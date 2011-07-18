@@ -12,6 +12,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
+import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
@@ -51,15 +52,21 @@ import org.eclipselabs.mscript.language.ast.MemberVariableAccess;
 import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
+import org.eclipselabs.mscript.language.ast.NegateStepExpression;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.PostfixExpression;
 import org.eclipselabs.mscript.language.ast.PowerExpression;
+import org.eclipselabs.mscript.language.ast.PrimitiveStepExpression;
 import org.eclipselabs.mscript.language.ast.RangeExpression;
+import org.eclipselabs.mscript.language.ast.RangeStepExpression;
 import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.StepExpression;
+import org.eclipselabs.mscript.language.ast.StepLiteral;
+import org.eclipselabs.mscript.language.ast.StepN;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
 import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
@@ -328,6 +335,34 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseVariableAccess(VariableAccess object) {
 				return createVariableAccessAdapter();
+			}
+			@Override
+			public Adapter caseStepExpression(StepExpression object) {
+				return createStepExpressionAdapter();
+			}
+			@Override
+			public Adapter caseRangeStepExpression(RangeStepExpression object) {
+				return createRangeStepExpressionAdapter();
+			}
+			@Override
+			public Adapter caseAdditiveStepExpression(AdditiveStepExpression object) {
+				return createAdditiveStepExpressionAdapter();
+			}
+			@Override
+			public Adapter caseNegateStepExpression(NegateStepExpression object) {
+				return createNegateStepExpressionAdapter();
+			}
+			@Override
+			public Adapter casePrimitiveStepExpression(PrimitiveStepExpression object) {
+				return createPrimitiveStepExpressionAdapter();
+			}
+			@Override
+			public Adapter caseStepLiteral(StepLiteral object) {
+				return createStepLiteralAdapter();
+			}
+			@Override
+			public Adapter caseStepN(StepN object) {
+				return createStepNAdapter();
 			}
 			@Override
 			public Adapter caseFunctionCall(FunctionCall object) {
@@ -1098,6 +1133,104 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVariableAccessAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.StepExpression <em>Step Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.StepExpression
+	 * @generated
+	 */
+	public Adapter createStepExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.RangeStepExpression <em>Range Step Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.RangeStepExpression
+	 * @generated
+	 */
+	public Adapter createRangeStepExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.AdditiveStepExpression <em>Additive Step Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.AdditiveStepExpression
+	 * @generated
+	 */
+	public Adapter createAdditiveStepExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.NegateStepExpression <em>Negate Step Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.NegateStepExpression
+	 * @generated
+	 */
+	public Adapter createNegateStepExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.PrimitiveStepExpression <em>Primitive Step Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.PrimitiveStepExpression
+	 * @generated
+	 */
+	public Adapter createPrimitiveStepExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.StepLiteral <em>Step Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.StepLiteral
+	 * @generated
+	 */
+	public Adapter createStepLiteralAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.StepN <em>Step N</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.StepN
+	 * @generated
+	 */
+	public Adapter createStepNAdapter() {
 		return null;
 	}
 

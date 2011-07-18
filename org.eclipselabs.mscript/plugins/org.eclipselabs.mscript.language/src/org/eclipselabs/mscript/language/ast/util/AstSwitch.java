@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
+import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
@@ -50,15 +51,21 @@ import org.eclipselabs.mscript.language.ast.MemberVariableAccess;
 import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
+import org.eclipselabs.mscript.language.ast.NegateStepExpression;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.PostfixExpression;
 import org.eclipselabs.mscript.language.ast.PowerExpression;
+import org.eclipselabs.mscript.language.ast.PrimitiveStepExpression;
 import org.eclipselabs.mscript.language.ast.RangeExpression;
+import org.eclipselabs.mscript.language.ast.RangeStepExpression;
 import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.StepExpression;
+import org.eclipselabs.mscript.language.ast.StepLiteral;
+import org.eclipselabs.mscript.language.ast.StepN;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
 import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
@@ -469,6 +476,56 @@ public class AstSwitch<T> extends Switch<T> {
 				T result = caseVariableAccess(variableAccess);
 				if (result == null) result = caseFeatureCall(variableAccess);
 				if (result == null) result = caseExpression(variableAccess);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.STEP_EXPRESSION: {
+				StepExpression stepExpression = (StepExpression)theEObject;
+				T result = caseStepExpression(stepExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.RANGE_STEP_EXPRESSION: {
+				RangeStepExpression rangeStepExpression = (RangeStepExpression)theEObject;
+				T result = caseRangeStepExpression(rangeStepExpression);
+				if (result == null) result = caseStepExpression(rangeStepExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.ADDITIVE_STEP_EXPRESSION: {
+				AdditiveStepExpression additiveStepExpression = (AdditiveStepExpression)theEObject;
+				T result = caseAdditiveStepExpression(additiveStepExpression);
+				if (result == null) result = caseStepExpression(additiveStepExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.NEGATE_STEP_EXPRESSION: {
+				NegateStepExpression negateStepExpression = (NegateStepExpression)theEObject;
+				T result = caseNegateStepExpression(negateStepExpression);
+				if (result == null) result = caseStepExpression(negateStepExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.PRIMITIVE_STEP_EXPRESSION: {
+				PrimitiveStepExpression primitiveStepExpression = (PrimitiveStepExpression)theEObject;
+				T result = casePrimitiveStepExpression(primitiveStepExpression);
+				if (result == null) result = caseStepExpression(primitiveStepExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.STEP_LITERAL: {
+				StepLiteral stepLiteral = (StepLiteral)theEObject;
+				T result = caseStepLiteral(stepLiteral);
+				if (result == null) result = casePrimitiveStepExpression(stepLiteral);
+				if (result == null) result = caseStepExpression(stepLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.STEP_N: {
+				StepN stepN = (StepN)theEObject;
+				T result = caseStepN(stepN);
+				if (result == null) result = casePrimitiveStepExpression(stepN);
+				if (result == null) result = caseStepExpression(stepN);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1294,6 +1351,111 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseVariableAccess(VariableAccess object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Step Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Step Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStepExpression(StepExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Range Step Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Range Step Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRangeStepExpression(RangeStepExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Additive Step Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Additive Step Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAdditiveStepExpression(AdditiveStepExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Negate Step Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Negate Step Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNegateStepExpression(NegateStepExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Primitive Step Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Primitive Step Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePrimitiveStepExpression(PrimitiveStepExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Step Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Step Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStepLiteral(StepLiteral object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Step N</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Step N</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStepN(StepN object) {
 		return null;
 	}
 

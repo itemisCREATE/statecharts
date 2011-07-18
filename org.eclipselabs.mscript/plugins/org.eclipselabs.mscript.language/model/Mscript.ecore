@@ -310,9 +310,33 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="#//CallableElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableAccess" eSuperTypes="#//FeatureCall">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="stepExpression" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stepExpression" eType="#//StepExpression"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StepExpression" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RangeStepExpression" eSuperTypes="#//StepExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="start" eType="#//StepExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="end" eType="#//StepExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AdditiveStepExpression" eSuperTypes="#//StepExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//AdditiveOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//StepExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//StepExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NegateStepExpression" eSuperTypes="#//StepExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//StepExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveStepExpression" abstract="true"
+      eSuperTypes="#//StepExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StepLiteral" eSuperTypes="#//PrimitiveStepExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StepN" eSuperTypes="#//PrimitiveStepExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionCall" eSuperTypes="#//FeatureCall">
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
         eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"

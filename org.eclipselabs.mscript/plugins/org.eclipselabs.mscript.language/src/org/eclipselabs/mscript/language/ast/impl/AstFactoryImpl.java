@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.AdditiveOperator;
+import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
@@ -54,6 +55,7 @@ import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
+import org.eclipselabs.mscript.language.ast.NegateStepExpression;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.PostfixExpression;
@@ -61,11 +63,14 @@ import org.eclipselabs.mscript.language.ast.PostfixOperator;
 import org.eclipselabs.mscript.language.ast.PowerExpression;
 import org.eclipselabs.mscript.language.ast.PowerOperator;
 import org.eclipselabs.mscript.language.ast.RangeExpression;
+import org.eclipselabs.mscript.language.ast.RangeStepExpression;
 import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.RelationalOperator;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.StepLiteral;
+import org.eclipselabs.mscript.language.ast.StepN;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
 import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
@@ -166,6 +171,11 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.UNARY_EXPRESSION: return createUnaryExpression();
 			case AstPackage.POSTFIX_EXPRESSION: return createPostfixExpression();
 			case AstPackage.VARIABLE_ACCESS: return createVariableAccess();
+			case AstPackage.RANGE_STEP_EXPRESSION: return createRangeStepExpression();
+			case AstPackage.ADDITIVE_STEP_EXPRESSION: return createAdditiveStepExpression();
+			case AstPackage.NEGATE_STEP_EXPRESSION: return createNegateStepExpression();
+			case AstPackage.STEP_LITERAL: return createStepLiteral();
+			case AstPackage.STEP_N: return createStepN();
 			case AstPackage.FUNCTION_CALL: return createFunctionCall();
 			case AstPackage.MEMBER_VARIABLE_ACCESS: return createMemberVariableAccess();
 			case AstPackage.BUILTIN_DEFINITION: return createBuiltinDefinition();
@@ -702,6 +712,56 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public VariableAccess createVariableAccess() {
 		VariableAccessImpl variableAccess = new VariableAccessImpl();
 		return variableAccess;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RangeStepExpression createRangeStepExpression() {
+		RangeStepExpressionImpl rangeStepExpression = new RangeStepExpressionImpl();
+		return rangeStepExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AdditiveStepExpression createAdditiveStepExpression() {
+		AdditiveStepExpressionImpl additiveStepExpression = new AdditiveStepExpressionImpl();
+		return additiveStepExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NegateStepExpression createNegateStepExpression() {
+		NegateStepExpressionImpl negateStepExpression = new NegateStepExpressionImpl();
+		return negateStepExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StepLiteral createStepLiteral() {
+		StepLiteralImpl stepLiteral = new StepLiteralImpl();
+		return stepLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StepN createStepN() {
+		StepNImpl stepN = new StepNImpl();
+		return stepN;
 	}
 
 	/**

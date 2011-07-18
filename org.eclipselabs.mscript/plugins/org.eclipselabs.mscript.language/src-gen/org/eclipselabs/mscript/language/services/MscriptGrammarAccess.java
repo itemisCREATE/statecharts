@@ -2416,7 +2416,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RealLiteral");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cValueAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cValueValidRealParserRuleCall_0_0 = (RuleCall)cValueAssignment_0.eContents().get(0);
+		private final RuleCall cValueValidDoubleParserRuleCall_0_0 = (RuleCall)cValueAssignment_0.eContents().get(0);
 		private final Assignment cModifierAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cModifierValidIDParserRuleCall_1_0 = (RuleCall)cModifierAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
@@ -2426,17 +2426,17 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
 		
 		//RealLiteral:
-		//	value=ValidReal modifier=ValidID? ("(" unit=Unit ")")?;
+		//	value=ValidDouble modifier=ValidID? ("(" unit=Unit ")")?;
 		public ParserRule getRule() { return rule; }
 
-		//value=ValidReal modifier=ValidID? ("(" unit=Unit ")")?
+		//value=ValidDouble modifier=ValidID? ("(" unit=Unit ")")?
 		public Group getGroup() { return cGroup; }
 
-		//value=ValidReal
+		//value=ValidDouble
 		public Assignment getValueAssignment_0() { return cValueAssignment_0; }
 
-		//ValidReal
-		public RuleCall getValueValidRealParserRuleCall_0_0() { return cValueValidRealParserRuleCall_0_0; }
+		//ValidDouble
+		public RuleCall getValueValidDoubleParserRuleCall_0_0() { return cValueValidDoubleParserRuleCall_0_0; }
 
 		//modifier=ValidID?
 		public Assignment getModifierAssignment_1() { return cModifierAssignment_1; }
@@ -2464,7 +2464,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IntegerLiteral");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cValueAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cValueValidIntegerParserRuleCall_0_0 = (RuleCall)cValueAssignment_0.eContents().get(0);
+		private final RuleCall cValueValidLongParserRuleCall_0_0 = (RuleCall)cValueAssignment_0.eContents().get(0);
 		private final Assignment cModifierAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cModifierValidIDParserRuleCall_1_0 = (RuleCall)cModifierAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
@@ -2474,17 +2474,17 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
 		
 		//IntegerLiteral:
-		//	value=ValidInteger modifier=ValidID? ("(" unit=Unit ")")?;
+		//	value=ValidLong modifier=ValidID? ("(" unit=Unit ")")?;
 		public ParserRule getRule() { return rule; }
 
-		//value=ValidInteger modifier=ValidID? ("(" unit=Unit ")")?
+		//value=ValidLong modifier=ValidID? ("(" unit=Unit ")")?
 		public Group getGroup() { return cGroup; }
 
-		//value=ValidInteger
+		//value=ValidLong
 		public Assignment getValueAssignment_0() { return cValueAssignment_0; }
 
-		//ValidInteger
-		public RuleCall getValueValidIntegerParserRuleCall_0_0() { return cValueValidIntegerParserRuleCall_0_0; }
+		//ValidLong
+		public RuleCall getValueValidLongParserRuleCall_0_0() { return cValueValidLongParserRuleCall_0_0; }
 
 		//modifier=ValidID?
 		public Assignment getModifierAssignment_1() { return cModifierAssignment_1; }
@@ -2551,7 +2551,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_0_2 = (Group)cGroup_0.eContents().get(2);
 		private final Keyword cLeftCurlyBracketKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
 		private final Assignment cStepExpressionAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
-		private final RuleCall cStepExpressionExpressionParserRuleCall_0_2_1_0 = (RuleCall)cStepExpressionAssignment_0_2_1.eContents().get(0);
+		private final RuleCall cStepExpressionStepExpressionParserRuleCall_0_2_1_0 = (RuleCall)cStepExpressionAssignment_0_2_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_0_2_2 = (Keyword)cGroup_0_2.eContents().get(2);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
 		private final Group cGroup_1_0 = (Group)cGroup_1.eContents().get(0);
@@ -2570,15 +2570,15 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_1_0_4 = (Keyword)cGroup_1_0.eContents().get(4);
 		
 		//FeatureCall returns Expression:
-		//	{VariableAccess} feature=[CallableElement|QualifiedName] ("{" stepExpression=Expression "}")? | => ({FunctionCall}
+		//	{VariableAccess} feature=[CallableElement|QualifiedName] ("{" stepExpression=StepExpression "}")? | => ({FunctionCall}
 		//	feature=[CallableElement|QualifiedName] "(" (arguments+=Expression ("," arguments+=Expression)*)? ")");
 		public ParserRule getRule() { return rule; }
 
-		//{VariableAccess} feature=[CallableElement|QualifiedName] ("{" stepExpression=Expression "}")? | => ({FunctionCall}
+		//{VariableAccess} feature=[CallableElement|QualifiedName] ("{" stepExpression=StepExpression "}")? | => ({FunctionCall}
 		//feature=[CallableElement|QualifiedName] "(" (arguments+=Expression ("," arguments+=Expression)*)? ")")
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//{VariableAccess} feature=[CallableElement|QualifiedName] ("{" stepExpression=Expression "}")?
+		//{VariableAccess} feature=[CallableElement|QualifiedName] ("{" stepExpression=StepExpression "}")?
 		public Group getGroup_0() { return cGroup_0; }
 
 		//{VariableAccess}
@@ -2593,17 +2593,17 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//QualifiedName
 		public RuleCall getFeatureCallableElementQualifiedNameParserRuleCall_0_1_0_1() { return cFeatureCallableElementQualifiedNameParserRuleCall_0_1_0_1; }
 
-		//("{" stepExpression=Expression "}")?
+		//("{" stepExpression=StepExpression "}")?
 		public Group getGroup_0_2() { return cGroup_0_2; }
 
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_0_2_0() { return cLeftCurlyBracketKeyword_0_2_0; }
 
-		//stepExpression=Expression
+		//stepExpression=StepExpression
 		public Assignment getStepExpressionAssignment_0_2_1() { return cStepExpressionAssignment_0_2_1; }
 
-		//Expression
-		public RuleCall getStepExpressionExpressionParserRuleCall_0_2_1_0() { return cStepExpressionExpressionParserRuleCall_0_2_1_0; }
+		//StepExpression
+		public RuleCall getStepExpressionStepExpressionParserRuleCall_0_2_1_0() { return cStepExpressionStepExpressionParserRuleCall_0_2_1_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_0_2_2() { return cRightCurlyBracketKeyword_0_2_2; }
@@ -2653,6 +2653,188 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//")"
 		public Keyword getRightParenthesisKeyword_1_0_4() { return cRightParenthesisKeyword_1_0_4; }
+	}
+
+	public class StepExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StepExpression");
+		private final RuleCall cRangeStepExpressionParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//StepExpression:
+		//	RangeStepExpression;
+		public ParserRule getRule() { return rule; }
+
+		//RangeStepExpression
+		public RuleCall getRangeStepExpressionParserRuleCall() { return cRangeStepExpressionParserRuleCall; }
+	}
+
+	public class RangeStepExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RangeStepExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cAdditiveStepExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cRangeStepExpressionStartAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cFullStopFullStopKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cEndAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cEndAdditiveStepExpressionParserRuleCall_1_2_0 = (RuleCall)cEndAssignment_1_2.eContents().get(0);
+		
+		//RangeStepExpression returns StepExpression:
+		//	AdditiveStepExpression ({RangeStepExpression.start=current} ".." end=AdditiveStepExpression)?;
+		public ParserRule getRule() { return rule; }
+
+		//AdditiveStepExpression ({RangeStepExpression.start=current} ".." end=AdditiveStepExpression)?
+		public Group getGroup() { return cGroup; }
+
+		//AdditiveStepExpression
+		public RuleCall getAdditiveStepExpressionParserRuleCall_0() { return cAdditiveStepExpressionParserRuleCall_0; }
+
+		//({RangeStepExpression.start=current} ".." end=AdditiveStepExpression)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{RangeStepExpression.start=current}
+		public Action getRangeStepExpressionStartAction_1_0() { return cRangeStepExpressionStartAction_1_0; }
+
+		//".."
+		public Keyword getFullStopFullStopKeyword_1_1() { return cFullStopFullStopKeyword_1_1; }
+
+		//end=AdditiveStepExpression
+		public Assignment getEndAssignment_1_2() { return cEndAssignment_1_2; }
+
+		//AdditiveStepExpression
+		public RuleCall getEndAdditiveStepExpressionParserRuleCall_1_2_0() { return cEndAdditiveStepExpressionParserRuleCall_1_2_0; }
+	}
+
+	public class AdditiveStepExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AdditiveStepExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cNegateStepExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cAdditiveStepExpressionLeftOperandAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cOperatorAdditiveOperatorEnumRuleCall_1_1_0 = (RuleCall)cOperatorAssignment_1_1.eContents().get(0);
+		private final Assignment cRightOperandAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightOperandNegateStepExpressionParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
+		
+		//AdditiveStepExpression returns StepExpression:
+		//	NegateStepExpression ({AdditiveStepExpression.leftOperand=current} operator=AdditiveOperator
+		//	rightOperand=NegateStepExpression)*;
+		public ParserRule getRule() { return rule; }
+
+		//NegateStepExpression ({AdditiveStepExpression.leftOperand=current} operator=AdditiveOperator
+		//rightOperand=NegateStepExpression)*
+		public Group getGroup() { return cGroup; }
+
+		//NegateStepExpression
+		public RuleCall getNegateStepExpressionParserRuleCall_0() { return cNegateStepExpressionParserRuleCall_0; }
+
+		//({AdditiveStepExpression.leftOperand=current} operator=AdditiveOperator rightOperand=NegateStepExpression)*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{AdditiveStepExpression.leftOperand=current}
+		public Action getAdditiveStepExpressionLeftOperandAction_1_0() { return cAdditiveStepExpressionLeftOperandAction_1_0; }
+
+		//operator=AdditiveOperator
+		public Assignment getOperatorAssignment_1_1() { return cOperatorAssignment_1_1; }
+
+		//AdditiveOperator
+		public RuleCall getOperatorAdditiveOperatorEnumRuleCall_1_1_0() { return cOperatorAdditiveOperatorEnumRuleCall_1_1_0; }
+
+		//rightOperand=NegateStepExpression
+		public Assignment getRightOperandAssignment_1_2() { return cRightOperandAssignment_1_2; }
+
+		//NegateStepExpression
+		public RuleCall getRightOperandNegateStepExpressionParserRuleCall_1_2_0() { return cRightOperandNegateStepExpressionParserRuleCall_1_2_0; }
+	}
+
+	public class NegateStepExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NegateStepExpression");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cPrimitiveStepExpressionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Action cNegateStepExpressionAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cHyphenMinusKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cOperandAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cOperandPrimitiveStepExpressionParserRuleCall_1_2_0 = (RuleCall)cOperandAssignment_1_2.eContents().get(0);
+		
+		//NegateStepExpression returns StepExpression:
+		//	PrimitiveStepExpression | {NegateStepExpression} "-" operand=PrimitiveStepExpression;
+		public ParserRule getRule() { return rule; }
+
+		//PrimitiveStepExpression | {NegateStepExpression} "-" operand=PrimitiveStepExpression
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//PrimitiveStepExpression
+		public RuleCall getPrimitiveStepExpressionParserRuleCall_0() { return cPrimitiveStepExpressionParserRuleCall_0; }
+
+		//{NegateStepExpression} "-" operand=PrimitiveStepExpression
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{NegateStepExpression}
+		public Action getNegateStepExpressionAction_1_0() { return cNegateStepExpressionAction_1_0; }
+
+		//"-"
+		public Keyword getHyphenMinusKeyword_1_1() { return cHyphenMinusKeyword_1_1; }
+
+		//operand=PrimitiveStepExpression
+		public Assignment getOperandAssignment_1_2() { return cOperandAssignment_1_2; }
+
+		//PrimitiveStepExpression
+		public RuleCall getOperandPrimitiveStepExpressionParserRuleCall_1_2_0() { return cOperandPrimitiveStepExpressionParserRuleCall_1_2_0; }
+	}
+
+	public class PrimitiveStepExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PrimitiveStepExpression");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cStepLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cStepNParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//PrimitiveStepExpression returns StepExpression:
+		//	StepLiteral | StepN;
+		public ParserRule getRule() { return rule; }
+
+		//StepLiteral | StepN
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//StepLiteral
+		public RuleCall getStepLiteralParserRuleCall_0() { return cStepLiteralParserRuleCall_0; }
+
+		//StepN
+		public RuleCall getStepNParserRuleCall_1() { return cStepNParserRuleCall_1; }
+	}
+
+	public class StepLiteralElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StepLiteral");
+		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cValueValidIntParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
+		
+		//StepLiteral:
+		//	value=ValidInt;
+		public ParserRule getRule() { return rule; }
+
+		//value=ValidInt
+		public Assignment getValueAssignment() { return cValueAssignment; }
+
+		//ValidInt
+		public RuleCall getValueValidIntParserRuleCall_0() { return cValueValidIntParserRuleCall_0; }
+	}
+
+	public class StepNElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StepN");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cStepNAction_0 = (Action)cGroup.eContents().get(0);
+		private final RuleCall cNTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		
+		//StepN:
+		//	{StepN} N;
+		public ParserRule getRule() { return rule; }
+
+		//{StepN} N
+		public Group getGroup() { return cGroup; }
+
+		//{StepN}
+		public Action getStepNAction_0() { return cStepNAction_0; }
+
+		//N
+		public RuleCall getNTerminalRuleCall_1() { return cNTerminalRuleCall_1; }
 	}
 
 	public class ArrayConstructionOperatorElements extends AbstractParserRuleElementFinder {
@@ -3160,64 +3342,20 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnitExponent");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cValidIntegerParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall cValidIntParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//UnitExponent returns ecore::EInt:
-		//	"-"? ValidInteger;
+		//	"-"? ValidInt;
 		public ParserRule getRule() { return rule; }
 
-		//"-"? ValidInteger
+		//"-"? ValidInt
 		public Group getGroup() { return cGroup; }
 
 		//"-"?
 		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
 
-		//ValidInteger
-		public RuleCall getValidIntegerParserRuleCall_1() { return cValidIntegerParserRuleCall_1; }
-	}
-
-	public class ValidRealElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValidReal");
-		private final RuleCall cREALTerminalRuleCall = (RuleCall)rule.eContents().get(1);
-		
-		//ValidReal returns ecore::EDouble:
-		//	REAL;
-		public ParserRule getRule() { return rule; }
-
-		//REAL
-		public RuleCall getREALTerminalRuleCall() { return cREALTerminalRuleCall; }
-	}
-
-	public class ValidIntegerElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValidInteger");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cONETerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cINTEGERTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//ValidInteger returns ecore::ELong:
-		//	ONE | INTEGER;
-		public ParserRule getRule() { return rule; }
-
-		//ONE | INTEGER
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//ONE
-		public RuleCall getONETerminalRuleCall_0() { return cONETerminalRuleCall_0; }
-
-		//INTEGER
-		public RuleCall getINTEGERTerminalRuleCall_1() { return cINTEGERTerminalRuleCall_1; }
-	}
-
-	public class ValidIDElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValidID");
-		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
-		
-		//ValidID:
-		//	ID;
-		public ParserRule getRule() { return rule; }
-
-		//ID
-		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
+		//ValidInt
+		public RuleCall getValidIntParserRuleCall_1() { return cValidIntParserRuleCall_1; }
 	}
 
 	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
@@ -3246,6 +3384,78 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//ValidID
 		public RuleCall getValidIDParserRuleCall_1_1() { return cValidIDParserRuleCall_1_1; }
+	}
+
+	public class ValidDoubleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValidDouble");
+		private final RuleCall cREALTerminalRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//ValidDouble returns ecore::EDouble:
+		//	REAL;
+		public ParserRule getRule() { return rule; }
+
+		//REAL
+		public RuleCall getREALTerminalRuleCall() { return cREALTerminalRuleCall; }
+	}
+
+	public class ValidIntElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValidInt");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cONETerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//ValidInt returns ecore::EInt:
+		//	ONE | INT;
+		public ParserRule getRule() { return rule; }
+
+		//ONE | INT
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//ONE
+		public RuleCall getONETerminalRuleCall_0() { return cONETerminalRuleCall_0; }
+
+		//INT
+		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
+	}
+
+	public class ValidLongElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValidLong");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cONETerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//ValidLong returns ecore::ELong:
+		//	ONE | INT;
+		public ParserRule getRule() { return rule; }
+
+		//ONE | INT
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//ONE
+		public RuleCall getONETerminalRuleCall_0() { return cONETerminalRuleCall_0; }
+
+		//INT
+		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
+	}
+
+	public class ValidIDElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValidID");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cNTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cIDTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//ValidID:
+		//	N | ID;
+		public ParserRule getRule() { return rule; }
+
+		//N | ID
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//N
+		public RuleCall getNTerminalRuleCall_0() { return cNTerminalRuleCall_0; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall_1() { return cIDTerminalRuleCall_1; }
 	}
 	
 	
@@ -3605,6 +3815,13 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private BooleanKindElements unknownRuleBooleanKind;
 	private StringLiteralElements pStringLiteral;
 	private FeatureCallElements pFeatureCall;
+	private StepExpressionElements pStepExpression;
+	private RangeStepExpressionElements pRangeStepExpression;
+	private AdditiveStepExpressionElements pAdditiveStepExpression;
+	private NegateStepExpressionElements pNegateStepExpression;
+	private PrimitiveStepExpressionElements pPrimitiveStepExpression;
+	private StepLiteralElements pStepLiteral;
+	private StepNElements pStepN;
 	private ArrayConstructionOperatorElements pArrayConstructionOperator;
 	private ArrayConstructionIterationClauseElements pArrayConstructionIterationClause;
 	private ArrayConcatenationOperatorElements pArrayConcatenationOperator;
@@ -3618,15 +3835,17 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private UnitDenominatorElements pUnitDenominator;
 	private UnitFactorElements pUnitFactor;
 	private UnitExponentElements pUnitExponent;
-	private ValidRealElements pValidReal;
-	private ValidIntegerElements pValidInteger;
-	private ValidIDElements pValidID;
 	private QualifiedNameElements pQualifiedName;
+	private ValidDoubleElements pValidDouble;
+	private ValidIntElements pValidInt;
+	private ValidLongElements pValidLong;
+	private ValidIDElements pValidID;
+	private TerminalRule tN;
 	private TerminalRule tID;
 	private TerminalRule tSTRING;
 	private TerminalRule tONE;
 	private TerminalRule tREAL;
-	private TerminalRule tINTEGER;
+	private TerminalRule tINT;
 	private TerminalRule tML_COMMENT;
 	private TerminalRule tSL_COMMENT;
 	private TerminalRule tWS;
@@ -4299,7 +4518,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RealLiteral:
-	//	value=ValidReal modifier=ValidID? ("(" unit=Unit ")")?;
+	//	value=ValidDouble modifier=ValidID? ("(" unit=Unit ")")?;
 	public RealLiteralElements getRealLiteralAccess() {
 		return (pRealLiteral != null) ? pRealLiteral : (pRealLiteral = new RealLiteralElements());
 	}
@@ -4309,7 +4528,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IntegerLiteral:
-	//	value=ValidInteger modifier=ValidID? ("(" unit=Unit ")")?;
+	//	value=ValidLong modifier=ValidID? ("(" unit=Unit ")")?;
 	public IntegerLiteralElements getIntegerLiteralAccess() {
 		return (pIntegerLiteral != null) ? pIntegerLiteral : (pIntegerLiteral = new IntegerLiteralElements());
 	}
@@ -4349,7 +4568,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FeatureCall returns Expression:
-	//	{VariableAccess} feature=[CallableElement|QualifiedName] ("{" stepExpression=Expression "}")? | => ({FunctionCall}
+	//	{VariableAccess} feature=[CallableElement|QualifiedName] ("{" stepExpression=StepExpression "}")? | => ({FunctionCall}
 	//	feature=[CallableElement|QualifiedName] "(" (arguments+=Expression ("," arguments+=Expression)*)? ")");
 	public FeatureCallElements getFeatureCallAccess() {
 		return (pFeatureCall != null) ? pFeatureCall : (pFeatureCall = new FeatureCallElements());
@@ -4357,6 +4576,77 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getFeatureCallRule() {
 		return getFeatureCallAccess().getRule();
+	}
+
+	//StepExpression:
+	//	RangeStepExpression;
+	public StepExpressionElements getStepExpressionAccess() {
+		return (pStepExpression != null) ? pStepExpression : (pStepExpression = new StepExpressionElements());
+	}
+	
+	public ParserRule getStepExpressionRule() {
+		return getStepExpressionAccess().getRule();
+	}
+
+	//RangeStepExpression returns StepExpression:
+	//	AdditiveStepExpression ({RangeStepExpression.start=current} ".." end=AdditiveStepExpression)?;
+	public RangeStepExpressionElements getRangeStepExpressionAccess() {
+		return (pRangeStepExpression != null) ? pRangeStepExpression : (pRangeStepExpression = new RangeStepExpressionElements());
+	}
+	
+	public ParserRule getRangeStepExpressionRule() {
+		return getRangeStepExpressionAccess().getRule();
+	}
+
+	//AdditiveStepExpression returns StepExpression:
+	//	NegateStepExpression ({AdditiveStepExpression.leftOperand=current} operator=AdditiveOperator
+	//	rightOperand=NegateStepExpression)*;
+	public AdditiveStepExpressionElements getAdditiveStepExpressionAccess() {
+		return (pAdditiveStepExpression != null) ? pAdditiveStepExpression : (pAdditiveStepExpression = new AdditiveStepExpressionElements());
+	}
+	
+	public ParserRule getAdditiveStepExpressionRule() {
+		return getAdditiveStepExpressionAccess().getRule();
+	}
+
+	//NegateStepExpression returns StepExpression:
+	//	PrimitiveStepExpression | {NegateStepExpression} "-" operand=PrimitiveStepExpression;
+	public NegateStepExpressionElements getNegateStepExpressionAccess() {
+		return (pNegateStepExpression != null) ? pNegateStepExpression : (pNegateStepExpression = new NegateStepExpressionElements());
+	}
+	
+	public ParserRule getNegateStepExpressionRule() {
+		return getNegateStepExpressionAccess().getRule();
+	}
+
+	//PrimitiveStepExpression returns StepExpression:
+	//	StepLiteral | StepN;
+	public PrimitiveStepExpressionElements getPrimitiveStepExpressionAccess() {
+		return (pPrimitiveStepExpression != null) ? pPrimitiveStepExpression : (pPrimitiveStepExpression = new PrimitiveStepExpressionElements());
+	}
+	
+	public ParserRule getPrimitiveStepExpressionRule() {
+		return getPrimitiveStepExpressionAccess().getRule();
+	}
+
+	//StepLiteral:
+	//	value=ValidInt;
+	public StepLiteralElements getStepLiteralAccess() {
+		return (pStepLiteral != null) ? pStepLiteral : (pStepLiteral = new StepLiteralElements());
+	}
+	
+	public ParserRule getStepLiteralRule() {
+		return getStepLiteralAccess().getRule();
+	}
+
+	//StepN:
+	//	{StepN} N;
+	public StepNElements getStepNAccess() {
+		return (pStepN != null) ? pStepN : (pStepN = new StepNElements());
+	}
+	
+	public ParserRule getStepNRule() {
+		return getStepNAccess().getRule();
 	}
 
 	//ArrayConstructionOperator:
@@ -4483,43 +4773,13 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//UnitExponent returns ecore::EInt:
-	//	"-"? ValidInteger;
+	//	"-"? ValidInt;
 	public UnitExponentElements getUnitExponentAccess() {
 		return (pUnitExponent != null) ? pUnitExponent : (pUnitExponent = new UnitExponentElements());
 	}
 	
 	public ParserRule getUnitExponentRule() {
 		return getUnitExponentAccess().getRule();
-	}
-
-	//ValidReal returns ecore::EDouble:
-	//	REAL;
-	public ValidRealElements getValidRealAccess() {
-		return (pValidReal != null) ? pValidReal : (pValidReal = new ValidRealElements());
-	}
-	
-	public ParserRule getValidRealRule() {
-		return getValidRealAccess().getRule();
-	}
-
-	//ValidInteger returns ecore::ELong:
-	//	ONE | INTEGER;
-	public ValidIntegerElements getValidIntegerAccess() {
-		return (pValidInteger != null) ? pValidInteger : (pValidInteger = new ValidIntegerElements());
-	}
-	
-	public ParserRule getValidIntegerRule() {
-		return getValidIntegerAccess().getRule();
-	}
-
-	//ValidID:
-	//	ID;
-	public ValidIDElements getValidIDAccess() {
-		return (pValidID != null) ? pValidID : (pValidID = new ValidIDElements());
-	}
-	
-	public ParserRule getValidIDRule() {
-		return getValidIDAccess().getRule();
 	}
 
 	//QualifiedName:
@@ -4532,9 +4792,55 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getQualifiedNameAccess().getRule();
 	}
 
+	//ValidDouble returns ecore::EDouble:
+	//	REAL;
+	public ValidDoubleElements getValidDoubleAccess() {
+		return (pValidDouble != null) ? pValidDouble : (pValidDouble = new ValidDoubleElements());
+	}
+	
+	public ParserRule getValidDoubleRule() {
+		return getValidDoubleAccess().getRule();
+	}
+
+	//ValidInt returns ecore::EInt:
+	//	ONE | INT;
+	public ValidIntElements getValidIntAccess() {
+		return (pValidInt != null) ? pValidInt : (pValidInt = new ValidIntElements());
+	}
+	
+	public ParserRule getValidIntRule() {
+		return getValidIntAccess().getRule();
+	}
+
+	//ValidLong returns ecore::ELong:
+	//	ONE | INT;
+	public ValidLongElements getValidLongAccess() {
+		return (pValidLong != null) ? pValidLong : (pValidLong = new ValidLongElements());
+	}
+	
+	public ParserRule getValidLongRule() {
+		return getValidLongAccess().getRule();
+	}
+
+	//ValidID:
+	//	N | ID;
+	public ValidIDElements getValidIDAccess() {
+		return (pValidID != null) ? pValidID : (pValidID = new ValidIDElements());
+	}
+	
+	public ParserRule getValidIDRule() {
+		return getValidIDAccess().getRule();
+	}
+
 	/// *
 	// * Terminals
-	// * / terminal ID:
+	// * / terminal N:
+	//	"n";
+	public TerminalRule getNRule() {
+		return (tN != null) ? tN : (tN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "N"));
+	} 
+
+	//terminal ID:
 	//	("_" | "a".."z" | "A".."Z") ("0".."9" | "_" | "a".."z" | "A".."Z")*;
 	public TerminalRule getIDRule() {
 		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
@@ -4558,10 +4864,10 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return (tREAL != null) ? tREAL : (tREAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "REAL"));
 	} 
 
-	//terminal INTEGER:
+	//terminal INT:
 	//	"0".."9"+;
-	public TerminalRule getINTEGERRule() {
-		return (tINTEGER != null) ? tINTEGER : (tINTEGER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INTEGER"));
+	public TerminalRule getINTRule() {
+		return (tINT != null) ? tINT : (tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
 	} 
 
 	//terminal ML_COMMENT:

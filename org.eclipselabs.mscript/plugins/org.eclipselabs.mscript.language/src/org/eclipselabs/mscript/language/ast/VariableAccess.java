@@ -6,7 +6,6 @@
  */
 package org.eclipselabs.mscript.language.ast;
 
-import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,12 +33,12 @@ public interface VariableAccess extends FeatureCall {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Step Expression</em>' containment reference.
-	 * @see #setStepExpression(Expression)
+	 * @see #setStepExpression(StepExpression)
 	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getVariableAccess_StepExpression()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Expression getStepExpression();
+	StepExpression getStepExpression();
 
 	/**
 	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.VariableAccess#getStepExpression <em>Step Expression</em>}' containment reference.
@@ -49,6 +48,6 @@ public interface VariableAccess extends FeatureCall {
 	 * @see #getStepExpression()
 	 * @generated
 	 */
-	void setStepExpression(Expression value);
+	void setStepExpression(StepExpression value);
 
 } // VariableAccess

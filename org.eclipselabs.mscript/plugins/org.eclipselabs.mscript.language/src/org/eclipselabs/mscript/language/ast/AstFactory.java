@@ -449,6 +449,51 @@ public interface AstFactory extends EFactory {
 	VariableAccess createVariableAccess();
 
 	/**
+	 * Returns a new object of class '<em>Range Step Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Range Step Expression</em>'.
+	 * @generated
+	 */
+	RangeStepExpression createRangeStepExpression();
+
+	/**
+	 * Returns a new object of class '<em>Additive Step Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Additive Step Expression</em>'.
+	 * @generated
+	 */
+	AdditiveStepExpression createAdditiveStepExpression();
+
+	/**
+	 * Returns a new object of class '<em>Negate Step Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Negate Step Expression</em>'.
+	 * @generated
+	 */
+	NegateStepExpression createNegateStepExpression();
+
+	/**
+	 * Returns a new object of class '<em>Step Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Step Literal</em>'.
+	 * @generated
+	 */
+	StepLiteral createStepLiteral();
+
+	/**
+	 * Returns a new object of class '<em>Step N</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Step N</em>'.
+	 * @generated
+	 */
+	StepN createStepN();
+
+	/**
 	 * Returns a new object of class '<em>Function Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

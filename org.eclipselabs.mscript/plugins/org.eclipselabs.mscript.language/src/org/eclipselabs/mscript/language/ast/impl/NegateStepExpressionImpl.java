@@ -12,39 +12,39 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipselabs.mscript.language.ast.AstPackage;
+import org.eclipselabs.mscript.language.ast.NegateStepExpression;
 import org.eclipselabs.mscript.language.ast.StepExpression;
-import org.eclipselabs.mscript.language.ast.VariableAccess;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Variable Access</b></em>'.
+ * An implementation of the model object '<em><b>Negate Step Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableAccessImpl#getStepExpression <em>Step Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NegateStepExpressionImpl#getOperand <em>Operand</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class VariableAccessImpl extends FeatureCallImpl implements VariableAccess {
+public class NegateStepExpressionImpl extends StepExpressionImpl implements NegateStepExpression {
 	/**
-	 * The cached value of the '{@link #getStepExpression() <em>Step Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getOperand() <em>Operand</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getStepExpression()
+	 * @see #getOperand()
 	 * @generated
 	 * @ordered
 	 */
-	protected StepExpression stepExpression;
+	protected StepExpression operand;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected VariableAccessImpl() {
+	protected NegateStepExpressionImpl() {
 		super();
 	}
 
@@ -55,7 +55,7 @@ public class VariableAccessImpl extends FeatureCallImpl implements VariableAcces
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return AstPackage.Literals.VARIABLE_ACCESS;
+		return AstPackage.Literals.NEGATE_STEP_EXPRESSION;
 	}
 
 	/**
@@ -63,8 +63,8 @@ public class VariableAccessImpl extends FeatureCallImpl implements VariableAcces
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StepExpression getStepExpression() {
-		return stepExpression;
+	public StepExpression getOperand() {
+		return operand;
 	}
 
 	/**
@@ -72,11 +72,11 @@ public class VariableAccessImpl extends FeatureCallImpl implements VariableAcces
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetStepExpression(StepExpression newStepExpression, NotificationChain msgs) {
-		StepExpression oldStepExpression = stepExpression;
-		stepExpression = newStepExpression;
+	public NotificationChain basicSetOperand(StepExpression newOperand, NotificationChain msgs) {
+		StepExpression oldOperand = operand;
+		operand = newOperand;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_ACCESS__STEP_EXPRESSION, oldStepExpression, newStepExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.NEGATE_STEP_EXPRESSION__OPERAND, oldOperand, newOperand);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -87,18 +87,18 @@ public class VariableAccessImpl extends FeatureCallImpl implements VariableAcces
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStepExpression(StepExpression newStepExpression) {
-		if (newStepExpression != stepExpression) {
+	public void setOperand(StepExpression newOperand) {
+		if (newOperand != operand) {
 			NotificationChain msgs = null;
-			if (stepExpression != null)
-				msgs = ((InternalEObject)stepExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.VARIABLE_ACCESS__STEP_EXPRESSION, null, msgs);
-			if (newStepExpression != null)
-				msgs = ((InternalEObject)newStepExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.VARIABLE_ACCESS__STEP_EXPRESSION, null, msgs);
-			msgs = basicSetStepExpression(newStepExpression, msgs);
+			if (operand != null)
+				msgs = ((InternalEObject)operand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.NEGATE_STEP_EXPRESSION__OPERAND, null, msgs);
+			if (newOperand != null)
+				msgs = ((InternalEObject)newOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.NEGATE_STEP_EXPRESSION__OPERAND, null, msgs);
+			msgs = basicSetOperand(newOperand, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_ACCESS__STEP_EXPRESSION, newStepExpression, newStepExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.NEGATE_STEP_EXPRESSION__OPERAND, newOperand, newOperand));
 	}
 
 	/**
@@ -109,8 +109,8 @@ public class VariableAccessImpl extends FeatureCallImpl implements VariableAcces
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AstPackage.VARIABLE_ACCESS__STEP_EXPRESSION:
-				return basicSetStepExpression(null, msgs);
+			case AstPackage.NEGATE_STEP_EXPRESSION__OPERAND:
+				return basicSetOperand(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -123,8 +123,8 @@ public class VariableAccessImpl extends FeatureCallImpl implements VariableAcces
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AstPackage.VARIABLE_ACCESS__STEP_EXPRESSION:
-				return getStepExpression();
+			case AstPackage.NEGATE_STEP_EXPRESSION__OPERAND:
+				return getOperand();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -137,8 +137,8 @@ public class VariableAccessImpl extends FeatureCallImpl implements VariableAcces
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AstPackage.VARIABLE_ACCESS__STEP_EXPRESSION:
-				setStepExpression((StepExpression)newValue);
+			case AstPackage.NEGATE_STEP_EXPRESSION__OPERAND:
+				setOperand((StepExpression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -152,8 +152,8 @@ public class VariableAccessImpl extends FeatureCallImpl implements VariableAcces
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AstPackage.VARIABLE_ACCESS__STEP_EXPRESSION:
-				setStepExpression((StepExpression)null);
+			case AstPackage.NEGATE_STEP_EXPRESSION__OPERAND:
+				setOperand((StepExpression)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -167,10 +167,10 @@ public class VariableAccessImpl extends FeatureCallImpl implements VariableAcces
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AstPackage.VARIABLE_ACCESS__STEP_EXPRESSION:
-				return stepExpression != null;
+			case AstPackage.NEGATE_STEP_EXPRESSION__OPERAND:
+				return operand != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //VariableAccessImpl
+} //NegateStepExpressionImpl

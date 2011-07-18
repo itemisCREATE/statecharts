@@ -4,12 +4,20 @@
 package org.eclipselabs.mscript.language.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
+import org.eclipselabs.mscript.language.ui.syntaxcoloring.MscriptAntlrTokenToAttributeIdMapper;
 
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class MscriptUiModule extends org.eclipselabs.mscript.language.ui.AbstractMscriptUiModule {
+
 	public MscriptUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
+	
+	public Class<? extends DefaultAntlrTokenToAttributeIdMapper> bindDefaultAntlrTokenToAttributeIdMapper() {
+		return MscriptAntlrTokenToAttributeIdMapper.class;
+	}
+	
 }

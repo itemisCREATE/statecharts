@@ -1940,6 +1940,202 @@ public interface AstPackage extends EPackage {
 	int VARIABLE_ACCESS_FEATURE_COUNT = FEATURE_CALL_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.StepExpressionImpl <em>Step Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.StepExpressionImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStepExpression()
+	 * @generated
+	 */
+	int STEP_EXPRESSION = 51;
+
+	/**
+	 * The number of structural features of the '<em>Step Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_EXPRESSION_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.RangeStepExpressionImpl <em>Range Step Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.RangeStepExpressionImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRangeStepExpression()
+	 * @generated
+	 */
+	int RANGE_STEP_EXPRESSION = 52;
+
+	/**
+	 * The feature id for the '<em><b>Start</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANGE_STEP_EXPRESSION__START = STEP_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>End</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANGE_STEP_EXPRESSION__END = STEP_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Range Step Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANGE_STEP_EXPRESSION_FEATURE_COUNT = STEP_EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.AdditiveStepExpressionImpl <em>Additive Step Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.AdditiveStepExpressionImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAdditiveStepExpression()
+	 * @generated
+	 */
+	int ADDITIVE_STEP_EXPRESSION = 53;
+
+	/**
+	 * The feature id for the '<em><b>Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDITIVE_STEP_EXPRESSION__OPERATOR = STEP_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDITIVE_STEP_EXPRESSION__LEFT_OPERAND = STEP_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDITIVE_STEP_EXPRESSION__RIGHT_OPERAND = STEP_EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Additive Step Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDITIVE_STEP_EXPRESSION_FEATURE_COUNT = STEP_EXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.NegateStepExpressionImpl <em>Negate Step Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.NegateStepExpressionImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getNegateStepExpression()
+	 * @generated
+	 */
+	int NEGATE_STEP_EXPRESSION = 54;
+
+	/**
+	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEGATE_STEP_EXPRESSION__OPERAND = STEP_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Negate Step Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEGATE_STEP_EXPRESSION_FEATURE_COUNT = STEP_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.PrimitiveStepExpressionImpl <em>Primitive Step Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.PrimitiveStepExpressionImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPrimitiveStepExpression()
+	 * @generated
+	 */
+	int PRIMITIVE_STEP_EXPRESSION = 55;
+
+	/**
+	 * The number of structural features of the '<em>Primitive Step Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_STEP_EXPRESSION_FEATURE_COUNT = STEP_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.StepLiteralImpl <em>Step Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.StepLiteralImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStepLiteral()
+	 * @generated
+	 */
+	int STEP_LITERAL = 56;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_LITERAL__VALUE = PRIMITIVE_STEP_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Step Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_LITERAL_FEATURE_COUNT = PRIMITIVE_STEP_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.StepNImpl <em>Step N</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.StepNImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStepN()
+	 * @generated
+	 */
+	int STEP_N = 57;
+
+	/**
+	 * The number of structural features of the '<em>Step N</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_N_FEATURE_COUNT = PRIMITIVE_STEP_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.FunctionCallImpl <em>Function Call</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1947,7 +2143,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFunctionCall()
 	 * @generated
 	 */
-	int FUNCTION_CALL = 51;
+	int FUNCTION_CALL = 58;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
@@ -1984,7 +2180,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMemberVariableAccess()
 	 * @generated
 	 */
-	int MEMBER_VARIABLE_ACCESS = 52;
+	int MEMBER_VARIABLE_ACCESS = 59;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' containment reference.
@@ -2021,7 +2217,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBuiltinDefinition()
 	 * @generated
 	 */
-	int BUILTIN_DEFINITION = 53;
+	int BUILTIN_DEFINITION = 60;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2049,7 +2245,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBuiltinFunction()
 	 * @generated
 	 */
-	int BUILTIN_FUNCTION = 54;
+	int BUILTIN_FUNCTION = 61;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2077,7 +2273,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBuiltinVariable()
 	 * @generated
 	 */
-	int BUILTIN_VARIABLE = 55;
+	int BUILTIN_VARIABLE = 62;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2105,7 +2301,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAssertionStatusKind()
 	 * @generated
 	 */
-	int ASSERTION_STATUS_KIND = 56;
+	int ASSERTION_STATUS_KIND = 63;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.EqualityOperator <em>Equality Operator</em>}' enum.
@@ -2115,7 +2311,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getEqualityOperator()
 	 * @generated
 	 */
-	int EQUALITY_OPERATOR = 57;
+	int EQUALITY_OPERATOR = 64;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -2125,7 +2321,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRelationalOperator()
 	 * @generated
 	 */
-	int RELATIONAL_OPERATOR = 58;
+	int RELATIONAL_OPERATOR = 65;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -2135,7 +2331,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAdditiveOperator()
 	 * @generated
 	 */
-	int ADDITIVE_OPERATOR = 59;
+	int ADDITIVE_OPERATOR = 66;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -2145,7 +2341,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMultiplicativeOperator()
 	 * @generated
 	 */
-	int MULTIPLICATIVE_OPERATOR = 60;
+	int MULTIPLICATIVE_OPERATOR = 67;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.PowerOperator <em>Power Operator</em>}' enum.
@@ -2155,7 +2351,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPowerOperator()
 	 * @generated
 	 */
-	int POWER_OPERATOR = 61;
+	int POWER_OPERATOR = 68;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -2165,7 +2361,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnaryOperator()
 	 * @generated
 	 */
-	int UNARY_OPERATOR = 62;
+	int UNARY_OPERATOR = 69;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.PostfixOperator <em>Postfix Operator</em>}' enum.
@@ -2175,7 +2371,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPostfixOperator()
 	 * @generated
 	 */
-	int POSTFIX_OPERATOR = 63;
+	int POSTFIX_OPERATOR = 70;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.Module <em>Module</em>}'.
@@ -3733,6 +3929,153 @@ public interface AstPackage extends EPackage {
 	EReference getVariableAccess_StepExpression();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.StepExpression <em>Step Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Step Expression</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.StepExpression
+	 * @generated
+	 */
+	EClass getStepExpression();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.RangeStepExpression <em>Range Step Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Range Step Expression</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.RangeStepExpression
+	 * @generated
+	 */
+	EClass getRangeStepExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.RangeStepExpression#getStart <em>Start</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Start</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.RangeStepExpression#getStart()
+	 * @see #getRangeStepExpression()
+	 * @generated
+	 */
+	EReference getRangeStepExpression_Start();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.RangeStepExpression#getEnd <em>End</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>End</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.RangeStepExpression#getEnd()
+	 * @see #getRangeStepExpression()
+	 * @generated
+	 */
+	EReference getRangeStepExpression_End();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.AdditiveStepExpression <em>Additive Step Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Additive Step Expression</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.AdditiveStepExpression
+	 * @generated
+	 */
+	EClass getAdditiveStepExpression();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.AdditiveStepExpression#getOperator <em>Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Operator</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.AdditiveStepExpression#getOperator()
+	 * @see #getAdditiveStepExpression()
+	 * @generated
+	 */
+	EAttribute getAdditiveStepExpression_Operator();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.AdditiveStepExpression#getLeftOperand <em>Left Operand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.AdditiveStepExpression#getLeftOperand()
+	 * @see #getAdditiveStepExpression()
+	 * @generated
+	 */
+	EReference getAdditiveStepExpression_LeftOperand();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.AdditiveStepExpression#getRightOperand <em>Right Operand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.AdditiveStepExpression#getRightOperand()
+	 * @see #getAdditiveStepExpression()
+	 * @generated
+	 */
+	EReference getAdditiveStepExpression_RightOperand();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.NegateStepExpression <em>Negate Step Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Negate Step Expression</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.NegateStepExpression
+	 * @generated
+	 */
+	EClass getNegateStepExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.NegateStepExpression#getOperand <em>Operand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Operand</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.NegateStepExpression#getOperand()
+	 * @see #getNegateStepExpression()
+	 * @generated
+	 */
+	EReference getNegateStepExpression_Operand();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.PrimitiveStepExpression <em>Primitive Step Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Primitive Step Expression</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.PrimitiveStepExpression
+	 * @generated
+	 */
+	EClass getPrimitiveStepExpression();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.StepLiteral <em>Step Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Step Literal</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.StepLiteral
+	 * @generated
+	 */
+	EClass getStepLiteral();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.StepLiteral#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.StepLiteral#getValue()
+	 * @see #getStepLiteral()
+	 * @generated
+	 */
+	EAttribute getStepLiteral_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.StepN <em>Step N</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Step N</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.StepN
+	 * @generated
+	 */
+	EClass getStepN();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.FunctionCall <em>Function Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5186,6 +5529,132 @@ public interface AstPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VARIABLE_ACCESS__STEP_EXPRESSION = eINSTANCE.getVariableAccess_StepExpression();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.StepExpressionImpl <em>Step Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.StepExpressionImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStepExpression()
+		 * @generated
+		 */
+		EClass STEP_EXPRESSION = eINSTANCE.getStepExpression();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.RangeStepExpressionImpl <em>Range Step Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.RangeStepExpressionImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRangeStepExpression()
+		 * @generated
+		 */
+		EClass RANGE_STEP_EXPRESSION = eINSTANCE.getRangeStepExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Start</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RANGE_STEP_EXPRESSION__START = eINSTANCE.getRangeStepExpression_Start();
+
+		/**
+		 * The meta object literal for the '<em><b>End</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RANGE_STEP_EXPRESSION__END = eINSTANCE.getRangeStepExpression_End();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.AdditiveStepExpressionImpl <em>Additive Step Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.AdditiveStepExpressionImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAdditiveStepExpression()
+		 * @generated
+		 */
+		EClass ADDITIVE_STEP_EXPRESSION = eINSTANCE.getAdditiveStepExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ADDITIVE_STEP_EXPRESSION__OPERATOR = eINSTANCE.getAdditiveStepExpression_Operator();
+
+		/**
+		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ADDITIVE_STEP_EXPRESSION__LEFT_OPERAND = eINSTANCE.getAdditiveStepExpression_LeftOperand();
+
+		/**
+		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ADDITIVE_STEP_EXPRESSION__RIGHT_OPERAND = eINSTANCE.getAdditiveStepExpression_RightOperand();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.NegateStepExpressionImpl <em>Negate Step Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.NegateStepExpressionImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getNegateStepExpression()
+		 * @generated
+		 */
+		EClass NEGATE_STEP_EXPRESSION = eINSTANCE.getNegateStepExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Operand</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NEGATE_STEP_EXPRESSION__OPERAND = eINSTANCE.getNegateStepExpression_Operand();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.PrimitiveStepExpressionImpl <em>Primitive Step Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.PrimitiveStepExpressionImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPrimitiveStepExpression()
+		 * @generated
+		 */
+		EClass PRIMITIVE_STEP_EXPRESSION = eINSTANCE.getPrimitiveStepExpression();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.StepLiteralImpl <em>Step Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.StepLiteralImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStepLiteral()
+		 * @generated
+		 */
+		EClass STEP_LITERAL = eINSTANCE.getStepLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STEP_LITERAL__VALUE = eINSTANCE.getStepLiteral_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.StepNImpl <em>Step N</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.StepNImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStepN()
+		 * @generated
+		 */
+		EClass STEP_N = eINSTANCE.getStepN();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.FunctionCallImpl <em>Function Call</em>}' class.

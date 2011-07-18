@@ -270,10 +270,10 @@ NumericLiteral:
 	RealLiteral | IntegerLiteral;
 	
 RealLiteral:
-	value=ValidReal (modifier=ValidID)? ('(' unit=Unit ')')?;
+	value=ValidDouble (modifier=ValidID)? ('(' unit=Unit ')')?;
 	
 IntegerLiteral:
-	value=ValidInteger (modifier=ValidID)? ('(' unit=Unit ')')?;
+	value=ValidLong (modifier=ValidID)? ('(' unit=Unit ')')?;
 
 BooleanLiteral:
 	value=BooleanKind;
@@ -285,8 +285,29 @@ StringLiteral:
 	value=STRING;
 		
 FeatureCall returns Expression:
-	{VariableAccess} feature=[CallableElement|QualifiedName] ('{' stepExpression=Expression '}')?
+	{VariableAccess} feature=[CallableElement|QualifiedName] ('{' stepExpression=StepExpression '}')?
 		| =>({FunctionCall} feature=[CallableElement|QualifiedName] '(' (arguments+=Expression (',' arguments+=Expression)*)? ')');
+
+StepExpression:
+	RangeStepExpression;
+	
+RangeStepExpression returns StepExpression:
+	AdditiveStepExpression ({RangeStepExpression.start=current} '..' end=AdditiveStepExpression)?;
+
+AdditiveStepExpression returns StepExpression:
+	NegateStepExpression ({AdditiveStepExpression.leftOperand=current} operator=AdditiveOperator rightOperand=NegateStepExpression)*;
+
+NegateStepExpression returns StepExpression:
+	PrimitiveStepExpression | {NegateStepExpression} '-' operand=PrimitiveStepExpression;
+
+PrimitiveStepExpression returns StepExpression:
+	StepLiteral | StepN;
+
+StepLiteral:
+	value=ValidInt;
+	
+StepN:
+	{StepN} N;
 
 ArrayConstructionOperator:
 	'{' expressions+=Expression ((',' expressions+=Expression)* | 'for' iterationClauses+=ArrayConstructionIterationClause (',' iterationClauses+=ArrayConstructionIterationClause)*) '}';
@@ -329,24 +350,30 @@ UnitFactor:
 	symbol=ValidID ('^' exponent=UnitExponent)?;
 
 UnitExponent returns ecore::EInt:
-	('-')? ValidInteger;
-
-ValidReal returns ecore::EDouble:
-	REAL;
-
-ValidInteger returns ecore::ELong:
-	ONE | INTEGER;
-
-ValidID:
-	ID;
+	('-')? ValidInt;
 
 QualifiedName:
   ValidID ('::' ValidID)*;
+
+ValidDouble returns ecore::EDouble:
+	REAL;
+
+ValidInt returns ecore::EInt:
+	ONE | INT;
+
+ValidLong returns ecore::ELong:
+	ONE | INT;
+
+ValidID:
+	N | ID;
 
 /*
  * Terminals
  */
  
+terminal N:
+	'n';
+
 terminal ID:
 	('_' | 'a'..'z' | 'A'..'Z') ('0'..'9' | '_' | 'a'..'z' | 'A'..'Z')*;
 
@@ -359,7 +386,7 @@ terminal ONE:
 terminal REAL:
 	('0'..'9')+ '.' ('0'..'9')* (('e' | 'E') ('+'|'-')? ('0'..'9')+)?;
 
-terminal INTEGER:
+terminal INT:
 	('0'..'9')+;
 
 terminal ML_COMMENT:

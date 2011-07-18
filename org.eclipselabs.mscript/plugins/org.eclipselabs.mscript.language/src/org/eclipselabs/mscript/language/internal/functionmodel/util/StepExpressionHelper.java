@@ -15,19 +15,15 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipselabs.mscript.language.ast.AdditiveExpression;
-import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
-import org.eclipselabs.mscript.language.ast.AdditiveOperator;
-import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
-import org.eclipselabs.mscript.language.ast.UnaryExpression;
+import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
+import org.eclipselabs.mscript.language.ast.NegateStepExpression;
+import org.eclipselabs.mscript.language.ast.StepExpression;
+import org.eclipselabs.mscript.language.ast.StepLiteral;
+import org.eclipselabs.mscript.language.ast.StepN;
 import org.eclipselabs.mscript.language.ast.VariableAccess;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.util.SyntaxStatus;
-import org.eclipselabs.mscript.typesystem.Expression;
-import org.eclipselabs.mscript.typesystem.IntegerLiteral;
-import org.eclipselabs.mscript.typesystem.Unit;
-import org.eclipselabs.mscript.typesystem.util.TypeSystemSwitch;
 
 /**
  * @author Andreas Unger
@@ -42,9 +38,9 @@ public class StepExpressionHelper {
 		return new StepExpressionResult(0, false);
 	}
 
-	private StepExpressionResult evaluateStepExpression(Expression expression) throws CoreException {
+	private StepExpressionResult evaluateStepExpression(StepExpression stepExpression) throws CoreException {
 		Evaluator evaluator = new Evaluator();
-		int result = evaluator.doSwitch(expression);
+		int result = evaluator.doSwitch(stepExpression);
 		IStatus status = evaluator.getStatus();
 		if (status.isOK()) {
 			return new StepExpressionResult(result, evaluator.isAbsolute());
@@ -77,23 +73,17 @@ public class StepExpressionHelper {
 		}
 		
 		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseAdditiveExpression(org.eclipselabs.mscript.language.ast.AdditiveExpression)
+		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseAdditiveStepExpression(org.eclipselabs.mscript.language.ast.AdditiveStepExpression)
 		 */
 		@Override
-		public Integer caseAdditiveExpression(AdditiveExpression addSubtractExpression) {
-			Integer result = doSwitch(addSubtractExpression.getLeftOperand());
-			for (AdditiveExpressionPart part : addSubtractExpression.getRightParts()) {
-				result = addSubtract(result, doSwitch(part.getOperand()), part.getOperator());
-			}
-			return result;
-		}
-		
-		protected Integer addSubtract(Integer operand1, Integer operand2, AdditiveOperator operator) {
-			switch (operator) {
+		public Integer caseAdditiveStepExpression(AdditiveStepExpression additiveStepExpression) {
+			Integer leftOperand = doSwitch(additiveStepExpression.getLeftOperand());
+			Integer rightOperand = doSwitch(additiveStepExpression.getRightOperand());
+			switch (additiveStepExpression.getOperator()) {
 			case ADD:
-				return operand1 + operand2;
+				return leftOperand + rightOperand;
 			case SUBTRACT:
-				return operand1 - operand2;
+				return leftOperand - rightOperand;
 			}
 			throw new IllegalArgumentException();
 		}
@@ -102,61 +92,29 @@ public class StepExpressionHelper {
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseUnaryExpression(org.eclipselabs.mscript.language.ast.UnaryExpression)
 		 */
 		@Override
-		public Integer caseUnaryExpression(UnaryExpression unaryExpression) {
-			Integer result;
-			Integer operandValue = doSwitch(unaryExpression.getOperand());
-			switch (unaryExpression.getOperator()) {
-			case NEGATE:
-				result = -operandValue;
-				break;
-			case LOGICAL_NOT:
-				result = 0;
-				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid unary operation", unaryExpression));
-				break;
-			default:
-				throw new IllegalArgumentException();
-			}
-			return result;
+		public Integer caseNegateStepExpression(NegateStepExpression negateStepExpression) {
+			return -doSwitch(negateStepExpression.getOperand());
 		}
-	
-		@Override
-		public Integer caseVariableAccess(VariableAccess variableAccess) {
-			if (variableAccess.getFeature().getName().equals("n")) {
-				if (absolute) {
-					absolute = false;
-					return 0;
-				} else {
-					status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Duplicate 'n'", variableAccess));
-				}
-			} else {
-				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid symbol", variableAccess));
-			}
-			return 0;
-		}
-		
-		private TypeSystemSwitch<Integer> typeSystemSwitch = new TypeSystemSwitch<Integer>() {
-		
-			/* (non-Javadoc)
-			 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIntegerLiteral(org.eclipselabs.mscript.language.ast.IntegerLiteral)
-			 */
-			@Override
-			public Integer caseIntegerLiteral(IntegerLiteral integerLiteral) {
-				Unit unit = integerLiteral.getUnit();
-				if (unit.isWildcard() || !unit.getNumerator().getFactors().isEmpty() || unit.getDenominator() != null) {
-					status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Integer literal must not specify unit", unit));
-					return 0;
-				}
-				return (int) integerLiteral.getValue();
-			}
-		
-		};
-		
+
 		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseParenthesizedExpression(org.eclipselabs.mscript.language.ast.ParenthesizedExpression)
+		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseStepLiteral(org.eclipselabs.mscript.language.ast.StepLiteral)
 		 */
 		@Override
-		public Integer caseParenthesizedExpression(ParenthesizedExpression parenthesizedExpression) {
-			return doSwitch(parenthesizedExpression.getExpressions().get(0));
+		public Integer caseStepLiteral(StepLiteral stepLiteral) {
+			return stepLiteral.getValue();
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseStepN(org.eclipselabs.mscript.language.ast.StepN)
+		 */
+		@Override
+		public Integer caseStepN(StepN stepN) {
+			if (absolute) {
+				absolute = false;
+			} else {
+				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Duplicate 'n'", stepN));
+			}
+			return 0;
 		}
 		
 		/* (non-Javadoc)
@@ -164,11 +122,7 @@ public class StepExpressionHelper {
 		 */
 		@Override
 		public Integer defaultCase(EObject object) {
-			Integer result = typeSystemSwitch.doSwitch(object);
-			if (result != null) {
-				return result;
-			}
-			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid expression part", object));
+			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid expression", object));
 			return 0;
 		}
 	
