@@ -12,10 +12,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.CallableElement;
 import org.eclipselabs.mscript.language.ast.VariableAccess;
 import org.eclipselabs.mscript.typesystem.Expression;
-import org.eclipselabs.mscript.typesystem.impl.ExpressionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,24 +22,13 @@ import org.eclipselabs.mscript.typesystem.impl.ExpressionImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableAccessImpl#getVariable <em>Variable</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableAccessImpl#getStepExpression <em>Step Expression</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class VariableAccessImpl extends ExpressionImpl implements VariableAccess {
-	/**
-	 * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVariable()
-	 * @generated
-	 * @ordered
-	 */
-	protected CallableElement variable;
-
+public class VariableAccessImpl extends FeatureCallImpl implements VariableAccess {
 	/**
 	 * The cached value of the '{@link #getStepExpression() <em>Step Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -69,44 +56,6 @@ public class VariableAccessImpl extends ExpressionImpl implements VariableAccess
 	@Override
 	protected EClass eStaticClass() {
 		return AstPackage.Literals.VARIABLE_ACCESS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CallableElement getVariable() {
-		if (variable != null && variable.eIsProxy()) {
-			InternalEObject oldVariable = (InternalEObject)variable;
-			variable = (CallableElement)eResolveProxy(oldVariable);
-			if (variable != oldVariable) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AstPackage.VARIABLE_ACCESS__VARIABLE, oldVariable, variable));
-			}
-		}
-		return variable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CallableElement basicGetVariable() {
-		return variable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVariable(CallableElement newVariable) {
-		CallableElement oldVariable = variable;
-		variable = newVariable;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_ACCESS__VARIABLE, oldVariable, variable));
 	}
 
 	/**
@@ -174,9 +123,6 @@ public class VariableAccessImpl extends ExpressionImpl implements VariableAccess
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AstPackage.VARIABLE_ACCESS__VARIABLE:
-				if (resolve) return getVariable();
-				return basicGetVariable();
 			case AstPackage.VARIABLE_ACCESS__STEP_EXPRESSION:
 				return getStepExpression();
 		}
@@ -191,9 +137,6 @@ public class VariableAccessImpl extends ExpressionImpl implements VariableAccess
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AstPackage.VARIABLE_ACCESS__VARIABLE:
-				setVariable((CallableElement)newValue);
-				return;
 			case AstPackage.VARIABLE_ACCESS__STEP_EXPRESSION:
 				setStepExpression((Expression)newValue);
 				return;
@@ -209,9 +152,6 @@ public class VariableAccessImpl extends ExpressionImpl implements VariableAccess
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AstPackage.VARIABLE_ACCESS__VARIABLE:
-				setVariable((CallableElement)null);
-				return;
 			case AstPackage.VARIABLE_ACCESS__STEP_EXPRESSION:
 				setStepExpression((Expression)null);
 				return;
@@ -227,8 +167,6 @@ public class VariableAccessImpl extends ExpressionImpl implements VariableAccess
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AstPackage.VARIABLE_ACCESS__VARIABLE:
-				return variable != null;
 			case AstPackage.VARIABLE_ACCESS__STEP_EXPRESSION:
 				return stepExpression != null;
 		}

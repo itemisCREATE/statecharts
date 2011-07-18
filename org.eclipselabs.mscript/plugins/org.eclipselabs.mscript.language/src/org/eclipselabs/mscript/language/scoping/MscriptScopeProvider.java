@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipselabs.mscript.language.ast.FunctionCall;
+import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.IterationCall;
@@ -20,11 +20,10 @@ import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
-import org.eclipselabs.mscript.language.ast.VariableAccess;
 
 public class MscriptScopeProvider extends AbstractDeclarativeScopeProvider {
 
-	public IScope scope_VariableAccess_variable(VariableAccess context, EReference reference) {
+	public IScope scope_FeatureCall_feature(FeatureCall context, EReference reference) {
 		List<EObject> elements = new ArrayList<EObject>();
 		
 		EObject container = context.eContainer();
@@ -47,36 +46,22 @@ public class MscriptScopeProvider extends AbstractDeclarativeScopeProvider {
 					elements.add(stateVariableDeclaration);
 				}
 
+				for (FunctionObjectDeclaration functionObjectDeclaration : functionDefinition.getFunctionObjectDeclarations()) {
+					elements.add(functionObjectDeclaration);
+				}
+
 				for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameterDeclarations()) {
 					elements.add(parameterDeclaration);
 				}
+				
 				for (ParameterDeclaration parameterDeclaration : functionDefinition.getInputParameterDeclarations()) {
 					elements.add(parameterDeclaration);
 				}
+				
 				for (ParameterDeclaration parameterDeclaration : functionDefinition.getOutputParameterDeclarations()) {
 					elements.add(parameterDeclaration);
 				}
 
-				elements.add(functionDefinition);
-			}
-			container = container.eContainer();
-		}
-		
-		return Scopes.scopeFor(elements, getDelegate().getScope(context, reference));
-	}
-	
-	public IScope scope_FunctionCall_function(FunctionCall context, EReference reference) {
-		List<EObject> elements = new ArrayList<EObject>();
-		
-		EObject container = context.eContainer();
-		while (container != null) {
-			if (container instanceof FunctionDefinition) {
-				FunctionDefinition functionDefinition = (FunctionDefinition) container;
-
-				for (FunctionObjectDeclaration functionObjectDeclaration : functionDefinition.getFunctionObjectDeclarations()) {
-					elements.add(functionObjectDeclaration);
-				}
-				
 				elements.add(functionDefinition);
 			}
 			container = container.eContainer();

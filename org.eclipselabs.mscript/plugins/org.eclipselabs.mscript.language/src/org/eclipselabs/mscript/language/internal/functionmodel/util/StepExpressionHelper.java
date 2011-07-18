@@ -121,7 +121,7 @@ public class StepExpressionHelper {
 	
 		@Override
 		public Integer caseVariableAccess(VariableAccess variableAccess) {
-			if (variableAccess.getVariable().getName().equals("n")) {
+			if (variableAccess.getFeature().getName().equals("n")) {
 				if (absolute) {
 					absolute = false;
 					return 0;

@@ -14,7 +14,7 @@ package org.eclipselabs.mscript.language.ast;
  *
  *
  * @see org.eclipselabs.mscript.language.ast.AstPackage#getDataTypeDefinition()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface DataTypeDefinition extends Definition {

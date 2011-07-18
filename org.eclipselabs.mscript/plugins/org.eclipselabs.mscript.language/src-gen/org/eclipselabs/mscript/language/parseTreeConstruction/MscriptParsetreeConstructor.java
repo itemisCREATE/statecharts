@@ -10783,7 +10783,7 @@ protected class ArrayElementAccess_RightSquareBracketKeyword_1_4 extends Keyword
  *
  * MemberFeatureCall returns Expression:
  * 	PrimaryExpression ({MemberVariableAccess.target=current} "." memberVariable=[CallableElement|ValidID] |
- * 	{FunctionCall.arguments+=current} "." function=[CallableElement|ValidID] "(" (arguments+=Expression (","
+ * 	{FunctionCall.arguments+=current} "." feature=[CallableElement|ValidID] "(" (arguments+=Expression (","
  * 	arguments+=Expression)*)? ")" | {IterationCall.target=current} "." identifier=ValidID "(" variables+=IterationVariable
  * 	("," variables+=IterationVariable)* (";" accumulator=IterationAccumulator)? (";" breakCondition=Expression)? "|"
  * 	expression=Expression ")")*;
@@ -10791,7 +10791,7 @@ protected class ArrayElementAccess_RightSquareBracketKeyword_1_4 extends Keyword
  **/
 
 // PrimaryExpression ({MemberVariableAccess.target=current} "." memberVariable=[CallableElement|ValidID] |
-// {FunctionCall.arguments+=current} "." function=[CallableElement|ValidID] "(" (arguments+=Expression (","
+// {FunctionCall.arguments+=current} "." feature=[CallableElement|ValidID] "(" (arguments+=Expression (","
 // arguments+=Expression)*)? ")" | {IterationCall.target=current} "." identifier=ValidID "(" variables+=IterationVariable
 // ("," variables+=IterationVariable)* (";" accumulator=IterationAccumulator)? (";" breakCondition=Expression)? "|"
 // expression=Expression ")")*
@@ -10885,7 +10885,7 @@ protected class MemberFeatureCall_PrimaryExpressionParserRuleCall_0 extends Rule
 }
 
 // ({MemberVariableAccess.target=current} "." memberVariable=[CallableElement|ValidID] | {FunctionCall.arguments+=current}
-// "." function=[CallableElement|ValidID] "(" (arguments+=Expression ("," arguments+=Expression)*)? ")" |
+// "." feature=[CallableElement|ValidID] "(" (arguments+=Expression ("," arguments+=Expression)*)? ")" |
 // {IterationCall.target=current} "." identifier=ValidID "(" variables+=IterationVariable (","
 // variables+=IterationVariable)* (";" accumulator=IterationAccumulator)? (";" breakCondition=Expression)? "|"
 // expression=Expression ")")*
@@ -11040,7 +11040,7 @@ protected class MemberFeatureCall_MemberVariableAssignment_1_0_2 extends Assignm
 }
 
 
-// {FunctionCall.arguments+=current} "." function=[CallableElement|ValidID] "(" (arguments+=Expression (","
+// {FunctionCall.arguments+=current} "." feature=[CallableElement|ValidID] "(" (arguments+=Expression (","
 // arguments+=Expression)*)? ")"
 protected class MemberFeatureCall_Group_1_1 extends GroupToken {
 	
@@ -11122,16 +11122,16 @@ protected class MemberFeatureCall_FullStopKeyword_1_1_1 extends KeywordToken  {
 
 }
 
-// function=[CallableElement|ValidID]
-protected class MemberFeatureCall_FunctionAssignment_1_1_2 extends AssignmentToken  {
+// feature=[CallableElement|ValidID]
+protected class MemberFeatureCall_FeatureAssignment_1_1_2 extends AssignmentToken  {
 	
-	public MemberFeatureCall_FunctionAssignment_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public MemberFeatureCall_FeatureAssignment_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getMemberFeatureCallAccess().getFunctionAssignment_1_1_2();
+		return grammarAccess.getMemberFeatureCallAccess().getFeatureAssignment_1_1_2();
 	}
 
     @Override
@@ -11144,13 +11144,13 @@ protected class MemberFeatureCall_FunctionAssignment_1_1_2 extends AssignmentTok
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("function",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("function");
+		if((value = eObjectConsumer.getConsumable("feature",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("feature");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getMemberFeatureCallAccess().getFunctionCallableElementCrossReference_1_1_2_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getMemberFeatureCallAccess().getFunctionCallableElementCrossReference_1_1_2_0(), (EObject)value , null)) {
+			if(param.isInstanceOf(grammarAccess.getMemberFeatureCallAccess().getFeatureCallableElementCrossReference_1_1_2_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getMemberFeatureCallAccess().getFeatureCallableElementCrossReference_1_1_2_0(), (EObject)value , null)) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getMemberFeatureCallAccess().getFunctionCallableElementCrossReference_1_1_2_0(); 
+				element = grammarAccess.getMemberFeatureCallAccess().getFeatureCallableElementCrossReference_1_1_2_0(); 
 				return obj;
 			}
 		}
@@ -11174,7 +11174,7 @@ protected class MemberFeatureCall_LeftParenthesisKeyword_1_1_3 extends KeywordTo
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new MemberFeatureCall_FunctionAssignment_1_1_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new MemberFeatureCall_FeatureAssignment_1_1_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -13392,13 +13392,13 @@ protected class StringLiteral_ValueAssignment extends AssignmentToken  {
 /************ begin Rule FeatureCall ****************
  *
  * FeatureCall returns Expression:
- * 	{VariableAccess} variable=[CallableElement|QualifiedName] ("{" stepExpression=Expression "}")? | => ({FunctionCall}
- * 	function=[CallableElement|QualifiedName] "(" (arguments+=Expression ("," arguments+=Expression)*)? ")");
+ * 	{VariableAccess} feature=[CallableElement|QualifiedName] ("{" stepExpression=Expression "}")? | => ({FunctionCall}
+ * 	feature=[CallableElement|QualifiedName] "(" (arguments+=Expression ("," arguments+=Expression)*)? ")");
  *
  **/
 
-// {VariableAccess} variable=[CallableElement|QualifiedName] ("{" stepExpression=Expression "}")? | => ({FunctionCall}
-// function=[CallableElement|QualifiedName] "(" (arguments+=Expression ("," arguments+=Expression)*)? ")")
+// {VariableAccess} feature=[CallableElement|QualifiedName] ("{" stepExpression=Expression "}")? | => ({FunctionCall}
+// feature=[CallableElement|QualifiedName] "(" (arguments+=Expression ("," arguments+=Expression)*)? ")")
 protected class FeatureCall_Alternatives extends AlternativesToken {
 
 	public FeatureCall_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -13429,7 +13429,7 @@ protected class FeatureCall_Alternatives extends AlternativesToken {
 
 }
 
-// {VariableAccess} variable=[CallableElement|QualifiedName] ("{" stepExpression=Expression "}")?
+// {VariableAccess} feature=[CallableElement|QualifiedName] ("{" stepExpression=Expression "}")?
 protected class FeatureCall_Group_0 extends GroupToken {
 	
 	public FeatureCall_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -13445,7 +13445,7 @@ protected class FeatureCall_Group_0 extends GroupToken {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new FeatureCall_Group_0_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new FeatureCall_VariableAssignment_0_1(lastRuleCallOrigin, this, 1, inst);
+			case 1: return new FeatureCall_FeatureAssignment_0_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -13485,16 +13485,16 @@ protected class FeatureCall_VariableAccessAction_0_0 extends ActionToken  {
 	}
 }
 
-// variable=[CallableElement|QualifiedName]
-protected class FeatureCall_VariableAssignment_0_1 extends AssignmentToken  {
+// feature=[CallableElement|QualifiedName]
+protected class FeatureCall_FeatureAssignment_0_1 extends AssignmentToken  {
 	
-	public FeatureCall_VariableAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public FeatureCall_FeatureAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getFeatureCallAccess().getVariableAssignment_0_1();
+		return grammarAccess.getFeatureCallAccess().getFeatureAssignment_0_1();
 	}
 
     @Override
@@ -13507,13 +13507,13 @@ protected class FeatureCall_VariableAssignment_0_1 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("variable",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("variable");
+		if((value = eObjectConsumer.getConsumable("feature",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("feature");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getFeatureCallAccess().getVariableCallableElementCrossReference_0_1_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getFeatureCallAccess().getFeatureCallableElementCrossReference_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getFeatureCallAccess().getFeatureCallableElementCrossReference_0_1_0(), (EObject)value , null)) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getFeatureCallAccess().getVariableCallableElementCrossReference_0_1_0(); 
+				element = grammarAccess.getFeatureCallAccess().getFeatureCallableElementCrossReference_0_1_0(); 
 				return obj;
 			}
 		}
@@ -13559,7 +13559,7 @@ protected class FeatureCall_LeftCurlyBracketKeyword_0_2_0 extends KeywordToken  
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new FeatureCall_VariableAssignment_0_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new FeatureCall_FeatureAssignment_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -13636,7 +13636,7 @@ protected class FeatureCall_RightCurlyBracketKeyword_0_2_2 extends KeywordToken 
 
 
 
-// => ({FunctionCall} function=[CallableElement|QualifiedName] "(" (arguments+=Expression ("," arguments+=Expression)*)?
+// => ({FunctionCall} feature=[CallableElement|QualifiedName] "(" (arguments+=Expression ("," arguments+=Expression)*)?
 // ")")
 protected class FeatureCall_Group_1 extends GroupToken {
 	
@@ -13666,7 +13666,7 @@ protected class FeatureCall_Group_1 extends GroupToken {
 
 }
 
-// {FunctionCall} function=[CallableElement|QualifiedName] "(" (arguments+=Expression ("," arguments+=Expression)*)? ")"
+// {FunctionCall} feature=[CallableElement|QualifiedName] "(" (arguments+=Expression ("," arguments+=Expression)*)? ")"
 protected class FeatureCall_Group_1_0 extends GroupToken {
 	
 	public FeatureCall_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -13714,16 +13714,16 @@ protected class FeatureCall_FunctionCallAction_1_0_0 extends ActionToken  {
 	}
 }
 
-// function=[CallableElement|QualifiedName]
-protected class FeatureCall_FunctionAssignment_1_0_1 extends AssignmentToken  {
+// feature=[CallableElement|QualifiedName]
+protected class FeatureCall_FeatureAssignment_1_0_1 extends AssignmentToken  {
 	
-	public FeatureCall_FunctionAssignment_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public FeatureCall_FeatureAssignment_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getFeatureCallAccess().getFunctionAssignment_1_0_1();
+		return grammarAccess.getFeatureCallAccess().getFeatureAssignment_1_0_1();
 	}
 
     @Override
@@ -13736,13 +13736,13 @@ protected class FeatureCall_FunctionAssignment_1_0_1 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("function",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("function");
+		if((value = eObjectConsumer.getConsumable("feature",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("feature");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getFeatureCallAccess().getFunctionCallableElementCrossReference_1_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getFeatureCallAccess().getFunctionCallableElementCrossReference_1_0_1_0(), (EObject)value , null)) {
+			if(param.isInstanceOf(grammarAccess.getFeatureCallAccess().getFeatureCallableElementCrossReference_1_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getFeatureCallAccess().getFeatureCallableElementCrossReference_1_0_1_0(), (EObject)value , null)) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getFeatureCallAccess().getFunctionCallableElementCrossReference_1_0_1_0(); 
+				element = grammarAccess.getFeatureCallAccess().getFeatureCallableElementCrossReference_1_0_1_0(); 
 				return obj;
 			}
 		}
@@ -13766,7 +13766,7 @@ protected class FeatureCall_LeftParenthesisKeyword_1_0_2 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new FeatureCall_FunctionAssignment_1_0_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new FeatureCall_FeatureAssignment_1_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}

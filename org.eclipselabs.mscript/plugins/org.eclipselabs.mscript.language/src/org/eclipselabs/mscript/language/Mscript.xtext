@@ -241,7 +241,7 @@ ArrayElementAccess returns Expression:
 
 MemberFeatureCall returns Expression:
 	PrimaryExpression (({MemberVariableAccess.target=current} '.' memberVariable=[CallableElement|ValidID])
-		| ({FunctionCall.arguments+=current} '.' function=[CallableElement|ValidID] '(' (arguments+=Expression (',' arguments+=Expression)*)? ')')
+		| ({FunctionCall.arguments+=current} '.' feature=[CallableElement|ValidID] '(' (arguments+=Expression (',' arguments+=Expression)*)? ')')
 		| ({IterationCall.target=current} '.' identifier=ValidID '(' variables+=IterationVariable (',' variables+=IterationVariable)* (';' accumulator=IterationAccumulator)? (';' breakCondition=Expression)? '|' expression=Expression ')'))*;
 
 IterationVariable:
@@ -285,8 +285,8 @@ StringLiteral:
 	value=STRING;
 		
 FeatureCall returns Expression:
-	{VariableAccess} variable=[CallableElement|QualifiedName] ('{' stepExpression=Expression '}')?
-		| =>({FunctionCall} function=[CallableElement|QualifiedName] '(' (arguments+=Expression (',' arguments+=Expression)*)? ')');
+	{VariableAccess} feature=[CallableElement|QualifiedName] ('{' stepExpression=Expression '}')?
+		| =>({FunctionCall} feature=[CallableElement|QualifiedName] '(' (arguments+=Expression (',' arguments+=Expression)*)? ')');
 
 ArrayConstructionOperator:
 	'{' expressions+=Expression ((',' expressions+=Expression)* | 'for' iterationClauses+=ArrayConstructionIterationClause (',' iterationClauses+=ArrayConstructionIterationClause)*) '}';

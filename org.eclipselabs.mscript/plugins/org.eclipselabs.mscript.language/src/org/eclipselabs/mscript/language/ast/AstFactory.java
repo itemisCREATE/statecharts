@@ -35,24 +35,6 @@ public interface AstFactory extends EFactory {
 	Module createModule();
 
 	/**
-	 * Returns a new object of class '<em>Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Definition</em>'.
-	 * @generated
-	 */
-	Definition createDefinition();
-
-	/**
-	 * Returns a new object of class '<em>Data Type Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Type Definition</em>'.
-	 * @generated
-	 */
-	DataTypeDefinition createDataTypeDefinition();
-
-	/**
 	 * Returns a new object of class '<em>Enumeration Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

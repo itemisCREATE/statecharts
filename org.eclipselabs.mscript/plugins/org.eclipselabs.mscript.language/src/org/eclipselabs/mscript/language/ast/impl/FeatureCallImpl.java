@@ -8,51 +8,43 @@ package org.eclipselabs.mscript.language.ast.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.Definition;
+import org.eclipselabs.mscript.language.ast.CallableElement;
+import org.eclipselabs.mscript.language.ast.FeatureCall;
+import org.eclipselabs.mscript.typesystem.impl.ExpressionImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Definition</b></em>'.
+ * An implementation of the model object '<em><b>Feature Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.DefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#getFeature <em>Feature</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class DefinitionImpl extends MinimalEObjectImpl.Container implements Definition {
+public abstract class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getFeature() <em>Feature</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getFeature()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
+	protected CallableElement feature;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DefinitionImpl() {
+	protected FeatureCallImpl() {
 		super();
 	}
 
@@ -63,7 +55,7 @@ public abstract class DefinitionImpl extends MinimalEObjectImpl.Container implem
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return AstPackage.Literals.DEFINITION;
+		return AstPackage.Literals.FEATURE_CALL;
 	}
 
 	/**
@@ -71,8 +63,16 @@ public abstract class DefinitionImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
+	public CallableElement getFeature() {
+		if (feature != null && feature.eIsProxy()) {
+			InternalEObject oldFeature = (InternalEObject)feature;
+			feature = (CallableElement)eResolveProxy(oldFeature);
+			if (feature != oldFeature) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AstPackage.FEATURE_CALL__FEATURE, oldFeature, feature));
+			}
+		}
+		return feature;
 	}
 
 	/**
@@ -80,11 +80,20 @@ public abstract class DefinitionImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
+	public CallableElement basicGetFeature() {
+		return feature;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFeature(CallableElement newFeature) {
+		CallableElement oldFeature = feature;
+		feature = newFeature;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.DEFINITION__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__FEATURE, oldFeature, feature));
 	}
 
 	/**
@@ -95,8 +104,9 @@ public abstract class DefinitionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AstPackage.DEFINITION__NAME:
-				return getName();
+			case AstPackage.FEATURE_CALL__FEATURE:
+				if (resolve) return getFeature();
+				return basicGetFeature();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,8 +119,8 @@ public abstract class DefinitionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AstPackage.DEFINITION__NAME:
-				setName((String)newValue);
+			case AstPackage.FEATURE_CALL__FEATURE:
+				setFeature((CallableElement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -124,8 +134,8 @@ public abstract class DefinitionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AstPackage.DEFINITION__NAME:
-				setName(NAME_EDEFAULT);
+			case AstPackage.FEATURE_CALL__FEATURE:
+				setFeature((CallableElement)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -139,26 +149,10 @@ public abstract class DefinitionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AstPackage.DEFINITION__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case AstPackage.FEATURE_CALL__FEATURE:
+				return feature != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
-	}
-
-} //DefinitionImpl
+} //FeatureCallImpl

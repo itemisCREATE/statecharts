@@ -19,7 +19,7 @@ import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
  *
  * @generated
  */
-public class DataTypeDefinitionImpl extends DefinitionImpl implements DataTypeDefinition {
+public abstract class DataTypeDefinitionImpl extends DefinitionImpl implements DataTypeDefinition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

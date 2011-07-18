@@ -33,6 +33,7 @@ import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
+import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
@@ -319,6 +320,10 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePostfixExpression(PostfixExpression object) {
 				return createPostfixExpressionAdapter();
+			}
+			@Override
+			public Adapter caseFeatureCall(FeatureCall object) {
+				return createFeatureCallAdapter();
 			}
 			@Override
 			public Adapter caseVariableAccess(VariableAccess object) {
@@ -1065,6 +1070,20 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPostfixExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FeatureCall <em>Feature Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.FeatureCall
+	 * @generated
+	 */
+	public Adapter createFeatureCallAdapter() {
 		return null;
 	}
 

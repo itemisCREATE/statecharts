@@ -96,7 +96,7 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 
 		@Override
 		public Boolean caseVariableAccess(VariableAccess variableAccess) {
-			String name = variableAccess.getVariable().getName();
+			String name = variableAccess.getFeature().getName();
 			
 			FunctionDescriptor functionDescriptor = equationSide.getDescriptor().getFunctionDescriptor();
 			VariableKind variableKind = getVariableKind(

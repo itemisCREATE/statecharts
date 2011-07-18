@@ -278,7 +278,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getArrayElementAccessAccess().getSubscriptsAssignment_1_2(), "rule__ArrayElementAccess__SubscriptsAssignment_1_2");
 					put(grammarAccess.getArrayElementAccessAccess().getSubscriptsAssignment_1_3_1(), "rule__ArrayElementAccess__SubscriptsAssignment_1_3_1");
 					put(grammarAccess.getMemberFeatureCallAccess().getMemberVariableAssignment_1_0_2(), "rule__MemberFeatureCall__MemberVariableAssignment_1_0_2");
-					put(grammarAccess.getMemberFeatureCallAccess().getFunctionAssignment_1_1_2(), "rule__MemberFeatureCall__FunctionAssignment_1_1_2");
+					put(grammarAccess.getMemberFeatureCallAccess().getFeatureAssignment_1_1_2(), "rule__MemberFeatureCall__FeatureAssignment_1_1_2");
 					put(grammarAccess.getMemberFeatureCallAccess().getArgumentsAssignment_1_1_4_0(), "rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_0");
 					put(grammarAccess.getMemberFeatureCallAccess().getArgumentsAssignment_1_1_4_1_1(), "rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_1_1");
 					put(grammarAccess.getMemberFeatureCallAccess().getIdentifierAssignment_1_2_2(), "rule__MemberFeatureCall__IdentifierAssignment_1_2_2");
@@ -300,9 +300,9 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getIntegerLiteralAccess().getUnitAssignment_2_1(), "rule__IntegerLiteral__UnitAssignment_2_1");
 					put(grammarAccess.getBooleanLiteralAccess().getValueAssignment(), "rule__BooleanLiteral__ValueAssignment");
 					put(grammarAccess.getStringLiteralAccess().getValueAssignment(), "rule__StringLiteral__ValueAssignment");
-					put(grammarAccess.getFeatureCallAccess().getVariableAssignment_0_1(), "rule__FeatureCall__VariableAssignment_0_1");
+					put(grammarAccess.getFeatureCallAccess().getFeatureAssignment_0_1(), "rule__FeatureCall__FeatureAssignment_0_1");
 					put(grammarAccess.getFeatureCallAccess().getStepExpressionAssignment_0_2_1(), "rule__FeatureCall__StepExpressionAssignment_0_2_1");
-					put(grammarAccess.getFeatureCallAccess().getFunctionAssignment_1_0_1(), "rule__FeatureCall__FunctionAssignment_1_0_1");
+					put(grammarAccess.getFeatureCallAccess().getFeatureAssignment_1_0_1(), "rule__FeatureCall__FeatureAssignment_1_0_1");
 					put(grammarAccess.getFeatureCallAccess().getArgumentsAssignment_1_0_3_0(), "rule__FeatureCall__ArgumentsAssignment_1_0_3_0");
 					put(grammarAccess.getFeatureCallAccess().getArgumentsAssignment_1_0_3_1_1(), "rule__FeatureCall__ArgumentsAssignment_1_0_3_1_1");
 					put(grammarAccess.getArrayConstructionOperatorAccess().getExpressionsAssignment_1(), "rule__ArrayConstructionOperator__ExpressionsAssignment_1");

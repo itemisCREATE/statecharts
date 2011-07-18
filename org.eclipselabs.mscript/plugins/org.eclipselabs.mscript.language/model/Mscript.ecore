@@ -7,10 +7,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="definitions" upperBound="-1"
         eType="#//Definition" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Definition">
+  <eClassifiers xsi:type="ecore:EClass" name="Definition" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DataTypeDefinition" eSuperTypes="#//Definition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataTypeDefinition" abstract="true"
+      eSuperTypes="#//Definition"/>
   <eClassifiers xsi:type="ecore:EClass" name="EnumerationDefinition" eSuperTypes="#//DataTypeDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="literalDeclarations" upperBound="-1"
         eType="#//EnumerationLiteralDeclaration" containment="true"/>
@@ -305,13 +306,14 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//PostfixOperator"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableAccess" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//CallableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureCall" abstract="true" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="#//CallableElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableAccess" eSuperTypes="#//FeatureCall">
     <eStructuralFeatures xsi:type="ecore:EReference" name="stepExpression" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FunctionCall" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//CallableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionCall" eSuperTypes="#//FeatureCall">
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
         eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>

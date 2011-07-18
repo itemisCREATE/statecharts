@@ -341,7 +341,7 @@ public class ExpressionDataTypeAdaptor implements IExpressionDataTypeAdaptor {
 		 */
 		@Override
 		public DataType caseFunctionCall(FunctionCall functionCall) {
-			String name = functionCall.getFunction().getName();
+			String name = functionCall.getFeature().getName();
 
 			List<DataType> argumentDataTypes = new ArrayList<DataType>();
 			for (Expression argument : functionCall.getArguments()) {

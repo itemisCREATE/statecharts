@@ -422,7 +422,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		 */
 		@Override
 		public Boolean caseFunctionCall(FunctionCall functionCall) {
-			String name = functionCall.getFunction().getName();
+			String name = functionCall.getFeature().getName();
 
 			List<DataType> inputParameterDataTypes = new ArrayList<DataType>();
 			for (Expression argument : functionCall.getArguments()) {

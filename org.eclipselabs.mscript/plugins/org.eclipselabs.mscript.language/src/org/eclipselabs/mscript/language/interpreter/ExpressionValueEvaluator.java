@@ -458,7 +458,7 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 		 */
 		@Override
 		public IValue caseFunctionCall(FunctionCall functionCall) {
-			String name = functionCall.getFunction().getName();
+			String name = functionCall.getFeature().getName();
 			
 			List<IValue> argumentValues = new ArrayList<IValue>();
 			for (Expression argument : functionCall.getArguments()) {

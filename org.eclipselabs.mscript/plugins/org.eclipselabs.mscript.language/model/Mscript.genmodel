@@ -238,12 +238,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PostfixExpression/operand"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//PostfixExpression/operator"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="Mscript.ecore#//FeatureCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Mscript.ecore#//FeatureCall/feature"/>
+    </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//VariableAccess">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Mscript.ecore#//VariableAccess/variable"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//VariableAccess/stepExpression"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//FunctionCall">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionCall/function"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionCall/arguments"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//MemberVariableAccess">

@@ -10053,7 +10053,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             	    }
             	    if ( state.backtracking==0 ) {
             	       
-            	      	        newCompositeNode(grammarAccess.getMemberFeatureCallAccess().getFunctionCallableElementCrossReference_1_1_2_0()); 
+            	      	        newCompositeNode(grammarAccess.getMemberFeatureCallAccess().getFeatureCallableElementCrossReference_1_1_2_0()); 
             	      	    
             	    }
             	    pushFollow(FOLLOW_ruleValidID_in_ruleMemberFeatureCall7537);
@@ -12422,7 +12422,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                     }
                     if ( state.backtracking==0 ) {
                        
-                      	        newCompositeNode(grammarAccess.getFeatureCallAccess().getVariableCallableElementCrossReference_0_1_0()); 
+                      	        newCompositeNode(grammarAccess.getFeatureCallAccess().getFeatureCallableElementCrossReference_0_1_0()); 
                       	    
                     }
                     pushFollow(FOLLOW_ruleQualifiedName_in_ruleFeatureCall9359);
@@ -12548,7 +12548,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                     }
                     if ( state.backtracking==0 ) {
                        
-                      	        newCompositeNode(grammarAccess.getFeatureCallAccess().getFunctionCallableElementCrossReference_1_0_1_0()); 
+                      	        newCompositeNode(grammarAccess.getFeatureCallAccess().getFeatureCallableElementCrossReference_1_0_1_0()); 
                       	    
                     }
                     pushFollow(FOLLOW_ruleQualifiedName_in_ruleFeatureCall9503);

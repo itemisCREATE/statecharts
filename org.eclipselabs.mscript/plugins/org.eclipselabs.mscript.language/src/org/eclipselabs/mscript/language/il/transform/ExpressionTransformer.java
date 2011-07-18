@@ -181,7 +181,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 	 */
 	@Override
 	public Expression caseVariableAccess(VariableAccess variableAccess) {
-		VariableDeclaration variableDeclaration = context.getVariableDeclaration(variableAccess.getVariable().getName());
+		VariableDeclaration variableDeclaration = context.getVariableDeclaration(variableAccess.getFeature().getName());
 		if (variableDeclaration != null) {
 			try {
 				StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(variableAccess);
@@ -202,7 +202,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 	@Override
 	public Expression caseFunctionCall(FunctionCall functionCall) {
 		FunctionCall transformedFunctionCall = AstFactory.eINSTANCE.createFunctionCall();
-		transformedFunctionCall.setFunction(functionCall.getFunction());
+		transformedFunctionCall.setFeature(functionCall.getFeature());
 		for (Expression expression : functionCall.getArguments()) {
 			Expression transformedExpression = doSwitch(expression);
 			if (transformedExpression instanceof InvalidExpression) {

@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see org.eclipselabs.mscript.language.ast.AstPackage#getDefinition()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Definition extends EObject {

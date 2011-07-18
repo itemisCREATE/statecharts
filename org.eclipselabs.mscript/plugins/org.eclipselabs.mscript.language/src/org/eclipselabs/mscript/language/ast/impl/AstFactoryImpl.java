@@ -28,9 +28,7 @@ import org.eclipselabs.mscript.language.ast.BeginExpression;
 import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
 import org.eclipselabs.mscript.language.ast.BuiltinFunction;
 import org.eclipselabs.mscript.language.ast.BuiltinVariable;
-import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.Definition;
 import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.EnumerationDefinition;
 import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
@@ -122,8 +120,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case AstPackage.MODULE: return createModule();
-			case AstPackage.DEFINITION: return createDefinition();
-			case AstPackage.DATA_TYPE_DEFINITION: return createDataTypeDefinition();
 			case AstPackage.ENUMERATION_DEFINITION: return createEnumerationDefinition();
 			case AstPackage.ENUMERATION_LITERAL_DECLARATION: return createEnumerationLiteralDeclaration();
 			case AstPackage.TYPE_ALIAS_DEFINITION: return createTypeAliasDefinition();
@@ -246,26 +242,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public Module createModule() {
 		ModuleImpl module = new ModuleImpl();
 		return module;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Definition createDefinition() {
-		DefinitionImpl definition = new DefinitionImpl();
-		return definition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DataTypeDefinition createDataTypeDefinition() {
-		DataTypeDefinitionImpl dataTypeDefinition = new DataTypeDefinitionImpl();
-		return dataTypeDefinition;
 	}
 
 	/**

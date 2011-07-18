@@ -32,6 +32,7 @@ import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
+import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
@@ -456,9 +457,17 @@ public class AstSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AstPackage.FEATURE_CALL: {
+				FeatureCall featureCall = (FeatureCall)theEObject;
+				T result = caseFeatureCall(featureCall);
+				if (result == null) result = caseExpression(featureCall);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AstPackage.VARIABLE_ACCESS: {
 				VariableAccess variableAccess = (VariableAccess)theEObject;
 				T result = caseVariableAccess(variableAccess);
+				if (result == null) result = caseFeatureCall(variableAccess);
 				if (result == null) result = caseExpression(variableAccess);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -466,6 +475,7 @@ public class AstSwitch<T> extends Switch<T> {
 			case AstPackage.FUNCTION_CALL: {
 				FunctionCall functionCall = (FunctionCall)theEObject;
 				T result = caseFunctionCall(functionCall);
+				if (result == null) result = caseFeatureCall(functionCall);
 				if (result == null) result = caseExpression(functionCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -1254,6 +1264,21 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePostfixExpression(PostfixExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Feature Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Feature Call</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFeatureCall(FeatureCall object) {
 		return null;
 	}
 

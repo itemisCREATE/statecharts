@@ -30660,26 +30660,26 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MemberFeatureCall__Group_1_1__2__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:10538:1: rule__MemberFeatureCall__Group_1_1__2__Impl : ( ( rule__MemberFeatureCall__FunctionAssignment_1_1_2 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:10538:1: rule__MemberFeatureCall__Group_1_1__2__Impl : ( ( rule__MemberFeatureCall__FeatureAssignment_1_1_2 ) ) ;
     public final void rule__MemberFeatureCall__Group_1_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:10542:1: ( ( ( rule__MemberFeatureCall__FunctionAssignment_1_1_2 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:10543:1: ( ( rule__MemberFeatureCall__FunctionAssignment_1_1_2 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:10542:1: ( ( ( rule__MemberFeatureCall__FeatureAssignment_1_1_2 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:10543:1: ( ( rule__MemberFeatureCall__FeatureAssignment_1_1_2 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:10543:1: ( ( rule__MemberFeatureCall__FunctionAssignment_1_1_2 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:10544:1: ( rule__MemberFeatureCall__FunctionAssignment_1_1_2 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:10543:1: ( ( rule__MemberFeatureCall__FeatureAssignment_1_1_2 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:10544:1: ( rule__MemberFeatureCall__FeatureAssignment_1_1_2 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMemberFeatureCallAccess().getFunctionAssignment_1_1_2()); 
+               before(grammarAccess.getMemberFeatureCallAccess().getFeatureAssignment_1_1_2()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:10545:1: ( rule__MemberFeatureCall__FunctionAssignment_1_1_2 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:10545:2: rule__MemberFeatureCall__FunctionAssignment_1_1_2
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:10545:1: ( rule__MemberFeatureCall__FeatureAssignment_1_1_2 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:10545:2: rule__MemberFeatureCall__FeatureAssignment_1_1_2
             {
-            pushFollow(FOLLOW_rule__MemberFeatureCall__FunctionAssignment_1_1_2_in_rule__MemberFeatureCall__Group_1_1__2__Impl21392);
-            rule__MemberFeatureCall__FunctionAssignment_1_1_2();
+            pushFollow(FOLLOW_rule__MemberFeatureCall__FeatureAssignment_1_1_2_in_rule__MemberFeatureCall__Group_1_1__2__Impl21392);
+            rule__MemberFeatureCall__FeatureAssignment_1_1_2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -30687,7 +30687,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMemberFeatureCallAccess().getFunctionAssignment_1_1_2()); 
+               after(grammarAccess.getMemberFeatureCallAccess().getFeatureAssignment_1_1_2()); 
             }
 
             }
@@ -34200,26 +34200,26 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureCall__Group_0__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:11833:1: rule__FeatureCall__Group_0__1__Impl : ( ( rule__FeatureCall__VariableAssignment_0_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:11833:1: rule__FeatureCall__Group_0__1__Impl : ( ( rule__FeatureCall__FeatureAssignment_0_1 ) ) ;
     public final void rule__FeatureCall__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:11837:1: ( ( ( rule__FeatureCall__VariableAssignment_0_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:11838:1: ( ( rule__FeatureCall__VariableAssignment_0_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:11837:1: ( ( ( rule__FeatureCall__FeatureAssignment_0_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:11838:1: ( ( rule__FeatureCall__FeatureAssignment_0_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:11838:1: ( ( rule__FeatureCall__VariableAssignment_0_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:11839:1: ( rule__FeatureCall__VariableAssignment_0_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:11838:1: ( ( rule__FeatureCall__FeatureAssignment_0_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:11839:1: ( rule__FeatureCall__FeatureAssignment_0_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFeatureCallAccess().getVariableAssignment_0_1()); 
+               before(grammarAccess.getFeatureCallAccess().getFeatureAssignment_0_1()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:11840:1: ( rule__FeatureCall__VariableAssignment_0_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:11840:2: rule__FeatureCall__VariableAssignment_0_1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:11840:1: ( rule__FeatureCall__FeatureAssignment_0_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:11840:2: rule__FeatureCall__FeatureAssignment_0_1
             {
-            pushFollow(FOLLOW_rule__FeatureCall__VariableAssignment_0_1_in_rule__FeatureCall__Group_0__1__Impl23941);
-            rule__FeatureCall__VariableAssignment_0_1();
+            pushFollow(FOLLOW_rule__FeatureCall__FeatureAssignment_0_1_in_rule__FeatureCall__Group_0__1__Impl23941);
+            rule__FeatureCall__FeatureAssignment_0_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -34227,7 +34227,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFeatureCallAccess().getVariableAssignment_0_1()); 
+               after(grammarAccess.getFeatureCallAccess().getFeatureAssignment_0_1()); 
             }
 
             }
@@ -34789,26 +34789,26 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureCall__Group_1_0__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12053:1: rule__FeatureCall__Group_1_0__1__Impl : ( ( rule__FeatureCall__FunctionAssignment_1_0_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12053:1: rule__FeatureCall__Group_1_0__1__Impl : ( ( rule__FeatureCall__FeatureAssignment_1_0_1 ) ) ;
     public final void rule__FeatureCall__Group_1_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12057:1: ( ( ( rule__FeatureCall__FunctionAssignment_1_0_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12058:1: ( ( rule__FeatureCall__FunctionAssignment_1_0_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12057:1: ( ( ( rule__FeatureCall__FeatureAssignment_1_0_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12058:1: ( ( rule__FeatureCall__FeatureAssignment_1_0_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12058:1: ( ( rule__FeatureCall__FunctionAssignment_1_0_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12059:1: ( rule__FeatureCall__FunctionAssignment_1_0_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12058:1: ( ( rule__FeatureCall__FeatureAssignment_1_0_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12059:1: ( rule__FeatureCall__FeatureAssignment_1_0_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFeatureCallAccess().getFunctionAssignment_1_0_1()); 
+               before(grammarAccess.getFeatureCallAccess().getFeatureAssignment_1_0_1()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12060:1: ( rule__FeatureCall__FunctionAssignment_1_0_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12060:2: rule__FeatureCall__FunctionAssignment_1_0_1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12060:1: ( rule__FeatureCall__FeatureAssignment_1_0_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12060:2: rule__FeatureCall__FeatureAssignment_1_0_1
             {
-            pushFollow(FOLLOW_rule__FeatureCall__FunctionAssignment_1_0_1_in_rule__FeatureCall__Group_1_0__1__Impl24372);
-            rule__FeatureCall__FunctionAssignment_1_0_1();
+            pushFollow(FOLLOW_rule__FeatureCall__FeatureAssignment_1_0_1_in_rule__FeatureCall__Group_1_0__1__Impl24372);
+            rule__FeatureCall__FeatureAssignment_1_0_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -34816,7 +34816,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFeatureCallAccess().getFunctionAssignment_1_0_1()); 
+               after(grammarAccess.getFeatureCallAccess().getFeatureAssignment_1_0_1()); 
             }
 
             }
@@ -45206,9 +45206,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__MemberFeatureCall__MemberVariableAssignment_1_0_2"
 
 
-    // $ANTLR start "rule__MemberFeatureCall__FunctionAssignment_1_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15788:1: rule__MemberFeatureCall__FunctionAssignment_1_1_2 : ( ( ruleValidID ) ) ;
-    public final void rule__MemberFeatureCall__FunctionAssignment_1_1_2() throws RecognitionException {
+    // $ANTLR start "rule__MemberFeatureCall__FeatureAssignment_1_1_2"
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15788:1: rule__MemberFeatureCall__FeatureAssignment_1_1_2 : ( ( ruleValidID ) ) ;
+    public final void rule__MemberFeatureCall__FeatureAssignment_1_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -45220,27 +45220,27 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15794:1: ( ruleValidID )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMemberFeatureCallAccess().getFunctionCallableElementCrossReference_1_1_2_0()); 
+               before(grammarAccess.getMemberFeatureCallAccess().getFeatureCallableElementCrossReference_1_1_2_0()); 
             }
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15795:1: ( ruleValidID )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15796:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMemberFeatureCallAccess().getFunctionCallableElementValidIDParserRuleCall_1_1_2_0_1()); 
+               before(grammarAccess.getMemberFeatureCallAccess().getFeatureCallableElementValidIDParserRuleCall_1_1_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__MemberFeatureCall__FunctionAssignment_1_1_231831);
+            pushFollow(FOLLOW_ruleValidID_in_rule__MemberFeatureCall__FeatureAssignment_1_1_231831);
             ruleValidID();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMemberFeatureCallAccess().getFunctionCallableElementValidIDParserRuleCall_1_1_2_0_1()); 
+               after(grammarAccess.getMemberFeatureCallAccess().getFeatureCallableElementValidIDParserRuleCall_1_1_2_0_1()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMemberFeatureCallAccess().getFunctionCallableElementCrossReference_1_1_2_0()); 
+               after(grammarAccess.getMemberFeatureCallAccess().getFeatureCallableElementCrossReference_1_1_2_0()); 
             }
 
             }
@@ -45260,7 +45260,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__MemberFeatureCall__FunctionAssignment_1_1_2"
+    // $ANTLR end "rule__MemberFeatureCall__FeatureAssignment_1_1_2"
 
 
     // $ANTLR start "rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_0"
@@ -46212,9 +46212,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__StringLiteral__ValueAssignment"
 
 
-    // $ANTLR start "rule__FeatureCall__VariableAssignment_0_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16130:1: rule__FeatureCall__VariableAssignment_0_1 : ( ( ruleQualifiedName ) ) ;
-    public final void rule__FeatureCall__VariableAssignment_0_1() throws RecognitionException {
+    // $ANTLR start "rule__FeatureCall__FeatureAssignment_0_1"
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16130:1: rule__FeatureCall__FeatureAssignment_0_1 : ( ( ruleQualifiedName ) ) ;
+    public final void rule__FeatureCall__FeatureAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -46226,27 +46226,27 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16136:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFeatureCallAccess().getVariableCallableElementCrossReference_0_1_0()); 
+               before(grammarAccess.getFeatureCallAccess().getFeatureCallableElementCrossReference_0_1_0()); 
             }
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16137:1: ( ruleQualifiedName )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16138:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFeatureCallAccess().getVariableCallableElementQualifiedNameParserRuleCall_0_1_0_1()); 
+               before(grammarAccess.getFeatureCallAccess().getFeatureCallableElementQualifiedNameParserRuleCall_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__FeatureCall__VariableAssignment_0_132534);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__FeatureCall__FeatureAssignment_0_132534);
             ruleQualifiedName();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFeatureCallAccess().getVariableCallableElementQualifiedNameParserRuleCall_0_1_0_1()); 
+               after(grammarAccess.getFeatureCallAccess().getFeatureCallableElementQualifiedNameParserRuleCall_0_1_0_1()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFeatureCallAccess().getVariableCallableElementCrossReference_0_1_0()); 
+               after(grammarAccess.getFeatureCallAccess().getFeatureCallableElementCrossReference_0_1_0()); 
             }
 
             }
@@ -46266,7 +46266,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__FeatureCall__VariableAssignment_0_1"
+    // $ANTLR end "rule__FeatureCall__FeatureAssignment_0_1"
 
 
     // $ANTLR start "rule__FeatureCall__StepExpressionAssignment_0_2_1"
@@ -46314,9 +46314,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__FeatureCall__StepExpressionAssignment_0_2_1"
 
 
-    // $ANTLR start "rule__FeatureCall__FunctionAssignment_1_0_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16164:1: rule__FeatureCall__FunctionAssignment_1_0_1 : ( ( ruleQualifiedName ) ) ;
-    public final void rule__FeatureCall__FunctionAssignment_1_0_1() throws RecognitionException {
+    // $ANTLR start "rule__FeatureCall__FeatureAssignment_1_0_1"
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16164:1: rule__FeatureCall__FeatureAssignment_1_0_1 : ( ( ruleQualifiedName ) ) ;
+    public final void rule__FeatureCall__FeatureAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -46328,27 +46328,27 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16170:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFeatureCallAccess().getFunctionCallableElementCrossReference_1_0_1_0()); 
+               before(grammarAccess.getFeatureCallAccess().getFeatureCallableElementCrossReference_1_0_1_0()); 
             }
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16171:1: ( ruleQualifiedName )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16172:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFeatureCallAccess().getFunctionCallableElementQualifiedNameParserRuleCall_1_0_1_0_1()); 
+               before(grammarAccess.getFeatureCallAccess().getFeatureCallableElementQualifiedNameParserRuleCall_1_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__FeatureCall__FunctionAssignment_1_0_132604);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__FeatureCall__FeatureAssignment_1_0_132604);
             ruleQualifiedName();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFeatureCallAccess().getFunctionCallableElementQualifiedNameParserRuleCall_1_0_1_0_1()); 
+               after(grammarAccess.getFeatureCallAccess().getFeatureCallableElementQualifiedNameParserRuleCall_1_0_1_0_1()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFeatureCallAccess().getFunctionCallableElementCrossReference_1_0_1_0()); 
+               after(grammarAccess.getFeatureCallAccess().getFeatureCallableElementCrossReference_1_0_1_0()); 
             }
 
             }
@@ -46368,7 +46368,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__FeatureCall__FunctionAssignment_1_0_1"
+    // $ANTLR end "rule__FeatureCall__FeatureAssignment_1_0_1"
 
 
     // $ANTLR start "rule__FeatureCall__ArgumentsAssignment_1_0_3_0"
@@ -48767,7 +48767,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_71_in_rule__MemberFeatureCall__Group_1_1__1__Impl21331 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__MemberFeatureCall__Group_1_1__2__Impl_in_rule__MemberFeatureCall__Group_1_1__221362 = new BitSet(new long[]{0x0000200000000000L});
     public static final BitSet FOLLOW_rule__MemberFeatureCall__Group_1_1__3_in_rule__MemberFeatureCall__Group_1_1__221365 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__MemberFeatureCall__FunctionAssignment_1_1_2_in_rule__MemberFeatureCall__Group_1_1__2__Impl21392 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__MemberFeatureCall__FeatureAssignment_1_1_2_in_rule__MemberFeatureCall__Group_1_1__2__Impl21392 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__MemberFeatureCall__Group_1_1__3__Impl_in_rule__MemberFeatureCall__Group_1_1__321422 = new BitSet(new long[]{0x2A076017020001F0L,0x0000000000009C01L});
     public static final BitSet FOLLOW_rule__MemberFeatureCall__Group_1_1__4_in_rule__MemberFeatureCall__Group_1_1__321425 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_45_in_rule__MemberFeatureCall__Group_1_1__3__Impl21453 = new BitSet(new long[]{0x0000000000000002L});
@@ -48876,7 +48876,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__FeatureCall__Group_0__1_in_rule__FeatureCall__Group_0__023853 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FeatureCall__Group_0__1__Impl_in_rule__FeatureCall__Group_0__123911 = new BitSet(new long[]{0x0000001000000000L});
     public static final BitSet FOLLOW_rule__FeatureCall__Group_0__2_in_rule__FeatureCall__Group_0__123914 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureCall__VariableAssignment_0_1_in_rule__FeatureCall__Group_0__1__Impl23941 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FeatureCall__FeatureAssignment_0_1_in_rule__FeatureCall__Group_0__1__Impl23941 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FeatureCall__Group_0__2__Impl_in_rule__FeatureCall__Group_0__223971 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FeatureCall__Group_0_2__0_in_rule__FeatureCall__Group_0__2__Impl23998 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FeatureCall__Group_0_2__0__Impl_in_rule__FeatureCall__Group_0_2__024035 = new BitSet(new long[]{0x2A072017020001F0L,0x0000000000009C01L});
@@ -48893,7 +48893,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__FeatureCall__Group_1_0__1_in_rule__FeatureCall__Group_1_0__024284 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FeatureCall__Group_1_0__1__Impl_in_rule__FeatureCall__Group_1_0__124342 = new BitSet(new long[]{0x0000200000000000L});
     public static final BitSet FOLLOW_rule__FeatureCall__Group_1_0__2_in_rule__FeatureCall__Group_1_0__124345 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureCall__FunctionAssignment_1_0_1_in_rule__FeatureCall__Group_1_0__1__Impl24372 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FeatureCall__FeatureAssignment_1_0_1_in_rule__FeatureCall__Group_1_0__1__Impl24372 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FeatureCall__Group_1_0__2__Impl_in_rule__FeatureCall__Group_1_0__224402 = new BitSet(new long[]{0x2A076017020001F0L,0x0000000000009C01L});
     public static final BitSet FOLLOW_rule__FeatureCall__Group_1_0__3_in_rule__FeatureCall__Group_1_0__224405 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_45_in_rule__FeatureCall__Group_1_0__2__Impl24433 = new BitSet(new long[]{0x0000000000000002L});
@@ -49170,7 +49170,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleArraySubscript_in_rule__ArrayElementAccess__SubscriptsAssignment_1_231726 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleArraySubscript_in_rule__ArrayElementAccess__SubscriptsAssignment_1_3_131757 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleValidID_in_rule__MemberFeatureCall__MemberVariableAssignment_1_0_231792 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__MemberFeatureCall__FunctionAssignment_1_1_231831 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__MemberFeatureCall__FeatureAssignment_1_1_231831 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_031866 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_1_131897 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleValidID_in_rule__MemberFeatureCall__IdentifierAssignment_1_2_231928 = new BitSet(new long[]{0x0000000000000002L});
@@ -49192,9 +49192,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleUnit_in_rule__IntegerLiteral__UnitAssignment_2_132437 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleBooleanKind_in_rule__BooleanLiteral__ValueAssignment32468 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_STRING_in_rule__StringLiteral__ValueAssignment32499 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__FeatureCall__VariableAssignment_0_132534 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__FeatureCall__FeatureAssignment_0_132534 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__FeatureCall__StepExpressionAssignment_0_2_132569 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__FeatureCall__FunctionAssignment_1_0_132604 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__FeatureCall__FeatureAssignment_1_0_132604 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__FeatureCall__ArgumentsAssignment_1_0_3_032639 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__FeatureCall__ArgumentsAssignment_1_0_3_1_132670 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__ArrayConstructionOperator__ExpressionsAssignment_132701 = new BitSet(new long[]{0x0000000000000002L});

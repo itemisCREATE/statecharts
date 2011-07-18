@@ -17,7 +17,6 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionCall#getFunction <em>Function</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionCall#getArguments <em>Arguments</em>}</li>
  * </ul>
  * </p>
@@ -26,33 +25,7 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * @model
  * @generated
  */
-public interface FunctionCall extends Expression {
-	/**
-	 * Returns the value of the '<em><b>Function</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Function</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Function</em>' reference.
-	 * @see #setFunction(CallableElement)
-	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionCall_Function()
-	 * @model
-	 * @generated
-	 */
-	CallableElement getFunction();
-
-	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FunctionCall#getFunction <em>Function</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Function</em>' reference.
-	 * @see #getFunction()
-	 * @generated
-	 */
-	void setFunction(CallableElement value);
-
+public interface FunctionCall extends FeatureCall {
 	/**
 	 * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipselabs.mscript.typesystem.Expression}.
