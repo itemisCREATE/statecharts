@@ -11,6 +11,8 @@
 
 package de.itemis.xtext.utils.gmf.viewers;
 
+import org.eclipse.emf.ecore.resource.Resource;
+
 import com.google.inject.Injector;
 
 import de.itemis.xtext.utils.jface.viewers.XtextCellEditor;
@@ -29,6 +31,10 @@ public class XtextCellEditorEx extends XtextCellEditor {
 
 	public XtextCellEditorEx(int style, Injector injector) {
 		super(style, injector);
+	}
+
+	public XtextCellEditorEx(int style, Injector injector, Resource context) {
+		super(style, injector, context);
 	}
 
 	/**

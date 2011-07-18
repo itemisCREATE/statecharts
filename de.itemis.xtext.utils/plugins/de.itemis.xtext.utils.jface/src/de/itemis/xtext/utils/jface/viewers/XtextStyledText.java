@@ -131,12 +131,37 @@ public class XtextStyledText {
 	private final int style;
 
 	private Composite parent;
+
+	/**
+	 * C'tor to create a new Instance.
+	 *
+	 * In contrast to 
+	 * {@link XtextStyledText#XtextStyledText(Composite, int, Injector)}, this constructor
+	 * uses a specific context for xtext.
+	 *
+	 * <b>Please note:</b> Since the text control has content assist proposals enabled via a 
+	 * listener, <code>dispose</code> must be called to unregister the listener!
+	 * 
+	 * @param style
+	 *            The SWT styles for this text widget.
+	 * @param injector
+	 *            For xtext dependency injection.
+	 * @param context 
+	 *            A context for xtext. 
+	 */
+	public XtextStyledText(Composite parent, int style, Injector injector, Resource context) {
+		this(parent, style, injector);
+		setContext(context);
+	}
 	
 	/**
 	 * C'tor to create a new Instance.
 	 *
-	 * <b>Please note:</b> Since the text control has content assist proposals enabled via a listener,
-	 * <code>dispose</code> must be called to unregister the listener!
+	 * No specific context is set for xtext! If you need a context, use 
+	 * {@link XtextStyledText#XtextStyledText(Composite, int, Injector, Resource)}!
+	 *
+	 * <b>Please note:</b> Since the text control has content assist proposals enabled via a 
+	 * listener, <code>dispose</code> must be called to unregister the listener!
 	 * 
 	 * @param style
 	 *            The SWT styles for this text widget.
@@ -228,24 +253,6 @@ public class XtextStyledText {
 		return resourceSet;
 	}
 
-//	@Override
-//	protected StyledText createStyledText(Composite parent) {
-//		sourceviewer = sourceViewerFactory.createSourceViewer(parent, null,
-//				null, false, getStyle());
-//		sourceviewer.configure(configuration);
-//		sourceviewer.setDocument(document, new AnnotationModel());
-//
-//		SourceViewerDecorationSupport support = new SourceViewerDecorationSupport(
-//				sourceviewer, null, new DefaultMarkerAnnotationAccess(),
-//				EditorsPlugin.getDefault().getSharedTextColors());
-//		configureSourceViewerDecorationSupport(support);
-//
-//		validationJob = createValidationJob();
-//		document.setValidationJob(validationJob);
-//
-//		return sourceviewer.getTextWidget();
-//	}
-
 	private ValidationJob createValidationJob() {
 		return new ValidationJob(validator, document,
 				new AnnotationIssueProcessor(document, sourceviewer
@@ -318,6 +325,9 @@ public class XtextStyledText {
 		return context;
 	}
 
+	/**
+	 * Update the xtext context for the styled text.
+	 */
 	public void setContext(Resource context) {
 		this.context = context;
 	}

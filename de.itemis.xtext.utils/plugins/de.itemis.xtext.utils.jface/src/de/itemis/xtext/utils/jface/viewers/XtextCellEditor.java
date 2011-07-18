@@ -50,6 +50,8 @@ public class XtextCellEditor extends StyledTextCellEditor {
 
 	private Injector injector;
 	
+	private Resource context;
+	
 	/**
 	 * Key listener for updating cell editor.
 	 */
@@ -78,12 +80,27 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	}
 
 	/**
+	 * C'tor to create a new Instance with context.
+	 * 
+	 * @param style
+	 *            The SWT style of this cell editor.
+	 * @param injector
+	 *            Used for dependency injection of xtext features.
+	 * @param context
+	 *            The context for xtext.
+	 */
+	public XtextCellEditor(int style, Injector injector, Resource context) {
+		this(style, injector);
+		this.context = context;
+	}
+
+	/**
 	 * Creates an {@link SourceViewer} and returns the {@link StyledText} widget of the viewer as the cell editors
 	 * control. Some code is copied from {@link XtextEditor}.
 	 */
 	@Override
 	protected Control createControl(Composite parent) {
-		xtextWidget = new XtextStyledText(parent, getStyle(), injector);
+		xtextWidget = new XtextStyledText(parent, getStyle(), injector, context);
 		text = xtextWidget.getStyledText();
 		text.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
