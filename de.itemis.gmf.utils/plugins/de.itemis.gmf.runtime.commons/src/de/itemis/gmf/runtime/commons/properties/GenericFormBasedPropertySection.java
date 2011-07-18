@@ -89,17 +89,21 @@ public abstract class GenericFormBasedPropertySection extends
 			// Add a focus listener to apply model changes on focus lost
 			control.addFocusListener(new FocusListener() {
 				public void focusLost(FocusEvent e) {
-					executeSetCommand(new SetRequest(getEObject(), descriptor
-							.getEAttribute(), descriptor.getControlValue()));
+					applyModelChanges(descriptor);
 				}
-
+				
 				public void focusGained(FocusEvent e) {
 					// Nothing to do
 				}
 			});
 		}
 	}
-
+	
+	protected void applyModelChanges(IFormPropertyDescriptor propertyDescriptor){
+		executeSetCommand(new SetRequest(getEObject(), propertyDescriptor
+				.getEAttribute(), propertyDescriptor.getControlValue()));		
+	}
+	
 	/**
 	 * Executes the {@link SetValueCommand} via the {@link IOperationHistory} to
 	 * allow undo / redo
