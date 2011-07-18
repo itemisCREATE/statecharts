@@ -11,6 +11,8 @@
 
 package de.itemis.xtext.utils.gmf.viewers;
 
+import com.google.inject.Injector;
+
 import de.itemis.xtext.utils.jface.viewers.XtextCellEditor;
 
 /**
@@ -25,8 +27,8 @@ public class XtextCellEditorEx extends XtextCellEditor {
 	private Object originalValue;
 	private boolean deactivationLock = false;
 
-	public XtextCellEditorEx(int style) {
-		super(style);
+	public XtextCellEditorEx(int style, Injector injector) {
+		super(style, injector);
 	}
 
 	/**
