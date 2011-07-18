@@ -36,11 +36,6 @@ import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.editors.text.EditorsPlugin;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
 import org.eclipse.ui.texteditor.AnnotationPreference;
@@ -69,6 +64,8 @@ import org.eclipse.xtext.validation.Issue;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
+
+import de.itemis.xtext.utils.jface.viewers.util.ActiveProjectResolver;
 
 /**
  * This class integrates xText Features into a {@link CellEditor} and can be
@@ -201,22 +198,9 @@ public class XtextCellEditor extends StyledTextCellEditor {
 
 	protected IProject getActiveProject() {
 		if (activeProject == null) {
-			Display.getDefault().syncExec(new Runnable() {
-				public void run() {
-					IWorkbenchWindow activeWorkbenchWindow = PlatformUI
-							.getWorkbench().getActiveWorkbenchWindow();
-					IWorkbenchPage activePage = activeWorkbenchWindow
-							.getActivePage();
-					if (activePage != null) {
-						IEditorInput editorInput = activePage.getActiveEditor()
-								.getEditorInput();
-						if (editorInput instanceof IFileEditorInput) {
-							IFileEditorInput input = (IFileEditorInput) editorInput;
-							activeProject = input.getFile().getProject();
-						}
-					}
-				}
-			});
+			ActiveProjectResolver activeProjectResolver = new ActiveProjectResolver();
+			Display.getDefault().syncExec(activeProjectResolver);
+			activeProject = activeProjectResolver.getResult();
 		}
 		return activeProject;
 	}
