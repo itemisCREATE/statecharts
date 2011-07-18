@@ -94,8 +94,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="EquationPart">
     <eStructuralFeatures xsi:type="ecore:EReference" name="side" eType="#//EquationSide"
         eOpposite="#//EquationSide/parts"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="featureCall" lowerBound="1"
-        eType="ecore:EClass Mscript.ecore#//FeatureCall"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableAccess" lowerBound="1"
+        eType="ecore:EClass Mscript.ecore#//VariableAccess"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableStep" lowerBound="1"
         eType="#//VariableStep" eOpposite="#//VariableStep/usingEquationParts"/>
   </eClassifiers>

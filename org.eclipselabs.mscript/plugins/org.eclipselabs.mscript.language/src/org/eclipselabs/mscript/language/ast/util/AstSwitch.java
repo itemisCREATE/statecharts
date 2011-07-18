@@ -32,8 +32,7 @@ import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
-import org.eclipselabs.mscript.language.ast.FeatureCall;
-import org.eclipselabs.mscript.language.ast.FeatureCallPart;
+import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.IfExpression;
@@ -46,11 +45,10 @@ import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
+import org.eclipselabs.mscript.language.ast.MemberVariableAccess;
 import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
-import org.eclipselabs.mscript.language.ast.NameComponent;
-import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.PostfixExpression;
@@ -66,6 +64,7 @@ import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
+import org.eclipselabs.mscript.language.ast.VariableAccess;
 import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
@@ -217,6 +216,7 @@ public class AstSwitch<T> extends Switch<T> {
 			case AstPackage.FUNCTION_OBJECT_DECLARATION: {
 				FunctionObjectDeclaration functionObjectDeclaration = (FunctionObjectDeclaration)theEObject;
 				T result = caseFunctionObjectDeclaration(functionObjectDeclaration);
+				if (result == null) result = caseCallableElement(functionObjectDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -284,23 +284,10 @@ public class AstSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case AstPackage.FEATURE_CALL_PART: {
-				FeatureCallPart featureCallPart = (FeatureCallPart)theEObject;
-				T result = caseFeatureCallPart(featureCallPart);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.NAME_COMPONENT: {
-				NameComponent nameComponent = (NameComponent)theEObject;
-				T result = caseNameComponent(nameComponent);
-				if (result == null) result = caseFeatureCallPart(nameComponent);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case AstPackage.ARRAY_ELEMENT_ACCESS: {
 				ArrayElementAccess arrayElementAccess = (ArrayElementAccess)theEObject;
 				T result = caseArrayElementAccess(arrayElementAccess);
-				if (result == null) result = caseFeatureCallPart(arrayElementAccess);
+				if (result == null) result = caseExpression(arrayElementAccess);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -310,17 +297,10 @@ public class AstSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case AstPackage.OPERATION_ARGUMENT_LIST: {
-				OperationArgumentList operationArgumentList = (OperationArgumentList)theEObject;
-				T result = caseOperationArgumentList(operationArgumentList);
-				if (result == null) result = caseFeatureCallPart(operationArgumentList);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case AstPackage.ITERATION_CALL: {
 				IterationCall iterationCall = (IterationCall)theEObject;
 				T result = caseIterationCall(iterationCall);
-				if (result == null) result = caseFeatureCallPart(iterationCall);
+				if (result == null) result = caseExpression(iterationCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -334,6 +314,7 @@ public class AstSwitch<T> extends Switch<T> {
 			case AstPackage.ITERATION_ACCUMULATOR: {
 				IterationAccumulator iterationAccumulator = (IterationAccumulator)theEObject;
 				T result = caseIterationAccumulator(iterationAccumulator);
+				if (result == null) result = caseCallableElement(iterationAccumulator);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -475,10 +456,24 @@ public class AstSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case AstPackage.FEATURE_CALL: {
-				FeatureCall featureCall = (FeatureCall)theEObject;
-				T result = caseFeatureCall(featureCall);
-				if (result == null) result = caseExpression(featureCall);
+			case AstPackage.VARIABLE_ACCESS: {
+				VariableAccess variableAccess = (VariableAccess)theEObject;
+				T result = caseVariableAccess(variableAccess);
+				if (result == null) result = caseExpression(variableAccess);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.FUNCTION_CALL: {
+				FunctionCall functionCall = (FunctionCall)theEObject;
+				T result = caseFunctionCall(functionCall);
+				if (result == null) result = caseExpression(functionCall);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.MEMBER_VARIABLE_ACCESS: {
+				MemberVariableAccess memberVariableAccess = (MemberVariableAccess)theEObject;
+				T result = caseMemberVariableAccess(memberVariableAccess);
+				if (result == null) result = caseExpression(memberVariableAccess);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -888,36 +883,6 @@ public class AstSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Feature Call Part</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Feature Call Part</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFeatureCallPart(FeatureCallPart object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Name Component</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Name Component</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNameComponent(NameComponent object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Array Element Access</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -944,21 +909,6 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseArraySubscript(ArraySubscript object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Operation Argument List</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Operation Argument List</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseOperationArgumentList(OperationArgumentList object) {
 		return null;
 	}
 
@@ -1308,17 +1258,47 @@ public class AstSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Feature Call</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Variable Access</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Feature Call</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Variable Access</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFeatureCall(FeatureCall object) {
+	public T caseVariableAccess(VariableAccess object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Function Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Function Call</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFunctionCall(FunctionCall object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Member Variable Access</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Member Variable Access</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMemberVariableAccess(MemberVariableAccess object) {
 		return null;
 	}
 

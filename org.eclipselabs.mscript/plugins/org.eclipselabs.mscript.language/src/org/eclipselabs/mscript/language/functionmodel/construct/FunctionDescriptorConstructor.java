@@ -11,19 +11,15 @@
 
 package org.eclipselabs.mscript.language.functionmodel.construct;
 
-import java.util.ListIterator;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.Equation;
-import org.eclipselabs.mscript.language.ast.FeatureCall;
-import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
-import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.VariableAccess;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
@@ -98,19 +94,16 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 			return status;
 		}
 
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseFeatureCall(org.eclipselabs.mscript.language.ast.FeatureCall)
-		 */
 		@Override
-		public Boolean caseFeatureCall(FeatureCall featureCall) {
-			String name = featureCall.getTarget().getName();
+		public Boolean caseVariableAccess(VariableAccess variableAccess) {
+			String name = variableAccess.getVariable().getName();
 			
 			FunctionDescriptor functionDescriptor = equationSide.getDescriptor().getFunctionDescriptor();
 			VariableKind variableKind = getVariableKind(
 					functionDescriptor.getDefinition(),
 					name);
 			
-			checkFeatureCall(featureCall, variableKind);
+			checkFeatureCall(variableAccess, variableKind);
 			
 			if (variableKind != VariableKind.UNKNOWN) {
 				int stepIndex = 0;
@@ -119,9 +112,8 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 				if (variableKind == VariableKind.INPUT_PARAMETER
 						|| variableKind == VariableKind.OUTPUT_PARAMETER
 						|| variableKind == VariableKind.STATE_VARIABLE) {
-					ListIterator<FeatureCallPart> partIterator = featureCall.getParts().listIterator();
 					try {
-						StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(partIterator);
+						StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(variableAccess);
 						stepIndex = stepExpressionResult.getIndex();
 						initial = stepExpressionResult.isInitial();
 					} catch (CoreException e) {
@@ -131,7 +123,7 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 
 				EquationPart part = FunctionModelFactory.eINSTANCE.createEquationPart();
 				part.setSide(equationSide);
-				part.setFeatureCall(featureCall);
+				part.setVariableAccess(variableAccess);
 				VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(name);
 				if (variableDescriptor == null) {
 					variableDescriptor = FunctionModelFactory.eINSTANCE.createVariableDescriptor();
@@ -149,9 +141,6 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 				}
 				part.setVariableStep(variableStep);
 			}
-			for (FeatureCallPart part : featureCall.getParts()) {
-				doSwitch(part);
-			}
 			return true;
 		}
 		
@@ -159,37 +148,21 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 		 * @param featureCall
 		 * @param variableKind
 		 */
-		private void checkFeatureCall(FeatureCall featureCall, VariableKind variableKind) {
-			ListIterator<FeatureCallPart> featureCallPartIterator = featureCall.getParts().listIterator();
-
+		private void checkFeatureCall(VariableAccess variableAccess, VariableKind variableKind) {
 			String message = null;
 			switch (variableKind) {
-			case TEMPLATE_PARAMETER:
-				if (featureCallPartIterator.hasNext() && featureCallPartIterator.next() instanceof OperationArgumentList) {
-					message = "Template parameters cannot be called";
-				}
-				break;
 			case INPUT_PARAMETER:
 			case OUTPUT_PARAMETER:
 			case STATE_VARIABLE:
-				if (featureCallPartIterator.hasNext() && featureCallPartIterator.next() instanceof OperationArgumentList) {
-					if (!equationSide.getDescriptor().getFunctionDescriptor().getDefinition().isStateful()) {
-						message = "Variable references of stateless functions must not specify step expressions";
-					}
+				if (variableAccess.getStepExpression() != null
+						&& !equationSide.getDescriptor().getFunctionDescriptor().getDefinition().isStateful()) {
+					message = "Variable references of stateless functions must not specify step expressions";
 				}
-				break;
-			case CONSTANT:
-				if (!featureCall.getParts().isEmpty() && featureCall.getParts().get(0) instanceof OperationArgumentList) {
-					message = "Constants cannot be called";
-				}
-				break;
-			case FUNCTION_OBJECT:
-				message = "Function objects not supported yet";
 				break;
 			}
 			
 			if (message != null) {
-				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, message, featureCall));
+				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, message, variableAccess));
 			}
 		}
 

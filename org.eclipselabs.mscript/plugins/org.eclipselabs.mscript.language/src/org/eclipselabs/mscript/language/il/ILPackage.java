@@ -853,108 +853,6 @@ public interface ILPackage extends EPackage {
 	int VARIABLE_REFERENCE_FEATURE_COUNT = VARIABLE_ACCESS_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.OperationCallImpl <em>Operation Call</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.il.impl.OperationCallImpl
-	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getOperationCall()
-	 * @generated
-	 */
-	int OPERATION_CALL = 17;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_CALL__ARGUMENTS = TypeSystemPackage.EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Operation Call</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_CALL_FEATURE_COUNT = TypeSystemPackage.EXPRESSION_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.FunctionCallImpl <em>Function Call</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.il.impl.FunctionCallImpl
-	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getFunctionCall()
-	 * @generated
-	 */
-	int FUNCTION_CALL = 18;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_CALL__ARGUMENTS = OPERATION_CALL__ARGUMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_CALL__NAME = OPERATION_CALL_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Function Call</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_CALL_FEATURE_COUNT = OPERATION_CALL_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.PropertyReferenceImpl <em>Property Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.il.impl.PropertyReferenceImpl
-	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getPropertyReference()
-	 * @generated
-	 */
-	int PROPERTY_REFERENCE = 19;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_REFERENCE__NAME = TypeSystemPackage.EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_REFERENCE__TARGET = TypeSystemPackage.EXPRESSION_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Property Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_REFERENCE_FEATURE_COUNT = TypeSystemPackage.EXPRESSION_FEATURE_COUNT + 2;
-
-	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.InvalidExpressionImpl <em>Invalid Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -962,7 +860,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getInvalidExpression()
 	 * @generated
 	 */
-	int INVALID_EXPRESSION = 20;
+	int INVALID_EXPRESSION = 17;
 
 	/**
 	 * The number of structural features of the '<em>Invalid Expression</em>' class.
@@ -974,43 +872,6 @@ public interface ILPackage extends EPackage {
 	int INVALID_EXPRESSION_FEATURE_COUNT = TypeSystemPackage.EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.NameImpl <em>Name</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.il.impl.NameImpl
-	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getName_()
-	 * @generated
-	 */
-	int NAME = 21;
-
-	/**
-	 * The feature id for the '<em><b>Segments</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME__SEGMENTS = 0;
-
-	/**
-	 * The feature id for the '<em><b>Last Segment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME__LAST_SEGMENT = 1;
-
-	/**
-	 * The number of structural features of the '<em>Name</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_FEATURE_COUNT = 2;
-
-	/**
 	 * The meta object id for the '<em>IValue</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1018,7 +879,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getIValue()
 	 * @generated
 	 */
-	int IVALUE = 22;
+	int IVALUE = 18;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.ILFunctionDefinition <em>Function Definition</em>}'.
@@ -1510,80 +1371,6 @@ public interface ILPackage extends EPackage {
 	EReference getVariableReference_ArrayIndices();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.OperationCall <em>Operation Call</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Operation Call</em>'.
-	 * @see org.eclipselabs.mscript.language.il.OperationCall
-	 * @generated
-	 */
-	EClass getOperationCall();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.il.OperationCall#getArguments <em>Arguments</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Arguments</em>'.
-	 * @see org.eclipselabs.mscript.language.il.OperationCall#getArguments()
-	 * @see #getOperationCall()
-	 * @generated
-	 */
-	EReference getOperationCall_Arguments();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.FunctionCall <em>Function Call</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Function Call</em>'.
-	 * @see org.eclipselabs.mscript.language.il.FunctionCall
-	 * @generated
-	 */
-	EClass getFunctionCall();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.il.FunctionCall#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Name</em>'.
-	 * @see org.eclipselabs.mscript.language.il.FunctionCall#getName()
-	 * @see #getFunctionCall()
-	 * @generated
-	 */
-	EReference getFunctionCall_Name();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.PropertyReference <em>Property Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Property Reference</em>'.
-	 * @see org.eclipselabs.mscript.language.il.PropertyReference
-	 * @generated
-	 */
-	EClass getPropertyReference();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.il.PropertyReference#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipselabs.mscript.language.il.PropertyReference#getName()
-	 * @see #getPropertyReference()
-	 * @generated
-	 */
-	EAttribute getPropertyReference_Name();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.il.PropertyReference#getTarget <em>Target</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see org.eclipselabs.mscript.language.il.PropertyReference#getTarget()
-	 * @see #getPropertyReference()
-	 * @generated
-	 */
-	EReference getPropertyReference_Target();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.InvalidExpression <em>Invalid Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1592,38 +1379,6 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getInvalidExpression();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.Name <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Name</em>'.
-	 * @see org.eclipselabs.mscript.language.il.Name
-	 * @generated
-	 */
-	EClass getName_();
-
-	/**
-	 * Returns the meta object for the attribute list '{@link org.eclipselabs.mscript.language.il.Name#getSegments <em>Segments</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Segments</em>'.
-	 * @see org.eclipselabs.mscript.language.il.Name#getSegments()
-	 * @see #getName_()
-	 * @generated
-	 */
-	EAttribute getName_Segments();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.il.Name#getLastSegment <em>Last Segment</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Last Segment</em>'.
-	 * @see org.eclipselabs.mscript.language.il.Name#getLastSegment()
-	 * @see #getName_()
-	 * @generated
-	 */
-	EAttribute getName_LastSegment();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipselabs.mscript.computation.core.value.IValue <em>IValue</em>}'.
@@ -2061,68 +1816,6 @@ public interface ILPackage extends EPackage {
 		EReference VARIABLE_REFERENCE__ARRAY_INDICES = eINSTANCE.getVariableReference_ArrayIndices();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.OperationCallImpl <em>Operation Call</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.il.impl.OperationCallImpl
-		 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getOperationCall()
-		 * @generated
-		 */
-		EClass OPERATION_CALL = eINSTANCE.getOperationCall();
-
-		/**
-		 * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference OPERATION_CALL__ARGUMENTS = eINSTANCE.getOperationCall_Arguments();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.FunctionCallImpl <em>Function Call</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.il.impl.FunctionCallImpl
-		 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getFunctionCall()
-		 * @generated
-		 */
-		EClass FUNCTION_CALL = eINSTANCE.getFunctionCall();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FUNCTION_CALL__NAME = eINSTANCE.getFunctionCall_Name();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.PropertyReferenceImpl <em>Property Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.il.impl.PropertyReferenceImpl
-		 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getPropertyReference()
-		 * @generated
-		 */
-		EClass PROPERTY_REFERENCE = eINSTANCE.getPropertyReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PROPERTY_REFERENCE__NAME = eINSTANCE.getPropertyReference_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PROPERTY_REFERENCE__TARGET = eINSTANCE.getPropertyReference_Target();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.InvalidExpressionImpl <em>Invalid Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2131,32 +1824,6 @@ public interface ILPackage extends EPackage {
 		 * @generated
 		 */
 		EClass INVALID_EXPRESSION = eINSTANCE.getInvalidExpression();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.NameImpl <em>Name</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.il.impl.NameImpl
-		 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getName_()
-		 * @generated
-		 */
-		EClass NAME = eINSTANCE.getName_();
-
-		/**
-		 * The meta object literal for the '<em><b>Segments</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NAME__SEGMENTS = eINSTANCE.getName_Segments();
-
-		/**
-		 * The meta object literal for the '<em><b>Last Segment</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NAME__LAST_SEGMENT = eINSTANCE.getName_LastSegment();
 
 		/**
 		 * The meta object literal for the '<em>IValue</em>' data type.

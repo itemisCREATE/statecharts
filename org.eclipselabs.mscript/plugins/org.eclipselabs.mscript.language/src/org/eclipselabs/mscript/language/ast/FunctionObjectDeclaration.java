@@ -7,7 +7,6 @@
 package org.eclipselabs.mscript.language.ast;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
@@ -28,7 +27,7 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * @model
  * @generated
  */
-public interface FunctionObjectDeclaration extends EObject {
+public interface FunctionObjectDeclaration extends CallableElement {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

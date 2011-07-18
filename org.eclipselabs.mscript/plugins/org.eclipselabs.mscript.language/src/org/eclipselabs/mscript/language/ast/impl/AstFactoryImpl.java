@@ -38,8 +38,7 @@ import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.EqualityOperator;
 import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
-import org.eclipselabs.mscript.language.ast.FeatureCall;
-import org.eclipselabs.mscript.language.ast.FeatureCallPart;
+import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.IfExpression;
@@ -52,12 +51,11 @@ import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
+import org.eclipselabs.mscript.language.ast.MemberVariableAccess;
 import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
-import org.eclipselabs.mscript.language.ast.NameComponent;
-import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.PostfixExpression;
@@ -77,6 +75,7 @@ import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnaryOperator;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
+import org.eclipselabs.mscript.language.ast.VariableAccess;
 
 /**
  * <!-- begin-user-doc -->
@@ -145,11 +144,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.SWITCH_CASE: return createSwitchCase();
 			case AstPackage.ADDITIVE_EXPRESSION_PART: return createAdditiveExpressionPart();
 			case AstPackage.MULTIPLICATIVE_EXPRESSION_PART: return createMultiplicativeExpressionPart();
-			case AstPackage.FEATURE_CALL_PART: return createFeatureCallPart();
-			case AstPackage.NAME_COMPONENT: return createNameComponent();
 			case AstPackage.ARRAY_ELEMENT_ACCESS: return createArrayElementAccess();
 			case AstPackage.ARRAY_SUBSCRIPT: return createArraySubscript();
-			case AstPackage.OPERATION_ARGUMENT_LIST: return createOperationArgumentList();
 			case AstPackage.ITERATION_CALL: return createIterationCall();
 			case AstPackage.ITERATION_VARIABLE: return createIterationVariable();
 			case AstPackage.ITERATION_ACCUMULATOR: return createIterationAccumulator();
@@ -173,7 +169,9 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.POWER_EXPRESSION: return createPowerExpression();
 			case AstPackage.UNARY_EXPRESSION: return createUnaryExpression();
 			case AstPackage.POSTFIX_EXPRESSION: return createPostfixExpression();
-			case AstPackage.FEATURE_CALL: return createFeatureCall();
+			case AstPackage.VARIABLE_ACCESS: return createVariableAccess();
+			case AstPackage.FUNCTION_CALL: return createFunctionCall();
+			case AstPackage.MEMBER_VARIABLE_ACCESS: return createMemberVariableAccess();
 			case AstPackage.BUILTIN_DEFINITION: return createBuiltinDefinition();
 			case AstPackage.BUILTIN_FUNCTION: return createBuiltinFunction();
 			case AstPackage.BUILTIN_VARIABLE: return createBuiltinVariable();
@@ -475,26 +473,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FeatureCallPart createFeatureCallPart() {
-		FeatureCallPartImpl featureCallPart = new FeatureCallPartImpl();
-		return featureCallPart;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NameComponent createNameComponent() {
-		NameComponentImpl nameComponent = new NameComponentImpl();
-		return nameComponent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ArrayElementAccess createArrayElementAccess() {
 		ArrayElementAccessImpl arrayElementAccess = new ArrayElementAccessImpl();
 		return arrayElementAccess;
@@ -508,16 +486,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public ArraySubscript createArraySubscript() {
 		ArraySubscriptImpl arraySubscript = new ArraySubscriptImpl();
 		return arraySubscript;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OperationArgumentList createOperationArgumentList() {
-		OperationArgumentListImpl operationArgumentList = new OperationArgumentListImpl();
-		return operationArgumentList;
 	}
 
 	/**
@@ -755,9 +723,29 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FeatureCall createFeatureCall() {
-		FeatureCallImpl featureCall = new FeatureCallImpl();
-		return featureCall;
+	public VariableAccess createVariableAccess() {
+		VariableAccessImpl variableAccess = new VariableAccessImpl();
+		return variableAccess;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FunctionCall createFunctionCall() {
+		FunctionCallImpl functionCall = new FunctionCallImpl();
+		return functionCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MemberVariableAccess createMemberVariableAccess() {
+		MemberVariableAccessImpl memberVariableAccess = new MemberVariableAccessImpl();
+		return memberVariableAccess;
 	}
 
 	/**

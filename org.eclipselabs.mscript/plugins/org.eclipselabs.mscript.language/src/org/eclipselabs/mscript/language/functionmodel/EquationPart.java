@@ -7,7 +7,7 @@
 package org.eclipselabs.mscript.language.functionmodel;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipselabs.mscript.language.ast.FeatureCall;
+import org.eclipselabs.mscript.language.ast.VariableAccess;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,7 +18,7 @@ import org.eclipselabs.mscript.language.ast.FeatureCall;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getSide <em>Side</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getFeatureCall <em>Feature Call</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getVariableAccess <em>Variable Access</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getVariableStep <em>Variable Step</em>}</li>
  * </ul>
  * </p>
@@ -57,30 +57,30 @@ public interface EquationPart extends EObject {
 	void setSide(EquationSide value);
 
 	/**
-	 * Returns the value of the '<em><b>Feature Call</b></em>' reference.
+	 * Returns the value of the '<em><b>Variable Access</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Feature Call</em>' reference isn't clear,
+	 * If the meaning of the '<em>Variable Access</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Feature Call</em>' reference.
-	 * @see #setFeatureCall(FeatureCall)
-	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getEquationPart_FeatureCall()
+	 * @return the value of the '<em>Variable Access</em>' reference.
+	 * @see #setVariableAccess(VariableAccess)
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getEquationPart_VariableAccess()
 	 * @model required="true"
 	 * @generated
 	 */
-	FeatureCall getFeatureCall();
+	VariableAccess getVariableAccess();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getFeatureCall <em>Feature Call</em>}' reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getVariableAccess <em>Variable Access</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Feature Call</em>' reference.
-	 * @see #getFeatureCall()
+	 * @param value the new value of the '<em>Variable Access</em>' reference.
+	 * @see #getVariableAccess()
 	 * @generated
 	 */
-	void setFeatureCall(FeatureCall value);
+	void setVariableAccess(VariableAccess value);
 
 	/**
 	 * Returns the value of the '<em><b>Variable Step</b></em>' reference.

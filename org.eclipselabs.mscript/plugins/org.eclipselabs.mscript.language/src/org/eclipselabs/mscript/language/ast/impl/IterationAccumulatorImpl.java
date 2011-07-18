@@ -11,7 +11,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.IterationAccumulator;
 import org.eclipselabs.mscript.typesystem.Expression;
@@ -30,7 +29,7 @@ import org.eclipselabs.mscript.typesystem.Expression;
  *
  * @generated
  */
-public class IterationAccumulatorImpl extends MinimalEObjectImpl.Container implements IterationAccumulator {
+public class IterationAccumulatorImpl extends CallableElementImpl implements IterationAccumulator {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->

@@ -231,10 +231,27 @@ enum UnaryOperator:
 	LogicalNot='!';
 	
 PostfixExpression returns Expression:
-	PrimaryExpression ({PostfixExpression.operand=current} operator=PostfixOperator)?;
+	ArrayElementAccess ({PostfixExpression.operand=current} operator=PostfixOperator)?;
 
 enum PostfixOperator:
 	Transpose="'";
+
+ArrayElementAccess returns Expression:
+	MemberFeatureCall ({ArrayElementAccess.array=current} '[' subscripts+=ArraySubscript (',' subscripts+=ArraySubscript)* ']')*;
+
+MemberFeatureCall returns Expression:
+	PrimaryExpression (({MemberVariableAccess.target=current} '.' memberVariable=[CallableElement|ValidID])
+		| ({FunctionCall.arguments+=current} '.' function=[CallableElement|ValidID] '(' (arguments+=Expression (',' arguments+=Expression)*)? ')')
+		| ({IterationCall.target=current} '.' identifier=ValidID '(' variables+=IterationVariable (',' variables+=IterationVariable)* (';' accumulator=IterationAccumulator)? (';' breakCondition=Expression)? '|' expression=Expression ')'))*;
+
+IterationVariable:
+	name=ValidID;
+
+IterationAccumulator:
+	name=ValidID '=' initializer=Expression;
+
+ArraySubscript:
+	slice?=':' | expression=Expression;
 
 PrimaryExpression returns Expression:
 	Literal |
@@ -268,32 +285,9 @@ StringLiteral:
 	value=STRING;
 		
 FeatureCall returns Expression:
-	{FeatureCall} target=[CallableElement|QualifiedName] (parts+=FeatureCallPart)*;
+	{VariableAccess} variable=[CallableElement|QualifiedName] ('{' stepExpression=Expression '}')?
+		| =>({FunctionCall} function=[CallableElement|QualifiedName] '(' (arguments+=Expression (',' arguments+=Expression)*)? ')');
 
-FeatureCallPart:
-	NameComponent | ArrayElementAccess | OperationArgumentList | IterationCall;
-	
-NameComponent:
-	'.' identifier=ValidID;
-	
-ArrayElementAccess:
-	'[' subscripts+=ArraySubscript (',' subscripts+=ArraySubscript)* ']';
-
-ArraySubscript:
-	slice?=':' | expression=Expression;
-
-OperationArgumentList:
-	{OperationArgumentList} '(' (arguments+=Expression (',' arguments+=Expression)*)? ')';
-
-IterationCall:
-	'.' name=ValidID '(' variables+=IterationVariable (',' variables+=IterationVariable)* (';' accumulator=IterationAccumulator)? (';' breakCondition=Expression)? '|' expression=Expression ')';
-
-IterationVariable:
-	name=ValidID;
-
-IterationAccumulator:
-	name=ValidID '=' initializer=Expression;
-	
 ArrayConstructionOperator:
 	'{' expressions+=Expression ((',' expressions+=Expression)* | 'for' iterationClauses+=ArrayConstructionIterationClause (',' iterationClauses+=ArrayConstructionIterationClause)*) '}';
 
@@ -347,7 +341,7 @@ ValidID:
 	ID;
 
 QualifiedName:
-  ValidID (=>'.' ValidID)*;
+  ValidID ('::' ValidID)*;
 
 /*
  * Terminals

@@ -21,6 +21,7 @@ import org.eclipselabs.mscript.language.ast.IterationAccumulator;
 import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.IterationVariable;
 import org.eclipselabs.mscript.typesystem.Expression;
+import org.eclipselabs.mscript.typesystem.impl.ExpressionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +30,8 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl#getIdentifier <em>Identifier</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl#getVariables <em>Variables</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl#getAccumulator <em>Accumulator</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl#getBreakCondition <em>Break Condition</em>}</li>
@@ -39,26 +41,36 @@ import org.eclipselabs.mscript.typesystem.Expression;
  *
  * @generated
  */
-public class IterationCallImpl extends FeatureCallPartImpl implements IterationCall {
+public class IterationCallImpl extends ExpressionImpl implements IterationCall {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getTarget()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
+	protected Expression target;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getIdentifier()
 	 * @generated
 	 * @ordered
 	 */
-	protected String name = NAME_EDEFAULT;
+	protected static final String IDENTIFIER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIdentifier()
+	 * @generated
+	 * @ordered
+	 */
+	protected String identifier = IDENTIFIER_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getVariables() <em>Variables</em>}' containment reference list.
@@ -124,8 +136,8 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
+	public Expression getTarget() {
+		return target;
 	}
 
 	/**
@@ -133,11 +145,54 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
+	public NotificationChain basicSetTarget(Expression newTarget, NotificationChain msgs) {
+		Expression oldTarget = target;
+		target = newTarget;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ITERATION_CALL__TARGET, oldTarget, newTarget);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTarget(Expression newTarget) {
+		if (newTarget != target) {
+			NotificationChain msgs = null;
+			if (target != null)
+				msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ITERATION_CALL__TARGET, null, msgs);
+			if (newTarget != null)
+				msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ITERATION_CALL__TARGET, null, msgs);
+			msgs = basicSetTarget(newTarget, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ITERATION_CALL__TARGET, newTarget, newTarget));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIdentifier(String newIdentifier) {
+		String oldIdentifier = identifier;
+		identifier = newIdentifier;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ITERATION_CALL__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ITERATION_CALL__IDENTIFIER, oldIdentifier, identifier));
 	}
 
 	/**
@@ -289,6 +344,8 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case AstPackage.ITERATION_CALL__TARGET:
+				return basicSetTarget(null, msgs);
 			case AstPackage.ITERATION_CALL__VARIABLES:
 				return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
 			case AstPackage.ITERATION_CALL__ACCUMULATOR:
@@ -309,8 +366,10 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AstPackage.ITERATION_CALL__NAME:
-				return getName();
+			case AstPackage.ITERATION_CALL__TARGET:
+				return getTarget();
+			case AstPackage.ITERATION_CALL__IDENTIFIER:
+				return getIdentifier();
 			case AstPackage.ITERATION_CALL__VARIABLES:
 				return getVariables();
 			case AstPackage.ITERATION_CALL__ACCUMULATOR:
@@ -332,8 +391,11 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AstPackage.ITERATION_CALL__NAME:
-				setName((String)newValue);
+			case AstPackage.ITERATION_CALL__TARGET:
+				setTarget((Expression)newValue);
+				return;
+			case AstPackage.ITERATION_CALL__IDENTIFIER:
+				setIdentifier((String)newValue);
 				return;
 			case AstPackage.ITERATION_CALL__VARIABLES:
 				getVariables().clear();
@@ -360,8 +422,11 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AstPackage.ITERATION_CALL__NAME:
-				setName(NAME_EDEFAULT);
+			case AstPackage.ITERATION_CALL__TARGET:
+				setTarget((Expression)null);
+				return;
+			case AstPackage.ITERATION_CALL__IDENTIFIER:
+				setIdentifier(IDENTIFIER_EDEFAULT);
 				return;
 			case AstPackage.ITERATION_CALL__VARIABLES:
 				getVariables().clear();
@@ -387,8 +452,10 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AstPackage.ITERATION_CALL__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case AstPackage.ITERATION_CALL__TARGET:
+				return target != null;
+			case AstPackage.ITERATION_CALL__IDENTIFIER:
+				return IDENTIFIER_EDEFAULT == null ? identifier != null : !IDENTIFIER_EDEFAULT.equals(identifier);
 			case AstPackage.ITERATION_CALL__VARIABLES:
 				return variables != null && !variables.isEmpty();
 			case AstPackage.ITERATION_CALL__ACCUMULATOR:
@@ -411,8 +478,8 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
+		result.append(" (identifier: ");
+		result.append(identifier);
 		result.append(')');
 		return result.toString();
 	}

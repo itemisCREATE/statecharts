@@ -6,7 +6,6 @@
  */
 package org.eclipselabs.mscript.language.ast;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
@@ -26,7 +25,7 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * @model
  * @generated
  */
-public interface IterationAccumulator extends EObject {
+public interface IterationAccumulator extends CallableElement {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

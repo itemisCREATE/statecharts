@@ -13,7 +13,6 @@ package org.eclipselabs.mscript.language.il.transform;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
@@ -25,11 +24,9 @@ import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
-import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
-import org.eclipselabs.mscript.language.ast.FeatureCall;
-import org.eclipselabs.mscript.language.ast.FeatureCallPart;
+import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.IterationCall;
@@ -39,23 +36,19 @@ import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
-import org.eclipselabs.mscript.language.ast.NameComponent;
-import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
+import org.eclipselabs.mscript.language.ast.VariableAccess;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
-import org.eclipselabs.mscript.language.il.FunctionCall;
 import org.eclipselabs.mscript.language.il.ILFactory;
 import org.eclipselabs.mscript.language.il.IfStatement;
 import org.eclipselabs.mscript.language.il.InvalidExpression;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
-import org.eclipselabs.mscript.language.il.Name;
-import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
@@ -184,46 +177,14 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseFeatureCall(org.eclipselabs.mscript.language.ast.FeatureCall)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseVariableAccess(org.eclipselabs.mscript.language.ast.VariableAccess)
 	 */
 	@Override
-	public Expression caseFeatureCall(FeatureCall featureCall) {
-		Expression targetExpression;
-		ListIterator<FeatureCallPart> featureCallPartIterator = featureCall.getParts().listIterator();
-
-		String name = featureCall.getTarget().getName();
-		targetExpression = resolveVariableReference(name, featureCallPartIterator);
-		if (targetExpression == null) {
-			targetExpression = resolveOperationCall(name, featureCallPartIterator, null);
-		}
-		if (targetExpression == null) {
-			String message;
-			if (featureCallPartIterator.hasNext() && featureCallPartIterator.next() instanceof OperationArgumentList) {
-				message = "The method " + name + "(...) is undefined";
-			} else {
-				message = name + " cannot be resolved to a variable";
-			}
-			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, message, featureCall));
-			return createInvalidExpression();
-		}
-		
-		FeatureCallPartTransformer featureCallPartTransformer = new FeatureCallPartTransformer(featureCallPartIterator);
-		while (featureCallPartIterator.hasNext()) {
-			featureCallPartTransformer.setTargetExpression(targetExpression);
-			targetExpression = featureCallPartTransformer.doSwitch(featureCallPartIterator.next());
-			if (targetExpression instanceof InvalidExpression) {
-				return targetExpression;
-			}
-		}
-		
-		return targetExpression;
-	}
-	
-	private Expression resolveVariableReference(String variableName, ListIterator<FeatureCallPart> featureCallPartIterator) {
-		VariableDeclaration variableDeclaration = context.getVariableDeclaration(variableName);
+	public Expression caseVariableAccess(VariableAccess variableAccess) {
+		VariableDeclaration variableDeclaration = context.getVariableDeclaration(variableAccess.getVariable().getName());
 		if (variableDeclaration != null) {
 			try {
-				StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(featureCallPartIterator);
+				StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(variableAccess);
 				VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
 				variableReference.setTarget(variableDeclaration);
 				variableReference.setStepIndex(stepExpressionResult.getIndex());
@@ -234,105 +195,193 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 		}
 		return null;
 	}
-	
-	private Expression resolveOperationCall(String operationName, ListIterator<FeatureCallPart> featureCallPartIterator, Expression targetExpression) {
-		OperationArgumentList operationArgumentList = null;
-		if (featureCallPartIterator.hasNext()) {
-			FeatureCallPart next = featureCallPartIterator.next();
-			if (next instanceof OperationArgumentList) {
-				operationArgumentList = (OperationArgumentList) next;
-			} else {
-				featureCallPartIterator.previous();
-			}
-		}
-		
-		if (operationArgumentList == null) {
-			return null;
-		}
-		
-		FunctionCall functionCall = ILFactory.eINSTANCE.createFunctionCall();
-		Name name = ILFactory.eINSTANCE.createName();
-		name.getSegments().add(operationName);
-		functionCall.setName(name);
-		if (targetExpression != null) {
-			functionCall.getArguments().add(targetExpression);
-		}
-		
-		for (Expression expression : operationArgumentList.getArguments()) {
-			Expression transformedExpression = ExpressionTransformer.this.doSwitch(expression);
+
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseFunctionCall(org.eclipselabs.mscript.language.ast.FunctionCall)
+	 */
+	@Override
+	public Expression caseFunctionCall(FunctionCall functionCall) {
+		FunctionCall transformedFunctionCall = AstFactory.eINSTANCE.createFunctionCall();
+		transformedFunctionCall.setFunction(functionCall.getFunction());
+		for (Expression expression : functionCall.getArguments()) {
+			Expression transformedExpression = doSwitch(expression);
 			if (transformedExpression instanceof InvalidExpression) {
 				return transformedExpression;
 			}
-			functionCall.getArguments().add(transformedExpression);
+			transformedFunctionCall.getArguments().add(transformedExpression);
 		}
-		
-		return functionCall;
+		return transformedFunctionCall;
 	}
-
-	private class FeatureCallPartTransformer extends AstSwitch<Expression> {
-
-		private ListIterator<FeatureCallPart> featureCallPartIterator;
-		private Expression targetExpression;
 	
-		/**
-		 * 
-		 */
-		public FeatureCallPartTransformer(ListIterator<FeatureCallPart> featureCallPartIterator) {
-			this.featureCallPartIterator = featureCallPartIterator;
-		}
-		
-		/**
-		 * @param targetExpression the targetExpression to set
-		 */
-		public void setTargetExpression(Expression targetExpression) {
-			this.targetExpression = targetExpression;
-		}
-		
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseFeatureReference(org.eclipselabs.mscript.language.ast.FeatureReference)
-		 */
-		@Override
-		public Expression caseNameComponent(NameComponent nameComponent) {
-			Expression expression = resolveOperationCall(nameComponent.getIdentifier(), featureCallPartIterator, targetExpression);
-			if (expression != null) {
-				return expression;
-			}
-			
-			PropertyReference propertyReference = ILFactory.eINSTANCE.createPropertyReference();
-			propertyReference.setName(nameComponent.getIdentifier());
-			propertyReference.setTarget(targetExpression);
-			return propertyReference;
-		}
-		
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseArrayElementAccess(org.eclipselabs.mscript.language.ast.ArrayElementAccess)
-		 */
-		@Override
-		public Expression caseArrayElementAccess(ArrayElementAccess arrayElementAccess) {
-			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Array element access not supported yet", arrayElementAccess));
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIterationCall(org.eclipselabs.mscript.language.ast.IterationCall)
+	 */
+	@Override
+	public Expression caseIterationCall(IterationCall iterationCall) {
+		IIterationCallTransformer transformer = iterationCallTransformerLookupTable.getTransformer(iterationCall.getIdentifier());
+		if (transformer == null) {
+			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid iteration call", iterationCall));
 			return createInvalidExpression();
 		}
 		
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIterationCall(org.eclipselabs.mscript.language.ast.IterationCall)
-		 */
-		@Override
-		public Expression caseIterationCall(IterationCall iterationCall) {
-			IIterationCallTransformer transformer = iterationCallTransformerLookupTable.getTransformer(iterationCall.getName());
-			if (transformer == null) {
-				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid iteration call", iterationCall));
-				return createInvalidExpression();
-			}
-			
-			IIterationCallTransformerResult result = transformer.transform(context, iterationCall, targetExpression);
-			
-			VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
-			variableReference.setTarget(result.getLocalVariableDeclaration());
-			variableReference.setStepIndex(0);
-			return variableReference;
-		}
+		IIterationCallTransformerResult result = transformer.transform(context, iterationCall, doSwitch(iterationCall.getTarget()));
 		
+		VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
+		variableReference.setTarget(result.getLocalVariableDeclaration());
+		variableReference.setStepIndex(0);
+		return variableReference;
 	}
+		
+//	/* (non-Javadoc)
+//	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseFeatureCall(org.eclipselabs.mscript.language.ast.FeatureCall)
+//	 */
+//	@Override
+//	public Expression caseFeatureCall(FeatureCall featureCall) {
+//		Expression targetExpression;
+//		ListIterator<FeatureCallPart> featureCallPartIterator = featureCall.getParts().listIterator();
+//
+//		String name = featureCall.getTarget().getName();
+//		targetExpression = resolveVariableReference(name, featureCallPartIterator);
+//		if (targetExpression == null) {
+//			targetExpression = resolveOperationCall(name, featureCallPartIterator, null);
+//		}
+//		if (targetExpression == null) {
+//			String message;
+//			if (featureCallPartIterator.hasNext() && featureCallPartIterator.next() instanceof OperationArgumentList) {
+//				message = "The method " + name + "(...) is undefined";
+//			} else {
+//				message = name + " cannot be resolved to a variable";
+//			}
+//			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, message, featureCall));
+//			return createInvalidExpression();
+//		}
+//		
+//		FeatureCallPartTransformer featureCallPartTransformer = new FeatureCallPartTransformer(featureCallPartIterator);
+//		while (featureCallPartIterator.hasNext()) {
+//			featureCallPartTransformer.setTargetExpression(targetExpression);
+//			targetExpression = featureCallPartTransformer.doSwitch(featureCallPartIterator.next());
+//			if (targetExpression instanceof InvalidExpression) {
+//				return targetExpression;
+//			}
+//		}
+//		
+//		return targetExpression;
+//	}
+//	
+//	private Expression resolveVariableReference(String variableName, ListIterator<FeatureCallPart> featureCallPartIterator) {
+//		VariableDeclaration variableDeclaration = context.getVariableDeclaration(variableName);
+//		if (variableDeclaration != null) {
+//			try {
+//				StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(featureCallPartIterator);
+//				VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
+//				variableReference.setTarget(variableDeclaration);
+//				variableReference.setStepIndex(stepExpressionResult.getIndex());
+//				return variableReference;
+//			} catch (CoreException e) {
+//				throw new RuntimeException(e);
+//			}
+//		}
+//		return null;
+//	}
+//	
+//	private Expression resolveOperationCall(String operationName, ListIterator<FeatureCallPart> featureCallPartIterator, Expression targetExpression) {
+//		OperationArgumentList operationArgumentList = null;
+//		if (featureCallPartIterator.hasNext()) {
+//			FeatureCallPart next = featureCallPartIterator.next();
+//			if (next instanceof OperationArgumentList) {
+//				operationArgumentList = (OperationArgumentList) next;
+//			} else {
+//				featureCallPartIterator.previous();
+//			}
+//		}
+//		
+//		if (operationArgumentList == null) {
+//			return null;
+//		}
+//		
+//		FunctionCall functionCall = ILFactory.eINSTANCE.createFunctionCall();
+//		Name name = ILFactory.eINSTANCE.createName();
+//		name.getSegments().add(operationName);
+//		functionCall.setName(name);
+//		if (targetExpression != null) {
+//			functionCall.getArguments().add(targetExpression);
+//		}
+//		
+//		for (Expression expression : operationArgumentList.getArguments()) {
+//			Expression transformedExpression = ExpressionTransformer.this.doSwitch(expression);
+//			if (transformedExpression instanceof InvalidExpression) {
+//				return transformedExpression;
+//			}
+//			functionCall.getArguments().add(transformedExpression);
+//		}
+//		
+//		return functionCall;
+//	}
+//
+//	private class FeatureCallPartTransformer extends AstSwitch<Expression> {
+//
+//		private ListIterator<FeatureCallPart> featureCallPartIterator;
+//		private Expression targetExpression;
+//	
+//		/**
+//		 * 
+//		 */
+//		public FeatureCallPartTransformer(ListIterator<FeatureCallPart> featureCallPartIterator) {
+//			this.featureCallPartIterator = featureCallPartIterator;
+//		}
+//		
+//		/**
+//		 * @param targetExpression the targetExpression to set
+//		 */
+//		public void setTargetExpression(Expression targetExpression) {
+//			this.targetExpression = targetExpression;
+//		}
+//		
+//		/* (non-Javadoc)
+//		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseFeatureReference(org.eclipselabs.mscript.language.ast.FeatureReference)
+//		 */
+//		@Override
+//		public Expression caseNameComponent(NameComponent nameComponent) {
+//			Expression expression = resolveOperationCall(nameComponent.getIdentifier(), featureCallPartIterator, targetExpression);
+//			if (expression != null) {
+//				return expression;
+//			}
+//			
+//			PropertyReference propertyReference = ILFactory.eINSTANCE.createPropertyReference();
+//			propertyReference.setName(nameComponent.getIdentifier());
+//			propertyReference.setTarget(targetExpression);
+//			return propertyReference;
+//		}
+//		
+//		/* (non-Javadoc)
+//		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseArrayElementAccess(org.eclipselabs.mscript.language.ast.ArrayElementAccess)
+//		 */
+//		@Override
+//		public Expression caseArrayElementAccess(ArrayElementAccess arrayElementAccess) {
+//			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Array element access not supported yet", arrayElementAccess));
+//			return createInvalidExpression();
+//		}
+//		
+//		/* (non-Javadoc)
+//		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIterationCall(org.eclipselabs.mscript.language.ast.IterationCall)
+//		 */
+//		@Override
+//		public Expression caseIterationCall(IterationCall iterationCall) {
+//			IIterationCallTransformer transformer = iterationCallTransformerLookupTable.getTransformer(iterationCall.getIdentifier());
+//			if (transformer == null) {
+//				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid iteration call", iterationCall));
+//				return createInvalidExpression();
+//			}
+//			
+//			IIterationCallTransformerResult result = transformer.transform(context, iterationCall, targetExpression);
+//			
+//			VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
+//			variableReference.setTarget(result.getLocalVariableDeclaration());
+//			variableReference.setStepIndex(0);
+//			return variableReference;
+//		}
+//		
+//	}
 			
 	private InvalidExpression createInvalidExpression() {
 		InvalidExpression invalidExpression = ILFactory.eINSTANCE.createInvalidExpression();

@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.language.ast.Equation;
-import org.eclipselabs.mscript.language.ast.FeatureCall;
+import org.eclipselabs.mscript.language.ast.VariableAccess;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
@@ -229,7 +229,7 @@ public class EquationDescriptorImpl extends EObjectImpl implements EquationDescr
 	public boolean isLeftHandSideValid(DiagnosticChain diagnostics, Map<Object, Object> context) {
 		Expression lhsExpression = getEquation().getLeftHandSide();
 		String message = null;
-		if (getLeftHandSide().getParts().size() == 1 && lhsExpression instanceof FeatureCall) {
+		if (getLeftHandSide().getParts().size() == 1 && lhsExpression instanceof VariableAccess) {
 			EquationPart part = getLeftHandSide().getParts().get(0);
 			switch (part.getVariableStep().getDescriptor().getKind()) {
 			case TEMPLATE_PARAMETER:
@@ -282,7 +282,7 @@ public class EquationDescriptorImpl extends EObjectImpl implements EquationDescr
 							FunctionModelValidator.DIAGNOSTIC_SOURCE,
 							FunctionModelValidator.EQUATION_DESCRIPTOR__IS_RIGHT_HAND_SIDE_VALID,
 							"Right-hand side must not reference initial value",
-							new Object [] { part.getFeatureCall() }));
+							new Object [] { part.getVariableAccess() }));
 				}
 				result = false;
 			}

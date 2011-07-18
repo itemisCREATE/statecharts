@@ -18,7 +18,6 @@ import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
 import org.eclipselabs.mscript.language.il.ComputationCompound;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
-import org.eclipselabs.mscript.language.il.FunctionCall;
 import org.eclipselabs.mscript.language.il.ILFactory;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.ILPackage;
@@ -27,9 +26,7 @@ import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InvalidExpression;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
-import org.eclipselabs.mscript.language.il.Name;
 import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
-import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableReference;
 
@@ -90,10 +87,7 @@ public class ILFactoryImpl extends EFactoryImpl implements ILFactory {
 			case ILPackage.IF_STATEMENT: return createIfStatement();
 			case ILPackage.FOREACH_STATEMENT: return createForeachStatement();
 			case ILPackage.VARIABLE_REFERENCE: return createVariableReference();
-			case ILPackage.FUNCTION_CALL: return createFunctionCall();
-			case ILPackage.PROPERTY_REFERENCE: return createPropertyReference();
 			case ILPackage.INVALID_EXPRESSION: return createInvalidExpression();
-			case ILPackage.NAME: return createName();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -264,39 +258,9 @@ public class ILFactoryImpl extends EFactoryImpl implements ILFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FunctionCall createFunctionCall() {
-		FunctionCallImpl functionCall = new FunctionCallImpl();
-		return functionCall;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PropertyReference createPropertyReference() {
-		PropertyReferenceImpl propertyReference = new PropertyReferenceImpl();
-		return propertyReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public InvalidExpression createInvalidExpression() {
 		InvalidExpressionImpl invalidExpression = new InvalidExpressionImpl();
 		return invalidExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Name createName() {
-		NameImpl name = new NameImpl();
-		return name;
 	}
 
 	/**

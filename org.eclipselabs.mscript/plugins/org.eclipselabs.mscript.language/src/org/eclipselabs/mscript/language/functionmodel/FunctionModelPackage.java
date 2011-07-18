@@ -236,13 +236,13 @@ public interface FunctionModelPackage extends EPackage {
 	int EQUATION_PART__SIDE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Feature Call</b></em>' reference.
+	 * The feature id for the '<em><b>Variable Access</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EQUATION_PART__FEATURE_CALL = 1;
+	int EQUATION_PART__VARIABLE_ACCESS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Variable Step</b></em>' reference.
@@ -555,15 +555,15 @@ public interface FunctionModelPackage extends EPackage {
 	EReference getEquationPart_Side();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getFeatureCall <em>Feature Call</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getVariableAccess <em>Variable Access</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Feature Call</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.EquationPart#getFeatureCall()
+	 * @return the meta object for the reference '<em>Variable Access</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.EquationPart#getVariableAccess()
 	 * @see #getEquationPart()
 	 * @generated
 	 */
-	EReference getEquationPart_FeatureCall();
+	EReference getEquationPart_VariableAccess();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getVariableStep <em>Variable Step</em>}'.
@@ -853,12 +853,12 @@ public interface FunctionModelPackage extends EPackage {
 		EReference EQUATION_PART__SIDE = eINSTANCE.getEquationPart_Side();
 
 		/**
-		 * The meta object literal for the '<em><b>Feature Call</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Variable Access</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EQUATION_PART__FEATURE_CALL = eINSTANCE.getEquationPart_FeatureCall();
+		EReference EQUATION_PART__VARIABLE_ACCESS = eINSTANCE.getEquationPart_VariableAccess();
 
 		/**
 		 * The meta object literal for the '<em><b>Variable Step</b></em>' reference feature.

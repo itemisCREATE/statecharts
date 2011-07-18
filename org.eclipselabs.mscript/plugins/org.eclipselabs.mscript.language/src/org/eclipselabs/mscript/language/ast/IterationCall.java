@@ -17,7 +17,8 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.IterationCall#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.IterationCall#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.IterationCall#getIdentifier <em>Identifier</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.IterationCall#getVariables <em>Variables</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.IterationCall#getAccumulator <em>Accumulator</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.IterationCall#getBreakCondition <em>Break Condition</em>}</li>
@@ -29,32 +30,58 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * @model
  * @generated
  */
-public interface IterationCall extends FeatureCallPart {
+public interface IterationCall extends Expression {
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Target</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Target</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getIterationCall_Name()
+	 * @return the value of the '<em>Target</em>' containment reference.
+	 * @see #setTarget(Expression)
+	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getIterationCall_Target()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Expression getTarget();
+
+	/**
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.IterationCall#getTarget <em>Target</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Target</em>' containment reference.
+	 * @see #getTarget()
+	 * @generated
+	 */
+	void setTarget(Expression value);
+
+	/**
+	 * Returns the value of the '<em><b>Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Identifier</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Identifier</em>' attribute.
+	 * @see #setIdentifier(String)
+	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getIterationCall_Identifier()
 	 * @model
 	 * @generated
 	 */
-	String getName();
+	String getIdentifier();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.IterationCall#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.IterationCall#getIdentifier <em>Identifier</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
+	 * @param value the new value of the '<em>Identifier</em>' attribute.
+	 * @see #getIdentifier()
 	 * @generated
 	 */
-	void setName(String value);
+	void setIdentifier(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Variables</b></em>' containment reference list.

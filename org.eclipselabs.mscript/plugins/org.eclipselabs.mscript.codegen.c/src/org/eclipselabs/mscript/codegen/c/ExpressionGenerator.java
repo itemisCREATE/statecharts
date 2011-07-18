@@ -30,6 +30,7 @@ import org.eclipselabs.mscript.computation.computationmodel.util.ComputationMode
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
+import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
@@ -39,9 +40,6 @@ import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
-import org.eclipselabs.mscript.language.il.FunctionCall;
-import org.eclipselabs.mscript.language.il.Name;
-import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor;
@@ -71,6 +69,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 
 		private IMscriptGeneratorContext context;
 		private IVariableAccessStrategy variableAccessStrategy;
+		private IBuiltinFunctionGeneratorLookupTable builtinFunctionGeneratorLookupTable = new BuiltinFunctionGeneratorLookupTable();
 		
 		private PrintWriter writer;
 
@@ -419,6 +418,28 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		};
 				
 		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseFunctionCall(org.eclipselabs.mscript.language.il.FunctionCall)
+		 */
+		@Override
+		public Boolean caseFunctionCall(FunctionCall functionCall) {
+			String name = functionCall.getFunction().getName();
+
+			List<DataType> inputParameterDataTypes = new ArrayList<DataType>();
+			for (Expression argument : functionCall.getArguments()) {
+				inputParameterDataTypes.add(ILUtil.getDataType(argument));
+			}
+			BuiltinFunctionDescriptor descriptor = BuiltinFunctionDescriptor.get(name, inputParameterDataTypes);
+			if (descriptor != null) {
+				IFunctionGenerator generator = builtinFunctionGeneratorLookupTable.getFunctionGenerator(descriptor);
+				if (generator != null) {
+					generator.generate(context, variableAccessStrategy, functionCall.getArguments());
+				}
+			}
+
+			return true;
+		}
+
+		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseExpression(org.eclipselabs.mscript.language.ast.Expression)
 		 */
 		@Override
@@ -435,8 +456,6 @@ public class ExpressionGenerator implements IExpressionGenerator {
 	
 		private class ILExpressionGenerator extends ILSwitch<Boolean> {
 			
-			private IBuiltinFunctionGeneratorLookupTable builtinFunctionGeneratorLookupTable = new BuiltinFunctionGeneratorLookupTable();
-			
 			public Boolean caseVariableReference(VariableReference variableReference) {
 				// TODO: redesign is needed here
 				String variableAccessString = new VariableAccessGenerator(context.getComputationModel(), variableAccessStrategy, variableReference).generate();
@@ -451,37 +470,6 @@ public class ExpressionGenerator implements IExpressionGenerator {
 				return true;
 			}
 			
-			/* (non-Javadoc)
-			 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#casePropertyReference(org.eclipselabs.mscript.language.il.PropertyReference)
-			 */
-			@Override
-			public Boolean casePropertyReference(PropertyReference propertyReference) {
-				// TODO Auto-generated method stub
-				return super.casePropertyReference(propertyReference);
-			}
-			
-			/* (non-Javadoc)
-			 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseFunctionCall(org.eclipselabs.mscript.language.il.FunctionCall)
-			 */
-			@Override
-			public Boolean caseFunctionCall(FunctionCall functionCall) {
-				Name name = functionCall.getName();
-				if (name.getSegments().size() == 1) {
-					List<DataType> inputParameterDataTypes = new ArrayList<DataType>();
-					for (Expression argument : functionCall.getArguments()) {
-						inputParameterDataTypes.add(ILUtil.getDataType(argument));
-					}
-					BuiltinFunctionDescriptor descriptor = BuiltinFunctionDescriptor.get(name.getLastSegment(), inputParameterDataTypes);
-					if (descriptor != null) {
-						IFunctionGenerator generator = builtinFunctionGeneratorLookupTable.getFunctionGenerator(descriptor);
-						if (generator != null) {
-							generator.generate(context, variableAccessStrategy, functionCall.getArguments());
-						}
-					}
-				}
-				return true;
-			}
-	
 		}
 
 	}

@@ -11,18 +11,20 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipselabs.mscript.language.ast.FeatureCall;
+import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
+import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.LetExpression;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.VariableAccess;
 
 public class MscriptScopeProvider extends AbstractDeclarativeScopeProvider {
 
-	public IScope scope_FeatureCall_target(FeatureCall context, EReference reference) {
+	public IScope scope_VariableAccess_variable(VariableAccess context, EReference reference) {
 		List<EObject> elements = new ArrayList<EObject>();
 		
 		EObject container = context.eContainer();
@@ -36,6 +38,7 @@ public class MscriptScopeProvider extends AbstractDeclarativeScopeProvider {
 				}
 			} else if (container instanceof IterationCall) {
 				IterationCall iterationCall = (IterationCall) container;
+				elements.add(iterationCall.getAccumulator());
 				elements.addAll(iterationCall.getVariables());
 			} else if (container instanceof FunctionDefinition) {
 				FunctionDefinition functionDefinition = (FunctionDefinition) container;
@@ -44,7 +47,6 @@ public class MscriptScopeProvider extends AbstractDeclarativeScopeProvider {
 					elements.add(stateVariableDeclaration);
 				}
 
-				elements.add(functionDefinition);
 				for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameterDeclarations()) {
 					elements.add(parameterDeclaration);
 				}
@@ -54,6 +56,8 @@ public class MscriptScopeProvider extends AbstractDeclarativeScopeProvider {
 				for (ParameterDeclaration parameterDeclaration : functionDefinition.getOutputParameterDeclarations()) {
 					elements.add(parameterDeclaration);
 				}
+
+				elements.add(functionDefinition);
 			}
 			container = container.eContainer();
 		}
@@ -61,4 +65,24 @@ public class MscriptScopeProvider extends AbstractDeclarativeScopeProvider {
 		return Scopes.scopeFor(elements, getDelegate().getScope(context, reference));
 	}
 	
+	public IScope scope_FunctionCall_function(FunctionCall context, EReference reference) {
+		List<EObject> elements = new ArrayList<EObject>();
+		
+		EObject container = context.eContainer();
+		while (container != null) {
+			if (container instanceof FunctionDefinition) {
+				FunctionDefinition functionDefinition = (FunctionDefinition) container;
+
+				for (FunctionObjectDeclaration functionObjectDeclaration : functionDefinition.getFunctionObjectDeclarations()) {
+					elements.add(functionObjectDeclaration);
+				}
+				
+				elements.add(functionDefinition);
+			}
+			container = container.eContainer();
+		}
+		
+		return Scopes.scopeFor(elements, getDelegate().getScope(context, reference));
+	}
+
 }

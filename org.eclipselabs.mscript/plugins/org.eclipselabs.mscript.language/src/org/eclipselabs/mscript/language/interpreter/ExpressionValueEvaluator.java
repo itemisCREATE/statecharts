@@ -32,6 +32,7 @@ import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
+import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
@@ -44,9 +45,6 @@ import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
-import org.eclipselabs.mscript.language.il.FunctionCall;
-import org.eclipselabs.mscript.language.il.Name;
-import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
@@ -89,6 +87,8 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 
 		private ILExpressionValueEvaluatorSwitch ilExpressionValueEvaluatorSwitch = new ILExpressionValueEvaluatorSwitch();
 		
+		private IBuiltinFunctionLookupTable builtinFunctionLookupTable = new BuiltinFunctionLookupTable();
+
 		/**
 		 * 
 		 */
@@ -454,6 +454,33 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 		}
 
 		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseFunctionCall(org.eclipselabs.mscript.language.il.FunctionCall)
+		 */
+		@Override
+		public IValue caseFunctionCall(FunctionCall functionCall) {
+			String name = functionCall.getFunction().getName();
+			
+			List<IValue> argumentValues = new ArrayList<IValue>();
+			for (Expression argument : functionCall.getArguments()) {
+				argumentValues.add(ExpressionValueEvaluatorSwitch.this.doSwitch(argument));
+			}
+
+			List<DataType> inputParameterDataTypes = new ArrayList<DataType>();
+			for (IValue argumentValue : argumentValues) {
+				inputParameterDataTypes.add(argumentValue.getDataType());
+			}
+			BuiltinFunctionDescriptor descriptor = BuiltinFunctionDescriptor.get(name, inputParameterDataTypes);
+			if (descriptor != null) {
+				IFunction behavior = builtinFunctionLookupTable.getFunction(descriptor);
+				if (behavior != null) {
+					return behavior.call(context, argumentValues).get(0);
+				}
+			}
+			
+			return super.caseFunctionCall(functionCall);
+		}
+
+		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
 		 */
 		@Override
@@ -471,8 +498,6 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 	
 		private class ILExpressionValueEvaluatorSwitch extends ILSwitch<IValue> {
 			
-			private IBuiltinFunctionLookupTable builtinFunctionLookupTable = new BuiltinFunctionLookupTable();
-			
 			/* (non-Javadoc)
 			 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseVariableReference(org.eclipselabs.mscript.language.imperativemodel.VariableReference)
 			 */
@@ -480,43 +505,6 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 			public IValue caseVariableReference(VariableReference variableReference) {
 				IVariable variable = context.getVariable(variableReference.getTarget());
 				return variable.getValue(variableReference.getStepIndex());
-			}
-			
-			/* (non-Javadoc)
-			 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#casePropertyReference(org.eclipselabs.mscript.language.il.PropertyReference)
-			 */
-			@Override
-			public IValue casePropertyReference(PropertyReference propertyReference) {
-				return InvalidValue.SINGLETON;
-			}
-			
-			/* (non-Javadoc)
-			 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseFunctionCall(org.eclipselabs.mscript.language.il.FunctionCall)
-			 */
-			@Override
-			public IValue caseFunctionCall(FunctionCall functionCall) {
-				Name name = functionCall.getName();
-				
-				List<IValue> argumentValues = new ArrayList<IValue>();
-				for (Expression argument : functionCall.getArguments()) {
-					argumentValues.add(ExpressionValueEvaluatorSwitch.this.doSwitch(argument));
-				}
-
-				if (name.getSegments().size() == 1) {
-					List<DataType> inputParameterDataTypes = new ArrayList<DataType>();
-					for (IValue argumentValue : argumentValues) {
-						inputParameterDataTypes.add(argumentValue.getDataType());
-					}
-					BuiltinFunctionDescriptor descriptor = BuiltinFunctionDescriptor.get(name.getLastSegment(), inputParameterDataTypes);
-					if (descriptor != null) {
-						IFunction behavior = builtinFunctionLookupTable.getFunction(descriptor);
-						if (behavior != null) {
-							return behavior.call(context, argumentValues).get(0);
-						}
-					}
-				}
-				
-				return super.caseFunctionCall(functionCall);
 			}
 			
 		}

@@ -217,7 +217,7 @@ public class FunctionDescriptorImpl extends EObjectImpl implements FunctionDescr
 						FunctionModelValidator.DIAGNOSTIC_SOURCE,
 						FunctionModelValidator.FUNCTION_DESCRIPTOR__HAS_NO_DUPLICATE_EQUATIONS,
 						message.toString(),
-						new Object[] { invalidEquationPart.getFeatureCall() }));
+						new Object[] { invalidEquationPart.getVariableAccess() }));
 			}
 		}
 		
@@ -246,7 +246,7 @@ public class FunctionDescriptorImpl extends EObjectImpl implements FunctionDescr
 								FunctionModelValidator.DIAGNOSTIC_SOURCE,
 								FunctionModelValidator.FUNCTION_DESCRIPTOR__HAS_NO_CYCLIC_EQUATIONS,
 								message,
-								new Object[] { equationPart.getFeatureCall() }));
+								new Object[] { equationPart.getVariableAccess() }));
 					}
 					result = false;
 				}

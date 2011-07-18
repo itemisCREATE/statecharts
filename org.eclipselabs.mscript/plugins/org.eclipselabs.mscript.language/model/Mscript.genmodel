@@ -145,22 +145,17 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//MultiplicativeExpressionPart/operator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//MultiplicativeExpressionPart/operand"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//FeatureCallPart"/>
-    <genClasses ecoreClass="Mscript.ecore#//NameComponent">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//NameComponent/identifier"/>
-    </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ArrayElementAccess">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayElementAccess/array"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayElementAccess/subscripts"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ArraySubscript">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ArraySubscript/slice"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArraySubscript/expression"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//OperationArgumentList">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//OperationArgumentList/arguments"/>
-    </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//IterationCall">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//IterationCall/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationCall/target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//IterationCall/identifier"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationCall/variables"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationCall/accumulator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationCall/breakCondition"/>
@@ -243,9 +238,17 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PostfixExpression/operand"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//PostfixExpression/operator"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//FeatureCall">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FeatureCall/target"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FeatureCall/parts"/>
+    <genClasses ecoreClass="Mscript.ecore#//VariableAccess">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Mscript.ecore#//VariableAccess/variable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//VariableAccess/stepExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//FunctionCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionCall/function"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionCall/arguments"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//MemberVariableAccess">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//MemberVariableAccess/target"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Mscript.ecore#//MemberVariableAccess/memberVariable"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//BuiltinDefinition"/>
     <genClasses ecoreClass="Mscript.ecore#//BuiltinFunction"/>

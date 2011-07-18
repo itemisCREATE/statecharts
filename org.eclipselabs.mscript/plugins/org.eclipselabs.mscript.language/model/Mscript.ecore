@@ -72,7 +72,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="StateVariableDeclaration" eSuperTypes="#//CallableElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FunctionObjectDeclaration">
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionObjectDeclaration" eSuperTypes="#//CallableElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="functionName" eType="#//FunctionDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="templateArguments" upperBound="-1"
@@ -171,11 +171,9 @@
   <eClassifiers xsi:type="ecore:EEnum" name="PostfixOperator">
     <eLiterals name="Transpose" literal="'"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FeatureCallPart"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NameComponent" eSuperTypes="#//FeatureCallPart">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArrayElementAccess" eSuperTypes="#//FeatureCallPart">
+  <eClassifiers xsi:type="ecore:EClass" name="ArrayElementAccess" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="array" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subscripts" upperBound="-1"
         eType="#//ArraySubscript" containment="true"/>
   </eClassifiers>
@@ -184,13 +182,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationArgumentList" eSuperTypes="#//FeatureCallPart">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
+  <eClassifiers xsi:type="ecore:EClass" name="IterationCall" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IterationCall" eSuperTypes="#//FeatureCallPart">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
         eType="#//IterationVariable" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="accumulator" eType="#//IterationAccumulator"
@@ -203,7 +198,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="IterationVariable" eSuperTypes="#//CallableElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IterationAccumulator">
+  <eClassifiers xsi:type="ecore:EClass" name="IterationAccumulator" eSuperTypes="#//CallableElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initializer" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
@@ -310,10 +305,21 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//PostfixOperator"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FeatureCall" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//CallableElement"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
-        eType="#//FeatureCallPart" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableAccess" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//CallableElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stepExpression" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionCall" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//CallableElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MemberVariableAccess" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="memberVariable" eType="#//CallableElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BuiltinDefinition" eSuperTypes="#//Definition #//CallableElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="BuiltinFunction" eSuperTypes="#//BuiltinDefinition"/>

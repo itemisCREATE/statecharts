@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
+import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
@@ -32,9 +33,6 @@ import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
-import org.eclipselabs.mscript.language.il.FunctionCall;
-import org.eclipselabs.mscript.language.il.Name;
-import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor;
 import org.eclipselabs.mscript.typesystem.BooleanLiteral;
@@ -339,6 +337,27 @@ public class ExpressionDataTypeAdaptor implements IExpressionDataTypeAdaptor {
 		}
 		
 		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseFunctionCall(org.eclipselabs.mscript.language.il.FunctionCall)
+		 */
+		@Override
+		public DataType caseFunctionCall(FunctionCall functionCall) {
+			String name = functionCall.getFunction().getName();
+
+			List<DataType> argumentDataTypes = new ArrayList<DataType>();
+			for (Expression argument : functionCall.getArguments()) {
+				argumentDataTypes.add(doSwitch(argument));
+			}
+			BuiltinFunctionDescriptor descriptor = BuiltinFunctionDescriptor.get(name, argumentDataTypes);
+			if (descriptor != null) {
+				DataType dataType = descriptor.getSignature().evaluateOutputParameterDataTypes(argumentDataTypes).get(0);
+				ILUtil.setDataType(functionCall, dataType);
+				return dataType;
+			}
+
+			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
+		}
+
+		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
 		 */
 		@Override
@@ -366,35 +385,6 @@ public class ExpressionDataTypeAdaptor implements IExpressionDataTypeAdaptor {
 				}
 				ILUtil.setDataType(variableReference, dataType);
 				return dataType;
-			}
-			
-			/* (non-Javadoc)
-			 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseFunctionCall(org.eclipselabs.mscript.language.il.FunctionCall)
-			 */
-			@Override
-			public DataType caseFunctionCall(FunctionCall functionCall) {
-				Name name = functionCall.getName();
-				if (name.getSegments().size() == 1) {
-					List<DataType> argumentDataTypes = new ArrayList<DataType>();
-					for (Expression argument : functionCall.getArguments()) {
-						argumentDataTypes.add(doSwitch(argument));
-					}
-					BuiltinFunctionDescriptor descriptor = BuiltinFunctionDescriptor.get(name.getLastSegment(), argumentDataTypes);
-					if (descriptor != null) {
-						DataType dataType = descriptor.getSignature().evaluateOutputParameterDataTypes(argumentDataTypes).get(0);
-						ILUtil.setDataType(functionCall, dataType);
-						return dataType;
-					}
-				}
-				return TypeSystemFactory.eINSTANCE.createInvalidDataType();
-			}
-			
-			/* (non-Javadoc)
-			 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#casePropertyReference(org.eclipselabs.mscript.language.il.PropertyReference)
-			 */
-			@Override
-			public DataType casePropertyReference(PropertyReference propertyReference) {
-				return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 			}
 			
 		}

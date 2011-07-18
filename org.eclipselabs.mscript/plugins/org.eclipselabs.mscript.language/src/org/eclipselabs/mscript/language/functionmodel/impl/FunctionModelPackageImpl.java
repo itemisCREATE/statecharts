@@ -306,7 +306,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEquationPart_FeatureCall() {
+	public EReference getEquationPart_VariableAccess() {
 		return (EReference)equationPartEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -465,7 +465,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 
 		equationPartEClass = createEClass(EQUATION_PART);
 		createEReference(equationPartEClass, EQUATION_PART__SIDE);
-		createEReference(equationPartEClass, EQUATION_PART__FEATURE_CALL);
+		createEReference(equationPartEClass, EQUATION_PART__VARIABLE_ACCESS);
 		createEReference(equationPartEClass, EQUATION_PART__VARIABLE_STEP);
 
 		variableDescriptorEClass = createEClass(VARIABLE_DESCRIPTOR);
@@ -596,7 +596,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 
 		initEClass(equationPartEClass, EquationPart.class, "EquationPart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEquationPart_Side(), this.getEquationSide(), this.getEquationSide_Parts(), "side", null, 0, 1, EquationPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEquationPart_FeatureCall(), theAstPackage.getFeatureCall(), null, "featureCall", null, 1, 1, EquationPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEquationPart_VariableAccess(), theAstPackage.getVariableAccess(), null, "variableAccess", null, 1, 1, EquationPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEquationPart_VariableStep(), this.getVariableStep(), this.getVariableStep_UsingEquationParts(), "variableStep", null, 1, 1, EquationPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableDescriptorEClass, VariableDescriptor.class, "VariableDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

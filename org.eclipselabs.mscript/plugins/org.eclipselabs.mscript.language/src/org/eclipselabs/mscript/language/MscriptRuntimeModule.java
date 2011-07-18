@@ -8,6 +8,7 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipselabs.mscript.language.conversion.MscriptTerminalConverters;
 import org.eclipselabs.mscript.language.linking.MscriptLinker;
+import org.eclipselabs.mscript.language.naming.QualifiedNameConverter;
 import org.eclipselabs.mscript.language.parser.EcoreElementFactory;
 import org.eclipselabs.mscript.language.scoping.GlobalScopeProvider;
 
@@ -39,6 +40,10 @@ public class MscriptRuntimeModule extends org.eclipselabs.mscript.language.Abstr
 	@Override
 	public Class<? extends ILinker> bindILinker() {
 		return MscriptLinker.class;
+	}
+	
+	public Class<? extends org.eclipse.xtext.naming.IQualifiedNameConverter> bindIQualifiedNameConverter() {
+		return QualifiedNameConverter.class;
 	}
 
 }

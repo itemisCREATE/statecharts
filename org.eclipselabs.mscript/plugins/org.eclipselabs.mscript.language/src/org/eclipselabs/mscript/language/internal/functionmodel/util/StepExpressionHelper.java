@@ -11,8 +11,6 @@
 
 package org.eclipselabs.mscript.language.internal.functionmodel.util;
 
-import java.util.ListIterator;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
@@ -20,11 +18,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.AdditiveOperator;
-import org.eclipselabs.mscript.language.ast.FeatureCall;
-import org.eclipselabs.mscript.language.ast.FeatureCallPart;
-import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
+import org.eclipselabs.mscript.language.ast.VariableAccess;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.util.SyntaxStatus;
@@ -39,17 +35,9 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemSwitch;
  */
 public class StepExpressionHelper {
 
-	public StepExpressionResult getStepExpression(ListIterator<FeatureCallPart> iterator) throws CoreException {
-		if (iterator.hasNext()) {
-			FeatureCallPart part = iterator.next();
-			if (part instanceof OperationArgumentList) {
-				OperationArgumentList operationArgumentList = (OperationArgumentList) part;
-				if (operationArgumentList.getArguments().size() == 1) {
-					return evaluateStepExpression(operationArgumentList.getArguments().get(0));
-				}
-				throw new CoreException(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid parameter count", operationArgumentList));
-			}
-			iterator.previous();
+	public StepExpressionResult getStepExpression(VariableAccess variableAccess) throws CoreException {
+		if (variableAccess.getStepExpression() != null) {
+			return evaluateStepExpression(variableAccess.getStepExpression());
 		}
 		return new StepExpressionResult(0, false);
 	}
@@ -131,20 +119,17 @@ public class StepExpressionHelper {
 			return result;
 		}
 	
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseFeatureCall(org.eclipselabs.mscript.language.ast.FeatureCall)
-		 */
 		@Override
-		public Integer caseFeatureCall(FeatureCall featureCall) {
-			if (featureCall.getTarget().getName().equals("n")) {
+		public Integer caseVariableAccess(VariableAccess variableAccess) {
+			if (variableAccess.getVariable().getName().equals("n")) {
 				if (absolute) {
 					absolute = false;
 					return 0;
 				} else {
-					status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Duplicate 'n'", featureCall));
+					status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Duplicate 'n'", variableAccess));
 				}
 			} else {
-				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid symbol", featureCall));
+				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid symbol", variableAccess));
 			}
 			return 0;
 		}

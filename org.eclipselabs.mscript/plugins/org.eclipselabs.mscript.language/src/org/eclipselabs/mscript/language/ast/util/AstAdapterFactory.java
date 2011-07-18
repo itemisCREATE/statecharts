@@ -33,8 +33,7 @@ import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
-import org.eclipselabs.mscript.language.ast.FeatureCall;
-import org.eclipselabs.mscript.language.ast.FeatureCallPart;
+import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.IfExpression;
@@ -47,11 +46,10 @@ import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
+import org.eclipselabs.mscript.language.ast.MemberVariableAccess;
 import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
-import org.eclipselabs.mscript.language.ast.NameComponent;
-import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.PostfixExpression;
@@ -67,6 +65,7 @@ import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
+import org.eclipselabs.mscript.language.ast.VariableAccess;
 import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
@@ -222,24 +221,12 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 				return createMultiplicativeExpressionPartAdapter();
 			}
 			@Override
-			public Adapter caseFeatureCallPart(FeatureCallPart object) {
-				return createFeatureCallPartAdapter();
-			}
-			@Override
-			public Adapter caseNameComponent(NameComponent object) {
-				return createNameComponentAdapter();
-			}
-			@Override
 			public Adapter caseArrayElementAccess(ArrayElementAccess object) {
 				return createArrayElementAccessAdapter();
 			}
 			@Override
 			public Adapter caseArraySubscript(ArraySubscript object) {
 				return createArraySubscriptAdapter();
-			}
-			@Override
-			public Adapter caseOperationArgumentList(OperationArgumentList object) {
-				return createOperationArgumentListAdapter();
 			}
 			@Override
 			public Adapter caseIterationCall(IterationCall object) {
@@ -334,8 +321,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 				return createPostfixExpressionAdapter();
 			}
 			@Override
-			public Adapter caseFeatureCall(FeatureCall object) {
-				return createFeatureCallAdapter();
+			public Adapter caseVariableAccess(VariableAccess object) {
+				return createVariableAccessAdapter();
+			}
+			@Override
+			public Adapter caseFunctionCall(FunctionCall object) {
+				return createFunctionCallAdapter();
+			}
+			@Override
+			public Adapter caseMemberVariableAccess(MemberVariableAccess object) {
+				return createMemberVariableAccessAdapter();
 			}
 			@Override
 			public Adapter caseBuiltinDefinition(BuiltinDefinition object) {
@@ -724,34 +719,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FeatureCallPart <em>Feature Call Part</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.FeatureCallPart
-	 * @generated
-	 */
-	public Adapter createFeatureCallPartAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.NameComponent <em>Name Component</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.NameComponent
-	 * @generated
-	 */
-	public Adapter createNameComponentAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ArrayElementAccess <em>Array Element Access</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -776,20 +743,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createArraySubscriptAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.OperationArgumentList <em>Operation Argument List</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.OperationArgumentList
-	 * @generated
-	 */
-	public Adapter createOperationArgumentListAdapter() {
 		return null;
 	}
 
@@ -1116,16 +1069,44 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FeatureCall <em>Feature Call</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.VariableAccess <em>Variable Access</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.FeatureCall
+	 * @see org.eclipselabs.mscript.language.ast.VariableAccess
 	 * @generated
 	 */
-	public Adapter createFeatureCallAdapter() {
+	public Adapter createVariableAccessAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FunctionCall <em>Function Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.FunctionCall
+	 * @generated
+	 */
+	public Adapter createFunctionCallAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.MemberVariableAccess <em>Member Variable Access</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.MemberVariableAccess
+	 * @generated
+	 */
+	public Adapter createMemberVariableAccessAdapter() {
 		return null;
 	}
 

@@ -233,24 +233,6 @@ public interface AstFactory extends EFactory {
 	MultiplicativeExpressionPart createMultiplicativeExpressionPart();
 
 	/**
-	 * Returns a new object of class '<em>Feature Call Part</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Feature Call Part</em>'.
-	 * @generated
-	 */
-	FeatureCallPart createFeatureCallPart();
-
-	/**
-	 * Returns a new object of class '<em>Name Component</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Name Component</em>'.
-	 * @generated
-	 */
-	NameComponent createNameComponent();
-
-	/**
 	 * Returns a new object of class '<em>Array Element Access</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -267,15 +249,6 @@ public interface AstFactory extends EFactory {
 	 * @generated
 	 */
 	ArraySubscript createArraySubscript();
-
-	/**
-	 * Returns a new object of class '<em>Operation Argument List</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Operation Argument List</em>'.
-	 * @generated
-	 */
-	OperationArgumentList createOperationArgumentList();
 
 	/**
 	 * Returns a new object of class '<em>Iteration Call</em>'.
@@ -485,13 +458,31 @@ public interface AstFactory extends EFactory {
 	PostfixExpression createPostfixExpression();
 
 	/**
-	 * Returns a new object of class '<em>Feature Call</em>'.
+	 * Returns a new object of class '<em>Variable Access</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Feature Call</em>'.
+	 * @return a new object of class '<em>Variable Access</em>'.
 	 * @generated
 	 */
-	FeatureCall createFeatureCall();
+	VariableAccess createVariableAccess();
+
+	/**
+	 * Returns a new object of class '<em>Function Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Function Call</em>'.
+	 * @generated
+	 */
+	FunctionCall createFunctionCall();
+
+	/**
+	 * Returns a new object of class '<em>Member Variable Access</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Member Variable Access</em>'.
+	 * @generated
+	 */
+	MemberVariableAccess createMemberVariableAccess();
 
 	/**
 	 * Returns a new object of class '<em>Builtin Definition</em>'.

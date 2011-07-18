@@ -15,7 +15,6 @@ import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
 import org.eclipselabs.mscript.language.il.ComputationCompound;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
-import org.eclipselabs.mscript.language.il.FunctionCall;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.ILPackage;
 import org.eclipselabs.mscript.language.il.IfStatement;
@@ -23,10 +22,7 @@ import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InvalidExpression;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
-import org.eclipselabs.mscript.language.il.Name;
-import org.eclipselabs.mscript.language.il.OperationCall;
 import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
-import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.il.Statement;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
@@ -160,24 +156,8 @@ public class ILAdapterFactory extends AdapterFactoryImpl {
 				return createVariableReferenceAdapter();
 			}
 			@Override
-			public Adapter caseOperationCall(OperationCall object) {
-				return createOperationCallAdapter();
-			}
-			@Override
-			public Adapter caseFunctionCall(FunctionCall object) {
-				return createFunctionCallAdapter();
-			}
-			@Override
-			public Adapter casePropertyReference(PropertyReference object) {
-				return createPropertyReferenceAdapter();
-			}
-			@Override
 			public Adapter caseInvalidExpression(InvalidExpression object) {
 				return createInvalidExpressionAdapter();
-			}
-			@Override
-			public Adapter caseName(Name object) {
-				return createNameAdapter();
 			}
 			@Override
 			public Adapter caseExpression(Expression object) {
@@ -442,48 +422,6 @@ public class ILAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.il.OperationCall <em>Operation Call</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.il.OperationCall
-	 * @generated
-	 */
-	public Adapter createOperationCallAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.il.FunctionCall <em>Function Call</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.il.FunctionCall
-	 * @generated
-	 */
-	public Adapter createFunctionCallAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.il.PropertyReference <em>Property Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.il.PropertyReference
-	 * @generated
-	 */
-	public Adapter createPropertyReferenceAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.il.InvalidExpression <em>Invalid Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -494,20 +432,6 @@ public class ILAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInvalidExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.il.Name <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.il.Name
-	 * @generated
-	 */
-	public Adapter createNameAdapter() {
 		return null;
 	}
 
