@@ -52,7 +52,6 @@ import org.eclipselabs.mscript.language.interpreter.builtin.BuiltinFunctionLooku
 import org.eclipselabs.mscript.language.interpreter.builtin.IBuiltinFunctionLookupTable;
 import org.eclipselabs.mscript.language.interpreter.builtin.IFunction;
 import org.eclipselabs.mscript.typesystem.ArrayType;
-import org.eclipselabs.mscript.typesystem.BooleanKind;
 import org.eclipselabs.mscript.typesystem.BooleanLiteral;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.Expression;
@@ -432,7 +431,7 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 			 */
 			@Override
 			public IValue caseBooleanLiteral(BooleanLiteral booleanLiteral) {
-				return Values.valueOf(context.getComputationContext(), booleanLiteral.getValue() == BooleanKind.TRUE);
+				return Values.valueOf(context.getComputationContext(), booleanLiteral.isTrue());
 			}
 		
 			/* (non-Javadoc)

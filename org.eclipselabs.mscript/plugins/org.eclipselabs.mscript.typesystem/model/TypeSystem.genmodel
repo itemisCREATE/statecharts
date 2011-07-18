@@ -17,9 +17,11 @@
       <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Divide"/>
       <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/ElementWiseMultiply"/>
       <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/ElementWiseDivide"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/ElementWisePower"/>
       <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Negate"/>
       <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Power"/>
       <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Root"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Transpose"/>
       <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalAnd"/>
       <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalOr"/>
       <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalNot"/>
@@ -30,10 +32,6 @@
       <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/GreaterThanOrEqualTo"/>
       <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/EqualTo"/>
       <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/NotEqualTo"/>
-    </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TypeSystem.ecore#//BooleanKind">
-      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//BooleanKind/False"/>
-      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//BooleanKind/True"/>
     </genEnums>
     <genClasses image="false" ecoreClass="TypeSystem.ecore#//DataType">
       <genOperations ecoreOperation="TypeSystem.ecore#//DataType/evaluate">
@@ -123,7 +121,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//IntegerLiteral/value"/>
     </genClasses>
     <genClasses ecoreClass="TypeSystem.ecore#//BooleanLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//BooleanLiteral/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//BooleanLiteral/true"/>
     </genClasses>
     <genClasses ecoreClass="TypeSystem.ecore#//StringLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//StringLiteral/value"/>

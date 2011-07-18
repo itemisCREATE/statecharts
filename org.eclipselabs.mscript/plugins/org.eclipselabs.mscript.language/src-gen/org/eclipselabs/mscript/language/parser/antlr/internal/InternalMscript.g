@@ -4192,25 +4192,33 @@ ruleBooleanLiteral returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getBooleanLiteralAccess().getBooleanLiteralAction_0(),
+            $current);
+    }
+)((
 (
-(
-		{ 
-	        newCompositeNode(grammarAccess.getBooleanLiteralAccess().getValueBooleanKindEnumRuleCall_0()); 
-	    }
-		lv_value_0_0=ruleBooleanKind		{
+		lv_true_1_0=	'true' 
+    {
+        newLeafNode(lv_true_1_0, grammarAccess.getBooleanLiteralAccess().getTrueTrueKeyword_1_0_0());
+    }
+ 
+	    {
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getBooleanLiteralRule());
+	            $current = createModelElement(grammarAccess.getBooleanLiteralRule());
 	        }
-       		set(
-       			$current, 
-       			"value",
-        		lv_value_0_0, 
-        		"BooleanKind");
-	        afterParserOrEnumRuleCall();
+       		setWithLastConsumed($current, "true", true, "true");
 	    }
 
 )
 )
+    |	otherlv_2='false' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getBooleanLiteralAccess().getFalseKeyword_1_1());
+    }
+))
 ;
 
 
@@ -5916,25 +5924,6 @@ rulePostfixOperator returns [Enumerator current=null]
         newLeafNode(enumLiteral_0, grammarAccess.getPostfixOperatorAccess().getTransposeEnumLiteralDeclaration()); 
     }
 );
-
-
-
-// Rule BooleanKind
-ruleBooleanKind returns [Enumerator current=null] 
-    @init { enterRule(); }
-    @after { leaveRule(); }:
-((	enumLiteral_0='false' 
-	{
-        $current = grammarAccess.getBooleanKindAccess().getFalseEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-        newLeafNode(enumLiteral_0, grammarAccess.getBooleanKindAccess().getFalseEnumLiteralDeclaration_0()); 
-    }
-)
-    |(	enumLiteral_1='true' 
-	{
-        $current = grammarAccess.getBooleanKindAccess().getTrueEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-        newLeafNode(enumLiteral_1, grammarAccess.getBooleanKindAccess().getTrueEnumLiteralDeclaration_1()); 
-    }
-));
 
 
 

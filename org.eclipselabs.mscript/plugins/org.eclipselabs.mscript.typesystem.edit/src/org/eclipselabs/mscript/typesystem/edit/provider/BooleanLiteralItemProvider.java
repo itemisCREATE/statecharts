@@ -23,7 +23,6 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.eclipselabs.mscript.typesystem.BooleanKind;
 import org.eclipselabs.mscript.typesystem.BooleanLiteral;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 
@@ -62,29 +61,29 @@ public class BooleanLiteralItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addValuePropertyDescriptor(object);
+			addTruePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Value feature.
+	 * This adds a property descriptor for the True feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addValuePropertyDescriptor(Object object) {
+	protected void addTruePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_BooleanLiteral_value_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BooleanLiteral_value_feature", "_UI_BooleanLiteral_type"),
-				 TypeSystemPackage.Literals.BOOLEAN_LITERAL__VALUE,
+				 getString("_UI_BooleanLiteral_true_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BooleanLiteral_true_feature", "_UI_BooleanLiteral_type"),
+				 TypeSystemPackage.Literals.BOOLEAN_LITERAL__TRUE,
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -108,11 +107,8 @@ public class BooleanLiteralItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		BooleanKind labelValue = ((BooleanLiteral)object).getValue();
-		String label = labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ?
-			getString("_UI_BooleanLiteral_type") :
-			getString("_UI_BooleanLiteral_type") + " " + label;
+		BooleanLiteral booleanLiteral = (BooleanLiteral)object;
+		return getString("_UI_BooleanLiteral_type") + " " + booleanLiteral.isTrue();
 	}
 
 	/**
@@ -127,7 +123,7 @@ public class BooleanLiteralItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(BooleanLiteral.class)) {
-			case TypeSystemPackage.BOOLEAN_LITERAL__VALUE:
+			case TypeSystemPackage.BOOLEAN_LITERAL__TRUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

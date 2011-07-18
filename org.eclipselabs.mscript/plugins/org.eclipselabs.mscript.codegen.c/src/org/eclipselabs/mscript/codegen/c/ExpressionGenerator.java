@@ -45,7 +45,6 @@ import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.language.il.util.ILUtil;
-import org.eclipselabs.mscript.typesystem.BooleanKind;
 import org.eclipselabs.mscript.typesystem.BooleanLiteral;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.Expression;
@@ -402,7 +401,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			 */
 			@Override
 			public Boolean caseBooleanLiteral(BooleanLiteral booleanLiteral) {
-				writer.print(booleanLiteral.getValue() == BooleanKind.TRUE ? "1" : "0");
+				writer.print(booleanLiteral.isTrue() ? "1" : "0");
 				return true;
 			}
 			

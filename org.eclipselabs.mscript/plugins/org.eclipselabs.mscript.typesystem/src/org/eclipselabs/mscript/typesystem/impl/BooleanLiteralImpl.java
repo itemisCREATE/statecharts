@@ -9,7 +9,6 @@ package org.eclipselabs.mscript.typesystem.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipselabs.mscript.typesystem.BooleanKind;
 import org.eclipselabs.mscript.typesystem.BooleanLiteral;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 
@@ -20,7 +19,7 @@ import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.typesystem.impl.BooleanLiteralImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.impl.BooleanLiteralImpl#isTrue <em>True</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,24 +27,24 @@ import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
  */
 public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The default value of the '{@link #isTrue() <em>True</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #isTrue()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BooleanKind VALUE_EDEFAULT = BooleanKind.FALSE;
+	protected static final boolean TRUE_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The cached value of the '{@link #isTrue() <em>True</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #isTrue()
 	 * @generated
 	 * @ordered
 	 */
-	protected BooleanKind value = VALUE_EDEFAULT;
+	protected boolean true_ = TRUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -71,8 +70,8 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BooleanKind getValue() {
-		return value;
+	public boolean isTrue() {
+		return true_;
 	}
 
 	/**
@@ -80,11 +79,11 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(BooleanKind newValue) {
-		BooleanKind oldValue = value;
-		value = newValue == null ? VALUE_EDEFAULT : newValue;
+	public void setTrue(boolean newTrue) {
+		boolean oldTrue = true_;
+		true_ = newTrue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.BOOLEAN_LITERAL__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.BOOLEAN_LITERAL__TRUE, oldTrue, true_));
 	}
 
 	/**
@@ -95,8 +94,8 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypeSystemPackage.BOOLEAN_LITERAL__VALUE:
-				return getValue();
+			case TypeSystemPackage.BOOLEAN_LITERAL__TRUE:
+				return isTrue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,8 +108,8 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypeSystemPackage.BOOLEAN_LITERAL__VALUE:
-				setValue((BooleanKind)newValue);
+			case TypeSystemPackage.BOOLEAN_LITERAL__TRUE:
+				setTrue((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -124,8 +123,8 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypeSystemPackage.BOOLEAN_LITERAL__VALUE:
-				setValue(VALUE_EDEFAULT);
+			case TypeSystemPackage.BOOLEAN_LITERAL__TRUE:
+				setTrue(TRUE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -139,8 +138,8 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypeSystemPackage.BOOLEAN_LITERAL__VALUE:
-				return value != VALUE_EDEFAULT;
+			case TypeSystemPackage.BOOLEAN_LITERAL__TRUE:
+				return true_ != TRUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -155,8 +154,8 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (value: ");
-		result.append(value);
+		result.append(" (true: ");
+		result.append(true_);
 		result.append(')');
 		return result.toString();
 	}

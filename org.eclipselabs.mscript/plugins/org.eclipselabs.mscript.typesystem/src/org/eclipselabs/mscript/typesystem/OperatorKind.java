@@ -83,6 +83,14 @@ public enum OperatorKind implements Enumerator {
 	ELEMENT_WISE_DIVIDE(5, "ElementWiseDivide", "ElementWiseDivide"),
 
 	/**
+	 * The '<em><b>Element Wise Power</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ELEMENT_WISE_POWER_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	ELEMENT_WISE_POWER(6, "ElementWisePower", "ElementWisePower"), /**
 	 * The '<em><b>Negate</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,7 +98,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	NEGATE(6, "Negate", "Negate"),
+	NEGATE(7, "Negate", "Negate"),
 
 	/**
 	 * The '<em><b>Power</b></em>' literal object.
@@ -100,7 +108,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	POWER(7, "Power", "Power"),
+	POWER(8, "Power", "Power"),
 
 	/**
 	 * The '<em><b>Root</b></em>' literal object.
@@ -110,9 +118,17 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	ROOT(8, "Root", "Root"),
+	ROOT(9, "Root", "Root"),
 
 	/**
+	 * The '<em><b>Transpose</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TRANSPOSE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	TRANSPOSE(10, "Transpose", "Transpose"), /**
 	 * The '<em><b>Logical And</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -120,7 +136,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LOGICAL_AND(9, "LogicalAnd", "LogicalAnd"),
+	LOGICAL_AND(11, "LogicalAnd", "LogicalAnd"),
 
 	/**
 	 * The '<em><b>Logical Or</b></em>' literal object.
@@ -130,7 +146,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LOGICAL_OR(10, "LogicalOr", "LogicalOr"),
+	LOGICAL_OR(12, "LogicalOr", "LogicalOr"),
 
 	/**
 	 * The '<em><b>Logical Not</b></em>' literal object.
@@ -140,7 +156,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LOGICAL_NOT(11, "LogicalNot", "LogicalNot"),
+	LOGICAL_NOT(13, "LogicalNot", "LogicalNot"),
 
 	/**
 	 * The '<em><b>Implies</b></em>' literal object.
@@ -150,7 +166,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	IMPLIES(12, "Implies", "Implies"),
+	IMPLIES(14, "Implies", "Implies"),
 
 	/**
 	 * The '<em><b>Less Than</b></em>' literal object.
@@ -160,7 +176,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LESS_THAN(13, "LessThan", "LessThan"),
+	LESS_THAN(15, "LessThan", "LessThan"),
 
 	/**
 	 * The '<em><b>Less Than Or Equal To</b></em>' literal object.
@@ -170,7 +186,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LESS_THAN_OR_EQUAL_TO(14, "LessThanOrEqualTo", "LessThanOrEqualTo"),
+	LESS_THAN_OR_EQUAL_TO(16, "LessThanOrEqualTo", "LessThanOrEqualTo"),
 
 	/**
 	 * The '<em><b>Greater Than</b></em>' literal object.
@@ -180,7 +196,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	GREATER_THAN(15, "GreaterThan", "GreaterThan"),
+	GREATER_THAN(17, "GreaterThan", "GreaterThan"),
 
 	/**
 	 * The '<em><b>Greater Than Or Equal To</b></em>' literal object.
@@ -190,7 +206,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	GREATER_THAN_OR_EQUAL_TO(16, "GreaterThanOrEqualTo", "GreaterThanOrEqualTo"),
+	GREATER_THAN_OR_EQUAL_TO(18, "GreaterThanOrEqualTo", "GreaterThanOrEqualTo"),
 
 	/**
 	 * The '<em><b>Equal To</b></em>' literal object.
@@ -200,7 +216,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	EQUAL_TO(17, "EqualTo", "EqualTo"),
+	EQUAL_TO(19, "EqualTo", "EqualTo"),
 
 	/**
 	 * The '<em><b>Not Equal To</b></em>' literal object.
@@ -210,7 +226,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	NOT_EQUAL_TO(18, "NotEqualTo", "NotEqualTo");
+	NOT_EQUAL_TO(20, "NotEqualTo", "NotEqualTo");
 
 	/**
 	 * The '<em><b>Add</b></em>' literal value.
@@ -303,6 +319,21 @@ public enum OperatorKind implements Enumerator {
 	public static final int ELEMENT_WISE_DIVIDE_VALUE = 5;
 
 	/**
+	 * The '<em><b>Element Wise Power</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Element Wise Power</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #ELEMENT_WISE_POWER
+	 * @model name="ElementWisePower"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT_WISE_POWER_VALUE = 6;
+
+	/**
 	 * The '<em><b>Negate</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -315,7 +346,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NEGATE_VALUE = 6;
+	public static final int NEGATE_VALUE = 7;
 
 	/**
 	 * The '<em><b>Power</b></em>' literal value.
@@ -330,7 +361,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int POWER_VALUE = 7;
+	public static final int POWER_VALUE = 8;
 
 	/**
 	 * The '<em><b>Root</b></em>' literal value.
@@ -345,7 +376,22 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ROOT_VALUE = 8;
+	public static final int ROOT_VALUE = 9;
+
+	/**
+	 * The '<em><b>Transpose</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Transpose</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #TRANSPOSE
+	 * @model name="Transpose"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TRANSPOSE_VALUE = 10;
 
 	/**
 	 * The '<em><b>Logical And</b></em>' literal value.
@@ -360,7 +406,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LOGICAL_AND_VALUE = 9;
+	public static final int LOGICAL_AND_VALUE = 11;
 
 	/**
 	 * The '<em><b>Logical Or</b></em>' literal value.
@@ -375,7 +421,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LOGICAL_OR_VALUE = 10;
+	public static final int LOGICAL_OR_VALUE = 12;
 
 	/**
 	 * The '<em><b>Logical Not</b></em>' literal value.
@@ -390,7 +436,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LOGICAL_NOT_VALUE = 11;
+	public static final int LOGICAL_NOT_VALUE = 13;
 
 	/**
 	 * The '<em><b>Implies</b></em>' literal value.
@@ -405,7 +451,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int IMPLIES_VALUE = 12;
+	public static final int IMPLIES_VALUE = 14;
 
 	/**
 	 * The '<em><b>Less Than</b></em>' literal value.
@@ -420,7 +466,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LESS_THAN_VALUE = 13;
+	public static final int LESS_THAN_VALUE = 15;
 
 	/**
 	 * The '<em><b>Less Than Or Equal To</b></em>' literal value.
@@ -435,7 +481,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LESS_THAN_OR_EQUAL_TO_VALUE = 14;
+	public static final int LESS_THAN_OR_EQUAL_TO_VALUE = 16;
 
 	/**
 	 * The '<em><b>Greater Than</b></em>' literal value.
@@ -450,7 +496,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GREATER_THAN_VALUE = 15;
+	public static final int GREATER_THAN_VALUE = 17;
 
 	/**
 	 * The '<em><b>Greater Than Or Equal To</b></em>' literal value.
@@ -465,7 +511,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GREATER_THAN_OR_EQUAL_TO_VALUE = 16;
+	public static final int GREATER_THAN_OR_EQUAL_TO_VALUE = 18;
 
 	/**
 	 * The '<em><b>Equal To</b></em>' literal value.
@@ -480,7 +526,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int EQUAL_TO_VALUE = 17;
+	public static final int EQUAL_TO_VALUE = 19;
 
 	/**
 	 * The '<em><b>Not Equal To</b></em>' literal value.
@@ -495,7 +541,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NOT_EQUAL_TO_VALUE = 18;
+	public static final int NOT_EQUAL_TO_VALUE = 20;
 
 	/**
 	 * An array of all the '<em><b>Operator Kind</b></em>' enumerators.
@@ -511,9 +557,11 @@ public enum OperatorKind implements Enumerator {
 			DIVIDE,
 			ELEMENT_WISE_MULTIPLY,
 			ELEMENT_WISE_DIVIDE,
+			ELEMENT_WISE_POWER,
 			NEGATE,
 			POWER,
 			ROOT,
+			TRANSPOSE,
 			LOGICAL_AND,
 			LOGICAL_OR,
 			LOGICAL_NOT,
@@ -580,9 +628,11 @@ public enum OperatorKind implements Enumerator {
 			case DIVIDE_VALUE: return DIVIDE;
 			case ELEMENT_WISE_MULTIPLY_VALUE: return ELEMENT_WISE_MULTIPLY;
 			case ELEMENT_WISE_DIVIDE_VALUE: return ELEMENT_WISE_DIVIDE;
+			case ELEMENT_WISE_POWER_VALUE: return ELEMENT_WISE_POWER;
 			case NEGATE_VALUE: return NEGATE;
 			case POWER_VALUE: return POWER;
 			case ROOT_VALUE: return ROOT;
+			case TRANSPOSE_VALUE: return TRANSPOSE;
 			case LOGICAL_AND_VALUE: return LOGICAL_AND;
 			case LOGICAL_OR_VALUE: return LOGICAL_OR;
 			case LOGICAL_NOT_VALUE: return LOGICAL_NOT;

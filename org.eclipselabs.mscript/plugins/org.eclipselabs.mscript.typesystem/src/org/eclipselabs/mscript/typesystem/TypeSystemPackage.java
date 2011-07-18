@@ -879,13 +879,13 @@ public interface TypeSystemPackage extends EPackage {
 	int BOOLEAN_LITERAL = 25;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * The feature id for the '<em><b>True</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
+	int BOOLEAN_LITERAL__TRUE = LITERAL_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Boolean Literal</em>' class.
@@ -933,17 +933,6 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 */
 	int OPERATOR_KIND = 27;
-
-
-	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.BooleanKind <em>Boolean Kind</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.typesystem.BooleanKind
-	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getBooleanKind()
-	 * @generated
-	 */
-	int BOOLEAN_KIND = 28;
 
 
 	/**
@@ -1438,15 +1427,15 @@ public interface TypeSystemPackage extends EPackage {
 	EClass getBooleanLiteral();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.BooleanLiteral#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.BooleanLiteral#isTrue <em>True</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.BooleanLiteral#getValue()
+	 * @return the meta object for the attribute '<em>True</em>'.
+	 * @see org.eclipselabs.mscript.typesystem.BooleanLiteral#isTrue()
 	 * @see #getBooleanLiteral()
 	 * @generated
 	 */
-	EAttribute getBooleanLiteral_Value();
+	EAttribute getBooleanLiteral_True();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.StringLiteral <em>String Literal</em>}'.
@@ -1478,16 +1467,6 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getOperatorKind();
-
-	/**
-	 * Returns the meta object for enum '{@link org.eclipselabs.mscript.typesystem.BooleanKind <em>Boolean Kind</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Boolean Kind</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.BooleanKind
-	 * @generated
-	 */
-	EEnum getBooleanKind();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1940,12 +1919,12 @@ public interface TypeSystemPackage extends EPackage {
 		EClass BOOLEAN_LITERAL = eINSTANCE.getBooleanLiteral();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>True</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BOOLEAN_LITERAL__VALUE = eINSTANCE.getBooleanLiteral_Value();
+		EAttribute BOOLEAN_LITERAL__TRUE = eINSTANCE.getBooleanLiteral_True();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.StringLiteralImpl <em>String Literal</em>}' class.
@@ -1974,16 +1953,6 @@ public interface TypeSystemPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum OPERATOR_KIND = eINSTANCE.getOperatorKind();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.BooleanKind <em>Boolean Kind</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.typesystem.BooleanKind
-		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getBooleanKind()
-		 * @generated
-		 */
-		EEnum BOOLEAN_KIND = eINSTANCE.getBooleanKind();
 
 	}
 

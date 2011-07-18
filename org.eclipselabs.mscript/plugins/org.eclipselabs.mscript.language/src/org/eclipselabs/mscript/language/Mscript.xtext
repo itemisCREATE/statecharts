@@ -276,11 +276,8 @@ IntegerLiteral:
 	value=ValidLong (modifier=ValidID)? ('(' unit=Unit ')')?;
 
 BooleanLiteral:
-	value=BooleanKind;
+	{BooleanLiteral} (true?='true' | 'false');
 
-enum BooleanKind:
-	False='false' | True='true';
-	
 StringLiteral:
 	value=STRING;
 		

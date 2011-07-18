@@ -1642,9 +1642,9 @@ ruleBooleanLiteral
     }
 	:
 (
-{ before(grammarAccess.getBooleanLiteralAccess().getValueAssignment()); }
-(rule__BooleanLiteral__ValueAssignment)
-{ after(grammarAccess.getBooleanLiteralAccess().getValueAssignment()); }
+{ before(grammarAccess.getBooleanLiteralAccess().getGroup()); }
+(rule__BooleanLiteral__Group__0)
+{ after(grammarAccess.getBooleanLiteralAccess().getGroup()); }
 )
 
 ;
@@ -2564,25 +2564,6 @@ finally {
 
 
 
-// Rule BooleanKind
-ruleBooleanKind
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getBooleanKindAccess().getAlternatives()); }
-(rule__BooleanKind__Alternatives)
-{ after(grammarAccess.getBooleanKindAccess().getAlternatives()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-
 rule__Definition__Alternatives
     @init {
 		int stackSize = keepStackSize();
@@ -3075,6 +3056,30 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__BooleanLiteral__Alternatives_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getBooleanLiteralAccess().getTrueAssignment_1_0()); }
+(rule__BooleanLiteral__TrueAssignment_1_0)
+{ after(grammarAccess.getBooleanLiteralAccess().getTrueAssignment_1_0()); }
+)
+
+    |(
+{ before(grammarAccess.getBooleanLiteralAccess().getFalseKeyword_1_1()); }
+
+	'false' 
+
+{ after(grammarAccess.getBooleanLiteralAccess().getFalseKeyword_1_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__FeatureCall__Alternatives
     @init {
 		int stackSize = keepStackSize();
@@ -3476,30 +3481,6 @@ rule__UnaryOperator__Alternatives
 (	'!' 
 )
 { after(grammarAccess.getUnaryOperatorAccess().getLogicalNotEnumLiteralDeclaration_1()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__BooleanKind__Alternatives
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getBooleanKindAccess().getFalseEnumLiteralDeclaration_0()); }
-(	'false' 
-)
-{ after(grammarAccess.getBooleanKindAccess().getFalseEnumLiteralDeclaration_0()); }
-)
-
-    |(
-{ before(grammarAccess.getBooleanKindAccess().getTrueEnumLiteralDeclaration_1()); }
-(	'true' 
-)
-{ after(grammarAccess.getBooleanKindAccess().getTrueEnumLiteralDeclaration_1()); }
 )
 
 ;
@@ -12099,6 +12080,69 @@ finally {
 
 
 
+rule__BooleanLiteral__Group__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__BooleanLiteral__Group__0__Impl
+	rule__BooleanLiteral__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__BooleanLiteral__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getBooleanLiteralAccess().getBooleanLiteralAction_0()); }
+(
+
+)
+{ after(grammarAccess.getBooleanLiteralAccess().getBooleanLiteralAction_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__BooleanLiteral__Group__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__BooleanLiteral__Group__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__BooleanLiteral__Group__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getBooleanLiteralAccess().getAlternatives_1()); }
+(rule__BooleanLiteral__Alternatives_1)
+{ after(grammarAccess.getBooleanLiteralAccess().getAlternatives_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
 rule__FeatureCall__Group_0__0
     @init {
 		int stackSize = keepStackSize();
@@ -16880,14 +16924,22 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__BooleanLiteral__ValueAssignment
+rule__BooleanLiteral__TrueAssignment_1_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getBooleanLiteralAccess().getValueBooleanKindEnumRuleCall_0()); }
-	ruleBooleanKind{ after(grammarAccess.getBooleanLiteralAccess().getValueBooleanKindEnumRuleCall_0()); }
+{ before(grammarAccess.getBooleanLiteralAccess().getTrueTrueKeyword_1_0_0()); }
+(
+{ before(grammarAccess.getBooleanLiteralAccess().getTrueTrueKeyword_1_0_0()); }
+
+	'true' 
+
+{ after(grammarAccess.getBooleanLiteralAccess().getTrueTrueKeyword_1_0_0()); }
+)
+
+{ after(grammarAccess.getBooleanLiteralAccess().getTrueTrueKeyword_1_0_0()); }
 )
 
 ;

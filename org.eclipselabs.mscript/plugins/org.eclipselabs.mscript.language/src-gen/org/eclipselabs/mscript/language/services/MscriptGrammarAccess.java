@@ -2510,18 +2510,34 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class BooleanLiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanLiteral");
-		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cValueBooleanKindEnumRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cBooleanLiteralAction_0 = (Action)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Assignment cTrueAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final Keyword cTrueTrueKeyword_1_0_0 = (Keyword)cTrueAssignment_1_0.eContents().get(0);
+		private final Keyword cFalseKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
 		
 		//BooleanLiteral:
-		//	value=BooleanKind;
+		//	{BooleanLiteral} (true?="true" | "false");
 		public ParserRule getRule() { return rule; }
 
-		//value=BooleanKind
-		public Assignment getValueAssignment() { return cValueAssignment; }
+		//{BooleanLiteral} (true?="true" | "false")
+		public Group getGroup() { return cGroup; }
 
-		//BooleanKind
-		public RuleCall getValueBooleanKindEnumRuleCall_0() { return cValueBooleanKindEnumRuleCall_0; }
+		//{BooleanLiteral}
+		public Action getBooleanLiteralAction_0() { return cBooleanLiteralAction_0; }
+
+		//true?="true" | "false"
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//true?="true"
+		public Assignment getTrueAssignment_1_0() { return cTrueAssignment_1_0; }
+
+		//"true"
+		public Keyword getTrueTrueKeyword_1_0_0() { return cTrueTrueKeyword_1_0_0; }
+
+		//"false"
+		public Keyword getFalseKeyword_1_1() { return cFalseKeyword_1_1; }
 	}
 
 	public class StringLiteralElements extends AbstractParserRuleElementFinder {
@@ -3718,34 +3734,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//"\'"
 		public Keyword getTransposeApostropheKeyword_0() { return cTransposeApostropheKeyword_0; }
 	}
-
-	public class BooleanKindElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanKind");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final EnumLiteralDeclaration cFalseEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
-		private final Keyword cFalseFalseKeyword_0_0 = (Keyword)cFalseEnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cTrueEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cTrueTrueKeyword_1_0 = (Keyword)cTrueEnumLiteralDeclaration_1.eContents().get(0);
-		
-		//enum BooleanKind:
-		//	False="false" | True="true";
-		public EnumRule getRule() { return rule; }
-
-		//False="false" | True="true"
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//False="false"
-		public EnumLiteralDeclaration getFalseEnumLiteralDeclaration_0() { return cFalseEnumLiteralDeclaration_0; }
-
-		//"false"
-		public Keyword getFalseFalseKeyword_0_0() { return cFalseFalseKeyword_0_0; }
-
-		//True="true"
-		public EnumLiteralDeclaration getTrueEnumLiteralDeclaration_1() { return cTrueEnumLiteralDeclaration_1; }
-
-		//"true"
-		public Keyword getTrueTrueKeyword_1_0() { return cTrueTrueKeyword_1_0; }
-	}
 	
 	private ModuleElements pModule;
 	private DefinitionElements pDefinition;
@@ -3812,7 +3800,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private RealLiteralElements pRealLiteral;
 	private IntegerLiteralElements pIntegerLiteral;
 	private BooleanLiteralElements pBooleanLiteral;
-	private BooleanKindElements unknownRuleBooleanKind;
 	private StringLiteralElements pStringLiteral;
 	private FeatureCallElements pFeatureCall;
 	private StepExpressionElements pStepExpression;
@@ -4538,23 +4525,13 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//BooleanLiteral:
-	//	value=BooleanKind;
+	//	{BooleanLiteral} (true?="true" | "false");
 	public BooleanLiteralElements getBooleanLiteralAccess() {
 		return (pBooleanLiteral != null) ? pBooleanLiteral : (pBooleanLiteral = new BooleanLiteralElements());
 	}
 	
 	public ParserRule getBooleanLiteralRule() {
 		return getBooleanLiteralAccess().getRule();
-	}
-
-	//enum BooleanKind:
-	//	False="false" | True="true";
-	public BooleanKindElements getBooleanKindAccess() {
-		return (unknownRuleBooleanKind != null) ? unknownRuleBooleanKind : (unknownRuleBooleanKind = new BooleanKindElements());
-	}
-	
-	public EnumRule getBooleanKindRule() {
-		return getBooleanKindAccess().getRule();
 	}
 
 	//StringLiteral:

@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipselabs.mscript.typesystem.AnyDataType;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
-import org.eclipselabs.mscript.typesystem.BooleanKind;
 import org.eclipselabs.mscript.typesystem.BooleanLiteral;
 import org.eclipselabs.mscript.typesystem.BooleanType;
 import org.eclipselabs.mscript.typesystem.ComplexType;
@@ -126,8 +125,6 @@ public class TypeSystemFactoryImpl extends EFactoryImpl implements TypeSystemFac
 		switch (eDataType.getClassifierID()) {
 			case TypeSystemPackage.OPERATOR_KIND:
 				return createOperatorKindFromString(eDataType, initialValue);
-			case TypeSystemPackage.BOOLEAN_KIND:
-				return createBooleanKindFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -143,8 +140,6 @@ public class TypeSystemFactoryImpl extends EFactoryImpl implements TypeSystemFac
 		switch (eDataType.getClassifierID()) {
 			case TypeSystemPackage.OPERATOR_KIND:
 				return convertOperatorKindToString(eDataType, instanceValue);
-			case TypeSystemPackage.BOOLEAN_KIND:
-				return convertBooleanKindToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -417,26 +412,6 @@ public class TypeSystemFactoryImpl extends EFactoryImpl implements TypeSystemFac
 	 * @generated
 	 */
 	public String convertOperatorKindToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BooleanKind createBooleanKindFromString(EDataType eDataType, String initialValue) {
-		BooleanKind result = BooleanKind.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertBooleanKindToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

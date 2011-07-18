@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipselabs.mscript.typesystem.AnyDataType;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
-import org.eclipselabs.mscript.typesystem.BooleanKind;
 import org.eclipselabs.mscript.typesystem.BooleanLiteral;
 import org.eclipselabs.mscript.typesystem.BooleanType;
 import org.eclipselabs.mscript.typesystem.ComplexType;
@@ -247,13 +246,6 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * @generated
 	 */
 	private EEnum operatorKindEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EEnum booleanKindEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -744,7 +736,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBooleanLiteral_Value() {
+	public EAttribute getBooleanLiteral_True() {
 		return (EAttribute)booleanLiteralEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -773,15 +765,6 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 */
 	public EEnum getOperatorKind() {
 		return operatorKindEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EEnum getBooleanKind() {
-		return booleanKindEEnum;
 	}
 
 	/**
@@ -884,14 +867,13 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		createEAttribute(integerLiteralEClass, INTEGER_LITERAL__VALUE);
 
 		booleanLiteralEClass = createEClass(BOOLEAN_LITERAL);
-		createEAttribute(booleanLiteralEClass, BOOLEAN_LITERAL__VALUE);
+		createEAttribute(booleanLiteralEClass, BOOLEAN_LITERAL__TRUE);
 
 		stringLiteralEClass = createEClass(STRING_LITERAL);
 		createEAttribute(stringLiteralEClass, STRING_LITERAL__VALUE);
 
 		// Create enums
 		operatorKindEEnum = createEEnum(OPERATOR_KIND);
-		booleanKindEEnum = createEEnum(BOOLEAN_KIND);
 	}
 
 	/**
@@ -1048,7 +1030,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		initEAttribute(getIntegerLiteral_Value(), ecorePackage.getELong(), "value", null, 0, 1, IntegerLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(booleanLiteralEClass, BooleanLiteral.class, "BooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBooleanLiteral_Value(), this.getBooleanKind(), "value", null, 0, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBooleanLiteral_True(), ecorePackage.getEBoolean(), "true", null, 0, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stringLiteralEClass, StringLiteral.class, "StringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStringLiteral_Value(), ecorePackage.getEString(), "value", null, 0, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1061,9 +1043,11 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.DIVIDE);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.ELEMENT_WISE_MULTIPLY);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.ELEMENT_WISE_DIVIDE);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.ELEMENT_WISE_POWER);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.NEGATE);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.POWER);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.ROOT);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.TRANSPOSE);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.LOGICAL_AND);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.LOGICAL_OR);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.LOGICAL_NOT);
@@ -1074,10 +1058,6 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.GREATER_THAN_OR_EQUAL_TO);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.EQUAL_TO);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.NOT_EQUAL_TO);
-
-		initEEnum(booleanKindEEnum, BooleanKind.class, "BooleanKind");
-		addEEnumLiteral(booleanKindEEnum, BooleanKind.FALSE);
-		addEEnumLiteral(booleanKindEEnum, BooleanKind.TRUE);
 
 		// Create resource
 		createResource(eNS_URI);

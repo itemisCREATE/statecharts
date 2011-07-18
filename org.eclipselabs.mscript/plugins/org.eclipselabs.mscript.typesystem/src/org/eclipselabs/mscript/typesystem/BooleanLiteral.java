@@ -15,7 +15,7 @@ package org.eclipselabs.mscript.typesystem;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.typesystem.BooleanLiteral#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.BooleanLiteral#isTrue <em>True</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,32 +25,29 @@ package org.eclipselabs.mscript.typesystem;
  */
 public interface BooleanLiteral extends Literal {
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
-	 * The literals are from the enumeration {@link org.eclipselabs.mscript.typesystem.BooleanKind}.
+	 * Returns the value of the '<em><b>True</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
+	 * If the meaning of the '<em>True</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see org.eclipselabs.mscript.typesystem.BooleanKind
-	 * @see #setValue(BooleanKind)
-	 * @see org.eclipselabs.mscript.typesystem.TypeSystemPackage#getBooleanLiteral_Value()
+	 * @return the value of the '<em>True</em>' attribute.
+	 * @see #setTrue(boolean)
+	 * @see org.eclipselabs.mscript.typesystem.TypeSystemPackage#getBooleanLiteral_True()
 	 * @model
 	 * @generated
 	 */
-	BooleanKind getValue();
+	boolean isTrue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.typesystem.BooleanLiteral#getValue <em>Value</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.typesystem.BooleanLiteral#isTrue <em>True</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see org.eclipselabs.mscript.typesystem.BooleanKind
-	 * @see #getValue()
+	 * @param value the new value of the '<em>True</em>' attribute.
+	 * @see #isTrue()
 	 * @generated
 	 */
-	void setValue(BooleanKind value);
+	void setTrue(boolean value);
 
 } // BooleanLiteral
