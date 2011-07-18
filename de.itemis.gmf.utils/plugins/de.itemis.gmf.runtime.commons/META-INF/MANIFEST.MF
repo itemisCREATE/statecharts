@@ -6,7 +6,9 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: itemis AG
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.gmf.runtime.diagram.ui.properties;bundle-version="1.4.2",
- org.eclipse.gmf.runtime.diagram.ui.resources.editor;bundle-version="1.4.1"
+ org.eclipse.gmf.runtime.diagram.ui.resources.editor;bundle-version="1.4.1",
+ de.itemis.xtext.utils.jface;bundle-version="1.0.0",
+ com.google.inject;bundle-version="2.0.0"
 Export-Package: de.itemis.gmf.runtime.commons.commands,
  de.itemis.gmf.runtime.commons.editparts,
  de.itemis.gmf.runtime.commons.editpolicies,
