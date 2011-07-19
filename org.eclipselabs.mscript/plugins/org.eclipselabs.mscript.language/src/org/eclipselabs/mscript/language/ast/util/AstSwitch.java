@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
-import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
@@ -50,7 +49,6 @@ import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MemberVariableAccess;
 import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
-import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.NegateStepExpression;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
@@ -277,18 +275,6 @@ public class AstSwitch<T> extends Switch<T> {
 			case AstPackage.SWITCH_CASE: {
 				SwitchCase switchCase = (SwitchCase)theEObject;
 				T result = caseSwitchCase(switchCase);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.ADDITIVE_EXPRESSION_PART: {
-				AdditiveExpressionPart additiveExpressionPart = (AdditiveExpressionPart)theEObject;
-				T result = caseAdditiveExpressionPart(additiveExpressionPart);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.MULTIPLICATIVE_EXPRESSION_PART: {
-				MultiplicativeExpressionPart multiplicativeExpressionPart = (MultiplicativeExpressionPart)theEObject;
-				T result = caseMultiplicativeExpressionPart(multiplicativeExpressionPart);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -916,36 +902,6 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSwitchCase(SwitchCase object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Additive Expression Part</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Additive Expression Part</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAdditiveExpressionPart(AdditiveExpressionPart object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Multiplicative Expression Part</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Multiplicative Expression Part</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMultiplicativeExpressionPart(MultiplicativeExpressionPart object) {
 		return null;
 	}
 

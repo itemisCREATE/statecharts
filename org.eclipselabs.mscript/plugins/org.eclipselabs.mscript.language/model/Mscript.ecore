@@ -141,19 +141,9 @@
     <eLiterals name="GreaterThan" value="2" literal=">"/>
     <eLiterals name="GreaterThanOrEqualTo" value="3" literal=">="/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AdditiveExpressionPart">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//AdditiveOperator"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
-        containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="AdditiveOperator">
     <eLiterals name="Add" literal="+"/>
     <eLiterals name="Subtract" value="1" literal="-"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeExpressionPart">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//MultiplicativeOperator"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MultiplicativeOperator">
     <eLiterals name="Multiply" literal="*"/>
@@ -248,13 +238,15 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LogicalOrExpression" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LogicalAndExpression" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EqualityExpression" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
@@ -278,16 +270,18 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AdditiveExpression" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//AdditiveOperator"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightParts" upperBound="-1"
-        eType="#//AdditiveExpressionPart" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeExpression" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//MultiplicativeOperator"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightParts" upperBound="-1"
-        eType="#//MultiplicativeExpressionPart" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PowerExpression" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"

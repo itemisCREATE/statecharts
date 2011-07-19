@@ -11,16 +11,11 @@
 
 package org.eclipselabs.mscript.language.il.transform;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
-import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
-import org.eclipselabs.mscript.language.ast.AdditiveOperator;
 import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
-import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
@@ -74,15 +69,13 @@ public class ArrayOperationDecomposer extends ILSwitch<Boolean> implements IArra
 		 */
 		@Override
 		public Boolean caseMultiplicativeExpression(MultiplicativeExpression multiplicativeExpression) {
-			List<MultiplicativeExpressionPart> rightParts = multiplicativeExpression.getRightParts();
-			
 			// TODO: Implement better support for vector multiplication expressions
-			if (rightParts.size() == 1 && rightParts.get(0).getOperator() == MultiplicativeOperator.MULTIPLY) {
+			if (multiplicativeExpression.getOperator() == MultiplicativeOperator.MULTIPLY) {
 				Expression leftOperand = multiplicativeExpression.getLeftOperand();
-				Expression rightOperand = rightParts.get(0).getOperand();
+				Expression rightOperand = multiplicativeExpression.getRightOperand();
 				if (leftOperand instanceof VariableReference && rightOperand instanceof VariableReference) {
-					DataType leftDataType = ILUtil.getDataType(multiplicativeExpression.getLeftOperand());
-					DataType rightDataType = ILUtil.getDataType(rightParts.get(0).getOperand());
+					DataType leftDataType = ILUtil.getDataType(leftOperand);
+					DataType rightDataType = ILUtil.getDataType(rightOperand);
 					if (leftDataType instanceof TensorType && rightDataType instanceof TensorType) {
 						TensorType leftTensorType = (TensorType) leftDataType;
 						TensorType rightTensorType = (TensorType) rightDataType;
@@ -93,7 +86,6 @@ public class ArrayOperationDecomposer extends ILSwitch<Boolean> implements IArra
 					}
 				}
 			}
-
 			return super.caseMultiplicativeExpression(multiplicativeExpression);
 		}
 		
@@ -105,9 +97,7 @@ public class ArrayOperationDecomposer extends ILSwitch<Boolean> implements IArra
 			
 			DataType resultDataType = leftTensorType.getElementType().evaluate(OperatorKind.MULTIPLY, rightTensorType.getElementType());
 
-			AdditiveExpression additiveExpression = AstFactory.eINSTANCE.createAdditiveExpression();
-			parenthesizedExpression.getExpressions().add(additiveExpression);
-
+			Expression rootExpression = null;
 			for (int i = 0; i < TypeSystemUtil.getArraySize(leftTensorType); ++i) {
 				MultiplicativeExpression multiplicativeExpression = AstFactory.eINSTANCE.createMultiplicativeExpression();
 				ILUtil.setDataType(multiplicativeExpression, EcoreUtil.copy(resultDataType));
@@ -132,23 +122,24 @@ public class ArrayOperationDecomposer extends ILSwitch<Boolean> implements IArra
 				ILUtil.setDataType(integerLiteral, integerType);
 				rightVariableReference.getArrayIndices().add(integerLiteral);
 
+				multiplicativeExpression.setOperator(MultiplicativeOperator.MULTIPLY);
 				multiplicativeExpression.setLeftOperand(leftVariableReference);
-				MultiplicativeExpressionPart rightPart = AstFactory.eINSTANCE.createMultiplicativeExpressionPart();
-				rightPart.setOperator(MultiplicativeOperator.MULTIPLY);
-				rightPart.setOperand(rightVariableReference);
-				multiplicativeExpression.getRightParts().add(rightPart);
+				multiplicativeExpression.setRightOperand(rightVariableReference);
 				
-				if (i == 0) {
-					additiveExpression.setLeftOperand(multiplicativeExpression);
+				if (rootExpression == null) {
+					rootExpression = multiplicativeExpression;
 				} else {
-					AdditiveExpressionPart rightAdditiveExpressionPart = AstFactory.eINSTANCE.createAdditiveExpressionPart();
-					rightAdditiveExpressionPart.setOperator(AdditiveOperator.ADD);
-					rightAdditiveExpressionPart.setOperand(multiplicativeExpression);
-					additiveExpression.getRightParts().add(rightAdditiveExpressionPart);
+					AdditiveExpression additiveExpression = AstFactory.eINSTANCE.createAdditiveExpression();
+					additiveExpression.setLeftOperand(rootExpression);
+					additiveExpression.setRightOperand(multiplicativeExpression);
+					ILUtil.setDataType(additiveExpression, EcoreUtil.copy(resultDataType));
+					rootExpression = additiveExpression;
 				}
 			}
 			
-			ILUtil.setDataType(additiveExpression, EcoreUtil.copy(resultDataType));
+			parenthesizedExpression.getExpressions().add(rootExpression);
+
+			ILUtil.setDataType(rootExpression, EcoreUtil.copy(resultDataType));
 			ILUtil.setDataType(parenthesizedExpression, EcoreUtil.copy(resultDataType));
 			
 			return parenthesizedExpression;

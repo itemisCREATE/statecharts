@@ -19,14 +19,12 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
-import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
-import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
@@ -85,15 +83,9 @@ public class ExpressionDataTypeAdaptor implements IExpressionDataTypeAdaptor {
 		public DataType caseLogicalOrExpression(LogicalOrExpression logicalOrExpression) {
 			DataType dataType = null;
 			
-			for (Expression operand : logicalOrExpression.getOperands()) {
-				DataType operandDataType = doSwitch(operand);
-				if (dataType == null) {
-					dataType = operandDataType;
-				} else {
-					dataType = dataType.evaluate(OperatorKind.LOGICAL_OR, operandDataType);
-				}
-			}
-			
+			DataType leftDataType = doSwitch(logicalOrExpression.getLeftOperand());
+			DataType rightDataType = doSwitch(logicalOrExpression.getRightOperand());
+			dataType = leftDataType.evaluate(OperatorKind.LOGICAL_OR, rightDataType);
 			ILUtil.setDataType(logicalOrExpression, dataType);
 	
 			return dataType;
@@ -106,15 +98,9 @@ public class ExpressionDataTypeAdaptor implements IExpressionDataTypeAdaptor {
 		public DataType caseLogicalAndExpression(LogicalAndExpression logicalAndExpression) {
 			DataType dataType = null;
 			
-			for (Expression operand : logicalAndExpression.getOperands()) {
-				DataType operandDataType = doSwitch(operand);
-				if (dataType == null) {
-					dataType = operandDataType;
-				} else {
-					dataType = dataType.evaluate(OperatorKind.LOGICAL_AND, operandDataType);
-				}
-			}
-			
+			DataType leftDataType = doSwitch(logicalAndExpression.getLeftOperand());
+			DataType rightDataType = doSwitch(logicalAndExpression.getRightOperand());
+			dataType = leftDataType.evaluate(OperatorKind.LOGICAL_AND, rightDataType);
 			ILUtil.setDataType(logicalAndExpression, dataType);
 	
 			return dataType;
@@ -183,22 +169,21 @@ public class ExpressionDataTypeAdaptor implements IExpressionDataTypeAdaptor {
 		 */
 		@Override
 		public DataType caseAdditiveExpression(AdditiveExpression additiveExpression) {
-			DataType dataType = doSwitch(additiveExpression.getLeftOperand());
+			DataType leftDataType = doSwitch(additiveExpression.getLeftOperand());
+			DataType rightDataType = doSwitch(additiveExpression.getRightOperand());
 			
-			for (AdditiveExpressionPart rightPart : additiveExpression.getRightParts()) {
-				OperatorKind operatorKind;
-				switch (rightPart.getOperator()) {
-				case ADD:
-					operatorKind = OperatorKind.ADD;
-					break;
-				case SUBTRACT:
-					operatorKind = OperatorKind.SUBTRACT;
-					break;
-				default:
-					throw new IllegalArgumentException();
-				}
-				dataType = dataType.evaluate(operatorKind, doSwitch(rightPart.getOperand()));
+			OperatorKind operatorKind;
+			switch (additiveExpression.getOperator()) {
+			case ADD:
+				operatorKind = OperatorKind.ADD;
+				break;
+			case SUBTRACT:
+				operatorKind = OperatorKind.SUBTRACT;
+				break;
+			default:
+				throw new IllegalArgumentException();
 			}
+			DataType dataType = leftDataType.evaluate(operatorKind, rightDataType);
 			
 			ILUtil.setDataType(additiveExpression, dataType);
 			
@@ -210,28 +195,21 @@ public class ExpressionDataTypeAdaptor implements IExpressionDataTypeAdaptor {
 		 */
 		@Override
 		public DataType caseMultiplicativeExpression(MultiplicativeExpression multiplicativeExpression) {
-			DataType dataType = doSwitch(multiplicativeExpression.getLeftOperand());
+			DataType leftDataType = doSwitch(multiplicativeExpression.getLeftOperand());
+			DataType rightDataType = doSwitch(multiplicativeExpression.getRightOperand());
 			
-			for (MultiplicativeExpressionPart rightPart : multiplicativeExpression.getRightParts()) {
-				OperatorKind operatorKind;
-				switch (rightPart.getOperator()) {
-				case MULTIPLY:
-					operatorKind = OperatorKind.MULTIPLY;
-					break;
-				case DIVIDE:
-					operatorKind = OperatorKind.DIVIDE;
-					break;
-				case ELEMENT_WISE_MULTIPLY:
-					operatorKind = OperatorKind.ELEMENT_WISE_MULTIPLY;
-					break;
-				case ELEMENT_WISE_DIVIDE:
-					operatorKind = OperatorKind.ELEMENT_WISE_DIVIDE;
-					break;
-				default:
-					throw new IllegalArgumentException();
-				}
-				dataType = dataType.evaluate(operatorKind, doSwitch(rightPart.getOperand()));
+			OperatorKind operatorKind;
+			switch (multiplicativeExpression.getOperator()) {
+			case MULTIPLY:
+				operatorKind = OperatorKind.MULTIPLY;
+				break;
+			case DIVIDE:
+				operatorKind = OperatorKind.DIVIDE;
+				break;
+			default:
+				throw new IllegalArgumentException();
 			}
+			DataType dataType = leftDataType.evaluate(operatorKind, rightDataType);
 			
 			ILUtil.setDataType(multiplicativeExpression, dataType);
 			

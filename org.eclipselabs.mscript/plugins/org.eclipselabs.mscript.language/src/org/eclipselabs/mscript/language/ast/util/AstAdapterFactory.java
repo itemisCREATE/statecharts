@@ -11,7 +11,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
-import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
@@ -51,7 +50,6 @@ import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MemberVariableAccess;
 import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
-import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.NegateStepExpression;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
@@ -219,14 +217,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSwitchCase(SwitchCase object) {
 				return createSwitchCaseAdapter();
-			}
-			@Override
-			public Adapter caseAdditiveExpressionPart(AdditiveExpressionPart object) {
-				return createAdditiveExpressionPartAdapter();
-			}
-			@Override
-			public Adapter caseMultiplicativeExpressionPart(MultiplicativeExpressionPart object) {
-				return createMultiplicativeExpressionPartAdapter();
 			}
 			@Override
 			public Adapter caseArrayElementAccess(ArrayElementAccess object) {
@@ -727,34 +717,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSwitchCaseAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.AdditiveExpressionPart <em>Additive Expression Part</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.AdditiveExpressionPart
-	 * @generated
-	 */
-	public Adapter createAdditiveExpressionPartAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart <em>Multiplicative Expression Part</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart
-	 * @generated
-	 */
-	public Adapter createMultiplicativeExpressionPartAdapter() {
 		return null;
 	}
 

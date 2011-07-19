@@ -173,13 +173,13 @@ ImpliesExpression returns Expression:
 	LogicalOrExpression ({ImpliesExpression.leftOperand=current} '=>' rightOperand=LogicalOrExpression)?;
 
 LogicalOrExpression returns Expression:
-	LogicalAndExpression ({LogicalOrExpression.operands+=current} ('||' operands+=LogicalAndExpression)+)?;
+	LogicalAndExpression ({LogicalOrExpression.leftOperand=current} '||' rightOperand=LogicalAndExpression)*;
 	
 LogicalAndExpression returns Expression:
-	EqualityExpression ({LogicalAndExpression.operands+=current} ('&&' operands+=EqualityExpression)+)?;
+	EqualityExpression ({LogicalAndExpression.leftOperand=current} '&&' rightOperand=EqualityExpression)*;
 
 EqualityExpression returns Expression:
-	RelationalExpression ({EqualityExpression.leftOperand=current} operator=EqualityOperator rightOperand=RelationalExpression)?;
+	RelationalExpression ({EqualityExpression.leftOperand=current} operator=EqualityOperator rightOperand=RelationalExpression)*;
 
 enum EqualityOperator:
 	EqualTo='==' |
@@ -195,21 +195,15 @@ enum RelationalOperator:
 	GreaterThanOrEqualTo='>=';
 
 AdditiveExpression returns Expression:
-	MultiplicativeExpression ({AdditiveExpression.leftOperand=current} (rightParts+=AdditiveExpressionPart)+)?;
-
-AdditiveExpressionPart:
-	operator=AdditiveOperator operand=MultiplicativeExpression;
+	MultiplicativeExpression ({AdditiveExpression.leftOperand=current} operator=AdditiveOperator rightOperand=MultiplicativeExpression)*;
 
 enum AdditiveOperator:
 	Add='+' |
 	Subtract='-';
 
 MultiplicativeExpression returns Expression:
-	PowerExpression ({MultiplicativeExpression.leftOperand=current} (rightParts+=MultiplicativeExpressionPart)+)?;
+	PowerExpression ({MultiplicativeExpression.leftOperand=current} operator=MultiplicativeOperator rightOperand=PowerExpression)*;
 
-MultiplicativeExpressionPart:
-	operator=MultiplicativeOperator operand=PowerExpression;
-	
 enum MultiplicativeOperator:
 	Multiply='*' |
 	Divide='/' |

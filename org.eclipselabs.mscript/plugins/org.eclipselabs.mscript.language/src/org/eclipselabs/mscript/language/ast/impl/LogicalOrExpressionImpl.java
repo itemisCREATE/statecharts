@@ -6,14 +6,11 @@
  */
 package org.eclipselabs.mscript.language.ast.impl;
 
-import java.util.Collection;
-
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.typesystem.Expression;
@@ -26,7 +23,8 @@ import org.eclipselabs.mscript.typesystem.impl.ExpressionImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.LogicalOrExpressionImpl#getOperands <em>Operands</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.LogicalOrExpressionImpl#getLeftOperand <em>Left Operand</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.LogicalOrExpressionImpl#getRightOperand <em>Right Operand</em>}</li>
  * </ul>
  * </p>
  *
@@ -34,15 +32,23 @@ import org.eclipselabs.mscript.typesystem.impl.ExpressionImpl;
  */
 public class LogicalOrExpressionImpl extends ExpressionImpl implements LogicalOrExpression {
 	/**
-	 * The cached value of the '{@link #getOperands() <em>Operands</em>}' containment reference list.
+	 * The cached value of the '{@link #getLeftOperand() <em>Left Operand</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOperands()
+	 * @see #getLeftOperand()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Expression> operands;
-
+	protected Expression leftOperand;
+	/**
+	 * The cached value of the '{@link #getRightOperand() <em>Right Operand</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRightOperand()
+	 * @generated
+	 * @ordered
+	 */
+	protected Expression rightOperand;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,11 +73,85 @@ public class LogicalOrExpressionImpl extends ExpressionImpl implements LogicalOr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Expression> getOperands() {
-		if (operands == null) {
-			operands = new EObjectContainmentEList<Expression>(Expression.class, this, AstPackage.LOGICAL_OR_EXPRESSION__OPERANDS);
+	public Expression getLeftOperand() {
+		return leftOperand;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetLeftOperand(Expression newLeftOperand, NotificationChain msgs) {
+		Expression oldLeftOperand = leftOperand;
+		leftOperand = newLeftOperand;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.LOGICAL_OR_EXPRESSION__LEFT_OPERAND, oldLeftOperand, newLeftOperand);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return operands;
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLeftOperand(Expression newLeftOperand) {
+		if (newLeftOperand != leftOperand) {
+			NotificationChain msgs = null;
+			if (leftOperand != null)
+				msgs = ((InternalEObject)leftOperand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.LOGICAL_OR_EXPRESSION__LEFT_OPERAND, null, msgs);
+			if (newLeftOperand != null)
+				msgs = ((InternalEObject)newLeftOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.LOGICAL_OR_EXPRESSION__LEFT_OPERAND, null, msgs);
+			msgs = basicSetLeftOperand(newLeftOperand, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.LOGICAL_OR_EXPRESSION__LEFT_OPERAND, newLeftOperand, newLeftOperand));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression getRightOperand() {
+		return rightOperand;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetRightOperand(Expression newRightOperand, NotificationChain msgs) {
+		Expression oldRightOperand = rightOperand;
+		rightOperand = newRightOperand;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND, oldRightOperand, newRightOperand);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRightOperand(Expression newRightOperand) {
+		if (newRightOperand != rightOperand) {
+			NotificationChain msgs = null;
+			if (rightOperand != null)
+				msgs = ((InternalEObject)rightOperand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND, null, msgs);
+			if (newRightOperand != null)
+				msgs = ((InternalEObject)newRightOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND, null, msgs);
+			msgs = basicSetRightOperand(newRightOperand, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND, newRightOperand, newRightOperand));
 	}
 
 	/**
@@ -82,8 +162,10 @@ public class LogicalOrExpressionImpl extends ExpressionImpl implements LogicalOr
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AstPackage.LOGICAL_OR_EXPRESSION__OPERANDS:
-				return ((InternalEList<?>)getOperands()).basicRemove(otherEnd, msgs);
+			case AstPackage.LOGICAL_OR_EXPRESSION__LEFT_OPERAND:
+				return basicSetLeftOperand(null, msgs);
+			case AstPackage.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND:
+				return basicSetRightOperand(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -96,8 +178,10 @@ public class LogicalOrExpressionImpl extends ExpressionImpl implements LogicalOr
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AstPackage.LOGICAL_OR_EXPRESSION__OPERANDS:
-				return getOperands();
+			case AstPackage.LOGICAL_OR_EXPRESSION__LEFT_OPERAND:
+				return getLeftOperand();
+			case AstPackage.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND:
+				return getRightOperand();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -107,13 +191,14 @@ public class LogicalOrExpressionImpl extends ExpressionImpl implements LogicalOr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AstPackage.LOGICAL_OR_EXPRESSION__OPERANDS:
-				getOperands().clear();
-				getOperands().addAll((Collection<? extends Expression>)newValue);
+			case AstPackage.LOGICAL_OR_EXPRESSION__LEFT_OPERAND:
+				setLeftOperand((Expression)newValue);
+				return;
+			case AstPackage.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND:
+				setRightOperand((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -127,8 +212,11 @@ public class LogicalOrExpressionImpl extends ExpressionImpl implements LogicalOr
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AstPackage.LOGICAL_OR_EXPRESSION__OPERANDS:
-				getOperands().clear();
+			case AstPackage.LOGICAL_OR_EXPRESSION__LEFT_OPERAND:
+				setLeftOperand((Expression)null);
+				return;
+			case AstPackage.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND:
+				setRightOperand((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -142,8 +230,10 @@ public class LogicalOrExpressionImpl extends ExpressionImpl implements LogicalOr
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AstPackage.LOGICAL_OR_EXPRESSION__OPERANDS:
-				return operands != null && !operands.isEmpty();
+			case AstPackage.LOGICAL_OR_EXPRESSION__LEFT_OPERAND:
+				return leftOperand != null;
+			case AstPackage.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND:
+				return rightOperand != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -6,7 +6,6 @@
  */
 package org.eclipselabs.mscript.language.ast;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
@@ -17,7 +16,8 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.LogicalAndExpression#getOperands <em>Operands</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.LogicalAndExpression#getLeftOperand <em>Left Operand</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.LogicalAndExpression#getRightOperand <em>Right Operand</em>}</li>
  * </ul>
  * </p>
  *
@@ -27,19 +27,55 @@ import org.eclipselabs.mscript.typesystem.Expression;
  */
 public interface LogicalAndExpression extends Expression {
 	/**
-	 * Returns the value of the '<em><b>Operands</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipselabs.mscript.typesystem.Expression}.
+	 * Returns the value of the '<em><b>Left Operand</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Operands</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Left Operand</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Operands</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getLogicalAndExpression_Operands()
+	 * @return the value of the '<em>Left Operand</em>' containment reference.
+	 * @see #setLeftOperand(Expression)
+	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getLogicalAndExpression_LeftOperand()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Expression> getOperands();
+	Expression getLeftOperand();
+
+	/**
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.LogicalAndExpression#getLeftOperand <em>Left Operand</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Left Operand</em>' containment reference.
+	 * @see #getLeftOperand()
+	 * @generated
+	 */
+	void setLeftOperand(Expression value);
+
+	/**
+	 * Returns the value of the '<em><b>Right Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Right Operand</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Right Operand</em>' containment reference.
+	 * @see #setRightOperand(Expression)
+	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getLogicalAndExpression_RightOperand()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Expression getRightOperand();
+
+	/**
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.LogicalAndExpression#getRightOperand <em>Right Operand</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Right Operand</em>' containment reference.
+	 * @see #getRightOperand()
+	 * @generated
+	 */
+	void setRightOperand(Expression value);
 
 } // LogicalAndExpression

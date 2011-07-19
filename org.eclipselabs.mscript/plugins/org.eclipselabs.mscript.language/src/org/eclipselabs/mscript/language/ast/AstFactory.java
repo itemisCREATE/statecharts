@@ -197,24 +197,6 @@ public interface AstFactory extends EFactory {
 	SwitchCase createSwitchCase();
 
 	/**
-	 * Returns a new object of class '<em>Additive Expression Part</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Additive Expression Part</em>'.
-	 * @generated
-	 */
-	AdditiveExpressionPart createAdditiveExpressionPart();
-
-	/**
-	 * Returns a new object of class '<em>Multiplicative Expression Part</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Multiplicative Expression Part</em>'.
-	 * @generated
-	 */
-	MultiplicativeExpressionPart createMultiplicativeExpressionPart();
-
-	/**
 	 * Returns a new object of class '<em>Array Element Access</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

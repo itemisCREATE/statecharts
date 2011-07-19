@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
-import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.AdditiveOperator;
 import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
@@ -53,7 +52,6 @@ import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MemberVariableAccess;
 import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
-import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
 import org.eclipselabs.mscript.language.ast.NegateStepExpression;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
@@ -143,8 +141,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.IF_EXPRESSION: return createIfExpression();
 			case AstPackage.SWITCH_EXPRESSION: return createSwitchExpression();
 			case AstPackage.SWITCH_CASE: return createSwitchCase();
-			case AstPackage.ADDITIVE_EXPRESSION_PART: return createAdditiveExpressionPart();
-			case AstPackage.MULTIPLICATIVE_EXPRESSION_PART: return createMultiplicativeExpressionPart();
 			case AstPackage.ARRAY_ELEMENT_ACCESS: return createArrayElementAccess();
 			case AstPackage.ARRAY_SUBSCRIPT: return createArraySubscript();
 			case AstPackage.ITERATION_CALL: return createIterationCall();
@@ -432,26 +428,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public SwitchCase createSwitchCase() {
 		SwitchCaseImpl switchCase = new SwitchCaseImpl();
 		return switchCase;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AdditiveExpressionPart createAdditiveExpressionPart() {
-		AdditiveExpressionPartImpl additiveExpressionPart = new AdditiveExpressionPartImpl();
-		return additiveExpressionPart;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public MultiplicativeExpressionPart createMultiplicativeExpressionPart() {
-		MultiplicativeExpressionPartImpl multiplicativeExpressionPart = new MultiplicativeExpressionPartImpl();
-		return multiplicativeExpressionPart;
 	}
 
 	/**

@@ -1557,39 +1557,35 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cLogicalAndExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cLogicalOrExpressionOperandsAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
-		private final Keyword cVerticalLineVerticalLineKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
-		private final Assignment cOperandsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
-		private final RuleCall cOperandsLogicalAndExpressionParserRuleCall_1_1_1_0 = (RuleCall)cOperandsAssignment_1_1_1.eContents().get(0);
+		private final Action cLogicalOrExpressionLeftOperandAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cVerticalLineVerticalLineKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cRightOperandAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightOperandLogicalAndExpressionParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
 		
 		//LogicalOrExpression returns Expression:
-		//	LogicalAndExpression ({LogicalOrExpression.operands+=current} ("||" operands+=LogicalAndExpression)+)?;
+		//	LogicalAndExpression ({LogicalOrExpression.leftOperand=current} "||" rightOperand=LogicalAndExpression)*;
 		public ParserRule getRule() { return rule; }
 
-		//LogicalAndExpression ({LogicalOrExpression.operands+=current} ("||" operands+=LogicalAndExpression)+)?
+		//LogicalAndExpression ({LogicalOrExpression.leftOperand=current} "||" rightOperand=LogicalAndExpression)*
 		public Group getGroup() { return cGroup; }
 
 		//LogicalAndExpression
 		public RuleCall getLogicalAndExpressionParserRuleCall_0() { return cLogicalAndExpressionParserRuleCall_0; }
 
-		//({LogicalOrExpression.operands+=current} ("||" operands+=LogicalAndExpression)+)?
+		//({LogicalOrExpression.leftOperand=current} "||" rightOperand=LogicalAndExpression)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{LogicalOrExpression.operands+=current}
-		public Action getLogicalOrExpressionOperandsAction_1_0() { return cLogicalOrExpressionOperandsAction_1_0; }
-
-		//("||" operands+=LogicalAndExpression)+
-		public Group getGroup_1_1() { return cGroup_1_1; }
+		//{LogicalOrExpression.leftOperand=current}
+		public Action getLogicalOrExpressionLeftOperandAction_1_0() { return cLogicalOrExpressionLeftOperandAction_1_0; }
 
 		//"||"
-		public Keyword getVerticalLineVerticalLineKeyword_1_1_0() { return cVerticalLineVerticalLineKeyword_1_1_0; }
+		public Keyword getVerticalLineVerticalLineKeyword_1_1() { return cVerticalLineVerticalLineKeyword_1_1; }
 
-		//operands+=LogicalAndExpression
-		public Assignment getOperandsAssignment_1_1_1() { return cOperandsAssignment_1_1_1; }
+		//rightOperand=LogicalAndExpression
+		public Assignment getRightOperandAssignment_1_2() { return cRightOperandAssignment_1_2; }
 
 		//LogicalAndExpression
-		public RuleCall getOperandsLogicalAndExpressionParserRuleCall_1_1_1_0() { return cOperandsLogicalAndExpressionParserRuleCall_1_1_1_0; }
+		public RuleCall getRightOperandLogicalAndExpressionParserRuleCall_1_2_0() { return cRightOperandLogicalAndExpressionParserRuleCall_1_2_0; }
 	}
 
 	public class LogicalAndExpressionElements extends AbstractParserRuleElementFinder {
@@ -1597,39 +1593,35 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cEqualityExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cLogicalAndExpressionOperandsAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
-		private final Keyword cAmpersandAmpersandKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
-		private final Assignment cOperandsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
-		private final RuleCall cOperandsEqualityExpressionParserRuleCall_1_1_1_0 = (RuleCall)cOperandsAssignment_1_1_1.eContents().get(0);
+		private final Action cLogicalAndExpressionLeftOperandAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cAmpersandAmpersandKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cRightOperandAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightOperandEqualityExpressionParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
 		
 		//LogicalAndExpression returns Expression:
-		//	EqualityExpression ({LogicalAndExpression.operands+=current} ("&&" operands+=EqualityExpression)+)?;
+		//	EqualityExpression ({LogicalAndExpression.leftOperand=current} "&&" rightOperand=EqualityExpression)*;
 		public ParserRule getRule() { return rule; }
 
-		//EqualityExpression ({LogicalAndExpression.operands+=current} ("&&" operands+=EqualityExpression)+)?
+		//EqualityExpression ({LogicalAndExpression.leftOperand=current} "&&" rightOperand=EqualityExpression)*
 		public Group getGroup() { return cGroup; }
 
 		//EqualityExpression
 		public RuleCall getEqualityExpressionParserRuleCall_0() { return cEqualityExpressionParserRuleCall_0; }
 
-		//({LogicalAndExpression.operands+=current} ("&&" operands+=EqualityExpression)+)?
+		//({LogicalAndExpression.leftOperand=current} "&&" rightOperand=EqualityExpression)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{LogicalAndExpression.operands+=current}
-		public Action getLogicalAndExpressionOperandsAction_1_0() { return cLogicalAndExpressionOperandsAction_1_0; }
-
-		//("&&" operands+=EqualityExpression)+
-		public Group getGroup_1_1() { return cGroup_1_1; }
+		//{LogicalAndExpression.leftOperand=current}
+		public Action getLogicalAndExpressionLeftOperandAction_1_0() { return cLogicalAndExpressionLeftOperandAction_1_0; }
 
 		//"&&"
-		public Keyword getAmpersandAmpersandKeyword_1_1_0() { return cAmpersandAmpersandKeyword_1_1_0; }
+		public Keyword getAmpersandAmpersandKeyword_1_1() { return cAmpersandAmpersandKeyword_1_1; }
 
-		//operands+=EqualityExpression
-		public Assignment getOperandsAssignment_1_1_1() { return cOperandsAssignment_1_1_1; }
+		//rightOperand=EqualityExpression
+		public Assignment getRightOperandAssignment_1_2() { return cRightOperandAssignment_1_2; }
 
 		//EqualityExpression
-		public RuleCall getOperandsEqualityExpressionParserRuleCall_1_1_1_0() { return cOperandsEqualityExpressionParserRuleCall_1_1_1_0; }
+		public RuleCall getRightOperandEqualityExpressionParserRuleCall_1_2_0() { return cRightOperandEqualityExpressionParserRuleCall_1_2_0; }
 	}
 
 	public class EqualityExpressionElements extends AbstractParserRuleElementFinder {
@@ -1645,17 +1637,17 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//EqualityExpression returns Expression:
 		//	RelationalExpression ({EqualityExpression.leftOperand=current} operator=EqualityOperator
-		//	rightOperand=RelationalExpression)?;
+		//	rightOperand=RelationalExpression)*;
 		public ParserRule getRule() { return rule; }
 
 		//RelationalExpression ({EqualityExpression.leftOperand=current} operator=EqualityOperator
-		//rightOperand=RelationalExpression)?
+		//rightOperand=RelationalExpression)*
 		public Group getGroup() { return cGroup; }
 
 		//RelationalExpression
 		public RuleCall getRelationalExpressionParserRuleCall_0() { return cRelationalExpressionParserRuleCall_0; }
 
-		//({EqualityExpression.leftOperand=current} operator=EqualityOperator rightOperand=RelationalExpression)?
+		//({EqualityExpression.leftOperand=current} operator=EqualityOperator rightOperand=RelationalExpression)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{EqualityExpression.leftOperand=current}
@@ -1747,58 +1739,40 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cMultiplicativeExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Action cAdditiveExpressionLeftOperandAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Assignment cRightPartsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cRightPartsAdditiveExpressionPartParserRuleCall_1_1_0 = (RuleCall)cRightPartsAssignment_1_1.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cOperatorAdditiveOperatorEnumRuleCall_1_1_0 = (RuleCall)cOperatorAssignment_1_1.eContents().get(0);
+		private final Assignment cRightOperandAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightOperandMultiplicativeExpressionParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
 		
 		//AdditiveExpression returns Expression:
-		//	MultiplicativeExpression ({AdditiveExpression.leftOperand=current} rightParts+=AdditiveExpressionPart+)?;
+		//	MultiplicativeExpression ({AdditiveExpression.leftOperand=current} operator=AdditiveOperator
+		//	rightOperand=MultiplicativeExpression)*;
 		public ParserRule getRule() { return rule; }
 
-		//MultiplicativeExpression ({AdditiveExpression.leftOperand=current} rightParts+=AdditiveExpressionPart+)?
+		//MultiplicativeExpression ({AdditiveExpression.leftOperand=current} operator=AdditiveOperator
+		//rightOperand=MultiplicativeExpression)*
 		public Group getGroup() { return cGroup; }
 
 		//MultiplicativeExpression
 		public RuleCall getMultiplicativeExpressionParserRuleCall_0() { return cMultiplicativeExpressionParserRuleCall_0; }
 
-		//({AdditiveExpression.leftOperand=current} rightParts+=AdditiveExpressionPart+)?
+		//({AdditiveExpression.leftOperand=current} operator=AdditiveOperator rightOperand=MultiplicativeExpression)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{AdditiveExpression.leftOperand=current}
 		public Action getAdditiveExpressionLeftOperandAction_1_0() { return cAdditiveExpressionLeftOperandAction_1_0; }
 
-		//rightParts+=AdditiveExpressionPart+
-		public Assignment getRightPartsAssignment_1_1() { return cRightPartsAssignment_1_1; }
-
-		//AdditiveExpressionPart
-		public RuleCall getRightPartsAdditiveExpressionPartParserRuleCall_1_1_0() { return cRightPartsAdditiveExpressionPartParserRuleCall_1_1_0; }
-	}
-
-	public class AdditiveExpressionPartElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AdditiveExpressionPart");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cOperatorAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cOperatorAdditiveOperatorEnumRuleCall_0_0 = (RuleCall)cOperatorAssignment_0.eContents().get(0);
-		private final Assignment cOperandAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cOperandMultiplicativeExpressionParserRuleCall_1_0 = (RuleCall)cOperandAssignment_1.eContents().get(0);
-		
-		//AdditiveExpressionPart:
-		//	operator=AdditiveOperator operand=MultiplicativeExpression;
-		public ParserRule getRule() { return rule; }
-
-		//operator=AdditiveOperator operand=MultiplicativeExpression
-		public Group getGroup() { return cGroup; }
-
 		//operator=AdditiveOperator
-		public Assignment getOperatorAssignment_0() { return cOperatorAssignment_0; }
+		public Assignment getOperatorAssignment_1_1() { return cOperatorAssignment_1_1; }
 
 		//AdditiveOperator
-		public RuleCall getOperatorAdditiveOperatorEnumRuleCall_0_0() { return cOperatorAdditiveOperatorEnumRuleCall_0_0; }
+		public RuleCall getOperatorAdditiveOperatorEnumRuleCall_1_1_0() { return cOperatorAdditiveOperatorEnumRuleCall_1_1_0; }
 
-		//operand=MultiplicativeExpression
-		public Assignment getOperandAssignment_1() { return cOperandAssignment_1; }
+		//rightOperand=MultiplicativeExpression
+		public Assignment getRightOperandAssignment_1_2() { return cRightOperandAssignment_1_2; }
 
 		//MultiplicativeExpression
-		public RuleCall getOperandMultiplicativeExpressionParserRuleCall_1_0() { return cOperandMultiplicativeExpressionParserRuleCall_1_0; }
+		public RuleCall getRightOperandMultiplicativeExpressionParserRuleCall_1_2_0() { return cRightOperandMultiplicativeExpressionParserRuleCall_1_2_0; }
 	}
 
 	public class MultiplicativeExpressionElements extends AbstractParserRuleElementFinder {
@@ -1807,58 +1781,40 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cPowerExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Action cMultiplicativeExpressionLeftOperandAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Assignment cRightPartsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cRightPartsMultiplicativeExpressionPartParserRuleCall_1_1_0 = (RuleCall)cRightPartsAssignment_1_1.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cOperatorMultiplicativeOperatorEnumRuleCall_1_1_0 = (RuleCall)cOperatorAssignment_1_1.eContents().get(0);
+		private final Assignment cRightOperandAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightOperandPowerExpressionParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
 		
 		//MultiplicativeExpression returns Expression:
-		//	PowerExpression ({MultiplicativeExpression.leftOperand=current} rightParts+=MultiplicativeExpressionPart+)?;
+		//	PowerExpression ({MultiplicativeExpression.leftOperand=current} operator=MultiplicativeOperator
+		//	rightOperand=PowerExpression)*;
 		public ParserRule getRule() { return rule; }
 
-		//PowerExpression ({MultiplicativeExpression.leftOperand=current} rightParts+=MultiplicativeExpressionPart+)?
+		//PowerExpression ({MultiplicativeExpression.leftOperand=current} operator=MultiplicativeOperator
+		//rightOperand=PowerExpression)*
 		public Group getGroup() { return cGroup; }
 
 		//PowerExpression
 		public RuleCall getPowerExpressionParserRuleCall_0() { return cPowerExpressionParserRuleCall_0; }
 
-		//({MultiplicativeExpression.leftOperand=current} rightParts+=MultiplicativeExpressionPart+)?
+		//({MultiplicativeExpression.leftOperand=current} operator=MultiplicativeOperator rightOperand=PowerExpression)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{MultiplicativeExpression.leftOperand=current}
 		public Action getMultiplicativeExpressionLeftOperandAction_1_0() { return cMultiplicativeExpressionLeftOperandAction_1_0; }
 
-		//rightParts+=MultiplicativeExpressionPart+
-		public Assignment getRightPartsAssignment_1_1() { return cRightPartsAssignment_1_1; }
-
-		//MultiplicativeExpressionPart
-		public RuleCall getRightPartsMultiplicativeExpressionPartParserRuleCall_1_1_0() { return cRightPartsMultiplicativeExpressionPartParserRuleCall_1_1_0; }
-	}
-
-	public class MultiplicativeExpressionPartElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MultiplicativeExpressionPart");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cOperatorAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cOperatorMultiplicativeOperatorEnumRuleCall_0_0 = (RuleCall)cOperatorAssignment_0.eContents().get(0);
-		private final Assignment cOperandAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cOperandPowerExpressionParserRuleCall_1_0 = (RuleCall)cOperandAssignment_1.eContents().get(0);
-		
-		//MultiplicativeExpressionPart:
-		//	operator=MultiplicativeOperator operand=PowerExpression;
-		public ParserRule getRule() { return rule; }
-
-		//operator=MultiplicativeOperator operand=PowerExpression
-		public Group getGroup() { return cGroup; }
-
 		//operator=MultiplicativeOperator
-		public Assignment getOperatorAssignment_0() { return cOperatorAssignment_0; }
+		public Assignment getOperatorAssignment_1_1() { return cOperatorAssignment_1_1; }
 
 		//MultiplicativeOperator
-		public RuleCall getOperatorMultiplicativeOperatorEnumRuleCall_0_0() { return cOperatorMultiplicativeOperatorEnumRuleCall_0_0; }
+		public RuleCall getOperatorMultiplicativeOperatorEnumRuleCall_1_1_0() { return cOperatorMultiplicativeOperatorEnumRuleCall_1_1_0; }
 
-		//operand=PowerExpression
-		public Assignment getOperandAssignment_1() { return cOperandAssignment_1; }
+		//rightOperand=PowerExpression
+		public Assignment getRightOperandAssignment_1_2() { return cRightOperandAssignment_1_2; }
 
 		//PowerExpression
-		public RuleCall getOperandPowerExpressionParserRuleCall_1_0() { return cOperandPowerExpressionParserRuleCall_1_0; }
+		public RuleCall getRightOperandPowerExpressionParserRuleCall_1_2_0() { return cRightOperandPowerExpressionParserRuleCall_1_2_0; }
 	}
 
 	public class PowerExpressionElements extends AbstractParserRuleElementFinder {
@@ -3778,10 +3734,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private RelationalExpressionElements pRelationalExpression;
 	private RelationalOperatorElements unknownRuleRelationalOperator;
 	private AdditiveExpressionElements pAdditiveExpression;
-	private AdditiveExpressionPartElements pAdditiveExpressionPart;
 	private AdditiveOperatorElements unknownRuleAdditiveOperator;
 	private MultiplicativeExpressionElements pMultiplicativeExpression;
-	private MultiplicativeExpressionPartElements pMultiplicativeExpressionPart;
 	private MultiplicativeOperatorElements unknownRuleMultiplicativeOperator;
 	private PowerExpressionElements pPowerExpression;
 	private PowerOperatorElements unknownRulePowerOperator;
@@ -4237,7 +4191,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LogicalOrExpression returns Expression:
-	//	LogicalAndExpression ({LogicalOrExpression.operands+=current} ("||" operands+=LogicalAndExpression)+)?;
+	//	LogicalAndExpression ({LogicalOrExpression.leftOperand=current} "||" rightOperand=LogicalAndExpression)*;
 	public LogicalOrExpressionElements getLogicalOrExpressionAccess() {
 		return (pLogicalOrExpression != null) ? pLogicalOrExpression : (pLogicalOrExpression = new LogicalOrExpressionElements());
 	}
@@ -4247,7 +4201,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LogicalAndExpression returns Expression:
-	//	EqualityExpression ({LogicalAndExpression.operands+=current} ("&&" operands+=EqualityExpression)+)?;
+	//	EqualityExpression ({LogicalAndExpression.leftOperand=current} "&&" rightOperand=EqualityExpression)*;
 	public LogicalAndExpressionElements getLogicalAndExpressionAccess() {
 		return (pLogicalAndExpression != null) ? pLogicalAndExpression : (pLogicalAndExpression = new LogicalAndExpressionElements());
 	}
@@ -4258,7 +4212,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 	//EqualityExpression returns Expression:
 	//	RelationalExpression ({EqualityExpression.leftOperand=current} operator=EqualityOperator
-	//	rightOperand=RelationalExpression)?;
+	//	rightOperand=RelationalExpression)*;
 	public EqualityExpressionElements getEqualityExpressionAccess() {
 		return (pEqualityExpression != null) ? pEqualityExpression : (pEqualityExpression = new EqualityExpressionElements());
 	}
@@ -4299,23 +4253,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AdditiveExpression returns Expression:
-	//	MultiplicativeExpression ({AdditiveExpression.leftOperand=current} rightParts+=AdditiveExpressionPart+)?;
+	//	MultiplicativeExpression ({AdditiveExpression.leftOperand=current} operator=AdditiveOperator
+	//	rightOperand=MultiplicativeExpression)*;
 	public AdditiveExpressionElements getAdditiveExpressionAccess() {
 		return (pAdditiveExpression != null) ? pAdditiveExpression : (pAdditiveExpression = new AdditiveExpressionElements());
 	}
 	
 	public ParserRule getAdditiveExpressionRule() {
 		return getAdditiveExpressionAccess().getRule();
-	}
-
-	//AdditiveExpressionPart:
-	//	operator=AdditiveOperator operand=MultiplicativeExpression;
-	public AdditiveExpressionPartElements getAdditiveExpressionPartAccess() {
-		return (pAdditiveExpressionPart != null) ? pAdditiveExpressionPart : (pAdditiveExpressionPart = new AdditiveExpressionPartElements());
-	}
-	
-	public ParserRule getAdditiveExpressionPartRule() {
-		return getAdditiveExpressionPartAccess().getRule();
 	}
 
 	//enum AdditiveOperator:
@@ -4329,23 +4274,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MultiplicativeExpression returns Expression:
-	//	PowerExpression ({MultiplicativeExpression.leftOperand=current} rightParts+=MultiplicativeExpressionPart+)?;
+	//	PowerExpression ({MultiplicativeExpression.leftOperand=current} operator=MultiplicativeOperator
+	//	rightOperand=PowerExpression)*;
 	public MultiplicativeExpressionElements getMultiplicativeExpressionAccess() {
 		return (pMultiplicativeExpression != null) ? pMultiplicativeExpression : (pMultiplicativeExpression = new MultiplicativeExpressionElements());
 	}
 	
 	public ParserRule getMultiplicativeExpressionRule() {
 		return getMultiplicativeExpressionAccess().getRule();
-	}
-
-	//MultiplicativeExpressionPart:
-	//	operator=MultiplicativeOperator operand=PowerExpression;
-	public MultiplicativeExpressionPartElements getMultiplicativeExpressionPartAccess() {
-		return (pMultiplicativeExpressionPart != null) ? pMultiplicativeExpressionPart : (pMultiplicativeExpressionPart = new MultiplicativeExpressionPartElements());
-	}
-	
-	public ParserRule getMultiplicativeExpressionPartRule() {
-		return getMultiplicativeExpressionPartAccess().getRule();
 	}
 
 	//enum MultiplicativeOperator:

@@ -26,8 +26,6 @@ import org.eclipselabs.mscript.computation.core.value.UnitValue;
 import org.eclipselabs.mscript.computation.core.value.Values;
 import org.eclipselabs.mscript.computation.core.value.VectorValue;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
-import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
-import org.eclipselabs.mscript.language.ast.AdditiveOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
@@ -37,8 +35,6 @@ import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
-import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
-import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
@@ -99,54 +95,54 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseAdditiveExpression(org.eclipselabs.mscript.language.ast.AdditiveExpression)
 		 */
 		@Override
-		public IValue caseAdditiveExpression(AdditiveExpression addSubtractExpression) {
-			IValue result = doSwitch(addSubtractExpression.getLeftOperand());
-			for (AdditiveExpressionPart part : addSubtractExpression.getRightParts()) {
-				result = addSubtract(result, doSwitch(part.getOperand()), part.getOperator());
+		public IValue caseAdditiveExpression(AdditiveExpression additiveExpression) {
+			IValue leftValue = doSwitch(additiveExpression.getLeftOperand());
+			IValue rightValue = doSwitch(additiveExpression.getRightOperand());
+			IValue result;
+
+			switch (additiveExpression.getOperator()) {
+			case ADD:
+				result = leftValue.add(rightValue);
+				break;
+			case SUBTRACT:
+				result = leftValue.subtract(rightValue);
+				break;
+			default:
+				throw new IllegalArgumentException();
 			}
+			
 			if (result instanceof InvalidValue) {
 				throw new RuntimeException("Additive operation cannot not be performed on provided operands");
 			}
+			
 			return result;
-		}
-
-		private IValue addSubtract(IValue operand1, IValue operand2, AdditiveOperator operator) {
-			switch (operator) {
-			case ADD:
-				return operand1.add(operand2);
-			case SUBTRACT:
-				return operand1.subtract(operand2);
-			}
-			throw new IllegalArgumentException();
 		}
 
 		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseMultiplicativeExpression(org.eclipselabs.mscript.language.ast.MultiplicativeExpression)
 		 */
 		@Override
-		public IValue caseMultiplicativeExpression(MultiplicativeExpression multiplyDivideExpression) {
-			IValue result = doSwitch(multiplyDivideExpression.getLeftOperand());
-			for (MultiplicativeExpressionPart part : multiplyDivideExpression.getRightParts()) {
-				result = multiplyDivide(result, doSwitch(part.getOperand()), part.getOperator());
+		public IValue caseMultiplicativeExpression(MultiplicativeExpression multiplicativeExpression) {
+			IValue leftValue = doSwitch(multiplicativeExpression.getLeftOperand());
+			IValue rightValue = doSwitch(multiplicativeExpression.getRightOperand());
+			IValue result;
+
+			switch (multiplicativeExpression.getOperator()) {
+			case MULTIPLY:
+				result = leftValue.multiply(rightValue);
+				break;
+			case DIVIDE:
+				result = leftValue.divide(rightValue);
+				break;
+			default:
+				throw new IllegalArgumentException();
 			}
+
 			if (result instanceof InvalidValue) {
 				throw new RuntimeException("Multiplicative operation cannot not be performed on provided operands");
 			}
+			
 			return result;
-		}
-		
-		private IValue multiplyDivide(IValue operand1, IValue operand2, MultiplicativeOperator operator) {
-			switch (operator) {
-			case MULTIPLY:
-				return operand1.multiply(operand2);
-			case DIVIDE:
-				return operand1.divide(operand2);
-			case ELEMENT_WISE_MULTIPLY:
-				return operand1.elementWiseMultiply(operand2);
-			case ELEMENT_WISE_DIVIDE:
-				return operand1.elementWiseDivide(operand2);
-			}
-			throw new IllegalArgumentException();
 		}
 		
 		/* (non-Javadoc)
@@ -175,17 +171,26 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 		 */
 		@Override
 		public IValue caseLogicalAndExpression(LogicalAndExpression logicalAndExpression) {
-			for (Expression operand : logicalAndExpression.getOperands()) {
-				IValue operandValue = doSwitch(operand);
-				if (operandValue instanceof IBooleanValue) {
-					IBooleanValue booleanResult = (IBooleanValue) operandValue;
-					if (!booleanResult.booleanValue()) {
-						return Values.valueOf(context.getComputationContext(), false);
-					}
-				} else {
-					throw new RuntimeException("Logical expression operands must be boolean");
+			IValue leftValue = doSwitch(logicalAndExpression.getLeftOperand());
+			if (leftValue instanceof IBooleanValue) {
+				IBooleanValue booleanResult = (IBooleanValue) leftValue;
+				if (!booleanResult.booleanValue()) {
+					return Values.valueOf(context.getComputationContext(), false);
 				}
+			} else {
+				throw new RuntimeException("Logical expression left operand must be boolean");
 			}
+
+			IValue rightValue = doSwitch(logicalAndExpression.getRightOperand());
+			if (rightValue instanceof IBooleanValue) {
+				IBooleanValue booleanResult = (IBooleanValue) rightValue;
+				if (!booleanResult.booleanValue()) {
+					return Values.valueOf(context.getComputationContext(), false);
+				}
+			} else {
+				throw new RuntimeException("Logical expression right operand must be boolean");
+			}
+			
 			return Values.valueOf(context.getComputationContext(), true);
 		}
 		
@@ -194,17 +199,26 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 		 */
 		@Override
 		public IValue caseLogicalOrExpression(LogicalOrExpression logicalOrExpression) {
-			for (Expression operand : logicalOrExpression.getOperands()) {
-				IValue operandValue = doSwitch(operand);
-				if (operandValue instanceof IBooleanValue) {
-					IBooleanValue booleanResult = (IBooleanValue) operandValue;
-					if (booleanResult.booleanValue()) {
-						return Values.valueOf(context.getComputationContext(), true);
-					}
-				} else {
-					throw new RuntimeException("Logical expression operands must be boolean");
+			IValue leftValue = doSwitch(logicalOrExpression.getLeftOperand());
+			if (leftValue instanceof IBooleanValue) {
+				IBooleanValue booleanResult = (IBooleanValue) leftValue;
+				if (booleanResult.booleanValue()) {
+					return Values.valueOf(context.getComputationContext(), true);
 				}
+			} else {
+				throw new RuntimeException("Logical expression left operand must be boolean");
 			}
+
+			IValue rightValue = doSwitch(logicalOrExpression.getRightOperand());
+			if (rightValue instanceof IBooleanValue) {
+				IBooleanValue booleanResult = (IBooleanValue) rightValue;
+				if (booleanResult.booleanValue()) {
+					return Values.valueOf(context.getComputationContext(), true);
+				}
+			} else {
+				throw new RuntimeException("Logical expression right operand must be boolean");
+			}
+			
 			return Values.valueOf(context.getComputationContext(), false);
 		}
 		

@@ -14,7 +14,6 @@ package org.eclipselabs.mscript.codegen.c;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.codegen.c.internal.VariableAccessGenerator;
@@ -28,14 +27,13 @@ import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
 import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelUtil;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
-import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
-import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
+import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
@@ -96,15 +94,9 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		 */
 		@Override
 		public Boolean caseLogicalOrExpression(LogicalOrExpression logicalOrExpression) {
-			boolean first = true;
-			for (Expression operand : logicalOrExpression.getOperands()) {
-				if (first) {
-					first = false;
-				} else {
-					writer.print(" || ");
-				}
-				doSwitch(operand);
-			}
+			doSwitch(logicalOrExpression.getLeftOperand());
+			writer.print(" || ");
+			doSwitch(logicalOrExpression.getRightOperand());
 			return true;
 		}
 		
@@ -113,15 +105,9 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		 */
 		@Override
 		public Boolean caseLogicalAndExpression(LogicalAndExpression logicalAndExpression) {
-			boolean first = true;
-			for (Expression operand : logicalAndExpression.getOperands()) {
-				if (first) {
-					first = false;
-				} else {
-					writer.print(" && ");
-				}
-				doSwitch(operand);
-			}
+			doSwitch(logicalAndExpression.getLeftOperand());
+			writer.print(" && ");
+			doSwitch(logicalAndExpression.getRightOperand());
 			return true;
 		}
 		
@@ -176,16 +162,13 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		@Override
 		public Boolean caseAdditiveExpression(AdditiveExpression additiveExpression) {
 			DataType dataType = ILUtil.getDataType(additiveExpression);
-			
 			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
 	
 			MscriptGeneratorUtil.castNumericType(context, variableAccessStrategy, numberFormat, additiveExpression.getLeftOperand());
-			for (AdditiveExpressionPart rightPart : additiveExpression.getRightParts()) {
-				writer.print(" ");
-				writer.print(rightPart.getOperator().getLiteral());
-				writer.print(" ");
-				MscriptGeneratorUtil.castNumericType(context, variableAccessStrategy, numberFormat, rightPart.getOperand());
-			}
+			writer.print(" ");
+			writer.print(additiveExpression.getOperator().getLiteral());
+			writer.print(" ");
+			MscriptGeneratorUtil.castNumericType(context, variableAccessStrategy, numberFormat, additiveExpression.getRightOperand());
 			
 			return true;
 		}
@@ -195,13 +178,11 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		 */
 		@Override
 		public Boolean caseMultiplicativeExpression(MultiplicativeExpression multiplicativeExpression) {
-			List<MultiplicativeExpressionPart> rightParts = multiplicativeExpression.getRightParts();
-	
 			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(ILUtil.getDataType(multiplicativeExpression));
 			if (numberFormat instanceof FloatingPointFormat) {
-				writeFloatingPointMultiplicativeExpression(multiplicativeExpression.getLeftOperand(), rightParts.listIterator(rightParts.size()), (FloatingPointFormat) numberFormat);
+				writeFloatingPointMultiplicativeExpression(multiplicativeExpression.getOperator(), multiplicativeExpression.getLeftOperand(), multiplicativeExpression.getRightOperand(), (FloatingPointFormat) numberFormat);
 			} else if (numberFormat instanceof FixedPointFormat) {
-				writeFixedPointMultiplicativeExpression(multiplicativeExpression.getLeftOperand(), rightParts.listIterator(rightParts.size()), (FixedPointFormat) numberFormat);
+				writeFixedPointMultiplicativeExpression(multiplicativeExpression.getOperator(), multiplicativeExpression.getLeftOperand(), multiplicativeExpression.getRightOperand(), (FixedPointFormat) numberFormat);
 			} else {
 				throw new IllegalArgumentException();
 			}
@@ -209,36 +190,28 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			return true;
 		}
 		
-		private void writeFloatingPointMultiplicativeExpression(Expression leftOperand, ListIterator<MultiplicativeExpressionPart> rightParts, FloatingPointFormat floatingPointFormat) {
-			MultiplicativeExpressionPart part = rightParts.previous();
-			if (rightParts.hasPrevious()) {
-				writeFloatingPointMultiplicativeExpression(leftOperand, rightParts, floatingPointFormat);
-			} else {
-				castToFloatingPoint(leftOperand, floatingPointFormat);
-			}
+		private void writeFloatingPointMultiplicativeExpression(MultiplicativeOperator operator, Expression leftOperand, Expression rightOperand, FloatingPointFormat floatingPointFormat) {
+			castToFloatingPoint(leftOperand, floatingPointFormat);
 			writer.print(" ");
-			writer.print(part.getOperator().getLiteral());
+			writer.print(operator.getLiteral());
 			writer.print(" ");
-			castToFloatingPoint(part.getOperand(), floatingPointFormat);
+			castToFloatingPoint(rightOperand, floatingPointFormat);
 		}
 		
-		private void writeFixedPointMultiplicativeExpression(Expression leftOperand, ListIterator<MultiplicativeExpressionPart> rightParts, FixedPointFormat fixedPointFormat) {
-			MultiplicativeExpressionPart part = rightParts.previous();
-			rightParts.next();
-			switch (part.getOperator()) {
+		private void writeFixedPointMultiplicativeExpression(MultiplicativeOperator operator, Expression leftOperand, Expression rightOperand, FixedPointFormat fixedPointFormat) {
+			switch (operator) {
 			case MULTIPLY:
-				writeFixedPointMultiplicationExpression(leftOperand, rightParts, fixedPointFormat);
+				writeFixedPointMultiplicationExpression(leftOperand, rightOperand, fixedPointFormat);
 				break;
 			case DIVIDE:
-				writeFixedPointDivisionExpression(leftOperand, rightParts, fixedPointFormat);
+				writeFixedPointDivisionExpression(leftOperand, rightOperand, fixedPointFormat);
 				break;
 			default:
 				throw new IllegalArgumentException();
 			}
 		}
 		
-		private void writeFixedPointMultiplicationExpression(Expression leftOperand, ListIterator<MultiplicativeExpressionPart> rightParts, FixedPointFormat fixedPointFormat) {
-			MultiplicativeExpressionPart part = rightParts.previous();
+		private void writeFixedPointMultiplicationExpression(Expression leftOperand, Expression rightOperand, FixedPointFormat fixedPointFormat) {
 			FixedPointOperation operation = ComputationModelUtil.getFixedPointOperation(fixedPointFormat, FixedPointOperationKind.MULTIPLY);
 			
 			boolean hasIntermediateWordSize = operation.getIntermediateWordSize() != fixedPointFormat.getWordSize();
@@ -251,21 +224,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 				writer.print("(");
 			}
 			
-			boolean castExplicitly = rightParts.hasPrevious() && hasIntermediateWordSize;
-			
-			if (castExplicitly) {
-				writer.printf("(int%d_t) (", operation.getIntermediateWordSize());
-			}
-	
-			if (rightParts.hasPrevious()) {
-				writeFixedPointMultiplicativeExpression(leftOperand, rightParts, fixedPointFormat);
-			} else {
-				castToFixedPoint(leftOperand, operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength());
-			}
-			
-			if (castExplicitly) {
-				writer.print(")");
-			}
+			castToFixedPoint(leftOperand, operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength());
 			
 			writer.print(" * ");
 			
@@ -273,7 +232,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 				writer.print("(");
 			}
 	
-			castToFixedPoint(part.getOperand(), operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength());
+			castToFixedPoint(rightOperand, operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength());
 			
 			if (fixedPointFormat.getFractionLength() > 0) {
 				writer.printf(") >> %d", fixedPointFormat.getFractionLength());
@@ -284,8 +243,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			}
 		}
 	
-		private void writeFixedPointDivisionExpression(Expression leftOperand, ListIterator<MultiplicativeExpressionPart> rightParts, FixedPointFormat fixedPointFormat) {
-			MultiplicativeExpressionPart part = rightParts.previous();
+		private void writeFixedPointDivisionExpression(Expression leftOperand, Expression rightOperand, FixedPointFormat fixedPointFormat) {
 			FixedPointOperation operation = ComputationModelUtil.getFixedPointOperation(fixedPointFormat, FixedPointOperationKind.DIVIDE);
 			
 			boolean hasIntermediateWordSize = operation.getIntermediateWordSize() != fixedPointFormat.getWordSize();
@@ -295,36 +253,18 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			}
 			
 			if (fixedPointFormat.getFractionLength() > 0) {
-				writer.print("(");
+				writer.print("((");
 			}
 	
-			boolean castExplicitly = rightParts.hasPrevious() && hasIntermediateWordSize;
-			
-			if (castExplicitly) {
-				writer.printf("(int%d_t) ", operation.getIntermediateWordSize());
-			}
-			
-			if (castExplicitly || fixedPointFormat.getFractionLength() > 0) {
-				writer.print("(");
-			}
-	
-			if (rightParts.hasPrevious()) {
-				writeFixedPointMultiplicativeExpression(leftOperand, rightParts, fixedPointFormat);
-			} else {
-				castToFixedPoint(leftOperand, operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength());
-			}
-			
-			if (castExplicitly || fixedPointFormat.getFractionLength() > 0) {
-				writer.print(")");
-			}
+			castToFixedPoint(leftOperand, operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength());
 			
 			if (fixedPointFormat.getFractionLength() > 0) {
-				writer.printf(" << %d)", fixedPointFormat.getFractionLength());
+				writer.printf(") << %d)", fixedPointFormat.getFractionLength());
 			}
 	
 			writer.print(" / ");
 			
-			castToFixedPoint(part.getOperand(), operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength());
+			castToFixedPoint(rightOperand, operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength());
 			
 			if (hasIntermediateWordSize) {
 				writer.print(")");
