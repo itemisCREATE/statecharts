@@ -9,6 +9,7 @@ package org.eclipselabs.mscript.language.ast.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipselabs.mscript.language.ast.*;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
@@ -190,6 +191,19 @@ public class AstSwitch<T> extends Switch<T> {
 				T result = caseFunctionDefinition(functionDefinition);
 				if (result == null) result = caseDefinition(functionDefinition);
 				if (result == null) result = caseCallableElement(functionDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.TEST: {
+				Test test = (Test)theEObject;
+				T result = caseTest(test);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.STATIC_TEST: {
+				StaticTest staticTest = (StaticTest)theEObject;
+				T result = caseStaticTest(staticTest);
+				if (result == null) result = caseTest(staticTest);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -692,6 +706,36 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseFunctionDefinition(FunctionDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Test</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Test</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTest(Test object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Static Test</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Static Test</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStaticTest(StaticTest object) {
 		return null;
 	}
 

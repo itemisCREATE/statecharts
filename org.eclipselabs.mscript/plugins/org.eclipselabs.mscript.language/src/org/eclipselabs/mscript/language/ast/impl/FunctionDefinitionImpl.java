@@ -23,6 +23,7 @@ import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.Test;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,6 +36,7 @@ import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getTemplateParameterDeclarations <em>Template Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getInputParameterDeclarations <em>Input Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getOutputParameterDeclarations <em>Output Parameter Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getTests <em>Tests</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getAssertions <em>Assertions</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getFunctionObjectDeclarations <em>Function Object Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getStateVariableDeclarations <em>State Variable Declarations</em>}</li>
@@ -94,6 +96,16 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 	 * @ordered
 	 */
 	protected EList<ParameterDeclaration> outputParameterDeclarations;
+
+	/**
+	 * The cached value of the '{@link #getTests() <em>Tests</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTests()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Test> tests;
 
 	/**
 	 * The cached value of the '{@link #getAssertions() <em>Assertions</em>}' containment reference list.
@@ -216,6 +228,18 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Test> getTests() {
+		if (tests == null) {
+			tests = new EObjectContainmentEList<Test>(Test.class, this, AstPackage.FUNCTION_DEFINITION__TESTS);
+		}
+		return tests;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Assertion> getAssertions() {
 		if (assertions == null) {
 			assertions = new EObjectContainmentEList<Assertion>(Assertion.class, this, AstPackage.FUNCTION_DEFINITION__ASSERTIONS);
@@ -284,6 +308,8 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 				return ((InternalEList<?>)getInputParameterDeclarations()).basicRemove(otherEnd, msgs);
 			case AstPackage.FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS:
 				return ((InternalEList<?>)getOutputParameterDeclarations()).basicRemove(otherEnd, msgs);
+			case AstPackage.FUNCTION_DEFINITION__TESTS:
+				return ((InternalEList<?>)getTests()).basicRemove(otherEnd, msgs);
 			case AstPackage.FUNCTION_DEFINITION__ASSERTIONS:
 				return ((InternalEList<?>)getAssertions()).basicRemove(otherEnd, msgs);
 			case AstPackage.FUNCTION_DEFINITION__FUNCTION_OBJECT_DECLARATIONS:
@@ -312,6 +338,8 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 				return getInputParameterDeclarations();
 			case AstPackage.FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS:
 				return getOutputParameterDeclarations();
+			case AstPackage.FUNCTION_DEFINITION__TESTS:
+				return getTests();
 			case AstPackage.FUNCTION_DEFINITION__ASSERTIONS:
 				return getAssertions();
 			case AstPackage.FUNCTION_DEFINITION__FUNCTION_OBJECT_DECLARATIONS:
@@ -347,6 +375,10 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 			case AstPackage.FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS:
 				getOutputParameterDeclarations().clear();
 				getOutputParameterDeclarations().addAll((Collection<? extends ParameterDeclaration>)newValue);
+				return;
+			case AstPackage.FUNCTION_DEFINITION__TESTS:
+				getTests().clear();
+				getTests().addAll((Collection<? extends Test>)newValue);
 				return;
 			case AstPackage.FUNCTION_DEFINITION__ASSERTIONS:
 				getAssertions().clear();
@@ -388,6 +420,9 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 			case AstPackage.FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS:
 				getOutputParameterDeclarations().clear();
 				return;
+			case AstPackage.FUNCTION_DEFINITION__TESTS:
+				getTests().clear();
+				return;
 			case AstPackage.FUNCTION_DEFINITION__ASSERTIONS:
 				getAssertions().clear();
 				return;
@@ -420,6 +455,8 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 				return inputParameterDeclarations != null && !inputParameterDeclarations.isEmpty();
 			case AstPackage.FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS:
 				return outputParameterDeclarations != null && !outputParameterDeclarations.isEmpty();
+			case AstPackage.FUNCTION_DEFINITION__TESTS:
+				return tests != null && !tests.isEmpty();
 			case AstPackage.FUNCTION_DEFINITION__ASSERTIONS:
 				return assertions != null && !assertions.isEmpty();
 			case AstPackage.FUNCTION_DEFINITION__FUNCTION_OBJECT_DECLARATIONS:

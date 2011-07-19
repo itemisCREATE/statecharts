@@ -72,11 +72,13 @@ import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.RelationalOperator;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.StaticTest;
 import org.eclipselabs.mscript.language.ast.StepExpression;
 import org.eclipselabs.mscript.language.ast.StepLiteral;
 import org.eclipselabs.mscript.language.ast.StepN;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
+import org.eclipselabs.mscript.language.ast.Test;
 import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
@@ -154,6 +156,20 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * @generated
 	 */
 	private EClass functionDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass testEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass staticTestEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -833,7 +849,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFunctionDefinition_Assertions() {
+	public EReference getFunctionDefinition_Tests() {
 		return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -842,7 +858,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFunctionDefinition_FunctionObjectDeclarations() {
+	public EReference getFunctionDefinition_Assertions() {
 		return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -851,7 +867,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFunctionDefinition_StateVariableDeclarations() {
+	public EReference getFunctionDefinition_FunctionObjectDeclarations() {
 		return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -860,8 +876,62 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFunctionDefinition_Equations() {
+	public EReference getFunctionDefinition_StateVariableDeclarations() {
 		return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFunctionDefinition_Equations() {
+		return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTest() {
+		return testEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStaticTest() {
+		return staticTestEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStaticTest_TemplateArguments() {
+		return (EReference)staticTestEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStaticTest_InputParameterTypes() {
+		return (EReference)staticTestEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStaticTest_OutputParameterTypes() {
+		return (EReference)staticTestEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2262,10 +2332,18 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__TEMPLATE_PARAMETER_DECLARATIONS);
 		createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__INPUT_PARAMETER_DECLARATIONS);
 		createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS);
+		createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__TESTS);
 		createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__ASSERTIONS);
 		createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__FUNCTION_OBJECT_DECLARATIONS);
 		createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS);
 		createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__EQUATIONS);
+
+		testEClass = createEClass(TEST);
+
+		staticTestEClass = createEClass(STATIC_TEST);
+		createEReference(staticTestEClass, STATIC_TEST__TEMPLATE_ARGUMENTS);
+		createEReference(staticTestEClass, STATIC_TEST__INPUT_PARAMETER_TYPES);
+		createEReference(staticTestEClass, STATIC_TEST__OUTPUT_PARAMETER_TYPES);
 
 		callableElementEClass = createEClass(CALLABLE_ELEMENT);
 
@@ -2508,6 +2586,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		recordDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
 		functionDefinitionEClass.getESuperTypes().add(this.getDefinition());
 		functionDefinitionEClass.getESuperTypes().add(this.getCallableElement());
+		staticTestEClass.getESuperTypes().add(this.getTest());
 		parameterDeclarationEClass.getESuperTypes().add(this.getCallableElement());
 		stateVariableDeclarationEClass.getESuperTypes().add(this.getCallableElement());
 		functionObjectDeclarationEClass.getESuperTypes().add(this.getCallableElement());
@@ -2582,10 +2661,18 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		initEReference(getFunctionDefinition_TemplateParameterDeclarations(), this.getParameterDeclaration(), null, "templateParameterDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunctionDefinition_InputParameterDeclarations(), this.getParameterDeclaration(), null, "inputParameterDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunctionDefinition_OutputParameterDeclarations(), this.getParameterDeclaration(), null, "outputParameterDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunctionDefinition_Tests(), this.getTest(), null, "tests", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunctionDefinition_Assertions(), this.getAssertion(), null, "assertions", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunctionDefinition_FunctionObjectDeclarations(), this.getFunctionObjectDeclaration(), null, "functionObjectDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunctionDefinition_StateVariableDeclarations(), this.getStateVariableDeclaration(), null, "stateVariableDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunctionDefinition_Equations(), this.getEquation(), null, "equations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(testEClass, Test.class, "Test", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(staticTestEClass, StaticTest.class, "StaticTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStaticTest_TemplateArguments(), theTypeSystemPackage.getExpression(), null, "templateArguments", null, 0, -1, StaticTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStaticTest_InputParameterTypes(), this.getDataTypeSpecifier(), null, "inputParameterTypes", null, 0, -1, StaticTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStaticTest_OutputParameterTypes(), this.getDataTypeSpecifier(), null, "outputParameterTypes", null, 0, -1, StaticTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(callableElementEClass, CallableElement.class, "CallableElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

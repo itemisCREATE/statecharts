@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getTemplateParameterDeclarations <em>Template Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getInputParameterDeclarations <em>Input Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getOutputParameterDeclarations <em>Output Parameter Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getTests <em>Tests</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertions <em>Assertions</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctionObjectDeclarations <em>Function Object Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getStateVariableDeclarations <em>State Variable Declarations</em>}</li>
@@ -105,6 +106,22 @@ public interface FunctionDefinition extends Definition, CallableElement {
 	 * @generated
 	 */
 	EList<ParameterDeclaration> getOutputParameterDeclarations();
+
+	/**
+	 * Returns the value of the '<em><b>Tests</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipselabs.mscript.language.ast.Test}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Tests</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Tests</em>' containment reference list.
+	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_Tests()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Test> getTests();
 
 	/**
 	 * Returns the value of the '<em><b>Assertions</b></em>' containment reference list.

@@ -195,7 +195,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getParameterDeclaration()
 	 * @generated
 	 */
-	int PARAMETER_DECLARATION = 10;
+	int PARAMETER_DECLARATION = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.AssertionImpl <em>Assertion</em>}' class.
@@ -205,7 +205,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAssertion()
 	 * @generated
 	 */
-	int ASSERTION = 11;
+	int ASSERTION = 13;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.StateVariableDeclarationImpl <em>State Variable Declaration</em>}' class.
@@ -215,7 +215,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStateVariableDeclaration()
 	 * @generated
 	 */
-	int STATE_VARIABLE_DECLARATION = 12;
+	int STATE_VARIABLE_DECLARATION = 14;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.FunctionObjectDeclarationImpl <em>Function Object Declaration</em>}' class.
@@ -225,7 +225,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFunctionObjectDeclaration()
 	 * @generated
 	 */
-	int FUNCTION_OBJECT_DECLARATION = 13;
+	int FUNCTION_OBJECT_DECLARATION = 15;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.EquationImpl <em>Equation</em>}' class.
@@ -235,7 +235,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getEquation()
 	 * @generated
 	 */
-	int EQUATION = 14;
+	int EQUATION = 16;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -427,13 +427,22 @@ public interface AstPackage extends EPackage {
 	int FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS = DEFINITION_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Tests</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_DEFINITION__TESTS = DEFINITION_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Assertions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_DEFINITION__ASSERTIONS = DEFINITION_FEATURE_COUNT + 4;
+	int FUNCTION_DEFINITION__ASSERTIONS = DEFINITION_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Function Object Declarations</b></em>' containment reference list.
@@ -442,7 +451,7 @@ public interface AstPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_DEFINITION__FUNCTION_OBJECT_DECLARATIONS = DEFINITION_FEATURE_COUNT + 5;
+	int FUNCTION_DEFINITION__FUNCTION_OBJECT_DECLARATIONS = DEFINITION_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>State Variable Declarations</b></em>' containment reference list.
@@ -451,7 +460,7 @@ public interface AstPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS = DEFINITION_FEATURE_COUNT + 6;
+	int FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS = DEFINITION_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Equations</b></em>' containment reference list.
@@ -460,7 +469,7 @@ public interface AstPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_DEFINITION__EQUATIONS = DEFINITION_FEATURE_COUNT + 7;
+	int FUNCTION_DEFINITION__EQUATIONS = DEFINITION_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Function Definition</em>' class.
@@ -469,7 +478,72 @@ public interface AstPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 8;
+	int FUNCTION_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 9;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.TestImpl <em>Test</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.TestImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getTest()
+	 * @generated
+	 */
+	int TEST = 9;
+
+	/**
+	 * The number of structural features of the '<em>Test</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.StaticTestImpl <em>Static Test</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.StaticTestImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStaticTest()
+	 * @generated
+	 */
+	int STATIC_TEST = 10;
+
+	/**
+	 * The feature id for the '<em><b>Template Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEST__TEMPLATE_ARGUMENTS = TEST_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Input Parameter Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEST__INPUT_PARAMETER_TYPES = TEST_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Output Parameter Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEST__OUTPUT_PARAMETER_TYPES = TEST_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Static Test</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEST_FEATURE_COUNT = TEST_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.CallableElementImpl <em>Callable Element</em>}' class.
@@ -479,7 +553,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getCallableElement()
 	 * @generated
 	 */
-	int CALLABLE_ELEMENT = 9;
+	int CALLABLE_ELEMENT = 11;
 
 	/**
 	 * The number of structural features of the '<em>Callable Element</em>' class.
@@ -642,7 +716,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getDataTypeSpecifier()
 	 * @generated
 	 */
-	int DATA_TYPE_SPECIFIER = 15;
+	int DATA_TYPE_SPECIFIER = 17;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -679,7 +753,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLetExpression()
 	 * @generated
 	 */
-	int LET_EXPRESSION = 16;
+	int LET_EXPRESSION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Variable Declarations</b></em>' containment reference list.
@@ -716,7 +790,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLetExpressionVariableDeclaration()
 	 * @generated
 	 */
-	int LET_EXPRESSION_VARIABLE_DECLARATION = 17;
+	int LET_EXPRESSION_VARIABLE_DECLARATION = 19;
 
 	/**
 	 * The feature id for the '<em><b>Parts</b></em>' containment reference list.
@@ -753,7 +827,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLetExpressionVariableDeclarationPart()
 	 * @generated
 	 */
-	int LET_EXPRESSION_VARIABLE_DECLARATION_PART = 18;
+	int LET_EXPRESSION_VARIABLE_DECLARATION_PART = 20;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -781,7 +855,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIfExpression()
 	 * @generated
 	 */
-	int IF_EXPRESSION = 19;
+	int IF_EXPRESSION = 21;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -836,7 +910,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getSwitchExpression()
 	 * @generated
 	 */
-	int SWITCH_EXPRESSION = 20;
+	int SWITCH_EXPRESSION = 22;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -891,7 +965,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getSwitchCase()
 	 * @generated
 	 */
-	int SWITCH_CASE = 21;
+	int SWITCH_CASE = 23;
 
 	/**
 	 * The feature id for the '<em><b>Case Expression</b></em>' containment reference.
@@ -928,7 +1002,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArrayElementAccess()
 	 * @generated
 	 */
-	int ARRAY_ELEMENT_ACCESS = 22;
+	int ARRAY_ELEMENT_ACCESS = 24;
 
 	/**
 	 * The feature id for the '<em><b>Array</b></em>' containment reference.
@@ -965,7 +1039,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArraySubscript()
 	 * @generated
 	 */
-	int ARRAY_SUBSCRIPT = 23;
+	int ARRAY_SUBSCRIPT = 25;
 
 	/**
 	 * The feature id for the '<em><b>Slice</b></em>' attribute.
@@ -1002,7 +1076,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIterationCall()
 	 * @generated
 	 */
-	int ITERATION_CALL = 24;
+	int ITERATION_CALL = 26;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' containment reference.
@@ -1075,7 +1149,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIterationVariable()
 	 * @generated
 	 */
-	int ITERATION_VARIABLE = 25;
+	int ITERATION_VARIABLE = 27;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1103,7 +1177,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIterationAccumulator()
 	 * @generated
 	 */
-	int ITERATION_ACCUMULATOR = 26;
+	int ITERATION_ACCUMULATOR = 28;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1140,7 +1214,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArrayConstructionOperator()
 	 * @generated
 	 */
-	int ARRAY_CONSTRUCTION_OPERATOR = 27;
+	int ARRAY_CONSTRUCTION_OPERATOR = 29;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -1177,7 +1251,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArrayConstructionIterationClause()
 	 * @generated
 	 */
-	int ARRAY_CONSTRUCTION_ITERATION_CLAUSE = 28;
+	int ARRAY_CONSTRUCTION_ITERATION_CLAUSE = 30;
 
 	/**
 	 * The feature id for the '<em><b>Variable Name</b></em>' attribute.
@@ -1214,7 +1288,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArrayConcatenationOperator()
 	 * @generated
 	 */
-	int ARRAY_CONCATENATION_OPERATOR = 29;
+	int ARRAY_CONCATENATION_OPERATOR = 31;
 
 	/**
 	 * The feature id for the '<em><b>Rows</b></em>' containment reference list.
@@ -1242,7 +1316,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getExpressionList()
 	 * @generated
 	 */
-	int EXPRESSION_LIST = 30;
+	int EXPRESSION_LIST = 32;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -1270,7 +1344,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnitConstructionOperator()
 	 * @generated
 	 */
-	int UNIT_CONSTRUCTION_OPERATOR = 31;
+	int UNIT_CONSTRUCTION_OPERATOR = 33;
 
 	/**
 	 * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -1298,7 +1372,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getParenthesizedExpression()
 	 * @generated
 	 */
-	int PARENTHESIZED_EXPRESSION = 32;
+	int PARENTHESIZED_EXPRESSION = 34;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -1326,7 +1400,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBeginExpression()
 	 * @generated
 	 */
-	int BEGIN_EXPRESSION = 33;
+	int BEGIN_EXPRESSION = 35;
 
 	/**
 	 * The number of structural features of the '<em>Begin Expression</em>' class.
@@ -1345,7 +1419,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getEndExpression()
 	 * @generated
 	 */
-	int END_EXPRESSION = 34;
+	int END_EXPRESSION = 36;
 
 	/**
 	 * The number of structural features of the '<em>End Expression</em>' class.
@@ -1364,7 +1438,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRangeExpression()
 	 * @generated
 	 */
-	int RANGE_EXPRESSION = 35;
+	int RANGE_EXPRESSION = 37;
 
 	/**
 	 * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -1392,7 +1466,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getImpliesExpression()
 	 * @generated
 	 */
-	int IMPLIES_EXPRESSION = 36;
+	int IMPLIES_EXPRESSION = 38;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1429,7 +1503,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLogicalOrExpression()
 	 * @generated
 	 */
-	int LOGICAL_OR_EXPRESSION = 37;
+	int LOGICAL_OR_EXPRESSION = 39;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1466,7 +1540,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLogicalAndExpression()
 	 * @generated
 	 */
-	int LOGICAL_AND_EXPRESSION = 38;
+	int LOGICAL_AND_EXPRESSION = 40;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1503,7 +1577,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getEqualityExpression()
 	 * @generated
 	 */
-	int EQUALITY_EXPRESSION = 39;
+	int EQUALITY_EXPRESSION = 41;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1549,7 +1623,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRelationalExpression()
 	 * @generated
 	 */
-	int RELATIONAL_EXPRESSION = 40;
+	int RELATIONAL_EXPRESSION = 42;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1595,7 +1669,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getTypeTestExpression()
 	 * @generated
 	 */
-	int TYPE_TEST_EXPRESSION = 41;
+	int TYPE_TEST_EXPRESSION = 43;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1632,7 +1706,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAdditiveExpression()
 	 * @generated
 	 */
-	int ADDITIVE_EXPRESSION = 42;
+	int ADDITIVE_EXPRESSION = 44;
 
 	/**
 	 * The feature id for the '<em><b>Operator</b></em>' attribute.
@@ -1678,7 +1752,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMultiplicativeExpression()
 	 * @generated
 	 */
-	int MULTIPLICATIVE_EXPRESSION = 43;
+	int MULTIPLICATIVE_EXPRESSION = 45;
 
 	/**
 	 * The feature id for the '<em><b>Operator</b></em>' attribute.
@@ -1724,7 +1798,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPowerExpression()
 	 * @generated
 	 */
-	int POWER_EXPRESSION = 44;
+	int POWER_EXPRESSION = 46;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1770,7 +1844,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnaryExpression()
 	 * @generated
 	 */
-	int UNARY_EXPRESSION = 45;
+	int UNARY_EXPRESSION = 47;
 
 	/**
 	 * The feature id for the '<em><b>Operator</b></em>' attribute.
@@ -1807,7 +1881,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPostfixExpression()
 	 * @generated
 	 */
-	int POSTFIX_EXPRESSION = 46;
+	int POSTFIX_EXPRESSION = 48;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1844,7 +1918,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureCall()
 	 * @generated
 	 */
-	int FEATURE_CALL = 47;
+	int FEATURE_CALL = 49;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
@@ -1872,7 +1946,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getVariableAccess()
 	 * @generated
 	 */
-	int VARIABLE_ACCESS = 48;
+	int VARIABLE_ACCESS = 50;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
@@ -1909,7 +1983,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStepExpression()
 	 * @generated
 	 */
-	int STEP_EXPRESSION = 49;
+	int STEP_EXPRESSION = 51;
 
 	/**
 	 * The number of structural features of the '<em>Step Expression</em>' class.
@@ -1928,7 +2002,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRangeStepExpression()
 	 * @generated
 	 */
-	int RANGE_STEP_EXPRESSION = 50;
+	int RANGE_STEP_EXPRESSION = 52;
 
 	/**
 	 * The feature id for the '<em><b>Start</b></em>' containment reference.
@@ -1965,7 +2039,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAdditiveStepExpression()
 	 * @generated
 	 */
-	int ADDITIVE_STEP_EXPRESSION = 51;
+	int ADDITIVE_STEP_EXPRESSION = 53;
 
 	/**
 	 * The feature id for the '<em><b>Operator</b></em>' attribute.
@@ -2011,7 +2085,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getNegateStepExpression()
 	 * @generated
 	 */
-	int NEGATE_STEP_EXPRESSION = 52;
+	int NEGATE_STEP_EXPRESSION = 54;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -2039,7 +2113,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPrimitiveStepExpression()
 	 * @generated
 	 */
-	int PRIMITIVE_STEP_EXPRESSION = 53;
+	int PRIMITIVE_STEP_EXPRESSION = 55;
 
 	/**
 	 * The number of structural features of the '<em>Primitive Step Expression</em>' class.
@@ -2058,7 +2132,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStepLiteral()
 	 * @generated
 	 */
-	int STEP_LITERAL = 54;
+	int STEP_LITERAL = 56;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2086,7 +2160,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStepN()
 	 * @generated
 	 */
-	int STEP_N = 55;
+	int STEP_N = 57;
 
 	/**
 	 * The number of structural features of the '<em>Step N</em>' class.
@@ -2105,7 +2179,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFunctionCall()
 	 * @generated
 	 */
-	int FUNCTION_CALL = 56;
+	int FUNCTION_CALL = 58;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
@@ -2142,7 +2216,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMemberVariableAccess()
 	 * @generated
 	 */
-	int MEMBER_VARIABLE_ACCESS = 57;
+	int MEMBER_VARIABLE_ACCESS = 59;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' containment reference.
@@ -2179,7 +2253,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBuiltinDefinition()
 	 * @generated
 	 */
-	int BUILTIN_DEFINITION = 58;
+	int BUILTIN_DEFINITION = 60;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2207,7 +2281,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBuiltinFunction()
 	 * @generated
 	 */
-	int BUILTIN_FUNCTION = 59;
+	int BUILTIN_FUNCTION = 61;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2235,7 +2309,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBuiltinVariable()
 	 * @generated
 	 */
-	int BUILTIN_VARIABLE = 60;
+	int BUILTIN_VARIABLE = 62;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2263,7 +2337,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAssertionStatusKind()
 	 * @generated
 	 */
-	int ASSERTION_STATUS_KIND = 61;
+	int ASSERTION_STATUS_KIND = 63;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.EqualityOperator <em>Equality Operator</em>}' enum.
@@ -2273,7 +2347,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getEqualityOperator()
 	 * @generated
 	 */
-	int EQUALITY_OPERATOR = 62;
+	int EQUALITY_OPERATOR = 64;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -2283,7 +2357,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRelationalOperator()
 	 * @generated
 	 */
-	int RELATIONAL_OPERATOR = 63;
+	int RELATIONAL_OPERATOR = 65;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -2293,7 +2367,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAdditiveOperator()
 	 * @generated
 	 */
-	int ADDITIVE_OPERATOR = 64;
+	int ADDITIVE_OPERATOR = 66;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -2303,7 +2377,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMultiplicativeOperator()
 	 * @generated
 	 */
-	int MULTIPLICATIVE_OPERATOR = 65;
+	int MULTIPLICATIVE_OPERATOR = 67;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.PowerOperator <em>Power Operator</em>}' enum.
@@ -2313,7 +2387,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPowerOperator()
 	 * @generated
 	 */
-	int POWER_OPERATOR = 66;
+	int POWER_OPERATOR = 68;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -2323,7 +2397,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnaryOperator()
 	 * @generated
 	 */
-	int UNARY_OPERATOR = 67;
+	int UNARY_OPERATOR = 69;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.PostfixOperator <em>Postfix Operator</em>}' enum.
@@ -2333,7 +2407,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPostfixOperator()
 	 * @generated
 	 */
-	int POSTFIX_OPERATOR = 68;
+	int POSTFIX_OPERATOR = 70;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.Module <em>Module</em>}'.
@@ -2558,6 +2632,17 @@ public interface AstPackage extends EPackage {
 	EReference getFunctionDefinition_OutputParameterDeclarations();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getTests <em>Tests</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Tests</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getTests()
+	 * @see #getFunctionDefinition()
+	 * @generated
+	 */
+	EReference getFunctionDefinition_Tests();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertions <em>Assertions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2600,6 +2685,59 @@ public interface AstPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFunctionDefinition_Equations();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.Test <em>Test</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Test</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.Test
+	 * @generated
+	 */
+	EClass getTest();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.StaticTest <em>Static Test</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Static Test</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.StaticTest
+	 * @generated
+	 */
+	EClass getStaticTest();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.StaticTest#getTemplateArguments <em>Template Arguments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Template Arguments</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.StaticTest#getTemplateArguments()
+	 * @see #getStaticTest()
+	 * @generated
+	 */
+	EReference getStaticTest_TemplateArguments();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.StaticTest#getInputParameterTypes <em>Input Parameter Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Input Parameter Types</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.StaticTest#getInputParameterTypes()
+	 * @see #getStaticTest()
+	 * @generated
+	 */
+	EReference getStaticTest_InputParameterTypes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.StaticTest#getOutputParameterTypes <em>Output Parameter Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Output Parameter Types</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.StaticTest#getOutputParameterTypes()
+	 * @see #getStaticTest()
+	 * @generated
+	 */
+	EReference getStaticTest_OutputParameterTypes();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.CallableElement <em>Callable Element</em>}'.
@@ -4389,6 +4527,14 @@ public interface AstPackage extends EPackage {
 		EReference FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS = eINSTANCE.getFunctionDefinition_OutputParameterDeclarations();
 
 		/**
+		 * The meta object literal for the '<em><b>Tests</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FUNCTION_DEFINITION__TESTS = eINSTANCE.getFunctionDefinition_Tests();
+
+		/**
 		 * The meta object literal for the '<em><b>Assertions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4419,6 +4565,50 @@ public interface AstPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FUNCTION_DEFINITION__EQUATIONS = eINSTANCE.getFunctionDefinition_Equations();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.TestImpl <em>Test</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.TestImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getTest()
+		 * @generated
+		 */
+		EClass TEST = eINSTANCE.getTest();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.StaticTestImpl <em>Static Test</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.StaticTestImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStaticTest()
+		 * @generated
+		 */
+		EClass STATIC_TEST = eINSTANCE.getStaticTest();
+
+		/**
+		 * The meta object literal for the '<em><b>Template Arguments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATIC_TEST__TEMPLATE_ARGUMENTS = eINSTANCE.getStaticTest_TemplateArguments();
+
+		/**
+		 * The meta object literal for the '<em><b>Input Parameter Types</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATIC_TEST__INPUT_PARAMETER_TYPES = eINSTANCE.getStaticTest_InputParameterTypes();
+
+		/**
+		 * The meta object literal for the '<em><b>Output Parameter Types</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATIC_TEST__OUTPUT_PARAMETER_TYPES = eINSTANCE.getStaticTest_OutputParameterTypes();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.CallableElementImpl <em>Callable Element</em>}' class.

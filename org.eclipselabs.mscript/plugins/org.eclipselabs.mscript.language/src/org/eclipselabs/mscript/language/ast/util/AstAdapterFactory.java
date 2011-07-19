@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipselabs.mscript.language.ast.*;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
@@ -165,6 +166,14 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseFunctionDefinition(FunctionDefinition object) {
 				return createFunctionDefinitionAdapter();
+			}
+			@Override
+			public Adapter caseTest(Test object) {
+				return createTestAdapter();
+			}
+			@Override
+			public Adapter caseStaticTest(StaticTest object) {
+				return createStaticTestAdapter();
 			}
 			@Override
 			public Adapter caseCallableElement(CallableElement object) {
@@ -521,6 +530,34 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFunctionDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Test <em>Test</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.Test
+	 * @generated
+	 */
+	public Adapter createTestAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.StaticTest <em>Static Test</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.StaticTest
+	 * @generated
+	 */
+	public Adapter createStaticTestAdapter() {
 		return null;
 	}
 

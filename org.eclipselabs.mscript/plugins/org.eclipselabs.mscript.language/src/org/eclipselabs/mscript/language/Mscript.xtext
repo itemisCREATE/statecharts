@@ -72,7 +72,8 @@ FunctionDefinition:
 			('<' templateParameterDeclarations+=ParameterDeclaration (',' templateParameterDeclarations+=ParameterDeclaration)* '>')?
 			'(' (inputParameterDeclarations+=ParameterDeclaration (',' inputParameterDeclarations+=ParameterDeclaration)*)? ')'
 			'->' outputParameterDeclarations+=ParameterDeclaration (',' outputParameterDeclarations+=ParameterDeclaration)* '{'
-		(assertions+=Assertion |
+		(tests+=Test |
+		assertions+=Assertion |
 		functionObjectDeclarations+=FunctionObjectDeclaration |
 		stateVariableDeclarations+=StateVariableDeclaration |
 		equations+=Equation)*
@@ -80,6 +81,12 @@ FunctionDefinition:
 
 ParameterDeclaration:
 	name=ValidID;
+
+Test:
+	{StaticTest} 'static' 'test'
+			('<' templateArguments+=Expression (',' templateArguments+=Expression)* '>')?
+			'(' (inputParameterTypes+=DataTypeSpecifier (',' inputParameterTypes+=DataTypeSpecifier)*)? ')'
+			'->' outputParameterTypes+=DataTypeSpecifier (',' outputParameterTypes+=DataTypeSpecifier)* ';';
 
 enum AssertionStatusKind:
 	Info='info' |
@@ -186,7 +193,7 @@ enum EqualityOperator:
 	NotEqualTo='!=';
 	
 RelationalExpression returns Expression:
-	AdditiveExpression ({RelationalExpression.leftOperand=current} operator=RelationalOperator rightOperand=AdditiveExpression | {TypeTestExpression.expression=current} 'is' type=DataTypeSpecifier)?;
+	AdditiveExpression =>({RelationalExpression.leftOperand=current} operator=RelationalOperator rightOperand=AdditiveExpression | {TypeTestExpression.expression=current} 'is' type=DataTypeSpecifier)?;
 
 enum RelationalOperator:
 	LessThan='<' |

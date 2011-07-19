@@ -30,13 +30,20 @@ import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 
 	@Check
-	public void checkStatelessFunctionDefinition(FunctionDefinition functionDefinition) {
+	public void checkStatelessFunction(FunctionDefinition functionDefinition) {
 		if (!functionDefinition.isStateful()) {
 			for (StateVariableDeclaration stateVariableDeclaration : functionDefinition.getStateVariableDeclarations()) {
-				error("Stateless functions must not declare state variables", stateVariableDeclaration, null, -1);
+				error("The state variable " + stateVariableDeclaration.getName() + " can only be declared in a stateful function", stateVariableDeclaration, null, -1);
 			}
 		}
 	}
+
+//	@Check
+//	public void checkFunctionHasTest(FunctionDefinition functionDefinition) {
+//		if (functionDefinition.getTests().isEmpty()) {
+//			error("The function " + functionDefinition.getName() + " must define at least one test", functionDefinition, AstPackage.eINSTANCE.getDefinition_Name(), -1);
+//		}
+//	}
 
 	@Check
 	public void checkBeginExpressionMustBeInsideArraySubscript(BeginExpression beginExpression) {

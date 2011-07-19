@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipselabs.mscript.language.ast.*;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveOperator;
 import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
@@ -129,6 +130,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.RECORD_DEFINITION: return createRecordDefinition();
 			case AstPackage.RECORD_FIELD_DECLARATION: return createRecordFieldDeclaration();
 			case AstPackage.FUNCTION_DEFINITION: return createFunctionDefinition();
+			case AstPackage.STATIC_TEST: return createStaticTest();
 			case AstPackage.PARAMETER_DECLARATION: return createParameterDeclaration();
 			case AstPackage.ASSERTION: return createAssertion();
 			case AstPackage.STATE_VARIABLE_DECLARATION: return createStateVariableDeclaration();
@@ -308,6 +310,16 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public FunctionDefinition createFunctionDefinition() {
 		FunctionDefinitionImpl functionDefinition = new FunctionDefinitionImpl();
 		return functionDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StaticTest createStaticTest() {
+		StaticTestImpl staticTest = new StaticTestImpl();
+		return staticTest;
 	}
 
 	/**
