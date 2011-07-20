@@ -12,6 +12,7 @@ package de.itemis.gmf.runtime.commons.properties.descriptors;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
@@ -29,16 +30,34 @@ import de.itemis.xtext.utils.jface.viewers.XtextStyledText;
 public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 
 	private final Injector injector;
+	private final Resource context;
 
 	public XtextPropertyDescriptor(EAttribute feature, String labelName,
 			Injector injector) {
+		this(feature, labelName, injector, null);
+	}
+
+	public XtextPropertyDescriptor(EAttribute feature, String labelName,
+			Injector injector, Resource context) {
 		super(feature, labelName);
 		this.injector = injector;
+		this.context = context;
+	}
+
+	protected int getStyle() {
+		return SWT.MULTI | SWT.BORDER;
 	}
 
 	public StyledText createControl(Composite parent) {
-		XtextStyledText styledTextWrapper = new XtextStyledText(parent,
-				SWT.MULTI | SWT.BORDER, getInjector());
+		XtextStyledText styledTextWrapper = null;
+		if (context == null) {
+			styledTextWrapper = new XtextStyledText(parent, getStyle(),
+					getInjector());
+		} else {
+			styledTextWrapper = new XtextStyledText(parent, getStyle(),
+					getInjector(), context);
+		}
+
 		GridDataFactory.fillDefaults().grab(true, true)
 				.applyTo(styledTextWrapper.getStyledText());
 		return (StyledText) styledTextWrapper.getStyledText();
