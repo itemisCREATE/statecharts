@@ -23,13 +23,14 @@ import com.google.inject.Injector;
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.TextPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.XtextPropertyDescriptor;
+
 /**
  * Property Section for {@link StateEditPart}s. Consists of a
  * {@link TextPropertyDescriptor} for the name field and an
  * {@link XtextPropertyDescriptor} for the expression.
  * 
  * @author andreas muelder
- *
+ * 
  */
 public class StatePropertySection extends NamePropertySection {
 
@@ -40,7 +41,7 @@ public class StatePropertySection extends NamePropertySection {
 
 		XtextPropertyDescriptor expressionsDescriptor = new XtextPropertyDescriptor(
 				SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
-				"Expression: ", getInjector());
+				"Expression: ", getInjector(), getActiveEditorResource());
 		descriptors.add(expressionsDescriptor);
 	}
 
@@ -48,8 +49,7 @@ public class StatePropertySection extends NamePropertySection {
 		Extensions<IExpressionsProvider> extensions = new Extensions<IExpressionsProvider>(
 				IExpressionsProvider.EXPRESSIONS_EXTENSION);
 		IExpressionsProvider registeredProvider = extensions
-				.getRegisteredProvider(SGraphFactory.eINSTANCE
-						.createState());
+				.getRegisteredProvider(SGraphFactory.eINSTANCE.createState());
 		return registeredProvider.getInjector();
 	}
 }

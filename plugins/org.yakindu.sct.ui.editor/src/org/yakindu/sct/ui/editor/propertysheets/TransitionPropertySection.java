@@ -20,7 +20,6 @@ import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
 
 import com.google.inject.Injector;
 
-import de.itemis.gmf.runtime.commons.properties.GenericFormBasedPropertySection;
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.XtextPropertyDescriptor;
 
@@ -31,15 +30,16 @@ import de.itemis.gmf.runtime.commons.properties.descriptors.XtextPropertyDescrip
  * @author andreas muelder
  * 
  */
-public class TransitionPropertySection extends GenericFormBasedPropertySection {
+public class TransitionPropertySection extends AbstractEditorPropertySection {
 
 	@Override
 	protected void createPropertyDescriptors(
 			List<IFormPropertyDescriptor> descriptors) {
 		XtextPropertyDescriptor expressionsDescriptor = new XtextPropertyDescriptor(
 				SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
-				"Expression: ", getInjector());
+				"Expression: ", getInjector(), getActiveEditorResource());
 		descriptors.add(expressionsDescriptor);
+
 	}
 
 	protected Injector getInjector() {

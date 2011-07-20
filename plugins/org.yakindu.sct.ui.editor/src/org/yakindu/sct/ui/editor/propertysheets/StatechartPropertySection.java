@@ -20,7 +20,6 @@ import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
 
 import com.google.inject.Injector;
 
-import de.itemis.gmf.runtime.commons.properties.GenericFormBasedPropertySection;
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.TextPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.XtextPropertyDescriptor;
@@ -33,7 +32,7 @@ import de.itemis.gmf.runtime.commons.properties.descriptors.XtextPropertyDescrip
  * @author andreas muelder
  * 
  */
-public class StatechartPropertySection extends GenericFormBasedPropertySection {
+public class StatechartPropertySection extends AbstractEditorPropertySection {
 
 	@Override
 	protected void createPropertyDescriptors(

@@ -5,7 +5,6 @@ import java.util.List;
 import org.yakindu.sct.model.sgraph.NamedElement;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
-import de.itemis.gmf.runtime.commons.properties.GenericFormBasedPropertySection;
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.TextPropertyDescriptor;
 /**
@@ -13,12 +12,11 @@ import de.itemis.gmf.runtime.commons.properties.descriptors.TextPropertyDescript
  * @author andreas muelder
  *
  */
-public abstract class NamePropertySection extends GenericFormBasedPropertySection{
+public abstract class NamePropertySection extends AbstractEditorPropertySection{
 
 	@Override
 	protected void createPropertyDescriptors(
 			List<IFormPropertyDescriptor> descriptors) {
-		// Text Property Descriptor for the name
 		TextPropertyDescriptor nameDescriptor = new TextPropertyDescriptor(
 				SGraphPackage.Literals.NAMED_ELEMENT__NAME, "Name: ");
 		descriptors.add(nameDescriptor);
