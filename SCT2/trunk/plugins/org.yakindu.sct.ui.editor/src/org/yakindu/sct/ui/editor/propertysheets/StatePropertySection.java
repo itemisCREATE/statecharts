@@ -22,6 +22,7 @@ import com.google.inject.Injector;
 
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.TextPropertyDescriptor;
+import de.itemis.gmf.runtime.commons.properties.descriptors.XtextPropertyDescriptor;
 /**
  * Property Section for {@link StateEditPart}s. Consists of a
  * {@link TextPropertyDescriptor} for the name field and an

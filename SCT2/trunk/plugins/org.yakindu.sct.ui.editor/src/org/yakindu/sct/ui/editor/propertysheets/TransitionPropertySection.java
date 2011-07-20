@@ -22,6 +22,7 @@ import com.google.inject.Injector;
 
 import de.itemis.gmf.runtime.commons.properties.GenericFormBasedPropertySection;
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
+import de.itemis.gmf.runtime.commons.properties.descriptors.XtextPropertyDescriptor;
 
 /**
  * Property Section for {@link TransitionEditPart}s. Consists of a
