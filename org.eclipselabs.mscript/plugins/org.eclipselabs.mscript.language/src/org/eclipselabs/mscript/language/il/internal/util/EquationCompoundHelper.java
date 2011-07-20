@@ -13,10 +13,12 @@ package org.eclipselabs.mscript.language.il.internal.util;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
@@ -68,18 +70,32 @@ public class EquationCompoundHelper {
 	private static class EquationComparator implements Comparator<EquationDescriptor> {
 		
 		public int compare(EquationDescriptor equationDescriptor1, EquationDescriptor equationDescriptor2) {
+			Set<EquationDescriptor> equations = new HashSet<EquationDescriptor>();
 			TreeIterator<EquationDescriptor> definingEquations = new EquationIterator(equationDescriptor1);
 			while (definingEquations.hasNext()) {
-				if (definingEquations.next() == equationDescriptor2) {
+				EquationDescriptor next = definingEquations.next();
+				// Break cycle
+				if (!equations.add(next)) {
+					return 0;
+				}
+				if (next == equationDescriptor2) {
 					return 1;
 				}
 			}
+
+			equations = new HashSet<EquationDescriptor>();
 			definingEquations = new EquationIterator(equationDescriptor2);
 			while (definingEquations.hasNext()) {
-				if (definingEquations.next() == equationDescriptor1) {
+				EquationDescriptor next = definingEquations.next();
+				// Break cycle
+				if (!equations.add(next)) {
+					return 0;
+				}
+				if (next == equationDescriptor1) {
 					return -1;
 				}
 			}
+			
 			return 0;
 		}
 
