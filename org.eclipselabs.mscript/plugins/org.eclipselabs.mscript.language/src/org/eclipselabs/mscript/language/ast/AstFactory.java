@@ -89,13 +89,13 @@ public interface AstFactory extends EFactory {
 	FunctionDefinition createFunctionDefinition();
 
 	/**
-	 * Returns a new object of class '<em>Static Test</em>'.
+	 * Returns a new object of class '<em>Check</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Static Test</em>'.
+	 * @return a new object of class '<em>Check</em>'.
 	 * @generated
 	 */
-	StaticTest createStaticTest();
+	Check createCheck();
 
 	/**
 	 * Returns a new object of class '<em>Parameter Declaration</em>'.

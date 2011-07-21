@@ -165,7 +165,7 @@
       </elements>
       <elements xsi:type="xtext:Keyword" value="{"/>
       <elements xsi:type="xtext:Alternatives" cardinality="*">
-        <elements xsi:type="xtext:Assignment" feature="tests" operator="+=">
+        <elements xsi:type="xtext:Assignment" feature="checks" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="//@rules.10"/>
         </elements>
         <elements xsi:type="xtext:Assignment" feature="assertions" operator="+=">
@@ -192,18 +192,12 @@
       <terminal xsi:type="xtext:RuleCall" rule="//@rules.90"/>
     </alternatives>
   </rules>
-  <rules xsi:type="xtext:ParserRule" name="Test">
+  <rules xsi:type="xtext:ParserRule" name="Check">
     <type metamodel="//@metamodelDeclarations.1">
-      <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//Test"/>
+      <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//Check"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <elements xsi:type="xtext:Action">
-        <type metamodel="//@metamodelDeclarations.1">
-          <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//StaticTest"/>
-        </type>
-      </elements>
-      <elements xsi:type="xtext:Keyword" value="static"/>
-      <elements xsi:type="xtext:Keyword" value="test"/>
+      <elements xsi:type="xtext:Keyword" value="check"/>
       <elements xsi:type="xtext:Group" cardinality="?">
         <elements xsi:type="xtext:Keyword" value="&lt;"/>
         <elements xsi:type="xtext:Assignment" feature="templateArguments" operator="+=">

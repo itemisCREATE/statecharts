@@ -40,8 +40,8 @@
         upperBound="-1" eType="#//ParameterDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputParameterDeclarations"
         upperBound="-1" eType="#//ParameterDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tests" upperBound="-1"
-        eType="#//Test" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="checks" upperBound="-1"
+        eType="#//Check" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="assertions" upperBound="-1"
         eType="#//Assertion" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="functionObjectDeclarations"
@@ -51,8 +51,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="equations" upperBound="-1"
         eType="#//Equation" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Test" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="StaticTest" eSuperTypes="#//Test">
+  <eClassifiers xsi:type="ecore:EClass" name="Check">
     <eStructuralFeatures xsi:type="ecore:EReference" name="templateArguments" upperBound="-1"
         eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>

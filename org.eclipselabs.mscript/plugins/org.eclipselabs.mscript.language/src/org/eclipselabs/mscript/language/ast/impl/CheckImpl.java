@@ -9,37 +9,33 @@ package org.eclipselabs.mscript.language.ast.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipselabs.mscript.language.ast.AstPackage;
+import org.eclipselabs.mscript.language.ast.Check;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.StaticTest;
-
 import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Static Test</b></em>'.
+ * An implementation of the model object '<em><b>Check</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.StaticTestImpl#getTemplateArguments <em>Template Arguments</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.StaticTestImpl#getInputParameterTypes <em>Input Parameter Types</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.StaticTestImpl#getOutputParameterTypes <em>Output Parameter Types</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.CheckImpl#getTemplateArguments <em>Template Arguments</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.CheckImpl#getInputParameterTypes <em>Input Parameter Types</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.CheckImpl#getOutputParameterTypes <em>Output Parameter Types</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class StaticTestImpl extends TestImpl implements StaticTest {
+public class CheckImpl extends MinimalEObjectImpl.Container implements Check {
 	/**
 	 * The cached value of the '{@link #getTemplateArguments() <em>Template Arguments</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -75,7 +71,7 @@ public class StaticTestImpl extends TestImpl implements StaticTest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected StaticTestImpl() {
+	protected CheckImpl() {
 		super();
 	}
 
@@ -86,7 +82,7 @@ public class StaticTestImpl extends TestImpl implements StaticTest {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return AstPackage.Literals.STATIC_TEST;
+		return AstPackage.Literals.CHECK;
 	}
 
 	/**
@@ -96,7 +92,7 @@ public class StaticTestImpl extends TestImpl implements StaticTest {
 	 */
 	public EList<Expression> getTemplateArguments() {
 		if (templateArguments == null) {
-			templateArguments = new EObjectContainmentEList<Expression>(Expression.class, this, AstPackage.STATIC_TEST__TEMPLATE_ARGUMENTS);
+			templateArguments = new EObjectContainmentEList<Expression>(Expression.class, this, AstPackage.CHECK__TEMPLATE_ARGUMENTS);
 		}
 		return templateArguments;
 	}
@@ -108,7 +104,7 @@ public class StaticTestImpl extends TestImpl implements StaticTest {
 	 */
 	public EList<DataTypeSpecifier> getInputParameterTypes() {
 		if (inputParameterTypes == null) {
-			inputParameterTypes = new EObjectContainmentEList<DataTypeSpecifier>(DataTypeSpecifier.class, this, AstPackage.STATIC_TEST__INPUT_PARAMETER_TYPES);
+			inputParameterTypes = new EObjectContainmentEList<DataTypeSpecifier>(DataTypeSpecifier.class, this, AstPackage.CHECK__INPUT_PARAMETER_TYPES);
 		}
 		return inputParameterTypes;
 	}
@@ -120,7 +116,7 @@ public class StaticTestImpl extends TestImpl implements StaticTest {
 	 */
 	public EList<DataTypeSpecifier> getOutputParameterTypes() {
 		if (outputParameterTypes == null) {
-			outputParameterTypes = new EObjectContainmentEList<DataTypeSpecifier>(DataTypeSpecifier.class, this, AstPackage.STATIC_TEST__OUTPUT_PARAMETER_TYPES);
+			outputParameterTypes = new EObjectContainmentEList<DataTypeSpecifier>(DataTypeSpecifier.class, this, AstPackage.CHECK__OUTPUT_PARAMETER_TYPES);
 		}
 		return outputParameterTypes;
 	}
@@ -133,11 +129,11 @@ public class StaticTestImpl extends TestImpl implements StaticTest {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AstPackage.STATIC_TEST__TEMPLATE_ARGUMENTS:
+			case AstPackage.CHECK__TEMPLATE_ARGUMENTS:
 				return ((InternalEList<?>)getTemplateArguments()).basicRemove(otherEnd, msgs);
-			case AstPackage.STATIC_TEST__INPUT_PARAMETER_TYPES:
+			case AstPackage.CHECK__INPUT_PARAMETER_TYPES:
 				return ((InternalEList<?>)getInputParameterTypes()).basicRemove(otherEnd, msgs);
-			case AstPackage.STATIC_TEST__OUTPUT_PARAMETER_TYPES:
+			case AstPackage.CHECK__OUTPUT_PARAMETER_TYPES:
 				return ((InternalEList<?>)getOutputParameterTypes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -151,11 +147,11 @@ public class StaticTestImpl extends TestImpl implements StaticTest {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AstPackage.STATIC_TEST__TEMPLATE_ARGUMENTS:
+			case AstPackage.CHECK__TEMPLATE_ARGUMENTS:
 				return getTemplateArguments();
-			case AstPackage.STATIC_TEST__INPUT_PARAMETER_TYPES:
+			case AstPackage.CHECK__INPUT_PARAMETER_TYPES:
 				return getInputParameterTypes();
-			case AstPackage.STATIC_TEST__OUTPUT_PARAMETER_TYPES:
+			case AstPackage.CHECK__OUTPUT_PARAMETER_TYPES:
 				return getOutputParameterTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -170,15 +166,15 @@ public class StaticTestImpl extends TestImpl implements StaticTest {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AstPackage.STATIC_TEST__TEMPLATE_ARGUMENTS:
+			case AstPackage.CHECK__TEMPLATE_ARGUMENTS:
 				getTemplateArguments().clear();
 				getTemplateArguments().addAll((Collection<? extends Expression>)newValue);
 				return;
-			case AstPackage.STATIC_TEST__INPUT_PARAMETER_TYPES:
+			case AstPackage.CHECK__INPUT_PARAMETER_TYPES:
 				getInputParameterTypes().clear();
 				getInputParameterTypes().addAll((Collection<? extends DataTypeSpecifier>)newValue);
 				return;
-			case AstPackage.STATIC_TEST__OUTPUT_PARAMETER_TYPES:
+			case AstPackage.CHECK__OUTPUT_PARAMETER_TYPES:
 				getOutputParameterTypes().clear();
 				getOutputParameterTypes().addAll((Collection<? extends DataTypeSpecifier>)newValue);
 				return;
@@ -194,13 +190,13 @@ public class StaticTestImpl extends TestImpl implements StaticTest {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AstPackage.STATIC_TEST__TEMPLATE_ARGUMENTS:
+			case AstPackage.CHECK__TEMPLATE_ARGUMENTS:
 				getTemplateArguments().clear();
 				return;
-			case AstPackage.STATIC_TEST__INPUT_PARAMETER_TYPES:
+			case AstPackage.CHECK__INPUT_PARAMETER_TYPES:
 				getInputParameterTypes().clear();
 				return;
-			case AstPackage.STATIC_TEST__OUTPUT_PARAMETER_TYPES:
+			case AstPackage.CHECK__OUTPUT_PARAMETER_TYPES:
 				getOutputParameterTypes().clear();
 				return;
 		}
@@ -215,14 +211,14 @@ public class StaticTestImpl extends TestImpl implements StaticTest {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AstPackage.STATIC_TEST__TEMPLATE_ARGUMENTS:
+			case AstPackage.CHECK__TEMPLATE_ARGUMENTS:
 				return templateArguments != null && !templateArguments.isEmpty();
-			case AstPackage.STATIC_TEST__INPUT_PARAMETER_TYPES:
+			case AstPackage.CHECK__INPUT_PARAMETER_TYPES:
 				return inputParameterTypes != null && !inputParameterTypes.isEmpty();
-			case AstPackage.STATIC_TEST__OUTPUT_PARAMETER_TYPES:
+			case AstPackage.CHECK__OUTPUT_PARAMETER_TYPES:
 				return outputParameterTypes != null && !outputParameterTypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //StaticTestImpl
+} //CheckImpl

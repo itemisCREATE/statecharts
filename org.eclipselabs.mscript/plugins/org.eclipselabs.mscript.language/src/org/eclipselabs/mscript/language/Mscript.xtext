@@ -72,7 +72,7 @@ FunctionDefinition:
 			('<' templateParameterDeclarations+=ParameterDeclaration (',' templateParameterDeclarations+=ParameterDeclaration)* '>')?
 			'(' (inputParameterDeclarations+=ParameterDeclaration (',' inputParameterDeclarations+=ParameterDeclaration)*)? ')'
 			'->' outputParameterDeclarations+=ParameterDeclaration (',' outputParameterDeclarations+=ParameterDeclaration)* '{'
-		(tests+=Test |
+		(checks+=Check |
 		assertions+=Assertion |
 		functionObjectDeclarations+=FunctionObjectDeclaration |
 		stateVariableDeclarations+=StateVariableDeclaration |
@@ -82,8 +82,8 @@ FunctionDefinition:
 ParameterDeclaration:
 	name=ValidID;
 
-Test:
-	{StaticTest} 'static' 'test'
+Check:
+	'check'
 			('<' templateArguments+=Expression (',' templateArguments+=Expression)* '>')?
 			'(' (inputParameterTypes+=DataTypeSpecifier (',' inputParameterTypes+=DataTypeSpecifier)*)? ')'
 			'->' outputParameterTypes+=DataTypeSpecifier (',' outputParameterTypes+=DataTypeSpecifier)* ';';

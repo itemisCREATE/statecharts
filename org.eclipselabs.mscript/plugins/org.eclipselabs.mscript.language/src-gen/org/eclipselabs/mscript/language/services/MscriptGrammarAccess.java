@@ -313,8 +313,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOutputParameterDeclarationsParameterDeclarationParserRuleCall_9_1_0 = (RuleCall)cOutputParameterDeclarationsAssignment_9_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
 		private final Alternatives cAlternatives_11 = (Alternatives)cGroup.eContents().get(11);
-		private final Assignment cTestsAssignment_11_0 = (Assignment)cAlternatives_11.eContents().get(0);
-		private final RuleCall cTestsTestParserRuleCall_11_0_0 = (RuleCall)cTestsAssignment_11_0.eContents().get(0);
+		private final Assignment cChecksAssignment_11_0 = (Assignment)cAlternatives_11.eContents().get(0);
+		private final RuleCall cChecksCheckParserRuleCall_11_0_0 = (RuleCall)cChecksAssignment_11_0.eContents().get(0);
 		private final Assignment cAssertionsAssignment_11_1 = (Assignment)cAlternatives_11.eContents().get(1);
 		private final RuleCall cAssertionsAssertionParserRuleCall_11_1_0 = (RuleCall)cAssertionsAssignment_11_1.eContents().get(0);
 		private final Assignment cFunctionObjectDeclarationsAssignment_11_2 = (Assignment)cAlternatives_11.eContents().get(2);
@@ -331,7 +331,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//	stateful?="stateful"? "func" name=ValidID ("<" templateParameterDeclarations+=ParameterDeclaration (","
 		//	templateParameterDeclarations+=ParameterDeclaration)* ">")? "(" (inputParameterDeclarations+=ParameterDeclaration (","
 		//	inputParameterDeclarations+=ParameterDeclaration)*)? ")" "->" outputParameterDeclarations+=ParameterDeclaration (","
-		//	outputParameterDeclarations+=ParameterDeclaration)* "{" (tests+=Test | assertions+=Assertion |
+		//	outputParameterDeclarations+=ParameterDeclaration)* "{" (checks+=Check | assertions+=Assertion |
 		//	functionObjectDeclarations+=FunctionObjectDeclaration | stateVariableDeclarations+=StateVariableDeclaration |
 		//	equations+=Equation)* "}";
 		public ParserRule getRule() { return rule; }
@@ -339,7 +339,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//stateful?="stateful"? "func" name=ValidID ("<" templateParameterDeclarations+=ParameterDeclaration (","
 		//templateParameterDeclarations+=ParameterDeclaration)* ">")? "(" (inputParameterDeclarations+=ParameterDeclaration (","
 		//inputParameterDeclarations+=ParameterDeclaration)*)? ")" "->" outputParameterDeclarations+=ParameterDeclaration (","
-		//outputParameterDeclarations+=ParameterDeclaration)* "{" (tests+=Test | assertions+=Assertion |
+		//outputParameterDeclarations+=ParameterDeclaration)* "{" (checks+=Check | assertions+=Assertion |
 		//functionObjectDeclarations+=FunctionObjectDeclaration | stateVariableDeclarations+=StateVariableDeclaration |
 		//equations+=Equation)* "}"
 		public Group getGroup() { return cGroup; }
@@ -438,15 +438,15 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_10() { return cLeftCurlyBracketKeyword_10; }
 
-		//(tests+=Test | assertions+=Assertion | functionObjectDeclarations+=FunctionObjectDeclaration |
+		//(checks+=Check | assertions+=Assertion | functionObjectDeclarations+=FunctionObjectDeclaration |
 		//stateVariableDeclarations+=StateVariableDeclaration | equations+=Equation)*
 		public Alternatives getAlternatives_11() { return cAlternatives_11; }
 
-		//tests+=Test
-		public Assignment getTestsAssignment_11_0() { return cTestsAssignment_11_0; }
+		//checks+=Check
+		public Assignment getChecksAssignment_11_0() { return cChecksAssignment_11_0; }
 
-		//Test
-		public RuleCall getTestsTestParserRuleCall_11_0_0() { return cTestsTestParserRuleCall_11_0_0; }
+		//Check
+		public RuleCall getChecksCheckParserRuleCall_11_0_0() { return cChecksCheckParserRuleCall_11_0_0; }
 
 		//assertions+=Assertion
 		public Assignment getAssertionsAssignment_11_1() { return cAssertionsAssignment_11_1; }
@@ -492,136 +492,128 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getNameValidIDParserRuleCall_0() { return cNameValidIDParserRuleCall_0; }
 	}
 
-	public class TestElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Test");
+	public class CheckElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Check");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cStaticTestAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cStaticKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cTestKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cCheckKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cLessThanSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cTemplateArgumentsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cTemplateArgumentsExpressionParserRuleCall_1_1_0 = (RuleCall)cTemplateArgumentsAssignment_1_1.eContents().get(0);
+		private final Group cGroup_1_2 = (Group)cGroup_1.eContents().get(2);
+		private final Keyword cCommaKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
+		private final Assignment cTemplateArgumentsAssignment_1_2_1 = (Assignment)cGroup_1_2.eContents().get(1);
+		private final RuleCall cTemplateArgumentsExpressionParserRuleCall_1_2_1_0 = (RuleCall)cTemplateArgumentsAssignment_1_2_1.eContents().get(0);
+		private final Keyword cGreaterThanSignKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
+		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cLessThanSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cTemplateArgumentsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cTemplateArgumentsExpressionParserRuleCall_3_1_0 = (RuleCall)cTemplateArgumentsAssignment_3_1.eContents().get(0);
-		private final Group cGroup_3_2 = (Group)cGroup_3.eContents().get(2);
-		private final Keyword cCommaKeyword_3_2_0 = (Keyword)cGroup_3_2.eContents().get(0);
-		private final Assignment cTemplateArgumentsAssignment_3_2_1 = (Assignment)cGroup_3_2.eContents().get(1);
-		private final RuleCall cTemplateArgumentsExpressionParserRuleCall_3_2_1_0 = (RuleCall)cTemplateArgumentsAssignment_3_2_1.eContents().get(0);
-		private final Keyword cGreaterThanSignKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
-		private final Keyword cLeftParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Assignment cInputParameterTypesAssignment_5_0 = (Assignment)cGroup_5.eContents().get(0);
-		private final RuleCall cInputParameterTypesDataTypeSpecifierParserRuleCall_5_0_0 = (RuleCall)cInputParameterTypesAssignment_5_0.eContents().get(0);
-		private final Group cGroup_5_1 = (Group)cGroup_5.eContents().get(1);
-		private final Keyword cCommaKeyword_5_1_0 = (Keyword)cGroup_5_1.eContents().get(0);
-		private final Assignment cInputParameterTypesAssignment_5_1_1 = (Assignment)cGroup_5_1.eContents().get(1);
-		private final RuleCall cInputParameterTypesDataTypeSpecifierParserRuleCall_5_1_1_0 = (RuleCall)cInputParameterTypesAssignment_5_1_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Keyword cHyphenMinusGreaterThanSignKeyword_7 = (Keyword)cGroup.eContents().get(7);
-		private final Assignment cOutputParameterTypesAssignment_8 = (Assignment)cGroup.eContents().get(8);
-		private final RuleCall cOutputParameterTypesDataTypeSpecifierParserRuleCall_8_0 = (RuleCall)cOutputParameterTypesAssignment_8.eContents().get(0);
-		private final Group cGroup_9 = (Group)cGroup.eContents().get(9);
-		private final Keyword cCommaKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
-		private final Assignment cOutputParameterTypesAssignment_9_1 = (Assignment)cGroup_9.eContents().get(1);
-		private final RuleCall cOutputParameterTypesDataTypeSpecifierParserRuleCall_9_1_0 = (RuleCall)cOutputParameterTypesAssignment_9_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_10 = (Keyword)cGroup.eContents().get(10);
+		private final Assignment cInputParameterTypesAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
+		private final RuleCall cInputParameterTypesDataTypeSpecifierParserRuleCall_3_0_0 = (RuleCall)cInputParameterTypesAssignment_3_0.eContents().get(0);
+		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
+		private final Keyword cCommaKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final Assignment cInputParameterTypesAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
+		private final RuleCall cInputParameterTypesDataTypeSpecifierParserRuleCall_3_1_1_0 = (RuleCall)cInputParameterTypesAssignment_3_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cHyphenMinusGreaterThanSignKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cOutputParameterTypesAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cOutputParameterTypesDataTypeSpecifierParserRuleCall_6_0 = (RuleCall)cOutputParameterTypesAssignment_6.eContents().get(0);
+		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
+		private final Keyword cCommaKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
+		private final Assignment cOutputParameterTypesAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
+		private final RuleCall cOutputParameterTypesDataTypeSpecifierParserRuleCall_7_1_0 = (RuleCall)cOutputParameterTypesAssignment_7_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
-		//Test:
-		//	{StaticTest} "static" "test" ("<" templateArguments+=Expression ("," templateArguments+=Expression)* ">")? "("
+		//Check:
+		//	"check" ("<" templateArguments+=Expression ("," templateArguments+=Expression)* ">")? "("
 		//	(inputParameterTypes+=DataTypeSpecifier ("," inputParameterTypes+=DataTypeSpecifier)*)? ")" "->"
 		//	outputParameterTypes+=DataTypeSpecifier ("," outputParameterTypes+=DataTypeSpecifier)* ";";
 		public ParserRule getRule() { return rule; }
 
-		//{StaticTest} "static" "test" ("<" templateArguments+=Expression ("," templateArguments+=Expression)* ">")? "("
+		//"check" ("<" templateArguments+=Expression ("," templateArguments+=Expression)* ">")? "("
 		//(inputParameterTypes+=DataTypeSpecifier ("," inputParameterTypes+=DataTypeSpecifier)*)? ")" "->"
 		//outputParameterTypes+=DataTypeSpecifier ("," outputParameterTypes+=DataTypeSpecifier)* ";"
 		public Group getGroup() { return cGroup; }
 
-		//{StaticTest}
-		public Action getStaticTestAction_0() { return cStaticTestAction_0; }
-
-		//"static"
-		public Keyword getStaticKeyword_1() { return cStaticKeyword_1; }
-
-		//"test"
-		public Keyword getTestKeyword_2() { return cTestKeyword_2; }
+		//"check"
+		public Keyword getCheckKeyword_0() { return cCheckKeyword_0; }
 
 		//("<" templateArguments+=Expression ("," templateArguments+=Expression)* ">")?
-		public Group getGroup_3() { return cGroup_3; }
+		public Group getGroup_1() { return cGroup_1; }
 
 		//"<"
-		public Keyword getLessThanSignKeyword_3_0() { return cLessThanSignKeyword_3_0; }
+		public Keyword getLessThanSignKeyword_1_0() { return cLessThanSignKeyword_1_0; }
 
 		//templateArguments+=Expression
-		public Assignment getTemplateArgumentsAssignment_3_1() { return cTemplateArgumentsAssignment_3_1; }
+		public Assignment getTemplateArgumentsAssignment_1_1() { return cTemplateArgumentsAssignment_1_1; }
 
 		//Expression
-		public RuleCall getTemplateArgumentsExpressionParserRuleCall_3_1_0() { return cTemplateArgumentsExpressionParserRuleCall_3_1_0; }
+		public RuleCall getTemplateArgumentsExpressionParserRuleCall_1_1_0() { return cTemplateArgumentsExpressionParserRuleCall_1_1_0; }
 
 		//("," templateArguments+=Expression)*
-		public Group getGroup_3_2() { return cGroup_3_2; }
+		public Group getGroup_1_2() { return cGroup_1_2; }
 
 		//","
-		public Keyword getCommaKeyword_3_2_0() { return cCommaKeyword_3_2_0; }
+		public Keyword getCommaKeyword_1_2_0() { return cCommaKeyword_1_2_0; }
 
 		//templateArguments+=Expression
-		public Assignment getTemplateArgumentsAssignment_3_2_1() { return cTemplateArgumentsAssignment_3_2_1; }
+		public Assignment getTemplateArgumentsAssignment_1_2_1() { return cTemplateArgumentsAssignment_1_2_1; }
 
 		//Expression
-		public RuleCall getTemplateArgumentsExpressionParserRuleCall_3_2_1_0() { return cTemplateArgumentsExpressionParserRuleCall_3_2_1_0; }
+		public RuleCall getTemplateArgumentsExpressionParserRuleCall_1_2_1_0() { return cTemplateArgumentsExpressionParserRuleCall_1_2_1_0; }
 
 		//">"
-		public Keyword getGreaterThanSignKeyword_3_3() { return cGreaterThanSignKeyword_3_3; }
+		public Keyword getGreaterThanSignKeyword_1_3() { return cGreaterThanSignKeyword_1_3; }
 
 		//"("
-		public Keyword getLeftParenthesisKeyword_4() { return cLeftParenthesisKeyword_4; }
+		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
 		//(inputParameterTypes+=DataTypeSpecifier ("," inputParameterTypes+=DataTypeSpecifier)*)?
-		public Group getGroup_5() { return cGroup_5; }
+		public Group getGroup_3() { return cGroup_3; }
 
 		//inputParameterTypes+=DataTypeSpecifier
-		public Assignment getInputParameterTypesAssignment_5_0() { return cInputParameterTypesAssignment_5_0; }
+		public Assignment getInputParameterTypesAssignment_3_0() { return cInputParameterTypesAssignment_3_0; }
 
 		//DataTypeSpecifier
-		public RuleCall getInputParameterTypesDataTypeSpecifierParserRuleCall_5_0_0() { return cInputParameterTypesDataTypeSpecifierParserRuleCall_5_0_0; }
+		public RuleCall getInputParameterTypesDataTypeSpecifierParserRuleCall_3_0_0() { return cInputParameterTypesDataTypeSpecifierParserRuleCall_3_0_0; }
 
 		//("," inputParameterTypes+=DataTypeSpecifier)*
-		public Group getGroup_5_1() { return cGroup_5_1; }
+		public Group getGroup_3_1() { return cGroup_3_1; }
 
 		//","
-		public Keyword getCommaKeyword_5_1_0() { return cCommaKeyword_5_1_0; }
+		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
 
 		//inputParameterTypes+=DataTypeSpecifier
-		public Assignment getInputParameterTypesAssignment_5_1_1() { return cInputParameterTypesAssignment_5_1_1; }
+		public Assignment getInputParameterTypesAssignment_3_1_1() { return cInputParameterTypesAssignment_3_1_1; }
 
 		//DataTypeSpecifier
-		public RuleCall getInputParameterTypesDataTypeSpecifierParserRuleCall_5_1_1_0() { return cInputParameterTypesDataTypeSpecifierParserRuleCall_5_1_1_0; }
+		public RuleCall getInputParameterTypesDataTypeSpecifierParserRuleCall_3_1_1_0() { return cInputParameterTypesDataTypeSpecifierParserRuleCall_3_1_1_0; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_6() { return cRightParenthesisKeyword_6; }
+		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 
 		//"->"
-		public Keyword getHyphenMinusGreaterThanSignKeyword_7() { return cHyphenMinusGreaterThanSignKeyword_7; }
+		public Keyword getHyphenMinusGreaterThanSignKeyword_5() { return cHyphenMinusGreaterThanSignKeyword_5; }
 
 		//outputParameterTypes+=DataTypeSpecifier
-		public Assignment getOutputParameterTypesAssignment_8() { return cOutputParameterTypesAssignment_8; }
+		public Assignment getOutputParameterTypesAssignment_6() { return cOutputParameterTypesAssignment_6; }
 
 		//DataTypeSpecifier
-		public RuleCall getOutputParameterTypesDataTypeSpecifierParserRuleCall_8_0() { return cOutputParameterTypesDataTypeSpecifierParserRuleCall_8_0; }
+		public RuleCall getOutputParameterTypesDataTypeSpecifierParserRuleCall_6_0() { return cOutputParameterTypesDataTypeSpecifierParserRuleCall_6_0; }
 
 		//("," outputParameterTypes+=DataTypeSpecifier)*
-		public Group getGroup_9() { return cGroup_9; }
+		public Group getGroup_7() { return cGroup_7; }
 
 		//","
-		public Keyword getCommaKeyword_9_0() { return cCommaKeyword_9_0; }
+		public Keyword getCommaKeyword_7_0() { return cCommaKeyword_7_0; }
 
 		//outputParameterTypes+=DataTypeSpecifier
-		public Assignment getOutputParameterTypesAssignment_9_1() { return cOutputParameterTypesAssignment_9_1; }
+		public Assignment getOutputParameterTypesAssignment_7_1() { return cOutputParameterTypesAssignment_7_1; }
 
 		//DataTypeSpecifier
-		public RuleCall getOutputParameterTypesDataTypeSpecifierParserRuleCall_9_1_0() { return cOutputParameterTypesDataTypeSpecifierParserRuleCall_9_1_0; }
+		public RuleCall getOutputParameterTypesDataTypeSpecifierParserRuleCall_7_1_0() { return cOutputParameterTypesDataTypeSpecifierParserRuleCall_7_1_0; }
 
 		//";"
-		public Keyword getSemicolonKeyword_10() { return cSemicolonKeyword_10; }
+		public Keyword getSemicolonKeyword_8() { return cSemicolonKeyword_8; }
 	}
 
 	public class AssertionElements extends AbstractParserRuleElementFinder {
@@ -3846,7 +3838,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private RecordFieldDeclarationElements pRecordFieldDeclaration;
 	private FunctionDefinitionElements pFunctionDefinition;
 	private ParameterDeclarationElements pParameterDeclaration;
-	private TestElements pTest;
+	private CheckElements pCheck;
 	private AssertionStatusKindElements unknownRuleAssertionStatusKind;
 	private AssertionElements pAssertion;
 	private StateVariableDeclarationElements pStateVariableDeclaration;
@@ -4046,7 +4038,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	//	stateful?="stateful"? "func" name=ValidID ("<" templateParameterDeclarations+=ParameterDeclaration (","
 	//	templateParameterDeclarations+=ParameterDeclaration)* ">")? "(" (inputParameterDeclarations+=ParameterDeclaration (","
 	//	inputParameterDeclarations+=ParameterDeclaration)*)? ")" "->" outputParameterDeclarations+=ParameterDeclaration (","
-	//	outputParameterDeclarations+=ParameterDeclaration)* "{" (tests+=Test | assertions+=Assertion |
+	//	outputParameterDeclarations+=ParameterDeclaration)* "{" (checks+=Check | assertions+=Assertion |
 	//	functionObjectDeclarations+=FunctionObjectDeclaration | stateVariableDeclarations+=StateVariableDeclaration |
 	//	equations+=Equation)* "}";
 	public FunctionDefinitionElements getFunctionDefinitionAccess() {
@@ -4067,16 +4059,16 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getParameterDeclarationAccess().getRule();
 	}
 
-	//Test:
-	//	{StaticTest} "static" "test" ("<" templateArguments+=Expression ("," templateArguments+=Expression)* ">")? "("
+	//Check:
+	//	"check" ("<" templateArguments+=Expression ("," templateArguments+=Expression)* ">")? "("
 	//	(inputParameterTypes+=DataTypeSpecifier ("," inputParameterTypes+=DataTypeSpecifier)*)? ")" "->"
 	//	outputParameterTypes+=DataTypeSpecifier ("," outputParameterTypes+=DataTypeSpecifier)* ";";
-	public TestElements getTestAccess() {
-		return (pTest != null) ? pTest : (pTest = new TestElements());
+	public CheckElements getCheckAccess() {
+		return (pCheck != null) ? pCheck : (pCheck = new CheckElements());
 	}
 	
-	public ParserRule getTestRule() {
-		return getTestAccess().getRule();
+	public ParserRule getCheckRule() {
+		return getCheckAccess().getRule();
 	}
 
 	//enum AssertionStatusKind:

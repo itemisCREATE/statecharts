@@ -10,7 +10,6 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipselabs.mscript.language.ast.*;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
@@ -25,6 +24,7 @@ import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
 import org.eclipselabs.mscript.language.ast.BuiltinFunction;
 import org.eclipselabs.mscript.language.ast.BuiltinVariable;
 import org.eclipselabs.mscript.language.ast.CallableElement;
+import org.eclipselabs.mscript.language.ast.Check;
 import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Definition;
@@ -168,12 +168,8 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 				return createFunctionDefinitionAdapter();
 			}
 			@Override
-			public Adapter caseTest(Test object) {
-				return createTestAdapter();
-			}
-			@Override
-			public Adapter caseStaticTest(StaticTest object) {
-				return createStaticTestAdapter();
+			public Adapter caseCheck(Check object) {
+				return createCheckAdapter();
 			}
 			@Override
 			public Adapter caseCallableElement(CallableElement object) {
@@ -534,30 +530,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Test <em>Test</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Check <em>Check</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.Test
+	 * @see org.eclipselabs.mscript.language.ast.Check
 	 * @generated
 	 */
-	public Adapter createTestAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.StaticTest <em>Static Test</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.StaticTest
-	 * @generated
-	 */
-	public Adapter createStaticTestAdapter() {
+	public Adapter createCheckAdapter() {
 		return null;
 	}
 

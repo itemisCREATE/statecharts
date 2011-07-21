@@ -724,17 +724,17 @@ ruleFunctionDefinition returns [EObject current=null]
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getFunctionDefinitionAccess().getTestsTestParserRuleCall_11_0_0()); 
+	        newCompositeNode(grammarAccess.getFunctionDefinitionAccess().getChecksCheckParserRuleCall_11_0_0()); 
 	    }
-		lv_tests_18_0=ruleTest		{
+		lv_checks_18_0=ruleCheck		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getFunctionDefinitionRule());
 	        }
        		add(
        			$current, 
-       			"tests",
-        		lv_tests_18_0, 
-        		"Test");
+       			"checks",
+        		lv_checks_18_0, 
+        		"Check");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -865,46 +865,58 @@ ruleParameterDeclaration returns [EObject current=null]
 
 
 
-// Entry rule entryRuleTest
-entryRuleTest returns [EObject current=null] 
+// Entry rule entryRuleCheck
+entryRuleCheck returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getTestRule()); }
-	 iv_ruleTest=ruleTest 
-	 { $current=$iv_ruleTest.current; } 
+	{ newCompositeNode(grammarAccess.getCheckRule()); }
+	 iv_ruleCheck=ruleCheck 
+	 { $current=$iv_ruleCheck.current; } 
 	 EOF 
 ;
 
-// Rule Test
-ruleTest returns [EObject current=null] 
+// Rule Check
+ruleCheck returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((
+(	otherlv_0='check' 
     {
-        $current = forceCreateModelElement(
-            grammarAccess.getTestAccess().getStaticTestAction_0(),
-            $current);
+    	newLeafNode(otherlv_0, grammarAccess.getCheckAccess().getCheckKeyword_0());
     }
-)	otherlv_1='static' 
+(	otherlv_1='<' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getTestAccess().getStaticKeyword_1());
-    }
-	otherlv_2='test' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getTestAccess().getTestKeyword_2());
-    }
-(	otherlv_3='<' 
-    {
-    	newLeafNode(otherlv_3, grammarAccess.getTestAccess().getLessThanSignKeyword_3_0());
+    	newLeafNode(otherlv_1, grammarAccess.getCheckAccess().getLessThanSignKeyword_1_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTestAccess().getTemplateArgumentsExpressionParserRuleCall_3_1_0()); 
+	        newCompositeNode(grammarAccess.getCheckAccess().getTemplateArgumentsExpressionParserRuleCall_1_1_0()); 
+	    }
+		lv_templateArguments_2_0=ruleExpression		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getCheckRule());
+	        }
+       		add(
+       			$current, 
+       			"templateArguments",
+        		lv_templateArguments_2_0, 
+        		"Expression");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_3=',' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getCheckAccess().getCommaKeyword_1_2_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getCheckAccess().getTemplateArgumentsExpressionParserRuleCall_1_2_1_0()); 
 	    }
 		lv_templateArguments_4_0=ruleExpression		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getTestRule());
+	            $current = createModelElementForParent(grammarAccess.getCheckRule());
 	        }
        		add(
        			$current, 
@@ -915,44 +927,44 @@ ruleTest returns [EObject current=null]
 	    }
 
 )
-)(	otherlv_5=',' 
+))*	otherlv_5='>' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getTestAccess().getCommaKeyword_3_2_0());
+    	newLeafNode(otherlv_5, grammarAccess.getCheckAccess().getGreaterThanSignKeyword_1_3());
     }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getTestAccess().getTemplateArgumentsExpressionParserRuleCall_3_2_1_0()); 
-	    }
-		lv_templateArguments_6_0=ruleExpression		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getTestRule());
-	        }
-       		add(
-       			$current, 
-       			"templateArguments",
-        		lv_templateArguments_6_0, 
-        		"Expression");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))*	otherlv_7='>' 
+)?	otherlv_6='(' 
     {
-    	newLeafNode(otherlv_7, grammarAccess.getTestAccess().getGreaterThanSignKeyword_3_3());
-    }
-)?	otherlv_8='(' 
-    {
-    	newLeafNode(otherlv_8, grammarAccess.getTestAccess().getLeftParenthesisKeyword_4());
+    	newLeafNode(otherlv_6, grammarAccess.getCheckAccess().getLeftParenthesisKeyword_2());
     }
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTestAccess().getInputParameterTypesDataTypeSpecifierParserRuleCall_5_0_0()); 
+	        newCompositeNode(grammarAccess.getCheckAccess().getInputParameterTypesDataTypeSpecifierParserRuleCall_3_0_0()); 
+	    }
+		lv_inputParameterTypes_7_0=ruleDataTypeSpecifier		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getCheckRule());
+	        }
+       		add(
+       			$current, 
+       			"inputParameterTypes",
+        		lv_inputParameterTypes_7_0, 
+        		"DataTypeSpecifier");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_8=',' 
+    {
+    	newLeafNode(otherlv_8, grammarAccess.getCheckAccess().getCommaKeyword_3_1_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getCheckAccess().getInputParameterTypesDataTypeSpecifierParserRuleCall_3_1_1_0()); 
 	    }
 		lv_inputParameterTypes_9_0=ruleDataTypeSpecifier		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getTestRule());
+	            $current = createModelElementForParent(grammarAccess.getCheckRule());
 	        }
        		add(
        			$current, 
@@ -963,44 +975,44 @@ ruleTest returns [EObject current=null]
 	    }
 
 )
-)(	otherlv_10=',' 
+))*)?	otherlv_10=')' 
     {
-    	newLeafNode(otherlv_10, grammarAccess.getTestAccess().getCommaKeyword_5_1_0());
+    	newLeafNode(otherlv_10, grammarAccess.getCheckAccess().getRightParenthesisKeyword_4());
+    }
+	otherlv_11='->' 
+    {
+    	newLeafNode(otherlv_11, grammarAccess.getCheckAccess().getHyphenMinusGreaterThanSignKeyword_5());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTestAccess().getInputParameterTypesDataTypeSpecifierParserRuleCall_5_1_1_0()); 
+	        newCompositeNode(grammarAccess.getCheckAccess().getOutputParameterTypesDataTypeSpecifierParserRuleCall_6_0()); 
 	    }
-		lv_inputParameterTypes_11_0=ruleDataTypeSpecifier		{
+		lv_outputParameterTypes_12_0=ruleDataTypeSpecifier		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getTestRule());
+	            $current = createModelElementForParent(grammarAccess.getCheckRule());
 	        }
        		add(
        			$current, 
-       			"inputParameterTypes",
-        		lv_inputParameterTypes_11_0, 
+       			"outputParameterTypes",
+        		lv_outputParameterTypes_12_0, 
         		"DataTypeSpecifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))*)?	otherlv_12=')' 
+)(	otherlv_13=',' 
     {
-    	newLeafNode(otherlv_12, grammarAccess.getTestAccess().getRightParenthesisKeyword_6());
-    }
-	otherlv_13='->' 
-    {
-    	newLeafNode(otherlv_13, grammarAccess.getTestAccess().getHyphenMinusGreaterThanSignKeyword_7());
+    	newLeafNode(otherlv_13, grammarAccess.getCheckAccess().getCommaKeyword_7_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTestAccess().getOutputParameterTypesDataTypeSpecifierParserRuleCall_8_0()); 
+	        newCompositeNode(grammarAccess.getCheckAccess().getOutputParameterTypesDataTypeSpecifierParserRuleCall_7_1_0()); 
 	    }
 		lv_outputParameterTypes_14_0=ruleDataTypeSpecifier		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getTestRule());
+	            $current = createModelElementForParent(grammarAccess.getCheckRule());
 	        }
        		add(
        			$current, 
@@ -1011,31 +1023,9 @@ ruleTest returns [EObject current=null]
 	    }
 
 )
-)(	otherlv_15=',' 
+))*	otherlv_15=';' 
     {
-    	newLeafNode(otherlv_15, grammarAccess.getTestAccess().getCommaKeyword_9_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getTestAccess().getOutputParameterTypesDataTypeSpecifierParserRuleCall_9_1_0()); 
-	    }
-		lv_outputParameterTypes_16_0=ruleDataTypeSpecifier		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getTestRule());
-	        }
-       		add(
-       			$current, 
-       			"outputParameterTypes",
-        		lv_outputParameterTypes_16_0, 
-        		"DataTypeSpecifier");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))*	otherlv_17=';' 
-    {
-    	newLeafNode(otherlv_17, grammarAccess.getTestAccess().getSemicolonKeyword_10());
+    	newLeafNode(otherlv_15, grammarAccess.getCheckAccess().getSemicolonKeyword_8());
     }
 )
 ;

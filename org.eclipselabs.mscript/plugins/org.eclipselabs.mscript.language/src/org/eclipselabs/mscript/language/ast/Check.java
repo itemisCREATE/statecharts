@@ -7,28 +7,28 @@
 package org.eclipselabs.mscript.language.ast;
 
 import org.eclipse.emf.common.util.EList;
-
+import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Static Test</b></em>'.
+ * A representation of the model object '<em><b>Check</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.StaticTest#getTemplateArguments <em>Template Arguments</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.StaticTest#getInputParameterTypes <em>Input Parameter Types</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.StaticTest#getOutputParameterTypes <em>Output Parameter Types</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.Check#getTemplateArguments <em>Template Arguments</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.Check#getInputParameterTypes <em>Input Parameter Types</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.Check#getOutputParameterTypes <em>Output Parameter Types</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getStaticTest()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getCheck()
  * @model
  * @generated
  */
-public interface StaticTest extends Test {
+public interface Check extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Template Arguments</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipselabs.mscript.typesystem.Expression}.
@@ -39,7 +39,7 @@ public interface StaticTest extends Test {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Template Arguments</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getStaticTest_TemplateArguments()
+	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getCheck_TemplateArguments()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -55,7 +55,7 @@ public interface StaticTest extends Test {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Input Parameter Types</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getStaticTest_InputParameterTypes()
+	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getCheck_InputParameterTypes()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -71,10 +71,10 @@ public interface StaticTest extends Test {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Output Parameter Types</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getStaticTest_OutputParameterTypes()
+	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getCheck_OutputParameterTypes()
 	 * @model containment="true"
 	 * @generated
 	 */
 	EList<DataTypeSpecifier> getOutputParameterTypes();
 
-} // StaticTest
+} // Check
