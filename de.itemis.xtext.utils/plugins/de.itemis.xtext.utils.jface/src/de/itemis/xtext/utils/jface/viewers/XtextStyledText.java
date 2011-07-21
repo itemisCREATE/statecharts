@@ -41,7 +41,7 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
-import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -56,8 +56,8 @@ import de.itemis.xtext.utils.jface.viewers.util.ActiveProjectResolver;
 
 /**
  * This class integrates xText Features into a {@link StyledText} and can be
- * used i.e. as {@link CellEditor}s in jface {@link StructuredViewer}s or in 
- * GMF EditParts via DirectEditManager.
+ * used i.e. as {@link CellEditor}s in jface {@link StructuredViewer}s or in GMF
+ * EditParts via DirectEditManager.
  * 
  * The current implementation supports, code completion, syntax highlighting and
  * validation
@@ -124,7 +124,7 @@ public class XtextStyledText {
 	@Inject
 	private XtextDocument document;
 	@Inject
-	private Provider<XtextResourceSetProvider> resourceSetProvider;
+	private IResourceSetProvider resourceSetProvider;
 
 	private Resource context;
 
@@ -134,34 +134,38 @@ public class XtextStyledText {
 
 	/**
 	 * C'tor to create a new Instance.
-	 *
-	 * In contrast to 
-	 * {@link XtextStyledText#XtextStyledText(Composite, int, Injector)}, this constructor
-	 * uses a specific context for xtext.
-	 *
-	 * <b>Please note:</b> Since the text control has content assist proposals enabled via a 
-	 * listener, <code>dispose</code> must be called to unregister the listener!
+	 * 
+	 * In contrast to
+	 * {@link XtextStyledText#XtextStyledText(Composite, int, Injector)}, this
+	 * constructor uses a specific context for xtext.
+	 * 
+	 * <b>Please note:</b> Since the text control has content assist proposals
+	 * enabled via a listener, <code>dispose</code> must be called to unregister
+	 * the listener!
 	 * 
 	 * @param style
 	 *            The SWT styles for this text widget.
 	 * @param injector
 	 *            For xtext dependency injection.
-	 * @param context 
-	 *            A context for xtext. 
+	 * @param context
+	 *            A context for xtext.
 	 */
-	public XtextStyledText(Composite parent, int style, Injector injector, Resource context) {
+	public XtextStyledText(Composite parent, int style, Injector injector,
+			Resource context) {
 		this(parent, style, injector);
 		setContext(context);
 	}
-	
+
 	/**
 	 * C'tor to create a new Instance.
-	 *
-	 * No specific context is set for xtext! If you need a context, use 
-	 * {@link XtextStyledText#XtextStyledText(Composite, int, Injector, Resource)}!
-	 *
-	 * <b>Please note:</b> Since the text control has content assist proposals enabled via a 
-	 * listener, <code>dispose</code> must be called to unregister the listener!
+	 * 
+	 * No specific context is set for xtext! If you need a context, use
+	 * {@link XtextStyledText#XtextStyledText(Composite, int, Injector, Resource)}
+	 * !
+	 * 
+	 * <b>Please note:</b> Since the text control has content assist proposals
+	 * enabled via a listener, <code>dispose</code> must be called to unregister
+	 * the listener!
 	 * 
 	 * @param style
 	 *            The SWT styles for this text widget.
@@ -175,17 +179,18 @@ public class XtextStyledText {
 			throw new IllegalArgumentException("Injector must not be null!");
 		injector.injectMembers(this);
 		if (sourceViewerFactory == null)
-			throw new IllegalArgumentException("Dependency injection did not work!");
+			throw new IllegalArgumentException(
+					"Dependency injection did not work!");
 	}
 
-	
 	/**
 	 * Creates an {@link SourceViewer} and returns the {@link StyledText} widget
 	 * of the viewer as the cell editors control. Some code is copied from
 	 * {@link XtextEditor}.
 	 */
 	protected void createStyledText() {
-		sourceviewer = sourceViewerFactory.createSourceViewer(parent, null, null, false, style);
+		sourceviewer = sourceViewerFactory.createSourceViewer(parent, null,
+				null, false, style);
 		sourceviewer.configure(configuration);
 
 		initResourceSet();
@@ -219,7 +224,7 @@ public class XtextStyledText {
 	private IProject activeProject;
 
 	private StyledText styledText;
-	
+
 	/**
 	 * @return The actual {@link StyledText} control.
 	 */
@@ -240,8 +245,7 @@ public class XtextStyledText {
 	}
 
 	private ResourceSet initResourceSet() {
-		ResourceSet resourceSet = resourceSetProvider.get().get(
-				getActiveProject());
+		ResourceSet resourceSet = resourceSetProvider.get(getActiveProject());
 		resourceSet.getResources().add(resource);
 		if (context != null) {
 			Resource contextResource = resourceSet.createResource(context
@@ -298,6 +302,7 @@ public class XtextStyledText {
 			String activeProject = getActiveProject().getName();
 			resource.setURI(URI.createURI("platform:/resource/" + activeProject
 					+ "/embedded." + fileExtension));
+			System.out.println("Editors uri " + resource.getURI());
 		}
 	}
 
