@@ -148,12 +148,22 @@ public class XtextStyledText {
 	 * @param injector
 	 *            For xtext dependency injection.
 	 * @param contextResource
-	 *            A contextResource for xtext.
+	 *            A contextResource for xtext. May be null.
 	 */
 	public XtextStyledText(Composite parent, int style, Injector injector,
 			Resource context) {
-		this(parent, style, injector);
-		setContext(context);
+		this.style = style;
+		this.parent = parent;
+		if (injector == null)
+			throw new IllegalArgumentException("Injector must not be null!");
+		injector.injectMembers(this);
+		if (sourceViewerFactory == null)
+			throw new IllegalArgumentException(
+					"Dependency injection did not work!");
+		// context may be null
+		if(context != null){
+			setContextResource(context);
+		}	
 	}
 
 	/**
@@ -173,14 +183,7 @@ public class XtextStyledText {
 	 *            For xtext dependency injection.
 	 */
 	public XtextStyledText(Composite parent, int style, Injector injector) {
-		this.style = style;
-		this.parent = parent;
-		if (injector == null)
-			throw new IllegalArgumentException("Injector must not be null!");
-		injector.injectMembers(this);
-		if (sourceViewerFactory == null)
-			throw new IllegalArgumentException(
-					"Dependency injection did not work!");
+		this(parent, style, injector, null);
 	}
 
 	/**
@@ -189,26 +192,13 @@ public class XtextStyledText {
 	 * {@link XtextEditor}.
 	 */
 	protected void createStyledText() {
-		sourceviewer = sourceViewerFactory.createSourceViewer(parent, null,
-				null, false, style);
-		sourceviewer.configure(configuration);
-
 		// create resource set and initialize it (add a copy of the context resource as well as the fake resource to it).
-		createAndInitResourceSet();
+		createAndInitXtextResourceSet();
+		// connect xtext document to fake resource 
+		initXtextDocument();
+		// connect xtext document to xtext source viewer
+		initXtextSourceViewer();
 		
-		document.setInput(fakeResource);
-
-		IDocumentPartitioner partitioner = documentPartitioner.get();
-		partitioner.connect(document);
-		document.setDocumentPartitioner(partitioner);
-
-		sourceviewer.setDocument(document, new AnnotationModel());
-
-		SourceViewerDecorationSupport support = new SourceViewerDecorationSupport(
-				sourceviewer, null, new DefaultMarkerAnnotationAccess(),
-				EditorsPlugin.getDefault().getSharedTextColors());
-		configureSourceViewerDecorationSupport(support);
-
 		validationJob = createValidationJob();
 		document.setValidationJob(validationJob);
 
@@ -218,6 +208,25 @@ public class XtextStyledText {
 		styledText.setFont(parent.getFont());
 		styledText.setBackground(parent.getBackground());
 		styledText.setText("");
+	}
+
+	private void initXtextSourceViewer() {
+		sourceviewer = sourceViewerFactory.createSourceViewer(parent, null,
+				null, false, style);
+		sourceviewer.configure(configuration);
+		sourceviewer.setDocument(document, new AnnotationModel());
+		SourceViewerDecorationSupport support = new SourceViewerDecorationSupport(
+				sourceviewer, null, new DefaultMarkerAnnotationAccess(),
+				EditorsPlugin.getDefault().getSharedTextColors());
+		configureSourceViewerDecorationSupport(support);
+	}
+
+	private void initXtextDocument() {
+		document.setInput(fakeResource);
+		
+		IDocumentPartitioner partitioner = documentPartitioner.get();
+		partitioner.connect(document);
+		document.setDocumentPartitioner(partitioner);
 	}
 
 	private IProject activeProject;
@@ -247,7 +256,7 @@ public class XtextStyledText {
 		return activeProject;
 	}
 
-	protected ResourceSet createAndInitResourceSet() {
+	protected ResourceSet createAndInitXtextResourceSet() {
 		ResourceSet resourceSet = resourceSetProvider.get(getActiveProject());
 		if (contextResource != null) {
 			// deep copy context resource contents, because simply loading the fakeResource will
@@ -261,10 +270,18 @@ public class XtextStyledText {
 		
 		// add the fake resource (add an uri to it, first)
 		String activeProject = getActiveProject().getName();
-		fakeResource.setURI(URI.createURI("platform:/fakeResource/" + activeProject
-				+ "/embedded." + fileExtension));
+		fakeResource.setURI(createFakeResourceUri(activeProject));
 		resourceSet.getResources().add(fakeResource);
 		return resourceSet;
+	}
+
+	private URI createFakeResourceUri(String activeProject) {
+		return createFakeResourceBaseFragment(activeProject).appendFileExtension(fileExtension);
+	}
+
+	protected URI createFakeResourceBaseFragment(String activeProject) {
+		return URI.createPlatformResourceURI(activeProject
+				+ "/embedded", true);
 	}
 
 	private ValidationJob createValidationJob() {
@@ -319,15 +336,18 @@ public class XtextStyledText {
 		document.disposeInput();
 	}
 
-	public Resource getContext() {
+	protected Resource getContextResource() {
 		return contextResource;
 	}
 
 	/**
-	 * Update the xtext contextResource for the styled text.
+	 * Update the contextResource for the styled text.
 	 */
-	public void setContext(Resource contextResource) {
+	protected void setContextResource(Resource contextResource) {
 		this.contextResource = contextResource;
 	}
-
+	
+	protected XtextResource getFakeResource() {
+		return fakeResource;
+	}
 }

@@ -46,7 +46,7 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	/**
 	 * Delegator to the actual styled text that provides the xtext features.
 	 */
-	private XtextStyledText xtextWidget;
+	protected XtextStyledText xtextWidget;
 
 	private Injector injector;
 	
@@ -109,7 +109,7 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	 */
 	@Override
 	protected Control createControl(Composite parent) {
-		xtextWidget = new XtextStyledText(parent, getStyle(), injector, context);
+		xtextWidget = createXtextWidget(parent, getStyle(), injector, context);
 		text = xtextWidget.getStyledText();
 		text.addKeyListener(keyListener);
 		text.addFocusListener(new FocusAdapter() {
@@ -120,6 +120,10 @@ public class XtextCellEditor extends StyledTextCellEditor {
 		return text;
 	}
 
+	protected XtextStyledText createXtextWidget(Composite parent, int style, Injector injector, Resource context) {
+		return new XtextStyledText(parent, style, injector, context);
+	}
+
 	@Override
 	public void dispose() {
 		text.removeKeyListener(keyListener);
@@ -128,7 +132,7 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	}
 
 	public void setContext(Resource context) {
-		xtextWidget.setContext(context);
+		xtextWidget.setContextResource(context);
 	}
 
 	public List<Issue> getIssues() {
@@ -136,7 +140,7 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	}
 
 	public Resource getContext() {
-		return xtextWidget.getContext();
+		return xtextWidget.getContextResource();
 	}
 	
 	public void setVisibleRegion(int start, int length) {

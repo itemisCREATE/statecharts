@@ -31,6 +31,8 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 
 	private final Injector injector;
 	private final Resource context;
+	
+	protected XtextStyledText xtextWidget;
 
 	public XtextPropertyDescriptor(EAttribute feature, String labelName,
 			Injector injector) {
@@ -49,18 +51,15 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 	}
 
 	public StyledText createControl(Composite parent) {
-		XtextStyledText styledTextWrapper = null;
-		if (context == null) {
-			styledTextWrapper = new XtextStyledText(parent, getStyle(),
-					getInjector());
-		} else {
-			styledTextWrapper = new XtextStyledText(parent, getStyle(),
-					getInjector(), context);
-		}
-
+		xtextWidget = createXtextWidget(parent, getStyle(), getInjector(), context);
 		GridDataFactory.fillDefaults().grab(true, true)
-				.applyTo(styledTextWrapper.getStyledText());
-		return (StyledText) styledTextWrapper.getStyledText();
+				.applyTo(xtextWidget.getStyledText());
+		return (StyledText) xtextWidget.getStyledText();
+	}
+	
+	protected XtextStyledText createXtextWidget(Composite parent, int style, Injector injector, Resource context) {
+		return new XtextStyledText(parent, style,
+					getInjector(), context);
 	}
 
 	public Object getControlValue() {
