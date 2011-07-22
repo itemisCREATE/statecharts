@@ -225,6 +225,10 @@ public class XtextStyledText {
 
 	private StyledText styledText;
 
+	public void setVisibleRegion(int start, int length) {
+		sourceviewer.setVisibleRegion(start, length);
+	}
+	
 	/**
 	 * @return The actual {@link StyledText} control.
 	 */
@@ -331,8 +335,9 @@ public class XtextStyledText {
 	}
 
 	/**
-	 * Update the xtext context for the styled text.
-	 */
+	 * Set the xtext context for the styled text. This has no effect if 
+	 * {@link XtextStyledText#getStyledText()} has already been called.
+	 */	
 	public void setContext(Resource context) {
 		this.context = context;
 	}
