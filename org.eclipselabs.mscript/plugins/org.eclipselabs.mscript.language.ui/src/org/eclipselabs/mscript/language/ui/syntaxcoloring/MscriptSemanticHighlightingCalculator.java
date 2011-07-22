@@ -25,7 +25,6 @@ import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.IterationCall;
-import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.StepExpression;
 import org.eclipselabs.mscript.typesystem.Unit;
 
@@ -43,8 +42,12 @@ public class MscriptSemanticHighlightingCalculator implements ISemanticHighlight
 			return;
 		}
 
-		Module module = (Module) resource.getParseResult().getRootASTElement();
-		for (TreeIterator<EObject> it = module.eAllContents(); it.hasNext();) {
+		EObject root = resource.getParseResult().getRootASTElement();
+		if (root == null) {
+			return;
+		}
+		
+		for (TreeIterator<EObject> it = root.eAllContents(); it.hasNext();) {
 			EObject next = it.next();
 			if (next instanceof FunctionDefinition) {
 				List<INode> nodes = NodeModelUtils.findNodesForFeature(next, AstPackage.eINSTANCE.getDefinition_Name());
