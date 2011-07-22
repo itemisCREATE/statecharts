@@ -30,8 +30,8 @@ import org.eclipse.xtext.validation.Issue;
 import com.google.inject.Injector;
 
 /**
- * This class integrates xText Features into a {@link CellEditor} and can be used i.E. in jface {@link StructuredViewer}
- * s or in GMF EditParts via DirectEditManager.
+ * This class integrates xText Features into a {@link CellEditor} and can be used i.E. in 
+ * jface {@link StructuredViewer}s or in GMF EditParts via DirectEditManager.
  * 
  * The current implementation supports, code completion, syntax highlighting and validation
  * 
@@ -53,13 +53,22 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	private Resource context;
 	
 	/**
-	 * Key listener for updating cell editor.
+	 * Key listener for updating, applying, and canceling cell editor.
 	 */
 	private final KeyListener keyListener = new KeyListener() {
 
 		public void keyPressed(KeyEvent e) {
-			// notify cell editor about changes
-			XtextCellEditor.this.valueChanged(true, true);
+//			if (e.keyCode == SWT.CR && ((text.getStyle() & SWT.MULTI) == 0 || 
+//					(e.stateMask & SWT.CTRL) != 0)) {
+				// apply value to cell editor and finish editing
+//				XtextCellEditor.this.fireApplyEditorValue();
+//			} else if (e.keyCode == SWT.ESC) {
+				// cancel editor
+//				XtextCellEditor.this.fireCancelEditor();
+//			} else {
+				// notify cell editor about changes
+				XtextCellEditor.this.valueChanged(true, true);
+//			}
 		}
 
 		public void keyReleased(KeyEvent e) {
@@ -95,13 +104,14 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	}
 
 	/**
-	 * Creates an {@link SourceViewer} and returns the {@link StyledText} widget of the viewer as the cell editors
-	 * control. Some code is copied from {@link XtextEditor}.
+	 * Creates an {@link SourceViewer} and returns the {@link StyledText} widget of the 
+	 * viewer as the cell editors control. Some code is copied from {@link XtextEditor}.
 	 */
 	@Override
 	protected Control createControl(Composite parent) {
 		xtextWidget = new XtextStyledText(parent, getStyle(), injector, context);
 		text = xtextWidget.getStyledText();
+		text.addKeyListener(keyListener);
 		text.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
 				XtextCellEditor.this.focusLost();
@@ -127,6 +137,10 @@ public class XtextCellEditor extends StyledTextCellEditor {
 
 	public Resource getContext() {
 		return xtextWidget.getContext();
+	}
+	
+	public void setVisibleRegion(int start, int length) {
+		xtextWidget.setVisibleRegion(start, length);
 	}
 
 }
