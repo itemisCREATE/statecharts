@@ -91,7 +91,7 @@ public abstract class AbstractNumericValue extends AbstractExplicitDataTypeValue
 
 	protected abstract AbstractNumericValue basicDivide(AbstractNumericValue other, NumericType resultDataType);
 
-	protected IValue doUnaryMinus(DataType resultDataType) {
+	protected IValue doNegate(DataType resultDataType) {
 		NumberFormat resultNumberFormat = getContext().getComputationModel().getNumberFormat(resultDataType);
 		
 		AbstractNumericValue operand = cast(resultNumberFormat);

@@ -11,8 +11,6 @@
 
 package org.eclipselabs.mscript.computation.core.value;
 
-import java.util.List;
-
 import org.eclipselabs.mscript.typesystem.DataType;
 
 /**
@@ -96,8 +94,8 @@ public abstract class AbstractValueDecorator implements IValue {
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.interpreter.value.IValue#unaryMinus()
 	 */
-	public IValue unaryMinus() {
-		return decoratedValue.unaryMinus();
+	public IValue negate() {
+		return decoratedValue.negate();
 	}
 
 	/* (non-Javadoc)
@@ -140,13 +138,6 @@ public abstract class AbstractValueDecorator implements IValue {
 	 */
 	public IValue notEqualTo(IValue other) {
 		return decoratedValue.notEqualTo(other);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.interpreter.value.IValue#getProperty(java.lang.String, java.util.List)
-	 */
-	public IValue getProperty(String name, List<IValue> arguments) {
-		return decoratedValue.getProperty(name, arguments);
 	}
 
 }

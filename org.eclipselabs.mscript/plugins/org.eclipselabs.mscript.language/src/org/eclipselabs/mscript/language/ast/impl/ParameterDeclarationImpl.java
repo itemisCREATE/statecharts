@@ -25,7 +25,7 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
  *
  * @generated
  */
-public class ParameterDeclarationImpl extends CallableElementImpl implements ParameterDeclaration {
+public abstract class ParameterDeclarationImpl extends CallableElementImpl implements ParameterDeclaration {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->

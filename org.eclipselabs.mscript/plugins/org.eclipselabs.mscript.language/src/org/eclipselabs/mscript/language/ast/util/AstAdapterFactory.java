@@ -40,6 +40,7 @@ import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
+import org.eclipselabs.mscript.language.ast.InputParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.IterationAccumulator;
 import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.IterationVariable;
@@ -52,6 +53,7 @@ import org.eclipselabs.mscript.language.ast.MemberVariableAccess;
 import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.NegateStepExpression;
+import org.eclipselabs.mscript.language.ast.OutputParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.PostfixExpression;
@@ -68,6 +70,7 @@ import org.eclipselabs.mscript.language.ast.StepLiteral;
 import org.eclipselabs.mscript.language.ast.StepN;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
+import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
@@ -178,6 +181,18 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseParameterDeclaration(ParameterDeclaration object) {
 				return createParameterDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseTemplateParameterDeclaration(TemplateParameterDeclaration object) {
+				return createTemplateParameterDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseInputParameterDeclaration(InputParameterDeclaration object) {
+				return createInputParameterDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseOutputParameterDeclaration(OutputParameterDeclaration object) {
+				return createOutputParameterDeclarationAdapter();
 			}
 			@Override
 			public Adapter caseAssertion(Assertion object) {
@@ -568,6 +583,48 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createParameterDeclarationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration <em>Template Parameter Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration
+	 * @generated
+	 */
+	public Adapter createTemplateParameterDeclarationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.InputParameterDeclaration <em>Input Parameter Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.InputParameterDeclaration
+	 * @generated
+	 */
+	public Adapter createInputParameterDeclarationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.OutputParameterDeclaration <em>Output Parameter Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.OutputParameterDeclaration
+	 * @generated
+	 */
+	public Adapter createOutputParameterDeclarationAdapter() {
 		return null;
 	}
 

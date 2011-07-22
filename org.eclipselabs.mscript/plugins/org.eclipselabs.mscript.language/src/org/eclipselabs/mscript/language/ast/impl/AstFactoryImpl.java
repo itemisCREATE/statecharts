@@ -42,6 +42,7 @@ import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
+import org.eclipselabs.mscript.language.ast.InputParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.IterationAccumulator;
 import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.IterationVariable;
@@ -55,7 +56,7 @@ import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
 import org.eclipselabs.mscript.language.ast.NegateStepExpression;
-import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
+import org.eclipselabs.mscript.language.ast.OutputParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.PostfixExpression;
 import org.eclipselabs.mscript.language.ast.PostfixOperator;
@@ -72,6 +73,7 @@ import org.eclipselabs.mscript.language.ast.StepLiteral;
 import org.eclipselabs.mscript.language.ast.StepN;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
+import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
@@ -131,7 +133,9 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.RECORD_FIELD_DECLARATION: return createRecordFieldDeclaration();
 			case AstPackage.FUNCTION_DEFINITION: return createFunctionDefinition();
 			case AstPackage.CHECK: return createCheck();
-			case AstPackage.PARAMETER_DECLARATION: return createParameterDeclaration();
+			case AstPackage.TEMPLATE_PARAMETER_DECLARATION: return createTemplateParameterDeclaration();
+			case AstPackage.INPUT_PARAMETER_DECLARATION: return createInputParameterDeclaration();
+			case AstPackage.OUTPUT_PARAMETER_DECLARATION: return createOutputParameterDeclaration();
 			case AstPackage.ASSERTION: return createAssertion();
 			case AstPackage.STATE_VARIABLE_DECLARATION: return createStateVariableDeclaration();
 			case AstPackage.FUNCTION_OBJECT_DECLARATION: return createFunctionObjectDeclaration();
@@ -327,9 +331,29 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ParameterDeclaration createParameterDeclaration() {
-		ParameterDeclarationImpl parameterDeclaration = new ParameterDeclarationImpl();
-		return parameterDeclaration;
+	public TemplateParameterDeclaration createTemplateParameterDeclaration() {
+		TemplateParameterDeclarationImpl templateParameterDeclaration = new TemplateParameterDeclarationImpl();
+		return templateParameterDeclaration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InputParameterDeclaration createInputParameterDeclaration() {
+		InputParameterDeclarationImpl inputParameterDeclaration = new InputParameterDeclarationImpl();
+		return inputParameterDeclaration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OutputParameterDeclaration createOutputParameterDeclaration() {
+		OutputParameterDeclarationImpl outputParameterDeclaration = new OutputParameterDeclarationImpl();
+		return outputParameterDeclaration;
 	}
 
 	/**

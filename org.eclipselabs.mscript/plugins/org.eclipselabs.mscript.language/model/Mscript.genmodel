@@ -83,6 +83,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionDefinition/equations"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//Check">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Mscript.ecore#//Check/function"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Check/templateArguments"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Check/inputParameterTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Check/outputParameterTypes"/>
@@ -94,6 +95,9 @@
     <genClasses ecoreClass="Mscript.ecore#//ParameterDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ParameterDeclaration/name"/>
     </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//TemplateParameterDeclaration"/>
+    <genClasses ecoreClass="Mscript.ecore#//InputParameterDeclaration"/>
+    <genClasses ecoreClass="Mscript.ecore#//OutputParameterDeclaration"/>
     <genClasses ecoreClass="Mscript.ecore#//Assertion">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//Assertion/static"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Assertion/condition"/>

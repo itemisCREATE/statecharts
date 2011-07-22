@@ -85,13 +85,13 @@ public class AnyValue extends AbstractExplicitDataTypeValue {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.interpreter.value.AbstractValue#doUnaryMinus(org.eclipselabs.mscript.typesystem.DataType)
+	 * @see org.eclipselabs.mscript.interpreter.value.AbstractValue#doNegate(org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
-	protected IValue doUnaryMinus(DataType resultDataType) {
+	protected IValue doNegate(DataType resultDataType) {
 		return new AnyValue(getContext(), resultDataType);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.interpreter.value.AbstractValue#doLessThan(org.eclipselabs.mscript.interpreter.value.IValue, org.eclipselabs.mscript.typesystem.DataType)
 	 */

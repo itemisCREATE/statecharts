@@ -20,7 +20,7 @@ package org.eclipselabs.mscript.language.ast;
  * </p>
  *
  * @see org.eclipselabs.mscript.language.ast.AstPackage#getParameterDeclaration()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface ParameterDeclaration extends CallableElement {

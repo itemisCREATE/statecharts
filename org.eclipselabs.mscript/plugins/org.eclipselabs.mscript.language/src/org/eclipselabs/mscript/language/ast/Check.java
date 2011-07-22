@@ -18,6 +18,7 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.Check#getFunction <em>Function</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.Check#getTemplateArguments <em>Template Arguments</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.Check#getInputParameterTypes <em>Input Parameter Types</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.Check#getOutputParameterTypes <em>Output Parameter Types</em>}</li>
@@ -29,6 +30,34 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * @generated
  */
 public interface Check extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Function</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getChecks <em>Checks</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Function</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Function</em>' container reference.
+	 * @see #setFunction(FunctionDefinition)
+	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getCheck_Function()
+	 * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getChecks
+	 * @model opposite="checks" required="true" transient="false"
+	 * @generated
+	 */
+	FunctionDefinition getFunction();
+
+	/**
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.Check#getFunction <em>Function</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Function</em>' container reference.
+	 * @see #getFunction()
+	 * @generated
+	 */
+	void setFunction(FunctionDefinition value);
+
 	/**
 	 * Returns the value of the '<em><b>Template Arguments</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipselabs.mscript.typesystem.Expression}.

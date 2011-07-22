@@ -14,9 +14,9 @@ package org.eclipselabs.mscript.language.interpreter.builtin;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipselabs.mscript.computation.core.IComputationContext;
 import org.eclipselabs.mscript.computation.core.value.ISimpleNumericValue;
 import org.eclipselabs.mscript.computation.core.value.IValue;
-import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
 
 /**
  * @author Andreas Unger
@@ -24,7 +24,7 @@ import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
  */
 public class RoundFunction implements IFunction {
 
-	public List<IValue> call(IInterpreterContext context, List<? extends IValue> arguments) {
+	public List<IValue> call(IComputationContext context, List<? extends IValue> arguments) {
 		IValue argument = arguments.get(0);
 		if (argument instanceof ISimpleNumericValue) {
 			IValue result = ((ISimpleNumericValue) argument).round();

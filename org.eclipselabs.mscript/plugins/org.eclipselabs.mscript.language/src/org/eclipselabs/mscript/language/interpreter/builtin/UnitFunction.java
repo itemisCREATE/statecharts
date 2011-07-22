@@ -15,9 +15,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipselabs.mscript.computation.core.IComputationContext;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.computation.core.value.UnitValue;
-import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
 import org.eclipselabs.mscript.typesystem.NumericType;
 
 /**
@@ -26,11 +26,11 @@ import org.eclipselabs.mscript.typesystem.NumericType;
  */
 public class UnitFunction implements IFunction {
 
-	public List<IValue> call(IInterpreterContext context, List<? extends IValue> arguments) {
+	public List<IValue> call(IComputationContext context, List<? extends IValue> arguments) {
 		IValue argument = arguments.get(0);
 		if (argument.getDataType() instanceof NumericType) {
 			NumericType numericType = (NumericType) argument.getDataType();
-			return Collections.<IValue>singletonList(new UnitValue(context.getComputationContext(), EcoreUtil.copy(numericType.getUnit())));
+			return Collections.<IValue>singletonList(new UnitValue(context, EcoreUtil.copy(numericType.getUnit())));
 		}
 		throw new IllegalArgumentException();
 	}

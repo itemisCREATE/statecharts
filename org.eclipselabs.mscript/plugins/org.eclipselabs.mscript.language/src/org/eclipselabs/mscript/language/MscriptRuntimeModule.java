@@ -9,7 +9,6 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipselabs.mscript.language.conversion.MscriptTerminalConverters;
 import org.eclipselabs.mscript.language.linking.MscriptLinker;
 import org.eclipselabs.mscript.language.naming.QualifiedNameConverter;
-import org.eclipselabs.mscript.language.parser.EcoreElementFactory;
 import org.eclipselabs.mscript.language.scoping.GlobalScopeProvider;
 
 /**
@@ -20,10 +19,6 @@ public class MscriptRuntimeModule extends org.eclipselabs.mscript.language.Abstr
 	@Override
 	public Class<? extends IValueConverterService> bindIValueConverterService() {
 		return MscriptTerminalConverters.class;
-	}
-	
-	public Class<? extends org.eclipse.xtext.parser.IAstFactory> bindIAstFactory() {
-		return EcoreElementFactory.class;
 	}
 	
 	/* (non-Javadoc)

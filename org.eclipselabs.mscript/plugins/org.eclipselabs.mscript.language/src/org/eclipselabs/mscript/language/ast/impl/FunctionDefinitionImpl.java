@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.AstPackage;
@@ -22,8 +23,10 @@ import org.eclipselabs.mscript.language.ast.Check;
 import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
-import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
+import org.eclipselabs.mscript.language.ast.InputParameterDeclaration;
+import org.eclipselabs.mscript.language.ast.OutputParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -75,7 +78,7 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ParameterDeclaration> templateParameterDeclarations;
+	protected EList<TemplateParameterDeclaration> templateParameterDeclarations;
 
 	/**
 	 * The cached value of the '{@link #getInputParameterDeclarations() <em>Input Parameter Declarations</em>}' containment reference list.
@@ -85,7 +88,7 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ParameterDeclaration> inputParameterDeclarations;
+	protected EList<InputParameterDeclaration> inputParameterDeclarations;
 
 	/**
 	 * The cached value of the '{@link #getOutputParameterDeclarations() <em>Output Parameter Declarations</em>}' containment reference list.
@@ -95,7 +98,7 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ParameterDeclaration> outputParameterDeclarations;
+	protected EList<OutputParameterDeclaration> outputParameterDeclarations;
 
 	/**
 	 * The cached value of the '{@link #getChecks() <em>Checks</em>}' containment reference list.
@@ -192,9 +195,9 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ParameterDeclaration> getTemplateParameterDeclarations() {
+	public EList<TemplateParameterDeclaration> getTemplateParameterDeclarations() {
 		if (templateParameterDeclarations == null) {
-			templateParameterDeclarations = new EObjectContainmentEList<ParameterDeclaration>(ParameterDeclaration.class, this, AstPackage.FUNCTION_DEFINITION__TEMPLATE_PARAMETER_DECLARATIONS);
+			templateParameterDeclarations = new EObjectContainmentEList<TemplateParameterDeclaration>(TemplateParameterDeclaration.class, this, AstPackage.FUNCTION_DEFINITION__TEMPLATE_PARAMETER_DECLARATIONS);
 		}
 		return templateParameterDeclarations;
 	}
@@ -204,9 +207,9 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ParameterDeclaration> getInputParameterDeclarations() {
+	public EList<InputParameterDeclaration> getInputParameterDeclarations() {
 		if (inputParameterDeclarations == null) {
-			inputParameterDeclarations = new EObjectContainmentEList<ParameterDeclaration>(ParameterDeclaration.class, this, AstPackage.FUNCTION_DEFINITION__INPUT_PARAMETER_DECLARATIONS);
+			inputParameterDeclarations = new EObjectContainmentEList<InputParameterDeclaration>(InputParameterDeclaration.class, this, AstPackage.FUNCTION_DEFINITION__INPUT_PARAMETER_DECLARATIONS);
 		}
 		return inputParameterDeclarations;
 	}
@@ -216,9 +219,9 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ParameterDeclaration> getOutputParameterDeclarations() {
+	public EList<OutputParameterDeclaration> getOutputParameterDeclarations() {
 		if (outputParameterDeclarations == null) {
-			outputParameterDeclarations = new EObjectContainmentEList<ParameterDeclaration>(ParameterDeclaration.class, this, AstPackage.FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS);
+			outputParameterDeclarations = new EObjectContainmentEList<OutputParameterDeclaration>(OutputParameterDeclaration.class, this, AstPackage.FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS);
 		}
 		return outputParameterDeclarations;
 	}
@@ -230,7 +233,7 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 	 */
 	public EList<Check> getChecks() {
 		if (checks == null) {
-			checks = new EObjectContainmentEList<Check>(Check.class, this, AstPackage.FUNCTION_DEFINITION__CHECKS);
+			checks = new EObjectContainmentWithInverseEList<Check>(Check.class, this, AstPackage.FUNCTION_DEFINITION__CHECKS, AstPackage.CHECK__FUNCTION);
 		}
 		return checks;
 	}
@@ -292,6 +295,21 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case AstPackage.FUNCTION_DEFINITION__CHECKS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getChecks()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -366,15 +384,15 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 				return;
 			case AstPackage.FUNCTION_DEFINITION__TEMPLATE_PARAMETER_DECLARATIONS:
 				getTemplateParameterDeclarations().clear();
-				getTemplateParameterDeclarations().addAll((Collection<? extends ParameterDeclaration>)newValue);
+				getTemplateParameterDeclarations().addAll((Collection<? extends TemplateParameterDeclaration>)newValue);
 				return;
 			case AstPackage.FUNCTION_DEFINITION__INPUT_PARAMETER_DECLARATIONS:
 				getInputParameterDeclarations().clear();
-				getInputParameterDeclarations().addAll((Collection<? extends ParameterDeclaration>)newValue);
+				getInputParameterDeclarations().addAll((Collection<? extends InputParameterDeclaration>)newValue);
 				return;
 			case AstPackage.FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS:
 				getOutputParameterDeclarations().clear();
-				getOutputParameterDeclarations().addAll((Collection<? extends ParameterDeclaration>)newValue);
+				getOutputParameterDeclarations().addAll((Collection<? extends OutputParameterDeclaration>)newValue);
 				return;
 			case AstPackage.FUNCTION_DEFINITION__CHECKS:
 				getChecks().clear();

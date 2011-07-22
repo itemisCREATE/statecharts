@@ -166,19 +166,31 @@ public abstract class AbstractValue implements IValue {
 		return InvalidValue.SINGLETON;
 	}
 
-	public IValue power(IValue other) {
-		return InvalidValue.SINGLETON;
-	}
-
-	public IValue unaryMinus() {
+	public IValue negate() {
 		DataType dataType = getDataType().evaluate(OperatorKind.NEGATE, null);
 		if (dataType instanceof InvalidDataType) { 
 			return InvalidValue.SINGLETON;
 		}
-		return doUnaryMinus(dataType);
+		return doNegate(dataType);
 	}
 
-	protected IValue doUnaryMinus(DataType resultDataType) {
+	protected IValue doNegate(DataType resultDataType) {
+		return InvalidValue.SINGLETON;
+	}
+	
+	public IValue power(IValue other) {
+		return InvalidValue.SINGLETON;
+	}
+
+	public IValue transpose() {
+		DataType dataType = getDataType().evaluate(OperatorKind.TRANSPOSE, null);
+		if (dataType instanceof InvalidDataType) { 
+			return InvalidValue.SINGLETON;
+		}
+		return doTranspose(dataType);
+	}
+	
+	public IValue doTranspose(DataType resultDataType) {
 		return InvalidValue.SINGLETON;
 	}
 	

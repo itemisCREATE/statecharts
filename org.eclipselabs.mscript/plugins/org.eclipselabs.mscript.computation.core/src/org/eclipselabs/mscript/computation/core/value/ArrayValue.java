@@ -43,6 +43,14 @@ public class ArrayValue extends AbstractExplicitDataTypeValue implements IArrayV
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.computation.core.value.AbstractExplicitDataTypeValue#getDataType()
+	 */
+	@Override
+	public ArrayType getDataType() {
+		return (ArrayType) super.getDataType();
+	}
+	
 	public IValue get(int index) {
 		return ((IValue[]) elements)[index];
 	}

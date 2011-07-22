@@ -35,13 +35,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="FunctionDefinition" eSuperTypes="#//Definition #//CallableElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="stateful" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="templateParameterDeclarations"
-        upperBound="-1" eType="#//ParameterDeclaration" containment="true"/>
+        upperBound="-1" eType="#//TemplateParameterDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputParameterDeclarations"
-        upperBound="-1" eType="#//ParameterDeclaration" containment="true"/>
+        upperBound="-1" eType="#//InputParameterDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputParameterDeclarations"
-        upperBound="-1" eType="#//ParameterDeclaration" containment="true"/>
+        upperBound="-1" eType="#//OutputParameterDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="checks" upperBound="-1"
-        eType="#//Check" containment="true"/>
+        eType="#//Check" containment="true" eOpposite="#//Check/function"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="assertions" upperBound="-1"
         eType="#//Assertion" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="functionObjectDeclarations"
@@ -52,6 +52,8 @@
         eType="#//Equation" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Check">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
+        eType="#//FunctionDefinition" eOpposite="#//FunctionDefinition/checks"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="templateArguments" upperBound="-1"
         eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
@@ -64,9 +66,13 @@
     <eOperations name="getName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eOperations name="getQualifiedName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ParameterDeclaration" eSuperTypes="#//CallableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterDeclaration" abstract="true"
+      eSuperTypes="#//CallableElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TemplateParameterDeclaration" eSuperTypes="#//ParameterDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InputParameterDeclaration" eSuperTypes="#//ParameterDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OutputParameterDeclaration" eSuperTypes="#//ParameterDeclaration"/>
   <eClassifiers xsi:type="ecore:EEnum" name="AssertionStatusKind">
     <eLiterals name="Info" literal="info"/>
     <eLiterals name="Warning" value="1" literal="warning"/>

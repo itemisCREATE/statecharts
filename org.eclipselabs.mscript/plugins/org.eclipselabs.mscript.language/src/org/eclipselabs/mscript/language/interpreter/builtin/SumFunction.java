@@ -14,9 +14,9 @@ package org.eclipselabs.mscript.language.interpreter.builtin;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipselabs.mscript.computation.core.IComputationContext;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.computation.core.value.VectorValue;
-import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
@@ -25,7 +25,7 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
  */
 public class SumFunction implements IFunction {
 
-	public List<IValue> call(IInterpreterContext context, List<? extends IValue> arguments) {
+	public List<IValue> call(IComputationContext context, List<? extends IValue> arguments) {
 		IValue argument = arguments.get(0);
 		if (argument instanceof VectorValue) {
 			VectorValue vectorValue = (VectorValue) argument;

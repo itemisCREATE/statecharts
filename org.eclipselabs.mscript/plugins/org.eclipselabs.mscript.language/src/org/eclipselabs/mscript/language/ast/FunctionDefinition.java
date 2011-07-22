@@ -61,7 +61,7 @@ public interface FunctionDefinition extends Definition, CallableElement {
 
 	/**
 	 * Returns the value of the '<em><b>Template Parameter Declarations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipselabs.mscript.language.ast.ParameterDeclaration}.
+	 * The list contents are of type {@link org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Template Parameter Declarations</em>' containment reference list isn't clear,
@@ -73,11 +73,11 @@ public interface FunctionDefinition extends Definition, CallableElement {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ParameterDeclaration> getTemplateParameterDeclarations();
+	EList<TemplateParameterDeclaration> getTemplateParameterDeclarations();
 
 	/**
 	 * Returns the value of the '<em><b>Input Parameter Declarations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipselabs.mscript.language.ast.ParameterDeclaration}.
+	 * The list contents are of type {@link org.eclipselabs.mscript.language.ast.InputParameterDeclaration}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Input Parameter Declarations</em>' containment reference list isn't clear,
@@ -89,11 +89,11 @@ public interface FunctionDefinition extends Definition, CallableElement {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ParameterDeclaration> getInputParameterDeclarations();
+	EList<InputParameterDeclaration> getInputParameterDeclarations();
 
 	/**
 	 * Returns the value of the '<em><b>Output Parameter Declarations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipselabs.mscript.language.ast.ParameterDeclaration}.
+	 * The list contents are of type {@link org.eclipselabs.mscript.language.ast.OutputParameterDeclaration}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Output Parameter Declarations</em>' containment reference list isn't clear,
@@ -105,11 +105,12 @@ public interface FunctionDefinition extends Definition, CallableElement {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ParameterDeclaration> getOutputParameterDeclarations();
+	EList<OutputParameterDeclaration> getOutputParameterDeclarations();
 
 	/**
 	 * Returns the value of the '<em><b>Checks</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipselabs.mscript.language.ast.Check}.
+	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.ast.Check#getFunction <em>Function</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Checks</em>' containment reference list isn't clear,
@@ -118,7 +119,8 @@ public interface FunctionDefinition extends Definition, CallableElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Checks</em>' containment reference list.
 	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_Checks()
-	 * @model containment="true"
+	 * @see org.eclipselabs.mscript.language.ast.Check#getFunction
+	 * @model opposite="function" containment="true"
 	 * @generated
 	 */
 	EList<Check> getChecks();

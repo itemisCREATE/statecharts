@@ -11,12 +11,16 @@
 
 package org.eclipselabs.mscript.computation.core.value;
 
+import org.eclipselabs.mscript.typesystem.ArrayType;
+
 /**
  * @author Andreas Unger
  *
  */
-public interface IArrayValue {
+public interface IArrayValue extends IValue {
 
+	ArrayType getDataType();
+	
 	IValue get(int index);
 	
 	IValue get(int rowIndex, int columnIndex);

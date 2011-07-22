@@ -39,6 +39,7 @@ import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
+import org.eclipselabs.mscript.language.ast.InputParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.IterationAccumulator;
 import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.IterationVariable;
@@ -51,6 +52,7 @@ import org.eclipselabs.mscript.language.ast.MemberVariableAccess;
 import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.NegateStepExpression;
+import org.eclipselabs.mscript.language.ast.OutputParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.PostfixExpression;
@@ -67,6 +69,7 @@ import org.eclipselabs.mscript.language.ast.StepLiteral;
 import org.eclipselabs.mscript.language.ast.StepN;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
+import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
@@ -210,6 +213,30 @@ public class AstSwitch<T> extends Switch<T> {
 				ParameterDeclaration parameterDeclaration = (ParameterDeclaration)theEObject;
 				T result = caseParameterDeclaration(parameterDeclaration);
 				if (result == null) result = caseCallableElement(parameterDeclaration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.TEMPLATE_PARAMETER_DECLARATION: {
+				TemplateParameterDeclaration templateParameterDeclaration = (TemplateParameterDeclaration)theEObject;
+				T result = caseTemplateParameterDeclaration(templateParameterDeclaration);
+				if (result == null) result = caseParameterDeclaration(templateParameterDeclaration);
+				if (result == null) result = caseCallableElement(templateParameterDeclaration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.INPUT_PARAMETER_DECLARATION: {
+				InputParameterDeclaration inputParameterDeclaration = (InputParameterDeclaration)theEObject;
+				T result = caseInputParameterDeclaration(inputParameterDeclaration);
+				if (result == null) result = caseParameterDeclaration(inputParameterDeclaration);
+				if (result == null) result = caseCallableElement(inputParameterDeclaration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.OUTPUT_PARAMETER_DECLARATION: {
+				OutputParameterDeclaration outputParameterDeclaration = (OutputParameterDeclaration)theEObject;
+				T result = caseOutputParameterDeclaration(outputParameterDeclaration);
+				if (result == null) result = caseParameterDeclaration(outputParameterDeclaration);
+				if (result == null) result = caseCallableElement(outputParameterDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -744,6 +771,51 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseParameterDeclaration(ParameterDeclaration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Template Parameter Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Template Parameter Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTemplateParameterDeclaration(TemplateParameterDeclaration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Input Parameter Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Input Parameter Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInputParameterDeclaration(InputParameterDeclaration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Output Parameter Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Output Parameter Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOutputParameterDeclaration(OutputParameterDeclaration object) {
 		return null;
 	}
 

@@ -69,9 +69,9 @@ RecordFieldDeclaration:
  
 FunctionDefinition:
 	(stateful?='stateful')? 'func' name=ValidID
-			('<' templateParameterDeclarations+=ParameterDeclaration (',' templateParameterDeclarations+=ParameterDeclaration)* '>')?
-			'(' (inputParameterDeclarations+=ParameterDeclaration (',' inputParameterDeclarations+=ParameterDeclaration)*)? ')'
-			'->' outputParameterDeclarations+=ParameterDeclaration (',' outputParameterDeclarations+=ParameterDeclaration)* '{'
+			('<' templateParameterDeclarations+=TemplateParameterDeclaration (',' templateParameterDeclarations+=TemplateParameterDeclaration)* '>')?
+			'(' (inputParameterDeclarations+=InputParameterDeclaration (',' inputParameterDeclarations+=InputParameterDeclaration)*)? ')'
+			'->' outputParameterDeclarations+=OutputParameterDeclaration (',' outputParameterDeclarations+=OutputParameterDeclaration)* '{'
 		(checks+=Check |
 		assertions+=Assertion |
 		functionObjectDeclarations+=FunctionObjectDeclaration |
@@ -79,7 +79,13 @@ FunctionDefinition:
 		equations+=Equation)*
 	'}';
 
-ParameterDeclaration:
+TemplateParameterDeclaration:
+	name=ValidID;
+
+InputParameterDeclaration:
+	name=ValidID;
+
+OutputParameterDeclaration:
 	name=ValidID;
 
 Check:
@@ -120,16 +126,16 @@ NumericType:
 	RealType | IntegerType | ComplexType | GaussianType;
 	
 RealType:
-	{RealType} 'real' ('(' unit=Unit ')')?;
+	{RealType} 'real' unit=Unit;
 	
 IntegerType:
-	{IntegerType} 'int' ('(' unit=Unit ')')?;
+	{IntegerType} 'int' unit=Unit;
 	
 ComplexType:
-	{ComplexType} 'complex' ('(' unit=Unit ')')?;
+	{ComplexType} 'complex' unit=Unit;
 
 GaussianType:
-	{GaussianType} 'gauss' ('(' unit=Unit ')')?;
+	{GaussianType} 'gauss' unit=Unit;
 
 BooleanType:
 	{BooleanType} 'bool';
@@ -271,10 +277,10 @@ NumericLiteral:
 	RealLiteral | IntegerLiteral;
 	
 RealLiteral:
-	value=ValidDouble (modifier=ValidID)? ('(' unit=Unit ')')?;
+	value=ValidDouble (modifier=ValidID)? unit=Unit;
 	
 IntegerLiteral:
-	value=ValidLong (modifier=ValidID)? ('(' unit=Unit ')')?;
+	value=ValidLong (modifier=ValidID)? unit=Unit;
 
 BooleanLiteral:
 	{BooleanLiteral} (true?='true' | 'false');
@@ -320,7 +326,7 @@ ExpressionList:
 	expressions+=Expression (',' expressions+=Expression)*;
 	
 UnitConstructionOperator:
-	'$' '(' unit=Unit ')';
+	'$' unit=ExplicitUnit;
 
 ParenthesizedExpression:
 	'(' expressions+=Expression (',' expressions+=Expression)* ')';
@@ -336,10 +342,16 @@ EndExpression:
  */
 	
 Unit:
-	{Unit} (numerator=UnitNumerator ('/' denominator=UnitDenominator)?)?;
+	{Unit} ('(' ')' | '(' numerator=UnitNumerator ('/' denominator=UnitDenominator)? ')' | numerator=ImplicitUnitNumerator);
+
+ExplicitUnit returns Unit:
+	'(' numerator=UnitNumerator ('/' denominator=UnitDenominator)? ')';
 
 UnitNumerator:
 	{UnitNumerator} ONE | factors+=UnitFactor ('*' factors+=UnitFactor)*;
+	
+ImplicitUnitNumerator returns UnitNumerator:
+	{UnitNumerator};
 
 UnitDenominator:
 	factors+=UnitFactor | '(' factors+=UnitFactor ('*' factors+=UnitFactor)* ')';

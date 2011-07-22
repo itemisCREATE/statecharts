@@ -5,7 +5,11 @@ package org.eclipselabs.mscript.language.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipselabs.mscript.language.ui.syntaxcoloring.MscriptAntlrTokenToAttributeIdMapper;
+import org.eclipselabs.mscript.language.ui.syntaxcoloring.MscriptHighlightingConfiguration;
+import org.eclipselabs.mscript.language.ui.syntaxcoloring.MscriptSemanticHighlightingCalculator;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -20,4 +24,12 @@ public class MscriptUiModule extends org.eclipselabs.mscript.language.ui.Abstrac
 		return MscriptAntlrTokenToAttributeIdMapper.class;
 	}
 	
+	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return MscriptHighlightingConfiguration.class;
+	}
+	
+	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		return MscriptSemanticHighlightingCalculator.class;
+	}
+
 }

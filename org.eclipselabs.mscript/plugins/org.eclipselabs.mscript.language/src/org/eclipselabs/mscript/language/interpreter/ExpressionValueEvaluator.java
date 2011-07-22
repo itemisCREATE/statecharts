@@ -291,7 +291,7 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 			IValue operandValue = doSwitch(unaryExpression.getOperand());
 			switch (unaryExpression.getOperator()) {
 			case NEGATE:
-				result = operandValue.unaryMinus();
+				result = operandValue.negate();
 				break;
 			case LOGICAL_NOT:
 				if (operandValue instanceof IBooleanValue) {
@@ -486,7 +486,7 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 			if (descriptor != null) {
 				IFunction behavior = builtinFunctionLookupTable.getFunction(descriptor);
 				if (behavior != null) {
-					return behavior.call(context, argumentValues).get(0);
+					return behavior.call(context.getComputationContext(), argumentValues).get(0);
 				}
 			}
 			

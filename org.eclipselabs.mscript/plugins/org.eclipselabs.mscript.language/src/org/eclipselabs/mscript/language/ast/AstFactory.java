@@ -98,13 +98,31 @@ public interface AstFactory extends EFactory {
 	Check createCheck();
 
 	/**
-	 * Returns a new object of class '<em>Parameter Declaration</em>'.
+	 * Returns a new object of class '<em>Template Parameter Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parameter Declaration</em>'.
+	 * @return a new object of class '<em>Template Parameter Declaration</em>'.
 	 * @generated
 	 */
-	ParameterDeclaration createParameterDeclaration();
+	TemplateParameterDeclaration createTemplateParameterDeclaration();
+
+	/**
+	 * Returns a new object of class '<em>Input Parameter Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Input Parameter Declaration</em>'.
+	 * @generated
+	 */
+	InputParameterDeclaration createInputParameterDeclaration();
+
+	/**
+	 * Returns a new object of class '<em>Output Parameter Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Output Parameter Declaration</em>'.
+	 * @generated
+	 */
+	OutputParameterDeclaration createOutputParameterDeclaration();
 
 	/**
 	 * Returns a new object of class '<em>Assertion</em>'.

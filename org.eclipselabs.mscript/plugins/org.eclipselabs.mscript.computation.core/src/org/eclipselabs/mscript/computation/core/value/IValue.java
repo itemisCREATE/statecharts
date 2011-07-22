@@ -11,8 +11,6 @@
 
 package org.eclipselabs.mscript.computation.core.value;
 
-import java.util.List;
-
 import org.eclipselabs.mscript.typesystem.DataType;
 
 /**
@@ -33,15 +31,14 @@ public interface IValue {
 	IValue divide(IValue other);
 	IValue elementWiseMultiply(IValue other);
 	IValue elementWiseDivide(IValue other);
+	IValue negate();
 	IValue power(IValue other);
-	IValue unaryMinus();
+	IValue transpose();
 	IValue lessThan(IValue other);
 	IValue lessThanOrEqualTo(IValue other);
 	IValue greaterThan(IValue other);
 	IValue greaterThanOrEqualTo(IValue other);
 	IValue equalTo(IValue other);
 	IValue notEqualTo(IValue other);
-	
-	IValue getProperty(String name, List<IValue> arguments);
 	
 }
