@@ -113,7 +113,7 @@ public class XtextStyledText {
 	@Inject
 	private Factory sourceViewerFactory;
 	@Inject
-	private XtextResource resource;
+	private XtextResource fakeResource;
 	@Inject
 	private IResourceValidator validator;
 	@Inject
@@ -126,7 +126,7 @@ public class XtextStyledText {
 	@Inject
 	private IResourceSetProvider resourceSetProvider;
 
-	private Resource context;
+	private Resource contextResource;
 
 	private final int style;
 
@@ -137,7 +137,7 @@ public class XtextStyledText {
 	 * 
 	 * In contrast to
 	 * {@link XtextStyledText#XtextStyledText(Composite, int, Injector)}, this
-	 * constructor uses a specific context for xtext.
+	 * constructor uses a specific contextResource for xtext.
 	 * 
 	 * <b>Please note:</b> Since the text control has content assist proposals
 	 * enabled via a listener, <code>dispose</code> must be called to unregister
@@ -147,8 +147,8 @@ public class XtextStyledText {
 	 *            The SWT styles for this text widget.
 	 * @param injector
 	 *            For xtext dependency injection.
-	 * @param context
-	 *            A context for xtext.
+	 * @param contextResource
+	 *            A contextResource for xtext.
 	 */
 	public XtextStyledText(Composite parent, int style, Injector injector,
 			Resource context) {
@@ -159,7 +159,7 @@ public class XtextStyledText {
 	/**
 	 * C'tor to create a new Instance.
 	 * 
-	 * No specific context is set for xtext! If you need a context, use
+	 * No specific contextResource is set for xtext! If you need a contextResource, use
 	 * {@link XtextStyledText#XtextStyledText(Composite, int, Injector, Resource)}
 	 * !
 	 * 
@@ -193,11 +193,10 @@ public class XtextStyledText {
 				null, false, style);
 		sourceviewer.configure(configuration);
 
-		initResourceSet();
-
-		setResourceUri(resource);
-
-		document.setInput(resource);
+		// create resource set and initialize it (add a copy of the context resource as well as the fake resource to it).
+		createAndInitResourceSet();
+		
+		document.setInput(fakeResource);
 
 		IDocumentPartitioner partitioner = documentPartitioner.get();
 		partitioner.connect(document);
@@ -248,16 +247,23 @@ public class XtextStyledText {
 		return activeProject;
 	}
 
-	private ResourceSet initResourceSet() {
+	protected ResourceSet createAndInitResourceSet() {
 		ResourceSet resourceSet = resourceSetProvider.get(getActiveProject());
-		resourceSet.getResources().add(resource);
-		if (context != null) {
-			Resource contextResource = resourceSet.createResource(context
+		if (contextResource != null) {
+			// deep copy context resource contents, because simply loading the fakeResource will
+			// not reflect the current edit state, but the last saved state.
+			Resource contextResourceCopy = resourceSet.createResource(contextResource
 					.getURI());
-			contextResource.getContents().addAll(
-					EcoreUtil.copyAll(context.getContents()));
-			resourceSet.getResources().add(contextResource);
+			contextResourceCopy.getContents().addAll(
+					EcoreUtil.copyAll(contextResource.getContents()));
+			resourceSet.getResources().add(contextResourceCopy);
 		}
+		
+		// add the fake resource (add an uri to it, first)
+		String activeProject = getActiveProject().getName();
+		fakeResource.setURI(URI.createURI("platform:/fakeResource/" + activeProject
+				+ "/embedded." + fileExtension));
+		resourceSet.getResources().add(fakeResource);
 		return resourceSet;
 	}
 
@@ -293,23 +299,6 @@ public class XtextStyledText {
 
 	}
 
-	/**
-	 * Sets the resource uri. From the resource uris project name the global
-	 * scope is determined.
-	 * 
-	 * @param resource
-	 */
-	protected void setResourceUri(final XtextResource resource) {
-		if (context != null) {
-			resource.setURI(context.getURI());
-		} else {
-			String activeProject = getActiveProject().getName();
-			resource.setURI(URI.createURI("platform:/resource/" + activeProject
-					+ "/embedded." + fileExtension));
-			System.out.println("Editors uri " + resource.getURI());
-		}
-	}
-
 	public IParseResult getParseResult() {
 		return document
 				.readOnly(new IUnitOfWork<IParseResult, XtextResource>() {
@@ -331,15 +320,14 @@ public class XtextStyledText {
 	}
 
 	public Resource getContext() {
-		return context;
+		return contextResource;
 	}
 
 	/**
-	 * Set the xtext context for the styled text. This has no effect if 
-	 * {@link XtextStyledText#getStyledText()} has already been called.
-	 */	
-	public void setContext(Resource context) {
-		this.context = context;
+	 * Update the xtext contextResource for the styled text.
+	 */
+	public void setContext(Resource contextResource) {
+		this.contextResource = contextResource;
 	}
 
 }
