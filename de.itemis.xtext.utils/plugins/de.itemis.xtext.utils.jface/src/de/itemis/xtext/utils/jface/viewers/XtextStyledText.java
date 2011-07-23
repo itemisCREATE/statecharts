@@ -275,7 +275,7 @@ public class XtextStyledText {
 		return resourceSet;
 	}
 
-	private URI createFakeResourceUri(String activeProject) {
+	protected URI createFakeResourceUri(String activeProject) {
 		return createFakeResourceBaseFragment(activeProject).appendFileExtension(fileExtension);
 	}
 
@@ -349,5 +349,9 @@ public class XtextStyledText {
 	
 	protected XtextResource getFakeResource() {
 		return fakeResource;
+	}
+	
+	protected IResourceSetProvider getResourceSetProvider() {
+		return resourceSetProvider;
 	}
 }
