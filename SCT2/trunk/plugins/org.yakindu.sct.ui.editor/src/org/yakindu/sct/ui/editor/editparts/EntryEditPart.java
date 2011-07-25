@@ -36,6 +36,7 @@ import org.yakindu.sct.ui.editor.editor.figures.ShallowHistoryFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
 
 import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPolicy;
+import de.itemis.gmf.runtime.commons.figures.EllipseAnchorDefaultSizeNodeFigure;
 
 /**
  * 
@@ -109,7 +110,7 @@ public class EntryEditPart extends AbstractBorderedShapeEditPart {
 
 	@Override
 	protected NodeFigure createMainFigure() {
-		final NodeFigure figure = new DefaultSizeNodeFigure(
+		final NodeFigure figure = new EllipseAnchorDefaultSizeNodeFigure(
 				MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
 		figure.setLayoutManager(new StackLayout());
 		figure.add(getPrimaryShape());
