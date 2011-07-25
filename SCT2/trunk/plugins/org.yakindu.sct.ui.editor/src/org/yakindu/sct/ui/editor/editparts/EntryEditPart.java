@@ -15,11 +15,13 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.AbstractBorderedShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IBorderItemEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemLocator;
 import org.eclipse.gmf.runtime.diagram.ui.handles.ConnectionHandle.HandleDirection;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
@@ -52,6 +54,8 @@ public class EntryEditPart extends AbstractBorderedShapeEditPart {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE,
 				new OneWayConnectionHandlesEditPolicy(HandleDirection.OUTGOING));
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
+				new NonResizableEditPolicyEx());
 	}
 
 	@Override
