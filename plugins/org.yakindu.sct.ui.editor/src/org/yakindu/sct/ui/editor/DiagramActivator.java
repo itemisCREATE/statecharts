@@ -21,7 +21,7 @@ import org.osgi.framework.BundleContext;
  */
 public class DiagramActivator extends AbstractUIPlugin {
 
-	public static final String PLUGIN_ID = "org.yakindu.sct.statechart.diagram";
+	public static final String PLUGIN_ID = "org.yakindu.sct.ui.editor";
 
 	public static final PreferencesHint DIAGRAM_PREFERENCES_HINT = new PreferencesHint(
 			PLUGIN_ID);
