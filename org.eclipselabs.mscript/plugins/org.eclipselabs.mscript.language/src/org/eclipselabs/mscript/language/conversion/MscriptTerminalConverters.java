@@ -11,6 +11,8 @@
 
 package org.eclipselabs.mscript.language.conversion;
 
+import java.util.regex.Pattern;
+
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
@@ -23,14 +25,17 @@ import org.eclipse.xtext.util.Strings;
  *
  */
 public class MscriptTerminalConverters extends DefaultTerminalConverters {
+	
+	private static final Pattern WHITE_SPACE_PATTERN = Pattern.compile("\\s");
 
 	@ValueConverter(rule = "ValidDouble")
 	public IValueConverter<Double> ValidDouble() {
 		return new IValueConverter<Double>() {
 			
 			public Double toValue(String string, INode node) {
-				if (Strings.isEmpty(string))
-					throw new ValueConverterException("Couldn't convert empty string to double", node, null);
+				if (Strings.isEmpty(string)) {
+					return Double.valueOf(0.0);
+				}
 				try {
 					return Double.valueOf(string);
 				} catch (NumberFormatException e) {
@@ -50,12 +55,13 @@ public class MscriptTerminalConverters extends DefaultTerminalConverters {
 		return new IValueConverter<Integer>() {
 			
 			public Integer toValue(String string, INode node) {
-				if (Strings.isEmpty(string))
-					throw new ValueConverterException("Couldn't convert empty string to long", node, null);
+				if (Strings.isEmpty(string)) {
+					return Integer.valueOf(0);
+				}
 				try {
 					return Integer.valueOf(string);
 				} catch (NumberFormatException e) {
-					throw new ValueConverterException("Couldn't convert '" + string + "' to long", node, e);
+					throw new ValueConverterException("Couldn't convert '" + string + "' to int", node, e);
 				}
 			}
 
@@ -71,8 +77,9 @@ public class MscriptTerminalConverters extends DefaultTerminalConverters {
 		return new IValueConverter<Long>() {
 			
 			public Long toValue(String string, INode node) {
-				if (Strings.isEmpty(string))
-					throw new ValueConverterException("Couldn't convert empty string to long", node, null);
+				if (Strings.isEmpty(string)) {
+					return Long.valueOf(0L);
+				}
 				try {
 					return Long.valueOf(string);
 				} catch (NumberFormatException e) {
@@ -87,15 +94,16 @@ public class MscriptTerminalConverters extends DefaultTerminalConverters {
 		};
 	}
 
-	@ValueConverter(rule = "UnitExpressionExponent")
-	public IValueConverter<Integer> UnitExpressionExponent() {
+	@ValueConverter(rule = "UnitExponent")
+	public IValueConverter<Integer> UnitExponent() {
 		return new IValueConverter<Integer>() {
 			
 			public Integer toValue(String string, INode node) {
-				if (Strings.isEmpty(string))
-					throw new ValueConverterException("Couldn't convert empty string to int", node, null);
+				if (Strings.isEmpty(string)) {
+					return Integer.valueOf(0);
+				}
 				try {
-					return Integer.valueOf(string);
+					return Integer.valueOf(WHITE_SPACE_PATTERN.matcher(string).replaceAll(""));
 				} catch (NumberFormatException e) {
 					throw new ValueConverterException("Couldn't convert '" + string + "' to int", node, e);
 				}
