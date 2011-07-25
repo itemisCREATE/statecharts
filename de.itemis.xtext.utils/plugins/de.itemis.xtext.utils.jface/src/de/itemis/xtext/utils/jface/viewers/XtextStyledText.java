@@ -354,4 +354,8 @@ public class XtextStyledText {
 	protected IResourceSetProvider getResourceSetProvider() {
 		return resourceSetProvider;
 	}
+
+	public void resetVisibleRegion() {
+		sourceviewer.resetVisibleRegion();
+	}
 }
