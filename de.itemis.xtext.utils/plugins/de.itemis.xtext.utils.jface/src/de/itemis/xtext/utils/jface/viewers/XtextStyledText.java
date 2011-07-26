@@ -1,10 +1,13 @@
 package de.itemis.xtext.utils.jface.viewers;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -99,7 +102,7 @@ public class XtextStyledText {
 	 * The sourceViewer, that provides additional functions to the styled text
 	 * widget
 	 */
-	private XtextSourceViewer sourceviewer;
+	protected XtextSourceViewer sourceviewer;
 
 	private ValidationJob validationJob;
 
@@ -132,6 +135,33 @@ public class XtextStyledText {
 
 	private Composite parent;
 
+	private IProject activeProject;
+
+	private StyledText styledText;
+
+	private ResourceSet resourceSet;
+
+	/**
+	 * C'tor to create a new Instance.
+	 * 
+	 * No specific contextResource is set for xtext! If you need a
+	 * contextResource, use
+	 * {@link XtextStyledText#XtextStyledText(Composite, int, Injector, Resource)}
+	 * !
+	 * 
+	 * <b>Please note:</b> Since the text control has content assist proposals
+	 * enabled via a listener, <code>dispose</code> must be called to unregister
+	 * the listener!
+	 * 
+	 * @param style
+	 *            The SWT styles for this text widget.
+	 * @param injector
+	 *            For xtext dependency injection.
+	 */
+	public XtextStyledText(Composite parent, int style, Injector injector) {
+		this(parent, style, injector, null);
+	}
+
 	/**
 	 * C'tor to create a new Instance.
 	 * 
@@ -160,135 +190,12 @@ public class XtextStyledText {
 		if (sourceViewerFactory == null)
 			throw new IllegalArgumentException(
 					"Dependency injection did not work!");
-		// context may be null
-		if(context != null){
+		// create resource set
+		resourceSet = createXtextResourceSet();
+		// context may be null (can be passed in lazily as well)
+		if (context != null) {
 			setContextResource(context);
-		}	
-	}
-
-	/**
-	 * C'tor to create a new Instance.
-	 * 
-	 * No specific contextResource is set for xtext! If you need a contextResource, use
-	 * {@link XtextStyledText#XtextStyledText(Composite, int, Injector, Resource)}
-	 * !
-	 * 
-	 * <b>Please note:</b> Since the text control has content assist proposals
-	 * enabled via a listener, <code>dispose</code> must be called to unregister
-	 * the listener!
-	 * 
-	 * @param style
-	 *            The SWT styles for this text widget.
-	 * @param injector
-	 *            For xtext dependency injection.
-	 */
-	public XtextStyledText(Composite parent, int style, Injector injector) {
-		this(parent, style, injector, null);
-	}
-
-	/**
-	 * Creates an {@link SourceViewer} and returns the {@link StyledText} widget
-	 * of the viewer as the cell editors control. Some code is copied from
-	 * {@link XtextEditor}.
-	 */
-	protected void createStyledText() {
-		// create resource set and initialize it (add a copy of the context resource as well as the fake resource to it).
-		createAndInitXtextResourceSet();
-		// connect xtext document to fake resource 
-		initXtextDocument();
-		// connect xtext document to xtext source viewer
-		initXtextSourceViewer();
-		
-		validationJob = createValidationJob();
-		document.setValidationJob(validationJob);
-
-		styledText = sourceviewer.getTextWidget();
-		styledText.addKeyListener(keyListener);
-
-		styledText.setFont(parent.getFont());
-		styledText.setBackground(parent.getBackground());
-		styledText.setText("");
-	}
-
-	private void initXtextSourceViewer() {
-		sourceviewer = sourceViewerFactory.createSourceViewer(parent, null,
-				null, false, style);
-		sourceviewer.configure(configuration);
-		sourceviewer.setDocument(document, new AnnotationModel());
-		SourceViewerDecorationSupport support = new SourceViewerDecorationSupport(
-				sourceviewer, null, new DefaultMarkerAnnotationAccess(),
-				EditorsPlugin.getDefault().getSharedTextColors());
-		configureSourceViewerDecorationSupport(support);
-	}
-
-	private void initXtextDocument() {
-		document.setInput(fakeResource);
-		
-		IDocumentPartitioner partitioner = documentPartitioner.get();
-		partitioner.connect(document);
-		document.setDocumentPartitioner(partitioner);
-	}
-
-	private IProject activeProject;
-
-	private StyledText styledText;
-
-	public void setVisibleRegion(int start, int length) {
-		sourceviewer.setVisibleRegion(start, length);
-	}
-	
-	/**
-	 * @return The actual {@link StyledText} control.
-	 */
-	public StyledText getStyledText() {
-		if (styledText == null) {
-			createStyledText();
 		}
-		return styledText;
-	}
-
-	protected IProject getActiveProject() {
-		if (activeProject == null) {
-			ActiveProjectResolver activeProjectResolver = new ActiveProjectResolver();
-			Display.getDefault().syncExec(activeProjectResolver);
-			activeProject = activeProjectResolver.getResult();
-		}
-		return activeProject;
-	}
-
-	protected ResourceSet createAndInitXtextResourceSet() {
-		ResourceSet resourceSet = resourceSetProvider.get(getActiveProject());
-		if (contextResource != null) {
-			// deep copy context resource contents, because simply loading the fakeResource will
-			// not reflect the current edit state, but the last saved state.
-			Resource contextResourceCopy = resourceSet.createResource(contextResource
-					.getURI());
-			contextResourceCopy.getContents().addAll(
-					EcoreUtil.copyAll(contextResource.getContents()));
-			resourceSet.getResources().add(contextResourceCopy);
-		}
-		
-		// add the fake resource (add an uri to it, first)
-		String activeProject = getActiveProject().getName();
-		fakeResource.setURI(createFakeResourceUri(activeProject));
-		resourceSet.getResources().add(fakeResource);
-		return resourceSet;
-	}
-
-	protected URI createFakeResourceUri(String activeProject) {
-		return createFakeResourceBaseFragment(activeProject).appendFileExtension(fileExtension);
-	}
-
-	protected URI createFakeResourceBaseFragment(String activeProject) {
-		return URI.createPlatformResourceURI(activeProject
-				+ "/embedded", true);
-	}
-
-	private ValidationJob createValidationJob() {
-		return new ValidationJob(validator, document,
-				new AnnotationIssueProcessor(document, sourceviewer
-						.getAnnotationModel(), resolutionProvider),
-				CheckMode.ALL);
 	}
 
 	/**
@@ -316,6 +223,107 @@ public class XtextStyledText {
 
 	}
 
+	protected void createContextFakeResource() {
+		// deep copy context resource contents, because simply loading the
+		// fakeResource will
+		// not reflect the current edit state, but the last saved state.
+		Resource contextResourceCopy = resourceSet
+				.createResource(contextResource.getURI());
+		contextResourceCopy.getContents().addAll(
+				EcoreUtil.copyAll(contextResource.getContents()));
+		resourceSet.getResources().add(contextResourceCopy);
+	}
+
+	private URI createFakeResourceBaseFragment(String activeProject) {
+		return URI.createPlatformResourceURI(activeProject + "/embedded", true);
+	}
+
+	private URI createFakeResourceUri(String activeProject) {
+		return createFakeResourceBaseFragment(activeProject)
+				.appendFileExtension(fileExtension);
+	}
+
+	/**
+	 * Creates an {@link SourceViewer} and returns the {@link StyledText} widget
+	 * of the viewer as the cell editors control. Some code is copied from
+	 * {@link XtextEditor}.
+	 */
+	protected void createStyledText() {
+		// initialize contents of fake resource
+		initXtextFakeResource();
+		// connect xtext document to fake resource
+		initXtextDocument();
+		// connect xtext document to xtext source viewer
+		createXtextSourceViewer();
+
+		validationJob = createValidationJob();
+		document.setValidationJob(validationJob);
+
+		styledText = sourceviewer.getTextWidget();
+		styledText.addKeyListener(keyListener);
+
+		styledText.setFont(parent.getFont());
+		styledText.setBackground(parent.getBackground());
+		styledText.setText("");
+	}
+
+	private ValidationJob createValidationJob() {
+		return new ValidationJob(validator, document,
+				new AnnotationIssueProcessor(document, sourceviewer
+						.getAnnotationModel(), resolutionProvider),
+				CheckMode.ALL);
+	}
+
+	protected ResourceSet createXtextResourceSet() {
+		ResourceSet resourceSet = resourceSetProvider.get(getActiveProject());
+		return resourceSet;
+	}
+
+	protected void createXtextSourceViewer() {
+		sourceviewer = sourceViewerFactory.createSourceViewer(parent, null,
+				null, false, style);
+		sourceviewer.configure(configuration);
+		sourceviewer.setDocument(document, new AnnotationModel());
+		SourceViewerDecorationSupport support = new SourceViewerDecorationSupport(
+				sourceviewer, null, new DefaultMarkerAnnotationAccess(),
+				EditorsPlugin.getDefault().getSharedTextColors());
+		configureSourceViewerDecorationSupport(support);
+	}
+
+	public void dispose() {
+		styledText.removeKeyListener(keyListener);
+		document.disposeInput();
+	}
+
+	protected IProject getActiveProject() {
+		if (activeProject == null) {
+			ActiveProjectResolver activeProjectResolver = new ActiveProjectResolver();
+			Display.getDefault().syncExec(activeProjectResolver);
+			activeProject = activeProjectResolver.getResult();
+		}
+		return activeProject;
+	}
+
+	protected Resource getContextResource() {
+		return contextResource;
+	}
+
+	protected XtextDocument getDocument() {
+		return document;
+	}
+
+	protected XtextResource getFakeResource() {
+		return fakeResource;
+	}
+
+	protected String getFileExtension() {
+		return fileExtension;
+	}
+
+	public List<Issue> getIssues() {
+		return validationJob.createIssues(new NullProgressMonitor());
+	}
+
 	public IParseResult getParseResult() {
 		return document
 				.readOnly(new IUnitOfWork<IParseResult, XtextResource>() {
@@ -327,35 +335,68 @@ public class XtextStyledText {
 				});
 	}
 
-	public List<Issue> getIssues() {
-		return validationJob.createIssues(new NullProgressMonitor());
+	protected ResourceSet getResourceSet() {
+		return resourceSet;
 	}
 
-	public void dispose() {
-		styledText.removeKeyListener(keyListener);
-		document.disposeInput();
+	protected XtextSourceViewer getSourceviewer() {
+		return sourceviewer;
 	}
 
-	protected Resource getContextResource() {
-		return contextResource;
+	/**
+	 * @return The actual {@link StyledText} control.
+	 */
+	public StyledText getStyledText() {
+		if (styledText == null) {
+			createStyledText();
+		}
+		return styledText;
+	}
+
+	protected IResourceValidator getValidator() {
+		return validator;
+	}
+
+	private void initXtextDocument() {
+		document.setInput(fakeResource);
+
+		IDocumentPartitioner partitioner = documentPartitioner.get();
+		partitioner.connect(document);
+		document.setDocumentPartitioner(partitioner);
+	}
+
+	protected void initXtextFakeResource() {
+		// add the fake resource (add an uri to it, first)
+		String activeProject = getActiveProject().getName();
+		fakeResource.setURI(createFakeResourceUri(activeProject));
+		resourceSet.getResources().add(fakeResource);
+	}
+
+	public void resetVisibleRegion() {
+		sourceviewer.resetVisibleRegion();
 	}
 
 	/**
 	 * Update the contextResource for the styled text.
 	 */
-	protected void setContextResource(Resource contextResource) {
+	public void setContextResource(Resource contextResource) {
+		// remove any other resources that may have been created earlier
+		List<Resource> staleResources = new ArrayList<Resource>();
+		for (Resource r : resourceSet.getResources()) {
+			if (r != fakeResource) {
+				staleResources.add(r);
+				r.unload();
+			}
+		}
+		resourceSet.getResources().removeAll(staleResources);
+		// create context fake resource
+		if (contextResource != null) {
+			createContextFakeResource();
+		}
 		this.contextResource = contextResource;
 	}
-	
-	protected XtextResource getFakeResource() {
-		return fakeResource;
-	}
-	
-	protected IResourceSetProvider getResourceSetProvider() {
-		return resourceSetProvider;
-	}
 
-	public void resetVisibleRegion() {
-		sourceviewer.resetVisibleRegion();
+	public void setVisibleRegion(int start, int length) {
+		sourceviewer.setVisibleRegion(start, length);
 	}
 }
