@@ -182,6 +182,7 @@ public class XtextStyledText {
 			Resource context) {
 		this.style = style;
 		this.parent = parent;
+		this.contextResource = context;
 		if (injector == null)
 			throw new IllegalArgumentException("Injector must not be null!");
 		injector.injectMembers(this);
