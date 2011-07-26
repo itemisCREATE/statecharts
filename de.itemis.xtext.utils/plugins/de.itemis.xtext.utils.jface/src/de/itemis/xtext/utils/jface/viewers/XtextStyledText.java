@@ -186,7 +186,6 @@ public class XtextStyledText {
 			Resource context) {
 		this.style = style;
 		this.parent = parent;
-		this.contextResource = context;
 		if (injector == null)
 			throw new IllegalArgumentException("Injector must not be null!");
 		injector.injectMembers(this);
@@ -429,10 +428,10 @@ public class XtextStyledText {
 		}
 		resourceSet.getResources().removeAll(staleResources);
 		// create context fake resource
+		this.contextResource = contextResource;
 		if (contextResource != null) {
 			createContextFakeResource();
 		}
-		this.contextResource = contextResource;
 	}
 
 	public void setVisibleRegion(int start, int length) {
