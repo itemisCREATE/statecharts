@@ -78,6 +78,10 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 	public Injector getInjector() {
 		return injector;
 	}
+	
+	public XtextStyledText getXtextWidget(){
+		return xtextWidget;
+	}
 
 	@Override
 	public StyledText getControl() {
