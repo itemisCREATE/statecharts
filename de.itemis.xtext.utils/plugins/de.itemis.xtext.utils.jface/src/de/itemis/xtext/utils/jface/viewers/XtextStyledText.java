@@ -1,13 +1,11 @@
 package de.itemis.xtext.utils.jface.viewers;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -187,9 +185,6 @@ public class XtextStyledText {
 		if (injector == null)
 			throw new IllegalArgumentException("Injector must not be null!");
 		injector.injectMembers(this);
-		if (sourceViewerFactory == null)
-			throw new IllegalArgumentException(
-					"Dependency injection did not work!");
 		// create resource set
 		resourceSet = createXtextResourceSet();
 		// context may be null (can be passed in lazily as well)
