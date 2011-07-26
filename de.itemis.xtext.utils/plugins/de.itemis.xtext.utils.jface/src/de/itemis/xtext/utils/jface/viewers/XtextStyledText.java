@@ -23,6 +23,8 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.internal.editors.text.EditorsPlugin;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
 import org.eclipse.ui.texteditor.AnnotationPreference;
@@ -113,6 +115,8 @@ public class XtextStyledText {
 	private XtextSourceViewerConfiguration configuration;
 	@Inject
 	private Factory sourceViewerFactory;
+	@Inject
+	private XtextStyledTextHighlightingHelper xtextStyledTextHighlightingHelper;
 	@Inject
 	private XtextResource fakeResource;
 	@Inject
@@ -252,6 +256,9 @@ public class XtextStyledText {
 		// connect xtext document to xtext source viewer
 		createXtextSourceViewer();
 
+		// install semantic highlighting support
+		installHighlightingHelper();
+		
 		validationJob = createValidationJob();
 		document.setValidationJob(validationJob);
 
@@ -261,6 +268,25 @@ public class XtextStyledText {
 		styledText.setFont(parent.getFont());
 		styledText.setBackground(parent.getBackground());
 		styledText.setText("");
+		
+		if ((styledText.getStyle() & SWT.SINGLE) != 0) {
+			// Add listener to send DefaultSelection event when ENTER is pressed.
+			// This will emulate the behavior of the Text widget.
+			styledText.addListener(SWT.KeyDown, new Listener() {
+				
+				public void handleEvent(Event event) {
+					if (event.keyCode == SWT.CR) {
+						Event selectionEvent = new Event();
+						selectionEvent.type = SWT.DefaultSelection;
+						selectionEvent.widget = event.widget;
+						for (Listener l : event.widget.getListeners(SWT.DefaultSelection)) {
+							l.handleEvent(selectionEvent);
+						}
+					}
+				}
+				
+			});
+		}
 	}
 
 	private ValidationJob createValidationJob() {
@@ -286,7 +312,20 @@ public class XtextStyledText {
 		configureSourceViewerDecorationSupport(support);
 	}
 
+	private void installHighlightingHelper() {
+		if (xtextStyledTextHighlightingHelper != null) {
+			xtextStyledTextHighlightingHelper.install(this, sourceviewer);
+		}
+	}
+
+	private void uninstallHighlightingHelper() {
+		if (xtextStyledTextHighlightingHelper != null) {
+			xtextStyledTextHighlightingHelper.uninstall();
+		}
+	}
+
 	public void dispose() {
+		uninstallHighlightingHelper();
 		styledText.removeKeyListener(keyListener);
 		document.disposeInput();
 	}
@@ -337,6 +376,10 @@ public class XtextStyledText {
 
 	protected XtextSourceViewer getSourceviewer() {
 		return sourceviewer;
+	}
+	
+	XtextSourceViewerConfiguration getSourceViewerConfiguration() {
+		return configuration;
 	}
 
 	/**
