@@ -17,7 +17,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(value = Suite.class)
-@SuiteClasses(value = { BuilderTest.class })
+@SuiteClasses(value = { STextBuilderTest.class })
 public class AllTests extends TestSuite {
 
 }

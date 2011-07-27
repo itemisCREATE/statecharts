@@ -17,7 +17,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(value = Suite.class)
-@SuiteClasses(value = { StatechartBuilderTest.class})
+@SuiteClasses(value = { SGraphBuilderTest.class})
 public class AllTests extends TestSuite {
 
 }

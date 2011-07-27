@@ -56,7 +56,7 @@ import org.yakindu.sct.simulation.runtime.sgraph.builder.SGraphBuilder;
  * @author andreas muelder
  * 
  */
-public class StatechartBuilderTest {
+public class SGraphBuilderTest {
 
 	private Statechart sourceSC;
 	private SGraphFactory graphFactory;
@@ -69,7 +69,7 @@ public class StatechartBuilderTest {
 		// set up EMF - the EPackage.Registry requires a context class loader
 		if (Thread.currentThread().getContextClassLoader() == null) {
 			Thread.currentThread().setContextClassLoader(
-					StatechartBuilderTest.class.getClassLoader());
+					SGraphBuilderTest.class.getClassLoader());
 		}
 		//SGraphPackage.eINSTANCE.eClass();
 		

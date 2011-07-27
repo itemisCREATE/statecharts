@@ -23,9 +23,13 @@ import static org.yakindu.sct.simulation.runtime.stext.CoreFunction.BIT_OR;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.yakindu.sct.simulation.runtime.EvaluationException;
+import org.yakindu.sct.simulation.runtime.injectors.StextInjectorProvider;
 import org.yakindu.sct.simulation.runtime.stext.Assert;
 import org.yakindu.sct.simulation.runtime.stext.Assign;
 import org.yakindu.sct.simulation.runtime.stext.BinaryOperation;
@@ -33,9 +37,9 @@ import org.yakindu.sct.simulation.runtime.stext.Conditional;
 import org.yakindu.sct.simulation.runtime.stext.Constant;
 import org.yakindu.sct.simulation.runtime.stext.ProcedureCall;
 import org.yakindu.sct.simulation.runtime.stext.RTExpression;
+import org.yakindu.sct.simulation.runtime.stext.RTScope;
+import org.yakindu.sct.simulation.runtime.stext.RTStatement;
 import org.yakindu.sct.simulation.runtime.stext.Raise;
-import org.yakindu.sct.simulation.runtime.stext.Scope;
-import org.yakindu.sct.simulation.runtime.stext.Statement;
 import org.yakindu.sct.simulation.runtime.stext.StatementSequence;
 import org.yakindu.sct.simulation.runtime.stext.UnaryOperation;
 import org.yakindu.sct.simulation.runtime.stext.Variable;
@@ -47,9 +51,10 @@ import org.yakindu.sct.simulation.runtime.stext.VariableRef;
  * @author andreas muelder
  * 
  */
+
 public class ExpressionsTest {
 
-	static class TestScope extends Scope {
+	static class TestScope extends RTScope {
 
 		public List<String> trace = new ArrayList<String>();
 		public String called;
@@ -114,7 +119,7 @@ public class ExpressionsTest {
 	 */
 	@Test
 	public void testProcedureCall() {
-		Statement stmt = new ProcedureCall("do");
+		RTStatement stmt = new ProcedureCall("do");
 
 		stmt.execute(scope);
 		assertEquals("do", scope.called);
@@ -125,7 +130,7 @@ public class ExpressionsTest {
 	 */
 	@Test
 	public void testRaise() {
-		Statement stmt = new Raise("signal");
+		RTStatement stmt = new Raise("signal");
 
 		stmt.execute(scope);
 		assertEquals("signal", scope.raised);
@@ -138,7 +143,7 @@ public class ExpressionsTest {
 	public void testAssignConstant() {
 		scope.addVariable(new Variable("a"));
 
-		Statement stmt = new Assign(new VariableRef("a"), new Constant(1));
+		RTStatement stmt = new Assign(new VariableRef("a"), new Constant(1));
 
 		// stmt = ASSIGN(VAR("a"), CONST(1));
 
@@ -155,7 +160,8 @@ public class ExpressionsTest {
 		scope.addVariable(new Variable("b"));
 		scope.getVariable("a").setName("Name");
 
-		Statement stmt = new Assign(new VariableRef("b"), new VariableRef("a"));
+		RTStatement stmt = new Assign(new VariableRef("b"),
+				new VariableRef("a"));
 
 		stmt.execute(scope);
 		assertEquals(scope.getValue("a"), scope.getValue("b"));
