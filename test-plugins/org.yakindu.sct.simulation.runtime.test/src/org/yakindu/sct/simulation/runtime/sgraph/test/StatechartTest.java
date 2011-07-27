@@ -47,7 +47,7 @@ public class StatechartTest {
 	 * will be extended by the different test cases as appropriate.
 	 */
 	@Before
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		statechart = new RTStatechart("SC");
 		rootRegion = new RTRegion("r", 1, statechart);
 		initial = new RTPseudostate("i", rootRegion, PseudostateKind.INITIAL);
@@ -189,5 +189,6 @@ public class StatechartTest {
 		assertEquals(state2, rootRegion.getCurrentState());
 		assertEquals(42, statechart.getValue("v"));
 	}
+	
 
 }
