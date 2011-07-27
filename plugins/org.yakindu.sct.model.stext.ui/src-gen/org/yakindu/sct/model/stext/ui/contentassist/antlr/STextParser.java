@@ -168,7 +168,6 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAssignmentAccess().getExpressionAssignment_2(), "rule__Assignment__ExpressionAssignment_2");
 					put(grammarAccess.getEventRaisingAccess().getEventAssignment_1(), "rule__EventRaising__EventAssignment_1");
 					put(grammarAccess.getEventRaisingAccess().getValueAssignment_2_1(), "rule__EventRaising__ValueAssignment_2_1");
-					put(grammarAccess.getOperationCallStatementAccess().getCallAssignment(), "rule__OperationCallStatement__CallAssignment");
 					put(grammarAccess.getLogicalOrExpressionAccess().getRightOperandAssignment_1_2(), "rule__LogicalOrExpression__RightOperandAssignment_1_2");
 					put(grammarAccess.getLogicalAndExpressionAccess().getRightOperandAssignment_1_2(), "rule__LogicalAndExpression__RightOperandAssignment_1_2");
 					put(grammarAccess.getLogicalNotExpressionAccess().getOperandAssignment_1_2(), "rule__LogicalNotExpression__OperandAssignment_1_2");

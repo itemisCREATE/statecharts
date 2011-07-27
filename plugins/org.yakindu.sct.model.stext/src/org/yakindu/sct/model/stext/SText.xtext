@@ -95,7 +95,7 @@ Exitpoint returns sct::Declaration:
 	/* ---- reaction rules ----
 Define the structure of reactions that are central for describing the statecharts behavior. 
 */
-Reaction:
+Reaction :
 	LocalReaction | TransitionReaction;
 
 LocalReaction:
@@ -154,17 +154,13 @@ AlwaysEvent:
 
 /* --- statements --- */
 Statement:
-	Assignment | EventRaising | OperationCallStatement;
+	Assignment | EventRaising | OperationCall;
 
 Assignment:
 	varRef=[sct::Variable] "=" expression=Expression;
 
 EventRaising:
 	'raise' event=[sct::Event] (':' value=Expression)?;
-
-OperationCallStatement:
-	call=OperationCall;
-
 
 
 //****************
@@ -252,5 +248,5 @@ terminal BOOL:
 	'true' | 'false';
 
 terminal FLOAT:
-	('-' | '+')? (INT '.' INT) ('e' ('-' | '+') INT)?;
+	('-' | '+')? (INT '.' INT) ('e' ('-' | '+') INT)? ('f'|'F'|'d'|'D')?;
 

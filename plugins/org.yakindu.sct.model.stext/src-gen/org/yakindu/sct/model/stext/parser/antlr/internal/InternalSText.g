@@ -2189,11 +2189,11 @@ ruleStatement returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getStatementAccess().getOperationCallStatementParserRuleCall_2()); 
+        newCompositeNode(grammarAccess.getStatementAccess().getOperationCallParserRuleCall_2()); 
     }
-    this_OperationCallStatement_2=ruleOperationCallStatement
+    this_OperationCall_2=ruleOperationCall
     { 
-        $current = $this_OperationCallStatement_2.current; 
+        $current = $this_OperationCall_2.current; 
         afterParserOrEnumRuleCall();
     }
 )
@@ -2313,45 +2313,6 @@ ruleEventRaising returns [EObject current=null]
 
 )
 ))?)
-;
-
-
-
-
-
-// Entry rule entryRuleOperationCallStatement
-entryRuleOperationCallStatement returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getOperationCallStatementRule()); }
-	 iv_ruleOperationCallStatement=ruleOperationCallStatement 
-	 { $current=$iv_ruleOperationCallStatement.current; } 
-	 EOF 
-;
-
-// Rule OperationCallStatement
-ruleOperationCallStatement returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getOperationCallStatementAccess().getCallOperationCallParserRuleCall_0()); 
-	    }
-		lv_call_0_0=ruleOperationCall		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getOperationCallStatementRule());
-	        }
-       		set(
-       			$current, 
-       			"call",
-        		lv_call_0_0, 
-        		"OperationCall");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)
 ;
 
 
@@ -3370,7 +3331,7 @@ ruleType returns [Enumerator current=null]
 
 RULE_BOOL : ('true'|'false');
 
-RULE_FLOAT : ('-'|'+')? RULE_INT '.' RULE_INT ('e' ('-'|'+') RULE_INT)?;
+RULE_FLOAT : ('-'|'+')? RULE_INT '.' RULE_INT ('e' ('-'|'+') RULE_INT)? ('f'|'F'|'d'|'D')?;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

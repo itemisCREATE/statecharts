@@ -97,7 +97,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.STATEMENT: return createStatement();
       case StextPackage.ASSIGNMENT: return createAssignment();
       case StextPackage.EVENT_RAISING: return createEventRaising();
-      case StextPackage.OPERATION_CALL_STATEMENT: return createOperationCallStatement();
       case StextPackage.EXPRESSION: return createExpression();
       case StextPackage.SIMPLE_SCOPE: return createSimpleScope();
       case StextPackage.INTERFACE_SCOPE: return createInterfaceScope();
@@ -489,17 +488,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     EventRaisingImpl eventRaising = new EventRaisingImpl();
     return eventRaising;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public OperationCallStatement createOperationCallStatement()
-  {
-    OperationCallStatementImpl operationCallStatement = new OperationCallStatementImpl();
-    return operationCallStatement;
   }
 
   /**

@@ -25,6 +25,8 @@ public class STextActivator extends AbstractUIPlugin {
 
 	private Map<String,Injector> injectors = new HashMap<String,Injector>();
 	private static STextActivator INSTANCE;
+	
+	public static final String STEXT_LANGUAGE_NAME = "org.yakindu.sct.model.stext.SText";
 
 	public Injector getInjector(String languageName) {
 		return injectors.get(languageName);
@@ -35,7 +37,7 @@ public class STextActivator extends AbstractUIPlugin {
 		super.start(context);
 		INSTANCE = this;
 		try {
-			registerInjectorFor("org.yakindu.sct.model.stext.SText");
+			registerInjectorFor(STEXT_LANGUAGE_NAME);
 			
 		} catch (Exception e) {
 			Logger.getLogger(getClass()).error(e.getMessage(), e);

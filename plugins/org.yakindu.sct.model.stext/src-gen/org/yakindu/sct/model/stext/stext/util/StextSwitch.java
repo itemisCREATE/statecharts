@@ -304,18 +304,11 @@ public class StextSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case StextPackage.OPERATION_CALL_STATEMENT:
-      {
-        OperationCallStatement operationCallStatement = (OperationCallStatement)theEObject;
-        T result = caseOperationCallStatement(operationCallStatement);
-        if (result == null) result = caseStatement(operationCallStatement);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case StextPackage.EXPRESSION:
       {
         Expression expression = (Expression)theEObject;
         T result = caseExpression(expression);
+        if (result == null) result = caseStatement(expression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -420,6 +413,7 @@ public class StextSwitch<T> extends Switch<T>
         LogicalOrExpression logicalOrExpression = (LogicalOrExpression)theEObject;
         T result = caseLogicalOrExpression(logicalOrExpression);
         if (result == null) result = caseExpression(logicalOrExpression);
+        if (result == null) result = caseStatement(logicalOrExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -428,6 +422,7 @@ public class StextSwitch<T> extends Switch<T>
         LogicalAndExpression logicalAndExpression = (LogicalAndExpression)theEObject;
         T result = caseLogicalAndExpression(logicalAndExpression);
         if (result == null) result = caseExpression(logicalAndExpression);
+        if (result == null) result = caseStatement(logicalAndExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -436,6 +431,7 @@ public class StextSwitch<T> extends Switch<T>
         LogicalNotExpression logicalNotExpression = (LogicalNotExpression)theEObject;
         T result = caseLogicalNotExpression(logicalNotExpression);
         if (result == null) result = caseExpression(logicalNotExpression);
+        if (result == null) result = caseStatement(logicalNotExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -444,6 +440,7 @@ public class StextSwitch<T> extends Switch<T>
         LogicalRelationExpression logicalRelationExpression = (LogicalRelationExpression)theEObject;
         T result = caseLogicalRelationExpression(logicalRelationExpression);
         if (result == null) result = caseExpression(logicalRelationExpression);
+        if (result == null) result = caseStatement(logicalRelationExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -452,6 +449,7 @@ public class StextSwitch<T> extends Switch<T>
         NumericalAddSubtractExpression numericalAddSubtractExpression = (NumericalAddSubtractExpression)theEObject;
         T result = caseNumericalAddSubtractExpression(numericalAddSubtractExpression);
         if (result == null) result = caseExpression(numericalAddSubtractExpression);
+        if (result == null) result = caseStatement(numericalAddSubtractExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -460,6 +458,7 @@ public class StextSwitch<T> extends Switch<T>
         NumericalMultiplyDivideExpression numericalMultiplyDivideExpression = (NumericalMultiplyDivideExpression)theEObject;
         T result = caseNumericalMultiplyDivideExpression(numericalMultiplyDivideExpression);
         if (result == null) result = caseExpression(numericalMultiplyDivideExpression);
+        if (result == null) result = caseStatement(numericalMultiplyDivideExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -468,6 +467,7 @@ public class StextSwitch<T> extends Switch<T>
         NumericalUnaryExpression numericalUnaryExpression = (NumericalUnaryExpression)theEObject;
         T result = caseNumericalUnaryExpression(numericalUnaryExpression);
         if (result == null) result = caseExpression(numericalUnaryExpression);
+        if (result == null) result = caseStatement(numericalUnaryExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -476,6 +476,7 @@ public class StextSwitch<T> extends Switch<T>
         PrimitiveValueExpression primitiveValueExpression = (PrimitiveValueExpression)theEObject;
         T result = casePrimitiveValueExpression(primitiveValueExpression);
         if (result == null) result = caseExpression(primitiveValueExpression);
+        if (result == null) result = caseStatement(primitiveValueExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -484,6 +485,7 @@ public class StextSwitch<T> extends Switch<T>
         ElementReferenceExpression elementReferenceExpression = (ElementReferenceExpression)theEObject;
         T result = caseElementReferenceExpression(elementReferenceExpression);
         if (result == null) result = caseExpression(elementReferenceExpression);
+        if (result == null) result = caseStatement(elementReferenceExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -492,6 +494,7 @@ public class StextSwitch<T> extends Switch<T>
         OperationCall operationCall = (OperationCall)theEObject;
         T result = caseOperationCall(operationCall);
         if (result == null) result = caseExpression(operationCall);
+        if (result == null) result = caseStatement(operationCall);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -943,22 +946,6 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEventRaising(EventRaising object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Operation Call Statement</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Operation Call Statement</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseOperationCallStatement(OperationCallStatement object)
   {
     return null;
   }

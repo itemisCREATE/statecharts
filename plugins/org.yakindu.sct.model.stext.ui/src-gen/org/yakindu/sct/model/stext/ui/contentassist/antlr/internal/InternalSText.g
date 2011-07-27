@@ -1181,34 +1181,6 @@ finally {
 
 
 
-// Entry rule entryRuleOperationCallStatement
-entryRuleOperationCallStatement 
-:
-{ before(grammarAccess.getOperationCallStatementRule()); }
-	 ruleOperationCallStatement
-{ after(grammarAccess.getOperationCallStatementRule()); } 
-	 EOF 
-;
-
-// Rule OperationCallStatement
-ruleOperationCallStatement
-    @init {
-		int stackSize = keepStackSize();
-    }
-	:
-(
-{ before(grammarAccess.getOperationCallStatementAccess().getCallAssignment()); }
-(rule__OperationCallStatement__CallAssignment)
-{ after(grammarAccess.getOperationCallStatementAccess().getCallAssignment()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-
 // Entry rule entryRuleExpression
 entryRuleExpression 
 :
@@ -1947,9 +1919,9 @@ rule__Statement__Alternatives
 )
 
     |(
-{ before(grammarAccess.getStatementAccess().getOperationCallStatementParserRuleCall_2()); }
-	ruleOperationCallStatement
-{ after(grammarAccess.getStatementAccess().getOperationCallStatementParserRuleCall_2()); }
+{ before(grammarAccess.getStatementAccess().getOperationCallParserRuleCall_2()); }
+	ruleOperationCall
+{ after(grammarAccess.getStatementAccess().getOperationCallParserRuleCall_2()); }
 )
 
 ;
@@ -8375,21 +8347,6 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__OperationCallStatement__CallAssignment
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getOperationCallStatementAccess().getCallOperationCallParserRuleCall_0()); }
-	ruleOperationCall{ after(grammarAccess.getOperationCallStatementAccess().getCallOperationCallParserRuleCall_0()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
 rule__LogicalOrExpression__RightOperandAssignment_1_2
     @init {
 		int stackSize = keepStackSize();
@@ -8641,7 +8598,7 @@ finally {
 
 RULE_BOOL : ('true'|'false');
 
-RULE_FLOAT : ('-'|'+')? RULE_INT '.' RULE_INT ('e' ('-'|'+') RULE_INT)?;
+RULE_FLOAT : ('-'|'+')? RULE_INT '.' RULE_INT ('e' ('-'|'+') RULE_INT)? ('f'|'F'|'d'|'D')?;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

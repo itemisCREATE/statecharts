@@ -49,7 +49,6 @@ import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression;
 import org.yakindu.sct.model.stext.stext.OnCycleEvent;
 import org.yakindu.sct.model.stext.stext.Operation;
 import org.yakindu.sct.model.stext.stext.OperationCall;
-import org.yakindu.sct.model.stext.stext.OperationCallStatement;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.Reaction;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
@@ -280,13 +279,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * @generated
    */
   private EClass eventRaisingEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass operationCallStatementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1062,26 +1054,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getOperationCallStatement()
-  {
-    return operationCallStatementEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getOperationCallStatement_Call()
-  {
-    return (EReference)operationCallStatementEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getExpression()
   {
     return expressionEClass;
@@ -1805,9 +1777,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     createEReference(eventRaisingEClass, EVENT_RAISING__EVENT);
     createEReference(eventRaisingEClass, EVENT_RAISING__VALUE);
 
-    operationCallStatementEClass = createEClass(OPERATION_CALL_STATEMENT);
-    createEReference(operationCallStatementEClass, OPERATION_CALL_STATEMENT__CALL);
-
     expressionEClass = createEClass(EXPRESSION);
 
     simpleScopeEClass = createEClass(SIMPLE_SCOPE);
@@ -1946,7 +1915,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     alwaysEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
     assignmentEClass.getESuperTypes().add(this.getStatement());
     eventRaisingEClass.getESuperTypes().add(this.getStatement());
-    operationCallStatementEClass.getESuperTypes().add(this.getStatement());
+    expressionEClass.getESuperTypes().add(this.getStatement());
     simpleScopeEClass.getESuperTypes().add(theSGraphPackage.getScope());
     interfaceScopeEClass.getESuperTypes().add(theSGraphPackage.getScope());
     internalScopeEClass.getESuperTypes().add(theSGraphPackage.getScope());
@@ -2047,9 +2016,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEClass(eventRaisingEClass, EventRaising.class, "EventRaising", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEventRaising_Event(), theSGraphPackage.getEvent(), null, "event", null, 0, 1, EventRaising.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEventRaising_Value(), this.getExpression(), null, "value", null, 0, 1, EventRaising.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(operationCallStatementEClass, OperationCallStatement.class, "OperationCallStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getOperationCallStatement_Call(), this.getExpression(), null, "call", null, 0, 1, OperationCallStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

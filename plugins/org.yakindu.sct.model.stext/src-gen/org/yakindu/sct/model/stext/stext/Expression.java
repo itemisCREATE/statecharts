@@ -6,7 +6,6 @@
  */
 package org.yakindu.sct.model.stext.stext;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,6 +17,6 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Expression extends EObject
+public interface Expression extends Statement
 {
 } // Expression

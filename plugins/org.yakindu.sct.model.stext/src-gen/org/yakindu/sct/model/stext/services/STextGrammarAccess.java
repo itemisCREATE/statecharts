@@ -1248,13 +1248,13 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cAssignmentParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cEventRaisingParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cOperationCallStatementParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cOperationCallParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		/// * --- statements --- * / Statement:
-		//	Assignment | EventRaising | OperationCallStatement;
+		//	Assignment | EventRaising | OperationCall;
 		public ParserRule getRule() { return rule; }
 
-		//Assignment | EventRaising | OperationCallStatement
+		//Assignment | EventRaising | OperationCall
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Assignment
@@ -1263,8 +1263,8 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//EventRaising
 		public RuleCall getEventRaisingParserRuleCall_1() { return cEventRaisingParserRuleCall_1; }
 
-		//OperationCallStatement
-		public RuleCall getOperationCallStatementParserRuleCall_2() { return cOperationCallStatementParserRuleCall_2; }
+		//OperationCall
+		public RuleCall getOperationCallParserRuleCall_2() { return cOperationCallParserRuleCall_2; }
 	}
 
 	public class AssignmentElements extends AbstractParserRuleElementFinder {
@@ -1345,22 +1345,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Expression
 		public RuleCall getValueExpressionParserRuleCall_2_1_0() { return cValueExpressionParserRuleCall_2_1_0; }
-	}
-
-	public class OperationCallStatementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OperationCallStatement");
-		private final Assignment cCallAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cCallOperationCallParserRuleCall_0 = (RuleCall)cCallAssignment.eContents().get(0);
-		
-		//OperationCallStatement:
-		//	call=OperationCall;
-		public ParserRule getRule() { return rule; }
-
-		//call=OperationCall
-		public Assignment getCallAssignment() { return cCallAssignment; }
-
-		//OperationCall
-		public RuleCall getCallOperationCallParserRuleCall_0() { return cCallOperationCallParserRuleCall_0; }
 	}
 
 	public class ExpressionElements extends AbstractParserRuleElementFinder {
@@ -2177,7 +2161,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private StatementElements pStatement;
 	private AssignmentElements pAssignment;
 	private EventRaisingElements pEventRaising;
-	private OperationCallStatementElements pOperationCallStatement;
 	private ExpressionElements pExpression;
 	private LogicalOrExpressionElements pLogicalOrExpression;
 	private LogicalAndExpressionElements pLogicalAndExpression;
@@ -2640,7 +2623,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// * --- statements --- * / Statement:
-	//	Assignment | EventRaising | OperationCallStatement;
+	//	Assignment | EventRaising | OperationCall;
 	public StatementElements getStatementAccess() {
 		return (pStatement != null) ? pStatement : (pStatement = new StatementElements());
 	}
@@ -2667,16 +2650,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getEventRaisingRule() {
 		return getEventRaisingAccess().getRule();
-	}
-
-	//OperationCallStatement:
-	//	call=OperationCall;
-	public OperationCallStatementElements getOperationCallStatementAccess() {
-		return (pOperationCallStatement != null) ? pOperationCallStatement : (pOperationCallStatement = new OperationCallStatementElements());
-	}
-	
-	public ParserRule getOperationCallStatementRule() {
-		return getOperationCallStatementAccess().getRule();
 	}
 
 	//// ****************
@@ -2894,7 +2867,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal FLOAT:
-	//	("-" | "+")? (INT "." INT) ("e" ("-" | "+") INT)?;
+	//	("-" | "+")? (INT "." INT) ("e" ("-" | "+") INT)? ("f" | "F" | "d" | "D")?;
 	public TerminalRule getFLOATRule() {
 		return (tFLOAT != null) ? tFLOAT : (tFLOAT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "FLOAT"));
 	} 
