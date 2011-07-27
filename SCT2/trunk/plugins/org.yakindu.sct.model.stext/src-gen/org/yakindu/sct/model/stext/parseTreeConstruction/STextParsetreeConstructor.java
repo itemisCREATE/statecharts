@@ -73,20 +73,19 @@ protected class ThisRootNode extends RootToken {
 			case 39: return new Statement_Alternatives(this, this, 39, inst);
 			case 40: return new Assignment_Group(this, this, 40, inst);
 			case 41: return new EventRaising_Group(this, this, 41, inst);
-			case 42: return new OperationCallStatement_CallAssignment(this, this, 42, inst);
-			case 43: return new Expression_LogicalOrExpressionParserRuleCall(this, this, 43, inst);
-			case 44: return new LogicalOrExpression_Group(this, this, 44, inst);
-			case 45: return new LogicalAndExpression_Group(this, this, 45, inst);
-			case 46: return new LogicalNotExpression_Alternatives(this, this, 46, inst);
-			case 47: return new LogicalRelationExpression_Group(this, this, 47, inst);
-			case 48: return new NumericalAddSubtractExpression_Group(this, this, 48, inst);
-			case 49: return new NumericalMultiplyDivideExpression_Group(this, this, 49, inst);
-			case 50: return new NumericalUnaryExpression_Alternatives(this, this, 50, inst);
-			case 51: return new PrimaryExpression_Alternatives(this, this, 51, inst);
-			case 52: return new ValueExpression_Alternatives(this, this, 52, inst);
-			case 53: return new PrimitiveValueExpression_Group(this, this, 53, inst);
-			case 54: return new ElementReferenceExpression_Group(this, this, 54, inst);
-			case 55: return new OperationCall_Group(this, this, 55, inst);
+			case 42: return new Expression_LogicalOrExpressionParserRuleCall(this, this, 42, inst);
+			case 43: return new LogicalOrExpression_Group(this, this, 43, inst);
+			case 44: return new LogicalAndExpression_Group(this, this, 44, inst);
+			case 45: return new LogicalNotExpression_Alternatives(this, this, 45, inst);
+			case 46: return new LogicalRelationExpression_Group(this, this, 46, inst);
+			case 47: return new NumericalAddSubtractExpression_Group(this, this, 47, inst);
+			case 48: return new NumericalMultiplyDivideExpression_Group(this, this, 48, inst);
+			case 49: return new NumericalUnaryExpression_Alternatives(this, this, 49, inst);
+			case 50: return new PrimaryExpression_Alternatives(this, this, 50, inst);
+			case 51: return new ValueExpression_Alternatives(this, this, 51, inst);
+			case 52: return new PrimitiveValueExpression_Group(this, this, 52, inst);
+			case 53: return new ElementReferenceExpression_Group(this, this, 53, inst);
+			case 54: return new OperationCall_Group(this, this, 54, inst);
 			default: return null;
 		}	
 	}	
@@ -6015,11 +6014,11 @@ protected class AlwaysEvent_AlwaysKeyword_1 extends KeywordToken  {
 /************ begin Rule Statement ****************
  *
  * / * --- statements --- * / Statement:
- * 	Assignment | EventRaising | OperationCallStatement;
+ * 	Assignment | EventRaising | OperationCall;
  *
  **/
 
-// Assignment | EventRaising | OperationCallStatement
+// Assignment | EventRaising | OperationCall
 protected class Statement_Alternatives extends AlternativesToken {
 
 	public Statement_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6036,7 +6035,7 @@ protected class Statement_Alternatives extends AlternativesToken {
 		switch(index) {
 			case 0: return new Statement_AssignmentParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new Statement_EventRaisingParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new Statement_OperationCallStatementParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
+			case 2: return new Statement_OperationCallParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -6045,7 +6044,7 @@ protected class Statement_Alternatives extends AlternativesToken {
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAssignmentRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getEventRaisingRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getOperationCallStatementRule().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getOperationCallAccess().getOperationCallAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -6124,31 +6123,31 @@ protected class Statement_EventRaisingParserRuleCall_1 extends RuleCallToken {
 	}	
 }
 
-// OperationCallStatement
-protected class Statement_OperationCallStatementParserRuleCall_2 extends RuleCallToken {
+// OperationCall
+protected class Statement_OperationCallParserRuleCall_2 extends RuleCallToken {
 	
-	public Statement_OperationCallStatementParserRuleCall_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Statement_OperationCallParserRuleCall_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getStatementAccess().getOperationCallStatementParserRuleCall_2();
+		return grammarAccess.getStatementAccess().getOperationCallParserRuleCall_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new OperationCallStatement_CallAssignment(this, this, 0, inst);
+			case 0: return new OperationCall_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getOperationCallStatementRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getOperationCallAccess().getOperationCallAction_0().getType().getClassifier())
 			return null;
-		if(checkForRecursion(OperationCallStatement_CallAssignment.class, eObjectConsumer)) return null;
+		if(checkForRecursion(OperationCall_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
 	}
 	
@@ -6496,63 +6495,6 @@ protected class EventRaising_ValueAssignment_2_1 extends AssignmentToken  {
 
 
 /************ end Rule EventRaising ****************/
-
-
-/************ begin Rule OperationCallStatement ****************
- *
- * OperationCallStatement:
- * 	call=OperationCall;
- *
- **/
-
-// call=OperationCall
-protected class OperationCallStatement_CallAssignment extends AssignmentToken  {
-	
-	public OperationCallStatement_CallAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getOperationCallStatementAccess().getCallAssignment();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new OperationCall_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getOperationCallStatementRule().getType().getClassifier())
-			return null;
-		if((value = eObjectConsumer.getConsumable("call",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("call");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getOperationCallRule().getType().getClassifier())) {
-				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getOperationCallStatementAccess().getCallOperationCallParserRuleCall_0(); 
-				consumed = obj;
-				return param;
-			}
-		}
-		return null;
-	}
-
-    @Override
-	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
-		if(value == inst.getEObject() && !inst.isConsumed()) return null;
-		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
-		}	
-	}	
-}
-
-/************ end Rule OperationCallStatement ****************/
 
 
 /************ begin Rule Expression ****************

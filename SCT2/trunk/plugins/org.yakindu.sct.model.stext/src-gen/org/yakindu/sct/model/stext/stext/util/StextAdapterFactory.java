@@ -227,11 +227,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
         return createEventRaisingAdapter();
       }
       @Override
-      public Adapter caseOperationCallStatement(OperationCallStatement object)
-      {
-        return createOperationCallStatementAdapter();
-      }
-      @Override
       public Adapter caseExpression(Expression object)
       {
         return createExpressionAdapter();
@@ -814,21 +809,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEventRaisingAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.OperationCallStatement <em>Operation Call Statement</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.OperationCallStatement
-   * @generated
-   */
-  public Adapter createOperationCallStatementAdapter()
   {
     return null;
   }
