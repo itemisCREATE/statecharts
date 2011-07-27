@@ -12,15 +12,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
-import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
@@ -75,28 +71,6 @@ import de.itemis.xtext.utils.jface.viewers.util.ActiveProjectResolver;
 // XTextDocument + setup
 @SuppressWarnings("restriction")
 public class XtextStyledText {
-
-	/**
-	 * Key listener executed content assist operation on CTRL+Space
-	 */
-	private final KeyListener keyListener = new KeyListener() {
-
-		public void keyPressed(KeyEvent e) {
-			// CONTENTASSIST_PROPOSALS
-			if ((e.keyCode == 32) && ((e.stateMask & SWT.CTRL) != 0)) {
-				BusyIndicator.showWhile(Display.getDefault(), new Runnable() {
-					public void run() {
-						sourceviewer
-								.doOperation(ISourceViewer.CONTENTASSIST_PROPOSALS);
-					}
-				});
-			}
-		}
-
-		public void keyReleased(KeyEvent e) {
-		}
-
-	};
 
 	/**
 	 * The sourceViewer, that provides additional functions to the styled text
@@ -262,8 +236,8 @@ public class XtextStyledText {
 		document.setValidationJob(validationJob);
 
 		styledText = sourceviewer.getTextWidget();
-		styledText.addKeyListener(keyListener);
 
+		styledText.setData(XtextStyledText.class.getCanonicalName(), this);
 		styledText.setFont(parent.getFont());
 		styledText.setBackground(parent.getBackground());
 		styledText.setText("");
@@ -325,7 +299,6 @@ public class XtextStyledText {
 
 	public void dispose() {
 		uninstallHighlightingHelper();
-		styledText.removeKeyListener(keyListener);
 		document.disposeInput();
 	}
 
@@ -373,7 +346,7 @@ public class XtextStyledText {
 		return resourceSet;
 	}
 
-	protected XtextSourceViewer getSourceviewer() {
+	public XtextSourceViewer getSourceviewer() {
 		return sourceviewer;
 	}
 	
