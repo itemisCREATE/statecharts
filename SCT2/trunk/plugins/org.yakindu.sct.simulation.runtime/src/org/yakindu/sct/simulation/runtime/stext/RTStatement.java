@@ -8,15 +8,11 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.simulation.runtime.sgraph;
+package org.yakindu.sct.simulation.runtime.stext;
 
-import org.yakindu.sct.simulation.runtime.sgraph.RTState;
-import org.yakindu.sct.simulation.runtime.sgraph.RTTransition;
+import org.yakindu.sct.simulation.runtime.ExecutionScope;
 
-public interface StatechartListener {
-	
-	void stateEntered(RTState state);
-	void stateLeft(RTState state);
-	void transitionFired(RTTransition trans);
+public interface RTStatement {
 
+	void execute(ExecutionScope scope);
 }

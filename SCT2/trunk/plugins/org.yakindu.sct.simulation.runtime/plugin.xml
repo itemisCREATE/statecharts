@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.yakindu.sct.simulation.core.sgraph.executionbuilder">
+      <SGraphExecutionBuilder
+            class="org.yakindu.sct.simulation.runtime.stext.builder.STextBuilder"
+            clazz="org.yakindu.sct.simulation.runtime.stext.builder.STextBuilder">
+      </SGraphExecutionBuilder>
+   </extension>
+
+</plugin>

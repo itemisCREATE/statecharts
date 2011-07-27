@@ -12,7 +12,7 @@ package org.yakindu.sct.simulation.runtime.stext;
 
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
 
-public class Raise implements Statement {
+public class Raise implements RTStatement {
 
 	protected String signal;
 	

@@ -69,7 +69,7 @@ public class StatechartLaunchShortcut implements ILaunchShortcut,
 					null, launchManager.generateLaunchConfigurationName(file
 							.getName()));
 
-			newConfig.setAttribute(FILE_NAME, file.getFullPath().toFile().getAbsolutePath());
+			newConfig.setAttribute(FILE_NAME, file.getLocation().toString());
 			return newConfig.doSave();
 			
 		} catch (CoreException e) {

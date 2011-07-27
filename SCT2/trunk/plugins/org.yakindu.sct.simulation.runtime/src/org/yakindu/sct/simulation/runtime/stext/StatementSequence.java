@@ -19,12 +19,12 @@ import org.yakindu.sct.simulation.runtime.ExecutionScope;
  *  
  * @author terfloth@itemis.de
  */
-public class StatementSequence extends ArrayList<Statement> implements Statement {
+public class StatementSequence extends ArrayList<RTStatement> implements RTStatement {
 
 	private static final long serialVersionUID = -7484316500582800045L;
 
 	public void execute(ExecutionScope scope) {
-		for (Statement stmt : this) {	
+		for (RTStatement stmt : this) {	
 			stmt.execute(scope);
 		}
 	}

@@ -8,11 +8,22 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.simulation.runtime.stext;
+package org.yakindu.sct.core.simulation;
 
-import org.yakindu.sct.simulation.runtime.ExecutionScope;
+import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.Vertex;
 
-public interface Statement {
+/**
+ * 
+ * @author andreas muelder
+ * 
+ */
+public interface ISGraphExecutionListener {
 
-	void execute(ExecutionScope scope);
+	void stateEntered(Vertex vertex);
+
+	void stateLeft(Vertex vertex);
+
+	void transitionFired(Transition transition);
+	
 }

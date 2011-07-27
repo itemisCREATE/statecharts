@@ -12,7 +12,7 @@ package org.yakindu.sct.simulation.runtime.stext;
 
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
 
-public class ProcedureCall implements Statement {
+public class ProcedureCall implements RTStatement {
 
 	protected String procedureId;
 	

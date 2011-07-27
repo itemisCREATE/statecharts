@@ -12,16 +12,16 @@ package org.yakindu.sct.simulation.runtime.sgraph;
 
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
 import org.yakindu.sct.simulation.runtime.sgraph.RTAction;
-import org.yakindu.sct.simulation.runtime.stext.Statement;
+import org.yakindu.sct.simulation.runtime.stext.RTStatement;
 
 
 public class ActionStatement extends RTAction {
 
-	protected Statement statement;
+	protected RTStatement statement;
 	protected ExecutionScope scope;
 	
 	
-	public ActionStatement(Statement statement, ExecutionScope scope) {
+	public ActionStatement(RTStatement statement, ExecutionScope scope) {
 		super();
 		this.statement = statement;
 		this.scope = scope;
@@ -29,13 +29,13 @@ public class ActionStatement extends RTAction {
 	
 	
 
-	public Statement getStatement() {
+	public RTStatement getStatement() {
 		return statement;
 	}
 
 
 
-	public void setStatement(Statement statement) {
+	public void setStatement(RTStatement statement) {
 		this.statement = statement;
 	}
 
