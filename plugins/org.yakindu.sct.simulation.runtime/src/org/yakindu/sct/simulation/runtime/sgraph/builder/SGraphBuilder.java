@@ -13,13 +13,13 @@ package org.yakindu.sct.simulation.runtime.sgraph.builder;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
+import org.yakindu.sct.core.simulation.ISGraphExecutionBuilder;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Entry;
@@ -36,9 +36,9 @@ import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
+import org.yakindu.sct.model.stext.stext.TimeUnit;
 import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
-import org.yakindu.sct.simulation.runtime.sgraph.ActionStatement;
 import org.yakindu.sct.simulation.runtime.sgraph.GuardExpression;
 import org.yakindu.sct.simulation.runtime.sgraph.PseudostateKind;
 import org.yakindu.sct.simulation.runtime.sgraph.RTAction;
@@ -54,10 +54,8 @@ import org.yakindu.sct.simulation.runtime.sgraph.RTState;
 import org.yakindu.sct.simulation.runtime.sgraph.RTStatechart;
 import org.yakindu.sct.simulation.runtime.sgraph.RTTimeEvent;
 import org.yakindu.sct.simulation.runtime.sgraph.RTTransition;
-import org.yakindu.sct.simulation.runtime.sgraph.TimeEventExpression;
 import org.yakindu.sct.simulation.runtime.stext.Function;
 import org.yakindu.sct.simulation.runtime.stext.FunctionMethod;
-import org.yakindu.sct.simulation.runtime.stext.RTTrigger.SignalEvent;
 import org.yakindu.sct.simulation.runtime.stext.Variable;
 import org.yakindu.sct.simulation.runtime.stext.builder.STextBuilder;
 
@@ -67,16 +65,15 @@ import org.yakindu.sct.simulation.runtime.stext.builder.STextBuilder;
  * @author andreas muelder
  * 
  */
-public class SGraphBuilder extends Function {
-
-	// TODO: Extract interface
-	private STextBuilder sTextBuilder;
+public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 
 	protected static Comparator<RTRegion> regionComparator = new Comparator<RTRegion>() {
 		public int compare(RTRegion o1, RTRegion o2) {
 			return o1.getPriority() - o2.getPriority();
 		}
 	};
+	
+	
 
 	public RTStatechart build(Statechart source) {
 		RTStatechart sc = new RTStatechart(source.getName());
@@ -93,28 +90,6 @@ public class SGraphBuilder extends Function {
 	public Object build(RTStatechart statechart, Scope scope) {
 		build(statechart, new BasicEList<EObject>(scope.getDeclarations()));
 		return statechart;
-	}
-
-	// TODO: This is an access to the sText meta model, we have to extract these
-	// dependencies
-	// to an own builder
-	@FunctionMethod("")
-	public Object build(RTStatechart statechart, VariableDefinition definition) {
-		Variable variable = new Variable();
-		variable.setName(definition.getName());
-		statechart.addVariable(variable);
-		statechart.defineAlias(definition, variable);
-		if (definition.getType() == Type.BOOLEAN) {
-			variable.setType(Boolean.class);
-			variable.setValue(false);
-		} else if (definition.getType() == Type.INTEGER) {
-			variable.setType(Integer.class);
-			variable.setValue(0);
-		} else if (definition.getType() == Type.REAL) {
-			variable.setType(Float.class);
-			variable.setValue(0.0f);
-		}
-		return null;
 	}
 
 	@FunctionMethod("")
@@ -218,13 +193,14 @@ public class SGraphBuilder extends Function {
 		RTAction action = null;
 
 		Trigger trigger = transition.getTrigger();
-		// TODO: Das muzss hier raus:
+//		// TODO: Das muss hier raus:
 		if (trigger instanceof ReactionTrigger) {
 			EList<EventSpec> triggers = ((ReactionTrigger) trigger)
 					.getTriggers();
 			for (EventSpec eventSpec : triggers) {
 				if (eventSpec instanceof RegularEventSpec) {
-					String name = ((RegularEventSpec) eventSpec).getEvent()
+					Event event = ((RegularEventSpec) eventSpec).getEvent();
+					String name = event
 							.getName();
 					RTSignalEvent signalEvent = tParent
 							.getSignalEvent(name);
@@ -232,18 +208,26 @@ public class SGraphBuilder extends Function {
 						signalTriggers.add(signalEvent);
 					}
 				}
+				if(eventSpec instanceof TimeEventSpec){
+					TimeUnit unit = ((TimeEventSpec) eventSpec).getUnit();
+					final int value = ((TimeEventSpec) eventSpec).getValue();
+					timeTrigger = new RTTimeEvent("id") {
+						@Override
+						public long getDuration() {
+							//TODO unit
+							return value;
+						}
+					};
+					
+				}
 				// TODO: TimeEvent
 			}
-
-			Expression guardExpression = ((ReactionTrigger) trigger)
-					.getGuardExpression();
-			guard = new GuardExpression(
-					sTextBuilder.buildGuardExpression(guardExpression), tParent);
+//			//TODO
 		}
 
-		Effect effect = transition.getEffect();
-		action = new ActionStatement(
-				sTextBuilder.buildActionExpression(effect), tParent);
+//		Effect effect = transition.getEffect();
+//		action = new ActionStatement(
+//				sTextBuilder.buildActionExpression(effect), tParent);
 
 		RTTransition tTrans = new RTTransition("t@", transition.getPriority(),
 				null, signalTriggers, guard, action, fromNode, toNode);

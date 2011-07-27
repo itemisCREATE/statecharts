@@ -75,7 +75,9 @@ public class Function {
 	public static Function lookup(Class<?> functionClass, String name,
 			Class<?>[] paramTypes) {
 
-		List<Method> functionMethods = getFunctionMethods(functionClass);
+		List<Method> functionMethods = new ArrayList<Method>();
+		addFunctionMethods(functionClass, functionMethods);
+		Collections.sort(functionMethods, new PolymorphicComparator());
 		for (Method fMethod : functionMethods) {
 			FunctionMethod fAnno = fMethod.getAnnotation(FunctionMethod.class);
 			if ((name.equals(fMethod.getName())) || name.equals(fAnno.value())) {
@@ -87,8 +89,8 @@ public class Function {
 		return null;
 	}
 
-	private static List<Method> getFunctionMethods(Class<?> functionClass) {
-
+	private static void addFunctionMethods(Class<?> functionClass,
+			List<Method> methodList) {
 		List<Method> result = new ArrayList<Method>();
 		Method[] methods = functionClass.getDeclaredMethods();
 		for (int i = 0; i < methods.length; i++) {
@@ -98,8 +100,10 @@ public class Function {
 				result.add(fMethod);
 			}
 		}
-		Collections.sort(result, new PolymorphicComparator());
-		return result;
+		methodList.addAll(result);
+		if (functionClass.getSuperclass() != null) {
+			addFunctionMethods(functionClass.getSuperclass(), methodList);
+		}
 	}
 
 	private static boolean isCallable(Class<?>[] paramTypes,

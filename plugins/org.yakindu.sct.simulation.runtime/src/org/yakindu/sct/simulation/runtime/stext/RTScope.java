@@ -20,7 +20,7 @@ import org.yakindu.sct.simulation.runtime.ExecutionScope;
  * 
  * @author terfloth@itemis.de
  */
-public class Scope implements ExecutionScope {
+public class RTScope implements ExecutionScope {
 
 	protected Map<String, Variable> variables = new HashMap<String, Variable>();
 	

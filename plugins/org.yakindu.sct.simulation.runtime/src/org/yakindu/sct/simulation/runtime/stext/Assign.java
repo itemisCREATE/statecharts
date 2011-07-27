@@ -17,7 +17,7 @@ import org.yakindu.sct.simulation.runtime.ExecutionScope;
  * @author terfloth@itemis.de
  *
  */
-public class Assign implements Statement {
+public class Assign implements RTStatement {
 	
 	protected VariableRef varRef;
 	protected RTExpression expression;

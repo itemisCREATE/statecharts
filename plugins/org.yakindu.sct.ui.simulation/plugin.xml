@@ -51,4 +51,24 @@
 		  	 </contextualLaunch>
 	    </shortcut>
 	</extension>
+	
+<!-- Session Listener -->
+ <extension
+       point="org.yakindu.sct.simulation.core.sgraph.sessionlistener">
+    <ISimulationSessionListener class="org.yakindu.sct.ui.simulation.editor.HighlightingExecutionListener" />
+    <ISimulationSessionListener
+          class="org.yakindu.sct.ui.simulation.view.EventViewUpdater">
+    </ISimulationSessionListener>
+ </extension>
+ <extension
+       point="org.eclipse.ui.views">
+    <view
+          allowMultiple="false"
+          class="org.yakindu.sct.ui.simulation.view.EventView"
+          icon="icons/yakindu.png"
+          id="org.yakindu.sct.ui.simulation.eventview"
+          name="Event View"
+          restorable="true">
+    </view>
+ </extension>
 </plugin>
