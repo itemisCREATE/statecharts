@@ -17,7 +17,7 @@ import java.util.HashSet;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.simulation.runtime.sgraph.ActionStatement;
+import org.yakindu.sct.simulation.runtime.sgraph.RTActionStatement;
 import org.yakindu.sct.simulation.runtime.sgraph.GuardExpression;
 import org.yakindu.sct.simulation.runtime.sgraph.PseudostateKind;
 import org.yakindu.sct.simulation.runtime.sgraph.RTPseudostate;
@@ -28,7 +28,7 @@ import org.yakindu.sct.simulation.runtime.sgraph.RTStatechart;
 import org.yakindu.sct.simulation.runtime.sgraph.RTTransition;
 import org.yakindu.sct.simulation.runtime.stext.Assign;
 import org.yakindu.sct.simulation.runtime.stext.Constant;
-import org.yakindu.sct.simulation.runtime.stext.Variable;
+import org.yakindu.sct.simulation.runtime.stext.RTVariable;
 import org.yakindu.sct.simulation.runtime.stext.VariableRef;
 
 @SuppressWarnings("all")
@@ -130,7 +130,7 @@ public class StatechartTest {
 	public void testTransitionWithTriggerAndGuard() {
 
 		final RTSignalEvent event = new RTSignalEvent("event");
-		Variable var = new Variable("v");
+		RTVariable var = new RTVariable("v");
 		statechart.addVariable(var);
 
 		RTSimpleState state2 = new RTSimpleState("s2", "b", rootRegion, null,
@@ -165,7 +165,7 @@ public class StatechartTest {
 	public void testTransitionWithAction() {
 
 		final RTSignalEvent event = new RTSignalEvent("event");
-		Variable var = new Variable("v");
+		RTVariable var = new RTVariable("v");
 		statechart.addVariable(var);
 
 		RTSimpleState state2 = new RTSimpleState("s2", "b", rootRegion, null,
@@ -174,7 +174,7 @@ public class StatechartTest {
 			{
 				add(event);
 			}
-		}, null, new ActionStatement(new Assign(new VariableRef("v"),
+		}, null, new RTActionStatement(new Assign(new VariableRef("v"),
 				new Constant(42)), statechart), state1, state2);
 
 		assertNull(rootRegion.getCurrentState());
