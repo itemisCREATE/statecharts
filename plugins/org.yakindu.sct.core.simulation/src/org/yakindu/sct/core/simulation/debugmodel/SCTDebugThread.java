@@ -1,8 +1,12 @@
 package org.yakindu.sct.core.simulation.debugmodel;
 
+import org.eclipse.core.runtime.PlatformObject;
+import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
+import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IBreakpoint;
+import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.yakindu.sct.core.simulation.ISGraphExecutionFacade;
@@ -10,19 +14,20 @@ import org.yakindu.sct.core.simulation.SGraphSimulationSession;
 
 /**
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SCTDebugThread extends SCTDebugElement implements IThread {
+public class SCTDebugThread extends PlatformObject implements IThread {
 
 	private boolean stepping = false;
-	private boolean terminated;
-	private boolean suspended;
+	private boolean terminated = false;
+	private boolean suspended = false;
 	private Thread thread;
 	private SGraphSimulationSession session;
+	private final SCTDebugTarget target;
 
 	public SCTDebugThread(SCTDebugTarget target, ISGraphExecutionFacade facade) {
-		super(target);
+		this.target = target;
 		session = new SGraphSimulationSession(facade);
 		thread = new Thread(session);
 		thread.start();
@@ -30,7 +35,7 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public IStackFrame[] getStackFrames() throws DebugException {
-		return null;
+		return new IStackFrame[] {};
 	}
 
 	public boolean hasStackFrames() throws DebugException {
@@ -50,7 +55,7 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public boolean canResume() {
-		return suspended;
+		return suspended && !terminated;
 	}
 
 	public boolean canSuspend() {
@@ -62,11 +67,13 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public void resume() throws DebugException {
+		fireEvent(new DebugEvent(this, DebugEvent.RESUME));
 		session.resume();
 		suspended = false;
 	}
 
 	public void suspend() throws DebugException {
+		fireEvent(new DebugEvent(this, DebugEvent.SUSPEND));
 		session.suspend();
 		suspended = true;
 	}
@@ -76,7 +83,7 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public boolean canStepOver() {
-		return isSuspended();
+		return isSuspended() && !isTerminated();
 	}
 
 	public boolean canStepReturn() {
@@ -91,6 +98,7 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public void stepOver() throws DebugException {
+		fireEvent(new DebugEvent(getDebugTarget(), DebugEvent.STEP_OVER));
 		session.singleStep();
 	}
 
@@ -106,8 +114,9 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public void terminate() throws DebugException {
-		session.terminate();
+		fireEvent(new DebugEvent(getDebugTarget(), DebugEvent.TERMINATE));
 		terminated = true;
+		session.terminate();
 	}
 
 	@Override
@@ -118,5 +127,19 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	@Override
 	public ILaunch getLaunch() {
 		return getDebugTarget().getLaunch();
+	}
+
+	protected void fireEvent(DebugEvent event) {
+		DebugPlugin.getDefault().fireDebugEventSet(new DebugEvent[] { event });
+	}
+
+	@Override
+	public String getModelIdentifier() {
+		return IDebugConstants.DEBUG_THREAD;
+	}
+
+	@Override
+	public IDebugTarget getDebugTarget() {
+		return target;
 	}
 }
