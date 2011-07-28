@@ -13,7 +13,6 @@ package org.yakindu.sct.core.simulation;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.yakindu.sct.core.simulation.extensions.Extensions;
 import org.yakindu.sct.core.simulation.extensions.IExtensionPoints;
 
 /**

@@ -2,6 +2,7 @@ package org.yakindu.sct.core.simulation.debugmodel;
 
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
@@ -11,12 +12,13 @@ import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 import org.yakindu.sct.core.simulation.ISGraphExecutionFacade;
+
 /**
  * 
- * @author andreas muelder
- *
+ * @author andreas muelder - Initial contribution and API
+ * 
  */
-public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
+public class SCTDebugTarget extends PlatformObject implements IDebugTarget {
 
 	private IProcess process;
 
@@ -26,7 +28,6 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 
 	public SCTDebugTarget(ILaunch launch, ISGraphExecutionFacade facade)
 			throws CoreException {
-		super(null);
 		this.launch = launch;
 		thread = new SCTDebugThread(this, facade);
 		DebugPlugin.getDefault().getBreakpointManager()
@@ -62,6 +63,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 	}
 
 	public void terminate() throws DebugException {
+
 		thread.terminate();
 	}
 
@@ -126,5 +128,15 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 	@Override
 	public ILaunch getLaunch() {
 		return launch;
+	}
+
+	@Override
+	public String getModelIdentifier() {
+		return IDebugConstants.DEBUG_TARGET;
+	}
+
+	@Override
+	public IDebugTarget getDebugTarget() {
+		return this;
 	}
 }
