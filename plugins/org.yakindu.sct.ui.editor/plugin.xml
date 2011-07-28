@@ -518,7 +518,7 @@
             </ElementType>
          </ViewId>
       </GlobalActionHandlerProvider>
-      <GlobalActionHandlerProvider class="org.yakindu.sct.ui.editor.providers.SemanticCopyGlobalActionHandlerProvider" id="global-actions">
+      <GlobalActionHandlerProvider class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider" id="global-actions">
          <Priority name="Lowest">
          </Priority>
          <ViewId id="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
@@ -587,11 +587,5 @@
          </action>    
       </objectContribution>           
 </extension>
- <extension point="org.eclipse.gmf.runtime.emf.clipboard.core.clipboardSupport">
-      <factory
-            class="org.yakindu.sct.ui.editor.clipboard.StatechartClipboardSupportFactory"
-            nsURI="http://www.yakindu.org/sct/2.0.0"
-            priority="highest"/>
-   </extension>
 
 </plugin>

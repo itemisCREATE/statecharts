@@ -12,20 +12,28 @@ package org.yakindu.sct.ui.editor.commands;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.common.ui.action.actions.global.ClipboardContentsHelper;
 import org.eclipse.gmf.runtime.common.ui.action.actions.global.ClipboardManager;
 import org.eclipse.gmf.runtime.common.ui.util.ICustomData;
+import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.clipboard.core.ClipboardUtil;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
+import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.ui.editor.clipboard.SCTClipboardUtil;
+import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
  * 
@@ -44,31 +52,75 @@ public class SemanticPasteCommand extends AbstractTransactionalCommand {
 		this.targets = target;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 			IAdaptable info) throws ExecutionException {
+		
 		ICustomData[] clipboardData = ClipboardManager.getInstance()
 				.getClipboardData(SemanticCopyCommand.DRAWING_SURFACE,
 						ClipboardContentsHelper.getInstance());
-		String notationData = new String(clipboardData[0].getData());
-		System.out.println(notationData);
-		String semanticData = new String(clipboardData[1].getData());
-		System.out.println(semanticData);
-
-		for (IGraphicalEditPart target : targets) {
-			Collection semanticElements = ClipboardUtil.pasteElementsFromString(semanticData,
-					target.resolveSemanticElement(), null,
-					new NullProgressMonitor());
-			
-			Collection<View> notationElements = ClipboardUtil.pasteElementsFromString(notationData,
-					target.getNotationView(), null, new NullProgressMonitor());
-			
-			
-			System.out.println(semanticElements);
-			System.out.println(notationElements);
-			
+		
+		Object object = SCTClipboardUtil.getObjectFromByteArray(clipboardData[0].getData());
+		
+		if (object instanceof Map<?, ?>) {
+			copyElementsAndNotationViewAttributes((Map<byte[], String>) object);
+		}
+		
+		else {
+			String dataString = new String(clipboardData[0].getData());
+			for (IGraphicalEditPart target : targets) {
+				
+				Collection semanticElements = ClipboardUtil.pasteElementsFromString(dataString,
+						target.resolveSemanticElement(), null,
+						new NullProgressMonitor());
+			}
 		}
 		return CommandResult.newOKCommandResult();
 	}
+	
+	@SuppressWarnings("unchecked")
+	private void copyElementsAndNotationViewAttributes(Map<byte[], String> map) {
+		for (IGraphicalEditPart target : targets) {
+			Resource resource = target.resolveSemanticElement().eResource();
+			for (byte[] semanticKeySet : map.keySet()) {
 
+				EObject eObject = resource.getEObject(map.get(semanticKeySet));
+
+				if (eObject instanceof Node) {
+					Node view = (Node) eObject;
+
+					Collection<EObject> semanticElements = (Collection<EObject>) ClipboardUtil
+							.pasteElementsFromString(
+									new String(semanticKeySet),
+									target.resolveSemanticElement(), null,
+									new NullProgressMonitor());
+
+					EObject semanticElement = semanticElements.iterator()
+							.next();
+
+					View compartmentView = getStateCompartmentView(target.getNotationView());
+					if (compartmentView!=null) {
+						Node newNode = ViewService.createNode(
+								compartmentView, semanticElement,
+								view.getType(), target.getDiagramPreferencesHint());
+						
+						newNode.setLayoutConstraint(EcoreUtil.copy(view
+								.getLayoutConstraint()));
+					}
+				}
+			}
+		}
+	}
+	
+	private View getStateCompartmentView(View stateView) {
+		for (Object object : stateView.getChildren()) {
+			if (object instanceof View
+					&& ((View) object).getType() == SemanticHints.REGION_COMPARTMENT) {
+				return (View) object;
+			}
+		}
+		return null;
+	}
+	
 }

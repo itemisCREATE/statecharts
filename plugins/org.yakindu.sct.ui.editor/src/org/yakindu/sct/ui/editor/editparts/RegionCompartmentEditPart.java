@@ -26,7 +26,9 @@ import org.yakindu.sct.ui.editor.policies.RegionCompartmentXYLayoutEditPolicy;
  * @author muelder
  */
 public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
-
+	
+	private boolean isSupportingViewActions = true;
+	
 	public RegionCompartmentEditPart(View view) {
 		super(view);
 	}
@@ -42,6 +44,14 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 				new DragDropEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE,
 				new RegionCompartmentXYLayoutEditPolicy());
+	}
+	
+	public boolean isSupportingViewActions(){
+		return this.isSupportingViewActions;
+	}
+	
+	public void setIsSupportingViewActions(boolean supportsViewActions){
+		this.isSupportingViewActions = supportsViewActions;
 	}
 
 	@Override
