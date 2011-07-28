@@ -2,8 +2,6 @@ package org.yakindu.sct.simulation.runtime.sgraph;
 
 import java.util.Set;
 
-import org.yakindu.sct.simulation.runtime.sgraph.RTStatechart;
-
 /**
  * Representation of a state (i.e. abstract base class for CompoundState, SimpleState,
  * and FinalState). A state has the unique property, that the system may be "in"

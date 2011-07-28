@@ -36,7 +36,7 @@ public class VariableRef implements RTExpression {
 	}
 
 	
-	public Variable getVariable(ExecutionScope scope) {
+	public RTVariable getVariable(ExecutionScope scope) {
 		return scope.getVariable(name);
 	}
 	

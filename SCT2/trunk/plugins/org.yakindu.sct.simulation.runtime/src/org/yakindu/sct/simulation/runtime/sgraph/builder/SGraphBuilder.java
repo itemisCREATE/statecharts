@@ -31,17 +31,15 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.stext.stext.EventSpec;
-import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
-import org.yakindu.sct.model.stext.stext.Type;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
-import org.yakindu.sct.simulation.runtime.sgraph.GuardExpression;
 import org.yakindu.sct.simulation.runtime.sgraph.PseudostateKind;
 import org.yakindu.sct.simulation.runtime.sgraph.RTAction;
+import org.yakindu.sct.simulation.runtime.sgraph.RTActionStatement;
 import org.yakindu.sct.simulation.runtime.sgraph.RTCompoundState;
 import org.yakindu.sct.simulation.runtime.sgraph.RTFinalState;
 import org.yakindu.sct.simulation.runtime.sgraph.RTGuard;
@@ -56,7 +54,8 @@ import org.yakindu.sct.simulation.runtime.sgraph.RTTimeEvent;
 import org.yakindu.sct.simulation.runtime.sgraph.RTTransition;
 import org.yakindu.sct.simulation.runtime.stext.Function;
 import org.yakindu.sct.simulation.runtime.stext.FunctionMethod;
-import org.yakindu.sct.simulation.runtime.stext.Variable;
+import org.yakindu.sct.simulation.runtime.stext.RTStatement;
+import org.yakindu.sct.simulation.runtime.stext.RTVariable;
 import org.yakindu.sct.simulation.runtime.stext.builder.STextBuilder;
 
 /**
@@ -67,13 +66,17 @@ import org.yakindu.sct.simulation.runtime.stext.builder.STextBuilder;
  */
 public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 
+	private STextBuilder textBuilder;
+
+	public SGraphBuilder() {
+		textBuilder = new STextBuilder();
+	}
+
 	protected static Comparator<RTRegion> regionComparator = new Comparator<RTRegion>() {
 		public int compare(RTRegion o1, RTRegion o2) {
 			return o1.getPriority() - o2.getPriority();
 		}
 	};
-	
-	
 
 	public RTStatechart build(Statechart source) {
 		RTStatechart sc = new RTStatechart(source.getName());
@@ -152,6 +155,14 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 	}
 
 	@FunctionMethod("")
+	public Object build(RTStatechart statechart, Variable definition) {
+		RTVariable var = (RTVariable) textBuilder.build(definition);
+		statechart.addVariable(var);
+		statechart.defineAlias(definition, var);
+		return var;
+	}
+
+	@FunctionMethod("")
 	public Object build(RTRegion parent, State state) {
 		RTState runtimeState = null;
 		if (state.getSubRegions().size() > 0) {
@@ -181,6 +192,18 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 	}
 
 	@FunctionMethod("")
+	public Object build(RTCompoundState compound, Transition transition) {
+		// TODO
+		return null;
+	}
+
+	@FunctionMethod("")
+	public Object build(RTCompoundState compound, Scope scope) {
+		// TODO
+		return null;
+	}
+
+	@FunctionMethod("")
 	public Object build(RTStatechart tParent, Transition transition) {
 		RTNode fromNode = (RTNode) tParent.getElementByAlias(transition
 				.getSource());
@@ -193,44 +216,44 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 		RTAction action = null;
 
 		Trigger trigger = transition.getTrigger();
-//		// TODO: Das muss hier raus:
+		
+		// // TODO: Das muss hier raus:
 		if (trigger instanceof ReactionTrigger) {
 			EList<EventSpec> triggers = ((ReactionTrigger) trigger)
 					.getTriggers();
 			for (EventSpec eventSpec : triggers) {
 				if (eventSpec instanceof RegularEventSpec) {
 					Event event = ((RegularEventSpec) eventSpec).getEvent();
-					String name = event
-							.getName();
-					RTSignalEvent signalEvent = tParent
-							.getSignalEvent(name);
+					String name = event.getName();
+					RTSignalEvent signalEvent = tParent.getSignalEvent(name);
 					if (signalEvent != null) {
 						signalTriggers.add(signalEvent);
 					}
 				}
-				if(eventSpec instanceof TimeEventSpec){
+				if (eventSpec instanceof TimeEventSpec) {
 					TimeUnit unit = ((TimeEventSpec) eventSpec).getUnit();
 					final int value = ((TimeEventSpec) eventSpec).getValue();
 					timeTrigger = new RTTimeEvent("id") {
 						@Override
 						public long getDuration() {
-							//TODO unit
+							// TODO unit
 							return value;
 						}
 					};
-					
+
 				}
 				// TODO: TimeEvent
 			}
-//			//TODO
+		}
+		//Build the transition action
+		Effect effect = transition.getEffect();
+		RTStatement statement = (RTStatement) textBuilder.build(effect);
+		if (statement != null) {
+			action = new RTActionStatement(statement, tParent);
 		}
 
-//		Effect effect = transition.getEffect();
-//		action = new ActionStatement(
-//				sTextBuilder.buildActionExpression(effect), tParent);
-
 		RTTransition tTrans = new RTTransition("t@", transition.getPriority(),
-				null, signalTriggers, guard, action, fromNode, toNode);
+				timeTrigger, signalTriggers, guard, action, fromNode, toNode);
 		tParent.defineAlias(transition, tTrans);
 		return tTrans;
 	}

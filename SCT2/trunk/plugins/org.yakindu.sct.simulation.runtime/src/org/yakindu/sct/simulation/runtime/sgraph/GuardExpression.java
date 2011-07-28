@@ -11,7 +11,6 @@
 package org.yakindu.sct.simulation.runtime.sgraph;
 
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
-import org.yakindu.sct.simulation.runtime.sgraph.RTGuard;
 import org.yakindu.sct.simulation.runtime.stext.RTExpression;
 
 

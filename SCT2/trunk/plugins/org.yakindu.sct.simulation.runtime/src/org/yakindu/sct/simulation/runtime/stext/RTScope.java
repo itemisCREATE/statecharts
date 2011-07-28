@@ -22,13 +22,13 @@ import org.yakindu.sct.simulation.runtime.ExecutionScope;
  */
 public class RTScope implements ExecutionScope {
 
-	protected Map<String, Variable> variables = new HashMap<String, Variable>();
+	protected Map<String, RTVariable> variables = new HashMap<String, RTVariable>();
 	
 	/* (non-Javadoc)
 	 * @see com.yakindu.statechart.model.expressions.runtime.ExecutionScope#getValue(java.lang.String)
 	 */
 	public Object getValue(String varName) {
-		Variable var = getVariable(varName);
+		RTVariable var = getVariable(varName);
 		
 		// TODO : handle not existing variables.
 		return (var != null) ? var.getValue() : null ;
@@ -37,14 +37,14 @@ public class RTScope implements ExecutionScope {
 	/* (non-Javadoc)
 	 * @see com.yakindu.statechart.model.expressions.runtime.ExecutionScope#getVariable(java.lang.String)
 	 */
-	public Variable getVariable(String varName) {
+	public RTVariable getVariable(String varName) {
 		return variables.get(varName);
 	}
 		
 	/* (non-Javadoc)
 	 * @see com.yakindu.statechart.model.expressions.runtime.ExecutionScope#addVariable(com.yakindu.statechart.model.expressions.runtime.Variable)
 	 */
-	public void addVariable(Variable var) {
+	public void addVariable(RTVariable var) {
 		// TODO : check for exceptions etc...
 		variables.put(var.getName(), var);
 	}
@@ -62,6 +62,11 @@ public class RTScope implements ExecutionScope {
 	 */
 	public void raise(String signal) {
 		// TODO Auto-generated method stub		
+	}
+
+	public void setVariableValue(RTVariable variable, Object object) {
+		variable.setValue(object);
+		
 	}
 	
 }

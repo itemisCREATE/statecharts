@@ -10,6 +10,13 @@
  */
 package org.yakindu.sct.model.sgraph.test;
 
+import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS;
+import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS;
+import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_INITIAL_ENTRY_WITH_IN_TRANS;
+import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_NODE_NOT_REACHABLE;
+import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_STATE_WITHOUT_NAME;
+import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION;
+
 import java.util.HashMap;
 
 import junit.framework.TestCase;
@@ -20,15 +27,13 @@ import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
-import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.util.SGraphValidator;
-
-import static org.yakindu.sct.model.sgraph.util.SGraphValidator.*;
 
 /**
  * Test of all validation rules that test very basic properties of statecharts.

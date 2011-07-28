@@ -3,6 +3,7 @@ package org.yakindu.sct.ui.simulation.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
@@ -11,7 +12,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -19,36 +20,80 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.part.ViewPart;
 import org.yakindu.sct.core.simulation.SGraphSimulationSession;
 import org.yakindu.sct.core.simulation.SGraphSimulationSessionRegistry;
+import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.NamedElement;
+import org.yakindu.sct.model.sgraph.Variable;
 
 /**
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
-public class EventView extends ViewPart {
+public class DeclarationView extends ViewPart {
 
-	public static final String ID = "org.yakindu.sct.ui.simulation.eventview";
+	public static final String ID = "org.yakindu.sct.ui.simulation.declarationview";
 
-	private TableViewer viewer;
+	private TableViewer eventViewer;
+
+	private TableViewer variableViewer;
 
 	private List<Control> controls;
 
 	@Override
 	public void createPartControl(Composite parent) {
 		controls = new ArrayList<Control>();
-		parent.setLayout(new FillLayout());
-		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
-				| SWT.V_SCROLL | SWT.FULL_SELECTION);
-		viewer.getTable().setLinesVisible(true);
-		viewer.getTable().setHeaderVisible(true);
-		createColumns(viewer);
-		viewer.setContentProvider(new ArrayContentProvider());
+		parent.setLayout(new GridLayout(1, true));
 
+		eventViewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
+				| SWT.V_SCROLL | SWT.FULL_SELECTION);
+		eventViewer.getTable().setLinesVisible(true);
+		eventViewer.getTable().setHeaderVisible(true);
+		createEventColumns(eventViewer);
+		eventViewer.setContentProvider(new ArrayContentProvider());
+		eventViewer.addFilter(new ClassViewerFilter(Event.class));
+		GridDataFactory.fillDefaults().grab(true, true)
+				.applyTo(eventViewer.getTable());
+
+		variableViewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
+				| SWT.V_SCROLL | SWT.FULL_SELECTION);
+		variableViewer.getTable().setLinesVisible(true);
+		variableViewer.getTable().setHeaderVisible(true);
+		createVariableColumns(variableViewer);
+		variableViewer.setContentProvider(new ArrayContentProvider());
+		variableViewer.addFilter(new ClassViewerFilter(Variable.class));
+		GridDataFactory.fillDefaults().grab(true, true)
+				.applyTo(variableViewer.getTable());
+
+		setEventViewerInput(DeclarationsViewUpdater.getViewerInput());
 	}
 
-	private void createColumns(final TableViewer viewer) {
+	private void createVariableColumns(TableViewer viewer) {
+		TableViewerColumn variableColumn = new TableViewerColumn(viewer,
+				SWT.NONE);
+		variableColumn.getColumn().setText("variable name");
+		variableColumn.getColumn().setWidth(120);
+		variableColumn.getColumn().setResizable(true);
+		variableColumn.getColumn().setMoveable(true);
+		variableColumn.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				if (element instanceof NamedElement) {
+					return ((NamedElement) element).getName();
+				}
+				return super.getText(element);
+			}
+		});
+
+		TableViewerColumn valueColumn = new TableViewerColumn(viewer, SWT.NONE);
+		valueColumn.getColumn().setText("value");
+		valueColumn.getColumn().setWidth(120);
+		valueColumn.getColumn().setResizable(true);
+		valueColumn.getColumn().setMoveable(true);
+		valueColumn.setLabelProvider(new ColumnLabelProvider());
+	}
+
+	private void createEventColumns(final TableViewer viewer) {
 		TableViewerColumn eventColumn = new TableViewerColumn(viewer, SWT.NONE);
 		eventColumn.getColumn().setText("event name");
 		eventColumn.getColumn().setWidth(120);
@@ -76,18 +121,19 @@ public class EventView extends ViewPart {
 
 	@Override
 	public void setFocus() {
-		viewer.getTable().setFocus();
+		eventViewer.getTable().setFocus();
 	}
+	
 
-	public void setViewerInput(List<Event> events) {
-		viewer.setInput(events);
-		TableItem[] items = viewer.getTable().getItems();
+	public void setEventViewerInput(List<Declaration> events) {
+		eventViewer.setInput(events);
+		TableItem[] items = eventViewer.getTable().getItems();
 		for (TableItem tableItem : items) {
-			final TableEditor editor = new TableEditor(viewer.getTable());
+			final TableEditor editor = new TableEditor(eventViewer.getTable());
 			editor.horizontalAlignment = SWT.LEFT;
 			editor.grabHorizontal = true;
 			editor.grabVertical = true;
-			Button button = new Button(viewer.getTable(), SWT.FLAT);
+			Button button = new Button(eventViewer.getTable(), SWT.FLAT);
 			button.setText("raise");
 			button.addSelectionListener(new ButtonListener(tableItem.getText()));
 			editor.setEditor(button, tableItem, 1);
@@ -99,7 +145,8 @@ public class EventView extends ViewPart {
 		for (Control control : controls) {
 			control.dispose();
 		}
-		viewer.setInput(null);
+		eventViewer.setInput(null);
+		variableViewer.setInput(null);
 	}
 
 	private static final class ButtonListener implements SelectionListener {

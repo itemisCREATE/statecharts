@@ -7,7 +7,6 @@ import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.yakindu.sct.core.simulation.ISGraphExecutionFacade;
 import org.yakindu.sct.core.simulation.SGraphSimulationSession;
-import org.yakindu.sct.core.simulation.SGraphSimulationSessionRegistry;
 
 /**
  * 
@@ -25,7 +24,6 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	public SCTDebugThread(SCTDebugTarget target, ISGraphExecutionFacade facade) {
 		super(target);
 		session = new SGraphSimulationSession(facade);
-		SGraphSimulationSessionRegistry.INSTANCE.registerSimulationSession(session);
 		thread = new Thread(session);
 		thread.start();
 		session.start();

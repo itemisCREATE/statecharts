@@ -1,6 +1,7 @@
 package org.yakindu.sct.ui.simulation.view;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
@@ -9,28 +10,34 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.PlatformUI;
-import org.yakindu.sct.core.simulation.ISimulationSessionListener;
-import org.yakindu.sct.model.sgraph.Event;
-import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.core.simulation.ISimulationSessionListener.SimulationSessionListenerAdapter;
+import org.yakindu.sct.model.sgraph.Declaration;
 
 import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorResolver;
 
-public class EventViewUpdater implements ISimulationSessionListener {
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
+public class DeclarationsViewUpdater extends SimulationSessionListenerAdapter {
 
-	public List<Event> getViewerInput() {
-		List<Event> events = new ArrayList<Event>();
+
+	public static List<Declaration> getViewerInput() {
+		List<Declaration> declarations = new ArrayList<Declaration>();
 		Resource activeEditorResource = ActiveEditorResolver
 				.getActiveEditorResource();
+		if (activeEditorResource == null)
+			return Collections.emptyList();
 		TreeIterator<EObject> allContents = activeEditorResource
 				.getAllContents();
 		while (allContents.hasNext()) {
 			EObject next = allContents.next();
-			if (next instanceof Event) {
-				events.add((Event) next);
+			if (next instanceof Declaration) {
+				declarations.add((Declaration) next);
 			}
 		}
-		return events;
+		return declarations;
 
 	}
 
@@ -38,31 +45,37 @@ public class EventViewUpdater implements ISimulationSessionListener {
 			SimulationState newState) {
 		switch (newState) {
 		case STARTED:
-			updateEventView();
+			updateDeclarationView();
 			break;
 		case TERMINATED:
-			clearEventView();
+			clearDeclarationView();
 			break;
 		}
 	}
 
-	protected EventView getEventView() {
+	@Override
+	public void variableValueChanged(String variableName, Object value) {
+		System.out.println("VARIABLE VALUE CHANGED!!!!! " + variableName
+				+ " value is " + value);
+		super.variableValueChanged(variableName, value);
+	}
+
+	protected DeclarationView getDeclarationView() {
 		IViewReference[] viewReferences = PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getViewReferences();
 		for (IViewReference ref : viewReferences) {
-			if (EventView.ID.equals(ref.getId())) {
-				return (EventView) ref.getView(false);
+			if (DeclarationView.ID.equals(ref.getId())) {
+				return (DeclarationView) ref.getView(true);
 
 			}
 		}
 		return null;
 	}
 
-	private void clearEventView() {
+	private void clearDeclarationView() {
 		Display.getDefault().asyncExec(new Runnable() {
-
 			public void run() {
-				EventView eventView = getEventView();
+				DeclarationView eventView = getDeclarationView();
 				if (eventView != null) {
 					eventView.clearViewerInput();
 				}
@@ -70,27 +83,14 @@ public class EventViewUpdater implements ISimulationSessionListener {
 		});
 	}
 
-	private void updateEventView() {
+	private void updateDeclarationView() {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
-				EventView eventView = getEventView();
+				DeclarationView eventView = getDeclarationView();
 				if (eventView != null) {
-					eventView.setViewerInput(getViewerInput());
+					eventView.setEventViewerInput(getViewerInput());
 				}
 			}
 		});
-
-	}
-
-	public void stateEntered(Vertex vertex) {
-		// Nothing to do
-	}
-
-	public void stateLeft(Vertex vertex) {
-		// Nothing to do
-	}
-
-	public void transitionFired(Transition transition) {
-		// Nothing to do
 	}
 }

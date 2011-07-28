@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     committers of YAKINDU - initial API and implementation
+ */
 package org.yakindu.sct.core.simulation;
 
 import java.util.ArrayList;
@@ -13,7 +23,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
 
 /**
  * 
- * @author muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class SGraphSimulationSession implements Runnable,
@@ -24,6 +34,7 @@ public class SGraphSimulationSession implements Runnable,
 	private BlockingQueue<Runnable> taskQueue;
 
 	private SimulationState currentState;
+
 	private final ISGraphExecutionFacade facade;
 
 	private Timer timer;
@@ -40,6 +51,8 @@ public class SGraphSimulationSession implements Runnable,
 		taskQueue.add(new Runnable() {
 			@Override
 			public void run() {
+				SGraphSimulationSessionRegistry.INSTANCE
+						.registerSimulationSession(SGraphSimulationSession.this);
 				changeSimulationState(SimulationState.STARTED);
 				facade.enter();
 				changeSimulationState(SimulationState.RUNNING);
@@ -81,6 +94,8 @@ public class SGraphSimulationSession implements Runnable,
 			@Override
 			public void run() {
 				changeSimulationState(SimulationState.TERMINATED);
+				SGraphSimulationSessionRegistry.INSTANCE
+						.unregisterSimulationSession(SGraphSimulationSession.this);
 			}
 		});
 	}
@@ -160,6 +175,22 @@ public class SGraphSimulationSession implements Runnable,
 
 	public List<ISimulationSessionListener> getListeners() {
 		return listeners;
+	}
+
+	@Override
+	public void variableValueChanged(String variableName, Object value) {
+		for (ISimulationSessionListener listener : listeners) {
+			listener.variableValueChanged(variableName, value);
+		}
+
+	}
+
+	@Override
+	public void eventRaised(String eventName) {
+		for (ISimulationSessionListener listener : listeners) {
+			listener.eventRaised(eventName);
+		}
+
 	}
 
 }

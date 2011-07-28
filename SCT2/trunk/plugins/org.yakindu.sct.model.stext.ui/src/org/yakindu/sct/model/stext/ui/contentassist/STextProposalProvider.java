@@ -3,7 +3,6 @@
 */
 package org.yakindu.sct.model.stext.ui.contentassist;
 
-import org.yakindu.sct.model.stext.ui.contentassist.AbstractSTextProposalProvider;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
