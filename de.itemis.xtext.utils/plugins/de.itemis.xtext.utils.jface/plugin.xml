@@ -7,23 +7,14 @@
             class="de.itemis.xtext.utils.jface.internal.handlers.ContentAssistHandler"
             commandId="org.eclipse.ui.edit.text.contentAssist.proposals">
          <activeWhen>
-            <iterate>
-               <test
-                     property="de.itemis.xtext.utils.jface.xtextStyledText.isFocused">
-               </test>
-            </iterate>
+            <with
+                  variable="activeFocusControlId">
+               <equals
+                     value="org.eclipse.swt.custom.StyledText">
+               </equals>
+            </with>
          </activeWhen>
       </handler>
-   </extension>
-   <extension
-         point="org.eclipse.core.expressions.propertyTesters">
-      <propertyTester
-            class="de.itemis.xtext.utils.jface.internal.propertytester.XtextStyledTextPropertyTester"
-            id="de.itemis.xtext.utils.jface.xtextStyledTextPropertyTester"
-            namespace="de.itemis.xtext.utils.jface.xtextStyledText"
-            properties="isFocused"
-            type="java.lang.Object">
-      </propertyTester>
    </extension>
 
 </plugin>

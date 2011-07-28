@@ -21,7 +21,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.editors.text.EditorsPlugin;
+import org.eclipse.ui.swt.IFocusService;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
 import org.eclipse.ui.texteditor.AnnotationPreference;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
@@ -260,6 +262,10 @@ public class XtextStyledText {
 				
 			});
 		}
+		
+		// Register focus tracker for evaluating the active focus control in core expression
+		IFocusService service = (IFocusService) PlatformUI.getWorkbench().getService(IFocusService.class);
+		service.addFocusTracker(styledText, StyledText.class.getCanonicalName());
 	}
 
 	private ValidationJob createValidationJob() {
