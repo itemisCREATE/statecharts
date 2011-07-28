@@ -44,7 +44,7 @@ import org.yakindu.sct.simulation.runtime.injectors.StextInjectorProvider;
 import org.yakindu.sct.simulation.runtime.stext.RTScope;
 import org.yakindu.sct.simulation.runtime.stext.RTStatement;
 import org.yakindu.sct.simulation.runtime.stext.StatementSequence;
-import org.yakindu.sct.simulation.runtime.stext.Variable;
+import org.yakindu.sct.simulation.runtime.stext.RTVariable;
 import org.yakindu.sct.simulation.runtime.stext.builder.BuilderException;
 import org.yakindu.sct.simulation.runtime.stext.builder.STextBuilder;
 
@@ -68,7 +68,7 @@ public class STextBuilderTest {
 		public String raised;
 
 		@Override
-		public Variable getVariable(String varName) {
+		public RTVariable getVariable(String varName) {
 			trace.add("var:" + varName);
 			return super.getVariable(varName);
 		}
@@ -202,7 +202,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntVariableAssignment() {
 		RTStatement stmt = parseReactionEffect("a = 42;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(42, scope.getValue("a"));
@@ -211,7 +211,7 @@ public class STextBuilderTest {
 	@Test
 	public void testHexVariableAssignment() {
 		RTStatement stmt = parseReactionEffect("a = 0xFF");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(0xFF, scope.getValue("a"));
@@ -220,7 +220,7 @@ public class STextBuilderTest {
 	@Test
 	public void testBoolTrueVariableAssignment() {
 		RTStatement stmt = parseReactionEffect("a = true;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(true, scope.getValue("a"));
@@ -229,7 +229,7 @@ public class STextBuilderTest {
 	@Test
 	public void testBoolFalseVariableAssignment() {
 		RTStatement stmt = parseReactionEffect("a = false;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(false, scope.getValue("a"));
@@ -238,7 +238,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatVariableAssignment() {
 		RTStatement stmt = parseReactionEffect("a = 42.0;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(42.0f, scope.getValue("a"));
@@ -247,7 +247,7 @@ public class STextBuilderTest {
 	@Test
 	public void testStringVariableAssignment() {
 		RTStatement stmt = parseReactionEffect("a = \"fortytwo\";");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals("fortytwo", scope.getValue("a"));
@@ -256,7 +256,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntStringVariableAssignment() {
 		RTStatement stmt = parseReactionEffect("a = \"42\";");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals("42", scope.getValue("a"));
@@ -267,7 +267,7 @@ public class STextBuilderTest {
 		RTStatement stmt = parseReactionEffect("a = true ? 42 : 1;");
 		assertNotNull(stmt);
 
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(42, scope.getValue("a"));
@@ -276,7 +276,7 @@ public class STextBuilderTest {
 	@Test
 	public void testConditionalFalse() {
 		RTStatement stmt = parseReactionEffect("a = false ? 42 : 1;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(1, scope.getValue("a"));
@@ -285,7 +285,7 @@ public class STextBuilderTest {
 	@Test
 	public void testBooleanOr() {
 		RTStatement stmt = parseReactionEffect("a = true || false;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(true, scope.getValue("a"));
@@ -294,7 +294,7 @@ public class STextBuilderTest {
 	@Test
 	public void testBooleanAnd() {
 		RTStatement stmt = parseReactionEffect("a = true && false;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(false, scope.getValue("a"));
@@ -303,7 +303,7 @@ public class STextBuilderTest {
 	@Test
 	public void testBitwiseXor() {
 		RTStatement stmt = parseReactionEffect("a = 0xF0F0 ^ 0xFF00;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(0x0FF0, scope.getValue("a"));
@@ -312,7 +312,7 @@ public class STextBuilderTest {
 	@Test
 	public void testBitwiseOr() {
 		RTStatement stmt = parseReactionEffect("a = 0xF0F0 | 0xFFFF;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(0xFFFF, scope.getValue("a"));
@@ -321,7 +321,7 @@ public class STextBuilderTest {
 	@Test
 	public void testBitwiseAnd() {
 		RTStatement stmt = parseReactionEffect("a = 0xF0F0 & 0xFFFF;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(0x0F0F0, scope.getValue("a"));
@@ -330,7 +330,7 @@ public class STextBuilderTest {
 	@Test
 	public void testBoolEqual() {
 		RTStatement stmt = parseReactionEffect("a = false == false;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(true, scope.getValue("a"));
@@ -339,7 +339,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntEqual() {
 		RTStatement stmt = parseReactionEffect("a = 1 == 1;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(true, scope.getValue("a"));
@@ -348,7 +348,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatEqual() {
 		RTStatement stmt = parseReactionEffect("a = 1.0f == 1.0f;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 		assertEquals(true, scope.getValue("a"));
 	}
@@ -356,7 +356,7 @@ public class STextBuilderTest {
 	@Test
 	public void testBoolNotEqual() {
 		RTStatement stmt = parseReactionEffect("a = true != false;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(true, scope.getValue("a"));
@@ -365,7 +365,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntNotEqual() {
 		RTStatement stmt = parseReactionEffect("a = 1 != 2;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(true, scope.getValue("a"));
@@ -374,7 +374,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatNotEqual() {
 		RTStatement stmt = parseReactionEffect("a = 1.0f != 2.0f;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(true, scope.getValue("a"));
@@ -383,7 +383,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntGreaterEqual() {
 		RTStatement stmt = parseReactionEffect("a = 2 >= 1;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(true, scope.getValue("a"));
@@ -392,7 +392,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatGreaterEqual() {
 		RTStatement stmt = parseReactionEffect("a = 2.0f >= 2.0f;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(true, scope.getValue("a"));
@@ -401,7 +401,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntSmallerEqual() {
 		RTStatement stmt = parseReactionEffect("a = 1 <= 2;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(true, scope.getValue("a"));
@@ -410,7 +410,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatSmallerEqual() {
 		RTStatement stmt = parseReactionEffect("a = 2.0f <= 2.0f;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(true, scope.getValue("a"));
@@ -419,7 +419,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntGreater() {
 		RTStatement stmt = parseReactionEffect("a = 2 > 1;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(true, scope.getValue("a"));
@@ -428,7 +428,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatGreater() {
 		RTStatement stmt = parseReactionEffect("a = 2.1f > 2.0f;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(true, scope.getValue("a"));
@@ -437,7 +437,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntSmaller() {
 		RTStatement stmt = parseReactionEffect("a = 1 < 2;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(true, scope.getValue("a"));
@@ -446,7 +446,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatSmaller() {
 		RTStatement stmt = parseReactionEffect("a = 2.0f < 2.1f;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(true, scope.getValue("a"));
@@ -455,7 +455,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntPositive() {
 		RTStatement stmt = parseReactionEffect("a = +1;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(1, scope.getValue("a"));
@@ -464,7 +464,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatPositive() {
 		RTStatement stmt = parseReactionEffect("a = +1.0;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(1.0f, scope.getValue("a"));
@@ -473,7 +473,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntNegative() {
 		RTStatement stmt = parseReactionEffect("a = -1;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(-1, scope.getValue("a"));
@@ -482,7 +482,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatNegative() {
 		RTStatement stmt = parseReactionEffect("a = -1.0f;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(-1.0f, scope.getValue("a"));
@@ -491,7 +491,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntPlus() {
 		RTStatement stmt = parseReactionEffect("a = 42 + 1;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(43, scope.getValue("a"));
@@ -500,7 +500,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatPlus() {
 		RTStatement stmt = parseReactionEffect("a = 42.0 + 1.0;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(43.0f, scope.getValue("a"));
@@ -509,7 +509,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntMinus() {
 		RTStatement stmt = parseReactionEffect("a = 42 - 1;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(41, scope.getValue("a"));
@@ -518,7 +518,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatMinus() {
 		RTStatement stmt = parseReactionEffect("a = 42.0f - 1.0f;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(41.0f, scope.getValue("a"));
@@ -527,7 +527,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntMultiply() {
 		RTStatement stmt = parseReactionEffect("a = 42 * 2;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(84, scope.getValue("a"));
@@ -536,7 +536,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatMultiply() {
 		RTStatement stmt = parseReactionEffect("a = 42.0f * 2.0f;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(84.0f, scope.getValue("a"));
@@ -545,7 +545,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntDivide() {
 		RTStatement stmt = parseReactionEffect("a = 42 / 2;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(21, scope.getValue("a"));
@@ -554,7 +554,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatDivide() {
 		RTStatement stmt = parseReactionEffect("a = 42.0f / 2.0f;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(21.0f, scope.getValue("a"));
@@ -563,7 +563,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntModulo() {
 		RTStatement stmt = parseReactionEffect("a = 42 % 2;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(0, scope.getValue("a"));
@@ -572,7 +572,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatModulo() {
 		RTStatement stmt = parseReactionEffect("a = 42.0f % 2.0f;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(0.0f, scope.getValue("a"));
@@ -581,7 +581,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntLeft() {
 		RTStatement stmt = parseReactionEffect("a = 42 << 2;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(168, scope.getValue("a"));
@@ -591,7 +591,7 @@ public class STextBuilderTest {
 	public void testFloatLeft() {
 		try {
 			RTStatement stmt = parseReactionEffect("a = 42.0f << 2.0f;");
-			scope.addVariable(new Variable("a"));
+			scope.addVariable(new RTVariable("a"));
 			stmt.execute(scope);
 
 			assertEquals(168, scope.getValue("a"));
@@ -603,7 +603,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntRight() {
 		RTStatement stmt = parseReactionEffect("a = 42 >> 2;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(10, scope.getValue("a"));
@@ -613,7 +613,7 @@ public class STextBuilderTest {
 	public void testFloatRight() {
 		try {
 			RTStatement stmt = parseReactionEffect("a = 42.0f >> 2.0f;");
-			scope.addVariable(new Variable("a"));
+			scope.addVariable(new RTVariable("a"));
 			stmt.execute(scope);
 
 			assertEquals(168, scope.getValue("a"));
@@ -625,7 +625,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntAnd() {
 		RTStatement stmt = parseReactionEffect("a= 9 & 12;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(8, scope.getValue("a"));
@@ -635,7 +635,7 @@ public class STextBuilderTest {
 	public void testFloatAnd() {
 		try {
 			RTStatement stmt = parseReactionEffect("a= 9.0f & 12.0f;");
-			scope.addVariable(new Variable("a"));
+			scope.addVariable(new RTVariable("a"));
 			stmt.execute(scope);
 
 			assertEquals(8.0f, scope.getValue("a"));
@@ -647,7 +647,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntXor() {
 		RTStatement stmt = parseReactionEffect("a= 9 ^ 12;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(5, scope.getValue("a"));
@@ -657,7 +657,7 @@ public class STextBuilderTest {
 	public void testFloatXor() {
 		try {
 			RTStatement stmt = parseReactionEffect("a= 9.0f ^ 12.0f;");
-			scope.addVariable(new Variable("a"));
+			scope.addVariable(new RTVariable("a"));
 			stmt.execute(scope);
 
 			assertEquals(5.0f, scope.getValue("a"));
@@ -669,7 +669,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntOr() {
 		RTStatement stmt = parseReactionEffect("a= 9 | 12;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(13, scope.getValue("a"));
@@ -679,7 +679,7 @@ public class STextBuilderTest {
 	public void testFloatOr() {
 		try {
 			RTStatement stmt = parseReactionEffect("a= 9.0f | 12.0f;");
-			scope.addVariable(new Variable("a"));
+			scope.addVariable(new RTVariable("a"));
 			stmt.execute(scope);
 
 			assertEquals(13.0f, scope.getValue("a"));
@@ -691,7 +691,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntBitComplement() {
 		RTStatement stmt = parseReactionEffect("a= ~9;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(-10, scope.getValue("a"));
@@ -701,7 +701,7 @@ public class STextBuilderTest {
 	public void testFloatBitComplement() {
 		try {
 			RTStatement stmt = parseReactionEffect("a= ~9.0f;");
-			scope.addVariable(new Variable("a"));
+			scope.addVariable(new RTVariable("a"));
 			stmt.execute(scope);
 
 			assertEquals(-10.0f, scope.getValue("a"));
@@ -713,7 +713,7 @@ public class STextBuilderTest {
 	@Test
 	public void testNot() {
 		RTStatement stmt = parseReactionEffect("a = ! true;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(false, scope.getValue("a"));
@@ -722,7 +722,7 @@ public class STextBuilderTest {
 	@Test
 	public void testPrirority() {
 		RTStatement stmt = parseReactionEffect("a = 1 + 2 * 3;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(7, scope.getValue("a"));
@@ -731,7 +731,7 @@ public class STextBuilderTest {
 	@Test
 	public void testNested() {
 		RTStatement stmt = parseReactionEffect("a = (1 + 2) * 3;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(9, scope.getValue("a"));
@@ -740,7 +740,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntPlusAssign() {
 		RTStatement stmt = parseReactionEffect("a=42; a+=42;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(84, scope.getValue("a"));
@@ -749,7 +749,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatPlusAssign() {
 		RTStatement stmt = parseReactionEffect("a=42.0; a+=42.0;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(84.0f, scope.getValue("a"));
@@ -758,7 +758,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntMinusAssign() {
 		RTStatement stmt = parseReactionEffect("a=42; a-=10;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(32, scope.getValue("a"));
@@ -767,7 +767,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatMinusAssign() {
 		RTStatement stmt = parseReactionEffect("a=42.0f; a-=10.0;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(32.0f, scope.getValue("a"));
@@ -776,7 +776,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntMultAssign() {
 		RTStatement stmt = parseReactionEffect("a=42; a*=1;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(42, scope.getValue("a"));
@@ -785,7 +785,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatMultAssign() {
 		RTStatement stmt = parseReactionEffect("a=42.0f; a*=1.0;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(42.0f, scope.getValue("a"));
@@ -794,7 +794,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntDivAssign() {
 		RTStatement stmt = parseReactionEffect("a=42; a/=1;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(42, scope.getValue("a"));
@@ -803,7 +803,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatDivAssign() {
 		RTStatement stmt = parseReactionEffect("a=42.0f; a/=1.0f;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(42.0f, scope.getValue("a"));
@@ -812,7 +812,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntModAssign() {
 		RTStatement stmt = parseReactionEffect("a=42; a%=1;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(0, scope.getValue("a"));
@@ -821,7 +821,7 @@ public class STextBuilderTest {
 	@Test
 	public void testFloatModAssign() {
 		RTStatement stmt = parseReactionEffect("a=42.0f; a%=1.0f;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(0.0f, scope.getValue("a"));
@@ -830,7 +830,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntLeftAssign() {
 		RTStatement stmt = parseReactionEffect("a=42; a<<=1;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(84, scope.getValue("a"));
@@ -840,7 +840,7 @@ public class STextBuilderTest {
 	public void testFloatLeftAssign() {
 		try {
 			RTStatement stmt = parseReactionEffect("a=42.0f; a<<=1.0f;");
-			scope.addVariable(new Variable("a"));
+			scope.addVariable(new RTVariable("a"));
 			stmt.execute(scope);
 
 			assertEquals(168, scope.getValue("a"));
@@ -852,7 +852,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntRightAssign() {
 		RTStatement stmt = parseReactionEffect("a=42; a>>=1;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(21, scope.getValue("a"));
@@ -862,7 +862,7 @@ public class STextBuilderTest {
 	public void testFloatRightAssign() {
 		try {
 			RTStatement stmt = parseReactionEffect("a=42.0f; a>>=1.0f;");
-			scope.addVariable(new Variable("a"));
+			scope.addVariable(new RTVariable("a"));
 			stmt.execute(scope);
 
 			assertEquals(168, scope.getValue("a"));
@@ -874,7 +874,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntAndAssign() {
 		RTStatement stmt = parseReactionEffect("a=9; a&=12;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(8, scope.getValue("a"));
@@ -884,7 +884,7 @@ public class STextBuilderTest {
 	public void testFloatAndAssign() {
 		try {
 			RTStatement stmt = parseReactionEffect("a=42.0f; a&=1.0f;");
-			scope.addVariable(new Variable("a"));
+			scope.addVariable(new RTVariable("a"));
 			stmt.execute(scope);
 
 			assertEquals(168, scope.getValue("a"));
@@ -896,7 +896,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntXorAssign() {
 		RTStatement stmt = parseReactionEffect("a=9; a^=12;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(5, scope.getValue("a"));
@@ -906,7 +906,7 @@ public class STextBuilderTest {
 	public void testFloatXorAssign() {
 		try {
 			RTStatement stmt = parseReactionEffect("a=42.0f; a^=1.0f;");
-			scope.addVariable(new Variable("a"));
+			scope.addVariable(new RTVariable("a"));
 			stmt.execute(scope);
 
 			assertEquals(168, scope.getValue("a"));
@@ -918,7 +918,7 @@ public class STextBuilderTest {
 	@Test
 	public void testIntOrAssign() {
 		RTStatement stmt = parseReactionEffect("a=9; a|=12;");
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(13, scope.getValue("a"));
@@ -928,7 +928,7 @@ public class STextBuilderTest {
 	public void testFloatOrAssign() {
 		try {
 			RTStatement stmt = parseReactionEffect("a=42.0; a|=1.0;");
-			scope.addVariable(new Variable("a"));
+			scope.addVariable(new RTVariable("a"));
 			stmt.execute(scope);
 
 			assertEquals(168, scope.getValue("a"));

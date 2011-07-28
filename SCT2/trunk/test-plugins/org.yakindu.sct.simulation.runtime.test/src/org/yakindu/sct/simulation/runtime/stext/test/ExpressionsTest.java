@@ -23,13 +23,9 @@ import static org.yakindu.sct.simulation.runtime.stext.CoreFunction.BIT_OR;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.yakindu.sct.simulation.runtime.EvaluationException;
-import org.yakindu.sct.simulation.runtime.injectors.StextInjectorProvider;
 import org.yakindu.sct.simulation.runtime.stext.Assert;
 import org.yakindu.sct.simulation.runtime.stext.Assign;
 import org.yakindu.sct.simulation.runtime.stext.BinaryOperation;
@@ -39,10 +35,10 @@ import org.yakindu.sct.simulation.runtime.stext.ProcedureCall;
 import org.yakindu.sct.simulation.runtime.stext.RTExpression;
 import org.yakindu.sct.simulation.runtime.stext.RTScope;
 import org.yakindu.sct.simulation.runtime.stext.RTStatement;
+import org.yakindu.sct.simulation.runtime.stext.RTVariable;
 import org.yakindu.sct.simulation.runtime.stext.Raise;
 import org.yakindu.sct.simulation.runtime.stext.StatementSequence;
 import org.yakindu.sct.simulation.runtime.stext.UnaryOperation;
-import org.yakindu.sct.simulation.runtime.stext.Variable;
 import org.yakindu.sct.simulation.runtime.stext.VariableRef;
 
 /**
@@ -61,7 +57,7 @@ public class ExpressionsTest {
 		public String raised;
 
 		@Override
-		public Variable getVariable(String varName) {
+		public RTVariable getVariable(String varName) {
 			trace.add("var:" + varName);
 			return super.getVariable(varName);
 		}
@@ -100,7 +96,7 @@ public class ExpressionsTest {
 	public void testScopeVarAccess() {
 		assertNull(scope.getVariable("a"));
 		assertNull(scope.getValue("a"));
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 		assertNotNull(scope.getVariable("a"));
 		scope.getVariable("a").setValue(42);
 		assertEquals(42, scope.getValue("a"));
@@ -111,7 +107,7 @@ public class ExpressionsTest {
 	 */
 	@Test
 	public void testInitialVariableValue() {
-		assertNull((new Variable("b")).getValue());
+		assertNull((new RTVariable("b")).getValue());
 	}
 
 	/**
@@ -141,7 +137,7 @@ public class ExpressionsTest {
 	 */
 	@Test
 	public void testAssignConstant() {
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 
 		RTStatement stmt = new Assign(new VariableRef("a"), new Constant(1));
 
@@ -156,8 +152,8 @@ public class ExpressionsTest {
 	 */
 	@Test
 	public void testAssignFromVar() {
-		scope.addVariable(new Variable("a"));
-		scope.addVariable(new Variable("b"));
+		scope.addVariable(new RTVariable("a"));
+		scope.addVariable(new RTVariable("b"));
 		scope.getVariable("a").setName("Name");
 
 		RTStatement stmt = new Assign(new VariableRef("b"),
@@ -173,7 +169,7 @@ public class ExpressionsTest {
 	 */
 	@Test
 	public void testStatementSequence() {
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 
 		StatementSequence seq = new StatementSequence();
 		seq.add(new Raise("signal"));
@@ -193,7 +189,7 @@ public class ExpressionsTest {
 	 */
 	@Test
 	public void testEmptyStatementSequence() {
-		scope.addVariable(new Variable("a"));
+		scope.addVariable(new RTVariable("a"));
 
 		StatementSequence seq = new StatementSequence();
 
@@ -218,7 +214,7 @@ public class ExpressionsTest {
 	 */
 	@Test
 	public void testVariableRef() {
-		scope.addVariable(new Variable("x"));
+		scope.addVariable(new RTVariable("x"));
 		scope.getVariable("x").setValue(getName());
 
 		RTExpression exp = new VariableRef("x");
