@@ -16,9 +16,11 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.Request;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
+import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
@@ -52,6 +54,20 @@ public class RegionEditPart extends ShapeNodeEditPart {
 		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
 				new ResizableEditPolicyEx());
+	}
+
+	@Override
+	public EditPart getTargetEditPart(Request request) {
+
+		if (request.getType().toString() == RequestConstants.REQ_PASTE) {
+			for (Object object : getChildren()) {
+				if (object instanceof RegionCompartmentEditPart) {
+					return (EditPart) object;
+				}
+			}
+		}
+
+		return super.getTargetEditPart(request);
 	}
 
 	@Override

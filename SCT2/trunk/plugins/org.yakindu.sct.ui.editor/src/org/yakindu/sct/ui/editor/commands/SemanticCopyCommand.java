@@ -11,7 +11,10 @@
 package org.yakindu.sct.ui.editor.commands;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
@@ -28,6 +31,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.clipboard.core.ClipboardUtil;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.ui.editor.clipboard.SCTClipboardUtil;
 
 /**
  * 
@@ -52,18 +56,12 @@ public class SemanticCopyCommand extends AbstractTransactionalCommand {
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 			IAdaptable info) throws ExecutionException {
-		String semanticString = ClipboardUtil.copyElementsToString(
-				getSemanticElements(), null, new NullProgressMonitor());
-		String notationString = ClipboardUtil.copyElementsToString(
-				getNotationElements(), null, new NullProgressMonitor());
-
-		CustomData semanticData = new CustomData(DRAWING_SURFACE,
-				semanticString.getBytes());
-		CustomData notationData = new CustomData(DRAWING_SURFACE,
-				notationString.getBytes());
-
+		
+		byte[] a = SCTClipboardUtil.getByteArrayFromObject(buildMap());
+		CustomData data = new CustomData (DRAWING_SURFACE,a);
+		
 		ClipboardManager.getInstance().addToCache(
-				new ICustomData[] { notationData, semanticData },
+				new ICustomData[] {data},
 				CustomDataTransfer.getInstance());
 		
 		ClipboardManager.getInstance().flushCacheToClipboard();
@@ -87,5 +85,27 @@ public class SemanticCopyCommand extends AbstractTransactionalCommand {
 			result.add(view);
 		}
 		return result;
+	}
+	
+	private Map<byte[], String> buildMap() {
+		Map<byte[], String> map = new HashMap<byte[], String>();
+		for (IGraphicalEditPart editPart : selectedObjects) {
+			
+			// Collections.SingletonList(...) returns an immutable list and
+			// ClipboardUtil.copyElementsToString want to remove elements from
+			// the list...
+			List<EObject> list = new ArrayList<EObject>(
+					Collections.singletonList(editPart.resolveSemanticElement()));
+			
+			String semanticElementString = ClipboardUtil.copyElementsToString(
+					list, null, new NullProgressMonitor());
+			
+			View view = editPart.getNotationView();
+			
+			map.put(semanticElementString.getBytes(),
+					view.eResource().getURIFragment(view));
+		}
+
+		return map;
 	}
 }
