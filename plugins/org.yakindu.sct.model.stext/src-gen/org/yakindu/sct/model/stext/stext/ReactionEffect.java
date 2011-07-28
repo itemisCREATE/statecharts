@@ -7,7 +7,6 @@
 package org.yakindu.sct.model.stext.stext;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.yakindu.sct.model.sgraph.Effect;
 
 /**

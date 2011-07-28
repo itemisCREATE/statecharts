@@ -22,11 +22,8 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.yakindu.sct.core.simulation.ISGraphExecutionBuilder;
 import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
-import org.yakindu.sct.simulation.runtime.sgraph.RTStatechart;
-import org.yakindu.sct.simulation.runtime.sgraph.builder.SGraphBuilder;
 import org.yakindu.sct.simulation.runtime.stext.Assign;
 import org.yakindu.sct.simulation.runtime.stext.BinaryOperation;
 import org.yakindu.sct.simulation.runtime.stext.Constant;
@@ -36,10 +33,10 @@ import org.yakindu.sct.simulation.runtime.stext.ProcedureCall;
 import org.yakindu.sct.simulation.runtime.stext.RTExpression;
 import org.yakindu.sct.simulation.runtime.stext.RTStatement;
 import org.yakindu.sct.simulation.runtime.stext.RTTrigger;
+import org.yakindu.sct.simulation.runtime.stext.RTVariable;
 import org.yakindu.sct.simulation.runtime.stext.Raise;
 import org.yakindu.sct.simulation.runtime.stext.StatementSequence;
 import org.yakindu.sct.simulation.runtime.stext.UnaryOperation;
-import org.yakindu.sct.simulation.runtime.stext.Variable;
 import org.yakindu.sct.simulation.runtime.stext.VariableRef;
 
 /**
@@ -61,7 +58,7 @@ import org.yakindu.sct.simulation.runtime.stext.VariableRef;
  * @author terfloth@itemis.de
  * @author andreas muelder
  */
-public class STextBuilder extends SGraphBuilder implements ISGraphExecutionBuilder{
+public class STextBuilder extends Function {
 
 	/** Builder functions always */
 	protected static Class<?>[] paramTypes = new Class[] { EObject.class };
@@ -80,26 +77,6 @@ public class STextBuilder extends SGraphBuilder implements ISGraphExecutionBuild
 		assignFunctionMap.put("xorAssign", "^");
 		assignFunctionMap.put("orAssign", "|");
 	}
-	
-		@FunctionMethod("")
-		public Object build(RTStatechart statechart, VariableDefinition definition) {
-			Variable variable = new Variable();
-			variable.setName(definition.getName());
-			statechart.addVariable(variable);
-			statechart.defineAlias(definition, variable);
-			if (definition.getType() == Type.BOOLEAN) {
-				variable.setType(Boolean.class);
-				variable.setValue(false);
-			} else if (definition.getType() == Type.INTEGER) {
-				variable.setType(Integer.class);
-				variable.setValue(0);
-			} else if (definition.getType() == Type.REAL) {
-				variable.setType(Float.class);
-				variable.setValue(0.0f);
-			}
-			return null;
-		}
-	
 
 	@FunctionMethod("build")
 	public RTTrigger buildTrigger(EObject obj) {
@@ -148,6 +125,29 @@ public class STextBuilder extends SGraphBuilder implements ISGraphExecutionBuild
 	}
 
 	@FunctionMethod("build")
+	public RTVariable buildVariableDefinition(EObject obj) {
+		RTVariable variable = new RTVariable();
+		VariableDefinition definition = (VariableDefinition) obj;
+
+
+		//TODO: Default value
+		variable.setName(definition.getName());
+		Type type = definition.getType();
+
+		if (type == Type.BOOLEAN) {
+			variable.setType(Boolean.class);
+			variable.setValue(false);
+		} else if (type == Type.INTEGER) {
+			variable.setType(Integer.class);
+			variable.setValue(0);
+		} else if (type == Type.REAL) {
+			variable.setType(Float.class);
+			variable.setValue(0.0f);
+		}
+		return variable;
+	}
+
+	@FunctionMethod("build")
 	public RTStatement buildEventRaising(EObject obj) {
 
 		EObject event = getToOne(obj, "event");
@@ -159,7 +159,6 @@ public class STextBuilder extends SGraphBuilder implements ISGraphExecutionBuild
 		EObject operation = getToOne(obj, "operation");
 		return new ProcedureCall(getString(operation, "name"));
 	}
-	
 
 	@FunctionMethod("build")
 	public RTStatement buildAssignment(EObject obj) {
@@ -325,7 +324,7 @@ public class STextBuilder extends SGraphBuilder implements ISGraphExecutionBuild
 	}
 
 	@FunctionMethod("build")
-	protected RTExpression buildElementReferenceExpression(EObject obj) {
+	public RTExpression buildElementReferenceExpression(EObject obj) {
 		// TODO: Do we really need an ElementReferenceExpression? Or is a
 		// VariableReferenceExpression enough?
 		EObject var = getToOne(obj, "value");

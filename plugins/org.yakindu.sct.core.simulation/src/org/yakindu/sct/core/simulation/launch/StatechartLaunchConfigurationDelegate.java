@@ -15,8 +15,11 @@ import java.util.Collections;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.IStatusHandler;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.emf.common.util.URI;
@@ -26,6 +29,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryRegistryImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.yakindu.sct.core.simulation.Activator;
 import org.yakindu.sct.core.simulation.ISGraphExecutionBuilder;
 import org.yakindu.sct.core.simulation.ISGraphExecutionFacade;
 import org.yakindu.sct.core.simulation.debugmodel.SCTDebugTarget;
@@ -36,11 +40,13 @@ import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class StatechartLaunchConfigurationDelegate implements
 		ILaunchConfigurationDelegate, IExtensionPoints {
+
+	private static final int STATUS_CODE = 200;
 
 	public void launch(ILaunchConfiguration configuration, String mode,
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {
@@ -48,12 +54,15 @@ public class StatechartLaunchConfigurationDelegate implements
 				IStatechartLaunchParameters.FILE_NAME, "");
 
 		Resource resource = loadResource(filename);
+		
 		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(
 				resource.getContents(), SGraphPackage.Literals.STATECHART);
+		
 		ISGraphExecutionBuilder builder = getBuilder();
 		ISGraphExecutionFacade executionFacade = builder.build(statechart);
 		IDebugTarget target = new SCTDebugTarget(launch, executionFacade);
 		launch.addDebugTarget(target);
+
 	}
 
 	protected ISGraphExecutionBuilder getBuilder() {
@@ -62,10 +71,18 @@ public class StatechartLaunchConfigurationDelegate implements
 		return extensions.getFirstExtension();
 	}
 
+	protected void handleStatusInformation(int severity, String message) {
+		Status status = new Status(severity, Activator.PLUGIN_ID, STATUS_CODE,
+				message, null);
+		IStatusHandler statusHandler = DebugPlugin.getDefault()
+				.getStatusHandler(status);
+		try {
+			statusHandler.handleStatus(status, this);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+	}
 
-	/**
-	 * Loads and returns the Resource for a given filename
-	 */
 	protected Resource loadResource(String filename) {
 		URI uri = URI.createFileURI(filename);
 		Factory factory = ResourceFactoryRegistryImpl.INSTANCE.getFactory(uri);

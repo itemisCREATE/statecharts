@@ -57,18 +57,27 @@
        point="org.yakindu.sct.simulation.core.sgraph.sessionlistener">
     <ISimulationSessionListener class="org.yakindu.sct.ui.simulation.editor.HighlightingExecutionListener" />
     <ISimulationSessionListener
-          class="org.yakindu.sct.ui.simulation.view.EventViewUpdater">
+          class="org.yakindu.sct.ui.simulation.view.DeclarationsViewUpdater">
     </ISimulationSessionListener>
  </extension>
  <extension
        point="org.eclipse.ui.views">
     <view
           allowMultiple="false"
-          class="org.yakindu.sct.ui.simulation.view.EventView"
+          class="org.yakindu.sct.ui.simulation.view.DeclarationView"
           icon="icons/yakindu.png"
-          id="org.yakindu.sct.ui.simulation.eventview"
-          name="Event View"
+          id="org.yakindu.sct.ui.simulation.declarationview"
+          name="Declarations View"
           restorable="true">
     </view>
+ </extension>
+ <extension
+       point="org.eclipse.debug.core.statusHandlers">
+    <statusHandler
+          class="org.yakindu.sct.ui.simulation.handler.GenericStatusHandler"
+          code="200"
+          id="org.yakindu.sct.ui.simulation.statushandler"
+          plugin="org.yakindu.sct.simulation.core">
+    </statusHandler>
  </extension>
 </plugin>

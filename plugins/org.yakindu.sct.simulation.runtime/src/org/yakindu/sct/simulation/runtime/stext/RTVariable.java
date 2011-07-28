@@ -18,23 +18,23 @@ import org.yakindu.sct.simulation.runtime.EvaluationException;
  * 
  * @author terfloth@itemis.de
  */
-public class Variable {
+public class RTVariable {
 
 	protected String name;
 	protected Object value;
 	protected Class<?> type;
 
 	
-	public Variable() {
+	public RTVariable() {
 		super();
 	}
 
-	public Variable(String name) {
+	public RTVariable(String name) {
 		this();
 		this.name = name;
 	}
 
-	public Variable(String name, Class<Object> type) {
+	public RTVariable(String name, Class<Object> type) {
 		this();
 		this.name = name;
 		this.type = type;

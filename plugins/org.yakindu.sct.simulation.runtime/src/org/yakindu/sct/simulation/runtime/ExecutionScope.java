@@ -10,18 +10,20 @@
  */
 package org.yakindu.sct.simulation.runtime;
 
-import org.yakindu.sct.simulation.runtime.stext.Variable;
+import org.yakindu.sct.simulation.runtime.stext.RTVariable;
 
 public interface ExecutionScope {
 
 	public abstract Object getValue(String varName);
 
-	public abstract Variable getVariable(String varName);
+	public abstract RTVariable getVariable(String varName);
 
-	public abstract void addVariable(Variable var);
+	public abstract void addVariable(RTVariable var);
 
 	public abstract void call(String procedureId);
 
 	public abstract void raise(String signal);
+
+	public abstract void setVariableValue(RTVariable variable, Object object);
 
 }

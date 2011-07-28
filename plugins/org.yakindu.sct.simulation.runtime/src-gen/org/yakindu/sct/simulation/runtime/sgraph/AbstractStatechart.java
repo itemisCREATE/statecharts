@@ -42,11 +42,9 @@ public abstract class AbstractStatechart {
 	}
 
 	public void setEvent(RTEvent event) {
-
 		synchronized (raisedEvents) {
 			raisedEvents.add(event);
 		}
-
 	}
 
 	protected void requestTimeEvent(RTTimeEvent event) {
@@ -59,7 +57,6 @@ public abstract class AbstractStatechart {
 
 
 	public void enter() {
-
 		// enter all nested regions (in the order of their priority)
 		for (RTRegion region : regions) {
 			region.enter();
@@ -68,7 +65,6 @@ public abstract class AbstractStatechart {
 	}
 
 	public void runCycle() {
-
 		Set<RTEvent> currentEvents = new HashSet<RTEvent>();
 		synchronized (raisedEvents) {
 			currentEvents.addAll(raisedEvents);
@@ -90,10 +86,8 @@ public abstract class AbstractStatechart {
 
 	
 	private void reactOn(Set<RTEvent> events) {
-
 		// pass events to our nested regions (in the order of their priority)
 		for (RTRegion region : regions) {
-			System.out.println("React on event " + events);
 			region.reactOn(events);
 		}
 	}

@@ -19,7 +19,7 @@ import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
 /**
  * Adapts GMF Editors to a {@link IHighlightingSupport}
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 @SuppressWarnings({ "rawtypes" })

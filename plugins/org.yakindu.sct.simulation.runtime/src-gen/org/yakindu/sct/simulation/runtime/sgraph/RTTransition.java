@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.yakindu.sct.simulation.runtime.sgraph.RTStatechart;
-
 /**
  * Representation of a transition. A transition always connects a source node to
  * a target node. It may react on a time trigger and/or multiple signal triggers

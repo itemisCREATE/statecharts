@@ -11,17 +11,16 @@
 package org.yakindu.sct.simulation.runtime.sgraph;
 
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
-import org.yakindu.sct.simulation.runtime.sgraph.RTAction;
 import org.yakindu.sct.simulation.runtime.stext.RTStatement;
 
 
-public class ActionStatement extends RTAction {
+public class RTActionStatement extends RTAction {
 
 	protected RTStatement statement;
 	protected ExecutionScope scope;
 	
 	
-	public ActionStatement(RTStatement statement, ExecutionScope scope) {
+	public RTActionStatement(RTStatement statement, ExecutionScope scope) {
 		super();
 		this.statement = statement;
 		this.scope = scope;

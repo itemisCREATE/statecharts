@@ -23,16 +23,7 @@ import org.yakindu.sct.core.simulation.ISGraphExecutionListener;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
-import org.yakindu.sct.simulation.runtime.sgraph.AbstractStatechart;
-import org.yakindu.sct.simulation.runtime.sgraph.RTCompoundState;
-import org.yakindu.sct.simulation.runtime.sgraph.RTEvent;
-import org.yakindu.sct.simulation.runtime.sgraph.RTNode;
-import org.yakindu.sct.simulation.runtime.sgraph.RTRegion;
-import org.yakindu.sct.simulation.runtime.sgraph.RTSignalEvent;
-import org.yakindu.sct.simulation.runtime.sgraph.RTState;
-import org.yakindu.sct.simulation.runtime.sgraph.RTTimingService;
-import org.yakindu.sct.simulation.runtime.sgraph.RTTransition;
-import org.yakindu.sct.simulation.runtime.stext.Variable;
+import org.yakindu.sct.simulation.runtime.stext.RTVariable;
 
 public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 		ISGraphExecutionFacade {
@@ -43,8 +34,8 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 	protected List<RTSignalEvent> events = new ArrayList<RTSignalEvent>();
 	protected Map<String, RTSignalEvent> eventMap = new HashMap<String, RTSignalEvent>();
 
-	protected List<Variable> variables = new ArrayList<Variable>();
-	protected Map<String, Variable> variableMap = new HashMap<String, Variable>();
+	protected List<RTVariable> variables = new ArrayList<RTVariable>();
+	protected Map<String, RTVariable> variableMap = new HashMap<String, RTVariable>();
 
 	protected Set<RTState> currentStateConfigurartion = new HashSet<RTState>();
 
@@ -107,21 +98,21 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 		return Collections.unmodifiableList(events);
 	}
 
-	public void addVariable(Variable var) {
+	public void addVariable(RTVariable var) {
 		variables.add(var);
 		variableMap.put(var.getName(), var);
 	}
 
 	public Object getValue(String varName) {
-		Variable var = getVariable(varName);
+		RTVariable var = getVariable(varName);
 		return (var != null) ? var.getValue() : null;
 	}
 
-	public Variable getVariable(String varName) {
+	public RTVariable getVariable(String varName) {
 		return variableMap.get(varName);
 	}
 
-	public List<Variable> getVariables() {
+	public List<RTVariable> getVariables() {
 		return Collections.unmodifiableList(variables);
 	}
 
@@ -142,6 +133,12 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 	protected void transitionFired(RTTransition trans) {
 		for (ISGraphExecutionListener listener : listeners) {
 			listener.transitionFired((Transition) elementToAliasMap.get(trans));
+		}
+	}
+	public void setVariableValue(RTVariable variable, Object value) {
+		variable.setValue(value);
+		for (ISGraphExecutionListener listener : listeners) {
+			listener.variableValueChanged(variable.getName(), value);
 		}
 	}
 
@@ -223,5 +220,4 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 			addAllRegions(regions, region);
 		}
 	}
-
 }

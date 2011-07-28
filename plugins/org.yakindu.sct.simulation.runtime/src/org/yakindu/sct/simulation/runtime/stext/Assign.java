@@ -15,14 +15,13 @@ import org.yakindu.sct.simulation.runtime.ExecutionScope;
 /**
  * 
  * @author terfloth@itemis.de
- *
+ * 
  */
 public class Assign implements RTStatement {
-	
+
 	protected VariableRef varRef;
 	protected RTExpression expression;
-	
-	
+
 	public Assign() {
 		super();
 	}
@@ -32,11 +31,11 @@ public class Assign implements RTStatement {
 		this.varRef = varRef;
 		this.expression = expression;
 	}
-	
+
 	public VariableRef getVarRef() {
 		return varRef;
 	}
-	
+
 	public void setVarRef(VariableRef varRef) {
 		this.varRef = varRef;
 	}
@@ -50,7 +49,6 @@ public class Assign implements RTStatement {
 	}
 
 	public void execute(ExecutionScope scope) {
-		varRef.getVariable(scope).setValue(expression.execute(scope));
+		scope.setVariableValue(varRef.getVariable(scope),(expression.execute(scope)));
 	}
-
 }
