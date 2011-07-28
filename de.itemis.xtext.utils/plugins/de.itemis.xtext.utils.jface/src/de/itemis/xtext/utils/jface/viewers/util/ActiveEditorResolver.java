@@ -43,7 +43,8 @@ public final class ActiveEditorResolver implements
 
 	public static final Resource getActiveEditorResource() {
 		IEditorPart editor = getActiveEditor();
-
+		if (editor == null)
+			return null;
 		EditingDomain domain = null;
 		if (editor instanceof IEditingDomainProvider) {
 			domain = ((IEditingDomainProvider) editor).getEditingDomain();

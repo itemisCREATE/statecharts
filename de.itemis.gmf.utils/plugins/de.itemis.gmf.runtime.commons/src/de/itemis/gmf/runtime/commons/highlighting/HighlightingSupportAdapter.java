@@ -24,10 +24,11 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.widgets.Display;
+
 /**
  * 
  * @author Alexander Nyssen
- *
+ * 
  */
 public class HighlightingSupportAdapter implements IHighlightingSupport {
 
@@ -133,15 +134,17 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		Assert.isNotNull(editPart, "Could not find a matching edit part");
 		IFigure figure = getTargetFigure(editPart);
 		Assert.isNotNull(figure, "Could not obtain target figure");
-		Display.getCurrent()
-				.asyncExec(
-						new Fader(
-								figure,
-								parameters.foregroundFadingColor,
-								getGreyscaled(figureStates.get(figure).foregroundColor),
-								parameters.backgroundFadingColor,
-								getGreyscaled(figureStates.get(figure).backgroundColor),
-								(int) parameters.fadingTime, false));
+		Color foregroundColor = figureStates.get(figure).foregroundColor;
+		Color backgroundColor = figureStates.get(figure).backgroundColor;
+
+		Display.getCurrent().asyncExec(
+				new Fader(figure, parameters.foregroundFadingColor,
+						parameters.grayScale ? getGreyscaled(foregroundColor)
+								: foregroundColor,
+						parameters.backgroundFadingColor,
+						parameters.grayScale ? getGreyscaled(backgroundColor)
+								: backgroundColor, (int) parameters.fadingTime,
+						false));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -213,7 +216,6 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		if (greyscaleColors.containsKey(color)) {
 			return greyscaleColors.get(color);
 		}
-
 		// use image to convert colors to greyscale
 		ImageData imageData = new ImageData(1, 1, 24, new PaletteData(0xFF,
 				0xFF00, 0xFF0000));
@@ -257,19 +259,19 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 				figureStates.put(figure, new ColorMemento(figure));
 			}
 		}
-
-		// greyscale figures after all colors have been stored
-		for (IFigure figure : figureStates.keySet()) {
-			// calculate fore and background colors as greyscaled
-			if (figure.getLocalForegroundColor() != null) {
-				figure.setForegroundColor(getGreyscaled(figure
-						.getForegroundColor()));
-			}
-			if (figure.getLocalBackgroundColor() != null) {
-				figure.setBackgroundColor(getGreyscaled(figure
-						.getBackgroundColor()));
-			}
-		}
+//TODO
+//		// greyscale figures after all colors have been stored
+//		for (IFigure figure : figureStates.keySet()) {
+//			// calculate fore and background colors as greyscaled
+//			if (figure.getLocalForegroundColor() != null) {
+//				figure.setForegroundColor(getGreyscaled(figure
+//						.getForegroundColor()));
+//			}
+//			if (figure.getLocalBackgroundColor() != null) {
+//				figure.setBackgroundColor(getGreyscaled(figure
+//						.getBackgroundColor()));
+//			}
+//		}
 
 		locked = true;
 	}
@@ -297,10 +299,10 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		}
 		figureStates.clear();
 
-		for (Color color : greyscaleColors.values()) {
-			color.dispose();
-		}
-		greyscaleColors.clear();
+		// for (Color color : greyscaleColors.values()) {
+		// color.dispose();
+		// }
+		// greyscaleColors.clear();
 
 		diagramWorkbenchPart.getDiagramEditPart().enableEditMode();
 		setSanityCheckEnablementState(true);

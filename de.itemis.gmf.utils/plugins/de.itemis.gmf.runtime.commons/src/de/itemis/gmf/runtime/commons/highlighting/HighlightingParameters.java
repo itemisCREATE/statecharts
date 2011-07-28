@@ -15,14 +15,17 @@ public class HighlightingParameters {
 	// light red
 	public Color backgroundFadingColor = new Color(null, 255, 128, 128);
 
+	public boolean grayScale = false;
+
 	public HighlightingParameters() {
 	}
 
 	public HighlightingParameters(long fadingTime, Color foregroundFadingColor,
-			Color backgroundFadingColor) {
+			Color backgroundFadingColor, boolean grayScale) {
 		this.fadingTime = fadingTime; // used for fade-in and fade-out
 		this.foregroundFadingColor = foregroundFadingColor;
 		this.backgroundFadingColor = backgroundFadingColor;
+		this.grayScale = grayScale;
 	}
 
 }

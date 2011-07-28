@@ -48,6 +48,7 @@ public class InjectMembersResource extends GMFResource implements
 		super(uri);
 		services = new ArrayList<IMemberInjectionService>();
 	}
+	
 
 	public List<org.eclipse.emf.common.util.Diagnostic> getDiagnostics() {
 		return diagnostics;
@@ -148,11 +149,6 @@ public class InjectMembersResource extends GMFResource implements
 			return ReparseAdapter.class == type;
 		}
 
-	}
-
-	@Override
-	public EList<Diagnostic> getErrors() {
-		return super.getErrors();
 	}
 
 }
