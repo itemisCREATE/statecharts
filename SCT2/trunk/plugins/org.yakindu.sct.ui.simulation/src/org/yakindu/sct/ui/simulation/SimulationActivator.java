@@ -2,6 +2,8 @@ package org.yakindu.sct.ui.simulation;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.yakindu.sct.core.simulation.SGraphSimulationSessionRegistry;
+import org.yakindu.sct.ui.simulation.editor.HighlightingExecutionListener;
 
 public class SimulationActivator extends AbstractUIPlugin {
 
@@ -15,6 +17,9 @@ public class SimulationActivator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		
+		SGraphSimulationSessionRegistry.INSTANCE.getListeners().add(
+				new HighlightingExecutionListener());
 	}
 
 	public void stop(BundleContext context) throws Exception {

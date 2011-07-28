@@ -2,7 +2,6 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="org.yakindu.sct.simulation.core.sgraph.executionbuilder" name="SGraphExecutionBuilder" schema="schema/org.yakindu.sct.simulation.core.sgraph.executionbuilder.exsd"/>
-   <extension-point id="org.yakindu.sct.simulation.core.sgraph.sessionlistener" name="SgraphSessionListener" schema="schema/org.yakindu.sct.simulation.core.sgraph.executionlistener.exsd"/>
 
 <extension point="org.eclipse.debug.core.launchConfigurationTypes">
     <launchConfigurationType

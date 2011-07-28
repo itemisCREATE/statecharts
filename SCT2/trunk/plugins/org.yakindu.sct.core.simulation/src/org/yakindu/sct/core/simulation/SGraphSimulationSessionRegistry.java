@@ -25,9 +25,12 @@ public class SGraphSimulationSessionRegistry implements IExtensionPoints {
 
 	public static final SGraphSimulationSessionRegistry INSTANCE = new SGraphSimulationSessionRegistry();
 
+	private List<ISimulationSessionListener> sessionListener;
+
 	private List<SGraphSimulationSession> sessions;
 
 	private SGraphSimulationSessionRegistry() {
+		sessionListener = new ArrayList<ISimulationSessionListener>();
 		sessions = new ArrayList<SGraphSimulationSession>();
 	}
 
@@ -41,14 +44,12 @@ public class SGraphSimulationSessionRegistry implements IExtensionPoints {
 		sessions.remove(session);
 	}
 
-	protected List<ISimulationSessionListener> getListeners() {
-		Extensions<ISimulationSessionListener> extensions = new Extensions<ISimulationSessionListener>(
-				SESSION_LISTENER);
-		return extensions.getExtensions();
+	public List<ISimulationSessionListener> getListeners() {
+		return sessionListener;
 	}
 
 	public SGraphSimulationSession getActiveSession() {
-		//TODO
+		// TODO
 		if (sessions.isEmpty())
 			return null;
 		return sessions.get(0);
