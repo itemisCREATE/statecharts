@@ -1,10 +1,11 @@
 package de.itemis.gmf.runtime.commons.highlighting;
 
 import org.eclipse.emf.ecore.EObject;
+
 /**
  * @author Alexander Nyssen
  * @author Andreas Muelder
- *
+ * 
  */
 public interface IHighlightingSupport {
 
@@ -45,4 +46,26 @@ public interface IHighlightingSupport {
 	 * @param parameters
 	 */
 	void flash(EObject semanticElement, HighlightingParameters parameters);
+
+	public static class HighlightingSupportNullImpl implements
+			IHighlightingSupport {
+
+		public void lockEditor() {
+		}
+
+		public void releaseEditor() {
+		}
+
+		public void fadeIn(EObject semanticElement,
+				HighlightingParameters parameters) {
+		}
+
+		public void fadeOut(EObject semanticElement,
+				HighlightingParameters parameters) {
+		}
+
+		public void flash(EObject semanticElement,
+				HighlightingParameters parameters) {
+		}
+	}
 }

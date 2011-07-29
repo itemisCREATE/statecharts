@@ -59,7 +59,7 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 	}
 
 	protected int getStyle() {
-		return SWT.MULTI | SWT.BORDER;
+		return SWT.MULTI | SWT.BORDER | SWT.V_SCROLL;
 	}
 
 	public StyledText createControl(Composite parent) {

@@ -32,45 +32,33 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  * @author andreas muelder
  * 
  */
-public abstract class AbstractPropertyDescriptor implements IFormPropertyDescriptor {
+public abstract class AbstractPropertyDescriptor implements
+		IFormPropertyDescriptor {
+
+	public final static String HELP_CONTEXT_NONE = "help_context_none";
 
 	private final EAttribute feature;
 	private final String labelName;
-
 	private Control control;
 
-	public final static String HELP_CONTEXT_NONE = "help_context_none";
-	
 	protected String helpContextId = HELP_CONTEXT_NONE;
 
-	public String getHelpContextId() {
-		return helpContextId;
-	}
-
-	// necessary?!
-	public void setHelpContextId(String helpContextId) {
-		this.helpContextId = helpContextId;
-	}
-
 	protected abstract Control createControl(Composite parent);
-
-	public void initControl(Composite parent) {
-		control = createControl(parent);
-		applyHelpContext(control);
-	}
 
 	public AbstractPropertyDescriptor(EAttribute feature, String labelName) {
 		this.feature = feature;
 		this.labelName = labelName;
 	}
 
-	public AbstractPropertyDescriptor(EAttribute feature, String labelName, String helpContextId) {
+	public AbstractPropertyDescriptor(EAttribute feature, String labelName,
+			String helpContextId) {
 		this(feature, labelName);
 		this.helpContextId = helpContextId;
 	}
 
-	public EAttribute getEAttribute() {
-		return feature;
+	public void initControl(Composite parent) {
+		control = createControl(parent);
+		applyHelpContext(control);
 	}
 
 	public Label createLabel(Composite parent) {
@@ -94,30 +82,42 @@ public abstract class AbstractPropertyDescriptor implements IFormPropertyDescrip
 	public void addHelp(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		final Button helpButton = toolkit.createButton(parent, "", SWT.PUSH);
-		helpButton.setImage(PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_LCL_LINKTO_HELP));
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.TOP).applyTo(helpButton);
+		helpButton.setImage(PlatformUI.getWorkbench().getSharedImages()
+				.getImage(ISharedImages.IMG_LCL_LINKTO_HELP));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.TOP)
+				.applyTo(helpButton);
 		if (hasHelpContext()) {
-			helpButton.setToolTipText(JFaceResources.getString(IDialogLabelKeys.HELP_LABEL_KEY));
+			helpButton.setToolTipText(JFaceResources
+					.getString(IDialogLabelKeys.HELP_LABEL_KEY));
 			helpButton.addMouseListener(new MouseAdapter() {
 				public void mouseDown(MouseEvent e) {
 					getControl().setFocus();
-					PlatformUI.getWorkbench().getHelpSystem().displayDynamicHelp();
+					PlatformUI.getWorkbench().getHelpSystem()
+							.displayDynamicHelp();
 				}
 			});
 		} else {
 			helpButton.setEnabled(false);
-			//helpButton.setVisible(false);
+			// helpButton.setVisible(false);
 		}
 	}
 
-	public boolean hasHelpContext() {
+	protected boolean hasHelpContext() {
 		return !(HELP_CONTEXT_NONE.equals(getHelpContextId()));
 	}
-	
-	// necessary?
+
 	protected void applyHelpContext(Control control) {
 		if (hasHelpContext()) {
-			PlatformUI.getWorkbench().getHelpSystem().setHelp(control, getHelpContextId());
+			PlatformUI.getWorkbench().getHelpSystem()
+					.setHelp(control, getHelpContextId());
 		}
+	}
+
+	public String getHelpContextId() {
+		return helpContextId;
+	}
+
+	public EAttribute getEAttribute() {
+		return feature;
 	}
 }
