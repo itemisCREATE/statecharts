@@ -96,14 +96,14 @@
          unpack="false"/>
 
    <plugin
-         id="org.yakindu.sct.core.simulation"
+         id="org.yakindu.sct.simulation.runtime"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.yakindu.sct.simulation.runtime"
+         id="org.yakindu.sct.simulation.core"
          download-size="0"
          install-size="0"
          version="0.0.0"
