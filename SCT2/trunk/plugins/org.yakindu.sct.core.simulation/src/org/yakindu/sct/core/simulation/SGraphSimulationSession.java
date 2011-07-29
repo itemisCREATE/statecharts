@@ -49,7 +49,6 @@ public class SGraphSimulationSession implements Runnable,
 
 	public void start() {
 		taskQueue.add(new Runnable() {
-			@Override
 			public void run() {
 				SGraphSimulationSessionRegistry.INSTANCE
 						.registerSimulationSession(SGraphSimulationSession.this);
@@ -63,7 +62,6 @@ public class SGraphSimulationSession implements Runnable,
 
 	public void singleStep() {
 		taskQueue.add(new Runnable() {
-			@Override
 			public void run() {
 				changeSimulationState(SimulationState.SINGLESTEP);
 			}
@@ -72,7 +70,6 @@ public class SGraphSimulationSession implements Runnable,
 
 	public void resume() {
 		taskQueue.add(new Runnable() {
-			@Override
 			public void run() {
 				changeSimulationState(SimulationState.RUNNING);
 				scheduleCycle();
@@ -82,7 +79,6 @@ public class SGraphSimulationSession implements Runnable,
 
 	public void suspend() {
 		taskQueue.add(new Runnable() {
-			@Override
 			public void run() {
 				changeSimulationState(SimulationState.PAUSED);
 			}
@@ -91,7 +87,6 @@ public class SGraphSimulationSession implements Runnable,
 
 	public void terminate() {
 		taskQueue.add(new Runnable() {
-			@Override
 			public void run() {
 				changeSimulationState(SimulationState.TERMINATED);
 				SGraphSimulationSessionRegistry.INSTANCE
@@ -102,7 +97,6 @@ public class SGraphSimulationSession implements Runnable,
 
 	public void raiseEvent(final String eventName) {
 		taskQueue.add(new Runnable() {
-			@Override
 			public void run() {
 				facade.raise(eventName);
 			}
@@ -116,10 +110,8 @@ public class SGraphSimulationSession implements Runnable,
 	protected void scheduleCycle() {
 		if (currentState == SimulationState.RUNNING) {
 			timer.schedule(new TimerTask() {
-				@Override
 				public void run() {
 					taskQueue.add(new Runnable() {
-						@Override
 						public void run() {
 							facade.runCycle();
 						}
@@ -131,7 +123,6 @@ public class SGraphSimulationSession implements Runnable,
 		}
 	}
 
-	@Override
 	public void run() {
 		while (!(currentState == SimulationState.TERMINATED)) {
 			try {
@@ -150,14 +141,12 @@ public class SGraphSimulationSession implements Runnable,
 		this.currentState = newState;
 	}
 
-	@Override
 	public void stateEntered(Vertex vertex) {
 		for (ISimulationSessionListener listener : listeners) {
 			listener.stateEntered(vertex);
 		}
 	}
 
-	@Override
 	public void stateLeft(Vertex vertex) {
 		for (ISimulationSessionListener listener : listeners) {
 			listener.stateLeft(vertex);
@@ -165,7 +154,6 @@ public class SGraphSimulationSession implements Runnable,
 
 	}
 
-	@Override
 	public void transitionFired(Transition transition) {
 		for (ISimulationSessionListener listener : listeners) {
 			listener.transitionFired(transition);
@@ -177,7 +165,6 @@ public class SGraphSimulationSession implements Runnable,
 		return listeners;
 	}
 
-	@Override
 	public void variableValueChanged(String variableName, Object value) {
 		for (ISimulationSessionListener listener : listeners) {
 			listener.variableValueChanged(variableName, value);
@@ -185,12 +172,9 @@ public class SGraphSimulationSession implements Runnable,
 
 	}
 
-	@Override
 	public void eventRaised(String eventName) {
 		for (ISimulationSessionListener listener : listeners) {
 			listener.eventRaised(eventName);
 		}
-
 	}
-
 }
