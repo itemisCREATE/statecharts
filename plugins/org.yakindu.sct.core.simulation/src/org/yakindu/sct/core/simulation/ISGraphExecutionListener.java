@@ -26,7 +26,6 @@ public interface ISGraphExecutionListener {
 
 	void transitionFired(Transition transition);
 
-
 	void variableValueChanged(String variableName, Object value);
 
 	void eventRaised(String eventName);
