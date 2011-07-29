@@ -29,6 +29,12 @@ public class ComboPropertyDescriptor extends AbstractPropertyDescriptor {
 		super(feature, labelName);
 		this.items = items;
 	}
+	
+	public ComboPropertyDescriptor(EAttribute feature, String labelName,
+			Enumerator[] items, String helpContextId) {
+		this(feature, labelName, items);
+		this.helpContextId = helpContextId;
+	}
 
 	public Object getControlValue() {
 		IStructuredSelection selection = (IStructuredSelection) comboViewer

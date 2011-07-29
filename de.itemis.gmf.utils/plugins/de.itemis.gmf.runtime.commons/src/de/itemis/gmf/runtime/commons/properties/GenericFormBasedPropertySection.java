@@ -63,7 +63,7 @@ public abstract class GenericFormBasedPropertySection extends
 	 * Hook method, clients may override
 	 */
 	protected Layout createBodyLayout() {
-		return new GridLayout(2, false);
+		return new GridLayout(3, false);
 	}
 
 	@Override
@@ -78,13 +78,15 @@ public abstract class GenericFormBasedPropertySection extends
 		Form form = toolkit.createForm(parent);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(form);
 
-		form.getBody().setLayout(createBodyLayout());
+		form.getBody().setLayout(createBodyLayout()); // returns 3 column grid by default now
 
 		for (final IFormPropertyDescriptor descriptor : descriptors) {
 			// Create the label in the first column
 			descriptor.createLabel(form.getBody());
 			// create the control inthe second column
 			descriptor.initControl(form.getBody());
+			// create help button in third column 
+			descriptor.addHelp(form.getBody());
 			final Control control = descriptor.getControl();
 			// Add a focus listener to apply model changes on focus lost
 			control.addFocusListener(new FocusListener() {

@@ -12,6 +12,11 @@ public class TextAreaPropertyDescriptor extends TextPropertyDescriptor {
 	public TextAreaPropertyDescriptor(EAttribute feature, String labelName) {
 		super(feature, labelName);
 	}
+	
+	public TextAreaPropertyDescriptor(EAttribute feature, String labelName, String helpContextId) {
+		this(feature,labelName);
+		this.helpContextId = helpContextId;
+	}
 
 	public Text createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());

@@ -62,4 +62,9 @@ public interface IFormPropertyDescriptor {
 	 */
 	EAttribute getEAttribute();
 
+	/**
+	 * Creates a help button for the third column of the property page.
+	 */
+	void addHelp(Composite parent);
+
 }

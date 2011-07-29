@@ -36,7 +36,7 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 
 	public XtextPropertyDescriptor(EAttribute feature, String labelName,
 			Injector injector) {
-		this(feature, labelName, injector, null);
+		this(feature, labelName, injector, (Resource)null);
 	}
 
 	public XtextPropertyDescriptor(EAttribute feature, String labelName,
@@ -44,6 +44,18 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 		super(feature, labelName);
 		this.injector = injector;
 		this.context = context;
+	}
+	
+	public XtextPropertyDescriptor(EAttribute feature, String labelName,
+			Injector injector, String helpContextId) {
+		this(feature, labelName, injector);
+		this.helpContextId = helpContextId;
+	}
+	
+	public XtextPropertyDescriptor(EAttribute feature, String labelName,
+			Injector injector, Resource context, String helpContextId) {
+		this(feature, labelName, injector, context);
+		this.helpContextId = helpContextId;
 	}
 
 	protected int getStyle() {

@@ -30,6 +30,10 @@ public class TextPropertyDescriptor extends AbstractPropertyDescriptor {
 		super(feature, labelName);
 	}
 
+	public TextPropertyDescriptor(EAttribute feature, String labelName, String helpContextId) {
+		super(feature, labelName, helpContextId);
+	}
+	
 	public Text createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		Text control = toolkit.createText(parent, "");
