@@ -13,14 +13,12 @@ package org.yakindu.sct.core.simulation;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.yakindu.sct.core.simulation.extensions.IExtensionPoints;
-
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SGraphSimulationSessionRegistry implements IExtensionPoints {
+public class SGraphSimulationSessionRegistry {
 
 	public static final SGraphSimulationSessionRegistry INSTANCE = new SGraphSimulationSessionRegistry();
 

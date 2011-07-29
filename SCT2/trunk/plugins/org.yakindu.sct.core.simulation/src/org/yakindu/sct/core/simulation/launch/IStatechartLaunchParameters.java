@@ -18,14 +18,7 @@ package org.yakindu.sct.core.simulation.launch;
  */
 public interface IStatechartLaunchParameters {
 
-	// Attribute keys
 	String FILE_NAME = "filename";
-	String YACOP_ENABLED = "yacopEnabled";
-	String YACOP_PORT = "yacopPort";
-
-	// Attribute default values
 	String DEFAULT_FILE_NAME = "";
-	boolean DEFAULT_YACOP_ENABLED = false;
-	String DEFAULT_YACOP_PORT = "1234";
 
 }

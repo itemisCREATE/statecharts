@@ -24,7 +24,7 @@ import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorResolver;
 /**
  * 
  * @author andreas muelder - Initial contribution and API
- *
+ * 
  */
 public class HighlightingExecutionListener extends
 		SimulationSessionListenerAdapter implements ISimulationSessionListener {
@@ -34,24 +34,29 @@ public class HighlightingExecutionListener extends
 	private HighlightingParameters parameters;
 
 	public HighlightingExecutionListener() {
+		parameters = new HighlightingParameters();
+	}
 
+	protected IHighlightingSupport getSupport() {
+		if (highlightingSupport != null)
+			return highlightingSupport;
 		IEditorPart activeEditor = ActiveEditorResolver.getActiveEditor();
 		if (activeEditor != null) {
 			// TODO The active editor should be adaptable to IHighlightSupport
 			// via registered factory
 			IHighlightingSupportAdapterFactory factory = new IHighlightingSupportAdapterFactory();
-			highlightingSupport = (IHighlightingSupport) factory.getAdapter(
-					activeEditor, IHighlightingSupport.class);
-
+			IHighlightingSupport support = (IHighlightingSupport) factory
+					.getAdapter(activeEditor, IHighlightingSupport.class);
+			if (support != null)
+				return highlightingSupport = support;
 		}
-
-		parameters = new HighlightingParameters();
+		return new IHighlightingSupport.HighlightingSupportNullImpl();
 	}
 
 	public void stateEntered(final Vertex vertex) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
-				highlightingSupport.fadeIn(vertex, parameters);
+				getSupport().fadeIn(vertex, parameters);
 			}
 		});
 	}
@@ -59,7 +64,7 @@ public class HighlightingExecutionListener extends
 	public void stateLeft(final Vertex vertex) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
-				highlightingSupport.fadeOut(vertex, parameters);
+				getSupport().fadeOut(vertex, parameters);
 			}
 		});
 	}
@@ -67,7 +72,7 @@ public class HighlightingExecutionListener extends
 	public void transitionFired(final Transition transition) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
-				highlightingSupport.flash(transition, parameters);
+				getSupport().flash(transition, parameters);
 			}
 		});
 	}
@@ -78,10 +83,10 @@ public class HighlightingExecutionListener extends
 			public void run() {
 				switch (newState) {
 				case STARTED:
-					highlightingSupport.lockEditor();
+					getSupport().lockEditor();
 					break;
 				case TERMINATED:
-					highlightingSupport.releaseEditor();
+					getSupport().releaseEditor();
 					break;
 				}
 			}

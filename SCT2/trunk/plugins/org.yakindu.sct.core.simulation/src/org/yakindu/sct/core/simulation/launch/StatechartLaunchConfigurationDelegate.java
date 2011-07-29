@@ -52,7 +52,6 @@ public class StatechartLaunchConfigurationDelegate implements
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {
 		String filename = configuration.getAttribute(
 				IStatechartLaunchParameters.FILE_NAME, "");
-
 		Resource resource = loadResource(filename);
 		
 		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(

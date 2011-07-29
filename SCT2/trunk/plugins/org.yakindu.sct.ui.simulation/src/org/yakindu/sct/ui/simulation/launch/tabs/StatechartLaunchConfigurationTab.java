@@ -44,8 +44,6 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 
 	private Image image;
 	private Text modelfile;
-	private Button btnYacopEnabled;
-	private Text port;
 
 	public StatechartLaunchConfigurationTab() {
 		image = new Image(Display.getDefault(), getClass().getClassLoader()
@@ -58,41 +56,6 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 		comp.setLayout(new GridLayout(1, true));
 		createFileSelectionGroup(comp);
 		new Label(comp, SWT.NONE);
-		createYacopGroup(comp);
-	}
-
-	private void createYacopGroup(Composite comp) {
-		Group yacopGroup = new Group(comp, SWT.NONE);
-		yacopGroup.setText("YAKINDU Communication Protocol:");
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(yacopGroup);
-		GridLayout layout = new GridLayout(2, false);
-		layout.horizontalSpacing = 15;
-		yacopGroup.setLayout(layout);
-
-		btnYacopEnabled = new Button(yacopGroup, SWT.CHECK);
-		GridDataFactory.fillDefaults().grab(true, false).span(2, 0)
-				.applyTo(btnYacopEnabled);
-		btnYacopEnabled.setText("enable protocol");
-		btnYacopEnabled.addSelectionListener(new SelectionListener() {
-
-			public void widgetSelected(SelectionEvent e) {
-				port.setEnabled(!port.getEnabled());
-				updateLaunchConfigurationDialog();
-			}
-
-			public void widgetDefaultSelected(SelectionEvent e) {
-				// Nothing to do
-			}
-		});
-
-		Label label = new Label(yacopGroup, SWT.NONE);
-		label.setText("socket server port: ");
-		GridDataFactory.fillDefaults().grab(false, false).applyTo(label);
-
-		port = new Text(yacopGroup, SWT.BORDER);
-		port.addModifyListener(new UpdateListener());
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(port);
-
 	}
 
 	private void createFileSelectionGroup(Composite comp) {
@@ -132,23 +95,12 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 	}
 
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(YACOP_ENABLED, DEFAULT_YACOP_ENABLED);
-		configuration.setAttribute(YACOP_PORT, DEFAULT_YACOP_PORT);
 	}
 
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
 			modelfile.setText(configuration.getAttribute(FILE_NAME,
 					DEFAULT_FILE_NAME));
-			btnYacopEnabled.setSelection(configuration.getAttribute(
-					YACOP_ENABLED, DEFAULT_YACOP_ENABLED));
-			if (btnYacopEnabled.getSelection()) {
-				port.setEnabled(true);
-			} else {
-				port.setEnabled(false);
-			}
-			port.setText(configuration.getAttribute(YACOP_PORT,
-					DEFAULT_YACOP_PORT));
 
 		} catch (CoreException e) {
 			e.printStackTrace();
@@ -157,9 +109,6 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(FILE_NAME, modelfile.getText());
-		configuration.setAttribute(YACOP_PORT, port.getText());
-		configuration.setAttribute(YACOP_ENABLED,
-				btnYacopEnabled.getSelection());
 	}
 
 	@Override
@@ -187,7 +136,6 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 				setErrorMessage("file " + model + " does not exist!");
 				return false;
 			}
-		// TODO: Add validation for port
 
 		return super.isValid(launchConfig);
 	}
