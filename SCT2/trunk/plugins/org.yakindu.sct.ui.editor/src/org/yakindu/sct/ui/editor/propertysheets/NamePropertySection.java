@@ -7,12 +7,15 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.TextPropertyDescriptor;
+
 /**
- * Base property section for all model elements that inherit from {@link NamedElement}
+ * Base property section for all model elements that inherit from
+ * {@link NamedElement}
+ * 
  * @author andreas muelder
- *
+ * 
  */
-public abstract class NamePropertySection extends AbstractEditorPropertySection{
+public abstract class NamePropertySection extends AbstractEditorPropertySection {
 
 	@Override
 	protected void createPropertyDescriptors(

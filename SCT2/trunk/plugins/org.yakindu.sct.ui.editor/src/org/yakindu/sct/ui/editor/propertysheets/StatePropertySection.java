@@ -17,6 +17,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.editparts.StateEditPart;
 import org.yakindu.sct.ui.editor.extensions.Extensions;
 import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
+import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 
 import com.google.inject.Injector;
 
@@ -41,7 +42,7 @@ public class StatePropertySection extends NamePropertySection {
 
 		XtextPropertyDescriptor expressionsDescriptor = new XtextPropertyDescriptor(
 				SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
-				"Expression: ", getInjector(), getActiveEditorResource());
+				"Expression: ", getInjector(), getActiveEditorResource(), IYakinduSctHelpContextIds.SC_PROPERTIES_STATE_EXPRESSION);
 		descriptors.add(expressionsDescriptor);
 	}
 

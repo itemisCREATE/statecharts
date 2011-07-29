@@ -17,6 +17,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.editparts.TransitionEditPart;
 import org.yakindu.sct.ui.editor.extensions.Extensions;
 import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
+import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 
 import com.google.inject.Injector;
 
@@ -37,7 +38,7 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 			List<IFormPropertyDescriptor> descriptors) {
 		XtextPropertyDescriptor expressionsDescriptor = new XtextPropertyDescriptor(
 				SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
-				"Expression: ", getInjector(), getActiveEditorResource());
+				"Expression: ", getInjector(), getActiveEditorResource(), IYakinduSctHelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION);
 		descriptors.add(expressionsDescriptor);
 
 	}
