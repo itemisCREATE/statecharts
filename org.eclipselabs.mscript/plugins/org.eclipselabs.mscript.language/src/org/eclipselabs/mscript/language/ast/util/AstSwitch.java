@@ -18,7 +18,6 @@ import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.BeginExpression;
 import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
 import org.eclipselabs.mscript.language.ast.BuiltinFunction;
 import org.eclipselabs.mscript.language.ast.BuiltinVariable;
@@ -383,13 +382,6 @@ public class AstSwitch<T> extends Switch<T> {
 				ParenthesizedExpression parenthesizedExpression = (ParenthesizedExpression)theEObject;
 				T result = caseParenthesizedExpression(parenthesizedExpression);
 				if (result == null) result = caseExpression(parenthesizedExpression);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.BEGIN_EXPRESSION: {
-				BeginExpression beginExpression = (BeginExpression)theEObject;
-				T result = caseBeginExpression(beginExpression);
-				if (result == null) result = caseExpression(beginExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1161,21 +1153,6 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseParenthesizedExpression(ParenthesizedExpression object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Begin Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Begin Expression</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBeginExpression(BeginExpression object) {
 		return null;
 	}
 

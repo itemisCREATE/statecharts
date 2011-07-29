@@ -181,7 +181,6 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getUnitConstructionOperatorAccess().getGroup(), "rule__UnitConstructionOperator__Group__0");
 					put(grammarAccess.getParenthesizedExpressionAccess().getGroup(), "rule__ParenthesizedExpression__Group__0");
 					put(grammarAccess.getParenthesizedExpressionAccess().getGroup_2(), "rule__ParenthesizedExpression__Group_2__0");
-					put(grammarAccess.getBeginExpressionAccess().getGroup(), "rule__BeginExpression__Group__0");
 					put(grammarAccess.getEndExpressionAccess().getGroup(), "rule__EndExpression__Group__0");
 					put(grammarAccess.getUnitAccess().getGroup(), "rule__Unit__Group__0");
 					put(grammarAccess.getUnitAccess().getGroup_1_0(), "rule__Unit__Group_1_0__0");

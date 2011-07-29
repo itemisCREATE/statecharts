@@ -2410,16 +2410,15 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cArrayConstructionOperatorParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cArrayConcatenationOperatorParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cParenthesizedExpressionParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
-		private final RuleCall cBeginExpressionParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
-		private final RuleCall cEndExpressionParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
+		private final RuleCall cEndExpressionParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		
 		//PrimaryExpression returns Expression:
 		//	Literal | FeatureCall | UnitConstructionOperator | ArrayConstructionOperator | ArrayConcatenationOperator |
-		//	ParenthesizedExpression | BeginExpression | EndExpression;
+		//	ParenthesizedExpression | EndExpression;
 		public ParserRule getRule() { return rule; }
 
 		//Literal | FeatureCall | UnitConstructionOperator | ArrayConstructionOperator | ArrayConcatenationOperator |
-		//ParenthesizedExpression | BeginExpression | EndExpression
+		//ParenthesizedExpression | EndExpression
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Literal
@@ -2440,11 +2439,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//ParenthesizedExpression
 		public RuleCall getParenthesizedExpressionParserRuleCall_5() { return cParenthesizedExpressionParserRuleCall_5; }
 
-		//BeginExpression
-		public RuleCall getBeginExpressionParserRuleCall_6() { return cBeginExpressionParserRuleCall_6; }
-
 		//EndExpression
-		public RuleCall getEndExpressionParserRuleCall_7() { return cEndExpressionParserRuleCall_7; }
+		public RuleCall getEndExpressionParserRuleCall_6() { return cEndExpressionParserRuleCall_6; }
 	}
 
 	public class LiteralElements extends AbstractParserRuleElementFinder {
@@ -3169,26 +3165,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//")"
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
-	}
-
-	public class BeginExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BeginExpression");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cBeginExpressionAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cBeginKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//BeginExpression:
-		//	{BeginExpression} "begin";
-		public ParserRule getRule() { return rule; }
-
-		//{BeginExpression} "begin"
-		public Group getGroup() { return cGroup; }
-
-		//{BeginExpression}
-		public Action getBeginExpressionAction_0() { return cBeginExpressionAction_0; }
-
-		//"begin"
-		public Keyword getBeginKeyword_1() { return cBeginKeyword_1; }
 	}
 
 	public class EndExpressionElements extends AbstractParserRuleElementFinder {
@@ -3952,7 +3928,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private ExpressionListElements pExpressionList;
 	private UnitConstructionOperatorElements pUnitConstructionOperator;
 	private ParenthesizedExpressionElements pParenthesizedExpression;
-	private BeginExpressionElements pBeginExpression;
 	private EndExpressionElements pEndExpression;
 	private UnitElements pUnit;
 	private ExplicitUnitElements pExplicitUnit;
@@ -4629,7 +4604,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 	//PrimaryExpression returns Expression:
 	//	Literal | FeatureCall | UnitConstructionOperator | ArrayConstructionOperator | ArrayConcatenationOperator |
-	//	ParenthesizedExpression | BeginExpression | EndExpression;
+	//	ParenthesizedExpression | EndExpression;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return (pPrimaryExpression != null) ? pPrimaryExpression : (pPrimaryExpression = new PrimaryExpressionElements());
 	}
@@ -4839,16 +4814,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getParenthesizedExpressionRule() {
 		return getParenthesizedExpressionAccess().getRule();
-	}
-
-	//BeginExpression:
-	//	{BeginExpression} "begin";
-	public BeginExpressionElements getBeginExpressionAccess() {
-		return (pBeginExpression != null) ? pBeginExpression : (pBeginExpression = new BeginExpressionElements());
-	}
-	
-	public ParserRule getBeginExpressionRule() {
-		return getBeginExpressionAccess().getRule();
 	}
 
 	//EndExpression:

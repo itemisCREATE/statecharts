@@ -24,7 +24,6 @@ import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.AssertionStatusKind;
 import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.BeginExpression;
 import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
 import org.eclipselabs.mscript.language.ast.BuiltinFunction;
 import org.eclipselabs.mscript.language.ast.BuiltinVariable;
@@ -158,7 +157,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.EXPRESSION_LIST: return createExpressionList();
 			case AstPackage.UNIT_CONSTRUCTION_OPERATOR: return createUnitConstructionOperator();
 			case AstPackage.PARENTHESIZED_EXPRESSION: return createParenthesizedExpression();
-			case AstPackage.BEGIN_EXPRESSION: return createBeginExpression();
 			case AstPackage.END_EXPRESSION: return createEndExpression();
 			case AstPackage.RANGE_EXPRESSION: return createRangeExpression();
 			case AstPackage.IMPLIES_EXPRESSION: return createImpliesExpression();
@@ -574,16 +572,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public ParenthesizedExpression createParenthesizedExpression() {
 		ParenthesizedExpressionImpl parenthesizedExpression = new ParenthesizedExpressionImpl();
 		return parenthesizedExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BeginExpression createBeginExpression() {
-		BeginExpressionImpl beginExpression = new BeginExpressionImpl();
-		return beginExpression;
 	}
 
 	/**

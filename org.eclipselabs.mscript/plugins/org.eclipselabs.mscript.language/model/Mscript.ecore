@@ -241,7 +241,6 @@
         eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BeginExpression" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="EndExpression" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="RangeExpression" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"

@@ -17,7 +17,6 @@ import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
 import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.BeginExpression;
 import org.eclipselabs.mscript.language.ast.BuiltinFunction;
 import org.eclipselabs.mscript.language.ast.BuiltinVariable;
 import org.eclipselabs.mscript.language.ast.CallableElement;
@@ -104,13 +103,6 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 				|| ce instanceof FunctionObjectDeclaration
 				|| ce instanceof BuiltinFunction)) {
 			error("Invalid function call " + variableAccess.getFeature().getName(), null);
-		}
-	}
-
-	@Check
-	public void checkBeginExpressionMustBeInsideArraySubscript(BeginExpression beginExpression) {
-		if (!isInsideArraySubscript(beginExpression)) {
-			error("'begin' may only appear inside array subscripts", null);
 		}
 	}
 

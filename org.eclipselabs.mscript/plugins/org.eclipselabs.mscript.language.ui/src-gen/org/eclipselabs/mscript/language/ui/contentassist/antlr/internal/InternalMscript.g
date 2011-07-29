@@ -2102,34 +2102,6 @@ finally {
 
 
 
-// Entry rule entryRuleBeginExpression
-entryRuleBeginExpression 
-:
-{ before(grammarAccess.getBeginExpressionRule()); }
-	 ruleBeginExpression
-{ after(grammarAccess.getBeginExpressionRule()); } 
-	 EOF 
-;
-
-// Rule BeginExpression
-ruleBeginExpression
-    @init {
-		int stackSize = keepStackSize();
-    }
-	:
-(
-{ before(grammarAccess.getBeginExpressionAccess().getGroup()); }
-(rule__BeginExpression__Group__0)
-{ after(grammarAccess.getBeginExpressionAccess().getGroup()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-
 // Entry rule entryRuleEndExpression
 entryRuleEndExpression 
 :
@@ -3082,15 +3054,9 @@ rule__PrimaryExpression__Alternatives
 )
 
     |(
-{ before(grammarAccess.getPrimaryExpressionAccess().getBeginExpressionParserRuleCall_6()); }
-	ruleBeginExpression
-{ after(grammarAccess.getPrimaryExpressionAccess().getBeginExpressionParserRuleCall_6()); }
-)
-
-    |(
-{ before(grammarAccess.getPrimaryExpressionAccess().getEndExpressionParserRuleCall_7()); }
+{ before(grammarAccess.getPrimaryExpressionAccess().getEndExpressionParserRuleCall_6()); }
 	ruleEndExpression
-{ after(grammarAccess.getPrimaryExpressionAccess().getEndExpressionParserRuleCall_7()); }
+{ after(grammarAccess.getPrimaryExpressionAccess().getEndExpressionParserRuleCall_6()); }
 )
 
 ;
@@ -14205,71 +14171,6 @@ rule__ParenthesizedExpression__Group_2__1__Impl
 { before(grammarAccess.getParenthesizedExpressionAccess().getExpressionsAssignment_2_1()); }
 (rule__ParenthesizedExpression__ExpressionsAssignment_2_1)
 { after(grammarAccess.getParenthesizedExpressionAccess().getExpressionsAssignment_2_1()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-
-
-
-
-rule__BeginExpression__Group__0
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-	rule__BeginExpression__Group__0__Impl
-	rule__BeginExpression__Group__1
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__BeginExpression__Group__0__Impl
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getBeginExpressionAccess().getBeginExpressionAction_0()); }
-(
-
-)
-{ after(grammarAccess.getBeginExpressionAccess().getBeginExpressionAction_0()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-rule__BeginExpression__Group__1
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-	rule__BeginExpression__Group__1__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__BeginExpression__Group__1__Impl
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getBeginExpressionAccess().getBeginKeyword_1()); }
-
-	'begin' 
-
-{ after(grammarAccess.getBeginExpressionAccess().getBeginKeyword_1()); }
 )
 
 ;

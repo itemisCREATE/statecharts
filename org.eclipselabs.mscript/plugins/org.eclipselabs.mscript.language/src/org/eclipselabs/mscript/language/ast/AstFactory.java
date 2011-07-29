@@ -323,15 +323,6 @@ public interface AstFactory extends EFactory {
 	ParenthesizedExpression createParenthesizedExpression();
 
 	/**
-	 * Returns a new object of class '<em>Begin Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Begin Expression</em>'.
-	 * @generated
-	 */
-	BeginExpression createBeginExpression();
-
-	/**
 	 * Returns a new object of class '<em>End Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -267,7 +267,6 @@ PrimaryExpression returns Expression:
 	ArrayConstructionOperator |
 	ArrayConcatenationOperator |
 	ParenthesizedExpression |
-	BeginExpression |
 	EndExpression;
 
 Literal:
@@ -330,9 +329,6 @@ UnitConstructionOperator:
 
 ParenthesizedExpression:
 	'(' expressions+=Expression (',' expressions+=Expression)* ')';
-
-BeginExpression:
-	{BeginExpression} 'begin';
 
 EndExpression:
 	{EndExpression} 'end';

@@ -19,7 +19,6 @@ import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.BeginExpression;
 import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
 import org.eclipselabs.mscript.language.ast.BuiltinFunction;
 import org.eclipselabs.mscript.language.ast.BuiltinVariable;
@@ -281,10 +280,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseParenthesizedExpression(ParenthesizedExpression object) {
 				return createParenthesizedExpressionAdapter();
-			}
-			@Override
-			public Adapter caseBeginExpression(BeginExpression object) {
-				return createBeginExpressionAdapter();
 			}
 			@Override
 			public Adapter caseEndExpression(EndExpression object) {
@@ -947,20 +942,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createParenthesizedExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.BeginExpression <em>Begin Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.BeginExpression
-	 * @generated
-	 */
-	public Adapter createBeginExpressionAdapter() {
 		return null;
 	}
 

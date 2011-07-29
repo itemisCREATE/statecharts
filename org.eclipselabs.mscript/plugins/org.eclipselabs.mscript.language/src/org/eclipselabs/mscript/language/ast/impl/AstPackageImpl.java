@@ -24,7 +24,6 @@ import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.AssertionStatusKind;
 import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.BeginExpression;
 import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
 import org.eclipselabs.mscript.language.ast.BuiltinFunction;
 import org.eclipselabs.mscript.language.ast.BuiltinVariable;
@@ -354,13 +353,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * @generated
 	 */
 	private EClass parenthesizedExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass beginExpressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1639,15 +1631,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getBeginExpression() {
-		return beginExpressionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getEndExpression() {
 		return endExpressionEClass;
 	}
@@ -2490,8 +2473,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		parenthesizedExpressionEClass = createEClass(PARENTHESIZED_EXPRESSION);
 		createEReference(parenthesizedExpressionEClass, PARENTHESIZED_EXPRESSION__EXPRESSIONS);
 
-		beginExpressionEClass = createEClass(BEGIN_EXPRESSION);
-
 		endExpressionEClass = createEClass(END_EXPRESSION);
 
 		rangeExpressionEClass = createEClass(RANGE_EXPRESSION);
@@ -2652,7 +2633,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		arrayConcatenationOperatorEClass.getESuperTypes().add(theTypeSystemPackage.getExpression());
 		unitConstructionOperatorEClass.getESuperTypes().add(theTypeSystemPackage.getExpression());
 		parenthesizedExpressionEClass.getESuperTypes().add(theTypeSystemPackage.getExpression());
-		beginExpressionEClass.getESuperTypes().add(theTypeSystemPackage.getExpression());
 		endExpressionEClass.getESuperTypes().add(theTypeSystemPackage.getExpression());
 		rangeExpressionEClass.getESuperTypes().add(theTypeSystemPackage.getExpression());
 		impliesExpressionEClass.getESuperTypes().add(theTypeSystemPackage.getExpression());
@@ -2829,8 +2809,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 
 		initEClass(parenthesizedExpressionEClass, ParenthesizedExpression.class, "ParenthesizedExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParenthesizedExpression_Expressions(), theTypeSystemPackage.getExpression(), null, "expressions", null, 0, -1, ParenthesizedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(beginExpressionEClass, BeginExpression.class, "BeginExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(endExpressionEClass, EndExpression.class, "EndExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

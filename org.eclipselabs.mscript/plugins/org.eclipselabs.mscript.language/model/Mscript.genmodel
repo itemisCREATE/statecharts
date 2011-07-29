@@ -190,7 +190,6 @@
     <genClasses ecoreClass="Mscript.ecore#//ParenthesizedExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ParenthesizedExpression/expressions"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//BeginExpression"/>
     <genClasses ecoreClass="Mscript.ecore#//EndExpression"/>
     <genClasses ecoreClass="Mscript.ecore#//RangeExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RangeExpression/operands"/>

@@ -4070,21 +4070,11 @@ rulePrimaryExpression returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getPrimaryExpressionAccess().getBeginExpressionParserRuleCall_6()); 
+        newCompositeNode(grammarAccess.getPrimaryExpressionAccess().getEndExpressionParserRuleCall_6()); 
     }
-    this_BeginExpression_6=ruleBeginExpression
+    this_EndExpression_6=ruleEndExpression
     { 
-        $current = $this_BeginExpression_6.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getPrimaryExpressionAccess().getEndExpressionParserRuleCall_7()); 
-    }
-    this_EndExpression_7=ruleEndExpression
-    { 
-        $current = $this_EndExpression_7.current; 
+        $current = $this_EndExpression_6.current; 
         afterParserOrEnumRuleCall();
     }
 )
@@ -5312,37 +5302,6 @@ ruleParenthesizedExpression returns [EObject current=null]
 ))*	otherlv_4=')' 
     {
     	newLeafNode(otherlv_4, grammarAccess.getParenthesizedExpressionAccess().getRightParenthesisKeyword_3());
-    }
-)
-;
-
-
-
-
-
-// Entry rule entryRuleBeginExpression
-entryRuleBeginExpression returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getBeginExpressionRule()); }
-	 iv_ruleBeginExpression=ruleBeginExpression 
-	 { $current=$iv_ruleBeginExpression.current; } 
-	 EOF 
-;
-
-// Rule BeginExpression
-ruleBeginExpression returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getBeginExpressionAccess().getBeginExpressionAction_0(),
-            $current);
-    }
-)	otherlv_1='begin' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getBeginExpressionAccess().getBeginKeyword_1());
     }
 )
 ;
