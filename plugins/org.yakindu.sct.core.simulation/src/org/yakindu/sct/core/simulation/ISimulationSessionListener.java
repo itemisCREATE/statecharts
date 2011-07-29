@@ -23,7 +23,6 @@ public interface ISimulationSessionListener extends ISGraphExecutionListener {
 	public static enum SimulationState {
 		STARTED, RUNNING, SINGLESTEP, PAUSED, TERMINATED
 	}
-	
 
 	public void simulationStateChanged(SimulationState oldState,
 			SimulationState newState);
@@ -35,33 +34,23 @@ public interface ISimulationSessionListener extends ISGraphExecutionListener {
 	public static class SimulationSessionListenerAdapter implements
 			ISimulationSessionListener {
 
-		@Override
 		public void stateEntered(Vertex vertex) {
 		}
 
-		@Override
 		public void stateLeft(Vertex vertex) {
 		}
 
-		@Override
 		public void transitionFired(Transition transition) {
 		}
 
-		@Override
 		public void simulationStateChanged(SimulationState oldState,
 				SimulationState newState) {
 		}
 
-		@Override
 		public void variableValueChanged(String variableName, Object value) {
-			// TODO Auto-generated method stub
-			
 		}
 
-		@Override
 		public void eventRaised(String eventName) {
-			// TODO Auto-generated method stub
-			
 		}
 	}
 }
