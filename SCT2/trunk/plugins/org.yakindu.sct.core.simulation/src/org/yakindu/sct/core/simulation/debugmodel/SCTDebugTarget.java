@@ -87,55 +87,43 @@ public class SCTDebugTarget extends PlatformObject implements IDebugTarget {
 		thread.suspend();
 	}
 
-	@Override
 	public void breakpointAdded(IBreakpoint breakpoint) {
 	}
 
-	@Override
 	public void breakpointRemoved(IBreakpoint breakpoint, IMarkerDelta delta) {
 	}
 
-	@Override
 	public void breakpointChanged(IBreakpoint breakpoint, IMarkerDelta delta) {
 	}
 
-	@Override
 	public boolean canDisconnect() {
 		return false;
 	}
 
-	@Override
 	public void disconnect() throws DebugException {
 
 	}
 
-	@Override
 	public boolean isDisconnected() {
 		return false;
 	}
 
-	@Override
 	public boolean supportsStorageRetrieval() {
 		return false;
 	}
-
-	@Override
 	public IMemoryBlock getMemoryBlock(long startAddress, long length)
 			throws DebugException {
 		return null;
 	}
 
-	@Override
 	public ILaunch getLaunch() {
 		return launch;
 	}
 
-	@Override
 	public String getModelIdentifier() {
 		return IDebugConstants.DEBUG_TARGET;
 	}
 
-	@Override
 	public IDebugTarget getDebugTarget() {
 		return this;
 	}

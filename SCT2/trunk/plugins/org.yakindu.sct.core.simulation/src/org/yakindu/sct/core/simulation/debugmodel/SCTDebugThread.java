@@ -119,12 +119,10 @@ public class SCTDebugThread extends PlatformObject implements IThread {
 		session.terminate();
 	}
 
-	@Override
 	public IStackFrame getTopStackFrame() throws DebugException {
 		return null;
 	}
 
-	@Override
 	public ILaunch getLaunch() {
 		return getDebugTarget().getLaunch();
 	}
@@ -133,12 +131,10 @@ public class SCTDebugThread extends PlatformObject implements IThread {
 		DebugPlugin.getDefault().fireDebugEventSet(new DebugEvent[] { event });
 	}
 
-	@Override
 	public String getModelIdentifier() {
 		return IDebugConstants.DEBUG_THREAD;
 	}
 
-	@Override
 	public IDebugTarget getDebugTarget() {
 		return target;
 	}
