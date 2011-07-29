@@ -27,6 +27,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.simulation.runtime.stext.Assign;
 import org.yakindu.sct.simulation.runtime.stext.BinaryOperation;
 import org.yakindu.sct.simulation.runtime.stext.Constant;
+import org.yakindu.sct.simulation.runtime.stext.CoreFunction;
 import org.yakindu.sct.simulation.runtime.stext.Function;
 import org.yakindu.sct.simulation.runtime.stext.FunctionMethod;
 import org.yakindu.sct.simulation.runtime.stext.ProcedureCall;
@@ -243,6 +244,16 @@ public class STextBuilder extends Function {
 	@FunctionMethod("build")
 	public RTExpression buildLogicalRelationExpression(EObject obj) {
 		return buildBinaryOperation(obj);
+	}
+
+	@FunctionMethod("build")
+	public RTExpression buildLogicalNotExpression(EObject obj) {
+		RTExpression operand = buildRefExpression(obj, "operand");
+
+		if (operand != null)
+			return new UnaryOperation(CoreFunction.NOT, operand);
+
+		return operand;
 	}
 
 	@FunctionMethod("build")
