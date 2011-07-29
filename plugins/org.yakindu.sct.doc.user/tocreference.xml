@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Reference" link_to="toc.xml#reference"> 
+	<topic label="Statechart Elements"> 
+		<topic label="Statechart" href="html/reference/statechart_elements/statechart.html" />
+  <topic href="html/reference/statechart_elements/region.html" label="Region">
+  </topic>
+  <topic href="html/reference/statechart_elements/state.html" label="State">
+  </topic>
+  <topic href="html/reference/statechart_elements/entry.html" label="Entry">
+  </topic>
+  <topic href="html/reference/statechart_elements/transition.html" label="Transition">
+  </topic> 
+	</topic>
+</toc>
