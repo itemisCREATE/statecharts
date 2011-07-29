@@ -210,7 +210,7 @@ public class STextBuilderTest {
 
 	@Test
 	public void testHexVariableAssignment() {
-		RTStatement stmt = parseReactionEffect("a = 0xFF");
+		RTStatement stmt = parseReactionEffect("a = 0xFF;");
 		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
