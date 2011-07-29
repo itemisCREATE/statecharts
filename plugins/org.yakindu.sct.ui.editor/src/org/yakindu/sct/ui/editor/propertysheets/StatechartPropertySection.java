@@ -17,6 +17,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart;
 import org.yakindu.sct.ui.editor.extensions.Extensions;
 import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
+import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 
 import com.google.inject.Injector;
 
@@ -44,7 +45,7 @@ public class StatechartPropertySection extends AbstractEditorPropertySection {
 		//Text property descriptor for the expression
 		XtextPropertyDescriptor expressionsDescriptor = new XtextPropertyDescriptor(
 				SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
-				"Expression: ", getInjector());
+				"Expression: ", getInjector(), IYakinduSctHelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION);
 		descriptors.add(expressionsDescriptor);
 	}
 
