@@ -7,7 +7,6 @@
 package org.eclipselabs.mscript.language.ast.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.ContinueStatement;
 

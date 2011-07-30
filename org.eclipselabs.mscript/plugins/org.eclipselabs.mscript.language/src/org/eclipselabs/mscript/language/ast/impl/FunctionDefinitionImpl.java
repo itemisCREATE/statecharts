@@ -22,6 +22,7 @@ import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Check;
 import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
+import org.eclipselabs.mscript.language.ast.FunctionKind;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.InputParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.OutputParameterDeclaration;
@@ -35,7 +36,7 @@ import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#isStateful <em>Stateful</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getKind <em>Kind</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getTemplateParameterDeclarations <em>Template Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getInputParameterDeclarations <em>Input Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getOutputParameterDeclarations <em>Output Parameter Declarations</em>}</li>
@@ -51,24 +52,24 @@ import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
  */
 public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDefinition {
 	/**
-	 * The default value of the '{@link #isStateful() <em>Stateful</em>}' attribute.
+	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isStateful()
+	 * @see #getKind()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean STATEFUL_EDEFAULT = false;
+	protected static final FunctionKind KIND_EDEFAULT = FunctionKind.STATELESS;
 
 	/**
-	 * The cached value of the '{@link #isStateful() <em>Stateful</em>}' attribute.
+	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isStateful()
+	 * @see #getKind()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean stateful = STATEFUL_EDEFAULT;
+	protected FunctionKind kind = KIND_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getTemplateParameterDeclarations() <em>Template Parameter Declarations</em>}' containment reference list.
@@ -174,8 +175,8 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isStateful() {
-		return stateful;
+	public FunctionKind getKind() {
+		return kind;
 	}
 
 	/**
@@ -183,11 +184,11 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStateful(boolean newStateful) {
-		boolean oldStateful = stateful;
-		stateful = newStateful;
+	public void setKind(FunctionKind newKind) {
+		FunctionKind oldKind = kind;
+		kind = newKind == null ? KIND_EDEFAULT : newKind;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_DEFINITION__STATEFUL, oldStateful, stateful));
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_DEFINITION__KIND, oldKind, kind));
 	}
 
 	/**
@@ -348,8 +349,8 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AstPackage.FUNCTION_DEFINITION__STATEFUL:
-				return isStateful();
+			case AstPackage.FUNCTION_DEFINITION__KIND:
+				return getKind();
 			case AstPackage.FUNCTION_DEFINITION__TEMPLATE_PARAMETER_DECLARATIONS:
 				return getTemplateParameterDeclarations();
 			case AstPackage.FUNCTION_DEFINITION__INPUT_PARAMETER_DECLARATIONS:
@@ -379,8 +380,8 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AstPackage.FUNCTION_DEFINITION__STATEFUL:
-				setStateful((Boolean)newValue);
+			case AstPackage.FUNCTION_DEFINITION__KIND:
+				setKind((FunctionKind)newValue);
 				return;
 			case AstPackage.FUNCTION_DEFINITION__TEMPLATE_PARAMETER_DECLARATIONS:
 				getTemplateParameterDeclarations().clear();
@@ -426,8 +427,8 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AstPackage.FUNCTION_DEFINITION__STATEFUL:
-				setStateful(STATEFUL_EDEFAULT);
+			case AstPackage.FUNCTION_DEFINITION__KIND:
+				setKind(KIND_EDEFAULT);
 				return;
 			case AstPackage.FUNCTION_DEFINITION__TEMPLATE_PARAMETER_DECLARATIONS:
 				getTemplateParameterDeclarations().clear();
@@ -465,8 +466,8 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AstPackage.FUNCTION_DEFINITION__STATEFUL:
-				return stateful != STATEFUL_EDEFAULT;
+			case AstPackage.FUNCTION_DEFINITION__KIND:
+				return kind != KIND_EDEFAULT;
 			case AstPackage.FUNCTION_DEFINITION__TEMPLATE_PARAMETER_DECLARATIONS:
 				return templateParameterDeclarations != null && !templateParameterDeclarations.isEmpty();
 			case AstPackage.FUNCTION_DEFINITION__INPUT_PARAMETER_DECLARATIONS:
@@ -497,8 +498,8 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (stateful: ");
-		result.append(stateful);
+		result.append(" (kind: ");
+		result.append(kind);
 		result.append(')');
 		return result.toString();
 	}

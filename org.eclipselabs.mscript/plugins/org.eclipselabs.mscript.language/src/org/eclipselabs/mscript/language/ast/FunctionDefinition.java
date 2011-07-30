@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#isStateful <em>Stateful</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getKind <em>Kind</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getTemplateParameterDeclarations <em>Template Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getInputParameterDeclarations <em>Input Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getOutputParameterDeclarations <em>Output Parameter Declarations</em>}</li>
@@ -34,30 +34,33 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface FunctionDefinition extends Definition, CallableElement {
 	/**
-	 * Returns the value of the '<em><b>Stateful</b></em>' attribute.
+	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.eclipselabs.mscript.language.ast.FunctionKind}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Stateful</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Kind</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Stateful</em>' attribute.
-	 * @see #setStateful(boolean)
-	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_Stateful()
+	 * @return the value of the '<em>Kind</em>' attribute.
+	 * @see org.eclipselabs.mscript.language.ast.FunctionKind
+	 * @see #setKind(FunctionKind)
+	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_Kind()
 	 * @model
 	 * @generated
 	 */
-	boolean isStateful();
+	FunctionKind getKind();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#isStateful <em>Stateful</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getKind <em>Kind</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Stateful</em>' attribute.
-	 * @see #isStateful()
+	 * @param value the new value of the '<em>Kind</em>' attribute.
+	 * @see org.eclipselabs.mscript.language.ast.FunctionKind
+	 * @see #getKind()
 	 * @generated
 	 */
-	void setStateful(boolean value);
+	void setKind(FunctionKind value);
 
 	/**
 	 * Returns the value of the '<em><b>Template Parameter Declarations</b></em>' containment reference list.

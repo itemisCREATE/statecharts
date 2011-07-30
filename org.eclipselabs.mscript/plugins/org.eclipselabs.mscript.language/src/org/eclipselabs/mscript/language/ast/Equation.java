@@ -17,6 +17,7 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.Equation#isInitial <em>Initial</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.Equation#getLeftHandSide <em>Left Hand Side</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.Equation#getRightHandSide <em>Right Hand Side</em>}</li>
  * </ul>
@@ -27,6 +28,32 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * @generated
  */
 public interface Equation extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Initial</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Initial</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Initial</em>' attribute.
+	 * @see #setInitial(boolean)
+	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getEquation_Initial()
+	 * @model
+	 * @generated
+	 */
+	boolean isInitial();
+
+	/**
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.Equation#isInitial <em>Initial</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Initial</em>' attribute.
+	 * @see #isInitial()
+	 * @generated
+	 */
+	void setInitial(boolean value);
+
 	/**
 	 * Returns the value of the '<em><b>Left Hand Side</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

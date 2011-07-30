@@ -9,7 +9,6 @@ package org.eclipselabs.mscript.language.ast.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.eclipselabs.mscript.language.ast.*;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
 import org.eclipselabs.mscript.language.ast.AlgorithmExpression;
@@ -21,15 +20,19 @@ import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.Assignment;
 import org.eclipselabs.mscript.language.ast.AstPackage;
+import org.eclipselabs.mscript.language.ast.BreakStatement;
 import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
 import org.eclipselabs.mscript.language.ast.BuiltinFunction;
 import org.eclipselabs.mscript.language.ast.BuiltinVariable;
 import org.eclipselabs.mscript.language.ast.CallableElement;
 import org.eclipselabs.mscript.language.ast.Check;
 import org.eclipselabs.mscript.language.ast.Compound;
+import org.eclipselabs.mscript.language.ast.ContinueStatement;
 import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Definition;
+import org.eclipselabs.mscript.language.ast.DerivativeOperator;
+import org.eclipselabs.mscript.language.ast.DoWhileStatement;
 import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.EnumerationDefinition;
 import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
@@ -37,10 +40,12 @@ import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
+import org.eclipselabs.mscript.language.ast.ForStatement;
 import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.IfExpression;
+import org.eclipselabs.mscript.language.ast.IfStatement;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.InputParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.IterationAccumulator;
@@ -66,6 +71,7 @@ import org.eclipselabs.mscript.language.ast.RangeStepExpression;
 import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
+import org.eclipselabs.mscript.language.ast.ReturnStatement;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.Statement;
 import org.eclipselabs.mscript.language.ast.StepExpression;
@@ -79,6 +85,8 @@ import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
 import org.eclipselabs.mscript.language.ast.VariableAccess;
+import org.eclipselabs.mscript.language.ast.VariableDeclaration;
+import org.eclipselabs.mscript.language.ast.WhileStatement;
 import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
@@ -347,6 +355,13 @@ public class AstSwitch<T> extends Switch<T> {
 				IterationAccumulator iterationAccumulator = (IterationAccumulator)theEObject;
 				T result = caseIterationAccumulator(iterationAccumulator);
 				if (result == null) result = caseCallableElement(iterationAccumulator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.DERIVATIVE_OPERATOR: {
+				DerivativeOperator derivativeOperator = (DerivativeOperator)theEObject;
+				T result = caseDerivativeOperator(derivativeOperator);
+				if (result == null) result = caseExpression(derivativeOperator);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1151,6 +1166,21 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseIterationAccumulator(IterationAccumulator object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Derivative Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Derivative Operator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDerivativeOperator(DerivativeOperator object) {
 		return null;
 	}
 

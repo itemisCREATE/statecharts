@@ -269,6 +269,15 @@ public interface AstFactory extends EFactory {
 	IterationAccumulator createIterationAccumulator();
 
 	/**
+	 * Returns a new object of class '<em>Derivative Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Derivative Operator</em>'.
+	 * @generated
+	 */
+	DerivativeOperator createDerivativeOperator();
+
+	/**
 	 * Returns a new object of class '<em>Array Construction Operator</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

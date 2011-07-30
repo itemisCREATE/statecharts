@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.mscript.language.ast.FunctionKind;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
@@ -63,7 +64,7 @@ public class FunctionDefinitionTransformer implements IFunctionDefinitionTransfo
 		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Function definition transformation errors", null);
 
 		ILFunctionDefinition ilFunctionDefinition = ILFactory.eINSTANCE.createILFunctionDefinition();
-		ilFunctionDefinition.setStateful(functionDescriptor.getDefinition().isStateful());
+		ilFunctionDefinition.setStateful(functionDescriptor.getDefinition().getKind() == FunctionKind.STATEFUL);
 		ilFunctionDefinition.setName(functionName != null ? functionName : functionDescriptor.getDefinition().getName());
 		
 		Map<VariableDescriptor, VariableDeclaration> variableDeclarations = new HashMap<VariableDescriptor, VariableDeclaration>();

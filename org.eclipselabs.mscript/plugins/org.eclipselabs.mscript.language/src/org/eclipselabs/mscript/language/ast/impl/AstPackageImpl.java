@@ -37,6 +37,7 @@ import org.eclipselabs.mscript.language.ast.ContinueStatement;
 import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Definition;
+import org.eclipselabs.mscript.language.ast.DerivativeOperator;
 import org.eclipselabs.mscript.language.ast.DoWhileStatement;
 import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.EnumerationDefinition;
@@ -49,6 +50,7 @@ import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.ForStatement;
 import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
+import org.eclipselabs.mscript.language.ast.FunctionKind;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.IfStatement;
@@ -323,6 +325,13 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * @generated
 	 */
 	private EClass iterationAccumulatorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass derivativeOperatorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -644,6 +653,13 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EEnum functionKindEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum assertionStatusKindEEnum = null;
 
 	/**
@@ -917,7 +933,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFunctionDefinition_Stateful() {
+	public EAttribute getFunctionDefinition_Kind() {
 		return (EAttribute)functionDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1205,8 +1221,17 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getEquation_Initial() {
+		return (EAttribute)equationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getEquation_LeftHandSide() {
-		return (EReference)equationEClass.getEStructuralFeatures().get(0);
+		return (EReference)equationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1215,7 +1240,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * @generated
 	 */
 	public EReference getEquation_RightHandSide() {
-		return (EReference)equationEClass.getEStructuralFeatures().get(1);
+		return (EReference)equationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1594,6 +1619,24 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 */
 	public EReference getIterationAccumulator_Initializer() {
 		return (EReference)iterationAccumulatorEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDerivativeOperator() {
+		return derivativeOperatorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDerivativeOperator_Variable() {
+		return (EReference)derivativeOperatorEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2591,6 +2634,15 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getFunctionKind() {
+		return functionKindEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getAssertionStatusKind() {
 		return assertionStatusKindEEnum;
 	}
@@ -2711,7 +2763,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		createEReference(recordFieldDeclarationEClass, RECORD_FIELD_DECLARATION__TYPE);
 
 		functionDefinitionEClass = createEClass(FUNCTION_DEFINITION);
-		createEAttribute(functionDefinitionEClass, FUNCTION_DEFINITION__STATEFUL);
+		createEAttribute(functionDefinitionEClass, FUNCTION_DEFINITION__KIND);
 		createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__TEMPLATE_PARAMETER_DECLARATIONS);
 		createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__INPUT_PARAMETER_DECLARATIONS);
 		createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS);
@@ -2753,6 +2805,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		createEReference(functionObjectDeclarationEClass, FUNCTION_OBJECT_DECLARATION__TEMPLATE_ARGUMENTS);
 
 		equationEClass = createEClass(EQUATION);
+		createEAttribute(equationEClass, EQUATION__INITIAL);
 		createEReference(equationEClass, EQUATION__LEFT_HAND_SIDE);
 		createEReference(equationEClass, EQUATION__RIGHT_HAND_SIDE);
 
@@ -2809,6 +2862,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		iterationAccumulatorEClass = createEClass(ITERATION_ACCUMULATOR);
 		createEAttribute(iterationAccumulatorEClass, ITERATION_ACCUMULATOR__NAME);
 		createEReference(iterationAccumulatorEClass, ITERATION_ACCUMULATOR__INITIALIZER);
+
+		derivativeOperatorEClass = createEClass(DERIVATIVE_OPERATOR);
+		createEReference(derivativeOperatorEClass, DERIVATIVE_OPERATOR__VARIABLE);
 
 		arrayConstructionOperatorEClass = createEClass(ARRAY_CONSTRUCTION_OPERATOR);
 		createEReference(arrayConstructionOperatorEClass, ARRAY_CONSTRUCTION_OPERATOR__EXPRESSIONS);
@@ -2966,6 +3022,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		builtinVariableEClass = createEClass(BUILTIN_VARIABLE);
 
 		// Create enums
+		functionKindEEnum = createEEnum(FUNCTION_KIND);
 		assertionStatusKindEEnum = createEEnum(ASSERTION_STATUS_KIND);
 		equalityOperatorEEnum = createEEnum(EQUALITY_OPERATOR);
 		relationalOperatorEEnum = createEEnum(RELATIONAL_OPERATOR);
@@ -3027,6 +3084,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		iterationCallEClass.getESuperTypes().add(theTypeSystemPackage.getExpression());
 		iterationVariableEClass.getESuperTypes().add(this.getCallableElement());
 		iterationAccumulatorEClass.getESuperTypes().add(this.getCallableElement());
+		derivativeOperatorEClass.getESuperTypes().add(theTypeSystemPackage.getExpression());
 		arrayConstructionOperatorEClass.getESuperTypes().add(theTypeSystemPackage.getExpression());
 		arrayConcatenationOperatorEClass.getESuperTypes().add(theTypeSystemPackage.getExpression());
 		unitConstructionOperatorEClass.getESuperTypes().add(theTypeSystemPackage.getExpression());
@@ -3096,7 +3154,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		initEReference(getRecordFieldDeclaration_Type(), this.getDataTypeSpecifier(), null, "type", null, 0, 1, RecordFieldDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(functionDefinitionEClass, FunctionDefinition.class, "FunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFunctionDefinition_Stateful(), ecorePackage.getEBoolean(), "stateful", null, 0, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFunctionDefinition_Kind(), this.getFunctionKind(), "kind", null, 0, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunctionDefinition_TemplateParameterDeclarations(), this.getTemplateParameterDeclaration(), null, "templateParameterDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunctionDefinition_InputParameterDeclarations(), this.getInputParameterDeclaration(), null, "inputParameterDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunctionDefinition_OutputParameterDeclarations(), this.getOutputParameterDeclaration(), null, "outputParameterDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3142,6 +3200,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		initEReference(getFunctionObjectDeclaration_TemplateArguments(), theTypeSystemPackage.getExpression(), null, "templateArguments", null, 0, -1, FunctionObjectDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(equationEClass, Equation.class, "Equation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEquation_Initial(), ecorePackage.getEBoolean(), "initial", null, 0, 1, Equation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEquation_LeftHandSide(), theTypeSystemPackage.getExpression(), null, "leftHandSide", null, 0, 1, Equation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEquation_RightHandSide(), theTypeSystemPackage.getExpression(), null, "rightHandSide", null, 0, 1, Equation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3198,6 +3257,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		initEClass(iterationAccumulatorEClass, IterationAccumulator.class, "IterationAccumulator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIterationAccumulator_Name(), ecorePackage.getEString(), "name", null, 0, 1, IterationAccumulator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIterationAccumulator_Initializer(), theTypeSystemPackage.getExpression(), null, "initializer", null, 0, 1, IterationAccumulator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(derivativeOperatorEClass, DerivativeOperator.class, "DerivativeOperator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDerivativeOperator_Variable(), this.getCallableElement(), null, "variable", null, 0, 1, DerivativeOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(arrayConstructionOperatorEClass, ArrayConstructionOperator.class, "ArrayConstructionOperator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getArrayConstructionOperator_Expressions(), theTypeSystemPackage.getExpression(), null, "expressions", null, 0, -1, ArrayConstructionOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3355,6 +3417,11 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		initEClass(builtinVariableEClass, BuiltinVariable.class, "BuiltinVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
+		initEEnum(functionKindEEnum, FunctionKind.class, "FunctionKind");
+		addEEnumLiteral(functionKindEEnum, FunctionKind.STATELESS);
+		addEEnumLiteral(functionKindEEnum, FunctionKind.STATEFUL);
+		addEEnumLiteral(functionKindEEnum, FunctionKind.CONTINUOUS);
+
 		initEEnum(assertionStatusKindEEnum, AssertionStatusKind.class, "AssertionStatusKind");
 		addEEnumLiteral(assertionStatusKindEEnum, AssertionStatusKind.INFO);
 		addEEnumLiteral(assertionStatusKindEEnum, AssertionStatusKind.WARNING);

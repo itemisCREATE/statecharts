@@ -10,7 +10,6 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipselabs.mscript.language.ast.*;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
 import org.eclipselabs.mscript.language.ast.AlgorithmExpression;
@@ -22,15 +21,19 @@ import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.Assignment;
 import org.eclipselabs.mscript.language.ast.AstPackage;
+import org.eclipselabs.mscript.language.ast.BreakStatement;
 import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
 import org.eclipselabs.mscript.language.ast.BuiltinFunction;
 import org.eclipselabs.mscript.language.ast.BuiltinVariable;
 import org.eclipselabs.mscript.language.ast.CallableElement;
 import org.eclipselabs.mscript.language.ast.Check;
 import org.eclipselabs.mscript.language.ast.Compound;
+import org.eclipselabs.mscript.language.ast.ContinueStatement;
 import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Definition;
+import org.eclipselabs.mscript.language.ast.DerivativeOperator;
+import org.eclipselabs.mscript.language.ast.DoWhileStatement;
 import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.EnumerationDefinition;
 import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
@@ -38,10 +41,12 @@ import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
+import org.eclipselabs.mscript.language.ast.ForStatement;
 import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.IfExpression;
+import org.eclipselabs.mscript.language.ast.IfStatement;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.InputParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.IterationAccumulator;
@@ -67,6 +72,7 @@ import org.eclipselabs.mscript.language.ast.RangeStepExpression;
 import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
+import org.eclipselabs.mscript.language.ast.ReturnStatement;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.Statement;
 import org.eclipselabs.mscript.language.ast.StepExpression;
@@ -80,6 +86,8 @@ import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
 import org.eclipselabs.mscript.language.ast.VariableAccess;
+import org.eclipselabs.mscript.language.ast.VariableDeclaration;
+import org.eclipselabs.mscript.language.ast.WhileStatement;
 import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
@@ -261,6 +269,10 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseIterationAccumulator(IterationAccumulator object) {
 				return createIterationAccumulatorAdapter();
+			}
+			@Override
+			public Adapter caseDerivativeOperator(DerivativeOperator object) {
+				return createDerivativeOperatorAdapter();
 			}
 			@Override
 			public Adapter caseArrayConstructionOperator(ArrayConstructionOperator object) {
@@ -911,6 +923,20 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIterationAccumulatorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.DerivativeOperator <em>Derivative Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.DerivativeOperator
+	 * @generated
+	 */
+	public Adapter createDerivativeOperatorAdapter() {
 		return null;
 	}
 

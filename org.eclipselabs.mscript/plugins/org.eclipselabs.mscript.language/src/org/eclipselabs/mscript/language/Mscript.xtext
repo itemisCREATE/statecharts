@@ -68,7 +68,7 @@ RecordFieldDeclaration:
  */
  
 FunctionDefinition:
-	(stateful?='stateful')? 'func' name=ValidID
+	(kind=FunctionKind)? 'func' name=ValidID
 			('<' templateParameterDeclarations+=TemplateParameterDeclaration (',' templateParameterDeclarations+=TemplateParameterDeclaration)* '>')?
 			'(' (inputParameterDeclarations+=InputParameterDeclaration (',' inputParameterDeclarations+=InputParameterDeclaration)*)? ')'
 			'->' outputParameterDeclarations+=OutputParameterDeclaration (',' outputParameterDeclarations+=OutputParameterDeclaration)* '{'
@@ -79,6 +79,9 @@ FunctionDefinition:
 		equations+=Equation)*
 	'}';
 
+enum FunctionKind:
+	Stateful='stateful' | Continuous='continuous';
+	
 TemplateParameterDeclaration:
 	name=ValidID;
 
@@ -110,7 +113,7 @@ FunctionObjectDeclaration:
 	'fob' name=ValidID ':' functionName=[FunctionDefinition|QualifiedName] ('<' templateArguments+=Expression (',' templateArguments+=Expression)* '>')? ';';
 
 Equation:
-	leftHandSide=Expression '=' rightHandSide=Expression ';';
+	(initial?='initial')? leftHandSide=Expression '=' rightHandSide=Expression ';';
 
 /*
  * Data type specifier
@@ -266,6 +269,7 @@ ArraySubscript:
 PrimaryExpression returns Expression:
 	Literal |
 	FeatureCall |
+	DerivativeOperator |
 	UnitConstructionOperator |
 	ArrayConstructionOperator |
 	ArrayConcatenationOperator |
@@ -324,6 +328,9 @@ StepLiteral:
 	
 StepN:
 	{StepN} N;
+
+DerivativeOperator:
+	'der' variable=[CallableElement|ValidID];
 
 ArrayConstructionOperator:
 	'{' expressions+=Expression ((',' expressions+=Expression)* | 'for' iterationClauses+=ArrayConstructionIterationClause (',' iterationClauses+=ArrayConstructionIterationClause)*) '}';

@@ -154,9 +154,15 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 			case INPUT_PARAMETER:
 			case OUTPUT_PARAMETER:
 			case STATE_VARIABLE:
-				if (variableAccess.getStepExpression() != null
-						&& !equationSide.getDescriptor().getFunctionDescriptor().getDefinition().isStateful()) {
-					message = "Variable references of stateless functions must not specify step expressions";
+				if (variableAccess.getStepExpression() != null) {
+					switch (equationSide.getDescriptor().getFunctionDescriptor().getDefinition().getKind()) {
+					case STATELESS:
+						message = "Variable references of stateless functions must not specify step expressions";
+						break;
+					case CONTINUOUS:
+						message = "Variable references of continuous functions must not specify step expressions";
+						break;
+					}
 				}
 				break;
 			}

@@ -23,6 +23,7 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.EquationImpl#isInitial <em>Initial</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.EquationImpl#getLeftHandSide <em>Left Hand Side</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.EquationImpl#getRightHandSide <em>Right Hand Side</em>}</li>
  * </ul>
@@ -31,6 +32,26 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * @generated
  */
 public class EquationImpl extends MinimalEObjectImpl.Container implements Equation {
+	/**
+	 * The default value of the '{@link #isInitial() <em>Initial</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInitial()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean INITIAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isInitial() <em>Initial</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInitial()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean initial = INITIAL_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getLeftHandSide() <em>Left Hand Side</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -68,6 +89,27 @@ public class EquationImpl extends MinimalEObjectImpl.Container implements Equati
 	@Override
 	protected EClass eStaticClass() {
 		return AstPackage.Literals.EQUATION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isInitial() {
+		return initial;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInitial(boolean newInitial) {
+		boolean oldInitial = initial;
+		initial = newInitial;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.EQUATION__INITIAL, oldInitial, initial));
 	}
 
 	/**
@@ -180,6 +222,8 @@ public class EquationImpl extends MinimalEObjectImpl.Container implements Equati
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case AstPackage.EQUATION__INITIAL:
+				return isInitial();
 			case AstPackage.EQUATION__LEFT_HAND_SIDE:
 				return getLeftHandSide();
 			case AstPackage.EQUATION__RIGHT_HAND_SIDE:
@@ -196,6 +240,9 @@ public class EquationImpl extends MinimalEObjectImpl.Container implements Equati
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case AstPackage.EQUATION__INITIAL:
+				setInitial((Boolean)newValue);
+				return;
 			case AstPackage.EQUATION__LEFT_HAND_SIDE:
 				setLeftHandSide((Expression)newValue);
 				return;
@@ -214,6 +261,9 @@ public class EquationImpl extends MinimalEObjectImpl.Container implements Equati
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case AstPackage.EQUATION__INITIAL:
+				setInitial(INITIAL_EDEFAULT);
+				return;
 			case AstPackage.EQUATION__LEFT_HAND_SIDE:
 				setLeftHandSide((Expression)null);
 				return;
@@ -232,12 +282,30 @@ public class EquationImpl extends MinimalEObjectImpl.Container implements Equati
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case AstPackage.EQUATION__INITIAL:
+				return initial != INITIAL_EDEFAULT;
 			case AstPackage.EQUATION__LEFT_HAND_SIDE:
 				return leftHandSide != null;
 			case AstPackage.EQUATION__RIGHT_HAND_SIDE:
 				return rightHandSide != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (initial: ");
+		result.append(initial);
+		result.append(')');
+		return result.toString();
 	}
 
 } //EquationImpl

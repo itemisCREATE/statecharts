@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipselabs.mscript.language.ast.*;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveOperator;
 import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
@@ -27,12 +26,16 @@ import org.eclipselabs.mscript.language.ast.AssertionStatusKind;
 import org.eclipselabs.mscript.language.ast.Assignment;
 import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.AstPackage;
+import org.eclipselabs.mscript.language.ast.BreakStatement;
 import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
 import org.eclipselabs.mscript.language.ast.BuiltinFunction;
 import org.eclipselabs.mscript.language.ast.BuiltinVariable;
 import org.eclipselabs.mscript.language.ast.Check;
 import org.eclipselabs.mscript.language.ast.Compound;
+import org.eclipselabs.mscript.language.ast.ContinueStatement;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.DerivativeOperator;
+import org.eclipselabs.mscript.language.ast.DoWhileStatement;
 import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.EnumerationDefinition;
 import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
@@ -40,10 +43,13 @@ import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.EqualityOperator;
 import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
+import org.eclipselabs.mscript.language.ast.ForStatement;
 import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
+import org.eclipselabs.mscript.language.ast.FunctionKind;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.IfExpression;
+import org.eclipselabs.mscript.language.ast.IfStatement;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.InputParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.IterationAccumulator;
@@ -71,6 +77,7 @@ import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.RelationalOperator;
+import org.eclipselabs.mscript.language.ast.ReturnStatement;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.StepLiteral;
 import org.eclipselabs.mscript.language.ast.StepN;
@@ -83,6 +90,8 @@ import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnaryOperator;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
 import org.eclipselabs.mscript.language.ast.VariableAccess;
+import org.eclipselabs.mscript.language.ast.VariableDeclaration;
+import org.eclipselabs.mscript.language.ast.WhileStatement;
 
 /**
  * <!-- begin-user-doc -->
@@ -155,6 +164,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.ITERATION_CALL: return createIterationCall();
 			case AstPackage.ITERATION_VARIABLE: return createIterationVariable();
 			case AstPackage.ITERATION_ACCUMULATOR: return createIterationAccumulator();
+			case AstPackage.DERIVATIVE_OPERATOR: return createDerivativeOperator();
 			case AstPackage.ARRAY_CONSTRUCTION_OPERATOR: return createArrayConstructionOperator();
 			case AstPackage.ARRAY_CONSTRUCTION_ITERATION_CLAUSE: return createArrayConstructionIterationClause();
 			case AstPackage.ARRAY_CONCATENATION_OPERATOR: return createArrayConcatenationOperator();
@@ -209,6 +219,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+			case AstPackage.FUNCTION_KIND:
+				return createFunctionKindFromString(eDataType, initialValue);
 			case AstPackage.ASSERTION_STATUS_KIND:
 				return createAssertionStatusKindFromString(eDataType, initialValue);
 			case AstPackage.EQUALITY_OPERATOR:
@@ -238,6 +250,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+			case AstPackage.FUNCTION_KIND:
+				return convertFunctionKindToString(eDataType, instanceValue);
 			case AstPackage.ASSERTION_STATUS_KIND:
 				return convertAssertionStatusKindToString(eDataType, instanceValue);
 			case AstPackage.EQUALITY_OPERATOR:
@@ -527,6 +541,16 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public IterationAccumulator createIterationAccumulator() {
 		IterationAccumulatorImpl iterationAccumulator = new IterationAccumulatorImpl();
 		return iterationAccumulator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DerivativeOperator createDerivativeOperator() {
+		DerivativeOperatorImpl derivativeOperator = new DerivativeOperatorImpl();
+		return derivativeOperator;
 	}
 
 	/**
@@ -937,6 +961,26 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public BuiltinVariable createBuiltinVariable() {
 		BuiltinVariableImpl builtinVariable = new BuiltinVariableImpl();
 		return builtinVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FunctionKind createFunctionKindFromString(EDataType eDataType, String initialValue) {
+		FunctionKind result = FunctionKind.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertFunctionKindToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

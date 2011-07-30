@@ -24,6 +24,7 @@ import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
+import org.eclipselabs.mscript.language.ast.FunctionKind;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.InputParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.IterationAccumulator;
@@ -57,9 +58,9 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 
 	@Check
 	public void checkStatelessFunction(FunctionDefinition functionDefinition) {
-		if (!functionDefinition.isStateful()) {
+		if (functionDefinition.getKind() == FunctionKind.STATELESS) {
 			for (StateVariableDeclaration stateVariableDeclaration : functionDefinition.getStateVariableDeclarations()) {
-				error("The state variable " + stateVariableDeclaration.getName() + " can only be declared in a stateful function", stateVariableDeclaration, null, -1);
+				error("The state variable " + stateVariableDeclaration.getName() + " can only be declared in stateful or continuous functions", stateVariableDeclaration, null, -1);
 			}
 		}
 	}
