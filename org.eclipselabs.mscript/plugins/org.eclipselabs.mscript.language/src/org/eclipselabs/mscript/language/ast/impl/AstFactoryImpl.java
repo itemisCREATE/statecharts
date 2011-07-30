@@ -12,9 +12,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipselabs.mscript.language.ast.*;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveOperator;
 import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
+import org.eclipselabs.mscript.language.ast.AlgorithmExpression;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
@@ -22,12 +24,14 @@ import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.AssertionStatusKind;
+import org.eclipselabs.mscript.language.ast.Assignment;
 import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
 import org.eclipselabs.mscript.language.ast.BuiltinFunction;
 import org.eclipselabs.mscript.language.ast.BuiltinVariable;
 import org.eclipselabs.mscript.language.ast.Check;
+import org.eclipselabs.mscript.language.ast.Compound;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.EnumerationDefinition;
@@ -178,6 +182,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.STEP_N: return createStepN();
 			case AstPackage.FUNCTION_CALL: return createFunctionCall();
 			case AstPackage.MEMBER_VARIABLE_ACCESS: return createMemberVariableAccess();
+			case AstPackage.ALGORITHM_EXPRESSION: return createAlgorithmExpression();
+			case AstPackage.COMPOUND: return createCompound();
+			case AstPackage.ASSIGNMENT: return createAssignment();
+			case AstPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
+			case AstPackage.IF_STATEMENT: return createIfStatement();
+			case AstPackage.WHILE_STATEMENT: return createWhileStatement();
+			case AstPackage.DO_WHILE_STATEMENT: return createDoWhileStatement();
+			case AstPackage.FOR_STATEMENT: return createForStatement();
+			case AstPackage.CONTINUE_STATEMENT: return createContinueStatement();
+			case AstPackage.BREAK_STATEMENT: return createBreakStatement();
+			case AstPackage.RETURN_STATEMENT: return createReturnStatement();
 			case AstPackage.BUILTIN_DEFINITION: return createBuiltinDefinition();
 			case AstPackage.BUILTIN_FUNCTION: return createBuiltinFunction();
 			case AstPackage.BUILTIN_VARIABLE: return createBuiltinVariable();
@@ -782,6 +797,116 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public MemberVariableAccess createMemberVariableAccess() {
 		MemberVariableAccessImpl memberVariableAccess = new MemberVariableAccessImpl();
 		return memberVariableAccess;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AlgorithmExpression createAlgorithmExpression() {
+		AlgorithmExpressionImpl algorithmExpression = new AlgorithmExpressionImpl();
+		return algorithmExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Compound createCompound() {
+		CompoundImpl compound = new CompoundImpl();
+		return compound;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Assignment createAssignment() {
+		AssignmentImpl assignment = new AssignmentImpl();
+		return assignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VariableDeclaration createVariableDeclaration() {
+		VariableDeclarationImpl variableDeclaration = new VariableDeclarationImpl();
+		return variableDeclaration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IfStatement createIfStatement() {
+		IfStatementImpl ifStatement = new IfStatementImpl();
+		return ifStatement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WhileStatement createWhileStatement() {
+		WhileStatementImpl whileStatement = new WhileStatementImpl();
+		return whileStatement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DoWhileStatement createDoWhileStatement() {
+		DoWhileStatementImpl doWhileStatement = new DoWhileStatementImpl();
+		return doWhileStatement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ForStatement createForStatement() {
+		ForStatementImpl forStatement = new ForStatementImpl();
+		return forStatement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ContinueStatement createContinueStatement() {
+		ContinueStatementImpl continueStatement = new ContinueStatementImpl();
+		return continueStatement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BreakStatement createBreakStatement() {
+		BreakStatementImpl breakStatement = new BreakStatementImpl();
+		return breakStatement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ReturnStatement createReturnStatement() {
+		ReturnStatementImpl returnStatement = new ReturnStatementImpl();
+		return returnStatement;
 	}
 
 	/**

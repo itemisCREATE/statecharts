@@ -274,6 +274,44 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//MemberVariableAccess/target"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Mscript.ecore#//MemberVariableAccess/memberVariable"/>
     </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//AlgorithmExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//AlgorithmExpression/body"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//Compound">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Compound/statements"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Mscript.ecore#//Statement"/>
+    <genClasses ecoreClass="Mscript.ecore#//Assignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Assignment/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Assignment/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//VariableDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//VariableDeclaration/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//VariableDeclaration/initializer"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//IfStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IfStatement/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IfStatement/thenStatement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IfStatement/elseStatement"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//WhileStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//WhileStatement/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//WhileStatement/body"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//DoWhileStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//DoWhileStatement/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//DoWhileStatement/body"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//ForStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ForStatement/iterationVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ForStatement/collectionExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ForStatement/body"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//ContinueStatement"/>
+    <genClasses ecoreClass="Mscript.ecore#//BreakStatement"/>
+    <genClasses ecoreClass="Mscript.ecore#//ReturnStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ReturnStatement/expression"/>
+    </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//BuiltinDefinition"/>
     <genClasses ecoreClass="Mscript.ecore#//BuiltinFunction"/>
     <genClasses ecoreClass="Mscript.ecore#//BuiltinVariable"/>

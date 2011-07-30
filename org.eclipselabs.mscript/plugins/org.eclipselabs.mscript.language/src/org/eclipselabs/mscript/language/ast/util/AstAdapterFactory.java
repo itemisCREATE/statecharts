@@ -10,20 +10,24 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipselabs.mscript.language.ast.*;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
+import org.eclipselabs.mscript.language.ast.AlgorithmExpression;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
 import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.Assertion;
+import org.eclipselabs.mscript.language.ast.Assignment;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
 import org.eclipselabs.mscript.language.ast.BuiltinFunction;
 import org.eclipselabs.mscript.language.ast.BuiltinVariable;
 import org.eclipselabs.mscript.language.ast.CallableElement;
 import org.eclipselabs.mscript.language.ast.Check;
+import org.eclipselabs.mscript.language.ast.Compound;
 import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Definition;
@@ -64,6 +68,7 @@ import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.Statement;
 import org.eclipselabs.mscript.language.ast.StepExpression;
 import org.eclipselabs.mscript.language.ast.StepLiteral;
 import org.eclipselabs.mscript.language.ast.StepN;
@@ -376,6 +381,54 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseMemberVariableAccess(MemberVariableAccess object) {
 				return createMemberVariableAccessAdapter();
+			}
+			@Override
+			public Adapter caseAlgorithmExpression(AlgorithmExpression object) {
+				return createAlgorithmExpressionAdapter();
+			}
+			@Override
+			public Adapter caseCompound(Compound object) {
+				return createCompoundAdapter();
+			}
+			@Override
+			public Adapter caseStatement(Statement object) {
+				return createStatementAdapter();
+			}
+			@Override
+			public Adapter caseAssignment(Assignment object) {
+				return createAssignmentAdapter();
+			}
+			@Override
+			public Adapter caseVariableDeclaration(VariableDeclaration object) {
+				return createVariableDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseIfStatement(IfStatement object) {
+				return createIfStatementAdapter();
+			}
+			@Override
+			public Adapter caseWhileStatement(WhileStatement object) {
+				return createWhileStatementAdapter();
+			}
+			@Override
+			public Adapter caseDoWhileStatement(DoWhileStatement object) {
+				return createDoWhileStatementAdapter();
+			}
+			@Override
+			public Adapter caseForStatement(ForStatement object) {
+				return createForStatementAdapter();
+			}
+			@Override
+			public Adapter caseContinueStatement(ContinueStatement object) {
+				return createContinueStatementAdapter();
+			}
+			@Override
+			public Adapter caseBreakStatement(BreakStatement object) {
+				return createBreakStatementAdapter();
+			}
+			@Override
+			public Adapter caseReturnStatement(ReturnStatement object) {
+				return createReturnStatementAdapter();
 			}
 			@Override
 			public Adapter caseBuiltinDefinition(BuiltinDefinition object) {
@@ -1278,6 +1331,174 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMemberVariableAccessAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.AlgorithmExpression <em>Algorithm Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.AlgorithmExpression
+	 * @generated
+	 */
+	public Adapter createAlgorithmExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Compound <em>Compound</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.Compound
+	 * @generated
+	 */
+	public Adapter createCompoundAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Statement <em>Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.Statement
+	 * @generated
+	 */
+	public Adapter createStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Assignment <em>Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.Assignment
+	 * @generated
+	 */
+	public Adapter createAssignmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.VariableDeclaration <em>Variable Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.VariableDeclaration
+	 * @generated
+	 */
+	public Adapter createVariableDeclarationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.IfStatement <em>If Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.IfStatement
+	 * @generated
+	 */
+	public Adapter createIfStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.WhileStatement <em>While Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.WhileStatement
+	 * @generated
+	 */
+	public Adapter createWhileStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.DoWhileStatement <em>Do While Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.DoWhileStatement
+	 * @generated
+	 */
+	public Adapter createDoWhileStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ForStatement <em>For Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.ForStatement
+	 * @generated
+	 */
+	public Adapter createForStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ContinueStatement <em>Continue Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.ContinueStatement
+	 * @generated
+	 */
+	public Adapter createContinueStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.BreakStatement <em>Break Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.BreakStatement
+	 * @generated
+	 */
+	public Adapter createBreakStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ReturnStatement <em>Return Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.ReturnStatement
+	 * @generated
+	 */
+	public Adapter createReturnStatementAdapter() {
 		return null;
 	}
 

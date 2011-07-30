@@ -9,20 +9,24 @@ package org.eclipselabs.mscript.language.ast.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipselabs.mscript.language.ast.*;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
+import org.eclipselabs.mscript.language.ast.AlgorithmExpression;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
 import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.Assertion;
+import org.eclipselabs.mscript.language.ast.Assignment;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
 import org.eclipselabs.mscript.language.ast.BuiltinFunction;
 import org.eclipselabs.mscript.language.ast.BuiltinVariable;
 import org.eclipselabs.mscript.language.ast.CallableElement;
 import org.eclipselabs.mscript.language.ast.Check;
+import org.eclipselabs.mscript.language.ast.Compound;
 import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Definition;
@@ -63,6 +67,7 @@ import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.Statement;
 import org.eclipselabs.mscript.language.ast.StepExpression;
 import org.eclipselabs.mscript.language.ast.StepLiteral;
 import org.eclipselabs.mscript.language.ast.StepN;
@@ -553,6 +558,89 @@ public class AstSwitch<T> extends Switch<T> {
 				MemberVariableAccess memberVariableAccess = (MemberVariableAccess)theEObject;
 				T result = caseMemberVariableAccess(memberVariableAccess);
 				if (result == null) result = caseExpression(memberVariableAccess);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.ALGORITHM_EXPRESSION: {
+				AlgorithmExpression algorithmExpression = (AlgorithmExpression)theEObject;
+				T result = caseAlgorithmExpression(algorithmExpression);
+				if (result == null) result = caseExpression(algorithmExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.COMPOUND: {
+				Compound compound = (Compound)theEObject;
+				T result = caseCompound(compound);
+				if (result == null) result = caseStatement(compound);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.STATEMENT: {
+				Statement statement = (Statement)theEObject;
+				T result = caseStatement(statement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.ASSIGNMENT: {
+				Assignment assignment = (Assignment)theEObject;
+				T result = caseAssignment(assignment);
+				if (result == null) result = caseStatement(assignment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.VARIABLE_DECLARATION: {
+				VariableDeclaration variableDeclaration = (VariableDeclaration)theEObject;
+				T result = caseVariableDeclaration(variableDeclaration);
+				if (result == null) result = caseStatement(variableDeclaration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.IF_STATEMENT: {
+				IfStatement ifStatement = (IfStatement)theEObject;
+				T result = caseIfStatement(ifStatement);
+				if (result == null) result = caseStatement(ifStatement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.WHILE_STATEMENT: {
+				WhileStatement whileStatement = (WhileStatement)theEObject;
+				T result = caseWhileStatement(whileStatement);
+				if (result == null) result = caseStatement(whileStatement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.DO_WHILE_STATEMENT: {
+				DoWhileStatement doWhileStatement = (DoWhileStatement)theEObject;
+				T result = caseDoWhileStatement(doWhileStatement);
+				if (result == null) result = caseStatement(doWhileStatement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.FOR_STATEMENT: {
+				ForStatement forStatement = (ForStatement)theEObject;
+				T result = caseForStatement(forStatement);
+				if (result == null) result = caseStatement(forStatement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.CONTINUE_STATEMENT: {
+				ContinueStatement continueStatement = (ContinueStatement)theEObject;
+				T result = caseContinueStatement(continueStatement);
+				if (result == null) result = caseStatement(continueStatement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.BREAK_STATEMENT: {
+				BreakStatement breakStatement = (BreakStatement)theEObject;
+				T result = caseBreakStatement(breakStatement);
+				if (result == null) result = caseStatement(breakStatement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.RETURN_STATEMENT: {
+				ReturnStatement returnStatement = (ReturnStatement)theEObject;
+				T result = caseReturnStatement(returnStatement);
+				if (result == null) result = caseStatement(returnStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1513,6 +1601,186 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMemberVariableAccess(MemberVariableAccess object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Algorithm Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Algorithm Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAlgorithmExpression(AlgorithmExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Compound</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Compound</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCompound(Compound object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStatement(Statement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Assignment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAssignment(Assignment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariableDeclaration(VariableDeclaration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>If Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>If Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIfStatement(IfStatement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>While Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>While Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWhileStatement(WhileStatement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Do While Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Do While Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDoWhileStatement(DoWhileStatement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>For Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>For Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseForStatement(ForStatement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Continue Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Continue Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContinueStatement(ContinueStatement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Break Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Break Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBreakStatement(BreakStatement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Return Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Return Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReturnStatement(ReturnStatement object) {
 		return null;
 	}
 

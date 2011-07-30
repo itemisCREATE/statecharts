@@ -2301,6 +2301,387 @@ public interface AstPackage extends EPackage {
 	int MEMBER_VARIABLE_ACCESS_FEATURE_COUNT = TypeSystemPackage.EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.AlgorithmExpressionImpl <em>Algorithm Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.AlgorithmExpressionImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAlgorithmExpression()
+	 * @generated
+	 */
+	int ALGORITHM_EXPRESSION = 61;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALGORITHM_EXPRESSION__BODY = TypeSystemPackage.EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Algorithm Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALGORITHM_EXPRESSION_FEATURE_COUNT = TypeSystemPackage.EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.StatementImpl <em>Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.StatementImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStatement()
+	 * @generated
+	 */
+	int STATEMENT = 63;
+
+	/**
+	 * The number of structural features of the '<em>Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.CompoundImpl <em>Compound</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.CompoundImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getCompound()
+	 * @generated
+	 */
+	int COMPOUND = 62;
+
+	/**
+	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOUND__STATEMENTS = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Compound</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOUND_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.AssignmentImpl <em>Assignment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.AssignmentImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAssignment()
+	 * @generated
+	 */
+	int ASSIGNMENT = 64;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__TARGET = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__EXPRESSION = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl <em>Variable Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getVariableDeclaration()
+	 * @generated
+	 */
+	int VARIABLE_DECLARATION = 65;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECLARATION__NAME = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Initializer</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECLARATION__INITIALIZER = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Variable Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECLARATION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.IfStatementImpl <em>If Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.IfStatementImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIfStatement()
+	 * @generated
+	 */
+	int IF_STATEMENT = 66;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_STATEMENT__CONDITION = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Then Statement</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_STATEMENT__THEN_STATEMENT = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Else Statement</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_STATEMENT__ELSE_STATEMENT = STATEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>If Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.WhileStatementImpl <em>While Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.WhileStatementImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getWhileStatement()
+	 * @generated
+	 */
+	int WHILE_STATEMENT = 67;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHILE_STATEMENT__CONDITION = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHILE_STATEMENT__BODY = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>While Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHILE_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.DoWhileStatementImpl <em>Do While Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.DoWhileStatementImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getDoWhileStatement()
+	 * @generated
+	 */
+	int DO_WHILE_STATEMENT = 68;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DO_WHILE_STATEMENT__CONDITION = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DO_WHILE_STATEMENT__BODY = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Do While Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DO_WHILE_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ForStatementImpl <em>For Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.ForStatementImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getForStatement()
+	 * @generated
+	 */
+	int FOR_STATEMENT = 69;
+
+	/**
+	 * The feature id for the '<em><b>Iteration Variable</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_STATEMENT__ITERATION_VARIABLE = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Collection Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_STATEMENT__COLLECTION_EXPRESSION = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_STATEMENT__BODY = STATEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>For Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ContinueStatementImpl <em>Continue Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.ContinueStatementImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getContinueStatement()
+	 * @generated
+	 */
+	int CONTINUE_STATEMENT = 70;
+
+	/**
+	 * The number of structural features of the '<em>Continue Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTINUE_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.BreakStatementImpl <em>Break Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.BreakStatementImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBreakStatement()
+	 * @generated
+	 */
+	int BREAK_STATEMENT = 71;
+
+	/**
+	 * The number of structural features of the '<em>Break Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BREAK_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ReturnStatementImpl <em>Return Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.ReturnStatementImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getReturnStatement()
+	 * @generated
+	 */
+	int RETURN_STATEMENT = 72;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN_STATEMENT__EXPRESSION = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Return Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.BuiltinDefinitionImpl <em>Builtin Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2308,7 +2689,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBuiltinDefinition()
 	 * @generated
 	 */
-	int BUILTIN_DEFINITION = 61;
+	int BUILTIN_DEFINITION = 73;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2336,7 +2717,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBuiltinFunction()
 	 * @generated
 	 */
-	int BUILTIN_FUNCTION = 62;
+	int BUILTIN_FUNCTION = 74;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2364,7 +2745,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBuiltinVariable()
 	 * @generated
 	 */
-	int BUILTIN_VARIABLE = 63;
+	int BUILTIN_VARIABLE = 75;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2392,7 +2773,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAssertionStatusKind()
 	 * @generated
 	 */
-	int ASSERTION_STATUS_KIND = 64;
+	int ASSERTION_STATUS_KIND = 76;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.EqualityOperator <em>Equality Operator</em>}' enum.
@@ -2402,7 +2783,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getEqualityOperator()
 	 * @generated
 	 */
-	int EQUALITY_OPERATOR = 65;
+	int EQUALITY_OPERATOR = 77;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -2412,7 +2793,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRelationalOperator()
 	 * @generated
 	 */
-	int RELATIONAL_OPERATOR = 66;
+	int RELATIONAL_OPERATOR = 78;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -2422,7 +2803,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAdditiveOperator()
 	 * @generated
 	 */
-	int ADDITIVE_OPERATOR = 67;
+	int ADDITIVE_OPERATOR = 79;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -2432,7 +2813,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMultiplicativeOperator()
 	 * @generated
 	 */
-	int MULTIPLICATIVE_OPERATOR = 68;
+	int MULTIPLICATIVE_OPERATOR = 80;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.PowerOperator <em>Power Operator</em>}' enum.
@@ -2442,7 +2823,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPowerOperator()
 	 * @generated
 	 */
-	int POWER_OPERATOR = 69;
+	int POWER_OPERATOR = 81;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -2452,7 +2833,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnaryOperator()
 	 * @generated
 	 */
-	int UNARY_OPERATOR = 70;
+	int UNARY_OPERATOR = 82;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.PostfixOperator <em>Postfix Operator</em>}' enum.
@@ -2462,7 +2843,7 @@ public interface AstPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPostfixOperator()
 	 * @generated
 	 */
-	int POSTFIX_OPERATOR = 71;
+	int POSTFIX_OPERATOR = 83;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.Module <em>Module</em>}'.
@@ -4285,6 +4666,313 @@ public interface AstPackage extends EPackage {
 	EReference getMemberVariableAccess_MemberVariable();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.AlgorithmExpression <em>Algorithm Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Algorithm Expression</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.AlgorithmExpression
+	 * @generated
+	 */
+	EClass getAlgorithmExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.AlgorithmExpression#getBody <em>Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Body</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.AlgorithmExpression#getBody()
+	 * @see #getAlgorithmExpression()
+	 * @generated
+	 */
+	EReference getAlgorithmExpression_Body();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.Compound <em>Compound</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Compound</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.Compound
+	 * @generated
+	 */
+	EClass getCompound();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.Compound#getStatements <em>Statements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Statements</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.Compound#getStatements()
+	 * @see #getCompound()
+	 * @generated
+	 */
+	EReference getCompound_Statements();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.Statement <em>Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Statement</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.Statement
+	 * @generated
+	 */
+	EClass getStatement();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.Assignment <em>Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Assignment</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.Assignment
+	 * @generated
+	 */
+	EClass getAssignment();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.Assignment#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Target</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.Assignment#getTarget()
+	 * @see #getAssignment()
+	 * @generated
+	 */
+	EReference getAssignment_Target();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.Assignment#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.Assignment#getExpression()
+	 * @see #getAssignment()
+	 * @generated
+	 */
+	EReference getAssignment_Expression();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.VariableDeclaration <em>Variable Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Variable Declaration</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.VariableDeclaration
+	 * @generated
+	 */
+	EClass getVariableDeclaration();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.VariableDeclaration#getName()
+	 * @see #getVariableDeclaration()
+	 * @generated
+	 */
+	EAttribute getVariableDeclaration_Name();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#getInitializer <em>Initializer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Initializer</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.VariableDeclaration#getInitializer()
+	 * @see #getVariableDeclaration()
+	 * @generated
+	 */
+	EReference getVariableDeclaration_Initializer();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.IfStatement <em>If Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>If Statement</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.IfStatement
+	 * @generated
+	 */
+	EClass getIfStatement();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.IfStatement#getCondition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Condition</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.IfStatement#getCondition()
+	 * @see #getIfStatement()
+	 * @generated
+	 */
+	EReference getIfStatement_Condition();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.IfStatement#getThenStatement <em>Then Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Then Statement</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.IfStatement#getThenStatement()
+	 * @see #getIfStatement()
+	 * @generated
+	 */
+	EReference getIfStatement_ThenStatement();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.IfStatement#getElseStatement <em>Else Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Else Statement</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.IfStatement#getElseStatement()
+	 * @see #getIfStatement()
+	 * @generated
+	 */
+	EReference getIfStatement_ElseStatement();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.WhileStatement <em>While Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>While Statement</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.WhileStatement
+	 * @generated
+	 */
+	EClass getWhileStatement();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.WhileStatement#getCondition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Condition</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.WhileStatement#getCondition()
+	 * @see #getWhileStatement()
+	 * @generated
+	 */
+	EReference getWhileStatement_Condition();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.WhileStatement#getBody <em>Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Body</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.WhileStatement#getBody()
+	 * @see #getWhileStatement()
+	 * @generated
+	 */
+	EReference getWhileStatement_Body();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.DoWhileStatement <em>Do While Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Do While Statement</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.DoWhileStatement
+	 * @generated
+	 */
+	EClass getDoWhileStatement();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.DoWhileStatement#getCondition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Condition</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.DoWhileStatement#getCondition()
+	 * @see #getDoWhileStatement()
+	 * @generated
+	 */
+	EReference getDoWhileStatement_Condition();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.DoWhileStatement#getBody <em>Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Body</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.DoWhileStatement#getBody()
+	 * @see #getDoWhileStatement()
+	 * @generated
+	 */
+	EReference getDoWhileStatement_Body();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ForStatement <em>For Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>For Statement</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.ForStatement
+	 * @generated
+	 */
+	EClass getForStatement();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ForStatement#getIterationVariable <em>Iteration Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Iteration Variable</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.ForStatement#getIterationVariable()
+	 * @see #getForStatement()
+	 * @generated
+	 */
+	EReference getForStatement_IterationVariable();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ForStatement#getCollectionExpression <em>Collection Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Collection Expression</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.ForStatement#getCollectionExpression()
+	 * @see #getForStatement()
+	 * @generated
+	 */
+	EReference getForStatement_CollectionExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ForStatement#getBody <em>Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Body</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.ForStatement#getBody()
+	 * @see #getForStatement()
+	 * @generated
+	 */
+	EReference getForStatement_Body();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ContinueStatement <em>Continue Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Continue Statement</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.ContinueStatement
+	 * @generated
+	 */
+	EClass getContinueStatement();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.BreakStatement <em>Break Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Break Statement</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.BreakStatement
+	 * @generated
+	 */
+	EClass getBreakStatement();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ReturnStatement <em>Return Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Return Statement</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.ReturnStatement
+	 * @generated
+	 */
+	EClass getReturnStatement();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ReturnStatement#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.ReturnStatement#getExpression()
+	 * @see #getReturnStatement()
+	 * @generated
+	 */
+	EReference getReturnStatement_Expression();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.BuiltinDefinition <em>Builtin Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5905,6 +6593,262 @@ public interface AstPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MEMBER_VARIABLE_ACCESS__MEMBER_VARIABLE = eINSTANCE.getMemberVariableAccess_MemberVariable();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.AlgorithmExpressionImpl <em>Algorithm Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.AlgorithmExpressionImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAlgorithmExpression()
+		 * @generated
+		 */
+		EClass ALGORITHM_EXPRESSION = eINSTANCE.getAlgorithmExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ALGORITHM_EXPRESSION__BODY = eINSTANCE.getAlgorithmExpression_Body();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.CompoundImpl <em>Compound</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.CompoundImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getCompound()
+		 * @generated
+		 */
+		EClass COMPOUND = eINSTANCE.getCompound();
+
+		/**
+		 * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOUND__STATEMENTS = eINSTANCE.getCompound_Statements();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.StatementImpl <em>Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.StatementImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStatement()
+		 * @generated
+		 */
+		EClass STATEMENT = eINSTANCE.getStatement();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.AssignmentImpl <em>Assignment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.AssignmentImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAssignment()
+		 * @generated
+		 */
+		EClass ASSIGNMENT = eINSTANCE.getAssignment();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSIGNMENT__TARGET = eINSTANCE.getAssignment_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSIGNMENT__EXPRESSION = eINSTANCE.getAssignment_Expression();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl <em>Variable Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getVariableDeclaration()
+		 * @generated
+		 */
+		EClass VARIABLE_DECLARATION = eINSTANCE.getVariableDeclaration();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VARIABLE_DECLARATION__NAME = eINSTANCE.getVariableDeclaration_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Initializer</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_DECLARATION__INITIALIZER = eINSTANCE.getVariableDeclaration_Initializer();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.IfStatementImpl <em>If Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.IfStatementImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIfStatement()
+		 * @generated
+		 */
+		EClass IF_STATEMENT = eINSTANCE.getIfStatement();
+
+		/**
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IF_STATEMENT__CONDITION = eINSTANCE.getIfStatement_Condition();
+
+		/**
+		 * The meta object literal for the '<em><b>Then Statement</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IF_STATEMENT__THEN_STATEMENT = eINSTANCE.getIfStatement_ThenStatement();
+
+		/**
+		 * The meta object literal for the '<em><b>Else Statement</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IF_STATEMENT__ELSE_STATEMENT = eINSTANCE.getIfStatement_ElseStatement();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.WhileStatementImpl <em>While Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.WhileStatementImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getWhileStatement()
+		 * @generated
+		 */
+		EClass WHILE_STATEMENT = eINSTANCE.getWhileStatement();
+
+		/**
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WHILE_STATEMENT__CONDITION = eINSTANCE.getWhileStatement_Condition();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WHILE_STATEMENT__BODY = eINSTANCE.getWhileStatement_Body();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.DoWhileStatementImpl <em>Do While Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.DoWhileStatementImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getDoWhileStatement()
+		 * @generated
+		 */
+		EClass DO_WHILE_STATEMENT = eINSTANCE.getDoWhileStatement();
+
+		/**
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DO_WHILE_STATEMENT__CONDITION = eINSTANCE.getDoWhileStatement_Condition();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DO_WHILE_STATEMENT__BODY = eINSTANCE.getDoWhileStatement_Body();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ForStatementImpl <em>For Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.ForStatementImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getForStatement()
+		 * @generated
+		 */
+		EClass FOR_STATEMENT = eINSTANCE.getForStatement();
+
+		/**
+		 * The meta object literal for the '<em><b>Iteration Variable</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FOR_STATEMENT__ITERATION_VARIABLE = eINSTANCE.getForStatement_IterationVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Collection Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FOR_STATEMENT__COLLECTION_EXPRESSION = eINSTANCE.getForStatement_CollectionExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FOR_STATEMENT__BODY = eINSTANCE.getForStatement_Body();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ContinueStatementImpl <em>Continue Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.ContinueStatementImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getContinueStatement()
+		 * @generated
+		 */
+		EClass CONTINUE_STATEMENT = eINSTANCE.getContinueStatement();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.BreakStatementImpl <em>Break Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.BreakStatementImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBreakStatement()
+		 * @generated
+		 */
+		EClass BREAK_STATEMENT = eINSTANCE.getBreakStatement();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ReturnStatementImpl <em>Return Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.ast.impl.ReturnStatementImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getReturnStatement()
+		 * @generated
+		 */
+		EClass RETURN_STATEMENT = eINSTANCE.getReturnStatement();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RETURN_STATEMENT__EXPRESSION = eINSTANCE.getReturnStatement_Expression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.BuiltinDefinitionImpl <em>Builtin Definition</em>}' class.

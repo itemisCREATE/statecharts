@@ -251,6 +251,9 @@ MemberFeatureCall returns Expression:
 		| ({FunctionCall.arguments+=current} '.' feature=[CallableElement|ValidID] '(' (arguments+=Expression (',' arguments+=Expression)*)? ')')
 		| ({IterationCall.target=current} '.' identifier=ValidID '(' variables+=IterationVariable (',' variables+=IterationVariable)* (';' accumulator=IterationAccumulator)? (';' breakCondition=Expression)? '|' expression=Expression ')'))*;
 
+AssignableMemberFeatureCall returns Expression:
+	AssignablePrimaryExpression (({MemberVariableAccess.target=current} '.' memberVariable=[CallableElement|ValidID]))*;
+
 IterationVariable:
 	name=ValidID;
 
@@ -267,7 +270,12 @@ PrimaryExpression returns Expression:
 	ArrayConstructionOperator |
 	ArrayConcatenationOperator |
 	ParenthesizedExpression |
-	EndExpression;
+	EndExpression |
+	AlgorithmExpression;
+
+AssignablePrimaryExpression returns Expression:
+	FeatureCall |
+	ParenthesizedExpression;
 
 Literal:
 	NumericLiteral | BooleanLiteral | StringLiteral;
@@ -288,8 +296,13 @@ StringLiteral:
 	value=STRING;
 		
 FeatureCall returns Expression:
-	{VariableAccess} feature=[CallableElement|QualifiedName] ('{' stepExpression=StepExpression '}')?
-		| =>({FunctionCall} feature=[CallableElement|QualifiedName] '(' (arguments+=Expression (',' arguments+=Expression)*)? ')');
+	VariableAccess | FunctionCall;
+	
+VariableAccess returns Expression:
+	{VariableAccess} feature=[CallableElement|QualifiedName] ('{' stepExpression=StepExpression '}')?;
+
+FunctionCall returns Expression:
+	{FunctionCall} feature=[CallableElement|QualifiedName] '(' (arguments+=Expression (',' arguments+=Expression)*)? ')';
 
 StepExpression:
 	RangeStepExpression;
@@ -333,6 +346,51 @@ ParenthesizedExpression:
 EndExpression:
 	{EndExpression} 'end';
 	
+AlgorithmExpression returns Expression:
+	{AlgorithmExpression} 'algo' body=Compound;
+
+Compound:
+	{Compound} '{' (statements+=Statement)* '}';
+
+Statement:
+	Compound |
+	Assignment |
+	VariableDeclaration |
+	IfStatement |
+	WhileStatement |
+	DoWhileStatement |
+	ForStatement |
+	ContinueStatement |
+	BreakStatement |
+	ReturnStatement;
+	
+Assignment:
+	target=AssignableMemberFeatureCall '=' expression=Expression ';';
+	
+VariableDeclaration:
+	'var' name=ValidID '=' initializer=Expression ';';
+
+IfStatement:
+	'if' '(' condition=Expression ')' thenStatement=Statement (=>'else' elseStatement=Statement)?;
+	
+WhileStatement:
+	'while' '(' condition=Expression ')' body=Statement;
+
+ForStatement:
+	'for' '(' iterationVariable=IterationVariable 'in' collectionExpression=Expression ')' body=Statement;
+
+DoWhileStatement:
+	'do' body=Statement '(' condition=Expression ')' ';';
+
+ContinueStatement:
+	{ContinueStatement} 'continue' ';';
+
+BreakStatement:
+	{BreakStatement} 'break' ';';
+
+ReturnStatement:
+	'return' expression=Expression ';';
+
 /*
  * Unit expressions
  */

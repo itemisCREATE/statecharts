@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveOperator;
 import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
+import org.eclipselabs.mscript.language.ast.AlgorithmExpression;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
@@ -22,16 +23,21 @@ import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.AssertionStatusKind;
+import org.eclipselabs.mscript.language.ast.Assignment;
 import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.AstPackage;
+import org.eclipselabs.mscript.language.ast.BreakStatement;
 import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
 import org.eclipselabs.mscript.language.ast.BuiltinFunction;
 import org.eclipselabs.mscript.language.ast.BuiltinVariable;
 import org.eclipselabs.mscript.language.ast.CallableElement;
 import org.eclipselabs.mscript.language.ast.Check;
+import org.eclipselabs.mscript.language.ast.Compound;
+import org.eclipselabs.mscript.language.ast.ContinueStatement;
 import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Definition;
+import org.eclipselabs.mscript.language.ast.DoWhileStatement;
 import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.EnumerationDefinition;
 import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
@@ -40,10 +46,12 @@ import org.eclipselabs.mscript.language.ast.EqualityOperator;
 import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
+import org.eclipselabs.mscript.language.ast.ForStatement;
 import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.IfExpression;
+import org.eclipselabs.mscript.language.ast.IfStatement;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.InputParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.IterationAccumulator;
@@ -73,7 +81,9 @@ import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.RelationalOperator;
+import org.eclipselabs.mscript.language.ast.ReturnStatement;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.Statement;
 import org.eclipselabs.mscript.language.ast.StepExpression;
 import org.eclipselabs.mscript.language.ast.StepLiteral;
 import org.eclipselabs.mscript.language.ast.StepN;
@@ -86,6 +96,8 @@ import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnaryOperator;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
 import org.eclipselabs.mscript.language.ast.VariableAccess;
+import org.eclipselabs.mscript.language.ast.VariableDeclaration;
+import org.eclipselabs.mscript.language.ast.WhileStatement;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 
 /**
@@ -521,6 +533,90 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * @generated
 	 */
 	private EClass memberVariableAccessEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass algorithmExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass compoundEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass statementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass assignmentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass variableDeclarationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass ifStatementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass whileStatementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass doWhileStatementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass forStatementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass continueStatementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass breakStatementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass returnStatementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2207,6 +2303,267 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAlgorithmExpression() {
+		return algorithmExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAlgorithmExpression_Body() {
+		return (EReference)algorithmExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCompound() {
+		return compoundEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompound_Statements() {
+		return (EReference)compoundEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStatement() {
+		return statementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAssignment() {
+		return assignmentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAssignment_Target() {
+		return (EReference)assignmentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAssignment_Expression() {
+		return (EReference)assignmentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getVariableDeclaration() {
+		return variableDeclarationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getVariableDeclaration_Name() {
+		return (EAttribute)variableDeclarationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVariableDeclaration_Initializer() {
+		return (EReference)variableDeclarationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIfStatement() {
+		return ifStatementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIfStatement_Condition() {
+		return (EReference)ifStatementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIfStatement_ThenStatement() {
+		return (EReference)ifStatementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIfStatement_ElseStatement() {
+		return (EReference)ifStatementEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getWhileStatement() {
+		return whileStatementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getWhileStatement_Condition() {
+		return (EReference)whileStatementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getWhileStatement_Body() {
+		return (EReference)whileStatementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDoWhileStatement() {
+		return doWhileStatementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDoWhileStatement_Condition() {
+		return (EReference)doWhileStatementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDoWhileStatement_Body() {
+		return (EReference)doWhileStatementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getForStatement() {
+		return forStatementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getForStatement_IterationVariable() {
+		return (EReference)forStatementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getForStatement_CollectionExpression() {
+		return (EReference)forStatementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getForStatement_Body() {
+		return (EReference)forStatementEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getContinueStatement() {
+		return continueStatementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBreakStatement() {
+		return breakStatementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getReturnStatement() {
+		return returnStatementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getReturnStatement_Expression() {
+		return (EReference)returnStatementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBuiltinDefinition() {
 		return builtinDefinitionEClass;
 	}
@@ -2561,6 +2918,47 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		createEReference(memberVariableAccessEClass, MEMBER_VARIABLE_ACCESS__TARGET);
 		createEReference(memberVariableAccessEClass, MEMBER_VARIABLE_ACCESS__MEMBER_VARIABLE);
 
+		algorithmExpressionEClass = createEClass(ALGORITHM_EXPRESSION);
+		createEReference(algorithmExpressionEClass, ALGORITHM_EXPRESSION__BODY);
+
+		compoundEClass = createEClass(COMPOUND);
+		createEReference(compoundEClass, COMPOUND__STATEMENTS);
+
+		statementEClass = createEClass(STATEMENT);
+
+		assignmentEClass = createEClass(ASSIGNMENT);
+		createEReference(assignmentEClass, ASSIGNMENT__TARGET);
+		createEReference(assignmentEClass, ASSIGNMENT__EXPRESSION);
+
+		variableDeclarationEClass = createEClass(VARIABLE_DECLARATION);
+		createEAttribute(variableDeclarationEClass, VARIABLE_DECLARATION__NAME);
+		createEReference(variableDeclarationEClass, VARIABLE_DECLARATION__INITIALIZER);
+
+		ifStatementEClass = createEClass(IF_STATEMENT);
+		createEReference(ifStatementEClass, IF_STATEMENT__CONDITION);
+		createEReference(ifStatementEClass, IF_STATEMENT__THEN_STATEMENT);
+		createEReference(ifStatementEClass, IF_STATEMENT__ELSE_STATEMENT);
+
+		whileStatementEClass = createEClass(WHILE_STATEMENT);
+		createEReference(whileStatementEClass, WHILE_STATEMENT__CONDITION);
+		createEReference(whileStatementEClass, WHILE_STATEMENT__BODY);
+
+		doWhileStatementEClass = createEClass(DO_WHILE_STATEMENT);
+		createEReference(doWhileStatementEClass, DO_WHILE_STATEMENT__CONDITION);
+		createEReference(doWhileStatementEClass, DO_WHILE_STATEMENT__BODY);
+
+		forStatementEClass = createEClass(FOR_STATEMENT);
+		createEReference(forStatementEClass, FOR_STATEMENT__ITERATION_VARIABLE);
+		createEReference(forStatementEClass, FOR_STATEMENT__COLLECTION_EXPRESSION);
+		createEReference(forStatementEClass, FOR_STATEMENT__BODY);
+
+		continueStatementEClass = createEClass(CONTINUE_STATEMENT);
+
+		breakStatementEClass = createEClass(BREAK_STATEMENT);
+
+		returnStatementEClass = createEClass(RETURN_STATEMENT);
+		createEReference(returnStatementEClass, RETURN_STATEMENT__EXPRESSION);
+
 		builtinDefinitionEClass = createEClass(BUILTIN_DEFINITION);
 
 		builtinFunctionEClass = createEClass(BUILTIN_FUNCTION);
@@ -2656,6 +3054,17 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		stepNEClass.getESuperTypes().add(this.getPrimitiveStepExpression());
 		functionCallEClass.getESuperTypes().add(this.getFeatureCall());
 		memberVariableAccessEClass.getESuperTypes().add(theTypeSystemPackage.getExpression());
+		algorithmExpressionEClass.getESuperTypes().add(theTypeSystemPackage.getExpression());
+		compoundEClass.getESuperTypes().add(this.getStatement());
+		assignmentEClass.getESuperTypes().add(this.getStatement());
+		variableDeclarationEClass.getESuperTypes().add(this.getStatement());
+		ifStatementEClass.getESuperTypes().add(this.getStatement());
+		whileStatementEClass.getESuperTypes().add(this.getStatement());
+		doWhileStatementEClass.getESuperTypes().add(this.getStatement());
+		forStatementEClass.getESuperTypes().add(this.getStatement());
+		continueStatementEClass.getESuperTypes().add(this.getStatement());
+		breakStatementEClass.getESuperTypes().add(this.getStatement());
+		returnStatementEClass.getESuperTypes().add(this.getStatement());
 		builtinDefinitionEClass.getESuperTypes().add(this.getDefinition());
 		builtinDefinitionEClass.getESuperTypes().add(this.getCallableElement());
 		builtinFunctionEClass.getESuperTypes().add(this.getBuiltinDefinition());
@@ -2897,6 +3306,47 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		initEClass(memberVariableAccessEClass, MemberVariableAccess.class, "MemberVariableAccess", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMemberVariableAccess_Target(), theTypeSystemPackage.getExpression(), null, "target", null, 0, 1, MemberVariableAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMemberVariableAccess_MemberVariable(), this.getCallableElement(), null, "memberVariable", null, 0, 1, MemberVariableAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(algorithmExpressionEClass, AlgorithmExpression.class, "AlgorithmExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAlgorithmExpression_Body(), this.getCompound(), null, "body", null, 0, 1, AlgorithmExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(compoundEClass, Compound.class, "Compound", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCompound_Statements(), this.getStatement(), null, "statements", null, 0, -1, Compound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(statementEClass, Statement.class, "Statement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(assignmentEClass, Assignment.class, "Assignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAssignment_Target(), theTypeSystemPackage.getExpression(), null, "target", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssignment_Expression(), theTypeSystemPackage.getExpression(), null, "expression", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(variableDeclarationEClass, VariableDeclaration.class, "VariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getVariableDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVariableDeclaration_Initializer(), theTypeSystemPackage.getExpression(), null, "initializer", null, 0, 1, VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(ifStatementEClass, IfStatement.class, "IfStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIfStatement_Condition(), theTypeSystemPackage.getExpression(), null, "condition", null, 0, 1, IfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIfStatement_ThenStatement(), this.getStatement(), null, "thenStatement", null, 0, 1, IfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIfStatement_ElseStatement(), this.getStatement(), null, "elseStatement", null, 0, 1, IfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(whileStatementEClass, WhileStatement.class, "WhileStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getWhileStatement_Condition(), theTypeSystemPackage.getExpression(), null, "condition", null, 0, 1, WhileStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWhileStatement_Body(), this.getStatement(), null, "body", null, 0, 1, WhileStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(doWhileStatementEClass, DoWhileStatement.class, "DoWhileStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDoWhileStatement_Condition(), theTypeSystemPackage.getExpression(), null, "condition", null, 0, 1, DoWhileStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDoWhileStatement_Body(), this.getStatement(), null, "body", null, 0, 1, DoWhileStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(forStatementEClass, ForStatement.class, "ForStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getForStatement_IterationVariable(), this.getIterationVariable(), null, "iterationVariable", null, 0, 1, ForStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getForStatement_CollectionExpression(), theTypeSystemPackage.getExpression(), null, "collectionExpression", null, 0, 1, ForStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getForStatement_Body(), this.getStatement(), null, "body", null, 0, 1, ForStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(continueStatementEClass, ContinueStatement.class, "ContinueStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(breakStatementEClass, BreakStatement.class, "BreakStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(returnStatementEClass, ReturnStatement.class, "ReturnStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getReturnStatement_Expression(), theTypeSystemPackage.getExpression(), null, "expression", null, 0, 1, ReturnStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(builtinDefinitionEClass, BuiltinDefinition.class, "BuiltinDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

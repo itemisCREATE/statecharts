@@ -512,6 +512,105 @@ public interface AstFactory extends EFactory {
 	MemberVariableAccess createMemberVariableAccess();
 
 	/**
+	 * Returns a new object of class '<em>Algorithm Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Algorithm Expression</em>'.
+	 * @generated
+	 */
+	AlgorithmExpression createAlgorithmExpression();
+
+	/**
+	 * Returns a new object of class '<em>Compound</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Compound</em>'.
+	 * @generated
+	 */
+	Compound createCompound();
+
+	/**
+	 * Returns a new object of class '<em>Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Assignment</em>'.
+	 * @generated
+	 */
+	Assignment createAssignment();
+
+	/**
+	 * Returns a new object of class '<em>Variable Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Variable Declaration</em>'.
+	 * @generated
+	 */
+	VariableDeclaration createVariableDeclaration();
+
+	/**
+	 * Returns a new object of class '<em>If Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>If Statement</em>'.
+	 * @generated
+	 */
+	IfStatement createIfStatement();
+
+	/**
+	 * Returns a new object of class '<em>While Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>While Statement</em>'.
+	 * @generated
+	 */
+	WhileStatement createWhileStatement();
+
+	/**
+	 * Returns a new object of class '<em>Do While Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Do While Statement</em>'.
+	 * @generated
+	 */
+	DoWhileStatement createDoWhileStatement();
+
+	/**
+	 * Returns a new object of class '<em>For Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>For Statement</em>'.
+	 * @generated
+	 */
+	ForStatement createForStatement();
+
+	/**
+	 * Returns a new object of class '<em>Continue Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Continue Statement</em>'.
+	 * @generated
+	 */
+	ContinueStatement createContinueStatement();
+
+	/**
+	 * Returns a new object of class '<em>Break Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Break Statement</em>'.
+	 * @generated
+	 */
+	BreakStatement createBreakStatement();
+
+	/**
+	 * Returns a new object of class '<em>Return Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Return Statement</em>'.
+	 * @generated
+	 */
+	ReturnStatement createReturnStatement();
+
+	/**
 	 * Returns a new object of class '<em>Builtin Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
