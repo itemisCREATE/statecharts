@@ -6,13 +6,17 @@
  */
 package org.eclipselabs.mscript.language.ast.impl;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.StepExpression;
+import org.eclipselabs.mscript.language.ast.StepN;
 import org.eclipselabs.mscript.language.ast.VariableAccess;
 
 /**
@@ -99,6 +103,27 @@ public class VariableAccessImpl extends FeatureCallImpl implements VariableAcces
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_ACCESS__STEP_EXPRESSION, newStepExpression, newStepExpression));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean isInitial() {
+		StepExpression stepExpression = getStepExpression();
+		if (stepExpression == null) {
+			return false;
+		}
+		if (stepExpression instanceof StepN) {
+			return false;
+		}
+		for (Iterator<EObject> it = stepExpression.eAllContents(); it.hasNext();) {
+			if (it.next() instanceof StepN) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**

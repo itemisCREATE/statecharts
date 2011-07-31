@@ -12,6 +12,7 @@
 package org.eclipselabs.mscript.language.functionmodel.construct;
 
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
+import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
 
 /**
  * @author Andreas Unger
@@ -19,6 +20,6 @@ import org.eclipselabs.mscript.language.ast.FunctionDefinition;
  */
 public interface IFunctionDescriptorConstructor {
 
-	IFunctionDescriptorConstructorResult construct(FunctionDefinition functionDefinition);
+	IFunctionDescriptorConstructorResult construct(IStaticEvaluationContext context, FunctionDefinition functionDefinition);
 
 }

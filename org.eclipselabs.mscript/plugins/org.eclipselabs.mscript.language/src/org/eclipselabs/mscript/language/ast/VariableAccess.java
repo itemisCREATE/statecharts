@@ -50,4 +50,12 @@ public interface VariableAccess extends FeatureCall {
 	 */
 	void setStepExpression(StepExpression value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	boolean isInitial();
+
 } // VariableAccess

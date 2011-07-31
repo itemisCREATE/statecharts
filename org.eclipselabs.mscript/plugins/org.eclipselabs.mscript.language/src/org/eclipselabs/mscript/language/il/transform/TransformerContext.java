@@ -14,6 +14,7 @@ package org.eclipselabs.mscript.language.il.transform;
 import org.eclipselabs.mscript.common.internal.util.Scope;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
+import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
 
 /**
  * @author Andreas Unger
@@ -21,7 +22,23 @@ import org.eclipselabs.mscript.language.il.VariableDeclaration;
  */
 public class TransformerContext implements ITransformerContext {
 
+	private IStaticEvaluationContext staticEvaluationContext;
+	
 	private TransformerScope scope = new TransformerScope(null);
+	
+	/**
+	 * 
+	 */
+	public TransformerContext(IStaticEvaluationContext staticEvaluationContext) {
+		this.staticEvaluationContext = staticEvaluationContext;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.il.transform.ITransformerContext#getStaticEvaluationContext()
+	 */
+	public IStaticEvaluationContext getStaticEvaluationContext() {
+		return staticEvaluationContext;
+	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.il.transform.IExpressionTransformerContext#enterScope()

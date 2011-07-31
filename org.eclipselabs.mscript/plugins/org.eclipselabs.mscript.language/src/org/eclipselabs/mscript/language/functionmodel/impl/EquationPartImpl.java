@@ -13,11 +13,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipselabs.mscript.language.ast.VariableAccess;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
+import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,7 +43,7 @@ public class EquationPartImpl extends EObjectImpl implements EquationPart {
 	 * @generated
 	 * @ordered
 	 */
-	protected VariableAccess variableAccess;
+	protected Expression variableAccess;
 
 	/**
 	 * The cached value of the '{@link #getVariableStep() <em>Variable Step</em>}' reference.
@@ -120,10 +120,10 @@ public class EquationPartImpl extends EObjectImpl implements EquationPart {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableAccess getVariableAccess() {
+	public Expression getVariableAccess() {
 		if (variableAccess != null && variableAccess.eIsProxy()) {
 			InternalEObject oldVariableAccess = (InternalEObject)variableAccess;
-			variableAccess = (VariableAccess)eResolveProxy(oldVariableAccess);
+			variableAccess = (Expression)eResolveProxy(oldVariableAccess);
 			if (variableAccess != oldVariableAccess) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FunctionModelPackage.EQUATION_PART__VARIABLE_ACCESS, oldVariableAccess, variableAccess));
@@ -137,7 +137,7 @@ public class EquationPartImpl extends EObjectImpl implements EquationPart {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableAccess basicGetVariableAccess() {
+	public Expression basicGetVariableAccess() {
 		return variableAccess;
 	}
 
@@ -146,8 +146,8 @@ public class EquationPartImpl extends EObjectImpl implements EquationPart {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setVariableAccess(VariableAccess newVariableAccess) {
-		VariableAccess oldVariableAccess = variableAccess;
+	public void setVariableAccess(Expression newVariableAccess) {
+		Expression oldVariableAccess = variableAccess;
 		variableAccess = newVariableAccess;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.EQUATION_PART__VARIABLE_ACCESS, oldVariableAccess, variableAccess));
@@ -295,7 +295,7 @@ public class EquationPartImpl extends EObjectImpl implements EquationPart {
 				setSide((EquationSide)newValue);
 				return;
 			case FunctionModelPackage.EQUATION_PART__VARIABLE_ACCESS:
-				setVariableAccess((VariableAccess)newValue);
+				setVariableAccess((Expression)newValue);
 				return;
 			case FunctionModelPackage.EQUATION_PART__VARIABLE_STEP:
 				setVariableStep((VariableStep)newValue);
@@ -316,7 +316,7 @@ public class EquationPartImpl extends EObjectImpl implements EquationPart {
 				setSide((EquationSide)null);
 				return;
 			case FunctionModelPackage.EQUATION_PART__VARIABLE_ACCESS:
-				setVariableAccess((VariableAccess)null);
+				setVariableAccess((Expression)null);
 				return;
 			case FunctionModelPackage.EQUATION_PART__VARIABLE_STEP:
 				setVariableStep((VariableStep)null);

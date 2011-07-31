@@ -11,14 +11,17 @@
 
 package org.eclipselabs.mscript.language.functionmodel.construct;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipselabs.mscript.language.ast.CallableElement;
+import org.eclipselabs.mscript.language.ast.DerivativeOperator;
 import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
-import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
+import org.eclipselabs.mscript.language.ast.InputParameterDeclaration;
+import org.eclipselabs.mscript.language.ast.OutputParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.VariableAccess;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
@@ -30,9 +33,8 @@ import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableKind;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
-import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionHelper;
-import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionResult;
 import org.eclipselabs.mscript.language.internal.util.StatusUtil;
+import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
 import org.eclipselabs.mscript.language.util.SyntaxStatus;
 import org.eclipselabs.mscript.typesystem.Expression;
 
@@ -45,7 +47,7 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.functionmodel.construct.IFunctionDescriptorConstructor#construct(org.eclipselabs.mscript.language.ast.FunctionDefinition)
 	 */
-	public IFunctionDescriptorConstructorResult construct(FunctionDefinition functionDefinition) {
+	public IFunctionDescriptorConstructorResult construct(IStaticEvaluationContext context, FunctionDefinition functionDefinition) {
 		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Function descriptor construction errors", null);
 
 		FunctionDescriptor functionDescriptor = FunctionModelFactory.eINSTANCE.createFunctionDescriptor();
@@ -60,13 +62,13 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 			EquationSide lhs = FunctionModelFactory.eINSTANCE.createEquationSide();
 			lhs.setDescriptor(equationDescriptor);
 			lhs.setExpression(lhsExpression);
-			StatusUtil.merge(status, new EquationSideInitializer(lhs).initialize());
+			StatusUtil.merge(status, new EquationSideInitializer(context, lhs).initialize());
 			
 			Expression rhsExpression = equation.getRightHandSide();
 			EquationSide rhs = FunctionModelFactory.eINSTANCE.createEquationSide();
 			rhs.setDescriptor(equationDescriptor);
 			rhs.setExpression(rhsExpression);
-			StatusUtil.merge(status, new EquationSideInitializer(rhs).initialize());
+			StatusUtil.merge(status, new EquationSideInitializer(context, rhs).initialize());
 		}
 		
 		if (!status.isOK()) {
@@ -77,14 +79,16 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 	}
 			
 	private static class EquationSideInitializer extends AstSwitch<Boolean> {
-
+		
+		private IStaticEvaluationContext context;
 		private EquationSide equationSide;
 		private MultiStatus status;
 		
 		/**
 		 * 
 		 */
-		public EquationSideInitializer(EquationSide equationSide) {
+		public EquationSideInitializer(IStaticEvaluationContext context, EquationSide equationSide) {
+			this.context = context;
 			this.equationSide = equationSide;
 		}
 		
@@ -93,15 +97,40 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 			doSwitch(equationSide.getExpression());
 			return status;
 		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseDerivativeOperator(org.eclipselabs.mscript.language.ast.DerivativeOperator)
+		 */
+		@Override
+		public Boolean caseDerivativeOperator(DerivativeOperator derivativeOperator) {
+			String name = derivativeOperator.getVariable().getName();
+			
+			FunctionDescriptor functionDescriptor = equationSide.getDescriptor().getFunctionDescriptor();
+			VariableKind variableKind = getVariableKind(derivativeOperator.getVariable());
+			
+			if (variableKind != VariableKind.UNKNOWN) {
+				EquationPart part = FunctionModelFactory.eINSTANCE.createEquationPart();
+				part.setSide(equationSide);
+				part.setVariableAccess(derivativeOperator);
+				VariableDescriptor variableDescriptor = getVariableDescriptor(functionDescriptor, name, variableKind);
+				
+				VariableStep variableStep = variableDescriptor.getStep(0, false, true);
+				if (variableStep == null) {
+					variableStep = FunctionModelFactory.eINSTANCE.createVariableStep();
+					variableStep.setDescriptor(variableDescriptor);
+					variableStep.setDerivative(true);
+				}
+				part.setVariableStep(variableStep);
+			}
+			return true;
+		}
 
 		@Override
 		public Boolean caseVariableAccess(VariableAccess variableAccess) {
 			String name = variableAccess.getFeature().getName();
 			
 			FunctionDescriptor functionDescriptor = equationSide.getDescriptor().getFunctionDescriptor();
-			VariableKind variableKind = getVariableKind(
-					functionDescriptor.getDefinition(),
-					name);
+			VariableKind variableKind = getVariableKind(variableAccess.getFeature());
 			
 			checkFeatureCall(variableAccess, variableKind);
 			
@@ -112,27 +141,23 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 				if (variableKind == VariableKind.INPUT_PARAMETER
 						|| variableKind == VariableKind.OUTPUT_PARAMETER
 						|| variableKind == VariableKind.STATE_VARIABLE) {
-					try {
-						StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(variableAccess);
-						stepIndex = stepExpressionResult.getIndex();
-						initial = stepExpressionResult.isInitial();
-					} catch (CoreException e) {
-						StatusUtil.merge(status, e.getStatus());
+					stepIndex = context.getStepIndex(variableAccess);
+					initial = variableAccess.isInitial();
+				}
+				
+				if (!initial) {
+					Equation equation = (Equation) equationSide.getExpression().eContainer();
+					if (equation.getLeftHandSide() == equationSide.getExpression() && equation.isInitial()) {
+						initial = true;
 					}
 				}
 
 				EquationPart part = FunctionModelFactory.eINSTANCE.createEquationPart();
 				part.setSide(equationSide);
 				part.setVariableAccess(variableAccess);
-				VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(name);
-				if (variableDescriptor == null) {
-					variableDescriptor = FunctionModelFactory.eINSTANCE.createVariableDescriptor();
-					variableDescriptor.setFunctionDescriptor(functionDescriptor);
-					variableDescriptor.setName(name);
-					variableDescriptor.setKind(variableKind);
-				}
+				VariableDescriptor variableDescriptor = getVariableDescriptor(functionDescriptor, name, variableKind);
 				
-				VariableStep variableStep = variableDescriptor.getStep(stepIndex, initial);
+				VariableStep variableStep = variableDescriptor.getStep(stepIndex, initial, false);
 				if (variableStep == null) {
 					variableStep = FunctionModelFactory.eINSTANCE.createVariableStep();
 					variableStep.setDescriptor(variableDescriptor);
@@ -172,26 +197,36 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 			}
 		}
 
-		private VariableKind getVariableKind(FunctionDefinition functionDefinition, String name) {
-			for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameterDeclarations()) {
-				if (name.equals(parameterDeclaration.getName())) {
-					return VariableKind.TEMPLATE_PARAMETER;
-				}
+		/**
+		 * @param functionDescriptor
+		 * @param name
+		 * @param variableKind
+		 * @return
+		 */
+		private VariableDescriptor getVariableDescriptor(FunctionDescriptor functionDescriptor, String name,
+				VariableKind variableKind) {
+			VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(name);
+			if (variableDescriptor == null) {
+				variableDescriptor = FunctionModelFactory.eINSTANCE.createVariableDescriptor();
+				variableDescriptor.setFunctionDescriptor(functionDescriptor);
+				variableDescriptor.setName(name);
+				variableDescriptor.setKind(variableKind);
 			}
-			for (ParameterDeclaration parameterDeclaration : functionDefinition.getInputParameterDeclarations()) {
-				if (name.equals(parameterDeclaration.getName())) {
-					return VariableKind.INPUT_PARAMETER;
-				}
+			return variableDescriptor;
+		}
+
+		private VariableKind getVariableKind(CallableElement feature) {
+			if (feature instanceof TemplateParameterDeclaration) {
+				return VariableKind.TEMPLATE_PARAMETER;
 			}
-			for (ParameterDeclaration parameterDeclaration : functionDefinition.getOutputParameterDeclarations()) {
-				if (name.equals(parameterDeclaration.getName())) {
-					return VariableKind.OUTPUT_PARAMETER;
-				}
+			if (feature instanceof InputParameterDeclaration) {
+				return VariableKind.INPUT_PARAMETER;
 			}
-			for (StateVariableDeclaration stateVariableDeclaration : functionDefinition.getStateVariableDeclarations()) {
-				if (name.equals(stateVariableDeclaration.getName())) {
-					return VariableKind.STATE_VARIABLE;
-				}
+			if (feature instanceof OutputParameterDeclaration) {
+				return VariableKind.OUTPUT_PARAMETER;
+			}
+			if (feature instanceof StateVariableDeclaration) {
+				return VariableKind.STATE_VARIABLE;
 			}
 			return VariableKind.UNKNOWN;
 		}

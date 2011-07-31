@@ -16320,11 +16320,11 @@ rule__DoWhileStatement__Group__2__Impl
     }
 :
 (
-{ before(grammarAccess.getDoWhileStatementAccess().getLeftParenthesisKeyword_2()); }
+{ before(grammarAccess.getDoWhileStatementAccess().getWhileKeyword_2()); }
 
-	'(' 
+	'while' 
 
-{ after(grammarAccess.getDoWhileStatementAccess().getLeftParenthesisKeyword_2()); }
+{ after(grammarAccess.getDoWhileStatementAccess().getWhileKeyword_2()); }
 )
 
 ;
@@ -16351,9 +16351,11 @@ rule__DoWhileStatement__Group__3__Impl
     }
 :
 (
-{ before(grammarAccess.getDoWhileStatementAccess().getConditionAssignment_3()); }
-(rule__DoWhileStatement__ConditionAssignment_3)
-{ after(grammarAccess.getDoWhileStatementAccess().getConditionAssignment_3()); }
+{ before(grammarAccess.getDoWhileStatementAccess().getLeftParenthesisKeyword_3()); }
+
+	'(' 
+
+{ after(grammarAccess.getDoWhileStatementAccess().getLeftParenthesisKeyword_3()); }
 )
 
 ;
@@ -16380,11 +16382,9 @@ rule__DoWhileStatement__Group__4__Impl
     }
 :
 (
-{ before(grammarAccess.getDoWhileStatementAccess().getRightParenthesisKeyword_4()); }
-
-	')' 
-
-{ after(grammarAccess.getDoWhileStatementAccess().getRightParenthesisKeyword_4()); }
+{ before(grammarAccess.getDoWhileStatementAccess().getConditionAssignment_4()); }
+(rule__DoWhileStatement__ConditionAssignment_4)
+{ after(grammarAccess.getDoWhileStatementAccess().getConditionAssignment_4()); }
 )
 
 ;
@@ -16399,6 +16399,7 @@ rule__DoWhileStatement__Group__5
     }
 :
 	rule__DoWhileStatement__Group__5__Impl
+	rule__DoWhileStatement__Group__6
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -16410,17 +16411,49 @@ rule__DoWhileStatement__Group__5__Impl
     }
 :
 (
-{ before(grammarAccess.getDoWhileStatementAccess().getSemicolonKeyword_5()); }
+{ before(grammarAccess.getDoWhileStatementAccess().getRightParenthesisKeyword_5()); }
 
-	';' 
+	')' 
 
-{ after(grammarAccess.getDoWhileStatementAccess().getSemicolonKeyword_5()); }
+{ after(grammarAccess.getDoWhileStatementAccess().getRightParenthesisKeyword_5()); }
 )
 
 ;
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+rule__DoWhileStatement__Group__6
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__DoWhileStatement__Group__6__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__DoWhileStatement__Group__6__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getDoWhileStatementAccess().getSemicolonKeyword_6()); }
+
+	';' 
+
+{ after(grammarAccess.getDoWhileStatementAccess().getSemicolonKeyword_6()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 
 
 
@@ -20424,14 +20457,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__DoWhileStatement__ConditionAssignment_3
+rule__DoWhileStatement__ConditionAssignment_4
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getDoWhileStatementAccess().getConditionExpressionParserRuleCall_3_0()); }
-	ruleExpression{ after(grammarAccess.getDoWhileStatementAccess().getConditionExpressionParserRuleCall_3_0()); }
+{ before(grammarAccess.getDoWhileStatementAccess().getConditionExpressionParserRuleCall_4_0()); }
+	ruleExpression{ after(grammarAccess.getDoWhileStatementAccess().getConditionExpressionParserRuleCall_4_0()); }
 )
 
 ;

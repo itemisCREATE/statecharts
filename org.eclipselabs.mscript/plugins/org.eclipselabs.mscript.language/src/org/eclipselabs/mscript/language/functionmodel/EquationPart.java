@@ -7,7 +7,7 @@
 package org.eclipselabs.mscript.language.functionmodel;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipselabs.mscript.language.ast.VariableAccess;
+import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * <!-- begin-user-doc -->
@@ -65,12 +65,12 @@ public interface EquationPart extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Variable Access</em>' reference.
-	 * @see #setVariableAccess(VariableAccess)
+	 * @see #setVariableAccess(Expression)
 	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getEquationPart_VariableAccess()
 	 * @model required="true"
 	 * @generated
 	 */
-	VariableAccess getVariableAccess();
+	Expression getVariableAccess();
 
 	/**
 	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getVariableAccess <em>Variable Access</em>}' reference.
@@ -80,7 +80,7 @@ public interface EquationPart extends EObject {
 	 * @see #getVariableAccess()
 	 * @generated
 	 */
-	void setVariableAccess(VariableAccess value);
+	void setVariableAccess(Expression value);
 
 	/**
 	 * Returns the value of the '<em><b>Variable Step</b></em>' reference.

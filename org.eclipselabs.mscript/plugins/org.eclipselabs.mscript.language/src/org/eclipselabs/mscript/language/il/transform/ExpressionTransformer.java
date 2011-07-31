@@ -14,12 +14,13 @@ package org.eclipselabs.mscript.language.il.transform;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
+import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
@@ -50,8 +51,6 @@ import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
-import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionHelper;
-import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionResult;
 import org.eclipselabs.mscript.language.util.SyntaxStatus;
 import org.eclipselabs.mscript.typesystem.BooleanLiteral;
 import org.eclipselabs.mscript.typesystem.Expression;
@@ -140,6 +139,15 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 	 */
 	@Override
 	public Expression caseIfExpression(IfExpression ifExpression) {
+		if (ifExpression.isStatic()) {
+			IValue value = context.getStaticEvaluationContext().getValue(ifExpression.getCondition());
+			if (value instanceof IBooleanValue) {
+				boolean condition = ((IBooleanValue) value).booleanValue();
+				Expression expression = condition ? ifExpression.getThenExpression() : ifExpression.getElseExpression();
+				return doSwitch(expression);
+			}
+		}
+		
 		LocalVariableDeclaration localVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
 		context.getCompound().getStatements().add(localVariableDeclaration);
 		IfStatement ifStatement = ILFactory.eINSTANCE.createIfStatement();
@@ -181,15 +189,10 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 	public Expression caseVariableAccess(VariableAccess variableAccess) {
 		VariableDeclaration variableDeclaration = context.getVariableDeclaration(variableAccess.getFeature().getName());
 		if (variableDeclaration != null) {
-			try {
-				StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(variableAccess);
-				VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
-				variableReference.setTarget(variableDeclaration);
-				variableReference.setStepIndex(stepExpressionResult.getIndex());
-				return variableReference;
-			} catch (CoreException e) {
-				throw new RuntimeException(e);
-			}
+			VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
+			variableReference.setTarget(variableDeclaration);
+			variableReference.setStepIndex(context.getStaticEvaluationContext().getStepIndex(variableAccess));
+			return variableReference;
 		}
 		return null;
 	}

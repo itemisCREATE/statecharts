@@ -387,7 +387,7 @@ ForStatement:
 	'for' '(' iterationVariable=IterationVariable 'in' collectionExpression=Expression ')' body=Statement;
 
 DoWhileStatement:
-	'do' body=Statement '(' condition=Expression ')' ';';
+	'do' body=Statement 'while' '(' condition=Expression ')' ';';
 
 ContinueStatement:
 	{ContinueStatement} 'continue' ';';

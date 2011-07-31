@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
+import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
 import org.eclipselabs.mscript.typesystem.DataType;
 
 /**
@@ -23,7 +24,7 @@ import org.eclipselabs.mscript.typesystem.DataType;
  */
 public interface IFunctionDefinitionTransformer {
 
-	IFunctionDefinitionTransformerResult transform(FunctionDescriptor functionDescriptor, String functionName,
+	IFunctionDefinitionTransformerResult transform(IStaticEvaluationContext staticEvaluationContext, FunctionDescriptor functionDescriptor, String functionName,
 			List<IValue> templateArguments, List<DataType> inputParameterDataTypes);
 
 }

@@ -26,6 +26,7 @@ import org.eclipselabs.mscript.language.il.transform.ITransformerContext;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.util.StatusUtil;
 import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
+import org.eclipselabs.mscript.language.interpreter.StaticEvaluationContext;
 import org.eclipselabs.mscript.language.interpreter.StaticInterpreterContext;
 import org.eclipselabs.mscript.language.interpreter.util.ExpressionInterpreterHelper;
 import org.eclipselabs.mscript.language.util.SyntaxStatus;
@@ -46,7 +47,7 @@ public class AssertionEvaluator {
 				continue;
 			}
 			
-			ITransformerContext transformerContext = new FunctionDefinitionTransformerContext(functionDefinition);
+			ITransformerContext transformerContext = new FunctionDefinitionTransformerContext(new StaticEvaluationContext(), functionDefinition);
 			IInterpreterContext interpreterContext = new StaticInterpreterContext(new ComputationContext(), functionDefinition);
 			ExpressionInterpreterHelper expressionInterpreterHelper = new ExpressionInterpreterHelper(transformerContext, interpreterContext, assertion.getCondition());
 

@@ -33,6 +33,7 @@ import org.eclipselabs.mscript.language.functionmodel.VariableStep;
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableStepImpl#getDescriptor <em>Descriptor</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableStepImpl#getIndex <em>Index</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableStepImpl#isInitial <em>Initial</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableStepImpl#isDerivative <em>Derivative</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableStepImpl#getUsingEquationParts <em>Using Equation Parts</em>}</li>
  * </ul>
  * </p>
@@ -79,6 +80,26 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	 * @ordered
 	 */
 	protected boolean initial = INITIAL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isDerivative() <em>Derivative</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDerivative()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean DERIVATIVE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isDerivative() <em>Derivative</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDerivative()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean derivative = DERIVATIVE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getUsingEquationParts() <em>Using Equation Parts</em>}' reference list.
@@ -197,6 +218,27 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isDerivative() {
+		return derivative;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDerivative(boolean newDerivative) {
+		boolean oldDerivative = derivative;
+		derivative = newDerivative;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.VARIABLE_STEP__DERIVATIVE, oldDerivative, derivative));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<EquationPart> getUsingEquationParts() {
 		if (usingEquationParts == null) {
 			usingEquationParts = new EObjectWithInverseResolvingEList<EquationPart>(EquationPart.class, this, FunctionModelPackage.VARIABLE_STEP__USING_EQUATION_PARTS, FunctionModelPackage.EQUATION_PART__VARIABLE_STEP);
@@ -267,6 +309,8 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 				return getIndex();
 			case FunctionModelPackage.VARIABLE_STEP__INITIAL:
 				return isInitial();
+			case FunctionModelPackage.VARIABLE_STEP__DERIVATIVE:
+				return isDerivative();
 			case FunctionModelPackage.VARIABLE_STEP__USING_EQUATION_PARTS:
 				return getUsingEquationParts();
 		}
@@ -290,6 +334,9 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 				return;
 			case FunctionModelPackage.VARIABLE_STEP__INITIAL:
 				setInitial((Boolean)newValue);
+				return;
+			case FunctionModelPackage.VARIABLE_STEP__DERIVATIVE:
+				setDerivative((Boolean)newValue);
 				return;
 			case FunctionModelPackage.VARIABLE_STEP__USING_EQUATION_PARTS:
 				getUsingEquationParts().clear();
@@ -316,6 +363,9 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 			case FunctionModelPackage.VARIABLE_STEP__INITIAL:
 				setInitial(INITIAL_EDEFAULT);
 				return;
+			case FunctionModelPackage.VARIABLE_STEP__DERIVATIVE:
+				setDerivative(DERIVATIVE_EDEFAULT);
+				return;
 			case FunctionModelPackage.VARIABLE_STEP__USING_EQUATION_PARTS:
 				getUsingEquationParts().clear();
 				return;
@@ -337,6 +387,8 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 				return index != INDEX_EDEFAULT;
 			case FunctionModelPackage.VARIABLE_STEP__INITIAL:
 				return initial != INITIAL_EDEFAULT;
+			case FunctionModelPackage.VARIABLE_STEP__DERIVATIVE:
+				return derivative != DERIVATIVE_EDEFAULT;
 			case FunctionModelPackage.VARIABLE_STEP__USING_EQUATION_PARTS:
 				return usingEquationParts != null && !usingEquationParts.isEmpty();
 		}
@@ -357,6 +409,8 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 		result.append(index);
 		result.append(", initial: ");
 		result.append(initial);
+		result.append(", derivative: ");
+		result.append(derivative);
 		result.append(')');
 		return result.toString();
 	}

@@ -51,10 +51,10 @@ public class FunctionModelUtil {
 		return null;
 	}
 
-	public static EquationDescriptor getDefiningEquation(FunctionDescriptor functionDescriptor, String variableName, int stepIndex, boolean initial) {
+	public static EquationDescriptor getDefiningEquation(FunctionDescriptor functionDescriptor, String variableName, int stepIndex, boolean initial, boolean derivative) {
 		VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(variableName);
 		if (variableDescriptor != null) {
-			VariableStep variableStep = variableDescriptor.getStep(stepIndex, initial);
+			VariableStep variableStep = variableDescriptor.getStep(stepIndex, initial, derivative);
 			if (variableStep != null) {
 				return getDefiningEquation(variableStep);
 			}
@@ -62,8 +62,8 @@ public class FunctionModelUtil {
 		return null;
 	}
 
-	public static TreeIterator<EquationDescriptor> getDefiningEquations(FunctionDescriptor functionDescriptor, String variableName, int stepIndex, boolean initial) {
-		EquationDescriptor root = getDefiningEquation(functionDescriptor, variableName, stepIndex, initial);
+	public static TreeIterator<EquationDescriptor> getDefiningEquations(FunctionDescriptor functionDescriptor, String variableName, int stepIndex, boolean initial, boolean derivative) {
+		EquationDescriptor root = getDefiningEquation(functionDescriptor, variableName, stepIndex, initial, derivative);
 		if (root != null) {
 			return new EquationIterator(root);
 		}

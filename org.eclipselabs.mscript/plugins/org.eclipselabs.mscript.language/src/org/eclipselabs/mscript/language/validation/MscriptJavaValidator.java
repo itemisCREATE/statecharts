@@ -1,9 +1,6 @@
 package org.eclipselabs.mscript.language.validation;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
@@ -37,22 +34,12 @@ import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.StepN;
 import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.VariableAccess;
-import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
-import org.eclipselabs.mscript.language.functionmodel.construct.FunctionDescriptorConstructor;
-import org.eclipselabs.mscript.language.functionmodel.construct.IFunctionDescriptorConstructorResult;
-import org.eclipselabs.mscript.language.functionmodel.util.FunctionModelValidator;
-import org.eclipselabs.mscript.language.il.transform.FunctionDefinitionTransformer;
-import org.eclipselabs.mscript.language.il.transform.IFunctionDefinitionTransformerResult;
-import org.eclipselabs.mscript.language.internal.util.EObjectTreeIterator;
 import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
 import org.eclipselabs.mscript.language.interpreter.StaticEvaluationContext;
 import org.eclipselabs.mscript.language.interpreter.StaticExpressionEvaluator;
 import org.eclipselabs.mscript.language.interpreter.StaticFunctionEvaluator;
 import org.eclipselabs.mscript.language.util.SyntaxStatus;
-import org.eclipselabs.mscript.typesystem.AnyDataType;
-import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.Expression;
-import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 
 public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 
@@ -138,56 +125,8 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 		return container instanceof ArraySubscript && ((ArraySubscript) container).eContainer() instanceof ArrayElementAccess;
 	}
 	
-//	@Check
-	public void checkFunctionDefinition(FunctionDefinition functionDefinition) {
-		IFunctionDescriptorConstructorResult functionDescriptorConstructorResult = new FunctionDescriptorConstructor().construct(functionDefinition);
-		
-		SyntaxStatus.addAllSyntaxStatusesToDiagnostics(
-				functionDescriptorConstructorResult.getStatus(),
-				getChain());
-		
-		FunctionDescriptor functionDescriptor = functionDescriptorConstructorResult.getFunctionDescriptor();
-		
-		FunctionModelValidator validator = new FunctionModelValidator();
-		for (EObjectTreeIterator it = new EObjectTreeIterator(functionDescriptor, true); it.hasNext();) {
-			validator.validate(it.next(), getChain(), new HashMap<Object, Object>());
-		}
-
-		List<IValue> templateArguments = new ArrayList<IValue>();
-		for (int i = 0, n = functionDefinition.getTemplateParameterDeclarations().size(); i < n; ++i) {
-			AnyDataType type = TypeSystemFactory.eINSTANCE.createAnyDataType();
-			AnyValue value = new AnyValue(new ComputationContext(), type);
-			templateArguments.add(value);
-		}
-
-		List<DataType> inputParameterDataTypes = new ArrayList<DataType>();
-		for (int i = 0, n = functionDefinition.getInputParameterDeclarations().size(); i < n; ++i) {
-			AnyDataType type = TypeSystemFactory.eINSTANCE.createAnyDataType();
-			inputParameterDataTypes.add(type);
-		}
-
-		IFunctionDefinitionTransformerResult functionDefinitionTransformerResult = new FunctionDefinitionTransformer().transform(functionDescriptor, null, templateArguments, inputParameterDataTypes);
-
-		SyntaxStatus.addAllSyntaxStatusesToDiagnostics(
-				functionDefinitionTransformerResult.getStatus(),
-				getChain());
-	}
-	
 	@Check
 	public void checkTypes(FunctionDefinition functionDefinition) {
-		IFunctionDescriptorConstructorResult functionDescriptorConstructorResult = new FunctionDescriptorConstructor().construct(functionDefinition);
-		
-		SyntaxStatus.addAllSyntaxStatusesToDiagnostics(
-				functionDescriptorConstructorResult.getStatus(),
-				getChain());
-		
-		FunctionDescriptor functionDescriptor = functionDescriptorConstructorResult.getFunctionDescriptor();
-		
-		FunctionModelValidator validator = new FunctionModelValidator();
-		for (EObjectTreeIterator it = new EObjectTreeIterator(functionDescriptor, true); it.hasNext();) {
-			validator.validate(it.next(), getChain(), new HashMap<Object, Object>());
-		}
-
 		StaticExpressionEvaluator staticExpressionEvaluator = new StaticExpressionEvaluator();
 		for (org.eclipselabs.mscript.language.ast.Check check : functionDefinition.getChecks()) {
 			if (!checkFunctionCheckSignatures(check)) {
@@ -207,7 +146,7 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 				context.setValue(inputParameterIt.next(), new AnyValue(new ComputationContext(), dataTypeSpecifier.getType()));
 			}
 
-			IStatus status = new StaticFunctionEvaluator().evaluate(context, functionDescriptor);
+			IStatus status = new StaticFunctionEvaluator().evaluate(context, functionDefinition);
 			
 			if (status.isOK()) {
 				Iterator<OutputParameterDeclaration> outputParameterIt = functionDefinition.getOutputParameterDeclarations().iterator();

@@ -133,10 +133,10 @@ public interface VariableDescriptor extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model indexRequired="true" initialRequired="true"
+	 * @model indexRequired="true" initialRequired="true" derivativeRequired="true"
 	 * @generated
 	 */
-	VariableStep getStep(int index, boolean initial);
+	VariableStep getStep(int index, boolean initial, boolean derivative);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -11,7 +11,10 @@
 
 package org.eclipselabs.mscript.language.util;
 
+import java.util.List;
+
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -79,6 +82,17 @@ public class SyntaxStatus extends Status implements ISyntaxStatus {
 				}
 			}
 		}
+	}
+	
+	public static IStatus toStatus(Diagnostic diagnostic) {
+		MultiStatus multiStatus = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "", null);
+		for (Diagnostic child : diagnostic.getChildren()) {
+			List<?> data = child.getData();
+			if (data != null && !data.isEmpty() && data.get(0) instanceof EObject) {
+				multiStatus.add(new SyntaxStatus(diagnostic.getSeverity(), LanguagePlugin.PLUGIN_ID, 0, child.getMessage(), (EObject) data.get(0)));
+			}
+		}
+		return multiStatus;
 	}
 
 }

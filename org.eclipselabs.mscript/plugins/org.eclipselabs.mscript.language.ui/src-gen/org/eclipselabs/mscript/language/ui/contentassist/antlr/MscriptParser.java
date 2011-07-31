@@ -376,7 +376,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getForStatementAccess().getCollectionExpressionAssignment_4(), "rule__ForStatement__CollectionExpressionAssignment_4");
 					put(grammarAccess.getForStatementAccess().getBodyAssignment_6(), "rule__ForStatement__BodyAssignment_6");
 					put(grammarAccess.getDoWhileStatementAccess().getBodyAssignment_1(), "rule__DoWhileStatement__BodyAssignment_1");
-					put(grammarAccess.getDoWhileStatementAccess().getConditionAssignment_3(), "rule__DoWhileStatement__ConditionAssignment_3");
+					put(grammarAccess.getDoWhileStatementAccess().getConditionAssignment_4(), "rule__DoWhileStatement__ConditionAssignment_4");
 					put(grammarAccess.getReturnStatementAccess().getExpressionAssignment_1(), "rule__ReturnStatement__ExpressionAssignment_1");
 					put(grammarAccess.getUnitAccess().getNumeratorAssignment_1_1_1(), "rule__Unit__NumeratorAssignment_1_1_1");
 					put(grammarAccess.getUnitAccess().getDenominatorAssignment_1_1_2_1(), "rule__Unit__DenominatorAssignment_1_1_2_1");

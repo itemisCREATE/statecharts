@@ -9581,11 +9581,11 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
                 {
                 int LA4_2 = input.LA(2);
 
-                if ( (LA4_2==64||LA4_2==67) ) {
-                    alt4=5;
-                }
-                else if ( (LA4_2==51) ) {
+                if ( (LA4_2==51) ) {
                     alt4=2;
+                }
+                else if ( (LA4_2==64||LA4_2==67) ) {
+                    alt4=5;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -46765,24 +46765,24 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DoWhileStatement__Group__2__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16317:1: rule__DoWhileStatement__Group__2__Impl : ( '(' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16317:1: rule__DoWhileStatement__Group__2__Impl : ( 'while' ) ;
     public final void rule__DoWhileStatement__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16321:1: ( ( '(' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16322:1: ( '(' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16321:1: ( ( 'while' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16322:1: ( 'while' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16322:1: ( '(' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16323:1: '('
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16322:1: ( 'while' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16323:1: 'while'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDoWhileStatementAccess().getLeftParenthesisKeyword_2()); 
+               before(grammarAccess.getDoWhileStatementAccess().getWhileKeyword_2()); 
             }
-            match(input,47,FOLLOW_47_in_rule__DoWhileStatement__Group__2__Impl32966); if (state.failed) return ;
+            match(input,82,FOLLOW_82_in_rule__DoWhileStatement__Group__2__Impl32966); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDoWhileStatementAccess().getLeftParenthesisKeyword_2()); 
+               after(grammarAccess.getDoWhileStatementAccess().getWhileKeyword_2()); 
             }
 
             }
@@ -46844,34 +46844,24 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DoWhileStatement__Group__3__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16348:1: rule__DoWhileStatement__Group__3__Impl : ( ( rule__DoWhileStatement__ConditionAssignment_3 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16348:1: rule__DoWhileStatement__Group__3__Impl : ( '(' ) ;
     public final void rule__DoWhileStatement__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16352:1: ( ( ( rule__DoWhileStatement__ConditionAssignment_3 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16353:1: ( ( rule__DoWhileStatement__ConditionAssignment_3 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16352:1: ( ( '(' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16353:1: ( '(' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16353:1: ( ( rule__DoWhileStatement__ConditionAssignment_3 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16354:1: ( rule__DoWhileStatement__ConditionAssignment_3 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16353:1: ( '(' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16354:1: '('
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDoWhileStatementAccess().getConditionAssignment_3()); 
+               before(grammarAccess.getDoWhileStatementAccess().getLeftParenthesisKeyword_3()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16355:1: ( rule__DoWhileStatement__ConditionAssignment_3 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16355:2: rule__DoWhileStatement__ConditionAssignment_3
-            {
-            pushFollow(FOLLOW_rule__DoWhileStatement__ConditionAssignment_3_in_rule__DoWhileStatement__Group__3__Impl33027);
-            rule__DoWhileStatement__ConditionAssignment_3();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
+            match(input,47,FOLLOW_47_in_rule__DoWhileStatement__Group__3__Impl33028); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDoWhileStatementAccess().getConditionAssignment_3()); 
+               after(grammarAccess.getDoWhileStatementAccess().getLeftParenthesisKeyword_3()); 
             }
 
             }
@@ -46895,21 +46885,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DoWhileStatement__Group__4"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16365:1: rule__DoWhileStatement__Group__4 : rule__DoWhileStatement__Group__4__Impl rule__DoWhileStatement__Group__5 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16367:1: rule__DoWhileStatement__Group__4 : rule__DoWhileStatement__Group__4__Impl rule__DoWhileStatement__Group__5 ;
     public final void rule__DoWhileStatement__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16369:1: ( rule__DoWhileStatement__Group__4__Impl rule__DoWhileStatement__Group__5 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16370:2: rule__DoWhileStatement__Group__4__Impl rule__DoWhileStatement__Group__5
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16371:1: ( rule__DoWhileStatement__Group__4__Impl rule__DoWhileStatement__Group__5 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16372:2: rule__DoWhileStatement__Group__4__Impl rule__DoWhileStatement__Group__5
             {
-            pushFollow(FOLLOW_rule__DoWhileStatement__Group__4__Impl_in_rule__DoWhileStatement__Group__433057);
+            pushFollow(FOLLOW_rule__DoWhileStatement__Group__4__Impl_in_rule__DoWhileStatement__Group__433059);
             rule__DoWhileStatement__Group__4__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__DoWhileStatement__Group__5_in_rule__DoWhileStatement__Group__433060);
+            pushFollow(FOLLOW_rule__DoWhileStatement__Group__5_in_rule__DoWhileStatement__Group__433062);
             rule__DoWhileStatement__Group__5();
 
             state._fsp--;
@@ -46933,24 +46923,34 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DoWhileStatement__Group__4__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16377:1: rule__DoWhileStatement__Group__4__Impl : ( ')' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16379:1: rule__DoWhileStatement__Group__4__Impl : ( ( rule__DoWhileStatement__ConditionAssignment_4 ) ) ;
     public final void rule__DoWhileStatement__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16381:1: ( ( ')' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16382:1: ( ')' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16383:1: ( ( ( rule__DoWhileStatement__ConditionAssignment_4 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16384:1: ( ( rule__DoWhileStatement__ConditionAssignment_4 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16382:1: ( ')' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16383:1: ')'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16384:1: ( ( rule__DoWhileStatement__ConditionAssignment_4 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16385:1: ( rule__DoWhileStatement__ConditionAssignment_4 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDoWhileStatementAccess().getRightParenthesisKeyword_4()); 
+               before(grammarAccess.getDoWhileStatementAccess().getConditionAssignment_4()); 
             }
-            match(input,48,FOLLOW_48_in_rule__DoWhileStatement__Group__4__Impl33088); if (state.failed) return ;
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16386:1: ( rule__DoWhileStatement__ConditionAssignment_4 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16386:2: rule__DoWhileStatement__ConditionAssignment_4
+            {
+            pushFollow(FOLLOW_rule__DoWhileStatement__ConditionAssignment_4_in_rule__DoWhileStatement__Group__4__Impl33089);
+            rule__DoWhileStatement__ConditionAssignment_4();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDoWhileStatementAccess().getRightParenthesisKeyword_4()); 
+               after(grammarAccess.getDoWhileStatementAccess().getConditionAssignment_4()); 
             }
 
             }
@@ -46974,17 +46974,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DoWhileStatement__Group__5"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16396:1: rule__DoWhileStatement__Group__5 : rule__DoWhileStatement__Group__5__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16396:1: rule__DoWhileStatement__Group__5 : rule__DoWhileStatement__Group__5__Impl rule__DoWhileStatement__Group__6 ;
     public final void rule__DoWhileStatement__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16400:1: ( rule__DoWhileStatement__Group__5__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16401:2: rule__DoWhileStatement__Group__5__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16400:1: ( rule__DoWhileStatement__Group__5__Impl rule__DoWhileStatement__Group__6 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16401:2: rule__DoWhileStatement__Group__5__Impl rule__DoWhileStatement__Group__6
             {
             pushFollow(FOLLOW_rule__DoWhileStatement__Group__5__Impl_in_rule__DoWhileStatement__Group__533119);
             rule__DoWhileStatement__Group__5__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__DoWhileStatement__Group__6_in_rule__DoWhileStatement__Group__533122);
+            rule__DoWhileStatement__Group__6();
 
             state._fsp--;
             if (state.failed) return ;
@@ -47007,24 +47012,24 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DoWhileStatement__Group__5__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16407:1: rule__DoWhileStatement__Group__5__Impl : ( ';' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16408:1: rule__DoWhileStatement__Group__5__Impl : ( ')' ) ;
     public final void rule__DoWhileStatement__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16411:1: ( ( ';' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16412:1: ( ';' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16412:1: ( ( ')' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16413:1: ( ')' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16412:1: ( ';' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16413:1: ';'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16413:1: ( ')' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16414:1: ')'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDoWhileStatementAccess().getSemicolonKeyword_5()); 
+               before(grammarAccess.getDoWhileStatementAccess().getRightParenthesisKeyword_5()); 
             }
-            match(input,43,FOLLOW_43_in_rule__DoWhileStatement__Group__5__Impl33147); if (state.failed) return ;
+            match(input,48,FOLLOW_48_in_rule__DoWhileStatement__Group__5__Impl33150); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDoWhileStatementAccess().getSemicolonKeyword_5()); 
+               after(grammarAccess.getDoWhileStatementAccess().getRightParenthesisKeyword_5()); 
             }
 
             }
@@ -47047,22 +47052,96 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__DoWhileStatement__Group__5__Impl"
 
 
+    // $ANTLR start "rule__DoWhileStatement__Group__6"
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16427:1: rule__DoWhileStatement__Group__6 : rule__DoWhileStatement__Group__6__Impl ;
+    public final void rule__DoWhileStatement__Group__6() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16431:1: ( rule__DoWhileStatement__Group__6__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16432:2: rule__DoWhileStatement__Group__6__Impl
+            {
+            pushFollow(FOLLOW_rule__DoWhileStatement__Group__6__Impl_in_rule__DoWhileStatement__Group__633181);
+            rule__DoWhileStatement__Group__6__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__DoWhileStatement__Group__6"
+
+
+    // $ANTLR start "rule__DoWhileStatement__Group__6__Impl"
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16438:1: rule__DoWhileStatement__Group__6__Impl : ( ';' ) ;
+    public final void rule__DoWhileStatement__Group__6__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16442:1: ( ( ';' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16443:1: ( ';' )
+            {
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16443:1: ( ';' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16444:1: ';'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getDoWhileStatementAccess().getSemicolonKeyword_6()); 
+            }
+            match(input,43,FOLLOW_43_in_rule__DoWhileStatement__Group__6__Impl33209); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getDoWhileStatementAccess().getSemicolonKeyword_6()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__DoWhileStatement__Group__6__Impl"
+
+
     // $ANTLR start "rule__ContinueStatement__Group__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16438:1: rule__ContinueStatement__Group__0 : rule__ContinueStatement__Group__0__Impl rule__ContinueStatement__Group__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16471:1: rule__ContinueStatement__Group__0 : rule__ContinueStatement__Group__0__Impl rule__ContinueStatement__Group__1 ;
     public final void rule__ContinueStatement__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16442:1: ( rule__ContinueStatement__Group__0__Impl rule__ContinueStatement__Group__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16443:2: rule__ContinueStatement__Group__0__Impl rule__ContinueStatement__Group__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16475:1: ( rule__ContinueStatement__Group__0__Impl rule__ContinueStatement__Group__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16476:2: rule__ContinueStatement__Group__0__Impl rule__ContinueStatement__Group__1
             {
-            pushFollow(FOLLOW_rule__ContinueStatement__Group__0__Impl_in_rule__ContinueStatement__Group__033190);
+            pushFollow(FOLLOW_rule__ContinueStatement__Group__0__Impl_in_rule__ContinueStatement__Group__033254);
             rule__ContinueStatement__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__ContinueStatement__Group__1_in_rule__ContinueStatement__Group__033193);
+            pushFollow(FOLLOW_rule__ContinueStatement__Group__1_in_rule__ContinueStatement__Group__033257);
             rule__ContinueStatement__Group__1();
 
             state._fsp--;
@@ -47086,23 +47165,23 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ContinueStatement__Group__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16450:1: rule__ContinueStatement__Group__0__Impl : ( () ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16483:1: rule__ContinueStatement__Group__0__Impl : ( () ) ;
     public final void rule__ContinueStatement__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16454:1: ( ( () ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16455:1: ( () )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16487:1: ( ( () ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16488:1: ( () )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16455:1: ( () )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16456:1: ()
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16488:1: ( () )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16489:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getContinueStatementAccess().getContinueStatementAction_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16457:1: ()
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16459:1: 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16490:1: ()
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16492:1: 
             {
             }
 
@@ -47127,21 +47206,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ContinueStatement__Group__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16469:1: rule__ContinueStatement__Group__1 : rule__ContinueStatement__Group__1__Impl rule__ContinueStatement__Group__2 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16502:1: rule__ContinueStatement__Group__1 : rule__ContinueStatement__Group__1__Impl rule__ContinueStatement__Group__2 ;
     public final void rule__ContinueStatement__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16473:1: ( rule__ContinueStatement__Group__1__Impl rule__ContinueStatement__Group__2 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16474:2: rule__ContinueStatement__Group__1__Impl rule__ContinueStatement__Group__2
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16506:1: ( rule__ContinueStatement__Group__1__Impl rule__ContinueStatement__Group__2 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16507:2: rule__ContinueStatement__Group__1__Impl rule__ContinueStatement__Group__2
             {
-            pushFollow(FOLLOW_rule__ContinueStatement__Group__1__Impl_in_rule__ContinueStatement__Group__133251);
+            pushFollow(FOLLOW_rule__ContinueStatement__Group__1__Impl_in_rule__ContinueStatement__Group__133315);
             rule__ContinueStatement__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__ContinueStatement__Group__2_in_rule__ContinueStatement__Group__133254);
+            pushFollow(FOLLOW_rule__ContinueStatement__Group__2_in_rule__ContinueStatement__Group__133318);
             rule__ContinueStatement__Group__2();
 
             state._fsp--;
@@ -47165,22 +47244,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ContinueStatement__Group__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16481:1: rule__ContinueStatement__Group__1__Impl : ( 'continue' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16514:1: rule__ContinueStatement__Group__1__Impl : ( 'continue' ) ;
     public final void rule__ContinueStatement__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16485:1: ( ( 'continue' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16486:1: ( 'continue' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16518:1: ( ( 'continue' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16519:1: ( 'continue' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16486:1: ( 'continue' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16487:1: 'continue'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16519:1: ( 'continue' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16520:1: 'continue'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getContinueStatementAccess().getContinueKeyword_1()); 
             }
-            match(input,84,FOLLOW_84_in_rule__ContinueStatement__Group__1__Impl33282); if (state.failed) return ;
+            match(input,84,FOLLOW_84_in_rule__ContinueStatement__Group__1__Impl33346); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getContinueStatementAccess().getContinueKeyword_1()); 
             }
@@ -47206,16 +47285,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ContinueStatement__Group__2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16500:1: rule__ContinueStatement__Group__2 : rule__ContinueStatement__Group__2__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16533:1: rule__ContinueStatement__Group__2 : rule__ContinueStatement__Group__2__Impl ;
     public final void rule__ContinueStatement__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16504:1: ( rule__ContinueStatement__Group__2__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16505:2: rule__ContinueStatement__Group__2__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16537:1: ( rule__ContinueStatement__Group__2__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16538:2: rule__ContinueStatement__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__ContinueStatement__Group__2__Impl_in_rule__ContinueStatement__Group__233313);
+            pushFollow(FOLLOW_rule__ContinueStatement__Group__2__Impl_in_rule__ContinueStatement__Group__233377);
             rule__ContinueStatement__Group__2__Impl();
 
             state._fsp--;
@@ -47239,22 +47318,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ContinueStatement__Group__2__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16511:1: rule__ContinueStatement__Group__2__Impl : ( ';' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16544:1: rule__ContinueStatement__Group__2__Impl : ( ';' ) ;
     public final void rule__ContinueStatement__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16515:1: ( ( ';' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16516:1: ( ';' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16548:1: ( ( ';' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16549:1: ( ';' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16516:1: ( ';' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16517:1: ';'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16549:1: ( ';' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16550:1: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getContinueStatementAccess().getSemicolonKeyword_2()); 
             }
-            match(input,43,FOLLOW_43_in_rule__ContinueStatement__Group__2__Impl33341); if (state.failed) return ;
+            match(input,43,FOLLOW_43_in_rule__ContinueStatement__Group__2__Impl33405); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getContinueStatementAccess().getSemicolonKeyword_2()); 
             }
@@ -47280,21 +47359,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BreakStatement__Group__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16536:1: rule__BreakStatement__Group__0 : rule__BreakStatement__Group__0__Impl rule__BreakStatement__Group__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16569:1: rule__BreakStatement__Group__0 : rule__BreakStatement__Group__0__Impl rule__BreakStatement__Group__1 ;
     public final void rule__BreakStatement__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16540:1: ( rule__BreakStatement__Group__0__Impl rule__BreakStatement__Group__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16541:2: rule__BreakStatement__Group__0__Impl rule__BreakStatement__Group__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16573:1: ( rule__BreakStatement__Group__0__Impl rule__BreakStatement__Group__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16574:2: rule__BreakStatement__Group__0__Impl rule__BreakStatement__Group__1
             {
-            pushFollow(FOLLOW_rule__BreakStatement__Group__0__Impl_in_rule__BreakStatement__Group__033378);
+            pushFollow(FOLLOW_rule__BreakStatement__Group__0__Impl_in_rule__BreakStatement__Group__033442);
             rule__BreakStatement__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__BreakStatement__Group__1_in_rule__BreakStatement__Group__033381);
+            pushFollow(FOLLOW_rule__BreakStatement__Group__1_in_rule__BreakStatement__Group__033445);
             rule__BreakStatement__Group__1();
 
             state._fsp--;
@@ -47318,23 +47397,23 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BreakStatement__Group__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16548:1: rule__BreakStatement__Group__0__Impl : ( () ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16581:1: rule__BreakStatement__Group__0__Impl : ( () ) ;
     public final void rule__BreakStatement__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16552:1: ( ( () ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16553:1: ( () )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16585:1: ( ( () ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16586:1: ( () )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16553:1: ( () )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16554:1: ()
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16586:1: ( () )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16587:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBreakStatementAccess().getBreakStatementAction_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16555:1: ()
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16557:1: 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16588:1: ()
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16590:1: 
             {
             }
 
@@ -47359,21 +47438,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BreakStatement__Group__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16567:1: rule__BreakStatement__Group__1 : rule__BreakStatement__Group__1__Impl rule__BreakStatement__Group__2 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16600:1: rule__BreakStatement__Group__1 : rule__BreakStatement__Group__1__Impl rule__BreakStatement__Group__2 ;
     public final void rule__BreakStatement__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16571:1: ( rule__BreakStatement__Group__1__Impl rule__BreakStatement__Group__2 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16572:2: rule__BreakStatement__Group__1__Impl rule__BreakStatement__Group__2
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16604:1: ( rule__BreakStatement__Group__1__Impl rule__BreakStatement__Group__2 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16605:2: rule__BreakStatement__Group__1__Impl rule__BreakStatement__Group__2
             {
-            pushFollow(FOLLOW_rule__BreakStatement__Group__1__Impl_in_rule__BreakStatement__Group__133439);
+            pushFollow(FOLLOW_rule__BreakStatement__Group__1__Impl_in_rule__BreakStatement__Group__133503);
             rule__BreakStatement__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__BreakStatement__Group__2_in_rule__BreakStatement__Group__133442);
+            pushFollow(FOLLOW_rule__BreakStatement__Group__2_in_rule__BreakStatement__Group__133506);
             rule__BreakStatement__Group__2();
 
             state._fsp--;
@@ -47397,22 +47476,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BreakStatement__Group__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16579:1: rule__BreakStatement__Group__1__Impl : ( 'break' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16612:1: rule__BreakStatement__Group__1__Impl : ( 'break' ) ;
     public final void rule__BreakStatement__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16583:1: ( ( 'break' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16584:1: ( 'break' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16616:1: ( ( 'break' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16617:1: ( 'break' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16584:1: ( 'break' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16585:1: 'break'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16617:1: ( 'break' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16618:1: 'break'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBreakStatementAccess().getBreakKeyword_1()); 
             }
-            match(input,85,FOLLOW_85_in_rule__BreakStatement__Group__1__Impl33470); if (state.failed) return ;
+            match(input,85,FOLLOW_85_in_rule__BreakStatement__Group__1__Impl33534); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getBreakStatementAccess().getBreakKeyword_1()); 
             }
@@ -47438,16 +47517,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BreakStatement__Group__2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16598:1: rule__BreakStatement__Group__2 : rule__BreakStatement__Group__2__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16631:1: rule__BreakStatement__Group__2 : rule__BreakStatement__Group__2__Impl ;
     public final void rule__BreakStatement__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16602:1: ( rule__BreakStatement__Group__2__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16603:2: rule__BreakStatement__Group__2__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16635:1: ( rule__BreakStatement__Group__2__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16636:2: rule__BreakStatement__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__BreakStatement__Group__2__Impl_in_rule__BreakStatement__Group__233501);
+            pushFollow(FOLLOW_rule__BreakStatement__Group__2__Impl_in_rule__BreakStatement__Group__233565);
             rule__BreakStatement__Group__2__Impl();
 
             state._fsp--;
@@ -47471,22 +47550,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BreakStatement__Group__2__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16609:1: rule__BreakStatement__Group__2__Impl : ( ';' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16642:1: rule__BreakStatement__Group__2__Impl : ( ';' ) ;
     public final void rule__BreakStatement__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16613:1: ( ( ';' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16614:1: ( ';' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16646:1: ( ( ';' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16647:1: ( ';' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16614:1: ( ';' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16615:1: ';'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16647:1: ( ';' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16648:1: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBreakStatementAccess().getSemicolonKeyword_2()); 
             }
-            match(input,43,FOLLOW_43_in_rule__BreakStatement__Group__2__Impl33529); if (state.failed) return ;
+            match(input,43,FOLLOW_43_in_rule__BreakStatement__Group__2__Impl33593); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getBreakStatementAccess().getSemicolonKeyword_2()); 
             }
@@ -47512,21 +47591,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ReturnStatement__Group__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16634:1: rule__ReturnStatement__Group__0 : rule__ReturnStatement__Group__0__Impl rule__ReturnStatement__Group__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16667:1: rule__ReturnStatement__Group__0 : rule__ReturnStatement__Group__0__Impl rule__ReturnStatement__Group__1 ;
     public final void rule__ReturnStatement__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16638:1: ( rule__ReturnStatement__Group__0__Impl rule__ReturnStatement__Group__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16639:2: rule__ReturnStatement__Group__0__Impl rule__ReturnStatement__Group__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16671:1: ( rule__ReturnStatement__Group__0__Impl rule__ReturnStatement__Group__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16672:2: rule__ReturnStatement__Group__0__Impl rule__ReturnStatement__Group__1
             {
-            pushFollow(FOLLOW_rule__ReturnStatement__Group__0__Impl_in_rule__ReturnStatement__Group__033566);
+            pushFollow(FOLLOW_rule__ReturnStatement__Group__0__Impl_in_rule__ReturnStatement__Group__033630);
             rule__ReturnStatement__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__ReturnStatement__Group__1_in_rule__ReturnStatement__Group__033569);
+            pushFollow(FOLLOW_rule__ReturnStatement__Group__1_in_rule__ReturnStatement__Group__033633);
             rule__ReturnStatement__Group__1();
 
             state._fsp--;
@@ -47550,22 +47629,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ReturnStatement__Group__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16646:1: rule__ReturnStatement__Group__0__Impl : ( 'return' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16679:1: rule__ReturnStatement__Group__0__Impl : ( 'return' ) ;
     public final void rule__ReturnStatement__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16650:1: ( ( 'return' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16651:1: ( 'return' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16683:1: ( ( 'return' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16684:1: ( 'return' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16651:1: ( 'return' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16652:1: 'return'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16684:1: ( 'return' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16685:1: 'return'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReturnStatementAccess().getReturnKeyword_0()); 
             }
-            match(input,86,FOLLOW_86_in_rule__ReturnStatement__Group__0__Impl33597); if (state.failed) return ;
+            match(input,86,FOLLOW_86_in_rule__ReturnStatement__Group__0__Impl33661); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReturnStatementAccess().getReturnKeyword_0()); 
             }
@@ -47591,21 +47670,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ReturnStatement__Group__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16665:1: rule__ReturnStatement__Group__1 : rule__ReturnStatement__Group__1__Impl rule__ReturnStatement__Group__2 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16698:1: rule__ReturnStatement__Group__1 : rule__ReturnStatement__Group__1__Impl rule__ReturnStatement__Group__2 ;
     public final void rule__ReturnStatement__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16669:1: ( rule__ReturnStatement__Group__1__Impl rule__ReturnStatement__Group__2 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16670:2: rule__ReturnStatement__Group__1__Impl rule__ReturnStatement__Group__2
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16702:1: ( rule__ReturnStatement__Group__1__Impl rule__ReturnStatement__Group__2 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16703:2: rule__ReturnStatement__Group__1__Impl rule__ReturnStatement__Group__2
             {
-            pushFollow(FOLLOW_rule__ReturnStatement__Group__1__Impl_in_rule__ReturnStatement__Group__133628);
+            pushFollow(FOLLOW_rule__ReturnStatement__Group__1__Impl_in_rule__ReturnStatement__Group__133692);
             rule__ReturnStatement__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__ReturnStatement__Group__2_in_rule__ReturnStatement__Group__133631);
+            pushFollow(FOLLOW_rule__ReturnStatement__Group__2_in_rule__ReturnStatement__Group__133695);
             rule__ReturnStatement__Group__2();
 
             state._fsp--;
@@ -47629,25 +47708,25 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ReturnStatement__Group__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16677:1: rule__ReturnStatement__Group__1__Impl : ( ( rule__ReturnStatement__ExpressionAssignment_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16710:1: rule__ReturnStatement__Group__1__Impl : ( ( rule__ReturnStatement__ExpressionAssignment_1 ) ) ;
     public final void rule__ReturnStatement__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16681:1: ( ( ( rule__ReturnStatement__ExpressionAssignment_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16682:1: ( ( rule__ReturnStatement__ExpressionAssignment_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16714:1: ( ( ( rule__ReturnStatement__ExpressionAssignment_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16715:1: ( ( rule__ReturnStatement__ExpressionAssignment_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16682:1: ( ( rule__ReturnStatement__ExpressionAssignment_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16683:1: ( rule__ReturnStatement__ExpressionAssignment_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16715:1: ( ( rule__ReturnStatement__ExpressionAssignment_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16716:1: ( rule__ReturnStatement__ExpressionAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReturnStatementAccess().getExpressionAssignment_1()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16684:1: ( rule__ReturnStatement__ExpressionAssignment_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16684:2: rule__ReturnStatement__ExpressionAssignment_1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16717:1: ( rule__ReturnStatement__ExpressionAssignment_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16717:2: rule__ReturnStatement__ExpressionAssignment_1
             {
-            pushFollow(FOLLOW_rule__ReturnStatement__ExpressionAssignment_1_in_rule__ReturnStatement__Group__1__Impl33658);
+            pushFollow(FOLLOW_rule__ReturnStatement__ExpressionAssignment_1_in_rule__ReturnStatement__Group__1__Impl33722);
             rule__ReturnStatement__ExpressionAssignment_1();
 
             state._fsp--;
@@ -47680,16 +47759,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ReturnStatement__Group__2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16694:1: rule__ReturnStatement__Group__2 : rule__ReturnStatement__Group__2__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16727:1: rule__ReturnStatement__Group__2 : rule__ReturnStatement__Group__2__Impl ;
     public final void rule__ReturnStatement__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16698:1: ( rule__ReturnStatement__Group__2__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16699:2: rule__ReturnStatement__Group__2__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16731:1: ( rule__ReturnStatement__Group__2__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16732:2: rule__ReturnStatement__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__ReturnStatement__Group__2__Impl_in_rule__ReturnStatement__Group__233688);
+            pushFollow(FOLLOW_rule__ReturnStatement__Group__2__Impl_in_rule__ReturnStatement__Group__233752);
             rule__ReturnStatement__Group__2__Impl();
 
             state._fsp--;
@@ -47713,22 +47792,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ReturnStatement__Group__2__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16705:1: rule__ReturnStatement__Group__2__Impl : ( ';' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16738:1: rule__ReturnStatement__Group__2__Impl : ( ';' ) ;
     public final void rule__ReturnStatement__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16709:1: ( ( ';' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16710:1: ( ';' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16742:1: ( ( ';' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16743:1: ( ';' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16710:1: ( ';' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16711:1: ';'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16743:1: ( ';' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16744:1: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReturnStatementAccess().getSemicolonKeyword_2()); 
             }
-            match(input,43,FOLLOW_43_in_rule__ReturnStatement__Group__2__Impl33716); if (state.failed) return ;
+            match(input,43,FOLLOW_43_in_rule__ReturnStatement__Group__2__Impl33780); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReturnStatementAccess().getSemicolonKeyword_2()); 
             }
@@ -47754,21 +47833,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16730:1: rule__Unit__Group__0 : rule__Unit__Group__0__Impl rule__Unit__Group__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16763:1: rule__Unit__Group__0 : rule__Unit__Group__0__Impl rule__Unit__Group__1 ;
     public final void rule__Unit__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16734:1: ( rule__Unit__Group__0__Impl rule__Unit__Group__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16735:2: rule__Unit__Group__0__Impl rule__Unit__Group__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16767:1: ( rule__Unit__Group__0__Impl rule__Unit__Group__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16768:2: rule__Unit__Group__0__Impl rule__Unit__Group__1
             {
-            pushFollow(FOLLOW_rule__Unit__Group__0__Impl_in_rule__Unit__Group__033753);
+            pushFollow(FOLLOW_rule__Unit__Group__0__Impl_in_rule__Unit__Group__033817);
             rule__Unit__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Unit__Group__1_in_rule__Unit__Group__033756);
+            pushFollow(FOLLOW_rule__Unit__Group__1_in_rule__Unit__Group__033820);
             rule__Unit__Group__1();
 
             state._fsp--;
@@ -47792,23 +47871,23 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16742:1: rule__Unit__Group__0__Impl : ( () ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16775:1: rule__Unit__Group__0__Impl : ( () ) ;
     public final void rule__Unit__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16746:1: ( ( () ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16747:1: ( () )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16779:1: ( ( () ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16780:1: ( () )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16747:1: ( () )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16748:1: ()
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16780:1: ( () )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16781:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getUnitAction_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16749:1: ()
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16751:1: 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16782:1: ()
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16784:1: 
             {
             }
 
@@ -47833,16 +47912,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16761:1: rule__Unit__Group__1 : rule__Unit__Group__1__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16794:1: rule__Unit__Group__1 : rule__Unit__Group__1__Impl ;
     public final void rule__Unit__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16765:1: ( rule__Unit__Group__1__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16766:2: rule__Unit__Group__1__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16798:1: ( rule__Unit__Group__1__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16799:2: rule__Unit__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__Unit__Group__1__Impl_in_rule__Unit__Group__133814);
+            pushFollow(FOLLOW_rule__Unit__Group__1__Impl_in_rule__Unit__Group__133878);
             rule__Unit__Group__1__Impl();
 
             state._fsp--;
@@ -47866,25 +47945,25 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16772:1: rule__Unit__Group__1__Impl : ( ( rule__Unit__Alternatives_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16805:1: rule__Unit__Group__1__Impl : ( ( rule__Unit__Alternatives_1 ) ) ;
     public final void rule__Unit__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16776:1: ( ( ( rule__Unit__Alternatives_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16777:1: ( ( rule__Unit__Alternatives_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16809:1: ( ( ( rule__Unit__Alternatives_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16810:1: ( ( rule__Unit__Alternatives_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16777:1: ( ( rule__Unit__Alternatives_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16778:1: ( rule__Unit__Alternatives_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16810:1: ( ( rule__Unit__Alternatives_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16811:1: ( rule__Unit__Alternatives_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getAlternatives_1()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16779:1: ( rule__Unit__Alternatives_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16779:2: rule__Unit__Alternatives_1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16812:1: ( rule__Unit__Alternatives_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16812:2: rule__Unit__Alternatives_1
             {
-            pushFollow(FOLLOW_rule__Unit__Alternatives_1_in_rule__Unit__Group__1__Impl33841);
+            pushFollow(FOLLOW_rule__Unit__Alternatives_1_in_rule__Unit__Group__1__Impl33905);
             rule__Unit__Alternatives_1();
 
             state._fsp--;
@@ -47917,21 +47996,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group_1_0__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16793:1: rule__Unit__Group_1_0__0 : rule__Unit__Group_1_0__0__Impl rule__Unit__Group_1_0__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16826:1: rule__Unit__Group_1_0__0 : rule__Unit__Group_1_0__0__Impl rule__Unit__Group_1_0__1 ;
     public final void rule__Unit__Group_1_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16797:1: ( rule__Unit__Group_1_0__0__Impl rule__Unit__Group_1_0__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16798:2: rule__Unit__Group_1_0__0__Impl rule__Unit__Group_1_0__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16830:1: ( rule__Unit__Group_1_0__0__Impl rule__Unit__Group_1_0__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16831:2: rule__Unit__Group_1_0__0__Impl rule__Unit__Group_1_0__1
             {
-            pushFollow(FOLLOW_rule__Unit__Group_1_0__0__Impl_in_rule__Unit__Group_1_0__033875);
+            pushFollow(FOLLOW_rule__Unit__Group_1_0__0__Impl_in_rule__Unit__Group_1_0__033939);
             rule__Unit__Group_1_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Unit__Group_1_0__1_in_rule__Unit__Group_1_0__033878);
+            pushFollow(FOLLOW_rule__Unit__Group_1_0__1_in_rule__Unit__Group_1_0__033942);
             rule__Unit__Group_1_0__1();
 
             state._fsp--;
@@ -47955,22 +48034,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group_1_0__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16805:1: rule__Unit__Group_1_0__0__Impl : ( '(' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16838:1: rule__Unit__Group_1_0__0__Impl : ( '(' ) ;
     public final void rule__Unit__Group_1_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16809:1: ( ( '(' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16810:1: ( '(' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16842:1: ( ( '(' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16843:1: ( '(' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16810:1: ( '(' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16811:1: '('
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16843:1: ( '(' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16844:1: '('
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getLeftParenthesisKeyword_1_0_0()); 
             }
-            match(input,47,FOLLOW_47_in_rule__Unit__Group_1_0__0__Impl33906); if (state.failed) return ;
+            match(input,47,FOLLOW_47_in_rule__Unit__Group_1_0__0__Impl33970); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getLeftParenthesisKeyword_1_0_0()); 
             }
@@ -47996,16 +48075,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group_1_0__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16824:1: rule__Unit__Group_1_0__1 : rule__Unit__Group_1_0__1__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16857:1: rule__Unit__Group_1_0__1 : rule__Unit__Group_1_0__1__Impl ;
     public final void rule__Unit__Group_1_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16828:1: ( rule__Unit__Group_1_0__1__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16829:2: rule__Unit__Group_1_0__1__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16861:1: ( rule__Unit__Group_1_0__1__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16862:2: rule__Unit__Group_1_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__Unit__Group_1_0__1__Impl_in_rule__Unit__Group_1_0__133937);
+            pushFollow(FOLLOW_rule__Unit__Group_1_0__1__Impl_in_rule__Unit__Group_1_0__134001);
             rule__Unit__Group_1_0__1__Impl();
 
             state._fsp--;
@@ -48029,22 +48108,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group_1_0__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16835:1: rule__Unit__Group_1_0__1__Impl : ( ')' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16868:1: rule__Unit__Group_1_0__1__Impl : ( ')' ) ;
     public final void rule__Unit__Group_1_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16839:1: ( ( ')' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16840:1: ( ')' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16872:1: ( ( ')' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16873:1: ( ')' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16840:1: ( ')' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16841:1: ')'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16873:1: ( ')' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16874:1: ')'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getRightParenthesisKeyword_1_0_1()); 
             }
-            match(input,48,FOLLOW_48_in_rule__Unit__Group_1_0__1__Impl33965); if (state.failed) return ;
+            match(input,48,FOLLOW_48_in_rule__Unit__Group_1_0__1__Impl34029); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getRightParenthesisKeyword_1_0_1()); 
             }
@@ -48070,21 +48149,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group_1_1__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16858:1: rule__Unit__Group_1_1__0 : rule__Unit__Group_1_1__0__Impl rule__Unit__Group_1_1__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16891:1: rule__Unit__Group_1_1__0 : rule__Unit__Group_1_1__0__Impl rule__Unit__Group_1_1__1 ;
     public final void rule__Unit__Group_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16862:1: ( rule__Unit__Group_1_1__0__Impl rule__Unit__Group_1_1__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16863:2: rule__Unit__Group_1_1__0__Impl rule__Unit__Group_1_1__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16895:1: ( rule__Unit__Group_1_1__0__Impl rule__Unit__Group_1_1__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16896:2: rule__Unit__Group_1_1__0__Impl rule__Unit__Group_1_1__1
             {
-            pushFollow(FOLLOW_rule__Unit__Group_1_1__0__Impl_in_rule__Unit__Group_1_1__034000);
+            pushFollow(FOLLOW_rule__Unit__Group_1_1__0__Impl_in_rule__Unit__Group_1_1__034064);
             rule__Unit__Group_1_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Unit__Group_1_1__1_in_rule__Unit__Group_1_1__034003);
+            pushFollow(FOLLOW_rule__Unit__Group_1_1__1_in_rule__Unit__Group_1_1__034067);
             rule__Unit__Group_1_1__1();
 
             state._fsp--;
@@ -48108,22 +48187,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group_1_1__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16870:1: rule__Unit__Group_1_1__0__Impl : ( '(' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16903:1: rule__Unit__Group_1_1__0__Impl : ( '(' ) ;
     public final void rule__Unit__Group_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16874:1: ( ( '(' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16875:1: ( '(' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16907:1: ( ( '(' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16908:1: ( '(' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16875:1: ( '(' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16876:1: '('
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16908:1: ( '(' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16909:1: '('
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getLeftParenthesisKeyword_1_1_0()); 
             }
-            match(input,47,FOLLOW_47_in_rule__Unit__Group_1_1__0__Impl34031); if (state.failed) return ;
+            match(input,47,FOLLOW_47_in_rule__Unit__Group_1_1__0__Impl34095); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getLeftParenthesisKeyword_1_1_0()); 
             }
@@ -48149,21 +48228,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group_1_1__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16889:1: rule__Unit__Group_1_1__1 : rule__Unit__Group_1_1__1__Impl rule__Unit__Group_1_1__2 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16922:1: rule__Unit__Group_1_1__1 : rule__Unit__Group_1_1__1__Impl rule__Unit__Group_1_1__2 ;
     public final void rule__Unit__Group_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16893:1: ( rule__Unit__Group_1_1__1__Impl rule__Unit__Group_1_1__2 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16894:2: rule__Unit__Group_1_1__1__Impl rule__Unit__Group_1_1__2
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16926:1: ( rule__Unit__Group_1_1__1__Impl rule__Unit__Group_1_1__2 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16927:2: rule__Unit__Group_1_1__1__Impl rule__Unit__Group_1_1__2
             {
-            pushFollow(FOLLOW_rule__Unit__Group_1_1__1__Impl_in_rule__Unit__Group_1_1__134062);
+            pushFollow(FOLLOW_rule__Unit__Group_1_1__1__Impl_in_rule__Unit__Group_1_1__134126);
             rule__Unit__Group_1_1__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Unit__Group_1_1__2_in_rule__Unit__Group_1_1__134065);
+            pushFollow(FOLLOW_rule__Unit__Group_1_1__2_in_rule__Unit__Group_1_1__134129);
             rule__Unit__Group_1_1__2();
 
             state._fsp--;
@@ -48187,25 +48266,25 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group_1_1__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16901:1: rule__Unit__Group_1_1__1__Impl : ( ( rule__Unit__NumeratorAssignment_1_1_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16934:1: rule__Unit__Group_1_1__1__Impl : ( ( rule__Unit__NumeratorAssignment_1_1_1 ) ) ;
     public final void rule__Unit__Group_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16905:1: ( ( ( rule__Unit__NumeratorAssignment_1_1_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16906:1: ( ( rule__Unit__NumeratorAssignment_1_1_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16938:1: ( ( ( rule__Unit__NumeratorAssignment_1_1_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16939:1: ( ( rule__Unit__NumeratorAssignment_1_1_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16906:1: ( ( rule__Unit__NumeratorAssignment_1_1_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16907:1: ( rule__Unit__NumeratorAssignment_1_1_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16939:1: ( ( rule__Unit__NumeratorAssignment_1_1_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16940:1: ( rule__Unit__NumeratorAssignment_1_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getNumeratorAssignment_1_1_1()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16908:1: ( rule__Unit__NumeratorAssignment_1_1_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16908:2: rule__Unit__NumeratorAssignment_1_1_1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16941:1: ( rule__Unit__NumeratorAssignment_1_1_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16941:2: rule__Unit__NumeratorAssignment_1_1_1
             {
-            pushFollow(FOLLOW_rule__Unit__NumeratorAssignment_1_1_1_in_rule__Unit__Group_1_1__1__Impl34092);
+            pushFollow(FOLLOW_rule__Unit__NumeratorAssignment_1_1_1_in_rule__Unit__Group_1_1__1__Impl34156);
             rule__Unit__NumeratorAssignment_1_1_1();
 
             state._fsp--;
@@ -48238,21 +48317,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group_1_1__2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16918:1: rule__Unit__Group_1_1__2 : rule__Unit__Group_1_1__2__Impl rule__Unit__Group_1_1__3 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16951:1: rule__Unit__Group_1_1__2 : rule__Unit__Group_1_1__2__Impl rule__Unit__Group_1_1__3 ;
     public final void rule__Unit__Group_1_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16922:1: ( rule__Unit__Group_1_1__2__Impl rule__Unit__Group_1_1__3 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16923:2: rule__Unit__Group_1_1__2__Impl rule__Unit__Group_1_1__3
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16955:1: ( rule__Unit__Group_1_1__2__Impl rule__Unit__Group_1_1__3 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16956:2: rule__Unit__Group_1_1__2__Impl rule__Unit__Group_1_1__3
             {
-            pushFollow(FOLLOW_rule__Unit__Group_1_1__2__Impl_in_rule__Unit__Group_1_1__234122);
+            pushFollow(FOLLOW_rule__Unit__Group_1_1__2__Impl_in_rule__Unit__Group_1_1__234186);
             rule__Unit__Group_1_1__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Unit__Group_1_1__3_in_rule__Unit__Group_1_1__234125);
+            pushFollow(FOLLOW_rule__Unit__Group_1_1__3_in_rule__Unit__Group_1_1__234189);
             rule__Unit__Group_1_1__3();
 
             state._fsp--;
@@ -48276,22 +48355,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group_1_1__2__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16930:1: rule__Unit__Group_1_1__2__Impl : ( ( rule__Unit__Group_1_1_2__0 )? ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16963:1: rule__Unit__Group_1_1__2__Impl : ( ( rule__Unit__Group_1_1_2__0 )? ) ;
     public final void rule__Unit__Group_1_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16934:1: ( ( ( rule__Unit__Group_1_1_2__0 )? ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16935:1: ( ( rule__Unit__Group_1_1_2__0 )? )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16967:1: ( ( ( rule__Unit__Group_1_1_2__0 )? ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16968:1: ( ( rule__Unit__Group_1_1_2__0 )? )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16935:1: ( ( rule__Unit__Group_1_1_2__0 )? )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16936:1: ( rule__Unit__Group_1_1_2__0 )?
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16968:1: ( ( rule__Unit__Group_1_1_2__0 )? )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16969:1: ( rule__Unit__Group_1_1_2__0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getGroup_1_1_2()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16937:1: ( rule__Unit__Group_1_1_2__0 )?
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16970:1: ( rule__Unit__Group_1_1_2__0 )?
             int alt102=2;
             int LA102_0 = input.LA(1);
 
@@ -48300,9 +48379,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             }
             switch (alt102) {
                 case 1 :
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16937:2: rule__Unit__Group_1_1_2__0
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16970:2: rule__Unit__Group_1_1_2__0
                     {
-                    pushFollow(FOLLOW_rule__Unit__Group_1_1_2__0_in_rule__Unit__Group_1_1__2__Impl34152);
+                    pushFollow(FOLLOW_rule__Unit__Group_1_1_2__0_in_rule__Unit__Group_1_1__2__Impl34216);
                     rule__Unit__Group_1_1_2__0();
 
                     state._fsp--;
@@ -48338,16 +48417,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group_1_1__3"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16947:1: rule__Unit__Group_1_1__3 : rule__Unit__Group_1_1__3__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16980:1: rule__Unit__Group_1_1__3 : rule__Unit__Group_1_1__3__Impl ;
     public final void rule__Unit__Group_1_1__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16951:1: ( rule__Unit__Group_1_1__3__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16952:2: rule__Unit__Group_1_1__3__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16984:1: ( rule__Unit__Group_1_1__3__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16985:2: rule__Unit__Group_1_1__3__Impl
             {
-            pushFollow(FOLLOW_rule__Unit__Group_1_1__3__Impl_in_rule__Unit__Group_1_1__334183);
+            pushFollow(FOLLOW_rule__Unit__Group_1_1__3__Impl_in_rule__Unit__Group_1_1__334247);
             rule__Unit__Group_1_1__3__Impl();
 
             state._fsp--;
@@ -48371,22 +48450,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group_1_1__3__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16958:1: rule__Unit__Group_1_1__3__Impl : ( ')' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16991:1: rule__Unit__Group_1_1__3__Impl : ( ')' ) ;
     public final void rule__Unit__Group_1_1__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16962:1: ( ( ')' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16963:1: ( ')' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16995:1: ( ( ')' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16996:1: ( ')' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16963:1: ( ')' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16964:1: ')'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16996:1: ( ')' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16997:1: ')'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getRightParenthesisKeyword_1_1_3()); 
             }
-            match(input,48,FOLLOW_48_in_rule__Unit__Group_1_1__3__Impl34211); if (state.failed) return ;
+            match(input,48,FOLLOW_48_in_rule__Unit__Group_1_1__3__Impl34275); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getRightParenthesisKeyword_1_1_3()); 
             }
@@ -48412,21 +48491,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group_1_1_2__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16985:1: rule__Unit__Group_1_1_2__0 : rule__Unit__Group_1_1_2__0__Impl rule__Unit__Group_1_1_2__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17018:1: rule__Unit__Group_1_1_2__0 : rule__Unit__Group_1_1_2__0__Impl rule__Unit__Group_1_1_2__1 ;
     public final void rule__Unit__Group_1_1_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16989:1: ( rule__Unit__Group_1_1_2__0__Impl rule__Unit__Group_1_1_2__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16990:2: rule__Unit__Group_1_1_2__0__Impl rule__Unit__Group_1_1_2__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17022:1: ( rule__Unit__Group_1_1_2__0__Impl rule__Unit__Group_1_1_2__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17023:2: rule__Unit__Group_1_1_2__0__Impl rule__Unit__Group_1_1_2__1
             {
-            pushFollow(FOLLOW_rule__Unit__Group_1_1_2__0__Impl_in_rule__Unit__Group_1_1_2__034250);
+            pushFollow(FOLLOW_rule__Unit__Group_1_1_2__0__Impl_in_rule__Unit__Group_1_1_2__034314);
             rule__Unit__Group_1_1_2__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Unit__Group_1_1_2__1_in_rule__Unit__Group_1_1_2__034253);
+            pushFollow(FOLLOW_rule__Unit__Group_1_1_2__1_in_rule__Unit__Group_1_1_2__034317);
             rule__Unit__Group_1_1_2__1();
 
             state._fsp--;
@@ -48450,22 +48529,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group_1_1_2__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16997:1: rule__Unit__Group_1_1_2__0__Impl : ( '/' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17030:1: rule__Unit__Group_1_1_2__0__Impl : ( '/' ) ;
     public final void rule__Unit__Group_1_1_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17001:1: ( ( '/' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17002:1: ( '/' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17034:1: ( ( '/' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17035:1: ( '/' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17002:1: ( '/' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17003:1: '/'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17035:1: ( '/' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17036:1: '/'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getSolidusKeyword_1_1_2_0()); 
             }
-            match(input,31,FOLLOW_31_in_rule__Unit__Group_1_1_2__0__Impl34281); if (state.failed) return ;
+            match(input,31,FOLLOW_31_in_rule__Unit__Group_1_1_2__0__Impl34345); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getSolidusKeyword_1_1_2_0()); 
             }
@@ -48491,16 +48570,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group_1_1_2__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17016:1: rule__Unit__Group_1_1_2__1 : rule__Unit__Group_1_1_2__1__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17049:1: rule__Unit__Group_1_1_2__1 : rule__Unit__Group_1_1_2__1__Impl ;
     public final void rule__Unit__Group_1_1_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17020:1: ( rule__Unit__Group_1_1_2__1__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17021:2: rule__Unit__Group_1_1_2__1__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17053:1: ( rule__Unit__Group_1_1_2__1__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17054:2: rule__Unit__Group_1_1_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__Unit__Group_1_1_2__1__Impl_in_rule__Unit__Group_1_1_2__134312);
+            pushFollow(FOLLOW_rule__Unit__Group_1_1_2__1__Impl_in_rule__Unit__Group_1_1_2__134376);
             rule__Unit__Group_1_1_2__1__Impl();
 
             state._fsp--;
@@ -48524,25 +48603,25 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__Group_1_1_2__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17027:1: rule__Unit__Group_1_1_2__1__Impl : ( ( rule__Unit__DenominatorAssignment_1_1_2_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17060:1: rule__Unit__Group_1_1_2__1__Impl : ( ( rule__Unit__DenominatorAssignment_1_1_2_1 ) ) ;
     public final void rule__Unit__Group_1_1_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17031:1: ( ( ( rule__Unit__DenominatorAssignment_1_1_2_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17032:1: ( ( rule__Unit__DenominatorAssignment_1_1_2_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17064:1: ( ( ( rule__Unit__DenominatorAssignment_1_1_2_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17065:1: ( ( rule__Unit__DenominatorAssignment_1_1_2_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17032:1: ( ( rule__Unit__DenominatorAssignment_1_1_2_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17033:1: ( rule__Unit__DenominatorAssignment_1_1_2_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17065:1: ( ( rule__Unit__DenominatorAssignment_1_1_2_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17066:1: ( rule__Unit__DenominatorAssignment_1_1_2_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getDenominatorAssignment_1_1_2_1()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17034:1: ( rule__Unit__DenominatorAssignment_1_1_2_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17034:2: rule__Unit__DenominatorAssignment_1_1_2_1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17067:1: ( rule__Unit__DenominatorAssignment_1_1_2_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17067:2: rule__Unit__DenominatorAssignment_1_1_2_1
             {
-            pushFollow(FOLLOW_rule__Unit__DenominatorAssignment_1_1_2_1_in_rule__Unit__Group_1_1_2__1__Impl34339);
+            pushFollow(FOLLOW_rule__Unit__DenominatorAssignment_1_1_2_1_in_rule__Unit__Group_1_1_2__1__Impl34403);
             rule__Unit__DenominatorAssignment_1_1_2_1();
 
             state._fsp--;
@@ -48575,21 +48654,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExplicitUnit__Group__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17048:1: rule__ExplicitUnit__Group__0 : rule__ExplicitUnit__Group__0__Impl rule__ExplicitUnit__Group__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17081:1: rule__ExplicitUnit__Group__0 : rule__ExplicitUnit__Group__0__Impl rule__ExplicitUnit__Group__1 ;
     public final void rule__ExplicitUnit__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17052:1: ( rule__ExplicitUnit__Group__0__Impl rule__ExplicitUnit__Group__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17053:2: rule__ExplicitUnit__Group__0__Impl rule__ExplicitUnit__Group__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17085:1: ( rule__ExplicitUnit__Group__0__Impl rule__ExplicitUnit__Group__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17086:2: rule__ExplicitUnit__Group__0__Impl rule__ExplicitUnit__Group__1
             {
-            pushFollow(FOLLOW_rule__ExplicitUnit__Group__0__Impl_in_rule__ExplicitUnit__Group__034373);
+            pushFollow(FOLLOW_rule__ExplicitUnit__Group__0__Impl_in_rule__ExplicitUnit__Group__034437);
             rule__ExplicitUnit__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__ExplicitUnit__Group__1_in_rule__ExplicitUnit__Group__034376);
+            pushFollow(FOLLOW_rule__ExplicitUnit__Group__1_in_rule__ExplicitUnit__Group__034440);
             rule__ExplicitUnit__Group__1();
 
             state._fsp--;
@@ -48613,22 +48692,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExplicitUnit__Group__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17060:1: rule__ExplicitUnit__Group__0__Impl : ( '(' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17093:1: rule__ExplicitUnit__Group__0__Impl : ( '(' ) ;
     public final void rule__ExplicitUnit__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17064:1: ( ( '(' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17065:1: ( '(' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17097:1: ( ( '(' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17098:1: ( '(' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17065:1: ( '(' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17066:1: '('
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17098:1: ( '(' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17099:1: '('
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getExplicitUnitAccess().getLeftParenthesisKeyword_0()); 
             }
-            match(input,47,FOLLOW_47_in_rule__ExplicitUnit__Group__0__Impl34404); if (state.failed) return ;
+            match(input,47,FOLLOW_47_in_rule__ExplicitUnit__Group__0__Impl34468); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getExplicitUnitAccess().getLeftParenthesisKeyword_0()); 
             }
@@ -48654,21 +48733,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExplicitUnit__Group__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17079:1: rule__ExplicitUnit__Group__1 : rule__ExplicitUnit__Group__1__Impl rule__ExplicitUnit__Group__2 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17112:1: rule__ExplicitUnit__Group__1 : rule__ExplicitUnit__Group__1__Impl rule__ExplicitUnit__Group__2 ;
     public final void rule__ExplicitUnit__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17083:1: ( rule__ExplicitUnit__Group__1__Impl rule__ExplicitUnit__Group__2 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17084:2: rule__ExplicitUnit__Group__1__Impl rule__ExplicitUnit__Group__2
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17116:1: ( rule__ExplicitUnit__Group__1__Impl rule__ExplicitUnit__Group__2 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17117:2: rule__ExplicitUnit__Group__1__Impl rule__ExplicitUnit__Group__2
             {
-            pushFollow(FOLLOW_rule__ExplicitUnit__Group__1__Impl_in_rule__ExplicitUnit__Group__134435);
+            pushFollow(FOLLOW_rule__ExplicitUnit__Group__1__Impl_in_rule__ExplicitUnit__Group__134499);
             rule__ExplicitUnit__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__ExplicitUnit__Group__2_in_rule__ExplicitUnit__Group__134438);
+            pushFollow(FOLLOW_rule__ExplicitUnit__Group__2_in_rule__ExplicitUnit__Group__134502);
             rule__ExplicitUnit__Group__2();
 
             state._fsp--;
@@ -48692,25 +48771,25 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExplicitUnit__Group__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17091:1: rule__ExplicitUnit__Group__1__Impl : ( ( rule__ExplicitUnit__NumeratorAssignment_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17124:1: rule__ExplicitUnit__Group__1__Impl : ( ( rule__ExplicitUnit__NumeratorAssignment_1 ) ) ;
     public final void rule__ExplicitUnit__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17095:1: ( ( ( rule__ExplicitUnit__NumeratorAssignment_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17096:1: ( ( rule__ExplicitUnit__NumeratorAssignment_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17128:1: ( ( ( rule__ExplicitUnit__NumeratorAssignment_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17129:1: ( ( rule__ExplicitUnit__NumeratorAssignment_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17096:1: ( ( rule__ExplicitUnit__NumeratorAssignment_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17097:1: ( rule__ExplicitUnit__NumeratorAssignment_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17129:1: ( ( rule__ExplicitUnit__NumeratorAssignment_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17130:1: ( rule__ExplicitUnit__NumeratorAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getExplicitUnitAccess().getNumeratorAssignment_1()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17098:1: ( rule__ExplicitUnit__NumeratorAssignment_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17098:2: rule__ExplicitUnit__NumeratorAssignment_1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17131:1: ( rule__ExplicitUnit__NumeratorAssignment_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17131:2: rule__ExplicitUnit__NumeratorAssignment_1
             {
-            pushFollow(FOLLOW_rule__ExplicitUnit__NumeratorAssignment_1_in_rule__ExplicitUnit__Group__1__Impl34465);
+            pushFollow(FOLLOW_rule__ExplicitUnit__NumeratorAssignment_1_in_rule__ExplicitUnit__Group__1__Impl34529);
             rule__ExplicitUnit__NumeratorAssignment_1();
 
             state._fsp--;
@@ -48743,21 +48822,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExplicitUnit__Group__2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17108:1: rule__ExplicitUnit__Group__2 : rule__ExplicitUnit__Group__2__Impl rule__ExplicitUnit__Group__3 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17141:1: rule__ExplicitUnit__Group__2 : rule__ExplicitUnit__Group__2__Impl rule__ExplicitUnit__Group__3 ;
     public final void rule__ExplicitUnit__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17112:1: ( rule__ExplicitUnit__Group__2__Impl rule__ExplicitUnit__Group__3 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17113:2: rule__ExplicitUnit__Group__2__Impl rule__ExplicitUnit__Group__3
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17145:1: ( rule__ExplicitUnit__Group__2__Impl rule__ExplicitUnit__Group__3 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17146:2: rule__ExplicitUnit__Group__2__Impl rule__ExplicitUnit__Group__3
             {
-            pushFollow(FOLLOW_rule__ExplicitUnit__Group__2__Impl_in_rule__ExplicitUnit__Group__234495);
+            pushFollow(FOLLOW_rule__ExplicitUnit__Group__2__Impl_in_rule__ExplicitUnit__Group__234559);
             rule__ExplicitUnit__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__ExplicitUnit__Group__3_in_rule__ExplicitUnit__Group__234498);
+            pushFollow(FOLLOW_rule__ExplicitUnit__Group__3_in_rule__ExplicitUnit__Group__234562);
             rule__ExplicitUnit__Group__3();
 
             state._fsp--;
@@ -48781,22 +48860,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExplicitUnit__Group__2__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17120:1: rule__ExplicitUnit__Group__2__Impl : ( ( rule__ExplicitUnit__Group_2__0 )? ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17153:1: rule__ExplicitUnit__Group__2__Impl : ( ( rule__ExplicitUnit__Group_2__0 )? ) ;
     public final void rule__ExplicitUnit__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17124:1: ( ( ( rule__ExplicitUnit__Group_2__0 )? ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17125:1: ( ( rule__ExplicitUnit__Group_2__0 )? )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17157:1: ( ( ( rule__ExplicitUnit__Group_2__0 )? ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17158:1: ( ( rule__ExplicitUnit__Group_2__0 )? )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17125:1: ( ( rule__ExplicitUnit__Group_2__0 )? )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17126:1: ( rule__ExplicitUnit__Group_2__0 )?
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17158:1: ( ( rule__ExplicitUnit__Group_2__0 )? )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17159:1: ( rule__ExplicitUnit__Group_2__0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getExplicitUnitAccess().getGroup_2()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17127:1: ( rule__ExplicitUnit__Group_2__0 )?
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17160:1: ( rule__ExplicitUnit__Group_2__0 )?
             int alt103=2;
             int LA103_0 = input.LA(1);
 
@@ -48805,9 +48884,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             }
             switch (alt103) {
                 case 1 :
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17127:2: rule__ExplicitUnit__Group_2__0
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17160:2: rule__ExplicitUnit__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__ExplicitUnit__Group_2__0_in_rule__ExplicitUnit__Group__2__Impl34525);
+                    pushFollow(FOLLOW_rule__ExplicitUnit__Group_2__0_in_rule__ExplicitUnit__Group__2__Impl34589);
                     rule__ExplicitUnit__Group_2__0();
 
                     state._fsp--;
@@ -48843,16 +48922,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExplicitUnit__Group__3"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17137:1: rule__ExplicitUnit__Group__3 : rule__ExplicitUnit__Group__3__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17170:1: rule__ExplicitUnit__Group__3 : rule__ExplicitUnit__Group__3__Impl ;
     public final void rule__ExplicitUnit__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17141:1: ( rule__ExplicitUnit__Group__3__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17142:2: rule__ExplicitUnit__Group__3__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17174:1: ( rule__ExplicitUnit__Group__3__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17175:2: rule__ExplicitUnit__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__ExplicitUnit__Group__3__Impl_in_rule__ExplicitUnit__Group__334556);
+            pushFollow(FOLLOW_rule__ExplicitUnit__Group__3__Impl_in_rule__ExplicitUnit__Group__334620);
             rule__ExplicitUnit__Group__3__Impl();
 
             state._fsp--;
@@ -48876,22 +48955,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExplicitUnit__Group__3__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17148:1: rule__ExplicitUnit__Group__3__Impl : ( ')' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17181:1: rule__ExplicitUnit__Group__3__Impl : ( ')' ) ;
     public final void rule__ExplicitUnit__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17152:1: ( ( ')' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17153:1: ( ')' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17185:1: ( ( ')' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17186:1: ( ')' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17153:1: ( ')' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17154:1: ')'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17186:1: ( ')' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17187:1: ')'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getExplicitUnitAccess().getRightParenthesisKeyword_3()); 
             }
-            match(input,48,FOLLOW_48_in_rule__ExplicitUnit__Group__3__Impl34584); if (state.failed) return ;
+            match(input,48,FOLLOW_48_in_rule__ExplicitUnit__Group__3__Impl34648); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getExplicitUnitAccess().getRightParenthesisKeyword_3()); 
             }
@@ -48917,21 +48996,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExplicitUnit__Group_2__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17175:1: rule__ExplicitUnit__Group_2__0 : rule__ExplicitUnit__Group_2__0__Impl rule__ExplicitUnit__Group_2__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17208:1: rule__ExplicitUnit__Group_2__0 : rule__ExplicitUnit__Group_2__0__Impl rule__ExplicitUnit__Group_2__1 ;
     public final void rule__ExplicitUnit__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17179:1: ( rule__ExplicitUnit__Group_2__0__Impl rule__ExplicitUnit__Group_2__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17180:2: rule__ExplicitUnit__Group_2__0__Impl rule__ExplicitUnit__Group_2__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17212:1: ( rule__ExplicitUnit__Group_2__0__Impl rule__ExplicitUnit__Group_2__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17213:2: rule__ExplicitUnit__Group_2__0__Impl rule__ExplicitUnit__Group_2__1
             {
-            pushFollow(FOLLOW_rule__ExplicitUnit__Group_2__0__Impl_in_rule__ExplicitUnit__Group_2__034623);
+            pushFollow(FOLLOW_rule__ExplicitUnit__Group_2__0__Impl_in_rule__ExplicitUnit__Group_2__034687);
             rule__ExplicitUnit__Group_2__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__ExplicitUnit__Group_2__1_in_rule__ExplicitUnit__Group_2__034626);
+            pushFollow(FOLLOW_rule__ExplicitUnit__Group_2__1_in_rule__ExplicitUnit__Group_2__034690);
             rule__ExplicitUnit__Group_2__1();
 
             state._fsp--;
@@ -48955,22 +49034,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExplicitUnit__Group_2__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17187:1: rule__ExplicitUnit__Group_2__0__Impl : ( '/' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17220:1: rule__ExplicitUnit__Group_2__0__Impl : ( '/' ) ;
     public final void rule__ExplicitUnit__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17191:1: ( ( '/' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17192:1: ( '/' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17224:1: ( ( '/' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17225:1: ( '/' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17192:1: ( '/' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17193:1: '/'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17225:1: ( '/' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17226:1: '/'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getExplicitUnitAccess().getSolidusKeyword_2_0()); 
             }
-            match(input,31,FOLLOW_31_in_rule__ExplicitUnit__Group_2__0__Impl34654); if (state.failed) return ;
+            match(input,31,FOLLOW_31_in_rule__ExplicitUnit__Group_2__0__Impl34718); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getExplicitUnitAccess().getSolidusKeyword_2_0()); 
             }
@@ -48996,16 +49075,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExplicitUnit__Group_2__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17206:1: rule__ExplicitUnit__Group_2__1 : rule__ExplicitUnit__Group_2__1__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17239:1: rule__ExplicitUnit__Group_2__1 : rule__ExplicitUnit__Group_2__1__Impl ;
     public final void rule__ExplicitUnit__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17210:1: ( rule__ExplicitUnit__Group_2__1__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17211:2: rule__ExplicitUnit__Group_2__1__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17243:1: ( rule__ExplicitUnit__Group_2__1__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17244:2: rule__ExplicitUnit__Group_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__ExplicitUnit__Group_2__1__Impl_in_rule__ExplicitUnit__Group_2__134685);
+            pushFollow(FOLLOW_rule__ExplicitUnit__Group_2__1__Impl_in_rule__ExplicitUnit__Group_2__134749);
             rule__ExplicitUnit__Group_2__1__Impl();
 
             state._fsp--;
@@ -49029,25 +49108,25 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExplicitUnit__Group_2__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17217:1: rule__ExplicitUnit__Group_2__1__Impl : ( ( rule__ExplicitUnit__DenominatorAssignment_2_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17250:1: rule__ExplicitUnit__Group_2__1__Impl : ( ( rule__ExplicitUnit__DenominatorAssignment_2_1 ) ) ;
     public final void rule__ExplicitUnit__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17221:1: ( ( ( rule__ExplicitUnit__DenominatorAssignment_2_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17222:1: ( ( rule__ExplicitUnit__DenominatorAssignment_2_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17254:1: ( ( ( rule__ExplicitUnit__DenominatorAssignment_2_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17255:1: ( ( rule__ExplicitUnit__DenominatorAssignment_2_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17222:1: ( ( rule__ExplicitUnit__DenominatorAssignment_2_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17223:1: ( rule__ExplicitUnit__DenominatorAssignment_2_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17255:1: ( ( rule__ExplicitUnit__DenominatorAssignment_2_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17256:1: ( rule__ExplicitUnit__DenominatorAssignment_2_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getExplicitUnitAccess().getDenominatorAssignment_2_1()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17224:1: ( rule__ExplicitUnit__DenominatorAssignment_2_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17224:2: rule__ExplicitUnit__DenominatorAssignment_2_1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17257:1: ( rule__ExplicitUnit__DenominatorAssignment_2_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17257:2: rule__ExplicitUnit__DenominatorAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__ExplicitUnit__DenominatorAssignment_2_1_in_rule__ExplicitUnit__Group_2__1__Impl34712);
+            pushFollow(FOLLOW_rule__ExplicitUnit__DenominatorAssignment_2_1_in_rule__ExplicitUnit__Group_2__1__Impl34776);
             rule__ExplicitUnit__DenominatorAssignment_2_1();
 
             state._fsp--;
@@ -49080,21 +49159,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitNumerator__Group_0__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17238:1: rule__UnitNumerator__Group_0__0 : rule__UnitNumerator__Group_0__0__Impl rule__UnitNumerator__Group_0__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17271:1: rule__UnitNumerator__Group_0__0 : rule__UnitNumerator__Group_0__0__Impl rule__UnitNumerator__Group_0__1 ;
     public final void rule__UnitNumerator__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17242:1: ( rule__UnitNumerator__Group_0__0__Impl rule__UnitNumerator__Group_0__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17243:2: rule__UnitNumerator__Group_0__0__Impl rule__UnitNumerator__Group_0__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17275:1: ( rule__UnitNumerator__Group_0__0__Impl rule__UnitNumerator__Group_0__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17276:2: rule__UnitNumerator__Group_0__0__Impl rule__UnitNumerator__Group_0__1
             {
-            pushFollow(FOLLOW_rule__UnitNumerator__Group_0__0__Impl_in_rule__UnitNumerator__Group_0__034746);
+            pushFollow(FOLLOW_rule__UnitNumerator__Group_0__0__Impl_in_rule__UnitNumerator__Group_0__034810);
             rule__UnitNumerator__Group_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__UnitNumerator__Group_0__1_in_rule__UnitNumerator__Group_0__034749);
+            pushFollow(FOLLOW_rule__UnitNumerator__Group_0__1_in_rule__UnitNumerator__Group_0__034813);
             rule__UnitNumerator__Group_0__1();
 
             state._fsp--;
@@ -49118,23 +49197,23 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitNumerator__Group_0__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17250:1: rule__UnitNumerator__Group_0__0__Impl : ( () ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17283:1: rule__UnitNumerator__Group_0__0__Impl : ( () ) ;
     public final void rule__UnitNumerator__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17254:1: ( ( () ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17255:1: ( () )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17287:1: ( ( () ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17288:1: ( () )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17255:1: ( () )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17256:1: ()
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17288:1: ( () )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17289:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitNumeratorAccess().getUnitNumeratorAction_0_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17257:1: ()
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17259:1: 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17290:1: ()
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17292:1: 
             {
             }
 
@@ -49159,16 +49238,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitNumerator__Group_0__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17269:1: rule__UnitNumerator__Group_0__1 : rule__UnitNumerator__Group_0__1__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17302:1: rule__UnitNumerator__Group_0__1 : rule__UnitNumerator__Group_0__1__Impl ;
     public final void rule__UnitNumerator__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17273:1: ( rule__UnitNumerator__Group_0__1__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17274:2: rule__UnitNumerator__Group_0__1__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17306:1: ( rule__UnitNumerator__Group_0__1__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17307:2: rule__UnitNumerator__Group_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__UnitNumerator__Group_0__1__Impl_in_rule__UnitNumerator__Group_0__134807);
+            pushFollow(FOLLOW_rule__UnitNumerator__Group_0__1__Impl_in_rule__UnitNumerator__Group_0__134871);
             rule__UnitNumerator__Group_0__1__Impl();
 
             state._fsp--;
@@ -49192,22 +49271,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitNumerator__Group_0__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17280:1: rule__UnitNumerator__Group_0__1__Impl : ( RULE_ONE ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17313:1: rule__UnitNumerator__Group_0__1__Impl : ( RULE_ONE ) ;
     public final void rule__UnitNumerator__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17284:1: ( ( RULE_ONE ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17285:1: ( RULE_ONE )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17317:1: ( ( RULE_ONE ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17318:1: ( RULE_ONE )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17285:1: ( RULE_ONE )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17286:1: RULE_ONE
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17318:1: ( RULE_ONE )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17319:1: RULE_ONE
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitNumeratorAccess().getONETerminalRuleCall_0_1()); 
             }
-            match(input,RULE_ONE,FOLLOW_RULE_ONE_in_rule__UnitNumerator__Group_0__1__Impl34834); if (state.failed) return ;
+            match(input,RULE_ONE,FOLLOW_RULE_ONE_in_rule__UnitNumerator__Group_0__1__Impl34898); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitNumeratorAccess().getONETerminalRuleCall_0_1()); 
             }
@@ -49233,21 +49312,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitNumerator__Group_1__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17301:1: rule__UnitNumerator__Group_1__0 : rule__UnitNumerator__Group_1__0__Impl rule__UnitNumerator__Group_1__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17334:1: rule__UnitNumerator__Group_1__0 : rule__UnitNumerator__Group_1__0__Impl rule__UnitNumerator__Group_1__1 ;
     public final void rule__UnitNumerator__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17305:1: ( rule__UnitNumerator__Group_1__0__Impl rule__UnitNumerator__Group_1__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17306:2: rule__UnitNumerator__Group_1__0__Impl rule__UnitNumerator__Group_1__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17338:1: ( rule__UnitNumerator__Group_1__0__Impl rule__UnitNumerator__Group_1__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17339:2: rule__UnitNumerator__Group_1__0__Impl rule__UnitNumerator__Group_1__1
             {
-            pushFollow(FOLLOW_rule__UnitNumerator__Group_1__0__Impl_in_rule__UnitNumerator__Group_1__034867);
+            pushFollow(FOLLOW_rule__UnitNumerator__Group_1__0__Impl_in_rule__UnitNumerator__Group_1__034931);
             rule__UnitNumerator__Group_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__UnitNumerator__Group_1__1_in_rule__UnitNumerator__Group_1__034870);
+            pushFollow(FOLLOW_rule__UnitNumerator__Group_1__1_in_rule__UnitNumerator__Group_1__034934);
             rule__UnitNumerator__Group_1__1();
 
             state._fsp--;
@@ -49271,25 +49350,25 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitNumerator__Group_1__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17313:1: rule__UnitNumerator__Group_1__0__Impl : ( ( rule__UnitNumerator__FactorsAssignment_1_0 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17346:1: rule__UnitNumerator__Group_1__0__Impl : ( ( rule__UnitNumerator__FactorsAssignment_1_0 ) ) ;
     public final void rule__UnitNumerator__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17317:1: ( ( ( rule__UnitNumerator__FactorsAssignment_1_0 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17318:1: ( ( rule__UnitNumerator__FactorsAssignment_1_0 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17350:1: ( ( ( rule__UnitNumerator__FactorsAssignment_1_0 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17351:1: ( ( rule__UnitNumerator__FactorsAssignment_1_0 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17318:1: ( ( rule__UnitNumerator__FactorsAssignment_1_0 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17319:1: ( rule__UnitNumerator__FactorsAssignment_1_0 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17351:1: ( ( rule__UnitNumerator__FactorsAssignment_1_0 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17352:1: ( rule__UnitNumerator__FactorsAssignment_1_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitNumeratorAccess().getFactorsAssignment_1_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17320:1: ( rule__UnitNumerator__FactorsAssignment_1_0 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17320:2: rule__UnitNumerator__FactorsAssignment_1_0
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17353:1: ( rule__UnitNumerator__FactorsAssignment_1_0 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17353:2: rule__UnitNumerator__FactorsAssignment_1_0
             {
-            pushFollow(FOLLOW_rule__UnitNumerator__FactorsAssignment_1_0_in_rule__UnitNumerator__Group_1__0__Impl34897);
+            pushFollow(FOLLOW_rule__UnitNumerator__FactorsAssignment_1_0_in_rule__UnitNumerator__Group_1__0__Impl34961);
             rule__UnitNumerator__FactorsAssignment_1_0();
 
             state._fsp--;
@@ -49322,16 +49401,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitNumerator__Group_1__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17330:1: rule__UnitNumerator__Group_1__1 : rule__UnitNumerator__Group_1__1__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17363:1: rule__UnitNumerator__Group_1__1 : rule__UnitNumerator__Group_1__1__Impl ;
     public final void rule__UnitNumerator__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17334:1: ( rule__UnitNumerator__Group_1__1__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17335:2: rule__UnitNumerator__Group_1__1__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17367:1: ( rule__UnitNumerator__Group_1__1__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17368:2: rule__UnitNumerator__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__UnitNumerator__Group_1__1__Impl_in_rule__UnitNumerator__Group_1__134927);
+            pushFollow(FOLLOW_rule__UnitNumerator__Group_1__1__Impl_in_rule__UnitNumerator__Group_1__134991);
             rule__UnitNumerator__Group_1__1__Impl();
 
             state._fsp--;
@@ -49355,22 +49434,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitNumerator__Group_1__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17341:1: rule__UnitNumerator__Group_1__1__Impl : ( ( rule__UnitNumerator__Group_1_1__0 )* ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17374:1: rule__UnitNumerator__Group_1__1__Impl : ( ( rule__UnitNumerator__Group_1_1__0 )* ) ;
     public final void rule__UnitNumerator__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17345:1: ( ( ( rule__UnitNumerator__Group_1_1__0 )* ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17346:1: ( ( rule__UnitNumerator__Group_1_1__0 )* )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17378:1: ( ( ( rule__UnitNumerator__Group_1_1__0 )* ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17379:1: ( ( rule__UnitNumerator__Group_1_1__0 )* )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17346:1: ( ( rule__UnitNumerator__Group_1_1__0 )* )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17347:1: ( rule__UnitNumerator__Group_1_1__0 )*
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17379:1: ( ( rule__UnitNumerator__Group_1_1__0 )* )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17380:1: ( rule__UnitNumerator__Group_1_1__0 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitNumeratorAccess().getGroup_1_1()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17348:1: ( rule__UnitNumerator__Group_1_1__0 )*
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17381:1: ( rule__UnitNumerator__Group_1_1__0 )*
             loop104:
             do {
                 int alt104=2;
@@ -49383,9 +49462,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
                 switch (alt104) {
             	case 1 :
-            	    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17348:2: rule__UnitNumerator__Group_1_1__0
+            	    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17381:2: rule__UnitNumerator__Group_1_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__UnitNumerator__Group_1_1__0_in_rule__UnitNumerator__Group_1__1__Impl34954);
+            	    pushFollow(FOLLOW_rule__UnitNumerator__Group_1_1__0_in_rule__UnitNumerator__Group_1__1__Impl35018);
             	    rule__UnitNumerator__Group_1_1__0();
 
             	    state._fsp--;
@@ -49424,21 +49503,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitNumerator__Group_1_1__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17362:1: rule__UnitNumerator__Group_1_1__0 : rule__UnitNumerator__Group_1_1__0__Impl rule__UnitNumerator__Group_1_1__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17395:1: rule__UnitNumerator__Group_1_1__0 : rule__UnitNumerator__Group_1_1__0__Impl rule__UnitNumerator__Group_1_1__1 ;
     public final void rule__UnitNumerator__Group_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17366:1: ( rule__UnitNumerator__Group_1_1__0__Impl rule__UnitNumerator__Group_1_1__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17367:2: rule__UnitNumerator__Group_1_1__0__Impl rule__UnitNumerator__Group_1_1__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17399:1: ( rule__UnitNumerator__Group_1_1__0__Impl rule__UnitNumerator__Group_1_1__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17400:2: rule__UnitNumerator__Group_1_1__0__Impl rule__UnitNumerator__Group_1_1__1
             {
-            pushFollow(FOLLOW_rule__UnitNumerator__Group_1_1__0__Impl_in_rule__UnitNumerator__Group_1_1__034989);
+            pushFollow(FOLLOW_rule__UnitNumerator__Group_1_1__0__Impl_in_rule__UnitNumerator__Group_1_1__035053);
             rule__UnitNumerator__Group_1_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__UnitNumerator__Group_1_1__1_in_rule__UnitNumerator__Group_1_1__034992);
+            pushFollow(FOLLOW_rule__UnitNumerator__Group_1_1__1_in_rule__UnitNumerator__Group_1_1__035056);
             rule__UnitNumerator__Group_1_1__1();
 
             state._fsp--;
@@ -49462,22 +49541,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitNumerator__Group_1_1__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17374:1: rule__UnitNumerator__Group_1_1__0__Impl : ( '*' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17407:1: rule__UnitNumerator__Group_1_1__0__Impl : ( '*' ) ;
     public final void rule__UnitNumerator__Group_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17378:1: ( ( '*' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17379:1: ( '*' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17411:1: ( ( '*' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17412:1: ( '*' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17379:1: ( '*' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17380:1: '*'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17412:1: ( '*' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17413:1: '*'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitNumeratorAccess().getAsteriskKeyword_1_1_0()); 
             }
-            match(input,30,FOLLOW_30_in_rule__UnitNumerator__Group_1_1__0__Impl35020); if (state.failed) return ;
+            match(input,30,FOLLOW_30_in_rule__UnitNumerator__Group_1_1__0__Impl35084); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitNumeratorAccess().getAsteriskKeyword_1_1_0()); 
             }
@@ -49503,16 +49582,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitNumerator__Group_1_1__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17393:1: rule__UnitNumerator__Group_1_1__1 : rule__UnitNumerator__Group_1_1__1__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17426:1: rule__UnitNumerator__Group_1_1__1 : rule__UnitNumerator__Group_1_1__1__Impl ;
     public final void rule__UnitNumerator__Group_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17397:1: ( rule__UnitNumerator__Group_1_1__1__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17398:2: rule__UnitNumerator__Group_1_1__1__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17430:1: ( rule__UnitNumerator__Group_1_1__1__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17431:2: rule__UnitNumerator__Group_1_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__UnitNumerator__Group_1_1__1__Impl_in_rule__UnitNumerator__Group_1_1__135051);
+            pushFollow(FOLLOW_rule__UnitNumerator__Group_1_1__1__Impl_in_rule__UnitNumerator__Group_1_1__135115);
             rule__UnitNumerator__Group_1_1__1__Impl();
 
             state._fsp--;
@@ -49536,25 +49615,25 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitNumerator__Group_1_1__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17404:1: rule__UnitNumerator__Group_1_1__1__Impl : ( ( rule__UnitNumerator__FactorsAssignment_1_1_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17437:1: rule__UnitNumerator__Group_1_1__1__Impl : ( ( rule__UnitNumerator__FactorsAssignment_1_1_1 ) ) ;
     public final void rule__UnitNumerator__Group_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17408:1: ( ( ( rule__UnitNumerator__FactorsAssignment_1_1_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17409:1: ( ( rule__UnitNumerator__FactorsAssignment_1_1_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17441:1: ( ( ( rule__UnitNumerator__FactorsAssignment_1_1_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17442:1: ( ( rule__UnitNumerator__FactorsAssignment_1_1_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17409:1: ( ( rule__UnitNumerator__FactorsAssignment_1_1_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17410:1: ( rule__UnitNumerator__FactorsAssignment_1_1_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17442:1: ( ( rule__UnitNumerator__FactorsAssignment_1_1_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17443:1: ( rule__UnitNumerator__FactorsAssignment_1_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitNumeratorAccess().getFactorsAssignment_1_1_1()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17411:1: ( rule__UnitNumerator__FactorsAssignment_1_1_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17411:2: rule__UnitNumerator__FactorsAssignment_1_1_1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17444:1: ( rule__UnitNumerator__FactorsAssignment_1_1_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17444:2: rule__UnitNumerator__FactorsAssignment_1_1_1
             {
-            pushFollow(FOLLOW_rule__UnitNumerator__FactorsAssignment_1_1_1_in_rule__UnitNumerator__Group_1_1__1__Impl35078);
+            pushFollow(FOLLOW_rule__UnitNumerator__FactorsAssignment_1_1_1_in_rule__UnitNumerator__Group_1_1__1__Impl35142);
             rule__UnitNumerator__FactorsAssignment_1_1_1();
 
             state._fsp--;
@@ -49587,21 +49666,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitDenominator__Group_1__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17425:1: rule__UnitDenominator__Group_1__0 : rule__UnitDenominator__Group_1__0__Impl rule__UnitDenominator__Group_1__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17458:1: rule__UnitDenominator__Group_1__0 : rule__UnitDenominator__Group_1__0__Impl rule__UnitDenominator__Group_1__1 ;
     public final void rule__UnitDenominator__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17429:1: ( rule__UnitDenominator__Group_1__0__Impl rule__UnitDenominator__Group_1__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17430:2: rule__UnitDenominator__Group_1__0__Impl rule__UnitDenominator__Group_1__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17462:1: ( rule__UnitDenominator__Group_1__0__Impl rule__UnitDenominator__Group_1__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17463:2: rule__UnitDenominator__Group_1__0__Impl rule__UnitDenominator__Group_1__1
             {
-            pushFollow(FOLLOW_rule__UnitDenominator__Group_1__0__Impl_in_rule__UnitDenominator__Group_1__035112);
+            pushFollow(FOLLOW_rule__UnitDenominator__Group_1__0__Impl_in_rule__UnitDenominator__Group_1__035176);
             rule__UnitDenominator__Group_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__UnitDenominator__Group_1__1_in_rule__UnitDenominator__Group_1__035115);
+            pushFollow(FOLLOW_rule__UnitDenominator__Group_1__1_in_rule__UnitDenominator__Group_1__035179);
             rule__UnitDenominator__Group_1__1();
 
             state._fsp--;
@@ -49625,22 +49704,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitDenominator__Group_1__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17437:1: rule__UnitDenominator__Group_1__0__Impl : ( '(' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17470:1: rule__UnitDenominator__Group_1__0__Impl : ( '(' ) ;
     public final void rule__UnitDenominator__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17441:1: ( ( '(' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17442:1: ( '(' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17474:1: ( ( '(' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17475:1: ( '(' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17442:1: ( '(' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17443:1: '('
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17475:1: ( '(' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17476:1: '('
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitDenominatorAccess().getLeftParenthesisKeyword_1_0()); 
             }
-            match(input,47,FOLLOW_47_in_rule__UnitDenominator__Group_1__0__Impl35143); if (state.failed) return ;
+            match(input,47,FOLLOW_47_in_rule__UnitDenominator__Group_1__0__Impl35207); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitDenominatorAccess().getLeftParenthesisKeyword_1_0()); 
             }
@@ -49666,21 +49745,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitDenominator__Group_1__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17456:1: rule__UnitDenominator__Group_1__1 : rule__UnitDenominator__Group_1__1__Impl rule__UnitDenominator__Group_1__2 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17489:1: rule__UnitDenominator__Group_1__1 : rule__UnitDenominator__Group_1__1__Impl rule__UnitDenominator__Group_1__2 ;
     public final void rule__UnitDenominator__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17460:1: ( rule__UnitDenominator__Group_1__1__Impl rule__UnitDenominator__Group_1__2 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17461:2: rule__UnitDenominator__Group_1__1__Impl rule__UnitDenominator__Group_1__2
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17493:1: ( rule__UnitDenominator__Group_1__1__Impl rule__UnitDenominator__Group_1__2 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17494:2: rule__UnitDenominator__Group_1__1__Impl rule__UnitDenominator__Group_1__2
             {
-            pushFollow(FOLLOW_rule__UnitDenominator__Group_1__1__Impl_in_rule__UnitDenominator__Group_1__135174);
+            pushFollow(FOLLOW_rule__UnitDenominator__Group_1__1__Impl_in_rule__UnitDenominator__Group_1__135238);
             rule__UnitDenominator__Group_1__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__UnitDenominator__Group_1__2_in_rule__UnitDenominator__Group_1__135177);
+            pushFollow(FOLLOW_rule__UnitDenominator__Group_1__2_in_rule__UnitDenominator__Group_1__135241);
             rule__UnitDenominator__Group_1__2();
 
             state._fsp--;
@@ -49704,25 +49783,25 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitDenominator__Group_1__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17468:1: rule__UnitDenominator__Group_1__1__Impl : ( ( rule__UnitDenominator__FactorsAssignment_1_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17501:1: rule__UnitDenominator__Group_1__1__Impl : ( ( rule__UnitDenominator__FactorsAssignment_1_1 ) ) ;
     public final void rule__UnitDenominator__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17472:1: ( ( ( rule__UnitDenominator__FactorsAssignment_1_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17473:1: ( ( rule__UnitDenominator__FactorsAssignment_1_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17505:1: ( ( ( rule__UnitDenominator__FactorsAssignment_1_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17506:1: ( ( rule__UnitDenominator__FactorsAssignment_1_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17473:1: ( ( rule__UnitDenominator__FactorsAssignment_1_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17474:1: ( rule__UnitDenominator__FactorsAssignment_1_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17506:1: ( ( rule__UnitDenominator__FactorsAssignment_1_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17507:1: ( rule__UnitDenominator__FactorsAssignment_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitDenominatorAccess().getFactorsAssignment_1_1()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17475:1: ( rule__UnitDenominator__FactorsAssignment_1_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17475:2: rule__UnitDenominator__FactorsAssignment_1_1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17508:1: ( rule__UnitDenominator__FactorsAssignment_1_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17508:2: rule__UnitDenominator__FactorsAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__UnitDenominator__FactorsAssignment_1_1_in_rule__UnitDenominator__Group_1__1__Impl35204);
+            pushFollow(FOLLOW_rule__UnitDenominator__FactorsAssignment_1_1_in_rule__UnitDenominator__Group_1__1__Impl35268);
             rule__UnitDenominator__FactorsAssignment_1_1();
 
             state._fsp--;
@@ -49755,21 +49834,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitDenominator__Group_1__2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17485:1: rule__UnitDenominator__Group_1__2 : rule__UnitDenominator__Group_1__2__Impl rule__UnitDenominator__Group_1__3 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17518:1: rule__UnitDenominator__Group_1__2 : rule__UnitDenominator__Group_1__2__Impl rule__UnitDenominator__Group_1__3 ;
     public final void rule__UnitDenominator__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17489:1: ( rule__UnitDenominator__Group_1__2__Impl rule__UnitDenominator__Group_1__3 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17490:2: rule__UnitDenominator__Group_1__2__Impl rule__UnitDenominator__Group_1__3
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17522:1: ( rule__UnitDenominator__Group_1__2__Impl rule__UnitDenominator__Group_1__3 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17523:2: rule__UnitDenominator__Group_1__2__Impl rule__UnitDenominator__Group_1__3
             {
-            pushFollow(FOLLOW_rule__UnitDenominator__Group_1__2__Impl_in_rule__UnitDenominator__Group_1__235234);
+            pushFollow(FOLLOW_rule__UnitDenominator__Group_1__2__Impl_in_rule__UnitDenominator__Group_1__235298);
             rule__UnitDenominator__Group_1__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__UnitDenominator__Group_1__3_in_rule__UnitDenominator__Group_1__235237);
+            pushFollow(FOLLOW_rule__UnitDenominator__Group_1__3_in_rule__UnitDenominator__Group_1__235301);
             rule__UnitDenominator__Group_1__3();
 
             state._fsp--;
@@ -49793,22 +49872,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitDenominator__Group_1__2__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17497:1: rule__UnitDenominator__Group_1__2__Impl : ( ( rule__UnitDenominator__Group_1_2__0 )* ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17530:1: rule__UnitDenominator__Group_1__2__Impl : ( ( rule__UnitDenominator__Group_1_2__0 )* ) ;
     public final void rule__UnitDenominator__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17501:1: ( ( ( rule__UnitDenominator__Group_1_2__0 )* ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17502:1: ( ( rule__UnitDenominator__Group_1_2__0 )* )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17534:1: ( ( ( rule__UnitDenominator__Group_1_2__0 )* ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17535:1: ( ( rule__UnitDenominator__Group_1_2__0 )* )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17502:1: ( ( rule__UnitDenominator__Group_1_2__0 )* )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17503:1: ( rule__UnitDenominator__Group_1_2__0 )*
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17535:1: ( ( rule__UnitDenominator__Group_1_2__0 )* )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17536:1: ( rule__UnitDenominator__Group_1_2__0 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitDenominatorAccess().getGroup_1_2()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17504:1: ( rule__UnitDenominator__Group_1_2__0 )*
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17537:1: ( rule__UnitDenominator__Group_1_2__0 )*
             loop105:
             do {
                 int alt105=2;
@@ -49821,9 +49900,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
                 switch (alt105) {
             	case 1 :
-            	    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17504:2: rule__UnitDenominator__Group_1_2__0
+            	    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17537:2: rule__UnitDenominator__Group_1_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__UnitDenominator__Group_1_2__0_in_rule__UnitDenominator__Group_1__2__Impl35264);
+            	    pushFollow(FOLLOW_rule__UnitDenominator__Group_1_2__0_in_rule__UnitDenominator__Group_1__2__Impl35328);
             	    rule__UnitDenominator__Group_1_2__0();
 
             	    state._fsp--;
@@ -49862,16 +49941,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitDenominator__Group_1__3"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17514:1: rule__UnitDenominator__Group_1__3 : rule__UnitDenominator__Group_1__3__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17547:1: rule__UnitDenominator__Group_1__3 : rule__UnitDenominator__Group_1__3__Impl ;
     public final void rule__UnitDenominator__Group_1__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17518:1: ( rule__UnitDenominator__Group_1__3__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17519:2: rule__UnitDenominator__Group_1__3__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17551:1: ( rule__UnitDenominator__Group_1__3__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17552:2: rule__UnitDenominator__Group_1__3__Impl
             {
-            pushFollow(FOLLOW_rule__UnitDenominator__Group_1__3__Impl_in_rule__UnitDenominator__Group_1__335295);
+            pushFollow(FOLLOW_rule__UnitDenominator__Group_1__3__Impl_in_rule__UnitDenominator__Group_1__335359);
             rule__UnitDenominator__Group_1__3__Impl();
 
             state._fsp--;
@@ -49895,22 +49974,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitDenominator__Group_1__3__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17525:1: rule__UnitDenominator__Group_1__3__Impl : ( ')' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17558:1: rule__UnitDenominator__Group_1__3__Impl : ( ')' ) ;
     public final void rule__UnitDenominator__Group_1__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17529:1: ( ( ')' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17530:1: ( ')' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17562:1: ( ( ')' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17563:1: ( ')' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17530:1: ( ')' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17531:1: ')'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17563:1: ( ')' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17564:1: ')'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitDenominatorAccess().getRightParenthesisKeyword_1_3()); 
             }
-            match(input,48,FOLLOW_48_in_rule__UnitDenominator__Group_1__3__Impl35323); if (state.failed) return ;
+            match(input,48,FOLLOW_48_in_rule__UnitDenominator__Group_1__3__Impl35387); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitDenominatorAccess().getRightParenthesisKeyword_1_3()); 
             }
@@ -49936,21 +50015,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitDenominator__Group_1_2__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17552:1: rule__UnitDenominator__Group_1_2__0 : rule__UnitDenominator__Group_1_2__0__Impl rule__UnitDenominator__Group_1_2__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17585:1: rule__UnitDenominator__Group_1_2__0 : rule__UnitDenominator__Group_1_2__0__Impl rule__UnitDenominator__Group_1_2__1 ;
     public final void rule__UnitDenominator__Group_1_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17556:1: ( rule__UnitDenominator__Group_1_2__0__Impl rule__UnitDenominator__Group_1_2__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17557:2: rule__UnitDenominator__Group_1_2__0__Impl rule__UnitDenominator__Group_1_2__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17589:1: ( rule__UnitDenominator__Group_1_2__0__Impl rule__UnitDenominator__Group_1_2__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17590:2: rule__UnitDenominator__Group_1_2__0__Impl rule__UnitDenominator__Group_1_2__1
             {
-            pushFollow(FOLLOW_rule__UnitDenominator__Group_1_2__0__Impl_in_rule__UnitDenominator__Group_1_2__035362);
+            pushFollow(FOLLOW_rule__UnitDenominator__Group_1_2__0__Impl_in_rule__UnitDenominator__Group_1_2__035426);
             rule__UnitDenominator__Group_1_2__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__UnitDenominator__Group_1_2__1_in_rule__UnitDenominator__Group_1_2__035365);
+            pushFollow(FOLLOW_rule__UnitDenominator__Group_1_2__1_in_rule__UnitDenominator__Group_1_2__035429);
             rule__UnitDenominator__Group_1_2__1();
 
             state._fsp--;
@@ -49974,22 +50053,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitDenominator__Group_1_2__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17564:1: rule__UnitDenominator__Group_1_2__0__Impl : ( '*' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17597:1: rule__UnitDenominator__Group_1_2__0__Impl : ( '*' ) ;
     public final void rule__UnitDenominator__Group_1_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17568:1: ( ( '*' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17569:1: ( '*' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17601:1: ( ( '*' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17602:1: ( '*' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17569:1: ( '*' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17570:1: '*'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17602:1: ( '*' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17603:1: '*'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitDenominatorAccess().getAsteriskKeyword_1_2_0()); 
             }
-            match(input,30,FOLLOW_30_in_rule__UnitDenominator__Group_1_2__0__Impl35393); if (state.failed) return ;
+            match(input,30,FOLLOW_30_in_rule__UnitDenominator__Group_1_2__0__Impl35457); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitDenominatorAccess().getAsteriskKeyword_1_2_0()); 
             }
@@ -50015,16 +50094,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitDenominator__Group_1_2__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17583:1: rule__UnitDenominator__Group_1_2__1 : rule__UnitDenominator__Group_1_2__1__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17616:1: rule__UnitDenominator__Group_1_2__1 : rule__UnitDenominator__Group_1_2__1__Impl ;
     public final void rule__UnitDenominator__Group_1_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17587:1: ( rule__UnitDenominator__Group_1_2__1__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17588:2: rule__UnitDenominator__Group_1_2__1__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17620:1: ( rule__UnitDenominator__Group_1_2__1__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17621:2: rule__UnitDenominator__Group_1_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__UnitDenominator__Group_1_2__1__Impl_in_rule__UnitDenominator__Group_1_2__135424);
+            pushFollow(FOLLOW_rule__UnitDenominator__Group_1_2__1__Impl_in_rule__UnitDenominator__Group_1_2__135488);
             rule__UnitDenominator__Group_1_2__1__Impl();
 
             state._fsp--;
@@ -50048,25 +50127,25 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitDenominator__Group_1_2__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17594:1: rule__UnitDenominator__Group_1_2__1__Impl : ( ( rule__UnitDenominator__FactorsAssignment_1_2_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17627:1: rule__UnitDenominator__Group_1_2__1__Impl : ( ( rule__UnitDenominator__FactorsAssignment_1_2_1 ) ) ;
     public final void rule__UnitDenominator__Group_1_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17598:1: ( ( ( rule__UnitDenominator__FactorsAssignment_1_2_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17599:1: ( ( rule__UnitDenominator__FactorsAssignment_1_2_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17631:1: ( ( ( rule__UnitDenominator__FactorsAssignment_1_2_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17632:1: ( ( rule__UnitDenominator__FactorsAssignment_1_2_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17599:1: ( ( rule__UnitDenominator__FactorsAssignment_1_2_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17600:1: ( rule__UnitDenominator__FactorsAssignment_1_2_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17632:1: ( ( rule__UnitDenominator__FactorsAssignment_1_2_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17633:1: ( rule__UnitDenominator__FactorsAssignment_1_2_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitDenominatorAccess().getFactorsAssignment_1_2_1()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17601:1: ( rule__UnitDenominator__FactorsAssignment_1_2_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17601:2: rule__UnitDenominator__FactorsAssignment_1_2_1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17634:1: ( rule__UnitDenominator__FactorsAssignment_1_2_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17634:2: rule__UnitDenominator__FactorsAssignment_1_2_1
             {
-            pushFollow(FOLLOW_rule__UnitDenominator__FactorsAssignment_1_2_1_in_rule__UnitDenominator__Group_1_2__1__Impl35451);
+            pushFollow(FOLLOW_rule__UnitDenominator__FactorsAssignment_1_2_1_in_rule__UnitDenominator__Group_1_2__1__Impl35515);
             rule__UnitDenominator__FactorsAssignment_1_2_1();
 
             state._fsp--;
@@ -50099,21 +50178,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitFactor__Group__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17615:1: rule__UnitFactor__Group__0 : rule__UnitFactor__Group__0__Impl rule__UnitFactor__Group__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17648:1: rule__UnitFactor__Group__0 : rule__UnitFactor__Group__0__Impl rule__UnitFactor__Group__1 ;
     public final void rule__UnitFactor__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17619:1: ( rule__UnitFactor__Group__0__Impl rule__UnitFactor__Group__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17620:2: rule__UnitFactor__Group__0__Impl rule__UnitFactor__Group__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17652:1: ( rule__UnitFactor__Group__0__Impl rule__UnitFactor__Group__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17653:2: rule__UnitFactor__Group__0__Impl rule__UnitFactor__Group__1
             {
-            pushFollow(FOLLOW_rule__UnitFactor__Group__0__Impl_in_rule__UnitFactor__Group__035485);
+            pushFollow(FOLLOW_rule__UnitFactor__Group__0__Impl_in_rule__UnitFactor__Group__035549);
             rule__UnitFactor__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__UnitFactor__Group__1_in_rule__UnitFactor__Group__035488);
+            pushFollow(FOLLOW_rule__UnitFactor__Group__1_in_rule__UnitFactor__Group__035552);
             rule__UnitFactor__Group__1();
 
             state._fsp--;
@@ -50137,25 +50216,25 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitFactor__Group__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17627:1: rule__UnitFactor__Group__0__Impl : ( ( rule__UnitFactor__SymbolAssignment_0 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17660:1: rule__UnitFactor__Group__0__Impl : ( ( rule__UnitFactor__SymbolAssignment_0 ) ) ;
     public final void rule__UnitFactor__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17631:1: ( ( ( rule__UnitFactor__SymbolAssignment_0 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17632:1: ( ( rule__UnitFactor__SymbolAssignment_0 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17664:1: ( ( ( rule__UnitFactor__SymbolAssignment_0 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17665:1: ( ( rule__UnitFactor__SymbolAssignment_0 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17632:1: ( ( rule__UnitFactor__SymbolAssignment_0 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17633:1: ( rule__UnitFactor__SymbolAssignment_0 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17665:1: ( ( rule__UnitFactor__SymbolAssignment_0 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17666:1: ( rule__UnitFactor__SymbolAssignment_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitFactorAccess().getSymbolAssignment_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17634:1: ( rule__UnitFactor__SymbolAssignment_0 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17634:2: rule__UnitFactor__SymbolAssignment_0
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17667:1: ( rule__UnitFactor__SymbolAssignment_0 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17667:2: rule__UnitFactor__SymbolAssignment_0
             {
-            pushFollow(FOLLOW_rule__UnitFactor__SymbolAssignment_0_in_rule__UnitFactor__Group__0__Impl35515);
+            pushFollow(FOLLOW_rule__UnitFactor__SymbolAssignment_0_in_rule__UnitFactor__Group__0__Impl35579);
             rule__UnitFactor__SymbolAssignment_0();
 
             state._fsp--;
@@ -50188,16 +50267,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitFactor__Group__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17644:1: rule__UnitFactor__Group__1 : rule__UnitFactor__Group__1__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17677:1: rule__UnitFactor__Group__1 : rule__UnitFactor__Group__1__Impl ;
     public final void rule__UnitFactor__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17648:1: ( rule__UnitFactor__Group__1__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17649:2: rule__UnitFactor__Group__1__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17681:1: ( rule__UnitFactor__Group__1__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17682:2: rule__UnitFactor__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__UnitFactor__Group__1__Impl_in_rule__UnitFactor__Group__135545);
+            pushFollow(FOLLOW_rule__UnitFactor__Group__1__Impl_in_rule__UnitFactor__Group__135609);
             rule__UnitFactor__Group__1__Impl();
 
             state._fsp--;
@@ -50221,22 +50300,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitFactor__Group__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17655:1: rule__UnitFactor__Group__1__Impl : ( ( rule__UnitFactor__Group_1__0 )? ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17688:1: rule__UnitFactor__Group__1__Impl : ( ( rule__UnitFactor__Group_1__0 )? ) ;
     public final void rule__UnitFactor__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17659:1: ( ( ( rule__UnitFactor__Group_1__0 )? ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17660:1: ( ( rule__UnitFactor__Group_1__0 )? )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17692:1: ( ( ( rule__UnitFactor__Group_1__0 )? ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17693:1: ( ( rule__UnitFactor__Group_1__0 )? )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17660:1: ( ( rule__UnitFactor__Group_1__0 )? )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17661:1: ( rule__UnitFactor__Group_1__0 )?
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17693:1: ( ( rule__UnitFactor__Group_1__0 )? )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17694:1: ( rule__UnitFactor__Group_1__0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitFactorAccess().getGroup_1()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17662:1: ( rule__UnitFactor__Group_1__0 )?
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17695:1: ( rule__UnitFactor__Group_1__0 )?
             int alt106=2;
             int LA106_0 = input.LA(1);
 
@@ -50245,9 +50324,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             }
             switch (alt106) {
                 case 1 :
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17662:2: rule__UnitFactor__Group_1__0
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17695:2: rule__UnitFactor__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__UnitFactor__Group_1__0_in_rule__UnitFactor__Group__1__Impl35572);
+                    pushFollow(FOLLOW_rule__UnitFactor__Group_1__0_in_rule__UnitFactor__Group__1__Impl35636);
                     rule__UnitFactor__Group_1__0();
 
                     state._fsp--;
@@ -50283,21 +50362,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitFactor__Group_1__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17676:1: rule__UnitFactor__Group_1__0 : rule__UnitFactor__Group_1__0__Impl rule__UnitFactor__Group_1__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17709:1: rule__UnitFactor__Group_1__0 : rule__UnitFactor__Group_1__0__Impl rule__UnitFactor__Group_1__1 ;
     public final void rule__UnitFactor__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17680:1: ( rule__UnitFactor__Group_1__0__Impl rule__UnitFactor__Group_1__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17681:2: rule__UnitFactor__Group_1__0__Impl rule__UnitFactor__Group_1__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17713:1: ( rule__UnitFactor__Group_1__0__Impl rule__UnitFactor__Group_1__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17714:2: rule__UnitFactor__Group_1__0__Impl rule__UnitFactor__Group_1__1
             {
-            pushFollow(FOLLOW_rule__UnitFactor__Group_1__0__Impl_in_rule__UnitFactor__Group_1__035607);
+            pushFollow(FOLLOW_rule__UnitFactor__Group_1__0__Impl_in_rule__UnitFactor__Group_1__035671);
             rule__UnitFactor__Group_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__UnitFactor__Group_1__1_in_rule__UnitFactor__Group_1__035610);
+            pushFollow(FOLLOW_rule__UnitFactor__Group_1__1_in_rule__UnitFactor__Group_1__035674);
             rule__UnitFactor__Group_1__1();
 
             state._fsp--;
@@ -50321,22 +50400,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitFactor__Group_1__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17688:1: rule__UnitFactor__Group_1__0__Impl : ( '^' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17721:1: rule__UnitFactor__Group_1__0__Impl : ( '^' ) ;
     public final void rule__UnitFactor__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17692:1: ( ( '^' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17693:1: ( '^' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17725:1: ( ( '^' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17726:1: ( '^' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17693:1: ( '^' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17694:1: '^'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17726:1: ( '^' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17727:1: '^'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitFactorAccess().getCircumflexAccentKeyword_1_0()); 
             }
-            match(input,34,FOLLOW_34_in_rule__UnitFactor__Group_1__0__Impl35638); if (state.failed) return ;
+            match(input,34,FOLLOW_34_in_rule__UnitFactor__Group_1__0__Impl35702); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitFactorAccess().getCircumflexAccentKeyword_1_0()); 
             }
@@ -50362,16 +50441,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitFactor__Group_1__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17707:1: rule__UnitFactor__Group_1__1 : rule__UnitFactor__Group_1__1__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17740:1: rule__UnitFactor__Group_1__1 : rule__UnitFactor__Group_1__1__Impl ;
     public final void rule__UnitFactor__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17711:1: ( rule__UnitFactor__Group_1__1__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17712:2: rule__UnitFactor__Group_1__1__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17744:1: ( rule__UnitFactor__Group_1__1__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17745:2: rule__UnitFactor__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__UnitFactor__Group_1__1__Impl_in_rule__UnitFactor__Group_1__135669);
+            pushFollow(FOLLOW_rule__UnitFactor__Group_1__1__Impl_in_rule__UnitFactor__Group_1__135733);
             rule__UnitFactor__Group_1__1__Impl();
 
             state._fsp--;
@@ -50395,25 +50474,25 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitFactor__Group_1__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17718:1: rule__UnitFactor__Group_1__1__Impl : ( ( rule__UnitFactor__ExponentAssignment_1_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17751:1: rule__UnitFactor__Group_1__1__Impl : ( ( rule__UnitFactor__ExponentAssignment_1_1 ) ) ;
     public final void rule__UnitFactor__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17722:1: ( ( ( rule__UnitFactor__ExponentAssignment_1_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17723:1: ( ( rule__UnitFactor__ExponentAssignment_1_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17755:1: ( ( ( rule__UnitFactor__ExponentAssignment_1_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17756:1: ( ( rule__UnitFactor__ExponentAssignment_1_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17723:1: ( ( rule__UnitFactor__ExponentAssignment_1_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17724:1: ( rule__UnitFactor__ExponentAssignment_1_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17756:1: ( ( rule__UnitFactor__ExponentAssignment_1_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17757:1: ( rule__UnitFactor__ExponentAssignment_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitFactorAccess().getExponentAssignment_1_1()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17725:1: ( rule__UnitFactor__ExponentAssignment_1_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17725:2: rule__UnitFactor__ExponentAssignment_1_1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17758:1: ( rule__UnitFactor__ExponentAssignment_1_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17758:2: rule__UnitFactor__ExponentAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__UnitFactor__ExponentAssignment_1_1_in_rule__UnitFactor__Group_1__1__Impl35696);
+            pushFollow(FOLLOW_rule__UnitFactor__ExponentAssignment_1_1_in_rule__UnitFactor__Group_1__1__Impl35760);
             rule__UnitFactor__ExponentAssignment_1_1();
 
             state._fsp--;
@@ -50446,21 +50525,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitExponent__Group__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17739:1: rule__UnitExponent__Group__0 : rule__UnitExponent__Group__0__Impl rule__UnitExponent__Group__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17772:1: rule__UnitExponent__Group__0 : rule__UnitExponent__Group__0__Impl rule__UnitExponent__Group__1 ;
     public final void rule__UnitExponent__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17743:1: ( rule__UnitExponent__Group__0__Impl rule__UnitExponent__Group__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17744:2: rule__UnitExponent__Group__0__Impl rule__UnitExponent__Group__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17776:1: ( rule__UnitExponent__Group__0__Impl rule__UnitExponent__Group__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17777:2: rule__UnitExponent__Group__0__Impl rule__UnitExponent__Group__1
             {
-            pushFollow(FOLLOW_rule__UnitExponent__Group__0__Impl_in_rule__UnitExponent__Group__035730);
+            pushFollow(FOLLOW_rule__UnitExponent__Group__0__Impl_in_rule__UnitExponent__Group__035794);
             rule__UnitExponent__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__UnitExponent__Group__1_in_rule__UnitExponent__Group__035733);
+            pushFollow(FOLLOW_rule__UnitExponent__Group__1_in_rule__UnitExponent__Group__035797);
             rule__UnitExponent__Group__1();
 
             state._fsp--;
@@ -50484,22 +50563,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitExponent__Group__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17751:1: rule__UnitExponent__Group__0__Impl : ( ( '-' )? ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17784:1: rule__UnitExponent__Group__0__Impl : ( ( '-' )? ) ;
     public final void rule__UnitExponent__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17755:1: ( ( ( '-' )? ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17756:1: ( ( '-' )? )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17788:1: ( ( ( '-' )? ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17789:1: ( ( '-' )? )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17756:1: ( ( '-' )? )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17757:1: ( '-' )?
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17789:1: ( ( '-' )? )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17790:1: ( '-' )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitExponentAccess().getHyphenMinusKeyword_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17758:1: ( '-' )?
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17791:1: ( '-' )?
             int alt107=2;
             int LA107_0 = input.LA(1);
 
@@ -50508,9 +50587,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             }
             switch (alt107) {
                 case 1 :
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17759:2: '-'
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17792:2: '-'
                     {
-                    match(input,29,FOLLOW_29_in_rule__UnitExponent__Group__0__Impl35762); if (state.failed) return ;
+                    match(input,29,FOLLOW_29_in_rule__UnitExponent__Group__0__Impl35826); if (state.failed) return ;
 
                     }
                     break;
@@ -50542,16 +50621,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitExponent__Group__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17770:1: rule__UnitExponent__Group__1 : rule__UnitExponent__Group__1__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17803:1: rule__UnitExponent__Group__1 : rule__UnitExponent__Group__1__Impl ;
     public final void rule__UnitExponent__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17774:1: ( rule__UnitExponent__Group__1__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17775:2: rule__UnitExponent__Group__1__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17807:1: ( rule__UnitExponent__Group__1__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17808:2: rule__UnitExponent__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__UnitExponent__Group__1__Impl_in_rule__UnitExponent__Group__135795);
+            pushFollow(FOLLOW_rule__UnitExponent__Group__1__Impl_in_rule__UnitExponent__Group__135859);
             rule__UnitExponent__Group__1__Impl();
 
             state._fsp--;
@@ -50575,22 +50654,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitExponent__Group__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17781:1: rule__UnitExponent__Group__1__Impl : ( ruleValidInt ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17814:1: rule__UnitExponent__Group__1__Impl : ( ruleValidInt ) ;
     public final void rule__UnitExponent__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17785:1: ( ( ruleValidInt ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17786:1: ( ruleValidInt )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17818:1: ( ( ruleValidInt ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17819:1: ( ruleValidInt )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17786:1: ( ruleValidInt )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17787:1: ruleValidInt
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17819:1: ( ruleValidInt )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17820:1: ruleValidInt
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitExponentAccess().getValidIntParserRuleCall_1()); 
             }
-            pushFollow(FOLLOW_ruleValidInt_in_rule__UnitExponent__Group__1__Impl35822);
+            pushFollow(FOLLOW_ruleValidInt_in_rule__UnitExponent__Group__1__Impl35886);
             ruleValidInt();
 
             state._fsp--;
@@ -50620,21 +50699,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17802:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17835:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
     public final void rule__QualifiedName__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17806:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17807:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17839:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17840:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__035855);
+            pushFollow(FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__035919);
             rule__QualifiedName__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__035858);
+            pushFollow(FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__035922);
             rule__QualifiedName__Group__1();
 
             state._fsp--;
@@ -50658,22 +50737,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17814:1: rule__QualifiedName__Group__0__Impl : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17847:1: rule__QualifiedName__Group__0__Impl : ( ruleValidID ) ;
     public final void rule__QualifiedName__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17818:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17819:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17851:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17852:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17819:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17820:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17852:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17853:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getValidIDParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__QualifiedName__Group__0__Impl35885);
+            pushFollow(FOLLOW_ruleValidID_in_rule__QualifiedName__Group__0__Impl35949);
             ruleValidID();
 
             state._fsp--;
@@ -50703,16 +50782,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17831:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17864:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
     public final void rule__QualifiedName__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17835:1: ( rule__QualifiedName__Group__1__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17836:2: rule__QualifiedName__Group__1__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17868:1: ( rule__QualifiedName__Group__1__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17869:2: rule__QualifiedName__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__135914);
+            pushFollow(FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__135978);
             rule__QualifiedName__Group__1__Impl();
 
             state._fsp--;
@@ -50736,22 +50815,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17842:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17875:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
     public final void rule__QualifiedName__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17846:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17847:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17879:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17880:1: ( ( rule__QualifiedName__Group_1__0 )* )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17847:1: ( ( rule__QualifiedName__Group_1__0 )* )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17848:1: ( rule__QualifiedName__Group_1__0 )*
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17880:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17881:1: ( rule__QualifiedName__Group_1__0 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getGroup_1()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17849:1: ( rule__QualifiedName__Group_1__0 )*
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17882:1: ( rule__QualifiedName__Group_1__0 )*
             loop108:
             do {
                 int alt108=2;
@@ -50764,9 +50843,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
                 switch (alt108) {
             	case 1 :
-            	    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17849:2: rule__QualifiedName__Group_1__0
+            	    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17882:2: rule__QualifiedName__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl35941);
+            	    pushFollow(FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl36005);
             	    rule__QualifiedName__Group_1__0();
 
             	    state._fsp--;
@@ -50805,21 +50884,21 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17863:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17896:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
     public final void rule__QualifiedName__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17867:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17868:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17900:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17901:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__035976);
+            pushFollow(FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__036040);
             rule__QualifiedName__Group_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__035979);
+            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__036043);
             rule__QualifiedName__Group_1__1();
 
             state._fsp--;
@@ -50843,22 +50922,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17875:1: rule__QualifiedName__Group_1__0__Impl : ( '::' ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17908:1: rule__QualifiedName__Group_1__0__Impl : ( '::' ) ;
     public final void rule__QualifiedName__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17879:1: ( ( '::' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17880:1: ( '::' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17912:1: ( ( '::' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17913:1: ( '::' )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17880:1: ( '::' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17881:1: '::'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17913:1: ( '::' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17914:1: '::'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getColonColonKeyword_1_0()); 
             }
-            match(input,87,FOLLOW_87_in_rule__QualifiedName__Group_1__0__Impl36007); if (state.failed) return ;
+            match(input,87,FOLLOW_87_in_rule__QualifiedName__Group_1__0__Impl36071); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQualifiedNameAccess().getColonColonKeyword_1_0()); 
             }
@@ -50884,16 +50963,16 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17894:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17927:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
     public final void rule__QualifiedName__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17898:1: ( rule__QualifiedName__Group_1__1__Impl )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17899:2: rule__QualifiedName__Group_1__1__Impl
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17931:1: ( rule__QualifiedName__Group_1__1__Impl )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17932:2: rule__QualifiedName__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__136038);
+            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__136102);
             rule__QualifiedName__Group_1__1__Impl();
 
             state._fsp--;
@@ -50917,22 +50996,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1__Impl"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17905:1: rule__QualifiedName__Group_1__1__Impl : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17938:1: rule__QualifiedName__Group_1__1__Impl : ( ruleValidID ) ;
     public final void rule__QualifiedName__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17909:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17910:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17942:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17943:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17910:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17911:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17943:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17944:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getValidIDParserRuleCall_1_1()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__QualifiedName__Group_1__1__Impl36065);
+            pushFollow(FOLLOW_ruleValidID_in_rule__QualifiedName__Group_1__1__Impl36129);
             ruleValidID();
 
             state._fsp--;
@@ -50962,22 +51041,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Module__DefinitionsAssignment"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17927:1: rule__Module__DefinitionsAssignment : ( ruleDefinition ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17960:1: rule__Module__DefinitionsAssignment : ( ruleDefinition ) ;
     public final void rule__Module__DefinitionsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17931:1: ( ( ruleDefinition ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17932:1: ( ruleDefinition )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17964:1: ( ( ruleDefinition ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17965:1: ( ruleDefinition )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17932:1: ( ruleDefinition )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17933:1: ruleDefinition
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17965:1: ( ruleDefinition )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17966:1: ruleDefinition
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModuleAccess().getDefinitionsDefinitionParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleDefinition_in_rule__Module__DefinitionsAssignment36103);
+            pushFollow(FOLLOW_ruleDefinition_in_rule__Module__DefinitionsAssignment36167);
             ruleDefinition();
 
             state._fsp--;
@@ -51007,22 +51086,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumerationDefinition__NameAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17942:1: rule__EnumerationDefinition__NameAssignment_1 : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17975:1: rule__EnumerationDefinition__NameAssignment_1 : ( ruleValidID ) ;
     public final void rule__EnumerationDefinition__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17946:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17947:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17979:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17980:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17947:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17948:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17980:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17981:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationDefinitionAccess().getNameValidIDParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__EnumerationDefinition__NameAssignment_136134);
+            pushFollow(FOLLOW_ruleValidID_in_rule__EnumerationDefinition__NameAssignment_136198);
             ruleValidID();
 
             state._fsp--;
@@ -51052,22 +51131,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17957:1: rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0 : ( ruleEnumerationLiteralDeclaration ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17990:1: rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0 : ( ruleEnumerationLiteralDeclaration ) ;
     public final void rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17961:1: ( ( ruleEnumerationLiteralDeclaration ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17962:1: ( ruleEnumerationLiteralDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17994:1: ( ( ruleEnumerationLiteralDeclaration ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17995:1: ( ruleEnumerationLiteralDeclaration )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17962:1: ( ruleEnumerationLiteralDeclaration )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17963:1: ruleEnumerationLiteralDeclaration
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17995:1: ( ruleEnumerationLiteralDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17996:1: ruleEnumerationLiteralDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationDefinitionAccess().getLiteralDeclarationsEnumerationLiteralDeclarationParserRuleCall_3_0_0()); 
             }
-            pushFollow(FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_036165);
+            pushFollow(FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_036229);
             ruleEnumerationLiteralDeclaration();
 
             state._fsp--;
@@ -51097,22 +51176,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17972:1: rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1 : ( ruleEnumerationLiteralDeclaration ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18005:1: rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1 : ( ruleEnumerationLiteralDeclaration ) ;
     public final void rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17976:1: ( ( ruleEnumerationLiteralDeclaration ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17977:1: ( ruleEnumerationLiteralDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18009:1: ( ( ruleEnumerationLiteralDeclaration ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18010:1: ( ruleEnumerationLiteralDeclaration )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17977:1: ( ruleEnumerationLiteralDeclaration )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17978:1: ruleEnumerationLiteralDeclaration
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18010:1: ( ruleEnumerationLiteralDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18011:1: ruleEnumerationLiteralDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationDefinitionAccess().getLiteralDeclarationsEnumerationLiteralDeclarationParserRuleCall_3_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_136196);
+            pushFollow(FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_136260);
             ruleEnumerationLiteralDeclaration();
 
             state._fsp--;
@@ -51142,22 +51221,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumerationLiteralDeclaration__NameAssignment"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17987:1: rule__EnumerationLiteralDeclaration__NameAssignment : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18020:1: rule__EnumerationLiteralDeclaration__NameAssignment : ( ruleValidID ) ;
     public final void rule__EnumerationLiteralDeclaration__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17991:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17992:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18024:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18025:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17992:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:17993:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18025:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18026:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationLiteralDeclarationAccess().getNameValidIDParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__EnumerationLiteralDeclaration__NameAssignment36227);
+            pushFollow(FOLLOW_ruleValidID_in_rule__EnumerationLiteralDeclaration__NameAssignment36291);
             ruleValidID();
 
             state._fsp--;
@@ -51187,22 +51266,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeAliasDefinition__NameAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18002:1: rule__TypeAliasDefinition__NameAssignment_1 : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18035:1: rule__TypeAliasDefinition__NameAssignment_1 : ( ruleValidID ) ;
     public final void rule__TypeAliasDefinition__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18006:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18007:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18039:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18040:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18007:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18008:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18040:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18041:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeAliasDefinitionAccess().getNameValidIDParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__TypeAliasDefinition__NameAssignment_136258);
+            pushFollow(FOLLOW_ruleValidID_in_rule__TypeAliasDefinition__NameAssignment_136322);
             ruleValidID();
 
             state._fsp--;
@@ -51232,22 +51311,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeAliasDefinition__TypeAssignment_3"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18017:1: rule__TypeAliasDefinition__TypeAssignment_3 : ( rulePrimitiveType ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18050:1: rule__TypeAliasDefinition__TypeAssignment_3 : ( rulePrimitiveType ) ;
     public final void rule__TypeAliasDefinition__TypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18021:1: ( ( rulePrimitiveType ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18022:1: ( rulePrimitiveType )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18054:1: ( ( rulePrimitiveType ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18055:1: ( rulePrimitiveType )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18022:1: ( rulePrimitiveType )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18023:1: rulePrimitiveType
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18055:1: ( rulePrimitiveType )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18056:1: rulePrimitiveType
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeAliasDefinitionAccess().getTypePrimitiveTypeParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_rulePrimitiveType_in_rule__TypeAliasDefinition__TypeAssignment_336289);
+            pushFollow(FOLLOW_rulePrimitiveType_in_rule__TypeAliasDefinition__TypeAssignment_336353);
             rulePrimitiveType();
 
             state._fsp--;
@@ -51277,22 +51356,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RecordDefinition__NameAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18032:1: rule__RecordDefinition__NameAssignment_1 : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18065:1: rule__RecordDefinition__NameAssignment_1 : ( ruleValidID ) ;
     public final void rule__RecordDefinition__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18036:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18037:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18069:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18070:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18037:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18038:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18070:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18071:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRecordDefinitionAccess().getNameValidIDParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__RecordDefinition__NameAssignment_136320);
+            pushFollow(FOLLOW_ruleValidID_in_rule__RecordDefinition__NameAssignment_136384);
             ruleValidID();
 
             state._fsp--;
@@ -51322,22 +51401,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RecordDefinition__FieldDeclarationsAssignment_3"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18047:1: rule__RecordDefinition__FieldDeclarationsAssignment_3 : ( ruleRecordFieldDeclaration ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18080:1: rule__RecordDefinition__FieldDeclarationsAssignment_3 : ( ruleRecordFieldDeclaration ) ;
     public final void rule__RecordDefinition__FieldDeclarationsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18051:1: ( ( ruleRecordFieldDeclaration ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18052:1: ( ruleRecordFieldDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18084:1: ( ( ruleRecordFieldDeclaration ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18085:1: ( ruleRecordFieldDeclaration )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18052:1: ( ruleRecordFieldDeclaration )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18053:1: ruleRecordFieldDeclaration
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18085:1: ( ruleRecordFieldDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18086:1: ruleRecordFieldDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRecordDefinitionAccess().getFieldDeclarationsRecordFieldDeclarationParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleRecordFieldDeclaration_in_rule__RecordDefinition__FieldDeclarationsAssignment_336351);
+            pushFollow(FOLLOW_ruleRecordFieldDeclaration_in_rule__RecordDefinition__FieldDeclarationsAssignment_336415);
             ruleRecordFieldDeclaration();
 
             state._fsp--;
@@ -51367,22 +51446,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RecordFieldDeclaration__NameAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18062:1: rule__RecordFieldDeclaration__NameAssignment_0 : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18095:1: rule__RecordFieldDeclaration__NameAssignment_0 : ( ruleValidID ) ;
     public final void rule__RecordFieldDeclaration__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18066:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18067:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18099:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18100:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18067:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18068:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18100:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18101:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRecordFieldDeclarationAccess().getNameValidIDParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__RecordFieldDeclaration__NameAssignment_036382);
+            pushFollow(FOLLOW_ruleValidID_in_rule__RecordFieldDeclaration__NameAssignment_036446);
             ruleValidID();
 
             state._fsp--;
@@ -51412,22 +51491,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RecordFieldDeclaration__TypeAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18077:1: rule__RecordFieldDeclaration__TypeAssignment_2 : ( ruleDataTypeSpecifier ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18110:1: rule__RecordFieldDeclaration__TypeAssignment_2 : ( ruleDataTypeSpecifier ) ;
     public final void rule__RecordFieldDeclaration__TypeAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18081:1: ( ( ruleDataTypeSpecifier ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18082:1: ( ruleDataTypeSpecifier )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18114:1: ( ( ruleDataTypeSpecifier ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18115:1: ( ruleDataTypeSpecifier )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18082:1: ( ruleDataTypeSpecifier )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18083:1: ruleDataTypeSpecifier
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18115:1: ( ruleDataTypeSpecifier )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18116:1: ruleDataTypeSpecifier
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRecordFieldDeclarationAccess().getTypeDataTypeSpecifierParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleDataTypeSpecifier_in_rule__RecordFieldDeclaration__TypeAssignment_236413);
+            pushFollow(FOLLOW_ruleDataTypeSpecifier_in_rule__RecordFieldDeclaration__TypeAssignment_236477);
             ruleDataTypeSpecifier();
 
             state._fsp--;
@@ -51457,22 +51536,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionDefinition__KindAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18092:1: rule__FunctionDefinition__KindAssignment_0 : ( ruleFunctionKind ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18125:1: rule__FunctionDefinition__KindAssignment_0 : ( ruleFunctionKind ) ;
     public final void rule__FunctionDefinition__KindAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18096:1: ( ( ruleFunctionKind ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18097:1: ( ruleFunctionKind )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18129:1: ( ( ruleFunctionKind ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18130:1: ( ruleFunctionKind )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18097:1: ( ruleFunctionKind )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18098:1: ruleFunctionKind
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18130:1: ( ruleFunctionKind )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18131:1: ruleFunctionKind
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getKindFunctionKindEnumRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleFunctionKind_in_rule__FunctionDefinition__KindAssignment_036444);
+            pushFollow(FOLLOW_ruleFunctionKind_in_rule__FunctionDefinition__KindAssignment_036508);
             ruleFunctionKind();
 
             state._fsp--;
@@ -51502,22 +51581,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionDefinition__NameAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18107:1: rule__FunctionDefinition__NameAssignment_2 : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18140:1: rule__FunctionDefinition__NameAssignment_2 : ( ruleValidID ) ;
     public final void rule__FunctionDefinition__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18111:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18112:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18144:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18145:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18112:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18113:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18145:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18146:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getNameValidIDParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__FunctionDefinition__NameAssignment_236475);
+            pushFollow(FOLLOW_ruleValidID_in_rule__FunctionDefinition__NameAssignment_236539);
             ruleValidID();
 
             state._fsp--;
@@ -51547,22 +51626,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18122:1: rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1 : ( ruleTemplateParameterDeclaration ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18155:1: rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1 : ( ruleTemplateParameterDeclaration ) ;
     public final void rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18126:1: ( ( ruleTemplateParameterDeclaration ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18127:1: ( ruleTemplateParameterDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18159:1: ( ( ruleTemplateParameterDeclaration ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18160:1: ( ruleTemplateParameterDeclaration )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18127:1: ( ruleTemplateParameterDeclaration )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18128:1: ruleTemplateParameterDeclaration
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18160:1: ( ruleTemplateParameterDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18161:1: ruleTemplateParameterDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getTemplateParameterDeclarationsTemplateParameterDeclarationParserRuleCall_3_1_0()); 
             }
-            pushFollow(FOLLOW_ruleTemplateParameterDeclaration_in_rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_136506);
+            pushFollow(FOLLOW_ruleTemplateParameterDeclaration_in_rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_136570);
             ruleTemplateParameterDeclaration();
 
             state._fsp--;
@@ -51592,22 +51671,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18137:1: rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1 : ( ruleTemplateParameterDeclaration ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18170:1: rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1 : ( ruleTemplateParameterDeclaration ) ;
     public final void rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18141:1: ( ( ruleTemplateParameterDeclaration ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18142:1: ( ruleTemplateParameterDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18174:1: ( ( ruleTemplateParameterDeclaration ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18175:1: ( ruleTemplateParameterDeclaration )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18142:1: ( ruleTemplateParameterDeclaration )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18143:1: ruleTemplateParameterDeclaration
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18175:1: ( ruleTemplateParameterDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18176:1: ruleTemplateParameterDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getTemplateParameterDeclarationsTemplateParameterDeclarationParserRuleCall_3_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleTemplateParameterDeclaration_in_rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_136537);
+            pushFollow(FOLLOW_ruleTemplateParameterDeclaration_in_rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_136601);
             ruleTemplateParameterDeclaration();
 
             state._fsp--;
@@ -51637,22 +51716,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18152:1: rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0 : ( ruleInputParameterDeclaration ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18185:1: rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0 : ( ruleInputParameterDeclaration ) ;
     public final void rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18156:1: ( ( ruleInputParameterDeclaration ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18157:1: ( ruleInputParameterDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18189:1: ( ( ruleInputParameterDeclaration ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18190:1: ( ruleInputParameterDeclaration )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18157:1: ( ruleInputParameterDeclaration )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18158:1: ruleInputParameterDeclaration
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18190:1: ( ruleInputParameterDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18191:1: ruleInputParameterDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getInputParameterDeclarationsInputParameterDeclarationParserRuleCall_5_0_0()); 
             }
-            pushFollow(FOLLOW_ruleInputParameterDeclaration_in_rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_036568);
+            pushFollow(FOLLOW_ruleInputParameterDeclaration_in_rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_036632);
             ruleInputParameterDeclaration();
 
             state._fsp--;
@@ -51682,22 +51761,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18167:1: rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1 : ( ruleInputParameterDeclaration ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18200:1: rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1 : ( ruleInputParameterDeclaration ) ;
     public final void rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18171:1: ( ( ruleInputParameterDeclaration ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18172:1: ( ruleInputParameterDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18204:1: ( ( ruleInputParameterDeclaration ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18205:1: ( ruleInputParameterDeclaration )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18172:1: ( ruleInputParameterDeclaration )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18173:1: ruleInputParameterDeclaration
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18205:1: ( ruleInputParameterDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18206:1: ruleInputParameterDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getInputParameterDeclarationsInputParameterDeclarationParserRuleCall_5_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleInputParameterDeclaration_in_rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_136599);
+            pushFollow(FOLLOW_ruleInputParameterDeclaration_in_rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_136663);
             ruleInputParameterDeclaration();
 
             state._fsp--;
@@ -51727,22 +51806,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18182:1: rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8 : ( ruleOutputParameterDeclaration ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18215:1: rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8 : ( ruleOutputParameterDeclaration ) ;
     public final void rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18186:1: ( ( ruleOutputParameterDeclaration ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18187:1: ( ruleOutputParameterDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18219:1: ( ( ruleOutputParameterDeclaration ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18220:1: ( ruleOutputParameterDeclaration )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18187:1: ( ruleOutputParameterDeclaration )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18188:1: ruleOutputParameterDeclaration
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18220:1: ( ruleOutputParameterDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18221:1: ruleOutputParameterDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getOutputParameterDeclarationsOutputParameterDeclarationParserRuleCall_8_0()); 
             }
-            pushFollow(FOLLOW_ruleOutputParameterDeclaration_in_rule__FunctionDefinition__OutputParameterDeclarationsAssignment_836630);
+            pushFollow(FOLLOW_ruleOutputParameterDeclaration_in_rule__FunctionDefinition__OutputParameterDeclarationsAssignment_836694);
             ruleOutputParameterDeclaration();
 
             state._fsp--;
@@ -51772,22 +51851,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18197:1: rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1 : ( ruleOutputParameterDeclaration ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18230:1: rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1 : ( ruleOutputParameterDeclaration ) ;
     public final void rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18201:1: ( ( ruleOutputParameterDeclaration ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18202:1: ( ruleOutputParameterDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18234:1: ( ( ruleOutputParameterDeclaration ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18235:1: ( ruleOutputParameterDeclaration )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18202:1: ( ruleOutputParameterDeclaration )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18203:1: ruleOutputParameterDeclaration
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18235:1: ( ruleOutputParameterDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18236:1: ruleOutputParameterDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getOutputParameterDeclarationsOutputParameterDeclarationParserRuleCall_9_1_0()); 
             }
-            pushFollow(FOLLOW_ruleOutputParameterDeclaration_in_rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_136661);
+            pushFollow(FOLLOW_ruleOutputParameterDeclaration_in_rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_136725);
             ruleOutputParameterDeclaration();
 
             state._fsp--;
@@ -51817,22 +51896,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionDefinition__ChecksAssignment_11_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18212:1: rule__FunctionDefinition__ChecksAssignment_11_0 : ( ruleCheck ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18245:1: rule__FunctionDefinition__ChecksAssignment_11_0 : ( ruleCheck ) ;
     public final void rule__FunctionDefinition__ChecksAssignment_11_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18216:1: ( ( ruleCheck ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18217:1: ( ruleCheck )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18249:1: ( ( ruleCheck ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18250:1: ( ruleCheck )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18217:1: ( ruleCheck )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18218:1: ruleCheck
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18250:1: ( ruleCheck )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18251:1: ruleCheck
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getChecksCheckParserRuleCall_11_0_0()); 
             }
-            pushFollow(FOLLOW_ruleCheck_in_rule__FunctionDefinition__ChecksAssignment_11_036692);
+            pushFollow(FOLLOW_ruleCheck_in_rule__FunctionDefinition__ChecksAssignment_11_036756);
             ruleCheck();
 
             state._fsp--;
@@ -51862,22 +51941,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionDefinition__AssertionsAssignment_11_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18227:1: rule__FunctionDefinition__AssertionsAssignment_11_1 : ( ruleAssertion ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18260:1: rule__FunctionDefinition__AssertionsAssignment_11_1 : ( ruleAssertion ) ;
     public final void rule__FunctionDefinition__AssertionsAssignment_11_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18231:1: ( ( ruleAssertion ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18232:1: ( ruleAssertion )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18264:1: ( ( ruleAssertion ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18265:1: ( ruleAssertion )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18232:1: ( ruleAssertion )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18233:1: ruleAssertion
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18265:1: ( ruleAssertion )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18266:1: ruleAssertion
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getAssertionsAssertionParserRuleCall_11_1_0()); 
             }
-            pushFollow(FOLLOW_ruleAssertion_in_rule__FunctionDefinition__AssertionsAssignment_11_136723);
+            pushFollow(FOLLOW_ruleAssertion_in_rule__FunctionDefinition__AssertionsAssignment_11_136787);
             ruleAssertion();
 
             state._fsp--;
@@ -51907,22 +51986,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionDefinition__FunctionObjectDeclarationsAssignment_11_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18242:1: rule__FunctionDefinition__FunctionObjectDeclarationsAssignment_11_2 : ( ruleFunctionObjectDeclaration ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18275:1: rule__FunctionDefinition__FunctionObjectDeclarationsAssignment_11_2 : ( ruleFunctionObjectDeclaration ) ;
     public final void rule__FunctionDefinition__FunctionObjectDeclarationsAssignment_11_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18246:1: ( ( ruleFunctionObjectDeclaration ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18247:1: ( ruleFunctionObjectDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18279:1: ( ( ruleFunctionObjectDeclaration ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18280:1: ( ruleFunctionObjectDeclaration )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18247:1: ( ruleFunctionObjectDeclaration )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18248:1: ruleFunctionObjectDeclaration
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18280:1: ( ruleFunctionObjectDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18281:1: ruleFunctionObjectDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getFunctionObjectDeclarationsFunctionObjectDeclarationParserRuleCall_11_2_0()); 
             }
-            pushFollow(FOLLOW_ruleFunctionObjectDeclaration_in_rule__FunctionDefinition__FunctionObjectDeclarationsAssignment_11_236754);
+            pushFollow(FOLLOW_ruleFunctionObjectDeclaration_in_rule__FunctionDefinition__FunctionObjectDeclarationsAssignment_11_236818);
             ruleFunctionObjectDeclaration();
 
             state._fsp--;
@@ -51952,22 +52031,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_3"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18257:1: rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_3 : ( ruleStateVariableDeclaration ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18290:1: rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_3 : ( ruleStateVariableDeclaration ) ;
     public final void rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18261:1: ( ( ruleStateVariableDeclaration ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18262:1: ( ruleStateVariableDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18294:1: ( ( ruleStateVariableDeclaration ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18295:1: ( ruleStateVariableDeclaration )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18262:1: ( ruleStateVariableDeclaration )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18263:1: ruleStateVariableDeclaration
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18295:1: ( ruleStateVariableDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18296:1: ruleStateVariableDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getStateVariableDeclarationsStateVariableDeclarationParserRuleCall_11_3_0()); 
             }
-            pushFollow(FOLLOW_ruleStateVariableDeclaration_in_rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_336785);
+            pushFollow(FOLLOW_ruleStateVariableDeclaration_in_rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_336849);
             ruleStateVariableDeclaration();
 
             state._fsp--;
@@ -51997,22 +52076,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionDefinition__EquationsAssignment_11_4"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18272:1: rule__FunctionDefinition__EquationsAssignment_11_4 : ( ruleEquation ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18305:1: rule__FunctionDefinition__EquationsAssignment_11_4 : ( ruleEquation ) ;
     public final void rule__FunctionDefinition__EquationsAssignment_11_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18276:1: ( ( ruleEquation ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18277:1: ( ruleEquation )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18309:1: ( ( ruleEquation ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18310:1: ( ruleEquation )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18277:1: ( ruleEquation )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18278:1: ruleEquation
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18310:1: ( ruleEquation )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18311:1: ruleEquation
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getEquationsEquationParserRuleCall_11_4_0()); 
             }
-            pushFollow(FOLLOW_ruleEquation_in_rule__FunctionDefinition__EquationsAssignment_11_436816);
+            pushFollow(FOLLOW_ruleEquation_in_rule__FunctionDefinition__EquationsAssignment_11_436880);
             ruleEquation();
 
             state._fsp--;
@@ -52042,22 +52121,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TemplateParameterDeclaration__NameAssignment"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18287:1: rule__TemplateParameterDeclaration__NameAssignment : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18320:1: rule__TemplateParameterDeclaration__NameAssignment : ( ruleValidID ) ;
     public final void rule__TemplateParameterDeclaration__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18291:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18292:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18324:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18325:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18292:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18293:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18325:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18326:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTemplateParameterDeclarationAccess().getNameValidIDParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__TemplateParameterDeclaration__NameAssignment36847);
+            pushFollow(FOLLOW_ruleValidID_in_rule__TemplateParameterDeclaration__NameAssignment36911);
             ruleValidID();
 
             state._fsp--;
@@ -52087,22 +52166,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InputParameterDeclaration__NameAssignment"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18302:1: rule__InputParameterDeclaration__NameAssignment : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18335:1: rule__InputParameterDeclaration__NameAssignment : ( ruleValidID ) ;
     public final void rule__InputParameterDeclaration__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18306:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18307:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18339:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18340:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18307:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18308:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18340:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18341:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInputParameterDeclarationAccess().getNameValidIDParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__InputParameterDeclaration__NameAssignment36878);
+            pushFollow(FOLLOW_ruleValidID_in_rule__InputParameterDeclaration__NameAssignment36942);
             ruleValidID();
 
             state._fsp--;
@@ -52132,22 +52211,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__OutputParameterDeclaration__NameAssignment"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18317:1: rule__OutputParameterDeclaration__NameAssignment : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18350:1: rule__OutputParameterDeclaration__NameAssignment : ( ruleValidID ) ;
     public final void rule__OutputParameterDeclaration__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18321:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18322:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18354:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18355:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18322:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18323:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18355:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18356:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOutputParameterDeclarationAccess().getNameValidIDParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__OutputParameterDeclaration__NameAssignment36909);
+            pushFollow(FOLLOW_ruleValidID_in_rule__OutputParameterDeclaration__NameAssignment36973);
             ruleValidID();
 
             state._fsp--;
@@ -52177,22 +52256,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Check__TemplateArgumentsAssignment_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18332:1: rule__Check__TemplateArgumentsAssignment_1_1 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18365:1: rule__Check__TemplateArgumentsAssignment_1_1 : ( ruleExpression ) ;
     public final void rule__Check__TemplateArgumentsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18336:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18337:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18369:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18370:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18337:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18338:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18370:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18371:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCheckAccess().getTemplateArgumentsExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__Check__TemplateArgumentsAssignment_1_136940);
+            pushFollow(FOLLOW_ruleExpression_in_rule__Check__TemplateArgumentsAssignment_1_137004);
             ruleExpression();
 
             state._fsp--;
@@ -52222,22 +52301,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Check__TemplateArgumentsAssignment_1_2_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18347:1: rule__Check__TemplateArgumentsAssignment_1_2_1 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18380:1: rule__Check__TemplateArgumentsAssignment_1_2_1 : ( ruleExpression ) ;
     public final void rule__Check__TemplateArgumentsAssignment_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18351:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18352:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18384:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18385:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18352:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18353:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18385:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18386:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCheckAccess().getTemplateArgumentsExpressionParserRuleCall_1_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__Check__TemplateArgumentsAssignment_1_2_136971);
+            pushFollow(FOLLOW_ruleExpression_in_rule__Check__TemplateArgumentsAssignment_1_2_137035);
             ruleExpression();
 
             state._fsp--;
@@ -52267,22 +52346,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Check__InputParameterTypesAssignment_3_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18362:1: rule__Check__InputParameterTypesAssignment_3_0 : ( ruleDataTypeSpecifier ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18395:1: rule__Check__InputParameterTypesAssignment_3_0 : ( ruleDataTypeSpecifier ) ;
     public final void rule__Check__InputParameterTypesAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18366:1: ( ( ruleDataTypeSpecifier ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18367:1: ( ruleDataTypeSpecifier )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18399:1: ( ( ruleDataTypeSpecifier ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18400:1: ( ruleDataTypeSpecifier )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18367:1: ( ruleDataTypeSpecifier )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18368:1: ruleDataTypeSpecifier
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18400:1: ( ruleDataTypeSpecifier )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18401:1: ruleDataTypeSpecifier
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCheckAccess().getInputParameterTypesDataTypeSpecifierParserRuleCall_3_0_0()); 
             }
-            pushFollow(FOLLOW_ruleDataTypeSpecifier_in_rule__Check__InputParameterTypesAssignment_3_037002);
+            pushFollow(FOLLOW_ruleDataTypeSpecifier_in_rule__Check__InputParameterTypesAssignment_3_037066);
             ruleDataTypeSpecifier();
 
             state._fsp--;
@@ -52312,22 +52391,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Check__InputParameterTypesAssignment_3_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18377:1: rule__Check__InputParameterTypesAssignment_3_1_1 : ( ruleDataTypeSpecifier ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18410:1: rule__Check__InputParameterTypesAssignment_3_1_1 : ( ruleDataTypeSpecifier ) ;
     public final void rule__Check__InputParameterTypesAssignment_3_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18381:1: ( ( ruleDataTypeSpecifier ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18382:1: ( ruleDataTypeSpecifier )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18414:1: ( ( ruleDataTypeSpecifier ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18415:1: ( ruleDataTypeSpecifier )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18382:1: ( ruleDataTypeSpecifier )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18383:1: ruleDataTypeSpecifier
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18415:1: ( ruleDataTypeSpecifier )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18416:1: ruleDataTypeSpecifier
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCheckAccess().getInputParameterTypesDataTypeSpecifierParserRuleCall_3_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleDataTypeSpecifier_in_rule__Check__InputParameterTypesAssignment_3_1_137033);
+            pushFollow(FOLLOW_ruleDataTypeSpecifier_in_rule__Check__InputParameterTypesAssignment_3_1_137097);
             ruleDataTypeSpecifier();
 
             state._fsp--;
@@ -52357,22 +52436,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Check__OutputParameterTypesAssignment_6"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18392:1: rule__Check__OutputParameterTypesAssignment_6 : ( ruleDataTypeSpecifier ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18425:1: rule__Check__OutputParameterTypesAssignment_6 : ( ruleDataTypeSpecifier ) ;
     public final void rule__Check__OutputParameterTypesAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18396:1: ( ( ruleDataTypeSpecifier ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18397:1: ( ruleDataTypeSpecifier )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18429:1: ( ( ruleDataTypeSpecifier ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18430:1: ( ruleDataTypeSpecifier )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18397:1: ( ruleDataTypeSpecifier )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18398:1: ruleDataTypeSpecifier
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18430:1: ( ruleDataTypeSpecifier )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18431:1: ruleDataTypeSpecifier
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCheckAccess().getOutputParameterTypesDataTypeSpecifierParserRuleCall_6_0()); 
             }
-            pushFollow(FOLLOW_ruleDataTypeSpecifier_in_rule__Check__OutputParameterTypesAssignment_637064);
+            pushFollow(FOLLOW_ruleDataTypeSpecifier_in_rule__Check__OutputParameterTypesAssignment_637128);
             ruleDataTypeSpecifier();
 
             state._fsp--;
@@ -52402,22 +52481,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Check__OutputParameterTypesAssignment_7_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18407:1: rule__Check__OutputParameterTypesAssignment_7_1 : ( ruleDataTypeSpecifier ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18440:1: rule__Check__OutputParameterTypesAssignment_7_1 : ( ruleDataTypeSpecifier ) ;
     public final void rule__Check__OutputParameterTypesAssignment_7_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18411:1: ( ( ruleDataTypeSpecifier ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18412:1: ( ruleDataTypeSpecifier )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18444:1: ( ( ruleDataTypeSpecifier ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18445:1: ( ruleDataTypeSpecifier )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18412:1: ( ruleDataTypeSpecifier )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18413:1: ruleDataTypeSpecifier
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18445:1: ( ruleDataTypeSpecifier )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18446:1: ruleDataTypeSpecifier
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCheckAccess().getOutputParameterTypesDataTypeSpecifierParserRuleCall_7_1_0()); 
             }
-            pushFollow(FOLLOW_ruleDataTypeSpecifier_in_rule__Check__OutputParameterTypesAssignment_7_137095);
+            pushFollow(FOLLOW_ruleDataTypeSpecifier_in_rule__Check__OutputParameterTypesAssignment_7_137159);
             ruleDataTypeSpecifier();
 
             state._fsp--;
@@ -52447,28 +52526,28 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Assertion__StaticAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18422:1: rule__Assertion__StaticAssignment_0 : ( ( 'static' ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18455:1: rule__Assertion__StaticAssignment_0 : ( ( 'static' ) ) ;
     public final void rule__Assertion__StaticAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18426:1: ( ( ( 'static' ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18427:1: ( ( 'static' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18459:1: ( ( ( 'static' ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18460:1: ( ( 'static' ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18427:1: ( ( 'static' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18428:1: ( 'static' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getAssertionAccess().getStaticStaticKeyword_0_0()); 
-            }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18429:1: ( 'static' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18430:1: 'static'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18460:1: ( ( 'static' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18461:1: ( 'static' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAssertionAccess().getStaticStaticKeyword_0_0()); 
             }
-            match(input,88,FOLLOW_88_in_rule__Assertion__StaticAssignment_037131); if (state.failed) return ;
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18462:1: ( 'static' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18463:1: 'static'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getAssertionAccess().getStaticStaticKeyword_0_0()); 
+            }
+            match(input,88,FOLLOW_88_in_rule__Assertion__StaticAssignment_037195); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAssertionAccess().getStaticStaticKeyword_0_0()); 
             }
@@ -52500,22 +52579,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Assertion__ConditionAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18445:1: rule__Assertion__ConditionAssignment_2 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18478:1: rule__Assertion__ConditionAssignment_2 : ( ruleExpression ) ;
     public final void rule__Assertion__ConditionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18449:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18450:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18482:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18483:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18450:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18451:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18483:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18484:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAssertionAccess().getConditionExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__Assertion__ConditionAssignment_237170);
+            pushFollow(FOLLOW_ruleExpression_in_rule__Assertion__ConditionAssignment_237234);
             ruleExpression();
 
             state._fsp--;
@@ -52545,22 +52624,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Assertion__StatusKindAssignment_4"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18460:1: rule__Assertion__StatusKindAssignment_4 : ( ruleAssertionStatusKind ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18493:1: rule__Assertion__StatusKindAssignment_4 : ( ruleAssertionStatusKind ) ;
     public final void rule__Assertion__StatusKindAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18464:1: ( ( ruleAssertionStatusKind ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18465:1: ( ruleAssertionStatusKind )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18497:1: ( ( ruleAssertionStatusKind ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18498:1: ( ruleAssertionStatusKind )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18465:1: ( ruleAssertionStatusKind )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18466:1: ruleAssertionStatusKind
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18498:1: ( ruleAssertionStatusKind )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18499:1: ruleAssertionStatusKind
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAssertionAccess().getStatusKindAssertionStatusKindEnumRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleAssertionStatusKind_in_rule__Assertion__StatusKindAssignment_437201);
+            pushFollow(FOLLOW_ruleAssertionStatusKind_in_rule__Assertion__StatusKindAssignment_437265);
             ruleAssertionStatusKind();
 
             state._fsp--;
@@ -52590,22 +52669,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Assertion__MessageAssignment_5"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18475:1: rule__Assertion__MessageAssignment_5 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18508:1: rule__Assertion__MessageAssignment_5 : ( ruleExpression ) ;
     public final void rule__Assertion__MessageAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18479:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18480:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18512:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18513:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18480:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18481:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18513:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18514:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAssertionAccess().getMessageExpressionParserRuleCall_5_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__Assertion__MessageAssignment_537232);
+            pushFollow(FOLLOW_ruleExpression_in_rule__Assertion__MessageAssignment_537296);
             ruleExpression();
 
             state._fsp--;
@@ -52635,22 +52714,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__StateVariableDeclaration__NameAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18490:1: rule__StateVariableDeclaration__NameAssignment_1 : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18523:1: rule__StateVariableDeclaration__NameAssignment_1 : ( ruleValidID ) ;
     public final void rule__StateVariableDeclaration__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18494:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18495:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18527:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18528:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18495:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18496:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18528:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18529:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStateVariableDeclarationAccess().getNameValidIDParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__StateVariableDeclaration__NameAssignment_137263);
+            pushFollow(FOLLOW_ruleValidID_in_rule__StateVariableDeclaration__NameAssignment_137327);
             ruleValidID();
 
             state._fsp--;
@@ -52680,22 +52759,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionObjectDeclaration__NameAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18505:1: rule__FunctionObjectDeclaration__NameAssignment_1 : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18538:1: rule__FunctionObjectDeclaration__NameAssignment_1 : ( ruleValidID ) ;
     public final void rule__FunctionObjectDeclaration__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18509:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18510:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18542:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18543:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18510:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18511:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18543:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18544:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionObjectDeclarationAccess().getNameValidIDParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__FunctionObjectDeclaration__NameAssignment_137294);
+            pushFollow(FOLLOW_ruleValidID_in_rule__FunctionObjectDeclaration__NameAssignment_137358);
             ruleValidID();
 
             state._fsp--;
@@ -52725,28 +52804,28 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionObjectDeclaration__FunctionNameAssignment_3"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18520:1: rule__FunctionObjectDeclaration__FunctionNameAssignment_3 : ( ( ruleQualifiedName ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18553:1: rule__FunctionObjectDeclaration__FunctionNameAssignment_3 : ( ( ruleQualifiedName ) ) ;
     public final void rule__FunctionObjectDeclaration__FunctionNameAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18524:1: ( ( ( ruleQualifiedName ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18525:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18557:1: ( ( ( ruleQualifiedName ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18558:1: ( ( ruleQualifiedName ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18525:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18526:1: ( ruleQualifiedName )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18558:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18559:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionObjectDeclarationAccess().getFunctionNameFunctionDefinitionCrossReference_3_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18527:1: ( ruleQualifiedName )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18528:1: ruleQualifiedName
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18560:1: ( ruleQualifiedName )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18561:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionObjectDeclarationAccess().getFunctionNameFunctionDefinitionQualifiedNameParserRuleCall_3_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__FunctionObjectDeclaration__FunctionNameAssignment_337329);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__FunctionObjectDeclaration__FunctionNameAssignment_337393);
             ruleQualifiedName();
 
             state._fsp--;
@@ -52782,22 +52861,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18539:1: rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_1 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18572:1: rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_1 : ( ruleExpression ) ;
     public final void rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18543:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18544:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18576:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18577:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18544:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18545:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18577:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18578:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionObjectDeclarationAccess().getTemplateArgumentsExpressionParserRuleCall_4_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_137364);
+            pushFollow(FOLLOW_ruleExpression_in_rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_137428);
             ruleExpression();
 
             state._fsp--;
@@ -52827,22 +52906,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_2_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18554:1: rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_2_1 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18587:1: rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_2_1 : ( ruleExpression ) ;
     public final void rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18558:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18559:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18591:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18592:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18559:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18560:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18592:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18593:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionObjectDeclarationAccess().getTemplateArgumentsExpressionParserRuleCall_4_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_2_137395);
+            pushFollow(FOLLOW_ruleExpression_in_rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_2_137459);
             ruleExpression();
 
             state._fsp--;
@@ -52872,28 +52951,28 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Equation__InitialAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18569:1: rule__Equation__InitialAssignment_0 : ( ( 'initial' ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18602:1: rule__Equation__InitialAssignment_0 : ( ( 'initial' ) ) ;
     public final void rule__Equation__InitialAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18573:1: ( ( ( 'initial' ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18574:1: ( ( 'initial' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18606:1: ( ( ( 'initial' ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18607:1: ( ( 'initial' ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18574:1: ( ( 'initial' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18575:1: ( 'initial' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getEquationAccess().getInitialInitialKeyword_0_0()); 
-            }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18576:1: ( 'initial' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18577:1: 'initial'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18607:1: ( ( 'initial' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18608:1: ( 'initial' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEquationAccess().getInitialInitialKeyword_0_0()); 
             }
-            match(input,89,FOLLOW_89_in_rule__Equation__InitialAssignment_037431); if (state.failed) return ;
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18609:1: ( 'initial' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18610:1: 'initial'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getEquationAccess().getInitialInitialKeyword_0_0()); 
+            }
+            match(input,89,FOLLOW_89_in_rule__Equation__InitialAssignment_037495); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEquationAccess().getInitialInitialKeyword_0_0()); 
             }
@@ -52925,22 +53004,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Equation__LeftHandSideAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18592:1: rule__Equation__LeftHandSideAssignment_1 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18625:1: rule__Equation__LeftHandSideAssignment_1 : ( ruleExpression ) ;
     public final void rule__Equation__LeftHandSideAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18596:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18597:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18629:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18630:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18597:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18598:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18630:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18631:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEquationAccess().getLeftHandSideExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__Equation__LeftHandSideAssignment_137470);
+            pushFollow(FOLLOW_ruleExpression_in_rule__Equation__LeftHandSideAssignment_137534);
             ruleExpression();
 
             state._fsp--;
@@ -52970,22 +53049,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Equation__RightHandSideAssignment_3"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18607:1: rule__Equation__RightHandSideAssignment_3 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18640:1: rule__Equation__RightHandSideAssignment_3 : ( ruleExpression ) ;
     public final void rule__Equation__RightHandSideAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18611:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18612:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18644:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18645:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18612:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18613:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18645:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18646:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEquationAccess().getRightHandSideExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__Equation__RightHandSideAssignment_337501);
+            pushFollow(FOLLOW_ruleExpression_in_rule__Equation__RightHandSideAssignment_337565);
             ruleExpression();
 
             state._fsp--;
@@ -53015,25 +53094,25 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DataTypeSpecifier__DefinedTypeAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18622:1: rule__DataTypeSpecifier__DefinedTypeAssignment_0 : ( ( rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18655:1: rule__DataTypeSpecifier__DefinedTypeAssignment_0 : ( ( rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0 ) ) ;
     public final void rule__DataTypeSpecifier__DefinedTypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18626:1: ( ( ( rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18627:1: ( ( rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18659:1: ( ( ( rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18660:1: ( ( rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18627:1: ( ( rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18628:1: ( rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18660:1: ( ( rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18661:1: ( rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeSpecifierAccess().getDefinedTypeAlternatives_0_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18629:1: ( rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18629:2: rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18662:1: ( rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18662:2: rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0
             {
-            pushFollow(FOLLOW_rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0_in_rule__DataTypeSpecifier__DefinedTypeAssignment_037532);
+            pushFollow(FOLLOW_rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0_in_rule__DataTypeSpecifier__DefinedTypeAssignment_037596);
             rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0();
 
             state._fsp--;
@@ -53066,28 +53145,28 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DataTypeSpecifier__TypeAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18638:1: rule__DataTypeSpecifier__TypeAssignment_1 : ( ( RULE_ID ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18671:1: rule__DataTypeSpecifier__TypeAssignment_1 : ( ( RULE_ID ) ) ;
     public final void rule__DataTypeSpecifier__TypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18642:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18643:1: ( ( RULE_ID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18675:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18676:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18643:1: ( ( RULE_ID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18644:1: ( RULE_ID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18676:1: ( ( RULE_ID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18677:1: ( RULE_ID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeSpecifierAccess().getTypeDataTypeCrossReference_1_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18645:1: ( RULE_ID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18646:1: RULE_ID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18678:1: ( RULE_ID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18679:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeSpecifierAccess().getTypeDataTypeIDTerminalRuleCall_1_0_1()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__DataTypeSpecifier__TypeAssignment_137569); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__DataTypeSpecifier__TypeAssignment_137633); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDataTypeSpecifierAccess().getTypeDataTypeIDTerminalRuleCall_1_0_1()); 
             }
@@ -53119,22 +53198,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RealType__UnitAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18657:1: rule__RealType__UnitAssignment_2 : ( ruleUnit ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18690:1: rule__RealType__UnitAssignment_2 : ( ruleUnit ) ;
     public final void rule__RealType__UnitAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18661:1: ( ( ruleUnit ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18662:1: ( ruleUnit )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18694:1: ( ( ruleUnit ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18695:1: ( ruleUnit )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18662:1: ( ruleUnit )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18663:1: ruleUnit
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18695:1: ( ruleUnit )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18696:1: ruleUnit
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRealTypeAccess().getUnitUnitParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleUnit_in_rule__RealType__UnitAssignment_237604);
+            pushFollow(FOLLOW_ruleUnit_in_rule__RealType__UnitAssignment_237668);
             ruleUnit();
 
             state._fsp--;
@@ -53164,22 +53243,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IntegerType__UnitAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18672:1: rule__IntegerType__UnitAssignment_2 : ( ruleUnit ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18705:1: rule__IntegerType__UnitAssignment_2 : ( ruleUnit ) ;
     public final void rule__IntegerType__UnitAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18676:1: ( ( ruleUnit ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18677:1: ( ruleUnit )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18709:1: ( ( ruleUnit ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18710:1: ( ruleUnit )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18677:1: ( ruleUnit )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18678:1: ruleUnit
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18710:1: ( ruleUnit )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18711:1: ruleUnit
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIntegerTypeAccess().getUnitUnitParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleUnit_in_rule__IntegerType__UnitAssignment_237635);
+            pushFollow(FOLLOW_ruleUnit_in_rule__IntegerType__UnitAssignment_237699);
             ruleUnit();
 
             state._fsp--;
@@ -53209,22 +53288,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ComplexType__UnitAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18687:1: rule__ComplexType__UnitAssignment_2 : ( ruleUnit ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18720:1: rule__ComplexType__UnitAssignment_2 : ( ruleUnit ) ;
     public final void rule__ComplexType__UnitAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18691:1: ( ( ruleUnit ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18692:1: ( ruleUnit )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18724:1: ( ( ruleUnit ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18725:1: ( ruleUnit )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18692:1: ( ruleUnit )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18693:1: ruleUnit
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18725:1: ( ruleUnit )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18726:1: ruleUnit
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getComplexTypeAccess().getUnitUnitParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleUnit_in_rule__ComplexType__UnitAssignment_237666);
+            pushFollow(FOLLOW_ruleUnit_in_rule__ComplexType__UnitAssignment_237730);
             ruleUnit();
 
             state._fsp--;
@@ -53254,22 +53333,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GaussianType__UnitAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18702:1: rule__GaussianType__UnitAssignment_2 : ( ruleUnit ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18735:1: rule__GaussianType__UnitAssignment_2 : ( ruleUnit ) ;
     public final void rule__GaussianType__UnitAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18706:1: ( ( ruleUnit ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18707:1: ( ruleUnit )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18739:1: ( ( ruleUnit ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18740:1: ( ruleUnit )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18707:1: ( ruleUnit )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18708:1: ruleUnit
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18740:1: ( ruleUnit )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18741:1: ruleUnit
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getGaussianTypeAccess().getUnitUnitParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleUnit_in_rule__GaussianType__UnitAssignment_237697);
+            pushFollow(FOLLOW_ruleUnit_in_rule__GaussianType__UnitAssignment_237761);
             ruleUnit();
 
             state._fsp--;
@@ -53299,22 +53378,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArrayType__DefinedElementTypeAssignment_1_0_0_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18717:1: rule__ArrayType__DefinedElementTypeAssignment_1_0_0_0 : ( rulePrimitiveType ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18750:1: rule__ArrayType__DefinedElementTypeAssignment_1_0_0_0 : ( rulePrimitiveType ) ;
     public final void rule__ArrayType__DefinedElementTypeAssignment_1_0_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18721:1: ( ( rulePrimitiveType ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18722:1: ( rulePrimitiveType )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18754:1: ( ( rulePrimitiveType ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18755:1: ( rulePrimitiveType )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18722:1: ( rulePrimitiveType )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18723:1: rulePrimitiveType
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18755:1: ( rulePrimitiveType )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18756:1: rulePrimitiveType
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayTypeAccess().getDefinedElementTypePrimitiveTypeParserRuleCall_1_0_0_0_0()); 
             }
-            pushFollow(FOLLOW_rulePrimitiveType_in_rule__ArrayType__DefinedElementTypeAssignment_1_0_0_037728);
+            pushFollow(FOLLOW_rulePrimitiveType_in_rule__ArrayType__DefinedElementTypeAssignment_1_0_0_037792);
             rulePrimitiveType();
 
             state._fsp--;
@@ -53344,28 +53423,28 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArrayType__ElementTypeAssignment_1_0_0_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18732:1: rule__ArrayType__ElementTypeAssignment_1_0_0_1 : ( ( RULE_ID ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18765:1: rule__ArrayType__ElementTypeAssignment_1_0_0_1 : ( ( RULE_ID ) ) ;
     public final void rule__ArrayType__ElementTypeAssignment_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18736:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18737:1: ( ( RULE_ID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18769:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18770:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18737:1: ( ( RULE_ID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18738:1: ( RULE_ID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18770:1: ( ( RULE_ID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18771:1: ( RULE_ID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayTypeAccess().getElementTypeDataTypeCrossReference_1_0_0_1_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18739:1: ( RULE_ID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18740:1: RULE_ID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18772:1: ( RULE_ID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18773:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayTypeAccess().getElementTypeDataTypeIDTerminalRuleCall_1_0_0_1_0_1()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ArrayType__ElementTypeAssignment_1_0_0_137763); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ArrayType__ElementTypeAssignment_1_0_0_137827); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getArrayTypeAccess().getElementTypeDataTypeIDTerminalRuleCall_1_0_0_1_0_1()); 
             }
@@ -53397,22 +53476,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArrayType__DimensionsAssignment_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18751:1: rule__ArrayType__DimensionsAssignment_1_2 : ( ruleArrayDimension ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18784:1: rule__ArrayType__DimensionsAssignment_1_2 : ( ruleArrayDimension ) ;
     public final void rule__ArrayType__DimensionsAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18755:1: ( ( ruleArrayDimension ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18756:1: ( ruleArrayDimension )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18788:1: ( ( ruleArrayDimension ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18789:1: ( ruleArrayDimension )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18756:1: ( ruleArrayDimension )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18757:1: ruleArrayDimension
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18789:1: ( ruleArrayDimension )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18790:1: ruleArrayDimension
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayTypeAccess().getDimensionsArrayDimensionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleArrayDimension_in_rule__ArrayType__DimensionsAssignment_1_237798);
+            pushFollow(FOLLOW_ruleArrayDimension_in_rule__ArrayType__DimensionsAssignment_1_237862);
             ruleArrayDimension();
 
             state._fsp--;
@@ -53442,22 +53521,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArrayType__DimensionsAssignment_1_3_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18766:1: rule__ArrayType__DimensionsAssignment_1_3_1 : ( ruleArrayDimension ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18799:1: rule__ArrayType__DimensionsAssignment_1_3_1 : ( ruleArrayDimension ) ;
     public final void rule__ArrayType__DimensionsAssignment_1_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18770:1: ( ( ruleArrayDimension ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18771:1: ( ruleArrayDimension )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18803:1: ( ( ruleArrayDimension ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18804:1: ( ruleArrayDimension )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18771:1: ( ruleArrayDimension )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18772:1: ruleArrayDimension
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18804:1: ( ruleArrayDimension )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18805:1: ruleArrayDimension
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayTypeAccess().getDimensionsArrayDimensionParserRuleCall_1_3_1_0()); 
             }
-            pushFollow(FOLLOW_ruleArrayDimension_in_rule__ArrayType__DimensionsAssignment_1_3_137829);
+            pushFollow(FOLLOW_ruleArrayDimension_in_rule__ArrayType__DimensionsAssignment_1_3_137893);
             ruleArrayDimension();
 
             state._fsp--;
@@ -53487,22 +53566,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TensorType__DefinedElementTypeAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18781:1: rule__TensorType__DefinedElementTypeAssignment_0 : ( ruleNumericType ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18814:1: rule__TensorType__DefinedElementTypeAssignment_0 : ( ruleNumericType ) ;
     public final void rule__TensorType__DefinedElementTypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18785:1: ( ( ruleNumericType ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18786:1: ( ruleNumericType )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18818:1: ( ( ruleNumericType ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18819:1: ( ruleNumericType )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18786:1: ( ruleNumericType )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18787:1: ruleNumericType
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18819:1: ( ruleNumericType )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18820:1: ruleNumericType
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTensorTypeAccess().getDefinedElementTypeNumericTypeParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleNumericType_in_rule__TensorType__DefinedElementTypeAssignment_037860);
+            pushFollow(FOLLOW_ruleNumericType_in_rule__TensorType__DefinedElementTypeAssignment_037924);
             ruleNumericType();
 
             state._fsp--;
@@ -53532,22 +53611,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TensorType__DimensionsAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18796:1: rule__TensorType__DimensionsAssignment_2 : ( ruleArrayDimension ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18829:1: rule__TensorType__DimensionsAssignment_2 : ( ruleArrayDimension ) ;
     public final void rule__TensorType__DimensionsAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18800:1: ( ( ruleArrayDimension ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18801:1: ( ruleArrayDimension )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18833:1: ( ( ruleArrayDimension ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18834:1: ( ruleArrayDimension )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18801:1: ( ruleArrayDimension )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18802:1: ruleArrayDimension
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18834:1: ( ruleArrayDimension )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18835:1: ruleArrayDimension
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTensorTypeAccess().getDimensionsArrayDimensionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleArrayDimension_in_rule__TensorType__DimensionsAssignment_237891);
+            pushFollow(FOLLOW_ruleArrayDimension_in_rule__TensorType__DimensionsAssignment_237955);
             ruleArrayDimension();
 
             state._fsp--;
@@ -53577,22 +53656,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TensorType__DimensionsAssignment_3_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18811:1: rule__TensorType__DimensionsAssignment_3_1 : ( ruleArrayDimension ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18844:1: rule__TensorType__DimensionsAssignment_3_1 : ( ruleArrayDimension ) ;
     public final void rule__TensorType__DimensionsAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18815:1: ( ( ruleArrayDimension ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18816:1: ( ruleArrayDimension )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18848:1: ( ( ruleArrayDimension ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18849:1: ( ruleArrayDimension )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18816:1: ( ruleArrayDimension )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18817:1: ruleArrayDimension
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18849:1: ( ruleArrayDimension )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18850:1: ruleArrayDimension
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTensorTypeAccess().getDimensionsArrayDimensionParserRuleCall_3_1_0()); 
             }
-            pushFollow(FOLLOW_ruleArrayDimension_in_rule__TensorType__DimensionsAssignment_3_137922);
+            pushFollow(FOLLOW_ruleArrayDimension_in_rule__TensorType__DimensionsAssignment_3_137986);
             ruleArrayDimension();
 
             state._fsp--;
@@ -53622,22 +53701,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArrayDimension__SizeAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18826:1: rule__ArrayDimension__SizeAssignment_1 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18859:1: rule__ArrayDimension__SizeAssignment_1 : ( ruleExpression ) ;
     public final void rule__ArrayDimension__SizeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18830:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18831:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18863:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18864:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18831:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18832:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18864:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18865:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayDimensionAccess().getSizeExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__ArrayDimension__SizeAssignment_137953);
+            pushFollow(FOLLOW_ruleExpression_in_rule__ArrayDimension__SizeAssignment_138017);
             ruleExpression();
 
             state._fsp--;
@@ -53667,22 +53746,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LetExpression__VariableDeclarationsAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18841:1: rule__LetExpression__VariableDeclarationsAssignment_1 : ( ruleLetExpressionVariableDeclaration ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18874:1: rule__LetExpression__VariableDeclarationsAssignment_1 : ( ruleLetExpressionVariableDeclaration ) ;
     public final void rule__LetExpression__VariableDeclarationsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18845:1: ( ( ruleLetExpressionVariableDeclaration ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18846:1: ( ruleLetExpressionVariableDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18878:1: ( ( ruleLetExpressionVariableDeclaration ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18879:1: ( ruleLetExpressionVariableDeclaration )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18846:1: ( ruleLetExpressionVariableDeclaration )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18847:1: ruleLetExpressionVariableDeclaration
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18879:1: ( ruleLetExpressionVariableDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18880:1: ruleLetExpressionVariableDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpressionAccess().getVariableDeclarationsLetExpressionVariableDeclarationParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleLetExpressionVariableDeclaration_in_rule__LetExpression__VariableDeclarationsAssignment_137984);
+            pushFollow(FOLLOW_ruleLetExpressionVariableDeclaration_in_rule__LetExpression__VariableDeclarationsAssignment_138048);
             ruleLetExpressionVariableDeclaration();
 
             state._fsp--;
@@ -53712,22 +53791,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LetExpression__VariableDeclarationsAssignment_2_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18856:1: rule__LetExpression__VariableDeclarationsAssignment_2_1 : ( ruleLetExpressionVariableDeclaration ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18889:1: rule__LetExpression__VariableDeclarationsAssignment_2_1 : ( ruleLetExpressionVariableDeclaration ) ;
     public final void rule__LetExpression__VariableDeclarationsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18860:1: ( ( ruleLetExpressionVariableDeclaration ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18861:1: ( ruleLetExpressionVariableDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18893:1: ( ( ruleLetExpressionVariableDeclaration ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18894:1: ( ruleLetExpressionVariableDeclaration )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18861:1: ( ruleLetExpressionVariableDeclaration )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18862:1: ruleLetExpressionVariableDeclaration
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18894:1: ( ruleLetExpressionVariableDeclaration )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18895:1: ruleLetExpressionVariableDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpressionAccess().getVariableDeclarationsLetExpressionVariableDeclarationParserRuleCall_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleLetExpressionVariableDeclaration_in_rule__LetExpression__VariableDeclarationsAssignment_2_138015);
+            pushFollow(FOLLOW_ruleLetExpressionVariableDeclaration_in_rule__LetExpression__VariableDeclarationsAssignment_2_138079);
             ruleLetExpressionVariableDeclaration();
 
             state._fsp--;
@@ -53757,22 +53836,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LetExpression__TargetExpressionAssignment_4"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18871:1: rule__LetExpression__TargetExpressionAssignment_4 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18904:1: rule__LetExpression__TargetExpressionAssignment_4 : ( ruleExpression ) ;
     public final void rule__LetExpression__TargetExpressionAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18875:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18876:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18908:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18909:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18876:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18877:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18909:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18910:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpressionAccess().getTargetExpressionExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__LetExpression__TargetExpressionAssignment_438046);
+            pushFollow(FOLLOW_ruleExpression_in_rule__LetExpression__TargetExpressionAssignment_438110);
             ruleExpression();
 
             state._fsp--;
@@ -53802,22 +53881,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LetExpressionVariableDeclaration__PartsAssignment_0_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18886:1: rule__LetExpressionVariableDeclaration__PartsAssignment_0_0 : ( ruleLetExpressionVariableDeclarationPart ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18919:1: rule__LetExpressionVariableDeclaration__PartsAssignment_0_0 : ( ruleLetExpressionVariableDeclarationPart ) ;
     public final void rule__LetExpressionVariableDeclaration__PartsAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18890:1: ( ( ruleLetExpressionVariableDeclarationPart ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18891:1: ( ruleLetExpressionVariableDeclarationPart )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18923:1: ( ( ruleLetExpressionVariableDeclarationPart ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18924:1: ( ruleLetExpressionVariableDeclarationPart )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18891:1: ( ruleLetExpressionVariableDeclarationPart )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18892:1: ruleLetExpressionVariableDeclarationPart
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18924:1: ( ruleLetExpressionVariableDeclarationPart )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18925:1: ruleLetExpressionVariableDeclarationPart
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpressionVariableDeclarationAccess().getPartsLetExpressionVariableDeclarationPartParserRuleCall_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleLetExpressionVariableDeclarationPart_in_rule__LetExpressionVariableDeclaration__PartsAssignment_0_038077);
+            pushFollow(FOLLOW_ruleLetExpressionVariableDeclarationPart_in_rule__LetExpressionVariableDeclaration__PartsAssignment_0_038141);
             ruleLetExpressionVariableDeclarationPart();
 
             state._fsp--;
@@ -53847,22 +53926,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LetExpressionVariableDeclaration__PartsAssignment_0_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18901:1: rule__LetExpressionVariableDeclaration__PartsAssignment_0_1_1 : ( ruleLetExpressionVariableDeclarationPart ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18934:1: rule__LetExpressionVariableDeclaration__PartsAssignment_0_1_1 : ( ruleLetExpressionVariableDeclarationPart ) ;
     public final void rule__LetExpressionVariableDeclaration__PartsAssignment_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18905:1: ( ( ruleLetExpressionVariableDeclarationPart ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18906:1: ( ruleLetExpressionVariableDeclarationPart )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18938:1: ( ( ruleLetExpressionVariableDeclarationPart ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18939:1: ( ruleLetExpressionVariableDeclarationPart )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18906:1: ( ruleLetExpressionVariableDeclarationPart )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18907:1: ruleLetExpressionVariableDeclarationPart
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18939:1: ( ruleLetExpressionVariableDeclarationPart )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18940:1: ruleLetExpressionVariableDeclarationPart
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpressionVariableDeclarationAccess().getPartsLetExpressionVariableDeclarationPartParserRuleCall_0_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleLetExpressionVariableDeclarationPart_in_rule__LetExpressionVariableDeclaration__PartsAssignment_0_1_138108);
+            pushFollow(FOLLOW_ruleLetExpressionVariableDeclarationPart_in_rule__LetExpressionVariableDeclaration__PartsAssignment_0_1_138172);
             ruleLetExpressionVariableDeclarationPart();
 
             state._fsp--;
@@ -53892,22 +53971,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LetExpressionVariableDeclaration__PartsAssignment_0_1_2_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18916:1: rule__LetExpressionVariableDeclaration__PartsAssignment_0_1_2_1 : ( ruleLetExpressionVariableDeclarationPart ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18949:1: rule__LetExpressionVariableDeclaration__PartsAssignment_0_1_2_1 : ( ruleLetExpressionVariableDeclarationPart ) ;
     public final void rule__LetExpressionVariableDeclaration__PartsAssignment_0_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18920:1: ( ( ruleLetExpressionVariableDeclarationPart ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18921:1: ( ruleLetExpressionVariableDeclarationPart )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18953:1: ( ( ruleLetExpressionVariableDeclarationPart ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18954:1: ( ruleLetExpressionVariableDeclarationPart )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18921:1: ( ruleLetExpressionVariableDeclarationPart )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18922:1: ruleLetExpressionVariableDeclarationPart
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18954:1: ( ruleLetExpressionVariableDeclarationPart )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18955:1: ruleLetExpressionVariableDeclarationPart
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpressionVariableDeclarationAccess().getPartsLetExpressionVariableDeclarationPartParserRuleCall_0_1_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleLetExpressionVariableDeclarationPart_in_rule__LetExpressionVariableDeclaration__PartsAssignment_0_1_2_138139);
+            pushFollow(FOLLOW_ruleLetExpressionVariableDeclarationPart_in_rule__LetExpressionVariableDeclaration__PartsAssignment_0_1_2_138203);
             ruleLetExpressionVariableDeclarationPart();
 
             state._fsp--;
@@ -53937,22 +54016,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LetExpressionVariableDeclaration__AssignedExpressionAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18931:1: rule__LetExpressionVariableDeclaration__AssignedExpressionAssignment_2 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18964:1: rule__LetExpressionVariableDeclaration__AssignedExpressionAssignment_2 : ( ruleExpression ) ;
     public final void rule__LetExpressionVariableDeclaration__AssignedExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18935:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18936:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18968:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18969:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18936:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18937:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18969:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18970:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpressionVariableDeclarationAccess().getAssignedExpressionExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__LetExpressionVariableDeclaration__AssignedExpressionAssignment_238170);
+            pushFollow(FOLLOW_ruleExpression_in_rule__LetExpressionVariableDeclaration__AssignedExpressionAssignment_238234);
             ruleExpression();
 
             state._fsp--;
@@ -53982,22 +54061,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LetExpressionVariableDeclarationPart__NameAssignment"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18946:1: rule__LetExpressionVariableDeclarationPart__NameAssignment : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18979:1: rule__LetExpressionVariableDeclarationPart__NameAssignment : ( ruleValidID ) ;
     public final void rule__LetExpressionVariableDeclarationPart__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18950:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18951:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18983:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18984:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18951:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18952:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18984:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18985:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpressionVariableDeclarationPartAccess().getNameValidIDParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__LetExpressionVariableDeclarationPart__NameAssignment38201);
+            pushFollow(FOLLOW_ruleValidID_in_rule__LetExpressionVariableDeclarationPart__NameAssignment38265);
             ruleValidID();
 
             state._fsp--;
@@ -54027,28 +54106,28 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IfExpression__StaticAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18961:1: rule__IfExpression__StaticAssignment_0 : ( ( 'static' ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18994:1: rule__IfExpression__StaticAssignment_0 : ( ( 'static' ) ) ;
     public final void rule__IfExpression__StaticAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18965:1: ( ( ( 'static' ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18966:1: ( ( 'static' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18998:1: ( ( ( 'static' ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18999:1: ( ( 'static' ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18966:1: ( ( 'static' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18967:1: ( 'static' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getIfExpressionAccess().getStaticStaticKeyword_0_0()); 
-            }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18968:1: ( 'static' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18969:1: 'static'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18999:1: ( ( 'static' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19000:1: ( 'static' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpressionAccess().getStaticStaticKeyword_0_0()); 
             }
-            match(input,88,FOLLOW_88_in_rule__IfExpression__StaticAssignment_038237); if (state.failed) return ;
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19001:1: ( 'static' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19002:1: 'static'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getIfExpressionAccess().getStaticStaticKeyword_0_0()); 
+            }
+            match(input,88,FOLLOW_88_in_rule__IfExpression__StaticAssignment_038301); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getIfExpressionAccess().getStaticStaticKeyword_0_0()); 
             }
@@ -54080,22 +54159,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IfExpression__ConditionAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18984:1: rule__IfExpression__ConditionAssignment_2 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19017:1: rule__IfExpression__ConditionAssignment_2 : ( ruleExpression ) ;
     public final void rule__IfExpression__ConditionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18988:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18989:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19021:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19022:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18989:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18990:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19022:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19023:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpressionAccess().getConditionExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__IfExpression__ConditionAssignment_238276);
+            pushFollow(FOLLOW_ruleExpression_in_rule__IfExpression__ConditionAssignment_238340);
             ruleExpression();
 
             state._fsp--;
@@ -54125,22 +54204,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IfExpression__ThenExpressionAssignment_4"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:18999:1: rule__IfExpression__ThenExpressionAssignment_4 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19032:1: rule__IfExpression__ThenExpressionAssignment_4 : ( ruleExpression ) ;
     public final void rule__IfExpression__ThenExpressionAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19003:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19004:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19036:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19037:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19004:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19005:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19037:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19038:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpressionAccess().getThenExpressionExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__IfExpression__ThenExpressionAssignment_438307);
+            pushFollow(FOLLOW_ruleExpression_in_rule__IfExpression__ThenExpressionAssignment_438371);
             ruleExpression();
 
             state._fsp--;
@@ -54170,22 +54249,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IfExpression__ElseExpressionAssignment_6"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19014:1: rule__IfExpression__ElseExpressionAssignment_6 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19047:1: rule__IfExpression__ElseExpressionAssignment_6 : ( ruleExpression ) ;
     public final void rule__IfExpression__ElseExpressionAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19018:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19019:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19051:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19052:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19019:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19020:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19052:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19053:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpressionAccess().getElseExpressionExpressionParserRuleCall_6_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__IfExpression__ElseExpressionAssignment_638338);
+            pushFollow(FOLLOW_ruleExpression_in_rule__IfExpression__ElseExpressionAssignment_638402);
             ruleExpression();
 
             state._fsp--;
@@ -54215,28 +54294,28 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SwitchExpression__StaticAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19029:1: rule__SwitchExpression__StaticAssignment_0 : ( ( 'static' ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19062:1: rule__SwitchExpression__StaticAssignment_0 : ( ( 'static' ) ) ;
     public final void rule__SwitchExpression__StaticAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19033:1: ( ( ( 'static' ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19034:1: ( ( 'static' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19066:1: ( ( ( 'static' ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19067:1: ( ( 'static' ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19034:1: ( ( 'static' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19035:1: ( 'static' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getSwitchExpressionAccess().getStaticStaticKeyword_0_0()); 
-            }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19036:1: ( 'static' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19037:1: 'static'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19067:1: ( ( 'static' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19068:1: ( 'static' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSwitchExpressionAccess().getStaticStaticKeyword_0_0()); 
             }
-            match(input,88,FOLLOW_88_in_rule__SwitchExpression__StaticAssignment_038374); if (state.failed) return ;
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19069:1: ( 'static' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19070:1: 'static'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getSwitchExpressionAccess().getStaticStaticKeyword_0_0()); 
+            }
+            match(input,88,FOLLOW_88_in_rule__SwitchExpression__StaticAssignment_038438); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSwitchExpressionAccess().getStaticStaticKeyword_0_0()); 
             }
@@ -54268,22 +54347,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SwitchExpression__ControlExpressionAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19052:1: rule__SwitchExpression__ControlExpressionAssignment_2 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19085:1: rule__SwitchExpression__ControlExpressionAssignment_2 : ( ruleExpression ) ;
     public final void rule__SwitchExpression__ControlExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19056:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19057:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19089:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19090:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19057:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19058:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19090:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19091:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSwitchExpressionAccess().getControlExpressionExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__SwitchExpression__ControlExpressionAssignment_238413);
+            pushFollow(FOLLOW_ruleExpression_in_rule__SwitchExpression__ControlExpressionAssignment_238477);
             ruleExpression();
 
             state._fsp--;
@@ -54313,22 +54392,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SwitchExpression__CasesAssignment_3"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19067:1: rule__SwitchExpression__CasesAssignment_3 : ( ruleSwitchCase ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19100:1: rule__SwitchExpression__CasesAssignment_3 : ( ruleSwitchCase ) ;
     public final void rule__SwitchExpression__CasesAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19071:1: ( ( ruleSwitchCase ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19072:1: ( ruleSwitchCase )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19104:1: ( ( ruleSwitchCase ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19105:1: ( ruleSwitchCase )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19072:1: ( ruleSwitchCase )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19073:1: ruleSwitchCase
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19105:1: ( ruleSwitchCase )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19106:1: ruleSwitchCase
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSwitchExpressionAccess().getCasesSwitchCaseParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleSwitchCase_in_rule__SwitchExpression__CasesAssignment_338444);
+            pushFollow(FOLLOW_ruleSwitchCase_in_rule__SwitchExpression__CasesAssignment_338508);
             ruleSwitchCase();
 
             state._fsp--;
@@ -54358,22 +54437,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SwitchExpression__DefaultExpressionAssignment_6"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19082:1: rule__SwitchExpression__DefaultExpressionAssignment_6 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19115:1: rule__SwitchExpression__DefaultExpressionAssignment_6 : ( ruleExpression ) ;
     public final void rule__SwitchExpression__DefaultExpressionAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19086:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19087:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19119:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19120:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19087:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19088:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19120:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19121:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSwitchExpressionAccess().getDefaultExpressionExpressionParserRuleCall_6_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__SwitchExpression__DefaultExpressionAssignment_638475);
+            pushFollow(FOLLOW_ruleExpression_in_rule__SwitchExpression__DefaultExpressionAssignment_638539);
             ruleExpression();
 
             state._fsp--;
@@ -54403,22 +54482,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SwitchCase__CaseExpressionAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19097:1: rule__SwitchCase__CaseExpressionAssignment_1 : ( ruleImpliesExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19130:1: rule__SwitchCase__CaseExpressionAssignment_1 : ( ruleImpliesExpression ) ;
     public final void rule__SwitchCase__CaseExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19101:1: ( ( ruleImpliesExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19102:1: ( ruleImpliesExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19134:1: ( ( ruleImpliesExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19135:1: ( ruleImpliesExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19102:1: ( ruleImpliesExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19103:1: ruleImpliesExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19135:1: ( ruleImpliesExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19136:1: ruleImpliesExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSwitchCaseAccess().getCaseExpressionImpliesExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleImpliesExpression_in_rule__SwitchCase__CaseExpressionAssignment_138506);
+            pushFollow(FOLLOW_ruleImpliesExpression_in_rule__SwitchCase__CaseExpressionAssignment_138570);
             ruleImpliesExpression();
 
             state._fsp--;
@@ -54448,22 +54527,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SwitchCase__ResultExpressionAssignment_3"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19112:1: rule__SwitchCase__ResultExpressionAssignment_3 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19145:1: rule__SwitchCase__ResultExpressionAssignment_3 : ( ruleExpression ) ;
     public final void rule__SwitchCase__ResultExpressionAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19116:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19117:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19149:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19150:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19117:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19118:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19150:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19151:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSwitchCaseAccess().getResultExpressionExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__SwitchCase__ResultExpressionAssignment_338537);
+            pushFollow(FOLLOW_ruleExpression_in_rule__SwitchCase__ResultExpressionAssignment_338601);
             ruleExpression();
 
             state._fsp--;
@@ -54493,22 +54572,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RangeExpression__OperandsAssignment_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19127:1: rule__RangeExpression__OperandsAssignment_1_2 : ( ruleImpliesExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19160:1: rule__RangeExpression__OperandsAssignment_1_2 : ( ruleImpliesExpression ) ;
     public final void rule__RangeExpression__OperandsAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19131:1: ( ( ruleImpliesExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19132:1: ( ruleImpliesExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19164:1: ( ( ruleImpliesExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19165:1: ( ruleImpliesExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19132:1: ( ruleImpliesExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19133:1: ruleImpliesExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19165:1: ( ruleImpliesExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19166:1: ruleImpliesExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRangeExpressionAccess().getOperandsImpliesExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleImpliesExpression_in_rule__RangeExpression__OperandsAssignment_1_238568);
+            pushFollow(FOLLOW_ruleImpliesExpression_in_rule__RangeExpression__OperandsAssignment_1_238632);
             ruleImpliesExpression();
 
             state._fsp--;
@@ -54538,22 +54617,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RangeExpression__OperandsAssignment_1_3_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19142:1: rule__RangeExpression__OperandsAssignment_1_3_1 : ( ruleImpliesExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19175:1: rule__RangeExpression__OperandsAssignment_1_3_1 : ( ruleImpliesExpression ) ;
     public final void rule__RangeExpression__OperandsAssignment_1_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19146:1: ( ( ruleImpliesExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19147:1: ( ruleImpliesExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19179:1: ( ( ruleImpliesExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19180:1: ( ruleImpliesExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19147:1: ( ruleImpliesExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19148:1: ruleImpliesExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19180:1: ( ruleImpliesExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19181:1: ruleImpliesExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRangeExpressionAccess().getOperandsImpliesExpressionParserRuleCall_1_3_1_0()); 
             }
-            pushFollow(FOLLOW_ruleImpliesExpression_in_rule__RangeExpression__OperandsAssignment_1_3_138599);
+            pushFollow(FOLLOW_ruleImpliesExpression_in_rule__RangeExpression__OperandsAssignment_1_3_138663);
             ruleImpliesExpression();
 
             state._fsp--;
@@ -54583,22 +54662,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ImpliesExpression__RightOperandAssignment_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19157:1: rule__ImpliesExpression__RightOperandAssignment_1_2 : ( ruleLogicalOrExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19190:1: rule__ImpliesExpression__RightOperandAssignment_1_2 : ( ruleLogicalOrExpression ) ;
     public final void rule__ImpliesExpression__RightOperandAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19161:1: ( ( ruleLogicalOrExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19162:1: ( ruleLogicalOrExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19194:1: ( ( ruleLogicalOrExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19195:1: ( ruleLogicalOrExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19162:1: ( ruleLogicalOrExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19163:1: ruleLogicalOrExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19195:1: ( ruleLogicalOrExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19196:1: ruleLogicalOrExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImpliesExpressionAccess().getRightOperandLogicalOrExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleLogicalOrExpression_in_rule__ImpliesExpression__RightOperandAssignment_1_238630);
+            pushFollow(FOLLOW_ruleLogicalOrExpression_in_rule__ImpliesExpression__RightOperandAssignment_1_238694);
             ruleLogicalOrExpression();
 
             state._fsp--;
@@ -54628,22 +54707,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LogicalOrExpression__RightOperandAssignment_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19172:1: rule__LogicalOrExpression__RightOperandAssignment_1_2 : ( ruleLogicalAndExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19205:1: rule__LogicalOrExpression__RightOperandAssignment_1_2 : ( ruleLogicalAndExpression ) ;
     public final void rule__LogicalOrExpression__RightOperandAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19176:1: ( ( ruleLogicalAndExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19177:1: ( ruleLogicalAndExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19209:1: ( ( ruleLogicalAndExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19210:1: ( ruleLogicalAndExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19177:1: ( ruleLogicalAndExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19178:1: ruleLogicalAndExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19210:1: ( ruleLogicalAndExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19211:1: ruleLogicalAndExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLogicalOrExpressionAccess().getRightOperandLogicalAndExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleLogicalAndExpression_in_rule__LogicalOrExpression__RightOperandAssignment_1_238661);
+            pushFollow(FOLLOW_ruleLogicalAndExpression_in_rule__LogicalOrExpression__RightOperandAssignment_1_238725);
             ruleLogicalAndExpression();
 
             state._fsp--;
@@ -54673,22 +54752,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LogicalAndExpression__RightOperandAssignment_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19187:1: rule__LogicalAndExpression__RightOperandAssignment_1_2 : ( ruleEqualityExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19220:1: rule__LogicalAndExpression__RightOperandAssignment_1_2 : ( ruleEqualityExpression ) ;
     public final void rule__LogicalAndExpression__RightOperandAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19191:1: ( ( ruleEqualityExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19192:1: ( ruleEqualityExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19224:1: ( ( ruleEqualityExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19225:1: ( ruleEqualityExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19192:1: ( ruleEqualityExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19193:1: ruleEqualityExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19225:1: ( ruleEqualityExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19226:1: ruleEqualityExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLogicalAndExpressionAccess().getRightOperandEqualityExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleEqualityExpression_in_rule__LogicalAndExpression__RightOperandAssignment_1_238692);
+            pushFollow(FOLLOW_ruleEqualityExpression_in_rule__LogicalAndExpression__RightOperandAssignment_1_238756);
             ruleEqualityExpression();
 
             state._fsp--;
@@ -54718,22 +54797,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EqualityExpression__OperatorAssignment_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19202:1: rule__EqualityExpression__OperatorAssignment_1_1 : ( ruleEqualityOperator ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19235:1: rule__EqualityExpression__OperatorAssignment_1_1 : ( ruleEqualityOperator ) ;
     public final void rule__EqualityExpression__OperatorAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19206:1: ( ( ruleEqualityOperator ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19207:1: ( ruleEqualityOperator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19239:1: ( ( ruleEqualityOperator ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19240:1: ( ruleEqualityOperator )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19207:1: ( ruleEqualityOperator )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19208:1: ruleEqualityOperator
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19240:1: ( ruleEqualityOperator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19241:1: ruleEqualityOperator
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEqualityExpressionAccess().getOperatorEqualityOperatorEnumRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleEqualityOperator_in_rule__EqualityExpression__OperatorAssignment_1_138723);
+            pushFollow(FOLLOW_ruleEqualityOperator_in_rule__EqualityExpression__OperatorAssignment_1_138787);
             ruleEqualityOperator();
 
             state._fsp--;
@@ -54763,22 +54842,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EqualityExpression__RightOperandAssignment_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19217:1: rule__EqualityExpression__RightOperandAssignment_1_2 : ( ruleRelationalExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19250:1: rule__EqualityExpression__RightOperandAssignment_1_2 : ( ruleRelationalExpression ) ;
     public final void rule__EqualityExpression__RightOperandAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19221:1: ( ( ruleRelationalExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19222:1: ( ruleRelationalExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19254:1: ( ( ruleRelationalExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19255:1: ( ruleRelationalExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19222:1: ( ruleRelationalExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19223:1: ruleRelationalExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19255:1: ( ruleRelationalExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19256:1: ruleRelationalExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEqualityExpressionAccess().getRightOperandRelationalExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleRelationalExpression_in_rule__EqualityExpression__RightOperandAssignment_1_238754);
+            pushFollow(FOLLOW_ruleRelationalExpression_in_rule__EqualityExpression__RightOperandAssignment_1_238818);
             ruleRelationalExpression();
 
             state._fsp--;
@@ -54808,22 +54887,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RelationalExpression__OperatorAssignment_1_0_0_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19232:1: rule__RelationalExpression__OperatorAssignment_1_0_0_1 : ( ruleRelationalOperator ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19265:1: rule__RelationalExpression__OperatorAssignment_1_0_0_1 : ( ruleRelationalOperator ) ;
     public final void rule__RelationalExpression__OperatorAssignment_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19236:1: ( ( ruleRelationalOperator ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19237:1: ( ruleRelationalOperator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19269:1: ( ( ruleRelationalOperator ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19270:1: ( ruleRelationalOperator )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19237:1: ( ruleRelationalOperator )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19238:1: ruleRelationalOperator
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19270:1: ( ruleRelationalOperator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19271:1: ruleRelationalOperator
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRelationalExpressionAccess().getOperatorRelationalOperatorEnumRuleCall_1_0_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleRelationalOperator_in_rule__RelationalExpression__OperatorAssignment_1_0_0_138785);
+            pushFollow(FOLLOW_ruleRelationalOperator_in_rule__RelationalExpression__OperatorAssignment_1_0_0_138849);
             ruleRelationalOperator();
 
             state._fsp--;
@@ -54853,22 +54932,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RelationalExpression__RightOperandAssignment_1_0_0_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19247:1: rule__RelationalExpression__RightOperandAssignment_1_0_0_2 : ( ruleAdditiveExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19280:1: rule__RelationalExpression__RightOperandAssignment_1_0_0_2 : ( ruleAdditiveExpression ) ;
     public final void rule__RelationalExpression__RightOperandAssignment_1_0_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19251:1: ( ( ruleAdditiveExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19252:1: ( ruleAdditiveExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19284:1: ( ( ruleAdditiveExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19285:1: ( ruleAdditiveExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19252:1: ( ruleAdditiveExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19253:1: ruleAdditiveExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19285:1: ( ruleAdditiveExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19286:1: ruleAdditiveExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRelationalExpressionAccess().getRightOperandAdditiveExpressionParserRuleCall_1_0_0_2_0()); 
             }
-            pushFollow(FOLLOW_ruleAdditiveExpression_in_rule__RelationalExpression__RightOperandAssignment_1_0_0_238816);
+            pushFollow(FOLLOW_ruleAdditiveExpression_in_rule__RelationalExpression__RightOperandAssignment_1_0_0_238880);
             ruleAdditiveExpression();
 
             state._fsp--;
@@ -54898,22 +54977,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RelationalExpression__TypeAssignment_1_0_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19262:1: rule__RelationalExpression__TypeAssignment_1_0_1_2 : ( ruleDataTypeSpecifier ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19295:1: rule__RelationalExpression__TypeAssignment_1_0_1_2 : ( ruleDataTypeSpecifier ) ;
     public final void rule__RelationalExpression__TypeAssignment_1_0_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19266:1: ( ( ruleDataTypeSpecifier ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19267:1: ( ruleDataTypeSpecifier )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19299:1: ( ( ruleDataTypeSpecifier ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19300:1: ( ruleDataTypeSpecifier )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19267:1: ( ruleDataTypeSpecifier )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19268:1: ruleDataTypeSpecifier
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19300:1: ( ruleDataTypeSpecifier )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19301:1: ruleDataTypeSpecifier
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRelationalExpressionAccess().getTypeDataTypeSpecifierParserRuleCall_1_0_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleDataTypeSpecifier_in_rule__RelationalExpression__TypeAssignment_1_0_1_238847);
+            pushFollow(FOLLOW_ruleDataTypeSpecifier_in_rule__RelationalExpression__TypeAssignment_1_0_1_238911);
             ruleDataTypeSpecifier();
 
             state._fsp--;
@@ -54943,22 +55022,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AdditiveExpression__OperatorAssignment_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19277:1: rule__AdditiveExpression__OperatorAssignment_1_1 : ( ruleAdditiveOperator ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19310:1: rule__AdditiveExpression__OperatorAssignment_1_1 : ( ruleAdditiveOperator ) ;
     public final void rule__AdditiveExpression__OperatorAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19281:1: ( ( ruleAdditiveOperator ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19282:1: ( ruleAdditiveOperator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19314:1: ( ( ruleAdditiveOperator ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19315:1: ( ruleAdditiveOperator )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19282:1: ( ruleAdditiveOperator )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19283:1: ruleAdditiveOperator
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19315:1: ( ruleAdditiveOperator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19316:1: ruleAdditiveOperator
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAdditiveExpressionAccess().getOperatorAdditiveOperatorEnumRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleAdditiveOperator_in_rule__AdditiveExpression__OperatorAssignment_1_138878);
+            pushFollow(FOLLOW_ruleAdditiveOperator_in_rule__AdditiveExpression__OperatorAssignment_1_138942);
             ruleAdditiveOperator();
 
             state._fsp--;
@@ -54988,22 +55067,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AdditiveExpression__RightOperandAssignment_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19292:1: rule__AdditiveExpression__RightOperandAssignment_1_2 : ( ruleMultiplicativeExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19325:1: rule__AdditiveExpression__RightOperandAssignment_1_2 : ( ruleMultiplicativeExpression ) ;
     public final void rule__AdditiveExpression__RightOperandAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19296:1: ( ( ruleMultiplicativeExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19297:1: ( ruleMultiplicativeExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19329:1: ( ( ruleMultiplicativeExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19330:1: ( ruleMultiplicativeExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19297:1: ( ruleMultiplicativeExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19298:1: ruleMultiplicativeExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19330:1: ( ruleMultiplicativeExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19331:1: ruleMultiplicativeExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAdditiveExpressionAccess().getRightOperandMultiplicativeExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleMultiplicativeExpression_in_rule__AdditiveExpression__RightOperandAssignment_1_238909);
+            pushFollow(FOLLOW_ruleMultiplicativeExpression_in_rule__AdditiveExpression__RightOperandAssignment_1_238973);
             ruleMultiplicativeExpression();
 
             state._fsp--;
@@ -55033,22 +55112,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MultiplicativeExpression__OperatorAssignment_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19307:1: rule__MultiplicativeExpression__OperatorAssignment_1_1 : ( ruleMultiplicativeOperator ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19340:1: rule__MultiplicativeExpression__OperatorAssignment_1_1 : ( ruleMultiplicativeOperator ) ;
     public final void rule__MultiplicativeExpression__OperatorAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19311:1: ( ( ruleMultiplicativeOperator ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19312:1: ( ruleMultiplicativeOperator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19344:1: ( ( ruleMultiplicativeOperator ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19345:1: ( ruleMultiplicativeOperator )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19312:1: ( ruleMultiplicativeOperator )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19313:1: ruleMultiplicativeOperator
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19345:1: ( ruleMultiplicativeOperator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19346:1: ruleMultiplicativeOperator
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicativeExpressionAccess().getOperatorMultiplicativeOperatorEnumRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleMultiplicativeOperator_in_rule__MultiplicativeExpression__OperatorAssignment_1_138940);
+            pushFollow(FOLLOW_ruleMultiplicativeOperator_in_rule__MultiplicativeExpression__OperatorAssignment_1_139004);
             ruleMultiplicativeOperator();
 
             state._fsp--;
@@ -55078,22 +55157,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MultiplicativeExpression__RightOperandAssignment_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19322:1: rule__MultiplicativeExpression__RightOperandAssignment_1_2 : ( rulePowerExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19355:1: rule__MultiplicativeExpression__RightOperandAssignment_1_2 : ( rulePowerExpression ) ;
     public final void rule__MultiplicativeExpression__RightOperandAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19326:1: ( ( rulePowerExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19327:1: ( rulePowerExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19359:1: ( ( rulePowerExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19360:1: ( rulePowerExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19327:1: ( rulePowerExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19328:1: rulePowerExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19360:1: ( rulePowerExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19361:1: rulePowerExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicativeExpressionAccess().getRightOperandPowerExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_rulePowerExpression_in_rule__MultiplicativeExpression__RightOperandAssignment_1_238971);
+            pushFollow(FOLLOW_rulePowerExpression_in_rule__MultiplicativeExpression__RightOperandAssignment_1_239035);
             rulePowerExpression();
 
             state._fsp--;
@@ -55123,22 +55202,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PowerExpression__OperatorAssignment_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19337:1: rule__PowerExpression__OperatorAssignment_1_1 : ( rulePowerOperator ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19370:1: rule__PowerExpression__OperatorAssignment_1_1 : ( rulePowerOperator ) ;
     public final void rule__PowerExpression__OperatorAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19341:1: ( ( rulePowerOperator ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19342:1: ( rulePowerOperator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19374:1: ( ( rulePowerOperator ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19375:1: ( rulePowerOperator )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19342:1: ( rulePowerOperator )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19343:1: rulePowerOperator
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19375:1: ( rulePowerOperator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19376:1: rulePowerOperator
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPowerExpressionAccess().getOperatorPowerOperatorEnumRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_rulePowerOperator_in_rule__PowerExpression__OperatorAssignment_1_139002);
+            pushFollow(FOLLOW_rulePowerOperator_in_rule__PowerExpression__OperatorAssignment_1_139066);
             rulePowerOperator();
 
             state._fsp--;
@@ -55168,22 +55247,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PowerExpression__ExponentAssignment_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19352:1: rule__PowerExpression__ExponentAssignment_1_2 : ( ruleUnaryExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19385:1: rule__PowerExpression__ExponentAssignment_1_2 : ( ruleUnaryExpression ) ;
     public final void rule__PowerExpression__ExponentAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19356:1: ( ( ruleUnaryExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19357:1: ( ruleUnaryExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19389:1: ( ( ruleUnaryExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19390:1: ( ruleUnaryExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19357:1: ( ruleUnaryExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19358:1: ruleUnaryExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19390:1: ( ruleUnaryExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19391:1: ruleUnaryExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPowerExpressionAccess().getExponentUnaryExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleUnaryExpression_in_rule__PowerExpression__ExponentAssignment_1_239033);
+            pushFollow(FOLLOW_ruleUnaryExpression_in_rule__PowerExpression__ExponentAssignment_1_239097);
             ruleUnaryExpression();
 
             state._fsp--;
@@ -55213,22 +55292,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnaryExpression__OperatorAssignment_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19367:1: rule__UnaryExpression__OperatorAssignment_1_1 : ( ruleUnaryOperator ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19400:1: rule__UnaryExpression__OperatorAssignment_1_1 : ( ruleUnaryOperator ) ;
     public final void rule__UnaryExpression__OperatorAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19371:1: ( ( ruleUnaryOperator ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19372:1: ( ruleUnaryOperator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19404:1: ( ( ruleUnaryOperator ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19405:1: ( ruleUnaryOperator )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19372:1: ( ruleUnaryOperator )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19373:1: ruleUnaryOperator
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19405:1: ( ruleUnaryOperator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19406:1: ruleUnaryOperator
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnaryExpressionAccess().getOperatorUnaryOperatorEnumRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleUnaryOperator_in_rule__UnaryExpression__OperatorAssignment_1_139064);
+            pushFollow(FOLLOW_ruleUnaryOperator_in_rule__UnaryExpression__OperatorAssignment_1_139128);
             ruleUnaryOperator();
 
             state._fsp--;
@@ -55258,22 +55337,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnaryExpression__OperandAssignment_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19382:1: rule__UnaryExpression__OperandAssignment_1_2 : ( rulePostfixExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19415:1: rule__UnaryExpression__OperandAssignment_1_2 : ( rulePostfixExpression ) ;
     public final void rule__UnaryExpression__OperandAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19386:1: ( ( rulePostfixExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19387:1: ( rulePostfixExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19419:1: ( ( rulePostfixExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19420:1: ( rulePostfixExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19387:1: ( rulePostfixExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19388:1: rulePostfixExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19420:1: ( rulePostfixExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19421:1: rulePostfixExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnaryExpressionAccess().getOperandPostfixExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_rulePostfixExpression_in_rule__UnaryExpression__OperandAssignment_1_239095);
+            pushFollow(FOLLOW_rulePostfixExpression_in_rule__UnaryExpression__OperandAssignment_1_239159);
             rulePostfixExpression();
 
             state._fsp--;
@@ -55303,22 +55382,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PostfixExpression__OperatorAssignment_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19397:1: rule__PostfixExpression__OperatorAssignment_1_1 : ( rulePostfixOperator ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19430:1: rule__PostfixExpression__OperatorAssignment_1_1 : ( rulePostfixOperator ) ;
     public final void rule__PostfixExpression__OperatorAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19401:1: ( ( rulePostfixOperator ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19402:1: ( rulePostfixOperator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19434:1: ( ( rulePostfixOperator ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19435:1: ( rulePostfixOperator )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19402:1: ( rulePostfixOperator )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19403:1: rulePostfixOperator
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19435:1: ( rulePostfixOperator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19436:1: rulePostfixOperator
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPostfixExpressionAccess().getOperatorPostfixOperatorEnumRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_rulePostfixOperator_in_rule__PostfixExpression__OperatorAssignment_1_139126);
+            pushFollow(FOLLOW_rulePostfixOperator_in_rule__PostfixExpression__OperatorAssignment_1_139190);
             rulePostfixOperator();
 
             state._fsp--;
@@ -55348,22 +55427,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArrayElementAccess__SubscriptsAssignment_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19412:1: rule__ArrayElementAccess__SubscriptsAssignment_1_2 : ( ruleArraySubscript ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19445:1: rule__ArrayElementAccess__SubscriptsAssignment_1_2 : ( ruleArraySubscript ) ;
     public final void rule__ArrayElementAccess__SubscriptsAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19416:1: ( ( ruleArraySubscript ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19417:1: ( ruleArraySubscript )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19449:1: ( ( ruleArraySubscript ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19450:1: ( ruleArraySubscript )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19417:1: ( ruleArraySubscript )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19418:1: ruleArraySubscript
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19450:1: ( ruleArraySubscript )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19451:1: ruleArraySubscript
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayElementAccessAccess().getSubscriptsArraySubscriptParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleArraySubscript_in_rule__ArrayElementAccess__SubscriptsAssignment_1_239157);
+            pushFollow(FOLLOW_ruleArraySubscript_in_rule__ArrayElementAccess__SubscriptsAssignment_1_239221);
             ruleArraySubscript();
 
             state._fsp--;
@@ -55393,22 +55472,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArrayElementAccess__SubscriptsAssignment_1_3_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19427:1: rule__ArrayElementAccess__SubscriptsAssignment_1_3_1 : ( ruleArraySubscript ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19460:1: rule__ArrayElementAccess__SubscriptsAssignment_1_3_1 : ( ruleArraySubscript ) ;
     public final void rule__ArrayElementAccess__SubscriptsAssignment_1_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19431:1: ( ( ruleArraySubscript ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19432:1: ( ruleArraySubscript )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19464:1: ( ( ruleArraySubscript ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19465:1: ( ruleArraySubscript )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19432:1: ( ruleArraySubscript )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19433:1: ruleArraySubscript
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19465:1: ( ruleArraySubscript )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19466:1: ruleArraySubscript
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayElementAccessAccess().getSubscriptsArraySubscriptParserRuleCall_1_3_1_0()); 
             }
-            pushFollow(FOLLOW_ruleArraySubscript_in_rule__ArrayElementAccess__SubscriptsAssignment_1_3_139188);
+            pushFollow(FOLLOW_ruleArraySubscript_in_rule__ArrayElementAccess__SubscriptsAssignment_1_3_139252);
             ruleArraySubscript();
 
             state._fsp--;
@@ -55438,28 +55517,28 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MemberFeatureCall__MemberVariableAssignment_1_0_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19442:1: rule__MemberFeatureCall__MemberVariableAssignment_1_0_2 : ( ( ruleValidID ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19475:1: rule__MemberFeatureCall__MemberVariableAssignment_1_0_2 : ( ( ruleValidID ) ) ;
     public final void rule__MemberFeatureCall__MemberVariableAssignment_1_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19446:1: ( ( ( ruleValidID ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19447:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19479:1: ( ( ( ruleValidID ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19480:1: ( ( ruleValidID ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19447:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19448:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19480:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19481:1: ( ruleValidID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMemberFeatureCallAccess().getMemberVariableCallableElementCrossReference_1_0_2_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19449:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19450:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19482:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19483:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMemberFeatureCallAccess().getMemberVariableCallableElementValidIDParserRuleCall_1_0_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__MemberFeatureCall__MemberVariableAssignment_1_0_239223);
+            pushFollow(FOLLOW_ruleValidID_in_rule__MemberFeatureCall__MemberVariableAssignment_1_0_239287);
             ruleValidID();
 
             state._fsp--;
@@ -55495,28 +55574,28 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MemberFeatureCall__FeatureAssignment_1_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19461:1: rule__MemberFeatureCall__FeatureAssignment_1_1_2 : ( ( ruleValidID ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19494:1: rule__MemberFeatureCall__FeatureAssignment_1_1_2 : ( ( ruleValidID ) ) ;
     public final void rule__MemberFeatureCall__FeatureAssignment_1_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19465:1: ( ( ( ruleValidID ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19466:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19498:1: ( ( ( ruleValidID ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19499:1: ( ( ruleValidID ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19466:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19467:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19499:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19500:1: ( ruleValidID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMemberFeatureCallAccess().getFeatureCallableElementCrossReference_1_1_2_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19468:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19469:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19501:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19502:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMemberFeatureCallAccess().getFeatureCallableElementValidIDParserRuleCall_1_1_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__MemberFeatureCall__FeatureAssignment_1_1_239262);
+            pushFollow(FOLLOW_ruleValidID_in_rule__MemberFeatureCall__FeatureAssignment_1_1_239326);
             ruleValidID();
 
             state._fsp--;
@@ -55552,22 +55631,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19480:1: rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_0 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19513:1: rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_0 : ( ruleExpression ) ;
     public final void rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19484:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19485:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19517:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19518:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19485:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19486:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19518:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19519:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMemberFeatureCallAccess().getArgumentsExpressionParserRuleCall_1_1_4_0_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_039297);
+            pushFollow(FOLLOW_ruleExpression_in_rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_039361);
             ruleExpression();
 
             state._fsp--;
@@ -55597,22 +55676,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19495:1: rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_1_1 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19528:1: rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_1_1 : ( ruleExpression ) ;
     public final void rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19499:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19500:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19532:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19533:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19500:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19501:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19533:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19534:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMemberFeatureCallAccess().getArgumentsExpressionParserRuleCall_1_1_4_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_1_139328);
+            pushFollow(FOLLOW_ruleExpression_in_rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_1_139392);
             ruleExpression();
 
             state._fsp--;
@@ -55642,22 +55721,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MemberFeatureCall__IdentifierAssignment_1_2_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19510:1: rule__MemberFeatureCall__IdentifierAssignment_1_2_2 : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19543:1: rule__MemberFeatureCall__IdentifierAssignment_1_2_2 : ( ruleValidID ) ;
     public final void rule__MemberFeatureCall__IdentifierAssignment_1_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19514:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19515:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19547:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19548:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19515:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19516:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19548:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19549:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMemberFeatureCallAccess().getIdentifierValidIDParserRuleCall_1_2_2_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__MemberFeatureCall__IdentifierAssignment_1_2_239359);
+            pushFollow(FOLLOW_ruleValidID_in_rule__MemberFeatureCall__IdentifierAssignment_1_2_239423);
             ruleValidID();
 
             state._fsp--;
@@ -55687,22 +55766,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MemberFeatureCall__VariablesAssignment_1_2_4"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19525:1: rule__MemberFeatureCall__VariablesAssignment_1_2_4 : ( ruleIterationVariable ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19558:1: rule__MemberFeatureCall__VariablesAssignment_1_2_4 : ( ruleIterationVariable ) ;
     public final void rule__MemberFeatureCall__VariablesAssignment_1_2_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19529:1: ( ( ruleIterationVariable ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19530:1: ( ruleIterationVariable )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19562:1: ( ( ruleIterationVariable ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19563:1: ( ruleIterationVariable )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19530:1: ( ruleIterationVariable )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19531:1: ruleIterationVariable
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19563:1: ( ruleIterationVariable )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19564:1: ruleIterationVariable
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMemberFeatureCallAccess().getVariablesIterationVariableParserRuleCall_1_2_4_0()); 
             }
-            pushFollow(FOLLOW_ruleIterationVariable_in_rule__MemberFeatureCall__VariablesAssignment_1_2_439390);
+            pushFollow(FOLLOW_ruleIterationVariable_in_rule__MemberFeatureCall__VariablesAssignment_1_2_439454);
             ruleIterationVariable();
 
             state._fsp--;
@@ -55732,22 +55811,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MemberFeatureCall__VariablesAssignment_1_2_5_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19540:1: rule__MemberFeatureCall__VariablesAssignment_1_2_5_1 : ( ruleIterationVariable ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19573:1: rule__MemberFeatureCall__VariablesAssignment_1_2_5_1 : ( ruleIterationVariable ) ;
     public final void rule__MemberFeatureCall__VariablesAssignment_1_2_5_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19544:1: ( ( ruleIterationVariable ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19545:1: ( ruleIterationVariable )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19577:1: ( ( ruleIterationVariable ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19578:1: ( ruleIterationVariable )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19545:1: ( ruleIterationVariable )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19546:1: ruleIterationVariable
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19578:1: ( ruleIterationVariable )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19579:1: ruleIterationVariable
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMemberFeatureCallAccess().getVariablesIterationVariableParserRuleCall_1_2_5_1_0()); 
             }
-            pushFollow(FOLLOW_ruleIterationVariable_in_rule__MemberFeatureCall__VariablesAssignment_1_2_5_139421);
+            pushFollow(FOLLOW_ruleIterationVariable_in_rule__MemberFeatureCall__VariablesAssignment_1_2_5_139485);
             ruleIterationVariable();
 
             state._fsp--;
@@ -55777,22 +55856,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MemberFeatureCall__AccumulatorAssignment_1_2_6_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19555:1: rule__MemberFeatureCall__AccumulatorAssignment_1_2_6_1 : ( ruleIterationAccumulator ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19588:1: rule__MemberFeatureCall__AccumulatorAssignment_1_2_6_1 : ( ruleIterationAccumulator ) ;
     public final void rule__MemberFeatureCall__AccumulatorAssignment_1_2_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19559:1: ( ( ruleIterationAccumulator ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19560:1: ( ruleIterationAccumulator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19592:1: ( ( ruleIterationAccumulator ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19593:1: ( ruleIterationAccumulator )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19560:1: ( ruleIterationAccumulator )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19561:1: ruleIterationAccumulator
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19593:1: ( ruleIterationAccumulator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19594:1: ruleIterationAccumulator
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMemberFeatureCallAccess().getAccumulatorIterationAccumulatorParserRuleCall_1_2_6_1_0()); 
             }
-            pushFollow(FOLLOW_ruleIterationAccumulator_in_rule__MemberFeatureCall__AccumulatorAssignment_1_2_6_139452);
+            pushFollow(FOLLOW_ruleIterationAccumulator_in_rule__MemberFeatureCall__AccumulatorAssignment_1_2_6_139516);
             ruleIterationAccumulator();
 
             state._fsp--;
@@ -55822,22 +55901,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MemberFeatureCall__BreakConditionAssignment_1_2_7_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19570:1: rule__MemberFeatureCall__BreakConditionAssignment_1_2_7_1 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19603:1: rule__MemberFeatureCall__BreakConditionAssignment_1_2_7_1 : ( ruleExpression ) ;
     public final void rule__MemberFeatureCall__BreakConditionAssignment_1_2_7_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19574:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19575:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19607:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19608:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19575:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19576:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19608:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19609:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMemberFeatureCallAccess().getBreakConditionExpressionParserRuleCall_1_2_7_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__MemberFeatureCall__BreakConditionAssignment_1_2_7_139483);
+            pushFollow(FOLLOW_ruleExpression_in_rule__MemberFeatureCall__BreakConditionAssignment_1_2_7_139547);
             ruleExpression();
 
             state._fsp--;
@@ -55867,22 +55946,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MemberFeatureCall__ExpressionAssignment_1_2_9"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19585:1: rule__MemberFeatureCall__ExpressionAssignment_1_2_9 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19618:1: rule__MemberFeatureCall__ExpressionAssignment_1_2_9 : ( ruleExpression ) ;
     public final void rule__MemberFeatureCall__ExpressionAssignment_1_2_9() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19589:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19590:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19622:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19623:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19590:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19591:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19623:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19624:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMemberFeatureCallAccess().getExpressionExpressionParserRuleCall_1_2_9_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__MemberFeatureCall__ExpressionAssignment_1_2_939514);
+            pushFollow(FOLLOW_ruleExpression_in_rule__MemberFeatureCall__ExpressionAssignment_1_2_939578);
             ruleExpression();
 
             state._fsp--;
@@ -55912,28 +55991,28 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AssignableMemberFeatureCall__MemberVariableAssignment_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19600:1: rule__AssignableMemberFeatureCall__MemberVariableAssignment_1_2 : ( ( ruleValidID ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19633:1: rule__AssignableMemberFeatureCall__MemberVariableAssignment_1_2 : ( ( ruleValidID ) ) ;
     public final void rule__AssignableMemberFeatureCall__MemberVariableAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19604:1: ( ( ( ruleValidID ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19605:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19637:1: ( ( ( ruleValidID ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19638:1: ( ( ruleValidID ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19605:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19606:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19638:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19639:1: ( ruleValidID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAssignableMemberFeatureCallAccess().getMemberVariableCallableElementCrossReference_1_2_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19607:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19608:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19640:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19641:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAssignableMemberFeatureCallAccess().getMemberVariableCallableElementValidIDParserRuleCall_1_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__AssignableMemberFeatureCall__MemberVariableAssignment_1_239549);
+            pushFollow(FOLLOW_ruleValidID_in_rule__AssignableMemberFeatureCall__MemberVariableAssignment_1_239613);
             ruleValidID();
 
             state._fsp--;
@@ -55969,22 +56048,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IterationVariable__NameAssignment"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19619:1: rule__IterationVariable__NameAssignment : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19652:1: rule__IterationVariable__NameAssignment : ( ruleValidID ) ;
     public final void rule__IterationVariable__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19623:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19624:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19656:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19657:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19624:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19625:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19657:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19658:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIterationVariableAccess().getNameValidIDParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__IterationVariable__NameAssignment39584);
+            pushFollow(FOLLOW_ruleValidID_in_rule__IterationVariable__NameAssignment39648);
             ruleValidID();
 
             state._fsp--;
@@ -56014,22 +56093,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IterationAccumulator__NameAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19634:1: rule__IterationAccumulator__NameAssignment_0 : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19667:1: rule__IterationAccumulator__NameAssignment_0 : ( ruleValidID ) ;
     public final void rule__IterationAccumulator__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19638:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19639:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19671:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19672:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19639:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19640:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19672:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19673:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIterationAccumulatorAccess().getNameValidIDParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__IterationAccumulator__NameAssignment_039615);
+            pushFollow(FOLLOW_ruleValidID_in_rule__IterationAccumulator__NameAssignment_039679);
             ruleValidID();
 
             state._fsp--;
@@ -56059,22 +56138,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IterationAccumulator__InitializerAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19649:1: rule__IterationAccumulator__InitializerAssignment_2 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19682:1: rule__IterationAccumulator__InitializerAssignment_2 : ( ruleExpression ) ;
     public final void rule__IterationAccumulator__InitializerAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19653:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19654:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19686:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19687:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19654:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19655:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19687:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19688:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIterationAccumulatorAccess().getInitializerExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__IterationAccumulator__InitializerAssignment_239646);
+            pushFollow(FOLLOW_ruleExpression_in_rule__IterationAccumulator__InitializerAssignment_239710);
             ruleExpression();
 
             state._fsp--;
@@ -56104,28 +56183,28 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArraySubscript__SliceAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19664:1: rule__ArraySubscript__SliceAssignment_0 : ( ( ':' ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19697:1: rule__ArraySubscript__SliceAssignment_0 : ( ( ':' ) ) ;
     public final void rule__ArraySubscript__SliceAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19668:1: ( ( ( ':' ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19669:1: ( ( ':' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19701:1: ( ( ( ':' ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19702:1: ( ( ':' ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19669:1: ( ( ':' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19670:1: ( ':' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getArraySubscriptAccess().getSliceColonKeyword_0_0()); 
-            }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19671:1: ( ':' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19672:1: ':'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19702:1: ( ( ':' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19703:1: ( ':' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArraySubscriptAccess().getSliceColonKeyword_0_0()); 
             }
-            match(input,45,FOLLOW_45_in_rule__ArraySubscript__SliceAssignment_039682); if (state.failed) return ;
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19704:1: ( ':' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19705:1: ':'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getArraySubscriptAccess().getSliceColonKeyword_0_0()); 
+            }
+            match(input,45,FOLLOW_45_in_rule__ArraySubscript__SliceAssignment_039746); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getArraySubscriptAccess().getSliceColonKeyword_0_0()); 
             }
@@ -56157,22 +56236,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArraySubscript__ExpressionAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19687:1: rule__ArraySubscript__ExpressionAssignment_1 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19720:1: rule__ArraySubscript__ExpressionAssignment_1 : ( ruleExpression ) ;
     public final void rule__ArraySubscript__ExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19691:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19692:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19724:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19725:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19692:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19693:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19725:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19726:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArraySubscriptAccess().getExpressionExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__ArraySubscript__ExpressionAssignment_139721);
+            pushFollow(FOLLOW_ruleExpression_in_rule__ArraySubscript__ExpressionAssignment_139785);
             ruleExpression();
 
             state._fsp--;
@@ -56202,22 +56281,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RealLiteral__ValueAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19702:1: rule__RealLiteral__ValueAssignment_0 : ( ruleValidDouble ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19735:1: rule__RealLiteral__ValueAssignment_0 : ( ruleValidDouble ) ;
     public final void rule__RealLiteral__ValueAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19706:1: ( ( ruleValidDouble ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19707:1: ( ruleValidDouble )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19739:1: ( ( ruleValidDouble ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19740:1: ( ruleValidDouble )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19707:1: ( ruleValidDouble )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19708:1: ruleValidDouble
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19740:1: ( ruleValidDouble )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19741:1: ruleValidDouble
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRealLiteralAccess().getValueValidDoubleParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleValidDouble_in_rule__RealLiteral__ValueAssignment_039752);
+            pushFollow(FOLLOW_ruleValidDouble_in_rule__RealLiteral__ValueAssignment_039816);
             ruleValidDouble();
 
             state._fsp--;
@@ -56247,22 +56326,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RealLiteral__ModifierAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19717:1: rule__RealLiteral__ModifierAssignment_1 : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19750:1: rule__RealLiteral__ModifierAssignment_1 : ( ruleValidID ) ;
     public final void rule__RealLiteral__ModifierAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19721:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19722:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19754:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19755:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19722:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19723:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19755:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19756:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRealLiteralAccess().getModifierValidIDParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__RealLiteral__ModifierAssignment_139783);
+            pushFollow(FOLLOW_ruleValidID_in_rule__RealLiteral__ModifierAssignment_139847);
             ruleValidID();
 
             state._fsp--;
@@ -56292,22 +56371,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RealLiteral__UnitAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19732:1: rule__RealLiteral__UnitAssignment_2 : ( ruleUnit ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19765:1: rule__RealLiteral__UnitAssignment_2 : ( ruleUnit ) ;
     public final void rule__RealLiteral__UnitAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19736:1: ( ( ruleUnit ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19737:1: ( ruleUnit )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19769:1: ( ( ruleUnit ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19770:1: ( ruleUnit )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19737:1: ( ruleUnit )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19738:1: ruleUnit
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19770:1: ( ruleUnit )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19771:1: ruleUnit
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRealLiteralAccess().getUnitUnitParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleUnit_in_rule__RealLiteral__UnitAssignment_239814);
+            pushFollow(FOLLOW_ruleUnit_in_rule__RealLiteral__UnitAssignment_239878);
             ruleUnit();
 
             state._fsp--;
@@ -56337,22 +56416,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IntegerLiteral__ValueAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19747:1: rule__IntegerLiteral__ValueAssignment_0 : ( ruleValidLong ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19780:1: rule__IntegerLiteral__ValueAssignment_0 : ( ruleValidLong ) ;
     public final void rule__IntegerLiteral__ValueAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19751:1: ( ( ruleValidLong ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19752:1: ( ruleValidLong )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19784:1: ( ( ruleValidLong ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19785:1: ( ruleValidLong )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19752:1: ( ruleValidLong )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19753:1: ruleValidLong
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19785:1: ( ruleValidLong )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19786:1: ruleValidLong
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIntegerLiteralAccess().getValueValidLongParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleValidLong_in_rule__IntegerLiteral__ValueAssignment_039845);
+            pushFollow(FOLLOW_ruleValidLong_in_rule__IntegerLiteral__ValueAssignment_039909);
             ruleValidLong();
 
             state._fsp--;
@@ -56382,22 +56461,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IntegerLiteral__ModifierAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19762:1: rule__IntegerLiteral__ModifierAssignment_1 : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19795:1: rule__IntegerLiteral__ModifierAssignment_1 : ( ruleValidID ) ;
     public final void rule__IntegerLiteral__ModifierAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19766:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19767:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19799:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19800:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19767:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19768:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19800:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19801:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIntegerLiteralAccess().getModifierValidIDParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__IntegerLiteral__ModifierAssignment_139876);
+            pushFollow(FOLLOW_ruleValidID_in_rule__IntegerLiteral__ModifierAssignment_139940);
             ruleValidID();
 
             state._fsp--;
@@ -56427,22 +56506,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IntegerLiteral__UnitAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19777:1: rule__IntegerLiteral__UnitAssignment_2 : ( ruleUnit ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19810:1: rule__IntegerLiteral__UnitAssignment_2 : ( ruleUnit ) ;
     public final void rule__IntegerLiteral__UnitAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19781:1: ( ( ruleUnit ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19782:1: ( ruleUnit )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19814:1: ( ( ruleUnit ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19815:1: ( ruleUnit )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19782:1: ( ruleUnit )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19783:1: ruleUnit
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19815:1: ( ruleUnit )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19816:1: ruleUnit
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIntegerLiteralAccess().getUnitUnitParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleUnit_in_rule__IntegerLiteral__UnitAssignment_239907);
+            pushFollow(FOLLOW_ruleUnit_in_rule__IntegerLiteral__UnitAssignment_239971);
             ruleUnit();
 
             state._fsp--;
@@ -56472,28 +56551,28 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BooleanLiteral__TrueAssignment_1_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19792:1: rule__BooleanLiteral__TrueAssignment_1_0 : ( ( 'true' ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19825:1: rule__BooleanLiteral__TrueAssignment_1_0 : ( ( 'true' ) ) ;
     public final void rule__BooleanLiteral__TrueAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19796:1: ( ( ( 'true' ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19797:1: ( ( 'true' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19829:1: ( ( ( 'true' ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19830:1: ( ( 'true' ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19797:1: ( ( 'true' ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19798:1: ( 'true' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getBooleanLiteralAccess().getTrueTrueKeyword_1_0_0()); 
-            }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19799:1: ( 'true' )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19800:1: 'true'
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19830:1: ( ( 'true' ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19831:1: ( 'true' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanLiteralAccess().getTrueTrueKeyword_1_0_0()); 
             }
-            match(input,90,FOLLOW_90_in_rule__BooleanLiteral__TrueAssignment_1_039943); if (state.failed) return ;
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19832:1: ( 'true' )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19833:1: 'true'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getBooleanLiteralAccess().getTrueTrueKeyword_1_0_0()); 
+            }
+            match(input,90,FOLLOW_90_in_rule__BooleanLiteral__TrueAssignment_1_040007); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getBooleanLiteralAccess().getTrueTrueKeyword_1_0_0()); 
             }
@@ -56525,22 +56604,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__StringLiteral__ValueAssignment"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19815:1: rule__StringLiteral__ValueAssignment : ( RULE_STRING ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19848:1: rule__StringLiteral__ValueAssignment : ( RULE_STRING ) ;
     public final void rule__StringLiteral__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19819:1: ( ( RULE_STRING ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19820:1: ( RULE_STRING )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19852:1: ( ( RULE_STRING ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19853:1: ( RULE_STRING )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19820:1: ( RULE_STRING )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19821:1: RULE_STRING
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19853:1: ( RULE_STRING )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19854:1: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStringLiteralAccess().getValueSTRINGTerminalRuleCall_0()); 
             }
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__StringLiteral__ValueAssignment39982); if (state.failed) return ;
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__StringLiteral__ValueAssignment40046); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getStringLiteralAccess().getValueSTRINGTerminalRuleCall_0()); 
             }
@@ -56566,28 +56645,28 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__VariableAccess__FeatureAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19830:1: rule__VariableAccess__FeatureAssignment_1 : ( ( ruleQualifiedName ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19863:1: rule__VariableAccess__FeatureAssignment_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__VariableAccess__FeatureAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19834:1: ( ( ( ruleQualifiedName ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19835:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19867:1: ( ( ( ruleQualifiedName ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19868:1: ( ( ruleQualifiedName ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19835:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19836:1: ( ruleQualifiedName )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19868:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19869:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getVariableAccessAccess().getFeatureCallableElementCrossReference_1_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19837:1: ( ruleQualifiedName )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19838:1: ruleQualifiedName
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19870:1: ( ruleQualifiedName )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19871:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getVariableAccessAccess().getFeatureCallableElementQualifiedNameParserRuleCall_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__VariableAccess__FeatureAssignment_140017);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__VariableAccess__FeatureAssignment_140081);
             ruleQualifiedName();
 
             state._fsp--;
@@ -56623,22 +56702,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__VariableAccess__StepExpressionAssignment_2_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19849:1: rule__VariableAccess__StepExpressionAssignment_2_1 : ( ruleStepExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19882:1: rule__VariableAccess__StepExpressionAssignment_2_1 : ( ruleStepExpression ) ;
     public final void rule__VariableAccess__StepExpressionAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19853:1: ( ( ruleStepExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19854:1: ( ruleStepExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19886:1: ( ( ruleStepExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19887:1: ( ruleStepExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19854:1: ( ruleStepExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19855:1: ruleStepExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19887:1: ( ruleStepExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19888:1: ruleStepExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getVariableAccessAccess().getStepExpressionStepExpressionParserRuleCall_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleStepExpression_in_rule__VariableAccess__StepExpressionAssignment_2_140052);
+            pushFollow(FOLLOW_ruleStepExpression_in_rule__VariableAccess__StepExpressionAssignment_2_140116);
             ruleStepExpression();
 
             state._fsp--;
@@ -56668,28 +56747,28 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionCall__FeatureAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19864:1: rule__FunctionCall__FeatureAssignment_1 : ( ( ruleQualifiedName ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19897:1: rule__FunctionCall__FeatureAssignment_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__FunctionCall__FeatureAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19868:1: ( ( ( ruleQualifiedName ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19869:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19901:1: ( ( ( ruleQualifiedName ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19902:1: ( ( ruleQualifiedName ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19869:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19870:1: ( ruleQualifiedName )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19902:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19903:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionCallAccess().getFeatureCallableElementCrossReference_1_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19871:1: ( ruleQualifiedName )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19872:1: ruleQualifiedName
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19904:1: ( ruleQualifiedName )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19905:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionCallAccess().getFeatureCallableElementQualifiedNameParserRuleCall_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__FunctionCall__FeatureAssignment_140087);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__FunctionCall__FeatureAssignment_140151);
             ruleQualifiedName();
 
             state._fsp--;
@@ -56725,22 +56804,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionCall__ArgumentsAssignment_3_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19883:1: rule__FunctionCall__ArgumentsAssignment_3_0 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19916:1: rule__FunctionCall__ArgumentsAssignment_3_0 : ( ruleExpression ) ;
     public final void rule__FunctionCall__ArgumentsAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19887:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19888:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19920:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19921:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19888:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19889:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19921:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19922:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionCallAccess().getArgumentsExpressionParserRuleCall_3_0_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__FunctionCall__ArgumentsAssignment_3_040122);
+            pushFollow(FOLLOW_ruleExpression_in_rule__FunctionCall__ArgumentsAssignment_3_040186);
             ruleExpression();
 
             state._fsp--;
@@ -56770,22 +56849,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionCall__ArgumentsAssignment_3_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19898:1: rule__FunctionCall__ArgumentsAssignment_3_1_1 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19931:1: rule__FunctionCall__ArgumentsAssignment_3_1_1 : ( ruleExpression ) ;
     public final void rule__FunctionCall__ArgumentsAssignment_3_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19902:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19903:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19935:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19936:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19903:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19904:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19936:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19937:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionCallAccess().getArgumentsExpressionParserRuleCall_3_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__FunctionCall__ArgumentsAssignment_3_1_140153);
+            pushFollow(FOLLOW_ruleExpression_in_rule__FunctionCall__ArgumentsAssignment_3_1_140217);
             ruleExpression();
 
             state._fsp--;
@@ -56815,22 +56894,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RangeStepExpression__EndAssignment_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19913:1: rule__RangeStepExpression__EndAssignment_1_2 : ( ruleAdditiveStepExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19946:1: rule__RangeStepExpression__EndAssignment_1_2 : ( ruleAdditiveStepExpression ) ;
     public final void rule__RangeStepExpression__EndAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19917:1: ( ( ruleAdditiveStepExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19918:1: ( ruleAdditiveStepExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19950:1: ( ( ruleAdditiveStepExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19951:1: ( ruleAdditiveStepExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19918:1: ( ruleAdditiveStepExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19919:1: ruleAdditiveStepExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19951:1: ( ruleAdditiveStepExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19952:1: ruleAdditiveStepExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRangeStepExpressionAccess().getEndAdditiveStepExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleAdditiveStepExpression_in_rule__RangeStepExpression__EndAssignment_1_240184);
+            pushFollow(FOLLOW_ruleAdditiveStepExpression_in_rule__RangeStepExpression__EndAssignment_1_240248);
             ruleAdditiveStepExpression();
 
             state._fsp--;
@@ -56860,22 +56939,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AdditiveStepExpression__OperatorAssignment_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19928:1: rule__AdditiveStepExpression__OperatorAssignment_1_1 : ( ruleAdditiveOperator ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19961:1: rule__AdditiveStepExpression__OperatorAssignment_1_1 : ( ruleAdditiveOperator ) ;
     public final void rule__AdditiveStepExpression__OperatorAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19932:1: ( ( ruleAdditiveOperator ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19933:1: ( ruleAdditiveOperator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19965:1: ( ( ruleAdditiveOperator ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19966:1: ( ruleAdditiveOperator )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19933:1: ( ruleAdditiveOperator )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19934:1: ruleAdditiveOperator
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19966:1: ( ruleAdditiveOperator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19967:1: ruleAdditiveOperator
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAdditiveStepExpressionAccess().getOperatorAdditiveOperatorEnumRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleAdditiveOperator_in_rule__AdditiveStepExpression__OperatorAssignment_1_140215);
+            pushFollow(FOLLOW_ruleAdditiveOperator_in_rule__AdditiveStepExpression__OperatorAssignment_1_140279);
             ruleAdditiveOperator();
 
             state._fsp--;
@@ -56905,22 +56984,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AdditiveStepExpression__RightOperandAssignment_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19943:1: rule__AdditiveStepExpression__RightOperandAssignment_1_2 : ( ruleNegateStepExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19976:1: rule__AdditiveStepExpression__RightOperandAssignment_1_2 : ( ruleNegateStepExpression ) ;
     public final void rule__AdditiveStepExpression__RightOperandAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19947:1: ( ( ruleNegateStepExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19948:1: ( ruleNegateStepExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19980:1: ( ( ruleNegateStepExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19981:1: ( ruleNegateStepExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19948:1: ( ruleNegateStepExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19949:1: ruleNegateStepExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19981:1: ( ruleNegateStepExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19982:1: ruleNegateStepExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAdditiveStepExpressionAccess().getRightOperandNegateStepExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleNegateStepExpression_in_rule__AdditiveStepExpression__RightOperandAssignment_1_240246);
+            pushFollow(FOLLOW_ruleNegateStepExpression_in_rule__AdditiveStepExpression__RightOperandAssignment_1_240310);
             ruleNegateStepExpression();
 
             state._fsp--;
@@ -56950,22 +57029,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NegateStepExpression__OperandAssignment_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19958:1: rule__NegateStepExpression__OperandAssignment_1_2 : ( rulePrimitiveStepExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19991:1: rule__NegateStepExpression__OperandAssignment_1_2 : ( rulePrimitiveStepExpression ) ;
     public final void rule__NegateStepExpression__OperandAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19962:1: ( ( rulePrimitiveStepExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19963:1: ( rulePrimitiveStepExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19995:1: ( ( rulePrimitiveStepExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19996:1: ( rulePrimitiveStepExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19963:1: ( rulePrimitiveStepExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19964:1: rulePrimitiveStepExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19996:1: ( rulePrimitiveStepExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19997:1: rulePrimitiveStepExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNegateStepExpressionAccess().getOperandPrimitiveStepExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_rulePrimitiveStepExpression_in_rule__NegateStepExpression__OperandAssignment_1_240277);
+            pushFollow(FOLLOW_rulePrimitiveStepExpression_in_rule__NegateStepExpression__OperandAssignment_1_240341);
             rulePrimitiveStepExpression();
 
             state._fsp--;
@@ -56995,22 +57074,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__StepLiteral__ValueAssignment"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19973:1: rule__StepLiteral__ValueAssignment : ( ruleValidInt ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20006:1: rule__StepLiteral__ValueAssignment : ( ruleValidInt ) ;
     public final void rule__StepLiteral__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19977:1: ( ( ruleValidInt ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19978:1: ( ruleValidInt )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20010:1: ( ( ruleValidInt ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20011:1: ( ruleValidInt )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19978:1: ( ruleValidInt )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19979:1: ruleValidInt
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20011:1: ( ruleValidInt )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20012:1: ruleValidInt
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStepLiteralAccess().getValueValidIntParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleValidInt_in_rule__StepLiteral__ValueAssignment40308);
+            pushFollow(FOLLOW_ruleValidInt_in_rule__StepLiteral__ValueAssignment40372);
             ruleValidInt();
 
             state._fsp--;
@@ -57040,28 +57119,28 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DerivativeOperator__VariableAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19988:1: rule__DerivativeOperator__VariableAssignment_1 : ( ( ruleValidID ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20021:1: rule__DerivativeOperator__VariableAssignment_1 : ( ( ruleValidID ) ) ;
     public final void rule__DerivativeOperator__VariableAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19992:1: ( ( ( ruleValidID ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19993:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20025:1: ( ( ( ruleValidID ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20026:1: ( ( ruleValidID ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19993:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19994:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20026:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20027:1: ( ruleValidID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDerivativeOperatorAccess().getVariableCallableElementCrossReference_1_0()); 
             }
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19995:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:19996:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20028:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20029:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDerivativeOperatorAccess().getVariableCallableElementValidIDParserRuleCall_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__DerivativeOperator__VariableAssignment_140343);
+            pushFollow(FOLLOW_ruleValidID_in_rule__DerivativeOperator__VariableAssignment_140407);
             ruleValidID();
 
             state._fsp--;
@@ -57097,22 +57176,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArrayConstructionOperator__ExpressionsAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20007:1: rule__ArrayConstructionOperator__ExpressionsAssignment_1 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20040:1: rule__ArrayConstructionOperator__ExpressionsAssignment_1 : ( ruleExpression ) ;
     public final void rule__ArrayConstructionOperator__ExpressionsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20011:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20012:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20044:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20045:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20012:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20013:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20045:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20046:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayConstructionOperatorAccess().getExpressionsExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__ArrayConstructionOperator__ExpressionsAssignment_140378);
+            pushFollow(FOLLOW_ruleExpression_in_rule__ArrayConstructionOperator__ExpressionsAssignment_140442);
             ruleExpression();
 
             state._fsp--;
@@ -57142,22 +57221,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArrayConstructionOperator__ExpressionsAssignment_2_0_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20022:1: rule__ArrayConstructionOperator__ExpressionsAssignment_2_0_1 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20055:1: rule__ArrayConstructionOperator__ExpressionsAssignment_2_0_1 : ( ruleExpression ) ;
     public final void rule__ArrayConstructionOperator__ExpressionsAssignment_2_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20026:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20027:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20059:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20060:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20027:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20028:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20060:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20061:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayConstructionOperatorAccess().getExpressionsExpressionParserRuleCall_2_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__ArrayConstructionOperator__ExpressionsAssignment_2_0_140409);
+            pushFollow(FOLLOW_ruleExpression_in_rule__ArrayConstructionOperator__ExpressionsAssignment_2_0_140473);
             ruleExpression();
 
             state._fsp--;
@@ -57187,22 +57266,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20037:1: rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_1 : ( ruleArrayConstructionIterationClause ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20070:1: rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_1 : ( ruleArrayConstructionIterationClause ) ;
     public final void rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20041:1: ( ( ruleArrayConstructionIterationClause ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20042:1: ( ruleArrayConstructionIterationClause )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20074:1: ( ( ruleArrayConstructionIterationClause ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20075:1: ( ruleArrayConstructionIterationClause )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20042:1: ( ruleArrayConstructionIterationClause )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20043:1: ruleArrayConstructionIterationClause
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20075:1: ( ruleArrayConstructionIterationClause )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20076:1: ruleArrayConstructionIterationClause
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayConstructionOperatorAccess().getIterationClausesArrayConstructionIterationClauseParserRuleCall_2_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleArrayConstructionIterationClause_in_rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_140440);
+            pushFollow(FOLLOW_ruleArrayConstructionIterationClause_in_rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_140504);
             ruleArrayConstructionIterationClause();
 
             state._fsp--;
@@ -57232,22 +57311,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_2_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20052:1: rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_2_1 : ( ruleArrayConstructionIterationClause ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20085:1: rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_2_1 : ( ruleArrayConstructionIterationClause ) ;
     public final void rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20056:1: ( ( ruleArrayConstructionIterationClause ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20057:1: ( ruleArrayConstructionIterationClause )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20089:1: ( ( ruleArrayConstructionIterationClause ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20090:1: ( ruleArrayConstructionIterationClause )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20057:1: ( ruleArrayConstructionIterationClause )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20058:1: ruleArrayConstructionIterationClause
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20090:1: ( ruleArrayConstructionIterationClause )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20091:1: ruleArrayConstructionIterationClause
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayConstructionOperatorAccess().getIterationClausesArrayConstructionIterationClauseParserRuleCall_2_1_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleArrayConstructionIterationClause_in_rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_2_140471);
+            pushFollow(FOLLOW_ruleArrayConstructionIterationClause_in_rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_2_140535);
             ruleArrayConstructionIterationClause();
 
             state._fsp--;
@@ -57277,22 +57356,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArrayConstructionIterationClause__VariableNameAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20067:1: rule__ArrayConstructionIterationClause__VariableNameAssignment_0 : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20100:1: rule__ArrayConstructionIterationClause__VariableNameAssignment_0 : ( ruleValidID ) ;
     public final void rule__ArrayConstructionIterationClause__VariableNameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20071:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20072:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20104:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20105:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20072:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20073:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20105:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20106:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayConstructionIterationClauseAccess().getVariableNameValidIDParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__ArrayConstructionIterationClause__VariableNameAssignment_040502);
+            pushFollow(FOLLOW_ruleValidID_in_rule__ArrayConstructionIterationClause__VariableNameAssignment_040566);
             ruleValidID();
 
             state._fsp--;
@@ -57322,22 +57401,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArrayConstructionIterationClause__CollectionExpressionAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20082:1: rule__ArrayConstructionIterationClause__CollectionExpressionAssignment_2 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20115:1: rule__ArrayConstructionIterationClause__CollectionExpressionAssignment_2 : ( ruleExpression ) ;
     public final void rule__ArrayConstructionIterationClause__CollectionExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20086:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20087:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20119:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20120:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20087:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20088:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20120:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20121:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayConstructionIterationClauseAccess().getCollectionExpressionExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__ArrayConstructionIterationClause__CollectionExpressionAssignment_240533);
+            pushFollow(FOLLOW_ruleExpression_in_rule__ArrayConstructionIterationClause__CollectionExpressionAssignment_240597);
             ruleExpression();
 
             state._fsp--;
@@ -57367,22 +57446,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArrayConcatenationOperator__RowsAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20097:1: rule__ArrayConcatenationOperator__RowsAssignment_1 : ( ruleExpressionList ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20130:1: rule__ArrayConcatenationOperator__RowsAssignment_1 : ( ruleExpressionList ) ;
     public final void rule__ArrayConcatenationOperator__RowsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20101:1: ( ( ruleExpressionList ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20102:1: ( ruleExpressionList )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20134:1: ( ( ruleExpressionList ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20135:1: ( ruleExpressionList )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20102:1: ( ruleExpressionList )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20103:1: ruleExpressionList
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20135:1: ( ruleExpressionList )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20136:1: ruleExpressionList
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayConcatenationOperatorAccess().getRowsExpressionListParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpressionList_in_rule__ArrayConcatenationOperator__RowsAssignment_140564);
+            pushFollow(FOLLOW_ruleExpressionList_in_rule__ArrayConcatenationOperator__RowsAssignment_140628);
             ruleExpressionList();
 
             state._fsp--;
@@ -57412,22 +57491,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArrayConcatenationOperator__RowsAssignment_2_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20112:1: rule__ArrayConcatenationOperator__RowsAssignment_2_1 : ( ruleExpressionList ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20145:1: rule__ArrayConcatenationOperator__RowsAssignment_2_1 : ( ruleExpressionList ) ;
     public final void rule__ArrayConcatenationOperator__RowsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20116:1: ( ( ruleExpressionList ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20117:1: ( ruleExpressionList )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20149:1: ( ( ruleExpressionList ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20150:1: ( ruleExpressionList )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20117:1: ( ruleExpressionList )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20118:1: ruleExpressionList
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20150:1: ( ruleExpressionList )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20151:1: ruleExpressionList
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayConcatenationOperatorAccess().getRowsExpressionListParserRuleCall_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpressionList_in_rule__ArrayConcatenationOperator__RowsAssignment_2_140595);
+            pushFollow(FOLLOW_ruleExpressionList_in_rule__ArrayConcatenationOperator__RowsAssignment_2_140659);
             ruleExpressionList();
 
             state._fsp--;
@@ -57457,22 +57536,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExpressionList__ExpressionsAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20127:1: rule__ExpressionList__ExpressionsAssignment_0 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20160:1: rule__ExpressionList__ExpressionsAssignment_0 : ( ruleExpression ) ;
     public final void rule__ExpressionList__ExpressionsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20131:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20132:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20164:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20165:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20132:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20133:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20165:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20166:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getExpressionListAccess().getExpressionsExpressionParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__ExpressionList__ExpressionsAssignment_040626);
+            pushFollow(FOLLOW_ruleExpression_in_rule__ExpressionList__ExpressionsAssignment_040690);
             ruleExpression();
 
             state._fsp--;
@@ -57502,22 +57581,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExpressionList__ExpressionsAssignment_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20142:1: rule__ExpressionList__ExpressionsAssignment_1_1 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20175:1: rule__ExpressionList__ExpressionsAssignment_1_1 : ( ruleExpression ) ;
     public final void rule__ExpressionList__ExpressionsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20146:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20147:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20179:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20180:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20147:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20148:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20180:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20181:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getExpressionListAccess().getExpressionsExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__ExpressionList__ExpressionsAssignment_1_140657);
+            pushFollow(FOLLOW_ruleExpression_in_rule__ExpressionList__ExpressionsAssignment_1_140721);
             ruleExpression();
 
             state._fsp--;
@@ -57547,22 +57626,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitConstructionOperator__UnitAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20157:1: rule__UnitConstructionOperator__UnitAssignment_1 : ( ruleExplicitUnit ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20190:1: rule__UnitConstructionOperator__UnitAssignment_1 : ( ruleExplicitUnit ) ;
     public final void rule__UnitConstructionOperator__UnitAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20161:1: ( ( ruleExplicitUnit ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20162:1: ( ruleExplicitUnit )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20194:1: ( ( ruleExplicitUnit ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20195:1: ( ruleExplicitUnit )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20162:1: ( ruleExplicitUnit )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20163:1: ruleExplicitUnit
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20195:1: ( ruleExplicitUnit )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20196:1: ruleExplicitUnit
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitConstructionOperatorAccess().getUnitExplicitUnitParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExplicitUnit_in_rule__UnitConstructionOperator__UnitAssignment_140688);
+            pushFollow(FOLLOW_ruleExplicitUnit_in_rule__UnitConstructionOperator__UnitAssignment_140752);
             ruleExplicitUnit();
 
             state._fsp--;
@@ -57592,22 +57671,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ParenthesizedExpression__ExpressionsAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20172:1: rule__ParenthesizedExpression__ExpressionsAssignment_1 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20205:1: rule__ParenthesizedExpression__ExpressionsAssignment_1 : ( ruleExpression ) ;
     public final void rule__ParenthesizedExpression__ExpressionsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20176:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20177:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20209:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20210:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20177:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20178:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20210:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20211:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParenthesizedExpressionAccess().getExpressionsExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__ParenthesizedExpression__ExpressionsAssignment_140719);
+            pushFollow(FOLLOW_ruleExpression_in_rule__ParenthesizedExpression__ExpressionsAssignment_140783);
             ruleExpression();
 
             state._fsp--;
@@ -57637,22 +57716,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ParenthesizedExpression__ExpressionsAssignment_2_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20187:1: rule__ParenthesizedExpression__ExpressionsAssignment_2_1 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20220:1: rule__ParenthesizedExpression__ExpressionsAssignment_2_1 : ( ruleExpression ) ;
     public final void rule__ParenthesizedExpression__ExpressionsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20191:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20192:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20224:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20225:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20192:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20193:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20225:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20226:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParenthesizedExpressionAccess().getExpressionsExpressionParserRuleCall_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__ParenthesizedExpression__ExpressionsAssignment_2_140750);
+            pushFollow(FOLLOW_ruleExpression_in_rule__ParenthesizedExpression__ExpressionsAssignment_2_140814);
             ruleExpression();
 
             state._fsp--;
@@ -57682,22 +57761,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AlgorithmExpression__BodyAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20202:1: rule__AlgorithmExpression__BodyAssignment_2 : ( ruleCompound ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20235:1: rule__AlgorithmExpression__BodyAssignment_2 : ( ruleCompound ) ;
     public final void rule__AlgorithmExpression__BodyAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20206:1: ( ( ruleCompound ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20207:1: ( ruleCompound )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20239:1: ( ( ruleCompound ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20240:1: ( ruleCompound )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20207:1: ( ruleCompound )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20208:1: ruleCompound
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20240:1: ( ruleCompound )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20241:1: ruleCompound
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAlgorithmExpressionAccess().getBodyCompoundParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleCompound_in_rule__AlgorithmExpression__BodyAssignment_240781);
+            pushFollow(FOLLOW_ruleCompound_in_rule__AlgorithmExpression__BodyAssignment_240845);
             ruleCompound();
 
             state._fsp--;
@@ -57727,22 +57806,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Compound__StatementsAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20217:1: rule__Compound__StatementsAssignment_2 : ( ruleStatement ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20250:1: rule__Compound__StatementsAssignment_2 : ( ruleStatement ) ;
     public final void rule__Compound__StatementsAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20221:1: ( ( ruleStatement ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20222:1: ( ruleStatement )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20254:1: ( ( ruleStatement ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20255:1: ( ruleStatement )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20222:1: ( ruleStatement )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20223:1: ruleStatement
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20255:1: ( ruleStatement )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20256:1: ruleStatement
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCompoundAccess().getStatementsStatementParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleStatement_in_rule__Compound__StatementsAssignment_240812);
+            pushFollow(FOLLOW_ruleStatement_in_rule__Compound__StatementsAssignment_240876);
             ruleStatement();
 
             state._fsp--;
@@ -57772,22 +57851,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Assignment__TargetAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20232:1: rule__Assignment__TargetAssignment_0 : ( ruleAssignableMemberFeatureCall ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20265:1: rule__Assignment__TargetAssignment_0 : ( ruleAssignableMemberFeatureCall ) ;
     public final void rule__Assignment__TargetAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20236:1: ( ( ruleAssignableMemberFeatureCall ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20237:1: ( ruleAssignableMemberFeatureCall )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20269:1: ( ( ruleAssignableMemberFeatureCall ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20270:1: ( ruleAssignableMemberFeatureCall )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20237:1: ( ruleAssignableMemberFeatureCall )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20238:1: ruleAssignableMemberFeatureCall
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20270:1: ( ruleAssignableMemberFeatureCall )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20271:1: ruleAssignableMemberFeatureCall
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAssignmentAccess().getTargetAssignableMemberFeatureCallParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleAssignableMemberFeatureCall_in_rule__Assignment__TargetAssignment_040843);
+            pushFollow(FOLLOW_ruleAssignableMemberFeatureCall_in_rule__Assignment__TargetAssignment_040907);
             ruleAssignableMemberFeatureCall();
 
             state._fsp--;
@@ -57817,22 +57896,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Assignment__ExpressionAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20247:1: rule__Assignment__ExpressionAssignment_2 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20280:1: rule__Assignment__ExpressionAssignment_2 : ( ruleExpression ) ;
     public final void rule__Assignment__ExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20251:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20252:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20284:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20285:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20252:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20253:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20285:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20286:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAssignmentAccess().getExpressionExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__Assignment__ExpressionAssignment_240874);
+            pushFollow(FOLLOW_ruleExpression_in_rule__Assignment__ExpressionAssignment_240938);
             ruleExpression();
 
             state._fsp--;
@@ -57862,22 +57941,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__VariableDeclaration__NameAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20262:1: rule__VariableDeclaration__NameAssignment_1 : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20295:1: rule__VariableDeclaration__NameAssignment_1 : ( ruleValidID ) ;
     public final void rule__VariableDeclaration__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20266:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20267:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20299:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20300:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20267:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20268:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20300:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20301:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getVariableDeclarationAccess().getNameValidIDParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__VariableDeclaration__NameAssignment_140905);
+            pushFollow(FOLLOW_ruleValidID_in_rule__VariableDeclaration__NameAssignment_140969);
             ruleValidID();
 
             state._fsp--;
@@ -57907,22 +57986,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__VariableDeclaration__InitializerAssignment_3"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20277:1: rule__VariableDeclaration__InitializerAssignment_3 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20310:1: rule__VariableDeclaration__InitializerAssignment_3 : ( ruleExpression ) ;
     public final void rule__VariableDeclaration__InitializerAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20281:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20282:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20314:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20315:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20282:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20283:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20315:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20316:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getVariableDeclarationAccess().getInitializerExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__VariableDeclaration__InitializerAssignment_340936);
+            pushFollow(FOLLOW_ruleExpression_in_rule__VariableDeclaration__InitializerAssignment_341000);
             ruleExpression();
 
             state._fsp--;
@@ -57952,22 +58031,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IfStatement__ConditionAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20292:1: rule__IfStatement__ConditionAssignment_2 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20325:1: rule__IfStatement__ConditionAssignment_2 : ( ruleExpression ) ;
     public final void rule__IfStatement__ConditionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20296:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20297:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20329:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20330:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20297:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20298:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20330:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20331:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfStatementAccess().getConditionExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__IfStatement__ConditionAssignment_240967);
+            pushFollow(FOLLOW_ruleExpression_in_rule__IfStatement__ConditionAssignment_241031);
             ruleExpression();
 
             state._fsp--;
@@ -57997,22 +58076,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IfStatement__ThenStatementAssignment_4"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20307:1: rule__IfStatement__ThenStatementAssignment_4 : ( ruleStatement ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20340:1: rule__IfStatement__ThenStatementAssignment_4 : ( ruleStatement ) ;
     public final void rule__IfStatement__ThenStatementAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20311:1: ( ( ruleStatement ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20312:1: ( ruleStatement )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20344:1: ( ( ruleStatement ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20345:1: ( ruleStatement )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20312:1: ( ruleStatement )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20313:1: ruleStatement
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20345:1: ( ruleStatement )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20346:1: ruleStatement
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfStatementAccess().getThenStatementStatementParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleStatement_in_rule__IfStatement__ThenStatementAssignment_440998);
+            pushFollow(FOLLOW_ruleStatement_in_rule__IfStatement__ThenStatementAssignment_441062);
             ruleStatement();
 
             state._fsp--;
@@ -58042,22 +58121,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IfStatement__ElseStatementAssignment_5_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20322:1: rule__IfStatement__ElseStatementAssignment_5_1 : ( ruleStatement ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20355:1: rule__IfStatement__ElseStatementAssignment_5_1 : ( ruleStatement ) ;
     public final void rule__IfStatement__ElseStatementAssignment_5_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20326:1: ( ( ruleStatement ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20327:1: ( ruleStatement )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20359:1: ( ( ruleStatement ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20360:1: ( ruleStatement )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20327:1: ( ruleStatement )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20328:1: ruleStatement
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20360:1: ( ruleStatement )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20361:1: ruleStatement
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfStatementAccess().getElseStatementStatementParserRuleCall_5_1_0()); 
             }
-            pushFollow(FOLLOW_ruleStatement_in_rule__IfStatement__ElseStatementAssignment_5_141029);
+            pushFollow(FOLLOW_ruleStatement_in_rule__IfStatement__ElseStatementAssignment_5_141093);
             ruleStatement();
 
             state._fsp--;
@@ -58087,22 +58166,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__WhileStatement__ConditionAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20337:1: rule__WhileStatement__ConditionAssignment_2 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20370:1: rule__WhileStatement__ConditionAssignment_2 : ( ruleExpression ) ;
     public final void rule__WhileStatement__ConditionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20341:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20342:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20374:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20375:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20342:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20343:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20375:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20376:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getWhileStatementAccess().getConditionExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__WhileStatement__ConditionAssignment_241060);
+            pushFollow(FOLLOW_ruleExpression_in_rule__WhileStatement__ConditionAssignment_241124);
             ruleExpression();
 
             state._fsp--;
@@ -58132,22 +58211,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__WhileStatement__BodyAssignment_4"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20352:1: rule__WhileStatement__BodyAssignment_4 : ( ruleStatement ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20385:1: rule__WhileStatement__BodyAssignment_4 : ( ruleStatement ) ;
     public final void rule__WhileStatement__BodyAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20356:1: ( ( ruleStatement ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20357:1: ( ruleStatement )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20389:1: ( ( ruleStatement ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20390:1: ( ruleStatement )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20357:1: ( ruleStatement )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20358:1: ruleStatement
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20390:1: ( ruleStatement )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20391:1: ruleStatement
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getWhileStatementAccess().getBodyStatementParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleStatement_in_rule__WhileStatement__BodyAssignment_441091);
+            pushFollow(FOLLOW_ruleStatement_in_rule__WhileStatement__BodyAssignment_441155);
             ruleStatement();
 
             state._fsp--;
@@ -58177,22 +58256,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ForStatement__IterationVariableAssignment_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20367:1: rule__ForStatement__IterationVariableAssignment_2 : ( ruleIterationVariable ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20400:1: rule__ForStatement__IterationVariableAssignment_2 : ( ruleIterationVariable ) ;
     public final void rule__ForStatement__IterationVariableAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20371:1: ( ( ruleIterationVariable ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20372:1: ( ruleIterationVariable )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20404:1: ( ( ruleIterationVariable ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20405:1: ( ruleIterationVariable )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20372:1: ( ruleIterationVariable )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20373:1: ruleIterationVariable
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20405:1: ( ruleIterationVariable )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20406:1: ruleIterationVariable
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getForStatementAccess().getIterationVariableIterationVariableParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleIterationVariable_in_rule__ForStatement__IterationVariableAssignment_241122);
+            pushFollow(FOLLOW_ruleIterationVariable_in_rule__ForStatement__IterationVariableAssignment_241186);
             ruleIterationVariable();
 
             state._fsp--;
@@ -58222,22 +58301,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ForStatement__CollectionExpressionAssignment_4"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20382:1: rule__ForStatement__CollectionExpressionAssignment_4 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20415:1: rule__ForStatement__CollectionExpressionAssignment_4 : ( ruleExpression ) ;
     public final void rule__ForStatement__CollectionExpressionAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20386:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20387:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20419:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20420:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20387:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20388:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20420:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20421:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getForStatementAccess().getCollectionExpressionExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__ForStatement__CollectionExpressionAssignment_441153);
+            pushFollow(FOLLOW_ruleExpression_in_rule__ForStatement__CollectionExpressionAssignment_441217);
             ruleExpression();
 
             state._fsp--;
@@ -58267,22 +58346,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ForStatement__BodyAssignment_6"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20397:1: rule__ForStatement__BodyAssignment_6 : ( ruleStatement ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20430:1: rule__ForStatement__BodyAssignment_6 : ( ruleStatement ) ;
     public final void rule__ForStatement__BodyAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20401:1: ( ( ruleStatement ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20402:1: ( ruleStatement )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20434:1: ( ( ruleStatement ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20435:1: ( ruleStatement )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20402:1: ( ruleStatement )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20403:1: ruleStatement
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20435:1: ( ruleStatement )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20436:1: ruleStatement
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getForStatementAccess().getBodyStatementParserRuleCall_6_0()); 
             }
-            pushFollow(FOLLOW_ruleStatement_in_rule__ForStatement__BodyAssignment_641184);
+            pushFollow(FOLLOW_ruleStatement_in_rule__ForStatement__BodyAssignment_641248);
             ruleStatement();
 
             state._fsp--;
@@ -58312,22 +58391,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DoWhileStatement__BodyAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20412:1: rule__DoWhileStatement__BodyAssignment_1 : ( ruleStatement ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20445:1: rule__DoWhileStatement__BodyAssignment_1 : ( ruleStatement ) ;
     public final void rule__DoWhileStatement__BodyAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20416:1: ( ( ruleStatement ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20417:1: ( ruleStatement )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20449:1: ( ( ruleStatement ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20450:1: ( ruleStatement )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20417:1: ( ruleStatement )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20418:1: ruleStatement
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20450:1: ( ruleStatement )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20451:1: ruleStatement
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDoWhileStatementAccess().getBodyStatementParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleStatement_in_rule__DoWhileStatement__BodyAssignment_141215);
+            pushFollow(FOLLOW_ruleStatement_in_rule__DoWhileStatement__BodyAssignment_141279);
             ruleStatement();
 
             state._fsp--;
@@ -58356,29 +58435,29 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__DoWhileStatement__BodyAssignment_1"
 
 
-    // $ANTLR start "rule__DoWhileStatement__ConditionAssignment_3"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20427:1: rule__DoWhileStatement__ConditionAssignment_3 : ( ruleExpression ) ;
-    public final void rule__DoWhileStatement__ConditionAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__DoWhileStatement__ConditionAssignment_4"
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20460:1: rule__DoWhileStatement__ConditionAssignment_4 : ( ruleExpression ) ;
+    public final void rule__DoWhileStatement__ConditionAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20431:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20432:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20464:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20465:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20432:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20433:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20465:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20466:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDoWhileStatementAccess().getConditionExpressionParserRuleCall_3_0()); 
+               before(grammarAccess.getDoWhileStatementAccess().getConditionExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__DoWhileStatement__ConditionAssignment_341246);
+            pushFollow(FOLLOW_ruleExpression_in_rule__DoWhileStatement__ConditionAssignment_441310);
             ruleExpression();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDoWhileStatementAccess().getConditionExpressionParserRuleCall_3_0()); 
+               after(grammarAccess.getDoWhileStatementAccess().getConditionExpressionParserRuleCall_4_0()); 
             }
 
             }
@@ -58398,26 +58477,26 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DoWhileStatement__ConditionAssignment_3"
+    // $ANTLR end "rule__DoWhileStatement__ConditionAssignment_4"
 
 
     // $ANTLR start "rule__ReturnStatement__ExpressionAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20442:1: rule__ReturnStatement__ExpressionAssignment_1 : ( ruleExpression ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20475:1: rule__ReturnStatement__ExpressionAssignment_1 : ( ruleExpression ) ;
     public final void rule__ReturnStatement__ExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20446:1: ( ( ruleExpression ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20447:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20479:1: ( ( ruleExpression ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20480:1: ( ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20447:1: ( ruleExpression )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20448:1: ruleExpression
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20480:1: ( ruleExpression )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20481:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReturnStatementAccess().getExpressionExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__ReturnStatement__ExpressionAssignment_141277);
+            pushFollow(FOLLOW_ruleExpression_in_rule__ReturnStatement__ExpressionAssignment_141341);
             ruleExpression();
 
             state._fsp--;
@@ -58447,22 +58526,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__NumeratorAssignment_1_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20457:1: rule__Unit__NumeratorAssignment_1_1_1 : ( ruleUnitNumerator ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20490:1: rule__Unit__NumeratorAssignment_1_1_1 : ( ruleUnitNumerator ) ;
     public final void rule__Unit__NumeratorAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20461:1: ( ( ruleUnitNumerator ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20462:1: ( ruleUnitNumerator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20494:1: ( ( ruleUnitNumerator ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20495:1: ( ruleUnitNumerator )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20462:1: ( ruleUnitNumerator )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20463:1: ruleUnitNumerator
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20495:1: ( ruleUnitNumerator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20496:1: ruleUnitNumerator
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getNumeratorUnitNumeratorParserRuleCall_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleUnitNumerator_in_rule__Unit__NumeratorAssignment_1_1_141308);
+            pushFollow(FOLLOW_ruleUnitNumerator_in_rule__Unit__NumeratorAssignment_1_1_141372);
             ruleUnitNumerator();
 
             state._fsp--;
@@ -58492,22 +58571,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__DenominatorAssignment_1_1_2_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20472:1: rule__Unit__DenominatorAssignment_1_1_2_1 : ( ruleUnitDenominator ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20505:1: rule__Unit__DenominatorAssignment_1_1_2_1 : ( ruleUnitDenominator ) ;
     public final void rule__Unit__DenominatorAssignment_1_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20476:1: ( ( ruleUnitDenominator ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20477:1: ( ruleUnitDenominator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20509:1: ( ( ruleUnitDenominator ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20510:1: ( ruleUnitDenominator )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20477:1: ( ruleUnitDenominator )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20478:1: ruleUnitDenominator
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20510:1: ( ruleUnitDenominator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20511:1: ruleUnitDenominator
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getDenominatorUnitDenominatorParserRuleCall_1_1_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleUnitDenominator_in_rule__Unit__DenominatorAssignment_1_1_2_141339);
+            pushFollow(FOLLOW_ruleUnitDenominator_in_rule__Unit__DenominatorAssignment_1_1_2_141403);
             ruleUnitDenominator();
 
             state._fsp--;
@@ -58537,22 +58616,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Unit__NumeratorAssignment_1_2"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20487:1: rule__Unit__NumeratorAssignment_1_2 : ( ruleImplicitUnitNumerator ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20520:1: rule__Unit__NumeratorAssignment_1_2 : ( ruleImplicitUnitNumerator ) ;
     public final void rule__Unit__NumeratorAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20491:1: ( ( ruleImplicitUnitNumerator ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20492:1: ( ruleImplicitUnitNumerator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20524:1: ( ( ruleImplicitUnitNumerator ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20525:1: ( ruleImplicitUnitNumerator )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20492:1: ( ruleImplicitUnitNumerator )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20493:1: ruleImplicitUnitNumerator
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20525:1: ( ruleImplicitUnitNumerator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20526:1: ruleImplicitUnitNumerator
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getNumeratorImplicitUnitNumeratorParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleImplicitUnitNumerator_in_rule__Unit__NumeratorAssignment_1_241370);
+            pushFollow(FOLLOW_ruleImplicitUnitNumerator_in_rule__Unit__NumeratorAssignment_1_241434);
             ruleImplicitUnitNumerator();
 
             state._fsp--;
@@ -58582,22 +58661,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExplicitUnit__NumeratorAssignment_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20502:1: rule__ExplicitUnit__NumeratorAssignment_1 : ( ruleUnitNumerator ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20535:1: rule__ExplicitUnit__NumeratorAssignment_1 : ( ruleUnitNumerator ) ;
     public final void rule__ExplicitUnit__NumeratorAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20506:1: ( ( ruleUnitNumerator ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20507:1: ( ruleUnitNumerator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20539:1: ( ( ruleUnitNumerator ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20540:1: ( ruleUnitNumerator )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20507:1: ( ruleUnitNumerator )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20508:1: ruleUnitNumerator
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20540:1: ( ruleUnitNumerator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20541:1: ruleUnitNumerator
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getExplicitUnitAccess().getNumeratorUnitNumeratorParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleUnitNumerator_in_rule__ExplicitUnit__NumeratorAssignment_141401);
+            pushFollow(FOLLOW_ruleUnitNumerator_in_rule__ExplicitUnit__NumeratorAssignment_141465);
             ruleUnitNumerator();
 
             state._fsp--;
@@ -58627,22 +58706,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExplicitUnit__DenominatorAssignment_2_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20517:1: rule__ExplicitUnit__DenominatorAssignment_2_1 : ( ruleUnitDenominator ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20550:1: rule__ExplicitUnit__DenominatorAssignment_2_1 : ( ruleUnitDenominator ) ;
     public final void rule__ExplicitUnit__DenominatorAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20521:1: ( ( ruleUnitDenominator ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20522:1: ( ruleUnitDenominator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20554:1: ( ( ruleUnitDenominator ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20555:1: ( ruleUnitDenominator )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20522:1: ( ruleUnitDenominator )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20523:1: ruleUnitDenominator
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20555:1: ( ruleUnitDenominator )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20556:1: ruleUnitDenominator
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getExplicitUnitAccess().getDenominatorUnitDenominatorParserRuleCall_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleUnitDenominator_in_rule__ExplicitUnit__DenominatorAssignment_2_141432);
+            pushFollow(FOLLOW_ruleUnitDenominator_in_rule__ExplicitUnit__DenominatorAssignment_2_141496);
             ruleUnitDenominator();
 
             state._fsp--;
@@ -58672,22 +58751,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitNumerator__FactorsAssignment_1_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20532:1: rule__UnitNumerator__FactorsAssignment_1_0 : ( ruleUnitFactor ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20565:1: rule__UnitNumerator__FactorsAssignment_1_0 : ( ruleUnitFactor ) ;
     public final void rule__UnitNumerator__FactorsAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20536:1: ( ( ruleUnitFactor ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20537:1: ( ruleUnitFactor )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20569:1: ( ( ruleUnitFactor ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20570:1: ( ruleUnitFactor )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20537:1: ( ruleUnitFactor )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20538:1: ruleUnitFactor
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20570:1: ( ruleUnitFactor )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20571:1: ruleUnitFactor
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitNumeratorAccess().getFactorsUnitFactorParserRuleCall_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleUnitFactor_in_rule__UnitNumerator__FactorsAssignment_1_041463);
+            pushFollow(FOLLOW_ruleUnitFactor_in_rule__UnitNumerator__FactorsAssignment_1_041527);
             ruleUnitFactor();
 
             state._fsp--;
@@ -58717,22 +58796,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitNumerator__FactorsAssignment_1_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20547:1: rule__UnitNumerator__FactorsAssignment_1_1_1 : ( ruleUnitFactor ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20580:1: rule__UnitNumerator__FactorsAssignment_1_1_1 : ( ruleUnitFactor ) ;
     public final void rule__UnitNumerator__FactorsAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20551:1: ( ( ruleUnitFactor ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20552:1: ( ruleUnitFactor )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20584:1: ( ( ruleUnitFactor ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20585:1: ( ruleUnitFactor )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20552:1: ( ruleUnitFactor )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20553:1: ruleUnitFactor
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20585:1: ( ruleUnitFactor )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20586:1: ruleUnitFactor
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitNumeratorAccess().getFactorsUnitFactorParserRuleCall_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleUnitFactor_in_rule__UnitNumerator__FactorsAssignment_1_1_141494);
+            pushFollow(FOLLOW_ruleUnitFactor_in_rule__UnitNumerator__FactorsAssignment_1_1_141558);
             ruleUnitFactor();
 
             state._fsp--;
@@ -58762,22 +58841,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitDenominator__FactorsAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20562:1: rule__UnitDenominator__FactorsAssignment_0 : ( ruleUnitFactor ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20595:1: rule__UnitDenominator__FactorsAssignment_0 : ( ruleUnitFactor ) ;
     public final void rule__UnitDenominator__FactorsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20566:1: ( ( ruleUnitFactor ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20567:1: ( ruleUnitFactor )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20599:1: ( ( ruleUnitFactor ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20600:1: ( ruleUnitFactor )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20567:1: ( ruleUnitFactor )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20568:1: ruleUnitFactor
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20600:1: ( ruleUnitFactor )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20601:1: ruleUnitFactor
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitDenominatorAccess().getFactorsUnitFactorParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleUnitFactor_in_rule__UnitDenominator__FactorsAssignment_041525);
+            pushFollow(FOLLOW_ruleUnitFactor_in_rule__UnitDenominator__FactorsAssignment_041589);
             ruleUnitFactor();
 
             state._fsp--;
@@ -58807,22 +58886,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitDenominator__FactorsAssignment_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20577:1: rule__UnitDenominator__FactorsAssignment_1_1 : ( ruleUnitFactor ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20610:1: rule__UnitDenominator__FactorsAssignment_1_1 : ( ruleUnitFactor ) ;
     public final void rule__UnitDenominator__FactorsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20581:1: ( ( ruleUnitFactor ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20582:1: ( ruleUnitFactor )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20614:1: ( ( ruleUnitFactor ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20615:1: ( ruleUnitFactor )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20582:1: ( ruleUnitFactor )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20583:1: ruleUnitFactor
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20615:1: ( ruleUnitFactor )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20616:1: ruleUnitFactor
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitDenominatorAccess().getFactorsUnitFactorParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleUnitFactor_in_rule__UnitDenominator__FactorsAssignment_1_141556);
+            pushFollow(FOLLOW_ruleUnitFactor_in_rule__UnitDenominator__FactorsAssignment_1_141620);
             ruleUnitFactor();
 
             state._fsp--;
@@ -58852,22 +58931,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitDenominator__FactorsAssignment_1_2_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20592:1: rule__UnitDenominator__FactorsAssignment_1_2_1 : ( ruleUnitFactor ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20625:1: rule__UnitDenominator__FactorsAssignment_1_2_1 : ( ruleUnitFactor ) ;
     public final void rule__UnitDenominator__FactorsAssignment_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20596:1: ( ( ruleUnitFactor ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20597:1: ( ruleUnitFactor )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20629:1: ( ( ruleUnitFactor ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20630:1: ( ruleUnitFactor )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20597:1: ( ruleUnitFactor )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20598:1: ruleUnitFactor
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20630:1: ( ruleUnitFactor )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20631:1: ruleUnitFactor
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitDenominatorAccess().getFactorsUnitFactorParserRuleCall_1_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleUnitFactor_in_rule__UnitDenominator__FactorsAssignment_1_2_141587);
+            pushFollow(FOLLOW_ruleUnitFactor_in_rule__UnitDenominator__FactorsAssignment_1_2_141651);
             ruleUnitFactor();
 
             state._fsp--;
@@ -58897,22 +58976,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitFactor__SymbolAssignment_0"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20607:1: rule__UnitFactor__SymbolAssignment_0 : ( ruleValidID ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20640:1: rule__UnitFactor__SymbolAssignment_0 : ( ruleValidID ) ;
     public final void rule__UnitFactor__SymbolAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20611:1: ( ( ruleValidID ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20612:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20644:1: ( ( ruleValidID ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20645:1: ( ruleValidID )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20612:1: ( ruleValidID )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20613:1: ruleValidID
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20645:1: ( ruleValidID )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20646:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitFactorAccess().getSymbolValidIDParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__UnitFactor__SymbolAssignment_041618);
+            pushFollow(FOLLOW_ruleValidID_in_rule__UnitFactor__SymbolAssignment_041682);
             ruleValidID();
 
             state._fsp--;
@@ -58942,22 +59021,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__UnitFactor__ExponentAssignment_1_1"
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20622:1: rule__UnitFactor__ExponentAssignment_1_1 : ( ruleUnitExponent ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20655:1: rule__UnitFactor__ExponentAssignment_1_1 : ( ruleUnitExponent ) ;
     public final void rule__UnitFactor__ExponentAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20626:1: ( ( ruleUnitExponent ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20627:1: ( ruleUnitExponent )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20659:1: ( ( ruleUnitExponent ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20660:1: ( ruleUnitExponent )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20627:1: ( ruleUnitExponent )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20628:1: ruleUnitExponent
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20660:1: ( ruleUnitExponent )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:20661:1: ruleUnitExponent
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitFactorAccess().getExponentUnitExponentParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleUnitExponent_in_rule__UnitFactor__ExponentAssignment_1_141649);
+            pushFollow(FOLLOW_ruleUnitExponent_in_rule__UnitFactor__ExponentAssignment_1_141713);
             ruleUnitExponent();
 
             state._fsp--;
@@ -59092,11 +59171,11 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     static final String DFA6_eotS =
         "\u00a5\uffff";
     static final String DFA6_eofS =
-        "\1\uffff\6\11\6\uffff\1\11\6\uffff\2\11\3\uffff\1\11\4\uffff\1\11"+
-        "\3\uffff\1\11\3\uffff\1\11\3\uffff\1\11\172\uffff";
+        "\1\uffff\6\11\11\uffff\1\11\3\uffff\2\11\6\uffff\1\11\1\uffff\1"+
+        "\11\3\uffff\1\11\3\uffff\1\11\3\uffff\1\11\172\uffff";
     static final String DFA6_minS =
-        "\1\10\6\26\1\uffff\1\5\1\uffff\3\5\1\26\1\37\2\36\1\37\2\36\2\26"+
-        "\1\37\2\36\1\26\1\37\2\36\1\7\1\26\1\5\2\7\1\26\1\5\2\7\1\26\1\5"+
+        "\1\10\6\26\1\uffff\1\5\1\uffff\3\5\1\37\2\36\1\26\1\37\2\36\2\26"+
+        "\1\37\2\36\1\37\2\36\1\26\1\7\1\26\1\5\2\7\1\26\1\5\2\7\1\26\1\5"+
         "\2\7\1\26\1\5\1\7\2\42\1\7\1\5\4\36\2\42\1\7\1\5\4\36\2\42\1\7\1"+
         "\5\4\36\2\42\1\7\1\5\4\36\1\5\2\36\2\5\2\36\2\5\2\36\2\5\2\36\2"+
         "\5\2\60\1\5\1\7\1\60\1\5\2\36\1\5\2\60\1\5\1\7\1\60\1\5\2\36\1\5"+
@@ -59104,14 +59183,14 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         "\36\1\5\4\36\1\5\4\36\1\5\4\36\5\5\2\36\1\5\2\36\1\5\2\36\1\5\2"+
         "\36";
     static final String DFA6_maxS =
-        "\1\73\6\116\1\uffff\1\60\1\uffff\3\60\1\116\6\60\2\116\3\60\1\116"+
-        "\3\60\1\57\1\116\1\35\1\10\1\57\1\116\1\35\1\10\1\57\1\116\1\35"+
-        "\1\10\1\57\1\116\1\35\1\10\2\60\1\10\1\6\6\60\1\10\1\6\6\60\1\10"+
-        "\1\6\6\60\1\10\1\6\4\60\1\35\2\60\2\35\2\60\2\35\2\60\2\35\2\60"+
-        "\1\35\1\6\2\60\1\35\1\10\1\60\1\6\2\60\1\6\2\60\1\35\1\10\1\60\1"+
-        "\6\2\60\1\6\2\60\1\35\1\10\1\60\1\6\2\60\1\6\2\60\1\35\1\10\1\60"+
-        "\1\6\2\60\1\6\4\60\1\6\4\60\1\6\4\60\1\6\4\60\4\35\1\6\2\60\1\6"+
-        "\2\60\1\6\2\60\1\6\2\60";
+        "\1\73\6\116\1\uffff\1\60\1\uffff\6\60\1\116\3\60\2\116\6\60\1\116"+
+        "\1\57\1\116\1\35\1\10\1\57\1\116\1\35\1\10\1\57\1\116\1\35\1\10"+
+        "\1\57\1\116\1\35\1\10\2\60\1\10\1\6\6\60\1\10\1\6\6\60\1\10\1\6"+
+        "\6\60\1\10\1\6\4\60\1\35\2\60\2\35\2\60\2\35\2\60\2\35\2\60\1\35"+
+        "\1\6\2\60\1\35\1\10\1\60\1\6\2\60\1\6\2\60\1\35\1\10\1\60\1\6\2"+
+        "\60\1\6\2\60\1\35\1\10\1\60\1\6\2\60\1\6\2\60\1\35\1\10\1\60\1\6"+
+        "\2\60\1\6\4\60\1\6\4\60\1\6\4\60\1\6\4\60\4\35\1\6\2\60\1\6\2\60"+
+        "\1\6\2\60\1\6\2\60";
     static final String DFA6_acceptS =
         "\7\uffff\1\2\1\uffff\1\1\u009b\uffff";
     static final String DFA6_specialS =
@@ -59137,17 +59216,17 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             "\2\uffff\1\11\13\uffff\1\7\1\11\1\uffff\1\11\1\uffff\2\11\1"+
             "\uffff\5\11\2\uffff\1\11\2\uffff\1\11",
             "",
-            "\1\16\1\uffff\1\17\1\20\47\uffff\1\15",
+            "\1\15\1\uffff\1\16\1\17\47\uffff\1\20",
             "",
             "\1\21\1\uffff\1\22\1\23\47\uffff\1\24",
             "\1\26\1\uffff\1\27\1\30\47\uffff\1\25",
-            "\1\32\1\uffff\1\33\1\34\47\uffff\1\31",
-            "\2\11\2\uffff\1\11\14\uffff\2\11\1\uffff\2\11\1\uffff\1\11"+
-            "\2\uffff\1\11\13\uffff\1\7\1\11\1\uffff\1\11\1\uffff\2\11\1"+
-            "\uffff\5\11\2\uffff\1\11\2\uffff\1\11",
+            "\1\31\1\uffff\1\32\1\33\47\uffff\1\34",
             "\1\35\20\uffff\1\36",
             "\1\40\1\35\2\uffff\1\37\15\uffff\1\36",
             "\1\40\1\35\2\uffff\1\37\15\uffff\1\36",
+            "\2\11\2\uffff\1\11\14\uffff\2\11\1\uffff\2\11\1\uffff\1\11"+
+            "\2\uffff\1\11\13\uffff\1\7\1\11\1\uffff\1\11\1\uffff\2\11\1"+
+            "\uffff\5\11\2\uffff\1\11\2\uffff\1\11",
             "\1\41\20\uffff\1\42",
             "\1\44\1\41\2\uffff\1\43\15\uffff\1\42",
             "\1\44\1\41\2\uffff\1\43\15\uffff\1\42",
@@ -59160,12 +59239,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             "\1\45\20\uffff\1\46",
             "\1\50\1\45\2\uffff\1\47\15\uffff\1\46",
             "\1\50\1\45\2\uffff\1\47\15\uffff\1\46",
-            "\2\11\2\uffff\1\11\14\uffff\2\11\1\uffff\2\11\1\uffff\1\11"+
-            "\2\uffff\1\11\13\uffff\1\7\1\11\1\uffff\1\11\1\uffff\2\11\1"+
-            "\uffff\5\11\2\uffff\1\11\2\uffff\1\11",
             "\1\51\20\uffff\1\52",
             "\1\54\1\51\2\uffff\1\53\15\uffff\1\52",
             "\1\54\1\51\2\uffff\1\53\15\uffff\1\52",
+            "\2\11\2\uffff\1\11\14\uffff\2\11\1\uffff\2\11\1\uffff\1\11"+
+            "\2\uffff\1\11\13\uffff\1\7\1\11\1\uffff\1\11\1\uffff\2\11\1"+
+            "\uffff\5\11\2\uffff\1\11\2\uffff\1\11",
             "\1\55\1\56\46\uffff\1\57",
             "\2\11\2\uffff\1\11\14\uffff\2\11\1\uffff\2\11\1\uffff\1\11"+
             "\2\uffff\1\11\13\uffff\1\7\1\11\1\uffff\1\11\1\uffff\2\11\1"+
@@ -59348,41 +59427,47 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     static final String DFA15_eotS =
         "\15\uffff";
     static final String DFA15_eofS =
-        "\2\uffff\2\4\11\uffff";
+        "\2\uffff\2\5\11\uffff";
     static final String DFA15_minS =
-        "\1\112\1\7\2\16\1\uffff\1\4\1\uffff\2\16\1\4\1\uffff\2\16";
+        "\1\112\1\7\2\16\1\4\1\uffff\2\16\1\uffff\1\4\1\uffff\2\16";
     static final String DFA15_maxS =
-        "\1\112\1\10\2\116\1\uffff\1\132\1\uffff\2\127\1\132\1\uffff\2\127";
+        "\1\112\1\10\2\116\1\132\1\uffff\2\127\1\uffff\1\132\1\uffff\2\127";
     static final String DFA15_acceptS =
-        "\4\uffff\1\1\1\uffff\1\2\3\uffff\1\3\2\uffff";
+        "\5\uffff\1\1\2\uffff\1\2\1\uffff\1\3\2\uffff";
     static final String DFA15_specialS =
         "\15\uffff}>";
     static final String[] DFA15_transitionS = {
             "\1\1",
             "\1\2\1\3",
-            "\1\4\7\uffff\16\4\3\uffff\2\4\1\uffff\2\4\1\uffff\1\4\1\uffff"+
-            "\1\5\1\4\13\uffff\2\4\1\uffff\1\4\1\uffff\2\4\1\uffff\10\4\2"+
-            "\uffff\1\4",
-            "\1\4\7\uffff\16\4\3\uffff\2\4\1\uffff\2\4\1\uffff\1\4\1\uffff"+
-            "\1\5\1\4\13\uffff\2\4\1\uffff\1\4\1\uffff\2\4\1\uffff\10\4\2"+
-            "\uffff\1\4",
+            "\1\5\7\uffff\16\5\3\uffff\2\5\1\uffff\2\5\1\uffff\1\5\1\uffff"+
+            "\1\4\1\5\13\uffff\2\5\1\uffff\1\5\1\uffff\2\5\1\uffff\10\5\2"+
+            "\uffff\1\5",
+            "\1\5\7\uffff\16\5\3\uffff\2\5\1\uffff\2\5\1\uffff\1\5\1\uffff"+
+            "\1\4\1\5\13\uffff\2\5\1\uffff\1\5\1\uffff\2\5\1\uffff\10\5\2"+
+            "\uffff\1\5",
+            "\3\10\1\6\1\7\1\10\5\uffff\1\10\15\uffff\1\10\6\uffff\1\10"+
+            "\1\uffff\1\10\10\uffff\2\10\13\uffff\1\10\1\uffff\1\10\1\uffff"+
+            "\1\10\2\uffff\1\10\11\uffff\1\10\1\uffff\3\10\6\uffff\1\10\1"+
+            "\uffff\1\10",
             "",
-            "\3\6\1\7\1\10\1\6\5\uffff\1\6\15\uffff\1\6\6\uffff\1\6\1\uffff"+
-            "\1\6\10\uffff\2\6\13\uffff\1\6\1\uffff\1\6\1\uffff\1\6\2\uffff"+
-            "\1\6\11\uffff\1\6\1\uffff\3\6\6\uffff\1\6\1\uffff\1\6",
+            "\1\10\7\uffff\16\10\2\uffff\1\10\1\uffff\1\11\2\uffff\1\12"+
+            "\1\uffff\1\10\1\uffff\2\10\13\uffff\1\10\11\uffff\5\10\1\12"+
+            "\13\uffff\1\10",
+            "\1\10\7\uffff\16\10\2\uffff\1\10\1\uffff\1\11\2\uffff\1\12"+
+            "\1\uffff\1\10\1\uffff\2\10\13\uffff\1\10\11\uffff\5\10\1\12"+
+            "\13\uffff\1\10",
             "",
-            "\1\6\7\uffff\16\6\2\uffff\1\6\1\uffff\1\11\2\uffff\1\12\1\uffff"+
-            "\1\6\1\uffff\2\6\13\uffff\1\6\11\uffff\5\6\1\12\13\uffff\1\6",
-            "\1\6\7\uffff\16\6\2\uffff\1\6\1\uffff\1\11\2\uffff\1\12\1\uffff"+
-            "\1\6\1\uffff\2\6\13\uffff\1\6\11\uffff\5\6\1\12\13\uffff\1\6",
-            "\3\6\1\13\1\14\1\6\5\uffff\1\6\15\uffff\1\6\6\uffff\1\6\1\uffff"+
-            "\1\6\10\uffff\1\6\14\uffff\1\6\1\uffff\1\6\1\uffff\1\6\2\uffff"+
-            "\1\6\11\uffff\1\6\1\uffff\3\6\6\uffff\1\6\1\uffff\1\6",
+            "\3\10\1\13\1\14\1\10\5\uffff\1\10\15\uffff\1\10\6\uffff\1\10"+
+            "\1\uffff\1\10\10\uffff\1\10\14\uffff\1\10\1\uffff\1\10\1\uffff"+
+            "\1\10\2\uffff\1\10\11\uffff\1\10\1\uffff\3\10\6\uffff\1\10\1"+
+            "\uffff\1\10",
             "",
-            "\1\6\7\uffff\16\6\2\uffff\1\6\1\uffff\1\11\2\uffff\1\12\1\uffff"+
-            "\1\6\1\uffff\2\6\13\uffff\1\6\11\uffff\5\6\1\12\13\uffff\1\6",
-            "\1\6\7\uffff\16\6\2\uffff\1\6\1\uffff\1\11\2\uffff\1\12\1\uffff"+
-            "\1\6\1\uffff\2\6\13\uffff\1\6\11\uffff\5\6\1\12\13\uffff\1\6"
+            "\1\10\7\uffff\16\10\2\uffff\1\10\1\uffff\1\11\2\uffff\1\12"+
+            "\1\uffff\1\10\1\uffff\2\10\13\uffff\1\10\11\uffff\5\10\1\12"+
+            "\13\uffff\1\10",
+            "\1\10\7\uffff\16\10\2\uffff\1\10\1\uffff\1\11\2\uffff\1\12"+
+            "\1\uffff\1\10\1\uffff\2\10\13\uffff\1\10\11\uffff\5\10\1\12"+
+            "\13\uffff\1\10"
     };
 
     static final short[] DFA15_eot = DFA.unpackEncodedString(DFA15_eotS);
@@ -59421,32 +59506,32 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     static final String DFA22_eotS =
         "\10\uffff";
     static final String DFA22_eofS =
-        "\1\uffff\2\4\3\uffff\2\4";
+        "\1\uffff\2\5\3\uffff\2\5";
     static final String DFA22_minS =
         "\1\7\2\16\1\7\2\uffff\2\16";
     static final String DFA22_maxS =
         "\1\10\2\127\1\10\2\uffff\2\127";
     static final String DFA22_acceptS =
-        "\4\uffff\1\1\1\2\2\uffff";
+        "\4\uffff\1\2\1\1\2\uffff";
     static final String DFA22_specialS =
         "\10\uffff}>";
     static final String[] DFA22_transitionS = {
             "\1\1\1\2",
-            "\1\4\7\uffff\16\4\2\uffff\3\4\1\uffff\2\4\1\uffff\1\4\1\uffff"+
-            "\1\5\1\4\13\uffff\2\4\1\uffff\1\4\1\uffff\2\4\1\uffff\10\4\2"+
-            "\uffff\1\4\10\uffff\1\3",
-            "\1\4\7\uffff\16\4\2\uffff\3\4\1\uffff\2\4\1\uffff\1\4\1\uffff"+
-            "\1\5\1\4\13\uffff\2\4\1\uffff\1\4\1\uffff\2\4\1\uffff\10\4\2"+
-            "\uffff\1\4\10\uffff\1\3",
+            "\1\5\7\uffff\16\5\2\uffff\3\5\1\uffff\2\5\1\uffff\1\5\1\uffff"+
+            "\1\4\1\5\13\uffff\2\5\1\uffff\1\5\1\uffff\2\5\1\uffff\10\5\2"+
+            "\uffff\1\5\10\uffff\1\3",
+            "\1\5\7\uffff\16\5\2\uffff\3\5\1\uffff\2\5\1\uffff\1\5\1\uffff"+
+            "\1\4\1\5\13\uffff\2\5\1\uffff\1\5\1\uffff\2\5\1\uffff\10\5\2"+
+            "\uffff\1\5\10\uffff\1\3",
             "\1\6\1\7",
             "",
             "",
-            "\1\4\7\uffff\16\4\2\uffff\3\4\1\uffff\2\4\1\uffff\1\4\1\uffff"+
-            "\1\5\1\4\13\uffff\2\4\1\uffff\1\4\1\uffff\2\4\1\uffff\10\4\2"+
-            "\uffff\1\4\10\uffff\1\3",
-            "\1\4\7\uffff\16\4\2\uffff\3\4\1\uffff\2\4\1\uffff\1\4\1\uffff"+
-            "\1\5\1\4\13\uffff\2\4\1\uffff\1\4\1\uffff\2\4\1\uffff\10\4\2"+
-            "\uffff\1\4\10\uffff\1\3"
+            "\1\5\7\uffff\16\5\2\uffff\3\5\1\uffff\2\5\1\uffff\1\5\1\uffff"+
+            "\1\4\1\5\13\uffff\2\5\1\uffff\1\5\1\uffff\2\5\1\uffff\10\5\2"+
+            "\uffff\1\5\10\uffff\1\3",
+            "\1\5\7\uffff\16\5\2\uffff\3\5\1\uffff\2\5\1\uffff\1\5\1\uffff"+
+            "\1\4\1\5\13\uffff\2\5\1\uffff\1\5\1\uffff\2\5\1\uffff\10\5\2"+
+            "\uffff\1\5\10\uffff\1\3"
     };
 
     static final short[] DFA22_eot = DFA.unpackEncodedString(DFA22_eotS);
@@ -61008,313 +61093,316 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__DoWhileStatement__Group__0__Impl_in_rule__DoWhileStatement__Group__032813 = new BitSet(new long[]{0x0010804000000180L,0x00000000007C4001L});
     public static final BitSet FOLLOW_rule__DoWhileStatement__Group__1_in_rule__DoWhileStatement__Group__032816 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_83_in_rule__DoWhileStatement__Group__0__Impl32844 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DoWhileStatement__Group__1__Impl_in_rule__DoWhileStatement__Group__132875 = new BitSet(new long[]{0x0000800000000000L});
+    public static final BitSet FOLLOW_rule__DoWhileStatement__Group__1__Impl_in_rule__DoWhileStatement__Group__132875 = new BitSet(new long[]{0x0000000000000000L,0x0000000000040000L});
     public static final BitSet FOLLOW_rule__DoWhileStatement__Group__2_in_rule__DoWhileStatement__Group__132878 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__DoWhileStatement__BodyAssignment_1_in_rule__DoWhileStatement__Group__1__Impl32905 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DoWhileStatement__Group__2__Impl_in_rule__DoWhileStatement__Group__232935 = new BitSet(new long[]{0x503C8050200083F0L,0x000000000703A009L});
+    public static final BitSet FOLLOW_rule__DoWhileStatement__Group__2__Impl_in_rule__DoWhileStatement__Group__232935 = new BitSet(new long[]{0x0000800000000000L});
     public static final BitSet FOLLOW_rule__DoWhileStatement__Group__3_in_rule__DoWhileStatement__Group__232938 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rule__DoWhileStatement__Group__2__Impl32966 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DoWhileStatement__Group__3__Impl_in_rule__DoWhileStatement__Group__332997 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_82_in_rule__DoWhileStatement__Group__2__Impl32966 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DoWhileStatement__Group__3__Impl_in_rule__DoWhileStatement__Group__332997 = new BitSet(new long[]{0x503C8050200083F0L,0x000000000703A009L});
     public static final BitSet FOLLOW_rule__DoWhileStatement__Group__4_in_rule__DoWhileStatement__Group__333000 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DoWhileStatement__ConditionAssignment_3_in_rule__DoWhileStatement__Group__3__Impl33027 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DoWhileStatement__Group__4__Impl_in_rule__DoWhileStatement__Group__433057 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_rule__DoWhileStatement__Group__5_in_rule__DoWhileStatement__Group__433060 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_rule__DoWhileStatement__Group__4__Impl33088 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DoWhileStatement__Group__5__Impl_in_rule__DoWhileStatement__Group__533119 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__DoWhileStatement__Group__5__Impl33147 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ContinueStatement__Group__0__Impl_in_rule__ContinueStatement__Group__033190 = new BitSet(new long[]{0x0000000000000000L,0x0000000000100000L});
-    public static final BitSet FOLLOW_rule__ContinueStatement__Group__1_in_rule__ContinueStatement__Group__033193 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ContinueStatement__Group__1__Impl_in_rule__ContinueStatement__Group__133251 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_rule__ContinueStatement__Group__2_in_rule__ContinueStatement__Group__133254 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_84_in_rule__ContinueStatement__Group__1__Impl33282 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ContinueStatement__Group__2__Impl_in_rule__ContinueStatement__Group__233313 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__ContinueStatement__Group__2__Impl33341 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BreakStatement__Group__0__Impl_in_rule__BreakStatement__Group__033378 = new BitSet(new long[]{0x0000000000000000L,0x0000000000200000L});
-    public static final BitSet FOLLOW_rule__BreakStatement__Group__1_in_rule__BreakStatement__Group__033381 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BreakStatement__Group__1__Impl_in_rule__BreakStatement__Group__133439 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_rule__BreakStatement__Group__2_in_rule__BreakStatement__Group__133442 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_85_in_rule__BreakStatement__Group__1__Impl33470 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BreakStatement__Group__2__Impl_in_rule__BreakStatement__Group__233501 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__BreakStatement__Group__2__Impl33529 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ReturnStatement__Group__0__Impl_in_rule__ReturnStatement__Group__033566 = new BitSet(new long[]{0x503C8050200083F0L,0x000000000703A009L});
-    public static final BitSet FOLLOW_rule__ReturnStatement__Group__1_in_rule__ReturnStatement__Group__033569 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_86_in_rule__ReturnStatement__Group__0__Impl33597 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ReturnStatement__Group__1__Impl_in_rule__ReturnStatement__Group__133628 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_rule__ReturnStatement__Group__2_in_rule__ReturnStatement__Group__133631 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ReturnStatement__ExpressionAssignment_1_in_rule__ReturnStatement__Group__1__Impl33658 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ReturnStatement__Group__2__Impl_in_rule__ReturnStatement__Group__233688 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__ReturnStatement__Group__2__Impl33716 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Unit__Group__0__Impl_in_rule__Unit__Group__033753 = new BitSet(new long[]{0x0000800000000000L});
-    public static final BitSet FOLLOW_rule__Unit__Group__1_in_rule__Unit__Group__033756 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Unit__Group__1__Impl_in_rule__Unit__Group__133814 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Unit__Alternatives_1_in_rule__Unit__Group__1__Impl33841 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Unit__Group_1_0__0__Impl_in_rule__Unit__Group_1_0__033875 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_rule__Unit__Group_1_0__1_in_rule__Unit__Group_1_0__033878 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rule__Unit__Group_1_0__0__Impl33906 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Unit__Group_1_0__1__Impl_in_rule__Unit__Group_1_0__133937 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_rule__Unit__Group_1_0__1__Impl33965 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Unit__Group_1_1__0__Impl_in_rule__Unit__Group_1_1__034000 = new BitSet(new long[]{0x00000000000001A0L});
-    public static final BitSet FOLLOW_rule__Unit__Group_1_1__1_in_rule__Unit__Group_1_1__034003 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rule__Unit__Group_1_1__0__Impl34031 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Unit__Group_1_1__1__Impl_in_rule__Unit__Group_1_1__134062 = new BitSet(new long[]{0x0001000080000000L});
-    public static final BitSet FOLLOW_rule__Unit__Group_1_1__2_in_rule__Unit__Group_1_1__134065 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Unit__NumeratorAssignment_1_1_1_in_rule__Unit__Group_1_1__1__Impl34092 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Unit__Group_1_1__2__Impl_in_rule__Unit__Group_1_1__234122 = new BitSet(new long[]{0x0001000080000000L});
-    public static final BitSet FOLLOW_rule__Unit__Group_1_1__3_in_rule__Unit__Group_1_1__234125 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Unit__Group_1_1_2__0_in_rule__Unit__Group_1_1__2__Impl34152 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Unit__Group_1_1__3__Impl_in_rule__Unit__Group_1_1__334183 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_rule__Unit__Group_1_1__3__Impl34211 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Unit__Group_1_1_2__0__Impl_in_rule__Unit__Group_1_1_2__034250 = new BitSet(new long[]{0x00008000000001A0L});
-    public static final BitSet FOLLOW_rule__Unit__Group_1_1_2__1_in_rule__Unit__Group_1_1_2__034253 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_rule__Unit__Group_1_1_2__0__Impl34281 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Unit__Group_1_1_2__1__Impl_in_rule__Unit__Group_1_1_2__134312 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Unit__DenominatorAssignment_1_1_2_1_in_rule__Unit__Group_1_1_2__1__Impl34339 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExplicitUnit__Group__0__Impl_in_rule__ExplicitUnit__Group__034373 = new BitSet(new long[]{0x00000000000001A0L});
-    public static final BitSet FOLLOW_rule__ExplicitUnit__Group__1_in_rule__ExplicitUnit__Group__034376 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rule__ExplicitUnit__Group__0__Impl34404 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExplicitUnit__Group__1__Impl_in_rule__ExplicitUnit__Group__134435 = new BitSet(new long[]{0x0001000080000000L});
-    public static final BitSet FOLLOW_rule__ExplicitUnit__Group__2_in_rule__ExplicitUnit__Group__134438 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExplicitUnit__NumeratorAssignment_1_in_rule__ExplicitUnit__Group__1__Impl34465 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExplicitUnit__Group__2__Impl_in_rule__ExplicitUnit__Group__234495 = new BitSet(new long[]{0x0001000080000000L});
-    public static final BitSet FOLLOW_rule__ExplicitUnit__Group__3_in_rule__ExplicitUnit__Group__234498 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExplicitUnit__Group_2__0_in_rule__ExplicitUnit__Group__2__Impl34525 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExplicitUnit__Group__3__Impl_in_rule__ExplicitUnit__Group__334556 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_rule__ExplicitUnit__Group__3__Impl34584 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExplicitUnit__Group_2__0__Impl_in_rule__ExplicitUnit__Group_2__034623 = new BitSet(new long[]{0x00008000000001A0L});
-    public static final BitSet FOLLOW_rule__ExplicitUnit__Group_2__1_in_rule__ExplicitUnit__Group_2__034626 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_rule__ExplicitUnit__Group_2__0__Impl34654 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExplicitUnit__Group_2__1__Impl_in_rule__ExplicitUnit__Group_2__134685 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExplicitUnit__DenominatorAssignment_2_1_in_rule__ExplicitUnit__Group_2__1__Impl34712 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitNumerator__Group_0__0__Impl_in_rule__UnitNumerator__Group_0__034746 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__UnitNumerator__Group_0__1_in_rule__UnitNumerator__Group_0__034749 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitNumerator__Group_0__1__Impl_in_rule__UnitNumerator__Group_0__134807 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ONE_in_rule__UnitNumerator__Group_0__1__Impl34834 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitNumerator__Group_1__0__Impl_in_rule__UnitNumerator__Group_1__034867 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_rule__UnitNumerator__Group_1__1_in_rule__UnitNumerator__Group_1__034870 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitNumerator__FactorsAssignment_1_0_in_rule__UnitNumerator__Group_1__0__Impl34897 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitNumerator__Group_1__1__Impl_in_rule__UnitNumerator__Group_1__134927 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitNumerator__Group_1_1__0_in_rule__UnitNumerator__Group_1__1__Impl34954 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_rule__UnitNumerator__Group_1_1__0__Impl_in_rule__UnitNumerator__Group_1_1__034989 = new BitSet(new long[]{0x00000000000001A0L});
-    public static final BitSet FOLLOW_rule__UnitNumerator__Group_1_1__1_in_rule__UnitNumerator__Group_1_1__034992 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_rule__UnitNumerator__Group_1_1__0__Impl35020 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitNumerator__Group_1_1__1__Impl_in_rule__UnitNumerator__Group_1_1__135051 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitNumerator__FactorsAssignment_1_1_1_in_rule__UnitNumerator__Group_1_1__1__Impl35078 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1__0__Impl_in_rule__UnitDenominator__Group_1__035112 = new BitSet(new long[]{0x00000000000001A0L});
-    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1__1_in_rule__UnitDenominator__Group_1__035115 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rule__UnitDenominator__Group_1__0__Impl35143 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1__1__Impl_in_rule__UnitDenominator__Group_1__135174 = new BitSet(new long[]{0x0001000040000000L});
-    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1__2_in_rule__UnitDenominator__Group_1__135177 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitDenominator__FactorsAssignment_1_1_in_rule__UnitDenominator__Group_1__1__Impl35204 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1__2__Impl_in_rule__UnitDenominator__Group_1__235234 = new BitSet(new long[]{0x0001000040000000L});
-    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1__3_in_rule__UnitDenominator__Group_1__235237 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1_2__0_in_rule__UnitDenominator__Group_1__2__Impl35264 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1__3__Impl_in_rule__UnitDenominator__Group_1__335295 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_rule__UnitDenominator__Group_1__3__Impl35323 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1_2__0__Impl_in_rule__UnitDenominator__Group_1_2__035362 = new BitSet(new long[]{0x00000000000001A0L});
-    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1_2__1_in_rule__UnitDenominator__Group_1_2__035365 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_rule__UnitDenominator__Group_1_2__0__Impl35393 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1_2__1__Impl_in_rule__UnitDenominator__Group_1_2__135424 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitDenominator__FactorsAssignment_1_2_1_in_rule__UnitDenominator__Group_1_2__1__Impl35451 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitFactor__Group__0__Impl_in_rule__UnitFactor__Group__035485 = new BitSet(new long[]{0x0000000400000000L});
-    public static final BitSet FOLLOW_rule__UnitFactor__Group__1_in_rule__UnitFactor__Group__035488 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitFactor__SymbolAssignment_0_in_rule__UnitFactor__Group__0__Impl35515 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitFactor__Group__1__Impl_in_rule__UnitFactor__Group__135545 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitFactor__Group_1__0_in_rule__UnitFactor__Group__1__Impl35572 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitFactor__Group_1__0__Impl_in_rule__UnitFactor__Group_1__035607 = new BitSet(new long[]{0x0000000020000060L});
-    public static final BitSet FOLLOW_rule__UnitFactor__Group_1__1_in_rule__UnitFactor__Group_1__035610 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_rule__UnitFactor__Group_1__0__Impl35638 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitFactor__Group_1__1__Impl_in_rule__UnitFactor__Group_1__135669 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitFactor__ExponentAssignment_1_1_in_rule__UnitFactor__Group_1__1__Impl35696 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitExponent__Group__0__Impl_in_rule__UnitExponent__Group__035730 = new BitSet(new long[]{0x0000000020000060L});
-    public static final BitSet FOLLOW_rule__UnitExponent__Group__1_in_rule__UnitExponent__Group__035733 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_rule__UnitExponent__Group__0__Impl35762 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnitExponent__Group__1__Impl_in_rule__UnitExponent__Group__135795 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidInt_in_rule__UnitExponent__Group__1__Impl35822 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__035855 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__035858 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__QualifiedName__Group__0__Impl35885 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__135914 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl35941 = new BitSet(new long[]{0x0000000000000002L,0x0000000000800000L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__035976 = new BitSet(new long[]{0x0000000000000180L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__035979 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_87_in_rule__QualifiedName__Group_1__0__Impl36007 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__136038 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__QualifiedName__Group_1__1__Impl36065 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDefinition_in_rule__Module__DefinitionsAssignment36103 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__EnumerationDefinition__NameAssignment_136134 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_036165 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_136196 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__EnumerationLiteralDeclaration__NameAssignment36227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__TypeAliasDefinition__NameAssignment_136258 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimitiveType_in_rule__TypeAliasDefinition__TypeAssignment_336289 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__RecordDefinition__NameAssignment_136320 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRecordFieldDeclaration_in_rule__RecordDefinition__FieldDeclarationsAssignment_336351 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__RecordFieldDeclaration__NameAssignment_036382 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDataTypeSpecifier_in_rule__RecordFieldDeclaration__TypeAssignment_236413 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFunctionKind_in_rule__FunctionDefinition__KindAssignment_036444 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__FunctionDefinition__NameAssignment_236475 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTemplateParameterDeclaration_in_rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_136506 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTemplateParameterDeclaration_in_rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_136537 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInputParameterDeclaration_in_rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_036568 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInputParameterDeclaration_in_rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_136599 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOutputParameterDeclaration_in_rule__FunctionDefinition__OutputParameterDeclarationsAssignment_836630 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOutputParameterDeclaration_in_rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_136661 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCheck_in_rule__FunctionDefinition__ChecksAssignment_11_036692 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAssertion_in_rule__FunctionDefinition__AssertionsAssignment_11_136723 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFunctionObjectDeclaration_in_rule__FunctionDefinition__FunctionObjectDeclarationsAssignment_11_236754 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateVariableDeclaration_in_rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_336785 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEquation_in_rule__FunctionDefinition__EquationsAssignment_11_436816 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__TemplateParameterDeclaration__NameAssignment36847 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__InputParameterDeclaration__NameAssignment36878 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__OutputParameterDeclaration__NameAssignment36909 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__Check__TemplateArgumentsAssignment_1_136940 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__Check__TemplateArgumentsAssignment_1_2_136971 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDataTypeSpecifier_in_rule__Check__InputParameterTypesAssignment_3_037002 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDataTypeSpecifier_in_rule__Check__InputParameterTypesAssignment_3_1_137033 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDataTypeSpecifier_in_rule__Check__OutputParameterTypesAssignment_637064 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDataTypeSpecifier_in_rule__Check__OutputParameterTypesAssignment_7_137095 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_88_in_rule__Assertion__StaticAssignment_037131 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__Assertion__ConditionAssignment_237170 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAssertionStatusKind_in_rule__Assertion__StatusKindAssignment_437201 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__Assertion__MessageAssignment_537232 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__StateVariableDeclaration__NameAssignment_137263 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__FunctionObjectDeclaration__NameAssignment_137294 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__FunctionObjectDeclaration__FunctionNameAssignment_337329 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_137364 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_2_137395 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_89_in_rule__Equation__InitialAssignment_037431 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__Equation__LeftHandSideAssignment_137470 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__Equation__RightHandSideAssignment_337501 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0_in_rule__DataTypeSpecifier__DefinedTypeAssignment_037532 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__DataTypeSpecifier__TypeAssignment_137569 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnit_in_rule__RealType__UnitAssignment_237604 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnit_in_rule__IntegerType__UnitAssignment_237635 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnit_in_rule__ComplexType__UnitAssignment_237666 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnit_in_rule__GaussianType__UnitAssignment_237697 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimitiveType_in_rule__ArrayType__DefinedElementTypeAssignment_1_0_0_037728 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__ArrayType__ElementTypeAssignment_1_0_0_137763 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArrayDimension_in_rule__ArrayType__DimensionsAssignment_1_237798 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArrayDimension_in_rule__ArrayType__DimensionsAssignment_1_3_137829 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericType_in_rule__TensorType__DefinedElementTypeAssignment_037860 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArrayDimension_in_rule__TensorType__DimensionsAssignment_237891 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArrayDimension_in_rule__TensorType__DimensionsAssignment_3_137922 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__ArrayDimension__SizeAssignment_137953 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLetExpressionVariableDeclaration_in_rule__LetExpression__VariableDeclarationsAssignment_137984 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLetExpressionVariableDeclaration_in_rule__LetExpression__VariableDeclarationsAssignment_2_138015 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__LetExpression__TargetExpressionAssignment_438046 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLetExpressionVariableDeclarationPart_in_rule__LetExpressionVariableDeclaration__PartsAssignment_0_038077 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLetExpressionVariableDeclarationPart_in_rule__LetExpressionVariableDeclaration__PartsAssignment_0_1_138108 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLetExpressionVariableDeclarationPart_in_rule__LetExpressionVariableDeclaration__PartsAssignment_0_1_2_138139 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__LetExpressionVariableDeclaration__AssignedExpressionAssignment_238170 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__LetExpressionVariableDeclarationPart__NameAssignment38201 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_88_in_rule__IfExpression__StaticAssignment_038237 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__IfExpression__ConditionAssignment_238276 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__IfExpression__ThenExpressionAssignment_438307 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__IfExpression__ElseExpressionAssignment_638338 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_88_in_rule__SwitchExpression__StaticAssignment_038374 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__SwitchExpression__ControlExpressionAssignment_238413 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSwitchCase_in_rule__SwitchExpression__CasesAssignment_338444 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__SwitchExpression__DefaultExpressionAssignment_638475 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImpliesExpression_in_rule__SwitchCase__CaseExpressionAssignment_138506 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__SwitchCase__ResultExpressionAssignment_338537 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImpliesExpression_in_rule__RangeExpression__OperandsAssignment_1_238568 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImpliesExpression_in_rule__RangeExpression__OperandsAssignment_1_3_138599 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalOrExpression_in_rule__ImpliesExpression__RightOperandAssignment_1_238630 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalAndExpression_in_rule__LogicalOrExpression__RightOperandAssignment_1_238661 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEqualityExpression_in_rule__LogicalAndExpression__RightOperandAssignment_1_238692 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEqualityOperator_in_rule__EqualityExpression__OperatorAssignment_1_138723 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRelationalExpression_in_rule__EqualityExpression__RightOperandAssignment_1_238754 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRelationalOperator_in_rule__RelationalExpression__OperatorAssignment_1_0_0_138785 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAdditiveExpression_in_rule__RelationalExpression__RightOperandAssignment_1_0_0_238816 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDataTypeSpecifier_in_rule__RelationalExpression__TypeAssignment_1_0_1_238847 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAdditiveOperator_in_rule__AdditiveExpression__OperatorAssignment_1_138878 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_rule__AdditiveExpression__RightOperandAssignment_1_238909 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMultiplicativeOperator_in_rule__MultiplicativeExpression__OperatorAssignment_1_138940 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePowerExpression_in_rule__MultiplicativeExpression__RightOperandAssignment_1_238971 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePowerOperator_in_rule__PowerExpression__OperatorAssignment_1_139002 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnaryExpression_in_rule__PowerExpression__ExponentAssignment_1_239033 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnaryOperator_in_rule__UnaryExpression__OperatorAssignment_1_139064 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePostfixExpression_in_rule__UnaryExpression__OperandAssignment_1_239095 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePostfixOperator_in_rule__PostfixExpression__OperatorAssignment_1_139126 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArraySubscript_in_rule__ArrayElementAccess__SubscriptsAssignment_1_239157 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArraySubscript_in_rule__ArrayElementAccess__SubscriptsAssignment_1_3_139188 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__MemberFeatureCall__MemberVariableAssignment_1_0_239223 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__MemberFeatureCall__FeatureAssignment_1_1_239262 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_039297 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_1_139328 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__MemberFeatureCall__IdentifierAssignment_1_2_239359 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIterationVariable_in_rule__MemberFeatureCall__VariablesAssignment_1_2_439390 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIterationVariable_in_rule__MemberFeatureCall__VariablesAssignment_1_2_5_139421 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIterationAccumulator_in_rule__MemberFeatureCall__AccumulatorAssignment_1_2_6_139452 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__MemberFeatureCall__BreakConditionAssignment_1_2_7_139483 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__MemberFeatureCall__ExpressionAssignment_1_2_939514 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__AssignableMemberFeatureCall__MemberVariableAssignment_1_239549 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__IterationVariable__NameAssignment39584 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__IterationAccumulator__NameAssignment_039615 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__IterationAccumulator__InitializerAssignment_239646 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_rule__ArraySubscript__SliceAssignment_039682 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__ArraySubscript__ExpressionAssignment_139721 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidDouble_in_rule__RealLiteral__ValueAssignment_039752 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__RealLiteral__ModifierAssignment_139783 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnit_in_rule__RealLiteral__UnitAssignment_239814 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidLong_in_rule__IntegerLiteral__ValueAssignment_039845 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__IntegerLiteral__ModifierAssignment_139876 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnit_in_rule__IntegerLiteral__UnitAssignment_239907 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_90_in_rule__BooleanLiteral__TrueAssignment_1_039943 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__StringLiteral__ValueAssignment39982 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__VariableAccess__FeatureAssignment_140017 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStepExpression_in_rule__VariableAccess__StepExpressionAssignment_2_140052 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__FunctionCall__FeatureAssignment_140087 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__FunctionCall__ArgumentsAssignment_3_040122 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__FunctionCall__ArgumentsAssignment_3_1_140153 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAdditiveStepExpression_in_rule__RangeStepExpression__EndAssignment_1_240184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAdditiveOperator_in_rule__AdditiveStepExpression__OperatorAssignment_1_140215 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNegateStepExpression_in_rule__AdditiveStepExpression__RightOperandAssignment_1_240246 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimitiveStepExpression_in_rule__NegateStepExpression__OperandAssignment_1_240277 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidInt_in_rule__StepLiteral__ValueAssignment40308 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__DerivativeOperator__VariableAssignment_140343 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__ArrayConstructionOperator__ExpressionsAssignment_140378 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__ArrayConstructionOperator__ExpressionsAssignment_2_0_140409 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArrayConstructionIterationClause_in_rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_140440 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArrayConstructionIterationClause_in_rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_2_140471 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__ArrayConstructionIterationClause__VariableNameAssignment_040502 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__ArrayConstructionIterationClause__CollectionExpressionAssignment_240533 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpressionList_in_rule__ArrayConcatenationOperator__RowsAssignment_140564 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpressionList_in_rule__ArrayConcatenationOperator__RowsAssignment_2_140595 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__ExpressionList__ExpressionsAssignment_040626 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__ExpressionList__ExpressionsAssignment_1_140657 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExplicitUnit_in_rule__UnitConstructionOperator__UnitAssignment_140688 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__ParenthesizedExpression__ExpressionsAssignment_140719 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__ParenthesizedExpression__ExpressionsAssignment_2_140750 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCompound_in_rule__AlgorithmExpression__BodyAssignment_240781 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStatement_in_rule__Compound__StatementsAssignment_240812 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAssignableMemberFeatureCall_in_rule__Assignment__TargetAssignment_040843 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__Assignment__ExpressionAssignment_240874 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__VariableDeclaration__NameAssignment_140905 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__VariableDeclaration__InitializerAssignment_340936 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__IfStatement__ConditionAssignment_240967 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStatement_in_rule__IfStatement__ThenStatementAssignment_440998 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStatement_in_rule__IfStatement__ElseStatementAssignment_5_141029 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__WhileStatement__ConditionAssignment_241060 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStatement_in_rule__WhileStatement__BodyAssignment_441091 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIterationVariable_in_rule__ForStatement__IterationVariableAssignment_241122 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__ForStatement__CollectionExpressionAssignment_441153 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStatement_in_rule__ForStatement__BodyAssignment_641184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStatement_in_rule__DoWhileStatement__BodyAssignment_141215 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__DoWhileStatement__ConditionAssignment_341246 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__ReturnStatement__ExpressionAssignment_141277 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnitNumerator_in_rule__Unit__NumeratorAssignment_1_1_141308 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnitDenominator_in_rule__Unit__DenominatorAssignment_1_1_2_141339 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImplicitUnitNumerator_in_rule__Unit__NumeratorAssignment_1_241370 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnitNumerator_in_rule__ExplicitUnit__NumeratorAssignment_141401 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnitDenominator_in_rule__ExplicitUnit__DenominatorAssignment_2_141432 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnitFactor_in_rule__UnitNumerator__FactorsAssignment_1_041463 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnitFactor_in_rule__UnitNumerator__FactorsAssignment_1_1_141494 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnitFactor_in_rule__UnitDenominator__FactorsAssignment_041525 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnitFactor_in_rule__UnitDenominator__FactorsAssignment_1_141556 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnitFactor_in_rule__UnitDenominator__FactorsAssignment_1_2_141587 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__UnitFactor__SymbolAssignment_041618 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnitExponent_in_rule__UnitFactor__ExponentAssignment_1_141649 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_rule__DoWhileStatement__Group__3__Impl33028 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DoWhileStatement__Group__4__Impl_in_rule__DoWhileStatement__Group__433059 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_rule__DoWhileStatement__Group__5_in_rule__DoWhileStatement__Group__433062 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DoWhileStatement__ConditionAssignment_4_in_rule__DoWhileStatement__Group__4__Impl33089 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DoWhileStatement__Group__5__Impl_in_rule__DoWhileStatement__Group__533119 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_rule__DoWhileStatement__Group__6_in_rule__DoWhileStatement__Group__533122 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_rule__DoWhileStatement__Group__5__Impl33150 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DoWhileStatement__Group__6__Impl_in_rule__DoWhileStatement__Group__633181 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rule__DoWhileStatement__Group__6__Impl33209 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ContinueStatement__Group__0__Impl_in_rule__ContinueStatement__Group__033254 = new BitSet(new long[]{0x0000000000000000L,0x0000000000100000L});
+    public static final BitSet FOLLOW_rule__ContinueStatement__Group__1_in_rule__ContinueStatement__Group__033257 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ContinueStatement__Group__1__Impl_in_rule__ContinueStatement__Group__133315 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_rule__ContinueStatement__Group__2_in_rule__ContinueStatement__Group__133318 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_84_in_rule__ContinueStatement__Group__1__Impl33346 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ContinueStatement__Group__2__Impl_in_rule__ContinueStatement__Group__233377 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rule__ContinueStatement__Group__2__Impl33405 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BreakStatement__Group__0__Impl_in_rule__BreakStatement__Group__033442 = new BitSet(new long[]{0x0000000000000000L,0x0000000000200000L});
+    public static final BitSet FOLLOW_rule__BreakStatement__Group__1_in_rule__BreakStatement__Group__033445 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BreakStatement__Group__1__Impl_in_rule__BreakStatement__Group__133503 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_rule__BreakStatement__Group__2_in_rule__BreakStatement__Group__133506 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_85_in_rule__BreakStatement__Group__1__Impl33534 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BreakStatement__Group__2__Impl_in_rule__BreakStatement__Group__233565 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rule__BreakStatement__Group__2__Impl33593 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ReturnStatement__Group__0__Impl_in_rule__ReturnStatement__Group__033630 = new BitSet(new long[]{0x503C8050200083F0L,0x000000000703A009L});
+    public static final BitSet FOLLOW_rule__ReturnStatement__Group__1_in_rule__ReturnStatement__Group__033633 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_86_in_rule__ReturnStatement__Group__0__Impl33661 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ReturnStatement__Group__1__Impl_in_rule__ReturnStatement__Group__133692 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_rule__ReturnStatement__Group__2_in_rule__ReturnStatement__Group__133695 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ReturnStatement__ExpressionAssignment_1_in_rule__ReturnStatement__Group__1__Impl33722 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ReturnStatement__Group__2__Impl_in_rule__ReturnStatement__Group__233752 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rule__ReturnStatement__Group__2__Impl33780 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Unit__Group__0__Impl_in_rule__Unit__Group__033817 = new BitSet(new long[]{0x0000800000000000L});
+    public static final BitSet FOLLOW_rule__Unit__Group__1_in_rule__Unit__Group__033820 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Unit__Group__1__Impl_in_rule__Unit__Group__133878 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Unit__Alternatives_1_in_rule__Unit__Group__1__Impl33905 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Unit__Group_1_0__0__Impl_in_rule__Unit__Group_1_0__033939 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_rule__Unit__Group_1_0__1_in_rule__Unit__Group_1_0__033942 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_rule__Unit__Group_1_0__0__Impl33970 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Unit__Group_1_0__1__Impl_in_rule__Unit__Group_1_0__134001 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_rule__Unit__Group_1_0__1__Impl34029 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Unit__Group_1_1__0__Impl_in_rule__Unit__Group_1_1__034064 = new BitSet(new long[]{0x00000000000001A0L});
+    public static final BitSet FOLLOW_rule__Unit__Group_1_1__1_in_rule__Unit__Group_1_1__034067 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_rule__Unit__Group_1_1__0__Impl34095 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Unit__Group_1_1__1__Impl_in_rule__Unit__Group_1_1__134126 = new BitSet(new long[]{0x0001000080000000L});
+    public static final BitSet FOLLOW_rule__Unit__Group_1_1__2_in_rule__Unit__Group_1_1__134129 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Unit__NumeratorAssignment_1_1_1_in_rule__Unit__Group_1_1__1__Impl34156 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Unit__Group_1_1__2__Impl_in_rule__Unit__Group_1_1__234186 = new BitSet(new long[]{0x0001000080000000L});
+    public static final BitSet FOLLOW_rule__Unit__Group_1_1__3_in_rule__Unit__Group_1_1__234189 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Unit__Group_1_1_2__0_in_rule__Unit__Group_1_1__2__Impl34216 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Unit__Group_1_1__3__Impl_in_rule__Unit__Group_1_1__334247 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_rule__Unit__Group_1_1__3__Impl34275 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Unit__Group_1_1_2__0__Impl_in_rule__Unit__Group_1_1_2__034314 = new BitSet(new long[]{0x00008000000001A0L});
+    public static final BitSet FOLLOW_rule__Unit__Group_1_1_2__1_in_rule__Unit__Group_1_1_2__034317 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_rule__Unit__Group_1_1_2__0__Impl34345 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Unit__Group_1_1_2__1__Impl_in_rule__Unit__Group_1_1_2__134376 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Unit__DenominatorAssignment_1_1_2_1_in_rule__Unit__Group_1_1_2__1__Impl34403 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ExplicitUnit__Group__0__Impl_in_rule__ExplicitUnit__Group__034437 = new BitSet(new long[]{0x00000000000001A0L});
+    public static final BitSet FOLLOW_rule__ExplicitUnit__Group__1_in_rule__ExplicitUnit__Group__034440 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_rule__ExplicitUnit__Group__0__Impl34468 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ExplicitUnit__Group__1__Impl_in_rule__ExplicitUnit__Group__134499 = new BitSet(new long[]{0x0001000080000000L});
+    public static final BitSet FOLLOW_rule__ExplicitUnit__Group__2_in_rule__ExplicitUnit__Group__134502 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ExplicitUnit__NumeratorAssignment_1_in_rule__ExplicitUnit__Group__1__Impl34529 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ExplicitUnit__Group__2__Impl_in_rule__ExplicitUnit__Group__234559 = new BitSet(new long[]{0x0001000080000000L});
+    public static final BitSet FOLLOW_rule__ExplicitUnit__Group__3_in_rule__ExplicitUnit__Group__234562 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ExplicitUnit__Group_2__0_in_rule__ExplicitUnit__Group__2__Impl34589 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ExplicitUnit__Group__3__Impl_in_rule__ExplicitUnit__Group__334620 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_rule__ExplicitUnit__Group__3__Impl34648 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ExplicitUnit__Group_2__0__Impl_in_rule__ExplicitUnit__Group_2__034687 = new BitSet(new long[]{0x00008000000001A0L});
+    public static final BitSet FOLLOW_rule__ExplicitUnit__Group_2__1_in_rule__ExplicitUnit__Group_2__034690 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_rule__ExplicitUnit__Group_2__0__Impl34718 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ExplicitUnit__Group_2__1__Impl_in_rule__ExplicitUnit__Group_2__134749 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ExplicitUnit__DenominatorAssignment_2_1_in_rule__ExplicitUnit__Group_2__1__Impl34776 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitNumerator__Group_0__0__Impl_in_rule__UnitNumerator__Group_0__034810 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__UnitNumerator__Group_0__1_in_rule__UnitNumerator__Group_0__034813 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitNumerator__Group_0__1__Impl_in_rule__UnitNumerator__Group_0__134871 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ONE_in_rule__UnitNumerator__Group_0__1__Impl34898 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitNumerator__Group_1__0__Impl_in_rule__UnitNumerator__Group_1__034931 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_rule__UnitNumerator__Group_1__1_in_rule__UnitNumerator__Group_1__034934 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitNumerator__FactorsAssignment_1_0_in_rule__UnitNumerator__Group_1__0__Impl34961 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitNumerator__Group_1__1__Impl_in_rule__UnitNumerator__Group_1__134991 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitNumerator__Group_1_1__0_in_rule__UnitNumerator__Group_1__1__Impl35018 = new BitSet(new long[]{0x0000000040000002L});
+    public static final BitSet FOLLOW_rule__UnitNumerator__Group_1_1__0__Impl_in_rule__UnitNumerator__Group_1_1__035053 = new BitSet(new long[]{0x00000000000001A0L});
+    public static final BitSet FOLLOW_rule__UnitNumerator__Group_1_1__1_in_rule__UnitNumerator__Group_1_1__035056 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_rule__UnitNumerator__Group_1_1__0__Impl35084 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitNumerator__Group_1_1__1__Impl_in_rule__UnitNumerator__Group_1_1__135115 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitNumerator__FactorsAssignment_1_1_1_in_rule__UnitNumerator__Group_1_1__1__Impl35142 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1__0__Impl_in_rule__UnitDenominator__Group_1__035176 = new BitSet(new long[]{0x00000000000001A0L});
+    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1__1_in_rule__UnitDenominator__Group_1__035179 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_rule__UnitDenominator__Group_1__0__Impl35207 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1__1__Impl_in_rule__UnitDenominator__Group_1__135238 = new BitSet(new long[]{0x0001000040000000L});
+    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1__2_in_rule__UnitDenominator__Group_1__135241 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitDenominator__FactorsAssignment_1_1_in_rule__UnitDenominator__Group_1__1__Impl35268 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1__2__Impl_in_rule__UnitDenominator__Group_1__235298 = new BitSet(new long[]{0x0001000040000000L});
+    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1__3_in_rule__UnitDenominator__Group_1__235301 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1_2__0_in_rule__UnitDenominator__Group_1__2__Impl35328 = new BitSet(new long[]{0x0000000040000002L});
+    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1__3__Impl_in_rule__UnitDenominator__Group_1__335359 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_rule__UnitDenominator__Group_1__3__Impl35387 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1_2__0__Impl_in_rule__UnitDenominator__Group_1_2__035426 = new BitSet(new long[]{0x00000000000001A0L});
+    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1_2__1_in_rule__UnitDenominator__Group_1_2__035429 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_rule__UnitDenominator__Group_1_2__0__Impl35457 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitDenominator__Group_1_2__1__Impl_in_rule__UnitDenominator__Group_1_2__135488 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitDenominator__FactorsAssignment_1_2_1_in_rule__UnitDenominator__Group_1_2__1__Impl35515 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitFactor__Group__0__Impl_in_rule__UnitFactor__Group__035549 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_rule__UnitFactor__Group__1_in_rule__UnitFactor__Group__035552 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitFactor__SymbolAssignment_0_in_rule__UnitFactor__Group__0__Impl35579 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitFactor__Group__1__Impl_in_rule__UnitFactor__Group__135609 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitFactor__Group_1__0_in_rule__UnitFactor__Group__1__Impl35636 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitFactor__Group_1__0__Impl_in_rule__UnitFactor__Group_1__035671 = new BitSet(new long[]{0x0000000020000060L});
+    public static final BitSet FOLLOW_rule__UnitFactor__Group_1__1_in_rule__UnitFactor__Group_1__035674 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_rule__UnitFactor__Group_1__0__Impl35702 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitFactor__Group_1__1__Impl_in_rule__UnitFactor__Group_1__135733 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitFactor__ExponentAssignment_1_1_in_rule__UnitFactor__Group_1__1__Impl35760 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitExponent__Group__0__Impl_in_rule__UnitExponent__Group__035794 = new BitSet(new long[]{0x0000000020000060L});
+    public static final BitSet FOLLOW_rule__UnitExponent__Group__1_in_rule__UnitExponent__Group__035797 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_rule__UnitExponent__Group__0__Impl35826 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnitExponent__Group__1__Impl_in_rule__UnitExponent__Group__135859 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidInt_in_rule__UnitExponent__Group__1__Impl35886 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__035919 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__035922 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__QualifiedName__Group__0__Impl35949 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__135978 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl36005 = new BitSet(new long[]{0x0000000000000002L,0x0000000000800000L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__036040 = new BitSet(new long[]{0x0000000000000180L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__036043 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_87_in_rule__QualifiedName__Group_1__0__Impl36071 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__136102 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__QualifiedName__Group_1__1__Impl36129 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDefinition_in_rule__Module__DefinitionsAssignment36167 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__EnumerationDefinition__NameAssignment_136198 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_036229 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_136260 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__EnumerationLiteralDeclaration__NameAssignment36291 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__TypeAliasDefinition__NameAssignment_136322 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimitiveType_in_rule__TypeAliasDefinition__TypeAssignment_336353 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__RecordDefinition__NameAssignment_136384 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRecordFieldDeclaration_in_rule__RecordDefinition__FieldDeclarationsAssignment_336415 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__RecordFieldDeclaration__NameAssignment_036446 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDataTypeSpecifier_in_rule__RecordFieldDeclaration__TypeAssignment_236477 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFunctionKind_in_rule__FunctionDefinition__KindAssignment_036508 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__FunctionDefinition__NameAssignment_236539 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTemplateParameterDeclaration_in_rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_136570 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTemplateParameterDeclaration_in_rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_136601 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInputParameterDeclaration_in_rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_036632 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInputParameterDeclaration_in_rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_136663 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOutputParameterDeclaration_in_rule__FunctionDefinition__OutputParameterDeclarationsAssignment_836694 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOutputParameterDeclaration_in_rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_136725 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCheck_in_rule__FunctionDefinition__ChecksAssignment_11_036756 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAssertion_in_rule__FunctionDefinition__AssertionsAssignment_11_136787 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFunctionObjectDeclaration_in_rule__FunctionDefinition__FunctionObjectDeclarationsAssignment_11_236818 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStateVariableDeclaration_in_rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_336849 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEquation_in_rule__FunctionDefinition__EquationsAssignment_11_436880 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__TemplateParameterDeclaration__NameAssignment36911 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__InputParameterDeclaration__NameAssignment36942 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__OutputParameterDeclaration__NameAssignment36973 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__Check__TemplateArgumentsAssignment_1_137004 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__Check__TemplateArgumentsAssignment_1_2_137035 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDataTypeSpecifier_in_rule__Check__InputParameterTypesAssignment_3_037066 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDataTypeSpecifier_in_rule__Check__InputParameterTypesAssignment_3_1_137097 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDataTypeSpecifier_in_rule__Check__OutputParameterTypesAssignment_637128 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDataTypeSpecifier_in_rule__Check__OutputParameterTypesAssignment_7_137159 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_88_in_rule__Assertion__StaticAssignment_037195 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__Assertion__ConditionAssignment_237234 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAssertionStatusKind_in_rule__Assertion__StatusKindAssignment_437265 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__Assertion__MessageAssignment_537296 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__StateVariableDeclaration__NameAssignment_137327 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__FunctionObjectDeclaration__NameAssignment_137358 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__FunctionObjectDeclaration__FunctionNameAssignment_337393 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_137428 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_2_137459 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_89_in_rule__Equation__InitialAssignment_037495 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__Equation__LeftHandSideAssignment_137534 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__Equation__RightHandSideAssignment_337565 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DataTypeSpecifier__DefinedTypeAlternatives_0_0_in_rule__DataTypeSpecifier__DefinedTypeAssignment_037596 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__DataTypeSpecifier__TypeAssignment_137633 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnit_in_rule__RealType__UnitAssignment_237668 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnit_in_rule__IntegerType__UnitAssignment_237699 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnit_in_rule__ComplexType__UnitAssignment_237730 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnit_in_rule__GaussianType__UnitAssignment_237761 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimitiveType_in_rule__ArrayType__DefinedElementTypeAssignment_1_0_0_037792 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__ArrayType__ElementTypeAssignment_1_0_0_137827 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArrayDimension_in_rule__ArrayType__DimensionsAssignment_1_237862 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArrayDimension_in_rule__ArrayType__DimensionsAssignment_1_3_137893 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericType_in_rule__TensorType__DefinedElementTypeAssignment_037924 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArrayDimension_in_rule__TensorType__DimensionsAssignment_237955 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArrayDimension_in_rule__TensorType__DimensionsAssignment_3_137986 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__ArrayDimension__SizeAssignment_138017 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLetExpressionVariableDeclaration_in_rule__LetExpression__VariableDeclarationsAssignment_138048 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLetExpressionVariableDeclaration_in_rule__LetExpression__VariableDeclarationsAssignment_2_138079 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__LetExpression__TargetExpressionAssignment_438110 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLetExpressionVariableDeclarationPart_in_rule__LetExpressionVariableDeclaration__PartsAssignment_0_038141 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLetExpressionVariableDeclarationPart_in_rule__LetExpressionVariableDeclaration__PartsAssignment_0_1_138172 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLetExpressionVariableDeclarationPart_in_rule__LetExpressionVariableDeclaration__PartsAssignment_0_1_2_138203 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__LetExpressionVariableDeclaration__AssignedExpressionAssignment_238234 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__LetExpressionVariableDeclarationPart__NameAssignment38265 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_88_in_rule__IfExpression__StaticAssignment_038301 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__IfExpression__ConditionAssignment_238340 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__IfExpression__ThenExpressionAssignment_438371 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__IfExpression__ElseExpressionAssignment_638402 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_88_in_rule__SwitchExpression__StaticAssignment_038438 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__SwitchExpression__ControlExpressionAssignment_238477 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSwitchCase_in_rule__SwitchExpression__CasesAssignment_338508 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__SwitchExpression__DefaultExpressionAssignment_638539 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImpliesExpression_in_rule__SwitchCase__CaseExpressionAssignment_138570 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__SwitchCase__ResultExpressionAssignment_338601 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImpliesExpression_in_rule__RangeExpression__OperandsAssignment_1_238632 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImpliesExpression_in_rule__RangeExpression__OperandsAssignment_1_3_138663 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalOrExpression_in_rule__ImpliesExpression__RightOperandAssignment_1_238694 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalAndExpression_in_rule__LogicalOrExpression__RightOperandAssignment_1_238725 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEqualityExpression_in_rule__LogicalAndExpression__RightOperandAssignment_1_238756 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEqualityOperator_in_rule__EqualityExpression__OperatorAssignment_1_138787 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRelationalExpression_in_rule__EqualityExpression__RightOperandAssignment_1_238818 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRelationalOperator_in_rule__RelationalExpression__OperatorAssignment_1_0_0_138849 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAdditiveExpression_in_rule__RelationalExpression__RightOperandAssignment_1_0_0_238880 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDataTypeSpecifier_in_rule__RelationalExpression__TypeAssignment_1_0_1_238911 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAdditiveOperator_in_rule__AdditiveExpression__OperatorAssignment_1_138942 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_rule__AdditiveExpression__RightOperandAssignment_1_238973 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMultiplicativeOperator_in_rule__MultiplicativeExpression__OperatorAssignment_1_139004 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePowerExpression_in_rule__MultiplicativeExpression__RightOperandAssignment_1_239035 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePowerOperator_in_rule__PowerExpression__OperatorAssignment_1_139066 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnaryExpression_in_rule__PowerExpression__ExponentAssignment_1_239097 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnaryOperator_in_rule__UnaryExpression__OperatorAssignment_1_139128 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePostfixExpression_in_rule__UnaryExpression__OperandAssignment_1_239159 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePostfixOperator_in_rule__PostfixExpression__OperatorAssignment_1_139190 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArraySubscript_in_rule__ArrayElementAccess__SubscriptsAssignment_1_239221 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArraySubscript_in_rule__ArrayElementAccess__SubscriptsAssignment_1_3_139252 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__MemberFeatureCall__MemberVariableAssignment_1_0_239287 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__MemberFeatureCall__FeatureAssignment_1_1_239326 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_039361 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__MemberFeatureCall__ArgumentsAssignment_1_1_4_1_139392 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__MemberFeatureCall__IdentifierAssignment_1_2_239423 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIterationVariable_in_rule__MemberFeatureCall__VariablesAssignment_1_2_439454 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIterationVariable_in_rule__MemberFeatureCall__VariablesAssignment_1_2_5_139485 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIterationAccumulator_in_rule__MemberFeatureCall__AccumulatorAssignment_1_2_6_139516 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__MemberFeatureCall__BreakConditionAssignment_1_2_7_139547 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__MemberFeatureCall__ExpressionAssignment_1_2_939578 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__AssignableMemberFeatureCall__MemberVariableAssignment_1_239613 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__IterationVariable__NameAssignment39648 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__IterationAccumulator__NameAssignment_039679 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__IterationAccumulator__InitializerAssignment_239710 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_45_in_rule__ArraySubscript__SliceAssignment_039746 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__ArraySubscript__ExpressionAssignment_139785 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidDouble_in_rule__RealLiteral__ValueAssignment_039816 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__RealLiteral__ModifierAssignment_139847 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnit_in_rule__RealLiteral__UnitAssignment_239878 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidLong_in_rule__IntegerLiteral__ValueAssignment_039909 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__IntegerLiteral__ModifierAssignment_139940 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnit_in_rule__IntegerLiteral__UnitAssignment_239971 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_90_in_rule__BooleanLiteral__TrueAssignment_1_040007 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__StringLiteral__ValueAssignment40046 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__VariableAccess__FeatureAssignment_140081 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStepExpression_in_rule__VariableAccess__StepExpressionAssignment_2_140116 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__FunctionCall__FeatureAssignment_140151 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__FunctionCall__ArgumentsAssignment_3_040186 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__FunctionCall__ArgumentsAssignment_3_1_140217 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAdditiveStepExpression_in_rule__RangeStepExpression__EndAssignment_1_240248 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAdditiveOperator_in_rule__AdditiveStepExpression__OperatorAssignment_1_140279 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNegateStepExpression_in_rule__AdditiveStepExpression__RightOperandAssignment_1_240310 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimitiveStepExpression_in_rule__NegateStepExpression__OperandAssignment_1_240341 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidInt_in_rule__StepLiteral__ValueAssignment40372 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__DerivativeOperator__VariableAssignment_140407 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__ArrayConstructionOperator__ExpressionsAssignment_140442 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__ArrayConstructionOperator__ExpressionsAssignment_2_0_140473 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArrayConstructionIterationClause_in_rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_140504 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArrayConstructionIterationClause_in_rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_2_140535 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__ArrayConstructionIterationClause__VariableNameAssignment_040566 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__ArrayConstructionIterationClause__CollectionExpressionAssignment_240597 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpressionList_in_rule__ArrayConcatenationOperator__RowsAssignment_140628 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpressionList_in_rule__ArrayConcatenationOperator__RowsAssignment_2_140659 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__ExpressionList__ExpressionsAssignment_040690 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__ExpressionList__ExpressionsAssignment_1_140721 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExplicitUnit_in_rule__UnitConstructionOperator__UnitAssignment_140752 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__ParenthesizedExpression__ExpressionsAssignment_140783 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__ParenthesizedExpression__ExpressionsAssignment_2_140814 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCompound_in_rule__AlgorithmExpression__BodyAssignment_240845 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStatement_in_rule__Compound__StatementsAssignment_240876 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAssignableMemberFeatureCall_in_rule__Assignment__TargetAssignment_040907 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__Assignment__ExpressionAssignment_240938 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__VariableDeclaration__NameAssignment_140969 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__VariableDeclaration__InitializerAssignment_341000 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__IfStatement__ConditionAssignment_241031 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStatement_in_rule__IfStatement__ThenStatementAssignment_441062 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStatement_in_rule__IfStatement__ElseStatementAssignment_5_141093 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__WhileStatement__ConditionAssignment_241124 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStatement_in_rule__WhileStatement__BodyAssignment_441155 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIterationVariable_in_rule__ForStatement__IterationVariableAssignment_241186 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__ForStatement__CollectionExpressionAssignment_441217 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStatement_in_rule__ForStatement__BodyAssignment_641248 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStatement_in_rule__DoWhileStatement__BodyAssignment_141279 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__DoWhileStatement__ConditionAssignment_441310 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__ReturnStatement__ExpressionAssignment_141341 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnitNumerator_in_rule__Unit__NumeratorAssignment_1_1_141372 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnitDenominator_in_rule__Unit__DenominatorAssignment_1_1_2_141403 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImplicitUnitNumerator_in_rule__Unit__NumeratorAssignment_1_241434 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnitNumerator_in_rule__ExplicitUnit__NumeratorAssignment_141465 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnitDenominator_in_rule__ExplicitUnit__DenominatorAssignment_2_141496 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnitFactor_in_rule__UnitNumerator__FactorsAssignment_1_041527 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnitFactor_in_rule__UnitNumerator__FactorsAssignment_1_1_141558 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnitFactor_in_rule__UnitDenominator__FactorsAssignment_041589 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnitFactor_in_rule__UnitDenominator__FactorsAssignment_1_141620 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnitFactor_in_rule__UnitDenominator__FactorsAssignment_1_2_141651 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__UnitFactor__SymbolAssignment_041682 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnitExponent_in_rule__UnitFactor__ExponentAssignment_1_141713 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleTensorType_in_synpred16_InternalMscript7052 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RelationalExpression__Group_1__0_in_synpred108_InternalMscript21151 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__IfStatement__Group_5__0_in_synpred134_InternalMscript31893 = new BitSet(new long[]{0x0000000000000002L});

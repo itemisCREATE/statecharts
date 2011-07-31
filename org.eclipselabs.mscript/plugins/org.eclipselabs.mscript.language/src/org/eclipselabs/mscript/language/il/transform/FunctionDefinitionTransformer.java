@@ -49,6 +49,7 @@ import org.eclipselabs.mscript.language.internal.functionmodel.util.FunctionMode
 import org.eclipselabs.mscript.language.internal.il.transform.AssertionEvaluator;
 import org.eclipselabs.mscript.language.internal.util.DataTypeAdaptor;
 import org.eclipselabs.mscript.language.internal.util.StatusUtil;
+import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
 import org.eclipselabs.mscript.typesystem.DataType;
 
 /**
@@ -60,7 +61,7 @@ public class FunctionDefinitionTransformer implements IFunctionDefinitionTransfo
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.il.transform.IFunctionDefinitionTransformer#transform(org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor, java.lang.String, java.util.List, java.util.List)
 	 */
-	public IFunctionDefinitionTransformerResult transform(FunctionDescriptor functionDescriptor, String functionName, List<IValue> templateArguments, List<DataType> inputParameterDataTypes) {
+	public IFunctionDefinitionTransformerResult transform(IStaticEvaluationContext staticEvaluationContext, FunctionDescriptor functionDescriptor, String functionName, List<IValue> templateArguments, List<DataType> inputParameterDataTypes) {
 		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Function definition transformation errors", null);
 
 		ILFunctionDefinition ilFunctionDefinition = ILFactory.eINSTANCE.createILFunctionDefinition();
@@ -74,7 +75,7 @@ public class FunctionDefinitionTransformer implements IFunctionDefinitionTransfo
 
 		Collection<List<EquationDescriptor>> equationCompounds = new EquationCompoundHelper().getEquationCompounds(functionDescriptor);
 		
-		IFunctionDefinitionTransformerContext context = new FunctionDefinitionTransformerContext(ilFunctionDefinition);
+		IFunctionDefinitionTransformerContext context = new FunctionDefinitionTransformerContext(staticEvaluationContext, ilFunctionDefinition);
 		StatusUtil.merge(status, constructInitializationCompound(context, equationCompounds, variableDeclarations));
 		StatusUtil.merge(status, constructComputationCompounds(context, equationCompounds, variableDeclarations));
 		

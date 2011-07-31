@@ -9,15 +9,17 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.language.internal.functionmodel.util;
+package org.eclipselabs.mscript.language.interpreter;
 
-import org.eclipse.core.runtime.CoreException;
+import java.util.Iterator;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.AdditiveStepExpression;
+import org.eclipselabs.mscript.language.ast.Equation;
+import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.NegateStepExpression;
-import org.eclipselabs.mscript.language.ast.StepExpression;
 import org.eclipselabs.mscript.language.ast.StepLiteral;
 import org.eclipselabs.mscript.language.ast.StepN;
 import org.eclipselabs.mscript.language.ast.VariableAccess;
@@ -29,35 +31,36 @@ import org.eclipselabs.mscript.language.util.SyntaxStatus;
  * @author Andreas Unger
  *
  */
-public class StepExpressionHelper {
-
-	public StepExpressionResult getStepExpression(VariableAccess variableAccess) throws CoreException {
-		if (variableAccess.getStepExpression() != null) {
-			return evaluateStepExpression(variableAccess.getStepExpression());
+public class StaticStepExpressionEvaluator {
+		
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.interpreter.IExpressionValueEvaluator#evaluate(org.eclipselabs.mscript.language.interpreter.IEvaluationContext, org.eclipselabs.mscript.language.ast.Expression)
+	 */
+	public IStatus evaluate(IStaticEvaluationContext context, FunctionDefinition functionDefinition) {
+		Evaluator evaluator = new Evaluator(context);
+		for (Equation equation : functionDefinition.getEquations()) {
+			for (Iterator<EObject> it = equation.eAllContents(); it.hasNext();) {
+				EObject next = it.next();
+				if (next instanceof VariableAccess) {
+					VariableAccess variableAccess = (VariableAccess) next;
+					if (variableAccess.getStepExpression() != null) {
+						Integer stepIndex = evaluator.doSwitch(variableAccess.getStepExpression());
+						context.setStepIndex(variableAccess, stepIndex);
+					}
+				}
+			}
 		}
-		return new StepExpressionResult(0, false);
-	}
-
-	private StepExpressionResult evaluateStepExpression(StepExpression stepExpression) throws CoreException {
-		Evaluator evaluator = new Evaluator();
-		int result = evaluator.doSwitch(stepExpression);
-		IStatus status = evaluator.getStatus();
-		if (status.isOK()) {
-			return new StepExpressionResult(result, evaluator.isAbsolute());
-		}
-		throw new CoreException(status);
+		return evaluator.getStatus();
 	}
 	
 	private static class Evaluator extends AstSwitch<Integer> {
-	
-		private MultiStatus status;
 		
-		private boolean absolute = true;
+		private MultiStatus status;
 		
 		/**
 		 * 
 		 */
-		public Evaluator() {
+		public Evaluator(IStaticEvaluationContext context) {
 			status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Step expression evaluation failed", null);
 		}
 		
@@ -66,10 +69,6 @@ public class StepExpressionHelper {
 		 */
 		public IStatus getStatus() {
 			return status;
-		}
-		
-		public boolean isAbsolute() {
-			return absolute;
 		}
 		
 		/* (non-Javadoc)
@@ -109,11 +108,6 @@ public class StepExpressionHelper {
 		 */
 		@Override
 		public Integer caseStepN(StepN stepN) {
-			if (absolute) {
-				absolute = false;
-			} else {
-				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Duplicate 'n'", stepN));
-			}
 			return 0;
 		}
 		
@@ -127,5 +121,5 @@ public class StepExpressionHelper {
 		}
 	
 	}
-
+	
 }

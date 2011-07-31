@@ -13,6 +13,9 @@ package org.eclipselabs.mscript.language.interpreter;
 
 import org.eclipselabs.mscript.computation.core.IComputationContext;
 import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.mscript.language.ast.FunctionDefinition;
+import org.eclipselabs.mscript.language.ast.VariableAccess;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 
 /**
  * @author Andreas Unger
@@ -25,4 +28,10 @@ public interface IStaticEvaluationContext {
 	IValue getValue(Object key);
 	void setValue(Object key, IValue value);
 	
+	int getStepIndex(VariableAccess variableAccess);
+	void setStepIndex(VariableAccess variableAccess, int stepIndex);
+	
+	FunctionDescriptor getFunctionDescriptor(FunctionDefinition functionDefinition);
+	void setFunctionDescriptor(FunctionDefinition functionDefinition, FunctionDescriptor functionDescriptor);
+
 }

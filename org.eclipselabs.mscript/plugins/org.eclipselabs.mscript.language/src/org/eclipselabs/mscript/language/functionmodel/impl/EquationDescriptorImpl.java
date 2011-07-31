@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipselabs.mscript.language.ast.DerivativeOperator;
 import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.VariableAccess;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
@@ -252,6 +253,8 @@ public class EquationDescriptorImpl extends EObjectImpl implements EquationDescr
 				}
 				break;
 			}
+		} else if (lhsExpression instanceof DerivativeOperator) {
+			
 		} else {
 			message = "Left-hand side must be single variable reference";
 		}

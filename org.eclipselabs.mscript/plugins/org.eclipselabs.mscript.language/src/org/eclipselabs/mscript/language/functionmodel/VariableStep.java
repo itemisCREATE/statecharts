@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getDescriptor <em>Descriptor</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getIndex <em>Index</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#isInitial <em>Initial</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#isDerivative <em>Derivative</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getUsingEquationParts <em>Using Equation Parts</em>}</li>
  * </ul>
  * </p>
@@ -108,6 +109,32 @@ public interface VariableStep extends EObject {
 	 * @generated
 	 */
 	void setInitial(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Derivative</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Derivative</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Derivative</em>' attribute.
+	 * @see #setDerivative(boolean)
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableStep_Derivative()
+	 * @model
+	 * @generated
+	 */
+	boolean isDerivative();
+
+	/**
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#isDerivative <em>Derivative</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Derivative</em>' attribute.
+	 * @see #isDerivative()
+	 * @generated
+	 */
+	void setDerivative(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Using Equation Parts</b></em>' reference list.

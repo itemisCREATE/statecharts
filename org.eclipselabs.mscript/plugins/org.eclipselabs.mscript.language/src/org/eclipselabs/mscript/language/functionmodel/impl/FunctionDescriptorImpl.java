@@ -190,7 +190,7 @@ public class FunctionDescriptorImpl extends EObjectImpl implements FunctionDescr
 			if (!equationDescriptor.getLeftHandSide().getParts().isEmpty()) {
 				EquationPart equationPart = equationDescriptor.getLeftHandSide().getParts().get(0);
 				VariableStep variableStep = equationPart.getVariableStep();
-				VariableDescriptorWrapper descriptor = new VariableDescriptorWrapper(variableStep.getDescriptor().getName(), variableStep.getIndex());
+				VariableDescriptorWrapper descriptor = new VariableDescriptorWrapper(variableStep.getDescriptor().getName(), variableStep.getIndex(), false, variableStep.isDerivative());
 				EquationPart previousEquationPart = wrappers.put(descriptor, equationPart);
 				if (previousEquationPart != null) {
 					invalidEquationParts.add(equationPart);

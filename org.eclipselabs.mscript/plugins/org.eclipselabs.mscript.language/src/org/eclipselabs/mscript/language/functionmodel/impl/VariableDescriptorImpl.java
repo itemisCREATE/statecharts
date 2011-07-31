@@ -210,9 +210,9 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public VariableStep getStep(int index, boolean initial) {
+	public VariableStep getStep(int index, boolean initial, boolean derivative) {
 		for (VariableStep step : getSteps()) {
-			if (step.getIndex() == index && step.isInitial() == initial) {
+			if (step.getIndex() == index && step.isInitial() == initial && step.isDerivative() == derivative) {
 				return step;
 			}
 		}

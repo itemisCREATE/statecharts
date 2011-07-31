@@ -355,13 +355,22 @@ public interface FunctionModelPackage extends EPackage {
 	int VARIABLE_STEP__INITIAL = 2;
 
 	/**
+	 * The feature id for the '<em><b>Derivative</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_STEP__DERIVATIVE = 3;
+
+	/**
 	 * The feature id for the '<em><b>Using Equation Parts</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_STEP__USING_EQUATION_PARTS = 3;
+	int VARIABLE_STEP__USING_EQUATION_PARTS = 4;
 
 	/**
 	 * The number of structural features of the '<em>Variable Step</em>' class.
@@ -370,7 +379,7 @@ public interface FunctionModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_STEP_FEATURE_COUNT = 4;
+	int VARIABLE_STEP_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.functionmodel.VariableKind <em>Variable Kind</em>}' enum.
@@ -674,6 +683,17 @@ public interface FunctionModelPackage extends EPackage {
 	EAttribute getVariableStep_Initial();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#isDerivative <em>Derivative</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Derivative</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableStep#isDerivative()
+	 * @see #getVariableStep()
+	 * @generated
+	 */
+	EAttribute getVariableStep_Derivative();
+
+	/**
 	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getUsingEquationParts <em>Using Equation Parts</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -943,6 +963,14 @@ public interface FunctionModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute VARIABLE_STEP__INITIAL = eINSTANCE.getVariableStep_Initial();
+
+		/**
+		 * The meta object literal for the '<em><b>Derivative</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VARIABLE_STEP__DERIVATIVE = eINSTANCE.getVariableStep_Derivative();
 
 		/**
 		 * The meta object literal for the '<em><b>Using Equation Parts</b></em>' reference list feature.

@@ -20,6 +20,7 @@ import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
+import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
 
 /**
  * @author Andreas Unger
@@ -34,7 +35,8 @@ public class FunctionDefinitionTransformerContext extends TransformerContext imp
 	/**
 	 * 
 	 */
-	public FunctionDefinitionTransformerContext(ILFunctionDefinition functionDefinition) {
+	public FunctionDefinitionTransformerContext(IStaticEvaluationContext staticEvaluationContext, ILFunctionDefinition functionDefinition) {
+		super(staticEvaluationContext);
 		this.functionDefinition = functionDefinition;
 	}
 	
