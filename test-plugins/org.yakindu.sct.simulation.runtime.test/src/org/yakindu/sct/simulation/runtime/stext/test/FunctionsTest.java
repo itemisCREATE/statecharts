@@ -178,6 +178,7 @@ public class FunctionsTest {
 		Class<?> paramTypes[] = new Class<?>[] { Object.class };
 
 		try {
+			@SuppressWarnings("unused")
 			Function result = Function.lookup(
 					FunctionWithFailingConstructor.class, "foo", paramTypes);
 			fail("Expected ExpressionRuntimeException !");

@@ -26,7 +26,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SGraphSimulationSession implements Runnable,
+public class ISGraphSimulationSession implements Runnable,
 		ISGraphExecutionListener {
 
 	private List<ISimulationSessionListener> listeners;
@@ -39,7 +39,7 @@ public class SGraphSimulationSession implements Runnable,
 
 	private Timer timer;
 
-	public SGraphSimulationSession(ISGraphExecutionFacade facade) {
+	public ISGraphSimulationSession(ISGraphExecutionFacade facade) {
 		this.facade = facade;
 		facade.addExecutionListener(this);
 		listeners = new ArrayList<ISimulationSessionListener>();
@@ -51,7 +51,7 @@ public class SGraphSimulationSession implements Runnable,
 		taskQueue.add(new Runnable() {
 			public void run() {
 				SGraphSimulationSessionRegistry.INSTANCE
-						.registerSimulationSession(SGraphSimulationSession.this);
+						.registerSimulationSession(ISGraphSimulationSession.this);
 				changeSimulationState(SimulationState.STARTED);
 				facade.enter();
 				changeSimulationState(SimulationState.RUNNING);
@@ -90,7 +90,7 @@ public class SGraphSimulationSession implements Runnable,
 			public void run() {
 				changeSimulationState(SimulationState.TERMINATED);
 				SGraphSimulationSessionRegistry.INSTANCE
-						.unregisterSimulationSession(SGraphSimulationSession.this);
+						.unregisterSimulationSession(ISGraphSimulationSession.this);
 			}
 		});
 	}
@@ -176,5 +176,9 @@ public class SGraphSimulationSession implements Runnable,
 		for (ISimulationSessionListener listener : listeners) {
 			listener.eventRaised(eventName);
 		}
+	}
+
+	public ISGraphExecutionScope getExecutionScope() {
+		return facade.getExecutionScope();
 	}
 }

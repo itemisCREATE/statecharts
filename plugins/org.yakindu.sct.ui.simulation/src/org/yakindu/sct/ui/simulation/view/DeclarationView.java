@@ -26,7 +26,7 @@ import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 import org.yakindu.sct.core.simulation.ISimulationSessionListener;
-import org.yakindu.sct.core.simulation.SGraphSimulationSession;
+import org.yakindu.sct.core.simulation.ISGraphSimulationSession;
 import org.yakindu.sct.core.simulation.SGraphSimulationSessionRegistry;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Event;
@@ -180,7 +180,7 @@ public class DeclarationView extends ViewPart implements
 		}
 
 		public void widgetSelected(SelectionEvent e) {
-			SGraphSimulationSession activeSession = SGraphSimulationSessionRegistry.INSTANCE
+			ISGraphSimulationSession activeSession = SGraphSimulationSessionRegistry.INSTANCE
 					.getActiveSession();
 			if (activeSession != null) {
 				activeSession.raiseEvent(eventName);
