@@ -13,8 +13,14 @@ package org.yakindu.sct.simulation.core.launch;
 import java.io.IOException;
 import java.util.Collections;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
@@ -47,16 +53,36 @@ public class StatechartLaunchConfigurationDelegate implements
 		ILaunchConfigurationDelegate, IExtensionPoints {
 
 	private static final int STATUS_CODE = 200;
+	// TODO: Introduce valdiation plugin
+	public static final String SGRAPH_ERROR_TYPE = "org.yakindu.sct.ui.editor.diagnostic";
+	public static final String STEXT_ERROR_TYPE = "org.yakindu.sct.ui.editor.xtext.diagnostic";
 
 	public void launch(ILaunchConfiguration configuration, String mode,
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {
 		String filename = configuration.getAttribute(
 				IStatechartLaunchParameters.FILE_NAME, "");
+		//check for errors
+		IFile file = ResourcesPlugin.getWorkspace().getRoot()
+				.getFile(new Path(filename));
+		IMarker[] sgraphMarkers = file.findMarkers(SGRAPH_ERROR_TYPE, true,
+				IResource.DEPTH_INFINITE);
+		IMarker[] stextMarkers = file.findMarkers(STEXT_ERROR_TYPE, true,
+				IResource.DEPTH_INFINITE);
+
+		if (sgraphMarkers.length > 0 || stextMarkers.length > 0) {
+			Status status = new Status(IStatus.ERROR, Activator.PLUGIN_ID, STATUS_CODE,
+					"Simulation could not be started because the selected resource contains errors.",null);
+			IStatusHandler statusHandler = DebugPlugin.getDefault()
+					.getStatusHandler(status);
+			statusHandler.handleStatus(status, this);
+			return;
+		}
+
 		Resource resource = loadResource(filename);
-		
+
 		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(
 				resource.getContents(), SGraphPackage.Literals.STATECHART);
-		
+
 		ISGraphExecutionBuilder builder = getBuilder();
 		ISGraphExecutionFacade executionFacade = builder.build(statechart);
 		IDebugTarget target = new SCTDebugTarget(launch, executionFacade);

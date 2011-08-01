@@ -24,19 +24,19 @@ public class SGraphSimulationSessionRegistry {
 
 	private List<ISimulationSessionListener> sessionListener;
 
-	private List<ISGraphSimulationSession> sessions;
+	private List<SGraphSimulationSession> sessions;
 
 	private SGraphSimulationSessionRegistry() {
 		sessionListener = new ArrayList<ISimulationSessionListener>();
-		sessions = new ArrayList<ISGraphSimulationSession>();
+		sessions = new ArrayList<SGraphSimulationSession>();
 	}
 
-	public void registerSimulationSession(ISGraphSimulationSession session) {
+	public void registerSimulationSession(SGraphSimulationSession session) {
 		session.getListeners().addAll(getListeners());
 		sessions.add(session);
 	}
 
-	public void unregisterSimulationSession(ISGraphSimulationSession session) {
+	public void unregisterSimulationSession(SGraphSimulationSession session) {
 		session.getListeners().clear();
 		sessions.remove(session);
 	}
@@ -45,7 +45,7 @@ public class SGraphSimulationSessionRegistry {
 		return sessionListener;
 	}
 
-	public ISGraphSimulationSession getActiveSession() {
+	public SGraphSimulationSession getActiveSession() {
 		// TODO
 		if (sessions.isEmpty())
 			return null;

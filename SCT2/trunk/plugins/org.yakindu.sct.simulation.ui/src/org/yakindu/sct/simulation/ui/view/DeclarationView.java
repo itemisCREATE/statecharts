@@ -38,7 +38,7 @@ import org.yakindu.sct.model.sgraph.NamedElement;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeVariable;
-import org.yakindu.sct.simulation.core.ISGraphSimulationSession;
+import org.yakindu.sct.simulation.core.SGraphSimulationSession;
 import org.yakindu.sct.simulation.core.ISimulationSessionListener;
 import org.yakindu.sct.simulation.core.SGraphSimulationSessionRegistry;
 import org.yakindu.sct.simulation.ui.view.editing.BooleanEditingSupport;
@@ -162,7 +162,7 @@ public class DeclarationView extends ViewPart implements
 	}
 
 	private void setVariableViewerInput() {
-		ISGraphSimulationSession activeSession = SGraphSimulationSessionRegistry.INSTANCE
+		SGraphSimulationSession activeSession = SGraphSimulationSessionRegistry.INSTANCE
 				.getActiveSession();
 		List<ScopeVariable> variables = activeSession.getExecutionScope()
 				.getVariables();
@@ -260,7 +260,7 @@ public class DeclarationView extends ViewPart implements
 		}
 
 		public void widgetSelected(SelectionEvent e) {
-			ISGraphSimulationSession activeSession = SGraphSimulationSessionRegistry.INSTANCE
+			SGraphSimulationSession activeSession = SGraphSimulationSessionRegistry.INSTANCE
 					.getActiveSession();
 			if (activeSession != null) {
 				activeSession.raiseEvent(eventName);
