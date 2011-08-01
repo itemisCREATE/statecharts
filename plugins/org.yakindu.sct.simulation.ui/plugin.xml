@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<!-- Editor Highlighting Adapter -->
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor"
+            class="org.yakindu.sct.simulation.ui.editor.IHighlightingSupportAdapterFactory">
+         <adapter
+               type="org.yakindu.sct.simulation.ui.editor.IHighlightingSupportAdapterFactory">
+         </adapter>
+      </factory>
+   </extension>
+	
+	<!-- Launch configuration images -->
+   <extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+    	<launchConfigurationTypeImage
+        	icon="icons/yakindu.png"
+        	configTypeID="org.yakindu.sct.core.simulation.launch.statechart"
+        	id="org.yakindu.sct.core.simulation.launch.statechartTypeImage">
+	    </launchConfigurationTypeImage>
+	</extension>
+	
+	<!-- launch tab group -->
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+  	  <launchConfigurationTabGroup
+    	 type="org.yakindu.sct.core.simulation.launch.statechart"
+  	     class="org.yakindu.sct.simulation.ui.launch.tabs.StatechartLaunchConfigurationTabGroup"
+  	     id="org.yakindu.sct.simulation.ui.launch.tabs.statechart.tabs">
+   	 </launchConfigurationTabGroup>
+	</extension>
+	
+	<!-- launch shortcuts -->
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+	    <shortcut
+	        id="org.yakindu.sct.core.simulation.launch.shortcut"
+	        class="org.yakindu.sct.simulation.ui.launch.StatechartLaunchShortcut"
+	        label="YAKINDU Statechart"
+	        icon="icons/yakindu.png"
+	        modes="run, debug">
+	         <contextualLaunch>
+				<enablement>
+					<with variable="selection">
+					<count value="1"/>
+						<iterate>
+							<test property="org.eclipse.debug.ui.matchesPattern" value="*.sct"/>
+						</iterate>
+					</with>
+				</enablement>
+		  	 </contextualLaunch>
+	    </shortcut>
+	</extension>
+	
+<!-- Session Listener -->
+ <extension
+       point="org.eclipse.ui.views">
+    <view
+          allowMultiple="false"
+          class="org.yakindu.sct.simulation.ui.view.DeclarationView"
+          icon="icons/yakindu.png"
+          id="org.yakindu.sct.simulation.ui.declarationview"
+          name="Declarations View"
+          restorable="true">
+    </view>
+ </extension>
+ <extension
+       point="org.eclipse.debug.core.statusHandlers">
+    <statusHandler
+          class="org.yakindu.sct.simulation.ui.handler.GenericStatusHandler"
+          code="200"
+          id="org.yakindu.sct.simulation.ui.statushandler"
+          plugin="org.yakindu.sct.simulation.core">
+    </statusHandler>
+ </extension>
+</plugin>

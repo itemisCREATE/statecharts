@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Simulation
+Bundle-SymbolicName: org.yakindu.sct.simulation.core;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.yakindu.sct.simulation.core.Activator
+Bundle-Vendor: YAKINDU
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.debug.core;bundle-version="3.7.0",
+ org.eclipse.emf.ecore;bundle-version="2.7.0",
+ org.yakindu.sct.model.sgraph;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.yakindu.sct.simulation.core,
+ org.yakindu.sct.simulation.core.launch
