@@ -26,8 +26,11 @@ import org.yakindu.sct.simulation.core.ISimulationSessionListener.SimulationStat
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class ISGraphSimulationSession implements Runnable,
+public class SGraphSimulationSession implements Runnable,
 		ISGraphExecutionListener {
+
+	// TODO: Add to launch tab config
+	private static final int CYCLE_SLEEP_TIME = 100;
 
 	private List<ISimulationSessionListener> listeners;
 
@@ -39,7 +42,7 @@ public class ISGraphSimulationSession implements Runnable,
 
 	private Timer timer;
 
-	public ISGraphSimulationSession(ISGraphExecutionFacade facade) {
+	public SGraphSimulationSession(ISGraphExecutionFacade facade) {
 		this.facade = facade;
 		facade.addExecutionListener(this);
 		listeners = new ArrayList<ISimulationSessionListener>();
@@ -51,7 +54,7 @@ public class ISGraphSimulationSession implements Runnable,
 		taskQueue.add(new Runnable() {
 			public void run() {
 				SGraphSimulationSessionRegistry.INSTANCE
-						.registerSimulationSession(ISGraphSimulationSession.this);
+						.registerSimulationSession(SGraphSimulationSession.this);
 				changeSimulationState(SimulationState.STARTED);
 				facade.enter();
 				changeSimulationState(SimulationState.RUNNING);
@@ -90,7 +93,7 @@ public class ISGraphSimulationSession implements Runnable,
 			public void run() {
 				changeSimulationState(SimulationState.TERMINATED);
 				SGraphSimulationSessionRegistry.INSTANCE
-						.unregisterSimulationSession(ISGraphSimulationSession.this);
+						.unregisterSimulationSession(SGraphSimulationSession.this);
 			}
 		});
 	}
@@ -118,7 +121,7 @@ public class ISGraphSimulationSession implements Runnable,
 					});
 					scheduleCycle();
 				}
-			}, 100);
+			}, CYCLE_SLEEP_TIME);
 
 		}
 	}
