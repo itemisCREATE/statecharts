@@ -5,10 +5,10 @@
    <extension
          point="org.eclipse.core.runtime.adapters">
       <factory
-            adaptableType="org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor"
+            adaptableType="org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor"
             class="org.yakindu.sct.simulation.ui.editor.IHighlightingSupportAdapterFactory">
          <adapter
-               type="org.yakindu.sct.simulation.ui.editor.IHighlightingSupportAdapterFactory">
+               type="de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport">
          </adapter>
       </factory>
    </extension>
