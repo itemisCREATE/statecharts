@@ -17,7 +17,7 @@
    <extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
     	<launchConfigurationTypeImage
         	icon="icons/yakindu.png"
-        	configTypeID="org.yakindu.sct.core.simulation.launch.statechart"
+        	configTypeID="org.yakindu.sct.simulation.core.launch.statechart"
         	id="org.yakindu.sct.core.simulation.launch.statechartTypeImage">
 	    </launchConfigurationTypeImage>
 	</extension>
@@ -25,7 +25,7 @@
 	<!-- launch tab group -->
 	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
   	  <launchConfigurationTabGroup
-    	 type="org.yakindu.sct.core.simulation.launch.statechart"
+    	 type="org.yakindu.sct.simulation.core.launch.statechart"
   	     class="org.yakindu.sct.simulation.ui.launch.tabs.StatechartLaunchConfigurationTabGroup"
   	     id="org.yakindu.sct.simulation.ui.launch.tabs.statechart.tabs">
    	 </launchConfigurationTabGroup>
