@@ -16,15 +16,19 @@ import org.eclipse.jface.dialogs.IDialogLabelKeys;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.forms.IFormColors;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.ImageHyperlink;
 
 /**
  * Abstract base class for all implementers of {@link IFormPropertyDescriptor}.
@@ -81,25 +85,28 @@ public abstract class AbstractPropertyDescriptor implements
 
 	public void addHelp(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
-		final Button helpButton = toolkit.createButton(parent, "", SWT.PUSH);
-		helpButton.setImage(PlatformUI.getWorkbench().getSharedImages()
-				.getImage(ISharedImages.IMG_LCL_LINKTO_HELP));
+		final ImageHyperlink helpWidget = toolkit.createImageHyperlink(parent,
+				SWT.CENTER);
+		Image defaultImage = PlatformUI.getWorkbench().getSharedImages()
+				.getImage(ISharedImages.IMG_LCL_LINKTO_HELP);
+		helpWidget.setImage(defaultImage);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.TOP)
-				.applyTo(helpButton);
+				.applyTo(helpWidget);
 		if (hasHelpContext()) {
-			helpButton.setToolTipText(JFaceResources
+			helpWidget.setToolTipText(JFaceResources
 					.getString(IDialogLabelKeys.HELP_LABEL_KEY));
-			helpButton.addMouseListener(new MouseAdapter() {
+			helpWidget.addMouseListener(new MouseAdapter() {
 				public void mouseDown(MouseEvent e) {
 					getControl().setFocus();
 					PlatformUI.getWorkbench().getHelpSystem()
 							.displayDynamicHelp();
 				}
 			});
+			helpWidget.setEnabled(true);
 		} else {
-			helpButton.setEnabled(false);
-			// helpButton.setVisible(false);
+			helpWidget.setEnabled(false);
 		}
+		toolkit.dispose();
 	}
 
 	protected boolean hasHelpContext() {
