@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.yakindu.sct.core.simulation.ISGraphExecutionScope;
+import org.yakindu.sct.simulation.core.ISGraphExecutionScope;
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
 import org.yakindu.sct.simulation.runtime.stext.RTVariable;
 
