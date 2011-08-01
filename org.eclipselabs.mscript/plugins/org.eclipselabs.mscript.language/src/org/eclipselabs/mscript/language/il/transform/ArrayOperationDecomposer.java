@@ -13,6 +13,8 @@ package org.eclipselabs.mscript.language.il.transform;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipselabs.mscript.computation.core.ComputationContext;
+import org.eclipselabs.mscript.computation.core.value.AnyValue;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
@@ -22,7 +24,7 @@ import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
-import org.eclipselabs.mscript.language.il.util.ILUtil;
+import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.Expression;
 import org.eclipselabs.mscript.typesystem.IntegerLiteral;
@@ -38,12 +40,15 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
  */
 public class ArrayOperationDecomposer extends ILSwitch<Boolean> implements IArrayOperationDecomposer {
 
+	private IStaticEvaluationContext context;
+	
 	private ArrayExpressionTransformer arrayExpressionTransformer = new ArrayExpressionTransformer();
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.il.transform.IArrayOperationDecomposer#decompose(org.eclipselabs.mscript.language.il.Compound)
 	 */
-	public void decompose(Compound compound) {
+	public void decompose(IStaticEvaluationContext context, Compound compound) {
+		this.context = context;
 		doSwitch(compound);
 	}
 	
@@ -61,6 +66,14 @@ public class ArrayOperationDecomposer extends ILSwitch<Boolean> implements IArra
 		}
 		return true;
 	}
+	
+	private DataType getDataType(Expression expression) {
+		return context.getValue(expression).getDataType();
+	}
+	
+	private void setDataType(Expression expression, DataType dataType) {
+		context.setValue(expression, new AnyValue(new ComputationContext(), dataType));
+	}
 
 	private class ArrayExpressionTransformer extends AstSwitch<Boolean> {
 		
@@ -74,8 +87,8 @@ public class ArrayOperationDecomposer extends ILSwitch<Boolean> implements IArra
 				Expression leftOperand = multiplicativeExpression.getLeftOperand();
 				Expression rightOperand = multiplicativeExpression.getRightOperand();
 				if (leftOperand instanceof VariableReference && rightOperand instanceof VariableReference) {
-					DataType leftDataType = ILUtil.getDataType(leftOperand);
-					DataType rightDataType = ILUtil.getDataType(rightOperand);
+					DataType leftDataType = getDataType(leftOperand);
+					DataType rightDataType = getDataType(rightOperand);
 					if (leftDataType instanceof TensorType && rightDataType instanceof TensorType) {
 						TensorType leftTensorType = (TensorType) leftDataType;
 						TensorType rightTensorType = (TensorType) rightDataType;
@@ -92,34 +105,34 @@ public class ArrayOperationDecomposer extends ILSwitch<Boolean> implements IArra
 		private Expression createVectorMultiplicationExpression(VariableReference leftOperand, VariableReference rightOperand) {			
 			ParenthesizedExpression parenthesizedExpression = AstFactory.eINSTANCE.createParenthesizedExpression();
 
-			TensorType leftTensorType = (TensorType) ILUtil.getDataType(leftOperand);
-			TensorType rightTensorType = (TensorType) ILUtil.getDataType(rightOperand);
+			TensorType leftTensorType = (TensorType) getDataType(leftOperand);
+			TensorType rightTensorType = (TensorType) getDataType(rightOperand);
 			
 			DataType resultDataType = leftTensorType.getElementType().evaluate(OperatorKind.MULTIPLY, rightTensorType.getElementType());
 
 			Expression rootExpression = null;
 			for (int i = 0; i < TypeSystemUtil.getArraySize(leftTensorType); ++i) {
 				MultiplicativeExpression multiplicativeExpression = AstFactory.eINSTANCE.createMultiplicativeExpression();
-				ILUtil.setDataType(multiplicativeExpression, EcoreUtil.copy(resultDataType));
+				setDataType(multiplicativeExpression, EcoreUtil.copy(resultDataType));
 				
 				VariableReference leftVariableReference = EcoreUtil.copy(leftOperand);
-				ILUtil.setDataType(leftVariableReference, EcoreUtil.copy(leftTensorType.getElementType()));
+				setDataType(leftVariableReference, EcoreUtil.copy(leftTensorType.getElementType()));
 				IntegerLiteral integerLiteral = TypeSystemFactory.eINSTANCE.createIntegerLiteral();
 				integerLiteral.setUnit(TypeSystemUtil.createUnit());
 				integerLiteral.setValue(i);
 				IntegerType integerType = TypeSystemFactory.eINSTANCE.createIntegerType();
 				integerType.setUnit(TypeSystemUtil.createUnit());
-				ILUtil.setDataType(integerLiteral, integerType);
+				setDataType(integerLiteral, integerType);
 				leftVariableReference.getArrayIndices().add(integerLiteral);
 				
 				VariableReference rightVariableReference = EcoreUtil.copy(rightOperand);
-				ILUtil.setDataType(rightVariableReference, EcoreUtil.copy(rightTensorType.getElementType()));
+				setDataType(rightVariableReference, EcoreUtil.copy(rightTensorType.getElementType()));
 				integerLiteral = TypeSystemFactory.eINSTANCE.createIntegerLiteral();
 				integerLiteral.setUnit(TypeSystemUtil.createUnit());
 				integerLiteral.setValue(i);
 				integerType = TypeSystemFactory.eINSTANCE.createIntegerType();
 				integerType.setUnit(TypeSystemUtil.createUnit());
-				ILUtil.setDataType(integerLiteral, integerType);
+				setDataType(integerLiteral, integerType);
 				rightVariableReference.getArrayIndices().add(integerLiteral);
 
 				multiplicativeExpression.setOperator(MultiplicativeOperator.MULTIPLY);
@@ -132,15 +145,15 @@ public class ArrayOperationDecomposer extends ILSwitch<Boolean> implements IArra
 					AdditiveExpression additiveExpression = AstFactory.eINSTANCE.createAdditiveExpression();
 					additiveExpression.setLeftOperand(rootExpression);
 					additiveExpression.setRightOperand(multiplicativeExpression);
-					ILUtil.setDataType(additiveExpression, EcoreUtil.copy(resultDataType));
+					setDataType(additiveExpression, EcoreUtil.copy(resultDataType));
 					rootExpression = additiveExpression;
 				}
 			}
 			
 			parenthesizedExpression.getExpressions().add(rootExpression);
 
-			ILUtil.setDataType(rootExpression, EcoreUtil.copy(resultDataType));
-			ILUtil.setDataType(parenthesizedExpression, EcoreUtil.copy(resultDataType));
+			setDataType(rootExpression, EcoreUtil.copy(resultDataType));
+			setDataType(parenthesizedExpression, EcoreUtil.copy(resultDataType));
 			
 			return parenthesizedExpression;
 		}

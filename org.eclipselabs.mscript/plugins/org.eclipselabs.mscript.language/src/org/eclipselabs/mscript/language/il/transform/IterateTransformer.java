@@ -13,8 +13,10 @@ package org.eclipselabs.mscript.language.il.transform;
 
 import java.util.Collections;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipselabs.mscript.language.ast.IterationCall;
+import org.eclipselabs.mscript.language.ast.IterationVariable;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
 import org.eclipselabs.mscript.language.il.ILFactory;
@@ -33,15 +35,18 @@ public class IterateTransformer implements IIterationCallTransformer {
 	 * @see org.eclipselabs.mscript.language.imperativemodel.transform.IIterationCallTransformer#transform(org.eclipselabs.mscript.language.ast.IterationCall, org.eclipselabs.mscript.language.imperativemodel.util.ImperativeExpressionTransformer.Scope)
 	 */
 	public IIterationCallTransformerResult transform(ITransformerContext context, IterationCall iterationCall, Expression collectionExpression) {
-		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Transform errors", null);
+		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Iterate transformation", null);
 		
 		LocalVariableDeclaration accumulatorDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
+		accumulatorDeclaration.setDataType(context.getStaticEvaluationContext().getValue(iterationCall.getAccumulator()).getDataType());
 		accumulatorDeclaration.setName(iterationCall.getAccumulator().getName());
 		context.getCompound().getStatements().add(accumulatorDeclaration);
 		ForeachStatement foreachStatement = ILFactory.eINSTANCE.createForeachStatement();
 		
 		LocalVariableDeclaration iterationVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
-		iterationVariableDeclaration.setName(iterationCall.getVariables().get(0).getName());
+		IterationVariable iterationVariable = iterationCall.getVariables().get(0);
+		iterationVariableDeclaration.setDataType(context.getStaticEvaluationContext().getValue(iterationVariable).getDataType());
+		iterationVariableDeclaration.setName(iterationVariable.getName());
 
 		StatusUtil.merge(status, new ExpressionTransformer(context).transform(
 				iterationCall.getAccumulator().getInitializer(),
@@ -63,7 +68,7 @@ public class IterateTransformer implements IIterationCallTransformer {
 
 		context.getCompound().getStatements().add(foreachStatement);
 		
-		if (!status.isOK()) {
+		if (status.getSeverity() > IStatus.WARNING) {
 			return new IterationCallTransformerResult(accumulatorDeclaration, status);
 		}
 		

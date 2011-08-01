@@ -74,6 +74,7 @@
       <genOperations ecoreOperation="FunctionModel.ecore#//VariableDescriptor/getStep">
         <genParameters ecoreParameter="FunctionModel.ecore#//VariableDescriptor/getStep/index"/>
         <genParameters ecoreParameter="FunctionModel.ecore#//VariableDescriptor/getStep/initial"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//VariableDescriptor/getStep/derivative"/>
       </genOperations>
       <genOperations ecoreOperation="FunctionModel.ecore#//VariableDescriptor/getMinimumStep"/>
       <genOperations ecoreOperation="FunctionModel.ecore#//VariableDescriptor/getMaximumStep"/>
@@ -82,6 +83,7 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionModel.ecore#//VariableStep/descriptor"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionModel.ecore#//VariableStep/index"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionModel.ecore#//VariableStep/initial"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionModel.ecore#//VariableStep/derivative"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//VariableStep/usingEquationParts"/>
     </genClasses>
   </genPackages>

@@ -257,6 +257,7 @@
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//VariableAccess">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//VariableAccess/stepExpression"/>
+      <genOperations ecoreOperation="Mscript.ecore#//VariableAccess/isInitial"/>
     </genClasses>
     <genClasses image="false" ecoreClass="Mscript.ecore#//StepExpression"/>
     <genClasses ecoreClass="Mscript.ecore#//RangeStepExpression">

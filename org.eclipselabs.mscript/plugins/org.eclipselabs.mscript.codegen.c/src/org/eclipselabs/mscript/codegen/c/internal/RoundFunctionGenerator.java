@@ -25,7 +25,6 @@ import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
-import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.Expression;
 import org.eclipselabs.mscript.typesystem.IntegerType;
@@ -48,7 +47,7 @@ public class RoundFunctionGenerator implements IFunctionGenerator {
 		
 		final Expression argument = arguments.get(0);
 		
-		final DataType argumentDataType = ILUtil.getDataType(argument);
+		final DataType argumentDataType = context.getStaticEvaluationContext().getValue(argument).getDataType();
 		if (!(argumentDataType instanceof NumericType)) {
 			throw new IllegalArgumentException();
 		}

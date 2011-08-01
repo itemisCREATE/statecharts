@@ -95,7 +95,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="side" eType="#//EquationSide"
         eOpposite="#//EquationSide/parts"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableAccess" lowerBound="1"
-        eType="ecore:EClass Mscript.ecore#//VariableAccess"/>
+        eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableStep" lowerBound="1"
         eType="#//VariableStep" eOpposite="#//VariableStep/usingEquationParts"/>
   </eClassifiers>
@@ -103,6 +103,7 @@
     <eOperations name="getStep" eType="#//VariableStep">
       <eParameters name="index" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eParameters name="initial" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="derivative" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="getMinimumStep" lowerBound="1" eType="#//VariableStep"/>
     <eOperations name="getMaximumStep" lowerBound="1" eType="#//VariableStep"/>
@@ -118,6 +119,7 @@
         eOpposite="#//VariableDescriptor/steps"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="initial" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="derivative" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="usingEquationParts" upperBound="-1"
         eType="#//EquationPart" eOpposite="#//EquationPart/variableStep"/>
   </eClassifiers>

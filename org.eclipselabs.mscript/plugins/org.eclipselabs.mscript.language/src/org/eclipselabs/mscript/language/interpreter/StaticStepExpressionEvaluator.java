@@ -61,7 +61,7 @@ public class StaticStepExpressionEvaluator {
 		 * 
 		 */
 		public Evaluator(IStaticEvaluationContext context) {
-			status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Step expression evaluation failed", null);
+			status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Step expression evaluation", null);
 		}
 		
 		/**

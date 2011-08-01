@@ -329,6 +329,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="#//CallableElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableAccess" eSuperTypes="#//FeatureCall">
+    <eOperations name="isInitial" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stepExpression" eType="#//StepExpression"
         containment="true"/>
   </eClassifiers>

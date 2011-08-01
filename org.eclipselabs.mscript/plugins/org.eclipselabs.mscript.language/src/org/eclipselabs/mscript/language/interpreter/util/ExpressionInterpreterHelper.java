@@ -55,7 +55,7 @@ public class ExpressionInterpreterHelper {
 	}
 
 	public IValue evaluateSingle() throws CoreException {
-		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Evaluating expression failed", null);
+		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Expression evaluation", null);
 		
 		LocalVariableDeclaration resultVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
 		

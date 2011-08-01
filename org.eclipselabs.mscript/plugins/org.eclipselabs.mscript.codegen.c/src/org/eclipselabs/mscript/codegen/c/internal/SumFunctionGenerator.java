@@ -19,7 +19,6 @@ import org.eclipselabs.mscript.codegen.c.IExpressionGenerator;
 import org.eclipselabs.mscript.codegen.c.IFunctionGenerator;
 import org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext;
 import org.eclipselabs.mscript.codegen.c.IVariableAccessStrategy;
-import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.Expression;
 import org.eclipselabs.mscript.typesystem.TensorType;
@@ -41,7 +40,7 @@ public class SumFunctionGenerator implements IFunctionGenerator {
 		
 		Expression argument = arguments.get(0);
 		
-		DataType dataType = ILUtil.getDataType(argument);
+		DataType dataType = context.getStaticEvaluationContext().getValue(argument).getDataType();
 		if (!(dataType instanceof TensorType)) {
 			throw new RuntimeException("Target type of sum() method must be tensor type");
 		}

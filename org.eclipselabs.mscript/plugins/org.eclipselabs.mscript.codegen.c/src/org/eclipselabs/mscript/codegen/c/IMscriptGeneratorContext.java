@@ -14,6 +14,7 @@ package org.eclipselabs.mscript.codegen.c;
 import java.io.Writer;
 
 import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
+import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
 
 /**
  * @author Andreas Unger
@@ -23,6 +24,7 @@ import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
  */
 public interface IMscriptGeneratorContext {
 
+	IStaticEvaluationContext getStaticEvaluationContext();
 	ComputationModel getComputationModel();
 	Writer getWriter();
 	

@@ -78,19 +78,25 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
  *
  */
 public class StaticExpressionEvaluator {
+
+	public IStatus evaluate(IStaticEvaluationContext context, Expression expression) {
+		return evaluate(context, expression, false);
+	}
 		
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.interpreter.IExpressionValueEvaluator#evaluate(org.eclipselabs.mscript.language.interpreter.IEvaluationContext, org.eclipselabs.mscript.language.ast.Expression)
 	 */
-	public IStatus evaluate(IStaticEvaluationContext context, Expression expression) {
-		ExpressionValueEvaluatorSwitch expressionValueEvaluatorSwitch = new ExpressionValueEvaluatorSwitch(context);
+	public IStatus evaluate(IStaticEvaluationContext context, Expression expression, boolean staticScope) {
+		ExpressionValueEvaluatorSwitch expressionValueEvaluatorSwitch = new ExpressionValueEvaluatorSwitch(context, staticScope);
 		expressionValueEvaluatorSwitch.evaluate(expression);
 		return expressionValueEvaluatorSwitch.getStatus();
 	}
 	
 	private static class ExpressionValueEvaluatorSwitch extends AstSwitch<IValue> {
 		
-		private MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Expression evaluation result", null);
+		private boolean staticScope;
+		
+		private MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Expression evaluation", null);
 
 		private IStaticEvaluationContext context;
 		
@@ -101,8 +107,9 @@ public class StaticExpressionEvaluator {
 		/**
 		 * 
 		 */
-		public ExpressionValueEvaluatorSwitch(IStaticEvaluationContext context) {
+		public ExpressionValueEvaluatorSwitch(IStaticEvaluationContext context, boolean staticScope) {
 			this.context = context;
+			this.staticScope = staticScope;
 		}
 		
 		/**
@@ -135,7 +142,9 @@ public class StaticExpressionEvaluator {
 		 */
 		@Override
 		public IValue caseIfExpression(IfExpression ifExpression) {
+			staticScope = ifExpression.isStatic();
 			IValue conditionValue = evaluate(ifExpression.getCondition());
+			staticScope = false;
 
 			if (conditionValue instanceof InvalidValue) {
 				return InvalidValue.SINGLETON;
@@ -176,18 +185,32 @@ public class StaticExpressionEvaluator {
 		@Override
 		public IValue caseImpliesExpression(ImpliesExpression impliesExpression) {
 			IValue leftValue = evaluate(impliesExpression.getLeftOperand());
+			
+			if (leftValue instanceof InvalidValue) {
+				return InvalidValue.SINGLETON;
+			}
+			
+			if (staticScope && leftValue instanceof IBooleanValue && !((IBooleanValue) leftValue).booleanValue()) {
+				return Values.valueOf(context.getComputationContext(), true);
+			}
+			
 			IValue rightValue = evaluate(impliesExpression.getRightOperand());
 			
-			if (leftValue instanceof InvalidValue || rightValue instanceof InvalidValue) {
+			if (rightValue instanceof InvalidValue) {
 				return InvalidValue.SINGLETON;
 			}
 
-			if (leftValue instanceof IBooleanValue && rightValue instanceof IBooleanValue) {
+			if (leftValue instanceof IBooleanValue) {
 				IBooleanValue leftBooleanValue = (IBooleanValue) leftValue;
-				IBooleanValue rightBooleanValue = (IBooleanValue) rightValue;
-				return Values.valueOf(context.getComputationContext(), !leftBooleanValue.booleanValue() || rightBooleanValue.booleanValue());
+				if (!leftBooleanValue.booleanValue()) {
+					return Values.valueOf(context.getComputationContext(), true);
+				}
+				if (rightValue instanceof IBooleanValue) {
+					IBooleanValue rightBooleanValue = (IBooleanValue) rightValue;
+					return Values.valueOf(context.getComputationContext(), rightBooleanValue.booleanValue());
+				}
 			}
-			
+
 			if (leftValue instanceof AnyValue && leftValue.getDataType() instanceof BooleanType
 					&& rightValue instanceof AnyValue && rightValue.getDataType() instanceof BooleanType) {
 				return leftValue;
@@ -210,16 +233,30 @@ public class StaticExpressionEvaluator {
 		@Override
 		public IValue caseLogicalOrExpression(LogicalOrExpression logicalOrExpression) {
 			IValue leftValue = evaluate(logicalOrExpression.getLeftOperand());
+
+			if (leftValue instanceof InvalidValue) {
+				return InvalidValue.SINGLETON;
+			}
+			
+			if (staticScope && leftValue instanceof IBooleanValue && ((IBooleanValue) leftValue).booleanValue()) {
+				return Values.valueOf(context.getComputationContext(), true);
+			}
+
 			IValue rightValue = evaluate(logicalOrExpression.getRightOperand());
 			
-			if (leftValue instanceof InvalidValue || rightValue instanceof InvalidValue) {
+			if (rightValue instanceof InvalidValue) {
 				return InvalidValue.SINGLETON;
 			}
 
-			if (leftValue instanceof IBooleanValue && rightValue instanceof IBooleanValue) {
+			if (leftValue instanceof IBooleanValue) {
 				IBooleanValue leftBooleanValue = (IBooleanValue) leftValue;
-				IBooleanValue rightBooleanValue = (IBooleanValue) rightValue;
-				return Values.valueOf(context.getComputationContext(), leftBooleanValue.booleanValue() || rightBooleanValue.booleanValue());
+				if (leftBooleanValue.booleanValue()) {
+					return Values.valueOf(context.getComputationContext(), true);
+				}
+				if (rightValue instanceof IBooleanValue) {
+					IBooleanValue rightBooleanValue = (IBooleanValue) rightValue;
+					return Values.valueOf(context.getComputationContext(), rightBooleanValue.booleanValue());
+				}
 			}
 			
 			if (leftValue instanceof AnyValue && leftValue.getDataType() instanceof BooleanType
@@ -244,16 +281,30 @@ public class StaticExpressionEvaluator {
 		@Override
 		public IValue caseLogicalAndExpression(LogicalAndExpression logicalAndExpression) {
 			IValue leftValue = evaluate(logicalAndExpression.getLeftOperand());
+			
+			if (leftValue instanceof InvalidValue) {
+				return InvalidValue.SINGLETON;
+			}
+			
+			if (staticScope && leftValue instanceof IBooleanValue && !((IBooleanValue) leftValue).booleanValue()) {
+				return Values.valueOf(context.getComputationContext(), false);
+			}
+
 			IValue rightValue = evaluate(logicalAndExpression.getRightOperand());
 			
-			if (leftValue instanceof InvalidValue || rightValue instanceof InvalidValue) {
+			if (rightValue instanceof InvalidValue) {
 				return InvalidValue.SINGLETON;
 			}
 
-			if (leftValue instanceof IBooleanValue && rightValue instanceof IBooleanValue) {
+			if (leftValue instanceof IBooleanValue) {
 				IBooleanValue leftBooleanValue = (IBooleanValue) leftValue;
-				IBooleanValue rightBooleanValue = (IBooleanValue) rightValue;
-				return Values.valueOf(context.getComputationContext(), leftBooleanValue.booleanValue() && rightBooleanValue.booleanValue());
+				if (!leftBooleanValue.booleanValue()) {
+					return Values.valueOf(context.getComputationContext(), false);
+				}
+				if (rightValue instanceof IBooleanValue) {
+					IBooleanValue rightBooleanValue = (IBooleanValue) rightValue;
+					return Values.valueOf(context.getComputationContext(), rightBooleanValue.booleanValue());
+				}
 			}
 			
 			if (leftValue instanceof AnyValue && leftValue.getDataType() instanceof BooleanType

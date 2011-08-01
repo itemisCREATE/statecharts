@@ -13,6 +13,7 @@ package org.eclipselabs.mscript.language.util;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
  * @author Andreas Unger
@@ -21,6 +22,6 @@ import org.eclipse.emf.ecore.EObject;
 public interface ISyntaxStatus extends IStatus {
 
 	EObject getSyntaxElement();
-	Integer getSyntaxFeatureId();
+	EStructuralFeature getSyntaxFeature();
 	
 }

@@ -12,6 +12,7 @@
 package org.eclipselabs.mscript.language.il.transform;
 
 import org.eclipselabs.mscript.language.il.Compound;
+import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
 
 /**
  * @author Andreas Unger
@@ -19,6 +20,6 @@ import org.eclipselabs.mscript.language.il.Compound;
  */
 public interface IArrayOperationDecomposer {
 
-	void decompose(Compound compound);
+	void decompose(IStaticEvaluationContext context, Compound compound);
 
 }

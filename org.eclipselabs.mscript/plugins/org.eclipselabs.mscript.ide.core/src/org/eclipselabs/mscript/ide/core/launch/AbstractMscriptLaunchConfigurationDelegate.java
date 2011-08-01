@@ -29,13 +29,14 @@ import org.eclipselabs.mscript.ide.core.internal.launch.util.ParseUtil;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.Module;
-import org.eclipselabs.mscript.language.functionmodel.construct.FunctionDescriptorConstructor;
-import org.eclipselabs.mscript.language.functionmodel.construct.IFunctionDescriptorConstructorResult;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.transform.FunctionDefinitionTransformer;
 import org.eclipselabs.mscript.language.il.transform.IFunctionDefinitionTransformerResult;
 import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
+import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
 import org.eclipselabs.mscript.language.interpreter.InterpreterContext;
+import org.eclipselabs.mscript.language.interpreter.StaticEvaluationContext;
+import org.eclipselabs.mscript.language.interpreter.StaticFunctionEvaluator;
 import org.eclipselabs.mscript.language.parser.antlr.MscriptParser;
 import org.eclipselabs.mscript.language.util.LanguageUtil;
 import org.eclipselabs.mscript.typesystem.DataType;
@@ -50,6 +51,8 @@ public abstract class AbstractMscriptLaunchConfigurationDelegate extends LaunchC
 	public static final String ATTRIBUTE__TEMPLATE_ARGUMENTS = "templateArguments";
 	public static final String ATTRIBUTE__COMPUTATION_MODEL = "computationModel";
 	
+	private IStaticEvaluationContext staticEvaluationContext;
+
 	private ComputationModel computationModel;
 	
 	private FunctionDefinition functionDefinition;
@@ -59,6 +62,13 @@ public abstract class AbstractMscriptLaunchConfigurationDelegate extends LaunchC
 	private List<IValue> templateArguments;
 	
 	private List<DataType> inputParameterDataTypes;
+	
+	/**
+	 * @return the staticEvaluationContext
+	 */
+	public IStaticEvaluationContext getStaticEvaluationContext() {
+		return staticEvaluationContext;
+	}
 	
 	/**
 	 * @return the computationModel
@@ -204,12 +214,13 @@ public abstract class AbstractMscriptLaunchConfigurationDelegate extends LaunchC
 	}
 
 	private ILFunctionDefinition createILFunctionDefinition(FunctionDefinition functionDefinition, String functionName, List<IValue> templateArguments, List<DataType> inputParameterDataTypes, IProgressMonitor monitor) throws CoreException {
-		IFunctionDescriptorConstructorResult functionDescriptorConstructorResult = new FunctionDescriptorConstructor().construct(functionDefinition);
-		if (!functionDescriptorConstructorResult.getStatus().isOK()) {
-			throw new CoreException(functionDescriptorConstructorResult.getStatus());
+		staticEvaluationContext = new StaticEvaluationContext();
+		IStatus status = new StaticFunctionEvaluator().evaluate(staticEvaluationContext, functionDefinition);
+		if (status.getSeverity() > IStatus.WARNING) {
+			throw new CoreException(status);
 		}
 		
-		IFunctionDefinitionTransformerResult functionDefinitionTransformerResult = new FunctionDefinitionTransformer().transform(functionDescriptorConstructorResult.getFunctionDescriptor(), functionName, templateArguments, inputParameterDataTypes);
+		IFunctionDefinitionTransformerResult functionDefinitionTransformerResult = new FunctionDefinitionTransformer().transform(staticEvaluationContext, staticEvaluationContext.getFunctionDescriptor(functionDefinition), functionName, templateArguments, inputParameterDataTypes);
 		if (!functionDefinitionTransformerResult.getStatus().isOK()) {
 			throw new CoreException(functionDefinitionTransformerResult.getStatus());
 		}

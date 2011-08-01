@@ -3652,17 +3652,18 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cDoKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cBodyAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cBodyStatementParserRuleCall_1_0 = (RuleCall)cBodyAssignment_1.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cConditionAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cConditionExpressionParserRuleCall_3_0 = (RuleCall)cConditionAssignment_3.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Keyword cWhileKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cConditionAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cConditionExpressionParserRuleCall_4_0 = (RuleCall)cConditionAssignment_4.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//DoWhileStatement:
-		//	"do" body=Statement "(" condition=Expression ")" ";";
+		//	"do" body=Statement "while" "(" condition=Expression ")" ";";
 		public ParserRule getRule() { return rule; }
 
-		//"do" body=Statement "(" condition=Expression ")" ";"
+		//"do" body=Statement "while" "(" condition=Expression ")" ";"
 		public Group getGroup() { return cGroup; }
 
 		//"do"
@@ -3674,20 +3675,23 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//Statement
 		public RuleCall getBodyStatementParserRuleCall_1_0() { return cBodyStatementParserRuleCall_1_0; }
 
+		//"while"
+		public Keyword getWhileKeyword_2() { return cWhileKeyword_2; }
+
 		//"("
-		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
+		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
 
 		//condition=Expression
-		public Assignment getConditionAssignment_3() { return cConditionAssignment_3; }
+		public Assignment getConditionAssignment_4() { return cConditionAssignment_4; }
 
 		//Expression
-		public RuleCall getConditionExpressionParserRuleCall_3_0() { return cConditionExpressionParserRuleCall_3_0; }
+		public RuleCall getConditionExpressionParserRuleCall_4_0() { return cConditionExpressionParserRuleCall_4_0; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
+		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 
 		//";"
-		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
+		public Keyword getSemicolonKeyword_6() { return cSemicolonKeyword_6; }
 	}
 
 	public class ContinueStatementElements extends AbstractParserRuleElementFinder {
@@ -5592,7 +5596,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DoWhileStatement:
-	//	"do" body=Statement "(" condition=Expression ")" ";";
+	//	"do" body=Statement "while" "(" condition=Expression ")" ";";
 	public DoWhileStatementElements getDoWhileStatementAccess() {
 		return (pDoWhileStatement != null) ? pDoWhileStatement : (pDoWhileStatement = new DoWhileStatementElements());
 	}

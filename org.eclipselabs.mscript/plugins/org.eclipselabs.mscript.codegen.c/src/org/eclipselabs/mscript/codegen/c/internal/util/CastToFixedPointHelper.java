@@ -12,8 +12,9 @@
 package org.eclipselabs.mscript.codegen.c.internal.util;
 
 import java.io.PrintWriter;
+import java.io.Writer;
 
-import org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext;
+import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
@@ -21,31 +22,27 @@ import org.eclipselabs.mscript.computation.computationmodel.util.ComputationMode
 import org.eclipselabs.mscript.typesystem.DataType;
 
 public abstract class CastToFixedPointHelper extends ComputationModelSwitch<Boolean> {
-	
-	private IMscriptGeneratorContext context;
+
+	private ComputationModel computationModel;
+	private PrintWriter writer;
+
 	private DataType expressionDataType;
 	private int wordSize;
 	private int fractionLength;
 	
-	private PrintWriter writer;
-	
 	/**
 	 * 
 	 */
-	public CastToFixedPointHelper(IMscriptGeneratorContext context, DataType expressionDataType, int wordSize, int fractionLength) {
-		this.context = context;
+	public CastToFixedPointHelper(ComputationModel computationModel, Writer writer, DataType expressionDataType, int wordSize, int fractionLength) {
+		this.computationModel = computationModel;
+		this.writer = new PrintWriter(writer);
 		this.expressionDataType = expressionDataType;
 		this.wordSize = wordSize;
 		this.fractionLength = fractionLength;
-		writer = new PrintWriter(context.getWriter());
 	}
 	
-	protected IMscriptGeneratorContext getContext() {
-		return context;
-	}
-
 	public void cast() {
-		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(expressionDataType);
+		NumberFormat numberFormat = computationModel.getNumberFormat(expressionDataType);
 		doSwitch(numberFormat);
 	}
 	

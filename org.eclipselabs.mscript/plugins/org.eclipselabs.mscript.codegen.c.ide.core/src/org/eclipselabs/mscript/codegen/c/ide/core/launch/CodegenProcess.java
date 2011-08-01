@@ -39,6 +39,7 @@ import org.eclipselabs.mscript.codegen.c.ide.core.CodegenCIDECorePlugin;
 import org.eclipselabs.mscript.codegen.c.util.NameNormalizer;
 import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
+import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
 
 /**
  * @author Andreas Unger
@@ -51,6 +52,7 @@ public class CodegenProcess implements IProcess {
 	
 	private IFolder targetFolder;
 	private ILFunctionDefinition functionDefinition;
+	private IStaticEvaluationContext staticEvaluationContext;
 	private ComputationModel computationModel;
 
 	private boolean terminated;
@@ -58,11 +60,12 @@ public class CodegenProcess implements IProcess {
 	/**
 	 * 
 	 */
-	public CodegenProcess(ILaunch launch, String name, IFolder targetFolder, ILFunctionDefinition functionDefinition, ComputationModel computationModel) {
+	public CodegenProcess(ILaunch launch, String name, IFolder targetFolder, ILFunctionDefinition functionDefinition, IStaticEvaluationContext staticEvaluationContext, ComputationModel computationModel) {
 		this.launch = launch;
 		this.name = name;
 		this.targetFolder = targetFolder;
 		this.functionDefinition = functionDefinition;
+		this.staticEvaluationContext = staticEvaluationContext;
 		this.computationModel = computationModel;
 		launch.addProcess(this);
 		fireCreationEvent();
@@ -223,7 +226,7 @@ public class CodegenProcess implements IProcess {
 	private class HeaderGeneratorThread extends GeneratorThread {
 		
 		public void generate() {
-			MscriptGenerator generator = new MscriptGenerator(functionDefinition, new MscriptGeneratorContext(computationModel, writer));
+			MscriptGenerator generator = new MscriptGenerator(functionDefinition, new MscriptGeneratorContext(staticEvaluationContext, computationModel, writer));
 			generator.generateHeaderCode();
 		}
 		
@@ -232,7 +235,7 @@ public class CodegenProcess implements IProcess {
 	private class ImplementationGeneratorThread extends GeneratorThread {
 		
 		public void generate() {
-			MscriptGenerator generator = new MscriptGenerator(functionDefinition, new MscriptGeneratorContext(computationModel, writer));
+			MscriptGenerator generator = new MscriptGenerator(functionDefinition, new MscriptGeneratorContext(staticEvaluationContext, computationModel, writer));
 			generator.generateImplementationCode();
 		}
 		

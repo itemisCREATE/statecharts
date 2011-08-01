@@ -55,7 +55,7 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 	@Check
 	public void checkFunctionHasChecks(FunctionDefinition functionDefinition) {
 		if (functionDefinition.getChecks().isEmpty()) {
-			warning("No static type checking can be performed for function " + functionDefinition.getName() + " since no checks have been defined", functionDefinition, AstPackage.eINSTANCE.getDefinition_Name(), -1);
+			warning("No static checking can be performed for function " + functionDefinition.getName() + " since no checks have been defined", functionDefinition, AstPackage.eINSTANCE.getDefinition_Name(), -1);
 		}
 	}
 	

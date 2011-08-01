@@ -1795,6 +1795,7 @@
       <elements xsi:type="xtext:Assignment" feature="body" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.90"/>
       </elements>
+      <elements xsi:type="xtext:Keyword" value="while"/>
       <elements xsi:type="xtext:Keyword" value="("/>
       <elements xsi:type="xtext:Assignment" feature="condition" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.31"/>

@@ -32,6 +32,7 @@ import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.LetExpression;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
@@ -79,7 +80,22 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 	 */
 	public ExpressionTransformer(ITransformerContext context) {
 		this.context = context;
-		status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Expression transformer errors", null);
+		status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Expression transformation", null);
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.emf.ecore.util.Switch#doSwitch(org.eclipse.emf.ecore.EObject)
+	 */
+	@Override
+	public Expression doSwitch(EObject eObject) {
+		Expression newExpression =  super.doSwitch(eObject);
+		IValue value = context.getStaticEvaluationContext().getValue(eObject);
+		if (value != null) {
+			context.getStaticEvaluationContext().setValue(newExpression, value);
+		} else {
+//			throw new IllegalStateException();
+		}
+		return newExpression;
 	}
 	
 	/* (non-Javadoc)
@@ -104,6 +120,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 	@Override
 	public Expression caseLetExpression(LetExpression letExpression) {
 		LocalVariableDeclaration localVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
+		localVariableDeclaration.setDataType(context.getStaticEvaluationContext().getValue(letExpression).getDataType());
 		context.getCompound().getStatements().add(localVariableDeclaration);
 
 		CompoundStatement compoundStatement = ILFactory.eINSTANCE.createCompoundStatement();
@@ -113,7 +130,9 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 
 		for (LetExpressionVariableDeclaration letExpressionVariableDeclaration : letExpression.getVariableDeclarations()) {
 			LocalVariableDeclaration letVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
-			letVariableDeclaration.setName(letExpressionVariableDeclaration.getParts().get(0).getName());
+			LetExpressionVariableDeclarationPart part = letExpressionVariableDeclaration.getParts().get(0);
+			letVariableDeclaration.setDataType(context.getStaticEvaluationContext().getValue(part).getDataType());
+			letVariableDeclaration.setName(part.getName());
 			Expression assignedExpression = doSwitch(letExpressionVariableDeclaration.getAssignedExpression());
 			letVariableDeclaration.setInitializer(assignedExpression);
 			compoundStatement.getStatements().add(letVariableDeclaration);
@@ -149,6 +168,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 		}
 		
 		LocalVariableDeclaration localVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
+		localVariableDeclaration.setDataType(context.getStaticEvaluationContext().getValue(ifExpression).getDataType());
 		context.getCompound().getStatements().add(localVariableDeclaration);
 		IfStatement ifStatement = ILFactory.eINSTANCE.createIfStatement();
 		Expression conditionExpression = doSwitch(ifExpression.getCondition());

@@ -53,13 +53,13 @@ public class CodegenLaunchConfigurationDelegate extends AbstractMscriptLaunchCon
 		}
 
 		IArrayOperationDecomposer arrayOperationDecomposer = new ArrayOperationDecomposer();
-		arrayOperationDecomposer.decompose(getILFunctionDefinition().getInitializationCompound());
+		arrayOperationDecomposer.decompose(getStaticEvaluationContext(), getILFunctionDefinition().getInitializationCompound());
 		for (Compound compound : getILFunctionDefinition().getComputationCompounds()) {
-			arrayOperationDecomposer.decompose(compound);
+			arrayOperationDecomposer.decompose(getStaticEvaluationContext(), compound);
 		}
 		
 		IFolder targetFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path(targetFolderPathString));
-		CodegenProcess process = new CodegenProcess(launch, "C Code Generator", targetFolder, getILFunctionDefinition(), getComputationModel());
+		CodegenProcess process = new CodegenProcess(launch, "C Code Generator", targetFolder, getILFunctionDefinition(), getStaticEvaluationContext(), getComputationModel());
 		process.run();
 	}
 

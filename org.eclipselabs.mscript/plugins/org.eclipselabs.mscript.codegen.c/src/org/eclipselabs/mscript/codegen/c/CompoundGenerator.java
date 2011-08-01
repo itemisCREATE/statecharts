@@ -24,7 +24,6 @@ import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.il.Statement;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
-import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
@@ -124,7 +123,7 @@ public class CompoundGenerator implements ICompoundGenerator {
 		@Override
 		public Boolean caseForeachStatement(ForeachStatement foreachStatement) {
 			VariableDeclaration iterationVariableDeclaration = foreachStatement.getIterationVariableDeclaration();
-			DataType collectionDataType = ILUtil.getDataType(foreachStatement.getCollectionExpression());
+			DataType collectionDataType = getDataType(foreachStatement.getCollectionExpression());
 			if (!(collectionDataType instanceof ArrayType)) {
 				throw new RuntimeException("Collection type must be array type");
 			}
@@ -189,6 +188,10 @@ public class CompoundGenerator implements ICompoundGenerator {
 		
 		private void cast(DataType targetDataType, Expression expression) {
 			MscriptGeneratorUtil.cast(context, variableAccessStrategy, expression, targetDataType);
+		}
+		
+		private DataType getDataType(Expression expression) {
+			return context.getStaticEvaluationContext().getValue(expression).getDataType();
 		}
 	
 	}

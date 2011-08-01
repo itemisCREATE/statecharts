@@ -6202,35 +6202,39 @@ ruleDoWhileStatement returns [EObject current=null]
 	    }
 
 )
-)	otherlv_2='(' 
+)	otherlv_2='while' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getDoWhileStatementAccess().getLeftParenthesisKeyword_2());
+    	newLeafNode(otherlv_2, grammarAccess.getDoWhileStatementAccess().getWhileKeyword_2());
+    }
+	otherlv_3='(' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getDoWhileStatementAccess().getLeftParenthesisKeyword_3());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getDoWhileStatementAccess().getConditionExpressionParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getDoWhileStatementAccess().getConditionExpressionParserRuleCall_4_0()); 
 	    }
-		lv_condition_3_0=ruleExpression		{
+		lv_condition_4_0=ruleExpression		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getDoWhileStatementRule());
 	        }
        		set(
        			$current, 
        			"condition",
-        		lv_condition_3_0, 
+        		lv_condition_4_0, 
         		"Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_4=')' 
+)	otherlv_5=')' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getDoWhileStatementAccess().getRightParenthesisKeyword_4());
+    	newLeafNode(otherlv_5, grammarAccess.getDoWhileStatementAccess().getRightParenthesisKeyword_5());
     }
-	otherlv_5=';' 
+	otherlv_6=';' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getDoWhileStatementAccess().getSemicolonKeyword_5());
+    	newLeafNode(otherlv_6, grammarAccess.getDoWhileStatementAccess().getSemicolonKeyword_6());
     }
 )
 ;

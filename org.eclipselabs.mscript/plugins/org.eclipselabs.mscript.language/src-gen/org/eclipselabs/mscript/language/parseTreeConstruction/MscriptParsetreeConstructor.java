@@ -19029,11 +19029,11 @@ protected class ForStatement_BodyAssignment_6 extends AssignmentToken  {
 /************ begin Rule DoWhileStatement ****************
  *
  * DoWhileStatement:
- * 	"do" body=Statement "(" condition=Expression ")" ";";
+ * 	"do" body=Statement "while" "(" condition=Expression ")" ";";
  *
  **/
 
-// "do" body=Statement "(" condition=Expression ")" ";"
+// "do" body=Statement "while" "(" condition=Expression ")" ";"
 protected class DoWhileStatement_Group extends GroupToken {
 	
 	public DoWhileStatement_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -19048,7 +19048,7 @@ protected class DoWhileStatement_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new DoWhileStatement_SemicolonKeyword_5(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new DoWhileStatement_SemicolonKeyword_6(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -19129,16 +19129,16 @@ protected class DoWhileStatement_BodyAssignment_1 extends AssignmentToken  {
 	}	
 }
 
-// "("
-protected class DoWhileStatement_LeftParenthesisKeyword_2 extends KeywordToken  {
+// "while"
+protected class DoWhileStatement_WhileKeyword_2 extends KeywordToken  {
 	
-	public DoWhileStatement_LeftParenthesisKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public DoWhileStatement_WhileKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getDoWhileStatementAccess().getLeftParenthesisKeyword_2();
+		return grammarAccess.getDoWhileStatementAccess().getWhileKeyword_2();
 	}
 
     @Override
@@ -19151,16 +19151,38 @@ protected class DoWhileStatement_LeftParenthesisKeyword_2 extends KeywordToken  
 
 }
 
-// condition=Expression
-protected class DoWhileStatement_ConditionAssignment_3 extends AssignmentToken  {
+// "("
+protected class DoWhileStatement_LeftParenthesisKeyword_3 extends KeywordToken  {
 	
-	public DoWhileStatement_ConditionAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public DoWhileStatement_LeftParenthesisKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getDoWhileStatementAccess().getLeftParenthesisKeyword_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new DoWhileStatement_WhileKeyword_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// condition=Expression
+protected class DoWhileStatement_ConditionAssignment_4 extends AssignmentToken  {
+	
+	public DoWhileStatement_ConditionAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getDoWhileStatementAccess().getConditionAssignment_3();
+		return grammarAccess.getDoWhileStatementAccess().getConditionAssignment_4();
 	}
 
     @Override
@@ -19179,7 +19201,7 @@ protected class DoWhileStatement_ConditionAssignment_3 extends AssignmentToken  
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getDoWhileStatementAccess().getConditionExpressionParserRuleCall_3_0(); 
+				element = grammarAccess.getDoWhileStatementAccess().getConditionExpressionParserRuleCall_4_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -19191,28 +19213,28 @@ protected class DoWhileStatement_ConditionAssignment_3 extends AssignmentToken  
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new DoWhileStatement_LeftParenthesisKeyword_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new DoWhileStatement_LeftParenthesisKeyword_3(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // ")"
-protected class DoWhileStatement_RightParenthesisKeyword_4 extends KeywordToken  {
+protected class DoWhileStatement_RightParenthesisKeyword_5 extends KeywordToken  {
 	
-	public DoWhileStatement_RightParenthesisKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public DoWhileStatement_RightParenthesisKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getDoWhileStatementAccess().getRightParenthesisKeyword_4();
+		return grammarAccess.getDoWhileStatementAccess().getRightParenthesisKeyword_5();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new DoWhileStatement_ConditionAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new DoWhileStatement_ConditionAssignment_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -19220,21 +19242,21 @@ protected class DoWhileStatement_RightParenthesisKeyword_4 extends KeywordToken 
 }
 
 // ";"
-protected class DoWhileStatement_SemicolonKeyword_5 extends KeywordToken  {
+protected class DoWhileStatement_SemicolonKeyword_6 extends KeywordToken  {
 	
-	public DoWhileStatement_SemicolonKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public DoWhileStatement_SemicolonKeyword_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getDoWhileStatementAccess().getSemicolonKeyword_5();
+		return grammarAccess.getDoWhileStatementAccess().getSemicolonKeyword_6();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new DoWhileStatement_RightParenthesisKeyword_4(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new DoWhileStatement_RightParenthesisKeyword_5(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}

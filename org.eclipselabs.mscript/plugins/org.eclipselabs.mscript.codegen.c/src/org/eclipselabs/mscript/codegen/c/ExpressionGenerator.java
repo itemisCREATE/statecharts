@@ -42,7 +42,6 @@ import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
-import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.typesystem.BooleanLiteral;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.Expression;
@@ -130,8 +129,8 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		}
 		
 		private void writeCompareExpression(Expression leftOperand, Expression rightOperand, String operator) {
-			DataType leftDataType = ILUtil.getDataType(leftOperand);
-			DataType rightDataType = ILUtil.getDataType(rightOperand);
+			DataType leftDataType = getDataType(leftOperand);
+			DataType rightDataType = getDataType(rightOperand);
 			
 			if (leftDataType instanceof NumericType && rightDataType instanceof NumericType) {
 				DataType dataType1 = TypeSystemUtil.getLeftHandDataType(leftDataType, rightDataType);
@@ -161,7 +160,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		 */
 		@Override
 		public Boolean caseAdditiveExpression(AdditiveExpression additiveExpression) {
-			DataType dataType = ILUtil.getDataType(additiveExpression);
+			DataType dataType = getDataType(additiveExpression);
 			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
 	
 			MscriptGeneratorUtil.castNumericType(context, variableAccessStrategy, numberFormat, additiveExpression.getLeftOperand());
@@ -178,7 +177,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		 */
 		@Override
 		public Boolean caseMultiplicativeExpression(MultiplicativeExpression multiplicativeExpression) {
-			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(ILUtil.getDataType(multiplicativeExpression));
+			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(getDataType(multiplicativeExpression));
 			if (numberFormat instanceof FloatingPointFormat) {
 				writeFloatingPointMultiplicativeExpression(multiplicativeExpression.getOperator(), multiplicativeExpression.getLeftOperand(), multiplicativeExpression.getRightOperand(), (FloatingPointFormat) numberFormat);
 			} else if (numberFormat instanceof FixedPointFormat) {
@@ -272,7 +271,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		}
 		
 		private void castToFloatingPoint(final Expression expression, FloatingPointFormat floatingPointFormat) {
-			new CastToFloatingPointHelper(context, ILUtil.getDataType(expression), floatingPointFormat) {
+			new CastToFloatingPointHelper(context.getComputationModel(), context.getWriter(), getDataType(expression), floatingPointFormat) {
 				
 				@Override
 				protected void writeExpression() {
@@ -283,7 +282,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		}
 	
 		private void castToFixedPoint(final Expression expression, int wordSize, int fractionLength) {
-			new CastToFixedPointHelper(context, ILUtil.getDataType(expression), wordSize, fractionLength) {
+			new CastToFixedPointHelper(context.getComputationModel(), context.getWriter(), getDataType(expression), wordSize, fractionLength) {
 				
 				@Override
 				protected void writeExpression() {
@@ -321,7 +320,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			 */
 			@Override
 			public Boolean caseRealLiteral(RealLiteral realLiteral) {
-				DataType dataType = ILUtil.getDataType(realLiteral);
+				DataType dataType = getDataType(realLiteral);
 				writer.print(MscriptGeneratorUtil.getLiteralString(context.getComputationModel(), dataType, realLiteral.getValue()));
 				return true;
 			}
@@ -331,7 +330,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			 */
 			@Override
 			public Boolean caseIntegerLiteral(IntegerLiteral integerLiteral) {
-				DataType dataType = ILUtil.getDataType(integerLiteral);
+				DataType dataType = getDataType(integerLiteral);
 				writer.print(MscriptGeneratorUtil.getLiteralString(context.getComputationModel(), dataType, integerLiteral.getValue()));
 				return true;
 			}
@@ -365,7 +364,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 
 			List<DataType> inputParameterDataTypes = new ArrayList<DataType>();
 			for (Expression argument : functionCall.getArguments()) {
-				inputParameterDataTypes.add(ILUtil.getDataType(argument));
+				inputParameterDataTypes.add(getDataType(argument));
 			}
 			BuiltinFunctionDescriptor descriptor = BuiltinFunctionDescriptor.get(name, inputParameterDataTypes);
 			if (descriptor != null) {
@@ -391,6 +390,10 @@ public class ExpressionGenerator implements IExpressionGenerator {
 				return new ILExpressionGenerator().doSwitch(object);
 			}
 			return super.defaultCase(object);
+		}
+		
+		private DataType getDataType(Expression expression) {
+			return context.getStaticEvaluationContext().getValue(expression).getDataType();
 		}
 	
 		private class ILExpressionGenerator extends ILSwitch<Boolean> {

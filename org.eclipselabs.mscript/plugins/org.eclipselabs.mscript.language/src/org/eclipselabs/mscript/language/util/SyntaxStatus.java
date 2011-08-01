@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 
 /**
@@ -30,16 +31,16 @@ public class SyntaxStatus extends Status implements ISyntaxStatus {
 
 	private EObject syntaxElement;
 	
-	private Integer syntaxFeatureId;
+	private EStructuralFeature syntaxFeature;
 	
 	public SyntaxStatus(int severity, String pluginId, int code, String message, EObject syntaxElement) {
 		this(severity, pluginId, code, message, syntaxElement, null);
 	}
 	
-	public SyntaxStatus(int severity, String pluginId, int code, String message, EObject syntaxElement, Integer syntaxFeatureId) {
+	public SyntaxStatus(int severity, String pluginId, int code, String message, EObject syntaxElement, EStructuralFeature syntaxFeature) {
 		super(severity, pluginId, code, message, null);
 		this.syntaxElement = syntaxElement;
-		this.syntaxFeatureId = syntaxFeatureId;
+		this.syntaxFeature = syntaxFeature;
 	}
 	
 	/* (non-Javadoc)
@@ -49,11 +50,8 @@ public class SyntaxStatus extends Status implements ISyntaxStatus {
 		return syntaxElement;
 	}
 	
-	/**
-	 * @return the syntaxFeatureId
-	 */
-	public Integer getSyntaxFeatureId() {
-		return syntaxFeatureId;
+	public EStructuralFeature getSyntaxFeature() {
+		return syntaxFeature;
 	}
 
 	public static void addAllSyntaxStatusesToDiagnostics(IStatus status, DiagnosticChain diagnostics) {
@@ -63,10 +61,10 @@ public class SyntaxStatus extends Status implements ISyntaxStatus {
 				if (next instanceof ISyntaxStatus) {
 					ISyntaxStatus syntaxStatus = (ISyntaxStatus) next;
 					Object[] data;
-					if (syntaxStatus.getSyntaxFeatureId() != null) {
+					if (syntaxStatus.getSyntaxFeature() != null) {
 						data = new Object[] {
 							syntaxStatus.getSyntaxElement(),
-							syntaxStatus.getSyntaxFeatureId()
+							syntaxStatus.getSyntaxFeature()
 						};
 					} else {
 						data = new Object[] {
@@ -74,7 +72,7 @@ public class SyntaxStatus extends Status implements ISyntaxStatus {
 						};
 					}
 					diagnostics.add(new BasicDiagnostic(
-							Diagnostic.ERROR,
+							status.getSeverity(),
 							LanguagePlugin.PLUGIN_ID,
 							0,
 							syntaxStatus.getMessage(),

@@ -48,7 +48,7 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 	 * @see org.eclipselabs.mscript.language.functionmodel.construct.IFunctionDescriptorConstructor#construct(org.eclipselabs.mscript.language.ast.FunctionDefinition)
 	 */
 	public IFunctionDescriptorConstructorResult construct(IStaticEvaluationContext context, FunctionDefinition functionDefinition) {
-		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Function descriptor construction errors", null);
+		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Function descriptor construction", null);
 
 		FunctionDescriptor functionDescriptor = FunctionModelFactory.eINSTANCE.createFunctionDescriptor();
 		functionDescriptor.setDefinition(functionDefinition);
@@ -71,7 +71,7 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 			StatusUtil.merge(status, new EquationSideInitializer(context, rhs).initialize());
 		}
 		
-		if (!status.isOK()) {
+		if (status.getSeverity() > IStatus.WARNING) {
 			return new FunctionDescriptorConstructorResult(functionDescriptor, status);
 		}
 		
