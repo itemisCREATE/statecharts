@@ -184,7 +184,7 @@ public class StaticExpressionEvaluator {
 
 			if (leftValue instanceof IBooleanValue && rightValue instanceof IBooleanValue) {
 				IBooleanValue leftBooleanValue = (IBooleanValue) leftValue;
-				IBooleanValue rightBooleanValue = (IBooleanValue) leftValue;
+				IBooleanValue rightBooleanValue = (IBooleanValue) rightValue;
 				return Values.valueOf(context.getComputationContext(), !leftBooleanValue.booleanValue() || rightBooleanValue.booleanValue());
 			}
 			
@@ -218,7 +218,7 @@ public class StaticExpressionEvaluator {
 
 			if (leftValue instanceof IBooleanValue && rightValue instanceof IBooleanValue) {
 				IBooleanValue leftBooleanValue = (IBooleanValue) leftValue;
-				IBooleanValue rightBooleanValue = (IBooleanValue) leftValue;
+				IBooleanValue rightBooleanValue = (IBooleanValue) rightValue;
 				return Values.valueOf(context.getComputationContext(), leftBooleanValue.booleanValue() || rightBooleanValue.booleanValue());
 			}
 			
@@ -252,7 +252,7 @@ public class StaticExpressionEvaluator {
 
 			if (leftValue instanceof IBooleanValue && rightValue instanceof IBooleanValue) {
 				IBooleanValue leftBooleanValue = (IBooleanValue) leftValue;
-				IBooleanValue rightBooleanValue = (IBooleanValue) leftValue;
+				IBooleanValue rightBooleanValue = (IBooleanValue) rightValue;
 				return Values.valueOf(context.getComputationContext(), leftBooleanValue.booleanValue() && rightBooleanValue.booleanValue());
 			}
 			

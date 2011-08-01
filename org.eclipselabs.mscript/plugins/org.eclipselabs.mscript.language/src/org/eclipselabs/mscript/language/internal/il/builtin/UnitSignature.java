@@ -18,7 +18,6 @@ import org.eclipselabs.mscript.language.il.builtin.Signature;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
-import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
  * @author Andreas Unger
@@ -32,7 +31,7 @@ public class UnitSignature extends Signature {
 	
 	private static List<DataType> createInputDataTypes() {
 		RealType realType = TypeSystemFactory.eINSTANCE.createRealType();
-		realType.setUnit(TypeSystemUtil.createUnit());
+		realType.setUnit(TypeSystemFactory.eINSTANCE.createUnit());
 		return Collections.<DataType>singletonList(realType);
 	}
 
