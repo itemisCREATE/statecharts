@@ -34,7 +34,7 @@ public class ScopeVariableLabelProvider extends ColumnLabelProvider {
 			return ((ScopeVariable) element).getName();
 		case 1:
 			// TYPE
-			((ScopeVariable) element).getType().getSimpleName();
+			return ((ScopeVariable) element).getType().getSimpleName();
 		case 2:
 			// VALUE:
 			return ((ScopeVariable) element).getValue().toString();
