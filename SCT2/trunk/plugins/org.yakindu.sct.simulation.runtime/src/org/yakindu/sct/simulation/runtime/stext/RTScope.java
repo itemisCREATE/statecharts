@@ -10,7 +10,9 @@
  */
 package org.yakindu.sct.simulation.runtime.stext;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
@@ -67,6 +69,10 @@ public class RTScope implements ExecutionScope {
 	public void setVariableValue(RTVariable variable, Object object) {
 		variable.setValue(object);
 		
+	}
+
+	public Collection<RTVariable> getVariables() {
+		return variables.values();
 	}
 	
 }

@@ -20,6 +20,7 @@ import java.util.Set;
 
 import org.yakindu.sct.core.simulation.ISGraphExecutionFacade;
 import org.yakindu.sct.core.simulation.ISGraphExecutionListener;
+import org.yakindu.sct.core.simulation.ISGraphExecutionScope;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
@@ -219,5 +220,9 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 		for (RTRegion region : cState.getRegions()) {
 			addAllRegions(regions, region);
 		}
+	}
+
+	public ISGraphExecutionScope getExecutionScope() {
+		return new ExecutionScopeAdapter(this);
 	}
 }

@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.simulation.runtime;
 
+import java.util.Collection;
+
 import org.yakindu.sct.simulation.runtime.stext.RTVariable;
 
 public interface ExecutionScope {
@@ -25,5 +27,7 @@ public interface ExecutionScope {
 	public abstract void raise(String signal);
 
 	public abstract void setVariableValue(RTVariable variable, Object object);
+	
+	public Collection<RTVariable> getVariables();
 
 }
