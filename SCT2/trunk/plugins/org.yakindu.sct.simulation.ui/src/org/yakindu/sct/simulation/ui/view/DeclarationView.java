@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.simulation.ui.view;
 
 import java.util.ArrayList;
@@ -23,15 +33,18 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.part.ViewPart;
-import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.NamedElement;
 import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeVariable;
 import org.yakindu.sct.simulation.core.ISGraphSimulationSession;
 import org.yakindu.sct.simulation.core.ISimulationSessionListener;
 import org.yakindu.sct.simulation.core.SGraphSimulationSessionRegistry;
+import org.yakindu.sct.simulation.ui.view.editing.BooleanEditingSupport;
+import org.yakindu.sct.simulation.ui.view.editing.IntegerEditingSupport;
+import org.yakindu.sct.simulation.ui.view.editing.MultiEditingSupport;
+import org.yakindu.sct.simulation.ui.view.editing.RealEditingSupport;
 
 import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorResolver;
 
@@ -50,74 +63,67 @@ public class DeclarationView extends ViewPart implements
 	private List<Control> controls;
 
 	public DeclarationView() {
+		controls = new ArrayList<Control>();
 		SGraphSimulationSessionRegistry.INSTANCE.getListeners().add(this);
 	}
 
 	@Override
 	public void createPartControl(Composite parent) {
-		controls = new ArrayList<Control>();
 		parent.setLayout(new GridLayout(1, true));
+		createEventViewer(parent);
+		createVariableViewer(parent);
+		setEventViewerInput();
+	}
 
-		eventViewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
-				| SWT.V_SCROLL | SWT.FULL_SELECTION);
-		eventViewer.getTable().setLinesVisible(true);
-		eventViewer.getTable().setHeaderVisible(true);
-		createEventColumns(eventViewer);
-		eventViewer.setContentProvider(new ArrayContentProvider());
-		eventViewer.addFilter(new ClassViewerFilter(Event.class));
-		GridDataFactory.fillDefaults().grab(true, true)
-				.applyTo(eventViewer.getTable());
-
+	private void createVariableViewer(Composite parent) {
 		variableViewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
 				| SWT.V_SCROLL | SWT.FULL_SELECTION);
 		variableViewer.getTable().setLinesVisible(true);
 		variableViewer.getTable().setHeaderVisible(true);
 		createVariableColumns(variableViewer);
 		variableViewer.setContentProvider(new ArrayContentProvider());
-		variableViewer.addFilter(new ClassViewerFilter(Variable.class));
 		GridDataFactory.fillDefaults().grab(true, true)
 				.applyTo(variableViewer.getTable());
-
-		setEventViewerInput(getViewerInput());
 	}
 
-	@Override
-	public void dispose() {
-		SGraphSimulationSessionRegistry.INSTANCE.getListeners().remove(this);
-		super.dispose();
+	private void createEventViewer(Composite parent) {
+		eventViewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
+				| SWT.V_SCROLL | SWT.FULL_SELECTION);
+		eventViewer.getTable().setLinesVisible(true);
+		eventViewer.getTable().setHeaderVisible(true);
+		createEventColumns(eventViewer);
+		eventViewer.setContentProvider(new ArrayContentProvider());
+		GridDataFactory.fillDefaults().grab(true, true)
+				.applyTo(eventViewer.getTable());
+	}
+
+	private TableViewerColumn createColumn(TableViewer viewer, String text,
+			int width) {
+		TableViewerColumn column = new TableViewerColumn(viewer, SWT.NONE);
+		column.getColumn().setText(text);
+		column.getColumn().setWidth(width);
+		column.getColumn().setResizable(true);
+		column.getColumn().setMoveable(true);
+		return column;
 	}
 
 	private void createVariableColumns(TableViewer viewer) {
-		TableViewerColumn variableColumn = new TableViewerColumn(viewer,
-				SWT.NONE);
-		variableColumn.getColumn().setText("variable name");
-		variableColumn.getColumn().setWidth(120);
-		variableColumn.getColumn().setResizable(true);
-		variableColumn.getColumn().setMoveable(true);
-		variableColumn.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof NamedElement) {
-					return ((NamedElement) element).getName();
-				}
-				return super.getText(element);
-			}
-		});
+		TableViewerColumn variableColumn = createColumn(viewer, "variable", 80);
+		variableColumn.setLabelProvider(new ScopeVariableLabelProvider(0));
 
-		TableViewerColumn valueColumn = new TableViewerColumn(viewer, SWT.NONE);
-		valueColumn.getColumn().setText("value");
-		valueColumn.getColumn().setWidth(120);
-		valueColumn.getColumn().setResizable(true);
-		valueColumn.getColumn().setMoveable(true);
-		valueColumn.setLabelProvider(new ColumnLabelProvider());
+		TableViewerColumn typeColumn = createColumn(viewer, "type", 80);
+		typeColumn.setLabelProvider(new ScopeVariableLabelProvider(1));
+
+		TableViewerColumn valueColumn = createColumn(viewer, "value", 80);
+		valueColumn.setLabelProvider(new ScopeVariableLabelProvider(2));
+	
+		valueColumn.setEditingSupport(new MultiEditingSupport(viewer,
+				new BooleanEditingSupport(viewer), new IntegerEditingSupport(
+						viewer), new RealEditingSupport(viewer)));
 	}
 
 	private void createEventColumns(final TableViewer viewer) {
-		TableViewerColumn eventColumn = new TableViewerColumn(viewer, SWT.NONE);
-		eventColumn.getColumn().setText("event name");
-		eventColumn.getColumn().setWidth(120);
-		eventColumn.getColumn().setResizable(true);
-		eventColumn.getColumn().setMoveable(true);
+		TableViewerColumn eventColumn = createColumn(viewer, "event name", 120);
 		eventColumn.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
@@ -128,12 +134,8 @@ public class DeclarationView extends ViewPart implements
 			}
 		});
 
-		TableViewerColumn executeColumn = new TableViewerColumn(viewer,
-				SWT.NONE);
-		executeColumn.getColumn().setText("execute event");
-		executeColumn.getColumn().setWidth(120);
-		executeColumn.getColumn().setResizable(true);
-		executeColumn.getColumn().setMoveable(true);
+		TableViewerColumn executeColumn = createColumn(viewer, "execute event",
+				120);
 		executeColumn.setLabelProvider(new ColumnLabelProvider());
 
 	}
@@ -143,8 +145,8 @@ public class DeclarationView extends ViewPart implements
 		eventViewer.getTable().setFocus();
 	}
 
-	public void setEventViewerInput(List<Declaration> events) {
-		eventViewer.setInput(events);
+	public void setEventViewerInput() {
+		eventViewer.setInput(getViewerInput());
 		TableItem[] items = eventViewer.getTable().getItems();
 		for (TableItem tableItem : items) {
 			final TableEditor editor = new TableEditor(eventViewer.getTable());
@@ -159,6 +161,14 @@ public class DeclarationView extends ViewPart implements
 		}
 	}
 
+	private void setVariableViewerInput() {
+		ISGraphSimulationSession activeSession = SGraphSimulationSessionRegistry.INSTANCE
+				.getActiveSession();
+		List<ScopeVariable> variables = activeSession.getExecutionScope()
+				.getVariables();
+		variableViewer.setInput(variables);
+	}
+
 	public void clearViewerInput() {
 		for (Control control : controls) {
 			control.dispose();
@@ -167,31 +177,9 @@ public class DeclarationView extends ViewPart implements
 		variableViewer.setInput(null);
 	}
 
-	private static final class ButtonListener implements SelectionListener {
 
-		private final String eventName;
-
-		public ButtonListener(String eventName) {
-			this.eventName = eventName;
-		}
-
-		public void widgetSelected(SelectionEvent e) {
-			ISGraphSimulationSession activeSession = SGraphSimulationSessionRegistry.INSTANCE
-					.getActiveSession();
-			if (activeSession != null) {
-				activeSession.raiseEvent(eventName);
-			}
-
-		}
-
-		public void widgetDefaultSelected(SelectionEvent e) {
-			// Nothing to do
-		}
-
-	}
-
-	public static List<Declaration> getViewerInput() {
-		List<Declaration> declarations = new ArrayList<Declaration>();
+	public static List<Event> getViewerInput() {
+		List<Event> events = new ArrayList<Event>();
 		Resource activeEditorResource = ActiveEditorResolver
 				.getActiveEditorResource();
 		if (activeEditorResource == null)
@@ -200,11 +188,11 @@ public class DeclarationView extends ViewPart implements
 				.getAllContents();
 		while (allContents.hasNext()) {
 			EObject next = allContents.next();
-			if (next instanceof Declaration) {
-				declarations.add((Declaration) next);
+			if (next instanceof Event) {
+				events.add((Event) next);
 			}
 		}
-		return declarations;
+		return events;
 
 	}
 
@@ -221,7 +209,7 @@ public class DeclarationView extends ViewPart implements
 	}
 
 	public void variableValueChanged(String variableName, Object value) {
-		//TODO Implement Variable view
+		updateDeclarationView();
 	}
 
 	private void clearDeclarationView() {
@@ -235,9 +223,16 @@ public class DeclarationView extends ViewPart implements
 	private void updateDeclarationView() {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
-				setEventViewerInput(getViewerInput());
+				setEventViewerInput();
+				setVariableViewerInput();
 			}
 		});
+	}
+
+	@Override
+	public void dispose() {
+		SGraphSimulationSessionRegistry.INSTANCE.getListeners().remove(this);
+		super.dispose();
 	}
 
 	public void stateEntered(Vertex vertex) {
@@ -255,5 +250,25 @@ public class DeclarationView extends ViewPart implements
 	public void eventRaised(String eventName) {
 		// Nothing to do
 	}
+	
+	private static final class ButtonListener implements SelectionListener {
 
+		private final String eventName;
+
+		public ButtonListener(String eventName) {
+			this.eventName = eventName;
+		}
+
+		public void widgetSelected(SelectionEvent e) {
+			ISGraphSimulationSession activeSession = SGraphSimulationSessionRegistry.INSTANCE
+					.getActiveSession();
+			if (activeSession != null) {
+				activeSession.raiseEvent(eventName);
+			}
+		}
+
+		public void widgetDefaultSelected(SelectionEvent e) {
+			// Nothing to do
+		}
+	}
 }
