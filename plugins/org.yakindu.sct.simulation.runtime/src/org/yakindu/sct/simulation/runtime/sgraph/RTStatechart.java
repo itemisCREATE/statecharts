@@ -18,11 +18,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.yakindu.sct.core.simulation.ISGraphExecutionFacade;
-import org.yakindu.sct.core.simulation.ISGraphExecutionListener;
-import org.yakindu.sct.core.simulation.ISGraphExecutionScope;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.simulation.core.ISGraphExecutionFacade;
+import org.yakindu.sct.simulation.core.ISGraphExecutionListener;
+import org.yakindu.sct.simulation.core.ISGraphExecutionScope;
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
 import org.yakindu.sct.simulation.runtime.stext.RTVariable;
 
