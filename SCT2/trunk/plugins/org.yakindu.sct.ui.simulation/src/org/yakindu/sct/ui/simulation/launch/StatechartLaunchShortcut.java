@@ -54,9 +54,18 @@ public class StatechartLaunchShortcut implements ILaunchShortcut,
 	}
 
 	protected void launch(IFile file, String mode) {
-		// TODO: Check for existing launch configuration
-		ILaunchConfiguration launchConfiguration = createNewLaunchConfiguration(file);
-		DebugUITools.launch(launchConfiguration, mode);
+		final ILaunchManager launchManager = DebugPlugin.getDefault()
+				.getLaunchManager();
+		final ILaunchConfigurationType configType = launchManager
+				.getLaunchConfigurationType(CONFIG_TYPE);
+		ILaunchConfiguration launchConfig = findLaunchConfiguration(configType,
+				file);
+		if (launchConfig != null) {
+			DebugUITools.launch(launchConfig, mode);
+		} else {
+			ILaunchConfiguration launchConfiguration = createNewLaunchConfiguration(file);
+			DebugUITools.launch(launchConfiguration, mode);
+		}
 	}
 
 	private ILaunchConfiguration createNewLaunchConfiguration(IFile file) {
@@ -69,13 +78,31 @@ public class StatechartLaunchShortcut implements ILaunchShortcut,
 					null, launchManager.generateLaunchConfigurationName(file
 							.getName()));
 
-			newConfig.setAttribute(FILE_NAME, file.getLocation().toString());
+			newConfig.setAttribute(FILE_NAME, file.getFullPath().toString());
 			return newConfig.doSave();
-			
+
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
 		throw new IllegalStateException();
+	}
+
+	protected ILaunchConfiguration findLaunchConfiguration(
+			ILaunchConfigurationType configType, IFile file) {
+		ILaunchConfiguration[] configs;
+		try {
+			configs = DebugPlugin.getDefault().getLaunchManager()
+					.getLaunchConfigurations(configType);
+			for (ILaunchConfiguration config : configs) {
+				String attribute = config.getAttribute(FILE_NAME, "");
+				if (attribute.equals(file.getFullPath().toString())) {
+					return config;
+				}
+			}
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
