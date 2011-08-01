@@ -140,7 +140,7 @@ public final class FactoryUtils {
 
 	private static void setStateViewLayoutConstraint(Node stateNode) {
 		Bounds bounds = NotationFactory.eINSTANCE.createBounds();
-		bounds.setX(10);
+		bounds.setX(40);
 		bounds.setY(80);
 		stateNode.setLayoutConstraint(bounds);
 	}
@@ -148,7 +148,7 @@ public final class FactoryUtils {
 	private static void setInitialStateViewLayoutConstraint(
 			Node initialStateView) {
 		Bounds bounds = NotationFactory.eINSTANCE.createBounds();
-		bounds.setX(20);
+		bounds.setX(70);
 		bounds.setY(20);
 		initialStateView.setLayoutConstraint(bounds);
 	}
