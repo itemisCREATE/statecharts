@@ -42,11 +42,8 @@ public class HighlightingExecutionListener extends
 			return highlightingSupport;
 		IEditorPart activeEditor = ActiveEditorResolver.getActiveEditor();
 		if (activeEditor != null) {
-			// TODO The active editor should be adaptable to IHighlightSupport
-			// via registered factory
-			IHighlightingSupportAdapterFactory factory = new IHighlightingSupportAdapterFactory();
-			IHighlightingSupport support = (IHighlightingSupport) factory
-					.getAdapter(activeEditor, IHighlightingSupport.class);
+			IHighlightingSupport support = (IHighlightingSupport) activeEditor
+					.getAdapter(IHighlightingSupport.class);
 			if (support != null)
 				return highlightingSupport = support;
 		}
