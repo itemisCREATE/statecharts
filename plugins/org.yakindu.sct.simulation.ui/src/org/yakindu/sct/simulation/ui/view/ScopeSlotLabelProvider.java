@@ -18,11 +18,11 @@ import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeSlot;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class ScopeVariableLabelProvider extends ColumnLabelProvider {
+public class ScopeSlotLabelProvider extends ColumnLabelProvider {
 
 	private final int index;
 
-	public ScopeVariableLabelProvider(int index) {
+	public ScopeSlotLabelProvider(int index) {
 		this.index = index;
 	}
 
@@ -34,10 +34,12 @@ public class ScopeVariableLabelProvider extends ColumnLabelProvider {
 			return ((ScopeSlot) element).getName();
 		case 1:
 			// TYPE
-			return ((ScopeSlot) element).getType().getSimpleName();
+			Class<?> type = ((ScopeSlot) element).getType();
+			return type != null ? type.getSimpleName() : null;
 		case 2:
 			// VALUE:
-			return ((ScopeSlot) element).getValue().toString();
+			Object value = ((ScopeSlot) element).getValue();
+			return value != null ? value.toString() : null;
 		default:
 			return "";
 		}

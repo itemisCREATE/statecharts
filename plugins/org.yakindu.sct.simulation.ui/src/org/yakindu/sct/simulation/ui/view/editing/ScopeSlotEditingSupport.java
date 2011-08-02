@@ -14,7 +14,6 @@ import org.eclipse.jface.viewers.ColumnViewer;
 import org.yakindu.sct.simulation.core.ISGraphExecutionScope;
 import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeSlot;
 import org.yakindu.sct.simulation.core.SGraphSimulationSessionRegistry;
-import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeVariable;
 
 
 /**
@@ -22,19 +21,19 @@ import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeVariable;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class ScopeVariableEditingSupport extends PublicEditingSupport {
+public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 
 	protected abstract Class<?> getSupportedType();
 
 	protected abstract Object convertValue(Object value);
 
-	public ScopeVariableEditingSupport(ColumnViewer viewer) {
+	public ScopeSlotEditingSupport(ColumnViewer viewer) {
 		super(viewer);
 	}
 
 	@Override
 	public boolean canEdit(Object element) {
-		if (element instanceof ScopeVariable) {
+		if (element instanceof ScopeSlot) {
 			return getSupportedType().equals(
 					((ScopeSlot) element).getType());
 		}
@@ -43,7 +42,7 @@ public abstract class ScopeVariableEditingSupport extends PublicEditingSupport {
 
 	@Override
 	public Object getValue(Object element) {
-		if (element instanceof ScopeVariable) {
+		if (element instanceof ScopeSlot) {
 			return String.valueOf(((ScopeSlot) element).getValue());
 		}
 		return null;
@@ -54,7 +53,7 @@ public abstract class ScopeVariableEditingSupport extends PublicEditingSupport {
 		value = convertValue(value);
 		if (value == null)
 			return;
-		if (element instanceof ScopeVariable) {
+		if (element instanceof ScopeSlot) {
 			ISGraphExecutionScope scope = SGraphSimulationSessionRegistry.INSTANCE
 					.getActiveSession().getExecutionScope();
 			scope.setSlotValue((ScopeSlot) element, value);

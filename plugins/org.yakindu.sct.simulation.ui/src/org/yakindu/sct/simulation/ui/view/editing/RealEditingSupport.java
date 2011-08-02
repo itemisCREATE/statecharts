@@ -22,7 +22,7 @@ import org.eclipse.swt.widgets.Composite;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class RealEditingSupport extends ScopeVariableEditingSupport {
+public class RealEditingSupport extends ScopeSlotEditingSupport {
 
 	public RealEditingSupport(ColumnViewer viewer) {
 		super(viewer);

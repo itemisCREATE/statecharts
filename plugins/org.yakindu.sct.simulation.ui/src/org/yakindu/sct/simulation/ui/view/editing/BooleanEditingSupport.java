@@ -24,7 +24,7 @@ import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeVariable;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class BooleanEditingSupport extends ScopeVariableEditingSupport {
+public class BooleanEditingSupport extends ScopeSlotEditingSupport {
 
 	public BooleanEditingSupport(ColumnViewer viewer) {
 		super(viewer);

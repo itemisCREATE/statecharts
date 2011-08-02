@@ -22,7 +22,7 @@ import org.eclipse.swt.widgets.Composite;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class IntegerEditingSupport extends ScopeVariableEditingSupport {
+public class IntegerEditingSupport extends ScopeSlotEditingSupport {
 
 	public IntegerEditingSupport(ColumnViewer viewer) {
 		super(viewer);
