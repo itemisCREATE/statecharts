@@ -49,6 +49,7 @@ import org.yakindu.sct.simulation.runtime.sgraph.RTSimpleState;
 import org.yakindu.sct.simulation.runtime.sgraph.RTStatechart;
 import org.yakindu.sct.simulation.runtime.sgraph.RTTransition;
 import org.yakindu.sct.simulation.runtime.sgraph.builder.SGraphBuilder;
+import org.yakindu.sct.simulation.runtime.stext.RTTrigger;
 
 /**
  * 
@@ -391,7 +392,12 @@ public class SGraphBuilderTest {
 		assertEquals(42, tTrans.getPriority());
 		assertEquals("t@1", tTrans.getId());
 		
-		assertNotNull(tTrans.getGuard());
+		assertNotNull(tTrans.getTrigger());
+		assertTrue(tTrans.getTrigger() instanceof RTTrigger);
+		
+		RTTrigger rtTrigger = (RTTrigger) tTrans.getTrigger();
+		
+		assertNotNull(rtTrigger.getGuard());
 		fail("complete me");
 		//FIXME
 //		// Unary expression because new grammar always put a VariableRef inside a positive unary expression
@@ -401,9 +407,9 @@ public class SGraphBuilderTest {
 //		assertNotNull(tTrans.getAction());
 //		assertTrue(((ActionStatement)tTrans.getAction()).getStatement() instanceof StatementSequence);
 
-		assertEquals(2, tTrans.getSignalTriggers().size());
-		assertTrue(tTrans.getSignalTriggers().contains(tSC.getSignalEvent("e1")));
-		assertTrue(tTrans.getSignalTriggers().contains(tSC.getSignalEvent("e2")));
+		assertEquals(2, rtTrigger.getSignalTriggers().size());
+		assertTrue(rtTrigger.getSignalTriggers().contains(tSC.getSignalEvent("e1")));
+		assertTrue(rtTrigger.getSignalTriggers().contains(tSC.getSignalEvent("e2")));
 
 		assertNotNull(tTrans.getTimeTrigger());
 

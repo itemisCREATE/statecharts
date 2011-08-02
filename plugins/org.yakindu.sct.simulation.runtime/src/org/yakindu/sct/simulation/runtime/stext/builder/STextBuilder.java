@@ -34,6 +34,7 @@ import org.yakindu.sct.simulation.runtime.stext.ProcedureCall;
 import org.yakindu.sct.simulation.runtime.stext.RTExpression;
 import org.yakindu.sct.simulation.runtime.stext.RTStatement;
 import org.yakindu.sct.simulation.runtime.stext.RTTrigger;
+import org.yakindu.sct.simulation.runtime.stext.RTTriggerEvent;
 import org.yakindu.sct.simulation.runtime.stext.RTVariable;
 import org.yakindu.sct.simulation.runtime.stext.Raise;
 import org.yakindu.sct.simulation.runtime.stext.StatementSequence;
@@ -85,13 +86,13 @@ public class STextBuilder extends Function {
 	}
 
 	@FunctionMethod("build")
-	public RTTrigger buildSignalEvent(EObject obj) {
-		return new RTTrigger.SignalEvent(getString(obj, "identifier"));
+	public RTTriggerEvent buildSignalEvent(EObject obj) {
+		return new RTTriggerEvent.SignalEvent(getString(obj, "identifier"));
 	}
 
 	@FunctionMethod("build")
-	public RTTrigger buildTimeEvent(EObject obj) {
-		return new RTTrigger.TimeEvent(buildRefExpression(obj, "duration"));
+	public RTTriggerEvent buildTimeEvent(EObject obj) {
+		return new RTTriggerEvent.TimeEvent(buildRefExpression(obj, "duration"));
 	}
 
 	@FunctionMethod("build")

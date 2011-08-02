@@ -2,7 +2,6 @@ package org.yakindu.sct.simulation.runtime.sgraph;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,9 +16,12 @@ public class RTTransition {
 	private String id;
 	private int priority;
 
-	private RTGuard guard;
-	private Set<RTSignalEvent> signalTriggers = new HashSet<RTSignalEvent>();
-	private RTTimeEvent timeTrigger;
+	private ITrigger trigger;
+	
+	
+//	private RTGuard guard;
+//	private Set<RTSignalEvent> signalTriggers = new HashSet<RTSignalEvent>();
+//	private RTTimeEvent timeTrigger;
 	private RTAction action;
 
 	private RTNode sourceNode;
@@ -29,17 +31,12 @@ public class RTTransition {
 	private List<RTCompoundState> enclosingStatesToEnter;
 	private List<RTCompoundState> enclosingStatesToLeave;
 
-	public RTTransition(String id, int priority, RTTimeEvent timeTrigger,
-			Set<RTSignalEvent> signalTriggers, RTGuard guard, RTAction action,
+	public RTTransition(String id, int priority, ITrigger trigger, RTAction action,
 			RTNode sourceNode, RTNode targetNode) {
 		this.id = id;
 		this.priority = priority;
 
-		this.timeTrigger = timeTrigger;
-		if (signalTriggers != null) {
-			this.signalTriggers.addAll(signalTriggers);
-		}
-		this.guard = guard;
+		this.trigger = trigger;
 		this.action = action;
 
 		this.sourceNode = sourceNode;
@@ -59,8 +56,10 @@ public class RTTransition {
 
 	protected boolean isTriggeredBy(Set<RTEvent> events) {
 
-		return !Collections.disjoint(this.signalTriggers, events)
-				|| (timeTrigger != null && events.contains(timeTrigger));
+		// TODO : implement Null-Trigger
+		return (trigger != null) ? trigger.isEnabled(events) : true ;
+//		return !Collections.disjoint(this.signalTriggers, events)
+//				|| (timeTrigger != null && events.contains(timeTrigger));
 
 	}
 
@@ -72,20 +71,20 @@ public class RTTransition {
 		return priority;
 	}
 
-	protected boolean isEnabled() {
-		if (guard == null) {
-			return true;
-		} else {
-			return guard.evaluate();
-		}
-	}
+//	protected boolean isEnabled() {
+//		if (guard == null) {
+//			return true;
+//		} else {
+//			return guard.evaluate();
+//		}
+//	}
 
 	public RTTimeEvent getTimeTrigger() {
-		return timeTrigger;
+		return trigger.getTimeTrigger();
 	}
 
 	protected boolean isTimeTriggered() {
-		return timeTrigger != null;
+		return (trigger != null) ? trigger.getTimeTrigger() != null : false;
 	}
 
 	protected void take() {
@@ -177,16 +176,20 @@ public class RTTransition {
 		return targetNode;
 	}
 
-	public RTGuard getGuard() {
-		return guard;
-	}
+//	public RTGuard getGuard() {
+//		return guard;
+//	}
 
 	public RTAction getAction() {
 		return action;
 	}
 
-	public Set<RTSignalEvent> getSignalTriggers() {
-		return signalTriggers;
+	public ITrigger getTrigger() {
+		return trigger;
 	}
+
+//	public Set<RTSignalEvent> getSignalTriggers() {
+//		return signalTriggers;
+//	}
 
 }
