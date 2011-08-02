@@ -22,8 +22,6 @@ public interface ISGraphExecutionFacade {
 
 	public void runCycle();
 
-	public void raise(String eventName);
-
 	public void addExecutionListener(ISGraphExecutionListener listener);
 
 	public void removeExecutionListener(ISGraphExecutionListener listener);
