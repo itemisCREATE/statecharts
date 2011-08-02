@@ -9,29 +9,27 @@ import java.util.List;
  */
 public interface ISGraphExecutionScope {
 
-	public ScopeVariable getVariable(String varName);
+	public ScopeSlot getVariable(String varName);
 
 	public List<ScopeVariable> getVariables();
+	
+	public List<ScopeEvent> getEvents();
 
-	public void setVariableValue(ScopeVariable variable, Object object);
-
-	public void createVariable(String varName, Object value, Class<?> type);
+	public void setSlotValue(ScopeSlot variable, Object object);
 
 	public void call(String procedureId);
 
 	public void raise(String signal);
 
-	/**
-	 * Read only access to ScopeVariables. Value can only be changed via
-	 * {@link ISGraphExecutionScope}#setVariableValue
-	 * 
-	 */
-	public class ScopeVariable {
-		private String name;
-		private Class<?> type;
-		private Object value;
+	
+	public static abstract class ScopeSlot {
 
-		public ScopeVariable(String name, Class<?> type, Object value) {
+		protected String name;
+		protected Class<?> type;
+		protected Object value;
+
+		
+		public ScopeSlot(String name, Class<?> type, Object value) {
 			super();
 			this.name = name;
 			this.type = type;
@@ -49,5 +47,32 @@ public interface ISGraphExecutionScope {
 		public Object getValue() {
 			return value;
 		}
+		
+	}
+	
+	/**
+	 * Read only access to ScopeVariables. Value can only be changed via
+	 * {@link ISGraphExecutionScope}#setVariableValue
+	 * 
+	 */
+	public class ScopeVariable extends ScopeSlot {
+
+		public ScopeVariable(String name, Class<?> type, Object value) {
+			super(name, type, value);
+		}
+
+	}
+
+	/**
+	 * Read only access to ScopeEvents. Value can only be changed via
+	 * {@link ISGraphExecutionScope}#setVariableValue
+	 * 
+	 */
+	public class ScopeEvent extends ScopeSlot {
+
+		public ScopeEvent(String name, Class<?> type, Object value) {
+			super(name, type, value);
+		}
+
 	}
 }
