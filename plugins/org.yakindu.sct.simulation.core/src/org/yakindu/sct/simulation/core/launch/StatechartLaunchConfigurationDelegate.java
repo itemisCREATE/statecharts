@@ -109,7 +109,7 @@ public class StatechartLaunchConfigurationDelegate implements
 	}
 
 	protected Resource loadResource(String filename) {
-		URI uri = URI.createFileURI(filename);
+		URI uri = URI.createPlatformResourceURI(filename, true);
 		Factory factory = ResourceFactoryRegistryImpl.INSTANCE.getFactory(uri);
 		Resource resource = factory.createResource(uri);
 		ResourceSet resourceSet = new ResourceSetImpl();
