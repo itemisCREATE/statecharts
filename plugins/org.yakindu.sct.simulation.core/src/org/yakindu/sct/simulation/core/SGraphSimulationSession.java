@@ -19,6 +19,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeEvent;
 import org.yakindu.sct.simulation.core.ISimulationSessionListener.SimulationState;
 
 /**
@@ -98,10 +99,10 @@ public class SGraphSimulationSession implements Runnable,
 		});
 	}
 
-	public void raiseEvent(final String eventName) {
+	public void raiseEvent(final ScopeEvent event) {
 		taskQueue.add(new Runnable() {
 			public void run() {
-				facade.raise(eventName);
+				facade.getExecutionScope().raise(event);
 			}
 		});
 	}

@@ -12,23 +12,21 @@ public interface ISGraphExecutionScope {
 	public ScopeSlot getVariable(String varName);
 
 	public List<ScopeVariable> getVariables();
-	
+
 	public List<ScopeEvent> getEvents();
 
 	public void setSlotValue(ScopeSlot variable, Object object);
 
 	public void call(String procedureId);
 
-	public void raise(String signal);
+	public void raise(ScopeEvent event);
 
-	
 	public static abstract class ScopeSlot {
 
 		protected String name;
 		protected Class<?> type;
 		protected Object value;
 
-		
 		public ScopeSlot(String name, Class<?> type, Object value) {
 			super();
 			this.name = name;
@@ -47,9 +45,9 @@ public interface ISGraphExecutionScope {
 		public Object getValue() {
 			return value;
 		}
-		
+
 	}
-	
+
 	/**
 	 * Read only access to ScopeVariables. Value can only be changed via
 	 * {@link ISGraphExecutionScope}#setVariableValue
@@ -69,6 +67,10 @@ public interface ISGraphExecutionScope {
 	 * 
 	 */
 	public class ScopeEvent extends ScopeSlot {
+
+		public ScopeEvent(String name) {
+			this(name, null, null);
+		}
 
 		public ScopeEvent(String name, Class<?> type, Object value) {
 			super(name, type, value);
