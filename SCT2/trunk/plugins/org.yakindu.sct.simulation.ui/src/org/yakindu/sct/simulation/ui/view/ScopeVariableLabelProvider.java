@@ -11,7 +11,7 @@
 package org.yakindu.sct.simulation.ui.view;
 
 import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeVariable;
+import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeSlot;
 
 /**
  * 
@@ -31,13 +31,13 @@ public class ScopeVariableLabelProvider extends ColumnLabelProvider {
 		switch (index) {
 		case 0:
 			// NAME
-			return ((ScopeVariable) element).getName();
+			return ((ScopeSlot) element).getName();
 		case 1:
 			// TYPE
-			return ((ScopeVariable) element).getType().getSimpleName();
+			return ((ScopeSlot) element).getType().getSimpleName();
 		case 2:
 			// VALUE:
-			return ((ScopeVariable) element).getValue().toString();
+			return ((ScopeSlot) element).getValue().toString();
 		default:
 			return "";
 		}
