@@ -28,6 +28,7 @@ import org.yakindu.sct.simulation.runtime.sgraph.RTStatechart;
 import org.yakindu.sct.simulation.runtime.sgraph.RTTransition;
 import org.yakindu.sct.simulation.runtime.stext.Assign;
 import org.yakindu.sct.simulation.runtime.stext.Constant;
+import org.yakindu.sct.simulation.runtime.stext.RTTrigger;
 import org.yakindu.sct.simulation.runtime.stext.RTVariable;
 import org.yakindu.sct.simulation.runtime.stext.VariableRef;
 
@@ -52,8 +53,7 @@ public class StatechartTest {
 		rootRegion = new RTRegion("r", 1, statechart);
 		initial = new RTPseudostate("i", rootRegion, PseudostateKind.INITIAL);
 		state1 = new RTSimpleState("s1", "a", rootRegion, null, null, null);
-		trans = new RTTransition("t_i_s1", 1, null, null, null, null, initial,
-				state1);
+		trans = new RTTransition("t_i_s1", 1, null, null, initial, state1);
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class StatechartTest {
 
 		RTSimpleState state2 = new RTSimpleState("s2", "b", rootRegion, null,
 				null, null);
-		new RTTransition("t_s1_s2", 1, null, null, null, null, state1, state2);
+		new RTTransition("t_s1_s2", 1, null, null, state1, state2);
 
 		assertNull(rootRegion.getCurrentState());
 
@@ -103,11 +103,13 @@ public class StatechartTest {
 
 		RTSimpleState state2 = new RTSimpleState("s2", "b", rootRegion, null,
 				null, null);
-		new RTTransition("t_s1_s2", 1, null, new HashSet<RTSignalEvent>() {
+		RTTrigger trigger = new RTTrigger(null, new HashSet<RTSignalEvent>() {
 			{
 				add(event);
 			}
-		}, null, null, state1, state2);
+		}, null);
+		
+		new RTTransition("t_s1_s2", 1, trigger, null, state1, state2);
 
 		assertNull(rootRegion.getCurrentState());
 
@@ -135,11 +137,14 @@ public class StatechartTest {
 
 		RTSimpleState state2 = new RTSimpleState("s2", "b", rootRegion, null,
 				null, null);
-		new RTTransition("t_s1_s2", 1, null, new HashSet<RTSignalEvent>() {
+		
+		RTTrigger trigger = new RTTrigger(null, new HashSet<RTSignalEvent>() {
 			{
 				add(event);
 			}
-		}, new GuardExpression(new VariableRef("v"), statechart), null, state1,
+		},  new GuardExpression(new VariableRef("v"), statechart));
+
+		new RTTransition("t_s1_s2", 1, trigger, null, state1,
 				state2);
 
 		assertNull(rootRegion.getCurrentState());
@@ -170,11 +175,15 @@ public class StatechartTest {
 
 		RTSimpleState state2 = new RTSimpleState("s2", "b", rootRegion, null,
 				null, null);
-		new RTTransition("t_s1_s2", 1, null, new HashSet<RTSignalEvent>() {
+		
+		
+		RTTrigger trigger = new RTTrigger(null, new HashSet<RTSignalEvent>() {
 			{
 				add(event);
 			}
-		}, null, new RTActionStatement(new Assign(new VariableRef("v"),
+		},  null);
+
+		new RTTransition("t_s1_s2", 1, trigger, new RTActionStatement(new Assign(new VariableRef("v"),
 				new Constant(42)), statechart), state1, state2);
 
 		assertNull(rootRegion.getCurrentState());

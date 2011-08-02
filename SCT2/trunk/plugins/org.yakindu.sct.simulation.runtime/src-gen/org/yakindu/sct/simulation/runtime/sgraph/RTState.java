@@ -77,7 +77,7 @@ public abstract class RTState extends RTNode {
 			Set<RTEvent> events) {
 
 		for (RTTransition transition : outgoingTransitions /* sorted by priority */) {
-			if (transition.isTriggeredBy(events) && transition.isEnabled()) {
+			if (transition.isTriggeredBy(events)) {
 				return transition;
 			}
 		}

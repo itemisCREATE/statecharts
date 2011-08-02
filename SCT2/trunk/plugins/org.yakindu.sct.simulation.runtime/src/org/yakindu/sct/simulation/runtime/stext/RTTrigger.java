@@ -10,49 +10,68 @@
  */
 package org.yakindu.sct.simulation.runtime.stext;
 
-import org.yakindu.sct.simulation.runtime.ExecutionScope;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
-public class RTTrigger {
+import org.yakindu.sct.simulation.runtime.sgraph.ITrigger;
+import org.yakindu.sct.simulation.runtime.sgraph.RTEvent;
+import org.yakindu.sct.simulation.runtime.sgraph.RTGuard;
+import org.yakindu.sct.simulation.runtime.sgraph.RTSignalEvent;
+import org.yakindu.sct.simulation.runtime.sgraph.RTTimeEvent;
+
+public class RTTrigger  implements ITrigger{
 	
-	public static class SignalEvent extends RTTrigger {
-		protected String signal;
+	private RTGuard guard;
+	private Set<RTSignalEvent> signalTriggers = new HashSet<RTSignalEvent>();
+	private RTTimeEvent timeTrigger;
 
-		public SignalEvent(String signal) {
-			super();
-			this.signal = signal;
+
+	public RTTrigger(RTTimeEvent timeTrigger, Set<RTSignalEvent> signalTriggers, RTGuard guard) {
+
+		this.timeTrigger = timeTrigger;
+		if (signalTriggers != null) {
+			this.signalTriggers.addAll(signalTriggers);
 		}
+		this.guard = guard;
+	}
 
-		public String getSignal() {
-			return signal;
-		}
+	
+	public boolean isEnabled(Set<RTEvent> events) {
+		
+		// TODO : rebuild according to execution semantics ... (e.g. no trigger)
+		
+		if ( !Collections.disjoint(this.signalTriggers, events)
+				|| (timeTrigger != null && events.contains(timeTrigger))) {
 
-		public void setSignal(String signal) {
-			this.signal = signal;
+			if (guard == null) {
+				return true;
+			} else {
+				return guard.evaluate();
+			}
 		}
 		
+		return false;
 	}
 	
-	public static class TimeEvent extends RTTrigger implements RTExpression {
-		protected RTExpression durationExp;
-
-		
-		public TimeEvent(RTExpression timeValueExp) {
-			super();
-			this.durationExp = timeValueExp;
-		}
-
-		public RTExpression getDurationExp() {
-			return durationExp;
-		}
-
-		public void setDurationExp(RTExpression timeValueExp) {
-			this.durationExp = timeValueExp;
-		}
-
-		public Object execute(ExecutionScope scope) {
-			return durationExp.execute(scope);
-		}
-		
-		
+	
+	public RTGuard getGuard() {
+		return guard;
 	}
+
+
+	public RTTimeEvent getTimeTrigger() {
+		return timeTrigger;
+	}
+
+	protected boolean isTimeTriggered() {
+		return timeTrigger != null;
+	}
+	
+	public Set<RTSignalEvent> getSignalTriggers() {
+		return signalTriggers;
+	}
+
+
+	
 }

@@ -55,6 +55,7 @@ import org.yakindu.sct.simulation.runtime.sgraph.RTTransition;
 import org.yakindu.sct.simulation.runtime.stext.Function;
 import org.yakindu.sct.simulation.runtime.stext.FunctionMethod;
 import org.yakindu.sct.simulation.runtime.stext.RTStatement;
+import org.yakindu.sct.simulation.runtime.stext.RTTrigger;
 import org.yakindu.sct.simulation.runtime.stext.RTVariable;
 import org.yakindu.sct.simulation.runtime.stext.builder.STextBuilder;
 
@@ -216,7 +217,8 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 		RTAction action = null;
 
 		Trigger trigger = transition.getTrigger();
-		
+		RTTrigger rtTrigger = null;
+				
 		// // TODO: Das muss hier raus:
 		if (trigger instanceof ReactionTrigger) {
 			EList<EventSpec> triggers = ((ReactionTrigger) trigger)
@@ -244,7 +246,10 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 				}
 				// TODO: TimeEvent
 			}
+			
+			rtTrigger = new RTTrigger(timeTrigger, signalTriggers, guard);
 		}
+		
 		//Build the transition action
 		Effect effect = transition.getEffect();
 		RTStatement statement = (RTStatement) textBuilder.build(effect);
@@ -253,7 +258,7 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 		}
 
 		RTTransition tTrans = new RTTransition("t@", transition.getPriority(),
-				timeTrigger, signalTriggers, guard, action, fromNode, toNode);
+				rtTrigger, action, fromNode, toNode);
 		tParent.defineAlias(transition, tTrans);
 		return tTrans;
 	}

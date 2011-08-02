@@ -1,7 +1,9 @@
 package org.yakindu.sct.simulation.runtime.sgraph;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Representation of a node (which is the abstract super concept of State and
@@ -41,8 +43,10 @@ public abstract class RTNode {
 
 	protected RTTransition getEnabledOutgoingTransitionOfHighestPriority() {
 
+		Set<RTEvent> s = Collections.emptySet();
 		for (RTTransition transition : outgoingTransitions) {
-			if (transition.isEnabled()) {
+			
+			if (transition.isTriggeredBy(s)) {
 				return transition;
 			}
 		}

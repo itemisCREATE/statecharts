@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.yakindu.sct.simulation.core.ISGraphExecutionScope;
+import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeSlot;
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
 import org.yakindu.sct.simulation.runtime.stext.RTVariable;
 
@@ -21,7 +22,7 @@ public class ExecutionScopeAdapter implements ISGraphExecutionScope {
 		this.scope = scope;
 	}
 
-	public ScopeVariable getVariable(String varName) {
+	public ScopeSlot getVariable(String varName) {
 		return toScope(scope.getVariable(varName));
 	}
 
@@ -39,7 +40,7 @@ public class ExecutionScopeAdapter implements ISGraphExecutionScope {
 				rtVariable.getValue());
 	}
 
-	public void setVariableValue(ScopeVariable variable, Object object) {
+	public void setSlotValue(ScopeSlot variable, Object object) {
 		RTVariable rtVar = scope.getVariable(variable.getName());
 		scope.setVariableValue(rtVar, object);
 
@@ -60,4 +61,11 @@ public class ExecutionScopeAdapter implements ISGraphExecutionScope {
 		// TODO
 	}
 
+	public List<ScopeEvent> getEvents() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	
 }
