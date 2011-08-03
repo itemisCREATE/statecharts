@@ -11,6 +11,11 @@ import org.eclipse.gmf.runtime.diagram.ui.commands.CreateCommand;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor;
 import org.eclipse.gmf.runtime.notation.View;
 
+
+/**
+ * @see http://wiki.eclipse.org/GMF/Recipes
+ * 
+ */
 public class CompartmentChildCreateCommand extends CreateCommand {
 	int index;
 

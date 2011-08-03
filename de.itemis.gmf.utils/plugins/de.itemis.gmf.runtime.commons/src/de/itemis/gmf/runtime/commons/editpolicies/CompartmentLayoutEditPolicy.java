@@ -38,9 +38,12 @@ public class CompartmentLayoutEditPolicy extends
 
 	private EStructuralFeature feature = null;
 
+	public CompartmentLayoutEditPolicy(EStructuralFeature feature) {
+		this.feature = feature;
+	}
+	
 	@Override
 	protected Command createAddCommand(EditPart child, EditPart after) {
-		// int index = getHost().getChildren().indexOf(after);
 		TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost())
 				.getEditingDomain();
 		AddCommand command = new AddCommand(editingDomain, new EObjectAdapter(
@@ -119,6 +122,16 @@ public class CompartmentLayoutEditPolicy extends
 
 		return null;
 	}
+	
+	@Override
+	protected boolean isHorizontal() {
+		IFigure figure = ((IGraphicalEditPart) getHost()).getContentPane();
+		if (figure.getLayoutManager() instanceof OrderedLayout) {
+			return ((OrderedLayout) figure.getLayoutManager()).isHorizontal();
+		}
+		return true;
+	}
+	
 
 	@Override
 	protected Command getDeleteDependantCommand(Request request) {
@@ -129,22 +142,5 @@ public class CompartmentLayoutEditPolicy extends
 	protected Command getOrphanChildrenCommand(Request request) {
 		return null;
 	}
-
-	/**
-	 * @param feature
-	 *            has to be an EList
-	 */
-	public CompartmentLayoutEditPolicy(EStructuralFeature feature) {
-		super();
-		this.feature = feature;
-	}
-
-	@Override
-	protected boolean isHorizontal() {
-		IFigure figure = ((IGraphicalEditPart) getHost()).getContentPane();
-		if (figure.getLayoutManager() instanceof OrderedLayout) {
-			return ((OrderedLayout) figure.getLayoutManager()).isHorizontal();
-		}
-		return true;
-	}
+	
 }
