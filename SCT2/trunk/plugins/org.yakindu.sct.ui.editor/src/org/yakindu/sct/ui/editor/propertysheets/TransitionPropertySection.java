@@ -12,14 +12,9 @@ package org.yakindu.sct.ui.editor.propertysheets;
 
 import java.util.List;
 
-import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.editparts.TransitionEditPart;
-import org.yakindu.sct.ui.editor.extensions.Extensions;
-import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
-
-import com.google.inject.Injector;
 
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.XtextPropertyDescriptor;
@@ -38,18 +33,10 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 			List<IFormPropertyDescriptor> descriptors) {
 		XtextPropertyDescriptor expressionsDescriptor = new XtextPropertyDescriptor(
 				SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
-				"Expression: ", getInjector(), getActiveEditorResource(), IYakinduSctHelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION);
+				"Expression: ", getInjector(SGraphPackage.Literals.TRANSITION),
+				getActiveEditorResource(),
+				IYakinduSctHelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION);
 		descriptors.add(expressionsDescriptor);
 
 	}
-
-	protected Injector getInjector() {
-		Extensions<IExpressionsProvider> extensions = new Extensions<IExpressionsProvider>(
-				IExpressionsProvider.EXPRESSIONS_EXTENSION);
-		IExpressionsProvider registeredProvider = extensions
-				.getRegisteredProvider(SGraphFactory.eINSTANCE
-						.createTransition());
-		return registeredProvider.getInjector();
-	}
-
 }

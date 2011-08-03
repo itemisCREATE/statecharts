@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2010 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -16,10 +26,11 @@ import de.itemis.xtext.utils.gmf.directedit.XtextDirectEditManager;
 
 /**
  * 
- * @author muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLabelEditPart {
+public abstract class PlugableExternalXtextLabelEditPart extends
+		ExternalXtextLabelEditPart {
 
 	private Injector injector;
 	private int editorStyle;
@@ -33,7 +44,9 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 		Extensions<IExpressionsProvider> extensions = new Extensions<IExpressionsProvider>(
 				IExpressionsProvider.EXPRESSIONS_EXTENSION);
 		IExpressionsProvider registeredProvider = extensions
-				.getRegisteredProvider(resolveSemanticElement());
+				.getRegisteredProvider(resolveSemanticElement().eClass(),
+						resolveSemanticElement().eResource().getURI()
+								.lastSegment());
 		injector = registeredProvider.getInjector();
 		editorStyle = registeredProvider.getStyle();
 	}
@@ -68,7 +81,7 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 		String exp = resolveSemanticElement().getExpression();
 		return exp != null ? exp : "";
 	}
-	
+
 	protected int getEditorStyles() {
 		return editorStyle;
 	}
@@ -76,6 +89,5 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 	public Injector getInjector() {
 		return injector;
 	}
-
 
 }

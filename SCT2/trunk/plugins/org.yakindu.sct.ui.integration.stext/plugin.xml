@@ -13,5 +13,4 @@
             class="org.yakindu.sct.ui.integration.stext.StatechartExpressionProvider">
       </ExpressionProvider>
    </extension>
-
 </plugin>

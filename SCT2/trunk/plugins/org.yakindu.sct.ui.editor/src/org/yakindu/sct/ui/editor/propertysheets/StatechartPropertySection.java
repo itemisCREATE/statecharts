@@ -12,14 +12,9 @@ package org.yakindu.sct.ui.editor.propertysheets;
 
 import java.util.List;
 
-import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart;
-import org.yakindu.sct.ui.editor.extensions.Extensions;
-import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
-
-import com.google.inject.Injector;
 
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.TextPropertyDescriptor;
@@ -38,23 +33,16 @@ public class StatechartPropertySection extends AbstractEditorPropertySection {
 	@Override
 	protected void createPropertyDescriptors(
 			List<IFormPropertyDescriptor> descriptors) {
-		//Text Property Descriptor for the name
+		// Text Property Descriptor for the name
 		TextPropertyDescriptor nameDescriptor = new TextPropertyDescriptor(
 				SGraphPackage.Literals.NAMED_ELEMENT__NAME, "Name: ");
 		descriptors.add(nameDescriptor);
-		//Text property descriptor for the expression
+		// Text property descriptor for the expression
 		XtextPropertyDescriptor expressionsDescriptor = new XtextPropertyDescriptor(
 				SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
-				"Expression: ", getInjector(), IYakinduSctHelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION);
+				"Expression: ", getInjector(SGraphPackage.Literals.STATECHART),
+				IYakinduSctHelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION);
 		descriptors.add(expressionsDescriptor);
 	}
-
-	protected Injector getInjector() {
-		Extensions<IExpressionsProvider> extensions = new Extensions<IExpressionsProvider>(
-				IExpressionsProvider.EXPRESSIONS_EXTENSION);
-		IExpressionsProvider registeredProvider = extensions
-				.getRegisteredProvider(SGraphFactory.eINSTANCE
-						.createStatechart());
-		return registeredProvider.getInjector();
-	}
+	
 }
