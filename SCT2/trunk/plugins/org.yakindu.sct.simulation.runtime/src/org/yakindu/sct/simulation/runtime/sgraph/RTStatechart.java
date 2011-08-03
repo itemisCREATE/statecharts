@@ -226,4 +226,8 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 	public ISGraphExecutionScope getExecutionScope() {
 		return new ExecutionScopeAdapter(this);
 	}
+
+	public List<RTSignalEvent> getEvents() {
+		return Collections.unmodifiableList(events);
+	}
 }
