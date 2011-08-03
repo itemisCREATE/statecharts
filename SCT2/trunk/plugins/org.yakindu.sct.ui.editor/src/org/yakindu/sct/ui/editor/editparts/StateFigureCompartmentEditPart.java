@@ -26,7 +26,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.policies.CompartmentCreationEditPolicy;
 import org.yakindu.sct.ui.editor.policies.StateCompartmentCanonicalEditPolicy;
 
-import de.itemis.gmf.runtime.commons.editpolicies.CompartmentEditPolicy;
+import de.itemis.gmf.runtime.commons.editpolicies.CompartmentLayoutEditPolicy;
 
 /**
  * 
@@ -64,7 +64,7 @@ public class StateFigureCompartmentEditPart extends
 				new StateCompartmentCanonicalEditPolicy());
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE,
 				new DragDropEditPolicy());
-		installEditPolicy(EditPolicy.LAYOUT_ROLE, new CompartmentEditPolicy(
+		installEditPolicy(EditPolicy.LAYOUT_ROLE, new CompartmentLayoutEditPolicy(
 				SGraphPackage.Literals.STATE__SUB_REGIONS));
 
 	}
