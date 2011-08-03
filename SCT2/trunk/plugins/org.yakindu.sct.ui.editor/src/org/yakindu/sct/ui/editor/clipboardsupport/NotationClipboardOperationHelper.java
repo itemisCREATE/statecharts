@@ -288,8 +288,7 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 	// PATCH START
 	static EObject getSemanticPasteTarget(View view, View container) {
 		EObject semanticObjectToCopy = view.getElement();
-		View parent = (View) view.eContainer();
-		EObject semanticTarget = parent.getElement();
+		EObject semanticTarget = container.getElement();
 		EList<EReference> eAllReferences = semanticTarget.eClass()
 				.getEAllReferences();
 		for (EReference eReference : eAllReferences) {
