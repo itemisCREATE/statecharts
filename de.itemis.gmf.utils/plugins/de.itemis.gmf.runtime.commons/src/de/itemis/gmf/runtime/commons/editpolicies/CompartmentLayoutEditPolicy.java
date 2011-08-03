@@ -1,5 +1,9 @@
 package de.itemis.gmf.runtime.commons.editpolicies;
 
+import java.util.Iterator;
+
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.OrderedLayout;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -10,13 +14,19 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gmf.runtime.diagram.core.commands.AddCommand;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
+import org.eclipse.gmf.runtime.diagram.ui.commands.CreateCommand;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
+import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramUIMessages;
+import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
+import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
+import org.eclipse.gmf.runtime.emf.commands.core.command.CompositeTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.commands.core.commands.RepositionEObjectCommand;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.View;
 
+import de.itemis.gmf.runtime.commons.commands.CompartmentChildCreateCommand;
 import de.itemis.gmf.runtime.commons.commands.CompartmentRepositionEObjectCommand;
 
 /**
@@ -30,7 +40,7 @@ public class CompartmentLayoutEditPolicy extends
 
 	@Override
 	protected Command createAddCommand(EditPart child, EditPart after) {
-	//	int index = getHost().getChildren().indexOf(after);
+		// int index = getHost().getChildren().indexOf(after);
 		TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost())
 				.getEditingDomain();
 		AddCommand command = new AddCommand(editingDomain, new EObjectAdapter(
@@ -83,6 +93,30 @@ public class CompartmentLayoutEditPolicy extends
 
 	@Override
 	protected Command getCreateCommand(CreateRequest request) {
+		if (request instanceof CreateViewAndElementRequest) {
+
+			TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost())
+					.getEditingDomain();
+			CompositeTransactionalCommand cc = new CompositeTransactionalCommand(
+					editingDomain, DiagramUIMessages.AddCommand_Label);
+
+			Iterator<?> descriptors = ((CreateViewRequest) request)
+					.getViewDescriptors().iterator();
+
+			while (descriptors.hasNext()) {
+				CreateViewRequest.ViewDescriptor descriptor = (CreateViewRequest.ViewDescriptor) descriptors
+						.next();
+
+				CreateCommand createCommand = new CompartmentChildCreateCommand(
+						editingDomain, descriptor,
+						(View) (getHost().getModel()),
+						getFeedbackIndexFor(request));
+
+				cc.compose(createCommand);
+			}
+			return new ICommandProxy(cc.reduce());
+		}
+
 		return null;
 	}
 
@@ -107,6 +141,10 @@ public class CompartmentLayoutEditPolicy extends
 
 	@Override
 	protected boolean isHorizontal() {
+		IFigure figure = ((IGraphicalEditPart) getHost()).getContentPane();
+		if (figure.getLayoutManager() instanceof OrderedLayout) {
+			return ((OrderedLayout) figure.getLayoutManager()).isHorizontal();
+		}
 		return true;
 	}
 }
