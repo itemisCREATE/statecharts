@@ -32,11 +32,13 @@ import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.stext.stext.EventSpec;
+import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
 import org.yakindu.sct.simulation.core.ISGraphExecutionBuilder;
+import org.yakindu.sct.simulation.runtime.sgraph.GuardExpression;
 import org.yakindu.sct.simulation.runtime.sgraph.PseudostateKind;
 import org.yakindu.sct.simulation.runtime.sgraph.RTAction;
 import org.yakindu.sct.simulation.runtime.sgraph.RTActionStatement;
@@ -54,6 +56,7 @@ import org.yakindu.sct.simulation.runtime.sgraph.RTTimeEvent;
 import org.yakindu.sct.simulation.runtime.sgraph.RTTransition;
 import org.yakindu.sct.simulation.runtime.stext.Function;
 import org.yakindu.sct.simulation.runtime.stext.FunctionMethod;
+import org.yakindu.sct.simulation.runtime.stext.RTExpression;
 import org.yakindu.sct.simulation.runtime.stext.RTStatement;
 import org.yakindu.sct.simulation.runtime.stext.RTTrigger;
 import org.yakindu.sct.simulation.runtime.stext.RTVariable;
@@ -247,6 +250,14 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 				// TODO: TimeEvent
 			}
 			
+			
+			//Build the transition action
+			Expression guardExp = ((ReactionTrigger) trigger).getGuardExpression();
+			RTExpression rtGuardExp = (RTExpression) textBuilder.build(guardExp);
+			if (rtGuardExp != null) {
+				guard = new GuardExpression(rtGuardExp, tParent);
+			}
+
 			rtTrigger = new RTTrigger(timeTrigger, signalTriggers, guard);
 		}
 		
