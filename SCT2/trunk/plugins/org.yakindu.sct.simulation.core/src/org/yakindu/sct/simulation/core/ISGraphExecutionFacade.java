@@ -18,6 +18,8 @@ package org.yakindu.sct.simulation.core;
  */
 public interface ISGraphExecutionFacade {
 
+	public String getId();
+	
 	public void enter();
 
 	public void runCycle();
