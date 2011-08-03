@@ -211,8 +211,8 @@ public class StaticExpressionEvaluator {
 				}
 			}
 
-			if (leftValue instanceof AnyValue && leftValue.getDataType() instanceof BooleanType
-					&& rightValue instanceof AnyValue && rightValue.getDataType() instanceof BooleanType) {
+			if ((leftValue instanceof IBooleanValue || leftValue instanceof AnyValue) && leftValue.getDataType() instanceof BooleanType
+					&& (rightValue instanceof IBooleanValue || rightValue instanceof AnyValue) && rightValue.getDataType() instanceof BooleanType) {
 				return leftValue;
 			}
 			
@@ -259,8 +259,8 @@ public class StaticExpressionEvaluator {
 				}
 			}
 			
-			if (leftValue instanceof AnyValue && leftValue.getDataType() instanceof BooleanType
-					&& rightValue instanceof AnyValue && rightValue.getDataType() instanceof BooleanType) {
+			if ((leftValue instanceof IBooleanValue || leftValue instanceof AnyValue) && leftValue.getDataType() instanceof BooleanType
+					&& (rightValue instanceof IBooleanValue || rightValue instanceof AnyValue) && rightValue.getDataType() instanceof BooleanType) {
 				return leftValue;
 			}
 			
@@ -307,8 +307,8 @@ public class StaticExpressionEvaluator {
 				}
 			}
 			
-			if (leftValue instanceof AnyValue && leftValue.getDataType() instanceof BooleanType
-					&& rightValue instanceof AnyValue && rightValue.getDataType() instanceof BooleanType) {
+			if ((leftValue instanceof IBooleanValue || leftValue instanceof AnyValue) && leftValue.getDataType() instanceof BooleanType
+					&& (rightValue instanceof IBooleanValue || rightValue instanceof AnyValue) && rightValue.getDataType() instanceof BooleanType) {
 				return leftValue;
 			}
 			
