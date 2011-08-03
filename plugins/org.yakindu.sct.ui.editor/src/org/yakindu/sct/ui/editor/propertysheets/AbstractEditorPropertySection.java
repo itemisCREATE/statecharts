@@ -1,11 +1,16 @@
 package org.yakindu.sct.ui.editor.propertysheets;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
+import org.yakindu.sct.ui.editor.extensions.Extensions;
+import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
+
+import com.google.inject.Injector;
 
 import de.itemis.gmf.runtime.commons.properties.GenericFormBasedPropertySection;
 import de.itemis.gmf.runtime.commons.properties.descriptors.XtextPropertyDescriptor;
@@ -48,6 +53,15 @@ public abstract class AbstractEditorPropertySection extends
 					"Different resources in resource set , don't know which to use...");
 		}
 		return resources.get(0);
-
 	}
+
+	protected Injector getInjector(EClass type) {
+		Extensions<IExpressionsProvider> extensions = new Extensions<IExpressionsProvider>(
+				IExpressionsProvider.EXPRESSIONS_EXTENSION);
+		IExpressionsProvider registeredProvider = extensions
+				.getRegisteredProvider(type, getActiveEditorResource().getURI()
+						.lastSegment());
+		return registeredProvider.getInjector();
+	}
+
 }
