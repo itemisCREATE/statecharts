@@ -185,4 +185,5 @@ public class SGraphSimulationSession implements Runnable,
 	public ISGraphExecutionScope getExecutionScope() {
 		return facade.getExecutionScope();
 	}
+	
 }
