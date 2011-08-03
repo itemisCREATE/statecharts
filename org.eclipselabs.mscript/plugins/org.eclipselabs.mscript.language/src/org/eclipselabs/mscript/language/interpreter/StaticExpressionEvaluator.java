@@ -171,8 +171,8 @@ public class StaticExpressionEvaluator {
 			
 			DataType dataType = TypeSystemUtil.getLeftHandDataType(thenValue.getDataType(), elseValue.getDataType());
 			if (dataType == null) {
-				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Resulting data type is incompatible to else expression data type", ifExpression.getThenExpression()));
-				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Resulting data type is incompatible to then expression data type", ifExpression.getElseExpression()));
+				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Resulting data type is incompatible with else expression data type", ifExpression.getThenExpression()));
+				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Resulting data type is incompatible with then expression data type", ifExpression.getElseExpression()));
 				return InvalidValue.SINGLETON;
 			}
 			
