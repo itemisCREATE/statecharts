@@ -591,4 +591,14 @@
       </objectContribution>           
 </extension>
 
+<!-- Patched Clipboard support -->
+ <extension
+         point="org.eclipse.gmf.runtime.emf.clipboard.core.clipboardSupport">
+      <factory
+            class="org.yakindu.sct.ui.editor.clipboardsupport.ClipboardSupportFactory"
+            nsURI="http://www.eclipse.org/gmf/runtime/1.0.2/notation"
+            priority="medium">
+      </factory>
+   </extension>
+
 </plugin>
