@@ -11,23 +11,28 @@
 package org.yakindu.sct.simulation.runtime;
 
 import java.util.Collection;
+import java.util.List;
 
+import org.yakindu.sct.simulation.runtime.sgraph.RTEvent;
+import org.yakindu.sct.simulation.runtime.sgraph.RTSignalEvent;
 import org.yakindu.sct.simulation.runtime.stext.RTVariable;
 
 public interface ExecutionScope {
 
-	public abstract Object getValue(String varName);
+	Object getValue(String varName);
 
-	public abstract RTVariable getVariable(String varName);
+	RTVariable getVariable(String varName);
 
-	public abstract void addVariable(RTVariable var);
+	void addVariable(RTVariable var);
 
-	public abstract void call(String procedureId);
+	void call(String procedureId);
 
-	public abstract void raise(String signal);
+	void raise(String signal);
 
-	public abstract void setVariableValue(RTVariable variable, Object object);
+	void setVariableValue(RTVariable variable, Object object);
 	
-	public Collection<RTVariable> getVariables();
+	Collection<RTVariable> getVariables();
+
+	List<RTSignalEvent> getEvents();
 
 }

@@ -58,14 +58,27 @@ public class ExecutionScopeAdapter implements ISGraphExecutionScope {
 	}
 
 	public void raise(String signal) {
-		// TODO
+		scope.raise(signal);
 	}
 
 	public List<ScopeEvent> getEvents() {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<ScopeEvent> scopeEvents = new ArrayList<ScopeEvent>();
+		Collection<RTSignalEvent> events = scope.getEvents();
+		for (RTSignalEvent rtEvent : events) {
+			scopeEvents.add(toScope(rtEvent));
+		}
+		return scopeEvents;
 	}
 
+	
+	private ScopeEvent toScope(RTSignalEvent rtEvent) {
+		return new ScopeEvent(rtEvent.getId());
+	}
 
+	
+	public void raise(ScopeEvent event) {
+		raise(event.getName());	
+	}
 	
 }

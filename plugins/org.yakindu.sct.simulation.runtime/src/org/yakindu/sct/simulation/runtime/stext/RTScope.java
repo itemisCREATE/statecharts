@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
+import org.yakindu.sct.simulation.runtime.sgraph.RTSignalEvent;
 
 
 /**
@@ -74,5 +75,11 @@ public class RTScope implements ExecutionScope {
 	public Collection<RTVariable> getVariables() {
 		return variables.values();
 	}
+
+	public List<RTSignalEvent> getEvents() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	
 }
