@@ -2,14 +2,16 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
+
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
 import org.eclipse.emf.ecore.EObject;
+
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Event;
@@ -17,57 +19,8 @@ import org.yakindu.sct.model.sgraph.NamedElement;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Variable;
-import org.yakindu.sct.model.stext.stext.AlwaysEvent;
-import org.yakindu.sct.model.stext.stext.Assignment;
-import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
-import org.yakindu.sct.model.stext.stext.Clock;
-import org.yakindu.sct.model.stext.stext.DefRoot;
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
-import org.yakindu.sct.model.stext.stext.EntryEvent;
-import org.yakindu.sct.model.stext.stext.EntryPointSpec;
-import org.yakindu.sct.model.stext.stext.Entrypoint;
-import org.yakindu.sct.model.stext.stext.EventDefinition;
-import org.yakindu.sct.model.stext.stext.EventDerivation;
-import org.yakindu.sct.model.stext.stext.EventRaising;
-import org.yakindu.sct.model.stext.stext.EventSpec;
-import org.yakindu.sct.model.stext.stext.ExitEvent;
-import org.yakindu.sct.model.stext.stext.ExitPointSpec;
-import org.yakindu.sct.model.stext.stext.Exitpoint;
-import org.yakindu.sct.model.stext.stext.Expression;
-import org.yakindu.sct.model.stext.stext.InterfaceScope;
-import org.yakindu.sct.model.stext.stext.InternalScope;
-import org.yakindu.sct.model.stext.stext.LocalReaction;
-import org.yakindu.sct.model.stext.stext.LogicalAndExpression;
-import org.yakindu.sct.model.stext.stext.LogicalNotExpression;
-import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
-import org.yakindu.sct.model.stext.stext.LogicalRelationExpression;
-import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression;
-import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
-import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression;
-import org.yakindu.sct.model.stext.stext.OnCycleEvent;
-import org.yakindu.sct.model.stext.stext.Operation;
-import org.yakindu.sct.model.stext.stext.OperationCall;
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
-import org.yakindu.sct.model.stext.stext.Reaction;
-import org.yakindu.sct.model.stext.stext.ReactionEffect;
-import org.yakindu.sct.model.stext.stext.ReactionPriority;
-import org.yakindu.sct.model.stext.stext.ReactionProperties;
-import org.yakindu.sct.model.stext.stext.ReactionProperty;
-import org.yakindu.sct.model.stext.stext.ReactionTrigger;
-import org.yakindu.sct.model.stext.stext.RegularEventSpec;
-import org.yakindu.sct.model.stext.stext.Root;
-import org.yakindu.sct.model.stext.stext.SimpleScope;
-import org.yakindu.sct.model.stext.stext.StateDeclaration;
-import org.yakindu.sct.model.stext.stext.StateRoot;
-import org.yakindu.sct.model.stext.stext.StatechartDefinition;
-import org.yakindu.sct.model.stext.stext.StatechartRoot;
-import org.yakindu.sct.model.stext.stext.Statement;
-import org.yakindu.sct.model.stext.stext.StextPackage;
-import org.yakindu.sct.model.stext.stext.TimeEventSpec;
-import org.yakindu.sct.model.stext.stext.TransitionReaction;
-import org.yakindu.sct.model.stext.stext.TransitionRoot;
-import org.yakindu.sct.model.stext.stext.TransitionStatement;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
+
+import org.yakindu.sct.model.stext.stext.*;
 
 /**
  * <!-- begin-user-doc -->

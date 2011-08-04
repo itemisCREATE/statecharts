@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext;
 
@@ -11,6 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 /**

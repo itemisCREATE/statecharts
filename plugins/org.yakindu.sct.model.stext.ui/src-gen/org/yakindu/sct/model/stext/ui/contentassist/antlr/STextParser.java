@@ -4,17 +4,18 @@
 package org.yakindu.sct.model.stext.ui.contentassist.antlr;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
 
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 
 import com.google.inject.Inject;
+
+import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 
 public class STextParser extends AbstractContentAssistParser {
 	
@@ -41,6 +42,7 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStatechartScopeAccess().getAlternatives(), "rule__StatechartScope__Alternatives");
 					put(grammarAccess.getDeclarationAccess().getAlternatives(), "rule__Declaration__Alternatives");
 					put(grammarAccess.getReactionAccess().getAlternatives(), "rule__Reaction__Alternatives");
+					put(grammarAccess.getReactionTriggerAccess().getAlternatives_1(), "rule__ReactionTrigger__Alternatives_1");
 					put(grammarAccess.getReactionPropertyAccess().getAlternatives(), "rule__ReactionProperty__Alternatives");
 					put(grammarAccess.getEventSpecAccess().getAlternatives(), "rule__EventSpec__Alternatives");
 					put(grammarAccess.getBuiltinEventSpecAccess().getAlternatives(), "rule__BuiltinEventSpec__Alternatives");
@@ -84,9 +86,10 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTransitionReactionAccess().getGroup_2(), "rule__TransitionReaction__Group_2__0");
 					put(grammarAccess.getTransitionReactionAccess().getGroup_3(), "rule__TransitionReaction__Group_3__0");
 					put(grammarAccess.getReactionTriggerAccess().getGroup(), "rule__ReactionTrigger__Group__0");
-					put(grammarAccess.getReactionTriggerAccess().getGroup_1(), "rule__ReactionTrigger__Group_1__0");
+					put(grammarAccess.getReactionTriggerAccess().getGroup_1_0(), "rule__ReactionTrigger__Group_1_0__0");
+					put(grammarAccess.getReactionTriggerAccess().getGroup_1_0_1(), "rule__ReactionTrigger__Group_1_0_1__0");
+					put(grammarAccess.getReactionTriggerAccess().getGroup_1_0_2(), "rule__ReactionTrigger__Group_1_0_2__0");
 					put(grammarAccess.getReactionTriggerAccess().getGroup_1_1(), "rule__ReactionTrigger__Group_1_1__0");
-					put(grammarAccess.getReactionTriggerAccess().getGroup_2(), "rule__ReactionTrigger__Group_2__0");
 					put(grammarAccess.getReactionEffectAccess().getGroup(), "rule__ReactionEffect__Group__0");
 					put(grammarAccess.getReactionEffectAccess().getGroup_1(), "rule__ReactionEffect__Group_1__0");
 					put(grammarAccess.getReactionPropertiesAccess().getGroup(), "rule__ReactionProperties__Group__0");
@@ -152,9 +155,10 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTransitionReactionAccess().getTriggerAssignment_1(), "rule__TransitionReaction__TriggerAssignment_1");
 					put(grammarAccess.getTransitionReactionAccess().getEffectAssignment_2_1(), "rule__TransitionReaction__EffectAssignment_2_1");
 					put(grammarAccess.getTransitionReactionAccess().getPropertiesAssignment_3_1(), "rule__TransitionReaction__PropertiesAssignment_3_1");
-					put(grammarAccess.getReactionTriggerAccess().getTriggersAssignment_1_0(), "rule__ReactionTrigger__TriggersAssignment_1_0");
-					put(grammarAccess.getReactionTriggerAccess().getTriggersAssignment_1_1_1(), "rule__ReactionTrigger__TriggersAssignment_1_1_1");
-					put(grammarAccess.getReactionTriggerAccess().getGuardExpressionAssignment_2_1(), "rule__ReactionTrigger__GuardExpressionAssignment_2_1");
+					put(grammarAccess.getReactionTriggerAccess().getTriggersAssignment_1_0_0(), "rule__ReactionTrigger__TriggersAssignment_1_0_0");
+					put(grammarAccess.getReactionTriggerAccess().getTriggersAssignment_1_0_1_1(), "rule__ReactionTrigger__TriggersAssignment_1_0_1_1");
+					put(grammarAccess.getReactionTriggerAccess().getGuardExpressionAssignment_1_0_2_1(), "rule__ReactionTrigger__GuardExpressionAssignment_1_0_2_1");
+					put(grammarAccess.getReactionTriggerAccess().getGuardExpressionAssignment_1_1_1(), "rule__ReactionTrigger__GuardExpressionAssignment_1_1_1");
 					put(grammarAccess.getReactionEffectAccess().getActionsAssignment_1_0(), "rule__ReactionEffect__ActionsAssignment_1_0");
 					put(grammarAccess.getReactionPropertiesAccess().getPropertiesAssignment_1(), "rule__ReactionProperties__PropertiesAssignment_1");
 					put(grammarAccess.getReactionPriorityAccess().getPriorityAssignment(), "rule__ReactionPriority__PriorityAssignment");

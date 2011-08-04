@@ -39,6 +39,7 @@ import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.simulation.runtime.sgraph.GuardExpression;
 import org.yakindu.sct.simulation.runtime.sgraph.PseudostateKind;
 import org.yakindu.sct.simulation.runtime.sgraph.RTCompoundState;
 import org.yakindu.sct.simulation.runtime.sgraph.RTFinalState;
@@ -50,6 +51,7 @@ import org.yakindu.sct.simulation.runtime.sgraph.RTStatechart;
 import org.yakindu.sct.simulation.runtime.sgraph.RTTransition;
 import org.yakindu.sct.simulation.runtime.sgraph.builder.SGraphBuilder;
 import org.yakindu.sct.simulation.runtime.stext.RTTrigger;
+import org.yakindu.sct.simulation.runtime.stext.VariableRef;
 
 /**
  * 
@@ -330,6 +332,9 @@ public class SGraphBuilderTest {
 		assertTrue(node instanceof RTPseudostate);
 		assertEquals(targetType, ((RTPseudostate) node).getKind());
 	}
+	
+	
+	
 	@Test
 	public void testTransition() {
 		//TODO: transition test with events -> move to text
@@ -360,7 +365,7 @@ public class SGraphBuilderTest {
 		trans.setSource(state_a);
 		trans.setTarget(state_b);
 		trans.setPriority(42);
-		trans.setExpression("e1,e2,after(200) [a] / a=false;");
+		trans.setExpression("e1, e2 [a] / a=false;");
 		
 		state_a.getOutgoingTransitions().add(trans);
 		
@@ -390,20 +395,23 @@ public class SGraphBuilderTest {
 		
 		// check the properties of the transition
 		assertEquals(42, tTrans.getPriority());
-		assertEquals("t@1", tTrans.getId());
+		assertEquals("t@0", tTrans.getId());
 		
 		assertNotNull(tTrans.getTrigger());
 		assertTrue(tTrans.getTrigger() instanceof RTTrigger);
 		
 		RTTrigger rtTrigger = (RTTrigger) tTrans.getTrigger();
-		
 		assertNotNull(rtTrigger.getGuard());
-		fail("complete me");
+		assertTrue(rtTrigger.getGuard() instanceof GuardExpression);
+		GuardExpression guard = (GuardExpression) rtTrigger.getGuard();
+		assertTrue(guard.getExpression() instanceof VariableRef);
+		
+//		fail("complete me");
 		//FIXME
 //		// Unary expression because new grammar always put a VariableRef inside a positive unary expression
-//		assertTrue(((GuardExpression)tTrans.getGuard()).getExpression() instanceof UnaryOperation);
+//		assertTrue(((GuardExpression)tTrans.Guard()).getExpression() instanceof UnaryOperation);
 //		assertTrue(((UnaryOperation)((GuardExpression)tTrans.getGuard()).getExpression()).getExpression() instanceof VariableRef);
-//		
+//
 //		assertNotNull(tTrans.getAction());
 //		assertTrue(((ActionStatement)tTrans.getAction()).getStatement() instanceof StatementSequence);
 

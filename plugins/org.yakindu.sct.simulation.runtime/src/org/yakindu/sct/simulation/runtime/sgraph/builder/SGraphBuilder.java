@@ -268,7 +268,8 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 			action = new RTActionStatement(statement, tParent);
 		}
 
-		RTTransition tTrans = new RTTransition("t@", transition.getPriority(),
+		String id= "t@" + transition.getSource().getOutgoingTransitions().indexOf(transition);
+		RTTransition tTrans = new RTTransition(id, transition.getPriority(),
 				rtTrigger, action, fromNode, toNode);
 		tParent.defineAlias(transition, tTrans);
 		return tTrans;
