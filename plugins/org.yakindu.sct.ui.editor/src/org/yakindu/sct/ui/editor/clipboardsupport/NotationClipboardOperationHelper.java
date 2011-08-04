@@ -13,9 +13,16 @@ package org.yakindu.sct.ui.editor.clipboardsupport;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -25,6 +32,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.transaction.util.TransactionUtil;
+import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.clipboard.core.ClipboardSupportUtil;
 import org.eclipse.gmf.runtime.emf.clipboard.core.CopyOperation;
 import org.eclipse.gmf.runtime.emf.clipboard.core.OverrideCopyOperation;
@@ -32,12 +41,16 @@ import org.eclipse.gmf.runtime.emf.clipboard.core.OverridePasteChildOperation;
 import org.eclipse.gmf.runtime.emf.clipboard.core.PasteAction;
 import org.eclipse.gmf.runtime.emf.clipboard.core.PasteChildOperation;
 import org.eclipse.gmf.runtime.emf.clipboard.core.PasteOption;
+import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.core.clipboard.AbstractClipboardSupport;
 import org.eclipse.gmf.runtime.emf.type.core.commands.DestroyElementCommand;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.Vertex;
 
 /**
  * A minimal clipboard operation helper for the notation metamodel. Extenders of
@@ -267,12 +280,47 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 		}
 		return true;
 	}
-
+	
 	/**
-	 * By default, there is no post processing to be done.
+	 * This is a quick fix to remove outgoing transitions of copied vertices if
+	 * they have no target.
+	 * 
 	 */
+	//FIXME: See Ticket #292 Copy&Paste should only copy selected Transitions if valid.
 	public void performPostPasteProcessing(Set pastedEObjects) {
-		// nothing to do
+		for (Object object : pastedEObjects) {
+			if (object instanceof Vertex) {
+				final Vertex vertex = (Vertex) object;
+				try {
+					new AbstractTransactionalCommand(
+							TransactionUtil.getEditingDomain(vertex),
+							"Remove invalid connections", null) {
+
+						@Override
+						protected CommandResult doExecuteWithResult(
+								IProgressMonitor monitor, IAdaptable info)
+								throws ExecutionException {
+
+							List<Transition> unusedTransitions = new LinkedList<Transition>();
+
+							for (Transition transition : vertex
+									.getOutgoingTransitions()) {
+								if (transition.getTarget() == null) {
+									unusedTransitions.add(transition);
+								}
+
+							}
+							vertex.getOutgoingTransitions().removeAll(
+									unusedTransitions);
+
+							return CommandResult.newOKCommandResult();
+						}
+					}.execute(new NullProgressMonitor(), null);
+				} catch (ExecutionException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	static Diagram getContainingDiagram(View view) {
@@ -285,6 +333,7 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 		}
 		return null;
 	}
+
 	// PATCH START
 	static EObject getSemanticPasteTarget(View view, View container) {
 		EObject semanticObjectToCopy = view.getElement();
@@ -294,8 +343,8 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 		for (EReference eReference : eAllReferences) {
 			EClass eReferenceType = eReference.getEReferenceType();
 			if (eReference.isContainment()
-					&& (eReference.isContainment() && eReferenceType
-							.isSuperTypeOf(semanticObjectToCopy.eClass()))) {
+					&& eReferenceType.isSuperTypeOf(semanticObjectToCopy
+							.eClass())) {
 				return semanticTarget;
 			}
 		}
