@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import java.util.List;
+
 import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
@@ -25,6 +27,7 @@ import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.UnexecutableCommand;
+import org.eclipse.gef.requests.GroupRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CreationEditPolicy;
@@ -32,6 +35,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
+import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
@@ -50,6 +54,7 @@ import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
  * 
  * @author andreas muelder
  * @author alexander nyssen
+ * @author markus muehlbrandt
  * 
  */
 public class StateEditPart extends ShapeNodeEditPart implements
@@ -70,7 +75,23 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		if (request instanceof CreateViewAndElementRequest) {
 			return figureCompartmentEditPart;
 		}
+		if (request instanceof GroupRequest && request.getType() == RequestConstants.REQ_DROP) {
+			GroupRequest req = (GroupRequest) request;
+			if (areInsertableChildren(req.getEditParts())) {
+				return figureCompartmentEditPart;
+			}
+		}
+		
 		return super.getTargetEditPart(request);
+	}
+	
+	private boolean areInsertableChildren(List<?> editParts) {
+		for (Object object : editParts) {
+			if (!(object instanceof RegionEditPart)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	@Override
