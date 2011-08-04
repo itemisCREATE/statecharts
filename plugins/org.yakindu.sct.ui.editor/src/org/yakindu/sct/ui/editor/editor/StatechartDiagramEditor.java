@@ -20,11 +20,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.IPartListener2;
-import org.eclipse.ui.IViewPart;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchPartReference;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IGotoMarker;
@@ -41,17 +36,6 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 		IGotoMarker {
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
-
-	// Duplicate of the internal constant used to register the help view as a UI
-	// extension.
-	// @see org.eclipse.help.ui.internalDefaulHelptUI#HELP_VIEW_ID
-	private final static String HELP_VIEW_ID = "org.eclipse.help.ui.HelpView";
-
-	// Declared static to prevent problems in case of an access attempt on
-	// startup
-	private static boolean dynamicHelpViewShowing = false;
-
-	private IPartListener2 dynamicHelpViewListener;
 
 	public StatechartDiagramEditor() {
 		super(true);
@@ -77,19 +61,6 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 
 					}
 				});
-
-		// Create the help view listener and register it with the workbench
-		Display.getCurrent().asyncExec(new Runnable() {
-			public void run() {
-				createDynamicHelpViewListener();
-				PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-						.getPartService()
-						.addPartListener(dynamicHelpViewListener);
-				// Listener may have missed view opening
-				dynamicHelpViewShowing = askWorkbenchIfDynamicHelpViewShowing();
-			}
-		});
-
 	}
 
 	public void gotoMarker(IMarker marker) {
@@ -109,97 +80,12 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 				.getWorkbench()
 				.getHelpSystem()
 				.setHelp(getGraphicalViewer().getControl(),
-						IYakinduSctHelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER); // /CHANGE
-																				// ID!!!
-	}
-
-	@Override
-	public void dispose() {
-		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPartService()
-				.removePartListener(dynamicHelpViewListener);
-		super.dispose();
-	}
-
-	private void createDynamicHelpViewListener() {
-		dynamicHelpViewListener = new IPartListener2() {
-
-			public void partOpened(IWorkbenchPartReference partRef) {
-				partVisible(partRef);
-			}
-
-			// Will be notified reliably when Dynamic Help View is opened in ANY
-			// perspective
-			public void partVisible(IWorkbenchPartReference partRef) {
-				if (HELP_VIEW_ID.equals(partRef.getId())) {
-					dynamicHelpViewShowing = true;
-				}
-
-			}
-
-			public void partClosed(IWorkbenchPartReference partRef) {
-				partHidden(partRef);
-			}
-
-			// Will be notified reliably when Dynamic Help View is closed in ANY
-			// perspective
-			public void partHidden(IWorkbenchPartReference partRef) {
-				if (HELP_VIEW_ID.equals(partRef.getId())) {
-					dynamicHelpViewShowing = false;
-					PlatformUI
-							.getWorkbench()
-							.getHelpSystem()
-							.setHelp(
-									getGraphicalViewer().getControl(),
-									IYakinduSctHelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
-				}
-			}
-
-			public void partActivated(IWorkbenchPartReference partRef) {
-				// do nothing
-			}
-
-			public void partBroughtToTop(IWorkbenchPartReference partRef) {
-				// do nothing
-			}
-
-			public void partDeactivated(IWorkbenchPartReference partRef) {
-				// do nothing
-			}
-
-			public void partInputChanged(IWorkbenchPartReference partRef) {
-				// do nothing
-			}
-
-		};
-	}
-
-	public static boolean askWorkbenchIfDynamicHelpViewShowing() {
-		boolean open = false;
-		IWorkbenchWindow activeWindow = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow();
-		if (activeWindow != null) {
-			IWorkbenchPage activePage = activeWindow.getActivePage();
-			if (activePage != null) {
-				IViewPart view = activePage.findView(HELP_VIEW_ID);
-				if (view != null) {
-					open = true;
-				}
-			}
-		}
-		return open;
+						IYakinduSctHelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
 	}
 
 	@Override
 	public String getContributorId() {
 		return ID;
-	}
-
-	public static void setDynamicHelpViewShowing(boolean dynamicHelpViewShowing) {
-		StatechartDiagramEditor.dynamicHelpViewShowing = dynamicHelpViewShowing;
-	}
-
-	public static boolean isDynamicHelpViewShowing() {
-		return StatechartDiagramEditor.dynamicHelpViewShowing;
 	}
 
 }
