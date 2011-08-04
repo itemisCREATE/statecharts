@@ -96,7 +96,7 @@ Exitpoint returns sct::Declaration:
 	/* ---- reaction rules ----
 Define the structure of reactions that are central for describing the statecharts behavior. 
 */
-Reaction :
+Reaction returns sct::Reaction:
 	LocalReaction | TransitionReaction;
 
 LocalReaction:
@@ -160,7 +160,23 @@ Statement:
 	Assignment | EventRaising | OperationCall;
 
 Assignment:
-	varRef=[sct::Variable] "=" expression=Expression;
+	varRef=[sct::Variable] operator=AssignmentOperator expression=Expression;
+	
+	
+enum AssignmentOperator
+: assign = '=' 
+| multAssign = '*=' 
+| divAssign = '/=' 
+| modAssign = '%=' 
+| addAssign = '+=' 
+| subAssign = '-=' 
+| leftShiftAssign = '<<=' 
+| rightShiftAssign = '>>=' 
+| andAssign = '&=' 
+| xorAssign = '^=' 
+| orAssign = '|='
+;
+
 
 EventRaising:
 	'raise' event=[sct::Event] (':' value=Expression)?;
@@ -172,7 +188,12 @@ EventRaising:
 //ExpressionRule:
 //	expression=(LogicalOrExpression | RaiseEventExpression);
 Expression returns Expression:
-	LogicalOrExpression;
+	ConditionalExpression;
+
+
+ConditionalExpression returns Expression
+:  	LogicalOrExpression ( {ConditionalExpression.condition=current} '?' trueCase=LogicalOrExpression ':' falseCase=LogicalOrExpression)?
+;
 
 LogicalOrExpression returns Expression:
 	LogicalAndExpression ({LogicalOrExpression.leftOperand=current} '||'
@@ -183,13 +204,36 @@ LogicalAndExpression returns Expression:
 	'&&' rightOperand=LogicalNotExpression)*;
 
 LogicalNotExpression returns Expression:
-	LogicalRelationExpression | {LogicalNotExpression} '!'
-	operand=LogicalRelationExpression;
+	BitwiseXorExpression | {LogicalNotExpression} '!'
+	operand=BitwiseXorExpression;
+
+BitwiseXorExpression returns Expression
+	: BitwiseOrExpression ({BitwiseXorExpression.leftOperand=current} '^' rightOperand = BitwiseOrExpression)*
+	;
+
+BitwiseOrExpression returns Expression
+	: BitwiseAndExpression ({BitwiseOrExpression.leftOperand=current} '|' rightOperand = BitwiseAndExpression)*
+	;
+
+BitwiseAndExpression returns Expression
+	: LogicalRelationExpression ({BitwiseAndExpression.leftOperand=current} '&' rightOperand = LogicalRelationExpression)*
+	;
 
 LogicalRelationExpression returns Expression:
-	NumericalAddSubtractExpression
+	ShiftExpression
 	({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
-	rightOperand=NumericalAddSubtractExpression)*;
+	rightOperand=ShiftExpression)*;
+
+ShiftExpression returns Expression
+:	NumericalAddSubtractExpression ({ShiftExpression.leftOperand=current} operator=ShiftOperator
+	rightOperand=NumericalAddSubtractExpression)*
+;	
+	
+enum ShiftOperator
+:	left = '<<'
+|   right = '>>'
+;
+
 
 NumericalAddSubtractExpression returns Expression:
 	NumericalMultiplyDivideExpression
@@ -245,11 +289,16 @@ OperationCall returns Expression:
 	{OperationCall} operation=[Operation] '(' (args+=Expression (',' args+=Expression)*)? ')';
 
 Literal:
-	BOOL | INT | STRING | FLOAT;
+	BOOL | INT | HEX | STRING | FLOAT;
 
 terminal BOOL:
 	'true' | 'false';
 
+terminal HEX: 
+	('0') ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+
+;
+
 terminal FLOAT:
-	('-' | '+')? (INT '.' INT) ('e' ('-' | '+') INT)? ('f'|'F'|'d'|'D')?;
+	(INT '.' INT) ('e' ('-' | '+') INT)? ('f'|'F'|'d'|'D')?
+;
 
