@@ -6,6 +6,15 @@ import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 
 /**
+ * Adds context-sensitive help to the host <code>EditPart</code>. Upon selection
+ * of the host, the policy sets the given help context ID on the
+ * <code>EditPartViewer</code>'s <code>Control</code> and prompts the workbench
+ * to display the referenced context in the Dynamic Help View, if it is visible.
+ * When the host is de-selected or loses focus, the default help context is
+ * restored.
+ * 
+ * @see org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor
+ * @see org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds
  * 
  * @author martin esser
  * 
@@ -14,7 +23,6 @@ public class ContextSensitiveHelpPolicy extends SelectionEditPolicy {
 
 	private String helpContextId;
 
-	
 	public ContextSensitiveHelpPolicy(String helpContextId) {
 		this.helpContextId = helpContextId;
 	}
