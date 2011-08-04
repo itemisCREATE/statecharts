@@ -1,7 +1,20 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package de.itemis.gmf.runtime.commons.editpolicies;
 
 import java.util.Iterator;
 
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.OrderedLayout;
 import org.eclipse.emf.common.util.EList;
@@ -12,6 +25,7 @@ import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.requests.CreateRequest;
+import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.core.commands.AddCommand;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.commands.CreateCommand;
@@ -38,17 +52,67 @@ public class CompartmentLayoutEditPolicy extends
 
 	private EStructuralFeature feature = null;
 
+	/**
+	 * Internal command which validates if a view is already a child of parent
+	 * and moving it to prefered index instead of adding it twice (What leads to
+	 * an exception see {@link AbstractEList#add(int index, E object)}).
+	 * 
+	 * @author markus muehlbrandt
+	 * 
+	 */
+	private class CompartmentAddCommand extends AddCommand {
+
+		private IAdaptable parent;
+		private IAdaptable child;
+		private int index;
+
+		public CompartmentAddCommand(TransactionalEditingDomain editingDomain,
+				IAdaptable parent, IAdaptable child, int index) {
+			super(editingDomain, parent, child, index);
+			assert null != parent : "Null parent in CompartmentAddCommand";//$NON-NLS-1$
+			assert null != child : "Null child in CompartmentAddCommand";//$NON-NLS-1$		
+			this.parent = parent;
+			this.child = child;
+			this.index = index;
+		}
+
+		@SuppressWarnings("unchecked")
+		@Override
+		protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
+				IAdaptable info) throws ExecutionException {
+
+			View childView = (View) child.getAdapter(View.class);
+			View parentView = (View) parent.getAdapter(View.class);
+
+			if (parentView.getPersistedChildren().contains(childView)
+					&& index != ViewUtil.APPEND) {
+				parentView.getPersistedChildren().move(index, childView);
+			} else if (index == ViewUtil.APPEND) {
+				parentView.insertChild(childView);
+			} else {
+				parentView.insertChildAt(childView, index);
+			}
+			return CommandResult.newOKCommandResult();
+		}
+	}
+
+	/**
+	 * @param feature
+	 *            has to be an EList
+	 */
 	public CompartmentLayoutEditPolicy(EStructuralFeature feature) {
+		super();
 		this.feature = feature;
 	}
-	
+
 	@Override
 	protected Command createAddCommand(EditPart child, EditPart after) {
+		int index = getHost().getChildren().indexOf(after);
 		TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost())
 				.getEditingDomain();
-		AddCommand command = new AddCommand(editingDomain, new EObjectAdapter(
-				(View) getHost().getModel()), new EObjectAdapter(
-				(View) child.getModel()), ViewUtil.APPEND);
+		AddCommand command = new CompartmentAddCommand(editingDomain,
+				new EObjectAdapter((View) getHost().getModel()),
+				new EObjectAdapter((View) child.getModel()), index);
 		return new ICommandProxy(command);
 	}
 
@@ -122,7 +186,7 @@ public class CompartmentLayoutEditPolicy extends
 
 		return null;
 	}
-	
+
 	@Override
 	protected boolean isHorizontal() {
 		IFigure figure = ((IGraphicalEditPart) getHost()).getContentPane();
@@ -131,7 +195,6 @@ public class CompartmentLayoutEditPolicy extends
 		}
 		return true;
 	}
-	
 
 	@Override
 	protected Command getDeleteDependantCommand(Request request) {
@@ -142,5 +205,4 @@ public class CompartmentLayoutEditPolicy extends
 	protected Command getOrphanChildrenCommand(Request request) {
 		return null;
 	}
-	
 }
