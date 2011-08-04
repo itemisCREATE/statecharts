@@ -12,9 +12,12 @@ public interface IYakinduSctHelpContextIds {
 
 	public static final String PREFIX = DiagramActivator.PLUGIN_ID + '.';
 
-	// Property sheets
+	// Diagram viewer
+	public static final String SC_EDITOR_EDITPART_VIEWER = PREFIX + "sc_editor_editpart_viewer"; //$NON-NLS-1$
+	
+	// Property sheets and EditParts
 	public static final String SC_PROPERTIES_ENTRY_ENTRYKIND = PREFIX + "sc_properties_entry_entrykind"; //$NON-NLS-1$
 	public static final String SC_PROPERTIES_STATE_EXPRESSION = PREFIX + "sc_properties_state_expression"; //$NON-NLS-1$
 	public static final String SC_PROPERTIES_STATECHART_EXPRESSION = PREFIX + "sc_properties_statechart_expression"; //$NON-NLS-1$
-	public static final String SC_PROPERTIES_TRANSITION_EXPRESSION = PREFIX + "sc_properties_transitioin_expression"; //$NON-NLS-1$
+	public static final String SC_PROPERTIES_TRANSITION_EXPRESSION = PREFIX + "sc_properties_transition_expression"; //$NON-NLS-1$
 }
