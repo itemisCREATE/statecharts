@@ -13,7 +13,7 @@ public interface IYakinduSctHelpContextIds {
 	public static final String PREFIX = DiagramActivator.PLUGIN_ID + '.';
 
 	// Diagram viewer
-	public static final String SC_EDITOR_EDITPART_VIEWER = PREFIX + "sc_editor_editpart_viewer"; //$NON-NLS-1$
+	public static final String SC_EDITOR_GRAPHICAL_VIEWER = PREFIX + "sc_editor_graphical_viewer"; //$NON-NLS-1$
 	
 	// Property sheets and EditParts
 	public static final String SC_PROPERTIES_ENTRY_ENTRYKIND = PREFIX + "sc_properties_entry_entrykind"; //$NON-NLS-1$
