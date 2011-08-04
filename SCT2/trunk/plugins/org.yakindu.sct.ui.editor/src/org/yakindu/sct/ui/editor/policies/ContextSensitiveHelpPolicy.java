@@ -1,7 +1,5 @@
 package org.yakindu.sct.ui.editor.policies;
 
-import java.util.Arrays;
-
 import org.eclipse.gef.editpolicies.SelectionEditPolicy;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IPartListener2;
@@ -70,7 +68,6 @@ public class ContextSensitiveHelpPolicy extends SelectionEditPolicy {
 	private final static String HELP_VIEW_ID = "org.eclipse.help.ui.HelpView";
 
 	private String helpContextId;
-	// private String editPartViewerInitialHelpContextId;
 	private static boolean dynamicHelpViewShowing = false;
 
 	public ContextSensitiveHelpPolicy(String helpContextId) {
@@ -87,8 +84,6 @@ public class ContextSensitiveHelpPolicy extends SelectionEditPolicy {
 						.getPartService().addPartListener(helpViewListener);
 				// Listener may have missed view opening
 				dynamicHelpViewShowing = isDynamicHelpViewShowing();
-				// editPartViewerInitialHelpContextId =
-				// getEditPartViewerInitialHelpContextId();
 			}
 		};
 		Display.getCurrent().asyncExec(runnable);
@@ -141,67 +136,4 @@ public class ContextSensitiveHelpPolicy extends SelectionEditPolicy {
 		PlatformUI.getWorkbench().getHelpSystem().displayDynamicHelp();
 	}
 
-	/*
-	 * Called to save the original help context id set on the statechart
-	 * editor's <code>EditPartViewer</code> so that it can be restored when
-	 * switching back and forth between individual <code>EditPart</code>s and
-	 * their associated contexts. Assumes that the concrete implementation of
-	 * <code>IWorkbenchHelpSystem</code> used in this scenario relies on the
-	 * <code>Widget</code> class's data field to store the help context id.
-	 * 
-	 * @see org.eclipse.ui.internal.help.WorkbenchHelpSystem#HELP_KEY
-	 * 
-	 * @see org.eclipse.swt.widgets.Widget#setData(Object)
-	 * 
-	 * @see #helpViewListener
-	 */
-	protected String getEditPartViewerInitialHelpContextId() {
-		String dummyHelpContextId = "dummy_context_id";
-		String editPartViewerInitialHelpContextId = null;
-
-		Object[] widgetData = (Object[]) getHost().getViewer().getControl()
-				.getData();
-		if (!(widgetData == null)) {
-			// Save the original widget data
-			Object[] savedWidgetData = Arrays.copyOf(widgetData,
-					widgetData.length);
-			PlatformUI
-					.getWorkbench()
-					.getHelpSystem()
-					.setHelp(getHost().getViewer().getControl(),
-							dummyHelpContextId);
-			Object[] changedWidgetData = (Object[]) getHost().getViewer()
-					.getControl().getData();
-
-			// Determine help key by searching the widget data for the dummy
-			// context id just inserted
-			String helpKey = null;
-			boolean found = false;
-			int i = 0;
-			while (i < changedWidgetData.length && !found) {
-				found = dummyHelpContextId.equals(changedWidgetData[i]);
-				if (found) {
-					helpKey = (String) changedWidgetData[i - 1];
-				}
-				i++;
-			}
-
-			// Determine the initial help context id registered for the
-			// editPartViewer
-			found = false;
-			i = 0;
-			while (i < savedWidgetData.length - 1 && !found) {
-				found = helpKey.equals(savedWidgetData[i]);
-				if (found) {
-					editPartViewerInitialHelpContextId = (String) savedWidgetData[i + 1];
-				}
-				i++;
-			}
-
-			// Restore the original help context id for the widget
-			PlatformUI.getWorkbench().getHelpSystem()
-					.setHelp(getHost().getViewer().getControl(), helpContextId);
-		}
-		return editPartViewerInitialHelpContextId;
-	}
 }
