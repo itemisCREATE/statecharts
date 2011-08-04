@@ -1,14 +1,15 @@
 package org.yakindu.sct.ui.editor.policies;
 
 import org.eclipse.gef.editpolicies.SelectionEditPolicy;
+import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
-import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 
 /**
  * Adds context-sensitive help to the host <code>EditPart</code>. 
  * 
- * @see org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor
  * @see org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds
  * 
  * @author martin esser
@@ -16,6 +17,11 @@ import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
  */
 public class ContextSensitiveHelpPolicy extends SelectionEditPolicy {
 
+	// Duplicate of the internal constant used to register the help view as a UI
+	// extension.
+	// @see org.eclipse.help.ui.internalDefaulHelptUI#HELP_VIEW_ID
+	private final static String HELP_VIEW_ID = "org.eclipse.help.ui.HelpView";
+	
 	private String helpContextId;
 
 	public ContextSensitiveHelpPolicy(String helpContextId) {
@@ -24,19 +30,15 @@ public class ContextSensitiveHelpPolicy extends SelectionEditPolicy {
 
 	@Override
 	protected void showSelection() {
-		if (StatechartDiagramEditor.isDynamicHelpViewShowing()) {
-			displayViewerHelpContext(helpContextId);
-			// Simple, but unreliable alternative
-			// PlatformUI.getWorkbench().getHelpSystem().displayHelp(helpContextId);
+		if (isDynamicHelpViewShowing()) {
+				displayViewerHelpContext(helpContextId);
 		}
 	}
 
 	@Override
 	protected void hideSelection() {
-		if (StatechartDiagramEditor.isDynamicHelpViewShowing()) {
+		if (isDynamicHelpViewShowing()) {
 			displayViewerHelpContext(IYakinduSctHelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
-			// Simple, but unreliable alternative
-			// PlatformUI.getWorkbench().getHelpSystem().displayHelp(IYakinduSctHelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
 		}
 	}
 
@@ -44,6 +46,22 @@ public class ContextSensitiveHelpPolicy extends SelectionEditPolicy {
 		PlatformUI.getWorkbench().getHelpSystem()
 				.setHelp(getHost().getViewer().getControl(), helpContextId);
 		PlatformUI.getWorkbench().getHelpSystem().displayDynamicHelp();
+	}
+	
+	public static boolean isDynamicHelpViewShowing() {
+		boolean open = false;
+		IWorkbenchWindow activeWindow = PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow();
+		if (activeWindow != null) {
+			IWorkbenchPage activePage = activeWindow.getActivePage();
+			if (activePage != null) {
+				IViewPart view = activePage.findView(HELP_VIEW_ID);
+				if (view != null) {
+					open = true;
+				}
+			}
+		}
+		return open;
 	}
 
 }
