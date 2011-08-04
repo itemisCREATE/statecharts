@@ -20,6 +20,10 @@ import org.yakindu.sct.simulation.runtime.sgraph.RTGuard;
 import org.yakindu.sct.simulation.runtime.sgraph.RTSignalEvent;
 import org.yakindu.sct.simulation.runtime.sgraph.RTTimeEvent;
 
+/**
+ * 
+ * @author terfloth
+ */
 public class RTTrigger  implements ITrigger{
 	
 	private RTGuard guard;
@@ -37,22 +41,39 @@ public class RTTrigger  implements ITrigger{
 	}
 
 	
+	
 	public boolean isEnabled(Set<RTEvent> events) {
-		
-		// TODO : rebuild according to execution semantics ... (e.g. no trigger)
-		
-		if ( !Collections.disjoint(this.signalTriggers, events)
-				|| (timeTrigger != null && events.contains(timeTrigger))) {
 
-			if (guard == null) {
-				return true;
-			} else {
-				return guard.evaluate();
-			}
+		if ( hasTriggerEvents() ) {
+			return matchesTriggerEvents(events) && matchesGuard();
 		}
 		
-		return false;
+		return matchesGuard();
 	}
+	
+	
+			
+
+	private boolean matchesTriggerEvents(Set<RTEvent> events) {
+		return !Collections.disjoint(this.signalTriggers, events) || (timeTrigger != null && events.contains(timeTrigger));
+			
+	}		
+			
+	private boolean matchesGuard() {
+		if (guard == null) {
+			return true;
+		} else {
+			return guard.evaluate();
+		}
+	}
+
+
+	private boolean hasTriggerEvents() {
+		return !signalTriggers.isEmpty() || timeTrigger!=null;
+	}
+
+
+
 	
 	
 	public RTGuard getGuard() {

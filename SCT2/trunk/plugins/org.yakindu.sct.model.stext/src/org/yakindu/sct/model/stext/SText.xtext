@@ -32,6 +32,7 @@ StateDeclaration:
 	scope=SimpleScope;
 
 TransitionStatement:
+//	Reaction;
 	TransitionReaction;
 
 	/* ---- scope rules ----
@@ -104,9 +105,11 @@ LocalReaction:
 TransitionReaction:
 	{TransitionReaction} (trigger=ReactionTrigger)? ('/' effect=ReactionEffect)? ('#' properties=ReactionProperties)?;
 
+
 ReactionTrigger returns sct::Trigger:
-	{ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)*)
-	('[' guardExpression=Expression ']')?;
+	{ReactionTrigger} (
+		(triggers+=EventSpec ("," triggers+=EventSpec)* (=>'[' guardExpression=Expression ']')?)
+		| ('[' guardExpression=Expression ']'));
 
 ReactionEffect returns sct::Effect:
 	{ReactionEffect} (actions+=Statement ';')+;

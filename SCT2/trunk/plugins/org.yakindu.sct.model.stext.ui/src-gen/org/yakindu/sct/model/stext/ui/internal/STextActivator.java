@@ -3,18 +3,19 @@
  */
 package org.yakindu.sct.model.stext.ui.internal;
 
-import static com.google.inject.Guice.createInjector;
 import static com.google.inject.util.Modules.override;
-
-import java.util.HashMap;
-import java.util.Map;
+import static com.google.inject.Guice.createInjector;
 
 import org.apache.log4j.Logger;
+
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.Injector;
 import com.google.inject.Module;
+
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -24,8 +25,6 @@ public class STextActivator extends AbstractUIPlugin {
 
 	private Map<String,Injector> injectors = new HashMap<String,Injector>();
 	private static STextActivator INSTANCE;
-	
-	public static final String STEXT_LANGUAGE_NAME = "org.yakindu.sct.model.stext.SText";
 
 	public Injector getInjector(String languageName) {
 		return injectors.get(languageName);
@@ -36,7 +35,7 @@ public class STextActivator extends AbstractUIPlugin {
 		super.start(context);
 		INSTANCE = this;
 		try {
-			registerInjectorFor(STEXT_LANGUAGE_NAME);
+			registerInjectorFor("org.yakindu.sct.model.stext.SText");
 			
 		} catch (Exception e) {
 			Logger.getLogger(getClass()).error(e.getMessage(), e);

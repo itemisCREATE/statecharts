@@ -416,23 +416,32 @@
             <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/SText#//ReactionTrigger"/>
           </type>
         </elements>
-        <elements xsi:type="xtext:Group">
-          <elements xsi:type="xtext:Assignment" feature="triggers" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.32"/>
-          </elements>
-          <elements xsi:type="xtext:Group" cardinality="*">
-            <elements xsi:type="xtext:Keyword" value=","/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Group">
             <elements xsi:type="xtext:Assignment" feature="triggers" operator="+=">
               <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.32"/>
             </elements>
+            <elements xsi:type="xtext:Group" cardinality="*">
+              <elements xsi:type="xtext:Keyword" value=","/>
+              <elements xsi:type="xtext:Assignment" feature="triggers" operator="+=">
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.32"/>
+              </elements>
+            </elements>
+            <elements xsi:type="xtext:Group" cardinality="?">
+              <elements xsi:type="xtext:Keyword" predicated="true" value="["/>
+              <elements xsi:type="xtext:Assignment" feature="guardExpression" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.43"/>
+              </elements>
+              <elements xsi:type="xtext:Keyword" value="]"/>
+            </elements>
           </elements>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="["/>
-          <elements xsi:type="xtext:Assignment" feature="guardExpression" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.43"/>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="["/>
+            <elements xsi:type="xtext:Assignment" feature="guardExpression" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.43"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value="]"/>
           </elements>
-          <elements xsi:type="xtext:Keyword" value="]"/>
         </elements>
       </alternatives>
     </rules>

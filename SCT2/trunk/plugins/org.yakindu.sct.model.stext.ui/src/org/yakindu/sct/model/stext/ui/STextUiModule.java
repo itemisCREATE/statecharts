@@ -9,6 +9,9 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
  * Use this class to register components to be used within the IDE.
  */
 public class STextUiModule extends org.yakindu.sct.model.stext.ui.AbstractSTextUiModule {
+	
+	public static final String STEXT_LANGUAGE_NAME = "org.yakindu.sct.model.stext.SText";
+
 	public STextUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
