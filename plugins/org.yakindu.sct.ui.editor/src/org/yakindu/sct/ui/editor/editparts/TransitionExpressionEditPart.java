@@ -10,21 +10,32 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
+import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 
 import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 
 /**
  * 
  * @author muelder
- *
+ * 
  */
-public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEditPart implements
-		IXtextAwareEditPart {
-
+public class TransitionExpressionEditPart extends
+		PlugableExternalXtextLabelEditPart implements IXtextAwareEditPart {
 
 	public TransitionExpressionEditPart(View view) {
 		super(view);
+	}
+
+	@Override
+	protected void createDefaultEditPolicies() {
+		super.createDefaultEditPolicies();
+		installEditPolicy(
+				EditPolicy.SELECTION_FEEDBACK_ROLE,
+				new ContextSensitiveHelpPolicy(
+						IYakinduSctHelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION));
 	}
 
 }

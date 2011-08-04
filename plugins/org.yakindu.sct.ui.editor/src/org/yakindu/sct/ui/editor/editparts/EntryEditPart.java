@@ -33,6 +33,8 @@ import org.yakindu.sct.ui.editor.editor.figures.DeepHistoryFigure;
 import org.yakindu.sct.ui.editor.editor.figures.InitialStateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.ShallowHistoryFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
+import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
+import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 
 import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPolicy;
 import de.itemis.gmf.runtime.commons.figures.EllipseAnchorDefaultSizeNodeFigure;
@@ -56,6 +58,10 @@ public class EntryEditPart extends AbstractBorderedShapeEditPart {
 				new OneWayConnectionHandlesEditPolicy(HandleDirection.OUTGOING));
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
 				new NonResizableEditPolicyEx());
+		installEditPolicy(
+				EditPolicy.SELECTION_FEEDBACK_ROLE,
+				new ContextSensitiveHelpPolicy(
+						IYakinduSctHelpContextIds.SC_PROPERTIES_ENTRY_ENTRYKIND));
 	}
 
 	@Override
