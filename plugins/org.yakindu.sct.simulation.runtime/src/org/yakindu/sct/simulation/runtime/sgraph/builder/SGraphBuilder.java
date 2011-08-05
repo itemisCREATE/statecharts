@@ -13,20 +13,17 @@ package org.yakindu.sct.simulation.runtime.sgraph.builder;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.FinalState;
-import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
@@ -108,7 +105,7 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 
 	@FunctionMethod("")
 	public Object build(RTStatechart tParent, Event event) {
-		RTSignalEvent signalEvent = new RTSignalEvent(event.getName());
+		RTSignalEvent signalEvent = (RTSignalEvent) textBuilder.build(event);
 		tParent.addSignalEvent(signalEvent);
 		tParent.defineAlias(event, signalEvent);
 		return event;
