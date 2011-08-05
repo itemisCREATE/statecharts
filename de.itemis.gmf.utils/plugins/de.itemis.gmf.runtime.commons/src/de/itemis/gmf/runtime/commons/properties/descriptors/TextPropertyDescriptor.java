@@ -55,10 +55,12 @@ public class TextPropertyDescriptor extends AbstractPropertyDescriptor {
 	}
 
 	public void setControlValue(Object value) {
+		Text text = (Text) getControl();
 		if (value != null) {
 			Assert.isTrue(value instanceof String, "Illegal value " + value);
-			Text text = (Text) getControl();
 			text.setText((String) value);
+		}else {
+			text.setText("");
 		}
 	}
 

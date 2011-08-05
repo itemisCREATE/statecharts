@@ -84,6 +84,8 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 		if (value != null) {
 			Assert.isTrue(value instanceof String, "Illegal value " + value);
 			getControl().setText((String) value);
+		}else {
+			getControl().setText("");
 		}
 	}
 
