@@ -72,10 +72,10 @@ public class FunctionDescriptorBuilder implements IFunctionDescriptorBuilder {
 		}
 		
 		if (status.getSeverity() > IStatus.WARNING) {
-			return new FunctionDescriptorConstructorResult(functionDescriptor, status);
+			return new FunctionDescriptorBuilderResult(functionDescriptor, status);
 		}
 		
-		return new FunctionDescriptorConstructorResult(functionDescriptor);
+		return new FunctionDescriptorBuilderResult(functionDescriptor);
 	}
 			
 	private static class EquationSideInitializer extends AstSwitch<Boolean> {

@@ -19,7 +19,7 @@ import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
  * @author Andreas Unger
  *
  */
-public class FunctionDescriptorConstructorResult implements IFunctionDescriptorBuilderResult {
+public class FunctionDescriptorBuilderResult implements IFunctionDescriptorBuilderResult {
 
 	private FunctionDescriptor functionDescriptor;
 	private IStatus status;
@@ -27,14 +27,14 @@ public class FunctionDescriptorConstructorResult implements IFunctionDescriptorB
 	/**
 	 * 
 	 */
-	public FunctionDescriptorConstructorResult(FunctionDescriptor functionDescriptor) {
+	public FunctionDescriptorBuilderResult(FunctionDescriptor functionDescriptor) {
 		this(functionDescriptor, Status.OK_STATUS);
 	}
 
 	/**
 	 * 
 	 */
-	public FunctionDescriptorConstructorResult(FunctionDescriptor functionDescriptor, IStatus status) {
+	public FunctionDescriptorBuilderResult(FunctionDescriptor functionDescriptor, IStatus status) {
 		this.functionDescriptor = functionDescriptor;
 		this.status = status;
 	}
