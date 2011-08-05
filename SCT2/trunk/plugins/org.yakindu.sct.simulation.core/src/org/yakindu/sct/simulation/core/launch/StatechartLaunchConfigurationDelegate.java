@@ -29,6 +29,7 @@ import org.eclipse.debug.core.IStatusHandler;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -83,17 +84,17 @@ public class StatechartLaunchConfigurationDelegate implements
 		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(
 				resource.getContents(), SGraphPackage.Literals.STATECHART);
 
-		ISGraphExecutionBuilder builder = getBuilder();
+		ISGraphExecutionBuilder builder = getBuilder(statechart);
 		ISGraphExecutionFacade executionFacade = builder.build(statechart);
 		IDebugTarget target = new SCTDebugTarget(launch, executionFacade);
 		launch.addDebugTarget(target);
 
 	}
 
-	protected ISGraphExecutionBuilder getBuilder() {
+	protected ISGraphExecutionBuilder getBuilder(EObject context) {
 		Extensions<ISGraphExecutionBuilder> extensions = new Extensions<ISGraphExecutionBuilder>(
 				EXECUTION_BUILDER);
-		return extensions.getFirstExtension();
+		return extensions.getRegisteredProvider(context);
 	}
 
 	protected void handleStatusInformation(int severity, String message) {

@@ -31,11 +31,11 @@ import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
 public class InjectMembersResourceFactory extends XMIResourceFactoryImpl {
 
 	@Inject
-	TransitionInjectionService transitionService;
+	private TransitionInjectionService transitionService;
 	@Inject
-	StateInjectionService stateService;
+	private StateInjectionService stateService;
 	@Inject
-	StatechartInjectionService statechartService;
+	private StatechartInjectionService statechartService;
 
 	@Override
 	public Resource createResource(URI uri) {
