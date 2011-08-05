@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright (c) 2008, 2011 Andreas Unger and others.
+ * Copyright (c) 2008, 2010 Andreas Unger and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,17 +9,27 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.language.functionmodel.construct;
+package org.eclipselabs.mscript.language.functionmodel.build;
 
-import org.eclipselabs.mscript.language.ast.FunctionDefinition;
-import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 
 /**
  * @author Andreas Unger
  *
+ * @noextend
+ * @noimplement
  */
-public interface IFunctionDescriptorBuilder {
+public interface IFunctionDescriptorBuilderResult {
 
-	IFunctionDescriptorBuilderResult build(IStaticEvaluationContext context, FunctionDefinition functionDefinition);
+	/**
+	 * @return the functionDescriptor
+	 */
+	FunctionDescriptor getFunctionDescriptor();
+
+	/**
+	 * @return the status
+	 */
+	IStatus getStatus();
 
 }

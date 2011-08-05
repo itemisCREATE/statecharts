@@ -9,7 +9,7 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.language.functionmodel.construct;
+package org.eclipselabs.mscript.language.functionmodel.build;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
