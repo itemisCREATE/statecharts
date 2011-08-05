@@ -3,7 +3,7 @@ package org.yakindu.sct.ui.perspectives;
 import org.yakindu.sct.ui.UIPluginActivator;
 
 /**
- * Ids for the YAKINDU Statechart editor perspectives.
+ * Ids for the YAKINDU statechart editor perspectives.
  * <p>
  * This interface contains constants only; it is not intended to be implemented
  * or extended.
