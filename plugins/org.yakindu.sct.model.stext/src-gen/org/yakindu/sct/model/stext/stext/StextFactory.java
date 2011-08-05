@@ -107,15 +107,6 @@ public interface StextFactory extends EFactory
   EventDerivation createEventDerivation();
 
   /**
-   * Returns a new object of class '<em>Reaction</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Reaction</em>'.
-   * @generated
-   */
-  Reaction createReaction();
-
-  /**
    * Returns a new object of class '<em>Local Reaction</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -386,6 +377,15 @@ public interface StextFactory extends EFactory
   ReactionEffect createReactionEffect();
 
   /**
+   * Returns a new object of class '<em>Conditional Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Conditional Expression</em>'.
+   * @generated
+   */
+  ConditionalExpression createConditionalExpression();
+
+  /**
    * Returns a new object of class '<em>Logical Or Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -413,6 +413,33 @@ public interface StextFactory extends EFactory
   LogicalNotExpression createLogicalNotExpression();
 
   /**
+   * Returns a new object of class '<em>Bitwise Xor Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bitwise Xor Expression</em>'.
+   * @generated
+   */
+  BitwiseXorExpression createBitwiseXorExpression();
+
+  /**
+   * Returns a new object of class '<em>Bitwise Or Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bitwise Or Expression</em>'.
+   * @generated
+   */
+  BitwiseOrExpression createBitwiseOrExpression();
+
+  /**
+   * Returns a new object of class '<em>Bitwise And Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bitwise And Expression</em>'.
+   * @generated
+   */
+  BitwiseAndExpression createBitwiseAndExpression();
+
+  /**
    * Returns a new object of class '<em>Logical Relation Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -420,6 +447,15 @@ public interface StextFactory extends EFactory
    * @generated
    */
   LogicalRelationExpression createLogicalRelationExpression();
+
+  /**
+   * Returns a new object of class '<em>Shift Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Shift Expression</em>'.
+   * @generated
+   */
+  ShiftExpression createShiftExpression();
 
   /**
    * Returns a new object of class '<em>Numerical Add Subtract Expression</em>'.

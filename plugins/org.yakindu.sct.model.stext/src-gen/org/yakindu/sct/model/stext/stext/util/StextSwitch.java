@@ -14,6 +14,7 @@ import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.NamedElement;
+import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Variable;
@@ -146,13 +147,6 @@ public class StextSwitch<T> extends Switch<T>
       {
         EventDerivation eventDerivation = (EventDerivation)theEObject;
         T result = caseEventDerivation(eventDerivation);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case StextPackage.REACTION:
-      {
-        Reaction reaction = (Reaction)theEObject;
-        T result = caseReaction(reaction);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -407,6 +401,15 @@ public class StextSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case StextPackage.CONDITIONAL_EXPRESSION:
+      {
+        ConditionalExpression conditionalExpression = (ConditionalExpression)theEObject;
+        T result = caseConditionalExpression(conditionalExpression);
+        if (result == null) result = caseExpression(conditionalExpression);
+        if (result == null) result = caseStatement(conditionalExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case StextPackage.LOGICAL_OR_EXPRESSION:
       {
         LogicalOrExpression logicalOrExpression = (LogicalOrExpression)theEObject;
@@ -434,12 +437,48 @@ public class StextSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case StextPackage.BITWISE_XOR_EXPRESSION:
+      {
+        BitwiseXorExpression bitwiseXorExpression = (BitwiseXorExpression)theEObject;
+        T result = caseBitwiseXorExpression(bitwiseXorExpression);
+        if (result == null) result = caseExpression(bitwiseXorExpression);
+        if (result == null) result = caseStatement(bitwiseXorExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.BITWISE_OR_EXPRESSION:
+      {
+        BitwiseOrExpression bitwiseOrExpression = (BitwiseOrExpression)theEObject;
+        T result = caseBitwiseOrExpression(bitwiseOrExpression);
+        if (result == null) result = caseExpression(bitwiseOrExpression);
+        if (result == null) result = caseStatement(bitwiseOrExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.BITWISE_AND_EXPRESSION:
+      {
+        BitwiseAndExpression bitwiseAndExpression = (BitwiseAndExpression)theEObject;
+        T result = caseBitwiseAndExpression(bitwiseAndExpression);
+        if (result == null) result = caseExpression(bitwiseAndExpression);
+        if (result == null) result = caseStatement(bitwiseAndExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case StextPackage.LOGICAL_RELATION_EXPRESSION:
       {
         LogicalRelationExpression logicalRelationExpression = (LogicalRelationExpression)theEObject;
         T result = caseLogicalRelationExpression(logicalRelationExpression);
         if (result == null) result = caseExpression(logicalRelationExpression);
         if (result == null) result = caseStatement(logicalRelationExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.SHIFT_EXPRESSION:
+      {
+        ShiftExpression shiftExpression = (ShiftExpression)theEObject;
+        T result = caseShiftExpression(shiftExpression);
+        if (result == null) result = caseExpression(shiftExpression);
+        if (result == null) result = caseStatement(shiftExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -641,22 +680,6 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEventDerivation(EventDerivation object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Reaction</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Reaction</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseReaction(Reaction object)
   {
     return null;
   }
@@ -1142,6 +1165,22 @@ public class StextSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Conditional Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Conditional Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConditionalExpression(ConditionalExpression object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Logical Or Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1190,6 +1229,54 @@ public class StextSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Bitwise Xor Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Bitwise Xor Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBitwiseXorExpression(BitwiseXorExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Bitwise Or Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Bitwise Or Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBitwiseOrExpression(BitwiseOrExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Bitwise And Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Bitwise And Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBitwiseAndExpression(BitwiseAndExpression object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Logical Relation Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1201,6 +1288,22 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseLogicalRelationExpression(LogicalRelationExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Shift Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Shift Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseShiftExpression(ShiftExpression object)
   {
     return null;
   }
@@ -1329,6 +1432,22 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseDeclaration(Declaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Reaction</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Reaction</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseReaction(Reaction object)
   {
     return null;
   }

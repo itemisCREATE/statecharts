@@ -27,7 +27,7 @@ public interface ExecutionScope {
 
 	void call(String procedureId);
 
-	void raise(String signal);
+	void raise(String signal, Object object);
 
 	void setVariableValue(RTVariable variable, Object object);
 	

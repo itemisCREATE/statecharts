@@ -148,7 +148,7 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 		return Collections.unmodifiableSet(currentStateConfigurartion);
 	}
 
-	public void raise(String signal) {
+	public void raise(String signal, Object object) {
 		setEvent(eventMap.get(signal));
 	}
 

@@ -63,7 +63,7 @@ public class RTScope implements ExecutionScope {
 	/* (non-Javadoc)
 	 * @see com.yakindu.statechart.model.expressions.runtime.ExecutionScope#raise(java.lang.String)
 	 */
-	public void raise(String signal) {
+	public void raise(String signal, Object object) {
 		// TODO Auto-generated method stub		
 	}
 
