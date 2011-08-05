@@ -66,6 +66,7 @@ public class STextBuilderTest {
 		public List<String> trace = new ArrayList<String>();
 		public String called;
 		public String raised;
+		public Object value;
 
 		@Override
 		public RTVariable getVariable(String varName) {
@@ -81,10 +82,11 @@ public class STextBuilderTest {
 		}
 
 		@Override
-		public void raise(String signal, Object object) {
+		public void raise(String signal, Object value) {
 			trace.add("raise:" + signal);
-			super.raise(signal, object);
+			super.raise(signal, value);
 			raised = signal;
+			this.value = value;
 		}
 
 	}
@@ -170,6 +172,21 @@ public class STextBuilderTest {
 
 		stmt.execute(scope);
 		assertEquals("abc", scope.raised);
+		assertEquals(null, scope.value);
+	}
+
+	@Test
+	public void testRaiseWithValue() {
+
+		RTStatement stmt = parseReactionEffect("raise abc:42;");
+
+		assertNotNull(stmt);
+		assertTrue(stmt instanceof StatementSequence);
+		assertEquals(1, ((StatementSequence) stmt).size());
+
+		stmt.execute(scope);
+		assertEquals("abc", scope.raised);
+		assertEquals(42, scope.value);
 	}
 
 	@Test

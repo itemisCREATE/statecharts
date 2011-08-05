@@ -149,11 +149,19 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 	}
 
 	public void raise(String signal, Object object) {
-		setEvent(eventMap.get(signal));
+		RTSignalEvent event = eventMap.get(signal);
+		event.setValue(object);
+		setEvent(event);
+		for (ISGraphExecutionListener listener : listeners) {
+			listener.eventRaised(signal);
+		}
+
 	}
 
 	public void reset(String signal) {
-		raisedEvents.remove(eventMap.get(signal));
+		RTSignalEvent event = eventMap.get(signal);
+		event.setValue(null);
+		raisedEvents.remove(event);
 	}
 
 	public void call(String procedureId) {

@@ -22,8 +22,10 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.simulation.runtime.sgraph.RTSignalEvent;
 import org.yakindu.sct.simulation.runtime.stext.Assign;
 import org.yakindu.sct.simulation.runtime.stext.BinaryOperation;
 import org.yakindu.sct.simulation.runtime.stext.Conditional;
@@ -148,6 +150,30 @@ public class STextBuilder extends Function {
 			variable.setValue(0.0f);
 		}
 		return variable;
+	}
+
+	
+	@FunctionMethod("build")
+	public RTSignalEvent buildEventDefinition(EObject obj) {
+		RTSignalEvent event = new RTSignalEvent();
+		EventDefinition definition = (EventDefinition) obj;
+
+
+		//TODO: Default value
+		event.setId(definition.getName());
+		Type type = definition.getType();
+
+		if (type == Type.BOOLEAN) {
+			event.setType(Boolean.class);
+			event.setValue(null);
+		} else if (type == Type.INTEGER) {
+			event.setType(Integer.class);
+			event.setValue(null);
+		} else if (type == Type.REAL) {
+			event.setType(Float.class);
+			event.setValue(null);
+		}
+		return event;
 	}
 
 	@FunctionMethod("build")

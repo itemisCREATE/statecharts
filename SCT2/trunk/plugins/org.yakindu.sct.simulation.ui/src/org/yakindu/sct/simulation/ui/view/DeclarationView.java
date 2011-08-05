@@ -206,7 +206,11 @@ public class DeclarationView extends ViewPart implements
 	}
 
 	public void eventRaised(String eventName) {
-		// Nothing to do
+		Display.getDefault().asyncExec(new Runnable() {
+			public void run() {
+				setEventViewerInput();
+			}
+		});
 	}
 
 	private static final class ButtonListener implements SelectionListener {

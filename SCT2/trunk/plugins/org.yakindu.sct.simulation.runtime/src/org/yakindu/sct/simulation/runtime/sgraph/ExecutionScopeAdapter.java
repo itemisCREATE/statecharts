@@ -73,7 +73,7 @@ public class ExecutionScopeAdapter implements ISGraphExecutionScope {
 
 	
 	private ScopeEvent toScope(RTSignalEvent rtEvent) {
-		return new ScopeEvent(rtEvent.getId());
+		return new ScopeEvent(rtEvent.getId(), rtEvent.getType(), rtEvent.getValue());
 	}
 
 	
