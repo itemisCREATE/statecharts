@@ -14,12 +14,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.yakindu.sct.model.sgraph.Effect;
+import org.yakindu.sct.model.sgraph.Reaction;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Trigger;
 
 import org.yakindu.sct.model.sgraph.impl.DeclarationImpl;
 
 import org.yakindu.sct.model.stext.stext.LocalReaction;
-import org.yakindu.sct.model.stext.stext.Reaction;
 import org.yakindu.sct.model.stext.stext.ReactionProperties;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -353,9 +354,8 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
     {
       switch (derivedFeatureID)
       {
-        case StextPackage.LOCAL_REACTION__TRIGGER: return StextPackage.REACTION__TRIGGER;
-        case StextPackage.LOCAL_REACTION__EFFECT: return StextPackage.REACTION__EFFECT;
-        case StextPackage.LOCAL_REACTION__PROPERTIES: return StextPackage.REACTION__PROPERTIES;
+        case StextPackage.LOCAL_REACTION__TRIGGER: return SGraphPackage.REACTION__TRIGGER;
+        case StextPackage.LOCAL_REACTION__EFFECT: return SGraphPackage.REACTION__EFFECT;
         default: return -1;
       }
     }
@@ -374,9 +374,8 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
     {
       switch (baseFeatureID)
       {
-        case StextPackage.REACTION__TRIGGER: return StextPackage.LOCAL_REACTION__TRIGGER;
-        case StextPackage.REACTION__EFFECT: return StextPackage.LOCAL_REACTION__EFFECT;
-        case StextPackage.REACTION__PROPERTIES: return StextPackage.LOCAL_REACTION__PROPERTIES;
+        case SGraphPackage.REACTION__TRIGGER: return StextPackage.LOCAL_REACTION__TRIGGER;
+        case SGraphPackage.REACTION__EFFECT: return StextPackage.LOCAL_REACTION__EFFECT;
         default: return -1;
       }
     }

@@ -15,6 +15,7 @@ import org.yakindu.sct.simulation.runtime.ExecutionScope;
 public class Raise implements RTStatement {
 
 	protected String signal;
+	protected RTExpression valueExpression;
 	
 	
 	public Raise() {
@@ -22,9 +23,10 @@ public class Raise implements RTStatement {
 	}
 	
 
-	public Raise(String signal) {
+	public Raise(String signal, RTExpression valueExp) {
 		this();
 		this.signal = signal;
+		this.valueExpression = valueExp;
 	}
 
 
@@ -39,7 +41,7 @@ public class Raise implements RTStatement {
 
 
 	public void execute(ExecutionScope scope) {
-		scope.raise(signal);
+		scope.raise(signal, valueExpression != null ? valueExpression.execute(scope) : null);
 	}
 
 }

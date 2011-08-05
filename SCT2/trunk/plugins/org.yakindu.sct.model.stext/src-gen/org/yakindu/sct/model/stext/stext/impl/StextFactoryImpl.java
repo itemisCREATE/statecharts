@@ -77,7 +77,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.STATE_DECLARATION: return createStateDeclaration();
       case StextPackage.TRANSITION_STATEMENT: return createTransitionStatement();
       case StextPackage.EVENT_DERIVATION: return createEventDerivation();
-      case StextPackage.REACTION: return createReaction();
       case StextPackage.LOCAL_REACTION: return createLocalReaction();
       case StextPackage.TRANSITION_REACTION: return createTransitionReaction();
       case StextPackage.REACTION_PROPERTIES: return createReactionProperties();
@@ -108,10 +107,15 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.EXITPOINT: return createExitpoint();
       case StextPackage.REACTION_TRIGGER: return createReactionTrigger();
       case StextPackage.REACTION_EFFECT: return createReactionEffect();
+      case StextPackage.CONDITIONAL_EXPRESSION: return createConditionalExpression();
       case StextPackage.LOGICAL_OR_EXPRESSION: return createLogicalOrExpression();
       case StextPackage.LOGICAL_AND_EXPRESSION: return createLogicalAndExpression();
       case StextPackage.LOGICAL_NOT_EXPRESSION: return createLogicalNotExpression();
+      case StextPackage.BITWISE_XOR_EXPRESSION: return createBitwiseXorExpression();
+      case StextPackage.BITWISE_OR_EXPRESSION: return createBitwiseOrExpression();
+      case StextPackage.BITWISE_AND_EXPRESSION: return createBitwiseAndExpression();
       case StextPackage.LOGICAL_RELATION_EXPRESSION: return createLogicalRelationExpression();
+      case StextPackage.SHIFT_EXPRESSION: return createShiftExpression();
       case StextPackage.NUMERICAL_ADD_SUBTRACT_EXPRESSION: return createNumericalAddSubtractExpression();
       case StextPackage.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION: return createNumericalMultiplyDivideExpression();
       case StextPackage.NUMERICAL_UNARY_EXPRESSION: return createNumericalUnaryExpression();
@@ -135,6 +139,10 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
     {
       case StextPackage.DIRECTION:
         return createDirectionFromString(eDataType, initialValue);
+      case StextPackage.ASSIGNMENT_OPERATOR:
+        return createAssignmentOperatorFromString(eDataType, initialValue);
+      case StextPackage.SHIFT_OPERATOR:
+        return createShiftOperatorFromString(eDataType, initialValue);
       case StextPackage.ADDITIVE_OPERATOR:
         return createAdditiveOperatorFromString(eDataType, initialValue);
       case StextPackage.MULTIPLICATIVE_OPERATOR:
@@ -164,6 +172,10 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
     {
       case StextPackage.DIRECTION:
         return convertDirectionToString(eDataType, instanceValue);
+      case StextPackage.ASSIGNMENT_OPERATOR:
+        return convertAssignmentOperatorToString(eDataType, instanceValue);
+      case StextPackage.SHIFT_OPERATOR:
+        return convertShiftOperatorToString(eDataType, instanceValue);
       case StextPackage.ADDITIVE_OPERATOR:
         return convertAdditiveOperatorToString(eDataType, instanceValue);
       case StextPackage.MULTIPLICATIVE_OPERATOR:
@@ -278,17 +290,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     EventDerivationImpl eventDerivation = new EventDerivationImpl();
     return eventDerivation;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Reaction createReaction()
-  {
-    ReactionImpl reaction = new ReactionImpl();
-    return reaction;
   }
 
   /**
@@ -626,6 +627,17 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public ConditionalExpression createConditionalExpression()
+  {
+    ConditionalExpressionImpl conditionalExpression = new ConditionalExpressionImpl();
+    return conditionalExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public LogicalOrExpression createLogicalOrExpression()
   {
     LogicalOrExpressionImpl logicalOrExpression = new LogicalOrExpressionImpl();
@@ -659,10 +671,54 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public BitwiseXorExpression createBitwiseXorExpression()
+  {
+    BitwiseXorExpressionImpl bitwiseXorExpression = new BitwiseXorExpressionImpl();
+    return bitwiseXorExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public BitwiseOrExpression createBitwiseOrExpression()
+  {
+    BitwiseOrExpressionImpl bitwiseOrExpression = new BitwiseOrExpressionImpl();
+    return bitwiseOrExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public BitwiseAndExpression createBitwiseAndExpression()
+  {
+    BitwiseAndExpressionImpl bitwiseAndExpression = new BitwiseAndExpressionImpl();
+    return bitwiseAndExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public LogicalRelationExpression createLogicalRelationExpression()
   {
     LogicalRelationExpressionImpl logicalRelationExpression = new LogicalRelationExpressionImpl();
     return logicalRelationExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ShiftExpression createShiftExpression()
+  {
+    ShiftExpressionImpl shiftExpression = new ShiftExpressionImpl();
+    return shiftExpression;
   }
 
   /**
@@ -749,6 +805,50 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
    * @generated
    */
   public String convertDirectionToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AssignmentOperator createAssignmentOperatorFromString(EDataType eDataType, String initialValue)
+  {
+    AssignmentOperator result = AssignmentOperator.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertAssignmentOperatorToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ShiftOperator createShiftOperatorFromString(EDataType eDataType, String initialValue)
+  {
+    ShiftOperator result = ShiftOperator.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertShiftOperatorToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

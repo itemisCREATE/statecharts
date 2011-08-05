@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.yakindu.sct.model.sgraph.Variable;
 
 import org.yakindu.sct.model.stext.stext.Assignment;
+import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -27,6 +28,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.AssignmentImpl#getVarRef <em>Var Ref</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.impl.AssignmentImpl#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.AssignmentImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
@@ -44,6 +46,26 @@ public class AssignmentImpl extends StatementImpl implements Assignment
    * @ordered
    */
   protected Variable varRef;
+
+  /**
+   * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperator()
+   * @generated
+   * @ordered
+   */
+  protected static final AssignmentOperator OPERATOR_EDEFAULT = AssignmentOperator.ASSIGN;
+
+  /**
+   * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperator()
+   * @generated
+   * @ordered
+   */
+  protected AssignmentOperator operator = OPERATOR_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
@@ -124,6 +146,29 @@ public class AssignmentImpl extends StatementImpl implements Assignment
    * <!-- end-user-doc -->
    * @generated
    */
+  public AssignmentOperator getOperator()
+  {
+    return operator;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setOperator(AssignmentOperator newOperator)
+  {
+    AssignmentOperator oldOperator = operator;
+    operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.ASSIGNMENT__OPERATOR, oldOperator, operator));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Expression getExpression()
   {
     return expression;
@@ -196,6 +241,8 @@ public class AssignmentImpl extends StatementImpl implements Assignment
       case StextPackage.ASSIGNMENT__VAR_REF:
         if (resolve) return getVarRef();
         return basicGetVarRef();
+      case StextPackage.ASSIGNMENT__OPERATOR:
+        return getOperator();
       case StextPackage.ASSIGNMENT__EXPRESSION:
         return getExpression();
     }
@@ -214,6 +261,9 @@ public class AssignmentImpl extends StatementImpl implements Assignment
     {
       case StextPackage.ASSIGNMENT__VAR_REF:
         setVarRef((Variable)newValue);
+        return;
+      case StextPackage.ASSIGNMENT__OPERATOR:
+        setOperator((AssignmentOperator)newValue);
         return;
       case StextPackage.ASSIGNMENT__EXPRESSION:
         setExpression((Expression)newValue);
@@ -235,6 +285,9 @@ public class AssignmentImpl extends StatementImpl implements Assignment
       case StextPackage.ASSIGNMENT__VAR_REF:
         setVarRef((Variable)null);
         return;
+      case StextPackage.ASSIGNMENT__OPERATOR:
+        setOperator(OPERATOR_EDEFAULT);
+        return;
       case StextPackage.ASSIGNMENT__EXPRESSION:
         setExpression((Expression)null);
         return;
@@ -254,10 +307,29 @@ public class AssignmentImpl extends StatementImpl implements Assignment
     {
       case StextPackage.ASSIGNMENT__VAR_REF:
         return varRef != null;
+      case StextPackage.ASSIGNMENT__OPERATOR:
+        return operator != OPERATOR_EDEFAULT;
       case StextPackage.ASSIGNMENT__EXPRESSION:
         return expression != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (operator: ");
+    result.append(operator);
+    result.append(')');
+    return result.toString();
   }
 
 } //AssignmentImpl

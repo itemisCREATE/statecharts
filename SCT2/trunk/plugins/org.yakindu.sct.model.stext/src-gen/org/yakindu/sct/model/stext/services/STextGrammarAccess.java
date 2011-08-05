@@ -719,7 +719,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		
 		/// * ---- reaction rules ----
 		//Define the structure of reactions that are central for describing the statecharts behavior. 
-		// * / Reaction:
+		// * / Reaction returns sct::Reaction:
 		//	LocalReaction | TransitionReaction;
 		public ParserRule getRule() { return rule; }
 
@@ -1301,15 +1301,16 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cVarRefAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cVarRefVariableCrossReference_0_0 = (CrossReference)cVarRefAssignment_0.eContents().get(0);
 		private final RuleCall cVarRefVariableIDTerminalRuleCall_0_0_1 = (RuleCall)cVarRefVariableCrossReference_0_0.eContents().get(1);
-		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cOperatorAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cOperatorAssignmentOperatorEnumRuleCall_1_0 = (RuleCall)cOperatorAssignment_1.eContents().get(0);
 		private final Assignment cExpressionAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cExpressionExpressionParserRuleCall_2_0 = (RuleCall)cExpressionAssignment_2.eContents().get(0);
 		
 		//Assignment:
-		//	varRef=[sct::Variable] "=" expression=Expression;
+		//	varRef=[sct::Variable] operator=AssignmentOperator expression=Expression;
 		public ParserRule getRule() { return rule; }
 
-		//varRef=[sct::Variable] "=" expression=Expression
+		//varRef=[sct::Variable] operator=AssignmentOperator expression=Expression
 		public Group getGroup() { return cGroup; }
 
 		//varRef=[sct::Variable]
@@ -1321,8 +1322,11 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getVarRefVariableIDTerminalRuleCall_0_0_1() { return cVarRefVariableIDTerminalRuleCall_0_0_1; }
 
-		//"="
-		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
+		//operator=AssignmentOperator
+		public Assignment getOperatorAssignment_1() { return cOperatorAssignment_1; }
+
+		//AssignmentOperator
+		public RuleCall getOperatorAssignmentOperatorEnumRuleCall_1_0() { return cOperatorAssignmentOperatorEnumRuleCall_1_0; }
 
 		//expression=Expression
 		public Assignment getExpressionAssignment_2() { return cExpressionAssignment_2; }
@@ -1377,7 +1381,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class ExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Expression");
-		private final RuleCall cLogicalOrExpressionParserRuleCall = (RuleCall)rule.eContents().get(1);
+		private final RuleCall cConditionalExpressionParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//// ****************
 		//// Expression Grammar
@@ -1385,11 +1389,61 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		////ExpressionRule:
 		////	expression=(LogicalOrExpression | RaiseEventExpression);
 		//Expression:
-		//	LogicalOrExpression;
+		//	ConditionalExpression;
 		public ParserRule getRule() { return rule; }
 
+		//ConditionalExpression
+		public RuleCall getConditionalExpressionParserRuleCall() { return cConditionalExpressionParserRuleCall; }
+	}
+
+	public class ConditionalExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ConditionalExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cLogicalOrExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cConditionalExpressionConditionAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cQuestionMarkKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cTrueCaseAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cTrueCaseLogicalOrExpressionParserRuleCall_1_2_0 = (RuleCall)cTrueCaseAssignment_1_2.eContents().get(0);
+		private final Keyword cColonKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
+		private final Assignment cFalseCaseAssignment_1_4 = (Assignment)cGroup_1.eContents().get(4);
+		private final RuleCall cFalseCaseLogicalOrExpressionParserRuleCall_1_4_0 = (RuleCall)cFalseCaseAssignment_1_4.eContents().get(0);
+		
+		//ConditionalExpression returns Expression:
+		//	LogicalOrExpression ({ConditionalExpression.condition=current} "?" trueCase=LogicalOrExpression ":"
+		//	falseCase=LogicalOrExpression)?;
+		public ParserRule getRule() { return rule; }
+
+		//LogicalOrExpression ({ConditionalExpression.condition=current} "?" trueCase=LogicalOrExpression ":"
+		//falseCase=LogicalOrExpression)?
+		public Group getGroup() { return cGroup; }
+
 		//LogicalOrExpression
-		public RuleCall getLogicalOrExpressionParserRuleCall() { return cLogicalOrExpressionParserRuleCall; }
+		public RuleCall getLogicalOrExpressionParserRuleCall_0() { return cLogicalOrExpressionParserRuleCall_0; }
+
+		//({ConditionalExpression.condition=current} "?" trueCase=LogicalOrExpression ":" falseCase=LogicalOrExpression)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{ConditionalExpression.condition=current}
+		public Action getConditionalExpressionConditionAction_1_0() { return cConditionalExpressionConditionAction_1_0; }
+
+		//"?"
+		public Keyword getQuestionMarkKeyword_1_1() { return cQuestionMarkKeyword_1_1; }
+
+		//trueCase=LogicalOrExpression
+		public Assignment getTrueCaseAssignment_1_2() { return cTrueCaseAssignment_1_2; }
+
+		//LogicalOrExpression
+		public RuleCall getTrueCaseLogicalOrExpressionParserRuleCall_1_2_0() { return cTrueCaseLogicalOrExpressionParserRuleCall_1_2_0; }
+
+		//":"
+		public Keyword getColonKeyword_1_3() { return cColonKeyword_1_3; }
+
+		//falseCase=LogicalOrExpression
+		public Assignment getFalseCaseAssignment_1_4() { return cFalseCaseAssignment_1_4; }
+
+		//LogicalOrExpression
+		public RuleCall getFalseCaseLogicalOrExpressionParserRuleCall_1_4_0() { return cFalseCaseLogicalOrExpressionParserRuleCall_1_4_0; }
 	}
 
 	public class LogicalOrExpressionElements extends AbstractParserRuleElementFinder {
@@ -1467,24 +1521,24 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	public class LogicalNotExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LogicalNotExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cLogicalRelationExpressionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cBitwiseXorExpressionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
 		private final Action cLogicalNotExpressionAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Keyword cExclamationMarkKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		private final Assignment cOperandAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cOperandLogicalRelationExpressionParserRuleCall_1_2_0 = (RuleCall)cOperandAssignment_1_2.eContents().get(0);
+		private final RuleCall cOperandBitwiseXorExpressionParserRuleCall_1_2_0 = (RuleCall)cOperandAssignment_1_2.eContents().get(0);
 		
 		//LogicalNotExpression returns Expression:
-		//	LogicalRelationExpression | {LogicalNotExpression} "!" operand=LogicalRelationExpression;
+		//	BitwiseXorExpression | {LogicalNotExpression} "!" operand=BitwiseXorExpression;
 		public ParserRule getRule() { return rule; }
 
-		//LogicalRelationExpression | {LogicalNotExpression} "!" operand=LogicalRelationExpression
+		//BitwiseXorExpression | {LogicalNotExpression} "!" operand=BitwiseXorExpression
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//LogicalRelationExpression
-		public RuleCall getLogicalRelationExpressionParserRuleCall_0() { return cLogicalRelationExpressionParserRuleCall_0; }
+		//BitwiseXorExpression
+		public RuleCall getBitwiseXorExpressionParserRuleCall_0() { return cBitwiseXorExpressionParserRuleCall_0; }
 
-		//{LogicalNotExpression} "!" operand=LogicalRelationExpression
+		//{LogicalNotExpression} "!" operand=BitwiseXorExpression
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{LogicalNotExpression}
@@ -1493,38 +1547,145 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//"!"
 		public Keyword getExclamationMarkKeyword_1_1() { return cExclamationMarkKeyword_1_1; }
 
-		//operand=LogicalRelationExpression
+		//operand=BitwiseXorExpression
 		public Assignment getOperandAssignment_1_2() { return cOperandAssignment_1_2; }
 
+		//BitwiseXorExpression
+		public RuleCall getOperandBitwiseXorExpressionParserRuleCall_1_2_0() { return cOperandBitwiseXorExpressionParserRuleCall_1_2_0; }
+	}
+
+	public class BitwiseXorExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BitwiseXorExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cBitwiseOrExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cBitwiseXorExpressionLeftOperandAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cCircumflexAccentKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cRightOperandAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightOperandBitwiseOrExpressionParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
+		
+		//BitwiseXorExpression returns Expression:
+		//	BitwiseOrExpression ({BitwiseXorExpression.leftOperand=current} "^" rightOperand=BitwiseOrExpression)*;
+		public ParserRule getRule() { return rule; }
+
+		//BitwiseOrExpression ({BitwiseXorExpression.leftOperand=current} "^" rightOperand=BitwiseOrExpression)*
+		public Group getGroup() { return cGroup; }
+
+		//BitwiseOrExpression
+		public RuleCall getBitwiseOrExpressionParserRuleCall_0() { return cBitwiseOrExpressionParserRuleCall_0; }
+
+		//({BitwiseXorExpression.leftOperand=current} "^" rightOperand=BitwiseOrExpression)*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{BitwiseXorExpression.leftOperand=current}
+		public Action getBitwiseXorExpressionLeftOperandAction_1_0() { return cBitwiseXorExpressionLeftOperandAction_1_0; }
+
+		//"^"
+		public Keyword getCircumflexAccentKeyword_1_1() { return cCircumflexAccentKeyword_1_1; }
+
+		//rightOperand=BitwiseOrExpression
+		public Assignment getRightOperandAssignment_1_2() { return cRightOperandAssignment_1_2; }
+
+		//BitwiseOrExpression
+		public RuleCall getRightOperandBitwiseOrExpressionParserRuleCall_1_2_0() { return cRightOperandBitwiseOrExpressionParserRuleCall_1_2_0; }
+	}
+
+	public class BitwiseOrExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BitwiseOrExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cBitwiseAndExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cBitwiseOrExpressionLeftOperandAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cVerticalLineKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cRightOperandAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightOperandBitwiseAndExpressionParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
+		
+		//BitwiseOrExpression returns Expression:
+		//	BitwiseAndExpression ({BitwiseOrExpression.leftOperand=current} "|" rightOperand=BitwiseAndExpression)*;
+		public ParserRule getRule() { return rule; }
+
+		//BitwiseAndExpression ({BitwiseOrExpression.leftOperand=current} "|" rightOperand=BitwiseAndExpression)*
+		public Group getGroup() { return cGroup; }
+
+		//BitwiseAndExpression
+		public RuleCall getBitwiseAndExpressionParserRuleCall_0() { return cBitwiseAndExpressionParserRuleCall_0; }
+
+		//({BitwiseOrExpression.leftOperand=current} "|" rightOperand=BitwiseAndExpression)*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{BitwiseOrExpression.leftOperand=current}
+		public Action getBitwiseOrExpressionLeftOperandAction_1_0() { return cBitwiseOrExpressionLeftOperandAction_1_0; }
+
+		//"|"
+		public Keyword getVerticalLineKeyword_1_1() { return cVerticalLineKeyword_1_1; }
+
+		//rightOperand=BitwiseAndExpression
+		public Assignment getRightOperandAssignment_1_2() { return cRightOperandAssignment_1_2; }
+
+		//BitwiseAndExpression
+		public RuleCall getRightOperandBitwiseAndExpressionParserRuleCall_1_2_0() { return cRightOperandBitwiseAndExpressionParserRuleCall_1_2_0; }
+	}
+
+	public class BitwiseAndExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BitwiseAndExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cLogicalRelationExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cBitwiseAndExpressionLeftOperandAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cAmpersandKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cRightOperandAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightOperandLogicalRelationExpressionParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
+		
+		//BitwiseAndExpression returns Expression:
+		//	LogicalRelationExpression ({BitwiseAndExpression.leftOperand=current} "&" rightOperand=LogicalRelationExpression)*;
+		public ParserRule getRule() { return rule; }
+
+		//LogicalRelationExpression ({BitwiseAndExpression.leftOperand=current} "&" rightOperand=LogicalRelationExpression)*
+		public Group getGroup() { return cGroup; }
+
 		//LogicalRelationExpression
-		public RuleCall getOperandLogicalRelationExpressionParserRuleCall_1_2_0() { return cOperandLogicalRelationExpressionParserRuleCall_1_2_0; }
+		public RuleCall getLogicalRelationExpressionParserRuleCall_0() { return cLogicalRelationExpressionParserRuleCall_0; }
+
+		//({BitwiseAndExpression.leftOperand=current} "&" rightOperand=LogicalRelationExpression)*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{BitwiseAndExpression.leftOperand=current}
+		public Action getBitwiseAndExpressionLeftOperandAction_1_0() { return cBitwiseAndExpressionLeftOperandAction_1_0; }
+
+		//"&"
+		public Keyword getAmpersandKeyword_1_1() { return cAmpersandKeyword_1_1; }
+
+		//rightOperand=LogicalRelationExpression
+		public Assignment getRightOperandAssignment_1_2() { return cRightOperandAssignment_1_2; }
+
+		//LogicalRelationExpression
+		public RuleCall getRightOperandLogicalRelationExpressionParserRuleCall_1_2_0() { return cRightOperandLogicalRelationExpressionParserRuleCall_1_2_0; }
 	}
 
 	public class LogicalRelationExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LogicalRelationExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cNumericalAddSubtractExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final RuleCall cShiftExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Action cLogicalRelationExpressionLeftOperandAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Assignment cOperatorAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cOperatorRelationalOperatorEnumRuleCall_1_1_0 = (RuleCall)cOperatorAssignment_1_1.eContents().get(0);
 		private final Assignment cRightOperandAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cRightOperandNumericalAddSubtractExpressionParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
+		private final RuleCall cRightOperandShiftExpressionParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
 		
 		//LogicalRelationExpression returns Expression:
-		//	NumericalAddSubtractExpression ({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
-		//	rightOperand=NumericalAddSubtractExpression)*;
+		//	ShiftExpression ({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
+		//	rightOperand=ShiftExpression)*;
 		public ParserRule getRule() { return rule; }
 
-		//NumericalAddSubtractExpression ({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
-		//rightOperand=NumericalAddSubtractExpression)*
+		//ShiftExpression ({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
+		//rightOperand=ShiftExpression)*
 		public Group getGroup() { return cGroup; }
 
-		//NumericalAddSubtractExpression
-		public RuleCall getNumericalAddSubtractExpressionParserRuleCall_0() { return cNumericalAddSubtractExpressionParserRuleCall_0; }
+		//ShiftExpression
+		public RuleCall getShiftExpressionParserRuleCall_0() { return cShiftExpressionParserRuleCall_0; }
 
-		//({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
-		//rightOperand=NumericalAddSubtractExpression)*
+		//({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator rightOperand=ShiftExpression)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{LogicalRelationExpression.leftOperand=current}
@@ -1535,6 +1696,48 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//RelationalOperator
 		public RuleCall getOperatorRelationalOperatorEnumRuleCall_1_1_0() { return cOperatorRelationalOperatorEnumRuleCall_1_1_0; }
+
+		//rightOperand=ShiftExpression
+		public Assignment getRightOperandAssignment_1_2() { return cRightOperandAssignment_1_2; }
+
+		//ShiftExpression
+		public RuleCall getRightOperandShiftExpressionParserRuleCall_1_2_0() { return cRightOperandShiftExpressionParserRuleCall_1_2_0; }
+	}
+
+	public class ShiftExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ShiftExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cNumericalAddSubtractExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cShiftExpressionLeftOperandAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cOperatorShiftOperatorEnumRuleCall_1_1_0 = (RuleCall)cOperatorAssignment_1_1.eContents().get(0);
+		private final Assignment cRightOperandAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightOperandNumericalAddSubtractExpressionParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
+		
+		//ShiftExpression returns Expression:
+		//	NumericalAddSubtractExpression ({ShiftExpression.leftOperand=current} operator=ShiftOperator
+		//	rightOperand=NumericalAddSubtractExpression)*;
+		public ParserRule getRule() { return rule; }
+
+		//NumericalAddSubtractExpression ({ShiftExpression.leftOperand=current} operator=ShiftOperator
+		//rightOperand=NumericalAddSubtractExpression)*
+		public Group getGroup() { return cGroup; }
+
+		//NumericalAddSubtractExpression
+		public RuleCall getNumericalAddSubtractExpressionParserRuleCall_0() { return cNumericalAddSubtractExpressionParserRuleCall_0; }
+
+		//({ShiftExpression.leftOperand=current} operator=ShiftOperator rightOperand=NumericalAddSubtractExpression)*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{ShiftExpression.leftOperand=current}
+		public Action getShiftExpressionLeftOperandAction_1_0() { return cShiftExpressionLeftOperandAction_1_0; }
+
+		//operator=ShiftOperator
+		public Assignment getOperatorAssignment_1_1() { return cOperatorAssignment_1_1; }
+
+		//ShiftOperator
+		public RuleCall getOperatorShiftOperatorEnumRuleCall_1_1_0() { return cOperatorShiftOperatorEnumRuleCall_1_1_0; }
 
 		//rightOperand=NumericalAddSubtractExpression
 		public Assignment getRightOperandAssignment_1_2() { return cRightOperandAssignment_1_2; }
@@ -1846,14 +2049,15 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cBOOLTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cSTRINGTerminalRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cFLOATTerminalRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cHEXTerminalRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cSTRINGTerminalRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cFLOATTerminalRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//Literal:
-		//	BOOL | INT | STRING | FLOAT;
+		//	BOOL | INT | HEX | STRING | FLOAT;
 		public ParserRule getRule() { return rule; }
 
-		//BOOL | INT | STRING | FLOAT
+		//BOOL | INT | HEX | STRING | FLOAT
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//BOOL
@@ -1862,11 +2066,14 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//INT
 		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
 
+		//HEX
+		public RuleCall getHEXTerminalRuleCall_2() { return cHEXTerminalRuleCall_2; }
+
 		//STRING
-		public RuleCall getSTRINGTerminalRuleCall_2() { return cSTRINGTerminalRuleCall_2; }
+		public RuleCall getSTRINGTerminalRuleCall_3() { return cSTRINGTerminalRuleCall_3; }
 
 		//FLOAT
-		public RuleCall getFLOATTerminalRuleCall_3() { return cFLOATTerminalRuleCall_3; }
+		public RuleCall getFLOATTerminalRuleCall_4() { return cFLOATTerminalRuleCall_4; }
 	}
 	
 	
@@ -1896,6 +2103,136 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"out"
 		public Keyword getOUTOutKeyword_1_0() { return cOUTOutKeyword_1_0; }
+	}
+
+	public class AssignmentOperatorElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "AssignmentOperator");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cAssignEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cAssignEqualsSignKeyword_0_0 = (Keyword)cAssignEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cMultAssignEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cMultAssignAsteriskEqualsSignKeyword_1_0 = (Keyword)cMultAssignEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cDivAssignEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cDivAssignSolidusEqualsSignKeyword_2_0 = (Keyword)cDivAssignEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cModAssignEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
+		private final Keyword cModAssignPercentSignEqualsSignKeyword_3_0 = (Keyword)cModAssignEnumLiteralDeclaration_3.eContents().get(0);
+		private final EnumLiteralDeclaration cAddAssignEnumLiteralDeclaration_4 = (EnumLiteralDeclaration)cAlternatives.eContents().get(4);
+		private final Keyword cAddAssignPlusSignEqualsSignKeyword_4_0 = (Keyword)cAddAssignEnumLiteralDeclaration_4.eContents().get(0);
+		private final EnumLiteralDeclaration cSubAssignEnumLiteralDeclaration_5 = (EnumLiteralDeclaration)cAlternatives.eContents().get(5);
+		private final Keyword cSubAssignHyphenMinusEqualsSignKeyword_5_0 = (Keyword)cSubAssignEnumLiteralDeclaration_5.eContents().get(0);
+		private final EnumLiteralDeclaration cLeftShiftAssignEnumLiteralDeclaration_6 = (EnumLiteralDeclaration)cAlternatives.eContents().get(6);
+		private final Keyword cLeftShiftAssignLessThanSignLessThanSignEqualsSignKeyword_6_0 = (Keyword)cLeftShiftAssignEnumLiteralDeclaration_6.eContents().get(0);
+		private final EnumLiteralDeclaration cRightShiftAssignEnumLiteralDeclaration_7 = (EnumLiteralDeclaration)cAlternatives.eContents().get(7);
+		private final Keyword cRightShiftAssignGreaterThanSignGreaterThanSignEqualsSignKeyword_7_0 = (Keyword)cRightShiftAssignEnumLiteralDeclaration_7.eContents().get(0);
+		private final EnumLiteralDeclaration cAndAssignEnumLiteralDeclaration_8 = (EnumLiteralDeclaration)cAlternatives.eContents().get(8);
+		private final Keyword cAndAssignAmpersandEqualsSignKeyword_8_0 = (Keyword)cAndAssignEnumLiteralDeclaration_8.eContents().get(0);
+		private final EnumLiteralDeclaration cXorAssignEnumLiteralDeclaration_9 = (EnumLiteralDeclaration)cAlternatives.eContents().get(9);
+		private final Keyword cXorAssignCircumflexAccentEqualsSignKeyword_9_0 = (Keyword)cXorAssignEnumLiteralDeclaration_9.eContents().get(0);
+		private final EnumLiteralDeclaration cOrAssignEnumLiteralDeclaration_10 = (EnumLiteralDeclaration)cAlternatives.eContents().get(10);
+		private final Keyword cOrAssignVerticalLineEqualsSignKeyword_10_0 = (Keyword)cOrAssignEnumLiteralDeclaration_10.eContents().get(0);
+		
+		//enum AssignmentOperator:
+		//	assign="=" | multAssign="*=" | divAssign="/=" | modAssign="%=" | addAssign="+=" | subAssign="-=" |
+		//	leftShiftAssign="<<=" | rightShiftAssign=">>=" | andAssign="&=" | xorAssign="^=" | orAssign="|=";
+		public EnumRule getRule() { return rule; }
+
+		//assign="=" | multAssign="*=" | divAssign="/=" | modAssign="%=" | addAssign="+=" | subAssign="-=" | leftShiftAssign="<<="
+		//| rightShiftAssign=">>=" | andAssign="&=" | xorAssign="^=" | orAssign="|="
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//assign="="
+		public EnumLiteralDeclaration getAssignEnumLiteralDeclaration_0() { return cAssignEnumLiteralDeclaration_0; }
+
+		//"="
+		public Keyword getAssignEqualsSignKeyword_0_0() { return cAssignEqualsSignKeyword_0_0; }
+
+		//multAssign="*="
+		public EnumLiteralDeclaration getMultAssignEnumLiteralDeclaration_1() { return cMultAssignEnumLiteralDeclaration_1; }
+
+		//"*="
+		public Keyword getMultAssignAsteriskEqualsSignKeyword_1_0() { return cMultAssignAsteriskEqualsSignKeyword_1_0; }
+
+		//divAssign="/="
+		public EnumLiteralDeclaration getDivAssignEnumLiteralDeclaration_2() { return cDivAssignEnumLiteralDeclaration_2; }
+
+		//"/="
+		public Keyword getDivAssignSolidusEqualsSignKeyword_2_0() { return cDivAssignSolidusEqualsSignKeyword_2_0; }
+
+		//modAssign="%="
+		public EnumLiteralDeclaration getModAssignEnumLiteralDeclaration_3() { return cModAssignEnumLiteralDeclaration_3; }
+
+		//"%="
+		public Keyword getModAssignPercentSignEqualsSignKeyword_3_0() { return cModAssignPercentSignEqualsSignKeyword_3_0; }
+
+		//addAssign="+="
+		public EnumLiteralDeclaration getAddAssignEnumLiteralDeclaration_4() { return cAddAssignEnumLiteralDeclaration_4; }
+
+		//"+="
+		public Keyword getAddAssignPlusSignEqualsSignKeyword_4_0() { return cAddAssignPlusSignEqualsSignKeyword_4_0; }
+
+		//subAssign="-="
+		public EnumLiteralDeclaration getSubAssignEnumLiteralDeclaration_5() { return cSubAssignEnumLiteralDeclaration_5; }
+
+		//"-="
+		public Keyword getSubAssignHyphenMinusEqualsSignKeyword_5_0() { return cSubAssignHyphenMinusEqualsSignKeyword_5_0; }
+
+		//leftShiftAssign="<<="
+		public EnumLiteralDeclaration getLeftShiftAssignEnumLiteralDeclaration_6() { return cLeftShiftAssignEnumLiteralDeclaration_6; }
+
+		//"<<="
+		public Keyword getLeftShiftAssignLessThanSignLessThanSignEqualsSignKeyword_6_0() { return cLeftShiftAssignLessThanSignLessThanSignEqualsSignKeyword_6_0; }
+
+		//rightShiftAssign=">>="
+		public EnumLiteralDeclaration getRightShiftAssignEnumLiteralDeclaration_7() { return cRightShiftAssignEnumLiteralDeclaration_7; }
+
+		//">>="
+		public Keyword getRightShiftAssignGreaterThanSignGreaterThanSignEqualsSignKeyword_7_0() { return cRightShiftAssignGreaterThanSignGreaterThanSignEqualsSignKeyword_7_0; }
+
+		//andAssign="&="
+		public EnumLiteralDeclaration getAndAssignEnumLiteralDeclaration_8() { return cAndAssignEnumLiteralDeclaration_8; }
+
+		//"&="
+		public Keyword getAndAssignAmpersandEqualsSignKeyword_8_0() { return cAndAssignAmpersandEqualsSignKeyword_8_0; }
+
+		//xorAssign="^="
+		public EnumLiteralDeclaration getXorAssignEnumLiteralDeclaration_9() { return cXorAssignEnumLiteralDeclaration_9; }
+
+		//"^="
+		public Keyword getXorAssignCircumflexAccentEqualsSignKeyword_9_0() { return cXorAssignCircumflexAccentEqualsSignKeyword_9_0; }
+
+		//orAssign="|="
+		public EnumLiteralDeclaration getOrAssignEnumLiteralDeclaration_10() { return cOrAssignEnumLiteralDeclaration_10; }
+
+		//"|="
+		public Keyword getOrAssignVerticalLineEqualsSignKeyword_10_0() { return cOrAssignVerticalLineEqualsSignKeyword_10_0; }
+	}
+
+	public class ShiftOperatorElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "ShiftOperator");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cLeftEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cLeftLessThanSignLessThanSignKeyword_0_0 = (Keyword)cLeftEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cRightEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cRightGreaterThanSignGreaterThanSignKeyword_1_0 = (Keyword)cRightEnumLiteralDeclaration_1.eContents().get(0);
+		
+		//enum ShiftOperator:
+		//	left="<<" | right=">>";
+		public EnumRule getRule() { return rule; }
+
+		//left="<<" | right=">>"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//left="<<"
+		public EnumLiteralDeclaration getLeftEnumLiteralDeclaration_0() { return cLeftEnumLiteralDeclaration_0; }
+
+		//"<<"
+		public Keyword getLeftLessThanSignLessThanSignKeyword_0_0() { return cLeftLessThanSignLessThanSignKeyword_0_0; }
+
+		//right=">>"
+		public EnumLiteralDeclaration getRightEnumLiteralDeclaration_1() { return cRightEnumLiteralDeclaration_1; }
+
+		//">>"
+		public Keyword getRightGreaterThanSignGreaterThanSignKeyword_1_0() { return cRightGreaterThanSignGreaterThanSignKeyword_1_0; }
 	}
 
 	public class AdditiveOperatorElements extends AbstractEnumRuleElementFinder {
@@ -2188,12 +2525,19 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private AlwaysEventElements pAlwaysEvent;
 	private StatementElements pStatement;
 	private AssignmentElements pAssignment;
+	private AssignmentOperatorElements unknownRuleAssignmentOperator;
 	private EventRaisingElements pEventRaising;
 	private ExpressionElements pExpression;
+	private ConditionalExpressionElements pConditionalExpression;
 	private LogicalOrExpressionElements pLogicalOrExpression;
 	private LogicalAndExpressionElements pLogicalAndExpression;
 	private LogicalNotExpressionElements pLogicalNotExpression;
+	private BitwiseXorExpressionElements pBitwiseXorExpression;
+	private BitwiseOrExpressionElements pBitwiseOrExpression;
+	private BitwiseAndExpressionElements pBitwiseAndExpression;
 	private LogicalRelationExpressionElements pLogicalRelationExpression;
+	private ShiftExpressionElements pShiftExpression;
+	private ShiftOperatorElements unknownRuleShiftOperator;
 	private NumericalAddSubtractExpressionElements pNumericalAddSubtractExpression;
 	private NumericalMultiplyDivideExpressionElements pNumericalMultiplyDivideExpression;
 	private NumericalUnaryExpressionElements pNumericalUnaryExpression;
@@ -2210,6 +2554,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private OperationCallElements pOperationCall;
 	private LiteralElements pLiteral;
 	private TerminalRule tBOOL;
+	private TerminalRule tHEX;
 	private TerminalRule tFLOAT;
 	
 	private final GrammarProvider grammarProvider;
@@ -2467,7 +2812,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// * ---- reaction rules ----
 	//Define the structure of reactions that are central for describing the statecharts behavior. 
-	// * / Reaction:
+	// * / Reaction returns sct::Reaction:
 	//	LocalReaction | TransitionReaction;
 	public ReactionElements getReactionAccess() {
 		return (pReaction != null) ? pReaction : (pReaction = new ReactionElements());
@@ -2662,13 +3007,24 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Assignment:
-	//	varRef=[sct::Variable] "=" expression=Expression;
+	//	varRef=[sct::Variable] operator=AssignmentOperator expression=Expression;
 	public AssignmentElements getAssignmentAccess() {
 		return (pAssignment != null) ? pAssignment : (pAssignment = new AssignmentElements());
 	}
 	
 	public ParserRule getAssignmentRule() {
 		return getAssignmentAccess().getRule();
+	}
+
+	//enum AssignmentOperator:
+	//	assign="=" | multAssign="*=" | divAssign="/=" | modAssign="%=" | addAssign="+=" | subAssign="-=" |
+	//	leftShiftAssign="<<=" | rightShiftAssign=">>=" | andAssign="&=" | xorAssign="^=" | orAssign="|=";
+	public AssignmentOperatorElements getAssignmentOperatorAccess() {
+		return (unknownRuleAssignmentOperator != null) ? unknownRuleAssignmentOperator : (unknownRuleAssignmentOperator = new AssignmentOperatorElements());
+	}
+	
+	public EnumRule getAssignmentOperatorRule() {
+		return getAssignmentOperatorAccess().getRule();
 	}
 
 	//EventRaising:
@@ -2687,13 +3043,24 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	////ExpressionRule:
 	////	expression=(LogicalOrExpression | RaiseEventExpression);
 	//Expression:
-	//	LogicalOrExpression;
+	//	ConditionalExpression;
 	public ExpressionElements getExpressionAccess() {
 		return (pExpression != null) ? pExpression : (pExpression = new ExpressionElements());
 	}
 	
 	public ParserRule getExpressionRule() {
 		return getExpressionAccess().getRule();
+	}
+
+	//ConditionalExpression returns Expression:
+	//	LogicalOrExpression ({ConditionalExpression.condition=current} "?" trueCase=LogicalOrExpression ":"
+	//	falseCase=LogicalOrExpression)?;
+	public ConditionalExpressionElements getConditionalExpressionAccess() {
+		return (pConditionalExpression != null) ? pConditionalExpression : (pConditionalExpression = new ConditionalExpressionElements());
+	}
+	
+	public ParserRule getConditionalExpressionRule() {
+		return getConditionalExpressionAccess().getRule();
 	}
 
 	//LogicalOrExpression returns Expression:
@@ -2717,7 +3084,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LogicalNotExpression returns Expression:
-	//	LogicalRelationExpression | {LogicalNotExpression} "!" operand=LogicalRelationExpression;
+	//	BitwiseXorExpression | {LogicalNotExpression} "!" operand=BitwiseXorExpression;
 	public LogicalNotExpressionElements getLogicalNotExpressionAccess() {
 		return (pLogicalNotExpression != null) ? pLogicalNotExpression : (pLogicalNotExpression = new LogicalNotExpressionElements());
 	}
@@ -2726,15 +3093,66 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getLogicalNotExpressionAccess().getRule();
 	}
 
+	//BitwiseXorExpression returns Expression:
+	//	BitwiseOrExpression ({BitwiseXorExpression.leftOperand=current} "^" rightOperand=BitwiseOrExpression)*;
+	public BitwiseXorExpressionElements getBitwiseXorExpressionAccess() {
+		return (pBitwiseXorExpression != null) ? pBitwiseXorExpression : (pBitwiseXorExpression = new BitwiseXorExpressionElements());
+	}
+	
+	public ParserRule getBitwiseXorExpressionRule() {
+		return getBitwiseXorExpressionAccess().getRule();
+	}
+
+	//BitwiseOrExpression returns Expression:
+	//	BitwiseAndExpression ({BitwiseOrExpression.leftOperand=current} "|" rightOperand=BitwiseAndExpression)*;
+	public BitwiseOrExpressionElements getBitwiseOrExpressionAccess() {
+		return (pBitwiseOrExpression != null) ? pBitwiseOrExpression : (pBitwiseOrExpression = new BitwiseOrExpressionElements());
+	}
+	
+	public ParserRule getBitwiseOrExpressionRule() {
+		return getBitwiseOrExpressionAccess().getRule();
+	}
+
+	//BitwiseAndExpression returns Expression:
+	//	LogicalRelationExpression ({BitwiseAndExpression.leftOperand=current} "&" rightOperand=LogicalRelationExpression)*;
+	public BitwiseAndExpressionElements getBitwiseAndExpressionAccess() {
+		return (pBitwiseAndExpression != null) ? pBitwiseAndExpression : (pBitwiseAndExpression = new BitwiseAndExpressionElements());
+	}
+	
+	public ParserRule getBitwiseAndExpressionRule() {
+		return getBitwiseAndExpressionAccess().getRule();
+	}
+
 	//LogicalRelationExpression returns Expression:
-	//	NumericalAddSubtractExpression ({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
-	//	rightOperand=NumericalAddSubtractExpression)*;
+	//	ShiftExpression ({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
+	//	rightOperand=ShiftExpression)*;
 	public LogicalRelationExpressionElements getLogicalRelationExpressionAccess() {
 		return (pLogicalRelationExpression != null) ? pLogicalRelationExpression : (pLogicalRelationExpression = new LogicalRelationExpressionElements());
 	}
 	
 	public ParserRule getLogicalRelationExpressionRule() {
 		return getLogicalRelationExpressionAccess().getRule();
+	}
+
+	//ShiftExpression returns Expression:
+	//	NumericalAddSubtractExpression ({ShiftExpression.leftOperand=current} operator=ShiftOperator
+	//	rightOperand=NumericalAddSubtractExpression)*;
+	public ShiftExpressionElements getShiftExpressionAccess() {
+		return (pShiftExpression != null) ? pShiftExpression : (pShiftExpression = new ShiftExpressionElements());
+	}
+	
+	public ParserRule getShiftExpressionRule() {
+		return getShiftExpressionAccess().getRule();
+	}
+
+	//enum ShiftOperator:
+	//	left="<<" | right=">>";
+	public ShiftOperatorElements getShiftOperatorAccess() {
+		return (unknownRuleShiftOperator != null) ? unknownRuleShiftOperator : (unknownRuleShiftOperator = new ShiftOperatorElements());
+	}
+	
+	public EnumRule getShiftOperatorRule() {
+		return getShiftOperatorAccess().getRule();
 	}
 
 	//NumericalAddSubtractExpression returns Expression:
@@ -2880,7 +3298,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Literal:
-	//	BOOL | INT | STRING | FLOAT;
+	//	BOOL | INT | HEX | STRING | FLOAT;
 	public LiteralElements getLiteralAccess() {
 		return (pLiteral != null) ? pLiteral : (pLiteral = new LiteralElements());
 	}
@@ -2895,8 +3313,14 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return (tBOOL != null) ? tBOOL : (tBOOL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "BOOL"));
 	} 
 
+	//terminal HEX:
+	//	"0" ("x" | "X") ("0".."9" | "a".."f" | "A".."F")+;
+	public TerminalRule getHEXRule() {
+		return (tHEX != null) ? tHEX : (tHEX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "HEX"));
+	} 
+
 	//terminal FLOAT:
-	//	("-" | "+")? (INT "." INT) ("e" ("-" | "+") INT)? ("f" | "F" | "d" | "D")?;
+	//	(INT "." INT) ("e" ("-" | "+") INT)? ("f" | "F" | "d" | "D")?;
 	public TerminalRule getFLOATRule() {
 		return (tFLOAT != null) ? tFLOAT : (tFLOAT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "FLOAT"));
 	} 

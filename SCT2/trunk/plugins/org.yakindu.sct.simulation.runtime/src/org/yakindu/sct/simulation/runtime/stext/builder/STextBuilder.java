@@ -26,6 +26,7 @@ import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.simulation.runtime.stext.Assign;
 import org.yakindu.sct.simulation.runtime.stext.BinaryOperation;
+import org.yakindu.sct.simulation.runtime.stext.Conditional;
 import org.yakindu.sct.simulation.runtime.stext.Constant;
 import org.yakindu.sct.simulation.runtime.stext.CoreFunction;
 import org.yakindu.sct.simulation.runtime.stext.Function;
@@ -153,7 +154,9 @@ public class STextBuilder extends Function {
 	public RTStatement buildEventRaising(EObject obj) {
 
 		EObject event = getToOne(obj, "event");
-		return new Raise(getString(event, "name"));
+		RTExpression value = buildRefExpression(obj, "value");
+
+		return new Raise(getString(event, "name"), value);
 	}
 
 	@FunctionMethod("build")
@@ -168,8 +171,34 @@ public class STextBuilder extends Function {
 		if (variable == null)
 			throw new IllegalStateException("Unknown variable reference " + obj);
 		RTExpression exp = (RTExpression) build(getToOne(obj, "expression"));
-		return new Assign(new VariableRef(getString(variable, "name")), exp);
+		String operator = getLiteral(obj, "operator");
+		VariableRef var = new VariableRef(getString(variable, "name"));
+		
+		if (! "assign".equals(operator)) {
+			String mappedOperator = assignFunctionMap.get(operator);
+			if (mappedOperator == null) 
+				throw new BuilderException("Assignment operator '" + operator + "' can not be resolved to a function.");
+			
+			exp = new BinaryOperation(mappedOperator, var, exp);
+		}
+
+		return new Assign(var, exp);
 	}
+	
+	
+	@FunctionMethod("build")
+	public RTExpression buildConditionalExpression(EObject obj) {
+		
+		RTExpression condition = buildRefExpression(obj, "condition");
+		RTExpression trueCase = buildRefExpression(obj, "trueCase");
+		RTExpression falseCase = buildRefExpression(obj, "falseCase");
+
+		if (condition != null && trueCase != null && falseCase != null)
+			return new Conditional(condition, trueCase, falseCase);
+		
+		return condition;
+	}
+
 
 	@FunctionMethod("build")
 	public RTExpression buildLogicalOrExpression(EObject obj) {
@@ -278,7 +307,7 @@ public class STextBuilder extends Function {
 	}
 
 	@FunctionMethod("build")
-	public RTExpression buildUnaryExpression(EObject obj) {
+	public RTExpression buildNumericalUnaryExpression(EObject obj) {
 
 		RTExpression operand = buildRefExpression(obj, "operand");
 		String operator = getLiteral(obj, "operator");

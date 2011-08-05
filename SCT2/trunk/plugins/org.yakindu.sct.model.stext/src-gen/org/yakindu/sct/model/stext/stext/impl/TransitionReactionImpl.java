@@ -14,9 +14,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.yakindu.sct.model.sgraph.Effect;
+import org.yakindu.sct.model.sgraph.Reaction;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Trigger;
 
-import org.yakindu.sct.model.stext.stext.Reaction;
 import org.yakindu.sct.model.stext.stext.ReactionProperties;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
@@ -351,9 +352,8 @@ public class TransitionReactionImpl extends TransitionStatementImpl implements T
     {
       switch (derivedFeatureID)
       {
-        case StextPackage.TRANSITION_REACTION__TRIGGER: return StextPackage.REACTION__TRIGGER;
-        case StextPackage.TRANSITION_REACTION__EFFECT: return StextPackage.REACTION__EFFECT;
-        case StextPackage.TRANSITION_REACTION__PROPERTIES: return StextPackage.REACTION__PROPERTIES;
+        case StextPackage.TRANSITION_REACTION__TRIGGER: return SGraphPackage.REACTION__TRIGGER;
+        case StextPackage.TRANSITION_REACTION__EFFECT: return SGraphPackage.REACTION__EFFECT;
         default: return -1;
       }
     }
@@ -372,9 +372,8 @@ public class TransitionReactionImpl extends TransitionStatementImpl implements T
     {
       switch (baseFeatureID)
       {
-        case StextPackage.REACTION__TRIGGER: return StextPackage.TRANSITION_REACTION__TRIGGER;
-        case StextPackage.REACTION__EFFECT: return StextPackage.TRANSITION_REACTION__EFFECT;
-        case StextPackage.REACTION__PROPERTIES: return StextPackage.TRANSITION_REACTION__PROPERTIES;
+        case SGraphPackage.REACTION__TRIGGER: return StextPackage.TRANSITION_REACTION__TRIGGER;
+        case SGraphPackage.REACTION__EFFECT: return StextPackage.TRANSITION_REACTION__EFFECT;
         default: return -1;
       }
     }

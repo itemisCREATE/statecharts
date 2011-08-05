@@ -16,6 +16,7 @@ import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.NamedElement;
+import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Variable;
@@ -129,11 +130,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEventDerivation(EventDerivation object)
       {
         return createEventDerivationAdapter();
-      }
-      @Override
-      public Adapter caseReaction(Reaction object)
-      {
-        return createReactionAdapter();
       }
       @Override
       public Adapter caseLocalReaction(LocalReaction object)
@@ -286,6 +282,11 @@ public class StextAdapterFactory extends AdapterFactoryImpl
         return createReactionEffectAdapter();
       }
       @Override
+      public Adapter caseConditionalExpression(ConditionalExpression object)
+      {
+        return createConditionalExpressionAdapter();
+      }
+      @Override
       public Adapter caseLogicalOrExpression(LogicalOrExpression object)
       {
         return createLogicalOrExpressionAdapter();
@@ -301,9 +302,29 @@ public class StextAdapterFactory extends AdapterFactoryImpl
         return createLogicalNotExpressionAdapter();
       }
       @Override
+      public Adapter caseBitwiseXorExpression(BitwiseXorExpression object)
+      {
+        return createBitwiseXorExpressionAdapter();
+      }
+      @Override
+      public Adapter caseBitwiseOrExpression(BitwiseOrExpression object)
+      {
+        return createBitwiseOrExpressionAdapter();
+      }
+      @Override
+      public Adapter caseBitwiseAndExpression(BitwiseAndExpression object)
+      {
+        return createBitwiseAndExpressionAdapter();
+      }
+      @Override
       public Adapter caseLogicalRelationExpression(LogicalRelationExpression object)
       {
         return createLogicalRelationExpressionAdapter();
+      }
+      @Override
+      public Adapter caseShiftExpression(ShiftExpression object)
+      {
+        return createShiftExpressionAdapter();
       }
       @Override
       public Adapter caseNumericalAddSubtractExpression(NumericalAddSubtractExpression object)
@@ -344,6 +365,11 @@ public class StextAdapterFactory extends AdapterFactoryImpl
       public Adapter caseDeclaration(Declaration object)
       {
         return createDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseReaction(Reaction object)
+      {
+        return createReactionAdapter();
       }
       @Override
       public Adapter caseScope(Scope object)
@@ -523,21 +549,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEventDerivationAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.Reaction <em>Reaction</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.Reaction
-   * @generated
-   */
-  public Adapter createReactionAdapter()
   {
     return null;
   }
@@ -993,6 +1004,21 @@ public class StextAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.ConditionalExpression <em>Conditional Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.ConditionalExpression
+   * @generated
+   */
+  public Adapter createConditionalExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.LogicalOrExpression <em>Logical Or Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1038,6 +1064,51 @@ public class StextAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.BitwiseXorExpression <em>Bitwise Xor Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.BitwiseXorExpression
+   * @generated
+   */
+  public Adapter createBitwiseXorExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.BitwiseOrExpression <em>Bitwise Or Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.BitwiseOrExpression
+   * @generated
+   */
+  public Adapter createBitwiseOrExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.BitwiseAndExpression <em>Bitwise And Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.BitwiseAndExpression
+   * @generated
+   */
+  public Adapter createBitwiseAndExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.LogicalRelationExpression <em>Logical Relation Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1048,6 +1119,21 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createLogicalRelationExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.ShiftExpression <em>Shift Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.ShiftExpression
+   * @generated
+   */
+  public Adapter createShiftExpressionAdapter()
   {
     return null;
   }
@@ -1168,6 +1254,21 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Reaction <em>Reaction</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.sgraph.Reaction
+   * @generated
+   */
+  public Adapter createReactionAdapter()
   {
     return null;
   }

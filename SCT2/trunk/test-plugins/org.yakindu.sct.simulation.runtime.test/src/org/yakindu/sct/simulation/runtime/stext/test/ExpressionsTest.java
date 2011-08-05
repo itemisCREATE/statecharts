@@ -70,9 +70,9 @@ public class ExpressionsTest {
 		}
 
 		@Override
-		public void raise(String signal) {
+		public void raise(String signal, Object object) {
 			trace.add("raise:" + signal);
-			super.raise(signal);
+			super.raise(signal, object);
 			raised = signal;
 		}
 
@@ -126,7 +126,7 @@ public class ExpressionsTest {
 	 */
 	@Test
 	public void testRaise() {
-		RTStatement stmt = new Raise("signal");
+		RTStatement stmt = new Raise("signal", null);
 
 		stmt.execute(scope);
 		assertEquals("signal", scope.raised);
@@ -172,7 +172,7 @@ public class ExpressionsTest {
 		scope.addVariable(new RTVariable("a"));
 
 		StatementSequence seq = new StatementSequence();
-		seq.add(new Raise("signal"));
+		seq.add(new Raise("signal", null));
 		seq.add(new ProcedureCall("proc"));
 		seq.add(new Assign(new VariableRef("a"), new Constant(1)));
 

@@ -81,9 +81,9 @@ public class STextBuilderTest {
 		}
 
 		@Override
-		public void raise(String signal) {
+		public void raise(String signal, Object object) {
 			trace.add("raise:" + signal);
-			super.raise(signal);
+			super.raise(signal, object);
 			raised = signal;
 		}
 
@@ -283,6 +283,16 @@ public class STextBuilderTest {
 	}
 
 	@Test
+	public void testNestedExpression() {
+		RTStatement stmt = parseReactionEffect("a = (1 + 1) * 2;");
+		scope.addVariable(new RTVariable("a"));
+		stmt.execute(scope);
+
+		assertEquals(4, scope.getValue("a"));
+	}
+
+
+	@Test
 	public void testBooleanOr() {
 		RTStatement stmt = parseReactionEffect("a = true || false;");
 		scope.addVariable(new RTVariable("a"));
@@ -454,11 +464,17 @@ public class STextBuilderTest {
 
 	@Test
 	public void testIntPositive() {
-		RTStatement stmt = parseReactionEffect("a = +1;");
+		RTStatement stmt = parseReactionEffect("a = + 1;");
 		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(1, scope.getValue("a"));
+
+		stmt = parseReactionEffect("a = +2;");
+		stmt.execute(scope);
+
+		assertEquals(2, scope.getValue("a"));
+
 	}
 
 	@Test
@@ -472,13 +488,32 @@ public class STextBuilderTest {
 
 	@Test
 	public void testIntNegative() {
-		RTStatement stmt = parseReactionEffect("a = -1;");
+		RTStatement stmt = parseReactionEffect("a = - 1;");
 		scope.addVariable(new RTVariable("a"));
 		stmt.execute(scope);
 
 		assertEquals(-1, scope.getValue("a"));
+
+		stmt = parseReactionEffect("a = -2;");
+		scope.addVariable(new RTVariable("a"));
+		stmt.execute(scope);
+
+		assertEquals(-2, scope.getValue("a"));
+	
 	}
 
+	@Test
+	public void testIntNegativeVar() {
+		RTVariable a = new RTVariable("a");
+		scope.addVariable(a);
+		scope.setVariableValue(a, 42);
+		RTStatement stmt = parseReactionEffect("a = -a;");
+		stmt.execute(scope);
+
+		assertEquals(-42, scope.getValue("a"));
+	}
+
+	
 	@Test
 	public void testFloatNegative() {
 		RTStatement stmt = parseReactionEffect("a = -1.0f;");

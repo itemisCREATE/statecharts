@@ -17,18 +17,26 @@ public class InternalSTextLexer extends Lexer {
     public static final int T__57=57;
     public static final int T__23=23;
     public static final int T__51=51;
-    public static final int T__13=13;
+    public static final int T__80=80;
     public static final int T__47=47;
-    public static final int RULE_STRING=6;
+    public static final int T__69=69;
+    public static final int RULE_STRING=7;
+    public static final int T__73=73;
     public static final int T__50=50;
     public static final int T__21=21;
     public static final int T__19=19;
     public static final int T__65=65;
-    public static final int RULE_FLOAT=7;
+    public static final int RULE_FLOAT=8;
+    public static final int RULE_HEX=6;
+    public static final int T__72=72;
+    public static final int T__70=70;
+    public static final int T__67=67;
+    public static final int T__74=74;
     public static final int T__39=39;
     public static final int T__30=30;
     public static final int T__46=46;
     public static final int T__52=52;
+    public static final int T__68=68;
     public static final int T__17=17;
     public static final int T__62=62;
     public static final int RULE_INT=5;
@@ -42,23 +50,28 @@ public class InternalSTextLexer extends Lexer {
     public static final int T__34=34;
     public static final int T__56=56;
     public static final int T__15=15;
-    public static final int RULE_ML_COMMENT=9;
+    public static final int RULE_ML_COMMENT=10;
     public static final int T__35=35;
-    public static final int RULE_ID=8;
+    public static final int RULE_ID=9;
+    public static final int T__78=78;
     public static final int T__36=36;
     public static final int T__20=20;
     public static final int T__58=58;
+    public static final int T__79=79;
     public static final int T__64=64;
     public static final int T__44=44;
-    public static final int T__14=14;
+    public static final int T__66=66;
     public static final int T__33=33;
+    public static final int T__14=14;
     public static final int T__22=22;
+    public static final int T__77=77;
     public static final int T__45=45;
     public static final int T__29=29;
     public static final int T__55=55;
     public static final int T__63=63;
-    public static final int RULE_WS=11;
+    public static final int RULE_WS=12;
     public static final int T__43=43;
+    public static final int T__75=75;
     public static final int T__31=31;
     public static final int T__40=40;
     public static final int EOF=-1;
@@ -67,14 +80,18 @@ public class InternalSTextLexer extends Lexer {
     public static final int T__16=16;
     public static final int T__38=38;
     public static final int T__37=37;
+    public static final int T__76=76;
     public static final int RULE_BOOL=4;
     public static final int T__26=26;
-    public static final int RULE_ANY_OTHER=12;
+    public static final int T__82=82;
+    public static final int RULE_ANY_OTHER=13;
     public static final int T__25=25;
-    public static final int RULE_SL_COMMENT=10;
+    public static final int T__81=81;
+    public static final int RULE_SL_COMMENT=11;
     public static final int T__60=60;
     public static final int T__41=41;
     public static final int T__18=18;
+    public static final int T__71=71;
 
     // delegates
     // delegators
@@ -89,36 +106,15 @@ public class InternalSTextLexer extends Lexer {
     }
     public String getGrammarFileName() { return "../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g"; }
 
-    // $ANTLR start "T__13"
-    public final void mT__13() throws RecognitionException {
-        try {
-            int _type = T__13;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11:7: ( 'in' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11:9: 'in'
-            {
-            match("in"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__13"
-
     // $ANTLR start "T__14"
     public final void mT__14() throws RecognitionException {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:12:7: ( 'out' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:12:9: 'out'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11:7: ( 'in' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11:9: 'in'
             {
-            match("out"); 
+            match("in"); 
 
 
             }
@@ -136,10 +132,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:13:7: ( '+' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:13:9: '+'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:12:7: ( 'out' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:12:9: 'out'
             {
-            match('+'); 
+            match("out"); 
+
 
             }
 
@@ -156,10 +153,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:14:7: ( '-' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:14:9: '-'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:13:7: ( '=' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:13:9: '='
             {
-            match('-'); 
+            match('='); 
 
             }
 
@@ -176,10 +173,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:15:7: ( '*' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:15:9: '*'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:14:7: ( '*=' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:14:9: '*='
             {
-            match('*'); 
+            match("*="); 
+
 
             }
 
@@ -196,10 +194,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:16:7: ( '/' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:16:9: '/'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:15:7: ( '/=' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:15:9: '/='
             {
-            match('/'); 
+            match("/="); 
+
 
             }
 
@@ -216,10 +215,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:17:7: ( '%' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:17:9: '%'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:16:7: ( '%=' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:16:9: '%='
             {
-            match('%'); 
+            match("%="); 
+
 
             }
 
@@ -236,10 +236,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:18:7: ( '~' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:18:9: '~'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:17:7: ( '+=' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:17:9: '+='
             {
-            match('~'); 
+            match("+="); 
+
 
             }
 
@@ -256,10 +257,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:19:7: ( '<' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:19:9: '<'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:18:7: ( '-=' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:18:9: '-='
             {
-            match('<'); 
+            match("-="); 
+
 
             }
 
@@ -276,10 +278,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:20:7: ( '<=' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:20:9: '<='
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:19:7: ( '<<=' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:19:9: '<<='
             {
-            match("<="); 
+            match("<<="); 
 
 
             }
@@ -297,10 +299,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:21:7: ( '>' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:21:9: '>'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:20:7: ( '>>=' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:20:9: '>>='
             {
-            match('>'); 
+            match(">>="); 
+
 
             }
 
@@ -317,10 +320,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:22:7: ( '>=' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:22:9: '>='
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:21:7: ( '&=' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:21:9: '&='
             {
-            match(">="); 
+            match("&="); 
 
 
             }
@@ -338,10 +341,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:23:7: ( '==' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:23:9: '=='
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:22:7: ( '^=' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:22:9: '^='
             {
-            match("=="); 
+            match("^="); 
 
 
             }
@@ -359,10 +362,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:24:7: ( '!=' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:24:9: '!='
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:23:7: ( '|=' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:23:9: '|='
             {
-            match("!="); 
+            match("|="); 
 
 
             }
@@ -380,10 +383,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:25:7: ( 's' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:25:9: 's'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:24:7: ( '<<' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:24:9: '<<'
             {
-            match('s'); 
+            match("<<"); 
+
 
             }
 
@@ -400,10 +404,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:26:7: ( 'ms' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:26:9: 'ms'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:25:7: ( '>>' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:25:9: '>>'
             {
-            match("ms"); 
+            match(">>"); 
 
 
             }
@@ -421,11 +425,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:27:7: ( 'ns' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:27:9: 'ns'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:26:7: ( '+' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:26:9: '+'
             {
-            match("ns"); 
-
+            match('+'); 
 
             }
 
@@ -442,11 +445,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:28:7: ( 'void' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:28:9: 'void'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:27:7: ( '-' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:27:9: '-'
             {
-            match("void"); 
-
+            match('-'); 
 
             }
 
@@ -463,11 +465,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:29:7: ( 'integer' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:29:9: 'integer'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:28:7: ( '*' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:28:9: '*'
             {
-            match("integer"); 
-
+            match('*'); 
 
             }
 
@@ -484,11 +485,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:30:7: ( 'real' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:30:9: 'real'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:29:7: ( '/' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:29:9: '/'
             {
-            match("real"); 
-
+            match('/'); 
 
             }
 
@@ -505,11 +505,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:31:7: ( 'boolean' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:31:9: 'boolean'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:30:7: ( '%' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:30:9: '%'
             {
-            match("boolean"); 
-
+            match('%'); 
 
             }
 
@@ -526,11 +525,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:32:7: ( 'string' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:32:9: 'string'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:31:7: ( '~' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:31:9: '~'
             {
-            match("string"); 
-
+            match('~'); 
 
             }
 
@@ -547,11 +545,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:33:7: ( '@@statechart@@' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:33:9: '@@statechart@@'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:32:7: ( '<' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:32:9: '<'
             {
-            match("@@statechart@@"); 
-
+            match('<'); 
 
             }
 
@@ -568,10 +565,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:34:7: ( '@@state@@' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:34:9: '@@state@@'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:33:7: ( '<=' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:33:9: '<='
             {
-            match("@@state@@"); 
+            match("<="); 
 
 
             }
@@ -589,11 +586,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:35:7: ( '@@transition@@' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:35:9: '@@transition@@'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:34:7: ( '>' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:34:9: '>'
             {
-            match("@@transition@@"); 
-
+            match('>'); 
 
             }
 
@@ -610,10 +606,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:36:7: ( 'interface' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:36:9: 'interface'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:35:7: ( '>=' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:35:9: '>='
             {
-            match("interface"); 
+            match(">="); 
 
 
             }
@@ -631,10 +627,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:37:7: ( ':' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:37:9: ':'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:36:7: ( '==' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:36:9: '=='
             {
-            match(':'); 
+            match("=="); 
+
 
             }
 
@@ -651,10 +648,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:38:7: ( 'internal' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:38:9: 'internal'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:37:7: ( '!=' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:37:9: '!='
             {
-            match("internal"); 
+            match("!="); 
 
 
             }
@@ -672,11 +669,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:39:7: ( 'event' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:39:9: 'event'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:38:7: ( 's' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:38:9: 's'
             {
-            match("event"); 
-
+            match('s'); 
 
             }
 
@@ -693,10 +689,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__42;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:40:7: ( '=' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:40:9: '='
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:39:7: ( 'ms' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:39:9: 'ms'
             {
-            match('='); 
+            match("ms"); 
+
 
             }
 
@@ -713,10 +710,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:41:7: ( 'var' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:41:9: 'var'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:40:7: ( 'ns' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:40:9: 'ns'
             {
-            match("var"); 
+            match("ns"); 
 
 
             }
@@ -734,10 +731,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:42:7: ( 'clock' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:42:9: 'clock'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:41:7: ( 'void' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:41:9: 'void'
             {
-            match("clock"); 
+            match("void"); 
 
 
             }
@@ -755,10 +752,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:43:7: ( 'operation' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:43:9: 'operation'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:42:7: ( 'integer' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:42:9: 'integer'
             {
-            match("operation"); 
+            match("integer"); 
 
 
             }
@@ -776,10 +773,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:44:7: ( '(' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:44:9: '('
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:43:7: ( 'real' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:43:9: 'real'
             {
-            match('('); 
+            match("real"); 
+
 
             }
 
@@ -796,10 +794,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:45:7: ( ')' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:45:9: ')'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:44:7: ( 'boolean' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:44:9: 'boolean'
             {
-            match(')'); 
+            match("boolean"); 
+
 
             }
 
@@ -816,10 +815,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:46:7: ( ',' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:46:9: ','
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:45:7: ( 'string' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:45:9: 'string'
             {
-            match(','); 
+            match("string"); 
+
 
             }
 
@@ -836,10 +836,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:47:7: ( 'entrypoint' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:47:9: 'entrypoint'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:46:7: ( '@@statechart@@' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:46:9: '@@statechart@@'
             {
-            match("entrypoint"); 
+            match("@@statechart@@"); 
 
 
             }
@@ -857,10 +857,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__50;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:48:7: ( 'exitpoint' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:48:9: 'exitpoint'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:47:7: ( '@@state@@' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:47:9: '@@state@@'
             {
-            match("exitpoint"); 
+            match("@@state@@"); 
 
 
             }
@@ -878,10 +878,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__51;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:49:7: ( '#' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:49:9: '#'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:48:7: ( '@@transition@@' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:48:9: '@@transition@@'
             {
-            match('#'); 
+            match("@@transition@@"); 
+
 
             }
 
@@ -898,10 +899,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__52;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:50:7: ( '[' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:50:9: '['
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:49:7: ( 'interface' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:49:9: 'interface'
             {
-            match('['); 
+            match("interface"); 
+
 
             }
 
@@ -918,10 +920,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__53;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:51:7: ( ']' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:51:9: ']'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:50:7: ( ':' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:50:9: ':'
             {
-            match(']'); 
+            match(':'); 
 
             }
 
@@ -938,10 +940,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__54;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:52:7: ( ';' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:52:9: ';'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:51:7: ( 'internal' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:51:9: 'internal'
             {
-            match(';'); 
+            match("internal"); 
+
 
             }
 
@@ -958,10 +961,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__55;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:53:7: ( 'after' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:53:9: 'after'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:52:7: ( 'event' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:52:9: 'event'
             {
-            match("after"); 
+            match("event"); 
 
 
             }
@@ -979,10 +982,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__56;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:54:7: ( 'entry' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:54:9: 'entry'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:53:7: ( 'var' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:53:9: 'var'
             {
-            match("entry"); 
+            match("var"); 
 
 
             }
@@ -1000,10 +1003,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__57;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:55:7: ( 'exit' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:55:9: 'exit'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:54:7: ( 'clock' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:54:9: 'clock'
             {
-            match("exit"); 
+            match("clock"); 
 
 
             }
@@ -1021,10 +1024,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__58;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:56:7: ( 'oncycle' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:56:9: 'oncycle'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:55:7: ( 'operation' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:55:9: 'operation'
             {
-            match("oncycle"); 
+            match("operation"); 
 
 
             }
@@ -1042,11 +1045,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__59;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:57:7: ( 'always' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:57:9: 'always'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:56:7: ( '(' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:56:9: '('
             {
-            match("always"); 
-
+            match('('); 
 
             }
 
@@ -1063,11 +1065,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__60;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:58:7: ( 'raise' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:58:9: 'raise'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:57:7: ( ')' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:57:9: ')'
             {
-            match("raise"); 
-
+            match(')'); 
 
             }
 
@@ -1084,11 +1085,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__61;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:59:7: ( '||' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:59:9: '||'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:58:7: ( ',' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:58:9: ','
             {
-            match("||"); 
-
+            match(','); 
 
             }
 
@@ -1105,10 +1105,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__62;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:60:7: ( '&&' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:60:9: '&&'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:59:7: ( 'entrypoint' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:59:9: 'entrypoint'
             {
-            match("&&"); 
+            match("entrypoint"); 
 
 
             }
@@ -1126,10 +1126,11 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__63;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:61:7: ( '!' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:61:9: '!'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:60:7: ( 'exitpoint' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:60:9: 'exitpoint'
             {
-            match('!'); 
+            match("exitpoint"); 
+
 
             }
 
@@ -1146,11 +1147,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__64;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:62:7: ( 'readonly' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:62:9: 'readonly'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:61:7: ( '#' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:61:9: '#'
             {
-            match("readonly"); 
-
+            match('#'); 
 
             }
 
@@ -1167,8 +1167,357 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = T__65;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:63:7: ( 'external' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:63:9: 'external'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:62:7: ( '[' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:62:9: '['
+            {
+            match('['); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__65"
+
+    // $ANTLR start "T__66"
+    public final void mT__66() throws RecognitionException {
+        try {
+            int _type = T__66;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:63:7: ( ']' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:63:9: ']'
+            {
+            match(']'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__66"
+
+    // $ANTLR start "T__67"
+    public final void mT__67() throws RecognitionException {
+        try {
+            int _type = T__67;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:64:7: ( ';' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:64:9: ';'
+            {
+            match(';'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__67"
+
+    // $ANTLR start "T__68"
+    public final void mT__68() throws RecognitionException {
+        try {
+            int _type = T__68;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:65:7: ( 'after' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:65:9: 'after'
+            {
+            match("after"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__68"
+
+    // $ANTLR start "T__69"
+    public final void mT__69() throws RecognitionException {
+        try {
+            int _type = T__69;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:66:7: ( 'entry' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:66:9: 'entry'
+            {
+            match("entry"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__69"
+
+    // $ANTLR start "T__70"
+    public final void mT__70() throws RecognitionException {
+        try {
+            int _type = T__70;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:67:7: ( 'exit' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:67:9: 'exit'
+            {
+            match("exit"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__70"
+
+    // $ANTLR start "T__71"
+    public final void mT__71() throws RecognitionException {
+        try {
+            int _type = T__71;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:68:7: ( 'oncycle' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:68:9: 'oncycle'
+            {
+            match("oncycle"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__71"
+
+    // $ANTLR start "T__72"
+    public final void mT__72() throws RecognitionException {
+        try {
+            int _type = T__72;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:69:7: ( 'always' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:69:9: 'always'
+            {
+            match("always"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__72"
+
+    // $ANTLR start "T__73"
+    public final void mT__73() throws RecognitionException {
+        try {
+            int _type = T__73;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:70:7: ( 'raise' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:70:9: 'raise'
+            {
+            match("raise"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__73"
+
+    // $ANTLR start "T__74"
+    public final void mT__74() throws RecognitionException {
+        try {
+            int _type = T__74;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:71:7: ( '?' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:71:9: '?'
+            {
+            match('?'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__74"
+
+    // $ANTLR start "T__75"
+    public final void mT__75() throws RecognitionException {
+        try {
+            int _type = T__75;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:72:7: ( '||' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:72:9: '||'
+            {
+            match("||"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__75"
+
+    // $ANTLR start "T__76"
+    public final void mT__76() throws RecognitionException {
+        try {
+            int _type = T__76;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:73:7: ( '&&' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:73:9: '&&'
+            {
+            match("&&"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__76"
+
+    // $ANTLR start "T__77"
+    public final void mT__77() throws RecognitionException {
+        try {
+            int _type = T__77;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:74:7: ( '!' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:74:9: '!'
+            {
+            match('!'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__77"
+
+    // $ANTLR start "T__78"
+    public final void mT__78() throws RecognitionException {
+        try {
+            int _type = T__78;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:75:7: ( '^' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:75:9: '^'
+            {
+            match('^'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__78"
+
+    // $ANTLR start "T__79"
+    public final void mT__79() throws RecognitionException {
+        try {
+            int _type = T__79;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:76:7: ( '|' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:76:9: '|'
+            {
+            match('|'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__79"
+
+    // $ANTLR start "T__80"
+    public final void mT__80() throws RecognitionException {
+        try {
+            int _type = T__80;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:77:7: ( '&' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:77:9: '&'
+            {
+            match('&'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__80"
+
+    // $ANTLR start "T__81"
+    public final void mT__81() throws RecognitionException {
+        try {
+            int _type = T__81;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:78:7: ( 'readonly' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:78:9: 'readonly'
+            {
+            match("readonly"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__81"
+
+    // $ANTLR start "T__82"
+    public final void mT__82() throws RecognitionException {
+        try {
+            int _type = T__82;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:79:7: ( 'external' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:79:9: 'external'
             {
             match("external"); 
 
@@ -1181,17 +1530,17 @@ public class InternalSTextLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__65"
+    // $ANTLR end "T__82"
 
     // $ANTLR start "RULE_BOOL"
     public final void mRULE_BOOL() throws RecognitionException {
         try {
             int _type = RULE_BOOL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8733:11: ( ( 'true' | 'false' ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8733:13: ( 'true' | 'false' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9993:11: ( ( 'true' | 'false' ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9993:13: ( 'true' | 'false' )
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8733:13: ( 'true' | 'false' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9993:13: ( 'true' | 'false' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1209,7 +1558,7 @@ public class InternalSTextLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8733:14: 'true'
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9993:14: 'true'
                     {
                     match("true"); 
 
@@ -1217,7 +1566,7 @@ public class InternalSTextLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8733:21: 'false'
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9993:21: 'false'
                     {
                     match("false"); 
 
@@ -1238,44 +1587,85 @@ public class InternalSTextLexer extends Lexer {
     }
     // $ANTLR end "RULE_BOOL"
 
+    // $ANTLR start "RULE_HEX"
+    public final void mRULE_HEX() throws RecognitionException {
+        try {
+            int _type = RULE_HEX;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9995:10: ( '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9995:12: '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            {
+            match('0'); 
+            if ( input.LA(1)=='X'||input.LA(1)=='x' ) {
+                input.consume();
+
+            }
+            else {
+                MismatchedSetException mse = new MismatchedSetException(null,input);
+                recover(mse);
+                throw mse;}
+
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9995:26: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            int cnt2=0;
+            loop2:
+            do {
+                int alt2=2;
+                int LA2_0 = input.LA(1);
+
+                if ( ((LA2_0>='0' && LA2_0<='9')||(LA2_0>='A' && LA2_0<='F')||(LA2_0>='a' && LA2_0<='f')) ) {
+                    alt2=1;
+                }
+
+
+                switch (alt2) {
+            	case 1 :
+            	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:
+            	    {
+            	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='F')||(input.LA(1)>='a' && input.LA(1)<='f') ) {
+            	        input.consume();
+
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;}
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt2 >= 1 ) break loop2;
+                        EarlyExitException eee =
+                            new EarlyExitException(2, input);
+                        throw eee;
+                }
+                cnt2++;
+            } while (true);
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "RULE_HEX"
+
     // $ANTLR start "RULE_FLOAT"
     public final void mRULE_FLOAT() throws RecognitionException {
         try {
             int _type = RULE_FLOAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8735:12: ( ( '-' | '+' )? RULE_INT '.' RULE_INT ( 'e' ( '-' | '+' ) RULE_INT )? ( 'f' | 'F' | 'd' | 'D' )? )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8735:14: ( '-' | '+' )? RULE_INT '.' RULE_INT ( 'e' ( '-' | '+' ) RULE_INT )? ( 'f' | 'F' | 'd' | 'D' )?
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9997:12: ( RULE_INT '.' RULE_INT ( 'e' ( '-' | '+' ) RULE_INT )? ( 'f' | 'F' | 'd' | 'D' )? )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9997:14: RULE_INT '.' RULE_INT ( 'e' ( '-' | '+' ) RULE_INT )? ( 'f' | 'F' | 'd' | 'D' )?
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8735:14: ( '-' | '+' )?
-            int alt2=2;
-            int LA2_0 = input.LA(1);
-
-            if ( (LA2_0=='+'||LA2_0=='-') ) {
-                alt2=1;
-            }
-            switch (alt2) {
-                case 1 :
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:
-                    {
-                    if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
-                        input.consume();
-
-                    }
-                    else {
-                        MismatchedSetException mse = new MismatchedSetException(null,input);
-                        recover(mse);
-                        throw mse;}
-
-
-                    }
-                    break;
-
-            }
-
             mRULE_INT(); 
             match('.'); 
             mRULE_INT(); 
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8735:47: ( 'e' ( '-' | '+' ) RULE_INT )?
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9997:36: ( 'e' ( '-' | '+' ) RULE_INT )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1284,7 +1674,7 @@ public class InternalSTextLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8735:48: 'e' ( '-' | '+' ) RULE_INT
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9997:37: 'e' ( '-' | '+' ) RULE_INT
                     {
                     match('e'); 
                     if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
@@ -1303,7 +1693,7 @@ public class InternalSTextLexer extends Lexer {
 
             }
 
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8735:73: ( 'f' | 'F' | 'd' | 'D' )?
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9997:62: ( 'f' | 'F' | 'd' | 'D' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1345,10 +1735,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8737:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8737:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9999:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9999:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8737:11: ( '^' )?
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9999:11: ( '^' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1357,7 +1747,7 @@ public class InternalSTextLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8737:11: '^'
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9999:11: '^'
                     {
                     match('^'); 
 
@@ -1375,7 +1765,7 @@ public class InternalSTextLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8737:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9999:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop6:
             do {
                 int alt6=2;
@@ -1424,10 +1814,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8739:10: ( ( '0' .. '9' )+ )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8739:12: ( '0' .. '9' )+
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10001:10: ( ( '0' .. '9' )+ )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10001:12: ( '0' .. '9' )+
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8739:12: ( '0' .. '9' )+
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10001:12: ( '0' .. '9' )+
             int cnt7=0;
             loop7:
             do {
@@ -1441,7 +1831,7 @@ public class InternalSTextLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8739:13: '0' .. '9'
+            	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10001:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1473,10 +1863,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8741:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8741:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10003:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10003:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8741:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10003:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1494,10 +1884,10 @@ public class InternalSTextLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8741:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10003:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8741:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10003:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop8:
                     do {
                         int alt8=3;
@@ -1513,7 +1903,7 @@ public class InternalSTextLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8741:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10003:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1529,7 +1919,7 @@ public class InternalSTextLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8741:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10003:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1554,10 +1944,10 @@ public class InternalSTextLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8741:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10003:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8741:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10003:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop9:
                     do {
                         int alt9=3;
@@ -1573,7 +1963,7 @@ public class InternalSTextLexer extends Lexer {
 
                         switch (alt9) {
                     	case 1 :
-                    	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8741:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10003:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1589,7 +1979,7 @@ public class InternalSTextLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8741:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10003:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1632,12 +2022,12 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8743:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8743:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10005:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10005:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8743:24: ( options {greedy=false; } : . )*
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10005:24: ( options {greedy=false; } : . )*
             loop11:
             do {
                 int alt11=2;
@@ -1662,7 +2052,7 @@ public class InternalSTextLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8743:52: .
+            	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10005:52: .
             	    {
             	    matchAny(); 
 
@@ -1692,12 +2082,12 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8745:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8745:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10007:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10007:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8745:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10007:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop12:
             do {
                 int alt12=2;
@@ -1710,7 +2100,7 @@ public class InternalSTextLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8745:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10007:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1730,7 +2120,7 @@ public class InternalSTextLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8745:40: ( ( '\\r' )? '\\n' )?
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10007:40: ( ( '\\r' )? '\\n' )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -1739,9 +2129,9 @@ public class InternalSTextLexer extends Lexer {
             }
             switch (alt14) {
                 case 1 :
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8745:41: ( '\\r' )? '\\n'
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10007:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8745:41: ( '\\r' )?
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10007:41: ( '\\r' )?
                     int alt13=2;
                     int LA13_0 = input.LA(1);
 
@@ -1750,7 +2140,7 @@ public class InternalSTextLexer extends Lexer {
                     }
                     switch (alt13) {
                         case 1 :
-                            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8745:41: '\\r'
+                            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10007:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1782,10 +2172,10 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8747:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8747:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10009:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10009:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8747:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10009:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt15=0;
             loop15:
             do {
@@ -1839,8 +2229,8 @@ public class InternalSTextLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8749:16: ( . )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:8749:18: .
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10011:16: ( . )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10011:18: .
             {
             matchAny(); 
 
@@ -1855,439 +2245,558 @@ public class InternalSTextLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:8: ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | RULE_BOOL | RULE_FLOAT | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt16=62;
+        // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:8: ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | RULE_BOOL | RULE_HEX | RULE_FLOAT | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt16=79;
         alt16 = dfa16.predict(input);
         switch (alt16) {
             case 1 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:10: T__13
-                {
-                mT__13(); 
-
-                }
-                break;
-            case 2 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:16: T__14
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:10: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
-            case 3 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:22: T__15
+            case 2 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:16: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
-            case 4 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:28: T__16
+            case 3 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:22: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
-            case 5 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:34: T__17
+            case 4 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:28: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
-            case 6 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:40: T__18
+            case 5 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:34: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
-            case 7 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:46: T__19
+            case 6 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:40: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
-            case 8 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:52: T__20
+            case 7 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:46: T__20
                 {
                 mT__20(); 
 
                 }
                 break;
-            case 9 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:58: T__21
+            case 8 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:52: T__21
                 {
                 mT__21(); 
 
                 }
                 break;
-            case 10 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:64: T__22
+            case 9 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:58: T__22
                 {
                 mT__22(); 
 
                 }
                 break;
-            case 11 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:70: T__23
+            case 10 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:64: T__23
                 {
                 mT__23(); 
 
                 }
                 break;
-            case 12 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:76: T__24
+            case 11 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:70: T__24
                 {
                 mT__24(); 
 
                 }
                 break;
-            case 13 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:82: T__25
+            case 12 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:76: T__25
                 {
                 mT__25(); 
 
                 }
                 break;
-            case 14 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:88: T__26
+            case 13 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:82: T__26
                 {
                 mT__26(); 
 
                 }
                 break;
-            case 15 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:94: T__27
+            case 14 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:88: T__27
                 {
                 mT__27(); 
 
                 }
                 break;
-            case 16 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:100: T__28
+            case 15 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:94: T__28
                 {
                 mT__28(); 
 
                 }
                 break;
-            case 17 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:106: T__29
+            case 16 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:100: T__29
                 {
                 mT__29(); 
 
                 }
                 break;
-            case 18 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:112: T__30
+            case 17 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:106: T__30
                 {
                 mT__30(); 
 
                 }
                 break;
-            case 19 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:118: T__31
+            case 18 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:112: T__31
                 {
                 mT__31(); 
 
                 }
                 break;
-            case 20 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:124: T__32
+            case 19 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:118: T__32
                 {
                 mT__32(); 
 
                 }
                 break;
-            case 21 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:130: T__33
+            case 20 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:124: T__33
                 {
                 mT__33(); 
 
                 }
                 break;
-            case 22 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:136: T__34
+            case 21 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:130: T__34
                 {
                 mT__34(); 
 
                 }
                 break;
-            case 23 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:142: T__35
+            case 22 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:136: T__35
                 {
                 mT__35(); 
 
                 }
                 break;
-            case 24 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:148: T__36
+            case 23 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:142: T__36
                 {
                 mT__36(); 
 
                 }
                 break;
-            case 25 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:154: T__37
+            case 24 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:148: T__37
                 {
                 mT__37(); 
 
                 }
                 break;
-            case 26 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:160: T__38
+            case 25 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:154: T__38
                 {
                 mT__38(); 
 
                 }
                 break;
-            case 27 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:166: T__39
+            case 26 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:160: T__39
                 {
                 mT__39(); 
 
                 }
                 break;
-            case 28 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:172: T__40
+            case 27 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:166: T__40
                 {
                 mT__40(); 
 
                 }
                 break;
-            case 29 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:178: T__41
+            case 28 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:172: T__41
                 {
                 mT__41(); 
 
                 }
                 break;
-            case 30 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:184: T__42
+            case 29 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:178: T__42
                 {
                 mT__42(); 
 
                 }
                 break;
-            case 31 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:190: T__43
+            case 30 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:184: T__43
                 {
                 mT__43(); 
 
                 }
                 break;
-            case 32 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:196: T__44
+            case 31 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:190: T__44
                 {
                 mT__44(); 
 
                 }
                 break;
-            case 33 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:202: T__45
+            case 32 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:196: T__45
                 {
                 mT__45(); 
 
                 }
                 break;
-            case 34 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:208: T__46
+            case 33 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:202: T__46
                 {
                 mT__46(); 
 
                 }
                 break;
-            case 35 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:214: T__47
+            case 34 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:208: T__47
                 {
                 mT__47(); 
 
                 }
                 break;
-            case 36 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:220: T__48
+            case 35 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:214: T__48
                 {
                 mT__48(); 
 
                 }
                 break;
-            case 37 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:226: T__49
+            case 36 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:220: T__49
                 {
                 mT__49(); 
 
                 }
                 break;
-            case 38 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:232: T__50
+            case 37 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:226: T__50
                 {
                 mT__50(); 
 
                 }
                 break;
-            case 39 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:238: T__51
+            case 38 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:232: T__51
                 {
                 mT__51(); 
 
                 }
                 break;
-            case 40 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:244: T__52
+            case 39 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:238: T__52
                 {
                 mT__52(); 
 
                 }
                 break;
-            case 41 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:250: T__53
+            case 40 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:244: T__53
                 {
                 mT__53(); 
 
                 }
                 break;
-            case 42 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:256: T__54
+            case 41 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:250: T__54
                 {
                 mT__54(); 
 
                 }
                 break;
-            case 43 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:262: T__55
+            case 42 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:256: T__55
                 {
                 mT__55(); 
 
                 }
                 break;
-            case 44 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:268: T__56
+            case 43 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:262: T__56
                 {
                 mT__56(); 
 
                 }
                 break;
-            case 45 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:274: T__57
+            case 44 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:268: T__57
                 {
                 mT__57(); 
 
                 }
                 break;
-            case 46 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:280: T__58
+            case 45 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:274: T__58
                 {
                 mT__58(); 
 
                 }
                 break;
-            case 47 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:286: T__59
+            case 46 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:280: T__59
                 {
                 mT__59(); 
 
                 }
                 break;
-            case 48 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:292: T__60
+            case 47 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:286: T__60
                 {
                 mT__60(); 
 
                 }
                 break;
-            case 49 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:298: T__61
+            case 48 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:292: T__61
                 {
                 mT__61(); 
 
                 }
                 break;
-            case 50 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:304: T__62
+            case 49 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:298: T__62
                 {
                 mT__62(); 
 
                 }
                 break;
-            case 51 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:310: T__63
+            case 50 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:304: T__63
                 {
                 mT__63(); 
 
                 }
                 break;
-            case 52 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:316: T__64
+            case 51 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:310: T__64
                 {
                 mT__64(); 
 
                 }
                 break;
-            case 53 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:322: T__65
+            case 52 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:316: T__65
                 {
                 mT__65(); 
 
                 }
                 break;
+            case 53 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:322: T__66
+                {
+                mT__66(); 
+
+                }
+                break;
             case 54 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:328: RULE_BOOL
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:328: T__67
+                {
+                mT__67(); 
+
+                }
+                break;
+            case 55 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:334: T__68
+                {
+                mT__68(); 
+
+                }
+                break;
+            case 56 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:340: T__69
+                {
+                mT__69(); 
+
+                }
+                break;
+            case 57 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:346: T__70
+                {
+                mT__70(); 
+
+                }
+                break;
+            case 58 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:352: T__71
+                {
+                mT__71(); 
+
+                }
+                break;
+            case 59 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:358: T__72
+                {
+                mT__72(); 
+
+                }
+                break;
+            case 60 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:364: T__73
+                {
+                mT__73(); 
+
+                }
+                break;
+            case 61 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:370: T__74
+                {
+                mT__74(); 
+
+                }
+                break;
+            case 62 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:376: T__75
+                {
+                mT__75(); 
+
+                }
+                break;
+            case 63 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:382: T__76
+                {
+                mT__76(); 
+
+                }
+                break;
+            case 64 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:388: T__77
+                {
+                mT__77(); 
+
+                }
+                break;
+            case 65 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:394: T__78
+                {
+                mT__78(); 
+
+                }
+                break;
+            case 66 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:400: T__79
+                {
+                mT__79(); 
+
+                }
+                break;
+            case 67 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:406: T__80
+                {
+                mT__80(); 
+
+                }
+                break;
+            case 68 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:412: T__81
+                {
+                mT__81(); 
+
+                }
+                break;
+            case 69 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:418: T__82
+                {
+                mT__82(); 
+
+                }
+                break;
+            case 70 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:424: RULE_BOOL
                 {
                 mRULE_BOOL(); 
 
                 }
                 break;
-            case 55 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:338: RULE_FLOAT
+            case 71 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:434: RULE_HEX
+                {
+                mRULE_HEX(); 
+
+                }
+                break;
+            case 72 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:443: RULE_FLOAT
                 {
                 mRULE_FLOAT(); 
 
                 }
                 break;
-            case 56 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:349: RULE_ID
+            case 73 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:454: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 57 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:357: RULE_INT
+            case 74 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:462: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 58 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:366: RULE_STRING
+            case 75 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:471: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 59 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:378: RULE_ML_COMMENT
+            case 76 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:483: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 60 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:394: RULE_SL_COMMENT
+            case 77 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:499: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 61 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:410: RULE_WS
+            case 78 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:515: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 62 :
-                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:418: RULE_ANY_OTHER
+            case 79 :
+                // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1:523: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -2301,122 +2810,105 @@ public class InternalSTextLexer extends Lexer {
 
     protected DFA16 dfa16 = new DFA16(this);
     static final String DFA16_eotS =
-        "\1\uffff\2\53\1\57\1\61\1\uffff\1\65\2\uffff\1\71\1\73\1\75\1\77"+
-        "\1\101\5\53\1\51\1\uffff\2\53\7\uffff\1\53\2\51\2\53\1\134\1\51"+
-        "\1\uffff\2\51\2\uffff\1\141\1\uffff\3\53\21\uffff\1\53\1\uffff\1"+
-        "\146\1\147\5\53\2\uffff\4\53\7\uffff\2\53\2\uffff\2\53\1\uffff\1"+
-        "\134\2\uffff\1\53\1\uffff\1\171\3\53\2\uffff\1\53\1\176\3\53\2\uffff"+
-        "\12\53\1\uffff\3\53\1\u0092\1\uffff\1\u0093\3\53\1\uffff\2\53\1"+
-        "\u009b\4\53\1\u00a0\6\53\2\uffff\1\53\1\u00a9\1\53\1\uffff\1\u00ac"+
-        "\1\u00ae\1\53\1\uffff\1\53\1\u00b1\1\u00b2\1\53\1\uffff\1\u00a0"+
-        "\5\53\1\u00b9\1\53\1\uffff\1\53\2\uffff\1\53\1\uffff\2\53\2\uffff"+
-        "\1\u00c0\1\u00c1\3\53\1\u00c5\1\uffff\1\53\1\u00c7\1\uffff\3\53"+
-        "\2\uffff\1\53\1\u00ce\1\53\1\uffff\1\u00d0\3\uffff\2\53\1\u00d3"+
-        "\1\u00d4\1\uffff\1\u00d5\1\uffff\1\53\1\u00d7\3\uffff\1\u00d8\2"+
+        "\1\uffff\2\55\1\62\1\64\1\70\1\72\1\74\1\76\1\101\1\104\1\107\1"+
+        "\111\1\114\1\uffff\1\117\1\121\5\55\1\53\1\uffff\2\55\7\uffff\1"+
+        "\55\1\uffff\2\55\2\154\1\uffff\2\53\2\uffff\1\162\1\uffff\3\55\16"+
+        "\uffff\1\167\2\uffff\1\171\15\uffff\1\55\1\uffff\1\173\1\174\5\55"+
+        "\2\uffff\4\55\7\uffff\2\55\1\uffff\2\55\2\uffff\1\154\3\uffff\1"+
+        "\55\1\uffff\1\u008e\2\55\4\uffff\1\55\2\uffff\1\55\1\u0093\3\55"+
+        "\2\uffff\12\55\1\uffff\3\55\1\u00a7\1\uffff\1\u00a8\3\55\1\uffff"+
+        "\2\55\1\u00b0\4\55\1\u00b5\6\55\2\uffff\1\55\1\u00be\1\55\1\uffff"+
+        "\1\u00c1\1\u00c3\1\55\1\uffff\1\55\1\u00c6\1\u00c7\1\55\1\uffff"+
+        "\1\u00b5\5\55\1\u00ce\1\55\1\uffff\1\55\2\uffff\1\55\1\uffff\2\55"+
+        "\2\uffff\1\u00d5\1\u00d6\3\55\1\u00da\1\uffff\1\55\1\u00dc\1\uffff"+
+        "\3\55\2\uffff\1\55\1\u00e3\1\55\1\uffff\1\u00e5\3\uffff\2\55\1\u00e8"+
+        "\1\u00e9\1\uffff\1\u00ea\1\uffff\1\55\1\u00ec\3\uffff\1\u00ed\2"+
         "\uffff";
     static final String DFA16_eofS =
-        "\u00d9\uffff";
+        "\u00ee\uffff";
     static final String DFA16_minS =
-        "\1\0\2\156\2\60\1\uffff\1\52\2\uffff\4\75\1\60\2\163\2\141\1\157"+
-        "\1\100\1\uffff\1\156\1\154\7\uffff\1\146\1\174\1\46\1\162\1\141"+
-        "\1\56\1\101\1\uffff\2\0\2\uffff\1\60\1\uffff\1\164\1\145\1\143\21"+
-        "\uffff\1\162\1\uffff\2\60\1\151\1\162\1\141\1\151\1\157\1\163\1"+
-        "\uffff\1\145\1\164\1\151\1\157\7\uffff\1\164\1\167\2\uffff\1\165"+
-        "\1\154\1\uffff\1\56\2\uffff\1\145\1\uffff\1\60\1\162\1\171\1\151"+
-        "\2\uffff\1\144\1\60\1\144\1\163\1\154\1\164\1\uffff\1\156\1\162"+
-        "\1\164\1\145\1\143\1\145\1\141\1\145\1\163\1\147\1\uffff\1\141\1"+
-        "\143\1\156\1\60\1\uffff\1\60\1\157\2\145\1\141\1\164\1\171\1\60"+
-        "\1\162\1\153\1\162\1\171\1\60\2\145\1\146\1\164\1\154\1\147\2\uffff"+
-        "\1\156\1\60\1\141\1\164\2\60\1\157\1\uffff\1\156\2\60\1\163\1\uffff"+
-        "\1\60\1\162\2\141\1\151\1\145\1\60\1\154\1\uffff\1\156\1\145\1\uffff"+
-        "\1\157\1\uffff\1\151\1\141\2\uffff\2\60\1\143\1\154\1\157\1\60\1"+
-        "\uffff\1\171\1\60\1\100\1\151\1\156\1\154\2\uffff\1\145\1\60\1\156"+
-        "\1\uffff\1\60\3\uffff\1\156\1\164\2\60\1\uffff\1\60\1\uffff\1\164"+
-        "\1\60\3\uffff\1\60\2\uffff";
+        "\1\0\2\156\2\75\1\52\3\75\1\74\1\75\1\46\2\75\1\uffff\1\75\1\60"+
+        "\2\163\2\141\1\157\1\100\1\uffff\1\156\1\154\7\uffff\1\146\1\uffff"+
+        "\1\162\1\141\2\56\1\uffff\2\0\2\uffff\1\60\1\uffff\1\164\1\145\1"+
+        "\143\16\uffff\1\75\2\uffff\1\75\15\uffff\1\162\1\uffff\2\60\1\151"+
+        "\1\162\1\141\1\151\1\157\1\163\1\uffff\1\145\1\164\1\151\1\157\7"+
+        "\uffff\1\164\1\167\1\uffff\1\165\1\154\2\uffff\1\56\3\uffff\1\145"+
+        "\1\uffff\1\60\1\162\1\171\4\uffff\1\151\2\uffff\1\144\1\60\1\144"+
+        "\1\163\1\154\1\164\1\uffff\1\156\1\162\1\164\1\145\1\143\1\145\1"+
+        "\141\1\145\1\163\1\147\1\uffff\1\141\1\143\1\156\1\60\1\uffff\1"+
+        "\60\1\157\2\145\1\141\1\164\1\171\1\60\1\162\1\153\1\162\1\171\1"+
+        "\60\2\145\1\146\1\164\1\154\1\147\2\uffff\1\156\1\60\1\141\1\164"+
+        "\2\60\1\157\1\uffff\1\156\2\60\1\163\1\uffff\1\60\1\162\2\141\1"+
+        "\151\1\145\1\60\1\154\1\uffff\1\156\1\145\1\uffff\1\157\1\uffff"+
+        "\1\151\1\141\2\uffff\2\60\1\143\1\154\1\157\1\60\1\uffff\1\171\1"+
+        "\60\1\100\1\151\1\156\1\154\2\uffff\1\145\1\60\1\156\1\uffff\1\60"+
+        "\3\uffff\1\156\1\164\2\60\1\uffff\1\60\1\uffff\1\164\1\60\3\uffff"+
+        "\1\60\2\uffff";
     static final String DFA16_maxS =
-        "\1\uffff\1\156\1\165\2\71\1\uffff\1\57\2\uffff\4\75\1\172\2\163"+
-        "\1\157\1\145\1\157\1\100\1\uffff\1\170\1\154\7\uffff\1\154\1\174"+
-        "\1\46\1\162\1\141\1\71\1\172\1\uffff\2\uffff\2\uffff\1\172\1\uffff"+
-        "\1\164\1\145\1\143\21\uffff\1\162\1\uffff\2\172\1\151\1\162\1\141"+
-        "\1\151\1\157\1\164\1\uffff\1\145\2\164\1\157\7\uffff\1\164\1\167"+
-        "\2\uffff\1\165\1\154\1\uffff\1\71\2\uffff\1\145\1\uffff\1\172\1"+
-        "\162\1\171\1\151\2\uffff\1\144\1\172\1\154\1\163\1\154\1\164\1\uffff"+
-        "\1\156\1\162\1\164\1\145\1\143\1\145\1\141\1\145\1\163\1\162\1\uffff"+
-        "\1\141\1\143\1\156\1\172\1\uffff\1\172\1\157\2\145\1\141\1\164\1"+
-        "\171\1\172\1\162\1\153\1\162\1\171\1\172\2\145\1\156\1\164\1\154"+
-        "\1\147\2\uffff\1\156\1\172\1\141\1\164\2\172\1\157\1\uffff\1\156"+
-        "\2\172\1\163\1\uffff\1\172\1\162\2\141\1\151\1\145\1\172\1\154\1"+
-        "\uffff\1\156\1\145\1\uffff\1\157\1\uffff\1\151\1\141\2\uffff\2\172"+
-        "\1\143\1\154\1\157\1\172\1\uffff\1\171\1\172\1\143\1\151\1\156\1"+
-        "\154\2\uffff\1\145\1\172\1\156\1\uffff\1\172\3\uffff\1\156\1\164"+
-        "\2\172\1\uffff\1\172\1\uffff\1\164\1\172\3\uffff\1\172\2\uffff";
+        "\1\uffff\1\156\1\165\7\75\1\76\1\75\1\172\1\174\1\uffff\1\75\1\172"+
+        "\2\163\1\157\1\145\1\157\1\100\1\uffff\1\170\1\154\7\uffff\1\154"+
+        "\1\uffff\1\162\1\141\1\170\1\71\1\uffff\2\uffff\2\uffff\1\172\1"+
+        "\uffff\1\164\1\145\1\143\16\uffff\1\75\2\uffff\1\75\15\uffff\1\162"+
+        "\1\uffff\2\172\1\151\1\162\1\141\1\151\1\157\1\164\1\uffff\1\145"+
+        "\2\164\1\157\7\uffff\1\164\1\167\1\uffff\1\165\1\154\2\uffff\1\71"+
+        "\3\uffff\1\145\1\uffff\1\172\1\162\1\171\4\uffff\1\151\2\uffff\1"+
+        "\144\1\172\1\154\1\163\1\154\1\164\1\uffff\1\156\1\162\1\164\1\145"+
+        "\1\143\1\145\1\141\1\145\1\163\1\162\1\uffff\1\141\1\143\1\156\1"+
+        "\172\1\uffff\1\172\1\157\2\145\1\141\1\164\1\171\1\172\1\162\1\153"+
+        "\1\162\1\171\1\172\2\145\1\156\1\164\1\154\1\147\2\uffff\1\156\1"+
+        "\172\1\141\1\164\2\172\1\157\1\uffff\1\156\2\172\1\163\1\uffff\1"+
+        "\172\1\162\2\141\1\151\1\145\1\172\1\154\1\uffff\1\156\1\145\1\uffff"+
+        "\1\157\1\uffff\1\151\1\141\2\uffff\2\172\1\143\1\154\1\157\1\172"+
+        "\1\uffff\1\171\1\172\1\143\1\151\1\156\1\154\2\uffff\1\145\1\172"+
+        "\1\156\1\uffff\1\172\3\uffff\1\156\1\164\2\172\1\uffff\1\172\1\uffff"+
+        "\1\164\1\172\3\uffff\1\172\2\uffff";
     static final String DFA16_acceptS =
-        "\5\uffff\1\5\1\uffff\1\7\1\10\13\uffff\1\33\2\uffff\1\42\1\43\1"+
-        "\44\1\47\1\50\1\51\1\52\7\uffff\1\70\2\uffff\1\75\1\76\1\uffff\1"+
-        "\70\3\uffff\1\3\1\67\1\4\1\5\1\73\1\74\1\6\1\7\1\10\1\12\1\11\1"+
-        "\14\1\13\1\15\1\36\1\16\1\63\1\uffff\1\17\10\uffff\1\33\4\uffff"+
-        "\1\42\1\43\1\44\1\47\1\50\1\51\1\52\2\uffff\1\61\1\62\2\uffff\1"+
-        "\71\1\uffff\1\72\1\75\1\uffff\1\1\4\uffff\1\20\1\21\6\uffff\1\31"+
-        "\12\uffff\1\2\4\uffff\1\37\23\uffff\1\22\1\24\7\uffff\1\55\4\uffff"+
-        "\1\66\10\uffff\1\60\2\uffff\1\35\1\uffff\1\54\2\uffff\1\40\1\53"+
-        "\6\uffff\1\26\6\uffff\1\57\1\23\3\uffff\1\56\1\uffff\1\25\1\27\1"+
-        "\30\4\uffff\1\34\1\uffff\1\64\2\uffff\1\65\1\32\1\41\1\uffff\1\46"+
-        "\1\45";
+        "\16\uffff\1\25\10\uffff\1\50\2\uffff\1\56\1\57\1\60\1\63\1\64\1"+
+        "\65\1\66\1\uffff\1\75\4\uffff\1\111\2\uffff\1\116\1\117\1\uffff"+
+        "\1\111\3\uffff\1\32\1\3\1\4\1\22\1\5\1\114\1\115\1\23\1\6\1\24\1"+
+        "\7\1\20\1\10\1\21\1\uffff\1\27\1\26\1\uffff\1\31\1\30\1\13\1\77"+
+        "\1\103\1\14\1\101\1\15\1\76\1\102\1\25\1\33\1\100\1\uffff\1\34\10"+
+        "\uffff\1\50\4\uffff\1\56\1\57\1\60\1\63\1\64\1\65\1\66\2\uffff\1"+
+        "\75\2\uffff\1\107\1\112\1\uffff\1\110\1\113\1\116\1\uffff\1\1\3"+
+        "\uffff\1\11\1\16\1\12\1\17\1\uffff\1\35\1\36\6\uffff\1\46\12\uffff"+
+        "\1\2\4\uffff\1\53\23\uffff\1\37\1\41\7\uffff\1\71\4\uffff\1\106"+
+        "\10\uffff\1\74\2\uffff\1\52\1\uffff\1\70\2\uffff\1\54\1\67\6\uffff"+
+        "\1\43\6\uffff\1\73\1\40\3\uffff\1\72\1\uffff\1\42\1\44\1\45\4\uffff"+
+        "\1\51\1\uffff\1\104\2\uffff\1\105\1\47\1\55\1\uffff\1\62\1\61";
     static final String DFA16_specialS =
-        "\1\1\45\uffff\1\0\1\2\u00b1\uffff}>";
+        "\1\0\47\uffff\1\2\1\1\u00c4\uffff}>";
     static final String[] DFA16_transitionS = {
-            "\11\51\2\50\2\51\1\50\22\51\1\50\1\14\1\46\1\32\1\51\1\7\1\40"+
-            "\1\47\1\27\1\30\1\5\1\3\1\31\1\4\1\51\1\6\12\43\1\24\1\35\1"+
-            "\11\1\13\1\12\1\51\1\23\32\45\1\33\1\51\1\34\1\44\1\45\1\51"+
-            "\1\36\1\22\1\26\1\45\1\25\1\42\2\45\1\1\3\45\1\16\1\17\1\2\2"+
-            "\45\1\21\1\15\1\41\1\45\1\20\4\45\1\51\1\37\1\51\1\10\uff81"+
-            "\51",
-            "\1\52",
-            "\1\56\1\uffff\1\55\4\uffff\1\54",
-            "\12\60",
-            "\12\60",
+            "\11\53\2\52\2\53\1\52\22\53\1\52\1\17\1\50\1\35\1\53\1\6\1\13"+
+            "\1\51\1\32\1\33\1\4\1\7\1\34\1\10\1\53\1\5\1\45\11\46\1\27\1"+
+            "\40\1\11\1\3\1\12\1\42\1\26\32\47\1\36\1\53\1\37\1\14\1\47\1"+
+            "\53\1\41\1\25\1\31\1\47\1\30\1\44\2\47\1\1\3\47\1\21\1\22\1"+
+            "\2\2\47\1\24\1\20\1\43\1\47\1\23\4\47\1\53\1\15\1\53\1\16\uff81"+
+            "\53",
+            "\1\54",
+            "\1\60\1\uffff\1\57\4\uffff\1\56",
+            "\1\61",
+            "\1\63",
+            "\1\66\4\uffff\1\67\15\uffff\1\65",
+            "\1\71",
+            "\1\73",
+            "\1\75",
+            "\1\77\1\100",
+            "\1\103\1\102",
+            "\1\106\26\uffff\1\105",
+            "\1\110\3\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\1\112\76\uffff\1\113",
             "",
-            "\1\63\4\uffff\1\64",
-            "",
-            "",
-            "\1\70",
-            "\1\72",
-            "\1\74",
-            "\1\76",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\23\53\1\100\6\53",
-            "\1\102",
-            "\1\103",
-            "\1\105\15\uffff\1\104",
-            "\1\107\3\uffff\1\106",
-            "\1\110",
-            "\1\111",
-            "",
-            "\1\114\7\uffff\1\113\1\uffff\1\115",
             "\1\116",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\126\5\uffff\1\127",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\23\55\1\120\6\55",
+            "\1\122",
+            "\1\123",
+            "\1\125\15\uffff\1\124",
+            "\1\127\3\uffff\1\126",
             "\1\130",
             "\1\131",
-            "\1\132",
-            "\1\133",
-            "\1\60\1\uffff\12\135",
-            "\32\53\4\uffff\1\53\1\uffff\32\53",
             "",
-            "\0\136",
-            "\0\136",
-            "",
-            "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\23\53\1\140\6\53",
-            "",
-            "\1\142",
-            "\1\143",
-            "\1\144",
+            "\1\134\7\uffff\1\133\1\uffff\1\135",
+            "\1\136",
             "",
             "",
             "",
@@ -2424,169 +2916,211 @@ public class InternalSTextLexer extends Lexer {
             "",
             "",
             "",
+            "\1\146\5\uffff\1\147",
             "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\145",
-            "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\1\150",
             "\1\151",
             "\1\152",
-            "\1\153",
-            "\1\154",
-            "\1\155\1\156",
+            "\1\156\1\uffff\12\155\36\uffff\1\153\37\uffff\1\153",
+            "\1\156\1\uffff\12\155",
             "",
-            "\1\157",
-            "\1\160",
-            "\1\161\12\uffff\1\162",
+            "\0\157",
+            "\0\157",
+            "",
+            "",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\23\55\1\161\6\55",
+            "",
             "\1\163",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
             "\1\164",
             "\1\165",
             "",
             "",
-            "\1\166",
-            "\1\167",
             "",
-            "\1\60\1\uffff\12\135",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\1\166",
             "",
             "",
             "\1\170",
             "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
             "\1\172",
-            "\1\173",
-            "\1\174",
             "",
-            "",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\175",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\1\u0080\7\uffff\1\177",
+            "\1\176",
+            "\1\177",
+            "\1\u0080",
             "\1\u0081",
-            "\1\u0082",
-            "\1\u0083",
+            "\1\u0082\1\u0083",
             "",
             "\1\u0084",
             "\1\u0085",
-            "\1\u0086",
-            "\1\u0087",
+            "\1\u0086\12\uffff\1\u0087",
             "\1\u0088",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
             "\1\u0089",
             "\1\u008a",
+            "",
             "\1\u008b",
             "\1\u008c",
-            "\1\u008d\12\uffff\1\u008e",
             "",
+            "",
+            "\1\156\1\uffff\12\155",
+            "",
+            "",
+            "",
+            "\1\u008d",
+            "",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u008f",
             "\1\u0090",
-            "\1\u0091",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
             "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\1\u0094",
-            "\1\u0095",
+            "",
+            "",
+            "",
+            "\1\u0091",
+            "",
+            "",
+            "\1\u0092",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\1\u0095\7\uffff\1\u0094",
             "\1\u0096",
             "\1\u0097",
             "\1\u0098",
+            "",
             "\1\u0099",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\17\53\1\u009a\12"+
-            "\53",
+            "\1\u009a",
+            "\1\u009b",
             "\1\u009c",
             "\1\u009d",
             "\1\u009e",
             "\1\u009f",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
+            "\1\u00a0",
             "\1\u00a1",
-            "\1\u00a2",
-            "\1\u00a3\7\uffff\1\u00a4",
+            "\1\u00a2\12\uffff\1\u00a3",
+            "",
+            "\1\u00a4",
             "\1\u00a5",
             "\1\u00a6",
-            "\1\u00a7",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "",
-            "",
-            "\1\u00a8",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\1\u00a9",
             "\1\u00aa",
             "\1\u00ab",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\17\53\1\u00ad\12"+
-            "\53",
-            "\1\u00af",
-            "",
-            "\1\u00b0",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
+            "\1\u00ac",
+            "\1\u00ad",
+            "\1\u00ae",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\17\55\1\u00af\12"+
+            "\55",
+            "\1\u00b1",
+            "\1\u00b2",
             "\1\u00b3",
-            "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
             "\1\u00b4",
-            "\1\u00b5",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u00b6",
             "\1\u00b7",
-            "\1\u00b8",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
+            "\1\u00b8\7\uffff\1\u00b9",
             "\1\u00ba",
-            "",
             "\1\u00bb",
             "\1\u00bc",
             "",
+            "",
             "\1\u00bd",
-            "",
-            "\1\u00be",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u00bf",
-            "",
-            "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\1\u00c2",
-            "\1\u00c3",
+            "\1\u00c0",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\17\55\1\u00c2\12"+
+            "\55",
             "\1\u00c4",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
             "",
-            "\1\u00c6",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\1\u00c9\42\uffff\1\u00c8",
+            "\1\u00c5",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\1\u00c8",
+            "",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\1\u00c9",
             "\1\u00ca",
             "\1\u00cb",
             "\1\u00cc",
-            "",
-            "",
             "\1\u00cd",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u00cf",
             "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "",
-            "",
-            "",
+            "\1\u00d0",
             "\1\u00d1",
+            "",
             "\1\u00d2",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
             "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "",
-            "\1\u00d6",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
+            "\1\u00d3",
+            "\1\u00d4",
             "",
             "",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\1\u00d7",
+            "\1\u00d8",
+            "\1\u00d9",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
+            "\1\u00db",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\1\u00de\42\uffff\1\u00dd",
+            "\1\u00df",
+            "\1\u00e0",
+            "\1\u00e1",
+            "",
+            "",
+            "\1\u00e2",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\1\u00e4",
+            "",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "",
+            "",
+            "",
+            "\1\u00e6",
+            "\1\u00e7",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "",
+            "\1\u00eb",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "",
+            "",
+            "",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "",
             ""
     };
@@ -2621,23 +3155,13 @@ public class InternalSTextLexer extends Lexer {
             this.transition = DFA16_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | RULE_BOOL | RULE_FLOAT | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | RULE_BOOL | RULE_HEX | RULE_FLOAT | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA16_38 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA16_38>='\u0000' && LA16_38<='\uFFFF')) ) {s = 94;}
-
-                        else s = 41;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA16_0 = input.LA(1);
 
                         s = -1;
@@ -2645,93 +3169,107 @@ public class InternalSTextLexer extends Lexer {
 
                         else if ( (LA16_0=='o') ) {s = 2;}
 
-                        else if ( (LA16_0=='+') ) {s = 3;}
+                        else if ( (LA16_0=='=') ) {s = 3;}
 
-                        else if ( (LA16_0=='-') ) {s = 4;}
+                        else if ( (LA16_0=='*') ) {s = 4;}
 
-                        else if ( (LA16_0=='*') ) {s = 5;}
+                        else if ( (LA16_0=='/') ) {s = 5;}
 
-                        else if ( (LA16_0=='/') ) {s = 6;}
+                        else if ( (LA16_0=='%') ) {s = 6;}
 
-                        else if ( (LA16_0=='%') ) {s = 7;}
+                        else if ( (LA16_0=='+') ) {s = 7;}
 
-                        else if ( (LA16_0=='~') ) {s = 8;}
+                        else if ( (LA16_0=='-') ) {s = 8;}
 
                         else if ( (LA16_0=='<') ) {s = 9;}
 
                         else if ( (LA16_0=='>') ) {s = 10;}
 
-                        else if ( (LA16_0=='=') ) {s = 11;}
+                        else if ( (LA16_0=='&') ) {s = 11;}
 
-                        else if ( (LA16_0=='!') ) {s = 12;}
+                        else if ( (LA16_0=='^') ) {s = 12;}
 
-                        else if ( (LA16_0=='s') ) {s = 13;}
+                        else if ( (LA16_0=='|') ) {s = 13;}
 
-                        else if ( (LA16_0=='m') ) {s = 14;}
+                        else if ( (LA16_0=='~') ) {s = 14;}
 
-                        else if ( (LA16_0=='n') ) {s = 15;}
+                        else if ( (LA16_0=='!') ) {s = 15;}
 
-                        else if ( (LA16_0=='v') ) {s = 16;}
+                        else if ( (LA16_0=='s') ) {s = 16;}
 
-                        else if ( (LA16_0=='r') ) {s = 17;}
+                        else if ( (LA16_0=='m') ) {s = 17;}
 
-                        else if ( (LA16_0=='b') ) {s = 18;}
+                        else if ( (LA16_0=='n') ) {s = 18;}
 
-                        else if ( (LA16_0=='@') ) {s = 19;}
+                        else if ( (LA16_0=='v') ) {s = 19;}
 
-                        else if ( (LA16_0==':') ) {s = 20;}
+                        else if ( (LA16_0=='r') ) {s = 20;}
 
-                        else if ( (LA16_0=='e') ) {s = 21;}
+                        else if ( (LA16_0=='b') ) {s = 21;}
 
-                        else if ( (LA16_0=='c') ) {s = 22;}
+                        else if ( (LA16_0=='@') ) {s = 22;}
 
-                        else if ( (LA16_0=='(') ) {s = 23;}
+                        else if ( (LA16_0==':') ) {s = 23;}
 
-                        else if ( (LA16_0==')') ) {s = 24;}
+                        else if ( (LA16_0=='e') ) {s = 24;}
 
-                        else if ( (LA16_0==',') ) {s = 25;}
+                        else if ( (LA16_0=='c') ) {s = 25;}
 
-                        else if ( (LA16_0=='#') ) {s = 26;}
+                        else if ( (LA16_0=='(') ) {s = 26;}
 
-                        else if ( (LA16_0=='[') ) {s = 27;}
+                        else if ( (LA16_0==')') ) {s = 27;}
 
-                        else if ( (LA16_0==']') ) {s = 28;}
+                        else if ( (LA16_0==',') ) {s = 28;}
 
-                        else if ( (LA16_0==';') ) {s = 29;}
+                        else if ( (LA16_0=='#') ) {s = 29;}
 
-                        else if ( (LA16_0=='a') ) {s = 30;}
+                        else if ( (LA16_0=='[') ) {s = 30;}
 
-                        else if ( (LA16_0=='|') ) {s = 31;}
+                        else if ( (LA16_0==']') ) {s = 31;}
 
-                        else if ( (LA16_0=='&') ) {s = 32;}
+                        else if ( (LA16_0==';') ) {s = 32;}
 
-                        else if ( (LA16_0=='t') ) {s = 33;}
+                        else if ( (LA16_0=='a') ) {s = 33;}
 
-                        else if ( (LA16_0=='f') ) {s = 34;}
+                        else if ( (LA16_0=='?') ) {s = 34;}
 
-                        else if ( ((LA16_0>='0' && LA16_0<='9')) ) {s = 35;}
+                        else if ( (LA16_0=='t') ) {s = 35;}
 
-                        else if ( (LA16_0=='^') ) {s = 36;}
+                        else if ( (LA16_0=='f') ) {s = 36;}
 
-                        else if ( ((LA16_0>='A' && LA16_0<='Z')||LA16_0=='_'||LA16_0=='d'||(LA16_0>='g' && LA16_0<='h')||(LA16_0>='j' && LA16_0<='l')||(LA16_0>='p' && LA16_0<='q')||LA16_0=='u'||(LA16_0>='w' && LA16_0<='z')) ) {s = 37;}
+                        else if ( (LA16_0=='0') ) {s = 37;}
 
-                        else if ( (LA16_0=='\"') ) {s = 38;}
+                        else if ( ((LA16_0>='1' && LA16_0<='9')) ) {s = 38;}
 
-                        else if ( (LA16_0=='\'') ) {s = 39;}
+                        else if ( ((LA16_0>='A' && LA16_0<='Z')||LA16_0=='_'||LA16_0=='d'||(LA16_0>='g' && LA16_0<='h')||(LA16_0>='j' && LA16_0<='l')||(LA16_0>='p' && LA16_0<='q')||LA16_0=='u'||(LA16_0>='w' && LA16_0<='z')) ) {s = 39;}
 
-                        else if ( ((LA16_0>='\t' && LA16_0<='\n')||LA16_0=='\r'||LA16_0==' ') ) {s = 40;}
+                        else if ( (LA16_0=='\"') ) {s = 40;}
 
-                        else if ( ((LA16_0>='\u0000' && LA16_0<='\b')||(LA16_0>='\u000B' && LA16_0<='\f')||(LA16_0>='\u000E' && LA16_0<='\u001F')||LA16_0=='$'||LA16_0=='.'||LA16_0=='?'||LA16_0=='\\'||LA16_0=='`'||LA16_0=='{'||LA16_0=='}'||(LA16_0>='\u007F' && LA16_0<='\uFFFF')) ) {s = 41;}
+                        else if ( (LA16_0=='\'') ) {s = 41;}
+
+                        else if ( ((LA16_0>='\t' && LA16_0<='\n')||LA16_0=='\r'||LA16_0==' ') ) {s = 42;}
+
+                        else if ( ((LA16_0>='\u0000' && LA16_0<='\b')||(LA16_0>='\u000B' && LA16_0<='\f')||(LA16_0>='\u000E' && LA16_0<='\u001F')||LA16_0=='$'||LA16_0=='.'||LA16_0=='\\'||LA16_0=='`'||LA16_0=='{'||LA16_0=='}'||(LA16_0>='\u007F' && LA16_0<='\uFFFF')) ) {s = 43;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA16_41 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA16_41>='\u0000' && LA16_41<='\uFFFF')) ) {s = 111;}
+
+                        else s = 43;
 
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA16_39 = input.LA(1);
+                        int LA16_40 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA16_39>='\u0000' && LA16_39<='\uFFFF')) ) {s = 94;}
+                        if ( ((LA16_40>='\u0000' && LA16_40<='\uFFFF')) ) {s = 111;}
 
-                        else s = 41;
+                        else s = 43;
 
                         if ( s>=0 ) return s;
                         break;
