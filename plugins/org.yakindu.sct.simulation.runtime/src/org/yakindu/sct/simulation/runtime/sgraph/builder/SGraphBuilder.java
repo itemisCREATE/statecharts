@@ -338,4 +338,9 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 				+ sourceChild.eClass().getName() + ") !");
 	}
 
+	public boolean isBuilderFor(EObject context) {
+		String resourceExtension = context.eResource().getURI().lastSegment();
+		return resourceExtension.endsWith("sct");
+	}
+
 }

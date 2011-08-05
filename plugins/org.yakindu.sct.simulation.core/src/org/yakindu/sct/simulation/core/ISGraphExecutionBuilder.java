@@ -17,7 +17,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public interface ISGraphExecutionBuilder {
+public interface ISGraphExecutionBuilder extends ISCTBuilder{
 	/**
 	 * Returns an execution facade for a statechart model. Execution Builder can
 	 * be registered via extension point
@@ -27,4 +27,5 @@ public interface ISGraphExecutionBuilder {
 	 * @return
 	 */
 	public ISGraphExecutionFacade build(Statechart statechart);
+
 }

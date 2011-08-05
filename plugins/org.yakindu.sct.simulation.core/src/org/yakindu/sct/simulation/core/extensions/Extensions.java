@@ -6,13 +6,15 @@ import java.util.List;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.ecore.EObject;
+import org.yakindu.sct.simulation.core.ISCTBuilder;
 
 /**
  * 
  * @author andreas muelder
  * 
  */
-public class Extensions<T> {
+public class Extensions<T extends ISCTBuilder> {
 
 	private String extensionPointId;
 
@@ -20,17 +22,15 @@ public class Extensions<T> {
 		this.extensionPointId = extensionPointId;
 	}
 
-	public T getFirstExtension() {
-		return getExtensions().get(0);
-	}
+	public T getRegisteredProvider(EObject object) {
+		List<T> loadRegisteredProvider = loadRegisteredProvider();
+		for (T t : loadRegisteredProvider) {
+			if (t.isBuilderFor(object)) {
+				return t;
+			}
+		}
+		throw new IllegalStateException("No provider found for type" + object);
 
-	public List<T> getExtensions() {
-		List<T> extensions = loadRegisteredProvider();
-		if (extensions.size() == 0)
-			throw new IllegalStateException(
-					"No extensions registered for extension point"
-							+ extensionPointId);
-		return extensions;
 	}
 
 	public List<T> loadRegisteredProvider() {
