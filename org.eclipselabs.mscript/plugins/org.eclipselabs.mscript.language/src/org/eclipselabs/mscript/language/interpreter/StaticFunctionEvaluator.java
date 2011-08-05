@@ -28,8 +28,8 @@ import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.VariableAccess;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
-import org.eclipselabs.mscript.language.functionmodel.construct.FunctionDescriptorConstructor;
-import org.eclipselabs.mscript.language.functionmodel.construct.IFunctionDescriptorConstructorResult;
+import org.eclipselabs.mscript.language.functionmodel.construct.FunctionDescriptorBuilder;
+import org.eclipselabs.mscript.language.functionmodel.construct.IFunctionDescriptorBuilderResult;
 import org.eclipselabs.mscript.language.functionmodel.util.FunctionModelValidator;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.util.EObjectTreeIterator;
@@ -50,9 +50,9 @@ public class StaticFunctionEvaluator {
 		MultiStatus multiStatus = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Static function evaluation", null);
 		StatusUtil.merge(multiStatus, new StaticStepExpressionEvaluator().evaluate(context, functionDefinition));
 
-		IFunctionDescriptorConstructorResult functionDescriptorConstructorResult = new FunctionDescriptorConstructor().construct(context, functionDefinition);
-		StatusUtil.merge(multiStatus, functionDescriptorConstructorResult.getStatus());
-		FunctionDescriptor functionDescriptor = functionDescriptorConstructorResult.getFunctionDescriptor();
+		IFunctionDescriptorBuilderResult functionDescriptorBuilderResult = new FunctionDescriptorBuilder().build(context, functionDefinition);
+		StatusUtil.merge(multiStatus, functionDescriptorBuilderResult.getStatus());
+		FunctionDescriptor functionDescriptor = functionDescriptorBuilderResult.getFunctionDescriptor();
 		context.setFunctionDescriptor(functionDefinition, functionDescriptor);
 
 		FunctionModelValidator validator = new FunctionModelValidator();

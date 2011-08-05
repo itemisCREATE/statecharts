@@ -42,12 +42,12 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * @author Andreas Unger
  *
  */
-public class FunctionDescriptorConstructor implements IFunctionDescriptorConstructor {
+public class FunctionDescriptorBuilder implements IFunctionDescriptorBuilder {
 
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.functionmodel.construct.IFunctionDescriptorConstructor#construct(org.eclipselabs.mscript.language.ast.FunctionDefinition)
 	 */
-	public IFunctionDescriptorConstructorResult construct(IStaticEvaluationContext context, FunctionDefinition functionDefinition) {
+	public IFunctionDescriptorBuilderResult build(IStaticEvaluationContext context, FunctionDefinition functionDefinition) {
 		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Function descriptor construction", null);
 
 		FunctionDescriptor functionDescriptor = FunctionModelFactory.eINSTANCE.createFunctionDescriptor();
