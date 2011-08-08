@@ -8,14 +8,14 @@
             fixed="false"
             icon="icons/modeling_perspective.png"
             id="org.yakindu.sct.ui.ModelingPerspective"
-            name="YAKINDU SCT Modeling">
+            name="SC Modeling">
       </perspective>
       <perspective
             class="org.yakindu.sct.ui.perspectives.SimulationPerspectiveFactory"
             fixed="false"
             icon="icons/simulation_perspective.png"
             id="org.yakindu.sct.ui.SimulationPerspective"
-            name="YAKINDU SCT Simulation">
+            name="SC Simulation">
       </perspective>
    </extension>
 
