@@ -21,7 +21,6 @@ import org.eclipse.ui.IPerspectiveFactory;
  */
 public class ModelingPerspectiveFactory implements IPerspectiveFactory {
 
-	@Override
 	public void createInitialLayout(IPageLayout layout) {
 		defineActions(layout);
 		defineLayout(layout);
