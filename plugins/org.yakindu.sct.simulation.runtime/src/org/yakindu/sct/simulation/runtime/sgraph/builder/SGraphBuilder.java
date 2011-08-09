@@ -249,6 +249,7 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 		return null;
 	}
 
+	
 	@FunctionMethod("")
 	public Object build(RTStatechart tParent, Transition transition) {
 		RTNode fromNode = (RTNode) tParent.getElementByAlias(transition
@@ -256,6 +257,9 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 		RTNode toNode = (RTNode) tParent.getElementByAlias(transition
 				.getTarget());
 
+		if ( fromNode == null || toNode == null ) return null;  // >>>>>>>>> exit here on false precondition
+		
+		
 		RTTimeEvent timeTrigger = null;
 		Set<RTSignalEvent> signalTriggers = new HashSet<RTSignalEvent>();
 		RTGuard guard = null;
@@ -314,6 +318,7 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 		RTTransition tTrans = new RTTransition(id, transition.getPriority(),
 				rtTrigger, action, fromNode, toNode);
 		tParent.defineAlias(transition, tTrans);
+		
 		return tTrans;
 	}
 
