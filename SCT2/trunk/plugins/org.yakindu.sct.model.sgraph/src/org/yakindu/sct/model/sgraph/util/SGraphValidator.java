@@ -60,6 +60,9 @@ public class SGraphValidator extends EObjectValidator {
 	public static final String ISSUE_INITIAL_ENTRY_WITH_IN_TRANS = "Initial entry should have no incoming transition.";
 	public static final String ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS = "Initial entry should have a single outgoing transition";
 	public final static String ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS = "Entries must not have more than one outgoing transition";
+	public static final String ISSUE_OUTGOING_TRANSITION_WITHOUT_TARGET = "!! Vertex contains outgoing transitions without target !!";
+
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -254,6 +257,10 @@ public class SGraphValidator extends EObjectValidator {
 	public boolean validateVertex_OutgoingTransitionCount(Vertex vertex,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 
+		
+		for (Transition tran : vertex.getOutgoingTransitions()) {
+			if (tran.getTarget() == null) warning(vertex, diagnostics, ISSUE_OUTGOING_TRANSITION_WITHOUT_TARGET);
+		}
 		
 		if ((vertex.getOutgoingTransitions().size() > 0) && (vertex instanceof FinalState)) {
 			return warning(vertex, diagnostics, ISSUE_FINAL_STATE_OUTGOING_TRANSITION);
