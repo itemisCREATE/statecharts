@@ -78,7 +78,7 @@ public class ExecutionScopeAdapter implements ISGraphExecutionScope {
 
 	
 	public void raise(ScopeEvent event) {
-		raise(event.getName());	
+		scope.raise(event.getName(), event.getValue());	
 	}
 	
 }
