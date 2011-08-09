@@ -84,6 +84,7 @@ public class HighlightingExecutionListener extends
 					break;
 				case TERMINATED:
 					getSupport().releaseEditor();
+					highlightingSupport = null;
 					break;
 				}
 			}
