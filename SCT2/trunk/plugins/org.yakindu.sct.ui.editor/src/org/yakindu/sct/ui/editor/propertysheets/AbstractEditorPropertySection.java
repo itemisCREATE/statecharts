@@ -48,11 +48,8 @@ public abstract class AbstractEditorPropertySection extends
 		}
 
 		EList<Resource> resources = domain.getResourceSet().getResources();
-		if (resources.size() != 1) {
-			throw new IllegalStateException(
-					"Different resources in resource set , don't know which to use...");
-		}
-		return resources.get(0);
+
+		return resources.get(0); // always take the first resource ...
 	}
 
 	protected Injector getInjector(EClass type) {
