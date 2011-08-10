@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?NLS TYPE="org.eclipse.help.contexts"?>
 <contexts>
+   <context id="sc_editor_graphical_viewer">
+      <description>Enter short description here!</description>
+      <topic href="help/01_Overview/overview.html" label="Getting Started"/>
+   </context>
    <context id="sc_properties_entry_entrykind" title="YAKINDU Statechart Element Properties">
       <description>Enter short description of the Entry Kind property here.</description>
-      <topic href="html/reference/statechart_elements/entry.html" label="Entry Kind Property"/>
+      <topic href="help/07_Reference/sc_reference.html#EntryKind" label="Entry Kind Property"/>
    </context>
    <context id="sc_properties_state_expression" title="YAKINDU Statechart Element Properties">
       <description>Enter short description of the State Expression property here.</description>
-      <topic href="html/reference/statechart_elements/state.html#property_expression" label="State Expression Property"/>
+      <topic href="help/07_Reference/sc_reference.html#StateExpression" label="State Expression Property"/>
    </context>
    <context id="sc_properties_statechart_expression" title="YAKINDU Statechart Element Properties">
       <description>Enter short description of the Statechart Expression property here.</description>
-      <topic href="html/reference/statechart_elements/statechart.html#property_expression" label="Statechart Expression Property"/>
+      <topic href="help/07_Reference/sc_reference.html#StatechartExpression" label="Statechart Expression Property"/>
    </context>
-   <context id="sc_properties_transitioin_expression" title="YAKINDU Statechart Element Properties">
+   <context id="sc_properties_transition_expression" title="YAKINDU Statechart Element Properties">
       <description>Enter short descripton of the Transition Expression property here.</description>
-      <topic href="html/reference/statechart_elements/transition.html#property_expression" label="Transition Expression Property"/>
+      <topic href="help/07_Reference/sc_reference.html#TransitionExpression" label="Transition Expression Property"/>
    </context>
 </contexts>

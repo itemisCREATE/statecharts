@@ -9,19 +9,32 @@
             primary="true">
       </toc>
       <toc
-            file="tocconcepts.xml">
+            file="help/01_Overview/overview-toc.xml"
+            primary="false">
       </toc>
       <toc
-            file="tocgettingstarted.xml">
+            file="help/02_Installation/installation-toc.xml"
+            primary="false">
       </toc>
       <toc
-            file="tocreference.xml">
+            file="help/03_Statechart_Modeling_and_Simulation/modeling_simulation-toc.xml"
+            primary="false">
       </toc>
       <toc
-            file="tocsamples.xml">
+            file="help/04_C-Code_Generator/c_code_generator-toc.xml"
+            primary="false">
       </toc>
       <toc
-            file="toctasks.xml">
+            file="help/05_Java-Code_Generator/java_code_generator-toc.xml"
+            primary="false">
+      </toc>
+      <toc
+            file="help/06_UML_Transformation/uml_transformation-toc.xml"
+            primary="false">
+      </toc>
+      <toc
+            file="help/07_Reference/sc_reference-toc.xml"
+            primary="false">
       </toc>
    </extension>
    <extension
