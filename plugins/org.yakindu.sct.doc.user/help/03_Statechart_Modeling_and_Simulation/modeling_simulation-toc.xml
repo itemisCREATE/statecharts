@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<toc topic="help/03_Statechart_Modeling_and_Simulation/modeling_simulation.html" label="modeling_simulation">
+	<topic href="help/03_Statechart_Modeling_and_Simulation/modeling_simulation.html" label="Statechart Modeling and Simulation">
+		<topic href="help/03_Statechart_Modeling_and_Simulation/modeling_simulation.html#TheYAKINDUperspective" label="The YAKINDU perspective"></topic>
+		<topic href="help/03_Statechart_Modeling_and_Simulation/modeling_simulation.html#ExampleStepbyStep" label="Example Step-by-Step">
+			<topic href="help/03_Statechart_Modeling_and_Simulation/modeling_simulation.html#ExampleStateMachine" label="Example State Machine"></topic>
+			<topic href="help/03_Statechart_Modeling_and_Simulation/modeling_simulation.html#CreatingaNewProject" label="Creating a New Project"></topic>
+			<topic href="help/03_Statechart_Modeling_and_Simulation/modeling_simulation.html#DefiningaStateMachine" label="Defining a State Machine "></topic>
+			<topic href="help/03_Statechart_Modeling_and_Simulation/modeling_simulation.html#CheckingtheStateMachine" label="Checking the State Machine"></topic>
+			<topic href="help/03_Statechart_Modeling_and_Simulation/modeling_simulation.html#ProjectTypeandDependencies" label="Project Type and Dependencies"></topic>
+			<topic href="help/03_Statechart_Modeling_and_Simulation/modeling_simulation.html#CreatingCheckFiles" label="Creating Check Files"></topic>
+			<topic href="help/03_Statechart_Modeling_and_Simulation/modeling_simulation.html#EditingCheckFiles" label="Editing Check Files"></topic>
+			<topic href="help/03_Statechart_Modeling_and_Simulation/modeling_simulation.html#SimulatingaStateMachine" label="Simulating a State Machine"></topic>
+		</topic>
+		<topic href="help/03_Statechart_Modeling_and_Simulation/modeling_simulation.html#UsingtheExampleProjects" label="Using the Example Projects"></topic>
+	</topic>
+</toc>
