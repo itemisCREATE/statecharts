@@ -13,6 +13,7 @@ package org.yakindu.sct.simulation.runtime.sgraph.builder;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -51,6 +52,7 @@ import org.yakindu.sct.simulation.runtime.sgraph.RTFinalState;
 import org.yakindu.sct.simulation.runtime.sgraph.RTGuard;
 import org.yakindu.sct.simulation.runtime.sgraph.RTNode;
 import org.yakindu.sct.simulation.runtime.sgraph.RTPseudostate;
+import org.yakindu.sct.simulation.runtime.sgraph.RTReaction;
 import org.yakindu.sct.simulation.runtime.sgraph.RTRegion;
 import org.yakindu.sct.simulation.runtime.sgraph.RTSignalEvent;
 import org.yakindu.sct.simulation.runtime.sgraph.RTSimpleState;
@@ -174,10 +176,18 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 	public Object build(RTRegion parent, State state) {
 		RTState runtimeState = null;
 		
+		LocalReaction entryReaction = getReactionByTriggerEventType(state, EntryEvent.class);
+		LocalReaction exitReaction = getReactionByTriggerEventType(state, ExitEvent.class);
+
+		List<LocalReaction> localReactions = getLocalReactions(state);
+		if ( entryReaction != null ) localReactions.remove(entryReaction);
+		if ( exitReaction != null) localReactions.remove(exitReaction);
 		
+
 		//Build the transition action
-		RTAction entryAction = buildAction((RTStatechart) parent.getStatechart(),  getReactionByTriggerEventType(state, EntryEvent.class));
-		RTAction exitAction = buildAction((RTStatechart) parent.getStatechart(),  getReactionByTriggerEventType(state, ExitEvent.class));
+		RTAction entryAction = buildAction((RTStatechart) parent.getStatechart(),  entryReaction);
+		RTAction exitAction = buildAction((RTStatechart) parent.getStatechart(),  exitReaction);
+		
 		
 		if (state.getSubRegions().size() > 0) {
 			runtimeState = new RTCompoundState(parent.getId() + "."
@@ -189,10 +199,24 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 					+ state.getName(), state.getName(), parent, entryAction, null, exitAction);
 		}
 		
+		for (LocalReaction reaction : localReactions) {
+			runtimeState.addLocalReaction(buildReaction((RTStatechart)parent.getStatechart(), reaction));
+		}
+		
 		((RTStatechart) parent.getStatechart())
 				.defineAlias(state, runtimeState);
 
 		return runtimeState;
+	}
+
+	
+	private RTReaction buildReaction(RTStatechart context, LocalReaction reaction) {
+		Trigger trigger = reaction.getTrigger();
+		RTTrigger rtTrigger = buildTrigger(context, trigger);
+		
+		RTAction action = buildAction(context, reaction.getEffect());
+
+		return new RTReaction(rtTrigger, action);
 	}
 
 	
@@ -218,6 +242,15 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 			if (!entryEvents.isEmpty()) {
 				return (LocalReaction) entryEvents.get(0).eContainer().eContainer();
 			}
+		}
+		return null;
+	}
+	
+	protected List<LocalReaction> getLocalReactions(State state) {
+	
+		// TODO: derive localReactions from scope. 
+		for (Scope declarationScope : state.getScopes()) {
+			return EcoreUtil2.getAllContentsOfType(declarationScope, LocalReaction.class);
 		}
 		return null;
 	}
@@ -259,15 +292,40 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 
 		if ( fromNode == null || toNode == null ) return null;  // >>>>>>>>> exit here on false precondition
 		
+		Trigger trigger = transition.getTrigger();
+		RTTrigger rtTrigger = buildTrigger(tParent, trigger);
 		
+		RTAction action = buildAction(tParent, transition.getEffect());
+
+		String id= "t@" + transition.getSource().getOutgoingTransitions().indexOf(transition);
+		RTReaction tTrans = new RTTransition(id, transition.getPriority(),
+				rtTrigger, action, fromNode, toNode);
+		tParent.defineAlias(transition, tTrans);
+		
+		return tTrans;
+	}
+
+	
+	protected RTAction buildAction(RTStatechart tParent, Effect effect) {
+		//Build the transition action
+		RTAction action = null;
+		RTStatement statement = (RTStatement) textBuilder.build(effect);
+		if (statement != null) {
+			action = new RTActionStatement(statement, tParent);
+		}
+		return action;
+	}
+
+	
+	protected RTTrigger buildTrigger(RTStatechart tParent,
+			 
+			 Trigger trigger ) {
+		
+		RTTrigger rtTrigger = null;
 		RTTimeEvent timeTrigger = null;
 		Set<RTSignalEvent> signalTriggers = new HashSet<RTSignalEvent>();
 		RTGuard guard = null;
-		RTAction action = null;
-
-		Trigger trigger = transition.getTrigger();
-		RTTrigger rtTrigger = null;
-				
+		
 		// // TODO: Das muss hier raus:
 		if (trigger instanceof ReactionTrigger) {
 			EList<EventSpec> triggers = ((ReactionTrigger) trigger)
@@ -306,20 +364,7 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 
 			rtTrigger = new RTTrigger(timeTrigger, signalTriggers, guard);
 		}
-		
-		//Build the transition action
-		Effect effect = transition.getEffect();
-		RTStatement statement = (RTStatement) textBuilder.build(effect);
-		if (statement != null) {
-			action = new RTActionStatement(statement, tParent);
-		}
-
-		String id= "t@" + transition.getSource().getOutgoingTransitions().indexOf(transition);
-		RTTransition tTrans = new RTTransition(id, transition.getPriority(),
-				rtTrigger, action, fromNode, toNode);
-		tParent.defineAlias(transition, tTrans);
-		
-		return tTrans;
+		return rtTrigger;
 	}
 
 	protected void build(Object targetParent, EList<EObject> sourceChildren) {

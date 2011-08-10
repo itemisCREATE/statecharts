@@ -17,9 +17,12 @@ public abstract class AbstractStatechart {
 	private List<RTRegion> regions = new ArrayList<RTRegion>();
 
 	private List<RTTransition> transitions = new ArrayList<RTTransition>();
+	private List<RTReaction> localReactions = new ArrayList<RTReaction>();
 
 	// used to request time events from environment
 	protected RTTimingService timingService = null;
+
+	protected Set<RTEvent> currentEvents = new HashSet<RTEvent>();
 
 	protected AbstractStatechart(String id) {
 		this.id = id;
@@ -65,8 +68,8 @@ public abstract class AbstractStatechart {
 	}
 
 	public void runCycle() {
-		Set<RTEvent> currentEvents = new HashSet<RTEvent>();
 		synchronized (raisedEvents) {
+			currentEvents.clear();
 			currentEvents.addAll(raisedEvents);
 			raisedEvents.clear();
 		}

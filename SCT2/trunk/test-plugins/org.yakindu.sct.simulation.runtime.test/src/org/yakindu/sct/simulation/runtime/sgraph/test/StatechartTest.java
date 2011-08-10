@@ -21,9 +21,11 @@ import org.yakindu.sct.simulation.runtime.sgraph.RTActionStatement;
 import org.yakindu.sct.simulation.runtime.sgraph.GuardExpression;
 import org.yakindu.sct.simulation.runtime.sgraph.PseudostateKind;
 import org.yakindu.sct.simulation.runtime.sgraph.RTPseudostate;
+import org.yakindu.sct.simulation.runtime.sgraph.RTReaction;
 import org.yakindu.sct.simulation.runtime.sgraph.RTRegion;
 import org.yakindu.sct.simulation.runtime.sgraph.RTSignalEvent;
 import org.yakindu.sct.simulation.runtime.sgraph.RTSimpleState;
+import org.yakindu.sct.simulation.runtime.sgraph.RTState;
 import org.yakindu.sct.simulation.runtime.sgraph.RTStatechart;
 import org.yakindu.sct.simulation.runtime.sgraph.RTTransition;
 import org.yakindu.sct.simulation.runtime.stext.Assign;
@@ -38,8 +40,8 @@ public class StatechartTest {
 	private RTRegion rootRegion;
 	protected RTStatechart statechart;
 	private RTPseudostate initial;
-	private RTSimpleState state1;
-	private RTTransition trans;
+	private RTState state1;
+	private RTReaction trans;
 
 	/**
 	 * The setup creates a basic statechart that consists of a single root
@@ -79,7 +81,7 @@ public class StatechartTest {
 	@Test
 	public void notestTransitionWithoutTrigger() {
 
-		RTSimpleState state2 = new RTSimpleState("s2", "b", rootRegion, null,
+		RTState state2 = new RTSimpleState("s2", "b", rootRegion, null,
 				null, null);
 		new RTTransition("t_s1_s2", 1, null, null, state1, state2);
 
@@ -101,7 +103,7 @@ public class StatechartTest {
 
 		final RTSignalEvent event = new RTSignalEvent("event");
 
-		RTSimpleState state2 = new RTSimpleState("s2", "b", rootRegion, null,
+		RTState state2 = new RTSimpleState("s2", "b", rootRegion, null,
 				null, null);
 		RTTrigger trigger = new RTTrigger(null, new HashSet<RTSignalEvent>() {
 			{
@@ -135,7 +137,7 @@ public class StatechartTest {
 		RTVariable var = new RTVariable("v");
 		statechart.addVariable(var);
 
-		RTSimpleState state2 = new RTSimpleState("s2", "b", rootRegion, null,
+		RTState state2 = new RTSimpleState("s2", "b", rootRegion, null,
 				null, null);
 		
 		RTTrigger trigger = new RTTrigger(null, new HashSet<RTSignalEvent>() {
@@ -173,7 +175,7 @@ public class StatechartTest {
 		RTVariable var = new RTVariable("v");
 		statechart.addVariable(var);
 
-		RTSimpleState state2 = new RTSimpleState("s2", "b", rootRegion, null,
+		RTState state2 = new RTSimpleState("s2", "b", rootRegion, null,
 				null, null);
 		
 		

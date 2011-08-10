@@ -1,5 +1,7 @@
 package org.yakindu.sct.simulation.runtime.sgraph;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,14 +18,21 @@ public abstract class RTState extends RTNode {
 	private RTAction exitAction;
 	private String name;
 
+	protected List<RTReaction> localReactions = new ArrayList<RTReaction>();
+
 	public RTState(String id, String name, RTRegion owningRegion,
 			RTAction entryAction, RTAction exitAction) {
 		super(id, owningRegion);
 		this.name = name;
 		this.entryAction = entryAction;
 		this.exitAction = exitAction;
+		
 	}
 
+	public void addLocalReaction(RTReaction reaction) {
+		localReactions.add(reaction);
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -111,6 +120,21 @@ public abstract class RTState extends RTNode {
 
 	public RTAction getExitAction() {
 		return exitAction;
+	}
+
+	
+	protected void performLocalReactions(Set<RTEvent> events) {
+		perfotmParentReactions(events);
+		for (RTReaction reaction : localReactions) {
+			if (reaction.getTrigger().isEnabled(events)) reaction.getAction().execute();
+		}
+	}
+
+	protected void perfotmParentReactions(Set<RTEvent> events) {
+		RTState state = getOwningRegion().getOwningState();
+		if (state != null) {
+			state.performLocalReactions(events);
+		}
 	}
 
 }

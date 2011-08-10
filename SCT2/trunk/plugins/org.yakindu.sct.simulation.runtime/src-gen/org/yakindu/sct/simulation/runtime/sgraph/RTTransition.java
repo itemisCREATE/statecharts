@@ -11,18 +11,10 @@ import java.util.Set;
  * and may be additionally guarded. In case a transition is taken, its action
  * will be executed.
  */
-public class RTTransition {
+public class RTTransition extends RTReaction {
 
 	private String id;
 	private int priority;
-
-	private ITrigger trigger;
-	
-	
-//	private RTGuard guard;
-//	private Set<RTSignalEvent> signalTriggers = new HashSet<RTSignalEvent>();
-//	private RTTimeEvent timeTrigger;
-	private RTAction action;
 
 	private RTNode sourceNode;
 	private RTNode targetNode;
@@ -33,6 +25,9 @@ public class RTTransition {
 
 	public RTTransition(String id, int priority, ITrigger trigger, RTAction action,
 			RTNode sourceNode, RTNode targetNode) {
+
+		super(trigger, action);
+		
 		this.id = id;
 		this.priority = priority;
 
@@ -56,11 +51,7 @@ public class RTTransition {
 
 	protected boolean isTriggeredBy(Set<RTEvent> events) {
 
-		// TODO : implement Null-Trigger
 		return (trigger != null) ? trigger.isEnabled(events) : true ;
-//		return !Collections.disjoint(this.signalTriggers, events)
-//				|| (timeTrigger != null && events.contains(timeTrigger));
-
 	}
 
 	public String getId() {
@@ -71,13 +62,6 @@ public class RTTransition {
 		return priority;
 	}
 
-//	protected boolean isEnabled() {
-//		if (guard == null) {
-//			return true;
-//		} else {
-//			return guard.evaluate();
-//		}
-//	}
 
 	public RTTimeEvent getTimeTrigger() {
 		return trigger.getTimeTrigger();
@@ -89,6 +73,9 @@ public class RTTransition {
 
 	protected void take() {
 
+		// first perform all local reactions of non effected parent states...
+		if (getCommonParentState() != null) getCommonParentState().performLocalReactions(commonAncestorRegion.getStatechart().currentEvents);
+		
 		// leave all enclosing states from the souceNode's container up to
 		// the common ancestor region
 		for (RTCompoundState state : enclosingStatesToLeave) {
@@ -176,20 +163,9 @@ public class RTTransition {
 		return targetNode;
 	}
 
-//	public RTGuard getGuard() {
-//		return guard;
-//	}
-
-	public RTAction getAction() {
-		return action;
+	public RTState getCommonParentState() {
+		return (commonAncestorRegion != null)  
+				? commonAncestorRegion.getOwningState()
+				: null;
 	}
-
-	public ITrigger getTrigger() {
-		return trigger;
-	}
-
-//	public Set<RTSignalEvent> getSignalTriggers() {
-//		return signalTriggers;
-//	}
-
 }
