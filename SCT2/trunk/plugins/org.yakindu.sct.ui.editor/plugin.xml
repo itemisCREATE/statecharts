@@ -14,7 +14,7 @@
             contributorClass="org.yakindu.sct.ui.editor.editor.StatechartDiagramActionbarContributor"
             default="true"
             extensions="sct"
-            icon="icons/obj16/StatemachineDiagramFile.gif"
+            icon="icons/obj16/StatemachineDiagramFile.png"
             id="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor"
             matchingStrategy="org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditorMatchingStrategy"
             name="YAKINDU Statechart Editor">
@@ -29,7 +29,7 @@
             nsURI="http://www.yakindu.org/sct/2.0.0">
          <metamodelType
                eclass="Statechart"
-               icon="icons/obj16/StatemachineDiagramFile.gif"
+               icon="icons/obj16/StatemachineDiagramFile.png"
                id="org.yakindu.sct.ui.editor.Statechart"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="Statechart">
@@ -215,7 +215,7 @@
       <wizard
             category="YAKINDU"
             class="org.yakindu.sct.ui.editor.wizards.CreationWizard"
-            icon="icons/obj16/StatemachineDiagramFile.gif"
+            icon="icons/obj16/StatemachineDiagramFile.png"
             id="org.yakindu.sct.ui.editor.StatechartDiagramWizard"
             name="YAKINDU Statechart Diagram"
             project="false">
