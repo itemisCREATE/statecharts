@@ -47,6 +47,7 @@ import org.yakindu.sct.simulation.runtime.sgraph.RTNode;
 import org.yakindu.sct.simulation.runtime.sgraph.RTPseudostate;
 import org.yakindu.sct.simulation.runtime.sgraph.RTRegion;
 import org.yakindu.sct.simulation.runtime.sgraph.RTSimpleState;
+import org.yakindu.sct.simulation.runtime.sgraph.RTState;
 import org.yakindu.sct.simulation.runtime.sgraph.RTStatechart;
 import org.yakindu.sct.simulation.runtime.sgraph.RTTransition;
 import org.yakindu.sct.simulation.runtime.sgraph.builder.SGraphBuilder;
@@ -218,7 +219,7 @@ public class SGraphBuilderTest {
 		assertEquals(1, regions.get(0).getNodes().size());
 		RTNode node = regions.get(0).getNodes().iterator().next();
 		assertTrue(node instanceof RTSimpleState);
-		RTSimpleState tState = (RTSimpleState) node;
+		RTState tState = (RTState) node;
 		assertEquals(state.getName(), tState.getName());
 		
 		fail("complete me");

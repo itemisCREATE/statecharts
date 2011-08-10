@@ -132,7 +132,7 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 		}
 	}
 
-	protected void transitionFired(RTTransition trans) {
+	protected void transitionFired(RTReaction trans) {
 		for (ISGraphExecutionListener listener : listeners) {
 			listener.transitionFired((Transition) elementToAliasMap.get(trans));
 		}

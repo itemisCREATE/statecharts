@@ -18,15 +18,11 @@ public class RTSimpleState extends RTState {
 	}
 
 	protected void reactLocallyOn(Set<RTEvent> events) {
-
-		if (doAction != null) {
-			doAction.execute();
-		}
-
+		performLocalReactions(events);
 	}
 
 	public RTAction getDoAction() {
 		return doAction;
 	}
-
+ 
 }
