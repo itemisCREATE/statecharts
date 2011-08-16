@@ -19,6 +19,6 @@ import org.eclipselabs.mscript.language.il.Compound;
  */
 public interface ICompoundGenerator {
 
-	void generate(IMscriptGeneratorContext context, IVariableAccessStrategy variableAccessStrategy, Compound compound);
+	void generate(IMscriptGeneratorContext context, Compound compound);
 
 }

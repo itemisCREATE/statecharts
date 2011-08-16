@@ -226,7 +226,7 @@ public class CodegenProcess implements IProcess {
 	private class HeaderGeneratorThread extends GeneratorThread {
 		
 		public void generate() {
-			MscriptGenerator generator = new MscriptGenerator(functionDefinition, new MscriptGeneratorContext(staticEvaluationContext, computationModel, writer));
+			MscriptGenerator generator = new MscriptGenerator(functionDefinition, new MscriptGeneratorContext(writer, computationModel, staticEvaluationContext));
 			generator.generateHeaderCode();
 		}
 		
@@ -235,7 +235,7 @@ public class CodegenProcess implements IProcess {
 	private class ImplementationGeneratorThread extends GeneratorThread {
 		
 		public void generate() {
-			MscriptGenerator generator = new MscriptGenerator(functionDefinition, new MscriptGeneratorContext(staticEvaluationContext, computationModel, writer));
+			MscriptGenerator generator = new MscriptGenerator(functionDefinition, new MscriptGeneratorContext(writer, computationModel, staticEvaluationContext));
 			generator.generateImplementationCode();
 		}
 		

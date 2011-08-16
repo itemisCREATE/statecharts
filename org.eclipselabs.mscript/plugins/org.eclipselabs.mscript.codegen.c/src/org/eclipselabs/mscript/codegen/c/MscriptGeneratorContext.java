@@ -11,8 +11,7 @@
 
 package org.eclipselabs.mscript.codegen.c;
 
-import java.io.Writer;
-
+import org.eclipselabs.mscript.codegen.c.internal.DefaultVariableAccessStrategy;
 import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
 import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
 
@@ -22,26 +21,35 @@ import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
  */
 public class MscriptGeneratorContext implements IMscriptGeneratorContext {
 
-	private IStaticEvaluationContext staticEvaluationContext;
+	private Appendable appendable;
 	private ComputationModel computationModel;
-	private Writer writer;
+	private IStaticEvaluationContext staticEvaluationContext;
+	private IVariableAccessStrategy variableAccessStrategy;
 	
 	/**
 	 * 
 	 */
-	public MscriptGeneratorContext(IStaticEvaluationContext staticEvaluationContext, ComputationModel computationModel, Writer writer) {
-		this.staticEvaluationContext = staticEvaluationContext;
-		this.computationModel = computationModel;
-		this.writer = writer;
+	public MscriptGeneratorContext(Appendable appendable, ComputationModel computationModel, IStaticEvaluationContext staticEvaluationContext) {
+		this(appendable, computationModel, staticEvaluationContext, new DefaultVariableAccessStrategy());
 	}
 	
 	/**
-	 * @return the staticEvaluationContext
+	 * 
 	 */
-	public IStaticEvaluationContext getStaticEvaluationContext() {
-		return staticEvaluationContext;
+	public MscriptGeneratorContext(Appendable appendable, ComputationModel computationModel, IStaticEvaluationContext staticEvaluationContext, IVariableAccessStrategy variableAccessStrategy) {
+		this.appendable = appendable;
+		this.computationModel = computationModel;
+		this.staticEvaluationContext = staticEvaluationContext;
+		this.variableAccessStrategy = variableAccessStrategy;
 	}
-	
+
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.codegen.c.IGeneratorContext#getWriter()
+	 */
+	public Appendable getAppendable() {
+		return appendable;
+	}
+
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.codegen.c.IGeneratorContext#getComputationModel()
 	 */
@@ -49,11 +57,18 @@ public class MscriptGeneratorContext implements IMscriptGeneratorContext {
 		return computationModel;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.codegen.c.IGeneratorContext#getWriter()
+	/**
+	 * @return the staticEvaluationContext
 	 */
-	public Writer getWriter() {
-		return writer;
+	public IStaticEvaluationContext getStaticEvaluationContext() {
+		return staticEvaluationContext;
+	}
+
+	/**
+	 * @return the variableAccessStrategy
+	 */
+	public IVariableAccessStrategy getVariableAccessStrategy() {
+		return variableAccessStrategy;
 	}
 
 }

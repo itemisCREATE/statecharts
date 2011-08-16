@@ -11,9 +11,7 @@
 
 package org.eclipselabs.mscript.codegen.c.internal.util;
 
-import java.io.PrintWriter;
-import java.io.Writer;
-
+import org.eclipselabs.mscript.common.util.PrintAppendable;
 import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
@@ -24,7 +22,7 @@ import org.eclipselabs.mscript.typesystem.DataType;
 public abstract class CastToFloatingPointHelper extends ComputationModelSwitch<Boolean> {
 
 	private ComputationModel computationModel;
-	private PrintWriter writer;
+	private PrintAppendable out;
 
 	private DataType expressionDataType;
 	private FloatingPointFormat targetFloatingPointFormat;
@@ -32,11 +30,11 @@ public abstract class CastToFloatingPointHelper extends ComputationModelSwitch<B
 	/**
 	 * 
 	 */
-	public CastToFloatingPointHelper(ComputationModel computationModel, Writer writer, DataType expressionDataType, FloatingPointFormat targetFloatingPointFormat) {
+	public CastToFloatingPointHelper(ComputationModel computationModel, Appendable appendable, DataType expressionDataType, FloatingPointFormat targetFloatingPointFormat) {
 		this.computationModel = computationModel;
-		this.writer = new PrintWriter(writer);
 		this.expressionDataType = expressionDataType;
 		this.targetFloatingPointFormat = targetFloatingPointFormat;
+		out = new PrintAppendable(appendable);
 	}
 	
 	public void cast() {
@@ -52,9 +50,9 @@ public abstract class CastToFloatingPointHelper extends ComputationModelSwitch<B
 		if (floatingPointFormat.getKind() == targetFloatingPointFormat.getKind()) {
 			writeExpression();
 		} else {
-			writer.printf("((%s) (", getCDataType());
+			out.printf("((%s) (", getCDataType());
 			writeExpression();
-			writer.print("))");
+			out.print("))");
 		}
 		return true;
 	}
@@ -65,13 +63,13 @@ public abstract class CastToFloatingPointHelper extends ComputationModelSwitch<B
 	@Override
 	public Boolean caseFixedPointFormat(FixedPointFormat fixedPointFormat) {
 		if (fixedPointFormat.getFractionLength() > 0) {
-			writer.printf("((%s) ((", getCDataType());
+			out.printf("((%s) ((", getCDataType());
 			writeExpression();
-			writer.printf(") * pow(2, -%d)))", fixedPointFormat.getFractionLength());
+			out.printf(") * pow(2, -%d)))", fixedPointFormat.getFractionLength());
 		} else {
-			writer.printf("((%s) (", getCDataType());
+			out.printf("((%s) (", getCDataType());
 			writeExpression();
-			writer.print("))");
+			out.print("))");
 		}
 		return true;
 	}

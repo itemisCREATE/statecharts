@@ -11,7 +11,6 @@
 
 package org.eclipselabs.mscript.codegen.c.internal;
 
-import java.io.PrintWriter;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -19,9 +18,9 @@ import org.eclipselabs.mscript.codegen.c.ExpressionGenerator;
 import org.eclipselabs.mscript.codegen.c.IExpressionGenerator;
 import org.eclipselabs.mscript.codegen.c.IFunctionGenerator;
 import org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext;
-import org.eclipselabs.mscript.codegen.c.IVariableAccessStrategy;
 import org.eclipselabs.mscript.codegen.c.internal.util.Caster;
 import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
+import org.eclipselabs.mscript.common.util.PrintAppendable;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
@@ -42,8 +41,8 @@ public class RoundFunctionGenerator implements IFunctionGenerator {
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.codegen.c.IFunctionGenerator#generate(java.util.List)
 	 */
-	public void generate(final IMscriptGeneratorContext context, final IVariableAccessStrategy variableAccessStrategy, List<? extends Expression> arguments) {
-		final PrintWriter writer = new PrintWriter(context.getWriter());
+	public void generate(final IMscriptGeneratorContext context, List<? extends Expression> arguments) {
+		final PrintAppendable out = new PrintAppendable(context.getAppendable());
 		
 		final Expression argument = arguments.get(0);
 		
@@ -66,13 +65,13 @@ public class RoundFunctionGenerator implements IFunctionGenerator {
 				@Override
 				protected void writeExpression() {
 					if (fractionLength > 0) {
-						writer.print("((");
-						expressionGenerator.generate(context, variableAccessStrategy, argument);
-						writer.printf(") + %d) & (%s) 0x%x", 1L << fractionLength - 1,
+						out.print("((");
+						expressionGenerator.generate(context, argument);
+						out.printf(") + %d) & (%s) 0x%x", 1L << fractionLength - 1,
 								MscriptGeneratorUtil.getCDataType(context.getComputationModel(), argumentDataType),
 								(1L << fixedPointFormat.getWordSize()) - 1 >>> fractionLength << fractionLength);
 					} else {
-						expressionGenerator.generate(context, variableAccessStrategy, argument);
+						expressionGenerator.generate(context, argument);
 					}
 				}
 				
@@ -82,9 +81,9 @@ public class RoundFunctionGenerator implements IFunctionGenerator {
 				
 				@Override
 				protected void writeExpression() {
-					writer.print("floor((");
-					expressionGenerator.generate(context, variableAccessStrategy, argument);
-					writer.print(") + 0.5)");
+					out.print("floor((");
+					expressionGenerator.generate(context, argument);
+					out.print(") + 0.5)");
 				}
 				
 			}.cast(context, argumentDataType, resultDataType);

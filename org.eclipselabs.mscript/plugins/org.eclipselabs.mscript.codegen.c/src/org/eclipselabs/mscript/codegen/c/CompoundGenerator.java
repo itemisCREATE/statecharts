@@ -11,11 +11,10 @@
 
 package org.eclipselabs.mscript.codegen.c;
 
-import java.io.PrintWriter;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.codegen.c.internal.VariableAccessGenerator;
 import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
+import org.eclipselabs.mscript.common.util.PrintAppendable;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
@@ -41,24 +40,22 @@ public class CompoundGenerator implements ICompoundGenerator {
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.codegen.c.ICompoundGenerator#generate(org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext, org.eclipselabs.mscript.language.il.Compound, org.eclipselabs.mscript.codegen.c.IVariableAccessStrategy)
 	 */
-	public void generate(IMscriptGeneratorContext context, IVariableAccessStrategy variableAccessStrategy, Compound compound) {
-		new CompoundGeneratorSwitch(context, variableAccessStrategy).doSwitch(compound);
+	public void generate(IMscriptGeneratorContext context, Compound compound) {
+		new CompoundGeneratorSwitch(context).doSwitch(compound);
 	}
 	
 	private class CompoundGeneratorSwitch extends ILSwitch<Boolean> {
 
 		private IMscriptGeneratorContext context;
-		private IVariableAccessStrategy variableAccessStrategy;
 
-		private PrintWriter writer;
+		private PrintAppendable out;
 
 		/**
 		 * 
 		 */
-		public CompoundGeneratorSwitch(IMscriptGeneratorContext context, IVariableAccessStrategy variableAccessStrategy) {
+		public CompoundGeneratorSwitch(IMscriptGeneratorContext context) {
 			this.context = context;
-			this.variableAccessStrategy = variableAccessStrategy;
-			this.writer = new PrintWriter(context.getWriter());
+			out = new PrintAppendable(context.getAppendable());
 		}
 		
 		/* (non-Javadoc)
@@ -68,17 +65,17 @@ public class CompoundGenerator implements ICompoundGenerator {
 		public Boolean caseCompound(Compound compound) {
 			boolean block = compound instanceof Statement;
 			if (block) {
-				writer.print("{\n");
+				out.print("{\n");
 			}
 			for (LocalVariableDeclaration localVariableDeclaration : compound.getLocalVariableDeclarations()) {
-				writer.print(MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), localVariableDeclaration.getDataType(), localVariableDeclaration.getName(), false));
-				writer.print(";\n");
+				out.print(MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), localVariableDeclaration.getDataType(), localVariableDeclaration.getName(), false));
+				out.print(";\n");
 			}
 			for (Statement statement : compound.getStatements()) {
 				doSwitch(statement);
 			}
 			if (block) {
-				writer.print("}\n");
+				out.print("}\n");
 			}
 			return true;
 		}
@@ -99,7 +96,7 @@ public class CompoundGenerator implements ICompoundGenerator {
 		 */
 		@Override
 		public Boolean caseAssignment(Assignment assignment) {
-			writeAssignment(assignment.getTarget().getDataType(), new VariableAccessGenerator(context.getComputationModel(), variableAccessStrategy, assignment).generate(), assignment.getAssignedExpression());
+			writeAssignment(assignment.getTarget().getDataType(), new VariableAccessGenerator(context.getComputationModel(), context.getVariableAccessStrategy(), assignment).generate(), assignment.getAssignedExpression());
 			return true;
 		}
 		
@@ -108,11 +105,11 @@ public class CompoundGenerator implements ICompoundGenerator {
 		 */
 		@Override
 		public Boolean caseIfStatement(IfStatement ifStatement) {
-			writer.print("if (");
+			out.print("if (");
 			doSwitch(ifStatement.getCondition());
-			writer.print(")\n");
+			out.print(")\n");
 			doSwitch(ifStatement.getThenStatement());
-			writer.print("else\n");
+			out.print("else\n");
 			doSwitch(ifStatement.getElseStatement());
 			return true;
 		}
@@ -136,15 +133,15 @@ public class CompoundGenerator implements ICompoundGenerator {
 			String itVarDecl = MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), iterationVariableDeclaration.getDataType(), itVarName, false);
 			int size = TypeSystemUtil.getArraySize(collectionArrayType);
 			
-			writer.println("{");
-			writer.printf("%s %s_i;\n", MscriptGeneratorUtil.getIndexCDataType(context.getComputationModel(), size), itVarName);
-			writer.printf("for (%s_i = 0; %s_i < %d; ++%s_i) {\n", itVarName, itVarName, size, itVarName);
-			writer.printf("%s = (", itVarDecl);
+			out.println("{");
+			out.printf("%s %s_i;\n", MscriptGeneratorUtil.getIndexCDataType(context.getComputationModel(), size), itVarName);
+			out.printf("for (%s_i = 0; %s_i < %d; ++%s_i) {\n", itVarName, itVarName, size, itVarName);
+			out.printf("%s = (", itVarDecl);
 			doSwitch(foreachStatement.getCollectionExpression());
-			writer.printf(")[%s_i];\n", itVarName);
+			out.printf(")[%s_i];\n", itVarName);
 			doSwitch(foreachStatement.getBody());
-			writer.println("}");
-			writer.println("}");
+			out.println("}");
+			out.println("}");
 			
 			return true;
 		}
@@ -155,7 +152,7 @@ public class CompoundGenerator implements ICompoundGenerator {
 		@Override
 		public Boolean defaultCase(EObject object) {
 			if (object instanceof Expression) {
-				expressionGenerator.generate(context, variableAccessStrategy, (Expression) object);
+				expressionGenerator.generate(context, (Expression) object);
 				return true;
 			}
 			return super.defaultCase(object);
@@ -167,27 +164,27 @@ public class CompoundGenerator implements ICompoundGenerator {
 				arrayType = (ArrayType) targetDataType;
 			}
 			if (arrayType != null) {
-				writer.print("memcpy(");
+				out.print("memcpy(");
 			}
-			writer.print(target);
+			out.print(target);
 			if (arrayType != null) {
-				writer.print(", ");
+				out.print(", ");
 			} else {
-				writer.print(" = ");
+				out.print(" = ");
 			}
 			cast(targetDataType, assignedExpression);
 			if (arrayType != null) {
-				writer.printf(", sizeof (%s)", MscriptGeneratorUtil.getCDataType(context.getComputationModel(), arrayType.getElementType()));
+				out.printf(", sizeof (%s)", MscriptGeneratorUtil.getCDataType(context.getComputationModel(), arrayType.getElementType()));
 				for (ArrayDimension arrayDimension : arrayType.getDimensions()) {
-					writer.printf(" * %d", arrayDimension.getSize());
+					out.printf(" * %d", arrayDimension.getSize());
 				}
-				writer.print(")");
+				out.print(")");
 			}
-			writer.print(";\n");
+			out.print(";\n");
 		}
 		
 		private void cast(DataType targetDataType, Expression expression) {
-			MscriptGeneratorUtil.cast(context, variableAccessStrategy, expression, targetDataType);
+			MscriptGeneratorUtil.cast(context, expression, targetDataType);
 		}
 		
 		private DataType getDataType(Expression expression) {

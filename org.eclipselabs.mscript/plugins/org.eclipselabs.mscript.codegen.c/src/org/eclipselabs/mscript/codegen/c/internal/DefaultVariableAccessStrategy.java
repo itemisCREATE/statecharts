@@ -23,7 +23,7 @@ import org.eclipselabs.mscript.language.il.util.ILSwitch;
  * @author Andreas Unger
  *
  */
-public class VariableAccessStrategy implements IVariableAccessStrategy {
+public class DefaultVariableAccessStrategy implements IVariableAccessStrategy {
 
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.codegen.c.IVariableAccessStrategy#getVariableAccessString(org.eclipselabs.mscript.language.il.VariableAccess)

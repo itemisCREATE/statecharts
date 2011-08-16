@@ -11,14 +11,13 @@
 
 package org.eclipselabs.mscript.codegen.c.internal;
 
-import java.io.PrintWriter;
 import java.util.List;
 
 import org.eclipselabs.mscript.codegen.c.ExpressionGenerator;
 import org.eclipselabs.mscript.codegen.c.IExpressionGenerator;
 import org.eclipselabs.mscript.codegen.c.IFunctionGenerator;
 import org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext;
-import org.eclipselabs.mscript.codegen.c.IVariableAccessStrategy;
+import org.eclipselabs.mscript.common.util.PrintAppendable;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.Expression;
 import org.eclipselabs.mscript.typesystem.TensorType;
@@ -35,8 +34,8 @@ public class SumFunctionGenerator implements IFunctionGenerator {
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.codegen.c.IFunctionGenerator#generate(java.util.List)
 	 */
-	public void generate(IMscriptGeneratorContext context, IVariableAccessStrategy variableAccessStrategy, List<? extends Expression> arguments) {
-		PrintWriter writer = new PrintWriter(context.getWriter());
+	public void generate(IMscriptGeneratorContext context, List<? extends Expression> arguments) {
+		PrintAppendable out = new PrintAppendable(context.getAppendable());
 		
 		Expression argument = arguments.get(0);
 		
@@ -50,11 +49,11 @@ public class SumFunctionGenerator implements IFunctionGenerator {
 		int arraySize = TypeSystemUtil.getArraySize(tensorType);
 		for (int i = 0; i < arraySize; ++i) {
 			if (i > 0) {
-				writer.print(" + ");
+				out.print(" + ");
 			}
-			writer.print("(");
-			expressionGenerator.generate(context, variableAccessStrategy, argument);
-			writer.printf(")[%d]", i);
+			out.print("(");
+			expressionGenerator.generate(context, argument);
+			out.printf(")[%d]", i);
 		}
 	}
 	

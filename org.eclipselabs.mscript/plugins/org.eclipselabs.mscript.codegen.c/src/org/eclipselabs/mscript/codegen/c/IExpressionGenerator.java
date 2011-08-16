@@ -19,7 +19,6 @@ import org.eclipselabs.mscript.typesystem.Expression;
  */
 public interface IExpressionGenerator {
 
-	void generate(IMscriptGeneratorContext context, IVariableAccessStrategy variableAccessStrategy,
-			Expression expression);
+	void generate(IMscriptGeneratorContext context, Expression expression);
 
 }

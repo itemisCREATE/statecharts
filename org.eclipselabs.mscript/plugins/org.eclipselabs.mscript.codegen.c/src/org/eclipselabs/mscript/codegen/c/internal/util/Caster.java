@@ -28,7 +28,7 @@ public abstract class Caster {
 		if (targetDataType instanceof NumericType) {
 			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(targetDataType);
 			if (numberFormat instanceof FloatingPointFormat) {
-				new CastToFloatingPointHelper(context.getComputationModel(), context.getWriter(), expressionDataType, (FloatingPointFormat) numberFormat) {
+				new CastToFloatingPointHelper(context.getComputationModel(), context.getAppendable(), expressionDataType, (FloatingPointFormat) numberFormat) {
 					
 					@Override
 					protected void writeExpression() {
@@ -38,7 +38,7 @@ public abstract class Caster {
 				}.cast();
 			} else if (numberFormat instanceof FixedPointFormat) {
 				FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
-				new CastToFixedPointHelper(context.getComputationModel(), context.getWriter(), expressionDataType, fixedPointFormat.getWordSize(), fixedPointFormat.getFractionLength()) {
+				new CastToFixedPointHelper(context.getComputationModel(), context.getAppendable(), expressionDataType, fixedPointFormat.getWordSize(), fixedPointFormat.getFractionLength()) {
 
 					@Override
 					protected void writeExpression() {

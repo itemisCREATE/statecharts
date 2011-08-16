@@ -11,7 +11,6 @@
 
 package org.eclipselabs.mscript.codegen.c;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +19,7 @@ import org.eclipselabs.mscript.codegen.c.internal.VariableAccessGenerator;
 import org.eclipselabs.mscript.codegen.c.internal.util.CastToFixedPointHelper;
 import org.eclipselabs.mscript.codegen.c.internal.util.CastToFloatingPointHelper;
 import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
+import org.eclipselabs.mscript.common.util.PrintAppendable;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointOperation;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointOperationKind;
@@ -57,22 +57,20 @@ public class ExpressionGenerator implements IExpressionGenerator {
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.codegen.c.IExpressionGenerator#generate(org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext, org.eclipselabs.mscript.codegen.c.IVariableAccessStrategy, org.eclipselabs.mscript.language.ast.Expression)
 	 */
-	public void generate(IMscriptGeneratorContext context, IVariableAccessStrategy variableAccessStrategy, Expression expression) {
-		new ExpressionGeneratorSwitch(context, variableAccessStrategy).doSwitch(expression);
+	public void generate(IMscriptGeneratorContext context, Expression expression) {
+		new ExpressionGeneratorSwitch(context).doSwitch(expression);
 	}
 	
 	private static class ExpressionGeneratorSwitch extends AstSwitch<Boolean> {
 
 		private IMscriptGeneratorContext context;
-		private IVariableAccessStrategy variableAccessStrategy;
 		private IBuiltinFunctionGeneratorLookupTable builtinFunctionGeneratorLookupTable = new BuiltinFunctionGeneratorLookupTable();
 		
-		private PrintWriter writer;
+		private PrintAppendable out;
 
-		public ExpressionGeneratorSwitch(IMscriptGeneratorContext context, IVariableAccessStrategy variableAccessStrategy) {
+		public ExpressionGeneratorSwitch(IMscriptGeneratorContext context) {
 			this.context = context;
-			this.variableAccessStrategy = variableAccessStrategy;
-			writer = new PrintWriter(context.getWriter());
+			out = new PrintAppendable(context.getAppendable());
 		}
 	
 		/* (non-Javadoc)
@@ -80,11 +78,11 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		 */
 		@Override
 		public Boolean caseImpliesExpression(ImpliesExpression impliesExpression) {
-			writer.print("(!(");
+			out.print("(!(");
 			doSwitch(impliesExpression.getLeftOperand());
-			writer.print(") || ");
+			out.print(") || ");
 			doSwitch(impliesExpression.getRightOperand());
-			writer.print(")");
+			out.print(")");
 			return true;
 		}
 		
@@ -94,7 +92,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		@Override
 		public Boolean caseLogicalOrExpression(LogicalOrExpression logicalOrExpression) {
 			doSwitch(logicalOrExpression.getLeftOperand());
-			writer.print(" || ");
+			out.print(" || ");
 			doSwitch(logicalOrExpression.getRightOperand());
 			return true;
 		}
@@ -105,7 +103,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		@Override
 		public Boolean caseLogicalAndExpression(LogicalAndExpression logicalAndExpression) {
 			doSwitch(logicalAndExpression.getLeftOperand());
-			writer.print(" && ");
+			out.print(" && ");
 			doSwitch(logicalAndExpression.getRightOperand());
 			return true;
 		}
@@ -141,16 +139,16 @@ public class ExpressionGenerator implements IExpressionGenerator {
 				
 				NumberFormat widestNumberFormat = ComputationModelUtil.getWidestNumberFormat(numberFormat1, numberFormat2);
 	
-				MscriptGeneratorUtil.castNumericType(context, variableAccessStrategy, widestNumberFormat, leftOperand);
-				writer.print(" ");
-				writer.print(operator);
-				writer.print(" ");
-				MscriptGeneratorUtil.castNumericType(context, variableAccessStrategy, widestNumberFormat, rightOperand);
+				MscriptGeneratorUtil.castNumericType(context, widestNumberFormat, leftOperand);
+				out.print(" ");
+				out.print(operator);
+				out.print(" ");
+				MscriptGeneratorUtil.castNumericType(context, widestNumberFormat, rightOperand);
 			} else {
 				doSwitch(leftOperand);
-				writer.print(" ");
-				writer.print(operator);
-				writer.print(" ");
+				out.print(" ");
+				out.print(operator);
+				out.print(" ");
 				doSwitch(rightOperand);
 			}
 		}
@@ -163,11 +161,11 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			DataType dataType = getDataType(additiveExpression);
 			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
 	
-			MscriptGeneratorUtil.castNumericType(context, variableAccessStrategy, numberFormat, additiveExpression.getLeftOperand());
-			writer.print(" ");
-			writer.print(additiveExpression.getOperator().getLiteral());
-			writer.print(" ");
-			MscriptGeneratorUtil.castNumericType(context, variableAccessStrategy, numberFormat, additiveExpression.getRightOperand());
+			MscriptGeneratorUtil.castNumericType(context, numberFormat, additiveExpression.getLeftOperand());
+			out.print(" ");
+			out.print(additiveExpression.getOperator().getLiteral());
+			out.print(" ");
+			MscriptGeneratorUtil.castNumericType(context, numberFormat, additiveExpression.getRightOperand());
 			
 			return true;
 		}
@@ -191,9 +189,9 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		
 		private void writeFloatingPointMultiplicativeExpression(MultiplicativeOperator operator, Expression leftOperand, Expression rightOperand, FloatingPointFormat floatingPointFormat) {
 			castToFloatingPoint(leftOperand, floatingPointFormat);
-			writer.print(" ");
-			writer.print(operator.getLiteral());
-			writer.print(" ");
+			out.print(" ");
+			out.print(operator.getLiteral());
+			out.print(" ");
 			castToFloatingPoint(rightOperand, floatingPointFormat);
 		}
 		
@@ -216,29 +214,29 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			boolean hasIntermediateWordSize = operation.getIntermediateWordSize() != fixedPointFormat.getWordSize();
 		
 			if (hasIntermediateWordSize) {
-				writer.printf("(int%d_t) ", fixedPointFormat.getWordSize());
+				out.printf("(int%d_t) ", fixedPointFormat.getWordSize());
 			}
 			
 			if (hasIntermediateWordSize || fixedPointFormat.getFractionLength() > 0) {
-				writer.print("(");
+				out.print("(");
 			}
 			
 			castToFixedPoint(leftOperand, operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength());
 			
-			writer.print(" * ");
+			out.print(" * ");
 			
 			if (fixedPointFormat.getFractionLength() > 0) {
-				writer.print("(");
+				out.print("(");
 			}
 	
 			castToFixedPoint(rightOperand, operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength());
 			
 			if (fixedPointFormat.getFractionLength() > 0) {
-				writer.printf(") >> %d", fixedPointFormat.getFractionLength());
+				out.printf(") >> %d", fixedPointFormat.getFractionLength());
 			}
 	
 			if (hasIntermediateWordSize || fixedPointFormat.getFractionLength() > 0) {
-				writer.print(")");
+				out.print(")");
 			}
 		}
 	
@@ -248,30 +246,30 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			boolean hasIntermediateWordSize = operation.getIntermediateWordSize() != fixedPointFormat.getWordSize();
 		
 			if (hasIntermediateWordSize) {
-				writer.printf("(int%d_t) (", fixedPointFormat.getWordSize());
+				out.printf("(int%d_t) (", fixedPointFormat.getWordSize());
 			}
 			
 			if (fixedPointFormat.getFractionLength() > 0) {
-				writer.print("((");
+				out.print("((");
 			}
 	
 			castToFixedPoint(leftOperand, operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength());
 			
 			if (fixedPointFormat.getFractionLength() > 0) {
-				writer.printf(") << %d)", fixedPointFormat.getFractionLength());
+				out.printf(") << %d)", fixedPointFormat.getFractionLength());
 			}
 	
-			writer.print(" / ");
+			out.print(" / ");
 			
 			castToFixedPoint(rightOperand, operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength());
 			
 			if (hasIntermediateWordSize) {
-				writer.print(")");
+				out.print(")");
 			}
 		}
 		
 		private void castToFloatingPoint(final Expression expression, FloatingPointFormat floatingPointFormat) {
-			new CastToFloatingPointHelper(context.getComputationModel(), context.getWriter(), getDataType(expression), floatingPointFormat) {
+			new CastToFloatingPointHelper(context.getComputationModel(), context.getAppendable(), getDataType(expression), floatingPointFormat) {
 				
 				@Override
 				protected void writeExpression() {
@@ -282,7 +280,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		}
 	
 		private void castToFixedPoint(final Expression expression, int wordSize, int fractionLength) {
-			new CastToFixedPointHelper(context.getComputationModel(), context.getWriter(), getDataType(expression), wordSize, fractionLength) {
+			new CastToFixedPointHelper(context.getComputationModel(), context.getAppendable(), getDataType(expression), wordSize, fractionLength) {
 				
 				@Override
 				protected void writeExpression() {
@@ -297,9 +295,9 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		 */
 		@Override
 		public Boolean caseParenthesizedExpression(ParenthesizedExpression parenthesizedExpression) {
-			writer.print("(");
+			out.print("(");
 			doSwitch(parenthesizedExpression.getExpressions().get(0));
-			writer.print(")");
+			out.print(")");
 			return true;
 		}
 		
@@ -308,7 +306,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		 */
 		@Override
 		public Boolean caseUnaryExpression(UnaryExpression unaryExpression) {
-			writer.print(unaryExpression.getOperator().getLiteral());
+			out.print(unaryExpression.getOperator().getLiteral());
 			doSwitch(unaryExpression.getOperand());
 			return true;
 		}
@@ -321,7 +319,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			@Override
 			public Boolean caseRealLiteral(RealLiteral realLiteral) {
 				DataType dataType = getDataType(realLiteral);
-				writer.print(MscriptGeneratorUtil.getLiteralString(context.getComputationModel(), dataType, realLiteral.getValue()));
+				out.print(MscriptGeneratorUtil.getLiteralString(context.getComputationModel(), dataType, realLiteral.getValue()));
 				return true;
 			}
 		
@@ -331,7 +329,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			@Override
 			public Boolean caseIntegerLiteral(IntegerLiteral integerLiteral) {
 				DataType dataType = getDataType(integerLiteral);
-				writer.print(MscriptGeneratorUtil.getLiteralString(context.getComputationModel(), dataType, integerLiteral.getValue()));
+				out.print(MscriptGeneratorUtil.getLiteralString(context.getComputationModel(), dataType, integerLiteral.getValue()));
 				return true;
 			}
 			
@@ -340,7 +338,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			 */
 			@Override
 			public Boolean caseBooleanLiteral(BooleanLiteral booleanLiteral) {
-				writer.print(booleanLiteral.isTrue() ? "1" : "0");
+				out.print(booleanLiteral.isTrue() ? "1" : "0");
 				return true;
 			}
 			
@@ -349,7 +347,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			 */
 			@Override
 			public Boolean caseStringLiteral(StringLiteral stringLiteral) {
-				writer.print("\"" + stringLiteral.getValue() + "\"");
+				out.print("\"" + stringLiteral.getValue() + "\"");
 				return true;
 			}
 		
@@ -370,7 +368,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			if (descriptor != null) {
 				IFunctionGenerator generator = builtinFunctionGeneratorLookupTable.getFunctionGenerator(descriptor);
 				if (generator != null) {
-					generator.generate(context, variableAccessStrategy, functionCall.getArguments());
+					generator.generate(context, functionCall.getArguments());
 				}
 			}
 
@@ -400,13 +398,13 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			
 			public Boolean caseVariableReference(VariableReference variableReference) {
 				// TODO: redesign is needed here
-				String variableAccessString = new VariableAccessGenerator(context.getComputationModel(), variableAccessStrategy, variableReference).generate();
-				writer.print(variableAccessString);
+				String variableAccessString = new VariableAccessGenerator(context.getComputationModel(), context.getVariableAccessStrategy(), variableReference).generate();
+				out.print(variableAccessString);
 				if (!(variableReference.getTarget() instanceof TemplateVariableDeclaration)) {
 					for (Expression expression : variableReference.getArrayIndices()) {
-						writer.print("[");
+						out.print("[");
 						ExpressionGeneratorSwitch.this.doSwitch(expression);
-						writer.print("]");
+						out.print("]");
 					}
 				}
 				return true;

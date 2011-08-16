@@ -11,14 +11,11 @@
 
 package org.eclipselabs.mscript.codegen.c.util;
 
-import java.io.PrintWriter;
-import java.io.Writer;
-
 import org.eclipselabs.mscript.codegen.c.ExpressionGenerator;
 import org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext;
-import org.eclipselabs.mscript.codegen.c.IVariableAccessStrategy;
 import org.eclipselabs.mscript.codegen.c.internal.util.CastToFixedPointHelper;
 import org.eclipselabs.mscript.codegen.c.internal.util.CastToFloatingPointHelper;
+import org.eclipselabs.mscript.common.util.PrintAppendable;
 import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
@@ -129,28 +126,28 @@ public class MscriptGeneratorUtil {
 	}
 
 	public static void cast(IMscriptGeneratorContext context, String expression, DataType expressionDataType, DataType targetDataType) {
-		cast(context.getComputationModel(), context.getWriter(), expression, expressionDataType, targetDataType);
+		cast(context.getComputationModel(), context.getAppendable(), expression, expressionDataType, targetDataType);
 	}
 	
-	public static void cast(ComputationModel computationModel, final Writer writer, final String expression, DataType expressionDataType, DataType targetDataType) {
+	public static void cast(ComputationModel computationModel, final Appendable appendable, final String expression, DataType expressionDataType, DataType targetDataType) {
 		if (targetDataType instanceof NumericType) {
 			NumberFormat numberFormat = computationModel.getNumberFormat(targetDataType);
 			if (numberFormat instanceof FloatingPointFormat) {
-				new CastToFloatingPointHelper(computationModel, writer, expressionDataType, (FloatingPointFormat) numberFormat) {
+				new CastToFloatingPointHelper(computationModel, appendable, expressionDataType, (FloatingPointFormat) numberFormat) {
 					
 					@Override
 					protected void writeExpression() {
-						new PrintWriter(writer).print(expression);
+						new PrintAppendable(appendable).print(expression);
 					}
 					
 				}.cast();
 			} else if (numberFormat instanceof FixedPointFormat) {
 				FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
-				new CastToFixedPointHelper(computationModel, writer, expressionDataType, fixedPointFormat.getWordSize(), fixedPointFormat.getFractionLength()) {
+				new CastToFixedPointHelper(computationModel, appendable, expressionDataType, fixedPointFormat.getWordSize(), fixedPointFormat.getFractionLength()) {
 
 					@Override
 					protected void writeExpression() {
-						new PrintWriter(writer).print(expression);
+						new PrintAppendable(appendable).print(expression);
 					}
 					
 				}.cast();
@@ -158,37 +155,37 @@ public class MscriptGeneratorUtil {
 				throw new IllegalArgumentException();
 			}
 		} else {
-			new PrintWriter(writer).print(expression);
+			new PrintAppendable(appendable).print(expression);
 		}
 	}
 
-	public static void cast(IMscriptGeneratorContext context, IVariableAccessStrategy variableAccessStrategy, Expression expression, DataType targetDataType) {
+	public static void cast(IMscriptGeneratorContext context, Expression expression, DataType targetDataType) {
 		if (targetDataType instanceof NumericType) {
 			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(targetDataType);
-			castNumericType(context, variableAccessStrategy, numberFormat, expression);
+			castNumericType(context, numberFormat, expression);
 		} else {
-			new ExpressionGenerator().generate(context, variableAccessStrategy, expression);
+			new ExpressionGenerator().generate(context, expression);
 		}
 	}
 
-	public static void castNumericType(final IMscriptGeneratorContext context, final IVariableAccessStrategy variableAccessStrategy, NumberFormat numberFormat, final Expression expression) {
+	public static void castNumericType(final IMscriptGeneratorContext context, NumberFormat numberFormat, final Expression expression) {
 		DataType expressionDataType = context.getStaticEvaluationContext().getValue(expression).getDataType();
 		if (numberFormat instanceof FloatingPointFormat) {
-			new CastToFloatingPointHelper(context.getComputationModel(), context.getWriter(), expressionDataType, (FloatingPointFormat) numberFormat) {
+			new CastToFloatingPointHelper(context.getComputationModel(), context.getAppendable(), expressionDataType, (FloatingPointFormat) numberFormat) {
 				
 				@Override
 				protected void writeExpression() {
-					new ExpressionGenerator().generate(context, variableAccessStrategy, expression);
+					new ExpressionGenerator().generate(context, expression);
 				}
 				
 			}.cast();
 		} else if (numberFormat instanceof FixedPointFormat) {
 			FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
-			new CastToFixedPointHelper(context.getComputationModel(), context.getWriter(), expressionDataType, fixedPointFormat.getWordSize(), fixedPointFormat.getFractionLength()) {
+			new CastToFixedPointHelper(context.getComputationModel(), context.getAppendable(), expressionDataType, fixedPointFormat.getWordSize(), fixedPointFormat.getFractionLength()) {
 
 				@Override
 				protected void writeExpression() {
-					new ExpressionGenerator().generate(context, variableAccessStrategy, expression);
+					new ExpressionGenerator().generate(context, expression);
 				}
 				
 			}.cast();

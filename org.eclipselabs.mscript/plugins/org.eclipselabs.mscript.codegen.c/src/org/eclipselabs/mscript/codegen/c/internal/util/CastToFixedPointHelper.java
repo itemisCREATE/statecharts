@@ -11,9 +11,7 @@
 
 package org.eclipselabs.mscript.codegen.c.internal.util;
 
-import java.io.PrintWriter;
-import java.io.Writer;
-
+import org.eclipselabs.mscript.common.util.PrintAppendable;
 import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
@@ -24,7 +22,7 @@ import org.eclipselabs.mscript.typesystem.DataType;
 public abstract class CastToFixedPointHelper extends ComputationModelSwitch<Boolean> {
 
 	private ComputationModel computationModel;
-	private PrintWriter writer;
+	private PrintAppendable out;
 
 	private DataType expressionDataType;
 	private int wordSize;
@@ -33,12 +31,12 @@ public abstract class CastToFixedPointHelper extends ComputationModelSwitch<Bool
 	/**
 	 * 
 	 */
-	public CastToFixedPointHelper(ComputationModel computationModel, Writer writer, DataType expressionDataType, int wordSize, int fractionLength) {
+	public CastToFixedPointHelper(ComputationModel computationModel, Appendable appendable, DataType expressionDataType, int wordSize, int fractionLength) {
 		this.computationModel = computationModel;
-		this.writer = new PrintWriter(writer);
 		this.expressionDataType = expressionDataType;
 		this.wordSize = wordSize;
 		this.fractionLength = fractionLength;
+		out = new PrintAppendable(appendable);
 	}
 	
 	public void cast() {
@@ -52,13 +50,13 @@ public abstract class CastToFixedPointHelper extends ComputationModelSwitch<Bool
 	@Override
 	public Boolean caseFloatingPointFormat(FloatingPointFormat floatingPointFormat) {
 		if (fractionLength > 0) {
-			writer.printf("((%s) floor((", getCDataType());
+			out.printf("((%s) floor((", getCDataType());
 			writeExpression();
-			writer.printf(") * pow(2, %d) + 0.5))", fractionLength);
+			out.printf(") * pow(2, %d) + 0.5))", fractionLength);
 		} else {
-			writer.printf("((%s) (", getCDataType());
+			out.printf("((%s) (", getCDataType());
 			writeExpression();
-			writer.print("))");
+			out.print("))");
 		}
 		return true;
 	}
@@ -70,25 +68,25 @@ public abstract class CastToFixedPointHelper extends ComputationModelSwitch<Bool
 	public Boolean caseFixedPointFormat(FixedPointFormat fixedPointFormat) {
 		if (wordSize != fixedPointFormat.getWordSize()) {
 			if (fractionLength < fixedPointFormat.getFractionLength()) {
-				writer.printf("(%s) ((", getCDataType());
+				out.printf("(%s) ((", getCDataType());
 			} else {
-				writer.printf("((%s) (", getCDataType());
+				out.printf("((%s) (", getCDataType());
 			}
 		}
 		if (fractionLength != fixedPointFormat.getFractionLength()) {
 			if (wordSize == fixedPointFormat.getWordSize()) {
-				writer.print("((");
+				out.print("((");
 			}
 			writeExpression();
 			if (fractionLength > fixedPointFormat.getFractionLength()) {
-				writer.printf(") << %d)", fractionLength - fixedPointFormat.getFractionLength());
+				out.printf(") << %d)", fractionLength - fixedPointFormat.getFractionLength());
 			} else {
-				writer.printf(") >> %d)", fixedPointFormat.getFractionLength() - fractionLength);
+				out.printf(") >> %d)", fixedPointFormat.getFractionLength() - fractionLength);
 			}
 		} else {
 			writeExpression();
 			if (wordSize != fixedPointFormat.getWordSize()) {
-				writer.print("))");
+				out.print("))");
 			}
 		}
 		return true;
