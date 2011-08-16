@@ -18,7 +18,7 @@ import java.util.Formatter;
  * @author Andreas Unger
  *
  */
-public class PrintAppendable {
+public class PrintAppendable implements Appendable {
 
 	private Appendable appendable;
 	private Formatter formatter;
@@ -78,6 +78,27 @@ public class PrintAppendable {
 			formatter = new Formatter(appendable);
 		}
 		return formatter;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Appendable#append(java.lang.CharSequence)
+	 */
+	public Appendable append(CharSequence csq) throws IOException {
+		return appendable.append(csq);
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Appendable#append(java.lang.CharSequence, int, int)
+	 */
+	public Appendable append(CharSequence csq, int start, int end) throws IOException {
+		return appendable.append(csq, start, end);
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Appendable#append(char)
+	 */
+	public Appendable append(char c) throws IOException {
+		return appendable.append(c);
 	}
 	
 }
