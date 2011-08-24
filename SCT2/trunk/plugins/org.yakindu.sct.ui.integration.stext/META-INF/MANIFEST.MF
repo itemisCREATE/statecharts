@@ -18,3 +18,4 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.ui.integration.stext,
  org.yakindu.sct.ui.integration.stext.modules,
  org.yakindu.sct.ui.integration.stext.parsers
+Bundle-Vendor: YAKINDU
