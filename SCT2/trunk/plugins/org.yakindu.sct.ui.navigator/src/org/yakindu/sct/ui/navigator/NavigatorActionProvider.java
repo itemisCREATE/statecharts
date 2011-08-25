@@ -76,9 +76,9 @@ public class NavigatorActionProvider extends CommonActionProvider {
 			myDiagram = null;
 			if (selection.size() == 1) {
 				Object selectedElement = selection.getFirstElement();
-				if (selectedElement instanceof NavigatorItem) {
-					selectedElement = ((NavigatorItem) selectedElement)
-							.getView();
+				if (selectedElement instanceof DomainNavigatorItem) {
+					selectedElement = ((DomainNavigatorItem) selectedElement)
+							.getEObject();
 				} else if (selectedElement instanceof IAdaptable) {
 					selectedElement = ((IAdaptable) selectedElement)
 							.getAdapter(View.class);
