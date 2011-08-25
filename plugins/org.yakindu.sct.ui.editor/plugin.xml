@@ -41,7 +41,7 @@
          </metamodelType>
          <metamodelType
                eclass="Region"
-               icon="icons/obj16/region_16x16.png"
+               icon="icons/obj16/region-32.png"
                id="org.yakindu.sct.ui.editor.Region"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="Region">
@@ -53,7 +53,7 @@
          <metamodelType
                eclass="State"
                edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-               icon="icons/obj16/state_16x16.png"
+               icon="icons/obj16/state-32.png"
                id="org.yakindu.sct.ui.editor.State"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="State">
@@ -65,7 +65,7 @@
          <metamodelType
                eclass="Transition"
                edithelper="org.yakindu.sct.ui.editor.edithelper.TransitionEditHelper"
-               icon="icons/obj16/transition_16x16.png"
+               icon="icons/obj16/transition-32.png"
                id="org.yakindu.sct.ui.editor.Transition"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="Transition">
@@ -77,7 +77,7 @@
          <metamodelType
                eclass="Choice"
                edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-               icon="icons/obj16/choice_16x16.png"
+               icon="icons/obj16/choice-32.png"
                id="org.yakindu.sct.ui.editor.Choice"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="Choice">
@@ -89,7 +89,7 @@
          <metamodelType
                eclass="Entry"
                edithelper="org.yakindu.sct.ui.editor.edithelper.EntryEditHelper"
-               icon="icons/obj16/initial_state_16x16.png"
+               icon="icons/obj16/initial-state-32.png"
                id="org.yakindu.sct.ui.editor.Entry"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="Entry">
@@ -101,7 +101,7 @@
          <metamodelType
                eclass="Entry"
                edithelper="org.yakindu.sct.ui.editor.edithelper.EntryEditHelper"
-               icon="icons/obj16/shallow_history_16x16.png"
+               icon="icons/obj16/shallow-history-32.png"
                id="org.yakindu.sct.ui.editor.ShallowHistory"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="ShallowHistory">
@@ -113,7 +113,7 @@
          <metamodelType
                eclass="Entry"
                edithelper="org.yakindu.sct.ui.editor.edithelper.EntryEditHelper"
-               icon="icons/obj16/deep_history_16x16.png"
+               icon="icons/obj16/deep-history-32.png"
                id="org.yakindu.sct.ui.editor.DeepHistory"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="DeepHistory">
@@ -125,7 +125,7 @@
          <metamodelType
                eclass="FinalState"
                edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-               icon="icons/obj16/final_state_16x16.png"
+               icon="icons/obj16/final-state-32.png"
                id="org.yakindu.sct.ui.editor.FinalState"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="FinalState">
@@ -137,7 +137,7 @@
           <metamodelType
                 eclass="Exit"
                 edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-                icon="icons/obj16/exit_point_16x16.png"
+                icon="icons/obj16/exit-point-32.png"
                 id="org.yakindu.sct.ui.editor.Exit"
                 kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                 name="Exit">
@@ -149,7 +149,7 @@
          <metamodelType
                eclass="Junction"
                edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-               icon="icons/obj16/junction_16x16.png"
+               icon="icons/obj16/junction-32.png"
                id="org.yakindu.sct.ui.editor.Junction"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="Junction">
@@ -244,18 +244,18 @@
                    id="org.yakindu.sct.ui.editor.Transition"
                    kind="tool"
                    label="Transition"
-                   large_icon="icons/obj16/transition_16x16.png"
+                   large_icon="icons/obj16/transition-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/transition_16x16.png">
+                   small_icon="icons/obj16/transition-16.png">
              </entry>
              <entry
                   description="Creates a state"
                   id="org.yakindu.sct.ui.editor.State"
                   kind="tool"
                   label="State"
-                  large_icon="icons/obj16/state_16x16.png"
+                  large_icon="icons/obj16/state-32.png"
                   path="/tools/"
-                  small_icon="icons/obj16/state_16x16.png">
+                  small_icon="icons/obj16/state-16.png">
                    <expand
                          force="true">
                            <content>
@@ -267,72 +267,72 @@
                    id="org.yakindu.sct.ui.editor.Region"
                    kind="tool"
                    label="Region"
-                   large_icon="icons/obj16/region_16x16.png"
+                   large_icon="icons/obj16/region-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/region_16x16.png">
+                   small_icon="icons/obj16/region-16.png">
              </entry>
              <entry
                    description="Creates an initial state"
                    id="org.yakindu.sct.ui.editor.Entry"
                    kind="tool"
                    label="Initial State"
-                   large_icon="icons/obj16/initial_state_16x16.png"
+                   large_icon="icons/obj16/initial-state-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/initial_state_16x16.png">
+                   small_icon="icons/obj16/initial-state-16.png">
              </entry>
               <entry
                    description="Creates a shallow history"
                    id="org.yakindu.sct.ui.editor.ShallowHistory"
                    kind="tool"
                    label="Shallow History"
-                   large_icon="icons/obj16/shallow_history_16x16.png"
+                   large_icon="icons/obj16/shallow-history-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/shallow_history_16x16.png">
+                   small_icon="icons/obj16/shallow-history-16.png">
              </entry>
              <entry
                    description="Creates a deep history"
                    id="org.yakindu.sct.ui.editor.DeepHistory"
                    kind="tool"
                    label="Deep History"
-                   large_icon="icons/obj16/deep_history_16x16.png"
+                   large_icon="icons/obj16/deep-history-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/deep_history_16x16.png">
+                   small_icon="icons/obj16/deep-history-16.png">
              </entry>
              <entry
                    description="Creates a final state"
                    id="org.yakindu.sct.ui.editor.FinalState"
                    kind="tool"
                    label="Final State"
-                   large_icon="icons/obj16/final_state_16x16.png"
+                   large_icon="icons/obj16/final-state-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/final_state_16x16.png">
+                   small_icon="icons/obj16/final-state-16.png">
              </entry>
                <entry
                    description="Creates an exit point"
                    id="org.yakindu.sct.ui.editor.Exit"
                    kind="tool"
                    label="Exit Point"
-                   large_icon="icons/obj16/exit_point_16x16.png"
+                   large_icon="icons/obj16/exit-point-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/exit_point_16x16.png">
+                   small_icon="icons/obj16/exit-point-16.png">
              </entry>
              <entry
                    description="Creates a choice"
                    id="org.yakindu.sct.ui.editor.Choice"
                    kind="tool"
                    label="Choice"
-                   large_icon="icons/obj16/choice_16x16.png"
+                   large_icon="icons/obj16/choice-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/choice_16x16.png">
+                   small_icon="icons/obj16/choice-16.png">
              </entry>
              <entry
                    description="Creates a junction"
                    id="org.yakindu.sct.ui.editor.Junction"
                    kind="tool"
                    label="Junction"
-                   large_icon="icons/obj16/junction_16x16.png"
+                   large_icon="icons/obj16/junction-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/junction_16x16.png">
+                   small_icon="icons/obj16/junction-16.png">
              </entry>
              <entry
                    description="Creates a synchronization"

@@ -6,6 +6,9 @@
          <includes>
             <contentExtension pattern="org.yakindu.sct.ui.navigator.resourceContent"/>
                 <contentExtension pattern="org.yakindu.sct.ui.navigator.navigatorLinkHelper"/>
+                <contentExtension
+                      pattern="org.yakindu.sct.ui.navigator.statechartObjectFilter">
+                </contentExtension>
          </includes>
       </viewerContentBinding>
    </extension>
@@ -18,11 +21,18 @@
             labelProvider="org.yakindu.sct.ui.navigator.StatechartNavigatorLabelProvider"
             activeByDefault="true">
          <triggerPoints>
-    	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test
-                     forcePluginActivation="true"
-                     property="org.eclipse.core.resources.extension"
-                     value="sct"/>
+               <or>
+                  <and>
+                     <instanceof
+                           value="org.eclipse.core.resources.IFile">
+                     </instanceof>
+                     <test
+                           forcePluginActivation="true"
+                           property="org.eclipse.core.resources.extension"
+                           value="sct">
+                     </test>
+                  </and>
+               </or>
          </triggerPoints>
       </navigatorContent>
        <actionProvider
@@ -31,16 +41,20 @@
          <enablement>
          </enablement>
       </actionProvider>
+       <commonFilter
+             class="org.yakindu.sct.ui.navigator.StatechartObjectViewerFilter"
+             id="org.yakindu.sct.ui.navigator.statechartObjectFilter"
+             name="Statechart Object Filter">
+       </commonFilter>
    </extension>
-     <extension point="org.eclipse.ui.navigator.linkHelper" id="navigator-linkhelper">
+     <extension point="org.eclipse.ui.navigator.linkHelper" id="org.yakindu.sct.ui.navigator.navigatorLinkHelper">
       <linkHelper
             id="org.yakindu.sct.ui.navigator.navigatorLinkHelper"
             class="org.yakindu.sct.ui.navigator.NavigatorLinkHelper">
-         <editorInputEnablement>
-               <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
-         </editorInputEnablement>
          <selectionEnablement>
-            <instanceof value="org.yakindu.sct.ui.navigator.AbstractNavigatorItem"/>
+            <instanceof
+                  value="org.yakindu.sct.ui.navigator.DomainNavigatorItem">
+            </instanceof>
          </selectionEnablement>
       </linkHelper>
    </extension>

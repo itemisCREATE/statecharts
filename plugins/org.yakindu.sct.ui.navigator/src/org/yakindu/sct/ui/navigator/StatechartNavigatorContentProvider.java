@@ -36,17 +36,23 @@ public class StatechartNavigatorContentProvider implements
 	private Runnable myViewerRefreshRunnable;
 
 	public StatechartNavigatorContentProvider() {
-
+		System.out.println("ContentProvider");
 		myAdapterFctoryContentProvier = new AdapterFactoryContentProvider(
 				ComposedAdapterFactoryUtil.FACTORY);
+		
 
 		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE
 				.createEditingDomain();
 		myEditingDomain = (AdapterFactoryEditingDomain) editingDomain;
-		myEditingDomain.setResourceToReadOnlyMap(new HashMap() {
-			public Object get(Object key) {
+		myEditingDomain.setResourceToReadOnlyMap(new HashMap<Resource, Boolean>() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -7623655803631543084L;
+
+			public Boolean get(Object key) {
 				if (!containsKey(key)) {
-					put(key, Boolean.TRUE);
+					put((Resource) key, Boolean.TRUE);
 				}
 				return super.get(key);
 			}
@@ -136,6 +142,7 @@ public class StatechartNavigatorContentProvider implements
 	}
 
 	public Object[] getChildren(Object parentElement) {
+		
 		if (parentElement instanceof IFile) {
 			IFile file = (IFile) parentElement;
 			URI fileURI = URI.createPlatformResourceURI(file.getFullPath()
@@ -167,9 +174,9 @@ public class StatechartNavigatorContentProvider implements
 	}
 
 	public Object getParent(Object element) {
-		if (element instanceof AbstractNavigatorItem) {
-			AbstractNavigatorItem abstractNavigatorItem = (AbstractNavigatorItem) element;
-			return abstractNavigatorItem.getParent();
+		if (element instanceof DomainNavigatorItem) {
+			DomainNavigatorItem domainNavigatorItem = (DomainNavigatorItem) element;
+			return domainNavigatorItem.getParent();
 		}
 		return null;
 	}
@@ -177,5 +184,4 @@ public class StatechartNavigatorContentProvider implements
 	public boolean hasChildren(Object element) {
 		return element instanceof IFile || getChildren(element).length > 0;
 	}
-
 }

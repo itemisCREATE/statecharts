@@ -101,10 +101,21 @@ public class EntryItemProvider
 	 * This returns Entry.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {
+		if (object instanceof Entry) {
+			Entry entry = (Entry) object;
+			switch (entry.getKind()) {
+			case INITIAL:
+				return overlayImage(object, getResourceLocator().getImage("full/obj16/InitialState"));
+			case DEEP_HISTORY:
+				return overlayImage(object, getResourceLocator().getImage("full/obj16/DeepHistoryState"));
+			case SHALLOW_HISTORY:
+				return overlayImage(object, getResourceLocator().getImage("full/obj16/ShallowHistoryState"));
+			}
+		}
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/Entry"));
 	}
 
