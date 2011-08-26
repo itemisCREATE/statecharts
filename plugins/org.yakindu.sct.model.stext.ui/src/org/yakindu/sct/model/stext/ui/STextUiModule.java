@@ -4,6 +4,8 @@
 package org.yakindu.sct.model.stext.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory;
+import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -14,5 +16,9 @@ public class STextUiModule extends org.yakindu.sct.model.stext.ui.AbstractSTextU
 
 	public STextUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
+	}
+	
+	public Class<? extends StatefulFactory> bindStatefulFactory () {
+		return STextStatefulFactory.class;
 	}
 }
