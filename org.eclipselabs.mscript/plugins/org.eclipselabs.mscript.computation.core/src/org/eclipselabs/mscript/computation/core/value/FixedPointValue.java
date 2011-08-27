@@ -87,7 +87,7 @@ public class FixedPointValue extends AbstractNumericValue implements ISimpleNume
 		FixedPointValue otherFixedPointValue = (FixedPointValue) other;
 		
 		if (getNumberFormat().getWordSize() > 32) {
-			BigInteger result = BigInteger.valueOf(rawValue).add(BigInteger.valueOf(otherFixedPointValue.rawValue));
+			BigInteger result = BigInteger.valueOf(rawValue).subtract(BigInteger.valueOf(otherFixedPointValue.rawValue));
 			return createValue(resultDataType, result, FixedPointOperationKind.SUBTRACT);
 		}
 
