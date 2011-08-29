@@ -24,4 +24,5 @@ public abstract class NamePropertySection extends AbstractEditorPropertySection 
 				SGraphPackage.Literals.NAMED_ELEMENT__NAME, "Name: ");
 		descriptors.add(nameDescriptor);
 	}
+	
 }

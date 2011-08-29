@@ -42,7 +42,7 @@ import org.yakindu.sct.ui.editor.editparts.TransitionExpressionEditPart;
 
 /**
  * 
- * @author muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider

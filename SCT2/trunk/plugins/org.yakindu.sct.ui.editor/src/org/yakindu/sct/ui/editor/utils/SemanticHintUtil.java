@@ -80,6 +80,10 @@ public final class SemanticHintUtil implements SemanticHints {
 				return CHOICE;
 			};
 
+			public String defaultCase(EObject object) {
+				throw new IllegalStateException(
+						"No Semantic Hint found for object " + object);
+			};
 		}.doSwitch(semanticElement);
 	}
 }

@@ -74,6 +74,10 @@ public class StateItemProvider
 
 			addExpressionPropertyDescriptor(object);
 			addReactionsPropertyDescriptor(object);
+			addSubstatechartPropertyDescriptor(object);
+			addSubmachineStatePropertyDescriptor(object);
+			addCompositeStatePropertyDescriptor(object);
+			addSimpleStatePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -118,6 +122,94 @@ public class StateItemProvider
 				 false,
 				 false,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Substatechart feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSubstatechartPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_State_substatechart_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_State_substatechart_feature", "_UI_State_type"),
+				 SGraphPackage.Literals.STATE__SUBSTATECHART,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Submachine State feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSubmachineStatePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_State_submachineState_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_State_submachineState_feature", "_UI_State_type"),
+				 SGraphPackage.Literals.STATE__SUBMACHINE_STATE,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Composite State feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCompositeStatePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_State_compositeState_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_State_compositeState_feature", "_UI_State_type"),
+				 SGraphPackage.Literals.STATE__COMPOSITE_STATE,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Simple State feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSimpleStatePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_State_simpleState_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_State_simpleState_feature", "_UI_State_type"),
+				 SGraphPackage.Literals.STATE__SIMPLE_STATE,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -192,6 +284,9 @@ public class StateItemProvider
 
 		switch (notification.getFeatureID(State.class)) {
 			case SGraphPackage.STATE__EXPRESSION:
+			case SGraphPackage.STATE__SUBMACHINE_STATE:
+			case SGraphPackage.STATE__COMPOSITE_STATE:
+			case SGraphPackage.STATE__SIMPLE_STATE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SGraphPackage.STATE__LOCAL_REACTIONS:

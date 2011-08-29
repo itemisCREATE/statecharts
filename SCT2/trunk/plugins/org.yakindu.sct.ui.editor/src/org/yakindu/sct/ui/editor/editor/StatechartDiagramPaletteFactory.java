@@ -19,8 +19,8 @@ import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 
 /**
  * 
- * @author andreas muelder
- * 
+ * @author andreas muelder - Initial contribution and API
+ *
  */
 public class StatechartDiagramPaletteFactory extends PaletteFactory.Adapter {
 
@@ -29,7 +29,7 @@ public class StatechartDiagramPaletteFactory extends PaletteFactory.Adapter {
 		IElementType elementType = ElementTypeRegistry.getInstance().getType(
 				toolId);
 		if (elementType == null)
-			throw new IllegalStateException("No Tool for toolId " + toolId
+			throw new IllegalStateException("No Element Id for toolId " + toolId
 					+ " found!");
 		if (toolId.equals(StatechartElementTypes.TRANSITION.getId())) {
 			return new ConnectionCreationTool(elementType);
