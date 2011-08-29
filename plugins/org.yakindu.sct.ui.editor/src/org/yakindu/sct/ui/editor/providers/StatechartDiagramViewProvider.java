@@ -32,7 +32,7 @@ import org.yakindu.sct.ui.editor.utils.SemanticHintUtil;
 
 /**
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class StatechartDiagramViewProvider extends AbstractViewProvider
@@ -72,6 +72,9 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider
 
 	private Class<?> getClass(String semanticHint) {
 		Class<?> factory = factories.get(semanticHint);
+		if(factory == null){
+			throw new IllegalStateException("No factory found for semantic hint " + semanticHint);
+		}
 		return factory;
 	}
 

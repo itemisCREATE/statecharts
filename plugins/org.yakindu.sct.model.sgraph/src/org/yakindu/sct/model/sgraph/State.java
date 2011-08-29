@@ -21,6 +21,10 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#getSubRegions <em>Sub Regions</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.State#getSubstatechart <em>Substatechart</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.State#isSubmachineState <em>Submachine State</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.State#isCompositeState <em>Composite State</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.State#isSimpleState <em>Simple State</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,5 +55,76 @@ public interface State extends Vertex, ExpressionElement, ReactiveElement, Scope
 	 * @generated
 	 */
 	EList<Region> getSubRegions();
+
+	/**
+	 * Returns the value of the '<em><b>Substatechart</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Substatechart</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Substatechart</em>' reference.
+	 * @see #setSubstatechart(Statechart)
+	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_Substatechart()
+	 * @model
+	 * @generated
+	 */
+	Statechart getSubstatechart();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sgraph.State#getSubstatechart <em>Substatechart</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Substatechart</em>' reference.
+	 * @see #getSubstatechart()
+	 * @generated
+	 */
+	void setSubstatechart(Statechart value);
+
+	/**
+	 * Returns the value of the '<em><b>Submachine State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Submachine State</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Submachine State</em>' attribute.
+	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_SubmachineState()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	boolean isSubmachineState();
+
+	/**
+	 * Returns the value of the '<em><b>Composite State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Composite State</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Composite State</em>' attribute.
+	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_CompositeState()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	boolean isCompositeState();
+
+	/**
+	 * Returns the value of the '<em><b>Simple State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Simple State</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Simple State</em>' attribute.
+	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_SimpleState()
+	 * @model transient="true" changeable="false" volatile="true"
+	 * @generated
+	 */
+	boolean isSimpleState();
 
 } // State

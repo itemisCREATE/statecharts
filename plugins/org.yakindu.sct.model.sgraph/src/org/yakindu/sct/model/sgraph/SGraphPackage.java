@@ -448,13 +448,49 @@ public interface SGraphPackage extends EPackage {
 	int STATE__SUB_REGIONS = VERTEX_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Substatechart</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__SUBSTATECHART = VERTEX_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Submachine State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__SUBMACHINE_STATE = VERTEX_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Composite State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__COMPOSITE_STATE = VERTEX_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Simple State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__SIMPLE_STATE = VERTEX_FEATURE_COUNT + 8;
+
+	/**
 	 * The number of structural features of the '<em>State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = VERTEX_FEATURE_COUNT + 5;
+	int STATE_FEATURE_COUNT = VERTEX_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.FinalStateImpl <em>Final State</em>}' class.
@@ -546,6 +582,42 @@ public interface SGraphPackage extends EPackage {
 	 * @ordered
 	 */
 	int FINAL_STATE__SUB_REGIONS = STATE__SUB_REGIONS;
+
+	/**
+	 * The feature id for the '<em><b>Substatechart</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL_STATE__SUBSTATECHART = STATE__SUBSTATECHART;
+
+	/**
+	 * The feature id for the '<em><b>Submachine State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL_STATE__SUBMACHINE_STATE = STATE__SUBMACHINE_STATE;
+
+	/**
+	 * The feature id for the '<em><b>Composite State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL_STATE__COMPOSITE_STATE = STATE__COMPOSITE_STATE;
+
+	/**
+	 * The feature id for the '<em><b>Simple State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL_STATE__SIMPLE_STATE = STATE__SIMPLE_STATE;
 
 	/**
 	 * The number of structural features of the '<em>Final State</em>' class.
@@ -1375,6 +1447,50 @@ public interface SGraphPackage extends EPackage {
 	EReference getState_SubRegions();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sgraph.State#getSubstatechart <em>Substatechart</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Substatechart</em>'.
+	 * @see org.yakindu.sct.model.sgraph.State#getSubstatechart()
+	 * @see #getState()
+	 * @generated
+	 */
+	EReference getState_Substatechart();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.State#isSubmachineState <em>Submachine State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Submachine State</em>'.
+	 * @see org.yakindu.sct.model.sgraph.State#isSubmachineState()
+	 * @see #getState()
+	 * @generated
+	 */
+	EAttribute getState_SubmachineState();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.State#isCompositeState <em>Composite State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Composite State</em>'.
+	 * @see org.yakindu.sct.model.sgraph.State#isCompositeState()
+	 * @see #getState()
+	 * @generated
+	 */
+	EAttribute getState_CompositeState();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.State#isSimpleState <em>Simple State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Simple State</em>'.
+	 * @see org.yakindu.sct.model.sgraph.State#isSimpleState()
+	 * @see #getState()
+	 * @generated
+	 */
+	EAttribute getState_SimpleState();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Variable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1836,6 +1952,38 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STATE__SUB_REGIONS = eINSTANCE.getState_SubRegions();
+
+		/**
+		 * The meta object literal for the '<em><b>Substatechart</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATE__SUBSTATECHART = eINSTANCE.getState_Substatechart();
+
+		/**
+		 * The meta object literal for the '<em><b>Submachine State</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE__SUBMACHINE_STATE = eINSTANCE.getState_SubmachineState();
+
+		/**
+		 * The meta object literal for the '<em><b>Composite State</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE__COMPOSITE_STATE = eINSTANCE.getState_CompositeState();
+
+		/**
+		 * The meta object literal for the '<em><b>Simple State</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE__SIMPLE_STATE = eINSTANCE.getState_SimpleState();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.VariableImpl <em>Variable</em>}' class.

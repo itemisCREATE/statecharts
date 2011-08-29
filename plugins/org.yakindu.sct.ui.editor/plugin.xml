@@ -62,6 +62,19 @@
                   value="State">
             </param>
          </metamodelType>
+          <metamodelType
+               eclass="SubchartState"
+               edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
+               icon="icons/obj16/substatechart-32.png"
+               id="org.yakindu.sct.ui.editor.SubchartState"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="SubchartState">
+            <param
+                  name="semanticHint"
+                  value="SubchartState">
+            </param>
+         </metamodelType>
+         
          <metamodelType
                eclass="Transition"
                edithelper="org.yakindu.sct.ui.editor.edithelper.TransitionEditHelper"
@@ -262,6 +275,20 @@
                            </content>
                      </expand>
             </entry>
+              <entry
+                  description="Creates a sub statechart"
+                  id="org.yakindu.sct.ui.editor.SubchartState"
+                  kind="tool"
+                  label="Substatechart"
+                  large_icon="icons/obj16/substatechart-32.png"
+                  path="/tools/"
+                  small_icon="icons/obj16/substatechart-16.png">
+                   <expand
+                         force="true">
+                           <content>
+                           </content>
+                     </expand>
+            </entry>
              <entry
                    description="Creates a region"
                    id="org.yakindu.sct.ui.editor.Region"
@@ -399,6 +426,13 @@
             class="org.yakindu.sct.ui.editor.propertysheets.StatechartPropertySection">
             <input type="org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart"/>
               <input type="org.yakindu.sct.ui.editor.editparts.StatechartNameEditPart"/>
+         </propertySection>
+         <!-- Subchart model section -->
+          <propertySection
+            id="property.section.domain.subchart" 
+            tab="property.tab.domain"
+            class="org.yakindu.sct.ui.editor.propertysheets.SubchartStatePropertySection">
+            <input type="org.yakindu.sct.ui.editor.editparts.SubchartStateEditPart"/>
          </propertySection>
         <!-- Transition model section -->         
          <propertySection
