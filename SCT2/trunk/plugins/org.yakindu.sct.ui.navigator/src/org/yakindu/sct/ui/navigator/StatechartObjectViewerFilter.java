@@ -5,6 +5,7 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.yakindu.sct.model.sgraph.Scope;
+import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 
@@ -16,6 +17,9 @@ public class StatechartObjectViewerFilter extends ViewerFilter {
 			DomainNavigatorItem navigatorItem = (DomainNavigatorItem) element;
 			EObject modelElement = navigatorItem.getEObject();
 			if (modelElement instanceof Diagram) {
+				return false;
+			}
+			if (modelElement instanceof Trigger) {
 				return false;
 			}
 			if (modelElement instanceof InternalScope

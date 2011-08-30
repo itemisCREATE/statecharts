@@ -39,6 +39,11 @@
             id="org.eclipse.ui.navigator.navigatorActionProvider"
             class="org.yakindu.sct.ui.navigator.NavigatorActionProvider">
          <enablement>
+            <or>
+               <instanceof
+                     value="org.yakindu.sct.ui.navigator.DomainNavigatorItem">
+               </instanceof>
+            </or>
          </enablement>
       </actionProvider>
        <commonFilter
@@ -56,6 +61,11 @@
                   value="org.yakindu.sct.ui.navigator.DomainNavigatorItem">
             </instanceof>
          </selectionEnablement>
+         <editorInputEnablement>
+            <instanceof
+                  value="org.eclipse.emf.common.ui.URIEditorInput">
+            </instanceof>
+         </editorInputEnablement>
       </linkHelper>
    </extension>
 </plugin>

@@ -8,12 +8,16 @@ import java.util.Iterator;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
+import org.eclipse.gmf.runtime.notation.NotationPackage;
+import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.navigator.ICommonContentExtensionSite;
@@ -34,9 +38,10 @@ public class StatechartNavigatorContentProvider implements
 	private WorkspaceSynchronizer myWorkspaceSynchronizer;
 
 	private Runnable myViewerRefreshRunnable;
+	
+	private ECrossReferenceAdapter myCrossReferenceAdapter;
 
 	public StatechartNavigatorContentProvider() {
-		System.out.println("ContentProvider");
 		myAdapterFctoryContentProvier = new AdapterFactoryContentProvider(
 				ComposedAdapterFactoryUtil.FACTORY);
 		
@@ -109,6 +114,9 @@ public class StatechartNavigatorContentProvider implements
 						return true;
 					}
 				});
+		
+		myCrossReferenceAdapter = new ECrossReferenceAdapter();
+		myEditingDomain.getResourceSet().eAdapters().add(myCrossReferenceAdapter);
 	}
 
 	public void dispose() {
@@ -120,6 +128,7 @@ public class StatechartNavigatorContentProvider implements
 			Resource resource = (Resource) it.next();
 			resource.unload();
 		}
+		myEditingDomain.getResourceSet().eAdapters().remove(myCrossReferenceAdapter);
 		((TransactionalEditingDomain) myEditingDomain).dispose();
 		myEditingDomain = null;
 	}
@@ -162,15 +171,37 @@ public class StatechartNavigatorContentProvider implements
 		return EMPTY_ARRAY;
 	}
 
-	public Object[] wrapEObjects(Object[] objects, Object parentElement) {
+	private Object[] wrapEObjects(Object[] objects, Object parentElement) {
 		Collection<DomainNavigatorItem> result = new ArrayList<DomainNavigatorItem>();
 		for (int i = 0; i < objects.length; i++) {
 			if (objects[i] instanceof EObject) {
-				result.add(new DomainNavigatorItem((EObject) objects[i],
-						parentElement, myAdapterFctoryContentProvier));
+				DomainNavigatorItem navigatorItem = new DomainNavigatorItem(
+						(EObject) objects[i], parentElement,
+						myAdapterFctoryContentProvier);
+				// Check if object has a corresponding View
+				if (!(objects[i] instanceof View)) {
+					EObject eObject = (EObject) objects[i];
+					navigatorItem.setView(getReferencigView(eObject));
+				}
+				result.add(navigatorItem);
 			}
 		}
 		return result.toArray();
+	}
+	
+	private View getReferencigView(EObject eObject) {
+		
+		Collection<Setting> inverseReferences = myCrossReferenceAdapter
+				.getInverseReferences(eObject, true);
+		
+		for (Setting setting:inverseReferences) {
+			if (setting.getEObject() instanceof View
+					&& setting.getEStructuralFeature() == NotationPackage.eINSTANCE
+							.getView_Element()) {
+				return (View) setting.getEObject();
+			}
+		}
+		return null;
 	}
 
 	public Object getParent(Object element) {
