@@ -41,7 +41,7 @@
          </metamodelType>
          <metamodelType
                eclass="Region"
-               icon="icons/obj16/region-32.png"
+               icon="icons/obj16/region-16.png"
                id="org.yakindu.sct.ui.editor.Region"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="Region">
@@ -53,7 +53,7 @@
          <metamodelType
                eclass="State"
                edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-               icon="icons/obj16/state-32.png"
+               icon="icons/obj16/state-16.png"
                id="org.yakindu.sct.ui.editor.State"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="State">
@@ -65,7 +65,7 @@
           <metamodelType
                eclass="SubchartState"
                edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-               icon="icons/obj16/substatechart-32.png"
+               icon="icons/obj16/substatechart-16.png"
                id="org.yakindu.sct.ui.editor.SubchartState"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="SubchartState">
@@ -78,7 +78,7 @@
          <metamodelType
                eclass="Transition"
                edithelper="org.yakindu.sct.ui.editor.edithelper.TransitionEditHelper"
-               icon="icons/obj16/transition-32.png"
+               icon="icons/obj16/transition-16.png"
                id="org.yakindu.sct.ui.editor.Transition"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="Transition">
@@ -90,7 +90,7 @@
          <metamodelType
                eclass="Choice"
                edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-               icon="icons/obj16/choice-32.png"
+               icon="icons/obj16/choice-16.png"
                id="org.yakindu.sct.ui.editor.Choice"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="Choice">
@@ -102,7 +102,7 @@
          <metamodelType
                eclass="Entry"
                edithelper="org.yakindu.sct.ui.editor.edithelper.EntryEditHelper"
-               icon="icons/obj16/initial-state-32.png"
+               icon="icons/obj16/initial-state-16.png"
                id="org.yakindu.sct.ui.editor.Entry"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="Entry">
@@ -114,7 +114,7 @@
          <metamodelType
                eclass="Entry"
                edithelper="org.yakindu.sct.ui.editor.edithelper.EntryEditHelper"
-               icon="icons/obj16/shallow-history-32.png"
+               icon="icons/obj16/shallow-history-16.png"
                id="org.yakindu.sct.ui.editor.ShallowHistory"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="ShallowHistory">
@@ -126,7 +126,7 @@
          <metamodelType
                eclass="Entry"
                edithelper="org.yakindu.sct.ui.editor.edithelper.EntryEditHelper"
-               icon="icons/obj16/deep-history-32.png"
+               icon="icons/obj16/deep-history-16.png"
                id="org.yakindu.sct.ui.editor.DeepHistory"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="DeepHistory">
@@ -138,7 +138,7 @@
          <metamodelType
                eclass="FinalState"
                edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-               icon="icons/obj16/final-state-32.png"
+               icon="icons/obj16/final-state-16.png"
                id="org.yakindu.sct.ui.editor.FinalState"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="FinalState">
@@ -150,7 +150,7 @@
           <metamodelType
                 eclass="Exit"
                 edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-                icon="icons/obj16/exit-point-32.png"
+                icon="icons/obj16/exit-point-16.png"
                 id="org.yakindu.sct.ui.editor.Exit"
                 kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                 name="Exit">
@@ -162,7 +162,7 @@
          <metamodelType
                eclass="Junction"
                edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-               icon="icons/obj16/junction-32.png"
+               icon="icons/obj16/junction-16.png"
                id="org.yakindu.sct.ui.editor.Junction"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="Junction">
