@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.draw2d.GridData;
@@ -43,9 +44,12 @@ import org.eclipse.gmf.runtime.notation.Compartment;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
+import org.yakindu.sct.ui.editor.pictogram.PictogramEditPolicy;
+import org.yakindu.sct.ui.editor.pictogram.SubchartPictogram;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 
 /**
@@ -75,16 +79,17 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		if (request instanceof CreateViewAndElementRequest) {
 			return figureCompartmentEditPart;
 		}
-		if (request instanceof GroupRequest && request.getType() == RequestConstants.REQ_DROP) {
+		if (request instanceof GroupRequest
+				&& request.getType() == RequestConstants.REQ_DROP) {
 			GroupRequest req = (GroupRequest) request;
 			if (areInsertableChildren(req.getEditParts())) {
 				return figureCompartmentEditPart;
 			}
 		}
-		
+
 		return super.getTargetEditPart(request);
 	}
-	
+
 	private boolean areInsertableChildren(List<?> editParts) {
 		for (Object object : editParts) {
 			if (!(object instanceof RegionEditPart)) {
@@ -109,8 +114,8 @@ public class StateEditPart extends ShapeNodeEditPart implements
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-//		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-//				new RelationshipSemanticEditPolicy());
+		// installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
+		// new RelationshipSemanticEditPolicy());
 		// We don't want to allow creation for parent editpart on a State
 		installEditPolicy(EditPolicyRoles.CREATION_ROLE,
 				new CreationEditPolicy() {
@@ -120,6 +125,8 @@ public class StateEditPart extends ShapeNodeEditPart implements
 						return UnexecutableCommand.INSTANCE;
 					}
 				});
+		installEditPolicy(PictogramEditPolicy.ROLE, new PictogramEditPolicy(
+				Collections.singletonList(new SubchartPictogram())));
 
 	}
 
@@ -313,5 +320,10 @@ public class StateEditPart extends ShapeNodeEditPart implements
 							.getRGB());
 		}
 		return super.getPreferredValue(feature);
+	}
+	
+	@Override
+	public State resolveSemanticElement() {
+		return (State) super.resolveSemanticElement();
 	}
 }

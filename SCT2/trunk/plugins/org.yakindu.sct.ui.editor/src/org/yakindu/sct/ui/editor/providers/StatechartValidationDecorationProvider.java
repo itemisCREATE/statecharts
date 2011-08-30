@@ -105,7 +105,7 @@ public class StatechartValidationDecorationProvider extends AbstractProvider
 			return;
 		}
 		final Diagram fdiagram = diagram;
-		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
 
 			public void run() {
 				try {
