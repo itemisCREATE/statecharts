@@ -63,7 +63,7 @@
          </selectionEnablement>
          <editorInputEnablement>
             <instanceof
-                  value="org.eclipse.emf.common.ui.URIEditorInput">
+                  value="org.eclipse.ui.IFileEditorInput">
             </instanceof>
          </editorInputEnablement>
       </linkHelper>

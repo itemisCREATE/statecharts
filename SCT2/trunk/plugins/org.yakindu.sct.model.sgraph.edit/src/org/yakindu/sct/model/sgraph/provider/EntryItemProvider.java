@@ -120,17 +120,28 @@ public class EntryItemProvider
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Entry)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Entry_type") :
-			getString("_UI_Entry_type") + " " + label;
+		Entry entry = (Entry) object;
+
+		switch (entry.getKind()) {
+		case DEEP_HISTORY:
+			return "Deep History";
+		case INITIAL:
+			return "Initial State";
+		case SHALLOW_HISTORY:
+			return "Shallow History";
+		default:
+			String label = ((Entry) object).getName();
+
+			return label == null || label.length() == 0 ? getString("_UI_Entry_type")
+					: getString("_UI_Entry_type") + " " + label;
+		}
 	}
 
 	/**

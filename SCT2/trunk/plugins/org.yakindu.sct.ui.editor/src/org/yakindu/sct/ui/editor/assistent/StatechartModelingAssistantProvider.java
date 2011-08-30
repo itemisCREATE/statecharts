@@ -81,5 +81,4 @@ public class StatechartModelingAssistantProvider extends
 			IAdaptable target) {
 		return Lists.newArrayList(TRANSITION);
 	}
-
 }

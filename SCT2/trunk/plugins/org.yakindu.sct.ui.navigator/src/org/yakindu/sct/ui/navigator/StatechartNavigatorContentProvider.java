@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.eclipse.core.internal.resources.WorkspaceRoot;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -205,6 +206,10 @@ public class StatechartNavigatorContentProvider implements
 	}
 
 	public Object getParent(Object element) {
+		if (element instanceof IFile) {
+			IFile file = (IFile) element;
+			return file.getParent();
+		}
 		if (element instanceof DomainNavigatorItem) {
 			DomainNavigatorItem domainNavigatorItem = (DomainNavigatorItem) element;
 			return domainNavigatorItem.getParent();

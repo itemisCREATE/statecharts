@@ -71,7 +71,7 @@ public class NavigatorLinkHelper implements ILinkHelper {
 		}
 		return StructuredSelection.EMPTY;
 	}
-
+	
 	public void activateEditor(IWorkbenchPage aPage,
 			IStructuredSelection aSelection) {
 
