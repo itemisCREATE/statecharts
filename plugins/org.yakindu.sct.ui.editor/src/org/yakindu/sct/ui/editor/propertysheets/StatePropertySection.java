@@ -42,11 +42,9 @@ public class StatePropertySection extends NamePropertySection {
 				IYakinduSctHelpContextIds.SC_PROPERTIES_STATE_EXPRESSION);
 		descriptors.add(expressionsDescriptor);
 		
-//		// Submachine reference
-//		TextDialogPropertyDescriptor submachineDescriptor = new TextDialogPropertyDescriptor(
-//				SGraphPackage.Literals.STATE__SUBSTATECHART, "Submachine:");
-//		descriptors.add(submachineDescriptor);
+		// Submachine reference
+		TextDialogPropertyDescriptor submachineDescriptor = new TextDialogPropertyDescriptor(
+				SGraphPackage.Literals.STATE__SUBSTATECHART, "Submachine:");
+		descriptors.add(submachineDescriptor);
 	}
-	
-
 }

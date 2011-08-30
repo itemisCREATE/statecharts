@@ -43,6 +43,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -59,7 +60,7 @@ import de.itemis.gmf.runtime.commons.properties.descriptors.AbstractPropertyDesc
 public class TextDialogPropertyDescriptor extends AbstractPropertyDescriptor {
 
 	private EObject eObject;
-	private Text text;
+	private Label text;
 
 	public TextDialogPropertyDescriptor(EStructuralFeature feature,
 			String labelName) {
@@ -75,10 +76,11 @@ public class TextDialogPropertyDescriptor extends AbstractPropertyDescriptor {
 		layout.marginLeft = 0;
 		layout.marginRight = 0;
 		composite.setLayout(layout);
-		text = new Text(composite, SWT.BORDER);
+		text = new Label(composite, SWT.BORDER);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(text);
 		Button openDialog = new Button(composite, SWT.NONE);
-		GridDataFactory.fillDefaults().hint(SWT.DEFAULT, 5).applyTo(openDialog);
+		GridDataFactory.fillDefaults().hint(SWT.DEFAULT, 10)
+				.applyTo(openDialog);
 		openDialog.setText("...");
 
 		openDialog.addSelectionListener(new SelectionListener() {
@@ -89,7 +91,17 @@ public class TextDialogPropertyDescriptor extends AbstractPropertyDescriptor {
 
 				if (dialog.open() == Dialog.OK) {
 					List<URI> urIs = dialog.getURIs();
-					getControl().setText(urIs.get(0).toString());
+					if (urIs.size() == 1) {
+						String string = urIs.get(0).toString();
+						Statechart statechart = loadFromResource(string);
+						if (statechart != null) {
+							executeSetCommand(new SetRequest(
+									eObject,
+									SGraphPackage.Literals.STATE__SUBSTATECHART,
+									statechart));
+							getControl().setText(string);
+						}
+					}
 				}
 			}
 
@@ -97,17 +109,6 @@ public class TextDialogPropertyDescriptor extends AbstractPropertyDescriptor {
 			}
 		});
 
-		text.addModifyListener(new ModifyListener() {
-
-			public void modifyText(ModifyEvent arg0) {
-				Statechart statechart = loadFromResource(text.getText());
-				if (statechart != null) {
-					executeSetCommand(new SetRequest(eObject,
-							SGraphPackage.Literals.STATE__SUBSTATECHART,
-							statechart));
-				}
-			}
-		});
 		return text;
 	}
 
@@ -124,8 +125,8 @@ public class TextDialogPropertyDescriptor extends AbstractPropertyDescriptor {
 	}
 
 	@Override
-	public Text getControl() {
-		return (Text) super.getControl();
+	public Label getControl() {
+		return (Label) super.getControl();
 	}
 
 	@Override
@@ -139,7 +140,8 @@ public class TextDialogPropertyDescriptor extends AbstractPropertyDescriptor {
 		this.eObject = eObject;
 		State state = (State) eObject;
 		Statechart substatechart = state.getSubstatechart();
-		if (substatechart != null)
+		//TODO: Handle unresolvable proxy
+		if (substatechart != null && !substatechart.eIsProxy())
 			text.setText(substatechart.eResource().getURI().toString());
 
 	}

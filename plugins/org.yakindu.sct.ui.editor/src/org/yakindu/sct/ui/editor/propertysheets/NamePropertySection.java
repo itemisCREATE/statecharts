@@ -20,6 +20,7 @@ public abstract class NamePropertySection extends AbstractEditorPropertySection 
 	@Override
 	protected void createPropertyDescriptors(
 			List<IFormPropertyDescriptor> descriptors) {
+	
 		TextPropertyDescriptor nameDescriptor = new TextPropertyDescriptor(
 				SGraphPackage.Literals.NAMED_ELEMENT__NAME, "Name: ");
 		descriptors.add(nameDescriptor);
