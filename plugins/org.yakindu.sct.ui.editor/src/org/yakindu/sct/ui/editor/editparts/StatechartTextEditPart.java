@@ -7,6 +7,9 @@ import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.SemanticEditPolicy;
+import org.eclipse.gmf.runtime.emf.type.core.requests.DestroyRequest;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.StatechartTextFigure;
@@ -34,6 +37,18 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
+
+		// Disables deletion of the text compartment view if additional elements
+		// are selected too
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
+				new SemanticEditPolicy() {
+					@Override
+					protected boolean shouldProceed(
+							DestroyRequest destroyRequest) {
+						return false;
+					}
+				});
+
 		// Disables deletion of the text compartment view via keyboard
 		installEditPolicy(EditPolicy.COMPONENT_ROLE,
 				new RootComponentEditPolicy());
