@@ -47,6 +47,7 @@
          </enablement>
       </actionProvider>
        <commonFilter
+             activeByDefault="true"
              class="org.yakindu.sct.ui.navigator.StatechartObjectViewerFilter"
              id="org.yakindu.sct.ui.navigator.statechartObjectFilter"
              name="Statechart Object Filter">
