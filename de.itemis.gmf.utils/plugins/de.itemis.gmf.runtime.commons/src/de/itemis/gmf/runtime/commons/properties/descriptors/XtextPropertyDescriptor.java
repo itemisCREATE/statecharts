@@ -10,9 +10,11 @@
  */
 package de.itemis.gmf.runtime.commons.properties.descriptors;
 
-import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
@@ -24,34 +26,34 @@ import de.itemis.xtext.utils.jface.viewers.XtextStyledText;
 
 /**
  * 
- * @author andreas muelder
- * 
+ * @author andreas muelder - Initial contribution and API
+ *
  */
 public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 
 	private final Injector injector;
 	private final Resource context;
-	
+
 	protected XtextStyledText xtextWidget;
 
-	public XtextPropertyDescriptor(EAttribute feature, String labelName,
+	public XtextPropertyDescriptor(EStructuralFeature feature, String labelName,
 			Injector injector) {
-		this(feature, labelName, injector, (Resource)null);
+		this(feature, labelName, injector, (Resource) null);
 	}
 
-	public XtextPropertyDescriptor(EAttribute feature, String labelName,
+	public XtextPropertyDescriptor(EStructuralFeature feature, String labelName,
 			Injector injector, Resource context) {
 		super(feature, labelName);
 		this.injector = injector;
 		this.context = context;
 	}
-	
+
 	public XtextPropertyDescriptor(EAttribute feature, String labelName,
 			Injector injector, String helpContextId) {
 		this(feature, labelName, injector);
 		this.helpContextId = helpContextId;
 	}
-	
+
 	public XtextPropertyDescriptor(EAttribute feature, String labelName,
 			Injector injector, Resource context, String helpContextId) {
 		this(feature, labelName, injector, context);
@@ -63,37 +65,24 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 	}
 
 	public StyledText createControl(Composite parent) {
-		xtextWidget = createXtextWidget(parent, getStyle(), getInjector(), context);
+		xtextWidget = createXtextWidget(parent, getStyle(), getInjector(),
+				context);
 		GridDataFactory.fillDefaults().grab(true, true)
 				.applyTo(xtextWidget.getStyledText());
 		return (StyledText) xtextWidget.getStyledText();
 	}
-	
-	protected XtextStyledText createXtextWidget(Composite parent, int style, Injector injector, Resource context) {
-		return new XtextStyledText(parent, style,
-					getInjector(), context);
+
+	protected XtextStyledText createXtextWidget(Composite parent, int style,
+			Injector injector, Resource context) {
+		return new XtextStyledText(parent, style, getInjector(), context);
 	}
 
-	public Object getControlValue() {
-		StyledText styledText = getControl();
-		return (styledText.getText() != null && styledText.getText().trim()
-				.length() != 0) ? styledText.getText().trim() : null;
-	}
-
-	public void setControlValue(Object value) {
-		if (value != null) {
-			Assert.isTrue(value instanceof String, "Illegal value " + value);
-			getControl().setText((String) value);
-		}else {
-			getControl().setText("");
-		}
-	}
 
 	public Injector getInjector() {
 		return injector;
 	}
-	
-	public XtextStyledText getXtextWidget(){
+
+	public XtextStyledText getXtextWidget() {
 		return xtextWidget;
 	}
 
@@ -101,5 +90,12 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 	public StyledText getControl() {
 		return (StyledText) super.getControl();
 	}
+
+	@Override
+	protected IObservableValue getWidgetValue() {
+		return  WidgetProperties.text(SWT.FocusOut)
+				.observe(getControl());
+	}
+
 
 }

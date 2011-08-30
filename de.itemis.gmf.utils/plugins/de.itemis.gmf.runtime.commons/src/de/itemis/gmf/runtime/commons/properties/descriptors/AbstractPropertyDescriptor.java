@@ -11,7 +11,13 @@
  */
 package de.itemis.gmf.runtime.commons.properties.descriptors;
 
-import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.emf.databinding.EMFDataBindingContext;
+import org.eclipse.emf.databinding.IEMFValueProperty;
+import org.eclipse.emf.databinding.edit.EMFEditProperties;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.jface.dialogs.IDialogLabelKeys;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.resource.JFaceResources;
@@ -28,9 +34,10 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ImageHyperlink;
 
 /**
+ * 
  * Abstract base class for all implementers of {@link IFormPropertyDescriptor}.
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public abstract class AbstractPropertyDescriptor implements
@@ -38,35 +45,42 @@ public abstract class AbstractPropertyDescriptor implements
 
 	public final static String HELP_CONTEXT_NONE = "help_context_none";
 
-	private final EAttribute feature;
+	private final EStructuralFeature feature;
+
 	private final String labelName;
+
 	private Control control;
+
+	private EMFDataBindingContext bindingContext;
 
 	protected String helpContextId = HELP_CONTEXT_NONE;
 
 	protected abstract Control createControl(Composite parent);
 
-	public AbstractPropertyDescriptor(EAttribute feature, String labelName) {
+	protected abstract IObservableValue getWidgetValue();
+
+	public AbstractPropertyDescriptor(EStructuralFeature feature,
+			String labelName) {
 		this.feature = feature;
 		this.labelName = labelName;
 	}
 
-	public AbstractPropertyDescriptor(EAttribute feature, String labelName,
-			String helpContextId) {
+	public AbstractPropertyDescriptor(EStructuralFeature feature,
+			String labelName, String helpContextId) {
 		this(feature, labelName);
 		this.helpContextId = helpContextId;
 	}
 
-	public void initControl(Composite parent) {
+	public void createControlColumn(Composite parent) {
 		control = createControl(parent);
 		applyHelpContext(control);
 	}
 
-	public Label createLabel(Composite parent) {
+	public void createLabelColumn(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		Label label = toolkit.createLabel(parent, labelName);
 		applyLayout(label);
-		return label;
+		toolkit.dispose();
 	}
 
 	/**
@@ -80,7 +94,7 @@ public abstract class AbstractPropertyDescriptor implements
 		return control;
 	}
 
-	public void addHelp(Composite parent) {
+	public void createHelpColumn(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		final ImageHyperlink helpWidget = toolkit.createImageHyperlink(parent,
 				SWT.CENTER);
@@ -121,7 +135,29 @@ public abstract class AbstractPropertyDescriptor implements
 		return helpContextId;
 	}
 
-	public EAttribute getEAttribute() {
+	public EStructuralFeature getFeature() {
 		return feature;
+	}
+
+	public void bindToModel(EObject eObject) {
+		if (bindingContext != null)
+			bindingContext.dispose();
+		bindingContext = new EMFDataBindingContext();
+
+		IObservableValue widgetValue = getWidgetValue();
+		bindingContext.bindValue(widgetValue, getModelValue(eObject));
+	}
+
+	protected IObservableValue getModelValue(EObject eObject) {
+		IEMFValueProperty property = EMFEditProperties.value(
+				TransactionUtil.getEditingDomain(eObject), getFeature());
+		IObservableValue value = property.observe(eObject);
+		return value;
+	}
+
+	public void dispose() {
+		getControl().dispose();
+		if (bindingContext != null)
+			bindingContext.dispose();
 	}
 }
