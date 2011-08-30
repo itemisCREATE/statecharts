@@ -35,18 +35,17 @@ public class ComboPropertyDescriptor extends AbstractPropertyDescriptor {
 	private final Enumerator[] items;
 	private ComboViewer comboViewer;
 
-	public ComboPropertyDescriptor(EStructuralFeature feature, String labelName,
-			Enumerator[] items) {
+	public ComboPropertyDescriptor(EStructuralFeature feature,
+			String labelName, Enumerator[] items) {
 		super(feature, labelName);
 		this.items = items;
 	}
 
-	public ComboPropertyDescriptor(EStructuralFeature feature, String labelName,
-			Enumerator[] items, String helpContextId) {
+	public ComboPropertyDescriptor(EStructuralFeature feature,
+			String labelName, Enumerator[] items, String helpContextId) {
 		this(feature, labelName, items);
 		this.helpContextId = helpContextId;
 	}
-
 
 	@Override
 	protected Control createControl(Composite parent) {
@@ -54,6 +53,8 @@ public class ComboPropertyDescriptor extends AbstractPropertyDescriptor {
 		comboViewer.setContentProvider(new ArrayContentProvider());
 		comboViewer.setLabelProvider(new LabelProvider());
 		comboViewer.setInput(items);
+		comboViewer.getControl().setEnabled(items.length > 0);
+
 		applyLayout(comboViewer.getControl());
 		return comboViewer.getControl();
 	}
@@ -62,10 +63,11 @@ public class ComboPropertyDescriptor extends AbstractPropertyDescriptor {
 	public Combo getControl() {
 		return (Combo) super.getControl();
 	}
-	
+
 	@Override
 	protected IObservableValue getWidgetValue() {
-		IViewerValueProperty singleSelection = ViewerProperties.singleSelection();
+		IViewerValueProperty singleSelection = ViewerProperties
+				.singleSelection();
 		return singleSelection.observe(comboViewer);
 	}
 
