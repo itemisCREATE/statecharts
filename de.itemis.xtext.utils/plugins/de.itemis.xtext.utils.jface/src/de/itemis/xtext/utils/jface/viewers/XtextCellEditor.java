@@ -59,17 +59,17 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	private final KeyListener keyListener = new KeyListener() {
 
 		public void keyPressed(KeyEvent e) {
-			if (e.keyCode == SWT.CR && ((text.getStyle() & SWT.MULTI) == 0 || 
-					(e.stateMask & SWT.CTRL) != 0)) {
-				// apply value to cell editor and finish editing
-				XtextCellEditor.this.fireApplyEditorValue();
-			} else if (e.keyCode == SWT.ESC) {
-				// cancel editor
-				XtextCellEditor.this.fireCancelEditor();
-			} else {
-				// notify cell editor about changes
-				XtextCellEditor.this.valueChanged(true, true);
-			}
+//			if (e.keyCode == SWT.CR && ((text.getStyle() & SWT.MULTI) == 0 || 
+//					(e.stateMask & SWT.CTRL) != 0)) {
+//				// apply value to cell editor and finish editing
+//				XtextCellEditor.this.fireApplyEditorValue();
+//			} else if (e.keyCode == SWT.ESC) {
+//				// cancel editor
+//				XtextCellEditor.this.fireCancelEditor();
+//			} else {
+//				// notify cell editor about changes
+//				XtextCellEditor.this.valueChanged(true, true);
+//			}
 		}
 
 		public void keyReleased(KeyEvent e) {
