@@ -1,7 +1,5 @@
 package org.yakindu.sct.ui.navigator;
 
-import java.util.Iterator;
-
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.URI;
@@ -107,9 +105,7 @@ public class NavigatorActionProvider extends CommonActionProvider {
 		}
 
 		private IEditorInput getEditorInput() {
-			for (Iterator<EObject> it = myDiagram.eResource().getContents().iterator(); it
-					.hasNext();) {
-				EObject nextEObject = (EObject) it.next();
+			for (EObject nextEObject : myDiagram.eResource().getContents()) {
 				if (nextEObject == myDiagram) {
 					return new FileEditorInput(
 							WorkspaceSynchronizer.getFile(myDiagram.eResource()));
@@ -124,7 +120,5 @@ public class NavigatorActionProvider extends CommonActionProvider {
 			IEditorInput editorInput = new URIEditorInput(uri, editorName);
 			return editorInput;
 		}
-
 	}
-
 }
