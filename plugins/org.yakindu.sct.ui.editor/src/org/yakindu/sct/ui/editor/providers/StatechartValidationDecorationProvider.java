@@ -346,8 +346,12 @@ public class StatechartValidationDecorationProvider extends AbstractProvider
 		}
 
 		public void handleMarkerDeleted(IMarker marker, Map attributes) {
+			if (attributes == null)
+				return;
 			String viewId = (String) attributes
 					.get(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID);
+			if (viewId == null)
+				return;
 			refreshDecorators(viewId, diagram);
 		}
 
