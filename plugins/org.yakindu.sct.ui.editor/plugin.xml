@@ -424,9 +424,9 @@
                    id="org.yakindu.sct.ui.editor.Synchronization"
                    kind="tool"
                    label="Synchronization"
-                   large_icon="icons/obj16/synchronization-16.png"
+                   large_icon="icons/obj32/synchronization-32.png"
                    path="/tools/"
-                   small_icon="icons/obj32/synchronization-32.png">
+                   small_icon="icons/obj16/synchronization-16.png">
              </entry>
          </contribution>
          <Priority
