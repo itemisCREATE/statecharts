@@ -63,7 +63,7 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 		manager = createDirectEditManager();
 	}
 
-	private void updateLabelText() {
+	protected void updateLabelText() {
 		getWrappingLabel().setText(getEditText());
 	}
 
@@ -114,11 +114,10 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 	}
 
 	public void setLabelText(String text) {
-		getWrappingLabel().setText(text);
-
+		updateLabelText();
 	}
 
-	private WrappingLabel getWrappingLabel() {
+	protected WrappingLabel getWrappingLabel() {
 		return (WrappingLabel) getFigure();
 	}
 
