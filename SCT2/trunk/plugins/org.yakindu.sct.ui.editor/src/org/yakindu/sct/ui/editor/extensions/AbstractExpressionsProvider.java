@@ -37,7 +37,7 @@ public abstract class AbstractExpressionsProvider implements
 	}
 
 	public boolean isProviderFor(EClass type, String resourceUri) {
-		return type.equals(getType())
+		return getType().isSuperTypeOf(type)
 				&& resourceUri.toLowerCase().endsWith(getResourceExtension());
 	}
 

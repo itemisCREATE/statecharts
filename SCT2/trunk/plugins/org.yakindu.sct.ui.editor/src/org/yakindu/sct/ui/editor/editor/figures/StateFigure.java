@@ -39,7 +39,6 @@ public class StateFigure extends RoundedRectangle {
 	public static final int BLUR_SHADOW_WIDTH = 5;
 
 	private WrappingLabel nameFigure;
-	private Figure figureCompartmentPane;
 	private Figure textCompartmentPane;
 
 	public StateFigure(IMapMode mapMode) {
@@ -51,7 +50,7 @@ public class StateFigure extends RoundedRectangle {
 		createContents();
 	}
 
-	private void createContents() {
+	protected void createContents() {
 		// Name Label
 		nameFigure = new WrappingLabel();
 		nameFigure.setAlignment(PositionConstants.CENTER);
@@ -64,21 +63,11 @@ public class StateFigure extends RoundedRectangle {
 		textCompartmentPane = new Figure();
 		textCompartmentPane.setLayoutManager(new StackLayout());
 		this.add(textCompartmentPane,
-				GridDataFactory.fillDefaults().grab(true, false).getData());
-		// Figure Compartment
-		figureCompartmentPane = new Figure();
-		figureCompartmentPane.setLayoutManager(new StackLayout());
-		this.add(figureCompartmentPane,
 				GridDataFactory.fillDefaults().grab(true, true).getData());
-
 	}
 
 	public WrappingLabel getNameFigure() {
 		return nameFigure;
-	}
-
-	public Figure getFigureCompartmentPane() {
-		return figureCompartmentPane;
 	}
 
 	public Figure getTextCompartmentPane() {

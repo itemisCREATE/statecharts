@@ -15,11 +15,13 @@ import org.eclipse.draw2d.Label;
 /**
  * An image figure used to display a {@link Pictogram}.
  * 
- * @author Alexander Nyssen <a
- *         href="mailto:alexander.nyssen@itemis.de">alexander
- *         .nyssen@itemis.de</a>
+ * @author Alexander Nyssen
  */
 public class PictogramFigure extends ImageFigure {
+
+	private static final int ENABLED_ALPHA_VALUE = 255;
+
+	private static final int DISABLED_ALPHA_VALUE = 20;
 
 	private static final int MIN_WIDTH = 50;
 
@@ -28,19 +30,18 @@ public class PictogramFigure extends ImageFigure {
 	public PictogramFigure(final Pictogram pictogram, IFigure hostFigure) {
 		super(pictogram.getImage());
 		this.hostFigure = hostFigure;
-		Label tooltipLabel = new Label(pictogram.getDescription());
-		tooltipLabel.setIcon(pictogram.getImage());
-		setToolTip(tooltipLabel);
+		setToolTip(new Label(pictogram.getDescription()));
 	}
 
 	@Override
 	public void paint(Graphics graphics) {
+
 		if (hostFigure.getParent().isVisible()
 				&& hostFigure.getBounds().width >= MIN_WIDTH) {
 			graphics.pushState();
-			if (isEnabled()) {
-				super.paint(graphics);
-			}
+			graphics.setAlpha(isEnabled() ? ENABLED_ALPHA_VALUE
+					: DISABLED_ALPHA_VALUE);
+			super.paint(graphics);
 			graphics.popState();
 		}
 	}

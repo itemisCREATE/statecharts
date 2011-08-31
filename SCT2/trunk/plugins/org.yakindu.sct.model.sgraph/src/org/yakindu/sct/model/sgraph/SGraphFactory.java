@@ -64,15 +64,6 @@ public interface SGraphFactory extends EFactory {
 	FinalState createFinalState();
 
 	/**
-	 * Returns a new object of class '<em>State</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>State</em>'.
-	 * @generated
-	 */
-	State createState();
-
-	/**
 	 * Returns a new object of class '<em>Junction</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -134,6 +125,24 @@ public interface SGraphFactory extends EFactory {
 	 * @generated
 	 */
 	Synchronization createSynchronization();
+
+	/**
+	 * Returns a new object of class '<em>State</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>State</em>'.
+	 * @generated
+	 */
+	State createState();
+
+	/**
+	 * Returns a new object of class '<em>Submachine State</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Submachine State</em>'.
+	 * @generated
+	 */
+	SubmachineState createSubmachineState();
 
 	/**
 	 * Returns the package supported by this factory.

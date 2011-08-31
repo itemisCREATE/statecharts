@@ -14,7 +14,7 @@
             contributorClass="org.yakindu.sct.ui.editor.editor.StatechartDiagramActionbarContributor"
             default="true"
             extensions="sct"
-            icon="icons/obj16/StatemachineDiagramFile.png"
+            icon="icons/obj16/logo-16.png"
             id="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor"
             matchingStrategy="org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditorMatchingStrategy"
             name="YAKINDU Statechart Editor">
@@ -29,7 +29,7 @@
             nsURI="http://www.yakindu.org/sct/2.0.0">
          <metamodelType
                eclass="Statechart"
-               icon="icons/obj16/StatemachineDiagramFile.png"
+               icon="icons/obj16/logo-16.png"
                id="org.yakindu.sct.ui.editor.Statechart"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="Statechart">
@@ -52,7 +52,7 @@
          </metamodelType>
          <metamodelType
                eclass="State"
-               edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
+               edithelper="org.yakindu.sct.ui.editor.edithelper.StateEditHelper"
                icon="icons/obj16/state-16.png"
                id="org.yakindu.sct.ui.editor.State"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
@@ -63,15 +63,39 @@
             </param>
          </metamodelType>
           <metamodelType
-               eclass="SubchartState"
-               edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-               icon="icons/obj16/substatechart-16.png"
-               id="org.yakindu.sct.ui.editor.SubchartState"
+               eclass="State"
+               edithelper="org.yakindu.sct.ui.editor.edithelper.StateEditHelper"
+               icon="icons/obj16/composite-state-16.png"
+               id="org.yakindu.sct.ui.editor.CompositeState"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               name="SubchartState">
+               name="CompositeState">
             <param
                   name="semanticHint"
-                  value="SubchartState">
+                  value="State">
+            </param>
+         </metamodelType>
+          <metamodelType
+               eclass="State"
+               edithelper="org.yakindu.sct.ui.editor.edithelper.StateEditHelper"
+               icon="icons/obj16/orthogonal-state-16.png"
+               id="org.yakindu.sct.ui.editor.OrthogonalState"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="OrthogonalState">
+            <param
+                  name="semanticHint"
+                  value="State">
+            </param>
+         </metamodelType>
+          <metamodelType
+               eclass="SubmachineState"
+               edithelper="org.yakindu.sct.ui.editor.edithelper.SubmachineStateEditHelper"
+               icon="icons/obj16/submachine-state-16.png"
+               id="org.yakindu.sct.ui.editor.SubmachineState"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="SubmachineState">
+            <param
+                  name="semanticHint"
+                  value="SubmachineState">
             </param>
          </metamodelType>
          
@@ -174,7 +198,7 @@
           <metamodelType
                 eclass="Synchronization"
                 edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-                icon="icons/obj16/synchronization_16x16.png"
+                icon="icons/obj16/synchronization-16.png"
                 id="org.yakindu.sct.ui.editor.Synchronization"
                 kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                 name="Synchronization">
@@ -228,7 +252,7 @@
       <wizard
             category="YAKINDU"
             class="org.yakindu.sct.ui.editor.wizards.CreationWizard"
-            icon="icons/obj16/StatemachineDiagramFile.png"
+            icon="icons/obj16/logo-16.png"
             id="org.yakindu.sct.ui.editor.StatechartDiagramWizard"
             name="YAKINDU Statechart Diagram"
             project="false">
@@ -257,16 +281,17 @@
                    id="org.yakindu.sct.ui.editor.Transition"
                    kind="tool"
                    label="Transition"
-                   large_icon="icons/obj16/transition-32.png"
+                   large_icon="icons/obj32/transition-32.png"
                    path="/tools/"
                    small_icon="icons/obj16/transition-16.png">
              </entry>
+             
              <entry
                   description="Creates a state"
                   id="org.yakindu.sct.ui.editor.State"
                   kind="tool"
                   label="State"
-                  large_icon="icons/obj16/state-32.png"
+                  large_icon="icons/obj32/state-32.png"
                   path="/tools/"
                   small_icon="icons/obj16/state-16.png">
                    <expand
@@ -275,14 +300,47 @@
                            </content>
                      </expand>
             </entry>
-              <entry
-                  description="Creates a sub statechart"
-                  id="org.yakindu.sct.ui.editor.SubchartState"
+            
+            <entry
+                  kind="stack" id="stack" path="/tools/">
+            </entry>
+            
+             <entry
+                  description="Creates a composite state"
+                  id="org.yakindu.sct.ui.editor.CompositeState"
                   kind="tool"
-                  label="Substatechart"
-                  large_icon="icons/obj16/substatechart-32.png"
-                  path="/tools/"
-                  small_icon="icons/obj16/substatechart-16.png">
+                  label="Composite State"
+                  large_icon="icons/obj32/composite-state-32.png"
+                  path="/tools/stack/"
+                  small_icon="icons/obj16/composite-state-16.png">
+                   <expand
+                         force="true">
+                           <content>
+                           </content>
+                     </expand>
+            </entry>
+             <entry
+                  description="Creates a orthogonal state"
+                  id="org.yakindu.sct.ui.editor.OrthogonalState"
+                  kind="tool"
+                  label="Orthogonal State"
+                  large_icon="icons/obj32/orthogonal-state-32.png"
+                  path="/tools/stack/"
+                  small_icon="icons/obj16/orthogonal-state-16.png">
+                   <expand
+                         force="true">
+                           <content>
+                           </content>
+                     </expand>
+            </entry>
+              <entry
+                  description="Creates a sub submachine state"
+                  id="org.yakindu.sct.ui.editor.SubmachineState"
+                  kind="tool"
+                  label="Submachine State"
+                  large_icon="icons/obj32/submachine-state-32.png"
+                  path="/tools/stack/"
+                  small_icon="icons/obj16/submachine-state-16.png">
                    <expand
                          force="true">
                            <content>
@@ -294,7 +352,7 @@
                    id="org.yakindu.sct.ui.editor.Region"
                    kind="tool"
                    label="Region"
-                   large_icon="icons/obj16/region-32.png"
+                   large_icon="icons/obj32/region-32.png"
                    path="/tools/"
                    small_icon="icons/obj16/region-16.png">
              </entry>
@@ -303,7 +361,7 @@
                    id="org.yakindu.sct.ui.editor.Entry"
                    kind="tool"
                    label="Initial State"
-                   large_icon="icons/obj16/initial-state-32.png"
+                   large_icon="icons/obj32/initial-state-32.png"
                    path="/tools/"
                    small_icon="icons/obj16/initial-state-16.png">
              </entry>
@@ -312,7 +370,7 @@
                    id="org.yakindu.sct.ui.editor.ShallowHistory"
                    kind="tool"
                    label="Shallow History"
-                   large_icon="icons/obj16/shallow-history-32.png"
+                   large_icon="icons/obj32/shallow-history-32.png"
                    path="/tools/"
                    small_icon="icons/obj16/shallow-history-16.png">
              </entry>
@@ -321,7 +379,7 @@
                    id="org.yakindu.sct.ui.editor.DeepHistory"
                    kind="tool"
                    label="Deep History"
-                   large_icon="icons/obj16/deep-history-32.png"
+                   large_icon="icons/obj32/deep-history-32.png"
                    path="/tools/"
                    small_icon="icons/obj16/deep-history-16.png">
              </entry>
@@ -330,7 +388,7 @@
                    id="org.yakindu.sct.ui.editor.FinalState"
                    kind="tool"
                    label="Final State"
-                   large_icon="icons/obj16/final-state-32.png"
+                   large_icon="icons/obj32/final-state-32.png"
                    path="/tools/"
                    small_icon="icons/obj16/final-state-16.png">
              </entry>
@@ -339,7 +397,7 @@
                    id="org.yakindu.sct.ui.editor.Exit"
                    kind="tool"
                    label="Exit Point"
-                   large_icon="icons/obj16/exit-point-32.png"
+                   large_icon="icons/obj32/exit-point-32.png"
                    path="/tools/"
                    small_icon="icons/obj16/exit-point-16.png">
              </entry>
@@ -348,7 +406,7 @@
                    id="org.yakindu.sct.ui.editor.Choice"
                    kind="tool"
                    label="Choice"
-                   large_icon="icons/obj16/choice-32.png"
+                   large_icon="icons/obj32/choice-32.png"
                    path="/tools/"
                    small_icon="icons/obj16/choice-16.png">
              </entry>
@@ -357,7 +415,7 @@
                    id="org.yakindu.sct.ui.editor.Junction"
                    kind="tool"
                    label="Junction"
-                   large_icon="icons/obj16/junction-32.png"
+                   large_icon="icons/obj32/junction-32.png"
                    path="/tools/"
                    small_icon="icons/obj16/junction-16.png">
              </entry>
@@ -366,9 +424,9 @@
                    id="org.yakindu.sct.ui.editor.Synchronization"
                    kind="tool"
                    label="Synchronization"
-                   large_icon="icons/obj16/synchronization_16x16.png"
+                   large_icon="icons/obj16/synchronization-16.png"
                    path="/tools/"
-                   small_icon="icons/obj16/synchronization_16x16.png">
+                   small_icon="icons/obj32/synchronization-32.png">
              </entry>
          </contribution>
          <Priority
@@ -415,9 +473,8 @@
          <propertySection
             id="property.section.domain.state" 
             tab="property.tab.domain"
-            class="org.yakindu.sct.ui.editor.propertysheets.StatePropertySection">
-            <input type="org.yakindu.sct.ui.editor.editparts.StateEditPart"/>
-            <input type="org.yakindu.sct.ui.editor.editparts.StateNameEditPart"/>
+            class="org.yakindu.sct.ui.editor.propertysheets.StatePropertySection"
+            filter="org.yakindu.sct.ui.editor.StatePropertySectionFilter">
          </propertySection>
         <!-- Statechart model section -->         
          <propertySection
@@ -429,10 +486,11 @@
          </propertySection>
          <!-- Subchart model section -->
           <propertySection
-            id="property.section.domain.subchart" 
+            id="property.section.domain.submachine" 
             tab="property.tab.domain"
-            class="org.yakindu.sct.ui.editor.propertysheets.SubchartStatePropertySection">
-            <input type="org.yakindu.sct.ui.editor.editparts.SubchartStateEditPart"/>
+            class="org.yakindu.sct.ui.editor.propertysheets.SubmachineStatePropertySection">
+            <input type="org.yakindu.sct.ui.editor.editparts.SubmachineStateNameEditPart"/>
+            <input type="org.yakindu.sct.ui.editor.editparts.SubmachineStateEditPart"/>
          </propertySection>
         <!-- Transition model section -->         
          <propertySection

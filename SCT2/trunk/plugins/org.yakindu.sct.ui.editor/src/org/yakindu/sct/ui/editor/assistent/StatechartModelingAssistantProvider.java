@@ -32,13 +32,14 @@ import org.yakindu.sct.ui.editor.editparts.StateEditPart;
 import org.yakindu.sct.ui.editor.editparts.StateFigureCompartmentEditPart;
 
 import com.google.common.collect.Lists;
+
 /**
  * 
  * @author muelder
  * 
  */
 public class StatechartModelingAssistantProvider extends
-		ModelingAssistantProvider{
+		ModelingAssistantProvider {
 
 	@Override
 	public List<IElementType> getTypesForPopupBar(IAdaptable host) {
@@ -48,7 +49,7 @@ public class StatechartModelingAssistantProvider extends
 		if (editPart instanceof RegionEditPart
 				|| editPart instanceof RegionCompartmentEditPart)
 			return Lists.newArrayList(ENTRY, STATE, FINALSTATE,
-					ENTRY,JUNCTION, CHOICE);
+					ENTRY, JUNCTION, CHOICE);
 
 		if (editPart instanceof StateEditPart
 				|| editPart instanceof StateFigureCompartmentEditPart)

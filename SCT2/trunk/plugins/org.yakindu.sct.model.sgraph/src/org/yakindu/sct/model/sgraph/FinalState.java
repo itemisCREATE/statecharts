@@ -21,7 +21,7 @@ package org.yakindu.sct.model.sgraph;
  * @model
  * @generated
  */
-public interface FinalState extends State {
+public interface FinalState extends AbstractState {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

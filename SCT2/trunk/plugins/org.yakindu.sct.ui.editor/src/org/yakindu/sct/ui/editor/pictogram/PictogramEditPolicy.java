@@ -186,17 +186,8 @@ public class PictogramEditPolicy extends AbstractEditPolicy {
 					.get(pictogram);
 			final boolean validContext = pictogram.getHandlerContextValidator()
 					.isValidContext(createExecutionEvent(null));
-			if (!validContext) {
-				if (pictogramContainerFigure.getChildren().contains(
-						pictogramFigure)) {
-					pictogramContainerFigure.remove(pictogramFigure);
-				}
-			} else {
-				if (!pictogramContainerFigure.getChildren().contains(
-						pictogramFigure)) {
-					pictogramContainerFigure.add(pictogramFigure);
-				}
-			}
+			pictogramFigure.setEnabled(validContext);
+			pictogramFigure.repaint();
 		}
 	}
 

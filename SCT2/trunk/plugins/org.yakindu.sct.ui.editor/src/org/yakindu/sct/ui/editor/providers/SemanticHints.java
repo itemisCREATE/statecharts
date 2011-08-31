@@ -29,11 +29,14 @@ public interface SemanticHints {
 	String TRANSITION = "Transition";
 	String TRANSITION_EXPRESSION = "TransitionExpression";
 
-	String STATE = "State";
 	String STATE_NAME = "StateName";
-	String STATE_FIGURE_COMPARTMENT = "StateFigureCompartment";
 	String STATE_TEXT_COMPARTMENT = "StateTextCompartment";
 	String STATE_TEXT_COMPARTMENT_EXPRESSION = "StateTextCompartmentExpression";
+
+	String STATE = "State";
+	String SUBMACHINE_STATE = "SubmachineState";
+	String SUBMACHINE_STATE_NAME = "SubmachineStateName";
+	String COMPOSITE_STATE_FIGURE_COMPARTMENT = "StateFigureCompartment";
 
 	String CHOICE = "Choice";
 
@@ -51,7 +54,7 @@ public interface SemanticHints {
 	String JOIN = "Join";
 
 	String JUNCTION = "Junction";
-	
+
 	String SYNCHRONIZATION = "Synchronization";
-	
+
 }

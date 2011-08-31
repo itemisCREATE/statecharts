@@ -13,6 +13,7 @@ package org.yakindu.sct.model.sgraph.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.yakindu.sct.model.sgraph.AbstractState;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
@@ -32,6 +33,7 @@ import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.SubmachineState;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
@@ -141,23 +143,12 @@ public class SGraphSwitch<T> extends Switch<T> {
 			case SGraphPackage.FINAL_STATE: {
 				FinalState finalState = (FinalState)theEObject;
 				T result = caseFinalState(finalState);
-				if (result == null) result = caseState(finalState);
+				if (result == null) result = caseAbstractState(finalState);
 				if (result == null) result = caseVertex(finalState);
 				if (result == null) result = caseExpressionElement(finalState);
 				if (result == null) result = caseReactiveElement(finalState);
 				if (result == null) result = caseScopedElement(finalState);
 				if (result == null) result = caseNamedElement(finalState);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case SGraphPackage.STATE: {
-				State state = (State)theEObject;
-				T result = caseState(state);
-				if (result == null) result = caseVertex(state);
-				if (result == null) result = caseExpressionElement(state);
-				if (result == null) result = caseReactiveElement(state);
-				if (result == null) result = caseScopedElement(state);
-				if (result == null) result = caseNamedElement(state);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -278,6 +269,41 @@ public class SGraphSwitch<T> extends Switch<T> {
 				if (result == null) result = casePseudostate(synchronization);
 				if (result == null) result = caseVertex(synchronization);
 				if (result == null) result = caseNamedElement(synchronization);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SGraphPackage.ABSTRACT_STATE: {
+				AbstractState abstractState = (AbstractState)theEObject;
+				T result = caseAbstractState(abstractState);
+				if (result == null) result = caseVertex(abstractState);
+				if (result == null) result = caseExpressionElement(abstractState);
+				if (result == null) result = caseReactiveElement(abstractState);
+				if (result == null) result = caseScopedElement(abstractState);
+				if (result == null) result = caseNamedElement(abstractState);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SGraphPackage.STATE: {
+				State state = (State)theEObject;
+				T result = caseState(state);
+				if (result == null) result = caseAbstractState(state);
+				if (result == null) result = caseVertex(state);
+				if (result == null) result = caseExpressionElement(state);
+				if (result == null) result = caseReactiveElement(state);
+				if (result == null) result = caseScopedElement(state);
+				if (result == null) result = caseNamedElement(state);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SGraphPackage.SUBMACHINE_STATE: {
+				SubmachineState submachineState = (SubmachineState)theEObject;
+				T result = caseSubmachineState(submachineState);
+				if (result == null) result = caseAbstractState(submachineState);
+				if (result == null) result = caseVertex(submachineState);
+				if (result == null) result = caseExpressionElement(submachineState);
+				if (result == null) result = caseReactiveElement(submachineState);
+				if (result == null) result = caseScopedElement(submachineState);
+				if (result == null) result = caseNamedElement(submachineState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -627,6 +653,36 @@ public class SGraphSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSynchronization(Synchronization object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract State</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract State</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractState(AbstractState object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Submachine State</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Submachine State</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSubmachineState(SubmachineState object) {
 		return null;
 	}
 

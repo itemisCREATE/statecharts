@@ -35,8 +35,6 @@ import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
@@ -45,10 +43,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.SubmachineState;
 
 import de.itemis.gmf.runtime.commons.properties.descriptors.AbstractPropertyDescriptor;
 
@@ -69,6 +66,9 @@ public class TextDialogPropertyDescriptor extends AbstractPropertyDescriptor {
 
 	@Override
 	protected Control createControl(Composite parent) {
+		
+		
+		
 		Composite composite = new Composite(parent, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(composite);
 		composite.setBackground(ColorConstants.white);
@@ -97,7 +97,7 @@ public class TextDialogPropertyDescriptor extends AbstractPropertyDescriptor {
 						if (statechart != null) {
 							executeSetCommand(new SetRequest(
 									eObject,
-									SGraphPackage.Literals.STATE__SUBSTATECHART,
+									SGraphPackage.Literals.SUBMACHINE_STATE__SUBSTATECHART,
 									statechart));
 							getControl().setText(string);
 						}
@@ -138,9 +138,9 @@ public class TextDialogPropertyDescriptor extends AbstractPropertyDescriptor {
 	@Override
 	public void bindToModel(EObject eObject) {
 		this.eObject = eObject;
-		State state = (State) eObject;
+		SubmachineState state = (SubmachineState) eObject;
 		Statechart substatechart = state.getSubstatechart();
-		//TODO: Handle unresolvable proxy
+		// TODO: Handle unresolvable proxy
 		if (substatechart != null && !substatechart.eIsProxy())
 			text.setText(substatechart.eResource().getURI().toString());
 

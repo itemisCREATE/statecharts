@@ -27,6 +27,7 @@ import org.yakindu.sct.ui.editor.factories.StateTextCompartmentViewFactory;
 import org.yakindu.sct.ui.editor.factories.StateViewFactory;
 import org.yakindu.sct.ui.editor.factories.StatechartDiagramViewFactory;
 import org.yakindu.sct.ui.editor.factories.StatechartTextFactory;
+import org.yakindu.sct.ui.editor.factories.SubmachineStateViewFactory;
 import org.yakindu.sct.ui.editor.factories.TransitionViewFactory;
 import org.yakindu.sct.ui.editor.utils.SemanticHintUtil;
 
@@ -52,10 +53,14 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider
 		factories.put(STATECHART_TEXT_EXPRESSION, ShapeViewFactory.class);
 		factories.put(REGION, RegionViewFactory.class);
 		factories.put(REGION_COMPARTMENT, ShapeViewFactory.class);
+
 		factories.put(STATE, StateViewFactory.class);
-		factories.put(STATE_FIGURE_COMPARTMENT, CompartmentViewFactory.class);
 		factories.put(STATE_TEXT_COMPARTMENT,
 				StateTextCompartmentViewFactory.class);
+		factories.put(COMPOSITE_STATE_FIGURE_COMPARTMENT,
+				CompartmentViewFactory.class);
+		factories.put(SUBMACHINE_STATE, SubmachineStateViewFactory.class);
+	
 		factories
 				.put(STATE_TEXT_COMPARTMENT_EXPRESSION, ShapeViewFactory.class);
 		factories.put(TRANSITION, TransitionViewFactory.class);
@@ -72,8 +77,9 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider
 
 	private Class<?> getClass(String semanticHint) {
 		Class<?> factory = factories.get(semanticHint);
-		if(factory == null){
-			throw new IllegalStateException("No factory found for semantic hint " + semanticHint);
+		if (factory == null) {
+			throw new IllegalStateException(
+					"No factory found for semantic hint " + semanticHint);
 		}
 		return factory;
 	}
