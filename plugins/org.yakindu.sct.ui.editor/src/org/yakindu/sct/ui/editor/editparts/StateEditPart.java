@@ -10,18 +10,14 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
@@ -30,27 +26,20 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.UnexecutableCommand;
 import org.eclipse.gef.requests.GroupRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CreationEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
-import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.Compartment;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.ui.editor.editor.figures.CompositeStateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
-import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
-import org.yakindu.sct.ui.editor.pictogram.PictogramEditPolicy;
-import org.yakindu.sct.ui.editor.pictogram.SubchartPictogram;
-import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 
 /**
  * The EditPart for the State.
@@ -61,7 +50,7 @@ import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
  * @author markus muehlbrandt
  * 
  */
-public class StateEditPart extends ShapeNodeEditPart implements
+public class StateEditPart extends AbstractStateEditPart implements
 		IPrimaryEditPart {
 
 	private EditPart figureCompartmentEditPart;
@@ -100,15 +89,8 @@ public class StateEditPart extends ShapeNodeEditPart implements
 	}
 
 	@Override
-	protected NodeFigure createNodeFigure() {
-		final NodeFigure figure = new DefaultSizeNodeFigure(
-				MapModeUtils.getDefaultSizeDimension(getMapMode()));
-		figure.setLayoutManager(new StackLayout());
-		figure.setMinimumSize(MapModeUtils
-				.getDefaultSizeDimension(getMapMode()));
-		StateFigure stateFigure = new StateFigure(getMapMode());
-		figure.add(stateFigure);
-		return figure;
+	public CompositeStateFigure createPrimaryShape() {
+		return new CompositeStateFigure(getMapMode());
 	}
 
 	@Override
@@ -125,8 +107,6 @@ public class StateEditPart extends ShapeNodeEditPart implements
 						return UnexecutableCommand.INSTANCE;
 					}
 				});
-		installEditPolicy(PictogramEditPolicy.ROLE, new PictogramEditPolicy(
-				Collections.singletonList(new SubchartPictogram())));
 
 	}
 
@@ -253,8 +233,8 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		return getPrimaryShape().getFigureCompartmentPane();
 	}
 
-	public StateFigure getPrimaryShape() {
-		return (StateFigure) getFigure().getChildren().get(0);
+	public CompositeStateFigure getPrimaryShape() {
+		return (CompositeStateFigure) getFigure().getChildren().get(0);
 	}
 
 	@Override
@@ -265,14 +245,6 @@ public class StateEditPart extends ShapeNodeEditPart implements
 			IFigure compartmentFigure = ((StateFigureCompartmentEditPart) childEditPart)
 					.getFigure();
 			pane.add(compartmentFigure);
-		} else if (childEditPart instanceof StateTextCompartmentEditPart) {
-			IFigure pane = getPrimaryShape().getTextCompartmentPane();
-			IFigure compartmentFigure = ((StateTextCompartmentEditPart) childEditPart)
-					.getFigure();
-			pane.add(compartmentFigure);
-		} else if (childEditPart instanceof StateNameEditPart) {
-			((StateNameEditPart) childEditPart).setLabel(getPrimaryShape()
-					.getNameFigure());
 		} else {
 			super.addChildVisual(childEditPart, index);
 		}
@@ -296,34 +268,4 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		removeListenerFilter("FigureCompartmentView");
 	}
 
-	@Override
-	protected void handleNotificationEvent(Notification notification) {
-		if (notification.getFeature() == NotationPackage.Literals.DRAWER_STYLE__COLLAPSED) {
-			refreshVisuals();
-		}
-		super.handleNotificationEvent(notification);
-	}
-
-	/**
-	 * Returns the default background color for states
-	 */
-	@Override
-	public Object getPreferredValue(EStructuralFeature feature) {
-		if (feature == NotationPackage.eINSTANCE.getLineStyle_LineColor()) {
-			return FigureUtilities
-					.RGBToInteger(StatechartColorConstants.STATE_LINE_COLOR
-							.getRGB());
-		} else if (feature == NotationPackage.eINSTANCE
-				.getFillStyle_FillColor()) {
-			return FigureUtilities
-					.RGBToInteger(StatechartColorConstants.STATE_BG_COLOR
-							.getRGB());
-		}
-		return super.getPreferredValue(feature);
-	}
-	
-	@Override
-	public State resolveSemanticElement() {
-		return (State) super.resolveSemanticElement();
-	}
 }

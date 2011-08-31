@@ -190,11 +190,6 @@ public class RegionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SGraphPackage.Literals.REGION__VERTICES,
-				 SGraphFactory.eINSTANCE.createState()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.REGION__VERTICES,
 				 SGraphFactory.eINSTANCE.createFinalState()));
 
 		newChildDescriptors.add
@@ -221,6 +216,16 @@ public class RegionItemProvider
 			(createChildParameter
 				(SGraphPackage.Literals.REGION__VERTICES,
 				 SGraphFactory.eINSTANCE.createSynchronization()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.REGION__VERTICES,
+				 SGraphFactory.eINSTANCE.createState()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.REGION__VERTICES,
+				 SGraphFactory.eINSTANCE.createSubmachineState()));
 	}
 
 }

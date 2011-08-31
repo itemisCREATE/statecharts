@@ -35,22 +35,7 @@
         lowerBound="1" eType="#//Vertex" eOpposite="#//Vertex/outgoingTransitions"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="#//State"/>
-  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Vertex #//ExpressionElement #//ReactiveElement #//ScopedElement">
-    <eAnnotations source="InjectMembers"/>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="NameIsNotEmpty"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subRegions" ordered="false"
-        upperBound="-1" eType="#//Region" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="substatechart" eType="#//Statechart"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="submachineState" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compositeState" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleState" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" volatile="true" transient="true"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="#//AbstractState"/>
   <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//Declaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="Junction" eSuperTypes="#//Pseudostate"/>
   <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true" eSuperTypes="#//Declaration"/>
@@ -101,4 +86,22 @@
         eType="#//Scope" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Synchronization" eSuperTypes="#//Pseudostate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractState" abstract="true" eSuperTypes="#//Vertex #//ExpressionElement #//ReactiveElement #//ScopedElement">
+    <eAnnotations source="InjectMembers"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="NameIsNotEmpty"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//AbstractState">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subRegions" ordered="false"
+        upperBound="-1" eType="#//Region" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orthogonal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubmachineState" eSuperTypes="#//AbstractState">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="SubStatechartExists"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="substatechart" eType="#//Statechart"/>
+  </eClassifiers>
 </ecore:EPackage>

@@ -29,6 +29,7 @@ import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.SubmachineState;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Variable;
@@ -173,54 +174,66 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 	}
 
 	@FunctionMethod("")
+	public Object build(RTRegion parent, SubmachineState state) {
+		throw new RuntimeException("Not yet implemented");
+	}
+
+	@FunctionMethod("")
 	public Object build(RTRegion parent, State state) {
 		RTState runtimeState = null;
-		
-		LocalReaction entryReaction = getReactionByTriggerEventType(state, EntryEvent.class);
-		LocalReaction exitReaction = getReactionByTriggerEventType(state, ExitEvent.class);
+
+		LocalReaction entryReaction = getReactionByTriggerEventType(state,
+				EntryEvent.class);
+		LocalReaction exitReaction = getReactionByTriggerEventType(state,
+				ExitEvent.class);
 
 		List<LocalReaction> localReactions = getLocalReactions(state);
-		if ( entryReaction != null ) localReactions.remove(entryReaction);
-		if ( exitReaction != null) localReactions.remove(exitReaction);
-		
+		if (entryReaction != null)
+			localReactions.remove(entryReaction);
+		if (exitReaction != null)
+			localReactions.remove(exitReaction);
 
-		//Build the transition action
-		RTAction entryAction = buildAction((RTStatechart) parent.getStatechart(),  entryReaction);
-		RTAction exitAction = buildAction((RTStatechart) parent.getStatechart(),  exitReaction);
-		
-		
+		// Build the transition action
+		RTAction entryAction = buildAction(
+				(RTStatechart) parent.getStatechart(), entryReaction);
+		RTAction exitAction = buildAction(
+				(RTStatechart) parent.getStatechart(), exitReaction);
+
 		if (state.getSubRegions().size() > 0) {
 			runtimeState = new RTCompoundState(parent.getId() + "."
-					+ state.getName(), state.getName(), parent, entryAction, exitAction);
+					+ state.getName(), state.getName(), parent, entryAction,
+					exitAction);
 			build(runtimeState, state.eContents());
 
 		} else {
 			runtimeState = new RTSimpleState(parent.getId() + "."
-					+ state.getName(), state.getName(), parent, entryAction, null, exitAction);
+					+ state.getName(), state.getName(), parent, entryAction,
+					null, exitAction);
 		}
-		
+
 		for (LocalReaction reaction : localReactions) {
-			runtimeState.addLocalReaction(buildReaction((RTStatechart)parent.getStatechart(), reaction));
+			runtimeState.addLocalReaction(buildReaction(
+					(RTStatechart) parent.getStatechart(), reaction));
 		}
-		
+
 		((RTStatechart) parent.getStatechart())
 				.defineAlias(state, runtimeState);
 
 		return runtimeState;
 	}
 
-	
-	private RTReaction buildReaction(RTStatechart context, LocalReaction reaction) {
+	private RTReaction buildReaction(RTStatechart context,
+			LocalReaction reaction) {
 		Trigger trigger = reaction.getTrigger();
 		RTTrigger rtTrigger = buildTrigger(context, trigger);
-		
+
 		RTAction action = buildAction(context, reaction.getEffect());
 
 		return new RTReaction(rtTrigger, action);
 	}
 
-	
-	protected RTAction buildAction(ExecutionScope scope, LocalReaction entryReaction) {
+	protected RTAction buildAction(ExecutionScope scope,
+			LocalReaction entryReaction) {
 		if (entryReaction != null) {
 			Effect effect = entryReaction.getEffect();
 			RTStatement statement = (RTStatement) textBuilder.build(effect);
@@ -230,37 +243,38 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 		}
 		return null;
 	}
-	
-	
-	protected <T extends EObject> LocalReaction getReactionByTriggerEventType(State state, Class<T> triggerType) {
 
-		// TODO: derive localReactions from scope. 
+	protected <T extends EObject> LocalReaction getReactionByTriggerEventType(
+			State state, Class<T> triggerType) {
+
+		// TODO: derive localReactions from scope.
 		for (Scope declarationScope : state.getScopes()) {
 			EList<EObject> entryEvents = new BasicEList<EObject>(
-					EcoreUtil2.getAllContentsOfType(declarationScope, triggerType));
+					EcoreUtil2.getAllContentsOfType(declarationScope,
+							triggerType));
 
 			if (!entryEvents.isEmpty()) {
-				return (LocalReaction) entryEvents.get(0).eContainer().eContainer();
+				return (LocalReaction) entryEvents.get(0).eContainer()
+						.eContainer();
 			}
 		}
 		return null;
 	}
-	
+
 	protected List<LocalReaction> getLocalReactions(State state) {
-	
-		// TODO: derive localReactions from scope. 
+
+		// TODO: derive localReactions from scope.
 		for (Scope declarationScope : state.getScopes()) {
-			return EcoreUtil2.getAllContentsOfType(declarationScope, LocalReaction.class);
+			return EcoreUtil2.getAllContentsOfType(declarationScope,
+					LocalReaction.class);
 		}
 		return null;
 	}
-	
-	
+
 	protected LocalReaction getExitReaction(State state) {
 		return null;
 	}
 
-	
 	@FunctionMethod("")
 	public Object build(RTRegion runtimeRegion, FinalState finalState) {
 		RTFinalState state = new RTFinalState(runtimeRegion.getId()
@@ -282,7 +296,6 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 		return null;
 	}
 
-	
 	@FunctionMethod("")
 	public Object build(RTStatechart tParent, Transition transition) {
 		RTNode fromNode = (RTNode) tParent.getElementByAlias(transition
@@ -290,24 +303,26 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 		RTNode toNode = (RTNode) tParent.getElementByAlias(transition
 				.getTarget());
 
-		if ( fromNode == null || toNode == null ) return null;  // >>>>>>>>> exit here on false precondition
-		
+		if (fromNode == null || toNode == null)
+			return null; // >>>>>>>>> exit here on false precondition
+
 		Trigger trigger = transition.getTrigger();
 		RTTrigger rtTrigger = buildTrigger(tParent, trigger);
-		
+
 		RTAction action = buildAction(tParent, transition.getEffect());
 
-		String id= "t@" + transition.getSource().getOutgoingTransitions().indexOf(transition);
+		String id = "t@"
+				+ transition.getSource().getOutgoingTransitions()
+						.indexOf(transition);
 		RTReaction tTrans = new RTTransition(id, transition.getPriority(),
 				rtTrigger, action, fromNode, toNode);
 		tParent.defineAlias(transition, tTrans);
-		
+
 		return tTrans;
 	}
 
-	
 	protected RTAction buildAction(RTStatechart tParent, Effect effect) {
-		//Build the transition action
+		// Build the transition action
 		RTAction action = null;
 		RTStatement statement = (RTStatement) textBuilder.build(effect);
 		if (statement != null) {
@@ -316,16 +331,15 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 		return action;
 	}
 
-	
 	protected RTTrigger buildTrigger(RTStatechart tParent,
-			 
-			 Trigger trigger ) {
-		
+
+	Trigger trigger) {
+
 		RTTrigger rtTrigger = null;
 		RTTimeEvent timeTrigger = null;
 		Set<RTSignalEvent> signalTriggers = new HashSet<RTSignalEvent>();
 		RTGuard guard = null;
-		
+
 		// // TODO: Das muss hier raus:
 		if (trigger instanceof ReactionTrigger) {
 			EList<EventSpec> triggers = ((ReactionTrigger) trigger)
@@ -353,11 +367,12 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 				}
 				// TODO: TimeEvent
 			}
-			
-			
-			//Build the transition action
-			Expression guardExp = ((ReactionTrigger) trigger).getGuardExpression();
-			RTExpression rtGuardExp = (RTExpression) textBuilder.build(guardExp);
+
+			// Build the transition action
+			Expression guardExp = ((ReactionTrigger) trigger)
+					.getGuardExpression();
+			RTExpression rtGuardExp = (RTExpression) textBuilder
+					.build(guardExp);
 			if (rtGuardExp != null) {
 				guard = new GuardExpression(rtGuardExp, tParent);
 			}

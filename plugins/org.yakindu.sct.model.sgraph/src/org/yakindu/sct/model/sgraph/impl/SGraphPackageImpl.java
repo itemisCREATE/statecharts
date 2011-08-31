@@ -216,6 +216,20 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass abstractStateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass submachineStateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum entryKindEEnum = null;
 
 	/**
@@ -446,7 +460,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getState() {
 		if (stateEClass == null) {
-			stateEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(6);
+			stateEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(24);
 		}
 		return stateEClass;
 	}
@@ -465,35 +479,8 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getState_Substatechart() {
-        return (EReference)getState().getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getState_SubmachineState() {
-        return (EAttribute)getState().getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getState_CompositeState() {
-        return (EAttribute)getState().getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getState_SimpleState() {
-        return (EAttribute)getState().getEStructuralFeatures().get(4);
+	public EAttribute getState_Orthogonal() {
+        return (EAttribute)getState().getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -503,7 +490,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getVariable() {
 		if (variableEClass == null) {
-			variableEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(7);
+			variableEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(6);
 		}
 		return variableEClass;
 	}
@@ -515,7 +502,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getJunction() {
 		if (junctionEClass == null) {
-			junctionEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(8);
+			junctionEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(7);
 		}
 		return junctionEClass;
 	}
@@ -527,7 +514,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getEvent() {
 		if (eventEClass == null) {
-			eventEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(9);
+			eventEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(8);
 		}
 		return eventEClass;
 	}
@@ -539,7 +526,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getChoice() {
 		if (choiceEClass == null) {
-			choiceEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(10);
+			choiceEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(9);
 		}
 		return choiceEClass;
 	}
@@ -551,7 +538,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getStatechart() {
 		if (statechartEClass == null) {
-			statechartEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(11);
+			statechartEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(10);
 		}
 		return statechartEClass;
 	}
@@ -572,7 +559,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getEntry() {
 		if (entryEClass == null) {
-			entryEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(12);
+			entryEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(11);
 		}
 		return entryEClass;
 	}
@@ -593,7 +580,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getTrigger() {
 		if (triggerEClass == null) {
-			triggerEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(13);
+			triggerEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(12);
 		}
 		return triggerEClass;
 	}
@@ -605,7 +592,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getEffect() {
 		if (effectEClass == null) {
-			effectEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(14);
+			effectEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(13);
 		}
 		return effectEClass;
 	}
@@ -617,7 +604,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getExpressionElement() {
 		if (expressionElementEClass == null) {
-			expressionElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(15);
+			expressionElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(14);
 		}
 		return expressionElementEClass;
 	}
@@ -638,7 +625,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getDeclaration() {
 		if (declarationEClass == null) {
-			declarationEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(16);
+			declarationEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(15);
 		}
 		return declarationEClass;
 	}
@@ -650,7 +637,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getReaction() {
 		if (reactionEClass == null) {
-			reactionEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(17);
+			reactionEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(16);
 		}
 		return reactionEClass;
 	}
@@ -680,7 +667,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getReactiveElement() {
 		if (reactiveElementEClass == null) {
-			reactiveElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(19);
+			reactiveElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(18);
 		}
 		return reactiveElementEClass;
 	}
@@ -710,7 +697,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getExit() {
 		if (exitEClass == null) {
-			exitEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(20);
+			exitEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(19);
 		}
 		return exitEClass;
 	}
@@ -722,7 +709,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getScope() {
 		if (scopeEClass == null) {
-			scopeEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(21);
+			scopeEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(20);
 		}
 		return scopeEClass;
 	}
@@ -761,7 +748,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getScopedElement() {
 		if (scopedElementEClass == null) {
-			scopedElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(22);
+			scopedElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(21);
 		}
 		return scopedElementEClass;
 	}
@@ -782,7 +769,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getSynchronization() {
 		if (synchronizationEClass == null) {
-			synchronizationEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(23);
+			synchronizationEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(22);
 		}
 		return synchronizationEClass;
 	}
@@ -792,9 +779,42 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAbstractState() {
+		if (abstractStateEClass == null) {
+			abstractStateEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(23);
+		}
+		return abstractStateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSubmachineState() {
+		if (submachineStateEClass == null) {
+			submachineStateEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(25);
+		}
+		return submachineStateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSubmachineState_Substatechart() {
+        return (EReference)getSubmachineState().getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getEntryKind() {
 		if (entryKindEEnum == null) {
-			entryKindEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(18);
+			entryKindEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(17);
 		}
 		return entryKindEEnum;
 	}

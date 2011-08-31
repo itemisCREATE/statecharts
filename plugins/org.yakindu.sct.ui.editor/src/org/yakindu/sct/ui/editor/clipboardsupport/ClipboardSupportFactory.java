@@ -1,7 +1,6 @@
 package org.yakindu.sct.ui.editor.clipboardsupport;
 
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.gmf.runtime.emf.clipboard.core.IClipboardSupport;
 import org.eclipse.gmf.runtime.emf.clipboard.core.IClipboardSupportFactory;
 

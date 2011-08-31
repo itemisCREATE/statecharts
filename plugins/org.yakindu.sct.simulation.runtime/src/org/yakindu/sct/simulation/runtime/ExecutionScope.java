@@ -13,7 +13,6 @@ package org.yakindu.sct.simulation.runtime;
 import java.util.Collection;
 import java.util.List;
 
-import org.yakindu.sct.simulation.runtime.sgraph.RTEvent;
 import org.yakindu.sct.simulation.runtime.sgraph.RTSignalEvent;
 import org.yakindu.sct.simulation.runtime.stext.RTVariable;
 

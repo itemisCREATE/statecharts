@@ -18,6 +18,7 @@ import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Junction;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.SubmachineState;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.util.SGraphSwitch;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
@@ -50,6 +51,10 @@ public final class SemanticHintUtil implements SemanticHints {
 			public String caseState(State object) {
 				return STATE;
 			}
+
+			public String caseSubmachineState(SubmachineState object) {
+				return SUBMACHINE_STATE;
+			};
 
 			@Override
 			public String caseRegion(Region object) {

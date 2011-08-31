@@ -23,11 +23,12 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.FileEditorInput;
-import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.SubmachineState;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 
 /**
+ * Opens the selected Statechart for a SubmachineState in a new/existing editor.
  * 
  * @author andreas muelder - Initial contribution and API
  * 
@@ -35,7 +36,7 @@ import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 public class OpenSubstatechartHandler extends AbstractHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		State selectedState = getSelectedState(event);
+		SubmachineState selectedState = getSelectedSubmachineState(event);
 		if (selectedState == null)
 			return null;
 		Statechart substatechart = selectedState.getSubstatechart();
@@ -53,14 +54,15 @@ public class OpenSubstatechartHandler extends AbstractHandler {
 		return null;
 	}
 
-	public static State getSelectedState(final ExecutionEvent event) {
+	public static SubmachineState getSelectedSubmachineState(
+			final ExecutionEvent event) {
 		IGraphicalEditPart editPart = getSelectedEditPart(event);
 		if (editPart == null)
 			return null;
 		EObject semanticElement = editPart.resolveSemanticElement();
-		if (!(semanticElement instanceof State))
+		if (!(semanticElement instanceof SubmachineState))
 			return null;
-		return (State) semanticElement;
+		return (SubmachineState) semanticElement;
 	}
 
 	public static IGraphicalEditPart getSelectedEditPart(

@@ -3,10 +3,10 @@
 */
 package org.yakindu.sct.model.stext.parser.antlr;
 
-import com.google.inject.Inject;
-
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
+
+import com.google.inject.Inject;
 
 public class STextParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	

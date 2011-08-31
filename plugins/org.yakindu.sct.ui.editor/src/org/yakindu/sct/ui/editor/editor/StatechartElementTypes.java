@@ -26,6 +26,9 @@ public final class StatechartElementTypes extends AbstractElementTypeEnumerator 
 	public static final IElementType STATECHART = getElementType("org.yakindu.sct.ui.editor.Statechart");
 	public static final IElementType REGION = getElementType("org.yakindu.sct.ui.editor.Region");
 	public static final IElementType STATE = getElementType("org.yakindu.sct.ui.editor.State");
+	public static final IElementType COMPOSITE_STATE = getElementType("org.yakindu.sct.ui.editor.CompositeState");
+	public static final IElementType ORTHOGONAL_STATE = getElementType("org.yakindu.sct.ui.editor.OrthogonalState");
+	public static final IElementType SUBMACHINE_STATE = getElementType("org.yakindu.sct.ui.editor.SubmachineState");
 	public static final IElementType TRANSITION = getElementType("org.yakindu.sct.ui.editor.Transition");
 	public static final IElementType CHOICE = getElementType("org.yakindu.sct.ui.editor.Choice");
 	public static final IElementType JUNCTION = getElementType("org.yakindu.sct.ui.editor.Junction");

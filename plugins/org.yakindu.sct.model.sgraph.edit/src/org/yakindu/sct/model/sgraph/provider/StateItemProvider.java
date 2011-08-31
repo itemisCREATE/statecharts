@@ -37,7 +37,7 @@ import org.yakindu.sct.model.sgraph.State;
  * @generated
  */
 public class StateItemProvider
-	extends VertexItemProvider
+	extends AbstractStateItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -72,140 +72,25 @@ public class StateItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addExpressionPropertyDescriptor(object);
-			addReactionsPropertyDescriptor(object);
-			addSubstatechartPropertyDescriptor(object);
-			addSubmachineStatePropertyDescriptor(object);
-			addCompositeStatePropertyDescriptor(object);
-			addSimpleStatePropertyDescriptor(object);
+			addOrthogonalPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Expression feature.
+	 * This adds a property descriptor for the Orthogonal feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addExpressionPropertyDescriptor(Object object) {
+	protected void addOrthogonalPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ExpressionElement_expression_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ExpressionElement_expression_feature", "_UI_ExpressionElement_type"),
-				 SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Reactions feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addReactionsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ReactiveElement_reactions_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ReactiveElement_reactions_feature", "_UI_ReactiveElement_type"),
-				 SGraphPackage.Literals.REACTIVE_ELEMENT__REACTIONS,
-				 false,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Substatechart feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSubstatechartPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_State_substatechart_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_State_substatechart_feature", "_UI_State_type"),
-				 SGraphPackage.Literals.STATE__SUBSTATECHART,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Submachine State feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSubmachineStatePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_State_submachineState_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_State_submachineState_feature", "_UI_State_type"),
-				 SGraphPackage.Literals.STATE__SUBMACHINE_STATE,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Composite State feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addCompositeStatePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_State_compositeState_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_State_compositeState_feature", "_UI_State_type"),
-				 SGraphPackage.Literals.STATE__COMPOSITE_STATE,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Simple State feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSimpleStatePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_State_simpleState_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_State_simpleState_feature", "_UI_State_type"),
-				 SGraphPackage.Literals.STATE__SIMPLE_STATE,
+				 getString("_UI_State_orthogonal_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_State_orthogonal_feature", "_UI_State_type"),
+				 SGraphPackage.Literals.STATE__ORTHOGONAL,
 				 false,
 				 false,
 				 false,
@@ -226,8 +111,6 @@ public class StateItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(SGraphPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS);
-			childrenFeatures.add(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES);
 			childrenFeatures.add(SGraphPackage.Literals.STATE__SUB_REGIONS);
 		}
 		return childrenFeatures;
@@ -283,14 +166,9 @@ public class StateItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(State.class)) {
-			case SGraphPackage.STATE__EXPRESSION:
-			case SGraphPackage.STATE__SUBMACHINE_STATE:
-			case SGraphPackage.STATE__COMPOSITE_STATE:
-			case SGraphPackage.STATE__SIMPLE_STATE:
+			case SGraphPackage.STATE__ORTHOGONAL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case SGraphPackage.STATE__LOCAL_REACTIONS:
-			case SGraphPackage.STATE__SCOPES:
 			case SGraphPackage.STATE__SUB_REGIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -308,16 +186,6 @@ public class StateItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS,
-				 SGraphFactory.eINSTANCE.createTransition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-				 SGraphFactory.eINSTANCE.createScope()));
 
 		newChildDescriptors.add
 			(createChildParameter

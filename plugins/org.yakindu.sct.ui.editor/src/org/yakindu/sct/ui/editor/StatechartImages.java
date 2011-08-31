@@ -10,9 +10,9 @@ import org.eclipse.swt.graphics.Image;
  */
 public enum StatechartImages {
 
-	SUB_STATECHART("icons/obj16/substatechart-16.png"),
+	SUB_STATECHART("icons/obj16/submachine-state-16.png"),
 
-	STATECHART_RESOURCE("icons/obj16/StatemachineDiagramFile.png");
+	LOGO("icons/obj16/logo-16.png");
 	
 
 	private final String path;

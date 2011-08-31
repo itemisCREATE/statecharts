@@ -32,7 +32,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
  * @generated
  */
 public class FinalStateItemProvider
-	extends StateItemProvider
+	extends AbstractStateItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,

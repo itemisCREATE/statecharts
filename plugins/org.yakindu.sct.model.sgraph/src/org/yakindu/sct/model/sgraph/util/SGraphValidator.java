@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
+import org.yakindu.sct.model.sgraph.AbstractState;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
@@ -38,6 +39,7 @@ import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.SubmachineState;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
@@ -60,9 +62,8 @@ public class SGraphValidator extends EObjectValidator {
 	public static final String ISSUE_INITIAL_ENTRY_WITH_IN_TRANS = "Initial entry should have no incoming transition.";
 	public static final String ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS = "Initial entry should have a single outgoing transition";
 	public final static String ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS = "Entries must not have more than one outgoing transition";
-	public static final String ISSUE_OUTGOING_TRANSITION_WITHOUT_TARGET = "!! Vertex contains outgoing transitions without target !!";
+	public static final String ISSUE_SUBMACHINESTATE_WITHOUT_SUBMACHINE = "Selected Submachine can not be resolved!";
 
-	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -101,9 +102,6 @@ public class SGraphValidator extends EObjectValidator {
 	 */
 	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
 
-	
-	
-	
 	/**
 	 * Creates an instance of the switch.
 	 * <!-- begin-user-doc --> <!--
@@ -146,8 +144,6 @@ public class SGraphValidator extends EObjectValidator {
 				return validateTransition((Transition)value, diagnostics, context);
 			case SGraphPackage.FINAL_STATE:
 				return validateFinalState((FinalState)value, diagnostics, context);
-			case SGraphPackage.STATE:
-				return validateState((State)value, diagnostics, context);
 			case SGraphPackage.VARIABLE:
 				return validateVariable((Variable)value, diagnostics, context);
 			case SGraphPackage.JUNCTION:
@@ -180,6 +176,12 @@ public class SGraphValidator extends EObjectValidator {
 				return validateScopedElement((ScopedElement)value, diagnostics, context);
 			case SGraphPackage.SYNCHRONIZATION:
 				return validateSynchronization((Synchronization)value, diagnostics, context);
+			case SGraphPackage.ABSTRACT_STATE:
+				return validateAbstractState((AbstractState)value, diagnostics, context);
+			case SGraphPackage.STATE:
+				return validateState((State)value, diagnostics, context);
+			case SGraphPackage.SUBMACHINE_STATE:
+				return validateSubmachineState((SubmachineState)value, diagnostics, context);
 			case SGraphPackage.ENTRY_KIND:
 				return validateEntryKind((EntryKind)value, diagnostics, context);
 			default:
@@ -235,15 +237,18 @@ public class SGraphValidator extends EObjectValidator {
 	 */
 	public boolean validateVertex_IncomingTransitionCount(Vertex vertex,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		
-		if (vertex.getIncomingTransitions().size() == 0 && !(vertex instanceof Entry)) {
+
+		if (vertex.getIncomingTransitions().size() == 0
+				&& !(vertex instanceof Entry)) {
 			return error(vertex, diagnostics, ISSUE_NODE_NOT_REACHABLE);
 		}
 
-		if (vertex.getIncomingTransitions().size() > 0 && vertex instanceof Entry && ((Entry)vertex).getKind().equals(EntryKind.INITIAL)) {
-			return warning(vertex, diagnostics, ISSUE_INITIAL_ENTRY_WITH_IN_TRANS);
+		if (vertex.getIncomingTransitions().size() > 0
+				&& vertex instanceof Entry
+				&& ((Entry) vertex).getKind().equals(EntryKind.INITIAL)) {
+			return warning(vertex, diagnostics,
+					ISSUE_INITIAL_ENTRY_WITH_IN_TRANS);
 		}
-		
 
 		return true;
 	}
@@ -257,28 +262,27 @@ public class SGraphValidator extends EObjectValidator {
 	public boolean validateVertex_OutgoingTransitionCount(Vertex vertex,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 
-		
-		for (Transition tran : vertex.getOutgoingTransitions()) {
-			if (tran.getTarget() == null) warning(vertex, diagnostics, ISSUE_OUTGOING_TRANSITION_WITHOUT_TARGET);
+		if ((vertex.getOutgoingTransitions().size() > 0)
+				&& (vertex instanceof FinalState)) {
+			return warning(vertex, diagnostics,
+					ISSUE_FINAL_STATE_OUTGOING_TRANSITION);
 		}
-		
-		if ((vertex.getOutgoingTransitions().size() > 0) && (vertex instanceof FinalState)) {
-			return warning(vertex, diagnostics, ISSUE_FINAL_STATE_OUTGOING_TRANSITION);
+
+		if (vertex.getOutgoingTransitions().size() == 0
+				&& vertex instanceof Entry
+				&& ((Entry) vertex).getKind().equals(EntryKind.INITIAL)) {
+			return warning(vertex, diagnostics,
+					ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS);
 		}
-		
-		if (vertex.getOutgoingTransitions().size() == 0 && vertex instanceof Entry && ((Entry)vertex).getKind().equals(EntryKind.INITIAL)) {
-			return warning(vertex, diagnostics, ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS);
-		} 
 
-		if (vertex.getOutgoingTransitions().size() > 1 && vertex instanceof Entry) {
-			return error(vertex, diagnostics, ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
-		} 
-
+		if (vertex.getOutgoingTransitions().size() > 1
+				&& vertex instanceof Entry) {
+			return error(vertex, diagnostics,
+					ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
+		}
 
 		return true;
 	}
-
-
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -317,22 +321,22 @@ public class SGraphValidator extends EObjectValidator {
 	public boolean validateRegion_ExactlyOneInitialState(Region region,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 
-//		int entryCount = 0;
-//		EList<Vertex> vertices = region.getVertices();
-//		for (Vertex vertex : vertices) {
-//			if (vertex instanceof Entry) {
-//				entryCount++;
-//			}
-//		}
-//		if (entryCount != 1) {
-//			if (diagnostics != null) {
-//				diagnostics.add(new BasicDiagnostic(Diagnostic.WARNING,
-//						DIAGNOSTIC_SOURCE, 0,
-//						"A region must contain exactly one initial state!",
-//						new Object[] { region }));
-//			}
-//			return false;
-//		}
+		// int entryCount = 0;
+		// EList<Vertex> vertices = region.getVertices();
+		// for (Vertex vertex : vertices) {
+		// if (vertex instanceof Entry) {
+		// entryCount++;
+		// }
+		// }
+		// if (entryCount != 1) {
+		// if (diagnostics != null) {
+		// diagnostics.add(new BasicDiagnostic(Diagnostic.WARNING,
+		// DIAGNOSTIC_SOURCE, 0,
+		// "A region must contain exactly one initial state!",
+		// new Object[] { region }));
+		// }
+		// return false;
+		// }
 		return true;
 	}
 
@@ -362,7 +366,7 @@ public class SGraphValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(finalState, diagnostics, context);
 		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(finalState, diagnostics, context);
 		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateState_NameIsNotEmpty(finalState, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractState_NameIsNotEmpty(finalState, diagnostics, context);
 		return result;
 	}
 
@@ -383,7 +387,7 @@ public class SGraphValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(state, diagnostics, context);
 		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(state, diagnostics, context);
 		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(state, diagnostics, context);
-		if (result || diagnostics != null) result &= validateState_NameIsNotEmpty(state, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractState_NameIsNotEmpty(state, diagnostics, context);
 		return result;
 	}
 
@@ -395,7 +399,7 @@ public class SGraphValidator extends EObjectValidator {
 	 */
 	public boolean validateState_NameIsNotEmpty(State state,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if ( (state.getName() == null || state.getName().trim().length() == 0) 
+		if ((state.getName() == null || state.getName().trim().length() == 0)
 				&& !(state instanceof FinalState)) {
 			return error(state, diagnostics, ISSUE_STATE_WITHOUT_NAME);
 		}
@@ -583,11 +587,11 @@ public class SGraphValidator extends EObjectValidator {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSynchronization(Synchronization synchronization, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateSynchronization(Synchronization synchronization,
+			DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!validate_NoCircularContainment(synchronization, diagnostics, context)) return false;
 		boolean result = validate_EveryMultiplicityConforms(synchronization, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(synchronization, diagnostics, context);
@@ -600,6 +604,95 @@ public class SGraphValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(synchronization, diagnostics, context);
 		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(synchronization, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAbstractState(AbstractState abstractState, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(abstractState, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(abstractState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(abstractState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(abstractState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(abstractState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(abstractState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(abstractState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(abstractState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(abstractState, diagnostics, context);
+		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(abstractState, diagnostics, context);
+		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(abstractState, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractState_NameIsNotEmpty(abstractState, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the NameIsNotEmpty constraint of '<em>Abstract State</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAbstractState_NameIsNotEmpty(AbstractState abstractState, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "NameIsNotEmpty", getObjectLabel(abstractState, context) },
+						 new Object[] { abstractState },
+						 context));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSubmachineState(SubmachineState submachineState,
+			DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(submachineState, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(submachineState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(submachineState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(submachineState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(submachineState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(submachineState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(submachineState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(submachineState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(submachineState, diagnostics, context);
+		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(submachineState, diagnostics, context);
+		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(submachineState, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractState_NameIsNotEmpty(submachineState, diagnostics, context);
+		if (result || diagnostics != null) result &= validateSubmachineState_SubStatechartExists(submachineState, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the SubStatechartExists constraint of '
+	 * <em>Submachine State</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public boolean validateSubmachineState_SubStatechartExists(
+			SubmachineState submachineState, DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		if ((submachineState.getSubstatechart() == null || submachineState
+				.getSubstatechart().eIsProxy())) {
+			return error(submachineState, diagnostics,
+					ISSUE_SUBMACHINESTATE_WITHOUT_SUBMACHINE);
+		}
+		return true;
+
 	}
 
 	/**
@@ -623,34 +716,23 @@ public class SGraphValidator extends EObjectValidator {
 		// Ensure that you remove @generated or mark it @generated NOT
 		return super.getResourceLocator();
 	}
-	
-	
-	protected boolean warning(Vertex vertex, DiagnosticChain diagnostics, String messagen) {
+
+	protected boolean warning(Vertex vertex, DiagnosticChain diagnostics,
+			String messagen) {
 		if (diagnostics != null) {
-			diagnostics
-					.add(new BasicDiagnostic(
-							Diagnostic.WARNING,
-							DIAGNOSTIC_SOURCE,
-							0,
-							messagen,
-							new Object[] { vertex }));
+			diagnostics.add(new BasicDiagnostic(Diagnostic.WARNING,
+					DIAGNOSTIC_SOURCE, 0, messagen, new Object[] { vertex }));
 		}
 		return false;
 	}
 
-	
-	protected boolean error(Vertex vertex, DiagnosticChain diagnostics, String messagen) {
+	protected boolean error(Vertex vertex, DiagnosticChain diagnostics,
+			String messagen) {
 		if (diagnostics != null) {
-			diagnostics
-					.add(new BasicDiagnostic(
-							Diagnostic.ERROR,
-							DIAGNOSTIC_SOURCE,
-							0,
-							messagen,
-							new Object[] { vertex }));
+			diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR,
+					DIAGNOSTIC_SOURCE, 0, messagen, new Object[] { vertex }));
 		}
 		return false;
 	}
-
 
 } // StatechartValidator

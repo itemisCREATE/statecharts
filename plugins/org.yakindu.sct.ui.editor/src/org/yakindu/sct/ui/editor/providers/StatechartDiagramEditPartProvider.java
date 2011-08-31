@@ -36,6 +36,8 @@ import org.yakindu.sct.ui.editor.editparts.StatechartDiagramEditPart;
 import org.yakindu.sct.ui.editor.editparts.StatechartNameEditPart;
 import org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart;
 import org.yakindu.sct.ui.editor.editparts.StatechartTextExpressionEditPart;
+import org.yakindu.sct.ui.editor.editparts.SubmachineStateEditPart;
+import org.yakindu.sct.ui.editor.editparts.SubmachineStateNameEditPart;
 import org.yakindu.sct.ui.editor.editparts.SynchronizationEditPart;
 import org.yakindu.sct.ui.editor.editparts.TransitionEditPart;
 import org.yakindu.sct.ui.editor.editparts.TransitionExpressionEditPart;
@@ -69,17 +71,21 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
 		editParts.put(SHALLOWHISTORY, EntryEditPart.class);
 		editParts.put(DEEPHISTORY, EntryEditPart.class);
 		editParts.put(JUNCTION, JunctionEditPart.class);
+		
 		editParts.put(REGION_COMPARTMENT, RegionCompartmentEditPart.class);
 		editParts.put(REGION, RegionEditPart.class);
 		editParts.put(REGION_NAME, RegionNameEditPart.class);
-		editParts.put(STATE, StateEditPart.class);
-		editParts.put(STATE_FIGURE_COMPARTMENT,
-				StateFigureCompartmentEditPart.class);
+		
 		editParts.put(STATE_NAME, StateNameEditPart.class);
 		editParts.put(STATE_TEXT_COMPARTMENT,
 				StateTextCompartmentEditPart.class);
 		editParts.put(STATE_TEXT_COMPARTMENT_EXPRESSION,
 				StateTextCompartmentExpressionEditPart.class);
+		editParts.put(STATE, StateEditPart.class);
+		editParts.put(COMPOSITE_STATE_FIGURE_COMPARTMENT,
+				StateFigureCompartmentEditPart.class);
+		editParts.put(SUBMACHINE_STATE, SubmachineStateEditPart.class);
+		editParts.put(SUBMACHINE_STATE_NAME, SubmachineStateNameEditPart.class);
 		editParts.put(TRANSITION, TransitionEditPart.class);
 		editParts
 				.put(TRANSITION_EXPRESSION, TransitionExpressionEditPart.class);

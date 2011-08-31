@@ -28,6 +28,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.SubmachineState;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 
@@ -85,7 +86,6 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 			case SGraphPackage.REGION: return createRegion();
 			case SGraphPackage.TRANSITION: return createTransition();
 			case SGraphPackage.FINAL_STATE: return createFinalState();
-			case SGraphPackage.STATE: return createState();
 			case SGraphPackage.JUNCTION: return createJunction();
 			case SGraphPackage.CHOICE: return createChoice();
 			case SGraphPackage.STATECHART: return createStatechart();
@@ -93,6 +93,8 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 			case SGraphPackage.EXIT: return createExit();
 			case SGraphPackage.SCOPE: return createScope();
 			case SGraphPackage.SYNCHRONIZATION: return createSynchronization();
+			case SGraphPackage.STATE: return createState();
+			case SGraphPackage.SUBMACHINE_STATE: return createSubmachineState();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -163,16 +165,6 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public State createState() {
-		StateImpl state = new StateImpl();
-		return state;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Junction createJunction() {
 		JunctionImpl junction = new JunctionImpl();
 		return junction;
@@ -236,6 +228,26 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 	public Synchronization createSynchronization() {
 		SynchronizationImpl synchronization = new SynchronizationImpl();
 		return synchronization;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public State createState() {
+		StateImpl state = new StateImpl();
+		return state;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SubmachineState createSubmachineState() {
+		SubmachineStateImpl submachineState = new SubmachineStateImpl();
+		return submachineState;
 	}
 
 	/**

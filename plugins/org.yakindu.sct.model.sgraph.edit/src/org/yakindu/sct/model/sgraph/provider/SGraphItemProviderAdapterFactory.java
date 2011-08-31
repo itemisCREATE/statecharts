@@ -154,29 +154,6 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.State} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected StateItemProvider stateItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.sgraph.State}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createStateAdapter() {
-		if (stateItemProvider == null) {
-			stateItemProvider = new StateItemProvider(this);
-		}
-
-		return stateItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.Junction} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -338,6 +315,52 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.State} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StateItemProvider stateItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sgraph.State}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStateAdapter() {
+		if (stateItemProvider == null) {
+			stateItemProvider = new StateItemProvider(this);
+		}
+
+		return stateItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.SubmachineState} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SubmachineStateItemProvider submachineStateItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sgraph.SubmachineState}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSubmachineStateAdapter() {
+		if (submachineStateItemProvider == null) {
+			submachineStateItemProvider = new SubmachineStateItemProvider(this);
+		}
+
+		return submachineStateItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -439,7 +462,6 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 		if (regionItemProvider != null) regionItemProvider.dispose();
 		if (transitionItemProvider != null) transitionItemProvider.dispose();
 		if (finalStateItemProvider != null) finalStateItemProvider.dispose();
-		if (stateItemProvider != null) stateItemProvider.dispose();
 		if (junctionItemProvider != null) junctionItemProvider.dispose();
 		if (choiceItemProvider != null) choiceItemProvider.dispose();
 		if (statechartItemProvider != null) statechartItemProvider.dispose();
@@ -447,6 +469,8 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 		if (exitItemProvider != null) exitItemProvider.dispose();
 		if (scopeItemProvider != null) scopeItemProvider.dispose();
 		if (synchronizationItemProvider != null) synchronizationItemProvider.dispose();
+		if (stateItemProvider != null) stateItemProvider.dispose();
+		if (submachineStateItemProvider != null) submachineStateItemProvider.dispose();
 	}
 
 }

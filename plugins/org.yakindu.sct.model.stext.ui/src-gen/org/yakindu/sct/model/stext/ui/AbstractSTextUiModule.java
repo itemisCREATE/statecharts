@@ -4,8 +4,8 @@
  */
 package org.yakindu.sct.model.stext.ui;
 
-import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.DefaultUiModule;
 
 /**
  * Manual modifications go to {org.yakindu.sct.model.stext.ui.STextUiModule}
