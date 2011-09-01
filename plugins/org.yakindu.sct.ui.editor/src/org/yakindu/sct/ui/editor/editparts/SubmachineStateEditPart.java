@@ -27,7 +27,7 @@ public class SubmachineStateEditPart extends AbstractStateEditPart {
 	public SubmachineStateEditPart(View view) {
 		super(view);
 	}
-
+	
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();

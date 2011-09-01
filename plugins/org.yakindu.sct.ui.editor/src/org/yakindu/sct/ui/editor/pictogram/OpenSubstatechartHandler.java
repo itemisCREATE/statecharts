@@ -14,6 +14,7 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.jface.viewers.ISelection;
@@ -40,8 +41,9 @@ public class OpenSubstatechartHandler extends AbstractHandler {
 		if (selectedState == null)
 			return null;
 		Statechart substatechart = selectedState.getSubstatechart();
+		Resource eResource = substatechart.eResource();
 		FileEditorInput fileEditorInput = new FileEditorInput(
-				WorkspaceSynchronizer.getFile(substatechart.eResource()));
+				WorkspaceSynchronizer.getFile(eResource));
 
 		final IWorkbenchPage page = PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage();
