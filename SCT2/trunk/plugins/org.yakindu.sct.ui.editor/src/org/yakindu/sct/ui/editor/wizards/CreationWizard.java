@@ -36,6 +36,7 @@ import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCo
 import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
@@ -44,30 +45,42 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.part.FileEditorInput;
+import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.factories.FactoryUtils;
 
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
 public class CreationWizard extends Wizard implements INewWizard {
 
-	protected IStructuredSelection selection;
+	public static final String ID = "org.yakindu.sct.ui.editor.StatechartDiagramWizard";
+
+	protected IStructuredSelection selection = new StructuredSelection();
 
 	protected CreationWizardPage modelFilePage;
 
 	protected Resource diagram;
 
-	private final boolean openOnCreate = true;
+	private boolean openOnCreate = true;
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 		setWindowTitle("New YAKINDU Statechart");
 		setNeedsProgressMonitor(true);
+
 	}
 
 	@Override
 	public void addPages() {
-		modelFilePage = new CreationWizardPage("DiagramModelFile", getSelection(), "sct");
+		modelFilePage = new CreationWizardPage("DiagramModelFile",
+				getSelection(), "sct");
 		modelFilePage.setTitle("YAKINDU SCT Diagram");
 		modelFilePage.setDescription("Create a new YAKINDU SCT Diagram File");
+		modelFilePage.setImageDescriptor(StatechartImages.LOGO
+				.imageDescriptor());
 		addPage(modelFilePage);
 	}
 
@@ -76,8 +89,10 @@ public class CreationWizard extends Wizard implements INewWizard {
 		IRunnableWithProgress op = new WorkspaceModifyOperation(null) {
 
 			@Override
-			protected void execute(IProgressMonitor monitor) throws CoreException, InterruptedException {
-				diagram = createDiagram(modelFilePage.getURI(), modelFilePage.getURI(), monitor);
+			protected void execute(IProgressMonitor monitor)
+					throws CoreException, InterruptedException {
+				diagram = createDiagram(modelFilePage.getURI(),
+						modelFilePage.getURI(), monitor);
 				if (isOpenOnCreate() && diagram != null) {
 					try {
 						openDiagram(diagram);
@@ -95,24 +110,33 @@ public class CreationWizard extends Wizard implements INewWizard {
 		return diagram != null;
 	}
 
-	public static boolean openDiagram(Resource diagram) throws PartInitException {
+	public static boolean openDiagram(Resource diagram)
+			throws PartInitException {
 		String path = diagram.getURI().toPlatformString(true);
-		IResource workspaceResource = ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(path));
+		IResource workspaceResource = ResourcesPlugin.getWorkspace().getRoot()
+				.findMember(new Path(path));
 		if (workspaceResource instanceof IFile) {
-			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-			return null != page.openEditor(new FileEditorInput((IFile) workspaceResource), StatechartDiagramEditor.ID);
+			IWorkbenchPage page = PlatformUI.getWorkbench()
+					.getActiveWorkbenchWindow().getActivePage();
+			return null != page.openEditor(new FileEditorInput(
+					(IFile) workspaceResource), StatechartDiagramEditor.ID);
 		}
 		return false;
 	}
 
-	public static Resource createDiagram(URI diagramURI, URI modelURI, IProgressMonitor progressMonitor) {
-		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
+	public static Resource createDiagram(URI diagramURI, URI modelURI,
+			IProgressMonitor progressMonitor) {
+		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE
+				.createEditingDomain();
 		progressMonitor.beginTask("Creating diagram file ...", 3);
-		final Resource resource = editingDomain.getResourceSet().createResource(modelURI);
-		AbstractTransactionalCommand command = new AbstractTransactionalCommand(editingDomain,
-				"Creating diagram file ...", Collections.EMPTY_LIST) {
+		final Resource resource = editingDomain.getResourceSet()
+				.createResource(modelURI);
+		AbstractTransactionalCommand command = new AbstractTransactionalCommand(
+				editingDomain, "Creating diagram file ...",
+				Collections.EMPTY_LIST) {
 			@Override
-			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
+			protected CommandResult doExecuteWithResult(
+					IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 
 				FactoryUtils.createStatechartModel(resource);
@@ -127,8 +151,8 @@ public class CreationWizard extends Wizard implements INewWizard {
 
 		};
 		try {
-			OperationHistoryFactory.getOperationHistory().execute(command, new SubProgressMonitor(progressMonitor, 1),
-					null);
+			OperationHistoryFactory.getOperationHistory().execute(command,
+					new SubProgressMonitor(progressMonitor, 1), null);
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
@@ -139,7 +163,8 @@ public class CreationWizard extends Wizard implements INewWizard {
 	public static Map<String, String> getSaveOptions() {
 		Map<String, String> saveOptions = new HashMap<String, String>();
 		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
-		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED,
+				Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 		return saveOptions;
 	}
 
@@ -164,6 +189,10 @@ public class CreationWizard extends Wizard implements INewWizard {
 
 	public boolean isOpenOnCreate() {
 		return openOnCreate;
+	}
+
+	public void setOpenOnCreate(boolean openOnCreate) {
+		this.openOnCreate = openOnCreate;
 	}
 
 }

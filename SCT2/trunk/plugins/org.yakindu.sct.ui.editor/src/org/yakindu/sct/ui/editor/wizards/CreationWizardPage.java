@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2010 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.ui.editor.wizards;
 
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -13,7 +23,8 @@ public class CreationWizardPage extends WizardNewFileCreationPage {
 
 	private final String fileExtension;
 
-	public CreationWizardPage(String pageName, IStructuredSelection selection, String fileExtension) {
+	public CreationWizardPage(String pageName, IStructuredSelection selection,
+			String fileExtension) {
 		super(pageName, selection);
 		this.fileExtension = fileExtension;
 	}
@@ -41,7 +52,8 @@ public class CreationWizardPage extends WizardNewFileCreationPage {
 	@Override
 	public void createControl(Composite parent) {
 		super.createControl(parent);
-		setFileName(getUniqueFileName(getContainerFullPath(), getFileName(), getExtension()));
+		setFileName(getUniqueFileName(getContainerFullPath(), getFileName(),
+				getExtension()));
 		setPageComplete(validatePage());
 	}
 
@@ -51,14 +63,16 @@ public class CreationWizardPage extends WizardNewFileCreationPage {
 			return false;
 		}
 		String extension = getExtension();
-		if (extension != null && !getFilePath().toString().endsWith("." + extension)) {
+		if (extension != null
+				&& !getFilePath().toString().endsWith("." + extension)) {
 			setErrorMessage(NLS.bind("file extension is not valid!", extension));
 			return false;
 		}
 		return true;
 	}
 
-	public static String getUniqueFileName(IPath containerFullPath, String fileName, String extension) {
+	public static String getUniqueFileName(IPath containerFullPath,
+			String fileName, String extension) {
 		if (containerFullPath == null) {
 			containerFullPath = new Path(""); //$NON-NLS-1$
 		}

@@ -300,11 +300,9 @@
                            </content>
                      </expand>
             </entry>
-            
             <entry
-                  kind="stack" id="stack" path="/tools/">
+                  kind="stack" id="stack" path="/tools/" >
             </entry>
-            
              <entry
                   description="Creates a composite state"
                   id="org.yakindu.sct.ui.editor.CompositeState"

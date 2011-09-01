@@ -10,6 +10,15 @@
  */
 package org.yakindu.sct.ui.editor.edithelper;
 
+import org.eclipse.gmf.runtime.common.core.command.ICommand;
+import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
+import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
+import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
+import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.swt.widgets.Shell;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
 
 /**
  * 
@@ -18,5 +27,21 @@ package org.yakindu.sct.ui.editor.edithelper;
  */
 public class SubmachineStateEditHelper extends VertexEditHelper {
 
-	// TODO: Open the dialog here
+	/**
+	 * Prompts the user to select the submachine resource
+	 */
+	@Override
+	protected ICommand getConfigureCommand(ConfigureRequest req) {
+		SelectSubmachineDialog dialog = new SelectSubmachineDialog(new Shell());
+		if (Dialog.OK == dialog.open()) {
+			Statechart selectedSubmachine = dialog.getSelectedSubmachine();
+			if (selectedSubmachine != null) {
+				return new SetValueCommand(new SetRequest(
+						req.getElementToConfigure(),
+						SGraphPackage.Literals.SUBMACHINE_STATE__SUBSTATECHART,
+						selectedSubmachine));
+			}
+		}
+		return null;
+	}
 }

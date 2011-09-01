@@ -12,13 +12,12 @@ package org.yakindu.sct.ui.editor.propertysheets;
 
 import java.util.List;
 
-import org.yakindu.sct.model.sgraph.SGraphPackage;
-
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
- *
+ * 
  */
 public class SubmachineStatePropertySection extends StatePropertySection {
 
@@ -26,11 +25,8 @@ public class SubmachineStatePropertySection extends StatePropertySection {
 	protected void createPropertyDescriptors(
 			List<IFormPropertyDescriptor> descriptors) {
 		super.createPropertyDescriptors(descriptors);
-
 		// Submachine reference
-		TextDialogPropertyDescriptor submachineDescriptor = new TextDialogPropertyDescriptor(
-				SGraphPackage.Literals.SUBMACHINE_STATE__SUBSTATECHART,
-				"Submachine:");
+		SubmachineSelectionDialogPropertyDescriptor submachineDescriptor = new SubmachineSelectionDialogPropertyDescriptor();
 		descriptors.add(submachineDescriptor);
 	}
 
