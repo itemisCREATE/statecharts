@@ -66,20 +66,24 @@ public class SGraphValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (c) 2011 committers of YAKINDU and others.\r\nAll rights reserved. This program and the accompanying materials\r\nare made available under the terms of the Eclipse Public License v1.0\r\nwhich accompanies this distribution, and is available at\r\nhttp://www.eclipse.org/legal/epl-v10.html\r\nContributors:\r\ncommitters of YAKINDU - initial API and implementation\r\n";
 
 	/**
-	 * The cached model package
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached model package <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static final SGraphValidator INSTANCE = new SGraphValidator();
 
 	/**
-	 * A constant for the {@link org.eclipse.emf.common.util.Diagnostic#getSource() source} of diagnostic {@link org.eclipse.emf.common.util.Diagnostic#getCode() codes} from this package.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * A constant for the
+	 * {@link org.eclipse.emf.common.util.Diagnostic#getSource() source} of
+	 * diagnostic {@link org.eclipse.emf.common.util.Diagnostic#getCode() codes}
+	 * from this package. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.eclipse.emf.common.util.Diagnostic#getSource()
 	 * @see org.eclipse.emf.common.util.Diagnostic#getCode()
 	 * @generated
@@ -87,25 +91,27 @@ public class SGraphValidator extends EObjectValidator {
 	public static final String DIAGNOSTIC_SOURCE = "org.yakindu.sct.model.sgraph";
 
 	/**
-	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
-	 * <!-- begin-user-doc --> <!--
+	 * A constant with a fixed name that can be used as the base value for
+	 * additional hand written constants. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 0;
 
 	/**
-	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
-	 * <!-- begin-user-doc
+	 * A constant with a fixed name that can be used as the base value for
+	 * additional hand written constants in a derived class. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
 
 	/**
-	 * Creates an instance of the switch.
-	 * <!-- begin-user-doc --> <!--
+	 * Creates an instance of the switch. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public SGraphValidator() {
@@ -113,119 +119,165 @@ public class SGraphValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Returns the package of this validator switch.
-	 * <!-- begin-user-doc -->
+	 * Returns the package of this validator switch. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EPackage getEPackage() {
-	  return SGraphPackage.eINSTANCE;
+		return SGraphPackage.eINSTANCE;
 	}
 
 	/**
-	 * Calls <code>validateXXX</code> for the corresponding classifier of the model.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Calls <code>validateXXX</code> for the corresponding classifier of the
+	 * model. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected boolean validate(int classifierID, Object value,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 		switch (classifierID) {
-			case SGraphPackage.PSEUDOSTATE:
-				return validatePseudostate((Pseudostate)value, diagnostics, context);
-			case SGraphPackage.VERTEX:
-				return validateVertex((Vertex)value, diagnostics, context);
-			case SGraphPackage.NAMED_ELEMENT:
-				return validateNamedElement((NamedElement)value, diagnostics, context);
-			case SGraphPackage.REGION:
-				return validateRegion((Region)value, diagnostics, context);
-			case SGraphPackage.TRANSITION:
-				return validateTransition((Transition)value, diagnostics, context);
-			case SGraphPackage.FINAL_STATE:
-				return validateFinalState((FinalState)value, diagnostics, context);
-			case SGraphPackage.VARIABLE:
-				return validateVariable((Variable)value, diagnostics, context);
-			case SGraphPackage.JUNCTION:
-				return validateJunction((Junction)value, diagnostics, context);
-			case SGraphPackage.EVENT:
-				return validateEvent((Event)value, diagnostics, context);
-			case SGraphPackage.CHOICE:
-				return validateChoice((Choice)value, diagnostics, context);
-			case SGraphPackage.STATECHART:
-				return validateStatechart((Statechart)value, diagnostics, context);
-			case SGraphPackage.ENTRY:
-				return validateEntry((Entry)value, diagnostics, context);
-			case SGraphPackage.TRIGGER:
-				return validateTrigger((Trigger)value, diagnostics, context);
-			case SGraphPackage.EFFECT:
-				return validateEffect((Effect)value, diagnostics, context);
-			case SGraphPackage.EXPRESSION_ELEMENT:
-				return validateExpressionElement((ExpressionElement)value, diagnostics, context);
-			case SGraphPackage.DECLARATION:
-				return validateDeclaration((Declaration)value, diagnostics, context);
-			case SGraphPackage.REACTION:
-				return validateReaction((Reaction)value, diagnostics, context);
-			case SGraphPackage.REACTIVE_ELEMENT:
-				return validateReactiveElement((ReactiveElement)value, diagnostics, context);
-			case SGraphPackage.EXIT:
-				return validateExit((Exit)value, diagnostics, context);
-			case SGraphPackage.SCOPE:
-				return validateScope((Scope)value, diagnostics, context);
-			case SGraphPackage.SCOPED_ELEMENT:
-				return validateScopedElement((ScopedElement)value, diagnostics, context);
-			case SGraphPackage.SYNCHRONIZATION:
-				return validateSynchronization((Synchronization)value, diagnostics, context);
-			case SGraphPackage.ABSTRACT_STATE:
-				return validateAbstractState((AbstractState)value, diagnostics, context);
-			case SGraphPackage.STATE:
-				return validateState((State)value, diagnostics, context);
-			case SGraphPackage.SUBMACHINE_STATE:
-				return validateSubmachineState((SubmachineState)value, diagnostics, context);
-			case SGraphPackage.ENTRY_KIND:
-				return validateEntryKind((EntryKind)value, diagnostics, context);
-			default:
-				return true;
+		case SGraphPackage.PSEUDOSTATE:
+			return validatePseudostate((Pseudostate) value, diagnostics,
+					context);
+		case SGraphPackage.VERTEX:
+			return validateVertex((Vertex) value, diagnostics, context);
+		case SGraphPackage.NAMED_ELEMENT:
+			return validateNamedElement((NamedElement) value, diagnostics,
+					context);
+		case SGraphPackage.REGION:
+			return validateRegion((Region) value, diagnostics, context);
+		case SGraphPackage.TRANSITION:
+			return validateTransition((Transition) value, diagnostics, context);
+		case SGraphPackage.FINAL_STATE:
+			return validateFinalState((FinalState) value, diagnostics, context);
+		case SGraphPackage.VARIABLE:
+			return validateVariable((Variable) value, diagnostics, context);
+		case SGraphPackage.JUNCTION:
+			return validateJunction((Junction) value, diagnostics, context);
+		case SGraphPackage.EVENT:
+			return validateEvent((Event) value, diagnostics, context);
+		case SGraphPackage.CHOICE:
+			return validateChoice((Choice) value, diagnostics, context);
+		case SGraphPackage.STATECHART:
+			return validateStatechart((Statechart) value, diagnostics, context);
+		case SGraphPackage.ENTRY:
+			return validateEntry((Entry) value, diagnostics, context);
+		case SGraphPackage.TRIGGER:
+			return validateTrigger((Trigger) value, diagnostics, context);
+		case SGraphPackage.EFFECT:
+			return validateEffect((Effect) value, diagnostics, context);
+		case SGraphPackage.EXPRESSION_ELEMENT:
+			return validateExpressionElement((ExpressionElement) value,
+					diagnostics, context);
+		case SGraphPackage.DECLARATION:
+			return validateDeclaration((Declaration) value, diagnostics,
+					context);
+		case SGraphPackage.REACTION:
+			return validateReaction((Reaction) value, diagnostics, context);
+		case SGraphPackage.REACTIVE_ELEMENT:
+			return validateReactiveElement((ReactiveElement) value,
+					diagnostics, context);
+		case SGraphPackage.EXIT:
+			return validateExit((Exit) value, diagnostics, context);
+		case SGraphPackage.SCOPE:
+			return validateScope((Scope) value, diagnostics, context);
+		case SGraphPackage.SCOPED_ELEMENT:
+			return validateScopedElement((ScopedElement) value, diagnostics,
+					context);
+		case SGraphPackage.SYNCHRONIZATION:
+			return validateSynchronization((Synchronization) value,
+					diagnostics, context);
+		case SGraphPackage.ABSTRACT_STATE:
+			return validateAbstractState((AbstractState) value, diagnostics,
+					context);
+		case SGraphPackage.STATE:
+			return validateState((State) value, diagnostics, context);
+		case SGraphPackage.SUBMACHINE_STATE:
+			return validateSubmachineState((SubmachineState) value,
+					diagnostics, context);
+		case SGraphPackage.ENTRY_KIND:
+			return validateEntryKind((EntryKind) value, diagnostics, context);
+		default:
+			return true;
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validatePseudostate(Pseudostate pseudostate,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(pseudostate, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(pseudostate, diagnostics, context);
+		if (!validate_NoCircularContainment(pseudostate, diagnostics, context))
+			return false;
+		boolean result = validate_EveryMultiplicityConforms(pseudostate,
+				diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryDataValueConforms(pseudostate, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryReferenceIsContained(pseudostate,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryBidirectionalReferenceIsPaired(pseudostate,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryProxyResolves(pseudostate, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_UniqueID(pseudostate, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryKeyUnique(pseudostate, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryMapEntryUnique(pseudostate, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validateVertex_IncomingTransitionCount(pseudostate,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_OutgoingTransitionCount(pseudostate,
+					diagnostics, context);
 		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateVertex(Vertex vertex, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(vertex, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(vertex, diagnostics, context);
+		if (!validate_NoCircularContainment(vertex, diagnostics, context))
+			return false;
+		boolean result = validate_EveryMultiplicityConforms(vertex,
+				diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryDataValueConforms(vertex, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryReferenceIsContained(vertex, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryBidirectionalReferenceIsPaired(vertex,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryProxyResolves(vertex, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_UniqueID(vertex, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryKeyUnique(vertex, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryMapEntryUnique(vertex, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_IncomingTransitionCount(vertex,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_OutgoingTransitionCount(vertex,
+					diagnostics, context);
 		return result;
 	}
 
@@ -286,29 +338,46 @@ public class SGraphValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateNamedElement(NamedElement namedElement,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(namedElement, diagnostics, context);
+		return validate_EveryDefaultConstraint(namedElement, diagnostics,
+				context);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateRegion(Region region, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(region, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(region, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(region, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(region, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(region, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(region, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(region, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(region, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(region, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRegion_ExactlyOneInitialState(region, diagnostics, context);
+		if (!validate_NoCircularContainment(region, diagnostics, context))
+			return false;
+		boolean result = validate_EveryMultiplicityConforms(region,
+				diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryDataValueConforms(region, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryReferenceIsContained(region, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryBidirectionalReferenceIsPaired(region,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryProxyResolves(region, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_UniqueID(region, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryKeyUnique(region, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryMapEntryUnique(region, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateRegion_ExactlyOneInitialState(region,
+					diagnostics, context);
 		return result;
 	}
 
@@ -342,6 +411,7 @@ public class SGraphValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateTransition(Transition transition,
@@ -351,43 +421,83 @@ public class SGraphValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateFinalState(FinalState finalState,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(finalState, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAbstractState_NameIsNotEmpty(finalState, diagnostics, context);
+		if (!validate_NoCircularContainment(finalState, diagnostics, context))
+			return false;
+		boolean result = validate_EveryMultiplicityConforms(finalState,
+				diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryDataValueConforms(finalState, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryReferenceIsContained(finalState,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryBidirectionalReferenceIsPaired(finalState,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryProxyResolves(finalState, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_UniqueID(finalState, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryKeyUnique(finalState, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryMapEntryUnique(finalState, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validateVertex_IncomingTransitionCount(finalState,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_OutgoingTransitionCount(finalState,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateAbstractState_NameIsNotEmpty(finalState,
+					diagnostics, context);
 		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateState(State state, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(state, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(state, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(state, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(state, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(state, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(state, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(state, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(state, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(state, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(state, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(state, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAbstractState_NameIsNotEmpty(state, diagnostics, context);
+		if (!validate_NoCircularContainment(state, diagnostics, context))
+			return false;
+		boolean result = validate_EveryMultiplicityConforms(state, diagnostics,
+				context);
+		if (result || diagnostics != null)
+			result &= validate_EveryDataValueConforms(state, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryReferenceIsContained(state, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryBidirectionalReferenceIsPaired(state,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryProxyResolves(state, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_UniqueID(state, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryKeyUnique(state, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryMapEntryUnique(state, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_IncomingTransitionCount(state,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_OutgoingTransitionCount(state,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateAbstractState_NameIsNotEmpty(state, diagnostics,
+					context);
 		return result;
 	}
 
@@ -408,6 +518,7 @@ public class SGraphValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateVariable(Variable variable,
@@ -417,26 +528,46 @@ public class SGraphValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateJunction(Junction junction,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(junction, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(junction, diagnostics, context);
+		if (!validate_NoCircularContainment(junction, diagnostics, context))
+			return false;
+		boolean result = validate_EveryMultiplicityConforms(junction,
+				diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryDataValueConforms(junction, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryReferenceIsContained(junction, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryBidirectionalReferenceIsPaired(junction,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryProxyResolves(junction, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_UniqueID(junction, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryKeyUnique(junction, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryMapEntryUnique(junction, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validateVertex_IncomingTransitionCount(junction,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_OutgoingTransitionCount(junction,
+					diagnostics, context);
 		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateEvent(Event event, DiagnosticChain diagnostics,
@@ -446,26 +577,44 @@ public class SGraphValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateChoice(Choice choice, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(choice, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(choice, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(choice, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(choice, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(choice, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(choice, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(choice, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(choice, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(choice, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(choice, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(choice, diagnostics, context);
+		if (!validate_NoCircularContainment(choice, diagnostics, context))
+			return false;
+		boolean result = validate_EveryMultiplicityConforms(choice,
+				diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryDataValueConforms(choice, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryReferenceIsContained(choice, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryBidirectionalReferenceIsPaired(choice,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryProxyResolves(choice, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_UniqueID(choice, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryKeyUnique(choice, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryMapEntryUnique(choice, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_IncomingTransitionCount(choice,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_OutgoingTransitionCount(choice,
+					diagnostics, context);
 		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateStatechart(Statechart statechart,
@@ -475,26 +624,44 @@ public class SGraphValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateEntry(Entry entry, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(entry, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(entry, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(entry, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(entry, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(entry, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(entry, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(entry, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(entry, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(entry, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(entry, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(entry, diagnostics, context);
+		if (!validate_NoCircularContainment(entry, diagnostics, context))
+			return false;
+		boolean result = validate_EveryMultiplicityConforms(entry, diagnostics,
+				context);
+		if (result || diagnostics != null)
+			result &= validate_EveryDataValueConforms(entry, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryReferenceIsContained(entry, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryBidirectionalReferenceIsPaired(entry,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryProxyResolves(entry, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_UniqueID(entry, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryKeyUnique(entry, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryMapEntryUnique(entry, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_IncomingTransitionCount(entry,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_OutgoingTransitionCount(entry,
+					diagnostics, context);
 		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateTrigger(Trigger trigger,
@@ -504,6 +671,7 @@ public class SGraphValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateEffect(Effect effect, DiagnosticChain diagnostics,
@@ -513,25 +681,30 @@ public class SGraphValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateExpressionElement(
 			ExpressionElement expressionElement, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(expressionElement, diagnostics, context);
+		return validate_EveryDefaultConstraint(expressionElement, diagnostics,
+				context);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateDeclaration(Declaration declaration,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(declaration, diagnostics, context);
+		return validate_EveryDefaultConstraint(declaration, diagnostics,
+				context);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateReaction(Reaction reaction,
@@ -541,35 +714,55 @@ public class SGraphValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateReactiveElement(ReactiveElement reactiveElement,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(reactiveElement, diagnostics, context);
+		return validate_EveryDefaultConstraint(reactiveElement, diagnostics,
+				context);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateExit(Exit exit, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(exit, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(exit, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(exit, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(exit, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(exit, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(exit, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(exit, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(exit, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(exit, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(exit, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(exit, diagnostics, context);
+		if (!validate_NoCircularContainment(exit, diagnostics, context))
+			return false;
+		boolean result = validate_EveryMultiplicityConforms(exit, diagnostics,
+				context);
+		if (result || diagnostics != null)
+			result &= validate_EveryDataValueConforms(exit, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryReferenceIsContained(exit, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryBidirectionalReferenceIsPaired(exit,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryProxyResolves(exit, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_UniqueID(exit, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryKeyUnique(exit, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryMapEntryUnique(exit, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_IncomingTransitionCount(exit, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validateVertex_OutgoingTransitionCount(exit, diagnostics,
+					context);
 		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateScope(Scope scope, DiagnosticChain diagnostics,
@@ -579,101 +772,159 @@ public class SGraphValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateScopedElement(ScopedElement scopedElement,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(scopedElement, diagnostics, context);
+		return validate_EveryDefaultConstraint(scopedElement, diagnostics,
+				context);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateSynchronization(Synchronization synchronization,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(synchronization, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(synchronization, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(synchronization, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(synchronization, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(synchronization, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(synchronization, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(synchronization, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(synchronization, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(synchronization, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(synchronization, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(synchronization, diagnostics, context);
+		if (!validate_NoCircularContainment(synchronization, diagnostics,
+				context))
+			return false;
+		boolean result = validate_EveryMultiplicityConforms(synchronization,
+				diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryDataValueConforms(synchronization,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryReferenceIsContained(synchronization,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryBidirectionalReferenceIsPaired(
+					synchronization, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryProxyResolves(synchronization, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_UniqueID(synchronization, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryKeyUnique(synchronization, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryMapEntryUnique(synchronization,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_IncomingTransitionCount(synchronization,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_OutgoingTransitionCount(synchronization,
+					diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public boolean validateAbstractState(AbstractState abstractState, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(abstractState, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAbstractState_NameIsNotEmpty(abstractState, diagnostics, context);
+	public boolean validateAbstractState(AbstractState abstractState,
+			DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(abstractState, diagnostics, context))
+			return false;
+		boolean result = validate_EveryMultiplicityConforms(abstractState,
+				diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryDataValueConforms(abstractState,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryReferenceIsContained(abstractState,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryBidirectionalReferenceIsPaired(
+					abstractState, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryProxyResolves(abstractState, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_UniqueID(abstractState, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryKeyUnique(abstractState, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryMapEntryUnique(abstractState, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validateVertex_IncomingTransitionCount(abstractState,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_OutgoingTransitionCount(abstractState,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateAbstractState_NameIsNotEmpty(abstractState,
+					diagnostics, context);
 		return result;
 	}
 
 	/**
 	 * Validates the NameIsNotEmpty constraint of '<em>Abstract State</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
 	 */
-	public boolean validateAbstractState_NameIsNotEmpty(AbstractState abstractState, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "NameIsNotEmpty", getObjectLabel(abstractState, context) },
-						 new Object[] { abstractState },
-						 context));
-			}
-			return false;
+	public boolean validateAbstractState_NameIsNotEmpty(
+			AbstractState state, DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		if ((state.getName() == null || state.getName().trim().length() == 0)
+				&& !(state instanceof FinalState)) {
+			return error(state, diagnostics, ISSUE_STATE_WITHOUT_NAME);
 		}
 		return true;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateSubmachineState(SubmachineState submachineState,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(submachineState, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAbstractState_NameIsNotEmpty(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateSubmachineState_SubStatechartExists(submachineState, diagnostics, context);
+		if (!validate_NoCircularContainment(submachineState, diagnostics,
+				context))
+			return false;
+		boolean result = validate_EveryMultiplicityConforms(submachineState,
+				diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryDataValueConforms(submachineState,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryReferenceIsContained(submachineState,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryBidirectionalReferenceIsPaired(
+					submachineState, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryProxyResolves(submachineState, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_UniqueID(submachineState, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryKeyUnique(submachineState, diagnostics,
+					context);
+		if (result || diagnostics != null)
+			result &= validate_EveryMapEntryUnique(submachineState,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_IncomingTransitionCount(submachineState,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateVertex_OutgoingTransitionCount(submachineState,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateAbstractState_NameIsNotEmpty(submachineState,
+					diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateSubmachineState_SubStatechartExists(
+					submachineState, diagnostics, context);
 		return result;
 	}
 
@@ -697,6 +948,7 @@ public class SGraphValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateEntryKind(EntryKind entryKind,
@@ -705,14 +957,16 @@ public class SGraphValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Returns the resource locator that will be used to fetch messages for this validator's diagnostics.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the resource locator that will be used to fetch messages for this
+	 * validator's diagnostics. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
 		// TODO
-		// Specialize this to return a resource locator for messages specific to this validator.
+		// Specialize this to return a resource locator for messages specific to
+		// this validator.
 		// Ensure that you remove @generated or mark it @generated NOT
 		return super.getResourceLocator();
 	}
