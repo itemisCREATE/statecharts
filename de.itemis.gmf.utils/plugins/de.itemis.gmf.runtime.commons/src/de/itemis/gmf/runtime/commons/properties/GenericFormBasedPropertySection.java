@@ -30,7 +30,7 @@ import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescrip
 /**
  * This is a generic base implementation with a 2 column layout for {@link Form}
  * based {@link ISection}. Clients can provide different
- * {@link IFormPropertyDescriptor}. 
+ * {@link IFormPropertyDescriptor}.
  * 
  * @author andreas muelder
  * 
@@ -57,7 +57,7 @@ public abstract class GenericFormBasedPropertySection extends
 	@Override
 	public void createControls(Composite parent,
 			TabbedPropertySheetPage aTabbedPropertySheetPage) {
-		
+
 		super.createControls(parent, aTabbedPropertySheetPage);
 		createPropertyDescriptors(descriptors);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(parent);
@@ -67,7 +67,7 @@ public abstract class GenericFormBasedPropertySection extends
 		Form form = toolkit.createForm(parent);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(form);
 
-		form.getBody().setLayout(createBodyLayout()); 
+		form.getBody().setLayout(createBodyLayout());
 
 		for (final IFormPropertyDescriptor descriptor : descriptors) {
 			// Create the label in the first column
@@ -78,15 +78,16 @@ public abstract class GenericFormBasedPropertySection extends
 			descriptor.createHelpColumn(form.getBody());
 		}
 	}
-	
+
 	@Override
-	public void refresh() {
+	public void aboutToBeShown() {
+		super.aboutToBeShown();
 		EObject eObject = getEObject();
 		for (IFormPropertyDescriptor descriptor : descriptors) {
 			descriptor.bindToModel(eObject);
 		}
 	}
-	
+
 	@Override
 	public void dispose() {
 		super.dispose();
