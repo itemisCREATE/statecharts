@@ -24,7 +24,7 @@ package org.yakindu.sct.model.sgraph;
  * </p>
  *
  * @see org.yakindu.sct.model.sgraph.SGraphPackage#getSubmachineState()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='SubStatechartExists'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='SubStatechartExists SubStatechartIsNotACycle'"
  * @generated
  */
 public interface SubmachineState extends AbstractState {
