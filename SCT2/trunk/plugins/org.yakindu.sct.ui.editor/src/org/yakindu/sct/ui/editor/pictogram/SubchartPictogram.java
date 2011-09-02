@@ -23,7 +23,7 @@ public class SubchartPictogram extends Pictogram {
 
 	public SubchartPictogram() {
 		super("Open Substatechart in new Editor",
-				StatechartImages.SUB_STATECHART.image(),
+				StatechartImages.SUB_STATECHART_PICTOGRAM.image(),
 				new OpenSubstatechartHandler(),
 				getHandlerExecutionContextValidator());
 	}
