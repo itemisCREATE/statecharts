@@ -58,7 +58,7 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 	private Label label;
 	private UpdateLabelAdapter updateLabelAdapter;
 
-	public void bindToModel(EObject eObject) {
+	public void updateModelBinding(EObject eObject) {
 		this.submachine = (SubmachineState) eObject;
 		updateLabel(submachine);
 		if (updateLabelAdapter == null) {
