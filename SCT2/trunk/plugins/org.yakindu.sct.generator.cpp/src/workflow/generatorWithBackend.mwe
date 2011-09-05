@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+
+<!--
+USE THIS WORKFLOW FOR LARGER MODELS!
+
+This worklow uses a new execution engine for the generator, that is 
+faster on larger models than the traditional Generator. 
+This engine is being called the Xtend Backend. A future version 
+will support compilation into code directly executable by the Xtend Backend.
+-->
+
+<workflow>
+	<property name="model" value="org.yakindu.sct.generator.cpp/src/Model.xmi" />
+	<property name="src-gen" value="src-gen" />
+	
+	<!-- set up EMF for standalone execution -->
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" >
+		<platformUri value=".."/>
+	</bean>
+	
+	<!-- instantiate metamodel -->
+	<bean id="mm_emf" class="org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel"/>
+
+	<!--
+	Multiple languages for code generation, model validation and transformation can be used. 
+	The languages are translated into Xtend Backend code by so called language contributors 
+	a.k.a middleends. As soon as a middleend for OCL is available, OCL will be usable from Xpand/Xtend. 
+	 
+	Register the language contributors at the generator backend! 
+	-->
+	<component class="org.eclipse.xtend.middleend.LanguageSetup">
+		<!-- Xtend -->
+		<languageContributor value="org.eclipse.xtend.middleend.xtend.plugin.OldXtendRegistryFactory"/>
+		<!-- Check -->
+		<languageContributor value="org.eclipse.xtend.middleend.xtend.plugin.OldCheckRegistryFactory"/>
+		<!-- Xpand -->
+		<languageContributor value="org.eclipse.xtend.middleend.xpand.plugin.OldXpandRegistryFactory"/>
+	</component>
+
+	<!-- load model and store it in slot 'model' -->
+	<component class="org.eclipse.emf.mwe.utils.Reader">
+		<uri value="platform:/resource/${model}" />
+		<modelSlot value="model" />
+	</component>
+
+	<!-- check model -->
+	<component class="org.eclipse.xtend.middleend.xtend.CheckComponent">
+		<metaModel idRef="mm_emf"/>
+		<checkFile value="metamodel::Checks" />
+		<emfAllChildrenSlot value="model" />
+	</component>
+
+	<!--  generate code -->
+	<component class="org.eclipse.xtend.middleend.xpand.XpandComponent">
+		<metaModel idRef="mm_emf"/>
+		<expand
+			value="template::Template::main FOR model" />
+		<outlet path="${src-gen}" >
+			<postprocessor class="org.eclipse.xpand2.output.JavaBeautifier" />
+		</outlet>
+	</component>
+</workflow>

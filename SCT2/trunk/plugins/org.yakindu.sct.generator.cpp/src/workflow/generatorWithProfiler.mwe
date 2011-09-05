@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<workflow>
+	<property name="model" value="org.yakindu.sct.generator.cpp/src/Model.xmi" />
+	<property name="src-gen" value="src-gen" />
+	<property name="profiling-gen" value="profiling" />
+	
+	<!-- set up EMF for standalone execution -->
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" >
+		<platformUri value=".."/>
+	</bean>
+	
+	<!-- instantiate metamodel -->
+	<bean id="mm_emf" class="org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel"/>
+
+	<!-- load model and store it in slot 'model' -->
+	<component class="org.eclipse.emf.mwe.utils.Reader">
+		<uri value="platform:/resource/${model}" />
+		<modelSlot value="model" />
+	</component>
+
+	<!-- suround components to be measured with profiler component -->
+	<component id="profiler" class="org.eclipse.xtend.profiler.ProfilerComponent"> 
+		<resultSlot value="profilingResult" /> 
+
+		<!-- check model -->
+		<component class="org.eclipse.xtend.check.CheckComponent">
+			<vetoableCallback idRef="profiler"/>
+			<metaModel idRef="mm_emf"/>
+			<checkFile value="metamodel::Checks" />
+			<emfAllChildrenSlot value="model" />
+		</component>
+	
+		<!--  generate code -->
+		<component class="org.eclipse.xpand2.Generator">
+			<vetoableCallback idRef="profiler"/>
+			<metaModel idRef="mm_emf"/>
+			<expand
+				value="template::Template::main FOR model" />
+			<outlet path="${src-gen}" >
+				<postprocessor class="org.eclipse.xpand2.output.JavaBeautifier" />
+			</outlet>
+		</component>
+	</component>
+	
+	<!-- generate profiling result -->
+	<component class="org.eclipse.xpand2.Generator" fileEncoding="ISO-8859-1">
+		<metaModel idRef="mm_emf"/> 
+		<expand value="org::eclipse::xtend::profiler::templates::Html::Main FOR profilingResult"/> 
+		<outlet overwrite="true" path="${profiling-gen}"/> 
+	</component> 
+	
+</workflow>
