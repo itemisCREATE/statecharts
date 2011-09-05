@@ -1,0 +1,13 @@
+#Mon Sep 05 10:17:47 CEST 2011
+eclipse.preferences.version=1
+encoding//.settings/org.eclipse.xtend.shared.ui.prefs=Cp1252
+encoding//src/Model.xmi=Cp1252
+encoding//src/metamodel/Checks.chk=Cp1252
+encoding//src/metamodel/Extensions.ext=Cp1252
+encoding//src/metamodel/metamodel.ecore=Cp1252
+encoding//src/template/GeneratorExtensions.ext=Cp1252
+encoding//src/template/Template.xpt=Cp1252
+encoding//src/workflow/generator.mwe=Cp1252
+encoding//src/workflow/generatorWithBackend.mwe=Cp1252
+encoding//src/workflow/generatorWithProfiler.mwe=Cp1252
+encoding/<project>=Cp1252
