@@ -80,11 +80,11 @@ public abstract class GenericFormBasedPropertySection extends
 	}
 
 	@Override
-	public void aboutToBeShown() {
-		super.aboutToBeShown();
+	public void refresh() {
+		super.refresh();
 		EObject eObject = getEObject();
 		for (IFormPropertyDescriptor descriptor : descriptors) {
-			descriptor.bindToModel(eObject);
+			descriptor.updateModelBinding(eObject);
 		}
 	}
 

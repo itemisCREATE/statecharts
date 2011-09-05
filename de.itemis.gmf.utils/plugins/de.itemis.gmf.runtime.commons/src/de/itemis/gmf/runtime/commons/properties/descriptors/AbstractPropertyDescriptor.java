@@ -139,7 +139,7 @@ public abstract class AbstractPropertyDescriptor implements
 		return feature;
 	}
 
-	public void bindToModel(EObject eObject) {
+	public void updateModelBinding(EObject eObject) {
 		if (bindingContext != null)
 			bindingContext.dispose();
 		bindingContext = new EMFDataBindingContext();

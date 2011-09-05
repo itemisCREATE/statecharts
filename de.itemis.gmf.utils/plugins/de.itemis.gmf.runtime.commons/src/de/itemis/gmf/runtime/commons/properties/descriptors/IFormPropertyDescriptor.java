@@ -44,7 +44,7 @@ public interface IFormPropertyDescriptor {
 	/**
 	 * Creates the binding between UI and model
 	 */
-	void bindToModel(EObject eObject);
+	void updateModelBinding(EObject eObject);
 
 	/**
 	 * Disposes the UI related parts
