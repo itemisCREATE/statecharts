@@ -156,7 +156,8 @@ public abstract class AbstractPropertyDescriptor implements
 	}
 
 	public void dispose() {
-		getControl().dispose();
+		if (getControl() != null && !getControl().isDisposed())
+			getControl().dispose();
 		if (bindingContext != null)
 			bindingContext.dispose();
 	}
