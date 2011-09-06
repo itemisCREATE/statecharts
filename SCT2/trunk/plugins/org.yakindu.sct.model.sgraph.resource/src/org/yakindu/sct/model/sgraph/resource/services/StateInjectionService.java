@@ -13,7 +13,6 @@ package org.yakindu.sct.model.sgraph.resource.services;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.yakindu.sct.model.sgraph.AbstractState;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -32,10 +31,10 @@ import de.itemis.xtext.utils.gmf.resource.IMemberInjectionService;
  * 
  */
 public class StateInjectionService extends
-		AbstractXtextMemberInjectionService<AbstractState, SimpleScope> {
+		AbstractXtextMemberInjectionService<State, SimpleScope> {
 
 	@Override
-	public String getExpression(AbstractState object) {
+	public String getExpression(State object) {
 		return object.getExpression();
 	}
 
@@ -45,7 +44,7 @@ public class StateInjectionService extends
 	}
 
 	@Override
-	public void setFeatures(AbstractState original, SimpleScope rootAST) {
+	public void setFeatures(State original, SimpleScope rootAST) {
 		Scope localScope = SGraphFactory.eINSTANCE.createScope();
 		EList<Declaration> declarations = rootAST.getDeclarations();
 		localScope.getDeclarations().addAll(declarations);
@@ -54,7 +53,7 @@ public class StateInjectionService extends
 	}
 
 	public boolean isServiceFor(EObject object) {
-		return object instanceof AbstractState;
+		return object instanceof State;
 	}
 
 	public EStructuralFeature getSourceFeature() {

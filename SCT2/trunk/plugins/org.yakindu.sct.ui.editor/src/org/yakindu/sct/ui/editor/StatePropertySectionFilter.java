@@ -4,14 +4,12 @@ import org.eclipse.jface.viewers.IFilter;
 import org.yakindu.sct.ui.editor.editparts.AbstractStateEditPart;
 import org.yakindu.sct.ui.editor.editparts.StateEditPart;
 import org.yakindu.sct.ui.editor.editparts.StateNameEditPart;
-import org.yakindu.sct.ui.editor.editparts.SubmachineStateEditPart;
 
 public class StatePropertySectionFilter implements IFilter {
 
 	public boolean select(Object toTest) {
 		return (toTest instanceof AbstractStateEditPart
-				|| toTest instanceof StateEditPart || toTest instanceof StateNameEditPart)
-				&& (!(toTest instanceof SubmachineStateEditPart));
+				|| toTest instanceof StateEditPart || toTest instanceof StateNameEditPart);
 	}
 
 }

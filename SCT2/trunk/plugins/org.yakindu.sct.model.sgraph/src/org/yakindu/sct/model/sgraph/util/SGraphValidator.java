@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
-import org.yakindu.sct.model.sgraph.AbstractState;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
@@ -39,7 +38,6 @@ import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.SubmachineState;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
@@ -177,12 +175,8 @@ public class SGraphValidator extends EObjectValidator {
 				return validateScopedElement((ScopedElement)value, diagnostics, context);
 			case SGraphPackage.SYNCHRONIZATION:
 				return validateSynchronization((Synchronization)value, diagnostics, context);
-			case SGraphPackage.ABSTRACT_STATE:
-				return validateAbstractState((AbstractState)value, diagnostics, context);
 			case SGraphPackage.STATE:
 				return validateState((State)value, diagnostics, context);
-			case SGraphPackage.SUBMACHINE_STATE:
-				return validateSubmachineState((SubmachineState)value, diagnostics, context);
 			case SGraphPackage.ENTRY_KIND:
 				return validateEntryKind((EntryKind)value, diagnostics, context);
 			default:
@@ -367,7 +361,6 @@ public class SGraphValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(finalState, diagnostics, context);
 		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(finalState, diagnostics, context);
 		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAbstractState_NameIsNotEmpty(finalState, diagnostics, context);
 		return result;
 	}
 
@@ -388,7 +381,7 @@ public class SGraphValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(state, diagnostics, context);
 		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(state, diagnostics, context);
 		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(state, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAbstractState_NameIsNotEmpty(state, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_NameIsNotEmpty(state, diagnostics, context);
 		return result;
 	}
 
@@ -608,98 +601,22 @@ public class SGraphValidator extends EObjectValidator {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateAbstractState(AbstractState abstractState,
-			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(abstractState, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(abstractState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAbstractState_NameIsNotEmpty(abstractState, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * Validates the NameIsNotEmpty constraint of '<em>Abstract State</em>'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public boolean validateAbstractState_NameIsNotEmpty(
-			AbstractState state, DiagnosticChain diagnostics,
-			Map<Object, Object> context) {
-		if ((state.getName() == null || state.getName().trim().length() == 0)
-				&& !(state instanceof FinalState)) {
-			return error(state, diagnostics, ISSUE_STATE_WITHOUT_NAME);
-		}
-		return true;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateSubmachineState(SubmachineState submachineState,
-			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(submachineState, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAbstractState_NameIsNotEmpty(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateSubmachineState_SubStatechartExists(submachineState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateSubmachineState_SubStatechartIsNotACycle(submachineState, diagnostics, context);
-		return result;
-	}
-
-	/**
 	 * Validates the SubStatechartExists constraint of '
 	 * <em>Submachine State</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
-	public boolean validateSubmachineState_SubStatechartExists(
-			SubmachineState submachineState, DiagnosticChain diagnostics,
-			Map<Object, Object> context) {
-		if ((submachineState.getSubstatechart() == null || submachineState
-				.getSubstatechart().eIsProxy())) {
-			return error(submachineState, diagnostics,
-					ISSUE_SUBMACHINESTATE_WITHOUT_SUBMACHINE);
-		}
-		return true;
-
-	}
-
-	/**
-	 * Validates the SubStatechartIsNotACycle constraint of '<em>Submachine State</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateSubmachineState_SubStatechartIsNotACycle(SubmachineState submachineState, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if ((submachineState.getSubstatechart() != null && !submachineState
-				.getSubstatechart().eIsProxy())) {
-			if(submachineState.eResource().getURI().equals(submachineState.getSubstatechart().eResource().getURI()))
-			return error(submachineState, diagnostics,
-					ISSUE_SUBMACHINESTATE__CYCLE);
-		}
-		return true;
-	}
+//	public boolean validateSubmachineState_SubStatechartExists(
+//			State submachineState, DiagnosticChain diagnostics,
+//			Map<Object, Object> context) {
+//		if ((submachineState.getSubstatechart() == null || submachineState
+//				.getSubstatechart().eIsProxy())) {
+//			return error(submachineState, diagnostics,
+//					ISSUE_SUBMACHINESTATE_WITHOUT_SUBMACHINE);
+//		}
+//		return true;
+//
+//	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

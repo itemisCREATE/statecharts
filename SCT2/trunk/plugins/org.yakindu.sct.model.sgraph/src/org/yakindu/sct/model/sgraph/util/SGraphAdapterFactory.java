@@ -14,7 +14,6 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.sct.model.sgraph.AbstractState;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
@@ -34,7 +33,6 @@ import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.SubmachineState;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
@@ -193,16 +191,8 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 				return createSynchronizationAdapter();
 			}
 			@Override
-			public Adapter caseAbstractState(AbstractState object) {
-				return createAbstractStateAdapter();
-			}
-			@Override
 			public Adapter caseState(State object) {
 				return createStateAdapter();
-			}
-			@Override
-			public Adapter caseSubmachineState(SubmachineState object) {
-				return createSubmachineStateAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -543,34 +533,6 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSynchronizationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.AbstractState <em>Abstract State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.sgraph.AbstractState
-	 * @generated
-	 */
-	public Adapter createAbstractStateAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.SubmachineState <em>Submachine State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.sgraph.SubmachineState
-	 * @generated
-	 */
-	public Adapter createSubmachineStateAdapter() {
 		return null;
 	}
 

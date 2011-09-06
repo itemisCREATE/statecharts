@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.model.sgraph;
 
+import org.eclipse.emf.ecore.EObject;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +23,7 @@ package org.yakindu.sct.model.sgraph;
  * @model
  * @generated
  */
-public interface FinalState extends AbstractState {
+public interface FinalState extends Vertex {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

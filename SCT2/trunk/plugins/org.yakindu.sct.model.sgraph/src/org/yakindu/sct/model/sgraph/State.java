@@ -22,14 +22,18 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#getSubRegions <em>Sub Regions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#isOrthogonal <em>Orthogonal</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.State#getSubstatechart <em>Substatechart</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.State#isSubmachine <em>Submachine</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.State#isSimple <em>Simple</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.State#isComposite <em>Composite</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NameIsNotEmpty'"
  * @generated
  */
-public interface State extends AbstractState {
+public interface State extends Vertex, ExpressionElement, ReactiveElement, ScopedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,5 +71,87 @@ public interface State extends AbstractState {
 	 * @generated
 	 */
 	boolean isOrthogonal();
+
+	/**
+	 * Returns the value of the '<em><b>Substatechart</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Substatechart</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Substatechart</em>' reference.
+	 * @see #setSubstatechart(Statechart)
+	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_Substatechart()
+	 * @model
+	 * @generated
+	 */
+	Statechart getSubstatechart();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sgraph.State#getSubstatechart <em>Substatechart</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Substatechart</em>' reference.
+	 * @see #getSubstatechart()
+	 * @generated
+	 */
+	void setSubstatechart(Statechart value);
+
+	/**
+	 * Returns the value of the '<em><b>Submachine</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Submachine</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Submachine</em>' attribute.
+	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_Submachine()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	boolean isSubmachine();
+
+	/**
+	 * Returns the value of the '<em><b>Simple</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Simple</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Simple</em>' attribute.
+	 * @see #setSimple(boolean)
+	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_Simple()
+	 * @model transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	boolean isSimple();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sgraph.State#isSimple <em>Simple</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Simple</em>' attribute.
+	 * @see #isSimple()
+	 * @generated
+	 */
+	void setSimple(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Composite</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Composite</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Composite</em>' attribute.
+	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_Composite()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	boolean isComposite();
 
 } // State

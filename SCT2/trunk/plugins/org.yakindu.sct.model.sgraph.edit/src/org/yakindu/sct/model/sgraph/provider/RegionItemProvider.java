@@ -221,11 +221,6 @@ public class RegionItemProvider
 			(createChildParameter
 				(SGraphPackage.Literals.REGION__VERTICES,
 				 SGraphFactory.eINSTANCE.createState()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.REGION__VERTICES,
-				 SGraphFactory.eINSTANCE.createSubmachineState()));
 	}
 
 }
