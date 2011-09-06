@@ -32,11 +32,11 @@ public interface SemanticHints {
 	String STATE_NAME = "StateName";
 	String STATE_TEXT_COMPARTMENT = "StateTextCompartment";
 	String STATE_TEXT_COMPARTMENT_EXPRESSION = "StateTextCompartmentExpression";
+	String STATE_FIGURE_COMPARTMENT = "StateFigureCompartment";
 
 	String STATE = "State";
 	String SUBMACHINE_STATE = "SubmachineState";
 	String SUBMACHINE_STATE_NAME = "SubmachineStateName";
-	String COMPOSITE_STATE_FIGURE_COMPARTMENT = "StateFigureCompartment";
 
 	String CHOICE = "Choice";
 

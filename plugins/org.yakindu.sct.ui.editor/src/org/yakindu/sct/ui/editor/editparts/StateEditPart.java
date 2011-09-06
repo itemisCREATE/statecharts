@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.draw2d.GridData;
@@ -37,9 +38,10 @@ import org.eclipse.gmf.runtime.notation.Compartment;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.sct.ui.editor.editor.figures.CompositeStateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
+import org.yakindu.sct.ui.editor.pictogram.PictogramEditPolicy;
+import org.yakindu.sct.ui.editor.pictogram.SubchartPictogram;
 
 /**
  * The EditPart for the State.
@@ -89,8 +91,8 @@ public class StateEditPart extends AbstractStateEditPart implements
 	}
 
 	@Override
-	public CompositeStateFigure createPrimaryShape() {
-		return new CompositeStateFigure(getMapMode());
+	public StateFigure createPrimaryShape() {
+		return new StateFigure(getMapMode());
 	}
 
 	@Override
@@ -107,6 +109,8 @@ public class StateEditPart extends AbstractStateEditPart implements
 						return UnexecutableCommand.INSTANCE;
 					}
 				});
+		installEditPolicy(PictogramEditPolicy.ROLE, new PictogramEditPolicy(
+				Collections.singletonList(new SubchartPictogram())));
 
 	}
 
@@ -233,8 +237,8 @@ public class StateEditPart extends AbstractStateEditPart implements
 		return getPrimaryShape().getFigureCompartmentPane();
 	}
 
-	public CompositeStateFigure getPrimaryShape() {
-		return (CompositeStateFigure) getFigure().getChildren().get(0);
+	public StateFigure getPrimaryShape() {
+		return (StateFigure) getFigure().getChildren().get(0);
 	}
 
 	@Override
@@ -245,7 +249,12 @@ public class StateEditPart extends AbstractStateEditPart implements
 			IFigure compartmentFigure = ((StateFigureCompartmentEditPart) childEditPart)
 					.getFigure();
 			pane.add(compartmentFigure);
-		} else {
+		} 
+//		else if (childEditPart instanceof SubmachineStateNameEditPart) {
+//			((SubmachineStateNameEditPart) childEditPart)
+//					.setLabel(getPrimaryShape().getNameFigure());
+//		} 
+		else {
 			super.addChildVisual(childEditPart, index);
 		}
 	}

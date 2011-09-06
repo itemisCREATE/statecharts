@@ -28,6 +28,7 @@ import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
 import org.eclipse.swt.graphics.Color;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
+
 /**
  * 
  * @author andreas muelder
@@ -40,6 +41,7 @@ public class StateFigure extends RoundedRectangle {
 
 	private WrappingLabel nameFigure;
 	private Figure textCompartmentPane;
+	private Figure figureCompartmentPane;
 
 	public StateFigure(IMapMode mapMode) {
 		GridLayout layout = new GridLayout(1, false);
@@ -64,6 +66,11 @@ public class StateFigure extends RoundedRectangle {
 		textCompartmentPane.setLayoutManager(new StackLayout());
 		this.add(textCompartmentPane,
 				GridDataFactory.fillDefaults().grab(true, true).getData());
+
+		figureCompartmentPane = new Figure();
+		figureCompartmentPane.setLayoutManager(new StackLayout());
+		this.add(figureCompartmentPane,
+				GridDataFactory.fillDefaults().grab(true, true).getData());
 	}
 
 	public WrappingLabel getNameFigure() {
@@ -72,6 +79,10 @@ public class StateFigure extends RoundedRectangle {
 
 	public Figure getTextCompartmentPane() {
 		return textCompartmentPane;
+	}
+
+	public Figure getFigureCompartmentPane() {
+		return figureCompartmentPane;
 	}
 
 	// ========= drawing related methods ============================

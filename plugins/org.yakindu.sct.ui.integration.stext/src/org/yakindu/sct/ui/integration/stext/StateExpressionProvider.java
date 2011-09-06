@@ -35,7 +35,7 @@ public class StateExpressionProvider extends AbstractExpressionsProvider
 	
 	@Override
 	protected EClass getType() {
-		return SGraphPackage.Literals.ABSTRACT_STATE;
+		return SGraphPackage.Literals.STATE;
 	}
 
 	@Override

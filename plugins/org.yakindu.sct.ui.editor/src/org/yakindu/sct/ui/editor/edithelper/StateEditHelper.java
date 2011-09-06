@@ -14,10 +14,14 @@ import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
+import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.swt.widgets.Shell;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
 import org.yakindu.sct.ui.editor.editor.StatechartElementTypes;
 
 /**
@@ -33,7 +37,7 @@ public class StateEditHelper extends VertexEditHelper {
 	@Override
 	protected ICommand getConfigureCommand(ConfigureRequest req) {
 		SGraphFactory factory = SGraphFactory.eINSTANCE;
-		
+
 		// Composite State gets one region
 		if (StatechartElementTypes.COMPOSITE_STATE.equals(req
 				.getTypeToConfigure())) {
@@ -42,7 +46,7 @@ public class StateEditHelper extends VertexEditHelper {
 			return new SetValueCommand(new SetRequest(
 					req.getElementToConfigure(),
 					SGraphPackage.Literals.STATE__SUB_REGIONS, region));
-			
+
 			// Orthogonal State gets two regions
 		} else if (StatechartElementTypes.ORTHOGONAL_STATE.equals(req
 				.getTypeToConfigure())) {
@@ -55,8 +59,23 @@ public class StateEditHelper extends VertexEditHelper {
 					SGraphPackage.Literals.STATE__SUB_REGIONS,
 					com.google.common.collect.Lists.newArrayList(region,
 							region2)));
+
+			// Prompts the user to select a submachine resource
+		} else if (StatechartElementTypes.SUBMACHINE_STATE.equals(req
+				.getTypeToConfigure())) {
+			SelectSubmachineDialog dialog = new SelectSubmachineDialog(
+					new Shell());
+			if (Dialog.OK == dialog.open()) {
+				Statechart selectedSubmachine = dialog.getSelectedSubmachine();
+				if (selectedSubmachine != null) {
+					return new SetValueCommand(
+							new SetRequest(
+									req.getElementToConfigure(),
+									SGraphPackage.Literals.STATE__SUBSTATECHART,
+									selectedSubmachine));
+				}
+			}
 		}
 		return null;
-
 	}
 }

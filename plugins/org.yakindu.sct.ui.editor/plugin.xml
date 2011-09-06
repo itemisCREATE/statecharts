@@ -87,8 +87,8 @@
             </param>
          </metamodelType>
           <metamodelType
-               eclass="SubmachineState"
-               edithelper="org.yakindu.sct.ui.editor.edithelper.SubmachineStateEditHelper"
+               eclass="State"
+               edithelper="org.yakindu.sct.ui.editor.edithelper.StateEditHelper"
                icon="icons/obj16/submachine-state-16.png"
                id="org.yakindu.sct.ui.editor.SubmachineState"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
@@ -213,7 +213,7 @@
    <!-- Contribution Item Provider -->
    <extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
       <contributionItemProvider
-            class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContributionItemProvider"
+            class="org.yakindu.sct.ui.editor.providers.StatechartDiagramContributionItemProvider"
             checkPluginLoaded="false">
          <Priority name="Low"/>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
@@ -221,6 +221,17 @@
             <popupStructuredContributionCriteria objectClass="org.yakindu.sct.ui.editor.editparts.StatechartTextExpressionEditPart"/>
             <popupPredefinedItem id="editGroup" remove="true"/>
          </popupContribution>
+         <partContribution
+               class="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
+            <partAction
+                  global="true"
+                  id="undo">
+            </partAction>
+            <partAction
+                  global="true"
+                  id="redo">
+            </partAction>
+         </partContribution>
       </contributionItemProvider>
    </extension>
    
@@ -481,14 +492,6 @@
             class="org.yakindu.sct.ui.editor.propertysheets.StatechartPropertySection">
             <input type="org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart"/>
               <input type="org.yakindu.sct.ui.editor.editparts.StatechartNameEditPart"/>
-         </propertySection>
-         <!-- Subchart model section -->
-          <propertySection
-            id="property.section.domain.submachine" 
-            tab="property.tab.domain"
-            class="org.yakindu.sct.ui.editor.propertysheets.SubmachineStatePropertySection">
-            <input type="org.yakindu.sct.ui.editor.editparts.SubmachineStateNameEditPart"/>
-            <input type="org.yakindu.sct.ui.editor.editparts.SubmachineStateEditPart"/>
          </propertySection>
         <!-- Transition model section -->         
          <propertySection

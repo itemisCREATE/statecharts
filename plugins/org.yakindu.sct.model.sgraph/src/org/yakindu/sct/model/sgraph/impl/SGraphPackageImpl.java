@@ -216,20 +216,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass abstractStateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass submachineStateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EEnum entryKindEEnum = null;
 
 	/**
@@ -460,7 +446,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getState() {
 		if (stateEClass == null) {
-			stateEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(24);
+			stateEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(23);
 		}
 		return stateEClass;
 	}
@@ -481,6 +467,42 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EAttribute getState_Orthogonal() {
         return (EAttribute)getState().getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getState_Substatechart() {
+        return (EReference)getState().getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getState_Submachine() {
+        return (EAttribute)getState().getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getState_Simple() {
+        return (EAttribute)getState().getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getState_Composite() {
+        return (EAttribute)getState().getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -772,39 +794,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 			synchronizationEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(22);
 		}
 		return synchronizationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getAbstractState() {
-		if (abstractStateEClass == null) {
-			abstractStateEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(23);
-		}
-		return abstractStateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getSubmachineState() {
-		if (submachineStateEClass == null) {
-			submachineStateEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(25);
-		}
-		return submachineStateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSubmachineState_Substatechart() {
-        return (EReference)getSubmachineState().getEStructuralFeatures().get(0);
 	}
 
 	/**

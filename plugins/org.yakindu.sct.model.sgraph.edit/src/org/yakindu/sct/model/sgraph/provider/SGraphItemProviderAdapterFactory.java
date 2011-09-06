@@ -338,29 +338,6 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.SubmachineState} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SubmachineStateItemProvider submachineStateItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.sgraph.SubmachineState}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSubmachineStateAdapter() {
-		if (submachineStateItemProvider == null) {
-			submachineStateItemProvider = new SubmachineStateItemProvider(this);
-		}
-
-		return submachineStateItemProvider;
-	}
-
-	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -470,7 +447,6 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 		if (scopeItemProvider != null) scopeItemProvider.dispose();
 		if (synchronizationItemProvider != null) synchronizationItemProvider.dispose();
 		if (stateItemProvider != null) stateItemProvider.dispose();
-		if (submachineStateItemProvider != null) submachineStateItemProvider.dispose();
 	}
 
 }

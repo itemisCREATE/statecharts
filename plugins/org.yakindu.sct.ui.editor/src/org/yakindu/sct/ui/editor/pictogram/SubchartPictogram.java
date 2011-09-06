@@ -11,7 +11,7 @@
 package org.yakindu.sct.ui.editor.pictogram;
 
 import org.eclipse.core.commands.ExecutionEvent;
-import org.yakindu.sct.model.sgraph.SubmachineState;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.StatechartImages;
 
 /**
@@ -31,7 +31,7 @@ public class SubchartPictogram extends Pictogram {
 	private static IHandlerContextValidator getHandlerExecutionContextValidator() {
 		return new IHandlerContextValidator() {
 			public boolean isValidContext(ExecutionEvent event) {
-				SubmachineState selectedState = OpenSubstatechartHandler
+				State selectedState = OpenSubstatechartHandler
 						.getSelectedSubmachineState(event);
 				if (selectedState.getSubstatechart() == null)
 					return false;

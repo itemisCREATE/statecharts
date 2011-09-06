@@ -28,7 +28,6 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.SubmachineState;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 
@@ -94,7 +93,6 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 			case SGraphPackage.SCOPE: return createScope();
 			case SGraphPackage.SYNCHRONIZATION: return createSynchronization();
 			case SGraphPackage.STATE: return createState();
-			case SGraphPackage.SUBMACHINE_STATE: return createSubmachineState();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -238,16 +236,6 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 	public State createState() {
 		StateImpl state = new StateImpl();
 		return state;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SubmachineState createSubmachineState() {
-		SubmachineStateImpl submachineState = new SubmachineStateImpl();
-		return submachineState;
 	}
 
 	/**

@@ -41,5 +41,9 @@ public class StatePropertySection extends NamePropertySection {
 				getActiveEditorResource(),
 				IYakinduSctHelpContextIds.SC_PROPERTIES_STATE_EXPRESSION);
 		descriptors.add(expressionsDescriptor);
+		
+		// Submachine reference
+		SubmachineSelectionDialogPropertyDescriptor submachineDescriptor = new SubmachineSelectionDialogPropertyDescriptor();
+		descriptors.add(submachineDescriptor);
 	}
 }

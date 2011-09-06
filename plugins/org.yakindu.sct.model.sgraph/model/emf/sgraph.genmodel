@@ -23,15 +23,14 @@
     </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//Region">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Region/vertices"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Region/priority"/>
     </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//Transition">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sgraph.ecore#//Transition/target"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//Transition/source"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Transition/priority"/>
     </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//FinalState"/>
-    <genClasses ecoreClass="sgraph.ecore#//State">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//State/subRegions"/>
-    </genClasses>
     <genClasses image="false" ecoreClass="sgraph.ecore#//Variable"/>
     <genClasses ecoreClass="sgraph.ecore#//Junction"/>
     <genClasses ecoreClass="sgraph.ecore#//Event"/>
@@ -64,6 +63,15 @@
     </genClasses>
     <genClasses image="false" ecoreClass="sgraph.ecore#//ScopedElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//ScopedElement/scopes"/>
+    </genClasses>
+    <genClasses ecoreClass="sgraph.ecore#//Synchronization"/>
+    <genClasses ecoreClass="sgraph.ecore#//State">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//State/subRegions"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/orthogonal"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sgraph.ecore#//State/substatechart"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/submachine"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/simple"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/composite"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

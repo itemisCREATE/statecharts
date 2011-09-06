@@ -36,8 +36,6 @@ import org.yakindu.sct.ui.editor.editparts.StatechartDiagramEditPart;
 import org.yakindu.sct.ui.editor.editparts.StatechartNameEditPart;
 import org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart;
 import org.yakindu.sct.ui.editor.editparts.StatechartTextExpressionEditPart;
-import org.yakindu.sct.ui.editor.editparts.SubmachineStateEditPart;
-import org.yakindu.sct.ui.editor.editparts.SubmachineStateNameEditPart;
 import org.yakindu.sct.ui.editor.editparts.SynchronizationEditPart;
 import org.yakindu.sct.ui.editor.editparts.TransitionEditPart;
 import org.yakindu.sct.ui.editor.editparts.TransitionExpressionEditPart;
@@ -79,13 +77,13 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
 		editParts.put(STATE_NAME, StateNameEditPart.class);
 		editParts.put(STATE_TEXT_COMPARTMENT,
 				StateTextCompartmentEditPart.class);
+		editParts.put(SUBMACHINE_STATE, StateEditPart.class);
+		editParts.put(SUBMACHINE_STATE_NAME, StateNameEditPart.class);
 		editParts.put(STATE_TEXT_COMPARTMENT_EXPRESSION,
 				StateTextCompartmentExpressionEditPart.class);
 		editParts.put(STATE, StateEditPart.class);
-		editParts.put(COMPOSITE_STATE_FIGURE_COMPARTMENT,
+		editParts.put(STATE_FIGURE_COMPARTMENT,
 				StateFigureCompartmentEditPart.class);
-		editParts.put(SUBMACHINE_STATE, SubmachineStateEditPart.class);
-		editParts.put(SUBMACHINE_STATE_NAME, SubmachineStateNameEditPart.class);
 		editParts.put(TRANSITION, TransitionEditPart.class);
 		editParts
 				.put(TRANSITION_EXPRESSION, TransitionExpressionEditPart.class);
@@ -100,6 +98,7 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
 
 	@Override
 	protected Class<? extends IGraphicalEditPart> getNodeEditPartClass(View view) {
+		System.out.println(view.getType());
 		return getClass(view.getType());
 	}
 

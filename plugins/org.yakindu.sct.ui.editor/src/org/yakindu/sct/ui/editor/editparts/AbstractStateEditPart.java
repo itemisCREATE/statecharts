@@ -22,7 +22,7 @@ import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.sct.model.sgraph.AbstractState;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
@@ -95,8 +95,8 @@ public abstract class AbstractStateEditPart extends ShapeNodeEditPart {
 	}
 
 	@Override
-	public AbstractState resolveSemanticElement() {
-		return (AbstractState) super.resolveSemanticElement();
+	public State resolveSemanticElement() {
+		return (State) super.resolveSemanticElement();
 	}
 
 	@Override

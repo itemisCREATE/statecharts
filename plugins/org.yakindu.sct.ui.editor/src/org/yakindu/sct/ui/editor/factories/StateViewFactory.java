@@ -10,13 +10,22 @@
  */
 package org.yakindu.sct.ui.editor.factories;
 
+import java.util.List;
+
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
+import org.eclipse.gmf.runtime.diagram.ui.view.factories.AbstractShapeViewFactory;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
+import org.eclipse.gmf.runtime.notation.NotationPackage;
+import org.eclipse.gmf.runtime.notation.ShapeStyle;
+import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
@@ -24,8 +33,8 @@ import org.yakindu.sct.ui.editor.providers.SemanticHints;
  * @author muelder
  * 
  */
-public class StateViewFactory extends AbstractStateViewFactory {
-
+public class StateViewFactory extends AbstractShapeViewFactory {
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void decorateView(View containerView, View view,
@@ -33,14 +42,21 @@ public class StateViewFactory extends AbstractStateViewFactory {
 			boolean persisted) {
 		super.decorateView(containerView, view, semanticAdapter, semanticHint,
 				index, persisted);
+
 		IAdaptable eObjectAdapter = null;
 		EObject eObject = (EObject) semanticAdapter.getAdapter(EObject.class);
 		if (eObject != null) {
 			eObjectAdapter = new EObjectAdapter(eObject);
 		}
-		// Create figure compartment 
+		//State name
+		FactoryUtils.createLabel(view, SemanticHints.STATE_NAME);
+		//Text compartment
 		getViewService().createNode(eObjectAdapter, view,
-				SemanticHints.COMPOSITE_STATE_FIGURE_COMPARTMENT, ViewUtil.APPEND, true,
+				SemanticHints.STATE_TEXT_COMPARTMENT, ViewUtil.APPEND, true,
+				getPreferencesHint());
+		//Figure compartment
+		getViewService().createNode(eObjectAdapter, view,
+				SemanticHints.STATE_FIGURE_COMPARTMENT, ViewUtil.APPEND, true,
 				getPreferencesHint());
 
 		// Create a boolean value style that indicates the alignment of
@@ -50,6 +66,20 @@ public class StateViewFactory extends AbstractStateViewFactory {
 		layout.setBooleanValue(false);
 		view.getStyles().add(layout);
 
+		// Create states default styles
+		ShapeStyle style = (ShapeStyle) view
+				.getStyle(NotationPackage.Literals.SHAPE_STYLE);
+		style.setFillColor(FigureUtilities
+				.RGBToInteger(StatechartColorConstants.STATE_BG_COLOR.getRGB()));
+		style.setLineColor(FigureUtilities
+				.RGBToInteger(ColorConstants.lightGray.getRGB()));
 	}
 
+
+	@Override
+	protected List<Style> createStyles(View view) {
+		List<Style> styles = super.createStyles(view);
+		styles.add(NotationFactory.eINSTANCE.createFontStyle());
+		return styles;
+	}
 }

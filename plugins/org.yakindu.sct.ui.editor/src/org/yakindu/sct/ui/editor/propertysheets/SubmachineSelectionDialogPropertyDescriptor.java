@@ -31,8 +31,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.SubmachineState;
 import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
 
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
@@ -48,18 +48,18 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 	private final class UpdateLabelAdapter extends AdapterImpl {
 		@Override
 		public void notifyChanged(Notification msg) {
-			if (msg.getFeature() == SGraphPackage.Literals.SUBMACHINE_STATE__SUBSTATECHART) {
+			if (msg.getFeature() == SGraphPackage.Literals.STATE__SUBSTATECHART) {
 				updateLabel(submachine);
 			}
 		}
 	}
 
-	private SubmachineState submachine;
+	private State submachine;
 	private Label label;
 	private UpdateLabelAdapter updateLabelAdapter;
 
 	public void updateModelBinding(EObject eObject) {
-		this.submachine = (SubmachineState) eObject;
+		this.submachine = (State) eObject;
 		updateLabel(submachine);
 		if (updateLabelAdapter == null) {
 			updateLabelAdapter = new UpdateLabelAdapter();
@@ -68,7 +68,7 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 
 	}
 
-	private void updateLabel(SubmachineState state) {
+	private void updateLabel(State state) {
 		Statechart substatechart = submachine.getSubstatechart();
 		if (substatechart != null) {
 			label.setText(substatechart.eResource().getURI().toString());
@@ -108,7 +108,7 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 						SetValueCommand command = new SetValueCommand(
 								new SetRequest(
 										submachine,
-										SGraphPackage.Literals.SUBMACHINE_STATE__SUBSTATECHART,
+										SGraphPackage.Literals.STATE__SUBSTATECHART,
 										selectedSubmachine));
 						try {
 							OperationHistoryFactory.getOperationHistory()

@@ -52,11 +52,11 @@ public class PictogramEditPolicy extends AbstractEditPolicy {
 
 	public static final String ROLE = "Pictograms";
 
-	protected static final int DEFAULT_Y_ABSOLUTE_OFFSET = -5;
+	protected static final int DEFAULT_Y_ABSOLUTE_OFFSET = -7;
 
 	protected static final double DEFAULT_Y_RELATIVE_OFFSET = 0.0;
 
-	protected static final int DEFAULT_X_ABSOLUTE_OFFSET = 5;
+	protected static final int DEFAULT_X_ABSOLUTE_OFFSET = -11;
 
 	protected static final double DEFAULT_X_RELATIVE_OFFSET = 0.0;
 
@@ -154,7 +154,7 @@ public class PictogramEditPolicy extends AbstractEditPolicy {
 							.getTranslated(
 									new Dimension(
 											(int) (relativeX * referenceBox.width)
-													+ absoluteX,
+													+  absoluteX + referenceBox.width - targetFigure.getBounds().width,
 											(int) (relativeY * referenceBox.height)
 													+ absoluteY
 													- targetFigure
@@ -171,7 +171,10 @@ public class PictogramEditPolicy extends AbstractEditPolicy {
 	 */
 	private static class PictogramContainerFigure extends Figure {
 		public PictogramContainerFigure() {
-			setLayoutManager(new FlowLayout());
+			FlowLayout layout = new FlowLayout();
+			layout.setMajorAlignment(FlowLayout.ALIGN_BOTTOMRIGHT);
+			layout.setMinorAlignment(FlowLayout.ALIGN_BOTTOMRIGHT);
+			setLayoutManager(layout);
 		}
 	}
 
@@ -186,7 +189,8 @@ public class PictogramEditPolicy extends AbstractEditPolicy {
 					.get(pictogram);
 			final boolean validContext = pictogram.getHandlerContextValidator()
 					.isValidContext(createExecutionEvent(null));
-			pictogramFigure.setEnabled(validContext);
+			
+			pictogramFigure.setVisible(validContext);
 			pictogramFigure.repaint();
 		}
 	}

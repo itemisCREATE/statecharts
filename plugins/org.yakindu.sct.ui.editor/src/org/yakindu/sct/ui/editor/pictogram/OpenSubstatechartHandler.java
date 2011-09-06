@@ -24,8 +24,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.FileEditorInput;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.SubmachineState;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 
 /**
@@ -37,7 +37,7 @@ import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 public class OpenSubstatechartHandler extends AbstractHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		SubmachineState selectedState = getSelectedSubmachineState(event);
+		State selectedState = getSelectedSubmachineState(event);
 		if (selectedState == null)
 			return null;
 		Statechart substatechart = selectedState.getSubstatechart();
@@ -56,15 +56,15 @@ public class OpenSubstatechartHandler extends AbstractHandler {
 		return null;
 	}
 
-	public static SubmachineState getSelectedSubmachineState(
+	public static State getSelectedSubmachineState(
 			final ExecutionEvent event) {
 		IGraphicalEditPart editPart = getSelectedEditPart(event);
 		if (editPart == null)
 			return null;
 		EObject semanticElement = editPart.resolveSemanticElement();
-		if (!(semanticElement instanceof SubmachineState))
+		if (!(semanticElement instanceof State))
 			return null;
-		return (SubmachineState) semanticElement;
+		return (State) semanticElement;
 	}
 
 	public static IGraphicalEditPart getSelectedEditPart(

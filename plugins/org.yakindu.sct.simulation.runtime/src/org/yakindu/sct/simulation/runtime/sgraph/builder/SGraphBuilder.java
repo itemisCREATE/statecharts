@@ -29,7 +29,6 @@ import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.SubmachineState;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Variable;
@@ -171,11 +170,6 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 		statechart.addVariable(var);
 		statechart.defineAlias(definition, var);
 		return var;
-	}
-
-	@FunctionMethod("")
-	public Object build(RTRegion parent, SubmachineState state) {
-		throw new RuntimeException("Not yet implemented");
 	}
 
 	@FunctionMethod("")
