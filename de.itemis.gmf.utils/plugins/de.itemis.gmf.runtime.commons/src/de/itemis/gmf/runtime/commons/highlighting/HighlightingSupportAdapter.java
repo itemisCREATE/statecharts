@@ -2,6 +2,7 @@ package de.itemis.gmf.runtime.commons.highlighting;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,12 +19,18 @@ import org.eclipse.gmf.runtime.diagram.ui.figures.BorderedNodeFigure;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
+import org.eclipse.jface.action.IAction;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.actions.ActionFactory;
+
+import de.itemis.gmf.runtime.commons.actions.ILockableAction;
 
 /**
  * 
@@ -96,6 +103,13 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 	private final Map<Color, Color> greyscaleColors = new HashMap<Color, Color>();
 	private boolean locked = false;
 	private final IDiagramWorkbenchPart diagramWorkbenchPart;
+	
+	private static String[] GLOBAL_ACTION_IDS = { 
+		ActionFactory.UNDO.getId(),
+		ActionFactory.REDO.getId() 
+	};
+	
+	//private Map<String,Boolean> globalActionStates = new HashMap<String, Boolean>();
 
 	public HighlightingSupportAdapter(IDiagramWorkbenchPart diagramWorkbenchPart) {
 		this.diagramWorkbenchPart = diagramWorkbenchPart;
@@ -247,7 +261,9 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		if (locked) {
 			throw new IllegalStateException("Editor already locked!");
 		}
-
+		
+		disableGlobalActions();
+		
 		setSanityCheckEnablementState(false);
 		diagramWorkbenchPart.getDiagramEditPart().disableEditMode();
 
@@ -292,7 +308,9 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		if (!locked) {
 			throw new IllegalStateException("Editor not locked!");
 		}
-
+		
+		restoreGlobalActions();
+		
 		// restore all elements still being highlighted
 		for (ColorMemento figureState : figureStates.values()) {
 			figureState.restore();
@@ -309,5 +327,42 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 
 		locked = false;
 	}
-
+	
+	private void disableGlobalActions() {
+		for (String actionID:Arrays.asList(GLOBAL_ACTION_IDS)) {
+			disableGlobalAction(actionID);
+		}
+	}
+	
+	private void restoreGlobalActions(){
+		for (String actionID:Arrays.asList(GLOBAL_ACTION_IDS)) {
+			restoreGlobalAction(actionID);
+		}
+	}
+	
+	private void disableGlobalAction(String actionID) {
+		IAction action = getGlobalAction(actionID);
+		if (action != null && action instanceof ILockableAction) {
+			((ILockableAction)action).setLocked(true);
+		}
+	}
+	
+	private void restoreGlobalAction(String actionID) {
+		IAction action = getGlobalAction(actionID);
+		if (action != null && action instanceof ILockableAction) {
+			((ILockableAction) action).setLocked(false);
+		}
+	}
+	
+	private IAction getGlobalAction(String actionID) {
+//		return GlobalActionManager.getInstance().getGlobalAction(diagramWorkbenchPart, actionID);
+		
+		Object adapter = diagramWorkbenchPart.getAdapter(IEditorPart.class);
+		if (adapter != null) {
+			IEditorPart editorPart = (IEditorPart) adapter;
+			IActionBars actionBars = editorPart.getEditorSite().getActionBars();
+			return actionBars.getGlobalActionHandler(actionID);
+		}
+		return null;
+	}
 }
