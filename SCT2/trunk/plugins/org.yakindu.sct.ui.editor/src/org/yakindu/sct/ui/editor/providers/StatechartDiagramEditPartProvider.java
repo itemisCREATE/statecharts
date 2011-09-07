@@ -98,7 +98,6 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
 
 	@Override
 	protected Class<? extends IGraphicalEditPart> getNodeEditPartClass(View view) {
-		System.out.println(view.getType());
 		return getClass(view.getType());
 	}
 
