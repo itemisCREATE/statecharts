@@ -11,18 +11,11 @@
 package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.Ellipse;
-import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
-import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.gef.Request;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.AbstractBorderedShapeEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.IBorderItemEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableEditPolicyEx;
-import org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemLocator;
 import org.eclipse.gmf.runtime.diagram.ui.handles.ConnectionHandle.HandleDirection;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.Node;
@@ -43,9 +36,7 @@ import de.itemis.gmf.runtime.commons.figures.EllipseAnchorDefaultSizeNodeFigure;
  * 
  * @author andreas muelder
  */
-public class EntryEditPart extends AbstractBorderedShapeEditPart {
-
-	private IGraphicalEditPart primaryChildEditPart;
+public class EntryEditPart extends BorderedShapeEditPart {
 
 	public EntryEditPart(View view) {
 		super(view);
@@ -98,21 +89,6 @@ public class EntryEditPart extends AbstractBorderedShapeEditPart {
 		return (Node) super.getNotationView();
 	}
 
-	protected void addBorderItem(IFigure borderItemContainer,
-			IBorderItemEditPart borderItemEditPart) {
-		if (primaryChildEditPart == null) {
-			primaryChildEditPart = borderItemEditPart;
-		}
-		BorderItemLocator locator = new BorderItemLocator(getMainFigure()) {
-			protected Rectangle getParentBorder() {
-				Rectangle bounds = getParentFigure().getBounds().getCopy();
-				bounds.expand(15, 15);
-				return bounds;
-			}
-		};
-		borderItemContainer.add(borderItemEditPart.getFigure(), locator);
-	}
-
 	@Override
 	protected NodeFigure createMainFigure() {
 		final NodeFigure figure = new EllipseAnchorDefaultSizeNodeFigure(
@@ -120,11 +96,6 @@ public class EntryEditPart extends AbstractBorderedShapeEditPart {
 		figure.setLayoutManager(new StackLayout());
 		figure.add(getPrimaryShape());
 		return figure;
-	}
-
-	@Override
-	protected void performDirectEditRequest(Request request) {
-		primaryChildEditPart.performRequest(request);
 	}
 
 }

@@ -21,9 +21,9 @@ import de.itemis.gmf.runtime.commons.editparts.TextAwareLabelEditPart;
  * @author andreas muelder
  * 
  */
-public class EntryLabelEditPart extends TextAwareLabelEditPart {
+public class NamedElementLabelEditPart extends TextAwareLabelEditPart {
 
-	public EntryLabelEditPart(View view) {
+	public NamedElementLabelEditPart(View view) {
 		super(view, SGraphPackage.Literals.NAMED_ELEMENT__NAME,
 				DiagramActivator.PLUGIN_ID);
 	}

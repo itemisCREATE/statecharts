@@ -15,10 +15,13 @@ import java.util.List;
 
 import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
@@ -27,21 +30,27 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.UnexecutableCommand;
 import org.eclipse.gef.requests.GroupRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CreationEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
+import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.Compartment;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
+import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.ui.editor.pictogram.PictogramEditPolicy;
 import org.yakindu.sct.ui.editor.pictogram.SubchartPictogram;
+import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 
 /**
  * The EditPart for the State.
@@ -52,7 +61,7 @@ import org.yakindu.sct.ui.editor.pictogram.SubchartPictogram;
  * @author markus muehlbrandt
  * 
  */
-public class StateEditPart extends AbstractStateEditPart implements
+public class StateEditPart extends ShapeNodeEditPart implements
 		IPrimaryEditPart {
 
 	private EditPart figureCompartmentEditPart;
@@ -91,6 +100,18 @@ public class StateEditPart extends AbstractStateEditPart implements
 	}
 
 	@Override
+	protected NodeFigure createNodeFigure() {
+		NodeFigure figure = new DefaultSizeNodeFigure(getDefaultSize());
+		figure.setLayoutManager(new StackLayout());
+		figure.setMinimumSize(getDefaultSize());
+		figure.add(createPrimaryShape());
+		return figure;
+	}
+
+	private Dimension getDefaultSize() {
+		return MapModeUtils.getDefaultSizeDimension(getMapMode());
+	}
+
 	public StateFigure createPrimaryShape() {
 		return new StateFigure(getMapMode());
 	}
@@ -249,12 +270,15 @@ public class StateEditPart extends AbstractStateEditPart implements
 			IFigure compartmentFigure = ((StateFigureCompartmentEditPart) childEditPart)
 					.getFigure();
 			pane.add(compartmentFigure);
-		} 
-//		else if (childEditPart instanceof SubmachineStateNameEditPart) {
-//			((SubmachineStateNameEditPart) childEditPart)
-//					.setLabel(getPrimaryShape().getNameFigure());
-//		} 
-		else {
+		} else if (childEditPart instanceof StateNameEditPart) {
+			((StateNameEditPart) childEditPart).setLabel(getPrimaryShape()
+					.getNameFigure());
+		} else if (childEditPart instanceof StateTextCompartmentEditPart) {
+			IFigure pane = getPrimaryShape().getTextCompartmentPane();
+			IFigure compartmentFigure = ((StateTextCompartmentEditPart) childEditPart)
+					.getFigure();
+			pane.add(compartmentFigure);
+		} else {
 			super.addChildVisual(childEditPart, index);
 		}
 	}
@@ -275,6 +299,37 @@ public class StateEditPart extends AbstractStateEditPart implements
 		super.removeNotationalListeners();
 		removeListenerFilter("TextCompartmentView");
 		removeListenerFilter("FigureCompartmentView");
+	}
+
+	/**
+	 * Returns the default background color for states
+	 */
+	@Override
+	public Object getPreferredValue(EStructuralFeature feature) {
+		if (feature == NotationPackage.eINSTANCE.getLineStyle_LineColor()) {
+			return FigureUtilities
+					.RGBToInteger(StatechartColorConstants.STATE_LINE_COLOR
+							.getRGB());
+		} else if (feature == NotationPackage.eINSTANCE
+				.getFillStyle_FillColor()) {
+			return FigureUtilities
+					.RGBToInteger(StatechartColorConstants.STATE_BG_COLOR
+							.getRGB());
+		}
+		return super.getPreferredValue(feature);
+	}
+
+	@Override
+	public State resolveSemanticElement() {
+		return (State) super.resolveSemanticElement();
+	}
+
+	@Override
+	protected void handleNotificationEvent(Notification notification) {
+		if (notification.getFeature() == NotationPackage.Literals.DRAWER_STYLE__COLLAPSED) {
+			refreshVisuals();
+		}
+		super.handleNotificationEvent(notification);
 	}
 
 }

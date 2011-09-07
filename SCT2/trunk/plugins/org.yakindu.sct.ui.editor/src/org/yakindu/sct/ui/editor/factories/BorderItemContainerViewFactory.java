@@ -22,7 +22,7 @@ import org.yakindu.sct.ui.editor.providers.SemanticHints;
  * @author andreas muelder
  * 
  */
-public class EntryViewFactory extends AbstractShapeViewFactory {
+public class BorderItemContainerViewFactory extends AbstractShapeViewFactory {
 
 	@Override
 	protected void decorateView(View containerView, View view,
@@ -37,7 +37,7 @@ public class EntryViewFactory extends AbstractShapeViewFactory {
 			eObjectAdapter = new EObjectAdapter(eObject);
 		}
 		getViewService().createNode(eObjectAdapter, view,
-				SemanticHints.ENTRY_BORDER_ITEM, ViewUtil.APPEND, true,
+				SemanticHints.BORDER_ITEM_LABEL_CONTAINER, ViewUtil.APPEND, true,
 				getPreferencesHint());
 
 	}

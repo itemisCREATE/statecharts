@@ -10,23 +10,25 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
-import org.eclipse.draw2d.Ellipse;
-import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.StackLayout;
+import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.handles.ConnectionHandle.HandleDirection;
+import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.ExitFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
 
-import de.itemis.gmf.runtime.commons.editparts.EllipseFixedSizeShapeNodeEditPart;
 import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPolicy;
+import de.itemis.gmf.runtime.commons.figures.EllipseAnchorDefaultSizeNodeFigure;
 
 /**
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
-public class ExitEditPart extends EllipseFixedSizeShapeNodeEditPart {
+public class ExitEditPart extends BorderedShapeEditPart {
 
 	public ExitEditPart(View view) {
 		super(view);
@@ -37,17 +39,16 @@ public class ExitEditPart extends EllipseFixedSizeShapeNodeEditPart {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE,
 				new OneWayConnectionHandlesEditPolicy(HandleDirection.INCOMING));
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
+				new NonResizableEditPolicyEx());
 	}
 
 	@Override
-	public Dimension getDefaultSize() {
-		return MapModeUtils.getMappedDimensions(getMapMode(),
+	protected NodeFigure createMainFigure() {
+		final NodeFigure figure = new EllipseAnchorDefaultSizeNodeFigure(
 				MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
+		figure.setLayoutManager(new StackLayout());
+		figure.add(new ExitFigure(getMapMode()));
+		return figure;
 	}
-
-	@Override
-	public Ellipse getPrimaryShape() {
-		return new ExitFigure(getMapMode());
-	}
-
 }

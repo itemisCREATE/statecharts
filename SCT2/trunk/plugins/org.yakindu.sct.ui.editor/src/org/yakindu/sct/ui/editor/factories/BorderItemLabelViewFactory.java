@@ -19,7 +19,7 @@ import org.yakindu.sct.ui.editor.providers.SemanticHints;
  * @author andreas muelder
  * 
  */
-public class EntryBorderItemViewFactory extends AbstractShapeViewFactory {
+public class BorderItemLabelViewFactory extends AbstractShapeViewFactory {
 
 	@Override
 	protected void decorateView(View containerView, View view,
@@ -28,6 +28,6 @@ public class EntryBorderItemViewFactory extends AbstractShapeViewFactory {
 		super.decorateView(containerView, view, semanticAdapter, semanticHint, index,
 				persisted);
 		
-		FactoryUtils.createLabel(view, SemanticHints.ENTRY_LABEL);
+		FactoryUtils.createLabel(view, SemanticHints.BORDER_ITEM_LABEL);
 	}
 }
