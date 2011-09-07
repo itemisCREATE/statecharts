@@ -65,9 +65,10 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider
 		factories.put(CHOICE, ShapeViewFactory.class);
 		factories.put(ENTRY, BorderItemContainerViewFactory.class);
 		factories.put(EXIT, BorderItemContainerViewFactory.class);
-		factories.put(BORDER_ITEM_LABEL_CONTAINER,BorderItemLabelViewFactory.class);
-		factories.put(SHALLOWHISTORY, ShapeViewFactory.class);
-		factories.put(DEEPHISTORY, ShapeViewFactory.class);
+		factories.put(BORDER_ITEM_LABEL_CONTAINER,
+				BorderItemLabelViewFactory.class);
+		factories.put(SHALLOWHISTORY, BorderItemContainerViewFactory.class);
+		factories.put(DEEPHISTORY, BorderItemContainerViewFactory.class);
 		factories.put(FINALSTATE, ShapeViewFactory.class);
 		factories.put(JUNCTION, ShapeViewFactory.class);
 		factories.put(SYNCHRONIZATION, ShapeViewFactory.class);
