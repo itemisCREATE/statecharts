@@ -482,8 +482,8 @@
          <propertySection
             id="property.section.domain.state" 
             tab="property.tab.domain"
-            class="org.yakindu.sct.ui.editor.propertysheets.StatePropertySection"
-            filter="org.yakindu.sct.ui.editor.StatePropertySectionFilter">
+            class="org.yakindu.sct.ui.editor.propertysheets.StatePropertySection">
+           <input type="org.yakindu.sct.ui.editor.editparts.StateEditPart"/>
          </propertySection>
         <!-- Statechart model section -->         
          <propertySection
@@ -507,6 +507,13 @@
             tab="property.tab.domain"
             class="org.yakindu.sct.ui.editor.propertysheets.EntryPropertySection">
             <input type="org.yakindu.sct.ui.editor.editparts.EntryEditPart"/>
+         </propertySection>
+            <!-- Exit model section -->         
+         <propertySection
+            id="property.section.domain.exit" 
+            tab="property.tab.domain"
+            class="org.yakindu.sct.ui.editor.propertysheets.NamePropertySection">
+            <input type="org.yakindu.sct.ui.editor.editparts.ExitEditPart"/>
          </propertySection>
             <!-- Region model section -->         
          <propertySection

@@ -45,11 +45,12 @@ public interface SemanticHints {
 	String SHALLOWHISTORY = "ShallowHistory";
 
 	String ENTRY = "Entry";
-	String ENTRY_BORDER_ITEM = "EntryBorderItem";
-	String ENTRY_LABEL = "EntryLabel";
 
 	String FINALSTATE = "FinalState";
 	String EXIT = "Exit";
+
+	String BORDER_ITEM_LABEL_CONTAINER = "BorderItemLabelContainer";
+	String BORDER_ITEM_LABEL = "BorderItemLabel";
 
 	String JOIN = "Join";
 

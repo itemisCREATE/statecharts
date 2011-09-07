@@ -78,6 +78,7 @@ public class StateViewFactory extends AbstractShapeViewFactory {
 
 	@Override
 	protected List<Style> createStyles(View view) {
+		@SuppressWarnings("unchecked")
 		List<Style> styles = super.createStyles(view);
 		styles.add(NotationFactory.eINSTANCE.createFontStyle());
 		return styles;

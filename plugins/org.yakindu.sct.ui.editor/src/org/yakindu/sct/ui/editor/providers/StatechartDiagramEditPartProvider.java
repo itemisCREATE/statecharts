@@ -18,9 +18,9 @@ import org.eclipse.gmf.runtime.diagram.ui.services.editpart.AbstractEditPartProv
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.editparts.ChoiceEditPart;
-import org.yakindu.sct.ui.editor.editparts.EntryBorderItemEditPart;
+import org.yakindu.sct.ui.editor.editparts.BorderItemEditPart;
 import org.yakindu.sct.ui.editor.editparts.EntryEditPart;
-import org.yakindu.sct.ui.editor.editparts.EntryLabelEditPart;
+import org.yakindu.sct.ui.editor.editparts.NamedElementLabelEditPart;
 import org.yakindu.sct.ui.editor.editparts.ExitEditPart;
 import org.yakindu.sct.ui.editor.editparts.FinalStateEditPart;
 import org.yakindu.sct.ui.editor.editparts.JunctionEditPart;
@@ -64,8 +64,8 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
 		editParts.put(CHOICE, ChoiceEditPart.class);
 		editParts.put(FINALSTATE, FinalStateEditPart.class);
 		editParts.put(ENTRY, EntryEditPart.class);
-		editParts.put(ENTRY_LABEL, EntryLabelEditPart.class);
-		editParts.put(ENTRY_BORDER_ITEM, EntryBorderItemEditPart.class);
+		editParts.put(BORDER_ITEM_LABEL, NamedElementLabelEditPart.class);
+		editParts.put(BORDER_ITEM_LABEL_CONTAINER, BorderItemEditPart.class);
 		editParts.put(SHALLOWHISTORY, EntryEditPart.class);
 		editParts.put(DEEPHISTORY, EntryEditPart.class);
 		editParts.put(JUNCTION, JunctionEditPart.class);

@@ -15,7 +15,7 @@ import de.itemis.gmf.runtime.commons.properties.descriptors.TextPropertyDescript
  * @author andreas muelder
  * 
  */
-public abstract class NamePropertySection extends AbstractEditorPropertySection {
+public class NamePropertySection extends AbstractEditorPropertySection {
 
 	@Override
 	protected void createPropertyDescriptors(

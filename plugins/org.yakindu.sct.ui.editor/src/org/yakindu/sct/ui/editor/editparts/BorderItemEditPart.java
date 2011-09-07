@@ -20,12 +20,12 @@ import org.eclipse.gmf.runtime.notation.View;
 
 /**
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
-public class EntryBorderItemEditPart extends AbstractBorderItemEditPart {
+public class BorderItemEditPart extends AbstractBorderItemEditPart {
 
-	public EntryBorderItemEditPart(View view) {
+	public BorderItemEditPart(View view) {
 		super(view);
 	}
 
@@ -37,6 +37,7 @@ public class EntryBorderItemEditPart extends AbstractBorderItemEditPart {
 		removeEditPolicy(EditPolicy.CONTAINER_ROLE);
 		removeEditPolicy(EditPolicy.COMPONENT_ROLE);
 	}
+
 	@Override
 	protected NodeFigure createNodeFigure() {
 		NodeFigure figure = new NodeFigure();
@@ -46,17 +47,18 @@ public class EntryBorderItemEditPart extends AbstractBorderItemEditPart {
 
 	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
-		if (childEditPart instanceof EntryLabelEditPart) {
-			getFigure().add(((EntryLabelEditPart) childEditPart).getFigure());
+		if (childEditPart instanceof NamedElementLabelEditPart) {
+			getFigure().add(
+					((NamedElementLabelEditPart) childEditPart).getFigure());
 		} else
 			super.addChildVisual(childEditPart, index);
 	}
 
 	@Override
 	protected void removeChildVisual(EditPart childEditPart) {
-		if (childEditPart instanceof EntryLabelEditPart) {
-			getFigure()
-					.remove(((EntryLabelEditPart) childEditPart).getFigure());
+		if (childEditPart instanceof NamedElementLabelEditPart) {
+			getFigure().remove(
+					((NamedElementLabelEditPart) childEditPart).getFigure());
 		} else
 			super.removeChildVisual(childEditPart);
 	}
