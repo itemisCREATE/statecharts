@@ -11,6 +11,7 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.yakindu.sct.model.sexec.Cycle
 
 class ModelSequencer {
 	
@@ -18,14 +19,14 @@ class ModelSequencer {
 
 	def ExecutionFlow create r : SexecFactory::eINSTANCE.createExecutionFlow transform(Statechart statechart){
 		var content = EcoreUtil2::eAllContentsAsList(statechart)
-		var leafStates = content.filter(e | e instanceof State && (e as State).simple)
-		r.states.addAll(leafStates.map( s | transform(s as State)));
+		val leafStates = content.filter(e | e instanceof State && (e as State).simple)
+		r.states.addAll(leafStates.map( s | (s as State).transform));
 	}
 	
 	
 	def ExecutionState create r : SexecFactory::eINSTANCE.createExecutionState transform(State state){
 		r.simpleName = state.name
-		r.name = state.fullyQualifiedName.toString	
+		r.name = state.fullyQualifiedName.toString.replaceAll(" ", "")
 	}
 	
 	

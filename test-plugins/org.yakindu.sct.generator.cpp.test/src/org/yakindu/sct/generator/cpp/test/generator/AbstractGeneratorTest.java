@@ -22,6 +22,7 @@ import org.eclipse.xpand2.output.OutputImpl;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -93,7 +94,7 @@ public class AbstractGeneratorTest {
 			@Override
 			protected EPackage[] allPackages() {
 				return new EPackage[] { SGraphPackage.eINSTANCE,
-						StextPackage.eINSTANCE, EcorePackage.eINSTANCE };
+						StextPackage.eINSTANCE, EcorePackage.eINSTANCE, SexecPackage.eINSTANCE };
 			}
 		};
 		execCtx.registerMetaModel(metamodel);
