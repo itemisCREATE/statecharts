@@ -19,5 +19,11 @@
             class="org.yakindu.sct.model.sgraph.SGraphPackage"
             genModel="model/emf/sgraph.genmodel"/>
    </extension>
+    <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.yakindu.org/sct/core/2.0.0"
+            class="org.yakindu.sct.model.sgraph.core.CorePackage"
+            genModel="model/emf/sgraph.genmodel"/>
+   </extension>
 
 </plugin>
