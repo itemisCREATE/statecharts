@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -27,7 +28,6 @@ import com.google.inject.Injector;
  */
 public class CPPGeneratorTest extends AbstractGeneratorTest {
 
-	
 	@Inject
 	private ModelSequencer sequencer;
 
@@ -36,7 +36,7 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 		Injector injector = Guice.createInjector(new TestModule());
 		injector.injectMembers(this);
 	}
-	
+
 	@Test
 	public void testExecuteGenerator() throws Exception {
 
@@ -56,8 +56,9 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 		resource.load(Collections.emptyMap());
 
 		Statechart statechart = (Statechart) resource.getContents().get(0);
-		
+		Assert.isNotNull(statechart);
 		ExecutionFlow flow = sequencer.transform(statechart);
+		Assert.isNotNull(flow);
 		generate(flow, templatePath, project);
 
 	}

@@ -1,7 +1,16 @@
 «IMPORT sexec»
 
 «DEFINE main FOR ExecutionFlow»
+
 «FILE 'Main.cpp'»
-	Hello C++
+Execution States:
+«EXPAND executionStates FOREACH this.states»
+
 «ENDFILE»
+«ENDDEFINE»
+
+
+«DEFINE executionStates FOR ExecutionState»
+Name: «this.name»
+Simple Name: «this.simpleName»
 «ENDDEFINE»
