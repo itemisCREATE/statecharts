@@ -1,0 +1,7 @@
+«IMPORT sexec»
+
+«DEFINE Main FOR ExecutionFlow»
+«FILE 'Main.cpp'»
+	Hello C++
+«ENDFILE»
+«ENDDEFINE»

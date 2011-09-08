@@ -1,9 +1,0 @@
-«IMPORT sgraph»
-«EXTENSION template::GeneratorExtensions»
-
-«DEFINE main FOR Statechart»
-	«FILE "Test.cpp"»
-	Hello World!
-	«ENDFILE»
-«ENDDEFINE»
-
