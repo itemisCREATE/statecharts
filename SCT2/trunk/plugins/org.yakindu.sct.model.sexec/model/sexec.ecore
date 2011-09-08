@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sexec"
+    nsURI="http://www.yakindu.org/sct/sexec/1.0.0" nsPrefix="sexec">
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionFlow">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
+        eType="#//ExecutionState" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sequences" upperBound="-1"
+        eType="#//Sequence" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionState" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cycle" eType="#//Cycle"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Cycle" eSuperTypes="#//Sequence"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Step" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sequence" eSuperTypes="#//Step #//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="steps" upperBound="-1"
+        eType="#//Step" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="If" eSuperTypes="#//Step">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//core/Statement"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="then" eType="#//Step"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="else" eType="#//Step"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Execution" eSuperTypes="#//Step">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statement" eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//core/Statement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnterState" eSuperTypes="#//Step">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExitState" eSuperTypes="#//Step">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SequenceExecution" eSuperTypes="#//Step">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sequence" eType="#//Sequence"/>
+  </eClassifiers>
+</ecore:EPackage>
