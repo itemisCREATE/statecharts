@@ -334,7 +334,9 @@ public class StateImpl extends VertexImpl implements State {
 	 * @generated
 	 */
 	public boolean isComposite() {
-		return getSubRegions().size() >= 1;
+		// TODO: implement this method to return the 'Composite' attribute
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**

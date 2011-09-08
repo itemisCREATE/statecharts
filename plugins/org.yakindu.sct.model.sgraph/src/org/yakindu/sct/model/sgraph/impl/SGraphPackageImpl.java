@@ -27,6 +27,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.core.CorePackage;
+import org.yakindu.sct.model.sgraph.core.impl.CorePackageImpl;
 import org.yakindu.sct.model.sgraph.util.SGraphValidator;
 
 /**
@@ -262,11 +264,15 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 
 		isInited = true;
 
+		// Obtain or create and register interdependencies
+		CorePackageImpl theCorePackage = (CorePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) instanceof CorePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) : CorePackage.eINSTANCE);
+
 		// Load packages
 		theSGraphPackage.loadPackage();
 
 		// Fix loaded packages
 		theSGraphPackage.fixPackageContents();
+		theCorePackage.fixPackageContents();
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
