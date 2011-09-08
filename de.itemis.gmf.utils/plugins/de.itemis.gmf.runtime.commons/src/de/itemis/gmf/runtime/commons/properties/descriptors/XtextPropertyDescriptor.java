@@ -27,7 +27,7 @@ import de.itemis.xtext.utils.jface.viewers.XtextStyledText;
 /**
  * 
  * @author andreas muelder - Initial contribution and API
- *
+ * 
  */
 public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 
@@ -36,13 +36,13 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 
 	protected XtextStyledText xtextWidget;
 
-	public XtextPropertyDescriptor(EStructuralFeature feature, String labelName,
-			Injector injector) {
+	public XtextPropertyDescriptor(EStructuralFeature feature,
+			String labelName, Injector injector) {
 		this(feature, labelName, injector, (Resource) null);
 	}
 
-	public XtextPropertyDescriptor(EStructuralFeature feature, String labelName,
-			Injector injector, Resource context) {
+	public XtextPropertyDescriptor(EStructuralFeature feature,
+			String labelName, Injector injector, Resource context) {
 		super(feature, labelName);
 		this.injector = injector;
 		this.context = context;
@@ -69,6 +69,7 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 				context);
 		GridDataFactory.fillDefaults().grab(true, true)
 				.applyTo(xtextWidget.getStyledText());
+	
 		return (StyledText) xtextWidget.getStyledText();
 	}
 
@@ -76,7 +77,6 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 			Injector injector, Resource context) {
 		return new XtextStyledText(parent, style, getInjector(), context);
 	}
-
 
 	public Injector getInjector() {
 		return injector;
@@ -93,9 +93,7 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 
 	@Override
 	protected IObservableValue getWidgetValue() {
-		return  WidgetProperties.text(SWT.FocusOut)
-				.observe(getControl());
+		return WidgetProperties.text(SWT.FocusOut).observe(getControl());
 	}
-
 
 }

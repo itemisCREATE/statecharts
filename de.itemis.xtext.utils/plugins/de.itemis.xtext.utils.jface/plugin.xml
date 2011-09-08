@@ -16,5 +16,22 @@
          </activeWhen>
       </handler>
    </extension>
+    <extension
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+      <specification
+            annotationType="com.mycompany.element"
+            colorPreferenceKey="annotateElemColor"
+            colorPreferenceValue="255,255,0"
+            highlightPreferenceKey="annotateElemHighlight"
+            highlightPreferenceValue="true"
+            includeOnPreferencePage="true"
+            label="Sample Annotation"
+            overviewRulerPreferenceKey="annotateElemOverviewRuler"
+            textPreferenceKey="annotateElemText"
+            verticalRulerPreferenceKey="annotateElemVerticalRuler"
+            verticalRulerPreferenceValue="true">
+      </specification>
+   </extension>
+   
 
 </plugin>
