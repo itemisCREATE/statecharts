@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext;
 
@@ -240,15 +241,6 @@ public interface StextFactory extends EFactory
    * @generated
    */
   AlwaysEvent createAlwaysEvent();
-
-  /**
-   * Returns a new object of class '<em>Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Statement</em>'.
-   * @generated
-   */
-  Statement createStatement();
 
   /**
    * Returns a new object of class '<em>Assignment</em>'.

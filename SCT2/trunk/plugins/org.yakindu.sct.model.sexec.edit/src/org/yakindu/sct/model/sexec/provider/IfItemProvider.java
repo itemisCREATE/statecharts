@@ -26,6 +26,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.SexecPackage;
+import org.yakindu.sct.model.sgraph.SGraphFactory;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.sct.model.sexec.If} object.
@@ -196,6 +197,11 @@ public class IfItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.IF__CONDITION,
+				 SGraphFactory.eINSTANCE.createStatement()));
 	}
 
 }

@@ -4,17 +4,18 @@
 package org.yakindu.sct.model.stext.ui.contentassist.antlr;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
 
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 
 import com.google.inject.Inject;
+
+import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 
 public class STextParser extends AbstractContentAssistParser {
 	

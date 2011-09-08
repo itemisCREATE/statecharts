@@ -178,6 +178,8 @@ public class SGraphValidator extends EObjectValidator {
 				return validateSynchronization((Synchronization)value, diagnostics, context);
 			case SGraphPackage.STATE:
 				return validateState((State)value, diagnostics, context);
+			case SGraphPackage.STATEMENT:
+				return validateStatement((Statement)value, diagnostics, context);
 			case SGraphPackage.ENTRY_KIND:
 				return validateEntryKind((EntryKind)value, diagnostics, context);
 			default:
@@ -399,6 +401,15 @@ public class SGraphValidator extends EObjectValidator {
 			return error(state, diagnostics, ISSUE_STATE_WITHOUT_NAME);
 		}
 		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateStatement(Statement statement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(statement, diagnostics, context);
 	}
 
 	/**

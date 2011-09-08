@@ -1184,6 +1184,25 @@ public interface SGraphPackage extends EPackage {
 	int STATE_FEATURE_COUNT = VERTEX_FEATURE_COUNT + 10;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.StatementImpl <em>Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgraph.impl.StatementImpl
+	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getStatement()
+	 * @generated
+	 */
+	int STATEMENT = 23;
+
+	/**
+	 * The number of structural features of the '<em>Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.EntryKind <em>Entry Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1191,7 +1210,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEntryKind()
 	 * @generated
 	 */
-	int ENTRY_KIND = 23;
+	int ENTRY_KIND = 24;
 
 
 	/**
@@ -1428,6 +1447,16 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getState_Composite();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Statement <em>Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Statement</em>'.
+	 * @see org.yakindu.sct.model.sgraph.Statement
+	 * @generated
+	 */
+	EClass getStatement();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Variable <em>Variable</em>}'.
@@ -1931,6 +1960,16 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STATE__COMPOSITE = eINSTANCE.getState_Composite();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.StatementImpl <em>Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgraph.impl.StatementImpl
+		 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getStatement()
+		 * @generated
+		 */
+		EClass STATEMENT = eINSTANCE.getStatement();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.VariableImpl <em>Variable</em>}' class.

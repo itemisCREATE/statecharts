@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.sgraph.core;
+package org.yakindu.sct.model.sgraph;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  *
- * @see org.yakindu.sct.model.sgraph.core.CorePackage#getStatement()
+ * @see org.yakindu.sct.model.sgraph.SGraphPackage#getStatement()
  * @model
  * @generated
  */

@@ -2,7 +2,6 @@ grammar org.yakindu.sct.model.stext.SText with org.eclipse.xtext.common.Terminal
 
 generate stext "http://www.yakindu.org/sct/statechart/SText"
 import "platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore" as sct
-
 /* ---- root rules ----
 These root rules are not relevant for the grammar integration in the statechart. They just integrate the different start rules consistently 
 into a single grammar. 
@@ -156,7 +155,7 @@ AlwaysEvent:
 	{AlwaysEvent} 'always';
 
 /* --- statements --- */
-Statement:
+Statement returns sct::Statement:
 	Assignment | EventRaising | OperationCall;
 
 Assignment:

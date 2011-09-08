@@ -1,102 +1,111 @@
 package org.yakindu.sct.model.stext.ui.contentassist.antlr.internal; 
 
-import org.antlr.runtime.BaseRecognizer;
-import org.antlr.runtime.BitSet;
-import org.antlr.runtime.FailedPredicateException;
-import org.antlr.runtime.IntStream;
-import org.antlr.runtime.NoViableAltException;
-import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.RecognizerSharedState;
-import org.antlr.runtime.TokenStream;
-import org.eclipse.xtext.Grammar;
+import java.io.InputStream;
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.parser.impl.*;
+import org.eclipse.xtext.parsetree.*;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.DFA;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
+
+
+
+import org.antlr.runtime.*;
+import java.util.Stack;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalSTextParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_BOOL", "RULE_INT", "RULE_HEX", "RULE_STRING", "RULE_FLOAT", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'in'", "'out'", "'='", "'*='", "'/='", "'%='", "'+='", "'-='", "'<<='", "'>>='", "'&='", "'^='", "'|='", "'<<'", "'>>'", "'+'", "'-'", "'*'", "'/'", "'%'", "'~'", "'<'", "'<='", "'>'", "'>='", "'=='", "'!='", "'s'", "'ms'", "'ns'", "'void'", "'integer'", "'real'", "'boolean'", "'string'", "'@@statechart@@'", "'@@state@@'", "'@@transition@@'", "'interface'", "':'", "'internal'", "'event'", "'var'", "'clock'", "'operation'", "'('", "')'", "','", "'entrypoint'", "'exitpoint'", "'#'", "'['", "']'", "';'", "'after'", "'entry'", "'exit'", "'oncycle'", "'always'", "'raise'", "'?'", "'||'", "'&&'", "'!'", "'^'", "'|'", "'&'", "'readonly'", "'external'"
     };
-    public static final int T__42=42;
-    public static final int T__28=28;
-    public static final int T__57=57;
-    public static final int T__23=23;
-    public static final int T__80=80;
-    public static final int T__51=51;
-    public static final int RULE_STRING=7;
-    public static final int T__69=69;
-    public static final int T__47=47;
-    public static final int T__73=73;
-    public static final int T__50=50;
-    public static final int T__21=21;
-    public static final int RULE_FLOAT=8;
-    public static final int T__65=65;
-    public static final int T__19=19;
-    public static final int RULE_HEX=6;
-    public static final int T__72=72;
-    public static final int T__70=70;
-    public static final int T__67=67;
-    public static final int T__74=74;
-    public static final int T__39=39;
-    public static final int T__30=30;
-    public static final int T__46=46;
-    public static final int T__52=52;
     public static final int T__68=68;
-    public static final int T__17=17;
-    public static final int T__62=62;
-    public static final int RULE_INT=5;
-    public static final int T__27=27;
-    public static final int T__24=24;
-    public static final int T__49=49;
-    public static final int T__61=61;
-    public static final int T__59=59;
-    public static final int T__54=54;
-    public static final int T__48=48;
-    public static final int T__34=34;
-    public static final int T__56=56;
-    public static final int T__15=15;
-    public static final int RULE_ML_COMMENT=10;
-    public static final int T__35=35;
+    public static final int T__69=69;
     public static final int RULE_ID=9;
-    public static final int T__78=78;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int T__58=58;
-    public static final int T__79=79;
-    public static final int T__64=64;
-    public static final int T__44=44;
     public static final int T__66=66;
-    public static final int T__14=14;
-    public static final int T__33=33;
-    public static final int T__22=22;
-    public static final int T__77=77;
-    public static final int T__55=55;
+    public static final int T__67=67;
+    public static final int T__64=64;
     public static final int T__29=29;
-    public static final int T__45=45;
-    public static final int RULE_WS=12;
+    public static final int T__65=65;
+    public static final int T__28=28;
+    public static final int T__62=62;
+    public static final int T__27=27;
     public static final int T__63=63;
-    public static final int T__75=75;
-    public static final int T__43=43;
-    public static final int T__31=31;
-    public static final int T__40=40;
-    public static final int EOF=-1;
-    public static final int T__53=53;
-    public static final int T__16=16;
-    public static final int T__32=32;
-    public static final int T__38=38;
-    public static final int RULE_BOOL=4;
-    public static final int T__76=76;
-    public static final int T__37=37;
-    public static final int RULE_ANY_OTHER=13;
-    public static final int T__82=82;
     public static final int T__26=26;
-    public static final int T__81=81;
     public static final int T__25=25;
-    public static final int RULE_SL_COMMENT=11;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=13;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int RULE_BOOL=4;
+    public static final int T__61=61;
     public static final int T__60=60;
-    public static final int T__41=41;
-    public static final int T__71=71;
+    public static final int EOF=-1;
+    public static final int T__55=55;
+    public static final int T__56=56;
+    public static final int T__19=19;
+    public static final int T__57=57;
+    public static final int RULE_HEX=6;
+    public static final int T__58=58;
+    public static final int T__16=16;
+    public static final int T__51=51;
+    public static final int T__15=15;
+    public static final int T__52=52;
     public static final int T__18=18;
+    public static final int T__53=53;
+    public static final int T__54=54;
+    public static final int T__17=17;
+    public static final int T__14=14;
+    public static final int T__59=59;
+    public static final int RULE_INT=5;
+    public static final int T__50=50;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__80=80;
+    public static final int T__46=46;
+    public static final int T__81=81;
+    public static final int T__47=47;
+    public static final int T__82=82;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int RULE_FLOAT=8;
+    public static final int RULE_SL_COMMENT=11;
+    public static final int RULE_ML_COMMENT=10;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int RULE_STRING=7;
+    public static final int T__32=32;
+    public static final int T__71=71;
+    public static final int T__33=33;
+    public static final int T__72=72;
+    public static final int T__34=34;
+    public static final int T__35=35;
+    public static final int T__70=70;
+    public static final int T__36=36;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__39=39;
+    public static final int RULE_WS=12;
+    public static final int T__76=76;
+    public static final int T__75=75;
+    public static final int T__74=74;
+    public static final int T__73=73;
+    public static final int T__79=79;
+    public static final int T__78=78;
+    public static final int T__77=77;
 
     // delegates
     // delegators
@@ -6568,11 +6577,11 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             if ( (LA9_0==RULE_ID) ) {
                 int LA9_1 = input.LA(2);
 
-                if ( (LA9_1==59) ) {
-                    alt9=3;
-                }
-                else if ( ((LA9_1>=16 && LA9_1<=26)) ) {
+                if ( ((LA9_1>=16 && LA9_1<=26)) ) {
                     alt9=1;
+                }
+                else if ( (LA9_1==59) ) {
+                    alt9=3;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -6890,11 +6899,11 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
                 {
                 int LA12_2 = input.LA(2);
 
-                if ( (LA12_2==EOF||LA12_2==RULE_ID||(LA12_2>=14 && LA12_2<=15)||(LA12_2>=27 && LA12_2<=33)||(LA12_2>=35 && LA12_2<=40)||(LA12_2>=49 && LA12_2<=58)||(LA12_2>=60 && LA12_2<=63)||(LA12_2>=65 && LA12_2<=72)||(LA12_2>=74 && LA12_2<=76)||(LA12_2>=78 && LA12_2<=80)) ) {
-                    alt12=1;
-                }
-                else if ( (LA12_2==59) ) {
+                if ( (LA12_2==59) ) {
                     alt12=3;
+                }
+                else if ( (LA12_2==EOF||LA12_2==RULE_ID||(LA12_2>=14 && LA12_2<=15)||(LA12_2>=27 && LA12_2<=33)||(LA12_2>=35 && LA12_2<=40)||(LA12_2>=49 && LA12_2<=58)||(LA12_2>=60 && LA12_2<=63)||(LA12_2>=65 && LA12_2<=72)||(LA12_2>=74 && LA12_2<=76)||(LA12_2>=78 && LA12_2<=80)) ) {
+                    alt12=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
