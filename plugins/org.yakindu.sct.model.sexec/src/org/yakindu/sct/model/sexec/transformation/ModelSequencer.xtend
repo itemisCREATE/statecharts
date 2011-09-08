@@ -16,16 +16,16 @@ class ModelSequencer {
 	
 	@Inject extension IQualifiedNameProvider qfnProvider
 
-	def ExecutionFlow create result : SexecFactory::eINSTANCE.createExecutionFlow transform(Statechart statechart){
+	def ExecutionFlow create r : SexecFactory::eINSTANCE.createExecutionFlow transform(Statechart statechart){
 		var content = EcoreUtil2::eAllContentsAsList(statechart)
 		var leafStates = content.filter(e | e instanceof State && (e as State).simple)
-		leafStates.forEach(state | result.states.add(transform(state as State)))	
+		r.states.addAll(leafStates.map( s | transform(s as State)));
 	}
 	
-	def ExecutionState create result : SexecFactory::eINSTANCE.createExecutionState transform(State state){
-		result.simpleName = state.name
-		result.name = state.fullyQualifiedName.toString
-		
+	
+	def ExecutionState create r : SexecFactory::eINSTANCE.createExecutionState transform(State state){
+		r.simpleName = state.name
+		r.name = state.fullyQualifiedName.toString	
 	}
 	
 	

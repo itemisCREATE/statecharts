@@ -9,6 +9,7 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.yakindu.sct.model.sexec,
  org.yakindu.sct.model.sexec.impl,
+ org.yakindu.sct.model.sexec.transformation,
  org.yakindu.sct.model.sexec.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
