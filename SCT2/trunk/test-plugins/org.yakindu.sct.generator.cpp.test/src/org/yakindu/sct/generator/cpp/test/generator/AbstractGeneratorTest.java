@@ -21,8 +21,8 @@ import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
+import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
@@ -73,7 +73,7 @@ public class AbstractGeneratorTest {
 	 * @param statechart
 	 *            the Statechart model to generate code for
 	 */
-	protected void generate(Statechart statechart, String templatePath,
+	protected void generate(ExecutionFlow flow, String templatePath,
 			IProject project) throws CoreException {
 
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
@@ -100,7 +100,7 @@ public class AbstractGeneratorTest {
 
 		// generate
 		XpandFacade facade = XpandFacade.create(execCtx);
-		facade.evaluate(templatePath, statechart);
+		facade.evaluate(templatePath, flow);
 
 		// refresh the project to get external updates:
 		resource.refreshLocal(IResource.DEPTH_INFINITE,
