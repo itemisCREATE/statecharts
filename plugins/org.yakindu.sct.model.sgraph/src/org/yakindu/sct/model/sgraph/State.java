@@ -122,22 +122,11 @@ public interface State extends Vertex, ExpressionElement, ReactiveElement, Scope
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Simple</em>' attribute.
-	 * @see #setSimple(boolean)
 	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_Simple()
-	 * @model transient="true" volatile="true" derived="true"
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	boolean isSimple();
-
-	/**
-	 * Sets the value of the '{@link org.yakindu.sct.model.sgraph.State#isSimple <em>Simple</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Simple</em>' attribute.
-	 * @see #isSimple()
-	 * @generated
-	 */
-	void setSimple(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Composite</b></em>' attribute.
