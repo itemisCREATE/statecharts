@@ -61,8 +61,7 @@ public class StateImpl extends VertexImpl implements State {
 
 	/**
 	 * The default value of the '{@link #getExpression() <em>Expression</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getExpression()
 	 * @generated
 	 * @ordered
@@ -71,8 +70,7 @@ public class StateImpl extends VertexImpl implements State {
 
 	/**
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getExpression()
 	 * @generated
 	 * @ordered
@@ -81,8 +79,7 @@ public class StateImpl extends VertexImpl implements State {
 
 	/**
 	 * The cached value of the '{@link #getReactions() <em>Reactions</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getReactions()
 	 * @generated
 	 * @ordered
@@ -90,9 +87,10 @@ public class StateImpl extends VertexImpl implements State {
 	protected EList<Reaction> reactions;
 
 	/**
-	 * The cached value of the '{@link #getLocalReactions() <em>Local Reactions</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getLocalReactions()
+	 * <em>Local Reactions</em>}' containment reference list. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getLocalReactions()
 	 * @generated
 	 * @ordered
@@ -101,8 +99,7 @@ public class StateImpl extends VertexImpl implements State {
 
 	/**
 	 * The cached value of the '{@link #getScopes() <em>Scopes</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getScopes()
 	 * @generated
 	 * @ordered
@@ -129,8 +126,8 @@ public class StateImpl extends VertexImpl implements State {
 
 	/**
 	 * The cached value of the '{@link #getSubstatechart() <em>Substatechart</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @see #getSubstatechart()
 	 * @generated
 	 * @ordered
@@ -139,8 +136,7 @@ public class StateImpl extends VertexImpl implements State {
 
 	/**
 	 * The default value of the '{@link #isSubmachine() <em>Submachine</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isSubmachine()
 	 * @generated
 	 * @ordered
@@ -149,8 +145,7 @@ public class StateImpl extends VertexImpl implements State {
 
 	/**
 	 * The default value of the '{@link #isSimple() <em>Simple</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isSimple()
 	 * @generated
 	 * @ordered
@@ -159,8 +154,7 @@ public class StateImpl extends VertexImpl implements State {
 
 	/**
 	 * The default value of the '{@link #isComposite() <em>Composite</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isComposite()
 	 * @generated
 	 * @ordered
@@ -185,8 +179,7 @@ public class StateImpl extends VertexImpl implements State {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getExpression() {
@@ -194,8 +187,7 @@ public class StateImpl extends VertexImpl implements State {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setExpression(String newExpression) {
@@ -206,8 +198,7 @@ public class StateImpl extends VertexImpl implements State {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EList<Reaction> getReactions() {
@@ -218,8 +209,7 @@ public class StateImpl extends VertexImpl implements State {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EList<Reaction> getLocalReactions() {
@@ -230,8 +220,7 @@ public class StateImpl extends VertexImpl implements State {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EList<Scope> getScopes() {
@@ -262,8 +251,7 @@ public class StateImpl extends VertexImpl implements State {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Statechart getSubstatechart() {
@@ -279,8 +267,7 @@ public class StateImpl extends VertexImpl implements State {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Statechart basicGetSubstatechart() {
@@ -288,8 +275,7 @@ public class StateImpl extends VertexImpl implements State {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setSubstatechart(Statechart newSubstatechart) {
@@ -300,8 +286,8 @@ public class StateImpl extends VertexImpl implements State {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public boolean isSubmachine() {
@@ -309,34 +295,22 @@ public class StateImpl extends VertexImpl implements State {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public boolean isSimple() {
 		return !isComposite() && !isSubmachine();
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSimple(boolean newSimple) {
-		// TODO: implement this method to set the 'Simple' attribute
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
 	 */
 	public boolean isComposite() {
-		// TODO: implement this method to return the 'Composite' attribute
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return getSubRegions().size() > 0;
 	}
 
 	/**
@@ -415,9 +389,6 @@ public class StateImpl extends VertexImpl implements State {
 			case SGraphPackage.STATE__SUBSTATECHART:
 				setSubstatechart((Statechart)newValue);
 				return;
-			case SGraphPackage.STATE__SIMPLE:
-				setSimple((Boolean)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -443,9 +414,6 @@ public class StateImpl extends VertexImpl implements State {
 				return;
 			case SGraphPackage.STATE__SUBSTATECHART:
 				setSubstatechart((Statechart)null);
-				return;
-			case SGraphPackage.STATE__SIMPLE:
-				setSimple(SIMPLE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -483,8 +451,7 @@ public class StateImpl extends VertexImpl implements State {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -512,8 +479,7 @@ public class StateImpl extends VertexImpl implements State {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -541,8 +507,7 @@ public class StateImpl extends VertexImpl implements State {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
