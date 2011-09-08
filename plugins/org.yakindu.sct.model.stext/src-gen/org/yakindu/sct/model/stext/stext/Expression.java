@@ -2,9 +2,11 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext;
 
+import org.yakindu.sct.model.sgraph.Statement;
 
 /**
  * <!-- begin-user-doc -->

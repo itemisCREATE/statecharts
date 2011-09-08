@@ -7,9 +7,6 @@ Bundle-ClassPath: .
 Bundle-Vendor: YAKINDU
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.model.sgraph,
- org.yakindu.sct.model.sgraph.core,
- org.yakindu.sct.model.sgraph.core.impl,
- org.yakindu.sct.model.sgraph.core.util,
  org.yakindu.sct.model.sgraph.impl,
  org.yakindu.sct.model.sgraph.util
 Require-Bundle: org.eclipse.core.runtime,

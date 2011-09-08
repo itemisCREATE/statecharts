@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -10,8 +11,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+
 import org.yakindu.sct.model.stext.stext.AdditiveOperator;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.Assignment;
@@ -66,7 +70,6 @@ import org.yakindu.sct.model.stext.stext.StateDeclaration;
 import org.yakindu.sct.model.stext.stext.StateRoot;
 import org.yakindu.sct.model.stext.stext.StatechartDefinition;
 import org.yakindu.sct.model.stext.stext.StatechartRoot;
-import org.yakindu.sct.model.stext.stext.Statement;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
@@ -253,13 +256,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * @generated
    */
   private EClass alwaysEventEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass statementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1001,16 +997,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
   public EClass getAlwaysEvent()
   {
     return alwaysEventEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getStatement()
-  {
-    return statementEClass;
   }
 
   /**
@@ -1988,8 +1974,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     alwaysEventEClass = createEClass(ALWAYS_EVENT);
 
-    statementEClass = createEClass(STATEMENT);
-
     assignmentEClass = createEClass(ASSIGNMENT);
     createEReference(assignmentEClass, ASSIGNMENT__VAR_REF);
     createEAttribute(assignmentEClass, ASSIGNMENT__OPERATOR);
@@ -2159,9 +2143,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     exitEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
     onCycleEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
     alwaysEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
-    assignmentEClass.getESuperTypes().add(this.getStatement());
-    eventRaisingEClass.getESuperTypes().add(this.getStatement());
-    expressionEClass.getESuperTypes().add(this.getStatement());
+    assignmentEClass.getESuperTypes().add(theSGraphPackage.getStatement());
+    eventRaisingEClass.getESuperTypes().add(theSGraphPackage.getStatement());
+    expressionEClass.getESuperTypes().add(theSGraphPackage.getStatement());
     simpleScopeEClass.getESuperTypes().add(theSGraphPackage.getScope());
     interfaceScopeEClass.getESuperTypes().add(theSGraphPackage.getScope());
     internalScopeEClass.getESuperTypes().add(theSGraphPackage.getScope());
@@ -2255,8 +2239,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     initEClass(alwaysEventEClass, AlwaysEvent.class, "AlwaysEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
     initEClass(assignmentEClass, Assignment.class, "Assignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAssignment_VarRef(), theSGraphPackage.getVariable(), null, "varRef", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAssignment_Operator(), this.getAssignmentOperator(), "operator", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2301,7 +2283,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEReference(getReactionTrigger_GuardExpression(), this.getExpression(), null, "guardExpression", null, 0, 1, ReactionTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(reactionEffectEClass, ReactionEffect.class, "ReactionEffect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getReactionEffect_Actions(), this.getStatement(), null, "actions", null, 0, -1, ReactionEffect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getReactionEffect_Actions(), theSGraphPackage.getStatement(), null, "actions", null, 0, -1, ReactionEffect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(conditionalExpressionEClass, ConditionalExpression.class, "ConditionalExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getConditionalExpression_Condition(), this.getExpression(), null, "condition", null, 0, 1, ConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

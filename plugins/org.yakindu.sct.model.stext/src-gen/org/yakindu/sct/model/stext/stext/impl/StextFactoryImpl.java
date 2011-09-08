@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -9,73 +10,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.yakindu.sct.model.stext.stext.AdditiveOperator;
-import org.yakindu.sct.model.stext.stext.AlwaysEvent;
-import org.yakindu.sct.model.stext.stext.Assignment;
-import org.yakindu.sct.model.stext.stext.AssignmentOperator;
-import org.yakindu.sct.model.stext.stext.BitwiseAndExpression;
-import org.yakindu.sct.model.stext.stext.BitwiseOrExpression;
-import org.yakindu.sct.model.stext.stext.BitwiseXorExpression;
-import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
-import org.yakindu.sct.model.stext.stext.Clock;
-import org.yakindu.sct.model.stext.stext.ConditionalExpression;
-import org.yakindu.sct.model.stext.stext.DefRoot;
-import org.yakindu.sct.model.stext.stext.Direction;
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
-import org.yakindu.sct.model.stext.stext.EntryEvent;
-import org.yakindu.sct.model.stext.stext.EntryPointSpec;
-import org.yakindu.sct.model.stext.stext.Entrypoint;
-import org.yakindu.sct.model.stext.stext.EventDefinition;
-import org.yakindu.sct.model.stext.stext.EventDerivation;
-import org.yakindu.sct.model.stext.stext.EventRaising;
-import org.yakindu.sct.model.stext.stext.EventSpec;
-import org.yakindu.sct.model.stext.stext.ExitEvent;
-import org.yakindu.sct.model.stext.stext.ExitPointSpec;
-import org.yakindu.sct.model.stext.stext.Exitpoint;
-import org.yakindu.sct.model.stext.stext.Expression;
-import org.yakindu.sct.model.stext.stext.InterfaceScope;
-import org.yakindu.sct.model.stext.stext.InternalScope;
-import org.yakindu.sct.model.stext.stext.LocalReaction;
-import org.yakindu.sct.model.stext.stext.LogicalAndExpression;
-import org.yakindu.sct.model.stext.stext.LogicalNotExpression;
-import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
-import org.yakindu.sct.model.stext.stext.LogicalRelationExpression;
-import org.yakindu.sct.model.stext.stext.MultiplicativeOperator;
-import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression;
-import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
-import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression;
-import org.yakindu.sct.model.stext.stext.OnCycleEvent;
-import org.yakindu.sct.model.stext.stext.Operation;
-import org.yakindu.sct.model.stext.stext.OperationCall;
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
-import org.yakindu.sct.model.stext.stext.ReactionEffect;
-import org.yakindu.sct.model.stext.stext.ReactionPriority;
-import org.yakindu.sct.model.stext.stext.ReactionProperties;
-import org.yakindu.sct.model.stext.stext.ReactionProperty;
-import org.yakindu.sct.model.stext.stext.ReactionTrigger;
-import org.yakindu.sct.model.stext.stext.RegularEventSpec;
-import org.yakindu.sct.model.stext.stext.RelationalOperator;
-import org.yakindu.sct.model.stext.stext.Root;
-import org.yakindu.sct.model.stext.stext.ShiftExpression;
-import org.yakindu.sct.model.stext.stext.ShiftOperator;
-import org.yakindu.sct.model.stext.stext.SimpleScope;
-import org.yakindu.sct.model.stext.stext.StateDeclaration;
-import org.yakindu.sct.model.stext.stext.StateRoot;
-import org.yakindu.sct.model.stext.stext.StatechartDefinition;
-import org.yakindu.sct.model.stext.stext.StatechartRoot;
-import org.yakindu.sct.model.stext.stext.Statement;
-import org.yakindu.sct.model.stext.stext.StextFactory;
-import org.yakindu.sct.model.stext.stext.StextPackage;
-import org.yakindu.sct.model.stext.stext.TimeEventSpec;
-import org.yakindu.sct.model.stext.stext.TimeUnit;
-import org.yakindu.sct.model.stext.stext.TransitionReaction;
-import org.yakindu.sct.model.stext.stext.TransitionRoot;
-import org.yakindu.sct.model.stext.stext.TransitionStatement;
-import org.yakindu.sct.model.stext.stext.Type;
-import org.yakindu.sct.model.stext.stext.UnaryOperator;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
+
+import org.yakindu.sct.model.stext.stext.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -153,7 +93,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.EXIT_EVENT: return createExitEvent();
       case StextPackage.ON_CYCLE_EVENT: return createOnCycleEvent();
       case StextPackage.ALWAYS_EVENT: return createAlwaysEvent();
-      case StextPackage.STATEMENT: return createStatement();
       case StextPackage.ASSIGNMENT: return createAssignment();
       case StextPackage.EVENT_RAISING: return createEventRaising();
       case StextPackage.EXPRESSION: return createExpression();
@@ -516,17 +455,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     AlwaysEventImpl alwaysEvent = new AlwaysEventImpl();
     return alwaysEvent;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Statement createStatement()
-  {
-    StatementImpl statement = new StatementImpl();
-    return statement;
   }
 
   /**

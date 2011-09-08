@@ -2,99 +2,96 @@ package org.yakindu.sct.model.stext.ui.contentassist.antlr.internal;
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
-import org.antlr.runtime.BaseRecognizer;
-import org.antlr.runtime.CharStream;
-import org.antlr.runtime.DFA;
-import org.antlr.runtime.EarlyExitException;
-import org.antlr.runtime.IntStream;
-import org.antlr.runtime.MismatchedSetException;
-import org.antlr.runtime.NoViableAltException;
-import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.RecognizerSharedState;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
+
+
+import org.antlr.runtime.*;
+import java.util.Stack;
+import java.util.List;
+import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalSTextLexer extends Lexer {
-    public static final int T__42=42;
+    public static final int T__68=68;
+    public static final int T__69=69;
+    public static final int RULE_ID=9;
+    public static final int T__66=66;
+    public static final int T__67=67;
+    public static final int T__29=29;
+    public static final int T__64=64;
     public static final int T__28=28;
-    public static final int T__57=57;
+    public static final int T__65=65;
+    public static final int T__27=27;
+    public static final int T__62=62;
+    public static final int T__26=26;
+    public static final int T__63=63;
+    public static final int T__25=25;
+    public static final int T__24=24;
     public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=13;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int RULE_BOOL=4;
+    public static final int T__61=61;
+    public static final int EOF=-1;
+    public static final int T__60=60;
+    public static final int T__55=55;
+    public static final int T__56=56;
+    public static final int T__19=19;
+    public static final int T__57=57;
+    public static final int RULE_HEX=6;
+    public static final int T__58=58;
+    public static final int T__16=16;
     public static final int T__51=51;
+    public static final int T__15=15;
+    public static final int T__52=52;
+    public static final int T__18=18;
+    public static final int T__53=53;
+    public static final int T__54=54;
+    public static final int T__17=17;
+    public static final int T__14=14;
+    public static final int T__59=59;
+    public static final int RULE_INT=5;
+    public static final int T__50=50;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__46=46;
     public static final int T__80=80;
     public static final int T__47=47;
-    public static final int T__69=69;
-    public static final int RULE_STRING=7;
-    public static final int T__73=73;
-    public static final int T__50=50;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__65=65;
-    public static final int RULE_FLOAT=8;
-    public static final int RULE_HEX=6;
-    public static final int T__72=72;
-    public static final int T__70=70;
-    public static final int T__67=67;
-    public static final int T__74=74;
-    public static final int T__39=39;
-    public static final int T__30=30;
-    public static final int T__46=46;
-    public static final int T__52=52;
-    public static final int T__68=68;
-    public static final int T__17=17;
-    public static final int T__62=62;
-    public static final int RULE_INT=5;
-    public static final int T__27=27;
-    public static final int T__24=24;
-    public static final int T__49=49;
-    public static final int T__61=61;
-    public static final int T__59=59;
-    public static final int T__54=54;
-    public static final int T__48=48;
-    public static final int T__34=34;
-    public static final int T__56=56;
-    public static final int T__15=15;
-    public static final int RULE_ML_COMMENT=10;
-    public static final int T__35=35;
-    public static final int RULE_ID=9;
-    public static final int T__78=78;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int T__58=58;
-    public static final int T__79=79;
-    public static final int T__64=64;
-    public static final int T__44=44;
-    public static final int T__66=66;
-    public static final int T__33=33;
-    public static final int T__14=14;
-    public static final int T__22=22;
-    public static final int T__77=77;
-    public static final int T__45=45;
-    public static final int T__29=29;
-    public static final int T__55=55;
-    public static final int T__63=63;
-    public static final int RULE_WS=12;
-    public static final int T__43=43;
-    public static final int T__75=75;
-    public static final int T__31=31;
-    public static final int T__40=40;
-    public static final int EOF=-1;
-    public static final int T__53=53;
-    public static final int T__32=32;
-    public static final int T__16=16;
-    public static final int T__38=38;
-    public static final int T__37=37;
-    public static final int T__76=76;
-    public static final int RULE_BOOL=4;
-    public static final int T__26=26;
-    public static final int T__82=82;
-    public static final int RULE_ANY_OTHER=13;
-    public static final int T__25=25;
     public static final int T__81=81;
+    public static final int T__44=44;
+    public static final int T__82=82;
+    public static final int T__45=45;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int RULE_FLOAT=8;
     public static final int RULE_SL_COMMENT=11;
-    public static final int T__60=60;
-    public static final int T__41=41;
-    public static final int T__18=18;
+    public static final int RULE_ML_COMMENT=10;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_STRING=7;
+    public static final int T__33=33;
     public static final int T__71=71;
+    public static final int T__34=34;
+    public static final int T__72=72;
+    public static final int T__35=35;
+    public static final int T__36=36;
+    public static final int T__70=70;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__39=39;
+    public static final int T__76=76;
+    public static final int RULE_WS=12;
+    public static final int T__75=75;
+    public static final int T__74=74;
+    public static final int T__73=73;
+    public static final int T__79=79;
+    public static final int T__78=78;
+    public static final int T__77=77;
 
     // delegates
     // delegators
@@ -2817,7 +2814,7 @@ public class InternalSTextLexer extends Lexer {
         "\111\1\114\1\uffff\1\117\1\121\5\55\1\53\1\uffff\2\55\7\uffff\1"+
         "\55\1\uffff\2\55\2\154\1\uffff\2\53\2\uffff\1\162\1\uffff\3\55\16"+
         "\uffff\1\167\2\uffff\1\171\15\uffff\1\55\1\uffff\1\173\1\174\5\55"+
-        "\2\uffff\4\55\7\uffff\2\55\1\uffff\2\55\2\uffff\1\154\3\uffff\1"+
+        "\2\uffff\4\55\7\uffff\2\55\1\uffff\2\55\3\uffff\1\154\2\uffff\1"+
         "\55\1\uffff\1\u008e\2\55\4\uffff\1\55\2\uffff\1\55\1\u0093\3\55"+
         "\2\uffff\12\55\1\uffff\3\55\1\u00a7\1\uffff\1\u00a8\3\55\1\uffff"+
         "\2\55\1\u00b0\4\55\1\u00b5\6\55\2\uffff\1\55\1\u00be\1\55\1\uffff"+
@@ -2835,7 +2832,7 @@ public class InternalSTextLexer extends Lexer {
         "\1\162\1\141\2\56\1\uffff\2\0\2\uffff\1\60\1\uffff\1\164\1\145\1"+
         "\143\16\uffff\1\75\2\uffff\1\75\15\uffff\1\162\1\uffff\2\60\1\151"+
         "\1\162\1\141\1\151\1\157\1\163\1\uffff\1\145\1\164\1\151\1\157\7"+
-        "\uffff\1\164\1\167\1\uffff\1\165\1\154\2\uffff\1\56\3\uffff\1\145"+
+        "\uffff\1\164\1\167\1\uffff\1\165\1\154\3\uffff\1\56\2\uffff\1\145"+
         "\1\uffff\1\60\1\162\1\171\4\uffff\1\151\2\uffff\1\144\1\60\1\144"+
         "\1\163\1\154\1\164\1\uffff\1\156\1\162\1\164\1\145\1\143\1\145\1"+
         "\141\1\145\1\163\1\147\1\uffff\1\141\1\143\1\156\1\60\1\uffff\1"+
@@ -2848,23 +2845,23 @@ public class InternalSTextLexer extends Lexer {
         "\3\uffff\1\156\1\164\2\60\1\uffff\1\60\1\uffff\1\164\1\60\3\uffff"+
         "\1\60\2\uffff";
     static final String DFA16_maxS =
-        "\1\uffff\1\156\1\165\7\75\1\76\1\75\1\172\1\174\1\uffff\1\75\1\172"+
-        "\2\163\1\157\1\145\1\157\1\100\1\uffff\1\170\1\154\7\uffff\1\154"+
-        "\1\uffff\1\162\1\141\1\170\1\71\1\uffff\2\uffff\2\uffff\1\172\1"+
-        "\uffff\1\164\1\145\1\143\16\uffff\1\75\2\uffff\1\75\15\uffff\1\162"+
-        "\1\uffff\2\172\1\151\1\162\1\141\1\151\1\157\1\164\1\uffff\1\145"+
-        "\2\164\1\157\7\uffff\1\164\1\167\1\uffff\1\165\1\154\2\uffff\1\71"+
-        "\3\uffff\1\145\1\uffff\1\172\1\162\1\171\4\uffff\1\151\2\uffff\1"+
-        "\144\1\172\1\154\1\163\1\154\1\164\1\uffff\1\156\1\162\1\164\1\145"+
-        "\1\143\1\145\1\141\1\145\1\163\1\162\1\uffff\1\141\1\143\1\156\1"+
-        "\172\1\uffff\1\172\1\157\2\145\1\141\1\164\1\171\1\172\1\162\1\153"+
-        "\1\162\1\171\1\172\2\145\1\156\1\164\1\154\1\147\2\uffff\1\156\1"+
-        "\172\1\141\1\164\2\172\1\157\1\uffff\1\156\2\172\1\163\1\uffff\1"+
-        "\172\1\162\2\141\1\151\1\145\1\172\1\154\1\uffff\1\156\1\145\1\uffff"+
-        "\1\157\1\uffff\1\151\1\141\2\uffff\2\172\1\143\1\154\1\157\1\172"+
-        "\1\uffff\1\171\1\172\1\143\1\151\1\156\1\154\2\uffff\1\145\1\172"+
-        "\1\156\1\uffff\1\172\3\uffff\1\156\1\164\2\172\1\uffff\1\172\1\uffff"+
-        "\1\164\1\172\3\uffff\1\172\2\uffff";
+        "\1\uffff\1\156\1\165\7\75\1\76\1\75\1\172\1\174\1\uffff\1\75\1"+
+        "\172\2\163\1\157\1\145\1\157\1\100\1\uffff\1\170\1\154\7\uffff\1"+
+        "\154\1\uffff\1\162\1\141\1\170\1\71\1\uffff\2\uffff\2\uffff\1\172"+
+        "\1\uffff\1\164\1\145\1\143\16\uffff\1\75\2\uffff\1\75\15\uffff\1"+
+        "\162\1\uffff\2\172\1\151\1\162\1\141\1\151\1\157\1\164\1\uffff\1"+
+        "\145\2\164\1\157\7\uffff\1\164\1\167\1\uffff\1\165\1\154\3\uffff"+
+        "\1\71\2\uffff\1\145\1\uffff\1\172\1\162\1\171\4\uffff\1\151\2\uffff"+
+        "\1\144\1\172\1\154\1\163\1\154\1\164\1\uffff\1\156\1\162\1\164\1"+
+        "\145\1\143\1\145\1\141\1\145\1\163\1\162\1\uffff\1\141\1\143\1\156"+
+        "\1\172\1\uffff\1\172\1\157\2\145\1\141\1\164\1\171\1\172\1\162\1"+
+        "\153\1\162\1\171\1\172\2\145\1\156\1\164\1\154\1\147\2\uffff\1\156"+
+        "\1\172\1\141\1\164\2\172\1\157\1\uffff\1\156\2\172\1\163\1\uffff"+
+        "\1\172\1\162\2\141\1\151\1\145\1\172\1\154\1\uffff\1\156\1\145\1"+
+        "\uffff\1\157\1\uffff\1\151\1\141\2\uffff\2\172\1\143\1\154\1\157"+
+        "\1\172\1\uffff\1\171\1\172\1\143\1\151\1\156\1\154\2\uffff\1\145"+
+        "\1\172\1\156\1\uffff\1\172\3\uffff\1\156\1\164\2\172\1\uffff\1\172"+
+        "\1\uffff\1\164\1\172\3\uffff\1\172\2\uffff";
     static final String DFA16_acceptS =
         "\16\uffff\1\25\10\uffff\1\50\2\uffff\1\56\1\57\1\60\1\63\1\64\1"+
         "\65\1\66\1\uffff\1\75\4\uffff\1\111\2\uffff\1\116\1\117\1\uffff"+
@@ -2872,21 +2869,21 @@ public class InternalSTextLexer extends Lexer {
         "\7\1\20\1\10\1\21\1\uffff\1\27\1\26\1\uffff\1\31\1\30\1\13\1\77"+
         "\1\103\1\14\1\101\1\15\1\76\1\102\1\25\1\33\1\100\1\uffff\1\34\10"+
         "\uffff\1\50\4\uffff\1\56\1\57\1\60\1\63\1\64\1\65\1\66\2\uffff\1"+
-        "\75\2\uffff\1\107\1\112\1\uffff\1\110\1\113\1\116\1\uffff\1\1\3"+
+        "\75\2\uffff\1\107\1\112\1\110\1\uffff\1\113\1\116\1\uffff\1\1\3"+
         "\uffff\1\11\1\16\1\12\1\17\1\uffff\1\35\1\36\6\uffff\1\46\12\uffff"+
         "\1\2\4\uffff\1\53\23\uffff\1\37\1\41\7\uffff\1\71\4\uffff\1\106"+
         "\10\uffff\1\74\2\uffff\1\52\1\uffff\1\70\2\uffff\1\54\1\67\6\uffff"+
         "\1\43\6\uffff\1\73\1\40\3\uffff\1\72\1\uffff\1\42\1\44\1\45\4\uffff"+
         "\1\51\1\uffff\1\104\2\uffff\1\105\1\47\1\55\1\uffff\1\62\1\61";
     static final String DFA16_specialS =
-        "\1\0\47\uffff\1\2\1\1\u00c4\uffff}>";
+        "\1\1\47\uffff\1\2\1\0\u00c4\uffff}>";
     static final String[] DFA16_transitionS = {
-            "\11\53\2\52\2\53\1\52\22\53\1\52\1\17\1\50\1\35\1\53\1\6\1\13"+
-            "\1\51\1\32\1\33\1\4\1\7\1\34\1\10\1\53\1\5\1\45\11\46\1\27\1"+
-            "\40\1\11\1\3\1\12\1\42\1\26\32\47\1\36\1\53\1\37\1\14\1\47\1"+
-            "\53\1\41\1\25\1\31\1\47\1\30\1\44\2\47\1\1\3\47\1\21\1\22\1"+
-            "\2\2\47\1\24\1\20\1\43\1\47\1\23\4\47\1\53\1\15\1\53\1\16\uff81"+
-            "\53",
+            "\11\53\2\52\2\53\1\52\22\53\1\52\1\17\1\50\1\35\1\53\1\6\1"+
+            "\13\1\51\1\32\1\33\1\4\1\7\1\34\1\10\1\53\1\5\1\45\11\46\1\27"+
+            "\1\40\1\11\1\3\1\12\1\42\1\26\32\47\1\36\1\53\1\37\1\14\1\47"+
+            "\1\53\1\41\1\25\1\31\1\47\1\30\1\44\2\47\1\1\3\47\1\21\1\22"+
+            "\1\2\2\47\1\24\1\20\1\43\1\47\1\23\4\47\1\53\1\15\1\53\1\16"+
+            "\uff81\53",
             "\1\54",
             "\1\60\1\uffff\1\57\4\uffff\1\56",
             "\1\61",
@@ -2923,8 +2920,8 @@ public class InternalSTextLexer extends Lexer {
             "",
             "\1\151",
             "\1\152",
-            "\1\156\1\uffff\12\155\36\uffff\1\153\37\uffff\1\153",
-            "\1\156\1\uffff\12\155",
+            "\1\155\1\uffff\12\156\36\uffff\1\153\37\uffff\1\153",
+            "\1\155\1\uffff\12\156",
             "",
             "\0\157",
             "\0\157",
@@ -2995,8 +2992,8 @@ public class InternalSTextLexer extends Lexer {
             "\1\u008c",
             "",
             "",
-            "\1\156\1\uffff\12\155",
             "",
+            "\1\155\1\uffff\12\156",
             "",
             "",
             "\1\u008d",
@@ -3165,6 +3162,16 @@ public class InternalSTextLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA16_41 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA16_41>='\u0000' && LA16_41<='\uFFFF')) ) {s = 111;}
+
+                        else s = 43;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
                         int LA16_0 = input.LA(1);
 
                         s = -1;
@@ -3253,16 +3260,6 @@ public class InternalSTextLexer extends Lexer {
                         else if ( ((LA16_0>='\t' && LA16_0<='\n')||LA16_0=='\r'||LA16_0==' ') ) {s = 42;}
 
                         else if ( ((LA16_0>='\u0000' && LA16_0<='\b')||(LA16_0>='\u000B' && LA16_0<='\f')||(LA16_0>='\u000E' && LA16_0<='\u001F')||LA16_0=='$'||LA16_0=='.'||LA16_0=='\\'||LA16_0=='`'||LA16_0=='{'||LA16_0=='}'||(LA16_0>='\u007F' && LA16_0<='\uFFFF')) ) {s = 43;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA16_41 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA16_41>='\u0000' && LA16_41<='\uFFFF')) ) {s = 111;}
-
-                        else s = 43;
 
                         if ( s>=0 ) return s;
                         break;

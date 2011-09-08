@@ -10,5 +10,6 @@ public class STextStandaloneSetup extends STextStandaloneSetupGenerated{
 	public static void doSetup() {
 		new STextStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
+	
 }
 

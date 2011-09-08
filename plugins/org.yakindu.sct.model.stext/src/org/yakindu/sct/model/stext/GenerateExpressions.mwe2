@@ -13,6 +13,7 @@ Workflow {
     bean = StandaloneSetup {
 	    scanClassPath = true
 		platformUri = "${runtimeProject}/.."
+		registerGenModelFile = "platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel"
 	}
 
 	component = DirectoryCleaner {
@@ -38,7 +39,6 @@ Workflow {
 
 			// generates Java API for the generated EPackages 
 			fragment = ecore.EcoreGeneratorFragment {
-			referencedGenModels = "platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel"
 			}
 
 			// the serialization component

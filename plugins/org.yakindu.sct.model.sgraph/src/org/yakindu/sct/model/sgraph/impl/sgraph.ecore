@@ -102,7 +102,5 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="composite" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
-  <eSubpackages name="core" nsURI="http://www.yakindu.org/sct/core/2.0.0" nsPrefix="core">
-    <eClassifiers xsi:type="ecore:EClass" name="Statement"/>
-  </eSubpackages>
+  <eClassifiers xsi:type="ecore:EClass" name="Statement"/>
 </ecore:EPackage>

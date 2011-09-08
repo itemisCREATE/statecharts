@@ -3,16 +3,11 @@
 */
 package org.yakindu.sct.model.stext.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Alternatives;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.Group;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.emf.ecore.*;
+import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
+
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 
 import com.google.inject.Inject;
@@ -6165,7 +6160,7 @@ protected class AlwaysEvent_AlwaysKeyword_1 extends KeywordToken  {
 
 /************ begin Rule Statement ****************
  *
- * / * --- statements --- * / Statement:
+ * / * --- statements --- * / Statement returns sct::Statement:
  * 	Assignment | EventRaising | OperationCall;
  *
  **/

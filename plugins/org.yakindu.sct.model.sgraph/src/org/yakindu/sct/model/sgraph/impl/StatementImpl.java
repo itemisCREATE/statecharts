@@ -8,14 +8,14 @@
  * committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.sgraph.core.impl;
+package org.yakindu.sct.model.sgraph.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.yakindu.sct.model.sgraph.core.CorePackage;
-import org.yakindu.sct.model.sgraph.core.Statement;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.Statement;
 
 /**
  * <!-- begin-user-doc -->
@@ -50,7 +50,7 @@ public class StatementImpl extends EObjectImpl implements Statement {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CorePackage.Literals.STATEMENT;
+		return SGraphPackage.Literals.STATEMENT;
 	}
 
 } //StatementImpl
