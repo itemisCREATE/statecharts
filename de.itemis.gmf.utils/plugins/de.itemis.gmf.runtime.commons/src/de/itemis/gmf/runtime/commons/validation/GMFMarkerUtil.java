@@ -54,7 +54,7 @@ public final class GMFMarkerUtil {
 			return;
 		}
 		View view = findNotationView(diagram, semanticTarget);
-		if (view == null)
+		if (view == null || view.eResource() == null)
 			return;
 		String uriFragment = view.eResource().getURIFragment(view);
 
