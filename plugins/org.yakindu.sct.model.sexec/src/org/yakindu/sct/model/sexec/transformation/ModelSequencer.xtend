@@ -85,13 +85,13 @@ class ModelSequencer {
 	}
 	
 	
-	
-	
-	def dispatch Expression _raised(EventSpec e) {
+	 
+
+	def dispatch Expression raised(EventSpec e) {
 	}
 
 
-	def dispatch Expression _raised(RegularEventSpec e) {
+	def dispatch Expression raised(RegularEventSpec e) {
 		val r = stextFactory.createElementReferenceExpression
 		r.value = e.event as Declaration
 		r
