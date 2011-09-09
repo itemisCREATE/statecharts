@@ -63,26 +63,26 @@ public class IfItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addThenPropertyDescriptor(object);
-			addElsePropertyDescriptor(object);
+			addThenStepPropertyDescriptor(object);
+			addElseStepPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Then feature.
+	 * This adds a property descriptor for the Then Step feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addThenPropertyDescriptor(Object object) {
+	protected void addThenStepPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_If_then_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_If_then_feature", "_UI_If_type"),
-				 SexecPackage.Literals.IF__THEN,
+				 getString("_UI_If_thenStep_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_If_thenStep_feature", "_UI_If_type"),
+				 SexecPackage.Literals.IF__THEN_STEP,
 				 true,
 				 false,
 				 true,
@@ -92,19 +92,19 @@ public class IfItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Else feature.
+	 * This adds a property descriptor for the Else Step feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addElsePropertyDescriptor(Object object) {
+	protected void addElseStepPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_If_else_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_If_else_feature", "_UI_If_type"),
-				 SexecPackage.Literals.IF__ELSE,
+				 getString("_UI_If_elseStep_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_If_elseStep_feature", "_UI_If_type"),
+				 SexecPackage.Literals.IF__ELSE_STEP,
 				 true,
 				 false,
 				 true,

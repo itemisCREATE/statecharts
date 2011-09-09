@@ -13,4 +13,22 @@ Execution States:
 «DEFINE executionStates FOR ExecutionState»
 Name: «this.name»
 Simple Name: «this.simpleName»
+
+Cycle: «EXPAND code FOR this.cycle»
+«ENDDEFINE»
+
+
+«DEFINE code FOR Sequence»
+	{
+		«EXPAND code FOREACH this.steps»
+	}
+«ENDDEFINE»
+
+«DEFINE code FOR If»
+		if () then «EXPAND code FOR this.thenStep»
+		«IF this.elseStep != null -»else «EXPAND code FOR this.elseStep»«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE code FOR Step»
+!!! UNKNOWN STEP !!!
 «ENDDEFINE»

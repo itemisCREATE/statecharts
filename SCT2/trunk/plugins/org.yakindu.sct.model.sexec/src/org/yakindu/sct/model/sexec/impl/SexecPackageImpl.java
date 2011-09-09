@@ -314,7 +314,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIf_Then() {
+	public EReference getIf_ThenStep() {
 		return (EReference)ifEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -323,7 +323,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIf_Else() {
+	public EReference getIf_ElseStep() {
 		return (EReference)ifEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -448,8 +448,8 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		ifEClass = createEClass(IF);
 		createEReference(ifEClass, IF__CONDITION);
-		createEReference(ifEClass, IF__THEN);
-		createEReference(ifEClass, IF__ELSE);
+		createEReference(ifEClass, IF__THEN_STEP);
+		createEReference(ifEClass, IF__ELSE_STEP);
 
 		executionEClass = createEClass(EXECUTION);
 		createEReference(executionEClass, EXECUTION__STATEMENT);
@@ -527,8 +527,8 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		initEClass(ifEClass, If.class, "If", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getIf_Condition(), theSGraphPackage.getStatement(), null, "condition", null, 0, 1, If.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIf_Then(), this.getStep(), null, "then", null, 0, 1, If.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIf_Else(), this.getStep(), null, "else", null, 0, 1, If.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIf_ThenStep(), this.getStep(), null, "thenStep", null, 0, 1, If.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIf_ElseStep(), this.getStep(), null, "elseStep", null, 0, 1, If.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionEClass, Execution.class, "Execution", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExecution_Statement(), theSGraphPackage.getStatement(), null, "statement", null, 0, 1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

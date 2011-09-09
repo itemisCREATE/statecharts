@@ -319,22 +319,22 @@ public interface SexecPackage extends EPackage {
 	int IF__CONDITION = STEP_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Then</b></em>' reference.
+	 * The feature id for the '<em><b>Then Step</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IF__THEN = STEP_FEATURE_COUNT + 1;
+	int IF__THEN_STEP = STEP_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Else</b></em>' reference.
+	 * The feature id for the '<em><b>Else Step</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IF__ELSE = STEP_FEATURE_COUNT + 2;
+	int IF__ELSE_STEP = STEP_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>If</em>' class.
@@ -653,26 +653,26 @@ public interface SexecPackage extends EPackage {
 	EReference getIf_Condition();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.If#getThen <em>Then</em>}'.
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.If#getThenStep <em>Then Step</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Then</em>'.
-	 * @see org.yakindu.sct.model.sexec.If#getThen()
+	 * @return the meta object for the reference '<em>Then Step</em>'.
+	 * @see org.yakindu.sct.model.sexec.If#getThenStep()
 	 * @see #getIf()
 	 * @generated
 	 */
-	EReference getIf_Then();
+	EReference getIf_ThenStep();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.If#getElse <em>Else</em>}'.
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.If#getElseStep <em>Else Step</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Else</em>'.
-	 * @see org.yakindu.sct.model.sexec.If#getElse()
+	 * @return the meta object for the reference '<em>Else Step</em>'.
+	 * @see org.yakindu.sct.model.sexec.If#getElseStep()
 	 * @see #getIf()
 	 * @generated
 	 */
-	EReference getIf_Else();
+	EReference getIf_ElseStep();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.Execution <em>Execution</em>}'.
@@ -915,20 +915,20 @@ public interface SexecPackage extends EPackage {
 		EReference IF__CONDITION = eINSTANCE.getIf_Condition();
 
 		/**
-		 * The meta object literal for the '<em><b>Then</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Then Step</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IF__THEN = eINSTANCE.getIf_Then();
+		EReference IF__THEN_STEP = eINSTANCE.getIf_ThenStep();
 
 		/**
-		 * The meta object literal for the '<em><b>Else</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Else Step</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IF__ELSE = eINSTANCE.getIf_Else();
+		EReference IF__ELSE_STEP = eINSTANCE.getIf_ElseStep();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionImpl <em>Execution</em>}' class.

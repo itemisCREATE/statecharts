@@ -9,7 +9,7 @@
       <declarations xsi:type="stext:VariableDefinition" xmi:id="_IngsldoeEeC1mZYRUkEwUg" name="c" type="integer"/>
     </scopes>
     <regions xmi:id="__J7H4teYEeCu-5XJkHVC4g" name="main region">
-      <vertices xsi:type="sgraph:State" xmi:id="__KOC0teYEeCu-5XJkHVC4g" name="S1" incomingTransitions="_LFZbYNeZEeCu-5XJkHVC4g _j4SoENocEeC1mZYRUkEwUg">
+      <vertices xsi:type="sgraph:State" xmi:id="__KOC0teYEeCu-5XJkHVC4g" name="S1" incomingTransitions="_LFZbYNeZEeCu-5XJkHVC4g _j4SoENocEeC1mZYRUkEwUg _ffNZQNpvEeC1mZYRUkEwUg">
         <outgoingTransitions xmi:id="_B88CENeZEeCu-5XJkHVC4g" expression="e1" target="_BepjkNeZEeCu-5XJkHVC4g">
           <trigger xsi:type="stext:ReactionTrigger" xmi:id="_InhTodoeEeC1mZYRUkEwUg">
             <triggers xsi:type="stext:RegularEventSpec" xmi:id="_InhTotoeEeC1mZYRUkEwUg" event="_IngskdoeEeC1mZYRUkEwUg"/>
@@ -45,6 +45,7 @@
                 <triggers xsi:type="stext:RegularEventSpec" xmi:id="_Inv9IdoeEeC1mZYRUkEwUg" event="_Ingsk9oeEeC1mZYRUkEwUg"/>
               </trigger>
             </outgoingTransitions>
+            <outgoingTransitions xmi:id="_ffNZQNpvEeC1mZYRUkEwUg" expression="" target="__KOC0teYEeCu-5XJkHVC4g"/>
             <scopes xmi:id="_InvWENoeEeC1mZYRUkEwUg"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_4ZpzUNocEeC1mZYRUkEwUg" name="S4" incomingTransitions="_69HOkNocEeC1mZYRUkEwUg">
@@ -242,6 +243,15 @@
       <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_7noLMtocEeC1mZYRUkEwUg" points="[-21, 9, 114, 0]$[-138, 16, -3, 7]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_7oUHsNocEeC1mZYRUkEwUg" id="(0.525,0.7636363636363637)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_7oUHsdocEeC1mZYRUkEwUg" id="(0.3,0.8727272727272727)"/>
+    </edges>
+    <edges xmi:id="_ffRDoNpvEeC1mZYRUkEwUg" type="Transition" element="_ffNZQNpvEeC1mZYRUkEwUg" source="_3BXxwNocEeC1mZYRUkEwUg" target="__KOC09eYEeCu-5XJkHVC4g">
+      <children xsi:type="notation:DecorationNode" xmi:id="_ffRqsdpvEeC1mZYRUkEwUg" type="TransitionExpression">
+        <styles xsi:type="notation:ShapeStyle" xmi:id="_ffRqstpvEeC1mZYRUkEwUg"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_ffRqs9pvEeC1mZYRUkEwUg" y="40"/>
+      </children>
+      <styles xsi:type="notation:ConnectorStyle" xmi:id="_ffRDodpvEeC1mZYRUkEwUg" lineColor="4210752"/>
+      <styles xsi:type="notation:FontStyle" xmi:id="_ffRqsNpvEeC1mZYRUkEwUg" fontName="Arial" fontHeight="10"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_ffRDotpvEeC1mZYRUkEwUg" points="[17, -27, -124, 191]$[141, -238, 0, -20]"/>
     </edges>
   </notation:Diagram>
 </xmi:XMI>
