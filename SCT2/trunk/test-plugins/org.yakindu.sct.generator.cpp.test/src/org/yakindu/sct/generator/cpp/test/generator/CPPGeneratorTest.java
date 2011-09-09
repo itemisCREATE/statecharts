@@ -16,10 +16,20 @@ import org.junit.Test;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Statement;
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
+import org.yakindu.sct.model.stext.stext.EventDefinition;
+import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
+import org.yakindu.sct.model.stext.stext.ReactionTrigger;
+import org.yakindu.sct.model.stext.stext.RegularEventSpec;
+import org.yakindu.sct.model.stext.stext.StextFactory;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+
+import static org.junit.Assert.*;
+	
 
 /**
  * 
@@ -62,4 +72,51 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 		generate(flow, templatePath, project);
 
 	}
+	
+	
+	@Test
+	public void testSingleRegularEventTriggerCondition() {
+		
+		EventDefinition e1 = _createEventDefinition("e1");
+
+		ReactionTrigger tr1 = StextFactory.eINSTANCE.createReactionTrigger();
+		tr1.getTriggers().add(_createRegularEventSpec(e1));
+		
+		Statement s = sequencer.buildCondition(tr1);
+		
+		assertTrue(s instanceof ElementReferenceExpression);
+	}
+
+
+
+	@Test
+	public void testMultipleRegularEventTriggerCondition() {
+		
+		EventDefinition e1 = _createEventDefinition("e1");
+		EventDefinition e2 = _createEventDefinition("e2");
+		
+		ReactionTrigger tr1 = StextFactory.eINSTANCE.createReactionTrigger();
+		tr1.getTriggers().add(_createRegularEventSpec(e1));
+		tr1.getTriggers().add(_createRegularEventSpec(e2));
+		
+		Statement s = sequencer.buildCondition(tr1);
+		
+		assertTrue(s instanceof LogicalOrExpression);
+		assertTrue( ((LogicalOrExpression)s).getLeftOperand() instanceof ElementReferenceExpression);
+		assertTrue( ((LogicalOrExpression)s).getRightOperand() instanceof ElementReferenceExpression);
+	}
+
+
+	protected EventDefinition _createEventDefinition(String name) {
+		EventDefinition e1 = StextFactory.eINSTANCE.createEventDefinition();
+		e1.setName(name);
+		return e1;
+	}
+
+	protected RegularEventSpec _createRegularEventSpec(EventDefinition e1) {
+		RegularEventSpec e1Spec = StextFactory.eINSTANCE.createRegularEventSpec();
+		e1Spec.setEvent(e1);
+		return e1Spec;
+	}
+
 }

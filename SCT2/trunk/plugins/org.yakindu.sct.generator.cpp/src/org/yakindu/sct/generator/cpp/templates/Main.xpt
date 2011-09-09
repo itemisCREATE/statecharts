@@ -1,4 +1,6 @@
 «IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
 
 «DEFINE main FOR ExecutionFlow»
 
@@ -25,10 +27,23 @@ Cycle: «EXPAND code FOR this.cycle»
 «ENDDEFINE»
 
 «DEFINE code FOR If»
-		if () then «EXPAND code FOR this.thenStep»
+		if («EXPAND code FOR condition») then «EXPAND code FOR this.thenStep»
 		«IF this.elseStep != null -»else «EXPAND code FOR this.elseStep»«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE code FOR Step»
 !!! UNKNOWN STEP !!!
+«ENDDEFINE»
+
+
+«DEFINE code FOR Statement»
+«ENDDEFINE»
+
+«DEFINE code FOR LogicalOrExpression -»
+«EXPAND code FOR leftOperand» || «EXPAND code FOR rightOperand -»
+«ENDDEFINE»
+
+
+«DEFINE code FOR ElementReferenceExpression -»
+«this.value.name -»
 «ENDDEFINE»

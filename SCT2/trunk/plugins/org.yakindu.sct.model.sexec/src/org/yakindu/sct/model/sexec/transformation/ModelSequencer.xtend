@@ -64,17 +64,21 @@ class ModelSequencer {
 		null
 	}
 	
+	
 	def dispatch Statement buildCondition (ReactionTrigger t) {
 		if (! t.triggers.empty) t.triggers.reverseView.fold(null as Expression,
 			[s,e | 
-				if (s==null) e.buildEventCheck  
-				else _or(e.buildEventCheck, s)
+				if (s==null) _raised(e)  
+				else _raised(e) || s
 			]
 		)
 	}
 	
-	
-	def Expression _or(Expression left, Expression right) {
+
+
+
+
+	def Expression _operator_or(Expression left, Expression right) {
 		val or = stextFactory.createLogicalOrExpression
 		or.leftOperand = left
 		or.rightOperand = right
@@ -82,11 +86,19 @@ class ModelSequencer {
 	}
 	
 	
-	def dispatch Expression buildEventCheck(EventSpec e) {
+//	def Expression _or(Expression left, Expression right) {
+//		val or = stextFactory.createLogicalOrExpression
+//		or.leftOperand = left
+//		or.rightOperand = right
+//		or
+//	}
+	
+	
+	def dispatch Expression _raised(EventSpec e) {
 	}
 
 
-	def dispatch Expression buildEventCheck(RegularEventSpec e) {
+	def dispatch Expression _raised(RegularEventSpec e) {
 		val r = stextFactory.createElementReferenceExpression
 		r.value = e.event as Declaration
 		r
