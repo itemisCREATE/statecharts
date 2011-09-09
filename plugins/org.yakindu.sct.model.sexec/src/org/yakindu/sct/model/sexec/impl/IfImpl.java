@@ -24,8 +24,8 @@ import org.yakindu.sct.model.sgraph.Statement;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.IfImpl#getCondition <em>Condition</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.IfImpl#getThen <em>Then</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.IfImpl#getElse <em>Else</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.IfImpl#getThenStep <em>Then Step</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.IfImpl#getElseStep <em>Else Step</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,24 +43,24 @@ public class IfImpl extends StepImpl implements If {
 	protected Statement condition;
 
 	/**
-	 * The cached value of the '{@link #getThen() <em>Then</em>}' reference.
+	 * The cached value of the '{@link #getThenStep() <em>Then Step</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getThen()
+	 * @see #getThenStep()
 	 * @generated
 	 * @ordered
 	 */
-	protected Step then;
+	protected Step thenStep;
 
 	/**
-	 * The cached value of the '{@link #getElse() <em>Else</em>}' reference.
+	 * The cached value of the '{@link #getElseStep() <em>Else Step</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getElse()
+	 * @see #getElseStep()
 	 * @generated
 	 * @ordered
 	 */
-	protected Step else_;
+	protected Step elseStep;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -129,16 +129,16 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Step getThen() {
-		if (then != null && then.eIsProxy()) {
-			InternalEObject oldThen = (InternalEObject)then;
-			then = (Step)eResolveProxy(oldThen);
-			if (then != oldThen) {
+	public Step getThenStep() {
+		if (thenStep != null && thenStep.eIsProxy()) {
+			InternalEObject oldThenStep = (InternalEObject)thenStep;
+			thenStep = (Step)eResolveProxy(oldThenStep);
+			if (thenStep != oldThenStep) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SexecPackage.IF__THEN, oldThen, then));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SexecPackage.IF__THEN_STEP, oldThenStep, thenStep));
 			}
 		}
-		return then;
+		return thenStep;
 	}
 
 	/**
@@ -146,8 +146,8 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Step basicGetThen() {
-		return then;
+	public Step basicGetThenStep() {
+		return thenStep;
 	}
 
 	/**
@@ -155,11 +155,11 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setThen(Step newThen) {
-		Step oldThen = then;
-		then = newThen;
+	public void setThenStep(Step newThenStep) {
+		Step oldThenStep = thenStep;
+		thenStep = newThenStep;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.IF__THEN, oldThen, then));
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.IF__THEN_STEP, oldThenStep, thenStep));
 	}
 
 	/**
@@ -167,16 +167,16 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Step getElse() {
-		if (else_ != null && else_.eIsProxy()) {
-			InternalEObject oldElse = (InternalEObject)else_;
-			else_ = (Step)eResolveProxy(oldElse);
-			if (else_ != oldElse) {
+	public Step getElseStep() {
+		if (elseStep != null && elseStep.eIsProxy()) {
+			InternalEObject oldElseStep = (InternalEObject)elseStep;
+			elseStep = (Step)eResolveProxy(oldElseStep);
+			if (elseStep != oldElseStep) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SexecPackage.IF__ELSE, oldElse, else_));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SexecPackage.IF__ELSE_STEP, oldElseStep, elseStep));
 			}
 		}
-		return else_;
+		return elseStep;
 	}
 
 	/**
@@ -184,8 +184,8 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Step basicGetElse() {
-		return else_;
+	public Step basicGetElseStep() {
+		return elseStep;
 	}
 
 	/**
@@ -193,11 +193,11 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setElse(Step newElse) {
-		Step oldElse = else_;
-		else_ = newElse;
+	public void setElseStep(Step newElseStep) {
+		Step oldElseStep = elseStep;
+		elseStep = newElseStep;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.IF__ELSE, oldElse, else_));
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.IF__ELSE_STEP, oldElseStep, elseStep));
 	}
 
 	/**
@@ -224,12 +224,12 @@ public class IfImpl extends StepImpl implements If {
 		switch (featureID) {
 			case SexecPackage.IF__CONDITION:
 				return getCondition();
-			case SexecPackage.IF__THEN:
-				if (resolve) return getThen();
-				return basicGetThen();
-			case SexecPackage.IF__ELSE:
-				if (resolve) return getElse();
-				return basicGetElse();
+			case SexecPackage.IF__THEN_STEP:
+				if (resolve) return getThenStep();
+				return basicGetThenStep();
+			case SexecPackage.IF__ELSE_STEP:
+				if (resolve) return getElseStep();
+				return basicGetElseStep();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -245,11 +245,11 @@ public class IfImpl extends StepImpl implements If {
 			case SexecPackage.IF__CONDITION:
 				setCondition((Statement)newValue);
 				return;
-			case SexecPackage.IF__THEN:
-				setThen((Step)newValue);
+			case SexecPackage.IF__THEN_STEP:
+				setThenStep((Step)newValue);
 				return;
-			case SexecPackage.IF__ELSE:
-				setElse((Step)newValue);
+			case SexecPackage.IF__ELSE_STEP:
+				setElseStep((Step)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -266,11 +266,11 @@ public class IfImpl extends StepImpl implements If {
 			case SexecPackage.IF__CONDITION:
 				setCondition((Statement)null);
 				return;
-			case SexecPackage.IF__THEN:
-				setThen((Step)null);
+			case SexecPackage.IF__THEN_STEP:
+				setThenStep((Step)null);
 				return;
-			case SexecPackage.IF__ELSE:
-				setElse((Step)null);
+			case SexecPackage.IF__ELSE_STEP:
+				setElseStep((Step)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -286,10 +286,10 @@ public class IfImpl extends StepImpl implements If {
 		switch (featureID) {
 			case SexecPackage.IF__CONDITION:
 				return condition != null;
-			case SexecPackage.IF__THEN:
-				return then != null;
-			case SexecPackage.IF__ELSE:
-				return else_ != null;
+			case SexecPackage.IF__THEN_STEP:
+				return thenStep != null;
+			case SexecPackage.IF__ELSE_STEP:
+				return elseStep != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -12,6 +12,17 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.sct.model.sexec.Cycle
+import org.yakindu.sct.model.sgraph.Transition
+import org.yakindu.sct.model.sexec.If
+import org.yakindu.sct.model.sgraph.Trigger
+import org.yakindu.sct.model.stext.stext.ReactionTrigger
+import org.yakindu.sct.model.sgraph.Statement
+import org.yakindu.sct.model.stext.stext.StextFactory
+import org.yakindu.sct.model.stext.stext.Expression
+import org.yakindu.sct.model.stext.stext.EventSpec
+import org.yakindu.sct.model.stext.stext.RegularEventSpec
+import org.yakindu.sct.model.sgraph.Declaration
+import org.yakindu.sct.model.sexec.Step
 
 class ModelSequencer {
 	
@@ -24,10 +35,65 @@ class ModelSequencer {
 	}
 	
 	
-	def ExecutionState create r : SexecFactory::eINSTANCE.createExecutionState transform(State state){
+	def ExecutionState create r : sexecFactory.createExecutionState transform(State state){
 		r.simpleName = state.name
 		r.name = state.fullyQualifiedName.toString.replaceAll(" ", "")
+		r.cycle = state.buildCycle
 	}
 	
 	
+	def Cycle create r : sexecFactory.createCycle buildCycle(State state) {	
+		r.steps.add( state.outgoingTransitions.reverseView.fold(null as If, [s, t | {
+				var ifStep = t.buildTransitionSequence
+				// TODO then ...
+				ifStep.elseStep = s
+				ifStep
+			}]
+		))
+	}
+	
+	
+	def If buildTransitionSequence(Transition t) {
+		var ifStep = sexecFactory.createIf
+		if (t.trigger != null) ifStep.condition = t.trigger.buildCondition 
+		ifStep	
+	}
+	
+	
+	def dispatch Statement buildCondition (Trigger t) {
+		null
+	}
+	
+	def dispatch Statement buildCondition (ReactionTrigger t) {
+		if (! t.triggers.empty) t.triggers.reverseView.fold(null as Expression,
+			[s,e | 
+				if (s==null) e.buildEventCheck  
+				else _or(e.buildEventCheck, s)
+			]
+		)
+	}
+	
+	
+	def Expression _or(Expression left, Expression right) {
+		val or = stextFactory.createLogicalOrExpression
+		or.leftOperand = left
+		or.rightOperand = right
+		or
+	}
+	
+	
+	def dispatch Expression buildEventCheck(EventSpec e) {
+	}
+
+
+	def dispatch Expression buildEventCheck(RegularEventSpec e) {
+		val r = stextFactory.createElementReferenceExpression
+		r.value = e.event as Declaration
+		r
+	}
+	
+	
+	//--------- UTILS ---------------
+	def sexecFactory() { SexecFactory::eINSTANCE }
+	def stextFactory() { StextFactory::eINSTANCE }
 }

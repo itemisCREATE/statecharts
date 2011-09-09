@@ -17,8 +17,8 @@ import org.yakindu.sct.model.sgraph.Statement;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.If#getCondition <em>Condition</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.If#getThen <em>Then</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.If#getElse <em>Else</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.If#getThenStep <em>Then Step</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.If#getElseStep <em>Else Step</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,55 +54,55 @@ public interface If extends Step {
 	void setCondition(Statement value);
 
 	/**
-	 * Returns the value of the '<em><b>Then</b></em>' reference.
+	 * Returns the value of the '<em><b>Then Step</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Then</em>' reference isn't clear,
+	 * If the meaning of the '<em>Then Step</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Then</em>' reference.
-	 * @see #setThen(Step)
-	 * @see org.yakindu.sct.model.sexec.SexecPackage#getIf_Then()
+	 * @return the value of the '<em>Then Step</em>' reference.
+	 * @see #setThenStep(Step)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getIf_ThenStep()
 	 * @model
 	 * @generated
 	 */
-	Step getThen();
+	Step getThenStep();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.If#getThen <em>Then</em>}' reference.
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.If#getThenStep <em>Then Step</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Then</em>' reference.
-	 * @see #getThen()
+	 * @param value the new value of the '<em>Then Step</em>' reference.
+	 * @see #getThenStep()
 	 * @generated
 	 */
-	void setThen(Step value);
+	void setThenStep(Step value);
 
 	/**
-	 * Returns the value of the '<em><b>Else</b></em>' reference.
+	 * Returns the value of the '<em><b>Else Step</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Else</em>' reference isn't clear,
+	 * If the meaning of the '<em>Else Step</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Else</em>' reference.
-	 * @see #setElse(Step)
-	 * @see org.yakindu.sct.model.sexec.SexecPackage#getIf_Else()
+	 * @return the value of the '<em>Else Step</em>' reference.
+	 * @see #setElseStep(Step)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getIf_ElseStep()
 	 * @model
 	 * @generated
 	 */
-	Step getElse();
+	Step getElseStep();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.If#getElse <em>Else</em>}' reference.
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.If#getElseStep <em>Else Step</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Else</em>' reference.
-	 * @see #getElse()
+	 * @param value the new value of the '<em>Else Step</em>' reference.
+	 * @see #getElseStep()
 	 * @generated
 	 */
-	void setElse(Step value);
+	void setElseStep(Step value);
 
 } // If
