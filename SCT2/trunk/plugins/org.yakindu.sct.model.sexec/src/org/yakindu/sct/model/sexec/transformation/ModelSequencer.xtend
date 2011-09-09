@@ -77,7 +77,6 @@ class ModelSequencer {
 
 
 
-
 	def Expression _operator_or(Expression left, Expression right) {
 		val or = stextFactory.createLogicalOrExpression
 		or.leftOperand = left
@@ -86,12 +85,6 @@ class ModelSequencer {
 	}
 	
 	
-//	def Expression _or(Expression left, Expression right) {
-//		val or = stextFactory.createLogicalOrExpression
-//		or.leftOperand = left
-//		or.rightOperand = right
-//		or
-//	}
 	
 	
 	def dispatch Expression _raised(EventSpec e) {
