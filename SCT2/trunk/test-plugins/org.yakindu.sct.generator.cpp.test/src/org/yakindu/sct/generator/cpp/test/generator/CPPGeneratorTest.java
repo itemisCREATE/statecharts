@@ -1,21 +1,20 @@
 package org.yakindu.sct.generator.cpp.test.generator;
 
+import static org.junit.Assert.assertTrue;
+
 import java.net.URL;
-import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Factory;
-import org.eclipse.emf.ecore.resource.impl.ResourceFactoryRegistryImpl;
 import org.junit.Before;
 import org.junit.Test;
+import org.yakindu.sct.generator.base.util.GeneratorBaseUtil;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
+import org.yakindu.sct.model.sexec.transformation.SequencerModule;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
@@ -31,9 +30,6 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-import static org.junit.Assert.*;
-	
-
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -46,7 +42,7 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 
 	@Before
 	public void setup() {
-		Injector injector = Guice.createInjector(new TestModule());
+		Injector injector = Guice.createInjector(new SequencerModule());
 		injector.injectMembers(this);
 	}
 
@@ -63,74 +59,62 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 				target.getFullPath().toString(), true);
 
 		String templatePath = "org::yakindu::sct::generator::cpp::templates::Main::main";
-
-		Factory factory = ResourceFactoryRegistryImpl.INSTANCE.getFactory(uri);
-		Resource resource = factory.createResource(uri);
-		resource.load(Collections.emptyMap());
-
-		Statechart statechart = (Statechart) resource.getContents().get(0);
-		Assert.isNotNull(statechart);
-		ExecutionFlow flow = sequencer.transform(statechart);
-		Assert.isNotNull(flow);
-		generate(flow, templatePath, project);
-
+		Statechart statechart = GeneratorBaseUtil.loadStatechart(uri);
+		ExecutionFlow executionFlow = GeneratorBaseUtil
+				.createExecutionFlowModel(statechart);
+		GeneratorBaseUtil.generate(executionFlow, templatePath, project,
+				"src-gen");
 	}
-	
-	
+
 	@Test
 	public void testSingleRegularEventTriggerCondition() {
-		
+
 		EventDefinition e1 = _createEventDefinition("e1");
 
 		ReactionTrigger tr1 = StextFactory.eINSTANCE.createReactionTrigger();
 		tr1.getTriggers().add(_createRegularEventSpec(e1));
-		
+
 		Statement s = sequencer.buildCondition(tr1);
-		
+
 		assertTrue(s instanceof ElementReferenceExpression);
 	}
 
-
-
 	@Test
 	public void testMultipleRegularEventTriggerCondition() {
-		
+
 		EventDefinition e1 = _createEventDefinition("e1");
 		EventDefinition e2 = _createEventDefinition("e2");
-		
+
 		ReactionTrigger tr1 = StextFactory.eINSTANCE.createReactionTrigger();
 		tr1.getTriggers().add(_createRegularEventSpec(e1));
 		tr1.getTriggers().add(_createRegularEventSpec(e2));
-		
-		Statement s = sequencer.buildCondition(tr1);
-		
-		assertTrue(s instanceof LogicalOrExpression);
-		assertTrue( ((LogicalOrExpression)s).getLeftOperand() instanceof ElementReferenceExpression);
-		assertTrue( ((LogicalOrExpression)s).getRightOperand() instanceof ElementReferenceExpression);
-	}
 
+		Statement s = sequencer.buildCondition(tr1);
+
+		assertTrue(s instanceof LogicalOrExpression);
+		assertTrue(((LogicalOrExpression) s).getLeftOperand() instanceof ElementReferenceExpression);
+		assertTrue(((LogicalOrExpression) s).getRightOperand() instanceof ElementReferenceExpression);
+	}
 
 	@Test
 	public void testTransitionSequence() {
-		
+
 		EventDefinition e1 = _createEventDefinition("e1");
 		EventDefinition e2 = _createEventDefinition("e2");
-		
-		
+
 		ReactionTrigger tr1 = StextFactory.eINSTANCE.createReactionTrigger();
 		tr1.getTriggers().add(_createRegularEventSpec(e1));
 		tr1.getTriggers().add(_createRegularEventSpec(e2));
-		
+
 		Transition t = SGraphFactory.eINSTANCE.createTransition();
 		t.setTrigger(tr1);
-		
-		If s = sequencer.buildTransitionSequence(t);
-		
-		assertTrue(s.getCondition() instanceof LogicalOrExpression);
-		assertTrue( ((LogicalOrExpression)s.getCondition()).getLeftOperand() instanceof ElementReferenceExpression);
-		assertTrue( ((LogicalOrExpression)s.getCondition()).getRightOperand() instanceof ElementReferenceExpression);
-	}
 
+		If s = sequencer.buildTransitionSequence(t);
+
+		assertTrue(s.getCondition() instanceof LogicalOrExpression);
+		assertTrue(((LogicalOrExpression) s.getCondition()).getLeftOperand() instanceof ElementReferenceExpression);
+		assertTrue(((LogicalOrExpression) s.getCondition()).getRightOperand() instanceof ElementReferenceExpression);
+	}
 
 	protected EventDefinition _createEventDefinition(String name) {
 		EventDefinition e1 = StextFactory.eINSTANCE.createEventDefinition();
@@ -139,7 +123,8 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 	}
 
 	protected RegularEventSpec _createRegularEventSpec(EventDefinition e1) {
-		RegularEventSpec e1Spec = StextFactory.eINSTANCE.createRegularEventSpec();
+		RegularEventSpec e1Spec = StextFactory.eINSTANCE
+				.createRegularEventSpec();
 		e1Spec.setEvent(e1);
 		return e1Spec;
 	}
