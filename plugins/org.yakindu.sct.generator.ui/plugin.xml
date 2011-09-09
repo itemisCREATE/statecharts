@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<extension point = "org.eclipse.ui.popupMenus">
+     <objectContribution
+        id="org.yakindu.sct.generator.ui"
+        objectClass="org.eclipse.core.resources.IFile"
+	    nameFilter="*.sct">
+	    <action
+           class="org.yakindu.sct.generator.ui.actions.GenerateCppActionDelegate"
+           definitionId="org.eclipse.ui.examples.readmetool.action1"
+           enablesFor="1"
+           icon="icons/c_app.gif"
+           id="org.yakindu.sct.generator.ui.generateaction"
+           label="Generate C++ code"
+           menubarPath="additions">
+	    </action>
+	 </objectContribution>
+	</extension>
+</plugin>
