@@ -14,9 +14,12 @@ import org.eclipse.emf.ecore.resource.impl.ResourceFactoryRegistryImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
+import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
+import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
@@ -104,6 +107,28 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 		assertTrue(s instanceof LogicalOrExpression);
 		assertTrue( ((LogicalOrExpression)s).getLeftOperand() instanceof ElementReferenceExpression);
 		assertTrue( ((LogicalOrExpression)s).getRightOperand() instanceof ElementReferenceExpression);
+	}
+
+
+	@Test
+	public void testTransitionSequence() {
+		
+		EventDefinition e1 = _createEventDefinition("e1");
+		EventDefinition e2 = _createEventDefinition("e2");
+		
+		
+		ReactionTrigger tr1 = StextFactory.eINSTANCE.createReactionTrigger();
+		tr1.getTriggers().add(_createRegularEventSpec(e1));
+		tr1.getTriggers().add(_createRegularEventSpec(e2));
+		
+		Transition t = SGraphFactory.eINSTANCE.createTransition();
+		t.setTrigger(tr1);
+		
+		If s = sequencer.buildTransitionSequence(t);
+		
+		assertTrue(s.getCondition() instanceof LogicalOrExpression);
+		assertTrue( ((LogicalOrExpression)s.getCondition()).getLeftOperand() instanceof ElementReferenceExpression);
+		assertTrue( ((LogicalOrExpression)s.getCondition()).getRightOperand() instanceof ElementReferenceExpression);
 	}
 
 
