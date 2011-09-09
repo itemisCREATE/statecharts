@@ -93,7 +93,7 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 		composite.setLayout(layout);
 		label = new Label(composite, SWT.BORDER);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(label);
-		Button openDialog = new Button(composite, SWT.NONE);
+		Button openDialog = new Button(composite, SWT.FLAT);
 		GridDataFactory.fillDefaults().hint(SWT.DEFAULT, 10)
 				.applyTo(openDialog);
 		openDialog.setText("...");
