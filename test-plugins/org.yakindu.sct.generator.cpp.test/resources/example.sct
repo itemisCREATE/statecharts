@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/2.0.0" xmlns:stext="http://www.yakindu.org/sct/statechart/SText">
-  <sgraph:Statechart xmi:id="__J6g0NeYEeCu-5XJkHVC4g" name="example" expression="interface Interface:&#xD;&#xA;&#xD;&#xA;  in event e1&#xD;&#xA;  in event e2&#xD;&#xA;  in event e3&#xD;&#xA;  in event e4&#xD;&#xA;   &#xD;&#xA;  var c : integer&#xD;&#xA;  ">
-    <scopes xsi:type="stext:InterfaceScope" xmi:id="_IngskNoeEeC1mZYRUkEwUg" name="Interface">
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_IngskdoeEeC1mZYRUkEwUg" name="e1"/>
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_IngsktoeEeC1mZYRUkEwUg" name="e2"/>
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_Ingsk9oeEeC1mZYRUkEwUg" name="e3"/>
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_IngslNoeEeC1mZYRUkEwUg" name="e4"/>
-      <declarations xsi:type="stext:VariableDefinition" xmi:id="_IngsldoeEeC1mZYRUkEwUg" name="c" type="integer"/>
+  <sgraph:Statechart xmi:id="__J6g0NeYEeCu-5XJkHVC4g" name="example" expression="interface Interface:&#xD;&#xA;&#xD;&#xA;  in event e1 : integer&#xD;&#xA;  in event e2&#xD;&#xA;  in event e3&#xD;&#xA;  in event e4&#xD;&#xA;   &#xD;&#xA;  var c : integer&#xD;&#xA;  ">
+    <scopes xsi:type="stext:InterfaceScope" xmi:id="_cHG8wNq2EeC1mZYRUkEwUg" name="Interface">
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_cHG8wdq2EeC1mZYRUkEwUg" name="e1" type="integer"/>
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_cHG8wtq2EeC1mZYRUkEwUg" name="e2"/>
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_cHG8w9q2EeC1mZYRUkEwUg" name="e3"/>
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_cHG8xNq2EeC1mZYRUkEwUg" name="e4"/>
+      <declarations xsi:type="stext:VariableDefinition" xmi:id="_cHG8xdq2EeC1mZYRUkEwUg" name="c" type="integer"/>
     </scopes>
     <regions xmi:id="__J7H4teYEeCu-5XJkHVC4g" name="main region">
       <vertices xsi:type="sgraph:State" xmi:id="__KOC0teYEeCu-5XJkHVC4g" name="S1" incomingTransitions="_LFZbYNeZEeCu-5XJkHVC4g _j4SoENocEeC1mZYRUkEwUg _ffNZQNpvEeC1mZYRUkEwUg">
         <outgoingTransitions xmi:id="_B88CENeZEeCu-5XJkHVC4g" expression="e1" target="_BepjkNeZEeCu-5XJkHVC4g">
-          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_InhTodoeEeC1mZYRUkEwUg">
-            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_InhTotoeEeC1mZYRUkEwUg" event="_IngskdoeEeC1mZYRUkEwUg"/>
+          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_cHIK4dq2EeC1mZYRUkEwUg">
+            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_cHIK4tq2EeC1mZYRUkEwUg" event="_cHG8wdq2EeC1mZYRUkEwUg"/>
           </trigger>
         </outgoingTransitions>
-        <scopes xmi:id="_InhToNoeEeC1mZYRUkEwUg"/>
+        <scopes xmi:id="_cHIK4Nq2EeC1mZYRUkEwUg"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_BepjkNeZEeCu-5XJkHVC4g" name="S2" incomingTransitions="_B88CENeZEeCu-5XJkHVC4g" expression="entry / c += 1;">
         <outgoingTransitions xmi:id="_LFZbYNeZEeCu-5XJkHVC4g" expression="e2" target="__KOC0teYEeCu-5XJkHVC4g">
-          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_InsSwNoeEeC1mZYRUkEwUg">
-            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_InsSwdoeEeC1mZYRUkEwUg" event="_IngsktoeEeC1mZYRUkEwUg"/>
+          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_cHUYINq2EeC1mZYRUkEwUg">
+            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_cHUYIdq2EeC1mZYRUkEwUg" event="_cHG8wtq2EeC1mZYRUkEwUg"/>
           </trigger>
         </outgoingTransitions>
-        <scopes xmi:id="_InoBUNoeEeC1mZYRUkEwUg">
-          <declarations xsi:type="stext:LocalReaction" xmi:id="_InoBUdoeEeC1mZYRUkEwUg">
-            <trigger xsi:type="stext:ReactionTrigger" xmi:id="_InoBUtoeEeC1mZYRUkEwUg">
-              <triggers xsi:type="stext:EntryEvent" xmi:id="_InoBU9oeEeC1mZYRUkEwUg"/>
+        <scopes xmi:id="_cHPfoNq2EeC1mZYRUkEwUg">
+          <declarations xsi:type="stext:LocalReaction" xmi:id="_cHPfodq2EeC1mZYRUkEwUg">
+            <trigger xsi:type="stext:ReactionTrigger" xmi:id="_cHPfotq2EeC1mZYRUkEwUg">
+              <triggers xsi:type="stext:EntryEvent" xmi:id="_cHPfo9q2EeC1mZYRUkEwUg"/>
             </trigger>
-            <effect xsi:type="stext:ReactionEffect" xmi:id="_InoBVNoeEeC1mZYRUkEwUg">
-              <actions xsi:type="stext:Assignment" xmi:id="_InoBVdoeEeC1mZYRUkEwUg" varRef="_IngsldoeEeC1mZYRUkEwUg" operator="+=">
-                <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_InoBVtoeEeC1mZYRUkEwUg" value="1"/>
+            <effect xsi:type="stext:ReactionEffect" xmi:id="_cHPfpNq2EeC1mZYRUkEwUg">
+              <actions xsi:type="stext:Assignment" xmi:id="_cHPfpdq2EeC1mZYRUkEwUg" varRef="_cHG8xdq2EeC1mZYRUkEwUg" operator="+=">
+                <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_cHPfptq2EeC1mZYRUkEwUg" value="1"/>
               </actions>
             </effect>
           </declarations>
@@ -41,20 +41,20 @@
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_3BWjoNocEeC1mZYRUkEwUg" name="S3" incomingTransitions="_6FxW4NocEeC1mZYRUkEwUg _7nm9ENocEeC1mZYRUkEwUg">
             <outgoingTransitions xmi:id="_69HOkNocEeC1mZYRUkEwUg" expression="e3" target="_4ZpzUNocEeC1mZYRUkEwUg">
-              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Inv9INoeEeC1mZYRUkEwUg">
-                <triggers xsi:type="stext:RegularEventSpec" xmi:id="_Inv9IdoeEeC1mZYRUkEwUg" event="_Ingsk9oeEeC1mZYRUkEwUg"/>
+              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_cHYpkdq2EeC1mZYRUkEwUg">
+                <triggers xsi:type="stext:RegularEventSpec" xmi:id="_cHYpktq2EeC1mZYRUkEwUg" event="_cHG8w9q2EeC1mZYRUkEwUg"/>
               </trigger>
             </outgoingTransitions>
-            <outgoingTransitions xmi:id="_ffNZQNpvEeC1mZYRUkEwUg" expression="" target="__KOC0teYEeCu-5XJkHVC4g"/>
-            <scopes xmi:id="_InvWENoeEeC1mZYRUkEwUg"/>
+            <scopes xmi:id="_cHYpkNq2EeC1mZYRUkEwUg"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_4ZpzUNocEeC1mZYRUkEwUg" name="S4" incomingTransitions="_69HOkNocEeC1mZYRUkEwUg">
             <outgoingTransitions xmi:id="_7nm9ENocEeC1mZYRUkEwUg" expression="e4" target="_3BWjoNocEeC1mZYRUkEwUg">
-              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_InzngdoeEeC1mZYRUkEwUg">
-                <triggers xsi:type="stext:RegularEventSpec" xmi:id="_InzngtoeEeC1mZYRUkEwUg" event="_IngslNoeEeC1mZYRUkEwUg"/>
+              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_cHdiENq2EeC1mZYRUkEwUg">
+                <triggers xsi:type="stext:RegularEventSpec" xmi:id="_cHdiEdq2EeC1mZYRUkEwUg" event="_cHG8xNq2EeC1mZYRUkEwUg"/>
               </trigger>
             </outgoingTransitions>
-            <scopes xmi:id="_InzngNoeEeC1mZYRUkEwUg"/>
+            <outgoingTransitions xmi:id="_ffNZQNpvEeC1mZYRUkEwUg" expression="" target="__KOC0teYEeCu-5XJkHVC4g"/>
+            <scopes xmi:id="_cHc7ANq2EeC1mZYRUkEwUg"/>
           </vertices>
         </subRegions>
       </vertices>
@@ -244,14 +244,15 @@
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_7oUHsNocEeC1mZYRUkEwUg" id="(0.525,0.7636363636363637)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_7oUHsdocEeC1mZYRUkEwUg" id="(0.3,0.8727272727272727)"/>
     </edges>
-    <edges xmi:id="_ffRDoNpvEeC1mZYRUkEwUg" type="Transition" element="_ffNZQNpvEeC1mZYRUkEwUg" source="_3BXxwNocEeC1mZYRUkEwUg" target="__KOC09eYEeCu-5XJkHVC4g">
+    <edges xmi:id="_ffRDoNpvEeC1mZYRUkEwUg" type="Transition" element="_ffNZQNpvEeC1mZYRUkEwUg" source="_4ZqaYNocEeC1mZYRUkEwUg" target="__KOC09eYEeCu-5XJkHVC4g">
       <children xsi:type="notation:DecorationNode" xmi:id="_ffRqsdpvEeC1mZYRUkEwUg" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_ffRqstpvEeC1mZYRUkEwUg"/>
         <layoutConstraint xsi:type="notation:Location" xmi:id="_ffRqs9pvEeC1mZYRUkEwUg" y="40"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_ffRDodpvEeC1mZYRUkEwUg" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_ffRqsNpvEeC1mZYRUkEwUg" fontName="Arial" fontHeight="10"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_ffRDotpvEeC1mZYRUkEwUg" points="[17, -27, -124, 191]$[141, -238, 0, -20]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_ffRDotpvEeC1mZYRUkEwUg" points="[4, -10, -9, 188]$[85, -198, 72, 0]$[33, -198, 20, 0]"/>
+      <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_i0T0kNq2EeC1mZYRUkEwUg" id="(0.55,0.18181818181818182)"/>
     </edges>
   </notation:Diagram>
 </xmi:XMI>
