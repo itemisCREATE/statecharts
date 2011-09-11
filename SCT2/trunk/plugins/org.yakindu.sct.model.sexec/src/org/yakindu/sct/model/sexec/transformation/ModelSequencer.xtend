@@ -37,7 +37,9 @@ class ModelSequencer {
 
 
 	def ExecutionFlow transform(Statechart sc) {
-		val ef = createExecutionFlow(sc)
+		val ef = sc.create
+		
+		sc.mapExecutionFlow(ef)
 		sc.mapScopes(ef)
 		
 		ef
@@ -81,11 +83,13 @@ class ModelSequencer {
 	
 	
 	
-	def ExecutionFlow create r : sexecFactory.createExecutionFlow createExecutionFlow(Statechart statechart){
+	def ExecutionFlow mapExecutionFlow(Statechart statechart, ExecutionFlow r){
 		var content = EcoreUtil2::eAllContentsAsList(statechart)
 		val leafStates = content.filter(e | e instanceof State && (e as State).simple)
 		r.states.addAll(leafStates.map( s | (s as State).transform));
+		return r
 	}
+
 	
 	
 	def ExecutionState transform(State state) {

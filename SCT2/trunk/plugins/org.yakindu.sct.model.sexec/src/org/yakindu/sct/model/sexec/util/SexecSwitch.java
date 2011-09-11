@@ -75,6 +75,7 @@ public class SexecSwitch<T> extends Switch<T> {
 				ExecutionFlow executionFlow = (ExecutionFlow)theEObject;
 				T result = caseExecutionFlow(executionFlow);
 				if (result == null) result = caseScopedElement(executionFlow);
+				if (result == null) result = caseNamedElement(executionFlow);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
