@@ -1,49 +1,26 @@
+«REM»
+
+Contais the root templates that call the different file templates.
+
+@author andreas muelder
+@auther axel terfloth
+
+«ENDREM»
+
 «IMPORT sexec»
 «IMPORT stext»
 «IMPORT sgraph»
 
+«IMPORT org::yakindu::sct::generator::cpp::templates»
+
 «DEFINE main FOR ExecutionFlow»
 
-«FILE 'Main.cpp'»
-Execution States:
-«EXPAND executionStates FOREACH this.states»
-
-«ENDFILE»
+	«EXPAND StatechartH::file FOR this»
+	«EXPAND StatechartCPP::file FOR this»
+	
+	«EXPAND Dump::file FOR this»
+	
 «ENDDEFINE»
 
 
-«DEFINE executionStates FOR ExecutionState»
-Name: «this.name»
-Simple Name: «this.simpleName»
 
-Cycle: «EXPAND code FOR this.cycle»
-«ENDDEFINE»
-
-
-«DEFINE code FOR Sequence»
-	{
-		«EXPAND code FOREACH this.steps»
-	}
-«ENDDEFINE»
-
-«DEFINE code FOR If»
-		if («EXPAND code FOR condition») then «EXPAND code FOR this.thenStep»
-		«IF this.elseStep != null -»else «EXPAND code FOR this.elseStep»«ENDIF-»
-«ENDDEFINE»
-
-«DEFINE code FOR Step»
-!!! UNKNOWN STEP !!!
-«ENDDEFINE»
-
-
-«DEFINE code FOR Statement -»aaa
-«ENDDEFINE»
-
-«DEFINE code FOR LogicalOrExpression -»
-«EXPAND code FOR leftOperand» || «EXPAND code FOR rightOperand -»
-«ENDDEFINE»
-
-
-«DEFINE code FOR ElementReferenceExpression -»
-«this.value.toString()»-«this.value.name -»
-«ENDDEFINE»
