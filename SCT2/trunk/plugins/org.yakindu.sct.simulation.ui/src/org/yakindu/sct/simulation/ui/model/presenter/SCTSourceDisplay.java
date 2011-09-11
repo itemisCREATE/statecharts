@@ -68,9 +68,14 @@ public class SCTSourceDisplay extends SimulationSessionListenerAdapter
 		StatechartDiagramEditor editor = openEditorAndSelectElements(
 				debugElement, page);
 
+		//Release the old editor
+		if (support.isLocked())
+			support.releaseEditor();
+		
 		support = (IHighlightingSupport) editor
 				.getAdapter(IHighlightingSupport.class);
-
+		
+		//Release the new editor
 		if (support.isLocked())
 			support.releaseEditor();
 
