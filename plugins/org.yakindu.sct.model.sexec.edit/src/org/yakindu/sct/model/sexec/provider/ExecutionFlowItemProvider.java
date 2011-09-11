@@ -109,6 +109,7 @@ public class ExecutionFlowItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__STATES);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__SEQUENCES);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__ENTER_SEQUENCE);
 		}
 		return childrenFeatures;
 	}
@@ -168,6 +169,7 @@ public class ExecutionFlowItemProvider
 				return;
 			case SexecPackage.EXECUTION_FLOW__STATES:
 			case SexecPackage.EXECUTION_FLOW__SEQUENCES:
+			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -199,6 +201,39 @@ public class ExecutionFlowItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__SEQUENCES,
 				 SexecFactory.eINSTANCE.createCycle()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTER_SEQUENCE,
+				 SexecFactory.eINSTANCE.createSequence()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTER_SEQUENCE,
+				 SexecFactory.eINSTANCE.createCycle()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == SexecPackage.Literals.EXECUTION_FLOW__SEQUENCES ||
+			childFeature == SexecPackage.Literals.EXECUTION_FLOW__ENTER_SEQUENCE;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

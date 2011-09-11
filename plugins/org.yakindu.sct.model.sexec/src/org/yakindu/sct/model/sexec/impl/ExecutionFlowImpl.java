@@ -39,6 +39,7 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getStates <em>States</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSequences <em>Sequences</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getEnterSequence <em>Enter Sequence</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,6 +85,16 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected EList<Sequence> sequences;
+
+	/**
+	 * The cached value of the '{@link #getEnterSequence() <em>Enter Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEnterSequence()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sequence enterSequence;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -154,6 +165,49 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Sequence getEnterSequence() {
+		return enterSequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEnterSequence(Sequence newEnterSequence, NotificationChain msgs) {
+		Sequence oldEnterSequence = enterSequence;
+		enterSequence = newEnterSequence;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE, oldEnterSequence, newEnterSequence);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEnterSequence(Sequence newEnterSequence) {
+		if (newEnterSequence != enterSequence) {
+			NotificationChain msgs = null;
+			if (enterSequence != null)
+				msgs = ((InternalEObject)enterSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE, null, msgs);
+			if (newEnterSequence != null)
+				msgs = ((InternalEObject)newEnterSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE, null, msgs);
+			msgs = basicSetEnterSequence(newEnterSequence, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE, newEnterSequence, newEnterSequence));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -161,6 +215,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return ((InternalEList<?>)getStates()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__SEQUENCES:
 				return ((InternalEList<?>)getSequences()).basicRemove(otherEnd, msgs);
+			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
+				return basicSetEnterSequence(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -179,6 +235,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return getStates();
 			case SexecPackage.EXECUTION_FLOW__SEQUENCES:
 				return getSequences();
+			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
+				return getEnterSequence();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -203,6 +261,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				getSequences().clear();
 				getSequences().addAll((Collection<? extends Sequence>)newValue);
 				return;
+			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
+				setEnterSequence((Sequence)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -224,6 +285,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__SEQUENCES:
 				getSequences().clear();
 				return;
+			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
+				setEnterSequence((Sequence)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -242,6 +306,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return states != null && !states.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__SEQUENCES:
 				return sequences != null && !sequences.isEmpty();
+			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
+				return enterSequence != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -29,6 +29,11 @@ import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import apple.awt.CRenderer$Tracer
+import org.yakindu.sct.model.sgraph.Region
+import org.yakindu.sct.model.sgraph.Entry
+import org.yakindu.sct.model.sgraph.SGraphPackage
+import org.yakindu.sct.model.sexec.EnterState
+import org.yakindu.sct.model.sexec.ExitState
 
 class ModelSequencer {
 	
@@ -42,7 +47,9 @@ class ModelSequencer {
 		sc.mapExecutionFlow(ef)
 		sc.mapScopes(ef)
 		
-		ef
+		ef.defineEnterSequence(sc)
+		
+		return ef
 	}
 	
 	
@@ -114,7 +121,12 @@ class ModelSequencer {
 	def If buildTransitionSequence(Transition t) {
 		var ifStep = sexecFactory.createIf
 		if (t.trigger != null) ifStep.condition = t.trigger.buildCondition 
-		ifStep	
+		val thenSequence = sexecFactory.createSequence 
+		ifStep.thenStep = thenSequence
+		if (t.source != null) thenSequence.steps.add(newExitStateStep(t.source as State))		
+		if (t.target != null) thenSequence.steps.add(newEnterStateStep(t.target as State))
+		
+		return ifStep	
 	}
 	
 	
@@ -155,9 +167,50 @@ class ModelSequencer {
 	}
 	
 	
-		//--------- UTILS ---------------
+	/************** Calculating execution sequences **************/
+	
+	
+	def defineEnterSequence(ExecutionFlow flow, Statechart sc) {
+		val enterSteps = sc.regions.map(r | r.entry.target?.newEnterStateStep).filter(e | e != null)
+		val enterSequence = sexecFactory.createSequence
+		enterSequence.name = "enter"
+		enterSteps.forEach(e | enterSequence.steps.add(e));
+		flow.enterSequence = enterSequence
+		return enterSequence
+	}
+	
+	
+	def newEnterStateStep(State s) {
+		var ess  = null as EnterState
+		if (s != null) {
+			ess = sexecFactory.createEnterState
+			ess.state = s.create	
+		}
+		return ess
+	}
+	
+	def newExitStateStep(State s) {
+		var ess  = null as ExitState
+		if (s != null) {
+			ess = sexecFactory.createExitState
+			ess.state = s.create	
+		}
+		return ess
+	}
+	
+	
+	//--------- UTILS ---------------
 	def sexecFactory() { SexecFactory::eINSTANCE }
 	def stextFactory() { StextFactory::eINSTANCE }
 	
 	
+	
+	def entry(Region r) {
+		r.vertices.findFirst(v | v instanceof Entry && (v.name == null || v.name == 'default') ) as Entry
+	}
+	
+	
+	def target(Entry entry) {
+		entry?.outgoingTransitions?.get(0)?.target as State
+	}
 }

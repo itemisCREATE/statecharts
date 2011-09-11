@@ -206,6 +206,15 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getExecutionFlow_EnterSequence() {
+		return (EReference)executionFlowEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getExecutionState() {
 		return executionStateEClass;
 	}
@@ -430,6 +439,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		executionFlowEClass = createEClass(EXECUTION_FLOW);
 		createEReference(executionFlowEClass, EXECUTION_FLOW__STATES);
 		createEReference(executionFlowEClass, EXECUTION_FLOW__SEQUENCES);
+		createEReference(executionFlowEClass, EXECUTION_FLOW__ENTER_SEQUENCE);
 
 		executionStateEClass = createEClass(EXECUTION_STATE);
 		createEAttribute(executionStateEClass, EXECUTION_STATE__SIMPLE_NAME);
@@ -511,6 +521,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEClass(executionFlowEClass, ExecutionFlow.class, "ExecutionFlow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExecutionFlow_States(), this.getExecutionState(), null, "states", null, 0, -1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionFlow_Sequences(), this.getSequence(), null, "sequences", null, 0, -1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionFlow_EnterSequence(), this.getSequence(), null, "enterSequence", null, 0, 1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionStateEClass, ExecutionState.class, "ExecutionState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExecutionState_SimpleName(), ecorePackage.getEString(), "simpleName", null, 0, 1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
