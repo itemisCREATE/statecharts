@@ -19,7 +19,6 @@ import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -40,6 +39,8 @@ public class InjectMembersResource extends GMFResource implements
 
 	private static final boolean isDebug = false;
 
+	private boolean parsing = false;
+
 	List<org.eclipse.emf.common.util.Diagnostic> diagnostics = new ArrayList<org.eclipse.emf.common.util.Diagnostic>();
 
 	private List<IMemberInjectionService> services;
@@ -48,7 +49,6 @@ public class InjectMembersResource extends GMFResource implements
 		super(uri);
 		services = new ArrayList<IMemberInjectionService>();
 	}
-	
 
 	public List<org.eclipse.emf.common.util.Diagnostic> getDiagnostics() {
 		return diagnostics;
@@ -57,11 +57,13 @@ public class InjectMembersResource extends GMFResource implements
 	@Override
 	public void doLoad(InputStream inputStream, Map<?, ?> options)
 			throws IOException {
+
 		super.doLoad(inputStream, options);
 		parseAll();
 	}
 
 	private void parseAll() {
+		parsing = true;
 		diagnostics.clear();
 		long t = System.currentTimeMillis();
 		TreeIterator<EObject> iter = getAllContents();
@@ -77,6 +79,29 @@ public class InjectMembersResource extends GMFResource implements
 		if (isDebug)
 			System.out.println("Reparsing Took "
 					+ (System.currentTimeMillis() - t));
+		parsing = false;
+	}
+
+	@Override
+	public void attached(EObject eObject) {
+		super.attached(eObject);
+		if (isLoading() || isParsing())
+			return;
+		EAnnotation eAnnotation = eObject.eClass().getEAnnotation(
+				INJECT_MEMBERS);
+		if (eAnnotation != null) {
+			reparse(receiveInjectionService(eObject), eObject);
+		}
+	}
+
+	@Override
+	public void detached(EObject eObject) {
+		super.detached(eObject);
+		Adapter existingAdapter = EcoreUtil.getExistingAdapter(eObject,
+				ReparseAdapter.class);
+		if (existingAdapter != null) {
+			eObject.eAdapters().remove(existingAdapter);
+		}
 	}
 
 	private IMemberInjectionService receiveInjectionService(
@@ -107,10 +132,10 @@ public class InjectMembersResource extends GMFResource implements
 			EObject object) {
 		Adapter existingAdapter = EcoreUtil.getExistingAdapter(object,
 				ReparseAdapter.class);
-		EList<Adapter> eAdapters = object.eAdapters();
 		if (existingAdapter == null) {
-			eAdapters.add(new ReparseAdapter(object,
-					service.getSourceFeature(), service));
+			object.eAdapters().add(
+					new ReparseAdapter(object, service.getSourceFeature(),
+							service));
 		}
 	}
 
@@ -148,7 +173,9 @@ public class InjectMembersResource extends GMFResource implements
 		public boolean isAdapterForType(Object type) {
 			return ReparseAdapter.class == type;
 		}
-
 	}
 
+	public boolean isParsing() {
+		return parsing;
+	}
 }
