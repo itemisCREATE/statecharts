@@ -1,0 +1,29 @@
+«REM»
+
+Templates for the main statechart cpp file.
+
+@auther joern seger
+
+«ENDREM»
+
+«IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
+
+
+«DEFINE file FOR ExecutionFlow»
+
+«FILE 'definition.h'»
+#ifndef DEFINITION_H_
+#define DEFINITION_H_
+
+/* platform/compiler specific additions (#includes) */
+/* temporarly set to fix values */ 
+
+typedef unsigned int uint32_t;
+typedef unsigned short uint16_t;
+
+#endif /* DEFINITION_H_ */
+«ENDFILE»
+
+«ENDDEFINE»

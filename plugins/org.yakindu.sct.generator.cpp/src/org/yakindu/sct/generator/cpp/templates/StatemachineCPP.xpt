@@ -1,0 +1,57 @@
+«REM»
+
+Templates for the main statechart cpp file.
+
+@auther joern seger
+
+«ENDREM»
+
+«IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
+
+
+«DEFINE file FOR ExecutionFlow»
+
+«FILE 'Statemachine.cpp'»
+#include "Statemachine.h"
+#include "StatemachineException.h"
+
+Statemachine::Statemachine(uint16_t maxStates) {
+	state = new uint32_t[maxStates]; /* memory allocation for all states */
+	statePtr = 0; /* actual state referencer */
+}
+
+Statemachine::~Statemachine() {
+	delete[] state;
+}
+
+void Statemachine::queueEvent(Event ev) {
+	/* creates a copy */
+	eventList.push_back(ev);
+}
+
+Event Statemachine::getEvent() {
+	if (eventList.empty())
+		throw(StatechartException("There is no event available"));
+	Event retEvent = eventList.front();
+	eventList.pop_front();
+	return (retEvent);
+}
+
+bool Statemachine::eventWaiting() const {
+	return (!eventList.empty());
+}
+
+void Statemachine::runCycle() {
+	if (!eventWaiting())
+		return;
+
+	Event ev = getEvent();
+	_runCycle(ev);
+
+	delete ev;
+}
+«ENDFILE»
+
+«ENDDEFINE»

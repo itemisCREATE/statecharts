@@ -1,0 +1,189 @@
+«REM»
+
+Templates for the main statechart cpp file.
+
+@auther joern seger
+
+«ENDREM»
+
+«IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
+
+
+«DEFINE file FOR ExecutionFlow»
+
+«FILE 'MyStatemachine.cpp'»
+#include <iostream>
+#include "MyStatemachine.h"
+
+MyStatemachine::MyStatemachine() : Statemachine(MAX_PARALLEL_STATES) {
+}
+
+MyStatemachine::~MyStatemachine() {
+}
+
+
+bool MyStatemachine::condition_state1_id1(const _Event & event, const MyDataRepository & data)
+{
+	return (event.getID() == (uint32_t)event1);
+}
+
+bool MyStatemachine::condition_state3_id1(const _Event & event, const MyDataRepository & data)
+{
+	return (event.getID() == (uint32_t)event2);
+}
+
+bool MyStatemachine::condition_state3_id2(const _Event & event, const MyDataRepository & data)
+{
+	return (event.getID() == (uint32_t)event3);
+}
+
+bool MyStatemachine::condition_state4_id1(const _Event & event, const MyDataRepository & data)
+{
+	return (event.getID() == (uint32_t)event4);
+}
+
+bool MyStatemachine::condition_state4_id2(const _Event & event, const MyDataRepository & data)
+{
+	return (event.getID() == (uint32_t)event5);
+}
+
+bool MyStatemachine::condition_state4_id3(const _Event & event, const MyDataRepository & data)
+{
+	return (event.getID() == (uint32_t)event2);
+}
+
+void MyStatemachine::statement_state1_id1()
+{
+	std::cout << "statement_state1_id1 \n";
+	/* exit  S1 */
+	/* transition action event1 */
+	/* entry S2 */
+	/* entry S3 */
+	state[0] = State3;
+}
+
+void MyStatemachine::statement_state3_id1()
+{
+	std::cout << "statement_state3_id1 \n";
+	/* exit S3 */
+	/* exit S2 */
+	/* transition action event 2 */
+	/* entry S1 */
+	state[0] = State1;
+}
+
+void MyStatemachine::statement_state4_id1()
+{
+	std::cout << "statement_state4_id1 \n";
+	/* exit S4 */
+	/* exit S2 */
+	/* transition action event 2 */
+	/* entry S1 */
+	state[0] = State3;
+
+}
+
+void MyStatemachine::statement_state4_id2()
+{
+	std::cout << "statement_state4_id2 \n";
+	/* exit S4 */
+	/* exit S2 */
+	/* transition action event 5 */
+	/* entry S1 */
+	state[0] = State1;
+
+}
+
+void MyStatemachine::statement_state4_id3()
+{
+	std::cout << "statement_state4_id3 \n";
+	/* exit S4 */
+	/* transition action event 3 */
+	/* entry S3 */
+	state[0] = State1;
+
+}
+
+void MyStatemachine::statement_state3_id2()
+{
+	std::cout << "statement_state3_id2 \n";
+	/* exit S3 */
+	/* transition action event 4 */
+	/* entry S4 */
+	state[0] = State4;
+
+}
+
+void MyStatemachine::cycle_state1(const _Event& ev)
+{
+	if (condition_state1_id1(ev, *this)) {
+		statement_state1_id1();
+		return;
+	}
+
+}
+
+void MyStatemachine::cycle_state3(const _Event& ev)
+{
+	if (condition_state3_id1(ev, *this)) {
+		statement_state3_id1();
+		return;
+	}
+	if (condition_state3_id2(ev, *this)) {
+		statement_state3_id2();
+	}
+}
+
+void MyStatemachine::cycle_state4(const _Event& ev)
+{
+	if (condition_state4_id1(ev, *this)) {
+		statement_state4_id1();
+		return;
+	}
+	if (condition_state4_id2(ev, *this)) {
+		statement_state4_id2();
+		return;
+	}
+	if (condition_state4_id3(ev, *this)) {
+		statement_state4_id3();
+		return;
+	}
+}
+
+
+void MyStatemachine::init()
+{
+	/* initialize enter states */
+	state[0] = State1;
+
+	/* uninitialized states:
+	 * state[1] = last_state; */
+}
+
+
+
+void MyStatemachine::_runCycle(Event ev)
+{
+	for (int i=0; i<MAX_PARALLEL_STATES; ++i) {
+		switch(state[i]) {
+		case State1:
+			cycle_state1(*ev);
+			break;
+		case State3:
+			cycle_state3(*ev);
+			break;
+		case State4:
+			cycle_state4(*ev);
+			break;
+		default:
+			/* no state found */
+			break;
+		}
+	}
+}
+
+«ENDFILE»
+
+«ENDDEFINE»
