@@ -2,7 +2,7 @@
 
 Templates for the main statechart cpp file.
 
-@auther axel terfloth
+@auther joern seger
 
 «ENDREM»
 
@@ -58,13 +58,16 @@ protected:
 	void cycle_state3(const _Event& ev);
 	void cycle_state4(const _Event& ev);
 
+	virtual void _runCycle(Event ev);
+
 public:
 
 	MyStatemachine();
 	virtual ~MyStatemachine();
 
 	virtual void init();
-	virtual void runCycle();
+
+	//virtual void queueEvent(const Event& ev);
 
 };
 
