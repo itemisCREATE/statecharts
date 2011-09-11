@@ -19,12 +19,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.yakindu.sct.generator.base.util.GeneratorBaseUtil;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.SequencerModule;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
@@ -32,6 +34,9 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+
+import static org.junit.Assert.*;
+
 
 /**
  * 
@@ -67,8 +72,11 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 		Statechart statechart = GeneratorBaseUtil.loadStatechart(uri);
 		ExecutionFlow executionFlow = GeneratorBaseUtil
 				.createExecutionFlowModel(statechart);
+		
 		GeneratorBaseUtil.generate(executionFlow, templatePath, project,
 				"src-gen");
+		
+		assertNotNull(((ElementReferenceExpression) ((If) executionFlow.getStates().get(0).getCycle().getSteps().get(0)).getCondition()).getValue());
 	}
 
 	
@@ -95,6 +103,9 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 
 		GeneratorBaseUtil.generate(flow, templatePath, project,
 				"src-gen");
+		
+		assertNotNull(((ElementReferenceExpression) ((If) flow.getStates().get(0).getCycle().getSteps().get(0)).getCondition()).getValue());
+
 	}
 
 }
