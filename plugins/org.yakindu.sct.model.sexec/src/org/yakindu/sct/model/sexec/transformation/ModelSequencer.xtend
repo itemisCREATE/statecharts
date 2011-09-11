@@ -26,25 +26,60 @@ import org.yakindu.sct.model.sexec.Step
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.sct.model.sgraph.SGraphFactory
 import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.VariableDefinition
+import apple.awt.CRenderer$Tracer
 
 class ModelSequencer {
 	
 	@Inject extension IQualifiedNameProvider qfnProvider
+	@Inject extension FactoryExtension factory
 
 
 	def ExecutionFlow transform(Statechart sc) {
 		val ef = createExecutionFlow(sc)
-		ef.defineScopes(sc)
+		sc.mapScopes(ef)
+		
+		ef
 	}
 	
 	
-	def ExecutionFlow defineScopes(ExecutionFlow flow, Statechart sc) {
-		flow.scopes.addAll(sc.scopes.map(scope | scope.copy))
+	/**
+	 * maps all required scope defined in the statechart to the execution flow.
+	 * This includes creating the scopes and adding all relevant declarations. Empty scopes wont be mapped.
+	 */
+	def ExecutionFlow mapScopes(Statechart sc, ExecutionFlow flow) {
+		flow.scopes.addAll(sc.scopes.map(scope | scope.map))
 		flow
 	}
 	
-	def Scope create r : EcoreUtil::copy(scope) copy(Scope scope) {
+	
+	/**
+	 * 
+	 */
+	def Scope map(Scope scope) {
+		val _scope = scope.create
+		_scope.declarations.addAll(scope.declarations.map(decl | decl.map).filter(e | e != null))
+		return _scope
 	}
+	
+	
+	def dispatch Declaration map(Declaration decl) {
+	}
+	
+	def dispatch Declaration map(EventDefinition e) {
+		val _e = e.create
+		return _e
+	}
+	
+	def dispatch Declaration map(VariableDefinition v) {
+		val _v = v.create
+		return _v
+	}
+	
+	
+	
+	
 	
 	def ExecutionFlow create r : sexecFactory.createExecutionFlow createExecutionFlow(Statechart statechart){
 		var content = EcoreUtil2::eAllContentsAsList(statechart)
@@ -53,21 +88,22 @@ class ModelSequencer {
 	}
 	
 	
-	def ExecutionState create r : sexecFactory.createExecutionState transform(State state){
-		r.simpleName = state.name
-		r.name = state.fullyQualifiedName.toString.replaceAll(" ", "")
-		r.cycle = state.buildCycle
+	def ExecutionState transform(State state) {
+		val _state = state.create;
+		_state.cycle = state.buildCycle
+		_state
 	}
 	
 	
 	def Cycle create r : sexecFactory.createCycle buildCycle(State state) {	
-		r.steps.add( state.outgoingTransitions.reverseView.fold(null as If, [s, t | {
+		val folded = state.outgoingTransitions.reverseView.fold(null as If, [s, t | {
 				var ifStep = t.buildTransitionSequence
 				// TODO then ...
 				ifStep.elseStep = s
 				ifStep
-			}]
-		))
+			}])
+			
+		if (folded != null) r.steps.add(folded)
 	}
 	
 	
@@ -92,8 +128,7 @@ class ModelSequencer {
 		)
 	}
 	
-
-
+	
 
 	def Expression or(Expression left, Expression right) {
 		val or = stextFactory.createLogicalOrExpression
@@ -111,12 +146,14 @@ class ModelSequencer {
 
 	def dispatch Expression raised(RegularEventSpec e) {
 		val r = stextFactory.createElementReferenceExpression
-		r.value = e.event as Declaration
-		r
+		r.value = (e.event as EventDefinition).create
+		return r
 	}
 	
 	
-	//--------- UTILS ---------------
+		//--------- UTILS ---------------
 	def sexecFactory() { SexecFactory::eINSTANCE }
 	def stextFactory() { StextFactory::eINSTANCE }
+	
+	
 }
