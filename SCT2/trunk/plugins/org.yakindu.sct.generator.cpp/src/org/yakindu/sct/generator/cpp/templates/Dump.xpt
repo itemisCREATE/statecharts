@@ -32,9 +32,8 @@ Cycle: «EXPAND code FOR this.cycle»
 «ENDDEFINE»
 
 
-«DEFINE code FOR Sequence»
-	{
-		«EXPAND code FOREACH this.steps»
+«DEFINE code FOR Sequence -»
+	{ «EXPAND code FOREACH this.steps -»
 	}
 «ENDDEFINE»
 
@@ -44,10 +43,19 @@ Cycle: «EXPAND code FOR this.cycle»
 		«IF this.elseStep != null -»else «EXPAND code FOR this.elseStep»«ENDIF-»
 «ENDDEFINE»
 
+«DEFINE code FOR EnterState -»
+ enter «this.state.name -»
+«ENDDEFINE»
+
+«DEFINE code FOR ExitState -»
+ exit «this.state.name -»
+«ENDDEFINE»
+
 
 «DEFINE code FOR Step»
 !!! UNKNOWN STEP !!!
 «ENDDEFINE»
+
 
 
 «DEFINE code FOR Statement -»
