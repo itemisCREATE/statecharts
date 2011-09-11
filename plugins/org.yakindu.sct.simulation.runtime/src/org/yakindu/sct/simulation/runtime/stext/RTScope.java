@@ -12,8 +12,8 @@ package org.yakindu.sct.simulation.runtime.stext;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
 import org.yakindu.sct.simulation.runtime.sgraph.RTSignalEvent;
@@ -76,7 +76,7 @@ public class RTScope implements ExecutionScope {
 		return variables.values();
 	}
 
-	public List<RTSignalEvent> getEvents() {
+	public Set<RTSignalEvent> getEvents() {
 		// TODO Auto-generated method stub
 		return null;
 	}

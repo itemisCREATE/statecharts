@@ -8,7 +8,10 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.simulation.ui.editor;
+package org.yakindu.sct.simulation.ui.model.presenter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
@@ -25,11 +28,23 @@ import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
 @SuppressWarnings({ "rawtypes" })
 public class IHighlightingSupportAdapterFactory implements IAdapterFactory {
 
+	private static Map<DiagramDocumentEditor, IHighlightingSupport> cache;
+	static {
+		cache = new HashMap<DiagramDocumentEditor, IHighlightingSupport>();
+	}
+
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
 		if (adapterType == IHighlightingSupport.class) {
 			if (adaptableObject instanceof DiagramDocumentEditor) {
-				return new HighlightingSupportAdapter(
+				IHighlightingSupport supportFromCache = cache
+						.get((DiagramDocumentEditor) adaptableObject);
+				if (supportFromCache != null)
+					return supportFromCache;
+				supportFromCache = new HighlightingSupportAdapter(
 						(DiagramDocumentEditor) adaptableObject);
+				cache.put((DiagramDocumentEditor) adaptableObject,
+						supportFromCache);
+				return supportFromCache;
 			}
 		}
 		return null;

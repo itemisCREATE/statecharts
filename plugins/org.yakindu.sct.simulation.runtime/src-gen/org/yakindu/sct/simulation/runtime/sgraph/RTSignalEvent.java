@@ -37,5 +37,9 @@ public class RTSignalEvent extends RTEvent {
 	public Class<?> getType() {
 		return type;
 	}
+	
+	
+	
+	
 
 }

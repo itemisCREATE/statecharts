@@ -6,7 +6,7 @@
          point="org.eclipse.core.runtime.adapters">
       <factory
             adaptableType="org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor"
-            class="org.yakindu.sct.simulation.ui.editor.IHighlightingSupportAdapterFactory">
+            class="org.yakindu.sct.simulation.ui.model.presenter.IHighlightingSupportAdapterFactory">
          <adapter
                type="de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport">
          </adapter>
@@ -72,5 +72,30 @@
           id="org.yakindu.sct.simulation.ui.statushandler"
           plugin="org.yakindu.sct.simulation.core">
     </statusHandler>
+ </extension>
+ <!-- Source Display Adapter factory -->
+ <extension
+       point="org.eclipse.core.runtime.adapters">
+    <factory
+          adaptableType="org.yakindu.sct.simulation.core.debugmodel.SCTStackFrame"
+          class="org.yakindu.sct.simulation.ui.model.presenter.SCTSourceDisplayAdapterFactory">
+       <adapter
+             type="org.eclipse.debug.ui.sourcelookup.ISourceDisplay">
+       </adapter>
+    </factory>
+     <factory
+          adaptableType="org.yakindu.sct.simulation.core.debugmodel.SCTDebugThread"
+          class="org.yakindu.sct.simulation.ui.model.presenter.SCTSourceDisplayAdapterFactory">
+       <adapter
+             type="org.eclipse.debug.ui.sourcelookup.ISourceDisplay">
+       </adapter>
+    </factory>
+     <factory
+          adaptableType="org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget"
+          class="org.yakindu.sct.simulation.ui.model.presenter.SCTSourceDisplayAdapterFactory">
+       <adapter
+             type="org.eclipse.debug.ui.sourcelookup.ISourceDisplay">
+       </adapter>
+    </factory>
  </extension>
 </plugin>

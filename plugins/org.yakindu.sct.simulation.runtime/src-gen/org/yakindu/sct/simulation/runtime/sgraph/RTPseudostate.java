@@ -17,7 +17,6 @@ public class RTPseudostate extends RTNode {
 	}
 
 	protected void enter() {
-
 		if (kind == PseudostateKind.INITIAL) {
 			// go directly into the next state (special transition needs no
 			// event

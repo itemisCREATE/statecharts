@@ -54,8 +54,6 @@ public class SGraphSimulationSession implements Runnable,
 	public void start() {
 		taskQueue.add(new Runnable() {
 			public void run() {
-				SGraphSimulationSessionRegistry.INSTANCE
-						.registerSimulationSession(SGraphSimulationSession.this);
 				changeSimulationState(SimulationState.STARTED);
 				facade.enter();
 				changeSimulationState(SimulationState.RUNNING);
@@ -93,8 +91,6 @@ public class SGraphSimulationSession implements Runnable,
 		taskQueue.add(new Runnable() {
 			public void run() {
 				changeSimulationState(SimulationState.TERMINATED);
-				SGraphSimulationSessionRegistry.INSTANCE
-						.unregisterSimulationSession(SGraphSimulationSession.this);
 			}
 		});
 	}
@@ -185,5 +181,9 @@ public class SGraphSimulationSession implements Runnable,
 	public ISGraphExecutionScope getExecutionScope() {
 		return facade.getExecutionScope();
 	}
-	
+
+	public SimulationState getCurrentState() {
+		return currentState;
+	}
+
 }

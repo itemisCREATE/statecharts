@@ -15,6 +15,7 @@ import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.widgets.Composite;
+import org.yakindu.sct.simulation.ui.view.ActiveSessionProvider;
 
 /**
  * {@link TextCellEditor} support for Real values.
@@ -24,8 +25,9 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class RealEditingSupport extends ScopeSlotEditingSupport {
 
-	public RealEditingSupport(ColumnViewer viewer) {
-		super(viewer);
+	public RealEditingSupport(ColumnViewer viewer,
+			ActiveSessionProvider provider) {
+		super(viewer, provider);
 	}
 
 	@Override

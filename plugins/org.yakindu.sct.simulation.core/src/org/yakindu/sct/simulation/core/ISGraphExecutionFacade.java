@@ -10,6 +10,10 @@
  */
 package org.yakindu.sct.simulation.core;
 
+import java.util.Set;
+
+import org.yakindu.sct.model.sgraph.Vertex;
+
 /**
  * Facade for executable statechart implementation.
  * 
@@ -29,4 +33,7 @@ public interface ISGraphExecutionFacade {
 	public void removeExecutionListener(ISGraphExecutionListener listener);
 
 	public ISGraphExecutionScope getExecutionScope();
+	
+	public Set<Vertex> getStateConfiguration(); 
+	
 }

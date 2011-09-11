@@ -12,7 +12,6 @@ package org.yakindu.sct.simulation.runtime.stext;
 
 import org.yakindu.sct.simulation.runtime.EvaluationException;
 
-
 /**
  * 
  * 
@@ -24,7 +23,6 @@ public class RTVariable {
 	protected Object value;
 	protected Class<?> type;
 
-	
 	public RTVariable() {
 		super();
 	}
@@ -48,7 +46,6 @@ public class RTVariable {
 		this.name = name;
 	}
 
-	
 	public Class<?> getType() {
 		return type;
 	}
@@ -57,18 +54,42 @@ public class RTVariable {
 		this.type = type;
 	}
 
-	
 	public Object getValue() {
 		return value;
 	}
 
 	public void setValue(Object value) {
-		if(type != null && (! type.isAssignableFrom(value.getClass()))) {
-			throw new EvaluationException(
-					"Variable <" + name + "> of type " + type 
-					+ " is not assignable from " + value.getClass() + " value.");
+		if (type != null && (!type.isAssignableFrom(value.getClass()))) {
+			throw new EvaluationException("Variable <" + name + "> of type "
+					+ type + " is not assignable from " + value.getClass()
+					+ " value.");
 		}
 		this.value = value;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RTVariable other = (RTVariable) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
 }
