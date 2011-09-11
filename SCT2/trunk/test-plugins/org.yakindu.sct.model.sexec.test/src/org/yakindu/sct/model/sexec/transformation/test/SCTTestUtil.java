@@ -1,5 +1,16 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEventDefinition;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createInterfaceScope;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createReactionTrigger;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegion;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegularEventSpec;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createState;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createStatechart;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createTransition;
+
+import org.yakindu.sct.model.sgraph.Entry;
+import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
@@ -85,6 +96,15 @@ public class SCTTestUtil {
 		return state;
 	}
 	
+	public static Entry _createEntry(EntryKind kind, String name, Region r) {
+		Entry entry = SGraphFactory.eINSTANCE.createEntry();
+		if (kind != null) entry.setKind(kind);  
+			else entry.setKind(EntryKind.INITIAL);
+		entry.setName(name);
+		if (r!=null) r.getVertices().add(entry);
+		return entry;
+	}
+	
 	public static Transition _createTransition(Vertex source, Vertex target) {
 		Transition t = SGraphFactory.eINSTANCE.createTransition();
 		t.setSource(source);
@@ -92,6 +112,60 @@ public class SCTTestUtil {
 		return t;
 	}
 	
+	
+	public static class SimpleFlatTSC {
+		
+		public Statechart sc = _createStatechart("test");
+		public InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
+		public EventDefinition e1 = _createEventDefinition("e1", s_scope);
+		public Region r = _createRegion("main", sc);
+		public Entry entry = _createEntry(EntryKind.INITIAL, null, r);
+		public State s1 = _createState("S1", r);
+		public State s2 = _createState("S2", r);
+		public Transition t0 = _createTransition(entry, s1);
+		public Transition t1 = _createTransition(s1, s2);
+		public ReactionTrigger tr1 = _createReactionTrigger(t1);
+		
+		public SimpleFlatTSC() {
+			_createRegularEventSpec(e1, tr1);
+		}
+
+	}
+	
+
+	public static class OrthogonalFlatTSC {
+		
+		public Statechart sc = _createStatechart("test");
+		public InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
+		public EventDefinition e1 = _createEventDefinition("e1", s_scope);
+		public EventDefinition e2 = _createEventDefinition("e2", s_scope);
+		
+		public Region r1 = _createRegion("first", sc);
+		public Entry entry_r1 = _createEntry(EntryKind.INITIAL, null, r1);
+		public State s1 = _createState("S1", r1);
+		public State s2 = _createState("S2", r1);
+		public Transition t0 = _createTransition(entry_r1, s1);
+		public Transition t1 = _createTransition(s1, s2);
+		public ReactionTrigger r1_tr1 = _createReactionTrigger(t1);
+		
+		public Region r2 = _createRegion("second", sc);
+		public Entry entry_r2 = _createEntry(EntryKind.INITIAL, null, r2);
+		public State s3 = _createState("S3", r2);
+		public State s4 = _createState("S4", r2);
+		public Transition t0_r2 = _createTransition(entry_r2, s3);
+		public Transition t1_r2 = _createTransition(s3, s4);
+		public Transition t2_r2 = _createTransition(s3, s4);
+		public ReactionTrigger r2_tr1 = _createReactionTrigger(t1_r2);
+		public ReactionTrigger r2_tr2 = _createReactionTrigger(t2_r2);
+
+		public OrthogonalFlatTSC() {
+			_createRegularEventSpec(e1, r1_tr1);
+			
+			_createRegularEventSpec(e1, r2_tr1);
+			_createRegularEventSpec(e2, r2_tr2);
+		}
+
+	}
 	
 
 }
