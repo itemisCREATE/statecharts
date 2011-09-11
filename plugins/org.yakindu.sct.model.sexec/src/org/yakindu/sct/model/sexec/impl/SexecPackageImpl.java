@@ -496,6 +496,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		// Add supertypes to classes
 		executionFlowEClass.getESuperTypes().add(theSGraphPackage.getScopedElement());
+		executionFlowEClass.getESuperTypes().add(this.getNamedElement());
 		executionStateEClass.getESuperTypes().add(this.getNamedElement());
 		cycleEClass.getESuperTypes().add(this.getSequence());
 		sequenceEClass.getESuperTypes().add(this.getStep());

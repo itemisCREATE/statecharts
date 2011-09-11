@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ExecutionFlow extends ScopedElement {
+public interface ExecutionFlow extends ScopedElement, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>States</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.sct.model.sexec.ExecutionState}.

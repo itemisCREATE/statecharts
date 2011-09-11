@@ -21,12 +21,18 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sgraph.Statechart
 
 class FactoryExtension {
 	
 	
 	@Inject extension IQualifiedNameProvider qfnProvider
 
+
+	def ExecutionFlow create r : sexecFactory.createExecutionFlow create(Statechart statechart){
+		r.name = statechart.name
+	}
 
 	def dispatch Scope create r : stextFactory.createInterfaceScope  create(InterfaceScope scope) {
 		r.name = scope.name

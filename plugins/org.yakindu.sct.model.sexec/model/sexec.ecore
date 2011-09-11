@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sexec"
     nsURI="http://www.yakindu.org/sct/sexec/1.0.0" nsPrefix="sexec">
-  <eClassifiers xsi:type="ecore:EClass" name="ExecutionFlow" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//ScopedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionFlow" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//ScopedElement #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
         eType="#//ExecutionState" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sequences" upperBound="-1"
