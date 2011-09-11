@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
 import org.yakindu.sct.model.sexec.*;
+import org.yakindu.sct.model.sgraph.ScopedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -114,6 +115,10 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSequenceExecution(SequenceExecution object) {
 				return createSequenceExecutionAdapter();
+			}
+			@Override
+			public Adapter caseScopedElement(ScopedElement object) {
+				return createScopedElementAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -286,6 +291,20 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSequenceExecutionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.ScopedElement <em>Scoped Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sgraph.ScopedElement
+	 * @generated
+	 */
+	public Adapter createScopedElementAdapter() {
 		return null;
 	}
 

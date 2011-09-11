@@ -1,6 +1,6 @@
 package org.yakindu.sct.generator.cpp.test.generator;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.net.URL;
 
@@ -15,16 +15,21 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.SequencerModule;
+import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
+import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
+import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.StextFactory;
+import org.yakindu.sct.model.stext.stext.Type;
+import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -33,6 +38,7 @@ import com.google.inject.Injector;
 /**
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author axel terfloth
  * 
  */
 public class CPPGeneratorTest extends AbstractGeneratorTest {
@@ -46,6 +52,7 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 		injector.injectMembers(this);
 	}
 
+	
 	@Test
 	public void testExecuteGenerator() throws Exception {
 
@@ -66,6 +73,8 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 				"src-gen");
 	}
 
+	
+	
 	@Test
 	public void testSingleRegularEventTriggerCondition() {
 
@@ -96,6 +105,7 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 		assertTrue(((LogicalOrExpression) s).getRightOperand() instanceof ElementReferenceExpression);
 	}
 
+	
 	@Test
 	public void testTransitionSequence() {
 
@@ -114,12 +124,54 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 		assertTrue(s.getCondition() instanceof LogicalOrExpression);
 		assertTrue(((LogicalOrExpression) s.getCondition()).getLeftOperand() instanceof ElementReferenceExpression);
 		assertTrue(((LogicalOrExpression) s.getCondition()).getRightOperand() instanceof ElementReferenceExpression);
+
+		assertEquals(e1.getName(),
+				((ElementReferenceExpression)((LogicalOrExpression) s.getCondition()).getLeftOperand()).getValue().getName());
+		assertEquals(e2.getName(),
+				((ElementReferenceExpression)((LogicalOrExpression) s.getCondition()).getRightOperand()).getValue().getName());
 	}
 
+	
+	@Test
+	public void testCopyScope() {
+
+		EventDefinition e1 = _createEventDefinition("e1");
+		EventDefinition e2 = _createEventDefinition("e2");
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER);
+		
+		InterfaceScope s_scope = StextFactory.eINSTANCE.createInterfaceScope();
+		s_scope.getDeclarations().add(e1);
+		s_scope.getDeclarations().add(e2);
+		s_scope.getDeclarations().add(v1);
+		
+		Scope r_scope = sequencer.copy(s_scope);
+
+		assertTrue(r_scope instanceof InterfaceScope);
+		assertEquals(3, r_scope.getDeclarations().size());
+		
+		
+		for ( int i =0; i<r_scope.getDeclarations().size(); i++) {			
+			Declaration s_decl = s_scope.getDeclarations().get(i);
+			Declaration r_decl = r_scope.getDeclarations().get(i);
+			
+			assertNotSame(s_decl, r_decl);	
+			assertEquals(s_decl.getName(), r_decl.getName());	
+			assertEquals(s_decl.getClass(), r_decl.getClass());	
+		}
+	}
+	
+	
 	protected EventDefinition _createEventDefinition(String name) {
-		EventDefinition e1 = StextFactory.eINSTANCE.createEventDefinition();
-		e1.setName(name);
-		return e1;
+		EventDefinition e = StextFactory.eINSTANCE.createEventDefinition();
+		e.setName(name);
+		return e;
+	}
+
+	protected VariableDefinition _createVariableDefinition(String name, Type type) {
+		VariableDefinition v = StextFactory.eINSTANCE.createVariableDefinition();
+		v.setName(name);
+		v.setType(type);
+		return v;
 	}
 
 	protected RegularEventSpec _createRegularEventSpec(EventDefinition e1) {

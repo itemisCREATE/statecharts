@@ -24,6 +24,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecPackage;
+import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,7 +40,7 @@ import org.yakindu.sct.model.sexec.SexecPackage;
  *
  * @generated
  */
-public class ExecutionFlowImpl extends EObjectImpl implements ExecutionFlow {
+public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlow {
 	/**
 	 * The cached value of the '{@link #getStates() <em>States</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
