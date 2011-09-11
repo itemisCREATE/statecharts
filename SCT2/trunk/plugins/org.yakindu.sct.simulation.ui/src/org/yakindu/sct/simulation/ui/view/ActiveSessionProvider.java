@@ -8,15 +8,17 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.simulation.core.launch;
+package org.yakindu.sct.simulation.ui.view;
+
+import org.yakindu.sct.simulation.core.SGraphSimulationSession;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public interface IStatechartLaunchConfigurationType {
+public interface ActiveSessionProvider {
 
-	String CONFIG_TYPE = "org.yakindu.sct.simulation.core.launch.statechart";
+	SGraphSimulationSession getActiveSession();
 
 }

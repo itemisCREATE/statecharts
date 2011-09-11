@@ -8,8 +8,7 @@
           delegate="org.yakindu.sct.simulation.core.launch.StatechartLaunchConfigurationDelegate"
           id="org.yakindu.sct.simulation.core.launch.statechart"
           modes="run, debug"
-          name="YAKINDU Statechart">        
+          name="YAKINDU Statechart">
     </launchConfigurationType>
 </extension>
-
 </plugin>

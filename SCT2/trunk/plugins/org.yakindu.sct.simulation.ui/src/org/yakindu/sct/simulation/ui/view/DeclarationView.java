@@ -13,8 +13,13 @@ package org.yakindu.sct.simulation.ui.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.PlatformObject;
+import org.eclipse.debug.ui.DebugUITools;
+import org.eclipse.debug.ui.contexts.DebugContextEvent;
+import org.eclipse.debug.ui.contexts.IDebugContextListener;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -27,6 +32,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.ui.IViewSite;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
@@ -34,7 +41,6 @@ import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeEvent;
 import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeVariable;
 import org.yakindu.sct.simulation.core.ISimulationSessionListener;
 import org.yakindu.sct.simulation.core.SGraphSimulationSession;
-import org.yakindu.sct.simulation.core.SGraphSimulationSessionRegistry;
 import org.yakindu.sct.simulation.ui.view.editing.BooleanEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.IntegerEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.MultiEditingSupport;
@@ -45,8 +51,8 @@ import org.yakindu.sct.simulation.ui.view.editing.RealEditingSupport;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class DeclarationView extends ViewPart implements
-		ISimulationSessionListener {
+public class DeclarationView extends ViewPart implements IDebugContextListener,
+		ISimulationSessionListener, ActiveSessionProvider {
 
 	private TableViewer eventViewer;
 
@@ -54,9 +60,18 @@ public class DeclarationView extends ViewPart implements
 
 	private List<Control> controls;
 
+	private SGraphSimulationSession activeSession;
+
 	public DeclarationView() {
 		controls = new ArrayList<Control>();
-		SGraphSimulationSessionRegistry.INSTANCE.getListeners().add(this);
+	}
+
+	@Override
+	public void init(IViewSite site) throws PartInitException {
+		super.init(site);
+		DebugUITools.getDebugContextManager()
+				.getContextService(site.getWorkbenchWindow())
+				.addDebugContextListener(this);
 	}
 
 	@Override
@@ -106,8 +121,9 @@ public class DeclarationView extends ViewPart implements
 		createColumn(viewer, "type", 80, 1);
 		TableViewerColumn valueColumn = createColumn(viewer, "value", 80, 2);
 		valueColumn.setEditingSupport(new MultiEditingSupport(viewer,
-				new BooleanEditingSupport(viewer), new IntegerEditingSupport(
-						viewer), new RealEditingSupport(viewer)));
+				new BooleanEditingSupport(viewer, this),
+				new IntegerEditingSupport(viewer, this),
+				new RealEditingSupport(viewer, this)));
 	}
 
 	@Override
@@ -116,8 +132,6 @@ public class DeclarationView extends ViewPart implements
 	}
 
 	public void setEventViewerInput() {
-		SGraphSimulationSession activeSession = SGraphSimulationSessionRegistry.INSTANCE
-				.getActiveSession();
 		if (activeSession != null) {
 			List<ScopeEvent> events = activeSession.getExecutionScope()
 					.getEvents();
@@ -140,8 +154,6 @@ public class DeclarationView extends ViewPart implements
 	}
 
 	private void setVariableViewerInput() {
-			SGraphSimulationSession activeSession = SGraphSimulationSessionRegistry.INSTANCE
-					.getActiveSession();
 		if (activeSession != null) {
 			List<ScopeVariable> variables = activeSession.getExecutionScope()
 					.getVariables();
@@ -157,28 +169,6 @@ public class DeclarationView extends ViewPart implements
 		variableViewer.setInput(null);
 	}
 
-	public void simulationStateChanged(SimulationState oldState,
-			SimulationState newState) {
-		switch (newState) {
-		case STARTED:
-			Display.getDefault().asyncExec(new Runnable() {
-				public void run() {
-					setEventViewerInput();
-					setVariableViewerInput();
-				}
-			});
-			break;
-		case TERMINATED:
-			Display.getDefault().asyncExec(new Runnable() {
-				public void run() {
-					clearViewerInput();
-				}
-			});
-			;
-			break;
-		}
-	}
-
 	public void variableValueChanged(String variableName, Object value) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
@@ -189,7 +179,6 @@ public class DeclarationView extends ViewPart implements
 
 	@Override
 	public void dispose() {
-		SGraphSimulationSessionRegistry.INSTANCE.getListeners().remove(this);
 		super.dispose();
 	}
 
@@ -213,7 +202,7 @@ public class DeclarationView extends ViewPart implements
 		});
 	}
 
-	private static final class ButtonListener implements SelectionListener {
+	private final class ButtonListener implements SelectionListener {
 
 		private final String eventName;
 
@@ -222,8 +211,6 @@ public class DeclarationView extends ViewPart implements
 		}
 
 		public void widgetSelected(SelectionEvent e) {
-			SGraphSimulationSession activeSession = SGraphSimulationSessionRegistry.INSTANCE
-					.getActiveSession();
 			if (activeSession != null) {
 				activeSession.raiseEvent(new ScopeEvent(eventName));
 			}
@@ -231,6 +218,57 @@ public class DeclarationView extends ViewPart implements
 
 		public void widgetDefaultSelected(SelectionEvent e) {
 			// Nothing to do
+		}
+	}
+
+	public void debugContextChanged(DebugContextEvent event) {
+		StructuredSelection strSel = (StructuredSelection) event.getContext();
+		PlatformObject firstElement = (PlatformObject) strSel.getFirstElement();
+		if (firstElement == null) {
+			return;
+		}
+		SGraphSimulationSession selectedSession = (SGraphSimulationSession) firstElement
+				.getAdapter(SGraphSimulationSession.class);
+		if (selectedSession == null
+				|| selectedSession.getCurrentState() == SimulationState.TERMINATED) {
+			activeSession = selectedSession;
+			clearViewerInput();
+		}
+		if (!(selectedSession == activeSession) && selectedSession != null) {
+			if (activeSession != null) {
+				activeSession.getListeners().remove(this);
+			}
+			activeSession = selectedSession;
+			selectedSession.getListeners().add(this);
+			clearViewerInput();
+			setEventViewerInput();
+			setVariableViewerInput();
+		}
+	}
+
+	public SGraphSimulationSession getActiveSession() {
+		return activeSession;
+	}
+
+	public void simulationStateChanged(SimulationState oldState,
+			SimulationState newState) {
+		switch (newState) {
+		case STARTED:
+			Display.getDefault().asyncExec(new Runnable() {
+				public void run() {
+					setEventViewerInput();
+					setVariableViewerInput();
+				}
+			});
+			break;
+		case TERMINATED:
+			Display.getDefault().asyncExec(new Runnable() {
+				public void run() {
+					clearViewerInput();
+				}
+			});
+			;
+			break;
 		}
 	}
 }

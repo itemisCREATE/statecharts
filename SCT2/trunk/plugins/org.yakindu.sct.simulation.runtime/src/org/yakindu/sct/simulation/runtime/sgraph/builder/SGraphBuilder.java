@@ -193,13 +193,33 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 		RTAction exitAction = buildAction(
 				(RTStatechart) parent.getStatechart(), exitReaction);
 
-		if (state.getSubRegions().size() > 0) {
+		if (state.isSubmachine()) {
+			runtimeState = new RTCompoundState(parent.getId() + "."
+					+ state.getName(), state.getName(), parent, entryAction,
+					exitAction);
+
+			EList<Region> regions = state.getSubstatechart().getRegions();
+			EList<EObject> contents = new BasicEList<EObject>();
+			contents.addAll(regions);
+			build(runtimeState, contents);
+
+			// Build the scopes
+			EList<EObject> scopes = new BasicEList<EObject>();
+			scopes.addAll(state.getSubstatechart().getScopes());
+			build(parent.getStatechart(), scopes);
+			// Build the transitions
+			EList<EObject> transitions = new BasicEList<EObject>(
+					EcoreUtil2.getAllContentsOfType(state.getSubstatechart(),
+							Transition.class));
+			build(parent.getStatechart(), transitions);
+
+		} else if (state.isComposite()) {
 			runtimeState = new RTCompoundState(parent.getId() + "."
 					+ state.getName(), state.getName(), parent, entryAction,
 					exitAction);
 			build(runtimeState, state.eContents());
 
-		} else {
+		} else if (state.isSimple()) {
 			runtimeState = new RTSimpleState(parent.getId() + "."
 					+ state.getName(), state.getName(), parent, entryAction,
 					null, exitAction);
@@ -349,7 +369,7 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 				}
 				if (eventSpec instanceof TimeEventSpec) {
 					TimeUnit unit = ((TimeEventSpec) eventSpec).getUnit();
-					
+
 					final int value = ((TimeEventSpec) eventSpec).getValue();
 					timeTrigger = new RTTimeEvent("id") {
 						@Override

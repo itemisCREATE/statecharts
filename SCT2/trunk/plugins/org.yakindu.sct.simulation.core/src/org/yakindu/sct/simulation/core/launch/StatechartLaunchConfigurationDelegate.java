@@ -62,7 +62,7 @@ public class StatechartLaunchConfigurationDelegate implements
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {
 		String filename = configuration.getAttribute(
 				IStatechartLaunchParameters.FILE_NAME, "");
-		//check for errors
+		// check for errors
 		IFile file = ResourcesPlugin.getWorkspace().getRoot()
 				.getFile(new Path(filename));
 		IMarker[] sgraphMarkers = file.findMarkers(SGRAPH_ERROR_TYPE, true,
@@ -71,8 +71,12 @@ public class StatechartLaunchConfigurationDelegate implements
 				IResource.DEPTH_INFINITE);
 
 		if (sgraphMarkers.length > 0 || stextMarkers.length > 0) {
-			Status status = new Status(IStatus.ERROR, Activator.PLUGIN_ID, STATUS_CODE,
-					"Simulation could not be started because the selected resource contains errors.",null);
+			Status status = new Status(
+					IStatus.ERROR,
+					Activator.PLUGIN_ID,
+					STATUS_CODE,
+					"Simulation could not be started because the selected resource contains errors.",
+					null);
 			IStatusHandler statusHandler = DebugPlugin.getDefault()
 					.getStatusHandler(status);
 			statusHandler.handleStatus(status, this);
@@ -84,9 +88,13 @@ public class StatechartLaunchConfigurationDelegate implements
 		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(
 				resource.getContents(), SGraphPackage.Literals.STATECHART);
 
+		String platformResource = statechart.eResource().getURI()
+				.toPlatformString(true);
+
 		ISGraphExecutionBuilder builder = getBuilder(statechart);
 		ISGraphExecutionFacade executionFacade = builder.build(statechart);
-		IDebugTarget target = new SCTDebugTarget(launch, executionFacade);
+		IDebugTarget target = new SCTDebugTarget(launch, executionFacade,
+				platformResource);
 		launch.addDebugTarget(target);
 
 	}

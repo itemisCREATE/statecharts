@@ -2,7 +2,6 @@ package org.yakindu.sct.simulation.core.debugmodel;
 
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
@@ -12,13 +11,14 @@ import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 import org.yakindu.sct.simulation.core.ISGraphExecutionFacade;
+import org.yakindu.sct.simulation.core.SGraphSimulationSession;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SCTDebugTarget extends PlatformObject implements IDebugTarget {
+public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 
 	private IProcess process;
 
@@ -26,10 +26,14 @@ public class SCTDebugTarget extends PlatformObject implements IDebugTarget {
 
 	private SCTDebugThread thread;
 
-	public SCTDebugTarget(ILaunch launch, ISGraphExecutionFacade facade)
-			throws CoreException {
+	private final ISGraphExecutionFacade facade;
+
+	public SCTDebugTarget(ILaunch launch, ISGraphExecutionFacade facade,
+			String resourceString) throws CoreException {
+		super(resourceString);
 		this.launch = launch;
-		thread = new SCTDebugThread(this, facade);
+		this.facade = facade;
+		thread = new SCTDebugThread(this, facade, resourceString);
 		DebugPlugin.getDefault().getBreakpointManager()
 				.addBreakpointListener(this);
 	}
@@ -47,7 +51,7 @@ public class SCTDebugTarget extends PlatformObject implements IDebugTarget {
 	}
 
 	public String getName() throws DebugException {
-		return IDebugConstants.DEBUG_TARGET;
+		return facade.getId();
 	}
 
 	public boolean supportsBreakpoint(IBreakpoint breakpoint) {
@@ -111,6 +115,7 @@ public class SCTDebugTarget extends PlatformObject implements IDebugTarget {
 	public boolean supportsStorageRetrieval() {
 		return false;
 	}
+
 	public IMemoryBlock getMemoryBlock(long startAddress, long length)
 			throws DebugException {
 		return null;
@@ -121,10 +126,20 @@ public class SCTDebugTarget extends PlatformObject implements IDebugTarget {
 	}
 
 	public String getModelIdentifier() {
-		return IDebugConstants.DEBUG_TARGET;
+		return IDebugConstants.ID_DEBUG_MODEL;
 	}
 
 	public IDebugTarget getDebugTarget() {
 		return this;
 	}
+
+	@Override
+	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
+		if (adapter == SGraphSimulationSession.class)
+			return thread.getAdapter(SGraphSimulationSession.class);
+		if (adapter == ISGraphExecutionFacade.class)
+			return facade;
+		return super.getAdapter(adapter);
+	}
+
 }

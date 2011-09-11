@@ -33,10 +33,10 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 	protected Map<Object, Object> aliasToElementMap = new HashMap<Object, Object>();
 	protected Map<Object, Object> elementToAliasMap = new HashMap<Object, Object>();
 
-	protected List<RTSignalEvent> events = new ArrayList<RTSignalEvent>();
+	protected Set<RTSignalEvent> events = new HashSet<RTSignalEvent>();
 	protected Map<String, RTSignalEvent> eventMap = new HashMap<String, RTSignalEvent>();
 
-	protected List<RTVariable> variables = new ArrayList<RTVariable>();
+	protected Set<RTVariable> variables = new HashSet<RTVariable>();
 	protected Map<String, RTVariable> variableMap = new HashMap<String, RTVariable>();
 
 	protected Set<RTState> currentStateConfigurartion = new HashSet<RTState>();
@@ -96,8 +96,8 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 	/**
 	 * @return The list of all defined signal events of this statechart.
 	 */
-	public List<RTSignalEvent> getSignalEvents() {
-		return Collections.unmodifiableList(events);
+	public Set<RTSignalEvent> getSignalEvents() {
+		return Collections.unmodifiableSet(events);
 	}
 
 	public void addVariable(RTVariable var) {
@@ -114,8 +114,8 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 		return variableMap.get(varName);
 	}
 
-	public List<RTVariable> getVariables() {
-		return Collections.unmodifiableList(variables);
+	public Set<RTVariable> getVariables() {
+		return Collections.unmodifiableSet(variables);
 	}
 
 	protected void stateLeft(RTState state) {
@@ -137,6 +137,7 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 			listener.transitionFired((Transition) elementToAliasMap.get(trans));
 		}
 	}
+
 	public void setVariableValue(RTVariable variable, Object value) {
 		variable.setValue(value);
 		for (ISGraphExecutionListener listener : listeners) {
@@ -235,7 +236,16 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 		return new ExecutionScopeAdapter(this);
 	}
 
-	public List<RTSignalEvent> getEvents() {
-		return Collections.unmodifiableList(events);
+	public Set<RTSignalEvent> getEvents() {
+		return Collections.unmodifiableSet(events);
+	}
+
+	public Set<Vertex> getStateConfiguration() {
+		Set<Vertex> result = new HashSet<Vertex>();
+		Set<RTState> currentStateConfiguration = getCurrentStateConfiguration();
+		for (RTState rtState : currentStateConfiguration) {
+			result.add((Vertex) elementToAliasMap.get(rtState));
+		}
+		return result;
 	}
 }

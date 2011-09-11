@@ -11,7 +11,7 @@
 package org.yakindu.sct.simulation.runtime;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 import org.yakindu.sct.simulation.runtime.sgraph.RTSignalEvent;
 import org.yakindu.sct.simulation.runtime.stext.RTVariable;
@@ -32,6 +32,6 @@ public interface ExecutionScope {
 	
 	Collection<RTVariable> getVariables();
 
-	List<RTSignalEvent> getEvents();
+	Set<RTSignalEvent> getEvents();
 
 }
