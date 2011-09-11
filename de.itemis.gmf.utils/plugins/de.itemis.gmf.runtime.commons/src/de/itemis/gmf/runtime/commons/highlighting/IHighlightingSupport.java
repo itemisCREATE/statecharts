@@ -14,10 +14,13 @@ public interface IHighlightingSupport {
 	 */
 	void lockEditor();
 
+	boolean isLocked();
 	/**
 	 * Allow user to edit model again
 	 */
 	void releaseEditor();
+
+	void highlight(EObject semanticElement, HighlightingParameters parameters);
 
 	/**
 	 * Highlight a model element. Fading time may be zero to indicate that
@@ -25,7 +28,6 @@ public interface IHighlightingSupport {
 	 * 
 	 * @param modelElement
 	 * @param parameterObject
-	 *            TODO
 	 */
 	void fadeIn(EObject semanticElement, HighlightingParameters parameters);
 
@@ -45,7 +47,7 @@ public interface IHighlightingSupport {
 	 * @param modelElement
 	 * @param parameters
 	 */
-	void flash(EObject semanticElement, HighlightingParameters parameters);
+	void flash(EObject semanticElemesnt, HighlightingParameters parameters);
 
 	public static class HighlightingSupportNullImpl implements
 			IHighlightingSupport {
@@ -66,6 +68,16 @@ public interface IHighlightingSupport {
 
 		public void flash(EObject semanticElement,
 				HighlightingParameters parameters) {
+		}
+
+		public void highlight(EObject semanticElement,
+				HighlightingParameters parameters) {
+			
+		}
+
+		public boolean isLocked() {
+			// TODO Auto-generated method stub
+			return false;
 		}
 	}
 }

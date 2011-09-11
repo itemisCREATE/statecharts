@@ -1,40 +1,30 @@
 package de.itemis.gmf.runtime.commons.highlighting;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.gef.EditPart;
-import org.eclipse.gef.NodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.figures.BorderedNodeFigure;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
-import org.eclipse.jface.action.IAction;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.actions.ActionFactory;
 
-import de.itemis.gmf.runtime.commons.actions.ILockableAction;
+import de.itemis.gmf.runtime.commons.util.EditPartUtils;
 
 /**
  * 
  * @author Alexander Nyssen
+ * @author Andreas Mülder
  * 
  */
 public class HighlightingSupportAdapter implements IHighlightingSupport {
@@ -103,13 +93,6 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 	private final Map<Color, Color> greyscaleColors = new HashMap<Color, Color>();
 	private boolean locked = false;
 	private final IDiagramWorkbenchPart diagramWorkbenchPart;
-	
-	private static String[] GLOBAL_ACTION_IDS = { 
-		ActionFactory.UNDO.getId(),
-		ActionFactory.REDO.getId() 
-	};
-	
-	//private Map<String,Boolean> globalActionStates = new HashMap<String, Boolean>();
 
 	public HighlightingSupportAdapter(IDiagramWorkbenchPart diagramWorkbenchPart) {
 		this.diagramWorkbenchPart = diagramWorkbenchPart;
@@ -117,13 +100,10 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 
 	public synchronized void fadeIn(EObject semanticElement,
 			HighlightingParameters parameters) {
-		if (!locked) {
-			throw new IllegalStateException(
-					"May only highlight if editor is locked");
-		}
 
 		IGraphicalEditPart editPart = getEditPartForSemanticElement(semanticElement);
-		Assert.isNotNull(editPart, "Could not find a matching edit part");
+		if(editPart == null)
+			return;
 		// ensure the edit part is made visible.
 		diagramWorkbenchPart.getDiagramGraphicalViewer().reveal(editPart);
 		IFigure figure = getTargetFigure(editPart);
@@ -145,7 +125,8 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		}
 
 		IGraphicalEditPart editPart = getEditPartForSemanticElement(semanticElement);
-		Assert.isNotNull(editPart, "Could not find a matching edit part");
+		if(editPart == null)
+			return;
 		IFigure figure = getTargetFigure(editPart);
 		Assert.isNotNull(figure, "Could not obtain target figure");
 		Color foregroundColor = figureStates.get(figure).foregroundColor;
@@ -161,43 +142,6 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 						false));
 	}
 
-	@SuppressWarnings("unchecked")
-	private IGraphicalEditPart findEditPartForSemanticElement(
-			EditPart editPart, EObject semanticElement) {
-		if (editPart instanceof IGraphicalEditPart) {
-			EObject resolveSemanticElement = ((IGraphicalEditPart) editPart)
-					.resolveSemanticElement();
-
-			if (EcoreUtil.equals(resolveSemanticElement, semanticElement)) {
-				return (IGraphicalEditPart) editPart;
-			}
-		}
-
-		for (Object child : editPart.getChildren()) {
-			IGraphicalEditPart recursiveEditPart = findEditPartForSemanticElement(
-					(EditPart) child, semanticElement);
-			if (recursiveEditPart != null) {
-				return recursiveEditPart;
-			}
-		}
-
-		if (editPart instanceof NodeEditPart) {
-			List<Connection> connections = new ArrayList<Connection>();
-			connections
-					.addAll(((NodeEditPart) editPart).getSourceConnections());
-			connections
-					.addAll(((NodeEditPart) editPart).getTargetConnections());
-			for (Object connection : connections) {
-				EObject resolveSemanticElement = ((IGraphicalEditPart) connection)
-						.resolveSemanticElement();
-				if (EcoreUtil.equals(resolveSemanticElement, semanticElement)) {
-					return (IGraphicalEditPart) connection;
-				}
-			}
-		}
-		return null;
-	}
-
 	public synchronized void flash(final EObject semanticElement,
 			final HighlightingParameters parameters) {
 		if (!locked) {
@@ -205,8 +149,8 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 					"May only highlight if editor is locked");
 		}
 		final IGraphicalEditPart editPart = getEditPartForSemanticElement(semanticElement);
-		Assert.isNotNull(editPart, "Could not find a matching edit part");
-
+		if(editPart == null)
+			return;
 		// ensure the edit part is made visible.
 		diagramWorkbenchPart.getDiagramGraphicalViewer().reveal(editPart);
 
@@ -221,8 +165,9 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 
 	private IGraphicalEditPart getEditPartForSemanticElement(
 			EObject semanticElement) {
-		return findEditPartForSemanticElement(diagramWorkbenchPart
-				.getDiagramGraphicalViewer().getRootEditPart(), semanticElement);
+		return EditPartUtils.findEditPartForSemanticElement(
+				diagramWorkbenchPart.getDiagramGraphicalViewer()
+						.getRootEditPart(), semanticElement);
 	}
 
 	private Color getGreyscaled(Color color) {
@@ -261,9 +206,7 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		if (locked) {
 			throw new IllegalStateException("Editor already locked!");
 		}
-		
-		disableGlobalActions();
-		
+
 		setSanityCheckEnablementState(false);
 		diagramWorkbenchPart.getDiagramEditPart().disableEditMode();
 
@@ -275,20 +218,6 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 				figureStates.put(figure, new ColorMemento(figure));
 			}
 		}
-//TODO
-//		// greyscale figures after all colors have been stored
-//		for (IFigure figure : figureStates.keySet()) {
-//			// calculate fore and background colors as greyscaled
-//			if (figure.getLocalForegroundColor() != null) {
-//				figure.setForegroundColor(getGreyscaled(figure
-//						.getForegroundColor()));
-//			}
-//			if (figure.getLocalBackgroundColor() != null) {
-//				figure.setBackgroundColor(getGreyscaled(figure
-//						.getBackgroundColor()));
-//			}
-//		}
-
 		locked = true;
 	}
 
@@ -308,61 +237,31 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		if (!locked) {
 			throw new IllegalStateException("Editor not locked!");
 		}
-		
-		restoreGlobalActions();
-		
+
 		// restore all elements still being highlighted
 		for (ColorMemento figureState : figureStates.values()) {
 			figureState.restore();
 		}
 		figureStates.clear();
-
-		// for (Color color : greyscaleColors.values()) {
-		// color.dispose();
-		// }
-		// greyscaleColors.clear();
-
 		diagramWorkbenchPart.getDiagramEditPart().enableEditMode();
 		setSanityCheckEnablementState(true);
 
 		locked = false;
 	}
-	
-	private void disableGlobalActions() {
-		for (String actionID:Arrays.asList(GLOBAL_ACTION_IDS)) {
-			disableGlobalAction(actionID);
+
+	public void highlight(EObject semanticElement,
+			HighlightingParameters parameters) {
+		IGraphicalEditPart editPartForSemanticElement = getEditPartForSemanticElement(semanticElement);
+		if (editPartForSemanticElement != null) {
+			IFigure figure = getTargetFigure(editPartForSemanticElement);
+			figure.setForegroundColor(parameters.foregroundFadingColor);
+			figure.setBackgroundColor(parameters.backgroundFadingColor);
+			figure.invalidate();
 		}
+
 	}
-	
-	private void restoreGlobalActions(){
-		for (String actionID:Arrays.asList(GLOBAL_ACTION_IDS)) {
-			restoreGlobalAction(actionID);
-		}
-	}
-	
-	private void disableGlobalAction(String actionID) {
-		IAction action = getGlobalAction(actionID);
-		if (action != null && action instanceof ILockableAction) {
-			((ILockableAction)action).setLocked(true);
-		}
-	}
-	
-	private void restoreGlobalAction(String actionID) {
-		IAction action = getGlobalAction(actionID);
-		if (action != null && action instanceof ILockableAction) {
-			((ILockableAction) action).setLocked(false);
-		}
-	}
-	
-	private IAction getGlobalAction(String actionID) {
-//		return GlobalActionManager.getInstance().getGlobalAction(diagramWorkbenchPart, actionID);
-		
-		Object adapter = diagramWorkbenchPart.getAdapter(IEditorPart.class);
-		if (adapter != null) {
-			IEditorPart editorPart = (IEditorPart) adapter;
-			IActionBars actionBars = editorPart.getEditorSite().getActionBars();
-			return actionBars.getGlobalActionHandler(actionID);
-		}
-		return null;
+
+	public boolean isLocked() {
+		return locked;
 	}
 }
