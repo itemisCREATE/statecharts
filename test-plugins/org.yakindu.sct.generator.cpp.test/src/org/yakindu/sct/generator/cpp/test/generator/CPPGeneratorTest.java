@@ -30,6 +30,7 @@ import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
+import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -76,6 +77,7 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 		GeneratorBaseUtil.generate(executionFlow, templatePath, project,
 				"src-gen");
 		
+		assertNotNull(((RegularEventSpec) ((ReactionTrigger) statechart.getRegions().get(0).getVertices().get(0).getOutgoingTransitions().get(0).getTrigger()).getTriggers().get(0)).getEvent());
 		assertNotNull(((ElementReferenceExpression) ((If) executionFlow.getStates().get(0).getCycle().getSteps().get(0)).getCondition()).getValue());
 	}
 
@@ -103,6 +105,7 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 
 		GeneratorBaseUtil.generate(flow, templatePath, project,
 				"src-gen");
+		
 		
 		assertNotNull(((ElementReferenceExpression) ((If) flow.getStates().get(0).getCycle().getSteps().get(0)).getCondition()).getValue());
 
