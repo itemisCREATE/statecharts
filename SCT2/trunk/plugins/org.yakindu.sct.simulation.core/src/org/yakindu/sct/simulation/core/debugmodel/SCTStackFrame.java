@@ -44,118 +44,114 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 		this.state = state;
 	}
 
-	@Override
 	public String getModelIdentifier() {
 		return IDebugConstants.ID_DEBUG_MODEL;
 	}
 
-	@Override
 	public boolean canStepInto() {
 		return thread.canStepInto();
 	}
 
-	@Override
 	public boolean canStepOver() {
 		return thread.canStepOver();
 	}
 
-	@Override
 	public boolean canStepReturn() {
 		return thread.canStepReturn();
 	}
 
-	@Override
+	
 	public boolean isStepping() {
 		return thread.isStepping();
 	}
 
-	@Override
+	
 	public void stepInto() throws DebugException {
 		thread.stepInto();
 	}
 
-	@Override
+	
 	public void stepOver() throws DebugException {
 		thread.stepOver();
 	}
 
-	@Override
+	
 	public void stepReturn() throws DebugException {
 		thread.stepReturn();
 	}
 
-	@Override
+	
 	public boolean canResume() {
 		return thread.canResume();
 	}
 
-	@Override
+	
 	public boolean canSuspend() {
 		return thread.canSuspend();
 	}
 
-	@Override
+	
 	public boolean isSuspended() {
 		return thread.isSuspended();
 	}
 
-	@Override
+	
 	public void resume() throws DebugException {
 		thread.resume();
 
 	}
 
-	@Override
+	
 	public void suspend() throws DebugException {
 		thread.suspend();
 	}
 
-	@Override
+	
 	public boolean canTerminate() {
 		return thread.canTerminate();
 	}
 
-	@Override
+	
 	public boolean isTerminated() {
 		return thread.isTerminated();
 	}
 
-	@Override
+	
 	public void terminate() throws DebugException {
 		thread.terminate();
 	}
 
-	@Override
+	
 	public SCTDebugThread getThread() {
 		return thread;
 	}
 
-	@Override
+	
 	public IVariable[] getVariables() throws DebugException {
 		return new IVariable[] {};
 	}
 
-	@Override
+	
 	public boolean hasVariables() throws DebugException {
 		return false;
 	}
 
-	@Override
+	
 	public int getLineNumber() throws DebugException {
 		return -1;
 	}
 
-	@Override
+	
 	public int getCharStart() throws DebugException {
 		return -1;
 	}
 
-	@Override
+	
 	public int getCharEnd() throws DebugException {
 		return -1;
 	}
 
-	@Override
+	
 	public String getName() throws DebugException {
 		List<String> qfnFragments = new ArrayList<String>();
 		qfnFragments.add(state.getName());
@@ -189,12 +185,12 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 
 	}
 
-	@Override
+	
 	public IRegisterGroup[] getRegisterGroups() throws DebugException {
 		return new IRegisterGroup[] {};
 	}
 
-	@Override
+	
 	public boolean hasRegisterGroups() throws DebugException {
 		return false;
 	}
@@ -203,7 +199,7 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 		return (SCTDebugTarget) thread.getDebugTarget();
 	}
 
-	@Override
+	
 	public ILaunch getLaunch() {
 		return thread.getLaunch();
 	}
@@ -212,12 +208,12 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 		return state;
 	}
 
-	@Override
+	
 	public String getResourceString() {
 		return state.eResource().getURI().toPlatformString(true);
 	}
 
-	@Override
+	
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (adapter == SGraphSimulationSession.class)
 			return thread.getAdapter(SGraphSimulationSession.class);

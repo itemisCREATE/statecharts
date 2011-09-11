@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.simulation.core.debugmodel;
 
 import java.util.ArrayList;
@@ -65,33 +75,33 @@ public class SCTDebugThread extends SCTDebugElement implements IThread,
 		return true;
 	}
 
-	@Override
+	
 	public String getModelIdentifier() {
 		return IDebugConstants.ID_DEBUG_MODEL;
 	}
 
-	@Override
+	
 	public void stateEntered(Vertex vertex) {
 		activeStates.add(vertex);
 	}
 
-	@Override
+	
 	public void stateLeft(Vertex vertex) {
 		activeStates.remove(vertex);
 
 	}
 
-	@Override
+	
 	public void transitionFired(Transition transition) {
 		// Nothing to do
 	}
 
-	@Override
+	
 	public void variableValueChanged(String variableName, Object value) {
 		// Nothing to do
 	}
 
-	@Override
+	
 	public void eventRaised(String eventName) {
 		// Nothing to do
 	}
@@ -187,7 +197,7 @@ public class SCTDebugThread extends SCTDebugElement implements IThread,
 		return target;
 	}
 
-	@Override
+	
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (adapter == SGraphSimulationSession.class)
 			return session;
