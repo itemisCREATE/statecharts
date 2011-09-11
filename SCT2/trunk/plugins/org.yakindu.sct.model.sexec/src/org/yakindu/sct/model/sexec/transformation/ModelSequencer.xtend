@@ -23,12 +23,30 @@ import org.yakindu.sct.model.stext.stext.EventSpec
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.sgraph.Declaration
 import org.yakindu.sct.model.sexec.Step
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.sct.model.sgraph.SGraphFactory
+import org.yakindu.sct.model.sgraph.Scope
 
 class ModelSequencer {
 	
 	@Inject extension IQualifiedNameProvider qfnProvider
 
-	def ExecutionFlow create r : SexecFactory::eINSTANCE.createExecutionFlow transform(Statechart statechart){
+
+	def ExecutionFlow transform(Statechart sc) {
+		val ef = createExecutionFlow(sc)
+		ef.defineScopes(sc)
+	}
+	
+	
+	def ExecutionFlow defineScopes(ExecutionFlow flow, Statechart sc) {
+		flow.scopes.addAll(sc.scopes.map(scope | scope.copy))
+		flow
+	}
+	
+	def Scope create r : EcoreUtil::copy(scope) copy(Scope scope) {
+	}
+	
+	def ExecutionFlow create r : sexecFactory.createExecutionFlow createExecutionFlow(Statechart statechart){
 		var content = EcoreUtil2::eAllContentsAsList(statechart)
 		val leafStates = content.filter(e | e instanceof State && (e as State).simple)
 		r.states.addAll(leafStates.map( s | (s as State).transform));
@@ -68,8 +86,8 @@ class ModelSequencer {
 	def dispatch Statement buildCondition (ReactionTrigger t) {
 		if (! t.triggers.empty) t.triggers.reverseView.fold(null as Expression,
 			[s,e | 
-				if (s==null) _raised(e)  
-				else _raised(e) || s
+				if (s==null) raised(e)  
+				else raised(e).or(s)
 			]
 		)
 	}
@@ -77,7 +95,7 @@ class ModelSequencer {
 
 
 
-	def Expression _operator_or(Expression left, Expression right) {
+	def Expression or(Expression left, Expression right) {
 		val or = stextFactory.createLogicalOrExpression
 		or.leftOperand = left
 		or.rightOperand = right

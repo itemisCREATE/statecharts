@@ -27,7 +27,7 @@ Cycle: «EXPAND code FOR this.cycle»
 «ENDDEFINE»
 
 «DEFINE code FOR If»
-		if (gg«EXPAND code FOR condition») then «EXPAND code FOR this.thenStep»
+		if («EXPAND code FOR condition») then «EXPAND code FOR this.thenStep»
 		«IF this.elseStep != null -»else «EXPAND code FOR this.elseStep»«ENDIF-»
 «ENDDEFINE»
 
@@ -45,5 +45,5 @@ Cycle: «EXPAND code FOR this.cycle»
 
 
 «DEFINE code FOR ElementReferenceExpression -»
-zzz«this.value.name -»
+«this.value.toString()»-«this.value.name -»
 «ENDDEFINE»

@@ -29,6 +29,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.SexecPackage;
+import org.yakindu.sct.model.sgraph.provider.ScopedElementItemProvider;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.sct.model.sexec.ExecutionFlow} object.
@@ -37,7 +38,7 @@ import org.yakindu.sct.model.sexec.SexecPackage;
  * @generated
  */
 public class ExecutionFlowItemProvider
-	extends ItemProviderAdapter
+	extends ScopedElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,

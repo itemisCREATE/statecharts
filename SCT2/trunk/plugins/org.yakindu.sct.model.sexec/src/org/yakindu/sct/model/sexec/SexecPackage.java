@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -70,13 +71,22 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_FLOW = 0;
 
 	/**
+	 * The feature id for the '<em><b>Scopes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_FLOW__SCOPES = SGraphPackage.SCOPED_ELEMENT__SCOPES;
+
+	/**
 	 * The feature id for the '<em><b>States</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__STATES = 0;
+	int EXECUTION_FLOW__STATES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Sequences</b></em>' containment reference list.
@@ -85,7 +95,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__SEQUENCES = 1;
+	int EXECUTION_FLOW__SEQUENCES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Execution Flow</em>' class.
@@ -94,7 +104,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW_FEATURE_COUNT = 2;
+	int EXECUTION_FLOW_FEATURE_COUNT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.NamedElementImpl <em>Named Element</em>}' class.
