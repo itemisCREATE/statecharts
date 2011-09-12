@@ -368,13 +368,19 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 					}
 				}
 				if (eventSpec instanceof TimeEventSpec) {
-					TimeUnit unit = ((TimeEventSpec) eventSpec).getUnit();
+					final TimeUnit unit = ((TimeEventSpec) eventSpec).getUnit();
 
 					final int value = ((TimeEventSpec) eventSpec).getValue();
 					timeTrigger = new RTTimeEvent("id") {
 						@Override
 						public long getDuration() {
-							// TODO unit
+							if (unit == TimeUnit.SECOND) {
+								return value * 1000;
+							} else if (unit == TimeUnit.MILLISECOND) {
+								return value;
+							} else if (unit == TimeUnit.NANOSECOND) {
+								return value / 1000;
+							}
 							return value;
 						}
 					};
