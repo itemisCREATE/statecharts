@@ -10,23 +10,29 @@
  */
 package org.yakindu.sct.simulation.core.debugmodel;
 
-import org.eclipse.core.runtime.PlatformObject;
+import org.eclipse.debug.core.model.DebugElement;
+import org.eclipse.debug.core.model.IDebugTarget;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
- *
+ * 
  */
-public class SCTDebugElement extends PlatformObject {
+public class SCTDebugElement extends DebugElement {
 
-	private String resourceString;
-
-	public SCTDebugElement(String resourceString) {
+	public SCTDebugElement(IDebugTarget target, String resourceString) {
+		super(target);
 		this.resourceString = resourceString;
 	}
+
+	private String resourceString;
 
 	public String getResourceString() {
 		return resourceString;
 	}
 
+	public String getModelIdentifier() {
+		return IDebugConstants.ID_DEBUG_MODEL;
+	}
 
 }
