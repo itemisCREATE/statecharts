@@ -48,6 +48,7 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.factories.FactoryUtils;
+import org.yakindu.sct.ui.perspectives.PerspectiveUtil;
 
 /**
  * 
@@ -66,7 +67,10 @@ public class CreationWizard extends Wizard implements INewWizard {
 
 	private boolean openOnCreate = true;
 
+	private IWorkbench workbench;
+
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
+		this.workbench = workbench;
 		this.selection = selection;
 		setWindowTitle("New YAKINDU Statechart");
 		setNeedsProgressMonitor(true);
@@ -87,7 +91,6 @@ public class CreationWizard extends Wizard implements INewWizard {
 	@Override
 	public boolean performFinish() {
 		IRunnableWithProgress op = new WorkspaceModifyOperation(null) {
-
 			@Override
 			protected void execute(IProgressMonitor monitor)
 					throws CoreException, InterruptedException {
@@ -96,6 +99,8 @@ public class CreationWizard extends Wizard implements INewWizard {
 				if (isOpenOnCreate() && diagram != null) {
 					try {
 						openDiagram(diagram);
+						PerspectiveUtil.switchToModelingPerspective(workbench
+								.getActiveWorkbenchWindow());
 					} catch (PartInitException e) {
 						e.printStackTrace();
 					}
