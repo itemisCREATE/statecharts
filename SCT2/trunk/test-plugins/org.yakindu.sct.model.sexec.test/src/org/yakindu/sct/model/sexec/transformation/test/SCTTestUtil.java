@@ -89,6 +89,13 @@ public class SCTTestUtil {
 		return region;
 	}
 	
+	public static Region _createRegion(String name, State state) {
+		Region region = SGraphFactory.eINSTANCE.createRegion();
+		region.setName(name);
+		if (state != null ) state.getSubRegions().add(region);
+		return region;
+	}
+	
 	public static State _createState(String name, Region r) {
 		State state = SGraphFactory.eINSTANCE.createState();
 		state.setName(name);

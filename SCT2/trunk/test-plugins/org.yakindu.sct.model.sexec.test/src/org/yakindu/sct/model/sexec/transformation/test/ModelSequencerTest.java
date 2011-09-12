@@ -60,6 +60,7 @@ public class ModelSequencerTest {
 		assertEquals(sc.getName(), sequencer.transform(sc).getName());
 	}
 	
+	
 	/**
 	 * The event refs used in the trigger condition must refer to the event declarations in the flow model 
 	 * and not the sc source model.
@@ -279,5 +280,98 @@ public class ModelSequencerTest {
 
 	
 
+	/**
+	 * The state vector descriptor of the ExecutionFlow must have an offset of 0 and a size that is 
+	 * the maximum orthogonality of the statechart.
+	 */
+	@Test public void testSCStateVectorFlatNonOrthopgonal() {
+		SimpleFlatTSC tsc = new SimpleFlatTSC();
+		
+		ExecutionFlow flow = sequencer.transform(tsc.sc);
+		
+		assertNotNull(flow.getStateVector());
+		assertEquals(1, flow.getStateVector().getSize());
+		assertEquals(0, flow.getStateVector().getOffset());
+	}
+
+	/**
+	 * The state vector descriptor of the ExecutionFlow must have an offset of 0 and a size that is 
+	 * the maximum orthogonality of the statechart.
+	 */
+	@Test public void testSCStateVectorFlatOrthopgonal() {
+		OrthogonalFlatTSC tsc = new OrthogonalFlatTSC();
+		
+		ExecutionFlow flow = sequencer.transform(tsc.sc);
+		
+		assertNotNull(flow.getStateVector());
+		assertEquals(2, flow.getStateVector().getSize());
+		assertEquals(0, flow.getStateVector().getOffset());
+	}
+
+	
+	/**
+	 * The state vector descriptor of the ExecutionFlow must have an offset of 0 and a size that is 
+	 * the maximum orthogonality of the statechart.
+	 */
+	@Test public void testSCStateVectorDeepNonOrthopgonal() {
+		Statechart sc = _createStatechart("test");
+		Region r = _createRegion("sc_r", sc);
+		State s1 = _createState("s1", r);
+		State s2 = _createState("s2", r);
+		Region s2_r = _createRegion("s2_r", s2);
+		State s2_1 = _createState("s2_1", s2_r);
+		State s2_2 = _createState("s2_2", s2_r);
+		Region s2_1_r = _createRegion("s2_1_r", s2_1);
+		State s2_1_1 = _createState("s2_1_1", s2_1_r);
+		State s2_1_2 = _createState("s2_1_2", s2_1_r);
+
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		assertNotNull(flow.getStateVector());
+		assertEquals(1, flow.getStateVector().getSize());
+		assertEquals(0, flow.getStateVector().getOffset());
+	}
+
+	
+	/**
+	 * The state vector descriptor of the ExecutionFlow must have an offset of 0 and a size that is 
+	 * the maximum orthogonality of the statechart.
+	 */
+	@Test public void testSCStateVectorDeepOrthopgonal() {
+		Statechart sc = _createStatechart("test");
+		
+		{  // first top region 
+			Region r = _createRegion("sc_r1", sc);
+			State s1 = _createState("s1", r);
+			State s2 = _createState("s2", r);
+			{ // first sub region 
+				Region s2_r = _createRegion("s2_r", s2);
+				State s2_1 = _createState("s2_1", s2_r);
+				State s2_2 = _createState("s2_2", s2_r);
+				{ // first sub sub region
+					Region s2_1_r = _createRegion("s2_1_r", s2_1);
+					State s2_1_1 = _createState("s2_1_1", s2_1_r);
+					State s2_1_2 = _createState("s2_1_2", s2_1_r);
+				}
+				{ // second sub sub region
+					Region s2_2_r = _createRegion("s2_1_r2", s2_1);
+					State s2_1_3 = _createState("s2_1_3", s2_2_r);
+					State s2_1_4 = _createState("s2_2_4", s2_2_r);
+				}
+			}
+		}
+		{  // second top region 
+			Region r = _createRegion("sc_r2", sc);
+			State s1 = _createState("r2_s1", r);
+			State s2 = _createState("r2_s2", r);
+		}
+
+
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		assertNotNull(flow.getStateVector());
+		assertEquals(3, flow.getStateVector().getSize());
+		assertEquals(0, flow.getStateVector().getOffset());
+	}
 	
 }

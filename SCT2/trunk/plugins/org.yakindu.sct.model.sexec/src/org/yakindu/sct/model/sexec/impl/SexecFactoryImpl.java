@@ -70,6 +70,7 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 			case SexecPackage.ENTER_STATE: return createEnterState();
 			case SexecPackage.EXIT_STATE: return createExitState();
 			case SexecPackage.SEQUENCE_EXECUTION: return createSequenceExecution();
+			case SexecPackage.STATE_VECTOR: return createStateVector();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -173,6 +174,16 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public SequenceExecution createSequenceExecution() {
 		SequenceExecutionImpl sequenceExecution = new SequenceExecutionImpl();
 		return sequenceExecution;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StateVector createStateVector() {
+		StateVectorImpl stateVector = new StateVectorImpl();
+		return stateVector;
 	}
 
 	/**

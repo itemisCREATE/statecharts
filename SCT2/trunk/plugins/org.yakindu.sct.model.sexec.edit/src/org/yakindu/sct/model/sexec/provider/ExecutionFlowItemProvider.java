@@ -110,6 +110,7 @@ public class ExecutionFlowItemProvider
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__STATES);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__SEQUENCES);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__ENTER_SEQUENCE);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__STATE_VECTOR);
 		}
 		return childrenFeatures;
 	}
@@ -170,6 +171,7 @@ public class ExecutionFlowItemProvider
 			case SexecPackage.EXECUTION_FLOW__STATES:
 			case SexecPackage.EXECUTION_FLOW__SEQUENCES:
 			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
+			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -211,6 +213,11 @@ public class ExecutionFlowItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__ENTER_SEQUENCE,
 				 SexecFactory.eINSTANCE.createCycle()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__STATE_VECTOR,
+				 SexecFactory.eINSTANCE.createStateVector()));
 	}
 
 	/**
