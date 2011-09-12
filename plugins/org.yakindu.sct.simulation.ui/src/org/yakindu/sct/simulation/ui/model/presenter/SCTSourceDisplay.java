@@ -68,14 +68,14 @@ public class SCTSourceDisplay extends SimulationSessionListenerAdapter
 		StatechartDiagramEditor editor = openEditorAndSelectElements(
 				debugElement, page);
 
-		//Release the old editor
+		// Release the old editor
 		if (support.isLocked())
 			support.releaseEditor();
-		
+
 		support = (IHighlightingSupport) editor
 				.getAdapter(IHighlightingSupport.class);
-		
-		//Release the new editor
+
+		// Release the new editor
 		if (support.isLocked())
 			support.releaseEditor();
 
@@ -119,6 +119,15 @@ public class SCTSourceDisplay extends SimulationSessionListenerAdapter
 				getSupport().flash(transition, parameters);
 			}
 		});
+	}
+
+	@Override
+	public void simulationStateChanged(SimulationState oldState,
+			SimulationState newState) {
+		if (newState == SimulationState.TERMINATED) {
+			if (support.isLocked())
+				support.releaseEditor();
+		}
 	}
 
 	/**
