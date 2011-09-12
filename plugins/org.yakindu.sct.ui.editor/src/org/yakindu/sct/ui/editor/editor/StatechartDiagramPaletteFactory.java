@@ -13,14 +13,16 @@ package org.yakindu.sct.ui.editor.editor;
 import org.eclipse.gef.Tool;
 import org.eclipse.gmf.runtime.diagram.ui.services.palette.PaletteFactory;
 import org.eclipse.gmf.runtime.diagram.ui.tools.ConnectionCreationTool;
-import org.eclipse.gmf.runtime.diagram.ui.tools.CreationTool;
 import org.eclipse.gmf.runtime.emf.type.core.ElementTypeRegistry;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
+
+import de.itemis.gmf.runtime.commons.palette.CreationTool;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
- *
+ * @author muehlbrandt
+ * 
  */
 public class StatechartDiagramPaletteFactory extends PaletteFactory.Adapter {
 
@@ -29,11 +31,17 @@ public class StatechartDiagramPaletteFactory extends PaletteFactory.Adapter {
 		IElementType elementType = ElementTypeRegistry.getInstance().getType(
 				toolId);
 		if (elementType == null)
-			throw new IllegalStateException("No Element Id for toolId " + toolId
-					+ " found!");
+			throw new IllegalStateException("No Element Id for toolId "
+					+ toolId + " found!");
 		if (toolId.equals(StatechartElementTypes.TRANSITION.getId())) {
 			return new ConnectionCreationTool(elementType);
+		}
+		if (toolId.equals(StatechartElementTypes.ENTRY.getId())
+				|| toolId.equals(StatechartElementTypes.DEEPHISTORY.getId())
+				|| toolId.equals(StatechartElementTypes.SHALLOWHISTORY.getId())
+				|| toolId.equals(StatechartElementTypes.EXIT.getId())) {
+			return new CreationTool(elementType, false);
 		} else
-			return new CreationTool(elementType);
+			return new CreationTool(elementType, true);
 	}
 }
