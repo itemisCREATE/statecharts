@@ -207,6 +207,12 @@
                   value="Synchronization">
             </param>
          </metamodelType>
+          <adviceBinding
+                class="org.yakindu.sct.ui.editor.edithelper.StatechartEditHelperAdvice"
+                id="org.yakindu.sct.ui.editor.StatechartAdviceBinding"
+                inheritance="none"
+                typeId="org.yakindu.sct.ui.editor.Statechart">
+          </adviceBinding>
          </metamodel>
    </extension>
    

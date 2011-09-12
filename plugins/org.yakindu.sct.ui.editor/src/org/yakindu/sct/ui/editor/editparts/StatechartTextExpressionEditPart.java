@@ -2,6 +2,7 @@ package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
@@ -29,6 +30,7 @@ public class StatechartTextExpressionEditPart extends
 				EditPolicy.SELECTION_FEEDBACK_ROLE,
 				new ContextSensitiveHelpPolicy(
 						IYakinduSctHelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION));
+		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
 	}
 
 }
