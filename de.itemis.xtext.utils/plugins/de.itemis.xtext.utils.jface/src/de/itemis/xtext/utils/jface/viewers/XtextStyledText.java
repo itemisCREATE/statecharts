@@ -18,7 +18,6 @@ import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.PlatformUI;
@@ -53,7 +52,7 @@ import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
-import de.itemis.xtext.utils.jface.viewers.util.ActiveProjectResolver;
+import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 
 /**
  * This class integrates xText Features into a {@link StyledText} and can be
@@ -310,9 +309,7 @@ public class XtextStyledText {
 
 	protected IProject getActiveProject() {
 		if (activeProject == null) {
-			ActiveProjectResolver activeProjectResolver = new ActiveProjectResolver();
-			Display.getDefault().syncExec(activeProjectResolver);
-			activeProject = activeProjectResolver.getResult();
+			activeProject = ActiveEditorTracker.getLastActiveEditorProject();
 		}
 		return activeProject;
 	}
