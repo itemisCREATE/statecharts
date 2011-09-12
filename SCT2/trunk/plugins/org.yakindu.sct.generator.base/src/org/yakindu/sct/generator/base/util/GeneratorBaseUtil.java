@@ -15,7 +15,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryRegistryImpl;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
@@ -46,7 +48,9 @@ public class GeneratorBaseUtil {
 	 */
 	public static Statechart loadStatechart(URI uri) throws IOException {
 		Factory factory = ResourceFactoryRegistryImpl.INSTANCE.getFactory(uri);
+		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = factory.createResource(uri);
+		resourceSet.getResources().add(resource);
 		resource.load(Collections.emptyMap());
 		Statechart statechart = (Statechart) resource.getContents().get(0);
 		Assert.isNotNull(statechart);
