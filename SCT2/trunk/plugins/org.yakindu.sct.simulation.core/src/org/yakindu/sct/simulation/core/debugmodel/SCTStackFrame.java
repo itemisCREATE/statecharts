@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IRegisterGroup;
@@ -39,7 +40,7 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 
 	public SCTStackFrame(SCTDebugThread thread, Vertex state,
 			String resourceString) {
-		super(resourceString);
+		super(thread.getDebugTarget(), resourceString);
 		this.thread = thread;
 		this.state = state;
 	}
@@ -60,98 +61,82 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 		return thread.canStepReturn();
 	}
 
-	
 	public boolean isStepping() {
 		return thread.isStepping();
 	}
 
-	
 	public void stepInto() throws DebugException {
 		thread.stepInto();
 	}
 
-	
 	public void stepOver() throws DebugException {
 		thread.stepOver();
 	}
 
-	
 	public void stepReturn() throws DebugException {
 		thread.stepReturn();
 	}
 
-	
 	public boolean canResume() {
 		return thread.canResume();
 	}
 
-	
 	public boolean canSuspend() {
 		return thread.canSuspend();
 	}
 
-	
 	public boolean isSuspended() {
 		return thread.isSuspended();
 	}
 
-	
 	public void resume() throws DebugException {
 		thread.resume();
+		fireEvent(new DebugEvent(this, DebugEvent.RESUME));
 
 	}
 
-	
 	public void suspend() throws DebugException {
 		thread.suspend();
+		fireEvent(new DebugEvent(this, DebugEvent.SUSPEND));
 	}
 
-	
 	public boolean canTerminate() {
 		return thread.canTerminate();
 	}
 
-	
 	public boolean isTerminated() {
 		return thread.isTerminated();
 	}
 
-	
 	public void terminate() throws DebugException {
 		thread.terminate();
+		fireEvent(new DebugEvent(this, DebugEvent.TERMINATE));
 	}
 
-	
 	public SCTDebugThread getThread() {
 		return thread;
 	}
 
-	
 	public IVariable[] getVariables() throws DebugException {
 		return new IVariable[] {};
 	}
 
-	
 	public boolean hasVariables() throws DebugException {
 		return false;
 	}
 
-	
 	public int getLineNumber() throws DebugException {
 		return -1;
 	}
 
-	
 	public int getCharStart() throws DebugException {
 		return -1;
 	}
 
-	
 	public int getCharEnd() throws DebugException {
 		return -1;
 	}
 
-	
 	public String getName() throws DebugException {
 		List<String> qfnFragments = new ArrayList<String>();
 		qfnFragments.add(state.getName());
@@ -185,12 +170,10 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 
 	}
 
-	
 	public IRegisterGroup[] getRegisterGroups() throws DebugException {
 		return new IRegisterGroup[] {};
 	}
 
-	
 	public boolean hasRegisterGroups() throws DebugException {
 		return false;
 	}
@@ -199,7 +182,6 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 		return (SCTDebugTarget) thread.getDebugTarget();
 	}
 
-	
 	public ILaunch getLaunch() {
 		return thread.getLaunch();
 	}
@@ -208,12 +190,10 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 		return state;
 	}
 
-	
 	public String getResourceString() {
 		return state.eResource().getURI().toPlatformString(true);
 	}
 
-	
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (adapter == SGraphSimulationSession.class)
 			return thread.getAdapter(SGraphSimulationSession.class);

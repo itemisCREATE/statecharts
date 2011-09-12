@@ -16,10 +16,7 @@ import java.util.List;
 
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
-import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IBreakpoint;
-import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.yakindu.sct.model.sgraph.Transition;
@@ -41,14 +38,12 @@ public class SCTDebugThread extends SCTDebugElement implements IThread,
 	private boolean suspended = false;
 	private Thread thread;
 	private SGraphSimulationSession session;
-	private final SCTDebugTarget target;
 	private final ISGraphExecutionFacade facade;
 	private List<Vertex> activeStates = new ArrayList<Vertex>();
 
 	public SCTDebugThread(SCTDebugTarget target, ISGraphExecutionFacade facade,
 			String resourceString) {
-		super(resourceString);
-		this.target = target;
+		super(target, resourceString);
 		this.facade = facade;
 		session = new SGraphSimulationSession(facade);
 		facade.addExecutionListener(this);
@@ -63,7 +58,6 @@ public class SCTDebugThread extends SCTDebugElement implements IThread,
 
 	public IStackFrame[] getStackFrames() throws DebugException {
 		List<IStackFrame> stackFrames = new ArrayList<IStackFrame>();
-
 		for (int i = activeStates.size() - 1; i >= 0; i--) {
 			stackFrames.add(new SCTStackFrame(this, activeStates.get(i),
 					getResourceString()));
@@ -75,33 +69,25 @@ public class SCTDebugThread extends SCTDebugElement implements IThread,
 		return true;
 	}
 
-	
-	public String getModelIdentifier() {
-		return IDebugConstants.ID_DEBUG_MODEL;
-	}
-
-	
 	public void stateEntered(Vertex vertex) {
 		activeStates.add(vertex);
+		fireChangeEvent(DebugEvent.CONTENT);
 	}
 
-	
 	public void stateLeft(Vertex vertex) {
 		activeStates.remove(vertex);
+		fireChangeEvent(DebugEvent.CONTENT);
 
 	}
 
-	
 	public void transitionFired(Transition transition) {
 		// Nothing to do
 	}
 
-	
 	public void variableValueChanged(String variableName, Object value) {
 		// Nothing to do
 	}
 
-	
 	public void eventRaised(String eventName) {
 		// Nothing to do
 	}
@@ -128,12 +114,14 @@ public class SCTDebugThread extends SCTDebugElement implements IThread,
 
 	public void resume() throws DebugException {
 		fireEvent(new DebugEvent(this, DebugEvent.RESUME));
+		fireChangeEvent(DebugEvent.CONTENT);
 		session.resume();
 		suspended = false;
 	}
 
 	public void suspend() throws DebugException {
 		fireEvent(new DebugEvent(this, DebugEvent.SUSPEND));
+		fireChangeEvent(DebugEvent.CONTENT);
 		session.suspend();
 		suspended = true;
 	}
@@ -185,19 +173,6 @@ public class SCTDebugThread extends SCTDebugElement implements IThread,
 		return null;
 	}
 
-	public ILaunch getLaunch() {
-		return getDebugTarget().getLaunch();
-	}
-
-	protected void fireEvent(DebugEvent event) {
-		DebugPlugin.getDefault().fireDebugEventSet(new DebugEvent[] { event });
-	}
-
-	public IDebugTarget getDebugTarget() {
-		return target;
-	}
-
-	
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (adapter == SGraphSimulationSession.class)
 			return session;
