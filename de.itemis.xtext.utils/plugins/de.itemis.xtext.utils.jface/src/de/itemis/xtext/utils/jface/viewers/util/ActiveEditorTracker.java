@@ -57,7 +57,7 @@ public class ActiveEditorTracker implements IPageListener, IPartListener,
 	 * @return The last active editor in the current active workbench page.
 	 */
 	public static IEditorPart getLastActiveEditor() {
-		return INSTANCE.getEditorById(INSTANCE.lastActiveEditorId);
+		return INSTANCE.getLastActiveEditorInternal();
 	}
 
 	/**
@@ -134,6 +134,7 @@ public class ActiveEditorTracker implements IPageListener, IPartListener,
 
 	public void pageOpened(IWorkbenchPage page) {
 		// do nothing
+		System.out.println("PAGE OPENED: " + page);
 	}
 
 	public void partActivated(IWorkbenchPart part) {
@@ -170,6 +171,30 @@ public class ActiveEditorTracker implements IPageListener, IPartListener,
 		if (part instanceof IEditorPart) {
 			// do nothing
 		}
+	}
+
+	private IEditorPart getLastActiveEditorInternal() {
+		if (activePage == null) {
+			initialize(PlatformUI.getWorkbench().getActiveWorkbenchWindow());
+			if (activePage == null)
+				return null;
+		}
+		boolean updated = false;
+		if (lastActiveEditorId == null) {
+			final IEditorPart editor = activePage.getActiveEditor();
+			if (editor != null) {
+				setActiveEditor(editor);
+			}
+			updated = true;
+		}
+		IEditorPart editor = getEditorById(lastActiveEditorId);
+		if (editor == null && !updated) {
+			editor = activePage.getActiveEditor();
+			if (editor != null) {
+				setActiveEditor(editor);
+			}
+		}
+		return editor;
 	}
 
 	private IEditorPart getEditorById(String editorId) {
@@ -240,7 +265,14 @@ public class ActiveEditorTracker implements IPageListener, IPartListener,
 			 */
 		}
 		this.workbenchWindow = window;
+		if (window == null)
+			return;
 		this.activePage = window.getActivePage();
+		final IEditorPart editor = this.activePage.getActiveEditor();
+		if (editor != null) {
+			lastActiveEditorId = checkEditorAndGetId(editor);
+			activeEditors.put(lastActiveEditorId, editor);
+		}
 		window.addPageListener(this);
 		window.getPartService().addPartListener(this);
 	}
