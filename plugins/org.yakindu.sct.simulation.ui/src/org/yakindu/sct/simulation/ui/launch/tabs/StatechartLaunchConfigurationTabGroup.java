@@ -11,6 +11,7 @@
 package org.yakindu.sct.simulation.ui.launch.tabs;
 
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup;
+import org.eclipse.debug.ui.CommonTab;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
 
@@ -22,11 +23,10 @@ import org.eclipse.debug.ui.ILaunchConfigurationTab;
 public class StatechartLaunchConfigurationTabGroup extends
 		AbstractLaunchConfigurationTabGroup {
 
-	public StatechartLaunchConfigurationTabGroup() {
-	}
 
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
-		ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] { new StatechartLaunchConfigurationTab() };
+		ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] {
+				new StatechartLaunchConfigurationTab(), new CommonTab() };
 		setTabs(tabs);
 	}
 
