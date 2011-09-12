@@ -116,6 +116,15 @@ public interface SexecFactory extends EFactory {
 	SequenceExecution createSequenceExecution();
 
 	/**
+	 * Returns a new object of class '<em>State Vector</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>State Vector</em>'.
+	 * @generated
+	 */
+	StateVector createStateVector();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -10,6 +10,8 @@
         eType="#//Sequence" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="enterSequence" eType="#//Sequence"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stateVector" eType="#//StateVector"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionState" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -44,5 +46,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SequenceExecution" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sequence" eType="#//Sequence"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateVector">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="offset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
   </eClassifiers>
 </ecore:EPackage>

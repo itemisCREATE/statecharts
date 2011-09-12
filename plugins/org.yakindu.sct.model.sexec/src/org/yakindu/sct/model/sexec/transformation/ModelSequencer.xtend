@@ -39,6 +39,7 @@ class ModelSequencer {
 	
 	@Inject extension IQualifiedNameProvider qfnProvider
 	@Inject extension FactoryExtension factory
+	@Inject extension StatechartExtensions sct
 
 
 	def ExecutionFlow transform(Statechart sc) {
@@ -47,6 +48,7 @@ class ModelSequencer {
 		sc.mapExecutionFlow(ef)
 		sc.mapScopes(ef)
 		
+		ef.defineStateVector(sc)
 		ef.defineEnterSequence(sc)
 		
 		return ef
@@ -167,6 +169,15 @@ class ModelSequencer {
 	}
 	
 	
+	/************** Calculating Structure information **************/
+
+	def defineStateVector(ExecutionFlow flow, Statechart sc) {
+		flow.stateVector = sexecFactory.createStateVector
+		flow.stateVector.offset = 0;
+		flow.stateVector.size = sc.maxOrthogonality		
+	}
+
+
 	/************** Calculating execution sequences **************/
 	
 	

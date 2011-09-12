@@ -116,13 +116,22 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_FLOW__ENTER_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>State Vector</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_FLOW__STATE_VECTOR = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Execution Flow</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW_FEATURE_COUNT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 4;
+	int EXECUTION_FLOW_FEATURE_COUNT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.NamedElementImpl <em>Named Element</em>}' class.
@@ -523,6 +532,44 @@ public interface SexecPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StateVectorImpl <em>State Vector</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.StateVectorImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateVector()
+	 * @generated
+	 */
+	int STATE_VECTOR = 11;
+
+	/**
+	 * The feature id for the '<em><b>Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_VECTOR__SIZE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_VECTOR__OFFSET = 1;
+
+	/**
+	 * The number of structural features of the '<em>State Vector</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_VECTOR_FEATURE_COUNT = 2;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionFlow <em>Execution Flow</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -564,6 +611,17 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExecutionFlow_EnterSequence();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionFlow#getStateVector <em>State Vector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>State Vector</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionFlow#getStateVector()
+	 * @see #getExecutionFlow()
+	 * @generated
+	 */
+	EReference getExecutionFlow_StateVector();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionState <em>Execution State</em>}'.
@@ -798,6 +856,38 @@ public interface SexecPackage extends EPackage {
 	EReference getSequenceExecution_Sequence();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.StateVector <em>State Vector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>State Vector</em>'.
+	 * @see org.yakindu.sct.model.sexec.StateVector
+	 * @generated
+	 */
+	EClass getStateVector();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sexec.StateVector#getSize <em>Size</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Size</em>'.
+	 * @see org.yakindu.sct.model.sexec.StateVector#getSize()
+	 * @see #getStateVector()
+	 * @generated
+	 */
+	EAttribute getStateVector_Size();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sexec.StateVector#getOffset <em>Offset</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Offset</em>'.
+	 * @see org.yakindu.sct.model.sexec.StateVector#getOffset()
+	 * @see #getStateVector()
+	 * @generated
+	 */
+	EAttribute getStateVector_Offset();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -852,6 +942,14 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXECUTION_FLOW__ENTER_SEQUENCE = eINSTANCE.getExecutionFlow_EnterSequence();
+
+		/**
+		 * The meta object literal for the '<em><b>State Vector</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_FLOW__STATE_VECTOR = eINSTANCE.getExecutionFlow_StateVector();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl <em>Execution State</em>}' class.
@@ -1048,6 +1146,32 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SEQUENCE_EXECUTION__SEQUENCE = eINSTANCE.getSequenceExecution_Sequence();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.StateVectorImpl <em>State Vector</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.StateVectorImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateVector()
+		 * @generated
+		 */
+		EClass STATE_VECTOR = eINSTANCE.getStateVector();
+
+		/**
+		 * The meta object literal for the '<em><b>Size</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE_VECTOR__SIZE = eINSTANCE.getStateVector_Size();
+
+		/**
+		 * The meta object literal for the '<em><b>Offset</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE_VECTOR__OFFSET = eINSTANCE.getStateVector_Offset();
 
 	}
 

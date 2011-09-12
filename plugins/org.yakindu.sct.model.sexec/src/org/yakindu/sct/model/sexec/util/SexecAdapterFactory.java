@@ -117,6 +117,10 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createSequenceExecutionAdapter();
 			}
 			@Override
+			public Adapter caseStateVector(StateVector object) {
+				return createStateVectorAdapter();
+			}
+			@Override
 			public Adapter caseScopedElement(ScopedElement object) {
 				return createScopedElementAdapter();
 			}
@@ -291,6 +295,20 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSequenceExecutionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.StateVector <em>State Vector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.StateVector
+	 * @generated
+	 */
+	public Adapter createStateVectorAdapter() {
 		return null;
 	}
 

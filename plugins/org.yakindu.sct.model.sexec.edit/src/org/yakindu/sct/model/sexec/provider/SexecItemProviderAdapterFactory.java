@@ -306,6 +306,29 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.StateVector} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StateVectorItemProvider stateVectorItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.StateVector}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStateVectorAdapter() {
+		if (stateVectorItemProvider == null) {
+			stateVectorItemProvider = new StateVectorItemProvider(this);
+		}
+
+		return stateVectorItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -414,6 +437,7 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (enterStateItemProvider != null) enterStateItemProvider.dispose();
 		if (exitStateItemProvider != null) exitStateItemProvider.dispose();
 		if (sequenceExecutionItemProvider != null) sequenceExecutionItemProvider.dispose();
+		if (stateVectorItemProvider != null) stateVectorItemProvider.dispose();
 	}
 
 }
