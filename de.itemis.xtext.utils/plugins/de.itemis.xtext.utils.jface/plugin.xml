@@ -32,6 +32,11 @@
             verticalRulerPreferenceValue="true">
       </specification>
    </extension>
-   
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker">
+      </startup>
+   </extension>
 
 </plugin>

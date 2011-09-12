@@ -14,6 +14,10 @@ import org.eclipse.ui.PlatformUI;
  * Utility operations to access the currently active (i.e. open) editor as well
  * as its underlying emf resource.
  * 
+ * <b>Please note that an <code>getActiveEditor</code> and
+ * <code>getActiveEditorResource</code> do not work if the editor is
+ * <i>minimized</i>! {@link ActiveEditorTracker} can be used instead.</b>
+ * 
  * @author nyssen
  * 
  */
@@ -65,6 +69,5 @@ public final class ActiveEditorResolver implements
 					"Different resources in resource set , don't know which to use...");
 		}
 		return resources.get(0);
-
 	}
 }
