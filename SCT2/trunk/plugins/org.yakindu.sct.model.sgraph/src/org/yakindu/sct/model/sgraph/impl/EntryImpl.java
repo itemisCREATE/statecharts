@@ -171,5 +171,13 @@ public class EntryImpl extends PseudostateImpl implements Entry {
 		result.append(')');
 		return result.toString();
 	}
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	public String getName() {
+		String name = super.getName();
+		return name == null ? "" : name;
+	}
 
 } //EntryImpl

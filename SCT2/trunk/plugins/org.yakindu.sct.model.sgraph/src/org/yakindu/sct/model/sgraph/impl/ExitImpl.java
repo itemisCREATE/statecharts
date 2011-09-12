@@ -49,5 +49,14 @@ public class ExitImpl extends PseudostateImpl implements Exit {
 	protected EClass eStaticClass() {
 		return SGraphPackage.Literals.EXIT;
 	}
+	
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	public String getName() {
+		String name = super.getName();
+		return name == null ? "" : name;
+	}
 
 } //ExitImpl

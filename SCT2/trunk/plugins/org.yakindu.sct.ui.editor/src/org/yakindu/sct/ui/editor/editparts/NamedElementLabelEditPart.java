@@ -27,5 +27,4 @@ public class NamedElementLabelEditPart extends TextAwareLabelEditPart {
 		super(view, SGraphPackage.Literals.NAMED_ELEMENT__NAME,
 				DiagramActivator.PLUGIN_ID);
 	}
-
 }
