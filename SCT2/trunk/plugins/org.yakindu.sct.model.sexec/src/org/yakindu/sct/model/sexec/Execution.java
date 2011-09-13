@@ -26,26 +26,26 @@ import org.yakindu.sct.model.sgraph.Statement;
  */
 public interface Execution extends Step {
 	/**
-	 * Returns the value of the '<em><b>Statement</b></em>' reference.
+	 * Returns the value of the '<em><b>Statement</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Statement</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Statement</em>' reference.
+	 * @return the value of the '<em>Statement</em>' containment reference.
 	 * @see #setStatement(Statement)
 	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecution_Statement()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	Statement getStatement();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.Execution#getStatement <em>Statement</em>}' reference.
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.Execution#getStatement <em>Statement</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Statement</em>' reference.
+	 * @param value the new value of the '<em>Statement</em>' containment reference.
 	 * @see #getStatement()
 	 * @generated
 	 */

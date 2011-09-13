@@ -2,12 +2,16 @@ package org.yakindu.sct.generator.cpp.test.generator;
 
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEventDefinition;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createInterfaceScope;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createReactionEffect;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createReactionTrigger;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegion;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegularEventSpec;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createState;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createStatechart;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createTransition;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createValue;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableAssignment;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableDefinition;
 
 import java.net.URL;
 
@@ -26,11 +30,16 @@ import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.stext.stext.Assignment;
+import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
+import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
+import org.yakindu.sct.model.stext.stext.Type;
+import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -106,6 +115,9 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 		_createRegularEventSpec(e2, tr2);
 		_createRegularEventSpec(e3, tr2);
 
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, s_scope);
+		ReactionEffect effect = _createReactionEffect(t2);
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), effect); 
 
 		ExecutionFlow flow = sequencer.transform(sc);
 
