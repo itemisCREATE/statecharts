@@ -1,9 +1,15 @@
+import sgraph;
 import stext;
+import sexec;
+
 
 
 String toCppCode(Expression statement, String statechartReference) : 
 	null; //polymorphic placeholder (abstract rule)
-
+ 
+String toCppCode(Statement statement, String statechartReference) : 
+	null; //polymorphic placeholder (abstract rule)
+ 
 String toCppCode(PrimitiveValueExpression primValue, String statechartName) :
 	primValue.value;
 
@@ -69,4 +75,7 @@ String getOperator(MultiplicativeOperator operator) :
 String toCppCode(NumericalMultiplyDivideExpression expression, String statechartReference) :
   	statechartReference + "." + expression.leftOperand.toCppCode(statechartReference) + getOperator(expression.operator) + statechartReference + "." + expression.rightOperand.toCppCode(statechartReference);
 
+String toCppCode(ElementReferenceExpression ev, String statechartReference) :
+    " ( " + ev.value.name + " == ev.getID() ) ";
 
+String scName(Expression statement) : ((ExecutionFlow)statement.eRootContainer).name ;

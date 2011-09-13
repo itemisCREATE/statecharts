@@ -10,148 +10,96 @@ Templates for the main statechart cpp file.
 «IMPORT stext»
 «IMPORT sgraph»
 
+«IMPORT org::yakindu::sct::generator::cpp::templates»
+«EXTENSION org::yakindu::sct::generator::cpp::templates::Expression»
+
+«DEFINE ActionCode FOR Step»
+// ActionCode for Step not defined
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR Execution»
+// ActionCode for Execution not implemented yet
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR Call»
+// ActionCode for Call not implemented yet
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR Sequence»
+  «EXPAND ActionCode FOREACH this.steps»
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR Check»
+// ActionCode for Check not implemented yet
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR Reaction»
+  «EXPAND ActionCode FOR this.effect» 
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR If»
+if («this.check.condition.toCppCode("bla")») {
+  «EXPAND ActionCode FOR this.thenStep»
+}
+else {
+  «EXPAND ActionCode FOR this.elseStep»
+}
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR EnterState»
+// dummy Enter
+// states = newstates
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR ExitState»
+// dummy Exit
+// oldstates = states
+«ENDDEFINE»
+
+
+«DEFINE ConditionMethodsImplement FOR ExecutionState»
+  «FOREACH reactions AS r»
+bool MyStatemachine::condition_«this.simpleName»_«r.name»(const _Event& ev) {
+  return (	«r.check.condition.toCppCode("bla")» );
+}
+  «ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE StatementMethodsImplement FOR ExecutionState»
+  «FOREACH reactions AS r»
+void MyStatemachine::actions_«this.simpleName»_«r.name»() {
+  «EXPAND ActionCode FOR r.effect»
+}
+  «ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE CycleMethodsImplement FOR ExecutionState»
+void MyStatemachine::cycle_«this.simpleName»(const _Event& ev)
+{
+  «FOREACH reactions AS r -»
+	  if(condition_«this.simpleName»_«r.name»(ev)) {
+	    actions_«this.simpleName»_«r.name»();
+	  } 
+  «ENDFOREACH»
+}
+«ENDDEFINE»
 
 «DEFINE file FOR ExecutionFlow»
-
 «FILE 'MyStatemachine.cpp'»
 #include <iostream>
 #include "MyStatemachine.h"
 
-MyStatemachine::MyStatemachine() : Statemachine(MAX_PARALLEL_STATES) {
+MyStatemachine::MyStatemachine() : Statemachine(«((ExecutionFlow)this.eRootContainer).stateVector.size») {
 }
 
 MyStatemachine::~MyStatemachine() {
 }
 
+«EXPAND ConditionMethodsImplement FOREACH this.states»
 
-bool MyStatemachine::condition_state1_id1(const _Event & event, const MyDataRepository & data)
-{
-	return (event.getID() == (uint32_t)event1);
-}
+«EXPAND StatementMethodsImplement FOREACH this.states»
 
-bool MyStatemachine::condition_state3_id1(const _Event & event, const MyDataRepository & data)
-{
-	return (event.getID() == (uint32_t)event2);
-}
-
-bool MyStatemachine::condition_state3_id2(const _Event & event, const MyDataRepository & data)
-{
-	return (event.getID() == (uint32_t)event3);
-}
-
-bool MyStatemachine::condition_state4_id1(const _Event & event, const MyDataRepository & data)
-{
-	return (event.getID() == (uint32_t)event4);
-}
-
-bool MyStatemachine::condition_state4_id2(const _Event & event, const MyDataRepository & data)
-{
-	return (event.getID() == (uint32_t)event5);
-}
-
-bool MyStatemachine::condition_state4_id3(const _Event & event, const MyDataRepository & data)
-{
-	return (event.getID() == (uint32_t)event2);
-}
-
-void MyStatemachine::statement_state1_id1()
-{
-	std::cout << "statement_state1_id1 \n";
-	/* exit  S1 */
-	/* transition action event1 */
-	/* entry S2 */
-	/* entry S3 */
-	state[0] = State3;
-}
-
-void MyStatemachine::statement_state3_id1()
-{
-	std::cout << "statement_state3_id1 \n";
-	/* exit S3 */
-	/* exit S2 */
-	/* transition action event 2 */
-	/* entry S1 */
-	state[0] = State1;
-}
-
-void MyStatemachine::statement_state4_id1()
-{
-	std::cout << "statement_state4_id1 \n";
-	/* exit S4 */
-	/* exit S2 */
-	/* transition action event 2 */
-	/* entry S1 */
-	state[0] = State3;
-
-}
-
-void MyStatemachine::statement_state4_id2()
-{
-	std::cout << "statement_state4_id2 \n";
-	/* exit S4 */
-	/* exit S2 */
-	/* transition action event 5 */
-	/* entry S1 */
-	state[0] = State1;
-
-}
-
-void MyStatemachine::statement_state4_id3()
-{
-	std::cout << "statement_state4_id3 \n";
-	/* exit S4 */
-	/* transition action event 3 */
-	/* entry S3 */
-	state[0] = State1;
-
-}
-
-void MyStatemachine::statement_state3_id2()
-{
-	std::cout << "statement_state3_id2 \n";
-	/* exit S3 */
-	/* transition action event 4 */
-	/* entry S4 */
-	state[0] = State4;
-
-}
-
-void MyStatemachine::cycle_state1(const _Event& ev)
-{
-	if (condition_state1_id1(ev, *this)) {
-		statement_state1_id1();
-		return;
-	}
-
-}
-
-void MyStatemachine::cycle_state3(const _Event& ev)
-{
-	if (condition_state3_id1(ev, *this)) {
-		statement_state3_id1();
-		return;
-	}
-	if (condition_state3_id2(ev, *this)) {
-		statement_state3_id2();
-	}
-}
-
-void MyStatemachine::cycle_state4(const _Event& ev)
-{
-	if (condition_state4_id1(ev, *this)) {
-		statement_state4_id1();
-		return;
-	}
-	if (condition_state4_id2(ev, *this)) {
-		statement_state4_id2();
-		return;
-	}
-	if (condition_state4_id3(ev, *this)) {
-		statement_state4_id3();
-		return;
-	}
-}
-
+«EXPAND CycleMethodsImplement FOREACH this.states»
 
 void MyStatemachine::init()
 {
@@ -166,17 +114,13 @@ void MyStatemachine::init()
 
 void MyStatemachine::_runCycle(Event ev)
 {
-	for (int i=0; i<MAX_PARALLEL_STATES; ++i) {
+	for (int i=0; i<«((ExecutionFlow)this.eRootContainer).stateVector.size»; ++i) {
 		switch(state[i]) {
-		case State1:
-			cycle_state1(*ev);
-			break;
-		case State3:
-			cycle_state3(*ev);
-			break;
-		case State4:
-			cycle_state4(*ev);
-			break;
+	«FOREACH this.states AS state»
+	    case «state.simpleName»:
+	        cycle_«state.simpleName»(*ev);
+	        break;
+	«ENDFOREACH»
 		default:
 			/* no state found */
 			break;
