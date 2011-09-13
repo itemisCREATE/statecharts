@@ -14,13 +14,14 @@ import java.io.IOException;
 import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.ui.dialogs.WorkspaceResourceDialog;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryRegistryImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
@@ -35,13 +36,13 @@ import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.internal.dialogs.NewWizard;
+import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
-import org.eclipse.ui.wizards.IWizardDescriptor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.StatechartImages;
-import org.yakindu.sct.ui.editor.wizards.CreationWizard;
 
 /**
  * Basic resource selection dialog for Statecharts with a link that opens the
@@ -50,11 +51,15 @@ import org.yakindu.sct.ui.editor.wizards.CreationWizard;
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@SuppressWarnings("restriction")
 public class SelectSubmachineDialog extends WorkspaceResourceDialog {
 
-	public SelectSubmachineDialog(Shell parent) {
+	private final ViewerFilter filter;
+
+	public SelectSubmachineDialog(Shell parent, ViewerFilter filter) {
 		super(parent, new WorkbenchLabelProvider(),
 				new WorkbenchContentProvider());
+		this.filter = filter;
 		initDialog();
 	}
 
@@ -63,7 +68,7 @@ public class SelectSubmachineDialog extends WorkspaceResourceDialog {
 		setTitle("Select Submachine");
 		setMessage("Select the Submachine to include include into the Submachine State.");
 		setImage(StatechartImages.LOGO.image());
-		addFilter(new StatechartViewerFilter());
+		addFilter(filter);
 		loadContents();
 	}
 
@@ -117,29 +122,43 @@ public class SelectSubmachineDialog extends WorkspaceResourceDialog {
 		}
 
 		public void handleEvent(Event event) {
-			IWizardDescriptor descriptor = PlatformUI.getWorkbench()
-					.getNewWizardRegistry().findWizard(CreationWizard.ID);
-			try {
-				CreationWizard wizard = (CreationWizard) descriptor
-						.createWizard();
-				wizard.setOpenOnCreate(false);
-				wizard.init(PlatformUI.getWorkbench(), selection);
-				WizardDialog wd = new WizardDialog(Display.getDefault()
-						.getActiveShell(), wizard);
-				wd.setTitle(wizard.getWindowTitle());
-				wd.open();
-			} catch (CoreException e) {
-				e.printStackTrace();
+			NewWizard wizard = new NewWizard();
+			wizard.init(PlatformUI.getWorkbench(), selection);
+			WizardDialog wd = new WizardDialog(Display.getDefault()
+					.getActiveShell(), wizard);
+			wd.setTitle(wizard.getWindowTitle());
+			IDialogSettings workbenchSettings = IDEWorkbenchPlugin.getDefault()
+					.getDialogSettings();
+			IDialogSettings wizardSettings = workbenchSettings
+					.getSection("NewWizardAction"); //$NON-NLS-1$
+			if (wizardSettings == null) {
+				wizardSettings = workbenchSettings
+						.addNewSection("NewWizardAction"); //$NON-NLS-1$
 			}
+			wizard.setDialogSettings(wizardSettings);
+			wizard.setForcePreviousAndNextButtons(true);
+			wd.open();
 		}
 	}
 
-	protected static class StatechartViewerFilter extends ViewerFilter {
+	public static class StatechartViewerFilter extends ViewerFilter {
+
+		private final String fileExtension;
+
+		public StatechartViewerFilter(String fileExtension) {
+			this.fileExtension = fileExtension;
+		}
+
+		public StatechartViewerFilter(EObject eobject) {
+			this.fileExtension = eobject.eResource().getURI().fileExtension();
+		}
+
 		@Override
 		public boolean select(Viewer viewer, Object parentElement,
 				Object element) {
 			if (element instanceof IFile) {
-				return ((IFile) element).getFileExtension().endsWith("sct");
+				return ((IFile) element).getFileExtension().endsWith(
+						fileExtension);
 			}
 			return true;
 		}
