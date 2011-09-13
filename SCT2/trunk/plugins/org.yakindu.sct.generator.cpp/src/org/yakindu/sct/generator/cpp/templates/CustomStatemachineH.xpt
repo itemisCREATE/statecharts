@@ -29,34 +29,33 @@ class MyStatemachine: public Statemachine, public MyDataRepository {
 
 public:
 	enum States {
-		State1,
-		State2,
-		State3,
-		State4,
+	    «FOREACH this.states AS exState»
+	      «exState.simpleName»,
+	    «ENDFOREACH»
 		last_state
 	};
 
 protected:
 	/* conditions */
-	bool condition_state1_id1(const _Event& event, const MyDataRepository& data);
-	bool condition_state3_id1(const _Event& event, const MyDataRepository& data);
-	bool condition_state3_id2(const _Event& event, const MyDataRepository& data);
-	bool condition_state4_id1(const _Event& event, const MyDataRepository& data);
-	bool condition_state4_id2(const _Event& event, const MyDataRepository& data);
-	bool condition_state4_id3(const _Event& event, const MyDataRepository& data);
-
-	/* statement */
-	void statement_state1_id1();
-	void statement_state3_id1();
-	void statement_state3_id2();
-	void statement_state4_id1();
-	void statement_state4_id2();
-	void statement_state4_id3();
+	«FOREACH states AS conStates»
+	  «FOREACH conStates.reactions AS state»
+	void condition_«conStates.simpleName»_«state.name»(const _Event& event);
+	  «ENDFOREACH»
+	«ENDFOREACH»
+	
+	/* actions */
+	«FOREACH states AS conStates»
+	  «FOREACH conStates.reactions AS state»
+	void actions_«conStates.simpleName»_«state.name»();
+	  «ENDFOREACH»
+	«ENDFOREACH»
 
 	/* cycles */
-	void cycle_state1(const _Event& ev);
-	void cycle_state3(const _Event& ev);
-	void cycle_state4(const _Event& ev);
+	«FOREACH states AS conStates»
+	  «FOREACH conStates.reactions AS state»
+	void cycle_«conStates.simpleName»();
+	  «ENDFOREACH»
+	«ENDFOREACH»
 
 	virtual void _runCycle(Event ev);
 
@@ -76,4 +75,23 @@ public:
 
 «ENDFILE»
 
+«ENDDEFINE»
+
+
+«DEFINE codeMethodPrototype FOR If»
+
+  condition_STATENAME_TRANSITIONPRIO_HERE(const _Event& event, const MyDataRepository& data);
+«ENDDEFINE»
+
+«DEFINE codeMethodPrototype FOR Cycle»
+  //NONE run through cycles
+  «EXPAND codeMethodPrototype FOREACH this.steps»
+«ENDDEFINE»
+
+«DEFINE codeMethodPrototype FOR Step»
+  //NONE Step
+«ENDDEFINE»
+
+«DEFINE codeMethodPrototype FOR Sequence»
+  «EXPAND codeMethodPrototype FOREACH this.steps»
 «ENDDEFINE»
