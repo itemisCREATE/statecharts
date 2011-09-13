@@ -23,6 +23,7 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.eclipse.swt.graphics.Color;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
+
 /**
  * 
  * @author muelder
@@ -41,10 +42,7 @@ public class RegionFigure extends RectangleFigure {
 		this.mapMode = mapMode;
 
 		GridLayout layoutThis = new GridLayout(1, false);
-		// StackLayout layoutThis = new StackLayout();
 		layoutThis.verticalSpacing = 2;
-		// layoutThis.marginHeight = 2;
-		// layoutThis.marginWidth = 2;
 		this.setLayoutManager(layoutThis);
 		this.setLineWidth(mapMode.DPtoLP(1));
 		createContents();
@@ -55,10 +53,6 @@ public class RegionFigure extends RectangleFigure {
 		RectangleFigure labelFigure = new RectangleFigure();
 		labelFigure.setOutline(false);
 		labelFigure.setFill(false);
-		// this.add(labelFigure,
-		// GridDataFactory.fillDefaults().align(GridData.CENTER,
-		// SWT.END).grab(true, false)
-		// .getData());
 		GridLayout layout = new GridLayout();
 		layout.verticalSpacing = 2;
 		layout.numColumns = 1;
@@ -67,10 +61,9 @@ public class RegionFigure extends RectangleFigure {
 
 		/** name Label **/
 		nameLabel = new WrappingLabel();
-		nameLabel.setAlignment(PositionConstants.WEST);
-		GridData data = GridDataFactory.fillDefaults()
-				.align(GridData.CENTER, GridData.BEGINNING).grab(true, false)
+		GridData data = GridDataFactory.fillDefaults().grab(true, false)
 				.getData();
+		nameLabel.setTextPlacement(PositionConstants.WEST);
 		// data.heightHint = mapMode.DPtoLP(10);
 		this.add(nameLabel, data);
 

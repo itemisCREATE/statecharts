@@ -52,6 +52,7 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements
 		// Disables deletion of the text compartment view via keyboard
 		installEditPolicy(EditPolicy.COMPONENT_ROLE,
 				new RootComponentEditPolicy());
+		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
 	}
 
 	@Override
