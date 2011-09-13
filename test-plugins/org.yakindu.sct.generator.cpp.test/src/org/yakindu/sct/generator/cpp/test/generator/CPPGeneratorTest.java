@@ -91,12 +91,21 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 		Statechart sc = _createStatechart("test");
 		InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
 		EventDefinition e1 = _createEventDefinition("e1", s_scope);
+		EventDefinition e2 = _createEventDefinition("e2", s_scope);
+		EventDefinition e3 = _createEventDefinition("e3", s_scope);
 		Region r = _createRegion("main", sc);
 		State s1 = _createState("S1", r);
 		State s2 = _createState("S2", r);
+		State s3 = _createState("S3", r);
 		Transition t = _createTransition(s1, s2);
 		ReactionTrigger tr1 = _createReactionTrigger(t);
 		_createRegularEventSpec(e1, tr1);
+		
+		Transition t2 = _createTransition(s1, s3);
+		ReactionTrigger tr2 = _createReactionTrigger(t2);
+		_createRegularEventSpec(e2, tr2);
+		_createRegularEventSpec(e3, tr2);
+
 
 		ExecutionFlow flow = sequencer.transform(sc);
 
