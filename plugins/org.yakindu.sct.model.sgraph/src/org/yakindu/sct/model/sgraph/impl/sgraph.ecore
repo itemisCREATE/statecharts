@@ -45,6 +45,9 @@
         lowerBound="1" upperBound="-1" eType="#//Region" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Entry" eSuperTypes="#//Pseudostate">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="DisallowTrigger"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//EntryKind"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Trigger" abstract="true"/>

@@ -16,6 +16,7 @@ import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_INITIAL_EN
 import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_NODE_NOT_REACHABLE;
 import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_STATE_WITHOUT_NAME;
 import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION;
+import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_ENTRY_WITH_TRIGGER;
 
 import java.util.HashMap;
 
@@ -34,6 +35,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.util.SGraphValidator;
+import org.yakindu.sct.model.stext.stext.StextFactory;
 
 /**
  * Test of all validation rules that test very basic properties of statecharts.
@@ -52,6 +54,7 @@ public class SGraphBaseValidationTest extends TestCase {
 	}
 	
 	protected SGraphFactory factory;
+	protected StextFactory sTextFactory;
 	protected SGraphValidator validator;
 	protected BasicDiagnostic diagnostics;
 	
@@ -66,6 +69,7 @@ public class SGraphBaseValidationTest extends TestCase {
 		validator = new SGraphValidator();
 		diagnostics = new BasicDiagnostic();
 		factory = SGraphFactory.eINSTANCE;
+		sTextFactory = StextFactory.eINSTANCE;
 		statechart = factory.createStatechart();
 		statechart.setName("SC");
 	}
@@ -225,6 +229,18 @@ public class SGraphBaseValidationTest extends TestCase {
 		assertError(diagnostics, ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
 		
 
+	}
+	
+	public void testEntryWithTriggeredTransition() {
+		prepareStateTest();
+		
+		Entry entry = factory.createEntry();
+		region.getVertices().add(entry);
+		Transition trans = createTransition(entry, state);
+		trans.setTrigger(sTextFactory.createReactionTrigger());
+		diagnostics = new BasicDiagnostic();
+		assertFalse(validator.validate(entry, diagnostics, new HashMap<Object, Object>()));
+		assertError(diagnostics, ISSUE_ENTRY_WITH_TRIGGER);
 	}
 	
 	

@@ -73,5 +73,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/simple"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/composite"/>
     </genClasses>
+    <genClasses ecoreClass="sgraph.ecore#//Statement"/>
   </genPackages>
 </genmodel:GenModel>
