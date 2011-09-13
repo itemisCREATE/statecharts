@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.model.sgraph;
 
-import org.eclipse.emf.ecore.EObject;
 
 
 /**

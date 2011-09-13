@@ -505,7 +505,7 @@ public class SGraphValidator extends EObjectValidator {
 	 * Validates the DisallowTrigger constraint of '<em>Entry</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean validateEntry_DisallowTrigger(Entry entry, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		
