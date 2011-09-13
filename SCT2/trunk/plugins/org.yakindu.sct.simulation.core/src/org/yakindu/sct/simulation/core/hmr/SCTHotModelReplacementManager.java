@@ -69,7 +69,6 @@ public class SCTHotModelReplacementManager implements IResourceChangeListener,
 		DebugPlugin.getDefault().getLaunchManager().removeLaunchListener(this);
 	}
 
-	@Override
 	public void handleDebugEvents(DebugEvent[] events) {
 		for (DebugEvent debugEvent : events) {
 			if (debugEvent.getKind() == DebugEvent.TERMINATE) {
@@ -85,7 +84,6 @@ public class SCTHotModelReplacementManager implements IResourceChangeListener,
 		}
 	}
 
-	@Override
 	public void launchRemoved(ILaunch launch) {
 		IDebugTarget[] debugTargets = launch.getDebugTargets();
 		for (IDebugTarget debugTarget : debugTargets) {
@@ -95,7 +93,6 @@ public class SCTHotModelReplacementManager implements IResourceChangeListener,
 		}
 	}
 
-	@Override
 	public void launchAdded(ILaunch launch) {
 		IDebugTarget[] debugTargets = launch.getDebugTargets();
 		for (IDebugTarget debugTarget : debugTargets) {
@@ -130,14 +127,12 @@ public class SCTHotModelReplacementManager implements IResourceChangeListener,
 		}
 	}
 
-	@Override
 	public void launchChanged(ILaunch launch) {
 		launchAdded(launch);
 	}
 
 	private List<IFile> changedFiles = new ArrayList<IFile>();
 
-	@Override
 	public synchronized void resourceChanged(IResourceChangeEvent event) {
 		IResourceDelta delta = event.getDelta();
 		try {
@@ -180,7 +175,6 @@ public class SCTHotModelReplacementManager implements IResourceChangeListener,
 
 	}
 
-	@Override
 	public boolean visit(IResourceDelta delta) throws CoreException {
 		IResource resource = delta.getResource();
 		if ((delta.getFlags() & IResourceDelta.CONTENT) != 0) {
