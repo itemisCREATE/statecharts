@@ -219,7 +219,7 @@
    <!-- Contribution Item Provider -->
    <extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
       <contributionItemProvider
-            class="org.yakindu.sct.ui.editor.providers.StatechartDiagramContributionItemProvider"
+            class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContributionItemProvider"
             checkPluginLoaded="false">
          <Priority name="Low"/>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
@@ -227,17 +227,6 @@
             <popupStructuredContributionCriteria objectClass="org.yakindu.sct.ui.editor.editparts.StatechartTextExpressionEditPart"/>
             <popupPredefinedItem id="editGroup" remove="true"/>
          </popupContribution>
-         <partContribution
-               class="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
-            <partAction
-                  global="true"
-                  id="undo">
-            </partAction>
-            <partAction
-                  global="true"
-                  id="redo">
-            </partAction>
-         </partContribution>
       </contributionItemProvider>
    </extension>
    

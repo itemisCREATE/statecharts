@@ -22,8 +22,7 @@ import org.yakindu.sct.ui.editor.utils.SemanticHintUtil;
 /**
  * @author andreas muelder
  */
-public class StateCompartmentCanonicalEditPolicy extends
-		CanonicalEditPolicy {
+public class StateCompartmentCanonicalEditPolicy extends CanonicalEditPolicy {
 
 	@SuppressWarnings("rawtypes")
 	@Override
