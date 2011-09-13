@@ -23,12 +23,20 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sexec.Check
+import org.yakindu.sct.model.stext.stext.ReactionTrigger
+import org.yakindu.sct.model.sexec.Reaction
+import org.yakindu.sct.model.sgraph.Transition
+import org.yakindu.sct.model.sexec.CheckRef
+import org.yakindu.sct.model.sexec.Call
+import org.yakindu.sct.model.sexec.Step
 
 class FactoryExtension {
 	
 	
 	@Inject extension IQualifiedNameProvider qfnProvider
-
+	@Inject extension StatechartExtensions sce
+	
 
 	def ExecutionFlow create r : sexecFactory.createExecutionFlow create(Statechart statechart){
 		r.name = statechart.name
@@ -51,6 +59,26 @@ class FactoryExtension {
 		r.name = state.fullyQualifiedName.toString.replaceAll(" ", "")
 	}
 	
+	def Check create r : sexecFactory.createCheck createCheck(ReactionTrigger tr){
+		r.name = tr.reaction.id
+	}
+	
+	def Reaction create r : sexecFactory.createReaction create(Transition tr){
+		r.name = tr.id
+	}
+	
+	def CheckRef newRef(Check check) {
+		val r = sexecFactory.createCheckRef
+		r.check = check
+		r
+	}
+
+	def Call newCall(Step step) {
+		val r = sexecFactory.createCall
+		r.step = step
+		r
+	}
+
 	//--------- UTILS ---------------
 	def sexecFactory() { SexecFactory::eINSTANCE }
 	def stextFactory() { StextFactory::eINSTANCE }

@@ -122,6 +122,29 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.Reaction} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ReactionItemProvider reactionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.Reaction}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createReactionAdapter() {
+		if (reactionItemProvider == null) {
+			reactionItemProvider = new ReactionItemProvider(this);
+		}
+
+		return reactionItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.NamedElement} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -165,6 +188,29 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		}
 
 		return cycleItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.Check} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CheckItemProvider checkItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.Check}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCheckAdapter() {
+		if (checkItemProvider == null) {
+			checkItemProvider = new CheckItemProvider(this);
+		}
+
+		return checkItemProvider;
 	}
 
 	/**
@@ -283,26 +329,49 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.SequenceExecution} instances.
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.Call} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SequenceExecutionItemProvider sequenceExecutionItemProvider;
+	protected CallItemProvider callItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.SequenceExecution}.
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.Call}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createSequenceExecutionAdapter() {
-		if (sequenceExecutionItemProvider == null) {
-			sequenceExecutionItemProvider = new SequenceExecutionItemProvider(this);
+	public Adapter createCallAdapter() {
+		if (callItemProvider == null) {
+			callItemProvider = new CallItemProvider(this);
 		}
 
-		return sequenceExecutionItemProvider;
+		return callItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.CheckRef} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CheckRefItemProvider checkRefItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.CheckRef}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCheckRefAdapter() {
+		if (checkRefItemProvider == null) {
+			checkRefItemProvider = new CheckRefItemProvider(this);
+		}
+
+		return checkRefItemProvider;
 	}
 
 	/**
@@ -429,15 +498,18 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	public void dispose() {
 		if (executionFlowItemProvider != null) executionFlowItemProvider.dispose();
 		if (executionStateItemProvider != null) executionStateItemProvider.dispose();
+		if (reactionItemProvider != null) reactionItemProvider.dispose();
+		if (stateVectorItemProvider != null) stateVectorItemProvider.dispose();
 		if (namedElementItemProvider != null) namedElementItemProvider.dispose();
-		if (cycleItemProvider != null) cycleItemProvider.dispose();
 		if (sequenceItemProvider != null) sequenceItemProvider.dispose();
+		if (cycleItemProvider != null) cycleItemProvider.dispose();
+		if (checkItemProvider != null) checkItemProvider.dispose();
 		if (ifItemProvider != null) ifItemProvider.dispose();
 		if (executionItemProvider != null) executionItemProvider.dispose();
 		if (enterStateItemProvider != null) enterStateItemProvider.dispose();
 		if (exitStateItemProvider != null) exitStateItemProvider.dispose();
-		if (sequenceExecutionItemProvider != null) sequenceExecutionItemProvider.dispose();
-		if (stateVectorItemProvider != null) stateVectorItemProvider.dispose();
+		if (callItemProvider != null) callItemProvider.dispose();
+		if (checkRefItemProvider != null) checkRefItemProvider.dispose();
 	}
 
 }

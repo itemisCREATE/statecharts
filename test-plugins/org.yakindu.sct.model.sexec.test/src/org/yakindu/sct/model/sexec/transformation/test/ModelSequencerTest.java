@@ -6,15 +6,19 @@ import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.If;
+import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.SequencerModule;
 import org.yakindu.sct.model.sgraph.Declaration;
+import org.yakindu.sct.model.sgraph.Entry;
+import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -87,7 +91,7 @@ public class ModelSequencerTest {
 		assertEquals(s1.getName(), flow.getStates().get(0).getSimpleName());
 		If _if = (If) flow.getStates().get(0).getCycle().getSteps().get(0);
 
-		ElementReferenceExpression _ere = (ElementReferenceExpression) _if.getCondition();
+		ElementReferenceExpression _ere = (ElementReferenceExpression) _if.getCheck().getCondition();
 		assertSame(_e1, _ere.getValue());
 	}
 
@@ -172,6 +176,31 @@ public class ModelSequencerTest {
 	}
 	
 	
+	@Test public void testStateReaction_SimpleFlatTSC() {
+		SimpleFlatTSC tsc = new SimpleFlatTSC();
+		
+		ExecutionFlow flow = sequencer.transform(tsc.sc);
+
+		// test state with one outgoing transition
+		ExecutionState s1 = flow.getStates().get(0);
+		ExecutionState s2 = flow.getStates().get(1);
+		assertEquals(tsc.s1.getName(), s1.getSimpleName());
+		assertEquals(tsc.s2.getName(), s2.getSimpleName());
+
+		assertEquals(1, s1.getReactions().size());
+		Reaction reaction = s1.getReactions().get(0);
+
+		assertNotNull(reaction.getCheck());
+		
+		assertNotNull(reaction.getEffect());
+		Sequence seq = (Sequence) reaction.getEffect();
+		assertTrue(seq.getSteps().get(0) instanceof ExitState);
+		assertEquals(s1, ((ExitState)seq.getSteps().get(0)).getState());
+		assertTrue(seq.getSteps().get(1) instanceof EnterState);
+		assertEquals(s2, ((EnterState)seq.getSteps().get(1)).getState());
+		
+	}
+	
 	
 	@Test public void testStateCycle_SimpleFlatTSC() {
 		OrthogonalFlatTSC tsc = new OrthogonalFlatTSC();
@@ -187,15 +216,17 @@ public class ModelSequencerTest {
 		
 		If _if = (If) s1.getCycle().getSteps().get(0);
 		assertNotNull(_if.getThenStep());
-		assertTrue(_if.getThenStep() instanceof Sequence);
+		assertTrue(_if.getThenStep() instanceof Call);
 		assertNull(_if.getElseStep());
 
-		Sequence seq = (Sequence) _if.getThenStep();
-		assertTrue(seq.getSteps().get(0) instanceof ExitState);
-		assertEquals(s1, ((ExitState)seq.getSteps().get(0)).getState());
-		assertTrue(seq.getSteps().get(1) instanceof EnterState);
-		assertEquals(s2, ((EnterState)seq.getSteps().get(1)).getState());
-
+		Call seq = (Call) _if.getThenStep();
+		assertEquals(s1.getReactions().get(0).getEffect(), seq.getStep());
+		
+//		assertTrue(seq.getSteps().get(0) instanceof ExitState);
+//		assertEquals(s1, ((ExitState)seq.getSteps().get(0)).getState());
+//		assertTrue(seq.getSteps().get(1) instanceof EnterState);
+//		assertEquals(s2, ((EnterState)seq.getSteps().get(1)).getState());
+//
 		
 		// test state with two outgoing transitions
 		ExecutionState s3 = flow.getStates().get(2);
@@ -210,6 +241,8 @@ public class ModelSequencerTest {
 
 
 	}
+	
+
 	
 	
 	
@@ -254,7 +287,7 @@ public class ModelSequencerTest {
 
 	
 	@Test
-	public void testTransitionTriggerSequence() {
+	public void testReactionEffectSequence() {
 
 		EventDefinition e1 = _createEventDefinition("e1", null);
 		EventDefinition e2 = _createEventDefinition("e2", null);
@@ -266,16 +299,16 @@ public class ModelSequencerTest {
 		Transition t = SGraphFactory.eINSTANCE.createTransition();
 		t.setTrigger(tr1);
 
-		If s = sequencer.buildTransitionSequence(t);
+		Reaction reaction = sequencer.mapTransition(t);
 
-		assertTrue(s.getCondition() instanceof LogicalOrExpression);
-		assertTrue(((LogicalOrExpression) s.getCondition()).getLeftOperand() instanceof ElementReferenceExpression);
-		assertTrue(((LogicalOrExpression) s.getCondition()).getRightOperand() instanceof ElementReferenceExpression);
+		assertTrue(reaction.getCheck().getCondition() instanceof LogicalOrExpression);
+		assertTrue(((LogicalOrExpression) reaction.getCheck().getCondition()).getLeftOperand() instanceof ElementReferenceExpression);
+		assertTrue(((LogicalOrExpression) reaction.getCheck().getCondition()).getRightOperand() instanceof ElementReferenceExpression);
 
 		assertEquals(e1.getName(),
-				((ElementReferenceExpression)((LogicalOrExpression) s.getCondition()).getLeftOperand()).getValue().getName());
+				((ElementReferenceExpression)((LogicalOrExpression) reaction.getCheck().getCondition()).getLeftOperand()).getValue().getName());
 		assertEquals(e2.getName(),
-				((ElementReferenceExpression)((LogicalOrExpression) s.getCondition()).getRightOperand()).getValue().getName());
+				((ElementReferenceExpression)((LogicalOrExpression) reaction.getCheck().getCondition()).getRightOperand()).getValue().getName());
 	}
 
 	
@@ -373,5 +406,45 @@ public class ModelSequencerTest {
 		assertEquals(3, flow.getStateVector().getSize());
 		assertEquals(0, flow.getStateVector().getOffset());
 	}
+
 	
+	/**
+	 * The state vector descriptor of the ExecutionFlow must have an offset of 0 and a size that is 
+	 * the maximum orthogonality of the statechart.
+	 */
+	@Test public void testSCStateVectorEmptyRegion() {
+		Statechart sc = _createStatechart("test");
+		
+		{  // first top region 
+			Region r = _createRegion("sc_r1", sc);
+		}
+	
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		assertNotNull(flow.getStateVector());
+		assertEquals(0, flow.getStateVector().getSize());
+		assertEquals(0, flow.getStateVector().getOffset());
+	}
+
+	/**
+	 * The state vector descriptor of the ExecutionFlow must have an offset of 0 and a size that is 
+	 * the maximum orthogonality of the statechart.
+	 */
+	@Test public void testSCStateVectorPseudoStates() {
+		Statechart sc = _createStatechart("test");
+		
+		{  // first top region 
+			Region r = _createRegion("sc_r1", sc);
+			Entry e = _createEntry(EntryKind.INITIAL, null, r);
+			Entry s = _createEntry(null, "s", r);
+			_createTransition(e, s);
+		}
+	
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		assertNotNull(flow.getStateVector());
+		assertEquals(0, flow.getStateVector().getSize());
+		assertEquals(0, flow.getStateVector().getOffset());
+	}
+
 }

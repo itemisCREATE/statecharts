@@ -13,40 +13,40 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.yakindu.sct.model.sexec.Sequence;
-import org.yakindu.sct.model.sexec.SequenceExecution;
+import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.SexecPackage;
+import org.yakindu.sct.model.sexec.Step;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Sequence Execution</b></em>'.
+ * An implementation of the model object '<em><b>Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.SequenceExecutionImpl#getSequence <em>Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.CallImpl#getStep <em>Step</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SequenceExecutionImpl extends StepImpl implements SequenceExecution {
+public class CallImpl extends StepImpl implements Call {
 	/**
-	 * The cached value of the '{@link #getSequence() <em>Sequence</em>}' reference.
+	 * The cached value of the '{@link #getStep() <em>Step</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSequence()
+	 * @see #getStep()
 	 * @generated
 	 * @ordered
 	 */
-	protected Sequence sequence;
+	protected Step step;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SequenceExecutionImpl() {
+	protected CallImpl() {
 		super();
 	}
 
@@ -57,7 +57,7 @@ public class SequenceExecutionImpl extends StepImpl implements SequenceExecution
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return SexecPackage.Literals.SEQUENCE_EXECUTION;
+		return SexecPackage.Literals.CALL;
 	}
 
 	/**
@@ -65,16 +65,16 @@ public class SequenceExecutionImpl extends StepImpl implements SequenceExecution
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Sequence getSequence() {
-		if (sequence != null && sequence.eIsProxy()) {
-			InternalEObject oldSequence = (InternalEObject)sequence;
-			sequence = (Sequence)eResolveProxy(oldSequence);
-			if (sequence != oldSequence) {
+	public Step getStep() {
+		if (step != null && step.eIsProxy()) {
+			InternalEObject oldStep = (InternalEObject)step;
+			step = (Step)eResolveProxy(oldStep);
+			if (step != oldStep) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SexecPackage.SEQUENCE_EXECUTION__SEQUENCE, oldSequence, sequence));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SexecPackage.CALL__STEP, oldStep, step));
 			}
 		}
-		return sequence;
+		return step;
 	}
 
 	/**
@@ -82,8 +82,8 @@ public class SequenceExecutionImpl extends StepImpl implements SequenceExecution
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Sequence basicGetSequence() {
-		return sequence;
+	public Step basicGetStep() {
+		return step;
 	}
 
 	/**
@@ -91,11 +91,11 @@ public class SequenceExecutionImpl extends StepImpl implements SequenceExecution
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSequence(Sequence newSequence) {
-		Sequence oldSequence = sequence;
-		sequence = newSequence;
+	public void setStep(Step newStep) {
+		Step oldStep = step;
+		step = newStep;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.SEQUENCE_EXECUTION__SEQUENCE, oldSequence, sequence));
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.CALL__STEP, oldStep, step));
 	}
 
 	/**
@@ -106,9 +106,9 @@ public class SequenceExecutionImpl extends StepImpl implements SequenceExecution
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SexecPackage.SEQUENCE_EXECUTION__SEQUENCE:
-				if (resolve) return getSequence();
-				return basicGetSequence();
+			case SexecPackage.CALL__STEP:
+				if (resolve) return getStep();
+				return basicGetStep();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -121,8 +121,8 @@ public class SequenceExecutionImpl extends StepImpl implements SequenceExecution
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SexecPackage.SEQUENCE_EXECUTION__SEQUENCE:
-				setSequence((Sequence)newValue);
+			case SexecPackage.CALL__STEP:
+				setStep((Step)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -136,8 +136,8 @@ public class SequenceExecutionImpl extends StepImpl implements SequenceExecution
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SexecPackage.SEQUENCE_EXECUTION__SEQUENCE:
-				setSequence((Sequence)null);
+			case SexecPackage.CALL__STEP:
+				setStep((Step)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -151,10 +151,10 @@ public class SequenceExecutionImpl extends StepImpl implements SequenceExecution
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SexecPackage.SEQUENCE_EXECUTION__SEQUENCE:
-				return sequence != null;
+			case SexecPackage.CALL__STEP:
+				return step != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //SequenceExecutionImpl
+} //CallImpl

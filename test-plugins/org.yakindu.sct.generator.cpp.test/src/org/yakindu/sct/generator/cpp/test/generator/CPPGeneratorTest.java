@@ -78,7 +78,7 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 				"src-gen");
 		
 		assertNotNull(((RegularEventSpec) ((ReactionTrigger) statechart.getRegions().get(0).getVertices().get(0).getOutgoingTransitions().get(0).getTrigger()).getTriggers().get(0)).getEvent());
-		assertNotNull(((ElementReferenceExpression) ((If) executionFlow.getStates().get(0).getCycle().getSteps().get(0)).getCondition()).getValue());
+		assertNotNull(((ElementReferenceExpression) ((If) executionFlow.getStates().get(0).getCycle().getSteps().get(0)).getCheck().getCondition()).getValue());
 	}
 
 	
@@ -107,7 +107,7 @@ public class CPPGeneratorTest extends AbstractGeneratorTest {
 				"src-gen");
 		
 		
-		assertNotNull(((ElementReferenceExpression) ((If) flow.getStates().get(0).getCycle().getSteps().get(0)).getCondition()).getValue());
+		assertNotNull(((ElementReferenceExpression) ((If) flow.getStates().get(0).getCycle().getSteps().get(0)).getCheck().getCondition()).getValue());
 
 	}
 

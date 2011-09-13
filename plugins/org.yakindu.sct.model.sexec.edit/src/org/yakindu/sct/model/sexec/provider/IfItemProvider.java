@@ -25,6 +25,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.yakindu.sct.model.sexec.If;
+import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 
@@ -125,7 +126,7 @@ public class IfItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(SexecPackage.Literals.IF__CONDITION);
+			childrenFeatures.add(SexecPackage.Literals.IF__CHECK);
 		}
 		return childrenFeatures;
 	}
@@ -162,7 +163,7 @@ public class IfItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((If)object).getComment();
+		String label = ((If)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_If_type") :
 			getString("_UI_If_type") + " " + label;
@@ -180,7 +181,7 @@ public class IfItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(If.class)) {
-			case SexecPackage.IF__CONDITION:
+			case SexecPackage.IF__CHECK:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -200,8 +201,13 @@ public class IfItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.IF__CONDITION,
-				 SGraphFactory.eINSTANCE.createStatement()));
+				(SexecPackage.Literals.IF__CHECK,
+				 SexecFactory.eINSTANCE.createCheck()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.IF__CHECK,
+				 SexecFactory.eINSTANCE.createCheckRef()));
 	}
 
 }

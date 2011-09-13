@@ -29,7 +29,7 @@ import org.yakindu.sct.model.sexec.Step;
  *
  * @generated
  */
-public abstract class StepImpl extends EObjectImpl implements Step {
+public abstract class StepImpl extends NamedElementImpl implements Step {
 	/**
 	 * The default value of the '{@link #getComment() <em>Comment</em>}' attribute.
 	 * <!-- begin-user-doc -->

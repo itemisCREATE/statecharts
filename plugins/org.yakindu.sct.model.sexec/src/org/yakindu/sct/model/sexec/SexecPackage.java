@@ -141,7 +141,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getNamedElement()
 	 * @generated
 	 */
-	int NAMED_ELEMENT = 2;
+	int NAMED_ELEMENT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -199,13 +199,77 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_STATE__CYCLE = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__REACTIONS = NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Leaf</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__LEAF = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Execution State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int EXECUTION_STATE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ReactionImpl <em>Reaction</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.ReactionImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getReaction()
+	 * @generated
+	 */
+	int REACTION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REACTION__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Check</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REACTION__CHECK = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Effect</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REACTION__EFFECT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Reaction</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REACTION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StepImpl <em>Step</em>}' class.
@@ -215,25 +279,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStep()
 	 * @generated
 	 */
-	int STEP = 4;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STEP__COMMENT = 0;
-
-	/**
-	 * The number of structural features of the '<em>Step</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STEP_FEATURE_COUNT = 1;
+	int STEP = 5;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.SequenceImpl <em>Sequence</em>}' class.
@@ -243,7 +289,140 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getSequence()
 	 * @generated
 	 */
-	int SEQUENCE = 5;
+	int SEQUENCE = 6;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CycleImpl <em>Cycle</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.CycleImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCycle()
+	 * @generated
+	 */
+	int CYCLE = 7;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CheckImpl <em>Check</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.CheckImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCheck()
+	 * @generated
+	 */
+	int CHECK = 8;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.IfImpl <em>If</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.IfImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getIf()
+	 * @generated
+	 */
+	int IF = 9;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionImpl <em>Execution</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.ExecutionImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecution()
+	 * @generated
+	 */
+	int EXECUTION = 10;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.EnterStateImpl <em>Enter State</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.EnterStateImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getEnterState()
+	 * @generated
+	 */
+	int ENTER_STATE = 11;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExitStateImpl <em>Exit State</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.ExitStateImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExitState()
+	 * @generated
+	 */
+	int EXIT_STATE = 12;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StateVectorImpl <em>State Vector</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.StateVectorImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateVector()
+	 * @generated
+	 */
+	int STATE_VECTOR = 3;
+
+	/**
+	 * The feature id for the '<em><b>Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_VECTOR__SIZE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_VECTOR__OFFSET = 1;
+
+	/**
+	 * The number of structural features of the '<em>State Vector</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_VECTOR_FEATURE_COUNT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP__COMMENT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Step</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQUENCE__NAME = STEP__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -255,22 +434,13 @@ public interface SexecPackage extends EPackage {
 	int SEQUENCE__COMMENT = STEP__COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEQUENCE__NAME = STEP_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Steps</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEQUENCE__STEPS = STEP_FEATURE_COUNT + 1;
+	int SEQUENCE__STEPS = STEP_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Sequence</em>' class.
@@ -279,26 +449,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEQUENCE_FEATURE_COUNT = STEP_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CycleImpl <em>Cycle</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.CycleImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCycle()
-	 * @generated
-	 */
-	int CYCLE = 3;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CYCLE__COMMENT = SEQUENCE__COMMENT;
+	int SEQUENCE_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -308,6 +459,15 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int CYCLE__NAME = SEQUENCE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYCLE__COMMENT = SEQUENCE__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Steps</b></em>' containment reference list.
@@ -328,14 +488,49 @@ public interface SexecPackage extends EPackage {
 	int CYCLE_FEATURE_COUNT = SEQUENCE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.IfImpl <em>If</em>}' class.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.IfImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getIf()
 	 * @generated
+	 * @ordered
 	 */
-	int IF = 6;
+	int CHECK__NAME = STEP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK__COMMENT = STEP__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK__CONDITION = STEP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Check</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF__NAME = STEP__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -347,16 +542,16 @@ public interface SexecPackage extends EPackage {
 	int IF__COMMENT = STEP__COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
+	 * The feature id for the '<em><b>Check</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IF__CONDITION = STEP_FEATURE_COUNT + 0;
+	int IF__CHECK = STEP_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Then Step</b></em>' reference.
+	 * The feature id for the '<em><b>Then Step</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -365,7 +560,7 @@ public interface SexecPackage extends EPackage {
 	int IF__THEN_STEP = STEP_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Else Step</b></em>' reference.
+	 * The feature id for the '<em><b>Else Step</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -383,14 +578,13 @@ public interface SexecPackage extends EPackage {
 	int IF_FEATURE_COUNT = STEP_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionImpl <em>Execution</em>}' class.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.ExecutionImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecution()
 	 * @generated
+	 * @ordered
 	 */
-	int EXECUTION = 7;
+	int EXECUTION__NAME = STEP__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -420,14 +614,13 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.EnterStateImpl <em>Enter State</em>}' class.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.EnterStateImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getEnterState()
 	 * @generated
+	 * @ordered
 	 */
-	int ENTER_STATE = 8;
+	int ENTER_STATE__NAME = STEP__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -457,14 +650,13 @@ public interface SexecPackage extends EPackage {
 	int ENTER_STATE_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExitStateImpl <em>Exit State</em>}' class.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.ExitStateImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExitState()
 	 * @generated
+	 * @ordered
 	 */
-	int EXIT_STATE = 9;
+	int EXIT_STATE__NAME = STEP__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -494,14 +686,23 @@ public interface SexecPackage extends EPackage {
 	int EXIT_STATE_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.SequenceExecutionImpl <em>Sequence Execution</em>}' class.
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CallImpl <em>Call</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.SequenceExecutionImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getSequenceExecution()
+	 * @see org.yakindu.sct.model.sexec.impl.CallImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCall()
 	 * @generated
 	 */
-	int SEQUENCE_EXECUTION = 10;
+	int CALL = 13;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL__NAME = STEP__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -510,63 +711,80 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEQUENCE_EXECUTION__COMMENT = STEP__COMMENT;
+	int CALL__COMMENT = STEP__COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Sequence</b></em>' reference.
+	 * The feature id for the '<em><b>Step</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEQUENCE_EXECUTION__SEQUENCE = STEP_FEATURE_COUNT + 0;
+	int CALL__STEP = STEP_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Sequence Execution</em>' class.
+	 * The number of structural features of the '<em>Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEQUENCE_EXECUTION_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
-
+	int CALL_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StateVectorImpl <em>State Vector</em>}' class.
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CheckRefImpl <em>Check Ref</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.StateVectorImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateVector()
+	 * @see org.yakindu.sct.model.sexec.impl.CheckRefImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCheckRef()
 	 * @generated
 	 */
-	int STATE_VECTOR = 11;
+	int CHECK_REF = 14;
 
 	/**
-	 * The feature id for the '<em><b>Size</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE_VECTOR__SIZE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Offset</b></em>' attribute.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_VECTOR__OFFSET = 1;
+	int CHECK_REF__NAME = CHECK__NAME;
 
 	/**
-	 * The number of structural features of the '<em>State Vector</em>' class.
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_VECTOR_FEATURE_COUNT = 2;
+	int CHECK_REF__COMMENT = CHECK__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK_REF__CONDITION = CHECK__CONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Check</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK_REF__CHECK = CHECK_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Check Ref</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK_REF_FEATURE_COUNT = CHECK_FEATURE_COUNT + 1;
 
 
 	/**
@@ -656,6 +874,60 @@ public interface SexecPackage extends EPackage {
 	EReference getExecutionState_Cycle();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sexec.ExecutionState#getReactions <em>Reactions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Reactions</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionState#getReactions()
+	 * @see #getExecutionState()
+	 * @generated
+	 */
+	EReference getExecutionState_Reactions();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sexec.ExecutionState#isLeaf <em>Leaf</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Leaf</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionState#isLeaf()
+	 * @see #getExecutionState()
+	 * @generated
+	 */
+	EAttribute getExecutionState_Leaf();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.Reaction <em>Reaction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Reaction</em>'.
+	 * @see org.yakindu.sct.model.sexec.Reaction
+	 * @generated
+	 */
+	EClass getReaction();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.Reaction#getCheck <em>Check</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Check</em>'.
+	 * @see org.yakindu.sct.model.sexec.Reaction#getCheck()
+	 * @see #getReaction()
+	 * @generated
+	 */
+	EReference getReaction_Check();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.Reaction#getEffect <em>Effect</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Effect</em>'.
+	 * @see org.yakindu.sct.model.sexec.Reaction#getEffect()
+	 * @see #getReaction()
+	 * @generated
+	 */
+	EReference getReaction_Effect();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.NamedElement <em>Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -685,6 +957,27 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCycle();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.Check <em>Check</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Check</em>'.
+	 * @see org.yakindu.sct.model.sexec.Check
+	 * @generated
+	 */
+	EClass getCheck();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.Check#getCondition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Condition</em>'.
+	 * @see org.yakindu.sct.model.sexec.Check#getCondition()
+	 * @see #getCheck()
+	 * @generated
+	 */
+	EReference getCheck_Condition();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.Step <em>Step</em>}'.
@@ -739,21 +1032,21 @@ public interface SexecPackage extends EPackage {
 	EClass getIf();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.If#getCondition <em>Condition</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.If#getCheck <em>Check</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Condition</em>'.
-	 * @see org.yakindu.sct.model.sexec.If#getCondition()
+	 * @return the meta object for the containment reference '<em>Check</em>'.
+	 * @see org.yakindu.sct.model.sexec.If#getCheck()
 	 * @see #getIf()
 	 * @generated
 	 */
-	EReference getIf_Condition();
+	EReference getIf_Check();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.If#getThenStep <em>Then Step</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.If#getThenStep <em>Then Step</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Then Step</em>'.
+	 * @return the meta object for the containment reference '<em>Then Step</em>'.
 	 * @see org.yakindu.sct.model.sexec.If#getThenStep()
 	 * @see #getIf()
 	 * @generated
@@ -761,10 +1054,10 @@ public interface SexecPackage extends EPackage {
 	EReference getIf_ThenStep();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.If#getElseStep <em>Else Step</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.If#getElseStep <em>Else Step</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Else Step</em>'.
+	 * @return the meta object for the containment reference '<em>Else Step</em>'.
 	 * @see org.yakindu.sct.model.sexec.If#getElseStep()
 	 * @see #getIf()
 	 * @generated
@@ -835,25 +1128,46 @@ public interface SexecPackage extends EPackage {
 	EReference getExitState_State();
 
 	/**
-	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.SequenceExecution <em>Sequence Execution</em>}'.
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.Call <em>Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Sequence Execution</em>'.
-	 * @see org.yakindu.sct.model.sexec.SequenceExecution
+	 * @return the meta object for class '<em>Call</em>'.
+	 * @see org.yakindu.sct.model.sexec.Call
 	 * @generated
 	 */
-	EClass getSequenceExecution();
+	EClass getCall();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.SequenceExecution#getSequence <em>Sequence</em>}'.
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.Call#getStep <em>Step</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Sequence</em>'.
-	 * @see org.yakindu.sct.model.sexec.SequenceExecution#getSequence()
-	 * @see #getSequenceExecution()
+	 * @return the meta object for the reference '<em>Step</em>'.
+	 * @see org.yakindu.sct.model.sexec.Call#getStep()
+	 * @see #getCall()
 	 * @generated
 	 */
-	EReference getSequenceExecution_Sequence();
+	EReference getCall_Step();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.CheckRef <em>Check Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Check Ref</em>'.
+	 * @see org.yakindu.sct.model.sexec.CheckRef
+	 * @generated
+	 */
+	EClass getCheckRef();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.CheckRef#getCheck <em>Check</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Check</em>'.
+	 * @see org.yakindu.sct.model.sexec.CheckRef#getCheck()
+	 * @see #getCheckRef()
+	 * @generated
+	 */
+	EReference getCheckRef_Check();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.StateVector <em>State Vector</em>}'.
@@ -978,6 +1292,48 @@ public interface SexecPackage extends EPackage {
 		EReference EXECUTION_STATE__CYCLE = eINSTANCE.getExecutionState_Cycle();
 
 		/**
+		 * The meta object literal for the '<em><b>Reactions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_STATE__REACTIONS = eINSTANCE.getExecutionState_Reactions();
+
+		/**
+		 * The meta object literal for the '<em><b>Leaf</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXECUTION_STATE__LEAF = eINSTANCE.getExecutionState_Leaf();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ReactionImpl <em>Reaction</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.ReactionImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getReaction()
+		 * @generated
+		 */
+		EClass REACTION = eINSTANCE.getReaction();
+
+		/**
+		 * The meta object literal for the '<em><b>Check</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REACTION__CHECK = eINSTANCE.getReaction_Check();
+
+		/**
+		 * The meta object literal for the '<em><b>Effect</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REACTION__EFFECT = eINSTANCE.getReaction_Effect();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.NamedElementImpl <em>Named Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1004,6 +1360,24 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CYCLE = eINSTANCE.getCycle();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.CheckImpl <em>Check</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.CheckImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCheck()
+		 * @generated
+		 */
+		EClass CHECK = eINSTANCE.getCheck();
+
+		/**
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CHECK__CONDITION = eINSTANCE.getCheck_Condition();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.StepImpl <em>Step</em>}' class.
@@ -1052,15 +1426,15 @@ public interface SexecPackage extends EPackage {
 		EClass IF = eINSTANCE.getIf();
 
 		/**
-		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Check</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IF__CONDITION = eINSTANCE.getIf_Condition();
+		EReference IF__CHECK = eINSTANCE.getIf_Check();
 
 		/**
-		 * The meta object literal for the '<em><b>Then Step</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Then Step</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1068,7 +1442,7 @@ public interface SexecPackage extends EPackage {
 		EReference IF__THEN_STEP = eINSTANCE.getIf_ThenStep();
 
 		/**
-		 * The meta object literal for the '<em><b>Else Step</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Else Step</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1130,22 +1504,40 @@ public interface SexecPackage extends EPackage {
 		EReference EXIT_STATE__STATE = eINSTANCE.getExitState_State();
 
 		/**
-		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.SequenceExecutionImpl <em>Sequence Execution</em>}' class.
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.CallImpl <em>Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.yakindu.sct.model.sexec.impl.SequenceExecutionImpl
-		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getSequenceExecution()
+		 * @see org.yakindu.sct.model.sexec.impl.CallImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCall()
 		 * @generated
 		 */
-		EClass SEQUENCE_EXECUTION = eINSTANCE.getSequenceExecution();
+		EClass CALL = eINSTANCE.getCall();
 
 		/**
-		 * The meta object literal for the '<em><b>Sequence</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Step</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SEQUENCE_EXECUTION__SEQUENCE = eINSTANCE.getSequenceExecution_Sequence();
+		EReference CALL__STEP = eINSTANCE.getCall_Step();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.CheckRefImpl <em>Check Ref</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.CheckRefImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCheckRef()
+		 * @generated
+		 */
+		EClass CHECK_REF = eINSTANCE.getCheckRef();
+
+		/**
+		 * The meta object literal for the '<em><b>Check</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CHECK_REF__CHECK = eINSTANCE.getCheckRef_Check();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.StateVectorImpl <em>State Vector</em>}' class.

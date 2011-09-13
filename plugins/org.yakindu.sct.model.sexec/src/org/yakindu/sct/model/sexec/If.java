@@ -16,7 +16,7 @@ import org.yakindu.sct.model.sgraph.Statement;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sexec.If#getCondition <em>Condition</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.If#getCheck <em>Check</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.If#getThenStep <em>Then Step</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.If#getElseStep <em>Else Step</em>}</li>
  * </ul>
@@ -28,78 +28,78 @@ import org.yakindu.sct.model.sgraph.Statement;
  */
 public interface If extends Step {
 	/**
-	 * Returns the value of the '<em><b>Condition</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Check</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Condition</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Check</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Condition</em>' containment reference.
-	 * @see #setCondition(Statement)
-	 * @see org.yakindu.sct.model.sexec.SexecPackage#getIf_Condition()
+	 * @return the value of the '<em>Check</em>' containment reference.
+	 * @see #setCheck(Check)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getIf_Check()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Statement getCondition();
+	Check getCheck();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.If#getCondition <em>Condition</em>}' containment reference.
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.If#getCheck <em>Check</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Condition</em>' containment reference.
-	 * @see #getCondition()
+	 * @param value the new value of the '<em>Check</em>' containment reference.
+	 * @see #getCheck()
 	 * @generated
 	 */
-	void setCondition(Statement value);
+	void setCheck(Check value);
 
 	/**
-	 * Returns the value of the '<em><b>Then Step</b></em>' reference.
+	 * Returns the value of the '<em><b>Then Step</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Then Step</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Then Step</em>' reference.
+	 * @return the value of the '<em>Then Step</em>' containment reference.
 	 * @see #setThenStep(Step)
 	 * @see org.yakindu.sct.model.sexec.SexecPackage#getIf_ThenStep()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	Step getThenStep();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.If#getThenStep <em>Then Step</em>}' reference.
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.If#getThenStep <em>Then Step</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Then Step</em>' reference.
+	 * @param value the new value of the '<em>Then Step</em>' containment reference.
 	 * @see #getThenStep()
 	 * @generated
 	 */
 	void setThenStep(Step value);
 
 	/**
-	 * Returns the value of the '<em><b>Else Step</b></em>' reference.
+	 * Returns the value of the '<em><b>Else Step</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Else Step</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Else Step</em>' reference.
+	 * @return the value of the '<em>Else Step</em>' containment reference.
 	 * @see #setElseStep(Step)
 	 * @see org.yakindu.sct.model.sexec.SexecPackage#getIf_ElseStep()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	Step getElseStep();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.If#getElseStep <em>Else Step</em>}' reference.
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.If#getElseStep <em>Else Step</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Else Step</em>' reference.
+	 * @param value the new value of the '<em>Else Step</em>' containment reference.
 	 * @see #getElseStep()
 	 * @generated
 	 */

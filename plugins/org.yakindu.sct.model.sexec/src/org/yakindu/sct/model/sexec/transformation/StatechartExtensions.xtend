@@ -4,6 +4,9 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Trigger
+import org.yakindu.sct.model.sgraph.Reaction
+import org.yakindu.sct.model.sgraph.Transition
 
 class StatechartExtensions {
 	
@@ -30,4 +33,28 @@ class StatechartExtensions {
 		} else 1
 	}
 
+
+	//=================================================================
+	// navigation util extensions
+	//
+		
+	def reaction(Trigger tr) { tr.eContainer as Reaction }
+
+
+	//=================================================================
+	// naming util extensions
+	//
+
+	def dispatch String id(Object obj) { null }
+		
+		
+	/**
+	 * The id of a transition is unique within the context of its source vertex.
+	 */	
+	def dispatch String id(Transition t) {
+		"tr" + if (t.source != null) t.source.outgoingTransitions.indexOf(t) else ""
+	}
+	
+	
+	
 }

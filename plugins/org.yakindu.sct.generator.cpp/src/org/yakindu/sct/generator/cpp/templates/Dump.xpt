@@ -28,6 +28,8 @@ Execution States:
 Name: «this.name»
 Simple Name: «this.simpleName»
 
+«EXPAND ReactionFunctions FOR this»
+
 Cycle: «EXPAND code FOR this.cycle»
 «ENDDEFINE»
 
@@ -39,7 +41,7 @@ Cycle: «EXPAND code FOR this.cycle»
 
 
 «DEFINE code FOR If»
-		if («EXPAND code FOR condition») then «EXPAND code FOR this.thenStep»
+		if («EXPAND code FOR check») then «EXPAND code FOR this.thenStep»
 		«IF this.elseStep != null -»else «EXPAND code FOR this.elseStep»«ENDIF-»
 «ENDDEFINE»
 
@@ -49,6 +51,19 @@ Cycle: «EXPAND code FOR this.cycle»
 
 «DEFINE code FOR ExitState -»
  exit «this.state.name -»
+«ENDDEFINE»
+
+«DEFINE code FOR Check -»
+«EXPAND code FOR this.condition -»
+«ENDDEFINE»
+
+
+«DEFINE code FOR CheckRef -»
+check_«this.check.name -»()
+«ENDDEFINE»
+
+«DEFINE code FOR Call -»
+take_«this.step.name -»()
 «ENDDEFINE»
 
 
@@ -68,4 +83,17 @@ Cycle: «EXPAND code FOR this.cycle»
 
 «DEFINE code FOR ElementReferenceExpression -»
 «this.value.name -»
+«ENDDEFINE»
+
+
+«DEFINE ReactionFunctions FOR ExecutionState»
+«FOREACH reactions AS r»
+public boolean check_«r.name»() {
+	«EXPAND code FOR r.check»
+}
+
+public void take_«r.name»() {
+	«EXPAND code FOR r.effect»
+}
+«ENDFOREACH»
 «ENDDEFINE»

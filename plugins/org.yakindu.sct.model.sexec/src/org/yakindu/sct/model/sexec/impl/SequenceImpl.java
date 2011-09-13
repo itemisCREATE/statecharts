@@ -33,7 +33,6 @@ import org.yakindu.sct.model.sexec.Step;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.SequenceImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.SequenceImpl#getSteps <em>Steps</em>}</li>
  * </ul>
  * </p>
@@ -41,26 +40,6 @@ import org.yakindu.sct.model.sexec.Step;
  * @generated
  */
 public class SequenceImpl extends StepImpl implements Sequence {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -88,27 +67,6 @@ public class SequenceImpl extends StepImpl implements Sequence {
 	@Override
 	protected EClass eStaticClass() {
 		return SexecPackage.Literals.SEQUENCE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.SEQUENCE__NAME, oldName, name));
 	}
 
 	/**
@@ -145,8 +103,6 @@ public class SequenceImpl extends StepImpl implements Sequence {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SexecPackage.SEQUENCE__NAME:
-				return getName();
 			case SexecPackage.SEQUENCE__STEPS:
 				return getSteps();
 		}
@@ -162,9 +118,6 @@ public class SequenceImpl extends StepImpl implements Sequence {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SexecPackage.SEQUENCE__NAME:
-				setName((String)newValue);
-				return;
 			case SexecPackage.SEQUENCE__STEPS:
 				getSteps().clear();
 				getSteps().addAll((Collection<? extends Step>)newValue);
@@ -181,9 +134,6 @@ public class SequenceImpl extends StepImpl implements Sequence {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SexecPackage.SEQUENCE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case SexecPackage.SEQUENCE__STEPS:
 				getSteps().clear();
 				return;
@@ -199,60 +149,10 @@ public class SequenceImpl extends StepImpl implements Sequence {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SexecPackage.SEQUENCE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case SexecPackage.SEQUENCE__STEPS:
 				return steps != null && !steps.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == NamedElement.class) {
-			switch (derivedFeatureID) {
-				case SexecPackage.SEQUENCE__NAME: return SexecPackage.NAMED_ELEMENT__NAME;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == NamedElement.class) {
-			switch (baseFeatureID) {
-				case SexecPackage.NAMED_ELEMENT__NAME: return SexecPackage.SEQUENCE__NAME;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //SequenceImpl
