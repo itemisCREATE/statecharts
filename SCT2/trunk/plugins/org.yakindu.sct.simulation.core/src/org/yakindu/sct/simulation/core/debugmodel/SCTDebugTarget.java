@@ -40,7 +40,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 
 	public SCTDebugTarget(ILaunch launch, ISGraphExecutionFacade facade,
 			String resourceString) throws CoreException {
-		super(null,resourceString);
+		super(null, resourceString);
 		this.launch = launch;
 		this.facade = facade;
 		thread = new SCTDebugThread(this, facade, resourceString);
@@ -135,12 +135,10 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 		return launch;
 	}
 
-
 	public IDebugTarget getDebugTarget() {
 		return this;
 	}
 
-	
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (adapter == SGraphSimulationSession.class)
 			return thread.getAdapter(SGraphSimulationSession.class);
