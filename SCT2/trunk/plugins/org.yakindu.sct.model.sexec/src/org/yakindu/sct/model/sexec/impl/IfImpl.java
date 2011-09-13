@@ -11,6 +11,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.Step;
@@ -23,7 +24,7 @@ import org.yakindu.sct.model.sgraph.Statement;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.IfImpl#getCondition <em>Condition</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.IfImpl#getCheck <em>Check</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.IfImpl#getThenStep <em>Then Step</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.IfImpl#getElseStep <em>Else Step</em>}</li>
  * </ul>
@@ -33,17 +34,17 @@ import org.yakindu.sct.model.sgraph.Statement;
  */
 public class IfImpl extends StepImpl implements If {
 	/**
-	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
+	 * The cached value of the '{@link #getCheck() <em>Check</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCondition()
+	 * @see #getCheck()
 	 * @generated
 	 * @ordered
 	 */
-	protected Statement condition;
+	protected Check check;
 
 	/**
-	 * The cached value of the '{@link #getThenStep() <em>Then Step</em>}' reference.
+	 * The cached value of the '{@link #getThenStep() <em>Then Step</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getThenStep()
@@ -53,7 +54,7 @@ public class IfImpl extends StepImpl implements If {
 	protected Step thenStep;
 
 	/**
-	 * The cached value of the '{@link #getElseStep() <em>Else Step</em>}' reference.
+	 * The cached value of the '{@link #getElseStep() <em>Else Step</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getElseStep()
@@ -86,8 +87,8 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Statement getCondition() {
-		return condition;
+	public Check getCheck() {
+		return check;
 	}
 
 	/**
@@ -95,11 +96,11 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCondition(Statement newCondition, NotificationChain msgs) {
-		Statement oldCondition = condition;
-		condition = newCondition;
+	public NotificationChain basicSetCheck(Check newCheck, NotificationChain msgs) {
+		Check oldCheck = check;
+		check = newCheck;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.IF__CONDITION, oldCondition, newCondition);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.IF__CHECK, oldCheck, newCheck);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -110,18 +111,18 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCondition(Statement newCondition) {
-		if (newCondition != condition) {
+	public void setCheck(Check newCheck) {
+		if (newCheck != check) {
 			NotificationChain msgs = null;
-			if (condition != null)
-				msgs = ((InternalEObject)condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.IF__CONDITION, null, msgs);
-			if (newCondition != null)
-				msgs = ((InternalEObject)newCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.IF__CONDITION, null, msgs);
-			msgs = basicSetCondition(newCondition, msgs);
+			if (check != null)
+				msgs = ((InternalEObject)check).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.IF__CHECK, null, msgs);
+			if (newCheck != null)
+				msgs = ((InternalEObject)newCheck).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.IF__CHECK, null, msgs);
+			msgs = basicSetCheck(newCheck, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.IF__CONDITION, newCondition, newCondition));
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.IF__CHECK, newCheck, newCheck));
 	}
 
 	/**
@@ -130,14 +131,6 @@ public class IfImpl extends StepImpl implements If {
 	 * @generated
 	 */
 	public Step getThenStep() {
-		if (thenStep != null && thenStep.eIsProxy()) {
-			InternalEObject oldThenStep = (InternalEObject)thenStep;
-			thenStep = (Step)eResolveProxy(oldThenStep);
-			if (thenStep != oldThenStep) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SexecPackage.IF__THEN_STEP, oldThenStep, thenStep));
-			}
-		}
 		return thenStep;
 	}
 
@@ -146,8 +139,14 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Step basicGetThenStep() {
-		return thenStep;
+	public NotificationChain basicSetThenStep(Step newThenStep, NotificationChain msgs) {
+		Step oldThenStep = thenStep;
+		thenStep = newThenStep;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.IF__THEN_STEP, oldThenStep, newThenStep);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -156,10 +155,17 @@ public class IfImpl extends StepImpl implements If {
 	 * @generated
 	 */
 	public void setThenStep(Step newThenStep) {
-		Step oldThenStep = thenStep;
-		thenStep = newThenStep;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.IF__THEN_STEP, oldThenStep, thenStep));
+		if (newThenStep != thenStep) {
+			NotificationChain msgs = null;
+			if (thenStep != null)
+				msgs = ((InternalEObject)thenStep).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.IF__THEN_STEP, null, msgs);
+			if (newThenStep != null)
+				msgs = ((InternalEObject)newThenStep).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.IF__THEN_STEP, null, msgs);
+			msgs = basicSetThenStep(newThenStep, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.IF__THEN_STEP, newThenStep, newThenStep));
 	}
 
 	/**
@@ -168,14 +174,6 @@ public class IfImpl extends StepImpl implements If {
 	 * @generated
 	 */
 	public Step getElseStep() {
-		if (elseStep != null && elseStep.eIsProxy()) {
-			InternalEObject oldElseStep = (InternalEObject)elseStep;
-			elseStep = (Step)eResolveProxy(oldElseStep);
-			if (elseStep != oldElseStep) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SexecPackage.IF__ELSE_STEP, oldElseStep, elseStep));
-			}
-		}
 		return elseStep;
 	}
 
@@ -184,8 +182,14 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Step basicGetElseStep() {
-		return elseStep;
+	public NotificationChain basicSetElseStep(Step newElseStep, NotificationChain msgs) {
+		Step oldElseStep = elseStep;
+		elseStep = newElseStep;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.IF__ELSE_STEP, oldElseStep, newElseStep);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -194,10 +198,17 @@ public class IfImpl extends StepImpl implements If {
 	 * @generated
 	 */
 	public void setElseStep(Step newElseStep) {
-		Step oldElseStep = elseStep;
-		elseStep = newElseStep;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.IF__ELSE_STEP, oldElseStep, elseStep));
+		if (newElseStep != elseStep) {
+			NotificationChain msgs = null;
+			if (elseStep != null)
+				msgs = ((InternalEObject)elseStep).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.IF__ELSE_STEP, null, msgs);
+			if (newElseStep != null)
+				msgs = ((InternalEObject)newElseStep).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.IF__ELSE_STEP, null, msgs);
+			msgs = basicSetElseStep(newElseStep, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.IF__ELSE_STEP, newElseStep, newElseStep));
 	}
 
 	/**
@@ -208,8 +219,12 @@ public class IfImpl extends StepImpl implements If {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SexecPackage.IF__CONDITION:
-				return basicSetCondition(null, msgs);
+			case SexecPackage.IF__CHECK:
+				return basicSetCheck(null, msgs);
+			case SexecPackage.IF__THEN_STEP:
+				return basicSetThenStep(null, msgs);
+			case SexecPackage.IF__ELSE_STEP:
+				return basicSetElseStep(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -222,14 +237,12 @@ public class IfImpl extends StepImpl implements If {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SexecPackage.IF__CONDITION:
-				return getCondition();
+			case SexecPackage.IF__CHECK:
+				return getCheck();
 			case SexecPackage.IF__THEN_STEP:
-				if (resolve) return getThenStep();
-				return basicGetThenStep();
+				return getThenStep();
 			case SexecPackage.IF__ELSE_STEP:
-				if (resolve) return getElseStep();
-				return basicGetElseStep();
+				return getElseStep();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -242,8 +255,8 @@ public class IfImpl extends StepImpl implements If {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SexecPackage.IF__CONDITION:
-				setCondition((Statement)newValue);
+			case SexecPackage.IF__CHECK:
+				setCheck((Check)newValue);
 				return;
 			case SexecPackage.IF__THEN_STEP:
 				setThenStep((Step)newValue);
@@ -263,8 +276,8 @@ public class IfImpl extends StepImpl implements If {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SexecPackage.IF__CONDITION:
-				setCondition((Statement)null);
+			case SexecPackage.IF__CHECK:
+				setCheck((Check)null);
 				return;
 			case SexecPackage.IF__THEN_STEP:
 				setThenStep((Step)null);
@@ -284,8 +297,8 @@ public class IfImpl extends StepImpl implements If {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SexecPackage.IF__CONDITION:
-				return condition != null;
+			case SexecPackage.IF__CHECK:
+				return check != null;
 			case SexecPackage.IF__THEN_STEP:
 				return thenStep != null;
 			case SexecPackage.IF__ELSE_STEP:

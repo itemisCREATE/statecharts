@@ -44,6 +44,15 @@ public interface SexecFactory extends EFactory {
 	ExecutionState createExecutionState();
 
 	/**
+	 * Returns a new object of class '<em>Reaction</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Reaction</em>'.
+	 * @generated
+	 */
+	Reaction createReaction();
+
+	/**
 	 * Returns a new object of class '<em>Named Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -60,6 +69,15 @@ public interface SexecFactory extends EFactory {
 	 * @generated
 	 */
 	Cycle createCycle();
+
+	/**
+	 * Returns a new object of class '<em>Check</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Check</em>'.
+	 * @generated
+	 */
+	Check createCheck();
 
 	/**
 	 * Returns a new object of class '<em>Sequence</em>'.
@@ -107,13 +125,22 @@ public interface SexecFactory extends EFactory {
 	ExitState createExitState();
 
 	/**
-	 * Returns a new object of class '<em>Sequence Execution</em>'.
+	 * Returns a new object of class '<em>Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Sequence Execution</em>'.
+	 * @return a new object of class '<em>Call</em>'.
 	 * @generated
 	 */
-	SequenceExecution createSequenceExecution();
+	Call createCall();
+
+	/**
+	 * Returns a new object of class '<em>Check Ref</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Check Ref</em>'.
+	 * @generated
+	 */
+	CheckRef createCheckRef();
 
 	/**
 	 * Returns a new object of class '<em>State Vector</em>'.

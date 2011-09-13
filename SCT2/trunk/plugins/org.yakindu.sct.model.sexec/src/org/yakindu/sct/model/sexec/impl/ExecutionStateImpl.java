@@ -6,16 +6,21 @@
  */
 package org.yakindu.sct.model.sexec.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.sct.model.sexec.Cycle;
 import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.SexecPackage;
 
 /**
@@ -27,6 +32,8 @@ import org.yakindu.sct.model.sexec.SexecPackage;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getSimpleName <em>Simple Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getCycle <em>Cycle</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getReactions <em>Reactions</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#isLeaf <em>Leaf</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,6 +69,36 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	 * @ordered
 	 */
 	protected Cycle cycle;
+
+	/**
+	 * The cached value of the '{@link #getReactions() <em>Reactions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReactions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Reaction> reactions;
+
+	/**
+	 * The default value of the '{@link #isLeaf() <em>Leaf</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLeaf()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean LEAF_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isLeaf() <em>Leaf</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLeaf()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean leaf = LEAF_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -151,11 +188,46 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Reaction> getReactions() {
+		if (reactions == null) {
+			reactions = new EObjectContainmentEList<Reaction>(Reaction.class, this, SexecPackage.EXECUTION_STATE__REACTIONS);
+		}
+		return reactions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isLeaf() {
+		return leaf;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLeaf(boolean newLeaf) {
+		boolean oldLeaf = leaf;
+		leaf = newLeaf;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__LEAF, oldLeaf, leaf));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case SexecPackage.EXECUTION_STATE__CYCLE:
 				return basicSetCycle(null, msgs);
+			case SexecPackage.EXECUTION_STATE__REACTIONS:
+				return ((InternalEList<?>)getReactions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -172,6 +244,10 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 				return getSimpleName();
 			case SexecPackage.EXECUTION_STATE__CYCLE:
 				return getCycle();
+			case SexecPackage.EXECUTION_STATE__REACTIONS:
+				return getReactions();
+			case SexecPackage.EXECUTION_STATE__LEAF:
+				return isLeaf();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -181,6 +257,7 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -189,6 +266,13 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 				return;
 			case SexecPackage.EXECUTION_STATE__CYCLE:
 				setCycle((Cycle)newValue);
+				return;
+			case SexecPackage.EXECUTION_STATE__REACTIONS:
+				getReactions().clear();
+				getReactions().addAll((Collection<? extends Reaction>)newValue);
+				return;
+			case SexecPackage.EXECUTION_STATE__LEAF:
+				setLeaf((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -208,6 +292,12 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 			case SexecPackage.EXECUTION_STATE__CYCLE:
 				setCycle((Cycle)null);
 				return;
+			case SexecPackage.EXECUTION_STATE__REACTIONS:
+				getReactions().clear();
+				return;
+			case SexecPackage.EXECUTION_STATE__LEAF:
+				setLeaf(LEAF_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -224,6 +314,10 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 				return SIMPLE_NAME_EDEFAULT == null ? simpleName != null : !SIMPLE_NAME_EDEFAULT.equals(simpleName);
 			case SexecPackage.EXECUTION_STATE__CYCLE:
 				return cycle != null;
+			case SexecPackage.EXECUTION_STATE__REACTIONS:
+				return reactions != null && !reactions.isEmpty();
+			case SexecPackage.EXECUTION_STATE__LEAF:
+				return leaf != LEAF_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -240,6 +334,8 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (simpleName: ");
 		result.append(simpleName);
+		result.append(", leaf: ");
+		result.append(leaf);
 		result.append(')');
 		return result.toString();
 	}

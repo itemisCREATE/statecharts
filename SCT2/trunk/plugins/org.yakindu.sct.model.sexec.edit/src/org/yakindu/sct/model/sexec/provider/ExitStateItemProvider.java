@@ -105,7 +105,7 @@ public class ExitStateItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ExitState)object).getComment();
+		String label = ((ExitState)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ExitState_type") :
 			getString("_UI_ExitState_type") + " " + label;

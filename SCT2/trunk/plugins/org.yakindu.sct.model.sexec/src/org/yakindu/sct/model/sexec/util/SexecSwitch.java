@@ -86,9 +86,37 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SexecPackage.REACTION: {
+				Reaction reaction = (Reaction)theEObject;
+				T result = caseReaction(reaction);
+				if (result == null) result = caseNamedElement(reaction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.STATE_VECTOR: {
+				StateVector stateVector = (StateVector)theEObject;
+				T result = caseStateVector(stateVector);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case SexecPackage.NAMED_ELEMENT: {
 				NamedElement namedElement = (NamedElement)theEObject;
 				T result = caseNamedElement(namedElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.STEP: {
+				Step step = (Step)theEObject;
+				T result = caseStep(step);
+				if (result == null) result = caseNamedElement(step);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.SEQUENCE: {
+				Sequence sequence = (Sequence)theEObject;
+				T result = caseSequence(sequence);
+				if (result == null) result = caseStep(sequence);
+				if (result == null) result = caseNamedElement(sequence);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -101,17 +129,11 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SexecPackage.STEP: {
-				Step step = (Step)theEObject;
-				T result = caseStep(step);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case SexecPackage.SEQUENCE: {
-				Sequence sequence = (Sequence)theEObject;
-				T result = caseSequence(sequence);
-				if (result == null) result = caseStep(sequence);
-				if (result == null) result = caseNamedElement(sequence);
+			case SexecPackage.CHECK: {
+				Check check = (Check)theEObject;
+				T result = caseCheck(check);
+				if (result == null) result = caseStep(check);
+				if (result == null) result = caseNamedElement(check);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -119,6 +141,7 @@ public class SexecSwitch<T> extends Switch<T> {
 				If if_ = (If)theEObject;
 				T result = caseIf(if_);
 				if (result == null) result = caseStep(if_);
+				if (result == null) result = caseNamedElement(if_);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -126,6 +149,7 @@ public class SexecSwitch<T> extends Switch<T> {
 				Execution execution = (Execution)theEObject;
 				T result = caseExecution(execution);
 				if (result == null) result = caseStep(execution);
+				if (result == null) result = caseNamedElement(execution);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -133,6 +157,7 @@ public class SexecSwitch<T> extends Switch<T> {
 				EnterState enterState = (EnterState)theEObject;
 				T result = caseEnterState(enterState);
 				if (result == null) result = caseStep(enterState);
+				if (result == null) result = caseNamedElement(enterState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -140,19 +165,24 @@ public class SexecSwitch<T> extends Switch<T> {
 				ExitState exitState = (ExitState)theEObject;
 				T result = caseExitState(exitState);
 				if (result == null) result = caseStep(exitState);
+				if (result == null) result = caseNamedElement(exitState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SexecPackage.SEQUENCE_EXECUTION: {
-				SequenceExecution sequenceExecution = (SequenceExecution)theEObject;
-				T result = caseSequenceExecution(sequenceExecution);
-				if (result == null) result = caseStep(sequenceExecution);
+			case SexecPackage.CALL: {
+				Call call = (Call)theEObject;
+				T result = caseCall(call);
+				if (result == null) result = caseStep(call);
+				if (result == null) result = caseNamedElement(call);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SexecPackage.STATE_VECTOR: {
-				StateVector stateVector = (StateVector)theEObject;
-				T result = caseStateVector(stateVector);
+			case SexecPackage.CHECK_REF: {
+				CheckRef checkRef = (CheckRef)theEObject;
+				T result = caseCheckRef(checkRef);
+				if (result == null) result = caseCheck(checkRef);
+				if (result == null) result = caseStep(checkRef);
+				if (result == null) result = caseNamedElement(checkRef);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -191,6 +221,21 @@ public class SexecSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Reaction</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Reaction</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReaction(Reaction object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -217,6 +262,21 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCycle(Cycle object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Check</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Check</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCheck(Check object) {
 		return null;
 	}
 
@@ -311,17 +371,32 @@ public class SexecSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Sequence Execution</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Sequence Execution</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Call</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSequenceExecution(SequenceExecution object) {
+	public T caseCall(Call object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Check Ref</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Check Ref</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCheckRef(CheckRef object) {
 		return null;
 	}
 

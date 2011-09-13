@@ -6,6 +6,7 @@
  */
 package org.yakindu.sct.model.sexec;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +18,8 @@ package org.yakindu.sct.model.sexec;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#getSimpleName <em>Simple Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#getCycle <em>Cycle</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#getReactions <em>Reactions</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#isLeaf <em>Leaf</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,5 +79,48 @@ public interface ExecutionState extends NamedElement {
 	 * @generated
 	 */
 	void setCycle(Cycle value);
+
+	/**
+	 * Returns the value of the '<em><b>Reactions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.yakindu.sct.model.sexec.Reaction}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Reactions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Reactions</em>' containment reference list.
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionState_Reactions()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Reaction> getReactions();
+
+	/**
+	 * Returns the value of the '<em><b>Leaf</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Leaf</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Leaf</em>' attribute.
+	 * @see #setLeaf(boolean)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionState_Leaf()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isLeaf();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.ExecutionState#isLeaf <em>Leaf</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Leaf</em>' attribute.
+	 * @see #isLeaf()
+	 * @generated
+	 */
+	void setLeaf(boolean value);
 
 } // ExecutionState

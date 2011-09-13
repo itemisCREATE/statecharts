@@ -28,6 +28,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.SexecPackage;
+import org.yakindu.sct.model.sgraph.SGraphFactory;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.sct.model.sexec.ExecutionState} object.
@@ -65,6 +66,7 @@ public class ExecutionStateItemProvider
 			super.getPropertyDescriptors(object);
 
 			addSimpleNamePropertyDescriptor(object);
+			addLeafPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -92,6 +94,28 @@ public class ExecutionStateItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Leaf feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLeafPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ExecutionState_leaf_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ExecutionState_leaf_feature", "_UI_ExecutionState_type"),
+				 SexecPackage.Literals.EXECUTION_STATE__LEAF,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -104,6 +128,7 @@ public class ExecutionStateItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__CYCLE);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__REACTIONS);
 		}
 		return childrenFeatures;
 	}
@@ -159,9 +184,11 @@ public class ExecutionStateItemProvider
 
 		switch (notification.getFeatureID(ExecutionState.class)) {
 			case SexecPackage.EXECUTION_STATE__SIMPLE_NAME:
+			case SexecPackage.EXECUTION_STATE__LEAF:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SexecPackage.EXECUTION_STATE__CYCLE:
+			case SexecPackage.EXECUTION_STATE__REACTIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -183,6 +210,11 @@ public class ExecutionStateItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__CYCLE,
 				 SexecFactory.eINSTANCE.createCycle()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__REACTIONS,
+				 SexecFactory.eINSTANCE.createReaction()));
 	}
 
 }

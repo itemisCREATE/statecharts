@@ -62,15 +62,18 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 		switch (eClass.getClassifierID()) {
 			case SexecPackage.EXECUTION_FLOW: return createExecutionFlow();
 			case SexecPackage.EXECUTION_STATE: return createExecutionState();
+			case SexecPackage.REACTION: return createReaction();
+			case SexecPackage.STATE_VECTOR: return createStateVector();
 			case SexecPackage.NAMED_ELEMENT: return createNamedElement();
-			case SexecPackage.CYCLE: return createCycle();
 			case SexecPackage.SEQUENCE: return createSequence();
+			case SexecPackage.CYCLE: return createCycle();
+			case SexecPackage.CHECK: return createCheck();
 			case SexecPackage.IF: return createIf();
 			case SexecPackage.EXECUTION: return createExecution();
 			case SexecPackage.ENTER_STATE: return createEnterState();
 			case SexecPackage.EXIT_STATE: return createExitState();
-			case SexecPackage.SEQUENCE_EXECUTION: return createSequenceExecution();
-			case SexecPackage.STATE_VECTOR: return createStateVector();
+			case SexecPackage.CALL: return createCall();
+			case SexecPackage.CHECK_REF: return createCheckRef();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -101,6 +104,16 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Reaction createReaction() {
+		ReactionImpl reaction = new ReactionImpl();
+		return reaction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public NamedElement createNamedElement() {
 		NamedElementImpl namedElement = new NamedElementImpl();
 		return namedElement;
@@ -114,6 +127,16 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public Cycle createCycle() {
 		CycleImpl cycle = new CycleImpl();
 		return cycle;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Check createCheck() {
+		CheckImpl check = new CheckImpl();
+		return check;
 	}
 
 	/**
@@ -171,9 +194,19 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SequenceExecution createSequenceExecution() {
-		SequenceExecutionImpl sequenceExecution = new SequenceExecutionImpl();
-		return sequenceExecution;
+	public Call createCall() {
+		CallImpl call = new CallImpl();
+		return call;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CheckRef createCheckRef() {
+		CheckRefImpl checkRef = new CheckRefImpl();
+		return checkRef;
 	}
 
 	/**

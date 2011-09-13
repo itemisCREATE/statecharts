@@ -81,12 +81,16 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createExecutionStateAdapter();
 			}
 			@Override
-			public Adapter caseNamedElement(NamedElement object) {
-				return createNamedElementAdapter();
+			public Adapter caseReaction(Reaction object) {
+				return createReactionAdapter();
 			}
 			@Override
-			public Adapter caseCycle(Cycle object) {
-				return createCycleAdapter();
+			public Adapter caseStateVector(StateVector object) {
+				return createStateVectorAdapter();
+			}
+			@Override
+			public Adapter caseNamedElement(NamedElement object) {
+				return createNamedElementAdapter();
 			}
 			@Override
 			public Adapter caseStep(Step object) {
@@ -95,6 +99,14 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSequence(Sequence object) {
 				return createSequenceAdapter();
+			}
+			@Override
+			public Adapter caseCycle(Cycle object) {
+				return createCycleAdapter();
+			}
+			@Override
+			public Adapter caseCheck(Check object) {
+				return createCheckAdapter();
 			}
 			@Override
 			public Adapter caseIf(If object) {
@@ -113,12 +125,12 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createExitStateAdapter();
 			}
 			@Override
-			public Adapter caseSequenceExecution(SequenceExecution object) {
-				return createSequenceExecutionAdapter();
+			public Adapter caseCall(Call object) {
+				return createCallAdapter();
 			}
 			@Override
-			public Adapter caseStateVector(StateVector object) {
-				return createStateVectorAdapter();
+			public Adapter caseCheckRef(CheckRef object) {
+				return createCheckRefAdapter();
 			}
 			@Override
 			public Adapter caseScopedElement(ScopedElement object) {
@@ -173,6 +185,20 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.Reaction <em>Reaction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.Reaction
+	 * @generated
+	 */
+	public Adapter createReactionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.NamedElement <em>Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -197,6 +223,20 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCycleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.Check <em>Check</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.Check
+	 * @generated
+	 */
+	public Adapter createCheckAdapter() {
 		return null;
 	}
 
@@ -285,16 +325,30 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.SequenceExecution <em>Sequence Execution</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.Call <em>Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.sexec.SequenceExecution
+	 * @see org.yakindu.sct.model.sexec.Call
 	 * @generated
 	 */
-	public Adapter createSequenceExecutionAdapter() {
+	public Adapter createCallAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.CheckRef <em>Check Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.CheckRef
+	 * @generated
+	 */
+	public Adapter createCheckRefAdapter() {
 		return null;
 	}
 

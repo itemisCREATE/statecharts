@@ -105,7 +105,7 @@ public class ExecutionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Execution)object).getComment();
+		String label = ((Execution)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Execution_type") :
 			getString("_UI_Execution_type") + " " + label;

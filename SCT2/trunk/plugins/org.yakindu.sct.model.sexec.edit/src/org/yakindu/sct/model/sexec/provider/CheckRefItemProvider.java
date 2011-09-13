@@ -21,17 +21,17 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.yakindu.sct.model.sexec.SequenceExecution;
+import org.yakindu.sct.model.sexec.CheckRef;
 import org.yakindu.sct.model.sexec.SexecPackage;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.sct.model.sexec.SequenceExecution} object.
+ * This is the item provider adapter for a {@link org.yakindu.sct.model.sexec.CheckRef} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class SequenceExecutionItemProvider
-	extends StepItemProvider
+public class CheckRefItemProvider
+	extends CheckItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -44,7 +44,7 @@ public class SequenceExecutionItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SequenceExecutionItemProvider(AdapterFactory adapterFactory) {
+	public CheckRefItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -59,25 +59,25 @@ public class SequenceExecutionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSequencePropertyDescriptor(object);
+			addCheckPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Sequence feature.
+	 * This adds a property descriptor for the Check feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSequencePropertyDescriptor(Object object) {
+	protected void addCheckPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_SequenceExecution_sequence_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SequenceExecution_sequence_feature", "_UI_SequenceExecution_type"),
-				 SexecPackage.Literals.SEQUENCE_EXECUTION__SEQUENCE,
+				 getString("_UI_CheckRef_check_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_CheckRef_check_feature", "_UI_CheckRef_type"),
+				 SexecPackage.Literals.CHECK_REF__CHECK,
 				 true,
 				 false,
 				 true,
@@ -87,14 +87,14 @@ public class SequenceExecutionItemProvider
 	}
 
 	/**
-	 * This returns SequenceExecution.gif.
+	 * This returns CheckRef.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/SequenceExecution"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/CheckRef"));
 	}
 
 	/**
@@ -105,10 +105,10 @@ public class SequenceExecutionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((SequenceExecution)object).getComment();
+		String label = ((CheckRef)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_SequenceExecution_type") :
-			getString("_UI_SequenceExecution_type") + " " + label;
+			getString("_UI_CheckRef_type") :
+			getString("_UI_CheckRef_type") + " " + label;
 	}
 
 	/**

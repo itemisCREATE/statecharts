@@ -34,6 +34,9 @@ import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sgraph.SGraphPackage
 import org.yakindu.sct.model.sexec.EnterState
 import org.yakindu.sct.model.sexec.ExitState
+import org.yakindu.sct.model.sexec.Check
+import org.yakindu.sct.model.sexec.Reaction
+import org.yakindu.sct.model.sexec.Sequence
 
 class ModelSequencer {
 	
@@ -42,18 +45,29 @@ class ModelSequencer {
 	@Inject extension StatechartExtensions sct
 
 
+	/* ==========================================================================
+	 * TRANSFORMATION ROOT
+	 */
+
 	def ExecutionFlow transform(Statechart sc) {
 		val ef = sc.create
 		
-		sc.mapExecutionFlow(ef)
+		// during mapping the basic structural elements will be mapped from the source statechart to the execution flow
 		sc.mapScopes(ef)
+		sc.mapStates(ef)
 		
+		// derive all additional information that is necessary for the execution
 		ef.defineStateVector(sc)
 		ef.defineEnterSequence(sc)
+		ef.defineStateCycles(sc)
 		
 		return ef
 	}
 	
+	
+	/* ==========================================================================
+	 * INTERFACE MAPPING
+	 */
 	
 	/**
 	 * maps all required scope defined in the statechart to the execution flow.
@@ -89,48 +103,102 @@ class ModelSequencer {
 	}
 	
 	
-	
-	
-	
-	def ExecutionFlow mapExecutionFlow(Statechart statechart, ExecutionFlow r){
+	/* ==========================================================================
+	 * STRUCTURAL MAPPING
+	 */
+
+		
+	def ExecutionFlow mapStates(Statechart statechart, ExecutionFlow r){
 		var content = EcoreUtil2::eAllContentsAsList(statechart)
-		val leafStates = content.filter(e | e instanceof State && (e as State).simple)
-		r.states.addAll(leafStates.map( s | (s as State).transform));
+		val allStates = content.filter(e | e instanceof State)
+		r.states.addAll(allStates.map( s | (s as State).mapState));
 		return r
 	}
 
 	
-	
-	def ExecutionState transform(State state) {
-		val _state = state.create;
-		_state.cycle = state.buildCycle
+	def ExecutionState mapState(State state) {
+		val _state = state.create
+		_state.reactions.addAll( state.outgoingTransitions.map(t | t.mapTransition))
+		_state.leaf = state.simple 
 		_state
 	}
+	 
+	 
+	def Reaction mapTransition(Transition t) {
+		val r = t.create
+		r.check = mapToCheck(t.trigger)
+		r.effect = mapToEffect(t)
+		return r
+	}
+
+
+	def Sequence mapToEffect(Transition t) {
+		val sequence = sexecFactory.createSequence 
+		if (t.source != null) sequence.steps.add(newExitStateStep(t.source as State))		
+		if (t.target != null) sequence.steps.add(newEnterStateStep(t.target as State))
+		
+		return sequence
+	}	
 	
 	
-	def Cycle create r : sexecFactory.createCycle buildCycle(State state) {	
-		val folded = state.outgoingTransitions.reverseView.fold(null as If, [s, t | {
-				var ifStep = t.buildTransitionSequence
-				// TODO then ...
+	/* ==========================================================================
+	 * SEQUENCING
+	 */
+	
+	def defineStateCycles(ExecutionFlow flow, Statechart sc) {
+		flow.states.filter(s | s.leaf).forEach(s | defineCycle(s))	
+		return flow
+	}
+	
+
+	def Cycle defineCycle(ExecutionState state) {	
+		val cycle = sexecFactory.createCycle
+		state.cycle = cycle
+		
+		val step = state.reactions.reverseView.fold(null as If, [s, reaction | {
+				var ifStep = sexecFactory.createIf
+				ifStep.check = reaction.check.newRef		
+				ifStep.thenStep = reaction.effect.newCall
 				ifStep.elseStep = s
 				ifStep
 			}])
 			
-		if (folded != null) r.steps.add(folded)
-	}
-	
-	
-	def If buildTransitionSequence(Transition t) {
-		var ifStep = sexecFactory.createIf
-		if (t.trigger != null) ifStep.condition = t.trigger.buildCondition 
-		val thenSequence = sexecFactory.createSequence 
-		ifStep.thenStep = thenSequence
-		if (t.source != null) thenSequence.steps.add(newExitStateStep(t.source as State))		
-		if (t.target != null) thenSequence.steps.add(newEnterStateStep(t.target as State))
+		if (step != null) cycle.steps.add(step)
 		
-		return ifStep	
+		return cycle
 	}
 	
+//	def Cycle create r : sexecFactory.createCycle buildCycle(State state) {	
+//		val folded = state.outgoingTransitions.reverseView.fold(null as If, [s, t | {
+//				var ifStep = t.buildTransitionSequence
+//				// TODO then ...
+//				ifStep.elseStep = s
+//				ifStep
+//			}])
+//			
+//		if (folded != null) r.steps.add(folded)
+//	}
+	
+	
+//	def If buildTransitionSequence(Transition t) {
+//		var ifStep = sexecFactory.createIf
+//		if (t.trigger != null) ifStep.check = t.trigger.mapToCheck 
+//		val thenSequence = sexecFactory.createSequence 
+//		ifStep.thenStep = thenSequence
+//		if (t.source != null) thenSequence.steps.add(newExitStateStep(t.source as State))		
+//		if (t.target != null) thenSequence.steps.add(newEnterStateStep(t.target as State))
+//		
+//		return ifStep	
+//	}
+	
+
+	def dispatch Check mapToCheck(Trigger tr) { null }
+	  
+	def dispatch Check mapToCheck(ReactionTrigger tr) {
+		val check = tr.createCheck
+		check.condition = tr.buildCondition;
+		return check
+	}
 	
 	def dispatch Statement buildCondition (Trigger t) {
 		null
