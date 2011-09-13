@@ -16,7 +16,6 @@ import static org.yakindu.sct.ui.editor.editor.figures.utils.GraphicsUtil.mixCol
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.Graphics;
-import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RoundedRectangle;
@@ -59,7 +58,6 @@ public class StateFigure extends RoundedRectangle {
 		this.add(
 				nameFigure,
 				GridDataFactory.fillDefaults()
-						.align(GridData.CENTER, GridData.CENTER)
 						.grab(true, false).getData());
 		// Text compartment
 		textCompartmentPane = new Figure();
