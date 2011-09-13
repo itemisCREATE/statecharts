@@ -16,6 +16,7 @@ Templates for writing a test dump file.
 «DEFINE file FOR ExecutionFlow»
 
 «FILE 'dump.txt'»
+«EXPAND interfaces FOR this»
 Execution States:
 «EXPAND executionStates FOREACH this.states»
 
@@ -23,6 +24,36 @@ Execution States:
 
 «ENDDEFINE»
 
+
+«DEFINE interfaces FOR ExecutionFlow»
+Statechart-Interfaces:
+«EXPAND scope FOREACH this.scopes»
+«ENDDEFINE»
+
+«DEFINE scope FOR Scope -»
+«ENDDEFINE»
+
+«DEFINE scope FOR InterfaceScope»
+interface «name» : 
+«EXPAND declaration FOREACH this.declarations»
+«ENDDEFINE»
+
+«DEFINE scope FOR InternalScope»
+internal : 
+«EXPAND declaration FOREACH this.declarations»
+«ENDDEFINE»
+
+«DEFINE declaration FOR Declaration -»
+	unknown declaration «name»
+«ENDDEFINE»
+
+«DEFINE declaration FOR EventDefinition -»
+	event «name»
+«ENDDEFINE»
+
+«DEFINE declaration FOR VariableDefinition -»
+	var «name» : «type»
+«ENDDEFINE»
 
 «DEFINE executionStates FOR ExecutionState»
 Name: «this.name»
