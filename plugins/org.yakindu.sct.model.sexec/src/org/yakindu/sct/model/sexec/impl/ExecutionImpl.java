@@ -7,6 +7,7 @@
 package org.yakindu.sct.model.sexec.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -29,7 +30,7 @@ import org.yakindu.sct.model.sgraph.Statement;
  */
 public class ExecutionImpl extends StepImpl implements Execution {
 	/**
-	 * The cached value of the '{@link #getStatement() <em>Statement</em>}' reference.
+	 * The cached value of the '{@link #getStatement() <em>Statement</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getStatement()
@@ -63,14 +64,6 @@ public class ExecutionImpl extends StepImpl implements Execution {
 	 * @generated
 	 */
 	public Statement getStatement() {
-		if (statement != null && statement.eIsProxy()) {
-			InternalEObject oldStatement = (InternalEObject)statement;
-			statement = (Statement)eResolveProxy(oldStatement);
-			if (statement != oldStatement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SexecPackage.EXECUTION__STATEMENT, oldStatement, statement));
-			}
-		}
 		return statement;
 	}
 
@@ -79,8 +72,14 @@ public class ExecutionImpl extends StepImpl implements Execution {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Statement basicGetStatement() {
-		return statement;
+	public NotificationChain basicSetStatement(Statement newStatement, NotificationChain msgs) {
+		Statement oldStatement = statement;
+		statement = newStatement;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION__STATEMENT, oldStatement, newStatement);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -89,10 +88,31 @@ public class ExecutionImpl extends StepImpl implements Execution {
 	 * @generated
 	 */
 	public void setStatement(Statement newStatement) {
-		Statement oldStatement = statement;
-		statement = newStatement;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION__STATEMENT, oldStatement, statement));
+		if (newStatement != statement) {
+			NotificationChain msgs = null;
+			if (statement != null)
+				msgs = ((InternalEObject)statement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION__STATEMENT, null, msgs);
+			if (newStatement != null)
+				msgs = ((InternalEObject)newStatement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION__STATEMENT, null, msgs);
+			msgs = basicSetStatement(newStatement, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION__STATEMENT, newStatement, newStatement));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SexecPackage.EXECUTION__STATEMENT:
+				return basicSetStatement(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -104,8 +124,7 @@ public class ExecutionImpl extends StepImpl implements Execution {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SexecPackage.EXECUTION__STATEMENT:
-				if (resolve) return getStatement();
-				return basicGetStatement();
+				return getStatement();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

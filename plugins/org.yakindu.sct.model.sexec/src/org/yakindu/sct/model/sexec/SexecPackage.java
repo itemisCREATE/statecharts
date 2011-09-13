@@ -596,7 +596,7 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION__COMMENT = STEP__COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Statement</b></em>' reference.
+	 * The feature id for the '<em><b>Statement</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1075,10 +1075,10 @@ public interface SexecPackage extends EPackage {
 	EClass getExecution();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.Execution#getStatement <em>Statement</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.Execution#getStatement <em>Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Statement</em>'.
+	 * @return the meta object for the containment reference '<em>Statement</em>'.
 	 * @see org.yakindu.sct.model.sexec.Execution#getStatement()
 	 * @see #getExecution()
 	 * @generated
@@ -1460,7 +1460,7 @@ public interface SexecPackage extends EPackage {
 		EClass EXECUTION = eINSTANCE.getExecution();
 
 		/**
-		 * The meta object literal for the '<em><b>Statement</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Statement</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

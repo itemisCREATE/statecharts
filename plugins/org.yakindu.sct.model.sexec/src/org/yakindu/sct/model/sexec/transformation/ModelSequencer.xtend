@@ -37,6 +37,15 @@ import org.yakindu.sct.model.sexec.ExitState
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.Sequence
+import org.yakindu.sct.model.stext.stext.ReactionEffect
+import org.yakindu.sct.model.sgraph.Effect
+import org.yakindu.sct.model.sexec.Execution
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
+import org.yakindu.sct.model.stext.stext.StextPackage
+import java.util.List
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.sct.model.stext.stext.Assignment
+import org.yakindu.sct.model.sgraph.Variable
 
 class ModelSequencer {
 	
@@ -60,6 +69,9 @@ class ModelSequencer {
 		ef.defineStateVector(sc)
 		ef.defineEnterSequence(sc)
 		ef.defineStateCycles(sc)
+		
+		// retarget declaration refs
+		ef.retargetDeclRefs
 		
 		return ef
 	}
@@ -125,8 +137,8 @@ class ModelSequencer {
 	 
 	 
 	def Reaction mapTransition(Transition t) {
-		val r = t.create
-		r.check = mapToCheck(t.trigger)
+		val r = t.create 
+		if (t.trigger != null) r.check = mapToCheck(t.trigger)
 		r.effect = mapToEffect(t)
 		return r
 	}
@@ -134,12 +146,29 @@ class ModelSequencer {
 
 	def Sequence mapToEffect(Transition t) {
 		val sequence = sexecFactory.createSequence 
-		if (t.source != null) sequence.steps.add(newExitStateStep(t.source as State))		
+		if (t.source != null) sequence.steps.add(newExitStateStep(t.source as State))
+		if (t.effect != null) sequence.steps.add(t.effect.mapEffect)		
 		if (t.target != null) sequence.steps.add(newEnterStateStep(t.target as State))
 		
 		return sequence
 	}	
 	
+	def dispatch Sequence mapEffect(Effect effect) {}
+	
+	def dispatch Sequence mapEffect(ReactionEffect effect) {
+		if ( ! effect.actions.empty) {
+			val sequence = sexecFactory.createSequence
+			sequence.name = "reaction_action"
+			sequence.steps.addAll( effect.actions.map( stmnt | stmnt.mapToExecution))
+			return sequence	
+		}	
+	}
+	
+	def Execution mapToExecution(Statement stmnt) {
+		val exec = sexecFactory.createExecution
+		exec.statement = EcoreUtil::copy(stmnt)
+		exec	
+	}
 	
 	/* ==========================================================================
 	 * SEQUENCING
@@ -278,6 +307,35 @@ class ModelSequencer {
 	}
 	
 	
+	
+	/************** retarget declaration refs **************/
+	
+	def retargetDeclRefs(ExecutionFlow flow) {
+		val allContent = EcoreUtil2::eAllContentsAsList(flow)
+		val declared = allContent.filter(e | e instanceof EventDefinition || e instanceof VariableDefinition).toList
+		
+		allContent.filter(e | e instanceof ElementReferenceExpression).map(s | s as ElementReferenceExpression).forEach( ere | ere.retarget(declared) )
+		allContent.filter(e | e instanceof Assignment).map(s | s as Assignment).forEach( ere | ere.retarget(declared) )
+	}
+	
+	
+	def retarget(ElementReferenceExpression ere, List<EObject> declared) {
+		if (! declared.contains(ere.value) ) ere.value = ere.value.replaced
+	}
+	
+	def retarget(Assignment assign, List<EObject> declared) {
+		if (! declared.contains(assign.varRef) ) assign.varRef = ((assign.varRef as VariableDefinition).replaced) as Variable
+	}
+	
+	def dispatch replaced(VariableDefinition vd) {
+		vd.create	
+	}
+	
+	def dispatch replaced(EventDefinition ed) {
+		ed.create	
+	}
+	
+	
 	//--------- UTILS ---------------
 	def sexecFactory() { SexecFactory::eINSTANCE }
 	def stextFactory() { StextFactory::eINSTANCE }
@@ -285,7 +343,7 @@ class ModelSequencer {
 	
 	
 	def entry(Region r) {
-		r.vertices.findFirst(v | v instanceof Entry && (v.name == null || v.name == 'default') ) as Entry
+		r.vertices.findFirst(v | v instanceof Entry && (v.name == null || v.name.empty || v.name == 'default') ) as Entry
 	}
 	
 	

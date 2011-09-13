@@ -1,14 +1,5 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEventDefinition;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createInterfaceScope;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createReactionTrigger;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegion;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegularEventSpec;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createState;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createStatechart;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createTransition;
-
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Reaction;
@@ -20,9 +11,14 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.stext.stext.Assignment;
+import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
+import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
+import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
+import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.StextFactory;
@@ -117,6 +113,27 @@ public class SCTTestUtil {
 		t.setSource(source);
 		t.setTarget(target);
 		return t;
+	}
+	
+	public static ReactionEffect _createReactionEffect(Reaction reaction) {
+		ReactionEffect effect = StextFactory.eINSTANCE.createReactionEffect();
+		if (reaction != null) reaction.setEffect(effect);
+		return effect;
+	}
+	
+	public static Assignment _createVariableAssignment(VariableDefinition v, AssignmentOperator op, Expression expression, ReactionEffect e) {
+		Assignment assignment = StextFactory.eINSTANCE.createAssignment();
+		assignment.setVarRef(v);
+		assignment.setOperator(op);
+		assignment.setExpression(expression);
+		if(e != null) e.getActions().add(assignment);
+		return assignment;
+	}
+	
+	public static PrimitiveValueExpression _createValue(String s) {
+		PrimitiveValueExpression assignment = StextFactory.eINSTANCE.createPrimitiveValueExpression();
+		assignment.setValue(s);
+		return assignment;
 	}
 	
 	

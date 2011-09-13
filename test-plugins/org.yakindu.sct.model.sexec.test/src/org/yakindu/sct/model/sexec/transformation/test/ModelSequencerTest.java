@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.EnterState;
+import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
@@ -26,11 +27,14 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.stext.stext.Assignment;
+import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
+import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
@@ -141,7 +145,7 @@ public class ModelSequencerTest {
 	
 	
 	/**
-	 * In the simplest case the a stet without an actions will be entered.
+	 * In the simplest case the a state without an actions will be entered.
 	 */
 	@Test public void testSCEnterSequence_SimpleFlatTSC() {
 		SimpleFlatTSC tsc = new SimpleFlatTSC();
@@ -202,6 +206,45 @@ public class ModelSequencerTest {
 	}
 	
 	
+	/**
+	 * The transition action must be part of the reaction effect sequence
+	 */
+	@Test public void testStateReaction_WithTransitionAction() {
+		SimpleFlatTSC tsc = new SimpleFlatTSC();
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
+		ReactionEffect effect = _createReactionEffect(tsc.t1);
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), effect); 
+		
+		ExecutionFlow flow = sequencer.transform(tsc.sc);
+
+		// test state with one outgoing transition
+		ExecutionState s1 = flow.getStates().get(0);
+		ExecutionState s2 = flow.getStates().get(1);
+		assertEquals(tsc.s1.getName(), s1.getSimpleName());
+		assertEquals(tsc.s2.getName(), s2.getSimpleName());
+
+		assertEquals(1, s1.getReactions().size());
+		Reaction reaction = s1.getReactions().get(0);
+
+		assertNotNull(reaction.getCheck());
+		
+		assertNotNull(reaction.getEffect());
+		Sequence seq = (Sequence) reaction.getEffect();
+		
+		assertTrue(seq.getSteps().get(0) instanceof ExitState);
+		assertEquals(s1, ((ExitState)seq.getSteps().get(0)).getState());
+		assertTrue(seq.getSteps().get(1) instanceof Sequence);		
+		Execution _exec = (Execution) ((Sequence)seq.getSteps().get(1)).getSteps().get(0);
+		Assignment _assign = (Assignment) _exec.getStatement();
+		assertNotSame(_assign, assign);
+		assertNotSame(_assign.getVarRef(), assign.getVarRef());
+		assertNotSame(_assign.getVarRef(), v1);
+		
+		assertTrue(seq.getSteps().get(2) instanceof EnterState);
+		assertEquals(s2, ((EnterState)seq.getSteps().get(2)).getState());
+	}
+
+	
 	@Test public void testStateCycle_SimpleFlatTSC() {
 		OrthogonalFlatTSC tsc = new OrthogonalFlatTSC();
 		
@@ -235,7 +278,7 @@ public class ModelSequencerTest {
 		
 		_if = (If) s3.getCycle().getSteps().get(0);
 		assertNotNull(_if.getThenStep());
-		assertTrue(_if.getThenStep() instanceof Sequence);
+		assertTrue(_if.getThenStep() instanceof Call);
 		assertNotNull(_if.getElseStep());
 		assertTrue(_if.getElseStep() instanceof If);
 
