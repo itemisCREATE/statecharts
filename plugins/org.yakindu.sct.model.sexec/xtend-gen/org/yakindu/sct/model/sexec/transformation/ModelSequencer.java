@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
@@ -18,6 +19,7 @@ import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
 import org.yakindu.sct.model.sexec.Cycle;
 import org.yakindu.sct.model.sexec.EnterState;
+import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
@@ -30,6 +32,7 @@ import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.transformation.FactoryExtension;
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
 import org.yakindu.sct.model.sgraph.Declaration;
+import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Region;
@@ -39,12 +42,15 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.stext.stext.Assignment;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
+import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.StextFactory;
@@ -71,6 +77,7 @@ public class ModelSequencer {
       this.defineStateVector(ef, sc);
       this.defineEnterSequence(ef, sc);
       this.defineStateCycles(ef, sc);
+      this.retargetDeclRefs(ef);
       return ef;
     }
   }
@@ -189,8 +196,12 @@ public class ModelSequencer {
       Reaction _create = this.factory.create(t);
       final Reaction r = _create;
       Trigger _trigger = t.getTrigger();
-      Check _mapToCheck = this.mapToCheck(_trigger);
-      r.setCheck(_mapToCheck);
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_trigger, null);
+      if (_operator_notEquals) {
+        Trigger _trigger_1 = t.getTrigger();
+        Check _mapToCheck = this.mapToCheck(_trigger_1);
+        r.setCheck(_mapToCheck);
+      }
       Sequence _mapToEffect = this.mapToEffect(t);
       r.setEffect(_mapToEffect);
       return r;
@@ -210,16 +221,68 @@ public class ModelSequencer {
         ExitState _newExitStateStep = this.newExitStateStep(((State) _source_1));
         _steps.add(_newExitStateStep);
       }
-      Vertex _target = t.getTarget();
-      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_target, null);
+      Effect _effect = t.getEffect();
+      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_effect, null);
       if (_operator_notEquals_1) {
         EList<Step> _steps_1 = sequence.getSteps();
+        Effect _effect_1 = t.getEffect();
+        Sequence _mapEffect = this.mapEffect(_effect_1);
+        _steps_1.add(_mapEffect);
+      }
+      Vertex _target = t.getTarget();
+      boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_target, null);
+      if (_operator_notEquals_2) {
+        EList<Step> _steps_2 = sequence.getSteps();
         Vertex _target_1 = t.getTarget();
         EnterState _newEnterStateStep = this.newEnterStateStep(((State) _target_1));
-        _steps_1.add(_newEnterStateStep);
+        _steps_2.add(_newEnterStateStep);
       }
       return sequence;
     }
+  }
+  
+  protected Sequence _mapEffect(final Effect effect) {
+    return null;
+  }
+  
+  protected Sequence _mapEffect(final ReactionEffect effect) {
+    Sequence _xifexpression = null;
+    EList<Statement> _actions = effect.getActions();
+    boolean _isEmpty = _actions.isEmpty();
+    boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
+    if (_operator_not) {
+      {
+        SexecFactory _sexecFactory = this.sexecFactory();
+        Sequence _createSequence = _sexecFactory.createSequence();
+        final Sequence sequence = _createSequence;
+        sequence.setName("reaction_action");
+        EList<Step> _steps = sequence.getSteps();
+        EList<Statement> _actions_1 = effect.getActions();
+        final Function1<Statement,Execution> _function = new Function1<Statement,Execution>() {
+            public Execution apply(final Statement stmnt) {
+              Execution _mapToExecution = ModelSequencer.this.mapToExecution(stmnt);
+              return _mapToExecution;
+            }
+          };
+        List<Execution> _map = ListExtensions.<Statement, Execution>map(_actions_1, _function);
+        _steps.addAll(_map);
+        return sequence;
+      }
+    }
+    return _xifexpression;
+  }
+  
+  public Execution mapToExecution(final Statement stmnt) {
+    Execution _xblockexpression = null;
+    {
+      SexecFactory _sexecFactory = this.sexecFactory();
+      Execution _createExecution = _sexecFactory.createExecution();
+      final Execution exec = _createExecution;
+      Statement _copy = EcoreUtil.<Statement>copy(stmnt);
+      exec.setStatement(_copy);
+      _xblockexpression = (exec);
+    }
+    return _xblockexpression;
   }
   
   public ExecutionFlow defineStateCycles(final ExecutionFlow flow, final Statechart sc) {
@@ -441,6 +504,101 @@ public class ModelSequencer {
     }
   }
   
+  public void retargetDeclRefs(final ExecutionFlow flow) {
+    {
+      List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(flow);
+      final List<EObject> allContent = _eAllContentsAsList;
+      final Function1<EObject,Boolean> _function = new Function1<EObject,Boolean>() {
+          public Boolean apply(final EObject e) {
+            boolean _operator_or = false;
+            if ((e instanceof org.yakindu.sct.model.stext.stext.EventDefinition)) {
+              _operator_or = true;
+            } else {
+              _operator_or = BooleanExtensions.operator_or((e instanceof org.yakindu.sct.model.stext.stext.EventDefinition), (e instanceof org.yakindu.sct.model.stext.stext.VariableDefinition));
+            }
+            return ((Boolean)_operator_or);
+          }
+        };
+      Iterable<EObject> _filter = IterableExtensions.<EObject>filter(allContent, _function);
+      List<EObject> _list = IterableExtensions.<EObject>toList(_filter);
+      final List<EObject> declared = _list;
+      final Function1<EObject,Boolean> _function_1 = new Function1<EObject,Boolean>() {
+          public Boolean apply(final EObject e_1) {
+            return (e_1 instanceof org.yakindu.sct.model.stext.stext.ElementReferenceExpression);
+          }
+        };
+      Iterable<EObject> _filter_1 = IterableExtensions.<EObject>filter(allContent, _function_1);
+      final Function1<EObject,ElementReferenceExpression> _function_2 = new Function1<EObject,ElementReferenceExpression>() {
+          public ElementReferenceExpression apply(final EObject s) {
+            return ((ElementReferenceExpression) s);
+          }
+        };
+      Iterable<ElementReferenceExpression> _map = IterableExtensions.<EObject, ElementReferenceExpression>map(_filter_1, _function_2);
+      final Function1<ElementReferenceExpression,Object> _function_3 = new Function1<ElementReferenceExpression,Object>() {
+          public Object apply(final ElementReferenceExpression ere) {
+            Object _retarget = ModelSequencer.this.retarget(ere, declared);
+            return _retarget;
+          }
+        };
+      IterableExtensions.<ElementReferenceExpression>forEach(_map, _function_3);
+      final Function1<EObject,Boolean> _function_4 = new Function1<EObject,Boolean>() {
+          public Boolean apply(final EObject e_2) {
+            return (e_2 instanceof org.yakindu.sct.model.stext.stext.Assignment);
+          }
+        };
+      Iterable<EObject> _filter_2 = IterableExtensions.<EObject>filter(allContent, _function_4);
+      final Function1<EObject,Assignment> _function_5 = new Function1<EObject,Assignment>() {
+          public Assignment apply(final EObject s_1) {
+            return ((Assignment) s_1);
+          }
+        };
+      Iterable<Assignment> _map_1 = IterableExtensions.<EObject, Assignment>map(_filter_2, _function_5);
+      final Function1<Assignment,Object> _function_6 = new Function1<Assignment,Object>() {
+          public Object apply(final Assignment ere_1) {
+            Object _retarget_1 = ModelSequencer.this.retarget(ere_1, declared);
+            return _retarget_1;
+          }
+        };
+      IterableExtensions.<Assignment>forEach(_map_1, _function_6);
+    }
+  }
+  
+  public Object retarget(final ElementReferenceExpression ere, final List<EObject> declared) {
+    Object _xifexpression = null;
+    Declaration _value = ere.getValue();
+    boolean _contains = declared.contains(_value);
+    boolean _operator_not = BooleanExtensions.operator_not(_contains);
+    if (_operator_not) {
+      Declaration _value_1 = ere.getValue();
+      Declaration _replaced = this.replaced(_value_1);
+      ere.setValue(_replaced);
+    }
+    return _xifexpression;
+  }
+  
+  public Object retarget(final Assignment assign, final List<EObject> declared) {
+    Object _xifexpression = null;
+    Variable _varRef = assign.getVarRef();
+    boolean _contains = declared.contains(_varRef);
+    boolean _operator_not = BooleanExtensions.operator_not(_contains);
+    if (_operator_not) {
+      Variable _varRef_1 = assign.getVarRef();
+      Declaration _replaced = this.replaced(((VariableDefinition) _varRef_1));
+      assign.setVarRef(((Variable) _replaced));
+    }
+    return _xifexpression;
+  }
+  
+  protected Declaration _replaced(final VariableDefinition vd) {
+    VariableDefinition _create = this.factory.create(vd);
+    return _create;
+  }
+  
+  protected Declaration _replaced(final EventDefinition ed) {
+    EventDefinition _create = this.factory.create(ed);
+    return _create;
+  }
+  
   public SexecFactory sexecFactory() {
     return SexecFactory.eINSTANCE;
   }
@@ -458,14 +616,22 @@ public class ModelSequencer {
             _operator_and = false;
           } else {
             boolean _operator_or = false;
+            boolean _operator_or_1 = false;
             String _name = v.getName();
             boolean _operator_equals = ObjectExtensions.operator_equals(_name, null);
             if (_operator_equals) {
-              _operator_or = true;
+              _operator_or_1 = true;
             } else {
               String _name_1 = v.getName();
-              boolean _operator_equals_1 = ObjectExtensions.operator_equals(_name_1, "default");
-              _operator_or = BooleanExtensions.operator_or(_operator_equals, _operator_equals_1);
+              boolean _isEmpty = _name_1.isEmpty();
+              _operator_or_1 = BooleanExtensions.operator_or(_operator_equals, _isEmpty);
+            }
+            if (_operator_or_1) {
+              _operator_or = true;
+            } else {
+              String _name_2 = v.getName();
+              boolean _operator_equals_1 = ObjectExtensions.operator_equals(_name_2, "default");
+              _operator_or = BooleanExtensions.operator_or(_operator_or_1, _operator_equals_1);
             }
             _operator_and = BooleanExtensions.operator_and((v instanceof org.yakindu.sct.model.sgraph.Entry), _operator_or);
           }
@@ -493,6 +659,17 @@ public class ModelSequencer {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         java.util.Arrays.<Object>asList(e).toString());
+    }
+  }
+  
+  public Sequence mapEffect(final Effect effect) {
+    if ((effect instanceof ReactionEffect)) {
+      return _mapEffect((ReactionEffect)effect);
+    } else if ((effect instanceof Effect)) {
+      return _mapEffect((Effect)effect);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        java.util.Arrays.<Object>asList(effect).toString());
     }
   }
   
@@ -526,6 +703,17 @@ public class ModelSequencer {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         java.util.Arrays.<Object>asList(e).toString());
+    }
+  }
+  
+  public Declaration replaced(final Declaration ed) {
+    if ((ed instanceof EventDefinition)) {
+      return _replaced((EventDefinition)ed);
+    } else if ((ed instanceof VariableDefinition)) {
+      return _replaced((VariableDefinition)ed);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        java.util.Arrays.<Object>asList(ed).toString());
     }
   }
 }
