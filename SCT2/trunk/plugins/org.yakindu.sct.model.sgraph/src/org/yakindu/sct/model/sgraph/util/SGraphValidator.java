@@ -63,6 +63,7 @@ public class SGraphValidator extends EObjectValidator {
 	public final static String ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS = "Entries must not have more than one outgoing transition";
 	public static final String ISSUE_SUBMACHINESTATE_WITHOUT_SUBMACHINE = "Selected Submachine can not be resolved.";
 	public static final String ISSUE_SUBMACHINESTATE__CYCLE = "A submachine state can not contain itself as as Submachine.";
+	public static final String ISSUE_ENTRY_WITH_TRIGGER = "Outgoing Transitions from Entries can not have a Trigger.";
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -496,7 +497,28 @@ public class SGraphValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(entry, diagnostics, context);
 		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(entry, diagnostics, context);
 		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(entry, diagnostics, context);
+		if (result || diagnostics != null) result &= validateEntry_DisallowTrigger(entry, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the DisallowTrigger constraint of '<em>Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEntry_DisallowTrigger(Entry entry, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		
+		for (Transition transition: entry.getOutgoingTransitions()){
+			if (transition.getTrigger()!=null) {
+				if (diagnostics != null) {
+					diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR,
+							DIAGNOSTIC_SOURCE, 0, ISSUE_ENTRY_WITH_TRIGGER, new Object[] { transition }));
+				}
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
