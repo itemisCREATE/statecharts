@@ -208,8 +208,6 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		}
 
 		setSanityCheckEnablementState(false);
-		diagramWorkbenchPart.getDiagramEditPart().disableEditMode();
-
 		for (Object editPart : diagramWorkbenchPart.getDiagramGraphicalViewer()
 				.getEditPartRegistry().values()) {
 			if (editPart instanceof IGraphicalEditPart) {
