@@ -22,6 +22,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
+import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog.StatechartViewerFilter;
 import org.yakindu.sct.ui.editor.editor.StatechartElementTypes;
 
 /**
@@ -36,46 +37,49 @@ public class StateEditHelper extends VertexEditHelper {
 	 */
 	@Override
 	protected ICommand getConfigureCommand(ConfigureRequest req) {
-		SGraphFactory factory = SGraphFactory.eINSTANCE;
 
-		// Composite State gets one region
 		if (StatechartElementTypes.COMPOSITE_STATE.equals(req
 				.getTypeToConfigure())) {
-			Region region = factory.createRegion();
-			region.setName("r1");
-			return new SetValueCommand(new SetRequest(
-					req.getElementToConfigure(),
-					SGraphPackage.Literals.STATE__SUB_REGIONS, region));
-
-			// Orthogonal State gets two regions
+			return createCompositeStateCommand(req);
 		} else if (StatechartElementTypes.ORTHOGONAL_STATE.equals(req
 				.getTypeToConfigure())) {
-			Region region = factory.createRegion();
-			region.setName("r1");
-			Region region2 = factory.createRegion();
-			region2.setName("r2");
-			return new SetValueCommand(new SetRequest(
-					req.getElementToConfigure(),
-					SGraphPackage.Literals.STATE__SUB_REGIONS,
-					com.google.common.collect.Lists.newArrayList(region,
-							region2)));
-
-			// Prompts the user to select a submachine resource
+			return createOrthogonalState(req);
 		} else if (StatechartElementTypes.SUBMACHINE_STATE.equals(req
 				.getTypeToConfigure())) {
-			SelectSubmachineDialog dialog = new SelectSubmachineDialog(
-					new Shell());
-			if (Dialog.OK == dialog.open()) {
-				Statechart selectedSubmachine = dialog.getSelectedSubmachine();
-				if (selectedSubmachine != null) {
-					return new SetValueCommand(
-							new SetRequest(
-									req.getElementToConfigure(),
-									SGraphPackage.Literals.STATE__SUBSTATECHART,
-									selectedSubmachine));
-				}
+			return createSubmachineStateCommand(req);
+		}
+		return null;
+	}
+
+	private ICommand createSubmachineStateCommand(ConfigureRequest req) {
+		SelectSubmachineDialog dialog = new SelectSubmachineDialog(new Shell(),
+				new StatechartViewerFilter(req.getElementToConfigure()));
+		if (Dialog.OK == dialog.open()) {
+			Statechart selectedSubmachine = dialog.getSelectedSubmachine();
+			if (selectedSubmachine != null) {
+				return new SetValueCommand(new SetRequest(
+						req.getElementToConfigure(),
+						SGraphPackage.Literals.STATE__SUBSTATECHART,
+						selectedSubmachine));
 			}
 		}
 		return null;
+	}
+
+	private ICommand createOrthogonalState(ConfigureRequest req) {
+		Region region = SGraphFactory.eINSTANCE.createRegion();
+		region.setName("r1");
+		Region region2 = SGraphFactory.eINSTANCE.createRegion();
+		region2.setName("r2");
+		return new SetValueCommand(new SetRequest(req.getElementToConfigure(),
+				SGraphPackage.Literals.STATE__SUB_REGIONS,
+				com.google.common.collect.Lists.newArrayList(region, region2)));
+	}
+
+	private ICommand createCompositeStateCommand(ConfigureRequest req) {
+		Region region = SGraphFactory.eINSTANCE.createRegion();
+		region.setName("r1");
+		return new SetValueCommand(new SetRequest(req.getElementToConfigure(),
+				SGraphPackage.Literals.STATE__SUB_REGIONS, region));
 	}
 }

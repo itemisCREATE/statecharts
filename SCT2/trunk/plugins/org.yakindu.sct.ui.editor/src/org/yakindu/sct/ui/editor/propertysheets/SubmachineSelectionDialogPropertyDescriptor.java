@@ -34,6 +34,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
+import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog.StatechartViewerFilter;
 
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
 
@@ -49,27 +50,27 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 		@Override
 		public void notifyChanged(Notification msg) {
 			if (msg.getFeature() == SGraphPackage.Literals.STATE__SUBSTATECHART) {
-				updateLabel(submachine);
+				updateLabel(state);
 			}
 		}
 	}
 
-	private State submachine;
+	private State state;
 	private Label label;
 	private UpdateLabelAdapter updateLabelAdapter;
 
 	public void updateModelBinding(EObject eObject) {
-		this.submachine = (State) eObject;
-		updateLabel(submachine);
+		this.state = (State) eObject;
+		updateLabel(state);
 		if (updateLabelAdapter == null) {
 			updateLabelAdapter = new UpdateLabelAdapter();
-			submachine.eAdapters().add(updateLabelAdapter);
+			state.eAdapters().add(updateLabelAdapter);
 		}
 
 	}
 
 	private void updateLabel(State state) {
-		Statechart substatechart = submachine.getSubstatechart();
+		Statechart substatechart = state.getSubstatechart();
 		if (substatechart != null) {
 			label.setText(substatechart.eResource().getURI().toString());
 		}
@@ -100,14 +101,15 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 		openDialog.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
 				SelectSubmachineDialog dialog = new SelectSubmachineDialog(
-						parent.getShell());
+						parent.getShell(), new StatechartViewerFilter(
+								state));
 				if (Dialog.OK == dialog.open()) {
 					Statechart selectedSubmachine = dialog
 							.getSelectedSubmachine();
 					if (selectedSubmachine != null) {
 						SetValueCommand command = new SetValueCommand(
 								new SetRequest(
-										submachine,
+										state,
 										SGraphPackage.Literals.STATE__SUBSTATECHART,
 										selectedSubmachine));
 						try {
@@ -129,6 +131,6 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 	}
 
 	public void dispose() {
-		submachine.eAdapters().remove(updateLabelAdapter);
+		state.eAdapters().remove(updateLabelAdapter);
 	}
 }
