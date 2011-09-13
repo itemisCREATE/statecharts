@@ -8,7 +8,6 @@
 	    nameFilter="*.sct">
 	    <action
            class="org.yakindu.sct.generator.ui.actions.GenerateCppActionDelegate"
-           definitionId="org.eclipse.ui.examples.readmetool.action1"
            enablesFor="1"
            icon="icons/c_app.gif"
            id="org.yakindu.sct.generator.ui.generateaction"
