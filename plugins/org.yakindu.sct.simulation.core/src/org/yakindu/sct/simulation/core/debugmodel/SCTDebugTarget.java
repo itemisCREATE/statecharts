@@ -216,7 +216,6 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 		return isSuspended() && !isTerminated();
 	}
 
-	@Override
 	public void stateEntered(Vertex vertex) {
 		if (vertex instanceof State) {
 			if (((State) vertex).isLeaf()) {
@@ -227,7 +226,6 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 		fireChangeEvent(DebugEvent.CONTENT);
 	}
 
-	@Override
 	public void stateLeft(Vertex vertex) {
 		if (vertex instanceof State) {
 			activeStates.remove(vertex);
