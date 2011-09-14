@@ -1,13 +1,13 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: SText Core
+Bundle-Name: Yakindu SCT SText
 Bundle-Vendor: YAKINDU
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: org.yakindu.sct.model.stext;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
- org.apache.log4j;bundle-version="1.2.15";visibility:=reexport,
- org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional;visibility:=reexport,
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
+ org.apache.log4j;visibility:=reexport,
+ org.apache.commons.logging;resolution:=optional;visibility:=reexport,
  org.eclipse.xtext.generator;resolution:=optional,
  org.eclipse.emf.codegen.ecore;resolution:=optional,
  org.eclipse.emf.mwe.utils;resolution:=optional,
@@ -17,8 +17,8 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.emf.common,
  org.antlr.runtime,
  org.eclipse.xtext.common.types,
- org.yakindu.sct.model.sgraph;bundle-version="1.0.0",
- de.itemis.xtext.utils.gmf;bundle-version="1.0.0"
+ org.yakindu.sct.model.sgraph,
+ de.itemis.xtext.utils.gmf
 Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.eclipse.xtext.builder.builderState,

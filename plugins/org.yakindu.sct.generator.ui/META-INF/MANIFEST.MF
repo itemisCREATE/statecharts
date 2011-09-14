@@ -1,16 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Generator UI Plugin
+Bundle-Name: Yakindu SCT Generator UI
 Bundle-SymbolicName: org.yakindu.sct.generator.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.yakindu.sct.generator.ui.GeneratorUIActivator
 Bundle-Vendor: YAKINDU
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.core.resources;bundle-version="3.7.100",
- org.eclipse.emf;bundle-version="2.6.0",
- org.eclipse.emf.common;bundle-version="2.7.0",
- org.yakindu.sct.generator.base;bundle-version="1.0.0"
+ org.eclipse.core.resources,
+ org.eclipse.emf,
+ org.eclipse.emf.common,
+ org.yakindu.sct.generator.base
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.generator.ui.actions

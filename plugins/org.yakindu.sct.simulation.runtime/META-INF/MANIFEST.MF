@@ -1,15 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: YAKINDU SCT Runtime
+Bundle-Name: Yakindu SCT Runtime
 Bundle-SymbolicName: org.yakindu.sct.simulation.runtime;singleton:=true
 Bundle-Version: 1.1.0.qualifier
 Bundle-Vendor: YAKINDU
-Require-Bundle: org.yakindu.sct.model.sgraph;bundle-version="1.0.0",
- org.eclipse.xtext;bundle-version="2.0.0",
- org.yakindu.sct.model.stext;bundle-version="1.0.0",
- org.yakindu.sct.model.stext.ui;bundle-version="1.0.0",
- org.eclipse.core.runtime;bundle-version="3.7.0",
- org.yakindu.sct.simulation.core;bundle-version="1.0.0"
+Require-Bundle: org.yakindu.sct.model.sgraph,
+ org.eclipse.xtext,
+ org.yakindu.sct.model.stext,
+ org.yakindu.sct.model.stext.ui,
+ org.eclipse.core.runtime,
+ org.yakindu.sct.simulation.core
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.simulation.runtime,
