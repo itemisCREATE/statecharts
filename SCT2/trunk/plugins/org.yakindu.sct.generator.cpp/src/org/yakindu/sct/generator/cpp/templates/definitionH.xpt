@@ -27,7 +27,10 @@ typedef int int32_t;
 typedef short int16_t;
 
 typedef int32_t integer; 
-
+typedef bool boolean;
+typedef float real;
+//typedef string char*;
+ 
 #endif /* DEFINITION_H_ */
 «ENDFILE»
 
