@@ -99,6 +99,25 @@ void «StName()»::cycle_«this.simpleName»(const _Event& ev)
 }
 «ENDDEFINE»
 
+«DEFINE EnterMethodImplement FOR ExecutionState»
+ENTER METHOD IMPLE
+«IF this.entryAction != null»
+void «StName()»::enter_«this.simpleName»()
+{
+«EXPAND ActionCode FOR this.entryAction»
+}
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE ExitMethodImplement FOR ExecutionState»
+«IF this.exitAction != null»
+void «StName()»::exit_«this.simpleName»()
+{
+«EXPAND ActionCode FOR this.exitAction»
+}
+«ENDIF»
+«ENDDEFINE»
+
 «DEFINE file FOR ExecutionFlow»
 «FILE StName()+'.cpp'»
 #include <iostream>
@@ -115,11 +134,11 @@ void «StName()»::cycle_«this.simpleName»(const _Event& ev)
 «EXPAND StatementMethodsImplement FOREACH this.states»
 
 «EXPAND CycleMethodsImplement FOREACH this.states»
-«REM»
-«EXPAND EnterMethodImplement FOREACH this.state»
 
-«EXPAND ExitMethodImplement FOREACH this.state»
-«ENDREM»
+«EXPAND EnterMethodImplement FOREACH this.states»
+
+«EXPAND ExitMethodImplement FOREACH this.states»
+
 
 void «StName()»::init()
 {

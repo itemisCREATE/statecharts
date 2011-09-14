@@ -38,26 +38,40 @@ public:
 
 protected:
 	/* conditions */
-	«FOREACH states AS conStates -»
-	  «FOREACH conStates.reactions AS state -»
-	  «IF state.check != null -»
-	void «state.check.functionName()»(const _Event& event);
+	«FOREACH states AS state -»
+	  «FOREACH state.reactions AS reaction -»
+	  «IF reaction.check != null -»
+	void «reaction.check.functionName()»(const _Event& event);
 	  «ENDIF»
 	  «ENDFOREACH»
 	«ENDFOREACH»
 	
 	/* actions */
-	«FOREACH states AS conStates -»
-	  «FOREACH conStates.reactions AS state -»
-	void «state.effect.functionName()»();
+	«FOREACH states AS state -»
+	  «FOREACH state.reactions AS reaction -»
+	void «reaction.effect.functionName()»();
 	  «ENDFOREACH»
 	«ENDFOREACH»
 
 	/* cycles */
-	«FOREACH states AS conStates -»
-	void cycle_«conStates.simpleName»();
+	«FOREACH states AS state -»
+	void cycle_«state.simpleName»();
 	«ENDFOREACH»
-
+	
+	/* entrys */
+	«FOREACH states AS state -»
+	«IF state.entryAction != null»
+	void entry_«state.simpleName»();
+	«ENDIF»
+	«ENDFOREACH»
+	
+	/*exits */
+	«FOREACH states AS state -»
+	«IF state.exitAction != null»
+	void exit_«state.simpleName»();
+	«ENDIF»
+	«ENDFOREACH»
+	
 	virtual void _runCycle(Event ev);
 
 public:
