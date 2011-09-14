@@ -60,14 +60,10 @@ public:
 
 	«DRName()»() : 
 «FOREACH this.declaredVariables() AS variable SEPARATOR ','-»
-    «((VariableDefinition)variable).name»(0)«
-    ENDFOREACH»
+ «((VariableDefinition)variable).name»(0)«
+ENDFOREACH»
 	{};
 	virtual ~«DRName()»() {};
-
-//	void init_data(uint32_t _var1, uint32_t _counter, float _sub_counter)
-//	{ var1 = _var1; counter = _counter; sub_counter = _sub_counter; }
-
 	
 «FOREACH this.declaredVariables() AS variable»
     «((VariableDefinition)variable).type» get_«((VariableDefinition)variable).name»()

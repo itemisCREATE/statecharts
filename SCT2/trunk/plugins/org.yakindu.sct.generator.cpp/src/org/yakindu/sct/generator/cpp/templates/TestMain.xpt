@@ -37,20 +37,18 @@ int main()
 	char* stateName[6] = {"State1", "State2", "State3", "State4", "State5", "State6"};
 	«StName()» machine;
 
-	/* initialize data repository */
-//	machine.init_data(1,0,0.0);
-
-	/* initialize the initial states */
+	// initialize the initial states 
 	machine.init();
-
-	/* create one event and enqueue it */
+	
+	/* Example code 
+	// create one event and enqueue it 
 	Event e = createEvent<Event1>();
 	machine.queueEvent(e);
 
-	/* run the cycle */
+	// run the cycle 
 	machine.runCycle();
 
-	/* check the state */
+	// check the state 
 	std::cout << stateName[machine.getState(0)] << "\n";
 	assert( strcmp(stateName[machine.getState(0)], "State3") == 0);
 
@@ -62,7 +60,7 @@ int main()
 	std::cout << stateName[machine.getState(0)] << "\n";
 	assert( strcmp(stateName[machine.getState(0)], "State1") == 0);
 
-	/* does event queuing work? */
+	// does event queuing work?
 	e = createEvent<Event1>();
 	machine.queueEvent(e);
 	e = createEvent<Event3>();
@@ -73,7 +71,7 @@ int main()
 	std::cout << stateName[machine.getState(0)] << "\n";
 	assert( strcmp(stateName[machine.getState(0)], "State3") == 0);
 
-	/* run second cycle */
+	// run second cycle
 	machine.runCycle();
 
 	std::cout << stateName[machine.getState(0)] << "\n";
@@ -103,7 +101,10 @@ int main()
 	std::cout << stateName[machine.getState(0)] << "\n";
 	assert( strcmp(stateName[machine.getState(0)], "State1") == 0);
 
+	*/
+	
 	return(0);
+	
 }
 
 «ENDFILE»
