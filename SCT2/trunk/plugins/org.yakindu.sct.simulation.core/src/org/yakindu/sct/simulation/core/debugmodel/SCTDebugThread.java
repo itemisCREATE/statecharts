@@ -44,7 +44,6 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	public IStackFrame[] getStackFrames() throws DebugException {
 		List<Vertex> activeStates = getDebugTarget().getActiveStatesForRegion(
 				region);
-		System.out.println(getName() + " active States " + activeStates);
 		List<IStackFrame> stackFrames = new ArrayList<IStackFrame>();
 		for (int i = activeStates.size() - 1; i >= 0; i--) {
 			stackFrames.add(new SCTStackFrame(this, activeStates.get(i),
@@ -58,7 +57,7 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public String getName() throws DebugException {
-		return region.getName();
+		return fullQfn(region);
 	}
 
 	public IBreakpoint[] getBreakpoints() {

@@ -10,19 +10,12 @@
  */
 package org.yakindu.sct.simulation.core.debugmodel;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IRegisterGroup;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IVariable;
-import org.eclipse.emf.ecore.EObject;
-import org.yakindu.sct.model.sgraph.NamedElement;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.ISGraphExecutionFacade;
 import org.yakindu.sct.simulation.core.SGraphSimulationSession;
@@ -138,35 +131,7 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 	}
 
 	public String getName() throws DebugException {
-		List<String> qfnFragments = new ArrayList<String>();
-		qfnFragments.add(state.getName());
-		EObject current = state;
-		while (!(current.eContainer() instanceof Statechart)) {
-			current = current.eContainer();
-			if (current instanceof NamedElement) {
-				String name = ((NamedElement) current).getName();
-				if (name != null) {
-					qfnFragments.add(name.replaceAll(" ", ""));
-				} else {
-					qfnFragments.add("<name>");
-				}
-			}
-		}
-		Collections.reverse(qfnFragments);
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(state.getName());
-		sb.append("  (");
-		String sep = "";
-		for (String s : qfnFragments) {
-			sb.append(sep).append(s);
-			sep = ".";
-		}
-		sb.append(")");
-
-		sb.append(" resource: ");
-		sb.append(state.eResource().getURI().lastSegment());
-		return sb.toString();
+		return fullQfn(state);
 
 	}
 
