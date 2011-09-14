@@ -28,7 +28,10 @@ import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchListener;
 import org.eclipse.debug.core.model.IDebugTarget;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
+import org.yakindu.sct.simulation.core.util.ResourceUtil;
 
 /**
  * 
@@ -139,15 +142,36 @@ public class SCTHotModelReplacementManager implements IResourceChangeListener,
 			changedFiles.clear();
 			delta.accept(this);
 			if (changedFiles.size() > 0) {
-				List<SCTDebugTarget> targets = getAffectedTargets();
-				if (targets.size() > 0) {
-					notifyHotModelReplacementFailed(targets);
-				}
+				handleHotModelReplacement();
 			}
 
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void handleHotModelReplacement() {
+		// first implementation: If the underlying model does not change
+		// semantically, no notification is required...
+
+		List<SCTDebugTarget> targets = getAffectedTargets();
+		List<SCTDebugTarget> modelReplacementFailedTargets = new ArrayList<SCTDebugTarget>();
+		for (SCTDebugTarget sctDebugTarget : targets) {
+			// Reload the Statechart form the changes resource
+			Statechart newStatechart = ResourceUtil
+					.loadStatechart(sctDebugTarget.getResourceString());
+			if (!EcoreUtil
+					.equals(newStatechart, sctDebugTarget.getStatechart())) {
+				// The model semantically changed, we have to create a
+				// notificiation for that....
+				modelReplacementFailedTargets.add(sctDebugTarget);
+			}
+		}
+
+		if (modelReplacementFailedTargets.size() > 0) {
+			notifyHotModelReplacementFailed(targets);
+		}
+
 	}
 
 	protected void notifyHotModelReplacementFailed(

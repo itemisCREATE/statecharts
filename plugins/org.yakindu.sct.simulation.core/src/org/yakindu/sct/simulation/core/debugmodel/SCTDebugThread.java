@@ -11,18 +11,15 @@
 package org.yakindu.sct.simulation.core.debugmodel;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
-import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.ISGraphExecutionFacade;
-import org.yakindu.sct.simulation.core.ISGraphExecutionListener;
 import org.yakindu.sct.simulation.core.SGraphSimulationSession;
 
 /**
@@ -30,26 +27,14 @@ import org.yakindu.sct.simulation.core.SGraphSimulationSession;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SCTDebugThread extends SCTDebugElement implements IThread,
-		ISGraphExecutionListener {
+public class SCTDebugThread extends SCTDebugElement implements IThread {
 
-	private boolean stepping = false;
-	private boolean terminated = false;
-	private boolean suspended = false;
-	private Thread thread;
-	private SGraphSimulationSession session;
-	private final ISGraphExecutionFacade facade;
-	private List<Vertex> activeStates = new ArrayList<Vertex>();
+	private final Region region;
 
 	public SCTDebugThread(SCTDebugTarget target, ISGraphExecutionFacade facade,
-			String resourceString) {
+			String resourceString, Region region) {
 		super(target, resourceString);
-		this.facade = facade;
-		session = new SGraphSimulationSession(facade);
-		facade.addExecutionListener(this);
-		thread = new Thread(session);
-		thread.start();
-		session.start();
+		this.region = region;
 	}
 
 	public int getPriority() throws DebugException {
@@ -57,6 +42,9 @@ public class SCTDebugThread extends SCTDebugElement implements IThread,
 	}
 
 	public IStackFrame[] getStackFrames() throws DebugException {
+		List<Vertex> activeStates = getDebugTarget().getActiveStatesForRegion(
+				region);
+		System.out.println(getName() + " active States " + activeStates);
 		List<IStackFrame> stackFrames = new ArrayList<IStackFrame>();
 		for (int i = activeStates.size() - 1; i >= 0; i--) {
 			stackFrames.add(new SCTStackFrame(this, activeStates.get(i),
@@ -69,31 +57,8 @@ public class SCTDebugThread extends SCTDebugElement implements IThread,
 		return true;
 	}
 
-	public void stateEntered(Vertex vertex) {
-		activeStates.add(vertex);
-		fireChangeEvent(DebugEvent.CONTENT);
-	}
-
-	public void stateLeft(Vertex vertex) {
-		activeStates.remove(vertex);
-		fireChangeEvent(DebugEvent.CONTENT);
-
-	}
-
-	public void transitionFired(Transition transition) {
-		// Nothing to do
-	}
-
-	public void variableValueChanged(String variableName, Object value) {
-		// Nothing to do
-	}
-
-	public void eventRaised(String eventName) {
-		// Nothing to do
-	}
-
 	public String getName() throws DebugException {
-		return "TODO";
+		return region.getName();
 	}
 
 	public IBreakpoint[] getBreakpoints() {
@@ -101,29 +66,23 @@ public class SCTDebugThread extends SCTDebugElement implements IThread,
 	}
 
 	public boolean canResume() {
-		return suspended && !terminated;
+		return getDebugTarget().canResume();
 	}
 
 	public boolean canSuspend() {
-		return !suspended && !terminated;
+		return getDebugTarget().canSuspend();
 	}
 
 	public boolean isSuspended() {
-		return suspended;
+		return getDebugTarget().isSuspended();
 	}
 
 	public void resume() throws DebugException {
-		fireEvent(new DebugEvent(this, DebugEvent.RESUME));
-		fireChangeEvent(DebugEvent.CONTENT);
-		session.resume();
-		suspended = false;
+		getDebugTarget().resume();
 	}
 
 	public void suspend() throws DebugException {
-		fireEvent(new DebugEvent(this, DebugEvent.SUSPEND));
-		fireChangeEvent(DebugEvent.CONTENT);
-		session.suspend();
-		suspended = true;
+		getDebugTarget().suspend();
 	}
 
 	public boolean canStepInto() {
@@ -131,7 +90,7 @@ public class SCTDebugThread extends SCTDebugElement implements IThread,
 	}
 
 	public boolean canStepOver() {
-		return isSuspended() && !isTerminated();
+		return getDebugTarget().canStepOver();
 	}
 
 	public boolean canStepReturn() {
@@ -139,34 +98,29 @@ public class SCTDebugThread extends SCTDebugElement implements IThread,
 	}
 
 	public boolean isStepping() {
-		return stepping;
+		return getDebugTarget().isStepping();
 	}
 
 	public void stepInto() throws DebugException {
 	}
 
 	public void stepOver() throws DebugException {
-		fireEvent(new DebugEvent(getDebugTarget(), DebugEvent.STEP_OVER));
-		session.singleStep();
+		getDebugTarget().stepOver();
 	}
 
 	public void stepReturn() throws DebugException {
 	}
 
 	public boolean canTerminate() {
-		return !terminated;
+		return getDebugTarget().canTerminate();
 	}
 
 	public boolean isTerminated() {
-		return terminated;
+		return getDebugTarget().isTerminated();
 	}
 
 	public void terminate() throws DebugException {
-		facade.removeExecutionListener(this);
-		activeStates = Collections.emptyList();
-		fireEvent(new DebugEvent(getDebugTarget(), DebugEvent.TERMINATE));
-		terminated = true;
-		session.terminate();
+		getDebugTarget().terminate();
 	}
 
 	public IStackFrame getTopStackFrame() throws DebugException {
@@ -175,10 +129,15 @@ public class SCTDebugThread extends SCTDebugElement implements IThread,
 
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (adapter == SGraphSimulationSession.class)
-			return session;
+			return getDebugTarget().getAdapter(SGraphSimulationSession.class);
 		if (adapter == ISGraphExecutionFacade.class)
 			return getDebugTarget().getAdapter(ISGraphExecutionFacade.class);
 		return super.getAdapter(adapter);
+	}
+
+	@Override
+	public SCTDebugTarget getDebugTarget() {
+		return (SCTDebugTarget) super.getDebugTarget();
 	}
 
 }
