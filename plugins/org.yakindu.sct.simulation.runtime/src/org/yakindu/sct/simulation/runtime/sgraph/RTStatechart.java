@@ -60,11 +60,11 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 		timingService = ts;
 	}
 
-	public void removeExecutionListener(ISGraphExecutionListener listener) {
+	public synchronized void removeExecutionListener(ISGraphExecutionListener listener) {
 		listeners.remove(listener);
 	}
 
-	public void addExecutionListener(ISGraphExecutionListener listener) {
+	public synchronized void addExecutionListener(ISGraphExecutionListener listener) {
 		listeners.add(listener);
 	}
 
@@ -118,38 +118,38 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 		return Collections.unmodifiableSet(variables);
 	}
 
-	protected void stateLeft(RTState state) {
+	protected synchronized void stateLeft(RTState state) {
 		currentStateConfigurartion.remove(state);
 		for (ISGraphExecutionListener listener : listeners) {
 			listener.stateLeft((Vertex) elementToAliasMap.get(state));
 		}
 	}
 
-	protected void stateEntered(RTState state) {
+	protected synchronized void stateEntered(RTState state) {
 		currentStateConfigurartion.add(state);
 		for (ISGraphExecutionListener listener : listeners) {
 			listener.stateEntered((Vertex) elementToAliasMap.get(state));
 		}
 	}
 
-	protected void transitionFired(RTReaction trans) {
+	protected synchronized void transitionFired(RTReaction trans) {
 		for (ISGraphExecutionListener listener : listeners) {
 			listener.transitionFired((Transition) elementToAliasMap.get(trans));
 		}
 	}
 
-	public void setVariableValue(RTVariable variable, Object value) {
+	public synchronized void setVariableValue(RTVariable variable, Object value) {
 		variable.setValue(value);
 		for (ISGraphExecutionListener listener : listeners) {
 			listener.variableValueChanged(variable.getName(), value);
 		}
 	}
 
-	public Set<RTState> getCurrentStateConfiguration() {
+	public synchronized Set<RTState> getCurrentStateConfiguration() {
 		return Collections.unmodifiableSet(currentStateConfigurartion);
 	}
 
-	public void raise(String signal, Object object) {
+	public synchronized void raise(String signal, Object object) {
 		RTSignalEvent event = eventMap.get(signal);
 		event.setValue(object);
 		setEvent(event);
@@ -159,7 +159,7 @@ public class RTStatechart extends AbstractStatechart implements ExecutionScope,
 
 	}
 
-	public void reset(String signal) {
+	public synchronized void reset(String signal) {
 		RTSignalEvent event = eventMap.get(signal);
 		event.setValue(null);
 		raisedEvents.remove(event);
