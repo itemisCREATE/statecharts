@@ -1,8 +1,10 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
+import org.apache.log4j.spi.TriggeringEventEvaluator;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Reaction;
+import org.yakindu.sct.model.sgraph.ReactiveElement;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -13,10 +15,13 @@ import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.Assignment;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
+import org.yakindu.sct.model.stext.stext.EntryEvent;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
+import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
+import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
@@ -120,6 +125,40 @@ public class SCTTestUtil {
 		if (reaction != null) reaction.setEffect(effect);
 		return effect;
 	}
+	
+	
+	public static LocalReaction _createEntryAction(ReactiveElement parent) {
+		LocalReaction reaction = StextFactory.eINSTANCE.createLocalReaction();
+		ReactionTrigger trigger = StextFactory.eINSTANCE.createReactionTrigger();
+		EntryEvent entryEvent = StextFactory.eINSTANCE.createEntryEvent();
+		_createReactionEffect(reaction);
+		
+		trigger.getTriggers().add(entryEvent);
+		reaction.setTrigger(trigger);
+		if (parent != null) parent.getLocalReactions().add(reaction);
+		
+		return reaction;
+	}
+	
+	
+	public static LocalReaction _createExitAction(ReactiveElement parent) {
+		return _createLocalRection(parent, StextFactory.eINSTANCE.createExitEvent() );
+	}
+	
+	public static LocalReaction _createLocalRection(ReactiveElement parent, EventSpec triggerEvent) {
+		LocalReaction reaction = StextFactory.eINSTANCE.createLocalReaction();
+		ReactionTrigger trigger = StextFactory.eINSTANCE.createReactionTrigger();
+		_createReactionEffect(reaction);
+		
+		trigger.getTriggers().add(triggerEvent);
+		reaction.setTrigger(trigger);
+		if (parent != null) parent.getLocalReactions().add(reaction);
+		
+		return reaction;
+	}
+	
+	
+
 	
 	public static Assignment _createVariableAssignment(VariableDefinition v, AssignmentOperator op, Expression expression, ReactionEffect e) {
 		Assignment assignment = StextFactory.eINSTANCE.createAssignment();

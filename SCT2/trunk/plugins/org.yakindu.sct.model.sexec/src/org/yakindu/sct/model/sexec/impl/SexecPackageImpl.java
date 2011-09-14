@@ -275,15 +275,6 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * @generated
 	 */
 	public EReference getExecutionState_Cycle() {
-		return (EReference)executionStateEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getExecutionState_Reactions() {
 		return (EReference)executionStateEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -292,8 +283,35 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getExecutionState_Reactions() {
+		return (EReference)executionStateEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExecutionState_EntryAction() {
+		return (EReference)executionStateEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExecutionState_ExitAction() {
+		return (EReference)executionStateEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getExecutionState_Leaf() {
-		return (EAttribute)executionStateEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)executionStateEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -593,9 +611,11 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		executionStateEClass = createEClass(EXECUTION_STATE);
 		createEAttribute(executionStateEClass, EXECUTION_STATE__SIMPLE_NAME);
+		createEAttribute(executionStateEClass, EXECUTION_STATE__LEAF);
 		createEReference(executionStateEClass, EXECUTION_STATE__CYCLE);
 		createEReference(executionStateEClass, EXECUTION_STATE__REACTIONS);
-		createEAttribute(executionStateEClass, EXECUTION_STATE__LEAF);
+		createEReference(executionStateEClass, EXECUTION_STATE__ENTRY_ACTION);
+		createEReference(executionStateEClass, EXECUTION_STATE__EXIT_ACTION);
 
 		reactionEClass = createEClass(REACTION);
 		createEReference(reactionEClass, REACTION__CHECK);
@@ -695,9 +715,11 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		initEClass(executionStateEClass, ExecutionState.class, "ExecutionState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExecutionState_SimpleName(), ecorePackage.getEString(), "simpleName", null, 0, 1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExecutionState_Leaf(), ecorePackage.getEBoolean(), "leaf", "false", 0, 1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionState_Cycle(), this.getCycle(), null, "cycle", null, 0, 1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionState_Reactions(), this.getReaction(), null, "reactions", null, 0, -1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getExecutionState_Leaf(), ecorePackage.getEBoolean(), "leaf", "false", 0, 1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionState_EntryAction(), this.getStep(), null, "entryAction", null, 0, 1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionState_ExitAction(), this.getStep(), null, "exitAction", null, 0, 1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(reactionEClass, Reaction.class, "Reaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getReaction_Check(), this.getCheck(), null, "check", null, 0, 1, Reaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
