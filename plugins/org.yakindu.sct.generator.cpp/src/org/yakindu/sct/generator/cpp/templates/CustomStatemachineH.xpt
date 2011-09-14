@@ -55,20 +55,20 @@ protected:
 
 	/* cycles */
 	«FOREACH states AS state -»
-	void cycle_«state.simpleName»();
+	void cycle_«state.simpleName»(const _Event& ev);
 	«ENDFOREACH»
 	
 	/* entrys */
 	«FOREACH states AS state -»
 	«IF state.entryAction != null»
-	void entry_«state.simpleName»();
+	void «state.entryAction.entryActionFunctionName()»();
 	«ENDIF»
 	«ENDFOREACH»
 	
 	/*exits */
 	«FOREACH states AS state -»
 	«IF state.exitAction != null»
-	void exit_«state.simpleName»();
+	void «state.exitAction.exitActionFunctionName()»();
 	«ENDIF»
 	«ENDFOREACH»
 	
