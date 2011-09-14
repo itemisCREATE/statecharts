@@ -89,6 +89,9 @@
 		<copy todir="${buildDirectory}/features">
 			<fileset dir="${buildWorkspace}/svn_repository/features" />
 		</copy>
+		<copy todir="${buildDirectory}/features">
+			<fileset dir="${buildWorkspace}/gmf_utils_repository/features" />
+		</copy>
 
 		<!-- remove the "-feature" suffix of all feature projects in the features folder -->
 		<for param="currentFeatureDir" keepgoing="true">
