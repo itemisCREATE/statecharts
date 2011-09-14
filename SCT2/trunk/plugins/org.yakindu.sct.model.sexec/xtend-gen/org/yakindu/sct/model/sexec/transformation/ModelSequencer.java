@@ -825,55 +825,77 @@ public class ModelSequencer {
   }
   
   public List<LocalReaction> entryReactions(final State state) {
-    EList<org.yakindu.sct.model.sgraph.Reaction> _localReactions = state.getLocalReactions();
-    final Function1<org.yakindu.sct.model.sgraph.Reaction,Boolean> _function = new Function1<org.yakindu.sct.model.sgraph.Reaction,Boolean>() {
-        public Boolean apply(final org.yakindu.sct.model.sgraph.Reaction r) {
-          Trigger _trigger = r.getTrigger();
-          EList<EventSpec> _triggers = ((ReactionTrigger) _trigger).getTriggers();
-          final Function1<EventSpec,Boolean> _function_1 = new Function1<EventSpec,Boolean>() {
-              public Boolean apply(final EventSpec t) {
-                return (t instanceof org.yakindu.sct.model.stext.stext.EntryEvent);
-              }
-            };
-          boolean _exists = IterableExtensions.<EventSpec>exists(_triggers, _function_1);
-          return ((Boolean)_exists);
-        }
-      };
-    Iterable<org.yakindu.sct.model.sgraph.Reaction> _filter = IterableExtensions.<org.yakindu.sct.model.sgraph.Reaction>filter(_localReactions, _function);
-    final Function1<org.yakindu.sct.model.sgraph.Reaction,LocalReaction> _function_2 = new Function1<org.yakindu.sct.model.sgraph.Reaction,LocalReaction>() {
-        public LocalReaction apply(final org.yakindu.sct.model.sgraph.Reaction lr) {
-          return ((LocalReaction) lr);
-        }
-      };
-    Iterable<LocalReaction> _map = IterableExtensions.<org.yakindu.sct.model.sgraph.Reaction, LocalReaction>map(_filter, _function_2);
-    List<LocalReaction> _list = IterableExtensions.<LocalReaction>toList(_map);
-    return _list;
+    List<LocalReaction> _xblockexpression = null;
+    {
+      List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(state);
+      final Function1<EObject,Boolean> _function = new Function1<EObject,Boolean>() {
+          public Boolean apply(final EObject e) {
+            return (e instanceof org.yakindu.sct.model.stext.stext.LocalReaction);
+          }
+        };
+      Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_eAllContentsAsList, _function);
+      Iterable<EObject> localReactions = _filter;
+      final Function1<EObject,Boolean> _function_1 = new Function1<EObject,Boolean>() {
+          public Boolean apply(final EObject r) {
+            Trigger _trigger = ((LocalReaction) r).getTrigger();
+            EList<EventSpec> _triggers = ((ReactionTrigger) _trigger).getTriggers();
+            final Function1<EventSpec,Boolean> _function_2 = new Function1<EventSpec,Boolean>() {
+                public Boolean apply(final EventSpec t) {
+                  return (t instanceof org.yakindu.sct.model.stext.stext.EntryEvent);
+                }
+              };
+            boolean _exists = IterableExtensions.<EventSpec>exists(_triggers, _function_2);
+            return ((Boolean)_exists);
+          }
+        };
+      Iterable<EObject> _filter_1 = IterableExtensions.<EObject>filter(localReactions, _function_1);
+      final Function1<EObject,LocalReaction> _function_3 = new Function1<EObject,LocalReaction>() {
+          public LocalReaction apply(final EObject lr) {
+            return ((LocalReaction) lr);
+          }
+        };
+      Iterable<LocalReaction> _map = IterableExtensions.<EObject, LocalReaction>map(_filter_1, _function_3);
+      List<LocalReaction> _list = IterableExtensions.<LocalReaction>toList(_map);
+      _xblockexpression = (_list);
+    }
+    return _xblockexpression;
   }
   
   public List<LocalReaction> exitReactions(final State state) {
-    EList<org.yakindu.sct.model.sgraph.Reaction> _localReactions = state.getLocalReactions();
-    final Function1<org.yakindu.sct.model.sgraph.Reaction,Boolean> _function = new Function1<org.yakindu.sct.model.sgraph.Reaction,Boolean>() {
-        public Boolean apply(final org.yakindu.sct.model.sgraph.Reaction r) {
-          Trigger _trigger = r.getTrigger();
-          EList<EventSpec> _triggers = ((ReactionTrigger) _trigger).getTriggers();
-          final Function1<EventSpec,Boolean> _function_1 = new Function1<EventSpec,Boolean>() {
-              public Boolean apply(final EventSpec t) {
-                return (t instanceof org.yakindu.sct.model.stext.stext.ExitEvent);
-              }
-            };
-          boolean _exists = IterableExtensions.<EventSpec>exists(_triggers, _function_1);
-          return ((Boolean)_exists);
-        }
-      };
-    Iterable<org.yakindu.sct.model.sgraph.Reaction> _filter = IterableExtensions.<org.yakindu.sct.model.sgraph.Reaction>filter(_localReactions, _function);
-    final Function1<org.yakindu.sct.model.sgraph.Reaction,LocalReaction> _function_2 = new Function1<org.yakindu.sct.model.sgraph.Reaction,LocalReaction>() {
-        public LocalReaction apply(final org.yakindu.sct.model.sgraph.Reaction lr) {
-          return ((LocalReaction) lr);
-        }
-      };
-    Iterable<LocalReaction> _map = IterableExtensions.<org.yakindu.sct.model.sgraph.Reaction, LocalReaction>map(_filter, _function_2);
-    List<LocalReaction> _list = IterableExtensions.<LocalReaction>toList(_map);
-    return _list;
+    List<LocalReaction> _xblockexpression = null;
+    {
+      List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(state);
+      final Function1<EObject,Boolean> _function = new Function1<EObject,Boolean>() {
+          public Boolean apply(final EObject e) {
+            return (e instanceof org.yakindu.sct.model.stext.stext.LocalReaction);
+          }
+        };
+      Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_eAllContentsAsList, _function);
+      Iterable<EObject> localReactions = _filter;
+      final Function1<EObject,Boolean> _function_1 = new Function1<EObject,Boolean>() {
+          public Boolean apply(final EObject r) {
+            Trigger _trigger = ((LocalReaction) r).getTrigger();
+            EList<EventSpec> _triggers = ((ReactionTrigger) _trigger).getTriggers();
+            final Function1<EventSpec,Boolean> _function_2 = new Function1<EventSpec,Boolean>() {
+                public Boolean apply(final EventSpec t) {
+                  return (t instanceof org.yakindu.sct.model.stext.stext.ExitEvent);
+                }
+              };
+            boolean _exists = IterableExtensions.<EventSpec>exists(_triggers, _function_2);
+            return ((Boolean)_exists);
+          }
+        };
+      Iterable<EObject> _filter_1 = IterableExtensions.<EObject>filter(localReactions, _function_1);
+      final Function1<EObject,LocalReaction> _function_3 = new Function1<EObject,LocalReaction>() {
+          public LocalReaction apply(final EObject lr) {
+            return ((LocalReaction) lr);
+          }
+        };
+      Iterable<LocalReaction> _map = IterableExtensions.<EObject, LocalReaction>map(_filter_1, _function_3);
+      List<LocalReaction> _list = IterableExtensions.<LocalReaction>toList(_map);
+      _xblockexpression = (_list);
+    }
+    return _xblockexpression;
   }
   
   public Declaration map(final Declaration e) {
