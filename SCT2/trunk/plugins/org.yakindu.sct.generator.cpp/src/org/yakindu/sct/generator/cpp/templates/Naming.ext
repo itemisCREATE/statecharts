@@ -29,8 +29,8 @@ cached String functionName(Step step) :
  
 String actionFunctionName(Step this) : "actions_" + this.reaction().state().simpleName + "_" + this.reaction().name; 
 String checkFunctionName(Step this) : "condition_" + this.reaction().state().simpleName + "_" + this.reaction().name; 
-String entryActionFunctionName(Step this) : "entryActions_" + this.reaction().state().simpleName + "_" + this.reaction().name; 
-String exitActionFunctionName(Step this) : "exitActions_" + this.reaction().state().simpleName + "_" + this.reaction().name; 
+String entryActionFunctionName(Step this) : "entryActions_" + this.state().simpleName; 
+String exitActionFunctionName(Step this) : "exitActions_" + this.state().simpleName; 
 
 boolean isEffect(Step step) : (! Check.isInstance(step)) && Reaction.isInstance(step.eContainer) ;
 boolean isReactionCheck(Step step) : Reaction.isInstance(step.eContainer) && Check.isInstance(step);

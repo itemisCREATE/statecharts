@@ -20,7 +20,7 @@ Templates for the main statechart cpp file.
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Execution»
-// ActionCode for Execution not implemented yet
+	«this.statement.toCppCode()»
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Call»
@@ -100,9 +100,8 @@ void «StName()»::cycle_«this.simpleName»(const _Event& ev)
 «ENDDEFINE»
 
 «DEFINE EnterMethodImplement FOR ExecutionState»
-ENTER METHOD IMPLE
 «IF this.entryAction != null»
-void «StName()»::enter_«this.simpleName»()
+void «StName()»::«this.entryAction.entryActionFunctionName()»()
 {
 «EXPAND ActionCode FOR this.entryAction»
 }
@@ -111,7 +110,7 @@ void «StName()»::enter_«this.simpleName»()
 
 «DEFINE ExitMethodImplement FOR ExecutionState»
 «IF this.exitAction != null»
-void «StName()»::exit_«this.simpleName»()
+void «StName()»::«this.exitAction.exitActionFunctionName()»()
 {
 «EXPAND ActionCode FOR this.exitAction»
 }
