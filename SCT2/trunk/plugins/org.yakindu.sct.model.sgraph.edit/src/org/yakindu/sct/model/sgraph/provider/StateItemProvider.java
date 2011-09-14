@@ -79,6 +79,7 @@ public class StateItemProvider
 			addSubmachinePropertyDescriptor(object);
 			addSimplePropertyDescriptor(object);
 			addCompositePropertyDescriptor(object);
+			addLeafPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -238,6 +239,28 @@ public class StateItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Leaf feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLeafPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_State_leaf_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_State_leaf_feature", "_UI_State_type"),
+				 SGraphPackage.Literals.STATE__LEAF,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -311,6 +334,7 @@ public class StateItemProvider
 			case SGraphPackage.STATE__SUBMACHINE:
 			case SGraphPackage.STATE__SIMPLE:
 			case SGraphPackage.STATE__COMPOSITE:
+			case SGraphPackage.STATE__LEAF:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SGraphPackage.STATE__LOCAL_REACTIONS:
