@@ -343,7 +343,7 @@ class ModelSequencer {
 	
 	
 	def entry(Region r) {
-		r.vertices.findFirst(v | v instanceof Entry && (v.name == null || v.name.empty || v.name == 'default') ) as Entry
+		r.vertices.findFirst(v | v instanceof Entry && (v.name == null || "".equals(v.name) || v.name == 'default') ) as Entry
 	}
 	
 	

@@ -623,8 +623,8 @@ public class ModelSequencer {
               _operator_or_1 = true;
             } else {
               String _name_1 = v.getName();
-              boolean _isEmpty = _name_1.isEmpty();
-              _operator_or_1 = BooleanExtensions.operator_or(_operator_equals, _isEmpty);
+              boolean _equals = "".equals(_name_1);
+              _operator_or_1 = BooleanExtensions.operator_or(_operator_equals, _equals);
             }
             if (_operator_or_1) {
               _operator_or = true;
