@@ -10,8 +10,15 @@
  */
 package org.yakindu.sct.simulation.core.debugmodel;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.debug.core.model.DebugElement;
 import org.eclipse.debug.core.model.IDebugTarget;
+import org.eclipse.emf.ecore.EObject;
+import org.yakindu.sct.model.sgraph.NamedElement;
+import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * 
@@ -33,6 +40,38 @@ public class SCTDebugElement extends DebugElement {
 
 	public String getModelIdentifier() {
 		return IDebugConstants.ID_DEBUG_MODEL;
+	}
+
+	public String fullQfn(NamedElement element) {
+		List<String> qfnFragments = new ArrayList<String>();
+		qfnFragments.add(element.getName());
+		EObject current = element;
+		while (!(current.eContainer() instanceof Statechart)) {
+			current = current.eContainer();
+			if (current instanceof NamedElement) {
+				String name = ((NamedElement) current).getName();
+				if (name != null) {
+					qfnFragments.add(name.replaceAll(" ", ""));
+				} else {
+					qfnFragments.add("<name>");
+				}
+			}
+		}
+		Collections.reverse(qfnFragments);
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(element.getName());
+		sb.append("  (");
+		String sep = "";
+		for (String s : qfnFragments) {
+			sb.append(sep).append(s);
+			sep = ".";
+		}
+		sb.append(")");
+
+		sb.append(" resource: ");
+		sb.append(element.eResource().getURI().lastSegment());
+		return sb.toString();
 	}
 
 }
