@@ -10,59 +10,60 @@ Templates for the main statechart cpp file.
 «IMPORT stext»
 «IMPORT sgraph»
 
+«EXTENSION org::yakindu::sct::generator::cpp::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::cpp::templates::Naming»
 
 «DEFINE file FOR ExecutionFlow»
 
-«FILE 'MyStatemachine.h'»
-#ifndef MYSTATEMACHINE_H_
-#define MYSTATEMACHINE_H_
+«FILE StName()+'.h'»
+#ifndef «STNAME()»_H_
+#define «STNAME()»_H_
 
 #include "Statemachine.h"
-#include "MyDataRepository.h"
-#include "MyEvents.h"
+#include "«DRName()».h"
+#include "«EvName()».h"
 
-//namespace MyStatemachineNS {
 
-#define MAX_PARALLEL_STATES 1
+#define MAX_PARALLEL_STATES «this.stateVector.size»
 
-class MyStatemachine: public Statemachine, public MyDataRepository {
+class «StName()»: public Statemachine, public «DRName()» {
 
 public:
 	enum States {
-	    «FOREACH this.states AS exState»
-	      «exState.simpleName»,
+	    «FOREACH this.states AS exState-»
+	      _«exState.simpleName»,
 	    «ENDFOREACH»
 		last_state
 	};
 
 protected:
 	/* conditions */
-	«FOREACH states AS conStates»
-	  «FOREACH conStates.reactions AS state»
-	void condition_«conStates.simpleName»_«state.name»(const _Event& event);
+	«FOREACH states AS conStates -»
+	  «FOREACH conStates.reactions AS state -»
+	  «IF state.check != null -»
+	void «state.check.functionName()»(const _Event& event);
+	  «ENDIF»
 	  «ENDFOREACH»
 	«ENDFOREACH»
 	
 	/* actions */
-	«FOREACH states AS conStates»
-	  «FOREACH conStates.reactions AS state»
-	void actions_«conStates.simpleName»_«state.name»();
+	«FOREACH states AS conStates -»
+	  «FOREACH conStates.reactions AS state -»
+	void «state.effect.functionName()»();
 	  «ENDFOREACH»
 	«ENDFOREACH»
 
 	/* cycles */
-	«FOREACH states AS conStates»
-	  «FOREACH conStates.reactions AS state»
+	«FOREACH states AS conStates -»
 	void cycle_«conStates.simpleName»();
-	  «ENDFOREACH»
 	«ENDFOREACH»
 
 	virtual void _runCycle(Event ev);
 
 public:
 
-	MyStatemachine();
-	virtual ~MyStatemachine();
+	«StName()»();
+	virtual ~«StName()»();
 
 	virtual void init();
 
@@ -71,27 +72,9 @@ public:
 };
 
 //}; // namespace
-#endif /* MYSTATEMACHINE_H_ */
+#endif /* «STNAME()»_H_ */
 
 «ENDFILE»
 
 «ENDDEFINE»
 
-
-«DEFINE codeMethodPrototype FOR If»
-
-  condition_STATENAME_TRANSITIONPRIO_HERE(const _Event& event, const MyDataRepository& data);
-«ENDDEFINE»
-
-«DEFINE codeMethodPrototype FOR Cycle»
-  //NONE run through cycles
-  «EXPAND codeMethodPrototype FOREACH this.steps»
-«ENDDEFINE»
-
-«DEFINE codeMethodPrototype FOR Step»
-  //NONE Step
-«ENDDEFINE»
-
-«DEFINE codeMethodPrototype FOR Sequence»
-  «EXPAND codeMethodPrototype FOREACH this.steps»
-«ENDDEFINE»

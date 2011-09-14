@@ -1,9 +1,11 @@
-import sgraph;
 import stext;
 import sexec;
-
+import ecore;
+import sgraph;
 toCppCode(Void void) :
 	"/*toCppCode() called with NULL element. Polymorphic resolver could not match callable method!*/";
+String toCppCode(Void o, String statechartReference) : 
+	""; //polymorphic placeholder (abstract rule)
 
 String toCppCode(Expression statement) : 
 	null; //polymorphic placeholder (abstract rule)
@@ -79,4 +81,3 @@ String getOperator(MultiplicativeOperator operator) :
     	default : ""
     };
 
-String scName(Expression statement) : ((ExecutionFlow)statement.eRootContainer).name ;
