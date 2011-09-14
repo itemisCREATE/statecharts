@@ -1175,13 +1175,22 @@ public interface SGraphPackage extends EPackage {
 	int STATE__COMPOSITE = VERTEX_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>Leaf</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__LEAF = VERTEX_FEATURE_COUNT + 10;
+
+	/**
 	 * The number of structural features of the '<em>State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = VERTEX_FEATURE_COUNT + 10;
+	int STATE_FEATURE_COUNT = VERTEX_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.StatementImpl <em>Statement</em>}' class.
@@ -1447,6 +1456,17 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getState_Composite();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.State#isLeaf <em>Leaf</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Leaf</em>'.
+	 * @see org.yakindu.sct.model.sgraph.State#isLeaf()
+	 * @see #getState()
+	 * @generated
+	 */
+	EAttribute getState_Leaf();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Statement <em>Statement</em>}'.
@@ -1960,6 +1980,14 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STATE__COMPOSITE = eINSTANCE.getState_Composite();
+
+		/**
+		 * The meta object literal for the '<em><b>Leaf</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE__LEAF = eINSTANCE.getState_Leaf();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.StatementImpl <em>Statement</em>}' class.

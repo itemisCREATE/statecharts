@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.yakindu.sct.model.sgraph.State#isSubmachine <em>Submachine</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#isSimple <em>Simple</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#isComposite <em>Composite</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.State#isLeaf <em>Leaf</em>}</li>
  * </ul>
  * </p>
  *
@@ -142,5 +143,21 @@ public interface State extends Vertex, ExpressionElement, ReactiveElement, Scope
 	 * @generated
 	 */
 	boolean isComposite();
+
+	/**
+	 * Returns the value of the '<em><b>Leaf</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Leaf</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Leaf</em>' attribute.
+	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_Leaf()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	boolean isLeaf();
+
 
 } // State
