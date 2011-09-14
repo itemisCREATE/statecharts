@@ -1,11 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: Yakindu SCT SExec Model
 Bundle-SymbolicName: org.yakindu.sct.model.sexec;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: %providerName
-Bundle-Localization: plugin
+Bundle-Vendor: YAKINDU
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.model.sexec,
  org.yakindu.sct.model.sexec.impl,
@@ -14,10 +13,10 @@ Export-Package: org.yakindu.sct.model.sexec,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.yakindu.sct.model.sgraph;visibility:=reexport,
- com.google.collect;bundle-version="1.0.0",
- com.google.inject;bundle-version="2.0.0",
- org.eclipse.xtext.xbase.lib;bundle-version="2.0.0",
- org.eclipse.xtext.xtend2.lib;bundle-version="2.0.0",
- org.eclipse.xtext;bundle-version="2.0.0",
- org.yakindu.sct.model.stext;bundle-version="1.0.0"
+ com.google.collect,
+ com.google.inject,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.xtend2.lib,
+ org.eclipse.xtext,
+ org.yakindu.sct.model.stext
 Bundle-ActivationPolicy: lazy
