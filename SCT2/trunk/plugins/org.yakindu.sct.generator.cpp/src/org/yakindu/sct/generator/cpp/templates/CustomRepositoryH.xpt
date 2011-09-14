@@ -48,6 +48,7 @@ Templates for the main statechart cpp file.
 #define «DRNAME()»_H_
 
 #include "definition.h"
+#include "DataRepository.h"
 
 class «DRName()» : public DataRepository {
 

@@ -41,7 +41,7 @@ protected:
 	«FOREACH states AS state -»
 	  «FOREACH state.reactions AS reaction -»
 	  «IF reaction.check != null -»
-	void «reaction.check.functionName()»(const _Event& event);
+	bool «reaction.check.functionName()»(const _Event& event);
 	  «ENDIF»
 	  «ENDFOREACH»
 	«ENDFOREACH»

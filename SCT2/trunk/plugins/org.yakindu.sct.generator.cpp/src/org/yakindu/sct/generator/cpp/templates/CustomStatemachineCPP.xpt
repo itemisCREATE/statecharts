@@ -41,7 +41,7 @@ Templates for the main statechart cpp file.
 
 «DEFINE ActionCode FOR CheckRef -»
   «IF this.check != null -»
-  «this.check.functionName()»() «
+  «this.check.functionName()»(ev) «
   ELSE -»
  true «
   ENDIF -»«

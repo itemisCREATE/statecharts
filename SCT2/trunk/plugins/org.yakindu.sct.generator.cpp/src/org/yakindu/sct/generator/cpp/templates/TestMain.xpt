@@ -10,24 +10,35 @@ Templates for the main statechart cpp file.
 «IMPORT stext»
 «IMPORT sgraph»
 
+«EXTENSION org::yakindu::sct::generator::cpp::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::cpp::templates::Naming»
+
 
 «DEFINE file FOR ExecutionFlow»
 
 «FILE 'main.cpp'»
+
+/*
+ * main.cpp
+ *
+ *  Created on: 10.09.2011
+ *      Author: seger
+ */
+
 #include <cstdio>
 #include <iostream>
-#include "MyStatemachine.h"
-#include "MyDataRepository.h"
-#include "MyEvents.h"
+#include "«StName()».h"
+// #include "«DRName()».h"
+#include "«EvName()».h"
 
 int main()
 {
 
 	char* stateName[6] = {"State1", "State2", "State3", "State4", "State5", "State6"};
-	MyStatemachine machine;
+	«StName()» machine;
 
 	/* initialize data repository */
-	machine.init_data(1,0,0.0);
+//	machine.init_data(1,0,0.0);
 
 	/* initialize the initial states */
 	machine.init();
@@ -94,6 +105,7 @@ int main()
 
 	return(0);
 }
+
 «ENDFILE»
 
 «ENDDEFINE»
