@@ -10,6 +10,8 @@ Templates for the main statechart cpp file.
 «IMPORT stext»
 «IMPORT sgraph»
 
+«EXTENSION org::yakindu::sct::generator::cpp::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::cpp::templates::Naming»
 
 «DEFINE file FOR ExecutionFlow»
 
@@ -18,12 +20,12 @@ cmake_minimum_required(VERSION 2.8)
 
 set(SRC
 	Statemachine.cpp
-	MyStatemachine.cpp
+	«StName()».cpp
 	main.cpp
 )
 
 add_definitions( -Wall -O0 -g)
-add_executable(MyStatemachineMain ${SRC})
+add_executable(«StName()»Main ${SRC})
 «ENDFILE»
 
 «ENDDEFINE»
