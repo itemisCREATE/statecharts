@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.yakindu.sct.sdk"
+      label="Yakindu SCT SDK"
+      version="1.0.0.qualifier"
+      provider-name="itemis AG">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <includes
+         id="org.yakindu.sct"
+         version="0.0.0"/>
+
+   <includes
+         id="org.yakindu.sct.source"
+         version="0.0.0"/>
+
+</feature>
