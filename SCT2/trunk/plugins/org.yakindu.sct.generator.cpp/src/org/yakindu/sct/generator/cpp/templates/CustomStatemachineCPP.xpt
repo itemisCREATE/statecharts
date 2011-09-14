@@ -38,7 +38,7 @@ Templates for the main statechart cpp file.
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR If»
-if («this.check.condition.toCppCode("bla")») {
+if («this.check.condition.toCppCode()») {
   «EXPAND ActionCode FOR this.thenStep»
 }
 else {
@@ -60,7 +60,7 @@ else {
 «DEFINE ConditionMethodsImplement FOR ExecutionState»
   «FOREACH reactions AS r»
 bool MyStatemachine::condition_«this.simpleName»_«r.name»(const _Event& ev) {
-  return (	«r.check.condition.toCppCode("bla")» );
+  return (	«r.check.condition.toCppCode()» );
 }
   «ENDFOREACH»
 «ENDDEFINE»

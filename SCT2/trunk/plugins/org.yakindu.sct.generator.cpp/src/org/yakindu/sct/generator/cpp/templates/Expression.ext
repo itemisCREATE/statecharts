@@ -2,57 +2,67 @@ import sgraph;
 import stext;
 import sexec;
 
+toCppCode(Void void) :
+	"/*toCppCode() called with NULL element. Polymorphic resolver could not match callable method!*/";
 
-
-String toCppCode(Expression statement, String statechartReference) : 
+String toCppCode(Expression statement) : 
 	null; //polymorphic placeholder (abstract rule)
  
-String toCppCode(Statement statement, String statechartReference) : 
+String toCppCode(Statement statement) : 
 	null; //polymorphic placeholder (abstract rule)
  
-String toCppCode(PrimitiveValueExpression primValue, String statechartName) :
+String toCppCode(PrimitiveValueExpression primValue) :
 	primValue.value;
 
 /* Assignment */
-String toCppCode(Assignment assignment, String statechartName) :
+String toCppCode(Assignment assignment) :
   switch (assignment.operator) {
-  case (AssignmentOperator::assign) : statechartName + "." + assignment.varRef.name + " = ( " + assignment.expression.toCppCode(statechartName) + " );"  
-  case (AssignmentOperator::multAssign) : statechartName + "." + assignment.varRef.name + " *= " + "(" + assignment.expression.toCppCode(statechartName) + ");"
-  case (AssignmentOperator::divAssign) : statechartName + "." + assignment.varRef.name + " /= " + "(" + assignment.expression.toCppCode(statechartName) + ");"
-  case (AssignmentOperator::modAssign) : statechartName + "." + assignment.varRef.name + " %= " + "(" + assignment.expression.toCppCode(statechartName) + ");"
-  case (AssignmentOperator::addAssign) : statechartName + "." + assignment.varRef.name + " += " + "(" + assignment.expression.toCppCode(statechartName) + ");"
-  case (AssignmentOperator::subAssign) : statechartName + "." + assignment.varRef.name + " -= " + "(" + assignment.expression.toCppCode(statechartName) + ");"
-  case (AssignmentOperator::leftShiftAssign) : statechartName + "." + assignment.varRef.name + " <<= " + "(" + assignment.expression.toCppCode(statechartName) + ");"
-  case (AssignmentOperator::rightShiftAssign) : statechartName + "." + assignment.varRef.name + " >>= " + "(" + assignment.expression.toCppCode(statechartName) + ");"
-  case (AssignmentOperator::andAssign) : statechartName + "." + assignment.varRef.name + " &= " + "(" + assignment.expression.toCppCode(statechartName) + ");"
-  case (AssignmentOperator::xorAssign) : statechartName + "." + assignment.varRef.name + " ^= " + "(" + assignment.expression.toCppCode(statechartName) + ");"
-  case (AssignmentOperator::orAssign) : statechartName + "." + assignment.varRef.name + " |= " + "(" + assignment.expression.toCppCode(statechartName) + ");"
+  case (AssignmentOperator::assign) : "set_" + assignment.varRef.name + "(" + assignment.expression.toCppCode() + ");"  
+  case (AssignmentOperator::multAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() * (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::divAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() / (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::modAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() % (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::addAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() + (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::subAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() - (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::leftShiftAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() << ("+ assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::rightShiftAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() >> (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::andAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() & (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::xorAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() ^ (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::orAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() ^ (" + assignment.expression.toCppCode() + "));"
   default : ""
   };
-
+		
 /* EventRaising */
 
 /* Logical Expressions */
-String toCppCode(LogicalOrExpression expression, String statechartReference) :
-  	statechartReference + "." + expression.leftOperand.toCppCode(statechartReference) + " || " + statechartReference + "." + expression.rightOperand.toCppCode(statechartReference);
+String toCppCode(LogicalOrExpression expression) :
+  	expression.leftOperand.toCppCode() + " || " + expression.rightOperand.toCppCode();
   	
-String toCppCode(LogicalAndExpression expression, String statechartReference) :
-  	statechartReference + "." + expression.leftOperand.toCppCode(statechartReference) + " && " + statechartReference + "." + expression.rightOperand.toCppCode(statechartReference);
+String toCppCode(LogicalAndExpression expression) :
+  	expression.leftOperand.toCppCode() + " && " + expression.rightOperand.toCppCode();
 
-String toCppCode(LogicalNotExpression expression, String statechartReference) :
-  	" ^" + statechartReference + "." + expression.operand.toCppCode(statechartReference);
+String toCppCode(LogicalNotExpression expression) :
+  	" ^" + expression.operand.toCppCode();
 
-String toCppCode(LogicalRelationExpression expression, String statechartReference) :
-    statechartReference + "." + expression.leftOperand.toCppCode(statechartReference) + " ??? " + statechartReference + "." + expression.leftOperand.toCppCode(statechartReference);
+String toCppCode(LogicalRelationExpression expression) :
+   expression.leftOperand.toCppCode() + " ??? " + expression.rightOperand.toCppCode();
     
-String toCppCode(BitwiseAndExpression expression, String statechartReference) :
-  	statechartReference + "." + expression.leftOperand.toCppCode(statechartReference) + " & " + statechartReference + "." + expression.rightOperand.toCppCode(statechartReference);
+String toCppCode(BitwiseAndExpression expression) :
+  	expression.leftOperand.toCppCode() + " & " + expression.rightOperand.toCppCode();
 
-String toCppCode(BitwiseOrExpression expression, String statechartReference) :
-  	statechartReference + "." + expression.leftOperand.toCppCode(statechartReference) + " | " + statechartReference + "." + expression.rightOperand.toCppCode(statechartReference);
+String toCppCode(BitwiseOrExpression expression) :
+  	expression.leftOperand.toCppCode() + " | " + expression.rightOperand.toCppCode();
 
-String toCppCode(BitwiseXorExpression expression, String statechartReference) :
-  	statechartReference + "." + expression.leftOperand.toCppCode(statechartReference) + " ^ " + statechartReference + "." + expression.rightOperand.toCppCode(statechartReference);
+String toCppCode(BitwiseXorExpression expression) :
+  	expression.leftOperand.toCppCode() + " ^ " + expression.rightOperand.toCppCode();
+
+String toCppCode(NumericalAddSubtractExpression expression) :
+  	expression.leftOperand.toCppCode() + getOperator(expression.operator) + expression.rightOperand.toCppCode();
+  	
+String toCppCode(NumericalMultiplyDivideExpression expression) :
+  	expression.leftOperand.toCppCode() + getOperator(expression.operator) + expression.rightOperand.toCppCode();
+
+String toCppCode(ElementReferenceExpression ev) :
+    " ( " + ev.value.name + " == ev.getID() ) ";
 
 String getOperator(AdditiveOperator operator) : 
     switch(operator) {
@@ -61,21 +71,12 @@ String getOperator(AdditiveOperator operator) :
     	default : ""
     };
 
-String toCppCode(NumericalAddSubtractExpression expression, String statechartReference) :
-  	statechartReference + "." + expression.leftOperand.toCppCode(statechartReference) + getOperator(expression.operator) + statechartReference + "." + expression.rightOperand.toCppCode(statechartReference);
-
 String getOperator(MultiplicativeOperator operator) : 
     switch(operator) {
-    	case(MultiplicativeOperator::mul) : " + "
+    	case(MultiplicativeOperator::mul) : " * "
     	case(MultiplicativeOperator::div) : " / "
     	case(MultiplicativeOperator::mod) : " % "
     	default : ""
     };
-
-String toCppCode(NumericalMultiplyDivideExpression expression, String statechartReference) :
-  	statechartReference + "." + expression.leftOperand.toCppCode(statechartReference) + getOperator(expression.operator) + statechartReference + "." + expression.rightOperand.toCppCode(statechartReference);
-
-String toCppCode(ElementReferenceExpression ev, String statechartReference) :
-    " ( " + ev.value.name + " == ev.getID() ) ";
 
 String scName(Expression statement) : ((ExecutionFlow)statement.eRootContainer).name ;
