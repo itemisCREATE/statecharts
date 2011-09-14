@@ -400,15 +400,17 @@ class ModelSequencer {
 	}
 	
 	def List<LocalReaction> entryReactions(State state) {
-		state.localReactions
-			.filter(r | (r.trigger as ReactionTrigger).triggers.exists( t | t instanceof EntryEvent))
+		var localReactions = EcoreUtil2::eAllContentsAsList(state).filter(e | e instanceof LocalReaction)
+		localReactions
+			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof EntryEvent))
 			.map(lr | lr as LocalReaction)
 			.toList	
 	} 
 	
 	def List<LocalReaction> exitReactions(State state) {
-		state.localReactions
-			.filter(r | (r.trigger as ReactionTrigger).triggers.exists( t | t instanceof ExitEvent))
+			var localReactions = EcoreUtil2::eAllContentsAsList(state).filter(e | e instanceof LocalReaction)
+		localReactions
+			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof ExitEvent))
 			.map(lr | lr as LocalReaction)
 			.toList	
 	} 
