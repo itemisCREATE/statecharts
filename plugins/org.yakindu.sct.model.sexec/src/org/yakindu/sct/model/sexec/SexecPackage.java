@@ -190,13 +190,22 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_STATE__SIMPLE_NAME = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Leaf</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__LEAF = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Cycle</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__CYCLE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int EXECUTION_STATE__CYCLE = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
@@ -205,16 +214,25 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__REACTIONS = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int EXECUTION_STATE__REACTIONS = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Leaf</b></em>' attribute.
+	 * The feature id for the '<em><b>Entry Action</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__LEAF = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int EXECUTION_STATE__ENTRY_ACTION = NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Exit Action</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__EXIT_ACTION = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Execution State</em>' class.
@@ -223,7 +241,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int EXECUTION_STATE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ReactionImpl <em>Reaction</em>}' class.
@@ -885,6 +903,28 @@ public interface SexecPackage extends EPackage {
 	EReference getExecutionState_Reactions();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionState#getEntryAction <em>Entry Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Entry Action</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionState#getEntryAction()
+	 * @see #getExecutionState()
+	 * @generated
+	 */
+	EReference getExecutionState_EntryAction();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionState#getExitAction <em>Exit Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Exit Action</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionState#getExitAction()
+	 * @see #getExecutionState()
+	 * @generated
+	 */
+	EReference getExecutionState_ExitAction();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sexec.ExecutionState#isLeaf <em>Leaf</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1298,6 +1338,22 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXECUTION_STATE__REACTIONS = eINSTANCE.getExecutionState_Reactions();
+
+		/**
+		 * The meta object literal for the '<em><b>Entry Action</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_STATE__ENTRY_ACTION = eINSTANCE.getExecutionState_EntryAction();
+
+		/**
+		 * The meta object literal for the '<em><b>Exit Action</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_STATE__EXIT_ACTION = eINSTANCE.getExecutionState_ExitAction();
 
 		/**
 		 * The meta object literal for the '<em><b>Leaf</b></em>' attribute feature.

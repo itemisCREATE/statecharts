@@ -46,6 +46,9 @@ import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.sct.model.stext.stext.Assignment
 import org.yakindu.sct.model.sgraph.Variable
+import org.yakindu.sct.model.stext.stext.LocalReaction
+import org.yakindu.sct.model.stext.stext.EntryEvent
+import org.yakindu.sct.model.stext.stext.ExitEvent
 
 class ModelSequencer {
 	
@@ -64,6 +67,7 @@ class ModelSequencer {
 		// during mapping the basic structural elements will be mapped from the source statechart to the execution flow
 		sc.mapScopes(ef)
 		sc.mapStates(ef)
+		sc.mapTransitions(ef)
 		
 		// derive all additional information that is necessary for the execution
 		ef.defineStateVector(sc)
@@ -130,9 +134,25 @@ class ModelSequencer {
 	
 	def ExecutionState mapState(State state) {
 		val _state = state.create
+		_state.leaf = state.simple
+		_state.entryAction = state.mapEntryAction
+		_state.exitAction = state.mapExitAction
+		return _state
+	}
+	 
+
+	def ExecutionFlow mapTransitions(Statechart statechart, ExecutionFlow r){
+		var content = EcoreUtil2::eAllContentsAsList(statechart)
+		val allStates = content.filter(e | e instanceof State)
+		allStates.forEach( s | (s as State).mapStateTransition);
+		return r
+	}
+
+
+	def ExecutionState mapStateTransition(State state) {
+		val _state = state.create
 		_state.reactions.addAll( state.outgoingTransitions.map(t | t.mapTransition))
-		_state.leaf = state.simple 
-		_state
+		return _state
 	}
 	 
 	 
@@ -146,9 +166,16 @@ class ModelSequencer {
 
 	def Sequence mapToEffect(Transition t) {
 		val sequence = sexecFactory.createSequence 
+
+		if (t.source instanceof State && (t.source as State).create.exitAction != null) 
+			sequence.steps.add( (t.source as State).create.exitAction.newCall)
+
 		if (t.source != null) sequence.steps.add(newExitStateStep(t.source as State))
 		if (t.effect != null) sequence.steps.add(t.effect.mapEffect)		
 		if (t.target != null) sequence.steps.add(newEnterStateStep(t.target as State))
+	
+		if (t.target instanceof State && (t.target as State).create.entryAction != null) 
+			sequence.steps.add( (t.target as State).create.entryAction.newCall)
 		
 		return sequence
 	}	
@@ -168,6 +195,27 @@ class ModelSequencer {
 		val exec = sexecFactory.createExecution
 		exec.statement = EcoreUtil::copy(stmnt)
 		exec	
+	}
+	
+	
+	def Step mapEntryAction(State state) {
+		val seq = sexecFactory.createSequence
+		seq.name = "entryAction"
+		state.entryReactions
+			.map([lr | if (lr.effect != null) { (lr.effect as ReactionEffect).mapEffect } else null])
+			.forEach(e | if (e != null) { seq.steps.add(e) })
+		
+		if (seq.steps.size > 0) seq else null
+	}
+	
+	def Step mapExitAction(State state) {
+		val seq = sexecFactory.createSequence
+		seq.name = "exitAction"
+		state.exitReactions
+			.map([lr | if (lr.effect != null) { (lr.effect as ReactionEffect).mapEffect } else null])
+			.forEach(e | if (e != null) { seq.steps.add(e) })
+		
+		if (seq.steps.size > 0) seq else null
 	}
 	
 	/* ==========================================================================
@@ -350,4 +398,19 @@ class ModelSequencer {
 	def target(Entry entry) {
 		entry?.outgoingTransitions?.get(0)?.target as State
 	}
+	
+	def List<LocalReaction> entryReactions(State state) {
+		state.localReactions
+			.filter(r | (r.trigger as ReactionTrigger).triggers.exists( t | t instanceof EntryEvent))
+			.map(lr | lr as LocalReaction)
+			.toList	
+	} 
+	
+	def List<LocalReaction> exitReactions(State state) {
+		state.localReactions
+			.filter(r | (r.trigger as ReactionTrigger).triggers.exists( t | t instanceof ExitEvent))
+			.map(lr | lr as LocalReaction)
+			.toList	
+	} 
+	
 }

@@ -31,8 +31,10 @@ import org.yakindu.sct.model.stext.stext.Assignment;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
+import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
+import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
@@ -160,6 +162,7 @@ public class ModelSequencerTest {
 	}
 	
 	
+	
 	/**
 	 * For each top level region a EnterState step must be performed.
 	 */
@@ -177,6 +180,62 @@ public class ModelSequencerTest {
 		enterState = (EnterState) flow.getEnterSequence().getSteps().get(1);
 		assertEquals(tsc.s3.getName(), enterState.getState().getSimpleName());
 	
+	}
+	
+	
+	/**
+	 * if a state defines a entry action then the execution state must have a entryAction.
+	 */
+	@Test public void testStateEntryAction() {
+		Statechart sc = _createStatechart("test");
+		Scope scope = _createInterfaceScope("interface", sc);
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		Region r = _createRegion("main", sc);
+		Entry e = _createEntry(EntryKind.INITIAL, null, r);
+		State s1 = _createState("s1", r);
+		State s2 = _createState("s2", r);
+		Transition e_t = _createTransition(e, s1);
+		Transition s1_t = _createTransition(s1, s2);
+		LocalReaction entryAction = _createEntryAction(s2);
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), (ReactionEffect) entryAction.getEffect());
+		
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		ExecutionState _s1 = flow.getStates().get(0);
+		ExecutionState _s2 = flow.getStates().get(1);
+		assertEquals(s1.getName(), _s1.getSimpleName());
+		assertEquals(s2.getName(), _s2.getSimpleName());
+		
+		assertNotNull(_s2.getEntryAction());
+		assertNull(_s1.getEntryAction());
+	}
+	
+	
+	/**
+	 * if a state defines a exit action then the execution state must have a exitAction.
+	 */
+	@Test public void testStateExitAction() {
+		Statechart sc = _createStatechart("test");
+		Scope scope = _createInterfaceScope("interface", sc);
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		Region r = _createRegion("main", sc);
+		Entry e = _createEntry(EntryKind.INITIAL, null, r);
+		State s1 = _createState("s1", r);
+		State s2 = _createState("s2", r);
+		Transition e_t = _createTransition(e, s1);
+		Transition s1_t = _createTransition(s1, s2);
+		LocalReaction exitAction = _createExitAction(s1);
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("21"), (ReactionEffect) exitAction.getEffect());
+		
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		ExecutionState _s1 = flow.getStates().get(0);
+		ExecutionState _s2 = flow.getStates().get(1);
+		assertEquals(s1.getName(), _s1.getSimpleName());
+		assertEquals(s2.getName(), _s2.getSimpleName());
+		
+		assertNotNull(_s1.getExitAction());
+		assertNull(_s2.getExitAction());
 	}
 	
 	
@@ -204,7 +263,6 @@ public class ModelSequencerTest {
 		assertEquals(s2, ((EnterState)seq.getSteps().get(1)).getState());
 		
 	}
-	
 	
 	/**
 	 * The transition action must be part of the reaction effect sequence
@@ -245,6 +303,80 @@ public class ModelSequencerTest {
 	}
 
 	
+	/**
+	 * The exit action must be part of the reaction effect sequence
+	 */
+	@Test public void testStateReaction_WithExitAction() {
+		SimpleFlatTSC tsc = new SimpleFlatTSC();
+
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
+		LocalReaction exitAction = _createExitAction(tsc.s1);
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("21"), (ReactionEffect) exitAction.getEffect());
+
+		ExecutionFlow flow = sequencer.transform(tsc.sc);
+		
+		
+		// test state with one outgoing transition
+		ExecutionState _s1 = flow.getStates().get(0);
+		ExecutionState _s2 = flow.getStates().get(1);
+		assertEquals(tsc.s1.getName(), _s1.getSimpleName());
+		assertEquals(tsc.s2.getName(), _s2.getSimpleName());
+
+		assertEquals(1, _s1.getReactions().size());
+		Reaction reaction = _s1.getReactions().get(0);
+
+		assertNotNull(reaction.getCheck());
+		
+		assertNotNull(reaction.getEffect());
+		Sequence seq = (Sequence) reaction.getEffect();
+
+		Call _exitActionCall = (Call) seq.getSteps().get(0);
+		assertSame( _s1.getExitAction(), _exitActionCall.getStep());	
+
+		assertTrue(seq.getSteps().get(1) instanceof ExitState);
+		assertEquals(_s1, ((ExitState)seq.getSteps().get(1)).getState());
+		
+	}
+	
+	/**
+	 * The exit action must be part of the reaction effect sequence
+	 */
+	@Test public void testStateReaction_WithEntryAction() {
+		SimpleFlatTSC tsc = new SimpleFlatTSC();
+
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
+		LocalReaction entryAction = _createEntryAction(tsc.s2);
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("21"), (ReactionEffect) entryAction.getEffect());
+
+		
+		ExecutionFlow flow = sequencer.transform(tsc.sc);
+		
+		
+		// test state with one outgoing transition
+		ExecutionState _s1 = flow.getStates().get(0);
+		ExecutionState _s2 = flow.getStates().get(1);
+		assertEquals(tsc.s1.getName(), _s1.getSimpleName());
+		assertEquals(tsc.s2.getName(), _s2.getSimpleName());
+
+		assertEquals(1, _s1.getReactions().size());
+		Reaction reaction = _s1.getReactions().get(0);
+
+		assertNotNull(reaction.getCheck());
+		
+		assertNotNull(reaction.getEffect());
+		Sequence seq = (Sequence) reaction.getEffect();
+
+		assertTrue(seq.getSteps().get(0) instanceof ExitState);
+		assertEquals(_s1, ((ExitState)seq.getSteps().get(0)).getState());
+
+		assertTrue(seq.getSteps().get(1) instanceof EnterState);
+		assertEquals(_s2, ((EnterState)seq.getSteps().get(1)).getState());
+
+		Call _entryActionCall = (Call) seq.getSteps().get(2);
+		assertSame( _s2.getEntryAction(), _entryActionCall.getStep());	
+	}
+	
+
 	@Test public void testStateCycle_SimpleFlatTSC() {
 		OrthogonalFlatTSC tsc = new OrthogonalFlatTSC();
 		
