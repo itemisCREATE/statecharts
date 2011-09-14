@@ -239,15 +239,12 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 		fireChangeEvent(DebugEvent.CONTENT);
 	}
 
-	@Override
 	public void transitionFired(Transition transition) {
 	}
 
-	@Override
 	public void variableValueChanged(String variableName, Object value) {
 	}
 
-	@Override
 	public void eventRaised(String eventName) {
 	}
 

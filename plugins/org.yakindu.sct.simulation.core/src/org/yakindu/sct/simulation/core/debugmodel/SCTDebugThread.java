@@ -134,7 +134,6 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 		return super.getAdapter(adapter);
 	}
 
-	@Override
 	public SCTDebugTarget getDebugTarget() {
 		return (SCTDebugTarget) super.getDebugTarget();
 	}
