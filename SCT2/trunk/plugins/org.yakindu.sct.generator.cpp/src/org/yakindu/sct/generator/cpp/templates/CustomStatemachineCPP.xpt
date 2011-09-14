@@ -9,9 +9,11 @@ Templates for the main statechart cpp file.
 «IMPORT sexec»
 «IMPORT stext»
 «IMPORT sgraph»
+«IMPORT ecore»
 
 «IMPORT org::yakindu::sct::generator::cpp::templates»
 «EXTENSION org::yakindu::sct::generator::cpp::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::cpp::templates::Naming»
 
 «DEFINE ActionCode FOR Step»
 // ActionCode for Step not defined
@@ -22,23 +24,35 @@ Templates for the main statechart cpp file.
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Call»
-// ActionCode for Call not implemented yet
+«this.step.functionName()»();
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Sequence»
   «EXPAND ActionCode FOREACH this.steps»
 «ENDDEFINE»
 
-«DEFINE ActionCode FOR Check»
-// ActionCode for Check not implemented yet
-«ENDDEFINE»
+«DEFINE ActionCode FOR Check -»
+  «IF this != null -»
+«this.condition.toCppCode() -»
+  «ELSE -»
+ true «
+ ENDIF -»«
+  ENDDEFINE»
+
+«DEFINE ActionCode FOR CheckRef -»
+  «IF this.check != null -»
+  «this.check.functionName()»() «
+  ELSE -»
+ true «
+  ENDIF -»«
+ENDDEFINE»
 
 «DEFINE ActionCode FOR Reaction»
   «EXPAND ActionCode FOR this.effect» 
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR If»
-if («this.check.condition.toCppCode()») {
+if («EXPAND ActionCode FOR this.check») { 
   «EXPAND ActionCode FOR this.thenStep»
 }
 else {
@@ -56,43 +70,44 @@ else {
 // oldstates = states
 «ENDDEFINE»
 
-
 «DEFINE ConditionMethodsImplement FOR ExecutionState»
   «FOREACH reactions AS r»
-bool MyStatemachine::condition_«this.simpleName»_«r.name»(const _Event& ev) {
+  «IF r.check != null -»
+bool «StName()»::«r.check.functionName()»(const _Event& ev) {
   return (	«r.check.condition.toCppCode()» );
 }
+  «ENDIF -»
   «ENDFOREACH»
 «ENDDEFINE»
 
 «DEFINE StatementMethodsImplement FOR ExecutionState»
   «FOREACH reactions AS r»
-void MyStatemachine::actions_«this.simpleName»_«r.name»() {
+void «this.StName()»::«r.effect.functionName()»() {
   «EXPAND ActionCode FOR r.effect»
 }
   «ENDFOREACH»
 «ENDDEFINE»
 
+«DEFINE CycleCode FOR Cycle» 
+«EXPAND ActionCode FOREACH this.steps»
+«ENDDEFINE»
+
 «DEFINE CycleMethodsImplement FOR ExecutionState»
-void MyStatemachine::cycle_«this.simpleName»(const _Event& ev)
+void «StName()»::cycle_«this.simpleName»(const _Event& ev)
 {
-  «FOREACH reactions AS r -»
-	  if(condition_«this.simpleName»_«r.name»(ev)) {
-	    actions_«this.simpleName»_«r.name»();
-	  } 
-  «ENDFOREACH»
+	«EXPAND CycleCode FOR cycle»
 }
 «ENDDEFINE»
 
 «DEFINE file FOR ExecutionFlow»
-«FILE 'MyStatemachine.cpp'»
+«FILE StName()+'.cpp'»
 #include <iostream>
-#include "MyStatemachine.h"
+#include "«StName()».h"
 
-MyStatemachine::MyStatemachine() : Statemachine(«((ExecutionFlow)this.eRootContainer).stateVector.size») {
+«StName()»::«StName()»() : Statemachine(«((ExecutionFlow)this.eRootContainer).stateVector.size») {
 }
 
-MyStatemachine::~MyStatemachine() {
+«StName()»::~«StName()»() {
 }
 
 «EXPAND ConditionMethodsImplement FOREACH this.states»
@@ -100,24 +115,29 @@ MyStatemachine::~MyStatemachine() {
 «EXPAND StatementMethodsImplement FOREACH this.states»
 
 «EXPAND CycleMethodsImplement FOREACH this.states»
+«REM»
+«EXPAND EnterMethodImplement FOREACH this.state»
 
-void MyStatemachine::init()
+«EXPAND ExitMethodImplement FOREACH this.state»
+«ENDREM»
+
+void «StName()»::init()
 {
-	/* initialize enter states */
-	state[0] = State1;
-
-	/* uninitialized states:
-	 * state[1] = last_state; */
+	«EXPAND ActionCode FOREACH this.enterSequence.steps»
 }
 
-
-
-void MyStatemachine::_runCycle(Event ev)
+/* Yet unimplemented
+void «StName()»::exit()
 {
-	for (int i=0; i<«((ExecutionFlow)this.eRootContainer).stateVector.size»; ++i) {
+}
+*/
+
+void «StName()»::_runCycle(Event ev)
+{
+	for (int i=0; i<MAX_PARALLEL_STATES; ++i) {
 		switch(state[i]) {
 	«FOREACH this.states AS state»
-	    case «state.simpleName»:
+	    case _«state.simpleName»:
 	        cycle_«state.simpleName»(*ev);
 	        break;
 	«ENDFOREACH»
@@ -127,7 +147,6 @@ void MyStatemachine::_runCycle(Event ev)
 		}
 	}
 }
-
 «ENDFILE»
 
 «ENDDEFINE»
