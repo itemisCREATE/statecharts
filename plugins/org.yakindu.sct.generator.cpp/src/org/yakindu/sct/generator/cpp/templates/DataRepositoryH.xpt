@@ -1,0 +1,53 @@
+«REM»
+
+Templates for the main statechart cpp file.
+
+@auther joern seger
+
+«ENDREM»
+
+«IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
+
+
+«DEFINE file FOR ExecutionFlow»
+
+«FILE 'DataRepository.h'»
+#ifndef DATAREPOSITORY_H_
+#define DATAREPOSITORY_H_
+
+#ifndef WITH_BOOST
+
+class DataRepository {
+protected:
+	virtual void lock(){}
+	virtual void unlock(){}
+
+public:
+	DataRepository(){};
+	virtual ~DataRepository(){};
+};
+
+#else
+
+#include <boost/thread/mutex.hpp>
+
+class  DataRepository {
+protected:
+	boost::mutex mutex;
+
+	virtual void lock(){ mutex.lock(); }
+	virtual void unlock(){ mutex.unlock(); }
+
+public:
+	DataRepositoryBoost(){};
+	virtual ~DataRepositoryBoost(){};
+};
+
+#endif
+
+#endif /* DATAREPOSITORY_H_ */
+«ENDFILE»
+
+«ENDDEFINE»

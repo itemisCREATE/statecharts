@@ -16,9 +16,9 @@ Templates for the main statechart cpp file.
 
 «DEFINE file FOR ExecutionFlow»
 
-«FILE name.toFirstUpper()+'Event.h'»
-#ifndef «name.toUpperCase()»EVENTS_H_
-#define «name.toUpperCase()»EVENTS_H_
+«FILE name.toFirstUpper()+'.h'»
+#ifndef «name.toUpperCase()»_H_
+#define «name.toUpperCase()»_H_
 
 #include "Event.h"
 
@@ -35,7 +35,7 @@ enum EventID {
 «ENDFOREACH»
  
 
-#endif /* «name.toUpperCase()»EVENTS_H_ */
+#endif /* «name.toUpperCase()»_H_ */
 
 «ENDFILE»
 

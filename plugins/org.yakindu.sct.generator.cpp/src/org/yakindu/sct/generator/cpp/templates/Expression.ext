@@ -63,8 +63,9 @@ String toCppCode(NumericalAddSubtractExpression expression) :
 String toCppCode(NumericalMultiplyDivideExpression expression) :
   	expression.leftOperand.toCppCode() + getOperator(expression.operator) + expression.rightOperand.toCppCode();
 
+// is this just relevant for events?
 String toCppCode(ElementReferenceExpression ev) :
-    " ( " + ev.value.name + " == ev.getID() ) ";
+    " ( _" + ev.value.name.toLowerCase() + " == ev.getID() ) ";
 
 String getOperator(AdditiveOperator operator) : 
     switch(operator) {
