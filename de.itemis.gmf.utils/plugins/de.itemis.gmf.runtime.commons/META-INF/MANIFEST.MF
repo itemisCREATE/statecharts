@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Extension
+Bundle-Name: GMF Runtime Commons
 Bundle-SymbolicName: de.itemis.gmf.runtime.commons
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: itemis AG

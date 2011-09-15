@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: de.itemis.xtext.utils.jface
+Bundle-Name: Xtext JFace Integration (XJI)
 Bundle-SymbolicName: de.itemis.xtext.utils.jface;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: itemis AG

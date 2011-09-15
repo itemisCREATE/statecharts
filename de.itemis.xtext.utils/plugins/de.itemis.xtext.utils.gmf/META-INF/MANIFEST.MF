@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext GMF Utils
+Bundle-Name: Xtext GMF Integration (XGI)
 Bundle-SymbolicName: de.itemis.xtext.utils.gmf
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: itemis AG
