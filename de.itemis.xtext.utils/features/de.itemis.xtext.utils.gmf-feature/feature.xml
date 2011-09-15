@@ -10,11 +10,11 @@
    </description>
 
    <copyright url="http://www.example.com/copyright">
-     %copyright
+      %copyright
    </copyright>
 
    <license url="%licenseURL">
-     %license
+      %license
    </license>
 
    <includes
