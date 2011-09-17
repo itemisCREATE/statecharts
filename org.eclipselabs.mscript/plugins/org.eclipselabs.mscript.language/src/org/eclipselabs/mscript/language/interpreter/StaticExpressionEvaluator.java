@@ -664,7 +664,7 @@ public class StaticExpressionEvaluator {
 				}
 			}
 			
-			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "The Function " + functionCall.getFeature().getName() + " is not supported", functionCall));
+			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "The function " + functionCall.getFeature().getName() + " is not supported", functionCall));
 			return InvalidValue.SINGLETON;
 		}
 		

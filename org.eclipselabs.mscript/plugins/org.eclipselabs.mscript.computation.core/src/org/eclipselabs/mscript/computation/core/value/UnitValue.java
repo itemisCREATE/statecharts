@@ -61,7 +61,7 @@ public class UnitValue extends AbstractValue {
 	 */
 	@Override
 	protected IValue doMultiply(IValue other, DataType resultDataType) {
-		if (other instanceof Unit) {
+		if (other instanceof UnitValue) {
 			return new UnitValue(getContext(), value.evaluate(OperatorKind.MULTIPLY, ((UnitValue) other).value));
 		}
 		return InvalidValue.SINGLETON;
@@ -72,8 +72,8 @@ public class UnitValue extends AbstractValue {
 	 */
 	@Override
 	protected IValue doDivide(IValue other, DataType resultDataType) {
-		if (other instanceof Unit) {
-			return new UnitValue(getContext(), value.evaluate(OperatorKind.MULTIPLY, ((UnitValue) other).value));
+		if (other instanceof UnitValue) {
+			return new UnitValue(getContext(), value.evaluate(OperatorKind.DIVIDE, ((UnitValue) other).value));
 		}
 		return InvalidValue.SINGLETON;
 	}

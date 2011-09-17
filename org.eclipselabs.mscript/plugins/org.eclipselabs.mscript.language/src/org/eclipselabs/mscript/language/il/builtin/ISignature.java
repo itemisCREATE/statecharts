@@ -21,6 +21,6 @@ import org.eclipselabs.mscript.typesystem.DataType;
  */
 public interface ISignature {
 
-	List<DataType> evaluateOutputParameterDataTypes(List<? extends DataType> inputParameterDataTypes);
+	boolean accepts(List<? extends DataType> inputParameterDataTypes);
 	
 }

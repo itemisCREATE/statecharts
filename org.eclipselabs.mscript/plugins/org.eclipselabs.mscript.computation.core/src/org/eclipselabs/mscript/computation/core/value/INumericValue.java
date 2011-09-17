@@ -12,6 +12,7 @@
 package org.eclipselabs.mscript.computation.core.value;
 
 import org.eclipselabs.mscript.typesystem.NumericType;
+import org.eclipselabs.mscript.typesystem.Unit;
 
 /**
  * @author Andreas Unger
@@ -20,5 +21,7 @@ import org.eclipselabs.mscript.typesystem.NumericType;
 public interface INumericValue extends IValue {
 
 	NumericType getDataType();
+	
+	INumericValue convertUnit(Unit unit);
 	
 }

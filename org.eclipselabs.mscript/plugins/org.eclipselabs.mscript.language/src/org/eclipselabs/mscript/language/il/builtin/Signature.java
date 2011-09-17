@@ -11,7 +11,6 @@
 
 package org.eclipselabs.mscript.language.il.builtin;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,37 +23,31 @@ import org.eclipselabs.mscript.typesystem.DataType;
 public class Signature implements ISignature {
 
 	private List<DataType> inputParameterDataTypes;
-	private List<DataType> outputParameterDataTypes;
 	
-	public Signature(List<DataType> inputDataTypes, DataType outputDataType) {
-		this(inputDataTypes, Collections.singletonList(outputDataType));
-	}
-
 	/**
 	 * 
 	 */
-	public Signature(List<DataType> inputDataTypes, List<DataType> outputDataTypes) {
+	public Signature(List<DataType> inputDataTypes) {
 		this.inputParameterDataTypes = inputDataTypes;
-		this.outputParameterDataTypes = outputDataTypes;
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ISignature#evaluateOutputDataTypes(java.util.List)
 	 */
-	public List<DataType> evaluateOutputParameterDataTypes(List<? extends DataType> inputParameterDataTypes) {
+	public boolean accepts(List<? extends DataType> inputParameterDataTypes) {
 		if (this.inputParameterDataTypes == inputParameterDataTypes) {
-			return outputParameterDataTypes;
+			return true;
 		}
 		if (!(this.inputParameterDataTypes != null && inputParameterDataTypes != null && this.inputParameterDataTypes.size() == inputParameterDataTypes.size())) {
-			return null;
+			return false;
 		}
 		Iterator<DataType> iterator = this.inputParameterDataTypes.iterator();
 		for (DataType inputDataType : inputParameterDataTypes) {
 			if (!iterator.next().isAssignableFrom(inputDataType)) {
-				return null;
+				return false;
 			}
 		}
-		return outputParameterDataTypes;
+		return true;
 	}
 
 }

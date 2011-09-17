@@ -11,28 +11,26 @@
 
 package org.eclipselabs.mscript.language.internal.il.builtin;
 
-import java.util.Collections;
 import java.util.List;
 
-import org.eclipselabs.mscript.language.il.builtin.Signature;
+import org.eclipselabs.mscript.language.il.builtin.ISignature;
 import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.RealType;
-import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
+import org.eclipselabs.mscript.typesystem.NumericType;
 
 /**
  * @author Andreas Unger
  *
  */
-public class UnitSignature extends Signature {
+public class UnitSignature implements ISignature {
 
-	public UnitSignature() {
-		super(createInputDataTypes(), TypeSystemFactory.eINSTANCE.createUnitType());
-	}
-	
-	private static List<DataType> createInputDataTypes() {
-		RealType realType = TypeSystemFactory.eINSTANCE.createRealType();
-		realType.setUnit(TypeSystemFactory.eINSTANCE.createUnit());
-		return Collections.<DataType>singletonList(realType);
+	public boolean accepts(List<? extends DataType> inputParameterDataTypes) {
+		if (inputParameterDataTypes.size() != 1) {
+			return false;
+		}
+		
+		DataType dataType = inputParameterDataTypes.get(0);
+		
+		return dataType instanceof NumericType;
 	}
 
 }

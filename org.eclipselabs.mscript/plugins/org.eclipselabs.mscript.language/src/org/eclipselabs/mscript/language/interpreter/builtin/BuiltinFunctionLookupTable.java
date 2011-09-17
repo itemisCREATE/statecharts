@@ -28,6 +28,8 @@ public class BuiltinFunctionLookupTable implements IBuiltinFunctionLookupTable {
 			return new UnitFunction();
 		case ROUND:
 			return new RoundFunction();
+		case NUM:
+			return new NumFunction();
 		}
 		return null;
 	}

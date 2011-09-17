@@ -3,4 +3,5 @@
   <definitions xsi:type="ast:BuiltinFunction" name="unit"/>
   <definitions xsi:type="ast:BuiltinFunction" name="size"/>
   <definitions xsi:type="ast:BuiltinFunction" name="round"/>
+  <definitions xsi:type="ast:BuiltinFunction" name="num"/>
 </ast:Module>

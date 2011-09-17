@@ -15,26 +15,27 @@ import java.util.List;
 
 import org.eclipselabs.mscript.language.il.builtin.ISignature;
 import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.IntegerType;
-import org.eclipselabs.mscript.typesystem.RealType;
+import org.eclipselabs.mscript.typesystem.NumericType;
+import org.eclipselabs.mscript.typesystem.UnitType;
 
 /**
  * @author Andreas Unger
  *
  */
-public class RoundSignature implements ISignature {
+public class NumSignature implements ISignature {
 
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.il.builtin.ISignature#evaluateOutputParameterDataTypes(java.util.List)
 	 */
 	public boolean accepts(List<? extends DataType> inputParameterDataTypes) {
-		if (inputParameterDataTypes.size() != 1) {
+		if (inputParameterDataTypes.size() != 2) {
 			return false;
 		}
 		
-		DataType inputDataType = inputParameterDataTypes.get(0);
+		DataType dataType1 = inputParameterDataTypes.get(0);
+		DataType dataType2 = inputParameterDataTypes.get(1);
 		
-		return inputDataType instanceof RealType || inputDataType instanceof IntegerType;
+		return dataType1 instanceof NumericType && dataType2 instanceof UnitType;
 	}
 
 }

@@ -13,6 +13,7 @@ package org.eclipselabs.mscript.language.il.builtin;
 
 import java.util.List;
 
+import org.eclipselabs.mscript.language.internal.il.builtin.NumSignature;
 import org.eclipselabs.mscript.language.internal.il.builtin.RoundSignature;
 import org.eclipselabs.mscript.language.internal.il.builtin.UnitSignature;
 import org.eclipselabs.mscript.typesystem.DataType;
@@ -24,7 +25,8 @@ import org.eclipselabs.mscript.typesystem.DataType;
 public enum BuiltinFunctionDescriptor {
 	
 	UNIT("unit", new UnitSignature()),
-	ROUND("round", new RoundSignature());
+	ROUND("round", new RoundSignature()),
+	NUM("num", new NumSignature());
 	
 	private String name;
 	private ISignature signature;
@@ -53,7 +55,7 @@ public enum BuiltinFunctionDescriptor {
 	 */
 	public static BuiltinFunctionDescriptor get(String name, List<DataType> inputParameterDataTypes) {
 		for (BuiltinFunctionDescriptor descriptor : values()) {
-			if (descriptor.name.equals(name) && descriptor.signature.evaluateOutputParameterDataTypes(inputParameterDataTypes) != null) {
+			if (descriptor.name.equals(name) && descriptor.signature.accepts(inputParameterDataTypes)) {
 				return descriptor;
 			}
 		}

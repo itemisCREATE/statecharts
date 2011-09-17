@@ -11,11 +11,13 @@
 
 package org.eclipselabs.mscript.computation.core.value;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
 import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelUtil;
 import org.eclipselabs.mscript.computation.core.IComputationContext;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.NumericType;
+import org.eclipselabs.mscript.typesystem.Unit;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
@@ -37,6 +39,15 @@ public abstract class AbstractNumericValue extends AbstractExplicitDataTypeValue
 	@Override
 	public NumericType getDataType() {
 		return (NumericType) super.getDataType();
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.computation.core.value.INumericValue#convertUnit(org.eclipselabs.mscript.typesystem.Unit)
+	 */
+	public INumericValue convertUnit(Unit unit) {
+		NumericType numericType = EcoreUtil.copy(getDataType());
+		numericType.setUnit(unit);
+		return (INumericValue) doConvert(numericType);
 	}
 
 	protected NumberFormat getNumberFormat() {
