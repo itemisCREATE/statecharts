@@ -116,15 +116,6 @@ public interface ILFactory extends EFactory {
 	Assignment createAssignment();
 
 	/**
-	 * Returns a new object of class '<em>If Statement</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>If Statement</em>'.
-	 * @generated
-	 */
-	IfStatement createIfStatement();
-
-	/**
 	 * Returns a new object of class '<em>Foreach Statement</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

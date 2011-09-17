@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 
 /**
@@ -153,16 +154,6 @@ public interface ILPackage extends EPackage {
 	int IL_FUNCTION_DEFINITION_FEATURE_COUNT = 8;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.StatementImpl <em>Statement</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.il.impl.StatementImpl
-	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getStatement()
-	 * @generated
-	 */
-	int STATEMENT = 10;
-
-	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.CompoundStatementImpl <em>Compound Statement</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -170,7 +161,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getCompoundStatement()
 	 * @generated
 	 */
-	int COMPOUND_STATEMENT = 11;
+	int COMPOUND_STATEMENT = 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.VariableDeclarationImpl <em>Variable Declaration</em>}' class.
@@ -596,15 +587,6 @@ public interface ILPackage extends EPackage {
 	int LOCAL_VARIABLE_DECLARATION_FEATURE_COUNT = VARIABLE_DECLARATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Statement</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATEMENT_FEATURE_COUNT = 0;
-
-	/**
 	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -639,7 +621,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getVariableAccess()
 	 * @generated
 	 */
-	int VARIABLE_ACCESS = 12;
+	int VARIABLE_ACCESS = 11;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -676,7 +658,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getAssignment()
 	 * @generated
 	 */
-	int ASSIGNMENT = 13;
+	int ASSIGNMENT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -715,52 +697,6 @@ public interface ILPackage extends EPackage {
 	int ASSIGNMENT_FEATURE_COUNT = VARIABLE_ACCESS_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.IfStatementImpl <em>If Statement</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.il.impl.IfStatementImpl
-	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getIfStatement()
-	 * @generated
-	 */
-	int IF_STATEMENT = 14;
-
-	/**
-	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IF_STATEMENT__CONDITION = STATEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Then Statement</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IF_STATEMENT__THEN_STATEMENT = STATEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Else Statement</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IF_STATEMENT__ELSE_STATEMENT = STATEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>If Statement</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IF_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 3;
-
-	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.ForeachStatementImpl <em>Foreach Statement</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -768,7 +704,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getForeachStatement()
 	 * @generated
 	 */
-	int FOREACH_STATEMENT = 15;
+	int FOREACH_STATEMENT = 13;
 
 	/**
 	 * The feature id for the '<em><b>Iteration Variable Declaration</b></em>' containment reference.
@@ -777,7 +713,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FOREACH_STATEMENT__ITERATION_VARIABLE_DECLARATION = STATEMENT_FEATURE_COUNT + 0;
+	int FOREACH_STATEMENT__ITERATION_VARIABLE_DECLARATION = AstPackage.STATEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Collection Expression</b></em>' containment reference.
@@ -786,7 +722,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FOREACH_STATEMENT__COLLECTION_EXPRESSION = STATEMENT_FEATURE_COUNT + 1;
+	int FOREACH_STATEMENT__COLLECTION_EXPRESSION = AstPackage.STATEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -795,7 +731,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FOREACH_STATEMENT__BODY = STATEMENT_FEATURE_COUNT + 2;
+	int FOREACH_STATEMENT__BODY = AstPackage.STATEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Foreach Statement</em>' class.
@@ -804,7 +740,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FOREACH_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 3;
+	int FOREACH_STATEMENT_FEATURE_COUNT = AstPackage.STATEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.VariableReferenceImpl <em>Variable Reference</em>}' class.
@@ -814,7 +750,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getVariableReference()
 	 * @generated
 	 */
-	int VARIABLE_REFERENCE = 16;
+	int VARIABLE_REFERENCE = 14;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -860,7 +796,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getInvalidExpression()
 	 * @generated
 	 */
-	int INVALID_EXPRESSION = 17;
+	int INVALID_EXPRESSION = 15;
 
 	/**
 	 * The number of structural features of the '<em>Invalid Expression</em>' class.
@@ -879,7 +815,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getIValue()
 	 * @generated
 	 */
-	int IVALUE = 18;
+	int IVALUE = 16;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.ILFunctionDefinition <em>Function Definition</em>}'.
@@ -978,16 +914,6 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getILFunctionDefinition_ComputationCompounds();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.Statement <em>Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Statement</em>'.
-	 * @see org.eclipselabs.mscript.language.il.Statement
-	 * @generated
-	 */
-	EClass getStatement();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.CompoundStatement <em>Compound Statement</em>}'.
@@ -1264,49 +1190,6 @@ public interface ILPackage extends EPackage {
 	EReference getAssignment_AssignedExpression();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.IfStatement <em>If Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>If Statement</em>'.
-	 * @see org.eclipselabs.mscript.language.il.IfStatement
-	 * @generated
-	 */
-	EClass getIfStatement();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.il.IfStatement#getCondition <em>Condition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Condition</em>'.
-	 * @see org.eclipselabs.mscript.language.il.IfStatement#getCondition()
-	 * @see #getIfStatement()
-	 * @generated
-	 */
-	EReference getIfStatement_Condition();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.il.IfStatement#getThenStatement <em>Then Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Then Statement</em>'.
-	 * @see org.eclipselabs.mscript.language.il.IfStatement#getThenStatement()
-	 * @see #getIfStatement()
-	 * @generated
-	 */
-	EReference getIfStatement_ThenStatement();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.il.IfStatement#getElseStatement <em>Else Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Else Statement</em>'.
-	 * @see org.eclipselabs.mscript.language.il.IfStatement#getElseStatement()
-	 * @see #getIfStatement()
-	 * @generated
-	 */
-	EReference getIfStatement_ElseStatement();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.ForeachStatement <em>Foreach Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1486,16 +1369,6 @@ public interface ILPackage extends EPackage {
 		 * @generated
 		 */
 		EReference IL_FUNCTION_DEFINITION__COMPUTATION_COMPOUNDS = eINSTANCE.getILFunctionDefinition_ComputationCompounds();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.StatementImpl <em>Statement</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.il.impl.StatementImpl
-		 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getStatement()
-		 * @generated
-		 */
-		EClass STATEMENT = eINSTANCE.getStatement();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.CompoundStatementImpl <em>Compound Statement</em>}' class.
@@ -1728,40 +1601,6 @@ public interface ILPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ASSIGNMENT__ASSIGNED_EXPRESSION = eINSTANCE.getAssignment_AssignedExpression();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.IfStatementImpl <em>If Statement</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.il.impl.IfStatementImpl
-		 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getIfStatement()
-		 * @generated
-		 */
-		EClass IF_STATEMENT = eINSTANCE.getIfStatement();
-
-		/**
-		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference IF_STATEMENT__CONDITION = eINSTANCE.getIfStatement_Condition();
-
-		/**
-		 * The meta object literal for the '<em><b>Then Statement</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference IF_STATEMENT__THEN_STATEMENT = eINSTANCE.getIfStatement_ThenStatement();
-
-		/**
-		 * The meta object literal for the '<em><b>Else Statement</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference IF_STATEMENT__ELSE_STATEMENT = eINSTANCE.getIfStatement_ElseStatement();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.ForeachStatementImpl <em>Foreach Statement</em>}' class.

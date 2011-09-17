@@ -15,12 +15,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.codegen.c.internal.VariableAccessGenerator;
 import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
 import org.eclipselabs.mscript.common.util.PrintAppendable;
+import org.eclipselabs.mscript.language.ast.IfStatement;
+import org.eclipselabs.mscript.language.ast.Statement;
+import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
-import org.eclipselabs.mscript.language.il.IfStatement;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
-import org.eclipselabs.mscript.language.il.Statement;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
@@ -49,6 +50,8 @@ public class CompoundGenerator implements ICompoundGenerator {
 		private IMscriptGeneratorContext context;
 
 		private PrintAppendable out;
+		
+		private AstCompoundGeneratorSwitch astCompoundGeneratorSwitch = new AstCompoundGeneratorSwitch();
 
 		/**
 		 * 
@@ -101,20 +104,6 @@ public class CompoundGenerator implements ICompoundGenerator {
 		}
 		
 		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseIfStatement(org.eclipselabs.mscript.language.imperativemodel.IfStatement)
-		 */
-		@Override
-		public Boolean caseIfStatement(IfStatement ifStatement) {
-			out.print("if (");
-			doSwitch(ifStatement.getCondition());
-			out.print(")\n");
-			doSwitch(ifStatement.getThenStatement());
-			out.print("else\n");
-			doSwitch(ifStatement.getElseStatement());
-			return true;
-		}
-		
-		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseForeachStatement(org.eclipselabs.mscript.language.imperativemodel.ForeachStatement)
 		 */
 		@Override
@@ -155,7 +144,7 @@ public class CompoundGenerator implements ICompoundGenerator {
 				expressionGenerator.generate(context, (Expression) object);
 				return true;
 			}
-			return super.defaultCase(object);
+			return astCompoundGeneratorSwitch.doSwitch(object);
 		}
 		
 		private void writeAssignment(DataType targetDataType, String target, Expression assignedExpression) {
@@ -189,6 +178,21 @@ public class CompoundGenerator implements ICompoundGenerator {
 		
 		private DataType getDataType(Expression expression) {
 			return context.getStaticEvaluationContext().getValue(expression).getDataType();
+		}
+		
+		private class AstCompoundGeneratorSwitch extends AstSwitch<Boolean> {
+			
+			@Override
+			public Boolean caseIfStatement(IfStatement ifStatement) {
+				out.print("if (");
+				CompoundGeneratorSwitch.this.doSwitch(ifStatement.getCondition());
+				out.print(")\n");
+				CompoundGeneratorSwitch.this.doSwitch(ifStatement.getThenStatement());
+				out.print("else\n");
+				CompoundGeneratorSwitch.this.doSwitch(ifStatement.getElseStatement());
+				return true;
+			}
+			
 		}
 	
 	}

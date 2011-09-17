@@ -28,6 +28,7 @@ import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.FunctionCall;
 import org.eclipselabs.mscript.language.ast.IfExpression;
+import org.eclipselabs.mscript.language.ast.IfStatement;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.LetExpression;
@@ -46,7 +47,6 @@ import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
 import org.eclipselabs.mscript.language.il.ILFactory;
-import org.eclipselabs.mscript.language.il.IfStatement;
 import org.eclipselabs.mscript.language.il.InvalidExpression;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
@@ -170,7 +170,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 		LocalVariableDeclaration localVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
 		localVariableDeclaration.setDataType(context.getStaticEvaluationContext().getValue(ifExpression).getDataType());
 		context.getCompound().getStatements().add(localVariableDeclaration);
-		IfStatement ifStatement = ILFactory.eINSTANCE.createIfStatement();
+		IfStatement ifStatement = AstFactory.eINSTANCE.createIfStatement();
 		Expression conditionExpression = doSwitch(ifExpression.getCondition());
 		ifStatement.setCondition(conditionExpression);
 		

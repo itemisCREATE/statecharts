@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipselabs.mscript.language.ast.Statement;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
@@ -17,14 +18,12 @@ import org.eclipselabs.mscript.language.il.ComputationCompound;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.ILPackage;
-import org.eclipselabs.mscript.language.il.IfStatement;
 import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InvalidExpression;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
-import org.eclipselabs.mscript.language.il.Statement;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableAccess;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
@@ -128,10 +127,6 @@ public class ILAdapterFactory extends AdapterFactoryImpl {
 				return createLocalVariableDeclarationAdapter();
 			}
 			@Override
-			public Adapter caseStatement(Statement object) {
-				return createStatementAdapter();
-			}
-			@Override
 			public Adapter caseCompoundStatement(CompoundStatement object) {
 				return createCompoundStatementAdapter();
 			}
@@ -144,10 +139,6 @@ public class ILAdapterFactory extends AdapterFactoryImpl {
 				return createAssignmentAdapter();
 			}
 			@Override
-			public Adapter caseIfStatement(IfStatement object) {
-				return createIfStatementAdapter();
-			}
-			@Override
 			public Adapter caseForeachStatement(ForeachStatement object) {
 				return createForeachStatementAdapter();
 			}
@@ -158,6 +149,10 @@ public class ILAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseInvalidExpression(InvalidExpression object) {
 				return createInvalidExpressionAdapter();
+			}
+			@Override
+			public Adapter caseStatement(Statement object) {
+				return createStatementAdapter();
 			}
 			@Override
 			public Adapter caseExpression(Expression object) {
@@ -198,13 +193,13 @@ public class ILAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.il.Statement <em>Statement</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Statement <em>Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.il.Statement
+	 * @see org.eclipselabs.mscript.language.ast.Statement
 	 * @generated
 	 */
 	public Adapter createStatementAdapter() {
@@ -376,20 +371,6 @@ public class ILAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAssignmentAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.il.IfStatement <em>If Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.il.IfStatement
-	 * @generated
-	 */
-	public Adapter createIfStatementAdapter() {
 		return null;
 	}
 

@@ -9,6 +9,7 @@ package org.eclipselabs.mscript.language.il.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipselabs.mscript.language.ast.Statement;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
@@ -16,14 +17,12 @@ import org.eclipselabs.mscript.language.il.ComputationCompound;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.ILPackage;
-import org.eclipselabs.mscript.language.il.IfStatement;
 import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InvalidExpression;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
-import org.eclipselabs.mscript.language.il.Statement;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableAccess;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
@@ -158,12 +157,6 @@ public class ILSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ILPackage.STATEMENT: {
-				Statement statement = (Statement)theEObject;
-				T result = caseStatement(statement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ILPackage.COMPOUND_STATEMENT: {
 				CompoundStatement compoundStatement = (CompoundStatement)theEObject;
 				T result = caseCompoundStatement(compoundStatement);
@@ -183,13 +176,6 @@ public class ILSwitch<T> extends Switch<T> {
 				T result = caseAssignment(assignment);
 				if (result == null) result = caseVariableAccess(assignment);
 				if (result == null) result = caseStatement(assignment);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ILPackage.IF_STATEMENT: {
-				IfStatement ifStatement = (IfStatement)theEObject;
-				T result = caseIfStatement(ifStatement);
-				if (result == null) result = caseStatement(ifStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -426,21 +412,6 @@ public class ILSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAssignment(Assignment object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>If Statement</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>If Statement</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseIfStatement(IfStatement object) {
 		return null;
 	}
 

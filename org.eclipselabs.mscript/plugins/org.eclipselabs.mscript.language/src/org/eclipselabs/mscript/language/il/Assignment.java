@@ -6,6 +6,7 @@
  */
 package org.eclipselabs.mscript.language.il;
 
+import org.eclipselabs.mscript.language.ast.Statement;
 import org.eclipselabs.mscript.typesystem.Expression;
 
 /**

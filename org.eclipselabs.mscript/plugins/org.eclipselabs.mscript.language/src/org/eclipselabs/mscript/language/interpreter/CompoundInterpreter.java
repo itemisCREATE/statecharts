@@ -11,16 +11,18 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.computation.core.value.IArrayValue;
 import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.computation.core.value.UninitializedValue;
+import org.eclipselabs.mscript.language.ast.IfStatement;
+import org.eclipselabs.mscript.language.ast.Statement;
+import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
-import org.eclipselabs.mscript.language.il.IfStatement;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
-import org.eclipselabs.mscript.language.il.Statement;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.typesystem.ArrayType;
@@ -44,6 +46,8 @@ public class CompoundInterpreter implements ICompoundInterpreter {
 		private IInterpreterContext context;
 		
 		private IExpressionValueEvaluator expressionValueEvaluator = new ExpressionValueEvaluator();
+		
+		private AstCompoundInterpreterSwitch astCompoundInterpreterSwitch = new AstCompoundInterpreterSwitch();
 
 		/**
 		 * 
@@ -76,23 +80,6 @@ public class CompoundInterpreter implements ICompoundInterpreter {
 			return true;
 		}
 	
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseIfStatement(org.eclipselabs.mscript.language.imperativemodel.IfStatement)
-		 */
-		@Override
-		public Boolean caseIfStatement(IfStatement ifStatement) {
-			IValue conditionValue = expressionValueEvaluator.evaluate(context, ifStatement.getCondition());
-			if (conditionValue instanceof IBooleanValue) {
-				IBooleanValue booleanConditionValue = (IBooleanValue) conditionValue;
-				if (booleanConditionValue.booleanValue()) {
-					return doSwitch(ifStatement.getThenStatement());
-				}
-			} else {
-				throw new RuntimeException("Condition expression must be boolean");
-			}
-			return doSwitch(ifStatement.getElseStatement());
-		}
-		
 		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseForeachStatement(org.eclipselabs.mscript.language.imperativemodel.ForeachStatement)
 		 */
@@ -145,6 +132,32 @@ public class CompoundInterpreter implements ICompoundInterpreter {
 			variable.setValue(0, value);
 			context.addVariable(variable);
 			return true;
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
+		 */
+		@Override
+		public Boolean defaultCase(EObject object) {
+			return astCompoundInterpreterSwitch.doSwitch(object);
+		}
+		
+		private class AstCompoundInterpreterSwitch extends AstSwitch<Boolean> {
+			
+			@Override
+			public Boolean caseIfStatement(IfStatement ifStatement) {
+				IValue conditionValue = expressionValueEvaluator.evaluate(context, ifStatement.getCondition());
+				if (conditionValue instanceof IBooleanValue) {
+					IBooleanValue booleanConditionValue = (IBooleanValue) conditionValue;
+					if (booleanConditionValue.booleanValue()) {
+						return CompoundInterpreterSwitch.this.doSwitch(ifStatement.getThenStatement());
+					}
+				} else {
+					throw new RuntimeException("Condition expression must be boolean");
+				}
+				return CompoundInterpreterSwitch.this.doSwitch(ifStatement.getElseStatement());
+			}
+			
 		}
 
 	}

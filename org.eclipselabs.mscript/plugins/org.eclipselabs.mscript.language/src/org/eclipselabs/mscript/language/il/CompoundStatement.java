@@ -6,6 +6,8 @@
  */
 package org.eclipselabs.mscript.language.il;
 
+import org.eclipselabs.mscript.language.ast.Statement;
+
 
 /**
  * <!-- begin-user-doc -->

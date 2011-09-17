@@ -15,13 +15,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.common.internal.util.Scope;
+import org.eclipselabs.mscript.language.ast.IfStatement;
+import org.eclipselabs.mscript.language.ast.Statement;
+import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.ComputationCompound;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
-import org.eclipselabs.mscript.language.il.IfStatement;
-import org.eclipselabs.mscript.language.il.Statement;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
 
@@ -122,6 +124,8 @@ public class NameNormalizer {
 		
 		private NormalizerScope scope;
 		
+		private AstCompoundNormalizer astCompoundNormalizer = new AstCompoundNormalizer();
+		
 		/**
 		 * 
 		 */
@@ -165,22 +169,31 @@ public class NameNormalizer {
 		}
 		
 		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseIfStatement(org.eclipselabs.mscript.language.il.IfStatement)
-		 */
-		@Override
-		public Boolean caseIfStatement(IfStatement ifStatement) {
-			doSwitch(ifStatement.getThenStatement());
-			doSwitch(ifStatement.getElseStatement());
-			return true;
-		}
-		
-		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseForeachStatement(org.eclipselabs.mscript.language.il.ForeachStatement)
 		 */
 		@Override
 		public Boolean caseForeachStatement(ForeachStatement foreachStatement) {
 			doSwitch(foreachStatement.getIterationVariableDeclaration());
 			return true;
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
+		 */
+		@Override
+		public Boolean defaultCase(EObject object) {
+			return astCompoundNormalizer.doSwitch(object);
+		}
+		
+		private class AstCompoundNormalizer extends AstSwitch<Boolean> {
+			
+			@Override
+			public Boolean caseIfStatement(IfStatement ifStatement) {
+				CompoundNormalizer.this.doSwitch(ifStatement.getThenStatement());
+				CompoundNormalizer.this.doSwitch(ifStatement.getElseStatement());
+				return true;
+			}
+			
 		}
 		
 	}

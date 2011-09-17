@@ -8,6 +8,7 @@ package org.eclipselabs.mscript.language.il;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipselabs.mscript.language.ast.Statement;
 
 
 /**
@@ -30,7 +31,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface Compound extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipselabs.mscript.language.il.Statement}.
+	 * The list contents are of type {@link org.eclipselabs.mscript.language.ast.Statement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Statements</em>' containment reference isn't clear,

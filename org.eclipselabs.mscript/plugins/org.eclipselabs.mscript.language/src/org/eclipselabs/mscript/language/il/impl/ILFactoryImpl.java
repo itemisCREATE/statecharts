@@ -21,7 +21,6 @@ import org.eclipselabs.mscript.language.il.ForeachStatement;
 import org.eclipselabs.mscript.language.il.ILFactory;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.ILPackage;
-import org.eclipselabs.mscript.language.il.IfStatement;
 import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InvalidExpression;
@@ -84,7 +83,6 @@ public class ILFactoryImpl extends EFactoryImpl implements ILFactory {
 			case ILPackage.LOCAL_VARIABLE_DECLARATION: return createLocalVariableDeclaration();
 			case ILPackage.COMPOUND_STATEMENT: return createCompoundStatement();
 			case ILPackage.ASSIGNMENT: return createAssignment();
-			case ILPackage.IF_STATEMENT: return createIfStatement();
 			case ILPackage.FOREACH_STATEMENT: return createForeachStatement();
 			case ILPackage.VARIABLE_REFERENCE: return createVariableReference();
 			case ILPackage.INVALID_EXPRESSION: return createInvalidExpression();
@@ -221,16 +219,6 @@ public class ILFactoryImpl extends EFactoryImpl implements ILFactory {
 	public Assignment createAssignment() {
 		AssignmentImpl assignment = new AssignmentImpl();
 		return assignment;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public IfStatement createIfStatement() {
-		IfStatementImpl ifStatement = new IfStatementImpl();
-		return ifStatement;
 	}
 
 	/**
