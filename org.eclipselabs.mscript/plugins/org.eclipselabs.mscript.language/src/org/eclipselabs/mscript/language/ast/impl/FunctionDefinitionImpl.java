@@ -290,12 +290,10 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getQualifiedName() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return getName();
 	}
 
 	/**

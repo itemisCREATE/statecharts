@@ -11,21 +11,26 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipselabs.mscript.language.ast.FeatureCall;
+import org.eclipselabs.mscript.language.ast.Compound;
+import org.eclipselabs.mscript.language.ast.ForStatement;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.IterationCall;
+import org.eclipselabs.mscript.language.ast.IterationVariable;
 import org.eclipselabs.mscript.language.ast.LetExpression;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.Statement;
+import org.eclipselabs.mscript.language.ast.VariableDeclaration;
 
 public class MscriptScopeProvider extends AbstractDeclarativeScopeProvider {
 
-	public IScope scope_FeatureCall_feature(FeatureCall context, EReference reference) {
+	public IScope scope_CallableElement(EObject context, EReference reference) {
 		List<EObject> elements = new ArrayList<EObject>();
 		
+		EObject element = context; 
 		EObject container = context.eContainer();
 		while (container != null) {
 			if (container instanceof LetExpression) {
@@ -63,7 +68,24 @@ public class MscriptScopeProvider extends AbstractDeclarativeScopeProvider {
 				}
 
 				elements.add(functionDefinition);
+			} else if (container instanceof ForStatement) {
+				ForStatement forStatement = (ForStatement) container;
+				IterationVariable declaredIterationVariable = forStatement.getDeclaredIterationVariable();
+				if (declaredIterationVariable != null) {
+					elements.add(declaredIterationVariable);
+				}
+			} else if (container instanceof Compound) {
+				Compound compound = (Compound) container;
+				for (Statement statement : compound.getStatements()) {
+					if (statement == element) {
+						break;
+					}
+					if (statement instanceof VariableDeclaration) {
+						elements.add(statement);
+					}
+				}
 			}
+			element = container;
 			container = container.eContainer();
 		}
 		

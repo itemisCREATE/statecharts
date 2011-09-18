@@ -41,22 +41,6 @@ public class GlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	private static volatile List<IEObjectDescription> eObjectDescriptions;
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider#getScope(org.eclipse.xtext.scoping.IScope, org.eclipse.emf.ecore.resource.Resource, boolean, org.eclipse.emf.ecore.EClass, com.google.common.base.Predicate)
-	 */
-//	@Override
-//	protected IScope getScope(IScope parent, Resource context, boolean ignoreCase, EClass type,
-//			Predicate<IEObjectDescription> filter) {
-//		return new AbstractScope(parent, ignoreCase) {
-//			
-//			@Override
-//			protected Iterable<IEObjectDescription> getAllLocalElements() {
-//				return getEObjectDescriptions();
-//			}
-//			
-//		};
-//	}
-	
-	/* (non-Javadoc)
 	 * @see org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider#getScope(org.eclipse.emf.ecore.resource.Resource, boolean, org.eclipse.emf.ecore.EClass, com.google.common.base.Predicate)
 	 */
 	@Override

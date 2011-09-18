@@ -34,6 +34,7 @@ import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.StepN;
 import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.VariableAccess;
+import org.eclipselabs.mscript.language.ast.VariableDeclaration;
 import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
 import org.eclipselabs.mscript.language.interpreter.StaticEvaluationContext;
 import org.eclipselabs.mscript.language.interpreter.StaticExpressionEvaluator;
@@ -67,7 +68,8 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 				|| ce instanceof LetExpressionVariableDeclarationPart
 				|| ce instanceof IterationVariable
 				|| ce instanceof IterationAccumulator
-				|| ce instanceof BuiltinVariable)) {
+				|| ce instanceof BuiltinVariable
+				|| ce instanceof VariableDeclaration)) {
 			error("Invalid variable reference " + variableAccess.getFeature().getName(), null);
 		}
 	}
