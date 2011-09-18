@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
+import org.eclipselabs.mscript.computation.core.value.ISimpleNumericValue;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
@@ -57,6 +58,8 @@ import org.eclipselabs.mscript.typesystem.BooleanLiteral;
 import org.eclipselabs.mscript.typesystem.Expression;
 import org.eclipselabs.mscript.typesystem.IntegerLiteral;
 import org.eclipselabs.mscript.typesystem.IntegerType;
+import org.eclipselabs.mscript.typesystem.Literal;
+import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.RealLiteral;
 import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.StringLiteral;
@@ -91,11 +94,36 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 		Expression newExpression =  super.doSwitch(eObject);
 		IValue value = context.getStaticEvaluationContext().getValue(eObject);
 		if (value != null) {
+			if (!(eObject instanceof Literal)) {
+				newExpression = condenseExpression(value, newExpression);
+			}
 			context.getStaticEvaluationContext().setValue(newExpression, value);
-		} else {
-//			throw new IllegalStateException();
 		}
 		return newExpression;
+	}
+
+	/**
+	 * @param value
+	 * @param expression
+	 * @return
+	 */
+	protected Expression condenseExpression(IValue value, Expression expression) {
+		if (value instanceof ISimpleNumericValue) {
+			ISimpleNumericValue numericValue = (ISimpleNumericValue) value;
+			NumericType dataType = numericValue.getDataType();
+			if (dataType instanceof RealType) {
+				RealLiteral realLiteral = TypeSystemFactory.eINSTANCE.createRealLiteral();
+				realLiteral.setValue(numericValue.doubleValue());
+				realLiteral.setUnit(EcoreUtil.copy(dataType.getUnit()));
+				expression = realLiteral;
+			} else if (dataType instanceof IntegerType) {
+				IntegerLiteral integerLiteral = TypeSystemFactory.eINSTANCE.createIntegerLiteral();
+				integerLiteral.setValue(numericValue.longValue());
+				integerLiteral.setUnit(EcoreUtil.copy(dataType.getUnit()));
+				expression = integerLiteral;
+			}
+		}
+		return expression;
 	}
 	
 	/* (non-Javadoc)
@@ -158,13 +186,11 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 	 */
 	@Override
 	public Expression caseIfExpression(IfExpression ifExpression) {
-		if (ifExpression.isStatic()) {
-			IValue value = context.getStaticEvaluationContext().getValue(ifExpression.getCondition());
-			if (value instanceof IBooleanValue) {
-				boolean condition = ((IBooleanValue) value).booleanValue();
-				Expression expression = condition ? ifExpression.getThenExpression() : ifExpression.getElseExpression();
-				return doSwitch(expression);
-			}
+		IValue value = context.getStaticEvaluationContext().getValue(ifExpression.getCondition());
+		if (value instanceof IBooleanValue) {
+			boolean condition = ((IBooleanValue) value).booleanValue();
+			Expression expression = condition ? ifExpression.getThenExpression() : ifExpression.getElseExpression();
+			return doSwitch(expression);
 		}
 		
 		LocalVariableDeclaration localVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
