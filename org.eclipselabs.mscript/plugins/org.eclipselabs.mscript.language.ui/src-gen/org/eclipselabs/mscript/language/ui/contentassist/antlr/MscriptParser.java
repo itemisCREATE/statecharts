@@ -62,6 +62,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPrimitiveStepExpressionAccess().getAlternatives(), "rule__PrimitiveStepExpression__Alternatives");
 					put(grammarAccess.getArrayConstructionOperatorAccess().getAlternatives_2(), "rule__ArrayConstructionOperator__Alternatives_2");
 					put(grammarAccess.getStatementAccess().getAlternatives(), "rule__Statement__Alternatives");
+					put(grammarAccess.getForStatementAccess().getAlternatives_2(), "rule__ForStatement__Alternatives_2");
 					put(grammarAccess.getUnitAccess().getAlternatives_1(), "rule__Unit__Alternatives_1");
 					put(grammarAccess.getUnitNumeratorAccess().getAlternatives(), "rule__UnitNumerator__Alternatives");
 					put(grammarAccess.getUnitDenominatorAccess().getAlternatives(), "rule__UnitDenominator__Alternatives");
@@ -195,6 +196,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getIfStatementAccess().getGroup_5(), "rule__IfStatement__Group_5__0");
 					put(grammarAccess.getWhileStatementAccess().getGroup(), "rule__WhileStatement__Group__0");
 					put(grammarAccess.getForStatementAccess().getGroup(), "rule__ForStatement__Group__0");
+					put(grammarAccess.getForStatementAccess().getGroup_2_0(), "rule__ForStatement__Group_2_0__0");
+					put(grammarAccess.getForStatementAccess().getGroup_5(), "rule__ForStatement__Group_5__0");
 					put(grammarAccess.getDoWhileStatementAccess().getGroup(), "rule__DoWhileStatement__Group__0");
 					put(grammarAccess.getContinueStatementAccess().getGroup(), "rule__ContinueStatement__Group__0");
 					put(grammarAccess.getBreakStatementAccess().getGroup(), "rule__BreakStatement__Group__0");
@@ -372,9 +375,11 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getIfStatementAccess().getElseStatementAssignment_5_1(), "rule__IfStatement__ElseStatementAssignment_5_1");
 					put(grammarAccess.getWhileStatementAccess().getConditionAssignment_2(), "rule__WhileStatement__ConditionAssignment_2");
 					put(grammarAccess.getWhileStatementAccess().getBodyAssignment_4(), "rule__WhileStatement__BodyAssignment_4");
-					put(grammarAccess.getForStatementAccess().getIterationVariableAssignment_2(), "rule__ForStatement__IterationVariableAssignment_2");
+					put(grammarAccess.getForStatementAccess().getDeclaredIterationVariableAssignment_2_0_1(), "rule__ForStatement__DeclaredIterationVariableAssignment_2_0_1");
+					put(grammarAccess.getForStatementAccess().getIterationVariableAssignment_2_1(), "rule__ForStatement__IterationVariableAssignment_2_1");
 					put(grammarAccess.getForStatementAccess().getCollectionExpressionAssignment_4(), "rule__ForStatement__CollectionExpressionAssignment_4");
-					put(grammarAccess.getForStatementAccess().getBodyAssignment_6(), "rule__ForStatement__BodyAssignment_6");
+					put(grammarAccess.getForStatementAccess().getConditionAssignment_5_1(), "rule__ForStatement__ConditionAssignment_5_1");
+					put(grammarAccess.getForStatementAccess().getBodyAssignment_7(), "rule__ForStatement__BodyAssignment_7");
 					put(grammarAccess.getDoWhileStatementAccess().getBodyAssignment_1(), "rule__DoWhileStatement__BodyAssignment_1");
 					put(grammarAccess.getDoWhileStatementAccess().getConditionAssignment_4(), "rule__DoWhileStatement__ConditionAssignment_4");
 					put(grammarAccess.getReturnStatementAccess().getExpressionAssignment_1(), "rule__ReturnStatement__ExpressionAssignment_1");

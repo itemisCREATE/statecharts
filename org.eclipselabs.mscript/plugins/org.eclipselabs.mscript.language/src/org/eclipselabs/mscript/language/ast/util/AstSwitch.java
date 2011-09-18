@@ -607,6 +607,7 @@ public class AstSwitch<T> extends Switch<T> {
 				VariableDeclaration variableDeclaration = (VariableDeclaration)theEObject;
 				T result = caseVariableDeclaration(variableDeclaration);
 				if (result == null) result = caseStatement(variableDeclaration);
+				if (result == null) result = caseCallableElement(variableDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

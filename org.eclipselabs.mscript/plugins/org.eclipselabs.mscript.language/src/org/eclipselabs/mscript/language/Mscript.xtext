@@ -384,7 +384,7 @@ WhileStatement:
 	'while' '(' condition=Expression ')' body=Statement;
 
 ForStatement:
-	'for' '(' iterationVariable=IterationVariable 'in' collectionExpression=Expression ')' body=Statement;
+	'for' '(' ('var' declaredIterationVariable=IterationVariable | iterationVariable=[CallableElement|ValidID]) 'in' collectionExpression=Expression ('while' condition=Expression)? ')' body=Statement;
 
 DoWhileStatement:
 	'do' body=Statement 'while' '(' condition=Expression ')' ';';

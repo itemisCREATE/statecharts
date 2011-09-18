@@ -25,7 +25,7 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * @model
  * @generated
  */
-public interface VariableDeclaration extends Statement {
+public interface VariableDeclaration extends Statement, CallableElement {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

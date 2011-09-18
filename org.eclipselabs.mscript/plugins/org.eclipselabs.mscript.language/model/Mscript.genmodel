@@ -313,8 +313,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//DoWhileStatement/body"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ForStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ForStatement/declaredIterationVariable"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ForStatement/iterationVariable"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ForStatement/collectionExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ForStatement/condition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ForStatement/body"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ContinueStatement"/>

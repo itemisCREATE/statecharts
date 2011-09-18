@@ -2617,13 +2617,22 @@ public interface AstPackage extends EPackage {
 	int FOR_STATEMENT = 70;
 
 	/**
-	 * The feature id for the '<em><b>Iteration Variable</b></em>' containment reference.
+	 * The feature id for the '<em><b>Declared Iteration Variable</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FOR_STATEMENT__ITERATION_VARIABLE = STATEMENT_FEATURE_COUNT + 0;
+	int FOR_STATEMENT__DECLARED_ITERATION_VARIABLE = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Iteration Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_STATEMENT__ITERATION_VARIABLE = STATEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Collection Expression</b></em>' containment reference.
@@ -2632,7 +2641,16 @@ public interface AstPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FOR_STATEMENT__COLLECTION_EXPRESSION = STATEMENT_FEATURE_COUNT + 1;
+	int FOR_STATEMENT__COLLECTION_EXPRESSION = STATEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_STATEMENT__CONDITION = STATEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -2641,7 +2659,7 @@ public interface AstPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FOR_STATEMENT__BODY = STATEMENT_FEATURE_COUNT + 2;
+	int FOR_STATEMENT__BODY = STATEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>For Statement</em>' class.
@@ -2650,7 +2668,7 @@ public interface AstPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FOR_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 3;
+	int FOR_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ContinueStatementImpl <em>Continue Statement</em>}' class.
@@ -4978,10 +4996,21 @@ public interface AstPackage extends EPackage {
 	EClass getForStatement();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ForStatement#getIterationVariable <em>Iteration Variable</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ForStatement#getDeclaredIterationVariable <em>Declared Iteration Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Iteration Variable</em>'.
+	 * @return the meta object for the containment reference '<em>Declared Iteration Variable</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.ForStatement#getDeclaredIterationVariable()
+	 * @see #getForStatement()
+	 * @generated
+	 */
+	EReference getForStatement_DeclaredIterationVariable();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.ast.ForStatement#getIterationVariable <em>Iteration Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Iteration Variable</em>'.
 	 * @see org.eclipselabs.mscript.language.ast.ForStatement#getIterationVariable()
 	 * @see #getForStatement()
 	 * @generated
@@ -4998,6 +5027,17 @@ public interface AstPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getForStatement_CollectionExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ForStatement#getCondition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Condition</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.ForStatement#getCondition()
+	 * @see #getForStatement()
+	 * @generated
+	 */
+	EReference getForStatement_Condition();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ForStatement#getBody <em>Body</em>}'.
@@ -6904,7 +6944,15 @@ public interface AstPackage extends EPackage {
 		EClass FOR_STATEMENT = eINSTANCE.getForStatement();
 
 		/**
-		 * The meta object literal for the '<em><b>Iteration Variable</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Declared Iteration Variable</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FOR_STATEMENT__DECLARED_ITERATION_VARIABLE = eINSTANCE.getForStatement_DeclaredIterationVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Iteration Variable</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -6918,6 +6966,14 @@ public interface AstPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FOR_STATEMENT__COLLECTION_EXPRESSION = eINSTANCE.getForStatement_CollectionExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FOR_STATEMENT__CONDITION = eINSTANCE.getForStatement_Condition();
 
 		/**
 		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.

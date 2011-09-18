@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipselabs.mscript.language.ast.AstPackage;
+import org.eclipselabs.mscript.language.ast.CallableElement;
 import org.eclipselabs.mscript.language.ast.ForStatement;
 import org.eclipselabs.mscript.language.ast.IterationVariable;
 import org.eclipselabs.mscript.language.ast.Statement;
@@ -24,8 +25,10 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ForStatementImpl#getDeclaredIterationVariable <em>Declared Iteration Variable</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ForStatementImpl#getIterationVariable <em>Iteration Variable</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ForStatementImpl#getCollectionExpression <em>Collection Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ForStatementImpl#getCondition <em>Condition</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ForStatementImpl#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
@@ -34,14 +37,24 @@ import org.eclipselabs.mscript.typesystem.Expression;
  */
 public class ForStatementImpl extends StatementImpl implements ForStatement {
 	/**
-	 * The cached value of the '{@link #getIterationVariable() <em>Iteration Variable</em>}' containment reference.
+	 * The cached value of the '{@link #getDeclaredIterationVariable() <em>Declared Iteration Variable</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDeclaredIterationVariable()
+	 * @generated
+	 * @ordered
+	 */
+	protected IterationVariable declaredIterationVariable;
+
+	/**
+	 * The cached value of the '{@link #getIterationVariable() <em>Iteration Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getIterationVariable()
 	 * @generated
 	 * @ordered
 	 */
-	protected IterationVariable iterationVariable;
+	protected CallableElement iterationVariable;
 
 	/**
 	 * The cached value of the '{@link #getCollectionExpression() <em>Collection Expression</em>}' containment reference.
@@ -52,6 +65,16 @@ public class ForStatementImpl extends StatementImpl implements ForStatement {
 	 * @ordered
 	 */
 	protected Expression collectionExpression;
+
+	/**
+	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCondition()
+	 * @generated
+	 * @ordered
+	 */
+	protected Expression condition;
 
 	/**
 	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -87,8 +110,8 @@ public class ForStatementImpl extends StatementImpl implements ForStatement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IterationVariable getIterationVariable() {
-		return iterationVariable;
+	public IterationVariable getDeclaredIterationVariable() {
+		return declaredIterationVariable;
 	}
 
 	/**
@@ -96,11 +119,11 @@ public class ForStatementImpl extends StatementImpl implements ForStatement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetIterationVariable(IterationVariable newIterationVariable, NotificationChain msgs) {
-		IterationVariable oldIterationVariable = iterationVariable;
-		iterationVariable = newIterationVariable;
+	public NotificationChain basicSetDeclaredIterationVariable(IterationVariable newDeclaredIterationVariable, NotificationChain msgs) {
+		IterationVariable oldDeclaredIterationVariable = declaredIterationVariable;
+		declaredIterationVariable = newDeclaredIterationVariable;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FOR_STATEMENT__ITERATION_VARIABLE, oldIterationVariable, newIterationVariable);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FOR_STATEMENT__DECLARED_ITERATION_VARIABLE, oldDeclaredIterationVariable, newDeclaredIterationVariable);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -111,18 +134,61 @@ public class ForStatementImpl extends StatementImpl implements ForStatement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIterationVariable(IterationVariable newIterationVariable) {
-		if (newIterationVariable != iterationVariable) {
+	public void setDeclaredIterationVariable(IterationVariable newDeclaredIterationVariable) {
+		if (newDeclaredIterationVariable != declaredIterationVariable) {
 			NotificationChain msgs = null;
-			if (iterationVariable != null)
-				msgs = ((InternalEObject)iterationVariable).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FOR_STATEMENT__ITERATION_VARIABLE, null, msgs);
-			if (newIterationVariable != null)
-				msgs = ((InternalEObject)newIterationVariable).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FOR_STATEMENT__ITERATION_VARIABLE, null, msgs);
-			msgs = basicSetIterationVariable(newIterationVariable, msgs);
+			if (declaredIterationVariable != null)
+				msgs = ((InternalEObject)declaredIterationVariable).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FOR_STATEMENT__DECLARED_ITERATION_VARIABLE, null, msgs);
+			if (newDeclaredIterationVariable != null)
+				msgs = ((InternalEObject)newDeclaredIterationVariable).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FOR_STATEMENT__DECLARED_ITERATION_VARIABLE, null, msgs);
+			msgs = basicSetDeclaredIterationVariable(newDeclaredIterationVariable, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FOR_STATEMENT__ITERATION_VARIABLE, newIterationVariable, newIterationVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FOR_STATEMENT__DECLARED_ITERATION_VARIABLE, newDeclaredIterationVariable, newDeclaredIterationVariable));
+	}
+
+	public CallableElement getIterationVariable() {
+		CallableElement iterationVariable = getDeclaredIterationVariable();
+		return iterationVariable != null ? iterationVariable : getIterationVariableGen();
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CallableElement getIterationVariableGen() {
+		if (iterationVariable != null && iterationVariable.eIsProxy()) {
+			InternalEObject oldIterationVariable = (InternalEObject)iterationVariable;
+			iterationVariable = (CallableElement)eResolveProxy(oldIterationVariable);
+			if (iterationVariable != oldIterationVariable) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AstPackage.FOR_STATEMENT__ITERATION_VARIABLE, oldIterationVariable, iterationVariable));
+			}
+		}
+		return iterationVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CallableElement basicGetIterationVariable() {
+		return iterationVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIterationVariable(CallableElement newIterationVariable) {
+		CallableElement oldIterationVariable = iterationVariable;
+		iterationVariable = newIterationVariable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FOR_STATEMENT__ITERATION_VARIABLE, oldIterationVariable, iterationVariable));
 	}
 
 	/**
@@ -166,6 +232,49 @@ public class ForStatementImpl extends StatementImpl implements ForStatement {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FOR_STATEMENT__COLLECTION_EXPRESSION, newCollectionExpression, newCollectionExpression));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression getCondition() {
+		return condition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetCondition(Expression newCondition, NotificationChain msgs) {
+		Expression oldCondition = condition;
+		condition = newCondition;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FOR_STATEMENT__CONDITION, oldCondition, newCondition);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCondition(Expression newCondition) {
+		if (newCondition != condition) {
+			NotificationChain msgs = null;
+			if (condition != null)
+				msgs = ((InternalEObject)condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FOR_STATEMENT__CONDITION, null, msgs);
+			if (newCondition != null)
+				msgs = ((InternalEObject)newCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FOR_STATEMENT__CONDITION, null, msgs);
+			msgs = basicSetCondition(newCondition, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FOR_STATEMENT__CONDITION, newCondition, newCondition));
 	}
 
 	/**
@@ -219,10 +328,12 @@ public class ForStatementImpl extends StatementImpl implements ForStatement {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AstPackage.FOR_STATEMENT__ITERATION_VARIABLE:
-				return basicSetIterationVariable(null, msgs);
+			case AstPackage.FOR_STATEMENT__DECLARED_ITERATION_VARIABLE:
+				return basicSetDeclaredIterationVariable(null, msgs);
 			case AstPackage.FOR_STATEMENT__COLLECTION_EXPRESSION:
 				return basicSetCollectionExpression(null, msgs);
+			case AstPackage.FOR_STATEMENT__CONDITION:
+				return basicSetCondition(null, msgs);
 			case AstPackage.FOR_STATEMENT__BODY:
 				return basicSetBody(null, msgs);
 		}
@@ -237,10 +348,15 @@ public class ForStatementImpl extends StatementImpl implements ForStatement {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case AstPackage.FOR_STATEMENT__DECLARED_ITERATION_VARIABLE:
+				return getDeclaredIterationVariable();
 			case AstPackage.FOR_STATEMENT__ITERATION_VARIABLE:
-				return getIterationVariable();
+				if (resolve) return getIterationVariable();
+				return basicGetIterationVariable();
 			case AstPackage.FOR_STATEMENT__COLLECTION_EXPRESSION:
 				return getCollectionExpression();
+			case AstPackage.FOR_STATEMENT__CONDITION:
+				return getCondition();
 			case AstPackage.FOR_STATEMENT__BODY:
 				return getBody();
 		}
@@ -255,11 +371,17 @@ public class ForStatementImpl extends StatementImpl implements ForStatement {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case AstPackage.FOR_STATEMENT__DECLARED_ITERATION_VARIABLE:
+				setDeclaredIterationVariable((IterationVariable)newValue);
+				return;
 			case AstPackage.FOR_STATEMENT__ITERATION_VARIABLE:
-				setIterationVariable((IterationVariable)newValue);
+				setIterationVariable((CallableElement)newValue);
 				return;
 			case AstPackage.FOR_STATEMENT__COLLECTION_EXPRESSION:
 				setCollectionExpression((Expression)newValue);
+				return;
+			case AstPackage.FOR_STATEMENT__CONDITION:
+				setCondition((Expression)newValue);
 				return;
 			case AstPackage.FOR_STATEMENT__BODY:
 				setBody((Statement)newValue);
@@ -276,11 +398,17 @@ public class ForStatementImpl extends StatementImpl implements ForStatement {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case AstPackage.FOR_STATEMENT__DECLARED_ITERATION_VARIABLE:
+				setDeclaredIterationVariable((IterationVariable)null);
+				return;
 			case AstPackage.FOR_STATEMENT__ITERATION_VARIABLE:
-				setIterationVariable((IterationVariable)null);
+				setIterationVariable((CallableElement)null);
 				return;
 			case AstPackage.FOR_STATEMENT__COLLECTION_EXPRESSION:
 				setCollectionExpression((Expression)null);
+				return;
+			case AstPackage.FOR_STATEMENT__CONDITION:
+				setCondition((Expression)null);
 				return;
 			case AstPackage.FOR_STATEMENT__BODY:
 				setBody((Statement)null);
@@ -297,10 +425,14 @@ public class ForStatementImpl extends StatementImpl implements ForStatement {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case AstPackage.FOR_STATEMENT__DECLARED_ITERATION_VARIABLE:
+				return declaredIterationVariable != null;
 			case AstPackage.FOR_STATEMENT__ITERATION_VARIABLE:
 				return iterationVariable != null;
 			case AstPackage.FOR_STATEMENT__COLLECTION_EXPRESSION:
 				return collectionExpression != null;
+			case AstPackage.FOR_STATEMENT__CONDITION:
+				return condition != null;
 			case AstPackage.FOR_STATEMENT__BODY:
 				return body != null;
 		}

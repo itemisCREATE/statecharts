@@ -382,7 +382,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration" eSuperTypes="#//Statement">
+  <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration" eSuperTypes="#//Statement #//CallableElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initializer" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
@@ -408,9 +408,12 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ForStatement" eSuperTypes="#//Statement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="iterationVariable" eType="#//IterationVariable"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declaredIterationVariable"
+        eType="#//IterationVariable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iterationVariable" eType="#//CallableElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionExpression" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Statement"
         containment="true"/>

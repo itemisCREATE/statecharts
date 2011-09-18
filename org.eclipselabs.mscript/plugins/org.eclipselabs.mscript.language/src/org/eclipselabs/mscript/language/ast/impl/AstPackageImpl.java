@@ -2544,7 +2544,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getForStatement_IterationVariable() {
+	public EReference getForStatement_DeclaredIterationVariable() {
 		return (EReference)forStatementEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2553,7 +2553,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getForStatement_CollectionExpression() {
+	public EReference getForStatement_IterationVariable() {
 		return (EReference)forStatementEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -2562,8 +2562,26 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getForStatement_Body() {
+	public EReference getForStatement_CollectionExpression() {
 		return (EReference)forStatementEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getForStatement_Condition() {
+		return (EReference)forStatementEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getForStatement_Body() {
+		return (EReference)forStatementEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -3004,8 +3022,10 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		createEReference(doWhileStatementEClass, DO_WHILE_STATEMENT__BODY);
 
 		forStatementEClass = createEClass(FOR_STATEMENT);
+		createEReference(forStatementEClass, FOR_STATEMENT__DECLARED_ITERATION_VARIABLE);
 		createEReference(forStatementEClass, FOR_STATEMENT__ITERATION_VARIABLE);
 		createEReference(forStatementEClass, FOR_STATEMENT__COLLECTION_EXPRESSION);
+		createEReference(forStatementEClass, FOR_STATEMENT__CONDITION);
 		createEReference(forStatementEClass, FOR_STATEMENT__BODY);
 
 		continueStatementEClass = createEClass(CONTINUE_STATEMENT);
@@ -3116,6 +3136,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		compoundEClass.getESuperTypes().add(this.getStatement());
 		assignmentEClass.getESuperTypes().add(this.getStatement());
 		variableDeclarationEClass.getESuperTypes().add(this.getStatement());
+		variableDeclarationEClass.getESuperTypes().add(this.getCallableElement());
 		ifStatementEClass.getESuperTypes().add(this.getStatement());
 		whileStatementEClass.getESuperTypes().add(this.getStatement());
 		doWhileStatementEClass.getESuperTypes().add(this.getStatement());
@@ -3401,8 +3422,10 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		initEReference(getDoWhileStatement_Body(), this.getStatement(), null, "body", null, 0, 1, DoWhileStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(forStatementEClass, ForStatement.class, "ForStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getForStatement_IterationVariable(), this.getIterationVariable(), null, "iterationVariable", null, 0, 1, ForStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getForStatement_DeclaredIterationVariable(), this.getIterationVariable(), null, "declaredIterationVariable", null, 0, 1, ForStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getForStatement_IterationVariable(), this.getCallableElement(), null, "iterationVariable", null, 0, 1, ForStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getForStatement_CollectionExpression(), theTypeSystemPackage.getExpression(), null, "collectionExpression", null, 0, 1, ForStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getForStatement_Condition(), theTypeSystemPackage.getExpression(), null, "condition", null, 0, 1, ForStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getForStatement_Body(), this.getStatement(), null, "body", null, 0, 1, ForStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(continueStatementEClass, ContinueStatement.class, "ContinueStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
