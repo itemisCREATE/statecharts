@@ -53,10 +53,25 @@ public class ActiveEditorTracker implements IPageListener, IPartListener,
 		INSTANCE = this;
 	}
 
+	public void earlyStartup() {
+		PlatformUI.getWorkbench().addWindowListener(this);
+	}
+
 	/**
 	 * @return The last active editor in the current active workbench page.
 	 */
 	public static IEditorPart getLastActiveEditor() {
+		if (INSTANCE == null) {
+			// not yet initialized, e.g. when another early startups blocks us!
+			// Let's try to get the current active editor instead.
+			if (PlatformUI.getWorkbench() != null) {
+				if (PlatformUI.getWorkbench().getActiveWorkbenchWindow() != null) {
+					return PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+							.getActivePage().getActiveEditor();
+				}
+			}
+			return null;
+		}
 		return INSTANCE.getLastActiveEditorInternal();
 	}
 
@@ -65,6 +80,25 @@ public class ActiveEditorTracker implements IPageListener, IPartListener,
 	 *         active workbench page.
 	 */
 	public static IEditorPart getLastEditor(String editorId) {
+		if (INSTANCE == null) {
+			// not yet initialized, e.g. when another early startups blocks us!
+			// Let's try to get any editor with the specified id instead.
+			if (PlatformUI.getWorkbench() != null) {
+				final IWorkbenchWindow window = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow();
+				if (window != null) {
+					final IWorkbenchPage page = window.getActivePage();
+					if (page != null) {
+						for (IEditorReference ref : page.getEditorReferences()) {
+							if (ref.getId().equals(editorId)) {
+								return ref.getEditor(false);
+							}
+						}
+					}
+				}
+			}
+			return null;
+		}
 		return INSTANCE.getEditorById(editorId);
 	}
 
@@ -115,10 +149,6 @@ public class ActiveEditorTracker implements IPageListener, IPartListener,
 			return input.getFile().getProject();
 		}
 		return null;
-	}
-
-	public void earlyStartup() {
-		PlatformUI.getWorkbench().addWindowListener(this);
 	}
 
 	public void pageActivated(IWorkbenchPage page) {
