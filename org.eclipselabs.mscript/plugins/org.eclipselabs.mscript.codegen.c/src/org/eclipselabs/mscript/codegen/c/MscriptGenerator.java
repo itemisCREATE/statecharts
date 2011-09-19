@@ -14,8 +14,10 @@ package org.eclipselabs.mscript.codegen.c;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
 import org.eclipselabs.mscript.common.util.PrintAppendable;
+import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.il.ComputationCompound;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
@@ -98,7 +100,7 @@ public class MscriptGenerator {
 	
 	private void writeContextStructureMember(StatefulVariableDeclaration variableDeclaration) {
 		String name = variableDeclaration.getName();
-		DataType dataType = variableDeclaration.getDataType();
+		DataType dataType = getDataType(variableDeclaration);
 		if (variableDeclaration.getCircularBufferSize() > 1) {
 			int bufferSize = variableDeclaration.getCircularBufferSize();
 			out.printf("%s[%d];\n",
@@ -192,10 +194,10 @@ public class MscriptGenerator {
 	private void generateComputeOutputsFunctionHeader() {
 		out.printf("void %s(%s_Context *context", functionDefinition.getName(), functionDefinition.getName());
 		for (InputVariableDeclaration inputVariableDeclaration : ILUtil.getDirectFeedthroughInputs(functionDefinition)) {
-			out.printf(", %s", MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), inputVariableDeclaration.getDataType(), inputVariableDeclaration.getName(), false));
+			out.printf(", %s", MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), getDataType(inputVariableDeclaration), inputVariableDeclaration.getName(), false));
 		}
 		for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
-			out.printf(", %s", MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), outputVariableDeclaration.getDataType(), outputVariableDeclaration.getName(), true));
+			out.printf(", %s", MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), getDataType(outputVariableDeclaration), outputVariableDeclaration.getName(), true));
 		}
 		out.print(")");
 	}
@@ -233,7 +235,7 @@ public class MscriptGenerator {
 	private void generateUpdateFunctionHeader() {
 		out.printf("void %s_update(%s_Context *context", functionDefinition.getName(), functionDefinition.getName());
 		for (InputVariableDeclaration inputVariableDeclaration : getUpdateCodeInputs()) {
-			out.printf(", %s", MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), inputVariableDeclaration.getDataType(), inputVariableDeclaration.getName(), false));
+			out.printf(", %s", MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), getDataType(inputVariableDeclaration), inputVariableDeclaration.getName(), false));
 		}
 		out.print(")");
 	}
@@ -295,7 +297,7 @@ public class MscriptGenerator {
 			} else {
 				out.print(", ");
 			}
-			out.print(MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), inputVariableDeclaration.getDataType(), inputVariableDeclaration.getName(), false));
+			out.print(MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), getDataType(inputVariableDeclaration), inputVariableDeclaration.getName(), false));
 		}
 		for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
 			if (first) {
@@ -303,9 +305,18 @@ public class MscriptGenerator {
 			} else {
 				out.print(", ");
 			}
-			out.print(MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), outputVariableDeclaration.getDataType(), outputVariableDeclaration.getName(), true));
+			out.print(MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), getDataType(outputVariableDeclaration), outputVariableDeclaration.getName(), true));
 		}
 		out.print(")");
 	}
-	
+
+	/**
+	 * @param eObject
+	 * @return
+	 */
+	private DataType getDataType(EObject eObject) {
+		IValue value = context.getStaticEvaluationContext().getValue(eObject);
+		return value != null ? value.getDataType() : null;
+	}
+
 }

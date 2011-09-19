@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.codegen.c.internal.VariableAccessGenerator;
 import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
 import org.eclipselabs.mscript.common.util.PrintAppendable;
+import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.ast.IfStatement;
 import org.eclipselabs.mscript.language.ast.Statement;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
@@ -71,7 +72,7 @@ public class CompoundGenerator implements ICompoundGenerator {
 				out.print("{\n");
 			}
 			for (LocalVariableDeclaration localVariableDeclaration : compound.getLocalVariableDeclarations()) {
-				out.print(MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), localVariableDeclaration.getDataType(), localVariableDeclaration.getName(), false));
+				out.print(MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), getDataType(localVariableDeclaration), localVariableDeclaration.getName(), false));
 				out.print(";\n");
 			}
 			for (Statement statement : compound.getStatements()) {
@@ -89,7 +90,7 @@ public class CompoundGenerator implements ICompoundGenerator {
 		@Override
 		public Boolean caseLocalVariableDeclaration(LocalVariableDeclaration localVariableDeclaration) {
 			if (localVariableDeclaration.getInitializer() != null) {
-				writeAssignment(localVariableDeclaration.getDataType(), localVariableDeclaration.getName(), localVariableDeclaration.getInitializer());
+				writeAssignment(getDataType(localVariableDeclaration), localVariableDeclaration.getName(), localVariableDeclaration.getInitializer());
 			}
 			return true;
 		}
@@ -99,10 +100,11 @@ public class CompoundGenerator implements ICompoundGenerator {
 		 */
 		@Override
 		public Boolean caseAssignment(Assignment assignment) {
-			writeAssignment(assignment.getTarget().getDataType(), new VariableAccessGenerator(context.getComputationModel(), context.getVariableAccessStrategy(), assignment).generate(), assignment.getAssignedExpression());
+			VariableDeclaration target = assignment.getTarget();
+			writeAssignment(getDataType(target), new VariableAccessGenerator(context, assignment).generate(), assignment.getAssignedExpression());
 			return true;
 		}
-		
+
 		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseForeachStatement(org.eclipselabs.mscript.language.imperativemodel.ForeachStatement)
 		 */
@@ -119,7 +121,7 @@ public class CompoundGenerator implements ICompoundGenerator {
 			}
 			
 			String itVarName = iterationVariableDeclaration.getName();
-			String itVarDecl = MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), iterationVariableDeclaration.getDataType(), itVarName, false);
+			String itVarDecl = MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), getDataType(iterationVariableDeclaration), itVarName, false);
 			int size = TypeSystemUtil.getArraySize(collectionArrayType);
 			
 			out.println("{");
@@ -176,10 +178,15 @@ public class CompoundGenerator implements ICompoundGenerator {
 			MscriptGeneratorUtil.cast(context, expression, targetDataType);
 		}
 		
-		private DataType getDataType(Expression expression) {
-			return context.getStaticEvaluationContext().getValue(expression).getDataType();
+		/**
+		 * @param eObject
+		 * @return
+		 */
+		private DataType getDataType(EObject eObject) {
+			IValue value = context.getStaticEvaluationContext().getValue(eObject);
+			return value != null ? value.getDataType() : null;
 		}
-		
+
 		private class AstCompoundGeneratorSwitch extends AstSwitch<Boolean> {
 			
 			@Override

@@ -21,6 +21,7 @@ import org.eclipselabs.mscript.language.il.VariableDeclaration;
  */
 public class InterpreterContext implements IInterpreterContext {
 
+	private IStaticEvaluationContext staticEvaluationContext;
 	private IComputationContext computationContext;
 
 	private InterpreterScope scope = new InterpreterScope(null);
@@ -30,10 +31,18 @@ public class InterpreterContext implements IInterpreterContext {
 	/**
 	 * 
 	 */
-	public InterpreterContext(IComputationContext computationContext) {
+	public InterpreterContext(IStaticEvaluationContext staticEvaluationContext, IComputationContext computationContext) {
+		this.staticEvaluationContext = staticEvaluationContext;
 		this.computationContext = computationContext;
 	}
 
+	/**
+	 * @return the staticEvaluationContext
+	 */
+	public IStaticEvaluationContext getStaticEvaluationContext() {
+		return staticEvaluationContext;
+	}
+	
 	/**
 	 * @return the computationContext
 	 */

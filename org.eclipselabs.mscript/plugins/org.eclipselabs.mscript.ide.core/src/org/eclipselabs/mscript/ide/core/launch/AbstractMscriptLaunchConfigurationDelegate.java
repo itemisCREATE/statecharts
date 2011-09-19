@@ -150,7 +150,7 @@ public abstract class AbstractMscriptLaunchConfigurationDelegate extends LaunchC
 	protected abstract List<DataType> computeInputParameterDataTypes(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor) throws CoreException;
 	
 	protected IInterpreterContext createTemplateArgumentsInterpreterContext() {
-		return new InterpreterContext(new ComputationContext());
+		return new InterpreterContext(getStaticEvaluationContext(), new ComputationContext());
 	}
 
 	protected String getTargetFunctionName() throws CoreException {

@@ -8,12 +8,10 @@ package org.eclipselabs.mscript.language.il.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipselabs.mscript.language.il.ILPackage;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
-import org.eclipselabs.mscript.typesystem.DataType;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +21,6 @@ import org.eclipselabs.mscript.typesystem.DataType;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.il.impl.VariableDeclarationImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.il.impl.VariableDeclarationImpl#getDataType <em>Data Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,16 +46,6 @@ public abstract class VariableDeclarationImpl extends EObjectImpl implements Var
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getDataType() <em>Data Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDataType()
-	 * @generated
-	 * @ordered
-	 */
-	protected DataType dataType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -105,52 +92,11 @@ public abstract class VariableDeclarationImpl extends EObjectImpl implements Var
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataType getDataType() {
-		if (dataType != null && dataType.eIsProxy()) {
-			InternalEObject oldDataType = (InternalEObject)dataType;
-			dataType = (DataType)eResolveProxy(oldDataType);
-			if (dataType != oldDataType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ILPackage.VARIABLE_DECLARATION__DATA_TYPE, oldDataType, dataType));
-			}
-		}
-		return dataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DataType basicGetDataType() {
-		return dataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDataType(DataType newDataType) {
-		DataType oldDataType = dataType;
-		dataType = newDataType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ILPackage.VARIABLE_DECLARATION__DATA_TYPE, oldDataType, dataType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ILPackage.VARIABLE_DECLARATION__NAME:
 				return getName();
-			case ILPackage.VARIABLE_DECLARATION__DATA_TYPE:
-				if (resolve) return getDataType();
-				return basicGetDataType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -165,9 +111,6 @@ public abstract class VariableDeclarationImpl extends EObjectImpl implements Var
 		switch (featureID) {
 			case ILPackage.VARIABLE_DECLARATION__NAME:
 				setName((String)newValue);
-				return;
-			case ILPackage.VARIABLE_DECLARATION__DATA_TYPE:
-				setDataType((DataType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -184,9 +127,6 @@ public abstract class VariableDeclarationImpl extends EObjectImpl implements Var
 			case ILPackage.VARIABLE_DECLARATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case ILPackage.VARIABLE_DECLARATION__DATA_TYPE:
-				setDataType((DataType)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -201,8 +141,6 @@ public abstract class VariableDeclarationImpl extends EObjectImpl implements Var
 		switch (featureID) {
 			case ILPackage.VARIABLE_DECLARATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case ILPackage.VARIABLE_DECLARATION__DATA_TYPE:
-				return dataType != null;
 		}
 		return super.eIsSet(featureID);
 	}

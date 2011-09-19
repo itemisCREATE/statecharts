@@ -148,7 +148,8 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 	@Override
 	public Expression caseLetExpression(LetExpression letExpression) {
 		LocalVariableDeclaration localVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
-		localVariableDeclaration.setDataType(context.getStaticEvaluationContext().getValue(letExpression).getDataType());
+		IValue expressionValue = context.getStaticEvaluationContext().getValue(letExpression);
+		context.getStaticEvaluationContext().setValue(localVariableDeclaration, expressionValue);
 		context.getCompound().getStatements().add(localVariableDeclaration);
 
 		CompoundStatement compoundStatement = ILFactory.eINSTANCE.createCompoundStatement();
@@ -159,7 +160,8 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 		for (LetExpressionVariableDeclaration letExpressionVariableDeclaration : letExpression.getVariableDeclarations()) {
 			LocalVariableDeclaration letVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
 			LetExpressionVariableDeclarationPart part = letExpressionVariableDeclaration.getParts().get(0);
-			letVariableDeclaration.setDataType(context.getStaticEvaluationContext().getValue(part).getDataType());
+			IValue partValue = context.getStaticEvaluationContext().getValue(part);
+			context.getStaticEvaluationContext().setValue(letVariableDeclaration, partValue);
 			letVariableDeclaration.setName(part.getName());
 			Expression assignedExpression = doSwitch(letExpressionVariableDeclaration.getAssignedExpression());
 			letVariableDeclaration.setInitializer(assignedExpression);
@@ -186,15 +188,17 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 	 */
 	@Override
 	public Expression caseIfExpression(IfExpression ifExpression) {
-		IValue value = context.getStaticEvaluationContext().getValue(ifExpression.getCondition());
-		if (value instanceof IBooleanValue) {
-			boolean condition = ((IBooleanValue) value).booleanValue();
+		IValue ifConditionValue = context.getStaticEvaluationContext().getValue(ifExpression.getCondition());
+		if (ifConditionValue instanceof IBooleanValue) {
+			boolean condition = ((IBooleanValue) ifConditionValue).booleanValue();
 			Expression expression = condition ? ifExpression.getThenExpression() : ifExpression.getElseExpression();
 			return doSwitch(expression);
 		}
 		
 		LocalVariableDeclaration localVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
-		localVariableDeclaration.setDataType(context.getStaticEvaluationContext().getValue(ifExpression).getDataType());
+		IValue ifExpressionValue = context.getStaticEvaluationContext().getValue(ifExpression);
+		context.getStaticEvaluationContext().setValue(localVariableDeclaration, ifExpressionValue);
+		
 		context.getCompound().getStatements().add(localVariableDeclaration);
 		IfStatement ifStatement = AstFactory.eINSTANCE.createIfStatement();
 		Expression conditionExpression = doSwitch(ifExpression.getCondition());

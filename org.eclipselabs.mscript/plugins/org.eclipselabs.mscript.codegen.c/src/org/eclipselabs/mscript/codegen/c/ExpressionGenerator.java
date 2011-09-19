@@ -398,7 +398,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			
 			public Boolean caseVariableReference(VariableReference variableReference) {
 				// TODO: redesign is needed here
-				String variableAccessString = new VariableAccessGenerator(context.getComputationModel(), context.getVariableAccessStrategy(), variableReference).generate();
+				String variableAccessString = new VariableAccessGenerator(context, variableReference).generate();
 				out.print(variableAccessString);
 				if (!(variableReference.getTarget() instanceof TemplateVariableDeclaration)) {
 					for (Expression expression : variableReference.getArrayIndices()) {

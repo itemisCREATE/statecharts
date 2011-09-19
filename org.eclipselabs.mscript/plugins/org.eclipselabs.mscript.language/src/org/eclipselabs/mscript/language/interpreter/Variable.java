@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.computation.core.value.UninitializedValue;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
+import org.eclipselabs.mscript.typesystem.DataType;
 
 /**
  * @author Andreas Unger
@@ -25,18 +26,23 @@ public class Variable implements IVariable {
 
 	private VariableDeclaration declaration;
 	
+	private DataType dataType;
+	
 	private CircularBuffer<IValue> values = new CircularBuffer<IValue>();
-		
-	public Variable(VariableDeclaration declaration) {
-		this.declaration = declaration;
-		values.resize(1);
+
+	public Variable(IInterpreterContext interpreterContext, VariableDeclaration declaration) {
+		this(interpreterContext, declaration, 1);
 	}
 
 	/**
 	 * 
 	 */
-	public Variable(VariableDeclaration declaration, int circularBufferSize) {
+	public Variable(IInterpreterContext interpreterContext, VariableDeclaration declaration, int circularBufferSize) {
 		this.declaration = declaration;
+		IValue value = interpreterContext.getStaticEvaluationContext().getValue(declaration);
+		if (value != null) {
+			this.dataType = value.getDataType();
+		}
 		values.resize(circularBufferSize);
 	}
 	
@@ -58,8 +64,8 @@ public class Variable implements IVariable {
 	 * @see org.eclipselabs.mscript.execution.IVariable#setValue(org.eclipselabs.mscript.execution.value.IValue)
 	 */
 	public void setValue(int stepIndex, IValue value) {
-		if (!(value instanceof UninitializedValue) && declaration != null && declaration.getDataType() != null) {
-			value = value.convert(declaration.getDataType());
+		if (!(value instanceof UninitializedValue) && declaration != null && dataType != null) {
+			value = value.convert(dataType);
 		}
 		values.set(stepIndex, value);
 	}

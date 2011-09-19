@@ -107,7 +107,7 @@ public class CompoundInterpreter implements ICompoundInterpreter {
 			VariableDeclaration iterationVariableDeclaration = foreachStatement.getIterationVariableDeclaration();
 			for (int i = 0; i < size; ++i) {
 				context.enterScope();
-				IVariable variable = new Variable(iterationVariableDeclaration, 1);
+				IVariable variable = new Variable(context, iterationVariableDeclaration);
 				variable.setValue(0, arrayValue.get(i));
 				context.addVariable(variable);
 				doSwitch(foreachStatement.getBody());
@@ -128,7 +128,7 @@ public class CompoundInterpreter implements ICompoundInterpreter {
 			} else {
 				value = new UninitializedValue(context.getComputationContext());
 			}
-			IVariable variable = new Variable(localVariableDeclaration, 1);
+			IVariable variable = new Variable(context, localVariableDeclaration);
 			variable.setValue(0, value);
 			context.addVariable(variable);
 			return true;

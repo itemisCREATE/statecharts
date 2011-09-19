@@ -23,8 +23,8 @@ import java.util.Set;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipselabs.mscript.computation.core.value.AnyValue;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.ast.FunctionKind;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
@@ -95,8 +95,7 @@ public class FunctionDefinitionTransformer implements IFunctionDefinitionTransfo
 			templateVariableDeclaration.setName(parameterDeclaration.getName());
 			if (templateArgumentIterator.hasNext()) {
 				IValue value = templateArgumentIterator.next();
-				templateVariableDeclaration.setDataType(EcoreUtil.copy(value.getDataType()));
-				templateVariableDeclaration.setValue(value);
+				staticEvaluationContext.setValue(templateVariableDeclaration, value);
 			}
 			VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(parameterDeclaration.getName());
 			if (variableDescriptor != null) {
@@ -110,7 +109,9 @@ public class FunctionDefinitionTransformer implements IFunctionDefinitionTransfo
 			InputVariableDeclaration inputVariableDeclaration = ILFactory.eINSTANCE.createInputVariableDeclaration();
 			inputVariableDeclaration.setName(parameterDeclaration.getName());
 			if (inputParameterDataTypesIterator.hasNext()) {
-				inputVariableDeclaration.setDataType(EcoreUtil.copy(inputParameterDataTypesIterator.next()));
+				DataType dataType = EcoreUtil.copy(inputParameterDataTypesIterator.next());
+				IValue value = new AnyValue(staticEvaluationContext.getComputationContext(), dataType);
+				staticEvaluationContext.setValue(inputVariableDeclaration, value);
 			}
 			VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(parameterDeclaration.getName());
 			if (variableDescriptor != null) {
@@ -126,7 +127,10 @@ public class FunctionDefinitionTransformer implements IFunctionDefinitionTransfo
 			VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(parameterDeclaration.getName());
 			if (variableDescriptor != null) {
 				outputVariableDeclaration.setCircularBufferSize(getInoutputCircularBufferSize(variableDescriptor));
-				outputVariableDeclaration.setDataType(getDataType(staticEvaluationContext, parameterDeclaration));
+				IValue value = staticEvaluationContext.getValue(parameterDeclaration);
+				if (value != null) {
+					staticEvaluationContext.setValue(outputVariableDeclaration, value);
+				}
 				variableDeclarations.put(variableDescriptor, outputVariableDeclaration);
 			}
 			ilFunctionDefinition.getOutputVariableDeclarations().add(outputVariableDeclaration);
@@ -138,7 +142,10 @@ public class FunctionDefinitionTransformer implements IFunctionDefinitionTransfo
 			VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(stateVariableDeclaration.getName());
 			if (variableDescriptor != null) {
 				instanceVariableDeclaration.setCircularBufferSize(variableDescriptor.getMaximumStep().getIndex() - variableDescriptor.getMinimumStep().getIndex() + 1);
-				instanceVariableDeclaration.setDataType(getDataType(staticEvaluationContext, stateVariableDeclaration));
+				IValue value = staticEvaluationContext.getValue(stateVariableDeclaration);
+				if (value != null) {
+					staticEvaluationContext.setValue(instanceVariableDeclaration, value);
+				}
 				variableDeclarations.put(variableDescriptor, instanceVariableDeclaration);
 			}
 			ilFunctionDefinition.getInstanceVariableDeclarations().add(instanceVariableDeclaration);
@@ -227,11 +234,6 @@ public class FunctionDefinitionTransformer implements IFunctionDefinitionTransfo
 		}
 
 		return status.isOK() ? Status.OK_STATUS : status;
-	}
-	
-	private DataType getDataType(IStaticEvaluationContext staticEvaluationContext, EObject eObject) {
-		IValue value = staticEvaluationContext.getValue(eObject);
-		return value != null ? value.getDataType() : null;
 	}
 	
 }

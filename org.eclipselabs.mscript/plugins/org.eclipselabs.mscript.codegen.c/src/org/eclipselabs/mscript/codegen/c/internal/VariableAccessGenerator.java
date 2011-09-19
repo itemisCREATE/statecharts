@@ -1,8 +1,7 @@
 package org.eclipselabs.mscript.codegen.c.internal;
 
-import org.eclipselabs.mscript.codegen.c.IVariableAccessStrategy;
+import org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext;
 import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
-import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
 import org.eclipselabs.mscript.computation.core.value.IArrayValue;
 import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
 import org.eclipselabs.mscript.computation.core.value.ISimpleNumericValue;
@@ -20,13 +19,11 @@ import org.eclipselabs.mscript.typesystem.RealType;
 
 public class VariableAccessGenerator extends ILSwitch<String> {
 
-	private ComputationModel computationModel;
-	private IVariableAccessStrategy variableAccessStrategy;
+	private IMscriptGeneratorContext context;
 	private VariableAccess variableAccess;
 	
-	public VariableAccessGenerator(ComputationModel computationModel, IVariableAccessStrategy variableAccessStrategy, VariableAccess variableAccess) {
-		this.computationModel = computationModel;
-		this.variableAccessStrategy = variableAccessStrategy;
+	public VariableAccessGenerator(IMscriptGeneratorContext context, VariableAccess variableAccess) {
+		this.context = context;
 		this.variableAccess = variableAccess;
 	}
 
@@ -39,7 +36,7 @@ public class VariableAccessGenerator extends ILSwitch<String> {
 	 */
 	@Override
 	public String caseTemplateVariableDeclaration(TemplateVariableDeclaration templateVariableDeclaration) {
-		IValue templateArgument = templateVariableDeclaration.getValue();
+		IValue templateArgument = context.getStaticEvaluationContext().getValue(templateVariableDeclaration);
 		return writeLiteral(templateArgument);
 	}
 	
@@ -47,9 +44,9 @@ public class VariableAccessGenerator extends ILSwitch<String> {
 		if (value instanceof ISimpleNumericValue) {
 			ISimpleNumericValue numericTemplateArgument = (ISimpleNumericValue) value;
 			if (value.getDataType() instanceof RealType) {
-				return MscriptGeneratorUtil.getLiteralString(computationModel, numericTemplateArgument.getDataType(), numericTemplateArgument.doubleValue());
+				return MscriptGeneratorUtil.getLiteralString(context.getComputationModel(), numericTemplateArgument.getDataType(), numericTemplateArgument.doubleValue());
 			} else if (value.getDataType() instanceof IntegerType) {
-				return MscriptGeneratorUtil.getLiteralString(computationModel, numericTemplateArgument.getDataType(), numericTemplateArgument.longValue());
+				return MscriptGeneratorUtil.getLiteralString(context.getComputationModel(), numericTemplateArgument.getDataType(), numericTemplateArgument.longValue());
 			}
 		} else if (value instanceof IBooleanValue){
 			IBooleanValue booleanTemplateArgument = (IBooleanValue) value;
@@ -77,7 +74,7 @@ public class VariableAccessGenerator extends ILSwitch<String> {
 	 */
 	@Override
 	public String caseStatefulVariableDeclaration(StatefulVariableDeclaration statefulVariableDeclaration) {
-		return variableAccessStrategy.getVariableAccessString(variableAccess);
+		return context.getVariableAccessStrategy().getVariableAccessString(variableAccess);
 	}
 	
 	/* (non-Javadoc)

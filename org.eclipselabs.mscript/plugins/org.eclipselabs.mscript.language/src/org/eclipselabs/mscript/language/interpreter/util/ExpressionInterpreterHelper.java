@@ -77,7 +77,7 @@ public class ExpressionInterpreterHelper {
 			
 			preprocessCompound(compound);
 
-			IVariable outputVariable = new Variable(resultVariableDeclaration);
+			IVariable outputVariable = new Variable(interpreterContext, resultVariableDeclaration);
 			interpreterContext.addVariable(outputVariable);
 			
 			new CompoundInterpreter().execute(interpreterContext, compound);

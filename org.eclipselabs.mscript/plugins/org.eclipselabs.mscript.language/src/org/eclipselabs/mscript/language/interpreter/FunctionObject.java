@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.computation.core.value.Values;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
@@ -44,21 +45,22 @@ public class FunctionObject implements IFunctionObject {
 		functionObject.functionDefinition = functionDefinition;
 		
 		for (TemplateVariableDeclaration declaration : functionDefinition.getTemplateVariableDeclarations()) {
-			IVariable variable = new Variable(declaration);
-			variable.setValue(0, Values.transform(context.getComputationContext(), declaration.getValue()));
+			IVariable variable = new Variable(context, declaration);
+			IValue value = context.getStaticEvaluationContext().getValue(declaration);
+			variable.setValue(0, Values.transform(context.getComputationContext(), value));
 			functionObject.variables.put(declaration, variable);
 		}
 		
 		for (InputVariableDeclaration declaration : functionDefinition.getInputVariableDeclarations()) {
-			functionObject.variables.put(declaration, new Variable(declaration, declaration.getCircularBufferSize()));
+			functionObject.variables.put(declaration, new Variable(context, declaration, declaration.getCircularBufferSize()));
 		}
 		
 		for (OutputVariableDeclaration declaration : functionDefinition.getOutputVariableDeclarations()) {
-			functionObject.variables.put(declaration, new Variable(declaration, declaration.getCircularBufferSize()));
+			functionObject.variables.put(declaration, new Variable(context, declaration, declaration.getCircularBufferSize()));
 		}
 		
 		for (InstanceVariableDeclaration declaration : functionDefinition.getInstanceVariableDeclarations()) {
-			functionObject.variables.put(declaration, new Variable(declaration, declaration.getCircularBufferSize()));
+			functionObject.variables.put(declaration, new Variable(context, declaration, declaration.getCircularBufferSize()));
 		}
 		
 		return functionObject;

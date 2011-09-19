@@ -22,6 +22,7 @@ import org.eclipselabs.mscript.language.il.VariableDeclaration;
  */
 public interface IInterpreterContext {
 	
+	IStaticEvaluationContext getStaticEvaluationContext();
 	IComputationContext getComputationContext();
 
 	void enterScope();

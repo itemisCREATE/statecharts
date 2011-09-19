@@ -71,7 +71,7 @@ public class MscriptLaunchConfigurationDelegate extends AbstractMscriptLaunchCon
 
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
-		IInterpreterContext context = new InterpreterContext(new ComputationContext(getComputationModel()));
+		IInterpreterContext context = new InterpreterContext(getStaticEvaluationContext(), new ComputationContext(getComputationModel()));
 
 		IFunctionObject functionObject = FunctionObject.create(context, getILFunctionDefinition());
 
@@ -88,7 +88,7 @@ public class MscriptLaunchConfigurationDelegate extends AbstractMscriptLaunchCon
 		int n = getFunctionDefinition().getInputParameterDeclarations().size();
 		DataType[] dataTypes = new DataType[n];
 		
-		IInterpreterContext interpreterContext = new InterpreterContext(new ComputationContext(getComputationModel()));
+		IInterpreterContext interpreterContext = new InterpreterContext(getStaticEvaluationContext(), new ComputationContext(getComputationModel()));
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile.getContents()));
 			while (!monitor.isCanceled() && reader.ready()) {
