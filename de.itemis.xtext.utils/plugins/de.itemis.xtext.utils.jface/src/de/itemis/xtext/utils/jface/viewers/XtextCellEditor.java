@@ -30,8 +30,8 @@ import org.eclipse.xtext.validation.Issue;
 import com.google.inject.Injector;
 
 /**
- * This class integrates xText Features into a {@link CellEditor} and can be used i.E. in 
- * jface {@link StructuredViewer}s or in GMF EditParts via DirectEditManager.
+ * This class integrates Xtext features into a {@link CellEditor} and can be used e.g. in 
+ * jFace {@link StructuredViewer}s or in GMF EditParts via DirectEditManager.
  * 
  * The current implementation supports, code completion, syntax highlighting and validation
  * 
