@@ -55,8 +55,8 @@ import com.google.inject.name.Named;
 import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 
 /**
- * This class integrates xText Features into a {@link StyledText} and can be
- * used i.e. as {@link CellEditor}s in jface {@link StructuredViewer}s or in GMF
+ * This class integrates Xtext features into a {@link StyledText} and can be
+ * used e.g. as {@link CellEditor}s in jFace {@link StructuredViewer}s or in GMF
  * EditParts via DirectEditManager.
  * 
  * The current implementation supports, code completion, syntax highlighting and
