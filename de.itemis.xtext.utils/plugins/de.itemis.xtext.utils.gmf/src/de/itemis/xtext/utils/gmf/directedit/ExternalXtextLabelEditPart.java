@@ -22,6 +22,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.label.ILabelDelegate;
 import org.eclipse.gmf.runtime.diagram.ui.label.LabelExDelegate;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.LabelEx;
+import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
@@ -81,10 +82,16 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart
 
 	@Override
 	protected void handleNotificationEvent(final Notification notification) {
+		Object feature = notification.getFeature();
 		if (notification.getNotifier() instanceof ShapeStyle) {
 			refreshVisuals();
 		}
-		super.handleNotificationEvent(notification);
+		else if (NotationPackage.eINSTANCE.getFontStyle().getEAllAttributes().contains(feature)) {
+			refreshFont();
+		}
+		else {
+			super.handleNotificationEvent(notification);
+		}
 	}
 
 	@Override

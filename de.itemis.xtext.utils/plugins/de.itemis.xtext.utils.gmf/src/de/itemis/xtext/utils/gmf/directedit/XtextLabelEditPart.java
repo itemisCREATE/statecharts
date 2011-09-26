@@ -20,6 +20,7 @@ import org.eclipse.gef.Request;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.LabelEx;
+import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
@@ -81,10 +82,14 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements
 	protected void handleNotificationEvent(final Notification notification) {
 		if (notification.getNotifier() instanceof ShapeStyle) {
 			refreshVisuals();
+		} else if (NotationPackage.eINSTANCE.getFontStyle().getEAllAttributes()
+				.contains(notification.getFeature())) {
+			refreshFont();
 		}
-		super.handleNotificationEvent(notification);
+		else {
+			super.handleNotificationEvent(notification);
+		}
 	}
-
 
 	@Override
 	protected void performDirectEditRequest(final Request request) {
@@ -104,7 +109,8 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements
 									.getExtendedData()
 									.get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
 
-							((XtextDirectEditManager) manager).show(initialChar);
+							((XtextDirectEditManager) manager)
+									.show(initialChar);
 
 						} else {
 							manager.show();
