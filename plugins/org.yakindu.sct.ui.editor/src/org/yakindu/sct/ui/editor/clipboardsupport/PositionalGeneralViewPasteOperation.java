@@ -23,11 +23,14 @@ import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 
 /**
- * @author Yasser Lulu
+ * This is a copy of
+ * {@link org.eclipse.gmf.runtime.notation.providers.internal.copypaste.PositionalGeneralViewPasteOperation}
+ * . It calls a static method of the {@link NotationClipboardOperationHelper}
+ * 
  */
 @SuppressWarnings("all")
-public class PositionalGeneralViewPasteOperation
-	extends OverridePasteChildOperation {
+public class PositionalGeneralViewPasteOperation extends
+		OverridePasteChildOperation {
 
 	private boolean shouldPasteAlwaysCopyObject;
 
@@ -41,12 +44,14 @@ public class PositionalGeneralViewPasteOperation
 		this.shouldPasteAlwaysCopyObject = shouldPasteAlwaysCopyObject;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gmf.runtime.emf.clipboard.core.PasteChildOperation#paste()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gmf.runtime.emf.clipboard.core.PasteChildOperation#paste()
 	 */
-	public void paste()
-		throws Exception {
-		//		delay unsetting of connector refs
+	public void paste() throws Exception {
+		// delay unsetting of connector refs
 	}
 
 	protected boolean shouldPasteAlwaysCopyObject(
@@ -58,19 +63,18 @@ public class PositionalGeneralViewPasteOperation
 
 		return new PostPasteChildOperation(this, EMPTY_ARRAY) {
 
-			public void paste()
-				throws Exception {
-				//unset connectors before pasting so that it won't affect
-				//real connectors especially if they happen to belong to the
+			public void paste() throws Exception {
+				// unset connectors before pasting so that it won't affect
+				// real connectors especially if they happen to belong to the
 				// same
-				//target diagram
+				// target diagram
 				Node view = (Node) getEObject();
 				view.eUnset(NotationPackage.eINSTANCE.getView_SourceEdges());
 				view.eUnset(NotationPackage.eINSTANCE.getView_TargetEdges());
 
-				//now paste view
+				// now paste view
 				EObject pastedElement = doPasteInto(getParentEObject());
-				//did we succeed?
+				// did we succeed?
 				if (pastedElement != null) {
 					setPastedElement(pastedElement);
 					addPastedElement(pastedElement);
@@ -82,24 +86,27 @@ public class PositionalGeneralViewPasteOperation
 			protected boolean shouldPasteAlwaysCopyObject(
 					ObjectInfo alwaysCopyObjectInfo) {
 				return PositionalGeneralViewPasteOperation.this
-					.shouldPasteAlwaysCopyObject(alwaysCopyObjectInfo);
+						.shouldPasteAlwaysCopyObject(alwaysCopyObjectInfo);
 			}
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.eclipse.gmf.runtime.emf.core.internal.copypaste.PasteChildOperation#makeAuxiliaryChildPasteProcess(org.eclipse.gmf.runtime.emf.core.internal.copypaste.ObjectInfo)
+			 * @see org.eclipse.gmf.runtime.emf.core.internal.copypaste.
+			 * PasteChildOperation
+			 * #makeAuxiliaryChildPasteProcess(org.eclipse.gmf
+			 * .runtime.emf.core.internal.copypaste.ObjectInfo)
 			 */
 			@SuppressWarnings("restriction")
 			protected PasteChildOperation makeAuxiliaryChildPasteProcess(
-					ObjectInfo auxiliaryChildEObjectInfo) {				
+					ObjectInfo auxiliaryChildEObjectInfo) {
 				EObject semanticPasteTarget = NotationClipboardOperationHelper
-					.getSemanticPasteTarget((View) getPastedElement());
+						.getSemanticPasteTarget((View) getPastedElement());
 				if (semanticPasteTarget == null) {
 					return null;
 				}
 				return new PasteChildOperation(getParentPasteProcess().clone(
-					semanticPasteTarget), auxiliaryChildEObjectInfo);
+						semanticPasteTarget), auxiliaryChildEObjectInfo);
 			}
 
 			public PasteChildOperation getPostPasteOperation() {

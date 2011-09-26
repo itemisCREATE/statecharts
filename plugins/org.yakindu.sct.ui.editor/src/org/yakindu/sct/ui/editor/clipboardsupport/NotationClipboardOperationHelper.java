@@ -51,14 +51,17 @@ import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 
 /**
- * A minimal clipboard operation helper for the notation metamodel. Extenders of
- * the notation metamodel should probably provide their own implementation of
- * this via their own
- * {@link org.eclipse.gmf.runtime.emf.core.internal.services.metamodel.IMetamodelSupport}
- * implementation.
+ * This is a copy of
+ * {@link org.eclipse.gmf.runtime.notation.providers.internal.copypaste.NotationClipboardOperationHelper}
+ * We had to override some static methods (getSemanticPasteTarget(...)) in this
+ * class to support copy and paste of container elements and their contained
+ * elements. The original paste command has only supported correct pasting on
+ * the diagram element.
  * 
- * @author Christian W. Damus
- * @author Yasser Lulu
+ * Because this is done in a static method we couldn't inherit from the original
+ * NotationClipboardOperationHelper.
+ * 
+ * @author muehlbrandt
  */
 @SuppressWarnings("all")
 public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
@@ -333,6 +336,14 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 	}
 
 	// PATCH START
+	/**
+	 * Customized Method to find the semantic target which should contain the
+	 * copied elements.
+	 * 
+	 * @param view
+	 * @param container
+	 * @return the semantic target.
+	 */
 	static EObject getSemanticPasteTarget(View view, View container) {
 		EObject semanticObjectToCopy = view.getElement();
 		EObject semanticTarget = container.getElement();
