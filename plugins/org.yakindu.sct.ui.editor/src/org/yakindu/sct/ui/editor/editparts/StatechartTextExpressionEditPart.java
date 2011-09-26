@@ -18,6 +18,31 @@ public class StatechartTextExpressionEditPart extends
 	public StatechartTextExpressionEditPart(View view) {
 		super(view);
 	}
+	
+	@Override
+	protected void addNotationalListeners() {
+		super.addNotationalListeners();
+		View parentStateView = getParentStateView();
+		if (parentStateView != null) {
+			addListenerFilter("parentStateView", this,parentStateView);
+		}
+	}
+	
+	@Override
+	protected void removeNotationalListeners() {
+		View parentStateView = getParentStateView();
+		if (parentStateView != null) {
+			removeListenerFilter("parentStateView");
+		}
+		super.removeNotationalListeners();
+	}
+	
+	private View getParentStateView() {
+		if (getParent() instanceof StatechartTextEditPart) {
+			return ((StatechartTextEditPart) getParent()).getNotationView();
+		}
+		return null;
+	}
 
 	@Override
 	protected void createDefaultEditPolicies() {

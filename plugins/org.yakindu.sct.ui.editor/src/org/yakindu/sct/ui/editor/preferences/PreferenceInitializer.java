@@ -41,7 +41,7 @@ public class PreferenceInitializer extends DiagramPreferenceInitializer
 				IPreferenceConstants.PREF_SNAP_TO_GEOMETRY, true);
 
 		// set default font
-		FontData defaultFont = new FontData("Arial", 10	, SWT.NONE);
+		FontData defaultFont = new FontData("Verdana", 9	, SWT.NONE);
 		PreferenceConverter.setDefault(getPreferenceStore(),
 				IPreferenceConstants.PREF_DEFAULT_FONT, defaultFont);
 		
