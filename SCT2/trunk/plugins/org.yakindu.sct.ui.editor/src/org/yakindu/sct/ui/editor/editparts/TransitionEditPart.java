@@ -11,8 +11,10 @@
 package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.Connection;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
+import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.TransitionFigure;
 
@@ -52,5 +54,14 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 					((TransitionExpressionEditPart) childEditPart).getFigure());
 		}
 	}
-
+	
+	@Override
+	protected void handleNotificationEvent(Notification notification) {
+		if (NotationPackage.eINSTANCE.getFontStyle().getEAllAttributes()
+				.contains(notification.getFeature())) {
+			refreshFont();
+		} else {
+			super.handleNotificationEvent(notification);
+		}
+	}
 }

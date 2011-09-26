@@ -20,6 +20,24 @@ public class StateTextCompartmentExpressionEditPart extends
 	}
 
 	@Override
+	protected void addNotationalListeners() {
+		super.addNotationalListeners();
+		View parentStateView = getParentStateView();
+		if (parentStateView != null) {
+			addListenerFilter("parentStateView", this,parentStateView);
+		}
+	}
+	
+	@Override
+	protected void removeNotationalListeners() {
+		View parentStateView = getParentStateView();
+		if (parentStateView != null) {
+			removeListenerFilter("parentStateView");
+		}
+		super.removeNotationalListeners();
+	}
+
+	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		removeEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
@@ -27,5 +45,12 @@ public class StateTextCompartmentExpressionEditPart extends
 				EditPolicy.SELECTION_FEEDBACK_ROLE,
 				new ContextSensitiveHelpPolicy(
 						IYakinduSctHelpContextIds.SC_PROPERTIES_STATE_EXPRESSION));
+	}
+
+	private View getParentStateView() {
+		if (getParent().getParent() instanceof StateEditPart) {
+			return ((StateEditPart) getParent().getParent()).getNotationView();
+		}
+		return null;
 	}
 }

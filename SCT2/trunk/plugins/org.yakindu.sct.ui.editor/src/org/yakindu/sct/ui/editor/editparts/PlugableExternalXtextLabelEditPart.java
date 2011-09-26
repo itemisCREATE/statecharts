@@ -72,9 +72,12 @@ public abstract class PlugableExternalXtextLabelEditPart extends
 
 	@Override
 	protected void handleNotificationEvent(Notification notification) {
-		super.handleNotificationEvent(notification);
-		if (notification.getFeature() == SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION)
+		if (notification.getFeature() == SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION) {
 			refreshVisuals();
+		}
+		else {
+			super.handleNotificationEvent(notification);
+		}
 	}
 
 	public String getEditText() {
