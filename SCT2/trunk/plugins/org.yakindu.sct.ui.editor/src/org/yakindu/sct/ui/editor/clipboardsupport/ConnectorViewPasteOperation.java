@@ -24,7 +24,10 @@ import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.View;
 
 /**
- * @author Yasser Lulu 
+ * This is a copy of
+ * {@link org.eclipse.gmf.runtime.notation.providers.internal.copypaste.ConnectorViewPasteOperation}
+ * . It calls a static method of the {@link NotationClipboardOperationHelper}
+ * 
  */
 @SuppressWarnings("all")
 public class ConnectorViewPasteOperation

@@ -27,7 +27,9 @@ import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 
 /**
- * @author Yasser Lulu
+ * This is a copy of
+ * {@link org.eclipse.gmf.runtime.notation.providers.internal.copypaste.ConnectorViewPostPasteChildOperation}
+ * . It calls a static method of the {@link NotationClipboardOperationHelper}
  */
 @SuppressWarnings("all")
 class ConnectorViewPostPasteChildOperation
@@ -208,5 +210,4 @@ class ConnectorViewPostPasteChildOperation
 		}
 		return semanticElementPasteOperations;
 	}
-
 }
