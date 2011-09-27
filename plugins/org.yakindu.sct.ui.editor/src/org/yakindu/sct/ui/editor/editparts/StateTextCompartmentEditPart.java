@@ -33,6 +33,7 @@ public class StateTextCompartmentEditPart extends ResizableCompartmentEditPart {
 				.createFigure();
 		figure.getContentPane().setLayoutManager(new StackLayout());
 		figure.setBorder(null);
+		figure.setToolTip((String)null);
 		return figure;
 	}
 
