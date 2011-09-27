@@ -84,10 +84,4 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements
 	private StatechartTextFigure getPrimaryShape() {
 		return (StatechartTextFigure) getFigure().getChildren().get(0);
 	}
-	
-	@Override
-	protected void refreshFont() {
-		// TODO Auto-generated method stub
-		super.refreshFont();
-	}
 }

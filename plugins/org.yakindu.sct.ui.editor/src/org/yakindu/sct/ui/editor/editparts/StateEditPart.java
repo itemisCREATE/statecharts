@@ -173,7 +173,7 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		return GridDataFactory.fillDefaults().grab(false, false).getData();
 	}
 
-	@Override
+	// @Override
 	protected void refreshBounds() {
 		// mark all figures covered by the blur shadow extended bounds as dirty
 		// (an update is enforced at the end of this method to ensure the area
@@ -213,7 +213,10 @@ public class StateEditPart extends ShapeNodeEditPart implements
 
 		// ensure repaint is performed (so blur shadow covered area is
 		// repainted)
-		nodeFigure.getUpdateManager().performUpdate();
+		// If a redraw is done in this method the state is drawn on creation
+		// process at position 0,0 and then "jumps" to the correct position (See
+		// YAKHMI-62).
+		// nodeFigure.getUpdateManager().performUpdate();
 	}
 
 	/**
@@ -331,5 +334,4 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		}
 		super.handleNotificationEvent(notification);
 	}
-
 }
