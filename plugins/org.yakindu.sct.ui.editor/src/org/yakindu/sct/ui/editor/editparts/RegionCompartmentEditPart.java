@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
@@ -59,6 +60,7 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 		ShapeCompartmentFigure figure = (ShapeCompartmentFigure) super
 				.createFigure();
 		figure.setBorder(null);
+		figure.setToolTip((String)null);
 		return figure;
 	}
 
