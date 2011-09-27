@@ -82,6 +82,7 @@ public class StateFigureCompartmentEditPart extends
 		figure.getContentPane().setLayoutManager(
 				new StateFigureCompartmentLayout(getAlignment()));
 		figure.setBorder(null);
+		figure.setToolTip((String)null);
 		return figure;
 	}
 
