@@ -1734,6 +1734,25 @@ finally {
 
 
 
+// Rule TimeEventType
+ruleTimeEventType
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getTimeEventTypeAccess().getAlternatives()); }
+(rule__TimeEventType__Alternatives)
+{ after(grammarAccess.getTimeEventTypeAccess().getAlternatives()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
 // Rule AssignmentOperator
 ruleAssignmentOperator
     @init {
@@ -2281,6 +2300,30 @@ rule__Direction__Alternatives
 (	'out' 
 )
 { after(grammarAccess.getDirectionAccess().getOUTEnumLiteralDeclaration_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TimeEventType__Alternatives
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getTimeEventTypeAccess().getAfterEnumLiteralDeclaration_0()); }
+(	'after' 
+)
+{ after(grammarAccess.getTimeEventTypeAccess().getAfterEnumLiteralDeclaration_0()); }
+)
+
+    |(
+{ before(grammarAccess.getTimeEventTypeAccess().getEveryEnumLiteralDeclaration_1()); }
+(	'every' 
+)
+{ after(grammarAccess.getTimeEventTypeAccess().getEveryEnumLiteralDeclaration_1()); }
 )
 
 ;
@@ -5831,11 +5874,9 @@ rule__TimeEventSpec__Group__0__Impl
     }
 :
 (
-{ before(grammarAccess.getTimeEventSpecAccess().getAfterKeyword_0()); }
-
-	'after' 
-
-{ after(grammarAccess.getTimeEventSpecAccess().getAfterKeyword_0()); }
+{ before(grammarAccess.getTimeEventSpecAccess().getTypeAssignment_0()); }
+(rule__TimeEventSpec__TypeAssignment_0)
+{ after(grammarAccess.getTimeEventSpecAccess().getTypeAssignment_0()); }
 )
 
 ;
@@ -9516,6 +9557,21 @@ rule__RegularEventSpec__EventAssignment
 	RULE_ID{ after(grammarAccess.getRegularEventSpecAccess().getEventEventIDTerminalRuleCall_0_1()); }
 )
 { after(grammarAccess.getRegularEventSpecAccess().getEventEventCrossReference_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TimeEventSpec__TypeAssignment_0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getTimeEventSpecAccess().getTypeTimeEventTypeEnumRuleCall_0_0()); }
+	ruleTimeEventType{ after(grammarAccess.getTimeEventSpecAccess().getTypeTimeEventTypeEnumRuleCall_0_0()); }
 )
 
 ;

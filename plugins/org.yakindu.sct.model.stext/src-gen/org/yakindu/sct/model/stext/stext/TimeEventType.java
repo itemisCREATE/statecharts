@@ -13,123 +13,97 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Multiplicative Operator</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Time Event Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see org.yakindu.sct.model.stext.stext.StextPackage#getMultiplicativeOperator()
+ * @see org.yakindu.sct.model.stext.stext.StextPackage#getTimeEventType()
  * @model
  * @generated
  */
-public enum MultiplicativeOperator implements Enumerator
+public enum TimeEventType implements Enumerator
 {
   /**
-   * The '<em><b>Mul</b></em>' literal object.
+   * The '<em><b>After</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #MUL_VALUE
+   * @see #AFTER_VALUE
    * @generated
    * @ordered
    */
-  MUL(0, "mul", "*"),
+  AFTER(0, "after", "after"),
 
   /**
-   * The '<em><b>Div</b></em>' literal object.
+   * The '<em><b>Every</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #DIV_VALUE
+   * @see #EVERY_VALUE
    * @generated
    * @ordered
    */
-  DIV(1, "div", "/"),
+  EVERY(1, "every", "every");
 
   /**
-   * The '<em><b>Mod</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #MOD_VALUE
-   * @generated
-   * @ordered
-   */
-  MOD(2, "mod", "%");
-
-  /**
-   * The '<em><b>Mul</b></em>' literal value.
+   * The '<em><b>After</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Mul</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>After</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #MUL
-   * @model name="mul" literal="*"
+   * @see #AFTER
+   * @model name="after"
    * @generated
    * @ordered
    */
-  public static final int MUL_VALUE = 0;
+  public static final int AFTER_VALUE = 0;
 
   /**
-   * The '<em><b>Div</b></em>' literal value.
+   * The '<em><b>Every</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Div</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>Every</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #DIV
-   * @model name="div" literal="/"
+   * @see #EVERY
+   * @model name="every"
    * @generated
    * @ordered
    */
-  public static final int DIV_VALUE = 1;
+  public static final int EVERY_VALUE = 1;
 
   /**
-   * The '<em><b>Mod</b></em>' literal value.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Mod</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @see #MOD
-   * @model name="mod" literal="%"
-   * @generated
-   * @ordered
-   */
-  public static final int MOD_VALUE = 2;
-
-  /**
-   * An array of all the '<em><b>Multiplicative Operator</b></em>' enumerators.
+   * An array of all the '<em><b>Time Event Type</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private static final MultiplicativeOperator[] VALUES_ARRAY =
-    new MultiplicativeOperator[]
+  private static final TimeEventType[] VALUES_ARRAY =
+    new TimeEventType[]
     {
-      MUL,
-      DIV,
-      MOD,
+      AFTER,
+      EVERY,
     };
 
   /**
-   * A public read-only list of all the '<em><b>Multiplicative Operator</b></em>' enumerators.
+   * A public read-only list of all the '<em><b>Time Event Type</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static final List<MultiplicativeOperator> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+  public static final List<TimeEventType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
   /**
-   * Returns the '<em><b>Multiplicative Operator</b></em>' literal with the specified literal value.
+   * Returns the '<em><b>Time Event Type</b></em>' literal with the specified literal value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static MultiplicativeOperator get(String literal)
+  public static TimeEventType get(String literal)
   {
     for (int i = 0; i < VALUES_ARRAY.length; ++i)
     {
-      MultiplicativeOperator result = VALUES_ARRAY[i];
+      TimeEventType result = VALUES_ARRAY[i];
       if (result.toString().equals(literal))
       {
         return result;
@@ -139,16 +113,16 @@ public enum MultiplicativeOperator implements Enumerator
   }
 
   /**
-   * Returns the '<em><b>Multiplicative Operator</b></em>' literal with the specified name.
+   * Returns the '<em><b>Time Event Type</b></em>' literal with the specified name.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static MultiplicativeOperator getByName(String name)
+  public static TimeEventType getByName(String name)
   {
     for (int i = 0; i < VALUES_ARRAY.length; ++i)
     {
-      MultiplicativeOperator result = VALUES_ARRAY[i];
+      TimeEventType result = VALUES_ARRAY[i];
       if (result.getName().equals(name))
       {
         return result;
@@ -158,18 +132,17 @@ public enum MultiplicativeOperator implements Enumerator
   }
 
   /**
-   * Returns the '<em><b>Multiplicative Operator</b></em>' literal with the specified integer value.
+   * Returns the '<em><b>Time Event Type</b></em>' literal with the specified integer value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static MultiplicativeOperator get(int value)
+  public static TimeEventType get(int value)
   {
     switch (value)
     {
-      case MUL_VALUE: return MUL;
-      case DIV_VALUE: return DIV;
-      case MOD_VALUE: return MOD;
+      case AFTER_VALUE: return AFTER;
+      case EVERY_VALUE: return EVERY;
     }
     return null;
   }
@@ -201,7 +174,7 @@ public enum MultiplicativeOperator implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
-  private MultiplicativeOperator(int value, String name, String literal)
+  private TimeEventType(int value, String name, String literal)
   {
     this.value = value;
     this.name = name;
@@ -250,4 +223,4 @@ public enum MultiplicativeOperator implements Enumerator
     return literal;
   }
   
-} //MultiplicativeOperator
+} //TimeEventType
