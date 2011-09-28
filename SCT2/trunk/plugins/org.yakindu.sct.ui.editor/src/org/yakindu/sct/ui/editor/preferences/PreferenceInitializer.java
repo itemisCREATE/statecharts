@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.preferences;
 
+import org.eclipse.gef.ui.palette.DefaultPaletteViewerPreferences;
 import org.eclipse.gmf.runtime.diagram.ui.figures.DiagramColorConstants;
 import org.eclipse.gmf.runtime.diagram.ui.preferences.DiagramPreferenceInitializer;
 import org.eclipse.gmf.runtime.diagram.ui.preferences.IPreferenceConstants;
@@ -41,11 +42,15 @@ public class PreferenceInitializer extends DiagramPreferenceInitializer
 				IPreferenceConstants.PREF_SNAP_TO_GEOMETRY, true);
 
 		// set default font
-		FontData defaultFont = new FontData("Verdana", 9	, SWT.NONE);
+		FontData defaultFont = new FontData("Verdana", 9, SWT.NONE);
 		PreferenceConverter.setDefault(getPreferenceStore(),
 				IPreferenceConstants.PREF_DEFAULT_FONT, defaultFont);
-		
-		
+
+		// set preferences for tool palette.
+		DefaultPaletteViewerPreferences prefs = new DefaultPaletteViewerPreferences();
+		prefs.setLayoutSetting(DefaultPaletteViewerPreferences.LAYOUT_COLUMNS);
+		prefs.setCurrentUseLargeIcons(true);
+		prefs.setFontData(new FontData("Verdana", 8, SWT.NONE));
 	}
 
 	@Override
