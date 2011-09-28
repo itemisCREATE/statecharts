@@ -135,8 +135,10 @@ RegularEventSpec:
 	event=[sct::Event];
 
 	// TODO: redefine after trigger - we need to use it with clocks
-TimeEventSpec:
-	'after' value=INT (unit=TimeUnit)?;
+TimeEventSpec: 
+	type=TimeEventType value=INT (unit=TimeUnit)?;
+
+enum TimeEventType: after | every;
 
 	// TODO: add dereived events like in(state), entered(state)	
 BuiltinEventSpec:

@@ -13,6 +13,10 @@
       <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//Direction/IN"/>
       <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//Direction/OUT"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//TimeEventType">
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//TimeEventType/after"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//TimeEventType/every"/>
+    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//AssignmentOperator">
       <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//AssignmentOperator/assign"/>
       <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//AssignmentOperator/multAssign"/>
@@ -112,6 +116,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//RegularEventSpec/event"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//TimeEventSpec">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//TimeEventSpec/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//TimeEventSpec/value"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//TimeEventSpec/unit"/>
     </genClasses>

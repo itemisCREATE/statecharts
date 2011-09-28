@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -139,6 +138,8 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
     {
       case StextPackage.DIRECTION:
         return createDirectionFromString(eDataType, initialValue);
+      case StextPackage.TIME_EVENT_TYPE:
+        return createTimeEventTypeFromString(eDataType, initialValue);
       case StextPackage.ASSIGNMENT_OPERATOR:
         return createAssignmentOperatorFromString(eDataType, initialValue);
       case StextPackage.SHIFT_OPERATOR:
@@ -172,6 +173,8 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
     {
       case StextPackage.DIRECTION:
         return convertDirectionToString(eDataType, instanceValue);
+      case StextPackage.TIME_EVENT_TYPE:
+        return convertTimeEventTypeToString(eDataType, instanceValue);
       case StextPackage.ASSIGNMENT_OPERATOR:
         return convertAssignmentOperatorToString(eDataType, instanceValue);
       case StextPackage.SHIFT_OPERATOR:
@@ -794,6 +797,28 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
    * @generated
    */
   public String convertDirectionToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TimeEventType createTimeEventTypeFromString(EDataType eDataType, String initialValue)
+  {
+    TimeEventType result = TimeEventType.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertTimeEventTypeToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

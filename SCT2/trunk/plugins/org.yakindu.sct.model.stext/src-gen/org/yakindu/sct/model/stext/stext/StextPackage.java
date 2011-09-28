@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext;
 
@@ -596,13 +595,22 @@ public interface StextPackage extends EPackage
   int TIME_EVENT_SPEC = 18;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TIME_EVENT_SPEC__TYPE = EVENT_SPEC_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TIME_EVENT_SPEC__VALUE = EVENT_SPEC_FEATURE_COUNT + 0;
+  int TIME_EVENT_SPEC__VALUE = EVENT_SPEC_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' attribute.
@@ -611,7 +619,7 @@ public interface StextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TIME_EVENT_SPEC__UNIT = EVENT_SPEC_FEATURE_COUNT + 1;
+  int TIME_EVENT_SPEC__UNIT = EVENT_SPEC_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Time Event Spec</em>' class.
@@ -620,7 +628,7 @@ public interface StextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TIME_EVENT_SPEC_FEATURE_COUNT = EVENT_SPEC_FEATURE_COUNT + 2;
+  int TIME_EVENT_SPEC_FEATURE_COUNT = EVENT_SPEC_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.BuiltinEventSpecImpl <em>Builtin Event Spec</em>}' class.
@@ -1864,6 +1872,16 @@ public interface StextPackage extends EPackage
   int DIRECTION = 53;
 
   /**
+   * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.yakindu.sct.model.stext.stext.TimeEventType
+   * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeEventType()
+   * @generated
+   */
+  int TIME_EVENT_TYPE = 54;
+
+  /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.AssignmentOperator <em>Assignment Operator</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1871,7 +1889,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getAssignmentOperator()
    * @generated
    */
-  int ASSIGNMENT_OPERATOR = 54;
+  int ASSIGNMENT_OPERATOR = 55;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.ShiftOperator <em>Shift Operator</em>}' enum.
@@ -1881,7 +1899,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getShiftOperator()
    * @generated
    */
-  int SHIFT_OPERATOR = 55;
+  int SHIFT_OPERATOR = 56;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -1891,7 +1909,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getAdditiveOperator()
    * @generated
    */
-  int ADDITIVE_OPERATOR = 56;
+  int ADDITIVE_OPERATOR = 57;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -1901,7 +1919,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getMultiplicativeOperator()
    * @generated
    */
-  int MULTIPLICATIVE_OPERATOR = 57;
+  int MULTIPLICATIVE_OPERATOR = 58;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -1911,7 +1929,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getUnaryOperator()
    * @generated
    */
-  int UNARY_OPERATOR = 58;
+  int UNARY_OPERATOR = 59;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -1921,7 +1939,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getRelationalOperator()
    * @generated
    */
-  int RELATIONAL_OPERATOR = 59;
+  int RELATIONAL_OPERATOR = 60;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.TimeUnit <em>Time Unit</em>}' enum.
@@ -1931,7 +1949,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeUnit()
    * @generated
    */
-  int TIME_UNIT = 60;
+  int TIME_UNIT = 61;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.Type <em>Type</em>}' enum.
@@ -1941,7 +1959,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getType()
    * @generated
    */
-  int TYPE = 61;
+  int TYPE = 62;
 
 
   /**
@@ -2298,6 +2316,17 @@ public interface StextPackage extends EPackage
    * @generated
    */
   EClass getTimeEventSpec();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.TimeEventSpec#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see org.yakindu.sct.model.stext.stext.TimeEventSpec#getType()
+   * @see #getTimeEventSpec()
+   * @generated
+   */
+  EAttribute getTimeEventSpec_Type();
 
   /**
    * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.TimeEventSpec#getValue <em>Value</em>}'.
@@ -3222,6 +3251,16 @@ public interface StextPackage extends EPackage
   EEnum getDirection();
 
   /**
+   * Returns the meta object for enum '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Time Event Type</em>'.
+   * @see org.yakindu.sct.model.stext.stext.TimeEventType
+   * @generated
+   */
+  EEnum getTimeEventType();
+
+  /**
    * Returns the meta object for enum '{@link org.yakindu.sct.model.stext.stext.AssignmentOperator <em>Assignment Operator</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3633,6 +3672,14 @@ public interface StextPackage extends EPackage
      * @generated
      */
     EClass TIME_EVENT_SPEC = eINSTANCE.getTimeEventSpec();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TIME_EVENT_SPEC__TYPE = eINSTANCE.getTimeEventSpec_Type();
 
     /**
      * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -4399,6 +4446,16 @@ public interface StextPackage extends EPackage
      * @generated
      */
     EEnum DIRECTION = eINSTANCE.getDirection();
+
+    /**
+     * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.yakindu.sct.model.stext.stext.TimeEventType
+     * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeEventType()
+     * @generated
+     */
+    EEnum TIME_EVENT_TYPE = eINSTANCE.getTimeEventType();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.AssignmentOperator <em>Assignment Operator</em>}' enum.

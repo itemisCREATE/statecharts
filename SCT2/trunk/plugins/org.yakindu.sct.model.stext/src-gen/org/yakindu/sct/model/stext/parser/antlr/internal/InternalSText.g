@@ -1950,11 +1950,25 @@ ruleTimeEventSpec returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='after' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getTimeEventSpecAccess().getAfterKeyword_0());
-    }
+((
 (
+		{ 
+	        newCompositeNode(grammarAccess.getTimeEventSpecAccess().getTypeTimeEventTypeEnumRuleCall_0_0()); 
+	    }
+		lv_type_0_0=ruleTimeEventType		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getTimeEventSpecRule());
+	        }
+       		set(
+       			$current, 
+       			"type",
+        		lv_type_0_0, 
+        		"TimeEventType");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
 (
 		lv_value_1_0=RULE_INT
 		{
@@ -3526,6 +3540,25 @@ ruleDirection returns [Enumerator current=null]
 	{
         $current = grammarAccess.getDirectionAccess().getOUTEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
         newLeafNode(enumLiteral_1, grammarAccess.getDirectionAccess().getOUTEnumLiteralDeclaration_1()); 
+    }
+));
+
+
+
+// Rule TimeEventType
+ruleTimeEventType returns [Enumerator current=null] 
+    @init { enterRule(); }
+    @after { leaveRule(); }:
+((	enumLiteral_0='after' 
+	{
+        $current = grammarAccess.getTimeEventTypeAccess().getAfterEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+        newLeafNode(enumLiteral_0, grammarAccess.getTimeEventTypeAccess().getAfterEnumLiteralDeclaration_0()); 
+    }
+)
+    |(	enumLiteral_1='every' 
+	{
+        $current = grammarAccess.getTimeEventTypeAccess().getEveryEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+        newLeafNode(enumLiteral_1, grammarAccess.getTimeEventTypeAccess().getEveryEnumLiteralDeclaration_1()); 
     }
 ));
 

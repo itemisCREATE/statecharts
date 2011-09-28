@@ -5487,11 +5487,11 @@ protected class RegularEventSpec_EventAssignment extends AssignmentToken  {
  *
  * // TODO: redefine after trigger - we need to use it with clocks
  * TimeEventSpec:
- * 	"after" value=INT unit=TimeUnit?;
+ * 	type=TimeEventType value=INT unit=TimeUnit?;
  *
  **/
 
-// "after" value=INT unit=TimeUnit?
+// type=TimeEventType value=INT unit=TimeUnit?
 protected class TimeEventSpec_Group extends GroupToken {
 	
 	public TimeEventSpec_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5521,16 +5521,16 @@ protected class TimeEventSpec_Group extends GroupToken {
 
 }
 
-// "after"
-protected class TimeEventSpec_AfterKeyword_0 extends KeywordToken  {
+// type=TimeEventType
+protected class TimeEventSpec_TypeAssignment_0 extends AssignmentToken  {
 	
-	public TimeEventSpec_AfterKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TimeEventSpec_TypeAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getTimeEventSpecAccess().getAfterKeyword_0();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTimeEventSpecAccess().getTypeAssignment_0();
 	}
 
     @Override
@@ -5538,6 +5538,18 @@ protected class TimeEventSpec_AfterKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("type",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getTimeEventSpecAccess().getTypeTimeEventTypeEnumRuleCall_0_0(), value, null)) { 
+			type = AssignmentType.ENUM_RULE_CALL;
+			element = grammarAccess.getTimeEventSpecAccess().getTypeTimeEventTypeEnumRuleCall_0_0();
+			return obj;
+		}
+		return null;
 	}
 
 }
@@ -5557,7 +5569,7 @@ protected class TimeEventSpec_ValueAssignment_1 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TimeEventSpec_AfterKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new TimeEventSpec_TypeAssignment_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}

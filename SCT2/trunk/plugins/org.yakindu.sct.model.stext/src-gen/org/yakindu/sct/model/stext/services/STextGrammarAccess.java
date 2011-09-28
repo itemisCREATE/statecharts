@@ -1131,7 +1131,8 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	public class TimeEventSpecElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TimeEventSpec");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAfterKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cTypeTimeEventTypeEnumRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cValueINTTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		private final Assignment cUnitAssignment_2 = (Assignment)cGroup.eContents().get(2);
@@ -1139,14 +1140,17 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//// TODO: redefine after trigger - we need to use it with clocks
 		//TimeEventSpec:
-		//	"after" value=INT unit=TimeUnit?;
+		//	type=TimeEventType value=INT unit=TimeUnit?;
 		public ParserRule getRule() { return rule; }
 
-		//"after" value=INT unit=TimeUnit?
+		//type=TimeEventType value=INT unit=TimeUnit?
 		public Group getGroup() { return cGroup; }
 
-		//"after"
-		public Keyword getAfterKeyword_0() { return cAfterKeyword_0; }
+		//type=TimeEventType
+		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
+
+		//TimeEventType
+		public RuleCall getTypeTimeEventTypeEnumRuleCall_0_0() { return cTypeTimeEventTypeEnumRuleCall_0_0; }
 
 		//value=INT
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
@@ -2105,6 +2109,34 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getOUTOutKeyword_1_0() { return cOUTOutKeyword_1_0; }
 	}
 
+	public class TimeEventTypeElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "TimeEventType");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cAfterEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cAfterAfterKeyword_0_0 = (Keyword)cAfterEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cEveryEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cEveryEveryKeyword_1_0 = (Keyword)cEveryEnumLiteralDeclaration_1.eContents().get(0);
+		
+		//enum TimeEventType:
+		//	after | every;
+		public EnumRule getRule() { return rule; }
+
+		//after | every
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//after
+		public EnumLiteralDeclaration getAfterEnumLiteralDeclaration_0() { return cAfterEnumLiteralDeclaration_0; }
+
+		//"after"
+		public Keyword getAfterAfterKeyword_0_0() { return cAfterAfterKeyword_0_0; }
+
+		//every
+		public EnumLiteralDeclaration getEveryEnumLiteralDeclaration_1() { return cEveryEnumLiteralDeclaration_1; }
+
+		//"every"
+		public Keyword getEveryEveryKeyword_1_0() { return cEveryEveryKeyword_1_0; }
+	}
+
 	public class AssignmentOperatorElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "AssignmentOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -2518,6 +2550,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private EventSpecElements pEventSpec;
 	private RegularEventSpecElements pRegularEventSpec;
 	private TimeEventSpecElements pTimeEventSpec;
+	private TimeEventTypeElements unknownRuleTimeEventType;
 	private BuiltinEventSpecElements pBuiltinEventSpec;
 	private EntryEventElements pEntryEvent;
 	private ExitEventElements pExitEvent;
@@ -2935,13 +2968,23 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// TODO: redefine after trigger - we need to use it with clocks
 	//TimeEventSpec:
-	//	"after" value=INT unit=TimeUnit?;
+	//	type=TimeEventType value=INT unit=TimeUnit?;
 	public TimeEventSpecElements getTimeEventSpecAccess() {
 		return (pTimeEventSpec != null) ? pTimeEventSpec : (pTimeEventSpec = new TimeEventSpecElements());
 	}
 	
 	public ParserRule getTimeEventSpecRule() {
 		return getTimeEventSpecAccess().getRule();
+	}
+
+	//enum TimeEventType:
+	//	after | every;
+	public TimeEventTypeElements getTimeEventTypeAccess() {
+		return (unknownRuleTimeEventType != null) ? unknownRuleTimeEventType : (unknownRuleTimeEventType = new TimeEventTypeElements());
+	}
+	
+	public EnumRule getTimeEventTypeRule() {
+		return getTimeEventTypeAccess().getRule();
 	}
 
 	//// TODO: add dereived events like in(state), entered(state)	

@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -73,6 +72,7 @@ import org.yakindu.sct.model.stext.stext.StatechartRoot;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
+import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
 import org.yakindu.sct.model.stext.stext.TransitionRoot;
@@ -466,6 +466,13 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * @generated
    */
   private EEnum directionEEnum = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum timeEventTypeEEnum = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -934,7 +941,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTimeEventSpec_Value()
+  public EAttribute getTimeEventSpec_Type()
   {
     return (EAttribute)timeEventSpecEClass.getEStructuralFeatures().get(0);
   }
@@ -944,9 +951,19 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTimeEventSpec_Unit()
+  public EAttribute getTimeEventSpec_Value()
   {
     return (EAttribute)timeEventSpecEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTimeEventSpec_Unit()
+  {
+    return (EAttribute)timeEventSpecEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1804,6 +1821,16 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EEnum getTimeEventType()
+  {
+    return timeEventTypeEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getAssignmentOperator()
   {
     return assignmentOperatorEEnum;
@@ -1961,6 +1988,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     createEReference(regularEventSpecEClass, REGULAR_EVENT_SPEC__EVENT);
 
     timeEventSpecEClass = createEClass(TIME_EVENT_SPEC);
+    createEAttribute(timeEventSpecEClass, TIME_EVENT_SPEC__TYPE);
     createEAttribute(timeEventSpecEClass, TIME_EVENT_SPEC__VALUE);
     createEAttribute(timeEventSpecEClass, TIME_EVENT_SPEC__UNIT);
 
@@ -2084,6 +2112,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     // Create enums
     directionEEnum = createEEnum(DIRECTION);
+    timeEventTypeEEnum = createEEnum(TIME_EVENT_TYPE);
     assignmentOperatorEEnum = createEEnum(ASSIGNMENT_OPERATOR);
     shiftOperatorEEnum = createEEnum(SHIFT_OPERATOR);
     additiveOperatorEEnum = createEEnum(ADDITIVE_OPERATOR);
@@ -2226,6 +2255,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEReference(getRegularEventSpec_Event(), theSGraphPackage.getEvent(), null, "event", null, 0, 1, RegularEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(timeEventSpecEClass, TimeEventSpec.class, "TimeEventSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTimeEventSpec_Type(), this.getTimeEventType(), "type", null, 0, 1, TimeEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTimeEventSpec_Value(), ecorePackage.getEInt(), "value", null, 0, 1, TimeEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTimeEventSpec_Unit(), this.getTimeUnit(), "unit", null, 0, 1, TimeEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2351,6 +2381,10 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEEnum(directionEEnum, Direction.class, "Direction");
     addEEnumLiteral(directionEEnum, Direction.IN);
     addEEnumLiteral(directionEEnum, Direction.OUT);
+
+    initEEnum(timeEventTypeEEnum, TimeEventType.class, "TimeEventType");
+    addEEnumLiteral(timeEventTypeEEnum, TimeEventType.AFTER);
+    addEEnumLiteral(timeEventTypeEEnum, TimeEventType.EVERY);
 
     initEEnum(assignmentOperatorEEnum, AssignmentOperator.class, "AssignmentOperator");
     addEEnumLiteral(assignmentOperatorEEnum, AssignmentOperator.ASSIGN);
