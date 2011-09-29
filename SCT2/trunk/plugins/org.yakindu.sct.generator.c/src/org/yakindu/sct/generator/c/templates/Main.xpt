@@ -41,16 +41,13 @@ Contais the root templates that call the different file templates.
 	«EXPAND EventPoolC::file FOR this»
 
 	«EXPAND CustomStatemachineH::file FOR this»
-	«EXPAND CustomStatemachineCPP::file FOR this»
+	«EXPAND CustomStatemachineC::file FOR this»
 	«EXPAND CustomRepositoryH::file FOR this»
 	«EXPAND CustomEventH::file FOR this»
 	
 	«EXPAND CMakeLists::file FOR this»
 	«EXPAND TestMain::file FOR this»
 
-
-	«EXPAND Dump::file FOR this»
-	
 «ENDDEFINE»
 
 
