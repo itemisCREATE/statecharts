@@ -23,7 +23,7 @@ class StatechartExtensions {
 			if (mo > s) mo else s }])
 	}
 
-	/** the maximum orthogonality of all pseudo states is 0 */
+	/** the maximum orthogonality of all  pseudo states is 0 */
 	def dispatch int maxOrthogonality(Vertex v) { 0 }
 	
 	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of a state */
