@@ -1,0 +1,84 @@
+import stext;
+import sexec;
+import ecore;
+import sgraph;
+toCppCode(Void void) :
+	"/*toCppCode() called with NULL element. Polymorphic resolver could not match callable method!*/";
+String toCppCode(Void o, String statechartReference) : 
+	""; //polymorphic placeholder (abstract rule)
+
+String toCppCode(Expression statement) : 
+	null; //polymorphic placeholder (abstract rule)
+ 
+String toCppCode(Statement statement) : 
+	null; //polymorphic placeholder (abstract rule)
+ 
+String toCppCode(PrimitiveValueExpression primValue) :
+	primValue.value;
+
+/* Assignment */
+String toCppCode(Assignment assignment) :
+  switch (assignment.operator) {
+  case (AssignmentOperator::assign) : "set_" + assignment.varRef.name + "(" + assignment.expression.toCppCode() + ");"  
+  case (AssignmentOperator::multAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() * (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::divAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() / (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::modAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() % (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::addAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() + (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::subAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() - (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::leftShiftAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() << ("+ assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::rightShiftAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() >> (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::andAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() & (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::xorAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() ^ (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::orAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() ^ (" + assignment.expression.toCppCode() + "));"
+  default : ""
+  };
+		
+/* EventRaising */
+
+/* Logical Expressions */
+String toCppCode(LogicalOrExpression expression) :
+  	expression.leftOperand.toCppCode() + " || " + expression.rightOperand.toCppCode();
+  	
+String toCppCode(LogicalAndExpression expression) :
+  	expression.leftOperand.toCppCode() + " && " + expression.rightOperand.toCppCode();
+
+String toCppCode(LogicalNotExpression expression) :
+  	" ^" + expression.operand.toCppCode();
+
+String toCppCode(LogicalRelationExpression expression) :
+   expression.leftOperand.toCppCode() + " ??? " + expression.rightOperand.toCppCode();
+    
+String toCppCode(BitwiseAndExpression expression) :
+  	expression.leftOperand.toCppCode() + " & " + expression.rightOperand.toCppCode();
+
+String toCppCode(BitwiseOrExpression expression) :
+  	expression.leftOperand.toCppCode() + " | " + expression.rightOperand.toCppCode();
+
+String toCppCode(BitwiseXorExpression expression) :
+  	expression.leftOperand.toCppCode() + " ^ " + expression.rightOperand.toCppCode();
+
+String toCppCode(NumericalAddSubtractExpression expression) :
+  	expression.leftOperand.toCppCode() + getOperator(expression.operator) + expression.rightOperand.toCppCode();
+  	
+String toCppCode(NumericalMultiplyDivideExpression expression) :
+  	expression.leftOperand.toCppCode() + getOperator(expression.operator) + expression.rightOperand.toCppCode();
+
+// is this just relevant for events?
+String toCppCode(ElementReferenceExpression ev) :
+    " ( _" + ev.value.name.toLowerCase() + " == ev.getID() ) ";
+
+String getOperator(AdditiveOperator operator) : 
+    switch(operator) {
+    	case(AdditiveOperator::plus) : " + "
+    	case(AdditiveOperator::minus) : " - "
+    	default : ""
+    };
+
+String getOperator(MultiplicativeOperator operator) : 
+    switch(operator) {
+    	case(MultiplicativeOperator::mul) : " * "
+    	case(MultiplicativeOperator::div) : " / "
+    	case(MultiplicativeOperator::mod) : " % "
+    	default : ""
+    };
+
