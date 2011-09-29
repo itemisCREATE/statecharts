@@ -15,7 +15,6 @@ import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
-import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
@@ -32,7 +31,7 @@ import org.yakindu.sct.ui.editor.validation.ValidationAction;
  * @author andreas muelder
  * @author martin esser
  */
-public class StatechartDiagramEditor extends DiagramDocumentEditor implements
+public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 		IGotoMarker {
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
@@ -72,6 +71,7 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 		return DiagramActivator.DIAGRAM_PREFERENCES_HINT;
 	}
 
+
 	@Override
 	protected void createGraphicalViewer(Composite parent) {
 		super.createGraphicalViewer(parent);
@@ -87,5 +87,4 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 	public String getContributorId() {
 		return ID;
 	}
-
 }
