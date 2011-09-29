@@ -10,23 +10,34 @@
  */
 package org.yakindu.sct.ui.editor.pictogram;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.eclipse.ui.part.FileEditorInput;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.ui.editor.editor.BreadcrumbDiagramEditor;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
+import org.yakindu.sct.ui.editor.editor.TrackingFileEditorInput;
+
+import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorResolver;
 
 /**
  * Opens the selected Statechart for a SubmachineState in a new/existing editor.
@@ -42,8 +53,24 @@ public class OpenSubstatechartHandler extends AbstractHandler {
 			return null;
 		Statechart substatechart = selectedState.getSubstatechart();
 		Resource eResource = substatechart.eResource();
-		FileEditorInput fileEditorInput = new FileEditorInput(
-				WorkspaceSynchronizer.getFile(eResource));
+		ActiveEditorResolver resolver = new ActiveEditorResolver();
+		Display.getDefault().syncExec(resolver);
+		IEditorPart result = resolver.getResult();
+		List<IFile> newHistory = new ArrayList<IFile>();
+		if(result instanceof BreadcrumbDiagramEditor){
+			List<IFile> history = ((BreadcrumbDiagramEditor) result).getHistory();
+			newHistory.addAll(history);
+		} else{
+			IEditorInput editorInput = result.getEditorInput();
+			if(editorInput instanceof IFileEditorInput)
+			newHistory.add(((IFileEditorInput) editorInput).getFile());
+		}
+
+		IFile file = WorkspaceSynchronizer.getFile(eResource);
+		newHistory.add(file);
+		TrackingFileEditorInput fileEditorInput = new TrackingFileEditorInput(
+				file);
+		fileEditorInput.setHistory(newHistory);
 
 		final IWorkbenchPage page = PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage();
@@ -56,8 +83,7 @@ public class OpenSubstatechartHandler extends AbstractHandler {
 		return null;
 	}
 
-	public static State getSelectedSubmachineState(
-			final ExecutionEvent event) {
+	public static State getSelectedSubmachineState(final ExecutionEvent event) {
 		IGraphicalEditPart editPart = getSelectedEditPart(event);
 		if (editPart == null)
 			return null;
