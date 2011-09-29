@@ -1,0 +1,31 @@
+«REM»
+
+Templates for the main statechart c file.
+
+@auther joern seger
+
+«ENDREM»
+
+«IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
+
+
+«DEFINE file FOR ExecutionFlow»
+
+«FILE 'Event.h'»
+#ifndef EVENT_H_
+#define EVENT_H_
+
+#include "definition.h"
+
+typedef struct {
+  uint32_t id;
+} _Event;
+
+extern void _event_init(_Event* handle, uint32_t id);
+
+#endif /* EVENT_H_ */
+«ENDFILE»
+
+«ENDDEFINE»

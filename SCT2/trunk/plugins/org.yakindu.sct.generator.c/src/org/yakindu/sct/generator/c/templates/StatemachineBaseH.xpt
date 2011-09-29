@@ -1,0 +1,46 @@
+«REM»
+
+Templates for the main statechart c file.
+
+@auther joern seger
+
+«ENDREM»
+
+«IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
+
+
+«DEFINE file FOR ExecutionFlow»
+
+«FILE 'StatemachineBase.h'»
+#ifndef STATEMACHINEBASE_H_
+#define STATEMACHINEBASE_H_
+
+#include "definition.h"
+#include "Timer.h"
+
+typedef struct {
+
+	uint32_t* state;
+	uint16_t statePtr;
+
+	Timer* timer;
+	boolean isStaticData;
+
+} StatemachineBase;
+
+
+extern void statemachineBase_init(StatemachineBase* handle, uint16_t maxStates, Timer* timer);
+extern void statemachineBase_init_staticData(StatemachineBase* handle,
+		uint32_t* staticData, Timer* timer);
+
+extern void statemachineBase_exit(StatemachineBase* handle);
+
+extern uint32_t statemachineBase_getState(StatemachineBase* handle, uint16_t pos);
+
+
+#endif /* STATEMACHINEBASE_H_ */
+«ENDFILE»
+
+«ENDDEFINE»

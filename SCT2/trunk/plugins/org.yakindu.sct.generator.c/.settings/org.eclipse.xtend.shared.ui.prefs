@@ -1,0 +1,2 @@
+metamodelContributor=org.eclipse.xtend.typesystem.emf.ui.EmfMetamodelContributor
+project.specific.metamodel=true
