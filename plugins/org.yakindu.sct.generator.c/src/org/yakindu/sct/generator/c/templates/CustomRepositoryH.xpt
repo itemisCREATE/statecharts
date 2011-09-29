@@ -48,34 +48,18 @@ Templates for the main statechart cpp file.
 #define «DRNAME()»_H_
 
 #include "definition.h"
-#include "DataRepository.h"
 
-class «DRName()» : public DataRepository {
+typedef struct {
 
 «FOREACH this.declaredVariables() AS variable»
     «((VariableDefinition)variable).type» «((VariableDefinition)variable).name»;
 «ENDFOREACH»
 
-public:
 
-	«DRName()»() : 
-«FOREACH this.declaredVariables() AS variable SEPARATOR ','-»
- «((VariableDefinition)variable).name»(0)«
-ENDFOREACH»
-	{};
-	virtual ~«DRName()»() {};
-	
-«FOREACH this.declaredVariables() AS variable»
-    «((VariableDefinition)variable).type» get_«((VariableDefinition)variable).name»()
-    { «((VariableDefinition)variable).type» value; lock(); value = «((VariableDefinition)variable).name»; unlock(); return value; }
-«ENDFOREACH»
+} «DRName()»;
 
-«FOREACH this.declaredVariables() AS variable»
-    void set_«((VariableDefinition)variable).name»(const «((VariableDefinition)variable).type»& value)
-    { lock(); «((VariableDefinition)variable).name» =  value; unlock(); }
-«ENDFOREACH»
-
-};
+extern void «DRName().toFirstLower()»_init(«DRName()»* handle);
+extern void «DRName().toFirstLower()»_exit(«DRName()»* handle);
 
 #endif /* «DRNAME()»_H_ */
 «ENDFILE»

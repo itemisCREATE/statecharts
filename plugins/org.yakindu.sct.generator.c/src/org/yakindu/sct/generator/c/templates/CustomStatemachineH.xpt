@@ -19,73 +19,43 @@ Templates for the main statechart cpp file.
 #ifndef «STNAME()»_H_
 #define «STNAME()»_H_
 
-#include "Statemachine.h"
+#include "Statemachine_cy.h"
 #include "«DRName()».h"
 #include "«EvName()».h"
 
+enum States {
+    «FOREACH this.states AS exState-»
+      _«exState.simpleName», 
+    «ENDFOREACH»
+	last_state
+};
 
 #define MAX_PARALLEL_STATES «this.stateVector.size»
 
-class «StName()»: public Statemachine, public «DRName()» {
 
-public:
-	enum States {
-	    «FOREACH this.states AS exState-»
-	      _«exState.simpleName»,
-	    «ENDFOREACH»
-		last_state
-	};
+typedef void(*raiseEventFPtr)(_Event* evPtr);
 
-protected:
-	/* conditions */
-	«FOREACH states AS state -»
-	  «FOREACH state.reactions AS reaction -»
-	  «IF reaction.check != null -»
-	bool «reaction.check.functionName()»(const _Event& event);
-	  «ENDIF»
-	  «ENDFOREACH»
-	«ENDFOREACH»
+typedef struct {
+
+	Statemachine_cy  base;
+	«DRName()» variableData;
+	raiseEventFPtr raiseEvent;
 	
-	/* actions */
-	«FOREACH states AS state -»
-	  «FOREACH state.reactions AS reaction -»
-	void «reaction.effect.functionName()»();
-	  «ENDFOREACH»
-	«ENDFOREACH»
+} «StName()»;
 
-	/* cycles */
-	«FOREACH states AS state -»
-	void cycle_«state.simpleName»(const _Event& ev);
-	«ENDFOREACH»
-	
-	/* entrys */
-	«FOREACH states AS state -»
-	«IF state.entryAction != null»
-	void «state.entryAction.entryActionFunctionName()»();
-	«ENDIF»
-	«ENDFOREACH»
-	
-	/*exits */
-	«FOREACH states AS state -»
-	«IF state.exitAction != null»
-	void «state.exitAction.exitActionFunctionName()»();
-	«ENDIF»
-	«ENDFOREACH»
-	
-	virtual void _runCycle(Event ev);
+/* Explicit Constructor & Destructor */
+extern void «StName().toFirstLower()»_init(«StName()»* handle, Timer* timer, EventPool* eventPool);
+extern void «StName().toFirstLower()»_exit(«StName()»* handle);
 
-public:
+extern void «StName().toFirstLower()»_setEvent(«StName()»* handle, _Event* ev);
+extern void «StName().toFirstLower()»_runCycle(«StName()»* handle);
 
-	«StName()»();
-	virtual ~«StName()»();
+extern boolean «StName().toFirstLower()»_eventWaiting(«StName()»* handle);
 
-	virtual void init();
+	/* virtual function form state machine must be implemented here */
+extern void statemachine_cy__runCycle(Statemachine_cy* handle);
 
-	//virtual void queueEvent(const Event& ev);
 
-};
-
-//}; // namespace
 #endif /* «STNAME()»_H_ */
 
 «ENDFILE»

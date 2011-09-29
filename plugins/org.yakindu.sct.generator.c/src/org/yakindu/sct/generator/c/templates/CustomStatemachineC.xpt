@@ -25,7 +25,7 @@ Templates for the main statechart cpp file.
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Call»
-«this.step.functionName()»();
+«this.step.functionName()»(handle);
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Sequence»
@@ -42,7 +42,7 @@ Templates for the main statechart cpp file.
 
 «DEFINE ActionCode FOR CheckRef -»
   «IF this.check != null -»
-  «this.check.functionName()»(ev) «
+  «this.check.functionName()»(handle) «
   ELSE -»
  true «
   ENDIF -»«
@@ -72,7 +72,7 @@ state[0] = last_state;
 «DEFINE ConditionMethodsImplement FOR ExecutionState»
   «FOREACH reactions AS r»
   «IF r.check != null -»
-bool «StName()»::«r.check.functionName()»(const _Event& ev) {
+bool «StName().toFirstLower()»_«r.check.functionName()»(«StName()»* handle) {
   return (	«r.check.condition.toCppCode()» );
 }
   «ENDIF -»
@@ -81,7 +81,7 @@ bool «StName()»::«r.check.functionName()»(const _Event& ev) {
 
 «DEFINE StatementMethodsImplement FOR ExecutionState»
   «FOREACH reactions AS r»
-void «this.StName()»::«r.effect.functionName()»() {
+void «this.StName().toFirstLower()»_«r.effect.functionName()»(«StName()»* handle) {
   «EXPAND ActionCode FOR r.effect»
 }
   «ENDFOREACH»
@@ -92,7 +92,7 @@ void «this.StName()»::«r.effect.functionName()»() {
 «ENDDEFINE»
 
 «DEFINE CycleMethodsImplement FOR ExecutionState»
-void «StName()»::cycle_«this.simpleName»(const _Event& ev)
+void «StName().toFirstLower()»_cycle_«this.simpleName»(«StName()»* handle)
 {
 	«EXPAND CycleCode FOR cycle»
 }
@@ -100,7 +100,7 @@ void «StName()»::cycle_«this.simpleName»(const _Event& ev)
 
 «DEFINE EnterMethodImplement FOR ExecutionState»
 «IF this.entryAction != null»
-void «StName()»::«this.entryAction.entryActionFunctionName()»()
+void «StName().toFirstLower()»_«this.entryAction.entryActionFunctionName()»(«StName()»* handle)
 {
 «EXPAND ActionCode FOR this.entryAction»
 }
@@ -109,7 +109,7 @@ void «StName()»::«this.entryAction.entryActionFunctionName()»()
 
 «DEFINE ExitMethodImplement FOR ExecutionState»
 «IF this.exitAction != null»
-void «StName()»::«this.exitAction.exitActionFunctionName()»()
+void «StName().toFirstLower()»_«this.exitAction.exitActionFunctionName()»(«StName()»* handle)
 {
 «EXPAND ActionCode FOR this.exitAction»
 }
@@ -117,15 +117,8 @@ void «StName()»::«this.exitAction.exitActionFunctionName()»()
 «ENDDEFINE»
 
 «DEFINE file FOR ExecutionFlow»
-«FILE StName()+'.cpp'»
-#include <iostream>
+«FILE StName()+'.c'»
 #include "«StName()».h"
-
-«StName()»::«StName()»() : Statemachine(«((ExecutionFlow)this.eRootContainer).stateVector.size») {
-}
-
-«StName()»::~«StName()»() {
-}
 
 «EXPAND ConditionMethodsImplement FOREACH this.states»
 
@@ -138,24 +131,48 @@ void «StName()»::«this.exitAction.exitActionFunctionName()»()
 «EXPAND ExitMethodImplement FOREACH this.states»
 
 
-void «StName()»::init()
+void «StName().toFirstLower()»_init(«StName()»* handle)
 {
+	statemachine_cy_init(&handle->base, MAX_PARALLEL_STATES,
+			event_last, timer, eventPool);
+			
+	«DRName().toFirstLower()»_init(&handle->variableData);
+	
+	//((StatemachineBase*)handle)->state[0] = st_State1;
+
 	«EXPAND ActionCode FOREACH this.enterSequence.steps»
 }
 
-/* Yet unimplemented
-void «StName()»::exit()
+void «StName().toFirstLower()»_exit(«StName()»* handle)
+{
+	statemachine_cy_exit(&handle->base);
+	variableData_exit(&handle->variableData);
+
+}
+
+void «StName().toFirstLower()»_runCycle(«StName()»* handle)
 {
 }
-*/
 
-void «StName()»::_runCycle(Event ev)
+void «StName().toFirstLower()»_setEvent(«StName()»* handle, _Event* ev)
 {
-	for (int i=0; i<MAX_PARALLEL_STATES; ++i) {
+	statemachine_cy_setEvent(&handle->base, ev);
+}
+
+boolean «StName().toFirstLower()»_eventWaiting(«StName()»* handle)
+{
+	return statemachine_cy_eventWaiting(&handle->base);
+}
+
+
+void statemachine_cy__runCycle(Statemachine_cy* handle)
+{
+	uint32_t i;
+	for (i=0; i<MAX_PARALLEL_STATES; ++i) {
 		switch(state[i]) {
 	«FOREACH this.states AS state»
 	    case _«state.simpleName»:
-	        cycle_«state.simpleName»(*ev);
+	        cycle_«state.simpleName»((«StName()»*) handle);
 	        break;
 	«ENDFOREACH»
 		default:
