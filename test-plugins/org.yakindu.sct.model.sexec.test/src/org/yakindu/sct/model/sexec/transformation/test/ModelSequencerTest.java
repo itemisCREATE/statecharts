@@ -209,6 +209,39 @@ public class ModelSequencerTest {
 		assertNotNull(_s2.getEntryAction());
 		assertNull(_s1.getEntryAction());
 	}
+
+	
+	/**
+	 * entry actions of a substate must not be included in a states entry action list
+	 */
+	@Test public void testSubStateEntryAction() {
+		Statechart sc = _createStatechart("test");
+		Scope scope = _createInterfaceScope("interface", sc);
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		Region r = _createRegion("main", sc);
+//		Entry e = _createEntry(EntryKind.INITIAL, null, r);
+		State s2 = _createState("s2", r);
+		
+		Region s2_r = _createRegion("sub", s2);
+		State s2_1 = _createState("s2_1", s2_r);
+		LocalReaction entryAction = _createEntryAction(s2_1);
+		Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), (ReactionEffect) entryAction.getEffect());
+		LocalReaction exitAction = _createExitAction(s2_1);
+		Assignment assign2 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("43"), (ReactionEffect) exitAction.getEffect());
+		
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		ExecutionState _s2 = flow.getStates().get(0);
+		ExecutionState _s2_1 = flow.getStates().get(1);
+		assertEquals(s2.getName(), _s2.getSimpleName());
+		assertEquals(s2_1.getName(), _s2_1.getSimpleName());
+		
+		assertNull(_s2.getEntryAction());
+		assertNotNull(_s2_1.getEntryAction());
+
+		assertNull(_s2.getExitAction());
+		assertNotNull(_s2_1.getExitAction());
+}
 	
 	
 	/**

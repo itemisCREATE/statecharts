@@ -49,6 +49,9 @@ import org.yakindu.sct.model.sgraph.Variable
 import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.stext.stext.EntryEvent
 import org.yakindu.sct.model.stext.stext.ExitEvent
+import org.eclipse.xtext.common.services.Ecore2XtextTerminalConverters
+import org.eclipse.emf.ecore.util.EcoreUtil$AbstractFilteredSettingsIterator
+import java.util.ArrayList
 
 class ModelSequencer {
 	
@@ -327,7 +330,14 @@ class ModelSequencer {
 	
 	
 	def defineEnterSequence(ExecutionFlow flow, Statechart sc) {
-		val enterSteps = sc.regions.map(r | r.entry.target?.newEnterStateStep).filter(e | e != null)
+		val enterSteps = new ArrayList<Step>()
+		
+		for ( r : sc.regions) {
+			val step = r.entry?.target?.newEnterStateStep
+			if (step != null) enterSteps.add(step);
+		} 
+		
+		// sc.regions.map(r | r.entry?.target?.newEnterStateStep).filter(e | e != null)
 		val enterSequence = sexecFactory.createSequence
 		enterSequence.name = "enter"
 		enterSteps.forEach(e | enterSequence.steps.add(e));
@@ -396,20 +406,28 @@ class ModelSequencer {
 	
 	
 	def target(Entry entry) {
-		entry?.outgoingTransitions?.get(0)?.target as State
+		if ( entry?.outgoingTransitions != null) {
+			if (entry.outgoingTransitions.size > 0) entry.outgoingTransitions.get(0).target as State
+		}
+	}
+
+	/**
+	 * Returns a list of all local reactions defined for a state. This includes also entry and exit actions but excludes 
+	 * local reactions of child states.
+	 */
+	def List<LocalReaction> localReactions(State state)	{
+		state.scopes.get(0).declarations.filter(typeof(LocalReaction)).toList
 	}
 	
 	def List<LocalReaction> entryReactions(State state) {
-		var localReactions = EcoreUtil2::eAllContentsAsList(state).filter(e | e instanceof LocalReaction)
-		localReactions
+		state.localReactions()
 			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof EntryEvent))
 			.map(lr | lr as LocalReaction)
 			.toList	
 	} 
 	
 	def List<LocalReaction> exitReactions(State state) {
-			var localReactions = EcoreUtil2::eAllContentsAsList(state).filter(e | e instanceof LocalReaction)
-		localReactions
+		state.localReactions()
 			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof ExitEvent))
 			.map(lr | lr as LocalReaction)
 			.toList	
