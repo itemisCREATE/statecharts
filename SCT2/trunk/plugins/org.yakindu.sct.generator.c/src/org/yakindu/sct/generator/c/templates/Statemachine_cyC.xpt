@@ -27,6 +27,10 @@ void statemachine_cy_init(Statemachine_cy* handle, uint16_t maxStates,
 	/* This is only a place for the pointers to the actual Events */
 	handle->eventList = malloc(sizeof(_Event*) * maxEvents);
 
+	//memset(); <- do we have string.h?
+	for (i=0; i<maxEvents; ++i)
+		handle->eventList[i] = 0;
+
 	/* eventPool must be initialized at this point */
 	handle->eventPool = eventPool;
 
@@ -69,6 +73,14 @@ void statemachine_cy_runCycle(Statemachine_cy* handle) {
 
 	/* call internal cycle */
 	statemachine_cy__runCycle(handle);
+
+	/* delete all events */
+	for (i=0; i<handle->eventSet.maxEvents; ++i) {
+		if (eventSet_check(&handle->eventSet, i)) {
+			eventPool_freeEvent(handle->eventPool, handle->eventList[i]);
+			handle->eventList[i] = 0;
+		}
+	}
 
 	/* cleanup all events */
 	eventSet_clean(&handle->eventSet);
