@@ -10,16 +10,20 @@
  */
 package org.yakindu.sct.ui.editor.editor.figures;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Ellipse;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.geometry.Dimension;
 
 public class ShallowHistoryFigure extends Ellipse {
 
+	private static final double HEIGHT_RATIO = 0.3;
+	private static final double WIDTH_RATIO = 0.2;
+
 	public ShallowHistoryFigure() {
 		this.setSize(new Dimension(10, 10));
 		this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
-		this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);
+		this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.black);
 	}
 
 	/**
@@ -28,14 +32,16 @@ public class ShallowHistoryFigure extends Ellipse {
 	@Override
 	protected void outlineShape(Graphics graphics) {
 		super.outlineShape(graphics);
-
 		// draw the 'H' letter
+		graphics.pushState();
+		graphics.setForegroundColor(org.eclipse.draw2d.ColorConstants.white);
 		graphics.drawLine(
-				bounds.getCenter().getTranslated((int) (-bounds.width * 0.15), (int) (-bounds.height * 0.25)), bounds
-						.getCenter().getTranslated((int) (-bounds.width * 0.15), (int) (bounds.height * 0.25)));
-		graphics.drawLine(bounds.getCenter().getTranslated((int) (bounds.width * 0.15), (int) (-bounds.height * 0.25)),
-				bounds.getCenter().getTranslated((int) (bounds.width * 0.15), (int) (bounds.height * 0.25)));
-		graphics.drawLine(bounds.getCenter().getTranslated((int) (-bounds.width * 0.15), 0), bounds.getCenter()
-				.getTranslated((int) (bounds.width * 0.15), 0));
+				bounds.getCenter().getTranslated((int) (-bounds.width * WIDTH_RATIO), (int) (-bounds.height * HEIGHT_RATIO)), bounds
+						.getCenter().getTranslated((int) (-bounds.width * WIDTH_RATIO), (int) (bounds.height * HEIGHT_RATIO)));
+		graphics.drawLine(bounds.getCenter().getTranslated((int) (bounds.width * WIDTH_RATIO), (int) (-bounds.height * HEIGHT_RATIO)),
+				bounds.getCenter().getTranslated((int) (bounds.width * WIDTH_RATIO), (int) (bounds.height * HEIGHT_RATIO)));
+		graphics.drawLine(bounds.getCenter().getTranslated((int) (-bounds.width * WIDTH_RATIO), 0), bounds.getCenter()
+				.getTranslated((int) (bounds.width * WIDTH_RATIO), 0));
+		graphics.popState();
 	}
 }
