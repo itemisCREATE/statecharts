@@ -16,10 +16,14 @@ import org.eclipse.draw2d.geometry.Dimension;
 
 public class DeepHistoryFigure extends Ellipse {
 
+	private static final double OFFSET = 0.05;
+	private static final double HEIGHT_RATIO = 0.25;
+	private static final double WIDTH_RATIO = 0.25;
+
 	public DeepHistoryFigure() {
 		this.setSize(new Dimension(10, 10));
 		this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
-		this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);
+		this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.black);
 	}
 
 	@Override
@@ -27,20 +31,25 @@ public class DeepHistoryFigure extends Ellipse {
 		super.outlineShape(graphics);
 
 		// draw the 'H' letter
+		
+		graphics.pushState();
+		graphics.setForegroundColor(org.eclipse.draw2d.ColorConstants.white);
+
 		graphics.drawLine(
-				bounds.getCenter().getTranslated((int) (-bounds.width * 0.25), (int) (-bounds.height * 0.25)), bounds
-						.getCenter().getTranslated((int) (-bounds.width * 0.25), (int) (bounds.height * 0.25)));
-		graphics.drawLine(bounds.getCenter().getTranslated((int) (bounds.width * 0.05), (int) (-bounds.height * 0.25)),
-				bounds.getCenter().getTranslated((int) (bounds.width * 0.05), (int) (bounds.height * 0.25)));
-		graphics.drawLine(bounds.getCenter().getTranslated((int) (-bounds.width * 0.25), 0), bounds.getCenter()
-				.getTranslated((int) (bounds.width * 0.05), 0));
+				bounds.getCenter().getTranslated((int) (-bounds.width * WIDTH_RATIO), (int) (-bounds.height * HEIGHT_RATIO)), bounds
+						.getCenter().getTranslated((int) (-bounds.width * WIDTH_RATIO), (int) (bounds.height * HEIGHT_RATIO)));
+		graphics.drawLine(bounds.getCenter().getTranslated((int) (bounds.width * OFFSET), (int) (-bounds.height * HEIGHT_RATIO)),
+				bounds.getCenter().getTranslated((int) (bounds.width * OFFSET), (int) (bounds.height * HEIGHT_RATIO)));
+		graphics.drawLine(bounds.getCenter().getTranslated((int) (-bounds.width * WIDTH_RATIO), 0), bounds.getCenter()
+				.getTranslated((int) (bounds.width * OFFSET), 0));
 
 		// draw the '*' character
-		graphics.drawLine(bounds.getCenter().getTranslated((int) (bounds.width * 0.25), (int) (-bounds.height * 0.25)),
-				bounds.getCenter().getTranslated((int) (bounds.width * 0.25), (int) (-bounds.height * 0.05)));
+		graphics.drawLine(bounds.getCenter().getTranslated((int) (bounds.width * WIDTH_RATIO), (int) (-bounds.height * HEIGHT_RATIO)),
+				bounds.getCenter().getTranslated((int) (bounds.width * WIDTH_RATIO), (int) (-bounds.height * OFFSET)));
 		graphics.drawLine(bounds.getCenter().getTranslated((int) (bounds.width * 0.15), (int) (-bounds.height * 0.20)),
 				bounds.getCenter().getTranslated((int) (bounds.width * 0.35), (int) (-bounds.height * 0.10)));
 		graphics.drawLine(bounds.getCenter().getTranslated((int) (bounds.width * 0.35), (int) (-bounds.height * 0.20)),
 				bounds.getCenter().getTranslated((int) (bounds.width * 0.15), (int) (-bounds.height * 0.10)));
+		graphics.popState();
 	}
 }

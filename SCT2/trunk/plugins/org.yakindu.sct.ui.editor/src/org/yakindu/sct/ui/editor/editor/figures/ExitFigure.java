@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.Display;
 /**
  * 
  * @author andreas muelder
+ * @author axel terfloth
  * 
  */
 public class ExitFigure extends Ellipse {
@@ -30,7 +31,7 @@ public class ExitFigure extends Ellipse {
 	public ExitFigure(IMapMode mapMode) {
 
 		this.mapMode = mapMode;
-		this.setLineWidth(1);
+		this.setLineWidth(2);
 		this.setForegroundColor(ColorConstants.black);
 		this.setBackgroundColor(ColorConstants.white);
 	}
@@ -42,7 +43,7 @@ public class ExitFigure extends Ellipse {
 		path.addArc(getBounds().x, getBounds().y, getBounds().width - 1,
 				getBounds().height - 1, 0, 360);
 		graphics.setClip(path);
-		graphics.setLineWidth(1);
+		graphics.setLineWidth(2);
 		graphics.drawLine(bounds.getTopLeft(), bounds.getBottomRight());
 		graphics.drawLine(bounds.getTopRight(), bounds.getBottomLeft());
 		path.dispose();
