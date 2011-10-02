@@ -97,9 +97,7 @@ public class PictogramEditPolicy extends AbstractEditPolicy {
 			case Notification.REMOVING_ADAPTER:
 				return;
 			default:
-				if (notification.getNewValue() != null) {
-					updatePictogramFigureStates();
-				}
+				updatePictogramFigureStates();
 			}
 		}
 
@@ -154,7 +152,9 @@ public class PictogramEditPolicy extends AbstractEditPolicy {
 							.getTranslated(
 									new Dimension(
 											(int) (relativeX * referenceBox.width)
-													+  absoluteX + referenceBox.width - targetFigure.getBounds().width,
+													+ absoluteX
+													+ referenceBox.width
+													- targetFigure.getBounds().width,
 											(int) (relativeY * referenceBox.height)
 													+ absoluteY
 													- targetFigure
@@ -189,7 +189,7 @@ public class PictogramEditPolicy extends AbstractEditPolicy {
 					.get(pictogram);
 			final boolean validContext = pictogram.getHandlerContextValidator()
 					.isValidContext(createExecutionEvent(null));
-			
+
 			pictogramFigure.setVisible(validContext);
 			pictogramFigure.repaint();
 		}
