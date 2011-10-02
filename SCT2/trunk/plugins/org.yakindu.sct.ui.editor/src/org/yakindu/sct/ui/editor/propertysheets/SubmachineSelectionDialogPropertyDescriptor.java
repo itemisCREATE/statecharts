@@ -73,6 +73,8 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 		Statechart substatechart = state.getSubstatechart();
 		if (substatechart != null) {
 			label.setText(substatechart.eResource().getURI().toString());
+		} else {
+			label.setText("");
 		}
 	}
 
@@ -101,12 +103,11 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 		openDialog.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
 				SelectSubmachineDialog dialog = new SelectSubmachineDialog(
-						parent.getShell(), new StatechartViewerFilter(
-								state));
+						parent.getShell(), new StatechartViewerFilter(state));
 				if (Dialog.OK == dialog.open()) {
 					Statechart selectedSubmachine = dialog
 							.getSelectedSubmachine();
-					if (selectedSubmachine != null) {
+					if (selectedSubmachine != null || dialog.isClearSelected()) {
 						SetValueCommand command = new SetValueCommand(
 								new SetRequest(
 										state,

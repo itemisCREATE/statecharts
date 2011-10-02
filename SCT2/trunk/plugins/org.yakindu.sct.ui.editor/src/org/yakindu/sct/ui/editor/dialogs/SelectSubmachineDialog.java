@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryRegistryImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -54,7 +55,11 @@ import org.yakindu.sct.ui.editor.StatechartImages;
 @SuppressWarnings("restriction")
 public class SelectSubmachineDialog extends WorkspaceResourceDialog {
 
+	public final static int CLEAR_BUTTON = IDialogConstants.CLIENT_ID + 1;
+
 	private final ViewerFilter filter;
+
+	private boolean clearSelected = false;
 
 	public SelectSubmachineDialog(Shell parent, ViewerFilter filter) {
 		super(parent, new WorkbenchLabelProvider(),
@@ -70,6 +75,13 @@ public class SelectSubmachineDialog extends WorkspaceResourceDialog {
 		setImage(StatechartImages.LOGO.image());
 		addFilter(filter);
 		loadContents();
+		clearSelected = false;
+	}
+
+	@Override
+	protected void createButtonsForButtonBar(Composite parent) {
+		createButton(parent, CLEAR_BUTTON, "None", false);
+		super.createButtonsForButtonBar(parent);
 	}
 
 	@Override
@@ -162,5 +174,24 @@ public class SelectSubmachineDialog extends WorkspaceResourceDialog {
 			}
 			return true;
 		}
+	}
+
+	@Override
+	protected void buttonPressed(int buttonId) {
+		if (buttonId == CLEAR_BUTTON) {
+			clearPressed();
+		} else {
+			super.buttonPressed(buttonId);
+		}
+	}
+
+	protected void clearPressed() {
+		clearSelected = true;
+		setReturnCode(OK);
+		close();
+	}
+
+	public boolean isClearSelected() {
+		return clearSelected;
 	}
 }
