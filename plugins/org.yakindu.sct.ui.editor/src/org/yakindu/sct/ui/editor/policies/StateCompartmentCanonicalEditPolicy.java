@@ -14,8 +14,10 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gmf.runtime.diagram.core.util.ViewType;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
+import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.utils.SemanticHintUtil;
 
@@ -46,5 +48,14 @@ public class StateCompartmentCanonicalEditPolicy extends CanonicalEditPolicy {
 				.getAdapter(EObject.class);
 		String factoryHint = SemanticHintUtil.getSemanticHint(modelElement);
 		return factoryHint;
+	}
+
+	protected boolean shouldDeleteView(View view) {
+		if (ViewType.NOTE.equals(view.getType())
+				| ViewType.NOTEATTACHMENT.equals(view.getType())
+				|| ViewType.TEXT.equals(view.getType())) {
+			return false;
+		}
+		return true;
 	}
 }

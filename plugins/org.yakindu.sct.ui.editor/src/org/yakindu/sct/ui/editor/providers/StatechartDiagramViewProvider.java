@@ -75,12 +75,7 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider
 	}
 
 	private Class<?> getClass(String semanticHint) {
-		Class<?> factory = factories.get(semanticHint);
-		if (factory == null) {
-			throw new IllegalStateException(
-					"No factory found for semantic hint " + semanticHint);
-		}
-		return factory;
+		return factories.get(semanticHint);
 	}
 
 	@Override
