@@ -16,8 +16,10 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gmf.runtime.diagram.core.util.ViewType;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalConnectionEditPolicy;
+import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
@@ -82,6 +84,15 @@ public class RegionCompartmentCanonicalEditPolicy extends
 		String factoryHint = SemanticHintUtil.getSemanticHint(modelElement);
 		return factoryHint;
 	}
+	
+	protected boolean shouldDeleteView(View view) {
+		  if (ViewType.NOTE.equals(view.getType())
+		      | ViewType.NOTEATTACHMENT.equals(view.getType())
+		       || ViewType.TEXT.equals(view.getType())) {
+		    return false;
+		   }
+		   return true;
+		}
 
 	@Override
 	protected String getDefaultFactoryHint() {
