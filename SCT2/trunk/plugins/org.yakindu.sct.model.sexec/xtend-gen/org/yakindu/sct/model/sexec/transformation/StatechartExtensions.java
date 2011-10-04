@@ -1,8 +1,12 @@
 package org.yakindu.sct.model.sexec.transformation;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -15,6 +19,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 
 @SuppressWarnings("all")
 public class StatechartExtensions {
@@ -85,6 +90,51 @@ public class StatechartExtensions {
   public Reaction reaction(final Trigger tr) {
     EObject _eContainer = tr.eContainer();
     return ((Reaction) _eContainer);
+  }
+  
+  public Statechart statechart(final State state) {
+    Region _parentRegion = state.getParentRegion();
+    Statechart _statechart = this.statechart(_parentRegion);
+    return _statechart;
+  }
+  
+  public Statechart statechart(final Region region) {
+    Statechart _xifexpression = null;
+    EObject _eContainer = region.eContainer();
+    if ((_eContainer instanceof org.yakindu.sct.model.sgraph.Statechart)) {
+      EObject _eContainer_1 = region.eContainer();
+      _xifexpression = ((Statechart) _eContainer_1);
+    } else {
+      EObject _eContainer_2 = region.eContainer();
+      Statechart _statechart = this.statechart(((State) _eContainer_2));
+      _xifexpression = _statechart;
+    }
+    return _xifexpression;
+  }
+  
+  public List<TimeEventSpec> timeEventSpecs(final State state) {
+    EList<Transition> _outgoingTransitions = state.getOutgoingTransitions();
+    ArrayList<TimeEventSpec> _arrayList = new ArrayList<TimeEventSpec>();
+    final Function2<ArrayList<TimeEventSpec>,Transition,ArrayList<TimeEventSpec>> _function = new Function2<ArrayList<TimeEventSpec>,Transition,ArrayList<TimeEventSpec>>() {
+        public ArrayList<TimeEventSpec> apply(final ArrayList<TimeEventSpec> s , final Transition r) {
+          ArrayList<TimeEventSpec> _xblockexpression = null;
+          {
+            List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(r);
+            Iterable<TimeEventSpec> _filter = IterableExtensions.<TimeEventSpec>filter(_eAllContentsAsList, org.yakindu.sct.model.stext.stext.TimeEventSpec.class);
+            final Function1<TimeEventSpec,Boolean> _function_1 = new Function1<TimeEventSpec,Boolean>() {
+                public Boolean apply(final TimeEventSpec tes) {
+                  boolean _add = s.add(tes);
+                  return ((Boolean)_add);
+                }
+              };
+            IterableExtensions.<TimeEventSpec>forEach(_filter, _function_1);
+            _xblockexpression = (s);
+          }
+          return _xblockexpression;
+        }
+      };
+    ArrayList<TimeEventSpec> _fold = IterableExtensions.<Transition, ArrayList<TimeEventSpec>>fold(_outgoingTransitions, _arrayList, _function);
+    return _fold;
   }
   
   protected String _id(final Object obj) {

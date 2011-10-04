@@ -141,7 +141,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getNamedElement()
 	 * @generated
 	 */
-	int NAMED_ELEMENT = 4;
+	int NAMED_ELEMENT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -169,7 +169,171 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecutionState()
 	 * @generated
 	 */
-	int EXECUTION_STATE = 1;
+	int EXECUTION_STATE = 4;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ReactionImpl <em>Reaction</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.ReactionImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getReaction()
+	 * @generated
+	 */
+	int REACTION = 5;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StepImpl <em>Step</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.StepImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStep()
+	 * @generated
+	 */
+	int STEP = 6;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.SequenceImpl <em>Sequence</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.SequenceImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getSequence()
+	 * @generated
+	 */
+	int SEQUENCE = 7;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CycleImpl <em>Cycle</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.CycleImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCycle()
+	 * @generated
+	 */
+	int CYCLE = 8;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CheckImpl <em>Check</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.CheckImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCheck()
+	 * @generated
+	 */
+	int CHECK = 9;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.IfImpl <em>If</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.IfImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getIf()
+	 * @generated
+	 */
+	int IF = 11;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionImpl <em>Execution</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.ExecutionImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecution()
+	 * @generated
+	 */
+	int EXECUTION = 12;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.EnterStateImpl <em>Enter State</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.EnterStateImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getEnterState()
+	 * @generated
+	 */
+	int ENTER_STATE = 13;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExitStateImpl <em>Exit State</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.ExitStateImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExitState()
+	 * @generated
+	 */
+	int EXIT_STATE = 14;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StateVectorImpl <em>State Vector</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.StateVectorImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateVector()
+	 * @generated
+	 */
+	int STATE_VECTOR = 2;
+
+	/**
+	 * The feature id for the '<em><b>Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_VECTOR__SIZE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_VECTOR__OFFSET = 1;
+
+	/**
+	 * The number of structural features of the '<em>State Vector</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_VECTOR_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TimeEventImpl <em>Time Event</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.TimeEventImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTimeEvent()
+	 * @generated
+	 */
+	int TIME_EVENT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_EVENT__NAME = SGraphPackage.EVENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Periodic</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_EVENT__PERIODIC = SGraphPackage.EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Time Event</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_EVENT_FEATURE_COUNT = SGraphPackage.EVENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -244,16 +408,6 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_STATE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ReactionImpl <em>Reaction</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.ReactionImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getReaction()
-	 * @generated
-	 */
-	int REACTION = 2;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -288,123 +442,6 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int REACTION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StepImpl <em>Step</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.StepImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStep()
-	 * @generated
-	 */
-	int STEP = 5;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.SequenceImpl <em>Sequence</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.SequenceImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getSequence()
-	 * @generated
-	 */
-	int SEQUENCE = 6;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CycleImpl <em>Cycle</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.CycleImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCycle()
-	 * @generated
-	 */
-	int CYCLE = 7;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CheckImpl <em>Check</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.CheckImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCheck()
-	 * @generated
-	 */
-	int CHECK = 8;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.IfImpl <em>If</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.IfImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getIf()
-	 * @generated
-	 */
-	int IF = 9;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionImpl <em>Execution</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.ExecutionImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecution()
-	 * @generated
-	 */
-	int EXECUTION = 10;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.EnterStateImpl <em>Enter State</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.EnterStateImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getEnterState()
-	 * @generated
-	 */
-	int ENTER_STATE = 11;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExitStateImpl <em>Exit State</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.ExitStateImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExitState()
-	 * @generated
-	 */
-	int EXIT_STATE = 12;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StateVectorImpl <em>State Vector</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.StateVectorImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateVector()
-	 * @generated
-	 */
-	int STATE_VECTOR = 3;
-
-	/**
-	 * The feature id for the '<em><b>Size</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE_VECTOR__SIZE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Offset</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE_VECTOR__OFFSET = 1;
-
-	/**
-	 * The number of structural features of the '<em>State Vector</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE_VECTOR_FEATURE_COUNT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -540,6 +577,91 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHECK_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CallImpl <em>Call</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.CallImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCall()
+	 * @generated
+	 */
+	int CALL = 15;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ScheduleTimeEventImpl <em>Schedule Time Event</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.ScheduleTimeEventImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getScheduleTimeEvent()
+	 * @generated
+	 */
+	int SCHEDULE_TIME_EVENT = 16;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.UnscheduleTimeEventImpl <em>Unschedule Time Event</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.UnscheduleTimeEventImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getUnscheduleTimeEvent()
+	 * @generated
+	 */
+	int UNSCHEDULE_TIME_EVENT = 17;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CheckRefImpl <em>Check Ref</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.CheckRefImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCheckRef()
+	 * @generated
+	 */
+	int CHECK_REF = 10;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK_REF__NAME = CHECK__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK_REF__COMMENT = CHECK__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK_REF__CONDITION = CHECK__CONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Check</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK_REF__CHECK = CHECK_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Check Ref</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK_REF_FEATURE_COUNT = CHECK_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -704,16 +826,6 @@ public interface SexecPackage extends EPackage {
 	int EXIT_STATE_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CallImpl <em>Call</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.CallImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCall()
-	 * @generated
-	 */
-	int CALL = 13;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -750,23 +862,13 @@ public interface SexecPackage extends EPackage {
 	int CALL_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CheckRefImpl <em>Check Ref</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.CheckRefImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCheckRef()
-	 * @generated
-	 */
-	int CHECK_REF = 14;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHECK_REF__NAME = CHECK__NAME;
+	int SCHEDULE_TIME_EVENT__NAME = STEP__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -775,34 +877,70 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CHECK_REF__COMMENT = CHECK__COMMENT;
+	int SCHEDULE_TIME_EVENT__COMMENT = STEP__COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
+	 * The feature id for the '<em><b>Time Event</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHECK_REF__CONDITION = CHECK__CONDITION;
+	int SCHEDULE_TIME_EVENT__TIME_EVENT = STEP_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Check</b></em>' reference.
+	 * The feature id for the '<em><b>Time Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHECK_REF__CHECK = CHECK_FEATURE_COUNT + 0;
+	int SCHEDULE_TIME_EVENT__TIME_VALUE = STEP_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Check Ref</em>' class.
+	 * The number of structural features of the '<em>Schedule Time Event</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHECK_REF_FEATURE_COUNT = CHECK_FEATURE_COUNT + 1;
+	int SCHEDULE_TIME_EVENT_FEATURE_COUNT = STEP_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNSCHEDULE_TIME_EVENT__NAME = STEP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNSCHEDULE_TIME_EVENT__COMMENT = STEP__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Time Event</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNSCHEDULE_TIME_EVENT__TIME_EVENT = STEP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Unschedule Time Event</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNSCHEDULE_TIME_EVENT_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
 
 
 	/**
@@ -1189,6 +1327,59 @@ public interface SexecPackage extends EPackage {
 	EReference getCall_Step();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ScheduleTimeEvent <em>Schedule Time Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Schedule Time Event</em>'.
+	 * @see org.yakindu.sct.model.sexec.ScheduleTimeEvent
+	 * @generated
+	 */
+	EClass getScheduleTimeEvent();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.ScheduleTimeEvent#getTimeEvent <em>Time Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Time Event</em>'.
+	 * @see org.yakindu.sct.model.sexec.ScheduleTimeEvent#getTimeEvent()
+	 * @see #getScheduleTimeEvent()
+	 * @generated
+	 */
+	EReference getScheduleTimeEvent_TimeEvent();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ScheduleTimeEvent#getTimeValue <em>Time Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Time Value</em>'.
+	 * @see org.yakindu.sct.model.sexec.ScheduleTimeEvent#getTimeValue()
+	 * @see #getScheduleTimeEvent()
+	 * @generated
+	 */
+	EReference getScheduleTimeEvent_TimeValue();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.UnscheduleTimeEvent <em>Unschedule Time Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unschedule Time Event</em>'.
+	 * @see org.yakindu.sct.model.sexec.UnscheduleTimeEvent
+	 * @generated
+	 */
+	EClass getUnscheduleTimeEvent();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.UnscheduleTimeEvent#getTimeEvent <em>Time Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Time Event</em>'.
+	 * @see org.yakindu.sct.model.sexec.UnscheduleTimeEvent#getTimeEvent()
+	 * @see #getUnscheduleTimeEvent()
+	 * @generated
+	 */
+	EReference getUnscheduleTimeEvent_TimeEvent();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.CheckRef <em>Check Ref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1240,6 +1431,27 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getStateVector_Offset();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.TimeEvent <em>Time Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Time Event</em>'.
+	 * @see org.yakindu.sct.model.sexec.TimeEvent
+	 * @generated
+	 */
+	EClass getTimeEvent();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sexec.TimeEvent#isPeriodic <em>Periodic</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Periodic</em>'.
+	 * @see org.yakindu.sct.model.sexec.TimeEvent#isPeriodic()
+	 * @see #getTimeEvent()
+	 * @generated
+	 */
+	EAttribute getTimeEvent_Periodic();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1578,6 +1790,50 @@ public interface SexecPackage extends EPackage {
 		EReference CALL__STEP = eINSTANCE.getCall_Step();
 
 		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ScheduleTimeEventImpl <em>Schedule Time Event</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.ScheduleTimeEventImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getScheduleTimeEvent()
+		 * @generated
+		 */
+		EClass SCHEDULE_TIME_EVENT = eINSTANCE.getScheduleTimeEvent();
+
+		/**
+		 * The meta object literal for the '<em><b>Time Event</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCHEDULE_TIME_EVENT__TIME_EVENT = eINSTANCE.getScheduleTimeEvent_TimeEvent();
+
+		/**
+		 * The meta object literal for the '<em><b>Time Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCHEDULE_TIME_EVENT__TIME_VALUE = eINSTANCE.getScheduleTimeEvent_TimeValue();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.UnscheduleTimeEventImpl <em>Unschedule Time Event</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.UnscheduleTimeEventImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getUnscheduleTimeEvent()
+		 * @generated
+		 */
+		EClass UNSCHEDULE_TIME_EVENT = eINSTANCE.getUnscheduleTimeEvent();
+
+		/**
+		 * The meta object literal for the '<em><b>Time Event</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNSCHEDULE_TIME_EVENT__TIME_EVENT = eINSTANCE.getUnscheduleTimeEvent_TimeEvent();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.CheckRefImpl <em>Check Ref</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1620,6 +1876,24 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STATE_VECTOR__OFFSET = eINSTANCE.getStateVector_Offset();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.TimeEventImpl <em>Time Event</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.TimeEventImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTimeEvent()
+		 * @generated
+		 */
+		EClass TIME_EVENT = eINSTANCE.getTimeEvent();
+
+		/**
+		 * The meta object literal for the '<em><b>Periodic</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TIME_EVENT__PERIODIC = eINSTANCE.getTimeEvent_Periodic();
 
 	}
 

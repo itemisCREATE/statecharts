@@ -14,7 +14,10 @@ import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.Reaction;
+import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
+import org.yakindu.sct.model.sexec.TimeEvent;
+import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.SequencerModule;
 import org.yakindu.sct.model.sgraph.Declaration;
@@ -36,8 +39,13 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
+import org.yakindu.sct.model.stext.stext.MultiplicativeOperator;
+import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
+import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
+import org.yakindu.sct.model.stext.stext.TimeEventType;
+import org.yakindu.sct.model.stext.stext.TimeUnit;
 import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
@@ -653,6 +661,87 @@ public class ModelSequencerTest {
 		assertNotNull(flow.getStateVector());
 		assertEquals(0, flow.getStateVector().getSize());
 		assertEquals(0, flow.getStateVector().getOffset());
+	}
+	
+	
+	/**
+	 * If a time trigger is defined for a transition then an event must be introduced into the execution flow.
+	 */
+	@Test public void testSingleTransitionTimeTrigger() {
+		
+		Statechart sc = _createStatechart("test");
+		Scope scope = _createInterfaceScope("interface", sc);
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		Region r = _createRegion("main", sc);
+		State s= _createState("s", r);
+
+		Transition t = _createTransition(s, s);
+		ReactionTrigger tr1 = _createReactionTrigger(t);
+		_createTimeEventSpec(TimeEventType.AFTER, 1, TimeUnit.SECOND, tr1);
+
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), (ReactionEffect) t.getEffect());
+		
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		// assert definition of time event
+		Scope timerScope = flow.getScopes().get(1);
+		assertTrue(timerScope.getDeclarations().get(0) instanceof TimeEvent);
+		
+		TimeEvent te = (TimeEvent) timerScope.getDeclarations().get(0);
+		
+		// assert that the reaction check checks the time event
+		assertEquals(1, flow.getStates().size());
+		ExecutionState _s = flow.getStates().get(0);
+		assertEquals(s.getName(), _s.getSimpleName());
+		If _if = (If) flow.getStates().get(0).getCycle().getSteps().get(0);
+
+		ElementReferenceExpression _ere = (ElementReferenceExpression) _if.getCheck().getCondition();
+		assertSame(te, _ere.getValue());
+		
+		// assert the scheduling of the time event during state entry
+		assertNotNull(_s.getEntryAction());
+		Sequence entryAction = (Sequence) _s.getEntryAction();
+		ScheduleTimeEvent ste = (ScheduleTimeEvent) entryAction.getSteps().get(0);
+		assertSame(te, ste.getTimeEvent());
+		NumericalMultiplyDivideExpression multiply = (NumericalMultiplyDivideExpression) ste.getTimeValue();
+		assertEquals("1", ((PrimitiveValueExpression)multiply.getLeftOperand()).getValue());
+		assertEquals("1000", ((PrimitiveValueExpression)multiply.getRightOperand()).getValue());
+		assertEquals(MultiplicativeOperator.MUL, multiply.getOperator());
+				
+		
+		// assert the unscheduling of the time events during state exit
+		assertNotNull(_s.getExitAction());
+		Sequence exitAction = (Sequence) _s.getExitAction();
+		UnscheduleTimeEvent ute = (UnscheduleTimeEvent) exitAction.getSteps().get(0);
+		assertSame(te, ute.getTimeEvent());
+	}
+
+	/**
+	 * 
+	 */
+	@Test public void testSingleLocalTimeTrigger() {
+		
+		Statechart sc = _createStatechart("test");
+		Scope scope = _createInterfaceScope("interface", sc);
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		Region r = _createRegion("main", sc);
+		State s= _createState("s", r);
+
+		LocalReaction timeTriggeredReaction = _createTimeTriggeredReaction(s, TimeEventType.AFTER, 2, TimeUnit.MILLISECOND);
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), (ReactionEffect) timeTriggeredReaction.getEffect());
+		
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		Scope timerScope = flow.getScopes().get(1);
+		assertTrue(timerScope.getDeclarations().get(0) instanceof EventDefinition);
+		
+		
+		fail("incomplete test: time event check");
+
+		fail("incomplete test: scheduling time events");
+		
+		fail("incomplete test: unscheduling time events");
+
 	}
 
 }

@@ -52,6 +52,13 @@ import org.yakindu.sct.model.stext.stext.ExitEvent
 import org.eclipse.xtext.common.services.Ecore2XtextTerminalConverters
 import org.eclipse.emf.ecore.util.EcoreUtil$AbstractFilteredSettingsIterator
 import java.util.ArrayList
+import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.stext.stext.TimeEventType
+import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
+import org.yakindu.sct.model.stext.stext.TimeUnit
+import org.yakindu.sct.model.stext.stext.MultiplicativeOperator
+import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
 
 class ModelSequencer {
 	
@@ -70,6 +77,7 @@ class ModelSequencer {
 		// during mapping the basic structural elements will be mapped from the source statechart to the execution flow
 		sc.mapScopes(ef)
 		sc.mapStates(ef)
+		sc.mapTimeEvents(ef)
 		sc.mapTransitions(ef)
 		
 		// derive all additional information that is necessary for the execution
@@ -144,6 +152,40 @@ class ModelSequencer {
 	}
 	 
 
+	/** Time trigger will be mapped to execution model time events for each real state. */
+	def ExecutionFlow mapTimeEvents(Statechart statechart, ExecutionFlow r) {
+		var content = EcoreUtil2::eAllContentsAsList(statechart)
+		val allStates = content.filter(typeof(State))
+		allStates.forEach( s | s.mapTimeEventSpecs)
+		return r
+	}
+	
+	
+	def mapTimeEventSpecs(State state) {
+		
+		val timeEventSpecs = state.timeEventSpecs
+		
+		val result = new ArrayList<TimeEvent>();
+		for (tes : timeEventSpecs ) {
+			val timeEvent = tes.createDerivedEvent
+			timeEvent.name = state.name + "_time_event_" + timeEventSpecs.indexOf(tes);
+			state.statechart.create.timeEventScope.declarations.add(timeEvent);
+			result.add(timeEvent);
+			
+		}	
+		
+//		var result = timeEventSpecs.map( tes | { 
+//			val timeEvent = tes.createDerivedEvent
+//			timeEvent.name = state.name + "_time_event_" + timeEventSpecs.indexOf(tes);
+//			state.statechart.create.timeEventScope.declarations.add(timeEvent);
+//			timeEvent
+//		})
+				
+		result
+	}
+	
+
+
 	def ExecutionFlow mapTransitions(Statechart statechart, ExecutionFlow r){
 		var content = EcoreUtil2::eAllContentsAsList(statechart)
 		val allStates = content.filter(e | e instanceof State)
@@ -201,9 +243,20 @@ class ModelSequencer {
 	}
 	
 	
+	/** 
+	 * The entry action sequence of a state consist all action that are specified with the 'entry' pseudo trigger within local reactions
+	 * and all scheduling actions for time triggers.
+	 */
 	def Step mapEntryAction(State state) {
 		val seq = sexecFactory.createSequence
 		seq.name = "entryAction"
+		
+		for (tes : state.timeEventSpecs ) {
+			val timeEvent = tes.createDerivedEvent
+			val scheduleStep = timeEvent.newScheduleTimeEvent(tes.buildValueExpression)
+			seq.steps.add(scheduleStep)
+		}	
+		
 		state.entryReactions
 			.map([lr | if (lr.effect != null) { (lr.effect as ReactionEffect).mapEffect } else null])
 			.forEach(e | if (e != null) { seq.steps.add(e) })
@@ -211,9 +264,58 @@ class ModelSequencer {
 		if (seq.steps.size > 0) seq else null
 	}
 	
+	
+	def Statement buildValueExpression(TimeEventSpec tes) {
+		val PrimitiveValueExpression pve = stextFactory.createPrimitiveValueExpression 
+		pve.value = tes.value.toString
+	
+		switch (tes.unit) {
+			case TimeUnit::MILLISECOND : pve
+			case TimeUnit::NANOSECOND  : pve.divide(1000)
+			case TimeUnit::SECOND      : pve.multiply(1000)
+			default : pve
+		} 
+	}
+	
+	
+	def Statement divide(Expression stmnt, long divisor) {
+		val NumericalMultiplyDivideExpression div = stextFactory.createNumericalMultiplyDivideExpression
+		val PrimitiveValueExpression pve = stextFactory.createPrimitiveValueExpression 
+		pve.value = divisor.toString
+		
+		div.operator = MultiplicativeOperator::DIV
+		div.leftOperand = stmnt
+		div.rightOperand = pve
+		
+		div
+	}
+	
+	def Statement multiply(Expression stmnt, long factor) {
+		val NumericalMultiplyDivideExpression div = stextFactory.createNumericalMultiplyDivideExpression
+		val PrimitiveValueExpression pve = stextFactory.createPrimitiveValueExpression 
+		pve.value = factor.toString
+		
+		div.operator = MultiplicativeOperator::MUL
+		div.leftOperand = stmnt
+		div.rightOperand = pve
+		
+		div
+	}
+
+	/** 
+	 * The exit action sequence of a state consist all action that are specified with the 'exit' pseudo trigger within local reactions
+	 * and all unscheduling actions for time triggers.
+	 */
 	def Step mapExitAction(State state) {
 		val seq = sexecFactory.createSequence
 		seq.name = "exitAction"
+		
+		for (tes : state.timeEventSpecs ) {
+			val timeEvent = tes.createDerivedEvent
+			val unscheduleStep = timeEvent.newUnscheduleTimeEvent()
+			seq.steps.add(unscheduleStep)
+		}	
+		
 		state.exitReactions
 			.map([lr | if (lr.effect != null) { (lr.effect as ReactionEffect).mapEffect } else null])
 			.forEach(e | if (e != null) { seq.steps.add(e) })
@@ -248,30 +350,7 @@ class ModelSequencer {
 		return cycle
 	}
 	
-//	def Cycle create r : sexecFactory.createCycle buildCycle(State state) {	
-//		val folded = state.outgoingTransitions.reverseView.fold(null as If, [s, t | {
-//				var ifStep = t.buildTransitionSequence
-//				// TODO then ...
-//				ifStep.elseStep = s
-//				ifStep
-//			}])
-//			
-//		if (folded != null) r.steps.add(folded)
-//	}
 	
-	
-//	def If buildTransitionSequence(Transition t) {
-//		var ifStep = sexecFactory.createIf
-//		if (t.trigger != null) ifStep.check = t.trigger.mapToCheck 
-//		val thenSequence = sexecFactory.createSequence 
-//		ifStep.thenStep = thenSequence
-//		if (t.source != null) thenSequence.steps.add(newExitStateStep(t.source as State))		
-//		if (t.target != null) thenSequence.steps.add(newEnterStateStep(t.target as State))
-//		
-//		return ifStep	
-//	}
-	
-
 	def dispatch Check mapToCheck(Trigger tr) { null }
 	  
 	def dispatch Check mapToCheck(ReactionTrigger tr) {
@@ -280,10 +359,8 @@ class ModelSequencer {
 		return check
 	}
 	
-	def dispatch Statement buildCondition (Trigger t) {
-		null
-	}
 	
+	def dispatch Statement buildCondition (Trigger t) { null }
 	
 	def dispatch Statement buildCondition (ReactionTrigger t) {
 		if (! t.triggers.empty) t.triggers.reverseView.fold(null as Expression,
@@ -309,11 +386,34 @@ class ModelSequencer {
 	def dispatch Expression raised(EventSpec e) {
 	}
 
-
 	def dispatch Expression raised(RegularEventSpec e) {
 		val r = stextFactory.createElementReferenceExpression
 		r.value = (e.event as EventDefinition).create
 		return r
+	}
+	
+	def dispatch Expression raised(TimeEventSpec e) {
+		val r = stextFactory.createElementReferenceExpression
+		r.value = e.createDerivedEvent
+		return r
+	}
+
+	
+	
+	/* ==========================================================================
+	 * HANDLING TIME EVENTS
+	 */
+	 
+	
+	
+	def TimeEvent create r : sexecFactory.createTimeEvent createDerivedEvent(TimeEventSpec tes) {
+		r.periodic = tes.type == TimeEventType::EVERY
+	}
+		
+	//def flow(ExecutionState state) { state.eContainer as ExecutionFlow }
+	
+	def Scope create r : sgraphFactory.createScope timeEventScope(ExecutionFlow flow) {
+		flow.scopes.add(r);
 	}
 	
 	
@@ -393,9 +493,14 @@ class ModelSequencer {
 		ed.create	
 	}
 	
+	def dispatch replaced(TimeEvent ed) {
+		ed	
+	}
+	
 	
 	//--------- UTILS ---------------
 	def sexecFactory() { SexecFactory::eINSTANCE }
+	def sgraphFactory() { SGraphFactory::eINSTANCE }
 	def stextFactory() { StextFactory::eINSTANCE }
 	
 	

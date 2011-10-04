@@ -352,6 +352,52 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.ScheduleTimeEvent} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ScheduleTimeEventItemProvider scheduleTimeEventItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.ScheduleTimeEvent}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createScheduleTimeEventAdapter() {
+		if (scheduleTimeEventItemProvider == null) {
+			scheduleTimeEventItemProvider = new ScheduleTimeEventItemProvider(this);
+		}
+
+		return scheduleTimeEventItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.UnscheduleTimeEvent} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UnscheduleTimeEventItemProvider unscheduleTimeEventItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.UnscheduleTimeEvent}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUnscheduleTimeEventAdapter() {
+		if (unscheduleTimeEventItemProvider == null) {
+			unscheduleTimeEventItemProvider = new UnscheduleTimeEventItemProvider(this);
+		}
+
+		return unscheduleTimeEventItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.CheckRef} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -395,6 +441,29 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		}
 
 		return stateVectorItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.TimeEvent} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TimeEventItemProvider timeEventItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.TimeEvent}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTimeEventAdapter() {
+		if (timeEventItemProvider == null) {
+			timeEventItemProvider = new TimeEventItemProvider(this);
+		}
+
+		return timeEventItemProvider;
 	}
 
 	/**
@@ -497,19 +566,22 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	 */
 	public void dispose() {
 		if (executionFlowItemProvider != null) executionFlowItemProvider.dispose();
+		if (namedElementItemProvider != null) namedElementItemProvider.dispose();
+		if (stateVectorItemProvider != null) stateVectorItemProvider.dispose();
+		if (timeEventItemProvider != null) timeEventItemProvider.dispose();
 		if (executionStateItemProvider != null) executionStateItemProvider.dispose();
 		if (reactionItemProvider != null) reactionItemProvider.dispose();
-		if (stateVectorItemProvider != null) stateVectorItemProvider.dispose();
-		if (namedElementItemProvider != null) namedElementItemProvider.dispose();
 		if (sequenceItemProvider != null) sequenceItemProvider.dispose();
 		if (cycleItemProvider != null) cycleItemProvider.dispose();
 		if (checkItemProvider != null) checkItemProvider.dispose();
+		if (checkRefItemProvider != null) checkRefItemProvider.dispose();
 		if (ifItemProvider != null) ifItemProvider.dispose();
 		if (executionItemProvider != null) executionItemProvider.dispose();
 		if (enterStateItemProvider != null) enterStateItemProvider.dispose();
 		if (exitStateItemProvider != null) exitStateItemProvider.dispose();
 		if (callItemProvider != null) callItemProvider.dispose();
-		if (checkRefItemProvider != null) checkRefItemProvider.dispose();
+		if (scheduleTimeEventItemProvider != null) scheduleTimeEventItemProvider.dispose();
+		if (unscheduleTimeEventItemProvider != null) unscheduleTimeEventItemProvider.dispose();
 	}
 
 }

@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
 import org.yakindu.sct.model.sexec.*;
+import org.yakindu.sct.model.sgraph.Declaration;
+import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 
 /**
@@ -79,6 +81,27 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SexecPackage.NAMED_ELEMENT: {
+				NamedElement namedElement = (NamedElement)theEObject;
+				T result = caseNamedElement(namedElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.STATE_VECTOR: {
+				StateVector stateVector = (StateVector)theEObject;
+				T result = caseStateVector(stateVector);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.TIME_EVENT: {
+				TimeEvent timeEvent = (TimeEvent)theEObject;
+				T result = caseTimeEvent(timeEvent);
+				if (result == null) result = caseEvent(timeEvent);
+				if (result == null) result = caseDeclaration(timeEvent);
+				if (result == null) result = caseSGraph_NamedElement(timeEvent);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case SexecPackage.EXECUTION_STATE: {
 				ExecutionState executionState = (ExecutionState)theEObject;
 				T result = caseExecutionState(executionState);
@@ -90,18 +113,6 @@ public class SexecSwitch<T> extends Switch<T> {
 				Reaction reaction = (Reaction)theEObject;
 				T result = caseReaction(reaction);
 				if (result == null) result = caseNamedElement(reaction);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case SexecPackage.STATE_VECTOR: {
-				StateVector stateVector = (StateVector)theEObject;
-				T result = caseStateVector(stateVector);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case SexecPackage.NAMED_ELEMENT: {
-				NamedElement namedElement = (NamedElement)theEObject;
-				T result = caseNamedElement(namedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -134,6 +145,15 @@ public class SexecSwitch<T> extends Switch<T> {
 				T result = caseCheck(check);
 				if (result == null) result = caseStep(check);
 				if (result == null) result = caseNamedElement(check);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.CHECK_REF: {
+				CheckRef checkRef = (CheckRef)theEObject;
+				T result = caseCheckRef(checkRef);
+				if (result == null) result = caseCheck(checkRef);
+				if (result == null) result = caseStep(checkRef);
+				if (result == null) result = caseNamedElement(checkRef);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -177,12 +197,19 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SexecPackage.CHECK_REF: {
-				CheckRef checkRef = (CheckRef)theEObject;
-				T result = caseCheckRef(checkRef);
-				if (result == null) result = caseCheck(checkRef);
-				if (result == null) result = caseStep(checkRef);
-				if (result == null) result = caseNamedElement(checkRef);
+			case SexecPackage.SCHEDULE_TIME_EVENT: {
+				ScheduleTimeEvent scheduleTimeEvent = (ScheduleTimeEvent)theEObject;
+				T result = caseScheduleTimeEvent(scheduleTimeEvent);
+				if (result == null) result = caseStep(scheduleTimeEvent);
+				if (result == null) result = caseNamedElement(scheduleTimeEvent);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.UNSCHEDULE_TIME_EVENT: {
+				UnscheduleTimeEvent unscheduleTimeEvent = (UnscheduleTimeEvent)theEObject;
+				T result = caseUnscheduleTimeEvent(unscheduleTimeEvent);
+				if (result == null) result = caseStep(unscheduleTimeEvent);
+				if (result == null) result = caseNamedElement(unscheduleTimeEvent);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -386,6 +413,36 @@ public class SexecSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Schedule Time Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Schedule Time Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScheduleTimeEvent(ScheduleTimeEvent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unschedule Time Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unschedule Time Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnscheduleTimeEvent(UnscheduleTimeEvent object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Check Ref</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -416,6 +473,21 @@ public class SexecSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Time Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Time Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTimeEvent(TimeEvent object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Scoped Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -427,6 +499,51 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseScopedElement(ScopedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSGraph_NamedElement(org.yakindu.sct.model.sgraph.NamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeclaration(Declaration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEvent(Event object) {
 		return null;
 	}
 
