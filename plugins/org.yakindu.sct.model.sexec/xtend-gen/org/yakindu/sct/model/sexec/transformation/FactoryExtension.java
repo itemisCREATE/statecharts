@@ -12,13 +12,17 @@ import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.Step;
+import org.yakindu.sct.model.sexec.TimeEvent;
+import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
@@ -206,6 +210,31 @@ public class FactoryExtension {
       Call _createCall = _sexecFactory.createCall();
       final Call r = _createCall;
       r.setStep(step);
+      _xblockexpression = (r);
+    }
+    return _xblockexpression;
+  }
+  
+  public ScheduleTimeEvent newScheduleTimeEvent(final TimeEvent te, final Statement timeValue) {
+    ScheduleTimeEvent _xblockexpression = null;
+    {
+      SexecFactory _sexecFactory = this.sexecFactory();
+      ScheduleTimeEvent _createScheduleTimeEvent = _sexecFactory.createScheduleTimeEvent();
+      final ScheduleTimeEvent r = _createScheduleTimeEvent;
+      r.setTimeEvent(te);
+      r.setTimeValue(timeValue);
+      _xblockexpression = (r);
+    }
+    return _xblockexpression;
+  }
+  
+  public UnscheduleTimeEvent newUnscheduleTimeEvent(final TimeEvent te) {
+    UnscheduleTimeEvent _xblockexpression = null;
+    {
+      SexecFactory _sexecFactory = this.sexecFactory();
+      UnscheduleTimeEvent _createUnscheduleTimeEvent = _sexecFactory.createUnscheduleTimeEvent();
+      final UnscheduleTimeEvent r = _createUnscheduleTimeEvent;
+      r.setTimeEvent(te);
       _xblockexpression = (r);
     }
     return _xblockexpression;

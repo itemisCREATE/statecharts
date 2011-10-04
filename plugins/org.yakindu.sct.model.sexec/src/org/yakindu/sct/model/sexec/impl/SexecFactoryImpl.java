@@ -61,19 +61,22 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case SexecPackage.EXECUTION_FLOW: return createExecutionFlow();
+			case SexecPackage.NAMED_ELEMENT: return createNamedElement();
+			case SexecPackage.STATE_VECTOR: return createStateVector();
+			case SexecPackage.TIME_EVENT: return createTimeEvent();
 			case SexecPackage.EXECUTION_STATE: return createExecutionState();
 			case SexecPackage.REACTION: return createReaction();
-			case SexecPackage.STATE_VECTOR: return createStateVector();
-			case SexecPackage.NAMED_ELEMENT: return createNamedElement();
 			case SexecPackage.SEQUENCE: return createSequence();
 			case SexecPackage.CYCLE: return createCycle();
 			case SexecPackage.CHECK: return createCheck();
+			case SexecPackage.CHECK_REF: return createCheckRef();
 			case SexecPackage.IF: return createIf();
 			case SexecPackage.EXECUTION: return createExecution();
 			case SexecPackage.ENTER_STATE: return createEnterState();
 			case SexecPackage.EXIT_STATE: return createExitState();
 			case SexecPackage.CALL: return createCall();
-			case SexecPackage.CHECK_REF: return createCheckRef();
+			case SexecPackage.SCHEDULE_TIME_EVENT: return createScheduleTimeEvent();
+			case SexecPackage.UNSCHEDULE_TIME_EVENT: return createUnscheduleTimeEvent();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -204,6 +207,26 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ScheduleTimeEvent createScheduleTimeEvent() {
+		ScheduleTimeEventImpl scheduleTimeEvent = new ScheduleTimeEventImpl();
+		return scheduleTimeEvent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnscheduleTimeEvent createUnscheduleTimeEvent() {
+		UnscheduleTimeEventImpl unscheduleTimeEvent = new UnscheduleTimeEventImpl();
+		return unscheduleTimeEvent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CheckRef createCheckRef() {
 		CheckRefImpl checkRef = new CheckRefImpl();
 		return checkRef;
@@ -217,6 +240,16 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public StateVector createStateVector() {
 		StateVectorImpl stateVector = new StateVectorImpl();
 		return stateVector;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TimeEvent createTimeEvent() {
+		TimeEventImpl timeEvent = new TimeEventImpl();
+		return timeEvent;
 	}
 
 	/**

@@ -181,6 +181,11 @@ public class ReactionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.REACTION__EFFECT,
+				 SexecFactory.eINSTANCE.createCheckRef()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.REACTION__EFFECT,
 				 SexecFactory.eINSTANCE.createIf()));
 
 		newChildDescriptors.add
@@ -206,7 +211,12 @@ public class ReactionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.REACTION__EFFECT,
-				 SexecFactory.eINSTANCE.createCheckRef()));
+				 SexecFactory.eINSTANCE.createScheduleTimeEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.REACTION__EFFECT,
+				 SexecFactory.eINSTANCE.createUnscheduleTimeEvent()));
 	}
 
 	/**

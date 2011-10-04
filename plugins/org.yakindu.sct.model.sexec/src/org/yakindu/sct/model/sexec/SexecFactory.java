@@ -134,6 +134,24 @@ public interface SexecFactory extends EFactory {
 	Call createCall();
 
 	/**
+	 * Returns a new object of class '<em>Schedule Time Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Schedule Time Event</em>'.
+	 * @generated
+	 */
+	ScheduleTimeEvent createScheduleTimeEvent();
+
+	/**
+	 * Returns a new object of class '<em>Unschedule Time Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unschedule Time Event</em>'.
+	 * @generated
+	 */
+	UnscheduleTimeEvent createUnscheduleTimeEvent();
+
+	/**
 	 * Returns a new object of class '<em>Check Ref</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -150,6 +168,15 @@ public interface SexecFactory extends EFactory {
 	 * @generated
 	 */
 	StateVector createStateVector();
+
+	/**
+	 * Returns a new object of class '<em>Time Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Time Event</em>'.
+	 * @generated
+	 */
+	TimeEvent createTimeEvent();
 
 	/**
 	 * Returns the package supported by this factory.

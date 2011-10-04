@@ -30,6 +30,10 @@ import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.sexec.CheckRef
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.ScheduleTimeEvent
+import org.yakindu.sct.model.sgraph.Statement
+import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 
 class FactoryExtension {
 	
@@ -71,11 +75,24 @@ class FactoryExtension {
 		val r = sexecFactory.createCheckRef
 		r.check = check
 		r
-	}
+	} 
 
 	def Call newCall(Step step) {
 		val r = sexecFactory.createCall
 		r.step = step
+		r
+	}
+	
+	def ScheduleTimeEvent newScheduleTimeEvent(TimeEvent te, Statement timeValue) {
+		val r = sexecFactory.createScheduleTimeEvent
+		r.timeEvent = te
+		r.timeValue = timeValue
+		r
+	}
+
+	def UnscheduleTimeEvent newUnscheduleTimeEvent(TimeEvent te) {
+		val r = sexecFactory.createUnscheduleTimeEvent
+		r.timeEvent = te
 		r
 	}
 

@@ -7,6 +7,10 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Trigger
 import org.yakindu.sct.model.sgraph.Reaction
 import org.yakindu.sct.model.sgraph.Transition
+import java.util.List
+import java.util.ArrayList
+import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import org.eclipse.xtext.EcoreUtil2
 
 class StatechartExtensions {
 	
@@ -35,11 +39,33 @@ class StatechartExtensions {
 
 
 	//=================================================================
-	// navigation util extensions
+	// navigation and query util extensions
 	//
 		
 	def reaction(Trigger tr) { tr.eContainer as Reaction }
 
+
+	def Statechart statechart(State state) { state.parentRegion.statechart }
+	
+	def Statechart statechart(Region region) { 
+		if (region.eContainer instanceof Statechart) 
+			region.eContainer as Statechart
+			else (region.eContainer as State).statechart		
+	}
+	
+	
+	/** 
+	 * Provides a list of all TimeEventSpecs that are defined in the context of 'state'.
+	 */
+	def List<TimeEventSpec> timeEventSpecs(State state) { 
+		// TODO: also query local reactions
+		state.outgoingTransitions.fold(new ArrayList<TimeEventSpec>(), 
+			[s, r | {
+				EcoreUtil2::eAllContentsAsList(r).filter(typeof (TimeEventSpec)).forEach(tes | s.add(tes))
+				s
+			}]
+		)
+	}
 
 	//=================================================================
 	// naming util extensions

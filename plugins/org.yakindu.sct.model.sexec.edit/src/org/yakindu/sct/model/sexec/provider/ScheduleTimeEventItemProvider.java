@@ -22,20 +22,20 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.yakindu.sct.model.sexec.Sequence;
-import org.yakindu.sct.model.sexec.SexecFactory;
+import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.SexecPackage;
 
+import org.yakindu.sct.model.sgraph.SGraphFactory;
+
 /**
- * This is the item provider adapter for a {@link org.yakindu.sct.model.sexec.Sequence} object.
+ * This is the item provider adapter for a {@link org.yakindu.sct.model.sexec.ScheduleTimeEvent} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class SequenceItemProvider
+public class ScheduleTimeEventItemProvider
 	extends StepItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -49,7 +49,7 @@ public class SequenceItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SequenceItemProvider(AdapterFactory adapterFactory) {
+	public ScheduleTimeEventItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -64,8 +64,31 @@ public class SequenceItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addTimeEventPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Time Event feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTimeEventPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ScheduleTimeEvent_timeEvent_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ScheduleTimeEvent_timeEvent_feature", "_UI_ScheduleTimeEvent_type"),
+				 SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_EVENT,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -80,7 +103,7 @@ public class SequenceItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(SexecPackage.Literals.SEQUENCE__STEPS);
+			childrenFeatures.add(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE);
 		}
 		return childrenFeatures;
 	}
@@ -99,14 +122,14 @@ public class SequenceItemProvider
 	}
 
 	/**
-	 * This returns Sequence.gif.
+	 * This returns ScheduleTimeEvent.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Sequence"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ScheduleTimeEvent"));
 	}
 
 	/**
@@ -117,10 +140,10 @@ public class SequenceItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Sequence)object).getName();
+		String label = ((ScheduleTimeEvent)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Sequence_type") :
-			getString("_UI_Sequence_type") + " " + label;
+			getString("_UI_ScheduleTimeEvent_type") :
+			getString("_UI_ScheduleTimeEvent_type") + " " + label;
 	}
 
 	/**
@@ -134,8 +157,8 @@ public class SequenceItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Sequence.class)) {
-			case SexecPackage.SEQUENCE__STEPS:
+		switch (notification.getFeatureID(ScheduleTimeEvent.class)) {
+			case SexecPackage.SCHEDULE_TIME_EVENT__TIME_VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -155,58 +178,8 @@ public class SequenceItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createCycle()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createCheck()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createCheckRef()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createIf()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createExecution()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createEnterState()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createExitState()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createCall()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createScheduleTimeEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createUnscheduleTimeEvent()));
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 SGraphFactory.eINSTANCE.createStatement()));
 	}
 
 }

@@ -238,6 +238,11 @@ public class ExecutionStateItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createCheckRef()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION,
 				 SexecFactory.eINSTANCE.createIf()));
 
 		newChildDescriptors.add
@@ -263,7 +268,12 @@ public class ExecutionStateItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION,
-				 SexecFactory.eINSTANCE.createCheckRef()));
+				 SexecFactory.eINSTANCE.createScheduleTimeEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createUnscheduleTimeEvent()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -283,6 +293,11 @@ public class ExecutionStateItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createCheckRef()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createIf()));
 
 		newChildDescriptors.add
@@ -308,7 +323,12 @@ public class ExecutionStateItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
-				 SexecFactory.eINSTANCE.createCheckRef()));
+				 SexecFactory.eINSTANCE.createScheduleTimeEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createUnscheduleTimeEvent()));
 	}
 
 	/**

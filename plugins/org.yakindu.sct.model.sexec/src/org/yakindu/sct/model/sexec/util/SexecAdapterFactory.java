@@ -14,6 +14,8 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
 import org.yakindu.sct.model.sexec.*;
+import org.yakindu.sct.model.sgraph.Declaration;
+import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 
 /**
@@ -77,20 +79,24 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createExecutionFlowAdapter();
 			}
 			@Override
-			public Adapter caseExecutionState(ExecutionState object) {
-				return createExecutionStateAdapter();
-			}
-			@Override
-			public Adapter caseReaction(Reaction object) {
-				return createReactionAdapter();
+			public Adapter caseNamedElement(NamedElement object) {
+				return createNamedElementAdapter();
 			}
 			@Override
 			public Adapter caseStateVector(StateVector object) {
 				return createStateVectorAdapter();
 			}
 			@Override
-			public Adapter caseNamedElement(NamedElement object) {
-				return createNamedElementAdapter();
+			public Adapter caseTimeEvent(TimeEvent object) {
+				return createTimeEventAdapter();
+			}
+			@Override
+			public Adapter caseExecutionState(ExecutionState object) {
+				return createExecutionStateAdapter();
+			}
+			@Override
+			public Adapter caseReaction(Reaction object) {
+				return createReactionAdapter();
 			}
 			@Override
 			public Adapter caseStep(Step object) {
@@ -107,6 +113,10 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCheck(Check object) {
 				return createCheckAdapter();
+			}
+			@Override
+			public Adapter caseCheckRef(CheckRef object) {
+				return createCheckRefAdapter();
 			}
 			@Override
 			public Adapter caseIf(If object) {
@@ -129,12 +139,28 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createCallAdapter();
 			}
 			@Override
-			public Adapter caseCheckRef(CheckRef object) {
-				return createCheckRefAdapter();
+			public Adapter caseScheduleTimeEvent(ScheduleTimeEvent object) {
+				return createScheduleTimeEventAdapter();
+			}
+			@Override
+			public Adapter caseUnscheduleTimeEvent(UnscheduleTimeEvent object) {
+				return createUnscheduleTimeEventAdapter();
 			}
 			@Override
 			public Adapter caseScopedElement(ScopedElement object) {
 				return createScopedElementAdapter();
+			}
+			@Override
+			public Adapter caseSGraph_NamedElement(org.yakindu.sct.model.sgraph.NamedElement object) {
+				return createSGraph_NamedElementAdapter();
+			}
+			@Override
+			public Adapter caseDeclaration(Declaration object) {
+				return createDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseEvent(Event object) {
+				return createEventAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -339,6 +365,34 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.ScheduleTimeEvent <em>Schedule Time Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.ScheduleTimeEvent
+	 * @generated
+	 */
+	public Adapter createScheduleTimeEventAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.UnscheduleTimeEvent <em>Unschedule Time Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.UnscheduleTimeEvent
+	 * @generated
+	 */
+	public Adapter createUnscheduleTimeEventAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.CheckRef <em>Check Ref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -367,6 +421,20 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.TimeEvent <em>Time Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.TimeEvent
+	 * @generated
+	 */
+	public Adapter createTimeEventAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.ScopedElement <em>Scoped Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -377,6 +445,48 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createScopedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.NamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sgraph.NamedElement
+	 * @generated
+	 */
+	public Adapter createSGraph_NamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Declaration <em>Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sgraph.Declaration
+	 * @generated
+	 */
+	public Adapter createDeclarationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Event <em>Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sgraph.Event
+	 * @generated
+	 */
+	public Adapter createEventAdapter() {
 		return null;
 	}
 

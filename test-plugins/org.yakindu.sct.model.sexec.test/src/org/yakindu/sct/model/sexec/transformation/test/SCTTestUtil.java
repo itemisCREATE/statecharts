@@ -27,6 +27,9 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.StextFactory;
+import org.yakindu.sct.model.stext.stext.TimeEventSpec;
+import org.yakindu.sct.model.stext.stext.TimeEventType;
+import org.yakindu.sct.model.stext.stext.TimeUnit;
 import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
@@ -127,17 +130,19 @@ public class SCTTestUtil {
 	}
 	
 	
+	public static TimeEventSpec _createTimeEventSpec(TimeEventType type, int value, TimeUnit unit, ReactionTrigger rt) {
+		TimeEventSpec timeTrigger = StextFactory.eINSTANCE.createTimeEventSpec();
+		timeTrigger.setType(type);
+		timeTrigger.setValue(value);
+		timeTrigger.setUnit(unit);
+
+		if (rt!=null) rt.getTriggers().add(timeTrigger);
+		return timeTrigger;
+	}
+
+	
 	public static LocalReaction _createEntryAction(ReactiveElement parent) {
-		LocalReaction reaction = StextFactory.eINSTANCE.createLocalReaction();
-		ReactionTrigger trigger = StextFactory.eINSTANCE.createReactionTrigger();
-		EntryEvent entryEvent = StextFactory.eINSTANCE.createEntryEvent();
-		_createReactionEffect(reaction);
-		
-		trigger.getTriggers().add(entryEvent);
-		reaction.setTrigger(trigger);
-		if (parent != null) parent.getLocalReactions().add(reaction);
-		
-		return reaction;
+		return _createLocalRection(parent, StextFactory.eINSTANCE.createEntryEvent() );
 	}
 	
 	
@@ -145,6 +150,15 @@ public class SCTTestUtil {
 		return _createLocalRection(parent, StextFactory.eINSTANCE.createExitEvent() );
 	}
 	
+	public static LocalReaction _createTimeTriggeredReaction(ReactiveElement parent, TimeEventType type, int value, TimeUnit unit) {
+//		TimeEventSpec timeTrigger = StextFactory.eINSTANCE.createTimeEventSpec();
+//		timeTrigger.setType(type);
+//		timeTrigger.setValue(value);
+//		timeTrigger.setUnit(unit);
+		return _createLocalRection(parent, _createTimeEventSpec(type, value, unit, null) );
+	}
+	
+
 	public static LocalReaction _createLocalRection(ReactiveElement parent, EventSpec triggerEvent) {
 		LocalReaction reaction = StextFactory.eINSTANCE.createLocalReaction();
 		ReactionTrigger trigger = StextFactory.eINSTANCE.createReactionTrigger();
