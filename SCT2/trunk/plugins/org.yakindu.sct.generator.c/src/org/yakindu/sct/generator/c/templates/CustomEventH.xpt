@@ -22,16 +22,18 @@ Templates for the main statechart cpp file.
 
 #include "Event.h"
 
-enum EventID {
+typedef enum {
 «FOREACH this.declaredEvents() AS ev»
-  _«((EventDefinition)ev).name.toLowerCase()»,
+  ev_«((EventDefinition)ev).name.toLowerCase()»,
 «ENDFOREACH»
 	event_last
-};
+} EventID;
 
 «FOREACH this.declaredEvents() AS ev»
-  class «((EventDefinition)ev).name» : public _Event { public: «((EventDefinition)ev).name»() : _Event((uint32_t)_«((EventDefinition)ev).name.toLowerCase()») {} };
-  // internal variables unhandled
+typedef struct { 
+  _Event baseEvent;
+  «REM» event variables go here «ENDREM»
+} «((EventDefinition)ev).name»;
 «ENDFOREACH»
  
 

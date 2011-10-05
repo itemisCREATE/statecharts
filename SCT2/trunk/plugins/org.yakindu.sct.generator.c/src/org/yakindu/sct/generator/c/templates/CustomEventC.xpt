@@ -1,0 +1,40 @@
+«REM»
+
+Templates for the main statechart cpp file.
+
+@auther joern seger
+
+«ENDREM»
+
+«IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
+
+«EXTENSION org::yakindu::sct::generator::c::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
+
+
+«DEFINE file FOR ExecutionFlow»
+
+«FILE EvName()+'.c'»
+#include "«EvName()».h"
+
+/* This is needed by the EventPool */
+uint32_t getSizeofEvent(uint32_t evid)
+{
+	switch((EventID) evid) {
+
+«FOREACH this.declaredEvents() AS ev -»
+  case ev_«((EventDefinition)ev).name.toLowerCase()»:
+    return sizeof(«((EventDefinition)ev).name»);
+«ENDFOREACH -»
+	default:
+		break;
+	}
+
+	return(0);
+}
+
+«ENDFILE»
+
+«ENDDEFINE»

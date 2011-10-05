@@ -23,12 +23,12 @@ Templates for the main statechart cpp file.
 #include "«DRName()».h"
 #include "«EvName()».h"
 
-enum States {
+typedef enum {
     «FOREACH this.states AS exState-»
       _«exState.simpleName», 
     «ENDFOREACH»
 	last_state
-};
+} States;
 
 #define MAX_PARALLEL_STATES «this.stateVector.size»
 

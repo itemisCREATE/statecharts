@@ -16,95 +16,123 @@ Templates for the main statechart cpp file.
 
 «DEFINE file FOR ExecutionFlow»
 
-«FILE 'main.cpp'»
-
-/*
- * main.cpp
- *
- *  Created on: 10.09.2011
- *      Author: seger
- */
-
-#include <cstdio>
-#include <iostream>
+«FILE 'main.c'»
+#include <stdio.h>
+#include <assert.h>
+#include <string.h>
+#include "Timer.h"
+#include "DummyTimer.h"
 #include "«StName()».h"
-// #include "«DRName()».h"
 #include "«EvName()».h"
 
+#define MAXEVENTSPERTYPE 4
 int main()
 {
+	const char* stateName[6] = {"State1", "State2", "State3", "State4", "State5", "State6"};
 
-	char* stateName[6] = {"State1", "State2", "State3", "State4", "State5", "State6"};
 	«StName()» machine;
+	Timer dummyTimer;
+	EventPool eventPool;
+    _Event* ev;
+    Event2* e2;
 
-	// initialize the initial states 
-	machine.init();
+	/* set up dummy Timer */
+	dummyTimer_init(&dummyTimer);
+
+	/* Set up Event Pool */
+	eventPool_init_heap(&eventPool, event_last, MAXEVENTSPERTYPE);
+
+	/* initialize state machine */
+	«stName()»_init(&machine, &dummyTimer, &eventPool);
+
+	/* check the state */
+	printf("%s\n", stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)]);
+	assert( strcmp(stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)], "State1") == 0);
+
+	/* create one event */
 	
-	/* Example code 
-	// create one event and enqueue it 
-	Event e = createEvent<Event1>();
-	machine.queueEvent(e);
+	ev = eventPool_createEvent(&eventPool, ev_event1);
 
-	// run the cycle 
-	machine.runCycle();
+	// The following would work as well
+	// This can be used, if you want to set some information within Event1
+	// e1 = ((Event1*)(eventPool_createEvent(&eventPool, ev_event1)));
 
-	// check the state 
-	std::cout << stateName[machine.getState(0)] << "\n";
-	assert( strcmp(stateName[machine.getState(0)], "State3") == 0);
+	/* set the event */
+	«stName()»_setEvent(&machine, ev);
 
-	e = createEvent<Event2>();
-	machine.queueEvent(e);
+	/* run the cycle */
+	«stName()»_runCycle(&machine);
 
-	machine.runCycle();
+	/* check the state */
+	printf("%s\n", stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)]);
+	assert( strcmp(stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)], "State3") == 0);
 
-	std::cout << stateName[machine.getState(0)] << "\n";
-	assert( strcmp(stateName[machine.getState(0)], "State1") == 0);
 
-	// does event queuing work?
-	e = createEvent<Event1>();
-	machine.queueEvent(e);
-	e = createEvent<Event3>();
-	machine.queueEvent(e);
+	e2 = ((Event2*)(eventPool_createEvent(&eventPool, ev_event2)));
+	«stName()»_setEvent(&machine, e2);
 
-	machine.runCycle();
+	«stName()»_runCycle(&machine);
 
-	std::cout << stateName[machine.getState(0)] << "\n";
-	assert( strcmp(stateName[machine.getState(0)], "State3") == 0);
+	printf("%s\n", stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)]);
+	assert( strcmp(stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)], "State1") == 0);
 
-	// run second cycle
-	machine.runCycle();
+	/* does event queuing work? */
+	ev = eventPool_createEvent(&eventPool, ev_event1);
+	«stName()»_setEvent(&machine, ev);
 
-	std::cout << stateName[machine.getState(0)] << "\n";
-	assert( strcmp(stateName[machine.getState(0)], "State4") == 0);
+	ev = eventPool_createEvent(&eventPool, ev_event3);
+	«stName()»_setEvent(&machine, ev);
 
-	e = createEvent<Event4>();
-	machine.queueEvent(e);
+	«stName()»_runCycle(&machine);
 
-	machine.runCycle();
+	printf("%s\n", stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)]);
+	assert( strcmp(stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)], "State3") == 0);
 
-	std::cout << stateName[machine.getState(0)] << "\n";
-	assert( strcmp(stateName[machine.getState(0)], "State3") == 0);
+	assert( «stName()»_eventWaiting(&machine) == bool_false );
 
-	e = createEvent<Event3>();
-	machine.queueEvent(e);
 
-	machine.runCycle();
+	ev = eventPool_createEvent(&eventPool, ev_event3);
+	«stName()»_setEvent(&machine, ev);
 
-	std::cout << stateName[machine.getState(0)] << "\n";
-	assert( strcmp(stateName[machine.getState(0)], "State4") == 0);
+	assert( «stName()»_eventWaiting(&machine) == bool_true );
 
-	e = createEvent<Event5>();
-	machine.queueEvent(e);
+	«stName()»_runCycle(&machine);
 
-	machine.runCycle();
+	printf("%s\n", stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)]);
+	assert( strcmp(stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)], "State4") == 0);
 
-	std::cout << stateName[machine.getState(0)] << "\n";
-	assert( strcmp(stateName[machine.getState(0)], "State1") == 0);
 
-	*/
-	
+	ev = eventPool_createEvent(&eventPool, ev_event4);
+	«stName()»_setEvent(&machine, ev);
+
+	«stName()»_runCycle(&machine);
+
+	printf("%s\n", stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)]);
+	assert( strcmp(stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)], "State3") == 0);
+
+
+	ev = eventPool_createEvent(&eventPool, ev_event3);
+	«stName()»_setEvent(&machine, ev);
+
+	«stName()»_runCycle(&machine);
+
+	printf("%s\n", stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)]);
+	assert( strcmp(stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)], "State4") == 0);
+
+
+	ev = eventPool_createEvent(&eventPool, ev_event5);
+	«stName()»_setEvent(&machine, ev);
+
+	«stName()»_runCycle(&machine);
+
+	printf("%s\n", stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)]);
+	assert( strcmp(stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)], "State1") == 0);
+
+	«stName()»_exit(&machine);
+	timer_exit(&dummyTimer);
+	eventPool_exit(&eventPool);
+
 	return(0);
-	
 }
 
 «ENDFILE»

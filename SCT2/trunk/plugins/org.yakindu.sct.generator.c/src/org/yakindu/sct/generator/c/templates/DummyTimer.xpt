@@ -1,0 +1,47 @@
+«REM»
+
+Templates for the main statechart c file.
+
+@auther joern seger
+
+«ENDREM»
+
+«IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
+
+
+«DEFINE file FOR ExecutionFlow»
+
+«FILE 'DummyTimer.h'»
+#ifndef DUMMYTIMER_H_
+#define DUMMYTIMER_H_
+
+#include "Timer.h"
+
+extern void setTimer(const uint32_t evid, const uint32_t time_ms,
+		boolean periodic);
+
+extern void unsetTimer(const uint32_t evid);
+
+extern void dummyTimer_init(Timer* handle);
+
+#endif /* DUMMYTIMER_H_ */
+«ENDFILE»
+
+«FILE 'DummyTimer.c'»
+#include "DummyTimer.h"
+
+void setTimer(const uint32_t evid, const uint32_t time_ms, boolean periodic)
+{}
+
+void unsetTimer(const uint32_t evid)
+{}
+
+void dummyTimer_init(Timer* handle)
+{
+	timer_setFPtr(handle, &setTimer, unsetTimer);
+}
+«ENDFILE»
+
+«ENDDEFINE»
