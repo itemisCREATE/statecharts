@@ -19,7 +19,6 @@ Templates for the main statechart c file.
 
 #include "EventSet.h"
 #include "StatemachineBase.h"
-#include "generatedSource/VariableData.h"
 #include "Timer.h"
 #include "EventPool.h"
 

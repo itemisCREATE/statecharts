@@ -18,10 +18,18 @@ Templates for the main statechart cpp file.
 «FILE 'CMakeLists.txt'»
 cmake_minimum_required(VERSION 2.8)
 
-set(SRC
-	Statemachine.cpp
-	«StName()».cpp
-	main.cpp
+set( SRC
+	Statemachine_cy.c
+	StatemachineBase.c
+	Event.c
+	EventSet.c
+	EventPool.c
+	«StName()».c
+	«EvName()».c
+	«DRName()».c
+	Timer.c
+	DummyTimer.c
+	main.c
 )
 
 add_definitions( -Wall -O0 -g)
