@@ -26,7 +26,7 @@
 		<echo message="Skipping repositories: ${skipRepositories}" />
 		<if>
 			<or>
-				<equals arg1="${skipRepositories}" arg2="false" />
+				<equals arg1="${skipRepositories}" arg2="true" />
 				<not>
 					<available file="${repoBaseLocation}" />
 				</not>
