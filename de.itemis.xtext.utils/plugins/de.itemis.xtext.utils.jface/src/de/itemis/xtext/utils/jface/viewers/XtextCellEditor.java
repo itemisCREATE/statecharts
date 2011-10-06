@@ -113,10 +113,8 @@ public class XtextCellEditor extends StyledTextCellEditor {
 			text.addListener(3005, new Listener() {
 				public void handleEvent(Event event) {
 					if (event.character == SWT.CR && !xtextWidget.isProposalPopupActive()) {
-//						System.err.println("handle event (CR), " + event.doit + " -> " + event);
-						XtextCellEditor.this.fireApplyEditorValue();
+						focusLost();
 					} else if (event.character == SWT.ESC && !xtextWidget.isProposalPopupActive()) {
-//						System.err.println("handle event (ESC), " + event.doit + " -> " + event);
 						XtextCellEditor.this.fireCancelEditor();
 					}
 				}
@@ -126,8 +124,27 @@ public class XtextCellEditor extends StyledTextCellEditor {
 		return text;
 	}
 
+	// in gtk, we need this flag to let one focus lost event pass. See focusLost() for details.
+    private boolean ignoreNextFocusLost = false;
+
+	/*
+	 * In gtk, the focus lost event is fired _after_ the CR event, so we need to
+	 * remember the state when the proposal popup window is open.
+	 */
 	@Override
 	protected void focusLost() {
+		if (SWT.getPlatform().equals("gtk")) {
+			if (ignoreNextFocusLost) {
+				ignoreNextFocusLost = false;
+				return;
+			}
+
+			if (xtextWidget.isProposalPopupActive()) {
+				ignoreNextFocusLost = true;
+				return;
+			}
+		}
+
 		if (!xtextWidget.isProposalPopupActive())
 			super.focusLost();
 	}
@@ -142,8 +159,9 @@ public class XtextCellEditor extends StyledTextCellEditor {
 		super.dispose();
 	}
 
-	/**
-	 * This is damn important! If we don't return false here, the ColumnEditorViewer calls applyEditorValue on FocusLostEvents!
+	/*
+	 * This is damn important! If we don't return false here, the
+	 * ColumnEditorViewer calls applyEditorValue on FocusLostEvents!
 	 */
 	@Override
 	protected boolean dependsOnExternalFocusListener() {
