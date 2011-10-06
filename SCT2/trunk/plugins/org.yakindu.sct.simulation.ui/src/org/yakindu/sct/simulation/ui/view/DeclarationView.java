@@ -195,6 +195,7 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 	}
 
 	public void eventRaised(String eventName) {
+		System.out.println("raised: " + eventName);
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				setEventViewerInput();
@@ -236,10 +237,10 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 		}
 		if (!(selectedSession == activeSession) && selectedSession != null) {
 			if (activeSession != null) {
-				activeSession.getListeners().remove(this);
+				activeSession.removeSimulationListener(this);
 			}
 			activeSession = selectedSession;
-			selectedSession.getListeners().add(this);
+			selectedSession.addSimulationListener(this);
 			clearViewerInput();
 			setEventViewerInput();
 			setVariableViewerInput();
