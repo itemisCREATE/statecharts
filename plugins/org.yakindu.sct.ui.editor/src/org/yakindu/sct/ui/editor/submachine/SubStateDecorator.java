@@ -53,7 +53,7 @@ public abstract class SubStateDecorator extends BaseDecorator {
 				if (shouldDecorate(state)) {
 					final Decoration decoration = (Decoration) getDecoratorTarget()
 							.addShapeDecoration(getDecorationImage(state),
-									getDecoratorPosition(), -1, false);
+									getDecoratorPosition(), -5, false);
 					renderToolTip(decoration, state);
 					decoration.addMouseListener(new MouseListener() {
 						public void mousePressed(MouseEvent me) {
