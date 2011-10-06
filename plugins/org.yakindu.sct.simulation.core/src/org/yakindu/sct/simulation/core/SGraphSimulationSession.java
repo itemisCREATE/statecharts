@@ -135,47 +135,66 @@ public class SGraphSimulationSession implements Runnable,
 	}
 
 	protected void changeSimulationState(SimulationState newState) {
-		for (ISimulationSessionListener listener : listeners) {
-			listener.simulationStateChanged(this.currentState, newState);
+		synchronized (listeners) {
+			for (ISimulationSessionListener listener : listeners) {
+				listener.simulationStateChanged(this.currentState, newState);
+			}
+			this.currentState = newState;
 		}
-		this.currentState = newState;
 	}
 
 	public void stateEntered(Vertex vertex) {
-		for (ISimulationSessionListener listener : listeners) {
-			listener.stateEntered(vertex);
+		synchronized (listeners) {
+			for (ISimulationSessionListener listener : listeners) {
+				listener.stateEntered(vertex);
+			}
 		}
 	}
 
 	public void stateLeft(Vertex vertex) {
-		for (ISimulationSessionListener listener : listeners) {
-			listener.stateLeft(vertex);
+		synchronized (listeners) {
+			for (ISimulationSessionListener listener : listeners) {
+				listener.stateLeft(vertex);
+			}
 		}
-
 	}
 
 	public void transitionFired(Transition transition) {
-		for (ISimulationSessionListener listener : listeners) {
-			listener.transitionFired(transition);
+		synchronized (listeners) {
+			for (ISimulationSessionListener listener : listeners) {
+				listener.transitionFired(transition);
+			}
 		}
-
 	}
 
-	public List<ISimulationSessionListener> getListeners() {
-		return listeners;
+	public void addSimulationListener(ISimulationSessionListener listener) {
+		synchronized (listeners) {
+			listeners.add(listener);
+		}
+	}
+
+	public void removeSimulationListener(ISimulationSessionListener listener) {
+		synchronized (listeners) {
+			listeners.remove(listener);
+		}
 	}
 
 	public void variableValueChanged(String variableName, Object value) {
-		for (ISimulationSessionListener listener : listeners) {
-			listener.variableValueChanged(variableName, value);
+		synchronized (listeners) {
+			for (ISimulationSessionListener listener : listeners) {
+				listener.variableValueChanged(variableName, value);
+			}
 		}
 
 	}
 
 	public void eventRaised(String eventName) {
-		for (ISimulationSessionListener listener : listeners) {
-			listener.eventRaised(eventName);
-		}
+synchronized (listeners) {
+	for (ISimulationSessionListener listener : listeners) {
+		listener.eventRaised(eventName);
+	}
+	
+}
 	}
 
 	public ISGraphExecutionScope getExecutionScope() {

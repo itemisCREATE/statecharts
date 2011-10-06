@@ -90,9 +90,9 @@ public class SCTSourceDisplay extends SimulationSessionListenerAdapter
 
 		// Register me as a Session Listener to control the highlighting
 		if (lastActiveSession != null) {
-			lastActiveSession.getListeners().remove(this);
+			lastActiveSession.removeSimulationListener(this);
 		}
-		session.getListeners().add(this);
+		session.addSimulationListener(this);
 		lastActiveSession = session;
 
 	}
