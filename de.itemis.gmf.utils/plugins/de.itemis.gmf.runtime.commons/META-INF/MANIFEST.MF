@@ -13,8 +13,11 @@ Require-Bundle: org.eclipse.gmf.runtime.diagram.ui.properties;bundle-version="1.
  org.eclipse.emf.databinding;bundle-version="1.2.0";visibility:=reexport,
  org.eclipse.jface.databinding;bundle-version="1.5.0";visibility:=reexport,
  org.eclipse.core.databinding.property;bundle-version="1.4.0";visibility:=reexport,
- org.eclipse.emf.databinding.edit;bundle-version="1.2.0";visibility:=reexport
+ org.eclipse.emf.databinding.edit;bundle-version="1.2.0";visibility:=reexport,
+ org.eclipse.gmf.runtime.diagram.ui.render;bundle-version="1.4.1",
+ org.eclipse.gmf.runtime.diagram.ui.providers;bundle-version="1.5.0"
 Export-Package: de.itemis.gmf.runtime.commons.commands,
+ de.itemis.gmf.runtime.commons.decorators,
  de.itemis.gmf.runtime.commons.editparts,
  de.itemis.gmf.runtime.commons.editpolicies,
  de.itemis.gmf.runtime.commons.figures,
