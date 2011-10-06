@@ -108,21 +108,9 @@ public class StatechartValidationDecorationProvider extends AbstractProvider
 		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
 
 			public void run() {
-				try {
-					TransactionUtil.getEditingDomain(fdiagram).runExclusive(
-							new Runnable() {
-
-								public void run() {
-									for (Iterator it = decorators.iterator(); it
-											.hasNext();) {
-										IDecorator decorator = (IDecorator) it
-												.next();
-										decorator.refresh();
-									}
-								}
-							});
-				} catch (Exception e) {
-					e.printStackTrace();
+				for (Iterator it = decorators.iterator(); it.hasNext();) {
+					IDecorator decorator = (IDecorator) it.next();
+					decorator.refresh();
 				}
 			}
 		});

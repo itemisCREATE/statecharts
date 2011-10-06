@@ -595,7 +595,8 @@
          <Priority name="Medium"/>
       </MarkerNavigationProvider>
    </extension>
-   
+   	
+   	<!-- Decoration Providers -->
    <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
       <decoratorProvider class="org.yakindu.sct.ui.editor.providers.StatechartValidationDecorationProvider">
          <Priority name="Lowest"/>
@@ -603,6 +604,11 @@
          <context decoratorTargets="PRIMARY_VIEW"/>
       </decoratorProvider>
    </extension>
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders"> 
+		<decoratorProvider class="org.yakindu.sct.ui.editor.submachine.SubmachineDecorationProvider"> 
+			<Priority name="Lowest" />
+ 		</decoratorProvider> 
+ </extension> 
    
    <!-- Global Action handler -->
     <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders" id="global-print-actions">

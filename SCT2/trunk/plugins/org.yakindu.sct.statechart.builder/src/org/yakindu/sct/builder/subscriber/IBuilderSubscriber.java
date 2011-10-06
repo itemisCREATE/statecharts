@@ -3,6 +3,7 @@ package org.yakindu.sct.builder.subscriber;
 import java.io.IOException;
 
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 
 /**
  * 
@@ -11,6 +12,6 @@ import org.eclipse.core.resources.IResource;
  */
 public interface IBuilderSubscriber {
 
-	public void doBuild(IResource resource) throws IOException;
+	public void doBuild(IResource resource) throws IOException, CoreException;
 
 }
