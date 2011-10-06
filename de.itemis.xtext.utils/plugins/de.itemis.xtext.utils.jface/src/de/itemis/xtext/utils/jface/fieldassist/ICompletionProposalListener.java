@@ -1,7 +1,5 @@
 package de.itemis.xtext.utils.jface.fieldassist;
 
-import org.eclipse.jface.fieldassist.ContentProposalAdapter;
-
 /**
  * This interface is used to listen to additional notifications from a
  * {@link CompletionProposalAdapter}.
@@ -15,7 +13,7 @@ public interface ICompletionProposalListener {
 	 *            the CompletionProposalAdapter which is adapting content proposal
 	 *            behavior to a control
 	 */
-	public void proposalPopupOpened(ContentProposalAdapter adapter);
+	public void proposalPopupOpened(CompletionProposalAdapter adapter);
 
 	/**
 	 * A completion proposal popup has been closed.
@@ -24,5 +22,5 @@ public interface ICompletionProposalListener {
 	 *            the CompletionProposalAdapter which is adapting content proposal
 	 *            behavior to a control
 	 */
-	public void proposalPopupClosed(ContentProposalAdapter adapter);
+	public void proposalPopupClosed(CompletionProposalAdapter adapter);
 }

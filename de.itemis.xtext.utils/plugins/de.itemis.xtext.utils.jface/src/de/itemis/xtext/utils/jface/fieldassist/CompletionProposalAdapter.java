@@ -3,7 +3,6 @@ package de.itemis.xtext.utils.jface.fieldassist;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.fieldassist.ContentProposalAdapter;
-import org.eclipse.jface.fieldassist.IContentProposalListener2;
 import org.eclipse.jface.text.contentassist.CompletionProposal;
 import org.eclipse.jface.text.contentassist.ContentAssistEvent;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
@@ -218,35 +217,16 @@ public class CompletionProposalAdapter implements ICompletionListener {
 	/**
 	 * Add the specified listener to the list of content proposal listeners that
 	 * are notified when a content proposal popup is opened or closed.
-	 * </p>
-	 * 
-	 * @param listener
-	 *            the IContentProposalListener2 to be added as a listener. Must
-	 *            not be <code>null</code>. If an attempt is made to register
-	 *            an instance which is already registered with this instance,
-	 *            this method has no effect.
-	 * 
-	 * @since 3.3
-	 * @see org.eclipse.jface.fieldassist.IContentProposalListener2
 	 */
-	public void addContentProposalListener(IContentProposalListener2 listener) {
+	public void addContentProposalListener(ICompletionProposalListener listener) {
 		proposalListeners2.add(listener);
 	}
 
 	/**
 	 * Remove the specified listener from the list of content proposal listeners
 	 * that are notified when a content proposal popup is opened or closed.
-	 * </p>
-	 * 
-	 * @param listener
-	 *            the IContentProposalListener2 to be removed as a listener.
-	 *            Must not be <code>null</code>. If the listener has not
-	 *            already been registered, this method has no effect.
-	 * 
-	 * @since 3.3
-	 * @see org.eclipse.jface.fieldassist.IContentProposalListener2
 	 */
-	public void removeContentProposalListener(IContentProposalListener2 listener) {
+	public void removeContentProposalListener(ICompletionProposalListener listener) {
 		proposalListeners2.remove(listener);
 	}
 
@@ -534,8 +514,8 @@ public class CompletionProposalAdapter implements ICompletionListener {
 		}
 		final Object[] listenerArray = proposalListeners2.getListeners();
 		for (int i = 0; i < listenerArray.length; i++) {
-			((IContentProposalListener2) listenerArray[i])
-					.proposalPopupOpened(null);
+			((ICompletionProposalListener) listenerArray[i])
+					.proposalPopupOpened(this);
 		}
 	}
 
@@ -548,8 +528,8 @@ public class CompletionProposalAdapter implements ICompletionListener {
 		}
 		final Object[] listenerArray = proposalListeners2.getListeners();
 		for (int i = 0; i < listenerArray.length; i++) {
-			((IContentProposalListener2) listenerArray[i])
-					.proposalPopupClosed(null);
+			((ICompletionProposalListener) listenerArray[i])
+					.proposalPopupClosed(this);
 		}
 	}
 
