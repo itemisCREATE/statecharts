@@ -1,5 +1,7 @@
 package de.itemis.xtext.utils.jface.viewers;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.text.IDocumentPartitioner;
+import org.eclipse.jface.text.contentassist.ContentAssistant;
+import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.source.SourceViewer;
@@ -52,6 +57,7 @@ import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
+import de.itemis.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
 import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 
 /**
@@ -243,13 +249,17 @@ public class XtextStyledText {
 		styledText.setBackground(parent.getBackground());
 		styledText.setText("");
 		
+		final IContentAssistant contentAssistant = sourceviewer.getContentAssistant();
+		new CompletionProposalAdapter(styledText, contentAssistant, KeyStroke.getInstance(SWT.CTRL, SWT.SPACE), null);
+
 		if ((styledText.getStyle() & SWT.SINGLE) != 0) {
-			// Add listener to send DefaultSelection event when ENTER is pressed.
-			// This will emulate the behavior of the Text widget.
-			styledText.addListener(SWT.KeyDown, new Listener() {
-				
+			
+			// The regular key down event is too late (after popup is closed).
+			// when using the StyledText.VerifyKey event (3005), we get the event early enough!
+			styledText.addListener(3005, new Listener() {
 				public void handleEvent(Event event) {
-					if (event.keyCode == SWT.CR) {
+					if (event.character == SWT.CR && !isProposalPopupActive()) {
+//						System.err.println("handle event, " + event.doit + " -> " + event);
 						Event selectionEvent = new Event();
 						selectionEvent.type = SWT.DefaultSelection;
 						selectionEvent.widget = event.widget;
@@ -412,5 +422,32 @@ public class XtextStyledText {
 
 	public void setVisibleRegion(int start, int length) {
 		sourceviewer.setVisibleRegion(start, length);
+	}
+	
+	/**
+	 * @return <code>true</code> if the content assistant has the completion proposal popup open; <code>false</code> otherwise.
+	 */
+	public boolean isProposalPopupActive() {
+		/*
+		 * Unfortunately, the method is protected so we use java reflection to access it.
+		 */
+		final IContentAssistant contentAssistant = sourceviewer.getContentAssistant();
+		try {
+			final Method m = ContentAssistant.class.getDeclaredMethod("isProposalPopupActive");
+			m.setAccessible(true);
+			try {
+				final Object result = m.invoke(contentAssistant);
+				if (result != null && result instanceof Boolean) {
+					return (Boolean) result;
+				} else {
+					throw new IllegalStateException("Method is expected to return boolean!");
+				}
+			} catch (InvocationTargetException e) {
+				throw e.getCause(); // cause was thrown by method m.
+			}
+		} catch (Throwable e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }

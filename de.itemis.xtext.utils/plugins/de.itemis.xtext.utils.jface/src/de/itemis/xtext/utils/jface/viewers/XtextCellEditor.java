@@ -14,20 +14,28 @@ package de.itemis.xtext.utils.jface.viewers;
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jface.bindings.keys.KeyStroke;
+import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.StructuredViewer;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
-import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.inject.Injector;
+
+import de.itemis.utils.jface.viewers.StyledTextCellEditor;
+import de.itemis.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
+
 
 /**
  * This class integrates Xtext features into a {@link CellEditor} and can be used e.g. in 
@@ -52,29 +60,6 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	
 	private Resource context;
 	
-	/**
-	 * Key listener for updating, applying, and canceling cell editor.
-	 */
-	private final KeyListener keyListener = new KeyListener() {
-
-		public void keyPressed(KeyEvent e) {
-//			if (e.keyCode == SWT.CR && ((text.getStyle() & SWT.MULTI) == 0 || 
-//					(e.stateMask & SWT.CTRL) != 0)) {
-//				// apply value to cell editor and finish editing
-//				XtextCellEditor.this.fireApplyEditorValue();
-//			} else if (e.keyCode == SWT.ESC) {
-//				// cancel editor
-//				XtextCellEditor.this.fireCancelEditor();
-//			} else {
-//				// notify cell editor about changes
-//				XtextCellEditor.this.valueChanged(true, true);
-//			}
-		}
-
-		public void keyReleased(KeyEvent e) {
-		}
-	};
-
 	/**
 	 * C'tor to create a new Instance.
 	 * 
@@ -111,26 +96,60 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	protected Control createControl(Composite parent) {
 		xtextWidget = createXtextWidget(parent, getStyle(), injector, context);
 		text = xtextWidget.getStyledText();
-		text.addKeyListener(keyListener);
 		text.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
 				XtextCellEditor.this.focusLost();
 			}
 		});
+		
+		final XtextSourceViewer sourceViewer = xtextWidget.getSourceviewer();
+		final IContentAssistant contentAssistant = sourceViewer.getContentAssistant();
+		new CompletionProposalAdapter(text, contentAssistant, KeyStroke.getInstance(SWT.CTRL, SWT.SPACE), null);
+
+		if ((text.getStyle() & SWT.SINGLE) != 0) {
+			
+			// The regular key down event is too late (after popup is closed again).
+			// when using the StyledText.VerifyKey event (3005), we get the event early enough!
+			text.addListener(3005, new Listener() {
+				public void handleEvent(Event event) {
+					if (event.character == SWT.CR && !xtextWidget.isProposalPopupActive()) {
+//						System.err.println("handle event (CR), " + event.doit + " -> " + event);
+						XtextCellEditor.this.fireApplyEditorValue();
+					} else if (event.character == SWT.ESC && !xtextWidget.isProposalPopupActive()) {
+//						System.err.println("handle event (ESC), " + event.doit + " -> " + event);
+						XtextCellEditor.this.fireCancelEditor();
+					}
+				}
+			});
+		}
+		
 		return text;
 	}
 
+	@Override
+	protected void focusLost() {
+		if (!xtextWidget.isProposalPopupActive())
+			super.focusLost();
+	}
+	
 	protected XtextStyledText createXtextWidget(Composite parent, int style, Injector injector, Resource context) {
 		return new XtextStyledText(parent, style, injector, context);
 	}
 
 	@Override
 	public void dispose() {
-		text.removeKeyListener(keyListener);
 		xtextWidget.dispose();
 		super.dispose();
 	}
 
+	/**
+	 * This is damn important! If we don't return false here, the ColumnEditorViewer calls applyEditorValue on FocusLostEvents!
+	 */
+	@Override
+	protected boolean dependsOnExternalFocusListener() {
+		return false;
+	}
+	
 	public void setContext(Resource context) {
 		xtextWidget.setContextResource(context);
 	}

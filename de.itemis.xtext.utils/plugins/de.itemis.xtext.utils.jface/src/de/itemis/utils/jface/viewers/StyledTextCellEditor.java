@@ -10,7 +10,7 @@
  *     IBM Corporation - initial API and implementation
  *     Tom Eicher <eclipse@tom.eicher.name> - fix minimum width
  *******************************************************************************/
-package de.itemis.xtext.utils.jface.viewers;
+package de.itemis.utils.jface.viewers;
 
 import java.text.MessageFormat;
 
@@ -309,6 +309,10 @@ public class StyledTextCellEditor extends CellEditor {
 		if (text == null || text.isDisposed()) {
 			return false;
 		}
+		/*
+		 * TODO: check that semantics remains the same as original:
+		 * text.getCaretPosition()
+		 */
 		return text.getSelectionCount() > 0
 				|| text.getCaretOffset() < text.getCharCount();
 	}
@@ -423,6 +427,10 @@ public class StyledTextCellEditor extends CellEditor {
 			text.insert(""); //$NON-NLS-1$
 		} else {
 			// remove the next character
+			/*
+			 * TODO: check that semantics remains the same as original:
+			 * text.getCaretPosition()
+			 */
 			int pos = text.getCaretOffset();
 			if (pos < text.getCharCount()) {
 				text.setSelection(pos, pos + 1);

@@ -2,25 +2,9 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.handlers">
-      <handler
-            class="de.itemis.xtext.utils.jface.internal.handlers.ContentAssistHandler"
-            commandId="org.eclipse.ui.edit.text.contentAssist.proposals">
-         <activeWhen>
-            <with
-                  variable="activeFocusControlId">
-               <equals
-                     value="org.eclipse.swt.custom.StyledText">
-               </equals>
-            </with>
-         </activeWhen>
-      </handler>
-   </extension>
-   <extension
          point="org.eclipse.ui.startup">
       <startup
             class="de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker">
       </startup>
    </extension>
-
 </plugin>
