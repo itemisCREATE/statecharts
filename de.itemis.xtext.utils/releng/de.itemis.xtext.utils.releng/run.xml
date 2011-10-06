@@ -62,7 +62,6 @@
 			<iu id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.5.0.v20110426-2159-47D08xGD6ExNBM7CIJa3CIKK9t84"/>
 			<iu id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.5.0.v20110607-1200-67N09E9QnChoWswz-3wf_rz0kQ8Y"/>
 			<iu id="org.eclipse.xtext.sdk.feature.group" version="2.0.1.v201108020636"/>
-			<slicingOptions includeOptional="false" includeNonGreedy="false" followStrict="true" />
 		</p2.mirror>
 			
 		<echo message="Preparing repositories done." />
