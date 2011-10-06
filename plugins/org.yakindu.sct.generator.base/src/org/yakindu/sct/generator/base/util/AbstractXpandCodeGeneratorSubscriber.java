@@ -27,7 +27,8 @@ public abstract class AbstractXpandCodeGeneratorSubscriber implements
 		try {
 			IProject project = resource.getProject();
 			Statechart statechart;
-
+			if (resource == null || !resource.exists())
+				return;
 			statechart = GeneratorBaseUtil.loadStatechart(resource);
 
 			ExecutionFlow executionFlow = GeneratorBaseUtil

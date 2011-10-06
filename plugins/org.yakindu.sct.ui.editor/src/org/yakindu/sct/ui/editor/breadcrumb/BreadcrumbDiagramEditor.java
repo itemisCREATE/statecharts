@@ -1,4 +1,4 @@
-package org.yakindu.sct.ui.editor.editor;
+package org.yakindu.sct.ui.editor.breadcrumb;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,6 +28,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.yakindu.sct.ui.editor.StatechartImages;
+import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 
 @SuppressWarnings("restriction")
 public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor {
@@ -38,7 +39,6 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor {
 		super(hasFlyoutPalette);
 		history = new ArrayList<IFile>(0);
 	}
-	
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -56,7 +56,6 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor {
 		return (IFileEditorInput) super.getEditorInput();
 	}
 
-	@Override
 	public void setInput(IEditorInput input) {
 		super.setInput(input);
 		if (input instanceof TrackingFileEditorInput) {
@@ -65,7 +64,7 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor {
 		if (history.isEmpty()) {
 			history.add(getEditorInput().getFile());
 		}
-	}
+	};
 
 	private void createBreadcrumpViewer(Composite parent) {
 		MyBreadcrumpViewer viewer = new MyBreadcrumpViewer(parent, SWT.NONE);
@@ -102,24 +101,28 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor {
 			}
 
 			public Object[] getChildren(TreePath parentPath) {
-				return input.subList(parentPath.getSegmentCount(), input.size()).toArray();
+				return input
+						.subList(parentPath.getSegmentCount(), input.size())
+						.toArray();
 			}
 		});
 		viewer.setLabelProvider(new MyLabelProvider());
 		viewer.setInput(getInputHistory());
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
-			
+
 			public void selectionChanged(SelectionChangedEvent event) {
 				ISelection selection = event.getSelection();
-				if(selection instanceof IStructuredSelection){
-					IFile firstElement = (IFile) ((IStructuredSelection) selection).getFirstElement();
-					System.out.println("Selection event ;" + firstElement);
+				if (selection instanceof IStructuredSelection) {
+					IFile firstElement = (IFile) ((IStructuredSelection) selection)
+							.getFirstElement();
 					final IWorkbenchPage page = PlatformUI.getWorkbench()
 							.getActiveWorkbenchWindow().getActivePage();
 
 					try {
-						TrackingFileEditorInput input = new TrackingFileEditorInput(firstElement);
-						input.setHistory(history.subList(0, history.indexOf(firstElement)));
+						TrackingFileEditorInput input = new TrackingFileEditorInput(
+								firstElement);
+						input.setHistory(history.subList(0,
+								history.indexOf(firstElement)));
 						page.openEditor(input, StatechartDiagramEditor.ID);
 					} catch (PartInitException e) {
 						e.printStackTrace();
@@ -130,14 +133,11 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor {
 
 	}
 
-
 	@Override
 	protected void createGraphicalViewer(Composite parent) {
 		super.createGraphicalViewer(parent);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(parent);
 	}
-	
-	
 
 	public List<IFile> getHistory() {
 		return history;
@@ -147,13 +147,12 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor {
 			ITreePathLabelProvider {
 
 		public void updateLabel(ViewerLabel label, TreePath elementPath) {
-			IFile lastSegment = (IFile)elementPath.getLastSegment();
+			IFile lastSegment = (IFile) elementPath.getLastSegment();
 			label.setText(lastSegment.getName());
 			label.setImage(StatechartImages.LOGO.image());
 		}
 	}
 
-	@SuppressWarnings("restriction")
 	public class MyBreadcrumpViewer extends BreadcrumbViewer {
 
 		public MyBreadcrumpViewer(Composite parent, int style) {
@@ -167,7 +166,5 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor {
 		}
 
 	}
-	
-	
 
 }

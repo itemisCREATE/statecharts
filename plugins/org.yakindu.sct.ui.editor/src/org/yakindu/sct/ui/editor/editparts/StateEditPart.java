@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.draw2d.GridData;
@@ -48,8 +47,6 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
-import org.yakindu.sct.ui.editor.pictogram.PictogramEditPolicy;
-import org.yakindu.sct.ui.editor.pictogram.SubchartPictogram;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 
 /**
@@ -130,9 +127,6 @@ public class StateEditPart extends ShapeNodeEditPart implements
 						return UnexecutableCommand.INSTANCE;
 					}
 				});
-		installEditPolicy(PictogramEditPolicy.ROLE, new PictogramEditPolicy(
-				Collections.singletonList(new SubchartPictogram())));
-
 	}
 
 	@Override

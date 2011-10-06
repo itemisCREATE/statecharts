@@ -1,4 +1,4 @@
-package org.yakindu.sct.ui.editor.editor;
+package org.yakindu.sct.ui.editor.breadcrumb;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,5 +22,6 @@ public class TrackingFileEditorInput extends FileEditorInput {
 	public void setHistory(List<IFile> history) {
 		this.history = history;
 	}
+	
 
 }

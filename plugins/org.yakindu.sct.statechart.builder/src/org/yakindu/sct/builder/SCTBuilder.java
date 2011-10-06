@@ -1,6 +1,5 @@
 package org.yakindu.sct.builder;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -75,7 +74,7 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 		for (IBuilderSubscriber builderSubscriber : subscriber) {
 			try {
 				builderSubscriber.doBuild(resource);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
