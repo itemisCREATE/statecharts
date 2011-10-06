@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target name="Indigo_SR1" sequenceNumber="3">
+<locations>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.7.1.v20110913-1526"/>
+<unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.5.0.v20110426-2159-47D08xGD6ExNBM7CIJa3CIKK9t84"/>
+<unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.5.0.v20110607-1200-67N09E9QnChoWswz-3wf_rz0kQ8Y"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.0.1.v201108020636"/>
+<repository location="http://download.eclipse.org/releases/indigo"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.platform.ide" version="3.7.1.M20110909-1335"/>
+<repository location="http://download.eclipse.org/eclipse/updates/3.7"/>
+</location>
+</locations>
+</target>
