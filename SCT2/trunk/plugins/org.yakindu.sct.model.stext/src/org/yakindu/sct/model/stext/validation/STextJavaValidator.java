@@ -27,11 +27,9 @@ import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.OnCycleEvent;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
-import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartDefinition;
 import org.yakindu.sct.model.stext.stext.StextPackage;
-import org.yakindu.sct.model.stext.stext.TransitionReaction;
 
 /**
  * Several validations for nonsensical expressions.
@@ -50,19 +48,18 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			if (!(reactionTrigger.eContainer() instanceof LocalReaction)
 					&& (eventSpec instanceof EntryEvent
 							|| eventSpec instanceof ExitEvent
-							|| eventSpec instanceof OnCycleEvent 
-							|| eventSpec instanceof AlwaysEvent)) {
+							|| eventSpec instanceof OnCycleEvent || eventSpec instanceof AlwaysEvent)) {
 
 				error("entry, exit, oncycle and always events are allowed as local reactions only.",
 						StextPackage.Literals.REACTION_TRIGGER__TRIGGERS);
 			}
 			// Context Transitions
-			if (reactionTrigger.eContainer() instanceof TransitionReaction) {
-				if (eventSpec instanceof RegularEventSpec) {
-					error("Regular event specs are not allowed for transitions.",
-							StextPackage.Literals.REACTION_TRIGGER__TRIGGERS);
-				}
-			}
+			// if (reactionTrigger.eContainer() instanceof TransitionReaction) {
+			// if (eventSpec instanceof RegularEventSpec) {
+			// error("Regular event specs are not allowed for transitions.",
+			// StextPackage.Literals.REACTION_TRIGGER__TRIGGERS);
+			// }
+			// }
 
 			// Context StatechartDefiniton
 			if (isStatechartDefinitionChild(reactionTrigger)) {
