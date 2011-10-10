@@ -36,12 +36,12 @@ import org.eclipse.ui.navigator.ILinkHelper;
 import org.eclipse.ui.part.FileEditorInput;
 import org.yakindu.sct.ui.navigator.utils.ComposedAdapterFactoryUtil;
 
-import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorResolver;
+import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 
 /**
  * 
  * @author m.muehlbrandt
- *
+ * 
  */
 public class NavigatorLinkHelper implements ILinkHelper {
 
@@ -73,7 +73,7 @@ public class NavigatorLinkHelper implements ILinkHelper {
 	}
 
 	public IStructuredSelection findSelection(IEditorInput anInput) {
-		IEditorPart activeEditor = ActiveEditorResolver.getActiveEditor();
+		IEditorPart activeEditor = ActiveEditorTracker.getLastActiveEditor();
 		if (activeEditor instanceof DiagramDocumentEditor) {
 			Diagram diagram = ((DiagramDocumentEditor) activeEditor)
 					.getDiagram();
@@ -86,7 +86,7 @@ public class NavigatorLinkHelper implements ILinkHelper {
 		}
 		return StructuredSelection.EMPTY;
 	}
-	
+
 	public void activateEditor(IWorkbenchPage aPage,
 			IStructuredSelection aSelection) {
 

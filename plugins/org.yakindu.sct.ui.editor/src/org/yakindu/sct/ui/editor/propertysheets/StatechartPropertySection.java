@@ -19,6 +19,7 @@ import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.TextPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.XtextPropertyDescriptor;
+import de.itemis.xtext.utils.jface.viewers.context.IXtextContextFakeResourcesProvider;
 
 /**
  * Property Section for {@link StatechartTextEditPart}s. Consists of a
@@ -37,12 +38,15 @@ public class StatechartPropertySection extends AbstractEditorPropertySection {
 		TextPropertyDescriptor nameDescriptor = new TextPropertyDescriptor(
 				SGraphPackage.Literals.NAMED_ELEMENT__NAME, "Name: ");
 		descriptors.add(nameDescriptor);
-		// Text property descriptor for the expression
+		
+		// Xtext property descriptor for the expression
 		XtextPropertyDescriptor expressionsDescriptor = new XtextPropertyDescriptor(
 				SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
-				"Expression: ", getInjector(SGraphPackage.Literals.STATECHART),
-				IYakinduSctHelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION);
+				"Expression: ",
+				IYakinduSctHelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION,
+				getInjector(SGraphPackage.Literals.STATECHART),
+				IXtextContextFakeResourcesProvider.NULL_CONTEXT_PROVIDER);
 		descriptors.add(expressionsDescriptor);
 	}
-	
+
 }
