@@ -15,7 +15,6 @@ import java.util.List;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
@@ -24,7 +23,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 
-import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorResolver;
+import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 
 /**
  * 
@@ -37,9 +36,7 @@ public class BreadcrumbEditorUtil {
 		if (!file.exists()) {
 			return;
 		}
-		ActiveEditorResolver resolver = new ActiveEditorResolver();
-		Display.getDefault().syncExec(resolver);
-		IEditorPart result = resolver.getResult();
+		IEditorPart result = ActiveEditorTracker.getLastActiveEditor();
 		List<IFile> newHistory = new ArrayList<IFile>();
 		if (result instanceof BreadcrumbDiagramEditor) {
 			List<IFile> history = ((BreadcrumbDiagramEditor) result)

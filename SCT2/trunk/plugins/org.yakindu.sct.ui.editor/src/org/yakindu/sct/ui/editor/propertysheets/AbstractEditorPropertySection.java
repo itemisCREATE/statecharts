@@ -5,7 +5,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.yakindu.sct.ui.editor.extensions.Extensions;
 import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
@@ -14,7 +13,7 @@ import com.google.inject.Injector;
 
 import de.itemis.gmf.runtime.commons.properties.GenericFormBasedPropertySection;
 import de.itemis.gmf.runtime.commons.properties.descriptors.XtextPropertyDescriptor;
-import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorResolver;
+import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 
 /**
  * 
@@ -29,9 +28,7 @@ public abstract class AbstractEditorPropertySection extends
 	 * scoping to elements outside the text block
 	 */
 	protected Resource getActiveEditorResource() {
-		ActiveEditorResolver activeEditorResolver = new ActiveEditorResolver();
-		Display.getDefault().syncExec(activeEditorResolver);
-		IEditorPart editor = activeEditorResolver.getResult();
+		IEditorPart editor = ActiveEditorTracker.getLastActiveEditor();
 
 		EditingDomain domain = null;
 		if (editor instanceof IEditingDomainProvider) {

@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.propertysheets;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -19,6 +20,7 @@ import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.TextPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.XtextPropertyDescriptor;
+import de.itemis.xtext.utils.jface.viewers.context.CloningBasedFakeContextResourcesProvider;
 
 /**
  * Property Section for {@link StateEditPart}s. Consists of a
@@ -37,11 +39,13 @@ public class StatePropertySection extends NamePropertySection {
 
 		XtextPropertyDescriptor expressionsDescriptor = new XtextPropertyDescriptor(
 				SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
-				"Expression: ", getInjector(SGraphPackage.Literals.STATE),
-				getActiveEditorResource(),
-				IYakinduSctHelpContextIds.SC_PROPERTIES_STATE_EXPRESSION);
+				"Expression: ",
+				IYakinduSctHelpContextIds.SC_PROPERTIES_STATE_EXPRESSION,
+				getInjector(SGraphPackage.Literals.STATE),
+				new CloningBasedFakeContextResourcesProvider(
+						Collections.singletonList(getActiveEditorResource())));
 		descriptors.add(expressionsDescriptor);
-		
+
 		// Submachine reference
 		SubmachineSelectionDialogPropertyDescriptor submachineDescriptor = new SubmachineSelectionDialogPropertyDescriptor();
 		descriptors.add(submachineDescriptor);
