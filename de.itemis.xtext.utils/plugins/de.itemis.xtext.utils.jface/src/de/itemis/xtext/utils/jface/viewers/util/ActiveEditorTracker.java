@@ -29,7 +29,8 @@ import org.eclipse.ui.PlatformUI;
  * Please note that the ActiveEditorTracker currently only supports one single
  * workbench window properly.
  * 
- * @author koenemann
+ * @author patrick.koenemann@itemis.de
+ * @author alexander.nyssen@itemis.de
  * 
  */
 public class ActiveEditorTracker implements IPageListener, IPartListener,
@@ -103,9 +104,6 @@ public class ActiveEditorTracker implements IPageListener, IPartListener,
 	}
 
 	/**
-	 * (This is a copy of {@link ActiveEditorResolver#getActiveEditorResource()}
-	 * )
-	 * 
 	 * @return The EMF resource of the last active editor (if it is still open).
 	 */
 	public static Resource getLastActiveEditorResource() {

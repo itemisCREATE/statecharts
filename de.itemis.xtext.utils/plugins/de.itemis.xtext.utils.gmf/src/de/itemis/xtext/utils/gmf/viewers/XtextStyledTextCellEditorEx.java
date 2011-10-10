@@ -11,30 +11,26 @@
 
 package de.itemis.xtext.utils.gmf.viewers;
 
-import org.eclipse.emf.ecore.resource.Resource;
-
 import com.google.inject.Injector;
 
-import de.itemis.xtext.utils.jface.viewers.XtextCellEditor;
+import de.itemis.xtext.utils.jface.viewers.XtextStyledTextCellEditor;
+import de.itemis.xtext.utils.jface.viewers.context.IXtextContextFakeResourcesProvider;
 
 /**
  * This is a copy of TextCellEditorEx, only the super class has been changed to
- * {@link XtextCellEditor}
+ * {@link XtextStyledTextCellEditor}
  * 
  * @author andreas muelder
  * 
  */
-public class XtextCellEditorEx extends XtextCellEditor {
+public class XtextStyledTextCellEditorEx extends XtextStyledTextCellEditor {
 
 	private Object originalValue;
 	private boolean deactivationLock = false;
 
-	public XtextCellEditorEx(int style, Injector injector) {
-		super(style, injector);
-	}
-
-	public XtextCellEditorEx(int style, Injector injector, Resource context) {
-		super(style, injector, context);
+	public XtextStyledTextCellEditorEx(int style, Injector injector,
+			IXtextContextFakeResourcesProvider contextResourcesProvider) {
+		super(style, injector, contextResourcesProvider);
 	}
 
 	/**

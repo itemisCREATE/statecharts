@@ -73,13 +73,14 @@ public abstract class AbstractPropertyDescriptor implements
 
 	public void createControlColumn(Composite parent) {
 		control = createControl(parent);
+		applyLayout(control);
 		applyHelpContext(control);
 	}
 
 	public void createLabelColumn(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		Label label = toolkit.createLabel(parent, labelName);
-		applyLayout(label);
+		GridDataFactory.fillDefaults().applyTo(label);
 		toolkit.dispose();
 	}
 

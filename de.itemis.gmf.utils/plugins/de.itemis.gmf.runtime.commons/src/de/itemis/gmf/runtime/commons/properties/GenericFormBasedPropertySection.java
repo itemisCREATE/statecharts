@@ -88,6 +88,16 @@ public abstract class GenericFormBasedPropertySection extends
 		}
 	}
 
+//	@Override
+//	protected void setEObject(EObject object) {
+//		if (eObject != null) {
+//			for (IFormPropertyDescriptor descriptor : descriptors) {
+//				descriptor.updateContext(eObject);
+//			}
+//		}
+//		super.setEObject(object);
+//	}
+
 	@Override
 	public void dispose() {
 		super.dispose();

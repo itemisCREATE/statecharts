@@ -1,5 +1,8 @@
 package de.itemis.xtext.utils.jface.fieldassist;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.fieldassist.ContentProposalAdapter;
@@ -19,7 +22,7 @@ import org.eclipse.swt.widgets.Listener;
  * the popup to a {@link CompletionProposal} managed by a
  * {@link IContentAssistant}.
  * 
- * @author koenemann
+ * @author patrick.koenemann@itemis.de
  * 
  */
 public class CompletionProposalAdapter implements ICompletionListener {
@@ -41,16 +44,17 @@ public class CompletionProposalAdapter implements ICompletionListener {
 	 * @param keyStroke
 	 * @param autoActivationCharacters
 	 */
-	public CompletionProposalAdapter(Control control, IContentAssistant contentAssistant, 
-			KeyStroke keyStroke, char[] autoActivationCharacters) {
-		
+	public CompletionProposalAdapter(Control control,
+			IContentAssistant contentAssistant, KeyStroke keyStroke,
+			char[] autoActivationCharacters) {
+
 		this.control = control;
 
 		this.triggerKeyStroke = keyStroke;
 		if (autoActivationCharacters != null) {
 			this.autoActivateString = new String(autoActivationCharacters);
 		}
-		
+
 		this.contentAssistant = contentAssistant;
 		addControlListener(control);
 	}
@@ -60,11 +64,6 @@ public class CompletionProposalAdapter implements ICompletionListener {
 	 */
 	public static final boolean DEBUG = false;
 
-	/*
-	 * Indicates whether the content proposal is currently open or not.
-	 */
-	private boolean popup;
-	
 	/*
 	 * The control for which content proposals are provided.
 	 */
@@ -156,9 +155,9 @@ public class CompletionProposalAdapter implements ICompletionListener {
 	 *            an explicit invocation keyStroke was specified. If this
 	 *            parameter is <code>null</code>, then only a specified
 	 *            keyStroke will invoke content proposal. If this parameter is
-	 *            <code>null</code> and the keyStroke value is
-	 *            <code>null</code>, then all alphanumeric characters will
-	 *            auto-activate content proposal.
+	 *            <code>null</code> and the keyStroke value is <code>null</code>
+	 *            , then all alphanumeric characters will auto-activate content
+	 *            proposal.
 	 * 
 	 */
 	public void setAutoActivationCharacters(char[] autoActivationCharacters) {
@@ -193,23 +192,21 @@ public class CompletionProposalAdapter implements ICompletionListener {
 
 	}
 
-
 	/**
 	 * Set the boolean flag that determines whether the adapter is enabled.
 	 * 
 	 * @param enabled
-	 *            <code>true</code> if the adapter is enabled and responding
-	 *            to user input, <code>false</code> if it is ignoring user
-	 *            input.
+	 *            <code>true</code> if the adapter is enabled and responding to
+	 *            user input, <code>false</code> if it is ignoring user input.
 	 * 
 	 */
 	public void setEnabled(boolean enabled) {
 		// If we are disabling it while it's proposing content, close the
 		// content proposal popup.
 		if (isEnabled && !enabled) {
-//			if (popup != null) {
-//				popup.close();
-//			}
+			// if (popup != null) {
+			// popup.close();
+			// }
 		}
 		isEnabled = enabled;
 	}
@@ -226,7 +223,8 @@ public class CompletionProposalAdapter implements ICompletionListener {
 	 * Remove the specified listener from the list of content proposal listeners
 	 * that are notified when a content proposal popup is opened or closed.
 	 */
-	public void removeContentProposalListener(ICompletionProposalListener listener) {
+	public void removeContentProposalListener(
+			ICompletionProposalListener listener) {
 		proposalListeners2.remove(listener);
 	}
 
@@ -264,26 +262,27 @@ public class CompletionProposalAdapter implements ICompletionListener {
 					}
 					// If the popup is open, it gets first shot at the
 					// keystroke and should set the doit flags appropriately.
-//					if (popup != null) {
-//						popup.getTargetControlListener().handleEvent(e);
-//						if (DEBUG) {
-//							StringBuffer sb;
-//							if (e.type == SWT.Traverse) {
-//								sb = new StringBuffer("Traverse"); //$NON-NLS-1$
-//							} else {
-//								sb = new StringBuffer("KeyDown"); //$NON-NLS-1$
-//							}
-//							sb.append(" after being handled by popup"); //$NON-NLS-1$
-//							dump(sb.toString(), e);
-//						}
-//						// See https://bugs.eclipse.org/bugs/show_bug.cgi?id=192633
-//						// If the popup is open and this is a valid character, we
-//						// want to watch for the modified text.
-//						if (propagateKeys && e.character != 0)
-//							watchModify = true;
-//
-//						return;
-//					}
+					// if (popup != null) {
+					// popup.getTargetControlListener().handleEvent(e);
+					// if (DEBUG) {
+					// StringBuffer sb;
+					// if (e.type == SWT.Traverse) {
+					//								sb = new StringBuffer("Traverse"); //$NON-NLS-1$
+					// } else {
+					//								sb = new StringBuffer("KeyDown"); //$NON-NLS-1$
+					// }
+					//							sb.append(" after being handled by popup"); //$NON-NLS-1$
+					// dump(sb.toString(), e);
+					// }
+					// // See
+					// https://bugs.eclipse.org/bugs/show_bug.cgi?id=192633
+					// // If the popup is open and this is a valid character, we
+					// // want to watch for the modified text.
+					// if (propagateKeys && e.character != 0)
+					// watchModify = true;
+					//
+					// return;
+					// }
 
 					// We were only listening to traverse events for the popup
 					if (e.type == SWT.Traverse) {
@@ -296,10 +295,9 @@ public class CompletionProposalAdapter implements ICompletionListener {
 						// Either there are no modifiers for the trigger and we
 						// check the character field...
 						if ((triggerKeyStroke.getModifierKeys() == KeyStroke.NO_KEY && triggerKeyStroke
-								.getNaturalKey() == e.character)
-								||
-								// ...or there are modifiers, in which case the
-								// keycode and state must match
+								.getNaturalKey() == e.character) ||
+						// ...or there are modifiers, in which case the
+						// keycode and state must match
 								(triggerKeyStroke.getNaturalKey() == e.keyCode && ((triggerKeyStroke
 										.getModifierKeys() & e.stateMask) == triggerKeyStroke
 										.getModifierKeys()))) {
@@ -327,7 +325,7 @@ public class CompletionProposalAdapter implements ICompletionListener {
 								// watch the modify so we can close the popup in
 								// cases where there is no longer a trigger
 								// character in the content
-//								watchModify = true;
+								// watchModify = true;
 							}
 						} else {
 							// The autoactivate string is null. If the trigger
@@ -335,56 +333,56 @@ public class CompletionProposalAdapter implements ICompletionListener {
 							// to the content. Set a flag so we'll catch this
 							// in the modify event.
 							if (triggerKeyStroke == null) {
-//								watchModify = true;
+								// watchModify = true;
 							}
 						}
 					} else {
 						// A non-character key has been pressed. Interrupt any
-						// autoactivation that is pending due to autoactivation delay.
+						// autoactivation that is pending due to autoactivation
+						// delay.
 						receivedKeyDown = true;
 					}
 					break;
 
-
-					// There are times when we want to monitor content changes
-					// rather than individual keystrokes to determine whether
-					// the popup should be closed or opened based on the entire
-					// content of the control.
-					// The watchModify flag ensures that we don't autoactivate if
-					// the content change was caused by something other than typing.
-					// See https://bugs.eclipse.org/bugs/show_bug.cgi?id=183650
-//					case SWT.Modify:
-//						if (allowsAutoActivate() && watchModify) {
-//							if (DEBUG) {
-//								dump("Modify event triggers popup open or close", e); //$NON-NLS-1$
-//							}
-//							watchModify = false;
-//							// We are in autoactivation mode, either for specific
-//							// characters or for all characters. In either case, 
-//							// we should close the proposal popup when there is no
-//							// content in the control.
-//							if (isControlContentEmpty()) {
-//								// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=192633
-//								closeProposalPopup();
-//							} else {
-//								// See https://bugs.eclipse.org/bugs/show_bug.cgi?id=147377
-//								// Given that we will close the popup when there are
-//								// no valid proposals, we must consider reopening it on any
-//								// content change when there are no particular autoActivation
-//								// characters
-//								if (autoActivateString == null) {
-//									autoActivate();
-//								} else {
-//									// Autoactivation characters are defined, but this
-//									// modify event does not involve one of them.  See
-//									// if any of the autoactivation characters are left
-//									// in the content and close the popup if none remain.
-//									if (!shouldPopupRemainOpen())
-//										closeProposalPopup();
-//								}
-//							}
-//						}
-//						break;
+				// There are times when we want to monitor content changes
+				// rather than individual keystrokes to determine whether
+				// the popup should be closed or opened based on the entire
+				// content of the control.
+				// The watchModify flag ensures that we don't autoactivate if
+				// the content change was caused by something other than typing.
+				// See https://bugs.eclipse.org/bugs/show_bug.cgi?id=183650
+				// case SWT.Modify:
+				// if (allowsAutoActivate() && watchModify) {
+				// if (DEBUG) {
+				//								dump("Modify event triggers popup open or close", e); //$NON-NLS-1$
+				// }
+				// watchModify = false;
+				// // We are in autoactivation mode, either for specific
+				// // characters or for all characters. In either case,
+				// // we should close the proposal popup when there is no
+				// // content in the control.
+				// if (isControlContentEmpty()) {
+				// // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=192633
+				// closeProposalPopup();
+				// } else {
+				// // See https://bugs.eclipse.org/bugs/show_bug.cgi?id=147377
+				// // Given that we will close the popup when there are
+				// // no valid proposals, we must consider reopening it on any
+				// // content change when there are no particular autoActivation
+				// // characters
+				// if (autoActivateString == null) {
+				// autoActivate();
+				// } else {
+				// // Autoactivation characters are defined, but this
+				// // modify event does not involve one of them. See
+				// // if any of the autoactivation characters are left
+				// // in the content and close the popup if none remain.
+				// if (!shouldPopupRemainOpen())
+				// closeProposalPopup();
+				// }
+				// }
+				// }
+				// break;
 				default:
 					break;
 				}
@@ -437,11 +435,11 @@ public class CompletionProposalAdapter implements ICompletionListener {
 	 */
 	private void openProposalPopup(boolean autoActivated) {
 		if (isValid() && isEnabled()) {
-			
+
 			// XXX here we delegate the request!
 			contentAssistant.showPossibleCompletions();
 
-			((ContentAssistant)contentAssistant).addCompletionListener(this);
+			((ContentAssistant) contentAssistant).addCompletionListener(this);
 		}
 	}
 
@@ -542,23 +540,47 @@ public class CompletionProposalAdapter implements ICompletionListener {
 	 * @since 3.6
 	 */
 	public boolean isProposalPopupOpen() {
-		if (isValid() && popup)
+		if (isValid() && isProposalPopupActive())
 			return true;
 		return false;
 	}
 
-	public void assistSessionStarted(ContentAssistEvent event) {
-		if (!popup) {
-			popup = true;
-			notifyPopupOpened();
+	/**
+	 * @return <code>true</code> if the content assistant has the completion
+	 *         proposal popup open; <code>false</code> otherwise.
+	 */
+	private boolean isProposalPopupActive() {
+		/*
+		 * Unfortunately, the method is protected so we use java reflection to
+		 * access it.
+		 */
+		try {
+			final Method m = ContentAssistant.class
+					.getDeclaredMethod("isProposalPopupActive");
+			m.setAccessible(true);
+			try {
+				final Object result = m.invoke(contentAssistant);
+				if (result != null && result instanceof Boolean) {
+					return (Boolean) result;
+				} else {
+					throw new IllegalStateException(
+							"Method is expected to return boolean!");
+				}
+			} catch (InvocationTargetException e) {
+				throw e.getCause(); // cause was thrown by method m.
+			}
+		} catch (Throwable e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 
+	public void assistSessionStarted(ContentAssistEvent event) {
+		notifyPopupOpened();
+	}
+
 	public void assistSessionEnded(ContentAssistEvent event) {
-		if (popup) {
-			popup = false;
-			notifyPopupClosed();
-		}
+		notifyPopupClosed();
 	}
 
 	public void selectionChanged(ICompletionProposal proposal,

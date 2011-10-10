@@ -1,0 +1,104 @@
+package de.itemis.xtext.utils.jface.viewers.context;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.core.resources.IProject;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.google.inject.name.Named;
+
+import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
+
+/**
+ * Context used by {@link XtextStyledTextAdapter} to handle the required underlying (fake) resources.
+ * 
+ * @author alexander.nyssen@itemis.de
+ * 
+ */
+public class XtextFakeResourceContext {
+
+	@Inject
+	private IResourceSetProvider resourceSetProvider;
+	private ResourceSet fakeResourceSet;
+	@Inject
+	private XtextResource fakeResource;
+	@Inject
+	private @Named(Constants.FILE_EXTENSIONS)
+	String fakeResourceFileExtension;
+
+	public XtextFakeResourceContext(Injector injector) {
+		injector.injectMembers(this);
+
+		// create resource set
+		createXtextFakeResourceSet();
+
+		// initialize fake resource (which was injected and thus does not has to
+		// be created)
+		initXtextFakeResource();
+
+		// initialize the resource set (the fake resource has to be added)
+		initXtextFakeResourceSet();
+	}
+
+	protected void initXtextFakeResourceSet() {
+		fakeResourceSet.getResources().add(fakeResource);
+	}
+
+	protected ResourceSet getFakeResourceSet() {
+		return fakeResourceSet;
+	}
+
+	protected void createXtextFakeResourceSet() {
+		fakeResourceSet = resourceSetProvider.get(getActiveProject());
+	}
+
+	protected void initXtextFakeResource() {
+		// add the fake resource (add an uri to it, first)
+		String activeProject = getActiveProject().getName();
+		fakeResource.setURI(createFakeResourceUri(activeProject));
+	}
+
+	public XtextResource getFakeResource() {
+		return fakeResource;
+	}
+
+	private URI createFakeResourceBaseFragment(String activeProject) {
+		return URI.createPlatformResourceURI(activeProject + "/embedded", true);
+	}
+
+	private URI createFakeResourceUri(String activeProject) {
+		return createFakeResourceBaseFragment(activeProject)
+				.appendFileExtension(fakeResourceFileExtension);
+	}
+
+	protected String getFileExtension() {
+		return fakeResourceFileExtension;
+	}
+
+	protected IProject getActiveProject() {
+		return ActiveEditorTracker.getLastActiveEditorProject();
+	}
+
+	public void updateFakeResourceContext(
+			IXtextContextFakeResourcesProvider contextProvider) {
+		// remove any other resources that may have been created earlier
+		List<Resource> staleResources = new ArrayList<Resource>();
+		for (Resource r : getFakeResourceSet().getResources()) {
+			if (r != getFakeResource()) {
+				staleResources.add(r);
+				r.unload();
+			}
+		}
+		getFakeResourceSet().getResources().removeAll(staleResources);
+		contextProvider.populateFakeResourceContextResourceSet(fakeResourceSet);
+	}
+
+}

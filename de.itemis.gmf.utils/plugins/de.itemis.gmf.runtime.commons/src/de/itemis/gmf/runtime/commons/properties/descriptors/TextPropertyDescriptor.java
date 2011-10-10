@@ -17,6 +17,7 @@ import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
@@ -40,17 +41,13 @@ public class TextPropertyDescriptor extends AbstractPropertyDescriptor {
 	public Text createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		Text control = toolkit.createText(parent, "");
-		applyLayout(control);
 		return control;
 	}
-
-	/**
-	 * hook method, clients may override
-	 */
-	protected void applyLayout(Text control) {
+	
+	@Override
+	protected void applyLayout(Control control) {
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(control);
 	}
-
 
 	@Override
 	public Text getControl() {

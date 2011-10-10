@@ -22,13 +22,11 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 
+
 /**
- * Highlighting reconciler - Background thread implementation. Initially copied
- * from org.eclipse.jdt.internal.ui.javaeditor.SemanticHighlightingReconciler
- * 
- * @author Sebastian Zarnekow
+ * Modified copy of org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingReconciler
  */
-public class XtextStyledTextHighlightingReconciler implements
+class XtextStyledTextHighlightingReconciler implements
 		ITextInputListener, IXtextModelListener, IHighlightedPositionAcceptor {
 
 	@Inject(optional = true)
@@ -38,7 +36,7 @@ public class XtextStyledTextHighlightingReconciler implements
 	private ITextAttributeProvider attributeProvider;
 
 	/** The Xtext editor this highlighting reconciler is installed on */
-	private XtextStyledText styledText;
+	private StyledTextXtextAdapter styledTextXtextAdapter;
 	/** The source viewer this highlighting reconciler is installed on */
 	private XtextSourceViewer sourceViewer;
 	/** The highlighting presenter */
@@ -174,14 +172,14 @@ public class XtextStyledTextHighlightingReconciler implements
 	 * @param presenter
 	 *            the highlighting presenter
 	 */
-	public void install(XtextStyledText editor, XtextSourceViewer sourceViewer,
+	public void install(StyledTextXtextAdapter xtextStyledText, XtextSourceViewer sourceViewer,
 			HighlightingPresenter presenter) {
 		this.presenter = presenter;
-		this.styledText = editor;
+		this.styledTextXtextAdapter = xtextStyledText;
 		this.sourceViewer = sourceViewer;
 		if (calculator != null) {
-			if (editor.getDocument() != null)
-				editor.getDocument().addModelListener(this);
+			if (styledTextXtextAdapter.getXtextDocument() != null)
+				styledTextXtextAdapter.getXtextDocument().addModelListener(this);
 
 			sourceViewer.addTextInputListener(this);
 		}
@@ -195,13 +193,13 @@ public class XtextStyledTextHighlightingReconciler implements
 		if (presenter != null)
 			presenter.setCanceled(true);
 
-		if (styledText != null) {
+		if (styledTextXtextAdapter != null) {
 			if (calculator != null) {
-				if (styledText.getDocument() != null)
-					styledText.getDocument().removeModelListener(this);
+				if (styledTextXtextAdapter.getXtextDocument() != null)
+					styledTextXtextAdapter.getXtextDocument().removeModelListener(this);
 				sourceViewer.removeTextInputListener(this);
 			}
-			styledText = null;
+			styledTextXtextAdapter = null;
 		}
 
 		sourceViewer = null;
@@ -236,7 +234,7 @@ public class XtextStyledTextHighlightingReconciler implements
 	 */
 	public void refresh() {
 		if (calculator != null) {
-			styledText.getDocument().readOnly(
+			styledTextXtextAdapter.getXtextDocument().readOnly(
 					new IUnitOfWork.Void<XtextResource>() {
 						@Override
 						public void process(XtextResource state)

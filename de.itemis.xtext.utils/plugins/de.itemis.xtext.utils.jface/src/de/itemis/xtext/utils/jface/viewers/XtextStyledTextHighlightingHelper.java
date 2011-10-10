@@ -14,32 +14,30 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
- * Highlighting helper.
- * Initially copied from org.eclipse.jdt.internal.ui.javaeditor.SemanticHighlightingManager
- * 
- * @author Sebastian Zarnekow
+ * Modified copy of
+ * org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingHelper
  */
-public class XtextStyledTextHighlightingHelper implements IPropertyChangeListener {
+class XtextStyledTextHighlightingHelper implements IPropertyChangeListener {
 
 	@Inject
 	private Provider<XtextStyledTextHighlightingReconciler> reconcilerProvider;
-	
+
 	@Inject
 	private Provider<HighlightingPresenter> presenterProvider;
-	
+
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccessor;
-	
+
 	@Inject
 	private TextAttributeProvider textAttributeProvider;
-	
+
 	/** Highlighting presenter */
 	private HighlightingPresenter fPresenter;
 	/** Highlighting reconciler */
 	private XtextStyledTextHighlightingReconciler fReconciler;
 
 	/** The editor */
-	private XtextStyledText styledText;
+	private StyledTextXtextAdapter styledTextXtextAdapter;
 	/** The source viewer */
 	private XtextSourceViewer fSourceViewer;
 	/** The source viewer configuration */
@@ -49,15 +47,18 @@ public class XtextStyledTextHighlightingHelper implements IPropertyChangeListene
 
 	private IPreferenceStore preferenceStore;
 
-	public void install(XtextStyledText editor, XtextSourceViewer sourceViewer) {
-		styledText= editor;
-		fSourceViewer= sourceViewer;
-		if (styledText != null) {
-			fConfiguration= editor.getSourceViewerConfiguration();
-			fPresentationReconciler= (XtextPresentationReconciler) fConfiguration.getPresentationReconciler(sourceViewer);
+	public void install(StyledTextXtextAdapter styledTextXtextAdapter,
+			XtextSourceViewer sourceViewer) {
+		this.styledTextXtextAdapter = styledTextXtextAdapter;
+		fSourceViewer = sourceViewer;
+		if (styledTextXtextAdapter != null) {
+			fConfiguration = styledTextXtextAdapter
+					.getXtextSourceViewerConfiguration();
+			fPresentationReconciler = (XtextPresentationReconciler) fConfiguration
+					.getPresentationReconciler(sourceViewer);
 		} else {
-			fConfiguration= null;
-			fPresentationReconciler= null;
+			fConfiguration = null;
+			fPresentationReconciler = null;
 		}
 		preferenceStore = getPreferenceStoreAccessor().getPreferenceStore();
 		preferenceStore.addPropertyChangeListener(this);
@@ -68,12 +69,12 @@ public class XtextStyledTextHighlightingHelper implements IPropertyChangeListene
 	 * Enable advanced highlighting.
 	 */
 	private void enable() {
-		fPresenter= getPresenterProvider().get();
+		fPresenter = getPresenterProvider().get();
 		fPresenter.install(fSourceViewer, fPresentationReconciler);
 
-		if (styledText != null) {
-			fReconciler= reconcilerProvider.get();
-			fReconciler.install(styledText, fSourceViewer, fPresenter);
+		if (styledTextXtextAdapter != null) {
+			fReconciler = reconcilerProvider.get();
+			fReconciler.install(styledTextXtextAdapter, fSourceViewer, fPresenter);
 		}
 	}
 
@@ -82,10 +83,10 @@ public class XtextStyledTextHighlightingHelper implements IPropertyChangeListene
 		if (preferenceStore != null) {
 			preferenceStore.removePropertyChangeListener(this);
 		}
-		styledText= null;
-		fSourceViewer= null;
-		fConfiguration= null;
-		fPresentationReconciler= null;
+		styledTextXtextAdapter = null;
+		fSourceViewer = null;
+		fConfiguration = null;
+		fPresentationReconciler = null;
 	}
 
 	/**
@@ -94,25 +95,26 @@ public class XtextStyledTextHighlightingHelper implements IPropertyChangeListene
 	private void disable() {
 		if (fReconciler != null) {
 			fReconciler.uninstall();
-			fReconciler= null;
+			fReconciler = null;
 		}
 
 		if (fPresenter != null) {
 			fPresenter.uninstall();
-			fPresenter= null;
+			fPresenter = null;
 		}
 	}
 
 	/**
 	 * Returns this hightlighter's reconciler.
-	 *
+	 * 
 	 * @return the highlighter reconciler or <code>null</code> if none
 	 */
 	public XtextStyledTextHighlightingReconciler getReconciler() {
 		return fReconciler;
 	}
 
-	public void setReconcilerProvider(Provider<XtextStyledTextHighlightingReconciler> reconcilerProvider) {
+	public void setReconcilerProvider(
+			Provider<XtextStyledTextHighlightingReconciler> reconcilerProvider) {
 		this.reconcilerProvider = reconcilerProvider;
 	}
 
@@ -120,7 +122,8 @@ public class XtextStyledTextHighlightingHelper implements IPropertyChangeListene
 		return reconcilerProvider;
 	}
 
-	public void setPresenterProvider(Provider<HighlightingPresenter> presenterProvider) {
+	public void setPresenterProvider(
+			Provider<HighlightingPresenter> presenterProvider) {
 		this.presenterProvider = presenterProvider;
 	}
 
@@ -128,7 +131,8 @@ public class XtextStyledTextHighlightingHelper implements IPropertyChangeListene
 		return presenterProvider;
 	}
 
-	public void setPreferenceStoreAccessor(IPreferenceStoreAccess preferenceStoreAccessor) {
+	public void setPreferenceStoreAccessor(
+			IPreferenceStoreAccess preferenceStoreAccessor) {
 		this.preferenceStoreAccessor = preferenceStoreAccessor;
 	}
 
@@ -137,7 +141,8 @@ public class XtextStyledTextHighlightingHelper implements IPropertyChangeListene
 	}
 
 	public void propertyChange(PropertyChangeEvent event) {
-		if (fReconciler != null && event.getProperty().contains(".syntaxColorer.tokenStyles")) {
+		if (fReconciler != null
+				&& event.getProperty().contains(".syntaxColorer.tokenStyles")) {
 			textAttributeProvider.propertyChange(event);
 			fReconciler.refresh();
 		}

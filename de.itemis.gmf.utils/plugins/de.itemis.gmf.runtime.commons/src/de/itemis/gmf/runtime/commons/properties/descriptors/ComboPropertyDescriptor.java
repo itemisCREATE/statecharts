@@ -54,8 +54,6 @@ public class ComboPropertyDescriptor extends AbstractPropertyDescriptor {
 		comboViewer.setLabelProvider(new LabelProvider());
 		comboViewer.setInput(items);
 		comboViewer.getControl().setEnabled(items.length > 0);
-
-		applyLayout(comboViewer.getControl());
 		return comboViewer.getControl();
 	}
 

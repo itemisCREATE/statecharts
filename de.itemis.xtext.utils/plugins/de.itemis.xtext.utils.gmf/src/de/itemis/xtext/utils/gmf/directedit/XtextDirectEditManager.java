@@ -13,6 +13,7 @@
 package de.itemis.xtext.utils.gmf.directedit;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -63,7 +64,8 @@ import org.eclipse.ui.part.CellEditorActionHandler;
 
 import com.google.inject.Injector;
 
-import de.itemis.xtext.utils.gmf.viewers.XtextCellEditorEx;
+import de.itemis.xtext.utils.gmf.viewers.XtextStyledTextCellEditorEx;
+import de.itemis.xtext.utils.jface.viewers.context.CloningBasedFakeContextResourcesProvider;
 
 /**
  * @author melaasar
@@ -128,7 +130,8 @@ public class XtextDirectEditManager extends DirectEditManager {
 	 *            figure of the <code>source</code> edit part must be of type
 	 *            <code>WrapLabel</code>.
 	 */
-	public XtextDirectEditManager(IXtextAwareEditPart source, Injector injector, int style) {
+	public XtextDirectEditManager(IXtextAwareEditPart source,
+			Injector injector, int style) {
 		this(source, null, getTextCellEditorLocator(source), injector, style);
 	}
 
@@ -262,8 +265,11 @@ public class XtextDirectEditManager extends DirectEditManager {
 			return super.createCellEditorOn(composite);
 		}
 
-		XtextCellEditorEx editor = new XtextCellEditorEx(style, injector,
-				getEditPart().resolveSemanticElement().eResource());
+		// TODO: pull context up (should be provided in constructor)
+		XtextStyledTextCellEditorEx editor = new XtextStyledTextCellEditorEx(
+				style, injector,
+				new CloningBasedFakeContextResourcesProvider(
+						Collections.singletonList(getEditPart().resolveSemanticElement().eResource())));
 		editor.create(composite);
 		return editor;
 	}
@@ -346,7 +352,8 @@ public class XtextDirectEditManager extends DirectEditManager {
 				 * stay in focus
 				 */
 				getCellEditor().getControl().setVisible(true);
-				((XtextCellEditorEx) getCellEditor()).setDeactivationLock(true);
+				((XtextStyledTextCellEditorEx) getCellEditor())
+						.setDeactivationLock(true);
 				return;
 			}
 		}
@@ -636,10 +643,10 @@ public class XtextDirectEditManager extends DirectEditManager {
 			// TODO: handle exception
 		}
 	}
-	
+
 	@Override
 	protected IXtextAwareEditPart getEditPart() {
-		return (IXtextAwareEditPart)super.getEditPart();
+		return (IXtextAwareEditPart) super.getEditPart();
 	}
 
 	/**

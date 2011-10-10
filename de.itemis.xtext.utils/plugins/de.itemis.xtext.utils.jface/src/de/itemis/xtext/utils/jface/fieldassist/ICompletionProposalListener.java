@@ -3,6 +3,8 @@ package de.itemis.xtext.utils.jface.fieldassist;
 /**
  * This interface is used to listen to additional notifications from a
  * {@link CompletionProposalAdapter}.
+ * 
+ * @author patrick.koenemann@itemis.de
  *
  */
 public interface ICompletionProposalListener {

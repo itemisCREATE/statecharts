@@ -5,34 +5,42 @@ import java.lang.reflect.Field;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.projection.ProjectionDocument;
-import org.eclipse.jface.text.source.IOverviewRuler;
-import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Layout;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
+
 
 /**
  * Source viewer replacement that implements a workaround for Eclipse bug
  * #352847 to enable that offsets are respected.
  * 
- * @author alexander nyssen (alexander.nyssen@itemis.de)
+ * @author alexander.nyssen@itemis.de
  * 
  */
-public class XtextSourceViewerEx extends XtextSourceViewer {
+class XtextSourceViewerEx extends XtextSourceViewer {
 
-	public XtextSourceViewerEx(Composite parent, IVerticalRuler ruler,
-			IOverviewRuler overviewRuler, boolean showsAnnotationOverview,
-			int styles) {
-		super(parent, ruler, overviewRuler, showsAnnotationOverview, styles);
+	private final StyledText styledText;
+
+	public XtextSourceViewerEx(StyledText styledText) {
+		// super constructor will create a new text widget by calling
+		// createControl(). As we want to use the passed in styled text, we have
+		// to disable this mechanism.
+		super(null, null, null, false, styledText.getStyle());
+		this.styledText = styledText;
+		super.createControl(styledText.getParent(), styledText.getStyle());
 	}
 
-	public static class DefaultFactoryEx implements Factory {
-		public XtextSourceViewer createSourceViewer(Composite parent,
-				IVerticalRuler ruler, IOverviewRuler overviewRuler,
-				boolean showsAnnotationOverview, int styles) {
-			return new XtextSourceViewerEx(parent, ruler, overviewRuler,
-					showsAnnotationOverview, styles);
-		}
+	@Override
+	protected void createControl(Composite parent, int styles) {
+		// do nothing here (will be called by super constructor)
+	}
+
+	@Override
+	protected StyledText createTextWidget(Composite parent, int styles) {
+		return styledText;
 	}
 
 	/**
