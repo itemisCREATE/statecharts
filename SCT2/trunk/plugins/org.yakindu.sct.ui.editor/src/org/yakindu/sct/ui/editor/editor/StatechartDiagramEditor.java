@@ -11,8 +11,13 @@
 package org.yakindu.sct.ui.editor.editor;
 
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.draw2d.ConnectionLayer;
+import org.eclipse.draw2d.ViewportAwareConnectionLayerClippingStrategy;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
+import org.eclipse.gef.LayerConstants;
+import org.eclipse.gef.RootEditPart;
+import org.eclipse.gef.editparts.LayerManager;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.swt.widgets.Composite;
@@ -72,7 +77,6 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 		return DiagramActivator.DIAGRAM_PREFERENCES_HINT;
 	}
 
-
 	@Override
 	protected void createGraphicalViewer(Composite parent) {
 		super.createGraphicalViewer(parent);
@@ -87,5 +91,21 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 	@Override
 	public String getContributorId() {
 		return ID;
+	}
+
+	@Override
+	protected void configureGraphicalViewer() {
+		super.configureGraphicalViewer();
+		RootEditPart rootEditPart = getDiagramGraphicalViewer()
+				.getRootEditPart();
+
+		// set clipping strategy for connection layer
+		if (rootEditPart instanceof LayerManager) {
+			ConnectionLayer connectionLayer = (ConnectionLayer) ((LayerManager) rootEditPart)
+					.getLayer(LayerConstants.CONNECTION_LAYER);
+			connectionLayer
+					.setClippingStrategy(new ViewportAwareConnectionLayerClippingStrategy(
+							connectionLayer));
+		}
 	}
 }
