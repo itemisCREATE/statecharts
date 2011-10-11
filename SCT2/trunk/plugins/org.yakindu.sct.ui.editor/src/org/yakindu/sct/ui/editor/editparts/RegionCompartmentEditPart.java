@@ -11,14 +11,13 @@
 package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.IScrollableFigure;
 import org.eclipse.draw2d.LayoutAnimator;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
+import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.sct.ui.editor.editor.figures.RegionCompartmentFigure;
 import org.yakindu.sct.ui.editor.policies.CompartmentCreationEditPolicy;
 import org.yakindu.sct.ui.editor.policies.RegionCompartmentCanonicalEditPolicy;
 import org.yakindu.sct.ui.editor.policies.RegionCompartmentXYLayoutEditPolicy;
@@ -58,7 +57,7 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 
 	@Override
 	protected IFigure createFigure() {
-		RegionCompartmentFigure figure = new RegionCompartmentFigure(
+		ShapeCompartmentFigure figure = new ShapeCompartmentFigure(
 				getCompartmentName(), getMapMode());
 		figure.getContentPane().setLayoutManager(getLayoutManager());
 		figure.getContentPane().addLayoutListener(LayoutAnimator.getDefault());
