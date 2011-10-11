@@ -13,25 +13,22 @@ Templates for the main statechart cpp file.
 
 «DEFINE file FOR ExecutionFlow»
 
-«FILE 'Statemachine.cpp'»
-#include "Statemachine.h"
+«FILE 'Statemachine_ev.cpp'»
+#include "Statemachine_ev.h"
 #include "StatemachineException.h"
 
-Statemachine::Statemachine(uint16_t maxStates) {
-	state = new uint32_t[maxStates]; /* memory allocation for all states */
-	statePtr = 0; /* actual state referencer */
+Statemachine_ev::Statemachine_ev(uint16_t maxStates, uint16_t maxEvents, Timer* _timer) : StatemachineBase(maxStates, _timer){
 }
 
-Statemachine::~Statemachine() {
-	delete[] state;
+Statemachine_ev::~Statemachine_ev() {
 }
 
-void Statemachine::queueEvent(Event ev) {
+void Statemachine_ev::queueEvent(Event ev) {
 	/* creates a copy */
 	eventList.push_back(ev);
 }
 
-Event Statemachine::getEvent() {
+Event Statemachine_ev::getEvent() {
 	if (eventList.empty())
 		throw(StatechartException("There is no event available"));
 	Event retEvent = eventList.front();
@@ -39,16 +36,18 @@ Event Statemachine::getEvent() {
 	return (retEvent);
 }
 
-bool Statemachine::eventWaiting() const {
+bool Statemachine_ev::eventWaiting() const {
 	return (!eventList.empty());
 }
 
-void Statemachine::runCycle() {
+void Statemachine_ev::runCycle() {
 	if (!eventWaiting())
 		return;
 
 	Event ev = getEvent();
+	_setActualEventData(ev);
 	_runCycle(ev);
+	_removeActualEventData();
 
 	delete ev;
 }

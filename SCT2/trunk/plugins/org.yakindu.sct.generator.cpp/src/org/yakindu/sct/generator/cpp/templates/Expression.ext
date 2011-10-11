@@ -46,7 +46,7 @@ String toCppCode(LogicalNotExpression expression) :
   	" ^" + expression.operand.toCppCode();
 
 String toCppCode(LogicalRelationExpression expression) :
-   expression.leftOperand.toCppCode() + " ??? " + expression.rightOperand.toCppCode();
+   expression.leftOperand.toCppCode() + getOperator(expression.operator) + expression.rightOperand.toCppCode();
     
 String toCppCode(BitwiseAndExpression expression) :
   	expression.leftOperand.toCppCode() + " & " + expression.rightOperand.toCppCode();
@@ -65,7 +65,7 @@ String toCppCode(NumericalMultiplyDivideExpression expression) :
 
 // is this just relevant for events?
 String toCppCode(ElementReferenceExpression ev) :
-    " ( _" + ev.value.name.toLowerCase() + " == ev.getID() ) ";
+    " eventSet.check( ev_" + ev.value.name.toLowerCase() + ") ";
 
 String getOperator(AdditiveOperator operator) : 
     switch(operator) {
@@ -82,3 +82,13 @@ String getOperator(MultiplicativeOperator operator) :
     	default : ""
     };
 
+String getOperator(RelationalOperator operator) :
+	switch (operator) {
+	  case (RelationalOperator::greater) : " > "
+	  case (RelationalOperator::greaterEqual) : " >= "
+	  case (RelationalOperator::smaller) : " < "
+	  case (RelationalOperator::smallerEqual) : " <= "
+	  case (RelationalOperator::equals) : " == "
+	  case (RelationalOperator::notEquals) : " != "
+	  default : ""
+	};
