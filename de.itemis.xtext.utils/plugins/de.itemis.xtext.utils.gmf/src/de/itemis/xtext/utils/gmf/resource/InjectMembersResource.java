@@ -40,6 +40,8 @@ public class InjectMembersResource extends GMFResource implements
 	private static final boolean isDebug = false;
 
 	private boolean parsing = false;
+	
+	private String languageName;
 
 	List<org.eclipse.emf.common.util.Diagnostic> diagnostics = new ArrayList<org.eclipse.emf.common.util.Diagnostic>();
 
@@ -173,6 +175,15 @@ public class InjectMembersResource extends GMFResource implements
 		public boolean isAdapterForType(Object type) {
 			return ReparseAdapter.class == type;
 		}
+	}
+	
+
+	public String getLanguageName() {
+		return languageName;
+	}
+
+	public void setLanguageName(String languageName) {
+		this.languageName = languageName;
 	}
 
 	public boolean isParsing() {
