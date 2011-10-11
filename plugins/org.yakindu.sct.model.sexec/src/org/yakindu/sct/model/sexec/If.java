@@ -6,7 +6,6 @@
  */
 package org.yakindu.sct.model.sexec;
 
-import org.yakindu.sct.model.sgraph.Statement;
 
 /**
  * <!-- begin-user-doc -->

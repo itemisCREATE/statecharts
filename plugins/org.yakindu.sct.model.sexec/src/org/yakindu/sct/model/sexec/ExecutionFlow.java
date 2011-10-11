@@ -7,9 +7,7 @@
 package org.yakindu.sct.model.sexec;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.yakindu.sct.model.sgraph.ScopedElement;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
