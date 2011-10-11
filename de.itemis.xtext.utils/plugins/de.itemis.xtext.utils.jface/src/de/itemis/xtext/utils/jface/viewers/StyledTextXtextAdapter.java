@@ -1,16 +1,14 @@
 package de.itemis.xtext.utils.jface.viewers;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.text.IDocumentPartitioner;
-import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
+import org.eclipse.jface.text.source.ISharedTextColors;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Event;
@@ -54,6 +52,7 @@ import de.itemis.xtext.utils.jface.viewers.context.XtextFakeResourceContext;
  * @author patrick.koenemann@itemis.de
  * 
  */
+@SuppressWarnings("restriction")
 public class StyledTextXtextAdapter {
 
 	/**
@@ -165,7 +164,7 @@ public class StyledTextXtextAdapter {
 		sourceviewer.setDocument(document, new AnnotationModel());
 		SourceViewerDecorationSupport support = new SourceViewerDecorationSupport(
 				sourceviewer, null, new DefaultMarkerAnnotationAccess(),
-				EditorsPlugin.getDefault().getSharedTextColors());
+				getSharedColors());
 		configureSourceViewerDecorationSupport(support);
 	}
 
@@ -174,8 +173,12 @@ public class StyledTextXtextAdapter {
 		sourceviewer.setDocument(document, new AnnotationModel());
 		SourceViewerDecorationSupport support = new SourceViewerDecorationSupport(
 				sourceviewer, null, new DefaultMarkerAnnotationAccess(),
-				EditorsPlugin.getDefault().getSharedTextColors());
+				getSharedColors());
 		configureSourceViewerDecorationSupport(support);
+	}
+	
+	protected ISharedTextColors getSharedColors() {
+		return EditorsPlugin.getDefault().getSharedTextColors();
 	}
 
 	/**
