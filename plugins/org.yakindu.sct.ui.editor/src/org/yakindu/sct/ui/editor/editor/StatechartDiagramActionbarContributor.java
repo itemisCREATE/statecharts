@@ -15,8 +15,8 @@ import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramActionBarContributor;
 import org.eclipse.ui.IActionBars;
 /**
  * 
- * @author Andreas Muelder <a href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
-*
+ * @author andreas muelder - Initial contribution and API
+ *
  */
 public class StatechartDiagramActionbarContributor extends
 		DiagramActionBarContributor {

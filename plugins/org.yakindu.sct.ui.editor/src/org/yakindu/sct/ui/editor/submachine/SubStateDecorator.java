@@ -1,6 +1,8 @@
 package org.yakindu.sct.ui.editor.submachine;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.GhostImageFigure;
 import org.eclipse.draw2d.ImageFigure;
 import org.eclipse.draw2d.MouseEvent;
 import org.eclipse.draw2d.MouseListener;
@@ -91,14 +93,18 @@ public abstract class SubStateDecorator extends BaseDecorator {
 			}
 
 			public void mouseEntered(MouseEvent me) {
-				decoration.setToolTip(new ImageFigure());
 				Diagram diagram = getTooltipDiagramToRender(semanticElement);
 				if (diagram != null) {
 					Image renderImage = renderImage(diagram);
-					ImageFigure toolTip = (ImageFigure) decoration.getToolTip();
+					ImageFigure toolTip = new ImageFigure(renderImage);
+					System.out.println("Image bounds " + renderImage.getBounds());
+					toolTip.setSize(renderImage.getBounds().width, renderImage.getBounds().height);
+					System.out.println("Tooltip bounds " + toolTip.getBounds());
+					GhostImageFigure ghost = new GhostImageFigure(toolTip, 80, ColorConstants.white.getRGB());
 					if (toolTip.getImage() != null)
 						toolTip.getImage().dispose();
-					toolTip.setImage(renderImage);
+					ghost.setSize(toolTip.getSize().getCopy());
+					decoration.setToolTip(ghost);
 				}
 			}
 

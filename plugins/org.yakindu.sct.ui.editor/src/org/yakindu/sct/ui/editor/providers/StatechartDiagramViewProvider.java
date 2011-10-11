@@ -20,8 +20,8 @@ import org.eclipse.gmf.runtime.diagram.ui.view.factories.optimal.CompartmentView
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.optimal.ShapeViewFactory;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
-import org.yakindu.sct.ui.editor.factories.BorderItemLabelViewFactory;
 import org.yakindu.sct.ui.editor.factories.BorderItemContainerViewFactory;
+import org.yakindu.sct.ui.editor.factories.BorderItemLabelViewFactory;
 import org.yakindu.sct.ui.editor.factories.RegionViewFactory;
 import org.yakindu.sct.ui.editor.factories.StateTextCompartmentViewFactory;
 import org.yakindu.sct.ui.editor.factories.StateViewFactory;
