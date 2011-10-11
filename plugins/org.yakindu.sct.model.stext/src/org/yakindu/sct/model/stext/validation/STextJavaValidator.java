@@ -11,7 +11,10 @@
  */
 package org.yakindu.sct.model.stext.validation;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.yakindu.sct.model.sgraph.Declaration;
@@ -30,6 +33,8 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartDefinition;
 import org.yakindu.sct.model.stext.stext.StextPackage;
+
+import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
 
 /**
  * Several validations for nonsensical expressions.
@@ -111,5 +116,14 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			element = element.eContainer();
 		}
 		return false;
+	}
+
+	@Override
+	protected String getCurrentLanguage(Map<Object, Object> context,
+			EObject eObject) {
+		Resource resource = eObject.eResource();
+		if (resource instanceof InjectMembersResource)
+			return ((InjectMembersResource) resource).getLanguageName();
+		return super.getCurrentLanguage(context, eObject);
 	}
 }

@@ -55,17 +55,24 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 				new ResourceSetListenerImpl() {
 					@Override
 					public void resourceSetChanged(ResourceSetChangeEvent event) {
-						Display.getDefault().asyncExec(new Runnable() {
-							public void run() {
-								if (getDiagram() != null) {
-									ValidationAction.validate(
-											getDiagramEditPart(), getDiagram());
-								}
-							}
-						});
-
+						validate();
 					}
 				});
+	}
+	protected void validate() {
+		Display.getDefault().asyncExec(new Runnable() {
+			public void run() {
+				if (getDiagram() != null) {
+					ValidationAction.validate(
+							getDiagramEditPart(), getDiagram());
+				}
+			}
+		});
+	}
+	@Override
+	protected void sanityCheckState(IEditorInput input) {
+		super.sanityCheckState(input);
+		validate();
 	}
 
 	public void gotoMarker(IMarker marker) {

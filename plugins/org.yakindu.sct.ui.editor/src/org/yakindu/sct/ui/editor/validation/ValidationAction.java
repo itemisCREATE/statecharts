@@ -44,7 +44,7 @@ public class ValidationAction implements IMarkerType {
 				e.printStackTrace();
 			}
 		}
-
+		
 		// // Ecore constraints
 		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(view
 				.getElement());
@@ -55,7 +55,7 @@ public class ValidationAction implements IMarkerType {
 					DIAGRAM_MARKER_TYPE, (EObject) child.getData().get(0));
 		}
 
-		// Diagnosticans from the InkectMembersResoruce
+		// Diagnosticans from the InjectMembersResoruce
 		if (view.eResource() instanceof InjectMembersResource) {
 			InjectMembersResource resource = (InjectMembersResource) view
 					.eResource();
@@ -66,7 +66,6 @@ public class ValidationAction implements IMarkerType {
 						XTEXT_MARKER_TYPE, (EObject) child.getData().get(0));
 			}
 		}
-
 	}
 
 }
