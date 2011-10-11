@@ -15,7 +15,6 @@ import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.Step;
-import org.yakindu.sct.model.sgraph.Statement;
 
 /**
  * <!-- begin-user-doc -->
