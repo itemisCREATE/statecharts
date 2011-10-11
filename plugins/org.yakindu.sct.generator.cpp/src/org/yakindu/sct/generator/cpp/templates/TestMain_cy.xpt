@@ -16,39 +16,34 @@ Templates for the main statechart cpp file.
 
 «DEFINE file FOR ExecutionFlow»
 
-«FILE 'main.cpp'»
-
-/*
- * main.cpp
- *
- *  Created on: 10.09.2011
- *      Author: seger
- */
-
+«FILE 'main_cy.cpp'»
 #include <cstdio>
 #include <iostream>
-#include "«StName()».h"
-// #include "«DRName()».h"
+#include <cstring>
+#include <assert.h>
+#include "«StNameCy()».h"
 #include "«EvName()».h"
+#include "Timer.h"
+#include "DummyTimer.h"
 
 int main()
 {
-
-	char* stateName[6] = {"State1", "State2", "State3", "State4", "State5", "State6"};
-	«StName()» machine;
-
-	// initialize the initial states 
-	machine.init();
+	Timer* timer;
 	
-	/* Example code 
-	// create one event and enqueue it 
+	const char* stateName[6] = {"State1", "State2", "State3", "State4", "State5", "State6"};
+	«StNameCy()» machine(timer = new DummyTimer);
+
+	/* initialize the initial states */
+	machine.init();
+
+	/* create one event and enqueue it */
 	Event e = createEvent<Event1>();
 	machine.queueEvent(e);
 
-	// run the cycle 
+	/* run the cycle */
 	machine.runCycle();
 
-	// check the state 
+	/* check the state */
 	std::cout << stateName[machine.getState(0)] << "\n";
 	assert( strcmp(stateName[machine.getState(0)], "State3") == 0);
 
@@ -60,7 +55,7 @@ int main()
 	std::cout << stateName[machine.getState(0)] << "\n";
 	assert( strcmp(stateName[machine.getState(0)], "State1") == 0);
 
-	// does event queuing work?
+	/* does event queuing work? */
 	e = createEvent<Event1>();
 	machine.queueEvent(e);
 	e = createEvent<Event3>();
@@ -71,7 +66,14 @@ int main()
 	std::cout << stateName[machine.getState(0)] << "\n";
 	assert( strcmp(stateName[machine.getState(0)], "State3") == 0);
 
-	// run second cycle
+	assert( machine.eventWaiting() == false );
+
+	e = createEvent<Event3>();
+	machine.queueEvent(e);
+
+	assert( machine.eventWaiting() == true );
+
+	/* run second cycle */
 	machine.runCycle();
 
 	std::cout << stateName[machine.getState(0)] << "\n";
@@ -101,12 +103,10 @@ int main()
 	std::cout << stateName[machine.getState(0)] << "\n";
 	assert( strcmp(stateName[machine.getState(0)], "State1") == 0);
 
-	*/
-	
-	return(0);
-	
-}
+    delete timer;
 
+	return(0);
+}
 «ENDFILE»
 
 «ENDDEFINE»

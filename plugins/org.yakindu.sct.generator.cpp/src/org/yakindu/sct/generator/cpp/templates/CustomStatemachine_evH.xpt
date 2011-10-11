@@ -15,18 +15,18 @@ Templates for the main statechart cpp file.
 
 «DEFINE file FOR ExecutionFlow»
 
-«FILE StName()+'.h'»
+«FILE StName()+'_ev.h'»
 #ifndef «STNAME()»_H_
 #define «STNAME()»_H_
 
-#include "Statemachine.h"
+#include "Statemachine_ev.h"
 #include "«DRName()».h"
 #include "«EvName()».h"
 
 
 #define MAX_PARALLEL_STATES «this.stateVector.size»
 
-class «StName()»: public Statemachine, public «DRName()» {
+class «StNameEv()»: public Statemachine_ev, public «DRName()» {
 
 public:
 	enum States {
@@ -73,11 +73,13 @@ protected:
 	«ENDFOREACH»
 	
 	virtual void _runCycle(Event ev);
+	virtual void _setActualEventData(Event ev);
+	virtual void _removeActualEventData();
 
 public:
 
-	«StName()»();
-	virtual ~«StName()»();
+	«StNameEv()»(Timer* timer);
+	virtual ~«StNameEv()»();
 
 	virtual void init();
 

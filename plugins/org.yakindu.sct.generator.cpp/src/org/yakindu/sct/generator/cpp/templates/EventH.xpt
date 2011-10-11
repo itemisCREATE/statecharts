@@ -25,7 +25,7 @@ protected:
 	uint32_t ID;
 
 public:
-	_Event() : ID(-1) {}
+	_Event() : ID(0xffffffff) {}
 	_Event(int _ID) : ID(_ID) {}
 	virtual ~_Event() {}
 

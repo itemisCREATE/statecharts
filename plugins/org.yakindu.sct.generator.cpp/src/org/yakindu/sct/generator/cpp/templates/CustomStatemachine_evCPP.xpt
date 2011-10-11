@@ -71,7 +71,7 @@ state[0] = last_state;
 «DEFINE ConditionMethodsImplement FOR ExecutionState»
   «FOREACH reactions AS r»
   «IF r.check != null -»
-bool «StName()»::«r.check.functionName()»(const _Event& ev) {
+bool «StNameEv()»::«r.check.functionName()»(const _Event& ev) {
   return (	«r.check.condition.toCppCode()» );
 }
   «ENDIF -»
@@ -91,7 +91,7 @@ void «this.StName()»::«r.effect.functionName()»() {
 «ENDDEFINE»
 
 «DEFINE CycleMethodsImplement FOR ExecutionState»
-void «StName()»::cycle_«this.simpleName»(const _Event& ev)
+void «StNameEv()»::cycle_«this.simpleName»(const _Event& ev)
 {
 	«EXPAND CycleCode FOR cycle»
 }
@@ -99,7 +99,7 @@ void «StName()»::cycle_«this.simpleName»(const _Event& ev)
 
 «DEFINE EnterMethodImplement FOR ExecutionState»
 «IF this.entryAction != null»
-void «StName()»::«this.entryAction.entryActionFunctionName()»()
+void «StNameEv()»::«this.entryAction.entryActionFunctionName()»()
 {
 «EXPAND ActionCode FOR this.entryAction»
 }
@@ -108,7 +108,7 @@ void «StName()»::«this.entryAction.entryActionFunctionName()»()
 
 «DEFINE ExitMethodImplement FOR ExecutionState»
 «IF this.exitAction != null»
-void «StName()»::«this.exitAction.exitActionFunctionName()»()
+void «StNameEv()»::«this.exitAction.exitActionFunctionName()»()
 {
 «EXPAND ActionCode FOR this.exitAction»
 }
@@ -116,14 +116,14 @@ void «StName()»::«this.exitAction.exitActionFunctionName()»()
 «ENDDEFINE»
 
 «DEFINE file FOR ExecutionFlow»
-«FILE StName()+'.cpp'»
+«FILE StName()+'_ev.cpp'»
 #include <iostream>
-#include "«StName()».h"
+#include "«StNameEv()».h"
 
-«StName()»::«StName()»() : Statemachine(«((ExecutionFlow)this.eRootContainer).stateVector.size») {
+«StNameEv()»::«StNameEv()»(Timer* _timer) : Statemachine_ev(«((ExecutionFlow)this.eRootContainer).stateVector.size», event_last, _timer) {
 }
 
-«StName()»::~«StName()»() {
+«StNameEv()»::~«StNameEv()»() {
 }
 
 «EXPAND ConditionMethodsImplement FOREACH this.states»
@@ -137,18 +137,28 @@ void «StName()»::«this.exitAction.exitActionFunctionName()»()
 «EXPAND ExitMethodImplement FOREACH this.states»
 
 
-void «StName()»::init()
+void «StNameEv()»::init()
 {
 	«EXPAND ActionCode FOREACH this.enterSequence.steps»
 }
 
 /* Yet unimplemented
-void «StName()»::exit()
+void «StNameEv()»::exit()
 {
 }
 */
 
-void «StName()»::_runCycle(Event ev)
+void «StNameEv()»::_setActualEventData(Event ev)
+{
+	setEventData(ev);
+}
+
+void «StNameEv()»::_removeActualEventData()
+{
+	clearEventData();
+}
+
+void «StNameEv()»::_runCycle(Event ev)
 {
 	for (int i=0; i<MAX_PARALLEL_STATES; ++i) {
 		switch(state[i]) {
