@@ -10,26 +10,27 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.IScrollableFigure;
+import org.eclipse.draw2d.LayoutAnimator;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
-import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.ui.editor.editor.figures.RegionCompartmentFigure;
 import org.yakindu.sct.ui.editor.policies.CompartmentCreationEditPolicy;
 import org.yakindu.sct.ui.editor.policies.RegionCompartmentCanonicalEditPolicy;
 import org.yakindu.sct.ui.editor.policies.RegionCompartmentXYLayoutEditPolicy;
 
-
 /**
  * @author muelder
+ * @author muehlbrandt
  */
 public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
-	
+
 	private boolean isSupportingViewActions = true;
-	
+
 	public RegionCompartmentEditPart(View view) {
 		super(view);
 	}
@@ -46,21 +47,24 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 		installEditPolicy(EditPolicy.LAYOUT_ROLE,
 				new RegionCompartmentXYLayoutEditPolicy());
 	}
-	
-	public boolean isSupportingViewActions(){
+
+	public boolean isSupportingViewActions() {
 		return this.isSupportingViewActions;
 	}
-	
-	public void setIsSupportingViewActions(boolean supportsViewActions){
+
+	public void setIsSupportingViewActions(boolean supportsViewActions) {
 		this.isSupportingViewActions = supportsViewActions;
 	}
 
 	@Override
 	protected IFigure createFigure() {
-		ShapeCompartmentFigure figure = (ShapeCompartmentFigure) super
-				.createFigure();
+		RegionCompartmentFigure figure = new RegionCompartmentFigure(
+				getCompartmentName(), getMapMode());
+		figure.getContentPane().setLayoutManager(getLayoutManager());
+		figure.getContentPane().addLayoutListener(LayoutAnimator.getDefault());
 		figure.setBorder(null);
-		figure.setToolTip((String)null);
+		//
+		figure.setToolTip((String) null);
 		return figure;
 	}
 
@@ -69,4 +73,9 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 		return false;
 	}
 
+	@Override
+	protected void refreshConnections() {
+		// Do nothing to prevent super.refreshConnections() from clearing away
+		// connections which are now clipped by ViewportAwareClippingStrategy.
+	}
 }
