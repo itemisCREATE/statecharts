@@ -56,7 +56,7 @@ public final class GMFMarkerUtil {
 			return;
 		}
 		View view = findNotationView(diagram, semanticTarget);
-		if(view == null)
+		if (view == null)
 			return;
 		String uriFragment = view.eResource().getURIFragment(view);
 
@@ -76,6 +76,9 @@ public final class GMFMarkerUtil {
 					&& semanticElement.equals(((View) eObject).getElement())) {
 				return (View) eObject;
 			}
+		}
+		if (semanticElement.eContainer() != null) {
+			return findNotationView(diagram, semanticElement.eContainer());
 		}
 		return null;
 
