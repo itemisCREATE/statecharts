@@ -20,6 +20,7 @@ import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerLabel;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IEditorInput;
@@ -42,9 +43,23 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		parent.setLayout(new org.eclipse.swt.layout.GridLayout(1, true));
+		parent.setLayout(createGridLayout());
+		// grid layout will produce small left and right trimmings; these should
+		// be removed as well
 		super.createPartControl(parent);
 		createBreadcrumpViewer(parent);
+	}
+
+	private org.eclipse.swt.layout.GridLayout createGridLayout() {
+		org.eclipse.swt.layout.GridLayout layout = new org.eclipse.swt.layout.GridLayout();
+		layout.makeColumnsEqualWidth = true;
+		layout.horizontalSpacing = 0;
+		layout.verticalSpacing = 0;
+		layout.marginBottom = 0;
+		layout.marginHeight = 0;
+		layout.marginLeft = 0;
+		layout.marginRight = 0;
+		return layout;
 	}
 
 	private Object getInputHistory() {
