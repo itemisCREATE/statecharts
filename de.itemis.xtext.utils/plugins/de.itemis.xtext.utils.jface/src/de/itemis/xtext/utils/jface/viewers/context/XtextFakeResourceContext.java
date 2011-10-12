@@ -18,7 +18,8 @@ import com.google.inject.name.Named;
 import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 
 /**
- * Context used by {@link XtextStyledTextAdapter} to handle the required underlying (fake) resources.
+ * Context used by {@link XtextStyledTextAdapter} to handle the required
+ * underlying (fake) resources.
  * 
  * @author alexander.nyssen@itemis.de
  * 
@@ -89,7 +90,9 @@ public class XtextFakeResourceContext {
 
 	public void updateFakeResourceContext(
 			IXtextContextFakeResourcesProvider contextProvider) {
+		
 		// remove any other resources that may have been created earlier
+		// unloading them (to remove all adapters)
 		List<Resource> staleResources = new ArrayList<Resource>();
 		for (Resource r : getFakeResourceSet().getResources()) {
 			if (r != getFakeResource()) {
@@ -98,7 +101,13 @@ public class XtextFakeResourceContext {
 			}
 		}
 		getFakeResourceSet().getResources().removeAll(staleResources);
+
+		// when populating the fake resource set, the non-existing fake resource
+		// contained in the resource set may be problematic, so we temporarily
+		// remove it
+		getFakeResourceSet().getResources().remove(getFakeResource());
 		contextProvider.populateFakeResourceContextResourceSet(fakeResourceSet);
+		getFakeResourceSet().getResources().add(getFakeResource());
 	}
 
 }
