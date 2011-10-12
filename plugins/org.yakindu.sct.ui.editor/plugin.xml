@@ -479,14 +479,18 @@
             tab="property.tab.domain"
             class="org.yakindu.sct.ui.editor.propertysheets.StatePropertySection">
            <input type="org.yakindu.sct.ui.editor.editparts.StateEditPart"/>
+           <input type="org.yakindu.sct.ui.editor.editparts.StateNameEditPart"/>
+           <input type="org.yakindu.sct.ui.editor.editparts.StateTextCompartmentEditPart"/>
+           <input type="org.yakindu.sct.ui.editor.editparts.StateTextCompartmentExpressionEditPart"/>
          </propertySection>
         <!-- Statechart model section -->         
          <propertySection
             id="property.section.domain.statechart" 
             tab="property.tab.domain"
             class="org.yakindu.sct.ui.editor.propertysheets.StatechartPropertySection">
+            <input type="org.yakindu.sct.ui.editor.editparts.StatechartNameEditPart"/>
             <input type="org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart"/>
-              <input type="org.yakindu.sct.ui.editor.editparts.StatechartNameEditPart"/>
+            <input type="org.yakindu.sct.ui.editor.editparts.StatechartTextExpressionEditPart"/>
          </propertySection>
         <!-- Transition model section -->         
          <propertySection
