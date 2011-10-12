@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * An {@link IXtextContextFakeResourcesProvider} that populates the fake
@@ -25,7 +26,7 @@ public class CloningBasedFakeContextResourcesProvider implements
 	}
 
 	public void populateFakeResourceContextResourceSet(
-			ResourceSet fakeResourceSet) {
+			ResourceSet fakeResourceSet, XtextResource fakeResource) {
 		for (Resource r : contextResources) {
 			createContextResourceCopyInResourceSet(fakeResourceSet, r);
 		}
