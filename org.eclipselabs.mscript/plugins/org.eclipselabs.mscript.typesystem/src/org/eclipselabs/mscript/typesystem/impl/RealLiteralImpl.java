@@ -9,7 +9,9 @@ package org.eclipselabs.mscript.typesystem.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipselabs.mscript.typesystem.RealData;
 import org.eclipselabs.mscript.typesystem.RealLiteral;
+import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 
 /**
@@ -19,6 +21,7 @@ import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.impl.RealLiteralImpl#getData <em>Data</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.RealLiteralImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
@@ -26,6 +29,26 @@ import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
  * @generated
  */
 public class RealLiteralImpl extends NumericLiteralImpl implements RealLiteral {
+	/**
+	 * The default value of the '{@link #getData() <em>Data</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getData()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final RealData DATA_EDEFAULT = (RealData)TypeSystemFactory.eINSTANCE.createFromString(TypeSystemPackage.eINSTANCE.getRealData(), "0.0");
+
+	/**
+	 * The cached value of the '{@link #getData() <em>Data</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getData()
+	 * @generated
+	 * @ordered
+	 */
+	protected RealData data = DATA_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -35,16 +58,6 @@ public class RealLiteralImpl extends NumericLiteralImpl implements RealLiteral {
 	 * @ordered
 	 */
 	protected static final double VALUE_EDEFAULT = 0.0;
-
-	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected double value = VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,8 +83,8 @@ public class RealLiteralImpl extends NumericLiteralImpl implements RealLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public double getValue() {
-		return value;
+	public RealData getData() {
+		return data;
 	}
 
 	/**
@@ -79,11 +92,37 @@ public class RealLiteralImpl extends NumericLiteralImpl implements RealLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(double newValue) {
-		double oldValue = value;
-		value = newValue;
+	public void setData(RealData newData) {
+		RealData oldData = data;
+		data = newData;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.REAL_LITERAL__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.REAL_LITERAL__DATA, oldData, data));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public double getValue() {
+		return getData().doubleValue();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void setValue(double newValue) {
+		setData(new RealData(newValue));
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.NumericLiteralImpl#isComplex()
+	 */
+	@Override
+	public boolean isComplex() {
+		return getData().isComplex();
 	}
 
 	/**
@@ -94,6 +133,8 @@ public class RealLiteralImpl extends NumericLiteralImpl implements RealLiteral {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case TypeSystemPackage.REAL_LITERAL__DATA:
+				return getData();
 			case TypeSystemPackage.REAL_LITERAL__VALUE:
 				return getValue();
 		}
@@ -108,6 +149,9 @@ public class RealLiteralImpl extends NumericLiteralImpl implements RealLiteral {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case TypeSystemPackage.REAL_LITERAL__DATA:
+				setData((RealData)newValue);
+				return;
 			case TypeSystemPackage.REAL_LITERAL__VALUE:
 				setValue((Double)newValue);
 				return;
@@ -123,6 +167,9 @@ public class RealLiteralImpl extends NumericLiteralImpl implements RealLiteral {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case TypeSystemPackage.REAL_LITERAL__DATA:
+				setData(DATA_EDEFAULT);
+				return;
 			case TypeSystemPackage.REAL_LITERAL__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
@@ -138,8 +185,10 @@ public class RealLiteralImpl extends NumericLiteralImpl implements RealLiteral {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case TypeSystemPackage.REAL_LITERAL__DATA:
+				return DATA_EDEFAULT == null ? data != null : !DATA_EDEFAULT.equals(data);
 			case TypeSystemPackage.REAL_LITERAL__VALUE:
-				return value != VALUE_EDEFAULT;
+				return getValue() != VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -154,8 +203,8 @@ public class RealLiteralImpl extends NumericLiteralImpl implements RealLiteral {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (value: ");
-		result.append(value);
+		result.append(" (data: ");
+		result.append(data);
 		result.append(')');
 		return result.toString();
 	}

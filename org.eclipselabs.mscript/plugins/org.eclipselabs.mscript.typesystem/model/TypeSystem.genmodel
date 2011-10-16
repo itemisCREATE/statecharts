@@ -33,6 +33,8 @@
       <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/EqualTo"/>
       <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/NotEqualTo"/>
     </genEnums>
+    <genDataTypes ecoreDataType="TypeSystem.ecore#//RealData"/>
+    <genDataTypes ecoreDataType="TypeSystem.ecore#//IntegerData"/>
     <genClasses image="false" ecoreClass="TypeSystem.ecore#//DataType">
       <genOperations ecoreOperation="TypeSystem.ecore#//DataType/evaluate">
         <genParameters ecoreParameter="TypeSystem.ecore#//DataType/evaluate/operator"/>
@@ -111,13 +113,15 @@
     </genClasses>
     <genClasses ecoreClass="TypeSystem.ecore#//Literal"/>
     <genClasses ecoreClass="TypeSystem.ecore#//NumericLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//NumericLiteral/modifier"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference TypeSystem.ecore#//NumericLiteral/unit"/>
+      <genOperations ecoreOperation="TypeSystem.ecore#//NumericLiteral/isComplex"/>
     </genClasses>
     <genClasses ecoreClass="TypeSystem.ecore#//RealLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//RealLiteral/data"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//RealLiteral/value"/>
     </genClasses>
     <genClasses ecoreClass="TypeSystem.ecore#//IntegerLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//IntegerLiteral/data"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//IntegerLiteral/value"/>
     </genClasses>
     <genClasses ecoreClass="TypeSystem.ecore#//BooleanLiteral">

@@ -2566,73 +2566,193 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class RealLiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RealLiteral");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cValueAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cValueValidDoubleParserRuleCall_0_0 = (RuleCall)cValueAssignment_0.eContents().get(0);
-		private final Assignment cModifierAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cModifierValidIDParserRuleCall_1_0 = (RuleCall)cModifierAssignment_1.eContents().get(0);
-		private final Assignment cUnitAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cUnitUnitParserRuleCall_2_0 = (RuleCall)cUnitAssignment_2.eContents().get(0);
+		private final Assignment cDataAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cDataRealDataParserRuleCall_0_0 = (RuleCall)cDataAssignment_0.eContents().get(0);
+		private final Assignment cUnitAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cUnitUnitParserRuleCall_1_0 = (RuleCall)cUnitAssignment_1.eContents().get(0);
 		
 		//RealLiteral:
-		//	value=ValidDouble modifier=ValidID? unit=Unit;
+		//	data=RealData unit=Unit;
 		public ParserRule getRule() { return rule; }
 
-		//value=ValidDouble modifier=ValidID? unit=Unit
+		//data=RealData unit=Unit
 		public Group getGroup() { return cGroup; }
 
-		//value=ValidDouble
-		public Assignment getValueAssignment_0() { return cValueAssignment_0; }
+		//data=RealData
+		public Assignment getDataAssignment_0() { return cDataAssignment_0; }
 
-		//ValidDouble
-		public RuleCall getValueValidDoubleParserRuleCall_0_0() { return cValueValidDoubleParserRuleCall_0_0; }
-
-		//modifier=ValidID?
-		public Assignment getModifierAssignment_1() { return cModifierAssignment_1; }
-
-		//ValidID
-		public RuleCall getModifierValidIDParserRuleCall_1_0() { return cModifierValidIDParserRuleCall_1_0; }
+		//RealData
+		public RuleCall getDataRealDataParserRuleCall_0_0() { return cDataRealDataParserRuleCall_0_0; }
 
 		//unit=Unit
-		public Assignment getUnitAssignment_2() { return cUnitAssignment_2; }
+		public Assignment getUnitAssignment_1() { return cUnitAssignment_1; }
 
 		//Unit
-		public RuleCall getUnitUnitParserRuleCall_2_0() { return cUnitUnitParserRuleCall_2_0; }
+		public RuleCall getUnitUnitParserRuleCall_1_0() { return cUnitUnitParserRuleCall_1_0; }
+	}
+
+	public class RealDataElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RealData");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cValidIntParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
+		private final Keyword cFullStopKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
+		private final RuleCall cValidIntParserRuleCall_1_0_1 = (RuleCall)cGroup_1_0.eContents().get(1);
+		private final Alternatives cAlternatives_1_0_2 = (Alternatives)cGroup_1_0.eContents().get(2);
+		private final RuleCall cIJTerminalRuleCall_1_0_2_0 = (RuleCall)cAlternatives_1_0_2.eContents().get(0);
+		private final RuleCall cEXPIJTerminalRuleCall_1_0_2_1 = (RuleCall)cAlternatives_1_0_2.eContents().get(1);
+		private final Group cGroup_1_0_2_2 = (Group)cAlternatives_1_0_2.eContents().get(2);
+		private final RuleCall cETerminalRuleCall_1_0_2_2_0 = (RuleCall)cGroup_1_0_2_2.eContents().get(0);
+		private final Alternatives cAlternatives_1_0_2_2_1 = (Alternatives)cGroup_1_0_2_2.eContents().get(1);
+		private final Keyword cPlusSignKeyword_1_0_2_2_1_0 = (Keyword)cAlternatives_1_0_2_2_1.eContents().get(0);
+		private final Keyword cHyphenMinusKeyword_1_0_2_2_1_1 = (Keyword)cAlternatives_1_0_2_2_1.eContents().get(1);
+		private final RuleCall cValidIntParserRuleCall_1_0_2_2_2 = (RuleCall)cGroup_1_0_2_2.eContents().get(2);
+		private final RuleCall cIJTerminalRuleCall_1_0_2_2_3 = (RuleCall)cGroup_1_0_2_2.eContents().get(3);
+		private final Alternatives cAlternatives_1_1 = (Alternatives)cAlternatives_1.eContents().get(1);
+		private final RuleCall cEXPIJTerminalRuleCall_1_1_0 = (RuleCall)cAlternatives_1_1.eContents().get(0);
+		private final Group cGroup_1_1_1 = (Group)cAlternatives_1_1.eContents().get(1);
+		private final RuleCall cETerminalRuleCall_1_1_1_0 = (RuleCall)cGroup_1_1_1.eContents().get(0);
+		private final Alternatives cAlternatives_1_1_1_1 = (Alternatives)cGroup_1_1_1.eContents().get(1);
+		private final Keyword cPlusSignKeyword_1_1_1_1_0 = (Keyword)cAlternatives_1_1_1_1.eContents().get(0);
+		private final Keyword cHyphenMinusKeyword_1_1_1_1_1 = (Keyword)cAlternatives_1_1_1_1.eContents().get(1);
+		private final RuleCall cValidIntParserRuleCall_1_1_1_2 = (RuleCall)cGroup_1_1_1.eContents().get(2);
+		private final RuleCall cIJTerminalRuleCall_1_1_1_3 = (RuleCall)cGroup_1_1_1.eContents().get(3);
+		
+		//RealData hidden():
+		//	ValidInt ("." ValidInt (IJ | EXPIJ | E ("+" | "-") ValidInt IJ?)? | (EXPIJ | E ("+" | "-") ValidInt IJ?));
+		public ParserRule getRule() { return rule; }
+
+		//ValidInt ("." ValidInt (IJ | EXPIJ | E ("+" | "-") ValidInt IJ?)? | (EXPIJ | E ("+" | "-") ValidInt IJ?))
+		public Group getGroup() { return cGroup; }
+
+		//ValidInt
+		public RuleCall getValidIntParserRuleCall_0() { return cValidIntParserRuleCall_0; }
+
+		//"." ValidInt (IJ | EXPIJ | E ("+" | "-") ValidInt IJ?)? | (EXPIJ | E ("+" | "-") ValidInt IJ?)
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//"." ValidInt (IJ | EXPIJ | E ("+" | "-") ValidInt IJ?)?
+		public Group getGroup_1_0() { return cGroup_1_0; }
+
+		//"."
+		public Keyword getFullStopKeyword_1_0_0() { return cFullStopKeyword_1_0_0; }
+
+		//ValidInt
+		public RuleCall getValidIntParserRuleCall_1_0_1() { return cValidIntParserRuleCall_1_0_1; }
+
+		//(IJ | EXPIJ | E ("+" | "-") ValidInt IJ?)?
+		public Alternatives getAlternatives_1_0_2() { return cAlternatives_1_0_2; }
+
+		//IJ
+		public RuleCall getIJTerminalRuleCall_1_0_2_0() { return cIJTerminalRuleCall_1_0_2_0; }
+
+		//EXPIJ
+		public RuleCall getEXPIJTerminalRuleCall_1_0_2_1() { return cEXPIJTerminalRuleCall_1_0_2_1; }
+
+		//E ("+" | "-") ValidInt IJ?
+		public Group getGroup_1_0_2_2() { return cGroup_1_0_2_2; }
+
+		//E
+		public RuleCall getETerminalRuleCall_1_0_2_2_0() { return cETerminalRuleCall_1_0_2_2_0; }
+
+		//"+" | "-"
+		public Alternatives getAlternatives_1_0_2_2_1() { return cAlternatives_1_0_2_2_1; }
+
+		//"+"
+		public Keyword getPlusSignKeyword_1_0_2_2_1_0() { return cPlusSignKeyword_1_0_2_2_1_0; }
+
+		//"-"
+		public Keyword getHyphenMinusKeyword_1_0_2_2_1_1() { return cHyphenMinusKeyword_1_0_2_2_1_1; }
+
+		//ValidInt
+		public RuleCall getValidIntParserRuleCall_1_0_2_2_2() { return cValidIntParserRuleCall_1_0_2_2_2; }
+
+		//IJ?
+		public RuleCall getIJTerminalRuleCall_1_0_2_2_3() { return cIJTerminalRuleCall_1_0_2_2_3; }
+
+		//EXPIJ | E ("+" | "-") ValidInt IJ?
+		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
+
+		//EXPIJ
+		public RuleCall getEXPIJTerminalRuleCall_1_1_0() { return cEXPIJTerminalRuleCall_1_1_0; }
+
+		//E ("+" | "-") ValidInt IJ?
+		public Group getGroup_1_1_1() { return cGroup_1_1_1; }
+
+		//E
+		public RuleCall getETerminalRuleCall_1_1_1_0() { return cETerminalRuleCall_1_1_1_0; }
+
+		//"+" | "-"
+		public Alternatives getAlternatives_1_1_1_1() { return cAlternatives_1_1_1_1; }
+
+		//"+"
+		public Keyword getPlusSignKeyword_1_1_1_1_0() { return cPlusSignKeyword_1_1_1_1_0; }
+
+		//"-"
+		public Keyword getHyphenMinusKeyword_1_1_1_1_1() { return cHyphenMinusKeyword_1_1_1_1_1; }
+
+		//ValidInt
+		public RuleCall getValidIntParserRuleCall_1_1_1_2() { return cValidIntParserRuleCall_1_1_1_2; }
+
+		//IJ?
+		public RuleCall getIJTerminalRuleCall_1_1_1_3() { return cIJTerminalRuleCall_1_1_1_3; }
 	}
 
 	public class IntegerLiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IntegerLiteral");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cValueAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cValueValidLongParserRuleCall_0_0 = (RuleCall)cValueAssignment_0.eContents().get(0);
-		private final Assignment cModifierAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cModifierValidIDParserRuleCall_1_0 = (RuleCall)cModifierAssignment_1.eContents().get(0);
-		private final Assignment cUnitAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cUnitUnitParserRuleCall_2_0 = (RuleCall)cUnitAssignment_2.eContents().get(0);
+		private final Assignment cDataAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cDataIntegerDataParserRuleCall_0_0 = (RuleCall)cDataAssignment_0.eContents().get(0);
+		private final Assignment cUnitAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cUnitUnitParserRuleCall_1_0 = (RuleCall)cUnitAssignment_1.eContents().get(0);
 		
 		//IntegerLiteral:
-		//	value=ValidLong modifier=ValidID? unit=Unit;
+		//	data=IntegerData unit=Unit;
 		public ParserRule getRule() { return rule; }
 
-		//value=ValidLong modifier=ValidID? unit=Unit
+		//data=IntegerData unit=Unit
 		public Group getGroup() { return cGroup; }
 
-		//value=ValidLong
-		public Assignment getValueAssignment_0() { return cValueAssignment_0; }
+		//data=IntegerData
+		public Assignment getDataAssignment_0() { return cDataAssignment_0; }
 
-		//ValidLong
-		public RuleCall getValueValidLongParserRuleCall_0_0() { return cValueValidLongParserRuleCall_0_0; }
-
-		//modifier=ValidID?
-		public Assignment getModifierAssignment_1() { return cModifierAssignment_1; }
-
-		//ValidID
-		public RuleCall getModifierValidIDParserRuleCall_1_0() { return cModifierValidIDParserRuleCall_1_0; }
+		//IntegerData
+		public RuleCall getDataIntegerDataParserRuleCall_0_0() { return cDataIntegerDataParserRuleCall_0_0; }
 
 		//unit=Unit
-		public Assignment getUnitAssignment_2() { return cUnitAssignment_2; }
+		public Assignment getUnitAssignment_1() { return cUnitAssignment_1; }
 
 		//Unit
-		public RuleCall getUnitUnitParserRuleCall_2_0() { return cUnitUnitParserRuleCall_2_0; }
+		public RuleCall getUnitUnitParserRuleCall_1_0() { return cUnitUnitParserRuleCall_1_0; }
+	}
+
+	public class IntegerDataElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IntegerData");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final RuleCall cONETerminalRuleCall_0_0 = (RuleCall)cAlternatives_0.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_0_1 = (RuleCall)cAlternatives_0.eContents().get(1);
+		private final RuleCall cIJTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		
+		//IntegerData hidden():
+		//	(ONE | INT) IJ?;
+		public ParserRule getRule() { return rule; }
+
+		//(ONE | INT) IJ?
+		public Group getGroup() { return cGroup; }
+
+		//ONE | INT
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+
+		//ONE
+		public RuleCall getONETerminalRuleCall_0_0() { return cONETerminalRuleCall_0_0; }
+
+		//INT
+		public RuleCall getINTTerminalRuleCall_0_1() { return cINTTerminalRuleCall_0_1; }
+
+		//IJ?
+		public RuleCall getIJTerminalRuleCall_1() { return cIJTerminalRuleCall_1; }
 	}
 
 	public class BooleanLiteralElements extends AbstractParserRuleElementFinder {
@@ -4139,18 +4259,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getValidIDParserRuleCall_1_1() { return cValidIDParserRuleCall_1_1; }
 	}
 
-	public class ValidDoubleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValidDouble");
-		private final RuleCall cREALTerminalRuleCall = (RuleCall)rule.eContents().get(1);
-		
-		//ValidDouble returns ecore::EDouble:
-		//	REAL;
-		public ParserRule getRule() { return rule; }
-
-		//REAL
-		public RuleCall getREALTerminalRuleCall() { return cREALTerminalRuleCall; }
-	}
-
 	public class ValidIntElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValidInt");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -4171,44 +4279,36 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
 	}
 
-	public class ValidLongElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValidLong");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cONETerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//ValidLong returns ecore::ELong:
-		//	ONE | INT;
-		public ParserRule getRule() { return rule; }
-
-		//ONE | INT
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//ONE
-		public RuleCall getONETerminalRuleCall_0() { return cONETerminalRuleCall_0; }
-
-		//INT
-		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
-	}
-
 	public class ValidIDElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValidID");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cNTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cIDTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cIJTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cETerminalRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cEXPIJTerminalRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cIDTerminalRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//ValidID:
-		//	N | ID;
+		//	N | IJ | E | EXPIJ | ID;
 		public ParserRule getRule() { return rule; }
 
-		//N | ID
+		//N | IJ | E | EXPIJ | ID
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//N
 		public RuleCall getNTerminalRuleCall_0() { return cNTerminalRuleCall_0; }
 
+		//IJ
+		public RuleCall getIJTerminalRuleCall_1() { return cIJTerminalRuleCall_1; }
+
+		//E
+		public RuleCall getETerminalRuleCall_2() { return cETerminalRuleCall_2; }
+
+		//EXPIJ
+		public RuleCall getEXPIJTerminalRuleCall_3() { return cEXPIJTerminalRuleCall_3; }
+
 		//ID
-		public RuleCall getIDTerminalRuleCall_1() { return cIDTerminalRuleCall_1; }
+		public RuleCall getIDTerminalRuleCall_4() { return cIDTerminalRuleCall_4; }
 	}
 	
 	
@@ -4567,7 +4667,9 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private LiteralElements pLiteral;
 	private NumericLiteralElements pNumericLiteral;
 	private RealLiteralElements pRealLiteral;
+	private RealDataElements pRealData;
 	private IntegerLiteralElements pIntegerLiteral;
+	private IntegerDataElements pIntegerData;
 	private BooleanLiteralElements pBooleanLiteral;
 	private StringLiteralElements pStringLiteral;
 	private FeatureCallElements pFeatureCall;
@@ -4608,16 +4710,16 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private UnitFactorElements pUnitFactor;
 	private UnitExponentElements pUnitExponent;
 	private QualifiedNameElements pQualifiedName;
-	private ValidDoubleElements pValidDouble;
 	private ValidIntElements pValidInt;
-	private ValidLongElements pValidLong;
 	private ValidIDElements pValidID;
 	private TerminalRule tN;
+	private TerminalRule tIJ;
+	private TerminalRule tE;
+	private TerminalRule tEXPIJ;
+	private TerminalRule tONE;
+	private TerminalRule tINT;
 	private TerminalRule tID;
 	private TerminalRule tSTRING;
-	private TerminalRule tONE;
-	private TerminalRule tREAL;
-	private TerminalRule tINT;
 	private TerminalRule tML_COMMENT;
 	private TerminalRule tSL_COMMENT;
 	private TerminalRule tWS;
@@ -5335,7 +5437,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RealLiteral:
-	//	value=ValidDouble modifier=ValidID? unit=Unit;
+	//	data=RealData unit=Unit;
 	public RealLiteralElements getRealLiteralAccess() {
 		return (pRealLiteral != null) ? pRealLiteral : (pRealLiteral = new RealLiteralElements());
 	}
@@ -5344,14 +5446,34 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getRealLiteralAccess().getRule();
 	}
 
+	//RealData hidden():
+	//	ValidInt ("." ValidInt (IJ | EXPIJ | E ("+" | "-") ValidInt IJ?)? | (EXPIJ | E ("+" | "-") ValidInt IJ?));
+	public RealDataElements getRealDataAccess() {
+		return (pRealData != null) ? pRealData : (pRealData = new RealDataElements());
+	}
+	
+	public ParserRule getRealDataRule() {
+		return getRealDataAccess().getRule();
+	}
+
 	//IntegerLiteral:
-	//	value=ValidLong modifier=ValidID? unit=Unit;
+	//	data=IntegerData unit=Unit;
 	public IntegerLiteralElements getIntegerLiteralAccess() {
 		return (pIntegerLiteral != null) ? pIntegerLiteral : (pIntegerLiteral = new IntegerLiteralElements());
 	}
 	
 	public ParserRule getIntegerLiteralRule() {
 		return getIntegerLiteralAccess().getRule();
+	}
+
+	//IntegerData hidden():
+	//	(ONE | INT) IJ?;
+	public IntegerDataElements getIntegerDataAccess() {
+		return (pIntegerData != null) ? pIntegerData : (pIntegerData = new IntegerDataElements());
+	}
+	
+	public ParserRule getIntegerDataRule() {
+		return getIntegerDataAccess().getRule();
 	}
 
 	//BooleanLiteral:
@@ -5761,16 +5883,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getQualifiedNameAccess().getRule();
 	}
 
-	//ValidDouble returns ecore::EDouble:
-	//	REAL;
-	public ValidDoubleElements getValidDoubleAccess() {
-		return (pValidDouble != null) ? pValidDouble : (pValidDouble = new ValidDoubleElements());
-	}
-	
-	public ParserRule getValidDoubleRule() {
-		return getValidDoubleAccess().getRule();
-	}
-
 	//ValidInt returns ecore::EInt:
 	//	ONE | INT;
 	public ValidIntElements getValidIntAccess() {
@@ -5781,18 +5893,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getValidIntAccess().getRule();
 	}
 
-	//ValidLong returns ecore::ELong:
-	//	ONE | INT;
-	public ValidLongElements getValidLongAccess() {
-		return (pValidLong != null) ? pValidLong : (pValidLong = new ValidLongElements());
-	}
-	
-	public ParserRule getValidLongRule() {
-		return getValidLongAccess().getRule();
-	}
-
 	//ValidID:
-	//	N | ID;
+	//	N | IJ | E | EXPIJ | ID;
 	public ValidIDElements getValidIDAccess() {
 		return (pValidID != null) ? pValidID : (pValidID = new ValidIDElements());
 	}
@@ -5809,6 +5911,36 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return (tN != null) ? tN : (tN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "N"));
 	} 
 
+	//terminal IJ:
+	//	"i" | "j";
+	public TerminalRule getIJRule() {
+		return (tIJ != null) ? tIJ : (tIJ = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IJ"));
+	} 
+
+	//terminal E:
+	//	"e" | "E";
+	public TerminalRule getERule() {
+		return (tE != null) ? tE : (tE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "E"));
+	} 
+
+	//terminal EXPIJ:
+	//	E "0".."9"+ IJ?;
+	public TerminalRule getEXPIJRule() {
+		return (tEXPIJ != null) ? tEXPIJ : (tEXPIJ = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EXPIJ"));
+	} 
+
+	//terminal ONE:
+	//	"1";
+	public TerminalRule getONERule() {
+		return (tONE != null) ? tONE : (tONE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ONE"));
+	} 
+
+	//terminal INT:
+	//	"0".."9"+;
+	public TerminalRule getINTRule() {
+		return (tINT != null) ? tINT : (tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+	} 
+
 	//terminal ID:
 	//	("_" | "a".."z" | "A".."Z") ("0".."9" | "_" | "a".."z" | "A".."Z")*;
 	public TerminalRule getIDRule() {
@@ -5819,24 +5951,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	//	"\"" (!("\\" | "\"") | "\\" ("\'" | "\"" | "?" | "\\" | "a" | "b" | "f" | "n" | "r" | "t" | "v"))* "\"";
 	public TerminalRule getSTRINGRule() {
 		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
-	} 
-
-	//terminal ONE:
-	//	"1";
-	public TerminalRule getONERule() {
-		return (tONE != null) ? tONE : (tONE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ONE"));
-	} 
-
-	//terminal REAL:
-	//	"0".."9"+ "." "0".."9"* (("e" | "E") ("+" | "-")? "0".."9"+)?;
-	public TerminalRule getREALRule() {
-		return (tREAL != null) ? tREAL : (tREAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "REAL"));
-	} 
-
-	//terminal INT:
-	//	"0".."9"+;
-	public TerminalRule getINTRule() {
-		return (tINT != null) ? tINT : (tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
 	} 
 
 	//terminal ML_COMMENT:

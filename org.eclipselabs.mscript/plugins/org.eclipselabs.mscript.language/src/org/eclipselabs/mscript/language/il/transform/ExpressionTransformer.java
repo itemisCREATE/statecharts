@@ -91,7 +91,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 	 */
 	@Override
 	public Expression doSwitch(EObject eObject) {
-		Expression newExpression =  super.doSwitch(eObject);
+		Expression newExpression = super.doSwitch(eObject);
 		IValue value = context.getStaticEvaluationContext().getValue(eObject);
 		if (value != null) {
 			if (!(eObject instanceof Literal)) {

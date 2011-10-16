@@ -8,6 +8,7 @@ package org.eclipselabs.mscript.typesystem;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -750,22 +751,13 @@ public interface TypeSystemPackage extends EPackage {
 	int NUMERIC_LITERAL = 22;
 
 	/**
-	 * The feature id for the '<em><b>Modifier</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_LITERAL__MODIFIER = LITERAL_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Unit</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NUMERIC_LITERAL__UNIT = LITERAL_FEATURE_COUNT + 1;
+	int NUMERIC_LITERAL__UNIT = LITERAL_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Numeric Literal</em>' class.
@@ -774,7 +766,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NUMERIC_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 2;
+	int NUMERIC_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.RealLiteralImpl <em>Real Literal</em>}' class.
@@ -787,15 +779,6 @@ public interface TypeSystemPackage extends EPackage {
 	int REAL_LITERAL = 23;
 
 	/**
-	 * The feature id for the '<em><b>Modifier</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REAL_LITERAL__MODIFIER = NUMERIC_LITERAL__MODIFIER;
-
-	/**
 	 * The feature id for the '<em><b>Unit</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -805,13 +788,22 @@ public interface TypeSystemPackage extends EPackage {
 	int REAL_LITERAL__UNIT = NUMERIC_LITERAL__UNIT;
 
 	/**
+	 * The feature id for the '<em><b>Data</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_LITERAL__DATA = NUMERIC_LITERAL_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REAL_LITERAL__VALUE = NUMERIC_LITERAL_FEATURE_COUNT + 0;
+	int REAL_LITERAL__VALUE = NUMERIC_LITERAL_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Real Literal</em>' class.
@@ -820,7 +812,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REAL_LITERAL_FEATURE_COUNT = NUMERIC_LITERAL_FEATURE_COUNT + 1;
+	int REAL_LITERAL_FEATURE_COUNT = NUMERIC_LITERAL_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.IntegerLiteralImpl <em>Integer Literal</em>}' class.
@@ -833,15 +825,6 @@ public interface TypeSystemPackage extends EPackage {
 	int INTEGER_LITERAL = 24;
 
 	/**
-	 * The feature id for the '<em><b>Modifier</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_LITERAL__MODIFIER = NUMERIC_LITERAL__MODIFIER;
-
-	/**
 	 * The feature id for the '<em><b>Unit</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -851,13 +834,22 @@ public interface TypeSystemPackage extends EPackage {
 	int INTEGER_LITERAL__UNIT = NUMERIC_LITERAL__UNIT;
 
 	/**
+	 * The feature id for the '<em><b>Data</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_LITERAL__DATA = NUMERIC_LITERAL_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_LITERAL__VALUE = NUMERIC_LITERAL_FEATURE_COUNT + 0;
+	int INTEGER_LITERAL__VALUE = NUMERIC_LITERAL_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Integer Literal</em>' class.
@@ -866,7 +858,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_LITERAL_FEATURE_COUNT = NUMERIC_LITERAL_FEATURE_COUNT + 1;
+	int INTEGER_LITERAL_FEATURE_COUNT = NUMERIC_LITERAL_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
@@ -933,6 +925,27 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 */
 	int OPERATOR_KIND = 27;
+
+
+	/**
+	 * The meta object id for the '<em>Real Data</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.typesystem.RealData
+	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getRealData()
+	 * @generated
+	 */
+	int REAL_DATA = 28;
+
+	/**
+	 * The meta object id for the '<em>Integer Data</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.typesystem.IntegerData
+	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getIntegerData()
+	 * @generated
+	 */
+	int INTEGER_DATA = 29;
 
 
 	/**
@@ -1353,17 +1366,6 @@ public interface TypeSystemPackage extends EPackage {
 	EClass getNumericLiteral();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.NumericLiteral#getModifier <em>Modifier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Modifier</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.NumericLiteral#getModifier()
-	 * @see #getNumericLiteral()
-	 * @generated
-	 */
-	EAttribute getNumericLiteral_Modifier();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.typesystem.NumericLiteral#getUnit <em>Unit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1385,6 +1387,17 @@ public interface TypeSystemPackage extends EPackage {
 	EClass getRealLiteral();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.RealLiteral#getData <em>Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Data</em>'.
+	 * @see org.eclipselabs.mscript.typesystem.RealLiteral#getData()
+	 * @see #getRealLiteral()
+	 * @generated
+	 */
+	EAttribute getRealLiteral_Data();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.RealLiteral#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1404,6 +1417,17 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getIntegerLiteral();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.IntegerLiteral#getData <em>Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Data</em>'.
+	 * @see org.eclipselabs.mscript.typesystem.IntegerLiteral#getData()
+	 * @see #getIntegerLiteral()
+	 * @generated
+	 */
+	EAttribute getIntegerLiteral_Data();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.IntegerLiteral#getValue <em>Value</em>}'.
@@ -1467,6 +1491,28 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getOperatorKind();
+
+	/**
+	 * Returns the meta object for data type '{@link org.eclipselabs.mscript.typesystem.RealData <em>Real Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Real Data</em>'.
+	 * @see org.eclipselabs.mscript.typesystem.RealData
+	 * @model instanceClass="org.eclipselabs.mscript.typesystem.RealData"
+	 * @generated
+	 */
+	EDataType getRealData();
+
+	/**
+	 * Returns the meta object for data type '{@link org.eclipselabs.mscript.typesystem.IntegerData <em>Integer Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Integer Data</em>'.
+	 * @see org.eclipselabs.mscript.typesystem.IntegerData
+	 * @model instanceClass="org.eclipselabs.mscript.typesystem.IntegerData"
+	 * @generated
+	 */
+	EDataType getIntegerData();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1857,14 +1903,6 @@ public interface TypeSystemPackage extends EPackage {
 		EClass NUMERIC_LITERAL = eINSTANCE.getNumericLiteral();
 
 		/**
-		 * The meta object literal for the '<em><b>Modifier</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NUMERIC_LITERAL__MODIFIER = eINSTANCE.getNumericLiteral_Modifier();
-
-		/**
 		 * The meta object literal for the '<em><b>Unit</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1883,6 +1921,14 @@ public interface TypeSystemPackage extends EPackage {
 		EClass REAL_LITERAL = eINSTANCE.getRealLiteral();
 
 		/**
+		 * The meta object literal for the '<em><b>Data</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REAL_LITERAL__DATA = eINSTANCE.getRealLiteral_Data();
+
+		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1899,6 +1945,14 @@ public interface TypeSystemPackage extends EPackage {
 		 * @generated
 		 */
 		EClass INTEGER_LITERAL = eINSTANCE.getIntegerLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Data</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INTEGER_LITERAL__DATA = eINSTANCE.getIntegerLiteral_Data();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -1953,6 +2007,26 @@ public interface TypeSystemPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum OPERATOR_KIND = eINSTANCE.getOperatorKind();
+
+		/**
+		 * The meta object literal for the '<em>Real Data</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.typesystem.RealData
+		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getRealData()
+		 * @generated
+		 */
+		EDataType REAL_DATA = eINSTANCE.getRealData();
+
+		/**
+		 * The meta object literal for the '<em>Integer Data</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.typesystem.IntegerData
+		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getIntegerData()
+		 * @generated
+		 */
+		EDataType INTEGER_DATA = eINSTANCE.getIntegerData();
 
 	}
 

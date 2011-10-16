@@ -17,6 +17,7 @@ Require-Bundle: org.eclipselabs.mscript.language;visibility:=reexport,
  org.eclipselabs.mscript.typesystem;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipselabs.mscript.language.ui.contentassist,
- org.eclipselabs.mscript.language.ui.contentassist.antlr
+ org.eclipselabs.mscript.language.ui.contentassist.antlr,
+ org.eclipselabs.mscript.language.ui.syntaxcoloring
 Bundle-Activator: org.eclipselabs.mscript.language.ui.internal.MscriptActivator
 Import-Package: org.apache.log4j

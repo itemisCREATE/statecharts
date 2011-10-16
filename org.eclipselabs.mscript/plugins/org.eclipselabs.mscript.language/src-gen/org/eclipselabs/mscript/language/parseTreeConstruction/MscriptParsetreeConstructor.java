@@ -13642,11 +13642,11 @@ protected class NumericLiteral_IntegerLiteralParserRuleCall_1 extends RuleCallTo
 /************ begin Rule RealLiteral ****************
  *
  * RealLiteral:
- * 	value=ValidDouble modifier=ValidID? unit=Unit;
+ * 	data=RealData unit=Unit;
  *
  **/
 
-// value=ValidDouble modifier=ValidID? unit=Unit
+// data=RealData unit=Unit
 protected class RealLiteral_Group extends GroupToken {
 	
 	public RealLiteral_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -13661,7 +13661,7 @@ protected class RealLiteral_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new RealLiteral_UnitAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new RealLiteral_UnitAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -13675,16 +13675,16 @@ protected class RealLiteral_Group extends GroupToken {
 
 }
 
-// value=ValidDouble
-protected class RealLiteral_ValueAssignment_0 extends AssignmentToken  {
+// data=RealData
+protected class RealLiteral_DataAssignment_0 extends AssignmentToken  {
 	
-	public RealLiteral_ValueAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RealLiteral_DataAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRealLiteralAccess().getValueAssignment_0();
+		return grammarAccess.getRealLiteralAccess().getDataAssignment_0();
 	}
 
     @Override
@@ -13696,45 +13696,11 @@ protected class RealLiteral_ValueAssignment_0 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getRealLiteralAccess().getValueValidDoubleParserRuleCall_0_0(), value, null)) {
+		if((value = eObjectConsumer.getConsumable("data",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("data");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getRealLiteralAccess().getDataRealDataParserRuleCall_0_0(), value, null)) {
 			type = AssignmentType.DATATYPE_RULE_CALL;
-			element = grammarAccess.getRealLiteralAccess().getValueValidDoubleParserRuleCall_0_0();
-			return obj;
-		}
-		return null;
-	}
-
-}
-
-// modifier=ValidID?
-protected class RealLiteral_ModifierAssignment_1 extends AssignmentToken  {
-	
-	public RealLiteral_ModifierAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getRealLiteralAccess().getModifierAssignment_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new RealLiteral_ValueAssignment_0(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("modifier",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("modifier");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getRealLiteralAccess().getModifierValidIDParserRuleCall_1_0(), value, null)) {
-			type = AssignmentType.DATATYPE_RULE_CALL;
-			element = grammarAccess.getRealLiteralAccess().getModifierValidIDParserRuleCall_1_0();
+			element = grammarAccess.getRealLiteralAccess().getDataRealDataParserRuleCall_0_0();
 			return obj;
 		}
 		return null;
@@ -13743,15 +13709,15 @@ protected class RealLiteral_ModifierAssignment_1 extends AssignmentToken  {
 }
 
 // unit=Unit
-protected class RealLiteral_UnitAssignment_2 extends AssignmentToken  {
+protected class RealLiteral_UnitAssignment_1 extends AssignmentToken  {
 	
-	public RealLiteral_UnitAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RealLiteral_UnitAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRealLiteralAccess().getUnitAssignment_2();
+		return grammarAccess.getRealLiteralAccess().getUnitAssignment_1();
 	}
 
     @Override
@@ -13770,7 +13736,7 @@ protected class RealLiteral_UnitAssignment_2 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getUnitRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRealLiteralAccess().getUnitUnitParserRuleCall_2_0(); 
+				element = grammarAccess.getRealLiteralAccess().getUnitUnitParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -13782,8 +13748,7 @@ protected class RealLiteral_UnitAssignment_2 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new RealLiteral_ModifierAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new RealLiteral_ValueAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new RealLiteral_DataAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -13793,14 +13758,15 @@ protected class RealLiteral_UnitAssignment_2 extends AssignmentToken  {
 /************ end Rule RealLiteral ****************/
 
 
+
 /************ begin Rule IntegerLiteral ****************
  *
  * IntegerLiteral:
- * 	value=ValidLong modifier=ValidID? unit=Unit;
+ * 	data=IntegerData unit=Unit;
  *
  **/
 
-// value=ValidLong modifier=ValidID? unit=Unit
+// data=IntegerData unit=Unit
 protected class IntegerLiteral_Group extends GroupToken {
 	
 	public IntegerLiteral_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -13815,7 +13781,7 @@ protected class IntegerLiteral_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new IntegerLiteral_UnitAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new IntegerLiteral_UnitAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -13829,16 +13795,16 @@ protected class IntegerLiteral_Group extends GroupToken {
 
 }
 
-// value=ValidLong
-protected class IntegerLiteral_ValueAssignment_0 extends AssignmentToken  {
+// data=IntegerData
+protected class IntegerLiteral_DataAssignment_0 extends AssignmentToken  {
 	
-	public IntegerLiteral_ValueAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public IntegerLiteral_DataAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getIntegerLiteralAccess().getValueAssignment_0();
+		return grammarAccess.getIntegerLiteralAccess().getDataAssignment_0();
 	}
 
     @Override
@@ -13850,45 +13816,11 @@ protected class IntegerLiteral_ValueAssignment_0 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getIntegerLiteralAccess().getValueValidLongParserRuleCall_0_0(), value, null)) {
+		if((value = eObjectConsumer.getConsumable("data",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("data");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getIntegerLiteralAccess().getDataIntegerDataParserRuleCall_0_0(), value, null)) {
 			type = AssignmentType.DATATYPE_RULE_CALL;
-			element = grammarAccess.getIntegerLiteralAccess().getValueValidLongParserRuleCall_0_0();
-			return obj;
-		}
-		return null;
-	}
-
-}
-
-// modifier=ValidID?
-protected class IntegerLiteral_ModifierAssignment_1 extends AssignmentToken  {
-	
-	public IntegerLiteral_ModifierAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getIntegerLiteralAccess().getModifierAssignment_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new IntegerLiteral_ValueAssignment_0(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("modifier",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("modifier");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getIntegerLiteralAccess().getModifierValidIDParserRuleCall_1_0(), value, null)) {
-			type = AssignmentType.DATATYPE_RULE_CALL;
-			element = grammarAccess.getIntegerLiteralAccess().getModifierValidIDParserRuleCall_1_0();
+			element = grammarAccess.getIntegerLiteralAccess().getDataIntegerDataParserRuleCall_0_0();
 			return obj;
 		}
 		return null;
@@ -13897,15 +13829,15 @@ protected class IntegerLiteral_ModifierAssignment_1 extends AssignmentToken  {
 }
 
 // unit=Unit
-protected class IntegerLiteral_UnitAssignment_2 extends AssignmentToken  {
+protected class IntegerLiteral_UnitAssignment_1 extends AssignmentToken  {
 	
-	public IntegerLiteral_UnitAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public IntegerLiteral_UnitAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getIntegerLiteralAccess().getUnitAssignment_2();
+		return grammarAccess.getIntegerLiteralAccess().getUnitAssignment_1();
 	}
 
     @Override
@@ -13924,7 +13856,7 @@ protected class IntegerLiteral_UnitAssignment_2 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getUnitRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getIntegerLiteralAccess().getUnitUnitParserRuleCall_2_0(); 
+				element = grammarAccess.getIntegerLiteralAccess().getUnitUnitParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -13936,8 +13868,7 @@ protected class IntegerLiteral_UnitAssignment_2 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new IntegerLiteral_ModifierAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new IntegerLiteral_ValueAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new IntegerLiteral_DataAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -13945,6 +13876,7 @@ protected class IntegerLiteral_UnitAssignment_2 extends AssignmentToken  {
 
 
 /************ end Rule IntegerLiteral ****************/
+
 
 
 /************ begin Rule BooleanLiteral ****************
@@ -21202,8 +21134,6 @@ protected class UnitFactor_ExponentAssignment_1_1 extends AssignmentToken  {
 
 
 /************ end Rule UnitFactor ****************/
-
-
 
 
 

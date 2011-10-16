@@ -20,6 +20,7 @@ import org.eclipselabs.mscript.typesystem.BooleanType;
 import org.eclipselabs.mscript.typesystem.ComplexType;
 import org.eclipselabs.mscript.typesystem.Expression;
 import org.eclipselabs.mscript.typesystem.GaussianType;
+import org.eclipselabs.mscript.typesystem.IntegerData;
 import org.eclipselabs.mscript.typesystem.IntegerLiteral;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
@@ -28,6 +29,7 @@ import org.eclipselabs.mscript.typesystem.NumericLiteral;
 import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.PrimitiveType;
+import org.eclipselabs.mscript.typesystem.RealData;
 import org.eclipselabs.mscript.typesystem.RealLiteral;
 import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.StringLiteral;
@@ -125,6 +127,10 @@ public class TypeSystemFactoryImpl extends EFactoryImpl implements TypeSystemFac
 		switch (eDataType.getClassifierID()) {
 			case TypeSystemPackage.OPERATOR_KIND:
 				return createOperatorKindFromString(eDataType, initialValue);
+			case TypeSystemPackage.REAL_DATA:
+				return createRealDataFromString(eDataType, initialValue);
+			case TypeSystemPackage.INTEGER_DATA:
+				return createIntegerDataFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -140,6 +146,10 @@ public class TypeSystemFactoryImpl extends EFactoryImpl implements TypeSystemFac
 		switch (eDataType.getClassifierID()) {
 			case TypeSystemPackage.OPERATOR_KIND:
 				return convertOperatorKindToString(eDataType, instanceValue);
+			case TypeSystemPackage.REAL_DATA:
+				return convertRealDataToString(eDataType, instanceValue);
+			case TypeSystemPackage.INTEGER_DATA:
+				return convertIntegerDataToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -413,6 +423,42 @@ public class TypeSystemFactoryImpl extends EFactoryImpl implements TypeSystemFac
 	 */
 	public String convertOperatorKindToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public RealData createRealDataFromString(EDataType eDataType, String initialValue) {
+		return RealData.valueOf(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String convertRealDataToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public IntegerData createIntegerDataFromString(EDataType eDataType, String initialValue) {
+		return IntegerData.valueOf(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String convertIntegerDataToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue.toString();
 	}
 
 	/**

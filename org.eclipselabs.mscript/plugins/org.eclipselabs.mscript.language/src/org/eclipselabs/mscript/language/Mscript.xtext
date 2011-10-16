@@ -288,10 +288,16 @@ NumericLiteral:
 	RealLiteral | IntegerLiteral;
 	
 RealLiteral:
-	value=ValidDouble (modifier=ValidID)? unit=Unit;
+	data=RealData unit=Unit;
 	
+RealData returns RealData hidden():
+	ValidInt (('.' ValidInt (IJ | EXPIJ | (E ('+' | '-') ValidInt IJ?))?) | (EXPIJ | (E ('+' | '-') ValidInt IJ?)));
+
 IntegerLiteral:
-	value=ValidLong (modifier=ValidID)? unit=Unit;
+	data=IntegerData unit=Unit;
+
+IntegerData returns IntegerData hidden():
+	(ONE | INT) IJ?;
 
 BooleanLiteral:
 	{BooleanLiteral} (true?='true' | 'false');
@@ -426,17 +432,11 @@ UnitExponent returns ecore::EInt:
 QualifiedName:
   ValidID ('::' ValidID)*;
 
-ValidDouble returns ecore::EDouble:
-	REAL;
-
 ValidInt returns ecore::EInt:
 	ONE | INT;
 
-ValidLong returns ecore::ELong:
-	ONE | INT;
-
 ValidID:
-	N | ID;
+	N | IJ | E | EXPIJ | ID;
 
 /*
  * Terminals
@@ -445,20 +445,26 @@ ValidID:
 terminal N:
 	'n';
 
+terminal IJ:
+	'i' | 'j';
+	
+terminal E:
+	'e' | 'E';
+
+terminal EXPIJ:
+	E ('0'..'9')+ IJ?;
+	
+terminal ONE:
+	'1';
+
+terminal INT:
+	('0'..'9')+;
+
 terminal ID:
 	('_' | 'a'..'z' | 'A'..'Z') ('0'..'9' | '_' | 'a'..'z' | 'A'..'Z')*;
 
 terminal STRING: 
 	'"' (!('\\' | '"') | '\\' ("'" | '"' | '?' | '\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v'))* '"';
-
-terminal ONE:
-	'1';
-
-terminal REAL:
-	('0'..'9')+ '.' ('0'..'9')* (('e' | 'E') ('+'|'-')? ('0'..'9')+)?;
-
-terminal INT:
-	('0'..'9')+;
 
 terminal ML_COMMENT:
 	'/*' -> '*/';

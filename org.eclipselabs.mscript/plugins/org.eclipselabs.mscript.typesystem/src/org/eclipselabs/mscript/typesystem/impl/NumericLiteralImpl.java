@@ -22,7 +22,6 @@ import org.eclipselabs.mscript.typesystem.Unit;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.typesystem.impl.NumericLiteralImpl#getModifier <em>Modifier</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.NumericLiteralImpl#getUnit <em>Unit</em>}</li>
  * </ul>
  * </p>
@@ -30,26 +29,6 @@ import org.eclipselabs.mscript.typesystem.Unit;
  * @generated
  */
 public class NumericLiteralImpl extends LiteralImpl implements NumericLiteral {
-	/**
-	 * The default value of the '{@link #getModifier() <em>Modifier</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getModifier()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String MODIFIER_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getModifier() <em>Modifier</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getModifier()
-	 * @generated
-	 * @ordered
-	 */
-	protected String modifier = MODIFIER_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getUnit() <em>Unit</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -82,22 +61,10 @@ public class NumericLiteralImpl extends LiteralImpl implements NumericLiteral {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public String getModifier() {
-		return modifier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setModifier(String newModifier) {
-		String oldModifier = modifier;
-		modifier = newModifier;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.NUMERIC_LITERAL__MODIFIER, oldModifier, modifier));
+	public boolean isComplex() {
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -165,8 +132,6 @@ public class NumericLiteralImpl extends LiteralImpl implements NumericLiteral {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypeSystemPackage.NUMERIC_LITERAL__MODIFIER:
-				return getModifier();
 			case TypeSystemPackage.NUMERIC_LITERAL__UNIT:
 				return getUnit();
 		}
@@ -181,9 +146,6 @@ public class NumericLiteralImpl extends LiteralImpl implements NumericLiteral {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypeSystemPackage.NUMERIC_LITERAL__MODIFIER:
-				setModifier((String)newValue);
-				return;
 			case TypeSystemPackage.NUMERIC_LITERAL__UNIT:
 				setUnit((Unit)newValue);
 				return;
@@ -199,9 +161,6 @@ public class NumericLiteralImpl extends LiteralImpl implements NumericLiteral {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypeSystemPackage.NUMERIC_LITERAL__MODIFIER:
-				setModifier(MODIFIER_EDEFAULT);
-				return;
 			case TypeSystemPackage.NUMERIC_LITERAL__UNIT:
 				setUnit((Unit)null);
 				return;
@@ -217,28 +176,10 @@ public class NumericLiteralImpl extends LiteralImpl implements NumericLiteral {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypeSystemPackage.NUMERIC_LITERAL__MODIFIER:
-				return MODIFIER_EDEFAULT == null ? modifier != null : !MODIFIER_EDEFAULT.equals(modifier);
 			case TypeSystemPackage.NUMERIC_LITERAL__UNIT:
 				return unit != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (modifier: ");
-		result.append(modifier);
-		result.append(')');
-		return result.toString();
 	}
 
 } //NumericLiteralImpl

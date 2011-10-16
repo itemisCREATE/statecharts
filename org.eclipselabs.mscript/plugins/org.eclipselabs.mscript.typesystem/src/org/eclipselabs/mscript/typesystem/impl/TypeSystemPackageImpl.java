@@ -8,6 +8,7 @@ package org.eclipselabs.mscript.typesystem.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -22,6 +23,7 @@ import org.eclipselabs.mscript.typesystem.ComplexType;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.Expression;
 import org.eclipselabs.mscript.typesystem.GaussianType;
+import org.eclipselabs.mscript.typesystem.IntegerData;
 import org.eclipselabs.mscript.typesystem.IntegerLiteral;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
@@ -30,6 +32,7 @@ import org.eclipselabs.mscript.typesystem.NumericLiteral;
 import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.PrimitiveType;
+import org.eclipselabs.mscript.typesystem.RealData;
 import org.eclipselabs.mscript.typesystem.RealLiteral;
 import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.StringLiteral;
@@ -246,6 +249,20 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * @generated
 	 */
 	private EEnum operatorKindEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType realDataEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType integerDataEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -673,17 +690,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getNumericLiteral_Modifier() {
-		return (EAttribute)numericLiteralEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getNumericLiteral_Unit() {
-		return (EReference)numericLiteralEClass.getEStructuralFeatures().get(1);
+		return (EReference)numericLiteralEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -700,8 +708,17 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRealLiteral_Value() {
+	public EAttribute getRealLiteral_Data() {
 		return (EAttribute)realLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRealLiteral_Value() {
+		return (EAttribute)realLiteralEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -718,8 +735,17 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getIntegerLiteral_Value() {
+	public EAttribute getIntegerLiteral_Data() {
 		return (EAttribute)integerLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIntegerLiteral_Value() {
+		return (EAttribute)integerLiteralEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -765,6 +791,24 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 */
 	public EEnum getOperatorKind() {
 		return operatorKindEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getRealData() {
+		return realDataEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getIntegerData() {
+		return integerDataEDataType;
 	}
 
 	/**
@@ -857,13 +901,14 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		literalEClass = createEClass(LITERAL);
 
 		numericLiteralEClass = createEClass(NUMERIC_LITERAL);
-		createEAttribute(numericLiteralEClass, NUMERIC_LITERAL__MODIFIER);
 		createEReference(numericLiteralEClass, NUMERIC_LITERAL__UNIT);
 
 		realLiteralEClass = createEClass(REAL_LITERAL);
+		createEAttribute(realLiteralEClass, REAL_LITERAL__DATA);
 		createEAttribute(realLiteralEClass, REAL_LITERAL__VALUE);
 
 		integerLiteralEClass = createEClass(INTEGER_LITERAL);
+		createEAttribute(integerLiteralEClass, INTEGER_LITERAL__DATA);
 		createEAttribute(integerLiteralEClass, INTEGER_LITERAL__VALUE);
 
 		booleanLiteralEClass = createEClass(BOOLEAN_LITERAL);
@@ -874,6 +919,10 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 
 		// Create enums
 		operatorKindEEnum = createEEnum(OPERATOR_KIND);
+
+		// Create data types
+		realDataEDataType = createEDataType(REAL_DATA);
+		integerDataEDataType = createEDataType(INTEGER_DATA);
 	}
 
 	/**
@@ -1020,14 +1069,17 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		initEClass(literalEClass, Literal.class, "Literal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(numericLiteralEClass, NumericLiteral.class, "NumericLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNumericLiteral_Modifier(), ecorePackage.getEString(), "modifier", null, 0, 1, NumericLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNumericLiteral_Unit(), this.getUnit(), null, "unit", null, 1, 1, NumericLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(numericLiteralEClass, ecorePackage.getEBoolean(), "isComplex", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(realLiteralEClass, RealLiteral.class, "RealLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRealLiteral_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, RealLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRealLiteral_Data(), this.getRealData(), "data", "0.0", 0, 1, RealLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRealLiteral_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, RealLiteral.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(integerLiteralEClass, IntegerLiteral.class, "IntegerLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getIntegerLiteral_Value(), ecorePackage.getELong(), "value", null, 0, 1, IntegerLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntegerLiteral_Data(), this.getIntegerData(), "data", "0", 0, 1, IntegerLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntegerLiteral_Value(), ecorePackage.getELong(), "value", null, 0, 1, IntegerLiteral.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(booleanLiteralEClass, BooleanLiteral.class, "BooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBooleanLiteral_True(), ecorePackage.getEBoolean(), "true", null, 0, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1058,6 +1110,10 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.GREATER_THAN_OR_EQUAL_TO);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.EQUAL_TO);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.NOT_EQUAL_TO);
+
+		// Initialize data types
+		initEDataType(realDataEDataType, RealData.class, "RealData", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(integerDataEDataType, IntegerData.class, "IntegerData", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -19,6 +19,8 @@ import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
+import org.eclipselabs.mscript.typesystem.IntegerData;
+import org.eclipselabs.mscript.typesystem.RealData;
 
 /**
  * @author Andreas Unger
@@ -28,22 +30,44 @@ public class MscriptTerminalConverters extends DefaultTerminalConverters {
 	
 	private static final Pattern WHITE_SPACE_PATTERN = Pattern.compile("\\s");
 
-	@ValueConverter(rule = "ValidDouble")
-	public IValueConverter<Double> ValidDouble() {
-		return new IValueConverter<Double>() {
+	@ValueConverter(rule = "RealData")
+	public IValueConverter<RealData> RealData() {
+		return new IValueConverter<RealData>() {
 			
-			public Double toValue(String string, INode node) {
+			public RealData toValue(String string, INode node) {
 				if (Strings.isEmpty(string)) {
-					return Double.valueOf(0.0);
+					return new RealData(0.0);
 				}
 				try {
-					return Double.valueOf(string);
+					return RealData.valueOf(string);
 				} catch (NumberFormatException e) {
-					throw new ValueConverterException("Couldn't convert '" + string + "' to double", node, e);
+					throw new ValueConverterException("Couldn't convert '" + string + "' to RealData", node, e);
 				}
 			}
 
-			public String toString(Double value) {
+			public String toString(RealData value) {
+				return value.toString();
+			}
+
+		};
+	}
+
+	@ValueConverter(rule = "IntegerData")
+	public IValueConverter<IntegerData> IntegerData() {
+		return new IValueConverter<IntegerData>() {
+			
+			public IntegerData toValue(String string, INode node) {
+				if (Strings.isEmpty(string)) {
+					return new IntegerData(0);
+				}
+				try {
+					return IntegerData.valueOf(string);
+				} catch (NumberFormatException e) {
+					throw new ValueConverterException("Couldn't convert '" + string + "' to IntegerData", node, e);
+				}
+			}
+
+			public String toString(IntegerData value) {
 				return value.toString();
 			}
 
