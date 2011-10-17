@@ -106,7 +106,7 @@ public class XtextFakeResourceContext {
 		// contained in the resource set may be problematic, so we temporarily
 		// remove it
 		fakeResourceSet.getResources().remove(fakeResource);
-		contextProvider.populateFakeResourceContextResourceSet(fakeResourceSet,
+		contextProvider.populateFakeResourceSet(fakeResourceSet,
 				fakeResource);
 		fakeResourceSet.getResources().add(fakeResource);
 	}

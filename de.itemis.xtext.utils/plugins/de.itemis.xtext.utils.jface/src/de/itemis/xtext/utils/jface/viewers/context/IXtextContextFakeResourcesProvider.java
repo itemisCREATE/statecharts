@@ -11,7 +11,7 @@ import org.eclipse.xtext.resource.XtextResource;
 public interface IXtextContextFakeResourcesProvider {
 
 	public static final IXtextContextFakeResourcesProvider NULL_CONTEXT_PROVIDER = new IXtextContextFakeResourcesProvider() {
-		public void populateFakeResourceContextResourceSet(
+		public void populateFakeResourceSet(
 				ResourceSet fakeResourceSet, XtextResource fakeResource) {
 		};
 	};
@@ -29,6 +29,6 @@ public interface IXtextContextFakeResourcesProvider {
 	 * @param fakeResource
 	 *            the fake {@link XtextResource} as context information.
 	 */
-	void populateFakeResourceContextResourceSet(ResourceSet fakeResourceSet,
+	void populateFakeResourceSet(ResourceSet fakeResourceSet,
 			XtextResource fakeResource);
 }

@@ -91,6 +91,10 @@ public class StyledTextXtextAdapter {
 		// create fake resource and containing resource set
 		createFakeResourceContext(injector);
 	}
+	
+	public StyledTextXtextAdapter(Injector injector) {
+		this(injector, IXtextContextFakeResourcesProvider.NULL_CONTEXT_PROVIDER);
+	}
 
 	public void adapt(StyledText styledText) {
 		this.styledText = styledText;

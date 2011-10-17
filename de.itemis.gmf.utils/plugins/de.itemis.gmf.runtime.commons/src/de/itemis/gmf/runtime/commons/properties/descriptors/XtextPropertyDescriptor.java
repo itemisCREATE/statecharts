@@ -12,6 +12,7 @@ package de.itemis.gmf.runtime.commons.properties.descriptors;
 
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.layout.GridDataFactory;
@@ -45,6 +46,12 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 		this.contextFakeResourceProvider = contextFakeResourceProvider;
 	}
 
+	public XtextPropertyDescriptor(EStructuralFeature feature,
+			String labelName, Injector injector) {
+		this(feature, labelName, injector,
+				IXtextContextFakeResourcesProvider.NULL_CONTEXT_PROVIDER);
+	}
+
 	public XtextPropertyDescriptor(EAttribute feature, String labelName,
 			String helpContextId, Injector injector,
 			IXtextContextFakeResourcesProvider contextResourcesProvider) {
@@ -52,9 +59,21 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 		this.helpContextId = helpContextId;
 	}
 
+	public XtextPropertyDescriptor(EAttribute feature, String labelName,
+			String helpContextId, Injector injector) {
+		this(feature, labelName, helpContextId, injector,
+				IXtextContextFakeResourcesProvider.NULL_CONTEXT_PROVIDER);
+	}
+
 	protected int getStyle() {
 		return SWT.MULTI | SWT.BORDER | SWT.V_SCROLL;
 	}
+
+//	@Override
+//	public void updateModelBinding(EObject eObject) {
+//		super.updateModelBinding(eObject);
+//		xtextAdapter.updateFakeResourceContext();
+//	}
 
 	protected StyledText createControl(Composite parent) {
 		StyledText styledText = new StyledText(parent, getStyle());

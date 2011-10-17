@@ -92,7 +92,7 @@ public abstract class GenericFormBasedPropertySection extends
 //	protected void setEObject(EObject object) {
 //		if (eObject != null) {
 //			for (IFormPropertyDescriptor descriptor : descriptors) {
-//				descriptor.updateContext(eObject);
+//				descriptor.updateModelBinding(eObject);
 //			}
 //		}
 //		super.setEObject(object);

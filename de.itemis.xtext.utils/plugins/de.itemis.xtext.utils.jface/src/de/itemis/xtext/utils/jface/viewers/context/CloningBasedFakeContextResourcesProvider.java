@@ -25,7 +25,7 @@ public class CloningBasedFakeContextResourcesProvider implements
 		this.contextResources.addAll(contextResources);
 	}
 
-	public void populateFakeResourceContextResourceSet(
+	public void populateFakeResourceSet(
 			ResourceSet fakeResourceSet, XtextResource fakeResource) {
 		for (Resource r : contextResources) {
 			createContextResourceCopyInResourceSet(fakeResourceSet, r);
