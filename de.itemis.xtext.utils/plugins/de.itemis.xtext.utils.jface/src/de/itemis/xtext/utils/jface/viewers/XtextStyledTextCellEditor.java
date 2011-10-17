@@ -34,7 +34,7 @@ import com.google.inject.Injector;
 
 import de.itemis.utils.jface.viewers.StyledTextCellEditor;
 import de.itemis.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
-import de.itemis.xtext.utils.jface.viewers.context.IXtextContextFakeResourcesProvider;
+import de.itemis.xtext.utils.jface.viewers.context.IXtextFakeContextResourcesProvider;
 
 /**
  * This class integrates Xtext features into a {@link CellEditor} and can be
@@ -54,10 +54,10 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 
 	private Injector injector;
 	private StyledTextXtextAdapter xtextAdapter;
-	private final IXtextContextFakeResourcesProvider contextFakeResourceProvider;
+	private final IXtextFakeContextResourcesProvider contextFakeResourceProvider;
 
 	public XtextStyledTextCellEditor(int style, Injector injector,
-			IXtextContextFakeResourcesProvider contextFakeResourceProvider) {
+			IXtextFakeContextResourcesProvider contextFakeResourceProvider) {
 		super();
 		setStyle(style);
 		this.injector = injector;

@@ -42,7 +42,7 @@ import com.google.inject.Injector;
 import com.google.inject.Provider;
 
 import de.itemis.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
-import de.itemis.xtext.utils.jface.viewers.context.IXtextContextFakeResourcesProvider;
+import de.itemis.xtext.utils.jface.viewers.context.IXtextFakeContextResourcesProvider;
 import de.itemis.xtext.utils.jface.viewers.context.XtextFakeResourceContext;
 
 /**
@@ -79,12 +79,12 @@ public class StyledTextXtextAdapter {
 	@Inject
 	private XtextDocument document;
 	private XtextFakeResourceContext fakeResourceContext;
-	private final IXtextContextFakeResourcesProvider contextFakeResourceProvider;
+	private final IXtextFakeContextResourcesProvider contextFakeResourceProvider;
 
 	private StyledText styledText;
 
 	public StyledTextXtextAdapter(Injector injector,
-			IXtextContextFakeResourcesProvider contextFakeResourceProvider) {
+			IXtextFakeContextResourcesProvider contextFakeResourceProvider) {
 		this.contextFakeResourceProvider = contextFakeResourceProvider;
 		injector.injectMembers(this);
 
@@ -93,7 +93,7 @@ public class StyledTextXtextAdapter {
 	}
 	
 	public StyledTextXtextAdapter(Injector injector) {
-		this(injector, IXtextContextFakeResourcesProvider.NULL_CONTEXT_PROVIDER);
+		this(injector, IXtextFakeContextResourcesProvider.NULL_CONTEXT_PROVIDER);
 	}
 
 	public void adapt(StyledText styledText) {
@@ -279,7 +279,7 @@ public class StyledTextXtextAdapter {
 				.updateFakeResourceContext(contextFakeResourceProvider);
 	}
 
-	protected IXtextContextFakeResourcesProvider getFakeResourceContextProvider() {
+	protected IXtextFakeContextResourcesProvider getFakeResourceContextProvider() {
 		return contextFakeResourceProvider;
 	}
 

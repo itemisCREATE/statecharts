@@ -24,7 +24,7 @@ import org.eclipse.swt.widgets.Control;
 import com.google.inject.Injector;
 
 import de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapter;
-import de.itemis.xtext.utils.jface.viewers.context.IXtextContextFakeResourcesProvider;
+import de.itemis.xtext.utils.jface.viewers.context.IXtextFakeContextResourcesProvider;
 
 /**
  * 
@@ -35,12 +35,12 @@ import de.itemis.xtext.utils.jface.viewers.context.IXtextContextFakeResourcesPro
 public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 
 	private final Injector injector;
-	private final IXtextContextFakeResourcesProvider contextFakeResourceProvider;
+	private final IXtextFakeContextResourcesProvider contextFakeResourceProvider;
 	private StyledTextXtextAdapter xtextAdapter;
 
 	public XtextPropertyDescriptor(EStructuralFeature feature,
 			String labelName, Injector injector,
-			IXtextContextFakeResourcesProvider contextFakeResourceProvider) {
+			IXtextFakeContextResourcesProvider contextFakeResourceProvider) {
 		super(feature, labelName);
 		this.injector = injector;
 		this.contextFakeResourceProvider = contextFakeResourceProvider;
@@ -49,12 +49,12 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 	public XtextPropertyDescriptor(EStructuralFeature feature,
 			String labelName, Injector injector) {
 		this(feature, labelName, injector,
-				IXtextContextFakeResourcesProvider.NULL_CONTEXT_PROVIDER);
+				IXtextFakeContextResourcesProvider.NULL_CONTEXT_PROVIDER);
 	}
 
 	public XtextPropertyDescriptor(EAttribute feature, String labelName,
 			String helpContextId, Injector injector,
-			IXtextContextFakeResourcesProvider contextResourcesProvider) {
+			IXtextFakeContextResourcesProvider contextResourcesProvider) {
 		this(feature, labelName, injector, contextResourcesProvider);
 		this.helpContextId = helpContextId;
 	}
@@ -62,7 +62,7 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 	public XtextPropertyDescriptor(EAttribute feature, String labelName,
 			String helpContextId, Injector injector) {
 		this(feature, labelName, helpContextId, injector,
-				IXtextContextFakeResourcesProvider.NULL_CONTEXT_PROVIDER);
+				IXtextFakeContextResourcesProvider.NULL_CONTEXT_PROVIDER);
 	}
 
 	protected int getStyle() {

@@ -8,9 +8,9 @@ import org.eclipse.xtext.resource.XtextResource;
  * @author alexander.nyssen@itemis.de
  * 
  */
-public interface IXtextContextFakeResourcesProvider {
+public interface IXtextFakeContextResourcesProvider {
 
-	public static final IXtextContextFakeResourcesProvider NULL_CONTEXT_PROVIDER = new IXtextContextFakeResourcesProvider() {
+	public static final IXtextFakeContextResourcesProvider NULL_CONTEXT_PROVIDER = new IXtextFakeContextResourcesProvider() {
 		public void populateFakeResourceSet(
 				ResourceSet fakeResourceSet, XtextResource fakeResource) {
 		};

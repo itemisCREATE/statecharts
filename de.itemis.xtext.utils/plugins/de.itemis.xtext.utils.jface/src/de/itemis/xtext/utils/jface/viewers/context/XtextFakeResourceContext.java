@@ -89,7 +89,7 @@ public class XtextFakeResourceContext {
 	}
 
 	public void updateFakeResourceContext(
-			IXtextContextFakeResourcesProvider contextProvider) {
+			IXtextFakeContextResourcesProvider contextProvider) {
 
 		// remove any other resources that may have been created earlier
 		// unloading them (to remove all adapters)

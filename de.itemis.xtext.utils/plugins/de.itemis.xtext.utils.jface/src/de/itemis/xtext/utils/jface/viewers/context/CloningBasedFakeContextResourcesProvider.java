@@ -9,14 +9,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
- * An {@link IXtextContextFakeResourcesProvider} that populates the fake
+ * An {@link IXtextFakeContextResourcesProvider} that populates the fake
  * {@link ResourceSet} with 'clones' of the passed in context resources.
  * 
  * @author alexander.nyssen@itemis.de
  * 
  */
 public class CloningBasedFakeContextResourcesProvider implements
-		IXtextContextFakeResourcesProvider {
+		IXtextFakeContextResourcesProvider {
 
 	private final List<Resource> contextResources = new ArrayList<Resource>();
 
