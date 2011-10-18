@@ -71,6 +71,7 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 	public void doIt(IResource resource) {
 		List<IBuilderSubscriber> subscriber = SubscriberExtensions
 				.getSubscriber(resource.getLocation().toOSString());
+//		System.out.println("try to build: " + resource.getLocationURI());
 		for (IBuilderSubscriber builderSubscriber : subscriber) {
 			try {
 				builderSubscriber.doBuild(resource);
