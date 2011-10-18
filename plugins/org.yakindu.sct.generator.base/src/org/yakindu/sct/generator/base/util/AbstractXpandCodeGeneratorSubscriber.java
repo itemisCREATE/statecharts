@@ -33,11 +33,7 @@ public abstract class AbstractXpandCodeGeneratorSubscriber implements
 
 			ExecutionFlow executionFlow = GeneratorBaseUtil
 					.createExecutionFlowModel(statechart);
-			String absoluteTargetFolder = ResourcesPlugin.getWorkspace()
-					.getRoot().getLocation().toOSString()
-					+ File.separator
-					+ project.getFullPath().toOSString()
-					+ File.separator + getOutletPath(resource);
+			String absoluteTargetFolder = project.getRawLocation().toOSString() + File.separator + getOutletPath(resource);
 			GeneratorBaseUtil.generate(executionFlow, getTemplatePath(),
 					project, absoluteTargetFolder);
 		} catch (CoreException e) {

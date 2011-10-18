@@ -95,14 +95,8 @@ public class GeneratorBaseUtil {
 	public static void generate(ExecutionFlow flow, String templatePath,
 			IProject project, String targetFolder) throws CoreException {
 
-		String absoluteTargetFolder = ResourcesPlugin.getWorkspace().getRoot()
-				.getLocation().toOSString()
-				+ File.separator
-				+ project.getFullPath().toOSString()
-				+ File.separator + targetFolder;
-
 		OutputImpl output = new OutputImpl();
-		Outlet outlet = new Outlet(absoluteTargetFolder);
+		Outlet outlet = new Outlet(targetFolder);
 		outlet.setOverwrite(true);
 		output.addOutlet(outlet);
 
