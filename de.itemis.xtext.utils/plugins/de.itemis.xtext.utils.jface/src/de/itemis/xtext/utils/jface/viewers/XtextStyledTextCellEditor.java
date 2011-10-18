@@ -86,8 +86,9 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 		// configure content assist
 		final IContentAssistant contentAssistant = xtextAdapter
 				.getContentAssistant();
-		completionProposalAdapter = new CompletionProposalAdapter(styledText, contentAssistant,
-				KeyStroke.getInstance(SWT.CTRL, SWT.SPACE), null);
+		completionProposalAdapter = new CompletionProposalAdapter(styledText,
+				contentAssistant, KeyStroke.getInstance(SWT.CTRL, SWT.SPACE),
+				null);
 
 		if ((styledText.getStyle() & SWT.SINGLE) != 0) {
 
@@ -109,6 +110,31 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 		}
 
 		return styledText;
+	}
+
+	@Override
+	public boolean isUndoEnabled() {
+		return xtextAdapter.sourceviewer.getUndoManager().undoable();
+	}
+
+	@Override
+	public void performUndo() {
+		xtextAdapter.sourceviewer.getUndoManager().undo();
+	}
+
+	@Override
+	public boolean isRedoEnabled() {
+		return xtextAdapter.sourceviewer.getUndoManager().redoable();
+	}
+
+	@Override
+	public void performRedo() {
+		xtextAdapter.sourceviewer.getUndoManager().redo();
+	}
+	
+	@Override
+	public boolean isFindEnabled() {
+		return true;
 	}
 
 	// in gtk, we need this flag to let one focus lost event pass. See
