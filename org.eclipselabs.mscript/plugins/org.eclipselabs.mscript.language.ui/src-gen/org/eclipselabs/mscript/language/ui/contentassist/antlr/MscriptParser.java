@@ -86,8 +86,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEnumerationDefinitionAccess().getGroup_3(), "rule__EnumerationDefinition__Group_3__0");
 					put(grammarAccess.getEnumerationDefinitionAccess().getGroup_3_1(), "rule__EnumerationDefinition__Group_3_1__0");
 					put(grammarAccess.getTypeAliasDefinitionAccess().getGroup(), "rule__TypeAliasDefinition__Group__0");
-					put(grammarAccess.getRecordDefinitionAccess().getGroup(), "rule__RecordDefinition__Group__0");
-					put(grammarAccess.getRecordFieldDeclarationAccess().getGroup(), "rule__RecordFieldDeclaration__Group__0");
+					put(grammarAccess.getStructDefinitionAccess().getGroup(), "rule__StructDefinition__Group__0");
+					put(grammarAccess.getStructMemberDeclarationAccess().getGroup(), "rule__StructMemberDeclaration__Group__0");
 					put(grammarAccess.getFunctionDefinitionAccess().getGroup(), "rule__FunctionDefinition__Group__0");
 					put(grammarAccess.getFunctionDefinitionAccess().getGroup_3(), "rule__FunctionDefinition__Group_3__0");
 					put(grammarAccess.getFunctionDefinitionAccess().getGroup_3_2(), "rule__FunctionDefinition__Group_3_2__0");
@@ -235,10 +235,10 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEnumerationLiteralDeclarationAccess().getNameAssignment(), "rule__EnumerationLiteralDeclaration__NameAssignment");
 					put(grammarAccess.getTypeAliasDefinitionAccess().getNameAssignment_1(), "rule__TypeAliasDefinition__NameAssignment_1");
 					put(grammarAccess.getTypeAliasDefinitionAccess().getTypeAssignment_3(), "rule__TypeAliasDefinition__TypeAssignment_3");
-					put(grammarAccess.getRecordDefinitionAccess().getNameAssignment_1(), "rule__RecordDefinition__NameAssignment_1");
-					put(grammarAccess.getRecordDefinitionAccess().getFieldDeclarationsAssignment_3(), "rule__RecordDefinition__FieldDeclarationsAssignment_3");
-					put(grammarAccess.getRecordFieldDeclarationAccess().getNameAssignment_0(), "rule__RecordFieldDeclaration__NameAssignment_0");
-					put(grammarAccess.getRecordFieldDeclarationAccess().getTypeAssignment_2(), "rule__RecordFieldDeclaration__TypeAssignment_2");
+					put(grammarAccess.getStructDefinitionAccess().getNameAssignment_1(), "rule__StructDefinition__NameAssignment_1");
+					put(grammarAccess.getStructDefinitionAccess().getMemberDeclarationsAssignment_3(), "rule__StructDefinition__MemberDeclarationsAssignment_3");
+					put(grammarAccess.getStructMemberDeclarationAccess().getNameAssignment_0(), "rule__StructMemberDeclaration__NameAssignment_0");
+					put(grammarAccess.getStructMemberDeclarationAccess().getTypeAssignment_2(), "rule__StructMemberDeclaration__TypeAssignment_2");
 					put(grammarAccess.getFunctionDefinitionAccess().getKindAssignment_0(), "rule__FunctionDefinition__KindAssignment_0");
 					put(grammarAccess.getFunctionDefinitionAccess().getNameAssignment_2(), "rule__FunctionDefinition__NameAssignment_2");
 					put(grammarAccess.getFunctionDefinitionAccess().getTemplateParameterDeclarationsAssignment_3_1(), "rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1");

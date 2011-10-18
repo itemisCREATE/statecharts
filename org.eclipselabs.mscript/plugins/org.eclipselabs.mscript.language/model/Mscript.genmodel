@@ -69,12 +69,12 @@
     <genClasses ecoreClass="Mscript.ecore#//TypeAliasDefinition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//TypeAliasDefinition/type"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//RecordDefinition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RecordDefinition/fieldDeclarations"/>
+    <genClasses ecoreClass="Mscript.ecore#//StructDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//StructDefinition/memberDeclarations"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//RecordFieldDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//RecordFieldDeclaration/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RecordFieldDeclaration/type"/>
+    <genClasses ecoreClass="Mscript.ecore#//StructMemberDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//StructMemberDeclaration/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//StructMemberDeclaration/type"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//FunctionDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//FunctionDefinition/kind"/>

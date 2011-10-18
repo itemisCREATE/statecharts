@@ -62,22 +62,22 @@ public interface AstFactory extends EFactory {
 	TypeAliasDefinition createTypeAliasDefinition();
 
 	/**
-	 * Returns a new object of class '<em>Record Definition</em>'.
+	 * Returns a new object of class '<em>Struct Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Record Definition</em>'.
+	 * @return a new object of class '<em>Struct Definition</em>'.
 	 * @generated
 	 */
-	RecordDefinition createRecordDefinition();
+	StructDefinition createStructDefinition();
 
 	/**
-	 * Returns a new object of class '<em>Record Field Declaration</em>'.
+	 * Returns a new object of class '<em>Struct Member Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Record Field Declaration</em>'.
+	 * @return a new object of class '<em>Struct Member Declaration</em>'.
 	 * @generated
 	 */
-	RecordFieldDeclaration createRecordFieldDeclaration();
+	StructMemberDeclaration createStructMemberDeclaration();
 
 	/**
 	 * Returns a new object of class '<em>Function Definition</em>'.

@@ -169,11 +169,11 @@ ruleDataTypeDefinition returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getDataTypeDefinitionAccess().getRecordDefinitionParserRuleCall_1()); 
+        newCompositeNode(grammarAccess.getDataTypeDefinitionAccess().getStructDefinitionParserRuleCall_1()); 
     }
-    this_RecordDefinition_1=ruleRecordDefinition
+    this_StructDefinition_1=ruleStructDefinition
     { 
-        $current = $this_RecordDefinition_1.current; 
+        $current = $this_StructDefinition_1.current; 
         afterParserOrEnumRuleCall();
     }
 
@@ -392,32 +392,32 @@ ruleTypeAliasDefinition returns [EObject current=null]
 
 
 
-// Entry rule entryRuleRecordDefinition
-entryRuleRecordDefinition returns [EObject current=null] 
+// Entry rule entryRuleStructDefinition
+entryRuleStructDefinition returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getRecordDefinitionRule()); }
-	 iv_ruleRecordDefinition=ruleRecordDefinition 
-	 { $current=$iv_ruleRecordDefinition.current; } 
+	{ newCompositeNode(grammarAccess.getStructDefinitionRule()); }
+	 iv_ruleStructDefinition=ruleStructDefinition 
+	 { $current=$iv_ruleStructDefinition.current; } 
 	 EOF 
 ;
 
-// Rule RecordDefinition
-ruleRecordDefinition returns [EObject current=null] 
+// Rule StructDefinition
+ruleStructDefinition returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='record' 
+(	otherlv_0='struct' 
     {
-    	newLeafNode(otherlv_0, grammarAccess.getRecordDefinitionAccess().getRecordKeyword_0());
+    	newLeafNode(otherlv_0, grammarAccess.getStructDefinitionAccess().getStructKeyword_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRecordDefinitionAccess().getNameValidIDParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getStructDefinitionAccess().getNameValidIDParserRuleCall_1_0()); 
 	    }
 		lv_name_1_0=ruleValidID		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getRecordDefinitionRule());
+	            $current = createModelElementForParent(grammarAccess.getStructDefinitionRule());
 	        }
        		set(
        			$current, 
@@ -430,29 +430,29 @@ ruleRecordDefinition returns [EObject current=null]
 )
 )	otherlv_2='{' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getRecordDefinitionAccess().getLeftCurlyBracketKeyword_2());
+    	newLeafNode(otherlv_2, grammarAccess.getStructDefinitionAccess().getLeftCurlyBracketKeyword_2());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRecordDefinitionAccess().getFieldDeclarationsRecordFieldDeclarationParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getStructDefinitionAccess().getMemberDeclarationsStructMemberDeclarationParserRuleCall_3_0()); 
 	    }
-		lv_fieldDeclarations_3_0=ruleRecordFieldDeclaration		{
+		lv_memberDeclarations_3_0=ruleStructMemberDeclaration		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getRecordDefinitionRule());
+	            $current = createModelElementForParent(grammarAccess.getStructDefinitionRule());
 	        }
        		add(
        			$current, 
-       			"fieldDeclarations",
-        		lv_fieldDeclarations_3_0, 
-        		"RecordFieldDeclaration");
+       			"memberDeclarations",
+        		lv_memberDeclarations_3_0, 
+        		"StructMemberDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 )*	otherlv_4='}' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getRecordDefinitionAccess().getRightCurlyBracketKeyword_4());
+    	newLeafNode(otherlv_4, grammarAccess.getStructDefinitionAccess().getRightCurlyBracketKeyword_4());
     }
 )
 ;
@@ -461,28 +461,28 @@ ruleRecordDefinition returns [EObject current=null]
 
 
 
-// Entry rule entryRuleRecordFieldDeclaration
-entryRuleRecordFieldDeclaration returns [EObject current=null] 
+// Entry rule entryRuleStructMemberDeclaration
+entryRuleStructMemberDeclaration returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getRecordFieldDeclarationRule()); }
-	 iv_ruleRecordFieldDeclaration=ruleRecordFieldDeclaration 
-	 { $current=$iv_ruleRecordFieldDeclaration.current; } 
+	{ newCompositeNode(grammarAccess.getStructMemberDeclarationRule()); }
+	 iv_ruleStructMemberDeclaration=ruleStructMemberDeclaration 
+	 { $current=$iv_ruleStructMemberDeclaration.current; } 
 	 EOF 
 ;
 
-// Rule RecordFieldDeclaration
-ruleRecordFieldDeclaration returns [EObject current=null] 
+// Rule StructMemberDeclaration
+ruleStructMemberDeclaration returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRecordFieldDeclarationAccess().getNameValidIDParserRuleCall_0_0()); 
+	        newCompositeNode(grammarAccess.getStructMemberDeclarationAccess().getNameValidIDParserRuleCall_0_0()); 
 	    }
 		lv_name_0_0=ruleValidID		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getRecordFieldDeclarationRule());
+	            $current = createModelElementForParent(grammarAccess.getStructMemberDeclarationRule());
 	        }
        		set(
        			$current, 
@@ -495,16 +495,16 @@ ruleRecordFieldDeclaration returns [EObject current=null]
 )
 )	otherlv_1=':' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getRecordFieldDeclarationAccess().getColonKeyword_1());
+    	newLeafNode(otherlv_1, grammarAccess.getStructMemberDeclarationAccess().getColonKeyword_1());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRecordFieldDeclarationAccess().getTypeDataTypeSpecifierParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getStructMemberDeclarationAccess().getTypeDataTypeSpecifierParserRuleCall_2_0()); 
 	    }
 		lv_type_2_0=ruleDataTypeSpecifier		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getRecordFieldDeclarationRule());
+	            $current = createModelElementForParent(grammarAccess.getStructMemberDeclarationRule());
 	        }
        		set(
        			$current, 
@@ -517,7 +517,7 @@ ruleRecordFieldDeclaration returns [EObject current=null]
 )
 )	otherlv_3=';' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getRecordFieldDeclarationAccess().getSemicolonKeyword_3());
+    	newLeafNode(otherlv_3, grammarAccess.getStructMemberDeclarationAccess().getSemicolonKeyword_3());
     }
 )
 ;

@@ -69,8 +69,6 @@ import org.eclipselabs.mscript.language.ast.PowerExpression;
 import org.eclipselabs.mscript.language.ast.PrimitiveStepExpression;
 import org.eclipselabs.mscript.language.ast.RangeExpression;
 import org.eclipselabs.mscript.language.ast.RangeStepExpression;
-import org.eclipselabs.mscript.language.ast.RecordDefinition;
-import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.ReturnStatement;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
@@ -78,6 +76,8 @@ import org.eclipselabs.mscript.language.ast.Statement;
 import org.eclipselabs.mscript.language.ast.StepExpression;
 import org.eclipselabs.mscript.language.ast.StepLiteral;
 import org.eclipselabs.mscript.language.ast.StepN;
+import org.eclipselabs.mscript.language.ast.StructDefinition;
+import org.eclipselabs.mscript.language.ast.StructMemberDeclaration;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
 import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
@@ -171,12 +171,12 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 				return createTypeAliasDefinitionAdapter();
 			}
 			@Override
-			public Adapter caseRecordDefinition(RecordDefinition object) {
-				return createRecordDefinitionAdapter();
+			public Adapter caseStructDefinition(StructDefinition object) {
+				return createStructDefinitionAdapter();
 			}
 			@Override
-			public Adapter caseRecordFieldDeclaration(RecordFieldDeclaration object) {
-				return createRecordFieldDeclarationAdapter();
+			public Adapter caseStructMemberDeclaration(StructMemberDeclaration object) {
+				return createStructMemberDeclarationAdapter();
 			}
 			@Override
 			public Adapter caseFunctionDefinition(FunctionDefinition object) {
@@ -563,30 +563,30 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.RecordDefinition <em>Record Definition</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.StructDefinition <em>Struct Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.RecordDefinition
+	 * @see org.eclipselabs.mscript.language.ast.StructDefinition
 	 * @generated
 	 */
-	public Adapter createRecordDefinitionAdapter() {
+	public Adapter createStructDefinitionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.RecordFieldDeclaration <em>Record Field Declaration</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.StructMemberDeclaration <em>Struct Member Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.RecordFieldDeclaration
+	 * @see org.eclipselabs.mscript.language.ast.StructMemberDeclaration
 	 * @generated
 	 */
-	public Adapter createRecordFieldDeclarationAdapter() {
+	public Adapter createStructMemberDeclarationAdapter() {
 		return null;
 	}
 

@@ -79,8 +79,6 @@ import org.eclipselabs.mscript.language.ast.PowerOperator;
 import org.eclipselabs.mscript.language.ast.PrimitiveStepExpression;
 import org.eclipselabs.mscript.language.ast.RangeExpression;
 import org.eclipselabs.mscript.language.ast.RangeStepExpression;
-import org.eclipselabs.mscript.language.ast.RecordDefinition;
-import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.RelationalOperator;
 import org.eclipselabs.mscript.language.ast.ReturnStatement;
@@ -89,6 +87,8 @@ import org.eclipselabs.mscript.language.ast.Statement;
 import org.eclipselabs.mscript.language.ast.StepExpression;
 import org.eclipselabs.mscript.language.ast.StepLiteral;
 import org.eclipselabs.mscript.language.ast.StepN;
+import org.eclipselabs.mscript.language.ast.StructDefinition;
+import org.eclipselabs.mscript.language.ast.StructMemberDeclaration;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
 import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
@@ -156,14 +156,14 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass recordDefinitionEClass = null;
+	private EClass structDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass recordFieldDeclarationEClass = null;
+	private EClass structMemberDeclarationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -879,8 +879,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getRecordDefinition() {
-		return recordDefinitionEClass;
+	public EClass getStructDefinition() {
+		return structDefinitionEClass;
 	}
 
 	/**
@@ -888,8 +888,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRecordDefinition_FieldDeclarations() {
-		return (EReference)recordDefinitionEClass.getEStructuralFeatures().get(0);
+	public EReference getStructDefinition_MemberDeclarations() {
+		return (EReference)structDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -897,8 +897,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getRecordFieldDeclaration() {
-		return recordFieldDeclarationEClass;
+	public EClass getStructMemberDeclaration() {
+		return structMemberDeclarationEClass;
 	}
 
 	/**
@@ -906,8 +906,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRecordFieldDeclaration_Name() {
-		return (EAttribute)recordFieldDeclarationEClass.getEStructuralFeatures().get(0);
+	public EAttribute getStructMemberDeclaration_Name() {
+		return (EAttribute)structMemberDeclarationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -915,8 +915,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRecordFieldDeclaration_Type() {
-		return (EReference)recordFieldDeclarationEClass.getEStructuralFeatures().get(1);
+	public EReference getStructMemberDeclaration_Type() {
+		return (EReference)structMemberDeclarationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2773,12 +2773,12 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		typeAliasDefinitionEClass = createEClass(TYPE_ALIAS_DEFINITION);
 		createEReference(typeAliasDefinitionEClass, TYPE_ALIAS_DEFINITION__TYPE);
 
-		recordDefinitionEClass = createEClass(RECORD_DEFINITION);
-		createEReference(recordDefinitionEClass, RECORD_DEFINITION__FIELD_DECLARATIONS);
+		structDefinitionEClass = createEClass(STRUCT_DEFINITION);
+		createEReference(structDefinitionEClass, STRUCT_DEFINITION__MEMBER_DECLARATIONS);
 
-		recordFieldDeclarationEClass = createEClass(RECORD_FIELD_DECLARATION);
-		createEAttribute(recordFieldDeclarationEClass, RECORD_FIELD_DECLARATION__NAME);
-		createEReference(recordFieldDeclarationEClass, RECORD_FIELD_DECLARATION__TYPE);
+		structMemberDeclarationEClass = createEClass(STRUCT_MEMBER_DECLARATION);
+		createEAttribute(structMemberDeclarationEClass, STRUCT_MEMBER_DECLARATION__NAME);
+		createEReference(structMemberDeclarationEClass, STRUCT_MEMBER_DECLARATION__TYPE);
 
 		functionDefinitionEClass = createEClass(FUNCTION_DEFINITION);
 		createEAttribute(functionDefinitionEClass, FUNCTION_DEFINITION__KIND);
@@ -3087,7 +3087,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		dataTypeDefinitionEClass.getESuperTypes().add(this.getDefinition());
 		enumerationDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
 		typeAliasDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
-		recordDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
+		structDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
 		functionDefinitionEClass.getESuperTypes().add(this.getDefinition());
 		functionDefinitionEClass.getESuperTypes().add(this.getCallableElement());
 		parameterDeclarationEClass.getESuperTypes().add(this.getCallableElement());
@@ -3167,12 +3167,12 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		initEClass(typeAliasDefinitionEClass, TypeAliasDefinition.class, "TypeAliasDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeAliasDefinition_Type(), theTypeSystemPackage.getPrimitiveType(), null, "type", null, 0, 1, TypeAliasDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(recordDefinitionEClass, RecordDefinition.class, "RecordDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRecordDefinition_FieldDeclarations(), this.getRecordFieldDeclaration(), null, "fieldDeclarations", null, 0, -1, RecordDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(structDefinitionEClass, StructDefinition.class, "StructDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStructDefinition_MemberDeclarations(), this.getStructMemberDeclaration(), null, "memberDeclarations", null, 0, -1, StructDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(recordFieldDeclarationEClass, RecordFieldDeclaration.class, "RecordFieldDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRecordFieldDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, RecordFieldDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRecordFieldDeclaration_Type(), this.getDataTypeSpecifier(), null, "type", null, 0, 1, RecordFieldDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(structMemberDeclarationEClass, StructMemberDeclaration.class, "StructMemberDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStructMemberDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, StructMemberDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStructMemberDeclaration_Type(), this.getDataTypeSpecifier(), null, "type", null, 0, 1, StructMemberDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(functionDefinitionEClass, FunctionDefinition.class, "FunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFunctionDefinition_Kind(), this.getFunctionKind(), "kind", null, 0, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

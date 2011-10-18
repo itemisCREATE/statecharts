@@ -73,14 +73,14 @@ import org.eclipselabs.mscript.language.ast.PowerExpression;
 import org.eclipselabs.mscript.language.ast.PowerOperator;
 import org.eclipselabs.mscript.language.ast.RangeExpression;
 import org.eclipselabs.mscript.language.ast.RangeStepExpression;
-import org.eclipselabs.mscript.language.ast.RecordDefinition;
-import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.RelationalOperator;
 import org.eclipselabs.mscript.language.ast.ReturnStatement;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.StepLiteral;
 import org.eclipselabs.mscript.language.ast.StepN;
+import org.eclipselabs.mscript.language.ast.StructDefinition;
+import org.eclipselabs.mscript.language.ast.StructMemberDeclaration;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
 import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
@@ -141,8 +141,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.ENUMERATION_DEFINITION: return createEnumerationDefinition();
 			case AstPackage.ENUMERATION_LITERAL_DECLARATION: return createEnumerationLiteralDeclaration();
 			case AstPackage.TYPE_ALIAS_DEFINITION: return createTypeAliasDefinition();
-			case AstPackage.RECORD_DEFINITION: return createRecordDefinition();
-			case AstPackage.RECORD_FIELD_DECLARATION: return createRecordFieldDeclaration();
+			case AstPackage.STRUCT_DEFINITION: return createStructDefinition();
+			case AstPackage.STRUCT_MEMBER_DECLARATION: return createStructMemberDeclaration();
 			case AstPackage.FUNCTION_DEFINITION: return createFunctionDefinition();
 			case AstPackage.CHECK: return createCheck();
 			case AstPackage.TEMPLATE_PARAMETER_DECLARATION: return createTemplateParameterDeclaration();
@@ -318,9 +318,9 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RecordDefinition createRecordDefinition() {
-		RecordDefinitionImpl recordDefinition = new RecordDefinitionImpl();
-		return recordDefinition;
+	public StructDefinition createStructDefinition() {
+		StructDefinitionImpl structDefinition = new StructDefinitionImpl();
+		return structDefinition;
 	}
 
 	/**
@@ -328,9 +328,9 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RecordFieldDeclaration createRecordFieldDeclaration() {
-		RecordFieldDeclarationImpl recordFieldDeclaration = new RecordFieldDeclarationImpl();
-		return recordFieldDeclaration;
+	public StructMemberDeclaration createStructMemberDeclaration() {
+		StructMemberDeclarationImpl structMemberDeclaration = new StructMemberDeclarationImpl();
+		return structMemberDeclaration;
 	}
 
 	/**

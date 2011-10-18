@@ -29,7 +29,7 @@ Definition:
  
 DataTypeDefinition:
 	EnumerationDefinition |
-	RecordDefinition |
+	StructDefinition |
 	TypeAliasDefinition;
 
 /*
@@ -52,15 +52,15 @@ TypeAliasDefinition:
 	'type' name=ValidID '=' type=PrimitiveType ';';	
 
 /*
- * Record
+ * Struct
  */
 
-RecordDefinition:
-	'record' name=ValidID '{'
-		(fieldDeclarations+=RecordFieldDeclaration)*
+StructDefinition:
+	'struct' name=ValidID '{'
+		(memberDeclarations+=StructMemberDeclaration)*
 	'}'; 
 
-RecordFieldDeclaration:
+StructMemberDeclaration:
 	name=ValidID ':' type=DataTypeSpecifier ';';
 
 /*

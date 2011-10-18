@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalMscriptParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_IJ", "RULE_EXPIJ", "RULE_E", "RULE_ONE", "RULE_INT", "RULE_STRING", "RULE_N", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'enum'", "'{'", "','", "'}'", "'type'", "'='", "';'", "'record'", "':'", "'func'", "'<'", "'>'", "'('", "')'", "'->'", "'check'", "'static'", "'assert'", "'var'", "'fob'", "'initial'", "'real'", "'int'", "'complex'", "'gauss'", "'bool'", "'string'", "'['", "']'", "'let'", "'in'", "'if'", "'then'", "'else'", "'switch'", "'default'", "'case'", "'=>'", "'||'", "'&&'", "'is'", "'.'", "'|'", "'+'", "'-'", "'true'", "'false'", "'..'", "'der'", "'for'", "'$'", "'end'", "'algo'", "'while'", "'do'", "'continue'", "'break'", "'return'", "'/'", "'*'", "'^'", "'::'", "'stateful'", "'continuous'", "'info'", "'warning'", "'error'", "'fatal'", "'=='", "'!='", "'<='", "'>='", "'.*'", "'./'", "'.^'", "'!'", "'\\''"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_IJ", "RULE_EXPIJ", "RULE_E", "RULE_ONE", "RULE_INT", "RULE_STRING", "RULE_N", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'enum'", "'{'", "','", "'}'", "'type'", "'='", "';'", "'struct'", "':'", "'func'", "'<'", "'>'", "'('", "')'", "'->'", "'check'", "'static'", "'assert'", "'var'", "'fob'", "'initial'", "'real'", "'int'", "'complex'", "'gauss'", "'bool'", "'string'", "'['", "']'", "'let'", "'in'", "'if'", "'then'", "'else'", "'switch'", "'default'", "'case'", "'=>'", "'||'", "'&&'", "'is'", "'.'", "'|'", "'+'", "'-'", "'true'", "'false'", "'..'", "'der'", "'for'", "'$'", "'end'", "'algo'", "'while'", "'do'", "'continue'", "'break'", "'return'", "'/'", "'*'", "'^'", "'::'", "'stateful'", "'continuous'", "'info'", "'warning'", "'error'", "'fatal'", "'=='", "'!='", "'<='", "'>='", "'.*'", "'./'", "'.^'", "'!'", "'\\''"
     };
     public static final int RULE_ID=4;
     public static final int T__29=29;
@@ -461,13 +461,13 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDataTypeDefinition"
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:156:1: ruleDataTypeDefinition returns [EObject current=null] : (this_EnumerationDefinition_0= ruleEnumerationDefinition | this_RecordDefinition_1= ruleRecordDefinition | this_TypeAliasDefinition_2= ruleTypeAliasDefinition ) ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:156:1: ruleDataTypeDefinition returns [EObject current=null] : (this_EnumerationDefinition_0= ruleEnumerationDefinition | this_StructDefinition_1= ruleStructDefinition | this_TypeAliasDefinition_2= ruleTypeAliasDefinition ) ;
     public final EObject ruleDataTypeDefinition() throws RecognitionException {
         EObject current = null;
 
         EObject this_EnumerationDefinition_0 = null;
 
-        EObject this_RecordDefinition_1 = null;
+        EObject this_StructDefinition_1 = null;
 
         EObject this_TypeAliasDefinition_2 = null;
 
@@ -475,10 +475,10 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:159:28: ( (this_EnumerationDefinition_0= ruleEnumerationDefinition | this_RecordDefinition_1= ruleRecordDefinition | this_TypeAliasDefinition_2= ruleTypeAliasDefinition ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:160:1: (this_EnumerationDefinition_0= ruleEnumerationDefinition | this_RecordDefinition_1= ruleRecordDefinition | this_TypeAliasDefinition_2= ruleTypeAliasDefinition )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:159:28: ( (this_EnumerationDefinition_0= ruleEnumerationDefinition | this_StructDefinition_1= ruleStructDefinition | this_TypeAliasDefinition_2= ruleTypeAliasDefinition ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:160:1: (this_EnumerationDefinition_0= ruleEnumerationDefinition | this_StructDefinition_1= ruleStructDefinition | this_TypeAliasDefinition_2= ruleTypeAliasDefinition )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:160:1: (this_EnumerationDefinition_0= ruleEnumerationDefinition | this_RecordDefinition_1= ruleRecordDefinition | this_TypeAliasDefinition_2= ruleTypeAliasDefinition )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:160:1: (this_EnumerationDefinition_0= ruleEnumerationDefinition | this_StructDefinition_1= ruleStructDefinition | this_TypeAliasDefinition_2= ruleTypeAliasDefinition )
             int alt3=3;
             switch ( input.LA(1) ) {
             case 16:
@@ -528,21 +528,21 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:171:5: this_RecordDefinition_1= ruleRecordDefinition
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:171:5: this_StructDefinition_1= ruleStructDefinition
                     {
                     if ( state.backtracking==0 ) {
                        
-                              newCompositeNode(grammarAccess.getDataTypeDefinitionAccess().getRecordDefinitionParserRuleCall_1()); 
+                              newCompositeNode(grammarAccess.getDataTypeDefinitionAccess().getStructDefinitionParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleRecordDefinition_in_ruleDataTypeDefinition369);
-                    this_RecordDefinition_1=ruleRecordDefinition();
+                    pushFollow(FOLLOW_ruleStructDefinition_in_ruleDataTypeDefinition369);
+                    this_StructDefinition_1=ruleStructDefinition();
 
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
                        
-                              current = this_RecordDefinition_1; 
+                              current = this_StructDefinition_1; 
                               afterParserOrEnumRuleCall();
                           
                     }
@@ -1130,30 +1130,30 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleTypeAliasDefinition"
 
 
-    // $ANTLR start "entryRuleRecordDefinition"
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:396:1: entryRuleRecordDefinition returns [EObject current=null] : iv_ruleRecordDefinition= ruleRecordDefinition EOF ;
-    public final EObject entryRuleRecordDefinition() throws RecognitionException {
+    // $ANTLR start "entryRuleStructDefinition"
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:396:1: entryRuleStructDefinition returns [EObject current=null] : iv_ruleStructDefinition= ruleStructDefinition EOF ;
+    public final EObject entryRuleStructDefinition() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleRecordDefinition = null;
+        EObject iv_ruleStructDefinition = null;
 
 
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:397:2: (iv_ruleRecordDefinition= ruleRecordDefinition EOF )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:398:2: iv_ruleRecordDefinition= ruleRecordDefinition EOF
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:397:2: (iv_ruleStructDefinition= ruleStructDefinition EOF )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:398:2: iv_ruleStructDefinition= ruleStructDefinition EOF
             {
             if ( state.backtracking==0 ) {
-               newCompositeNode(grammarAccess.getRecordDefinitionRule()); 
+               newCompositeNode(grammarAccess.getStructDefinitionRule()); 
             }
-            pushFollow(FOLLOW_ruleRecordDefinition_in_entryRuleRecordDefinition858);
-            iv_ruleRecordDefinition=ruleRecordDefinition();
+            pushFollow(FOLLOW_ruleStructDefinition_in_entryRuleStructDefinition858);
+            iv_ruleStructDefinition=ruleStructDefinition();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               current =iv_ruleRecordDefinition; 
+               current =iv_ruleStructDefinition; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRecordDefinition868); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStructDefinition868); if (state.failed) return current;
 
             }
 
@@ -1167,12 +1167,12 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleRecordDefinition"
+    // $ANTLR end "entryRuleStructDefinition"
 
 
-    // $ANTLR start "ruleRecordDefinition"
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:405:1: ruleRecordDefinition returns [EObject current=null] : (otherlv_0= 'record' ( (lv_name_1_0= ruleValidID ) ) otherlv_2= '{' ( (lv_fieldDeclarations_3_0= ruleRecordFieldDeclaration ) )* otherlv_4= '}' ) ;
-    public final EObject ruleRecordDefinition() throws RecognitionException {
+    // $ANTLR start "ruleStructDefinition"
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:405:1: ruleStructDefinition returns [EObject current=null] : (otherlv_0= 'struct' ( (lv_name_1_0= ruleValidID ) ) otherlv_2= '{' ( (lv_memberDeclarations_3_0= ruleStructMemberDeclaration ) )* otherlv_4= '}' ) ;
+    public final EObject ruleStructDefinition() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
@@ -1180,22 +1180,22 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         Token otherlv_4=null;
         AntlrDatatypeRuleToken lv_name_1_0 = null;
 
-        EObject lv_fieldDeclarations_3_0 = null;
+        EObject lv_memberDeclarations_3_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:408:28: ( (otherlv_0= 'record' ( (lv_name_1_0= ruleValidID ) ) otherlv_2= '{' ( (lv_fieldDeclarations_3_0= ruleRecordFieldDeclaration ) )* otherlv_4= '}' ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:409:1: (otherlv_0= 'record' ( (lv_name_1_0= ruleValidID ) ) otherlv_2= '{' ( (lv_fieldDeclarations_3_0= ruleRecordFieldDeclaration ) )* otherlv_4= '}' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:408:28: ( (otherlv_0= 'struct' ( (lv_name_1_0= ruleValidID ) ) otherlv_2= '{' ( (lv_memberDeclarations_3_0= ruleStructMemberDeclaration ) )* otherlv_4= '}' ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:409:1: (otherlv_0= 'struct' ( (lv_name_1_0= ruleValidID ) ) otherlv_2= '{' ( (lv_memberDeclarations_3_0= ruleStructMemberDeclaration ) )* otherlv_4= '}' )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:409:1: (otherlv_0= 'record' ( (lv_name_1_0= ruleValidID ) ) otherlv_2= '{' ( (lv_fieldDeclarations_3_0= ruleRecordFieldDeclaration ) )* otherlv_4= '}' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:409:3: otherlv_0= 'record' ( (lv_name_1_0= ruleValidID ) ) otherlv_2= '{' ( (lv_fieldDeclarations_3_0= ruleRecordFieldDeclaration ) )* otherlv_4= '}'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:409:1: (otherlv_0= 'struct' ( (lv_name_1_0= ruleValidID ) ) otherlv_2= '{' ( (lv_memberDeclarations_3_0= ruleStructMemberDeclaration ) )* otherlv_4= '}' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:409:3: otherlv_0= 'struct' ( (lv_name_1_0= ruleValidID ) ) otherlv_2= '{' ( (lv_memberDeclarations_3_0= ruleStructMemberDeclaration ) )* otherlv_4= '}'
             {
-            otherlv_0=(Token)match(input,23,FOLLOW_23_in_ruleRecordDefinition905); if (state.failed) return current;
+            otherlv_0=(Token)match(input,23,FOLLOW_23_in_ruleStructDefinition905); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_0, grammarAccess.getRecordDefinitionAccess().getRecordKeyword_0());
+                  	newLeafNode(otherlv_0, grammarAccess.getStructDefinitionAccess().getStructKeyword_0());
                   
             }
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:413:1: ( (lv_name_1_0= ruleValidID ) )
@@ -1206,10 +1206,10 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             {
             if ( state.backtracking==0 ) {
                
-              	        newCompositeNode(grammarAccess.getRecordDefinitionAccess().getNameValidIDParserRuleCall_1_0()); 
+              	        newCompositeNode(grammarAccess.getStructDefinitionAccess().getNameValidIDParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleValidID_in_ruleRecordDefinition926);
+            pushFollow(FOLLOW_ruleValidID_in_ruleStructDefinition926);
             lv_name_1_0=ruleValidID();
 
             state._fsp--;
@@ -1217,7 +1217,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
 
               	        if (current==null) {
-              	            current = createModelElementForParent(grammarAccess.getRecordDefinitionRule());
+              	            current = createModelElementForParent(grammarAccess.getStructDefinitionRule());
               	        }
                      		set(
                      			current, 
@@ -1233,13 +1233,13 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,17,FOLLOW_17_in_ruleRecordDefinition938); if (state.failed) return current;
+            otherlv_2=(Token)match(input,17,FOLLOW_17_in_ruleStructDefinition938); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_2, grammarAccess.getRecordDefinitionAccess().getLeftCurlyBracketKeyword_2());
+                  	newLeafNode(otherlv_2, grammarAccess.getStructDefinitionAccess().getLeftCurlyBracketKeyword_2());
                   
             }
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:435:1: ( (lv_fieldDeclarations_3_0= ruleRecordFieldDeclaration ) )*
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:435:1: ( (lv_memberDeclarations_3_0= ruleStructMemberDeclaration ) )*
             loop6:
             do {
                 int alt6=2;
@@ -1252,31 +1252,31 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                 switch (alt6) {
             	case 1 :
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:436:1: (lv_fieldDeclarations_3_0= ruleRecordFieldDeclaration )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:436:1: (lv_memberDeclarations_3_0= ruleStructMemberDeclaration )
             	    {
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:436:1: (lv_fieldDeclarations_3_0= ruleRecordFieldDeclaration )
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:437:3: lv_fieldDeclarations_3_0= ruleRecordFieldDeclaration
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:436:1: (lv_memberDeclarations_3_0= ruleStructMemberDeclaration )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:437:3: lv_memberDeclarations_3_0= ruleStructMemberDeclaration
             	    {
             	    if ( state.backtracking==0 ) {
             	       
-            	      	        newCompositeNode(grammarAccess.getRecordDefinitionAccess().getFieldDeclarationsRecordFieldDeclarationParserRuleCall_3_0()); 
+            	      	        newCompositeNode(grammarAccess.getStructDefinitionAccess().getMemberDeclarationsStructMemberDeclarationParserRuleCall_3_0()); 
             	      	    
             	    }
-            	    pushFollow(FOLLOW_ruleRecordFieldDeclaration_in_ruleRecordDefinition959);
-            	    lv_fieldDeclarations_3_0=ruleRecordFieldDeclaration();
+            	    pushFollow(FOLLOW_ruleStructMemberDeclaration_in_ruleStructDefinition959);
+            	    lv_memberDeclarations_3_0=ruleStructMemberDeclaration();
 
             	    state._fsp--;
             	    if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      	        if (current==null) {
-            	      	            current = createModelElementForParent(grammarAccess.getRecordDefinitionRule());
+            	      	            current = createModelElementForParent(grammarAccess.getStructDefinitionRule());
             	      	        }
             	             		add(
             	             			current, 
-            	             			"fieldDeclarations",
-            	              		lv_fieldDeclarations_3_0, 
-            	              		"RecordFieldDeclaration");
+            	             			"memberDeclarations",
+            	              		lv_memberDeclarations_3_0, 
+            	              		"StructMemberDeclaration");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -1292,10 +1292,10 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,19,FOLLOW_19_in_ruleRecordDefinition972); if (state.failed) return current;
+            otherlv_4=(Token)match(input,19,FOLLOW_19_in_ruleStructDefinition972); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_4, grammarAccess.getRecordDefinitionAccess().getRightCurlyBracketKeyword_4());
+                  	newLeafNode(otherlv_4, grammarAccess.getStructDefinitionAccess().getRightCurlyBracketKeyword_4());
                   
             }
 
@@ -1317,33 +1317,33 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleRecordDefinition"
+    // $ANTLR end "ruleStructDefinition"
 
 
-    // $ANTLR start "entryRuleRecordFieldDeclaration"
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:465:1: entryRuleRecordFieldDeclaration returns [EObject current=null] : iv_ruleRecordFieldDeclaration= ruleRecordFieldDeclaration EOF ;
-    public final EObject entryRuleRecordFieldDeclaration() throws RecognitionException {
+    // $ANTLR start "entryRuleStructMemberDeclaration"
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:465:1: entryRuleStructMemberDeclaration returns [EObject current=null] : iv_ruleStructMemberDeclaration= ruleStructMemberDeclaration EOF ;
+    public final EObject entryRuleStructMemberDeclaration() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleRecordFieldDeclaration = null;
+        EObject iv_ruleStructMemberDeclaration = null;
 
 
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:466:2: (iv_ruleRecordFieldDeclaration= ruleRecordFieldDeclaration EOF )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:467:2: iv_ruleRecordFieldDeclaration= ruleRecordFieldDeclaration EOF
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:466:2: (iv_ruleStructMemberDeclaration= ruleStructMemberDeclaration EOF )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:467:2: iv_ruleStructMemberDeclaration= ruleStructMemberDeclaration EOF
             {
             if ( state.backtracking==0 ) {
-               newCompositeNode(grammarAccess.getRecordFieldDeclarationRule()); 
+               newCompositeNode(grammarAccess.getStructMemberDeclarationRule()); 
             }
-            pushFollow(FOLLOW_ruleRecordFieldDeclaration_in_entryRuleRecordFieldDeclaration1008);
-            iv_ruleRecordFieldDeclaration=ruleRecordFieldDeclaration();
+            pushFollow(FOLLOW_ruleStructMemberDeclaration_in_entryRuleStructMemberDeclaration1008);
+            iv_ruleStructMemberDeclaration=ruleStructMemberDeclaration();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               current =iv_ruleRecordFieldDeclaration; 
+               current =iv_ruleStructMemberDeclaration; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRecordFieldDeclaration1018); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStructMemberDeclaration1018); if (state.failed) return current;
 
             }
 
@@ -1357,12 +1357,12 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleRecordFieldDeclaration"
+    // $ANTLR end "entryRuleStructMemberDeclaration"
 
 
-    // $ANTLR start "ruleRecordFieldDeclaration"
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:474:1: ruleRecordFieldDeclaration returns [EObject current=null] : ( ( (lv_name_0_0= ruleValidID ) ) otherlv_1= ':' ( (lv_type_2_0= ruleDataTypeSpecifier ) ) otherlv_3= ';' ) ;
-    public final EObject ruleRecordFieldDeclaration() throws RecognitionException {
+    // $ANTLR start "ruleStructMemberDeclaration"
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:474:1: ruleStructMemberDeclaration returns [EObject current=null] : ( ( (lv_name_0_0= ruleValidID ) ) otherlv_1= ':' ( (lv_type_2_0= ruleDataTypeSpecifier ) ) otherlv_3= ';' ) ;
+    public final EObject ruleStructMemberDeclaration() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
@@ -1389,10 +1389,10 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             {
             if ( state.backtracking==0 ) {
                
-              	        newCompositeNode(grammarAccess.getRecordFieldDeclarationAccess().getNameValidIDParserRuleCall_0_0()); 
+              	        newCompositeNode(grammarAccess.getStructMemberDeclarationAccess().getNameValidIDParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleValidID_in_ruleRecordFieldDeclaration1064);
+            pushFollow(FOLLOW_ruleValidID_in_ruleStructMemberDeclaration1064);
             lv_name_0_0=ruleValidID();
 
             state._fsp--;
@@ -1400,7 +1400,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
 
               	        if (current==null) {
-              	            current = createModelElementForParent(grammarAccess.getRecordFieldDeclarationRule());
+              	            current = createModelElementForParent(grammarAccess.getStructMemberDeclarationRule());
               	        }
                      		set(
                      			current, 
@@ -1416,10 +1416,10 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,24,FOLLOW_24_in_ruleRecordFieldDeclaration1076); if (state.failed) return current;
+            otherlv_1=(Token)match(input,24,FOLLOW_24_in_ruleStructMemberDeclaration1076); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_1, grammarAccess.getRecordFieldDeclarationAccess().getColonKeyword_1());
+                  	newLeafNode(otherlv_1, grammarAccess.getStructMemberDeclarationAccess().getColonKeyword_1());
                   
             }
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:500:1: ( (lv_type_2_0= ruleDataTypeSpecifier ) )
@@ -1430,10 +1430,10 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             {
             if ( state.backtracking==0 ) {
                
-              	        newCompositeNode(grammarAccess.getRecordFieldDeclarationAccess().getTypeDataTypeSpecifierParserRuleCall_2_0()); 
+              	        newCompositeNode(grammarAccess.getStructMemberDeclarationAccess().getTypeDataTypeSpecifierParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleDataTypeSpecifier_in_ruleRecordFieldDeclaration1097);
+            pushFollow(FOLLOW_ruleDataTypeSpecifier_in_ruleStructMemberDeclaration1097);
             lv_type_2_0=ruleDataTypeSpecifier();
 
             state._fsp--;
@@ -1441,7 +1441,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
 
               	        if (current==null) {
-              	            current = createModelElementForParent(grammarAccess.getRecordFieldDeclarationRule());
+              	            current = createModelElementForParent(grammarAccess.getStructMemberDeclarationRule());
               	        }
                      		set(
                      			current, 
@@ -1457,10 +1457,10 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,22,FOLLOW_22_in_ruleRecordFieldDeclaration1109); if (state.failed) return current;
+            otherlv_3=(Token)match(input,22,FOLLOW_22_in_ruleStructMemberDeclaration1109); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_3, grammarAccess.getRecordFieldDeclarationAccess().getSemicolonKeyword_3());
+                  	newLeafNode(otherlv_3, grammarAccess.getStructMemberDeclarationAccess().getSemicolonKeyword_3());
                   
             }
 
@@ -1482,7 +1482,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleRecordFieldDeclaration"
+    // $ANTLR end "ruleStructMemberDeclaration"
 
 
     // $ANTLR start "entryRuleFunctionDefinition"
@@ -22822,7 +22822,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleDataTypeDefinition_in_entryRuleDataTypeDefinition285 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleDataTypeDefinition295 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleEnumerationDefinition_in_ruleDataTypeDefinition342 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRecordDefinition_in_ruleDataTypeDefinition369 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStructDefinition_in_ruleDataTypeDefinition369 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleTypeAliasDefinition_in_ruleDataTypeDefinition396 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleEnumerationDefinition_in_entryRuleEnumerationDefinition431 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleEnumerationDefinition441 = new BitSet(new long[]{0x0000000000000002L});
@@ -22843,19 +22843,19 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_21_in_ruleTypeAliasDefinition789 = new BitSet(new long[]{0x000007E000000000L});
     public static final BitSet FOLLOW_rulePrimitiveType_in_ruleTypeAliasDefinition810 = new BitSet(new long[]{0x0000000000400000L});
     public static final BitSet FOLLOW_22_in_ruleTypeAliasDefinition822 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRecordDefinition_in_entryRuleRecordDefinition858 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRecordDefinition868 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_ruleRecordDefinition905 = new BitSet(new long[]{0x00000000000008F0L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleRecordDefinition926 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleRecordDefinition938 = new BitSet(new long[]{0x00000000000808F0L});
-    public static final BitSet FOLLOW_ruleRecordFieldDeclaration_in_ruleRecordDefinition959 = new BitSet(new long[]{0x00000000000808F0L});
-    public static final BitSet FOLLOW_19_in_ruleRecordDefinition972 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRecordFieldDeclaration_in_entryRuleRecordFieldDeclaration1008 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRecordFieldDeclaration1018 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleRecordFieldDeclaration1064 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_24_in_ruleRecordFieldDeclaration1076 = new BitSet(new long[]{0x000007E000000010L});
-    public static final BitSet FOLLOW_ruleDataTypeSpecifier_in_ruleRecordFieldDeclaration1097 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_22_in_ruleRecordFieldDeclaration1109 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStructDefinition_in_entryRuleStructDefinition858 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStructDefinition868 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_ruleStructDefinition905 = new BitSet(new long[]{0x00000000000008F0L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleStructDefinition926 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_ruleStructDefinition938 = new BitSet(new long[]{0x00000000000808F0L});
+    public static final BitSet FOLLOW_ruleStructMemberDeclaration_in_ruleStructDefinition959 = new BitSet(new long[]{0x00000000000808F0L});
+    public static final BitSet FOLLOW_19_in_ruleStructDefinition972 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStructMemberDeclaration_in_entryRuleStructMemberDeclaration1008 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStructMemberDeclaration1018 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleStructMemberDeclaration1064 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_24_in_ruleStructMemberDeclaration1076 = new BitSet(new long[]{0x000007E000000010L});
+    public static final BitSet FOLLOW_ruleDataTypeSpecifier_in_ruleStructMemberDeclaration1097 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_22_in_ruleStructMemberDeclaration1109 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFunctionDefinition_in_entryRuleFunctionDefinition1145 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleFunctionDefinition1155 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFunctionKind_in_ruleFunctionDefinition1201 = new BitSet(new long[]{0x0000000002000000L});

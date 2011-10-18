@@ -68,8 +68,6 @@ import org.eclipselabs.mscript.language.ast.PowerExpression;
 import org.eclipselabs.mscript.language.ast.PrimitiveStepExpression;
 import org.eclipselabs.mscript.language.ast.RangeExpression;
 import org.eclipselabs.mscript.language.ast.RangeStepExpression;
-import org.eclipselabs.mscript.language.ast.RecordDefinition;
-import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.ReturnStatement;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
@@ -77,6 +75,8 @@ import org.eclipselabs.mscript.language.ast.Statement;
 import org.eclipselabs.mscript.language.ast.StepExpression;
 import org.eclipselabs.mscript.language.ast.StepLiteral;
 import org.eclipselabs.mscript.language.ast.StepN;
+import org.eclipselabs.mscript.language.ast.StructDefinition;
+import org.eclipselabs.mscript.language.ast.StructMemberDeclaration;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
 import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
@@ -187,17 +187,17 @@ public class AstSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case AstPackage.RECORD_DEFINITION: {
-				RecordDefinition recordDefinition = (RecordDefinition)theEObject;
-				T result = caseRecordDefinition(recordDefinition);
-				if (result == null) result = caseDataTypeDefinition(recordDefinition);
-				if (result == null) result = caseDefinition(recordDefinition);
+			case AstPackage.STRUCT_DEFINITION: {
+				StructDefinition structDefinition = (StructDefinition)theEObject;
+				T result = caseStructDefinition(structDefinition);
+				if (result == null) result = caseDataTypeDefinition(structDefinition);
+				if (result == null) result = caseDefinition(structDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case AstPackage.RECORD_FIELD_DECLARATION: {
-				RecordFieldDeclaration recordFieldDeclaration = (RecordFieldDeclaration)theEObject;
-				T result = caseRecordFieldDeclaration(recordFieldDeclaration);
+			case AstPackage.STRUCT_MEMBER_DECLARATION: {
+				StructMemberDeclaration structMemberDeclaration = (StructMemberDeclaration)theEObject;
+				T result = caseStructMemberDeclaration(structMemberDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -781,32 +781,32 @@ public class AstSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Record Definition</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Struct Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Record Definition</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Struct Definition</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRecordDefinition(RecordDefinition object) {
+	public T caseStructDefinition(StructDefinition object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Record Field Declaration</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Struct Member Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Record Field Declaration</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Struct Member Declaration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRecordFieldDeclaration(RecordFieldDeclaration object) {
+	public T caseStructMemberDeclaration(StructMemberDeclaration object) {
 		return null;
 	}
 

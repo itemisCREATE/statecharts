@@ -158,26 +158,6 @@ public interface AstPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION = 5;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.RecordDefinitionImpl <em>Record Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.ast.impl.RecordDefinitionImpl
-	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRecordDefinition()
-	 * @generated
-	 */
-	int RECORD_DEFINITION = 6;
-
-	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.RecordFieldDeclarationImpl <em>Record Field Declaration</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.ast.impl.RecordFieldDeclarationImpl
-	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRecordFieldDeclaration()
-	 * @generated
-	 */
-	int RECORD_FIELD_DECLARATION = 7;
-
-	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl <em>Function Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -328,31 +308,14 @@ public interface AstPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION_FEATURE_COUNT = DATA_TYPE_DEFINITION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.StructDefinitionImpl <em>Struct Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.StructDefinitionImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStructDefinition()
 	 * @generated
-	 * @ordered
 	 */
-	int RECORD_DEFINITION__NAME = DATA_TYPE_DEFINITION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Field Declarations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RECORD_DEFINITION__FIELD_DECLARATIONS = DATA_TYPE_DEFINITION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Record Definition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RECORD_DEFINITION_FEATURE_COUNT = DATA_TYPE_DEFINITION_FEATURE_COUNT + 1;
+	int STRUCT_DEFINITION = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -361,7 +324,44 @@ public interface AstPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RECORD_FIELD_DECLARATION__NAME = 0;
+	int STRUCT_DEFINITION__NAME = DATA_TYPE_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Member Declarations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCT_DEFINITION__MEMBER_DECLARATIONS = DATA_TYPE_DEFINITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Struct Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCT_DEFINITION_FEATURE_COUNT = DATA_TYPE_DEFINITION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.StructMemberDeclarationImpl <em>Struct Member Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.StructMemberDeclarationImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStructMemberDeclaration()
+	 * @generated
+	 */
+	int STRUCT_MEMBER_DECLARATION = 7;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCT_MEMBER_DECLARATION__NAME = 0;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -370,16 +370,16 @@ public interface AstPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RECORD_FIELD_DECLARATION__TYPE = 1;
+	int STRUCT_MEMBER_DECLARATION__TYPE = 1;
 
 	/**
-	 * The number of structural features of the '<em>Record Field Declaration</em>' class.
+	 * The number of structural features of the '<em>Struct Member Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RECORD_FIELD_DECLARATION_FEATURE_COUNT = 2;
+	int STRUCT_MEMBER_DECLARATION_FEATURE_COUNT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3026,57 +3026,57 @@ public interface AstPackage extends EPackage {
 	EReference getTypeAliasDefinition_Type();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.RecordDefinition <em>Record Definition</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.StructDefinition <em>Struct Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Record Definition</em>'.
-	 * @see org.eclipselabs.mscript.language.ast.RecordDefinition
+	 * @return the meta object for class '<em>Struct Definition</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.StructDefinition
 	 * @generated
 	 */
-	EClass getRecordDefinition();
+	EClass getStructDefinition();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.RecordDefinition#getFieldDeclarations <em>Field Declarations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.StructDefinition#getMemberDeclarations <em>Member Declarations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Field Declarations</em>'.
-	 * @see org.eclipselabs.mscript.language.ast.RecordDefinition#getFieldDeclarations()
-	 * @see #getRecordDefinition()
+	 * @return the meta object for the containment reference list '<em>Member Declarations</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.StructDefinition#getMemberDeclarations()
+	 * @see #getStructDefinition()
 	 * @generated
 	 */
-	EReference getRecordDefinition_FieldDeclarations();
+	EReference getStructDefinition_MemberDeclarations();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.RecordFieldDeclaration <em>Record Field Declaration</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.StructMemberDeclaration <em>Struct Member Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Record Field Declaration</em>'.
-	 * @see org.eclipselabs.mscript.language.ast.RecordFieldDeclaration
+	 * @return the meta object for class '<em>Struct Member Declaration</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.StructMemberDeclaration
 	 * @generated
 	 */
-	EClass getRecordFieldDeclaration();
+	EClass getStructMemberDeclaration();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.RecordFieldDeclaration#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.StructMemberDeclaration#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipselabs.mscript.language.ast.RecordFieldDeclaration#getName()
-	 * @see #getRecordFieldDeclaration()
+	 * @see org.eclipselabs.mscript.language.ast.StructMemberDeclaration#getName()
+	 * @see #getStructMemberDeclaration()
 	 * @generated
 	 */
-	EAttribute getRecordFieldDeclaration_Name();
+	EAttribute getStructMemberDeclaration_Name();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.RecordFieldDeclaration#getType <em>Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.StructMemberDeclaration#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Type</em>'.
-	 * @see org.eclipselabs.mscript.language.ast.RecordFieldDeclaration#getType()
-	 * @see #getRecordFieldDeclaration()
+	 * @see org.eclipselabs.mscript.language.ast.StructMemberDeclaration#getType()
+	 * @see #getStructMemberDeclaration()
 	 * @generated
 	 */
-	EReference getRecordFieldDeclaration_Type();
+	EReference getStructMemberDeclaration_Type();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition <em>Function Definition</em>}'.
@@ -5334,32 +5334,32 @@ public interface AstPackage extends EPackage {
 		EReference TYPE_ALIAS_DEFINITION__TYPE = eINSTANCE.getTypeAliasDefinition_Type();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.RecordDefinitionImpl <em>Record Definition</em>}' class.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.StructDefinitionImpl <em>Struct Definition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.ast.impl.RecordDefinitionImpl
-		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRecordDefinition()
+		 * @see org.eclipselabs.mscript.language.ast.impl.StructDefinitionImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStructDefinition()
 		 * @generated
 		 */
-		EClass RECORD_DEFINITION = eINSTANCE.getRecordDefinition();
+		EClass STRUCT_DEFINITION = eINSTANCE.getStructDefinition();
 
 		/**
-		 * The meta object literal for the '<em><b>Field Declarations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Member Declarations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RECORD_DEFINITION__FIELD_DECLARATIONS = eINSTANCE.getRecordDefinition_FieldDeclarations();
+		EReference STRUCT_DEFINITION__MEMBER_DECLARATIONS = eINSTANCE.getStructDefinition_MemberDeclarations();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.RecordFieldDeclarationImpl <em>Record Field Declaration</em>}' class.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.StructMemberDeclarationImpl <em>Struct Member Declaration</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.ast.impl.RecordFieldDeclarationImpl
-		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRecordFieldDeclaration()
+		 * @see org.eclipselabs.mscript.language.ast.impl.StructMemberDeclarationImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStructMemberDeclaration()
 		 * @generated
 		 */
-		EClass RECORD_FIELD_DECLARATION = eINSTANCE.getRecordFieldDeclaration();
+		EClass STRUCT_MEMBER_DECLARATION = eINSTANCE.getStructMemberDeclaration();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -5367,7 +5367,7 @@ public interface AstPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute RECORD_FIELD_DECLARATION__NAME = eINSTANCE.getRecordFieldDeclaration_Name();
+		EAttribute STRUCT_MEMBER_DECLARATION__NAME = eINSTANCE.getStructMemberDeclaration_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
@@ -5375,7 +5375,7 @@ public interface AstPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RECORD_FIELD_DECLARATION__TYPE = eINSTANCE.getRecordFieldDeclaration_Type();
+		EReference STRUCT_MEMBER_DECLARATION__TYPE = eINSTANCE.getStructMemberDeclaration_Type();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl <em>Function Definition</em>}' class.

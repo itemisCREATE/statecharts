@@ -15,39 +15,39 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.RecordDefinition;
-import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
+import org.eclipselabs.mscript.language.ast.StructDefinition;
+import org.eclipselabs.mscript.language.ast.StructMemberDeclaration;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Record Definition</b></em>'.
+ * An implementation of the model object '<em><b>Struct Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RecordDefinitionImpl#getFieldDeclarations <em>Field Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.StructDefinitionImpl#getMemberDeclarations <em>Member Declarations</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class RecordDefinitionImpl extends DataTypeDefinitionImpl implements RecordDefinition {
+public class StructDefinitionImpl extends DataTypeDefinitionImpl implements StructDefinition {
 	/**
-	 * The cached value of the '{@link #getFieldDeclarations() <em>Field Declarations</em>}' containment reference list.
+	 * The cached value of the '{@link #getMemberDeclarations() <em>Member Declarations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFieldDeclarations()
+	 * @see #getMemberDeclarations()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<RecordFieldDeclaration> fieldDeclarations;
+	protected EList<StructMemberDeclaration> memberDeclarations;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RecordDefinitionImpl() {
+	protected StructDefinitionImpl() {
 		super();
 	}
 
@@ -58,7 +58,7 @@ public class RecordDefinitionImpl extends DataTypeDefinitionImpl implements Reco
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return AstPackage.Literals.RECORD_DEFINITION;
+		return AstPackage.Literals.STRUCT_DEFINITION;
 	}
 
 	/**
@@ -66,11 +66,11 @@ public class RecordDefinitionImpl extends DataTypeDefinitionImpl implements Reco
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<RecordFieldDeclaration> getFieldDeclarations() {
-		if (fieldDeclarations == null) {
-			fieldDeclarations = new EObjectContainmentEList<RecordFieldDeclaration>(RecordFieldDeclaration.class, this, AstPackage.RECORD_DEFINITION__FIELD_DECLARATIONS);
+	public EList<StructMemberDeclaration> getMemberDeclarations() {
+		if (memberDeclarations == null) {
+			memberDeclarations = new EObjectContainmentEList<StructMemberDeclaration>(StructMemberDeclaration.class, this, AstPackage.STRUCT_DEFINITION__MEMBER_DECLARATIONS);
 		}
-		return fieldDeclarations;
+		return memberDeclarations;
 	}
 
 	/**
@@ -81,8 +81,8 @@ public class RecordDefinitionImpl extends DataTypeDefinitionImpl implements Reco
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AstPackage.RECORD_DEFINITION__FIELD_DECLARATIONS:
-				return ((InternalEList<?>)getFieldDeclarations()).basicRemove(otherEnd, msgs);
+			case AstPackage.STRUCT_DEFINITION__MEMBER_DECLARATIONS:
+				return ((InternalEList<?>)getMemberDeclarations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -95,8 +95,8 @@ public class RecordDefinitionImpl extends DataTypeDefinitionImpl implements Reco
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AstPackage.RECORD_DEFINITION__FIELD_DECLARATIONS:
-				return getFieldDeclarations();
+			case AstPackage.STRUCT_DEFINITION__MEMBER_DECLARATIONS:
+				return getMemberDeclarations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -110,9 +110,9 @@ public class RecordDefinitionImpl extends DataTypeDefinitionImpl implements Reco
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AstPackage.RECORD_DEFINITION__FIELD_DECLARATIONS:
-				getFieldDeclarations().clear();
-				getFieldDeclarations().addAll((Collection<? extends RecordFieldDeclaration>)newValue);
+			case AstPackage.STRUCT_DEFINITION__MEMBER_DECLARATIONS:
+				getMemberDeclarations().clear();
+				getMemberDeclarations().addAll((Collection<? extends StructMemberDeclaration>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -126,8 +126,8 @@ public class RecordDefinitionImpl extends DataTypeDefinitionImpl implements Reco
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AstPackage.RECORD_DEFINITION__FIELD_DECLARATIONS:
-				getFieldDeclarations().clear();
+			case AstPackage.STRUCT_DEFINITION__MEMBER_DECLARATIONS:
+				getMemberDeclarations().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -141,10 +141,10 @@ public class RecordDefinitionImpl extends DataTypeDefinitionImpl implements Reco
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AstPackage.RECORD_DEFINITION__FIELD_DECLARATIONS:
-				return fieldDeclarations != null && !fieldDeclarations.isEmpty();
+			case AstPackage.STRUCT_DEFINITION__MEMBER_DECLARATIONS:
+				return memberDeclarations != null && !memberDeclarations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //RecordDefinitionImpl
+} //StructDefinitionImpl

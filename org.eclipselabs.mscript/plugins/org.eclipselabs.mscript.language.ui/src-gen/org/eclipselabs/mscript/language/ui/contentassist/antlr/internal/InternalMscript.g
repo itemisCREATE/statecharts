@@ -226,25 +226,25 @@ finally {
 
 
 
-// Entry rule entryRuleRecordDefinition
-entryRuleRecordDefinition 
+// Entry rule entryRuleStructDefinition
+entryRuleStructDefinition 
 :
-{ before(grammarAccess.getRecordDefinitionRule()); }
-	 ruleRecordDefinition
-{ after(grammarAccess.getRecordDefinitionRule()); } 
+{ before(grammarAccess.getStructDefinitionRule()); }
+	 ruleStructDefinition
+{ after(grammarAccess.getStructDefinitionRule()); } 
 	 EOF 
 ;
 
-// Rule RecordDefinition
-ruleRecordDefinition
+// Rule StructDefinition
+ruleStructDefinition
     @init {
 		int stackSize = keepStackSize();
     }
 	:
 (
-{ before(grammarAccess.getRecordDefinitionAccess().getGroup()); }
-(rule__RecordDefinition__Group__0)
-{ after(grammarAccess.getRecordDefinitionAccess().getGroup()); }
+{ before(grammarAccess.getStructDefinitionAccess().getGroup()); }
+(rule__StructDefinition__Group__0)
+{ after(grammarAccess.getStructDefinitionAccess().getGroup()); }
 )
 
 ;
@@ -254,25 +254,25 @@ finally {
 
 
 
-// Entry rule entryRuleRecordFieldDeclaration
-entryRuleRecordFieldDeclaration 
+// Entry rule entryRuleStructMemberDeclaration
+entryRuleStructMemberDeclaration 
 :
-{ before(grammarAccess.getRecordFieldDeclarationRule()); }
-	 ruleRecordFieldDeclaration
-{ after(grammarAccess.getRecordFieldDeclarationRule()); } 
+{ before(grammarAccess.getStructMemberDeclarationRule()); }
+	 ruleStructMemberDeclaration
+{ after(grammarAccess.getStructMemberDeclarationRule()); } 
 	 EOF 
 ;
 
-// Rule RecordFieldDeclaration
-ruleRecordFieldDeclaration
+// Rule StructMemberDeclaration
+ruleStructMemberDeclaration
     @init {
 		int stackSize = keepStackSize();
     }
 	:
 (
-{ before(grammarAccess.getRecordFieldDeclarationAccess().getGroup()); }
-(rule__RecordFieldDeclaration__Group__0)
-{ after(grammarAccess.getRecordFieldDeclarationAccess().getGroup()); }
+{ before(grammarAccess.getStructMemberDeclarationAccess().getGroup()); }
+(rule__StructMemberDeclaration__Group__0)
+{ after(grammarAccess.getStructMemberDeclarationAccess().getGroup()); }
 )
 
 ;
@@ -3167,9 +3167,9 @@ rule__DataTypeDefinition__Alternatives
 )
 
     |(
-{ before(grammarAccess.getDataTypeDefinitionAccess().getRecordDefinitionParserRuleCall_1()); }
-	ruleRecordDefinition
-{ after(grammarAccess.getDataTypeDefinitionAccess().getRecordDefinitionParserRuleCall_1()); }
+{ before(grammarAccess.getDataTypeDefinitionAccess().getStructDefinitionParserRuleCall_1()); }
+	ruleStructDefinition
+{ after(grammarAccess.getDataTypeDefinitionAccess().getStructDefinitionParserRuleCall_1()); }
 )
 
     |(
@@ -4823,29 +4823,29 @@ finally {
 
 
 
-rule__RecordDefinition__Group__0
+rule__StructDefinition__Group__0
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__RecordDefinition__Group__0__Impl
-	rule__RecordDefinition__Group__1
+	rule__StructDefinition__Group__0__Impl
+	rule__StructDefinition__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RecordDefinition__Group__0__Impl
+rule__StructDefinition__Group__0__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRecordDefinitionAccess().getRecordKeyword_0()); }
+{ before(grammarAccess.getStructDefinitionAccess().getStructKeyword_0()); }
 
-	'record' 
+	'struct' 
 
-{ after(grammarAccess.getRecordDefinitionAccess().getRecordKeyword_0()); }
+{ after(grammarAccess.getStructDefinitionAccess().getStructKeyword_0()); }
 )
 
 ;
@@ -4854,27 +4854,27 @@ finally {
 }
 
 
-rule__RecordDefinition__Group__1
+rule__StructDefinition__Group__1
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__RecordDefinition__Group__1__Impl
-	rule__RecordDefinition__Group__2
+	rule__StructDefinition__Group__1__Impl
+	rule__StructDefinition__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RecordDefinition__Group__1__Impl
+rule__StructDefinition__Group__1__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRecordDefinitionAccess().getNameAssignment_1()); }
-(rule__RecordDefinition__NameAssignment_1)
-{ after(grammarAccess.getRecordDefinitionAccess().getNameAssignment_1()); }
+{ before(grammarAccess.getStructDefinitionAccess().getNameAssignment_1()); }
+(rule__StructDefinition__NameAssignment_1)
+{ after(grammarAccess.getStructDefinitionAccess().getNameAssignment_1()); }
 )
 
 ;
@@ -4883,29 +4883,29 @@ finally {
 }
 
 
-rule__RecordDefinition__Group__2
+rule__StructDefinition__Group__2
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__RecordDefinition__Group__2__Impl
-	rule__RecordDefinition__Group__3
+	rule__StructDefinition__Group__2__Impl
+	rule__StructDefinition__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RecordDefinition__Group__2__Impl
+rule__StructDefinition__Group__2__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRecordDefinitionAccess().getLeftCurlyBracketKeyword_2()); }
+{ before(grammarAccess.getStructDefinitionAccess().getLeftCurlyBracketKeyword_2()); }
 
 	'{' 
 
-{ after(grammarAccess.getRecordDefinitionAccess().getLeftCurlyBracketKeyword_2()); }
+{ after(grammarAccess.getStructDefinitionAccess().getLeftCurlyBracketKeyword_2()); }
 )
 
 ;
@@ -4914,27 +4914,27 @@ finally {
 }
 
 
-rule__RecordDefinition__Group__3
+rule__StructDefinition__Group__3
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__RecordDefinition__Group__3__Impl
-	rule__RecordDefinition__Group__4
+	rule__StructDefinition__Group__3__Impl
+	rule__StructDefinition__Group__4
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RecordDefinition__Group__3__Impl
+rule__StructDefinition__Group__3__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRecordDefinitionAccess().getFieldDeclarationsAssignment_3()); }
-(rule__RecordDefinition__FieldDeclarationsAssignment_3)*
-{ after(grammarAccess.getRecordDefinitionAccess().getFieldDeclarationsAssignment_3()); }
+{ before(grammarAccess.getStructDefinitionAccess().getMemberDeclarationsAssignment_3()); }
+(rule__StructDefinition__MemberDeclarationsAssignment_3)*
+{ after(grammarAccess.getStructDefinitionAccess().getMemberDeclarationsAssignment_3()); }
 )
 
 ;
@@ -4943,28 +4943,28 @@ finally {
 }
 
 
-rule__RecordDefinition__Group__4
+rule__StructDefinition__Group__4
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__RecordDefinition__Group__4__Impl
+	rule__StructDefinition__Group__4__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RecordDefinition__Group__4__Impl
+rule__StructDefinition__Group__4__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRecordDefinitionAccess().getRightCurlyBracketKeyword_4()); }
+{ before(grammarAccess.getStructDefinitionAccess().getRightCurlyBracketKeyword_4()); }
 
 	'}' 
 
-{ after(grammarAccess.getRecordDefinitionAccess().getRightCurlyBracketKeyword_4()); }
+{ after(grammarAccess.getStructDefinitionAccess().getRightCurlyBracketKeyword_4()); }
 )
 
 ;
@@ -4983,27 +4983,27 @@ finally {
 
 
 
-rule__RecordFieldDeclaration__Group__0
+rule__StructMemberDeclaration__Group__0
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__RecordFieldDeclaration__Group__0__Impl
-	rule__RecordFieldDeclaration__Group__1
+	rule__StructMemberDeclaration__Group__0__Impl
+	rule__StructMemberDeclaration__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RecordFieldDeclaration__Group__0__Impl
+rule__StructMemberDeclaration__Group__0__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRecordFieldDeclarationAccess().getNameAssignment_0()); }
-(rule__RecordFieldDeclaration__NameAssignment_0)
-{ after(grammarAccess.getRecordFieldDeclarationAccess().getNameAssignment_0()); }
+{ before(grammarAccess.getStructMemberDeclarationAccess().getNameAssignment_0()); }
+(rule__StructMemberDeclaration__NameAssignment_0)
+{ after(grammarAccess.getStructMemberDeclarationAccess().getNameAssignment_0()); }
 )
 
 ;
@@ -5012,29 +5012,29 @@ finally {
 }
 
 
-rule__RecordFieldDeclaration__Group__1
+rule__StructMemberDeclaration__Group__1
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__RecordFieldDeclaration__Group__1__Impl
-	rule__RecordFieldDeclaration__Group__2
+	rule__StructMemberDeclaration__Group__1__Impl
+	rule__StructMemberDeclaration__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RecordFieldDeclaration__Group__1__Impl
+rule__StructMemberDeclaration__Group__1__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRecordFieldDeclarationAccess().getColonKeyword_1()); }
+{ before(grammarAccess.getStructMemberDeclarationAccess().getColonKeyword_1()); }
 
 	':' 
 
-{ after(grammarAccess.getRecordFieldDeclarationAccess().getColonKeyword_1()); }
+{ after(grammarAccess.getStructMemberDeclarationAccess().getColonKeyword_1()); }
 )
 
 ;
@@ -5043,27 +5043,27 @@ finally {
 }
 
 
-rule__RecordFieldDeclaration__Group__2
+rule__StructMemberDeclaration__Group__2
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__RecordFieldDeclaration__Group__2__Impl
-	rule__RecordFieldDeclaration__Group__3
+	rule__StructMemberDeclaration__Group__2__Impl
+	rule__StructMemberDeclaration__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RecordFieldDeclaration__Group__2__Impl
+rule__StructMemberDeclaration__Group__2__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRecordFieldDeclarationAccess().getTypeAssignment_2()); }
-(rule__RecordFieldDeclaration__TypeAssignment_2)
-{ after(grammarAccess.getRecordFieldDeclarationAccess().getTypeAssignment_2()); }
+{ before(grammarAccess.getStructMemberDeclarationAccess().getTypeAssignment_2()); }
+(rule__StructMemberDeclaration__TypeAssignment_2)
+{ after(grammarAccess.getStructMemberDeclarationAccess().getTypeAssignment_2()); }
 )
 
 ;
@@ -5072,28 +5072,28 @@ finally {
 }
 
 
-rule__RecordFieldDeclaration__Group__3
+rule__StructMemberDeclaration__Group__3
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__RecordFieldDeclaration__Group__3__Impl
+	rule__StructMemberDeclaration__Group__3__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RecordFieldDeclaration__Group__3__Impl
+rule__StructMemberDeclaration__Group__3__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRecordFieldDeclarationAccess().getSemicolonKeyword_3()); }
+{ before(grammarAccess.getStructMemberDeclarationAccess().getSemicolonKeyword_3()); }
 
 	';' 
 
-{ after(grammarAccess.getRecordFieldDeclarationAccess().getSemicolonKeyword_3()); }
+{ after(grammarAccess.getStructMemberDeclarationAccess().getSemicolonKeyword_3()); }
 )
 
 ;
@@ -18799,14 +18799,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RecordDefinition__NameAssignment_1
+rule__StructDefinition__NameAssignment_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRecordDefinitionAccess().getNameValidIDParserRuleCall_1_0()); }
-	ruleValidID{ after(grammarAccess.getRecordDefinitionAccess().getNameValidIDParserRuleCall_1_0()); }
+{ before(grammarAccess.getStructDefinitionAccess().getNameValidIDParserRuleCall_1_0()); }
+	ruleValidID{ after(grammarAccess.getStructDefinitionAccess().getNameValidIDParserRuleCall_1_0()); }
 )
 
 ;
@@ -18814,14 +18814,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RecordDefinition__FieldDeclarationsAssignment_3
+rule__StructDefinition__MemberDeclarationsAssignment_3
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRecordDefinitionAccess().getFieldDeclarationsRecordFieldDeclarationParserRuleCall_3_0()); }
-	ruleRecordFieldDeclaration{ after(grammarAccess.getRecordDefinitionAccess().getFieldDeclarationsRecordFieldDeclarationParserRuleCall_3_0()); }
+{ before(grammarAccess.getStructDefinitionAccess().getMemberDeclarationsStructMemberDeclarationParserRuleCall_3_0()); }
+	ruleStructMemberDeclaration{ after(grammarAccess.getStructDefinitionAccess().getMemberDeclarationsStructMemberDeclarationParserRuleCall_3_0()); }
 )
 
 ;
@@ -18829,14 +18829,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RecordFieldDeclaration__NameAssignment_0
+rule__StructMemberDeclaration__NameAssignment_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRecordFieldDeclarationAccess().getNameValidIDParserRuleCall_0_0()); }
-	ruleValidID{ after(grammarAccess.getRecordFieldDeclarationAccess().getNameValidIDParserRuleCall_0_0()); }
+{ before(grammarAccess.getStructMemberDeclarationAccess().getNameValidIDParserRuleCall_0_0()); }
+	ruleValidID{ after(grammarAccess.getStructMemberDeclarationAccess().getNameValidIDParserRuleCall_0_0()); }
 )
 
 ;
@@ -18844,14 +18844,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RecordFieldDeclaration__TypeAssignment_2
+rule__StructMemberDeclaration__TypeAssignment_2
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRecordFieldDeclarationAccess().getTypeDataTypeSpecifierParserRuleCall_2_0()); }
-	ruleDataTypeSpecifier{ after(grammarAccess.getRecordFieldDeclarationAccess().getTypeDataTypeSpecifierParserRuleCall_2_0()); }
+{ before(grammarAccess.getStructMemberDeclarationAccess().getTypeDataTypeSpecifierParserRuleCall_2_0()); }
+	ruleDataTypeSpecifier{ after(grammarAccess.getStructMemberDeclarationAccess().getTypeDataTypeSpecifierParserRuleCall_2_0()); }
 )
 
 ;

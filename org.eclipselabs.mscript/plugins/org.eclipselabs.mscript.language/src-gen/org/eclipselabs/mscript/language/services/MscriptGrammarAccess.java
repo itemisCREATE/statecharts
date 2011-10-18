@@ -56,23 +56,23 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataTypeDefinition");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEnumerationDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cRecordDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cStructDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cTypeAliasDefinitionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		/// *
 		// * DataTypeDefinition
 		// * / DataTypeDefinition:
-		//	EnumerationDefinition | RecordDefinition | TypeAliasDefinition;
+		//	EnumerationDefinition | StructDefinition | TypeAliasDefinition;
 		public ParserRule getRule() { return rule; }
 
-		//EnumerationDefinition | RecordDefinition | TypeAliasDefinition
+		//EnumerationDefinition | StructDefinition | TypeAliasDefinition
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//EnumerationDefinition
 		public RuleCall getEnumerationDefinitionParserRuleCall_0() { return cEnumerationDefinitionParserRuleCall_0; }
 
-		//RecordDefinition
-		public RuleCall getRecordDefinitionParserRuleCall_1() { return cRecordDefinitionParserRuleCall_1; }
+		//StructDefinition
+		public RuleCall getStructDefinitionParserRuleCall_1() { return cStructDefinitionParserRuleCall_1; }
 
 		//TypeAliasDefinition
 		public RuleCall getTypeAliasDefinitionParserRuleCall_2() { return cTypeAliasDefinitionParserRuleCall_2; }
@@ -200,28 +200,28 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
-	public class RecordDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RecordDefinition");
+	public class StructDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StructDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cRecordKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cStructKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cFieldDeclarationsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cFieldDeclarationsRecordFieldDeclarationParserRuleCall_3_0 = (RuleCall)cFieldDeclarationsAssignment_3.eContents().get(0);
+		private final Assignment cMemberDeclarationsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cMemberDeclarationsStructMemberDeclarationParserRuleCall_3_0 = (RuleCall)cMemberDeclarationsAssignment_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		/// *
-		// * Record
-		// * / RecordDefinition:
-		//	"record" name=ValidID "{" fieldDeclarations+=RecordFieldDeclaration* "}";
+		// * Struct
+		// * / StructDefinition:
+		//	"struct" name=ValidID "{" memberDeclarations+=StructMemberDeclaration* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"record" name=ValidID "{" fieldDeclarations+=RecordFieldDeclaration* "}"
+		//"struct" name=ValidID "{" memberDeclarations+=StructMemberDeclaration* "}"
 		public Group getGroup() { return cGroup; }
 
-		//"record"
-		public Keyword getRecordKeyword_0() { return cRecordKeyword_0; }
+		//"struct"
+		public Keyword getStructKeyword_0() { return cStructKeyword_0; }
 
 		//name=ValidID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
@@ -232,18 +232,18 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//fieldDeclarations+=RecordFieldDeclaration*
-		public Assignment getFieldDeclarationsAssignment_3() { return cFieldDeclarationsAssignment_3; }
+		//memberDeclarations+=StructMemberDeclaration*
+		public Assignment getMemberDeclarationsAssignment_3() { return cMemberDeclarationsAssignment_3; }
 
-		//RecordFieldDeclaration
-		public RuleCall getFieldDeclarationsRecordFieldDeclarationParserRuleCall_3_0() { return cFieldDeclarationsRecordFieldDeclarationParserRuleCall_3_0; }
+		//StructMemberDeclaration
+		public RuleCall getMemberDeclarationsStructMemberDeclarationParserRuleCall_3_0() { return cMemberDeclarationsStructMemberDeclarationParserRuleCall_3_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
-	public class RecordFieldDeclarationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RecordFieldDeclaration");
+	public class StructMemberDeclarationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StructMemberDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameValidIDParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -252,7 +252,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypeDataTypeSpecifierParserRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//RecordFieldDeclaration:
+		//StructMemberDeclaration:
 		//	name=ValidID ":" type=DataTypeSpecifier ";";
 		public ParserRule getRule() { return rule; }
 
@@ -4606,8 +4606,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private EnumerationDefinitionElements pEnumerationDefinition;
 	private EnumerationLiteralDeclarationElements pEnumerationLiteralDeclaration;
 	private TypeAliasDefinitionElements pTypeAliasDefinition;
-	private RecordDefinitionElements pRecordDefinition;
-	private RecordFieldDeclarationElements pRecordFieldDeclaration;
+	private StructDefinitionElements pStructDefinition;
+	private StructMemberDeclarationElements pStructMemberDeclaration;
 	private FunctionDefinitionElements pFunctionDefinition;
 	private FunctionKindElements unknownRuleFunctionKind;
 	private TemplateParameterDeclarationElements pTemplateParameterDeclaration;
@@ -4761,7 +4761,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	/// *
 	// * DataTypeDefinition
 	// * / DataTypeDefinition:
-	//	EnumerationDefinition | RecordDefinition | TypeAliasDefinition;
+	//	EnumerationDefinition | StructDefinition | TypeAliasDefinition;
 	public DataTypeDefinitionElements getDataTypeDefinitionAccess() {
 		return (pDataTypeDefinition != null) ? pDataTypeDefinition : (pDataTypeDefinition = new DataTypeDefinitionElements());
 	}
@@ -4806,25 +4806,25 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// *
-	// * Record
-	// * / RecordDefinition:
-	//	"record" name=ValidID "{" fieldDeclarations+=RecordFieldDeclaration* "}";
-	public RecordDefinitionElements getRecordDefinitionAccess() {
-		return (pRecordDefinition != null) ? pRecordDefinition : (pRecordDefinition = new RecordDefinitionElements());
+	// * Struct
+	// * / StructDefinition:
+	//	"struct" name=ValidID "{" memberDeclarations+=StructMemberDeclaration* "}";
+	public StructDefinitionElements getStructDefinitionAccess() {
+		return (pStructDefinition != null) ? pStructDefinition : (pStructDefinition = new StructDefinitionElements());
 	}
 	
-	public ParserRule getRecordDefinitionRule() {
-		return getRecordDefinitionAccess().getRule();
+	public ParserRule getStructDefinitionRule() {
+		return getStructDefinitionAccess().getRule();
 	}
 
-	//RecordFieldDeclaration:
+	//StructMemberDeclaration:
 	//	name=ValidID ":" type=DataTypeSpecifier ";";
-	public RecordFieldDeclarationElements getRecordFieldDeclarationAccess() {
-		return (pRecordFieldDeclaration != null) ? pRecordFieldDeclaration : (pRecordFieldDeclaration = new RecordFieldDeclarationElements());
+	public StructMemberDeclarationElements getStructMemberDeclarationAccess() {
+		return (pStructMemberDeclaration != null) ? pStructMemberDeclaration : (pStructMemberDeclaration = new StructMemberDeclarationElements());
 	}
 	
-	public ParserRule getRecordFieldDeclarationRule() {
-		return getRecordFieldDeclarationAccess().getRule();
+	public ParserRule getStructMemberDeclarationRule() {
+		return getStructMemberDeclarationAccess().getRule();
 	}
 
 	/// *

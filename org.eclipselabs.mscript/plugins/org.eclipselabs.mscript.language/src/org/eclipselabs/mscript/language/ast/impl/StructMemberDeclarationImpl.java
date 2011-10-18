@@ -14,23 +14,23 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
+import org.eclipselabs.mscript.language.ast.StructMemberDeclaration;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Record Field Declaration</b></em>'.
+ * An implementation of the model object '<em><b>Struct Member Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RecordFieldDeclarationImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RecordFieldDeclarationImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.StructMemberDeclarationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.StructMemberDeclarationImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container implements RecordFieldDeclaration {
+public class StructMemberDeclarationImpl extends MinimalEObjectImpl.Container implements StructMemberDeclaration {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -66,7 +66,7 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RecordFieldDeclarationImpl() {
+	protected StructMemberDeclarationImpl() {
 		super();
 	}
 
@@ -77,7 +77,7 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return AstPackage.Literals.RECORD_FIELD_DECLARATION;
+		return AstPackage.Literals.STRUCT_MEMBER_DECLARATION;
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RECORD_FIELD_DECLARATION__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.STRUCT_MEMBER_DECLARATION__NAME, oldName, name));
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
 		DataTypeSpecifier oldType = type;
 		type = newType;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.RECORD_FIELD_DECLARATION__TYPE, oldType, newType);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.STRUCT_MEMBER_DECLARATION__TYPE, oldType, newType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -134,14 +134,14 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
 		if (newType != type) {
 			NotificationChain msgs = null;
 			if (type != null)
-				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.RECORD_FIELD_DECLARATION__TYPE, null, msgs);
+				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.STRUCT_MEMBER_DECLARATION__TYPE, null, msgs);
 			if (newType != null)
-				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.RECORD_FIELD_DECLARATION__TYPE, null, msgs);
+				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.STRUCT_MEMBER_DECLARATION__TYPE, null, msgs);
 			msgs = basicSetType(newType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RECORD_FIELD_DECLARATION__TYPE, newType, newType));
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.STRUCT_MEMBER_DECLARATION__TYPE, newType, newType));
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AstPackage.RECORD_FIELD_DECLARATION__TYPE:
+			case AstPackage.STRUCT_MEMBER_DECLARATION__TYPE:
 				return basicSetType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -166,9 +166,9 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AstPackage.RECORD_FIELD_DECLARATION__NAME:
+			case AstPackage.STRUCT_MEMBER_DECLARATION__NAME:
 				return getName();
-			case AstPackage.RECORD_FIELD_DECLARATION__TYPE:
+			case AstPackage.STRUCT_MEMBER_DECLARATION__TYPE:
 				return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -182,10 +182,10 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AstPackage.RECORD_FIELD_DECLARATION__NAME:
+			case AstPackage.STRUCT_MEMBER_DECLARATION__NAME:
 				setName((String)newValue);
 				return;
-			case AstPackage.RECORD_FIELD_DECLARATION__TYPE:
+			case AstPackage.STRUCT_MEMBER_DECLARATION__TYPE:
 				setType((DataTypeSpecifier)newValue);
 				return;
 		}
@@ -200,10 +200,10 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AstPackage.RECORD_FIELD_DECLARATION__NAME:
+			case AstPackage.STRUCT_MEMBER_DECLARATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case AstPackage.RECORD_FIELD_DECLARATION__TYPE:
+			case AstPackage.STRUCT_MEMBER_DECLARATION__TYPE:
 				setType((DataTypeSpecifier)null);
 				return;
 		}
@@ -218,9 +218,9 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AstPackage.RECORD_FIELD_DECLARATION__NAME:
+			case AstPackage.STRUCT_MEMBER_DECLARATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case AstPackage.RECORD_FIELD_DECLARATION__TYPE:
+			case AstPackage.STRUCT_MEMBER_DECLARATION__TYPE:
 				return type != null;
 		}
 		return super.eIsSet(featureID);
@@ -242,4 +242,4 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
 		return result.toString();
 	}
 
-} //RecordFieldDeclarationImpl
+} //StructMemberDeclarationImpl

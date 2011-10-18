@@ -23,11 +23,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//PrimitiveType"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RecordDefinition" eSuperTypes="#//DataTypeDefinition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="fieldDeclarations" upperBound="-1"
-        eType="#//RecordFieldDeclaration" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StructDefinition" eSuperTypes="#//DataTypeDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="memberDeclarations" upperBound="-1"
+        eType="#//StructMemberDeclaration" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RecordFieldDeclaration">
+  <eClassifiers xsi:type="ecore:EClass" name="StructMemberDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//DataTypeSpecifier"
         containment="true"/>

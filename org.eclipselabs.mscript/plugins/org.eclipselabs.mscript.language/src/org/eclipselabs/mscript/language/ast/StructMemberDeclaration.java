@@ -10,22 +10,22 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Record Field Declaration</b></em>'.
+ * A representation of the model object '<em><b>Struct Member Declaration</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.RecordFieldDeclaration#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.RecordFieldDeclaration#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.StructMemberDeclaration#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.StructMemberDeclaration#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getRecordFieldDeclaration()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getStructMemberDeclaration()
  * @model
  * @generated
  */
-public interface RecordFieldDeclaration extends EObject {
+public interface StructMemberDeclaration extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -36,14 +36,14 @@ public interface RecordFieldDeclaration extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getRecordFieldDeclaration_Name()
+	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getStructMemberDeclaration_Name()
 	 * @model
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.RecordFieldDeclaration#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.StructMemberDeclaration#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -62,14 +62,14 @@ public interface RecordFieldDeclaration extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' containment reference.
 	 * @see #setType(DataTypeSpecifier)
-	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getRecordFieldDeclaration_Type()
+	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getStructMemberDeclaration_Type()
 	 * @model containment="true"
 	 * @generated
 	 */
 	DataTypeSpecifier getType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.RecordFieldDeclaration#getType <em>Type</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.StructMemberDeclaration#getType <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Type</em>' containment reference.
@@ -78,4 +78,4 @@ public interface RecordFieldDeclaration extends EObject {
 	 */
 	void setType(DataTypeSpecifier value);
 
-} // RecordFieldDeclaration
+} // StructMemberDeclaration
