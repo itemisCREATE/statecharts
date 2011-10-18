@@ -19,6 +19,14 @@ Templates for the main statechart cpp file.
 // ActionCode for Step not defined
 «ENDDEFINE»
 
+«DEFINE ActionCode FOR ScheduleTimeEvent»
+  timer->setTimer(ev_«this.timeEvent.name», «this.timeValue», «this.timeEvent.periodic»);
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR UnscheduleTimeEvent»
+  timer->unsetTimer(ev_«this.timeEvent.name»);
+«ENDDEFINE»
+
 «DEFINE ActionCode FOR Execution»
 	«this.statement.toCppCode()»
 «ENDDEFINE»
