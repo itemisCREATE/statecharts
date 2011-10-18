@@ -73,6 +73,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 					.getGroup().eContents()));
 			keywords.addAll(getKeywords(grammarAccess.getDirectionAccess()
 					.getAlternatives().eContents()));
+			keywords.addAll(getKeywords(grammarAccess.getOperationAccess()
+					.getGroup().eContents()));
 		}
 		// context Statechart
 		else if (contentAssistContext.getRootModel() instanceof StatechartDefinition) {
