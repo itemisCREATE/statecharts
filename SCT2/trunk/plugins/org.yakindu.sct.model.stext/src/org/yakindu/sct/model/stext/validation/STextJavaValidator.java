@@ -26,6 +26,7 @@ import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.OnCycleEvent;
+import org.yakindu.sct.model.stext.stext.Operation;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartDefinition;
@@ -82,6 +83,13 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		if (simpleScope.getVariables().size() > 0) {
 			error("Variables can not be defined in states.",
 					SGraphPackage.Literals.SCOPE__VARIABLES);
+		}
+		
+		for (Declaration declaration: simpleScope.getDeclarations()) {
+			if (declaration instanceof Operation) {
+				error("Operations can not be defined in states.",
+						SGraphPackage.Literals.SCOPE__DECLARATIONS);
+			}
 		}
 	}
 
