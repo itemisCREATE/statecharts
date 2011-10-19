@@ -13,7 +13,11 @@ package org.yakindu.sct.ui.editor.editor;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.draw2d.ConnectionLayer;
 import org.eclipse.draw2d.ViewportAwareConnectionLayerClippingStrategy;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
+import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
 import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.RootEditPart;
@@ -21,12 +25,13 @@ import org.eclipse.gef.editparts.LayerManager;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.breadcrumb.BreadcrumbDiagramEditor;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
@@ -34,13 +39,29 @@ import org.yakindu.sct.ui.editor.validation.ValidationAction;
 
 /**
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * @author martin esser
  */
 public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 		IGotoMarker {
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
+
+	// Listenes the ResourceSet for semantic changes
+	private ResourceSetListener validationListener = new ResourceSetListenerImpl() {
+		@Override
+		public void resourceSetChanged(ResourceSetChangeEvent event) {
+			for (Notification notification : event.getNotifications()) {
+				if (notification.getNotifier() instanceof EObject) {
+					EObject object = (EObject) notification.getNotifier();
+					if (EcoreUtil.getRootContainer(object) instanceof Statechart) {
+						validate();
+						return;
+					}
+				}
+			}
+		}
+	};
 
 	public StatechartDiagramEditor() {
 		super(true);
@@ -50,29 +71,19 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 	public void init(IEditorSite site, IEditorInput input)
 			throws PartInitException {
 		super.init(site, input);
+		getEditingDomain().addResourceSetListener(validationListener);
+	}
 
-		getEditingDomain().addResourceSetListener(
-				new ResourceSetListenerImpl() {
-					@Override
-					public void resourceSetChanged(ResourceSetChangeEvent event) {
-						validate();
-					}
-				});
-	}
-	protected void validate() {
-		Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
-				if (getDiagram() != null) {
-					ValidationAction.validate(
-							getDiagramEditPart(), getDiagram());
-				}
-			}
-		});
-	}
 	@Override
 	protected void sanityCheckState(IEditorInput input) {
 		super.sanityCheckState(input);
 		validate();
+	}
+
+	protected void validate() {
+		if (getDiagram() != null) {
+			ValidationAction.validate(getDiagramEditPart(), getDiagram());
+		}
 	}
 
 	public void gotoMarker(IMarker marker) {
@@ -88,11 +99,10 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 	protected void createGraphicalViewer(Composite parent) {
 		super.createGraphicalViewer(parent);
 		// Tag the viewer with the desired help context id
-		PlatformUI
-				.getWorkbench()
-				.getHelpSystem()
-				.setHelp(getGraphicalViewer().getControl(),
-						IYakinduSctHelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
+		IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench()
+				.getHelpSystem();
+		helpSystem.setHelp(getGraphicalViewer().getControl(),
+				IYakinduSctHelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
 	}
 
 	@Override
@@ -105,7 +115,6 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 		super.configureGraphicalViewer();
 		RootEditPart rootEditPart = getDiagramGraphicalViewer()
 				.getRootEditPart();
-
 		// set clipping strategy for connection layer
 		if (rootEditPart instanceof LayerManager) {
 			ConnectionLayer connectionLayer = (ConnectionLayer) ((LayerManager) rootEditPart)
@@ -114,5 +123,11 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 					.setClippingStrategy(new ViewportAwareConnectionLayerClippingStrategy(
 							connectionLayer));
 		}
+	}
+
+	@Override
+	public void dispose() {
+		getEditingDomain().removeResourceSetListener(validationListener);
+		super.dispose();
 	}
 }
