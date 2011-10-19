@@ -58,11 +58,14 @@ For the preparation for multithreading, the DataRepository defines the virtual f
 
 h3. TimerHandler
 
-The code generator creates an abstract / interface class for the usage of timers. Additionally it creates a DummyTimerHandler class, that is derived from this abstract class. 
+The code generator creates an abstract/interface class for the usage of timers. Additionally it creates a DummyTimerHandler class, that is derived from this abstract class. 
 
 The implementer has to provide two methods in an implementation derived from TimerHandler:
 
 * setTimer(eventId, time_ms, periodic)
 * resetTimer(eventId)
 
-The setTimer method has to create a operation system timer with the given wake up time. The    
+The setTimer method has to create an operation system timer with the given wake up time. When the timer is raised by the operation system, an event with the given event Id has to be created and eventHandler method raiseEvent() has to be called with this event.     
+
+In case a state has been left due to another event than the timer event, the external timers need to be stopped. Therefore the state machine calls resetTimer() with the according event ID. The TimerHandler has to ensure, that the timerEvent will not occur in the future.
+ 
