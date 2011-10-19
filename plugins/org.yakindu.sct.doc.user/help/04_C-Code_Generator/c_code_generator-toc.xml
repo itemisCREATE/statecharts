@@ -2,10 +2,9 @@
 <toc topic="help/04_C-Code_Generator/c_code_generator.html" label="c_code_generator">
 	<topic href="help/04_C-Code_Generator/c_code_generator.html" label="Yakindu Statechart Generator">
 		<topic href="help/04_C-Code_Generator/c_code_generator.html#Introduction" label="Introduction"></topic>
-		<topic href="help/04_C-Code_Generator/c_code_generator.html#ExampleScenario" label="Example Scenario"></topic>
-		<topic href="help/04_C-Code_Generator/c_code_generator.html#StartingtheWorkflow" label="Starting the Workflow"></topic>
-		<topic href="help/04_C-Code_Generator/c_code_generator.html#CodeIntegrationintoanExistingProject" label="Code Integration into an Existing Project"></topic>
-		<topic href="help/04_C-Code_Generator/c_code_generator.html#StateMachineAccess" label="State Machine Access"></topic>
-		<topic href="help/04_C-Code_Generator/c_code_generator.html#OperatingSystemandDriversfortheExampleDevice" label="Operating System and Drivers for the Example Device"></topic>
+		<topic href="help/04_C-Code_Generator/c_code_generator.html#DescriptionoftheExecutionModelusedinYAKINDUstatechartenvironment" label="Description of the 'Execution Model' used in YAKINDU statechart environment">
+			<topic href="help/04_C-Code_Generator/c_code_generator.html#TimerhandlerInterface" label="Timerhandler Interface"></topic>
+		</topic>
+		<topic href="help/04_C-Code_Generator/c_code_generator.html#Multithreading" label="Multithreading"></topic>
 	</topic>
 </toc>
