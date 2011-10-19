@@ -19,7 +19,6 @@ import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.TextPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.XtextPropertyDescriptor;
-import de.itemis.xtext.utils.jface.viewers.context.IXtextFakeContextResourcesProvider;
 
 /**
  * Property Section for {@link StatechartTextEditPart}s. Consists of a

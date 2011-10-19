@@ -33,6 +33,7 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 	public RegionCompartmentEditPart(View view) {
 		super(view);
 	}
+	
 
 	@Override
 	protected void createDefaultEditPolicies() {

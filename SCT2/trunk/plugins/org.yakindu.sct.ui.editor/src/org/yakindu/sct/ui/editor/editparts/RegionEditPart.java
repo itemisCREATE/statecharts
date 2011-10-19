@@ -39,6 +39,7 @@ public class RegionEditPart extends ShapeNodeEditPart {
 		super(view);
 	}
 
+	
 	@Override
 	protected NodeFigure createNodeFigure() {
 		final NodeFigure figure = new NodeFigure();
@@ -47,6 +48,7 @@ public class RegionEditPart extends ShapeNodeEditPart {
 		figure.add(new RegionFigure(getMapMode()));
 		return figure;
 	}
+	
 
 	@Override
 	protected void createDefaultEditPolicies() {
@@ -66,7 +68,6 @@ public class RegionEditPart extends ShapeNodeEditPart {
 				}
 			}
 		}
-
 		return super.getTargetEditPart(request);
 	}
 
