@@ -69,7 +69,7 @@ EventDerivation:
 	'=' condition=Expression (':' value=Expression)?;
 
 enum Direction:
-	IN='in' | OUT='out';
+	LOCAL='local' | IN='in' | OUT='out';
 
 /* ---- variable definition ---- */
 VariableDefinition returns sct::Variable:

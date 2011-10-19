@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -2380,6 +2379,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     // Initialize enums and add enum literals
     initEEnum(directionEEnum, Direction.class, "Direction");
+    addEEnumLiteral(directionEEnum, Direction.LOCAL);
     addEEnumLiteral(directionEEnum, Direction.IN);
     addEEnumLiteral(directionEEnum, Direction.OUT);
 
