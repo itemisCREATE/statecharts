@@ -17,10 +17,13 @@ import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
+import org.eclipse.swt.custom.StyledText;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.validation.IMarkerType;
 
 import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
+import de.itemis.xtext.utils.gmf.experimental.StyledLabel;
+import de.itemis.xtext.utils.jface.viewers.XtextStyledTextCellEditor;
 
 /**
  * 
@@ -47,8 +50,12 @@ public class ExpressionDirectEditPolicy extends DirectEditPolicy implements
 
 	@Override
 	protected void showCurrentEditValue(DirectEditRequest request) {
-		String value = (String) request.getCellEditor().getValue();
+		XtextStyledTextCellEditor cellEditor = (XtextStyledTextCellEditor) request.getCellEditor();
+		String value = (String) cellEditor.getValue();
 		((IXtextAwareEditPart) getHost()).setLabelText(value);
+		StyledText text = (StyledText)cellEditor.getControl();
+		StyledLabel figure = (StyledLabel)getHost().getFigure();
+		figure.setRanges(text.getStyleRanges());
 	}
 
 }
