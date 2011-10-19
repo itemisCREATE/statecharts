@@ -7,7 +7,7 @@ The Interface should contain following methods:
 
 
 |*|*setTimer(event, time, periodic?)*|
-| |Defines an event which will be triggered after the specified <Time>. The third parameter should be set if the event has to be periodically triggered. The time should be specified in milliseconds.|
+| |Defines an event which will be triggered after the specified Time. The third parameter should be set if the event has to be periodically triggered. The time should be specified in milliseconds.|
 
 |*|*resetTimer(event)*|
 | |Resets the timer of the event so it is not triggered anymore.|
