@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <toc topic="help/04_C-Code_Generator/c_code_generator.html" label="c_code_generator">
-	<topic href="help/04_C-Code_Generator/c_code_generator.html" label="C-Code Generator">
+	<topic href="help/04_C-Code_Generator/c_code_generator.html" label="Yakindu Statechart Generator">
 		<topic href="help/04_C-Code_Generator/c_code_generator.html#Introduction" label="Introduction"></topic>
 		<topic href="help/04_C-Code_Generator/c_code_generator.html#ExampleScenario" label="Example Scenario"></topic>
 		<topic href="help/04_C-Code_Generator/c_code_generator.html#StartingtheWorkflow" label="Starting the Workflow"></topic>
