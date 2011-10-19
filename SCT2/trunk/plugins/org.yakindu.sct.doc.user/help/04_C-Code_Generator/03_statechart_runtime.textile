@@ -1,0 +1,16 @@
+h2. Runtime implementation alternatives
+
+This section introduces a number of details and alternatives for the implementation. The specific implementation informatio are not presented in this, but in a subsequent section. 
+
+h3. Event Based State Machine Approach
+
+The event based state machine implements a queue for events that should be handled. This queue is a first-in-first-out queue and handles one event per runCycle step.
+
+So if there a statemachine with an empty event queue and the event E1 and after that event E2 were received, the statemachine handels E1 during the first call to runCycle and handles the second Event during the second call to runCycle(). The call to runCycle is not fixed. It can be done when ever an event occurs or when there is a timeslice available.
+
+
+h3. Cycle Based State Machine Approach 
+
+The Cycle Based approach calls the runCycle method periodically (e.g. every 50 milliseconds). When an event occurs, it is sent to the statemachine via raiseEvent(). The cycle based state machine collects all events and the transition conditions, which are ordered by priority, are tested for a match with the given events. If there is a match, the transition is executed (with all exit, transition and entry actions).
+
+If one transition (the best matching one) was found and executed, all other events are deleted and the runCycle method returns. 
