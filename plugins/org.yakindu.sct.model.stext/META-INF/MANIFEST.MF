@@ -5,21 +5,21 @@ Bundle-Vendor: YAKINDU
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: org.yakindu.sct.model.stext;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.apache.log4j;visibility:=reexport,
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
+ org.apache.log4j;visibility:=reexport,
  org.apache.commons.logging;resolution:=optional;visibility:=reexport,
- org.antlr.runtime,
  org.eclipse.xtext.generator;resolution:=optional,
  org.eclipse.emf.codegen.ecore;resolution:=optional,
  org.eclipse.emf.mwe.utils;resolution:=optional,
  org.eclipse.emf.mwe2.launch;resolution:=optional,
+ org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
- org.eclipse.gmf.runtime.emf.core,
- org.eclipse.xtext;visibility:=reexport,
- org.eclipse.xtext.util,
+ org.antlr.runtime,
  org.eclipse.xtext.common.types,
  org.yakindu.sct.model.sgraph,
- de.itemis.xtext.utils.gmf
+ de.itemis.xtext.utils.gmf,
+ org.eclipse.gmf.runtime.emf.core;bundle-version="1.4.1"
 Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.eclipse.xtext.builder.builderState,

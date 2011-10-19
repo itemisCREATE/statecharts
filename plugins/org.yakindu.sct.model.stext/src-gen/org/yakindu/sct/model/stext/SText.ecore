@@ -38,8 +38,9 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Direction">
-    <eLiterals name="IN" literal="in"/>
-    <eLiterals name="OUT" value="1" literal="out"/>
+    <eLiterals name="LOCAL" literal="local"/>
+    <eLiterals name="IN" value="1" literal="in"/>
+    <eLiterals name="OUT" value="2" literal="out"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LocalReaction" eSuperTypes="platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Declaration platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Reaction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" eType="ecore:EClass platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//ReactionProperties"
