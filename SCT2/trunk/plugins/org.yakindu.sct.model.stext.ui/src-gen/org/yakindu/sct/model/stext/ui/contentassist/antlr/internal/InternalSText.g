@@ -2289,24 +2289,17 @@ rule__Direction__Alternatives
     }
 :
 (
-{ before(grammarAccess.getDirectionAccess().getLOCALEnumLiteralDeclaration_0()); }
-(	'local' 
-)
-{ after(grammarAccess.getDirectionAccess().getLOCALEnumLiteralDeclaration_0()); }
-)
-
-    |(
-{ before(grammarAccess.getDirectionAccess().getINEnumLiteralDeclaration_1()); }
+{ before(grammarAccess.getDirectionAccess().getINEnumLiteralDeclaration_0()); }
 (	'in' 
 )
-{ after(grammarAccess.getDirectionAccess().getINEnumLiteralDeclaration_1()); }
+{ after(grammarAccess.getDirectionAccess().getINEnumLiteralDeclaration_0()); }
 )
 
     |(
-{ before(grammarAccess.getDirectionAccess().getOUTEnumLiteralDeclaration_2()); }
+{ before(grammarAccess.getDirectionAccess().getOUTEnumLiteralDeclaration_1()); }
 (	'out' 
 )
-{ after(grammarAccess.getDirectionAccess().getOUTEnumLiteralDeclaration_2()); }
+{ after(grammarAccess.getDirectionAccess().getOUTEnumLiteralDeclaration_1()); }
 )
 
 ;
@@ -4710,7 +4703,7 @@ rule__LocalReaction__Group__1__Impl
 :
 (
 { before(grammarAccess.getLocalReactionAccess().getGroup_1()); }
-(rule__LocalReaction__Group_1__0)?
+(rule__LocalReaction__Group_1__0)
 { after(grammarAccess.getLocalReactionAccess().getGroup_1()); }
 )
 

@@ -222,10 +222,6 @@
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.yakindu.org/sct/statechart/SText#//Direction/LOCAL"/>
-          <literal value="local"/>
-        </elements>
-        <elements xsi:type="xtext:EnumLiteralDeclaration">
           <enumLiteral href="http://www.yakindu.org/sct/statechart/SText#//Direction/IN"/>
           <literal value="in"/>
         </elements>
@@ -369,7 +365,7 @@
         <elements xsi:type="xtext:Assignment" feature="trigger" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.25"/>
         </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
+        <elements xsi:type="xtext:Group">
           <elements xsi:type="xtext:Keyword" value="/"/>
           <elements xsi:type="xtext:Assignment" feature="effect" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.26"/>

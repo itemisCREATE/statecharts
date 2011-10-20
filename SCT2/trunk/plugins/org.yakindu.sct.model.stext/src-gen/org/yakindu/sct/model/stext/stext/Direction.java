@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext;
 
@@ -23,16 +24,6 @@ import org.eclipse.emf.common.util.Enumerator;
 public enum Direction implements Enumerator
 {
   /**
-   * The '<em><b>LOCAL</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #LOCAL_VALUE
-   * @generated
-   * @ordered
-   */
-  LOCAL(0, "LOCAL", "local"),
-
-  /**
    * The '<em><b>IN</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -40,7 +31,7 @@ public enum Direction implements Enumerator
    * @generated
    * @ordered
    */
-  IN(1, "IN", "in"),
+  IN(0, "IN", "in"),
 
   /**
    * The '<em><b>OUT</b></em>' literal object.
@@ -50,22 +41,7 @@ public enum Direction implements Enumerator
    * @generated
    * @ordered
    */
-  OUT(2, "OUT", "out");
-
-  /**
-   * The '<em><b>LOCAL</b></em>' literal value.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>LOCAL</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @see #LOCAL
-   * @model literal="local"
-   * @generated
-   * @ordered
-   */
-  public static final int LOCAL_VALUE = 0;
+  OUT(1, "OUT", "out");
 
   /**
    * The '<em><b>IN</b></em>' literal value.
@@ -80,7 +56,7 @@ public enum Direction implements Enumerator
    * @generated
    * @ordered
    */
-  public static final int IN_VALUE = 1;
+  public static final int IN_VALUE = 0;
 
   /**
    * The '<em><b>OUT</b></em>' literal value.
@@ -95,7 +71,7 @@ public enum Direction implements Enumerator
    * @generated
    * @ordered
    */
-  public static final int OUT_VALUE = 2;
+  public static final int OUT_VALUE = 1;
 
   /**
    * An array of all the '<em><b>Direction</b></em>' enumerators.
@@ -106,7 +82,6 @@ public enum Direction implements Enumerator
   private static final Direction[] VALUES_ARRAY =
     new Direction[]
     {
-      LOCAL,
       IN,
       OUT,
     };
@@ -167,7 +142,6 @@ public enum Direction implements Enumerator
   {
     switch (value)
     {
-      case LOCAL_VALUE: return LOCAL;
       case IN_VALUE: return IN;
       case OUT_VALUE: return OUT;
     }
