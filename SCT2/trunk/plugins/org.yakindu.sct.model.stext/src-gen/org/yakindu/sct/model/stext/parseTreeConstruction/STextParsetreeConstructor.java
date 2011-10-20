@@ -3562,11 +3562,11 @@ protected class Reaction_TransitionReactionParserRuleCall_1 extends RuleCallToke
 /************ begin Rule LocalReaction ****************
  *
  * LocalReaction:
- * 	trigger=ReactionTrigger ("/" effect=ReactionEffect)? ("#" properties=ReactionProperties)?;
+ * 	trigger=ReactionTrigger ("/" effect=ReactionEffect) ("#" properties=ReactionProperties)?;
  *
  **/
 
-// trigger=ReactionTrigger ("/" effect=ReactionEffect)? ("#" properties=ReactionProperties)?
+// trigger=ReactionTrigger ("/" effect=ReactionEffect) ("#" properties=ReactionProperties)?
 protected class LocalReaction_Group extends GroupToken {
 	
 	public LocalReaction_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3583,7 +3583,6 @@ protected class LocalReaction_Group extends GroupToken {
 		switch(index) {
 			case 0: return new LocalReaction_Group_2(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new LocalReaction_Group_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new LocalReaction_TriggerAssignment_0(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -3642,7 +3641,7 @@ protected class LocalReaction_TriggerAssignment_0 extends AssignmentToken  {
 	}	
 }
 
-// ("/" effect=ReactionEffect)?
+// "/" effect=ReactionEffect
 protected class LocalReaction_Group_1 extends GroupToken {
 	
 	public LocalReaction_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3708,7 +3707,7 @@ protected class LocalReaction_EffectAssignment_1_1 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("effect",false)) == null) return null;
+		if((value = eObjectConsumer.getConsumable("effect",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("effect");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
@@ -3771,7 +3770,6 @@ protected class LocalReaction_NumberSignKeyword_2_0 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new LocalReaction_Group_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new LocalReaction_TriggerAssignment_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
