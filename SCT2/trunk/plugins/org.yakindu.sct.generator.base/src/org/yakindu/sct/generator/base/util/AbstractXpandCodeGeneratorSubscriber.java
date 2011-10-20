@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.yakindu.sct.builder.subscriber.IBuilderSubscriber;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
