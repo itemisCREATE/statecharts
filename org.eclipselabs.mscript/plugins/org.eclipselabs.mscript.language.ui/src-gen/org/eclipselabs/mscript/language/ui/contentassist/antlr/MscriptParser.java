@@ -103,8 +103,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAssertionAccess().getGroup(), "rule__Assertion__Group__0");
 					put(grammarAccess.getStateVariableDeclarationAccess().getGroup(), "rule__StateVariableDeclaration__Group__0");
 					put(grammarAccess.getFunctionObjectDeclarationAccess().getGroup(), "rule__FunctionObjectDeclaration__Group__0");
-					put(grammarAccess.getFunctionObjectDeclarationAccess().getGroup_4(), "rule__FunctionObjectDeclaration__Group_4__0");
-					put(grammarAccess.getFunctionObjectDeclarationAccess().getGroup_4_2(), "rule__FunctionObjectDeclaration__Group_4_2__0");
+					put(grammarAccess.getFunctionObjectDeclarationAccess().getGroup_2(), "rule__FunctionObjectDeclaration__Group_2__0");
+					put(grammarAccess.getFunctionObjectDeclarationAccess().getGroup_2_2(), "rule__FunctionObjectDeclaration__Group_2_2__0");
 					put(grammarAccess.getEquationAccess().getGroup(), "rule__Equation__Group__0");
 					put(grammarAccess.getRealTypeAccess().getGroup(), "rule__RealType__Group__0");
 					put(grammarAccess.getIntegerTypeAccess().getGroup(), "rule__IntegerType__Group__0");
@@ -237,8 +237,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypeAliasDefinitionAccess().getTypeAssignment_3(), "rule__TypeAliasDefinition__TypeAssignment_3");
 					put(grammarAccess.getStructDefinitionAccess().getNameAssignment_1(), "rule__StructDefinition__NameAssignment_1");
 					put(grammarAccess.getStructDefinitionAccess().getMemberDeclarationsAssignment_3(), "rule__StructDefinition__MemberDeclarationsAssignment_3");
-					put(grammarAccess.getStructMemberDeclarationAccess().getNameAssignment_0(), "rule__StructMemberDeclaration__NameAssignment_0");
-					put(grammarAccess.getStructMemberDeclarationAccess().getTypeAssignment_2(), "rule__StructMemberDeclaration__TypeAssignment_2");
+					put(grammarAccess.getStructMemberDeclarationAccess().getTypeAssignment_0(), "rule__StructMemberDeclaration__TypeAssignment_0");
+					put(grammarAccess.getStructMemberDeclarationAccess().getNameAssignment_1(), "rule__StructMemberDeclaration__NameAssignment_1");
 					put(grammarAccess.getFunctionDefinitionAccess().getKindAssignment_0(), "rule__FunctionDefinition__KindAssignment_0");
 					put(grammarAccess.getFunctionDefinitionAccess().getNameAssignment_2(), "rule__FunctionDefinition__NameAssignment_2");
 					put(grammarAccess.getFunctionDefinitionAccess().getTemplateParameterDeclarationsAssignment_3_1(), "rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1");
@@ -266,10 +266,10 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAssertionAccess().getStatusKindAssignment_4(), "rule__Assertion__StatusKindAssignment_4");
 					put(grammarAccess.getAssertionAccess().getMessageAssignment_5(), "rule__Assertion__MessageAssignment_5");
 					put(grammarAccess.getStateVariableDeclarationAccess().getNameAssignment_1(), "rule__StateVariableDeclaration__NameAssignment_1");
-					put(grammarAccess.getFunctionObjectDeclarationAccess().getNameAssignment_1(), "rule__FunctionObjectDeclaration__NameAssignment_1");
-					put(grammarAccess.getFunctionObjectDeclarationAccess().getFunctionNameAssignment_3(), "rule__FunctionObjectDeclaration__FunctionNameAssignment_3");
-					put(grammarAccess.getFunctionObjectDeclarationAccess().getTemplateArgumentsAssignment_4_1(), "rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_1");
-					put(grammarAccess.getFunctionObjectDeclarationAccess().getTemplateArgumentsAssignment_4_2_1(), "rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_4_2_1");
+					put(grammarAccess.getFunctionObjectDeclarationAccess().getFunctionNameAssignment_1(), "rule__FunctionObjectDeclaration__FunctionNameAssignment_1");
+					put(grammarAccess.getFunctionObjectDeclarationAccess().getTemplateArgumentsAssignment_2_1(), "rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_2_1");
+					put(grammarAccess.getFunctionObjectDeclarationAccess().getTemplateArgumentsAssignment_2_2_1(), "rule__FunctionObjectDeclaration__TemplateArgumentsAssignment_2_2_1");
+					put(grammarAccess.getFunctionObjectDeclarationAccess().getNameAssignment_3(), "rule__FunctionObjectDeclaration__NameAssignment_3");
 					put(grammarAccess.getEquationAccess().getInitialAssignment_0(), "rule__Equation__InitialAssignment_0");
 					put(grammarAccess.getEquationAccess().getLeftHandSideAssignment_1(), "rule__Equation__LeftHandSideAssignment_1");
 					put(grammarAccess.getEquationAccess().getRightHandSideAssignment_3(), "rule__Equation__RightHandSideAssignment_3");

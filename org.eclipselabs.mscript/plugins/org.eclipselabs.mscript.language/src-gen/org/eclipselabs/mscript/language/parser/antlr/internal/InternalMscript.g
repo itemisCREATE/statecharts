@@ -478,46 +478,42 @@ ruleStructMemberDeclaration returns [EObject current=null]
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getStructMemberDeclarationAccess().getNameValidIDParserRuleCall_0_0()); 
+	        newCompositeNode(grammarAccess.getStructMemberDeclarationAccess().getTypeDataTypeSpecifierParserRuleCall_0_0()); 
 	    }
-		lv_name_0_0=ruleValidID		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getStructMemberDeclarationRule());
-	        }
-       		set(
-       			$current, 
-       			"name",
-        		lv_name_0_0, 
-        		"ValidID");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)	otherlv_1=':' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getStructMemberDeclarationAccess().getColonKeyword_1());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getStructMemberDeclarationAccess().getTypeDataTypeSpecifierParserRuleCall_2_0()); 
-	    }
-		lv_type_2_0=ruleDataTypeSpecifier		{
+		lv_type_0_0=ruleDataTypeSpecifier		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStructMemberDeclarationRule());
 	        }
        		set(
        			$current, 
        			"type",
-        		lv_type_2_0, 
+        		lv_type_0_0, 
         		"DataTypeSpecifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_3=';' 
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getStructMemberDeclarationAccess().getNameValidIDParserRuleCall_1_0()); 
+	    }
+		lv_name_1_0=ruleValidID		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getStructMemberDeclarationRule());
+	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"ValidID");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_2=';' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getStructMemberDeclarationAccess().getSemicolonKeyword_3());
+    	newLeafNode(otherlv_2, grammarAccess.getStructMemberDeclarationAccess().getSemicolonKeyword_2());
     }
 )
 ;
@@ -1284,49 +1280,49 @@ ruleFunctionObjectDeclaration returns [EObject current=null]
     }
 (
 (
-		{ 
-	        newCompositeNode(grammarAccess.getFunctionObjectDeclarationAccess().getNameValidIDParserRuleCall_1_0()); 
-	    }
-		lv_name_1_0=ruleValidID		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getFunctionObjectDeclarationRule());
-	        }
-       		set(
-       			$current, 
-       			"name",
-        		lv_name_1_0, 
-        		"ValidID");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)	otherlv_2=':' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getFunctionObjectDeclarationAccess().getColonKeyword_2());
-    }
-(
-(
 		{
 			if ($current==null) {
 	            $current = createModelElement(grammarAccess.getFunctionObjectDeclarationRule());
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getFunctionObjectDeclarationAccess().getFunctionNameFunctionDefinitionCrossReference_3_0()); 
+	        newCompositeNode(grammarAccess.getFunctionObjectDeclarationAccess().getFunctionNameFunctionDefinitionCrossReference_1_0()); 
 	    }
 		ruleQualifiedName		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_4='<' 
+)(	otherlv_2='<' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getFunctionObjectDeclarationAccess().getLessThanSignKeyword_4_0());
+    	newLeafNode(otherlv_2, grammarAccess.getFunctionObjectDeclarationAccess().getLessThanSignKeyword_2_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getFunctionObjectDeclarationAccess().getTemplateArgumentsExpressionParserRuleCall_4_1_0()); 
+	        newCompositeNode(grammarAccess.getFunctionObjectDeclarationAccess().getTemplateArgumentsExpressionParserRuleCall_2_1_0()); 
+	    }
+		lv_templateArguments_3_0=ruleExpression		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getFunctionObjectDeclarationRule());
+	        }
+       		add(
+       			$current, 
+       			"templateArguments",
+        		lv_templateArguments_3_0, 
+        		"Expression");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_4=',' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getFunctionObjectDeclarationAccess().getCommaKeyword_2_2_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getFunctionObjectDeclarationAccess().getTemplateArgumentsExpressionParserRuleCall_2_2_1_0()); 
 	    }
 		lv_templateArguments_5_0=ruleExpression		{
 	        if ($current==null) {
@@ -1341,35 +1337,31 @@ ruleFunctionObjectDeclaration returns [EObject current=null]
 	    }
 
 )
-)(	otherlv_6=',' 
+))*	otherlv_6='>' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getFunctionObjectDeclarationAccess().getCommaKeyword_4_2_0());
+    	newLeafNode(otherlv_6, grammarAccess.getFunctionObjectDeclarationAccess().getGreaterThanSignKeyword_2_3());
     }
-(
+)?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getFunctionObjectDeclarationAccess().getTemplateArgumentsExpressionParserRuleCall_4_2_1_0()); 
+	        newCompositeNode(grammarAccess.getFunctionObjectDeclarationAccess().getNameValidIDParserRuleCall_3_0()); 
 	    }
-		lv_templateArguments_7_0=ruleExpression		{
+		lv_name_7_0=ruleValidID		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getFunctionObjectDeclarationRule());
 	        }
-       		add(
+       		set(
        			$current, 
-       			"templateArguments",
-        		lv_templateArguments_7_0, 
-        		"Expression");
+       			"name",
+        		lv_name_7_0, 
+        		"ValidID");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))*	otherlv_8='>' 
+)	otherlv_8=';' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getFunctionObjectDeclarationAccess().getGreaterThanSignKeyword_4_3());
-    }
-)?	otherlv_9=';' 
-    {
-    	newLeafNode(otherlv_9, grammarAccess.getFunctionObjectDeclarationAccess().getSemicolonKeyword_5());
+    	newLeafNode(otherlv_8, grammarAccess.getFunctionObjectDeclarationAccess().getSemicolonKeyword_4());
     }
 )
 ;

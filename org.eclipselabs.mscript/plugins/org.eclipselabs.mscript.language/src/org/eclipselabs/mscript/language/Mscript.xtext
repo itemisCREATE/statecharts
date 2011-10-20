@@ -61,7 +61,7 @@ StructDefinition:
 	'}'; 
 
 StructMemberDeclaration:
-	name=ValidID ':' type=DataTypeSpecifier ';';
+	type=DataTypeSpecifier name=ValidID ';';
 
 /*
  * Function
@@ -110,7 +110,7 @@ StateVariableDeclaration:
 	'var' name=ValidID ';';
 	
 FunctionObjectDeclaration:
-	'fob' name=ValidID ':' functionName=[FunctionDefinition|QualifiedName] ('<' templateArguments+=Expression (',' templateArguments+=Expression)* '>')? ';';
+	'fob' functionName=[FunctionDefinition|QualifiedName] ('<' templateArguments+=Expression (',' templateArguments+=Expression)* '>')? name=ValidID ';';
 
 Equation:
 	(initial?='initial')? leftHandSide=Expression '=' rightHandSide=Expression ';';
