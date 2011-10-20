@@ -7,9 +7,7 @@
 package org.yakindu.sct.model.sexec.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.yakindu.sct.model.sgraph.provider.SGraphEditPlugin;
 
 /**
