@@ -69,7 +69,7 @@ EventDerivation:
 	'=' condition=Expression (':' value=Expression)?;
 
 enum Direction:
-	LOCAL='local' | IN='in' | OUT='out';
+	IN='in' | OUT='out';
 
 /* ---- variable definition ---- */
 VariableDefinition returns sct::Variable:
@@ -99,7 +99,7 @@ Reaction returns sct::Reaction:
 	LocalReaction | TransitionReaction;
 
 LocalReaction:
-	(trigger=ReactionTrigger) ('/' effect=ReactionEffect)? ('#' properties=ReactionProperties)?;
+	(trigger=ReactionTrigger) ('/' effect=ReactionEffect) ('#' properties=ReactionProperties)?;
 
 TransitionReaction:
 	{TransitionReaction} (trigger=ReactionTrigger)? ('/' effect=ReactionEffect)? ('#' properties=ReactionProperties)?;

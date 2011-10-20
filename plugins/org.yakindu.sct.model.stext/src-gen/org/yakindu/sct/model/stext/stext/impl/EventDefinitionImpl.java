@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -46,7 +47,7 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
    * @generated
    * @ordered
    */
-  protected static final Direction DIRECTION_EDEFAULT = Direction.LOCAL;
+  protected static final Direction DIRECTION_EDEFAULT = Direction.IN;
 
   /**
    * The cached value of the '{@link #getDirection() <em>Direction</em>}' attribute.
