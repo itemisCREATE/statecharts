@@ -63,7 +63,7 @@ public class SGraphValidator extends EObjectValidator {
 	public final static String ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS = "Entries must not have more than one outgoing transition";
 	public static final String ISSUE_SUBMACHINESTATE_WITHOUT_SUBMACHINE = "Selected Submachine can not be resolved.";
 	public static final String ISSUE_SUBMACHINESTATE__CYCLE = "A submachine state can not contain itself as as Submachine.";
-	public static final String ISSUE_ENTRY_WITH_TRIGGER = "Outgoing Transitions from Entries can not have a Trigger.";
+	public static final String ISSUE_ENTRY_WITH_TRIGGER = "Outgoing Transitions from Entries can not have a Trigger or Guard.";
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
