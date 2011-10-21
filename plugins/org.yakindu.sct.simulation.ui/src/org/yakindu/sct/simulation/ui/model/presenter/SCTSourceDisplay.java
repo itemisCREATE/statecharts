@@ -56,6 +56,9 @@ public class SCTSourceDisplay extends SimulationSessionListenerAdapter
 
 	private HighlightingParameters parameters = new HighlightingParameters();
 
+	public SCTSourceDisplay() {
+	}
+	
 	public void displaySource(Object element, IWorkbenchPage page,
 			boolean forceSourceLookup) {
 
