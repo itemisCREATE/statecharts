@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
+
 <plugin>
-   <extension
-         point="org.yakindu.sct.builder.subscriber">
-      <BuilderSubscriber
-            class="org.yakindu.sct.generator.cpp.subscriber.CppCodeGeneratorSubscriber"
-            resourceExtension="sct">
-      </BuilderSubscriber>
-   </extension>
+
+
 </plugin>
