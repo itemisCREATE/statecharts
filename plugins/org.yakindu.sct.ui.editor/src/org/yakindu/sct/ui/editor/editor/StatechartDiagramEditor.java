@@ -13,9 +13,6 @@ package org.yakindu.sct.ui.editor.editor;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.draw2d.ConnectionLayer;
 import org.eclipse.draw2d.ViewportAwareConnectionLayerClippingStrategy;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
@@ -31,7 +28,6 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.breadcrumb.BreadcrumbDiagramEditor;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
@@ -51,15 +47,7 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 	private ResourceSetListener validationListener = new ResourceSetListenerImpl() {
 		@Override
 		public void resourceSetChanged(ResourceSetChangeEvent event) {
-			for (Notification notification : event.getNotifications()) {
-				if (notification.getNotifier() instanceof EObject) {
-					EObject object = (EObject) notification.getNotifier();
-					if (EcoreUtil.getRootContainer(object) instanceof Statechart) {
-						validate();
-						return;
-					}
-				}
-			}
+			validate();
 		}
 	};
 
