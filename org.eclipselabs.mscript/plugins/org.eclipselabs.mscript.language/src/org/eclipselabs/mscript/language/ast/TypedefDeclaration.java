@@ -6,26 +6,24 @@
  */
 package org.eclipselabs.mscript.language.ast;
 
-import org.eclipselabs.mscript.typesystem.PrimitiveType;
-
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Type Alias Definition</b></em>'.
+ * A representation of the model object '<em><b>Typedef Declaration</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.TypeAliasDefinition#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.TypedefDeclaration#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getTypeAliasDefinition()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getTypedefDeclaration()
  * @model
  * @generated
  */
-public interface TypeAliasDefinition extends DataTypeDefinition {
+public interface TypedefDeclaration extends DataTypeDefinition {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -35,21 +33,21 @@ public interface TypeAliasDefinition extends DataTypeDefinition {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' containment reference.
-	 * @see #setType(PrimitiveType)
-	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getTypeAliasDefinition_Type()
+	 * @see #setType(DataTypeSpecifier)
+	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getTypedefDeclaration_Type()
 	 * @model containment="true"
 	 * @generated
 	 */
-	PrimitiveType getType();
+	DataTypeSpecifier getType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.TypeAliasDefinition#getType <em>Type</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.TypedefDeclaration#getType <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Type</em>' containment reference.
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(PrimitiveType value);
+	void setType(DataTypeSpecifier value);
 
-} // TypeAliasDefinition
+} // TypedefDeclaration

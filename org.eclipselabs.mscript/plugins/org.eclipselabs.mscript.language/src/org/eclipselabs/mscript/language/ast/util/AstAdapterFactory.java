@@ -81,8 +81,8 @@ import org.eclipselabs.mscript.language.ast.StructMemberDeclaration;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
 import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
-import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
+import org.eclipselabs.mscript.language.ast.TypedefDeclaration;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
 import org.eclipselabs.mscript.language.ast.VariableAccess;
@@ -167,8 +167,8 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 				return createEnumerationLiteralDeclarationAdapter();
 			}
 			@Override
-			public Adapter caseTypeAliasDefinition(TypeAliasDefinition object) {
-				return createTypeAliasDefinitionAdapter();
+			public Adapter caseTypedefDeclaration(TypedefDeclaration object) {
+				return createTypedefDeclarationAdapter();
 			}
 			@Override
 			public Adapter caseStructDefinition(StructDefinition object) {
@@ -549,16 +549,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.TypeAliasDefinition <em>Type Alias Definition</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.TypedefDeclaration <em>Typedef Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.TypeAliasDefinition
+	 * @see org.eclipselabs.mscript.language.ast.TypedefDeclaration
 	 * @generated
 	 */
-	public Adapter createTypeAliasDefinitionAdapter() {
+	public Adapter createTypedefDeclarationAdapter() {
 		return null;
 	}
 

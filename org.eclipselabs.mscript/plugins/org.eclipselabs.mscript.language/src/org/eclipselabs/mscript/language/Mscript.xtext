@@ -30,7 +30,7 @@ Definition:
 DataTypeDefinition:
 	EnumerationDefinition |
 	StructDefinition |
-	TypeAliasDefinition;
+	TypedefDeclaration;
 
 /*
  * Enumeration
@@ -45,11 +45,11 @@ EnumerationLiteralDeclaration:
 	name=ValidID;
 	
 /*
- * TypeAlias
+ * Typedef
  */
  
-TypeAliasDefinition:
-	'type' name=ValidID '=' type=PrimitiveType ';';	
+TypedefDeclaration:
+	'typedef' type=DataTypeSpecifier name=ValidID ';';	
 
 /*
  * Struct

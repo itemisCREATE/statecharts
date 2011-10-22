@@ -57,15 +57,15 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEnumerationDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cStructDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cTypeAliasDefinitionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cTypedefDeclarationParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		/// *
 		// * DataTypeDefinition
 		// * / DataTypeDefinition:
-		//	EnumerationDefinition | StructDefinition | TypeAliasDefinition;
+		//	EnumerationDefinition | StructDefinition | TypedefDeclaration;
 		public ParserRule getRule() { return rule; }
 
-		//EnumerationDefinition | StructDefinition | TypeAliasDefinition
+		//EnumerationDefinition | StructDefinition | TypedefDeclaration
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//EnumerationDefinition
@@ -74,8 +74,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//StructDefinition
 		public RuleCall getStructDefinitionParserRuleCall_1() { return cStructDefinitionParserRuleCall_1; }
 
-		//TypeAliasDefinition
-		public RuleCall getTypeAliasDefinitionParserRuleCall_2() { return cTypeAliasDefinitionParserRuleCall_2; }
+		//TypedefDeclaration
+		public RuleCall getTypedefDeclarationParserRuleCall_2() { return cTypedefDeclarationParserRuleCall_2; }
 	}
 
 	public class EnumerationDefinitionElements extends AbstractParserRuleElementFinder {
@@ -158,46 +158,42 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getNameValidIDParserRuleCall_0() { return cNameValidIDParserRuleCall_0; }
 	}
 
-	public class TypeAliasDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeAliasDefinition");
+	public class TypedefDeclarationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypedefDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cEqualsSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cTypePrimitiveTypeParserRuleCall_3_0 = (RuleCall)cTypeAssignment_3.eContents().get(0);
-		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cTypedefKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTypeDataTypeSpecifierParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameValidIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		/// *
-		// * TypeAlias
-		// * / TypeAliasDefinition:
-		//	"type" name=ValidID "=" type=PrimitiveType ";";
+		// * Typedef
+		// * / TypedefDeclaration:
+		//	"typedef" type=DataTypeSpecifier name=ValidID ";";
 		public ParserRule getRule() { return rule; }
 
-		//"type" name=ValidID "=" type=PrimitiveType ";"
+		//"typedef" type=DataTypeSpecifier name=ValidID ";"
 		public Group getGroup() { return cGroup; }
 
-		//"type"
-		public Keyword getTypeKeyword_0() { return cTypeKeyword_0; }
+		//"typedef"
+		public Keyword getTypedefKeyword_0() { return cTypedefKeyword_0; }
+
+		//type=DataTypeSpecifier
+		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
+
+		//DataTypeSpecifier
+		public RuleCall getTypeDataTypeSpecifierParserRuleCall_1_0() { return cTypeDataTypeSpecifierParserRuleCall_1_0; }
 
 		//name=ValidID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
 		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
-
-		//"="
-		public Keyword getEqualsSignKeyword_2() { return cEqualsSignKeyword_2; }
-
-		//type=PrimitiveType
-		public Assignment getTypeAssignment_3() { return cTypeAssignment_3; }
-
-		//PrimitiveType
-		public RuleCall getTypePrimitiveTypeParserRuleCall_3_0() { return cTypePrimitiveTypeParserRuleCall_3_0; }
+		public RuleCall getNameValidIDParserRuleCall_2_0() { return cNameValidIDParserRuleCall_2_0; }
 
 		//";"
-		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
+		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
 	public class StructDefinitionElements extends AbstractParserRuleElementFinder {
@@ -4597,7 +4593,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private DataTypeDefinitionElements pDataTypeDefinition;
 	private EnumerationDefinitionElements pEnumerationDefinition;
 	private EnumerationLiteralDeclarationElements pEnumerationLiteralDeclaration;
-	private TypeAliasDefinitionElements pTypeAliasDefinition;
+	private TypedefDeclarationElements pTypedefDeclaration;
 	private StructDefinitionElements pStructDefinition;
 	private StructMemberDeclarationElements pStructMemberDeclaration;
 	private FunctionDefinitionElements pFunctionDefinition;
@@ -4753,7 +4749,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	/// *
 	// * DataTypeDefinition
 	// * / DataTypeDefinition:
-	//	EnumerationDefinition | StructDefinition | TypeAliasDefinition;
+	//	EnumerationDefinition | StructDefinition | TypedefDeclaration;
 	public DataTypeDefinitionElements getDataTypeDefinitionAccess() {
 		return (pDataTypeDefinition != null) ? pDataTypeDefinition : (pDataTypeDefinition = new DataTypeDefinitionElements());
 	}
@@ -4786,15 +4782,15 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// *
-	// * TypeAlias
-	// * / TypeAliasDefinition:
-	//	"type" name=ValidID "=" type=PrimitiveType ";";
-	public TypeAliasDefinitionElements getTypeAliasDefinitionAccess() {
-		return (pTypeAliasDefinition != null) ? pTypeAliasDefinition : (pTypeAliasDefinition = new TypeAliasDefinitionElements());
+	// * Typedef
+	// * / TypedefDeclaration:
+	//	"typedef" type=DataTypeSpecifier name=ValidID ";";
+	public TypedefDeclarationElements getTypedefDeclarationAccess() {
+		return (pTypedefDeclaration != null) ? pTypedefDeclaration : (pTypedefDeclaration = new TypedefDeclarationElements());
 	}
 	
-	public ParserRule getTypeAliasDefinitionRule() {
-		return getTypeAliasDefinitionAccess().getRule();
+	public ParserRule getTypedefDeclarationRule() {
+		return getTypedefDeclarationAccess().getRule();
 	}
 
 	/// *

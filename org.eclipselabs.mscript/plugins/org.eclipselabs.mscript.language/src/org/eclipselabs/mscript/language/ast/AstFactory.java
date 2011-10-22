@@ -53,13 +53,13 @@ public interface AstFactory extends EFactory {
 	EnumerationLiteralDeclaration createEnumerationLiteralDeclaration();
 
 	/**
-	 * Returns a new object of class '<em>Type Alias Definition</em>'.
+	 * Returns a new object of class '<em>Typedef Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Alias Definition</em>'.
+	 * @return a new object of class '<em>Typedef Declaration</em>'.
 	 * @generated
 	 */
-	TypeAliasDefinition createTypeAliasDefinition();
+	TypedefDeclaration createTypedefDeclaration();
 
 	/**
 	 * Returns a new object of class '<em>Struct Definition</em>'.

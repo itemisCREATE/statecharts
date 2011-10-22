@@ -179,11 +179,11 @@ ruleDataTypeDefinition returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getDataTypeDefinitionAccess().getTypeAliasDefinitionParserRuleCall_2()); 
+        newCompositeNode(grammarAccess.getDataTypeDefinitionAccess().getTypedefDeclarationParserRuleCall_2()); 
     }
-    this_TypeAliasDefinition_2=ruleTypeAliasDefinition
+    this_TypedefDeclaration_2=ruleTypedefDeclaration
     { 
-        $current = $this_TypeAliasDefinition_2.current; 
+        $current = $this_TypedefDeclaration_2.current; 
         afterParserOrEnumRuleCall();
     }
 )
@@ -323,67 +323,63 @@ ruleEnumerationLiteralDeclaration returns [EObject current=null]
 
 
 
-// Entry rule entryRuleTypeAliasDefinition
-entryRuleTypeAliasDefinition returns [EObject current=null] 
+// Entry rule entryRuleTypedefDeclaration
+entryRuleTypedefDeclaration returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getTypeAliasDefinitionRule()); }
-	 iv_ruleTypeAliasDefinition=ruleTypeAliasDefinition 
-	 { $current=$iv_ruleTypeAliasDefinition.current; } 
+	{ newCompositeNode(grammarAccess.getTypedefDeclarationRule()); }
+	 iv_ruleTypedefDeclaration=ruleTypedefDeclaration 
+	 { $current=$iv_ruleTypedefDeclaration.current; } 
 	 EOF 
 ;
 
-// Rule TypeAliasDefinition
-ruleTypeAliasDefinition returns [EObject current=null] 
+// Rule TypedefDeclaration
+ruleTypedefDeclaration returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='type' 
+(	otherlv_0='typedef' 
     {
-    	newLeafNode(otherlv_0, grammarAccess.getTypeAliasDefinitionAccess().getTypeKeyword_0());
+    	newLeafNode(otherlv_0, grammarAccess.getTypedefDeclarationAccess().getTypedefKeyword_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTypeAliasDefinitionAccess().getNameValidIDParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getTypedefDeclarationAccess().getTypeDataTypeSpecifierParserRuleCall_1_0()); 
 	    }
-		lv_name_1_0=ruleValidID		{
+		lv_type_1_0=ruleDataTypeSpecifier		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getTypeAliasDefinitionRule());
+	            $current = createModelElementForParent(grammarAccess.getTypedefDeclarationRule());
+	        }
+       		set(
+       			$current, 
+       			"type",
+        		lv_type_1_0, 
+        		"DataTypeSpecifier");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getTypedefDeclarationAccess().getNameValidIDParserRuleCall_2_0()); 
+	    }
+		lv_name_2_0=ruleValidID		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getTypedefDeclarationRule());
 	        }
        		set(
        			$current, 
        			"name",
-        		lv_name_1_0, 
+        		lv_name_2_0, 
         		"ValidID");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_2='=' 
+)	otherlv_3=';' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getTypeAliasDefinitionAccess().getEqualsSignKeyword_2());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getTypeAliasDefinitionAccess().getTypePrimitiveTypeParserRuleCall_3_0()); 
-	    }
-		lv_type_3_0=rulePrimitiveType		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getTypeAliasDefinitionRule());
-	        }
-       		set(
-       			$current, 
-       			"type",
-        		lv_type_3_0, 
-        		"PrimitiveType");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)	otherlv_4=';' 
-    {
-    	newLeafNode(otherlv_4, grammarAccess.getTypeAliasDefinitionAccess().getSemicolonKeyword_4());
+    	newLeafNode(otherlv_3, grammarAccess.getTypedefDeclarationAccess().getSemicolonKeyword_3());
     }
 )
 ;

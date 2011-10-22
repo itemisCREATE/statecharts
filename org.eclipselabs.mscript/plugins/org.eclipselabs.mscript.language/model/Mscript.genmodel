@@ -66,8 +66,8 @@
     <genClasses ecoreClass="Mscript.ecore#//EnumerationLiteralDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//EnumerationLiteralDeclaration/name"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//TypeAliasDefinition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//TypeAliasDefinition/type"/>
+    <genClasses ecoreClass="Mscript.ecore#//TypedefDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//TypedefDeclaration/type"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//StructDefinition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//StructDefinition/memberDeclarations"/>

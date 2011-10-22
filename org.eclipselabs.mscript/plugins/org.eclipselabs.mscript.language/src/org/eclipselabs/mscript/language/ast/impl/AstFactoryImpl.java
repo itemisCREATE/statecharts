@@ -84,8 +84,8 @@ import org.eclipselabs.mscript.language.ast.StructMemberDeclaration;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
 import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
-import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
+import org.eclipselabs.mscript.language.ast.TypedefDeclaration;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnaryOperator;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
@@ -140,7 +140,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.MODULE: return createModule();
 			case AstPackage.ENUMERATION_DEFINITION: return createEnumerationDefinition();
 			case AstPackage.ENUMERATION_LITERAL_DECLARATION: return createEnumerationLiteralDeclaration();
-			case AstPackage.TYPE_ALIAS_DEFINITION: return createTypeAliasDefinition();
+			case AstPackage.TYPEDEF_DECLARATION: return createTypedefDeclaration();
 			case AstPackage.STRUCT_DEFINITION: return createStructDefinition();
 			case AstPackage.STRUCT_MEMBER_DECLARATION: return createStructMemberDeclaration();
 			case AstPackage.FUNCTION_DEFINITION: return createFunctionDefinition();
@@ -308,9 +308,9 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeAliasDefinition createTypeAliasDefinition() {
-		TypeAliasDefinitionImpl typeAliasDefinition = new TypeAliasDefinitionImpl();
-		return typeAliasDefinition;
+	public TypedefDeclaration createTypedefDeclaration() {
+		TypedefDeclarationImpl typedefDeclaration = new TypedefDeclarationImpl();
+		return typedefDeclaration;
 	}
 
 	/**

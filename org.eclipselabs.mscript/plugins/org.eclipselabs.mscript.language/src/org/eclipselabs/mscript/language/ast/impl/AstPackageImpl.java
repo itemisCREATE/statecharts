@@ -92,8 +92,8 @@ import org.eclipselabs.mscript.language.ast.StructMemberDeclaration;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
 import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
-import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
+import org.eclipselabs.mscript.language.ast.TypedefDeclaration;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnaryOperator;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
@@ -149,7 +149,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass typeAliasDefinitionEClass = null;
+	private EClass typedefDeclarationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -861,8 +861,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTypeAliasDefinition() {
-		return typeAliasDefinitionEClass;
+	public EClass getTypedefDeclaration() {
+		return typedefDeclarationEClass;
 	}
 
 	/**
@@ -870,8 +870,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTypeAliasDefinition_Type() {
-		return (EReference)typeAliasDefinitionEClass.getEStructuralFeatures().get(0);
+	public EReference getTypedefDeclaration_Type() {
+		return (EReference)typedefDeclarationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2770,8 +2770,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		enumerationLiteralDeclarationEClass = createEClass(ENUMERATION_LITERAL_DECLARATION);
 		createEAttribute(enumerationLiteralDeclarationEClass, ENUMERATION_LITERAL_DECLARATION__NAME);
 
-		typeAliasDefinitionEClass = createEClass(TYPE_ALIAS_DEFINITION);
-		createEReference(typeAliasDefinitionEClass, TYPE_ALIAS_DEFINITION__TYPE);
+		typedefDeclarationEClass = createEClass(TYPEDEF_DECLARATION);
+		createEReference(typedefDeclarationEClass, TYPEDEF_DECLARATION__TYPE);
 
 		structDefinitionEClass = createEClass(STRUCT_DEFINITION);
 		createEReference(structDefinitionEClass, STRUCT_DEFINITION__MEMBER_DECLARATIONS);
@@ -3086,7 +3086,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		// Add supertypes to classes
 		dataTypeDefinitionEClass.getESuperTypes().add(this.getDefinition());
 		enumerationDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
-		typeAliasDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
+		typedefDeclarationEClass.getESuperTypes().add(this.getDataTypeDefinition());
 		structDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
 		functionDefinitionEClass.getESuperTypes().add(this.getDefinition());
 		functionDefinitionEClass.getESuperTypes().add(this.getCallableElement());
@@ -3164,8 +3164,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		initEClass(enumerationLiteralDeclarationEClass, EnumerationLiteralDeclaration.class, "EnumerationLiteralDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEnumerationLiteralDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, EnumerationLiteralDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(typeAliasDefinitionEClass, TypeAliasDefinition.class, "TypeAliasDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeAliasDefinition_Type(), theTypeSystemPackage.getPrimitiveType(), null, "type", null, 0, 1, TypeAliasDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(typedefDeclarationEClass, TypedefDeclaration.class, "TypedefDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypedefDeclaration_Type(), this.getDataTypeSpecifier(), null, "type", null, 0, 1, TypedefDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(structDefinitionEClass, StructDefinition.class, "StructDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStructDefinition_MemberDeclarations(), this.getStructMemberDeclaration(), null, "memberDeclarations", null, 0, -1, StructDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

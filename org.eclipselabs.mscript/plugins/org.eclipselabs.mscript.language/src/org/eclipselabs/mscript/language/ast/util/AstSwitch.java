@@ -80,8 +80,8 @@ import org.eclipselabs.mscript.language.ast.StructMemberDeclaration;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
 import org.eclipselabs.mscript.language.ast.TemplateParameterDeclaration;
-import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
+import org.eclipselabs.mscript.language.ast.TypedefDeclaration;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
 import org.eclipselabs.mscript.language.ast.VariableAccess;
@@ -179,11 +179,11 @@ public class AstSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case AstPackage.TYPE_ALIAS_DEFINITION: {
-				TypeAliasDefinition typeAliasDefinition = (TypeAliasDefinition)theEObject;
-				T result = caseTypeAliasDefinition(typeAliasDefinition);
-				if (result == null) result = caseDataTypeDefinition(typeAliasDefinition);
-				if (result == null) result = caseDefinition(typeAliasDefinition);
+			case AstPackage.TYPEDEF_DECLARATION: {
+				TypedefDeclaration typedefDeclaration = (TypedefDeclaration)theEObject;
+				T result = caseTypedefDeclaration(typedefDeclaration);
+				if (result == null) result = caseDataTypeDefinition(typedefDeclaration);
+				if (result == null) result = caseDefinition(typedefDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -766,17 +766,17 @@ public class AstSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Alias Definition</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Typedef Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Alias Definition</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Typedef Declaration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeAliasDefinition(TypeAliasDefinition object) {
+	public T caseTypedefDeclaration(TypedefDeclaration object) {
 		return null;
 	}
 

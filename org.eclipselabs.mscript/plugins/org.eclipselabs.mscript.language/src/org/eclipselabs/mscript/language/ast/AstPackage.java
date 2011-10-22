@@ -148,16 +148,6 @@ public interface AstPackage extends EPackage {
 	int ENUMERATION_LITERAL_DECLARATION = 4;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.TypeAliasDefinitionImpl <em>Type Alias Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.ast.impl.TypeAliasDefinitionImpl
-	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getTypeAliasDefinition()
-	 * @generated
-	 */
-	int TYPE_ALIAS_DEFINITION = 5;
-
-	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl <em>Function Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -281,13 +271,23 @@ public interface AstPackage extends EPackage {
 	int ENUMERATION_LITERAL_DECLARATION_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.TypedefDeclarationImpl <em>Typedef Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.ast.impl.TypedefDeclarationImpl
+	 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getTypedefDeclaration()
+	 * @generated
+	 */
+	int TYPEDEF_DECLARATION = 5;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_DEFINITION__NAME = DATA_TYPE_DEFINITION__NAME;
+	int TYPEDEF_DECLARATION__NAME = DATA_TYPE_DEFINITION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -296,16 +296,16 @@ public interface AstPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_DEFINITION__TYPE = DATA_TYPE_DEFINITION_FEATURE_COUNT + 0;
+	int TYPEDEF_DECLARATION__TYPE = DATA_TYPE_DEFINITION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Type Alias Definition</em>' class.
+	 * The number of structural features of the '<em>Typedef Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_DEFINITION_FEATURE_COUNT = DATA_TYPE_DEFINITION_FEATURE_COUNT + 1;
+	int TYPEDEF_DECLARATION_FEATURE_COUNT = DATA_TYPE_DEFINITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.StructDefinitionImpl <em>Struct Definition</em>}' class.
@@ -3005,25 +3005,25 @@ public interface AstPackage extends EPackage {
 	EAttribute getEnumerationLiteralDeclaration_Name();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.TypeAliasDefinition <em>Type Alias Definition</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.TypedefDeclaration <em>Typedef Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Alias Definition</em>'.
-	 * @see org.eclipselabs.mscript.language.ast.TypeAliasDefinition
+	 * @return the meta object for class '<em>Typedef Declaration</em>'.
+	 * @see org.eclipselabs.mscript.language.ast.TypedefDeclaration
 	 * @generated
 	 */
-	EClass getTypeAliasDefinition();
+	EClass getTypedefDeclaration();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.TypeAliasDefinition#getType <em>Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.TypedefDeclaration#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Type</em>'.
-	 * @see org.eclipselabs.mscript.language.ast.TypeAliasDefinition#getType()
-	 * @see #getTypeAliasDefinition()
+	 * @see org.eclipselabs.mscript.language.ast.TypedefDeclaration#getType()
+	 * @see #getTypedefDeclaration()
 	 * @generated
 	 */
-	EReference getTypeAliasDefinition_Type();
+	EReference getTypedefDeclaration_Type();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.StructDefinition <em>Struct Definition</em>}'.
@@ -5316,14 +5316,14 @@ public interface AstPackage extends EPackage {
 		EAttribute ENUMERATION_LITERAL_DECLARATION__NAME = eINSTANCE.getEnumerationLiteralDeclaration_Name();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.TypeAliasDefinitionImpl <em>Type Alias Definition</em>}' class.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.TypedefDeclarationImpl <em>Typedef Declaration</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.ast.impl.TypeAliasDefinitionImpl
-		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getTypeAliasDefinition()
+		 * @see org.eclipselabs.mscript.language.ast.impl.TypedefDeclarationImpl
+		 * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getTypedefDeclaration()
 		 * @generated
 		 */
-		EClass TYPE_ALIAS_DEFINITION = eINSTANCE.getTypeAliasDefinition();
+		EClass TYPEDEF_DECLARATION = eINSTANCE.getTypedefDeclaration();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
@@ -5331,7 +5331,7 @@ public interface AstPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_ALIAS_DEFINITION__TYPE = eINSTANCE.getTypeAliasDefinition_Type();
+		EReference TYPEDEF_DECLARATION__TYPE = eINSTANCE.getTypedefDeclaration_Type();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.StructDefinitionImpl <em>Struct Definition</em>}' class.
