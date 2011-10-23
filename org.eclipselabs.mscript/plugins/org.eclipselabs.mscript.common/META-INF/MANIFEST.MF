@@ -8,6 +8,6 @@ Bundle-Vendor: Mscript Project
 Require-Bundle: org.eclipse.core.runtime
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipselabs.mscript.common.internal.util;x-friends:="org.eclipselabs.mscript.language,org.eclipselabs.mscript.codegen.c",
+Export-Package: org.eclipselabs.mscript.common.internal.util;x-friends:="org.eclipselabs.mscript.language,org.eclipselabs.damos.mscript.codegen.c",
  org.eclipselabs.mscript.common.registry,
  org.eclipselabs.mscript.common.util

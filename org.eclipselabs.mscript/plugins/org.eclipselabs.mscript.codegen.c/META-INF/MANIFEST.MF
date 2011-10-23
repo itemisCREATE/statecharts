@@ -1,14 +1,14 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Mscript Codegen C
-Bundle-SymbolicName: org.eclipselabs.mscript.codegen.c
+Bundle-SymbolicName: org.eclipselabs.damos.mscript.codegen.c
 Bundle-Version: 0.1.0.qualifier
-Bundle-Activator: org.eclipselabs.mscript.codegen.c.CodegenCPlugin
+Bundle-Activator: org.eclipselabs.damos.mscript.codegen.c.CodegenCPlugin
 Bundle-Vendor: Mscript Project
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipselabs.damos.mscript;bundle-version="0.3.0",
  org.eclipselabs.mscript.common;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipselabs.mscript.codegen.c,
- org.eclipselabs.mscript.codegen.c.util
+Export-Package: org.eclipselabs.damos.mscript.codegen.c,
+ org.eclipselabs.damos.mscript.codegen.c.util

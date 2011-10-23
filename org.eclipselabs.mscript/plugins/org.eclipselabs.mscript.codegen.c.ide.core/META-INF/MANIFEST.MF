@@ -1,15 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Mscript Codegen C IDE Core
-Bundle-SymbolicName: org.eclipselabs.mscript.codegen.c.ide.core;singleton:=true
+Bundle-SymbolicName: org.eclipselabs.damos.mscript.codegen.c.ide.core;singleton:=true
 Bundle-Version: 0.1.0.qualifier
-Bundle-Activator: org.eclipselabs.mscript.codegen.c.ide.core.CodegenCIDECorePlugin
+Bundle-Activator: org.eclipselabs.damos.mscript.codegen.c.ide.core.CodegenCIDECorePlugin
 Bundle-Vendor: Mscript Project
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.debug.core;bundle-version="3.6.0",
  org.eclipselabs.damos.mscript;bundle-version="0.3.0",
- org.eclipselabs.mscript.codegen.c;bundle-version="0.1.0",
+ org.eclipselabs.damos.mscript.codegen.c;bundle-version="0.1.0",
  org.eclipselabs.mscript.ide.core;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipselabs.mscript.codegen.c.ide.core.launch
+Export-Package: org.eclipselabs.damos.mscript.codegen.c.ide.core.launch

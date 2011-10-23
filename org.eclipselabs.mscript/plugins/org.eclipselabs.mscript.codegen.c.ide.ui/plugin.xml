@@ -5,7 +5,7 @@
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
-            class="org.eclipselabs.mscript.codegen.c.ide.ui.launch.CodegenTabGroup"
+            class="org.eclipselabs.damos.mscript.codegen.c.ide.ui.launch.CodegenTabGroup"
             id="org.eclipselabs.mscript.ide.ui.codegenTabGroup"
             type="org.eclipselabs.mscript.codegen.c.ide.core.codegen">
       </launchConfigurationTabGroup>

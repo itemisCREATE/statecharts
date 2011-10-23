@@ -26,21 +26,21 @@
    </requires>
 
    <plugin
-         id="org.eclipselabs.mscript.codegen.c"
+         id="org.eclipselabs.damos.mscript.codegen.c"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipselabs.mscript.codegen.c.ide.core"
+         id="org.eclipselabs.damos.mscript.codegen.c.ide.core"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipselabs.mscript.codegen.c.ide.ui"
+         id="org.eclipselabs.damos.mscript.codegen.c.ide.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

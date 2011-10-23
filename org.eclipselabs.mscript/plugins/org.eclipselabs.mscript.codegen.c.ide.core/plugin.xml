@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.debug.core.launchConfigurationTypes">
       <launchConfigurationType
-            delegate="org.eclipselabs.mscript.codegen.c.ide.core.launch.CodegenLaunchConfigurationDelegate"
+            delegate="org.eclipselabs.damos.mscript.codegen.c.ide.core.launch.CodegenLaunchConfigurationDelegate"
             id="org.eclipselabs.mscript.codegen.c.ide.core.codegen"
             modes="run"
             name="Mscript C Code Generator">
