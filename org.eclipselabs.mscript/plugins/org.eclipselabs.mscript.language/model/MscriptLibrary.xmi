@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<ast:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ast="http://www.eclipselabs.org/mscript/AST/1.0.0" xsi:schemaLocation="http://www.eclipselabs.org/mscript/AST/1.0.0 Mscript.ecore">
-  <definitions xsi:type="ast:BuiltinFunction" name="unit"/>
-  <definitions xsi:type="ast:BuiltinFunction" name="size"/>
-  <definitions xsi:type="ast:BuiltinFunction" name="round"/>
-  <definitions xsi:type="ast:BuiltinFunction" name="num"/>
-</ast:Module>
