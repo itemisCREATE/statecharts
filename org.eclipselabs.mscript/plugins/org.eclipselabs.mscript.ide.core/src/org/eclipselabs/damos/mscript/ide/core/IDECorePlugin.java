@@ -1,4 +1,4 @@
-package org.eclipselabs.mscript.ide.core;
+package org.eclipselabs.damos.mscript.ide.core;
 
 import org.eclipse.core.runtime.Plugin;
 import org.eclipselabs.damos.mscript.MscriptRuntimeModule;

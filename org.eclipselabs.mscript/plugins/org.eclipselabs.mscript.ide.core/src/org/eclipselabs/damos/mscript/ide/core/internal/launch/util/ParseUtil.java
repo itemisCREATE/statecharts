@@ -9,7 +9,7 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.ide.core.internal.launch.util;
+package org.eclipselabs.damos.mscript.ide.core.internal.launch.util;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -19,12 +19,12 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipselabs.damos.mscript.Expression;
 import org.eclipselabs.damos.mscript.ExpressionList;
 import org.eclipselabs.damos.mscript.InvalidDataType;
+import org.eclipselabs.damos.mscript.ide.core.IDECorePlugin;
 import org.eclipselabs.damos.mscript.interpreter.ExpressionValueEvaluator;
 import org.eclipselabs.damos.mscript.interpreter.IExpressionValueEvaluator;
 import org.eclipselabs.damos.mscript.interpreter.IInterpreterContext;
 import org.eclipselabs.damos.mscript.interpreter.value.IValue;
 import org.eclipselabs.damos.mscript.parser.antlr.MscriptParser;
-import org.eclipselabs.mscript.ide.core.IDECorePlugin;
 
 /**
  * @author Andreas Unger

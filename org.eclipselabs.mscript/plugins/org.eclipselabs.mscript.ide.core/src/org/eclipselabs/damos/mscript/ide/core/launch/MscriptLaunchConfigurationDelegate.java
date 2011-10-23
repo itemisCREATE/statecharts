@@ -1,4 +1,4 @@
-package org.eclipselabs.mscript.ide.core.launch;
+package org.eclipselabs.damos.mscript.ide.core.launch;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +18,8 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipselabs.damos.mscript.DataType;
+import org.eclipselabs.damos.mscript.ide.core.IDECorePlugin;
+import org.eclipselabs.damos.mscript.ide.core.internal.launch.util.ParseUtil;
 import org.eclipselabs.damos.mscript.interpreter.ComputationContext;
 import org.eclipselabs.damos.mscript.interpreter.FunctionObject;
 import org.eclipselabs.damos.mscript.interpreter.IFunctionObject;
@@ -26,8 +28,6 @@ import org.eclipselabs.damos.mscript.interpreter.IVariable;
 import org.eclipselabs.damos.mscript.interpreter.InterpreterContext;
 import org.eclipselabs.damos.mscript.interpreter.value.IValue;
 import org.eclipselabs.damos.mscript.util.TypeUtil;
-import org.eclipselabs.mscript.ide.core.IDECorePlugin;
-import org.eclipselabs.mscript.ide.core.internal.launch.util.ParseUtil;
 
 public class MscriptLaunchConfigurationDelegate extends AbstractMscriptLaunchConfigurationDelegate {
 

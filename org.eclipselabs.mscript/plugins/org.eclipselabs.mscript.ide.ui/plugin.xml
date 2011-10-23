@@ -5,7 +5,7 @@
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
-            class="org.eclipselabs.mscript.ide.ui.launch.MscriptTabGroup"
+            class="org.eclipselabs.damos.mscript.ide.ui.launch.MscriptTabGroup"
             id="org.eclipselabs.mscript.ide.ui.mscriptTabGroup"
             type="org.eclipselabs.mscript.ide.core.mscriptApplication">
       </launchConfigurationTabGroup>

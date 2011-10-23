@@ -1,4 +1,4 @@
-package org.eclipselabs.mscript.ide.core.launch;
+package org.eclipselabs.damos.mscript.ide.core.launch;
 
 import java.io.InputStreamReader;
 import java.io.StringReader;
@@ -27,6 +27,8 @@ import org.eclipselabs.damos.mscript.InvalidDataType;
 import org.eclipselabs.damos.mscript.Module;
 import org.eclipselabs.damos.mscript.computationmodel.ComputationModel;
 import org.eclipselabs.damos.mscript.computationmodel.util.ComputationModelUtil;
+import org.eclipselabs.damos.mscript.ide.core.IDECorePlugin;
+import org.eclipselabs.damos.mscript.ide.core.internal.launch.util.ParseUtil;
 import org.eclipselabs.damos.mscript.il.ILFunctionDefinition;
 import org.eclipselabs.damos.mscript.il.transform.FunctionDefinitionTransformer;
 import org.eclipselabs.damos.mscript.il.transform.IFunctionDefinitionTransformerResult;
@@ -39,8 +41,6 @@ import org.eclipselabs.damos.mscript.interpreter.StaticFunctionEvaluator;
 import org.eclipselabs.damos.mscript.interpreter.value.IValue;
 import org.eclipselabs.damos.mscript.parser.antlr.MscriptParser;
 import org.eclipselabs.damos.mscript.util.MscriptUtil;
-import org.eclipselabs.mscript.ide.core.IDECorePlugin;
-import org.eclipselabs.mscript.ide.core.internal.launch.util.ParseUtil;
 
 public abstract class AbstractMscriptLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
 

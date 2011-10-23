@@ -9,7 +9,7 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.ide.core.launch;
+package org.eclipselabs.damos.mscript.ide.core.launch;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -21,6 +21,8 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipselabs.damos.mscript.ide.core.IDECorePlugin;
+import org.eclipselabs.damos.mscript.ide.core.internal.launch.util.ParseUtil;
 import org.eclipselabs.damos.mscript.interpreter.IFunctionObject;
 import org.eclipselabs.damos.mscript.interpreter.IInterpreter;
 import org.eclipselabs.damos.mscript.interpreter.IInterpreterContext;
@@ -28,8 +30,6 @@ import org.eclipselabs.damos.mscript.interpreter.Interpreter;
 import org.eclipselabs.damos.mscript.interpreter.value.IBooleanValue;
 import org.eclipselabs.damos.mscript.interpreter.value.ISimpleNumericValue;
 import org.eclipselabs.damos.mscript.interpreter.value.IValue;
-import org.eclipselabs.mscript.ide.core.IDECorePlugin;
-import org.eclipselabs.mscript.ide.core.internal.launch.util.ParseUtil;
 
 /**
  * @author Andreas Unger

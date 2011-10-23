@@ -1,4 +1,4 @@
-package org.eclipselabs.mscript.ide.ui;
+package org.eclipselabs.damos.mscript.ide.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

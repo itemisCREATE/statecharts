@@ -9,7 +9,7 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.ide.ui.launch;
+package org.eclipselabs.damos.mscript.ide.ui.launch;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -36,8 +36,8 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.FilteredResourcesSelectionDialog;
-import org.eclipselabs.mscript.ide.core.launch.MscriptLaunchConfigurationDelegate;
-import org.eclipselabs.mscript.ide.ui.IDEUIPlugin;
+import org.eclipselabs.damos.mscript.ide.core.launch.MscriptLaunchConfigurationDelegate;
+import org.eclipselabs.damos.mscript.ide.ui.IDEUIPlugin;
 
 /**
  * @author Andreas Unger

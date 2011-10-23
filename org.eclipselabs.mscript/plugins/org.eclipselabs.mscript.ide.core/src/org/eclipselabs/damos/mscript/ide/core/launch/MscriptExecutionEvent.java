@@ -9,7 +9,7 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.ide.core.launch;
+package org.eclipselabs.damos.mscript.ide.core.launch;
 
 import java.util.EventObject;
 

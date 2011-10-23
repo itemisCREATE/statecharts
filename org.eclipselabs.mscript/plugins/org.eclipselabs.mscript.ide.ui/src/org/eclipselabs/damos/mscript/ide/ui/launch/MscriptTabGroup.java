@@ -1,4 +1,4 @@
-package org.eclipselabs.mscript.ide.ui.launch;
+package org.eclipselabs.damos.mscript.ide.ui.launch;
 
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup;
 import org.eclipse.debug.ui.CommonTab;
