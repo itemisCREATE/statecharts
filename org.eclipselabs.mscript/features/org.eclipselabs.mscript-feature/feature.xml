@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipselabs.mscript"
+      id="org.eclipselabs.damos.mscript"
       label="%featureName"
       version="0.1.0.qualifier"
       provider-name="%providerName">
