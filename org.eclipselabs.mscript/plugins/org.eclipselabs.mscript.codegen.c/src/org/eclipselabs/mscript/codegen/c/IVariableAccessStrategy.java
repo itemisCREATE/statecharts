@@ -11,7 +11,8 @@
 
 package org.eclipselabs.mscript.codegen.c;
 
-import org.eclipselabs.mscript.language.il.VariableAccess;
+import org.eclipselabs.damos.mscript.il.VariableAccess;
+
 
 /**
  * @author Andreas Unger

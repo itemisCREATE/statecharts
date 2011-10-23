@@ -11,12 +11,12 @@
 
 package org.eclipselabs.mscript.codegen.c.internal.util;
 
+import org.eclipselabs.damos.mscript.DataType;
+import org.eclipselabs.damos.mscript.NumericType;
+import org.eclipselabs.damos.mscript.computationmodel.FixedPointFormat;
+import org.eclipselabs.damos.mscript.computationmodel.FloatingPointFormat;
+import org.eclipselabs.damos.mscript.computationmodel.NumberFormat;
 import org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext;
-import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
-import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
-import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
-import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.NumericType;
 
 /**
  * @author Andreas Unger

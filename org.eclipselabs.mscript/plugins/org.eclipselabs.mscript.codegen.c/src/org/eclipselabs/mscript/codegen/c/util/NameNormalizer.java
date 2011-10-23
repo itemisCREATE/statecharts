@@ -16,16 +16,16 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipselabs.damos.mscript.IfStatement;
+import org.eclipselabs.damos.mscript.Statement;
+import org.eclipselabs.damos.mscript.il.Compound;
+import org.eclipselabs.damos.mscript.il.ComputationCompound;
+import org.eclipselabs.damos.mscript.il.ForeachStatement;
+import org.eclipselabs.damos.mscript.il.ILFunctionDefinition;
+import org.eclipselabs.damos.mscript.il.VariableDeclaration;
+import org.eclipselabs.damos.mscript.il.util.ILSwitch;
+import org.eclipselabs.damos.mscript.util.MscriptSwitch;
 import org.eclipselabs.mscript.common.internal.util.Scope;
-import org.eclipselabs.mscript.language.ast.IfStatement;
-import org.eclipselabs.mscript.language.ast.Statement;
-import org.eclipselabs.mscript.language.ast.util.AstSwitch;
-import org.eclipselabs.mscript.language.il.Compound;
-import org.eclipselabs.mscript.language.il.ComputationCompound;
-import org.eclipselabs.mscript.language.il.ForeachStatement;
-import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
-import org.eclipselabs.mscript.language.il.VariableDeclaration;
-import org.eclipselabs.mscript.language.il.util.ILSwitch;
 
 /**
  * @author Andreas Unger
@@ -185,7 +185,7 @@ public class NameNormalizer {
 			return astCompoundNormalizer.doSwitch(object);
 		}
 		
-		private class AstCompoundNormalizer extends AstSwitch<Boolean> {
+		private class AstCompoundNormalizer extends MscriptSwitch<Boolean> {
 			
 			@Override
 			public Boolean caseIfStatement(IfStatement ifStatement) {

@@ -1,21 +1,21 @@
 package org.eclipselabs.mscript.codegen.c.internal;
 
+import org.eclipselabs.damos.mscript.Expression;
+import org.eclipselabs.damos.mscript.IntegerLiteral;
+import org.eclipselabs.damos.mscript.IntegerType;
+import org.eclipselabs.damos.mscript.RealType;
+import org.eclipselabs.damos.mscript.il.LocalVariableDeclaration;
+import org.eclipselabs.damos.mscript.il.StatefulVariableDeclaration;
+import org.eclipselabs.damos.mscript.il.TemplateVariableDeclaration;
+import org.eclipselabs.damos.mscript.il.VariableAccess;
+import org.eclipselabs.damos.mscript.il.VariableReference;
+import org.eclipselabs.damos.mscript.il.util.ILSwitch;
+import org.eclipselabs.damos.mscript.interpreter.value.IArrayValue;
+import org.eclipselabs.damos.mscript.interpreter.value.IBooleanValue;
+import org.eclipselabs.damos.mscript.interpreter.value.ISimpleNumericValue;
+import org.eclipselabs.damos.mscript.interpreter.value.IValue;
 import org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext;
 import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
-import org.eclipselabs.mscript.computation.core.value.IArrayValue;
-import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
-import org.eclipselabs.mscript.computation.core.value.ISimpleNumericValue;
-import org.eclipselabs.mscript.computation.core.value.IValue;
-import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
-import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
-import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
-import org.eclipselabs.mscript.language.il.VariableAccess;
-import org.eclipselabs.mscript.language.il.VariableReference;
-import org.eclipselabs.mscript.language.il.util.ILSwitch;
-import org.eclipselabs.mscript.typesystem.Expression;
-import org.eclipselabs.mscript.typesystem.IntegerLiteral;
-import org.eclipselabs.mscript.typesystem.IntegerType;
-import org.eclipselabs.mscript.typesystem.RealType;
 
 public class VariableAccessGenerator extends ILSwitch<String> {
 

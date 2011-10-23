@@ -15,42 +15,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipselabs.damos.mscript.AdditiveExpression;
+import org.eclipselabs.damos.mscript.BooleanLiteral;
+import org.eclipselabs.damos.mscript.DataType;
+import org.eclipselabs.damos.mscript.EqualityExpression;
+import org.eclipselabs.damos.mscript.Expression;
+import org.eclipselabs.damos.mscript.FunctionCall;
+import org.eclipselabs.damos.mscript.ImpliesExpression;
+import org.eclipselabs.damos.mscript.IntegerLiteral;
+import org.eclipselabs.damos.mscript.LogicalAndExpression;
+import org.eclipselabs.damos.mscript.LogicalOrExpression;
+import org.eclipselabs.damos.mscript.MultiplicativeExpression;
+import org.eclipselabs.damos.mscript.MultiplicativeOperator;
+import org.eclipselabs.damos.mscript.NumericType;
+import org.eclipselabs.damos.mscript.ParenthesizedExpression;
+import org.eclipselabs.damos.mscript.RealLiteral;
+import org.eclipselabs.damos.mscript.RelationalExpression;
+import org.eclipselabs.damos.mscript.StringLiteral;
+import org.eclipselabs.damos.mscript.UnaryExpression;
+import org.eclipselabs.damos.mscript.computationmodel.FixedPointFormat;
+import org.eclipselabs.damos.mscript.computationmodel.FixedPointOperation;
+import org.eclipselabs.damos.mscript.computationmodel.FixedPointOperationKind;
+import org.eclipselabs.damos.mscript.computationmodel.FloatingPointFormat;
+import org.eclipselabs.damos.mscript.computationmodel.NumberFormat;
+import org.eclipselabs.damos.mscript.computationmodel.util.ComputationModelUtil;
+import org.eclipselabs.damos.mscript.il.TemplateVariableDeclaration;
+import org.eclipselabs.damos.mscript.il.VariableReference;
+import org.eclipselabs.damos.mscript.il.builtin.BuiltinFunctionDescriptor;
+import org.eclipselabs.damos.mscript.il.util.ILSwitch;
+import org.eclipselabs.damos.mscript.util.MscriptSwitch;
+import org.eclipselabs.damos.mscript.util.TypeUtil;
 import org.eclipselabs.mscript.codegen.c.internal.VariableAccessGenerator;
 import org.eclipselabs.mscript.codegen.c.internal.util.CastToFixedPointHelper;
 import org.eclipselabs.mscript.codegen.c.internal.util.CastToFloatingPointHelper;
 import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
 import org.eclipselabs.mscript.common.util.PrintAppendable;
-import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
-import org.eclipselabs.mscript.computation.computationmodel.FixedPointOperation;
-import org.eclipselabs.mscript.computation.computationmodel.FixedPointOperationKind;
-import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
-import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
-import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelUtil;
-import org.eclipselabs.mscript.language.ast.AdditiveExpression;
-import org.eclipselabs.mscript.language.ast.EqualityExpression;
-import org.eclipselabs.mscript.language.ast.FunctionCall;
-import org.eclipselabs.mscript.language.ast.ImpliesExpression;
-import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
-import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
-import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
-import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
-import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
-import org.eclipselabs.mscript.language.ast.RelationalExpression;
-import org.eclipselabs.mscript.language.ast.UnaryExpression;
-import org.eclipselabs.mscript.language.ast.util.AstSwitch;
-import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
-import org.eclipselabs.mscript.language.il.VariableReference;
-import org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor;
-import org.eclipselabs.mscript.language.il.util.ILSwitch;
-import org.eclipselabs.mscript.typesystem.BooleanLiteral;
-import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.Expression;
-import org.eclipselabs.mscript.typesystem.IntegerLiteral;
-import org.eclipselabs.mscript.typesystem.NumericType;
-import org.eclipselabs.mscript.typesystem.RealLiteral;
-import org.eclipselabs.mscript.typesystem.StringLiteral;
-import org.eclipselabs.mscript.typesystem.util.TypeSystemSwitch;
-import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 public class ExpressionGenerator implements IExpressionGenerator {
 
@@ -61,7 +60,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 		new ExpressionGeneratorSwitch(context).doSwitch(expression);
 	}
 	
-	private static class ExpressionGeneratorSwitch extends AstSwitch<Boolean> {
+	private static class ExpressionGeneratorSwitch extends MscriptSwitch<Boolean> {
 
 		private IMscriptGeneratorContext context;
 		private IBuiltinFunctionGeneratorLookupTable builtinFunctionGeneratorLookupTable = new BuiltinFunctionGeneratorLookupTable();
@@ -131,8 +130,8 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			DataType rightDataType = getDataType(rightOperand);
 			
 			if (leftDataType instanceof NumericType && rightDataType instanceof NumericType) {
-				DataType dataType1 = TypeSystemUtil.getLeftHandDataType(leftDataType, rightDataType);
-				DataType dataType2 = TypeSystemUtil.getLeftHandDataType(rightDataType, leftDataType);
+				DataType dataType1 = TypeUtil.getLeftHandDataType(leftDataType, rightDataType);
+				DataType dataType2 = TypeUtil.getLeftHandDataType(rightDataType, leftDataType);
 				
 				NumberFormat numberFormat1 = context.getComputationModel().getNumberFormat(dataType1);
 				NumberFormat numberFormat2 = context.getComputationModel().getNumberFormat(dataType2);
@@ -311,7 +310,7 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			return true;
 		}
 		
-		private TypeSystemSwitch<Boolean> typeSystemSwitch = new TypeSystemSwitch<Boolean>() {
+		private MscriptSwitch<Boolean> typeSystemSwitch = new MscriptSwitch<Boolean>() {
 		
 			/* (non-Javadoc)
 			 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseRealLiteral(org.eclipselabs.mscript.language.ast.RealLiteral)

@@ -16,15 +16,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.damos.mscript.Expression;
+import org.eclipselabs.damos.mscript.ExpressionList;
+import org.eclipselabs.damos.mscript.InvalidDataType;
+import org.eclipselabs.damos.mscript.interpreter.ExpressionValueEvaluator;
+import org.eclipselabs.damos.mscript.interpreter.IExpressionValueEvaluator;
+import org.eclipselabs.damos.mscript.interpreter.IInterpreterContext;
+import org.eclipselabs.damos.mscript.interpreter.value.IValue;
+import org.eclipselabs.damos.mscript.parser.antlr.MscriptParser;
 import org.eclipselabs.mscript.ide.core.IDECorePlugin;
-import org.eclipselabs.mscript.language.ast.ExpressionList;
-import org.eclipselabs.mscript.language.interpreter.ExpressionValueEvaluator;
-import org.eclipselabs.mscript.language.interpreter.IExpressionValueEvaluator;
-import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
-import org.eclipselabs.mscript.language.parser.antlr.MscriptParser;
-import org.eclipselabs.mscript.typesystem.Expression;
-import org.eclipselabs.mscript.typesystem.InvalidDataType;
 
 /**
  * @author Andreas Unger

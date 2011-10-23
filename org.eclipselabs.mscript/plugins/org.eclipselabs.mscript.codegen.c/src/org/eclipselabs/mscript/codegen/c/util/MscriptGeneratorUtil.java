@@ -11,21 +11,21 @@
 
 package org.eclipselabs.mscript.codegen.c.util;
 
+import org.eclipselabs.damos.mscript.ArrayDimension;
+import org.eclipselabs.damos.mscript.ArrayType;
+import org.eclipselabs.damos.mscript.BooleanType;
+import org.eclipselabs.damos.mscript.DataType;
+import org.eclipselabs.damos.mscript.Expression;
+import org.eclipselabs.damos.mscript.NumericType;
+import org.eclipselabs.damos.mscript.computationmodel.ComputationModel;
+import org.eclipselabs.damos.mscript.computationmodel.FixedPointFormat;
+import org.eclipselabs.damos.mscript.computationmodel.FloatingPointFormat;
+import org.eclipselabs.damos.mscript.computationmodel.NumberFormat;
 import org.eclipselabs.mscript.codegen.c.ExpressionGenerator;
 import org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext;
 import org.eclipselabs.mscript.codegen.c.internal.util.CastToFixedPointHelper;
 import org.eclipselabs.mscript.codegen.c.internal.util.CastToFloatingPointHelper;
 import org.eclipselabs.mscript.common.util.PrintAppendable;
-import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
-import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
-import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
-import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
-import org.eclipselabs.mscript.typesystem.ArrayDimension;
-import org.eclipselabs.mscript.typesystem.ArrayType;
-import org.eclipselabs.mscript.typesystem.BooleanType;
-import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.Expression;
-import org.eclipselabs.mscript.typesystem.NumericType;
 
 /**
  * @author Andreas Unger

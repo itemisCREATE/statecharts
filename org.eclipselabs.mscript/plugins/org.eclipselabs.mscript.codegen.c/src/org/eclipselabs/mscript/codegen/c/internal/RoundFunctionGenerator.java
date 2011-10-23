@@ -14,6 +14,14 @@ package org.eclipselabs.mscript.codegen.c.internal;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipselabs.damos.mscript.DataType;
+import org.eclipselabs.damos.mscript.Expression;
+import org.eclipselabs.damos.mscript.IntegerType;
+import org.eclipselabs.damos.mscript.MscriptFactory;
+import org.eclipselabs.damos.mscript.NumericType;
+import org.eclipselabs.damos.mscript.computationmodel.FixedPointFormat;
+import org.eclipselabs.damos.mscript.computationmodel.FloatingPointFormat;
+import org.eclipselabs.damos.mscript.computationmodel.NumberFormat;
 import org.eclipselabs.mscript.codegen.c.ExpressionGenerator;
 import org.eclipselabs.mscript.codegen.c.IExpressionGenerator;
 import org.eclipselabs.mscript.codegen.c.IFunctionGenerator;
@@ -21,14 +29,6 @@ import org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext;
 import org.eclipselabs.mscript.codegen.c.internal.util.Caster;
 import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
 import org.eclipselabs.mscript.common.util.PrintAppendable;
-import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
-import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
-import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
-import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.Expression;
-import org.eclipselabs.mscript.typesystem.IntegerType;
-import org.eclipselabs.mscript.typesystem.NumericType;
-import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 
 /**
  * @author Andreas Unger
@@ -52,7 +52,7 @@ public class RoundFunctionGenerator implements IFunctionGenerator {
 		}
 		
 		NumericType argumentNumericType = (NumericType) argumentDataType;
-		IntegerType resultDataType = TypeSystemFactory.eINSTANCE.createIntegerType();
+		IntegerType resultDataType = MscriptFactory.eINSTANCE.createIntegerType();
 		resultDataType.setUnit(EcoreUtil.copy(argumentNumericType.getUnit()));
 		
 		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(argumentDataType);

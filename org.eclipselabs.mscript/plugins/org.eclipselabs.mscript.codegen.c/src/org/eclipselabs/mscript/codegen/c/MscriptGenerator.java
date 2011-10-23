@@ -15,17 +15,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipselabs.damos.mscript.DataType;
+import org.eclipselabs.damos.mscript.il.ComputationCompound;
+import org.eclipselabs.damos.mscript.il.ILFunctionDefinition;
+import org.eclipselabs.damos.mscript.il.InputVariableDeclaration;
+import org.eclipselabs.damos.mscript.il.InstanceVariableDeclaration;
+import org.eclipselabs.damos.mscript.il.OutputVariableDeclaration;
+import org.eclipselabs.damos.mscript.il.StatefulVariableDeclaration;
+import org.eclipselabs.damos.mscript.il.util.ILUtil;
+import org.eclipselabs.damos.mscript.interpreter.value.IValue;
 import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
 import org.eclipselabs.mscript.common.util.PrintAppendable;
-import org.eclipselabs.mscript.computation.core.value.IValue;
-import org.eclipselabs.mscript.language.il.ComputationCompound;
-import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
-import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
-import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
-import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
-import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
-import org.eclipselabs.mscript.language.il.util.ILUtil;
-import org.eclipselabs.mscript.typesystem.DataType;
 
 /**
  * @author Andreas Unger

@@ -11,7 +11,8 @@
 
 package org.eclipselabs.mscript.codegen.c;
 
-import org.eclipselabs.mscript.language.il.Compound;
+import org.eclipselabs.damos.mscript.il.Compound;
+
 
 /**
  * @author Andreas Unger

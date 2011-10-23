@@ -12,24 +12,24 @@
 package org.eclipselabs.mscript.codegen.c;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipselabs.damos.mscript.ArrayDimension;
+import org.eclipselabs.damos.mscript.ArrayType;
+import org.eclipselabs.damos.mscript.DataType;
+import org.eclipselabs.damos.mscript.Expression;
+import org.eclipselabs.damos.mscript.IfStatement;
+import org.eclipselabs.damos.mscript.Statement;
+import org.eclipselabs.damos.mscript.il.Assignment;
+import org.eclipselabs.damos.mscript.il.Compound;
+import org.eclipselabs.damos.mscript.il.ForeachStatement;
+import org.eclipselabs.damos.mscript.il.LocalVariableDeclaration;
+import org.eclipselabs.damos.mscript.il.VariableDeclaration;
+import org.eclipselabs.damos.mscript.il.util.ILSwitch;
+import org.eclipselabs.damos.mscript.interpreter.value.IValue;
+import org.eclipselabs.damos.mscript.util.MscriptSwitch;
+import org.eclipselabs.damos.mscript.util.TypeUtil;
 import org.eclipselabs.mscript.codegen.c.internal.VariableAccessGenerator;
 import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
 import org.eclipselabs.mscript.common.util.PrintAppendable;
-import org.eclipselabs.mscript.computation.core.value.IValue;
-import org.eclipselabs.mscript.language.ast.IfStatement;
-import org.eclipselabs.mscript.language.ast.Statement;
-import org.eclipselabs.mscript.language.ast.util.AstSwitch;
-import org.eclipselabs.mscript.language.il.Assignment;
-import org.eclipselabs.mscript.language.il.Compound;
-import org.eclipselabs.mscript.language.il.ForeachStatement;
-import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
-import org.eclipselabs.mscript.language.il.VariableDeclaration;
-import org.eclipselabs.mscript.language.il.util.ILSwitch;
-import org.eclipselabs.mscript.typesystem.ArrayDimension;
-import org.eclipselabs.mscript.typesystem.ArrayType;
-import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.Expression;
-import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
  * @author Andreas Unger
@@ -122,7 +122,7 @@ public class CompoundGenerator implements ICompoundGenerator {
 			
 			String itVarName = iterationVariableDeclaration.getName();
 			String itVarDecl = MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), getDataType(iterationVariableDeclaration), itVarName, false);
-			int size = TypeSystemUtil.getArraySize(collectionArrayType);
+			int size = TypeUtil.getArraySize(collectionArrayType);
 			
 			out.println("{");
 			out.printf("%s %s_i;\n", MscriptGeneratorUtil.getIndexCDataType(context.getComputationModel(), size), itVarName);
@@ -187,7 +187,7 @@ public class CompoundGenerator implements ICompoundGenerator {
 			return value != null ? value.getDataType() : null;
 		}
 
-		private class AstCompoundGeneratorSwitch extends AstSwitch<Boolean> {
+		private class AstCompoundGeneratorSwitch extends MscriptSwitch<Boolean> {
 			
 			@Override
 			public Boolean caseIfStatement(IfStatement ifStatement) {

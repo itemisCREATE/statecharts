@@ -20,27 +20,27 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
-import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelUtil;
-import org.eclipselabs.mscript.computation.core.ComputationContext;
-import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.damos.mscript.DataType;
+import org.eclipselabs.damos.mscript.DataTypeSpecifier;
+import org.eclipselabs.damos.mscript.FunctionDefinition;
+import org.eclipselabs.damos.mscript.InvalidDataType;
+import org.eclipselabs.damos.mscript.Module;
+import org.eclipselabs.damos.mscript.computationmodel.ComputationModel;
+import org.eclipselabs.damos.mscript.computationmodel.util.ComputationModelUtil;
+import org.eclipselabs.damos.mscript.il.ILFunctionDefinition;
+import org.eclipselabs.damos.mscript.il.transform.FunctionDefinitionTransformer;
+import org.eclipselabs.damos.mscript.il.transform.IFunctionDefinitionTransformerResult;
+import org.eclipselabs.damos.mscript.interpreter.ComputationContext;
+import org.eclipselabs.damos.mscript.interpreter.IInterpreterContext;
+import org.eclipselabs.damos.mscript.interpreter.IStaticEvaluationContext;
+import org.eclipselabs.damos.mscript.interpreter.InterpreterContext;
+import org.eclipselabs.damos.mscript.interpreter.StaticEvaluationContext;
+import org.eclipselabs.damos.mscript.interpreter.StaticFunctionEvaluator;
+import org.eclipselabs.damos.mscript.interpreter.value.IValue;
+import org.eclipselabs.damos.mscript.parser.antlr.MscriptParser;
+import org.eclipselabs.damos.mscript.util.MscriptUtil;
 import org.eclipselabs.mscript.ide.core.IDECorePlugin;
 import org.eclipselabs.mscript.ide.core.internal.launch.util.ParseUtil;
-import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.FunctionDefinition;
-import org.eclipselabs.mscript.language.ast.Module;
-import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
-import org.eclipselabs.mscript.language.il.transform.FunctionDefinitionTransformer;
-import org.eclipselabs.mscript.language.il.transform.IFunctionDefinitionTransformerResult;
-import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
-import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
-import org.eclipselabs.mscript.language.interpreter.InterpreterContext;
-import org.eclipselabs.mscript.language.interpreter.StaticEvaluationContext;
-import org.eclipselabs.mscript.language.interpreter.StaticFunctionEvaluator;
-import org.eclipselabs.mscript.language.parser.antlr.MscriptParser;
-import org.eclipselabs.mscript.language.util.LanguageUtil;
-import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.InvalidDataType;
 
 public abstract class AbstractMscriptLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
 
@@ -206,7 +206,7 @@ public abstract class AbstractMscriptLaunchConfigurationDelegate extends LaunchC
 		}
 
 		Module module = (Module) parseResult.getRootASTElement();
-		FunctionDefinition functionDefinition = LanguageUtil.getFunctionDefinition(module, functionName);
+		FunctionDefinition functionDefinition = MscriptUtil.getFunctionDefinition(module, functionName);
 		if (functionDefinition == null) {
 			throw new CoreException(new Status(IStatus.ERROR, IDECorePlugin.PLUGIN_ID, "Function '" + functionName + "' not found"));
 		}

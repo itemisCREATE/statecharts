@@ -11,7 +11,7 @@
 
 package org.eclipselabs.mscript.codegen.c;
 
-import org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor;
+import org.eclipselabs.damos.mscript.il.builtin.BuiltinFunctionDescriptor;
 
 /**
  * @author Andreas Unger

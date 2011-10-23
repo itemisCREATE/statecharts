@@ -19,8 +19,8 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStreamsProxy;
-import org.eclipselabs.mscript.language.interpreter.IFunctionObject;
-import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
+import org.eclipselabs.damos.mscript.interpreter.IFunctionObject;
+import org.eclipselabs.damos.mscript.interpreter.IInterpreterContext;
 
 /**
  * @author Andreas Unger

@@ -17,17 +17,17 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipselabs.mscript.computation.core.ComputationContext;
-import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.damos.mscript.DataType;
+import org.eclipselabs.damos.mscript.interpreter.ComputationContext;
+import org.eclipselabs.damos.mscript.interpreter.FunctionObject;
+import org.eclipselabs.damos.mscript.interpreter.IFunctionObject;
+import org.eclipselabs.damos.mscript.interpreter.IInterpreterContext;
+import org.eclipselabs.damos.mscript.interpreter.IVariable;
+import org.eclipselabs.damos.mscript.interpreter.InterpreterContext;
+import org.eclipselabs.damos.mscript.interpreter.value.IValue;
+import org.eclipselabs.damos.mscript.util.TypeUtil;
 import org.eclipselabs.mscript.ide.core.IDECorePlugin;
 import org.eclipselabs.mscript.ide.core.internal.launch.util.ParseUtil;
-import org.eclipselabs.mscript.language.interpreter.FunctionObject;
-import org.eclipselabs.mscript.language.interpreter.IFunctionObject;
-import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
-import org.eclipselabs.mscript.language.interpreter.IVariable;
-import org.eclipselabs.mscript.language.interpreter.InterpreterContext;
-import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 public class MscriptLaunchConfigurationDelegate extends AbstractMscriptLaunchConfigurationDelegate {
 
@@ -108,7 +108,7 @@ public class MscriptLaunchConfigurationDelegate extends AbstractMscriptLaunchCon
 					if (dataTypes[i] == null) {
 						dataTypes[i] = value.getDataType();
 					} else {
-						dataTypes[i] = TypeSystemUtil.getLeftHandDataType(dataTypes[i], value.getDataType());
+						dataTypes[i] = TypeUtil.getLeftHandDataType(dataTypes[i], value.getDataType());
 						if (dataTypes[i] == null) {
 							throw new CoreException(new Status(IStatus.ERROR, IDECorePlugin.PLUGIN_ID, "Incompatible values in '"
 									+ inputFile.getName() + "'"));

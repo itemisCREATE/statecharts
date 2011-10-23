@@ -11,9 +11,9 @@
 
 package org.eclipselabs.mscript.codegen.c;
 
+import org.eclipselabs.damos.mscript.computationmodel.ComputationModel;
+import org.eclipselabs.damos.mscript.interpreter.IStaticEvaluationContext;
 import org.eclipselabs.mscript.codegen.c.internal.DefaultVariableAccessStrategy;
-import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
-import org.eclipselabs.mscript.language.interpreter.IStaticEvaluationContext;
 
 /**
  * @author Andreas Unger

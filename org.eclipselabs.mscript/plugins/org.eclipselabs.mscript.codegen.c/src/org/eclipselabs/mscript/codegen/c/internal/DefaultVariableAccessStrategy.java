@@ -11,13 +11,13 @@
 
 package org.eclipselabs.mscript.codegen.c.internal;
 
+import org.eclipselabs.damos.mscript.il.InputVariableDeclaration;
+import org.eclipselabs.damos.mscript.il.InstanceVariableDeclaration;
+import org.eclipselabs.damos.mscript.il.OutputVariableDeclaration;
+import org.eclipselabs.damos.mscript.il.StatefulVariableDeclaration;
+import org.eclipselabs.damos.mscript.il.VariableAccess;
+import org.eclipselabs.damos.mscript.il.util.ILSwitch;
 import org.eclipselabs.mscript.codegen.c.IVariableAccessStrategy;
-import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
-import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
-import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
-import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
-import org.eclipselabs.mscript.language.il.VariableAccess;
-import org.eclipselabs.mscript.language.il.util.ILSwitch;
 
 /**
  * @author Andreas Unger

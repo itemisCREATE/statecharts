@@ -61,34 +61,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipselabs.mscript.computation.computationmodel"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipselabs.mscript.computation.computationmodel.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipselabs.mscript.computation.computationmodel.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipselabs.mscript.computation.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipselabs.mscript.ide.core"
          download-size="0"
          install-size="0"
@@ -97,34 +69,6 @@
 
    <plugin
          id="org.eclipselabs.mscript.ide.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipselabs.mscript.language"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipselabs.mscript.language.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipselabs.mscript.typesystem"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipselabs.mscript.typesystem.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"

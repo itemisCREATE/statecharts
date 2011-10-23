@@ -11,8 +11,8 @@
 
 package org.eclipselabs.mscript.codegen.c;
 
+import org.eclipselabs.damos.mscript.il.builtin.BuiltinFunctionDescriptor;
 import org.eclipselabs.mscript.codegen.c.internal.RoundFunctionGenerator;
-import org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor;
 
 /**
  * @author Andreas Unger
