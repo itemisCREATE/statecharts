@@ -92,3 +92,14 @@ String getOperator(RelationalOperator operator) :
 	  case (RelationalOperator::notEquals) : " != "
 	  default : ""
 	};
+
+String eventTypeToString(Type type) : 
+  switch (type) {
+  case (Type::void) : "void"
+  case (Type::real) : "real"
+  case (Type::integer) : "integer"
+  case (Type::boolean) : "boolean"
+  case (Type::string)  : "strng"
+  default : "unknownType"
+  };
+	

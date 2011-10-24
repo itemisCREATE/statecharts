@@ -26,7 +26,14 @@ DataRepository::DataRepository() : eventDataList(0), maxDataListItems(0)
 void DataRepository::clearEventData()
 {
 	for(uint32_t i(0);i<maxDataListItems; ++i) {
-//		delete eventDataList[i];
+		eventDataList[i] = 0;
+	}
+}
+
+void DataRepository::deleteEventData()
+{
+	for(uint32_t i(0);i<maxDataListItems; ++i) {
+		delete eventDataList[i];
 		eventDataList[i] = 0;
 	}
 }
