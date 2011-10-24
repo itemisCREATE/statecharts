@@ -35,7 +35,6 @@ class «((EventDefinition)ev).name» : public _Event {
     «((EventDefinition)ev).name»() : _Event((uint32_t)ev_«((EventDefinition)ev).name.toLowerCase()») {} 
     «eventTypeToString(((EventDefinition)ev).type)» value;    
 };
-  // internal variables unhandled
 «ENDFOREACH»
  
 
