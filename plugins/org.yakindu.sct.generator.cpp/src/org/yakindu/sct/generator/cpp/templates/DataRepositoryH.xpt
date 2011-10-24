@@ -30,7 +30,8 @@ protected:
 
 	void clearEventData();
 	void setEventData(const Event& data);
-
+    void deleteEventData();
+     
 public:
 	DataRepository();
 	DataRepository(const uint32_t maxEvents);

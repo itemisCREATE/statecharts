@@ -19,15 +19,15 @@ Templates for the main statechart cpp file.
 // ActionCode for Step not defined
 «ENDDEFINE»
 
-«DEFINE ActionCode FOR Execution»
+«DEFINE ActionCode FOR Execution -»
 	«this.statement.toCppCode()»
 «ENDDEFINE»
 
-«DEFINE ActionCode FOR Call»
+«DEFINE ActionCode FOR Call -»
 «this.step.functionName()»();
 «ENDDEFINE»
 
-«DEFINE ActionCode FOR Sequence»
+«DEFINE ActionCode FOR Sequence -»
   «EXPAND ActionCode FOREACH this.steps»
 «ENDDEFINE»
 
@@ -47,72 +47,72 @@ Templates for the main statechart cpp file.
   ENDIF -»«
 ENDDEFINE»
 
-«DEFINE ActionCode FOR Reaction»
+«DEFINE ActionCode FOR Reaction -»
   «EXPAND ActionCode FOR this.effect» 
 «ENDDEFINE»
 
-«DEFINE ActionCode FOR If»
+«DEFINE ActionCode FOR If -»
 if («EXPAND ActionCode FOR this.check») { 
-  «EXPAND ActionCode FOR this.thenStep»
+  «EXPAND ActionCode FOR this.thenStep -»
 }
 else {
-  «EXPAND ActionCode FOR this.elseStep»
+  «EXPAND ActionCode FOR this.elseStep -»
 }
 «ENDDEFINE»
 
-«DEFINE ActionCode FOR EnterState»
+«DEFINE ActionCode FOR EnterState -»
 state[0] = _«this.state.simpleName»;
 «ENDDEFINE»
 
-«DEFINE ActionCode FOR ExitState»
+«DEFINE ActionCode FOR ExitState -»
 state[0] = last_state;
 «ENDDEFINE»
 
-«DEFINE ConditionMethodsImplement FOR ExecutionState»
-  «FOREACH reactions AS r»
+«DEFINE ConditionMethodsImplement FOR ExecutionState -»
+  «FOREACH reactions AS r -»
   «IF r.check != null -»
 bool «StNameCy()»::«r.check.functionName()»() {
   return (	«r.check.condition.toCppCode()» );
 }
   «ENDIF -»
-  «ENDFOREACH»
+  «ENDFOREACH -»
 «ENDDEFINE»
 
-«DEFINE StatementMethodsImplement FOR ExecutionState»
-  «FOREACH reactions AS r»
+«DEFINE StatementMethodsImplement FOR ExecutionState -»
+  «FOREACH reactions AS r -»
 void «StNameCy()»::«r.effect.functionName()»() {
-  «EXPAND ActionCode FOR r.effect»
+  «EXPAND ActionCode FOR r.effect -»
 }
   «ENDFOREACH»
 «ENDDEFINE»
 
-«DEFINE CycleCode FOR Cycle» 
+«DEFINE CycleCode FOR Cycle- » 
 «EXPAND ActionCode FOREACH this.steps»
 «ENDDEFINE»
 
-«DEFINE CycleMethodsImplement FOR ExecutionState»
+«DEFINE CycleMethodsImplement FOR ExecutionState -»
 void «StNameCy()»::cycle_«this.simpleName»()
 {
 	«EXPAND CycleCode FOR cycle»
 }
 «ENDDEFINE»
 
-«DEFINE EnterMethodImplement FOR ExecutionState»
-«IF this.entryAction != null»
+«DEFINE EnterMethodImplement FOR ExecutionState -»
+«IF this.entryAction != null -»
 void «StNameCy()»::«this.entryAction.entryActionFunctionName()»()
 {
-«EXPAND ActionCode FOR this.entryAction»
+«EXPAND ActionCode FOR this.entryAction -»
 }
-«ENDIF»
+«ENDIF -»
 «ENDDEFINE»
 
-«DEFINE ExitMethodImplement FOR ExecutionState»
-«IF this.exitAction != null»
+«DEFINE ExitMethodImplement FOR ExecutionState -»
+«IF this.exitAction != null -»
 void «StNameCy()»::«this.exitAction.exitActionFunctionName()»()
 {
-«EXPAND ActionCode FOR this.exitAction»
+«EXPAND ActionCode FOR this.exitAction -»
 }
-«ENDIF»
+«ENDIF -»
 «ENDDEFINE»
 
 «DEFINE file FOR ExecutionFlow»
@@ -126,21 +126,32 @@ void «StNameCy()»::«this.exitAction.exitActionFunctionName()»()
 «StNameCy()»::~«StNameCy()»() {
 }
 
-«EXPAND ConditionMethodsImplement FOREACH this.states»
-
-«EXPAND StatementMethodsImplement FOREACH this.states»
-
-«EXPAND CycleMethodsImplement FOREACH this.states»
-
-«EXPAND EnterMethodImplement FOREACH this.states»
-
-«EXPAND ExitMethodImplement FOREACH this.states»
-
+«EXPAND ConditionMethodsImplement FOREACH this.states -»
+«EXPAND StatementMethodsImplement FOREACH this.states -»
+«EXPAND CycleMethodsImplement FOREACH this.states -»
+«EXPAND EnterMethodImplement FOREACH this.states -»
+«EXPAND ExitMethodImplement FOREACH this.states -»
 
 void «StNameCy()»::init()
 {
-	«EXPAND ActionCode FOREACH this.enterSequence.steps»
+	«EXPAND ActionCode FOREACH this.enterSequence.steps -»
 }
+
+«FOREACH declaredEvents() AS event -»
+«IF (((EventDefinition)event).type == Type::void) -»
+void set«((EventDefinition)event).name.toFirstUpper()»()
+«ELSE -»
+void set«((EventDefinition)event).name.toFirstUpper()»(«eventTypeToString(((EventDefinition)event).type)» value)
+«ENDIF -»
+{
+	«((EventDefinition)event).name»* ev(new «((EventDefinition)event).name»);
+
+«IF (((EventDefinition)event).type != Type::void) -»
+	ev->value = value;
+«ENDIF -»
+	queueEvent(ev);
+}
+«ENDFOREACH -»
 
 /* Yet unimplemented
 void «StNameCy()»::exit()

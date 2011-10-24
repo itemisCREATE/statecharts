@@ -31,8 +31,8 @@ class «StNameCy()»: public Statemachine_cy, public «DRName()» {
 public:
 	enum States {
 	    «FOREACH this.states AS exState-»
-	      _«exState.simpleName»,
-	    «ENDFOREACH»
+	    _«exState.simpleName -»,
+	    «ENDFOREACH -»
 		last_state
 	};		
 
@@ -42,35 +42,35 @@ protected:
 	  «FOREACH state.reactions AS reaction -»
 	  «IF reaction.check != null -»
 	bool «reaction.check.functionName()»();
-	  «ENDIF»
-	  «ENDFOREACH»
-	«ENDFOREACH»
+	  «ENDIF -»
+	  «ENDFOREACH -»
+	«ENDFOREACH -»
 	
 	/* actions */
 	«FOREACH states AS state -»
 	  «FOREACH state.reactions AS reaction -»
 	void «reaction.effect.functionName()»();
-	  «ENDFOREACH»
-	«ENDFOREACH»
+	  «ENDFOREACH -»
+	«ENDFOREACH -»
 
 	/* cycles */
 	«FOREACH states AS state -»
 	void cycle_«state.simpleName»();
-	«ENDFOREACH»
+	«ENDFOREACH -»
 	
 	/* entrys */
 	«FOREACH states AS state -»
-	«IF state.entryAction != null»
+	«IF state.entryAction != null -»
 	void «state.entryAction.entryActionFunctionName()»();
-	«ENDIF»
-	«ENDFOREACH»
+	«ENDIF -»
+	«ENDFOREACH -»
 	
 	/*exits */
 	«FOREACH states AS state -»
-	«IF state.exitAction != null»
+	«IF state.exitAction != null -»
 	void «state.exitAction.exitActionFunctionName()»();
-	«ENDIF»
-	«ENDFOREACH»
+	«ENDIF -»
+	«ENDFOREACH -»
 	
 	virtual void _runCycle();
 
@@ -81,8 +81,13 @@ public:
 
 	virtual void init();
 
-	//virtual void queueEvent(const Event& ev);
-
+	«FOREACH declaredEvents() AS event -»
+	«IF (((EventDefinition)event).type == Type::void) -»
+	void set«((EventDefinition)event).name.toFirstUpper()»();
+	«ELSE -»
+	void set«((EventDefinition)event).name.toFirstUpper()»(«eventTypeToString(((EventDefinition)event).type)» value);
+	«ENDIF -»
+    «ENDFOREACH -»
 };
 
 //}; // namespace

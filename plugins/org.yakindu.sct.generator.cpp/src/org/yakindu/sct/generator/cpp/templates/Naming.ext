@@ -28,7 +28,8 @@ cached String functionName(Step step) :
 	(step.isEntryAction()) ? step.entryActionFunctionName() : ( 
 	(step.isExitAction()) ? step.exitActionFunctionName() : 
 	" !! unknown function type !!" )));
- 
+
+
 String actionFunctionName(Step this) : "actions_" + this.reaction().state().simpleName + "_" + this.reaction().name; 
 String checkFunctionName(Step this) : "condition_" + this.reaction().state().simpleName + "_" + this.reaction().name; 
 String entryActionFunctionName(Step this) : "entryActions_" + this.state().simpleName; 
