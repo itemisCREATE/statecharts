@@ -26,13 +26,14 @@ typedef enum {
 «FOREACH this.declaredEvents() AS ev»
   ev_«((EventDefinition)ev).name.toLowerCase()»,
 «ENDFOREACH»
-	event_last
+  event_last
 } EventID;
 
 «FOREACH this.declaredEvents() AS ev»
 typedef struct { 
   _Event baseEvent;
-  «REM» event variables go here «ENDREM»
+  «eventTypeToString(((EventDefinition)ev).type)» value;    
+  
 } «((EventDefinition)ev).name»;
 «ENDFOREACH»
  
