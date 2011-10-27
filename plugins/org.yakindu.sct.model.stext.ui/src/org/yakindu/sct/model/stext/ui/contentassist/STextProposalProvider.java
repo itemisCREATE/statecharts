@@ -95,11 +95,12 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 					.getGroup().eContents()));
 			keywords.addAll(getKeywords(grammarAccess.getTimeEventTypeAccess()
 					.getAlternatives().eContents()));
+			keywords.add(grammarAccess.getDirectionAccess().getLOCALLocalKeyword_0_0());
 		}
 
 		if (contentAssistContext.getCurrentModel() instanceof InternalScope) {
-			keywords.addAll(getKeywords(grammarAccess.getDirectionAccess()
-					.getAlternatives().eContents()));
+			keywords.add(grammarAccess.getDirectionAccess().getINInKeyword_1_0());
+			keywords.add(grammarAccess.getDirectionAccess().getOUTOutKeyword_2_0());
 		}
 
 		if (!keywords.contains(keyword)) {
