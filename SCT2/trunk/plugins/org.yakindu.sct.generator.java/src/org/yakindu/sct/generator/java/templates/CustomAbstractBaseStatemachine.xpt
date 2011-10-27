@@ -1,0 +1,293 @@
+«REM»
+Copyright (c) 2011 committers of YAKINDU and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+Contributors:
+	committers of YAKINDU - initial API and implementation
+ 	
+@author Markus Muehlbrandt - Initial contribution and API
+«ENDREM»
+
+«IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
+«IMPORT ecore»
+
+«IMPORT org::yakindu::sct::generator::java::templates»
+«EXTENSION org::yakindu::sct::generator::java::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::java::templates::Naming»
+
+«DEFINE ActionCode FOR Step-»
+// ActionCode for Step not defined
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR ScheduleTimeEvent-»
+getTimerHandler().setTimer(«timeEvent.getName()», «timeValue.toCode()», «timeEvent.periodic»);
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR UnscheduleTimeEvent-»
+getTimerHandler().resetTimer(«timeEvent.getName()»);
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR Execution-»
+	«statement.toCode()»
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR Call-»
+«this.step.functionName()»();
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR Sequence-»
+	«EXPAND ActionCode FOREACH this.steps»
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR Check -»
+  «IF this != null -»
+«this.condition.toCode() -»
+  «ELSE -»
+ true «
+ ENDIF -»«
+  ENDDEFINE»
+
+«DEFINE ActionCode FOR CheckRef -»
+«IF this.check != null -»
+«this.check.functionName()»(Collection<?> occuredEvents) «
+ELSE -»
+true 
+«ENDIF -»
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR Reaction-»
+«EXPAND ActionCode FOR this.effect-» 
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR If-»
+if («EXPAND ActionCode FOR this.check») { 
+	«EXPAND ActionCode FOR this.thenStep-»
+}
+«IF elseStep != null-»
+else {
+	«EXPAND ActionCode FOR this.elseStep-»
+}
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR EnterState-»
+	activeStates.add(State.«state.getName()»);
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR ExitState-»
+	activeStates.remove(States.«state.getName()»);
+«ENDDEFINE»
+
+«DEFINE ConditionMethodsImplement FOR ExecutionState-»
+	«FOREACH reactions AS r-»
+		«IF r.check != null -»
+	private bool «r.check.functionName()»(Collection<?> occuredEvents) {
+		«IF r.check.condition != null-»
+		return «r.check.condition.toCode()»;
+		«ELSE-»
+		return true;
+  	«ENDIF-»
+	}
+	«ENDIF -»
+  «ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE StatementMethodsImplement FOR ExecutionState-»
+  «FOREACH reactions AS r-»
+	private void «r.effect.functionName()»() {
+		«EXPAND ActionCode FOR r.effect-»
+	}
+  «ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE CycleCode FOR Cycle-» 
+«EXPAND ActionCode FOREACH this.steps-»
+«ENDDEFINE»
+
+«DEFINE CycleMethodsImplement FOR ExecutionState-»
+	private void cycle«getName()»(Collection<?> occuredEvents) {
+		«EXPAND CycleCode FOR cycle-»
+	}
+«ENDDEFINE»
+
+«DEFINE EnterMethodImplement FOR ExecutionState-»
+	«IF this.entryAction != null-»
+	private void «this.entryAction.entryActionFunctionName()»() {
+		«EXPAND ActionCode FOR this.entryAction-»
+	}
+	«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE ExitMethodImplement FOR ExecutionState-»
+	«IF this.exitAction != null-»
+	private void «this.exitAction.exitActionFunctionName()»() {
+		«EXPAND ActionCode FOR this.exitAction-»
+	}
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE file FOR ExecutionFlow-»
+«FILE getAbstractStatemachineName()+'.java'-»
+«getLicenseHeader()»
+package org.yakindu.sct.runtime.java.«getStatemachineName()»;
+
+import java.util.Collection;
+import java.util.EnumSet;
+import java.util.Set;
+
+import org.yakindu.sct.runtime.java.base.DataType;
+import org.yakindu.sct.runtime.java.base.IStatemachine;
+
+public abstract class «getAbstractStatemachineName()» implements ITimedStatemachine<Event> {
+
+	public enum State {
+		«FOREACH states AS state-»
+	      «state.getName()»,
+	    «ENDFOREACH-»
+	};
+	«REM»unnamed interface valued events«ENDREM»
+	«FOREACH getUnnamedInterfaceScopeEvents() AS event-»
+	private «event.type.getJavaType()» «event.getValueName()»;
+	«ENDFOREACH-»
+	«REM»unnamed interface variables«ENDREM»
+	«FOREACH getUnnamedInterfaceScopeVariables() AS variable-»
+	private «variable.type.getJavaType()» «variable.getValueName()»;
+	«ENDFOREACH-»
+	«REM»internal scope valued events«ENDREM»
+	«FOREACH getInternalScopeValuedEvents() AS event-»
+  	private «event.type.getJavaType()» «event.getValueName()»;
+	«ENDFOREACH-»
+	«REM»internal variables«ENDREM»
+	«FOREACH getInternalScopeVariables() AS variable-»
+	private «variable.type.getJavaType()» «variable.getValueName()»;
+	«ENDFOREACH-»
+
+	private Set<State> activeStates = EnumSet.noneOf(State.class);
+	
+	private ITimerHandler<Event> timerHandler;
+	
+	protected abstract Collection<Events> getOccuredEvents();
+	
+	protected abstract Collection<Events> getOutEvents();
+
+	«FOREACH getNamedInterfaceScope() AS interface-»
+	protected abstract «interface.getAbstractInterfaceName()» get«interface.getAbstractInterfaceName()»();
+	«ENDFOREACH-»
+		
+	protected boolean eventOccured() {
+		return !getOccuredEvents().isEmpty();
+	}
+	
+	@Override
+	public void init() {
+		«EXPAND ActionCode FOREACH enterSequence.steps»
+	}
+	
+	@Override
+	public void raiseTimeEvent(Event timeEvent) {
+		getOccuredEvents().add(timeEvent);
+	}
+
+	@Override
+	public void setTimerHandler(ITimerHandler<Event> timerHandler) {
+		this.timerHandler = timerHandler;
+	}
+
+	@Override
+	public ITimerHandler<Event> getTimerHandler() {
+		if (timerHandler == null) {
+			timerHandler = new TimerHandler<Event>(this);
+		}
+		return timerHandler;
+	}
+	
+	«FOREACH getNamedInterfaceScope() AS interface-»
+	public «interface.getInterfaceName()» get«interface.getInterfaceName()» {
+		return get«interface.getAbstractInterfaceName()»();
+	}
+	«ENDFOREACH-»
+	
+	«REM»Generate raise and isRaised... Methods for Interface Scopes«ENDREM»
+	«FOREACH getUnnamedInterfaceScopeEvents() AS event-»
+	«IF event.direction == Direction::OUT-»
+	public boolean isRaised«event.getInternalName()»() {
+		return getOutEvents().contains(Event.«event.getInternalName()»);
+	}
+	private void raise«event.getInternalName()»(){
+		getOccuredEvents().add(Event.«event.getInternalName()»);
+		getOutEvents().add(Event.«event.getInternalName()»);
+	}
+	«ELSE-»
+	private boolean isRaised«event.getInternalName()»() {
+		return getOccuredEvents().contains(Event.«event.getInternalName()»);
+	}
+	
+	public void raise«event.getInternalName().toFirstUpper()»(){
+		getOccuredEvents().add(Event.«event.getInternalName()»);
+	}
+	«ENDIF-»
+	«ENDFOREACH-»
+	«FOREACH getInternalScopeEvents() AS event-»
+	private boolean isRaised«event.getInternalName()»() {
+		return getOccuredEvents().contains(Event.«event.getInternalName()»);
+	}
+	
+	private void raise«event.getInternalName()»(){
+		getOccuredEvents().add(Event.«event.getInternalName()»);
+	}
+	«ENDFOREACH-»
+	«REM»Generate getters and setters for valued events and variables«ENDREM»
+	«FOREACH getUnnamedInterfaceScopeValuedEvents() AS event-»
+	«event.getterVisibility()» «event.type.getJavaType()» get«event.getValueName().toFirstUpper()»(){
+		return «event.getValueName()»;
+	}
+	
+	«event.setterVisibility()» void set«event.getValueName().toFirstUpper()»(«event.type.getJavaType()» value) {
+		«event.getValueName()» = value;
+	}
+	«ENDFOREACH-»
+	«FOREACH getUnnamedInterfaceScopeVariables() AS variable-»
+	public «variable.type.getJavaType()» get«variable.getValueName().toFirstUpper()»(){
+		return «variable.getValueName()»;
+	}
+	«variable.setterValueVisibility()» void set«variable.getValueName().toFirstUpper()»(«variable.type.getJavaType()» value) {
+		«variable.getValueName()» = value;
+	}
+	«ENDFOREACH-»
+	«FOREACH getInternalScopeValuedEvents() AS event-»
+	private «event.type.getJavaType()» get«event.getValueName().toFirstUpper()»(){
+		return «event.getValueName()»;
+	}
+	
+	private void set«event.getValueName().toFirstUpper()»(«event.type.getJavaType()» value) {
+		«event.getValueName()» = value;
+	}
+	«ENDFOREACH-»
+
+«EXPAND ConditionMethodsImplement FOREACH this.states-»
+«EXPAND StatementMethodsImplement FOREACH this.states-»
+«EXPAND CycleMethodsImplement FOREACH this.states-»
+«EXPAND EnterMethodImplement FOREACH this.states-»
+«EXPAND ExitMethodImplement FOREACH this.states-»
+
+	public void runCycle(Collection<?> events) {
+		getOutEvents().clear();
+		for (State state : activeStates) {
+			switch (state) {
+			«FOREACH this.states AS state-»
+    		case «state.getName()»:
+        		cycle«state.getName()»(events);
+        		break;
+			«ENDFOREACH-»
+			default:
+				// no state found
+			}
+		}
+	}
+}
+«ENDFILE-»
+«ENDDEFINE»

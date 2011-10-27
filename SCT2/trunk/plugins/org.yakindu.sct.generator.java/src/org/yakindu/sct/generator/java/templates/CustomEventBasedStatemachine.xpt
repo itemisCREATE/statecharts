@@ -1,0 +1,83 @@
+«REM»
+Copyright (c) 2011 committers of YAKINDU and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+Contributors:
+	committers of YAKINDU - initial API and implementation
+ 	
+@author Markus Muehlbrandt - Initial contribution and API
+«ENDREM»
+«IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
+«IMPORT ecore»
+
+«EXTENSION org::yakindu::sct::generator::java::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::java::templates::Naming»
+
+«DEFINE file FOR ExecutionFlow»
+«FILE getEventBasedStatemachineName()+'.java'-»
+«getLicenseHeader()»
+package org.yakindu.sct.runtime.java.«getStatemachineName()»;
+
+import java.util.Collection;
+import java.util.EnumSet;
+import java.util.Set;
+
+public class «getEventBasedStatemachineName()» extends «getAbstractStatemachineName()» {
+
+	private Queue<Events> eventQueue = new LinkedList<Event>();
+	
+	private Set<Events> outEvents = EnumSet.noneOf(Event.class);
+	
+	«FOREACH getNamedInterfaceScope() AS interface»
+	private «interface.getAbstractInterfaceName()» «interface.getInterfaceName().toFirstLower()»
+	«ENDFOREACH»
+
+	@Override
+	protected Collection<Events> getOccuredEvents() {
+		return occuredEvents;
+	}
+	
+	@Override
+	protected Collection<Events> getOutEvents() {
+		return outEvents;
+	}
+	
+	«FOREACH getNamedInterfaceScope() AS interface-»
+	«LET interface.getAbstractInterfaceName() AS abstractName-»
+	«LET interface.getInterfaceName().toFirstLower() AS name-»
+	@Override
+	protected «abstractName» get«abstractName»() {
+		if («name» == null) {
+			«name» = new «abstractName»() {
+
+				@Override
+				public Collection<Events> getOutEvents() {
+					return outEvents;
+				}
+
+				@Override
+				public Collection<Events> getOccuredEvents() {
+					return occuredEvents;
+				}
+			};
+		}
+		return «name»;
+	}
+	«ENDLET-»
+	«ENDLET-»
+	«ENDFOREACH-»
+	
+	@Override
+	public void runCycle() {
+		if (eventOccured()) {
+			Event event = eventQueue.poll();
+			runCycle(Collections.singletonList(event));
+		}
+	}
+}
+«ENDFILE-»
+«ENDDEFINE»

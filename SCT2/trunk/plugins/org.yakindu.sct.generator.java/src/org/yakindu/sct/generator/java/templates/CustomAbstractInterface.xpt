@@ -1,0 +1,64 @@
+«REM»
+Copyright (c) 2011 committers of YAKINDU and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+Contributors:
+	committers of YAKINDU - initial API and implementation
+ 	
+@author Markus Muehlbrandt - Initial contribution and API
+«ENDREM»
+«IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
+
+«EXTENSION org::yakindu::sct::generator::java::templates::Naming»
+
+«DEFINE file FOR InterfaceScope»
+«IF name != null-»
+«FILE getAbstractInterfaceName() + '.java'-»
+«getLicenseHeader()»
+package org.yakindu.sct.runtime.java.«getStatemachineName((ExecutionFlow)eContainer)»;
+
+public abstract class «getAbstractInterfaceName()» implements Interface<Event>, «getInterfaceName()» {
+	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
+	«IF event.type != Type::void-»
+	private «event.type.getJavaType()» «event.getValueName()»
+	
+	public «event.type.getJavaType()» get«event.getValueName().toFirstUpper()»() {
+		return «event.getValueName()»;
+	} 
+	«ENDIF-»
+	public void raise«event.name.toFirstUpper()»() {
+		getOccouredEvents().add(Event.«event.getQualifiedName()»);
+		«IF event.direction ==  Direction::OUT-»
+		getOutEvents().add(Event.«event.getQualifiedName()»);
+		«ENDIF-»
+	}
+	«IF event.type != Type::void-»
+	public void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value) {
+		«event.getValueName()» = value;
+		getOccouredEvents().add(Event.«event.getQualifiedName()»);
+		«IF event.direction ==  Direction::OUT-»
+		getOutEvents().add(Event.«event.getQualifiedName()»);
+		«ENDIF-»
+	}
+	«ENDIF-»
+	«ENDFOREACH-»
+	
+	«FOREACH declarations.typeSelect(VariableDefinition) AS variable-»
+	private «variable.type.getJavaType()» «variable.getValueName()»
+	
+	public «variable.type.getJavaType()» get«variable.getValueName().toFirstUpper()»() {
+		return «variable.getValueName()»;
+	}
+	
+	public void set«variable.getValueName().toFirstUpper()»(«variable.type.getJavaType()» value) {
+		«variable.getValueName()» = value;
+	}	
+	«ENDFOREACH-»
+}
+«ENDFILE-»
+«ENDIF-»
+«ENDDEFINE»

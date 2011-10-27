@@ -1,0 +1,119 @@
+/*
+  Copyright (c) 2011 committers of YAKINDU and others.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Public License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/legal/epl-v10.html
+  Contributors:
+  	committers of YAKINDU - initial API and implementation  
+  	
+  	@author Joern Seger - Initial contribution and API
+  	@author Markus Muehlbrandt - Java adaptions
+ */
+import stext;
+import sexec;
+import ecore;
+import sgraph;
+
+extension org::yakindu::sct::generator::java::templates::Naming;
+
+toCode(Void void) :
+	"/*toCode() called with NULL element. Polymorphic resolver could not match callable method!*/";
+String toCode(Void o, String statechartReference) : 
+	""; //polymorphic placeholder (abstract rule)
+
+String toCode(Expression statement) : 
+	null; //polymorphic placeholder (abstract rule)
+ 
+String toCode(Statement statement) : 
+	null; //polymorphic placeholder (abstract rule)
+ 
+String toCode(PrimitiveValueExpression primValue) :
+	primValue.value;
+	
+getterCall(Assignment this) :
+	getContext(varRef)+"getVar"+ varRef.name.toFirstUpper()+ "()";
+	
+setterCall(Assignment this, String textCorpus) :
+	getContext(varRef)+"setVar" + varRef.name.toFirstUpper() + "(" + textCorpus + ");";
+
+/* Assignment */
+String toCode(Assignment this) :
+  switch (operator) {
+  case (AssignmentOperator::assign) : setterCall(expression.toCode())
+  case (AssignmentOperator::multAssign) : setterCall(getterCall() + " * (" + expression.toCode() + ")")
+  case (AssignmentOperator::divAssign) : setterCall(getterCall() + " / (" + expression.toCode() + ")")
+  case (AssignmentOperator::modAssign) : setterCall(getterCall() + " % (" + expression.toCode() + ")")
+  case (AssignmentOperator::addAssign) : setterCall(getterCall() + " + (" + expression.toCode() + ")")
+  case (AssignmentOperator::subAssign) : setterCall(getterCall() + " - (" + expression.toCode() + ")")
+  case (AssignmentOperator::andAssign) : setterCall(getterCall() + " & (" + expression.toCode() + ")")
+  case (AssignmentOperator::xorAssign) : setterCall(getterCall() + " ^ (" + expression.toCode() + ")")
+  case (AssignmentOperator::orAssign) : setterCall(getterCall() + " ^ (" + expression.toCode() + ")")
+  case (AssignmentOperator::leftShiftAssign) : setterCall(getterCall() + " << ("+ expression.toCode() + ")")
+  case (AssignmentOperator::rightShiftAssign) : setterCall(getterCall() + " >> (" + expression.toCode() + ")")  
+  default : ""
+  };
+		
+/* EventRaising */
+
+/* Logical Expressions */
+String toCode(LogicalOrExpression expression) :
+  	expression.leftOperand.toCode() + " || " + expression.rightOperand.toCode();
+  	
+String toCode(LogicalAndExpression expression) :
+  	expression.leftOperand.toCode() + " && " + expression.rightOperand.toCode();
+
+String toCode(LogicalNotExpression expression) :
+  	" ^" + expression.operand.toCode();
+
+String toCode(LogicalRelationExpression expression) :
+   expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode();
+    
+String toCode(BitwiseAndExpression expression) :
+  	expression.leftOperand.toCode() + " & " + expression.rightOperand.toCode();
+
+String toCode(BitwiseOrExpression expression) :
+  	expression.leftOperand.toCode() + " | " + expression.rightOperand.toCode();
+
+String toCode(BitwiseXorExpression expression) :
+  	expression.leftOperand.toCode() + " ^ " + expression.rightOperand.toCode();
+
+String toCode(NumericalAddSubtractExpression expression) :
+  	expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode();
+  	
+String toCode(NumericalMultiplyDivideExpression expression) :
+  	expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode();
+
+String toCode(ElementReferenceExpression exp) :
+    if (EventDefinition.isInstance(exp.value)) then
+    	"getOccuredEvents().contains(Event."+((EventDefinition)exp.value).getName()+")"
+    else if (VariableDefinition.isInstance(exp.value)) then
+    	getContext((VariableDefinition)exp.value)+"getVar"+exp.value.name.toFirstUpper()+"()"
+    else if (TimeEvent.isInstance(exp.value)) then
+    	"getOccuredEvents().contains(Event."+getName((TimeEvent)exp.value)+")";
+
+String getOperator(AdditiveOperator operator) : 
+    switch(operator) {
+    	case(AdditiveOperator::plus) : " + "
+    	case(AdditiveOperator::minus) : " - "
+    	default : ""
+    };
+
+String getOperator(MultiplicativeOperator operator) : 
+    switch(operator) {
+    	case(MultiplicativeOperator::mul) : " * "
+    	case(MultiplicativeOperator::div) : " / "
+    	case(MultiplicativeOperator::mod) : " % "
+    	default : ""
+    };
+
+String getOperator(RelationalOperator operator) :
+	switch (operator) {
+	  case (RelationalOperator::greater) : " > "
+	  case (RelationalOperator::greaterEqual) : " >= "
+	  case (RelationalOperator::smaller) : " < "
+	  case (RelationalOperator::smallerEqual) : " <= "
+	  case (RelationalOperator::equals) : " == "
+	  case (RelationalOperator::notEquals) : " != "
+	  default : ""
+	};
