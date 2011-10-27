@@ -18,12 +18,16 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.yakindu.sct.model.sgraph.Declaration;
+import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
+import org.yakindu.sct.model.stext.stext.Direction;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
+import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
+import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.OnCycleEvent;
 import org.yakindu.sct.model.stext.stext.Operation;
@@ -101,17 +105,23 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 						SGraphPackage.Literals.SCOPE__DECLARATIONS);
 			}
 		}
+		for (Event event : interfaceScope.getEvents()) {
+			if (event instanceof EventDefinition && ((EventDefinition)event).getDirection() == Direction.LOCAL) {
+				error("Local declarations are not allowed in interface scope.",
+						SGraphPackage.Literals.SCOPE__EVENTS);
+			}
+		}
 	}
 
-//	@Check(CheckType.FAST)
-//	public void checkInternalScope(InternalScope internalScope) {
-//		for (Event event : internalScope.getEvents()) {
-//			if (event instanceof EventDefinition && ((EventDefinition)event).getDirection() != Direction.LOCAL) {
-//				error("In/Out declarations are not allowed in internal scope.",
-//						SGraphPackage.Literals.SCOPE__EVENTS);
-//			}
-//		}
-//	}
+	@Check(CheckType.FAST)
+	public void checkInternalScope(InternalScope internalScope) {
+		for (Event event : internalScope.getEvents()) {
+			if (event instanceof EventDefinition && ((EventDefinition)event).getDirection() != Direction.LOCAL) {
+				error("In/Out declarations are not allowed in internal scope.",
+						SGraphPackage.Literals.SCOPE__EVENTS);
+			}
+		}
+	}
 
 	private boolean isStatechartDefinitionChild(EObject element) {
 		while (element.eContainer() != null) {
