@@ -2289,17 +2289,24 @@ rule__Direction__Alternatives
     }
 :
 (
-{ before(grammarAccess.getDirectionAccess().getINEnumLiteralDeclaration_0()); }
-(	'in' 
+{ before(grammarAccess.getDirectionAccess().getLOCALEnumLiteralDeclaration_0()); }
+(	'local' 
 )
-{ after(grammarAccess.getDirectionAccess().getINEnumLiteralDeclaration_0()); }
+{ after(grammarAccess.getDirectionAccess().getLOCALEnumLiteralDeclaration_0()); }
 )
 
     |(
-{ before(grammarAccess.getDirectionAccess().getOUTEnumLiteralDeclaration_1()); }
+{ before(grammarAccess.getDirectionAccess().getINEnumLiteralDeclaration_1()); }
+(	'in' 
+)
+{ after(grammarAccess.getDirectionAccess().getINEnumLiteralDeclaration_1()); }
+)
+
+    |(
+{ before(grammarAccess.getDirectionAccess().getOUTEnumLiteralDeclaration_2()); }
 (	'out' 
 )
-{ after(grammarAccess.getDirectionAccess().getOUTEnumLiteralDeclaration_1()); }
+{ after(grammarAccess.getDirectionAccess().getOUTEnumLiteralDeclaration_2()); }
 )
 
 ;

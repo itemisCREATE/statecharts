@@ -222,6 +222,10 @@
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:EnumLiteralDeclaration">
+          <enumLiteral href="http://www.yakindu.org/sct/statechart/SText#//Direction/LOCAL"/>
+          <literal value="local"/>
+        </elements>
+        <elements xsi:type="xtext:EnumLiteralDeclaration">
           <enumLiteral href="http://www.yakindu.org/sct/statechart/SText#//Direction/IN"/>
           <literal value="in"/>
         </elements>

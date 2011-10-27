@@ -2084,29 +2084,37 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	public class DirectionElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "Direction");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final EnumLiteralDeclaration cINEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
-		private final Keyword cINInKeyword_0_0 = (Keyword)cINEnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cOUTEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cOUTOutKeyword_1_0 = (Keyword)cOUTEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cLOCALEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cLOCALLocalKeyword_0_0 = (Keyword)cLOCALEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cINEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cINInKeyword_1_0 = (Keyword)cINEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cOUTEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cOUTOutKeyword_2_0 = (Keyword)cOUTEnumLiteralDeclaration_2.eContents().get(0);
 		
 		//enum Direction:
-		//	IN="in" | OUT="out";
+		//	LOCAL="local" | IN="in" | OUT="out";
 		public EnumRule getRule() { return rule; }
 
-		//IN="in" | OUT="out"
+		//LOCAL="local" | IN="in" | OUT="out"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
+		//LOCAL="local"
+		public EnumLiteralDeclaration getLOCALEnumLiteralDeclaration_0() { return cLOCALEnumLiteralDeclaration_0; }
+
+		//"local"
+		public Keyword getLOCALLocalKeyword_0_0() { return cLOCALLocalKeyword_0_0; }
+
 		//IN="in"
-		public EnumLiteralDeclaration getINEnumLiteralDeclaration_0() { return cINEnumLiteralDeclaration_0; }
+		public EnumLiteralDeclaration getINEnumLiteralDeclaration_1() { return cINEnumLiteralDeclaration_1; }
 
 		//"in"
-		public Keyword getINInKeyword_0_0() { return cINInKeyword_0_0; }
+		public Keyword getINInKeyword_1_0() { return cINInKeyword_1_0; }
 
 		//OUT="out"
-		public EnumLiteralDeclaration getOUTEnumLiteralDeclaration_1() { return cOUTEnumLiteralDeclaration_1; }
+		public EnumLiteralDeclaration getOUTEnumLiteralDeclaration_2() { return cOUTEnumLiteralDeclaration_2; }
 
 		//"out"
-		public Keyword getOUTOutKeyword_1_0() { return cOUTOutKeyword_1_0; }
+		public Keyword getOUTOutKeyword_2_0() { return cOUTOutKeyword_2_0; }
 	}
 
 	public class TimeEventTypeElements extends AbstractEnumRuleElementFinder {
@@ -2783,7 +2791,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//enum Direction:
-	//	IN="in" | OUT="out";
+	//	LOCAL="local" | IN="in" | OUT="out";
 	public DirectionElements getDirectionAccess() {
 		return (unknownRuleDirection != null) ? unknownRuleDirection : (unknownRuleDirection = new DirectionElements());
 	}
