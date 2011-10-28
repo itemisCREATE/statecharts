@@ -20,7 +20,11 @@ Contributors:
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
 «DEFINE ActionCode FOR Step-»
-// ActionCode for Step not defined
+// ActionCode for Step «toString()» not defined
+«ENDDEFINE»
+
+«DEFINE EntryCode FOR Step-»
+// EntryCode for Step «toString()» not defined
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR ScheduleTimeEvent-»
@@ -116,7 +120,7 @@ else {
 
 «DEFINE EnterMethodImplement FOR ExecutionState-»
 	«IF this.entryAction != null-»
-	private void «this.entryAction.entryActionFunctionName()»() {
+	private void «entryAction.entryActionFunctionName()»() {
 		«EXPAND ActionCode FOR this.entryAction-»
 	}
 	«ENDIF-»
@@ -128,6 +132,13 @@ else {
 		«EXPAND ActionCode FOR this.exitAction-»
 	}
 «ENDIF-»
+«ENDDEFINE»
+
+«DEFINE EntryCode FOR EnterState-»
+	public void «statemachineEntryFunctionName()» {
+		«EXPAND ActionCode FOR this-»
+		«state.entryAction.entryActionFunctionName()»();
+	}
 «ENDDEFINE»
 
 «DEFINE file FOR ExecutionFlow-»
@@ -178,13 +189,15 @@ public abstract class «getAbstractStatemachineName()» implements ITimedStatemach
 	protected abstract «interface.getAbstractInterfaceName()» get«interface.getAbstractInterfaceName()»();
 	«ENDFOREACH-»
 		
+	«EXPAND EntryCode FOREACH enterSequence.steps-»
+	
 	protected boolean eventOccured() {
 		return !getOccuredEvents().isEmpty();
 	}
 	
 	@Override
 	public void init() {
-		«EXPAND ActionCode FOREACH enterSequence.steps»
+		
 	}
 	
 	@Override
