@@ -114,15 +114,21 @@ cached String functionName(Step step) :
 	(step.isExitAction()) ? step.exitActionFunctionName() : 
 	" !! unknown function type !!" )));
  
-String actionFunctionName(Step this) : "actions" + getName(reaction().state()) + this.reaction().name.toFirstUpper(); 
-String checkFunctionName(Step this) : "condition" + getName(reaction().state()) + this.reaction().name.toFirstUpper(); 
-String entryActionFunctionName(Step this) : "entryActions" + getName(state()); 
-String exitActionFunctionName(Step this) : "exitActions" + getName(state()); 
+statemachineEntryFunctionName(EnterState this):
+	if (this.name != null) then
+		"entry"+name.toFirstUpper().replaceAll(" ","")+"()"
+	else
+		"entry()";
 
-boolean isEffect(Step step) : (! Check.isInstance(step)) && Reaction.isInstance(step.eContainer) ;
-boolean isReactionCheck(Step step) : Reaction.isInstance(step.eContainer) && Check.isInstance(step);
-boolean isEntryAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().entryAction == step;
-boolean isExitAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().exitAction == step;
+actionFunctionName(Step this) : "actions" + getName(reaction().state()) + this.reaction().name.toFirstUpper(); 
+checkFunctionName(Step this) : "condition" + getName(reaction().state()) + this.reaction().name.toFirstUpper(); 
+entryActionFunctionName(Step this) : "entryActions" + getName(state()); 
+exitActionFunctionName(Step this) : "exitActions" + getName(state()); 
+
+isEffect(Step step) : (! Check.isInstance(step)) && Reaction.isInstance(step.eContainer) ;
+isReactionCheck(Step step) : Reaction.isInstance(step.eContainer) && Check.isInstance(step);
+isEntryAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().entryAction == step;
+isExitAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().exitAction == step;
 
 Reaction reaction(Step this) : (Reaction) this.eContainer ;
 ExecutionState state(Reaction this) : (ExecutionState) eContainer;
