@@ -40,6 +40,7 @@ public class StatechartInjectionService extends
 	public void setFeatures(Statechart original, StatechartDefinition rootAST) {
 		EList<Scope> definitionScopes = rootAST.getDefinitionScopes();
 		original.getScopes().clear();
+		original.setNamespace(rootAST.getNamespace());
 		original.getScopes().addAll(definitionScopes);
 	}
 

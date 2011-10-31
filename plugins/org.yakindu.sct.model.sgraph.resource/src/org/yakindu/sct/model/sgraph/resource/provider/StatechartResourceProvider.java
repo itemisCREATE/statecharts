@@ -13,7 +13,6 @@ package org.yakindu.sct.model.sgraph.resource.provider;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 
@@ -25,8 +24,7 @@ import com.google.inject.Injector;
  * @author andreas muelder
  * 
  */
-public class StatechartResourceProvider extends DefaultResourceServiceProvider
-		implements IResourceServiceProvider {
+public class StatechartResourceProvider extends DefaultResourceServiceProvider {
 
 	@Inject
 	private Injector injector;
@@ -35,7 +33,10 @@ public class StatechartResourceProvider extends DefaultResourceServiceProvider
 	public IResourceDescription.Manager getResourceDescriptionManager() {
 		DefaultResourceDescriptionManager defaultResourceDescriptionManager = new DefaultResourceDescriptionManager() {
 			public IResourceDescription getResourceDescription(Resource resource) {
-				return new StatechartResourceDescription(resource);
+				StatechartResourceDescription description = new StatechartResourceDescription(
+						resource);
+				injector.injectMembers(description);
+				return description;
 			}
 		};
 		injector.injectMembers(defaultResourceDescriptionManager);

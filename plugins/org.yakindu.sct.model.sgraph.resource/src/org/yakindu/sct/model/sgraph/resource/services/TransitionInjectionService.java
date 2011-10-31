@@ -32,6 +32,11 @@ public class TransitionInjectionService extends
 	}
 
 	@Override
+	public void injectMembers(EObject object) {
+		super.injectMembers(object);
+	}
+
+	@Override
 	public void setFeatures(Transition original, TransitionReaction rootAST) {
 		original.setTrigger(rootAST.getTrigger());
 		original.setEffect(rootAST.getEffect());

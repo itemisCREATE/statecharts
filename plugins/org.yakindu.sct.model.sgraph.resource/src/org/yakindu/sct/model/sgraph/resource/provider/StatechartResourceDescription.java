@@ -18,15 +18,16 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
-import org.yakindu.sct.model.sgraph.NamedElement;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * 
@@ -40,6 +41,9 @@ public class StatechartResourceDescription extends AbstractResourceDescription
 
 	private final URI uri;
 
+	@Inject
+	IQualifiedNameProvider qualifiedNameProvider;
+
 	public StatechartResourceDescription(Resource resource) {
 		this.resource = resource;
 		this.uri = getNormalizedURI(resource);
@@ -52,12 +56,10 @@ public class StatechartResourceDescription extends AbstractResourceDescription
 		Map<String, String> userData = new HashMap<String, String>();
 		while (contents.hasNext()) {
 			EObject eObject = contents.next();
-			if (eObject instanceof NamedElement) {
-				String name = ((NamedElement) eObject).getName();
-				if (name != null) {
-					result.add(new EObjectDescription(QualifiedName
-							.create(name), eObject, userData));
-				}
+			QualifiedName qualifiedName = qualifiedNameProvider.apply(eObject);
+			if (qualifiedName != null) {
+				result.add(new EObjectDescription(qualifiedName, eObject,
+						userData));
 			}
 		}
 		return result;
