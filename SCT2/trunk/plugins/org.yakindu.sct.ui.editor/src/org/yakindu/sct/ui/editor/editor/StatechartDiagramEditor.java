@@ -11,6 +11,11 @@
 package org.yakindu.sct.ui.editor.editor;
 
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.draw2d.ConnectionLayer;
 import org.eclipse.draw2d.ViewportAwareConnectionLayerClippingStrategy;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
@@ -21,6 +26,8 @@ import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.editparts.LayerManager;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
+import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
@@ -28,6 +35,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.breadcrumb.BreadcrumbDiagramEditor;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
@@ -60,6 +68,61 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 			throws PartInitException {
 		super.init(site, input);
 		getEditingDomain().addResourceSetListener(validationListener);
+		checkXtextNature();
+	}
+
+	private void checkXtextNature() {
+		IProject project = getEditorInput().getFile().getProject();
+		if (project != null && !XtextProjectHelper.hasNature(project)
+				&& project.isAccessible() && !project.isHidden()) {
+			String title = "Add Xtext Nature";
+			String message = "Do you want to add the Xtext nature to the project '"
+					+ project.getName() + "'?";
+
+			MessageDialog dialog = new MessageDialog(
+					getEditorSite().getShell(), title, null, message,
+					MessageDialog.QUESTION, new String[] {
+							IDialogConstants.YES_LABEL,
+							IDialogConstants.NO_LABEL,
+							IDialogConstants.CANCEL_LABEL }, 0);
+			int open = dialog.open();
+			if (open == 0) {
+				toggleNature(project);
+			}
+		}
+	}
+
+	public void toggleNature(IProject project) {
+		try {
+			IProjectDescription description = project.getDescription();
+			String[] natures = description.getNatureIds();
+
+			for (int i = 0; i < natures.length; ++i) {
+				if (XtextProjectHelper.NATURE_ID.equals(natures[i])) {
+					// Remove the nature
+					String[] newNatures = new String[natures.length - 1];
+					System.arraycopy(natures, 0, newNatures, 0, i);
+					System.arraycopy(natures, i + 1, newNatures, i,
+							natures.length - i - 1);
+					description.setNatureIds(newNatures);
+					project.setDescription(description, null);
+					return;
+				}
+			}
+
+			// Add the nature
+			String[] newNatures = new String[natures.length + 1];
+			System.arraycopy(natures, 0, newNatures, 0, natures.length);
+			newNatures[natures.length] = XtextProjectHelper.NATURE_ID;
+			description.setNatureIds(newNatures);
+			project.setDescription(description, null);
+		} catch (CoreException e) {
+			DiagramActivator
+					.getDefault()
+					.getLog()
+					.log(new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID,
+							"Xtext nature can't be added", e));
+		}
 	}
 
 	@Override

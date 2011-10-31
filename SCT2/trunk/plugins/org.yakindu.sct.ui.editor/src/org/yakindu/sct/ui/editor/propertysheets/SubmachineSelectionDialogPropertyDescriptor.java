@@ -30,11 +30,16 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
-import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog.StatechartViewerFilter;
+
+import com.google.inject.Inject;
 
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
 
@@ -55,27 +60,43 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 		}
 	}
 
+	@Inject
+	IQualifiedNameProvider nameProvider;
+	@Inject
+	IQualifiedNameConverter nameConverter;
 	private State state;
 	private Label label;
 	private UpdateLabelAdapter updateLabelAdapter;
+	private EObject context;
+
+	public SubmachineSelectionDialogPropertyDescriptor() {
+		STextActivator.getInstance().getInjector().injectMembers(this);
+	}
 
 	public void updateModelBinding(EObject eObject) {
 		this.state = (State) eObject;
 		updateLabel(state);
+		context = eObject;
 		if (updateLabelAdapter == null) {
 			updateLabelAdapter = new UpdateLabelAdapter();
 			state.eAdapters().add(updateLabelAdapter);
 		}
-
 	}
 
 	private void updateLabel(State state) {
 		Statechart substatechart = state.getSubstatechart();
+		String labelText = "";
 		if (substatechart != null) {
-			label.setText(substatechart.eResource().getURI().toString());
-		} else {
-			label.setText("");
+			QualifiedName qualifiedName = nameProvider
+					.getFullyQualifiedName(substatechart);
+			if (qualifiedName != null) {
+				String text = nameConverter.toString(qualifiedName);
+				labelText = text;
+			} else {
+				labelText = "<UNRESOLVED>";
+			}
 		}
+		label.setText(labelText);
 	}
 
 	public void createLabelColumn(Composite parent) {
@@ -101,9 +122,11 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 				.applyTo(openDialog);
 		openDialog.setText("...");
 		openDialog.addListener(SWT.Selection, new Listener() {
+
 			public void handleEvent(Event event) {
 				SelectSubmachineDialog dialog = new SelectSubmachineDialog(
-						parent.getShell(), new StatechartViewerFilter(state));
+						parent.getShell());
+				dialog.setElements(new Object[] { context });
 				if (Dialog.OK == dialog.open()) {
 					Statechart selectedSubmachine = dialog
 							.getSelectedSubmachine();
