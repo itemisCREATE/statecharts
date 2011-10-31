@@ -22,7 +22,6 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
-import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog.StatechartViewerFilter;
 import org.yakindu.sct.ui.editor.editor.StatechartElementTypes;
 
 /**
@@ -52,8 +51,8 @@ public class StateEditHelper extends VertexEditHelper {
 	}
 
 	private ICommand createSubmachineStateCommand(ConfigureRequest req) {
-		SelectSubmachineDialog dialog = new SelectSubmachineDialog(new Shell(),
-				new StatechartViewerFilter(req.getElementToConfigure()));
+		SelectSubmachineDialog dialog = new SelectSubmachineDialog(new Shell());
+		dialog.setElements(new Object[] { req.getElementToConfigure() });
 		if (Dialog.OK == dialog.open()) {
 			Statechart selectedSubmachine = dialog.getSelectedSubmachine();
 			if (selectedSubmachine != null) {

@@ -10,23 +10,16 @@
  */
 package org.yakindu.sct.ui.editor.dialogs;
 
-import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.emf.common.ui.dialogs.WorkspaceResourceDialog;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Factory;
-import org.eclipse.emf.ecore.resource.impl.ResourceFactoryRegistryImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.IDialogSettings;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -37,13 +30,19 @@ import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.internal.dialogs.NewWizard;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
-import org.eclipse.ui.model.WorkbenchContentProvider;
-import org.eclipse.ui.model.WorkbenchLabelProvider;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.IScope;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 import org.yakindu.sct.ui.editor.StatechartImages;
+
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
 /**
  * Basic resource selection dialog for Statecharts with a link that opens the
@@ -53,29 +52,54 @@ import org.yakindu.sct.ui.editor.StatechartImages;
  * 
  */
 @SuppressWarnings("restriction")
-public class SelectSubmachineDialog extends WorkspaceResourceDialog {
+public class SelectSubmachineDialog extends ElementListSelectionDialog {
 
 	public final static int CLEAR_BUTTON = IDialogConstants.CLIENT_ID + 1;
 
-	private final ViewerFilter filter;
 
 	private boolean clearSelected = false;
 
-	public SelectSubmachineDialog(Shell parent, ViewerFilter filter) {
-		super(parent, new WorkbenchLabelProvider(),
-				new WorkbenchContentProvider());
-		this.filter = filter;
+	private EObject context;
+
+	public SelectSubmachineDialog(Shell parent) {
+		super(parent, getLabelProvider());
 		initDialog();
 	}
 
+	private static ILabelProvider getLabelProvider() {
+		return STextActivator.getInstance().getInjector()
+				.getInstance(ILabelProvider.class);
+	}
+
+	private static Object[] getStatemachines(EObject context) {
+		IGlobalScopeProvider scopeProvider = STextActivator.getInstance()
+				.getInjector().getInstance(IGlobalScopeProvider.class);
+		IScope scope = scopeProvider.getScope(context.eResource(),
+				SGraphPackage.Literals.STATE__SUBSTATECHART,
+				Predicates.<IEObjectDescription> alwaysTrue());
+		Iterable<IEObjectDescription> statecharts = scope.getAllElements();
+		return Iterables.toArray(statecharts, IEObjectDescription.class);
+	}
+
 	protected void initDialog() {
-		setAllowMultiple(false);
 		setTitle("Select Submachine");
 		setMessage("Select the Submachine to include include into the Submachine State.");
 		setImage(StatechartImages.LOGO.image());
-		addFilter(filter);
-		loadContents();
 		clearSelected = false;
+	}
+
+	@Override
+	public void setElements(Object[] elements) {
+		if (elements == null || elements.length != 1) {
+			throw new IllegalStateException("No element was given");
+		}
+		Object object = elements[0];
+		if (!(object instanceof EObject)) {
+			throw new IllegalStateException("The element must be an EObject");
+		}
+		EObject element = (EObject) object;
+		this.context = element;
+		super.setElements(getStatemachines(element));
 	}
 
 	@Override
@@ -94,35 +118,40 @@ public class SelectSubmachineDialog extends WorkspaceResourceDialog {
 		return composite;
 	}
 
+	@Override
+	protected List getInitialElementSelections() {
+		if (context instanceof Statechart) {
+			return Collections.singletonList(context);
+		}
+		return super.getInitialElementSelections();
+	}
+
 	private IStructuredSelection getSelection() {
-		return new StructuredSelection(getSelectedContainers());
+		Statechart selectedSubmachine = getSelectedSubmachine();
+		if (selectedSubmachine != null) {
+			return new StructuredSelection(selectedSubmachine);
+		} else {
+			return StructuredSelection.EMPTY;
+		}
+
 	}
 
 	public Statechart getSelectedSubmachine() {
 		Object[] result = getResult();
-		if (result.length == 1 && result[0] instanceof IFile) {
-			IFile selectedFile = (IFile) result[0];
-			return loadFromFile(selectedFile);
+		if (result != null && result.length == 1) {
+			Statechart statechart = null;
+			if (result[0] instanceof IEObjectDescription) {
+				statechart = (Statechart) ((IEObjectDescription) result[0])
+						.getEObjectOrProxy();
+			}
+			if (statechart != null && statechart.eIsProxy()) {
+				statechart = (Statechart) EcoreUtil
+						.resolve(statechart, context);
+				;
+			}
+			return statechart;
 		}
 		return null;
-	}
-
-	public static Statechart loadFromFile(IFile fileResource) {
-		URI platformURI = URI.createPlatformResourceURI(fileResource
-				.getFullPath().toString(), true);
-		Factory factory = ResourceFactoryRegistryImpl.INSTANCE
-				.getFactory(platformURI);
-		Resource resource = factory.createResource(platformURI);
-		if (resource == null)
-			return null;
-		try {
-			resource.load(Collections.emptyMap());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(
-				resource.getContents(), SGraphPackage.Literals.STATECHART);
-		return statechart;
 	}
 
 	protected static class OpenCreationWizardListener implements Listener {
@@ -150,29 +179,6 @@ public class SelectSubmachineDialog extends WorkspaceResourceDialog {
 			wizard.setDialogSettings(wizardSettings);
 			wizard.setForcePreviousAndNextButtons(true);
 			wd.open();
-		}
-	}
-
-	public static class StatechartViewerFilter extends ViewerFilter {
-
-		private final String fileExtension;
-
-		public StatechartViewerFilter(String fileExtension) {
-			this.fileExtension = fileExtension;
-		}
-
-		public StatechartViewerFilter(EObject eobject) {
-			this.fileExtension = eobject.eResource().getURI().fileExtension();
-		}
-
-		@Override
-		public boolean select(Viewer viewer, Object parentElement,
-				Object element) {
-			if (element instanceof IFile) {
-				return ((IFile) element).getFileExtension().endsWith(
-						fileExtension);
-			}
-			return true;
 		}
 	}
 

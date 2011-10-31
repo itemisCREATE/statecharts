@@ -14,8 +14,11 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.Decoration;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorProvider;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget;
@@ -25,6 +28,7 @@ import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.breadcrumb.BreadcrumbEditorUtil;
 
@@ -66,14 +70,25 @@ public class SubmachineDecorationProvider extends AbstractDecoratorProvider
 
 		@Override
 		protected Diagram getTooltipDiagramToRender(State state) {
-			return (Diagram) EcoreUtil2.getObjectByType(state
-					.getSubstatechart().eResource().getContents(),
+			Statechart substatechart = state.getSubstatechart();
+			if (substatechart == null) {
+				return null;
+			}
+			Resource eResource = substatechart.eResource();
+			if (eResource == null) {
+				return null;
+			}
+			EList<EObject> contents = eResource.getContents();
+			if (contents == null) {
+				return null;
+			}
+			return (Diagram) EcoreUtil2.getObjectByType(contents,
 					NotationPackage.Literals.DIAGRAM);
 		}
 
 		@Override
 		protected void mouseClicked(Decoration decoration, State semanticElement) {
-			URI uri = semanticElement.getSubstatechart().eResource().getURI();
+			URI uri = EcoreUtil.getURI(semanticElement.getSubstatechart());
 			IFile file = ResourcesPlugin.getWorkspace().getRoot()
 					.getFile(new Path(uri.toPlatformString(true)));
 			try {
