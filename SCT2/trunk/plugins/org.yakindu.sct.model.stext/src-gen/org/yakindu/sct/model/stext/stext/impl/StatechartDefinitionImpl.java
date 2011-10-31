@@ -2,12 +2,12 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -32,6 +33,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.impl.StatechartDefinitionImpl#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.StatechartDefinitionImpl#getDefinitionScopes <em>Definition Scopes</em>}</li>
  * </ul>
  * </p>
@@ -40,6 +42,26 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  */
 public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container implements StatechartDefinition
 {
+  /**
+   * The default value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNamespace()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAMESPACE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNamespace()
+   * @generated
+   * @ordered
+   */
+  protected String namespace = NAMESPACE_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getDefinitionScopes() <em>Definition Scopes</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -69,6 +91,29 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   protected EClass eStaticClass()
   {
     return StextPackage.Literals.STATECHART_DEFINITION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getNamespace()
+  {
+    return namespace;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setNamespace(String newNamespace)
+  {
+    String oldNamespace = namespace;
+    namespace = newNamespace;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.STATECHART_DEFINITION__NAMESPACE, oldNamespace, namespace));
   }
 
   /**
@@ -111,6 +156,8 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case StextPackage.STATECHART_DEFINITION__NAMESPACE:
+        return getNamespace();
       case StextPackage.STATECHART_DEFINITION__DEFINITION_SCOPES:
         return getDefinitionScopes();
     }
@@ -128,6 +175,9 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case StextPackage.STATECHART_DEFINITION__NAMESPACE:
+        setNamespace((String)newValue);
+        return;
       case StextPackage.STATECHART_DEFINITION__DEFINITION_SCOPES:
         getDefinitionScopes().clear();
         getDefinitionScopes().addAll((Collection<? extends Scope>)newValue);
@@ -146,6 +196,9 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case StextPackage.STATECHART_DEFINITION__NAMESPACE:
+        setNamespace(NAMESPACE_EDEFAULT);
+        return;
       case StextPackage.STATECHART_DEFINITION__DEFINITION_SCOPES:
         getDefinitionScopes().clear();
         return;
@@ -163,10 +216,29 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case StextPackage.STATECHART_DEFINITION__NAMESPACE:
+        return NAMESPACE_EDEFAULT == null ? namespace != null : !NAMESPACE_EDEFAULT.equals(namespace);
       case StextPackage.STATECHART_DEFINITION__DEFINITION_SCOPES:
         return definitionScopes != null && !definitionScopes.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (namespace: ");
+    result.append(namespace);
+    result.append(')');
+    return result.toString();
   }
 
 } //StatechartDefinitionImpl

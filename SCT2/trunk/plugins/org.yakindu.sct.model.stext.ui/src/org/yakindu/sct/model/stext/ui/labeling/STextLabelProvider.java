@@ -4,7 +4,9 @@
 package org.yakindu.sct.model.stext.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Inject;
 
@@ -20,15 +22,17 @@ public class STextLabelProvider extends DefaultEObjectLabelProvider {
 		super(delegate);
 	}
 
-/*
 	//Labels and icons can be computed like this:
 	
-	String text(MyModel ele) {
-	  return "my "+ele.getName();
+	String text(Statechart ele) {
+		return ele.getName();
+	}
+
+	String text(IEObjectDescription ele) {
+		return ele.getName().toString();
 	}
 	 
-    String image(MyModel ele) {
-      return "MyModel.gif";
-    }
-*/
+	/*
+	 * String image(MyModel ele) { return "MyModel.gif"; }
+	 */
 }

@@ -302,19 +302,41 @@ ruleStatechartDefinition returns [EObject current=null]
             grammarAccess.getStatechartDefinitionAccess().getStatechartDefinitionAction_0(),
             $current);
     }
-)(
+)(	otherlv_1='namespace' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getStatechartDefinitionAccess().getNamespaceKeyword_1_0());
+    }
+(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getStatechartDefinitionAccess().getDefinitionScopesStatechartScopeParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getStatechartDefinitionAccess().getNamespaceFQNParserRuleCall_1_1_0()); 
 	    }
-		lv_definitionScopes_1_0=ruleStatechartScope		{
+		lv_namespace_2_0=ruleFQN		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getStatechartDefinitionRule());
+	        }
+       		set(
+       			$current, 
+       			"namespace",
+        		lv_namespace_2_0, 
+        		"FQN");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getStatechartDefinitionAccess().getDefinitionScopesStatechartScopeParserRuleCall_2_0()); 
+	    }
+		lv_definitionScopes_3_0=ruleStatechartScope		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStatechartDefinitionRule());
 	        }
        		add(
        			$current, 
        			"definitionScopes",
-        		lv_definitionScopes_1_0, 
+        		lv_definitionScopes_3_0, 
         		"StatechartScope");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1298,6 +1320,47 @@ ruleExitpoint returns [EObject current=null]
 
 
 
+// Entry rule entryRuleFQN
+entryRuleFQN returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getFQNRule()); } 
+	 iv_ruleFQN=ruleFQN 
+	 { $current=$iv_ruleFQN.current.getText(); }  
+	 EOF 
+;
+
+// Rule FQN
+ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(    this_ID_0=RULE_ID    {
+		$current.merge(this_ID_0);
+    }
+
+    { 
+    newLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
+    }
+(
+	kw='.' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
+    }
+    this_ID_2=RULE_ID    {
+		$current.merge(this_ID_2);
+    }
+
+    { 
+    newLeafNode(this_ID_2, grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
+    }
+)*)
+    ;
+
+
+
+
+
 
 
 // Entry rule entryRuleLocalReaction
@@ -1801,10 +1864,12 @@ ruleEntryPointSpec returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getEntryPointSpecRule());
 	        }
         }
-	otherlv_1=RULE_ID
-	{
-		newLeafNode(otherlv_1, grammarAccess.getEntryPointSpecAccess().getEntrypointEntrypointCrossReference_1_0()); 
-	}
+		{ 
+	        newCompositeNode(grammarAccess.getEntryPointSpecAccess().getEntrypointEntrypointCrossReference_1_0()); 
+	    }
+		ruleFQN		{ 
+	        afterParserOrEnumRuleCall();
+	    }
 
 )
 ))
@@ -1835,10 +1900,12 @@ ruleExitPointSpec returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getExitPointSpecRule());
 	        }
         }
-	otherlv_0=RULE_ID
-	{
-		newLeafNode(otherlv_0, grammarAccess.getExitPointSpecAccess().getExitpointExitpointCrossReference_0_0()); 
-	}
+		{ 
+	        newCompositeNode(grammarAccess.getExitPointSpecAccess().getExitpointExitpointCrossReference_0_0()); 
+	    }
+		ruleFQN		{ 
+	        afterParserOrEnumRuleCall();
+	    }
 
 )
 )	otherlv_1='>' 
@@ -1923,10 +1990,12 @@ ruleRegularEventSpec returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getRegularEventSpecRule());
 	        }
         }
-	otherlv_0=RULE_ID
-	{
-		newLeafNode(otherlv_0, grammarAccess.getRegularEventSpecAccess().getEventEventCrossReference_0()); 
-	}
+		{ 
+	        newCompositeNode(grammarAccess.getRegularEventSpecAccess().getEventEventCrossReference_0()); 
+	    }
+		ruleFQN		{ 
+	        afterParserOrEnumRuleCall();
+	    }
 
 )
 )
@@ -2266,10 +2335,12 @@ ruleAssignment returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getAssignmentRule());
 	        }
         }
-	otherlv_0=RULE_ID
-	{
-		newLeafNode(otherlv_0, grammarAccess.getAssignmentAccess().getVarRefVariableCrossReference_0_0()); 
-	}
+		{ 
+	        newCompositeNode(grammarAccess.getAssignmentAccess().getVarRefVariableCrossReference_0_0()); 
+	    }
+		ruleFQN		{ 
+	        afterParserOrEnumRuleCall();
+	    }
 
 )
 )(
@@ -2340,10 +2411,12 @@ ruleEventRaising returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getEventRaisingRule());
 	        }
         }
-	otherlv_1=RULE_ID
-	{
-		newLeafNode(otherlv_1, grammarAccess.getEventRaisingAccess().getEventEventCrossReference_1_0()); 
-	}
+		{ 
+	        newCompositeNode(grammarAccess.getEventRaisingAccess().getEventEventCrossReference_1_0()); 
+	    }
+		ruleFQN		{ 
+	        afterParserOrEnumRuleCall();
+	    }
 
 )
 )(	otherlv_2=':' 
@@ -3365,10 +3438,12 @@ ruleElementReferenceExpression returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getElementReferenceExpressionRule());
 	        }
         }
-	otherlv_1=RULE_ID
-	{
-		newLeafNode(otherlv_1, grammarAccess.getElementReferenceExpressionAccess().getValueDeclarationCrossReference_1_0()); 
-	}
+		{ 
+	        newCompositeNode(grammarAccess.getElementReferenceExpressionAccess().getValueDeclarationCrossReference_1_0()); 
+	    }
+		ruleFQN		{ 
+	        afterParserOrEnumRuleCall();
+	    }
 
 )
 ))
@@ -3405,10 +3480,12 @@ ruleOperationCall returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getOperationCallRule());
 	        }
         }
-	otherlv_1=RULE_ID
-	{
-		newLeafNode(otherlv_1, grammarAccess.getOperationCallAccess().getOperationOperationCrossReference_1_0()); 
-	}
+		{ 
+	        newCompositeNode(grammarAccess.getOperationCallAccess().getOperationOperationCrossReference_1_0()); 
+	    }
+		ruleFQN		{ 
+	        afterParserOrEnumRuleCall();
+	    }
 
 )
 )	otherlv_2='(' 

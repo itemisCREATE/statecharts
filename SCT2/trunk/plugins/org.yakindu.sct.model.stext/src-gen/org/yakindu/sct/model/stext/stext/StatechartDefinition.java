@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext;
 
@@ -20,6 +19,7 @@ import org.yakindu.sct.model.sgraph.Scope;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.StatechartDefinition#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.StatechartDefinition#getDefinitionScopes <em>Definition Scopes</em>}</li>
  * </ul>
  * </p>
@@ -30,6 +30,32 @@ import org.yakindu.sct.model.sgraph.Scope;
  */
 public interface StatechartDefinition extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Namespace</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Namespace</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Namespace</em>' attribute.
+   * @see #setNamespace(String)
+   * @see org.yakindu.sct.model.stext.stext.StextPackage#getStatechartDefinition_Namespace()
+   * @model
+   * @generated
+   */
+  String getNamespace();
+
+  /**
+   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.StatechartDefinition#getNamespace <em>Namespace</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Namespace</em>' attribute.
+   * @see #getNamespace()
+   * @generated
+   */
+  void setNamespace(String value);
+
   /**
    * Returns the value of the '<em><b>Definition Scopes</b></em>' containment reference list.
    * The list contents are of type {@link org.yakindu.sct.model.sgraph.Scope}.
