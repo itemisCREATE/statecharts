@@ -12,10 +12,12 @@ package org.yakindu.sct.model.sgraph.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -31,6 +33,7 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ScopedElementImpl#getScopes <em>Scopes</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.ScopedElementImpl#getNamespace <em>Namespace</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,6 +56,26 @@ public abstract class ScopedElementImpl extends EObjectImpl implements ScopedEle
 	 * @ordered
 	 */
 	protected EList<Scope> scopes;
+
+	/**
+	 * The default value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNamespace()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAMESPACE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNamespace()
+	 * @generated
+	 * @ordered
+	 */
+	protected String namespace = NAMESPACE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -90,6 +113,27 @@ public abstract class ScopedElementImpl extends EObjectImpl implements ScopedEle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getNamespace() {
+		return namespace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNamespace(String newNamespace) {
+		String oldNamespace = namespace;
+		namespace = newNamespace;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.SCOPED_ELEMENT__NAMESPACE, oldNamespace, namespace));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -109,6 +153,8 @@ public abstract class ScopedElementImpl extends EObjectImpl implements ScopedEle
 		switch (featureID) {
 			case SGraphPackage.SCOPED_ELEMENT__SCOPES:
 				return getScopes();
+			case SGraphPackage.SCOPED_ELEMENT__NAMESPACE:
+				return getNamespace();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -126,6 +172,9 @@ public abstract class ScopedElementImpl extends EObjectImpl implements ScopedEle
 				getScopes().clear();
 				getScopes().addAll((Collection<? extends Scope>)newValue);
 				return;
+			case SGraphPackage.SCOPED_ELEMENT__NAMESPACE:
+				setNamespace((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -141,6 +190,9 @@ public abstract class ScopedElementImpl extends EObjectImpl implements ScopedEle
 			case SGraphPackage.SCOPED_ELEMENT__SCOPES:
 				getScopes().clear();
 				return;
+			case SGraphPackage.SCOPED_ELEMENT__NAMESPACE:
+				setNamespace(NAMESPACE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -155,8 +207,26 @@ public abstract class ScopedElementImpl extends EObjectImpl implements ScopedEle
 		switch (featureID) {
 			case SGraphPackage.SCOPED_ELEMENT__SCOPES:
 				return scopes != null && !scopes.isEmpty();
+			case SGraphPackage.SCOPED_ELEMENT__NAMESPACE:
+				return NAMESPACE_EDEFAULT == null ? namespace != null : !NAMESPACE_EDEFAULT.equals(namespace);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (namespace: ");
+		result.append(namespace);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ScopedElementImpl

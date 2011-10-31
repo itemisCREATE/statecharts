@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.ScopedElement#getScopes <em>Scopes</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.ScopedElement#getNamespace <em>Namespace</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,5 +53,31 @@ public interface ScopedElement extends EObject {
 	 * @generated
 	 */
 	EList<Scope> getScopes();
+
+	/**
+	 * Returns the value of the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Namespace</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Namespace</em>' attribute.
+	 * @see #setNamespace(String)
+	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getScopedElement_Namespace()
+	 * @model
+	 * @generated
+	 */
+	String getNamespace();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sgraph.ScopedElement#getNamespace <em>Namespace</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Namespace</em>' attribute.
+	 * @see #getNamespace()
+	 * @generated
+	 */
+	void setNamespace(String value);
 
 } // ScopedElement

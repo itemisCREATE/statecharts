@@ -63,6 +63,7 @@
     </genClasses>
     <genClasses image="false" ecoreClass="sgraph.ecore#//ScopedElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//ScopedElement/scopes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//ScopedElement/namespace"/>
     </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//Synchronization"/>
     <genClasses ecoreClass="sgraph.ecore#//State">
@@ -72,6 +73,7 @@
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/submachine"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/simple"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/composite"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/leaf"/>
     </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//Statement"/>
   </genPackages>
