@@ -14,7 +14,7 @@
    <!-- Resource Provider -->
    <extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-           class="org.yakindu.sct.model.sgraph.resource.factory.ExpressionsExecutableExtensionFactory:org.yakindu.sct.model.sgraph.resource.provider.StatechartResourceProvider"
+           class="org.yakindu.sct.model.sgraph.resource.factory.ExpressionsExecutableExtensionFactory:org.yakindu.sct.model.sgraph.resource.provider.StatechartResourceUIProvider"
             uriExtension="sct">
         </resourceServiceProvider>
     </extension>
