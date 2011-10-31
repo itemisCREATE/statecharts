@@ -634,11 +634,11 @@ protected class TransitionRoot_DefAssignment_1 extends AssignmentToken  {
  * / * ---- start rules ----
  * Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
  * * / StatechartDefinition:
- * 	{StatechartDefinition} definitionScopes+=StatechartScope*;
+ * 	{StatechartDefinition} ("namespace" namespace=FQN)? definitionScopes+=StatechartScope*;
  *
  **/
 
-// {StatechartDefinition} definitionScopes+=StatechartScope*
+// {StatechartDefinition} ("namespace" namespace=FQN)? definitionScopes+=StatechartScope*
 protected class StatechartDefinition_Group extends GroupToken {
 	
 	public StatechartDefinition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -653,8 +653,9 @@ protected class StatechartDefinition_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new StatechartDefinition_DefinitionScopesAssignment_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new StatechartDefinition_StatechartDefinitionAction_0(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new StatechartDefinition_DefinitionScopesAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new StatechartDefinition_Group_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new StatechartDefinition_StatechartDefinitionAction_0(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -694,16 +695,95 @@ protected class StatechartDefinition_StatechartDefinitionAction_0 extends Action
 	}
 }
 
-// definitionScopes+=StatechartScope*
-protected class StatechartDefinition_DefinitionScopesAssignment_1 extends AssignmentToken  {
+// ("namespace" namespace=FQN)?
+protected class StatechartDefinition_Group_1 extends GroupToken {
 	
-	public StatechartDefinition_DefinitionScopesAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StatechartDefinition_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getStatechartDefinitionAccess().getGroup_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new StatechartDefinition_NamespaceAssignment_1_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "namespace"
+protected class StatechartDefinition_NamespaceKeyword_1_0 extends KeywordToken  {
+	
+	public StatechartDefinition_NamespaceKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getStatechartDefinitionAccess().getNamespaceKeyword_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new StatechartDefinition_StatechartDefinitionAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// namespace=FQN
+protected class StatechartDefinition_NamespaceAssignment_1_1 extends AssignmentToken  {
+	
+	public StatechartDefinition_NamespaceAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStatechartDefinitionAccess().getDefinitionScopesAssignment_1();
+		return grammarAccess.getStatechartDefinitionAccess().getNamespaceAssignment_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new StatechartDefinition_NamespaceKeyword_1_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("namespace",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("namespace");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getStatechartDefinitionAccess().getNamespaceFQNParserRuleCall_1_1_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getStatechartDefinitionAccess().getNamespaceFQNParserRuleCall_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// definitionScopes+=StatechartScope*
+protected class StatechartDefinition_DefinitionScopesAssignment_2 extends AssignmentToken  {
+	
+	public StatechartDefinition_DefinitionScopesAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getStatechartDefinitionAccess().getDefinitionScopesAssignment_2();
 	}
 
     @Override
@@ -722,7 +802,7 @@ protected class StatechartDefinition_DefinitionScopesAssignment_1 extends Assign
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getStatechartScopeRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getStatechartDefinitionAccess().getDefinitionScopesStatechartScopeParserRuleCall_1_0(); 
+				element = grammarAccess.getStatechartDefinitionAccess().getDefinitionScopesStatechartScopeParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -734,8 +814,9 @@ protected class StatechartDefinition_DefinitionScopesAssignment_1 extends Assign
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new StatechartDefinition_DefinitionScopesAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new StatechartDefinition_StatechartDefinitionAction_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new StatechartDefinition_DefinitionScopesAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new StatechartDefinition_Group_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 2: return new StatechartDefinition_StatechartDefinitionAction_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -3443,6 +3524,7 @@ protected class Exitpoint_NameAssignment_2 extends AssignmentToken  {
 /************ end Rule Exitpoint ****************/
 
 
+
 /************ begin Rule Reaction ****************
  *
  * / * ---- reaction rules ----
@@ -5082,11 +5164,11 @@ protected class ReactionPriority_PriorityAssignment extends AssignmentToken  {
 /************ begin Rule EntryPointSpec ****************
  *
  * EntryPointSpec:
- * 	">" entrypoint=[Entrypoint];
+ * 	">" entrypoint=[Entrypoint|FQN];
  *
  **/
 
-// ">" entrypoint=[Entrypoint]
+// ">" entrypoint=[Entrypoint|FQN]
 protected class EntryPointSpec_Group extends GroupToken {
 	
 	public EntryPointSpec_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5136,7 +5218,7 @@ protected class EntryPointSpec_GreaterThanSignKeyword_0 extends KeywordToken  {
 
 }
 
-// entrypoint=[Entrypoint]
+// entrypoint=[Entrypoint|FQN]
 protected class EntryPointSpec_EntrypointAssignment_1 extends AssignmentToken  {
 	
 	public EntryPointSpec_EntrypointAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5180,11 +5262,11 @@ protected class EntryPointSpec_EntrypointAssignment_1 extends AssignmentToken  {
 /************ begin Rule ExitPointSpec ****************
  *
  * ExitPointSpec:
- * 	exitpoint=[Exitpoint] ">";
+ * 	exitpoint=[Exitpoint|FQN] ">";
  *
  **/
 
-// exitpoint=[Exitpoint] ">"
+// exitpoint=[Exitpoint|FQN] ">"
 protected class ExitPointSpec_Group extends GroupToken {
 	
 	public ExitPointSpec_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5213,7 +5295,7 @@ protected class ExitPointSpec_Group extends GroupToken {
 
 }
 
-// exitpoint=[Exitpoint]
+// exitpoint=[Exitpoint|FQN]
 protected class ExitPointSpec_ExitpointAssignment_0 extends AssignmentToken  {
 	
 	public ExitPointSpec_ExitpointAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5436,11 +5518,11 @@ protected class EventSpec_BuiltinEventSpecParserRuleCall_2 extends RuleCallToken
 /************ begin Rule RegularEventSpec ****************
  *
  * RegularEventSpec:
- * 	event=[sct::Event];
+ * 	event=[sct::Event|FQN];
  *
  **/
 
-// event=[sct::Event]
+// event=[sct::Event|FQN]
 protected class RegularEventSpec_EventAssignment extends AssignmentToken  {
 	
 	public RegularEventSpec_EventAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6323,11 +6405,11 @@ protected class Statement_OperationCallParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule Assignment ****************
  *
  * Assignment:
- * 	varRef=[sct::Variable] operator=AssignmentOperator expression=Expression;
+ * 	varRef=[sct::Variable|FQN] operator=AssignmentOperator expression=Expression;
  *
  **/
 
-// varRef=[sct::Variable] operator=AssignmentOperator expression=Expression
+// varRef=[sct::Variable|FQN] operator=AssignmentOperator expression=Expression
 protected class Assignment_Group extends GroupToken {
 	
 	public Assignment_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6356,7 +6438,7 @@ protected class Assignment_Group extends GroupToken {
 
 }
 
-// varRef=[sct::Variable]
+// varRef=[sct::Variable|FQN]
 protected class Assignment_VarRefAssignment_0 extends AssignmentToken  {
 	
 	public Assignment_VarRefAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6479,11 +6561,11 @@ protected class Assignment_ExpressionAssignment_2 extends AssignmentToken  {
 /************ begin Rule EventRaising ****************
  *
  * EventRaising:
- * 	"raise" event=[sct::Event] (":" value=Expression)?;
+ * 	"raise" event=[sct::Event|FQN] (":" value=Expression)?;
  *
  **/
 
-// "raise" event=[sct::Event] (":" value=Expression)?
+// "raise" event=[sct::Event|FQN] (":" value=Expression)?
 protected class EventRaising_Group extends GroupToken {
 	
 	public EventRaising_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6534,7 +6616,7 @@ protected class EventRaising_RaiseKeyword_0 extends KeywordToken  {
 
 }
 
-// event=[sct::Event]
+// event=[sct::Event|FQN]
 protected class EventRaising_EventAssignment_1 extends AssignmentToken  {
 	
 	public EventRaising_EventAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9913,11 +9995,11 @@ protected class PrimitiveValueExpression_ValueAssignment_1 extends AssignmentTok
 /************ begin Rule ElementReferenceExpression ****************
  *
  * ElementReferenceExpression returns Expression:
- * 	{ElementReferenceExpression} value=[sct::Declaration];
+ * 	{ElementReferenceExpression} value=[sct::Declaration|FQN];
  *
  **/
 
-// {ElementReferenceExpression} value=[sct::Declaration]
+// {ElementReferenceExpression} value=[sct::Declaration|FQN]
 protected class ElementReferenceExpression_Group extends GroupToken {
 	
 	public ElementReferenceExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9972,7 +10054,7 @@ protected class ElementReferenceExpression_ElementReferenceExpressionAction_0 ex
 	}
 }
 
-// value=[sct::Declaration]
+// value=[sct::Declaration|FQN]
 protected class ElementReferenceExpression_ValueAssignment_1 extends AssignmentToken  {
 	
 	public ElementReferenceExpression_ValueAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10016,11 +10098,11 @@ protected class ElementReferenceExpression_ValueAssignment_1 extends AssignmentT
 /************ begin Rule OperationCall ****************
  *
  * OperationCall returns Expression:
- * 	{OperationCall} operation=[Operation] "(" (args+=Expression ("," args+=Expression)*)? ")";
+ * 	{OperationCall} operation=[Operation|FQN] "(" (args+=Expression ("," args+=Expression)*)? ")";
  *
  **/
 
-// {OperationCall} operation=[Operation] "(" (args+=Expression ("," args+=Expression)*)? ")"
+// {OperationCall} operation=[Operation|FQN] "(" (args+=Expression ("," args+=Expression)*)? ")"
 protected class OperationCall_Group extends GroupToken {
 	
 	public OperationCall_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10075,7 +10157,7 @@ protected class OperationCall_OperationCallAction_0 extends ActionToken  {
 	}
 }
 
-// operation=[Operation]
+// operation=[Operation|FQN]
 protected class OperationCall_OperationAssignment_1 extends AssignmentToken  {
 	
 	public OperationCall_OperationAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

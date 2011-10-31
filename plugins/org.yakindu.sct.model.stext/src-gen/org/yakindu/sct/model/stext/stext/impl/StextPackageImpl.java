@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -702,9 +701,19 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getStatechartDefinition_Namespace()
+  {
+    return (EAttribute)statechartDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getStatechartDefinition_DefinitionScopes()
   {
-    return (EReference)statechartDefinitionEClass.getEStructuralFeatures().get(0);
+    return (EReference)statechartDefinitionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1952,6 +1961,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     createEReference(transitionRootEClass, TRANSITION_ROOT__DEF);
 
     statechartDefinitionEClass = createEClass(STATECHART_DEFINITION);
+    createEAttribute(statechartDefinitionEClass, STATECHART_DEFINITION__NAMESPACE);
     createEReference(statechartDefinitionEClass, STATECHART_DEFINITION__DEFINITION_SCOPES);
 
     stateDeclarationEClass = createEClass(STATE_DECLARATION);
@@ -2219,6 +2229,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEReference(getTransitionRoot_Def(), this.getTransitionStatement(), null, "def", null, 0, 1, TransitionRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(statechartDefinitionEClass, StatechartDefinition.class, "StatechartDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getStatechartDefinition_Namespace(), ecorePackage.getEString(), "namespace", null, 0, 1, StatechartDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getStatechartDefinition_DefinitionScopes(), theSGraphPackage.getScope(), null, "definitionScopes", null, 0, -1, StatechartDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stateDeclarationEClass, StateDeclaration.class, "StateDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

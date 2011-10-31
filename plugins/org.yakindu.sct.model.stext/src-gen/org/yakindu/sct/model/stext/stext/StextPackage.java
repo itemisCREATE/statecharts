@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext;
 
@@ -205,13 +204,22 @@ public interface StextPackage extends EPackage
   int STATECHART_DEFINITION = 5;
 
   /**
+   * The feature id for the '<em><b>Namespace</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATECHART_DEFINITION__NAMESPACE = 0;
+
+  /**
    * The feature id for the '<em><b>Definition Scopes</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STATECHART_DEFINITION__DEFINITION_SCOPES = 0;
+  int STATECHART_DEFINITION__DEFINITION_SCOPES = 1;
 
   /**
    * The number of structural features of the '<em>Statechart Definition</em>' class.
@@ -220,7 +228,7 @@ public interface StextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATECHART_DEFINITION_FEATURE_COUNT = 1;
+  int STATECHART_DEFINITION_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.StateDeclarationImpl <em>State Declaration</em>}' class.
@@ -2068,6 +2076,17 @@ public interface StextPackage extends EPackage
   EClass getStatechartDefinition();
 
   /**
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.StatechartDefinition#getNamespace <em>Namespace</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Namespace</em>'.
+   * @see org.yakindu.sct.model.stext.stext.StatechartDefinition#getNamespace()
+   * @see #getStatechartDefinition()
+   * @generated
+   */
+  EAttribute getStatechartDefinition_Namespace();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.stext.stext.StatechartDefinition#getDefinitionScopes <em>Definition Scopes</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3455,6 +3474,14 @@ public interface StextPackage extends EPackage
      * @generated
      */
     EClass STATECHART_DEFINITION = eINSTANCE.getStatechartDefinition();
+
+    /**
+     * The meta object literal for the '<em><b>Namespace</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute STATECHART_DEFINITION__NAMESPACE = eINSTANCE.getStatechartDefinition_Namespace();
 
     /**
      * The meta object literal for the '<em><b>Definition Scopes</b></em>' containment reference list feature.

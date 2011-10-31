@@ -66,6 +66,7 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStateRootAccess().getGroup(), "rule__StateRoot__Group__0");
 					put(grammarAccess.getTransitionRootAccess().getGroup(), "rule__TransitionRoot__Group__0");
 					put(grammarAccess.getStatechartDefinitionAccess().getGroup(), "rule__StatechartDefinition__Group__0");
+					put(grammarAccess.getStatechartDefinitionAccess().getGroup_1(), "rule__StatechartDefinition__Group_1__0");
 					put(grammarAccess.getSimpleScopeAccess().getGroup(), "rule__SimpleScope__Group__0");
 					put(grammarAccess.getInterfaceScopeAccess().getGroup(), "rule__InterfaceScope__Group__0");
 					put(grammarAccess.getInternalScopeAccess().getGroup(), "rule__InternalScope__Group__0");
@@ -82,6 +83,8 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getOperationAccess().getGroup_6(), "rule__Operation__Group_6__0");
 					put(grammarAccess.getEntrypointAccess().getGroup(), "rule__Entrypoint__Group__0");
 					put(grammarAccess.getExitpointAccess().getGroup(), "rule__Exitpoint__Group__0");
+					put(grammarAccess.getFQNAccess().getGroup(), "rule__FQN__Group__0");
+					put(grammarAccess.getFQNAccess().getGroup_1(), "rule__FQN__Group_1__0");
 					put(grammarAccess.getLocalReactionAccess().getGroup(), "rule__LocalReaction__Group__0");
 					put(grammarAccess.getLocalReactionAccess().getGroup_1(), "rule__LocalReaction__Group_1__0");
 					put(grammarAccess.getLocalReactionAccess().getGroup_2(), "rule__LocalReaction__Group_2__0");
@@ -138,7 +141,8 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStatechartRootAccess().getDefAssignment_1(), "rule__StatechartRoot__DefAssignment_1");
 					put(grammarAccess.getStateRootAccess().getDefAssignment_1(), "rule__StateRoot__DefAssignment_1");
 					put(grammarAccess.getTransitionRootAccess().getDefAssignment_1(), "rule__TransitionRoot__DefAssignment_1");
-					put(grammarAccess.getStatechartDefinitionAccess().getDefinitionScopesAssignment_1(), "rule__StatechartDefinition__DefinitionScopesAssignment_1");
+					put(grammarAccess.getStatechartDefinitionAccess().getNamespaceAssignment_1_1(), "rule__StatechartDefinition__NamespaceAssignment_1_1");
+					put(grammarAccess.getStatechartDefinitionAccess().getDefinitionScopesAssignment_2(), "rule__StatechartDefinition__DefinitionScopesAssignment_2");
 					put(grammarAccess.getStateDeclarationAccess().getScopeAssignment(), "rule__StateDeclaration__ScopeAssignment");
 					put(grammarAccess.getSimpleScopeAccess().getDeclarationsAssignment_1(), "rule__SimpleScope__DeclarationsAssignment_1");
 					put(grammarAccess.getInterfaceScopeAccess().getNameAssignment_2(), "rule__InterfaceScope__NameAssignment_2");

@@ -25,7 +25,9 @@ TransitionRoot:
 Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
 */
 StatechartDefinition:
-	{StatechartDefinition} (definitionScopes+=StatechartScope)*;
+	{StatechartDefinition}
+	('namespace' namespace = FQN)?
+	(definitionScopes+=StatechartScope)*;
 
 StateDeclaration:
 	scope=SimpleScope;
@@ -92,6 +94,10 @@ Entrypoint returns sct::Declaration:
 Exitpoint returns sct::Declaration:
 	{Exitpoint} 'exitpoint' name=ID;
 
+/* ---- Datatype rules ---- */
+FQN:
+	ID ('.'ID)*;
+
 	/* ---- reaction rules ----
 Define the structure of reactions that are central for describing the statecharts behavior. 
 */
@@ -123,16 +129,16 @@ ReactionPriority:
 	priority=INT;
 
 EntryPointSpec:
-	'>' entrypoint=[Entrypoint];
+	'>' entrypoint=[Entrypoint|FQN];
 
 ExitPointSpec:
-	exitpoint=[Exitpoint] '>';
+	exitpoint=[Exitpoint|FQN] '>';
 
 EventSpec:
 	RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
 
 RegularEventSpec:
-	event=[sct::Event];
+	event=[sct::Event|FQN];
 
 	// TODO: redefine after trigger - we need to use it with clocks
 TimeEventSpec: 
@@ -161,7 +167,7 @@ Statement returns sct::Statement:
 	Assignment | EventRaising | OperationCall;
 
 Assignment:
-	varRef=[sct::Variable] operator=AssignmentOperator expression=Expression;
+	varRef=[sct::Variable|FQN] operator=AssignmentOperator expression=Expression;
 	
 	
 enum AssignmentOperator
@@ -180,7 +186,7 @@ enum AssignmentOperator
 
 
 EventRaising:
-	'raise' event=[sct::Event] (':' value=Expression)?;
+	'raise' event=[sct::Event|FQN] (':' value=Expression)?;
 
 
 //****************
@@ -284,10 +290,10 @@ PrimitiveValueExpression returns Expression:
 	{PrimitiveValueExpression} value=Literal;
 
 ElementReferenceExpression returns Expression:
-	{ElementReferenceExpression} value=[sct::Declaration];
+	{ElementReferenceExpression} value=[sct::Declaration|FQN];
 
 OperationCall returns Expression:
-	{OperationCall} operation=[Operation] '(' (args+=Expression (',' args+=Expression)*)? ')';
+	{OperationCall} operation=[Operation|FQN] '(' (args+=Expression (',' args+=Expression)*)? ')';
 
 Literal:
 	BOOL | INT | HEX | STRING | FLOAT;
