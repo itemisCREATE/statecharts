@@ -41,6 +41,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getLocalReactions <em>Local Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getScopes <em>Scopes</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getRegions <em>Regions</em>}</li>
  * </ul>
  * </p>
@@ -104,6 +105,26 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	 * @ordered
 	 */
 	protected EList<Scope> scopes;
+
+	/**
+	 * The default value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNamespace()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAMESPACE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNamespace()
+	 * @generated
+	 * @ordered
+	 */
+	protected String namespace = NAMESPACE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getRegions() <em>Regions</em>}' containment reference list.
@@ -196,6 +217,27 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getNamespace() {
+		return namespace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNamespace(String newNamespace) {
+		String oldNamespace = namespace;
+		namespace = newNamespace;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__NAMESPACE, oldNamespace, namespace));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Region> getRegions() {
 		if (regions == null) {
 			regions = new EObjectContainmentEList<Region>(Region.class, this, SGraphPackage.STATECHART__REGIONS);
@@ -237,6 +279,8 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 				return getLocalReactions();
 			case SGraphPackage.STATECHART__SCOPES:
 				return getScopes();
+			case SGraphPackage.STATECHART__NAMESPACE:
+				return getNamespace();
 			case SGraphPackage.STATECHART__REGIONS:
 				return getRegions();
 		}
@@ -263,6 +307,9 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 				getScopes().clear();
 				getScopes().addAll((Collection<? extends Scope>)newValue);
 				return;
+			case SGraphPackage.STATECHART__NAMESPACE:
+				setNamespace((String)newValue);
+				return;
 			case SGraphPackage.STATECHART__REGIONS:
 				getRegions().clear();
 				getRegions().addAll((Collection<? extends Region>)newValue);
@@ -288,6 +335,9 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 			case SGraphPackage.STATECHART__SCOPES:
 				getScopes().clear();
 				return;
+			case SGraphPackage.STATECHART__NAMESPACE:
+				setNamespace(NAMESPACE_EDEFAULT);
+				return;
 			case SGraphPackage.STATECHART__REGIONS:
 				getRegions().clear();
 				return;
@@ -311,6 +361,8 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 				return localReactions != null && !localReactions.isEmpty();
 			case SGraphPackage.STATECHART__SCOPES:
 				return scopes != null && !scopes.isEmpty();
+			case SGraphPackage.STATECHART__NAMESPACE:
+				return NAMESPACE_EDEFAULT == null ? namespace != null : !NAMESPACE_EDEFAULT.equals(namespace);
 			case SGraphPackage.STATECHART__REGIONS:
 				return regions != null && !regions.isEmpty();
 		}
@@ -340,6 +392,7 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 		if (baseClass == ScopedElement.class) {
 			switch (derivedFeatureID) {
 				case SGraphPackage.STATECHART__SCOPES: return SGraphPackage.SCOPED_ELEMENT__SCOPES;
+				case SGraphPackage.STATECHART__NAMESPACE: return SGraphPackage.SCOPED_ELEMENT__NAMESPACE;
 				default: return -1;
 			}
 		}
@@ -369,6 +422,7 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 		if (baseClass == ScopedElement.class) {
 			switch (baseFeatureID) {
 				case SGraphPackage.SCOPED_ELEMENT__SCOPES: return SGraphPackage.STATECHART__SCOPES;
+				case SGraphPackage.SCOPED_ELEMENT__NAMESPACE: return SGraphPackage.STATECHART__NAMESPACE;
 				default: return -1;
 			}
 		}
@@ -387,6 +441,8 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (expression: ");
 		result.append(expression);
+		result.append(", namespace: ");
+		result.append(namespace);
 		result.append(')');
 		return result.toString();
 	}

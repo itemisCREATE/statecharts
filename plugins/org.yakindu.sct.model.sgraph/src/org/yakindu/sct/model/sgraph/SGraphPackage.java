@@ -671,13 +671,22 @@ public interface SGraphPackage extends EPackage {
 	int STATECHART__SCOPES = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATECHART__NAMESPACE = NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__REGIONS = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int STATECHART__REGIONS = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Statechart</em>' class.
@@ -686,7 +695,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int STATECHART_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.EntryImpl <em>Entry</em>}' class.
@@ -985,13 +994,22 @@ public interface SGraphPackage extends EPackage {
 	int SCOPED_ELEMENT__SCOPES = 0;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPED_ELEMENT__NAMESPACE = 1;
+
+	/**
 	 * The number of structural features of the '<em>Scoped Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPED_ELEMENT_FEATURE_COUNT = 1;
+	int SCOPED_ELEMENT_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.SynchronizationImpl <em>Synchronization</em>}' class.
@@ -1121,13 +1139,22 @@ public interface SGraphPackage extends EPackage {
 	int STATE__SCOPES = VERTEX_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__NAMESPACE = VERTEX_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Sub Regions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SUB_REGIONS = VERTEX_FEATURE_COUNT + 4;
+	int STATE__SUB_REGIONS = VERTEX_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Orthogonal</b></em>' attribute.
@@ -1136,7 +1163,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__ORTHOGONAL = VERTEX_FEATURE_COUNT + 5;
+	int STATE__ORTHOGONAL = VERTEX_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Substatechart</b></em>' reference.
@@ -1145,7 +1172,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SUBSTATECHART = VERTEX_FEATURE_COUNT + 6;
+	int STATE__SUBSTATECHART = VERTEX_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Submachine</b></em>' attribute.
@@ -1154,7 +1181,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SUBMACHINE = VERTEX_FEATURE_COUNT + 7;
+	int STATE__SUBMACHINE = VERTEX_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Simple</b></em>' attribute.
@@ -1163,7 +1190,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SIMPLE = VERTEX_FEATURE_COUNT + 8;
+	int STATE__SIMPLE = VERTEX_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Composite</b></em>' attribute.
@@ -1172,7 +1199,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__COMPOSITE = VERTEX_FEATURE_COUNT + 9;
+	int STATE__COMPOSITE = VERTEX_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Leaf</b></em>' attribute.
@@ -1181,7 +1208,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__LEAF = VERTEX_FEATURE_COUNT + 10;
+	int STATE__LEAF = VERTEX_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -1190,7 +1217,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = VERTEX_FEATURE_COUNT + 11;
+	int STATE_FEATURE_COUNT = VERTEX_FEATURE_COUNT + 12;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.StatementImpl <em>Statement</em>}' class.
@@ -1750,6 +1777,17 @@ public interface SGraphPackage extends EPackage {
 	EReference getScopedElement_Scopes();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.ScopedElement#getNamespace <em>Namespace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Namespace</em>'.
+	 * @see org.yakindu.sct.model.sgraph.ScopedElement#getNamespace()
+	 * @see #getScopedElement()
+	 * @generated
+	 */
+	EAttribute getScopedElement_Namespace();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Synchronization <em>Synchronization</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2236,6 +2274,14 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCOPED_ELEMENT__SCOPES = eINSTANCE.getScopedElement_Scopes();
+
+		/**
+		 * The meta object literal for the '<em><b>Namespace</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCOPED_ELEMENT__NAMESPACE = eINSTANCE.getScopedElement_Namespace();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.SynchronizationImpl <em>Synchronization</em>}' class.
