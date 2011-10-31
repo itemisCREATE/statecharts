@@ -61,7 +61,7 @@ public abstract class AbstractXtextMemberInjectionService<S extends EObject, T e
 	private ILinker linker;
 
 	/**
-	 * The ParserRule that should be invoked sith the expression
+	 * The ParserRule that should be invoked with the expression
 	 * 
 	 * @return the parser rule
 	 */
