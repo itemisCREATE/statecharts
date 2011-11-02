@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.IDialogSettings;
@@ -38,11 +39,13 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 import org.yakindu.sct.ui.editor.StatechartImages;
+import org.yakindu.sct.ui.editor.extensions.Extensions;
+import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.inject.Injector;
 
 /**
  * Basic resource selection dialog for Statecharts with a link that opens the
@@ -56,25 +59,38 @@ public class SelectSubmachineDialog extends ElementListSelectionDialog {
 
 	public final static int CLEAR_BUTTON = IDialogConstants.CLIENT_ID + 1;
 
-
 	private boolean clearSelected = false;
 
 	private EObject context;
 
-	public SelectSubmachineDialog(Shell parent) {
-		super(parent, getLabelProvider());
+	private final Resource resource;
+
+	public SelectSubmachineDialog(Shell parent, Resource resource) {
+		super(parent, getLabelProvider(resource));
+		this.resource = resource;
 		initDialog();
 	}
 
-	private static ILabelProvider getLabelProvider() {
-		return STextActivator.getInstance().getInjector()
-				.getInstance(ILabelProvider.class);
+	private static Injector getInjector(Resource resource) {
+		Extensions<IExpressionsProvider> extensions = new Extensions<IExpressionsProvider>(
+				IExpressionsProvider.EXPRESSIONS_EXTENSION);
+		IExpressionsProvider provider = extensions
+				.getRegisteredProvider(SGraphPackage.Literals.STATECHART,
+						resource.getURI().toString());
+		return provider.getInjector();
 	}
 
-	private static Object[] getStatemachines(EObject context) {
-		IGlobalScopeProvider scopeProvider = STextActivator.getInstance()
-				.getInjector().getInstance(IGlobalScopeProvider.class);
-		IScope scope = scopeProvider.getScope(context.eResource(),
+	private static ILabelProvider getLabelProvider(Resource resource) {
+		return getInjector(resource).getInstance(ILabelProvider.class);
+	}
+
+	private IGlobalScopeProvider getGlobalScopeProvider(Resource resource) {
+		return getInjector(resource).getInstance(IGlobalScopeProvider.class);
+	}
+
+	private Object[] getStatemachines(EObject context) {
+		IScope scope = getGlobalScopeProvider(resource).getScope(
+				context.eResource(),
 				SGraphPackage.Literals.STATE__SUBSTATECHART,
 				Predicates.<IEObjectDescription> alwaysTrue());
 		Iterable<IEObjectDescription> statecharts = scope.getAllElements();
@@ -118,6 +134,7 @@ public class SelectSubmachineDialog extends ElementListSelectionDialog {
 		return composite;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected List getInitialElementSelections() {
 		if (context instanceof Statechart) {
