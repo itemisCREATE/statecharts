@@ -51,7 +51,8 @@ public class StateEditHelper extends VertexEditHelper {
 	}
 
 	private ICommand createSubmachineStateCommand(ConfigureRequest req) {
-		SelectSubmachineDialog dialog = new SelectSubmachineDialog(new Shell());
+		SelectSubmachineDialog dialog = new SelectSubmachineDialog(new Shell(),
+				req.getElementToConfigure().eResource());
 		dialog.setElements(new Object[] { req.getElementToConfigure() });
 		if (Dialog.OK == dialog.open()) {
 			Statechart selectedSubmachine = dialog.getSelectedSubmachine();

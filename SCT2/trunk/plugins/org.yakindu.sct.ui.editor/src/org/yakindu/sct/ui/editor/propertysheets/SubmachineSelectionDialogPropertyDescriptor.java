@@ -18,6 +18,7 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.eclipse.jface.dialogs.Dialog;
@@ -36,10 +37,12 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
+import org.yakindu.sct.ui.editor.extensions.Extensions;
+import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
 
@@ -69,12 +72,19 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 	private UpdateLabelAdapter updateLabelAdapter;
 	private EObject context;
 
-	public SubmachineSelectionDialogPropertyDescriptor() {
-		STextActivator.getInstance().getInjector().injectMembers(this);
+	private void injectMembers(Resource resource) {
+		Extensions<IExpressionsProvider> extensions = new Extensions<IExpressionsProvider>(
+				IExpressionsProvider.EXPRESSIONS_EXTENSION);
+		IExpressionsProvider provider = extensions
+				.getRegisteredProvider(SGraphPackage.Literals.STATECHART,
+						resource.getURI().toString());
+		Injector injector = provider.getInjector();
+		injector.injectMembers(this);
 	}
 
 	public void updateModelBinding(EObject eObject) {
 		this.state = (State) eObject;
+		injectMembers(state.eResource());
 		updateLabel(state);
 		context = eObject;
 		if (updateLabelAdapter == null) {
@@ -125,7 +135,7 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 
 			public void handleEvent(Event event) {
 				SelectSubmachineDialog dialog = new SelectSubmachineDialog(
-						parent.getShell());
+						parent.getShell(), state.eResource());
 				dialog.setElements(new Object[] { context });
 				if (Dialog.OK == dialog.open()) {
 					Statechart selectedSubmachine = dialog
