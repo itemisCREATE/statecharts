@@ -27,15 +27,15 @@ Contributors:
 	
 	«EXPAND TimerHandler::file FOR this»
 	
-	«EXPAND Interface::file FOR this»
+	«EXPAND Event::file FOR this»
 	
 	«REM» concrete files «ENDREM»
 	«FOREACH this.scopes.typeSelect(InterfaceScope) AS scope»
 	«EXPAND CustomInterface::file FOR scope»
-	«EXPAND CustomAbstractInterface::file FOR scope»
+	«EXPAND CustomInterfaceImpl::file FOR scope»
 	«ENDFOREACH»
 	
-	«EXPAND CustomAbstractBaseStatemachine::file FOR this»
+	«EXPAND CustomBaseStatemachine::file FOR this»
 	
 	«EXPAND CustomCycleBasedStatemachine::file FOR this»
 	

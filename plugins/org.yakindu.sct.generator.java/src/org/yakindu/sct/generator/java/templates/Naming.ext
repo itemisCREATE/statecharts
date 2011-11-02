@@ -58,12 +58,13 @@ getInternalScopeValuedEvents(ExecutionFlow this) :
 getTimeEvents(ExecutionFlow this) : scopes.typeSelect(Scope).declarations.typeSelect(TimeEvent);
 
 String getStatemachineName(ExecutionFlow this) : name.toFirstUpper();
-String getAbstractStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "AbstractBaseStatemachine";
+String getBaseStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "BaseStatemachine";
 String getEventBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "EventBasedStatemachine";
 String getCycleBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "CyleBasedStatemachine";
 
 String getInterfaceName(InterfaceScope this) :  "Interface" + name.toFirstUpper(); 
-String getAbstractInterfaceName(InterfaceScope this) :  "Abstract" + getInterfaceName();
+String getInterfaceImplName(InterfaceScope this) :  getInterfaceName() + "Impl";
+String getBaseStatemachineName(InterfaceScope this) : ((ExecutionFlow)eContainer).getBaseStatemachineName();
 
 String getQualifiedName(EventDefinition this) : ((InterfaceScope)eContainer).name.toFirstUpper()+name.toFirstUpper();
 String getValueName(EventDefinition this) : "eventValue"+name.toFirstUpper();
@@ -136,7 +137,7 @@ ExecutionState state(Step this) : (ExecutionState) eContainer;
 
 String getContext(Variable this) : 
 	if (InterfaceScope.isInstance(eContainer) && ((InterfaceScope)eContainer).name != null) then  
-		"getAbstractInterface"+((InterfaceScope)eContainer).name.toFirstUpper()+"()."
+		"interface"+((InterfaceScope)eContainer).name.toFirstUpper()+"."
 	
 	else 
 		"";
