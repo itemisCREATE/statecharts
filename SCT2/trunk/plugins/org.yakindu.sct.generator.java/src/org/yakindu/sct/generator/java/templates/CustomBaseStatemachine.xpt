@@ -57,7 +57,7 @@ getTimerHandler().resetTimer(«timeEvent.getName()»);
 
 «DEFINE ActionCode FOR CheckRef -»
 «IF this.check != null -»
-«this.check.functionName()»(Collection<?> occuredEvents) «
+«this.check.functionName()»(events) «
 ELSE -»
 true 
 «ENDIF -»
@@ -83,13 +83,13 @@ else {
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR ExitState-»
-	activeStates.remove(States.«state.getName()»);
+	activeStates.remove(State.«state.getName()»);
 «ENDDEFINE»
 
 «DEFINE ConditionMethodsImplement FOR ExecutionState-»
 	«FOREACH reactions AS r-»
 		«IF r.check != null -»
-	private bool «r.check.functionName()»(Collection<?> occuredEvents) {
+	private bool «r.check.functionName()»(Collection<?> events) {
 		«IF r.check.condition != null-»
 		return «r.check.condition.toCode()»;
 		«ELSE-»
@@ -113,7 +113,7 @@ else {
 «ENDDEFINE»
 
 «DEFINE CycleMethodsImplement FOR ExecutionState-»
-	private void cycle«getName()»(Collection<?> occuredEvents) {
+	private void cycle«getName()»(Collection<?> events) {
 		«EXPAND CycleCode FOR cycle-»
 	}
 «ENDDEFINE»
@@ -137,12 +137,15 @@ else {
 «DEFINE EntryCode FOR EnterState-»
 	public void «statemachineEntryFunctionName()» {
 		«EXPAND ActionCode FOR this-»
+		«IF state.entryAction != null-»
 		«state.entryAction.entryActionFunctionName()»();
+		«ENDIF»
+		
 	}
 «ENDDEFINE»
 
 «DEFINE file FOR ExecutionFlow-»
-«FILE getAbstractStatemachineName()+'.java'-»
+«FILE getBaseStatemachineName()+'.java'-»
 «getLicenseHeader()»
 package org.yakindu.sct.runtime.java.«getStatemachineName()»;
 
@@ -153,13 +156,18 @@ import java.util.Set;
 import org.yakindu.sct.runtime.java.base.DataType;
 import org.yakindu.sct.runtime.java.base.IStatemachine;
 
-public abstract class «getAbstractStatemachineName()» implements ITimedStatemachine<Event> {
+public class «getBaseStatemachineName()» implements ITimedStatemachine<Event> {
 
 	public enum State {
 		«FOREACH states AS state-»
 	      «state.getName()»,
 	    «ENDFOREACH-»
 	};
+	
+	«FOREACH getNamedInterfaceScope() AS interface-»
+	private «interface.getInterfaceImplName()» «interface.getInterfaceName().toFirstLower()»
+	«ENDFOREACH-»
+	
 	«REM»unnamed interface valued events«ENDREM»
 	«FOREACH getUnnamedInterfaceScopeEvents() AS event-»
 	private «event.type.getJavaType()» «event.getValueName()»;
@@ -177,17 +185,29 @@ public abstract class «getAbstractStatemachineName()» implements ITimedStatemach
 	private «variable.type.getJavaType()» «variable.getValueName()»;
 	«ENDFOREACH-»
 
-	private Set<State> activeStates = EnumSet.noneOf(State.class);
+	private final Set<State> activeStates = EnumSet.noneOf(State.class);
+	
+	private Collection<Event> occuredEvents;
+	
+	private Collection<Event> outEvents;
 	
 	private ITimerHandler<Event> timerHandler;
 	
-	protected abstract Collection<Events> getOccuredEvents();
+	public «getBaseStatemachineName()»(Collection<Event> occuredEvents, Collection<Event> outEvents) {
+		this.occuredEvents = occuredEvents;
+		this.outEvents = outEvents;
+		«FOREACH getNamedInterfaceScope() AS interface-»
+		«interface.getInterfaceName().toFirstLower()» = new  «interface.getInterfaceImplName()»(occuredEvents, outEvents);
+		«ENDFOREACH-»
+	}
 	
-	protected abstract Collection<Events> getOutEvents();
-
-	«FOREACH getNamedInterfaceScope() AS interface-»
-	protected abstract «interface.getAbstractInterfaceName()» get«interface.getAbstractInterfaceName()»();
-	«ENDFOREACH-»
+	protected Collection<Event> getOccuredEvents() {
+		return occuredEvents;
+	}
+	
+	protected Collection<Event> getOutEvents(){
+		return outEvents;
+	}
 		
 	«EXPAND EntryCode FOREACH enterSequence.steps-»
 	
@@ -220,7 +240,7 @@ public abstract class «getAbstractStatemachineName()» implements ITimedStatemach
 	
 	«FOREACH getNamedInterfaceScope() AS interface-»
 	public «interface.getInterfaceName()» get«interface.getInterfaceName()» {
-		return get«interface.getAbstractInterfaceName()»();
+		return «interface.getInterfaceName().toFirstLower()»;
 	}
 	«ENDFOREACH-»
 	

@@ -86,11 +86,11 @@ String toCode(NumericalMultiplyDivideExpression expression) :
 
 String toCode(ElementReferenceExpression exp) :
     if (EventDefinition.isInstance(exp.value)) then
-    	"getOccuredEvents().contains(Event."+((EventDefinition)exp.value).getName()+")"
+    	"events.contains(Event."+((EventDefinition)exp.value).getName()+")"
     else if (VariableDefinition.isInstance(exp.value)) then
     	getContext((VariableDefinition)exp.value)+"getVar"+exp.value.name.toFirstUpper()+"()"
     else if (TimeEvent.isInstance(exp.value)) then
-    	"getOccuredEvents().contains(Event."+getName((TimeEvent)exp.value)+")";
+    	"events.contains(Event."+getName((TimeEvent)exp.value)+")";
 
 String getOperator(AdditiveOperator operator) : 
     switch(operator) {

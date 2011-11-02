@@ -26,55 +26,21 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
 
-public class «getEventBasedStatemachineName()» extends «getAbstractStatemachineName()» {
+public class «getEventBasedStatemachineName()» extends «getBaseStatemachineName()» {
 
-	private Queue<Events> eventQueue = new LinkedList<Event>();
-	
-	private Set<Events> outEvents = EnumSet.noneOf(Event.class);
-	
-	«FOREACH getNamedInterfaceScope() AS interface»
-	private «interface.getAbstractInterfaceName()» «interface.getInterfaceName().toFirstLower()»
-	«ENDFOREACH»
-
-	@Override
-	protected Collection<Events> getOccuredEvents() {
-		return occuredEvents;
+	public CustomEventBasedStatemachine() {
+		super(new LinkedList<Event>(), EnumSet.noneOf(Event.class));
 	}
 	
 	@Override
-	protected Collection<Events> getOutEvents() {
-		return outEvents;
+	protected Queue<Event> getOccuredEvents() {
+		return (Queue<Event>) super.getOccuredEvents();
 	}
-	
-	«FOREACH getNamedInterfaceScope() AS interface-»
-	«LET interface.getAbstractInterfaceName() AS abstractName-»
-	«LET interface.getInterfaceName().toFirstLower() AS name-»
-	@Override
-	protected «abstractName» get«abstractName»() {
-		if («name» == null) {
-			«name» = new «abstractName»() {
-
-				@Override
-				public Collection<Events> getOutEvents() {
-					return outEvents;
-				}
-
-				@Override
-				public Collection<Events> getOccuredEvents() {
-					return occuredEvents;
-				}
-			};
-		}
-		return «name»;
-	}
-	«ENDLET-»
-	«ENDLET-»
-	«ENDFOREACH-»
 	
 	@Override
 	public void runCycle() {
 		if (eventOccured()) {
-			Event event = eventQueue.poll();
+			Event event = getOccuredEvents().poll();
 			runCycle(Collections.singletonList(event));
 		}
 	}
