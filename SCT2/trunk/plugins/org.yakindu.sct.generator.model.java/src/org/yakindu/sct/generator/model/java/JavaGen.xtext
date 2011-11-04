@@ -1,0 +1,34 @@
+grammar org.yakindu.sct.generator.model.java.JavaGen with org.yakindu.sct.generator.model.base.BaseGen
+
+generate javaGen "http://www.yakindu.org/sct/generator/model/java/JavaGen"
+import "platform:/resource/org.yakindu.sct.model.sgen/model/emf/sgen.ecore" as gen
+import "http://www.yakindu.org/sct/generator/BaseGenModel" as javaGenModel
+/*
+ * @author Andreas Muelder
+ */
+BaseGeneratorModel returns gen::GeneratorModel:
+	'JavaGenerator' '{'
+	statechartReferences=StatechartReferences
+	configuration=GeneratorConfiguration
+	'}';
+ 
+Configurations returns gen::Configuration:
+	(OutletConfiguration | NamingConfiguration | ExecutionTypeConfiguration);
+
+NamingConfiguration returns gen::Configuration:
+	{NamingConfiguration} 'naming' '{'
+	'interfacePackage' '=' interfacePackageName=STRING
+	'implementationPackage' '=' implementationPackageName=STRING
+	'copyrightHeader' '=' copyright=STRING
+	'}';
+
+ExecutionTypeConfiguration returns gen::Configuration:
+	{ExecutionTypeConfiguration} 'executionType' '{'
+	'type' '=' type=ExecutionType
+	'}';
+
+enum ExecutionType:
+	CYCLE_BASED="cycleBased" | EVENT_DRIVEN="eventDriven";
+
+
+ 

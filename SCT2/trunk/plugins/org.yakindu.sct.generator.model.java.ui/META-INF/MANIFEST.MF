@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.yakindu.sct.generator.model.java.ui
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0
+Bundle-SymbolicName: org.yakindu.sct.generator.model.java.ui; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.yakindu.sct.generator.model.java;visibility:=reexport,
+ org.eclipse.xtext.ui,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.ui,
+ org.eclipse.xtext.builder,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types.ui,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.compare,
+ org.yakindu.sct.generator.model.base.ui;bundle-version="1.0.0",
+ org.yakindu.sct.generator.base;bundle-version="1.0.0"
+Import-Package: org.apache.log4j,
+ org.apache.commons.logging
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.yakindu.sct.generator.model.java.ui.contentassist.antlr,
+ org.yakindu.sct.generator.model.java.ui.internal
+Bundle-Activator: org.yakindu.sct.generator.model.java.ui.internal.JavaGenActivator

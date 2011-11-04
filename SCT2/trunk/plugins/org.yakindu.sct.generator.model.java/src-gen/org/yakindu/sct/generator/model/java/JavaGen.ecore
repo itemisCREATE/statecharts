@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="javaGen"
+    nsURI="http://www.yakindu.org/sct/generator/model/java/JavaGen" nsPrefix="javaGen">
+  <eClassifiers xsi:type="ecore:EEnum" name="ExecutionType">
+    <eLiterals name="CYCLE_BASED" literal="cycleBased"/>
+    <eLiterals name="EVENT_DRIVEN" value="1" literal="eventDriven"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamingConfiguration" eSuperTypes="platform:/resource/org.yakindu.sct.model.sgen/model/emf/sgen.ecore#//Configuration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interfacePackageName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="implementationPackageName"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="copyright" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionTypeConfiguration" eSuperTypes="platform:/resource/org.yakindu.sct.model.sgen/model/emf/sgen.ecore#//Configuration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EEnum platform:/resource/org.yakindu.sct.generator.model.java/src-gen/org/yakindu/sct/generator/model/java/JavaGen.ecore#//ExecutionType"/>
+  </eClassifiers>
+</ecore:EPackage>
