@@ -38,7 +38,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
-import org.yakindu.sct.ui.editor.extensions.Extensions;
+import org.yakindu.sct.ui.editor.extensions.ExpressionsProviderExtensions;
 import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
 
 import com.google.inject.Inject;
@@ -73,9 +73,7 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 	private EObject context;
 
 	private void injectMembers(Resource resource) {
-		Extensions<IExpressionsProvider> extensions = new Extensions<IExpressionsProvider>(
-				IExpressionsProvider.EXPRESSIONS_EXTENSION);
-		IExpressionsProvider provider = extensions
+		IExpressionsProvider provider = ExpressionsProviderExtensions
 				.getRegisteredProvider(SGraphPackage.Literals.STATECHART,
 						resource.getURI().toString());
 		Injector injector = provider.getInjector();

@@ -15,7 +15,7 @@ import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.ExpressionElement;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.ui.editor.extensions.Extensions;
+import org.yakindu.sct.ui.editor.extensions.ExpressionsProviderExtensions;
 import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
 import org.yakindu.sct.ui.editor.policies.ExpressionDirectEditPolicy;
 
@@ -40,9 +40,7 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart {
 	}
 
 	private void init() {
-		Extensions<IExpressionsProvider> extensions = new Extensions<IExpressionsProvider>(
-				IExpressionsProvider.EXPRESSIONS_EXTENSION);
-		IExpressionsProvider registeredProvider = extensions
+		IExpressionsProvider registeredProvider = ExpressionsProviderExtensions
 				.getRegisteredProvider(resolveSemanticElement().eClass(),
 						resolveSemanticElement().eResource().getURI()
 								.lastSegment());
@@ -73,8 +71,7 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart {
 	protected void handleNotificationEvent(Notification notification) {
 		if (notification.getFeature() == SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION) {
 			refreshVisuals();
-		}
-		else {
+		} else {
 			super.handleNotificationEvent(notification);
 		}
 	}

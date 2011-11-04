@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.extensions;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.swt.SWT;
 
 import com.google.inject.Injector;
@@ -18,9 +19,7 @@ import com.google.inject.Injector;
  * @author andreas muelder
  * 
  */
-public interface IExpressionsProvider extends ISCTProvider {
-
-	String EXPRESSIONS_EXTENSION = "org.yakindu.sct.ui.editor.expressions";
+public interface IExpressionsProvider {
 
 	public Injector getInjector();
 
@@ -28,4 +27,6 @@ public interface IExpressionsProvider extends ISCTProvider {
 	 * @return the {@link SWT} styles for the CellEditor
 	 */
 	public int getStyle();
+	
+	public boolean isProviderFor(EClass type, String resourceUri);
 }

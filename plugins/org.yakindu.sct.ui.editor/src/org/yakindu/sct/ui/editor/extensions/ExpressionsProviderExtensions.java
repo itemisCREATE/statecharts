@@ -22,37 +22,40 @@ import org.eclipse.emf.ecore.EClass;
  * 
  * @author andreas muelder - Initial contribution and API
  * 
- * @param <T>
  */
-public class Extensions<T extends ISCTProvider> {
+public class ExpressionsProviderExtensions {
 
-	private final String extensionPointId;
+	private static final String EXPRESSIONS_EXTENSION = "org.yakindu.sct.ui.editor.expressions";
 
-	public Extensions(String extensionPointId) {
-		this.extensionPointId = extensionPointId;
+	protected ExpressionsProviderExtensions() {
+		// Not intended to be instantiated
 	}
 
-
-	public T getRegisteredProvider(EClass type, String resourceUri) {
-		List<T> loadRegisteredProvider = loadRegisteredProvider();
-		for (T t : loadRegisteredProvider) {
+	/**
+	 * Returns all registered {@link IExpressionsProvider}s 
+	 * @param type
+	 * @param resourceUri
+	 * @return
+	 */
+	public static IExpressionsProvider getRegisteredProvider(EClass type,
+			String resourceUri) {
+		List<IExpressionsProvider> loadRegisteredProvider = loadRegisteredProvider();
+		for (IExpressionsProvider t : loadRegisteredProvider) {
 			if (t.isProviderFor(type, resourceUri)) {
 				return t;
 			}
 		}
-		throw new IllegalStateException("No provider found for type" + type);
-
+		return null;
 	}
 
-	public List<T> loadRegisteredProvider() {
-		List<T> providers = new ArrayList<T>();
+	protected static List<IExpressionsProvider> loadRegisteredProvider() {
+		List<IExpressionsProvider> providers = new ArrayList<IExpressionsProvider>();
 		IConfigurationElement[] configurationElements = Platform
 				.getExtensionRegistry().getConfigurationElementsFor(
-						extensionPointId);
+						EXPRESSIONS_EXTENSION);
 		for (IConfigurationElement configurationElement : configurationElements) {
 			try {
-				@SuppressWarnings("unchecked")
-				T provider = (T) configurationElement
+				IExpressionsProvider provider = (IExpressionsProvider) configurationElement
 						.createExecutableExtension("class");
 				providers.add(provider);
 			} catch (CoreException e) {

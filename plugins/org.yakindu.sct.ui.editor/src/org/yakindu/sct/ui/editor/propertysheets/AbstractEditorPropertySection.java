@@ -6,7 +6,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.ui.IEditorPart;
-import org.yakindu.sct.ui.editor.extensions.Extensions;
+import org.yakindu.sct.ui.editor.extensions.ExpressionsProviderExtensions;
 import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
 
 import com.google.inject.Injector;
@@ -50,9 +50,7 @@ public abstract class AbstractEditorPropertySection extends
 	}
 
 	protected Injector getInjector(EClass type) {
-		Extensions<IExpressionsProvider> extensions = new Extensions<IExpressionsProvider>(
-				IExpressionsProvider.EXPRESSIONS_EXTENSION);
-		IExpressionsProvider registeredProvider = extensions
+		IExpressionsProvider registeredProvider = ExpressionsProviderExtensions
 				.getRegisteredProvider(type, getActiveEditorResource().getURI()
 						.lastSegment());
 		return registeredProvider.getInjector();

@@ -40,7 +40,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.StatechartImages;
-import org.yakindu.sct.ui.editor.extensions.Extensions;
+import org.yakindu.sct.ui.editor.extensions.ExpressionsProviderExtensions;
 import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
 
 import com.google.common.base.Predicates;
@@ -72,9 +72,7 @@ public class SelectSubmachineDialog extends ElementListSelectionDialog {
 	}
 
 	private static Injector getInjector(Resource resource) {
-		Extensions<IExpressionsProvider> extensions = new Extensions<IExpressionsProvider>(
-				IExpressionsProvider.EXPRESSIONS_EXTENSION);
-		IExpressionsProvider provider = extensions
+		IExpressionsProvider provider = ExpressionsProviderExtensions
 				.getRegisteredProvider(SGraphPackage.Literals.STATECHART,
 						resource.getURI().toString());
 		return provider.getInjector();
