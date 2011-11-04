@@ -1,17 +1,11 @@
 package org.yakindu.sct.ui.integration.stext;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.swt.SWT;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.extensions.AbstractExpressionsProvider;
-import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
+import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
 import org.yakindu.sct.ui.integration.stext.modules.TransitionRuntimeModule;
 import org.yakindu.sct.ui.integration.stext.modules.TransitionUIModule;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.util.Modules;
+import com.google.inject.Module;
 
 /**
  * 
@@ -19,27 +13,15 @@ import com.google.inject.util.Modules;
  * 
  */
 public class TransitionExpressionProvider extends AbstractExpressionsProvider
-		implements IExpressionsProvider {
+		implements IExpressionLanguageProvider {
 
-	public Injector createInjector() {
-		return Guice.createInjector(Modules.override(
-				Modules.override(new TransitionRuntimeModule())
-						.with(new TransitionUIModule(ExtensionsActivator
-								.getDefault()))).with(new SharedStateModule()));
-	}
-
-	public int getStyle() {
-		return SWT.SINGLE;
+	@Override
+	protected Module getRuntimeModule() {
+		return new TransitionRuntimeModule();
 	}
 
 	@Override
-	protected EClass getType() {
-		return SGraphPackage.Literals.TRANSITION;
+	protected Module getUIModule() {
+		return new TransitionUIModule(ExtensionsActivator.getDefault());
 	}
-
-	@Override
-	protected String getResourceExtension() {
-		return "sct";
-	}
-
 }

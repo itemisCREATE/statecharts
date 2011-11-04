@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.editparts.TransitionEditPart;
+import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
@@ -37,7 +38,7 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 				SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
 				"Expression: ",
 				IYakinduSctHelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION,
-				getInjector(SGraphPackage.Literals.TRANSITION),
+				getInjector(SemanticTarget.TransitionExpression),
 				new CloningBasedFakeContextResourcesProvider(
 						Collections.singletonList(getActiveEditorResource())));
 		descriptors.add(expressionsDescriptor);

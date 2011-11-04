@@ -4,6 +4,8 @@ import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.swt.SWT;
+import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 
@@ -16,18 +18,18 @@ public class StatechartTextExpressionEditPart extends
 		PlugableXtextLabelEditPart {
 
 	public StatechartTextExpressionEditPart(View view) {
-		super(view);
+		super(view, SemanticTarget.StatechartInterface);
 	}
-	
+
 	@Override
 	protected void addNotationalListeners() {
 		super.addNotationalListeners();
 		View parentStateView = getParentStateView();
 		if (parentStateView != null) {
-			addListenerFilter("parentStateView", this,parentStateView);
+			addListenerFilter("parentStateView", this, parentStateView);
 		}
 	}
-	
+
 	@Override
 	protected void removeNotationalListeners() {
 		View parentStateView = getParentStateView();
@@ -35,13 +37,6 @@ public class StatechartTextExpressionEditPart extends
 			removeListenerFilter("parentStateView");
 		}
 		super.removeNotationalListeners();
-	}
-	
-	private View getParentStateView() {
-		if (getParent() instanceof StatechartTextEditPart) {
-			return ((StatechartTextEditPart) getParent()).getNotationView();
-		}
-		return null;
 	}
 
 	@Override
@@ -56,6 +51,18 @@ public class StatechartTextExpressionEditPart extends
 				new ContextSensitiveHelpPolicy(
 						IYakinduSctHelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION));
 		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
+	}
+
+	private View getParentStateView() {
+		if (getParent() instanceof StatechartTextEditPart) {
+			return ((StatechartTextEditPart) getParent()).getNotationView();
+		}
+		return null;
+	}
+
+	@Override
+	protected int getEditorStyles() {
+		return SWT.MULTI;
 	}
 
 }

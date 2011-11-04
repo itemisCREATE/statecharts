@@ -8,7 +8,7 @@ import org.yakindu.sct.ui.integration.stext.parsers.TransitionContentAssistParse
 
 /**
  * 
- * @author muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class TransitionUIModule extends STextUiModule {

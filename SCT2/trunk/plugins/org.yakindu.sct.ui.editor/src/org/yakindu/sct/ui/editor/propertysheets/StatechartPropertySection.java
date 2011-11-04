@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart;
+import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
@@ -43,7 +44,7 @@ public class StatechartPropertySection extends AbstractEditorPropertySection {
 				SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
 				"Expression: ",
 				IYakinduSctHelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION,
-				getInjector(SGraphPackage.Literals.STATECHART));
+				getInjector(SemanticTarget.StatechartInterface));
 		descriptors.add(expressionsDescriptor);
 	}
 

@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.editparts.StateEditPart;
+import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
@@ -41,7 +42,7 @@ public class StatePropertySection extends NamePropertySection {
 				SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
 				"Expression: ",
 				IYakinduSctHelpContextIds.SC_PROPERTIES_STATE_EXPRESSION,
-				getInjector(SGraphPackage.Literals.STATE),
+				getInjector(SemanticTarget.StateDeclaration),
 				new CloningBasedFakeContextResourcesProvider(
 						Collections.singletonList(getActiveEditorResource())));
 		descriptors.add(expressionsDescriptor);
