@@ -12,6 +12,8 @@ package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.swt.SWT;
+import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 
@@ -26,7 +28,7 @@ public class TransitionExpressionEditPart extends
 		PlugableExternalXtextLabelEditPart implements IXtextAwareEditPart {
 
 	public TransitionExpressionEditPart(View view) {
-		super(view);
+		super(view, SemanticTarget.TransitionExpression);
 	}
 
 	@Override
@@ -36,6 +38,11 @@ public class TransitionExpressionEditPart extends
 				EditPolicy.SELECTION_FEEDBACK_ROLE,
 				new ContextSensitiveHelpPolicy(
 						IYakinduSctHelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION));
+	}
+
+	@Override
+	protected int getEditorStyles() {
+		return SWT.SINGLE;
 	}
 
 }

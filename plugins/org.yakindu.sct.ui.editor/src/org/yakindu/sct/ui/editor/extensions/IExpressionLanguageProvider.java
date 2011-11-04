@@ -10,23 +10,15 @@
  */
 package org.yakindu.sct.ui.editor.extensions;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.swt.SWT;
-
 import com.google.inject.Injector;
 
 /**
- * @author andreas muelder
+ * 
+ * @author andreas muelder - Initial contribution and API
  * 
  */
-public interface IExpressionsProvider {
+public interface IExpressionLanguageProvider {
 
 	public Injector getInjector();
 
-	/**
-	 * @return the {@link SWT} styles for the CellEditor
-	 */
-	public int getStyle();
-	
-	public boolean isProviderFor(EClass type, String resourceUri);
 }

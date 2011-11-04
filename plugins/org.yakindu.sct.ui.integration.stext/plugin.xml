@@ -3,14 +3,20 @@
 <plugin>
    <extension
          point="org.yakindu.sct.ui.editor.expressions">
-      <ExpressionProvider
-            class="org.yakindu.sct.ui.integration.stext.TransitionExpressionProvider">
-      </ExpressionProvider>
-      <ExpressionProvider
-            class="org.yakindu.sct.ui.integration.stext.StateExpressionProvider">
-      </ExpressionProvider>
-      <ExpressionProvider
-            class="org.yakindu.sct.ui.integration.stext.StatechartExpressionProvider">
-      </ExpressionProvider>
+      <ExpressionLanguageProvider
+            class="org.yakindu.sct.ui.integration.stext.StatechartExpressionProvider"
+            resourceExtension="sct"
+            semanticTarget="StatechartInterface">
+      </ExpressionLanguageProvider>
+      <ExpressionLanguageProvider
+            class="org.yakindu.sct.ui.integration.stext.StateExpressionProvider"
+            resourceExtension="sct"
+            semanticTarget="StateDeclaration">
+      </ExpressionLanguageProvider>
+      <ExpressionLanguageProvider
+            class="org.yakindu.sct.ui.integration.stext.TransitionExpressionProvider"
+            resourceExtension="sct"
+            semanticTarget="TransitionExpression">
+      </ExpressionLanguageProvider>
    </extension>
 </plugin>

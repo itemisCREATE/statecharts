@@ -15,8 +15,9 @@ import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.ExpressionElement;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.ui.editor.extensions.ExpressionsProviderExtensions;
-import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
+import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
+import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
+import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
 import org.yakindu.sct.ui.editor.policies.ExpressionDirectEditPolicy;
 
 import com.google.inject.Injector;
@@ -32,20 +33,19 @@ import de.itemis.xtext.utils.gmf.directedit.XtextLabelEditPart;
 public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart {
 
 	private Injector injector;
-	private int editorStyle;
 
-	public PlugableXtextLabelEditPart(View view) {
+	protected abstract int getEditorStyles();
+
+	public PlugableXtextLabelEditPart(View view, SemanticTarget target) {
 		super(view);
-		init();
+		init(target);
 	}
 
-	private void init() {
-		IExpressionsProvider registeredProvider = ExpressionsProviderExtensions
-				.getRegisteredProvider(resolveSemanticElement().eClass(),
-						resolveSemanticElement().eResource().getURI()
-								.lastSegment());
+	private void init(SemanticTarget target) {
+		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions
+				.getRegisteredProvider(target, resolveSemanticElement()
+						.eResource().getURI().lastSegment());
 		injector = registeredProvider.getInjector();
-		editorStyle = registeredProvider.getStyle();
 	}
 
 	@Override
@@ -79,10 +79,6 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart {
 	public String getEditText() {
 		String exp = resolveSemanticElement().getExpression();
 		return exp != null ? exp : "";
-	}
-
-	protected int getEditorStyles() {
-		return editorStyle;
 	}
 
 	public Injector getInjector() {

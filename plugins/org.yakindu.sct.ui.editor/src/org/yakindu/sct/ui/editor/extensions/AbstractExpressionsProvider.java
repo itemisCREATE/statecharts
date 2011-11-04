@@ -10,35 +10,38 @@
  */
 package org.yakindu.sct.ui.editor.extensions;
 
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 
+import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 
 /**
+ * Base class for all {@link IExpressionLanguageProvider}s, provides caching of
+ * the Injector.
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
 public abstract class AbstractExpressionsProvider implements
-		IExpressionsProvider {
+		IExpressionLanguageProvider {
 
 	private Injector injector = null;
 
-	protected abstract Injector createInjector();
+	protected abstract Module getRuntimeModule();
 
-	protected abstract EClass getType();
+	protected abstract Module getUIModule();
 
-	protected abstract String getResourceExtension();
+	protected Injector createInjector() {
+		return Guice.createInjector(Modules.override(
+				Modules.override(getRuntimeModule()).with(getUIModule())).with(
+				new SharedStateModule()));
+	}
 
 	public Injector getInjector() {
 		if (injector == null)
 			injector = createInjector();
 		return injector;
 	}
-
-	public boolean isProviderFor(EClass type, String resourceUri) {
-		return getType().isSuperTypeOf(type)
-				&& resourceUri.toLowerCase().endsWith(getResourceExtension());
-	}
-
 }

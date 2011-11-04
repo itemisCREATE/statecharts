@@ -38,8 +38,10 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
-import org.yakindu.sct.ui.editor.extensions.ExpressionsProviderExtensions;
-import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
+import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
+import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
+import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
+import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -73,9 +75,9 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 	private EObject context;
 
 	private void injectMembers(Resource resource) {
-		IExpressionsProvider provider = ExpressionsProviderExtensions
-				.getRegisteredProvider(SGraphPackage.Literals.STATECHART,
-						resource.getURI().toString());
+		IExpressionLanguageProvider provider = ExpressionLanguageProviderExtensions
+				.getRegisteredProvider(SemanticTarget.StatechartInterface,
+						resource.getURI().lastSegment());
 		Injector injector = provider.getInjector();
 		injector.injectMembers(this);
 	}

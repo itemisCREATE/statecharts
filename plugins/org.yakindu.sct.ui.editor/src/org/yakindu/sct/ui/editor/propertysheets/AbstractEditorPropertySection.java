@@ -1,13 +1,13 @@
 package org.yakindu.sct.ui.editor.propertysheets;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.ui.IEditorPart;
-import org.yakindu.sct.ui.editor.extensions.ExpressionsProviderExtensions;
-import org.yakindu.sct.ui.editor.extensions.IExpressionsProvider;
+import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
+import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
+import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
 
 import com.google.inject.Injector;
 
@@ -49,9 +49,9 @@ public abstract class AbstractEditorPropertySection extends
 		return resources.get(0); // always take the first resource ...
 	}
 
-	protected Injector getInjector(EClass type) {
-		IExpressionsProvider registeredProvider = ExpressionsProviderExtensions
-				.getRegisteredProvider(type, getActiveEditorResource().getURI()
+	protected Injector getInjector(SemanticTarget semanticTarget) {
+		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions
+				.getRegisteredProvider(semanticTarget,getActiveEditorResource().getURI()
 						.lastSegment());
 		return registeredProvider.getInjector();
 	}

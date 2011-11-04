@@ -10,58 +10,58 @@
  */
 package org.yakindu.sct.ui.editor.extensions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class ExpressionsProviderExtensions {
+public class ExpressionLanguageProviderExtensions {
 
 	private static final String EXPRESSIONS_EXTENSION = "org.yakindu.sct.ui.editor.expressions";
 
-	protected ExpressionsProviderExtensions() {
+	private static final String ATTR_CLASS = "class";
+
+	private static final String ATTR_RESOURCE_EXTENSION = "resourceExtension";
+
+	private static final String ATTR_SEMANTIC_TARGET = "semanticTarget";
+
+	public enum SemanticTarget {
+		StatechartInterface, StateDeclaration, TransitionExpression
+	}
+
+	protected ExpressionLanguageProviderExtensions() {
 		// Not intended to be instantiated
 	}
 
 	/**
-	 * Returns all registered {@link IExpressionsProvider}s 
-	 * @param type
-	 * @param resourceUri
-	 * @return
+	 * Returns all registered {@link IExpressionLanguageProvider}s
+	 * 
 	 */
-	public static IExpressionsProvider getRegisteredProvider(EClass type,
-			String resourceUri) {
-		List<IExpressionsProvider> loadRegisteredProvider = loadRegisteredProvider();
-		for (IExpressionsProvider t : loadRegisteredProvider) {
-			if (t.isProviderFor(type, resourceUri)) {
-				return t;
-			}
-		}
-		return null;
-	}
-
-	protected static List<IExpressionsProvider> loadRegisteredProvider() {
-		List<IExpressionsProvider> providers = new ArrayList<IExpressionsProvider>();
+	public static IExpressionLanguageProvider getRegisteredProvider(
+			SemanticTarget target, String resourceExtension) {
 		IConfigurationElement[] configurationElements = Platform
 				.getExtensionRegistry().getConfigurationElementsFor(
 						EXPRESSIONS_EXTENSION);
 		for (IConfigurationElement configurationElement : configurationElements) {
 			try {
-				IExpressionsProvider provider = (IExpressionsProvider) configurationElement
-						.createExecutableExtension("class");
-				providers.add(provider);
+				String semanticTarget = configurationElement
+						.getAttribute(ATTR_SEMANTIC_TARGET);
+				String registeredExtension = configurationElement
+						.getAttribute(ATTR_RESOURCE_EXTENSION);
+				if (SemanticTarget.valueOf(semanticTarget) == target
+						&& resourceExtension.endsWith(registeredExtension)) {
+					return (IExpressionLanguageProvider) configurationElement
+							.createExecutableExtension(ATTR_CLASS);
+				}
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
 		}
-		return providers;
+		throw new IllegalStateException("No Expression Provider found for "
+				+ target);
 	}
 }
