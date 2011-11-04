@@ -27,8 +27,7 @@ Configurations returns gen::Configuration:
 
 OutletConfiguration returns gen::OutletConfiguration:
 	{OutletConfigurationCustom} 'outlet' '{'
-	'projectName' '=' projectName=STRING
-	'folder' '=' targetFolder=STRING 
+	'path' '=' path=STRING
 	'}';
 
 

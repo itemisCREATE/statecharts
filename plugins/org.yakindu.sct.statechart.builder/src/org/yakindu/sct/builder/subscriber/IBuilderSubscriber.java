@@ -10,8 +10,10 @@ import org.eclipse.core.runtime.CoreException;
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@Deprecated
 public interface IBuilderSubscriber {
 
+	@Deprecated
 	public void doBuild(IResource resource) throws IOException, CoreException;
 
 }
