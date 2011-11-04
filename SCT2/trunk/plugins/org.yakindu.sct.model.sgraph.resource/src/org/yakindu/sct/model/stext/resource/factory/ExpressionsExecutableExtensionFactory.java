@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.sgraph.resource.factory;
+package org.yakindu.sct.model.stext.resource.factory;
 
 import org.eclipse.core.runtime.IExecutableExtensionFactory;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
@@ -28,7 +28,7 @@ public class ExpressionsExecutableExtensionFactory extends
 
 	@Override
 	protected Bundle getBundle() {
-		return org.yakindu.sct.model.sgraph.resource.Activator.getDefault()
+		return org.yakindu.sct.model.stext.resource.Activator.getDefault()
 				.getBundle();
 	}
 

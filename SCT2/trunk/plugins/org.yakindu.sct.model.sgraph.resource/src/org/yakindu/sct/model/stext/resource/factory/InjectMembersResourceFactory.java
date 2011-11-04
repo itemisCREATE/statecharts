@@ -8,15 +8,15 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.sgraph.resource.factory;
+package org.yakindu.sct.model.stext.resource.factory;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.Constants;
-import org.yakindu.sct.model.sgraph.resource.services.StateInjectionService;
-import org.yakindu.sct.model.sgraph.resource.services.StatechartInjectionService;
-import org.yakindu.sct.model.sgraph.resource.services.TransitionInjectionService;
+import org.yakindu.sct.model.stext.resource.services.StateInjectionService;
+import org.yakindu.sct.model.stext.resource.services.StatechartInjectionService;
+import org.yakindu.sct.model.stext.resource.services.TransitionInjectionService;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
