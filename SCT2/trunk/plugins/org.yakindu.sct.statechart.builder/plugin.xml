@@ -2,6 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="org.yakindu.sct.builder.subscriber" name="Builder Subscriber" schema="schema/org.yakindu.sct.builder.subscriber.exsd"/>
+   <extension-point id="org.yakindu.sct.builder.generator" name="SCT Generator" schema="schema/org.yakindu.sct.builder.generator.exsd"/>
 
    <extension
          id="org.yakindu.sct.builder.SCTBuilder"

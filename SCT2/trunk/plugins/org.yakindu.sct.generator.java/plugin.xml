@@ -2,11 +2,13 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.yakindu.sct.builder.subscriber">
-      <BuilderSubscriber
-            class="org.yakindu.sct.generator.java.JavaCodegeneratorBuilderSubscriber"
-            resourceExtension="sct">
-      </BuilderSubscriber>
+
+         point="org.yakindu.sct.builder.generator">
+      <SCTGenerator
+            class="org.yakindu.sct.generator.java.JavaSCTGenerator"
+            name="SCT Java Generator"
+            resourceExtension="javagen">
+      </SCTGenerator>
    </extension>
 
 </plugin>

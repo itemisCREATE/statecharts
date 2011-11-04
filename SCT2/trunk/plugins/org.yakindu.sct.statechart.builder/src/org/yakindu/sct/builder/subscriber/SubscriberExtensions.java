@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.Platform;
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@Deprecated
 public class SubscriberExtensions {
 
 	private static final String extensionPointId = "org.yakindu.sct.builder.subscriber";

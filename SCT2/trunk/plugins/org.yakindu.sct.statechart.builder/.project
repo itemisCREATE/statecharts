@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.yakindu.sct.statechart.builder</name>
+	<name>org.yakindu.sct.generator.base</name>
 	<comment></comment>
 	<projects>
 	</projects>
