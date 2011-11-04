@@ -70,22 +70,22 @@ public interface SGenPackage extends EPackage {
 	int GENERATOR_MODEL = 0;
 
 	/**
-	 * The feature id for the '<em><b>Configurations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Configuration</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_MODEL__CONFIGURATIONS = 0;
+	int GENERATOR_MODEL__CONFIGURATION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Statecharts</b></em>' reference list.
+	 * The feature id for the '<em><b>Statechart References</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_MODEL__STATECHARTS = 1;
+	int GENERATOR_MODEL__STATECHART_REFERENCES = 1;
 
 	/**
 	 * The number of structural features of the '<em>Generator Model</em>' class.
@@ -152,6 +152,62 @@ public interface SGenPackage extends EPackage {
 	 */
 	int OUTLET_CONFIGURATION_FEATURE_COUNT = CONFIGURATION_FEATURE_COUNT + 2;
 
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.GeneratorConfigurationImpl <em>Generator Configuration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgen.impl.GeneratorConfigurationImpl
+	 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getGeneratorConfiguration()
+	 * @generated
+	 */
+	int GENERATOR_CONFIGURATION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Configurations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_CONFIGURATION__CONFIGURATIONS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Generator Configuration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_CONFIGURATION_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.StatechartReferencesImpl <em>Statechart References</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgen.impl.StatechartReferencesImpl
+	 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getStatechartReferences()
+	 * @generated
+	 */
+	int STATECHART_REFERENCES = 4;
+
+	/**
+	 * The feature id for the '<em><b>Statecharts</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATECHART_REFERENCES__STATECHARTS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Statechart References</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATECHART_REFERENCES_FEATURE_COUNT = 1;
+
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.GeneratorModel <em>Generator Model</em>}'.
@@ -164,26 +220,26 @@ public interface SGenPackage extends EPackage {
 	EClass getGeneratorModel();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgen.GeneratorModel#getConfigurations <em>Configurations</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sgen.GeneratorModel#getConfiguration <em>Configuration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Configurations</em>'.
-	 * @see org.yakindu.sct.model.sgen.GeneratorModel#getConfigurations()
+	 * @return the meta object for the containment reference '<em>Configuration</em>'.
+	 * @see org.yakindu.sct.model.sgen.GeneratorModel#getConfiguration()
 	 * @see #getGeneratorModel()
 	 * @generated
 	 */
-	EReference getGeneratorModel_Configurations();
+	EReference getGeneratorModel_Configuration();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.yakindu.sct.model.sgen.GeneratorModel#getStatecharts <em>Statecharts</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sgen.GeneratorModel#getStatechartReferences <em>Statechart References</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Statecharts</em>'.
-	 * @see org.yakindu.sct.model.sgen.GeneratorModel#getStatecharts()
+	 * @return the meta object for the containment reference '<em>Statechart References</em>'.
+	 * @see org.yakindu.sct.model.sgen.GeneratorModel#getStatechartReferences()
 	 * @see #getGeneratorModel()
 	 * @generated
 	 */
-	EReference getGeneratorModel_Statecharts();
+	EReference getGeneratorModel_StatechartReferences();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.Configuration <em>Configuration</em>}'.
@@ -228,6 +284,48 @@ public interface SGenPackage extends EPackage {
 	EAttribute getOutletConfiguration_Override();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.GeneratorConfiguration <em>Generator Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Generator Configuration</em>'.
+	 * @see org.yakindu.sct.model.sgen.GeneratorConfiguration
+	 * @generated
+	 */
+	EClass getGeneratorConfiguration();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgen.GeneratorConfiguration#getConfigurations <em>Configurations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Configurations</em>'.
+	 * @see org.yakindu.sct.model.sgen.GeneratorConfiguration#getConfigurations()
+	 * @see #getGeneratorConfiguration()
+	 * @generated
+	 */
+	EReference getGeneratorConfiguration_Configurations();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.StatechartReferences <em>Statechart References</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Statechart References</em>'.
+	 * @see org.yakindu.sct.model.sgen.StatechartReferences
+	 * @generated
+	 */
+	EClass getStatechartReferences();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.yakindu.sct.model.sgen.StatechartReferences#getStatecharts <em>Statecharts</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Statecharts</em>'.
+	 * @see org.yakindu.sct.model.sgen.StatechartReferences#getStatecharts()
+	 * @see #getStatechartReferences()
+	 * @generated
+	 */
+	EReference getStatechartReferences_Statecharts();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -260,20 +358,20 @@ public interface SGenPackage extends EPackage {
 		EClass GENERATOR_MODEL = eINSTANCE.getGeneratorModel();
 
 		/**
-		 * The meta object literal for the '<em><b>Configurations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Configuration</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference GENERATOR_MODEL__CONFIGURATIONS = eINSTANCE.getGeneratorModel_Configurations();
+		EReference GENERATOR_MODEL__CONFIGURATION = eINSTANCE.getGeneratorModel_Configuration();
 
 		/**
-		 * The meta object literal for the '<em><b>Statecharts</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Statechart References</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference GENERATOR_MODEL__STATECHARTS = eINSTANCE.getGeneratorModel_Statecharts();
+		EReference GENERATOR_MODEL__STATECHART_REFERENCES = eINSTANCE.getGeneratorModel_StatechartReferences();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.ConfigurationImpl <em>Configuration</em>}' class.
@@ -310,6 +408,42 @@ public interface SGenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OUTLET_CONFIGURATION__OVERRIDE = eINSTANCE.getOutletConfiguration_Override();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.GeneratorConfigurationImpl <em>Generator Configuration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgen.impl.GeneratorConfigurationImpl
+		 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getGeneratorConfiguration()
+		 * @generated
+		 */
+		EClass GENERATOR_CONFIGURATION = eINSTANCE.getGeneratorConfiguration();
+
+		/**
+		 * The meta object literal for the '<em><b>Configurations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GENERATOR_CONFIGURATION__CONFIGURATIONS = eINSTANCE.getGeneratorConfiguration_Configurations();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.StatechartReferencesImpl <em>Statechart References</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgen.impl.StatechartReferencesImpl
+		 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getStatechartReferences()
+		 * @generated
+		 */
+		EClass STATECHART_REFERENCES = eINSTANCE.getStatechartReferences();
+
+		/**
+		 * The meta object literal for the '<em><b>Statecharts</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATECHART_REFERENCES__STATECHARTS = eINSTANCE.getStatechartReferences_Statecharts();
 
 	}
 

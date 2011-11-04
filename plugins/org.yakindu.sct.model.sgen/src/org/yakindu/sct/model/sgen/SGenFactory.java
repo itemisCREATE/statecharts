@@ -53,6 +53,24 @@ public interface SGenFactory extends EFactory {
 	OutletConfiguration createOutletConfiguration();
 
 	/**
+	 * Returns a new object of class '<em>Generator Configuration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Generator Configuration</em>'.
+	 * @generated
+	 */
+	GeneratorConfiguration createGeneratorConfiguration();
+
+	/**
+	 * Returns a new object of class '<em>Statechart References</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Statechart References</em>'.
+	 * @generated
+	 */
+	StatechartReferences createStatechartReferences();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
