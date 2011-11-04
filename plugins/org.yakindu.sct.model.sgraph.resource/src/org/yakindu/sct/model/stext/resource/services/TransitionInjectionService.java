@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.sgraph.resource.services;
+package org.yakindu.sct.model.stext.resource.services;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;

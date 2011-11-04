@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.sgraph.resource.provider;
+package org.yakindu.sct.model.stext.resource.provider;
 
 import org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider;
 
