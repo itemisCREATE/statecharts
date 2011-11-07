@@ -20,11 +20,11 @@ Contributors:
 «getLicenseHeader()»
 package org.yakindu.sct.runtime.java.base;
 
-public interface ITimerHandler<TimeEventType> {
+public interface ITimerHandler {
 	
-	public void setTimer(TimeEventType event, long time, boolean periodic);
+	public void setTimer(TimeEvent event);
 	
-	public void resetTimer(TimeEventType event);
+	public void resetTimer(TimeEvent event);
 }
 «ENDFILE-»
 «ENDDEFINE»

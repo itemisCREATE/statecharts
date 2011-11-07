@@ -25,20 +25,22 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TimerHandler<TimeEventType> implements ITimerHandler<TimeEventType> {
+import org.yakindu.sct.runtime.java.base.notification.EventNotification;
 
-	private final ITimedStatemachine<TimeEventType> statemachine;
+public class TimerHandler implements ITimerHandler {
+
+	private final ITimedStatemachine statemachine;
 
 	private final Timer timer = new Timer();
 
-	private final Map<TimeEventType, TimerTask> timerTaskMap = new HashMap<TimeEventType, TimerTask>();;
+	private final Map<TimeEvent, TimerTask> timerTaskMap = new HashMap<TimeEvent, TimerTask>();;
 
-	public TimerHandler(ITimedStatemachine<TimeEventType> statemachine) {
+	public TimerHandler(ITimedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 
 	@Override
-	public void setTimer(final TimeEventType event, long time, boolean periodic) {
+	public void setTimer(final TimeEvent event) {
 		// Reset existing TimerTask for event. This step isn't necessary if
 		// timer tasks are properly reset by sexec model.
 		if (timerTaskMap.containsKey(event)) {
@@ -49,22 +51,22 @@ public class TimerHandler<TimeEventType> implements ITimerHandler<TimeEventType>
 		timerTaskMap.put(event, new TimerTask() {
 			@Override
 			public void run() {
-				statemachine.raiseTimeEvent(event);
+				statemachine.notify(new EventNotification(event));
 			}
 		});
 		
 		//start scheduling the timer.
-		if (periodic) {
-			timer.scheduleAtFixedRate(timerTaskMap.get(event),time, time);
+		if (event.isPeriodic()) {
+			timer.scheduleAtFixedRate(timerTaskMap.get(event),event.getValue(), event.getValue());
 		}
 		else {
-			timer.schedule(timerTaskMap.get(event), time);
+			timer.schedule(timerTaskMap.get(event), event.getValue());
 		}
 
 	}
 
 	@Override
-	public void resetTimer(TimeEventType event) {
+	public void resetTimer(TimeEvent event) {
 		if (timerTaskMap.containsKey(event) && timerTaskMap.get(event) != null) {
 			timerTaskMap.get(event).cancel();
 			timer.purge();

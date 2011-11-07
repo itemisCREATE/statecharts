@@ -22,14 +22,14 @@ Contributors:
 «getLicenseHeader()»
 package org.yakindu.sct.runtime.java.«getStatemachineName()»;
 
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.Set;
+import java.util.HashSet;
+
+import org.yakindu.sct.runtime.java.base.Event;
 
 public class «getCycleBasedStatemachineName()» extends «getBaseStatemachineName()» {
 
 	public CustomCycleBasedStatemachine() {
-		super(EnumSet.noneOf(Event.class), EnumSet.noneOf(Event.class));
+		super(new HashSet<Event<?>>());
 	}
 
 	public void runCycle() {

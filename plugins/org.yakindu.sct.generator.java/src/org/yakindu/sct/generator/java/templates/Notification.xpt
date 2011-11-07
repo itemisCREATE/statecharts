@@ -17,31 +17,27 @@ Contributors:
 
 «DEFINE file FOR ExecutionFlow-»
 «IF name != null-»
-«FILE 'Event.java'-»
+«FILE 'Notification.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.base;
+package org.yakindu.sct.runtime.java.base.notification;
 
-public class Event<DataType> {
+public class Notification<Element> {
 	
-	private DataType value;
+	private NotificationType notificationType;
 	
-	private String name;
-	
-	public Event(String name, DataType value) {
-		this.name = name;
-		this.value = value;
+	private Element element;
+
+	public Notification(NotificationType notificationType, Element element) {
+		this.notificationType = notificationType;
+		this.element = element;
 	}
 	
-	public String getName() {
-		return name;
+	public NotificationType getNotificationType() {
+		return notificationType;
 	}
 
-	public DataType getValue() {
-		return value;
-	}
-	
-	public void setValue(DataType value) {
-		this.value = value;
+	public Element getElement() {
+		return element;
 	}
 }
 «ENDFILE-»
