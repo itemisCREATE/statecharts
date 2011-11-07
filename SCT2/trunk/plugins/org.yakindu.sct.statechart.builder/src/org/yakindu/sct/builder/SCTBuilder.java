@@ -1,5 +1,6 @@
 package org.yakindu.sct.builder;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
@@ -10,7 +11,8 @@ import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.yakindu.sct.generator.base.internal.SCTGenerator;
+import org.yakindu.sct.builder.subscriber.IBuilderSubscriber;
+import org.yakindu.sct.builder.subscriber.SubscriberExtensions;
 
 /**
  * 
@@ -68,22 +70,22 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 	}
 
 	public void doIt(IResource resource) {
-		// List<IBuilderSubscriber> subscriber = SubscriberExtensions
-		// .getSubscriber(resource.getLocation().toOSString());
-		// // System.out.println("try to build: " + resource.getLocationURI());
-		// for (IBuilderSubscriber builderSubscriber : subscriber) {
+		List<IBuilderSubscriber> subscriber = SubscriberExtensions
+				.getSubscriber(resource.getLocation().toOSString());
+		// System.out.println("try to build: " + resource.getLocationURI());
+		for (IBuilderSubscriber builderSubscriber : subscriber) {
+			try {
+				builderSubscriber.doBuild(resource);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		// try {
-		// builderSubscriber.doBuild(resource);
-		// } catch (Exception e) {
+		// new SCTGenerator().doBuild(resource);
+		// } catch (CoreException e) {
+		// // TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
-		// }
-		try {
-			new SCTGenerator().doBuild(resource);
-		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	protected void fullBuild(final IProgressMonitor monitor)
