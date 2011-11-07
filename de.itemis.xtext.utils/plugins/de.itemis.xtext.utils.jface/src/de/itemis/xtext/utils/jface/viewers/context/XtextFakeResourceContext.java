@@ -52,8 +52,8 @@ public class XtextFakeResourceContext {
 
 	protected void initXtextFakeResourceSet() {
 		fakeResourceSet.getResources().add(fakeResource);
-		fakeResourceSet.getLoadOptions().put(
-				ResourceDescriptionsProvider.LIVE_SCOPE, Boolean.TRUE);
+//		fakeResourceSet.getLoadOptions().put(
+//				ResourceDescriptionsProvider.LIVE_SCOPE, Boolean.TRUE);
 	}
 
 	protected ResourceSet getFakeResourceSet() {
