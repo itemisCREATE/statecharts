@@ -16,12 +16,20 @@ Contributors:
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
 «DEFINE file FOR InterfaceScope-»
-«IF name != null-»
 «FILE getInterfaceName() + '.java'-»
 «getLicenseHeader()»
 package org.yakindu.sct.runtime.java.«getStatemachineName((ExecutionFlow)eContainer)»;
 
-public interface «getInterfaceName()» {
+import org.yakindu.sct.runtime.java.base.Event;
+«IF hasOutgoingEvents()-»
+import org.yakindu.sct.runtime.java.base.notification.INotificationSender;
+«ENDIF-»
+
+public interface «getInterfaceName()»«getInterfaceExtension()» {
+	
+	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
+	public static final Event<«event.type.getJavaClassType()»> «event.getName()» = new Event<«event.type.getJavaClassType()»>("«event.name»", «event.getInitialValue()»); 
+	«ENDFOREACH-»
 	
 	«FOREACH declarations.typeSelect(EventDefinition) AS eventDefinition-»
 	«IF  eventDefinition.direction ==  Direction::IN-»
@@ -45,5 +53,4 @@ public interface «getInterfaceName()» {
 	«ENDFOREACH-»
 }
 «ENDFILE-»
-«ENDIF-»
 «ENDDEFINE»

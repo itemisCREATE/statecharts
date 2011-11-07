@@ -22,25 +22,27 @@ Contributors:
 «getLicenseHeader()»
 package org.yakindu.sct.runtime.java.«getStatemachineName()»;
 
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.Set;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
+
+import org.yakindu.sct.runtime.java.base.Event;
 
 public class «getEventBasedStatemachineName()» extends «getBaseStatemachineName()» {
 
 	public CustomEventBasedStatemachine() {
-		super(new LinkedList<Event>(), EnumSet.noneOf(Event.class));
+		super(new LinkedList<Event<?>>());
 	}
 	
 	@Override
-	protected Queue<Event> getOccuredEvents() {
-		return (Queue<Event>) super.getOccuredEvents();
+	protected Queue<Event<?>> getOccuredEvents() {
+		return (Queue<Event<?>>) super.getOccuredEvents();
 	}
 	
 	@Override
 	public void runCycle() {
 		if (eventOccured()) {
-			Event event = getOccuredEvents().poll();
+			Event<?> event = getOccuredEvents().poll();
 			runCycle(Collections.singletonList(event));
 		}
 	}

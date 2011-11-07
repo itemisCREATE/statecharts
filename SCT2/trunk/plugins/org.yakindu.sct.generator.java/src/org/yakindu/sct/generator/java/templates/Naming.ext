@@ -14,71 +14,83 @@ import stext;
 import sexec;
 import ecore;
 import sgraph;
+extension org::yakindu::sct::generator::java::templates::Expression;
 
 List declaredVariables(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(VariableDefinition);
 
-getNamedInterfaceScope(ExecutionFlow this) : scopes.typeSelect(InterfaceScope).select(interfaceScope|interfaceScope.name!=null);
-getNamedInterfaceScopeDeclarations(ExecutionFlow this) : getNamedInterfaceScope().declarations;
-getNamedInterfaceScopeVariables(ExecutionFlow this) : getNamedInterfaceScopeDeclarations().typeSelect(VariableDefinition);
-getNamedInterfaceScopeEvents(ExecutionFlow this) : getNamedInterfaceScopeDeclarations().typeSelect(EventDefinition);
-getNamedInterfaceScopeVoidEvents(ExecutionFlow this) : getNamedInterfaceScopeEvents().select(e|e.type==Type::void);
-getNamedInterfaceScopeValuedEvents(ExecutionFlow this) : getNamedInterfaceScopeEvents().select(e|e.type!=Type::void);
+getInterfaceScope(ExecutionFlow this) : scopes.typeSelect(InterfaceScope);
+getInterfaceScopeDeclarations(ExecutionFlow this) : getInterfaceScope().declarations;
+getInterfaceScopeVariables(ExecutionFlow this) : getInterfaceScopeDeclarations().typeSelect(VariableDefinition);
+getInterfaceScopeEvents(ExecutionFlow this) : getInterfaceScopeDeclarations().typeSelect(EventDefinition);
+getInterfaceScopeVoidEvents(ExecutionFlow this) : getInterfaceScopeEvents().select(e|e.type==Type::void);
+getInterfaceScopeValuedEvents(ExecutionFlow this) : getInterfaceScopeEvents().select(e|e.type!=Type::void);
 
-getUnnamedInterfaceScopeDeclarations(ExecutionFlow this) : 
-	scopes.typeSelect(InterfaceScope).select(interfaceScope|interfaceScope.name==null).declarations;
-	
-getUnnamedInterfaceScopeVariables(ExecutionFlow this) :
-	getUnnamedInterfaceScopeDeclarations().typeSelect(VariableDefinition);
-	
-getUnnamedInterfaceScopeEvents(ExecutionFlow this) :
-	getUnnamedInterfaceScopeDeclarations().typeSelect(EventDefinition);
-	
-getUnnamedInterfaceScopeVoidEvents(ExecutionFlow this) :
-	getUnnamedInterfaceScopeEvents().select(e|e.type==Type::void);
-	
-getUnnamedInterfaceScopeValuedEvents(ExecutionFlow this) :
-	getUnnamedInterfaceScopeEvents().select(e|e.type!=Type::void);
+//getNamedInterfaceScope(ExecutionFlow this) : scopes.typeSelect(InterfaceScope).select(interfaceScope|interfaceScope.name!=null);
+//getNamedInterfaceScopeDeclarations(ExecutionFlow this) : getNamedInterfaceScope().declarations;
+//getNamedInterfaceScopeVariables(ExecutionFlow this) : getNamedInterfaceScopeDeclarations().typeSelect(VariableDefinition);
+//getNamedInterfaceScopeEvents(ExecutionFlow this) : getNamedInterfaceScopeDeclarations().typeSelect(EventDefinition);
+//getNamedInterfaceScopeVoidEvents(ExecutionFlow this) : getNamedInterfaceScopeEvents().select(e|e.type==Type::void);
+//getNamedInterfaceScopeValuedEvents(ExecutionFlow this) : getNamedInterfaceScopeEvents().select(e|e.type!=Type::void);
 
+//getUnnamedInterfaceScopeDeclarations(ExecutionFlow this) : scopes.typeSelect(InterfaceScope).select(interfaceScope|interfaceScope.name==null).declarations;	
+//getUnnamedInterfaceScopeVariables(ExecutionFlow this) : getUnnamedInterfaceScopeDeclarations().typeSelect(VariableDefinition);
+//getUnnamedInterfaceScopeEvents(ExecutionFlow this) : getUnnamedInterfaceScopeDeclarations().typeSelect(EventDefinition);	
+//getUnnamedInterfaceScopeVoidEvents(ExecutionFlow this) : getUnnamedInterfaceScopeEvents().select(e|e.type==Type::void);
+//getUnnamedInterfaceScopeValuedEvents(ExecutionFlow this) : getUnnamedInterfaceScopeEvents().select(e|e.type!=Type::void);
 
-getInternalScopeDeclarations(ExecutionFlow this) :
-	scopes.typeSelect(InternalScope).declarations;
-
-getInternalScopeVariables(ExecutionFlow this) :
-	getInternalScopeDeclarations().typeSelect(VariableDefinition);
-
-getInternalScopeEvents(ExecutionFlow this) :
-	getInternalScopeDeclarations().typeSelect(EventDefinition);
-	
-getInternalScopeVoidEvents(ExecutionFlow this) :
-	getInternalScopeEvents().select(e|e.type==Type::void);
-	
-getInternalScopeValuedEvents(ExecutionFlow this) :
-	getInternalScopeEvents().select(e|e.type!=Type::void);
-
+getInternalScopeDeclarations(ExecutionFlow this) : scopes.typeSelect(InternalScope).declarations;
+getInternalScopeVariables(ExecutionFlow this) :	getInternalScopeDeclarations().typeSelect(VariableDefinition);
+getInternalScopeEvents(ExecutionFlow this) : getInternalScopeDeclarations().typeSelect(EventDefinition);
+getInternalScopeVoidEvents(ExecutionFlow this) :getInternalScopeEvents().select(e|e.type==Type::void);
+getInternalScopeValuedEvents(ExecutionFlow this) : getInternalScopeEvents().select(e|e.type!=Type::void);
 getTimeEvents(ExecutionFlow this) : scopes.typeSelect(Scope).declarations.typeSelect(TimeEvent);
 
 String getStatemachineName(ExecutionFlow this) : name.toFirstUpper();
-String getBaseStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "BaseStatemachine";
+String getBaseStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "AbstractBaseStatemachine";
 String getEventBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "EventBasedStatemachine";
 String getCycleBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "CyleBasedStatemachine";
 
-String getInterfaceName(InterfaceScope this) :  "Interface" + name.toFirstUpper(); 
+String getInterfaceName(InterfaceScope this) :  
+	if name!=null then
+		"Interface" + name.toFirstUpper()
+	else
+		"InterfaceDefault";
+		 
 String getInterfaceImplName(InterfaceScope this) :  getInterfaceName() + "Impl";
 String getBaseStatemachineName(InterfaceScope this) : ((ExecutionFlow)eContainer).getBaseStatemachineName();
 
-String getQualifiedName(EventDefinition this) : ((InterfaceScope)eContainer).name.toFirstUpper()+name.toFirstUpper();
+String getQualifiedName(EventDefinition this) : getContext() + name.toFirstUpper();
+		
 String getValueName(EventDefinition this) : "eventValue"+name.toFirstUpper();
 String getInternalName(EventDefinition this) : name.toFirstUpper();
 
+String getInitialValue(EventDefinition this) :
+	if derivation != null then
+		derivation.condition.toCode()
+	else
+		"null";
+
+String getInitialValueAssignment(EventDefinition this) :
+	if derivation != null then
+		" = " + derivation.condition.toCode()
+	else
+		null;
+		
+String getInitialValueAssignment(VariableDefinition this) : 
+	if initialValue != null then
+		" = " + initialValue
+	else
+		null;
+
 String getValueName(VariableDefinition this) : "var"+name.toFirstUpper();
 
-getName(ExecutionState this) :
+String getName(ExecutionState this) :
 	simpleName.replaceAll(" ","").toFirstUpper();
 
-getName(Event this) :
-	getContext() + name.toFirstUpper();
+String getName(Event this) :
+	"Event"+name.toFirstUpper();
 
-getName(TimeEvent this) :
+String getName(TimeEvent this) :
 	name.replaceAll(" ","").toFirstUpper();
 
 String getterVisibility(EventDefinition this) : 
@@ -108,6 +120,16 @@ String getJavaType(Type type) :
 		default : ""
 		};
 
+String getJavaClassType(Type type) :
+		switch (type) {
+		case (Type::real) : "Float"
+		case (Type::integer) : "Integer"
+		case (Type::boolean) : "Boolean"
+		case (Type::string) : "String"
+		case (Type::void) : "Void"
+		default : ""
+		};
+
 cached String functionName(Step step) : 
 	(step.isEffect()) ? step.actionFunctionName() : (
 	(step.isReactionCheck()) ? step.checkFunctionName() : (
@@ -115,16 +137,16 @@ cached String functionName(Step step) :
 	(step.isExitAction()) ? step.exitActionFunctionName() : 
 	" !! unknown function type !!" )));
  
-statemachineEntryFunctionName(EnterState this):
+String statemachineEntryFunctionName(EnterState this):
 	if (this.name != null) then
 		"entry"+name.toFirstUpper().replaceAll(" ","")+"()"
 	else
 		"entry()";
 
-actionFunctionName(Step this) : "actions" + getName(reaction().state()) + this.reaction().name.toFirstUpper(); 
-checkFunctionName(Step this) : "condition" + getName(reaction().state()) + this.reaction().name.toFirstUpper(); 
-entryActionFunctionName(Step this) : "entryActions" + getName(state()); 
-exitActionFunctionName(Step this) : "exitActions" + getName(state()); 
+String actionFunctionName(Step this) : "actions" + getName(reaction().state()) + this.reaction().name.toFirstUpper(); 
+String checkFunctionName(Step this) : "condition" + getName(reaction().state()) + this.reaction().name.toFirstUpper(); 
+String entryActionFunctionName(Step this) : "entryActions" + getName(state()); 
+String exitActionFunctionName(Step this) : "exitActions" + getName(state()); 
 
 isEffect(Step step) : (! Check.isInstance(step)) && Reaction.isInstance(step.eContainer) ;
 isReactionCheck(Step step) : Reaction.isInstance(step.eContainer) && Check.isInstance(step);
@@ -136,19 +158,33 @@ ExecutionState state(Reaction this) : (ExecutionState) eContainer;
 ExecutionState state(Step this) : (ExecutionState) eContainer;
 
 String getContext(Variable this) : 
-	if (InterfaceScope.isInstance(eContainer) && ((InterfaceScope)eContainer).name != null) then  
-		"interface"+((InterfaceScope)eContainer).name.toFirstUpper()+"."
+	if (InterfaceScope.isInstance(eContainer)) then  
+		getInterfaceName((InterfaceScope)eContainer)+"."
+	else 
+		"";
+		
+String getContext(Event this) : 
+	if (InterfaceScope.isInstance(eContainer)) then  
+		getInterfaceName((InterfaceScope)eContainer).toFirstUpper()+"."
+	else 
+		"";
+		
+boolean hasOutgoingEvents(InterfaceScope this) :
+	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).isEmpty;
 	
-	else 
-		"";
+String getInterfaceExtension(InterfaceScope this):
+	if (hasOutgoingEvents()) then
+		" extends INotificationSender"
+	else
+		null;
 		
-getContext(Event this) : 
-	if (InterfaceScope.isInstance(eContainer) && ((InterfaceScope)eContainer).name != null) then  
-		((InterfaceScope)eContainer).name.toFirstUpper()
-	else 
-		"";
+String getInterfaceImplExtension(InterfaceScope this):
+	if (hasOutgoingEvents()) then
+		" extends NotificationSender"
+	else
+		null;
 		
-getLicenseHeader() : "/**
+String getLicenseHeader() : "/**
  * Copyright (c) 2011 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0

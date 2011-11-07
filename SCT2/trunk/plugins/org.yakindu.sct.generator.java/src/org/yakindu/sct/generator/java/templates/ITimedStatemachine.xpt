@@ -19,13 +19,14 @@ Contributors:
 «getLicenseHeader()»
 package org.yakindu.sct.runtime.java.base;
 
-public interface ITimedStatemachine<TimeEventType> extends IStatemachine {
-	
-	public void raiseTimeEvent(TimeEventType timeEvent);
-	
-	public void setTimerHandler(ITimerHandler<TimeEventType> timerHandler);
-	
-	public ITimerHandler<TimeEventType> getTimerHandler();
+import org.yakindu.sct.runtime.java.base.notification.INotificationListener;
+
+public interface ITimedStatemachine extends
+		IStatemachine, INotificationListener {
+
+	public void setTimerHandler(ITimerHandler timerHandler);
+
+	public ITimerHandler getTimerHandler();
 }
 «ENDFILE-»
 «ENDDEFINE»

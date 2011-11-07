@@ -64,7 +64,7 @@ true
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Reaction-»
-«EXPAND ActionCode FOR this.effect-» 
+	«EXPAND ActionCode FOR this.effect-» 
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR If-»
@@ -109,7 +109,7 @@ else {
 «ENDDEFINE»
 
 «DEFINE CycleCode FOR Cycle-» 
-«EXPAND ActionCode FOREACH this.steps-»
+	«EXPAND ActionCode FOREACH this.steps-»
 «ENDDEFINE»
 
 «DEFINE CycleMethodsImplement FOR ExecutionState-»
@@ -151,53 +151,54 @@ package org.yakindu.sct.runtime.java.«getStatemachineName()»;
 
 import java.util.Collection;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.Set;
 
-import org.yakindu.sct.runtime.java.base.DataType;
-import org.yakindu.sct.runtime.java.base.IStatemachine;
+import org.yakindu.sct.runtime.java.base.Event;
+import org.yakindu.sct.runtime.java.base.ITimedStatemachine;
+import org.yakindu.sct.runtime.java.base.ITimerHandler;
+import org.yakindu.sct.runtime.java.base.TimerHandler;
+import org.yakindu.sct.runtime.java.base.notification.EventNotification;
+import org.yakindu.sct.runtime.java.base.notification.Notification;
 
-public class «getBaseStatemachineName()» implements ITimedStatemachine<Event> {
-
+public abstract class «getBaseStatemachineName()» implements ITimedStatemachine<Event> {
+	
+	«FOREACH getInternalScopeEvents() AS event-»
+	private static final Event<«event.type.getJavaClassType()»> «event.getName()» = new Event<«event.type.getJavaClassType()»>("«event.name»", «event.getInitialValue()»); 
+	«ENDFOREACH-»
+	
 	public enum State {
 		«FOREACH states AS state-»
 	      «state.getName()»,
 	    «ENDFOREACH-»
 	};
 	
-	«FOREACH getNamedInterfaceScope() AS interface-»
+	«FOREACH scopes.typeSelect(InterfaceScope) AS interface-»
 	private «interface.getInterfaceImplName()» «interface.getInterfaceName().toFirstLower()»
 	«ENDFOREACH-»
-	
-	«REM»unnamed interface valued events«ENDREM»
-	«FOREACH getUnnamedInterfaceScopeEvents() AS event-»
-	private «event.type.getJavaType()» «event.getValueName()»;
-	«ENDFOREACH-»
-	«REM»unnamed interface variables«ENDREM»
-	«FOREACH getUnnamedInterfaceScopeVariables() AS variable-»
-	private «variable.type.getJavaType()» «variable.getValueName()»;
-	«ENDFOREACH-»
-	«REM»internal scope valued events«ENDREM»
+	«REM»internal scope valued events
 	«FOREACH getInternalScopeValuedEvents() AS event-»
-  	private «event.type.getJavaType()» «event.getValueName()»;
-	«ENDFOREACH-»
+  	private «event.type.getJavaType()» «event.getValueName()»«event.getInitialValueAssignment()»;
+	«ENDFOREACH-»«ENDREM»
 	«REM»internal variables«ENDREM»
 	«FOREACH getInternalScopeVariables() AS variable-»
-	private «variable.type.getJavaType()» «variable.getValueName()»;
+	private «variable.type.getJavaType()» «variable.getValueName()»«variable.getInitialValueAssignment()»;
+	
 	«ENDFOREACH-»
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 	
-	private Collection<Event> occuredEvents;
+	private final Collection<Event<?>> occuredEvents;
 	
-	private Collection<Event> outEvents;
+	private final Collection<Event<?>> outEvents;
 	
-	private ITimerHandler<Event> timerHandler;
+	private ITimerHandler timerHandler;
 	
-	public «getBaseStatemachineName()»(Collection<Event> occuredEvents, Collection<Event> outEvents) {
+	public «getBaseStatemachineName()»(Collection<Event<?>> occuredEvents) {
 		this.occuredEvents = occuredEvents;
-		this.outEvents = outEvents;
-		«FOREACH getNamedInterfaceScope() AS interface-»
-		«interface.getInterfaceName().toFirstLower()» = new  «interface.getInterfaceImplName()»(occuredEvents, outEvents);
+		this.outEvents = new HashSet<Event<?>>();
+		«FOREACH getInterfaceScope() AS interface-»
+		«interface.getInterfaceName().toFirstLower()» = new «interface.getInterfaceImplName()»(this);
 		«ENDFOREACH-»
 	}
 	
@@ -219,86 +220,49 @@ public class «getBaseStatemachineName()» implements ITimedStatemachine<Event> {
 	public void init() {
 		
 	}
-	
-	@Override
-	public void raiseTimeEvent(Event timeEvent) {
-		getOccuredEvents().add(timeEvent);
-	}
 
 	@Override
-	public void setTimerHandler(ITimerHandler<Event> timerHandler) {
+	public void setTimerHandler(ITimerHandler timerHandler) {
 		this.timerHandler = timerHandler;
 	}
 
 	@Override
-	public ITimerHandler<Event> getTimerHandler() {
+	public ITimerHandler getTimerHandler() {
 		if (timerHandler == null) {
 			timerHandler = new TimerHandler<Event>(this);
 		}
 		return timerHandler;
 	}
 	
-	«FOREACH getNamedInterfaceScope() AS interface-»
+	@Override
+	public void notify(Notification<?> notification) {
+		if (notification instanceof EventNotification) {
+			EventNotification eventNotification = (EventNotification) notification;
+			getOccuredEvents().add(eventNotification.getElement());
+		}
+	}
+	
+	«FOREACH scopes.typeSelect(InterfaceScope) AS interface-»
 	public «interface.getInterfaceName()» get«interface.getInterfaceName()» {
 		return «interface.getInterfaceName().toFirstLower()»;
 	}
-	«ENDFOREACH-»
 	
-	«REM»Generate raise and isRaised... Methods for Interface Scopes«ENDREM»
-	«FOREACH getUnnamedInterfaceScopeEvents() AS event-»
-	«IF event.direction == Direction::OUT-»
-	public boolean isRaised«event.getInternalName()»() {
-		return getOutEvents().contains(Event.«event.getInternalName()»);
-	}
-	private void raise«event.getInternalName()»(){
-		getOccuredEvents().add(Event.«event.getInternalName()»);
-		getOutEvents().add(Event.«event.getInternalName()»);
-	}
-	«ELSE-»
-	private boolean isRaised«event.getInternalName()»() {
-		return getOccuredEvents().contains(Event.«event.getInternalName()»);
-	}
-	
-	public void raise«event.getInternalName().toFirstUpper()»(){
-		getOccuredEvents().add(Event.«event.getInternalName()»);
-	}
-	«ENDIF-»
 	«ENDFOREACH-»
 	«FOREACH getInternalScopeEvents() AS event-»
-	private boolean isRaised«event.getInternalName()»() {
-		return getOccuredEvents().contains(Event.«event.getInternalName()»);
+	private void raise«event.name.toFirstUpper()»() {
+		statemachine.getOccuredEvents().add(«event.getName()»);
 	}
 	
-	private void raise«event.getInternalName()»(){
-		getOccuredEvents().add(Event.«event.getInternalName()»);
-	}
-	«ENDFOREACH-»
-	«REM»Generate getters and setters for valued events and variables«ENDREM»
-	«FOREACH getUnnamedInterfaceScopeValuedEvents() AS event-»
-	«event.getterVisibility()» «event.type.getJavaType()» get«event.getValueName().toFirstUpper()»(){
-		return «event.getValueName()»;
+	«IF event.type != Type::void-»
+	private void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value) {
+		«event.getName()».setValue(value);
+		statemachine.getOccuredEvents().add(«event.getName()»);
 	}
 	
-	«event.setterVisibility()» void set«event.getValueName().toFirstUpper()»(«event.type.getJavaType()» value) {
-		«event.getValueName()» = value;
+	private «event.type.getJavaType()» get«event.getValueName().toFirstUpper()»() {
+		return «event.getName()».getValue();
 	}
-	«ENDFOREACH-»
-	«FOREACH getUnnamedInterfaceScopeVariables() AS variable-»
-	public «variable.type.getJavaType()» get«variable.getValueName().toFirstUpper()»(){
-		return «variable.getValueName()»;
-	}
-	«variable.setterValueVisibility()» void set«variable.getValueName().toFirstUpper()»(«variable.type.getJavaType()» value) {
-		«variable.getValueName()» = value;
-	}
-	«ENDFOREACH-»
-	«FOREACH getInternalScopeValuedEvents() AS event-»
-	private «event.type.getJavaType()» get«event.getValueName().toFirstUpper()»(){
-		return «event.getValueName()»;
-	}
-	
-	private void set«event.getValueName().toFirstUpper()»(«event.type.getJavaType()» value) {
-		«event.getValueName()» = value;
-	}
+	«ENDIF-»
 	«ENDFOREACH-»
 
 «EXPAND ConditionMethodsImplement FOREACH this.states-»

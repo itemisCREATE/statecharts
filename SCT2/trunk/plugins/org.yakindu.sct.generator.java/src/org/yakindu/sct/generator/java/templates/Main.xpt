@@ -29,6 +29,20 @@ Contributors:
 	
 	«EXPAND Event::file FOR this»
 	
+	«EXPAND TimeEvent::file FOR this»
+	
+	«EXPAND EventNotification::file FOR this»
+	
+	«EXPAND INotificationListener::file FOR this»
+	
+	«EXPAND INotificationSender::file FOR this»
+	
+	«EXPAND Notification::file FOR this»
+	
+	«EXPAND NotificationSender::file FOR this»
+	
+	«EXPAND NotificationType::file FOR this»
+	
 	«REM» concrete files «ENDREM»
 	«FOREACH this.scopes.typeSelect(InterfaceScope) AS scope»
 	«EXPAND CustomInterface::file FOR scope»

@@ -17,7 +17,7 @@ import sgraph;
 
 extension org::yakindu::sct::generator::java::templates::Naming;
 
-toCode(Void void) :
+String toCode(Void void) :
 	"/*toCode() called with NULL element. Polymorphic resolver could not match callable method!*/";
 String toCode(Void o, String statechartReference) : 
 	""; //polymorphic placeholder (abstract rule)
@@ -31,11 +31,11 @@ String toCode(Statement statement) :
 String toCode(PrimitiveValueExpression primValue) :
 	primValue.value;
 	
-getterCall(Assignment this) :
-	getContext(varRef)+"getVar"+ varRef.name.toFirstUpper()+ "()";
+String getterCall(Assignment this) :
+	getContext(varRef).toFirstLower()+"getVar"+ varRef.name.toFirstUpper()+ "()";
 	
-setterCall(Assignment this, String textCorpus) :
-	getContext(varRef)+"setVar" + varRef.name.toFirstUpper() + "(" + textCorpus + ");";
+String setterCall(Assignment this, String expression) :
+	getContext(varRef).toFirstLower()+"setVar" + varRef.name.toFirstUpper() + "(" + expression + ");";
 
 /* Assignment */
 String toCode(Assignment this) :
@@ -86,11 +86,11 @@ String toCode(NumericalMultiplyDivideExpression expression) :
 
 String toCode(ElementReferenceExpression exp) :
     if (EventDefinition.isInstance(exp.value)) then
-    	"events.contains(Event."+((EventDefinition)exp.value).getName()+")"
+    	"getOccuredEvents.contains("+((EventDefinition)exp.value).getContext()+((EventDefinition)exp.value).getName()+")"
     else if (VariableDefinition.isInstance(exp.value)) then
     	getContext((VariableDefinition)exp.value)+"getVar"+exp.value.name.toFirstUpper()+"()"
     else if (TimeEvent.isInstance(exp.value)) then
-    	"events.contains(Event."+getName((TimeEvent)exp.value)+")";
+    	"getOccuredEvents.contains(Event."+getName((TimeEvent)exp.value)+")";
 
 String getOperator(AdditiveOperator operator) : 
     switch(operator) {
@@ -117,3 +117,9 @@ String getOperator(RelationalOperator operator) :
 	  case (RelationalOperator::notEquals) : " != "
 	  default : ""
 	};
+	
+String toCode(EventRaising this) :
+	if this.value != null then
+		event.getContext().toFirstLower()+".raise"+event.name.toFirstUpper()+"("+value.toCode()+");"
+	else
+		event.getContext().toFirstLower()+".raise"+event.name.toFirstUpper()+"();";
