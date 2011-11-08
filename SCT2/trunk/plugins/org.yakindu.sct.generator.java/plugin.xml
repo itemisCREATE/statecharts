@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension point="org.yakindu.sct.builder.subscriber">
+      <BuilderSubscriber
+         class="org.yakindu.sct.generator.java.JavaCodegeneratorBuilderSubscriber" 
+         resourceExtension="sct">
+      </BuilderSubscriber>
+   </extension>
    <extension
-
          point="org.yakindu.sct.builder.generator">
       <SCTGenerator
             class="org.yakindu.sct.generator.java.JavaSCTGenerator"
