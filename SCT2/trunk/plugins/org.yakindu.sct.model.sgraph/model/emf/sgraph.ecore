@@ -70,9 +70,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReactiveElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reactions" upperBound="-1"
-        eType="#//Reaction" changeable="false" derived="true"/>
+        eType="#//Reaction" changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="localReactions" upperBound="-1"
-        eType="#//Reaction" containment="true"/>
+        eType="#//Reaction" changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Exit" eSuperTypes="#//Pseudostate"/>
   <eClassifiers xsi:type="ecore:EClass" name="Scope">
