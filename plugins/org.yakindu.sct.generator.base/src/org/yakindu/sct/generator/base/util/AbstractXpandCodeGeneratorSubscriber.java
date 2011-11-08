@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.yakindu.sct.builder.subscriber.IBuilderSubscriber;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -23,16 +24,23 @@ public abstract class AbstractXpandCodeGeneratorSubscriber implements
 	public abstract String getOutletPath(IResource resource);
 
 	public void doBuild(IResource resource) {
+		System.out.println(getClass() + ".doBuild()");
 		try {
 			IProject project = resource.getProject();
 			Statechart statechart;
-			if (resource == null || !resource.exists())
+			if (resource == null || !resource.exists()) {
 				return;
+			}
 			statechart = GeneratorBaseUtil.loadStatechart(resource);
 
 			ExecutionFlow executionFlow = GeneratorBaseUtil
 					.createExecutionFlowModel(statechart);
-			String absoluteTargetFolder = project.getRawLocation().toOSString() + File.separator + getOutletPath(resource);
+			IPath location = project.getRawLocation();
+			if (location == null) {
+				location = project.getLocation();
+			}
+			String absoluteTargetFolder = location.toOSString()
+					+ File.separator + getOutletPath(resource);
 			GeneratorBaseUtil.generate(executionFlow, getTemplatePath(),
 					project, absoluteTargetFolder);
 		} catch (CoreException e) {

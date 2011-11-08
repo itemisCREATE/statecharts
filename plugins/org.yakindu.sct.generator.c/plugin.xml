@@ -4,7 +4,7 @@
 <plugin>
 	<extension point="org.yakindu.sct.builder.subscriber">
       <BuilderSubscriber
-         class="org.yakindu.sct.generator.cpp.subscriber.CppCodeGeneratorSubscriber" 
+         class="org.yakindu.sct.generator.c.subscriber.CCodeGeneratorSubscriber" 
          resourceExtension="sct">
       </BuilderSubscriber>
    </extension>
