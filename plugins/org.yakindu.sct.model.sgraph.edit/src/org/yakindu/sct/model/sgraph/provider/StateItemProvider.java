@@ -74,6 +74,7 @@ public class StateItemProvider
 
 			addExpressionPropertyDescriptor(object);
 			addReactionsPropertyDescriptor(object);
+			addNamespacePropertyDescriptor(object);
 			addOrthogonalPropertyDescriptor(object);
 			addSubstatechartPropertyDescriptor(object);
 			addSubmachinePropertyDescriptor(object);
@@ -124,6 +125,28 @@ public class StateItemProvider
 				 false,
 				 false,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Namespace feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamespacePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ScopedElement_namespace_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ScopedElement_namespace_feature", "_UI_ScopedElement_type"),
+				 SGraphPackage.Literals.SCOPED_ELEMENT__NAMESPACE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -330,6 +353,7 @@ public class StateItemProvider
 
 		switch (notification.getFeatureID(State.class)) {
 			case SGraphPackage.STATE__EXPRESSION:
+			case SGraphPackage.STATE__NAMESPACE:
 			case SGraphPackage.STATE__ORTHOGONAL:
 			case SGraphPackage.STATE__SUBMACHINE:
 			case SGraphPackage.STATE__SIMPLE:
