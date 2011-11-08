@@ -18,7 +18,10 @@ import org.yakindu.sct.ui.editor.editparts.StateEditPart;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 
+import com.google.inject.Injector;
+
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
+import de.itemis.gmf.runtime.commons.properties.descriptors.TextAreaPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.TextPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.XtextPropertyDescriptor;
 import de.itemis.xtext.utils.jface.viewers.context.CloningBasedFakeContextResourcesProvider;
@@ -38,14 +41,22 @@ public class StatePropertySection extends NamePropertySection {
 			List<IFormPropertyDescriptor> descriptors) {
 		super.createPropertyDescriptors(descriptors);
 
-		XtextPropertyDescriptor expressionsDescriptor = new XtextPropertyDescriptor(
-				SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
-				"Expression: ",
-				IYakinduSctHelpContextIds.SC_PROPERTIES_STATE_EXPRESSION,
-				getInjector(SemanticTarget.StateDeclaration),
-				new CloningBasedFakeContextResourcesProvider(
-						Collections.singletonList(getActiveEditorResource())));
-		descriptors.add(expressionsDescriptor);
+		Injector injector = getInjector(SemanticTarget.StateDeclaration);
+		if (injector != null) {
+			XtextPropertyDescriptor descriptor = new XtextPropertyDescriptor(
+					SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
+					"Expression: ",
+					IYakinduSctHelpContextIds.SC_PROPERTIES_STATE_EXPRESSION,
+					injector, new CloningBasedFakeContextResourcesProvider(
+							Collections
+									.singletonList(getActiveEditorResource())));
+			descriptors.add(descriptor);
+		} else {
+			TextAreaPropertyDescriptor descriptor = new TextAreaPropertyDescriptor(
+					SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
+					"Expression: ");
+			descriptors.add(descriptor);
+		}
 
 		// Submachine reference
 		SubmachineSelectionDialogPropertyDescriptor submachineDescriptor = new SubmachineSelectionDialogPropertyDescriptor();

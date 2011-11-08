@@ -18,7 +18,10 @@ import org.yakindu.sct.ui.editor.editparts.TransitionEditPart;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 
+import com.google.inject.Injector;
+
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
+import de.itemis.gmf.runtime.commons.properties.descriptors.TextAreaPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.XtextPropertyDescriptor;
 import de.itemis.xtext.utils.jface.viewers.context.CloningBasedFakeContextResourcesProvider;
 
@@ -34,13 +37,21 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 	@Override
 	protected void createPropertyDescriptors(
 			List<IFormPropertyDescriptor> descriptors) {
-		XtextPropertyDescriptor expressionsDescriptor = new XtextPropertyDescriptor(
-				SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
-				"Expression: ",
-				IYakinduSctHelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION,
-				getInjector(SemanticTarget.TransitionExpression),
-				new CloningBasedFakeContextResourcesProvider(
-						Collections.singletonList(getActiveEditorResource())));
-		descriptors.add(expressionsDescriptor);
+		Injector injector = getInjector(SemanticTarget.TransitionExpression);
+		if (injector != null) {
+			XtextPropertyDescriptor descriptor = new XtextPropertyDescriptor(
+					SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
+					"Expression: ",
+					IYakinduSctHelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION,
+					injector, new CloningBasedFakeContextResourcesProvider(
+							Collections
+									.singletonList(getActiveEditorResource())));
+			descriptors.add(descriptor);
+		} else {
+			TextAreaPropertyDescriptor descriptor = new TextAreaPropertyDescriptor(
+					SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
+					"Expression: ");
+			descriptors.add(descriptor);
+		}
 	}
 }

@@ -11,10 +11,21 @@
 package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.editpolicies.DirectEditPolicy;
+import org.eclipse.gef.tools.DirectEditManager;
+import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
+import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.LabelDirectEditPolicy;
+import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
+import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.yakindu.sct.model.sgraph.ExpressionElement;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
@@ -22,6 +33,7 @@ import org.yakindu.sct.ui.editor.policies.ExpressionDirectEditPolicy;
 
 import com.google.inject.Injector;
 
+import de.itemis.gmf.runtime.commons.parsers.AttributeParser;
 import de.itemis.xtext.utils.gmf.directedit.XtextDirectEditManager;
 import de.itemis.xtext.utils.gmf.directedit.XtextLabelEditPart;
 
@@ -30,7 +42,8 @@ import de.itemis.xtext.utils.gmf.directedit.XtextLabelEditPart;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart {
+public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
+		implements ITextAwareEditPart {
 
 	private Injector injector;
 
@@ -51,15 +64,25 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart {
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		ExpressionDirectEditPolicy expressionDirectEditPolicy = new ExpressionDirectEditPolicy();
-		injector.injectMembers(expressionDirectEditPolicy);
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				expressionDirectEditPolicy);
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, createDirectEditPolicy());
+	}
+
+	protected DirectEditPolicy createDirectEditPolicy() {
+		if (injector != null) {
+			ExpressionDirectEditPolicy expressionDirectEditPolicy = new ExpressionDirectEditPolicy();
+			injector.injectMembers(expressionDirectEditPolicy);
+			return expressionDirectEditPolicy;
+		} else
+			return new LabelDirectEditPolicy();
 	}
 
 	@Override
-	protected XtextDirectEditManager createXTextDirectEditManager() {
-		return new XtextDirectEditManager(this, injector, getEditorStyles());
+	protected DirectEditManager createDirectEditManager() {
+		if (injector != null) {
+			return new XtextDirectEditManager(this, injector, getEditorStyles());
+		} else {
+			return new TextDirectEditManager(this);
+		}
 	}
 
 	@Override
@@ -69,11 +92,19 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart {
 
 	@Override
 	protected void handleNotificationEvent(Notification notification) {
-		if (notification.getFeature() == SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION) {
+		if (notification.getFeature() == getFeature()) {
 			refreshVisuals();
 		} else {
 			super.handleNotificationEvent(notification);
 		}
+	}
+
+	private EAttribute getFeature() {
+		return SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION;
+	}
+
+	public Injector getInjector() {
+		return injector;
 	}
 
 	public String getEditText() {
@@ -81,8 +112,20 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart {
 		return exp != null ? exp : "";
 	}
 
-	public Injector getInjector() {
-		return injector;
+	public ICellEditorValidator getEditTextValidator() {
+		return null;
+	}
+
+	public ParserOptions getParserOptions() {
+		return ParserOptions.NONE;
+	}
+
+	public IParser getParser() {
+		return new AttributeParser(getFeature(), DiagramActivator.PLUGIN_ID);
+	}
+
+	public IContentAssistProcessor getCompletionProcessor() {
+		return null;
 	}
 
 }

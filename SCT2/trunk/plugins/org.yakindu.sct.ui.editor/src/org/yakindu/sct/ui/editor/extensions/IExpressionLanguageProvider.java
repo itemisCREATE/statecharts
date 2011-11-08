@@ -21,4 +21,12 @@ public interface IExpressionLanguageProvider {
 
 	public Injector getInjector();
 
+	public static class NullLanguageProvider implements IExpressionLanguageProvider {
+		public Injector getInjector() {
+			return null;
+		}
+	}
 }
+
+
+
