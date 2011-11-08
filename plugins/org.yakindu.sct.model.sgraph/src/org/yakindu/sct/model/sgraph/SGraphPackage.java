@@ -653,7 +653,7 @@ public interface SGraphPackage extends EPackage {
 	int STATECHART__REACTIONS = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Local Reactions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Local Reactions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -856,7 +856,7 @@ public interface SGraphPackage extends EPackage {
 	int REACTIVE_ELEMENT__REACTIONS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Local Reactions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Local Reactions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1121,7 +1121,7 @@ public interface SGraphPackage extends EPackage {
 	int STATE__REACTIONS = VERTEX_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Local Reactions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Local Reactions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1692,10 +1692,10 @@ public interface SGraphPackage extends EPackage {
 	EReference getReactiveElement_Reactions();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgraph.ReactiveElement#getLocalReactions <em>Local Reactions</em>}'.
+	 * Returns the meta object for the reference list '{@link org.yakindu.sct.model.sgraph.ReactiveElement#getLocalReactions <em>Local Reactions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Local Reactions</em>'.
+	 * @return the meta object for the reference list '<em>Local Reactions</em>'.
 	 * @see org.yakindu.sct.model.sgraph.ReactiveElement#getLocalReactions()
 	 * @see #getReactiveElement()
 	 * @generated
@@ -2206,7 +2206,7 @@ public interface SGraphPackage extends EPackage {
 		EReference REACTIVE_ELEMENT__REACTIONS = eINSTANCE.getReactiveElement_Reactions();
 
 		/**
-		 * The meta object literal for the '<em><b>Local Reactions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Local Reactions</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

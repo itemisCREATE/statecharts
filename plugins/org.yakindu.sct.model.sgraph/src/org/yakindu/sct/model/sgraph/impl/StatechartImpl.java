@@ -14,13 +14,14 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.ExpressionElement;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
@@ -75,26 +76,6 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	 * @ordered
 	 */
 	protected String expression = EXPRESSION_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getReactions() <em>Reactions</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReactions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Reaction> reactions;
-
-	/**
-	 * The cached value of the '{@link #getLocalReactions() <em>Local Reactions</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLocalReactions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Reaction> localReactions;
 
 	/**
 	 * The cached value of the '{@link #getScopes() <em>Scopes</em>}' containment reference list.
@@ -177,27 +158,33 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
 	 */
 	public EList<Reaction> getReactions() {
-		if (reactions == null) {
-			reactions = new EObjectResolvingEList<Reaction>(Reaction.class, this, SGraphPackage.STATECHART__REACTIONS);
-		}
-		return reactions;
+		EList<Reaction> result = new BasicEList<Reaction>();
+		result.addAll(getLocalReactions());
+		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
 	 */
 	public EList<Reaction> getLocalReactions() {
-		if (localReactions == null) {
-			localReactions = new EObjectContainmentEList<Reaction>(Reaction.class, this, SGraphPackage.STATECHART__LOCAL_REACTIONS);
+		EList<Reaction> result = new BasicEList<Reaction>();
+		EList<Scope> scopes = getScopes();
+		for (Scope scope : scopes) {
+			EList<Declaration> declarations = scope.getDeclarations();
+			for (Declaration declaration : declarations) {
+				if (declaration instanceof Reaction) {
+					result.add((Reaction) declaration);
+				}
+			}
 		}
-		return localReactions;
+		return result;
 	}
 
 	/**
@@ -253,8 +240,6 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SGraphPackage.STATECHART__LOCAL_REACTIONS:
-				return ((InternalEList<?>)getLocalReactions()).basicRemove(otherEnd, msgs);
 			case SGraphPackage.STATECHART__SCOPES:
 				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
 			case SGraphPackage.STATECHART__REGIONS:
@@ -299,10 +284,6 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 			case SGraphPackage.STATECHART__EXPRESSION:
 				setExpression((String)newValue);
 				return;
-			case SGraphPackage.STATECHART__LOCAL_REACTIONS:
-				getLocalReactions().clear();
-				getLocalReactions().addAll((Collection<? extends Reaction>)newValue);
-				return;
 			case SGraphPackage.STATECHART__SCOPES:
 				getScopes().clear();
 				getScopes().addAll((Collection<? extends Scope>)newValue);
@@ -329,9 +310,6 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 			case SGraphPackage.STATECHART__EXPRESSION:
 				setExpression(EXPRESSION_EDEFAULT);
 				return;
-			case SGraphPackage.STATECHART__LOCAL_REACTIONS:
-				getLocalReactions().clear();
-				return;
 			case SGraphPackage.STATECHART__SCOPES:
 				getScopes().clear();
 				return;
@@ -356,9 +334,9 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 			case SGraphPackage.STATECHART__EXPRESSION:
 				return EXPRESSION_EDEFAULT == null ? expression != null : !EXPRESSION_EDEFAULT.equals(expression);
 			case SGraphPackage.STATECHART__REACTIONS:
-				return reactions != null && !reactions.isEmpty();
+				return !getReactions().isEmpty();
 			case SGraphPackage.STATECHART__LOCAL_REACTIONS:
-				return localReactions != null && !localReactions.isEmpty();
+				return !getLocalReactions().isEmpty();
 			case SGraphPackage.STATECHART__SCOPES:
 				return scopes != null && !scopes.isEmpty();
 			case SGraphPackage.STATECHART__NAMESPACE:

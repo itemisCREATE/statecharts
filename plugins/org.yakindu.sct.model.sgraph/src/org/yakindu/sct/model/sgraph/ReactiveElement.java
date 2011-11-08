@@ -49,13 +49,13 @@ public interface ReactiveElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reactions</em>' reference list.
 	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getReactiveElement_Reactions()
-	 * @model changeable="false" derived="true"
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	EList<Reaction> getReactions();
 
 	/**
-	 * Returns the value of the '<em><b>Local Reactions</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Local Reactions</b></em>' reference list.
 	 * The list contents are of type {@link org.yakindu.sct.model.sgraph.Reaction}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -63,9 +63,9 @@ public interface ReactiveElement extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Local Reactions</em>' containment reference list.
+	 * @return the value of the '<em>Local Reactions</em>' reference list.
 	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getReactiveElement_LocalReactions()
-	 * @model containment="true"
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	EList<Reaction> getLocalReactions();
