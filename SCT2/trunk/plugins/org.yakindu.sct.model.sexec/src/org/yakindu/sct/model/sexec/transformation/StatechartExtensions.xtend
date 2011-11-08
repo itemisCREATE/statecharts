@@ -38,6 +38,7 @@ class StatechartExtensions {
 	}
 
 
+
 	//=================================================================
 	// navigation and query util extensions
 	//
@@ -59,12 +60,23 @@ class StatechartExtensions {
 	 */
 	def List<TimeEventSpec> timeEventSpecs(State state) { 
 		// TODO: also query local reactions
-		state.outgoingTransitions.fold(new ArrayList<TimeEventSpec>(), 
+		var tesList = new ArrayList<TimeEventSpec>()
+		
+		state.outgoingTransitions.fold(tesList, 
 			[s, r | {
 				EcoreUtil2::eAllContentsAsList(r).filter(typeof (TimeEventSpec)).forEach(tes | s.add(tes))
 				s
 			}]
 		)
+
+		state.localReactions.fold(tesList, 
+			[s, r | {
+				EcoreUtil2::eAllContentsAsList(r).filter(typeof (TimeEventSpec)).forEach(tes | s.add(tes))
+				s
+			}]
+		)
+				
+		return tesList
 	}
 
 	//=================================================================

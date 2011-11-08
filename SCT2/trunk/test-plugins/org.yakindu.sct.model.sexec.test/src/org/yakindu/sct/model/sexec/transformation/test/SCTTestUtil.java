@@ -139,16 +139,16 @@ public class SCTTestUtil {
 	}
 
 	
-	public static LocalReaction _createEntryAction(ReactiveElement parent) {
+	public static LocalReaction _createEntryAction(State parent) {
 		return _createLocalRection(parent, StextFactory.eINSTANCE.createEntryEvent() );
 	}
 	
 	
-	public static LocalReaction _createExitAction(ReactiveElement parent) {
+	public static LocalReaction _createExitAction(State parent) {
 		return _createLocalRection(parent, StextFactory.eINSTANCE.createExitEvent() );
 	}
 	
-	public static LocalReaction _createTimeTriggeredReaction(ReactiveElement parent, TimeEventType type, int value, TimeUnit unit) {
+	public static LocalReaction _createTimeTriggeredReaction(State parent, TimeEventType type, int value, TimeUnit unit) {
 //		TimeEventSpec timeTrigger = StextFactory.eINSTANCE.createTimeEventSpec();
 //		timeTrigger.setType(type);
 //		timeTrigger.setValue(value);
@@ -157,14 +157,25 @@ public class SCTTestUtil {
 	}
 	
 
-	public static LocalReaction _createLocalRection(ReactiveElement parent, EventSpec triggerEvent) {
+	public static LocalReaction _createLocalRection(State parent, EventSpec triggerEvent) {
 		LocalReaction reaction = StextFactory.eINSTANCE.createLocalReaction();
 		ReactionTrigger trigger = StextFactory.eINSTANCE.createReactionTrigger();
 		_createReactionEffect(reaction);
 		
 		trigger.getTriggers().add(triggerEvent);
 		reaction.setTrigger(trigger);
-		if (parent != null) parent.getLocalReactions().add(reaction);
+
+		Scope scope = null;
+		if (parent != null) {
+			if (parent.getScopes().size() > 0 ) {
+				scope = parent.getScopes().get(0);
+			} else {
+				scope = StextFactory.eINSTANCE.createSimpleScope();
+				parent.getScopes().add(scope);
+			}
+		}
+		
+		scope.getDeclarations().add(reaction);
 		
 		return reaction;
 	}

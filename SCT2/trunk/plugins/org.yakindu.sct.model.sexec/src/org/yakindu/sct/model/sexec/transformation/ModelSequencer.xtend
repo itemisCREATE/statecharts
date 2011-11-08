@@ -217,7 +217,7 @@ class ModelSequencer {
 
 		if (t.source != null) sequence.steps.add(newExitStateStep(t.source as State))
 		if (t.effect != null) sequence.steps.add(t.effect.mapEffect)		
-		if (t.target != null) sequence.steps.add(newEnterStateStep(t.target as State))
+		if (t.target != null && t.target instanceof State) sequence.steps.add(newEnterStateStep(t.target as State))
 	
 		if (t.target instanceof State && (t.target as State).create.entryAction != null) 
 			sequence.steps.add( (t.target as State).create.entryAction.newCall)
@@ -519,20 +519,23 @@ class ModelSequencer {
 	/**
 	 * Returns a list of all local reactions defined for a state. This includes also entry and exit actions but excludes 
 	 * local reactions of child states.
+	 * 
+	 * TODO: remove this function as soon the localReactions property in the sgraph model is correctly derived.
 	 */
-	def List<LocalReaction> localReactions(State state)	{
-		state.scopes.get(0).declarations.filter(typeof(LocalReaction)).toList
+	def List<LocalReaction> localReactions_(State state)	{
+		if (state.scopes != null && state.scopes.size > 0 ) state.scopes.get(0).declarations.filter(typeof(LocalReaction)).toList
+		else new ArrayList<LocalReaction>()
 	}
-	
+	 
 	def List<LocalReaction> entryReactions(State state) {
-		state.localReactions()
+		state.localReactions
 			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof EntryEvent))
 			.map(lr | lr as LocalReaction)
 			.toList	
 	} 
 	
 	def List<LocalReaction> exitReactions(State state) {
-		state.localReactions()
+		state.localReactions
 			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof ExitEvent))
 			.map(lr | lr as LocalReaction)
 			.toList	
