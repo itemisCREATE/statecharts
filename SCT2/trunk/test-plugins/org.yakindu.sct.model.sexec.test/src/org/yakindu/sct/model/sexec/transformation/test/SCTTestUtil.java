@@ -3,7 +3,6 @@ package org.yakindu.sct.model.sexec.transformation.test;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Reaction;
-import org.yakindu.sct.model.sgraph.ReactiveElement;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -127,6 +126,7 @@ public class SCTTestUtil {
 		return effect;
 	}
 	
+		
 	
 	public static TimeEventSpec _createTimeEventSpec(TimeEventType type, int value, TimeUnit unit, ReactionTrigger rt) {
 		TimeEventSpec timeTrigger = StextFactory.eINSTANCE.createTimeEventSpec();

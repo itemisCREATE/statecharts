@@ -58,9 +58,11 @@ import org.yakindu.sct.model.stext.stext.Assignment;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
+import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
+import org.yakindu.sct.model.stext.stext.LogicalAndExpression;
 import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
 import org.yakindu.sct.model.stext.stext.MultiplicativeOperator;
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
@@ -367,6 +369,7 @@ public class ModelSequencerTest {
 		assertEquals(s2, ((EnterState)seq.getSteps().get(2)).getState());
 	}
 
+		
 	
 	/**
 	 * The exit action must be part of the reaction effect sequence
@@ -526,8 +529,7 @@ public class ModelSequencerTest {
 	}
 
 	
-	@Test
-	public void testReactionEffectSequence() {
+	@Test public void testTransitionCheckSequenceWithoutGuard() {
 
 		EventDefinition e1 = _createEventDefinition("e1", null);
 		EventDefinition e2 = _createEventDefinition("e2", null);
@@ -549,6 +551,60 @@ public class ModelSequencerTest {
 				((ElementReferenceExpression)((LogicalOrExpression) reaction.getCheck().getCondition()).getLeftOperand()).getValue().getName());
 		assertEquals(e2.getName(),
 				((ElementReferenceExpression)((LogicalOrExpression) reaction.getCheck().getCondition()).getRightOperand()).getValue().getName());
+	}
+
+	
+	@Test public void testTransitionCheckSequenceWithGuard() {
+
+		EventDefinition e1 = _createEventDefinition("e1", null);
+		EventDefinition e2 = _createEventDefinition("e2", null);
+
+		ReactionTrigger tr1 = _createReactionTrigger(null);
+		_createRegularEventSpec(e1, tr1);
+		_createRegularEventSpec(e2, tr1);
+
+		PrimitiveValueExpression exp = _createValue("false");
+		tr1.setGuardExpression(exp);
+
+		Transition t = SGraphFactory.eINSTANCE.createTransition();
+		t.setTrigger(tr1);
+
+		Reaction reaction = sequencer.mapTransition(t);
+
+		// now check the expression structure ...
+		
+		// the root is an and condition with the trigger check as the first (left) part and the guard as the right (second) part.
+		LogicalAndExpression and = (LogicalAndExpression) reaction.getCheck().getCondition();
+		LogicalOrExpression triggerCheck = (LogicalOrExpression) and.getLeftOperand();
+		PrimitiveValueExpression guardCheck = (PrimitiveValueExpression) and.getRightOperand();
+		
+		assertTrue(triggerCheck.getLeftOperand() instanceof ElementReferenceExpression);
+		assertTrue(triggerCheck.getRightOperand() instanceof ElementReferenceExpression);
+		assertEquals(e1.getName(),
+				((ElementReferenceExpression) triggerCheck.getLeftOperand()).getValue().getName());
+		assertEquals(e2.getName(),
+				((ElementReferenceExpression) triggerCheck.getRightOperand()).getValue().getName());
+		
+		assertEquals(exp.getValue(), guardCheck.getValue());
+	}
+
+	
+	@Test public void testTransitionCheckSequenceWithoutTrigger() {
+
+		ReactionTrigger tr1 = _createReactionTrigger(null);
+		PrimitiveValueExpression exp = _createValue("false");
+		tr1.setGuardExpression(exp);
+
+		Transition t = SGraphFactory.eINSTANCE.createTransition();
+		t.setTrigger(tr1);
+
+		Reaction reaction = sequencer.mapTransition(t);
+
+		// now check the expression structure ...
+		
+		// the root is an and condition with the trigger check as the first (left) part and the guard as the right (second) part.
+		PrimitiveValueExpression guard = (PrimitiveValueExpression) reaction.getCheck().getCondition();
+		assertEquals(exp.getValue(), guard.getValue());
 	}
 
 	

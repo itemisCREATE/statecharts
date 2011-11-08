@@ -59,6 +59,7 @@ import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
+import org.yakindu.sct.model.stext.stext.LogicalAndExpression;
 import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
 import org.yakindu.sct.model.stext.stext.MultiplicativeOperator;
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
@@ -708,32 +709,72 @@ public class ModelSequencer {
   }
   
   protected Statement _buildCondition(final ReactionTrigger t) {
-    Expression _xifexpression = null;
-    EList<EventSpec> _triggers = t.getTriggers();
-    boolean _isEmpty = _triggers.isEmpty();
-    boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
-    if (_operator_not) {
-      EList<EventSpec> _triggers_1 = t.getTriggers();
-      Iterable<EventSpec> _reverseView = ListExtensions.<EventSpec>reverseView(_triggers_1);
-      final Function2<Expression,EventSpec,Expression> _function = new Function2<Expression,EventSpec,Expression>() {
-          public Expression apply(final Expression s , final EventSpec e) {
-            Expression _xifexpression_1 = null;
-            boolean _operator_equals = ObjectExtensions.operator_equals(s, null);
-            if (_operator_equals) {
-              Expression _raised = ModelSequencer.this.raised(e);
-              _xifexpression_1 = _raised;
-            } else {
-              Expression _raised_1 = ModelSequencer.this.raised(e);
-              Expression _or = ModelSequencer.this.or(_raised_1, s);
-              _xifexpression_1 = _or;
+    Expression _xblockexpression = null;
+    {
+      Expression _xifexpression = null;
+      EList<EventSpec> _triggers = t.getTriggers();
+      boolean _isEmpty = _triggers.isEmpty();
+      boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
+      if (_operator_not) {
+        EList<EventSpec> _triggers_1 = t.getTriggers();
+        Iterable<EventSpec> _reverseView = ListExtensions.<EventSpec>reverseView(_triggers_1);
+        final Function2<Expression,EventSpec,Expression> _function = new Function2<Expression,EventSpec,Expression>() {
+            public Expression apply(final Expression s , final EventSpec e) {
+              Expression _xifexpression_1 = null;
+              boolean _operator_equals = ObjectExtensions.operator_equals(s, null);
+              if (_operator_equals) {
+                Expression _raised = ModelSequencer.this.raised(e);
+                _xifexpression_1 = _raised;
+              } else {
+                Expression _raised_1 = ModelSequencer.this.raised(e);
+                Expression _or = ModelSequencer.this.or(_raised_1, s);
+                _xifexpression_1 = _or;
+              }
+              return _xifexpression_1;
             }
-            return _xifexpression_1;
-          }
-        };
-      Expression _fold = IterableExtensions.<EventSpec, Expression>fold(_reverseView, ((Expression) null), _function);
-      _xifexpression = _fold;
+          };
+        Expression _fold = IterableExtensions.<EventSpec, Expression>fold(_reverseView, ((Expression) null), _function);
+        _xifexpression = _fold;
+      } else {
+        _xifexpression = null;
+      }
+      final Expression triggerCheck = _xifexpression;
+      Expression _xifexpression_2 = null;
+      Expression _guardExpression = t.getGuardExpression();
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_guardExpression, null);
+      if (_operator_notEquals) {
+        Expression _guardExpression_1 = t.getGuardExpression();
+        Expression _copy = EcoreUtil.<Expression>copy(_guardExpression_1);
+        _xifexpression_2 = _copy;
+      } else {
+        _xifexpression_2 = null;
+      }
+      final Expression guard = _xifexpression_2;
+      Expression _xifexpression_3 = null;
+      boolean _operator_and = false;
+      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(triggerCheck, null);
+      if (!_operator_notEquals_1) {
+        _operator_and = false;
+      } else {
+        boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(guard, null);
+        _operator_and = BooleanExtensions.operator_and(_operator_notEquals_1, _operator_notEquals_2);
+      }
+      if (_operator_and) {
+        Expression _and = this.and(triggerCheck, guard);
+        _xifexpression_3 = _and;
+      } else {
+        Expression _xifexpression_4 = null;
+        boolean _operator_notEquals_3 = ObjectExtensions.operator_notEquals(triggerCheck, null);
+        if (_operator_notEquals_3) {
+          _xifexpression_4 = triggerCheck;
+        } else {
+          _xifexpression_4 = guard;
+        }
+        _xifexpression_3 = _xifexpression_4;
+      }
+      _xblockexpression = (_xifexpression_3);
     }
-    return _xifexpression;
+    return _xblockexpression;
   }
   
   public Expression or(final Expression left, final Expression right) {
@@ -742,6 +783,19 @@ public class ModelSequencer {
       StextFactory _stextFactory = this.stextFactory();
       LogicalOrExpression _createLogicalOrExpression = _stextFactory.createLogicalOrExpression();
       final LogicalOrExpression or = _createLogicalOrExpression;
+      or.setLeftOperand(left);
+      or.setRightOperand(right);
+      _xblockexpression = (or);
+    }
+    return _xblockexpression;
+  }
+  
+  public Expression and(final Expression left, final Expression right) {
+    LogicalAndExpression _xblockexpression = null;
+    {
+      StextFactory _stextFactory = this.stextFactory();
+      LogicalAndExpression _createLogicalAndExpression = _stextFactory.createLogicalAndExpression();
+      final LogicalAndExpression or = _createLogicalAndExpression;
       or.setLeftOperand(left);
       or.setRightOperand(right);
       _xblockexpression = (or);
