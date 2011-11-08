@@ -40,7 +40,7 @@ public class TimerHandler implements ITimerHandler {
 	}
 
 	@Override
-	public void setTimer(final TimeEvent event) {
+	public void setTimer(final TimeEvent event, long time) {
 		// Reset existing TimerTask for event. This step isn't necessary if
 		// timer tasks are properly reset by sexec model.
 		if (timerTaskMap.containsKey(event)) {
@@ -55,14 +55,16 @@ public class TimerHandler implements ITimerHandler {
 			}
 		});
 		
+		//set time field of event
+		event.setTime(time);
+		
 		//start scheduling the timer.
-		if (event.isPeriodic()) {
-			timer.scheduleAtFixedRate(timerTaskMap.get(event),event.getValue(), event.getValue());
+		if (event.getValue()) {
+			timer.scheduleAtFixedRate(timerTaskMap.get(event), time, time);
 		}
 		else {
-			timer.schedule(timerTaskMap.get(event), event.getValue());
+			timer.schedule(timerTaskMap.get(event), time);
 		}
-
 	}
 
 	@Override

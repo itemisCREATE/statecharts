@@ -28,7 +28,7 @@ Contributors:
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR ScheduleTimeEvent-»
-getTimerHandler().setTimer(«timeEvent.getName()», «timeValue.toCode()», «timeEvent.periodic»);
+getTimerHandler().setTimer(«timeEvent.getName()», «timeValue.toCode()»);
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR UnscheduleTimeEvent-»
@@ -89,7 +89,7 @@ else {
 «DEFINE ConditionMethodsImplement FOR ExecutionState-»
 	«FOREACH reactions AS r-»
 		«IF r.check != null -»
-	private bool «r.check.functionName()»(Collection<?> events) {
+	private boolean «r.check.functionName()»(Collection<?> events) {
 		«IF r.check.condition != null-»
 		return «r.check.condition.toCode()»;
 		«ELSE-»
@@ -147,7 +147,7 @@ else {
 «DEFINE file FOR ExecutionFlow-»
 «FILE getBaseStatemachineName()+'.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.«getStatemachineName()»;
+package org.yakindu.sct.runtime.java.«getStatemachineName().toLowerCase()»;
 
 import java.util.Collection;
 import java.util.EnumSet;
@@ -155,17 +155,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.yakindu.sct.runtime.java.base.Event;
+«IF getTimeEvents().size > 0 -»
+import org.yakindu.sct.runtime.java.base.TimeEvent;
+«ENDIF-»
 import org.yakindu.sct.runtime.java.base.ITimedStatemachine;
 import org.yakindu.sct.runtime.java.base.ITimerHandler;
 import org.yakindu.sct.runtime.java.base.TimerHandler;
 import org.yakindu.sct.runtime.java.base.notification.EventNotification;
 import org.yakindu.sct.runtime.java.base.notification.Notification;
 
-public abstract class «getBaseStatemachineName()» implements ITimedStatemachine<Event> {
+public abstract class «getBaseStatemachineName()» implements ITimedStatemachine {
 	
 	«FOREACH getInternalScopeEvents() AS event-»
 	private static final Event<«event.type.getJavaClassType()»> «event.getName()» = new Event<«event.type.getJavaClassType()»>("«event.name»", «event.getInitialValue()»); 
 	«ENDFOREACH-»
+	
+	«FOREACH getTimeEvents() AS timeEvent-»
+		private static final TimeEvent «timeEvent.getName()» = new TimeEvent("«timeEvent.getName()»", «timeEvent.periodic»); 
+	«ENDFOREACH»
 	
 	public enum State {
 		«FOREACH states AS state-»
@@ -174,7 +181,7 @@ public abstract class «getBaseStatemachineName()» implements ITimedStatemachine<
 	};
 	
 	«FOREACH scopes.typeSelect(InterfaceScope) AS interface-»
-	private «interface.getInterfaceImplName()» «interface.getInterfaceName().toFirstLower()»
+	private «interface.getInterfaceImplName()» «interface.getInterfaceName().toFirstLower()»;
 	«ENDFOREACH-»
 	«REM»internal scope valued events
 	«FOREACH getInternalScopeValuedEvents() AS event-»
@@ -202,11 +209,11 @@ public abstract class «getBaseStatemachineName()» implements ITimedStatemachine<
 		«ENDFOREACH-»
 	}
 	
-	protected Collection<Event> getOccuredEvents() {
+	protected Collection<Event<?>> getOccuredEvents() {
 		return occuredEvents;
 	}
 	
-	protected Collection<Event> getOutEvents(){
+	protected Collection<Event<?>> getOutEvents(){
 		return outEvents;
 	}
 		
@@ -229,7 +236,7 @@ public abstract class «getBaseStatemachineName()» implements ITimedStatemachine<
 	@Override
 	public ITimerHandler getTimerHandler() {
 		if (timerHandler == null) {
-			timerHandler = new TimerHandler<Event>(this);
+			timerHandler = new TimerHandler(this);
 		}
 		return timerHandler;
 	}
@@ -243,20 +250,20 @@ public abstract class «getBaseStatemachineName()» implements ITimedStatemachine<
 	}
 	
 	«FOREACH scopes.typeSelect(InterfaceScope) AS interface-»
-	public «interface.getInterfaceName()» get«interface.getInterfaceName()» {
+	public «interface.getInterfaceName()» get«interface.getInterfaceName()»() {
 		return «interface.getInterfaceName().toFirstLower()»;
 	}
 	
 	«ENDFOREACH-»
 	«FOREACH getInternalScopeEvents() AS event-»
 	private void raise«event.name.toFirstUpper()»() {
-		statemachine.getOccuredEvents().add(«event.getName()»);
+		getOccuredEvents().add(«event.getName()»);
 	}
 	
 	«IF event.type != Type::void-»
 	private void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value) {
 		«event.getName()».setValue(value);
-		statemachine.getOccuredEvents().add(«event.getName()»);
+		getOccuredEvents().add(«event.getName()»);
 	}
 	
 	private «event.type.getJavaType()» get«event.getValueName().toFirstUpper()»() {

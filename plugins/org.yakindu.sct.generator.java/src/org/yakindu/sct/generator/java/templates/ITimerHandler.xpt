@@ -22,7 +22,7 @@ package org.yakindu.sct.runtime.java.base;
 
 public interface ITimerHandler {
 	
-	public void setTimer(TimeEvent event);
+	public void setTimer(TimeEvent event, long time);
 	
 	public void resetTimer(TimeEvent event);
 }

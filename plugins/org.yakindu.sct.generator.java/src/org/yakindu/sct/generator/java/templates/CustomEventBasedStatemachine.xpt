@@ -20,7 +20,7 @@ Contributors:
 «DEFINE file FOR ExecutionFlow»
 «FILE getEventBasedStatemachineName()+'.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.«getStatemachineName()»;
+package org.yakindu.sct.runtime.java.«getStatemachineName().toLowerCase()»;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -30,7 +30,7 @@ import org.yakindu.sct.runtime.java.base.Event;
 
 public class «getEventBasedStatemachineName()» extends «getBaseStatemachineName()» {
 
-	public CustomEventBasedStatemachine() {
+	public «getEventBasedStatemachineName()»() {
 		super(new LinkedList<Event<?>>());
 	}
 	
