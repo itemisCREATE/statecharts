@@ -113,28 +113,51 @@ public class StatechartExtensions {
   }
   
   public List<TimeEventSpec> timeEventSpecs(final State state) {
-    EList<Transition> _outgoingTransitions = state.getOutgoingTransitions();
-    ArrayList<TimeEventSpec> _arrayList = new ArrayList<TimeEventSpec>();
-    final Function2<ArrayList<TimeEventSpec>,Transition,ArrayList<TimeEventSpec>> _function = new Function2<ArrayList<TimeEventSpec>,Transition,ArrayList<TimeEventSpec>>() {
-        public ArrayList<TimeEventSpec> apply(final ArrayList<TimeEventSpec> s , final Transition r) {
-          ArrayList<TimeEventSpec> _xblockexpression = null;
-          {
-            List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(r);
-            Iterable<TimeEventSpec> _filter = IterableExtensions.<TimeEventSpec>filter(_eAllContentsAsList, org.yakindu.sct.model.stext.stext.TimeEventSpec.class);
-            final Function1<TimeEventSpec,Boolean> _function_1 = new Function1<TimeEventSpec,Boolean>() {
-                public Boolean apply(final TimeEventSpec tes) {
-                  boolean _add = s.add(tes);
-                  return ((Boolean)_add);
-                }
-              };
-            IterableExtensions.<TimeEventSpec>forEach(_filter, _function_1);
-            _xblockexpression = (s);
+    {
+      ArrayList<TimeEventSpec> _arrayList = new ArrayList<TimeEventSpec>();
+      ArrayList<TimeEventSpec> tesList = _arrayList;
+      EList<Transition> _outgoingTransitions = state.getOutgoingTransitions();
+      final Function2<ArrayList<TimeEventSpec>,Transition,ArrayList<TimeEventSpec>> _function = new Function2<ArrayList<TimeEventSpec>,Transition,ArrayList<TimeEventSpec>>() {
+          public ArrayList<TimeEventSpec> apply(final ArrayList<TimeEventSpec> s , final Transition r) {
+            ArrayList<TimeEventSpec> _xblockexpression = null;
+            {
+              List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(r);
+              Iterable<TimeEventSpec> _filter = IterableExtensions.<TimeEventSpec>filter(_eAllContentsAsList, org.yakindu.sct.model.stext.stext.TimeEventSpec.class);
+              final Function1<TimeEventSpec,Boolean> _function_1 = new Function1<TimeEventSpec,Boolean>() {
+                  public Boolean apply(final TimeEventSpec tes) {
+                    boolean _add = s.add(tes);
+                    return ((Boolean)_add);
+                  }
+                };
+              IterableExtensions.<TimeEventSpec>forEach(_filter, _function_1);
+              _xblockexpression = (s);
+            }
+            return _xblockexpression;
           }
-          return _xblockexpression;
-        }
-      };
-    ArrayList<TimeEventSpec> _fold = IterableExtensions.<Transition, ArrayList<TimeEventSpec>>fold(_outgoingTransitions, _arrayList, _function);
-    return _fold;
+        };
+      IterableExtensions.<Transition, ArrayList<TimeEventSpec>>fold(_outgoingTransitions, tesList, _function);
+      EList<Reaction> _localReactions = state.getLocalReactions();
+      final Function2<ArrayList<TimeEventSpec>,Reaction,ArrayList<TimeEventSpec>> _function_2 = new Function2<ArrayList<TimeEventSpec>,Reaction,ArrayList<TimeEventSpec>>() {
+          public ArrayList<TimeEventSpec> apply(final ArrayList<TimeEventSpec> s_1 , final Reaction r_1) {
+            ArrayList<TimeEventSpec> _xblockexpression_1 = null;
+            {
+              List<EObject> _eAllContentsAsList_1 = EcoreUtil2.eAllContentsAsList(r_1);
+              Iterable<TimeEventSpec> _filter_1 = IterableExtensions.<TimeEventSpec>filter(_eAllContentsAsList_1, org.yakindu.sct.model.stext.stext.TimeEventSpec.class);
+              final Function1<TimeEventSpec,Boolean> _function_3 = new Function1<TimeEventSpec,Boolean>() {
+                  public Boolean apply(final TimeEventSpec tes_1) {
+                    boolean _add_1 = s_1.add(tes_1);
+                    return ((Boolean)_add_1);
+                  }
+                };
+              IterableExtensions.<TimeEventSpec>forEach(_filter_1, _function_3);
+              _xblockexpression_1 = (s_1);
+            }
+            return _xblockexpression_1;
+          }
+        };
+      IterableExtensions.<Reaction, ArrayList<TimeEventSpec>>fold(_localReactions, tesList, _function_2);
+      return tesList;
+    }
   }
   
   protected String _id(final Object obj) {

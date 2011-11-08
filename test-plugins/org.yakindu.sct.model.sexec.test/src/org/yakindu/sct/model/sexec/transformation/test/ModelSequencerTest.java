@@ -731,8 +731,7 @@ public class ModelSequencerTest {
 		assertEquals("1", ((PrimitiveValueExpression)multiply.getLeftOperand()).getValue());
 		assertEquals("1000", ((PrimitiveValueExpression)multiply.getRightOperand()).getValue());
 		assertEquals(MultiplicativeOperator.MUL, multiply.getOperator());
-				
-		
+						
 		// assert the unscheduling of the time events during state exit
 		assertNotNull(_s.getExitAction());
 		Sequence exitAction = (Sequence) _s.getExitAction();
@@ -757,14 +756,24 @@ public class ModelSequencerTest {
 		ExecutionFlow flow = sequencer.transform(sc);
 		
 		Scope timerScope = flow.getScopes().get(1);
-		assertTrue(timerScope.getDeclarations().get(0) instanceof EventDefinition);
+		assertTrue(timerScope.getDeclarations().get(0) instanceof TimeEvent);
 		
+		TimeEvent te = (TimeEvent) timerScope.getDeclarations().get(0);
 		
-		fail("incomplete test: time event check");
+		// assert that the reaction check checks the time event
+		ExecutionState _s = flow.getStates().get(0);
 
-		fail("incomplete test: scheduling time events");
-		
-		fail("incomplete test: unscheduling time events");
+		// assert the scheduling of the time event during state entry
+		assertNotNull(_s.getEntryAction());
+		Sequence entryAction = (Sequence) _s.getEntryAction();
+		ScheduleTimeEvent ste = (ScheduleTimeEvent) entryAction.getSteps().get(0);
+		assertSame(te, ste.getTimeEvent());
+		PrimitiveValueExpression value = (PrimitiveValueExpression) ste.getTimeValue();
+		assertEquals("2", value.getValue());
+		assertNotNull(_s.getExitAction());
+		Sequence exitAction = (Sequence) _s.getExitAction();
+		UnscheduleTimeEvent ute = (UnscheduleTimeEvent) exitAction.getSteps().get(0);
+		assertSame(te, ute.getTimeEvent());
 
 	}
 
