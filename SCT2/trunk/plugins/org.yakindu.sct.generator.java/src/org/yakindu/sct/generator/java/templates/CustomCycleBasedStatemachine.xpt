@@ -20,7 +20,7 @@ Contributors:
 «DEFINE file FOR ExecutionFlow»
 «FILE getCycleBasedStatemachineName() + '.java'»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.«getStatemachineName()»;
+package org.yakindu.sct.runtime.java.«getStatemachineName().toLowerCase()»;
 
 import java.util.HashSet;
 
@@ -28,7 +28,7 @@ import org.yakindu.sct.runtime.java.base.Event;
 
 public class «getCycleBasedStatemachineName()» extends «getBaseStatemachineName()» {
 
-	public CustomCycleBasedStatemachine() {
+	public «getCycleBasedStatemachineName()»() {
 		super(new HashSet<Event<?>>());
 	}
 

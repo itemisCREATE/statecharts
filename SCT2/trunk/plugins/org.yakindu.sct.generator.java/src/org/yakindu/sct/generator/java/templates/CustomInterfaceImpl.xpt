@@ -19,14 +19,14 @@ Contributors:
 «DEFINE file FOR InterfaceScope»
 «FILE getInterfaceImplName() + '.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.«getStatemachineName((ExecutionFlow)eContainer)»;
+package org.yakindu.sct.runtime.java.«getStatemachineName((ExecutionFlow)eContainer).toLowerCase()»;
 
 import org.yakindu.sct.runtime.java.base.notification.EventNotification;
 «IF hasOutgoingEvents()-»
 import org.yakindu.sct.runtime.java.base.notification.NotificationSender;
 «ENDIF-»
 
-public abstract class «getInterfaceImplName()»«getInterfaceImplExtension()» implements «getInterfaceName()» {
+public class «getInterfaceImplName()»«getInterfaceImplExtension()» implements «getInterfaceName()» {
 	
 	private «getBaseStatemachineName()» statemachine; 
 	

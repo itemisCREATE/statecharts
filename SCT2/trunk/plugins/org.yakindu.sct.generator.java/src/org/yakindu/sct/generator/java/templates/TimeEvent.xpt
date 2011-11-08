@@ -21,17 +21,20 @@ Contributors:
 «getLicenseHeader()»
 package org.yakindu.sct.runtime.java.base;
 
-public class TimeEvent extends Event<Long> {
+public class TimeEvent extends Event<Boolean> {
 	
-	private boolean periodic;
+	private long time = -1;
 	
-	public TimeEvent(String name, Long timeValue, boolean periodic) {
-		super(name, timeValue);
-		this.periodic = periodic;
+	public TimeEvent(String name, boolean periodic) {
+		super(name, periodic);
 	}
 	
-	public boolean isPeriodic(){
-		return periodic;
+	public void setTime(long time){
+		this.time = time;
+	}
+	
+	public long getTime(){
+		return time;
 	}
 }
 

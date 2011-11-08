@@ -18,7 +18,7 @@ Contributors:
 «DEFINE file FOR InterfaceScope-»
 «FILE getInterfaceName() + '.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.«getStatemachineName((ExecutionFlow)eContainer)»;
+package org.yakindu.sct.runtime.java.«getStatemachineName((ExecutionFlow)eContainer).toLowerCase()»;
 
 import org.yakindu.sct.runtime.java.base.Event;
 «IF hasOutgoingEvents()-»
