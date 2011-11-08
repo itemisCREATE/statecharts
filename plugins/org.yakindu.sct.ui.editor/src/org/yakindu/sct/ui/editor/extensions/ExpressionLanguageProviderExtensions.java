@@ -61,7 +61,6 @@ public class ExpressionLanguageProviderExtensions {
 				e.printStackTrace();
 			}
 		}
-		throw new IllegalStateException("No Expression Provider found for "
-				+ target);
+		return new IExpressionLanguageProvider.NullLanguageProvider();
 	}
 }
