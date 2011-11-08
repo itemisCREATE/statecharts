@@ -19,8 +19,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.label.ILabelDelegate;
-import org.eclipse.gmf.runtime.diagram.ui.label.LabelExDelegate;
+import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.LabelEx;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
@@ -40,7 +39,7 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart
 
 	private DirectEditManager manager;
 
-	protected abstract DirectEditManager createXTextDirectEditManager();
+	protected abstract DirectEditManager createDirectEditManager();
 
 	public ExternalXtextLabelEditPart(final View view) {
 		super(view);
@@ -82,30 +81,20 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart
 
 	@Override
 	protected void handleNotificationEvent(final Notification notification) {
-		Object feature = notification.getFeature();
 		if (notification.getNotifier() instanceof ShapeStyle) {
 			refreshVisuals();
-		}
-		else if (NotationPackage.eINSTANCE.getFontStyle().getEAllAttributes().contains(feature)) {
+		} else if (NotationPackage.eINSTANCE.getFontStyle().getEAllAttributes()
+				.contains(notification.getFeature())) {
 			refreshFont();
-		}
-		else {
+		} else {
 			super.handleNotificationEvent(notification);
 		}
 	}
 
 	@Override
-	public Object getAdapter(@SuppressWarnings("rawtypes") final Class key) {
-		if (key.equals(ILabelDelegate.class)) {
-			return new LabelExDelegate(getFigure());
-		}
-		return super.getAdapter(key);
-	}
-
-	@Override
 	protected void performDirectEditRequest(final Request request) {
 		if (manager == null) {
-			manager = createXTextDirectEditManager();
+			manager = createDirectEditManager();
 		}
 		final Request theRequest = request;
 		try {
@@ -114,14 +103,17 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart
 				public void run() {
 					if (isActive()) {
 						if (theRequest.getExtendedData().get(
-								REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character
-								&& manager instanceof XtextDirectEditManager) {
+								REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character) {
 							final Character initialChar = (Character) theRequest
 									.getExtendedData()
 									.get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
-
-							((XtextDirectEditManager) manager).show(initialChar);
-
+							if (manager instanceof XtextDirectEditManager) {
+								((XtextDirectEditManager) manager)
+										.show(initialChar);
+							} else if (manager instanceof TextDirectEditManager) {
+								((TextDirectEditManager) manager)
+										.show(initialChar);
+							}
 						} else {
 							manager.show();
 						}

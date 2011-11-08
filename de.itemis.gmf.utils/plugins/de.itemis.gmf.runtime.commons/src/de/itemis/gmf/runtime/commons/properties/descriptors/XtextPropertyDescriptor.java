@@ -68,12 +68,6 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 		return SWT.MULTI | SWT.BORDER | SWT.V_SCROLL;
 	}
 
-//	@Override
-//	public void updateModelBinding(EObject eObject) {
-//		super.updateModelBinding(eObject);
-//		xtextAdapter.updateFakeResourceContext();
-//	}
-
 	protected StyledText createControl(Composite parent) {
 		StyledText styledText = new StyledText(parent, getStyle());
 		xtextAdapter = new StyledTextXtextAdapter(getInjector(),

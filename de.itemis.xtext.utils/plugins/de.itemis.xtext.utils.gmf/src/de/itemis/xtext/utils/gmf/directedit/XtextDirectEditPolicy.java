@@ -6,7 +6,7 @@ import org.eclipse.gef.requests.DirectEditRequest;
 /**
  * Base class for XTextDirectEdit.
  * 
- * @author andreas muelder (andreas.muelder@itemis.de)
+ * @author andreas muelder 
  * 
  */
 public abstract class XtextDirectEditPolicy extends DirectEditPolicy {
