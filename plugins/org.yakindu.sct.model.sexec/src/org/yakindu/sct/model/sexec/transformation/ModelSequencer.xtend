@@ -363,12 +363,18 @@ class ModelSequencer {
 	def dispatch Statement buildCondition (Trigger t) { null }
 	
 	def dispatch Statement buildCondition (ReactionTrigger t) {
-		if (! t.triggers.empty) t.triggers.reverseView.fold(null as Expression,
+		val triggerCheck = if (! t.triggers.empty) t.triggers.reverseView.fold(null as Expression,
 			[s,e | 
 				if (s==null) raised(e)  
 				else raised(e).or(s)
 			]
-		)
+		) else null;
+		
+		val guard = if ( t.guardExpression != null ) EcoreUtil::copy(t.guardExpression) else null;
+		
+		if ( triggerCheck != null && guard != null ) and(triggerCheck, guard)
+		else if ( triggerCheck != null )  triggerCheck
+		else guard
 	}
 	
 	
@@ -380,6 +386,12 @@ class ModelSequencer {
 		or
 	}
 	
+	def Expression and(Expression left, Expression right) {
+		val or = stextFactory.createLogicalAndExpression
+		or.leftOperand = left
+		or.rightOperand = right
+		or
+	}
 	
 	 
 
