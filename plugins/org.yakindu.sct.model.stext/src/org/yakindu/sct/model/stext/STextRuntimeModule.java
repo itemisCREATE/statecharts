@@ -4,7 +4,6 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.scoping.impl.ResourceSetGlobalScopeProvider;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.scoping.NamespaceLocalScopeResolver;
 
@@ -18,10 +17,11 @@ import de.itemis.xtext.utils.gmf.resource.InjectMembersLazyLinker;
  */
 public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTextRuntimeModule {
 
-	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		super.bindIGlobalScopeProvider();
-		return ResourceSetGlobalScopeProvider.class;
-	}
+	// public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider>
+	// bindIGlobalScopeProvider() {
+	// super.bindIGlobalScopeProvider();
+	// return ResourceSetGlobalScopeProvider.class;
+	// }
 
 	@Override
 	public Class<? extends ILinker> bindILinker() {
