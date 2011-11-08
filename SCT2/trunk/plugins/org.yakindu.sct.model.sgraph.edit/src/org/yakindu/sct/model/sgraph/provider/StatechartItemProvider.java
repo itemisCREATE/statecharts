@@ -74,6 +74,7 @@ public class StatechartItemProvider
 
 			addExpressionPropertyDescriptor(object);
 			addReactionsPropertyDescriptor(object);
+			addNamespacePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -118,6 +119,28 @@ public class StatechartItemProvider
 				 false,
 				 false,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Namespace feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamespacePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ScopedElement_namespace_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ScopedElement_namespace_feature", "_UI_ScopedElement_type"),
+				 SGraphPackage.Literals.SCOPED_ELEMENT__NAMESPACE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -192,6 +215,7 @@ public class StatechartItemProvider
 
 		switch (notification.getFeatureID(Statechart.class)) {
 			case SGraphPackage.STATECHART__EXPRESSION:
+			case SGraphPackage.STATECHART__NAMESPACE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SGraphPackage.STATECHART__LOCAL_REACTIONS:
