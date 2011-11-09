@@ -21,7 +21,7 @@ Templates for the main statechart cpp file.
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Execution»
-	«this.statement.toCppCode()»
+	«this.statement.toCCode()»
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Call»
@@ -34,7 +34,7 @@ Templates for the main statechart cpp file.
 
 «DEFINE ActionCode FOR Check -»
   «IF this != null -»
-«this.condition.toCppCode() -»
+«this.condition.toCCode() -»
   «ELSE -»
  bool_true «
  ENDIF -»«
@@ -69,12 +69,19 @@ else {
 ((StatemachineBase*)handle)->state[0] = last_state;
 «ENDDEFINE»
 
+«DEFINE ConditionMethodsProto FOR ExecutionState»
+  «FOREACH reactions AS r -»
+  «IF r.check != null -»
+static boolean «r.check.functionName()»(«StName()»* handle);
+  «ENDIF -»«ENDFOREACH -»
+«ENDDEFINE»
+
 «DEFINE ConditionMethodsImplement FOR ExecutionState»
-  «FOREACH reactions AS r»
+  «FOREACH reactions AS r -»
   «IF r.check != null -»
 boolean «r.check.functionName()»(«StName()»* handle) {
   boolean retValue = bool_false;
-  if («r.check.condition.toCppCode()»)
+  if («r.check.condition.toCCode()»)
     retValue = bool_true;
   
   return retValue;
@@ -83,19 +90,26 @@ boolean «r.check.functionName()»(«StName()»* handle) {
   «ENDFOREACH»
 «ENDDEFINE»
 
+«DEFINE StatementMethodsProto FOR ExecutionState»
+  «FOREACH reactions AS r -»
+static void «r.effect.functionName()»(«StName()»* handle);
+ «ENDFOREACH -»
+«ENDDEFINE»
+
 «DEFINE StatementMethodsImplement FOR ExecutionState»
-  «FOREACH reactions AS r»
-void «r.effect.functionName()»(«StName()»* handle) {
- 
-  «DRName()»* variable = &handle->variableData;
-  
-  «EXPAND ActionCode FOR r.effect»
+  «FOREACH reactions AS r -»
+void «r.effect.functionName()»(«StName()»* handle) {   
+  «EXPAND ActionCode FOR r.effect -»
 }
-  «ENDFOREACH»
+  «ENDFOREACH -»
 «ENDDEFINE»
 
 «DEFINE CycleCode FOR Cycle» 
 «EXPAND ActionCode FOREACH this.steps»
+«ENDDEFINE»
+
+«DEFINE CycleMethodsProto FOR ExecutionState»
+static void «StName().toFirstLower()»_cycle_«this.simpleName»(«StName()»* handle);
 «ENDDEFINE»
 
 «DEFINE CycleMethodsImplement FOR ExecutionState»
@@ -105,18 +119,30 @@ void «StName().toFirstLower()»_cycle_«this.simpleName»(«StName()»* handle)
 }
 «ENDDEFINE»
 
+«DEFINE EnterMethodProto FOR ExecutionState»
+«IF this.entryAction != null -»
+static void «this.entryAction.entryActionFunctionName()»(«StName()»* handle);
+«ENDIF -»
+«ENDDEFINE»
+
 «DEFINE EnterMethodImplement FOR ExecutionState»
 «IF this.entryAction != null»
-void «StName().toFirstLower()»_«this.entryAction.entryActionFunctionName()»(«StName()»* handle)
+void «this.entryAction.entryActionFunctionName()»(«StName()»* handle)
 {
 «EXPAND ActionCode FOR this.entryAction»
 }
 «ENDIF»
 «ENDDEFINE»
 
+«DEFINE ExitMethodProto FOR ExecutionState»
+«IF this.exitAction != null -»
+static void «this.exitAction.exitActionFunctionName()»(«StName()»* handle);
+«ENDIF -»
+«ENDDEFINE»
+
 «DEFINE ExitMethodImplement FOR ExecutionState»
 «IF this.exitAction != null»
-void «StName().toFirstLower()»_«this.exitAction.exitActionFunctionName()»(«StName()»* handle)
+void «this.exitAction.exitActionFunctionName()»(«StName()»* handle)
 {
 «EXPAND ActionCode FOR this.exitAction»
 }
@@ -127,23 +153,36 @@ void «StName().toFirstLower()»_«this.exitAction.exitActionFunctionName()»(«StNam
 «FILE StName()+'.c'»
 #include "«StName()».h"
 
+«EXPAND ConditionMethodsProto FOREACH this.states»
+«EXPAND StatementMethodsProto FOREACH this.states»
+«EXPAND CycleMethodsProto FOREACH this.states»
+«EXPAND EnterMethodProto FOREACH this.states»
+«EXPAND ExitMethodProto FOREACH this.states»
+
 «EXPAND ConditionMethodsImplement FOREACH this.states»
-
 «EXPAND StatementMethodsImplement FOREACH this.states»
-
 «EXPAND CycleMethodsImplement FOREACH this.states»
-
 «EXPAND EnterMethodImplement FOREACH this.states»
-
 «EXPAND ExitMethodImplement FOREACH this.states»
-
 
 void «stName()»_init(«StName()»* handle, Timer* timer, EventPool* eventPool)
 {
 	statemachine_cy_init(&handle->base, MAX_PARALLEL_STATES,
 			event_last, timer, eventPool);
 			
-	«DRName().toFirstLower()»_init(&handle->variableData);
+«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
+	«interface.interfaceName()»_init(&handle->«interface.interfaceObjectName().toFirstLower()», &handle->base, &handle->base.eventSet, eventPool);
+«FOREACH interface.getInEvents() AS event -»
+	eventSet_set_type(&handle->base.eventSet, «event.getEventEnumName()», ev_type_input); 
+«ENDFOREACH -»
+«FOREACH interface.getOutEvents() AS event -»
+	eventSet_set_type(&handle->base.eventSet, «event.getEventEnumName()», ev_type_output); 
+«ENDFOREACH -»
+«FOREACH interface.getLocalEvents() AS event -»
+	eventSet_set_type(&handle->base.eventSet, «event.getEventEnumName()», ev_type_local); 
+«ENDFOREACH -»
+
+«ENDFOREACH»	
 	
 	//((StatemachineBase*)handle)->state[0] = st_State1;
 

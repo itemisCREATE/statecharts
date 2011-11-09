@@ -34,11 +34,10 @@ extern void statemachine_cy_init(Statemachine_cy* handle, uint16_t maxStates,
 
 extern void statemachine_cy_init_staticData(Statemachine_cy* handle,
 		uint16_t maxEvents, Timer* timer, uint32_t* staticStateData,
-		boolean* staticEventSet, _Event** staticListPtr, EventPool* eventPool);
+		boolean* staticEventSet, EventType* eventTypes, _Event** staticListPtr, EventPool* eventPool);
 
 extern void statemachine_cy_exit(Statemachine_cy* handle);
 
-/* implement me */
 extern void statemachine_cy_runCycle(Statemachine_cy* handle);
 
 extern void statemachine_cy_setEvent(Statemachine_cy* handle, _Event* ev);
@@ -48,7 +47,6 @@ extern boolean statemachine_cy_eventWaiting(Statemachine_cy* handle);
 extern void statemachine_cy__runCycle(Statemachine_cy* handle);
 
 #endif /* STATEMACHINE_CY_H_ */
-
 «ENDFILE»
 
 «ENDDEFINE»

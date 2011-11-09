@@ -6,9 +6,9 @@ import sgraph;
 
 String scName(Expression statement) : ((ExecutionFlow)statement.eRootContainer).name ;
 
-List declaredEvents(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(EventDefinition);
+List[EventDefinition] declaredEvents(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(EventDefinition);
 
-List declaredVariables(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(VariableDefinition);
+List[VariableDefinition] declaredVariables(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(VariableDefinition);
 
 String test(NamedElement obj) :  "";
 String StName(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toFirstUpper() + "Statemachine";
@@ -41,5 +41,13 @@ boolean isExitAction(Step step) : ExecutionState.isInstance(step.eContainer) && 
 Reaction reaction(Step this) : (Reaction) this.eContainer ;
 ExecutionState state(Reaction this) : (ExecutionState) eContainer;
 ExecutionState state(Step this) : (ExecutionState) eContainer;
+
+ExecutionFlow getExecutionFlow(InterfaceScope this) : ((ExecutionFlow)this.eContainer);
+
+String interfaceName(InterfaceScope this) : this.getExecutionFlow().name.toFirstLower() + ((this.name == null) ? "_if" : "_if_" + this.name);
+String interfaceClassName(InterfaceScope this) : this.getExecutionFlow().name.toFirstUpper() + "If" + ((this.name == null)?"":this.name.toFirstUpper());
+String interfaceObjectName(InterfaceScope this) : "interface" + ((this.name == null)?"":this.name.toFirstUpper());
+
+String getEventEnumName(EventDefinition this) : "ev_" + this.name;
 
 

@@ -2,69 +2,75 @@ import stext;
 import sexec;
 import ecore;
 import sgraph;
-toCppCode(Void void) :
-	"/*toCppCode() called with NULL element. Polymorphic resolver could not match callable method!*/";
-String toCppCode(Void o, String statechartReference) : 
+
+toCCode(Void void) :
+	"/*toCCode() called with NULL element. Polymorphic resolver could not match callable method!*/";
+String toCCode(Void o, String statechartReference) : 
 	""; //polymorphic placeholder (abstract rule)
 
-String toCppCode(Expression statement) : 
+String toCCode(Expression statement) : 
 	null; //polymorphic placeholder (abstract rule)
  
-String toCppCode(Statement statement) : 
+String toCCode(Statement statement) : 
 	null; //polymorphic placeholder (abstract rule)
  
-String toCppCode(PrimitiveValueExpression primValue) :
+String toCCode(PrimitiveValueExpression primValue) :
 	primValue.value;
 
 /* Assignment */
-String toCppCode(Assignment assignment) :
+String toCCode(Assignment assignment) :
   switch (assignment.operator) {
-  case (AssignmentOperator::assign) : "variable->" + assignment.varRef.name + " = " + assignment.expression.toCppCode() + ";"  
-  case (AssignmentOperator::multAssign) : "variable->" + assignment.varRef.name + " *= " + assignment.expression.toCppCode() + ";"
-  case (AssignmentOperator::divAssign) : "variable->" + assignment.varRef.name + " /= " + assignment.expression.toCppCode() + ";"
-  case (AssignmentOperator::modAssign) : "variable->" + assignment.varRef.name + " %= " + assignment.expression.toCppCode() + ";"
-  case (AssignmentOperator::addAssign) : "variable->" + assignment.varRef.name + " += " + assignment.expression.toCppCode() + ";"
-  case (AssignmentOperator::subAssign) : "variable->" + assignment.varRef.name + " -= " + assignment.expression.toCppCode() + ";"
-  case (AssignmentOperator::leftShiftAssign) : "variable->" + assignment.varRef.name + " <<= "+ assignment.expression.toCppCode() + ";"
-  case (AssignmentOperator::rightShiftAssign) : "variable->" + assignment.varRef.name + " >>= " + assignment.expression.toCppCode() + ";"
-  case (AssignmentOperator::andAssign) : "variable->" + assignment.varRef.name + " &= " + assignment.expression.toCppCode() + ";"
-  case (AssignmentOperator::xorAssign) : "variable->" + assignment.varRef.name + " ^= " + assignment.expression.toCppCode() + ";"
-  case (AssignmentOperator::orAssign) : "variable->" + assignment.varRef.name + " |= " + assignment.expression.toCppCode() + ";"
+  case (AssignmentOperator::assign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + assignment.varRef.name + " = " + assignment.expression.toCCode() + ";"  
+  case (AssignmentOperator::multAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " *= " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::divAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " /= " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::modAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " %= " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::addAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " += " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::subAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " -= " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::leftShiftAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " <<= "+ assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::rightShiftAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " >>= " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::andAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " &= " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::xorAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " ^= " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::orAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " |= " + assignment.expression.toCCode() + ";"
   default : ""
   };
 		
 /* EventRaising */
+String toCCode(EventRaising eventRaising) :
+  "{ _Event* ev = eventPool_createEvent(handle->base.eventPool, ev_"+eventRaising.event.name+"); if (ev) { " + eventRaising.addValue() + "statemachine_cy_setEvent(&handle->base, ev); } }";
+
+String addValue(EventRaising event) :
+  ( (event.value == null)?"":("ev->value = " + event.value.toCCode() + ";") );
 
 /* Logical Expressions */
-String toCppCode(LogicalOrExpression expression) :
-  	expression.leftOperand.toCppCode() + " || " + expression.rightOperand.toCppCode();
+String toCCode(LogicalOrExpression expression) :
+  	expression.leftOperand.toCCode() + " || " + expression.rightOperand.toCCode();
   	
-String toCppCode(LogicalAndExpression expression) :
-  	expression.leftOperand.toCppCode() + " && " + expression.rightOperand.toCppCode();
+String toCCode(LogicalAndExpression expression) :
+  	expression.leftOperand.toCCode() + " && " + expression.rightOperand.toCCode();
 
-String toCppCode(LogicalNotExpression expression) :
-  	" ~" + expression.operand.toCppCode();
+String toCCode(LogicalNotExpression expression) :
+  	" ~" + expression.operand.toCCode();
 
-String toCppCode(LogicalRelationExpression expression) :
-   expression.leftOperand.toCppCode() + getOperator(expression.operator) + expression.rightOperand.toCppCode();
+String toCCode(LogicalRelationExpression expression) :
+   expression.leftOperand.toCCode() + getOperator(expression.operator) + expression.rightOperand.toCCode();
     
-String toCppCode(BitwiseAndExpression expression) :
-  	expression.leftOperand.toCppCode() + " & " + expression.rightOperand.toCppCode();
+String toCCode(BitwiseAndExpression expression) :
+  	expression.leftOperand.toCCode() + " & " + expression.rightOperand.toCCode();
 
-String toCppCode(BitwiseOrExpression expression) :
-  	expression.leftOperand.toCppCode() + " | " + expression.rightOperand.toCppCode();
+String toCCode(BitwiseOrExpression expression) :
+  	expression.leftOperand.toCCode() + " | " + expression.rightOperand.toCCode();
 
-String toCppCode(BitwiseXorExpression expression) :
-  	expression.leftOperand.toCppCode() + " ^ " + expression.rightOperand.toCppCode();
+String toCCode(BitwiseXorExpression expression) :
+  	expression.leftOperand.toCCode() + " ^ " + expression.rightOperand.toCCode();
 
-String toCppCode(NumericalAddSubtractExpression expression) :
-  	expression.leftOperand.toCppCode() + getOperator(expression.operator) + expression.rightOperand.toCppCode();
+String toCCode(NumericalAddSubtractExpression expression) :
+  	expression.leftOperand.toCCode() + getOperator(expression.operator) + expression.rightOperand.toCCode();
   	
-String toCppCode(NumericalMultiplyDivideExpression expression) :
-  	expression.leftOperand.toCppCode() + getOperator(expression.operator) + expression.rightOperand.toCppCode();
+String toCCode(NumericalMultiplyDivideExpression expression) :
+  	expression.leftOperand.toCCode() + getOperator(expression.operator) + expression.rightOperand.toCCode();
 
 // is this just relevant for events?
-String toCppCode(ElementReferenceExpression ev) :
+String toCCode(ElementReferenceExpression ev) :
     " ( eventSet_check( &handle->base.eventSet, ev_" + ev.value.name.toLowerCase() + ") ) ";
 
 String getOperator(AdditiveOperator operator) : 
@@ -92,3 +98,25 @@ String getOperator(RelationalOperator operator) :
 	  case (RelationalOperator::notEquals) : " != "
 	  default : ""
 	};
+
+String eventTypeToString(Type type) : 
+  switch (type) {
+  case (Type::void) : "void"
+  case (Type::real) : "real"
+  case (Type::integer) : "integer"
+  case (Type::boolean) : "boolean"
+  case (Type::string)  : "strng"
+  default : "unknownType"
+ };
+  
+Set[EventDefinition] getInEvents(InterfaceScope interface) : 
+	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::IN);
+
+Set[EventDefinition] getOutEvents(InterfaceScope interface) : 
+	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::OUT);
+
+Set[EventDefinition] getLocalEvents(InterfaceScope interface) : 
+	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::LOCAL);
+
+
+	

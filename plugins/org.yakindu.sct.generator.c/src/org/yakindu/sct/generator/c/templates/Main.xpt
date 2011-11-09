@@ -32,6 +32,7 @@ Contais the root templates that call the different file templates.
 	«EXPAND Statemachine_cyH::file FOR this»
 	«EXPAND Statemachine_cyC::file FOR this»
 
+	«EXPAND Interfaces::file FOR this»
 
     «REM» code that is created by the model «ENDREM»
 	«EXPAND definitionH::file FOR this»
@@ -42,16 +43,14 @@ Contais the root templates that call the different file templates.
 	«EXPAND CustomStatemachineH::file FOR this»
 	«EXPAND CustomStatemachineC::file FOR this»
 	
-	«EXPAND CustomRepositoryH::file FOR this»
-	«EXPAND CustomRepositoryC::file FOR this»
-
 	«EXPAND CustomEventH::file FOR this»
 	«EXPAND CustomEventC::file FOR this»
-	
+
 	«EXPAND CMakeLists::file FOR this»
 	
-	«REM» Test Code «ENDREM»
+	«REM» Test Code
 	«EXPAND TestMain::file FOR this»
+	 «ENDREM»
 	«EXPAND DummyTimer::file FOR this»
 
 «ENDDEFINE»
