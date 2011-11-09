@@ -1,0 +1,27 @@
+grammar org.yakindu.sct.generator.genmodel.SGen with org.eclipse.xtext.common.Terminals
+
+import "platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore" as sct
+import "platform:/resource/org.yakindu.sct.model.sgen/model/emf/sgen.ecore" as gen
+/**
+ * @author Andreas Muelder
+ */
+GeneratorModel returns gen::GeneratorModel:
+	'GeneratorModel' 'for' generatorId=QID '{'
+	(entries+=GeneratorEntry)+
+	'}';
+
+GeneratorEntry returns gen::GeneratorEntry:
+	'statechart' statechart=[sct::Statechart] '{'
+	(features+=FeatureConfiguration)*
+	'}';
+
+FeatureConfiguration returns gen::FeatureConfiguration:
+	type=[gen::FeatureType] '{'
+	parameterValues+=FeatureParameterValue (',' parameterValues+=FeatureParameterValue)*
+	'}';
+
+FeatureParameterValue returns gen::FeatureParameterValue:
+	parameter=[gen::FeatureParameter] '=' value=STRING;
+
+QID:
+	ID (('::' | '.') ID)*; 
