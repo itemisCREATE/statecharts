@@ -10,7 +10,9 @@
  */
 package org.yakindu.sct.generator.cpp.subscriber;
 
+import org.eclipse.core.resources.IProject;
 import org.yakindu.sct.generator.core.impl.AbstractXpandBasedCodeGenerator;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 /**
  * 
@@ -22,6 +24,12 @@ public class CppCodeGenerator extends AbstractXpandBasedCodeGenerator {
 	@Override
 	public String getTemplatePath() {
 		return "org::yakindu::sct::generator::cpp::templates::Main::main";
+	}
+
+	@Override
+	protected void createProject(IProject project, GeneratorEntry entry) {
+		super.createProject(project, entry);
+		// TODO: Set up right project description with C++ related stuff here...
 	}
 
 }
