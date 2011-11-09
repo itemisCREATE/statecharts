@@ -77,7 +77,24 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 				OUTLET_FEATURE_TARGET_PROJECT).getValue();
 		IProject project = ResourcesPlugin.getWorkspace().getRoot()
 				.getProject(projectName);
+		if (!project.exists()) {
+			createProject(project, entry);
+		}
 		return project;
+	}
+
+	/**
+	 * The default implementation only creates a new default project. Clients
+	 * may override if they want to contribute generatorspecific project setup
+	 */
+	protected void createProject(IProject project, GeneratorEntry entry) {
+		try {
+			NullProgressMonitor monitor = new NullProgressMonitor();
+			project.create(monitor);
+			project.open(monitor);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 	}
 
 	protected XpandExecutionContext createXpandContext(Output output) {
@@ -107,7 +124,6 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 		Outlet outlet = new Outlet(absoluteTargetFolder);
 		outlet.setOverwrite(true);
 		output.addOutlet(outlet);
-		System.out.println("Generating to " + absoluteTargetFolder);
 		return output;
 	}
 
