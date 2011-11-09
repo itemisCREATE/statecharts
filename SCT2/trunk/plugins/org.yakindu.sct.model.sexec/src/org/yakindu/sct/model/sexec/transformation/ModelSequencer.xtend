@@ -79,6 +79,7 @@ class ModelSequencer {
 		sc.mapStates(ef)
 		sc.mapTimeEvents(ef)
 		sc.mapTransitions(ef)
+		sc.mapLocalReactions(ef)
 		
 		// derive all additional information that is necessary for the execution
 		ef.defineStateVector(sc)
@@ -209,6 +210,37 @@ class ModelSequencer {
 	}
 
 
+
+
+	def ExecutionFlow mapLocalReactions(Statechart statechart, ExecutionFlow r){
+		var content = EcoreUtil2::eAllContentsAsList(statechart)
+		val allStates = content.filter(e | e instanceof State)
+		allStates.forEach( s | (s as State).mapStateLocalReactions);
+		return r
+	}
+
+	def ExecutionState mapStateLocalReactions(State state) {
+		val _state = state.create
+		
+		_state.reactions.addAll( 
+			state.localReactions
+				.filter( typeof( LocalReaction ))
+				// ignore all reaction that are just entry or exit actions
+				.filter(lr | (lr.trigger as ReactionTrigger).triggers.empty || ! (lr.trigger as ReactionTrigger).triggers.filter( t | t instanceof RegularEventSpec || t instanceof TimeEventSpec).toList.empty)
+				.map(t | t.mapReaction)
+		)
+		return _state
+	}
+	 
+	 
+	def Reaction mapReaction(LocalReaction lr) {
+		val r = lr.create 
+		if (lr.trigger != null) r.check = mapToCheck(lr.trigger)
+		r.effect = mapToEffect(lr)
+		return r
+	}
+
+
 	def Sequence mapToEffect(Transition t) {
 		val sequence = sexecFactory.createSequence 
 
@@ -224,6 +256,12 @@ class ModelSequencer {
 		
 		return sequence
 	}	
+	
+	
+	def Sequence mapToEffect(LocalReaction lr) {
+		if (lr.effect != null) lr.effect.mapEffect	
+	}	
+
 	
 	def dispatch Sequence mapEffect(Effect effect) {}
 	
@@ -337,15 +375,29 @@ class ModelSequencer {
 		val cycle = sexecFactory.createCycle
 		state.cycle = cycle
 		
-		val step = state.reactions.reverseView.fold(null as If, [s, reaction | {
+		val localReactions = state.reactions.filter(r | ! r.transition).toList
+		var localSteps = sexecFactory.createSequence
+		localSteps.steps.addAll(localReactions.map(lr | {
+				var ifStep = sexecFactory.createIf
+				ifStep.check = lr.check.newRef		
+				ifStep.thenStep = lr.effect.newCall
+				ifStep
+		}))
+		if (localSteps.steps.empty) localSteps = null
+				
+				
+		val transitionReactions = state.reactions.filter(r | r.transition).toList
+		val transitionStep = transitionReactions.reverseView.fold(localSteps as Step, [s, reaction | {
 				var ifStep = sexecFactory.createIf
 				ifStep.check = reaction.check.newRef		
 				ifStep.thenStep = reaction.effect.newCall
 				ifStep.elseStep = s
-				ifStep
+				ifStep as Step
 			}])
-			
-		if (step != null) cycle.steps.add(step)
+
+	
+		if (transitionStep != null) cycle.steps.add(transitionStep)		
+		else if (localSteps != null) cycle.steps.add(localSteps)
 		
 		return cycle
 	}
@@ -364,10 +416,13 @@ class ModelSequencer {
 	
 	def dispatch Statement buildCondition (ReactionTrigger t) {
 		val triggerCheck = if (! t.triggers.empty) t.triggers.reverseView.fold(null as Expression,
-			[s,e | 
-				if (s==null) raised(e)  
-				else raised(e).or(s)
-			]
+			[s,e | {
+				val Expression raised = raised(e)
+				
+				if (raised == null) s
+				else if (s==null) raised  
+				else raised.or(s)
+			}]
 		) else null;
 		
 		val guard = if ( t.guardExpression != null ) EcoreUtil::copy(t.guardExpression) else null;
@@ -526,17 +581,6 @@ class ModelSequencer {
 		if ( entry?.outgoingTransitions != null) {
 			if (entry.outgoingTransitions.size > 0) entry.outgoingTransitions.get(0).target as State
 		}
-	}
-
-	/**
-	 * Returns a list of all local reactions defined for a state. This includes also entry and exit actions but excludes 
-	 * local reactions of child states.
-	 * 
-	 * TODO: remove this function as soon the localReactions property in the sgraph model is correctly derived.
-	 */
-	def List<LocalReaction> localReactions_(State state)	{
-		if (state.scopes != null && state.scopes.size > 0 ) state.scopes.get(0).declarations.filter(typeof(LocalReaction)).toList
-		else new ArrayList<LocalReaction>()
 	}
 	 
 	def List<LocalReaction> entryReactions(State state) {

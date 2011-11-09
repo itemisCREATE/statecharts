@@ -27,6 +27,7 @@ import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
+import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
@@ -44,7 +45,7 @@ public class FactoryExtension {
   
   public ExecutionFlow create(final Statechart statechart) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(statechart);
-    final ExecutionFlow r;
+    ExecutionFlow r;
     synchronized (_createCache_create) {
       if (_createCache_create.containsKey(_cacheKey)) {
         return _createCache_create.get(_cacheKey);
@@ -63,7 +64,7 @@ public class FactoryExtension {
   
   protected Scope _create(final InterfaceScope scope) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(scope);
-    final InterfaceScope r;
+    InterfaceScope r;
     synchronized (_createCache_create_1) {
       if (_createCache_create_1.containsKey(_cacheKey)) {
         return _createCache_create_1.get(_cacheKey);
@@ -82,7 +83,7 @@ public class FactoryExtension {
   
   protected Scope _create(final InternalScope scope) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(scope);
-    final InternalScope r;
+    InternalScope r;
     synchronized (_createCache_create_2) {
       if (_createCache_create_2.containsKey(_cacheKey)) {
         return _createCache_create_2.get(_cacheKey);
@@ -99,7 +100,7 @@ public class FactoryExtension {
   
   public EventDefinition create(final EventDefinition event) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(event);
-    final EventDefinition r;
+    EventDefinition r;
     synchronized (_createCache_create_3) {
       if (_createCache_create_3.containsKey(_cacheKey)) {
         return _createCache_create_3.get(_cacheKey);
@@ -115,7 +116,7 @@ public class FactoryExtension {
   
   public VariableDefinition create(final VariableDefinition v) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(v);
-    final VariableDefinition r;
+    VariableDefinition r;
     synchronized (_createCache_create_4) {
       if (_createCache_create_4.containsKey(_cacheKey)) {
         return _createCache_create_4.get(_cacheKey);
@@ -131,7 +132,7 @@ public class FactoryExtension {
   
   public ExecutionState create(final State state) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(state);
-    final ExecutionState r;
+    ExecutionState r;
     synchronized (_createCache_create_5) {
       if (_createCache_create_5.containsKey(_cacheKey)) {
         return _createCache_create_5.get(_cacheKey);
@@ -156,7 +157,7 @@ public class FactoryExtension {
   
   public Check createCheck(final ReactionTrigger tr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(tr);
-    final Check r;
+    Check r;
     synchronized (_createCache_createCheck) {
       if (_createCache_createCheck.containsKey(_cacheKey)) {
         return _createCache_createCheck.get(_cacheKey);
@@ -176,7 +177,7 @@ public class FactoryExtension {
   
   public org.yakindu.sct.model.sexec.Reaction create(final Transition tr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(tr);
-    final org.yakindu.sct.model.sexec.Reaction r;
+    org.yakindu.sct.model.sexec.Reaction r;
     synchronized (_createCache_create_6) {
       if (_createCache_create_6.containsKey(_cacheKey)) {
         return _createCache_create_6.get(_cacheKey);
@@ -186,8 +187,33 @@ public class FactoryExtension {
       r = _createReaction;
       _createCache_create_6.put(_cacheKey, r);
     }
-    String _id = this.sce.id(tr);
-    r.setName(_id);
+    {
+      String _id = this.sce.id(tr);
+      r.setName(_id);
+      r.setTransition(true);
+    }
+    return r;
+  }
+  
+  private final HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_7 = new HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction>();
+  
+  public org.yakindu.sct.model.sexec.Reaction create(final LocalReaction lr) {
+    final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(lr);
+    org.yakindu.sct.model.sexec.Reaction r;
+    synchronized (_createCache_create_7) {
+      if (_createCache_create_7.containsKey(_cacheKey)) {
+        return _createCache_create_7.get(_cacheKey);
+      }
+      SexecFactory _sexecFactory = this.sexecFactory();
+      org.yakindu.sct.model.sexec.Reaction _createReaction = _sexecFactory.createReaction();
+      r = _createReaction;
+      _createCache_create_7.put(_cacheKey, r);
+    }
+    {
+      String _id = this.sce.id(lr);
+      r.setName(_id);
+      r.setTransition(false);
+    }
     return r;
   }
   

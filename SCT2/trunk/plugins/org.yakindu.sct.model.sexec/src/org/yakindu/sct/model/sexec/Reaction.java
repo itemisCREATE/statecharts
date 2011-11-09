@@ -17,6 +17,7 @@ package org.yakindu.sct.model.sexec;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.Reaction#getCheck <em>Check</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.Reaction#getEffect <em>Effect</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.Reaction#isTransition <em>Transition</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,5 +77,31 @@ public interface Reaction extends NamedElement {
 	 * @generated
 	 */
 	void setEffect(Step value);
+
+	/**
+	 * Returns the value of the '<em><b>Transition</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Transition</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Transition</em>' attribute.
+	 * @see #setTransition(boolean)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getReaction_Transition()
+	 * @model
+	 * @generated
+	 */
+	boolean isTransition();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.Reaction#isTransition <em>Transition</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Transition</em>' attribute.
+	 * @see #isTransition()
+	 * @generated
+	 */
+	void setTransition(boolean value);
 
 } // Reaction

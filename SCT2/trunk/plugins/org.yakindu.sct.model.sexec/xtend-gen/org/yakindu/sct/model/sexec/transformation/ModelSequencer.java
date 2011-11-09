@@ -93,6 +93,7 @@ public class ModelSequencer {
       this.mapStates(sc, ef);
       this.mapTimeEvents(sc, ef);
       this.mapTransitions(sc, ef);
+      this.mapLocalReactions(sc, ef);
       this.defineStateVector(ef, sc);
       this.defineEnterSequence(ef, sc);
       this.defineStateCycles(ef, sc);
@@ -305,6 +306,96 @@ public class ModelSequencer {
     }
   }
   
+  public ExecutionFlow mapLocalReactions(final Statechart statechart, final ExecutionFlow r) {
+    {
+      List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(statechart);
+      List<EObject> content = _eAllContentsAsList;
+      final Function1<EObject,Boolean> _function = new Function1<EObject,Boolean>() {
+          public Boolean apply(final EObject e) {
+            return (e instanceof org.yakindu.sct.model.sgraph.State);
+          }
+        };
+      Iterable<EObject> _filter = IterableExtensions.<EObject>filter(content, _function);
+      final Iterable<EObject> allStates = _filter;
+      final Function1<EObject,ExecutionState> _function_1 = new Function1<EObject,ExecutionState>() {
+          public ExecutionState apply(final EObject s) {
+            ExecutionState _mapStateLocalReactions = ModelSequencer.this.mapStateLocalReactions(((State) s));
+            return _mapStateLocalReactions;
+          }
+        };
+      IterableExtensions.<EObject>forEach(allStates, _function_1);
+      return r;
+    }
+  }
+  
+  public ExecutionState mapStateLocalReactions(final State state) {
+    {
+      ExecutionState _create = this.factory.create(state);
+      final ExecutionState _state = _create;
+      EList<Reaction> _reactions = _state.getReactions();
+      EList<org.yakindu.sct.model.sgraph.Reaction> _localReactions = state.getLocalReactions();
+      Iterable<LocalReaction> _filter = IterableExtensions.<LocalReaction>filter(_localReactions, org.yakindu.sct.model.stext.stext.LocalReaction.class);
+      final Function1<LocalReaction,Boolean> _function = new Function1<LocalReaction,Boolean>() {
+          public Boolean apply(final LocalReaction lr) {
+            boolean _operator_or = false;
+            Trigger _trigger = lr.getTrigger();
+            EList<EventSpec> _triggers = ((ReactionTrigger) _trigger).getTriggers();
+            boolean _isEmpty = _triggers.isEmpty();
+            if (_isEmpty) {
+              _operator_or = true;
+            } else {
+              Trigger _trigger_1 = lr.getTrigger();
+              EList<EventSpec> _triggers_1 = ((ReactionTrigger) _trigger_1).getTriggers();
+              final Function1<EventSpec,Boolean> _function_1 = new Function1<EventSpec,Boolean>() {
+                  public Boolean apply(final EventSpec t) {
+                    boolean _operator_or_1 = false;
+                    if ((t instanceof org.yakindu.sct.model.stext.stext.RegularEventSpec)) {
+                      _operator_or_1 = true;
+                    } else {
+                      _operator_or_1 = BooleanExtensions.operator_or((t instanceof org.yakindu.sct.model.stext.stext.RegularEventSpec), (t instanceof org.yakindu.sct.model.stext.stext.TimeEventSpec));
+                    }
+                    return ((Boolean)_operator_or_1);
+                  }
+                };
+              Iterable<EventSpec> _filter_1 = IterableExtensions.<EventSpec>filter(_triggers_1, _function_1);
+              List<EventSpec> _list = IterableExtensions.<EventSpec>toList(_filter_1);
+              boolean _isEmpty_1 = _list.isEmpty();
+              boolean _operator_not = BooleanExtensions.operator_not(_isEmpty_1);
+              _operator_or = BooleanExtensions.operator_or(_isEmpty, _operator_not);
+            }
+            return ((Boolean)_operator_or);
+          }
+        };
+      Iterable<LocalReaction> _filter_2 = IterableExtensions.<LocalReaction>filter(_filter, _function);
+      final Function1<LocalReaction,Reaction> _function_2 = new Function1<LocalReaction,Reaction>() {
+          public Reaction apply(final LocalReaction t_1) {
+            Reaction _mapReaction = ModelSequencer.this.mapReaction(t_1);
+            return _mapReaction;
+          }
+        };
+      Iterable<Reaction> _map = IterableExtensions.<LocalReaction, Reaction>map(_filter_2, _function_2);
+      CollectionExtensions.<Reaction>addAll(_reactions, _map);
+      return _state;
+    }
+  }
+  
+  public Reaction mapReaction(final LocalReaction lr) {
+    {
+      Reaction _create = this.factory.create(lr);
+      final Reaction r = _create;
+      Trigger _trigger = lr.getTrigger();
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_trigger, null);
+      if (_operator_notEquals) {
+        Trigger _trigger_1 = lr.getTrigger();
+        Check _mapToCheck = this.mapToCheck(_trigger_1);
+        r.setCheck(_mapToCheck);
+      }
+      Sequence _mapToEffect = this.mapToEffect(lr);
+      r.setEffect(_mapToEffect);
+      return r;
+    }
+  }
+  
   public Sequence mapToEffect(final Transition t) {
     {
       SexecFactory _sexecFactory = this.sexecFactory();
@@ -381,6 +472,18 @@ public class ModelSequencer {
       }
       return sequence;
     }
+  }
+  
+  public Sequence mapToEffect(final LocalReaction lr) {
+    Sequence _xifexpression = null;
+    Effect _effect = lr.getEffect();
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_effect, null);
+    if (_operator_notEquals) {
+      Effect _effect_1 = lr.getEffect();
+      Sequence _mapEffect = this.mapEffect(_effect_1);
+      _xifexpression = _mapEffect;
+    }
+    return _xifexpression;
   }
   
   protected Sequence _mapEffect(final Effect effect) {
@@ -659,32 +762,87 @@ public class ModelSequencer {
       final Cycle cycle = _createCycle;
       state.setCycle(cycle);
       EList<Reaction> _reactions = state.getReactions();
-      Iterable<Reaction> _reverseView = ListExtensions.<Reaction>reverseView(_reactions);
-      final Function2<If,Reaction,If> _function = new Function2<If,Reaction,If>() {
-          public If apply(final If s , final Reaction reaction) {
+      final Function1<Reaction,Boolean> _function = new Function1<Reaction,Boolean>() {
+          public Boolean apply(final Reaction r) {
+            boolean _isTransition = r.isTransition();
+            boolean _operator_not = BooleanExtensions.operator_not(_isTransition);
+            return ((Boolean)_operator_not);
+          }
+        };
+      Iterable<Reaction> _filter = IterableExtensions.<Reaction>filter(_reactions, _function);
+      List<Reaction> _list = IterableExtensions.<Reaction>toList(_filter);
+      final List<Reaction> localReactions = _list;
+      SexecFactory _sexecFactory_1 = this.sexecFactory();
+      Sequence _createSequence = _sexecFactory_1.createSequence();
+      Sequence localSteps = _createSequence;
+      EList<Step> _steps = localSteps.getSteps();
+      final Function1<Reaction,If> _function_1 = new Function1<Reaction,If>() {
+          public If apply(final Reaction lr) {
             If _xblockexpression = null;
             {
-              SexecFactory _sexecFactory_1 = ModelSequencer.this.sexecFactory();
-              If _createIf = _sexecFactory_1.createIf();
+              SexecFactory _sexecFactory_2 = ModelSequencer.this.sexecFactory();
+              If _createIf = _sexecFactory_2.createIf();
               If ifStep = _createIf;
-              Check _check = reaction.getCheck();
+              Check _check = lr.getCheck();
               CheckRef _newRef = ModelSequencer.this.factory.newRef(_check);
               ifStep.setCheck(_newRef);
-              Step _effect = reaction.getEffect();
+              Step _effect = lr.getEffect();
               Call _newCall = ModelSequencer.this.factory.newCall(_effect);
               ifStep.setThenStep(_newCall);
-              ifStep.setElseStep(s);
               _xblockexpression = (ifStep);
             }
             return _xblockexpression;
           }
         };
-      If _fold = IterableExtensions.<Reaction, If>fold(_reverseView, ((If) null), _function);
-      final If step = _fold;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(step, null);
+      List<If> _map = ListExtensions.<Reaction, If>map(localReactions, _function_1);
+      _steps.addAll(_map);
+      EList<Step> _steps_1 = localSteps.getSteps();
+      boolean _isEmpty = _steps_1.isEmpty();
+      if (_isEmpty) {
+        localSteps = null;
+      }
+      EList<Reaction> _reactions_1 = state.getReactions();
+      final Function1<Reaction,Boolean> _function_2 = new Function1<Reaction,Boolean>() {
+          public Boolean apply(final Reaction r_1) {
+            boolean _isTransition_1 = r_1.isTransition();
+            return ((Boolean)_isTransition_1);
+          }
+        };
+      Iterable<Reaction> _filter_1 = IterableExtensions.<Reaction>filter(_reactions_1, _function_2);
+      List<Reaction> _list_1 = IterableExtensions.<Reaction>toList(_filter_1);
+      final List<Reaction> transitionReactions = _list_1;
+      Iterable<Reaction> _reverseView = ListExtensions.<Reaction>reverseView(transitionReactions);
+      final Function2<Step,Reaction,Step> _function_3 = new Function2<Step,Reaction,Step>() {
+          public Step apply(final Step s , final Reaction reaction) {
+            Step _xblockexpression_1 = null;
+            {
+              SexecFactory _sexecFactory_3 = ModelSequencer.this.sexecFactory();
+              If _createIf_1 = _sexecFactory_3.createIf();
+              If ifStep_1 = _createIf_1;
+              Check _check_1 = reaction.getCheck();
+              CheckRef _newRef_1 = ModelSequencer.this.factory.newRef(_check_1);
+              ifStep_1.setCheck(_newRef_1);
+              Step _effect_1 = reaction.getEffect();
+              Call _newCall_1 = ModelSequencer.this.factory.newCall(_effect_1);
+              ifStep_1.setThenStep(_newCall_1);
+              ifStep_1.setElseStep(s);
+              _xblockexpression_1 = (((Step) ifStep_1));
+            }
+            return _xblockexpression_1;
+          }
+        };
+      Step _fold = IterableExtensions.<Reaction, Step>fold(_reverseView, ((Step) localSteps), _function_3);
+      final Step transitionStep = _fold;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(transitionStep, null);
       if (_operator_notEquals) {
-        EList<Step> _steps = cycle.getSteps();
-        _steps.add(step);
+        EList<Step> _steps_2 = cycle.getSteps();
+        _steps_2.add(transitionStep);
+      } else {
+        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(localSteps, null);
+        if (_operator_notEquals_1) {
+          EList<Step> _steps_3 = cycle.getSteps();
+          _steps_3.add(localSteps);
+        }
       }
       return cycle;
     }
@@ -720,17 +878,28 @@ public class ModelSequencer {
         Iterable<EventSpec> _reverseView = ListExtensions.<EventSpec>reverseView(_triggers_1);
         final Function2<Expression,EventSpec,Expression> _function = new Function2<Expression,EventSpec,Expression>() {
             public Expression apply(final Expression s , final EventSpec e) {
-              Expression _xifexpression_1 = null;
-              boolean _operator_equals = ObjectExtensions.operator_equals(s, null);
-              if (_operator_equals) {
+              Expression _xblockexpression_1 = null;
+              {
                 Expression _raised = ModelSequencer.this.raised(e);
-                _xifexpression_1 = _raised;
-              } else {
-                Expression _raised_1 = ModelSequencer.this.raised(e);
-                Expression _or = ModelSequencer.this.or(_raised_1, s);
-                _xifexpression_1 = _or;
+                final Expression raised = _raised;
+                Expression _xifexpression_1 = null;
+                boolean _operator_equals = ObjectExtensions.operator_equals(raised, null);
+                if (_operator_equals) {
+                  _xifexpression_1 = s;
+                } else {
+                  Expression _xifexpression_2 = null;
+                  boolean _operator_equals_1 = ObjectExtensions.operator_equals(s, null);
+                  if (_operator_equals_1) {
+                    _xifexpression_2 = raised;
+                  } else {
+                    Expression _or = ModelSequencer.this.or(raised, s);
+                    _xifexpression_2 = _or;
+                  }
+                  _xifexpression_1 = _xifexpression_2;
+                }
+                _xblockexpression_1 = (_xifexpression_1);
               }
-              return _xifexpression_1;
+              return _xblockexpression_1;
             }
           };
         Expression _fold = IterableExtensions.<EventSpec, Expression>fold(_reverseView, ((Expression) null), _function);
@@ -739,18 +908,18 @@ public class ModelSequencer {
         _xifexpression = null;
       }
       final Expression triggerCheck = _xifexpression;
-      Expression _xifexpression_2 = null;
+      Expression _xifexpression_3 = null;
       Expression _guardExpression = t.getGuardExpression();
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_guardExpression, null);
       if (_operator_notEquals) {
         Expression _guardExpression_1 = t.getGuardExpression();
         Expression _copy = EcoreUtil.<Expression>copy(_guardExpression_1);
-        _xifexpression_2 = _copy;
+        _xifexpression_3 = _copy;
       } else {
-        _xifexpression_2 = null;
+        _xifexpression_3 = null;
       }
-      final Expression guard = _xifexpression_2;
-      Expression _xifexpression_3 = null;
+      final Expression guard = _xifexpression_3;
+      Expression _xifexpression_4 = null;
       boolean _operator_and = false;
       boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(triggerCheck, null);
       if (!_operator_notEquals_1) {
@@ -761,18 +930,18 @@ public class ModelSequencer {
       }
       if (_operator_and) {
         Expression _and = this.and(triggerCheck, guard);
-        _xifexpression_3 = _and;
+        _xifexpression_4 = _and;
       } else {
-        Expression _xifexpression_4 = null;
+        Expression _xifexpression_5 = null;
         boolean _operator_notEquals_3 = ObjectExtensions.operator_notEquals(triggerCheck, null);
         if (_operator_notEquals_3) {
-          _xifexpression_4 = triggerCheck;
+          _xifexpression_5 = triggerCheck;
         } else {
-          _xifexpression_4 = guard;
+          _xifexpression_5 = guard;
         }
-        _xifexpression_3 = _xifexpression_4;
+        _xifexpression_4 = _xifexpression_5;
       }
-      _xblockexpression = (_xifexpression_3);
+      _xblockexpression = (_xifexpression_4);
     }
     return _xblockexpression;
   }
@@ -1113,33 +1282,6 @@ public class ModelSequencer {
         _xifexpression_1 = ((State) _target);
       }
       _xifexpression = _xifexpression_1;
-    }
-    return _xifexpression;
-  }
-  
-  public List<LocalReaction> localReactions_(final State state) {
-    List<LocalReaction> _xifexpression = null;
-    boolean _operator_and = false;
-    EList<Scope> _scopes = state.getScopes();
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_scopes, null);
-    if (!_operator_notEquals) {
-      _operator_and = false;
-    } else {
-      EList<Scope> _scopes_1 = state.getScopes();
-      int _size = _scopes_1.size();
-      boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)0));
-      _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_greaterThan);
-    }
-    if (_operator_and) {
-      EList<Scope> _scopes_2 = state.getScopes();
-      Scope _get = _scopes_2.get(0);
-      EList<Declaration> _declarations = _get.getDeclarations();
-      Iterable<LocalReaction> _filter = IterableExtensions.<LocalReaction>filter(_declarations, org.yakindu.sct.model.stext.stext.LocalReaction.class);
-      List<LocalReaction> _list = IterableExtensions.<LocalReaction>toList(_filter);
-      _xifexpression = _list;
-    } else {
-      ArrayList<LocalReaction> _arrayList = new ArrayList<LocalReaction>();
-      _xifexpression = _arrayList;
     }
     return _xifexpression;
   }

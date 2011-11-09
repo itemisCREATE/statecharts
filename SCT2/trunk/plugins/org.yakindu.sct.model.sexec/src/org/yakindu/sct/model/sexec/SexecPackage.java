@@ -80,6 +80,15 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_FLOW__SCOPES = SGraphPackage.SCOPED_ELEMENT__SCOPES;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_FLOW__NAMESPACE = SGraphPackage.SCOPED_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -435,13 +444,22 @@ public interface SexecPackage extends EPackage {
 	int REACTION__EFFECT = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Transition</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REACTION__TRANSITION = NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Reaction</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REACTION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int REACTION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1106,6 +1124,17 @@ public interface SexecPackage extends EPackage {
 	EReference getReaction_Effect();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sexec.Reaction#isTransition <em>Transition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Transition</em>'.
+	 * @see org.yakindu.sct.model.sexec.Reaction#isTransition()
+	 * @see #getReaction()
+	 * @generated
+	 */
+	EAttribute getReaction_Transition();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.NamedElement <em>Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1600,6 +1629,14 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference REACTION__EFFECT = eINSTANCE.getReaction_Effect();
+
+		/**
+		 * The meta object literal for the '<em><b>Transition</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REACTION__TRANSITION = eINSTANCE.getReaction_Transition();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.NamedElementImpl <em>Named Element</em>}' class.
