@@ -175,13 +175,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.yakindu.sct.generator.base"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.yakindu.sct.generator.cpp"
          download-size="0"
          install-size="0"
@@ -197,6 +190,13 @@
 
    <plugin
          id="org.yakindu.sct.model.sgen"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.yakindu.sct.generator.core"
          download-size="0"
          install-size="0"
          version="0.0.0"
