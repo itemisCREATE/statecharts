@@ -39,6 +39,7 @@ public class SCTTestUtil {
 		return e;
 	}
 
+	
 	public static VariableDefinition _createVariableDefinition(String name, Type type, Scope scope) {
 		VariableDefinition v = StextFactory.eINSTANCE.createVariableDefinition();
 		v.setName(name);
@@ -47,6 +48,7 @@ public class SCTTestUtil {
 		return v;
 	}
 
+	
 	public static RegularEventSpec _createRegularEventSpec(EventDefinition e1, ReactionTrigger rt) {
 		RegularEventSpec e1Spec = StextFactory.eINSTANCE.createRegularEventSpec();
 		e1Spec.setEvent(e1);
@@ -54,6 +56,7 @@ public class SCTTestUtil {
 		return e1Spec;
 	}
 
+	
 	public static ReactionTrigger _createReactionTrigger(Reaction reaction) {
 		ReactionTrigger rt = StextFactory.eINSTANCE.createReactionTrigger();
 		if (reaction != null) reaction.setTrigger(rt);
@@ -140,12 +143,12 @@ public class SCTTestUtil {
 
 	
 	public static LocalReaction _createEntryAction(State parent) {
-		return _createLocalRection(parent, StextFactory.eINSTANCE.createEntryEvent() );
+		return _createLocalReaction(parent, StextFactory.eINSTANCE.createEntryEvent() );
 	}
 	
 	
 	public static LocalReaction _createExitAction(State parent) {
-		return _createLocalRection(parent, StextFactory.eINSTANCE.createExitEvent() );
+		return _createLocalReaction(parent, StextFactory.eINSTANCE.createExitEvent() );
 	}
 	
 	public static LocalReaction _createTimeTriggeredReaction(State parent, TimeEventType type, int value, TimeUnit unit) {
@@ -153,16 +156,16 @@ public class SCTTestUtil {
 //		timeTrigger.setType(type);
 //		timeTrigger.setValue(value);
 //		timeTrigger.setUnit(unit);
-		return _createLocalRection(parent, _createTimeEventSpec(type, value, unit, null) );
+		return _createLocalReaction(parent, _createTimeEventSpec(type, value, unit, null) );
 	}
 	
 
-	public static LocalReaction _createLocalRection(State parent, EventSpec triggerEvent) {
+	public static LocalReaction _createLocalReaction(State parent, EventSpec triggerEvent) {
 		LocalReaction reaction = StextFactory.eINSTANCE.createLocalReaction();
 		ReactionTrigger trigger = StextFactory.eINSTANCE.createReactionTrigger();
 		_createReactionEffect(reaction);
 		
-		trigger.getTriggers().add(triggerEvent);
+		if (triggerEvent != null) trigger.getTriggers().add(triggerEvent);
 		reaction.setTrigger(trigger);
 
 		Scope scope = null;
@@ -198,6 +201,23 @@ public class SCTTestUtil {
 		return assignment;
 	}
 	
+
+	
+	public static class MinimalTSC {
+		
+		public Statechart sc = _createStatechart("test");
+		public InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
+		public EventDefinition e1 = _createEventDefinition("e1", s_scope);
+		public Region r = _createRegion("main", sc);
+		public Entry entry = _createEntry(EntryKind.INITIAL, null, r);
+		public State s1 = _createState("S1", r);
+		public Transition t0 = _createTransition(entry, s1);
+		
+		public MinimalTSC() {
+		}
+
+	}
+
 	
 	public static class SimpleFlatTSC {
 		

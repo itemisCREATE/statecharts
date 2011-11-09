@@ -6,13 +6,13 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEntry;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEntryAction;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEventDefinition;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createExitAction;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createInterfaceScope;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createInternalScope;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createLocalReaction;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createReactionEffect;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createReactionTrigger;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegion;
@@ -42,6 +42,7 @@ import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.SequencerModule;
+import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.MinimalTSC;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.OrthogonalFlatTSC;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.SimpleFlatTSC;
 import org.yakindu.sct.model.sgraph.Declaration;
@@ -58,17 +59,19 @@ import org.yakindu.sct.model.stext.stext.Assignment;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
-import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.LogicalAndExpression;
 import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
+import org.yakindu.sct.model.stext.stext.LogicalRelationExpression;
 import org.yakindu.sct.model.stext.stext.MultiplicativeOperator;
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
+import org.yakindu.sct.model.stext.stext.RelationalOperator;
+import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
 import org.yakindu.sct.model.stext.stext.Type;
@@ -445,7 +448,7 @@ public class ModelSequencerTest {
 	}
 	
 
-	@Test public void testStateCycle_SimpleFlatTSC() {
+	@Test public void testStateCycle() {
 		OrthogonalFlatTSC tsc = new OrthogonalFlatTSC();
 		
 		ExecutionFlow flow = sequencer.transform(tsc.sc);
@@ -486,8 +489,256 @@ public class ModelSequencerTest {
 	}
 	
 
+	@Test public void testStateCycle_WithLocalReactions() {
+		SimpleFlatTSC tsc = new SimpleFlatTSC();
+
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
+
+		// the first local reaction conforms to "e1 / x=42;" 
+		LocalReaction lr1 = _createLocalReaction(tsc.s1, null);
+		_createRegularEventSpec(tsc.e1, (ReactionTrigger) lr1.getTrigger());
+		ReactionEffect lr1_eff = _createReactionEffect(lr1);
+		Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), lr1_eff); 
+
+		// the secont local reaction conforms to "e1 [x==42] / x=0;" 
+		LocalReaction lr2 = _createLocalReaction(tsc.s1, null);
+		_createRegularEventSpec(tsc.e1, (ReactionTrigger) lr2.getTrigger());
+		LogicalRelationExpression lr2_equals = StextFactory.eINSTANCE.createLogicalRelationExpression();
+		lr2_equals.setOperator(RelationalOperator.EQUALS);
+		ElementReferenceExpression lr2_varRef = StextFactory.eINSTANCE.createElementReferenceExpression();
+		lr2_varRef.setValue(v1);
+		PrimitiveValueExpression lr2_value = _createValue("42");
+		lr2_equals.setLeftOperand(lr2_varRef);
+		lr2_equals.setRightOperand(lr2_value);
+		((ReactionTrigger) lr2.getTrigger()).setGuardExpression(lr2_equals);
+		ReactionEffect lr2_eff = _createReactionEffect(lr2);
+		Assignment assign2 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("0"), lr2_eff); 
+
+		// the third local reaction conforms to: "[x==0] / x=1;"
+		LocalReaction lr3 = _createLocalReaction(tsc.s1, null);
+		LogicalRelationExpression lr3_equals = StextFactory.eINSTANCE.createLogicalRelationExpression();
+		lr3_equals.setOperator(RelationalOperator.EQUALS);
+		ElementReferenceExpression lr3_varRef = StextFactory.eINSTANCE.createElementReferenceExpression();
+		lr3_varRef.setValue(v1);
+		PrimitiveValueExpression lr3_value = _createValue("0");
+		lr3_equals.setLeftOperand(lr3_varRef);
+		lr3_equals.setRightOperand(lr3_value);
+		((ReactionTrigger) lr3.getTrigger()).setGuardExpression(lr3_equals);
+		ReactionEffect lr3_eff = _createReactionEffect(lr3);
+		Assignment assign3 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("1"), lr3_eff); 
+		
+		
+		ExecutionFlow flow = sequencer.transform(tsc.sc);
+
+		// test state with one outgoing transition
+		ExecutionState s1 = flow.getStates().get(0);
+		ExecutionState s2 = flow.getStates().get(1);
+		assertEquals(tsc.s1.getName(), s1.getSimpleName());
+		assertEquals(tsc.s2.getName(), s2.getSimpleName());
+		
+		assertEquals(4, s1.getReactions().size());
+		
+		assertNotNull(s1.getCycle());
+		
+		If _if = (If) s1.getCycle().getSteps().get(0);
+		assertNotNull(_if.getThenStep());
+		assertTrue(_if.getThenStep() instanceof Call);
+		assertNotNull(_if.getElseStep());
+
+		Sequence _seq = (Sequence) _if.getElseStep();
+		assertEquals(3, _seq.getSteps().size());
+		
+		// check first local reaction
+		If _lr1 = (If) _seq.getSteps().get(0);
+		assertTrue(_lr1.getCheck().getCondition() instanceof ElementReferenceExpression);
+		assertSame(s1.getReactions().get(1).getCheck().getCondition(), _lr1.getCheck().getCondition() );
+		Call _lr1_eff_call = (Call) _lr1.getThenStep();
+		assertSame(s1.getReactions().get(1).getEffect(), _lr1_eff_call.getStep() );
+		
+		// check second local reaction
+		If _lr2 = (If) _seq.getSteps().get(1);
+		assertTrue(_lr2.getCheck().getCondition() instanceof LogicalAndExpression);
+		assertSame(s1.getReactions().get(2).getCheck().getCondition(), _lr2.getCheck().getCondition() );
+		Call _lr2_eff_call = (Call) _lr2.getThenStep();
+		assertSame(s1.getReactions().get(2).getEffect(), _lr2_eff_call.getStep() );
+
+		// check the third local reaction
+		If _lr3 = (If) _seq.getSteps().get(2);
+		assertTrue(_lr3.getCheck().getCondition() instanceof LogicalRelationExpression);
+		assertSame(s1.getReactions().get(3).getCheck().getCondition(), _lr3.getCheck().getCondition() );
+		Call _lr3_eff_call = (Call) _lr3.getThenStep();
+		assertSame(s1.getReactions().get(3).getEffect(), _lr3_eff_call.getStep() );
+						
+	}
 	
 	
+	/**
+	 * The cycle sequence of a state that only consists of local reactions includes sequential processing of the 
+	 * local reactions.
+	 */
+	@Test public void testStateCycle_WithLocalReactionsOnly() {
+		MinimalTSC tsc = new MinimalTSC();
+
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
+
+		// the first local reaction conforms to "e1 / x=42;" 
+		LocalReaction lr1 = _createLocalReaction(tsc.s1, null);
+		_createRegularEventSpec(tsc.e1, (ReactionTrigger) lr1.getTrigger());
+		ReactionEffect lr1_eff = _createReactionEffect(lr1);
+		Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), lr1_eff); 
+
+		// the secont local reaction conforms to "e1 [x==42] / x=0;" 
+		LocalReaction lr2 = _createLocalReaction(tsc.s1, null);
+		_createRegularEventSpec(tsc.e1, (ReactionTrigger) lr2.getTrigger());
+		LogicalRelationExpression lr2_equals = StextFactory.eINSTANCE.createLogicalRelationExpression();
+		lr2_equals.setOperator(RelationalOperator.EQUALS);
+		ElementReferenceExpression lr2_varRef = StextFactory.eINSTANCE.createElementReferenceExpression();
+		lr2_varRef.setValue(v1);
+		PrimitiveValueExpression lr2_value = _createValue("42");
+		lr2_equals.setLeftOperand(lr2_varRef);
+		lr2_equals.setRightOperand(lr2_value);
+		((ReactionTrigger) lr2.getTrigger()).setGuardExpression(lr2_equals);
+		ReactionEffect lr2_eff = _createReactionEffect(lr2);
+		Assignment assign2 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("0"), lr2_eff); 
+
+		// the third local reaction conforms to: "[x==0] / x=1;"
+		LocalReaction lr3 = _createLocalReaction(tsc.s1, null);
+		LogicalRelationExpression lr3_equals = StextFactory.eINSTANCE.createLogicalRelationExpression();
+		lr3_equals.setOperator(RelationalOperator.EQUALS);
+		ElementReferenceExpression lr3_varRef = StextFactory.eINSTANCE.createElementReferenceExpression();
+		lr3_varRef.setValue(v1);
+		PrimitiveValueExpression lr3_value = _createValue("0");
+		lr3_equals.setLeftOperand(lr3_varRef);
+		lr3_equals.setRightOperand(lr3_value);
+		((ReactionTrigger) lr3.getTrigger()).setGuardExpression(lr3_equals);
+		ReactionEffect lr3_eff = _createReactionEffect(lr3);
+		Assignment assign3 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("1"), lr3_eff); 
+		
+		
+		ExecutionFlow flow = sequencer.transform(tsc.sc);
+
+		// test state with one outgoing transition
+		ExecutionState s1 = flow.getStates().get(0);
+		assertEquals(tsc.s1.getName(), s1.getSimpleName());
+		
+		assertEquals(3, s1.getReactions().size());
+		
+		assertNotNull(s1.getCycle());
+		
+
+		Sequence _seq = (Sequence) s1.getCycle().getSteps().get(0);
+		assertEquals(3, _seq.getSteps().size());
+		
+		// check first local reaction
+		If _lr1 = (If) _seq.getSteps().get(0);
+		assertTrue(_lr1.getCheck().getCondition() instanceof ElementReferenceExpression);
+		assertSame(s1.getReactions().get(0).getCheck().getCondition(), _lr1.getCheck().getCondition() );
+		Call _lr1_eff_call = (Call) _lr1.getThenStep();
+		assertSame(s1.getReactions().get(0).getEffect(), _lr1_eff_call.getStep() );
+		
+		// check second local reaction
+		If _lr2 = (If) _seq.getSteps().get(1);
+		assertTrue(_lr2.getCheck().getCondition() instanceof LogicalAndExpression);
+		assertSame(s1.getReactions().get(1).getCheck().getCondition(), _lr2.getCheck().getCondition() );
+		Call _lr2_eff_call = (Call) _lr2.getThenStep();
+		assertSame(s1.getReactions().get(1).getEffect(), _lr2_eff_call.getStep() );
+
+		// check the third local reaction
+		If _lr3 = (If) _seq.getSteps().get(2);
+		assertTrue(_lr3.getCheck().getCondition() instanceof LogicalRelationExpression);
+		assertSame(s1.getReactions().get(2).getCheck().getCondition(), _lr3.getCheck().getCondition() );
+		Call _lr3_eff_call = (Call) _lr3.getThenStep();
+		assertSame(s1.getReactions().get(2).getEffect(), _lr3_eff_call.getStep() );
+		
+					
+	}
+
+	/** Entry action behaviors are not directly part of the states cycle steps */
+	@Test public void testStateCycle_EntryActionExclusion() {
+		MinimalTSC tsc = new MinimalTSC();
+
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
+
+		// add a simple entry action: "entry / x=42;" 
+		LocalReaction lr = _createEntryAction(tsc.s1);
+		ReactionEffect lr_eff = _createReactionEffect(lr);
+		Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), lr_eff); 
+
+		
+		// TRANSFORM
+		ExecutionFlow flow = sequencer.transform(tsc.sc);
+
+		
+		// test state with one outgoing transition
+		ExecutionState s1 = flow.getStates().get(0);
+		
+		assertEquals(0, s1.getReactions().size());		
+		assertNotNull(s1.getCycle());
+		assertEquals(0, s1.getCycle().getSteps().size());		
+	}
+
+	
+	/** Exit action behaviors are not directly part of the states cycle steps */
+	@Test public void testStateCycle_ExitActionExclusion() {
+		MinimalTSC tsc = new MinimalTSC();
+
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
+
+		// add a simple entry action: "entry / x=42;" 
+		LocalReaction lr = _createExitAction(tsc.s1);
+		ReactionEffect lr_eff = _createReactionEffect(lr);
+		Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), lr_eff); 
+
+		
+		// TRANSFORM
+		ExecutionFlow flow = sequencer.transform(tsc.sc);
+
+		
+		// test state with one outgoing transition
+		ExecutionState s1 = flow.getStates().get(0);
+		
+		assertEquals(0, s1.getReactions().size());		
+		assertNotNull(s1.getCycle());
+		assertEquals(0, s1.getCycle().getSteps().size());		
+	}
+
+
+	/** Local reactions that define regular and entry triggers side by side must also be part of the cycle steps. */
+	@Test public void testStateCycle_LocalReactionWithMixedRegularAndEntryTrigger() {
+		MinimalTSC tsc = new MinimalTSC();
+
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
+
+		// add a simple entry action: "entry / x=42;" 
+		LocalReaction lr = _createEntryAction(tsc.s1);
+		_createRegularEventSpec(tsc.e1, (ReactionTrigger) lr.getTrigger());
+		ReactionEffect lr_eff = _createReactionEffect(lr);
+		Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), lr_eff); 
+
+		
+		// TRANSFORM
+		ExecutionFlow flow = sequencer.transform(tsc.sc);
+
+		
+		// test state with one outgoing transition
+		ExecutionState s1 = flow.getStates().get(0);
+		
+		assertEquals(1, s1.getReactions().size());		
+		assertNotNull(s1.getCycle());
+		assertEquals(1, s1.getCycle().getSteps().size());	
+	
+		Sequence _seq = (Sequence) s1.getCycle().getSteps().get(0);
+		
+		If _lr1 = (If) _seq.getSteps().get(0);
+		assertTrue(_lr1.getCheck().getCondition() instanceof ElementReferenceExpression);
+		assertSame(s1.getReactions().get(0).getCheck().getCondition(), _lr1.getCheck().getCondition() );
+		Call _lr1_eff_call = (Call) _lr1.getThenStep();
+		assertSame(s1.getReactions().get(0).getEffect(), _lr1_eff_call.getStep() );
+
+	}
+
+	
+
 	
 	/**
 	 * Single trigger events of a Reaction Trigger will be converted into a single condition 

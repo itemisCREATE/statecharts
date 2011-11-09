@@ -34,6 +34,7 @@ import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sgraph.Statement
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
+import org.yakindu.sct.model.stext.stext.LocalReaction
 
 class FactoryExtension {
 	
@@ -69,6 +70,12 @@ class FactoryExtension {
 	
 	def Reaction create r : sexecFactory.createReaction create(Transition tr){
 		r.name = tr.id
+		r.transition = true
+	}
+	
+	def Reaction create r : sexecFactory.createReaction create(LocalReaction lr){
+		r.name = lr.id
+		r.transition = false
 	}
 	
 	def CheckRef newRef(Check check) {

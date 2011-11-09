@@ -11,6 +11,9 @@ import java.util.List
 import java.util.ArrayList
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.sct.model.stext.stext.LocalReaction
+import org.yakindu.sct.model.sgraph.ReactiveElement
+import org.yakindu.sct.model.sgraph.Scope
 
 class StatechartExtensions {
 	
@@ -79,6 +82,25 @@ class StatechartExtensions {
 		return tesList
 	}
 
+
+	def dispatch ReactiveElement reactiveElement(Reaction r) {
+		r.scope.reactiveElement		
+	}
+
+	def dispatch ReactiveElement reactiveElement(Transition tr) {
+		if (tr.source instanceof State) tr as State
+		else null
+	}
+	
+	
+	def Scope scope(Reaction r) {
+		if (r.eContainer instanceof Scope) r.eContainer as Scope
+	} 
+
+	def ReactiveElement reactiveElement(Scope s) {
+		if (s.eContainer instanceof ReactiveElement) s.eContainer as ReactiveElement
+	}	
+	
 	//=================================================================
 	// naming util extensions
 	//
@@ -91,6 +113,13 @@ class StatechartExtensions {
 	 */	
 	def dispatch String id(Transition t) {
 		"tr" + if (t.source != null) t.source.outgoingTransitions.indexOf(t) else ""
+	}
+	
+	/**
+	 * The id of a local reaction is unique within the context of its source vertex.
+	 */	
+	def dispatch String id(LocalReaction t) {
+		"lr" + if (t.reactiveElement != null) t.reactiveElement.localReactions.indexOf(t) else ""
 	}
 	
 	

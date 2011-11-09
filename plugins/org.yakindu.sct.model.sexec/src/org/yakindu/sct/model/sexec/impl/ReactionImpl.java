@@ -25,6 +25,7 @@ import org.yakindu.sct.model.sexec.Step;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ReactionImpl#getCheck <em>Check</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ReactionImpl#getEffect <em>Effect</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ReactionImpl#isTransition <em>Transition</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,6 +51,26 @@ public class ReactionImpl extends NamedElementImpl implements Reaction {
 	 * @ordered
 	 */
 	protected Step effect;
+
+	/**
+	 * The default value of the '{@link #isTransition() <em>Transition</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTransition()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean TRANSITION_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isTransition() <em>Transition</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTransition()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean transition = TRANSITION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -161,6 +182,27 @@ public class ReactionImpl extends NamedElementImpl implements Reaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isTransition() {
+		return transition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTransition(boolean newTransition) {
+		boolean oldTransition = transition;
+		transition = newTransition;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.REACTION__TRANSITION, oldTransition, transition));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -184,6 +226,8 @@ public class ReactionImpl extends NamedElementImpl implements Reaction {
 				return getCheck();
 			case SexecPackage.REACTION__EFFECT:
 				return getEffect();
+			case SexecPackage.REACTION__TRANSITION:
+				return isTransition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -201,6 +245,9 @@ public class ReactionImpl extends NamedElementImpl implements Reaction {
 				return;
 			case SexecPackage.REACTION__EFFECT:
 				setEffect((Step)newValue);
+				return;
+			case SexecPackage.REACTION__TRANSITION:
+				setTransition((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -220,6 +267,9 @@ public class ReactionImpl extends NamedElementImpl implements Reaction {
 			case SexecPackage.REACTION__EFFECT:
 				setEffect((Step)null);
 				return;
+			case SexecPackage.REACTION__TRANSITION:
+				setTransition(TRANSITION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -236,8 +286,26 @@ public class ReactionImpl extends NamedElementImpl implements Reaction {
 				return check != null;
 			case SexecPackage.REACTION__EFFECT:
 				return effect != null;
+			case SexecPackage.REACTION__TRANSITION:
+				return transition != TRANSITION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (transition: ");
+		result.append(transition);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ReactionImpl

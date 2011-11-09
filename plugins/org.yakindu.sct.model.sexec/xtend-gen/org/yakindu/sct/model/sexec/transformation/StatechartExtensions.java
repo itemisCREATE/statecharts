@@ -13,12 +13,15 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.sct.model.sgraph.Reaction;
+import org.yakindu.sct.model.sgraph.ReactiveElement;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 
 @SuppressWarnings("all")
@@ -160,6 +163,43 @@ public class StatechartExtensions {
     }
   }
   
+  protected ReactiveElement _reactiveElement(final Reaction r) {
+    Scope _scope = this.scope(r);
+    ReactiveElement _reactiveElement = this.reactiveElement(_scope);
+    return _reactiveElement;
+  }
+  
+  protected ReactiveElement _reactiveElement(final Transition tr) {
+    State _xifexpression = null;
+    Vertex _source = tr.getSource();
+    if ((_source instanceof org.yakindu.sct.model.sgraph.State)) {
+      _xifexpression = ((State) tr);
+    } else {
+      _xifexpression = null;
+    }
+    return _xifexpression;
+  }
+  
+  public Scope scope(final Reaction r) {
+    Scope _xifexpression = null;
+    EObject _eContainer = r.eContainer();
+    if ((_eContainer instanceof org.yakindu.sct.model.sgraph.Scope)) {
+      EObject _eContainer_1 = r.eContainer();
+      _xifexpression = ((Scope) _eContainer_1);
+    }
+    return _xifexpression;
+  }
+  
+  public ReactiveElement reactiveElement(final Scope s) {
+    ReactiveElement _xifexpression = null;
+    EObject _eContainer = s.eContainer();
+    if ((_eContainer instanceof org.yakindu.sct.model.sgraph.ReactiveElement)) {
+      EObject _eContainer_1 = s.eContainer();
+      _xifexpression = ((ReactiveElement) _eContainer_1);
+    }
+    return _xifexpression;
+  }
+  
   protected String _id(final Object obj) {
     return null;
   }
@@ -180,6 +220,22 @@ public class StatechartExtensions {
     return _operator_plus;
   }
   
+  protected String _id(final LocalReaction t) {
+    Comparable<? extends Object> _xifexpression = null;
+    ReactiveElement _reactiveElement = this.reactiveElement(t);
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_reactiveElement, null);
+    if (_operator_notEquals) {
+      ReactiveElement _reactiveElement_1 = this.reactiveElement(t);
+      EList<Reaction> _localReactions = _reactiveElement_1.getLocalReactions();
+      int _indexOf = _localReactions.indexOf(t);
+      _xifexpression = _indexOf;
+    } else {
+      _xifexpression = "";
+    }
+    String _operator_plus = StringExtensions.operator_plus("lr", _xifexpression);
+    return _operator_plus;
+  }
+  
   public int maxOrthogonality(final Vertex s) {
     if ((s instanceof State)) {
       return _maxOrthogonality((State)s);
@@ -191,8 +247,21 @@ public class StatechartExtensions {
     }
   }
   
+  public ReactiveElement reactiveElement(final Reaction tr) {
+    if ((tr instanceof Transition)) {
+      return _reactiveElement((Transition)tr);
+    } else if ((tr instanceof Reaction)) {
+      return _reactiveElement((Reaction)tr);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        java.util.Arrays.<Object>asList(tr).toString());
+    }
+  }
+  
   public String id(final Object t) {
-    if ((t instanceof Transition)) {
+    if ((t instanceof LocalReaction)) {
+      return _id((LocalReaction)t);
+    } else if ((t instanceof Transition)) {
       return _id((Transition)t);
     } else if ((t instanceof Object)) {
       return _id((Object)t);
