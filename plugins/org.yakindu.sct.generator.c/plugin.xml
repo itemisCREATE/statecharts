@@ -2,10 +2,13 @@
 <?eclipse version="3.4"?>
 
 <plugin>
-	<extension point="org.yakindu.sct.builder.subscriber">
-      <BuilderSubscriber
-         class="org.yakindu.sct.generator.c.subscriber.CCodeGeneratorSubscriber" 
-         resourceExtension="sct">
-      </BuilderSubscriber>
+   <extension
+         point="org.yakindu.sct.generator.core">
+      <SCTGenerator
+            class="org.yakindu.sct.generator.c.subscriber.CCodeGenerator"
+            description="YAKINDU C Code Generator"
+            id="yakindu::c"
+            name="YAKINDU C Code Generator">
+      </SCTGenerator>
    </extension>
 </plugin>
