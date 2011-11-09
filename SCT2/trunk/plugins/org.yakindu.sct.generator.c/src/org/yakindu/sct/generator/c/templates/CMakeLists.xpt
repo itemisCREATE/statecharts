@@ -16,8 +16,6 @@ Templates for the main statechart cpp file.
 «DEFINE file FOR ExecutionFlow»
 
 «FILE 'CMakeLists.txt'»
-cmake_minimum_required(VERSION 2.8)
-
 set( SRC
 	Statemachine_cy.c
 	StatemachineBase.c
@@ -26,14 +24,15 @@ set( SRC
 	EventPool.c
 	«StName()».c
 	«EvName()».c
-	«DRName()».c
+«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
+	«interface.interfaceClassName()».c
+«ENDFOREACH»
 	Timer.c
 	DummyTimer.c
-	main.c
 )
 
-add_definitions( -Wall -O0 -g)
-add_executable(«StName()»Main ${SRC})
+add_library(«StName()» ${SRC})
+
 «ENDFILE»
 
 «ENDDEFINE»

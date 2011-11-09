@@ -19,8 +19,10 @@ Templates for the main statechart cpp file.
 #ifndef «STNAME()»_H_
 #define «STNAME()»_H_
 
+«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
+#include "«interface.interfaceClassName()».h"
+«ENDFOREACH»
 #include "Statemachine_cy.h"
-#include "«DRName()».h"
 #include "«EvName()».h"
 
 typedef enum {
@@ -38,7 +40,9 @@ typedef void(*raiseEventFPtr)(_Event* evPtr);
 typedef struct {
 
 	Statemachine_cy  base;
-	«DRName()» variableData;
+«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface»
+	«interface.interfaceClassName()» «interface.interfaceObjectName().toFirstLower()»;
+«ENDFOREACH»
 	raiseEventFPtr raiseEvent;
 	
 } «StName()»;

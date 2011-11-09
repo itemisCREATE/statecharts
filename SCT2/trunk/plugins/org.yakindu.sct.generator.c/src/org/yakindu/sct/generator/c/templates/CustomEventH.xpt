@@ -32,8 +32,9 @@ typedef enum {
 «FOREACH this.declaredEvents() AS ev»
 typedef struct { 
   _Event baseEvent;
+  «IF ((EventDefinition)ev).type != Type::void»
   «eventTypeToString(((EventDefinition)ev).type)» value;    
-  
+  «ENDIF»
 } «((EventDefinition)ev).name»;
 «ENDFOREACH»
  

@@ -1,0 +1,224 @@
+«REM»
+
+Templates for the main statechart cpp file.
+
+@auther joern seger
+
+«ENDREM»
+
+«IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
+
+«EXTENSION org::yakindu::sct::generator::c::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
+
+
+«DEFINE file FOR ExecutionFlow»
+«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface»
+«FILE interface.interfaceClassName()+".h"»
+
+#ifndef «interface.interfaceClassName().toUpperCase()»_H_
+#define «interface.interfaceClassName().toUpperCase()»_H_
+
+#include "definition.h"
+#include "Event.h"
+#include "EventSet.h"
+#include "EventPool.h"
+#include "Statemachine_cy.h"
+#include "«EvName()».h"
+
+typedef void(*handleEvent)(_Event ev);
+
+typedef struct {
+	EventSet* eventSet;
+	Statemachine_cy* statemachine;
+#ifdef INTERFACE_LISTENER
+	handleEvent handleEventCallback;
+#else
+	EventPool* eventPool;
+«FOREACH interface.getOutEvents() AS event -»
+    _Event* «event.name»;
+«ENDFOREACH»
+#endif // INTERFACE_LISTENER
+
+«FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
+	«variable.type» «variable.name»;
+«ENDFOREACH» 
+	
+} «interfaceClassName(interface)»;
+
+«FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
+extern «eventTypeToString(variable.type)» «interface.interfaceName()»_get_«variable.name»(«interfaceClassName(interface)»* handle);
+«IF variable.readonly == false -»
+extern void «interface.interfaceName()»_set_«variable.name»(«interfaceClassName(interface)»* handle, «eventTypeToString(variable.type)» value);
+«ENDIF»
+«ENDFOREACH» 
+
+
+extern void «interface.interfaceName()»_reset_event(«interfaceClassName(interface)»* handle);
+
+#ifdef INTERFACE_LISTENER
+
+extern void «interface.interfaceName()»_init(«interfaceClassName(interface)»* handle, Statemachine_cy* statemachine,
+		EventSet* eventSet);
+extern void «interface.interfaceName()»_set_listener(«interfaceClassName(interface)»* handle, handleEvent handleEventPtr);
+extern void «interface.interfaceName()»_raiseEvent(«interfaceClassName(interface)»* handle, _Event* event);
+
+#else
+
+extern void «interface.interfaceName()»_init(«interfaceClassName(interface)»* handle, Statemachine_cy* statemachine,
+		EventSet* eventSet, EventPool* eventPool);
+		
+«FOREACH interface.getOutEvents() AS event -»
+extern boolean «interface.interfaceName()»_is_«event.name»_raised(«interface.interfaceClassName()»* handle«
+IF event.type != Type::void -», «event.type.eventTypeToString()»* value«ENDIF» );
+«ENDFOREACH»
+
+«FOREACH interface.getInEvents() AS event -»
+extern void «interface.interfaceName()»_raise_«event.name»(«interface.interfaceClassName()»* handle«
+IF event.type != Type::void -», «event.type.eventTypeToString()» value «ENDIF»);
+«ENDFOREACH» 
+
+#endif // INTERFACE_LISTENER
+
+
+#endif /* INTERFACEBASE_H_ */
+
+
+«ENDFILE»
+
+«FILE interface.interfaceClassName()+".c"»
+#include "«interface.interfaceClassName()».h"
+#include <stdlib.h>
+
+static boolean «interface.interfaceName()»_is_my_event(«interface.interfaceClassName()»* handle, uint32_t evid);
+
+#ifdef INTERFACE_LISTENER
+void «interface.interfaceName()»_init(«interface.interfaceClassName()»* handle, Statemachine_cy* statemachine,
+		EventSet* eventSet)
+#else
+void «interface.interfaceName()»_init(«interface.interfaceClassName()»* handle, Statemachine_cy* statemachine,
+		EventSet* eventSet, EventPool* eventPool)
+#endif
+{
+	handle->eventSet = eventSet;
+	/* initial values */
+	
+«FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
+«IF variable.initialValue != null»
+	handle->«variable.name» = «variable.initialValue»;
+«ENDIF»
+«ENDFOREACH»
+
+	«interface.interfaceName()»_reset_event(handle);
+
+	handle->statemachine = statemachine;
+
+#ifndef INTERFACE_LISTENER
+	handle->eventPool = eventPool;
+«FOREACH interface.getOutEvents() AS event -»
+	handle->«event.name» = eventPool_createEvent(handle->eventPool, «event.getEventEnumName()»);
+	// ((«event.name»*)handle->«event.name»)->value = initial value for events is missing in model;
+«ENDFOREACH»
+#endif
+
+}
+
+«FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
+«variable.type.eventTypeToString()» «interface.interfaceName()»_get_«variable.name»(«interface.interfaceClassName()»* handle)
+{
+	return handle->«variable.name»;
+}
+«IF variable.readonly == false -»
+void «interface.interfaceName()»_set_«variable.name»(«interface.interfaceClassName()»* handle, «variable.type.eventTypeToString()» value)
+{
+	handle->«variable.name» = value;
+}
+«ENDIF»
+«ENDFOREACH»
+
+
+boolean «interface.interfaceName()»_is_set(«interface.interfaceClassName()»* handle, uint32_t evid)
+{
+	if («interface.interfaceName()»_is_my_event(handle, evid))
+		return eventSet_check(handle->eventSet, evid);
+	return bool_false;
+}
+
+void «interface.interfaceName()»_reset_event(«interface.interfaceClassName()»* handle)
+{
+	// clean all out events
+	«FOREACH interface.getOutEvents() AS outEvent»
+	eventSet_clean_single(handle->eventSet, «outEvent.getEventEnumName()»);
+	«ENDFOREACH»
+
+}
+
+#ifdef INTERFACE_LISTENER
+
+void «interface.interfaceName()»_set_listener(«interface.interfaceClassName()»* handle, handleEvent handleEventPtr)
+{
+	handle->handleEventCallback = handleEventPtr;
+}
+
+void «interface.interfaceName()»_raiseEvent(«interface.interfaceClassName()»* handle, _Event event) {
+	if («interface.interfaceName()»_is_my_event(event->id))
+		statemachine_cy_setEvent(handle->statemachine, event);
+}
+
+#else
+
+«FOREACH interface.getOutEvents() AS event -»
+extern boolean «interface.interfaceName()»_is_«event.name»_raised(«interface.interfaceClassName()»* handle
+«IF event.type != Type::void -», «event.type.eventTypeToString()»* value«ENDIF») 
+{
+	boolean ret = bool_false;
+	if (eventSet_check(handle->eventSet,«event.getEventEnumName()»)) {
+«IF event.type != Type::void -»	
+		*value = ((«event.name»*)handle->«event.name»)->value;
+«ENDIF»
+		ret = bool_true;
+	}
+	return ret;
+}
+
+«ENDFOREACH»
+
+«FOREACH interface.getInEvents() AS event -»
+extern void «interface.interfaceName()»_raise_«event.name»(«interface.interfaceClassName()»* handle
+«IF event.type != Type::void -» , «event.type.eventTypeToString()» value«
+ENDIF»)
+{
+	_Event* ev = eventPool_createEvent(handle->eventPool, «event.getEventEnumName()»);
+
+«IF event.type != Type::void -»
+	ev->value = value;
+«ENDIF»
+
+	if (ev != NULL)
+		statemachine_cy_setEvent(handle->statemachine, ev);
+}
+«ENDFOREACH» 
+
+#endif // INTERFACE_LISTENER
+
+
+boolean «interface.interfaceName()»_is_my_event(«interface.interfaceClassName()»* handle, uint32_t evid)
+{
+	boolean ret = bool_false;
+	switch (evid) {
+«FOREACH interface.getInEvents() AS event -»
+	case «event.getEventEnumName()»:
+«ENDFOREACH»
+		ret = bool_true;
+		break;
+	default:
+		break;
+	}
+	return ret;
+}
+
+«ENDFILE»
+«ENDFOREACH»
+«ENDDEFINE»

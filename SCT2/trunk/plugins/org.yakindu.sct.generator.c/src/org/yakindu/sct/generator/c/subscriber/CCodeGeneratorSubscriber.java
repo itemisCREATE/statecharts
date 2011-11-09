@@ -20,7 +20,7 @@ public class CCodeGeneratorSubscriber extends
 
 	@Override
 	public String getOutletPath(IResource resource) {
-		return "src-gen" + File.separator
+		return "src-gen-c" + File.separator
 				+ resource.getName().replaceAll(" ", "");
 	}
 
