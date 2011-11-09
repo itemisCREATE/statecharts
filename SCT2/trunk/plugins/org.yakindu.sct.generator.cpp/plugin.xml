@@ -2,10 +2,13 @@
 <?eclipse version="3.4"?>
 
 <plugin>
-	<extension point="org.yakindu.sct.builder.subscriber">
-      <BuilderSubscriber
-         class="org.yakindu.sct.generator.cpp.subscriber.CppCodeGeneratorSubscriber" 
-         resourceExtension="sct">
-      </BuilderSubscriber>
+   <extension
+         point="org.yakindu.sct.generator.core">
+      <SCTGenerator
+            class="org.yakindu.sct.generator.cpp.subscriber.CppCodeGenerator"
+            description="YAKINDU.org C++ Code Generator"
+            id="yakindu::cpp"
+            name="YAKINDU.org C++ Code Generator">
+      </SCTGenerator>
    </extension>
 </plugin>
