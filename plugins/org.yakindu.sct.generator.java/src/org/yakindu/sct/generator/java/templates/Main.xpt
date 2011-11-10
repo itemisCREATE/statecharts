@@ -12,11 +12,14 @@ Contributors:
 «IMPORT sexec»
 «IMPORT stext»
 «IMPORT sgraph»
+«IMPORT sgen»
 
 «IMPORT org::yakindu::sct::generator::java::templates»
 
-«DEFINE main FOR ExecutionFlow»
-
+«DEFINE main(sgen::GeneratorEntry entry) FOR ExecutionFlow»
+	«FILE 'test.test'»
+	«entry.getFeatureConfiguration("NamingFeature")»
+	«ENDFILE»
 	«REM» basis files «ENDREM»
 	
 	«EXPAND IStatemachine::file FOR this»

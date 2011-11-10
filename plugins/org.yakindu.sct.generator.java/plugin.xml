@@ -10,5 +10,12 @@
             name="YAKINDU Java generator">
       </SCTGenerator>
    </extension>
+   <extension
+         point="org.yakindu.sct.generator.genmodel.featuretypes">
+      <FeatureLibrary
+            generatorId="yakindu::java"
+            uri="platform:/plugin/org.yakindu.sct.generator.java/library/FeatureTypeLibrary.xmi">
+      </FeatureLibrary>
+   </extension>
 
 </plugin>
