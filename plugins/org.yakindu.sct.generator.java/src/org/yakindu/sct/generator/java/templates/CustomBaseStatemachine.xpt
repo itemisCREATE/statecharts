@@ -145,7 +145,7 @@ else {
 «ENDDEFINE»
 
 «DEFINE file FOR ExecutionFlow-»
-«FILE getBaseStatemachineName()+'.java'-»
+«FILE getCustomPackage()+getBaseStatemachineName()+'.java'-»
 «getLicenseHeader()»
 package org.yakindu.sct.runtime.java.«getStatemachineName().toLowerCase()»;
 
@@ -247,6 +247,10 @@ public abstract class «getBaseStatemachineName()» implements ITimedStatemachine 
 			EventNotification eventNotification = (EventNotification) notification;
 			getOccuredEvents().add(eventNotification.getElement());
 		}
+	}
+	
+	public Set<State> getActiveStates(){
+		return EnumSet.copyOf(activeStates);
 	}
 	
 	«FOREACH scopes.typeSelect(InterfaceScope) AS interface-»

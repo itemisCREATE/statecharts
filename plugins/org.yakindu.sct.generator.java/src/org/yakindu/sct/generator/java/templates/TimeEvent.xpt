@@ -17,7 +17,7 @@ Contributors:
 
 «DEFINE file FOR ExecutionFlow-»
 «IF name != null-»
-«FILE 'TimeEvent.java'-»
+«FILE 'org/yakindu/sct/runtime/java/base/TimeEvent.java'-»
 «getLicenseHeader()»
 package org.yakindu.sct.runtime.java.base;
 

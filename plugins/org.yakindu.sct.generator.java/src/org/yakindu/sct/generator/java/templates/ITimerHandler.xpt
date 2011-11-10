@@ -16,7 +16,7 @@ Contributors:
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
 «DEFINE file FOR ExecutionFlow-»
-«FILE 'ITimerHandler.java'-»
+«FILE 'org/yakindu/sct/runtime/java/base/ITimerHandler.java'-»
 «getLicenseHeader()»
 package org.yakindu.sct.runtime.java.base;
 
