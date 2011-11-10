@@ -40,7 +40,7 @@ public class InjectMembersResource extends GMFResource implements
 	private static final boolean isDebug = false;
 
 	private boolean parsing = false;
-	
+
 	private String languageName;
 
 	List<org.eclipse.emf.common.util.Diagnostic> diagnostics = new ArrayList<org.eclipse.emf.common.util.Diagnostic>();
@@ -69,14 +69,18 @@ public class InjectMembersResource extends GMFResource implements
 		diagnostics.clear();
 		long t = System.currentTimeMillis();
 		TreeIterator<EObject> iter = getAllContents();
+		List<EObject> toParse = new ArrayList<EObject>();
 		while (iter.hasNext()) {
 			EObject currentObject = iter.next();
 			EAnnotation eAnnotation = currentObject.eClass().getEAnnotation(
 					INJECT_MEMBERS);
 			if (eAnnotation != null) {
-				IMemberInjectionService service = receiveInjectionService(currentObject);
-				reparse(service, currentObject);
+				toParse.add(currentObject);
 			}
+		}
+		for (EObject eObject : toParse) {
+			IMemberInjectionService service = receiveInjectionService(eObject);
+			reparse(service, eObject);
 		}
 		if (isDebug)
 			System.out.println("Reparsing Took "
@@ -176,7 +180,6 @@ public class InjectMembersResource extends GMFResource implements
 			return ReparseAdapter.class == type;
 		}
 	}
-	
 
 	public String getLanguageName() {
 		return languageName;
