@@ -37,6 +37,7 @@ import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
+import org.yakindu.sct.model.sgen.SGenPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -60,7 +61,7 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 		Output output = createOutput(entry);
 		XpandExecutionContext context = createXpandContext(output);
 		XpandFacade facade = XpandFacade.create(context);
-		facade.evaluate(getTemplatePath(), flow);
+		facade.evaluate(getTemplatePath(), flow, entry);
 		// refresh the project to get external updates:
 		IProject project = getTargetProject(entry);
 		try {
@@ -106,7 +107,7 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 			protected EPackage[] allPackages() {
 				return new EPackage[] { SGraphPackage.eINSTANCE,
 						StextPackage.eINSTANCE, EcorePackage.eINSTANCE,
-						SexecPackage.eINSTANCE };
+						SexecPackage.eINSTANCE, SGenPackage.eINSTANCE };
 			}
 		};
 		execCtx.registerMetaModel(metamodel);
