@@ -4,6 +4,6 @@ enable_testing()
 
 add_definitions( -Wall -O0 -g)
 
-add_subdirectory(src-gen-c/InterfaceTest.sct)
+add_subdirectory(src-gen-c/InterfaceTest)
 add_subdirectory(test-c/InterfaceTest)
 

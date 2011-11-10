@@ -1,0 +1,50 @@
+GeneratorModel for yakindu::cpp {
+	statechart InterfaceTest {
+		OutletFeature {
+			targetProject = "TestScenarios",
+			targetFolder = "src-gen-cpp/InterfaceTest"
+		}
+	}
+	statechart Test_DeepHistory {
+		OutletFeature {
+			targetProject = "TestScenarios",
+			targetFolder = "src-gen-cpp/Test_DeepHistory"
+		}
+	}
+	statechart Test_Expression {
+		OutletFeature {
+			targetProject = "TestScenarios",
+			targetFolder = "src-gen-cpp/Test_Expression"
+		}
+	}
+	statechart Test_Hierarchy {
+		OutletFeature {
+			targetProject = "TestScenarios",
+			targetFolder = "src-gen-cpp/Test_Hierarchy"
+		}
+	}
+	statechart Test_LocalActions {
+		OutletFeature {
+			targetProject = "TestScenarios",
+			targetFolder = "src-gen-cpp/Test_LocalActions"
+		}
+	}
+	statechart Test_ParallelRegions {
+		OutletFeature {
+			targetProject = "TestScenarios",
+			targetFolder = "src-gen-cpp/Test_ParallelRegions"
+		}
+	}
+	statechart Test_ShallowHistory {
+		OutletFeature {
+			targetProject = "TestScenarios",
+			targetFolder = "src-gen-cpp/Test_ShallowHistory"
+		}
+	}
+	statechart Test_Transition {
+		OutletFeature {
+			targetProject = "TestScenarios",
+			targetFolder = "src-gen-cpp/Test_Transition"
+		}
+	}
+}
