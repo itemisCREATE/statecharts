@@ -17,7 +17,7 @@ Contributors:
 
 «DEFINE file FOR ExecutionFlow-»
 «IF name != null-»
-«FILE 'INotificationListener.java'-»
+«FILE 'org/yakindu/sct/runtime/java/base/notification/INotificationListener.java'-»
 «getLicenseHeader()»
 package org.yakindu.sct.runtime.java.base.notification;
 

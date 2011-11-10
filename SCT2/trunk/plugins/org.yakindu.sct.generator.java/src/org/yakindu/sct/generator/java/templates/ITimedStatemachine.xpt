@@ -15,7 +15,7 @@ Contributors:
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
 «DEFINE file FOR ExecutionFlow-»
-«FILE 'ITimedStatemachine.java'-»
+«FILE 'org/yakindu/sct/runtime/java/base/ITimedStatemachine.java'-»
 «getLicenseHeader()»
 package org.yakindu.sct.runtime.java.base;
 

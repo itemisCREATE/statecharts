@@ -58,31 +58,31 @@ String toCode(Assignment this) :
 
 /* Logical Expressions */
 String toCode(LogicalOrExpression expression) :
-  	expression.leftOperand.toCode() + " || " + expression.rightOperand.toCode();
+  	"("+expression.leftOperand.toCode() + " || " + expression.rightOperand.toCode()+")";
   	
 String toCode(LogicalAndExpression expression) :
-  	expression.leftOperand.toCode() + " && " + expression.rightOperand.toCode();
+  	"("+expression.leftOperand.toCode() + " && " + expression.rightOperand.toCode()+")";
 
 String toCode(LogicalNotExpression expression) :
   	" ^" + expression.operand.toCode();
 
 String toCode(LogicalRelationExpression expression) :
-   expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode();
+   "("+expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode()+")";
     
 String toCode(BitwiseAndExpression expression) :
-  	expression.leftOperand.toCode() + " & " + expression.rightOperand.toCode();
+  	"("+expression.leftOperand.toCode() + " & " + expression.rightOperand.toCode()+")";
 
 String toCode(BitwiseOrExpression expression) :
-  	expression.leftOperand.toCode() + " | " + expression.rightOperand.toCode();
+  	"("+expression.leftOperand.toCode() + " | " + expression.rightOperand.toCode()+")";
 
 String toCode(BitwiseXorExpression expression) :
-  	expression.leftOperand.toCode() + " ^ " + expression.rightOperand.toCode();
+  	"("+expression.leftOperand.toCode() + " ^ " + expression.rightOperand.toCode()+")";
 
 String toCode(NumericalAddSubtractExpression expression) :
-  	expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode();
+  	"("+expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode()+")";
   	
 String toCode(NumericalMultiplyDivideExpression expression) :
-  	expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode();
+  	"("+expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode()+")";
 
 String toCode(ElementReferenceExpression exp) :
     if (EventDefinition.isInstance(exp.value)) then

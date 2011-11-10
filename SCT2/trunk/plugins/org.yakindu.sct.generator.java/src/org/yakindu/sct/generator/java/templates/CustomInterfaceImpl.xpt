@@ -17,7 +17,7 @@ Contributors:
 «EXTENSION org::yakindu::sct::generator::java::templates::Expression»
 
 «DEFINE file FOR InterfaceScope»
-«FILE getInterfaceImplName() + '.java'-»
+«FILE getCustomPackage()+getInterfaceImplName() + '.java'-»
 «getLicenseHeader()»
 package org.yakindu.sct.runtime.java.«getStatemachineName((ExecutionFlow)eContainer).toLowerCase()»;
 

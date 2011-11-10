@@ -18,7 +18,7 @@ Contributors:
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
 «DEFINE file FOR ExecutionFlow»
-«FILE getEventBasedStatemachineName()+'.java'-»
+«FILE getCustomPackage()+getEventBasedStatemachineName()+'.java'-»
 «getLicenseHeader()»
 package org.yakindu.sct.runtime.java.«getStatemachineName().toLowerCase()»;
 

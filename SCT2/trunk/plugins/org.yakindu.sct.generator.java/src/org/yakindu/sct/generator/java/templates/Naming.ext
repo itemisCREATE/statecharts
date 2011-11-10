@@ -50,6 +50,9 @@ String getBaseStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "Abst
 String getEventBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "EventBasedStatemachine";
 String getCycleBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "CyleBasedStatemachine";
 
+String getCustomPackage(ExecutionFlow this) : "org/yakindu/sct/runtime/java/"+getStatemachineName().toLowerCase()+"/";
+String getCustomPackage(InterfaceScope this) : "org/yakindu/sct/runtime/java/"+getStatemachineName((ExecutionFlow)eContainer).toLowerCase()+"/";
+
 String getInterfaceName(InterfaceScope this) :  
 	if name!=null then
 		"Interface" + name.toFirstUpper()
@@ -113,7 +116,7 @@ String setterValueVisibility(VariableDefinition this) :
 
 String getJavaType(Type type) :
 		switch (type) {
-		case (Type::real) : "float"
+		case (Type::real) : "double"
 		case (Type::integer) : "int"
 		case (Type::boolean) : "boolean"
 		case (Type::string) : "string"
@@ -122,7 +125,7 @@ String getJavaType(Type type) :
 
 String getJavaClassType(Type type) :
 		switch (type) {
-		case (Type::real) : "Float"
+		case (Type::real) : "Double"
 		case (Type::integer) : "Integer"
 		case (Type::boolean) : "Boolean"
 		case (Type::string) : "String"
@@ -159,7 +162,7 @@ ExecutionState state(Step this) : (ExecutionState) eContainer;
 
 String getContext(Variable this) : 
 	if (InterfaceScope.isInstance(eContainer)) then  
-		getInterfaceName((InterfaceScope)eContainer)+"."
+		getInterfaceName((InterfaceScope)eContainer).toFirstLower()+"."
 	else 
 		"";
 		
