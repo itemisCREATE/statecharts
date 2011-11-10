@@ -21,14 +21,9 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalSGenParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'GeneratorModel'", "'for'", "'{'", "'}'", "'statechart'", "','", "'='", "'::'", "'.'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'GeneratorModel'", "'for'", "'{'", "'}'", "'statechart'", "'='", "'::'", "'.'"
     };
     public static final int RULE_ID=4;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int EOF=-1;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T__19=19;
     public static final int RULE_STRING=5;
     public static final int T__16=16;
     public static final int T__15=15;
@@ -38,8 +33,12 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
     public static final int T__11=11;
     public static final int T__14=14;
     public static final int T__13=13;
+    public static final int RULE_ANY_OTHER=10;
     public static final int RULE_INT=6;
     public static final int RULE_WS=9;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
     // delegates
     // delegators
@@ -455,42 +454,50 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFeatureConfiguration"
-    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:213:1: ruleFeatureConfiguration returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '{' ( (lv_parameterValues_2_0= ruleFeatureParameterValue ) ) (otherlv_3= ',' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) ) )* otherlv_5= '}' ) ;
+    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:213:1: ruleFeatureConfiguration returns [EObject current=null] : ( () ( (otherlv_1= RULE_ID ) ) otherlv_2= '{' ( (lv_parameterValues_3_0= ruleFeatureParameterValue ) )+ otherlv_4= '}' ) ;
     public final EObject ruleFeatureConfiguration() throws RecognitionException {
         EObject current = null;
 
-        Token otherlv_0=null;
         Token otherlv_1=null;
-        Token otherlv_3=null;
-        Token otherlv_5=null;
-        EObject lv_parameterValues_2_0 = null;
-
-        EObject lv_parameterValues_4_0 = null;
+        Token otherlv_2=null;
+        Token otherlv_4=null;
+        EObject lv_parameterValues_3_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:216:28: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '{' ( (lv_parameterValues_2_0= ruleFeatureParameterValue ) ) (otherlv_3= ',' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) ) )* otherlv_5= '}' ) )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:217:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '{' ( (lv_parameterValues_2_0= ruleFeatureParameterValue ) ) (otherlv_3= ',' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) ) )* otherlv_5= '}' )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:216:28: ( ( () ( (otherlv_1= RULE_ID ) ) otherlv_2= '{' ( (lv_parameterValues_3_0= ruleFeatureParameterValue ) )+ otherlv_4= '}' ) )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:217:1: ( () ( (otherlv_1= RULE_ID ) ) otherlv_2= '{' ( (lv_parameterValues_3_0= ruleFeatureParameterValue ) )+ otherlv_4= '}' )
             {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:217:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '{' ( (lv_parameterValues_2_0= ruleFeatureParameterValue ) ) (otherlv_3= ',' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) ) )* otherlv_5= '}' )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:217:2: ( (otherlv_0= RULE_ID ) ) otherlv_1= '{' ( (lv_parameterValues_2_0= ruleFeatureParameterValue ) ) (otherlv_3= ',' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) ) )* otherlv_5= '}'
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:217:1: ( () ( (otherlv_1= RULE_ID ) ) otherlv_2= '{' ( (lv_parameterValues_3_0= ruleFeatureParameterValue ) )+ otherlv_4= '}' )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:217:2: () ( (otherlv_1= RULE_ID ) ) otherlv_2= '{' ( (lv_parameterValues_3_0= ruleFeatureParameterValue ) )+ otherlv_4= '}'
             {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:217:2: ( (otherlv_0= RULE_ID ) )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:218:1: (otherlv_0= RULE_ID )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:217:2: ()
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:218:5: 
             {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:218:1: (otherlv_0= RULE_ID )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:219:3: otherlv_0= RULE_ID
+
+                    current = forceCreateModelElement(
+                        grammarAccess.getFeatureConfigurationAccess().getFeatureConfigurationAction_0(),
+                        current);
+                
+
+            }
+
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:223:2: ( (otherlv_1= RULE_ID ) )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:224:1: (otherlv_1= RULE_ID )
+            {
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:224:1: (otherlv_1= RULE_ID )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:225:3: otherlv_1= RULE_ID
             {
 
             			if (current==null) {
             	            current = createModelElement(grammarAccess.getFeatureConfigurationRule());
             	        }
                     
-            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFeatureConfiguration441); 
+            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFeatureConfiguration450); 
 
-            		newLeafNode(otherlv_0, grammarAccess.getFeatureConfigurationAccess().getTypeFeatureTypeCrossReference_0_0()); 
+            		newLeafNode(otherlv_1, grammarAccess.getFeatureConfigurationAccess().getTypeFeatureTypeCrossReference_1_0()); 
             	
 
             }
@@ -498,71 +505,34 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,13,FOLLOW_13_in_ruleFeatureConfiguration453); 
+            otherlv_2=(Token)match(input,13,FOLLOW_13_in_ruleFeatureConfiguration462); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getFeatureConfigurationAccess().getLeftCurlyBracketKeyword_1());
+                	newLeafNode(otherlv_2, grammarAccess.getFeatureConfigurationAccess().getLeftCurlyBracketKeyword_2());
                 
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:234:1: ( (lv_parameterValues_2_0= ruleFeatureParameterValue ) )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:235:1: (lv_parameterValues_2_0= ruleFeatureParameterValue )
-            {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:235:1: (lv_parameterValues_2_0= ruleFeatureParameterValue )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:236:3: lv_parameterValues_2_0= ruleFeatureParameterValue
-            {
-             
-            	        newCompositeNode(grammarAccess.getFeatureConfigurationAccess().getParameterValuesFeatureParameterValueParserRuleCall_2_0()); 
-            	    
-            pushFollow(FOLLOW_ruleFeatureParameterValue_in_ruleFeatureConfiguration474);
-            lv_parameterValues_2_0=ruleFeatureParameterValue();
-
-            state._fsp--;
-
-
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getFeatureConfigurationRule());
-            	        }
-                   		add(
-                   			current, 
-                   			"parameterValues",
-                    		lv_parameterValues_2_0, 
-                    		"FeatureParameterValue");
-            	        afterParserOrEnumRuleCall();
-            	    
-
-            }
-
-
-            }
-
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:252:2: (otherlv_3= ',' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) ) )*
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:240:1: ( (lv_parameterValues_3_0= ruleFeatureParameterValue ) )+
+            int cnt3=0;
             loop3:
             do {
                 int alt3=2;
                 int LA3_0 = input.LA(1);
 
-                if ( (LA3_0==16) ) {
+                if ( (LA3_0==RULE_ID) ) {
                     alt3=1;
                 }
 
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:252:4: otherlv_3= ',' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) )
+            	    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:241:1: (lv_parameterValues_3_0= ruleFeatureParameterValue )
             	    {
-            	    otherlv_3=(Token)match(input,16,FOLLOW_16_in_ruleFeatureConfiguration487); 
-
-            	        	newLeafNode(otherlv_3, grammarAccess.getFeatureConfigurationAccess().getCommaKeyword_3_0());
-            	        
-            	    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:256:1: ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) )
-            	    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:257:1: (lv_parameterValues_4_0= ruleFeatureParameterValue )
-            	    {
-            	    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:257:1: (lv_parameterValues_4_0= ruleFeatureParameterValue )
-            	    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:258:3: lv_parameterValues_4_0= ruleFeatureParameterValue
+            	    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:241:1: (lv_parameterValues_3_0= ruleFeatureParameterValue )
+            	    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:242:3: lv_parameterValues_3_0= ruleFeatureParameterValue
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getFeatureConfigurationAccess().getParameterValuesFeatureParameterValueParserRuleCall_3_1_0()); 
+            	    	        newCompositeNode(grammarAccess.getFeatureConfigurationAccess().getParameterValuesFeatureParameterValueParserRuleCall_3_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleFeatureParameterValue_in_ruleFeatureConfiguration508);
-            	    lv_parameterValues_4_0=ruleFeatureParameterValue();
+            	    pushFollow(FOLLOW_ruleFeatureParameterValue_in_ruleFeatureConfiguration483);
+            	    lv_parameterValues_3_0=ruleFeatureParameterValue();
 
             	    state._fsp--;
 
@@ -573,7 +543,7 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
             	           		add(
             	           			current, 
             	           			"parameterValues",
-            	            		lv_parameterValues_4_0, 
+            	            		lv_parameterValues_3_0, 
             	            		"FeatureParameterValue");
             	    	        afterParserOrEnumRuleCall();
             	    	    
@@ -582,19 +552,20 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
 
 
             	    }
-
-
-            	    }
             	    break;
 
             	default :
-            	    break loop3;
+            	    if ( cnt3 >= 1 ) break loop3;
+                        EarlyExitException eee =
+                            new EarlyExitException(3, input);
+                        throw eee;
                 }
+                cnt3++;
             } while (true);
 
-            otherlv_5=(Token)match(input,14,FOLLOW_14_in_ruleFeatureConfiguration522); 
+            otherlv_4=(Token)match(input,14,FOLLOW_14_in_ruleFeatureConfiguration496); 
 
-                	newLeafNode(otherlv_5, grammarAccess.getFeatureConfigurationAccess().getRightCurlyBracketKeyword_4());
+                	newLeafNode(otherlv_4, grammarAccess.getFeatureConfigurationAccess().getRightCurlyBracketKeyword_4());
                 
 
             }
@@ -617,7 +588,7 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleFeatureParameterValue"
-    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:286:1: entryRuleFeatureParameterValue returns [EObject current=null] : iv_ruleFeatureParameterValue= ruleFeatureParameterValue EOF ;
+    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:270:1: entryRuleFeatureParameterValue returns [EObject current=null] : iv_ruleFeatureParameterValue= ruleFeatureParameterValue EOF ;
     public final EObject entryRuleFeatureParameterValue() throws RecognitionException {
         EObject current = null;
 
@@ -625,17 +596,17 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:287:2: (iv_ruleFeatureParameterValue= ruleFeatureParameterValue EOF )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:288:2: iv_ruleFeatureParameterValue= ruleFeatureParameterValue EOF
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:271:2: (iv_ruleFeatureParameterValue= ruleFeatureParameterValue EOF )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:272:2: iv_ruleFeatureParameterValue= ruleFeatureParameterValue EOF
             {
              newCompositeNode(grammarAccess.getFeatureParameterValueRule()); 
-            pushFollow(FOLLOW_ruleFeatureParameterValue_in_entryRuleFeatureParameterValue558);
+            pushFollow(FOLLOW_ruleFeatureParameterValue_in_entryRuleFeatureParameterValue532);
             iv_ruleFeatureParameterValue=ruleFeatureParameterValue();
 
             state._fsp--;
 
              current =iv_ruleFeatureParameterValue; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFeatureParameterValue568); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFeatureParameterValue542); 
 
             }
 
@@ -653,37 +624,48 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFeatureParameterValue"
-    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:295:1: ruleFeatureParameterValue returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) ) ;
+    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:279:1: ruleFeatureParameterValue returns [EObject current=null] : ( () ( (otherlv_1= RULE_ID ) ) otherlv_2= '=' ( (lv_value_3_0= RULE_STRING ) ) ) ;
     public final EObject ruleFeatureParameterValue() throws RecognitionException {
         EObject current = null;
 
-        Token otherlv_0=null;
         Token otherlv_1=null;
-        Token lv_value_2_0=null;
+        Token otherlv_2=null;
+        Token lv_value_3_0=null;
 
          enterRule(); 
             
         try {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:298:28: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) ) )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:299:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:282:28: ( ( () ( (otherlv_1= RULE_ID ) ) otherlv_2= '=' ( (lv_value_3_0= RULE_STRING ) ) ) )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:283:1: ( () ( (otherlv_1= RULE_ID ) ) otherlv_2= '=' ( (lv_value_3_0= RULE_STRING ) ) )
             {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:299:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:299:2: ( (otherlv_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:283:1: ( () ( (otherlv_1= RULE_ID ) ) otherlv_2= '=' ( (lv_value_3_0= RULE_STRING ) ) )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:283:2: () ( (otherlv_1= RULE_ID ) ) otherlv_2= '=' ( (lv_value_3_0= RULE_STRING ) )
             {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:299:2: ( (otherlv_0= RULE_ID ) )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:300:1: (otherlv_0= RULE_ID )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:283:2: ()
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:284:5: 
             {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:300:1: (otherlv_0= RULE_ID )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:301:3: otherlv_0= RULE_ID
+
+                    current = forceCreateModelElement(
+                        grammarAccess.getFeatureParameterValueAccess().getFeatureParameterValueAction_0(),
+                        current);
+                
+
+            }
+
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:289:2: ( (otherlv_1= RULE_ID ) )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:290:1: (otherlv_1= RULE_ID )
+            {
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:290:1: (otherlv_1= RULE_ID )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:291:3: otherlv_1= RULE_ID
             {
 
             			if (current==null) {
             	            current = createModelElement(grammarAccess.getFeatureParameterValueRule());
             	        }
                     
-            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFeatureParameterValue613); 
+            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFeatureParameterValue596); 
 
-            		newLeafNode(otherlv_0, grammarAccess.getFeatureParameterValueAccess().getParameterFeatureParameterCrossReference_0_0()); 
+            		newLeafNode(otherlv_1, grammarAccess.getFeatureParameterValueAccess().getParameterFeatureParameterCrossReference_1_0()); 
             	
 
             }
@@ -691,19 +673,19 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,17,FOLLOW_17_in_ruleFeatureParameterValue625); 
+            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleFeatureParameterValue608); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getFeatureParameterValueAccess().getEqualsSignKeyword_1());
+                	newLeafNode(otherlv_2, grammarAccess.getFeatureParameterValueAccess().getEqualsSignKeyword_2());
                 
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:316:1: ( (lv_value_2_0= RULE_STRING ) )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:317:1: (lv_value_2_0= RULE_STRING )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:306:1: ( (lv_value_3_0= RULE_STRING ) )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:307:1: (lv_value_3_0= RULE_STRING )
             {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:317:1: (lv_value_2_0= RULE_STRING )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:318:3: lv_value_2_0= RULE_STRING
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:307:1: (lv_value_3_0= RULE_STRING )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:308:3: lv_value_3_0= RULE_STRING
             {
-            lv_value_2_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleFeatureParameterValue642); 
+            lv_value_3_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleFeatureParameterValue625); 
 
-            			newLeafNode(lv_value_2_0, grammarAccess.getFeatureParameterValueAccess().getValueSTRINGTerminalRuleCall_2_0()); 
+            			newLeafNode(lv_value_3_0, grammarAccess.getFeatureParameterValueAccess().getValueSTRINGTerminalRuleCall_3_0()); 
             		
 
             	        if (current==null) {
@@ -712,7 +694,7 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
                    		setWithLastConsumed(
                    			current, 
                    			"value",
-                    		lv_value_2_0, 
+                    		lv_value_3_0, 
                     		"STRING");
             	    
 
@@ -742,7 +724,7 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleQID"
-    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:342:1: entryRuleQID returns [String current=null] : iv_ruleQID= ruleQID EOF ;
+    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:332:1: entryRuleQID returns [String current=null] : iv_ruleQID= ruleQID EOF ;
     public final String entryRuleQID() throws RecognitionException {
         String current = null;
 
@@ -750,17 +732,17 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:343:2: (iv_ruleQID= ruleQID EOF )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:344:2: iv_ruleQID= ruleQID EOF
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:333:2: (iv_ruleQID= ruleQID EOF )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:334:2: iv_ruleQID= ruleQID EOF
             {
              newCompositeNode(grammarAccess.getQIDRule()); 
-            pushFollow(FOLLOW_ruleQID_in_entryRuleQID684);
+            pushFollow(FOLLOW_ruleQID_in_entryRuleQID667);
             iv_ruleQID=ruleQID();
 
             state._fsp--;
 
              current =iv_ruleQID.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleQID695); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleQID678); 
 
             }
 
@@ -778,7 +760,7 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleQID"
-    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:351:1: ruleQID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID ( (kw= '::' | kw= '.' ) this_ID_3= RULE_ID )* ) ;
+    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:341:1: ruleQID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID ( (kw= '::' | kw= '.' ) this_ID_3= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleQID() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -789,42 +771,42 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:354:28: ( (this_ID_0= RULE_ID ( (kw= '::' | kw= '.' ) this_ID_3= RULE_ID )* ) )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:355:1: (this_ID_0= RULE_ID ( (kw= '::' | kw= '.' ) this_ID_3= RULE_ID )* )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:344:28: ( (this_ID_0= RULE_ID ( (kw= '::' | kw= '.' ) this_ID_3= RULE_ID )* ) )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:345:1: (this_ID_0= RULE_ID ( (kw= '::' | kw= '.' ) this_ID_3= RULE_ID )* )
             {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:355:1: (this_ID_0= RULE_ID ( (kw= '::' | kw= '.' ) this_ID_3= RULE_ID )* )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:355:6: this_ID_0= RULE_ID ( (kw= '::' | kw= '.' ) this_ID_3= RULE_ID )*
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:345:1: (this_ID_0= RULE_ID ( (kw= '::' | kw= '.' ) this_ID_3= RULE_ID )* )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:345:6: this_ID_0= RULE_ID ( (kw= '::' | kw= '.' ) this_ID_3= RULE_ID )*
             {
-            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleQID735); 
+            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleQID718); 
 
             		current.merge(this_ID_0);
                 
              
                 newLeafNode(this_ID_0, grammarAccess.getQIDAccess().getIDTerminalRuleCall_0()); 
                 
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:362:1: ( (kw= '::' | kw= '.' ) this_ID_3= RULE_ID )*
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:352:1: ( (kw= '::' | kw= '.' ) this_ID_3= RULE_ID )*
             loop5:
             do {
                 int alt5=2;
                 int LA5_0 = input.LA(1);
 
-                if ( ((LA5_0>=18 && LA5_0<=19)) ) {
+                if ( ((LA5_0>=17 && LA5_0<=18)) ) {
                     alt5=1;
                 }
 
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:362:2: (kw= '::' | kw= '.' ) this_ID_3= RULE_ID
+            	    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:352:2: (kw= '::' | kw= '.' ) this_ID_3= RULE_ID
             	    {
-            	    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:362:2: (kw= '::' | kw= '.' )
+            	    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:352:2: (kw= '::' | kw= '.' )
             	    int alt4=2;
             	    int LA4_0 = input.LA(1);
 
-            	    if ( (LA4_0==18) ) {
+            	    if ( (LA4_0==17) ) {
             	        alt4=1;
             	    }
-            	    else if ( (LA4_0==19) ) {
+            	    else if ( (LA4_0==18) ) {
             	        alt4=2;
             	    }
             	    else {
@@ -835,9 +817,9 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
             	    }
             	    switch (alt4) {
             	        case 1 :
-            	            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:363:2: kw= '::'
+            	            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:353:2: kw= '::'
             	            {
-            	            kw=(Token)match(input,18,FOLLOW_18_in_ruleQID755); 
+            	            kw=(Token)match(input,17,FOLLOW_17_in_ruleQID738); 
 
             	                    current.merge(kw);
             	                    newLeafNode(kw, grammarAccess.getQIDAccess().getColonColonKeyword_1_0_0()); 
@@ -846,9 +828,9 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:370:2: kw= '.'
+            	            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:360:2: kw= '.'
             	            {
-            	            kw=(Token)match(input,19,FOLLOW_19_in_ruleQID774); 
+            	            kw=(Token)match(input,18,FOLLOW_18_in_ruleQID757); 
 
             	                    current.merge(kw);
             	                    newLeafNode(kw, grammarAccess.getQIDAccess().getFullStopKeyword_1_0_1()); 
@@ -859,7 +841,7 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    this_ID_3=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleQID790); 
+            	    this_ID_3=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleQID773); 
 
             	    		current.merge(this_ID_3);
             	        
@@ -916,22 +898,20 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_14_in_ruleGeneratorEntry350 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFeatureConfiguration_in_entryRuleFeatureConfiguration386 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleFeatureConfiguration396 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFeatureConfiguration441 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleFeatureConfiguration453 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFeatureParameterValue_in_ruleFeatureConfiguration474 = new BitSet(new long[]{0x0000000000014000L});
-    public static final BitSet FOLLOW_16_in_ruleFeatureConfiguration487 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFeatureParameterValue_in_ruleFeatureConfiguration508 = new BitSet(new long[]{0x0000000000014000L});
-    public static final BitSet FOLLOW_14_in_ruleFeatureConfiguration522 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFeatureParameterValue_in_entryRuleFeatureParameterValue558 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFeatureParameterValue568 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFeatureParameterValue613 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleFeatureParameterValue625 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleFeatureParameterValue642 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQID_in_entryRuleQID684 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleQID695 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleQID735 = new BitSet(new long[]{0x00000000000C0002L});
-    public static final BitSet FOLLOW_18_in_ruleQID755 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_19_in_ruleQID774 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleQID790 = new BitSet(new long[]{0x00000000000C0002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFeatureConfiguration450 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleFeatureConfiguration462 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFeatureParameterValue_in_ruleFeatureConfiguration483 = new BitSet(new long[]{0x0000000000004010L});
+    public static final BitSet FOLLOW_14_in_ruleFeatureConfiguration496 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFeatureParameterValue_in_entryRuleFeatureParameterValue532 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFeatureParameterValue542 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFeatureParameterValue596 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleFeatureParameterValue608 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleFeatureParameterValue625 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQID_in_entryRuleQID667 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleQID678 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleQID718 = new BitSet(new long[]{0x0000000000060002L});
+    public static final BitSet FOLLOW_17_in_ruleQID738 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_18_in_ruleQID757 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleQID773 = new BitSet(new long[]{0x0000000000060002L});
 
 }

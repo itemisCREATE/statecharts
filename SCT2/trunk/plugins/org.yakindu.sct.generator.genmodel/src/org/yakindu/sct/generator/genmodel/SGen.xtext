@@ -16,12 +16,12 @@ GeneratorEntry returns gen::GeneratorEntry:
 	'}';
 
 FeatureConfiguration returns gen::FeatureConfiguration:
-	type=[gen::FeatureType] '{'
-	parameterValues+=FeatureParameterValue (',' parameterValues+=FeatureParameterValue)*
+	{gen::FeatureConfiguration} type=[gen::FeatureType] '{'
+	(parameterValues+=FeatureParameterValue)+
 	'}';
 
 FeatureParameterValue returns gen::FeatureParameterValue:
-	parameter=[gen::FeatureParameter] '=' value=STRING;
+	{gen::FeatureParameterValue} parameter=[gen::FeatureParameter] '=' value=STRING;
 
 QID:
 	ID (('::' | '.') ID)*; 

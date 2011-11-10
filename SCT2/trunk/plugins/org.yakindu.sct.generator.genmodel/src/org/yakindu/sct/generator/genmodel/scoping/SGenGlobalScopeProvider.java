@@ -3,14 +3,13 @@ package org.yakindu.sct.generator.genmodel.scoping;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.yakindu.sct.generator.genmodel.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.genmodel.extensions.LibraryExtensions.LibraryDescriptor;
+import org.yakindu.sct.generator.genmodel.resource.FeatureResourceDescription;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -30,9 +29,6 @@ public class SGenGlobalScopeProvider extends DefaultGlobalScopeProvider {
 	@Inject
 	private Injector injector;
 
-	@Inject
-	private IDefaultResourceDescriptionStrategy resourceDescriptionStrategy;
-
 	@Override
 	protected IScope getScope(Resource resource, boolean ignoreCase,
 			final EClass type, Predicate<IEObjectDescription> filter) {
@@ -44,8 +40,7 @@ public class SGenGlobalScopeProvider extends DefaultGlobalScopeProvider {
 				.getLibraryDescriptor();
 		for (LibraryDescriptor desc : libraryDescriptor) {
 			Resource library = resourceSet.getResource(desc.getURI(), true);
-			DefaultResourceDescription description = new DefaultResourceDescription(
-					library, resourceDescriptionStrategy);
+			FeatureResourceDescription description = new FeatureResourceDescription(library);
 			injector.injectMembers(description);
 			allElements = Iterables.concat(allElements,
 					description.getExportedObjectsByType(type));
