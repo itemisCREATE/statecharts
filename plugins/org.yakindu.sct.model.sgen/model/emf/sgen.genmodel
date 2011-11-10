@@ -6,20 +6,20 @@
     complianceLevel="5.0" copyrightFields="false" usedGenPackages="../../../org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph">
   <foreignModel>sgen.ecore</foreignModel>
   <genPackages prefix="SGen" basePackage="org.yakindu.sct.model" disposableProviderFactory="true"
-      ecorePackage="sgen.ecore#/">
+      loadInitialization="true" ecorePackage="sgen.ecore#/">
     <genClasses ecoreClass="sgen.ecore#//GeneratorModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgen.ecore#//GeneratorModel/entries"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgen.ecore#//GeneratorModel/generatorId"/>
     </genClasses>
     <genClasses ecoreClass="sgen.ecore#//GeneratorConfiguration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgen.ecore#//GeneratorConfiguration/configurations"/>
     </genClasses>
-    <genClasses ecoreClass="sgen.ecore#//StatechartReferences">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sgen.ecore#//StatechartReferences/statecharts"/>
-    </genClasses>
     <genClasses ecoreClass="sgen.ecore#//FeatureType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgen.ecore#//FeatureType/parameters"/>
     </genClasses>
-    <genClasses ecoreClass="sgen.ecore#//FeatureParameter"/>
+    <genClasses ecoreClass="sgen.ecore#//FeatureParameter">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference sgen.ecore#//FeatureParameter/featureType"/>
+    </genClasses>
     <genClasses ecoreClass="sgen.ecore#//FeatureConfiguration">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sgen.ecore#//FeatureConfiguration/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgen.ecore#//FeatureConfiguration/parameterValues"/>
