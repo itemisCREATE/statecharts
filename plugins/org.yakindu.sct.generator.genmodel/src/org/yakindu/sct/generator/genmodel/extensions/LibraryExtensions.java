@@ -8,6 +8,8 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 /**
  * 
@@ -19,6 +21,7 @@ public class LibraryExtensions {
 	private static final String EXTENSION_POINT_ID = "org.yakindu.sct.generator.genmodel.featuretypes";
 	private static final String ATTRIBUTE_URI = "uri";
 	private static final String ATTRIBUTE_GENERATOR_ID = "generatorId";
+	public static final String GLOBAL_ID = "ALL";
 
 	public static class LibraryDescriptor {
 		private final IConfigurationElement configElement;
@@ -42,6 +45,20 @@ public class LibraryExtensions {
 						EXTENSION_POINT_ID);
 		return transform(newArrayList(configurationElements),
 				new CreateLibraryDescriptor());
+	}
+
+	public static Iterable<LibraryDescriptor> getLibraryDescriptor(
+			final String generatorId) {
+		Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions
+				.getLibraryDescriptor();
+		return Iterables.filter(libraryDescriptor,
+				new Predicate<LibraryDescriptor>() {
+					@Override
+					public boolean apply(LibraryDescriptor input) {
+						return input.getGeneratorId().equals(generatorId)
+								|| input.getGeneratorId().equals(GLOBAL_ID);
+					}
+				});
 	}
 
 	private static final class CreateLibraryDescriptor implements
