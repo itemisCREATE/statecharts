@@ -78,7 +78,7 @@ public class AbstractSGenSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (type=[FeatureType|ID] parameterValues+=FeatureParameterValue parameterValues+=FeatureParameterValue*)
+	 *     (type=[FeatureType|ID] parameterValues+=FeatureParameterValue+)
 	 *
 	 * Features:
 	 *    type[1, 1]
@@ -106,8 +106,8 @@ public class AbstractSGenSemanticSequencer extends AbstractSemanticSequencer {
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getFeatureParameterValueAccess().getParameterFeatureParameterIDTerminalRuleCall_0_0_1(), semanticObject.getParameter());
-		feeder.accept(grammarAccess.getFeatureParameterValueAccess().getValueSTRINGTerminalRuleCall_2_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getFeatureParameterValueAccess().getParameterFeatureParameterIDTerminalRuleCall_1_0_1(), semanticObject.getParameter());
+		feeder.accept(grammarAccess.getFeatureParameterValueAccess().getValueSTRINGTerminalRuleCall_3_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	

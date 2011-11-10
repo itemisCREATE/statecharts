@@ -215,65 +215,49 @@ ruleFeatureConfiguration returns [EObject current=null]
     }
     @after { leaveRule(); }:
 ((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getFeatureConfigurationAccess().getFeatureConfigurationAction_0(),
+            $current);
+    }
+)(
 (
 		{
 			if ($current==null) {
 	            $current = createModelElement(grammarAccess.getFeatureConfigurationRule());
 	        }
         }
-	otherlv_0=RULE_ID
+	otherlv_1=RULE_ID
 	{
-		newLeafNode(otherlv_0, grammarAccess.getFeatureConfigurationAccess().getTypeFeatureTypeCrossReference_0_0()); 
+		newLeafNode(otherlv_1, grammarAccess.getFeatureConfigurationAccess().getTypeFeatureTypeCrossReference_1_0()); 
 	}
 
 )
-)	otherlv_1='{' 
+)	otherlv_2='{' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getFeatureConfigurationAccess().getLeftCurlyBracketKeyword_1());
+    	newLeafNode(otherlv_2, grammarAccess.getFeatureConfigurationAccess().getLeftCurlyBracketKeyword_2());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getFeatureConfigurationAccess().getParameterValuesFeatureParameterValueParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getFeatureConfigurationAccess().getParameterValuesFeatureParameterValueParserRuleCall_3_0()); 
 	    }
-		lv_parameterValues_2_0=ruleFeatureParameterValue		{
+		lv_parameterValues_3_0=ruleFeatureParameterValue		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getFeatureConfigurationRule());
 	        }
        		add(
        			$current, 
        			"parameterValues",
-        		lv_parameterValues_2_0, 
+        		lv_parameterValues_3_0, 
         		"FeatureParameterValue");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_3=',' 
+)+	otherlv_4='}' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getFeatureConfigurationAccess().getCommaKeyword_3_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getFeatureConfigurationAccess().getParameterValuesFeatureParameterValueParserRuleCall_3_1_0()); 
-	    }
-		lv_parameterValues_4_0=ruleFeatureParameterValue		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getFeatureConfigurationRule());
-	        }
-       		add(
-       			$current, 
-       			"parameterValues",
-        		lv_parameterValues_4_0, 
-        		"FeatureParameterValue");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))*	otherlv_5='}' 
-    {
-    	newLeafNode(otherlv_5, grammarAccess.getFeatureConfigurationAccess().getRightCurlyBracketKeyword_4());
+    	newLeafNode(otherlv_4, grammarAccess.getFeatureConfigurationAccess().getRightCurlyBracketKeyword_4());
     }
 )
 ;
@@ -297,27 +281,33 @@ ruleFeatureParameterValue returns [EObject current=null]
     }
     @after { leaveRule(); }:
 ((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getFeatureParameterValueAccess().getFeatureParameterValueAction_0(),
+            $current);
+    }
+)(
 (
 		{
 			if ($current==null) {
 	            $current = createModelElement(grammarAccess.getFeatureParameterValueRule());
 	        }
         }
-	otherlv_0=RULE_ID
+	otherlv_1=RULE_ID
 	{
-		newLeafNode(otherlv_0, grammarAccess.getFeatureParameterValueAccess().getParameterFeatureParameterCrossReference_0_0()); 
+		newLeafNode(otherlv_1, grammarAccess.getFeatureParameterValueAccess().getParameterFeatureParameterCrossReference_1_0()); 
 	}
 
 )
-)	otherlv_1='=' 
+)	otherlv_2='=' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getFeatureParameterValueAccess().getEqualsSignKeyword_1());
+    	newLeafNode(otherlv_2, grammarAccess.getFeatureParameterValueAccess().getEqualsSignKeyword_2());
     }
 (
 (
-		lv_value_2_0=RULE_STRING
+		lv_value_3_0=RULE_STRING
 		{
-			newLeafNode(lv_value_2_0, grammarAccess.getFeatureParameterValueAccess().getValueSTRINGTerminalRuleCall_2_0()); 
+			newLeafNode(lv_value_3_0, grammarAccess.getFeatureParameterValueAccess().getValueSTRINGTerminalRuleCall_3_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -326,7 +316,7 @@ ruleFeatureParameterValue returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"value",
-        		lv_value_2_0, 
+        		lv_value_3_0, 
         		"STRING");
 	    }
 

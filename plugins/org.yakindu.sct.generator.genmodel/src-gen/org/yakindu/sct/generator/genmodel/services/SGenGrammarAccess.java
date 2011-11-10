@@ -110,54 +110,42 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	public class FeatureConfigurationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FeatureConfiguration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final CrossReference cTypeFeatureTypeCrossReference_0_0 = (CrossReference)cTypeAssignment_0.eContents().get(0);
-		private final RuleCall cTypeFeatureTypeIDTerminalRuleCall_0_0_1 = (RuleCall)cTypeFeatureTypeCrossReference_0_0.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cParameterValuesAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cParameterValuesFeatureParameterValueParserRuleCall_2_0 = (RuleCall)cParameterValuesAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cCommaKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cParameterValuesAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cParameterValuesFeatureParameterValueParserRuleCall_3_1_0 = (RuleCall)cParameterValuesAssignment_3_1.eContents().get(0);
+		private final Action cFeatureConfigurationAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cTypeFeatureTypeCrossReference_1_0 = (CrossReference)cTypeAssignment_1.eContents().get(0);
+		private final RuleCall cTypeFeatureTypeIDTerminalRuleCall_1_0_1 = (RuleCall)cTypeFeatureTypeCrossReference_1_0.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cParameterValuesAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cParameterValuesFeatureParameterValueParserRuleCall_3_0 = (RuleCall)cParameterValuesAssignment_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//FeatureConfiguration returns gen::FeatureConfiguration:
-		//	type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue ("," parameterValues+=FeatureParameterValue)* "}";
+		//	{gen::FeatureConfiguration} type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue+ "}";
 		public ParserRule getRule() { return rule; }
 
-		//type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue ("," parameterValues+=FeatureParameterValue)* "}"
+		//{gen::FeatureConfiguration} type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue+ "}"
 		public Group getGroup() { return cGroup; }
 
+		//{gen::FeatureConfiguration}
+		public Action getFeatureConfigurationAction_0() { return cFeatureConfigurationAction_0; }
+
 		//type=[gen::FeatureType]
-		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
+		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
 
 		//[gen::FeatureType]
-		public CrossReference getTypeFeatureTypeCrossReference_0_0() { return cTypeFeatureTypeCrossReference_0_0; }
+		public CrossReference getTypeFeatureTypeCrossReference_1_0() { return cTypeFeatureTypeCrossReference_1_0; }
 
 		//ID
-		public RuleCall getTypeFeatureTypeIDTerminalRuleCall_0_0_1() { return cTypeFeatureTypeIDTerminalRuleCall_0_0_1; }
+		public RuleCall getTypeFeatureTypeIDTerminalRuleCall_1_0_1() { return cTypeFeatureTypeIDTerminalRuleCall_1_0_1; }
 
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//parameterValues+=FeatureParameterValue
-		public Assignment getParameterValuesAssignment_2() { return cParameterValuesAssignment_2; }
-
-		//FeatureParameterValue
-		public RuleCall getParameterValuesFeatureParameterValueParserRuleCall_2_0() { return cParameterValuesFeatureParameterValueParserRuleCall_2_0; }
-
-		//("," parameterValues+=FeatureParameterValue)*
-		public Group getGroup_3() { return cGroup_3; }
-
-		//","
-		public Keyword getCommaKeyword_3_0() { return cCommaKeyword_3_0; }
-
-		//parameterValues+=FeatureParameterValue
-		public Assignment getParameterValuesAssignment_3_1() { return cParameterValuesAssignment_3_1; }
+		//parameterValues+=FeatureParameterValue+
+		public Assignment getParameterValuesAssignment_3() { return cParameterValuesAssignment_3; }
 
 		//FeatureParameterValue
-		public RuleCall getParameterValuesFeatureParameterValueParserRuleCall_3_1_0() { return cParameterValuesFeatureParameterValueParserRuleCall_3_1_0; }
+		public RuleCall getParameterValuesFeatureParameterValueParserRuleCall_3_0() { return cParameterValuesFeatureParameterValueParserRuleCall_3_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
@@ -166,37 +154,41 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	public class FeatureParameterValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FeatureParameterValue");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cParameterAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final CrossReference cParameterFeatureParameterCrossReference_0_0 = (CrossReference)cParameterAssignment_0.eContents().get(0);
-		private final RuleCall cParameterFeatureParameterIDTerminalRuleCall_0_0_1 = (RuleCall)cParameterFeatureParameterCrossReference_0_0.eContents().get(1);
-		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cValueSTRINGTerminalRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
+		private final Action cFeatureParameterValueAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cParameterAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cParameterFeatureParameterCrossReference_1_0 = (CrossReference)cParameterAssignment_1.eContents().get(0);
+		private final RuleCall cParameterFeatureParameterIDTerminalRuleCall_1_0_1 = (RuleCall)cParameterFeatureParameterCrossReference_1_0.eContents().get(1);
+		private final Keyword cEqualsSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cValueAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cValueSTRINGTerminalRuleCall_3_0 = (RuleCall)cValueAssignment_3.eContents().get(0);
 		
 		//FeatureParameterValue returns gen::FeatureParameterValue:
-		//	parameter=[gen::FeatureParameter] "=" value=STRING;
+		//	{gen::FeatureParameterValue} parameter=[gen::FeatureParameter] "=" value=STRING;
 		public ParserRule getRule() { return rule; }
 
-		//parameter=[gen::FeatureParameter] "=" value=STRING
+		//{gen::FeatureParameterValue} parameter=[gen::FeatureParameter] "=" value=STRING
 		public Group getGroup() { return cGroup; }
 
+		//{gen::FeatureParameterValue}
+		public Action getFeatureParameterValueAction_0() { return cFeatureParameterValueAction_0; }
+
 		//parameter=[gen::FeatureParameter]
-		public Assignment getParameterAssignment_0() { return cParameterAssignment_0; }
+		public Assignment getParameterAssignment_1() { return cParameterAssignment_1; }
 
 		//[gen::FeatureParameter]
-		public CrossReference getParameterFeatureParameterCrossReference_0_0() { return cParameterFeatureParameterCrossReference_0_0; }
+		public CrossReference getParameterFeatureParameterCrossReference_1_0() { return cParameterFeatureParameterCrossReference_1_0; }
 
 		//ID
-		public RuleCall getParameterFeatureParameterIDTerminalRuleCall_0_0_1() { return cParameterFeatureParameterIDTerminalRuleCall_0_0_1; }
+		public RuleCall getParameterFeatureParameterIDTerminalRuleCall_1_0_1() { return cParameterFeatureParameterIDTerminalRuleCall_1_0_1; }
 
 		//"="
-		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
+		public Keyword getEqualsSignKeyword_2() { return cEqualsSignKeyword_2; }
 
 		//value=STRING
-		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
+		public Assignment getValueAssignment_3() { return cValueAssignment_3; }
 
 		//STRING
-		public RuleCall getValueSTRINGTerminalRuleCall_2_0() { return cValueSTRINGTerminalRuleCall_2_0; }
+		public RuleCall getValueSTRINGTerminalRuleCall_3_0() { return cValueSTRINGTerminalRuleCall_3_0; }
 	}
 
 	public class QIDElements extends AbstractParserRuleElementFinder {
@@ -286,7 +278,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FeatureConfiguration returns gen::FeatureConfiguration:
-	//	type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue ("," parameterValues+=FeatureParameterValue)* "}";
+	//	{gen::FeatureConfiguration} type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue+ "}";
 	public FeatureConfigurationElements getFeatureConfigurationAccess() {
 		return (pFeatureConfiguration != null) ? pFeatureConfiguration : (pFeatureConfiguration = new FeatureConfigurationElements());
 	}
@@ -296,7 +288,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FeatureParameterValue returns gen::FeatureParameterValue:
-	//	parameter=[gen::FeatureParameter] "=" value=STRING;
+	//	{gen::FeatureParameterValue} parameter=[gen::FeatureParameter] "=" value=STRING;
 	public FeatureParameterValueElements getFeatureParameterValueAccess() {
 		return (pFeatureParameterValue != null) ? pFeatureParameterValue : (pFeatureParameterValue = new FeatureParameterValueElements());
 	}
