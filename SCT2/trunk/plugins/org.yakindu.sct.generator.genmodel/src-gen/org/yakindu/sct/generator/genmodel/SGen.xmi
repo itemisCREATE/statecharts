@@ -55,6 +55,7 @@
             <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/SGen#//FeatureConfiguration"/>
           </type>
         </elements>
+        <elements xsi:type="xtext:Keyword" value="feature"/>
         <elements xsi:type="xtext:Assignment" feature="type" operator="=">
           <terminal xsi:type="xtext:CrossReference">
             <type metamodel="/0/@metamodelDeclarations.1">

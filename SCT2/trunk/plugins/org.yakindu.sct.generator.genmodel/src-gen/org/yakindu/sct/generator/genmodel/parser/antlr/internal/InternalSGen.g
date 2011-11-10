@@ -220,44 +220,48 @@ ruleFeatureConfiguration returns [EObject current=null]
             grammarAccess.getFeatureConfigurationAccess().getFeatureConfigurationAction_0(),
             $current);
     }
-)(
+)	otherlv_1='feature' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getFeatureConfigurationAccess().getFeatureKeyword_1());
+    }
+(
 (
 		{
 			if ($current==null) {
 	            $current = createModelElement(grammarAccess.getFeatureConfigurationRule());
 	        }
         }
-	otherlv_1=RULE_ID
+	otherlv_2=RULE_ID
 	{
-		newLeafNode(otherlv_1, grammarAccess.getFeatureConfigurationAccess().getTypeFeatureTypeCrossReference_1_0()); 
+		newLeafNode(otherlv_2, grammarAccess.getFeatureConfigurationAccess().getTypeFeatureTypeCrossReference_2_0()); 
 	}
 
 )
-)	otherlv_2='{' 
+)	otherlv_3='{' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getFeatureConfigurationAccess().getLeftCurlyBracketKeyword_2());
+    	newLeafNode(otherlv_3, grammarAccess.getFeatureConfigurationAccess().getLeftCurlyBracketKeyword_3());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getFeatureConfigurationAccess().getParameterValuesFeatureParameterValueParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getFeatureConfigurationAccess().getParameterValuesFeatureParameterValueParserRuleCall_4_0()); 
 	    }
-		lv_parameterValues_3_0=ruleFeatureParameterValue		{
+		lv_parameterValues_4_0=ruleFeatureParameterValue		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getFeatureConfigurationRule());
 	        }
        		add(
        			$current, 
        			"parameterValues",
-        		lv_parameterValues_3_0, 
+        		lv_parameterValues_4_0, 
         		"FeatureParameterValue");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)+	otherlv_4='}' 
+)+	otherlv_5='}' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getFeatureConfigurationAccess().getRightCurlyBracketKeyword_4());
+    	newLeafNode(otherlv_5, grammarAccess.getFeatureConfigurationAccess().getRightCurlyBracketKeyword_5());
     }
 )
 ;

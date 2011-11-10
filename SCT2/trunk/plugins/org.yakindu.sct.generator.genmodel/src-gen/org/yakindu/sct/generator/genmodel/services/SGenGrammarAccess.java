@@ -111,44 +111,48 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FeatureConfiguration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cFeatureConfigurationAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cTypeFeatureTypeCrossReference_1_0 = (CrossReference)cTypeAssignment_1.eContents().get(0);
-		private final RuleCall cTypeFeatureTypeIDTerminalRuleCall_1_0_1 = (RuleCall)cTypeFeatureTypeCrossReference_1_0.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cParameterValuesAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cParameterValuesFeatureParameterValueParserRuleCall_3_0 = (RuleCall)cParameterValuesAssignment_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cFeatureKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cTypeFeatureTypeCrossReference_2_0 = (CrossReference)cTypeAssignment_2.eContents().get(0);
+		private final RuleCall cTypeFeatureTypeIDTerminalRuleCall_2_0_1 = (RuleCall)cTypeFeatureTypeCrossReference_2_0.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cParameterValuesAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cParameterValuesFeatureParameterValueParserRuleCall_4_0 = (RuleCall)cParameterValuesAssignment_4.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//FeatureConfiguration returns gen::FeatureConfiguration:
-		//	{gen::FeatureConfiguration} type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue+ "}";
+		//	{gen::FeatureConfiguration} "feature" type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue+ "}";
 		public ParserRule getRule() { return rule; }
 
-		//{gen::FeatureConfiguration} type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue+ "}"
+		//{gen::FeatureConfiguration} "feature" type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue+ "}"
 		public Group getGroup() { return cGroup; }
 
 		//{gen::FeatureConfiguration}
 		public Action getFeatureConfigurationAction_0() { return cFeatureConfigurationAction_0; }
 
+		//"feature"
+		public Keyword getFeatureKeyword_1() { return cFeatureKeyword_1; }
+
 		//type=[gen::FeatureType]
-		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
+		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
 
 		//[gen::FeatureType]
-		public CrossReference getTypeFeatureTypeCrossReference_1_0() { return cTypeFeatureTypeCrossReference_1_0; }
+		public CrossReference getTypeFeatureTypeCrossReference_2_0() { return cTypeFeatureTypeCrossReference_2_0; }
 
 		//ID
-		public RuleCall getTypeFeatureTypeIDTerminalRuleCall_1_0_1() { return cTypeFeatureTypeIDTerminalRuleCall_1_0_1; }
+		public RuleCall getTypeFeatureTypeIDTerminalRuleCall_2_0_1() { return cTypeFeatureTypeIDTerminalRuleCall_2_0_1; }
 
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
 		//parameterValues+=FeatureParameterValue+
-		public Assignment getParameterValuesAssignment_3() { return cParameterValuesAssignment_3; }
+		public Assignment getParameterValuesAssignment_4() { return cParameterValuesAssignment_4; }
 
 		//FeatureParameterValue
-		public RuleCall getParameterValuesFeatureParameterValueParserRuleCall_3_0() { return cParameterValuesFeatureParameterValueParserRuleCall_3_0; }
+		public RuleCall getParameterValuesFeatureParameterValueParserRuleCall_4_0() { return cParameterValuesFeatureParameterValueParserRuleCall_4_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 
 	public class FeatureParameterValueElements extends AbstractParserRuleElementFinder {
@@ -278,7 +282,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FeatureConfiguration returns gen::FeatureConfiguration:
-	//	{gen::FeatureConfiguration} type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue+ "}";
+	//	{gen::FeatureConfiguration} "feature" type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue+ "}";
 	public FeatureConfigurationElements getFeatureConfigurationAccess() {
 		return (pFeatureConfiguration != null) ? pFeatureConfiguration : (pFeatureConfiguration = new FeatureConfigurationElements());
 	}
