@@ -1,50 +1,50 @@
 GeneratorModel for yakindu::java {
 	statechart InterfaceTest {
-		OutletFeature {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test",
-			targetFolder = "src-gen"
+		feature OutletFeature {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-java/InterfaceTest"
 		}
 	}
 	statechart Test_DeepHistory {
-		OutletFeature {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test",
-			targetFolder = "src-gen"
+		feature OutletFeature {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-java/Test_DeepHistory"
 		}
 	}
 	statechart Test_Expression {
-		OutletFeature {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test",
-			targetFolder = "src-gen"
+		feature OutletFeature {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-java/Test_Expression"
 		}
 	}
 	statechart Test_Hierarchy {
-		OutletFeature {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test",
-			targetFolder = "src-gen"
+		feature OutletFeature {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-java/Test_Hierarchy"
 		}
 	}
 	statechart Test_LocalActions {
-		OutletFeature {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test",
-			targetFolder = "src-gen"
+		feature OutletFeature {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-java/Test_LocalActions"
 		}
 	}
 	statechart Test_ParallelRegions {
-		OutletFeature {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test",
-			targetFolder = "src-gen"
+		feature OutletFeature {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-java/Test_ParallelRegions"
 		}
 	}
 	statechart Test_ShallowHistory {
-		OutletFeature {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test",
-			targetFolder = "src-gen"
+		feature OutletFeature {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-java/Test_ShallowHistory"
 		}
 	}
 	statechart Test_Transition {
-		OutletFeature {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test",
-			targetFolder = "src-gen"
+		feature OutletFeature {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-java/Test_Transition"
 		}
 	}
 }
