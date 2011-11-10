@@ -195,7 +195,6 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 	}
 
 	public void eventRaised(String eventName) {
-		System.out.println("raised: " + eventName);
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				setEventViewerInput();
