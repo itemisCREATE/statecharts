@@ -6,6 +6,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.scoping.NamespaceLocalScopeResolver;
+import org.yakindu.sct.model.stext.scoping.STextGlobalScopeProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -13,15 +14,16 @@ import com.google.inject.name.Names;
 import de.itemis.xtext.utils.gmf.resource.InjectMembersLazyLinker;
 
 /**
- * Use this class to register components to be used at runtime / without the Equinox extension registry.
+ * Use this class to register components to be used at runtime / without the
+ * Equinox extension registry.
  */
-public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTextRuntimeModule {
+public class STextRuntimeModule extends
+		org.yakindu.sct.model.stext.AbstractSTextRuntimeModule {
 
-	// public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider>
-	// bindIGlobalScopeProvider() {
-	// super.bindIGlobalScopeProvider();
-	// return ResourceSetGlobalScopeProvider.class;
-	// }
+	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		super.bindIGlobalScopeProvider();
+		return STextGlobalScopeProvider.class;
+	}
 
 	@Override
 	public Class<? extends ILinker> bindILinker() {
@@ -43,4 +45,3 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 	}
 
 }
-
