@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/2.0.0" xmlns:stext="http://www.yakindu.org/sct/statechart/SText">
-  <sgraph:Statechart xmi:id="_wXk3MAuIEeGVgpgRVT1uXw" name="Test_Expression" expression="interface:&#xA;in event event1 : integer&#xA;out event event2 : real&#xA;var var1 : integer = 6&#xA;var var2 : integer = -123&#xA;var var3 : real = 19.4&#xA;var var4 : real = -43.3&#xA;">
-    <scopes xsi:type="stext:InterfaceScope" xmi:id="_63TeEAuLEeGVgpgRVT1uXw">
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_63TeEQuLEeGVgpgRVT1uXw" name="event1" direction="in" type="integer"/>
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_63TeEguLEeGVgpgRVT1uXw" name="event2" direction="out" type="real"/>
-      <declarations xsi:type="stext:VariableDefinition" xmi:id="_63UFIAuLEeGVgpgRVT1uXw" name="var1" type="integer" initialValue="6"/>
-      <declarations xsi:type="stext:VariableDefinition" xmi:id="_63UFIQuLEeGVgpgRVT1uXw" name="var2" type="integer"/>
-      <declarations xsi:type="stext:VariableDefinition" xmi:id="_63UFIguLEeGVgpgRVT1uXw" name="var3" type="real" initialValue="19.4"/>
-      <declarations xsi:type="stext:VariableDefinition" xmi:id="_63UFIwuLEeGVgpgRVT1uXw" name="var4" type="real"/>
+  <sgraph:Statechart xmi:id="_wXk3MAuIEeGVgpgRVT1uXw" name="Test_Expression" expression="interface:&#xA;in event event1 : integer&#xA;out event event2 : real&#xA;var var1 : integer = 6&#xA;var var2 : integer = -123&#xA;var var3 : real = 19.4&#xA;var var4 : real = - 43.3&#xA;">
+    <scopes xsi:type="stext:InterfaceScope" xmi:id="_RIMCMAu4EeGmY4-cgZfupg">
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_RIMCMQu4EeGmY4-cgZfupg" name="event1" direction="in" type="integer"/>
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_RIMCMgu4EeGmY4-cgZfupg" name="event2" direction="out" type="real"/>
+      <declarations xsi:type="stext:VariableDefinition" xmi:id="_RIMCMwu4EeGmY4-cgZfupg" name="var1" type="integer" initialValue="6"/>
+      <declarations xsi:type="stext:VariableDefinition" xmi:id="_RIMCNAu4EeGmY4-cgZfupg" name="var2" type="integer"/>
+      <declarations xsi:type="stext:VariableDefinition" xmi:id="_RIMCNQu4EeGmY4-cgZfupg" name="var3" type="real" initialValue="19.4"/>
+      <declarations xsi:type="stext:VariableDefinition" xmi:id="_RIMCNgu4EeGmY4-cgZfupg" name="var4" type="real"/>
     </scopes>
     <regions xmi:id="_wXmFUguIEeGVgpgRVT1uXw" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_wXpIoQuIEeGVgpgRVT1uXw">
@@ -15,19 +15,19 @@
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_wXqWwAuIEeGVgpgRVT1uXw" name="state1" incomingTransitions="_wXrk4wuIEeGVgpgRVT1uXw _foN2kAuLEeGVgpgRVT1uXw">
         <outgoingTransitions xmi:id="_ep-FoAuLEeGVgpgRVT1uXw" expression="event1" target="_dUv_IAuLEeGVgpgRVT1uXw">
-          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_63UsMAuLEeGVgpgRVT1uXw">
-            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_63UsMQuLEeGVgpgRVT1uXw" event="_63TeEQuLEeGVgpgRVT1uXw"/>
+          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_RIVMIAu4EeGmY4-cgZfupg">
+            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_RIVMIQu4EeGmY4-cgZfupg" event="_RIMCMQu4EeGmY4-cgZfupg"/>
           </trigger>
         </outgoingTransitions>
-        <scopes xmi:id="_63UFJAuLEeGVgpgRVT1uXw"/>
+        <scopes xmi:id="_RIMCNwu4EeGmY4-cgZfupg"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_dUv_IAuLEeGVgpgRVT1uXw" name="state2" incomingTransitions="_ep-FoAuLEeGVgpgRVT1uXw">
         <outgoingTransitions xmi:id="_foN2kAuLEeGVgpgRVT1uXw" expression="event1" target="_wXqWwAuIEeGVgpgRVT1uXw">
-          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_63V6UQuLEeGVgpgRVT1uXw">
-            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_63V6UguLEeGVgpgRVT1uXw" event="_63TeEQuLEeGVgpgRVT1uXw"/>
+          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_RIVMIwu4EeGmY4-cgZfupg">
+            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_RIVMJAu4EeGmY4-cgZfupg" event="_RIMCMQu4EeGmY4-cgZfupg"/>
           </trigger>
         </outgoingTransitions>
-        <scopes xmi:id="_63V6UAuLEeGVgpgRVT1uXw"/>
+        <scopes xmi:id="_RIVMIgu4EeGmY4-cgZfupg"/>
       </vertices>
     </regions>
   </sgraph:Statechart>
