@@ -16,7 +16,7 @@ GeneratorEntry returns gen::GeneratorEntry:
 	'}';
 
 FeatureConfiguration returns gen::FeatureConfiguration:
-	{gen::FeatureConfiguration} type=[gen::FeatureType] '{'
+	{gen::FeatureConfiguration} 'feature' type=[gen::FeatureType] '{'
 	(parameterValues+=FeatureParameterValue)+
 	'}';
 
