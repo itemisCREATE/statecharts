@@ -14,7 +14,7 @@ Contais the root templates that call the different file templates.
 
 «IMPORT org::yakindu::sct::generator::cpp::templates»
 
-«DEFINE main FOR ExecutionFlow»
+«DEFINE main(sgen::GeneratorEntry entry) FOR ExecutionFlow»
 
 	«REM» basis files «ENDREM»
 	«EXPAND StatemachineExceptionH::file FOR this»

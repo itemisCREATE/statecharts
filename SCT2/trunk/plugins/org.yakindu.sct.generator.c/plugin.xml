@@ -11,4 +11,11 @@
             name="YAKINDU C Code Generator">
       </SCTGenerator>
    </extension>
+   <extension
+         point="org.yakindu.sct.generator.genmodel.featuretypes">
+      <FeatureLibrary
+            generatorId="yakindu::c"
+            uri="platform:/plugin/org.yakindu.sct.generator.c/library/FeatureTypeLibrary.xmi">
+      </FeatureLibrary>
+   </extension>
 </plugin>
