@@ -52,7 +52,6 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 	@Inject
 	private IResourceDescriptions resourceDescriptions;
 
-	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 		setWindowTitle("New Yakindu SGen Model");
@@ -60,7 +59,6 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 
 	}
 
-	@Override
 	public void addPages() {
 		modelFilePage = new SGenWizardPage1("fileName", selection,
 				"sgen");
@@ -74,8 +72,7 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 				.setDescription("Select the Statecharts and the Generator type");
 		addPage(generatorConfigPage);
 	}
-
-	@Override
+	
 	public boolean performFinish() {
 		IRunnableWithProgress op = new WorkspaceModifyOperation(null) {
 			@Override
