@@ -21,7 +21,6 @@ public abstract class AbstractDefaultFeatureValueProvider implements
 	protected abstract void setDefaultValue(
 			FeatureParameterValue parameterValue, Statechart statechart);
 
-	@Override
 	public final FeatureConfiguration createDefaultFeatureConfiguration(
 			FeatureType type, Statechart statechart) {
 		FeatureConfiguration config = createConfiguration(type);
