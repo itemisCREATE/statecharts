@@ -41,7 +41,7 @@
          </metamodelType>
          <metamodelType
                eclass="Region"
-               icon="icons/obj16/region-16.png"
+               icon="icons/obj16/Region-16.png"
                id="org.yakindu.sct.ui.editor.Region"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="Region">
@@ -53,7 +53,7 @@
          <metamodelType
                eclass="State"
                edithelper="org.yakindu.sct.ui.editor.edithelper.StateEditHelper"
-               icon="icons/obj16/state-16.png"
+               icon="icons/obj16/State-16.png"
                id="org.yakindu.sct.ui.editor.State"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="State">
@@ -65,7 +65,7 @@
           <metamodelType
                eclass="State"
                edithelper="org.yakindu.sct.ui.editor.edithelper.StateEditHelper"
-               icon="icons/obj16/composite-state-16.png"
+               icon="icons/obj16/Composite-State-16.png"
                id="org.yakindu.sct.ui.editor.CompositeState"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="CompositeState">
@@ -77,7 +77,7 @@
           <metamodelType
                eclass="State"
                edithelper="org.yakindu.sct.ui.editor.edithelper.StateEditHelper"
-               icon="icons/obj16/orthogonal-state-16.png"
+               icon="icons/obj16/Orthogonal-State-16.png"
                id="org.yakindu.sct.ui.editor.OrthogonalState"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="OrthogonalState">
@@ -89,7 +89,7 @@
           <metamodelType
                eclass="State"
                edithelper="org.yakindu.sct.ui.editor.edithelper.StateEditHelper"
-               icon="icons/obj16/submachine-state-16.png"
+               icon="icons/obj16/Submachine-State-16.png"
                id="org.yakindu.sct.ui.editor.SubmachineState"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="SubmachineState">
@@ -114,7 +114,7 @@
          <metamodelType
                eclass="Choice"
                edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-               icon="icons/obj16/choice-16.png"
+               icon="icons/obj16/Choice-16.png"
                id="org.yakindu.sct.ui.editor.Choice"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="Choice">
@@ -126,7 +126,7 @@
          <metamodelType
                eclass="Entry"
                edithelper="org.yakindu.sct.ui.editor.edithelper.EntryEditHelper"
-               icon="icons/obj16/initial-state-16.png"
+               icon="icons/obj16/Initial-State-16.png"
                id="org.yakindu.sct.ui.editor.Entry"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="Entry">
@@ -138,7 +138,7 @@
          <metamodelType
                eclass="Entry"
                edithelper="org.yakindu.sct.ui.editor.edithelper.EntryEditHelper"
-               icon="icons/obj16/shallow-history-16.png"
+               icon="icons/obj16/Shallow-History-16.png"
                id="org.yakindu.sct.ui.editor.ShallowHistory"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="ShallowHistory">
@@ -150,7 +150,7 @@
          <metamodelType
                eclass="Entry"
                edithelper="org.yakindu.sct.ui.editor.edithelper.EntryEditHelper"
-               icon="icons/obj16/deep-history-16.png"
+               icon="icons/obj16/Deep-History-16.png"
                id="org.yakindu.sct.ui.editor.DeepHistory"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="DeepHistory">
@@ -162,7 +162,7 @@
          <metamodelType
                eclass="FinalState"
                edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-               icon="icons/obj16/final-state-16.png"
+               icon="icons/obj16/Final-State-16.png"
                id="org.yakindu.sct.ui.editor.FinalState"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="FinalState">
@@ -174,7 +174,7 @@
           <metamodelType
                 eclass="Exit"
                 edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-                icon="icons/obj16/exit-point-16.png"
+                icon="icons/obj16/Exit-Point-16.png"
                 id="org.yakindu.sct.ui.editor.Exit"
                 kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                 name="Exit">
@@ -186,7 +186,7 @@
          <metamodelType
                eclass="Junction"
                edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-               icon="icons/obj16/junction-16.png"
+               icon="icons/obj16/Junction-16.png"
                id="org.yakindu.sct.ui.editor.Junction"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                name="Junction">
@@ -198,7 +198,7 @@
           <metamodelType
                 eclass="Synchronization"
                 edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-                icon="icons/obj16/synchronization-16.png"
+                icon="icons/obj16/Synchronization-16.png"
                 id="org.yakindu.sct.ui.editor.Synchronization"
                 kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                 name="Synchronization">
@@ -297,9 +297,9 @@
                   id="org.yakindu.sct.ui.editor.State"
                   kind="tool"
                   label="State"
-                  large_icon="icons/obj32/state-32.png"
+                  large_icon="icons/obj32/State-32.png"
                   path="/tools/"
-                  small_icon="icons/obj16/state-16.png">
+                  small_icon="icons/obj16/State-16.png">
                    <expand
                          force="true">
                            <content>
@@ -314,9 +314,9 @@
                   id="org.yakindu.sct.ui.editor.CompositeState"
                   kind="tool"
                   label="Composite State"
-                  large_icon="icons/obj32/composite-state-32.png"
+                  large_icon="icons/obj32/Composite-State-32.png"
                   path="/tools/stack/"
-                  small_icon="icons/obj16/composite-state-16.png">
+                  small_icon="icons/obj16/Composite-State-16.png">
                    <expand
                          force="true">
                            <content>
@@ -328,9 +328,9 @@
                   id="org.yakindu.sct.ui.editor.OrthogonalState"
                   kind="tool"
                   label="Orthogonal State"
-                  large_icon="icons/obj32/orthogonal-state-32.png"
+                  large_icon="icons/obj32/Orthogonal-State-32.png"
                   path="/tools/stack/"
-                  small_icon="icons/obj16/orthogonal-state-16.png">
+                  small_icon="icons/obj16/Orthogonal-State-16.png">
                    <expand
                          force="true">
                            <content>
@@ -342,9 +342,9 @@
                   id="org.yakindu.sct.ui.editor.SubmachineState"
                   kind="tool"
                   label="Submachine State"
-                  large_icon="icons/obj32/submachine-state-32.png"
+                  large_icon="icons/obj32/Submachine-State-32.png"
                   path="/tools/stack/"
-                  small_icon="icons/obj16/submachine-state-16.png">
+                  small_icon="icons/obj16/Submachine-State-16.png">
                    <expand
                          force="true">
                            <content>
@@ -356,81 +356,81 @@
                    id="org.yakindu.sct.ui.editor.Region"
                    kind="tool"
                    label="Region"
-                   large_icon="icons/obj32/region-32.png"
+                   large_icon="icons/obj32/Region-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/region-16.png">
+                   small_icon="icons/obj16/Region-16.png">
              </entry>
              <entry
                    description="Creates an initial state"
                    id="org.yakindu.sct.ui.editor.Entry"
                    kind="tool"
                    label="Initial State"
-                   large_icon="icons/obj32/initial-state-32.png"
+                   large_icon="icons/obj32/Initial-State-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/initial-state-16.png">
+                   small_icon="icons/obj16/Initial-State-16.png">
              </entry>
               <entry
                    description="Creates a shallow history"
                    id="org.yakindu.sct.ui.editor.ShallowHistory"
                    kind="tool"
                    label="Shallow History"
-                   large_icon="icons/obj32/shallow-history-32.png"
+                   large_icon="icons/obj32/Shallow-History-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/shallow-history-16.png">
+                   small_icon="icons/obj16/Shallow-History-16.png">
              </entry>
              <entry
                    description="Creates a deep history"
                    id="org.yakindu.sct.ui.editor.DeepHistory"
                    kind="tool"
                    label="Deep History"
-                   large_icon="icons/obj32/deep-history-32.png"
+                   large_icon="icons/obj32/Deep-History-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/deep-history-16.png">
+                   small_icon="icons/obj16/Deep-History-16.png">
              </entry>
              <entry
                    description="Creates a final state"
                    id="org.yakindu.sct.ui.editor.FinalState"
                    kind="tool"
                    label="Final State"
-                   large_icon="icons/obj32/final-state-32.png"
+                   large_icon="icons/obj32/Final-State-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/final-state-16.png">
+                   small_icon="icons/obj16/Final-State-16.png">
              </entry>
                <entry
                    description="Creates an exit point"
                    id="org.yakindu.sct.ui.editor.Exit"
                    kind="tool"
                    label="Exit Point"
-                   large_icon="icons/obj32/exit-point-32.png"
+                   large_icon="icons/obj32/Exit-Point-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/exit-point-16.png">
+                   small_icon="icons/obj16/Exit-Point-16.png">
              </entry>
              <entry
                    description="Creates a choice"
                    id="org.yakindu.sct.ui.editor.Choice"
                    kind="tool"
                    label="Choice"
-                   large_icon="icons/obj32/choice-32.png"
+                   large_icon="icons/obj32/Choice-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/choice-16.png">
+                   small_icon="icons/obj16/Choice-16.png">
              </entry>
              <entry
                    description="Creates a junction"
                    id="org.yakindu.sct.ui.editor.Junction"
                    kind="tool"
                    label="Junction"
-                   large_icon="icons/obj32/junction-32.png"
+                   large_icon="icons/obj32/Junction-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/junction-16.png">
+                   small_icon="icons/obj16/Junction-16.png">
              </entry>
              <entry
                    description="Creates a synchronization"
                    id="org.yakindu.sct.ui.editor.Synchronization"
                    kind="tool"
                    label="Synchronization"
-                   large_icon="icons/obj32/synchronization-32.png"
+                   large_icon="icons/obj32/Synchronization-32.png"
                    path="/tools/"
-                   small_icon="icons/obj16/synchronization-16.png">
+                   small_icon="icons/obj16/Synchronization-16.png">
              </entry>
          </contribution>
          <Priority

@@ -16,7 +16,7 @@
 	<!-- Launch configuration images -->
    <extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
     	<launchConfigurationTypeImage
-        	icon="icons/yakindu.png"
+        	icon="icons/Statechart-Launcher-16.png"
         	configTypeID="org.yakindu.sct.simulation.core.launch.statechart"
         	id="org.yakindu.sct.core.simulation.launch.statechartTypeImage">
 	    </launchConfigurationTypeImage>
@@ -37,7 +37,7 @@
 	        id="org.yakindu.sct.core.simulation.launch.shortcut"
 	        class="org.yakindu.sct.simulation.ui.launch.StatechartLaunchShortcut"
 	        label="YAKINDU Statechart"
-	        icon="icons/yakindu.png"
+	        icon="icons/Statechart-Launcher-16.png"
 	        modes="run, debug">
 	         <contextualLaunch>
 				<enablement>
@@ -58,7 +58,7 @@
     <view
           allowMultiple="false"
           class="org.yakindu.sct.simulation.ui.view.DeclarationView"
-          icon="icons/yakindu.png"
+          icon="Statechart-Launcher-16.png"
           id="org.yakindu.sct.simulation.ui.declarationview"
           name="Declarations View"
           restorable="true">
