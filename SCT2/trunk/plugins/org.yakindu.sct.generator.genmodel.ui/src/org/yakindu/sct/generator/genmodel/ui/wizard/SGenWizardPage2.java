@@ -48,7 +48,6 @@ public class SGenWizardPage2 extends WizardPage {
 		this.resourceDescriptions = resourceDescriptions;
 	}
 
-	@Override
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
 		setControl(container);
@@ -101,7 +100,6 @@ public class SGenWizardPage2 extends WizardPage {
 			super();
 		}
 
-		@Override
 		public String getText(Object element) {
 			if (element instanceof GeneratorDescriptor) {
 				return ((GeneratorDescriptor) element).getName();
@@ -109,7 +107,6 @@ public class SGenWizardPage2 extends WizardPage {
 			return super.getText(element);
 		}
 
-		@Override
 		public Image getImage(Object element) {
 			if (element instanceof GeneratorDescriptor) {
 				return ((GeneratorDescriptor) element).getImage();
