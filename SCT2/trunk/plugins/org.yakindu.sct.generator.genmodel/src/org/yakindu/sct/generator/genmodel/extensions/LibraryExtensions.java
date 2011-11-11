@@ -3,6 +3,7 @@ package org.yakindu.sct.generator.genmodel.extensions;
 import static com.google.common.collect.Iterables.transform;
 import static com.google.common.collect.Lists.newArrayList;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
@@ -21,6 +22,8 @@ public class LibraryExtensions {
 	private static final String EXTENSION_POINT_ID = "org.yakindu.sct.generator.genmodel.featuretypes";
 	private static final String ATTRIBUTE_URI = "uri";
 	private static final String ATTRIBUTE_GENERATOR_ID = "generatorId";
+	private static final String DEFAULT_PROVIDER = "defaultProvider";
+
 	public static final String GLOBAL_ID = "ALL";
 
 	public static class LibraryDescriptor {
@@ -36,6 +39,16 @@ public class LibraryExtensions {
 
 		public String getGeneratorId() {
 			return configElement.getAttribute(ATTRIBUTE_GENERATOR_ID);
+		}
+
+		public IDefaultFeatureValueProvider createFeatureValueProvider() {
+			try {
+				return (IDefaultFeatureValueProvider) configElement
+						.createExecutableExtension(DEFAULT_PROVIDER);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+			return null;
 		}
 	}
 
@@ -53,7 +66,6 @@ public class LibraryExtensions {
 				.getLibraryDescriptor();
 		return Iterables.filter(libraryDescriptor,
 				new Predicate<LibraryDescriptor>() {
-					@Override
 					public boolean apply(LibraryDescriptor input) {
 						return input.getGeneratorId().equals(generatorId)
 								|| input.getGeneratorId().equals(GLOBAL_ID);
