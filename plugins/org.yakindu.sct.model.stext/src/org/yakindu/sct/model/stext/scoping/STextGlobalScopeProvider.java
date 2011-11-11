@@ -25,14 +25,14 @@ public class STextGlobalScopeProvider extends ResourceSetGlobalScopeProvider {
 
 	@Inject
 	private DefaultGlobalScopeProvider delegate;
-
+	
 	public IScope getScope(Resource context, EReference reference,
 			Predicate<IEObjectDescription> filter) {
 		IScope scope = super.getScope(context, reference, filter);
 		IScope globalScope = delegate.getScope(context, reference, filter);
 		FilteringScope filteringScope = new FilteringScope(globalScope,
 				new Predicate<IEObjectDescription>() {
-					@Override
+					
 					public boolean apply(IEObjectDescription input) {
 						return input.getEClass() == SGraphPackage.Literals.STATECHART;
 					}
