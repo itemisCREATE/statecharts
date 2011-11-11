@@ -10,13 +10,19 @@
  */
 package org.yakindu.sct.runtime.java.test_localactions;
 
+import org.yakindu.sct.runtime.java.Event;
+import org.yakindu.sct.runtime.java.INotificationSender;
 
-public interface InterfaceDefault {
+public interface InterfaceDefault extends INotificationSender {
 	
 	public void raiseEvent1();
 	public void raiseEvent2();
 	public void raiseEvent3();
 	public void raiseEvent4();
+	public boolean isRaisedEvent5();
+		
+	public Event<Void> getEventEvent5();
+	
 	
 	public int getVarI();
 	public void setVarI(int value);	

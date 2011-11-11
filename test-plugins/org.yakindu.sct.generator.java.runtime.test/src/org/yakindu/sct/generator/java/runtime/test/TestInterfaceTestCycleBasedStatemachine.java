@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	@author markus muehlbrandt - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.generator.java.runtime.test;
 
 import static org.junit.Assert.assertEquals;
@@ -10,6 +20,12 @@ import org.junit.Test;
 import org.yakindu.sct.runtime.java.interfacetest.InterfaceTestAbstractBaseStatemachine.State;
 import org.yakindu.sct.runtime.java.interfacetest.InterfaceTestCyleBasedStatemachine;
 
+/**
+ * Testcases for 'InterfaceTest' cycle based statemachine.
+ * 
+ * @author muehlbrandt
+ *
+ */
 public class TestInterfaceTestCycleBasedStatemachine {
 
 	private InterfaceTestCyleBasedStatemachine statemachine;
@@ -26,7 +42,7 @@ public class TestInterfaceTestCycleBasedStatemachine {
 	}
 
 	@Test
-	public void testStatemachineInitialisation() {
+	public void testStatemachineEntry() {
 		setUp();
 		assertEquals("InterfaceDefault.Var2 is not correct initialized:", 2.3,
 				statemachine.getInterfaceDefault().getVarVar2(),
