@@ -22,7 +22,6 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		GeneratorEntry entry = (GeneratorEntry) config.eContainer();
 		Iterable<FeatureConfiguration> filter = Iterables.filter(
 				entry.getFeatures(), new Predicate<FeatureConfiguration>() {
-					@Override
 					public boolean apply(FeatureConfiguration input) {
 						return (input.getType().getName().equals(config
 								.getType().getName()));
