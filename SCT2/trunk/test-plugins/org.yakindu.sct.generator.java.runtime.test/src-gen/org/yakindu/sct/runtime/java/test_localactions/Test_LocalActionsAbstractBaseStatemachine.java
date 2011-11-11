@@ -138,6 +138,7 @@ entryActionsState2();
 	}
 	private void actionsState1Lr4() {
 	interfaceDefault.setVarC(interfaceDefault.getVarC() + (1));
+	interfaceDefault.raiseEvent5();
 
 	}
 	private void actionsState2Tr0() {
