@@ -14,12 +14,12 @@ T__14=14
 T__13=13
 RULE_INT=6
 RULE_WS=9
+'feature'=18
 '}'=16
 '='=19
 'for'=14
 'GeneratorModel'=13
 '::'=11
 'statechart'=17
-','=18
 '.'=12
 '{'=15

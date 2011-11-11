@@ -192,10 +192,11 @@ public class InternalSGenLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:18:7: ( ',' )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:18:9: ','
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:18:7: ( 'feature' )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:18:9: 'feature'
             {
-            match(','); 
+            match("feature"); 
+
 
             }
 
@@ -232,10 +233,10 @@ public class InternalSGenLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1175:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1175:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1172:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1172:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1175:11: ( '^' )?
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1172:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -244,7 +245,7 @@ public class InternalSGenLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1175:11: '^'
+                    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1172:11: '^'
                     {
                     match('^'); 
 
@@ -262,7 +263,7 @@ public class InternalSGenLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1175:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1172:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -311,10 +312,10 @@ public class InternalSGenLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1177:10: ( ( '0' .. '9' )+ )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1177:12: ( '0' .. '9' )+
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1174:10: ( ( '0' .. '9' )+ )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1174:12: ( '0' .. '9' )+
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1177:12: ( '0' .. '9' )+
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1174:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -328,7 +329,7 @@ public class InternalSGenLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1177:13: '0' .. '9'
+            	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1174:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -360,10 +361,10 @@ public class InternalSGenLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1179:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1179:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1176:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1176:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1179:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1176:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -381,10 +382,10 @@ public class InternalSGenLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1179:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1176:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1179:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1176:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -400,7 +401,7 @@ public class InternalSGenLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1179:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1176:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -416,7 +417,7 @@ public class InternalSGenLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1179:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1176:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -441,10 +442,10 @@ public class InternalSGenLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1179:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1176:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1179:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1176:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -460,7 +461,7 @@ public class InternalSGenLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1179:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1176:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -476,7 +477,7 @@ public class InternalSGenLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1179:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1176:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -519,12 +520,12 @@ public class InternalSGenLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1181:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1181:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1178:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1178:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1181:24: ( options {greedy=false; } : . )*
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1178:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -549,7 +550,7 @@ public class InternalSGenLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1181:52: .
+            	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1178:52: .
             	    {
             	    matchAny(); 
 
@@ -579,12 +580,12 @@ public class InternalSGenLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1183:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1183:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1180:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1180:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1183:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1180:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -597,7 +598,7 @@ public class InternalSGenLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1183:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1180:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -617,7 +618,7 @@ public class InternalSGenLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1183:40: ( ( '\\r' )? '\\n' )?
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1180:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -626,9 +627,9 @@ public class InternalSGenLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1183:41: ( '\\r' )? '\\n'
+                    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1180:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1183:41: ( '\\r' )?
+                    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1180:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -637,7 +638,7 @@ public class InternalSGenLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1183:41: '\\r'
+                            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1180:41: '\\r'
                             {
                             match('\r'); 
 
@@ -669,10 +670,10 @@ public class InternalSGenLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1185:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1185:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1182:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1182:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1185:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1182:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -726,8 +727,8 @@ public class InternalSGenLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1187:16: ( . )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1187:18: .
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1184:16: ( . )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1184:18: .
             {
             matchAny(); 
 
@@ -866,56 +867,56 @@ public class InternalSGenLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\21\1\uffff\2\25\2\uffff\1\25\2\uffff\1\21\2\uffff\3"+
-        "\21\4\uffff\1\25\1\uffff\1\25\2\uffff\1\25\7\uffff\1\25\1\45\2\25"+
-        "\1\uffff\14\25\1\64\1\25\1\uffff\2\25\1\70\1\uffff";
-    static final String DFA12_eofS =
-        "\71\uffff";
-    static final String DFA12_minS =
-        "\1\0\1\72\1\uffff\1\145\1\157\2\uffff\1\164\2\uffff\1\101\2\uffff"+
-        "\2\0\1\52\4\uffff\1\156\1\uffff\1\162\2\uffff\1\141\7\uffff\1\145"+
-        "\1\60\1\164\1\162\1\uffff\1\145\1\141\1\143\1\164\1\150\1\157\1"+
-        "\141\2\162\1\115\1\164\1\157\1\60\1\144\1\uffff\1\145\1\154\1\60"+
+        "\1\uffff\1\20\1\uffff\2\24\2\uffff\1\24\1\uffff\1\20\2\uffff\3"+
+        "\20\4\uffff\1\24\1\uffff\2\24\2\uffff\1\24\6\uffff\1\24\1\45\3\24"+
+        "\1\uffff\11\24\1\62\2\24\1\uffff\4\24\1\71\1\24\1\uffff\2\24\1\75"+
         "\1\uffff";
+    static final String DFA12_eofS =
+        "\76\uffff";
+    static final String DFA12_minS =
+        "\1\0\1\72\1\uffff\2\145\2\uffff\1\164\1\uffff\1\101\2\uffff\2\0"+
+        "\1\52\4\uffff\1\156\1\uffff\1\162\1\141\2\uffff\1\141\6\uffff\1"+
+        "\145\1\60\2\164\1\162\1\uffff\1\165\1\145\1\141\1\162\1\143\1\164"+
+        "\1\145\1\150\1\157\1\60\1\141\1\162\1\uffff\1\162\1\115\1\164\1"+
+        "\157\1\60\1\144\1\uffff\1\145\1\154\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\72\1\uffff\1\145\1\157\2\uffff\1\164\2\uffff\1\172\2"+
-        "\uffff\2\uffff\1\57\4\uffff\1\156\1\uffff\1\162\2\uffff\1\141\7"+
-        "\uffff\1\145\1\172\1\164\1\162\1\uffff\1\145\1\141\1\143\1\164\1"+
-        "\150\1\157\1\141\2\162\1\115\1\164\1\157\1\172\1\144\1\uffff\1\145"+
-        "\1\154\1\172\1\uffff";
+        "\1\uffff\1\72\1\uffff\1\145\1\157\2\uffff\1\164\1\uffff\1\172\2"+
+        "\uffff\2\uffff\1\57\4\uffff\1\156\1\uffff\1\162\1\141\2\uffff\1"+
+        "\141\6\uffff\1\145\1\172\2\164\1\162\1\uffff\1\165\1\145\1\141\1"+
+        "\162\1\143\1\164\1\145\1\150\1\157\1\172\1\141\1\162\1\uffff\1\162"+
+        "\1\115\1\164\1\157\1\172\1\144\1\uffff\1\145\1\154\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\2\uffff\1\2\2\uffff\1\5\1\6\1\uffff\1\10\1\11\1\uffff\1\12\1\13"+
-        "\3\uffff\1\17\1\20\1\1\1\2\1\uffff\1\12\1\uffff\1\5\1\6\1\uffff"+
-        "\1\10\1\11\1\13\1\14\1\15\1\16\1\17\4\uffff\1\4\16\uffff\1\7\3\uffff"+
+        "\2\uffff\1\2\2\uffff\1\5\1\6\1\uffff\1\11\1\uffff\1\12\1\13\3\uffff"+
+        "\1\17\1\20\1\1\1\2\1\uffff\1\12\2\uffff\1\5\1\6\1\uffff\1\11\1\13"+
+        "\1\14\1\15\1\16\1\17\5\uffff\1\4\14\uffff\1\10\6\uffff\1\7\3\uffff"+
         "\1\3";
     static final String DFA12_specialS =
-        "\1\2\14\uffff\1\1\1\0\52\uffff}>";
+        "\1\2\13\uffff\1\1\1\0\60\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\21\2\20\2\21\1\20\22\21\1\20\1\21\1\15\4\21\1\16\4\21\1"+
-            "\10\1\21\1\2\1\17\12\14\1\1\2\21\1\11\3\21\6\13\1\3\23\13\3"+
-            "\21\1\12\1\13\1\21\5\13\1\4\14\13\1\7\7\13\1\5\1\21\1\6\uff82"+
-            "\21",
-            "\1\22",
+            "\11\20\2\17\2\20\1\17\22\20\1\17\1\20\1\14\4\20\1\15\6\20\1"+
+            "\2\1\16\12\13\1\1\2\20\1\10\3\20\6\12\1\3\23\12\3\20\1\11\1"+
+            "\12\1\20\5\12\1\4\14\12\1\7\7\12\1\5\1\20\1\6\uff82\20",
+            "\1\21",
             "",
-            "\1\24",
-            "\1\26",
+            "\1\23",
+            "\1\26\11\uffff\1\25",
             "",
             "",
             "\1\31",
             "",
-            "",
-            "\32\25\4\uffff\1\25\1\uffff\32\25",
-            "",
-            "",
-            "\0\35",
-            "\0\35",
-            "\1\36\4\uffff\1\37",
+            "\32\24\4\uffff\1\24\1\uffff\32\24",
             "",
             "",
+            "\0\34",
+            "\0\34",
+            "\1\35\4\uffff\1\36",
             "",
+            "",
+            "",
+            "",
+            "\1\40",
             "",
             "\1\41",
-            "",
             "\1\42",
             "",
             "",
@@ -926,13 +927,12 @@ public class InternalSGenLexer extends Lexer {
             "",
             "",
             "",
-            "",
             "\1\44",
-            "\12\25\7\uffff\32\25\4\uffff\1\25\1\uffff\32\25",
+            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
             "\1\46",
             "\1\47",
-            "",
             "\1\50",
+            "",
             "\1\51",
             "\1\52",
             "\1\53",
@@ -942,14 +942,20 @@ public class InternalSGenLexer extends Lexer {
             "\1\57",
             "\1\60",
             "\1\61",
-            "\1\62",
+            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
             "\1\63",
-            "\12\25\7\uffff\32\25\4\uffff\1\25\1\uffff\32\25",
-            "\1\65",
+            "\1\64",
             "",
+            "\1\65",
             "\1\66",
             "\1\67",
-            "\12\25\7\uffff\32\25\4\uffff\1\25\1\uffff\32\25",
+            "\1\70",
+            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
+            "\1\72",
+            "",
+            "\1\73",
+            "\1\74",
+            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
             ""
     };
 
@@ -990,22 +996,22 @@ public class InternalSGenLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_14 = input.LA(1);
+                        int LA12_13 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_14>='\u0000' && LA12_14<='\uFFFF')) ) {s = 29;}
+                        if ( ((LA12_13>='\u0000' && LA12_13<='\uFFFF')) ) {s = 28;}
 
-                        else s = 17;
+                        else s = 16;
 
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA12_13 = input.LA(1);
+                        int LA12_12 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_13>='\u0000' && LA12_13<='\uFFFF')) ) {s = 29;}
+                        if ( ((LA12_12>='\u0000' && LA12_12<='\uFFFF')) ) {s = 28;}
 
-                        else s = 17;
+                        else s = 16;
 
                         if ( s>=0 ) return s;
                         break;
@@ -1027,25 +1033,23 @@ public class InternalSGenLexer extends Lexer {
 
                         else if ( (LA12_0=='s') ) {s = 7;}
 
-                        else if ( (LA12_0==',') ) {s = 8;}
+                        else if ( (LA12_0=='=') ) {s = 8;}
 
-                        else if ( (LA12_0=='=') ) {s = 9;}
+                        else if ( (LA12_0=='^') ) {s = 9;}
 
-                        else if ( (LA12_0=='^') ) {s = 10;}
+                        else if ( ((LA12_0>='A' && LA12_0<='F')||(LA12_0>='H' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='e')||(LA12_0>='g' && LA12_0<='r')||(LA12_0>='t' && LA12_0<='z')) ) {s = 10;}
 
-                        else if ( ((LA12_0>='A' && LA12_0<='F')||(LA12_0>='H' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='e')||(LA12_0>='g' && LA12_0<='r')||(LA12_0>='t' && LA12_0<='z')) ) {s = 11;}
+                        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {s = 11;}
 
-                        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {s = 12;}
+                        else if ( (LA12_0=='\"') ) {s = 12;}
 
-                        else if ( (LA12_0=='\"') ) {s = 13;}
+                        else if ( (LA12_0=='\'') ) {s = 13;}
 
-                        else if ( (LA12_0=='\'') ) {s = 14;}
+                        else if ( (LA12_0=='/') ) {s = 14;}
 
-                        else if ( (LA12_0=='/') ) {s = 15;}
+                        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 15;}
 
-                        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 16;}
-
-                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='+')||LA12_0=='-'||(LA12_0>=';' && LA12_0<='<')||(LA12_0>='>' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 17;}
+                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='-')||(LA12_0>=';' && LA12_0<='<')||(LA12_0>='>' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 16;}
 
                         if ( s>=0 ) return s;
                         break;
