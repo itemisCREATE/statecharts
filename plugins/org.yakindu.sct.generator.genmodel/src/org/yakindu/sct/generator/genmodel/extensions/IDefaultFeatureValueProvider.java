@@ -11,5 +11,8 @@ import org.yakindu.sct.model.sgraph.Statechart;
  */
 public interface IDefaultFeatureValueProvider {
 
-	public FeatureConfiguration createDefaultFeatureConfiguration(FeatureType type, Statechart statechart);
+	public FeatureConfiguration createDefaultFeatureConfiguration(
+			FeatureType type, Statechart statechart);
+
+	public boolean isProviderFor(String featureTypeName);
 }
