@@ -10,23 +10,27 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.wizard;
 
-import org.eclipse.core.resources.IResource;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-import org.eclipse.xpand2.XpandExecutionContextImpl;
-import org.eclipse.xpand2.XpandFacade;
-import org.eclipse.xpand2.output.Outlet;
-import org.eclipse.xpand2.output.OutputImpl;
-import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
+import org.eclipse.xtext.serializer.ISerializer;
+import org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator;
+import org.yakindu.sct.model.sgen.GeneratorModel;
+import org.yakindu.sct.model.sgraph.Statechart;
+
+import com.google.common.collect.Lists;
+import com.google.inject.Injector;
 
 /**
  * 
@@ -50,7 +54,7 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 
 	@Override
 	public void addPages() {
-		modelFilePage = new SGenWizardPage1("DiagramModelFile", selection,
+		modelFilePage = new SGenWizardPage1("fileName", selection,
 				"sgen");
 		modelFilePage.setTitle("YAKINDU SCT Diagram");
 		modelFilePage.setDescription("Create a new YAKINDU SCT Diagram File");
@@ -63,7 +67,14 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 			@Override
 			protected void execute(IProgressMonitor monitor)
 					throws CoreException, InterruptedException {
-				generateFile();
+				// TODO: Does not work for linked projects
+				IPath containerFullPath = modelFilePage.getContainerFullPath();
+				IPath location = ResourcesPlugin.getWorkspace().getRoot()
+						.getLocation();
+				location = location.append(containerFullPath);
+				String osString = location.toOSString();
+				System.out.println(osString);
+				createDefaultModel(osString);
 			}
 		};
 		try {
@@ -74,35 +85,18 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 		return true;
 	}
 
-	protected void generateFile() throws CoreException {
-		
-		IPath containerFullPath = modelFilePage.getContainerFullPath();
-		String outlet = containerFullPath.toFile().getAbsolutePath();
-		System.out.println(outlet);
-		
-		OutputImpl output = new OutputImpl();
-		output.addOutlet(new Outlet(false, System.getProperty("file.encoding"),
-				null, true, outlet));
-
-		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(
-				output, null);
-		execCtx.getResourceManager().setFileEncoding("Cp1252");
-		execCtx.registerMetaModel(new JavaBeansMetaModel());
-
-		XpandFacade facade = XpandFacade.create(execCtx);
-		facade.evaluate(
-				"org::yakindu::sct::generator::genmodel::ui::wizard::SGenNewProject::main",
-				getProjectInfo());
-		// TODO: Update only current project
-		ResourcesPlugin
-				.getWorkspace()
-				.getRoot()
-				.refreshLocal(IResource.DEPTH_INFINITE,
-						new NullProgressMonitor());
-	}
-
-	private Object getProjectInfo() {
-		return null;
+	private void createDefaultModel(String target) {
+		ArrayList<Statechart> statecharts = Lists.newArrayList();
+		ModelCreator creator = new ModelCreator("yakindu::java", statecharts);
+		GeneratorModel model = creator.create();
+		Injector injector = SGenActivator.getInstance().getInjector(
+				"org.yakindu.sct.generator.genmodel.SGen");
+		ISerializer serializer = injector.getInstance(ISerializer.class);
+		try {
+			serializer.serialize(model, new FileWriter(target), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public IStructuredSelection getSelection() {
