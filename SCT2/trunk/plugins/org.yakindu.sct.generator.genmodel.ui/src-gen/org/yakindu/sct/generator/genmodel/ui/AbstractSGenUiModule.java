@@ -93,6 +93,7 @@ public abstract class AbstractSGenUiModule extends DefaultUiModule {
 		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.yakindu.sct.generator.genmodel.ui.contentassist.antlr.internal.InternalSGenLexer.class);
 	}
 
+
 	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();
