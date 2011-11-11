@@ -3,25 +3,55 @@
  */
 package org.yakindu.sct.generator.genmodel.formatting;
 
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
+import org.eclipse.xtext.util.Pair;
+import org.yakindu.sct.generator.genmodel.services.SGenGrammarAccess;
 
 /**
  * This class contains custom formatting description.
  * 
  * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#formatting
- * on how and when to use it 
+ * on how and when to use it
  * 
- * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
+ * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an
+ * example
  */
 public class SGenFormatter extends AbstractDeclarativeFormatter {
-	
+
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
-// It's usually a good idea to activate the following three statements.
-// They will add and preserve newlines around comments
-//		c.setLinewrap(0, 1, 2).before(getGrammarAccess().getSL_COMMENTRule());
-//		c.setLinewrap(0, 1, 2).before(getGrammarAccess().getML_COMMENTRule());
-//		c.setLinewrap(0, 1, 1).after(getGrammarAccess().getML_COMMENTRule());
+		// It's usually a good idea to activate the following three statements.
+		// They will add and preserve newlines around comments
+		// c.setLinewrap(0, 1,
+		// 2).before(getGrammarAccess().getSL_COMMENTRule());
+		// c.setLinewrap(0, 1,
+		// 2).before(getGrammarAccess().getML_COMMENTRule());
+		// c.setLinewrap(0, 1, 1).after(getGrammarAccess().getML_COMMENTRule());
+
+		// Find elements which declare their body in curly brackets.
+		// - Increment Indentation for the body.
+		// - Line wrap before opening and after closing element
+		for (Pair<Keyword, Keyword> pair : grammar.findKeywordPairs("{", "}")) {
+			c.setIndentation(pair.getFirst(), pair.getSecond());
+			c.setLinewrap().after(pair.getFirst());
+			c.setLinewrap().around(pair.getSecond());
+
+			Keyword openingBrace = pair.getFirst();
+			Group containingGroup = (Group) openingBrace.eContainer();
+
+			// Top-most elements with brackets: Insert blank lines
+			// if (containingGroup.eContainer().eContainer() instanceof Grammar)
+			// {
+			c.setLinewrap(1, 2, 2).before(containingGroup);
+			c.setLinewrap(1, 2, 2).after(containingGroup);
+			// }
+		}
+
+		SGenGrammarAccess g = (SGenGrammarAccess) getGrammarAccess();
+		c.setLinewrap().around(g.getFeatureConfigurationRule());
+		c.setLinewrap().around(g.getFeatureParameterValueRule());
 	}
 }
