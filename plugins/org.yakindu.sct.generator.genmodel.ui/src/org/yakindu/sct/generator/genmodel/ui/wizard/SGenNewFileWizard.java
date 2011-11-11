@@ -24,12 +24,14 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
@@ -45,6 +47,12 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 
 	private IStructuredSelection selection;
 
+	private SGenWizardPage2 generatorConfigPage;
+
+	@Inject
+	private IResourceDescriptions resourceDescriptions;
+
+	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 		setWindowTitle("New Yakindu SGen Model");
@@ -59,6 +67,12 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 		modelFilePage.setTitle("YAKINDU SCT Diagram");
 		modelFilePage.setDescription("Create a new YAKINDU SCT Diagram File");
 		addPage(modelFilePage);
+		generatorConfigPage = new SGenWizardPage2("Statecharts",
+				resourceDescriptions);
+		generatorConfigPage.setTitle("Generator Configuration");
+		generatorConfigPage
+				.setDescription("Select the Statecharts and the Generator type");
+		addPage(generatorConfigPage);
 	}
 
 	@Override
