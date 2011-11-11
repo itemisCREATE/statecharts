@@ -14,12 +14,12 @@ Contributors:
 «IMPORT sgraph»
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
-«DEFINE file FOR ExecutionFlow-»
-«FILE 'org/yakindu/sct/runtime/java/base/ITimedStatemachine.java'-»
+«DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
+«FILE entry.getBasePackagePath()+'/ITimedStatemachine.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.base;
+package «entry.getBasePackageName()»;
 
-import org.yakindu.sct.runtime.java.base.notification.INotificationListener;
+import «entry.getBasePackageName()».INotificationListener;
 
 public interface ITimedStatemachine extends
 		IStatemachine, INotificationListener {

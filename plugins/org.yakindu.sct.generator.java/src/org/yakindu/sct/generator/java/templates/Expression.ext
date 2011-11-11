@@ -86,7 +86,7 @@ String toCode(NumericalMultiplyDivideExpression expression) :
 
 String toCode(ElementReferenceExpression exp) :
     if (EventDefinition.isInstance(exp.value)) then
-    	"getOccuredEvents().contains("+((EventDefinition)exp.value).getContext()+((EventDefinition)exp.value).getName()+")"
+    	"getOccuredEvents().contains("+((EventDefinition)exp.value).getContext().toFirstLower()+"get"+((EventDefinition)exp.value).getName()+"())"
     else if (VariableDefinition.isInstance(exp.value)) then
     	getContext((VariableDefinition)exp.value)+"getVar"+exp.value.name.toFirstUpper()+"()"
     else if (TimeEvent.isInstance(exp.value)) then

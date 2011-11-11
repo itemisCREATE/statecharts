@@ -15,11 +15,11 @@ Contributors:
 
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
-«DEFINE file FOR ExecutionFlow-»
+«DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
 «IF name != null-»
-«FILE 'org/yakindu/sct/runtime/java/base/Event.java'-»
+«FILE entry.getBasePackagePath()+'/Event.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.base;
+package «entry.getBasePackageName()»;
 
 public class Event<DataType> {
 	

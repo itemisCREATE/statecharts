@@ -144,25 +144,25 @@ else {
 	}
 «ENDDEFINE»
 
-«DEFINE file FOR ExecutionFlow-»
-«FILE getCustomPackage()+getBaseStatemachineName()+'.java'-»
+«DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
+«FILE getImplementationPackagePath(entry)+"/"+getBaseStatemachineName()+'.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.«getStatemachineName().toLowerCase()»;
+package «getImplementationPackageName(entry)»;
 
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.yakindu.sct.runtime.java.base.Event;
+import «entry.getBasePackageName()».Event;
 «IF getTimeEvents().size > 0 -»
-import org.yakindu.sct.runtime.java.base.TimeEvent;
+import «entry.getBasePackageName()».TimeEvent;
 «ENDIF-»
-import org.yakindu.sct.runtime.java.base.ITimedStatemachine;
-import org.yakindu.sct.runtime.java.base.ITimerHandler;
-import org.yakindu.sct.runtime.java.base.TimerHandler;
-import org.yakindu.sct.runtime.java.base.notification.EventNotification;
-import org.yakindu.sct.runtime.java.base.notification.Notification;
+import «entry.getBasePackageName()».ITimedStatemachine;
+import «entry.getBasePackageName()».ITimerHandler;
+import «entry.getBasePackageName()».TimerHandler;
+import «entry.getBasePackageName()».EventNotification;
+import «entry.getBasePackageName()».Notification;
 
 public abstract class «getBaseStatemachineName()» implements ITimedStatemachine {
 	
@@ -282,7 +282,7 @@ public abstract class «getBaseStatemachineName()» implements ITimedStatemachine 
 «EXPAND EnterMethodImplement FOREACH this.states-»
 «EXPAND ExitMethodImplement FOREACH this.states-»
 
-	public void runCycle(Collection<?> events) {
+	protected void runCycle(Collection<?> events) {
 		getOutEvents().clear();
 		for (State state : activeStates) {
 			switch (state) {
