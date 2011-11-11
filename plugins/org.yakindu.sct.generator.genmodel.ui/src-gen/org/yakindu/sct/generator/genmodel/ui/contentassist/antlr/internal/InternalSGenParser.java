@@ -23,7 +23,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalSGenParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'::'", "'.'", "'GeneratorModel'", "'for'", "'{'", "'}'", "'statechart'", "','", "'='"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'::'", "'.'", "'GeneratorModel'", "'for'", "'{'", "'}'", "'statechart'", "'feature'", "'='"
     };
     public static final int RULE_ID=4;
     public static final int RULE_ANY_OTHER=10;
@@ -1337,7 +1337,7 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
                 int alt3=2;
                 int LA3_0 = input.LA(1);
 
-                if ( (LA3_0==RULE_ID) ) {
+                if ( (LA3_0==18) ) {
                     alt3=1;
                 }
 
@@ -1491,41 +1491,31 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureConfiguration__Group__0__Impl"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:601:1: rule__FeatureConfiguration__Group__0__Impl : ( ( rule__FeatureConfiguration__TypeAssignment_0 ) ) ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:601:1: rule__FeatureConfiguration__Group__0__Impl : ( () ) ;
     public final void rule__FeatureConfiguration__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:605:1: ( ( ( rule__FeatureConfiguration__TypeAssignment_0 ) ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:606:1: ( ( rule__FeatureConfiguration__TypeAssignment_0 ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:605:1: ( ( () ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:606:1: ( () )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:606:1: ( ( rule__FeatureConfiguration__TypeAssignment_0 ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:607:1: ( rule__FeatureConfiguration__TypeAssignment_0 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:606:1: ( () )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:607:1: ()
             {
-             before(grammarAccess.getFeatureConfigurationAccess().getTypeAssignment_0()); 
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:608:1: ( rule__FeatureConfiguration__TypeAssignment_0 )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:608:2: rule__FeatureConfiguration__TypeAssignment_0
+             before(grammarAccess.getFeatureConfigurationAccess().getFeatureConfigurationAction_0()); 
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:608:1: ()
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:610:1: 
             {
-            pushFollow(FOLLOW_rule__FeatureConfiguration__TypeAssignment_0_in_rule__FeatureConfiguration__Group__0__Impl1161);
-            rule__FeatureConfiguration__TypeAssignment_0();
-
-            state._fsp--;
-
-
             }
 
-             after(grammarAccess.getFeatureConfigurationAccess().getTypeAssignment_0()); 
+             after(grammarAccess.getFeatureConfigurationAccess().getFeatureConfigurationAction_0()); 
 
             }
 
 
             }
 
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
         }
         finally {
 
@@ -1538,21 +1528,21 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureConfiguration__Group__1"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:618:1: rule__FeatureConfiguration__Group__1 : rule__FeatureConfiguration__Group__1__Impl rule__FeatureConfiguration__Group__2 ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:620:1: rule__FeatureConfiguration__Group__1 : rule__FeatureConfiguration__Group__1__Impl rule__FeatureConfiguration__Group__2 ;
     public final void rule__FeatureConfiguration__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:622:1: ( rule__FeatureConfiguration__Group__1__Impl rule__FeatureConfiguration__Group__2 )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:623:2: rule__FeatureConfiguration__Group__1__Impl rule__FeatureConfiguration__Group__2
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:624:1: ( rule__FeatureConfiguration__Group__1__Impl rule__FeatureConfiguration__Group__2 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:625:2: rule__FeatureConfiguration__Group__1__Impl rule__FeatureConfiguration__Group__2
             {
-            pushFollow(FOLLOW_rule__FeatureConfiguration__Group__1__Impl_in_rule__FeatureConfiguration__Group__11191);
+            pushFollow(FOLLOW_rule__FeatureConfiguration__Group__1__Impl_in_rule__FeatureConfiguration__Group__11192);
             rule__FeatureConfiguration__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__FeatureConfiguration__Group__2_in_rule__FeatureConfiguration__Group__11194);
+            pushFollow(FOLLOW_rule__FeatureConfiguration__Group__2_in_rule__FeatureConfiguration__Group__11195);
             rule__FeatureConfiguration__Group__2();
 
             state._fsp--;
@@ -1576,21 +1566,21 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureConfiguration__Group__1__Impl"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:630:1: rule__FeatureConfiguration__Group__1__Impl : ( '{' ) ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:632:1: rule__FeatureConfiguration__Group__1__Impl : ( 'feature' ) ;
     public final void rule__FeatureConfiguration__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:634:1: ( ( '{' ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:635:1: ( '{' )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:636:1: ( ( 'feature' ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:637:1: ( 'feature' )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:635:1: ( '{' )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:636:1: '{'
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:637:1: ( 'feature' )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:638:1: 'feature'
             {
-             before(grammarAccess.getFeatureConfigurationAccess().getLeftCurlyBracketKeyword_1()); 
-            match(input,15,FOLLOW_15_in_rule__FeatureConfiguration__Group__1__Impl1222); 
-             after(grammarAccess.getFeatureConfigurationAccess().getLeftCurlyBracketKeyword_1()); 
+             before(grammarAccess.getFeatureConfigurationAccess().getFeatureKeyword_1()); 
+            match(input,18,FOLLOW_18_in_rule__FeatureConfiguration__Group__1__Impl1223); 
+             after(grammarAccess.getFeatureConfigurationAccess().getFeatureKeyword_1()); 
 
             }
 
@@ -1613,21 +1603,21 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureConfiguration__Group__2"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:649:1: rule__FeatureConfiguration__Group__2 : rule__FeatureConfiguration__Group__2__Impl rule__FeatureConfiguration__Group__3 ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:651:1: rule__FeatureConfiguration__Group__2 : rule__FeatureConfiguration__Group__2__Impl rule__FeatureConfiguration__Group__3 ;
     public final void rule__FeatureConfiguration__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:653:1: ( rule__FeatureConfiguration__Group__2__Impl rule__FeatureConfiguration__Group__3 )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:654:2: rule__FeatureConfiguration__Group__2__Impl rule__FeatureConfiguration__Group__3
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:655:1: ( rule__FeatureConfiguration__Group__2__Impl rule__FeatureConfiguration__Group__3 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:656:2: rule__FeatureConfiguration__Group__2__Impl rule__FeatureConfiguration__Group__3
             {
-            pushFollow(FOLLOW_rule__FeatureConfiguration__Group__2__Impl_in_rule__FeatureConfiguration__Group__21253);
+            pushFollow(FOLLOW_rule__FeatureConfiguration__Group__2__Impl_in_rule__FeatureConfiguration__Group__21254);
             rule__FeatureConfiguration__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__FeatureConfiguration__Group__3_in_rule__FeatureConfiguration__Group__21256);
+            pushFollow(FOLLOW_rule__FeatureConfiguration__Group__3_in_rule__FeatureConfiguration__Group__21257);
             rule__FeatureConfiguration__Group__3();
 
             state._fsp--;
@@ -1651,31 +1641,31 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureConfiguration__Group__2__Impl"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:661:1: rule__FeatureConfiguration__Group__2__Impl : ( ( rule__FeatureConfiguration__ParameterValuesAssignment_2 ) ) ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:663:1: rule__FeatureConfiguration__Group__2__Impl : ( ( rule__FeatureConfiguration__TypeAssignment_2 ) ) ;
     public final void rule__FeatureConfiguration__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:665:1: ( ( ( rule__FeatureConfiguration__ParameterValuesAssignment_2 ) ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:666:1: ( ( rule__FeatureConfiguration__ParameterValuesAssignment_2 ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:667:1: ( ( ( rule__FeatureConfiguration__TypeAssignment_2 ) ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:668:1: ( ( rule__FeatureConfiguration__TypeAssignment_2 ) )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:666:1: ( ( rule__FeatureConfiguration__ParameterValuesAssignment_2 ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:667:1: ( rule__FeatureConfiguration__ParameterValuesAssignment_2 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:668:1: ( ( rule__FeatureConfiguration__TypeAssignment_2 ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:669:1: ( rule__FeatureConfiguration__TypeAssignment_2 )
             {
-             before(grammarAccess.getFeatureConfigurationAccess().getParameterValuesAssignment_2()); 
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:668:1: ( rule__FeatureConfiguration__ParameterValuesAssignment_2 )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:668:2: rule__FeatureConfiguration__ParameterValuesAssignment_2
+             before(grammarAccess.getFeatureConfigurationAccess().getTypeAssignment_2()); 
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:670:1: ( rule__FeatureConfiguration__TypeAssignment_2 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:670:2: rule__FeatureConfiguration__TypeAssignment_2
             {
-            pushFollow(FOLLOW_rule__FeatureConfiguration__ParameterValuesAssignment_2_in_rule__FeatureConfiguration__Group__2__Impl1283);
-            rule__FeatureConfiguration__ParameterValuesAssignment_2();
+            pushFollow(FOLLOW_rule__FeatureConfiguration__TypeAssignment_2_in_rule__FeatureConfiguration__Group__2__Impl1284);
+            rule__FeatureConfiguration__TypeAssignment_2();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getFeatureConfigurationAccess().getParameterValuesAssignment_2()); 
+             after(grammarAccess.getFeatureConfigurationAccess().getTypeAssignment_2()); 
 
             }
 
@@ -1698,21 +1688,21 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureConfiguration__Group__3"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:678:1: rule__FeatureConfiguration__Group__3 : rule__FeatureConfiguration__Group__3__Impl rule__FeatureConfiguration__Group__4 ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:680:1: rule__FeatureConfiguration__Group__3 : rule__FeatureConfiguration__Group__3__Impl rule__FeatureConfiguration__Group__4 ;
     public final void rule__FeatureConfiguration__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:682:1: ( rule__FeatureConfiguration__Group__3__Impl rule__FeatureConfiguration__Group__4 )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:683:2: rule__FeatureConfiguration__Group__3__Impl rule__FeatureConfiguration__Group__4
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:684:1: ( rule__FeatureConfiguration__Group__3__Impl rule__FeatureConfiguration__Group__4 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:685:2: rule__FeatureConfiguration__Group__3__Impl rule__FeatureConfiguration__Group__4
             {
-            pushFollow(FOLLOW_rule__FeatureConfiguration__Group__3__Impl_in_rule__FeatureConfiguration__Group__31313);
+            pushFollow(FOLLOW_rule__FeatureConfiguration__Group__3__Impl_in_rule__FeatureConfiguration__Group__31314);
             rule__FeatureConfiguration__Group__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__FeatureConfiguration__Group__4_in_rule__FeatureConfiguration__Group__31316);
+            pushFollow(FOLLOW_rule__FeatureConfiguration__Group__4_in_rule__FeatureConfiguration__Group__31317);
             rule__FeatureConfiguration__Group__4();
 
             state._fsp--;
@@ -1736,49 +1726,21 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureConfiguration__Group__3__Impl"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:690:1: rule__FeatureConfiguration__Group__3__Impl : ( ( rule__FeatureConfiguration__Group_3__0 )* ) ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:692:1: rule__FeatureConfiguration__Group__3__Impl : ( '{' ) ;
     public final void rule__FeatureConfiguration__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:694:1: ( ( ( rule__FeatureConfiguration__Group_3__0 )* ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:695:1: ( ( rule__FeatureConfiguration__Group_3__0 )* )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:696:1: ( ( '{' ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:697:1: ( '{' )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:695:1: ( ( rule__FeatureConfiguration__Group_3__0 )* )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:696:1: ( rule__FeatureConfiguration__Group_3__0 )*
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:697:1: ( '{' )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:698:1: '{'
             {
-             before(grammarAccess.getFeatureConfigurationAccess().getGroup_3()); 
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:697:1: ( rule__FeatureConfiguration__Group_3__0 )*
-            loop4:
-            do {
-                int alt4=2;
-                int LA4_0 = input.LA(1);
-
-                if ( (LA4_0==18) ) {
-                    alt4=1;
-                }
-
-
-                switch (alt4) {
-            	case 1 :
-            	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:697:2: rule__FeatureConfiguration__Group_3__0
-            	    {
-            	    pushFollow(FOLLOW_rule__FeatureConfiguration__Group_3__0_in_rule__FeatureConfiguration__Group__3__Impl1343);
-            	    rule__FeatureConfiguration__Group_3__0();
-
-            	    state._fsp--;
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop4;
-                }
-            } while (true);
-
-             after(grammarAccess.getFeatureConfigurationAccess().getGroup_3()); 
+             before(grammarAccess.getFeatureConfigurationAccess().getLeftCurlyBracketKeyword_3()); 
+            match(input,15,FOLLOW_15_in_rule__FeatureConfiguration__Group__3__Impl1345); 
+             after(grammarAccess.getFeatureConfigurationAccess().getLeftCurlyBracketKeyword_3()); 
 
             }
 
@@ -1801,17 +1763,22 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureConfiguration__Group__4"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:707:1: rule__FeatureConfiguration__Group__4 : rule__FeatureConfiguration__Group__4__Impl ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:711:1: rule__FeatureConfiguration__Group__4 : rule__FeatureConfiguration__Group__4__Impl rule__FeatureConfiguration__Group__5 ;
     public final void rule__FeatureConfiguration__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:711:1: ( rule__FeatureConfiguration__Group__4__Impl )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:712:2: rule__FeatureConfiguration__Group__4__Impl
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:715:1: ( rule__FeatureConfiguration__Group__4__Impl rule__FeatureConfiguration__Group__5 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:716:2: rule__FeatureConfiguration__Group__4__Impl rule__FeatureConfiguration__Group__5
             {
-            pushFollow(FOLLOW_rule__FeatureConfiguration__Group__4__Impl_in_rule__FeatureConfiguration__Group__41374);
+            pushFollow(FOLLOW_rule__FeatureConfiguration__Group__4__Impl_in_rule__FeatureConfiguration__Group__41376);
             rule__FeatureConfiguration__Group__4__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_rule__FeatureConfiguration__Group__5_in_rule__FeatureConfiguration__Group__41379);
+            rule__FeatureConfiguration__Group__5();
 
             state._fsp--;
 
@@ -1834,21 +1801,74 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureConfiguration__Group__4__Impl"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:718:1: rule__FeatureConfiguration__Group__4__Impl : ( '}' ) ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:723:1: rule__FeatureConfiguration__Group__4__Impl : ( ( ( rule__FeatureConfiguration__ParameterValuesAssignment_4 ) ) ( ( rule__FeatureConfiguration__ParameterValuesAssignment_4 )* ) ) ;
     public final void rule__FeatureConfiguration__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:722:1: ( ( '}' ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:723:1: ( '}' )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:727:1: ( ( ( ( rule__FeatureConfiguration__ParameterValuesAssignment_4 ) ) ( ( rule__FeatureConfiguration__ParameterValuesAssignment_4 )* ) ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:728:1: ( ( ( rule__FeatureConfiguration__ParameterValuesAssignment_4 ) ) ( ( rule__FeatureConfiguration__ParameterValuesAssignment_4 )* ) )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:723:1: ( '}' )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:724:1: '}'
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:728:1: ( ( ( rule__FeatureConfiguration__ParameterValuesAssignment_4 ) ) ( ( rule__FeatureConfiguration__ParameterValuesAssignment_4 )* ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:729:1: ( ( rule__FeatureConfiguration__ParameterValuesAssignment_4 ) ) ( ( rule__FeatureConfiguration__ParameterValuesAssignment_4 )* )
             {
-             before(grammarAccess.getFeatureConfigurationAccess().getRightCurlyBracketKeyword_4()); 
-            match(input,16,FOLLOW_16_in_rule__FeatureConfiguration__Group__4__Impl1402); 
-             after(grammarAccess.getFeatureConfigurationAccess().getRightCurlyBracketKeyword_4()); 
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:729:1: ( ( rule__FeatureConfiguration__ParameterValuesAssignment_4 ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:730:1: ( rule__FeatureConfiguration__ParameterValuesAssignment_4 )
+            {
+             before(grammarAccess.getFeatureConfigurationAccess().getParameterValuesAssignment_4()); 
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:731:1: ( rule__FeatureConfiguration__ParameterValuesAssignment_4 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:731:2: rule__FeatureConfiguration__ParameterValuesAssignment_4
+            {
+            pushFollow(FOLLOW_rule__FeatureConfiguration__ParameterValuesAssignment_4_in_rule__FeatureConfiguration__Group__4__Impl1408);
+            rule__FeatureConfiguration__ParameterValuesAssignment_4();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getFeatureConfigurationAccess().getParameterValuesAssignment_4()); 
+
+            }
+
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:734:1: ( ( rule__FeatureConfiguration__ParameterValuesAssignment_4 )* )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:735:1: ( rule__FeatureConfiguration__ParameterValuesAssignment_4 )*
+            {
+             before(grammarAccess.getFeatureConfigurationAccess().getParameterValuesAssignment_4()); 
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:736:1: ( rule__FeatureConfiguration__ParameterValuesAssignment_4 )*
+            loop4:
+            do {
+                int alt4=2;
+                int LA4_0 = input.LA(1);
+
+                if ( (LA4_0==RULE_ID) ) {
+                    alt4=1;
+                }
+
+
+                switch (alt4) {
+            	case 1 :
+            	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:736:2: rule__FeatureConfiguration__ParameterValuesAssignment_4
+            	    {
+            	    pushFollow(FOLLOW_rule__FeatureConfiguration__ParameterValuesAssignment_4_in_rule__FeatureConfiguration__Group__4__Impl1420);
+            	    rule__FeatureConfiguration__ParameterValuesAssignment_4();
+
+            	    state._fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop4;
+                }
+            } while (true);
+
+             after(grammarAccess.getFeatureConfigurationAccess().getParameterValuesAssignment_4()); 
+
+            }
+
 
             }
 
@@ -1870,23 +1890,18 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__FeatureConfiguration__Group__4__Impl"
 
 
-    // $ANTLR start "rule__FeatureConfiguration__Group_3__0"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:747:1: rule__FeatureConfiguration__Group_3__0 : rule__FeatureConfiguration__Group_3__0__Impl rule__FeatureConfiguration__Group_3__1 ;
-    public final void rule__FeatureConfiguration__Group_3__0() throws RecognitionException {
+    // $ANTLR start "rule__FeatureConfiguration__Group__5"
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:747:1: rule__FeatureConfiguration__Group__5 : rule__FeatureConfiguration__Group__5__Impl ;
+    public final void rule__FeatureConfiguration__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:751:1: ( rule__FeatureConfiguration__Group_3__0__Impl rule__FeatureConfiguration__Group_3__1 )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:752:2: rule__FeatureConfiguration__Group_3__0__Impl rule__FeatureConfiguration__Group_3__1
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:751:1: ( rule__FeatureConfiguration__Group__5__Impl )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:752:2: rule__FeatureConfiguration__Group__5__Impl
             {
-            pushFollow(FOLLOW_rule__FeatureConfiguration__Group_3__0__Impl_in_rule__FeatureConfiguration__Group_3__01443);
-            rule__FeatureConfiguration__Group_3__0__Impl();
-
-            state._fsp--;
-
-            pushFollow(FOLLOW_rule__FeatureConfiguration__Group_3__1_in_rule__FeatureConfiguration__Group_3__01446);
-            rule__FeatureConfiguration__Group_3__1();
+            pushFollow(FOLLOW_rule__FeatureConfiguration__Group__5__Impl_in_rule__FeatureConfiguration__Group__51453);
+            rule__FeatureConfiguration__Group__5__Impl();
 
             state._fsp--;
 
@@ -1905,25 +1920,25 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__FeatureConfiguration__Group_3__0"
+    // $ANTLR end "rule__FeatureConfiguration__Group__5"
 
 
-    // $ANTLR start "rule__FeatureConfiguration__Group_3__0__Impl"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:759:1: rule__FeatureConfiguration__Group_3__0__Impl : ( ',' ) ;
-    public final void rule__FeatureConfiguration__Group_3__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__FeatureConfiguration__Group__5__Impl"
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:758:1: rule__FeatureConfiguration__Group__5__Impl : ( '}' ) ;
+    public final void rule__FeatureConfiguration__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:763:1: ( ( ',' ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:764:1: ( ',' )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:762:1: ( ( '}' ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:763:1: ( '}' )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:764:1: ( ',' )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:765:1: ','
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:763:1: ( '}' )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:764:1: '}'
             {
-             before(grammarAccess.getFeatureConfigurationAccess().getCommaKeyword_3_0()); 
-            match(input,18,FOLLOW_18_in_rule__FeatureConfiguration__Group_3__0__Impl1474); 
-             after(grammarAccess.getFeatureConfigurationAccess().getCommaKeyword_3_0()); 
+             before(grammarAccess.getFeatureConfigurationAccess().getRightCurlyBracketKeyword_5()); 
+            match(input,16,FOLLOW_16_in_rule__FeatureConfiguration__Group__5__Impl1481); 
+             after(grammarAccess.getFeatureConfigurationAccess().getRightCurlyBracketKeyword_5()); 
 
             }
 
@@ -1942,105 +1957,25 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__FeatureConfiguration__Group_3__0__Impl"
-
-
-    // $ANTLR start "rule__FeatureConfiguration__Group_3__1"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:778:1: rule__FeatureConfiguration__Group_3__1 : rule__FeatureConfiguration__Group_3__1__Impl ;
-    public final void rule__FeatureConfiguration__Group_3__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:782:1: ( rule__FeatureConfiguration__Group_3__1__Impl )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:783:2: rule__FeatureConfiguration__Group_3__1__Impl
-            {
-            pushFollow(FOLLOW_rule__FeatureConfiguration__Group_3__1__Impl_in_rule__FeatureConfiguration__Group_3__11505);
-            rule__FeatureConfiguration__Group_3__1__Impl();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__FeatureConfiguration__Group_3__1"
-
-
-    // $ANTLR start "rule__FeatureConfiguration__Group_3__1__Impl"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:789:1: rule__FeatureConfiguration__Group_3__1__Impl : ( ( rule__FeatureConfiguration__ParameterValuesAssignment_3_1 ) ) ;
-    public final void rule__FeatureConfiguration__Group_3__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:793:1: ( ( ( rule__FeatureConfiguration__ParameterValuesAssignment_3_1 ) ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:794:1: ( ( rule__FeatureConfiguration__ParameterValuesAssignment_3_1 ) )
-            {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:794:1: ( ( rule__FeatureConfiguration__ParameterValuesAssignment_3_1 ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:795:1: ( rule__FeatureConfiguration__ParameterValuesAssignment_3_1 )
-            {
-             before(grammarAccess.getFeatureConfigurationAccess().getParameterValuesAssignment_3_1()); 
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:796:1: ( rule__FeatureConfiguration__ParameterValuesAssignment_3_1 )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:796:2: rule__FeatureConfiguration__ParameterValuesAssignment_3_1
-            {
-            pushFollow(FOLLOW_rule__FeatureConfiguration__ParameterValuesAssignment_3_1_in_rule__FeatureConfiguration__Group_3__1__Impl1532);
-            rule__FeatureConfiguration__ParameterValuesAssignment_3_1();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getFeatureConfigurationAccess().getParameterValuesAssignment_3_1()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__FeatureConfiguration__Group_3__1__Impl"
+    // $ANTLR end "rule__FeatureConfiguration__Group__5__Impl"
 
 
     // $ANTLR start "rule__FeatureParameterValue__Group__0"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:810:1: rule__FeatureParameterValue__Group__0 : rule__FeatureParameterValue__Group__0__Impl rule__FeatureParameterValue__Group__1 ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:789:1: rule__FeatureParameterValue__Group__0 : rule__FeatureParameterValue__Group__0__Impl rule__FeatureParameterValue__Group__1 ;
     public final void rule__FeatureParameterValue__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:814:1: ( rule__FeatureParameterValue__Group__0__Impl rule__FeatureParameterValue__Group__1 )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:815:2: rule__FeatureParameterValue__Group__0__Impl rule__FeatureParameterValue__Group__1
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:793:1: ( rule__FeatureParameterValue__Group__0__Impl rule__FeatureParameterValue__Group__1 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:794:2: rule__FeatureParameterValue__Group__0__Impl rule__FeatureParameterValue__Group__1
             {
-            pushFollow(FOLLOW_rule__FeatureParameterValue__Group__0__Impl_in_rule__FeatureParameterValue__Group__01566);
+            pushFollow(FOLLOW_rule__FeatureParameterValue__Group__0__Impl_in_rule__FeatureParameterValue__Group__01524);
             rule__FeatureParameterValue__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__FeatureParameterValue__Group__1_in_rule__FeatureParameterValue__Group__01569);
+            pushFollow(FOLLOW_rule__FeatureParameterValue__Group__1_in_rule__FeatureParameterValue__Group__01527);
             rule__FeatureParameterValue__Group__1();
 
             state._fsp--;
@@ -2064,41 +1999,31 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureParameterValue__Group__0__Impl"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:822:1: rule__FeatureParameterValue__Group__0__Impl : ( ( rule__FeatureParameterValue__ParameterAssignment_0 ) ) ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:801:1: rule__FeatureParameterValue__Group__0__Impl : ( () ) ;
     public final void rule__FeatureParameterValue__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:826:1: ( ( ( rule__FeatureParameterValue__ParameterAssignment_0 ) ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:827:1: ( ( rule__FeatureParameterValue__ParameterAssignment_0 ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:805:1: ( ( () ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:806:1: ( () )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:827:1: ( ( rule__FeatureParameterValue__ParameterAssignment_0 ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:828:1: ( rule__FeatureParameterValue__ParameterAssignment_0 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:806:1: ( () )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:807:1: ()
             {
-             before(grammarAccess.getFeatureParameterValueAccess().getParameterAssignment_0()); 
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:829:1: ( rule__FeatureParameterValue__ParameterAssignment_0 )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:829:2: rule__FeatureParameterValue__ParameterAssignment_0
+             before(grammarAccess.getFeatureParameterValueAccess().getFeatureParameterValueAction_0()); 
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:808:1: ()
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:810:1: 
             {
-            pushFollow(FOLLOW_rule__FeatureParameterValue__ParameterAssignment_0_in_rule__FeatureParameterValue__Group__0__Impl1596);
-            rule__FeatureParameterValue__ParameterAssignment_0();
-
-            state._fsp--;
-
-
             }
 
-             after(grammarAccess.getFeatureParameterValueAccess().getParameterAssignment_0()); 
+             after(grammarAccess.getFeatureParameterValueAccess().getFeatureParameterValueAction_0()); 
 
             }
 
 
             }
 
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
         }
         finally {
 
@@ -2111,21 +2036,21 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureParameterValue__Group__1"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:839:1: rule__FeatureParameterValue__Group__1 : rule__FeatureParameterValue__Group__1__Impl rule__FeatureParameterValue__Group__2 ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:820:1: rule__FeatureParameterValue__Group__1 : rule__FeatureParameterValue__Group__1__Impl rule__FeatureParameterValue__Group__2 ;
     public final void rule__FeatureParameterValue__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:843:1: ( rule__FeatureParameterValue__Group__1__Impl rule__FeatureParameterValue__Group__2 )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:844:2: rule__FeatureParameterValue__Group__1__Impl rule__FeatureParameterValue__Group__2
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:824:1: ( rule__FeatureParameterValue__Group__1__Impl rule__FeatureParameterValue__Group__2 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:825:2: rule__FeatureParameterValue__Group__1__Impl rule__FeatureParameterValue__Group__2
             {
-            pushFollow(FOLLOW_rule__FeatureParameterValue__Group__1__Impl_in_rule__FeatureParameterValue__Group__11626);
+            pushFollow(FOLLOW_rule__FeatureParameterValue__Group__1__Impl_in_rule__FeatureParameterValue__Group__11585);
             rule__FeatureParameterValue__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__FeatureParameterValue__Group__2_in_rule__FeatureParameterValue__Group__11629);
+            pushFollow(FOLLOW_rule__FeatureParameterValue__Group__2_in_rule__FeatureParameterValue__Group__11588);
             rule__FeatureParameterValue__Group__2();
 
             state._fsp--;
@@ -2149,21 +2074,31 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureParameterValue__Group__1__Impl"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:851:1: rule__FeatureParameterValue__Group__1__Impl : ( '=' ) ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:832:1: rule__FeatureParameterValue__Group__1__Impl : ( ( rule__FeatureParameterValue__ParameterAssignment_1 ) ) ;
     public final void rule__FeatureParameterValue__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:855:1: ( ( '=' ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:856:1: ( '=' )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:836:1: ( ( ( rule__FeatureParameterValue__ParameterAssignment_1 ) ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:837:1: ( ( rule__FeatureParameterValue__ParameterAssignment_1 ) )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:856:1: ( '=' )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:857:1: '='
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:837:1: ( ( rule__FeatureParameterValue__ParameterAssignment_1 ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:838:1: ( rule__FeatureParameterValue__ParameterAssignment_1 )
             {
-             before(grammarAccess.getFeatureParameterValueAccess().getEqualsSignKeyword_1()); 
-            match(input,19,FOLLOW_19_in_rule__FeatureParameterValue__Group__1__Impl1657); 
-             after(grammarAccess.getFeatureParameterValueAccess().getEqualsSignKeyword_1()); 
+             before(grammarAccess.getFeatureParameterValueAccess().getParameterAssignment_1()); 
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:839:1: ( rule__FeatureParameterValue__ParameterAssignment_1 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:839:2: rule__FeatureParameterValue__ParameterAssignment_1
+            {
+            pushFollow(FOLLOW_rule__FeatureParameterValue__ParameterAssignment_1_in_rule__FeatureParameterValue__Group__1__Impl1615);
+            rule__FeatureParameterValue__ParameterAssignment_1();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getFeatureParameterValueAccess().getParameterAssignment_1()); 
 
             }
 
@@ -2186,17 +2121,22 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureParameterValue__Group__2"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:870:1: rule__FeatureParameterValue__Group__2 : rule__FeatureParameterValue__Group__2__Impl ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:849:1: rule__FeatureParameterValue__Group__2 : rule__FeatureParameterValue__Group__2__Impl rule__FeatureParameterValue__Group__3 ;
     public final void rule__FeatureParameterValue__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:874:1: ( rule__FeatureParameterValue__Group__2__Impl )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:875:2: rule__FeatureParameterValue__Group__2__Impl
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:853:1: ( rule__FeatureParameterValue__Group__2__Impl rule__FeatureParameterValue__Group__3 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:854:2: rule__FeatureParameterValue__Group__2__Impl rule__FeatureParameterValue__Group__3
             {
-            pushFollow(FOLLOW_rule__FeatureParameterValue__Group__2__Impl_in_rule__FeatureParameterValue__Group__21688);
+            pushFollow(FOLLOW_rule__FeatureParameterValue__Group__2__Impl_in_rule__FeatureParameterValue__Group__21645);
             rule__FeatureParameterValue__Group__2__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_rule__FeatureParameterValue__Group__3_in_rule__FeatureParameterValue__Group__21648);
+            rule__FeatureParameterValue__Group__3();
 
             state._fsp--;
 
@@ -2219,31 +2159,21 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureParameterValue__Group__2__Impl"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:881:1: rule__FeatureParameterValue__Group__2__Impl : ( ( rule__FeatureParameterValue__ValueAssignment_2 ) ) ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:861:1: rule__FeatureParameterValue__Group__2__Impl : ( '=' ) ;
     public final void rule__FeatureParameterValue__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:885:1: ( ( ( rule__FeatureParameterValue__ValueAssignment_2 ) ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:886:1: ( ( rule__FeatureParameterValue__ValueAssignment_2 ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:865:1: ( ( '=' ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:866:1: ( '=' )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:886:1: ( ( rule__FeatureParameterValue__ValueAssignment_2 ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:887:1: ( rule__FeatureParameterValue__ValueAssignment_2 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:866:1: ( '=' )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:867:1: '='
             {
-             before(grammarAccess.getFeatureParameterValueAccess().getValueAssignment_2()); 
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:888:1: ( rule__FeatureParameterValue__ValueAssignment_2 )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:888:2: rule__FeatureParameterValue__ValueAssignment_2
-            {
-            pushFollow(FOLLOW_rule__FeatureParameterValue__ValueAssignment_2_in_rule__FeatureParameterValue__Group__2__Impl1715);
-            rule__FeatureParameterValue__ValueAssignment_2();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getFeatureParameterValueAccess().getValueAssignment_2()); 
+             before(grammarAccess.getFeatureParameterValueAccess().getEqualsSignKeyword_2()); 
+            match(input,19,FOLLOW_19_in_rule__FeatureParameterValue__Group__2__Impl1676); 
+             after(grammarAccess.getFeatureParameterValueAccess().getEqualsSignKeyword_2()); 
 
             }
 
@@ -2265,22 +2195,102 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__FeatureParameterValue__Group__2__Impl"
 
 
+    // $ANTLR start "rule__FeatureParameterValue__Group__3"
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:880:1: rule__FeatureParameterValue__Group__3 : rule__FeatureParameterValue__Group__3__Impl ;
+    public final void rule__FeatureParameterValue__Group__3() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:884:1: ( rule__FeatureParameterValue__Group__3__Impl )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:885:2: rule__FeatureParameterValue__Group__3__Impl
+            {
+            pushFollow(FOLLOW_rule__FeatureParameterValue__Group__3__Impl_in_rule__FeatureParameterValue__Group__31707);
+            rule__FeatureParameterValue__Group__3__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__FeatureParameterValue__Group__3"
+
+
+    // $ANTLR start "rule__FeatureParameterValue__Group__3__Impl"
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:891:1: rule__FeatureParameterValue__Group__3__Impl : ( ( rule__FeatureParameterValue__ValueAssignment_3 ) ) ;
+    public final void rule__FeatureParameterValue__Group__3__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:895:1: ( ( ( rule__FeatureParameterValue__ValueAssignment_3 ) ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:896:1: ( ( rule__FeatureParameterValue__ValueAssignment_3 ) )
+            {
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:896:1: ( ( rule__FeatureParameterValue__ValueAssignment_3 ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:897:1: ( rule__FeatureParameterValue__ValueAssignment_3 )
+            {
+             before(grammarAccess.getFeatureParameterValueAccess().getValueAssignment_3()); 
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:898:1: ( rule__FeatureParameterValue__ValueAssignment_3 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:898:2: rule__FeatureParameterValue__ValueAssignment_3
+            {
+            pushFollow(FOLLOW_rule__FeatureParameterValue__ValueAssignment_3_in_rule__FeatureParameterValue__Group__3__Impl1734);
+            rule__FeatureParameterValue__ValueAssignment_3();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getFeatureParameterValueAccess().getValueAssignment_3()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__FeatureParameterValue__Group__3__Impl"
+
+
     // $ANTLR start "rule__QID__Group__0"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:904:1: rule__QID__Group__0 : rule__QID__Group__0__Impl rule__QID__Group__1 ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:916:1: rule__QID__Group__0 : rule__QID__Group__0__Impl rule__QID__Group__1 ;
     public final void rule__QID__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:908:1: ( rule__QID__Group__0__Impl rule__QID__Group__1 )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:909:2: rule__QID__Group__0__Impl rule__QID__Group__1
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:920:1: ( rule__QID__Group__0__Impl rule__QID__Group__1 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:921:2: rule__QID__Group__0__Impl rule__QID__Group__1
             {
-            pushFollow(FOLLOW_rule__QID__Group__0__Impl_in_rule__QID__Group__01751);
+            pushFollow(FOLLOW_rule__QID__Group__0__Impl_in_rule__QID__Group__01772);
             rule__QID__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__QID__Group__1_in_rule__QID__Group__01754);
+            pushFollow(FOLLOW_rule__QID__Group__1_in_rule__QID__Group__01775);
             rule__QID__Group__1();
 
             state._fsp--;
@@ -2304,20 +2314,20 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QID__Group__0__Impl"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:916:1: rule__QID__Group__0__Impl : ( RULE_ID ) ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:928:1: rule__QID__Group__0__Impl : ( RULE_ID ) ;
     public final void rule__QID__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:920:1: ( ( RULE_ID ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:921:1: ( RULE_ID )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:932:1: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:933:1: ( RULE_ID )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:921:1: ( RULE_ID )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:922:1: RULE_ID
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:933:1: ( RULE_ID )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:934:1: RULE_ID
             {
              before(grammarAccess.getQIDAccess().getIDTerminalRuleCall_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QID__Group__0__Impl1781); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QID__Group__0__Impl1802); 
              after(grammarAccess.getQIDAccess().getIDTerminalRuleCall_0()); 
 
             }
@@ -2341,16 +2351,16 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QID__Group__1"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:933:1: rule__QID__Group__1 : rule__QID__Group__1__Impl ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:945:1: rule__QID__Group__1 : rule__QID__Group__1__Impl ;
     public final void rule__QID__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:937:1: ( rule__QID__Group__1__Impl )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:938:2: rule__QID__Group__1__Impl
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:949:1: ( rule__QID__Group__1__Impl )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:950:2: rule__QID__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__QID__Group__1__Impl_in_rule__QID__Group__11810);
+            pushFollow(FOLLOW_rule__QID__Group__1__Impl_in_rule__QID__Group__11831);
             rule__QID__Group__1__Impl();
 
             state._fsp--;
@@ -2374,20 +2384,20 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QID__Group__1__Impl"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:944:1: rule__QID__Group__1__Impl : ( ( rule__QID__Group_1__0 )* ) ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:956:1: rule__QID__Group__1__Impl : ( ( rule__QID__Group_1__0 )* ) ;
     public final void rule__QID__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:948:1: ( ( ( rule__QID__Group_1__0 )* ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:949:1: ( ( rule__QID__Group_1__0 )* )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:960:1: ( ( ( rule__QID__Group_1__0 )* ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:961:1: ( ( rule__QID__Group_1__0 )* )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:949:1: ( ( rule__QID__Group_1__0 )* )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:950:1: ( rule__QID__Group_1__0 )*
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:961:1: ( ( rule__QID__Group_1__0 )* )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:962:1: ( rule__QID__Group_1__0 )*
             {
              before(grammarAccess.getQIDAccess().getGroup_1()); 
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:951:1: ( rule__QID__Group_1__0 )*
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:963:1: ( rule__QID__Group_1__0 )*
             loop5:
             do {
                 int alt5=2;
@@ -2400,9 +2410,9 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:951:2: rule__QID__Group_1__0
+            	    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:963:2: rule__QID__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__QID__Group_1__0_in_rule__QID__Group__1__Impl1837);
+            	    pushFollow(FOLLOW_rule__QID__Group_1__0_in_rule__QID__Group__1__Impl1858);
             	    rule__QID__Group_1__0();
 
             	    state._fsp--;
@@ -2439,21 +2449,21 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QID__Group_1__0"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:965:1: rule__QID__Group_1__0 : rule__QID__Group_1__0__Impl rule__QID__Group_1__1 ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:977:1: rule__QID__Group_1__0 : rule__QID__Group_1__0__Impl rule__QID__Group_1__1 ;
     public final void rule__QID__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:969:1: ( rule__QID__Group_1__0__Impl rule__QID__Group_1__1 )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:970:2: rule__QID__Group_1__0__Impl rule__QID__Group_1__1
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:981:1: ( rule__QID__Group_1__0__Impl rule__QID__Group_1__1 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:982:2: rule__QID__Group_1__0__Impl rule__QID__Group_1__1
             {
-            pushFollow(FOLLOW_rule__QID__Group_1__0__Impl_in_rule__QID__Group_1__01872);
+            pushFollow(FOLLOW_rule__QID__Group_1__0__Impl_in_rule__QID__Group_1__01893);
             rule__QID__Group_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__QID__Group_1__1_in_rule__QID__Group_1__01875);
+            pushFollow(FOLLOW_rule__QID__Group_1__1_in_rule__QID__Group_1__01896);
             rule__QID__Group_1__1();
 
             state._fsp--;
@@ -2477,23 +2487,23 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QID__Group_1__0__Impl"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:977:1: rule__QID__Group_1__0__Impl : ( ( rule__QID__Alternatives_1_0 ) ) ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:989:1: rule__QID__Group_1__0__Impl : ( ( rule__QID__Alternatives_1_0 ) ) ;
     public final void rule__QID__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:981:1: ( ( ( rule__QID__Alternatives_1_0 ) ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:982:1: ( ( rule__QID__Alternatives_1_0 ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:993:1: ( ( ( rule__QID__Alternatives_1_0 ) ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:994:1: ( ( rule__QID__Alternatives_1_0 ) )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:982:1: ( ( rule__QID__Alternatives_1_0 ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:983:1: ( rule__QID__Alternatives_1_0 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:994:1: ( ( rule__QID__Alternatives_1_0 ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:995:1: ( rule__QID__Alternatives_1_0 )
             {
              before(grammarAccess.getQIDAccess().getAlternatives_1_0()); 
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:984:1: ( rule__QID__Alternatives_1_0 )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:984:2: rule__QID__Alternatives_1_0
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:996:1: ( rule__QID__Alternatives_1_0 )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:996:2: rule__QID__Alternatives_1_0
             {
-            pushFollow(FOLLOW_rule__QID__Alternatives_1_0_in_rule__QID__Group_1__0__Impl1902);
+            pushFollow(FOLLOW_rule__QID__Alternatives_1_0_in_rule__QID__Group_1__0__Impl1923);
             rule__QID__Alternatives_1_0();
 
             state._fsp--;
@@ -2524,16 +2534,16 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QID__Group_1__1"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:994:1: rule__QID__Group_1__1 : rule__QID__Group_1__1__Impl ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1006:1: rule__QID__Group_1__1 : rule__QID__Group_1__1__Impl ;
     public final void rule__QID__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:998:1: ( rule__QID__Group_1__1__Impl )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:999:2: rule__QID__Group_1__1__Impl
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1010:1: ( rule__QID__Group_1__1__Impl )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1011:2: rule__QID__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__QID__Group_1__1__Impl_in_rule__QID__Group_1__11932);
+            pushFollow(FOLLOW_rule__QID__Group_1__1__Impl_in_rule__QID__Group_1__11953);
             rule__QID__Group_1__1__Impl();
 
             state._fsp--;
@@ -2557,20 +2567,20 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QID__Group_1__1__Impl"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1005:1: rule__QID__Group_1__1__Impl : ( RULE_ID ) ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1017:1: rule__QID__Group_1__1__Impl : ( RULE_ID ) ;
     public final void rule__QID__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1009:1: ( ( RULE_ID ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1010:1: ( RULE_ID )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1021:1: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1022:1: ( RULE_ID )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1010:1: ( RULE_ID )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1011:1: RULE_ID
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1022:1: ( RULE_ID )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1023:1: RULE_ID
             {
              before(grammarAccess.getQIDAccess().getIDTerminalRuleCall_1_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QID__Group_1__1__Impl1959); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QID__Group_1__1__Impl1980); 
              after(grammarAccess.getQIDAccess().getIDTerminalRuleCall_1_1()); 
 
             }
@@ -2594,20 +2604,20 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GeneratorModel__GeneratorIdAssignment_2"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1027:1: rule__GeneratorModel__GeneratorIdAssignment_2 : ( ruleQID ) ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1039:1: rule__GeneratorModel__GeneratorIdAssignment_2 : ( ruleQID ) ;
     public final void rule__GeneratorModel__GeneratorIdAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1031:1: ( ( ruleQID ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1032:1: ( ruleQID )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1043:1: ( ( ruleQID ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1044:1: ( ruleQID )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1032:1: ( ruleQID )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1033:1: ruleQID
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1044:1: ( ruleQID )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1045:1: ruleQID
             {
              before(grammarAccess.getGeneratorModelAccess().getGeneratorIdQIDParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleQID_in_rule__GeneratorModel__GeneratorIdAssignment_21997);
+            pushFollow(FOLLOW_ruleQID_in_rule__GeneratorModel__GeneratorIdAssignment_22018);
             ruleQID();
 
             state._fsp--;
@@ -2635,20 +2645,20 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GeneratorModel__EntriesAssignment_4"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1042:1: rule__GeneratorModel__EntriesAssignment_4 : ( ruleGeneratorEntry ) ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1054:1: rule__GeneratorModel__EntriesAssignment_4 : ( ruleGeneratorEntry ) ;
     public final void rule__GeneratorModel__EntriesAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1046:1: ( ( ruleGeneratorEntry ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1047:1: ( ruleGeneratorEntry )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1058:1: ( ( ruleGeneratorEntry ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1059:1: ( ruleGeneratorEntry )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1047:1: ( ruleGeneratorEntry )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1048:1: ruleGeneratorEntry
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1059:1: ( ruleGeneratorEntry )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1060:1: ruleGeneratorEntry
             {
              before(grammarAccess.getGeneratorModelAccess().getEntriesGeneratorEntryParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleGeneratorEntry_in_rule__GeneratorModel__EntriesAssignment_42028);
+            pushFollow(FOLLOW_ruleGeneratorEntry_in_rule__GeneratorModel__EntriesAssignment_42049);
             ruleGeneratorEntry();
 
             state._fsp--;
@@ -2676,24 +2686,24 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GeneratorEntry__StatechartAssignment_1"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1057:1: rule__GeneratorEntry__StatechartAssignment_1 : ( ( RULE_ID ) ) ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1069:1: rule__GeneratorEntry__StatechartAssignment_1 : ( ( RULE_ID ) ) ;
     public final void rule__GeneratorEntry__StatechartAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1061:1: ( ( ( RULE_ID ) ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1062:1: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1073:1: ( ( ( RULE_ID ) ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1074:1: ( ( RULE_ID ) )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1062:1: ( ( RULE_ID ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1063:1: ( RULE_ID )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1074:1: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1075:1: ( RULE_ID )
             {
              before(grammarAccess.getGeneratorEntryAccess().getStatechartStatechartCrossReference_1_0()); 
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1064:1: ( RULE_ID )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1065:1: RULE_ID
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1076:1: ( RULE_ID )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1077:1: RULE_ID
             {
              before(grammarAccess.getGeneratorEntryAccess().getStatechartStatechartIDTerminalRuleCall_1_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__GeneratorEntry__StatechartAssignment_12063); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__GeneratorEntry__StatechartAssignment_12084); 
              after(grammarAccess.getGeneratorEntryAccess().getStatechartStatechartIDTerminalRuleCall_1_0_1()); 
 
             }
@@ -2721,20 +2731,20 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GeneratorEntry__FeaturesAssignment_3"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1076:1: rule__GeneratorEntry__FeaturesAssignment_3 : ( ruleFeatureConfiguration ) ;
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1088:1: rule__GeneratorEntry__FeaturesAssignment_3 : ( ruleFeatureConfiguration ) ;
     public final void rule__GeneratorEntry__FeaturesAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1080:1: ( ( ruleFeatureConfiguration ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1081:1: ( ruleFeatureConfiguration )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1092:1: ( ( ruleFeatureConfiguration ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1093:1: ( ruleFeatureConfiguration )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1081:1: ( ruleFeatureConfiguration )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1082:1: ruleFeatureConfiguration
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1093:1: ( ruleFeatureConfiguration )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1094:1: ruleFeatureConfiguration
             {
              before(grammarAccess.getGeneratorEntryAccess().getFeaturesFeatureConfigurationParserRuleCall_3_0()); 
-            pushFollow(FOLLOW_ruleFeatureConfiguration_in_rule__GeneratorEntry__FeaturesAssignment_32098);
+            pushFollow(FOLLOW_ruleFeatureConfiguration_in_rule__GeneratorEntry__FeaturesAssignment_32119);
             ruleFeatureConfiguration();
 
             state._fsp--;
@@ -2761,30 +2771,30 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__GeneratorEntry__FeaturesAssignment_3"
 
 
-    // $ANTLR start "rule__FeatureConfiguration__TypeAssignment_0"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1091:1: rule__FeatureConfiguration__TypeAssignment_0 : ( ( RULE_ID ) ) ;
-    public final void rule__FeatureConfiguration__TypeAssignment_0() throws RecognitionException {
+    // $ANTLR start "rule__FeatureConfiguration__TypeAssignment_2"
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1103:1: rule__FeatureConfiguration__TypeAssignment_2 : ( ( RULE_ID ) ) ;
+    public final void rule__FeatureConfiguration__TypeAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1095:1: ( ( ( RULE_ID ) ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1096:1: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1107:1: ( ( ( RULE_ID ) ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1108:1: ( ( RULE_ID ) )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1096:1: ( ( RULE_ID ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1097:1: ( RULE_ID )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1108:1: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1109:1: ( RULE_ID )
             {
-             before(grammarAccess.getFeatureConfigurationAccess().getTypeFeatureTypeCrossReference_0_0()); 
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1098:1: ( RULE_ID )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1099:1: RULE_ID
+             before(grammarAccess.getFeatureConfigurationAccess().getTypeFeatureTypeCrossReference_2_0()); 
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1110:1: ( RULE_ID )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1111:1: RULE_ID
             {
-             before(grammarAccess.getFeatureConfigurationAccess().getTypeFeatureTypeIDTerminalRuleCall_0_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__FeatureConfiguration__TypeAssignment_02133); 
-             after(grammarAccess.getFeatureConfigurationAccess().getTypeFeatureTypeIDTerminalRuleCall_0_0_1()); 
+             before(grammarAccess.getFeatureConfigurationAccess().getTypeFeatureTypeIDTerminalRuleCall_2_0_1()); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__FeatureConfiguration__TypeAssignment_22154); 
+             after(grammarAccess.getFeatureConfigurationAccess().getTypeFeatureTypeIDTerminalRuleCall_2_0_1()); 
 
             }
 
-             after(grammarAccess.getFeatureConfigurationAccess().getTypeFeatureTypeCrossReference_0_0()); 
+             after(grammarAccess.getFeatureConfigurationAccess().getTypeFeatureTypeCrossReference_2_0()); 
 
             }
 
@@ -2803,29 +2813,29 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__FeatureConfiguration__TypeAssignment_0"
+    // $ANTLR end "rule__FeatureConfiguration__TypeAssignment_2"
 
 
-    // $ANTLR start "rule__FeatureConfiguration__ParameterValuesAssignment_2"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1110:1: rule__FeatureConfiguration__ParameterValuesAssignment_2 : ( ruleFeatureParameterValue ) ;
-    public final void rule__FeatureConfiguration__ParameterValuesAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__FeatureConfiguration__ParameterValuesAssignment_4"
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1122:1: rule__FeatureConfiguration__ParameterValuesAssignment_4 : ( ruleFeatureParameterValue ) ;
+    public final void rule__FeatureConfiguration__ParameterValuesAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1114:1: ( ( ruleFeatureParameterValue ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1115:1: ( ruleFeatureParameterValue )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1126:1: ( ( ruleFeatureParameterValue ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1127:1: ( ruleFeatureParameterValue )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1115:1: ( ruleFeatureParameterValue )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1116:1: ruleFeatureParameterValue
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1127:1: ( ruleFeatureParameterValue )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1128:1: ruleFeatureParameterValue
             {
-             before(grammarAccess.getFeatureConfigurationAccess().getParameterValuesFeatureParameterValueParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleFeatureParameterValue_in_rule__FeatureConfiguration__ParameterValuesAssignment_22168);
+             before(grammarAccess.getFeatureConfigurationAccess().getParameterValuesFeatureParameterValueParserRuleCall_4_0()); 
+            pushFollow(FOLLOW_ruleFeatureParameterValue_in_rule__FeatureConfiguration__ParameterValuesAssignment_42189);
             ruleFeatureParameterValue();
 
             state._fsp--;
 
-             after(grammarAccess.getFeatureConfigurationAccess().getParameterValuesFeatureParameterValueParserRuleCall_2_0()); 
+             after(grammarAccess.getFeatureConfigurationAccess().getParameterValuesFeatureParameterValueParserRuleCall_4_0()); 
 
             }
 
@@ -2844,29 +2854,33 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__FeatureConfiguration__ParameterValuesAssignment_2"
+    // $ANTLR end "rule__FeatureConfiguration__ParameterValuesAssignment_4"
 
 
-    // $ANTLR start "rule__FeatureConfiguration__ParameterValuesAssignment_3_1"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1125:1: rule__FeatureConfiguration__ParameterValuesAssignment_3_1 : ( ruleFeatureParameterValue ) ;
-    public final void rule__FeatureConfiguration__ParameterValuesAssignment_3_1() throws RecognitionException {
+    // $ANTLR start "rule__FeatureParameterValue__ParameterAssignment_1"
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1137:1: rule__FeatureParameterValue__ParameterAssignment_1 : ( ( RULE_ID ) ) ;
+    public final void rule__FeatureParameterValue__ParameterAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1129:1: ( ( ruleFeatureParameterValue ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1130:1: ( ruleFeatureParameterValue )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1141:1: ( ( ( RULE_ID ) ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1142:1: ( ( RULE_ID ) )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1130:1: ( ruleFeatureParameterValue )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1131:1: ruleFeatureParameterValue
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1142:1: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1143:1: ( RULE_ID )
             {
-             before(grammarAccess.getFeatureConfigurationAccess().getParameterValuesFeatureParameterValueParserRuleCall_3_1_0()); 
-            pushFollow(FOLLOW_ruleFeatureParameterValue_in_rule__FeatureConfiguration__ParameterValuesAssignment_3_12199);
-            ruleFeatureParameterValue();
+             before(grammarAccess.getFeatureParameterValueAccess().getParameterFeatureParameterCrossReference_1_0()); 
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1144:1: ( RULE_ID )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1145:1: RULE_ID
+            {
+             before(grammarAccess.getFeatureParameterValueAccess().getParameterFeatureParameterIDTerminalRuleCall_1_0_1()); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__FeatureParameterValue__ParameterAssignment_12224); 
+             after(grammarAccess.getFeatureParameterValueAccess().getParameterFeatureParameterIDTerminalRuleCall_1_0_1()); 
 
-            state._fsp--;
+            }
 
-             after(grammarAccess.getFeatureConfigurationAccess().getParameterValuesFeatureParameterValueParserRuleCall_3_1_0()); 
+             after(grammarAccess.getFeatureParameterValueAccess().getParameterFeatureParameterCrossReference_1_0()); 
 
             }
 
@@ -2885,33 +2899,25 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__FeatureConfiguration__ParameterValuesAssignment_3_1"
+    // $ANTLR end "rule__FeatureParameterValue__ParameterAssignment_1"
 
 
-    // $ANTLR start "rule__FeatureParameterValue__ParameterAssignment_0"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1140:1: rule__FeatureParameterValue__ParameterAssignment_0 : ( ( RULE_ID ) ) ;
-    public final void rule__FeatureParameterValue__ParameterAssignment_0() throws RecognitionException {
+    // $ANTLR start "rule__FeatureParameterValue__ValueAssignment_3"
+    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1156:1: rule__FeatureParameterValue__ValueAssignment_3 : ( RULE_STRING ) ;
+    public final void rule__FeatureParameterValue__ValueAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1144:1: ( ( ( RULE_ID ) ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1145:1: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1160:1: ( ( RULE_STRING ) )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1161:1: ( RULE_STRING )
             {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1145:1: ( ( RULE_ID ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1146:1: ( RULE_ID )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1161:1: ( RULE_STRING )
+            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1162:1: RULE_STRING
             {
-             before(grammarAccess.getFeatureParameterValueAccess().getParameterFeatureParameterCrossReference_0_0()); 
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1147:1: ( RULE_ID )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1148:1: RULE_ID
-            {
-             before(grammarAccess.getFeatureParameterValueAccess().getParameterFeatureParameterIDTerminalRuleCall_0_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__FeatureParameterValue__ParameterAssignment_02234); 
-             after(grammarAccess.getFeatureParameterValueAccess().getParameterFeatureParameterIDTerminalRuleCall_0_0_1()); 
-
-            }
-
-             after(grammarAccess.getFeatureParameterValueAccess().getParameterFeatureParameterCrossReference_0_0()); 
+             before(grammarAccess.getFeatureParameterValueAccess().getValueSTRINGTerminalRuleCall_3_0()); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__FeatureParameterValue__ValueAssignment_32259); 
+             after(grammarAccess.getFeatureParameterValueAccess().getValueSTRINGTerminalRuleCall_3_0()); 
 
             }
 
@@ -2930,44 +2936,7 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__FeatureParameterValue__ParameterAssignment_0"
-
-
-    // $ANTLR start "rule__FeatureParameterValue__ValueAssignment_2"
-    // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1159:1: rule__FeatureParameterValue__ValueAssignment_2 : ( RULE_STRING ) ;
-    public final void rule__FeatureParameterValue__ValueAssignment_2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1163:1: ( ( RULE_STRING ) )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1164:1: ( RULE_STRING )
-            {
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1164:1: ( RULE_STRING )
-            // ../org.yakindu.sct.generator.genmodel.ui/src-gen/org/yakindu/sct/generator/genmodel/ui/contentassist/antlr/internal/InternalSGen.g:1165:1: RULE_STRING
-            {
-             before(grammarAccess.getFeatureParameterValueAccess().getValueSTRINGTerminalRuleCall_2_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__FeatureParameterValue__ValueAssignment_22269); 
-             after(grammarAccess.getFeatureParameterValueAccess().getValueSTRINGTerminalRuleCall_2_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__FeatureParameterValue__ValueAssignment_2"
+    // $ANTLR end "rule__FeatureParameterValue__ValueAssignment_3"
 
     // Delegated rules
 
@@ -3015,59 +2984,58 @@ public class InternalSGenParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__GeneratorEntry__Group__1__Impl_in_rule__GeneratorEntry__Group__1879 = new BitSet(new long[]{0x0000000000008000L});
     public static final BitSet FOLLOW_rule__GeneratorEntry__Group__2_in_rule__GeneratorEntry__Group__1882 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__GeneratorEntry__StatechartAssignment_1_in_rule__GeneratorEntry__Group__1__Impl909 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__GeneratorEntry__Group__2__Impl_in_rule__GeneratorEntry__Group__2939 = new BitSet(new long[]{0x0000000000010010L});
+    public static final BitSet FOLLOW_rule__GeneratorEntry__Group__2__Impl_in_rule__GeneratorEntry__Group__2939 = new BitSet(new long[]{0x0000000000050000L});
     public static final BitSet FOLLOW_rule__GeneratorEntry__Group__3_in_rule__GeneratorEntry__Group__2942 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_15_in_rule__GeneratorEntry__Group__2__Impl970 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__GeneratorEntry__Group__3__Impl_in_rule__GeneratorEntry__Group__31001 = new BitSet(new long[]{0x0000000000010010L});
+    public static final BitSet FOLLOW_rule__GeneratorEntry__Group__3__Impl_in_rule__GeneratorEntry__Group__31001 = new BitSet(new long[]{0x0000000000050000L});
     public static final BitSet FOLLOW_rule__GeneratorEntry__Group__4_in_rule__GeneratorEntry__Group__31004 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__GeneratorEntry__FeaturesAssignment_3_in_rule__GeneratorEntry__Group__3__Impl1031 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_rule__GeneratorEntry__FeaturesAssignment_3_in_rule__GeneratorEntry__Group__3__Impl1031 = new BitSet(new long[]{0x0000000000040002L});
     public static final BitSet FOLLOW_rule__GeneratorEntry__Group__4__Impl_in_rule__GeneratorEntry__Group__41062 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_16_in_rule__GeneratorEntry__Group__4__Impl1090 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__0__Impl_in_rule__FeatureConfiguration__Group__01131 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__0__Impl_in_rule__FeatureConfiguration__Group__01131 = new BitSet(new long[]{0x0000000000040000L});
     public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__1_in_rule__FeatureConfiguration__Group__01134 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureConfiguration__TypeAssignment_0_in_rule__FeatureConfiguration__Group__0__Impl1161 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__1__Impl_in_rule__FeatureConfiguration__Group__11191 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__2_in_rule__FeatureConfiguration__Group__11194 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__FeatureConfiguration__Group__1__Impl1222 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__2__Impl_in_rule__FeatureConfiguration__Group__21253 = new BitSet(new long[]{0x0000000000050000L});
-    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__3_in_rule__FeatureConfiguration__Group__21256 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureConfiguration__ParameterValuesAssignment_2_in_rule__FeatureConfiguration__Group__2__Impl1283 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__3__Impl_in_rule__FeatureConfiguration__Group__31313 = new BitSet(new long[]{0x0000000000050000L});
-    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__4_in_rule__FeatureConfiguration__Group__31316 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group_3__0_in_rule__FeatureConfiguration__Group__3__Impl1343 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__4__Impl_in_rule__FeatureConfiguration__Group__41374 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__FeatureConfiguration__Group__4__Impl1402 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group_3__0__Impl_in_rule__FeatureConfiguration__Group_3__01443 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group_3__1_in_rule__FeatureConfiguration__Group_3__01446 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_rule__FeatureConfiguration__Group_3__0__Impl1474 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group_3__1__Impl_in_rule__FeatureConfiguration__Group_3__11505 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureConfiguration__ParameterValuesAssignment_3_1_in_rule__FeatureConfiguration__Group_3__1__Impl1532 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureParameterValue__Group__0__Impl_in_rule__FeatureParameterValue__Group__01566 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_rule__FeatureParameterValue__Group__1_in_rule__FeatureParameterValue__Group__01569 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureParameterValue__ParameterAssignment_0_in_rule__FeatureParameterValue__Group__0__Impl1596 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureParameterValue__Group__1__Impl_in_rule__FeatureParameterValue__Group__11626 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__FeatureParameterValue__Group__2_in_rule__FeatureParameterValue__Group__11629 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_rule__FeatureParameterValue__Group__1__Impl1657 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureParameterValue__Group__2__Impl_in_rule__FeatureParameterValue__Group__21688 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FeatureParameterValue__ValueAssignment_2_in_rule__FeatureParameterValue__Group__2__Impl1715 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QID__Group__0__Impl_in_rule__QID__Group__01751 = new BitSet(new long[]{0x0000000000001800L});
-    public static final BitSet FOLLOW_rule__QID__Group__1_in_rule__QID__Group__01754 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__QID__Group__0__Impl1781 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QID__Group__1__Impl_in_rule__QID__Group__11810 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QID__Group_1__0_in_rule__QID__Group__1__Impl1837 = new BitSet(new long[]{0x0000000000001802L});
-    public static final BitSet FOLLOW_rule__QID__Group_1__0__Impl_in_rule__QID__Group_1__01872 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__QID__Group_1__1_in_rule__QID__Group_1__01875 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QID__Alternatives_1_0_in_rule__QID__Group_1__0__Impl1902 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QID__Group_1__1__Impl_in_rule__QID__Group_1__11932 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__QID__Group_1__1__Impl1959 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQID_in_rule__GeneratorModel__GeneratorIdAssignment_21997 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGeneratorEntry_in_rule__GeneratorModel__EntriesAssignment_42028 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__GeneratorEntry__StatechartAssignment_12063 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFeatureConfiguration_in_rule__GeneratorEntry__FeaturesAssignment_32098 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__FeatureConfiguration__TypeAssignment_02133 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFeatureParameterValue_in_rule__FeatureConfiguration__ParameterValuesAssignment_22168 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFeatureParameterValue_in_rule__FeatureConfiguration__ParameterValuesAssignment_3_12199 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__FeatureParameterValue__ParameterAssignment_02234 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__FeatureParameterValue__ValueAssignment_22269 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__1__Impl_in_rule__FeatureConfiguration__Group__11192 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__2_in_rule__FeatureConfiguration__Group__11195 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_rule__FeatureConfiguration__Group__1__Impl1223 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__2__Impl_in_rule__FeatureConfiguration__Group__21254 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__3_in_rule__FeatureConfiguration__Group__21257 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FeatureConfiguration__TypeAssignment_2_in_rule__FeatureConfiguration__Group__2__Impl1284 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__3__Impl_in_rule__FeatureConfiguration__Group__31314 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__4_in_rule__FeatureConfiguration__Group__31317 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_rule__FeatureConfiguration__Group__3__Impl1345 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__4__Impl_in_rule__FeatureConfiguration__Group__41376 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__5_in_rule__FeatureConfiguration__Group__41379 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FeatureConfiguration__ParameterValuesAssignment_4_in_rule__FeatureConfiguration__Group__4__Impl1408 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_rule__FeatureConfiguration__ParameterValuesAssignment_4_in_rule__FeatureConfiguration__Group__4__Impl1420 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_rule__FeatureConfiguration__Group__5__Impl_in_rule__FeatureConfiguration__Group__51453 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_rule__FeatureConfiguration__Group__5__Impl1481 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FeatureParameterValue__Group__0__Impl_in_rule__FeatureParameterValue__Group__01524 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__FeatureParameterValue__Group__1_in_rule__FeatureParameterValue__Group__01527 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FeatureParameterValue__Group__1__Impl_in_rule__FeatureParameterValue__Group__11585 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_rule__FeatureParameterValue__Group__2_in_rule__FeatureParameterValue__Group__11588 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FeatureParameterValue__ParameterAssignment_1_in_rule__FeatureParameterValue__Group__1__Impl1615 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FeatureParameterValue__Group__2__Impl_in_rule__FeatureParameterValue__Group__21645 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__FeatureParameterValue__Group__3_in_rule__FeatureParameterValue__Group__21648 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rule__FeatureParameterValue__Group__2__Impl1676 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FeatureParameterValue__Group__3__Impl_in_rule__FeatureParameterValue__Group__31707 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FeatureParameterValue__ValueAssignment_3_in_rule__FeatureParameterValue__Group__3__Impl1734 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QID__Group__0__Impl_in_rule__QID__Group__01772 = new BitSet(new long[]{0x0000000000001800L});
+    public static final BitSet FOLLOW_rule__QID__Group__1_in_rule__QID__Group__01775 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__QID__Group__0__Impl1802 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QID__Group__1__Impl_in_rule__QID__Group__11831 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QID__Group_1__0_in_rule__QID__Group__1__Impl1858 = new BitSet(new long[]{0x0000000000001802L});
+    public static final BitSet FOLLOW_rule__QID__Group_1__0__Impl_in_rule__QID__Group_1__01893 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__QID__Group_1__1_in_rule__QID__Group_1__01896 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QID__Alternatives_1_0_in_rule__QID__Group_1__0__Impl1923 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QID__Group_1__1__Impl_in_rule__QID__Group_1__11953 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__QID__Group_1__1__Impl1980 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQID_in_rule__GeneratorModel__GeneratorIdAssignment_22018 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleGeneratorEntry_in_rule__GeneratorModel__EntriesAssignment_42049 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__GeneratorEntry__StatechartAssignment_12084 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFeatureConfiguration_in_rule__GeneratorEntry__FeaturesAssignment_32119 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__FeatureConfiguration__TypeAssignment_22154 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFeatureParameterValue_in_rule__FeatureConfiguration__ParameterValuesAssignment_42189 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__FeatureParameterValue__ParameterAssignment_12224 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__FeatureParameterValue__ValueAssignment_32259 = new BitSet(new long[]{0x0000000000000002L});
 
 }

@@ -41,7 +41,6 @@ public class SGenParser extends AbstractContentAssistParser {
 					put(grammarAccess.getGeneratorModelAccess().getGroup(), "rule__GeneratorModel__Group__0");
 					put(grammarAccess.getGeneratorEntryAccess().getGroup(), "rule__GeneratorEntry__Group__0");
 					put(grammarAccess.getFeatureConfigurationAccess().getGroup(), "rule__FeatureConfiguration__Group__0");
-					put(grammarAccess.getFeatureConfigurationAccess().getGroup_3(), "rule__FeatureConfiguration__Group_3__0");
 					put(grammarAccess.getFeatureParameterValueAccess().getGroup(), "rule__FeatureParameterValue__Group__0");
 					put(grammarAccess.getQIDAccess().getGroup(), "rule__QID__Group__0");
 					put(grammarAccess.getQIDAccess().getGroup_1(), "rule__QID__Group_1__0");
@@ -49,11 +48,10 @@ public class SGenParser extends AbstractContentAssistParser {
 					put(grammarAccess.getGeneratorModelAccess().getEntriesAssignment_4(), "rule__GeneratorModel__EntriesAssignment_4");
 					put(grammarAccess.getGeneratorEntryAccess().getStatechartAssignment_1(), "rule__GeneratorEntry__StatechartAssignment_1");
 					put(grammarAccess.getGeneratorEntryAccess().getFeaturesAssignment_3(), "rule__GeneratorEntry__FeaturesAssignment_3");
-					put(grammarAccess.getFeatureConfigurationAccess().getTypeAssignment_0(), "rule__FeatureConfiguration__TypeAssignment_0");
-					put(grammarAccess.getFeatureConfigurationAccess().getParameterValuesAssignment_2(), "rule__FeatureConfiguration__ParameterValuesAssignment_2");
-					put(grammarAccess.getFeatureConfigurationAccess().getParameterValuesAssignment_3_1(), "rule__FeatureConfiguration__ParameterValuesAssignment_3_1");
-					put(grammarAccess.getFeatureParameterValueAccess().getParameterAssignment_0(), "rule__FeatureParameterValue__ParameterAssignment_0");
-					put(grammarAccess.getFeatureParameterValueAccess().getValueAssignment_2(), "rule__FeatureParameterValue__ValueAssignment_2");
+					put(grammarAccess.getFeatureConfigurationAccess().getTypeAssignment_2(), "rule__FeatureConfiguration__TypeAssignment_2");
+					put(grammarAccess.getFeatureConfigurationAccess().getParameterValuesAssignment_4(), "rule__FeatureConfiguration__ParameterValuesAssignment_4");
+					put(grammarAccess.getFeatureParameterValueAccess().getParameterAssignment_1(), "rule__FeatureParameterValue__ParameterAssignment_1");
+					put(grammarAccess.getFeatureParameterValueAccess().getValueAssignment_3(), "rule__FeatureParameterValue__ValueAssignment_3");
 				}
 			};
 		}
