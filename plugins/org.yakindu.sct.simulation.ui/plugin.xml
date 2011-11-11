@@ -58,7 +58,7 @@
     <view
           allowMultiple="false"
           class="org.yakindu.sct.simulation.ui.view.DeclarationView"
-          icon="Statechart-Launcher-16.png"
+          icon="icons/Declarations-View-16.gif"
           id="org.yakindu.sct.simulation.ui.declarationview"
           name="Declarations View"
           restorable="true">
