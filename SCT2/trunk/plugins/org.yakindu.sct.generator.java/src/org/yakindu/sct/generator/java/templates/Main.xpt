@@ -17,46 +17,43 @@ Contributors:
 «IMPORT org::yakindu::sct::generator::java::templates»
 
 «DEFINE main(sgen::GeneratorEntry entry) FOR ExecutionFlow»
-	«FILE 'test.test'»
-	«entry.getFeatureConfiguration("NamingFeature")»
-	«ENDFILE»
-	«REM» basis files «ENDREM»
 	
-	«EXPAND IStatemachine::file FOR this»
+	«REM» base package files «ENDREM»
+	«EXPAND IStatemachine::file(entry) FOR this»
 	
-	«EXPAND ITimedStatemachine::file FOR this»
+	«EXPAND ITimedStatemachine::file(entry) FOR this»
 	
-	«EXPAND ITimerHandler::file FOR this»
+	«EXPAND ITimerHandler::file(entry) FOR this»
 	
-	«EXPAND TimerHandler::file FOR this»
+	«EXPAND TimerHandler::file(entry) FOR this»
 	
-	«EXPAND Event::file FOR this»
+	«EXPAND Event::file(entry) FOR this»
 	
-	«EXPAND TimeEvent::file FOR this»
+	«EXPAND TimeEvent::file(entry) FOR this»
 	
-	«EXPAND EventNotification::file FOR this»
+	«EXPAND EventNotification::file(entry) FOR this»
 	
-	«EXPAND INotificationListener::file FOR this»
+	«EXPAND INotificationListener::file(entry) FOR this»
 	
-	«EXPAND INotificationSender::file FOR this»
+	«EXPAND INotificationSender::file(entry) FOR this»
 	
-	«EXPAND Notification::file FOR this»
+	«EXPAND Notification::file(entry) FOR this»
 	
-	«EXPAND NotificationSender::file FOR this»
+	«EXPAND NotificationSender::file(entry) FOR this»
 	
-	«EXPAND NotificationType::file FOR this»
+	«EXPAND NotificationType::file(entry) FOR this»
 	
 	«REM» concrete files «ENDREM»
 	«FOREACH this.scopes.typeSelect(InterfaceScope) AS scope»
-	«EXPAND CustomInterface::file FOR scope»
-	«EXPAND CustomInterfaceImpl::file FOR scope»
+	«EXPAND CustomInterface::file(entry) FOR scope»
+	«EXPAND CustomInterfaceImpl::file(entry) FOR scope»
 	«ENDFOREACH»
 	
-	«EXPAND CustomBaseStatemachine::file FOR this»
+	«EXPAND CustomBaseStatemachine::file(entry) FOR this»
 	
-	«EXPAND CustomCycleBasedStatemachine::file FOR this»
+	«EXPAND CustomCycleBasedStatemachine::file(entry) FOR this»
 	
-	«EXPAND CustomEventBasedStatemachine::file FOR this»
+	«EXPAND CustomEventBasedStatemachine::file(entry) FOR this»
 	
 
 «ENDDEFINE»

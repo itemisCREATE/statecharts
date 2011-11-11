@@ -16,17 +16,24 @@ Contributors:
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 «EXTENSION org::yakindu::sct::generator::java::templates::Expression»
 
-«DEFINE file FOR InterfaceScope»
-«FILE getCustomPackage()+getInterfaceImplName() + '.java'-»
+«DEFINE file(sgen::GeneratorEntry entry) FOR InterfaceScope»
+«FILE getImplementationPackagePath(entry)+"/"+getInterfaceImplName() + '.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.«getStatemachineName((ExecutionFlow)eContainer).toLowerCase()»;
+package «getImplementationPackageName(entry)»;
 
-import org.yakindu.sct.runtime.java.base.notification.EventNotification;
+import «entry.getBasePackageName()».EventNotification;
+«IF hasEvents()-»
+import «entry.getBasePackageName()».Event;
+«ENDIF-»
 «IF hasOutgoingEvents()-»
-import org.yakindu.sct.runtime.java.base.notification.NotificationSender;
+import «entry.getBasePackageName()».NotificationSender;
 «ENDIF-»
 
 public class «getInterfaceImplName()»«getInterfaceImplExtension()» implements «getInterfaceName()» {
+	
+	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
+	private final Event<«event.type.getJavaClassType()»> «event.getName()» = new Event<«event.type.getJavaClassType()»>("«event.name»", «event.getInitialValue()»); 
+	«ENDFOREACH-»
 	
 	private «getBaseStatemachineName()» statemachine; 
 	
@@ -52,12 +59,12 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension()» implements «g
 		notifyListeners(new EventNotification(«event.getName()»));
 		«ENDIF-»
 	}
+	«ENDIF-»
 	
-	public «event.type.getJavaType()» get«event.getValueName().toFirstUpper()»() {
-		return «event.getName()».getValue();
+	public Event<«event.type.getJavaClassType()»> get«event.getName()»() {
+		return «event.getName()»;
 	}
 	
-	«ENDIF-»
 	«IF event.direction ==  Direction::OUT-»
 	public boolean isRaised«event.name.toFirstUpper()»() {
 		return statemachine.getOutEvents().contains(«event.getName()»);

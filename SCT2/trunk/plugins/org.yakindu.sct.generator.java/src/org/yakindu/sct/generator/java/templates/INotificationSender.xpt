@@ -15,11 +15,11 @@ Contributors:
 
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
-«DEFINE file FOR ExecutionFlow-»
+«DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
 «IF name != null-»
-«FILE 'org/yakindu/sct/runtime/java/base/notification/INotificationSender.java'-»
+«FILE entry.getBasePackagePath()+'/INotificationSender.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.base.notification;
+package «entry.getBasePackageName()»;
 
 public interface INotificationSender {
 	

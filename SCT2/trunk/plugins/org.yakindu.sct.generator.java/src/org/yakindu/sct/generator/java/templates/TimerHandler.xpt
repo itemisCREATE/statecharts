@@ -15,17 +15,17 @@ Contributors:
 
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
-«DEFINE file FOR ExecutionFlow-»
-«FILE 'org/yakindu/sct/runtime/java/base/TimerHandler.java'-»
+«DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
+«FILE entry.getBasePackagePath()+'/TimerHandler.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.base;
+package «entry.getBasePackageName()»;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.yakindu.sct.runtime.java.base.notification.EventNotification;
+import «entry.getBasePackageName()».EventNotification;
 
 public class TimerHandler implements ITimerHandler {
 

@@ -14,6 +14,8 @@ import stext;
 import sexec;
 import ecore;
 import sgraph;
+import sgen;
+
 extension org::yakindu::sct::generator::java::templates::Expression;
 
 List declaredVariables(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(VariableDefinition);
@@ -24,19 +26,6 @@ getInterfaceScopeVariables(ExecutionFlow this) : getInterfaceScopeDeclarations()
 getInterfaceScopeEvents(ExecutionFlow this) : getInterfaceScopeDeclarations().typeSelect(EventDefinition);
 getInterfaceScopeVoidEvents(ExecutionFlow this) : getInterfaceScopeEvents().select(e|e.type==Type::void);
 getInterfaceScopeValuedEvents(ExecutionFlow this) : getInterfaceScopeEvents().select(e|e.type!=Type::void);
-
-//getNamedInterfaceScope(ExecutionFlow this) : scopes.typeSelect(InterfaceScope).select(interfaceScope|interfaceScope.name!=null);
-//getNamedInterfaceScopeDeclarations(ExecutionFlow this) : getNamedInterfaceScope().declarations;
-//getNamedInterfaceScopeVariables(ExecutionFlow this) : getNamedInterfaceScopeDeclarations().typeSelect(VariableDefinition);
-//getNamedInterfaceScopeEvents(ExecutionFlow this) : getNamedInterfaceScopeDeclarations().typeSelect(EventDefinition);
-//getNamedInterfaceScopeVoidEvents(ExecutionFlow this) : getNamedInterfaceScopeEvents().select(e|e.type==Type::void);
-//getNamedInterfaceScopeValuedEvents(ExecutionFlow this) : getNamedInterfaceScopeEvents().select(e|e.type!=Type::void);
-
-//getUnnamedInterfaceScopeDeclarations(ExecutionFlow this) : scopes.typeSelect(InterfaceScope).select(interfaceScope|interfaceScope.name==null).declarations;	
-//getUnnamedInterfaceScopeVariables(ExecutionFlow this) : getUnnamedInterfaceScopeDeclarations().typeSelect(VariableDefinition);
-//getUnnamedInterfaceScopeEvents(ExecutionFlow this) : getUnnamedInterfaceScopeDeclarations().typeSelect(EventDefinition);	
-//getUnnamedInterfaceScopeVoidEvents(ExecutionFlow this) : getUnnamedInterfaceScopeEvents().select(e|e.type==Type::void);
-//getUnnamedInterfaceScopeValuedEvents(ExecutionFlow this) : getUnnamedInterfaceScopeEvents().select(e|e.type!=Type::void);
 
 getInternalScopeDeclarations(ExecutionFlow this) : scopes.typeSelect(InternalScope).declarations;
 getInternalScopeVariables(ExecutionFlow this) :	getInternalScopeDeclarations().typeSelect(VariableDefinition);
@@ -71,7 +60,15 @@ String getInitialValue(EventDefinition this) :
 	if derivation != null then
 		derivation.condition.toCode()
 	else
-		"null";
+		//if no initial value expression is declared set default value to avoid npe exceptions
+		switch (type) {
+		case (Type::real) : "0D"
+		case (Type::integer) : "0"
+		case (Type::boolean) : "false"
+		case (Type::string) : ""
+		case (Type::void) : "null"
+		default : ""
+		};
 
 String getInitialValueAssignment(EventDefinition this) :
 	if derivation != null then
@@ -175,6 +172,9 @@ String getContext(Event this) :
 boolean hasOutgoingEvents(InterfaceScope this) :
 	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).isEmpty;
 	
+boolean hasEvents(InterfaceScope this) :
+	!declarations.typeSelect(EventDefinition).isEmpty;
+	
 String getInterfaceExtension(InterfaceScope this):
 	if (hasOutgoingEvents()) then
 		" extends INotificationSender"
@@ -187,6 +187,35 @@ String getInterfaceImplExtension(InterfaceScope this):
 	else
 		null;
 		
+String getBasePackageName(GeneratorEntry entry):
+	if entry.getFeatureConfiguration("NamingFeature")!=null 
+		&& entry.getFeatureConfiguration("NamingFeature").getParameterValue("basePackage")!=null then
+		entry.getFeatureConfiguration("NamingFeature").getParameterValue("basePackage").value
+	else
+		"org.yakindu.sct.runtime.java";
+
+String getBasePackagePath(GeneratorEntry entry):
+	entry.getBasePackageName().replaceAll("\\.","/");
+	
+String getImplementationSuffix(GeneratorEntry entry, ExecutionFlow flow):
+	if entry.getFeatureConfiguration("NamingFeature")!=null
+		&& entry.getFeatureConfiguration("NamingFeature").getParameterValue("implementationSuffix") != null then
+		entry.getFeatureConfiguration("NamingFeature").getParameterValue("implementationSuffix").value
+	else 
+		flow.getStatemachineName();
+
+String getImplementationPackagePath(ExecutionFlow this, GeneratorEntry entry):
+	entry.getBasePackagePath()+"/"+entry.getImplementationSuffix(this).toLowerCase();
+
+String getImplementationPackagePath(InterfaceScope this, GeneratorEntry entry):
+	((ExecutionFlow)eContainer).getImplementationPackagePath(entry);
+
+String getImplementationPackageName(ExecutionFlow this, GeneratorEntry entry):
+	entry.getBasePackageName()+"."+entry.getImplementationSuffix(this).toLowerCase();
+
+String getImplementationPackageName(InterfaceScope this, GeneratorEntry entry):
+	((ExecutionFlow)eContainer).getImplementationPackageName(entry);
+	
 String getLicenseHeader() : "/**
  * Copyright (c) 2011 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials

@@ -15,11 +15,11 @@ Contributors:
 
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
-«DEFINE file FOR ExecutionFlow-»
+«DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
 «IF name != null-»
-«FILE 'org/yakindu/sct/runtime/java/base/notification/NotificationType.java'-»
+«FILE entry.getBasePackagePath()+'/NotificationType.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.base.notification;
+package «entry.getBasePackageName()»;
 
 public enum NotificationType {
 	EventNotification,

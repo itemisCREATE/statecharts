@@ -17,16 +17,16 @@ Contributors:
 «EXTENSION org::yakindu::sct::generator::java::templates::Expression»
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
-«DEFINE file FOR ExecutionFlow»
-«FILE getCustomPackage()+getEventBasedStatemachineName()+'.java'-»
+«DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow»
+«FILE getImplementationPackagePath(entry)+"/"+getEventBasedStatemachineName()+'.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.«getStatemachineName().toLowerCase()»;
+package «getImplementationPackageName(entry)»;
 
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import org.yakindu.sct.runtime.java.base.Event;
+import «entry.getBasePackageName()».Event;
 
 public class «getEventBasedStatemachineName()» extends «getBaseStatemachineName()» {
 

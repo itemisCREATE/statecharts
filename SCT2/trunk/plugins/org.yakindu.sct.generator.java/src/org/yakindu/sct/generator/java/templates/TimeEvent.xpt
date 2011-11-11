@@ -15,11 +15,11 @@ Contributors:
 
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
-«DEFINE file FOR ExecutionFlow-»
+«DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
 «IF name != null-»
-«FILE 'org/yakindu/sct/runtime/java/base/TimeEvent.java'-»
+«FILE entry.getBasePackagePath()+'/TimeEvent.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.base;
+package «entry.getBasePackageName()»;
 
 public class TimeEvent extends Event<Boolean> {
 	

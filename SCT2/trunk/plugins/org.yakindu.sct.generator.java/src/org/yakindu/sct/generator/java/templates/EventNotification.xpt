@@ -15,13 +15,13 @@ Contributors:
 
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
-«DEFINE file FOR ExecutionFlow-»
+«DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
 «IF name != null-»
-«FILE 'org/yakindu/sct/runtime/java/base/notification/EventNotification.java'-»
+«FILE entry.getBasePackagePath()+'/EventNotification.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.base.notification;
+package «entry.getBasePackageName()»;
 
-import org.yakindu.sct.runtime.java.base.Event;
+import «entry.getBasePackageName()».Event;
 
 public class EventNotification extends Notification<Event<?>> {
 

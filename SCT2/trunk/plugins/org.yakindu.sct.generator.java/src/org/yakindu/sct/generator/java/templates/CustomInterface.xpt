@@ -15,21 +15,17 @@ Contributors:
 
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
-«DEFINE file FOR InterfaceScope-»
-«FILE getCustomPackage()+getInterfaceName() + '.java'-»
+«DEFINE file(sgen::GeneratorEntry entry) FOR InterfaceScope-»
+«FILE getImplementationPackagePath(entry)+"/"+getInterfaceName() + '.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.«getStatemachineName((ExecutionFlow)eContainer).toLowerCase()»;
+package «getImplementationPackageName(entry)»;
 
-import org.yakindu.sct.runtime.java.base.Event;
 «IF hasOutgoingEvents()-»
-import org.yakindu.sct.runtime.java.base.notification.INotificationSender;
+import «entry.getBasePackageName()».Event;
+import «entry.getBasePackageName()».INotificationSender;
 «ENDIF-»
 
 public interface «getInterfaceName()»«getInterfaceExtension()» {
-	
-	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
-	public static final Event<«event.type.getJavaClassType()»> «event.getName()» = new Event<«event.type.getJavaClassType()»>("«event.name»", «event.getInitialValue()»); 
-	«ENDFOREACH-»
 	
 	«FOREACH declarations.typeSelect(EventDefinition) AS eventDefinition-»
 	«IF  eventDefinition.direction ==  Direction::IN-»
@@ -39,9 +35,9 @@ public interface «getInterfaceName()»«getInterfaceExtension()» {
 		«ENDIF-»
 	«ELSEIF eventDefinition.direction ==  Direction::OUT-»
 	public boolean isRaised«eventDefinition.name.toFirstUpper()»();
-		«IF eventDefinition.type != Type::void-»
-	public «eventDefinition.type.getJavaType()» get«eventDefinition.getValueName().toFirstUpper()»();
-		«ENDIF-»
+		
+	public Event<«eventDefinition.type.getJavaClassType()»> get«eventDefinition.getName()»();
+	
 	«ENDIF-»
 	«ENDFOREACH-»
 	

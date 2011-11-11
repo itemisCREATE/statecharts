@@ -15,10 +15,10 @@ Contributors:
 
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
-«DEFINE file FOR ExecutionFlow-»
-«FILE 'org/yakindu/sct/runtime/java/base/ITimerHandler.java'-»
+«DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
+«FILE entry.getBasePackagePath()+'/ITimerHandler.java'-»
 «getLicenseHeader()»
-package org.yakindu.sct.runtime.java.base;
+package «entry.getBasePackageName()»;
 
 public interface ITimerHandler {
 	
