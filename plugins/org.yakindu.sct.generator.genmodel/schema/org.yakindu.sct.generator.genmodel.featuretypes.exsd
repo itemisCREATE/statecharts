@@ -63,6 +63,16 @@
                </documentation>
             </annotation>
          </attribute>
+         <attribute name="defaultProvider" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="org.yakindu.sct.generator.genmodel.extensions.AbstractDefaultFeatureValueProvider:"/>
+               </appinfo>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 

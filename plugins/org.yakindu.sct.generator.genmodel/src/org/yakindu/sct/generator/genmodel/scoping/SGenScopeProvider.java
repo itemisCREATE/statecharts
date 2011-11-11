@@ -26,7 +26,6 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 		FilteringScope filteringScope = new FilteringScope(getDelegate()
 				.getScope(context, reference),
 				new Predicate<IEObjectDescription>() {
-					@Override
 					public boolean apply(IEObjectDescription input) {
 						FeatureConfiguration featureConfig = (FeatureConfiguration) context
 								.eContainer();
@@ -46,7 +45,6 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 		FilteringScope filteringScope = new FilteringScope(getDelegate()
 				.getScope(context, reference),
 				new Predicate<IEObjectDescription>() {
-					@Override
 					public boolean apply(IEObjectDescription input) {
 						String featureName = context.getType().getName();
 						return featureName.equals(input

@@ -41,7 +41,6 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		Iterable<FeatureParameterValue> filter = Iterables.filter(
 				entry.getParameterValues(),
 				new Predicate<FeatureParameterValue>() {
-					@Override
 					public boolean apply(FeatureParameterValue input) {
 						return (input.getParameter().getName().equals(value
 								.getParameter().getName()));
