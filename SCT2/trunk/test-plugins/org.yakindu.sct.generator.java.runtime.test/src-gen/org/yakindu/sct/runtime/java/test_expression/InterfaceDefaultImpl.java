@@ -11,13 +11,13 @@
 package org.yakindu.sct.runtime.java.test_expression;
 
 import org.yakindu.sct.runtime.java.EventNotification;
-import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.NotificationSender;
+import org.yakindu.sct.runtime.java.ValuedEvent;
 
 public class InterfaceDefaultImpl extends NotificationSender implements InterfaceDefault {
 	
-	private final Event<Integer> EventEvent1 = new Event<Integer>("event1", 0); 
-	private final Event<Double> EventEvent2 = new Event<Double>("event2", 0D); 
+	private final ValuedEvent<Integer> EventEvent1 = new ValuedEvent<Integer>("event1", 0); 
+	private final ValuedEvent<Double> EventEvent2 = new ValuedEvent<Double>("event2", 0D); 
 	
 	private Test_ExpressionAbstractBaseStatemachine statemachine; 
 	
@@ -34,7 +34,7 @@ public class InterfaceDefaultImpl extends NotificationSender implements Interfac
 		statemachine.getOccuredEvents().add(EventEvent1);
 	}
 	
-	public Event<Integer> getEventEvent1() {
+	public ValuedEvent<Integer> getEventEvent1() {
 		return EventEvent1;
 	}
 	
@@ -51,7 +51,7 @@ public class InterfaceDefaultImpl extends NotificationSender implements Interfac
 		notifyListeners(new EventNotification(EventEvent2));
 	}
 	
-	public Event<Double> getEventEvent2() {
+	public ValuedEvent<Double> getEventEvent2() {
 		return EventEvent2;
 	}
 	

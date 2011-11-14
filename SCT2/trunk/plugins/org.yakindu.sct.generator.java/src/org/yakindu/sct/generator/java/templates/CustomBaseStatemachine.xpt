@@ -153,7 +153,6 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
-
 import «entry.getBasePackageName()».Event;
 «IF getTimeEvents().size > 0 -»
 import «entry.getBasePackageName()».TimeEvent;
@@ -163,15 +162,18 @@ import «entry.getBasePackageName()».ITimerHandler;
 import «entry.getBasePackageName()».TimerHandler;
 import «entry.getBasePackageName()».EventNotification;
 import «entry.getBasePackageName()».Notification;
+«IF getInternalScopeValuedEvents().size > 0 -»
+import «entry.getBasePackageName()».ValuedEvent;
+«ENDIF-»
 
 public abstract class «getBaseStatemachineName()» implements ITimedStatemachine {
 	
 	«FOREACH getInternalScopeEvents() AS event-»
-	private static final Event<«event.type.getJavaClassType()»> «event.getName()» = new Event<«event.type.getJavaClassType()»>("«event.name»", «event.getInitialValue()»); 
+	private final «event.getEventType()» «event.getName()» = new «event.getEventType()»(«event.getCreationSignature()»); 
 	«ENDFOREACH-»
 	
 	«FOREACH getTimeEvents() AS timeEvent-»
-		private static final TimeEvent «timeEvent.getName()» = new TimeEvent("«timeEvent.getName()»", «timeEvent.periodic»); 
+	private static final TimeEvent «timeEvent.getName()» = new TimeEvent("«timeEvent.getName()»", «timeEvent.periodic»); 
 	«ENDFOREACH»
 	
 	public enum State {
@@ -195,25 +197,25 @@ public abstract class «getBaseStatemachineName()» implements ITimedStatemachine 
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 	
-	private final Collection<Event<?>> occuredEvents;
+	private final Collection<Event> occuredEvents;
 	
-	private final Collection<Event<?>> outEvents;
+	private final Collection<Event> outEvents;
 	
 	private ITimerHandler timerHandler;
 	
-	public «getBaseStatemachineName()»(Collection<Event<?>> occuredEvents) {
+	public «getBaseStatemachineName()»(Collection<Event> occuredEvents) {
 		this.occuredEvents = occuredEvents;
-		this.outEvents = new HashSet<Event<?>>();
+		this.outEvents = new HashSet<Event>();
 		«FOREACH getInterfaceScope() AS interface-»
 		«interface.getInterfaceName().toFirstLower()» = new «interface.getInterfaceImplName()»(this);
 		«ENDFOREACH-»
 	}
 	
-	protected Collection<Event<?>> getOccuredEvents() {
+	protected Collection<Event> getOccuredEvents() {
 		return occuredEvents;
 	}
 	
-	protected Collection<Event<?>> getOutEvents(){
+	protected Collection<Event> getOutEvents(){
 		return outEvents;
 	}
 		

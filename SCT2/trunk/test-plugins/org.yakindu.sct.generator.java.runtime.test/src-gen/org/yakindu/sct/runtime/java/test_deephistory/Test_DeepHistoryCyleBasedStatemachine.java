@@ -18,7 +18,7 @@ import org.yakindu.sct.runtime.java.Event;
 public class Test_DeepHistoryCyleBasedStatemachine extends Test_DeepHistoryAbstractBaseStatemachine {
 
 	public Test_DeepHistoryCyleBasedStatemachine() {
-		super(new HashSet<Event<?>>());
+		super(new HashSet<Event>());
 	}
 
 	public void runCycle() {

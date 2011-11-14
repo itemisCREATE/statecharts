@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
-
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
 import org.yakindu.sct.runtime.java.ITimerHandler;
@@ -45,23 +44,23 @@ public abstract class Test_DeepHistoryAbstractBaseStatemachine implements ITimed
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 	
-	private final Collection<Event<?>> occuredEvents;
+	private final Collection<Event> occuredEvents;
 	
-	private final Collection<Event<?>> outEvents;
+	private final Collection<Event> outEvents;
 	
 	private ITimerHandler timerHandler;
 	
-	public Test_DeepHistoryAbstractBaseStatemachine(Collection<Event<?>> occuredEvents) {
+	public Test_DeepHistoryAbstractBaseStatemachine(Collection<Event> occuredEvents) {
 		this.occuredEvents = occuredEvents;
-		this.outEvents = new HashSet<Event<?>>();
+		this.outEvents = new HashSet<Event>();
 		interfaceDefault = new InterfaceDefaultImpl(this);
 	}
 	
-	protected Collection<Event<?>> getOccuredEvents() {
+	protected Collection<Event> getOccuredEvents() {
 		return occuredEvents;
 	}
 	
-	protected Collection<Event<?>> getOutEvents(){
+	protected Collection<Event> getOutEvents(){
 		return outEvents;
 	}
 		

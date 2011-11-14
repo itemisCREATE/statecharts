@@ -19,18 +19,18 @@ import org.yakindu.sct.runtime.java.Event;
 public class Test_DeepHistoryEventBasedStatemachine extends Test_DeepHistoryAbstractBaseStatemachine {
 
 	public Test_DeepHistoryEventBasedStatemachine() {
-		super(new LinkedList<Event<?>>());
+		super(new LinkedList<Event>());
 	}
 	
 	@Override
-	protected Queue<Event<?>> getOccuredEvents() {
-		return (Queue<Event<?>>) super.getOccuredEvents();
+	protected Queue<Event> getOccuredEvents() {
+		return (Queue<Event>) super.getOccuredEvents();
 	}
 	
 	@Override
 	public void runCycle() {
 		if (eventOccured()) {
-			Event<?> event = getOccuredEvents().poll();
+			Event event = getOccuredEvents().poll();
 			runCycle(Collections.singletonList(event));
 		}
 	}

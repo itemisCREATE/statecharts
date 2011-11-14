@@ -11,6 +11,7 @@
 package org.yakindu.sct.runtime.java.test_shallowhistory;
 
 
+
 public interface InterfaceDefault {
 	
 	public void raiseEvent1();

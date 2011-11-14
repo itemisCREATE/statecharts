@@ -13,11 +13,12 @@ package org.yakindu.sct.runtime.java.interfacetest;
 import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.NotificationSender;
+import org.yakindu.sct.runtime.java.ValuedEvent;
 
 public class InterfaceThirdImpl extends NotificationSender implements InterfaceThird {
 	
-	private final Event<Void> EventEvent5 = new Event<Void>("event5", null); 
-	private final Event<Boolean> EventEvent6 = new Event<Boolean>("event6", false); 
+	private final Event EventEvent5 = new Event("event5"); 
+	private final ValuedEvent<Boolean> EventEvent6 = new ValuedEvent<Boolean>("event6", false); 
 	
 	private InterfaceTestAbstractBaseStatemachine statemachine; 
 	
@@ -30,7 +31,7 @@ public class InterfaceThirdImpl extends NotificationSender implements InterfaceT
 	}
 	
 	
-	public Event<Void> getEventEvent5() {
+	public Event getEventEvent5() {
 		return EventEvent5;
 	}
 	
@@ -47,7 +48,7 @@ public class InterfaceThirdImpl extends NotificationSender implements InterfaceT
 		notifyListeners(new EventNotification(EventEvent6));
 	}
 	
-	public Event<Boolean> getEventEvent6() {
+	public ValuedEvent<Boolean> getEventEvent6() {
 		return EventEvent6;
 	}
 	

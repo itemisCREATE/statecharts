@@ -12,15 +12,13 @@ package org.yakindu.sct.runtime.java.test_localactions;
 
 import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Event;
-import org.yakindu.sct.runtime.java.NotificationSender;
 
-public class InterfaceDefaultImpl extends NotificationSender implements InterfaceDefault {
+public class InterfaceDefaultImpl implements InterfaceDefault {
 	
-	private final Event<Void> EventEvent1 = new Event<Void>("Event1", null); 
-	private final Event<Void> EventEvent2 = new Event<Void>("Event2", null); 
-	private final Event<Void> EventEvent3 = new Event<Void>("Event3", null); 
-	private final Event<Void> EventEvent4 = new Event<Void>("Event4", null); 
-	private final Event<Void> EventEvent5 = new Event<Void>("Event5", null); 
+	private final Event EventEvent1 = new Event("Event1"); 
+	private final Event EventEvent2 = new Event("Event2"); 
+	private final Event EventEvent3 = new Event("Event3"); 
+	private final Event EventEvent4 = new Event("Event4"); 
 	
 	private Test_LocalActionsAbstractBaseStatemachine statemachine; 
 	
@@ -33,7 +31,7 @@ public class InterfaceDefaultImpl extends NotificationSender implements Interfac
 	}
 	
 	
-	public Event<Void> getEventEvent1() {
+	public Event getEventEvent1() {
 		return EventEvent1;
 	}
 	
@@ -42,7 +40,7 @@ public class InterfaceDefaultImpl extends NotificationSender implements Interfac
 	}
 	
 	
-	public Event<Void> getEventEvent2() {
+	public Event getEventEvent2() {
 		return EventEvent2;
 	}
 	
@@ -51,7 +49,7 @@ public class InterfaceDefaultImpl extends NotificationSender implements Interfac
 	}
 	
 	
-	public Event<Void> getEventEvent3() {
+	public Event getEventEvent3() {
 		return EventEvent3;
 	}
 	
@@ -60,24 +58,10 @@ public class InterfaceDefaultImpl extends NotificationSender implements Interfac
 	}
 	
 	
-	public Event<Void> getEventEvent4() {
+	public Event getEventEvent4() {
 		return EventEvent4;
 	}
 	
-	public void raiseEvent5() {
-		statemachine.getOccuredEvents().add(EventEvent5);
-		statemachine.getOutEvents().add(EventEvent5);
-		notifyListeners(new EventNotification(EventEvent5));
-	}
-	
-	
-	public Event<Void> getEventEvent5() {
-		return EventEvent5;
-	}
-	
-	public boolean isRaisedEvent5() {
-		return statemachine.getOutEvents().contains(EventEvent5);
-	}
 	
 	private int varI;
 	

@@ -16,8 +16,8 @@ import org.yakindu.sct.runtime.java.NotificationSender;
 
 public class InterfaceOtherImpl extends NotificationSender implements InterfaceOther {
 	
-	private final Event<Void> EventEvent3 = new Event<Void>("event3", null); 
-	private final Event<Void> EventEvent4 = new Event<Void>("event4", null); 
+	private final Event EventEvent3 = new Event("event3"); 
+	private final Event EventEvent4 = new Event("event4"); 
 	
 	private InterfaceTestAbstractBaseStatemachine statemachine; 
 	
@@ -30,7 +30,7 @@ public class InterfaceOtherImpl extends NotificationSender implements InterfaceO
 	}
 	
 	
-	public Event<Void> getEventEvent3() {
+	public Event getEventEvent3() {
 		return EventEvent3;
 	}
 	
@@ -41,7 +41,7 @@ public class InterfaceOtherImpl extends NotificationSender implements InterfaceO
 	}
 	
 	
-	public Event<Void> getEventEvent4() {
+	public Event getEventEvent4() {
 		return EventEvent4;
 	}
 	

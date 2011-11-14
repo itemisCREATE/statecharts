@@ -23,9 +23,9 @@ package «entry.getBasePackageName()»;
 
 import «entry.getBasePackageName()».Event;
 
-public class EventNotification extends Notification<Event<?>> {
+public class EventNotification extends Notification<Event> {
 
-	public EventNotification(Event<?> element) {
+	public EventNotification(Event element) {
 		super(NotificationType.EventNotification, element);
 	}
 

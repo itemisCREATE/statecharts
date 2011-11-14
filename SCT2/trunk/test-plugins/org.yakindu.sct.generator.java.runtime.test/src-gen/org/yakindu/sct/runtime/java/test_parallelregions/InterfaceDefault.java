@@ -11,6 +11,7 @@
 package org.yakindu.sct.runtime.java.test_parallelregions;
 
 
+
 public interface InterfaceDefault {
 	
 	public void raiseEvent1();

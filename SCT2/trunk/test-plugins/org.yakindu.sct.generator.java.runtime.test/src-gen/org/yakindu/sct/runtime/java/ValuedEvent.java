@@ -10,12 +10,23 @@
  */
 package org.yakindu.sct.runtime.java;
 
-import org.yakindu.sct.runtime.java.Event;
-
-public class EventNotification extends Notification<Event> {
-
-	public EventNotification(Event element) {
-		super(NotificationType.EventNotification, element);
+public class ValuedEvent<DataType> extends Event {
+	
+	private DataType value;
+	
+	public ValuedEvent(String name, DataType value) {
+		super(name);
+		this.value = value;
 	}
-
+	
+	public DataType getValue() {
+		return value;
+	}
+	
+	public void setValue(DataType value) {
+		if (value == null) {
+			throw new IllegalArgumentException();
+		}
+		this.value = value;
+	}
 }

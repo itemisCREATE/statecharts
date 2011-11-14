@@ -18,7 +18,7 @@ import org.yakindu.sct.runtime.java.Event;
 public class Test_ExpressionCyleBasedStatemachine extends Test_ExpressionAbstractBaseStatemachine {
 
 	public Test_ExpressionCyleBasedStatemachine() {
-		super(new HashSet<Event<?>>());
+		super(new HashSet<Event>());
 	}
 
 	public void runCycle() {

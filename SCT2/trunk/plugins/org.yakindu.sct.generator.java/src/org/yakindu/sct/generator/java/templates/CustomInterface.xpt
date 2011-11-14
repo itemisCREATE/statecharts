@@ -20,31 +20,37 @@ Contributors:
 «getLicenseHeader()»
 package «getImplementationPackageName(entry)»;
 
-«IF hasOutgoingEvents()-»
+«IF hasOutgoingVoidEvents()-»
 import «entry.getBasePackageName()».Event;
+«ENDIF-»
+«IF hasOutgoingEvents()-»
 import «entry.getBasePackageName()».INotificationSender;
 «ENDIF-»
+«IF hasOutgoingValuedEvents()-»
+import «entry.getBasePackageName()».ValuedEvent;
+«ENDIF-»
+
 
 public interface «getInterfaceName()»«getInterfaceExtension()» {
 	
-	«FOREACH declarations.typeSelect(EventDefinition) AS eventDefinition-»
-	«IF  eventDefinition.direction ==  Direction::IN-»
-	public void raise«eventDefinition.name.toFirstUpper()»();
-		«IF eventDefinition.type != Type::void-»
-	public void raise«eventDefinition.name.toFirstUpper()»(«eventDefinition.type.getJavaType()» value);
+	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
+	«IF  event.direction ==  Direction::IN-»
+	public void raise«event.name.toFirstUpper()»();
+		«IF event.type != Type::void-»
+	public void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value);
 		«ENDIF-»
-	«ELSEIF eventDefinition.direction ==  Direction::OUT-»
-	public boolean isRaised«eventDefinition.name.toFirstUpper()»();
+	«ELSEIF event.direction ==  Direction::OUT-»
+	public boolean isRaised«event.name.toFirstUpper()»();
 		
-	public Event<«eventDefinition.type.getJavaClassType()»> get«eventDefinition.getName()»();
+	public «event.getEventType()» get«event.getName()»();
 	
 	«ENDIF-»
 	«ENDFOREACH-»
 	
-	«FOREACH declarations.typeSelect(VariableDefinition) AS variableDefinition-»
-	public «variableDefinition.type.getJavaType()» get«variableDefinition.getValueName().toFirstUpper()»();
-	«IF  !variableDefinition.readonly-»
-	public void set«variableDefinition.getValueName().toFirstUpper()»(«variableDefinition.type.getJavaType()» value);	
+	«FOREACH declarations.typeSelect(VariableDefinition) AS variable-»
+	public «variable.type.getJavaType()» get«variable.getValueName().toFirstUpper()»();
+	«IF  !variable.readonly-»
+	public void set«variable.getValueName().toFirstUpper()»(«variable.type.getJavaType()» value);	
 	«ENDIF-»
 	«ENDFOREACH-»
 }

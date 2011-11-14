@@ -27,7 +27,8 @@ getInterfaceScopeEvents(ExecutionFlow this) : getInterfaceScopeDeclarations().ty
 getInterfaceScopeVoidEvents(ExecutionFlow this) : getInterfaceScopeEvents().select(e|e.type==Type::void);
 getInterfaceScopeValuedEvents(ExecutionFlow this) : getInterfaceScopeEvents().select(e|e.type!=Type::void);
 
-getInternalScopeDeclarations(ExecutionFlow this) : scopes.typeSelect(InternalScope).declarations;
+getInternalScope(ExecutionFlow this) : scopes.typeSelect(InternalScope);
+getInternalScopeDeclarations(ExecutionFlow this) : getInternalScope().declarations;
 getInternalScopeVariables(ExecutionFlow this) :	getInternalScopeDeclarations().typeSelect(VariableDefinition);
 getInternalScopeEvents(ExecutionFlow this) : getInternalScopeDeclarations().typeSelect(EventDefinition);
 getInternalScopeVoidEvents(ExecutionFlow this) :getInternalScopeEvents().select(e|e.type==Type::void);
@@ -129,6 +130,18 @@ String getJavaClassType(Type type) :
 		case (Type::void) : "Void"
 		default : ""
 		};
+		
+String getEventType(EventDefinition this) :
+	if type == Type::void then
+		"Event"
+	else
+		"ValuedEvent<"+type.getJavaClassType()+">";
+		
+String getCreationSignature(EventDefinition this) :
+	if type == Type::void then
+		"\""+name+"\""
+	else
+		"\""+name+"\", "+getInitialValue();
 
 cached String functionName(Step step) : 
 	(step.isEffect()) ? step.actionFunctionName() : (
@@ -169,19 +182,28 @@ String getContext(Event this) :
 	else 
 		"";
 		
-boolean hasOutgoingEvents(InterfaceScope this) :
+boolean hasOutgoingEvents(Scope this) :
 	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).isEmpty;
+
+boolean hasOutgoingVoidEvents(Scope this) :
+	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).select(event|event.type == Type::void).isEmpty;
 	
-boolean hasEvents(InterfaceScope this) :
-	!declarations.typeSelect(EventDefinition).isEmpty;
+boolean hasOutgoingValuedEvents(Scope this) :
+	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).select(event|event.type != Type::void).isEmpty;
+
+boolean hasEvents(Scope this) :
+	!declarations.typeSelect(EventDefinition).select(event|event.type == Type::void).isEmpty;
 	
-String getInterfaceExtension(InterfaceScope this):
+boolean hasValuedEvents(Scope this) :
+	!declarations.typeSelect(EventDefinition).select(event|event.type != Type::void).isEmpty;
+	
+String getInterfaceExtension(Scope this):
 	if (hasOutgoingEvents()) then
 		" extends INotificationSender"
 	else
 		null;
 		
-String getInterfaceImplExtension(InterfaceScope this):
+String getInterfaceImplExtension(Scope this):
 	if (hasOutgoingEvents()) then
 		" extends NotificationSender"
 	else

@@ -18,7 +18,7 @@ import org.yakindu.sct.runtime.java.Event;
 public class Test_TransitionCyleBasedStatemachine extends Test_TransitionAbstractBaseStatemachine {
 
 	public Test_TransitionCyleBasedStatemachine() {
-		super(new HashSet<Event<?>>());
+		super(new HashSet<Event>());
 	}
 
 	public void runCycle() {

@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
-
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.TimeEvent;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
@@ -22,13 +21,14 @@ import org.yakindu.sct.runtime.java.ITimerHandler;
 import org.yakindu.sct.runtime.java.TimerHandler;
 import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Notification;
+import org.yakindu.sct.runtime.java.ValuedEvent;
 
 public abstract class Test_TransitionAbstractBaseStatemachine implements ITimedStatemachine {
 	
-	private static final Event<Integer> EventEvent10 = new Event<Integer>("event10", 0); 
+	private final ValuedEvent<Integer> EventEvent10 = new ValuedEvent<Integer>("event10", 0); 
 	
-		private static final TimeEvent State1_time_event_0 = new TimeEvent("State1_time_event_0", false); 
-		private static final TimeEvent State1_time_event_1 = new TimeEvent("State1_time_event_1", false); 
+	private static final TimeEvent State1_time_event_0 = new TimeEvent("State1_time_event_0", false); 
+	private static final TimeEvent State1_time_event_1 = new TimeEvent("State1_time_event_1", false); 
 	
 	
 	public enum State {
@@ -43,24 +43,24 @@ public abstract class Test_TransitionAbstractBaseStatemachine implements ITimedS
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 	
-	private final Collection<Event<?>> occuredEvents;
+	private final Collection<Event> occuredEvents;
 	
-	private final Collection<Event<?>> outEvents;
+	private final Collection<Event> outEvents;
 	
 	private ITimerHandler timerHandler;
 	
-	public Test_TransitionAbstractBaseStatemachine(Collection<Event<?>> occuredEvents) {
+	public Test_TransitionAbstractBaseStatemachine(Collection<Event> occuredEvents) {
 		this.occuredEvents = occuredEvents;
-		this.outEvents = new HashSet<Event<?>>();
+		this.outEvents = new HashSet<Event>();
 		interfaceA = new InterfaceAImpl(this);
 		interfaceDefault = new InterfaceDefaultImpl(this);
 	}
 	
-	protected Collection<Event<?>> getOccuredEvents() {
+	protected Collection<Event> getOccuredEvents() {
 		return occuredEvents;
 	}
 	
-	protected Collection<Event<?>> getOutEvents(){
+	protected Collection<Event> getOutEvents(){
 		return outEvents;
 	}
 		
