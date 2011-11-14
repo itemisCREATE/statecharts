@@ -47,11 +47,12 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 
 	private IStructuredSelection selection;
 
-	private SGenWizardPage2 generatorConfigPage;
+	protected SGenWizardPage2 generatorConfigPage;
 
 	@Inject
 	private IResourceDescriptions resourceDescriptions;
 
+	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 		setWindowTitle("New Yakindu SGen Model");
@@ -59,20 +60,21 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 
 	}
 
+	@Override
 	public void addPages() {
-		modelFilePage = new SGenWizardPage1("fileName", selection,
-				"sgen");
+		modelFilePage = new SGenWizardPage1("fileName", selection, "sgen");
 		modelFilePage.setTitle("YAKINDU SCT Diagram");
 		modelFilePage.setDescription("Create a new YAKINDU SCT Diagram File");
 		addPage(modelFilePage);
 		generatorConfigPage = new SGenWizardPage2("Statecharts",
-				resourceDescriptions);
+				resourceDescriptions, modelFilePage);
 		generatorConfigPage.setTitle("Generator Configuration");
 		generatorConfigPage
 				.setDescription("Select the Statecharts and the Generator type");
 		addPage(generatorConfigPage);
 	}
-	
+
+	@Override
 	public boolean performFinish() {
 		IRunnableWithProgress op = new WorkspaceModifyOperation(null) {
 			@Override
@@ -85,7 +87,8 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 				location = location.append(containerFullPath);
 				String osString = location.toOSString();
 				System.out.println(osString);
-				createDefaultModel(osString);
+				String generatorId = generatorConfigPage.getGeneratorId();
+				createDefaultModel(osString, generatorId);
 			}
 		};
 		try {
@@ -96,9 +99,9 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 		return true;
 	}
 
-	private void createDefaultModel(String target) {
+	private void createDefaultModel(String target, String generatorId) {
 		ArrayList<Statechart> statecharts = Lists.newArrayList();
-		ModelCreator creator = new ModelCreator("yakindu::java", statecharts);
+		ModelCreator creator = new ModelCreator(generatorId, statecharts);
 		GeneratorModel model = creator.create();
 		Injector injector = SGenActivator.getInstance().getInjector(
 				"org.yakindu.sct.generator.genmodel.SGen");

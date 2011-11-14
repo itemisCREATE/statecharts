@@ -213,7 +213,6 @@
       </menuContribution>
    </extension>
    <!-- New File Wizard -->
-   <!--
     <extension
          point="org.eclipse.ui.newWizards">
       <wizard
@@ -224,7 +223,6 @@
             project="false">
       </wizard>
    </extension>
-   -->
 
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="org.yakindu.sct.generator.genmodel.SGen.compare.contentViewers"
