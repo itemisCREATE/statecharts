@@ -3,6 +3,8 @@ import sexec;
 import ecore;
 import sgraph;
 
+InterfaceScope getInterfaceScope(Assignment this) : ((InterfaceScope)this.varRef.eContainer);
+
 toCCode(Void void) :
 	"/*toCCode() called with NULL element. Polymorphic resolver could not match callable method!*/";
 String toCCode(Void o, String statechartReference) : 
@@ -15,31 +17,39 @@ String toCCode(Statement statement) :
 	null; //polymorphic placeholder (abstract rule)
  
 String toCCode(PrimitiveValueExpression primValue) :
-	primValue.value;
+	(primValue.value == "true" ? "bool_true" :
+	(primValue.value == "false" ? "bool_false" :
+	primValue.value ));
 
 /* Assignment */
 String toCCode(Assignment assignment) :
   switch (assignment.operator) {
-  case (AssignmentOperator::assign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + assignment.varRef.name + " = " + assignment.expression.toCCode() + ";"  
-  case (AssignmentOperator::multAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " *= " + assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::divAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " /= " + assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::modAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " %= " + assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::addAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " += " + assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::subAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " -= " + assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::leftShiftAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " <<= "+ assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::rightShiftAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " >>= " + assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::andAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " &= " + assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::xorAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " ^= " + assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::orAssign) : ((InterfaceScope)assignment.varRef.eContainer).name + "->" + " |= " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::assign) : assignment.varRef.toCCode() + " = " + assignment.expression.toCCode() + ";"  
+  case (AssignmentOperator::multAssign) : assignment.varRef.toCCode() + " *= " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::divAssign) : assignment.varRef.toCCode() + " /= " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::modAssign) : assignment.varRef.toCCode() + " %= " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::addAssign) : assignment.varRef.toCCode() + " += " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::subAssign) : assignment.varRef.toCCode() + " -= " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::leftShiftAssign) : assignment.varRef.toCCode() + " <<= "+ assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::rightShiftAssign) : assignment.varRef.toCCode() + " >>= " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::andAssign) : assignment.varRef.toCCode() + " &= " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::xorAssign) : assignment.varRef.toCCode() + " ^= " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::orAssign) : assignment.varRef.toCCode() + " |= " + assignment.expression.toCCode() + ";"
   default : ""
   };
 		
 /* EventRaising */
 String toCCode(EventRaising eventRaising) :
-  "{ _Event* ev = eventPool_createEvent(handle->base.eventPool, ev_"+eventRaising.event.name+"); if (ev) { " + eventRaising.addValue() + "statemachine_cy_setEvent(&handle->base, ev); } }";
+	((eventRaising.value == null)?"":
+	"((" + eventRaising.event.name + "*) handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.name + ")->value = " + eventRaising.value.toCCode() + ";") + 
+	" statemachine_cy_setEvent(&handle->base, handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.name + "); ";
+//  "{ _Event* ev = eventPool_createEvent(handle->base.eventPool, ev_"+eventRaising.event.name+"); if (ev) { " + eventRaising.addValue() + "statemachine_cy_setEvent(&handle->base, ev); } }";
+
+String getInterfaceName(EventRaising event) :
+	"interface" + (( ((InterfaceScope)event.event.eContainer).name == null)?"":((InterfaceScope)event.event.eContainer).name.toFirstUpper());
 
 String addValue(EventRaising event) :
-  ( (event.value == null)?"":("ev->value = " + event.value.toCCode() + ";") );
+  ( (event.value == null)?"":("((" +event.event.name + "*)ev)->value = " + event.value.toCCode() + "; ") );
 
 /* Logical Expressions */
 String toCCode(LogicalOrExpression expression) :
@@ -70,8 +80,35 @@ String toCCode(NumericalMultiplyDivideExpression expression) :
   	expression.leftOperand.toCCode() + getOperator(expression.operator) + expression.rightOperand.toCCode();
 
 // is this just relevant for events?
-String toCCode(ElementReferenceExpression ev) :
-    " ( eventSet_check( &handle->base.eventSet, ev_" + ev.value.name.toLowerCase() + ") ) ";
+String toCCode(ElementReferenceExpression ref) :
+	ref.value.toCCode();
+
+String toCCode(Declaration dec) :
+	"declartion type not specified";
+	
+String toCCode(EventDefinition evDef) :
+    " ( eventSet_check( &handle->base.eventSet, ev_" + evDef.name.toLowerCase() + ") ) ";
+
+/*
+String getScope(EObject eo) :
+"unkownScope";
+
+String getScope(InterfaceScope ifScope) :
+	"if->";
+	
+String getScope(InternalScope inScope) :
+	"internal->";
+*/
+/* can not handle internal scope  */
+
+ExecutionFlow getExecutionFlow(InterfaceScope this) : ((ExecutionFlow)this.eContainer);
+String interfaceObjectName(InterfaceScope this) : "interface" + ((this.name == null)?"":this.name.toFirstUpper());
+
+String getInterface(VariableDefinition var) :
+	((InterfaceScope)var.eContainer).interfaceObjectName();
+
+String toCCode(VariableDefinition var) :
+    " handle->"+ var.getInterface() + "." + var.name.toLowerCase() + " ";
 
 String getOperator(AdditiveOperator operator) : 
     switch(operator) {
@@ -105,7 +142,7 @@ String eventTypeToString(Type type) :
   case (Type::real) : "real"
   case (Type::integer) : "integer"
   case (Type::boolean) : "boolean"
-  case (Type::string)  : "strng"
+  case (Type::string)  : "string"
   default : "unknownType"
  };
   

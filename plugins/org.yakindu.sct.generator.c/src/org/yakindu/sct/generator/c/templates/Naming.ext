@@ -3,6 +3,7 @@ import sexec;
 import ecore;
 import sgraph;
 
+ExecutionFlow getExecutionFlow(InterfaceScope this) : ((ExecutionFlow)this.eContainer);
 
 String scName(Expression statement) : ((ExecutionFlow)statement.eRootContainer).name ;
 
@@ -41,8 +42,6 @@ boolean isExitAction(Step step) : ExecutionState.isInstance(step.eContainer) && 
 Reaction reaction(Step this) : (Reaction) this.eContainer ;
 ExecutionState state(Reaction this) : (ExecutionState) eContainer;
 ExecutionState state(Step this) : (ExecutionState) eContainer;
-
-ExecutionFlow getExecutionFlow(InterfaceScope this) : ((ExecutionFlow)this.eContainer);
 
 String interfaceName(InterfaceScope this) : this.getExecutionFlow().name.toFirstLower() + ((this.name == null) ? "_if" : "_if_" + this.name);
 String interfaceClassName(InterfaceScope this) : this.getExecutionFlow().name.toFirstUpper() + "If" + ((this.name == null)?"":this.name.toFirstUpper());
