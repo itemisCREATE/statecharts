@@ -12,7 +12,7 @@ package org.yakindu.sct.generator.genmodel.ui.wizard;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -24,14 +24,11 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgraph.Statechart;
 
-import com.google.common.collect.Lists;
-import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
@@ -49,9 +46,6 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 
 	protected SGenWizardPage2 generatorConfigPage;
 
-	@Inject
-	private IResourceDescriptions resourceDescriptions;
-
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
@@ -66,8 +60,7 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 		modelFilePage.setTitle("YAKINDU SCT Diagram");
 		modelFilePage.setDescription("Create a new YAKINDU SCT Diagram File");
 		addPage(modelFilePage);
-		generatorConfigPage = new SGenWizardPage2("Statecharts",
-				resourceDescriptions, modelFilePage);
+		generatorConfigPage = new SGenWizardPage2("Statecharts", modelFilePage);
 		generatorConfigPage.setTitle("Generator Configuration");
 		generatorConfigPage
 				.setDescription("Select the Statecharts and the Generator type");
@@ -87,20 +80,21 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 				location = location.append(containerFullPath);
 				String osString = location.toOSString();
 				System.out.println(osString);
-				String generatorId = generatorConfigPage.getGeneratorId();
-				createDefaultModel(osString, generatorId);
+				createDefaultModel(osString);
 			}
 		};
 		try {
 			getContainer().run(false, true, op);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 		return true;
 	}
 
-	private void createDefaultModel(String target, String generatorId) {
-		ArrayList<Statechart> statecharts = Lists.newArrayList();
+	private void createDefaultModel(String target) {
+		List<Statechart> statecharts = generatorConfigPage.getStatecharts();
+		String generatorId = generatorConfigPage.getGeneratorId();
 		ModelCreator creator = new ModelCreator(generatorId, statecharts);
 		GeneratorModel model = creator.create();
 		Injector injector = SGenActivator.getInstance().getInjector(
