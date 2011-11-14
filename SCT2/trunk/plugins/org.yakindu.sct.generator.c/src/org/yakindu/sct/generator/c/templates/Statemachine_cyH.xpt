@@ -25,7 +25,7 @@ Templates for the main statechart c file.
 typedef struct {
   StatemachineBase base;
   EventSet eventSet;
-  _Event** eventList;
+//  _Event** eventList;
   EventPool* eventPool;
 } Statemachine_cy ;
 
@@ -34,7 +34,7 @@ extern void statemachine_cy_init(Statemachine_cy* handle, uint16_t maxStates,
 
 extern void statemachine_cy_init_staticData(Statemachine_cy* handle,
 		uint16_t maxEvents, Timer* timer, uint32_t* staticStateData,
-		boolean* staticEventSet, EventType* eventTypes, _Event** staticListPtr, EventPool* eventPool);
+		boolean* staticEventSet, EventType* eventTypes,/* _Event** staticListPtr,*/ EventPool* eventPool);
 
 extern void statemachine_cy_exit(Statemachine_cy* handle);
 

@@ -28,17 +28,17 @@ Templates for the main statechart c file.
 void statemachine_cy_init(Statemachine_cy* handle, uint16_t maxStates,
 		uint16_t maxEvents, Timer* timer, EventPool* eventPool) {
 
-	uint32_t i;
+//	uint32_t i;
 
 	statemachineBase_init((StatemachineBase*) handle, maxStates, timer);
 	eventSet_init(&handle->eventSet, maxEvents);
 
 	/* This is only a place for the pointers to the actual Events */
-	handle->eventList = malloc(sizeof(_Event*) * maxEvents);
+//	handle->eventList = malloc(sizeof(_Event*) * maxEvents);
 
 	//memset(); <- do we have string.h?
-	for (i=0; i<maxEvents; ++i)
-		handle->eventList[i] = 0;
+//	for (i=0; i<maxEvents; ++i)
+//		handle->eventList[i] = 0;
 
 	/* eventPool must be initialized at this point */
 	handle->eventPool = eventPool;
@@ -48,13 +48,13 @@ void statemachine_cy_init(Statemachine_cy* handle, uint16_t maxStates,
 
 void statemachine_cy_init_staticData(Statemachine_cy* handle,
 		uint16_t maxEvents, Timer* timer, uint32_t* staticStateData,
-		boolean* staticEventSet, EventType* eventTypes, _Event** staticListPtr, EventPool* eventPool) {
+		boolean* staticEventSet, EventType* eventTypes, /*_Event** staticListPtr,*/ EventPool* eventPool) {
 	statemachineBase_init_staticData((StatemachineBase*) handle,
 			staticStateData, timer);
 	eventSet_init_staticData(&handle->eventSet, maxEvents, staticEventSet, eventTypes);
 
 	/* Hand out event List */
-	handle->eventList = staticListPtr;
+//	handle->eventList = staticListPtr;
 
 	/* eventPool must be initialized at this point */
 	handle->eventPool = eventPool;
@@ -62,16 +62,16 @@ void statemachine_cy_init_staticData(Statemachine_cy* handle,
 }
 
 void statemachine_cy_exit(Statemachine_cy* handle) {
-
+/*
 	uint32_t i;
 	// the active events, which are not been handled need to be freed
 	for (i = 0; i < handle->eventSet.maxEvents; ++i) {
 		if (eventSet_is_type(&handle->eventSet, i, ev_type_input) && eventSet_check(&handle->eventSet, i))
 			eventPool_freeEvent(handle->eventPool, handle->eventList[i]);
 	}
-
-	if (handle->base.isStaticData == bool_false)
-		free(handle->eventList);
+*/
+//	if (handle->base.isStaticData == bool_false)
+//		free(handle->eventList);
 
 	eventSet_exit(&handle->eventSet);
 	statemachineBase_exit((StatemachineBase*) handle);
@@ -87,9 +87,9 @@ void statemachine_cy_runCycle(Statemachine_cy* handle) {
 		// only delete events, that where marked as out
 		if (eventSet_is_type(&handle->eventSet,i,ev_type_output) && eventSet_check(&handle->eventSet, i)) {
 			// output events are out of our control
-			//eventPool_freeEvent(handle->eventPool, handle->eventList[i]);
+		    // eventPool_freeEvent(handle->eventPool, handle->eventList[i]);
 			eventSet_clean_single(&handle->eventSet, i);
-			handle->eventList[i] = 0;
+//			handle->eventList[i] = 0;
 		}
 	}
 
@@ -100,9 +100,9 @@ void statemachine_cy_runCycle(Statemachine_cy* handle) {
 	for (i=0; i<handle->eventSet.maxEvents; ++i) {
 		// only delete events, that where marked as out
 		if (eventSet_is_type(&handle->eventSet,i,ev_type_input) && eventSet_check(&handle->eventSet, i)) {
-			eventPool_freeEvent(handle->eventPool, handle->eventList[i]);
+//			eventPool_freeEvent(handle->eventPool, handle->eventList[i]);
 			eventSet_clean_single(&handle->eventSet, i);
-			handle->eventList[i] = 0;
+//			handle->eventList[i] = 0;
 		}
 	}
 
@@ -111,7 +111,7 @@ void statemachine_cy_runCycle(Statemachine_cy* handle) {
 void statemachine_cy_setEvent(Statemachine_cy* handle, _Event* ev) {
 
 	eventSet_set(&handle->eventSet,ev->id);
-	handle->eventList[ev->id] = ev;
+//	handle->eventList[ev->id] = ev;
 
 }
 
