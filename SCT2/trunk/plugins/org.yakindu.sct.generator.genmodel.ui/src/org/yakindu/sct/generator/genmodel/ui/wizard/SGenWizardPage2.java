@@ -239,6 +239,7 @@ public class SGenWizardPage2 extends WizardPage {
 
 	@Override
 	public void setVisible(boolean visible) {
+		stateChartTree.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
 		super.setVisible(visible);
 		if (visible) {
 			IPath containerPath = fileSelectionPage.getFilePath();
@@ -252,7 +253,6 @@ public class SGenWizardPage2 extends WizardPage {
 			} catch (CoreException e) {
 				// input will be empty
 			}
-			stateChartTree.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
 			checkComplete();
 		}
 	}
