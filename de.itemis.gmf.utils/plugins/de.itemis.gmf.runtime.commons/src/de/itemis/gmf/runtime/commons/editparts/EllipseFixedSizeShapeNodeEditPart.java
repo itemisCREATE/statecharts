@@ -36,5 +36,4 @@ public abstract class EllipseFixedSizeShapeNodeEditPart extends
 		figure.add(getPrimaryShape());
 		return figure;
 	}
-
 }
