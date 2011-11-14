@@ -68,7 +68,6 @@ public class SGenWizardPage2 extends WizardPage {
 
 	private static final ITreeContentProvider treeContentProvider = new ITreeContentProvider() {
 
-		@Override
 		public Object[] getElements(Object inputElement) {
 			if (inputElement instanceof TreeNode) {
 				return ((TreeNode) inputElement).children.toArray();
@@ -76,7 +75,6 @@ public class SGenWizardPage2 extends WizardPage {
 			return new Object[] {};
 		}
 
-		@Override
 		public boolean hasChildren(Object element) {
 			if (element instanceof TreeNode) {
 				return !((TreeNode) element).children.isEmpty();
@@ -84,7 +82,6 @@ public class SGenWizardPage2 extends WizardPage {
 			return false;
 		}
 
-		@Override
 		public Object[] getChildren(Object parentElement) {
 			if (parentElement instanceof TreeNode) {
 				return ((TreeNode) parentElement).children.toArray();
@@ -92,17 +89,14 @@ public class SGenWizardPage2 extends WizardPage {
 			return new Object[] {};
 		}
 
-		@Override
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			// not handled
 		}
 
-		@Override
 		public void dispose() {
 			// not handled
 		}
 
-		@Override
 		public Object getParent(Object element) {
 			return null;
 		}
@@ -110,7 +104,6 @@ public class SGenWizardPage2 extends WizardPage {
 	};
 	private static final LabelProvider treeLabelProvider = new LabelProvider() {
 
-		@Override
 		public Image getImage(Object element) {
 			if (element instanceof TreeNode) {
 				TreeNode treeNode = (TreeNode) element;
@@ -146,7 +139,6 @@ public class SGenWizardPage2 extends WizardPage {
 		this.fileSelectionPage = fileSelectionPage;
 	}
 
-	@Override
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
 		setControl(container);
@@ -293,7 +285,6 @@ public class SGenWizardPage2 extends WizardPage {
 
 	private static final Function<IResource, TreeNode> toTreeNode = new Function<IResource, TreeNode>() {
 
-		@Override
 		public TreeNode apply(IResource from) {
 			return new TreeNode(from);
 		}
@@ -313,7 +304,6 @@ public class SGenWizardPage2 extends WizardPage {
 		}
 
 		static final Predicate<TreeNode> isEmpty = new Predicate<TreeNode>() {
-			@Override
 			public boolean apply(TreeNode input) {
 				return input.isEmpty();
 			}
@@ -330,7 +320,6 @@ public class SGenWizardPage2 extends WizardPage {
 			this.matches = matches;
 		}
 
-		@Override
 		public boolean visit(IResource resource) throws CoreException {
 			if (rootFolder.equals(resource)) {
 				return true;
@@ -354,7 +343,6 @@ public class SGenWizardPage2 extends WizardPage {
 			this.matches = matches;
 		}
 
-		@Override
 		public boolean visit(IResource resource) throws CoreException {
 			if (rootResource.equals(resource)
 					&& resource.getType() == IResource.FOLDER) {
