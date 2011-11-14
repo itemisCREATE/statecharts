@@ -10,21 +10,26 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.wizard;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTreeViewer;
 import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.jface.viewers.ICheckStateListener;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -36,11 +41,17 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.IDE;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.ui.editor.StatechartImages;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -50,22 +61,88 @@ import com.google.common.collect.Lists;
  */
 public class SGenWizardPage2 extends WizardPage {
 
-	protected static final Object STATECHART_FILE_EXTEMSION = "sct";
-	private ComboViewer generators;
-	protected CheckboxTreeViewer statecharts;
-	private final IResourceDescriptions resourceDescriptions;
+	protected static final String STATECHART_FILE_EXTENSION = "sct";
+	private ComboViewer generatorCombo;
+	protected CheckboxTreeViewer stateChartTree;
 	private final SGenWizardPage1 fileSelectionPage;
+
+	private static final ITreeContentProvider treeContentProvider = new ITreeContentProvider() {
+
+		@Override
+		public Object[] getElements(Object inputElement) {
+			if (inputElement instanceof TreeNode) {
+				return ((TreeNode) inputElement).children.toArray();
+			}
+			return new Object[] {};
+		}
+
+		@Override
+		public boolean hasChildren(Object element) {
+			if (element instanceof TreeNode) {
+				return !((TreeNode) element).children.isEmpty();
+			}
+			return false;
+		}
+
+		@Override
+		public Object[] getChildren(Object parentElement) {
+			if (parentElement instanceof TreeNode) {
+				return ((TreeNode) parentElement).children.toArray();
+			}
+			return new Object[] {};
+		}
+
+		@Override
+		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+			// not handled
+		}
+
+		@Override
+		public void dispose() {
+			// not handled
+		}
+
+		@Override
+		public Object getParent(Object element) {
+			return null;
+		}
+
+	};
+	private static final LabelProvider treeLabelProvider = new LabelProvider() {
+
+		@Override
+		public Image getImage(Object element) {
+			if (element instanceof TreeNode) {
+				TreeNode treeNode = (TreeNode) element;
+				if (isStatechartResource(treeNode.resource)) {
+					return StatechartImages.LOGO.image();
+				} else if (treeNode.resource.getType() == IResource.FOLDER) {
+					return PlatformUI.getWorkbench().getSharedImages()
+							.getImage(ISharedImages.IMG_OBJ_FOLDER);
+				} else if (treeNode.resource.getType() == IResource.PROJECT) {
+					return PlatformUI.getWorkbench().getSharedImages()
+							.getImage(IDE.SharedImages.IMG_OBJ_PROJECT);
+				}
+			}
+			return super.getImage(element);
+		}
+
+		@Override
+		public String getText(Object element) {
+			if (element instanceof TreeNode) {
+				return ((TreeNode) element).resource.getName();
+			}
+			return super.getText(element);
+		}
+	};
 
 	/**
 	 * @param pageName
 	 * @param resourceDescriptions
 	 * @param selection
 	 */
-	protected SGenWizardPage2(String pageName,
-			IResourceDescriptions resourceDescriptions,
-			SGenWizardPage1 fileSelectionPage) {
+	protected SGenWizardPage2(String pageName, SGenWizardPage1 fileSelectionPage) {
 		super(pageName);
-		this.resourceDescriptions = resourceDescriptions;
 		this.fileSelectionPage = fileSelectionPage;
 	}
 
@@ -80,134 +157,84 @@ public class SGenWizardPage2 extends WizardPage {
 				false, 1, 1));
 		lblNewLabel.setText("Statecharts");
 
-		statecharts = new CheckboxTreeViewer(container, SWT.BORDER);
-		statecharts.getTree().setLayoutData(
+		stateChartTree = new CheckboxTreeViewer(container, SWT.BORDER);
+		stateChartTree.getTree().setLayoutData(
 				new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		statecharts.setContentProvider(new ITreeContentProvider() {
 
-			@Override
-			public void inputChanged(Viewer viewer, Object oldInput,
-					Object newInput) {
-				// TODO Auto-generated method stub
+		stateChartTree.setContentProvider(treeContentProvider);
 
-			}
-
-			@Override
-			public void dispose() {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public boolean hasChildren(Object element) {
-				return element instanceof IProject;
-			}
-
-			@Override
-			public Object getParent(Object element) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public Object[] getElements(Object inputElement) {
-				if (inputElement instanceof IFolder) {
-					return new Object[] { ((IFolder) inputElement).getProject() };
-				}
-				if (inputElement instanceof IProject) {
-					return findStatecharts((IProject) inputElement).toArray();
-				}
-				return new Object[] {};
-			}
-
-			@Override
-			public Object[] getChildren(Object parentElement) {
-				if (parentElement instanceof IProject) {
-					return findStatecharts((IProject) parentElement).toArray();
-				}
-				return new Object[] {};
-			}
-		});
-		statecharts.setLabelProvider(new LabelProvider() {
-
-			@Override
-			public String getText(Object element) {
-				if (element instanceof IResource) {
-					return ((IResource) element).getFullPath().toString();
-				}
-				return super.getText(element);
-			}
-		});
-		statecharts.addCheckStateListener(new ICheckStateListener() {
-
-			@Override
-			public void checkStateChanged(CheckStateChangedEvent event) {
-				Object element = event.getElement();
-				if (element instanceof IProject) {
-					statecharts.setSubtreeChecked(element, event.getChecked());
-				}
-				checkComplete();
-
-			}
-		});
-		// statecharts.addDoubleClickListener(new IDoubleClickListener() {
-		//
-		// @Override
-		// public void doubleClick(DoubleClickEvent event) {
-		// IStructuredSelection selection = (IStructuredSelection)
-		// event.getSelection();
-		// Object firstElement = selection.getFirstElement();
-		// if (firstElement instanceof IProject) {
-		// boolean expanded = statecharts
-		// .getExpandedState(firstElement);
-		// statecharts.setExpandedState(firstElement, !expanded);
-		// }
-		//
-		// }
-		// });
+		stateChartTree.setLabelProvider(treeLabelProvider);
+		stateChartTree
+				.addCheckStateListener(new TreePropagatingCheckStateListener(
+						stateChartTree) {
+					@Override
+					public void checkStateChanged(CheckStateChangedEvent event) {
+						super.checkStateChanged(event);
+						checkComplete();
+					}
+				});
+		stateChartTree
+				.addDoubleClickListener(new TreeExpandingDoubleClickListener(
+						stateChartTree));
 		Label lblGenerator = new Label(container, SWT.NONE);
 		lblGenerator.setText("Generator");
 
-		generators = new ComboViewer(container, SWT.READ_ONLY);
-		generators.getCombo().setLayoutData(
+		generatorCombo = new ComboViewer(container, SWT.READ_ONLY);
+		generatorCombo.getCombo().setLayoutData(
 				new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		generators.setLabelProvider(new GeneratorDescriptorLabelProvider());
-		generators.setContentProvider(new ArrayContentProvider());
+		generatorCombo.setLabelProvider(new GeneratorDescriptorLabelProvider());
+		generatorCombo.setContentProvider(new ArrayContentProvider());
 		GeneratorDescriptor[] generatorArray = Iterables.toArray(
 				GeneratorExtensions.getGeneratorDescriptors(),
 				GeneratorDescriptor.class);
-		generators.setInput(generatorArray);
-		generators.getCombo().select(0);
+		generatorCombo.setInput(generatorArray);
+		generatorCombo.getCombo().select(0);
 
 		checkComplete();
 
 	}
 
-	/**
-	 * @param inputElement
-	 * @return
-	 */
-	protected List<IResource> findStatecharts(IProject project) {
-		final List<IResource> statecharts = Lists.newArrayList();
-		try {
-			project.accept(new IResourceVisitor() {
-
-				@Override
-				public boolean visit(IResource resource) throws CoreException {
-					if (resource.getType() == IResource.FILE
-							&& STATECHART_FILE_EXTEMSION.equals(resource
-									.getFileExtension())) {
-						statecharts.add(resource);
-					}
-					return resource.getType() == IResource.FOLDER
-							|| resource.getType() == IResource.PROJECT;
+	public List<Statechart> getStatecharts() {
+		List<Statechart> statecharts = Lists.newArrayList();
+		Object[] checkedElements = stateChartTree.getCheckedElements();
+		for (Object object : checkedElements) {
+			if (object instanceof TreeNode) {
+				IResource resource = ((TreeNode) object).resource;
+				if (isStatechartResource(resource)) {
+					statecharts.add(loadStatechart(resource));
 				}
-			});
-		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			}
 		}
 		return statecharts;
+	}
+
+	private static Statechart loadStatechart(IResource resource) {
+		Resource emfResource = toEmfResource(resource);
+		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(
+				emfResource.getContents(), SGraphPackage.Literals.STATECHART);
+		return statechart;
+	}
+
+	private static Resource toEmfResource(IResource iResource) {
+		URI uri = URI.createPlatformResourceURI(iResource.getFullPath()
+				.toString(),
+				true);
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Resource resource = Resource.Factory.Registry.INSTANCE.getFactory(uri)
+				.createResource(uri);
+		resourceSet.getResources().add(resource);
+		try {
+			resource.load(Collections.emptyMap());
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return resource;
+	}
+
+	public String getGeneratorId() {
+		return ((GeneratorDescriptor) ((StructuredSelection) generatorCombo
+				.getSelection()).getFirstElement()).getId();
 	}
 
 	@Override
@@ -217,14 +244,17 @@ public class SGenWizardPage2 extends WizardPage {
 			IPath containerPath = fileSelectionPage.getFilePath();
 			IFolder folder = ResourcesPlugin.getWorkspace().getRoot()
 					.getFolder(containerPath);
-			statecharts.setInput(folder);
+			try {
+				TreeNode projectTree = new TreeNode(folder.getProject());
+				TreeNode tree = buildTree(folder.getProject());
+				projectTree.children.add(tree);
+				stateChartTree.setInput(projectTree);
+			} catch (CoreException e) {
+				// input will be empty
+			}
+			stateChartTree.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
 			checkComplete();
 		}
-
-	}
-
-	List<Statechart> getStatechars() {
-		return Collections.emptyList();
 	}
 
 	protected void checkComplete() {
@@ -232,13 +262,109 @@ public class SGenWizardPage2 extends WizardPage {
 	}
 
 	protected boolean validatePage() {
-		return statecharts.getCheckedElements().length > 0
-				&& !generators.getSelection().isEmpty();
+		return stateChartTree.getCheckedElements().length > 0
+				&& !generatorCombo.getSelection().isEmpty();
 	}
 
-	public String getGeneratorId() {
-		return ((GeneratorDescriptor) ((StructuredSelection) generators
-				.getSelection()).getFirstElement()).getId();
+	private TreeNode buildTree(IResource resource) throws CoreException {
+		final TreeNode root = new TreeNode(resource);
+		List<IResource> statecharts = Lists.newArrayList();
+		resource.accept(new StatechartVisitor(resource, statecharts));
+		if (!statecharts.isEmpty()) {
+			Iterables.addAll(root.children,
+					Iterables.transform(statecharts, toTreeNode));
+		}
+		List<IResource> folders = Lists.newArrayList();
+		resource.accept(new FolderVisitor(resource, folders));
+		for (IResource folder : folders) {
+			TreeNode subtree = buildTree(folder);
+			if (!subtree.isEmpty()) {
+				root.children.add(subtree);
+			}
+		}
+		return root;
+	}
+
+	protected static boolean isStatechartResource(IResource resource) {
+		return resource.getType() == IResource.FILE
+				&& STATECHART_FILE_EXTENSION
+						.equals(resource.getFileExtension());
+	}
+
+	private static final Function<IResource, TreeNode> toTreeNode = new Function<IResource, TreeNode>() {
+
+		@Override
+		public TreeNode apply(IResource from) {
+			return new TreeNode(from);
+		}
+	};
+
+	private static class TreeNode {
+		final IResource resource;
+		final List<TreeNode> children = Lists.newArrayList();
+
+		public TreeNode(IResource project) {
+			this.resource = project;
+		}
+
+		public boolean isEmpty() {
+			return resource.getType() == IResource.FOLDER
+					&& (children.isEmpty() || Iterables.all(children, isEmpty));
+		}
+
+		static final Predicate<TreeNode> isEmpty = new Predicate<TreeNode>() {
+			@Override
+			public boolean apply(TreeNode input) {
+				return input.isEmpty();
+			}
+		};
+	}
+
+	private class FolderVisitor implements IResourceVisitor {
+		final List<IResource> matches;
+		private final IResource rootFolder;
+
+		public FolderVisitor(IResource rootFolder, List<IResource> matches) {
+			super();
+			this.rootFolder = rootFolder;
+			this.matches = matches;
+		}
+
+		@Override
+		public boolean visit(IResource resource) throws CoreException {
+			if (rootFolder.equals(resource)) {
+				return true;
+			}
+			if (resource.getType() == IResource.FOLDER) {
+				matches.add(resource);
+			}
+			return resource.getType() == IResource.PROJECT;
+		}
+
+	}
+
+	private class StatechartVisitor implements IResourceVisitor {
+
+		final List<IResource> matches;
+		private final IResource rootResource;
+
+		public StatechartVisitor(IResource rootResource, List<IResource> matches) {
+			super();
+			this.rootResource = rootResource;
+			this.matches = matches;
+		}
+
+		@Override
+		public boolean visit(IResource resource) throws CoreException {
+			if (rootResource.equals(resource)
+					&& resource.getType() == IResource.FOLDER) {
+				return true;
+			}
+			if (isStatechartResource(resource)) {
+				matches.add(resource);
+			}
+			return resource.getType() == IResource.PROJECT;
+		}
 	}
 
 	private static class GeneratorDescriptorLabelProvider extends LabelProvider {
