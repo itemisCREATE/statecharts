@@ -13,12 +13,13 @@ package org.yakindu.sct.runtime.java.test_transition;
 import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.NotificationSender;
+import org.yakindu.sct.runtime.java.ValuedEvent;
 
 public class InterfaceDefaultImpl extends NotificationSender implements InterfaceDefault {
 	
-	private final Event<Boolean> EventEvent5 = new Event<Boolean>("event5", false); 
-	private final Event<Void> EventEvent6 = new Event<Void>("event6", null); 
-	private final Event<Void> EventEvent7 = new Event<Void>("event7", null); 
+	private final ValuedEvent<Boolean> EventEvent5 = new ValuedEvent<Boolean>("event5", false); 
+	private final Event EventEvent6 = new Event("event6"); 
+	private final Event EventEvent7 = new Event("event7"); 
 	
 	private Test_TransitionAbstractBaseStatemachine statemachine; 
 	
@@ -35,7 +36,7 @@ public class InterfaceDefaultImpl extends NotificationSender implements Interfac
 		statemachine.getOccuredEvents().add(EventEvent5);
 	}
 	
-	public Event<Boolean> getEventEvent5() {
+	public ValuedEvent<Boolean> getEventEvent5() {
 		return EventEvent5;
 	}
 	
@@ -44,7 +45,7 @@ public class InterfaceDefaultImpl extends NotificationSender implements Interfac
 	}
 	
 	
-	public Event<Void> getEventEvent6() {
+	public Event getEventEvent6() {
 		return EventEvent6;
 	}
 	
@@ -55,7 +56,7 @@ public class InterfaceDefaultImpl extends NotificationSender implements Interfac
 	}
 	
 	
-	public Event<Void> getEventEvent7() {
+	public Event getEventEvent7() {
 		return EventEvent7;
 	}
 	

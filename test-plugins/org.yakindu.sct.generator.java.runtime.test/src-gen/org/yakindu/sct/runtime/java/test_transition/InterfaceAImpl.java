@@ -13,13 +13,14 @@ package org.yakindu.sct.runtime.java.test_transition;
 import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.NotificationSender;
+import org.yakindu.sct.runtime.java.ValuedEvent;
 
 public class InterfaceAImpl extends NotificationSender implements InterfaceA {
 	
-	private final Event<Integer> EventEvent1 = new Event<Integer>("event1", 1); 
-	private final Event<Void> EventEvent2 = new Event<Void>("event2", null); 
-	private final Event<Void> EventEvent3 = new Event<Void>("event3", null); 
-	private final Event<Void> EventEvent4 = new Event<Void>("event4", null); 
+	private final ValuedEvent<Integer> EventEvent1 = new ValuedEvent<Integer>("event1", 1); 
+	private final Event EventEvent2 = new Event("event2"); 
+	private final Event EventEvent3 = new Event("event3"); 
+	private final Event EventEvent4 = new Event("event4"); 
 	
 	private Test_TransitionAbstractBaseStatemachine statemachine; 
 	
@@ -36,7 +37,7 @@ public class InterfaceAImpl extends NotificationSender implements InterfaceA {
 		statemachine.getOccuredEvents().add(EventEvent1);
 	}
 	
-	public Event<Integer> getEventEvent1() {
+	public ValuedEvent<Integer> getEventEvent1() {
 		return EventEvent1;
 	}
 	
@@ -45,7 +46,7 @@ public class InterfaceAImpl extends NotificationSender implements InterfaceA {
 	}
 	
 	
-	public Event<Void> getEventEvent2() {
+	public Event getEventEvent2() {
 		return EventEvent2;
 	}
 	
@@ -54,7 +55,7 @@ public class InterfaceAImpl extends NotificationSender implements InterfaceA {
 	}
 	
 	
-	public Event<Void> getEventEvent3() {
+	public Event getEventEvent3() {
 		return EventEvent3;
 	}
 	
@@ -65,7 +66,7 @@ public class InterfaceAImpl extends NotificationSender implements InterfaceA {
 	}
 	
 	
-	public Event<Void> getEventEvent4() {
+	public Event getEventEvent4() {
 		return EventEvent4;
 	}
 	

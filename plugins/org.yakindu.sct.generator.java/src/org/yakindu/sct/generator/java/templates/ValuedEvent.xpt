@@ -17,27 +17,30 @@ Contributors:
 
 «DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
 «IF name != null-»
-«FILE entry.getBasePackagePath()+'/TimeEvent.java'-»
+«FILE entry.getBasePackagePath()+'/ValuedEvent.java'-»
 «getLicenseHeader()»
 package «entry.getBasePackageName()»;
 
-public class TimeEvent extends ValuedEvent<Boolean> {
+public class ValuedEvent<DataType> extends Event {
 	
-	private long time = -1;
+	private DataType value;
 	
-	public TimeEvent(String name, boolean periodic) {
-		super(name, periodic);
+	public ValuedEvent(String name, DataType value) {
+		super(name);
+		this.value = value;
 	}
 	
-	public void setTime(long time){
-		this.time = time;
+	public DataType getValue() {
+		return value;
 	}
 	
-	public long getTime(){
-		return time;
+	public void setValue(DataType value) {
+		if (value == null) {
+			throw new IllegalArgumentException();
+		}
+		this.value = value;
 	}
 }
-
 «ENDFILE-»
 «ENDIF-»
 «ENDDEFINE»

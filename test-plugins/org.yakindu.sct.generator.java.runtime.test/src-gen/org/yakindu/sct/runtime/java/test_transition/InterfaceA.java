@@ -13,6 +13,7 @@ package org.yakindu.sct.runtime.java.test_transition;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.INotificationSender;
 
+
 public interface InterfaceA extends INotificationSender {
 	
 	public void raiseEvent1();
@@ -21,7 +22,7 @@ public interface InterfaceA extends INotificationSender {
 	public void raiseEvent3();
 	public boolean isRaisedEvent4();
 		
-	public Event<Void> getEventEvent4();
+	public Event getEventEvent4();
 	
 	
 }

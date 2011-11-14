@@ -10,15 +10,16 @@
  */
 package org.yakindu.sct.runtime.java.interfacetest;
 
-import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.INotificationSender;
+import org.yakindu.sct.runtime.java.ValuedEvent;
+
 
 public interface InterfaceDefault extends INotificationSender {
 	
 	public void raiseEvent1();
 	public boolean isRaisedEvent2();
 		
-	public Event<Integer> getEventEvent2();
+	public ValuedEvent<Integer> getEventEvent2();
 	
 	
 	public boolean getVarVar1();

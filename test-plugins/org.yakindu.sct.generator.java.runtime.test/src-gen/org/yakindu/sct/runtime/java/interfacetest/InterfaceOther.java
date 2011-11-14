@@ -13,12 +13,13 @@ package org.yakindu.sct.runtime.java.interfacetest;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.INotificationSender;
 
+
 public interface InterfaceOther extends INotificationSender {
 	
 	public void raiseEvent3();
 	public boolean isRaisedEvent4();
 		
-	public Event<Void> getEventEvent4();
+	public Event getEventEvent4();
 	
 	
 	public int getVarV1();

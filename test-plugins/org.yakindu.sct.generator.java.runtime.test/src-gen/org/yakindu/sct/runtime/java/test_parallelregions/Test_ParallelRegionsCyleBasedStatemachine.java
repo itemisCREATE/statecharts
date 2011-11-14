@@ -18,7 +18,7 @@ import org.yakindu.sct.runtime.java.Event;
 public class Test_ParallelRegionsCyleBasedStatemachine extends Test_ParallelRegionsAbstractBaseStatemachine {
 
 	public Test_ParallelRegionsCyleBasedStatemachine() {
-		super(new HashSet<Event<?>>());
+		super(new HashSet<Event>());
 	}
 
 	public void runCycle() {

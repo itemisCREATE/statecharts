@@ -10,26 +10,15 @@
  */
 package org.yakindu.sct.runtime.java;
 
-public class Event<DataType> {
-	
-	private DataType value;
+public class Event {
 	
 	private String name;
 	
-	public Event(String name, DataType value) {
+	public Event(String name) {
 		this.name = name;
-		this.value = value;
 	}
 	
 	public String getName() {
 		return name;
-	}
-
-	public DataType getValue() {
-		return value;
-	}
-	
-	public void setValue(DataType value) {
-		this.value = value;
 	}
 }

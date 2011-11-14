@@ -15,14 +15,14 @@ import org.yakindu.sct.runtime.java.Event;
 
 public class InterfaceDefaultImpl implements InterfaceDefault {
 	
-	private final Event<Void> EventEvent1 = new Event<Void>("event1", null); 
-	private final Event<Void> EventEvent2 = new Event<Void>("event2", null); 
-	private final Event<Void> EventEvent3 = new Event<Void>("event3", null); 
-	private final Event<Void> EventEvent4 = new Event<Void>("event4", null); 
-	private final Event<Void> EventEvent5 = new Event<Void>("event5", null); 
-	private final Event<Void> EventEvent6 = new Event<Void>("event6", null); 
-	private final Event<Void> EventEvent7 = new Event<Void>("event7", null); 
-	private final Event<Void> EventEvent8 = new Event<Void>("event8", null); 
+	private final Event EventEvent1 = new Event("event1"); 
+	private final Event EventEvent2 = new Event("event2"); 
+	private final Event EventEvent3 = new Event("event3"); 
+	private final Event EventEvent4 = new Event("event4"); 
+	private final Event EventEvent5 = new Event("event5"); 
+	private final Event EventEvent6 = new Event("event6"); 
+	private final Event EventEvent7 = new Event("event7"); 
+	private final Event EventEvent8 = new Event("event8"); 
 	
 	private Test_ShallowHistoryAbstractBaseStatemachine statemachine; 
 	
@@ -35,7 +35,7 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 	}
 	
 	
-	public Event<Void> getEventEvent1() {
+	public Event getEventEvent1() {
 		return EventEvent1;
 	}
 	
@@ -44,7 +44,7 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 	}
 	
 	
-	public Event<Void> getEventEvent2() {
+	public Event getEventEvent2() {
 		return EventEvent2;
 	}
 	
@@ -53,7 +53,7 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 	}
 	
 	
-	public Event<Void> getEventEvent3() {
+	public Event getEventEvent3() {
 		return EventEvent3;
 	}
 	
@@ -62,7 +62,7 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 	}
 	
 	
-	public Event<Void> getEventEvent4() {
+	public Event getEventEvent4() {
 		return EventEvent4;
 	}
 	
@@ -71,7 +71,7 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 	}
 	
 	
-	public Event<Void> getEventEvent5() {
+	public Event getEventEvent5() {
 		return EventEvent5;
 	}
 	
@@ -80,7 +80,7 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 	}
 	
 	
-	public Event<Void> getEventEvent6() {
+	public Event getEventEvent6() {
 		return EventEvent6;
 	}
 	
@@ -89,7 +89,7 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 	}
 	
 	
-	public Event<Void> getEventEvent7() {
+	public Event getEventEvent7() {
 		return EventEvent7;
 	}
 	
@@ -98,7 +98,7 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 	}
 	
 	
-	public Event<Void> getEventEvent8() {
+	public Event getEventEvent8() {
 		return EventEvent8;
 	}
 	

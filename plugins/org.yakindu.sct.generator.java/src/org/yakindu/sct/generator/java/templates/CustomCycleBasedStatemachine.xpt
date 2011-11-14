@@ -29,7 +29,7 @@ import «entry.getBasePackageName()».Event;
 public class «getCycleBasedStatemachineName()» extends «getBaseStatemachineName()» {
 
 	public «getCycleBasedStatemachineName()»() {
-		super(new HashSet<Event<?>>());
+		super(new HashSet<Event>());
 	}
 
 	public void runCycle() {

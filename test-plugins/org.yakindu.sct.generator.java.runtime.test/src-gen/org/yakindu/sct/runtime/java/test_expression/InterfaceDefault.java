@@ -10,8 +10,9 @@
  */
 package org.yakindu.sct.runtime.java.test_expression;
 
-import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.INotificationSender;
+import org.yakindu.sct.runtime.java.ValuedEvent;
+
 
 public interface InterfaceDefault extends INotificationSender {
 	
@@ -19,7 +20,7 @@ public interface InterfaceDefault extends INotificationSender {
 	public void raiseEvent1(int value);
 	public boolean isRaisedEvent2();
 		
-	public Event<Double> getEventEvent2();
+	public ValuedEvent<Double> getEventEvent2();
 	
 	
 	public int getVarVar1();

@@ -13,11 +13,12 @@ package org.yakindu.sct.runtime.java.interfacetest;
 import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.NotificationSender;
+import org.yakindu.sct.runtime.java.ValuedEvent;
 
 public class InterfaceDefaultImpl extends NotificationSender implements InterfaceDefault {
 	
-	private final Event<Void> EventEvent1 = new Event<Void>("event1", null); 
-	private final Event<Integer> EventEvent2 = new Event<Integer>("event2", 0); 
+	private final Event EventEvent1 = new Event("event1"); 
+	private final ValuedEvent<Integer> EventEvent2 = new ValuedEvent<Integer>("event2", 0); 
 	
 	private InterfaceTestAbstractBaseStatemachine statemachine; 
 	
@@ -30,7 +31,7 @@ public class InterfaceDefaultImpl extends NotificationSender implements Interfac
 	}
 	
 	
-	public Event<Void> getEventEvent1() {
+	public Event getEventEvent1() {
 		return EventEvent1;
 	}
 	
@@ -47,7 +48,7 @@ public class InterfaceDefaultImpl extends NotificationSender implements Interfac
 		notifyListeners(new EventNotification(EventEvent2));
 	}
 	
-	public Event<Integer> getEventEvent2() {
+	public ValuedEvent<Integer> getEventEvent2() {
 		return EventEvent2;
 	}
 	

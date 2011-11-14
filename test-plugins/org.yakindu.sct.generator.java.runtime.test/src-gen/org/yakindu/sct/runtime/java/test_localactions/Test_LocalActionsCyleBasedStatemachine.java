@@ -18,7 +18,7 @@ import org.yakindu.sct.runtime.java.Event;
 public class Test_LocalActionsCyleBasedStatemachine extends Test_LocalActionsAbstractBaseStatemachine {
 
 	public Test_LocalActionsCyleBasedStatemachine() {
-		super(new HashSet<Event<?>>());
+		super(new HashSet<Event>());
 	}
 
 	public void runCycle() {

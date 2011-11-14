@@ -18,7 +18,7 @@ import org.yakindu.sct.runtime.java.Event;
 public class InterfaceTestCyleBasedStatemachine extends InterfaceTestAbstractBaseStatemachine {
 
 	public InterfaceTestCyleBasedStatemachine() {
-		super(new HashSet<Event<?>>());
+		super(new HashSet<Event>());
 	}
 
 	public void runCycle() {

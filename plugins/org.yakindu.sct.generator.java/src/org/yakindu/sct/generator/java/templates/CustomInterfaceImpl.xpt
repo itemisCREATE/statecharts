@@ -28,11 +28,14 @@ import «entry.getBasePackageName()».Event;
 «IF hasOutgoingEvents()-»
 import «entry.getBasePackageName()».NotificationSender;
 «ENDIF-»
+«IF hasValuedEvents()-»
+import «entry.getBasePackageName()».ValuedEvent;
+«ENDIF-»
 
 public class «getInterfaceImplName()»«getInterfaceImplExtension()» implements «getInterfaceName()» {
 	
 	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
-	private final Event<«event.type.getJavaClassType()»> «event.getName()» = new Event<«event.type.getJavaClassType()»>("«event.name»", «event.getInitialValue()»); 
+	private final «event.getEventType()» «event.getName()» = new «event.getEventType()»(«event.getCreationSignature()»); 
 	«ENDFOREACH-»
 	
 	private «getBaseStatemachineName()» statemachine; 
@@ -61,7 +64,7 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension()» implements «g
 	}
 	«ENDIF-»
 	
-	public Event<«event.type.getJavaClassType()»> get«event.getName()»() {
+	public «event.getEventType()» get«event.getName()»() {
 		return «event.getName()»;
 	}
 	

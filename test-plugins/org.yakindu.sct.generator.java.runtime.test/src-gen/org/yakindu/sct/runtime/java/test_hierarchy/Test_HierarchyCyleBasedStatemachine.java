@@ -18,7 +18,7 @@ import org.yakindu.sct.runtime.java.Event;
 public class Test_HierarchyCyleBasedStatemachine extends Test_HierarchyAbstractBaseStatemachine {
 
 	public Test_HierarchyCyleBasedStatemachine() {
-		super(new HashSet<Event<?>>());
+		super(new HashSet<Event>());
 	}
 
 	public void runCycle() {

@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.runtime.java;
 
-public class TimeEvent extends Event<Boolean> {
+public class TimeEvent extends ValuedEvent<Boolean> {
 	
 	private long time = -1;
 	
