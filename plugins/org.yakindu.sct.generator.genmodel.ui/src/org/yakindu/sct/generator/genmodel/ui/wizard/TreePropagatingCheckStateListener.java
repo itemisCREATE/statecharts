@@ -29,7 +29,6 @@ public class TreePropagatingCheckStateListener implements
 		this.treeViewer = treeViewer;
 	}
 
-	@Override
 	public void checkStateChanged(CheckStateChangedEvent event) {
 		Object element = event.getElement();
 		if (treeViewer.isExpandable(element)) {

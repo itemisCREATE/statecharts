@@ -17,7 +17,7 @@ public abstract class AbstractStatechart {
 	private List<RTRegion> regions = new ArrayList<RTRegion>();
 
 	private List<RTTransition> transitions = new ArrayList<RTTransition>();
-	private List<RTReaction> localReactions = new ArrayList<RTReaction>();
+	//private List<RTReaction> localReactions = new ArrayList<RTReaction>();
 
 	// used to request time events from environment
 	protected RTTimingService timingService = null;

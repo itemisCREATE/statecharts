@@ -46,7 +46,6 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 
 	protected SGenWizardPage2 generatorConfigPage;
 
-	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 		setWindowTitle("New Yakindu SGen Model");
@@ -79,7 +78,6 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 						.getLocation();
 				location = location.append(containerFullPath);
 				String osString = location.toOSString();
-				System.out.println(osString);
 				createDefaultModel(osString);
 			}
 		};

@@ -29,7 +29,6 @@ public class TreeExpandingDoubleClickListener implements IDoubleClickListener {
 		this.treeViewer = treeViewer;
 	}
 
-	@Override
 	public void doubleClick(DoubleClickEvent event) {
 		IStructuredSelection selection = (IStructuredSelection) event
 				.getSelection();
