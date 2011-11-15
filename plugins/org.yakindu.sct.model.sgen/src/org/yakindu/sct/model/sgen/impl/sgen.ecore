@@ -15,6 +15,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="FeatureType" eSuperTypes="http://www.yakindu.org/sct/2.0.0#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//FeatureParameter" containment="true" eOpposite="#//FeatureParameter/featureType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="library" lowerBound="1"
+        eType="#//FeatureTypeLibrary" changeable="false" volatile="true" transient="true"
+        derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureParameter" eSuperTypes="http://www.yakindu.org/sct/2.0.0#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="featureType" eType="#//FeatureType"
@@ -43,5 +46,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="FeatureTypeLibrary">
     <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
         eType="#//FeatureType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

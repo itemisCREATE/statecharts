@@ -16,6 +16,7 @@
     </genClasses>
     <genClasses ecoreClass="sgen.ecore#//FeatureType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgen.ecore#//FeatureType/parameters"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference sgen.ecore#//FeatureType/library"/>
     </genClasses>
     <genClasses ecoreClass="sgen.ecore#//FeatureParameter">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference sgen.ecore#//FeatureParameter/featureType"/>
@@ -40,6 +41,7 @@
     </genClasses>
     <genClasses ecoreClass="sgen.ecore#//FeatureTypeLibrary">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgen.ecore#//FeatureTypeLibrary/types"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgen.ecore#//FeatureTypeLibrary/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureType;
+import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 import org.yakindu.sct.model.sgen.SGenPackage;
 import org.yakindu.sct.model.sgraph.impl.NamedElementImpl;
 
@@ -27,6 +28,7 @@ import org.yakindu.sct.model.sgraph.impl.NamedElementImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureTypeImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureTypeImpl#getLibrary <em>Library</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,6 +81,25 @@ public class FeatureTypeImpl extends NamedElementImpl implements FeatureType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public FeatureTypeLibrary getLibrary() {
+		FeatureTypeLibrary library = basicGetLibrary();
+		return library != null && library.eIsProxy() ? (FeatureTypeLibrary)eResolveProxy((InternalEObject)library) : library;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public FeatureTypeLibrary basicGetLibrary() {
+		return (FeatureTypeLibrary) eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -113,6 +134,9 @@ public class FeatureTypeImpl extends NamedElementImpl implements FeatureType {
 		switch (featureID) {
 			case SGenPackage.FEATURE_TYPE__PARAMETERS:
 				return getParameters();
+			case SGenPackage.FEATURE_TYPE__LIBRARY:
+				if (resolve) return getLibrary();
+				return basicGetLibrary();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -159,6 +183,8 @@ public class FeatureTypeImpl extends NamedElementImpl implements FeatureType {
 		switch (featureID) {
 			case SGenPackage.FEATURE_TYPE__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
+			case SGenPackage.FEATURE_TYPE__LIBRARY:
+				return basicGetLibrary() != null;
 		}
 		return super.eIsSet(featureID);
 	}
