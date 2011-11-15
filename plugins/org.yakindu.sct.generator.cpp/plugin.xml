@@ -5,7 +5,7 @@
    <extension
          point="org.yakindu.sct.generator.core.generator">
       <SCTGenerator
-            class="org.yakindu.sct.generator.cpp.subscriber.CppCodeGenerator"
+            class="org.yakindu.sct.generator.cpp.CppCodeGenerator"
             description="YAKINDU.org C++ Code Generator"
             id="yakindu::cpp"
             name="YAKINDU.org C++ Code Generator">
@@ -14,6 +14,7 @@
    <extension
          point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary
+            defaultProvider="org.yakindu.sct.generator.cpp.features.CPPDefaultFeatureValueProvider"
             generatorId="yakindu::cpp"
             uri="platform:/plugin/org.yakindu.sct.generator.cpp/library/FeatureTypeLibrary.xmi">
       </FeatureLibrary>
