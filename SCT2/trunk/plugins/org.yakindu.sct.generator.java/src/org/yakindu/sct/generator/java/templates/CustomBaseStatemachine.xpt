@@ -28,7 +28,7 @@ Contributors:
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR ScheduleTimeEvent-»
-getTimerHandler().setTimer(«timeEvent.getName()», «timeValue.toCode()»);
+getTimerHandler().setTimer(«timeEvent.getName()», «timeValue.toCode()», cycleStartTime);
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR UnscheduleTimeEvent-»
@@ -136,6 +136,7 @@ else {
 
 «DEFINE EntryCode FOR EnterState-»
 	public void «statemachineEntryFunctionName()» {
+		cycleStartTime = System.currentTimeMillis();
 		«EXPAND ActionCode FOR this-»
 		«IF state.entryAction != null-»
 		«state.entryAction.entryActionFunctionName()»();
@@ -201,6 +202,8 @@ public abstract class «getBaseStatemachineName()» implements ITimedStatemachine 
 	private final Collection<Event> outEvents;
 	
 	private ITimerHandler timerHandler;
+	
+	private long cycleStartTime;
 	
 	public «getBaseStatemachineName()»(Collection<Event> occuredEvents) {
 		this.occuredEvents = occuredEvents;
@@ -284,6 +287,7 @@ public abstract class «getBaseStatemachineName()» implements ITimedStatemachine 
 «EXPAND ExitMethodImplement FOREACH this.states-»
 
 	protected void runCycle(Collection<?> events) {
+		cycleStartTime = System.currentTimeMillis();
 		getOutEvents().clear();
 		for (State state : activeStates) {
 			switch (state) {
