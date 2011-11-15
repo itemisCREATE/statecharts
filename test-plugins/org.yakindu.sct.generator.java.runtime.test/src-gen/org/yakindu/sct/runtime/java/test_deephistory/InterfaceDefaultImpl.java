@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.runtime.java.test_deephistory;
 
-import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Event;
 
 public class InterfaceDefaultImpl implements InterfaceDefault {

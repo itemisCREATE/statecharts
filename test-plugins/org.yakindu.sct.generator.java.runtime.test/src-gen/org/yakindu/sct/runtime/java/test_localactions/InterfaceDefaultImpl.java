@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.runtime.java.test_localactions;
 
-import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Event;
 
 public class InterfaceDefaultImpl implements InterfaceDefault {

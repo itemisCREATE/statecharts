@@ -17,7 +17,6 @@ import java.util.Set;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
 import org.yakindu.sct.runtime.java.ITimerHandler;
-import org.yakindu.sct.runtime.java.TimerHandler;
 import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Notification;
 
@@ -87,7 +86,7 @@ public abstract class Test_ShallowHistoryAbstractBaseStatemachine implements ITi
 	@Override
 	public ITimerHandler getTimerHandler() {
 		if (timerHandler == null) {
-			timerHandler = new TimerHandler(this);
+			throw new NullPointerException("TimerHandler of statemachine \"+Test_ShallowHistory+\" not set!");
 		}
 		return timerHandler;
 	}
