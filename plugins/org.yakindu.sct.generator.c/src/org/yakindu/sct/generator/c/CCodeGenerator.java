@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.c.subscriber;
+package org.yakindu.sct.generator.c;
 
 import org.eclipse.core.resources.IProject;
 import org.yakindu.sct.generator.core.impl.AbstractXpandBasedCodeGenerator;

@@ -3,17 +3,18 @@
 
 <plugin>
    <extension
-         point="org.yakindu.sct.generator.core">
+         point="org.yakindu.sct.generator.core.generator">
       <SCTGenerator
-            class="org.yakindu.sct.generator.c.subscriber.CCodeGenerator"
+            class="org.yakindu.sct.generator.c.CCodeGenerator"
             description="YAKINDU C Code Generator"
             id="yakindu::c"
             name="YAKINDU C Code Generator">
       </SCTGenerator>
    </extension>
    <extension
-         point="org.yakindu.sct.generator.genmodel.featuretypes">
+         point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary
+            defaultProvider="org.yakindu.sct.generator.c.features.CDefaultFeatureValueProvider"
             generatorId="yakindu::c"
             uri="platform:/plugin/org.yakindu.sct.generator.c/library/FeatureTypeLibrary.xmi">
       </FeatureLibrary>
