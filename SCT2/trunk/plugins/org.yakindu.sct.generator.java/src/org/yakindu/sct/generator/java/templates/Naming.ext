@@ -35,10 +35,19 @@ getInternalScopeVoidEvents(ExecutionFlow this) :getInternalScopeEvents().select(
 getInternalScopeValuedEvents(ExecutionFlow this) : getInternalScopeEvents().select(e|e.type!=Type::void);
 getTimeEvents(ExecutionFlow this) : scopes.typeSelect(Scope).declarations.typeSelect(TimeEvent);
 
+boolean isTimedStatemachine(ExecutionFlow this) :
+	getTimeEvents().size > 0;
+
 String getStatemachineName(ExecutionFlow this) : name.toFirstUpper();
 String getBaseStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "AbstractBaseStatemachine";
 String getEventBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "EventBasedStatemachine";
 String getCycleBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "CyleBasedStatemachine";
+
+String getImplementationType(ExecutionFlow this):
+	if isTimedStatemachine() then
+		"ITimedStatemachine"
+	else
+		"IStatemachine"; 
 
 String getCustomPackage(ExecutionFlow this) : "org/yakindu/sct/runtime/java/"+getStatemachineName().toLowerCase()+"/";
 String getCustomPackage(InterfaceScope this) : "org/yakindu/sct/runtime/java/"+getStatemachineName((ExecutionFlow)eContainer).toLowerCase()+"/";
