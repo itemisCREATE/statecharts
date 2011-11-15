@@ -35,6 +35,11 @@ public class TestLocalActionsCycleBasedStatemachine {
 	// soft-realtime requirements.
 	private final long timerThreshold = 10;
 
+	// Define sleeptime in ms of JUnit Test between statemachine "runCycle()"
+	// calls. So the TimerHandler Thread get's a chance to throw a timed event
+	// within the timerThreshold time.
+	private final long junitSleepTime = 1;
+
 	@Before
 	public void setUp() {
 		statemachine = new Test_LocalActionsCyleBasedStatemachine();
@@ -46,16 +51,15 @@ public class TestLocalActionsCycleBasedStatemachine {
 	public void tearDown() {
 		statemachine = null;
 	}
-	
+
 	@Test
-	public void testExceptionHandling(){
+	public void testExceptionHandling() {
 		try {
 			Test_LocalActionsCyleBasedStatemachine statemachine = new Test_LocalActionsCyleBasedStatemachine();
 			statemachine.entry();
 			fail("Statemachine should throw a NullPointerException if entered without TimerHandler set before");
-		}
-		catch (NullPointerException exception) {
-			
+		} catch (NullPointerException exception) {
+
 		}
 	}
 
@@ -89,13 +93,13 @@ public class TestLocalActionsCycleBasedStatemachine {
 		// Check timer behavior
 		while (statemachine.getInterfaceDefault().getVarC() < 10) {
 			statemachine.runCycle();
-			Thread.sleep(2);
+			Thread.sleep(junitSleepTime);
 		}
 		final long time2 = System.currentTimeMillis() - time;
 		final long expectedTime = statemachine.getInterfaceDefault().getVarC() * 100;
 		final long delta = time2 - expectedTime;
 		assertTrue("Timer threshold overflow in State 1. Delta is " + delta
-				+ "ms. Threshold is: " + timerThreshold + "ms.",
+				+ " ms. Threshold is: " + timerThreshold + " ms.",
 				time2 <= expectedTime + timerThreshold);
 	}
 
@@ -122,14 +126,14 @@ public class TestLocalActionsCycleBasedStatemachine {
 		// Check timer behavior
 		while (statemachine.getInterfaceDefault().getVarJ() != 3) {
 			statemachine.runCycle();
-			Thread.sleep(2);
+			Thread.sleep(junitSleepTime);
 		}
 		final long time2 = System.currentTimeMillis() - time;
 		// After 200 ms var j should be set to 3
 		final long expectedTime = 200;
 		final long delta = time2 - expectedTime;
 		assertTrue("Timer threshold overflow in State 2. Delta is " + delta
-				+ "ms. Threshold is: " + timerThreshold + "ms.",
+				+ " ms. Threshold is: " + timerThreshold + " ms.",
 				time2 <= expectedTime + timerThreshold);
 
 		// Check local reaction for Event4
@@ -138,12 +142,11 @@ public class TestLocalActionsCycleBasedStatemachine {
 		assertEquals(
 				"Error in local reaction \"Event2, Event4 / j=2;\" of State2",
 				2, statemachine.getInterfaceDefault().getVarJ());
-		
+
 		// Check local reaction for exit
 		statemachine.getInterfaceDefault().raiseEvent3();
 		statemachine.runCycle();
-		assertEquals(
-				"Error in local reaction \"exit / j=0;\" of State2",
-				0, statemachine.getInterfaceDefault().getVarJ());
+		assertEquals("Error in local reaction \"exit / j=0;\" of State2", 0,
+				statemachine.getInterfaceDefault().getVarJ());
 	}
 }
