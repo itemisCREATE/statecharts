@@ -232,6 +232,15 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getFeatureType_Library() {
+        return (EReference)getFeatureType().getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFeatureParameter() {
 		if (featureParameterEClass == null) {
 			featureParameterEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGenPackage.eNS_URI).getEClassifiers().get(3);
@@ -357,6 +366,15 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 */
 	public EReference getFeatureTypeLibrary_Types() {
         return (EReference)getFeatureTypeLibrary().getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFeatureTypeLibrary_Name() {
+        return (EAttribute)getFeatureTypeLibrary().getEStructuralFeatures().get(1);
 	}
 
 	/**

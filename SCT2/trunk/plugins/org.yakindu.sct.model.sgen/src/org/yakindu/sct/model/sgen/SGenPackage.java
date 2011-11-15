@@ -155,13 +155,22 @@ public interface SGenPackage extends EPackage {
 	int FEATURE_TYPE__PARAMETERS = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Library</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_TYPE__LIBRARY = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Feature Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_TYPE_FEATURE_COUNT = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int FEATURE_TYPE_FEATURE_COUNT = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.FeatureParameterImpl <em>Feature Parameter</em>}' class.
@@ -331,13 +340,22 @@ public interface SGenPackage extends EPackage {
 	int FEATURE_TYPE_LIBRARY__TYPES = 0;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_TYPE_LIBRARY__NAME = 1;
+
+	/**
 	 * The number of structural features of the '<em>Feature Type Library</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_TYPE_LIBRARY_FEATURE_COUNT = 1;
+	int FEATURE_TYPE_LIBRARY_FEATURE_COUNT = 2;
 
 
 	/**
@@ -413,6 +431,17 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFeatureType_Parameters();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sgen.FeatureType#getLibrary <em>Library</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Library</em>'.
+	 * @see org.yakindu.sct.model.sgen.FeatureType#getLibrary()
+	 * @see #getFeatureType()
+	 * @generated
+	 */
+	EReference getFeatureType_Library();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.FeatureParameter <em>Feature Parameter</em>}'.
@@ -553,6 +582,17 @@ public interface SGenPackage extends EPackage {
 	EReference getFeatureTypeLibrary_Types();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgen.FeatureTypeLibrary#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.yakindu.sct.model.sgen.FeatureTypeLibrary#getName()
+	 * @see #getFeatureTypeLibrary()
+	 * @generated
+	 */
+	EAttribute getFeatureTypeLibrary_Name();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -635,6 +675,14 @@ public interface SGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FEATURE_TYPE__PARAMETERS = eINSTANCE.getFeatureType_Parameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Library</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FEATURE_TYPE__LIBRARY = eINSTANCE.getFeatureType_Library();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.FeatureParameterImpl <em>Feature Parameter</em>}' class.
@@ -749,6 +797,14 @@ public interface SGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FEATURE_TYPE_LIBRARY__TYPES = eINSTANCE.getFeatureTypeLibrary_Types();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FEATURE_TYPE_LIBRARY__NAME = eINSTANCE.getFeatureTypeLibrary_Name();
 
 	}
 

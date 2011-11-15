@@ -8,6 +8,7 @@ package org.yakindu.sct.model.sgen.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -15,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -32,6 +34,7 @@ import org.yakindu.sct.model.sgen.SGenPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureTypeLibraryImpl#getTypes <em>Types</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureTypeLibraryImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -47,6 +50,25 @@ public class FeatureTypeLibraryImpl extends EObjectImpl implements FeatureTypeLi
 	 * @ordered
 	 */
 	protected EList<FeatureType> types;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -84,6 +106,27 @@ public class FeatureTypeLibraryImpl extends EObjectImpl implements FeatureTypeLi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SGenPackage.FEATURE_TYPE_LIBRARY__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -103,6 +146,8 @@ public class FeatureTypeLibraryImpl extends EObjectImpl implements FeatureTypeLi
 		switch (featureID) {
 			case SGenPackage.FEATURE_TYPE_LIBRARY__TYPES:
 				return getTypes();
+			case SGenPackage.FEATURE_TYPE_LIBRARY__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -120,6 +165,9 @@ public class FeatureTypeLibraryImpl extends EObjectImpl implements FeatureTypeLi
 				getTypes().clear();
 				getTypes().addAll((Collection<? extends FeatureType>)newValue);
 				return;
+			case SGenPackage.FEATURE_TYPE_LIBRARY__NAME:
+				setName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -135,6 +183,9 @@ public class FeatureTypeLibraryImpl extends EObjectImpl implements FeatureTypeLi
 			case SGenPackage.FEATURE_TYPE_LIBRARY__TYPES:
 				getTypes().clear();
 				return;
+			case SGenPackage.FEATURE_TYPE_LIBRARY__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -149,8 +200,26 @@ public class FeatureTypeLibraryImpl extends EObjectImpl implements FeatureTypeLi
 		switch (featureID) {
 			case SGenPackage.FEATURE_TYPE_LIBRARY__TYPES:
 				return types != null && !types.isEmpty();
+			case SGenPackage.FEATURE_TYPE_LIBRARY__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //FeatureTypeLibraryImpl

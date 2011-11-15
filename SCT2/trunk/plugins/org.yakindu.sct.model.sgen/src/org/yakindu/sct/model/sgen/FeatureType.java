@@ -19,6 +19,7 @@ import org.yakindu.sct.model.sgraph.NamedElement;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.FeatureType#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgen.FeatureType#getLibrary <em>Library</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,5 +45,20 @@ public interface FeatureType extends NamedElement {
 	 * @generated
 	 */
 	EList<FeatureParameter> getParameters();
+
+	/**
+	 * Returns the value of the '<em><b>Library</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Library</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Library</em>' reference.
+	 * @see org.yakindu.sct.model.sgen.SGenPackage#getFeatureType_Library()
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	FeatureTypeLibrary getLibrary();
 
 } // FeatureType
