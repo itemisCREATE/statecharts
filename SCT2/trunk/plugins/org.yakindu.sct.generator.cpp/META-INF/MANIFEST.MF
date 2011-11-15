@@ -21,6 +21,6 @@ Require-Bundle: org.yakindu.sct.model.sexec,
  org.yakindu.sct.generator.core;bundle-version="1.0.0",
  org.yakindu.sct.generator.genmodel;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.yakindu.sct.generator.cpp.subscriber,
+Export-Package: org.yakindu.sct.generator.cpp,
  org.yakindu.sct.generator.cpp.templates
 Bundle-Vendor: YAKINDU

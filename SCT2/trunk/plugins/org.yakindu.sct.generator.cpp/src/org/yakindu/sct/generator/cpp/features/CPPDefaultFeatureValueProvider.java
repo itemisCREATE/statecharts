@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.c.features;
+package org.yakindu.sct.generator.cpp.features;
 
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -20,11 +20,11 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class CDefaultFeatureValueProvider extends
+public class CPPDefaultFeatureValueProvider extends
 		AbstractDefaultFeatureValueProvider {
 
 	public boolean isProviderFor(FeatureTypeLibrary library) {
-		return CFeatureConstants.LIBRARY_NAME.equals(library.getName());
+		return CPPFeatureConstants.LIBRARY_NAME.equals(library.getName());
 	}
 
 	@Override
