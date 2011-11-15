@@ -20,7 +20,7 @@ import org.eclipse.gef.Request;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.LabelEx;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.View;
@@ -47,15 +47,15 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements
 
 	@Override
 	protected IFigure createFigure() {
-		final LabelEx label = new LabelEx();
-		label.setLabelAlignment(PositionConstants.LEFT);
-		label.setTextAlignment(PositionConstants.TOP);
+		final WrappingLabel label = new WrappingLabel();
+		label.setTextWrap(true);
+		label.setAlignment(PositionConstants.LEFT | PositionConstants.TOP);
 		return label;
 	}
 
 	@Override
-	public LabelEx getFigure() {
-		return (LabelEx) super.getFigure();
+	public WrappingLabel getFigure() {
+		return (WrappingLabel) super.getFigure();
 	}
 
 	public void setLabelText(final String text) {
