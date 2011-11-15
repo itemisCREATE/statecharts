@@ -156,18 +156,18 @@ public class SGenWizardPage2 extends WizardPage {
 
 		stateChartTree.setContentProvider(treeContentProvider);
 		stateChartTree.setLabelProvider(treeLabelProvider);
-		stateChartTree
-				.addCheckStateListener(new TreePropagatingCheckStateListener(
-						stateChartTree) {
-					@Override
-					public void checkStateChanged(CheckStateChangedEvent event) {
-						super.checkStateChanged(event);
-						checkComplete();
-					}
-				});
+		TreePropagatingCheckStateListener checkStateListener = new TreePropagatingCheckStateListener(
+				stateChartTree) {
+			@Override
+			public void checkStateChanged(CheckStateChangedEvent event) {
+				super.checkStateChanged(event);
+				checkComplete();
+			}
+		};
+		stateChartTree.addCheckStateListener(checkStateListener);
 		stateChartTree
 				.addDoubleClickListener(new TreeExpandingDoubleClickListener(
-						stateChartTree));
+						stateChartTree, checkStateListener));
 		stateChartTree.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
 
 		Label lblGenerator = new Label(container, SWT.NONE);
