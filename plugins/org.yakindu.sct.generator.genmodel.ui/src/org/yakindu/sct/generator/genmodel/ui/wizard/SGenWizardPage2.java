@@ -104,6 +104,7 @@ public class SGenWizardPage2 extends WizardPage {
 	};
 	private static final LabelProvider treeLabelProvider = new LabelProvider() {
 
+		@Override
 		public Image getImage(Object element) {
 			if (element instanceof TreeNode) {
 				TreeNode treeNode = (TreeNode) element;
@@ -154,7 +155,6 @@ public class SGenWizardPage2 extends WizardPage {
 				new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
 		stateChartTree.setContentProvider(treeContentProvider);
-
 		stateChartTree.setLabelProvider(treeLabelProvider);
 		stateChartTree
 				.addCheckStateListener(new TreePropagatingCheckStateListener(
@@ -168,6 +168,8 @@ public class SGenWizardPage2 extends WizardPage {
 		stateChartTree
 				.addDoubleClickListener(new TreeExpandingDoubleClickListener(
 						stateChartTree));
+		stateChartTree.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
+
 		Label lblGenerator = new Label(container, SWT.NONE);
 		lblGenerator.setText("Generator");
 
@@ -209,8 +211,7 @@ public class SGenWizardPage2 extends WizardPage {
 
 	private static Resource toEmfResource(IResource iResource) {
 		URI uri = URI.createPlatformResourceURI(iResource.getFullPath()
-				.toString(),
-				true);
+				.toString(), true);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = Resource.Factory.Registry.INSTANCE.getFactory(uri)
 				.createResource(uri);
@@ -231,7 +232,6 @@ public class SGenWizardPage2 extends WizardPage {
 
 	@Override
 	public void setVisible(boolean visible) {
-		stateChartTree.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
 		super.setVisible(visible);
 		if (visible) {
 			IPath containerPath = fileSelectionPage.getFilePath();
@@ -239,8 +239,7 @@ public class SGenWizardPage2 extends WizardPage {
 					.getFolder(containerPath);
 			try {
 				TreeNode projectTree = new TreeNode(folder.getProject());
-				TreeNode tree = buildTree(folder.getProject());
-				projectTree.children.add(tree);
+				projectTree.children.add(buildTree(folder.getProject()));
 				stateChartTree.setInput(projectTree);
 			} catch (CoreException e) {
 				// input will be empty
@@ -324,7 +323,7 @@ public class SGenWizardPage2 extends WizardPage {
 			if (rootFolder.equals(resource)) {
 				return true;
 			}
-			if (resource.getType() == IResource.FOLDER) {
+			if (resource.getType() == IResource.FOLDER && !resource.isDerived()) {
 				matches.add(resource);
 			}
 			return resource.getType() == IResource.PROJECT;
