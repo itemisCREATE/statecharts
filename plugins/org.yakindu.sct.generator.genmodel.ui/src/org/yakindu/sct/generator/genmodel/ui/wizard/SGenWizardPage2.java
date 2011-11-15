@@ -253,8 +253,19 @@ public class SGenWizardPage2 extends WizardPage {
 	}
 
 	protected boolean validatePage() {
-		return stateChartTree.getCheckedElements().length > 0
-				&& !generatorCombo.getSelection().isEmpty();
+		return stateChartSelected() && !generatorCombo.getSelection().isEmpty();
+	}
+
+	protected boolean stateChartSelected() {
+		if (stateChartTree.getCheckedElements().length > 0) {
+			for (Object element : stateChartTree.getCheckedElements()) {
+				if (element instanceof TreeNode
+						&& isStatechartResource(((TreeNode) element).resource)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	private TreeNode buildTree(IResource resource) throws CoreException {
