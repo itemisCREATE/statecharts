@@ -28,7 +28,6 @@ public class JavaFeatureValueProvider extends
 		}
 	}
 
-	@Override
 	public boolean isProviderFor(FeatureTypeLibrary library) {
 		return library.getName().equals(LIBRARY_NAME);
 	}
