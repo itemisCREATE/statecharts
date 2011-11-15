@@ -23,13 +23,13 @@ public class SGenFormatter extends AbstractDeclarativeFormatter {
 
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
+		SGenGrammarAccess g = (SGenGrammarAccess) getGrammarAccess();
 		// It's usually a good idea to activate the following three statements.
 		// They will add and preserve newlines around comments
-		// c.setLinewrap(0, 1,
-		// 2).before(getGrammarAccess().getSL_COMMENTRule());
-		// c.setLinewrap(0, 1,
-		// 2).before(getGrammarAccess().getML_COMMENTRule());
-		// c.setLinewrap(0, 1, 1).after(getGrammarAccess().getML_COMMENTRule());
+		c.setLinewrap(0, 1, 2).before(g.getSL_COMMENTRule());
+		c.setLinewrap(0, 1, 2).before(g.getML_COMMENTRule());
+		c.setLinewrap(0, 1, 1).after(g.getML_COMMENTRule());
+
 
 		// Find elements which declare their body in curly brackets.
 		// - Increment Indentation for the body.
@@ -42,16 +42,19 @@ public class SGenFormatter extends AbstractDeclarativeFormatter {
 			Keyword openingBrace = pair.getFirst();
 			Group containingGroup = (Group) openingBrace.eContainer();
 
-			// Top-most elements with brackets: Insert blank lines
-			// if (containingGroup.eContainer().eContainer() instanceof Grammar)
-			// {
 			c.setLinewrap(1, 2, 2).before(containingGroup);
-			c.setLinewrap(1, 2, 2).after(containingGroup);
-			// }
+			c.setLinewrap(1, 1, 2).after(containingGroup);
 		}
 
-		SGenGrammarAccess g = (SGenGrammarAccess) getGrammarAccess();
+
 		c.setLinewrap().around(g.getFeatureConfigurationRule());
 		c.setLinewrap().around(g.getFeatureParameterValueRule());
+		c.setNoLinewrap().after(
+				g.getGeneratorEntryAccess().getStatechartKeyword_0());
+		c.setNoLinewrap().after(
+				g.getFeatureConfigurationAccess().getFeatureKeyword_1());
+		c.setNoLinewrap().before(
+				g.getGeneratorModelAccess().getGeneratorModelKeyword_0());
+
 	}
 }
