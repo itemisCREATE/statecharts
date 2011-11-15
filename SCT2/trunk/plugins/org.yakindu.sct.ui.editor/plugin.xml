@@ -255,6 +255,7 @@
    </extension>
    <extension
          point="org.eclipse.ui.newWizards">
+     <category id="YAKINDU" name="Yakindu"/>
       <wizard
             category="YAKINDU"
             class="org.yakindu.sct.ui.editor.wizards.CreationWizard"

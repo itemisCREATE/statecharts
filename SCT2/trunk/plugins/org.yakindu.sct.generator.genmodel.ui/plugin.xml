@@ -216,8 +216,9 @@
     <extension
          point="org.eclipse.ui.newWizards">
       <wizard
-			icon="icons/GenModel-16.png"
+            category="YAKINDU"
             class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.yakindu.sct.generator.genmodel.ui.wizard.SGenNewFileWizard"
+            icon="icons/GenModel-16.png"
             id="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard"
             name="YAKINDU Statechart Generator Model"
             project="false">
