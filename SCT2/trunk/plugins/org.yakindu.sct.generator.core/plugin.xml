@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
- <extension-point id="org.yakindu.sct.generator.core" name="SCT Generator" schema="schema/generator.exsd"/>
+ <extension-point id="org.yakindu.sct.generator.core.generator" name="SCT Generator" schema="schema/generator.exsd"/>
+  <extension-point id="org.yakindu.sct.generator.core.featuretypes" name="GenModel Feature Types" schema="schema/featuretypes.exsd"/>
  <extension
-         point="org.yakindu.sct.generator.genmodel.featuretypes">
+         point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary
             generatorId="ALL"
             uri="platform:/plugin/org.yakindu.sct.generator.core/library/FeatureTypeLibrary.xmi">

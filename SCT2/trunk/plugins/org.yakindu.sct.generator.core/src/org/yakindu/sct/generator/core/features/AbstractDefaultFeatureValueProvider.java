@@ -1,4 +1,4 @@
-package org.yakindu.sct.generator.genmodel.extensions;
+package org.yakindu.sct.generator.core.features;
 
 import org.eclipse.emf.common.util.EList;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;

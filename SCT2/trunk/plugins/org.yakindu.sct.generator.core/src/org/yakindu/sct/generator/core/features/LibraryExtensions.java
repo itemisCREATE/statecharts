@@ -1,4 +1,4 @@
-package org.yakindu.sct.generator.genmodel.extensions;
+package org.yakindu.sct.generator.core.features;
 
 import static com.google.common.collect.Iterables.transform;
 import static com.google.common.collect.Lists.newArrayList;

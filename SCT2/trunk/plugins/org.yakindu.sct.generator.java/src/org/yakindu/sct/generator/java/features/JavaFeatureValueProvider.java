@@ -3,9 +3,10 @@ package org.yakindu.sct.generator.java.features;
 import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.BASE_PACKAGE;
 import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.IMPLEMENTATION_SUFFIX;
 
-import org.yakindu.sct.generator.genmodel.extensions.AbstractDefaultFeatureValueProvider;
-import org.yakindu.sct.generator.genmodel.extensions.IDefaultFeatureValueProvider;
+import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
+import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
@@ -13,7 +14,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * @author muelder
  * 
  */
-public class DefaultFeatureValueProvider extends
+public class JavaFeatureValueProvider extends
 		AbstractDefaultFeatureValueProvider implements
 		IDefaultFeatureValueProvider {
 
@@ -28,8 +29,9 @@ public class DefaultFeatureValueProvider extends
 		}
 	}
 
-	public boolean isProviderFor(String featureTypeName) {
-		return IJavaFeatureConstants.NAMING_FEATURE.equals(featureTypeName);
+	public boolean isProviderFor(FeatureTypeLibrary library) {
+		//TODO
+		return false;
 	}
 
 }

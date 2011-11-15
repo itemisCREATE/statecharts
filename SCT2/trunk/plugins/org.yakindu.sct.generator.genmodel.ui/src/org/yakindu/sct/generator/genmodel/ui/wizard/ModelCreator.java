@@ -6,9 +6,9 @@ import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.yakindu.sct.generator.genmodel.extensions.IDefaultFeatureValueProvider;
-import org.yakindu.sct.generator.genmodel.extensions.LibraryExtensions;
-import org.yakindu.sct.generator.genmodel.extensions.LibraryExtensions.LibraryDescriptor;
+import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
+import org.yakindu.sct.generator.core.features.LibraryExtensions;
+import org.yakindu.sct.generator.core.features.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
@@ -66,7 +66,7 @@ public class ModelCreator {
 			IDefaultFeatureValueProvider defaultProvider = desc
 					.createFeatureValueProvider();
 			if (defaultProvider != null
-					&& defaultProvider.isProviderFor(featureType.getName()))
+					&& defaultProvider.isProviderFor((FeatureTypeLibrary)featureType.eContainer()))
 				return defaultProvider.createDefaultFeatureConfiguration(
 						featureType, statechart);
 		}

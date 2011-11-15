@@ -2,7 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.yakindu.sct.generator.core">
+         point="org.yakindu.sct.generator.core.generator">
       <SCTGenerator
             class="org.yakindu.sct.generator.java.JavaSCTGenerator"
             description="YAKINDU Java Code Generator"
@@ -11,7 +11,7 @@
       </SCTGenerator>
    </extension>
    <extension
-         point="org.yakindu.sct.generator.genmodel.featuretypes">
+         point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary
             generatorId="yakindu::java"
             uri="platform:/plugin/org.yakindu.sct.generator.java/library/FeatureTypeLibrary.xmi">

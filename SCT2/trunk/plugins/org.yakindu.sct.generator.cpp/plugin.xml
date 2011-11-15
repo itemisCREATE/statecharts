@@ -3,7 +3,7 @@
 
 <plugin>
    <extension
-         point="org.yakindu.sct.generator.core">
+         point="org.yakindu.sct.generator.core.generator">
       <SCTGenerator
             class="org.yakindu.sct.generator.cpp.subscriber.CppCodeGenerator"
             description="YAKINDU.org C++ Code Generator"
@@ -12,7 +12,7 @@
       </SCTGenerator>
    </extension>
    <extension
-         point="org.yakindu.sct.generator.genmodel.featuretypes">
+         point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary
             generatorId="yakindu::cpp"
             uri="platform:/plugin/org.yakindu.sct.generator.cpp/library/FeatureTypeLibrary.xmi">
