@@ -6,9 +6,9 @@ import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
+import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
-import org.yakindu.sct.generator.core.features.LibraryExtensions;
-import org.yakindu.sct.generator.core.features.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
@@ -26,7 +26,7 @@ import com.google.common.collect.Lists;
  */
 public class ModelCreator {
 
-	private SGenFactory factory = SGenFactory.eINSTANCE;
+	private final SGenFactory factory = SGenFactory.eINSTANCE;
 	private final String generatorId;
 	private final List<Statechart> statecharts;
 
@@ -66,9 +66,10 @@ public class ModelCreator {
 			IDefaultFeatureValueProvider defaultProvider = desc
 					.createFeatureValueProvider();
 			if (defaultProvider != null
-					&& defaultProvider.isProviderFor((FeatureTypeLibrary)featureType.eContainer()))
+					&& defaultProvider.isProviderFor(featureType.getLibrary())) {
 				return defaultProvider.createDefaultFeatureConfiguration(
 						featureType, statechart);
+			}
 		}
 		return null;
 	}

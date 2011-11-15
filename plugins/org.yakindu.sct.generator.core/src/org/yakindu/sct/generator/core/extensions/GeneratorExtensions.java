@@ -28,7 +28,7 @@ import com.google.common.collect.Iterables;
  */
 public class GeneratorExtensions {
 
-	private static final String EXTENSION_POINT_ID = "org.yakindu.sct.generator.core";
+	private static final String EXTENSION_POINT_ID = "org.yakindu.sct.generator.core.generator";
 	private static final String ATTRIBUTE_CLASS = "class";
 	private static final String ATTRIBUTE_ID = "id";
 	private static final String ATTRIBUTE_NAME = "name";

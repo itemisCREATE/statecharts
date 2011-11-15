@@ -7,6 +7,8 @@ package org.yakindu.sct.generator.java.features;
  */
 public interface IJavaFeatureConstants {
 
+	public static final String LIBRARY_NAME = "Java Generator";
+
 	public static final String NAMING_FEATURE = "NamingFeature";
 
 	public static final String BASE_PACKAGE = "basePackage";

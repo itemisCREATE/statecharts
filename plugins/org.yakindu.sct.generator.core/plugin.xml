@@ -6,6 +6,7 @@
  <extension
          point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary
+            defaultProvider="org.yakindu.sct.generator.core.features.impl.CoreLibraryDefaultFeatureValueProvider"
             generatorId="ALL"
             uri="platform:/plugin/org.yakindu.sct.generator.core/library/FeatureTypeLibrary.xmi">
       </FeatureLibrary>

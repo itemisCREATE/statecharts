@@ -63,7 +63,7 @@
                </documentation>
             </annotation>
          </attribute>
-         <attribute name="defaultProvider" type="string">
+         <attribute name="defaultProvider" type="string" use="required">
             <annotation>
                <documentation>
                   

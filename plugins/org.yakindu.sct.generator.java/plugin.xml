@@ -13,6 +13,7 @@
    <extension
          point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary
+            defaultProvider="org.yakindu.sct.generator.java.features.JavaFeatureValueProvider"
             generatorId="yakindu::java"
             uri="platform:/plugin/org.yakindu.sct.generator.java/library/FeatureTypeLibrary.xmi">
       </FeatureLibrary>
