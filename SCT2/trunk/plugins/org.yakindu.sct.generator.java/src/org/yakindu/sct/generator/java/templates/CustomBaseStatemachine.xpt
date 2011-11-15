@@ -159,7 +159,6 @@ import «entry.getBasePackageName()».TimeEvent;
 «ENDIF-»
 import «entry.getBasePackageName()».ITimedStatemachine;
 import «entry.getBasePackageName()».ITimerHandler;
-import «entry.getBasePackageName()».TimerHandler;
 import «entry.getBasePackageName()».EventNotification;
 import «entry.getBasePackageName()».Notification;
 «IF getInternalScopeValuedEvents().size > 0 -»
@@ -238,7 +237,7 @@ public abstract class «getBaseStatemachineName()» implements ITimedStatemachine 
 	@Override
 	public ITimerHandler getTimerHandler() {
 		if (timerHandler == null) {
-			timerHandler = new TimerHandler(this);
+			throw new NullPointerException("TimerHandler of statemachine \"+«name»+\" not set!");
 		}
 		return timerHandler;
 	}

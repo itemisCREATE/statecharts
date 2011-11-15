@@ -21,11 +21,11 @@ Contributors:
 «getLicenseHeader()»
 package «getImplementationPackageName(entry)»;
 
-import «entry.getBasePackageName()».EventNotification;
 «IF hasEvents()-»
 import «entry.getBasePackageName()».Event;
 «ENDIF-»
 «IF hasOutgoingEvents()-»
+import «entry.getBasePackageName()».EventNotification;
 import «entry.getBasePackageName()».NotificationSender;
 «ENDIF-»
 «IF hasValuedEvents()-»

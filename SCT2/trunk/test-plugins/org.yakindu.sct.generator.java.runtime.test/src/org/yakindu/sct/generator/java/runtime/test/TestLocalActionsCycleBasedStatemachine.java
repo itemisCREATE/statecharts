@@ -12,10 +12,12 @@ package org.yakindu.sct.generator.java.runtime.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.yakindu.sct.runtime.java.TimerHandler;
 import org.yakindu.sct.runtime.java.test_localactions.Test_LocalActionsAbstractBaseStatemachine.State;
 import org.yakindu.sct.runtime.java.test_localactions.Test_LocalActionsCyleBasedStatemachine;
 
@@ -36,12 +38,25 @@ public class TestLocalActionsCycleBasedStatemachine {
 	@Before
 	public void setUp() {
 		statemachine = new Test_LocalActionsCyleBasedStatemachine();
+		statemachine.setTimerHandler(new TimerHandler(statemachine));
 		statemachine.entry();
 	}
 
 	@After
 	public void tearDown() {
 		statemachine = null;
+	}
+	
+	@Test
+	public void testExceptionHandling(){
+		try {
+			Test_LocalActionsCyleBasedStatemachine statemachine = new Test_LocalActionsCyleBasedStatemachine();
+			statemachine.entry();
+			fail("Statemachine should throw a NullPointerException if entered without TimerHandler set before");
+		}
+		catch (NullPointerException exception) {
+			
+		}
 	}
 
 	@Test

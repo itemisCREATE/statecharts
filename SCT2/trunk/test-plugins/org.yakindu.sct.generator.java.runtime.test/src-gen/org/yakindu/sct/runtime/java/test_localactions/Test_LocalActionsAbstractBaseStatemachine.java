@@ -18,7 +18,6 @@ import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.TimeEvent;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
 import org.yakindu.sct.runtime.java.ITimerHandler;
-import org.yakindu.sct.runtime.java.TimerHandler;
 import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Notification;
 
@@ -84,7 +83,7 @@ public abstract class Test_LocalActionsAbstractBaseStatemachine implements ITime
 	@Override
 	public ITimerHandler getTimerHandler() {
 		if (timerHandler == null) {
-			timerHandler = new TimerHandler(this);
+			throw new NullPointerException("TimerHandler of statemachine \"+Test_LocalActions+\" not set!");
 		}
 		return timerHandler;
 	}

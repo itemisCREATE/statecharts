@@ -10,8 +10,8 @@
  */
 package org.yakindu.sct.runtime.java.interfacetest;
 
-import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Event;
+import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.NotificationSender;
 import org.yakindu.sct.runtime.java.ValuedEvent;
 

@@ -18,7 +18,6 @@ import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.TimeEvent;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
 import org.yakindu.sct.runtime.java.ITimerHandler;
-import org.yakindu.sct.runtime.java.TimerHandler;
 import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Notification;
 import org.yakindu.sct.runtime.java.ValuedEvent;
@@ -88,7 +87,7 @@ public abstract class Test_TransitionAbstractBaseStatemachine implements ITimedS
 	@Override
 	public ITimerHandler getTimerHandler() {
 		if (timerHandler == null) {
-			timerHandler = new TimerHandler(this);
+			throw new NullPointerException("TimerHandler of statemachine \"+Test_Transition+\" not set!");
 		}
 		return timerHandler;
 	}
