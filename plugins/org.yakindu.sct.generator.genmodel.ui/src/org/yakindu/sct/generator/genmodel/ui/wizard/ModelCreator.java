@@ -49,8 +49,11 @@ public class ModelCreator {
 		entry.setStatechart(statechart);
 		List<FeatureType> featureTypes = getFeatureTypes();
 		for (FeatureType featureType : featureTypes) {
-			entry.getFeatures().add(
-					createFeatureConfiguration(statechart, featureType));
+			FeatureConfiguration config = createFeatureConfiguration(
+					statechart, featureType);
+			if (config != null) {
+				entry.getFeatures().add(config);
+			}
 		}
 		return entry;
 	}
@@ -67,7 +70,7 @@ public class ModelCreator {
 				return defaultProvider.createDefaultFeatureConfiguration(
 						featureType, statechart);
 		}
-		return factory.createFeatureConfiguration();
+		return null;
 	}
 
 	public List<FeatureType> getFeatureTypes() {

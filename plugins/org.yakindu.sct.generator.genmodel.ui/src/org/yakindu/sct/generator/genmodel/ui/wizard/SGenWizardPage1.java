@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.genmodel.ui.wizard;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Composite;
@@ -31,6 +32,11 @@ public class SGenWizardPage1 extends WizardNewFileCreationPage {
 	protected String getExtension() {
 		return fileExtension;
 	}
+	
+	public URI getURI() {
+		return URI.createPlatformResourceURI(getFilePath().toString(), false);
+	}
+
 
 	public IPath getFilePath() {
 		IPath path = getContainerFullPath();

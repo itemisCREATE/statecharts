@@ -6,6 +6,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
+        	icon="icons/GenModel-16.png"
             class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
@@ -136,15 +137,6 @@
             uriExtension="sgen">
         </resourceServiceProvider>
     </extension>
-
-
-
-   <extension
-         point="org.eclipse.xtext.builder.participant">
-      <participant
-            class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
-      </participant>
-   </extension>
 
 	<!-- Quick Outline -->
 	<extension

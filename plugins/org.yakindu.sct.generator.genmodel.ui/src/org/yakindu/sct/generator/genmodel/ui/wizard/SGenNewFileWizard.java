@@ -10,27 +10,25 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.wizard;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-import org.eclipse.xtext.serializer.ISerializer;
-import org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgraph.Statechart;
 
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 
 /**
  * 
@@ -46,6 +44,9 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 	private IStructuredSelection selection;
 
 	protected SGenWizardPage2 generatorConfigPage;
+	
+	@Inject
+	private ResourceSet resourceSet;
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
@@ -75,14 +76,7 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 			@Override
 			protected void execute(IProgressMonitor monitor)
 					throws CoreException, InterruptedException {
-				// TODO: Does not work for linked projects
-				IPath containerFullPath = modelFilePage.getContainerFullPath();
-				IPath location = ResourcesPlugin.getWorkspace().getRoot()
-						.getLocation();
-				location = location.append(containerFullPath);
-				location = location.append(modelFilePage.getFileName());
-				String osString = location.toOSString();
-				createDefaultModel(osString);
+				createDefaultModel(modelFilePage.getURI());
 			}
 		};
 		try {
@@ -94,19 +88,17 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 		return true;
 	}
 
-	private void createDefaultModel(String target) {
+	private void createDefaultModel(URI uri) {
 		List<Statechart> statecharts = generatorConfigPage.getStatecharts();
 		String generatorId = generatorConfigPage.getGeneratorId();
+		
 		ModelCreator creator = new ModelCreator(generatorId, statecharts);
 		GeneratorModel model = creator.create();
-		Injector injector = SGenActivator.getInstance().getInjector(
-				"org.yakindu.sct.generator.genmodel.SGen");
-		ISerializer serializer = injector.getInstance(ISerializer.class);
+		
+		Resource resource = resourceSet.createResource(uri);
+		resource.getContents().add(model);
 		try {
-
-			File file = new File(target);
-			System.out.println(file.getAbsolutePath());
-			serializer.serialize(model, new FileWriter(file), null);
+			resource.save(Collections.EMPTY_MAP);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
