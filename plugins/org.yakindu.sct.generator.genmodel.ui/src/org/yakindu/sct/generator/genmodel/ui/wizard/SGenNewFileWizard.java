@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.wizard;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -56,11 +57,13 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 	@Override
 	public void addPages() {
 		modelFilePage = new SGenWizardPage1("fileName", selection, "sgen");
-		modelFilePage.setTitle("YAKINDU SCT Diagram");
-		modelFilePage.setDescription("Create a new YAKINDU SCT Diagram File");
+		modelFilePage.setTitle("YAKINDU Statechart Generator Model");
+		modelFilePage
+				.setDescription("Create a new YAKINDU Statechart Generator Model");
 		addPage(modelFilePage);
 		generatorConfigPage = new SGenWizardPage2("Statecharts", modelFilePage);
-		generatorConfigPage.setTitle("Generator Configuration");
+		generatorConfigPage
+				.setTitle("YAKINDU Statechart Generator Model Configuration");
 		generatorConfigPage
 				.setDescription("Select the Statecharts and the Generator type");
 		addPage(generatorConfigPage);
@@ -77,6 +80,7 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 				IPath location = ResourcesPlugin.getWorkspace().getRoot()
 						.getLocation();
 				location = location.append(containerFullPath);
+				location = location.append(modelFilePage.getFileName());
 				String osString = location.toOSString();
 				createDefaultModel(osString);
 			}
@@ -99,7 +103,10 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 				"org.yakindu.sct.generator.genmodel.SGen");
 		ISerializer serializer = injector.getInstance(ISerializer.class);
 		try {
-			serializer.serialize(model, new FileWriter(target), null);
+
+			File file = new File(target);
+			System.out.println(file.getAbsolutePath());
+			serializer.serialize(model, new FileWriter(file), null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -62,7 +62,8 @@ public class ModelCreator {
 		for (LibraryDescriptor desc : libraryDescriptor) {
 			IDefaultFeatureValueProvider defaultProvider = desc
 					.createFeatureValueProvider();
-			if (defaultProvider.isProviderFor(featureType.getName()))
+			if (defaultProvider != null
+					&& defaultProvider.isProviderFor(featureType.getName()))
 				return defaultProvider.createDefaultFeatureConfiguration(
 						featureType, statechart);
 		}
