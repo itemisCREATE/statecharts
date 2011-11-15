@@ -1,5 +1,8 @@
 package org.yakindu.sct.generator.core.features;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
@@ -46,6 +49,19 @@ public abstract class AbstractDefaultFeatureValueProvider implements
 		FeatureConfiguration result = factory.createFeatureConfiguration();
 		result.setType(type);
 		return result;
+	}
+
+	/**
+	 * get the {@link IProject} containing the given {@link Statechart}
+	 * 
+	 */
+	protected IProject getProject(Statechart statechart) {
+		return ResourcesPlugin
+				.getWorkspace()
+				.getRoot()
+				.getFile(
+						new Path(statechart.eResource().getURI()
+								.toPlatformString(true))).getProject();
 	}
 
 }
