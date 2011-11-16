@@ -69,7 +69,7 @@ public class StatechartNavigatorContentProvider implements
 		});
 		myViewerRefreshRunnable = new Runnable() {
 			public void run() {
-				if (myViewer != null) {
+				if (myViewer != null && !myViewer.getControl().isDisposed()) {
 					myViewer.refresh();
 				}
 			}
