@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.core.features.impl;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LIBRARY_NAME;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.DEBUG_FEATURE_DUMP_SEXEC;
 
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -26,7 +27,6 @@ import org.yakindu.sct.model.sgraph.Statechart;
 public class CoreLibraryDefaultFeatureValueProvider extends
 		AbstractDefaultFeatureValueProvider {
 
-
 	public boolean isProviderFor(FeatureTypeLibrary library) {
 		return LIBRARY_NAME.equals(library.getName());
 	}
@@ -39,7 +39,8 @@ public class CoreLibraryDefaultFeatureValueProvider extends
 			parameterValue.setValue("src-gen");
 		} else if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName)) {
 			parameterValue.setValue(getProject(statechart).getName());
+		} else if (DEBUG_FEATURE_DUMP_SEXEC.equals(parameterName)) {
+			parameterValue.setValue("false");
 		}
 	}
-
 }

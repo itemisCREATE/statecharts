@@ -10,11 +10,10 @@
  */
 package org.yakindu.sct.generator.core.impl;
 
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 
 import org.eclipse.core.resources.IProject;
@@ -22,8 +21,13 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
@@ -59,6 +63,10 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 	@Override
 	protected final void generate(ExecutionFlow flow, GeneratorEntry entry) {
 		Output output = createOutput(entry);
+		
+		if (isDumpSexec(entry))
+			dumpSexec(entry, flow, output);
+
 		XpandExecutionContext context = createXpandContext(output);
 		XpandFacade facade = XpandFacade.create(context);
 		facade.evaluate(getTemplatePath(), flow, entry);
@@ -134,4 +142,52 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 				.getFeatureConfiguration(OUTLET_FEATURE);
 		return outletConfig;
 	}
+
+	protected boolean isDumpSexec(GeneratorEntry entry) {
+
+		FeatureParameterValue dumpSexec = getFeatureParameter(entry,
+				DEBUG_FEATURE, DEBUG_FEATURE_DUMP_SEXEC);
+
+		return dumpSexec != null && (dumpSexec.getValue().trim().length() > 0)
+				&& dumpSexec.getValue().trim().toLowerCase().equals("true");
+	}
+
+	protected FeatureParameterValue getFeatureParameter(GeneratorEntry entry,
+			String featureName, String paramName) {
+		FeatureConfiguration feature = entry
+				.getFeatureConfiguration(featureName);
+
+		if (feature != null) {
+			return feature.getParameterValue(paramName);
+		}
+
+		return null;
+	}
+
+	protected void dumpSexec(GeneratorEntry entry, ExecutionFlow flow,
+			Output output) {
+
+		ResourceSet resourceSet = new ResourceSetImpl();
+
+		resourceSet
+				.getResourceFactoryRegistry()
+				.getExtensionToFactoryMap()
+				.put(Resource.Factory.Registry.DEFAULT_EXTENSION,
+						new XMIResourceFactoryImpl());
+
+		URI fileURI = entry.getStatechart().eResource().getURI()
+				.trimFileExtension().appendFileExtension("sexec");
+		// URI fileURI = URI.createFileURI(new
+		// File("mylibrary.xmi").getAbsolutePath());
+
+		System.out.println(fileURI.toString());
+		Resource resource = resourceSet.createResource(fileURI);
+		resource.getContents().add(flow);
+
+		try {
+			resource.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+		}
+	}
+
 }

@@ -17,9 +17,14 @@ package org.yakindu.sct.generator.core.features;
  * 
  */
 public interface ICoreFeatureConstants {
+
 	public static final String LIBRARY_NAME = "Core";
-	public static final String OUTLET_FEATURE = "OutletFeature";
+	
+	public static final String OUTLET_FEATURE = "Outlet";
 	public static final String OUTLET_FEATURE_TARGET_PROJECT = "targetProject";
 	public static final String OUTLET_FEATURE_TARGET_FOLDER = "targetFolder";
 
+	public static final String DEBUG_FEATURE = "Debug";
+	public static final String DEBUG_FEATURE_DUMP_SEXEC = "dumpSexec";
+	
 }
