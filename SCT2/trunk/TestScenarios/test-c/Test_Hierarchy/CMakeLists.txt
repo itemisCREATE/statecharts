@@ -1,4 +1,4 @@
-include_directories(../../src-gen-c/Test_Expression)
+include_directories(../../src-gen-c/Test_Hierarchy)
 
 add_executable(TestHierarchyMain main.c)
 target_link_libraries(TestHierarchyMain Test_HierarchyStatemachine)
