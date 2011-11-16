@@ -1,6 +1,6 @@
 
 
-include_directories(../../src-gen-c/InterfaceTest.sct)
+include_directories(../../src-gen-c/InterfaceTest)
 
 add_executable(InterfaceTestStatemachineMain main.c)
 target_link_libraries(InterfaceTestStatemachineMain InterfaceTestStatemachine)
