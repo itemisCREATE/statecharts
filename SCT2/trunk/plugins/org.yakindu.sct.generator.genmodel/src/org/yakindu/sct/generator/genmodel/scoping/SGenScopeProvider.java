@@ -30,6 +30,9 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 						FeatureConfiguration featureConfig = (FeatureConfiguration) context
 								.eContainer();
 						String featureName = featureConfig.getType().getName();
+						if(featureName == null){
+							return false;
+						}
 						return featureName.equals(input
 								.getUserData(FeatureResourceDescription.FEATURE_CONTAINER));
 					}
