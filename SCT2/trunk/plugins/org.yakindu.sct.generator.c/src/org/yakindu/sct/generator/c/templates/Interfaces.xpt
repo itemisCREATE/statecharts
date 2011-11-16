@@ -107,7 +107,7 @@ void «interface.interfaceName()»_init(«interface.interfaceClassName()»* handle, 
 	
 «FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
 «IF variable.initialValue != null»
-	handle->«variable.name» = «variable.initialValue»;
+	handle->«variable.name» = «variable.initialValue.correctLValue()»;
 «ENDIF»
 «ENDFOREACH»
 
@@ -193,7 +193,7 @@ ENDIF»)
 	_Event* ev = eventPool_createEvent(handle->eventPool, «event.getEventEnumName()»);
 
 «IF event.type != Type::void -»
-	ev->value = value;
+	((«event.name»*)ev)->value = value;
 «ENDIF»
 
 	if (ev != NULL)
