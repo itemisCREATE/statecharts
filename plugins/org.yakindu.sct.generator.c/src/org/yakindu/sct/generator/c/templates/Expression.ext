@@ -53,31 +53,31 @@ String addValue(EventRaising event) :
 
 /* Logical Expressions */
 String toCCode(LogicalOrExpression expression) :
-  	expression.leftOperand.toCCode() + " || " + expression.rightOperand.toCCode();
+  	" ( " + expression.leftOperand.toCCode() + " ) " + " || " + " ( " + expression.rightOperand.toCCode() + " ) ";
   	
 String toCCode(LogicalAndExpression expression) :
-  	expression.leftOperand.toCCode() + " && " + expression.rightOperand.toCCode();
+  	" ( " + expression.leftOperand.toCCode() + " ) " + " && " + " ( " + expression.rightOperand.toCCode() + " ) ";
 
 String toCCode(LogicalNotExpression expression) :
-  	" ~" + expression.operand.toCCode();
+  	" ~" + " ( " + expression.operand.toCCode() + " ) ";
 
 String toCCode(LogicalRelationExpression expression) :
-   expression.leftOperand.toCCode() + getOperator(expression.operator) + expression.rightOperand.toCCode();
+   " ( " + expression.leftOperand.toCCode() + " ) " + getOperator(expression.operator) + " ( " + expression.rightOperand.toCCode() + " ) ";
     
 String toCCode(BitwiseAndExpression expression) :
-  	expression.leftOperand.toCCode() + " & " + expression.rightOperand.toCCode();
+  	" ( " + expression.leftOperand.toCCode() + " ) " + " & " + " ( " + expression.rightOperand.toCCode() + " ) ";
 
 String toCCode(BitwiseOrExpression expression) :
-  	expression.leftOperand.toCCode() + " | " + expression.rightOperand.toCCode();
+  	" ( " + expression.leftOperand.toCCode() + " ) " + " | " + " ( " + expression.rightOperand.toCCode() + " ) ";
 
 String toCCode(BitwiseXorExpression expression) :
-  	expression.leftOperand.toCCode() + " ^ " + expression.rightOperand.toCCode();
+  	" ( " + expression.leftOperand.toCCode() + " ) " + " ^ " + " ( " + expression.rightOperand.toCCode() + " ) ";
 
 String toCCode(NumericalAddSubtractExpression expression) :
-  	expression.leftOperand.toCCode() + getOperator(expression.operator) + expression.rightOperand.toCCode();
+  	" ( " + expression.leftOperand.toCCode() + " ) " + getOperator(expression.operator) + " ( " + expression.rightOperand.toCCode() + " ) ";
   	
 String toCCode(NumericalMultiplyDivideExpression expression) :
-  	expression.leftOperand.toCCode() + getOperator(expression.operator) + expression.rightOperand.toCCode();
+  	" ( " + expression.leftOperand.toCCode() + " ) " + getOperator(expression.operator) + " ( " + expression.rightOperand.toCCode() + " ) ";
 
 // is this just relevant for events?
 String toCCode(ElementReferenceExpression ref) :
