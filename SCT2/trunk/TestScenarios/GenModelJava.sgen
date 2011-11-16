@@ -1,50 +1,50 @@
 GeneratorModel for yakindu::java {
 	statechart InterfaceTest {
 		feature OutletFeature {
-			targetProject = "TestScenarios"
-			targetFolder = "src-gen-java/InterfaceTest"
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetFolder = "src-gen"
 		}
 	}
 	statechart Test_DeepHistory {
 		feature OutletFeature {
-			targetProject = "TestScenarios"
-			targetFolder = "src-gen-java/Test_DeepHistory"
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetFolder = "src-gen"
 		}
 	}
 	statechart Test_Expression {
 		feature OutletFeature {
-			targetProject = "TestScenarios"
-			targetFolder = "src-gen-java/Test_Expression"
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetFolder = "src-gen"
 		}
 	}
 	statechart Test_Hierarchy {
 		feature OutletFeature {
-			targetProject = "TestScenarios"
-			targetFolder = "src-gen-java/Test_Hierarchy"
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetFolder = "src-gen"
 		}
 	}
 	statechart Test_LocalActions {
 		feature OutletFeature {
-			targetProject = "TestScenarios"
-			targetFolder = "src-gen-java/Test_LocalActions"
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetFolder = "src-gen"
 		}
 	}
 	statechart Test_ParallelRegions {
 		feature OutletFeature {
-			targetProject = "TestScenarios"
-			targetFolder = "src-gen-java/Test_ParallelRegions"
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetFolder = "src-gen"
 		}
 	}
 	statechart Test_ShallowHistory {
 		feature OutletFeature {
-			targetProject = "TestScenarios"
-			targetFolder = "src-gen-java/Test_ShallowHistory"
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetFolder = "src-gen"
 		}
 	}
 	statechart Test_Transition {
 		feature OutletFeature {
-			targetProject = "TestScenarios"
-			targetFolder = "src-gen-java/Test_Transition"
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetFolder = "src-gen"
 		}
 	}
 }
