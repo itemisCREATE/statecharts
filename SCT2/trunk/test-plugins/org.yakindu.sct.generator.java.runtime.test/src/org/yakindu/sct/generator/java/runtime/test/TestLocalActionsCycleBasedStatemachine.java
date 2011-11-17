@@ -49,6 +49,7 @@ public class TestLocalActionsCycleBasedStatemachine {
 
 	@After
 	public void tearDown() {
+		statemachine.getTimerHandler().cancel();
 		statemachine = null;
 	}
 

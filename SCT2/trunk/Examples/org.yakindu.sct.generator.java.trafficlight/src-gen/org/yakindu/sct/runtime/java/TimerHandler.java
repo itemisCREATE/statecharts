@@ -66,4 +66,11 @@ public class TimerHandler implements ITimerHandler {
 		}
 		timerTaskMap.remove(event);
 	}
+	
+	/**
+	 * Cancels all running TimersTasks
+	 */
+	public void cancel() {
+		timer.cancel();
+	}
 }
