@@ -66,8 +66,7 @@ public class CrossingDemo {
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
-				TimerHandler timerHandler = new TimerHandler(statemachine);
-				statemachine.setTimerHandler(timerHandler);
+				statemachine.setTimerHandler(new TimerHandler(statemachine));
 				statemachine.entry();
 				while (!isInterrupted()) {
 					statemachine.runCycle();
@@ -82,6 +81,7 @@ public class CrossingDemo {
 						interrupt();
 					}
 				}
+				statemachine.getTimerHandler().cancel();
 			}
 		};
 		thread.start();
