@@ -15,12 +15,9 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 import org.yakindu.sct.runtime.java.Event;
-import org.yakindu.sct.runtime.java.ITimedStatemachine;
-import org.yakindu.sct.runtime.java.ITimerHandler;
-import org.yakindu.sct.runtime.java.EventNotification;
-import org.yakindu.sct.runtime.java.Notification;
+import org.yakindu.sct.runtime.java.IStatemachine;
 
-public abstract class InterfaceTestAbstractBaseStatemachine implements ITimedStatemachine {
+public abstract class InterfaceTestAbstractBaseStatemachine implements IStatemachine {
 	
 	
 	
@@ -35,8 +32,6 @@ public abstract class InterfaceTestAbstractBaseStatemachine implements ITimedSta
 	private InterfaceDefaultImpl interfaceDefault;
 	private InterfaceOtherImpl interfaceOther;
 	private InterfaceThirdImpl interfaceThird;
-	
-	
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 	
@@ -44,7 +39,6 @@ public abstract class InterfaceTestAbstractBaseStatemachine implements ITimedSta
 	
 	private final Collection<Event> outEvents;
 	
-	private ITimerHandler timerHandler;
 	
 	public InterfaceTestAbstractBaseStatemachine(Collection<Event> occuredEvents) {
 		this.occuredEvents = occuredEvents;
@@ -76,28 +70,8 @@ public abstract class InterfaceTestAbstractBaseStatemachine implements ITimedSta
 	public void init() {
 		
 	}
-
-	@Override
-	public void setTimerHandler(ITimerHandler timerHandler) {
-		this.timerHandler = timerHandler;
-	}
-
-	@Override
-	public ITimerHandler getTimerHandler() {
-		if (timerHandler == null) {
-			throw new NullPointerException("TimerHandler of statemachine \"+InterfaceTest+\" not set!");
-		}
-		return timerHandler;
-	}
 	
-	@Override
-	public void notify(Notification<?> notification) {
-		if (notification instanceof EventNotification) {
-			EventNotification eventNotification = (EventNotification) notification;
-			getOccuredEvents().add(eventNotification.getElement());
-		}
-	}
-	
+		
 	public Set<State> getActiveStates(){
 		return EnumSet.copyOf(activeStates);
 	}
@@ -114,7 +88,6 @@ public abstract class InterfaceTestAbstractBaseStatemachine implements ITimedSta
 		return interfaceThird;
 	}
 	
-
 	private boolean conditionState1Tr0(Collection<?> events) {
 		return (getOccuredEvents().contains(interfaceDefault.getEventEvent1()) && (interfaceDefault.getVarVar2() > 0));
 	}
@@ -211,7 +184,6 @@ actionsState4Tr0();
 
 
 	}
-
 	protected void runCycle(Collection<?> events) {
 		getOutEvents().clear();
 		for (State state : activeStates) {

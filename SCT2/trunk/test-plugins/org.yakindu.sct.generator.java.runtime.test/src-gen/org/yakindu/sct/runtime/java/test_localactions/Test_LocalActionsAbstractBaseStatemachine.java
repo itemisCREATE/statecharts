@@ -34,8 +34,6 @@ public abstract class Test_LocalActionsAbstractBaseStatemachine implements ITime
 	};
 	
 	private InterfaceDefaultImpl interfaceDefault;
-	
-	
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 	
@@ -44,6 +42,8 @@ public abstract class Test_LocalActionsAbstractBaseStatemachine implements ITime
 	private final Collection<Event> outEvents;
 	
 	private ITimerHandler timerHandler;
+	
+	private long cycleStartTime;
 	
 	public Test_LocalActionsAbstractBaseStatemachine(Collection<Event> occuredEvents) {
 		this.occuredEvents = occuredEvents;
@@ -60,6 +60,7 @@ public abstract class Test_LocalActionsAbstractBaseStatemachine implements ITime
 	}
 		
 	public void entry() {
+		cycleStartTime = System.currentTimeMillis();
 	activeStates.add(State.State1);
 		entryActionsState1();
 		
@@ -74,7 +75,7 @@ public abstract class Test_LocalActionsAbstractBaseStatemachine implements ITime
 	public void init() {
 		
 	}
-
+	
 	@Override
 	public void setTimerHandler(ITimerHandler timerHandler) {
 		this.timerHandler = timerHandler;
@@ -95,7 +96,7 @@ public abstract class Test_LocalActionsAbstractBaseStatemachine implements ITime
 			getOccuredEvents().add(eventNotification.getElement());
 		}
 	}
-	
+		
 	public Set<State> getActiveStates(){
 		return EnumSet.copyOf(activeStates);
 	}
@@ -104,7 +105,6 @@ public abstract class Test_LocalActionsAbstractBaseStatemachine implements ITime
 		return interfaceDefault;
 	}
 	
-
 	private boolean conditionState1Tr0(Collection<?> events) {
 		return getOccuredEvents().contains(interfaceDefault.getEventEvent1());
 	}
@@ -182,13 +182,13 @@ actionsState2Lr3();
 }
 	}
 	private void entryActionsState1() {
-getTimerHandler().setTimer(State1_time_event_0, 100);
+getTimerHandler().setTimer(State1_time_event_0, 100, cycleStartTime);
 	interfaceDefault.setVarI(1);
 
 
 	}
 	private void entryActionsState2() {
-getTimerHandler().setTimer(State2_time_event_0, 200);
+getTimerHandler().setTimer(State2_time_event_0, 200, cycleStartTime);
 	interfaceDefault.setVarJ(1);
 
 
@@ -205,8 +205,8 @@ getTimerHandler().resetTimer(State2_time_event_0);
 
 
 	}
-
 	protected void runCycle(Collection<?> events) {
+		cycleStartTime = System.currentTimeMillis();
 		getOutEvents().clear();
 		for (State state : activeStates) {
 			switch (state) {

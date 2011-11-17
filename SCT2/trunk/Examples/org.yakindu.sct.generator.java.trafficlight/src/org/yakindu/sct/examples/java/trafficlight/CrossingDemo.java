@@ -1,5 +1,21 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.examples.java.trafficlight;
 
+/**
+ * Example to show how to integrate the generated statemachine code into existing projects.
+ * 
+ * @author a.nyssen - initial API and implementation
+ * @author m.muehlbrandt - adaptions to new statemachine code.
+ */
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.draw2d.FigureCanvas;
@@ -20,7 +36,7 @@ import org.yakindu.sct.runtime.java.trafficlightwaitingsimple.TrafficLightWaitin
 public class CrossingDemo {
 
 	public static void main(String[] args) {
-		
+
 		final TrafficLightWaitingSimpleCyleBasedStatemachine statemachine = new TrafficLightWaitingSimpleCyleBasedStatemachine();
 
 		// create display and shell
@@ -46,7 +62,7 @@ public class CrossingDemo {
 		crossing.add(pl);
 		crossing.getLayoutManager().setConstraint(pl,
 				new Rectangle(50, 10, 70, 20));
-		
+
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
