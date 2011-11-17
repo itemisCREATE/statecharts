@@ -1,0 +1,15 @@
+GeneratorModel for yakindu::java {
+	statechart TrafficLightWaiting {
+		feature OutletFeature {
+			targetProject = "org.yakindu.sct.examples.generator.java.trafficlight"
+			targetFolder = "src-gen"
+		}
+	}
+	
+	statechart TrafficLightWaitingSimple {
+		feature OutletFeature {
+			targetProject = "org.yakindu.sct.examples.generator.java.trafficlight"
+			targetFolder = "src-gen"
+		}
+	}
+}

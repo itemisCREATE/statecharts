@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Trafficlight
+Bundle-SymbolicName: org.yakindu.sct.examples.generator.java.trafficlight
+Bundle-Version: 1.0.0.qualifier
+Export-Package: org.yakindu.sct.examples.java.trafficlight,
+ org.yakindu.sct.runtime.java,
+ org.yakindu.sct.runtime.java.trafficlightwaiting
+Require-Bundle: org.eclipse.draw2d;bundle-version="3.7.0"
