@@ -64,7 +64,7 @@ String toCode(LogicalAndExpression expression) :
   	"("+expression.leftOperand.toCode() + " && " + expression.rightOperand.toCode()+")";
 
 String toCode(LogicalNotExpression expression) :
-  	" ^" + expression.operand.toCode();
+  	" !" + expression.operand.toCode();
 
 String toCode(LogicalRelationExpression expression) :
    "("+expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode()+")";

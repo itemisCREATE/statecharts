@@ -15,12 +15,9 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 import org.yakindu.sct.runtime.java.Event;
-import org.yakindu.sct.runtime.java.ITimedStatemachine;
-import org.yakindu.sct.runtime.java.ITimerHandler;
-import org.yakindu.sct.runtime.java.EventNotification;
-import org.yakindu.sct.runtime.java.Notification;
+import org.yakindu.sct.runtime.java.IStatemachine;
 
-public abstract class Test_HierarchyAbstractBaseStatemachine implements ITimedStatemachine {
+public abstract class Test_HierarchyAbstractBaseStatemachine implements IStatemachine {
 	
 	
 	
@@ -39,8 +36,6 @@ public abstract class Test_HierarchyAbstractBaseStatemachine implements ITimedSt
 	};
 	
 	private InterfaceDefaultImpl interfaceDefault;
-	
-	
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 	
@@ -48,7 +43,6 @@ public abstract class Test_HierarchyAbstractBaseStatemachine implements ITimedSt
 	
 	private final Collection<Event> outEvents;
 	
-	private ITimerHandler timerHandler;
 	
 	public Test_HierarchyAbstractBaseStatemachine(Collection<Event> occuredEvents) {
 		this.occuredEvents = occuredEvents;
@@ -79,28 +73,8 @@ public abstract class Test_HierarchyAbstractBaseStatemachine implements ITimedSt
 	public void init() {
 		
 	}
-
-	@Override
-	public void setTimerHandler(ITimerHandler timerHandler) {
-		this.timerHandler = timerHandler;
-	}
-
-	@Override
-	public ITimerHandler getTimerHandler() {
-		if (timerHandler == null) {
-			throw new NullPointerException("TimerHandler of statemachine \"+Test_Hierarchy+\" not set!");
-		}
-		return timerHandler;
-	}
 	
-	@Override
-	public void notify(Notification<?> notification) {
-		if (notification instanceof EventNotification) {
-			EventNotification eventNotification = (EventNotification) notification;
-			getOccuredEvents().add(eventNotification.getElement());
-		}
-	}
-	
+		
 	public Set<State> getActiveStates(){
 		return EnumSet.copyOf(activeStates);
 	}
@@ -109,7 +83,6 @@ public abstract class Test_HierarchyAbstractBaseStatemachine implements ITimedSt
 		return interfaceDefault;
 	}
 	
-
 	private boolean conditionState1Tr0(Collection<?> events) {
 		return getOccuredEvents().contains(interfaceDefault.getEventEvent1());
 	}
@@ -438,7 +411,6 @@ actionsState8Tr2();
 
 
 	}
-
 	protected void runCycle(Collection<?> events) {
 		getOutEvents().clear();
 		for (State state : activeStates) {

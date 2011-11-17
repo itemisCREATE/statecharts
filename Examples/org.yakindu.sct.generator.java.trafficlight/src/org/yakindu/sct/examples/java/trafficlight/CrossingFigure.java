@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.examples.java.trafficlight;
 
 import org.eclipse.draw2d.ColorConstants;
@@ -6,6 +16,12 @@ import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.XYLayout;
 import org.eclipse.draw2d.geometry.Rectangle;
 
+/**
+ * Draw2d figure for the crossing. Used by CrossingDemo. 
+ * 
+ * @author a.nyssen
+ *
+ */
 public class CrossingFigure extends Figure {
 
 	public CrossingFigure() {

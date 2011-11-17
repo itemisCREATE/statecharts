@@ -37,8 +37,6 @@ public abstract class Test_TransitionAbstractBaseStatemachine implements ITimedS
 	
 	private InterfaceAImpl interfaceA;
 	private InterfaceDefaultImpl interfaceDefault;
-	
-	
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 	
@@ -47,6 +45,8 @@ public abstract class Test_TransitionAbstractBaseStatemachine implements ITimedS
 	private final Collection<Event> outEvents;
 	
 	private ITimerHandler timerHandler;
+	
+	private long cycleStartTime;
 	
 	public Test_TransitionAbstractBaseStatemachine(Collection<Event> occuredEvents) {
 		this.occuredEvents = occuredEvents;
@@ -64,6 +64,7 @@ public abstract class Test_TransitionAbstractBaseStatemachine implements ITimedS
 	}
 		
 	public void entry() {
+		cycleStartTime = System.currentTimeMillis();
 	activeStates.add(State.State1);
 		entryActionsState1();
 		
@@ -78,7 +79,7 @@ public abstract class Test_TransitionAbstractBaseStatemachine implements ITimedS
 	public void init() {
 		
 	}
-
+	
 	@Override
 	public void setTimerHandler(ITimerHandler timerHandler) {
 		this.timerHandler = timerHandler;
@@ -99,7 +100,7 @@ public abstract class Test_TransitionAbstractBaseStatemachine implements ITimedS
 			getOccuredEvents().add(eventNotification.getElement());
 		}
 	}
-	
+		
 	public Set<State> getActiveStates(){
 		return EnumSet.copyOf(activeStates);
 	}
@@ -124,7 +125,7 @@ public abstract class Test_TransitionAbstractBaseStatemachine implements ITimedS
 	private int getEventValueEvent10() {
 		return EventEvent10.getValue();
 	}
-
+	
 	private boolean conditionState1Tr0(Collection<?> events) {
 		return (getOccuredEvents().contains(interfaceA.getEventEvent1()) || getOccuredEvents().contains(interfaceA.getEventEvent2()));
 	}
@@ -258,8 +259,8 @@ actionsState1Tr8();
 	private void cycleState2(Collection<?> events) {
 	}
 	private void entryActionsState1() {
-getTimerHandler().setTimer(State1_time_event_0, (10 * 1000));
-getTimerHandler().setTimer(State1_time_event_1, 100);
+getTimerHandler().setTimer(State1_time_event_0, (10 * 1000), cycleStartTime);
+getTimerHandler().setTimer(State1_time_event_1, 100, cycleStartTime);
 
 	}
 	private void exitActionsState1() {
@@ -267,8 +268,8 @@ getTimerHandler().resetTimer(State1_time_event_0);
 getTimerHandler().resetTimer(State1_time_event_1);
 
 	}
-
 	protected void runCycle(Collection<?> events) {
+		cycleStartTime = System.currentTimeMillis();
 		getOutEvents().clear();
 		for (State state : activeStates) {
 			switch (state) {

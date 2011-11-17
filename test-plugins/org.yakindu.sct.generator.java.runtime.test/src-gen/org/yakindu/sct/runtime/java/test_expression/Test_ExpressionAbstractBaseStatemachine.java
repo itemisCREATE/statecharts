@@ -15,12 +15,9 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 import org.yakindu.sct.runtime.java.Event;
-import org.yakindu.sct.runtime.java.ITimedStatemachine;
-import org.yakindu.sct.runtime.java.ITimerHandler;
-import org.yakindu.sct.runtime.java.EventNotification;
-import org.yakindu.sct.runtime.java.Notification;
+import org.yakindu.sct.runtime.java.IStatemachine;
 
-public abstract class Test_ExpressionAbstractBaseStatemachine implements ITimedStatemachine {
+public abstract class Test_ExpressionAbstractBaseStatemachine implements IStatemachine {
 	
 	
 	
@@ -31,8 +28,6 @@ public abstract class Test_ExpressionAbstractBaseStatemachine implements ITimedS
 	};
 	
 	private InterfaceDefaultImpl interfaceDefault;
-	
-	
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 	
@@ -40,7 +35,6 @@ public abstract class Test_ExpressionAbstractBaseStatemachine implements ITimedS
 	
 	private final Collection<Event> outEvents;
 	
-	private ITimerHandler timerHandler;
 	
 	public Test_ExpressionAbstractBaseStatemachine(Collection<Event> occuredEvents) {
 		this.occuredEvents = occuredEvents;
@@ -70,28 +64,8 @@ public abstract class Test_ExpressionAbstractBaseStatemachine implements ITimedS
 	public void init() {
 		
 	}
-
-	@Override
-	public void setTimerHandler(ITimerHandler timerHandler) {
-		this.timerHandler = timerHandler;
-	}
-
-	@Override
-	public ITimerHandler getTimerHandler() {
-		if (timerHandler == null) {
-			throw new NullPointerException("TimerHandler of statemachine \"+Test_Expression+\" not set!");
-		}
-		return timerHandler;
-	}
 	
-	@Override
-	public void notify(Notification<?> notification) {
-		if (notification instanceof EventNotification) {
-			EventNotification eventNotification = (EventNotification) notification;
-			getOccuredEvents().add(eventNotification.getElement());
-		}
-	}
-	
+		
 	public Set<State> getActiveStates(){
 		return EnumSet.copyOf(activeStates);
 	}
@@ -100,7 +74,6 @@ public abstract class Test_ExpressionAbstractBaseStatemachine implements ITimedS
 		return interfaceDefault;
 	}
 	
-
 	private boolean conditionState1Tr0(Collection<?> events) {
 		return getOccuredEvents().contains(interfaceDefault.getEventEvent1());
 	}
@@ -127,7 +100,6 @@ if (conditionState2Tr0(events) ) {
 actionsState2Tr0();
 }
 	}
-
 	protected void runCycle(Collection<?> events) {
 		getOutEvents().clear();
 		for (State state : activeStates) {

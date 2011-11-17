@@ -280,15 +280,24 @@ public abstract class «getBaseStatemachineName()» implements «getImplementationT
 	private «event.type.getJavaType()» get«event.getValueName().toFirstUpper()»() {
 		return «event.getName()».getValue();
 	}
+	
 	«ENDIF-»
 	«ENDFOREACH-»
-
+	«FOREACH getInternalScopeVariables() AS variable-»
+	private «variable.type.getJavaType()» get«variable.getValueName().toFirstUpper()»() {
+		return «variable.getValueName()»;
+	}
+	
+	private void set«variable.getValueName().toFirstUpper()»(«variable.type.getJavaType()» value) {
+		«variable.getValueName()» = value;
+	}	
+	
+	«ENDFOREACH-»
 «EXPAND ConditionMethodsImplement FOREACH this.states-»
 «EXPAND StatementMethodsImplement FOREACH this.states-»
 «EXPAND CycleMethodsImplement FOREACH this.states-»
 «EXPAND EnterMethodImplement FOREACH this.states-»
 «EXPAND ExitMethodImplement FOREACH this.states-»
-
 	protected void runCycle(Collection<?> events) {
 		«IF isTimedStatemachine()-»
 		cycleStartTime = System.currentTimeMillis();
