@@ -59,6 +59,7 @@ import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
 import org.yakindu.sct.model.stext.stext.TimeUnit
 import org.yakindu.sct.model.stext.stext.MultiplicativeOperator
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
+import com.sun.org.apache.xerces.internal.dom.ParentNode$UserDataRecord
 
 class ModelSequencer {
 	
@@ -175,13 +176,6 @@ class ModelSequencer {
 			
 		}	
 		
-//		var result = timeEventSpecs.map( tes | { 
-//			val timeEvent = tes.createDerivedEvent
-//			timeEvent.name = state.name + "_time_event_" + timeEventSpecs.indexOf(tes);
-//			state.statechart.create.timeEventScope.declarations.add(timeEvent);
-//			timeEvent
-//		})
-				
 		result
 	}
 	
@@ -244,18 +238,51 @@ class ModelSequencer {
 	def Sequence mapToEffect(Transition t) {
 		val sequence = sexecFactory.createSequence 
 
-		if (t.source instanceof State && (t.source as State).create.exitAction != null) 
-			sequence.steps.add( (t.source as State).create.exitAction.newCall)
-
+		t.exitStates().fold(sequence, [seq, state | {
+			if (state.create.exitAction != null) seq.steps.add(state.create.exitAction.newCall)
+			seq
+		}])
+		
 		if (t.source != null) sequence.steps.add(newExitStateStep(t.source as State))
 		if (t.effect != null) sequence.steps.add(t.effect.mapEffect)		
 		if (t.target != null && t.target instanceof State) sequence.steps.add(newEnterStateStep(t.target as State))
 	
-		if (t.target instanceof State && (t.target as State).create.entryAction != null) 
-			sequence.steps.add( (t.target as State).create.entryAction.newCall)
+
+		t.entryStates().reverse.fold(sequence, [seq, state | {
+			if (state.create.entryAction != null) seq.steps.add(state.create.entryAction.newCall)
+			seq
+		}])
 		
 		return sequence
 	}	
+	
+	
+	def List<State> exitStates(Transition t) {
+		val l = t.source.containers
+		l.removeAll(t.target.containers)
+		l.filter( typeof(State) ).toList
+	}
+	
+	def List<State> entryStates(Transition t) {
+		val l = t.target.containers
+		l.removeAll(t.source.containers)
+		l.filter( typeof(State) ).toList
+	}
+	
+	
+	
+	def List<EObject> containers(EObject obj) {
+		val containerList = new ArrayList<EObject>()
+		collectContainers(obj, containerList)
+		return containerList
+	}
+	
+	def void collectContainers(EObject obj, List<EObject> containerList) {
+		containerList += obj
+		if (obj?.eContainer != null) collectContainers(obj.eContainer, containerList);
+	}
+	
+	
 	
 	
 	def Sequence mapToEffect(LocalReaction lr) {
@@ -288,6 +315,7 @@ class ModelSequencer {
 	def Step mapEntryAction(State state) {
 		val seq = sexecFactory.createSequence
 		seq.name = "entryAction"
+		seq.comment = "Entry action for state '" + state.name + "'."
 		
 		for (tes : state.timeEventSpecs ) {
 			val timeEvent = tes.createDerivedEvent

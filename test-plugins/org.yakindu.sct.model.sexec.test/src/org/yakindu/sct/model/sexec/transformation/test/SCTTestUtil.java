@@ -1,5 +1,10 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
+import java.util.Collection;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Reaction;
@@ -29,6 +34,9 @@ import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
 import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 
 public class SCTTestUtil {
 
@@ -202,6 +210,19 @@ public class SCTTestUtil {
 	}
 	
 
+	
+	public static State findState(Statechart sc, final String name) {
+		Collection<EObject> states = Collections2.filter(EcoreUtil2.eAllContentsAsList(sc), new Predicate<Object>() {
+
+			public boolean apply(Object obj) {
+				// TODO Auto-generated method stub
+				return obj != null && obj instanceof State && name.equals(((State)obj).getName());
+			}
+		});
+		
+		return (states.size() > 0) ? (State) states.iterator().next() : null;
+	}
+	
 	
 	public static class MinimalTSC {
 		
