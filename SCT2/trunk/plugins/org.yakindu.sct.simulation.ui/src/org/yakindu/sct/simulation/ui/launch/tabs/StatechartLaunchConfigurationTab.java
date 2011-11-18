@@ -47,7 +47,7 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 
 	public StatechartLaunchConfigurationTab() {
 		image = new Image(Display.getDefault(), getClass().getClassLoader()
-				.getResourceAsStream("icons/yakindu.png"));
+				.getResourceAsStream("icons/Statechart-Launcher-16.png"));
 	}
 
 	public void createControl(Composite parent) {
