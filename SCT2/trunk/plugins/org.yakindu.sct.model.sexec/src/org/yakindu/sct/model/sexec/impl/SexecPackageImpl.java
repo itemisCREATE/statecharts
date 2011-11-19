@@ -334,6 +334,24 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getExecutionState_EnterSequence() {
+		return (EReference)executionStateEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExecutionState_ExitSequence() {
+		return (EReference)executionStateEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getExecutionState_Leaf() {
 		return (EAttribute)executionStateEClass.getEStructuralFeatures().get(1);
 	}
@@ -722,6 +740,8 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		createEReference(executionStateEClass, EXECUTION_STATE__REACTIONS);
 		createEReference(executionStateEClass, EXECUTION_STATE__ENTRY_ACTION);
 		createEReference(executionStateEClass, EXECUTION_STATE__EXIT_ACTION);
+		createEReference(executionStateEClass, EXECUTION_STATE__ENTER_SEQUENCE);
+		createEReference(executionStateEClass, EXECUTION_STATE__EXIT_SEQUENCE);
 
 		reactionEClass = createEClass(REACTION);
 		createEReference(reactionEClass, REACTION__CHECK);
@@ -840,6 +860,8 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEReference(getExecutionState_Reactions(), this.getReaction(), null, "reactions", null, 0, -1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionState_EntryAction(), this.getStep(), null, "entryAction", null, 0, 1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionState_ExitAction(), this.getStep(), null, "exitAction", null, 0, 1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionState_EnterSequence(), this.getSequence(), null, "enterSequence", null, 0, 1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionState_ExitSequence(), this.getSequence(), null, "exitSequence", null, 0, 1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(reactionEClass, Reaction.class, "Reaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getReaction_Check(), this.getCheck(), null, "check", null, 0, 1, Reaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

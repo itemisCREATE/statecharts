@@ -1,5 +1,10 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEntryAction;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createExitAction;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createValue;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableAssignment;
+
 import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
@@ -192,6 +197,18 @@ public class SCTTestUtil {
 	}
 	
 	
+	public static void _createExitAssignemnt(VariableDefinition v1, State s1, String value) {
+		LocalReaction exitAction = _createExitAction(s1);
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(value), (ReactionEffect) exitAction.getEffect());
+	}
+
+
+	public static void _createEntryAssignemnt(VariableDefinition v1, State s1, String value) {
+		LocalReaction entryAction = _createEntryAction(s1);
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(value), (ReactionEffect) entryAction.getEffect());
+	}
+
+
 
 	
 	public static Assignment _createVariableAssignment(VariableDefinition v, AssignmentOperator op, Expression expression, ReactionEffect e) {

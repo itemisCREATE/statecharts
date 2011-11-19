@@ -38,6 +38,10 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exitAction" eType="#//Step"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enterSequence" eType="#//Sequence"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exitSequence" eType="#//Sequence"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Reaction" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="check" eType="#//Check"

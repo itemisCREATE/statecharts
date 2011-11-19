@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.sct.model.sexec.Cycle;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.Reaction;
+import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.Step;
 
@@ -35,6 +36,8 @@ import org.yakindu.sct.model.sexec.Step;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getEntryAction <em>Entry Action</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getExitAction <em>Exit Action</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getEnterSequence <em>Enter Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getExitSequence <em>Exit Sequence</em>}</li>
  * </ul>
  * </p>
  *
@@ -120,6 +123,26 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	 * @ordered
 	 */
 	protected Step exitAction;
+
+	/**
+	 * The cached value of the '{@link #getEnterSequence() <em>Enter Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEnterSequence()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sequence enterSequence;
+
+	/**
+	 * The cached value of the '{@link #getExitSequence() <em>Exit Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExitSequence()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sequence exitSequence;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -307,6 +330,92 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Sequence getEnterSequence() {
+		return enterSequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEnterSequence(Sequence newEnterSequence, NotificationChain msgs) {
+		Sequence oldEnterSequence = enterSequence;
+		enterSequence = newEnterSequence;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__ENTER_SEQUENCE, oldEnterSequence, newEnterSequence);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEnterSequence(Sequence newEnterSequence) {
+		if (newEnterSequence != enterSequence) {
+			NotificationChain msgs = null;
+			if (enterSequence != null)
+				msgs = ((InternalEObject)enterSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_STATE__ENTER_SEQUENCE, null, msgs);
+			if (newEnterSequence != null)
+				msgs = ((InternalEObject)newEnterSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_STATE__ENTER_SEQUENCE, null, msgs);
+			msgs = basicSetEnterSequence(newEnterSequence, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__ENTER_SEQUENCE, newEnterSequence, newEnterSequence));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Sequence getExitSequence() {
+		return exitSequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetExitSequence(Sequence newExitSequence, NotificationChain msgs) {
+		Sequence oldExitSequence = exitSequence;
+		exitSequence = newExitSequence;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE, oldExitSequence, newExitSequence);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExitSequence(Sequence newExitSequence) {
+		if (newExitSequence != exitSequence) {
+			NotificationChain msgs = null;
+			if (exitSequence != null)
+				msgs = ((InternalEObject)exitSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE, null, msgs);
+			if (newExitSequence != null)
+				msgs = ((InternalEObject)newExitSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE, null, msgs);
+			msgs = basicSetExitSequence(newExitSequence, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE, newExitSequence, newExitSequence));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isLeaf() {
 		return leaf;
 	}
@@ -339,6 +448,10 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 				return basicSetEntryAction(null, msgs);
 			case SexecPackage.EXECUTION_STATE__EXIT_ACTION:
 				return basicSetExitAction(null, msgs);
+			case SexecPackage.EXECUTION_STATE__ENTER_SEQUENCE:
+				return basicSetEnterSequence(null, msgs);
+			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
+				return basicSetExitSequence(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -363,6 +476,10 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 				return getEntryAction();
 			case SexecPackage.EXECUTION_STATE__EXIT_ACTION:
 				return getExitAction();
+			case SexecPackage.EXECUTION_STATE__ENTER_SEQUENCE:
+				return getEnterSequence();
+			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
+				return getExitSequence();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -395,6 +512,12 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 			case SexecPackage.EXECUTION_STATE__EXIT_ACTION:
 				setExitAction((Step)newValue);
 				return;
+			case SexecPackage.EXECUTION_STATE__ENTER_SEQUENCE:
+				setEnterSequence((Sequence)newValue);
+				return;
+			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
+				setExitSequence((Sequence)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -425,6 +548,12 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 			case SexecPackage.EXECUTION_STATE__EXIT_ACTION:
 				setExitAction((Step)null);
 				return;
+			case SexecPackage.EXECUTION_STATE__ENTER_SEQUENCE:
+				setEnterSequence((Sequence)null);
+				return;
+			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
+				setExitSequence((Sequence)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -449,6 +578,10 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 				return entryAction != null;
 			case SexecPackage.EXECUTION_STATE__EXIT_ACTION:
 				return exitAction != null;
+			case SexecPackage.EXECUTION_STATE__ENTER_SEQUENCE:
+				return enterSequence != null;
+			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
+				return exitSequence != null;
 		}
 		return super.eIsSet(featureID);
 	}

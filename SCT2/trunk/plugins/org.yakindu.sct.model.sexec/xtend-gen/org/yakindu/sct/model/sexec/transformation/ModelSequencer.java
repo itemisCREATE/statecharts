@@ -95,6 +95,7 @@ public class ModelSequencer {
       this.mapTransitions(sc, ef);
       this.mapLocalReactions(sc, ef);
       this.defineStateVector(ef, sc);
+      this.defineStateEnterSequences(ef, sc);
       this.defineEnterSequence(ef, sc);
       this.defineStateCycles(ef, sc);
       this.retargetDeclRefs(ef);
@@ -1113,6 +1114,76 @@ public class ModelSequencer {
     }
   }
   
+  public void defineStateEnterSequences(final ExecutionFlow flow, final Statechart sc) {
+    EList<Region> _regions = sc.getRegions();
+    for (Region r : _regions) {
+      this.defineStateEnterSequence(r);
+    }
+  }
+  
+  public void defineStateEnterSequence(final Region r) {
+    EList<Vertex> _vertices = r.getVertices();
+    Iterable<State> _filter = IterableExtensions.<State>filter(_vertices, org.yakindu.sct.model.sgraph.State.class);
+    for (State s : _filter) {
+      this.defineStateEnterSequence(s);
+    }
+  }
+  
+  public void defineStateEnterSequence(final State state) {
+    {
+      ExecutionState _create = this.factory.create(state);
+      final ExecutionState execState = _create;
+      SexecFactory _sexecFactory = this.sexecFactory();
+      Sequence _createSequence = _sexecFactory.createSequence();
+      final Sequence seq = _createSequence;
+      seq.setName("enterSequence");
+      String _name = state.getName();
+      String _operator_plus = StringExtensions.operator_plus("Default enter sequence for state ", _name);
+      seq.setComment(_operator_plus);
+      Step _entryAction = execState.getEntryAction();
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_entryAction, null);
+      if (_operator_notEquals) {
+        EList<Step> _steps = seq.getSteps();
+        Step _entryAction_1 = execState.getEntryAction();
+        Call _newCall = this.factory.newCall(_entryAction_1);
+        _steps.add(_newCall);
+      }
+      boolean _isLeaf = execState.isLeaf();
+      if (_isLeaf) {
+        EList<Step> _steps_1 = seq.getSteps();
+        EnterState _newEnterStateStep = this.newEnterStateStep(state);
+        CollectionExtensions.<EnterState>operator_add(_steps_1, _newEnterStateStep);
+      } else {
+        EList<Region> _subRegions = state.getSubRegions();
+        for (Region r : _subRegions) {
+          {
+            this.defineStateEnterSequence(r);
+            Entry _entry = this.entry(r);
+            State _target = this==null?(State)null:this.target(_entry);
+            ExecutionState _create_1 = this.factory==null?(ExecutionState)null:this.factory.create(_target);
+            final ExecutionState entryState = _create_1;
+            boolean _operator_and = false;
+            boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(entryState, null);
+            if (!_operator_notEquals_1) {
+              _operator_and = false;
+            } else {
+              Sequence _enterSequence = entryState.getEnterSequence();
+              boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_enterSequence, null);
+              _operator_and = BooleanExtensions.operator_and(_operator_notEquals_1, _operator_notEquals_2);
+            }
+            if (_operator_and) {
+              EList<Step> _steps_2 = seq.getSteps();
+              Sequence _enterSequence_1 = entryState.getEnterSequence();
+              Call _newCall_1 = this.factory.newCall(_enterSequence_1);
+              _steps_2.add(_newCall_1);
+            }
+          }
+        }
+      }
+      execState.setEnterSequence(seq);
+    }
+  }
+  
   public Sequence defineEnterSequence(final ExecutionFlow flow, final Statechart sc) {
     {
       ArrayList<Step> _arrayList = new ArrayList<Step>();
@@ -1135,6 +1206,9 @@ public class ModelSequencer {
       Sequence _createSequence = _sexecFactory.createSequence();
       final Sequence enterSequence = _createSequence;
       enterSequence.setName("enter");
+      String _name = sc.getName();
+      String _operator_plus = StringExtensions.operator_plus("Default enter sequence for statechart ", _name);
+      enterSequence.setComment(_operator_plus);
       final Function1<Step,Boolean> _function = new Function1<Step,Boolean>() {
           public Boolean apply(final Step e) {
             EList<Step> _steps = enterSequence.getSteps();
@@ -1338,10 +1412,19 @@ public class ModelSequencer {
       int _size = _outgoingTransitions_1.size();
       boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)0));
       if (_operator_greaterThan) {
-        EList<Transition> _outgoingTransitions_2 = entry.getOutgoingTransitions();
-        Transition _get = _outgoingTransitions_2.get(0);
-        Vertex _target = _get.getTarget();
-        _xifexpression_1 = ((State) _target);
+        State _xblockexpression = null;
+        {
+          EList<Transition> _outgoingTransitions_2 = entry.getOutgoingTransitions();
+          Transition _get = _outgoingTransitions_2.get(0);
+          Vertex _target = _get.getTarget();
+          final Vertex target = _target;
+          State _xifexpression_2 = null;
+          if ((target instanceof org.yakindu.sct.model.sgraph.State)) {
+            _xifexpression_2 = ((State) target);
+          }
+          _xblockexpression = (_xifexpression_2);
+        }
+        _xifexpression_1 = _xblockexpression;
       }
       _xifexpression = _xifexpression_1;
     }

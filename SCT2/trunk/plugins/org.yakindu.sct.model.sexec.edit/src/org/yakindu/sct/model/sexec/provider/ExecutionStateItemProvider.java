@@ -127,6 +127,8 @@ public class ExecutionStateItemProvider
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__REACTIONS);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__ENTER_SEQUENCE);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__EXIT_SEQUENCE);
 		}
 		return childrenFeatures;
 	}
@@ -189,6 +191,8 @@ public class ExecutionStateItemProvider
 			case SexecPackage.EXECUTION_STATE__REACTIONS:
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
 			case SexecPackage.EXECUTION_STATE__EXIT_ACTION:
+			case SexecPackage.EXECUTION_STATE__ENTER_SEQUENCE:
+			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -325,6 +329,26 @@ public class ExecutionStateItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createUnscheduleTimeEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__ENTER_SEQUENCE,
+				 SexecFactory.eINSTANCE.createSequence()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__ENTER_SEQUENCE,
+				 SexecFactory.eINSTANCE.createCycle()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__EXIT_SEQUENCE,
+				 SexecFactory.eINSTANCE.createSequence()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__EXIT_SEQUENCE,
+				 SexecFactory.eINSTANCE.createCycle()));
 	}
 
 	/**
@@ -341,7 +365,9 @@ public class ExecutionStateItemProvider
 		boolean qualify =
 			childFeature == SexecPackage.Literals.EXECUTION_STATE__CYCLE ||
 			childFeature == SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION ||
-			childFeature == SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION;
+			childFeature == SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION ||
+			childFeature == SexecPackage.Literals.EXECUTION_STATE__ENTER_SEQUENCE ||
+			childFeature == SexecPackage.Literals.EXECUTION_STATE__EXIT_SEQUENCE;
 
 		if (qualify) {
 			return getString

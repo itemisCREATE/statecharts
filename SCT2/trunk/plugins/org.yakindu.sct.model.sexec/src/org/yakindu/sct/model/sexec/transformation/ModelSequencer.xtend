@@ -84,6 +84,7 @@ class ModelSequencer {
 		
 		// derive all additional information that is necessary for the execution
 		ef.defineStateVector(sc)
+		ef.defineStateEnterSequences(sc)
 		ef.defineEnterSequence(sc)
 		ef.defineStateCycles(sc)
 		
@@ -523,6 +524,50 @@ class ModelSequencer {
 
 	/************** Calculating execution sequences **************/
 	
+	/**
+	 * Defines the enter sequences of all states
+	 */
+	def void defineStateEnterSequences(ExecutionFlow flow, Statechart sc) {
+		
+		// iterate over all regions
+		for ( r : sc.regions) defineStateEnterSequence(r)
+	}
+	
+
+	def void defineStateEnterSequence(Region r) {
+		
+		// process all states of a region
+		for ( s : r.vertices.filter(typeof(State))) defineStateEnterSequence(s)
+	}
+	
+	
+	def void defineStateEnterSequence(State state) {
+		
+		val execState = state.create
+		val seq = sexecFactory.createSequence
+		seq.name = "enterSequence"
+		seq.comment = "Default enter sequence for state " + state.name
+		if (execState.entryAction != null) seq.steps.add(execState.entryAction.newCall)
+
+		if ( execState.leaf ) {
+			
+			seq.steps += state.newEnterStateStep
+					
+		} else {
+	
+			for ( r : state.subRegions ) {
+				defineStateEnterSequence(r)
+				
+				val entryState = r.entry?.target?.create
+				
+				if (entryState != null && entryState.enterSequence != null) 
+					seq.steps.add(entryState.enterSequence.newCall);
+			} 
+		}
+
+		execState.enterSequence = seq
+	}
+	
 	
 	def defineEnterSequence(ExecutionFlow flow, Statechart sc) {
 		val enterSteps = new ArrayList<Step>()
@@ -535,6 +580,7 @@ class ModelSequencer {
 		// sc.regions.map(r | r.entry?.target?.newEnterStateStep).filter(e | e != null)
 		val enterSequence = sexecFactory.createSequence
 		enterSequence.name = "enter"
+		enterSequence.comment = "Default enter sequence for statechart " + sc.name
 		enterSteps.forEach(e | enterSequence.steps.add(e));
 		flow.enterSequence = enterSequence
 		return enterSequence
@@ -604,10 +650,16 @@ class ModelSequencer {
 		r.vertices.findFirst(v | v instanceof Entry && (v.name == null || "".equals(v.name) || v.name == 'default') ) as Entry
 	}
 	
-	
+	/**
+	 * Retrieves the target from an entry.
+	 * TODO: validation of preconditions for entry targets e.g every region needs an entry with appropriate target
+	 */
 	def target(Entry entry) {
 		if ( entry?.outgoingTransitions != null) {
-			if (entry.outgoingTransitions.size > 0) entry.outgoingTransitions.get(0).target as State
+			if (entry.outgoingTransitions.size > 0) {
+				val target =entry.outgoingTransitions.get(0).target
+				if (target instanceof State ) target as State	
+			}
 		}
 	}
 	 

@@ -408,13 +408,31 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_STATE__EXIT_ACTION = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Enter Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__ENTER_SEQUENCE = NAMED_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Exit Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__EXIT_SEQUENCE = NAMED_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Execution State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int EXECUTION_STATE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1081,6 +1099,28 @@ public interface SexecPackage extends EPackage {
 	EReference getExecutionState_ExitAction();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionState#getEnterSequence <em>Enter Sequence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Enter Sequence</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionState#getEnterSequence()
+	 * @see #getExecutionState()
+	 * @generated
+	 */
+	EReference getExecutionState_EnterSequence();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionState#getExitSequence <em>Exit Sequence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Exit Sequence</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionState#getExitSequence()
+	 * @see #getExecutionState()
+	 * @generated
+	 */
+	EReference getExecutionState_ExitSequence();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sexec.ExecutionState#isLeaf <em>Leaf</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1595,6 +1635,22 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXECUTION_STATE__EXIT_ACTION = eINSTANCE.getExecutionState_ExitAction();
+
+		/**
+		 * The meta object literal for the '<em><b>Enter Sequence</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_STATE__ENTER_SEQUENCE = eINSTANCE.getExecutionState_EnterSequence();
+
+		/**
+		 * The meta object literal for the '<em><b>Exit Sequence</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_STATE__EXIT_SEQUENCE = eINSTANCE.getExecutionState_ExitSequence();
 
 		/**
 		 * The meta object literal for the '<em><b>Leaf</b></em>' attribute feature.
