@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -142,13 +143,16 @@ public class FactoryExtension {
       r = _createExecutionState;
       _createCache_create_5.put(_cacheKey, r);
     }
-    {
-      String _name = state.getName();
-      r.setSimpleName(_name);
-      QualifiedName _fullyQualifiedName = this.qfnProvider.getFullyQualifiedName(state);
-      String _string = _fullyQualifiedName.toString();
-      String _replaceAll = _string.replaceAll(" ", "");
-      r.setName(_replaceAll);
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(state, null);
+    if (_operator_notEquals) {
+      {
+        String _name = state.getName();
+        r.setSimpleName(_name);
+        QualifiedName _fullyQualifiedName = this.qfnProvider.getFullyQualifiedName(state);
+        String _string = _fullyQualifiedName.toString();
+        String _replaceAll = _string.replaceAll(" ", "");
+        r.setName(_replaceAll);
+      }
     }
     return r;
   }

@@ -60,8 +60,10 @@ class FactoryExtension {
 	
 	
 	def ExecutionState create r : sexecFactory.createExecutionState create(State state){
-		r.simpleName = state.name
-		r.name = state.fullyQualifiedName.toString.replaceAll(" ", "")
+		if (state != null) {
+			r.simpleName = state.name
+			r.name = state.fullyQualifiedName.toString.replaceAll(" ", "")		
+		}
 	}
 	
 	def Check create r : sexecFactory.createCheck createCheck(ReactionTrigger tr){
