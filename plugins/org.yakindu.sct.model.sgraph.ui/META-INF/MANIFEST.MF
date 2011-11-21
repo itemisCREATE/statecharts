@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Yakindu SCT SGraph Model UI
+Bundle-SymbolicName: org.yakindu.sct.model.sgraph.ui
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.yakindu.sct.model.sgraph.ui.Activator
+Bundle-Vendor: YAKINDU
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.yakindu.sct.model.sgraph,
+ org.eclipse.xtext.ui,
+ org.eclipse.xtext.ui.shared,
+ org.apache.commons.lang
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.yakindu.sct.model.sgraph.ui
