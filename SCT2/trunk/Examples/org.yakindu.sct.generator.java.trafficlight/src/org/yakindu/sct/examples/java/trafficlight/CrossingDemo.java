@@ -102,7 +102,6 @@ public class CrossingDemo {
 				display.sleep();
 			}
 		}
-		System.out.println("Shell disposed...");
 		thread.interrupt();
 	}
 
@@ -142,7 +141,7 @@ public class CrossingDemo {
 				public void handleEvent(
 						final org.eclipse.swt.widgets.Event event) {
 
-					// Shorter call for code commentet out below
+					// Shorter call for code commented out below
 					try {
 						Class<?> interfaceClass = statemachine
 								.getInterfaceDefault().getClass();
@@ -164,22 +163,5 @@ public class CrossingDemo {
 				}
 			});
 		}
-		// button[1].addListener(SWT.Selection, new Listener() {
-		// public void handleEvent(final org.eclipse.swt.widgets.Event event) {
-		// statechart.getInterfaceDefault().raiseKeypress1();
-		// }
-		// });
-		//
-		// button[2].addListener(SWT.Selection, new Listener() {
-		// public void handleEvent(final org.eclipse.swt.widgets.Event event) {
-		// statechart.getInterfaceDefault().raiseKeypress2();
-		// }
-		// });
-		//
-		// button[3].addListener(SWT.Selection, new Listener() {
-		// public void handleEvent(final org.eclipse.swt.widgets.Event event) {
-		// statechart.getInterfaceDefault().raiseKeypress3();
-		// }
-		// });
 	}
 }
