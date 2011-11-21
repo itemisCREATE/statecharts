@@ -168,6 +168,7 @@ entryActionsState4();
 	}
 	private void actionsState3Tr1() {
 exitActionsState3();
+exitActionsState2();
 	activeStates.remove(State.State3);
 	activeStates.add(State.State1);
 entryActionsState1();
@@ -175,8 +176,10 @@ entryActionsState1();
 	}
 	private void actionsState3Tr2() {
 exitActionsState3();
+exitActionsState2();
 	activeStates.remove(State.State3);
 	activeStates.add(State.State9);
+entryActionsState1();
 entryActionsState9();
 
 	}
@@ -196,6 +199,8 @@ entryActionsState6();
 	}
 	private void actionsState5Tr1() {
 exitActionsState5();
+exitActionsState4();
+exitActionsState2();
 	activeStates.remove(State.State5);
 	activeStates.add(State.State1);
 entryActionsState1();
@@ -203,8 +208,11 @@ entryActionsState1();
 	}
 	private void actionsState5Tr2() {
 exitActionsState5();
+exitActionsState4();
+exitActionsState2();
 	activeStates.remove(State.State5);
 	activeStates.add(State.State10);
+entryActionsState1();
 entryActionsState10();
 
 	}
@@ -231,6 +239,9 @@ entryActionsState7();
 	}
 	private void actionsState8Tr1() {
 exitActionsState8();
+exitActionsState6();
+exitActionsState4();
+exitActionsState2();
 	activeStates.remove(State.State8);
 	activeStates.add(State.State1);
 entryActionsState1();
@@ -238,8 +249,12 @@ entryActionsState1();
 	}
 	private void actionsState8Tr2() {
 exitActionsState8();
+exitActionsState6();
+exitActionsState4();
+exitActionsState2();
 	activeStates.remove(State.State8);
 	activeStates.add(State.State10);
+entryActionsState1();
 entryActionsState10();
 
 	}
