@@ -1,48 +1,48 @@
 GeneratorModel for yakindu::c {
 	statechart InterfaceTest {
-		feature	OutletFeature {
+		feature	Outlet {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-c/InterfaceTest"
 		}
 	}
 	statechart Test_DeepHistory {
-		feature OutletFeature {
+		feature Outlet {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-c/Test_DeepHistory"
 		}
 	}
 	statechart Test_Expression {
-		feature OutletFeature {
+		feature Outlet {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-c/Test_Expression"
 		}
 	}
 	statechart Test_Hierarchy {
-		feature OutletFeature {
+		feature Outlet {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-c/Test_Hierarchy"
 		}
 	}
 	statechart Test_LocalActions {
-		feature OutletFeature {
+		feature Outlet {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-c/Test_LocalActions"
 		}
 	}
 	statechart Test_ParallelRegions {
-		feature OutletFeature {
+		feature Outlet {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-c/Test_ParallelRegions"
 		}
 	}
 	statechart Test_ShallowHistory {
-		feature OutletFeature {
+		feature Outlet {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-c/Test_ShallowHistory"
 		}
 	}
 	statechart Test_Transition {
-		feature OutletFeature {
+		feature Outlet {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-c/Test_Transition"
 		}
