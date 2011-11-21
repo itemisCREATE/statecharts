@@ -17,8 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
-import org.yakindu.sct.model.sgraph.Declaration;
-import org.yakindu.sct.model.sgraph.Event;
+import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.Direction;
@@ -35,6 +34,7 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartDefinition;
 import org.yakindu.sct.model.stext.stext.StextPackage;
+import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
 
@@ -60,13 +60,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 				error("entry, exit, oncycle and always events are allowed as local reactions only.",
 						StextPackage.Literals.REACTION_TRIGGER__TRIGGERS);
 			}
-			// Context Transitions
-			// if (reactionTrigger.eContainer() instanceof TransitionReaction) {
-			// if (eventSpec instanceof RegularEventSpec) {
-			// error("Regular event specs are not allowed for transitions.",
-			// StextPackage.Literals.REACTION_TRIGGER__TRIGGERS);
-			// }
-			// }
 
 			// Context StatechartDefiniton
 			if (isStatechartDefinitionChild(reactionTrigger)) {
@@ -82,44 +75,44 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	}
 
 	@Check(CheckType.FAST)
-	public void checkSimpleScope(SimpleScope simpleScope) {
-		// Context State
-		if (simpleScope.getVariables().size() > 0) {
-			error("Variables can not be defined in states.",
-					SGraphPackage.Literals.SCOPE__VARIABLES);
-		}
-		
-		for (Declaration declaration: simpleScope.getDeclarations()) {
-			if (declaration instanceof Operation) {
-				error("Operations can not be defined in states.",
-						SGraphPackage.Literals.SCOPE__DECLARATIONS);
-			}
+	public void checkVariable(VariableDefinition variable) {
+		if (variable.eContainer() instanceof SimpleScope) {
+			error("Variables can not be defined in states.", variable,
+					SGraphPackage.Literals.NAMED_ELEMENT__NAME,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 		}
 	}
 
 	@Check(CheckType.FAST)
-	public void checkInterfaceScope(InterfaceScope interfaceScope) {
-		for (Declaration declaration : interfaceScope.getDeclarations()) {
-			if (declaration instanceof LocalReaction) {
-				error("Local reactions are not allowed in interface scope.",
-						SGraphPackage.Literals.SCOPE__DECLARATIONS);
-			}
+	public void checkEventDefinition(EventDefinition event) {
+		if (event.eContainer() instanceof InterfaceScope
+				&& event.getDirection() == Direction.LOCAL) {
+			error("Local declarations are not allowed in interface scope.",
+					StextPackage.Literals.EVENT_DEFINITION__DIRECTION);
 		}
-		for (Event event : interfaceScope.getEvents()) {
-			if (event instanceof EventDefinition && ((EventDefinition)event).getDirection() == Direction.LOCAL) {
-				error("Local declarations are not allowed in interface scope.",
-						SGraphPackage.Literals.SCOPE__EVENTS);
-			}
+		if (event.eContainer() instanceof InternalScope
+				&& event.getDirection() != Direction.LOCAL) {
+			error("In/Out declarations are not allowed in internal scope.",
+					StextPackage.Literals.EVENT_DEFINITION__DIRECTION);
 		}
 	}
-
+	
 	@Check(CheckType.FAST)
-	public void checkInternalScope(InternalScope internalScope) {
-		for (Event event : internalScope.getEvents()) {
-			if (event instanceof EventDefinition && ((EventDefinition)event).getDirection() != Direction.LOCAL) {
-				error("In/Out declarations are not allowed in internal scope.",
-						SGraphPackage.Literals.SCOPE__EVENTS);
-			}
+	public void checkOperation(Operation operation) {
+		if (operation.eContainer() instanceof SimpleScope) {
+			error("Operations can not be defined in states.", operation,
+					StextPackage.Literals.OPERATION__PARAM_TYPES,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
+		}
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkLocalReaction(LocalReaction localReaction) {
+		if (localReaction.eContainer() instanceof InterfaceScope) {
+			error("Local reactions are not allowed in interface scope.",
+					localReaction,
+					StextPackage.Literals.LOCAL_REACTION__PROPERTIES,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 		}
 	}
 
