@@ -39,10 +39,8 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.ui.Activator;
 import org.yakindu.sct.ui.editor.StatechartImages;
-import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
-import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
-import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -73,13 +71,12 @@ public class SelectSubmachineDialog extends ElementListSelectionDialog {
 	}
 
 	private static Injector getInjector(Resource resource) {
-		IExpressionLanguageProvider provider = ExpressionLanguageProviderExtensions
-				.getRegisteredProvider(SemanticTarget.StatechartInterface,
-						resource.getURI().toString());
-		return provider.getInjector();
+		return Activator.getDefault().getInjector();
 	}
 
 	private static ILabelProvider getLabelProvider(Resource resource) {
+		// return new AdapterFactoryLabelProvider(
+		// new SGraphItemProviderAdapterFactory());
 		return getInjector(resource).getInstance(ILabelProvider.class);
 	}
 

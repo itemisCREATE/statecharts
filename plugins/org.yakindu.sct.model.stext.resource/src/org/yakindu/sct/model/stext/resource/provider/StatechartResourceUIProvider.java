@@ -11,6 +11,7 @@
 package org.yakindu.sct.model.stext.resource.provider;
 
 import org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider;
+import org.yakindu.sct.model.sgraph.resource.provider.StatechartResourceProvider;
 
 import com.google.inject.Inject;
 

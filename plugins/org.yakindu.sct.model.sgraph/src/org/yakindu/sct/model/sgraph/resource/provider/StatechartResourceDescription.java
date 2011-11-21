@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.stext.resource.provider;
+package org.yakindu.sct.model.sgraph.resource.provider;
 
 import java.util.HashMap;
 import java.util.Iterator;
