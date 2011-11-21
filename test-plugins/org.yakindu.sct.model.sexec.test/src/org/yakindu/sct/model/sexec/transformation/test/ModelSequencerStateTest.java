@@ -27,7 +27,7 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public class ModelSequencerStateTest {
+public class ModelSequencerStateTest extends Assert {
 
 	
 	@Inject
@@ -151,9 +151,9 @@ public class ModelSequencerStateTest {
 		assertNotNull(_s1.getEntryAction());
 		assertNotNull(_s1.getEnterSequence());
 		assertEquals(2, _s1.getEnterSequence().getSteps().size());
-		Call entryCall = (Call) _s1.getEnterSequence().getSteps().get(0);
-		assertSame(_s1.getEntryAction(), entryCall.getStep());
 		
+		assertCall(_s1.getEnterSequence(), 0, _s1.getEntryAction());
+				
 		assertTrue(_s1.getEnterSequence().getSteps().get(1) instanceof EnterState);
 	}
 
@@ -199,14 +199,10 @@ public class ModelSequencerStateTest {
 		assertNotNull(_s1.getEntryAction());
 		assertNotNull(_s1.getEnterSequence());
 		assertEquals(3, _s1.getEnterSequence().getSteps().size());
-		Call entryCall = (Call) _s1.getEnterSequence().getSteps().get(0);
-		assertSame(_s1.getEntryAction(), entryCall.getStep());
 		
-		Call subEnterCall1 = (Call) _s1.getEnterSequence().getSteps().get(1);
-		assertSame(_s2.getEnterSequence(), subEnterCall1.getStep());
-
-		Call subEnterCall2 = (Call) _s1.getEnterSequence().getSteps().get(2);
-		assertSame(_s3.getEnterSequence(), subEnterCall2.getStep());
+		assertCall(_s1.getEnterSequence(), 0, _s1.getEntryAction());
+		assertCall(_s1.getEnterSequence(), 1, _s2.getEnterSequence());
+		assertCall(_s1.getEnterSequence(), 2, _s3.getEnterSequence());
 	}
 
 
