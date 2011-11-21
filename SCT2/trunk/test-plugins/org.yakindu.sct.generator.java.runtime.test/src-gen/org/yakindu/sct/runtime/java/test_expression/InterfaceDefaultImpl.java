@@ -68,7 +68,7 @@ public class InterfaceDefaultImpl extends NotificationSender implements Interfac
 	public void setVarVar1(int value) {
 		varVar1 = value;
 	}	
-	private int varVar2;
+	private int varVar2 = 123;
 	
 	public int getVarVar2() {
 		return varVar2;
@@ -86,7 +86,7 @@ public class InterfaceDefaultImpl extends NotificationSender implements Interfac
 	public void setVarVar3(double value) {
 		varVar3 = value;
 	}	
-	private double varVar4;
+	private double varVar4 = 43.3;
 	
 	public double getVarVar4() {
 		return varVar4;
@@ -94,5 +94,14 @@ public class InterfaceDefaultImpl extends NotificationSender implements Interfac
 	
 	public void setVarVar4(double value) {
 		varVar4 = value;
+	}	
+	private boolean varVar5 = false;
+	
+	public boolean getVarVar5() {
+		return varVar5;
+	}
+	
+	public void setVarVar5(boolean value) {
+		varVar5 = value;
 	}	
 }

@@ -1,48 +1,48 @@
 GeneratorModel for yakindu::java {
 	statechart InterfaceTest {
-		feature OutletFeature {
+		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
 	}
 	statechart Test_DeepHistory {
-		feature OutletFeature {
+		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
 	}
 	statechart Test_Expression {
-		feature OutletFeature {
+		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
 	}
 	statechart Test_Hierarchy {
-		feature OutletFeature {
+		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
 	}
 	statechart Test_LocalActions {
-		feature OutletFeature {
+		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
 	}
 	statechart Test_ParallelRegions {
-		feature OutletFeature {
+		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
 	}
 	statechart Test_ShallowHistory {
-		feature OutletFeature {
+		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
 	}
 	statechart Test_Transition {
-		feature OutletFeature {
+		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}

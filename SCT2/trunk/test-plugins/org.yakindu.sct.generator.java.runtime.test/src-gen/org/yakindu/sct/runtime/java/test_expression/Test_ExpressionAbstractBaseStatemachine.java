@@ -28,6 +28,7 @@ public abstract class Test_ExpressionAbstractBaseStatemachine implements IStatem
 	};
 	
 	private InterfaceDefaultImpl interfaceDefault;
+	private InterfaceOtherImpl interfaceOther;
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 	
@@ -40,6 +41,7 @@ public abstract class Test_ExpressionAbstractBaseStatemachine implements IStatem
 		this.occuredEvents = occuredEvents;
 		this.outEvents = new HashSet<Event>();
 		interfaceDefault = new InterfaceDefaultImpl(this);
+		interfaceOther = new InterfaceOtherImpl(this);
 	}
 	
 	protected Collection<Event> getOccuredEvents() {
@@ -52,6 +54,7 @@ public abstract class Test_ExpressionAbstractBaseStatemachine implements IStatem
 		
 	public void entry() {
 	activeStates.add(State.State1);
+		entryActionsState1();
 		
 		
 	}
@@ -74,20 +77,31 @@ public abstract class Test_ExpressionAbstractBaseStatemachine implements IStatem
 		return interfaceDefault;
 	}
 	
+	public InterfaceOther getInterfaceOther() {
+		return interfaceOther;
+	}
+	
 	private boolean conditionState1Tr0(Collection<?> events) {
-		return getOccuredEvents().contains(interfaceDefault.getEventEvent1());
+		return (getOccuredEvents().contains(interfaceDefault.getEventEvent1()) && ((interfaceOther.getVarVar1() == true) || (interfaceDefault.getVarVar5() == false)));
 	}
 	private boolean conditionState2Tr0(Collection<?> events) {
-		return getOccuredEvents().contains(interfaceDefault.getEventEvent1());
+		return (getOccuredEvents().contains(interfaceDefault.getEventEvent1()) && (interfaceDefault.getVarVar3() > 0));
 	}
 	private void actionsState1Tr0() {
+exitActionsState1();
 	activeStates.remove(State.State1);
+	interfaceOther.setVarVar1(false);
+
 	activeStates.add(State.State2);
+entryActionsState2();
 
 	}
 	private void actionsState2Tr0() {
 	activeStates.remove(State.State2);
+	interfaceDefault.setVarVar5(true);
+
 	activeStates.add(State.State1);
+entryActionsState1();
 
 	}
 	private void cycleState1(Collection<?> events) {
@@ -99,6 +113,25 @@ actionsState1Tr0();
 if (conditionState2Tr0(events) ) { 
 actionsState2Tr0();
 }
+	}
+	private void entryActionsState1() {
+	interfaceDefault.setVarVar3(interfaceDefault.getVarVar3() + ((interfaceDefault.getVarVar2() * interfaceDefault.getVarVar3())));
+
+
+	}
+	private void entryActionsState2() {
+	interfaceDefault.setVarVar3(interfaceDefault.getVarVar3() / (5));
+
+	interfaceDefault.setVarVar1(interfaceDefault.getVarVar1() + (1));
+
+
+	}
+	private void exitActionsState1() {
+	interfaceDefault.setVarVar2(1);
+
+	interfaceDefault.setVarVar4(22.3);
+
+
 	}
 	protected void runCycle(Collection<?> events) {
 		getOutEvents().clear();

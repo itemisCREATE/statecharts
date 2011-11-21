@@ -31,4 +31,6 @@ public interface InterfaceDefault extends INotificationSender {
 	public void setVarVar3(double value);	
 	public double getVarVar4();
 	public void setVarVar4(double value);	
+	public boolean getVarVar5();
+	public void setVarVar5(boolean value);	
 }
