@@ -39,6 +39,7 @@ import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
+import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
@@ -88,7 +89,7 @@ import com.google.inject.Injector;
  * 
  */
 @SuppressWarnings("unused")
-public class ModelSequencerTest {
+public class ModelSequencerTest extends Assert {
 
 	@Inject
 	private ModelSequencer sequencer;
@@ -194,10 +195,10 @@ public class ModelSequencerTest {
 		
 		assertNotNull(flow.getEnterSequence());
 		assertEquals(1, flow.getEnterSequence().getSteps().size());
-
-		EnterState enterState = (EnterState) flow.getEnterSequence().getSteps().get(0);
-		assertEquals(tsc.s1.getName(), enterState.getState().getSimpleName());
+		
+		assertCall(flow.getEnterSequence(), 0, flow.getStates().get(0).getEnterSequence());
 	}
+	
 	
 	
 	
@@ -212,11 +213,9 @@ public class ModelSequencerTest {
 		assertNotNull(flow.getEnterSequence());
 		assertEquals(2, flow.getEnterSequence().getSteps().size());
 
-		EnterState enterState = (EnterState) flow.getEnterSequence().getSteps().get(0);
-		assertEquals(tsc.s1.getName(), enterState.getState().getSimpleName());
+		assertCall(flow.getEnterSequence(), 0, flow.getStates().get(0).getEnterSequence());
+		assertCall(flow.getEnterSequence(), 1, flow.getStates().get(2).getEnterSequence());
 
-		enterState = (EnterState) flow.getEnterSequence().getSteps().get(1);
-		assertEquals(tsc.s3.getName(), enterState.getState().getSimpleName());
 	}
 	
 	

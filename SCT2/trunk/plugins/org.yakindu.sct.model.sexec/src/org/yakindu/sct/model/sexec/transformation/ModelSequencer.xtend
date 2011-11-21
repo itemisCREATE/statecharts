@@ -245,15 +245,20 @@ class ModelSequencer {
 		}])
 		
 		if (t.source != null) sequence.steps.add(newExitStateStep(t.source as State))
+		
 		if (t.effect != null) sequence.steps.add(t.effect.mapEffect)		
-		if (t.target != null && t.target instanceof State) sequence.steps.add(newEnterStateStep(t.target as State))
-	
 
 		t.entryStates().reverse.fold(sequence, [seq, state | {
 			if (state.create.entryAction != null) seq.steps.add(state.create.entryAction.newCall)
 			seq
 		}])
 		
+		//TODO: make sure target state entry action is not called twice !!
+
+		if (t.target != null && t.target instanceof State) {
+			sequence.steps.add((t.target as State).create.enterSequence.newCall)	
+		}
+			
 		return sequence
 	}	
 	
@@ -570,18 +575,18 @@ class ModelSequencer {
 	
 	
 	def defineEnterSequence(ExecutionFlow flow, Statechart sc) {
-		val enterSteps = new ArrayList<Step>()
-		
-		for ( r : sc.regions) {
-			val step = r.entry?.target?.newEnterStateStep
-			if (step != null) enterSteps.add(step);
-		} 
-		
-		// sc.regions.map(r | r.entry?.target?.newEnterStateStep).filter(e | e != null)
+
 		val enterSequence = sexecFactory.createSequence
 		enterSequence.name = "enter"
 		enterSequence.comment = "Default enter sequence for statechart " + sc.name
-		enterSteps.forEach(e | enterSequence.steps.add(e));
+		
+		for ( r : sc.regions) {
+			if ( r.entry?.target != null) {
+				val step = r.entry?.target?.create.enterSequence.newCall
+				if (step != null) enterSequence.steps.add(step);
+			}
+		} 
+		
 		flow.enterSequence = enterSequence
 		return enterSequence
 	}
