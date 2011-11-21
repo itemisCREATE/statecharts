@@ -54,14 +54,18 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 
 	private Injector injector;
 	private StyledTextXtextAdapter xtextAdapter;
-	private final IXtextFakeContextResourcesProvider contextFakeResourceProvider;
+	private  IXtextFakeContextResourcesProvider contextFakeResourceProvider;
 
 	public XtextStyledTextCellEditor(int style, Injector injector,
 			IXtextFakeContextResourcesProvider contextFakeResourceProvider) {
-		super();
+		this(style, injector);
+		this.contextFakeResourceProvider = contextFakeResourceProvider;
+	}
+
+
+	public XtextStyledTextCellEditor(int style, Injector injector) {
 		setStyle(style);
 		this.injector = injector;
-		this.contextFakeResourceProvider = contextFakeResourceProvider;
 	}
 
 	/**
@@ -80,7 +84,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 
 		// adapt to xtext
 		xtextAdapter = new StyledTextXtextAdapter(injector,
-				contextFakeResourceProvider);
+				contextFakeResourceProvider == null ? IXtextFakeContextResourcesProvider.NULL_CONTEXT_PROVIDER: contextFakeResourceProvider);
 		xtextAdapter.adapt(styledText);
 
 		// configure content assist

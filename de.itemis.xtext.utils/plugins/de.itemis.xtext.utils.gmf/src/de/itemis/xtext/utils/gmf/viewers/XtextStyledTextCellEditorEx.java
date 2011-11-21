@@ -33,6 +33,10 @@ public class XtextStyledTextCellEditorEx extends XtextStyledTextCellEditor {
 		super(style, injector, contextResourcesProvider);
 	}
 
+	public XtextStyledTextCellEditorEx(int style, Injector injector) {
+		super(style, injector);
+	}
+
 	/**
 	 * This will be used when an edit has occurred by a ModifyEvent has been
 	 * been send. Will call #setValue(Object) but will also call

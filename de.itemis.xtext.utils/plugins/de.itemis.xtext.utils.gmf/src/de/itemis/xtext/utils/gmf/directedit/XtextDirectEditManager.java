@@ -13,7 +13,6 @@
 package de.itemis.xtext.utils.gmf.directedit;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -65,7 +64,7 @@ import org.eclipse.ui.part.CellEditorActionHandler;
 import com.google.inject.Injector;
 
 import de.itemis.xtext.utils.gmf.viewers.XtextStyledTextCellEditorEx;
-import de.itemis.xtext.utils.jface.viewers.context.CloningBasedFakeContextResourcesProvider;
+import de.itemis.xtext.utils.jface.viewers.context.IXtextFakeContextResourcesProvider;
 
 /**
  * @author melaasar
@@ -122,6 +121,8 @@ public class XtextDirectEditManager extends DirectEditManager {
 	private final Injector injector;
 	private final int style;
 
+	private IXtextFakeContextResourcesProvider fakeProvider;
+
 	/**
 	 * constructor
 	 * 
@@ -133,6 +134,14 @@ public class XtextDirectEditManager extends DirectEditManager {
 	public XtextDirectEditManager(IXtextAwareEditPart source,
 			Injector injector, int style) {
 		this(source, null, getTextCellEditorLocator(source), injector, style);
+	}
+
+	public XtextDirectEditManager(IXtextAwareEditPart source,
+			Injector injector, int style,
+			IXtextFakeContextResourcesProvider provider) {
+		this(source, null, getTextCellEditorLocator(source), injector, style);
+		this.fakeProvider = provider;
+
 	}
 
 	/**
@@ -264,13 +273,15 @@ public class XtextDirectEditManager extends DirectEditManager {
 		if (editorType != null) {
 			return super.createCellEditorOn(composite);
 		}
-
-		// TODO: pull context up (should be provided in constructor)
-		XtextStyledTextCellEditorEx editor = new XtextStyledTextCellEditorEx(
-				style, injector,
-				new CloningBasedFakeContextResourcesProvider(
-						Collections.singletonList(getEditPart().resolveSemanticElement().eResource())));
-		editor.create(composite);
+		XtextStyledTextCellEditorEx editor;
+		if (fakeProvider != null) {
+			editor = new XtextStyledTextCellEditorEx(style, injector,
+					fakeProvider);
+			editor.create(composite);
+		} else {
+			editor = new XtextStyledTextCellEditorEx(style, injector);
+			editor.create(composite);
+		}
 		return editor;
 	}
 
