@@ -15,6 +15,8 @@ import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTL
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.DEBUG_FEATURE_DUMP_SEXEC;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
@@ -42,5 +44,9 @@ public class CoreLibraryDefaultFeatureValueProvider extends
 		} else if (DEBUG_FEATURE_DUMP_SEXEC.equals(parameterName)) {
 			parameterValue.setValue("false");
 		}
+	}
+
+	public IStatus validateParameterValue(FeatureParameterValue value) {
+		return Status.OK_STATUS;
 	}
 }
