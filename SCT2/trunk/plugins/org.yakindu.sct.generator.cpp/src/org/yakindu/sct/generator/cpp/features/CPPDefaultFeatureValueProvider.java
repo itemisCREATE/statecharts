@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.generator.cpp.features;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
@@ -31,6 +33,10 @@ public class CPPDefaultFeatureValueProvider extends
 	protected void setDefaultValue(FeatureParameterValue parameterValue,
 			Statechart statechart) {
 		//TODO: Implement my default properties
+	}
+
+	public IStatus validateParameterValue(FeatureParameterValue value) {
+		return Status.OK_STATUS;
 	}
 
 }

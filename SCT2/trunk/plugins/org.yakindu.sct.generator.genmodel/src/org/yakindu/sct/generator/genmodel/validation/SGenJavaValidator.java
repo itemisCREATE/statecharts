@@ -1,9 +1,14 @@
 package org.yakindu.sct.generator.genmodel.validation;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
+import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
+import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
+import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgen.SGenPackage;
 
 import com.google.common.base.Predicate;
@@ -15,6 +20,29 @@ import com.google.common.collect.Iterables;
  * 
  */
 public class SGenJavaValidator extends AbstractSGenJavaValidator {
+
+	@Check
+	public void checkParameterValue(final FeatureParameterValue value) {
+		GeneratorModel model = (GeneratorModel) EcoreUtil2
+				.getRootContainer(value);
+		IDefaultFeatureValueProvider provider = LibraryExtensions
+				.getDefaultFeatureValueProvider(model.getGeneratorId(), value
+						.getParameter().getFeatureType().getLibrary());
+		IStatus status = provider.validateParameterValue(value);
+		createMarker(status);
+	}
+
+	private void createMarker(IStatus status) {
+		switch (status.getCode()) {
+		case IStatus.ERROR:
+			super.error(status.getMessage(),
+					SGenPackage.Literals.FEATURE_PARAMETER_VALUE__VALUE);
+			break;
+		case IStatus.WARNING:
+			super.warning(status.getMessage(),
+					SGenPackage.Literals.FEATURE_PARAMETER_VALUE__VALUE);
+		}
+	}
 
 	@Check
 	public void checkDuplicateGeneratorEntryFeature(

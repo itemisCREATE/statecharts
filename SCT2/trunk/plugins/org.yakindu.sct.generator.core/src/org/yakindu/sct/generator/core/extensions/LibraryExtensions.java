@@ -8,6 +8,9 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
+import org.yakindu.sct.model.sgen.FeatureParameter;
+import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -72,6 +75,20 @@ public class LibraryExtensions {
 								|| input.getGeneratorId().equals(GLOBAL_ID);
 					}
 				});
+	}
+
+	public static IDefaultFeatureValueProvider getDefaultFeatureValueProvider(
+			String generatorId, FeatureTypeLibrary library) {
+		Iterable<LibraryDescriptor> libraryDescriptor = getLibraryDescriptor(generatorId);
+		for (LibraryDescriptor desc : libraryDescriptor) {
+			IDefaultFeatureValueProvider defaultProvider = desc
+					.createFeatureValueProvider();
+			if (defaultProvider != null
+					&& defaultProvider.isProviderFor(library)) {
+				return defaultProvider;
+			}
+		}
+		return null;
 	}
 
 	private static final class CreateLibraryDescriptor implements
