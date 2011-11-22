@@ -35,16 +35,37 @@ void teardownStatemachine(Test_ExpressionStatemachine* machine, Timer* dummyTime
 }
 
 /*@Test: test_default_var1 test behavior of var1 in default interface */
-int test_initialization()
+int test_initialization_and_first_entry()
 {
 	Test_ExpressionStatemachine machine;
 	Timer dummyTimer;
 	EventPool eventPool;
 
+	real testvalue1u = (19.4 + 19.4*123 + 0.1);
+	real testvalue1l = (19.4 + 19.4*123 - 0.1);
+
 	//integer retval;
 
 	/*@Desc: setup initial statemachine */
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
+
+	/*@Desc: check whether var1 from default interface is initially set to 6 */
+	assert( test_Expression_if_get_var1(&machine.interface) == 6);
+
+	/*@Desc: check whether var2 from default is initially set to 123 */
+	assert( test_Expression_if_get_var2(&machine.interface) == 123);
+
+	/*@Desc: check, wether var3 from default interface is set correct after state1 entry */
+	printf("Var3 is set to %f\n", test_Expression_if_get_var3(&machine.interface));
+	assert( (test_Expression_if_get_var3(&machine.interface) > testvalue1l) &&
+			(test_Expression_if_get_var3(&machine.interface) < testvalue1u) );
+
+	/*@Desc: check, whether var4 from default interface is between 43.3 and 43.5 */
+	assert( (test_Expression_if_get_var4(&machine.interface) > 43.3) &&
+			(test_Expression_if_get_var4(&machine.interface) < 43.5) );
+
+	/*@Desc: check whether var5 from default interface is initially set to false */
+	assert( test_Expression_if_get_var5(&machine.interface) == bool_false);
 
 	/*@Desc: teardown statemachine */
 	teardownStatemachine(&machine, &dummyTimer, &eventPool);
@@ -54,6 +75,8 @@ int test_initialization()
 }
 
 
+
+
 /*@Test: test_default_var1 test behavior of var1 in default and other interface */
 int test_default_other_var1()
 {
@@ -61,7 +84,7 @@ int test_default_other_var1()
 	Timer dummyTimer;
 	EventPool eventPool;
 
-	real retval;
+//	real retval;
 
 	/*@Desc: setup initial statemachine */
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
@@ -98,14 +121,8 @@ int test_default_other_var1()
 	/*@Desc: check whether var1 has been increased by 1 (==7) */
 	assert( test_Expression_if_get_var1(&machine.interface) == 7 );
 
-	/*@Desc: check if the entry event2 is raised */
-	assert( test_Expression_if_is_event2_raised(&machine.interface, &retval) == bool_true );
-
 	/*@Desc: run an explicit cycle */
 	test_ExpressionStatemachine_runCycle(&machine);
-
-	/*@Desc: check whether var1 has been increased by 1 on onCycle (==8) */
-	assert( test_Expression_if_get_var1(&machine.interface) == 8 );
 
 	/*@Desc: check whether the state is still set to "State2" */
 	printf("%s\n", stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)]);
@@ -123,8 +140,8 @@ int test_default_other_var2_var3()
 	Timer dummyTimer;
 	EventPool eventPool;
 
-	real testvalue1u = (19.4 + 19.4*123 + 0.1);
-	real testvalue1l = (19.4 + 19.4*123 - 0.1);
+//	real testvalue1u = (19.4 + 19.4*123 + 0.1);
+//	real testvalue1l = (19.4 + 19.4*123 - 0.1);
 
 	real testvalue2u = 19.4 + 19.4*123/5.0 + 0.1;
 	real testvalue2l = 19.4 + 19.4*123/5.0 - 0.1;
@@ -146,9 +163,16 @@ int test_default_other_var2_var3()
 	printf("%s\n", stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)]);
 	assert( strcmp(stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)], "State1") == 0);
 
-	/*@Desc: check, wether var3 on default interface is set correct after state1 entry */
-	assert( (test_Expression_if_get_var3(&machine.interface) > testvalue1l) &&
-			(test_Expression_if_get_var3(&machine.interface) < testvalue1u) );
+	/*@Desc: raise event1 on default interface with value 5 (actually unused) */
+	test_Expression_if_raise_event1(&machine.interface, 5);
+
+	/*@Desc: run an explicit cycle - without any waiting event */
+	test_ExpressionStatemachine_runCycle(&machine);
+
+	/*@Desc: check the initial state */
+	printf("%s\n", stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)]);
+	assert( strcmp(stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)], "State2") == 0);
+
 
 	/*@Desc: check, wether var3 on default interface is set correct after state1 entry */
 	assert( test_Expression_if_get_var2(&machine.interface) == 1 );
@@ -164,6 +188,7 @@ int test_default_other_var2_var3()
 	assert( strcmp(stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)], "State2") == 0);
 
 	/*@Desc: check, wether var3 on default interface is set correct after entry */
+	printf("Var3 is set to %f\n", test_Expression_if_get_var3(&machine.interface));
 	assert( (test_Expression_if_get_var3(&machine.interface) > testvalue2l) &&
 			(test_Expression_if_get_var3(&machine.interface) < testvalue2u) );
 
@@ -185,6 +210,48 @@ int test_default_other_var2_var3()
 	return 0;
 }
 
+int test_onCycle()
+{
+	Test_ExpressionStatemachine machine;
+	Timer dummyTimer;
+	EventPool eventPool;
+
+	/*@Desc: setup initial statemachine */
+	setupStatemachine(&machine, &dummyTimer, &eventPool);
+
+	/*@Desc: run an explicit cycle - without any waiting event */
+	test_ExpressionStatemachine_runCycle(&machine);
+
+	/*@Desc: raise event1 on default interface with value 5 (actually unused) */
+	test_Expression_if_raise_event1(&machine.interface, 5);
+
+	/*@Desc: set other.var1 to "true" to let transition take place */
+	test_Expression_if_other_set_var1(&machine.interfaceOther, bool_true);
+
+	/*@Desc: run an explicit cycle */
+	test_ExpressionStatemachine_runCycle(&machine);
+
+	/*@Desc: check whether var1 has been increased by one (==7) */
+	assert( test_Expression_if_get_var1(&machine.interface) == 7 );
+
+	/*@Desc: run an explicit cycle - without any change */
+	test_ExpressionStatemachine_runCycle(&machine);
+
+	/*@Desc: check whether var1 has been increased by 1 on onCycle (==8) */
+	assert( test_Expression_if_get_var1(&machine.interface) == 8 );
+
+	/*@Desc: run an explicit cycle - without any change */
+	test_ExpressionStatemachine_runCycle(&machine);
+
+	/*@Desc: check whether var1 has been increased by 1 on onCycle (==9) */
+	assert( test_Expression_if_get_var1(&machine.interface) == 9 );
+
+	/*@Desc: teardown statemachine */
+	teardownStatemachine(&machine, &dummyTimer, &eventPool);
+
+	return 0;
+}
+
 
 
 int main(int argc, char** argv)
@@ -194,9 +261,13 @@ int main(int argc, char** argv)
 
 	switch (atoi(argv[1])) {
 	case 1:
-		return test_default_other_var1();
+		return test_initialization_and_first_entry();
 	case 2:
+		return test_default_other_var1();
+	case 3:
 		return test_default_other_var2_var3();
+	case 4:
+		return test_onCycle();
 	}
 
 	return 0;
