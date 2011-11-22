@@ -38,6 +38,7 @@
     <genClasses ecoreClass="sgen.ecore#//FeatureParameterValue">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sgen.ecore#//FeatureParameterValue/parameter"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgen.ecore#//FeatureParameterValue/value"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference sgen.ecore#//FeatureParameterValue/featureConfiguration"/>
     </genClasses>
     <genClasses ecoreClass="sgen.ecore#//FeatureTypeLibrary">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgen.ecore#//FeatureTypeLibrary/types"/>

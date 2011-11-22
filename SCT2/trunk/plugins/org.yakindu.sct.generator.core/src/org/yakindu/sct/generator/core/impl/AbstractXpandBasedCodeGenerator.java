@@ -62,22 +62,42 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 	 */
 	@Override
 	protected final void generate(ExecutionFlow flow, GeneratorEntry entry) {
-		Output output = createOutput(entry);
-		
-		if (isDumpSexec(entry))
-			dumpSexec(entry, flow, output);
-
-		XpandExecutionContext context = createXpandContext(output);
-		XpandFacade facade = XpandFacade.create(context);
-		facade.evaluate(getTemplatePath(), flow, entry);
-		// refresh the project to get external updates:
-		IProject project = getTargetProject(entry);
+		writeToConsole("Generating "+entry.getStatechart().getName()+"...");
 		try {
+			prepareGenerator(entry);
+			Output output = createOutput(entry);
+
+			if (isDumpSexec(entry))
+				dumpSexec(entry, flow, output);
+
+			XpandExecutionContext context = createXpandContext(output);
+			XpandFacade facade = XpandFacade.create(context);
+			facade.evaluate(getTemplatePath(), flow, entry);
+
+			// refresh the project to get external updates:
+			IProject project = getTargetProject(entry);
 			project.refreshLocal(IResource.DEPTH_INFINITE,
 					new NullProgressMonitor());
-		} catch (CoreException e) {
-			e.printStackTrace();
+			writeToConsole("Done.");
+		} catch (Exception e) {
+			writeToConsole(e);
+		} finally {
+			finishGenerator(entry);
 		}
+	}
+
+	/**
+	 * override this method to do any setup needed before generation
+	 */
+	protected void prepareGenerator(GeneratorEntry entry) {
+		// override if needed
+	}
+
+	/**
+	 * override this method to do any cleanup needed after generation
+	 */
+	protected void finishGenerator(GeneratorEntry entry) {
+		// override if needed
 	}
 
 	private IProject getTargetProject(GeneratorEntry entry) {
@@ -180,7 +200,6 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 		// URI fileURI = URI.createFileURI(new
 		// File("mylibrary.xmi").getAbsolutePath());
 
-		System.out.println(fileURI.toString());
 		Resource resource = resourceSet.createResource(fileURI);
 		resource.getContents().add(flow);
 

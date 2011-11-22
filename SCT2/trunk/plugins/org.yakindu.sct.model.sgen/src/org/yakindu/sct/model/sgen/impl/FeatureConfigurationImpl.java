@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -120,7 +121,7 @@ public class FeatureConfigurationImpl extends EObjectImpl implements
 	 */
 	public EList<FeatureParameterValue> getParameterValues() {
 		if (parameterValues == null) {
-			parameterValues = new EObjectContainmentEList<FeatureParameterValue>(FeatureParameterValue.class, this, SGenPackage.FEATURE_CONFIGURATION__PARAMETER_VALUES);
+			parameterValues = new EObjectContainmentWithInverseEList<FeatureParameterValue>(FeatureParameterValue.class, this, SGenPackage.FEATURE_CONFIGURATION__PARAMETER_VALUES, SGenPackage.FEATURE_PARAMETER_VALUE__FEATURE_CONFIGURATION);
 		}
 		return parameterValues;
 	}
@@ -138,6 +139,21 @@ public class FeatureConfigurationImpl extends EObjectImpl implements
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SGenPackage.FEATURE_CONFIGURATION__PARAMETER_VALUES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getParameterValues()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**

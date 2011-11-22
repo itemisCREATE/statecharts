@@ -8,12 +8,14 @@ package org.yakindu.sct.model.sgen.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.SGenPackage;
@@ -27,6 +29,7 @@ import org.yakindu.sct.model.sgen.SGenPackage;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureParameterValueImpl#getParameter <em>Parameter</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureParameterValueImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureParameterValueImpl#getFeatureConfiguration <em>Feature Configuration</em>}</li>
  * </ul>
  * </p>
  *
@@ -145,6 +148,60 @@ public class FeatureParameterValueImpl extends EObjectImpl implements FeaturePar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public FeatureConfiguration getFeatureConfiguration() {
+		if (eContainerFeatureID() != SGenPackage.FEATURE_PARAMETER_VALUE__FEATURE_CONFIGURATION) return null;
+		return (FeatureConfiguration)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SGenPackage.FEATURE_PARAMETER_VALUE__FEATURE_CONFIGURATION:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return eBasicSetContainer(otherEnd, SGenPackage.FEATURE_PARAMETER_VALUE__FEATURE_CONFIGURATION, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SGenPackage.FEATURE_PARAMETER_VALUE__FEATURE_CONFIGURATION:
+				return eBasicSetContainer(null, SGenPackage.FEATURE_PARAMETER_VALUE__FEATURE_CONFIGURATION, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case SGenPackage.FEATURE_PARAMETER_VALUE__FEATURE_CONFIGURATION:
+				return eInternalContainer().eInverseRemove(this, SGenPackage.FEATURE_CONFIGURATION__PARAMETER_VALUES, FeatureConfiguration.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -153,6 +210,8 @@ public class FeatureParameterValueImpl extends EObjectImpl implements FeaturePar
 				return basicGetParameter();
 			case SGenPackage.FEATURE_PARAMETER_VALUE__VALUE:
 				return getValue();
+			case SGenPackage.FEATURE_PARAMETER_VALUE__FEATURE_CONFIGURATION:
+				return getFeatureConfiguration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -205,6 +264,8 @@ public class FeatureParameterValueImpl extends EObjectImpl implements FeaturePar
 				return parameter != null;
 			case SGenPackage.FEATURE_PARAMETER_VALUE__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case SGenPackage.FEATURE_PARAMETER_VALUE__FEATURE_CONFIGURATION:
+				return getFeatureConfiguration() != null;
 		}
 		return super.eIsSet(featureID);
 	}

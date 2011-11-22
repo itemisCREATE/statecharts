@@ -34,7 +34,9 @@ public abstract class AbstractDefaultFeatureValueProvider implements
 		for (FeatureParameter parameter : parameters) {
 			FeatureParameterValue parameterValue = createParameterValue(
 					parameter, statechart);
-			config.getParameterValues().add(parameterValue);
+			if (parameterValue != null) {
+				config.getParameterValues().add(parameterValue);
+			}
 		}
 		return config;
 	}
@@ -45,7 +47,10 @@ public abstract class AbstractDefaultFeatureValueProvider implements
 				.createFeatureParameterValue();
 		parameterValue.setParameter(parameter);
 		setDefaultValue(parameterValue, statechart);
-		return parameterValue;
+		if (parameterValue.getValue() != null) {
+			return parameterValue;
+		}
+		return null;
 	}
 
 	protected FeatureConfiguration createConfiguration(FeatureType type) {
@@ -70,7 +75,22 @@ public abstract class AbstractDefaultFeatureValueProvider implements
 	protected IStatus error(String msg) {
 		return new Status(IStatus.ERROR, GeneratorActivator.PLUGIN_ID, msg);
 	}
+
 	protected IStatus warning(String msg) {
 		return new Status(IStatus.WARNING, GeneratorActivator.PLUGIN_ID, msg);
+	}
+
+	protected boolean projectExists(String value) {
+		return ResourcesPlugin.getWorkspace().getRoot().getProject(value)
+				.exists();
+	}
+
+	protected boolean folderExists(String projectName, String folderPath) {
+		return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName)
+				.getFolder(new Path(folderPath)).exists();
+	}
+	protected boolean fileExists(String projectName, String folderPath) {
+		return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName)
+				.getFile(new Path(folderPath)).exists();
 	}
 }

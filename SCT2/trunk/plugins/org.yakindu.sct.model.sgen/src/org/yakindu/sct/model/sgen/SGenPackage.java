@@ -312,13 +312,22 @@ public interface SGenPackage extends EPackage {
 	int FEATURE_PARAMETER_VALUE__VALUE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Feature Configuration</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_PARAMETER_VALUE__FEATURE_CONFIGURATION = 2;
+
+	/**
 	 * The number of structural features of the '<em>Feature Parameter Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_PARAMETER_VALUE_FEATURE_COUNT = 2;
+	int FEATURE_PARAMETER_VALUE_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.FeatureTypeLibraryImpl <em>Feature Type Library</em>}' class.
@@ -561,6 +570,17 @@ public interface SGenPackage extends EPackage {
 	EAttribute getFeatureParameterValue_Value();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.yakindu.sct.model.sgen.FeatureParameterValue#getFeatureConfiguration <em>Feature Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Feature Configuration</em>'.
+	 * @see org.yakindu.sct.model.sgen.FeatureParameterValue#getFeatureConfiguration()
+	 * @see #getFeatureParameterValue()
+	 * @generated
+	 */
+	EReference getFeatureParameterValue_FeatureConfiguration();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.FeatureTypeLibrary <em>Feature Type Library</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -779,6 +799,14 @@ public interface SGenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FEATURE_PARAMETER_VALUE__VALUE = eINSTANCE.getFeatureParameterValue_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Feature Configuration</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FEATURE_PARAMETER_VALUE__FEATURE_CONFIGURATION = eINSTANCE.getFeatureParameterValue_FeatureConfiguration();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.FeatureTypeLibraryImpl <em>Feature Type Library</em>}' class.

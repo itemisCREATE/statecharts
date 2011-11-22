@@ -29,7 +29,7 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//FeatureType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameterValues" upperBound="-1"
-        eType="#//FeatureParameterValue" containment="true"/>
+        eType="#//FeatureParameterValue" containment="true" eOpposite="#//FeatureParameterValue/featureConfiguration"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GeneratorEntry">
     <eOperations name="getFeatureConfiguration" eType="#//FeatureConfiguration">
@@ -42,6 +42,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="FeatureParameterValue">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//FeatureParameter"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureConfiguration" eType="#//FeatureConfiguration"
+        changeable="false" eOpposite="#//FeatureConfiguration/parameterValues"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureTypeLibrary">
     <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
