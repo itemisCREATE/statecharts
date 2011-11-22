@@ -4,6 +4,8 @@ import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.BASE
 import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.IMPLEMENTATION_SUFFIX;
 import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.LIBRARY_NAME;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
@@ -30,6 +32,10 @@ public class JavaFeatureValueProvider extends
 
 	public boolean isProviderFor(FeatureTypeLibrary library) {
 		return library.getName().equals(LIBRARY_NAME);
+	}
+
+	public IStatus validateParameterValue(FeatureParameterValue value) {
+		return super.error("falsch");
 	}
 
 }

@@ -2,8 +2,11 @@ package org.yakindu.sct.generator.core.features;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
+import org.yakindu.sct.generator.core.GeneratorActivator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -64,4 +67,10 @@ public abstract class AbstractDefaultFeatureValueProvider implements
 								.toPlatformString(true))).getProject();
 	}
 
+	protected IStatus error(String msg) {
+		return new Status(IStatus.ERROR, GeneratorActivator.PLUGIN_ID, msg);
+	}
+	protected IStatus warning(String msg) {
+		return new Status(IStatus.WARNING, GeneratorActivator.PLUGIN_ID, msg);
+	}
 }
