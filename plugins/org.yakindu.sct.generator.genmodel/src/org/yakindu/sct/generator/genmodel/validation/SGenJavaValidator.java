@@ -23,6 +23,8 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
 	@Check
 	public void checkParameterValue(final FeatureParameterValue value) {
+		if (value.getValue() == null)
+			return;
 		GeneratorModel model = (GeneratorModel) EcoreUtil2
 				.getRootContainer(value);
 		IDefaultFeatureValueProvider provider = LibraryExtensions
@@ -33,7 +35,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	}
 
 	private void createMarker(IStatus status) {
-		switch (status.getCode()) {
+		switch (status.getSeverity()) {
 		case IStatus.ERROR:
 			super.error(status.getMessage(),
 					SGenPackage.Literals.FEATURE_PARAMETER_VALUE__VALUE);

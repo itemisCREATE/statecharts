@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.FeatureParameterValue#getParameter <em>Parameter</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.FeatureParameterValue#getValue <em>Value</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgen.FeatureParameterValue#getFeatureConfiguration <em>Feature Configuration</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,5 +78,22 @@ public interface FeatureParameterValue extends EObject {
 	 * @generated
 	 */
 	void setValue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Feature Configuration</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.yakindu.sct.model.sgen.FeatureConfiguration#getParameterValues <em>Parameter Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Feature Configuration</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Feature Configuration</em>' container reference.
+	 * @see org.yakindu.sct.model.sgen.SGenPackage#getFeatureParameterValue_FeatureConfiguration()
+	 * @see org.yakindu.sct.model.sgen.FeatureConfiguration#getParameterValues
+	 * @model opposite="parameterValues" transient="false" changeable="false"
+	 * @generated
+	 */
+	FeatureConfiguration getFeatureConfiguration();
 
 } // FeatureParameterValue

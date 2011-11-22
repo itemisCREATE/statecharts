@@ -57,6 +57,7 @@ public interface FeatureConfiguration extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Parameter Values</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.sct.model.sgen.FeatureParameterValue}.
+	 * It is bidirectional and its opposite is '{@link org.yakindu.sct.model.sgen.FeatureParameterValue#getFeatureConfiguration <em>Feature Configuration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parameter Values</em>' containment reference list isn't clear,
@@ -65,7 +66,8 @@ public interface FeatureConfiguration extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameter Values</em>' containment reference list.
 	 * @see org.yakindu.sct.model.sgen.SGenPackage#getFeatureConfiguration_ParameterValues()
-	 * @model containment="true"
+	 * @see org.yakindu.sct.model.sgen.FeatureParameterValue#getFeatureConfiguration
+	 * @model opposite="featureConfiguration" containment="true"
 	 * @generated
 	 */
 	EList<FeatureParameterValue> getParameterValues();

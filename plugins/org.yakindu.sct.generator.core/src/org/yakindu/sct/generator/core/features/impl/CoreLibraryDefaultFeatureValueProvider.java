@@ -10,10 +10,10 @@
  */
 package org.yakindu.sct.generator.core.features.impl;
 
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.DEBUG_FEATURE_DUMP_SEXEC;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LIBRARY_NAME;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.DEBUG_FEATURE_DUMP_SEXEC;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -46,7 +46,31 @@ public class CoreLibraryDefaultFeatureValueProvider extends
 		}
 	}
 
-	public IStatus validateParameterValue(FeatureParameterValue value) {
+	public IStatus validateParameterValue(FeatureParameterValue parameterValue) {
+		String parameterName = parameterValue.getParameter().getName();
+		if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName)
+				&& !projectExists(parameterValue.getValue()))
+			return warning(String.format("The Project %s does not exist",
+					parameterValue.getValue()));
+		if (OUTLET_FEATURE_TARGET_FOLDER.equals(parameterName)) {
+			FeatureParameterValue targetProjectParam = parameterValue
+					.getFeatureConfiguration().getParameterValue(
+							OUTLET_FEATURE_TARGET_PROJECT);
+			String targetProjectName = targetProjectParam != null ? targetProjectParam
+					.getValue() : null;
+			if (targetProjectName != null
+					&& !folderExists(targetProjectName,
+							parameterValue.getValue())) {
+				return warning(String.format(
+						"The Folder %s does not exist in Project %s",
+						parameterValue.getValue(), targetProjectName));
+			}
+		}
+		if (DEBUG_FEATURE_DUMP_SEXEC.equals(parameterName)
+				&& !(parameterValue.getValue().equalsIgnoreCase("true") || parameterValue
+						.getValue().equalsIgnoreCase("false"))) {
+			return error("Illegal Value. Must be 'true' or 'false'");
+		}
 		return Status.OK_STATUS;
 	}
 }

@@ -10,7 +10,22 @@
  */
 package org.yakindu.sct.generator.core.impl;
 
+import java.io.PrintWriter;
+
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.console.ConsolePlugin;
+import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.IConsoleManager;
+import org.eclipse.ui.console.MessageConsole;
+import org.eclipse.ui.console.MessageConsoleStream;
+import org.yakindu.sct.generator.core.GeneratorActivator;
 import org.yakindu.sct.generator.core.ISCTGenerator;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
@@ -30,6 +45,8 @@ import com.google.inject.Injector;
  */
 public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 
+	private static final String SCT_GENERATOR_CONSOLE = "SCT Generator Console";
+
 	protected abstract void generate(ExecutionFlow flow, GeneratorEntry entry);
 
 	public final void generate(GeneratorEntry entry) {
@@ -46,5 +63,45 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 		Assert.isNotNull(flow, "Error creation ExecutionFlow");
 		return flow;
 	}
+
+	protected void showErrorDialog(Throwable t) {
+		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+				.getShell();
+		ErrorDialog.openError(shell, "Generator Error",
+				"Error executing generator", new Status(IStatus.ERROR,
+						GeneratorActivator.PLUGIN_ID, t.getMessage()));
+	}
+
+	private MessageConsole findConsole(String name) {
+		ConsolePlugin plugin = ConsolePlugin.getDefault();
+		IConsoleManager conMan = plugin.getConsoleManager();
+		IConsole[] existing = conMan.getConsoles();
+		for (int i = 0; i < existing.length; i++)
+			if (name.equals(existing[i].getName()))
+				return (MessageConsole) existing[i];
+		// no console found, so create a new one
+		MessageConsole myConsole = new MessageConsole(name, null);
+		conMan.addConsoles(new IConsole[] { myConsole });
+		return myConsole;
+	}
+
+	private MessageConsoleStream createConsoleStream() {
+		MessageConsole console = findConsole(SCT_GENERATOR_CONSOLE);
+		MessageConsoleStream out = console.newMessageStream();
+		return out;
+	}
+
+	protected void writeToConsole(Throwable t) {
+		MessageConsoleStream createConsoleStream = createConsoleStream();
+		createConsoleStream.setColor(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+		PrintWriter printWriter = new PrintWriter(createConsoleStream);
+		t.printStackTrace(printWriter);
+		printWriter.flush();
+		printWriter.close();
+	}
+
+	protected void writeToConsole(String line) {
+		createConsoleStream().println(line);
+	};
 
 }
