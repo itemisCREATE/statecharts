@@ -25,7 +25,6 @@ import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._creat
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createValue;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableAssignment;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableDefinition;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.findState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,7 +38,6 @@ import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
-import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;

@@ -5,7 +5,15 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.*;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEntryAssignemnt;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createExitAssignemnt;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createInterfaceScope;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegion;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createState;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createStatechart;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createTransition;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableDefinition;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.findState;
 
 import org.junit.Before;
 import org.junit.Test;

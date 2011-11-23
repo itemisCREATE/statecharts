@@ -8,8 +8,6 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
-import org.yakindu.sct.model.sgen.FeatureParameter;
-import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 
 import com.google.common.base.Function;
