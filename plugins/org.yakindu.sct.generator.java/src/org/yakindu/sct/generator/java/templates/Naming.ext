@@ -221,7 +221,7 @@ String getInterfaceImplExtension(Scope this):
 String getBasePackageName(GeneratorEntry entry):
 	if entry.getFeatureConfiguration("NamingFeature")!=null 
 		&& entry.getFeatureConfiguration("NamingFeature").getParameterValue("basePackage")!=null then
-		entry.getFeatureConfiguration("NamingFeature").getParameterValue("basePackage").value
+		entry.getFeatureConfiguration("NamingFeature").getParameterValue("basePackage").getStringValue()
 	else
 		"org.yakindu.sct.runtime.java";
 
@@ -231,7 +231,7 @@ String getBasePackagePath(GeneratorEntry entry):
 String getImplementationSuffix(GeneratorEntry entry, ExecutionFlow flow):
 	if entry.getFeatureConfiguration("NamingFeature")!=null
 		&& entry.getFeatureConfiguration("NamingFeature").getParameterValue("implementationSuffix") != null then
-		entry.getFeatureConfiguration("NamingFeature").getParameterValue("implementationSuffix").value
+		entry.getFeatureConfiguration("NamingFeature").getParameterValue("implementationSuffix").getStringValue()
 	else 
 		flow.getStatemachineName();
 
