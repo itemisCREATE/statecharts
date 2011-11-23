@@ -10,26 +10,40 @@
  */
 package org.yakindu.sct.generator.core.impl;
 
-import java.io.PrintWriter;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.DEBUG_FEATURE;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.DEBUG_FEATURE_DUMP_SEXEC;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Collections;
+
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
-import org.yakindu.sct.generator.core.GeneratorActivator;
+import org.eclipse.xpand2.output.Output;
 import org.yakindu.sct.generator.core.ISCTGenerator;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.SequencerModule;
+import org.yakindu.sct.model.sgen.FeatureConfiguration;
+import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
@@ -45,12 +59,37 @@ import com.google.inject.Injector;
  */
 public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 
+	private static final String SEXEC_FILE_EXTENSION = "sexec";
 	private static final String SCT_GENERATOR_CONSOLE = "SCT Generator Console";
 
 	protected abstract void generate(ExecutionFlow flow, GeneratorEntry entry);
 
 	public final void generate(GeneratorEntry entry) {
-		generate(createExecutionFlow(entry.getStatechart()), entry);
+		writeToConsole(String.format("Generating Statechart %s ...", entry
+				.getStatechart().getName()));
+		try {
+			prepareGenerator(entry);
+			generate(createExecutionFlow(entry.getStatechart()), entry);
+			writeToConsole("Done.");
+		} catch (Exception e) {
+			writeToConsole(e);
+		} finally {
+			finishGenerator(entry);
+		}
+	}
+
+	/**
+	 * override this method to do any setup needed before generation
+	 */
+	protected void prepareGenerator(GeneratorEntry entry) {
+		// override if needed
+	}
+
+	/**
+	 * override this method to do any cleanup needed after generation
+	 */
+	protected void finishGenerator(GeneratorEntry entry) {
+		// override if needed
 	}
 
 	/**
@@ -64,44 +103,121 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 		return flow;
 	}
 
-	protected void showErrorDialog(Throwable t) {
-		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-				.getShell();
-		ErrorDialog.openError(shell, "Generator Error",
-				"Error executing generator", new Status(IStatus.ERROR,
-						GeneratorActivator.PLUGIN_ID, t.getMessage()));
-	}
-
-	private MessageConsole findConsole(String name) {
+	private MessageConsole getConsole() {
 		ConsolePlugin plugin = ConsolePlugin.getDefault();
 		IConsoleManager conMan = plugin.getConsoleManager();
 		IConsole[] existing = conMan.getConsoles();
-		for (int i = 0; i < existing.length; i++)
-			if (name.equals(existing[i].getName()))
+		for (int i = 0; i < existing.length; i++) {
+			if (SCT_GENERATOR_CONSOLE.equals(existing[i].getName())) {
 				return (MessageConsole) existing[i];
-		// no console found, so create a new one
-		MessageConsole myConsole = new MessageConsole(name, null);
+			}
+		}
+		MessageConsole myConsole = new MessageConsole(SCT_GENERATOR_CONSOLE,
+				null);
 		conMan.addConsoles(new IConsole[] { myConsole });
 		return myConsole;
 	}
 
-	private MessageConsoleStream createConsoleStream() {
-		MessageConsole console = findConsole(SCT_GENERATOR_CONSOLE);
-		MessageConsoleStream out = console.newMessageStream();
-		return out;
-	}
-
-	protected void writeToConsole(Throwable t) {
-		MessageConsoleStream createConsoleStream = createConsoleStream();
-		createConsoleStream.setColor(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-		PrintWriter printWriter = new PrintWriter(createConsoleStream);
+	protected final void writeToConsole(Throwable t) {
+		MessageConsoleStream out = getConsole().newMessageStream();
+		out.setColor(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+		PrintWriter printWriter = new PrintWriter(out);
 		t.printStackTrace(printWriter);
 		printWriter.flush();
 		printWriter.close();
 	}
 
-	protected void writeToConsole(String line) {
-		createConsoleStream().println(line);
+	protected final void writeToConsole(String line) {
+		getConsole().newMessageStream().println(line);
+	}
+
+	protected final void refreshTargetProject(GeneratorEntry entry) {
+		try {
+			IProject project = getTargetProject(entry);
+			project.refreshLocal(IResource.DEPTH_INFINITE,
+					new NullProgressMonitor());
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 	};
+
+	protected final IProject getTargetProject(GeneratorEntry entry) {
+		FeatureConfiguration outletConfig = getOutletFeatureConfiguration(entry);
+		String projectName = outletConfig.getParameterValue(
+				OUTLET_FEATURE_TARGET_PROJECT).getValue();
+		IProject project = ResourcesPlugin.getWorkspace().getRoot()
+				.getProject(projectName);
+		if (!project.exists()) {
+			createProject(project, entry);
+		}
+		return project;
+	}
+
+	/**
+	 * The default implementation only creates a new default project. Clients
+	 * may override if they want to contribute generatorspecific project setup
+	 */
+	protected void createProject(IProject project, GeneratorEntry entry) {
+		try {
+			NullProgressMonitor monitor = new NullProgressMonitor();
+			project.create(monitor);
+			project.open(monitor);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected FeatureConfiguration getOutletFeatureConfiguration(
+			GeneratorEntry entry) {
+		FeatureConfiguration outletConfig = entry
+				.getFeatureConfiguration(OUTLET_FEATURE);
+		return outletConfig;
+	}
+
+	protected boolean isDumpSexec(GeneratorEntry entry) {
+
+		FeatureParameterValue dumpSexec = getFeatureParameter(entry,
+				DEBUG_FEATURE, DEBUG_FEATURE_DUMP_SEXEC);
+
+		return dumpSexec != null && (dumpSexec.getValue().trim().length() > 0)
+				&& dumpSexec.getValue().trim().toLowerCase().equals("true");
+	}
+
+	protected FeatureParameterValue getFeatureParameter(GeneratorEntry entry,
+			String featureName, String paramName) {
+		FeatureConfiguration feature = entry
+				.getFeatureConfiguration(featureName);
+
+		if (feature != null) {
+			return feature.getParameterValue(paramName);
+		}
+
+		return null;
+	}
+
+	protected void dumpSexec(GeneratorEntry entry, ExecutionFlow flow,
+			Output output) {
+
+		ResourceSet resourceSet = new ResourceSetImpl();
+
+		resourceSet
+				.getResourceFactoryRegistry()
+				.getExtensionToFactoryMap()
+				.put(Resource.Factory.Registry.DEFAULT_EXTENSION,
+						new XMIResourceFactoryImpl());
+
+		URI fileURI = entry.getStatechart().eResource().getURI()
+				.trimFileExtension().appendFileExtension(SEXEC_FILE_EXTENSION);
+		// URI fileURI = URI.createFileURI(new
+		// File("mylibrary.xmi").getAbsolutePath());
+
+		Resource resource = resourceSet.createResource(fileURI);
+		resource.getContents().add(flow);
+
+		try {
+			resource.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+		}
+	}
 
 }

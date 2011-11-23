@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.generator.core.impl;
 
 import java.io.File;
@@ -13,7 +23,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.JavaRuntime;
 
 import com.google.common.collect.Lists;
@@ -48,7 +57,6 @@ public class WorkspaceClassLoaderFactory {
 			try {
 				urls.add(getFileSystemFile(project).toURI().toURL());
 			} catch (MalformedURLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			addReferencedProjectsClasspaths(project, urls);
@@ -63,7 +71,6 @@ public class WorkspaceClassLoaderFactory {
 				addClasspathEntries(iProject, urls);
 			}
 		} catch (CoreException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -76,16 +83,11 @@ public class WorkspaceClassLoaderFactory {
 	}
 
 	protected IJavaProject toJavaProject(IProject project) {
-		IJavaProject javaProject = null;
-		try {
-			javaProject = JavaCore.create(project);
-//			javaProject.e
-			// access children to decide whether we have a java project or not
-			javaProject.getChildren();
-		} catch (JavaModelException jme) {
-			return null;
+		IJavaProject javaProject = JavaCore.create(project);
+		if (javaProject.exists()) {
+			return javaProject;
 		}
-		return javaProject;
+		return null;
 	}
 
 	protected void addJavaClasspathEntries(IJavaProject project, List<URL> urls) {
@@ -93,7 +95,6 @@ public class WorkspaceClassLoaderFactory {
 			urls.addAll(Lists.newArrayList(convertClassPath(JavaRuntime
 					.computeDefaultRuntimeClassPath(project))));
 		} catch (CoreException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -10,24 +10,13 @@
  */
 package org.yakindu.sct.generator.core.impl;
 
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.*;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Collections;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
@@ -62,68 +51,20 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 	 */
 	@Override
 	protected final void generate(ExecutionFlow flow, GeneratorEntry entry) {
-		writeToConsole("Generating "+entry.getStatechart().getName()+"...");
-		try {
-			prepareGenerator(entry);
-			Output output = createOutput(entry);
+		Output output = createOutput(entry);
 
-			if (isDumpSexec(entry))
-				dumpSexec(entry, flow, output);
-
-			XpandExecutionContext context = createXpandContext(output);
-			XpandFacade facade = XpandFacade.create(context);
-			facade.evaluate(getTemplatePath(), flow, entry);
-
-			// refresh the project to get external updates:
-			IProject project = getTargetProject(entry);
-			project.refreshLocal(IResource.DEPTH_INFINITE,
-					new NullProgressMonitor());
-			writeToConsole("Done.");
-		} catch (Exception e) {
-			writeToConsole(e);
-		} finally {
-			finishGenerator(entry);
+		if (isDumpSexec(entry)) {
+			dumpSexec(entry, flow, output);
 		}
-	}
+		String templatePath = getTemplatePath();
 
-	/**
-	 * override this method to do any setup needed before generation
-	 */
-	protected void prepareGenerator(GeneratorEntry entry) {
-		// override if needed
-	}
+		writeToConsole("Executing Template " + templatePath);
+		XpandExecutionContext context = createXpandContext(output);
+		XpandFacade facade = XpandFacade.create(context);
+		facade.evaluate(templatePath, flow, entry);
 
-	/**
-	 * override this method to do any cleanup needed after generation
-	 */
-	protected void finishGenerator(GeneratorEntry entry) {
-		// override if needed
-	}
-
-	private IProject getTargetProject(GeneratorEntry entry) {
-		FeatureConfiguration outletConfig = getOutletFeatureConfiguration(entry);
-		String projectName = outletConfig.getParameterValue(
-				OUTLET_FEATURE_TARGET_PROJECT).getValue();
-		IProject project = ResourcesPlugin.getWorkspace().getRoot()
-				.getProject(projectName);
-		if (!project.exists()) {
-			createProject(project, entry);
-		}
-		return project;
-	}
-
-	/**
-	 * The default implementation only creates a new default project. Clients
-	 * may override if they want to contribute generatorspecific project setup
-	 */
-	protected void createProject(IProject project, GeneratorEntry entry) {
-		try {
-			NullProgressMonitor monitor = new NullProgressMonitor();
-			project.create(monitor);
-			project.open(monitor);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
+		// refresh the project to get external updates:
+		refreshTargetProject(entry);
 	}
 
 	protected XpandExecutionContext createXpandContext(Output output) {
@@ -154,59 +95,6 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 		outlet.setOverwrite(true);
 		output.addOutlet(outlet);
 		return output;
-	}
-
-	protected FeatureConfiguration getOutletFeatureConfiguration(
-			GeneratorEntry entry) {
-		FeatureConfiguration outletConfig = entry
-				.getFeatureConfiguration(OUTLET_FEATURE);
-		return outletConfig;
-	}
-
-	protected boolean isDumpSexec(GeneratorEntry entry) {
-
-		FeatureParameterValue dumpSexec = getFeatureParameter(entry,
-				DEBUG_FEATURE, DEBUG_FEATURE_DUMP_SEXEC);
-
-		return dumpSexec != null && (dumpSexec.getValue().trim().length() > 0)
-				&& dumpSexec.getValue().trim().toLowerCase().equals("true");
-	}
-
-	protected FeatureParameterValue getFeatureParameter(GeneratorEntry entry,
-			String featureName, String paramName) {
-		FeatureConfiguration feature = entry
-				.getFeatureConfiguration(featureName);
-
-		if (feature != null) {
-			return feature.getParameterValue(paramName);
-		}
-
-		return null;
-	}
-
-	protected void dumpSexec(GeneratorEntry entry, ExecutionFlow flow,
-			Output output) {
-
-		ResourceSet resourceSet = new ResourceSetImpl();
-
-		resourceSet
-				.getResourceFactoryRegistry()
-				.getExtensionToFactoryMap()
-				.put(Resource.Factory.Registry.DEFAULT_EXTENSION,
-						new XMIResourceFactoryImpl());
-
-		URI fileURI = entry.getStatechart().eResource().getURI()
-				.trimFileExtension().appendFileExtension("sexec");
-		// URI fileURI = URI.createFileURI(new
-		// File("mylibrary.xmi").getAbsolutePath());
-
-		Resource resource = resourceSet.createResource(fileURI);
-		resource.getContents().add(flow);
-
-		try {
-			resource.save(Collections.EMPTY_MAP);
-		} catch (IOException e) {
-		}
 	}
 
 }
