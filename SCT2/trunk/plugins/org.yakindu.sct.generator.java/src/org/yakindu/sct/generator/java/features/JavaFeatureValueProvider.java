@@ -15,6 +15,7 @@ import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.IMPL
 import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.LIBRARY_NAME;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
@@ -27,6 +28,9 @@ import org.yakindu.sct.model.sgraph.Statechart;
  */
 public class JavaFeatureValueProvider extends
 		AbstractDefaultFeatureValueProvider {
+
+	private static final String PACKAGE_NAME_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*\\.)+[a-zA-Z_][a-zA-Z0-9_]*";
+	private static final String SUFFIX_REGEX = "[a-zA-Z0-9_]*";
 
 	@Override
 	protected void setDefaultValue(FeatureParameterValue parameterValue,
@@ -44,7 +48,16 @@ public class JavaFeatureValueProvider extends
 	}
 
 	public IStatus validateParameterValue(FeatureParameterValue value) {
-		return super.error("falsch");
+		String name = value.getParameter().getName();
+		if (BASE_PACKAGE.equals(name)
+				&& !value.getValue().matches(PACKAGE_NAME_REGEX)) {
+				return error("Invalid package name");
+		}
+		if (IMPLEMENTATION_SUFFIX.equals(name)
+				&& !value.getValue().matches(SUFFIX_REGEX)) {
+			return error("Invalid value");
+		}
+		return Status.OK_STATUS;
 	}
 
 }
