@@ -33,27 +33,27 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
 	@Check
 	public void checkParameterValue(final FeatureParameterValue value) {
-		if (value.getValue() == null)
-			return;
-		GeneratorModel model = (GeneratorModel) EcoreUtil2
-				.getRootContainer(value);
-		IDefaultFeatureValueProvider provider = LibraryExtensions
-				.getDefaultFeatureValueProvider(model.getGeneratorId(), value
-						.getParameter().getFeatureType().getLibrary());
-		IStatus status = provider.validateParameterValue(value);
-		createMarker(status);
+//		if (value.getValue() == null)
+//			return;
+//		GeneratorModel model = (GeneratorModel) EcoreUtil2
+//				.getRootContainer(value);
+//		IDefaultFeatureValueProvider provider = LibraryExtensions
+//				.getDefaultFeatureValueProvider(model.getGeneratorId(), value
+//						.getParameter().getFeatureType().getLibrary());
+//		IStatus status = provider.validateParameterValue(value);
+//		createMarker(status);
 	}
 
 	private void createMarker(IStatus status) {
-		switch (status.getSeverity()) {
-		case IStatus.ERROR:
-			super.error(status.getMessage(),
-					SGenPackage.Literals.FEATURE_PARAMETER_VALUE__VALUE);
-			break;
-		case IStatus.WARNING:
-			super.warning(status.getMessage(),
-					SGenPackage.Literals.FEATURE_PARAMETER_VALUE__VALUE);
-		}
+//		switch (status.getSeverity()) {
+//		case IStatus.ERROR:
+//			super.error(status.getMessage(),
+//					SGenPackage.Literals.FEATURE_PARAMETER_VALUE__VALUE);
+//			break;
+//		case IStatus.WARNING:
+//			super.warning(status.getMessage(),
+//					SGenPackage.Literals.FEATURE_PARAMETER_VALUE__VALUE);
+//		}
 	}
 
 	@Check

@@ -47,10 +47,7 @@ public abstract class AbstractDefaultFeatureValueProvider implements
 				.createFeatureParameterValue();
 		parameterValue.setParameter(parameter);
 		setDefaultValue(parameterValue, statechart);
-		if (parameterValue.getValue() != null) {
-			return parameterValue;
-		}
-		return null;
+		return parameterValue;
 	}
 
 	protected FeatureConfiguration createConfiguration(FeatureType type) {
@@ -89,6 +86,7 @@ public abstract class AbstractDefaultFeatureValueProvider implements
 		return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName)
 				.getFolder(new Path(folderPath)).exists();
 	}
+
 	protected boolean fileExists(String projectName, String folderPath) {
 		return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName)
 				.getFile(new Path(folderPath)).exists();

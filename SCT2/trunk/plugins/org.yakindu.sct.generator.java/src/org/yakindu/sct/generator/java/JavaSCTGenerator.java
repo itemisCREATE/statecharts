@@ -69,7 +69,7 @@ public class JavaSCTGenerator extends AbstractXpandBasedCodeGenerator {
 			// Set up classpath with default JRE runtime and the target folder
 			javaProject.setRawClasspath(
 					getClasspathEntries(project.getName(),
-							targetFolder.getValue()), null);
+							targetFolder.getStringValue()), null);
 		} catch (CoreException ex) {
 			ex.printStackTrace();
 		}

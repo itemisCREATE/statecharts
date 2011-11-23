@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.yakindu.sct.model.sgen.SGenFactory;
 import org.yakindu.sct.model.sgen.SGenPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -139,6 +140,7 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 
 		// Initialize simple dependencies
 		SGraphPackage.eINSTANCE.eClass();
+		XbasePackage.eINSTANCE.eClass();
 
 		// Load packages
 		theSGenPackage.loadPackage();
@@ -343,8 +345,8 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFeatureParameterValue_Value() {
-        return (EAttribute)getFeatureParameterValue().getEStructuralFeatures().get(1);
+	public EReference getFeatureParameterValue_FeatureConfiguration() {
+        return (EReference)getFeatureParameterValue().getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -352,7 +354,7 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFeatureParameterValue_FeatureConfiguration() {
+	public EReference getFeatureParameterValue_Expression() {
         return (EReference)getFeatureParameterValue().getEStructuralFeatures().get(2);
 	}
 

@@ -136,7 +136,7 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated 
 	 */
 	public FeatureParameterValue createFeatureParameterValue() {
 		FeatureParameterValueImpl featureParameterValue = new FeatureParameterValueImpl();

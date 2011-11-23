@@ -64,7 +64,6 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 	private final MessageConsoleStream info;
 	private final MessageConsoleStream error;
 
-
 	protected abstract void generate(ExecutionFlow flow, GeneratorEntry entry);
 
 	public AbstractSExecModelGenerator() {
@@ -160,7 +159,7 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 	protected final IProject getTargetProject(GeneratorEntry entry) {
 		FeatureConfiguration outletConfig = getOutletFeatureConfiguration(entry);
 		String projectName = outletConfig.getParameterValue(
-				OUTLET_FEATURE_TARGET_PROJECT).getValue();
+				OUTLET_FEATURE_TARGET_PROJECT).getStringValue();
 		IProject project = ResourcesPlugin.getWorkspace().getRoot()
 				.getProject(projectName);
 		if (!project.exists()) {
@@ -191,12 +190,9 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 	}
 
 	protected boolean isDumpSexec(GeneratorEntry entry) {
-
 		FeatureParameterValue dumpSexec = getFeatureParameter(entry,
 				DEBUG_FEATURE, DEBUG_FEATURE_DUMP_SEXEC);
-
-		return dumpSexec != null && (dumpSexec.getValue().trim().length() > 0)
-				&& dumpSexec.getValue().trim().toLowerCase().equals("true");
+		return dumpSexec.getBooleanValue();
 	}
 
 	protected FeatureParameterValue getFeatureParameter(GeneratorEntry entry,

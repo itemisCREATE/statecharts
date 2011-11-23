@@ -6,7 +6,6 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-        	icon="icons/GenModel-16.png"
             class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
@@ -138,6 +137,8 @@
         </resourceServiceProvider>
     </extension>
 
+
+
 	<!-- Quick Outline -->
 	<extension
 		point="org.eclipse.ui.handlers">
@@ -204,18 +205,6 @@
          </command>
       </menuContribution>
    </extension>
-   <!-- New File Wizard -->
-    <extension
-         point="org.eclipse.ui.newWizards">
-      <wizard
-            category="YAKINDU"
-            class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.yakindu.sct.generator.genmodel.ui.wizard.SGenNewFileWizard"
-            icon="icons/GenModel-16.png"
-            id="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard"
-            name="YAKINDU Statechart Generator Model"
-            project="false">
-      </wizard>
-   </extension>
 
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="org.yakindu.sct.generator.genmodel.SGen.compare.contentViewers"
@@ -235,18 +224,5 @@
             extensions="sgen">
     </provider>
   </extension>
-<extension point = "org.eclipse.ui.popupMenus">
-     <objectContribution
-        id="org.yakindu.sct.generator.ui"
-        objectClass="org.eclipse.core.resources.IFile"
-	    nameFilter="*.sgen">
-	    <action
-           class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.yakindu.sct.generator.genmodel.ui.action.GenerateModelAction"
-           enablesFor="1"
-           id="org.yakindu.sct.generator.ui.generateaction"
-           label="Generate Model"
-           menubarPath="additions">
-	    </action>
-	 </objectContribution>
-	</extension>
+
 </plugin>

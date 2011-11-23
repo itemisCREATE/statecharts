@@ -47,9 +47,9 @@ public class XpandLibraryDefaultFeatureValueProvider extends
 
 	public IStatus validateParameterValue(FeatureParameterValue parameterValue) {
 		String parameterName = parameterValue.getParameter().getName();
-		String value = parameterValue.getValue();
+		String value = parameterValue.getStringValue();
 		if (TEMPLATE_FEATURE_TEMPLATE_PATH.equals(parameterName)
-				&& !parameterValue.getValue()
+				&& !parameterValue.getStringValue()
 						.matches(XPAND_TEMPLATE_PATH_REGEX)) {
 			return error("Xpand Template Path Syntax Error");
 		}

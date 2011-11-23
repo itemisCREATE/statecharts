@@ -35,7 +35,7 @@ public class GenericXPandCodeGenerator extends AbstractXpandBasedCodeGenerator {
 	@Override
 	protected void prepareGenerator(GeneratorEntry entry) {
 		templatePath = entry.getFeatureConfiguration(TEMPLATE_FEATURE)
-				.getParameterValue(TEMPLATE_FEATURE_TEMPLATE_PATH).getValue();
+				.getParameterValue(TEMPLATE_FEATURE_TEMPLATE_PATH).getStringValue();
 		ResourceLoaderFactory
 				.setCurrentThreadResourceLoader(createResourceLoader(entry));
 	}
@@ -67,7 +67,7 @@ public class GenericXPandCodeGenerator extends AbstractXpandBasedCodeGenerator {
 				.getParameterValue(TEMPLATE_FEATURE_TEMPLATE_PROJECT);
 		if (projectName != null) {
 			project = ResourcesPlugin.getWorkspace().getRoot()
-					.getProject(projectName.getValue());
+					.getProject(projectName.getStringValue());
 		} else {
 			URI uri = entry.getStatechart().eResource().getURI();
 			project = ResourcesPlugin.getWorkspace().getRoot()

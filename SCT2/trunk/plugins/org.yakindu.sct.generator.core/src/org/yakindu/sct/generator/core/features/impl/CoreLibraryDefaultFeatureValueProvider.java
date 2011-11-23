@@ -42,14 +42,15 @@ public class CoreLibraryDefaultFeatureValueProvider extends
 		} else if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName)) {
 			parameterValue.setValue(getProject(statechart).getName());
 		} else if (DEBUG_FEATURE_DUMP_SEXEC.equals(parameterName)) {
-			parameterValue.setValue("false");
+			parameterValue.setValue(false);
 		}
 	}
 
 	public IStatus validateParameterValue(FeatureParameterValue parameterValue) {
+		// FIXME:
 		String parameterName = parameterValue.getParameter().getName();
 		if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName)
-				&& !projectExists(parameterValue.getValue()))
+				&& !projectExists(parameterValue.getStringValue()))
 			return warning(String.format("The Project %s does not exist",
 					parameterValue.getValue()));
 		if (OUTLET_FEATURE_TARGET_FOLDER.equals(parameterName)) {
@@ -57,18 +58,17 @@ public class CoreLibraryDefaultFeatureValueProvider extends
 					.getFeatureConfiguration().getParameterValue(
 							OUTLET_FEATURE_TARGET_PROJECT);
 			String targetProjectName = targetProjectParam != null ? targetProjectParam
-					.getValue() : null;
+					.getStringValue() : null;
 			if (targetProjectName != null
 					&& !folderExists(targetProjectName,
-							parameterValue.getValue())) {
+							parameterValue.getStringValue())) {
 				return warning(String.format(
 						"The Folder %s does not exist in Project %s",
 						parameterValue.getValue(), targetProjectName));
 			}
 		}
 		if (DEBUG_FEATURE_DUMP_SEXEC.equals(parameterName)
-				&& !(parameterValue.getValue().equalsIgnoreCase("true") || parameterValue
-						.getValue().equalsIgnoreCase("false"))) {
+				&& !(parameterValue.getValue() instanceof Boolean)) {
 			return error("Illegal Value. Must be 'true' or 'false'");
 		}
 		return Status.OK_STATUS;

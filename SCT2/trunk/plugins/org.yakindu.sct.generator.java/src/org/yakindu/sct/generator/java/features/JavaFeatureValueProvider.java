@@ -50,11 +50,11 @@ public class JavaFeatureValueProvider extends
 	public IStatus validateParameterValue(FeatureParameterValue value) {
 		String name = value.getParameter().getName();
 		if (BASE_PACKAGE.equals(name)
-				&& !value.getValue().matches(PACKAGE_NAME_REGEX)) {
+				&& !value.getStringValue().matches(PACKAGE_NAME_REGEX)) {
 				return error("Invalid package name");
 		}
 		if (IMPLEMENTATION_SUFFIX.equals(name)
-				&& !value.getValue().matches(SUFFIX_REGEX)) {
+				&& !value.getStringValue().matches(SUFFIX_REGEX)) {
 			return error("Invalid value");
 		}
 		return Status.OK_STATUS;

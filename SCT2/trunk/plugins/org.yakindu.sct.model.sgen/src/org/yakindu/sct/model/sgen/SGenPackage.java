@@ -303,22 +303,22 @@ public interface SGenPackage extends EPackage {
 	int FEATURE_PARAMETER_VALUE__PARAMETER = 0;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE_PARAMETER_VALUE__VALUE = 1;
-
-	/**
 	 * The feature id for the '<em><b>Feature Configuration</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_PARAMETER_VALUE__FEATURE_CONFIGURATION = 2;
+	int FEATURE_PARAMETER_VALUE__FEATURE_CONFIGURATION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_PARAMETER_VALUE__EXPRESSION = 2;
 
 	/**
 	 * The number of structural features of the '<em>Feature Parameter Value</em>' class.
@@ -559,17 +559,6 @@ public interface SGenPackage extends EPackage {
 	EReference getFeatureParameterValue_Parameter();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgen.FeatureParameterValue#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.yakindu.sct.model.sgen.FeatureParameterValue#getValue()
-	 * @see #getFeatureParameterValue()
-	 * @generated
-	 */
-	EAttribute getFeatureParameterValue_Value();
-
-	/**
 	 * Returns the meta object for the container reference '{@link org.yakindu.sct.model.sgen.FeatureParameterValue#getFeatureConfiguration <em>Feature Configuration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -579,6 +568,17 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFeatureParameterValue_FeatureConfiguration();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sgen.FeatureParameterValue#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.yakindu.sct.model.sgen.FeatureParameterValue#getExpression()
+	 * @see #getFeatureParameterValue()
+	 * @generated
+	 */
+	EReference getFeatureParameterValue_Expression();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.FeatureTypeLibrary <em>Feature Type Library</em>}'.
@@ -793,20 +793,20 @@ public interface SGenPackage extends EPackage {
 		EReference FEATURE_PARAMETER_VALUE__PARAMETER = eINSTANCE.getFeatureParameterValue_Parameter();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FEATURE_PARAMETER_VALUE__VALUE = eINSTANCE.getFeatureParameterValue_Value();
-
-		/**
 		 * The meta object literal for the '<em><b>Feature Configuration</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference FEATURE_PARAMETER_VALUE__FEATURE_CONFIGURATION = eINSTANCE.getFeatureParameterValue_FeatureConfiguration();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FEATURE_PARAMETER_VALUE__EXPRESSION = eINSTANCE.getFeatureParameterValue_Expression();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.FeatureTypeLibraryImpl <em>Feature Type Library</em>}' class.
