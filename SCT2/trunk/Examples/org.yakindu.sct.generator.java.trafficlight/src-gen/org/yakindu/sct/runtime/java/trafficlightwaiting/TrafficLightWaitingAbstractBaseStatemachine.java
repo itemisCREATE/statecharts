@@ -91,25 +91,21 @@ public abstract class TrafficLightWaitingAbstractBaseStatemachine implements ITi
 		return !getOccuredEvents().isEmpty();
 	}
 	
-	@Override
 	public void init() {
 		
 	}
 	
-	@Override
 	public void setTimerHandler(ITimerHandler timerHandler) {
 		this.timerHandler = timerHandler;
 	}
 
-	@Override
 	public ITimerHandler getTimerHandler() {
 		if (timerHandler == null) {
 			throw new NullPointerException("TimerHandler of statemachine \"+TrafficLightWaiting+\" not set!");
 		}
 		return timerHandler;
 	}
-	
-	@Override
+
 	public void notify(Notification<?> notification) {
 		if (notification instanceof EventNotification) {
 			EventNotification eventNotification = (EventNotification) notification;
