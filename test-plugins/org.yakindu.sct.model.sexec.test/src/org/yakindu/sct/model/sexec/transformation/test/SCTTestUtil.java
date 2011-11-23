@@ -1,14 +1,8 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEntryAction;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createExitAction;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createValue;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableAssignment;
-
 import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;

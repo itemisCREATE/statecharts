@@ -1,11 +1,24 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
-import static org.junit.Assert.*;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEntry;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEntryAction;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEntryAssignemnt;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createExitAction;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createInterfaceScope;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegion;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createState;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createStatechart;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createTransition;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createValue;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableAssignment;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableDefinition;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
