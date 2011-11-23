@@ -63,7 +63,6 @@ public abstract class Test_ExpressionAbstractBaseStatemachine implements IStatem
 		return !getOccuredEvents().isEmpty();
 	}
 	
-	@Override
 	public void init() {
 		
 	}

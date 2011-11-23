@@ -66,8 +66,7 @@ public abstract class Test_ParallelRegionsAbstractBaseStatemachine implements IS
 	protected boolean eventOccured() {
 		return !getOccuredEvents().isEmpty();
 	}
-	
-	@Override
+
 	public void init() {
 		
 	}

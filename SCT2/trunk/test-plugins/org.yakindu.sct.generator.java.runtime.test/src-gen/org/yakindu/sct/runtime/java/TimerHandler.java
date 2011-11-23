@@ -29,7 +29,6 @@ public class TimerHandler implements ITimerHandler {
 		this.statemachine = statemachine;
 	}
 
-	@Override
 	public void setTimer(final TimeEvent event, long time, long cycleStartTime) {
 		// Reset existing TimerTask for event. This step isn't necessary if
 		// timer tasks are properly reset by sexec model.
@@ -58,7 +57,6 @@ public class TimerHandler implements ITimerHandler {
 		}
 	}
 
-	@Override
 	public void resetTimer(TimeEvent event) {
 		if (timerTaskMap.containsKey(event) && timerTaskMap.get(event) != null) {
 			timerTaskMap.get(event).cancel();

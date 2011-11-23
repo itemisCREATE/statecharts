@@ -67,7 +67,6 @@ public abstract class Test_DeepHistoryAbstractBaseStatemachine implements IState
 		return !getOccuredEvents().isEmpty();
 	}
 	
-	@Override
 	public void init() {
 		
 	}

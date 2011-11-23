@@ -66,8 +66,7 @@ public abstract class Test_ShallowHistoryAbstractBaseStatemachine implements ISt
 	protected boolean eventOccured() {
 		return !getOccuredEvents().isEmpty();
 	}
-	
-	@Override
+
 	public void init() {
 		
 	}

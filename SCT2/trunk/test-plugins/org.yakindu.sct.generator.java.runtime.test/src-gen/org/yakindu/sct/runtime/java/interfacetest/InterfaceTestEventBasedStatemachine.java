@@ -22,12 +22,10 @@ public class InterfaceTestEventBasedStatemachine extends InterfaceTestAbstractBa
 		super(new LinkedList<Event>());
 	}
 	
-	@Override
 	protected Queue<Event> getOccuredEvents() {
 		return (Queue<Event>) super.getOccuredEvents();
 	}
 	
-	@Override
 	public void runCycle() {
 		if (eventOccured()) {
 			Event event = getOccuredEvents().poll();

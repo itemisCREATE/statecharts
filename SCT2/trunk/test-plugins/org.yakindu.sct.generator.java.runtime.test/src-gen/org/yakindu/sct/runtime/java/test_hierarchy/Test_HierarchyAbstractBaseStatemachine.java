@@ -69,7 +69,6 @@ public abstract class Test_HierarchyAbstractBaseStatemachine implements IStatema
 		return !getOccuredEvents().isEmpty();
 	}
 	
-	@Override
 	public void init() {
 		
 	}
