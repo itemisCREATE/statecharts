@@ -14,6 +14,10 @@ import java.io.IOException;
 import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -50,11 +54,22 @@ public class GenerateModelAction implements IObjectActionDelegate {
 		String generatorId = model.getGeneratorId();
 		GeneratorDescriptor description = GeneratorExtensions
 				.getGeneratorDescriptorForId(generatorId);
-		ISCTGenerator generator = description.createGenerator();
-		EList<GeneratorEntry> entries = model.getEntries();
-		for (GeneratorEntry generatorEntry : entries) {
-			generator.generate(generatorEntry);
-		}
+		final ISCTGenerator generator = description.createGenerator();
+		final EList<GeneratorEntry> entries = model.getEntries();
+		Job generatorJob = new Job("Execute SCT Genmodel " + file.getName()) {
+
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				for (GeneratorEntry generatorEntry : entries) {
+					if (monitor.isCanceled()) {
+						break;
+					}
+					generator.generate(generatorEntry);
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		generatorJob.schedule();
 
 	}
 

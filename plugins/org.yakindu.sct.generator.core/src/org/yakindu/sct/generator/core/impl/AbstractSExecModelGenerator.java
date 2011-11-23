@@ -61,8 +61,26 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 
 	private static final String SEXEC_FILE_EXTENSION = "sexec";
 	private static final String SCT_GENERATOR_CONSOLE = "SCT Generator Console";
+	private final MessageConsoleStream info;
+	private final MessageConsoleStream error;
+
 
 	protected abstract void generate(ExecutionFlow flow, GeneratorEntry entry);
+
+	public AbstractSExecModelGenerator() {
+		super();
+		info = getConsole().newMessageStream();
+		error = getConsole().newMessageStream();
+		error.setColor(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+		error.setActivateOnWrite(true);
+	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		info.close();
+		error.close();
+		super.finalize();
+	}
 
 	public final void generate(GeneratorEntry entry) {
 		writeToConsole(String.format("Generating Statechart %s ...", entry
@@ -103,6 +121,17 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 		return flow;
 	}
 
+	protected final void writeToConsole(Throwable t) {
+		PrintWriter printWriter = new PrintWriter(error);
+		t.printStackTrace(printWriter);
+		printWriter.flush();
+		printWriter.close();
+	}
+
+	protected final void writeToConsole(String line) {
+		info.println(line);
+	}
+
 	private MessageConsole getConsole() {
 		ConsolePlugin plugin = ConsolePlugin.getDefault();
 		IConsoleManager conMan = plugin.getConsoleManager();
@@ -116,19 +145,6 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 				null);
 		conMan.addConsoles(new IConsole[] { myConsole });
 		return myConsole;
-	}
-
-	protected final void writeToConsole(Throwable t) {
-		MessageConsoleStream out = getConsole().newMessageStream();
-		out.setColor(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-		PrintWriter printWriter = new PrintWriter(out);
-		t.printStackTrace(printWriter);
-		printWriter.flush();
-		printWriter.close();
-	}
-
-	protected final void writeToConsole(String line) {
-		getConsole().newMessageStream().println(line);
 	}
 
 	protected final void refreshTargetProject(GeneratorEntry entry) {
