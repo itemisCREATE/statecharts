@@ -1,19 +1,8 @@
 package org.yakindu.sct.generator.java.plain.test.generator;
 
-import java.io.File;
-import java.net.URL;
-
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.generator.base.util.GeneratorBaseUtil;
-import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.transformation.SequencerModule;
-import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -37,30 +26,30 @@ public class JavaGeneratorTest extends AbstractGeneratorTest {
 	@Test
 	public void testExecuteGenerator() throws Exception {
 
-		IProject project = super.createTestProject("JavaGeneratorTest", true);
-		final IFile target = project.getFile("example.sct");
-		URL entry = Platform.getBundle("org.yakindu.sct.generator.java.plain.test")
-				.getEntry("resources/example.sct");
-		copyUrlFileToIFile(entry, target);
-
-		URI uri = URI.createPlatformResourceURI(
-				target.getFullPath().toString(), true);
-
-		String templatePath = "org::yakindu::sct::generator::java::plain::templates::Main::main";
-		Statechart statechart = GeneratorBaseUtil.loadStatechart(uri);
-		ExecutionFlow executionFlow = GeneratorBaseUtil
-				.createExecutionFlowModel(statechart);
-		
-		String targetFolder = "src-gen";
-		
-		String absoluteTargetFolder = ResourcesPlugin.getWorkspace().getRoot()
-				.getLocation().toOSString()
-				+ File.separator
-				+ project.getFullPath().toOSString()
-				+ File.separator + targetFolder;
-		
-		GeneratorBaseUtil.generate(executionFlow, templatePath, project,
-				absoluteTargetFolder);
+//		IProject project = super.createTestProject("JavaGeneratorTest", true);
+//		final IFile target = project.getFile("example.sct");
+//		URL entry = Platform.getBundle("org.yakindu.sct.generator.java.plain.test")
+//				.getEntry("resources/example.sct");
+//		copyUrlFileToIFile(entry, target);
+//
+//		URI uri = URI.createPlatformResourceURI(
+//				target.getFullPath().toString(), true);
+//
+//		String templatePath = "org::yakindu::sct::generator::java::plain::templates::Main::main";
+//		Statechart statechart = GeneratorBaseUtil.loadStatechart(uri);
+//		ExecutionFlow executionFlow = GeneratorBaseUtil
+//				.createExecutionFlowModel(statechart);
+//		
+//		String targetFolder = "src-gen";
+//		
+//		String absoluteTargetFolder = ResourcesPlugin.getWorkspace().getRoot()
+//				.getLocation().toOSString()
+//				+ File.separator
+//				+ project.getFullPath().toOSString()
+//				+ File.separator + targetFolder;
+//		
+//		GeneratorBaseUtil.generate(executionFlow, templatePath, project,
+//				absoluteTargetFolder);
 		
 //		assertNotNull(((RegularEventSpec) ((ReactionTrigger) statechart.getRegions().get(0).getVertices().get(0).getOutgoingTransitions().get(0).getTrigger()).getTriggers().get(0)).getEvent());
 //		assertNotNull(((ElementReferenceExpression) ((If) executionFlow.getStates().get(0).getCycle().getSteps().get(0)).getCheck().getCondition()).getValue());
