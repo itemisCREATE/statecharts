@@ -1,7 +1,18 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.generator.core.impl;
 
 import static org.yakindu.sct.generator.core.features.IXpandFeatureConstants.TEMPLATE_FEATURE;
 import static org.yakindu.sct.generator.core.features.IXpandFeatureConstants.TEMPLATE_FEATURE_TEMPLATE_PATH;
+import static org.yakindu.sct.generator.core.features.IXpandFeatureConstants.TEMPLATE_FEATURE_TEMPLATE_PROJECT;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -10,11 +21,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.mwe.core.resources.ResourceLoader;
 import org.eclipse.emf.mwe.core.resources.ResourceLoaderFactory;
 import org.eclipse.emf.mwe.core.resources.ResourceLoaderImpl;
-import org.yakindu.sct.generator.core.features.IXpandFeatureConstants;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
+/**
+ * @author holger willebrandt - Initial contribution and API
+ */
 public class GenericXPandCodeGenerator extends AbstractXpandBasedCodeGenerator {
 
 	private String templatePath;
@@ -49,9 +62,9 @@ public class GenericXPandCodeGenerator extends AbstractXpandBasedCodeGenerator {
 	protected IProject getLookupRoot(GeneratorEntry entry) {
 		IProject project = null;
 		FeatureConfiguration templateConfig = entry
-				.getFeatureConfiguration(IXpandFeatureConstants.TEMPLATE_FEATURE);
+				.getFeatureConfiguration(TEMPLATE_FEATURE);
 		FeatureParameterValue projectName = templateConfig
-				.getParameterValue(IXpandFeatureConstants.TEMPLATE_FEATURE_TEMPLATE_PROJECT);
+				.getParameterValue(TEMPLATE_FEATURE_TEMPLATE_PROJECT);
 		if (projectName != null) {
 			project = ResourcesPlugin.getWorkspace().getRoot()
 					.getProject(projectName.getValue());
