@@ -27,7 +27,6 @@ public class Test_LocalActionsEventBasedStatemachine extends Test_LocalActionsAb
 		return (Queue<Event>) super.getOccuredEvents();
 	}
 	
-	@Override
 	public void runCycle() {
 		if (eventOccured()) {
 			Event event = getOccuredEvents().poll();

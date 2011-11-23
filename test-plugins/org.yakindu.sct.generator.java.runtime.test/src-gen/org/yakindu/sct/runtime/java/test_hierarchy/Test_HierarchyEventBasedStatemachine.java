@@ -27,7 +27,6 @@ public class Test_HierarchyEventBasedStatemachine extends Test_HierarchyAbstract
 		return (Queue<Event>) super.getOccuredEvents();
 	}
 	
-	@Override
 	public void runCycle() {
 		if (eventOccured()) {
 			Event event = getOccuredEvents().poll();

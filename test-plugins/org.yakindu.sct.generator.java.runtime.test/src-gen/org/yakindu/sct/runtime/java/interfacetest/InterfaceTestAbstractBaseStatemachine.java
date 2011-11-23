@@ -66,7 +66,6 @@ public abstract class InterfaceTestAbstractBaseStatemachine implements IStatemac
 		return !getOccuredEvents().isEmpty();
 	}
 	
-	@Override
 	public void init() {
 		
 	}

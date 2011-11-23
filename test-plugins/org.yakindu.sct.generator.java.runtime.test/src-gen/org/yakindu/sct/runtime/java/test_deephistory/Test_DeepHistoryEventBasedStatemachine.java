@@ -27,7 +27,6 @@ public class Test_DeepHistoryEventBasedStatemachine extends Test_DeepHistoryAbst
 		return (Queue<Event>) super.getOccuredEvents();
 	}
 	
-	@Override
 	public void runCycle() {
 		if (eventOccured()) {
 			Event event = getOccuredEvents().poll();

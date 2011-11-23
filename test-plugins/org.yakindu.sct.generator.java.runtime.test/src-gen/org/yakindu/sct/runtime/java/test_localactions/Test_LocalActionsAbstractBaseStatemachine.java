@@ -71,25 +71,21 @@ public abstract class Test_LocalActionsAbstractBaseStatemachine implements ITime
 		return !getOccuredEvents().isEmpty();
 	}
 	
-	@Override
 	public void init() {
 		
 	}
-	
-	@Override
+
 	public void setTimerHandler(ITimerHandler timerHandler) {
 		this.timerHandler = timerHandler;
 	}
 
-	@Override
 	public ITimerHandler getTimerHandler() {
 		if (timerHandler == null) {
 			throw new NullPointerException("TimerHandler of statemachine \"+Test_LocalActions+\" not set!");
 		}
 		return timerHandler;
 	}
-	
-	@Override
+
 	public void notify(Notification<?> notification) {
 		if (notification instanceof EventNotification) {
 			EventNotification eventNotification = (EventNotification) notification;

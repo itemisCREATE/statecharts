@@ -26,8 +26,7 @@ public class Test_ShallowHistoryEventBasedStatemachine extends Test_ShallowHisto
 	protected Queue<Event> getOccuredEvents() {
 		return (Queue<Event>) super.getOccuredEvents();
 	}
-	
-	@Override
+
 	public void runCycle() {
 		if (eventOccured()) {
 			Event event = getOccuredEvents().poll();
