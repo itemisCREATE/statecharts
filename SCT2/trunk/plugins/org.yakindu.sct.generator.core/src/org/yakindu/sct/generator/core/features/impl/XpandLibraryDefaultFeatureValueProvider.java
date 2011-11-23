@@ -29,7 +29,7 @@ public class XpandLibraryDefaultFeatureValueProvider extends
 		AbstractDefaultFeatureValueProvider {
 
 	// (ID::)+ID
-	private static final String XPAND_TEMPLATE_PATH_REGEX = "([a-zA-Z$_][a-zA-Z0-9$_.]*::)+[a-zA-Z$_][a-zA-Z0-9$_.]*";
+	private static final String XPAND_TEMPLATE_PATH_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*::)+[a-zA-Z_][a-zA-Z0-9_]*";
 
 	public boolean isProviderFor(final FeatureTypeLibrary library) {
 		return LIBRARY_NAME.equals(library.getName());
