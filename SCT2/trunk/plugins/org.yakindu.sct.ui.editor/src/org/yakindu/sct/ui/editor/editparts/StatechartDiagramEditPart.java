@@ -44,6 +44,7 @@ public class StatechartDiagramEditPart extends DiagramEditPart implements
 				new DragDropEditPolicy());
 		// TODO: This is a workaround for GMF bug #349042
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, new FixedXYLayoutEditPolicy());
+		removeEditPolicy(EditPolicyRoles.POPUPBAR_ROLE);
 	}
 
 	public void setPreferencesHint(PreferencesHint preferenceHint) {
