@@ -23,19 +23,7 @@ FeatureConfiguration returns gen::FeatureConfiguration:
 	'}';
 
 FeatureParameterValue returns gen::FeatureParameterValue:
-	{gen::FeatureParameterValue} parameter=[gen::FeatureParameter] '=' expression=XExpression;
-
-XPrimaryExpression returns xbase::XExpression:
-	XFeatureCall |
-	XLiteral |
-	XParenthesizedExpression;
-	
-XLiteral returns xbase::XExpression:
-	XBooleanLiteral |
-	XIntLiteral |
-	XNullLiteral |
-	XStringLiteral
-;
+	{gen::FeatureParameterValue} parameter=[gen::FeatureParameter] '=' expression=XLiteral;
 
 QID:
 	ID (('::' | '.') ID)*; 
