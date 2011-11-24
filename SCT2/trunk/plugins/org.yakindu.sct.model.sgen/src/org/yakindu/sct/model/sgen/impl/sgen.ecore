@@ -18,10 +18,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="library" lowerBound="1"
         eType="#//FeatureTypeLibrary" changeable="false" volatile="true" transient="true"
         derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureParameter" eSuperTypes="http://www.yakindu.org/sct/2.0.0#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="featureType" eType="#//FeatureType"
         eOpposite="#//FeatureType/parameters"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterType" eType="#//ParameterTypes"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureConfiguration">
     <eOperations name="getParameterValue" eType="#//FeatureParameterValue">
@@ -48,7 +53,6 @@
     </eOperations>
     <eOperations name="getStringValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eOperations name="getBooleanValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="getValue" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//FeatureParameter"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="featureConfiguration" eType="#//FeatureConfiguration"
         changeable="false" eOpposite="#//FeatureConfiguration/parameterValues"/>
@@ -59,5 +63,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
         eType="#//FeatureType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ParameterTypes">
+    <eLiterals name="STRING" value="1"/>
+    <eLiterals name="FLOAT" value="2" literal="FLOAT"/>
+    <eLiterals name="BOOLEAN"/>
+    <eLiterals name="INTEGER" value="3"/>
   </eClassifiers>
 </ecore:EPackage>

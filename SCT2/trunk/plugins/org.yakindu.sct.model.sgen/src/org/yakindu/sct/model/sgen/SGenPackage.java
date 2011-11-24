@@ -8,6 +8,7 @@ package org.yakindu.sct.model.sgen;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -164,13 +165,22 @@ public interface SGenPackage extends EPackage {
 	int FEATURE_TYPE__LIBRARY = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_TYPE__OPTIONAL = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Feature Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_TYPE_FEATURE_COUNT = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int FEATURE_TYPE_FEATURE_COUNT = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.FeatureParameterImpl <em>Feature Parameter</em>}' class.
@@ -201,13 +211,31 @@ public interface SGenPackage extends EPackage {
 	int FEATURE_PARAMETER__FEATURE_TYPE = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_PARAMETER__OPTIONAL = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Parameter Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_PARAMETER__PARAMETER_TYPE = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Feature Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_PARAMETER_FEATURE_COUNT = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int FEATURE_PARAMETER_FEATURE_COUNT = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.FeatureConfigurationImpl <em>Feature Configuration</em>}' class.
@@ -368,6 +396,17 @@ public interface SGenPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.ParameterTypes <em>Parameter Types</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgen.ParameterTypes
+	 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getParameterTypes()
+	 * @generated
+	 */
+	int PARAMETER_TYPES = 8;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.GeneratorModel <em>Generator Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -453,6 +492,17 @@ public interface SGenPackage extends EPackage {
 	EReference getFeatureType_Library();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgen.FeatureType#isOptional <em>Optional</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Optional</em>'.
+	 * @see org.yakindu.sct.model.sgen.FeatureType#isOptional()
+	 * @see #getFeatureType()
+	 * @generated
+	 */
+	EAttribute getFeatureType_Optional();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.FeatureParameter <em>Feature Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -472,6 +522,28 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFeatureParameter_FeatureType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgen.FeatureParameter#isOptional <em>Optional</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Optional</em>'.
+	 * @see org.yakindu.sct.model.sgen.FeatureParameter#isOptional()
+	 * @see #getFeatureParameter()
+	 * @generated
+	 */
+	EAttribute getFeatureParameter_Optional();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgen.FeatureParameter#getParameterType <em>Parameter Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Parameter Type</em>'.
+	 * @see org.yakindu.sct.model.sgen.FeatureParameter#getParameterType()
+	 * @see #getFeatureParameter()
+	 * @generated
+	 */
+	EAttribute getFeatureParameter_ParameterType();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.FeatureConfiguration <em>Feature Configuration</em>}'.
@@ -613,6 +685,16 @@ public interface SGenPackage extends EPackage {
 	EAttribute getFeatureTypeLibrary_Name();
 
 	/**
+	 * Returns the meta object for enum '{@link org.yakindu.sct.model.sgen.ParameterTypes <em>Parameter Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Parameter Types</em>'.
+	 * @see org.yakindu.sct.model.sgen.ParameterTypes
+	 * @generated
+	 */
+	EEnum getParameterTypes();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -705,6 +787,14 @@ public interface SGenPackage extends EPackage {
 		EReference FEATURE_TYPE__LIBRARY = eINSTANCE.getFeatureType_Library();
 
 		/**
+		 * The meta object literal for the '<em><b>Optional</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FEATURE_TYPE__OPTIONAL = eINSTANCE.getFeatureType_Optional();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.FeatureParameterImpl <em>Feature Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -721,6 +811,22 @@ public interface SGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FEATURE_PARAMETER__FEATURE_TYPE = eINSTANCE.getFeatureParameter_FeatureType();
+
+		/**
+		 * The meta object literal for the '<em><b>Optional</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FEATURE_PARAMETER__OPTIONAL = eINSTANCE.getFeatureParameter_Optional();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameter Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FEATURE_PARAMETER__PARAMETER_TYPE = eINSTANCE.getFeatureParameter_ParameterType();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.FeatureConfigurationImpl <em>Feature Configuration</em>}' class.
@@ -833,6 +939,16 @@ public interface SGenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FEATURE_TYPE_LIBRARY__NAME = eINSTANCE.getFeatureTypeLibrary_Name();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.ParameterTypes <em>Parameter Types</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgen.ParameterTypes
+		 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getParameterTypes()
+		 * @generated
+		 */
+		EEnum PARAMETER_TYPES = eINSTANCE.getParameterTypes();
 
 	}
 

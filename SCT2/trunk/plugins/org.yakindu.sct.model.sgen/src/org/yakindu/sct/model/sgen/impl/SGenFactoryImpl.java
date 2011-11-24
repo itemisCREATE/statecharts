@@ -7,6 +7,7 @@
 package org.yakindu.sct.model.sgen.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -78,6 +79,36 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case SGenPackage.PARAMETER_TYPES:
+				return createParameterTypesFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case SGenPackage.PARAMETER_TYPES:
+				return convertParameterTypesToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public GeneratorModel createGeneratorModel() {
 		GeneratorModelImpl generatorModel = new GeneratorModelImpl();
 		return generatorModel;
@@ -136,7 +167,7 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated 
+	 * @generated
 	 */
 	public FeatureParameterValue createFeatureParameterValue() {
 		FeatureParameterValueImpl featureParameterValue = new FeatureParameterValueImpl();
@@ -151,6 +182,26 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 	public FeatureTypeLibrary createFeatureTypeLibrary() {
 		FeatureTypeLibraryImpl featureTypeLibrary = new FeatureTypeLibraryImpl();
 		return featureTypeLibrary;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ParameterTypes createParameterTypesFromString(EDataType eDataType, String initialValue) {
+		ParameterTypes result = ParameterTypes.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertParameterTypesToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
@@ -93,6 +94,13 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 * @generated
 	 */
 	private EClass featureTypeLibraryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum parameterTypesEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -243,6 +251,15 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getFeatureType_Optional() {
+        return (EAttribute)getFeatureType().getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFeatureParameter() {
 		if (featureParameterEClass == null) {
 			featureParameterEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGenPackage.eNS_URI).getEClassifiers().get(3);
@@ -257,6 +274,24 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 */
 	public EReference getFeatureParameter_FeatureType() {
         return (EReference)getFeatureParameter().getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFeatureParameter_Optional() {
+        return (EAttribute)getFeatureParameter().getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFeatureParameter_ParameterType() {
+        return (EAttribute)getFeatureParameter().getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -386,6 +421,18 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 */
 	public EAttribute getFeatureTypeLibrary_Name() {
         return (EAttribute)getFeatureTypeLibrary().getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getParameterTypes() {
+		if (parameterTypesEEnum == null) {
+			parameterTypesEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(SGenPackage.eNS_URI).getEClassifiers().get(8);
+		}
+		return parameterTypesEEnum;
 	}
 
 	/**

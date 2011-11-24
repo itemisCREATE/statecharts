@@ -44,6 +44,7 @@ import com.google.inject.Inject;
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@SuppressWarnings("restriction")
 public class GenerateModelAction implements IObjectActionDelegate {
 
 	private ISelection selection;
