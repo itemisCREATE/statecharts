@@ -12,7 +12,11 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -20,20 +24,21 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.sct.model.sexec.Reaction;
+
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.SexecPackage;
+import org.yakindu.sct.model.sexec.StateCase;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.sct.model.sexec.Reaction} object.
+ * This is the item provider adapter for a {@link org.yakindu.sct.model.sexec.StateCase} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ReactionItemProvider
-	extends NamedElementItemProvider
+public class StateCaseItemProvider
+	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -46,7 +51,7 @@ public class ReactionItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReactionItemProvider(AdapterFactory adapterFactory) {
+	public StateCaseItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -61,29 +66,29 @@ public class ReactionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTransitionPropertyDescriptor(object);
+			addStatePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Transition feature.
+	 * This adds a property descriptor for the State feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTransitionPropertyDescriptor(Object object) {
+	protected void addStatePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Reaction_transition_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Reaction_transition_feature", "_UI_Reaction_type"),
-				 SexecPackage.Literals.REACTION__TRANSITION,
+				 getString("_UI_StateCase_state_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StateCase_state_feature", "_UI_StateCase_type"),
+				 SexecPackage.Literals.STATE_CASE__STATE,
 				 true,
 				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 true,
+				 null,
 				 null,
 				 null));
 	}
@@ -100,8 +105,7 @@ public class ReactionItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(SexecPackage.Literals.REACTION__CHECK);
-			childrenFeatures.add(SexecPackage.Literals.REACTION__EFFECT);
+			childrenFeatures.add(SexecPackage.Literals.STATE_CASE__STEP);
 		}
 		return childrenFeatures;
 	}
@@ -120,14 +124,14 @@ public class ReactionItemProvider
 	}
 
 	/**
-	 * This returns Reaction.gif.
+	 * This returns StateCase.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Reaction"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/StateCase"));
 	}
 
 	/**
@@ -138,10 +142,7 @@ public class ReactionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Reaction)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Reaction_type") :
-			getString("_UI_Reaction_type") + " " + label;
+		return getString("_UI_StateCase_type");
 	}
 
 	/**
@@ -155,12 +156,8 @@ public class ReactionItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Reaction.class)) {
-			case SexecPackage.REACTION__TRANSITION:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case SexecPackage.REACTION__CHECK:
-			case SexecPackage.REACTION__EFFECT:
+		switch (notification.getFeatureID(StateCase.class)) {
+			case SexecPackage.STATE_CASE__STEP:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -180,96 +177,74 @@ public class ReactionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.REACTION__CHECK,
-				 SexecFactory.eINSTANCE.createCheck()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.REACTION__CHECK,
-				 SexecFactory.eINSTANCE.createCheckRef()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.REACTION__EFFECT,
+				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createSequence()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.REACTION__EFFECT,
+				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createCycle()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.REACTION__EFFECT,
+				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createCheck()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.REACTION__EFFECT,
+				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createCheckRef()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.REACTION__EFFECT,
+				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createIf()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.REACTION__EFFECT,
+				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createExecution()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.REACTION__EFFECT,
+				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createEnterState()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.REACTION__EFFECT,
+				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createExitState()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.REACTION__EFFECT,
+				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.REACTION__EFFECT,
+				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createScheduleTimeEvent()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.REACTION__EFFECT,
+				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createUnscheduleTimeEvent()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.REACTION__EFFECT,
+				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createStateSwitch()));
 	}
 
 	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * Return the resource locator for this item provider's resources.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == SexecPackage.Literals.REACTION__CHECK ||
-			childFeature == SexecPackage.Literals.REACTION__EFFECT;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
+	public ResourceLocator getResourceLocator() {
+		return SexecEditPlugin.INSTANCE;
 	}
 
 }

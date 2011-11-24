@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -92,6 +93,8 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 			case SexecPackage.CALL: return createCall();
 			case SexecPackage.SCHEDULE_TIME_EVENT: return createScheduleTimeEvent();
 			case SexecPackage.UNSCHEDULE_TIME_EVENT: return createUnscheduleTimeEvent();
+			case SexecPackage.STATE_SWITCH: return createStateSwitch();
+			case SexecPackage.STATE_CASE: return createStateCase();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -235,6 +238,26 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public UnscheduleTimeEvent createUnscheduleTimeEvent() {
 		UnscheduleTimeEventImpl unscheduleTimeEvent = new UnscheduleTimeEventImpl();
 		return unscheduleTimeEvent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StateSwitch createStateSwitch() {
+		StateSwitchImpl stateSwitch = new StateSwitchImpl();
+		return stateSwitch;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StateCase createStateCase() {
+		StateCaseImpl stateCase = new StateCaseImpl();
+		return stateCase;
 	}
 
 	/**

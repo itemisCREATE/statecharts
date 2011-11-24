@@ -94,4 +94,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="UnscheduleTimeEvent" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="timeEvent" eType="#//TimeEvent"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateSwitch" eSuperTypes="#//Step">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"
+        eType="#//StateCase" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateCase">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="step" eType="#//Step" containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

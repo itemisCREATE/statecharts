@@ -980,6 +980,90 @@ public interface SexecPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StateSwitchImpl <em>State Switch</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.StateSwitchImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateSwitch()
+	 * @generated
+	 */
+	int STATE_SWITCH = 18;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_SWITCH__NAME = STEP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_SWITCH__COMMENT = STEP__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Cases</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_SWITCH__CASES = STEP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>State Switch</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_SWITCH_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StateCaseImpl <em>State Case</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.StateCaseImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateCase()
+	 * @generated
+	 */
+	int STATE_CASE = 19;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_CASE__STATE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Step</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_CASE__STEP = 1;
+
+	/**
+	 * The number of structural features of the '<em>State Case</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_CASE_FEATURE_COUNT = 2;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionFlow <em>Execution Flow</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1447,6 +1531,59 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getUnscheduleTimeEvent_TimeEvent();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.StateSwitch <em>State Switch</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>State Switch</em>'.
+	 * @see org.yakindu.sct.model.sexec.StateSwitch
+	 * @generated
+	 */
+	EClass getStateSwitch();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sexec.StateSwitch#getCases <em>Cases</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Cases</em>'.
+	 * @see org.yakindu.sct.model.sexec.StateSwitch#getCases()
+	 * @see #getStateSwitch()
+	 * @generated
+	 */
+	EReference getStateSwitch_Cases();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.StateCase <em>State Case</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>State Case</em>'.
+	 * @see org.yakindu.sct.model.sexec.StateCase
+	 * @generated
+	 */
+	EClass getStateCase();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.StateCase#getState <em>State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>State</em>'.
+	 * @see org.yakindu.sct.model.sexec.StateCase#getState()
+	 * @see #getStateCase()
+	 * @generated
+	 */
+	EReference getStateCase_State();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.StateCase#getStep <em>Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Step</em>'.
+	 * @see org.yakindu.sct.model.sexec.StateCase#getStep()
+	 * @see #getStateCase()
+	 * @generated
+	 */
+	EReference getStateCase_Step();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.CheckRef <em>Check Ref</em>}'.
@@ -1925,6 +2062,50 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference UNSCHEDULE_TIME_EVENT__TIME_EVENT = eINSTANCE.getUnscheduleTimeEvent_TimeEvent();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.StateSwitchImpl <em>State Switch</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.StateSwitchImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateSwitch()
+		 * @generated
+		 */
+		EClass STATE_SWITCH = eINSTANCE.getStateSwitch();
+
+		/**
+		 * The meta object literal for the '<em><b>Cases</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATE_SWITCH__CASES = eINSTANCE.getStateSwitch_Cases();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.StateCaseImpl <em>State Case</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.StateCaseImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateCase()
+		 * @generated
+		 */
+		EClass STATE_CASE = eINSTANCE.getStateCase();
+
+		/**
+		 * The meta object literal for the '<em><b>State</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATE_CASE__STATE = eINSTANCE.getStateCase_State();
+
+		/**
+		 * The meta object literal for the '<em><b>Step</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATE_CASE__STEP = eINSTANCE.getStateCase_Step();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.CheckRefImpl <em>Check Ref</em>}' class.

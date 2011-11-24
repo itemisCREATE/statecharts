@@ -191,13 +191,13 @@ public class SCTTestUtil {
 	}
 	
 	
-	public static void _createExitAssignemnt(VariableDefinition v1, State s1, String value) {
+	public static void _createExitAssignment(VariableDefinition v1, State s1, String value) {
 		LocalReaction exitAction = _createExitAction(s1);
 		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(value), (ReactionEffect) exitAction.getEffect());
 	}
 
 
-	public static void _createEntryAssignemnt(VariableDefinition v1, State s1, String value) {
+	public static void _createEntryAssignment(VariableDefinition v1, State s1, String value) {
 		LocalReaction entryAction = _createEntryAction(s1);
 		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(value), (ReactionEffect) entryAction.getEffect());
 	}

@@ -60,6 +60,7 @@ import org.yakindu.sct.model.stext.stext.TimeUnit
 import org.yakindu.sct.model.stext.stext.MultiplicativeOperator
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
 import com.sun.org.apache.xerces.internal.dom.ParentNode$UserDataRecord
+import org.yakindu.sct.model.sexec.StateSwitch
 
 class ModelSequencer {
 	
@@ -79,13 +80,18 @@ class ModelSequencer {
 		sc.mapScopes(ef)
 		sc.mapStates(ef)
 		sc.mapTimeEvents(ef)
-		sc.mapTransitions(ef)
-		sc.mapLocalReactions(ef)
+		// sc.mapTransitions(ef)
+		// sc.mapLocalReactions(ef)
 		
 		// derive all additional information that is necessary for the execution
 		ef.defineStateVector(sc)
 		ef.defineStateEnterSequences(sc)
+		ef.defineStateExitSequences(sc)
 		ef.defineEnterSequence(sc)
+		
+		sc.mapTransitions(ef)
+		sc.mapLocalReactions(ef)
+		
 		ef.defineStateCycles(sc)
 		
 		// retarget declaration refs
@@ -239,22 +245,31 @@ class ModelSequencer {
 	def Sequence mapToEffect(Transition t) {
 		val sequence = sexecFactory.createSequence 
 
+		// define exit behavior of transition
+		if (t.source != null && t.source instanceof State) {
+			sequence.steps.add((t.source as State).create.exitSequence.newCall)	
+		}
+
 		t.exitStates().fold(sequence, [seq, state | {
-			if (state.create.exitAction != null) seq.steps.add(state.create.exitAction.newCall)
+			if (state != t.source // since we call the exit sequence of the source state we have to exclude it's exit action here
+				&& state.create.exitAction != null
+			) seq.steps.add(state.create.exitAction.newCall)
 			seq
 		}])
 		
-		if (t.source != null) sequence.steps.add(newExitStateStep(t.source as State))
+//		if (t.source != null) sequence.steps.add(newExitStateStep(t.source as State))
 		
+		// map transition actions
 		if (t.effect != null) sequence.steps.add(t.effect.mapEffect)		
 
+		// define entry behavior of the transition
 		t.entryStates().reverse.fold(sequence, [seq, state | {
-			if (state.create.entryAction != null) seq.steps.add(state.create.entryAction.newCall)
+			if (state != t.target // since we call the entry sequence of the target state we have to exclude it here
+				&& state.create.entryAction != null
+			) seq.steps.add(state.create.entryAction.newCall)
 			seq
 		}])
 		
-		//TODO: make sure target state entry action is not called twice !!
-
 		if (t.target != null && t.target instanceof State) {
 			sequence.steps.add((t.target as State).create.enterSequence.newCall)	
 		}
@@ -571,6 +586,67 @@ class ModelSequencer {
 		}
 
 		execState.enterSequence = seq
+	}
+	
+	
+	
+	/**
+	 * Defines the exit sequences of all states
+	 */
+	def void defineStateExitSequences(ExecutionFlow flow, Statechart sc) {
+		
+		// iterate over all regions
+		for ( r : sc.regions) defineStateExitSequence(r)
+	}
+	
+
+	def void defineStateExitSequence(Region r) {
+		
+		// process all states of a region
+		for ( s : r.vertices.filter(typeof(State))) defineStateExitSequence(s)
+	}
+	
+	
+	def void defineStateExitSequence(State state) {
+		
+		val execState = state.create
+		val seq = sexecFactory.createSequence
+		seq.name = "exitSequence"
+		seq.comment = "Default exit sequence for state " + state.name
+
+		if ( execState.leaf ) {
+			
+			seq.steps += state.newExitStateStep
+					
+		} else {
+	
+			for ( r : state.subRegions ) {
+				defineStateExitSequence(r)
+				
+				val StateSwitch sSwitch = sexecFactory.createStateSwitch
+				
+				for ( s : r.states ) {
+					if (s.create.exitSequence != null) sSwitch.cases.add(s.create.newCase(s.create.exitSequence.newCall))
+				}
+				seq.steps.add(sSwitch);
+			} 
+		}
+
+		if (execState.exitAction != null) seq.steps.add(execState.exitAction.newCall)
+		execState.exitSequence = seq
+	}
+	
+	
+	def newCase(ExecutionState it, Step step) {
+		val sCase = sexecFactory.createStateCase
+		sCase.state = it
+		sCase.step = step
+		return sCase
+	}
+	
+	
+	def states(Region it) {
+		it.vertices.filter( typeof(State) )
 	}
 	
 	

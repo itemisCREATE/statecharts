@@ -12,7 +12,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -20,17 +22,18 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.sct.model.sexec.Sequence;
+
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.SexecPackage;
+import org.yakindu.sct.model.sexec.StateSwitch;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.sct.model.sexec.Sequence} object.
+ * This is the item provider adapter for a {@link org.yakindu.sct.model.sexec.StateSwitch} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class SequenceItemProvider
+public class StateSwitchItemProvider
 	extends StepItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -44,7 +47,7 @@ public class SequenceItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SequenceItemProvider(AdapterFactory adapterFactory) {
+	public StateSwitchItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -75,7 +78,7 @@ public class SequenceItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(SexecPackage.Literals.SEQUENCE__STEPS);
+			childrenFeatures.add(SexecPackage.Literals.STATE_SWITCH__CASES);
 		}
 		return childrenFeatures;
 	}
@@ -94,14 +97,14 @@ public class SequenceItemProvider
 	}
 
 	/**
-	 * This returns Sequence.gif.
+	 * This returns StateSwitch.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Sequence"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/StateSwitch"));
 	}
 
 	/**
@@ -112,10 +115,10 @@ public class SequenceItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Sequence)object).getName();
+		String label = ((StateSwitch)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Sequence_type") :
-			getString("_UI_Sequence_type") + " " + label;
+			getString("_UI_StateSwitch_type") :
+			getString("_UI_StateSwitch_type") + " " + label;
 	}
 
 	/**
@@ -129,8 +132,8 @@ public class SequenceItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Sequence.class)) {
-			case SexecPackage.SEQUENCE__STEPS:
+		switch (notification.getFeatureID(StateSwitch.class)) {
+			case SexecPackage.STATE_SWITCH__CASES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -150,63 +153,8 @@ public class SequenceItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createCycle()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createCheck()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createCheckRef()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createIf()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createExecution()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createEnterState()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createExitState()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createCall()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createScheduleTimeEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createUnscheduleTimeEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createStateSwitch()));
+				(SexecPackage.Literals.STATE_SWITCH__CASES,
+				 SexecFactory.eINSTANCE.createStateCase()));
 	}
 
 }

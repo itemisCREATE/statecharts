@@ -27,6 +27,8 @@ import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.SexecPackage;
+import org.yakindu.sct.model.sexec.StateCase;
+import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.StateVector;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
@@ -144,6 +146,20 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * @generated
 	 */
 	private EClass unscheduleTimeEventEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stateSwitchEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stateCaseEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -631,6 +647,51 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getStateSwitch() {
+		return stateSwitchEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStateSwitch_Cases() {
+		return (EReference)stateSwitchEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStateCase() {
+		return stateCaseEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStateCase_State() {
+		return (EReference)stateCaseEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStateCase_Step() {
+		return (EReference)stateCaseEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCheckRef() {
 		return checkRefEClass;
 	}
@@ -785,6 +846,13 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		unscheduleTimeEventEClass = createEClass(UNSCHEDULE_TIME_EVENT);
 		createEReference(unscheduleTimeEventEClass, UNSCHEDULE_TIME_EVENT__TIME_EVENT);
+
+		stateSwitchEClass = createEClass(STATE_SWITCH);
+		createEReference(stateSwitchEClass, STATE_SWITCH__CASES);
+
+		stateCaseEClass = createEClass(STATE_CASE);
+		createEReference(stateCaseEClass, STATE_CASE__STATE);
+		createEReference(stateCaseEClass, STATE_CASE__STEP);
 	}
 
 	/**
@@ -835,6 +903,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		callEClass.getESuperTypes().add(this.getStep());
 		scheduleTimeEventEClass.getESuperTypes().add(this.getStep());
 		unscheduleTimeEventEClass.getESuperTypes().add(this.getStep());
+		stateSwitchEClass.getESuperTypes().add(this.getStep());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(executionFlowEClass, ExecutionFlow.class, "ExecutionFlow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -905,6 +974,13 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		initEClass(unscheduleTimeEventEClass, UnscheduleTimeEvent.class, "UnscheduleTimeEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUnscheduleTimeEvent_TimeEvent(), this.getTimeEvent(), null, "timeEvent", null, 0, 1, UnscheduleTimeEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(stateSwitchEClass, StateSwitch.class, "StateSwitch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStateSwitch_Cases(), this.getStateCase(), null, "cases", null, 0, -1, StateSwitch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(stateCaseEClass, StateCase.class, "StateCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStateCase_State(), this.getExecutionState(), null, "state", null, 0, 1, StateCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStateCase_Step(), this.getStep(), null, "step", null, 0, 1, StateCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -1,29 +1,13 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEntryAssignemnt;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createExitAssignemnt;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createInterfaceScope;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegion;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createState;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createStatechart;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createTransition;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableDefinition;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.findState;
+import static org.junit.Assert.*;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.*;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.Sequence;
-import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
-import org.yakindu.sct.model.sexec.transformation.SequencerModule;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -31,20 +15,8 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
-import com.google.inject.Guice;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-
-public class ModelSequencerHierarchyTest {
-
-	@Inject
-	private ModelSequencer sequencer;
-
-	@Before
-	public void setup() {
-		Injector injector = Guice.createInjector(new SequencerModule());
-		injector.injectMembers(this);
-	}
+ 
+public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 
 
 	/**
@@ -60,15 +32,15 @@ public class ModelSequencerHierarchyTest {
 
 			Region r = _createRegion("r", sc); {
 				State s1 = _createState("s1", r); {
-					_createEntryAssignemnt(v1, s1, "1");
+					_createEntryAssignment(v1, s1, "1");
 
 					Region r_s1 = _createRegion("r", s1); {
 						State s3 = _createState("s3", r_s1); {
-							_createEntryAssignemnt(v1, s3, "2");
+							_createEntryAssignment(v1, s3, "2");
 							
 							Region r_s3 = _createRegion("r", s3); {
 								State s4 = _createState("s4", r_s3);
-								_createEntryAssignemnt(v1, s4, "3");
+								_createEntryAssignment(v1, s4, "3");
 
 								State s5 = _createState("s5", r_s3);
 							}
@@ -108,16 +80,11 @@ public class ModelSequencerHierarchyTest {
 		assertTrue(_t.isTransition());
 		
 		Sequence _effect = (Sequence) _t.getEffect();
-		assertEquals(5, _effect.getSteps().size());
+		assertEquals(4, _effect.getSteps().size());
 		
-		Call _s4_entryActionCall = (Call) _effect.getSteps().get(4);
-		assertSame( _s4.getEntryAction(), _s4_entryActionCall.getStep());	
-
-		Call _s3_entryActionCall = (Call) _effect.getSteps().get(3);
-		assertSame( _s3.getEntryAction(), _s3_entryActionCall.getStep());	
-
-		Call _s1_entryActionCall = (Call) _effect.getSteps().get(2);
-		assertSame( _s1.getEntryAction(), _s1_entryActionCall.getStep());	
+		assertCall(_effect, 3, _s4.getEnterSequence());
+		assertCall(_effect, 2, _s3.getEntryAction());		
+		assertCall(_effect, 1, _s1.getEntryAction());
 		
 	}
 	
@@ -137,14 +104,14 @@ public class ModelSequencerHierarchyTest {
 
 			Region r = _createRegion("r", sc); {
 				State s1 = _createState("s1", r); {
-					_createEntryAssignemnt(v1, s1, "1");
+					_createEntryAssignment(v1, s1, "1");
 
 					Region r_s1 = _createRegion("r", s1); {
 						State s3 = _createState("s3", r_s1); {
 							
 							Region r_s3 = _createRegion("r", s3); {
 								State s4 = _createState("s4", r_s3);
-								_createEntryAssignemnt(v1, s4, "3");
+								_createEntryAssignment(v1, s4, "3");
 
 								State s5 = _createState("s5", r_s3);
 							}
@@ -183,13 +150,10 @@ public class ModelSequencerHierarchyTest {
 		assertTrue(_t.isTransition());
 		
 		Sequence _effect = (Sequence) _t.getEffect();
-		assertEquals(4, _effect.getSteps().size());
+		assertEquals(3, _effect.getSteps().size());
 		
-		Call _s4_entryActionCall = (Call) _effect.getSteps().get(3);
-		assertSame( _s4.getEntryAction(), _s4_entryActionCall.getStep());	
-
-		Call _s1_entryActionCall = (Call) _effect.getSteps().get(2);
-		assertSame( _s1.getEntryAction(), _s1_entryActionCall.getStep());	
+		assertCall(_effect, 2, _s4.getEnterSequence());
+		assertCall(_effect,  1, _s1.getEntryAction());
 	}
 	
 	
@@ -208,15 +172,15 @@ public class ModelSequencerHierarchyTest {
 
 			Region r = _createRegion("r", sc); {
 				State s1 = _createState("s1", r); {
-					_createEntryAssignemnt(v1, s1, "1");
+					_createEntryAssignment(v1, s1, "1");
 
 					Region r_s1 = _createRegion("r", s1); {
 						State s3 = _createState("s3", r_s1); {
-							_createEntryAssignemnt(v1, s3, "2");
+							_createEntryAssignment(v1, s3, "2");
 
 							Region r_s3 = _createRegion("r", s3); {
 								State s4 = _createState("s4", r_s3);
-								_createEntryAssignemnt(v1, s4, "3");
+								_createEntryAssignment(v1, s4, "3");
 
 								State s5 = _createState("s5", r_s3);
 							}
@@ -255,10 +219,9 @@ public class ModelSequencerHierarchyTest {
 		assertTrue(_t.isTransition());
 		
 		Sequence _effect = (Sequence) _t.getEffect();
-		assertEquals(3, _effect.getSteps().size());
+		assertEquals(2, _effect.getSteps().size());
 		
-		Call _s4_entryActionCall = (Call) _effect.getSteps().get(2);
-		assertSame( _s4.getEntryAction(), _s4_entryActionCall.getStep());	
+		assertCall(_effect, 1, _s4.getEnterSequence());	
 	}
 
 
@@ -279,15 +242,15 @@ public class ModelSequencerHierarchyTest {
 
 			Region r = _createRegion("r", sc); {
 				State s1 = _createState("s1", r); {
-					_createExitAssignemnt(v1, s1, "1");
+					_createExitAssignment(v1, s1, "1");
 
 					Region r_s1 = _createRegion("r", s1); {
 						State s3 = _createState("s3", r_s1); {
-							_createExitAssignemnt(v1, s3, "2");
+							_createExitAssignment(v1, s3, "2");
 							
 							Region r_s3 = _createRegion("r", s3); {
 								State s4 = _createState("s4", r_s3);
-								_createExitAssignemnt(v1, s4, "3");
+								_createExitAssignment(v1, s4, "3");
 
 								State s5 = _createState("s5", r_s3);
 							}
@@ -323,17 +286,11 @@ public class ModelSequencerHierarchyTest {
 		assertTrue(_t.isTransition());
 		
 		Sequence _effect = (Sequence) _t.getEffect();
-		assertEquals(5, _effect.getSteps().size());
+		assertEquals(4, _effect.getSteps().size());
 		
-		Call _s4_exitActionCall = (Call) _effect.getSteps().get(0);
-		assertSame( _s4.getExitAction(), _s4_exitActionCall.getStep());	
-
-		Call _s3_exitActionCall = (Call) _effect.getSteps().get(1);
-		assertSame( _s3.getExitAction(), _s3_exitActionCall.getStep());	
-
-		Call _s1_exitActionCall = (Call) _effect.getSteps().get(2);
-		assertSame( _s1.getExitAction(), _s1_exitActionCall.getStep());	
-		
+		assertCall(_effect, 0, _s4.getExitSequence());
+		assertCall(_effect, 1, _s3.getExitAction());
+		assertCall(_effect, 2, _s1.getExitAction());
 	}
 	
 	
@@ -352,14 +309,14 @@ public class ModelSequencerHierarchyTest {
 
 			Region r = _createRegion("r", sc); {
 				State s1 = _createState("s1", r); {
-					_createExitAssignemnt(v1, s1, "1");
+					_createExitAssignment(v1, s1, "1");
 
 					Region r_s1 = _createRegion("r", s1); {
 						State s3 = _createState("s3", r_s1); {
 							
 							Region r_s3 = _createRegion("r", s3); {
 								State s4 = _createState("s4", r_s3);
-								_createExitAssignemnt(v1, s4, "3");
+								_createExitAssignment(v1, s4, "3");
 
 								State s5 = _createState("s5", r_s3);
 							}
@@ -395,14 +352,10 @@ public class ModelSequencerHierarchyTest {
 		assertTrue(_t.isTransition());
 		
 		Sequence _effect = (Sequence) _t.getEffect();
-		assertEquals(4, _effect.getSteps().size());
+		assertEquals(3, _effect.getSteps().size());
 		
-		Call _s4_exitActionCall = (Call) _effect.getSteps().get(0);
-		assertSame( _s4.getExitAction(), _s4_exitActionCall.getStep());	
-
-		Call _s1_exitActionCall = (Call) _effect.getSteps().get(1);
-		assertSame( _s1.getExitAction(), _s1_exitActionCall.getStep());	
-		
+		assertCall(_effect, 0, _s4.getExitSequence());
+		assertCall(_effect, 1, _s1.getExitAction());
 	}
 	
 
@@ -420,15 +373,15 @@ public class ModelSequencerHierarchyTest {
 
 			Region r = _createRegion("r", sc); {
 				State s1 = _createState("s1", r); {
-					_createExitAssignemnt(v1, s1, "1");
+					_createExitAssignment(v1, s1, "1");
 
 					Region r_s1 = _createRegion("r", s1); {
 						State s3 = _createState("s3", r_s1); {
-							_createExitAssignemnt(v1, s3, "2");
+							_createExitAssignment(v1, s3, "2");
 
 							Region r_s3 = _createRegion("r", s3); {
 								State s4 = _createState("s4", r_s3);
-								_createExitAssignemnt(v1, s4, "3");
+								_createExitAssignment(v1, s4, "3");
 
 								State s5 = _createState("s5", r_s3);
 							}
@@ -464,10 +417,9 @@ public class ModelSequencerHierarchyTest {
 		assertTrue(_t.isTransition());
 		
 		Sequence _effect = (Sequence) _t.getEffect();
-		assertEquals(3, _effect.getSteps().size());
+		assertEquals(2, _effect.getSteps().size());
 		
-		Call _s4_exitActionCall = (Call) _effect.getSteps().get(0);
-		assertSame( _s4.getExitAction(), _s4_exitActionCall.getStep());	
+		assertCall(_effect, 0, _s4.getExitSequence());
 		
 	}
 
