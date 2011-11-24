@@ -15,19 +15,21 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.genmodel.resource.FeatureResourceDescription;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
-import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgen.SGenPackage;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -49,19 +51,52 @@ public class SGenScopeProvider extends XbaseScopeProvider {
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		if (context instanceof FeatureConfiguration
-				&& reference.getName().equals("type")) {
-			return getLibraryScope(context.eResource());
+		if (reference.getName().equals("type")) {
+			return scope_Type(context, reference);
 		}
-		if (context instanceof FeatureParameterValue
-				&& reference.getName().equals("parameter")) {
-			return getLibraryScope(context.eResource());
+		if (reference.getName().equals("parameter")) {
+			return scope_Parameter(context, reference);
 		}
 		return super.getScope(context, reference);
 	}
 
+	private IScope scope_Parameter(final EObject context, EReference reference) {
+		IScope libraryScope = getLibraryScope(context.eResource());
+		return new FilteringScope(libraryScope,
+				new Predicate<IEObjectDescription>() {
+					public boolean apply(IEObjectDescription input) {
+						if (!input.getEClass().equals(
+								SGenPackage.Literals.FEATURE_PARAMETER)) {
+							return false;
+						}
+						// Only allow references to FeatureParameters defined by
+						// enclosing Feature
+						FeatureConfiguration configuration = EcoreUtil2
+								.getContainerOfType(context,
+										FeatureConfiguration.class);
+						String featureName = configuration.getType().getName();
+						if (featureName == null) {
+							return false;
+						}
+						return featureName.equals(input
+								.getUserData(FeatureResourceDescription.FEATURE_CONTAINER));
+
+					}
+				});
+	}
+
+	private IScope scope_Type(EObject context, EReference reference) {
+		IScope libraryScope = getLibraryScope(context.eResource());
+		return new FilteringScope(libraryScope,
+				new Predicate<IEObjectDescription>() {
+					public boolean apply(IEObjectDescription input) {
+						return input.getEClass().equals(
+								SGenPackage.Literals.FEATURE_TYPE);
+					}
+				});
+	}
+
 	private SimpleScope getLibraryScope(Resource resource) {
-		// get the generator id
 		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil
 				.getObjectByType(resource.getContents(),
 						SGenPackage.Literals.GENERATOR_MODEL);
@@ -81,4 +116,5 @@ public class SGenScopeProvider extends XbaseScopeProvider {
 		}
 		return new SimpleScope(allElements);
 	}
+
 }
