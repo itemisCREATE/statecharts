@@ -10,11 +10,11 @@
  */
 package org.yakindu.sct.generator.genmodel.validation;
 
+import java.util.NoSuchElementException;
+
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
-import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
-import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
+import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -57,11 +57,23 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	}
 
 	@Check
+	public void checkGeneratorExists(GeneratorModel model) {
+		try {
+			GeneratorExtensions.getGeneratorDescriptorForId(model
+					.getGeneratorId());
+		} catch (NoSuchElementException e) {
+			error(String.format("Unkown Generator %s!", model.getGeneratorId()),
+					SGenPackage.Literals.GENERATOR_MODEL__GENERATOR_ID);
+		}
+	}
+
+	@Check
 	public void checkDuplicateGeneratorEntryFeature(
 			final FeatureConfiguration config) {
 		GeneratorEntry entry = (GeneratorEntry) config.eContainer();
 		Iterable<FeatureConfiguration> filter = Iterables.filter(
 				entry.getFeatures(), new Predicate<FeatureConfiguration>() {
+					@Override
 					public boolean apply(FeatureConfiguration input) {
 						return (input.getType().getName().equals(config
 								.getType().getName()));
@@ -80,6 +92,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		Iterable<FeatureParameterValue> filter = Iterables.filter(
 				entry.getParameterValues(),
 				new Predicate<FeatureParameterValue>() {
+					@Override
 					public boolean apply(FeatureParameterValue input) {
 						return (input.getParameter().getName().equals(value
 								.getParameter().getName()));
