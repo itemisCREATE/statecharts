@@ -10,14 +10,11 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.wizard;
 
-import org.eclipse.core.resources.IProject;
-
 /**
  * 
  * @author holger willebrandt - Initial contribution and API
  */
 public class ProjectData {
-	IProject project;
 	boolean pluginExport;
 	boolean typeLibrary;
 	String projectName;
@@ -48,10 +45,6 @@ public class ProjectData {
 
 	public String getGeneratorName() {
 		return generatorName;
-	}
-
-	public IProject getProject() {
-		return project;
 	}
 
 	public String getGeneratorClass() {

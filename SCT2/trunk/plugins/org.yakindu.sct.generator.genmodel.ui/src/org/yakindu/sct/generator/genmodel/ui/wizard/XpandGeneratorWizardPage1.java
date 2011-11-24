@@ -113,6 +113,7 @@ public class XpandGeneratorWizardPage1 extends WizardPage {
 		GridDataFactory.fillDefaults().grab(true, false)
 				.applyTo(txtGeneratorDesc);
 
+		// TODO : implement Feature Type Library generation
 		Label lblLibraryCheckBox = new Label(generatorGroup, SWT.WRAP);
 		lblLibraryCheckBox.setText("Create Fetaure Library");
 		lblLibraryCheckBox.setVisible(false);
@@ -183,6 +184,7 @@ public class XpandGeneratorWizardPage1 extends WizardPage {
 		txtGeneratorId.setEnabled(enabled);
 		txtGeneratorName.setEnabled(enabled);
 		txtGeneratorDesc.setEnabled(enabled);
+		txtGeneratorClass.setEnabled(enabled);
 		cbLibrary.setEnabled(enabled);
 	}
 
@@ -197,6 +199,7 @@ public class XpandGeneratorWizardPage1 extends WizardPage {
 		data.typeLibrary = cbLibrary.getSelection();
 		return data;
 	}
+
 	static abstract class SelectionListenerAdapter implements SelectionListener {
 
 		public void widgetDefaultSelected(SelectionEvent e) {
