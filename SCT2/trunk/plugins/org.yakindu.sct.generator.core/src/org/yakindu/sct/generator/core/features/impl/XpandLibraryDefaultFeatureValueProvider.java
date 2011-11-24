@@ -29,7 +29,7 @@ public class XpandLibraryDefaultFeatureValueProvider extends
 		AbstractDefaultFeatureValueProvider {
 
 	// (ID::)+ID
-	private static final String XPAND_TEMPLATE_PATH_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*::)+[a-zA-Z_][a-zA-Z0-9_]*";
+	private static final String XPAND_TEMPLATE_PATH_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*::)+[a-zA-Z_][a-zA-Z0-9_]*"; //$NON-NLS-1$
 
 	public boolean isProviderFor(final FeatureTypeLibrary library) {
 		return LIBRARY_NAME.equals(library.getName());
@@ -42,6 +42,9 @@ public class XpandLibraryDefaultFeatureValueProvider extends
 		if (TEMPLATE_FEATURE_TEMPLATE_PATH.equals(parameterName)) {
 			parameterValue
 					.setValue("org::yakindu::sct::generator::xpand::Main::main");
+		}
+		if (TEMPLATE_FEATURE_TEMPLATE_PROJECT.equals(parameterName)) {
+			parameterValue.setValue(getProject(statechart).getName());
 		}
 	}
 
