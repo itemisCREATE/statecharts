@@ -31,12 +31,10 @@ public class XBaseInterpreterResource extends XbaseResource implements
 	@Inject
 	private IExpressionInterpreter interpreter;
 
-	@Override
 	public IEvaluationResult evaluate(XExpression expression) {
 		return interpreter.evaluate(expression);
 	}
 
-	@Override
 	public IEvaluationResult evaluate(XExpression expression,
 			IEvaluationContext context, CancelIndicator cancelIndicator) {
 		return interpreter.evaluate(expression, context, cancelIndicator);
