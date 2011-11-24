@@ -144,6 +144,21 @@ public class SGenWizardPage2 extends WizardPage {
 		Composite container = new Composite(parent, SWT.NULL);
 		setControl(container);
 		container.setLayout(new GridLayout(1, false));
+		
+		
+		Label lblGenerator = new Label(container, SWT.NONE);
+		lblGenerator.setText("Generator");
+
+		generatorCombo = new ComboViewer(container, SWT.READ_ONLY);
+		generatorCombo.getCombo().setLayoutData(
+				new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		generatorCombo.setLabelProvider(new GeneratorDescriptorLabelProvider());
+		generatorCombo.setContentProvider(new ArrayContentProvider());
+		GeneratorDescriptor[] generatorArray = Iterables.toArray(
+				GeneratorExtensions.getGeneratorDescriptors(),
+				GeneratorDescriptor.class);
+		generatorCombo.setInput(generatorArray);
+		generatorCombo.getCombo().select(0);
 
 		Label lblNewLabel = new Label(container, SWT.NONE);
 		lblNewLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true,
@@ -170,19 +185,7 @@ public class SGenWizardPage2 extends WizardPage {
 						stateChartTree, checkStateListener));
 		stateChartTree.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
 
-		Label lblGenerator = new Label(container, SWT.NONE);
-		lblGenerator.setText("Generator");
-
-		generatorCombo = new ComboViewer(container, SWT.READ_ONLY);
-		generatorCombo.getCombo().setLayoutData(
-				new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		generatorCombo.setLabelProvider(new GeneratorDescriptorLabelProvider());
-		generatorCombo.setContentProvider(new ArrayContentProvider());
-		GeneratorDescriptor[] generatorArray = Iterables.toArray(
-				GeneratorExtensions.getGeneratorDescriptors(),
-				GeneratorDescriptor.class);
-		generatorCombo.setInput(generatorArray);
-		generatorCombo.getCombo().select(0);
+		
 
 		checkComplete();
 
