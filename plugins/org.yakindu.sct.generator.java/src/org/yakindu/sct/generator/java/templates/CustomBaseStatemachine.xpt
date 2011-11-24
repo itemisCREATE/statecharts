@@ -16,6 +16,7 @@ Contributors:
 «IMPORT ecore»
 
 «IMPORT org::yakindu::sct::generator::java::templates»
+«EXTENSION org::yakindu::sct::generator::java::templates::BaseExtension»
 «EXTENSION org::yakindu::sct::generator::java::templates::Expression»
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
@@ -25,6 +26,14 @@ Contributors:
 
 «DEFINE EntryCode FOR Step-»
 // EntryCode for Step «toString()» not defined
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR StateSwitch-»
+	«FOREACH cases AS stateCase ITERATOR iter -»
+	«IF iter.counter1 > 1»else «ENDIF»if (activeStates.contains(State.«stateCase.state.getName()»)) {
+		«EXPAND ActionCode FOR stateCase.step»
+	}
+	«ENDFOREACH-»
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR ScheduleTimeEvent-»
@@ -108,13 +117,9 @@ else {
   «ENDFOREACH-»
 «ENDDEFINE»
 
-«DEFINE CycleCode FOR Cycle-» 
-	«EXPAND ActionCode FOREACH this.steps-»
-«ENDDEFINE»
-
 «DEFINE CycleMethodsImplement FOR ExecutionState-»
 	private void cycle«getName()»(Collection<?> events) {
-		«EXPAND CycleCode FOR cycle-»
+		«EXPAND ActionCode FOREACH cycle.steps-»
 	}
 «ENDDEFINE»
 
@@ -134,17 +139,20 @@ else {
 «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE EntryCode FOR EnterState-»
-	public void «statemachineEntryFunctionName()» {
-		«IF isTimedStatemachine((ExecutionFlow)eContainer.eContainer)-»
-		cycleStartTime = System.currentTimeMillis();
-		«ENDIF-»
-		«EXPAND ActionCode FOR this-»
-		«IF state.entryAction != null-»
-		«state.entryAction.entryActionFunctionName()»();
-		«ENDIF»
-		
+«DEFINE EnterSequenceImplement FOR ExecutionState»
+	«IF enterSequence.steps.size > 0 -»
+	private void «enterSequenceName()»() {
+		«EXPAND ActionCode FOREACH enterSequence.steps-»
 	}
+	«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE ExitSequenceImplement FOR ExecutionState-»
+	«IF exitSequence.steps.size > 0 -»
+	private void «exitSequenceName()»() {
+		«EXPAND ActionCode FOREACH exitSequence.steps-»
+	}
+	«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
@@ -170,7 +178,7 @@ import «entry.getBasePackageName()».IStatemachine;
 import «entry.getBasePackageName()».ValuedEvent;
 «ENDIF-»
 
-public abstract class «getBaseStatemachineName()» implements «getImplementationType()» {
+public abstract class «getBaseStatemachineName()» implements «getStatemachineImplementationType()» {
 	
 	«FOREACH getInternalScopeEvents() AS event-»
 	private final «event.getEventType()» «event.getName()» = new «event.getEventType()»(«event.getCreationSignature()»); 
@@ -221,25 +229,23 @@ public abstract class «getBaseStatemachineName()» implements «getImplementationT
 	protected Collection<Event> getOutEvents(){
 		return outEvents;
 	}
-		
-	«EXPAND EntryCode FOREACH enterSequence.steps-»
 	
 	protected boolean eventOccured() {
 		return !getOccuredEvents().isEmpty();
 	}
 	
-	@Override
+	
 	public void init() {
 		
 	}
 	
 	«IF isTimedStatemachine()-»
-	@Override
+	
 	public void setTimerHandler(ITimerHandler timerHandler) {
 		this.timerHandler = timerHandler;
 	}
 
-	@Override
+	
 	public ITimerHandler getTimerHandler() {
 		if (timerHandler == null) {
 			throw new NullPointerException("TimerHandler of statemachine \"+«name»+\" not set!");
@@ -247,7 +253,6 @@ public abstract class «getBaseStatemachineName()» implements «getImplementationT
 		return timerHandler;
 	}
 	
-	@Override
 	public void notify(Notification<?> notification) {
 		if (notification instanceof EventNotification) {
 			EventNotification eventNotification = (EventNotification) notification;
@@ -266,6 +271,7 @@ public abstract class «getBaseStatemachineName()» implements «getImplementationT
 	}
 	
 	«ENDFOREACH-»
+	«REM»create getters and setters for events«ENDREM»
 	«FOREACH getInternalScopeEvents() AS event-»
 	private void raise«event.name.toFirstUpper()»() {
 		getOccuredEvents().add(«event.getName()»);
@@ -277,12 +283,13 @@ public abstract class «getBaseStatemachineName()» implements «getImplementationT
 		getOccuredEvents().add(«event.getName()»);
 	}
 	
-	private «event.type.getJavaType()» get«event.getValueName().toFirstUpper()»() {
-		return «event.getName()».getValue();
+	«ENDIF-»
+	private «event.getEventType()» get«event.getName()»() {
+		return «event.getName()»;
 	}
 	
-	«ENDIF-»
 	«ENDFOREACH-»
+	«REM»Create getters and setters for variables«ENDREM»
 	«FOREACH getInternalScopeVariables() AS variable-»
 	private «variable.type.getJavaType()» get«variable.getValueName().toFirstUpper()»() {
 		return «variable.getValueName()»;
@@ -293,11 +300,20 @@ public abstract class «getBaseStatemachineName()» implements «getImplementationT
 	}	
 	
 	«ENDFOREACH-»
+	«REM»Create enterSequences for statemachine«ENDREM»
+	«IF enterSequence.steps.size > 0 -»
+	public void «enterSequenceName()»() {
+		«EXPAND ActionCode FOREACH enterSequence.steps-»
+	}
+	«ENDIF-»
+	
 «EXPAND ConditionMethodsImplement FOREACH this.states-»
 «EXPAND StatementMethodsImplement FOREACH this.states-»
-«EXPAND CycleMethodsImplement FOREACH this.states-»
 «EXPAND EnterMethodImplement FOREACH this.states-»
 «EXPAND ExitMethodImplement FOREACH this.states-»
+«EXPAND EnterSequenceImplement FOREACH this.states-»
+«EXPAND ExitSequenceImplement FOREACH this.states-»
+«EXPAND CycleMethodsImplement FOREACH this.states-»
 	protected void runCycle(Collection<?> events) {
 		«IF isTimedStatemachine()-»
 		cycleStartTime = System.currentTimeMillis();

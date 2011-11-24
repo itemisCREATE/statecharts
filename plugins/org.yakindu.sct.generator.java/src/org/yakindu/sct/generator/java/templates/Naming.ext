@@ -17,40 +17,19 @@ import sgraph;
 import sgen;
 
 extension org::yakindu::sct::generator::java::templates::Expression;
+extension org::yakindu::sct::generator::java::templates::BaseExtension;
 
-List declaredVariables(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(VariableDefinition);
-
-getInterfaceScope(ExecutionFlow this) : scopes.typeSelect(InterfaceScope);
-getInterfaceScopeDeclarations(ExecutionFlow this) : getInterfaceScope().declarations;
-getInterfaceScopeVariables(ExecutionFlow this) : getInterfaceScopeDeclarations().typeSelect(VariableDefinition);
-getInterfaceScopeEvents(ExecutionFlow this) : getInterfaceScopeDeclarations().typeSelect(EventDefinition);
-getInterfaceScopeVoidEvents(ExecutionFlow this) : getInterfaceScopeEvents().select(e|e.type==Type::void);
-getInterfaceScopeValuedEvents(ExecutionFlow this) : getInterfaceScopeEvents().select(e|e.type!=Type::void);
-
-getInternalScope(ExecutionFlow this) : scopes.typeSelect(InternalScope);
-getInternalScopeDeclarations(ExecutionFlow this) : getInternalScope().declarations;
-getInternalScopeVariables(ExecutionFlow this) :	getInternalScopeDeclarations().typeSelect(VariableDefinition);
-getInternalScopeEvents(ExecutionFlow this) : getInternalScopeDeclarations().typeSelect(EventDefinition);
-getInternalScopeVoidEvents(ExecutionFlow this) :getInternalScopeEvents().select(e|e.type==Type::void);
-getInternalScopeValuedEvents(ExecutionFlow this) : getInternalScopeEvents().select(e|e.type!=Type::void);
-getTimeEvents(ExecutionFlow this) : scopes.typeSelect(Scope).declarations.typeSelect(TimeEvent);
-
-boolean isTimedStatemachine(ExecutionFlow this) :
-	getTimeEvents().size > 0;
-
-String getStatemachineName(ExecutionFlow this) : name.toFirstUpper();
+String getStatemachineName(ExecutionFlow this) : (name.toLowerCase() == "default")? name.toFirstUpper()+"SM" : name.toFirstUpper();
 String getBaseStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "AbstractBaseStatemachine";
+String getBaseStatemachineName(InterfaceScope this) : ((ExecutionFlow)eContainer).getBaseStatemachineName();
 String getEventBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "EventBasedStatemachine";
 String getCycleBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "CyleBasedStatemachine";
 
-String getImplementationType(ExecutionFlow this):
+String getStatemachineImplementationType(ExecutionFlow this):
 	if isTimedStatemachine() then
 		"ITimedStatemachine"
 	else
 		"IStatemachine"; 
-
-String getCustomPackage(ExecutionFlow this) : "org/yakindu/sct/runtime/java/"+getStatemachineName().toLowerCase()+"/";
-String getCustomPackage(InterfaceScope this) : "org/yakindu/sct/runtime/java/"+getStatemachineName((ExecutionFlow)eContainer).toLowerCase()+"/";
 
 String getInterfaceName(InterfaceScope this) :  
 	if name!=null then
@@ -59,12 +38,6 @@ String getInterfaceName(InterfaceScope this) :
 		"InterfaceDefault";
 		 
 String getInterfaceImplName(InterfaceScope this) :  getInterfaceName() + "Impl";
-String getBaseStatemachineName(InterfaceScope this) : ((ExecutionFlow)eContainer).getBaseStatemachineName();
-
-String getQualifiedName(EventDefinition this) : getContext() + name.toFirstUpper();
-		
-String getValueName(EventDefinition this) : "eventValue"+name.toFirstUpper();
-String getInternalName(EventDefinition this) : name.toFirstUpper();
 
 String getInitialValue(EventDefinition this) :
 	if derivation != null then
@@ -80,12 +53,19 @@ String getInitialValue(EventDefinition this) :
 		default : ""
 		};
 
-String getInitialValueAssignment(EventDefinition this) :
-	if derivation != null then
-		" = " + derivation.condition.toCode()
+String getCreationSignature(EventDefinition this) :
+	if type == Type::void then
+		"\""+name+"\""
 	else
-		null;
-		
+		"\""+name+"\", "+getInitialValue();
+
+String getEventType(EventDefinition this) :
+	if type == Type::void then
+		"Event"
+	else
+		"ValuedEvent<"+type.getJavaClassType()+">";
+
+	
 String getInitialValueAssignment(VariableDefinition this) : 
 	if initialValue != null then
 		" = " + initialValue
@@ -96,30 +76,15 @@ String getValueName(VariableDefinition this) : "var"+name.toFirstUpper();
 
 String getName(ExecutionState this) :
 	simpleName.replaceAll(" ","").toFirstUpper();
+	
+String getName(ExecutionFlow this) :
+	name.replaceAll(" ","").toFirstUpper();
 
 String getName(Event this) :
 	"Event"+name.toFirstUpper();
 
 String getName(TimeEvent this) :
 	name.replaceAll(" ","").toFirstUpper();
-
-String getterVisibility(EventDefinition this) : 
-	switch (direction) {
-	case (Direction::OUT) : "public"
-	case (Direction::IN) : "private"
-	default : "private"
-	};
-	
-String setterVisibility(EventDefinition this) : 
-	switch (direction) {
-	case (Direction::OUT) : "private"
-	case (Direction::IN) : "public"
-	default : "private"
-	};
-	
-String setterValueVisibility(VariableDefinition this) : 
-	if (readonly) then "private"
-	else "public";
 
 String getJavaType(Type type) :
 		switch (type) {
@@ -129,7 +94,7 @@ String getJavaType(Type type) :
 		case (Type::string) : "string"
 		default : ""
 		};
-
+		
 String getJavaClassType(Type type) :
 		switch (type) {
 		case (Type::real) : "Double"
@@ -139,25 +104,15 @@ String getJavaClassType(Type type) :
 		case (Type::void) : "Void"
 		default : ""
 		};
-		
-String getEventType(EventDefinition this) :
-	if type == Type::void then
-		"Event"
-	else
-		"ValuedEvent<"+type.getJavaClassType()+">";
-		
-String getCreationSignature(EventDefinition this) :
-	if type == Type::void then
-		"\""+name+"\""
-	else
-		"\""+name+"\", "+getInitialValue();
-
+				
 cached String functionName(Step step) : 
 	(step.isEffect()) ? step.actionFunctionName() : (
 	(step.isReactionCheck()) ? step.checkFunctionName() : (
 	(step.isEntryAction()) ? step.entryActionFunctionName() : ( 
-	(step.isExitAction()) ? step.exitActionFunctionName() : 
-	" !! unknown function type !!" )));
+	(step.isExitAction()) ? step.exitActionFunctionName() :  (
+	(step.isEnterSequence()) ? step.enterSequenceName() : (
+	(step.isExitSequence()) ? step.exitSequenceName() :
+	" // unknown function type "+step )))));
  
 String statemachineEntryFunctionName(EnterState this):
 	if (this.name != null) then
@@ -167,13 +122,21 @@ String statemachineEntryFunctionName(EnterState this):
 
 String actionFunctionName(Step this) : "actions" + getName(reaction().state()) + this.reaction().name.toFirstUpper(); 
 String checkFunctionName(Step this) : "condition" + getName(reaction().state()) + this.reaction().name.toFirstUpper(); 
-String entryActionFunctionName(Step this) : "entryActions" + getName(state()); 
-String exitActionFunctionName(Step this) : "exitActions" + getName(state()); 
+String entryActionFunctionName(Step this) : "entryAction" + getName(state()); 
+String exitActionFunctionName(Step this) : "exitAction" + getName(state());
+String enterSequenceName(Step this) : "enterSequence"+getName(state()); 
+String enterSequenceName(ExecutionState this) : "enterSequence"+getName();
+String enterSequenceName(ExecutionFlow this) : "enterSequenceStatechart"+getName();
+String exitSequenceName(Step this) : "exitSequence"+getName(state()); 
+String exitSequenceName(ExecutionState this) : "exitSequence"+getName();
+String exitSequenceName(ExecutionFlow this) : "enterSequenceStatechart"+getName();
 
 isEffect(Step step) : (! Check.isInstance(step)) && Reaction.isInstance(step.eContainer) ;
 isReactionCheck(Step step) : Reaction.isInstance(step.eContainer) && Check.isInstance(step);
 isEntryAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().entryAction == step;
 isExitAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().exitAction == step;
+isEnterSequence(Step step) : Sequence.isInstance(step) && step.name == "enterSequence";
+isExitSequence(Step step) : Sequence.isInstance(step) && step.name == "exitSequence";
 
 Reaction reaction(Step this) : (Reaction) this.eContainer ;
 ExecutionState state(Reaction this) : (ExecutionState) eContainer;
@@ -190,21 +153,6 @@ String getContext(Event this) :
 		getInterfaceName((InterfaceScope)eContainer).toFirstUpper()+"."
 	else 
 		"";
-		
-boolean hasOutgoingEvents(Scope this) :
-	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).isEmpty;
-
-boolean hasOutgoingVoidEvents(Scope this) :
-	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).select(event|event.type == Type::void).isEmpty;
-	
-boolean hasOutgoingValuedEvents(Scope this) :
-	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).select(event|event.type != Type::void).isEmpty;
-
-boolean hasEvents(Scope this) :
-	!declarations.typeSelect(EventDefinition).select(event|event.type == Type::void).isEmpty;
-	
-boolean hasValuedEvents(Scope this) :
-	!declarations.typeSelect(EventDefinition).select(event|event.type != Type::void).isEmpty;
 	
 String getInterfaceExtension(Scope this):
 	if (hasOutgoingEvents()) then
@@ -217,11 +165,20 @@ String getInterfaceImplExtension(Scope this):
 		" extends NotificationSender"
 	else
 		null;
+
+String getNamingFeature() :
+ JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getNamingFeature();
+ 
+String getBasePackage() :
+ JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getBasePackage();
+ 
+String getImplementationSuffix() :
+ JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getImplementationSuffix();
 		
 String getBasePackageName(GeneratorEntry entry):
-	if entry.getFeatureConfiguration("NamingFeature")!=null 
-		&& entry.getFeatureConfiguration("NamingFeature").getParameterValue("basePackage")!=null then
-		entry.getFeatureConfiguration("NamingFeature").getParameterValue("basePackage").getStringValue()
+	if entry.getFeatureConfiguration(getNamingFeature())!=null 
+		&& entry.getFeatureConfiguration(getNamingFeature()).getParameterValue(getBasePackage())!=null then
+		entry.getFeatureConfiguration(getNamingFeature()).getParameterValue(getBasePackage()).getStringValue()
 	else
 		"org.yakindu.sct.runtime.java";
 
@@ -229,9 +186,9 @@ String getBasePackagePath(GeneratorEntry entry):
 	entry.getBasePackageName().replaceAll("\\.","/");
 	
 String getImplementationSuffix(GeneratorEntry entry, ExecutionFlow flow):
-	if entry.getFeatureConfiguration("NamingFeature")!=null
-		&& entry.getFeatureConfiguration("NamingFeature").getParameterValue("implementationSuffix") != null then
-		entry.getFeatureConfiguration("NamingFeature").getParameterValue("implementationSuffix").getStringValue()
+	if entry.getFeatureConfiguration(getNamingFeature())!=null
+		&& entry.getFeatureConfiguration(getNamingFeature()).getParameterValue(getImplementationSuffix()) != null then
+		entry.getFeatureConfiguration(getNamingFeature()).getParameterValue(getImplementationSuffix()).getStringValue()
 	else 
 		flow.getStatemachineName();
 

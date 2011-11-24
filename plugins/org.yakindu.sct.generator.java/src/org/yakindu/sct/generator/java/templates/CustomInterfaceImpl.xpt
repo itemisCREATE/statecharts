@@ -13,6 +13,7 @@ Contributors:
 «IMPORT stext»
 «IMPORT sgraph»
 
+«EXTENSION org::yakindu::sct::generator::java::templates::BaseExtension»
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 «EXTENSION org::yakindu::sct::generator::java::templates::Expression»
 
