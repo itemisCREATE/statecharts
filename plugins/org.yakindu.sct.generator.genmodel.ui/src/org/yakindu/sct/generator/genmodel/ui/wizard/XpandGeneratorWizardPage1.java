@@ -21,7 +21,7 @@ public class XpandGeneratorWizardPage1 extends WizardPage {
 	private static final String GENERATOR_ID_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*::)+[a-zA-Z_][a-zA-Z0-9_]*"; //$NON-NLS-1$
 	private static final String GENERATOR_CLASS_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*\\.)+[a-zA-Z_][a-zA-Z0-9_]*"; //$NON-NLS-1$
 	// project will be an OSGI bundle, so there are some name restrictions
-	private static final String PROJECT_REGEX = "[A-Za-z0-9\\._]"; //$NON-NLS-1$
+	private static final String PROJECT_REGEX = "[A-Za-z0-9\\._]+"; //$NON-NLS-1$
 	private Group generatorGroup;
 	private Text txtGeneratorDesc;
 	private Text txtGeneratorId;
