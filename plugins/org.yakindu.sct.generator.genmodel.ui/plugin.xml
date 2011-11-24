@@ -215,6 +215,14 @@
             name="YAKINDU Statechart Generator Model"
             project="false">
       </wizard>
+      <wizard
+            category="YAKINDU"
+            class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.yakindu.sct.generator.genmodel.ui.wizard.XpandGeneratorProjectWizard"
+            icon="icons/GenModel-16.png"
+            id="org.yakindu.sct.generator.genmodel.ui.XtendGeneratorProjectWizard"
+            name="YAKINDU Xpand Generator Project"
+            project="true">
+      </wizard>
    </extension>
 
   <extension point="org.eclipse.compare.contentViewers">

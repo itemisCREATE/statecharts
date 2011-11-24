@@ -1,0 +1,16 @@
+«IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
+«IMPORT sgen»
+
+«DEFINE main(sgen::GeneratorEntry entry) FOR sexec::ExecutionFlow-»
+«FILE this.name+'.txt' -»
+The name of the Statemachine is '«this.name-»'
+
+The Statemachine has the following states:
+
+«FOREACH this.states AS state-»
+«state.name.replaceFirst(this.name+'\\.','')»
+«ENDFOREACH-»
+«ENDFILE-»
+«ENDDEFINE»
