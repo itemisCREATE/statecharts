@@ -55,7 +55,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.yakindu.sct.generator.base.ISCTGenerator"/>
+                  <meta.attribute kind="java" basedOn=":org.yakindu.sct.generator.core.ISCTGenerator"/>
                </appinfo>
             </annotation>
          </attribute>
