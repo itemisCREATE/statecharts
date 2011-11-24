@@ -20,6 +20,7 @@ import org.yakindu.sct.model.sgraph.NamedElement;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.FeatureType#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.FeatureType#getLibrary <em>Library</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgen.FeatureType#isOptional <em>Optional</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,5 +61,32 @@ public interface FeatureType extends NamedElement {
 	 * @generated
 	 */
 	FeatureTypeLibrary getLibrary();
+
+	/**
+	 * Returns the value of the '<em><b>Optional</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Optional</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Optional</em>' attribute.
+	 * @see #setOptional(boolean)
+	 * @see org.yakindu.sct.model.sgen.SGenPackage#getFeatureType_Optional()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isOptional();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sgen.FeatureType#isOptional <em>Optional</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Optional</em>' attribute.
+	 * @see #isOptional()
+	 * @generated
+	 */
+	void setOptional(boolean value);
 
 } // FeatureType

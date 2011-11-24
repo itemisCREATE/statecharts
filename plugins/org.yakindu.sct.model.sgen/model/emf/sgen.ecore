@@ -18,10 +18,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="library" lowerBound="1"
         eType="#//FeatureTypeLibrary" changeable="false" volatile="true" transient="true"
         derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureParameter" eSuperTypes="../../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="featureType" eType="#//FeatureType"
         eOpposite="#//FeatureType/parameters"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterType" eType="#//ParameterTypes"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureConfiguration">
     <eOperations name="getParameterValue" eType="#//FeatureParameterValue">
@@ -58,5 +63,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
         eType="#//FeatureType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ParameterTypes">
+    <eLiterals name="STRING" value="1"/>
+    <eLiterals name="FLOAT" value="2" literal="FLOAT"/>
+    <eLiterals name="BOOLEAN"/>
+    <eLiterals name="INTEGER" value="3"/>
   </eClassifiers>
 </ecore:EPackage>

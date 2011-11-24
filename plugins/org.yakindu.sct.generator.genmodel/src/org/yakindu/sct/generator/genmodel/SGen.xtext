@@ -3,7 +3,6 @@ grammar org.yakindu.sct.generator.genmodel.SGen with org.eclipse.xtext.xbase.Xba
 import "platform:/resource/org.yakindu.sct.model.sgen/model/emf/sgen.ecore" as gen
 import "platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore" as sct
 import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
- 
 
 /**
  * @author Andreas Muelder
@@ -16,19 +15,27 @@ GeneratorModel returns gen::GeneratorModel:
 GeneratorEntry returns gen::GeneratorEntry:
 	'statechart' statechart=[sct::Statechart] '{'
 	(features+=FeatureConfiguration)*
-	'}';  
+	'}';
 
 FeatureConfiguration returns gen::FeatureConfiguration:
 	{gen::FeatureConfiguration} 'feature' type=[gen::FeatureType] '{'
 	(parameterValues+=FeatureParameterValue)+
 	'}';
 
-FeatureParameterValue returns gen::FeatureParameterValue: 
+FeatureParameterValue returns gen::FeatureParameterValue:
 	{gen::FeatureParameterValue} parameter=[gen::FeatureParameter] '=' expression=XExpression;
 
 XPrimaryExpression returns xbase::XExpression:
 	XFeatureCall |
 	XLiteral |
 	XParenthesizedExpression;
+	
+XLiteral returns xbase::XExpression:
+	XBooleanLiteral |
+	XIntLiteral |
+	XNullLiteral |
+	XStringLiteral
+;
+
 QID:
 	ID (('::' | '.') ID)*; 
