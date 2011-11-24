@@ -31,6 +31,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
  * <!-- end-user-doc -->
  * @generated
  */
+@SuppressWarnings("restriction")
 public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	/**
 	 * <!-- begin-user-doc -->
