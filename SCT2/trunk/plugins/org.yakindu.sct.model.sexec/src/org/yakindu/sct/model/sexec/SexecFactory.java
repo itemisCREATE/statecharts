@@ -152,6 +152,24 @@ public interface SexecFactory extends EFactory {
 	UnscheduleTimeEvent createUnscheduleTimeEvent();
 
 	/**
+	 * Returns a new object of class '<em>State Switch</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>State Switch</em>'.
+	 * @generated
+	 */
+	StateSwitch createStateSwitch();
+
+	/**
+	 * Returns a new object of class '<em>State Case</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>State Case</em>'.
+	 * @generated
+	 */
+	StateCase createStateCase();
+
+	/**
 	 * Returns a new object of class '<em>Check Ref</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

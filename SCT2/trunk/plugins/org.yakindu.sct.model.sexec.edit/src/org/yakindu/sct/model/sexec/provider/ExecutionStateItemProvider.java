@@ -277,6 +277,11 @@ public class ExecutionStateItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createStateSwitch()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createSequence()));
 
@@ -329,6 +334,11 @@ public class ExecutionStateItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createUnscheduleTimeEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createStateSwitch()));
 
 		newChildDescriptors.add
 			(createChildParameter

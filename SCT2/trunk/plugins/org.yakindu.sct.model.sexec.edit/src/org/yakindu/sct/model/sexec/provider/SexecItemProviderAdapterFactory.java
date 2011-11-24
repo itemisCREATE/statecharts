@@ -396,6 +396,52 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.StateSwitch} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StateSwitchItemProvider stateSwitchItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.StateSwitch}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStateSwitchAdapter() {
+		if (stateSwitchItemProvider == null) {
+			stateSwitchItemProvider = new StateSwitchItemProvider(this);
+		}
+
+		return stateSwitchItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.StateCase} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StateCaseItemProvider stateCaseItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.StateCase}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStateCaseAdapter() {
+		if (stateCaseItemProvider == null) {
+			stateCaseItemProvider = new StateCaseItemProvider(this);
+		}
+
+		return stateCaseItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.CheckRef} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -580,6 +626,8 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (callItemProvider != null) callItemProvider.dispose();
 		if (scheduleTimeEventItemProvider != null) scheduleTimeEventItemProvider.dispose();
 		if (unscheduleTimeEventItemProvider != null) unscheduleTimeEventItemProvider.dispose();
+		if (stateSwitchItemProvider != null) stateSwitchItemProvider.dispose();
+		if (stateCaseItemProvider != null) stateCaseItemProvider.dispose();
 	}
 
 }
