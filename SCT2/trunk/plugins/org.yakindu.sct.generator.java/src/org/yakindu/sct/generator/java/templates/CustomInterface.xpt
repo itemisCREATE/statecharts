@@ -14,6 +14,7 @@ Contributors:
 «IMPORT sgraph»
 
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
+«EXTENSION org::yakindu::sct::generator::java::templates::BaseExtension»
 
 «DEFINE file(sgen::GeneratorEntry entry) FOR InterfaceScope-»
 «FILE getImplementationPackagePath(entry)+"/"+getInterfaceName() + '.java'-»
