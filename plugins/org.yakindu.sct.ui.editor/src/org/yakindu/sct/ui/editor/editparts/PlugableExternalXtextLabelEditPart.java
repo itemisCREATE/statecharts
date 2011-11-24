@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import java.util.Collections;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.gef.EditPolicy;
@@ -36,6 +38,7 @@ import com.google.inject.Injector;
 import de.itemis.gmf.runtime.commons.parsers.AttributeParser;
 import de.itemis.xtext.utils.gmf.directedit.ExternalXtextLabelEditPart;
 import de.itemis.xtext.utils.gmf.directedit.XtextDirectEditManager;
+import de.itemis.xtext.utils.jface.viewers.context.CloningBasedFakeContextResourcesProvider;
 
 /**
  * 
@@ -79,7 +82,11 @@ public abstract class PlugableExternalXtextLabelEditPart extends
 	@Override
 	protected DirectEditManager createDirectEditManager() {
 		if (injector != null) {
-			return new XtextDirectEditManager(this, injector, getEditorStyles());
+			CloningBasedFakeContextResourcesProvider fakeContext = new CloningBasedFakeContextResourcesProvider(
+					Collections.singletonList(resolveSemanticElement()
+							.eResource()));
+			return new XtextDirectEditManager(this, injector,
+					getEditorStyles(), fakeContext);
 		} else {
 			return new TextDirectEditManager(this);
 		}
