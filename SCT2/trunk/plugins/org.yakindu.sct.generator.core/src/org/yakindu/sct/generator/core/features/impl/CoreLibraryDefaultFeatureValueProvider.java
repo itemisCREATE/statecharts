@@ -47,7 +47,6 @@ public class CoreLibraryDefaultFeatureValueProvider extends
 	}
 
 	public IStatus validateParameterValue(FeatureParameterValue parameterValue) {
-		// FIXME:
 		String parameterName = parameterValue.getParameter().getName();
 		if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName)
 				&& !projectExists(parameterValue.getStringValue()))

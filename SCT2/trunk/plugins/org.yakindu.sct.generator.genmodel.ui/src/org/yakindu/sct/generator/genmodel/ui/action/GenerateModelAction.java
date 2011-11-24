@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.action;
 
-import java.util.List;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -26,16 +24,12 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
-import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.yakindu.sct.generator.core.ISCTGenerator;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
-import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
-import org.yakindu.sct.model.sgen.impl.FeatureParameterValueImpl;
 
 import com.google.inject.Inject;
 
@@ -44,7 +38,6 @@ import com.google.inject.Inject;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-@SuppressWarnings("restriction")
 public class GenerateModelAction implements IObjectActionDelegate {
 
 	private ISelection selection;
@@ -52,23 +45,12 @@ public class GenerateModelAction implements IObjectActionDelegate {
 	@Inject
 	private XtextResourceSetProvider provider;
 
-	@Inject
-	private IExpressionInterpreter interpreter;
-
 	public void run(IAction action) {
 		IFile file = unwrap();
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(),
 				true);
 		Resource resource = loadResource(uri);
 		GeneratorModel model = (GeneratorModel) resource.getContents().get(0);
-
-		// TODO: DIRTY
-		List<FeatureParameterValue> contents = EcoreUtil2.getAllContentsOfType(
-				model, FeatureParameterValue.class);
-		for (FeatureParameterValue featureParameterValue : contents) {
-			((FeatureParameterValueImpl) featureParameterValue)
-					.setInterpreter(interpreter);
-		}
 
 		String generatorId = model.getGeneratorId();
 		GeneratorDescriptor description = GeneratorExtensions

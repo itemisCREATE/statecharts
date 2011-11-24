@@ -192,6 +192,8 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 	protected boolean isDumpSexec(GeneratorEntry entry) {
 		FeatureParameterValue dumpSexec = getFeatureParameter(entry,
 				DEBUG_FEATURE, DEBUG_FEATURE_DUMP_SEXEC);
+		if (dumpSexec == null)
+			return false;
 		return dumpSexec.getBooleanValue();
 	}
 
