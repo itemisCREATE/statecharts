@@ -6,8 +6,6 @@
  */
 package org.yakindu.sct.model.sgen.impl;
 
-import java.nio.channels.IllegalSelectorException;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
