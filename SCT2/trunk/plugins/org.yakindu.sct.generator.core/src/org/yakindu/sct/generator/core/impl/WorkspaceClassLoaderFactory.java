@@ -36,6 +36,21 @@ import com.google.common.collect.Lists;
  */
 public class WorkspaceClassLoaderFactory {
 
+	private final boolean resolveSimpleProjectReferences;
+
+	public WorkspaceClassLoaderFactory() {
+		this(false);
+	}
+
+	/**
+	 * @param resolveSimpleProjectReferences
+	 *            whether project references should be resolved for non-java
+	 *            projects
+	 */
+	public WorkspaceClassLoaderFactory(boolean resolveSimpleProjectReferences) {
+		this.resolveSimpleProjectReferences = resolveSimpleProjectReferences;
+	}
+
 	/**
 	 * Creates a {@link ClassLoader} that can be used to load resources from the
 	 * workspace.
@@ -59,7 +74,9 @@ public class WorkspaceClassLoaderFactory {
 			} catch (MalformedURLException e1) {
 				e1.printStackTrace();
 			}
-			addReferencedProjectsClasspaths(project, urls);
+			if (resolveSimpleProjectReferences) {
+				addReferencedProjectsClasspaths(project, urls);
+			}
 		}
 	}
 

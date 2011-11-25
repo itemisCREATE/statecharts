@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sgen:FeatureTypeLibrary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sgen="http://www.yakindu.org/sct/statechart/SGen" xsi:schemaLocation="http://www.yakindu.org/sct/statechart/SGen ../../org.yakindu.sct.model.sgen/model/emf/sgen.ecore" name="Java">
+  <types name="Generator">
+    <parameters name="generatorProject"/>
+    <parameters name="generatorClass"/>
+  </types>
+</sgen:FeatureTypeLibrary>
