@@ -113,12 +113,10 @@ public class XpandGeneratorWizardPage1 extends WizardPage {
 		GridDataFactory.fillDefaults().grab(true, false)
 				.applyTo(txtGeneratorDesc);
 
-		// TODO : implement Feature Type Library generation
 		Label lblLibraryCheckBox = new Label(generatorGroup, SWT.WRAP);
 		lblLibraryCheckBox.setText("Create Fetaure Library");
-		lblLibraryCheckBox.setVisible(false);
+
 		cbLibrary = new Button(generatorGroup, SWT.CHECK);
-		cbLibrary.setVisible(false);
 
 		setGeneratorGroupEnabled(false);
 		setPageComplete(false);

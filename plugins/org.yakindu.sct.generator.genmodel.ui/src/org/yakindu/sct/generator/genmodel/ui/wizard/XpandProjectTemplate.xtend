@@ -33,7 +33,12 @@ import org.eclipse.core.resources.IProject
 import org.eclipse.core.runtime.SubProgressMonitor
 import java.io.ByteArrayOutputStream
 import java.io.BufferedInputStream
-
+import org.yakindu.sct.model.sgen.SGenFactory
+import org.yakindu.sct.model.sgen.ParameterTypes
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.common.util.URI
+import java.util.Collections
 
 /**
  * 
@@ -48,7 +53,7 @@ class XpandProjectTemplate {
 	}
 
 	def generate(ProjectData data) {
-		monitor.beginTask("Create YAKINDU Xpand Generator Project", 12);
+		monitor.beginTask("Create YAKINDU Xpand Generator Project", 15);
 		val project = ResourcesPlugin::workspace.root.getProject(data.projectName);
 		project.create(monitor.sub)
 		project.open(monitor.sub)
@@ -56,17 +61,24 @@ class XpandProjectTemplate {
 		project.createFolder('src')
 		project.getFile('.settings/org.eclipse.core.resources.prefs')
 			.write(data.projectSettings(ResourcesPlugin::encoding))
-		project.getFile('.settings/org.eclipse.xtend.shared.ui.prefs').write(data.xpandSettings)
+		project.getFile('.settings/org.eclipse.xtend.shared.ui.prefs')
+			.write(data.xpandSettings)
 		project.getFile('build.properties').write(data.buildProperties)
 		project.getFile('META-INF/MANIFEST.MF').write(data.manifest)
 		project.getFile('src/'+data.targetPackage.asFolder+'/'+data.templateName+'.xpt').
 			write(resource('XpandDefaultTemplate.xpt'.fromMyFolder,'iso-8859-1'))
 		if (data.pluginExport) {
 			project.getFile('plugin.xml').write(data.plugin)
-			project.getFile('src/'+data.generatorClass.javaFilename).write(data.generator)
+			project.getFile('src/'+data.generatorClass.javaFilename)
+				.write(data.generator)
 			if (data.typeLibrary) {
 				project.createFolder('library')
-				//TODO create FeatureTypeLibrary.xmi
+				project.getFile('library/FeatureTypeLibrary.xmi')
+					.write(data.featureLibrary)
+				project.getFile('src/'+data.providerClass.javaFilename)
+					.write(data.defaultProvider)
+				project.getFile('src/'+data.libraryConstantsClass.javaFilename)
+					.write(data.libraryConstants)
 			}	
 		}
 		project.getFile('.classpath').write(data.classpath);
@@ -114,9 +126,35 @@ class XpandProjectTemplate {
 	def providerClass(ProjectData data){
 		data.generatorClass+'DefaultValueProvider'
 	}
+
+	def libraryConstantsClass(ProjectData data){
+		data.providerClass.packageName+'.IFeatureConstants'
+	}
 	
 	def javaFilename(String s) {
 		s.replaceAll('\\.','/')+'.java'
+	}
+	
+	def featureLibrary(ProjectData data) {
+		val factory = SGenFactory::eINSTANCE
+		val lib = factory.createFeatureTypeLibrary
+		lib.name=data.generatorName
+		val type = factory.createFeatureType
+		type.name='MyFeature'
+		val parameter = factory.createFeatureParameter
+		parameter.name='MyParameter'
+		parameter.parameterType=ParameterTypes::STRING
+		type.parameters.add(parameter)
+		lib.types.add(type)
+		return lib		
+	}
+	
+	def write(IFile file, EObject object) {
+		val uri = URI::createPlatformResourceURI(file.fullPath.toString,true)
+		val resourceSet = new ResourceSetImpl()
+		val resource = resourceSet.createResource(uri)
+		resource.contents.add(object)
+		resource.save(Collections::emptyMap)
 	}
 	
 	def write(IFile file, StringConcatenation content) {
@@ -298,31 +336,51 @@ class XpandProjectTemplate {
 	def defaultProvider(ProjectData data) '''
 		package «data.providerClass.packageName»;
 		
+		import static «data.libraryConstantsClass».LIBRARY_NAME;
+		import static «data.libraryConstantsClass».MY_PARAMETER;
+		
+		import org.eclipse.core.runtime.IStatus;
+		import org.eclipse.core.runtime.Status;
 		import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
+		import org.yakindu.sct.model.sgen.FeatureParameterValue;
+		import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
+		import org.yakindu.sct.model.sgraph.Statechart;
 		
 		/**
-		 * Default value proivder for «data.generatorName» feature library
+		 * Default value provider for «data.generatorName» feature library
 		 */
 		public class «data.providerClass.simpleName» extends AbstractDefaultFeatureValueProvider {
 		
-			private static final String LIBRARY_NAME = "«data.generatorName»";
-			
+
+			public boolean isProviderFor(FeatureTypeLibrary library) {
+				return library.getName().equals(LIBRARY_NAME);
+			}
+
 			@Override
 			protected void setDefaultValue(FeatureParameterValue parameterValue,
 					Statechart statechart) {
 				String parameterName = parameterValue.getParameter().getName();
-				//TODO: set the default values
+				if (MY_PARAMETER.equals(parameterName)) {
+					parameterValue.setValue("default value");
+				}
 			}
 		
-			public boolean isProviderFor(FeatureTypeLibrary library) {
-				return library.getName().equals(LIBRARY_NAME);
-			}
-		
-			public IStatus validateParameterValue(FeatureParameterValue value) {
-				String name = value.getParameter().getName();
-				//TODO implement validation
+			public IStatus validateParameterValue(FeatureParameterValue parameterValue) {
+				String parameterName = parameterValue.getParameter().getName();
+				// TODO implement validation
+				// return error("Illegal parameter value");
 				return Status.OK_STATUS;
 			}
+		}
+	'''
+	
+	def libraryConstants(ProjectData data) '''
+		package «data.libraryConstantsClass.packageName»;
+		
+		public interface «data.libraryConstantsClass.simpleName» {
+			public static final String LIBRARY_NAME = "«data.generatorName»";
+			public static final String MY_FEATURE = "MyFeature";
+			public static final String MY_PARAMETER = "MyParameter";
 		}
 	'''
 	
