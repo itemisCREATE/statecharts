@@ -48,7 +48,7 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
 			name = nameConverter.toQualifiedName(nameString);
 		} else if (nameString == null) {
 			// Default interface
-			name = nameConverter.toQualifiedName("default");
+			name = nameConverter.toQualifiedName("");
 		}
 
 		QualifiedName namespace = getNamespace(ele);

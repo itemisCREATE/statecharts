@@ -20,7 +20,7 @@ public class StextNameProvider extends SGraphNameProvider {
 			name = nameConverter.toQualifiedName(ele.getName());
 		} else if (ele.getName() == null) {
 			// Default interface
-			name = nameConverter.toQualifiedName("default");
+			name = nameConverter.toQualifiedName("");
 		}
 
 		QualifiedName namespace = getNamespace(ele);
