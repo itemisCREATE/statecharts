@@ -2,7 +2,6 @@ package org.yakindu.sct.generator.genmodel.ui.wizard;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
@@ -16,7 +15,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-public class XpandGeneratorWizardPage1 extends WizardPage {
+public class XpandGeneratorWizardPage1 extends IProjectWzardPage {
 	// (ID::)+ID
 	private static final String GENERATOR_ID_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*::)+[a-zA-Z_][a-zA-Z0-9_]*"; //$NON-NLS-1$
 	private static final String GENERATOR_CLASS_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*\\.)+[a-zA-Z_][a-zA-Z0-9_]*"; //$NON-NLS-1$
@@ -186,8 +185,10 @@ public class XpandGeneratorWizardPage1 extends WizardPage {
 		cbLibrary.setEnabled(enabled);
 	}
 
+	@Override
 	public ProjectData getProjectData() {
 		ProjectData data = new ProjectData();
+		data.generatorType = GeneratorType.Xpand;
 		data.projectName = txtProjectName.getText().trim();
 		data.generatorClass = txtGeneratorClass.getText().trim();
 		data.generatorDescription = txtGeneratorDesc.getText().trim();
