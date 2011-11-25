@@ -80,8 +80,6 @@ class ModelSequencer {
 		sc.mapScopes(ef)
 		sc.mapStates(ef)
 		sc.mapTimeEvents(ef)
-		// sc.mapTransitions(ef)
-		// sc.mapLocalReactions(ef)
 		
 		// derive all additional information that is necessary for the execution
 		ef.defineStateVector(sc)
@@ -146,11 +144,20 @@ class ModelSequencer {
 		
 	def ExecutionFlow mapStates(Statechart statechart, ExecutionFlow r){
 		var content = EcoreUtil2::eAllContentsAsList(statechart)
-		val allStates = content.filter(e | e instanceof State)
-		r.states.addAll(allStates.map( s | (s as State).mapState));
+		val allStates = statechart.allStates
+		r.states.addAll(allStates.map( s | s.mapState));
 		return r
 	}
 
+
+	// TODO : move to other extension
+	def List<State> allStates(Statechart sc) {
+		var content = EcoreUtil2::eAllContentsAsList(sc)
+		val allStates = content.filter( typeof(State) )
+		
+		return allStates.toList
+	}
+	
 	
 	def ExecutionState mapState(State state) {
 		val _state = state.create
@@ -278,6 +285,7 @@ class ModelSequencer {
 	}	
 	
 	
+	
 	def List<State> exitStates(Transition t) {
 		val l = t.source.containers
 		l.removeAll(t.target.containers)
@@ -290,6 +298,9 @@ class ModelSequencer {
 		l.filter( typeof(State) ).toList
 	}
 	
+	def List<State> parentStates(State s) {
+		s.containers.filter( typeof(State) ).toList		
+	}
 	
 	
 	def List<EObject> containers(EObject obj) {
@@ -415,14 +426,35 @@ class ModelSequencer {
 	 */
 	
 	def defineStateCycles(ExecutionFlow flow, Statechart sc) {
-		flow.states.filter(s | s.leaf).forEach(s | defineCycle(s))	
+		
+		val states = sc.allStates
+		states.filter(s | s.isSimple()).forEach(s | defineCycle(s as State))
+		
+//		flow.states.filter(s | s.leaf).forEach(s | defineCycle(s))	
 		return flow
 	}
 	
 
+	def Cycle defineCycle(State state) {
+	
+		val execState = state.create
+		val stateReaction = execState.createReactionSequence(null)
+		val parents = state.parentStates		
+		execState.cycle = parents.fold(null, [r, s | {
+			s.create.createReactionSequence(r)
+		}])
+		
+		return execState.cycle
+	}	
+
 	def Cycle defineCycle(ExecutionState state) {	
+		state.cycle = state.createReactionSequence(null)
+		return state.cycle
+	}
+	
+
+	def Cycle createReactionSequence(ExecutionState state, Step localStep) {	
 		val cycle = sexecFactory.createCycle
-		state.cycle = cycle
 		
 		val localReactions = state.reactions.filter(r | ! r.transition).toList
 		var localSteps = sexecFactory.createSequence
@@ -432,6 +464,7 @@ class ModelSequencer {
 				ifStep.thenStep = lr.effect.newCall
 				ifStep
 		}))
+		if (localStep != null) localSteps.steps += localStep
 		if (localSteps.steps.empty) localSteps = null
 				
 				
@@ -450,7 +483,7 @@ class ModelSequencer {
 		
 		return cycle
 	}
-	
+
 	
 	def dispatch Check mapToCheck(Trigger tr) { null }
 	  
