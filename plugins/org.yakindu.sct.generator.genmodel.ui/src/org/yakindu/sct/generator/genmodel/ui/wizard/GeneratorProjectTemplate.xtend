@@ -44,7 +44,7 @@ import java.util.Collections
  * 
  * @author holger willebrandt - Initial contribution and API
  */
-class XpandProjectTemplate {
+class GeneratorProjectTemplate {
 	
 	IProgressMonitor monitor
 	
@@ -59,18 +59,21 @@ class XpandProjectTemplate {
 		project.open(monitor.sub)
 		monitor.worked(1)
 		project.createFolder('src')
+		if (data.generatorType == GeneratorType::Xtend){
+			project.createFolder('xtend-gen')
+		}
 		project.getFile('.settings/org.eclipse.core.resources.prefs')
 			.write(data.projectSettings(ResourcesPlugin::encoding))
-		project.getFile('.settings/org.eclipse.xtend.shared.ui.prefs')
-			.write(data.xpandSettings)
+		if (data.generatorType != GeneratorType::Java) {
+			project.getFile('.settings/org.eclipse.xtend.shared.ui.prefs')
+				.write(data.xpandSettings)
+		}
 		project.getFile('build.properties').write(data.buildProperties)
 		project.getFile('META-INF/MANIFEST.MF').write(data.manifest)
-		project.getFile('src/'+data.targetPackage.asFolder+'/'+data.templateName+'.xpt').
-			write(resource('XpandDefaultTemplate.xpt'.fromMyFolder,'iso-8859-1'))
 		if (data.pluginExport) {
 			project.getFile('plugin.xml').write(data.plugin)
 			project.getFile('src/'+data.generatorClass.javaFilename)
-				.write(data.generator)
+				.write(data.xpandGenerator)
 			if (data.typeLibrary) {
 				project.createFolder('library')
 				project.getFile('library/FeatureTypeLibrary.xmi')
@@ -83,6 +86,17 @@ class XpandProjectTemplate {
 		}
 		project.getFile('.classpath').write(data.classpath);
 		project.getFile('.project').write(data.projectFile);
+		switch data.generatorType {
+			case GeneratorType::Xpand :
+				project.getFile('src/'+data.targetPackage.asFolder+'/'+data.templateName+'.xpt').
+					write(resource('XpandDefaultTemplate.xpt'.fromMyFolder,'iso-8859-1'))
+			case GeneratorType::Xtend :
+				project.getFile('src/'+data.generatorClass.xtendFilename).
+					write(data.xtendGenerator)
+			case GeneratorType::Java :
+				project.getFile('src/'+data.generatorClass.javaFilename).
+					write(data.javaGenerator)
+		}
 	}
 	
 	def fromMyFolder(String s) {
@@ -94,7 +108,7 @@ class XpandProjectTemplate {
 	}
 	
 	def templateName(ProjectData data) {
-		if (data.pluginExport)
+		if (data.pluginExport || data.generatorType != GeneratorType::Xpand)
 			data.generatorClass.simpleName
 		else
 			'Main'
@@ -133,6 +147,9 @@ class XpandProjectTemplate {
 	
 	def javaFilename(String s) {
 		s.replaceAll('\\.','/')+'.java'
+	}
+	def xtendFilename(String s) {
+		s.replaceAll('\\.','/')+'.xtend'
 	}
 	
 	def featureLibrary(ProjectData data) {
@@ -224,11 +241,13 @@ class XpandProjectTemplate {
 			<projects>
 			</projects>
 			<buildSpec>
-				<buildCommand>
-					<name>org.eclipse.xtend.shared.ui.xtendBuilder</name>
-					<arguments>
-					</arguments>
-				</buildCommand>
+				«IF data.generatorType != GeneratorType::Java»
+					<buildCommand>
+						<name>org.eclipse.xtend.shared.ui.xtendBuilder</name>
+						<arguments>
+						</arguments>
+					</buildCommand>
+				«ENDIF»
 				<buildCommand>
 					<name>org.eclipse.pde.ManifestBuilder</name>
 					<arguments>
@@ -244,11 +263,23 @@ class XpandProjectTemplate {
 					<arguments>
 					</arguments>
 				</buildCommand>
+				«IF data.generatorType == GeneratorType::Xtend»
+					<buildCommand>
+						<name>org.eclipse.xtext.ui.shared.xtextBuilder</name>
+						<arguments>
+						</arguments>
+					</buildCommand>				
+				«ENDIF»
 			</buildSpec>
 			<natures>
 				<nature>org.eclipse.jdt.core.javanature</nature>
 				<nature>org.eclipse.pde.PluginNature</nature>
-				<nature>org.eclipse.xtend.shared.ui.xtendXPandNature</nature>
+				«IF data.generatorType != GeneratorType::Java»
+					<nature>org.eclipse.xtend.shared.ui.xtendXPandNature</nature>
+				«ENDIF»
+				«IF data.generatorType == GeneratorType::Xtend»
+					<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
+				«ENDIF»
 			</natures>
 		</projectDescription>
 	'''
@@ -256,6 +287,9 @@ class XpandProjectTemplate {
 	def classpath(ProjectData data) '''
 		<?xml version="1.0" encoding="UTF-8"?>
 		<classpath>
+			«IF data.generatorType == GeneratorType::Xtend»
+				<classpathentry kind="src" path="xtend-gen"/>
+			«ENDIF»
 			<classpathentry kind="src" path="src"/>
 			<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 			<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
@@ -270,7 +304,6 @@ class XpandProjectTemplate {
 		Bundle-SymbolicName: «data.projectName»; singleton:=true
 		Bundle-Version: 1.0.0
 		Require-Bundle: org.eclipse.jdt.core;bundle-version="3.5.0",
-		 org.eclipse.xtend.profiler;resolution:=optional,
 		 org.apache.commons.logging,
 		 org.apache.log4j;resolution:=optional,
 		 com.ibm.icu;bundle-version="4.0.1",
@@ -279,10 +312,17 @@ class XpandProjectTemplate {
 		 org.eclipse.emf.mwe.utils;bundle-version="0.7.0",
 		 org.eclipse.emf.ecore.xmi;bundle-version="2.5.0",
 		 org.eclipse.jface.text;bundle-version="3.5.0",
-		 org.eclipse.xpand;bundle-version="0.7.0",
-		 org.eclipse.xtend;bundle-version="0.7.0",
-		 org.eclipse.xtend.typesystem.emf;bundle-version="0.7.0",
-		«IF data.pluginExport»
+		«IF data.generatorType == GeneratorType::Xpand || data.generatorType == GeneratorType::Xtend»
+			«' '»org.eclipse.xpand;bundle-version="0.7.0",
+			«' '»org.eclipse.xtend;bundle-version="0.7.0",
+			«' '»org.eclipse.xtend.typesystem.emf;bundle-version="0.7.0",
+			«' '»org.eclipse.xtend.profiler;resolution:=optional,
+		«ENDIF»
+		«IF data.generatorType == GeneratorType::Xtend»
+			«' '»org.eclipse.xtext.xbase.lib;bundle-version="2.0.1",
+			«' '»org.eclipse.xtext.xtend2.lib;bundle-version="2.0.1",
+		«ENDIF»
+		«IF data.pluginExport || data.generatorType != GeneratorType::Xpand»
 			«' '»org.yakindu.sct.generator.core;bundle-version="1.0.0",
 		«ENDIF»
 		 org.yakindu.sct.model.sgen;bundle-version="1.0.0",
@@ -316,7 +356,7 @@ class XpandProjectTemplate {
 		</plugin>
 	'''
 	
-	def generator(ProjectData data) '''
+	def xpandGenerator(ProjectData data) '''
 		package «data.generatorClass.packageName»;
 		
 		import org.yakindu.sct.generator.core.impl.AbstractXpandBasedCodeGenerator;
@@ -332,6 +372,36 @@ class XpandProjectTemplate {
 			}
 		}
 	'''
+	
+	def javaGenerator(ProjectData data) '''
+		package «data.generatorClass.packageName»;
+
+		import org.yakindu.sct.generator.core.AbstractWorkspaceGenerator;
+		import org.yakindu.sct.model.sexec.ExecutionFlow;
+		import org.yakindu.sct.model.sgen.GeneratorEntry;
+		
+		public class «data.generatorClass.simpleName» extends AbstractWorkspaceGenerator {
+			@Override
+			public void generate(ExecutionFlow flow, GeneratorEntry entry) {
+				writeToConsole("Output shall go into project "+getTargetProjectPath(entry));
+			}
+		}
+	'''
+	def xtendGenerator(ProjectData data) '''
+		package «data.generatorClass.packageName»
+
+		import org.yakindu.sct.model.sexec.ExecutionFlow
+		import org.yakindu.sct.model.sgen.GeneratorEntry
+		import org.yakindu.sct.generator.core.AbstractWorkspaceGenerator
+		
+		class «data.generatorClass.simpleName» extends AbstractWorkspaceGenerator {
+		
+			override generate(ExecutionFlow flow, GeneratorEntry entry) {
+				writeToConsole('output will go into project '+entry.targetProjectPath)
+			}
+		}
+	'''
+	
 	
 	def defaultProvider(ProjectData data) '''
 		package «data.providerClass.packageName»;

@@ -1,4 +1,4 @@
-#Thu Nov 24 22:12:08 CET 2011
+#Fri Nov 25 17:27:24 CET 2011
 eclipse.preferences.version=1
+encoding//src/org/yakindu/sct/generator/genmodel/ui/wizard/GeneratorProjectTemplate.xtend=UTF-8
 encoding//src/org/yakindu/sct/generator/genmodel/ui/wizard/XpandDefaultTemplate.xpt=ISO-8859-1
-encoding//src/org/yakindu/sct/generator/genmodel/ui/wizard/XpandProjectTemplate.xtend=UTF-8

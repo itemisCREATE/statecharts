@@ -27,7 +27,7 @@ import org.eclipse.ui.IWorkbenchWizard;
 public class XpandGeneratorProjectWizard extends Wizard implements
 		IWorkbenchWizard {
 
-	private XpandGeneratorWizardPage1 projectPage;
+	private IProjectWzardPage projectPage;
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		setWindowTitle("New YAKINDU Xpand Generator Project");
@@ -36,10 +36,16 @@ public class XpandGeneratorProjectWizard extends Wizard implements
 
 	@Override
 	public void addPages() {
-		projectPage = new XpandGeneratorWizardPage1("project"); //$NON-NLS-1$
+		projectPage = getProjectPage();
+		addPage(projectPage);
+	}
+
+	protected IProjectWzardPage getProjectPage() {
+		XpandGeneratorWizardPage1 projectPage = new XpandGeneratorWizardPage1(
+				"project"); //$NON-NLS-1$
 		projectPage.setTitle("New YAKINDU Xpand Generator Project");
 		projectPage.setDescription("Configure the Generator Project");
-		addPage(projectPage);
+		return projectPage;
 	}
 
 	@Override
@@ -51,7 +57,7 @@ public class XpandGeneratorProjectWizard extends Wizard implements
 			public void run(final IProgressMonitor monitor)
 					throws InvocationTargetException {
 				try {
-					XpandProjectTemplate template = new XpandProjectTemplate();
+					GeneratorProjectTemplate template = new GeneratorProjectTemplate();
 					template.setMonitor(monitor);
 					template.generate(projectData);
 				} catch (Exception e) {

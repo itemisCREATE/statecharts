@@ -22,6 +22,7 @@ public class ProjectData {
 	String generatorDescription;
 	String generatorName;
 	String generatorClass;
+	GeneratorType generatorType;
 
 	public boolean isPluginExport() {
 		return pluginExport;
@@ -49,6 +50,10 @@ public class ProjectData {
 
 	public String getGeneratorClass() {
 		return generatorClass;
+	}
+
+	public GeneratorType getGeneratorType() {
+		return generatorType;
 	}
 
 }
