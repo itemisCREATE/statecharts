@@ -5,6 +5,7 @@ import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.*;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.Call;
+import org.yakindu.sct.model.sexec.Cycle;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -22,9 +23,12 @@ import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.Assignment;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
+import org.yakindu.sct.model.stext.stext.EventDefinition;
+import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.LogicalAndExpression;
 import org.yakindu.sct.model.stext.stext.LogicalRelationExpression;
@@ -39,7 +43,6 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 public class ModelSequencerStateTest extends ModelSequencerTest {
 
-	
 
 	/**
 	 * if a state defines a entry action then the execution state must have a entryAction.
@@ -726,6 +729,99 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertSame(s1.getReactions().get(0).getCheck().getCondition(), _lr1.getCheck().getCondition() );
 		Call _lr1_eff_call = (Call) _lr1.getThenStep();
 		assertSame(s1.getReactions().get(0).getEffect(), _lr1_eff_call.getStep() );
+
+	}
+
+	
+	/**
+	 * The state cycle must contain all reactions of parent states.
+	 */
+	@Test public void testStateCycle_WithParent() {
+		
+		Statechart sc = _createStatechart("sc"); {  
+			
+			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
+			VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, s_scope);
+			EventDefinition e1 = _createEventDefinition("e1", s_scope);
+			
+
+			Region r = _createRegion("r", sc); {
+				State s1 = _createState("s1", r); {
+					// a local reaction: "e1 / x=42;" 
+					LocalReaction lr1 = _createLocalReaction(s1, null);
+					_createRegularEventSpec(e1, (ReactionTrigger) lr1.getTrigger());
+					ReactionEffect lr1_eff = _createReactionEffect(lr1);
+					Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), lr1_eff); 
+
+					Region r_s1 = _createRegion("r", s1); {
+						State s3 = _createState("s3", r_s1); {
+							_createEntryAssignment(v1, s3, "2");
+							
+							Region r_s3 = _createRegion("r", s3); {
+								State s4 = _createState("s4", r_s3);
+								_createEntryAssignment(v1, s4, "3");
+
+								State s5 = _createState("s5", r_s3);
+							}
+						}
+					}
+				}		
+				State s2 = _createState("s2", r); {
+					Region r_s1 = _createRegion("r", s2); {
+						_createState("s6", r_s1);
+					}
+				}
+			}
+
+			Transition t_s4_s5 = _createTransition(findState(sc, "s4"), findState(sc, "s5"));
+			_createRegularEventSpec(e1, (ReactionTrigger) t_s4_s5.getTrigger());
+
+			
+			Transition t_s3_s6 =_createTransition(findState(sc, "s3"), findState(sc, "s6"));
+			_createRegularEventSpec(e1, (ReactionTrigger) t_s3_s6.getTrigger());
+		
+		}
+		
+
+		ExecutionFlow flow = sequencer.transform(sc);
+		 
+		
+		ExecutionState _s1 = flow.getStates().get(0);
+		assertEquals("sc.r.s1", _s1.getName());
+
+		ExecutionState _s3 = flow.getStates().get(1);
+		assertEquals("sc.r.s1.r.s3", _s3.getName());
+
+		ExecutionState _s4 = flow.getStates().get(2);
+		assertEquals("sc.r.s1.r.s3.r.s4", _s4.getName());
+		
+		ExecutionState _s6 = flow.getStates().get(5);
+		assertEquals("sc.r.s2.r.s6", _s6.getName());
+		
+			
+		Cycle cycle = _s4.getCycle();
+		
+		Sequence _seq = (Sequence) cycle.getSteps().get(0);
+		
+		// first entry is the s1 local reaction
+		If _if = (If) _seq.getSteps().get(0);
+		assertCall(_if.getThenStep(), _s1.getReactions().get(0).getEffect());
+		
+		// second entry is the s3 cycle with the transition reaction
+		cycle = (Cycle) _seq.getSteps().get(1);
+		_if = (If) cycle.getSteps().get(0);
+		assertCall(_if.getThenStep(), _s3.getReactions().get(0).getEffect());
+		assertTrue(_s3.getReactions().get(0).isTransition());
+		assertEquals(1,	cycle.getSteps().size());
+				
+		// third is the s4 cycle with the transition reaction
+		_seq = (Sequence) _if.getElseStep();
+		cycle = (Cycle) _seq.getSteps().get(0);
+		_if = (If) cycle.getSteps().get(0);
+		assertCall(_if.getThenStep(), _s4.getReactions().get(0).getEffect());
+		assertTrue(_s4.getReactions().get(0).isTransition());
+		assertNull(_if.getElseStep());
+		assertEquals(1,	cycle.getSteps().size());
 
 	}
 
