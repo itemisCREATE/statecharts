@@ -6,7 +6,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-
+import java.util.Collections;
+import java.util.Map;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -17,14 +18,26 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
+import org.yakindu.sct.generator.genmodel.ui.wizard.ProjectData;
+import org.yakindu.sct.model.sgen.FeatureParameter;
+import org.yakindu.sct.model.sgen.FeatureType;
+import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
+import org.yakindu.sct.model.sgen.ParameterTypes;
+import org.yakindu.sct.model.sgen.SGenFactory;
 
 @SuppressWarnings("all")
 public class XpandProjectTemplate {
@@ -38,7 +51,7 @@ public class XpandProjectTemplate {
   
   public void generate(final ProjectData data) throws IOException, UnsupportedEncodingException, CoreException {
     {
-      this.monitor.beginTask("Create YAKINDU Xpand Generator Project", 12);
+      this.monitor.beginTask("Create YAKINDU Xpand Generator Project", 15);
       IWorkspace _workspace = ResourcesPlugin.getWorkspace();
       IWorkspaceRoot _root = _workspace.getRoot();
       String _projectName = data.getProjectName();
@@ -88,16 +101,33 @@ public class XpandProjectTemplate {
           this.write(_file_6, _generator);
           boolean _isTypeLibrary = data.isTypeLibrary();
           if (_isTypeLibrary) {
-            this.createFolder(project, "library");
+            {
+              this.createFolder(project, "library");
+              IFile _file_7 = project.getFile("library/FeatureTypeLibrary.xmi");
+              FeatureTypeLibrary _featureLibrary = this.featureLibrary(data);
+              this.write(_file_7, _featureLibrary);
+              String _providerClass = this.providerClass(data);
+              String _javaFilename_1 = this.javaFilename(_providerClass);
+              String _operator_plus_5 = StringExtensions.operator_plus("src/", _javaFilename_1);
+              IFile _file_8 = project.getFile(_operator_plus_5);
+              StringConcatenation _defaultProvider = this.defaultProvider(data);
+              this.write(_file_8, _defaultProvider);
+              String _libraryConstantsClass = this.libraryConstantsClass(data);
+              String _javaFilename_2 = this.javaFilename(_libraryConstantsClass);
+              String _operator_plus_6 = StringExtensions.operator_plus("src/", _javaFilename_2);
+              IFile _file_9 = project.getFile(_operator_plus_6);
+              StringConcatenation _libraryConstants = this.libraryConstants(data);
+              this.write(_file_9, _libraryConstants);
+            }
           }
         }
       }
-      IFile _file_7 = project.getFile(".classpath");
+      IFile _file_10 = project.getFile(".classpath");
       StringConcatenation _classpath = this.classpath(data);
-      this.write(_file_7, _classpath);
-      IFile _file_8 = project.getFile(".project");
+      this.write(_file_10, _classpath);
+      IFile _file_11 = project.getFile(".project");
       StringConcatenation _projectFile = this.projectFile(data);
-      this.write(_file_8, _projectFile);
+      this.write(_file_11, _projectFile);
     }
   }
   
@@ -166,10 +196,56 @@ public class XpandProjectTemplate {
     return _operator_plus;
   }
   
+  public String libraryConstantsClass(final ProjectData data) {
+    String _providerClass = this.providerClass(data);
+    String _packageName = this.packageName(_providerClass);
+    String _operator_plus = StringExtensions.operator_plus(_packageName, ".IFeatureConstants");
+    return _operator_plus;
+  }
+  
   public String javaFilename(final String s) {
     String _replaceAll = s.replaceAll("\\.", "/");
     String _operator_plus = StringExtensions.operator_plus(_replaceAll, ".java");
     return _operator_plus;
+  }
+  
+  public FeatureTypeLibrary featureLibrary(final ProjectData data) {
+    {
+      final SGenFactory factory = SGenFactory.eINSTANCE;
+      FeatureTypeLibrary _createFeatureTypeLibrary = factory.createFeatureTypeLibrary();
+      final FeatureTypeLibrary lib = _createFeatureTypeLibrary;
+      String _generatorName = data.getGeneratorName();
+      lib.setName(_generatorName);
+      FeatureType _createFeatureType = factory.createFeatureType();
+      final FeatureType type = _createFeatureType;
+      type.setName("MyFeature");
+      FeatureParameter _createFeatureParameter = factory.createFeatureParameter();
+      final FeatureParameter parameter = _createFeatureParameter;
+      parameter.setName("MyParameter");
+      parameter.setParameterType(ParameterTypes.STRING);
+      EList<FeatureParameter> _parameters = type.getParameters();
+      _parameters.add(parameter);
+      EList<FeatureType> _types = lib.getTypes();
+      _types.add(type);
+      return lib;
+    }
+  }
+  
+  public void write(final IFile file, final EObject object) throws IOException {
+    {
+      IPath _fullPath = file.getFullPath();
+      String _string = _fullPath.toString();
+      URI _createPlatformResourceURI = URI.createPlatformResourceURI(_string, true);
+      final URI uri = _createPlatformResourceURI;
+      ResourceSetImpl _resourceSetImpl = new ResourceSetImpl();
+      final ResourceSetImpl resourceSet = _resourceSetImpl;
+      Resource _createResource = resourceSet.createResource(uri);
+      final Resource resource = _createResource;
+      EList<EObject> _contents = resource.getContents();
+      _contents.add(object);
+      Map<Object,Object> _emptyMap = Collections.<Object, Object>emptyMap();
+      resource.save(_emptyMap);
+    }
   }
   
   public void write(final IFile file, final StringConcatenation content) throws IOException, UnsupportedEncodingException, CoreException {
@@ -653,13 +729,34 @@ public class XpandProjectTemplate {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    _builder.append("import static ");
+    String _libraryConstantsClass = this.libraryConstantsClass(data);
+    _builder.append(_libraryConstantsClass, "");
+    _builder.append(".LIBRARY_NAME;");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import static ");
+    String _libraryConstantsClass_1 = this.libraryConstantsClass(data);
+    _builder.append(_libraryConstantsClass_1, "");
+    _builder.append(".MY_PARAMETER;");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("import org.eclipse.core.runtime.IStatus;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.core.runtime.Status;");
+    _builder.newLine();
     _builder.append("import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;");
+    _builder.newLine();
+    _builder.append("import org.yakindu.sct.model.sgen.FeatureParameterValue;");
+    _builder.newLine();
+    _builder.append("import org.yakindu.sct.model.sgen.FeatureTypeLibrary;");
+    _builder.newLine();
+    _builder.append("import org.yakindu.sct.model.sgraph.Statechart;");
     _builder.newLine();
     _builder.newLine();
     _builder.append("/**");
     _builder.newLine();
     _builder.append(" ");
-    _builder.append("* Default value proivder for ");
+    _builder.append("* Default value provider for ");
     String _generatorName = data.getGeneratorName();
     _builder.append(_generatorName, " ");
     _builder.append(" feature library");
@@ -674,13 +771,16 @@ public class XpandProjectTemplate {
     _builder.append(" extends AbstractDefaultFeatureValueProvider {");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    _builder.newLine();
     _builder.append("\t");
-    _builder.append("private static final String LIBRARY_NAME = \"");
-    String _generatorName_1 = data.getGeneratorName();
-    _builder.append(_generatorName_1, "	");
-    _builder.append("\";");
-    _builder.newLineIfNotEmpty();
+    _builder.append("public boolean isProviderFor(FeatureTypeLibrary library) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return library.getName().equals(LIBRARY_NAME);");
+    _builder.newLine();
     _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("@Override");
@@ -695,36 +795,67 @@ public class XpandProjectTemplate {
     _builder.append("String parameterName = parameterValue.getParameter().getName();");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("//TODO: set the default values");
+    _builder.append("if (MY_PARAMETER.equals(parameterName)) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("parameterValue.setValue(\"default value\");");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public boolean isProviderFor(FeatureTypeLibrary library) {");
+    _builder.append("public IStatus validateParameterValue(FeatureParameterValue parameterValue) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("return library.getName().equals(LIBRARY_NAME);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public IStatus validateParameterValue(FeatureParameterValue value) {");
+    _builder.append("String parameterName = parameterValue.getParameter().getName();");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("String name = value.getParameter().getName();");
+    _builder.append("// TODO implement validation");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("//TODO implement validation");
+    _builder.append("// return error(\"Illegal parameter value\");");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return Status.OK_STATUS;");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public StringConcatenation libraryConstants(final ProjectData data) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package ");
+    String _libraryConstantsClass = this.libraryConstantsClass(data);
+    String _packageName = this.packageName(_libraryConstantsClass);
+    _builder.append(_packageName, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("public interface ");
+    String _libraryConstantsClass_1 = this.libraryConstantsClass(data);
+    String _simpleName = this.simpleName(_libraryConstantsClass_1);
+    _builder.append(_simpleName, "");
+    _builder.append(" {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("public static final String LIBRARY_NAME = \"");
+    String _generatorName = data.getGeneratorName();
+    _builder.append(_generatorName, "	");
+    _builder.append("\";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("public static final String MY_FEATURE = \"MyFeature\";");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public static final String MY_PARAMETER = \"MyParameter\";");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
