@@ -19,7 +19,7 @@ Templates for the main statechart c file.
 
 void eventSet_init(EventSet* handle, const uint32_t _maxEvents) {
 
-	int i;
+	uint32_t i;
 
 	handle->isStaticData = bool_false;
 	handle->maxEvents = _maxEvents;
@@ -35,7 +35,7 @@ void eventSet_init(EventSet* handle, const uint32_t _maxEvents) {
 
 void eventSet_init_staticData(EventSet* handle, const uint32_t _maxEvents,
 		boolean* _dataSet, EventType* _eventTypes) {
-	int i;
+	uint32_t i;
 
 	handle->isStaticData = bool_true;
 	handle->maxEvents = _maxEvents;

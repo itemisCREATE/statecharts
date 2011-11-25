@@ -149,6 +149,40 @@ void «this.exitAction.exitActionFunctionName()»(«StName()»* handle)
 «ENDIF»
 «ENDDEFINE»
 
+
+
+«DEFINE EnterSequenceProto FOR ExecutionState»
+«IF this.enterSequence != null -»
+static void «this.enterSequence.enterSequenceFunctionName()»(«StName()»* handle);
+«ENDIF -»
+«ENDDEFINE»
+
+«DEFINE EnterSequenceImplement FOR ExecutionState»
+«IF this.enterSequence != null»
+void «this.enterSequence.enterSequenceFunctionName()»(«StName()»* handle)
+{
+«EXPAND ActionCode FOR this.enterSequence»
+}
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE ExitSequenceProto FOR ExecutionState»
+«IF this.exitSequence != null -»
+static void «this.exitSequence.exitSequenceFunctionName()»(«StName()»* handle);
+«ENDIF -»
+«ENDDEFINE»
+
+«DEFINE ExitSequenceImplement FOR ExecutionState»
+«IF this.exitSequence != null»
+void «this.exitSequence.exitSequenceFunctionName()»(«StName()»* handle)
+{
+«EXPAND ActionCode FOR this.exitSequence»
+}
+«ENDIF»
+«ENDDEFINE»
+
+
+
 «DEFINE file FOR ExecutionFlow»
 «FILE StName()+'.c'»
 #include "«StName()».h"
@@ -158,12 +192,16 @@ void «this.exitAction.exitActionFunctionName()»(«StName()»* handle)
 «EXPAND CycleMethodsProto FOREACH this.states»
 «EXPAND EnterMethodProto FOREACH this.states»
 «EXPAND ExitMethodProto FOREACH this.states»
+«EXPAND EnterSequenceProto FOREACH this.states»
+«EXPAND ExitSequenceProto FOREACH this.states»
 
 «EXPAND ConditionMethodsImplement FOREACH this.states»
 «EXPAND StatementMethodsImplement FOREACH this.states»
 «EXPAND CycleMethodsImplement FOREACH this.states»
 «EXPAND EnterMethodImplement FOREACH this.states»
 «EXPAND ExitMethodImplement FOREACH this.states»
+«EXPAND EnterSequenceImplement FOREACH this.states»
+«EXPAND ExitSequenceImplement FOREACH this.states»
 
 void «stName()»_init(«StName()»* handle, Timer* timer, EventPool* eventPool)
 {
