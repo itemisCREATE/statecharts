@@ -67,7 +67,8 @@ import de.itemis.xtext.utils.gmf.viewers.XtextStyledTextCellEditorEx;
 import de.itemis.xtext.utils.jface.viewers.context.IXtextFakeContextResourcesProvider;
 
 /**
- * @author melaasar
+ * Full copy of the TextDirectEditManager for a StyledText 
+ *
  */
 @SuppressWarnings("restriction")
 public class XtextDirectEditManager extends DirectEditManager {
