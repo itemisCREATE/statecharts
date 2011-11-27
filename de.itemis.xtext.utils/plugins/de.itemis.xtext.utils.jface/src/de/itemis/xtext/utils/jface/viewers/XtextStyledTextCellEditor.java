@@ -22,6 +22,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
@@ -54,14 +55,13 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 
 	private Injector injector;
 	private StyledTextXtextAdapter xtextAdapter;
-	private  IXtextFakeContextResourcesProvider contextFakeResourceProvider;
+	private IXtextFakeContextResourcesProvider contextFakeResourceProvider;
 
 	public XtextStyledTextCellEditor(int style, Injector injector,
 			IXtextFakeContextResourcesProvider contextFakeResourceProvider) {
 		this(style, injector);
 		this.contextFakeResourceProvider = contextFakeResourceProvider;
 	}
-
 
 	public XtextStyledTextCellEditor(int style, Injector injector) {
 		setStyle(style);
@@ -83,8 +83,10 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 		});
 
 		// adapt to xtext
-		xtextAdapter = new StyledTextXtextAdapter(injector,
-				contextFakeResourceProvider == null ? IXtextFakeContextResourcesProvider.NULL_CONTEXT_PROVIDER: contextFakeResourceProvider);
+		xtextAdapter = new StyledTextXtextAdapter(
+				injector,
+				contextFakeResourceProvider == null ? IXtextFakeContextResourcesProvider.NULL_CONTEXT_PROVIDER
+						: contextFakeResourceProvider);
 		xtextAdapter.adapt(styledText);
 
 		// configure content assist
@@ -95,7 +97,6 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 				null);
 
 		if ((styledText.getStyle() & SWT.SINGLE) != 0) {
-
 			// The regular key down event is too late (after popup is closed
 			// again).
 			// when using the StyledText.VerifyKey event (3005), we get the
@@ -105,15 +106,27 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 					if (event.character == SWT.CR
 							&& !completionProposalAdapter.isProposalPopupOpen()) {
 						focusLost();
-					} else if (event.character == SWT.ESC
-							&& !completionProposalAdapter.isProposalPopupOpen()) {
-						XtextStyledTextCellEditor.this.fireCancelEditor();
 					}
 				}
 			});
 		}
+		styledText.addListener(3005, new Listener() {
+			public void handleEvent(Event event) {
+				 if (event.character == '\u001b' //ESC
+						&& !completionProposalAdapter.isProposalPopupOpen()) {
+					XtextStyledTextCellEditor.this.fireCancelEditor();
+				}
+			}
+		});
 
 		return styledText;
+	}
+
+	protected void keyReleaseOccured(KeyEvent keyEvent) {
+		if (keyEvent.character == '\u001b') { // ESC
+			return;
+		}
+		super.keyReleaseOccured(keyEvent);
 	}
 
 	@Override
@@ -135,7 +148,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 	public void performRedo() {
 		xtextAdapter.sourceviewer.getUndoManager().redo();
 	}
-	
+
 	@Override
 	public boolean isFindEnabled() {
 		return true;
