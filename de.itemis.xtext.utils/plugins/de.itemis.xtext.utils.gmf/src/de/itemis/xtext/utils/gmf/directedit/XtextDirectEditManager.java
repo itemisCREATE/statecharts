@@ -123,6 +123,8 @@ public class XtextDirectEditManager extends DirectEditManager {
 	private final int style;
 
 	private IXtextFakeContextResourcesProvider fakeProvider;
+	
+	private static final int LABEL_MIN_WIDTH = 75;
 
 	/**
 	 * constructor
@@ -251,6 +253,9 @@ public class XtextDirectEditManager extends DirectEditManager {
 			public void relocate(CellEditor celleditor) {
 				StyledText text = (StyledText) celleditor.getControl();
 				Rectangle rect = source.getFigure().getBounds().getCopy();
+				//Added min width because it looks silly if the label has a width of 0
+				if(rect.width == 0)
+					rect.width = LABEL_MIN_WIDTH;
 				source.getFigure().translateToAbsolute(rect);
 				if (!rect.equals(new Rectangle(text.getBounds()))) {
 					text.setBounds(rect.x, rect.y, rect.width, rect.height);
