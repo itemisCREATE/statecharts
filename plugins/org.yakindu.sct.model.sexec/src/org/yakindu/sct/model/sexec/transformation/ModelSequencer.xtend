@@ -236,7 +236,15 @@ class ModelSequencer {
 			state.localReactions
 				.filter( typeof( LocalReaction ))
 				// ignore all reaction that are just entry or exit actions
-				.filter(lr | (lr.trigger as ReactionTrigger).triggers.empty || ! (lr.trigger as ReactionTrigger).triggers.filter( t | t instanceof RegularEventSpec || t instanceof TimeEventSpec).toList.empty)
+				.filter(lr | 
+					(lr.trigger as ReactionTrigger).triggers.empty 
+					|| ! (lr.trigger as ReactionTrigger).triggers.filter( t | 
+						t instanceof RegularEventSpec 
+						|| t instanceof TimeEventSpec 
+						|| t instanceof OnCycleEvent 
+						|| t instanceof AlwaysEvent
+					).toList.empty
+				)
 				.map(t | t.mapReaction)
 		)
 		return _state

@@ -361,10 +361,22 @@ public class ModelSequencer {
               final Function1<EventSpec,Boolean> _function_1 = new Function1<EventSpec,Boolean>() {
                   public Boolean apply(final EventSpec t) {
                     boolean _operator_or_1 = false;
+                    boolean _operator_or_2 = false;
+                    boolean _operator_or_3 = false;
                     if ((t instanceof org.yakindu.sct.model.stext.stext.RegularEventSpec)) {
+                      _operator_or_3 = true;
+                    } else {
+                      _operator_or_3 = BooleanExtensions.operator_or((t instanceof org.yakindu.sct.model.stext.stext.RegularEventSpec), (t instanceof org.yakindu.sct.model.stext.stext.TimeEventSpec));
+                    }
+                    if (_operator_or_3) {
+                      _operator_or_2 = true;
+                    } else {
+                      _operator_or_2 = BooleanExtensions.operator_or(_operator_or_3, (t instanceof org.yakindu.sct.model.stext.stext.OnCycleEvent));
+                    }
+                    if (_operator_or_2) {
                       _operator_or_1 = true;
                     } else {
-                      _operator_or_1 = BooleanExtensions.operator_or((t instanceof org.yakindu.sct.model.stext.stext.RegularEventSpec), (t instanceof org.yakindu.sct.model.stext.stext.TimeEventSpec));
+                      _operator_or_1 = BooleanExtensions.operator_or(_operator_or_2, (t instanceof org.yakindu.sct.model.stext.stext.AlwaysEvent));
                     }
                     return ((Boolean)_operator_or_1);
                   }
