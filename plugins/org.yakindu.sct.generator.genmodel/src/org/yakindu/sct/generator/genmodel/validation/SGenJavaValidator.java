@@ -10,23 +10,39 @@
  */
 package org.yakindu.sct.generator.genmodel.validation;
 
+import static com.google.common.collect.Iterables.concat;
+import static com.google.common.collect.Iterables.filter;
+import static com.google.common.collect.Iterables.transform;
+
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.validation.Check;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
+import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
+import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.FeatureType;
+import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgen.ParameterTypes;
+import org.yakindu.sct.model.sgen.SGenFactory;
 import org.yakindu.sct.model.sgen.SGenPackage;
+import org.yakindu.sct.model.sgraph.NamedElement;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 /**
  * 
@@ -135,5 +151,122 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			error("Duplicate parameter!",
 					SGenPackage.Literals.FEATURE_PARAMETER_VALUE__PARAMETER);
 		}
+	}
+
+	@Check
+	public void checkRequiredFeatures(GeneratorEntry entry) {
+		GeneratorModel model = (GeneratorModel) EcoreUtil2
+				.getRootContainer(entry);
+		Iterable<LibraryDescriptor> libraryDescriptors = LibraryExtensions
+				.getLibraryDescriptor(model.getGeneratorId());
+		Iterable<FeatureType> requiredFeatures = filter(
+				concat(transform(
+						transform(libraryDescriptors, getFeatureTypeLibrary()),
+						getFeatureTypes())), isRequired());
+		List<String> configuredTypes = Lists.newArrayList();
+		for (FeatureConfiguration featureConfiguration : entry.getFeatures()) {
+			configuredTypes.add(featureConfiguration.getType().getName());
+		}
+		for (FeatureType featureType : requiredFeatures) {
+			if (!configuredTypes.contains(featureType.getName()))
+				error(String.format("Missing required feature %s",
+						featureType.getName()),
+						SGenPackage.Literals.GENERATOR_ENTRY__STATECHART);
+		}
+	}
+
+	@Check
+	public void checkRequiredParameters(FeatureConfiguration configuration) {
+		GeneratorModel model = (GeneratorModel) EcoreUtil2
+				.getRootContainer(configuration);
+		Iterable<LibraryDescriptor> libraryDescriptors = LibraryExtensions
+				.getLibraryDescriptor(model.getGeneratorId());
+		
+		
+		Iterable<String> requiredParameters = transform(
+				filter(concat(transform(
+						filter(concat(transform(
+								transform(libraryDescriptors,
+										getFeatureTypeLibrary()),
+								getFeatureTypes())), hasName(configuration
+								.getType().getName())), getParmeter())),
+						isRequiredParamter()), getName());
+
+		List<String> configuredParameters = Lists.newArrayList();
+		
+		for (FeatureParameterValue featureParameterValue : configuration
+				.getParameterValues()) {
+			configuredParameters.add(featureParameterValue.getParameter()
+					.getName());
+		}
+		for (String string : requiredParameters) {
+			if (!configuredParameters.contains(string))
+				error(String.format("Missing required Parameter %s", string),
+						SGenPackage.Literals.FEATURE_CONFIGURATION__TYPE);
+		}
+	}
+
+	private Function<NamedElement, String> getName() {
+		return new Function<NamedElement, String>() {
+
+			public String apply(NamedElement from) {
+				return from.getName();
+			}
+		};
+	}
+
+	private Predicate<FeatureParameter> isRequiredParamter() {
+		return new Predicate<FeatureParameter>() {
+
+			public boolean apply(FeatureParameter input) {
+				return !input.isOptional();
+			}
+		};
+	}
+
+	private Function<FeatureType, Iterable<FeatureParameter>> getParmeter() {
+		return new Function<FeatureType, Iterable<FeatureParameter>>() {
+
+			public Iterable<FeatureParameter> apply(FeatureType from) {
+				return from.getParameters();
+			}
+		};
+	}
+
+	private Predicate<NamedElement> hasName(final String name) {
+		return new Predicate<NamedElement>() {
+
+			public boolean apply(NamedElement input) {
+				return name.equals(input.getName());
+			}
+		};
+	}
+
+	private static Predicate<FeatureType> isRequired() {
+		return new Predicate<FeatureType>() {
+
+			public boolean apply(FeatureType input) {
+				return !input.isOptional();
+			}
+		};
+	}
+
+	private static Function<FeatureTypeLibrary, Iterable<FeatureType>> getFeatureTypes() {
+		return new Function<FeatureTypeLibrary, Iterable<FeatureType>>() {
+
+			public Iterable<FeatureType> apply(FeatureTypeLibrary from) {
+				return from.getTypes();
+			}
+		};
+	}
+
+	private static Function<LibraryDescriptor, FeatureTypeLibrary> getFeatureTypeLibrary() {
+		return new Function<LibraryExtensions.LibraryDescriptor, FeatureTypeLibrary>() {
+
+			public FeatureTypeLibrary apply(LibraryDescriptor from) {
+				return (FeatureTypeLibrary) new ResourceSetImpl()
+						.getResource(from.getURI(), true).getContents().get(0);
+			}
+		};
 	}
 }
