@@ -17,6 +17,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.xtext,
  de.itemis.xtext.utils.gmf,
- org.eclipse.gmf.runtime.emf.core,
- org.apache.commons.lang
+ org.eclipse.gmf.runtime.emf.core
 Bundle-ActivationPolicy: lazy
