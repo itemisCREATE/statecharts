@@ -1,0 +1,123 @@
+
+h1. Generating Code
+
+Code generation can be configured by providing a generator configuration model (a text file with suffix __.sgen__) that defines the code generator to use and the generator specific parameters.
+
+The code generator can be executed via the context menu of the __.sgen__ files (__right click > Generate statechart Artifacts__).
+
+h2. Common Generator Configuration
+
+A minimum generator model looks as follows:
+
+pre. GeneratorModel for yakindu::c {
+    statechart MyStatechart {
+        feature Outlet {
+            targetProject = "MyProject"
+            targetFolder = "src-gen"
+    }
+}
+
+The generator to use is configured by specifying the corresponding generator id (__yakindu::c__ in the example).
+
+Available generator ids are:
+* __yakindu::c__ Generates C Code
+* __yakindu::cpp__ Generates C++ Code
+* __yakindu::java__ Generates Java Code
+* __yakindu::generic__ Executes Generators from the workspace
+* __yakindu::xpand__ Executes Xpand templates form the workspace
+
+For each statechart that shall be processed, a configuration block must be provided that contains the configuration for the generator features (starting with keyword __statechart__ followed by the name of the statechart).
+Every generator requires the __Outlet__ feature that defines the target project and folder where the output shall be written.
+Depending on the chosen generator, more features might be required.
+
+h2. Using the Generator Model Wizard
+
+The wizard for generator models is available under __New > Yakindu > YAKINDU statechart Generator Model__.
+It allows to select statecharts that should be processed and a generator type to use.
+The wizard will create a new generator model file with reasonable defaults for the generator's configuration features.
+
+
+
+h1. Generic Xpand Generator
+
+The generic Xpand Generator (Generator id __yakindu::xpand__) allows to execute Xpand templates located inside the workspace.
+
+h2. Configuration
+
+The generator requires a __Template__ configuration feature that defines the Xpand template that shall be executed.
+
+pre. GeneratorModel for yakindu::xpand {
+    statechart MyStatechart {
+        feature Template {
+            templateProject = "MyXpandProject"
+            templatePath = "org::yakindu::sct::generator::xpand::Main::main"
+        }
+        feature Outlet {...}
+    }
+}
+
+h2. Implementation
+
+The Xpand template is expected to have the following entry method signature:
+
+pre. «DEFINE main(sgen::GeneratorEntry entry) FOR sexec::ExecutionFlow-»
+«ENDDEFINE»
+
+h2. Xpand Generator Project Wizard
+
+A wizard for Xpand-based generators is available under __New > Yakindu > YAKINDU Xpand Generator Project__.
+It will create a new project with all needed library dependencies and a hello world template to generate artifacts from a statechart.
+
+h3. Exporting the Generator as Plugin
+
+The wizard provides options to setup the new generator project as exportable plugin.
+Therefor, a generator id, a generator name and a generator class name must be specified. Optionally, a feature library can be generated to use custom configuration options with the generator. 
+
+
+h1. Generic Workspace Generator
+
+The generic Workspace Generator (Generator id __yakindu::generic__) allows to execute Java classes located inside the workspace.
+
+h2. Configuration
+
+The generator requires a __Generator__ configuration feature that defines the Java class that shall be executed
+
+pre. GeneratorModel for yakindu::generic {
+    statechart MyStatechart {
+        feature Generator {
+            generatorProject = "MyJavaProject"
+            generatorClass = "org.yakindu.sct.generator.MyGenerator"
+        }
+        feature Outlet {..}
+    }
+}
+
+
+h2. Implementaion
+
+The Java class that is referenced from the configuration must extend __org.yakindu.sct.generator.core.AbstractWorkspaceGenerator__.
+
+The signature of the generator entry method looks as follows:
+
+pre. public class MyGenerator extends AbstractWorkspaceGenerator {
+    @Override
+	public void generate(ExecutionFlow flow, GeneratorEntry entry) {
+    }
+}
+
+If you prefer to implement the generator using Xtend, the following signature is required:
+
+pre. class Bla extends AbstractWorkspaceGenerator {
+    override generate(ExecutionFlow flow, GeneratorEntry entry) {
+    }
+}
+	
+h2. Generic Java Generator Project wizard
+
+A wizard for Java/Xtend-based generators is available under __New > Yakindu > YAKINDU Workspace Generator Project__.
+It will create a new project with all needed library dependencies and a default generator implementation.
+The type of the generator (Java or Xtend) can be chosen from the wizard. 
+
+
+
+
