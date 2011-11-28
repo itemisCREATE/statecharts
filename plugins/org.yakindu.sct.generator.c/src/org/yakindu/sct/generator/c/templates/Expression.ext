@@ -84,7 +84,23 @@ String toCCode(ElementReferenceExpression ref) :
 	ref.value.toCCode();
 
 String toCCode(Declaration dec) :
-	"declartion type not specified";
+	"Declartion type not specified";
+
+String toCCode(Clock clockDef) :
+	"Clock to C not defined";
+	
+String toCCode(Operation op) :
+	"Operation to C not defined";
+
+String toCCode(LocalReaction localReac) :
+	"Local Reaction to C not defined";
+
+String toCCode(Entrypoint op) :
+	"Entrypoint to C not defined";
+
+String toCCode(Exitpoint op) :
+	"Exitpoint to C not defined";
+
 	
 String toCCode(EventDefinition evDef) :
     " ( eventSet_check( &handle->base.eventSet, ev_" + evDef.name.toLowerCase() + ") ) ";
