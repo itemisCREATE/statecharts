@@ -113,7 +113,7 @@ public class XpandGeneratorWizardPage1 extends IProjectWzardPage {
 				.applyTo(txtGeneratorDesc);
 
 		Label lblLibraryCheckBox = new Label(generatorGroup, SWT.WRAP);
-		lblLibraryCheckBox.setText("Create Fetaure Library");
+		lblLibraryCheckBox.setText("Create Feature Library");
 
 		cbLibrary = new Button(generatorGroup, SWT.CHECK);
 
