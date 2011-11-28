@@ -34,6 +34,7 @@ import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
+import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
 import org.yakindu.sct.model.stext.stext.Type;
@@ -283,6 +284,60 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		UnscheduleTimeEvent ute = (UnscheduleTimeEvent) exitAction.getSteps().get(0);
 		assertSame(te, ute.getTimeEvent());
 
+	}
+	
+
+	/**
+	 * Local reactions must be created for behavior with 'oncycle' trigger
+	 */
+	@Test public void testOncycleLocalReaction() {
+		
+		Statechart sc = _createStatechart("test");
+		Scope scope = _createInterfaceScope("interface", sc);
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		Region r = _createRegion("main", sc);
+		State s= _createState("s", r);
+
+		
+		LocalReaction timeTriggeredReaction = _createLocalReaction(s, StextFactory.eINSTANCE.createOnCycleEvent());
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), (ReactionEffect) timeTriggeredReaction.getEffect());
+		
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		ExecutionState _s = flow.getStates().get(0);
+
+		// assert that a local reaction is created
+		Reaction reaction = _s.getReactions().get(0);
+		PrimitiveValueExpression pve = (PrimitiveValueExpression) reaction.getCheck().getCondition();
+		assertSame("true", pve.getValue());
+		
+	}
+	
+	
+	/**
+	 * Local reactions must be created for behavior with 'always' trigger
+	 */
+	@Test public void testAlwaysLocalReaction() {
+		
+		Statechart sc = _createStatechart("test");
+		Scope scope = _createInterfaceScope("interface", sc);
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		Region r = _createRegion("main", sc);
+		State s= _createState("s", r);
+
+		
+		LocalReaction timeTriggeredReaction = _createLocalReaction(s, StextFactory.eINSTANCE.createAlwaysEvent());
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), (ReactionEffect) timeTriggeredReaction.getEffect());
+		
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		ExecutionState _s = flow.getStates().get(0);
+
+		// assert that a local reaction is created
+		Reaction reaction = _s.getReactions().get(0);
+		PrimitiveValueExpression pve = (PrimitiveValueExpression) reaction.getCheck().getCondition();
+		assertSame("true", pve.getValue());
+		
 	}
 	
 
