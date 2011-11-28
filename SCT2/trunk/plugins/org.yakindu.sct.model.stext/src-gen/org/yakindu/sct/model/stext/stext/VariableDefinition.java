@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext;
 
@@ -110,29 +111,29 @@ public interface VariableDefinition extends Variable
   void setType(Type value);
 
   /**
-   * Returns the value of the '<em><b>Initial Value</b></em>' attribute.
+   * Returns the value of the '<em><b>Initial Value</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Initial Value</em>' attribute isn't clear,
+   * If the meaning of the '<em>Initial Value</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Initial Value</em>' attribute.
-   * @see #setInitialValue(String)
+   * @return the value of the '<em>Initial Value</em>' containment reference.
+   * @see #setInitialValue(Expression)
    * @see org.yakindu.sct.model.stext.stext.StextPackage#getVariableDefinition_InitialValue()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getInitialValue();
+  Expression getInitialValue();
 
   /**
-   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.VariableDefinition#getInitialValue <em>Initial Value</em>}' attribute.
+   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.VariableDefinition#getInitialValue <em>Initial Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Initial Value</em>' attribute.
+   * @param value the new value of the '<em>Initial Value</em>' containment reference.
    * @see #getInitialValue()
    * @generated
    */
-  void setInitialValue(String value);
+  void setInitialValue(Expression value);
 
 } // VariableDefinition

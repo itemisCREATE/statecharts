@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext;
 
@@ -33,12 +34,12 @@ public interface ReactionPriority extends ReactionProperty
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Priority</em>' attribute.
-   * @see #setPriority(int)
+   * @see #setPriority(long)
    * @see org.yakindu.sct.model.stext.stext.StextPackage#getReactionPriority_Priority()
    * @model
    * @generated
    */
-  int getPriority();
+  long getPriority();
 
   /**
    * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.ReactionPriority#getPriority <em>Priority</em>}' attribute.
@@ -48,6 +49,6 @@ public interface ReactionPriority extends ReactionProperty
    * @see #getPriority()
    * @generated
    */
-  void setPriority(int value);
+  void setPriority(long value);
 
 } // ReactionPriority

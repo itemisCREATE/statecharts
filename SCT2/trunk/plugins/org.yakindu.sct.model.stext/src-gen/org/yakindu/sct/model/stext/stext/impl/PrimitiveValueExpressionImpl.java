@@ -2,15 +2,19 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.yakindu.sct.model.stext.stext.Literal;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -30,24 +34,14 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class PrimitiveValueExpressionImpl extends ExpressionImpl implements PrimitiveValueExpression
 {
   /**
-   * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getValue()
    * @generated
    * @ordered
    */
-  protected static final String VALUE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getValue()
-   * @generated
-   * @ordered
-   */
-  protected String value = VALUE_EDEFAULT;
+  protected Literal value;
 
   /**
    * <!-- begin-user-doc -->
@@ -75,7 +69,7 @@ public class PrimitiveValueExpressionImpl extends ExpressionImpl implements Prim
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getValue()
+  public Literal getValue()
   {
     return value;
   }
@@ -85,12 +79,53 @@ public class PrimitiveValueExpressionImpl extends ExpressionImpl implements Prim
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(String newValue)
+  public NotificationChain basicSetValue(Literal newValue, NotificationChain msgs)
   {
-    String oldValue = value;
+    Literal oldValue = value;
     value = newValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.PRIMITIVE_VALUE_EXPRESSION__VALUE, oldValue, value));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.PRIMITIVE_VALUE_EXPRESSION__VALUE, oldValue, newValue);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setValue(Literal newValue)
+  {
+    if (newValue != value)
+    {
+      NotificationChain msgs = null;
+      if (value != null)
+        msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.PRIMITIVE_VALUE_EXPRESSION__VALUE, null, msgs);
+      if (newValue != null)
+        msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.PRIMITIVE_VALUE_EXPRESSION__VALUE, null, msgs);
+      msgs = basicSetValue(newValue, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.PRIMITIVE_VALUE_EXPRESSION__VALUE, newValue, newValue));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case StextPackage.PRIMITIVE_VALUE_EXPRESSION__VALUE:
+        return basicSetValue(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -120,7 +155,7 @@ public class PrimitiveValueExpressionImpl extends ExpressionImpl implements Prim
     switch (featureID)
     {
       case StextPackage.PRIMITIVE_VALUE_EXPRESSION__VALUE:
-        setValue((String)newValue);
+        setValue((Literal)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,7 +172,7 @@ public class PrimitiveValueExpressionImpl extends ExpressionImpl implements Prim
     switch (featureID)
     {
       case StextPackage.PRIMITIVE_VALUE_EXPRESSION__VALUE:
-        setValue(VALUE_EDEFAULT);
+        setValue((Literal)null);
         return;
     }
     super.eUnset(featureID);
@@ -154,26 +189,9 @@ public class PrimitiveValueExpressionImpl extends ExpressionImpl implements Prim
     switch (featureID)
     {
       case StextPackage.PRIMITIVE_VALUE_EXPRESSION__VALUE:
-        return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+        return value != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (value: ");
-    result.append(value);
-    result.append(')');
-    return result.toString();
   }
 
 } //PrimitiveValueExpressionImpl

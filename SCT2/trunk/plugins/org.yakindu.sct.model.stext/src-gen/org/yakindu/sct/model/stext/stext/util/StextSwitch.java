@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.util;
 
@@ -275,6 +276,15 @@ public class StextSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case StextPackage.DEFAULT_EVENT:
+      {
+        DefaultEvent defaultEvent = (DefaultEvent)theEObject;
+        T result = caseDefaultEvent(defaultEvent);
+        if (result == null) result = caseBuiltinEventSpec(defaultEvent);
+        if (result == null) result = caseEventSpec(defaultEvent);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case StextPackage.ASSIGNMENT:
       {
         Assignment assignment = (Assignment)theEObject;
@@ -296,6 +306,81 @@ public class StextSwitch<T> extends Switch<T>
         Expression expression = (Expression)theEObject;
         T result = caseExpression(expression);
         if (result == null) result = caseStatement(expression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION:
+      {
+        ElementReferenceExpression elementReferenceExpression = (ElementReferenceExpression)theEObject;
+        T result = caseElementReferenceExpression(elementReferenceExpression);
+        if (result == null) result = caseExpression(elementReferenceExpression);
+        if (result == null) result = caseStatement(elementReferenceExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION:
+      {
+        EventValueReferenceExpression eventValueReferenceExpression = (EventValueReferenceExpression)theEObject;
+        T result = caseEventValueReferenceExpression(eventValueReferenceExpression);
+        if (result == null) result = caseExpression(eventValueReferenceExpression);
+        if (result == null) result = caseStatement(eventValueReferenceExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.EVENT_RAISED_REFERENCE_EXPRESSION:
+      {
+        EventRaisedReferenceExpression eventRaisedReferenceExpression = (EventRaisedReferenceExpression)theEObject;
+        T result = caseEventRaisedReferenceExpression(eventRaisedReferenceExpression);
+        if (result == null) result = caseExpression(eventRaisedReferenceExpression);
+        if (result == null) result = caseStatement(eventRaisedReferenceExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.ACTIVE_STATE_REFERENCE_EXPRESSION:
+      {
+        ActiveStateReferenceExpression activeStateReferenceExpression = (ActiveStateReferenceExpression)theEObject;
+        T result = caseActiveStateReferenceExpression(activeStateReferenceExpression);
+        if (result == null) result = caseExpression(activeStateReferenceExpression);
+        if (result == null) result = caseStatement(activeStateReferenceExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.LITERAL:
+      {
+        Literal literal = (Literal)theEObject;
+        T result = caseLiteral(literal);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.BOOL_LITERAL:
+      {
+        BoolLiteral boolLiteral = (BoolLiteral)theEObject;
+        T result = caseBoolLiteral(boolLiteral);
+        if (result == null) result = caseLiteral(boolLiteral);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.INT_LITERAL:
+      {
+        IntLiteral intLiteral = (IntLiteral)theEObject;
+        T result = caseIntLiteral(intLiteral);
+        if (result == null) result = caseLiteral(intLiteral);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.REAL_LITERAL:
+      {
+        RealLiteral realLiteral = (RealLiteral)theEObject;
+        T result = caseRealLiteral(realLiteral);
+        if (result == null) result = caseLiteral(realLiteral);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.HEX_LITERAL:
+      {
+        HexLiteral hexLiteral = (HexLiteral)theEObject;
+        T result = caseHexLiteral(hexLiteral);
+        if (result == null) result = caseLiteral(hexLiteral);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -512,21 +597,30 @@ public class StextSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case StextPackage.ELEMENT_REFERENCE_EXPRESSION:
-      {
-        ElementReferenceExpression elementReferenceExpression = (ElementReferenceExpression)theEObject;
-        T result = caseElementReferenceExpression(elementReferenceExpression);
-        if (result == null) result = caseExpression(elementReferenceExpression);
-        if (result == null) result = caseStatement(elementReferenceExpression);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case StextPackage.OPERATION_CALL:
       {
         OperationCall operationCall = (OperationCall)theEObject;
         T result = caseOperationCall(operationCall);
         if (result == null) result = caseExpression(operationCall);
         if (result == null) result = caseStatement(operationCall);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.BOOLEAN_LITERAL:
+      {
+        BooleanLiteral booleanLiteral = (BooleanLiteral)theEObject;
+        T result = caseBooleanLiteral(booleanLiteral);
+        if (result == null) result = caseBoolLiteral(booleanLiteral);
+        if (result == null) result = caseLiteral(booleanLiteral);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.FLOAT_LITERAL:
+      {
+        FloatLiteral floatLiteral = (FloatLiteral)theEObject;
+        T result = caseFloatLiteral(floatLiteral);
+        if (result == null) result = caseRealLiteral(floatLiteral);
+        if (result == null) result = caseLiteral(floatLiteral);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -919,6 +1013,22 @@ public class StextSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Default Event</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Default Event</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDefaultEvent(DefaultEvent object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Assignment</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -962,6 +1072,150 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseExpression(Expression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Element Reference Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Element Reference Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseElementReferenceExpression(ElementReferenceExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Event Value Reference Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Event Value Reference Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEventValueReferenceExpression(EventValueReferenceExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Event Raised Reference Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Event Raised Reference Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEventRaisedReferenceExpression(EventRaisedReferenceExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Active State Reference Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Active State Reference Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseActiveStateReferenceExpression(ActiveStateReferenceExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLiteral(Literal object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Bool Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Bool Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBoolLiteral(BoolLiteral object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Int Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Int Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIntLiteral(IntLiteral object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Real Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Real Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRealLiteral(RealLiteral object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Hex Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Hex Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseHexLiteral(HexLiteral object)
   {
     return null;
   }
@@ -1351,22 +1605,6 @@ public class StextSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Element Reference Expression</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Element Reference Expression</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseElementReferenceExpression(ElementReferenceExpression object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Operation Call</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1378,6 +1616,38 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseOperationCall(OperationCall object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Boolean Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Boolean Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBooleanLiteral(BooleanLiteral object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Float Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Float Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFloatLiteral(FloatLiteral object)
   {
     return null;
   }

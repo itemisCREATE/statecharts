@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -92,9 +93,19 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.EXIT_EVENT: return createExitEvent();
       case StextPackage.ON_CYCLE_EVENT: return createOnCycleEvent();
       case StextPackage.ALWAYS_EVENT: return createAlwaysEvent();
+      case StextPackage.DEFAULT_EVENT: return createDefaultEvent();
       case StextPackage.ASSIGNMENT: return createAssignment();
       case StextPackage.EVENT_RAISING: return createEventRaising();
       case StextPackage.EXPRESSION: return createExpression();
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION: return createElementReferenceExpression();
+      case StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION: return createEventValueReferenceExpression();
+      case StextPackage.EVENT_RAISED_REFERENCE_EXPRESSION: return createEventRaisedReferenceExpression();
+      case StextPackage.ACTIVE_STATE_REFERENCE_EXPRESSION: return createActiveStateReferenceExpression();
+      case StextPackage.LITERAL: return createLiteral();
+      case StextPackage.BOOL_LITERAL: return createBoolLiteral();
+      case StextPackage.INT_LITERAL: return createIntLiteral();
+      case StextPackage.REAL_LITERAL: return createRealLiteral();
+      case StextPackage.HEX_LITERAL: return createHexLiteral();
       case StextPackage.SIMPLE_SCOPE: return createSimpleScope();
       case StextPackage.INTERFACE_SCOPE: return createInterfaceScope();
       case StextPackage.INTERNAL_SCOPE: return createInternalScope();
@@ -119,8 +130,9 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION: return createNumericalMultiplyDivideExpression();
       case StextPackage.NUMERICAL_UNARY_EXPRESSION: return createNumericalUnaryExpression();
       case StextPackage.PRIMITIVE_VALUE_EXPRESSION: return createPrimitiveValueExpression();
-      case StextPackage.ELEMENT_REFERENCE_EXPRESSION: return createElementReferenceExpression();
       case StextPackage.OPERATION_CALL: return createOperationCall();
+      case StextPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
+      case StextPackage.FLOAT_LITERAL: return createFloatLiteral();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -465,6 +477,17 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public DefaultEvent createDefaultEvent()
+  {
+    DefaultEventImpl defaultEvent = new DefaultEventImpl();
+    return defaultEvent;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Assignment createAssignment()
   {
     AssignmentImpl assignment = new AssignmentImpl();
@@ -491,6 +514,105 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ElementReferenceExpression createElementReferenceExpression()
+  {
+    ElementReferenceExpressionImpl elementReferenceExpression = new ElementReferenceExpressionImpl();
+    return elementReferenceExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EventValueReferenceExpression createEventValueReferenceExpression()
+  {
+    EventValueReferenceExpressionImpl eventValueReferenceExpression = new EventValueReferenceExpressionImpl();
+    return eventValueReferenceExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EventRaisedReferenceExpression createEventRaisedReferenceExpression()
+  {
+    EventRaisedReferenceExpressionImpl eventRaisedReferenceExpression = new EventRaisedReferenceExpressionImpl();
+    return eventRaisedReferenceExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ActiveStateReferenceExpression createActiveStateReferenceExpression()
+  {
+    ActiveStateReferenceExpressionImpl activeStateReferenceExpression = new ActiveStateReferenceExpressionImpl();
+    return activeStateReferenceExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Literal createLiteral()
+  {
+    LiteralImpl literal = new LiteralImpl();
+    return literal;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public BoolLiteral createBoolLiteral()
+  {
+    BoolLiteralImpl boolLiteral = new BoolLiteralImpl();
+    return boolLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IntLiteral createIntLiteral()
+  {
+    IntLiteralImpl intLiteral = new IntLiteralImpl();
+    return intLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RealLiteral createRealLiteral()
+  {
+    RealLiteralImpl realLiteral = new RealLiteralImpl();
+    return realLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public HexLiteral createHexLiteral()
+  {
+    HexLiteralImpl hexLiteral = new HexLiteralImpl();
+    return hexLiteral;
   }
 
   /**
@@ -762,10 +884,10 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ElementReferenceExpression createElementReferenceExpression()
+  public OperationCall createOperationCall()
   {
-    ElementReferenceExpressionImpl elementReferenceExpression = new ElementReferenceExpressionImpl();
-    return elementReferenceExpression;
+    OperationCallImpl operationCall = new OperationCallImpl();
+    return operationCall;
   }
 
   /**
@@ -773,10 +895,21 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public OperationCall createOperationCall()
+  public BooleanLiteral createBooleanLiteral()
   {
-    OperationCallImpl operationCall = new OperationCallImpl();
-    return operationCall;
+    BooleanLiteralImpl booleanLiteral = new BooleanLiteralImpl();
+    return booleanLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public FloatLiteral createFloatLiteral()
+  {
+    FloatLiteralImpl floatLiteral = new FloatLiteralImpl();
+    return floatLiteral;
   }
 
   /**

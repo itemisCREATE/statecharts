@@ -1,7 +1,8 @@
-grammar org.yakindu.sct.model.stext.SText with org.eclipse.xtext.common.Terminals
+grammar org.yakindu.sct.model.stext.SText 
 
 generate stext "http://www.yakindu.org/sct/statechart/SText"
 import "platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore" as sct
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 /* ---- root rules ----
 These root rules are not relevant for the grammar integration in the statechart. They just integrate the different start rules consistently 
 into a single grammar. 
@@ -76,7 +77,7 @@ enum Direction:
 /* ---- variable definition ---- */
 VariableDefinition returns sct::Variable:
 	{VariableDefinition} 'var' ((readonly?='readonly')? & (external?='external')?) name=ID ':' type=Type ('='
-	initialValue=Literal)?;
+	initialValue=Expression)?;
 
 /* ---- clock definition ---- */
 Clock returns sct::Declaration:
@@ -126,7 +127,7 @@ ReactionProperty:
 	ReactionPriority | EntryPointSpec | ExitPointSpec;
 
 ReactionPriority:
-	priority=INT;
+	priority=LONG_INT;
 
 EntryPointSpec:
 	'>' entrypoint=[Entrypoint|FQN];
@@ -142,13 +143,13 @@ RegularEventSpec:
 
 	// TODO: redefine after trigger - we need to use it with clocks
 TimeEventSpec: 
-	type=TimeEventType value=INT (unit=TimeUnit)?;
+	type=TimeEventType value=LONG_INT (unit=TimeUnit)?;
 
 enum TimeEventType: after | every;
 
 	// TODO: add dereived events like in(state), entered(state)	
 BuiltinEventSpec:
-	EntryEvent | ExitEvent | OnCycleEvent | AlwaysEvent;
+	EntryEvent | ExitEvent | OnCycleEvent | AlwaysEvent | DefaultEvent;
 
 EntryEvent:
 	{EntryEvent} 'entry';
@@ -157,10 +158,14 @@ ExitEvent:
 	{ExitEvent} 'exit';
 
 OnCycleEvent:
-	{OnCycleEvent} 'oncycle'; // TODO: ?!? better 'ontick' ?!?
+	{OnCycleEvent} 'oncycle'; 
 	
 AlwaysEvent:
 	{AlwaysEvent} 'always';
+
+DefaultEvent:
+	{DefaultEvent} ('default' | 'else')
+;
 
 /* --- statements --- */
 Statement returns sct::Statement:
@@ -284,28 +289,54 @@ enum Type:
 	void | integer | real | boolean | string;
 
 ValueExpression returns Expression:
-	PrimitiveValueExpression | ElementReferenceExpression;
+	PrimitiveValueExpression | ElementReferenceExpression | ActiveStateReferenceExpression| EventValueReferenceExpression | EventRaisedReferenceExpression;
 
 PrimitiveValueExpression returns Expression:
 	{PrimitiveValueExpression} value=Literal;
 
-ElementReferenceExpression returns Expression:
+ElementReferenceExpression:
 	{ElementReferenceExpression} value=[sct::Declaration|FQN];
+
+EventValueReferenceExpression:
+	{EventValueReferenceExpression} 'valueof' '(' value=[sct::Event|FQN]')';
+
+EventRaisedReferenceExpression:
+	{EventRaisedReferenceExpression} 'raised' '(' value=[sct::Event|FQN]')';
+	
+ActiveStateReferenceExpression:
+	{ActiveStateReferenceExpression}'active' '(' value=[sct::RegularState] ')' 
+;
+
 
 OperationCall returns Expression:
 	{OperationCall} operation=[Operation|FQN] '(' (args+=Expression (',' args+=Expression)*)? ')';
 
 Literal:
-	BOOL | INT | HEX | STRING | FLOAT;
+	BoolLiteral | IntLiteral | HexLiteral |  RealLiteral;
+BoolLiteral:
+	{BooleanLiteral} value=BOOL
+;
+IntLiteral:
+	{IntLiteral} value = LONG_INT
+;
+RealLiteral: 
+	{FloatLiteral} value = DOUBLE
+;
+HexLiteral:
+	{HexLiteral} value = HEX
+;
 
-terminal BOOL:
-	'true' | 'false';
+terminal LONG_INT returns ecore::ELong: ('0'..'9')+;
 
-terminal HEX: 
+terminal BOOL returns ecore::EBoolean:
+	'true' | 'false' | 'yes' | 'no';
+
+terminal HEX returns ecore::ELong: 
 	('0') ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+
 ;
 
-terminal FLOAT:
-	(INT '.' INT) ('e' ('-' | '+') INT)? ('f'|'F'|'d'|'D')?
+terminal DOUBLE returns ecore::EDouble:
+	(LONG_INT '.' LONG_INT) ('e' ('-' | '+') LONG_INT)? ('f'|'F'|'d'|'D')?
 ;
+terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
