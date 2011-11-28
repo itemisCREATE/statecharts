@@ -31,7 +31,7 @@ public class TransitionViewFactory extends ConnectionViewFactory {
 	protected void decorateView(View containerView, View view,
 			IAdaptable element, String semanticHint, int index,
 			boolean persisted) {
-		
+
 		FontStyle fontStyle = NotationFactory.eINSTANCE.createFontStyle();
 		view.getStyles().add(fontStyle);
 
@@ -42,7 +42,7 @@ public class TransitionViewFactory extends ConnectionViewFactory {
 				SemanticHints.TRANSITION_EXPRESSION);
 		Location location = (Location) label.getLayoutConstraint();
 		location.setX(0);
-		location.setY(40);
-		
+		location.setY(10);
+
 	}
 }
