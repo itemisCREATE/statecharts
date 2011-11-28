@@ -31,7 +31,7 @@ import org.yakindu.sct.model.sgraph.FinalState;
  * @generated
  */
 public class FinalStateItemProvider
-	extends VertexItemProvider
+	extends RegularStateItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,

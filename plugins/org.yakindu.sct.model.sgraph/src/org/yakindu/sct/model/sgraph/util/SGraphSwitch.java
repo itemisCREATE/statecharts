@@ -22,17 +22,18 @@ import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.ExpressionElement;
 import org.yakindu.sct.model.sgraph.FinalState;
-import org.yakindu.sct.model.sgraph.Junction;
 import org.yakindu.sct.model.sgraph.NamedElement;
 import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
@@ -142,6 +143,7 @@ public class SGraphSwitch<T> extends Switch<T> {
 			case SGraphPackage.FINAL_STATE: {
 				FinalState finalState = (FinalState)theEObject;
 				T result = caseFinalState(finalState);
+				if (result == null) result = caseRegularState(finalState);
 				if (result == null) result = caseVertex(finalState);
 				if (result == null) result = caseNamedElement(finalState);
 				if (result == null) result = defaultCase(theEObject);
@@ -152,15 +154,6 @@ public class SGraphSwitch<T> extends Switch<T> {
 				T result = caseVariable(variable);
 				if (result == null) result = caseDeclaration(variable);
 				if (result == null) result = caseNamedElement(variable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case SGraphPackage.JUNCTION: {
-				Junction junction = (Junction)theEObject;
-				T result = caseJunction(junction);
-				if (result == null) result = casePseudostate(junction);
-				if (result == null) result = caseVertex(junction);
-				if (result == null) result = caseNamedElement(junction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -270,10 +263,11 @@ public class SGraphSwitch<T> extends Switch<T> {
 			case SGraphPackage.STATE: {
 				State state = (State)theEObject;
 				T result = caseState(state);
-				if (result == null) result = caseVertex(state);
 				if (result == null) result = caseExpressionElement(state);
 				if (result == null) result = caseReactiveElement(state);
 				if (result == null) result = caseScopedElement(state);
+				if (result == null) result = caseRegularState(state);
+				if (result == null) result = caseVertex(state);
 				if (result == null) result = caseNamedElement(state);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -281,6 +275,14 @@ public class SGraphSwitch<T> extends Switch<T> {
 			case SGraphPackage.STATEMENT: {
 				Statement statement = (Statement)theEObject;
 				T result = caseStatement(statement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SGraphPackage.REGULAR_STATE: {
+				RegularState regularState = (RegularState)theEObject;
+				T result = caseRegularState(regularState);
+				if (result == null) result = caseVertex(regularState);
+				if (result == null) result = caseNamedElement(regularState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -409,6 +411,21 @@ public class SGraphSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Regular State</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Regular State</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRegularState(RegularState object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -420,21 +437,6 @@ public class SGraphSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseVariable(Variable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Junction</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Junction</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJunction(Junction object) {
 		return null;
 	}
 

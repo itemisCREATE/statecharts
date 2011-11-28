@@ -154,29 +154,6 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.Junction} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected JunctionItemProvider junctionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.sgraph.Junction}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createJunctionAdapter() {
-		if (junctionItemProvider == null) {
-			junctionItemProvider = new JunctionItemProvider(this);
-		}
-
-		return junctionItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.Choice} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -361,6 +338,29 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.RegularState} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RegularStateItemProvider regularStateItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sgraph.RegularState}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRegularStateAdapter() {
+		if (regularStateItemProvider == null) {
+			regularStateItemProvider = new RegularStateItemProvider(this);
+		}
+
+		return regularStateItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -462,7 +462,6 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 		if (regionItemProvider != null) regionItemProvider.dispose();
 		if (transitionItemProvider != null) transitionItemProvider.dispose();
 		if (finalStateItemProvider != null) finalStateItemProvider.dispose();
-		if (junctionItemProvider != null) junctionItemProvider.dispose();
 		if (choiceItemProvider != null) choiceItemProvider.dispose();
 		if (statechartItemProvider != null) statechartItemProvider.dispose();
 		if (entryItemProvider != null) entryItemProvider.dispose();
@@ -471,6 +470,7 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 		if (synchronizationItemProvider != null) synchronizationItemProvider.dispose();
 		if (stateItemProvider != null) stateItemProvider.dispose();
 		if (statementItemProvider != null) statementItemProvider.dispose();
+		if (regularStateItemProvider != null) regularStateItemProvider.dispose();
 	}
 
 }

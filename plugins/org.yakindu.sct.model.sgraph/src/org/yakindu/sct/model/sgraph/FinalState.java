@@ -22,7 +22,7 @@ package org.yakindu.sct.model.sgraph;
  * @model
  * @generated
  */
-public interface FinalState extends Vertex {
+public interface FinalState extends RegularState {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

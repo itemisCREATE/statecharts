@@ -22,7 +22,6 @@ import org.yakindu.sct.ui.editor.editparts.ChoiceEditPart;
 import org.yakindu.sct.ui.editor.editparts.EntryEditPart;
 import org.yakindu.sct.ui.editor.editparts.ExitEditPart;
 import org.yakindu.sct.ui.editor.editparts.FinalStateEditPart;
-import org.yakindu.sct.ui.editor.editparts.JunctionEditPart;
 import org.yakindu.sct.ui.editor.editparts.NamedElementLabelEditPart;
 import org.yakindu.sct.ui.editor.editparts.RegionCompartmentEditPart;
 import org.yakindu.sct.ui.editor.editparts.RegionEditPart;
@@ -68,7 +67,6 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
 		editParts.put(BORDER_ITEM_LABEL_CONTAINER, BorderItemEditPart.class);
 		editParts.put(SHALLOWHISTORY, EntryEditPart.class);
 		editParts.put(DEEPHISTORY, EntryEditPart.class);
-		editParts.put(JUNCTION, JunctionEditPart.class);
 		
 		editParts.put(REGION_COMPARTMENT, RegionCompartmentEditPart.class);
 		editParts.put(REGION, RegionEditPart.class);

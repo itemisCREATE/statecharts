@@ -35,7 +35,7 @@ import org.eclipse.emf.common.util.EList;
  * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NameIsNotEmpty'"
  * @generated
  */
-public interface State extends Vertex, ExpressionElement, ReactiveElement, ScopedElement {
+public interface State extends ExpressionElement, ReactiveElement, ScopedElement, RegularState {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -85,7 +85,7 @@ public interface State extends Vertex, ExpressionElement, ReactiveElement, Scope
 	 * @return the value of the '<em>Substatechart</em>' reference.
 	 * @see #setSubstatechart(Statechart)
 	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_Substatechart()
-	 * @model
+	 * @model transient="true"
 	 * @generated
 	 */
 	Statechart getSubstatechart();

@@ -22,13 +22,14 @@ import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
-import org.yakindu.sct.model.sgraph.Junction;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 
@@ -86,7 +87,6 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 			case SGraphPackage.REGION: return createRegion();
 			case SGraphPackage.TRANSITION: return createTransition();
 			case SGraphPackage.FINAL_STATE: return createFinalState();
-			case SGraphPackage.JUNCTION: return createJunction();
 			case SGraphPackage.CHOICE: return createChoice();
 			case SGraphPackage.STATECHART: return createStatechart();
 			case SGraphPackage.ENTRY: return createEntry();
@@ -95,6 +95,7 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 			case SGraphPackage.SYNCHRONIZATION: return createSynchronization();
 			case SGraphPackage.STATE: return createState();
 			case SGraphPackage.STATEMENT: return createStatement();
+			case SGraphPackage.REGULAR_STATE: return createRegularState();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -158,16 +159,6 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 	public FinalState createFinalState() {
 		FinalStateImpl finalState = new FinalStateImpl();
 		return finalState;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Junction createJunction() {
-		JunctionImpl junction = new JunctionImpl();
-		return junction;
 	}
 
 	/**
@@ -248,6 +239,16 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 	public Statement createStatement() {
 		StatementImpl statement = new StatementImpl();
 		return statement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RegularState createRegularState() {
+		RegularStateImpl regularState = new RegularStateImpl();
+		return regularState;
 	}
 
 	/**

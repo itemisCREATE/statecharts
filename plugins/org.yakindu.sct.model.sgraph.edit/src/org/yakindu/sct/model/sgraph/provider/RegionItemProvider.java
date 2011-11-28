@@ -190,12 +190,12 @@ public class RegionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SGraphPackage.Literals.REGION__VERTICES,
-				 SGraphFactory.eINSTANCE.createFinalState()));
+				 SGraphFactory.eINSTANCE.createRegularState()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SGraphPackage.Literals.REGION__VERTICES,
-				 SGraphFactory.eINSTANCE.createJunction()));
+				 SGraphFactory.eINSTANCE.createFinalState()));
 
 		newChildDescriptors.add
 			(createChildParameter

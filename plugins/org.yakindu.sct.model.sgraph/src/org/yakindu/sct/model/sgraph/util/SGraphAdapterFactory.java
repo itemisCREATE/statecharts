@@ -23,17 +23,18 @@ import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.ExpressionElement;
 import org.yakindu.sct.model.sgraph.FinalState;
-import org.yakindu.sct.model.sgraph.Junction;
 import org.yakindu.sct.model.sgraph.NamedElement;
 import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
@@ -132,10 +133,6 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 				return createVariableAdapter();
 			}
 			@Override
-			public Adapter caseJunction(Junction object) {
-				return createJunctionAdapter();
-			}
-			@Override
 			public Adapter caseEvent(Event object) {
 				return createEventAdapter();
 			}
@@ -198,6 +195,10 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseStatement(Statement object) {
 				return createStatementAdapter();
+			}
+			@Override
+			public Adapter caseRegularState(RegularState object) {
+				return createRegularStateAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -332,6 +333,20 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.RegularState <em>Regular State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sgraph.RegularState
+	 * @generated
+	 */
+	public Adapter createRegularStateAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Variable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -342,20 +357,6 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVariableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Junction <em>Junction</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.sgraph.Junction
-	 * @generated
-	 */
-	public Adapter createJunctionAdapter() {
 		return null;
 	}
 
