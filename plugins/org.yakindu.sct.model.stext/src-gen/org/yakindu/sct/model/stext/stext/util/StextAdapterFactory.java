@@ -399,16 +399,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
         return createOperationCallAdapter();
       }
       @Override
-      public Adapter caseBooleanLiteral(BooleanLiteral object)
-      {
-        return createBooleanLiteralAdapter();
-      }
-      @Override
-      public Adapter caseFloatLiteral(FloatLiteral object)
-      {
-        return createFloatLiteralAdapter();
-      }
-      @Override
       public Adapter caseNamedElement(NamedElement object)
       {
         return createNamedElementAdapter();
@@ -1401,36 +1391,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createOperationCallAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.BooleanLiteral <em>Boolean Literal</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.BooleanLiteral
-   * @generated
-   */
-  public Adapter createBooleanLiteralAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.FloatLiteral <em>Float Literal</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.FloatLiteral
-   * @generated
-   */
-  public Adapter createFloatLiteralAdapter()
   {
     return null;
   }

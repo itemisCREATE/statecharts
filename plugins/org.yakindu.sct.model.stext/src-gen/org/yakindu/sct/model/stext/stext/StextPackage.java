@@ -998,13 +998,22 @@ public interface StextPackage extends EPackage
   int BOOL_LITERAL = 33;
 
   /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOL_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Bool Literal</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BOOL_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 0;
+  int BOOL_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.IntLiteralImpl <em>Int Literal</em>}' class.
@@ -1045,13 +1054,22 @@ public interface StextPackage extends EPackage
   int REAL_LITERAL = 35;
 
   /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REAL_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Real Literal</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REAL_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 0;
+  int REAL_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.HexLiteralImpl <em>Hex Literal</em>}' class.
@@ -2088,62 +2106,6 @@ public interface StextPackage extends EPackage
   int OPERATION_CALL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
-   * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.yakindu.sct.model.stext.stext.impl.BooleanLiteralImpl
-   * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getBooleanLiteral()
-   * @generated
-   */
-  int BOOLEAN_LITERAL = 62;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BOOLEAN_LITERAL__VALUE = BOOL_LITERAL_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Boolean Literal</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BOOLEAN_LITERAL_FEATURE_COUNT = BOOL_LITERAL_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.FloatLiteralImpl <em>Float Literal</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.yakindu.sct.model.stext.stext.impl.FloatLiteralImpl
-   * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getFloatLiteral()
-   * @generated
-   */
-  int FLOAT_LITERAL = 63;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FLOAT_LITERAL__VALUE = REAL_LITERAL_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Float Literal</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FLOAT_LITERAL_FEATURE_COUNT = REAL_LITERAL_FEATURE_COUNT + 1;
-
-  /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.Direction <em>Direction</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2151,7 +2113,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getDirection()
    * @generated
    */
-  int DIRECTION = 64;
+  int DIRECTION = 62;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}' enum.
@@ -2161,7 +2123,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeEventType()
    * @generated
    */
-  int TIME_EVENT_TYPE = 65;
+  int TIME_EVENT_TYPE = 63;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.AssignmentOperator <em>Assignment Operator</em>}' enum.
@@ -2171,7 +2133,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getAssignmentOperator()
    * @generated
    */
-  int ASSIGNMENT_OPERATOR = 66;
+  int ASSIGNMENT_OPERATOR = 64;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.ShiftOperator <em>Shift Operator</em>}' enum.
@@ -2181,7 +2143,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getShiftOperator()
    * @generated
    */
-  int SHIFT_OPERATOR = 67;
+  int SHIFT_OPERATOR = 65;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -2191,7 +2153,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getAdditiveOperator()
    * @generated
    */
-  int ADDITIVE_OPERATOR = 68;
+  int ADDITIVE_OPERATOR = 66;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -2201,7 +2163,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getMultiplicativeOperator()
    * @generated
    */
-  int MULTIPLICATIVE_OPERATOR = 69;
+  int MULTIPLICATIVE_OPERATOR = 67;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -2211,7 +2173,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getUnaryOperator()
    * @generated
    */
-  int UNARY_OPERATOR = 70;
+  int UNARY_OPERATOR = 68;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -2221,7 +2183,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getRelationalOperator()
    * @generated
    */
-  int RELATIONAL_OPERATOR = 71;
+  int RELATIONAL_OPERATOR = 69;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.TimeUnit <em>Time Unit</em>}' enum.
@@ -2231,7 +2193,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeUnit()
    * @generated
    */
-  int TIME_UNIT = 72;
+  int TIME_UNIT = 70;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.Type <em>Type</em>}' enum.
@@ -2241,7 +2203,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getType()
    * @generated
    */
-  int TYPE = 73;
+  int TYPE = 71;
 
 
   /**
@@ -2893,6 +2855,17 @@ public interface StextPackage extends EPackage
   EClass getBoolLiteral();
 
   /**
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.BoolLiteral#isValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.yakindu.sct.model.stext.stext.BoolLiteral#isValue()
+   * @see #getBoolLiteral()
+   * @generated
+   */
+  EAttribute getBoolLiteral_Value();
+
+  /**
    * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.IntLiteral <em>Int Literal</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2922,6 +2895,17 @@ public interface StextPackage extends EPackage
    * @generated
    */
   EClass getRealLiteral();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.RealLiteral#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.yakindu.sct.model.stext.stext.RealLiteral#getValue()
+   * @see #getRealLiteral()
+   * @generated
+   */
+  EAttribute getRealLiteral_Value();
 
   /**
    * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.HexLiteral <em>Hex Literal</em>}'.
@@ -3679,48 +3663,6 @@ public interface StextPackage extends EPackage
   EReference getOperationCall_Args();
 
   /**
-   * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.BooleanLiteral <em>Boolean Literal</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Boolean Literal</em>'.
-   * @see org.yakindu.sct.model.stext.stext.BooleanLiteral
-   * @generated
-   */
-  EClass getBooleanLiteral();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.BooleanLiteral#isValue <em>Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Value</em>'.
-   * @see org.yakindu.sct.model.stext.stext.BooleanLiteral#isValue()
-   * @see #getBooleanLiteral()
-   * @generated
-   */
-  EAttribute getBooleanLiteral_Value();
-
-  /**
-   * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.FloatLiteral <em>Float Literal</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Float Literal</em>'.
-   * @see org.yakindu.sct.model.stext.stext.FloatLiteral
-   * @generated
-   */
-  EClass getFloatLiteral();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.FloatLiteral#getValue <em>Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Value</em>'.
-   * @see org.yakindu.sct.model.stext.stext.FloatLiteral#getValue()
-   * @see #getFloatLiteral()
-   * @generated
-   */
-  EAttribute getFloatLiteral_Value();
-
-  /**
    * Returns the meta object for enum '{@link org.yakindu.sct.model.stext.stext.Direction <em>Direction</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4408,6 +4350,14 @@ public interface StextPackage extends EPackage
     EClass BOOL_LITERAL = eINSTANCE.getBoolLiteral();
 
     /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BOOL_LITERAL__VALUE = eINSTANCE.getBoolLiteral_Value();
+
+    /**
      * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.IntLiteralImpl <em>Int Literal</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -4434,6 +4384,14 @@ public interface StextPackage extends EPackage
      * @generated
      */
     EClass REAL_LITERAL = eINSTANCE.getRealLiteral();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REAL_LITERAL__VALUE = eINSTANCE.getRealLiteral_Value();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.HexLiteralImpl <em>Hex Literal</em>}' class.
@@ -5054,42 +5012,6 @@ public interface StextPackage extends EPackage
      * @generated
      */
     EReference OPERATION_CALL__ARGS = eINSTANCE.getOperationCall_Args();
-
-    /**
-     * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.yakindu.sct.model.stext.stext.impl.BooleanLiteralImpl
-     * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getBooleanLiteral()
-     * @generated
-     */
-    EClass BOOLEAN_LITERAL = eINSTANCE.getBooleanLiteral();
-
-    /**
-     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute BOOLEAN_LITERAL__VALUE = eINSTANCE.getBooleanLiteral_Value();
-
-    /**
-     * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.FloatLiteralImpl <em>Float Literal</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.yakindu.sct.model.stext.stext.impl.FloatLiteralImpl
-     * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getFloatLiteral()
-     * @generated
-     */
-    EClass FLOAT_LITERAL = eINSTANCE.getFloatLiteral();
-
-    /**
-     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute FLOAT_LITERAL__VALUE = eINSTANCE.getFloatLiteral_Value();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.Direction <em>Direction</em>}' enum.

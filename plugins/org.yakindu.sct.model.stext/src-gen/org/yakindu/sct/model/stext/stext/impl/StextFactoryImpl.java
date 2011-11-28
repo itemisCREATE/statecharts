@@ -131,8 +131,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.NUMERICAL_UNARY_EXPRESSION: return createNumericalUnaryExpression();
       case StextPackage.PRIMITIVE_VALUE_EXPRESSION: return createPrimitiveValueExpression();
       case StextPackage.OPERATION_CALL: return createOperationCall();
-      case StextPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
-      case StextPackage.FLOAT_LITERAL: return createFloatLiteral();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -888,28 +886,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     OperationCallImpl operationCall = new OperationCallImpl();
     return operationCall;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public BooleanLiteral createBooleanLiteral()
-  {
-    BooleanLiteralImpl booleanLiteral = new BooleanLiteralImpl();
-    return booleanLiteral;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public FloatLiteral createFloatLiteral()
-  {
-    FloatLiteralImpl floatLiteral = new FloatLiteralImpl();
-    return floatLiteral;
   }
 
   /**

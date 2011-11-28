@@ -314,13 +314,13 @@ OperationCall returns Expression:
 Literal:
 	BoolLiteral | IntLiteral | HexLiteral |  RealLiteral;
 BoolLiteral:
-	{BooleanLiteral} value=BOOL
+	{BoolLiteral} value=BOOL
 ;
 IntLiteral:
 	{IntLiteral} value = LONG_INT
 ;
 RealLiteral: 
-	{FloatLiteral} value = DOUBLE
+	{RealLiteral} value = DOUBLE
 ;
 HexLiteral:
 	{HexLiteral} value = HEX
@@ -338,5 +338,7 @@ terminal HEX returns ecore::ELong:
 terminal DOUBLE returns ecore::EDouble:
 	(LONG_INT '.' LONG_INT) ('e' ('-' | '+') LONG_INT)? ('f'|'F'|'d'|'D')?
 ;
-terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+terminal ID :
+	'^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
+;
 

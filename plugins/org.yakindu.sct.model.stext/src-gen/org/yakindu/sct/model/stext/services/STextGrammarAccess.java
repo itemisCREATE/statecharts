@@ -2287,19 +2287,19 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	public class BoolLiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BoolLiteral");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cBooleanLiteralAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cBoolLiteralAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cValueBOOLTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
 		//BoolLiteral:
-		//	{BooleanLiteral} value=BOOL;
+		//	{BoolLiteral} value=BOOL;
 		public ParserRule getRule() { return rule; }
 
-		//{BooleanLiteral} value=BOOL
+		//{BoolLiteral} value=BOOL
 		public Group getGroup() { return cGroup; }
 
-		//{BooleanLiteral}
-		public Action getBooleanLiteralAction_0() { return cBooleanLiteralAction_0; }
+		//{BoolLiteral}
+		public Action getBoolLiteralAction_0() { return cBoolLiteralAction_0; }
 
 		//value=BOOL
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
@@ -2335,19 +2335,19 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	public class RealLiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RealLiteral");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cFloatLiteralAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cRealLiteralAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cValueDOUBLETerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
 		//RealLiteral:
-		//	{FloatLiteral} value=DOUBLE;
+		//	{RealLiteral} value=DOUBLE;
 		public ParserRule getRule() { return rule; }
 
-		//{FloatLiteral} value=DOUBLE
+		//{RealLiteral} value=DOUBLE
 		public Group getGroup() { return cGroup; }
 
-		//{FloatLiteral}
-		public Action getFloatLiteralAction_0() { return cFloatLiteralAction_0; }
+		//{RealLiteral}
+		public Action getRealLiteralAction_0() { return cRealLiteralAction_0; }
 
 		//value=DOUBLE
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
@@ -3712,7 +3712,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//BoolLiteral:
-	//	{BooleanLiteral} value=BOOL;
+	//	{BoolLiteral} value=BOOL;
 	public BoolLiteralElements getBoolLiteralAccess() {
 		return (pBoolLiteral != null) ? pBoolLiteral : (pBoolLiteral = new BoolLiteralElements());
 	}
@@ -3732,7 +3732,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RealLiteral:
-	//	{FloatLiteral} value=DOUBLE;
+	//	{RealLiteral} value=DOUBLE;
 	public RealLiteralElements getRealLiteralAccess() {
 		return (pRealLiteral != null) ? pRealLiteral : (pRealLiteral = new RealLiteralElements());
 	}
