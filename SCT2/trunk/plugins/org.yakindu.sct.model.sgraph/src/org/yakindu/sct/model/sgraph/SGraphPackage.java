@@ -1175,13 +1175,22 @@ public interface SGraphPackage extends EPackage {
 	int STATE__SUBSTATECHART = VERTEX_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Substatechart Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__SUBSTATECHART_ID = VERTEX_FEATURE_COUNT + 8;
+
+	/**
 	 * The feature id for the '<em><b>Submachine</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SUBMACHINE = VERTEX_FEATURE_COUNT + 8;
+	int STATE__SUBMACHINE = VERTEX_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Simple</b></em>' attribute.
@@ -1190,7 +1199,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SIMPLE = VERTEX_FEATURE_COUNT + 9;
+	int STATE__SIMPLE = VERTEX_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Composite</b></em>' attribute.
@@ -1199,7 +1208,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__COMPOSITE = VERTEX_FEATURE_COUNT + 10;
+	int STATE__COMPOSITE = VERTEX_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Leaf</b></em>' attribute.
@@ -1208,7 +1217,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__LEAF = VERTEX_FEATURE_COUNT + 11;
+	int STATE__LEAF = VERTEX_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -1217,7 +1226,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = VERTEX_FEATURE_COUNT + 12;
+	int STATE_FEATURE_COUNT = VERTEX_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.StatementImpl <em>Statement</em>}' class.
@@ -1450,6 +1459,17 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getState_Substatechart();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.State#getSubstatechartId <em>Substatechart Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Substatechart Id</em>'.
+	 * @see org.yakindu.sct.model.sgraph.State#getSubstatechartId()
+	 * @see #getState()
+	 * @generated
+	 */
+	EAttribute getState_SubstatechartId();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.State#isSubmachine <em>Submachine</em>}'.
@@ -1994,6 +2014,14 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STATE__SUBSTATECHART = eINSTANCE.getState_Substatechart();
+
+		/**
+		 * The meta object literal for the '<em><b>Substatechart Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE__SUBSTATECHART_ID = eINSTANCE.getState_SubstatechartId();
 
 		/**
 		 * The meta object literal for the '<em><b>Submachine</b></em>' attribute feature.

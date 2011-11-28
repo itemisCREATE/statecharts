@@ -490,7 +490,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getState_Submachine() {
+	public EAttribute getState_SubstatechartId() {
         return (EAttribute)getState().getEStructuralFeatures().get(3);
 	}
 
@@ -499,7 +499,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getState_Simple() {
+	public EAttribute getState_Submachine() {
         return (EAttribute)getState().getEStructuralFeatures().get(4);
 	}
 
@@ -508,7 +508,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getState_Composite() {
+	public EAttribute getState_Simple() {
         return (EAttribute)getState().getEStructuralFeatures().get(5);
 	}
 
@@ -517,8 +517,17 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getState_Leaf() {
+	public EAttribute getState_Composite() {
         return (EAttribute)getState().getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getState_Leaf() {
+        return (EAttribute)getState().getEStructuralFeatures().get(7);
 	}
 
 	/**

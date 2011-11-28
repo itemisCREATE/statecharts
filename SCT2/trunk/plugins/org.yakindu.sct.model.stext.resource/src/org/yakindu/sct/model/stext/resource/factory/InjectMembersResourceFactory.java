@@ -14,11 +14,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.Constants;
+import org.yakindu.sct.model.sgraph.resource.SGraphInjectMembersResource;
 import org.yakindu.sct.model.stext.resource.services.StateInjectionService;
 import org.yakindu.sct.model.stext.resource.services.StatechartInjectionService;
 import org.yakindu.sct.model.stext.resource.services.TransitionInjectionService;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.inject.name.Named;
 
 import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
@@ -42,9 +44,13 @@ public class InjectMembersResourceFactory extends XMIResourceFactoryImpl {
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
 
+	@Inject
+	Injector injector;
+
 	@Override
 	public Resource createResource(URI uri) {
-		InjectMembersResource resource = new InjectMembersResource(uri);
+		InjectMembersResource resource = new SGraphInjectMembersResource(uri);
+		injector.injectMembers(resource);
 		resource.getServices().add(transitionService);
 		resource.getServices().add(stateService);
 		resource.getServices().add(statechartService);
