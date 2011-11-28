@@ -183,18 +183,6 @@
                   value="Exit">
             </param>
          </metamodelType>
-         <metamodelType
-               eclass="Junction"
-               edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
-               icon="icons/obj16/Junction-16.png"
-               id="org.yakindu.sct.ui.editor.Junction"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               name="Junction">
-            <param
-                  name="semanticHint"
-                  value="Junction">
-            </param>
-         </metamodelType>
           <metamodelType
                 eclass="Synchronization"
                 edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
@@ -414,15 +402,6 @@
                    large_icon="icons/obj32/Choice-32.png"
                    path="/tools/"
                    small_icon="icons/obj16/Choice-16.png">
-             </entry>
-             <entry
-                   description="Creates a junction"
-                   id="org.yakindu.sct.ui.editor.Junction"
-                   kind="tool"
-                   label="Junction"
-                   large_icon="icons/obj32/Junction-32.png"
-                   path="/tools/"
-                   small_icon="icons/obj16/Junction-16.png">
              </entry>
              <entry
                    description="Creates a synchronization"
@@ -739,21 +718,6 @@
             </ElementType>
             <ElementType
                   class="org.yakindu.sct.ui.editor.editparts.SynchronizationEditPart">
-               <GlobalActionId
-                     actionId="delete">
-               </GlobalActionId>
-               <GlobalActionId
-                     actionId="save">
-               </GlobalActionId>
-               <GlobalActionId
-                     actionId="copy">
-               </GlobalActionId>
-               <GlobalActionId
-                     actionId="cut">
-               </GlobalActionId>
-            </ElementType>
-            <ElementType
-                  class="org.yakindu.sct.ui.editor.editparts.JunctionEditPart">
                <GlobalActionId
                      actionId="delete">
                </GlobalActionId>

@@ -15,7 +15,6 @@ import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
-import org.yakindu.sct.model.sgraph.Junction;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
@@ -56,10 +55,6 @@ public final class SemanticHintUtil implements SemanticHints {
 				return REGION;
 			}
 
-			@Override
-			public String caseJunction(Junction object) {
-				return JUNCTION;
-			}
 
 			@Override
 			public String caseEntry(Entry object) {

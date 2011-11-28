@@ -23,7 +23,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
  *
  * @generated
  */
-public class FinalStateImpl extends VertexImpl implements FinalState {
+public class FinalStateImpl extends RegularStateImpl implements FinalState {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

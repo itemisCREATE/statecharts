@@ -64,15 +64,6 @@ public interface SGraphFactory extends EFactory {
 	FinalState createFinalState();
 
 	/**
-	 * Returns a new object of class '<em>Junction</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Junction</em>'.
-	 * @generated
-	 */
-	Junction createJunction();
-
-	/**
 	 * Returns a new object of class '<em>Choice</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -143,6 +134,15 @@ public interface SGraphFactory extends EFactory {
 	 * @generated
 	 */
 	Statement createStatement();
+
+	/**
+	 * Returns a new object of class '<em>Regular State</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Regular State</em>'.
+	 * @generated
+	 */
+	RegularState createRegularState();
 
 	/**
 	 * Returns the package supported by this factory.

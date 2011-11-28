@@ -32,7 +32,6 @@
     </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//FinalState"/>
     <genClasses image="false" ecoreClass="sgraph.ecore#//Variable"/>
-    <genClasses ecoreClass="sgraph.ecore#//Junction"/>
     <genClasses ecoreClass="sgraph.ecore#//Event"/>
     <genClasses ecoreClass="sgraph.ecore#//Choice"/>
     <genClasses ecoreClass="sgraph.ecore#//Statechart">
@@ -77,5 +76,6 @@
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/leaf"/>
     </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//Statement"/>
+    <genClasses ecoreClass="sgraph.ecore#//RegularState"/>
   </genPackages>
 </genmodel:GenModel>

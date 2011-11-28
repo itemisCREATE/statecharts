@@ -16,22 +16,24 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.yakindu.sct.model.sgraph.Junction;
+
+import org.yakindu.sct.model.sgraph.RegularState;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.sct.model.sgraph.Junction} object.
+ * This is the item provider adapter for a {@link org.yakindu.sct.model.sgraph.RegularState} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class JunctionItemProvider
-	extends PseudostateItemProvider
+public class RegularStateItemProvider
+	extends VertexItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -51,7 +53,7 @@ public class JunctionItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JunctionItemProvider(AdapterFactory adapterFactory) {
+	public RegularStateItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -71,14 +73,14 @@ public class JunctionItemProvider
 	}
 
 	/**
-	 * This returns Junction.gif.
+	 * This returns RegularState.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Junction"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/RegularState"));
 	}
 
 	/**
@@ -89,10 +91,10 @@ public class JunctionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Junction)object).getName();
+		String label = ((RegularState)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Junction_type") :
-			getString("_UI_Junction_type") + " " + label;
+			getString("_UI_RegularState_type") :
+			getString("_UI_RegularState_type") + " " + label;
 	}
 
 	/**

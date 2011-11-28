@@ -37,7 +37,7 @@ import org.yakindu.sct.model.sgraph.State;
  * @generated
  */
 public class StateItemProvider
-	extends VertexItemProvider
+	extends ExpressionElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -72,39 +72,19 @@ public class StateItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addExpressionPropertyDescriptor(object);
 			addReactionsPropertyDescriptor(object);
 			addNamespacePropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
+			addIncomingTransitionsPropertyDescriptor(object);
 			addOrthogonalPropertyDescriptor(object);
 			addSubstatechartPropertyDescriptor(object);
+			addSubstatechartIdPropertyDescriptor(object);
 			addSubmachinePropertyDescriptor(object);
 			addSimplePropertyDescriptor(object);
 			addCompositePropertyDescriptor(object);
 			addLeafPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Expression feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addExpressionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ExpressionElement_expression_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ExpressionElement_expression_feature", "_UI_ExpressionElement_type"),
-				 SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -152,6 +132,50 @@ public class StateItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NamedElement_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
+				 SGraphPackage.Literals.NAMED_ELEMENT__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Incoming Transitions feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIncomingTransitionsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Vertex_incomingTransitions_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Vertex_incomingTransitions_feature", "_UI_Vertex_type"),
+				 SGraphPackage.Literals.VERTEX__INCOMING_TRANSITIONS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Orthogonal feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -191,6 +215,28 @@ public class StateItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Substatechart Id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSubstatechartIdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_State_substatechartId_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_State_substatechartId_feature", "_UI_State_type"),
+				 SGraphPackage.Literals.STATE__SUBSTATECHART_ID,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -297,6 +343,7 @@ public class StateItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(SGraphPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS);
 			childrenFeatures.add(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES);
+			childrenFeatures.add(SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS);
 			childrenFeatures.add(SGraphPackage.Literals.STATE__SUB_REGIONS);
 		}
 		return childrenFeatures;
@@ -352,9 +399,10 @@ public class StateItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(State.class)) {
-			case SGraphPackage.STATE__EXPRESSION:
 			case SGraphPackage.STATE__NAMESPACE:
+			case SGraphPackage.STATE__NAME:
 			case SGraphPackage.STATE__ORTHOGONAL:
+			case SGraphPackage.STATE__SUBSTATECHART_ID:
 			case SGraphPackage.STATE__SUBMACHINE:
 			case SGraphPackage.STATE__SIMPLE:
 			case SGraphPackage.STATE__COMPOSITE:
@@ -363,6 +411,7 @@ public class StateItemProvider
 				return;
 			case SGraphPackage.STATE__LOCAL_REACTIONS:
 			case SGraphPackage.STATE__SCOPES:
+			case SGraphPackage.STATE__OUTGOING_TRANSITIONS:
 			case SGraphPackage.STATE__SUB_REGIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -393,6 +442,11 @@ public class StateItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS,
+				 SGraphFactory.eINSTANCE.createTransition()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(SGraphPackage.Literals.STATE__SUB_REGIONS,
 				 SGraphFactory.eINSTANCE.createRegion()));
 	}
@@ -409,8 +463,8 @@ public class StateItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS ||
-			childFeature == SGraphPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS;
+			childFeature == SGraphPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS ||
+			childFeature == SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS;
 
 		if (qualify) {
 			return getString

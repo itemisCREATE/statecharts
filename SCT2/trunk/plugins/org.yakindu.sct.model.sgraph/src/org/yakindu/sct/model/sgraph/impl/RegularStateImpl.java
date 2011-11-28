@@ -11,19 +11,20 @@
 package org.yakindu.sct.model.sgraph.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.yakindu.sct.model.sgraph.Junction;
+
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Junction</b></em>'.
+ * An implementation of the model object '<em><b>Regular State</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class JunctionImpl extends PseudostateImpl implements Junction {
+public class RegularStateImpl extends VertexImpl implements RegularState {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -36,7 +37,7 @@ public class JunctionImpl extends PseudostateImpl implements Junction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected JunctionImpl() {
+	protected RegularStateImpl() {
 		super();
 	}
 
@@ -47,7 +48,7 @@ public class JunctionImpl extends PseudostateImpl implements Junction {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return SGraphPackage.Literals.JUNCTION;
+		return SGraphPackage.Literals.REGULAR_STATE;
 	}
 
-} //JunctionImpl
+} //RegularStateImpl

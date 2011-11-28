@@ -28,17 +28,18 @@ import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.ExpressionElement;
 import org.yakindu.sct.model.sgraph.FinalState;
-import org.yakindu.sct.model.sgraph.Junction;
 import org.yakindu.sct.model.sgraph.NamedElement;
 import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
@@ -147,8 +148,6 @@ public class SGraphValidator extends EObjectValidator {
 				return validateFinalState((FinalState)value, diagnostics, context);
 			case SGraphPackage.VARIABLE:
 				return validateVariable((Variable)value, diagnostics, context);
-			case SGraphPackage.JUNCTION:
-				return validateJunction((Junction)value, diagnostics, context);
 			case SGraphPackage.EVENT:
 				return validateEvent((Event)value, diagnostics, context);
 			case SGraphPackage.CHOICE:
@@ -181,6 +180,8 @@ public class SGraphValidator extends EObjectValidator {
 				return validateState((State)value, diagnostics, context);
 			case SGraphPackage.STATEMENT:
 				return validateStatement((Statement)value, diagnostics, context);
+			case SGraphPackage.REGULAR_STATE:
+				return validateRegularState((RegularState)value, diagnostics, context);
 			case SGraphPackage.ENTRY_KIND:
 				return validateEntryKind((EntryKind)value, diagnostics, context);
 			default:
@@ -414,32 +415,32 @@ public class SGraphValidator extends EObjectValidator {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateVariable(Variable variable,
-			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(variable, diagnostics, context);
+	public boolean validateRegularState(RegularState regularState, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(regularState, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(regularState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(regularState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(regularState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(regularState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(regularState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(regularState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(regularState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(regularState, diagnostics, context);
+		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(regularState, diagnostics, context);
+		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(regularState, diagnostics, context);
+		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateJunction(Junction junction,
+	public boolean validateVariable(Variable variable,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(junction, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(junction, diagnostics, context);
-		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(junction, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint(variable, diagnostics, context);
 	}
 
 	/**

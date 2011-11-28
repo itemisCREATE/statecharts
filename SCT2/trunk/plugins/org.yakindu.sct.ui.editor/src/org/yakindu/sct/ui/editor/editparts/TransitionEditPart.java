@@ -64,4 +64,5 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 			super.handleNotificationEvent(notification);
 		}
 	}
+	
 }
