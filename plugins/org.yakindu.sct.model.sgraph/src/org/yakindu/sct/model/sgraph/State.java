@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.yakindu.sct.model.sgraph.State#getSubRegions <em>Sub Regions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#isOrthogonal <em>Orthogonal</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#getSubstatechart <em>Substatechart</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.State#getSubstatechartId <em>Substatechart Id</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#isSubmachine <em>Submachine</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#isSimple <em>Simple</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#isComposite <em>Composite</em>}</li>
@@ -98,6 +99,32 @@ public interface State extends Vertex, ExpressionElement, ReactiveElement, Scope
 	 * @generated
 	 */
 	void setSubstatechart(Statechart value);
+
+	/**
+	 * Returns the value of the '<em><b>Substatechart Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Substatechart Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Substatechart Id</em>' attribute.
+	 * @see #setSubstatechartId(String)
+	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_SubstatechartId()
+	 * @model
+	 * @generated
+	 */
+	String getSubstatechartId();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sgraph.State#getSubstatechartId <em>Substatechart Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Substatechart Id</em>' attribute.
+	 * @see #getSubstatechartId()
+	 * @generated
+	 */
+	void setSubstatechartId(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Submachine</b></em>' attribute.

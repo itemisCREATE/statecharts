@@ -70,6 +70,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//State/subRegions"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/orthogonal"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sgraph.ecore#//State/substatechart"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/substatechartId"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/submachine"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/simple"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/composite"/>

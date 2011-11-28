@@ -99,7 +99,9 @@
         upperBound="-1" eType="#//Region" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="orthogonal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="substatechart" eType="#//Statechart"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="substatechart" eType="#//Statechart"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="substatechartId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="submachine" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simple" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
