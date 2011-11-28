@@ -38,7 +38,7 @@ public class ReactionPriorityImpl extends ReactionPropertyImpl implements Reacti
    * @generated
    * @ordered
    */
-  protected static final long PRIORITY_EDEFAULT = 0L;
+  protected static final int PRIORITY_EDEFAULT = 0;
 
   /**
    * The cached value of the '{@link #getPriority() <em>Priority</em>}' attribute.
@@ -48,7 +48,7 @@ public class ReactionPriorityImpl extends ReactionPropertyImpl implements Reacti
    * @generated
    * @ordered
    */
-  protected long priority = PRIORITY_EDEFAULT;
+  protected int priority = PRIORITY_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -76,7 +76,7 @@ public class ReactionPriorityImpl extends ReactionPropertyImpl implements Reacti
    * <!-- end-user-doc -->
    * @generated
    */
-  public long getPriority()
+  public int getPriority()
   {
     return priority;
   }
@@ -86,9 +86,9 @@ public class ReactionPriorityImpl extends ReactionPropertyImpl implements Reacti
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPriority(long newPriority)
+  public void setPriority(int newPriority)
   {
-    long oldPriority = priority;
+    int oldPriority = priority;
     priority = newPriority;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.REACTION_PRIORITY__PRIORITY, oldPriority, priority));
@@ -121,7 +121,7 @@ public class ReactionPriorityImpl extends ReactionPropertyImpl implements Reacti
     switch (featureID)
     {
       case StextPackage.REACTION_PRIORITY__PRIORITY:
-        setPriority((Long)newValue);
+        setPriority((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);

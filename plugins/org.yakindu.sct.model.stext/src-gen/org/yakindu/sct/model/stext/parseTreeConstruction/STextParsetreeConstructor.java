@@ -5140,11 +5140,11 @@ protected class ReactionProperty_ExitPointSpecParserRuleCall_2 extends RuleCallT
 /************ begin Rule ReactionPriority ****************
  *
  * ReactionPriority:
- * 	priority=LONG_INT;
+ * 	priority=INT;
  *
  **/
 
-// priority=LONG_INT
+// priority=INT
 protected class ReactionPriority_PriorityAssignment extends AssignmentToken  {
 	
 	public ReactionPriority_PriorityAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5169,9 +5169,9 @@ protected class ReactionPriority_PriorityAssignment extends AssignmentToken  {
 			return null;
 		if((value = eObjectConsumer.getConsumable("priority",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("priority");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getReactionPriorityAccess().getPriorityLONG_INTTerminalRuleCall_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getReactionPriorityAccess().getPriorityINTTerminalRuleCall_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getReactionPriorityAccess().getPriorityLONG_INTTerminalRuleCall_0();
+			element = grammarAccess.getReactionPriorityAccess().getPriorityINTTerminalRuleCall_0();
 			return obj;
 		}
 		return null;
@@ -5590,11 +5590,11 @@ protected class RegularEventSpec_EventAssignment extends AssignmentToken  {
  *
  * // TODO: redefine after trigger - we need to use it with clocks
  * TimeEventSpec:
- * 	type=TimeEventType value=LONG_INT unit=TimeUnit?;
+ * 	type=TimeEventType value=INT unit=TimeUnit?;
  *
  **/
 
-// type=TimeEventType value=LONG_INT unit=TimeUnit?
+// type=TimeEventType value=INT unit=TimeUnit?
 protected class TimeEventSpec_Group extends GroupToken {
 	
 	public TimeEventSpec_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5657,7 +5657,7 @@ protected class TimeEventSpec_TypeAssignment_0 extends AssignmentToken  {
 
 }
 
-// value=LONG_INT
+// value=INT
 protected class TimeEventSpec_ValueAssignment_1 extends AssignmentToken  {
 	
 	public TimeEventSpec_ValueAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5681,9 +5681,9 @@ protected class TimeEventSpec_ValueAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTimeEventSpecAccess().getValueLONG_INTTerminalRuleCall_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTimeEventSpecAccess().getValueINTTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getTimeEventSpecAccess().getValueLONG_INTTerminalRuleCall_1_0();
+			element = grammarAccess.getTimeEventSpecAccess().getValueINTTerminalRuleCall_1_0();
 			return obj;
 		}
 		return null;
@@ -11549,11 +11549,11 @@ protected class BoolLiteral_ValueAssignment_1 extends AssignmentToken  {
 /************ begin Rule IntLiteral ****************
  *
  * IntLiteral:
- * 	{IntLiteral} value=LONG_INT;
+ * 	{IntLiteral} value=INT;
  *
  **/
 
-// {IntLiteral} value=LONG_INT
+// {IntLiteral} value=INT
 protected class IntLiteral_Group extends GroupToken {
 	
 	public IntLiteral_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -11608,7 +11608,7 @@ protected class IntLiteral_IntLiteralAction_0 extends ActionToken  {
 	}
 }
 
-// value=LONG_INT
+// value=INT
 protected class IntLiteral_ValueAssignment_1 extends AssignmentToken  {
 	
 	public IntLiteral_ValueAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -11632,9 +11632,9 @@ protected class IntLiteral_ValueAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getIntLiteralAccess().getValueLONG_INTTerminalRuleCall_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getIntLiteralAccess().getValueINTTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getIntLiteralAccess().getValueLONG_INTTerminalRuleCall_1_0();
+			element = grammarAccess.getIntLiteralAccess().getValueINTTerminalRuleCall_1_0();
 			return obj;
 		}
 		return null;

@@ -65,12 +65,12 @@ public interface TimeEventSpec extends EventSpec
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' attribute.
-   * @see #setValue(long)
+   * @see #setValue(int)
    * @see org.yakindu.sct.model.stext.stext.StextPackage#getTimeEventSpec_Value()
    * @model
    * @generated
    */
-  long getValue();
+  int getValue();
 
   /**
    * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.TimeEventSpec#getValue <em>Value</em>}' attribute.
@@ -80,7 +80,7 @@ public interface TimeEventSpec extends EventSpec
    * @see #getValue()
    * @generated
    */
-  void setValue(long value);
+  void setValue(int value);
 
   /**
    * Returns the value of the '<em><b>Unit</b></em>' attribute.

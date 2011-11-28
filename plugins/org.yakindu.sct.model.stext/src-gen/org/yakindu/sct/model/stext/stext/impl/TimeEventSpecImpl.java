@@ -62,7 +62,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec
    * @generated
    * @ordered
    */
-  protected static final long VALUE_EDEFAULT = 0L;
+  protected static final int VALUE_EDEFAULT = 0;
 
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -72,7 +72,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec
    * @generated
    * @ordered
    */
-  protected long value = VALUE_EDEFAULT;
+  protected int value = VALUE_EDEFAULT;
 
   /**
    * The default value of the '{@link #getUnit() <em>Unit</em>}' attribute.
@@ -143,7 +143,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec
    * <!-- end-user-doc -->
    * @generated
    */
-  public long getValue()
+  public int getValue()
   {
     return value;
   }
@@ -153,9 +153,9 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(long newValue)
+  public void setValue(int newValue)
   {
-    long oldValue = value;
+    int oldValue = value;
     value = newValue;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.TIME_EVENT_SPEC__VALUE, oldValue, value));
@@ -218,7 +218,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec
         setType((TimeEventType)newValue);
         return;
       case StextPackage.TIME_EVENT_SPEC__VALUE:
-        setValue((Long)newValue);
+        setValue((Integer)newValue);
         return;
       case StextPackage.TIME_EVENT_SPEC__UNIT:
         setUnit((TimeUnit)newValue);

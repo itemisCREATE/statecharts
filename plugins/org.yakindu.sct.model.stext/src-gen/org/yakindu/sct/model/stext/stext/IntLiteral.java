@@ -34,12 +34,12 @@ public interface IntLiteral extends Literal
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' attribute.
-   * @see #setValue(long)
+   * @see #setValue(int)
    * @see org.yakindu.sct.model.stext.stext.StextPackage#getIntLiteral_Value()
    * @model
    * @generated
    */
-  long getValue();
+  int getValue();
 
   /**
    * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.IntLiteral#getValue <em>Value</em>}' attribute.
@@ -49,6 +49,6 @@ public interface IntLiteral extends Literal
    * @see #getValue()
    * @generated
    */
-  void setValue(long value);
+  void setValue(int value);
 
 } // IntLiteral
