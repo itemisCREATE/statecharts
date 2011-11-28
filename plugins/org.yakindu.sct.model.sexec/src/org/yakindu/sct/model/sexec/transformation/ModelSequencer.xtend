@@ -61,6 +61,8 @@ import org.yakindu.sct.model.stext.stext.MultiplicativeOperator
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
 import com.sun.org.apache.xerces.internal.dom.ParentNode$UserDataRecord
 import org.yakindu.sct.model.sexec.StateSwitch
+import org.yakindu.sct.model.stext.stext.OnCycleEvent
+import org.yakindu.sct.model.stext.stext.AlwaysEvent
 
 class ModelSequencer {
 	
@@ -547,7 +549,17 @@ class ModelSequencer {
 		return r
 	}
 
+	def dispatch Expression raised(OnCycleEvent e) {
+		val r = stextFactory.createPrimitiveValueExpression
+		r.value = 'true'
+		return r
+	}
 	
+	def dispatch Expression raised(AlwaysEvent e) {
+		val r = stextFactory.createPrimitiveValueExpression
+		r.value = 'true'
+		return r		
+	}
 	
 	/* ==========================================================================
 	 * HANDLING TIME EVENTS
