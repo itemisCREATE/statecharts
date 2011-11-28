@@ -25,7 +25,6 @@ import org.yakindu.sct.model.stext.stext.BitwiseAndExpression;
 import org.yakindu.sct.model.stext.stext.BitwiseOrExpression;
 import org.yakindu.sct.model.stext.stext.BitwiseXorExpression;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
-import org.yakindu.sct.model.stext.stext.BooleanLiteral;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
 import org.yakindu.sct.model.stext.stext.Clock;
 import org.yakindu.sct.model.stext.stext.ConditionalExpression;
@@ -46,7 +45,6 @@ import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.Exitpoint;
 import org.yakindu.sct.model.stext.stext.Expression;
-import org.yakindu.sct.model.stext.stext.FloatLiteral;
 import org.yakindu.sct.model.stext.stext.HexLiteral;
 import org.yakindu.sct.model.stext.stext.IntLiteral;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
@@ -534,20 +532,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * @generated
    */
   private EClass operationCallEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass booleanLiteralEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass floatLiteralEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1310,6 +1294,16 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getBoolLiteral_Value()
+  {
+    return (EAttribute)boolLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getIntLiteral()
   {
     return intLiteralEClass;
@@ -1333,6 +1327,16 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
   public EClass getRealLiteral()
   {
     return realLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRealLiteral_Value()
+  {
+    return (EAttribute)realLiteralEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2050,46 +2054,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getBooleanLiteral()
-  {
-    return booleanLiteralEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getBooleanLiteral_Value()
-  {
-    return (EAttribute)booleanLiteralEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getFloatLiteral()
-  {
-    return floatLiteralEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getFloatLiteral_Value()
-  {
-    return (EAttribute)floatLiteralEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EEnum getDirection()
   {
     return directionEEnum;
@@ -2310,11 +2274,13 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     literalEClass = createEClass(LITERAL);
 
     boolLiteralEClass = createEClass(BOOL_LITERAL);
+    createEAttribute(boolLiteralEClass, BOOL_LITERAL__VALUE);
 
     intLiteralEClass = createEClass(INT_LITERAL);
     createEAttribute(intLiteralEClass, INT_LITERAL__VALUE);
 
     realLiteralEClass = createEClass(REAL_LITERAL);
+    createEAttribute(realLiteralEClass, REAL_LITERAL__VALUE);
 
     hexLiteralEClass = createEClass(HEX_LITERAL);
     createEAttribute(hexLiteralEClass, HEX_LITERAL__VALUE);
@@ -2412,12 +2378,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     operationCallEClass = createEClass(OPERATION_CALL);
     createEReference(operationCallEClass, OPERATION_CALL__OPERATION);
     createEReference(operationCallEClass, OPERATION_CALL__ARGS);
-
-    booleanLiteralEClass = createEClass(BOOLEAN_LITERAL);
-    createEAttribute(booleanLiteralEClass, BOOLEAN_LITERAL__VALUE);
-
-    floatLiteralEClass = createEClass(FLOAT_LITERAL);
-    createEAttribute(floatLiteralEClass, FLOAT_LITERAL__VALUE);
 
     // Create enums
     directionEEnum = createEEnum(DIRECTION);
@@ -2518,8 +2478,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     numericalUnaryExpressionEClass.getESuperTypes().add(this.getExpression());
     primitiveValueExpressionEClass.getESuperTypes().add(this.getExpression());
     operationCallEClass.getESuperTypes().add(this.getExpression());
-    booleanLiteralEClass.getESuperTypes().add(this.getBoolLiteral());
-    floatLiteralEClass.getESuperTypes().add(this.getRealLiteral());
 
     // Initialize classes and features; add operations and parameters
     initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2617,11 +2575,13 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEClass(literalEClass, Literal.class, "Literal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(boolLiteralEClass, BoolLiteral.class, "BoolLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getBoolLiteral_Value(), ecorePackage.getEBoolean(), "value", null, 0, 1, BoolLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(intLiteralEClass, IntLiteral.class, "IntLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getIntLiteral_Value(), ecorePackage.getELong(), "value", null, 0, 1, IntLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(realLiteralEClass, RealLiteral.class, "RealLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRealLiteral_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, RealLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(hexLiteralEClass, HexLiteral.class, "HexLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getHexLiteral_Value(), ecorePackage.getELong(), "value", null, 0, 1, HexLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2719,12 +2679,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEClass(operationCallEClass, OperationCall.class, "OperationCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getOperationCall_Operation(), this.getOperation(), null, "operation", null, 0, 1, OperationCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getOperationCall_Args(), this.getExpression(), null, "args", null, 0, -1, OperationCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(booleanLiteralEClass, BooleanLiteral.class, "BooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getBooleanLiteral_Value(), ecorePackage.getEBoolean(), "value", null, 0, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(floatLiteralEClass, FloatLiteral.class, "FloatLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFloatLiteral_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, FloatLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(directionEEnum, Direction.class, "Direction");

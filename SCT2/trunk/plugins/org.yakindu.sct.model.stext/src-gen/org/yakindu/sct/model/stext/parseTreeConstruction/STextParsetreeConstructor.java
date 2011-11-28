@@ -11288,10 +11288,10 @@ protected class Literal_Alternatives extends AlternativesToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getBoolLiteralAccess().getBooleanLiteralAction_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRealLiteralAccess().getFloatLiteralAction_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getBoolLiteralAccess().getBoolLiteralAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getHexLiteralAccess().getHexLiteralAction_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getIntLiteralAccess().getIntLiteralAction_0().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getIntLiteralAccess().getIntLiteralAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getRealLiteralAccess().getRealLiteralAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -11320,7 +11320,7 @@ protected class Literal_BoolLiteralParserRuleCall_0 extends RuleCallToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getBoolLiteralAccess().getBooleanLiteralAction_0().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getBoolLiteralAccess().getBoolLiteralAction_0().getType().getClassifier())
 			return null;
 		if(checkForRecursion(BoolLiteral_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
@@ -11428,7 +11428,7 @@ protected class Literal_RealLiteralParserRuleCall_3 extends RuleCallToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRealLiteralAccess().getFloatLiteralAction_0().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getRealLiteralAccess().getRealLiteralAction_0().getType().getClassifier())
 			return null;
 		if(checkForRecursion(RealLiteral_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
@@ -11449,11 +11449,11 @@ protected class Literal_RealLiteralParserRuleCall_3 extends RuleCallToken {
 /************ begin Rule BoolLiteral ****************
  *
  * BoolLiteral:
- * 	{BooleanLiteral} value=BOOL;
+ * 	{BoolLiteral} value=BOOL;
  *
  **/
 
-// {BooleanLiteral} value=BOOL
+// {BoolLiteral} value=BOOL
 protected class BoolLiteral_Group extends GroupToken {
 	
 	public BoolLiteral_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -11475,23 +11475,23 @@ protected class BoolLiteral_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getBoolLiteralAccess().getBooleanLiteralAction_0().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getBoolLiteralAccess().getBoolLiteralAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
 
 }
 
-// {BooleanLiteral}
-protected class BoolLiteral_BooleanLiteralAction_0 extends ActionToken  {
+// {BoolLiteral}
+protected class BoolLiteral_BoolLiteralAction_0 extends ActionToken  {
 
-	public BoolLiteral_BooleanLiteralAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public BoolLiteral_BoolLiteralAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getBoolLiteralAccess().getBooleanLiteralAction_0();
+		return grammarAccess.getBoolLiteralAccess().getBoolLiteralAction_0();
 	}
 
     @Override
@@ -11523,7 +11523,7 @@ protected class BoolLiteral_ValueAssignment_1 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new BoolLiteral_BooleanLiteralAction_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new BoolLiteral_BoolLiteralAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -11649,11 +11649,11 @@ protected class IntLiteral_ValueAssignment_1 extends AssignmentToken  {
 /************ begin Rule RealLiteral ****************
  *
  * RealLiteral:
- * 	{FloatLiteral} value=DOUBLE;
+ * 	{RealLiteral} value=DOUBLE;
  *
  **/
 
-// {FloatLiteral} value=DOUBLE
+// {RealLiteral} value=DOUBLE
 protected class RealLiteral_Group extends GroupToken {
 	
 	public RealLiteral_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -11675,23 +11675,23 @@ protected class RealLiteral_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRealLiteralAccess().getFloatLiteralAction_0().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getRealLiteralAccess().getRealLiteralAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
 
 }
 
-// {FloatLiteral}
-protected class RealLiteral_FloatLiteralAction_0 extends ActionToken  {
+// {RealLiteral}
+protected class RealLiteral_RealLiteralAction_0 extends ActionToken  {
 
-	public RealLiteral_FloatLiteralAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RealLiteral_RealLiteralAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getRealLiteralAccess().getFloatLiteralAction_0();
+		return grammarAccess.getRealLiteralAccess().getRealLiteralAction_0();
 	}
 
     @Override
@@ -11723,7 +11723,7 @@ protected class RealLiteral_ValueAssignment_1 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new RealLiteral_FloatLiteralAction_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new RealLiteral_RealLiteralAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}

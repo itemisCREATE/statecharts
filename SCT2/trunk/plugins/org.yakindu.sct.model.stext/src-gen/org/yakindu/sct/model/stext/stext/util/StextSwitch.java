@@ -606,24 +606,6 @@ public class StextSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case StextPackage.BOOLEAN_LITERAL:
-      {
-        BooleanLiteral booleanLiteral = (BooleanLiteral)theEObject;
-        T result = caseBooleanLiteral(booleanLiteral);
-        if (result == null) result = caseBoolLiteral(booleanLiteral);
-        if (result == null) result = caseLiteral(booleanLiteral);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case StextPackage.FLOAT_LITERAL:
-      {
-        FloatLiteral floatLiteral = (FloatLiteral)theEObject;
-        T result = caseFloatLiteral(floatLiteral);
-        if (result == null) result = caseRealLiteral(floatLiteral);
-        if (result == null) result = caseLiteral(floatLiteral);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       default: return defaultCase(theEObject);
     }
   }
@@ -1616,38 +1598,6 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseOperationCall(OperationCall object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Boolean Literal</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Boolean Literal</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseBooleanLiteral(BooleanLiteral object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Float Literal</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Float Literal</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseFloatLiteral(FloatLiteral object)
   {
     return null;
   }

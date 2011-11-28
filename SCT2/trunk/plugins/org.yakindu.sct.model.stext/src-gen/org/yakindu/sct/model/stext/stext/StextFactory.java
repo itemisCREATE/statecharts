@@ -585,24 +585,6 @@ public interface StextFactory extends EFactory
   OperationCall createOperationCall();
 
   /**
-   * Returns a new object of class '<em>Boolean Literal</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Boolean Literal</em>'.
-   * @generated
-   */
-  BooleanLiteral createBooleanLiteral();
-
-  /**
-   * Returns a new object of class '<em>Float Literal</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Float Literal</em>'.
-   * @generated
-   */
-  FloatLiteral createFloatLiteral();
-
-  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -11280,7 +11280,7 @@ public class InternalSTextParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
 
                       current = forceCreateModelElement(
-                          grammarAccess.getBoolLiteralAccess().getBooleanLiteralAction_0(),
+                          grammarAccess.getBoolLiteralAccess().getBoolLiteralAction_0(),
                           current);
                   
             }
@@ -11522,7 +11522,7 @@ public class InternalSTextParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
 
                       current = forceCreateModelElement(
-                          grammarAccess.getRealLiteralAccess().getFloatLiteralAction_0(),
+                          grammarAccess.getRealLiteralAccess().getRealLiteralAction_0(),
                           current);
                   
             }

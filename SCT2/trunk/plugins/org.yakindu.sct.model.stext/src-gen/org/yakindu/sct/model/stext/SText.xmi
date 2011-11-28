@@ -1364,7 +1364,7 @@
     <alternatives xsi:type="xtext:Group">
       <elements xsi:type="xtext:Action">
         <type metamodel="//@metamodelDeclarations.0">
-          <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/SText#//BooleanLiteral"/>
+          <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/SText#//BoolLiteral"/>
         </type>
       </elements>
       <elements xsi:type="xtext:Assignment" feature="value" operator="=">
@@ -1394,7 +1394,7 @@
     <alternatives xsi:type="xtext:Group">
       <elements xsi:type="xtext:Action">
         <type metamodel="//@metamodelDeclarations.0">
-          <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/SText#//FloatLiteral"/>
+          <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/SText#//RealLiteral"/>
         </type>
       </elements>
       <elements xsi:type="xtext:Assignment" feature="value" operator="=">

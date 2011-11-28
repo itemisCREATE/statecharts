@@ -3856,7 +3856,7 @@ ruleBoolLiteral returns [EObject current=null]
 ((
     {
         $current = forceCreateModelElement(
-            grammarAccess.getBoolLiteralAccess().getBooleanLiteralAction_0(),
+            grammarAccess.getBoolLiteralAccess().getBoolLiteralAction_0(),
             $current);
     }
 )(
@@ -3946,7 +3946,7 @@ ruleRealLiteral returns [EObject current=null]
 ((
     {
         $current = forceCreateModelElement(
-            grammarAccess.getRealLiteralAccess().getFloatLiteralAction_0(),
+            grammarAccess.getRealLiteralAccess().getRealLiteralAction_0(),
             $current);
     }
 )(
