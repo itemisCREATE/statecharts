@@ -15,7 +15,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -34,6 +33,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.internal.dialogs.NewWizard;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
@@ -140,7 +140,7 @@ public class SelectSubmachineDialog extends ElementListSelectionDialog {
 	}
 
 	private IStructuredSelection getSelection() {
-		Statechart selectedSubmachine = getSelectedSubmachine();
+		QualifiedName selectedSubmachine = getSelectedSubmachine();
 		if (selectedSubmachine != null) {
 			return new StructuredSelection(selectedSubmachine);
 		} else {
@@ -149,18 +149,13 @@ public class SelectSubmachineDialog extends ElementListSelectionDialog {
 
 	}
 
-	public Statechart getSelectedSubmachine() {
+	public QualifiedName getSelectedSubmachine() {
 		Object[] result = getResult();
 		if (result != null && result.length == 1) {
-			Statechart statechart = null;
+			QualifiedName statechart = null;
 			if (result[0] instanceof IEObjectDescription) {
-				statechart = (Statechart) ((IEObjectDescription) result[0])
-						.getEObjectOrProxy();
-			}
-			if (statechart != null && statechart.eIsProxy()) {
-				statechart = (Statechart) EcoreUtil
-						.resolve(statechart, context);
-				;
+				statechart = ((IEObjectDescription) result[0])
+						.getQualifiedName();
 			}
 			return statechart;
 		}

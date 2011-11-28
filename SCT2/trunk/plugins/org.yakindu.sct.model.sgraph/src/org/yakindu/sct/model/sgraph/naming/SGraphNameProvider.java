@@ -24,6 +24,12 @@ import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Inject;
 
+/**
+ * NameProvider for SGraph elements like statecharts, scopes and declarations.
+ * 
+ * @author benjamin schwertfeger
+ * 
+ */
 public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider {
 	@Inject
 	IQualifiedNameConverter nameConverter;
@@ -46,9 +52,6 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
 		String nameString = SimpleAttributeResolver.NAME_RESOLVER.apply(ele);
 		if (!Strings.isEmpty(nameString)) {
 			name = nameConverter.toQualifiedName(nameString);
-		} else if (nameString == null) {
-			// Default interface
-			name = nameConverter.toQualifiedName("");
 		}
 
 		QualifiedName namespace = getNamespace(ele);
