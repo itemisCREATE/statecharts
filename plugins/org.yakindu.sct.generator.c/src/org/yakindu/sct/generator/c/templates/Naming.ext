@@ -55,8 +55,9 @@ String interfaceObjectName(InterfaceScope this) : "interface" + ((this.name == n
 
 String getEventEnumName(EventDefinition this) : "ev_" + this.name;
 
+/**
 String correctLValue(String literal) :
     (literal == "true" ? "bool_true" :
 	(literal == "false" ? "bool_false" :
 	literal ));
-    
+**/    
