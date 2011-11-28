@@ -16,11 +16,11 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
 import org.yakindu.sct.ui.editor.editor.StatechartElementTypes;
 
@@ -55,12 +55,12 @@ public class StateEditHelper extends VertexEditHelper {
 				req.getElementToConfigure().eResource());
 		dialog.setElements(new Object[] { req.getElementToConfigure() });
 		if (Dialog.OK == dialog.open()) {
-			Statechart selectedSubmachine = dialog.getSelectedSubmachine();
+			QualifiedName selectedSubmachine = dialog.getSelectedSubmachine();
 			if (selectedSubmachine != null) {
 				return new SetValueCommand(new SetRequest(
 						req.getElementToConfigure(),
-						SGraphPackage.Literals.STATE__SUBSTATECHART,
-						selectedSubmachine));
+						SGraphPackage.Literals.STATE__SUBSTATECHART_ID,
+						selectedSubmachine.toString()));
 			}
 		}
 		return null;

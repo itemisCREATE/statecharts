@@ -18,9 +18,6 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.gmf.runtime.emf.commands.core.command.CompositeTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.eclipse.jface.dialogs.Dialog;
@@ -33,12 +30,9 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.provider.SGraphItemProviderAdapterFactory;
-import org.yakindu.sct.model.sgraph.ui.Activator;
 import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
 
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
@@ -54,7 +48,7 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 	private final class UpdateLabelAdapter extends AdapterImpl {
 		@Override
 		public void notifyChanged(Notification msg) {
-			if (msg.getFeature() == SGraphPackage.Literals.STATE__SUBSTATECHART) {
+			if (msg.getFeature() == SGraphPackage.Literals.STATE__SUBSTATECHART_ID) {
 				updateLabel(state);
 			}
 		}
@@ -76,11 +70,9 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 	}
 
 	private void updateLabel(State state) {
-		Statechart substatechart = state.getSubstatechart();
-		if (substatechart != null) {
-			AdapterFactoryLabelProvider provider = new AdapterFactoryLabelProvider(
-					new SGraphItemProviderAdapterFactory());
-			label.setText(provider.getText(substatechart));
+		String substatechartId = state.getSubstatechartId();
+		if (substatechartId != null) {
+			label.setText(substatechartId);
 		} else {
 			label.setText("");
 		}
@@ -115,30 +107,18 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 						parent.getShell(), state.eResource());
 				dialog.setElements(new Object[] { context });
 				if (Dialog.OK == dialog.open()) {
-					Statechart selectedSubmachine = dialog
+					QualifiedName selectedSubmachine = dialog
 							.getSelectedSubmachine();
 					if (selectedSubmachine != null || dialog.isClearSelected()) {
-						CompositeTransactionalCommand transactionalCommand = new CompositeTransactionalCommand(
-								TransactionUtil.getEditingDomain(state), "");
-						// TODO set only one, the model should keep both in sync
-						transactionalCommand
-								.add(new SetValueCommand(
-										new SetRequest(
-												state,
-												SGraphPackage.Literals.STATE__SUBSTATECHART,
-												selectedSubmachine)));
-						transactionalCommand
-								.add(new SetValueCommand(
-										new SetRequest(
-												state,
-												SGraphPackage.Literals.STATE__SUBSTATECHART_ID,
-												getNameProvider()
-														.getFullyQualifiedName(
-																selectedSubmachine))));
+						SetValueCommand command = new SetValueCommand(
+								new SetRequest(
+										state,
+										SGraphPackage.Literals.STATE__SUBSTATECHART_ID,
+										selectedSubmachine.toString()));
 
 						try {
 							OperationHistoryFactory.getOperationHistory()
-									.execute(transactionalCommand,
+									.execute(command,
 											new NullProgressMonitor(), null);
 						} catch (ExecutionException e) {
 							e.printStackTrace();
@@ -147,11 +127,6 @@ public class SubmachineSelectionDialogPropertyDescriptor implements
 				}
 			}
 		});
-	}
-
-	private IQualifiedNameProvider getNameProvider() {
-		return Activator.getDefault().getInjector()
-				.getInstance(IQualifiedNameProvider.class);
 	}
 
 	public void createHelpColumn(Composite parent) {
