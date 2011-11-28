@@ -120,14 +120,14 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	@Check(CheckType.FAST)
 	public void checkInterfaceScope(InterfaceScope interfaceScope) {
-		if (getInterfaceCount(interfaceScope) > 1) {
+		if (getNotNamedInterfaceCount(interfaceScope) > 1) {
 			error("It can only exist one default/unamed interface",
 					interfaceScope,
 					StextPackage.Literals.INTERFACE_SCOPE__NAME,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 		}
 	}
-
+	
 	private boolean isStatechartDefinitionChild(EObject element) {
 		while (element.eContainer() != null) {
 			if (element.eContainer() instanceof StatechartDefinition) {
@@ -137,14 +137,14 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		}
 		return false;
 	}
-
-	private int getInterfaceCount(InterfaceScope interfaceScope) {
-		int count = 1;
+	
+	private int getNotNamedInterfaceCount(InterfaceScope interfaceScope) {
+		int count = 0;
 		if (interfaceScope.eContainer() instanceof Statechart) {
 			Statechart statechart = (Statechart) interfaceScope.eContainer();
 
 			for (Scope scope : statechart.getScopes()) {
-				if (scope != interfaceScope && scope instanceof InterfaceScope
+				if (scope instanceof InterfaceScope
 						&& ((InterfaceScope) scope).getName() == null) {
 					count++;
 				}
