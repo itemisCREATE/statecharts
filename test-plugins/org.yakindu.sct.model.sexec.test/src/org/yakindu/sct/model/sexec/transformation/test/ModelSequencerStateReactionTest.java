@@ -150,7 +150,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		_createRegularEventSpec(e1, tr1);
 		_createRegularEventSpec(e2, tr1);
 
-		PrimitiveValueExpression exp = _createValue("false");
+		PrimitiveValueExpression exp = _createValue(false);
 		tr1.setGuardExpression(exp);
 
 		Transition t = SGraphFactory.eINSTANCE.createTransition();
@@ -179,7 +179,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 	@Test public void testTransitionCheckSequenceWithoutTrigger() {
 
 		ReactionTrigger tr1 = _createReactionTrigger(null);
-		PrimitiveValueExpression exp = _createValue("false");
+		PrimitiveValueExpression exp = _createValue(false);
 		tr1.setGuardExpression(exp);
 
 		Transition t = SGraphFactory.eINSTANCE.createTransition();
@@ -212,7 +212,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		ReactionTrigger tr1 = _createReactionTrigger(t);
 		_createTimeEventSpec(TimeEventType.AFTER, 1, TimeUnit.SECOND, tr1);
 
-		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), (ReactionEffect) t.getEffect());
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), (ReactionEffect) t.getEffect());
 		
 		ExecutionFlow flow = sequencer.transform(sc);
 		
@@ -260,7 +260,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		State s= _createState("s", r);
 
 		LocalReaction timeTriggeredReaction = _createTimeTriggeredReaction(s, TimeEventType.AFTER, 2, TimeUnit.MILLISECOND);
-		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), (ReactionEffect) timeTriggeredReaction.getEffect());
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), (ReactionEffect) timeTriggeredReaction.getEffect());
 		
 		ExecutionFlow flow = sequencer.transform(sc);
 		
@@ -300,7 +300,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		
 		LocalReaction timeTriggeredReaction = _createLocalReaction(s, StextFactory.eINSTANCE.createOnCycleEvent());
-		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), (ReactionEffect) timeTriggeredReaction.getEffect());
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), (ReactionEffect) timeTriggeredReaction.getEffect());
 		
 		ExecutionFlow flow = sequencer.transform(sc);
 		
@@ -327,7 +327,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		
 		LocalReaction timeTriggeredReaction = _createLocalReaction(s, StextFactory.eINSTANCE.createAlwaysEvent());
-		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), (ReactionEffect) timeTriggeredReaction.getEffect());
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), (ReactionEffect) timeTriggeredReaction.getEffect());
 		
 		ExecutionFlow flow = sequencer.transform(sc);
 		

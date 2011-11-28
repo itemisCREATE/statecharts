@@ -63,6 +63,9 @@ import com.sun.org.apache.xerces.internal.dom.ParentNode$UserDataRecord
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.stext.stext.OnCycleEvent
 import org.yakindu.sct.model.stext.stext.AlwaysEvent
+import org.yakindu.sct.model.stext.stext.IntLiteral
+import org.yakindu.sct.model.stext.stext.BoolLiteral
+import javax.sound.sampled.BooleanControl$Type
 
 class ModelSequencer {
 	
@@ -375,7 +378,9 @@ class ModelSequencer {
 	
 	def Statement buildValueExpression(TimeEventSpec tes) {
 		val PrimitiveValueExpression pve = stextFactory.createPrimitiveValueExpression 
-		pve.value = tes.value.toString
+		val IntLiteral intLit = stextFactory.createIntLiteral
+		intLit.value = tes.value
+		pve.value = intLit
 	
 		switch (tes.unit) {
 			case TimeUnit::MILLISECOND : pve
@@ -389,7 +394,9 @@ class ModelSequencer {
 	def Statement divide(Expression stmnt, long divisor) {
 		val NumericalMultiplyDivideExpression div = stextFactory.createNumericalMultiplyDivideExpression
 		val PrimitiveValueExpression pve = stextFactory.createPrimitiveValueExpression 
-		pve.value = divisor.toString
+		val IntLiteral intLit = stextFactory.createIntLiteral
+		intLit.value = divisor.intValue
+		pve.value = intLit
 		
 		div.operator = MultiplicativeOperator::DIV
 		div.leftOperand = stmnt
@@ -401,7 +408,9 @@ class ModelSequencer {
 	def Statement multiply(Expression stmnt, long factor) {
 		val NumericalMultiplyDivideExpression div = stextFactory.createNumericalMultiplyDivideExpression
 		val PrimitiveValueExpression pve = stextFactory.createPrimitiveValueExpression 
-		pve.value = factor.toString
+		val IntLiteral intLit = stextFactory.createIntLiteral
+		intLit.value = factor.intValue
+		pve.value = intLit
 		
 		div.operator = MultiplicativeOperator::MUL
 		div.leftOperand = stmnt
@@ -559,15 +568,20 @@ class ModelSequencer {
 
 	def dispatch Expression raised(OnCycleEvent e) {
 		val r = stextFactory.createPrimitiveValueExpression
-		r.value = 'true'
+		val BoolLiteral boolLit = stextFactory.createBoolLiteral
+		boolLit.value = true		
+		r.value = boolLit
 		return r
 	}
 	
 	def dispatch Expression raised(AlwaysEvent e) {
 		val r = stextFactory.createPrimitiveValueExpression
-		r.value = 'true'
-		return r		
+		val BoolLiteral boolLit = stextFactory.createBoolLiteral
+		boolLit.value = true		
+		r.value = boolLit
+		return r
 	}
+
 	
 	/* ==========================================================================
 	 * HANDLING TIME EVENTS

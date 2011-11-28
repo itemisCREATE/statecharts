@@ -32,15 +32,15 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 
 			Region r = _createRegion("r", sc); {
 				State s1 = _createState("s1", r); {
-					_createEntryAssignment(v1, s1, "1");
+					_createEntryAssignment(v1, s1, 1);
 
 					Region r_s1 = _createRegion("r", s1); {
 						State s3 = _createState("s3", r_s1); {
-							_createEntryAssignment(v1, s3, "2");
+							_createEntryAssignment(v1, s3, 2);
 							
 							Region r_s3 = _createRegion("r", s3); {
 								State s4 = _createState("s4", r_s3);
-								_createEntryAssignment(v1, s4, "3");
+								_createEntryAssignment(v1, s4, 3);
 
 								State s5 = _createState("s5", r_s3);
 							}
@@ -104,14 +104,14 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 
 			Region r = _createRegion("r", sc); {
 				State s1 = _createState("s1", r); {
-					_createEntryAssignment(v1, s1, "1");
+					_createEntryAssignment(v1, s1, 1);
 
 					Region r_s1 = _createRegion("r", s1); {
 						State s3 = _createState("s3", r_s1); {
 							
 							Region r_s3 = _createRegion("r", s3); {
 								State s4 = _createState("s4", r_s3);
-								_createEntryAssignment(v1, s4, "3");
+								_createEntryAssignment(v1, s4, 3);
 
 								State s5 = _createState("s5", r_s3);
 							}
@@ -172,15 +172,15 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 
 			Region r = _createRegion("r", sc); {
 				State s1 = _createState("s1", r); {
-					_createEntryAssignment(v1, s1, "1");
+					_createEntryAssignment(v1, s1, 1);
 
 					Region r_s1 = _createRegion("r", s1); {
 						State s3 = _createState("s3", r_s1); {
-							_createEntryAssignment(v1, s3, "2");
+							_createEntryAssignment(v1, s3, 2);
 
 							Region r_s3 = _createRegion("r", s3); {
 								State s4 = _createState("s4", r_s3);
-								_createEntryAssignment(v1, s4, "3");
+								_createEntryAssignment(v1, s4, 3);
 
 								State s5 = _createState("s5", r_s3);
 							}
@@ -242,15 +242,15 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 
 			Region r = _createRegion("r", sc); {
 				State s1 = _createState("s1", r); {
-					_createExitAssignment(v1, s1, "1");
+					_createExitAssignment(v1, s1, 1);
 
 					Region r_s1 = _createRegion("r", s1); {
 						State s3 = _createState("s3", r_s1); {
-							_createExitAssignment(v1, s3, "2");
+							_createExitAssignment(v1, s3, 2);
 							
 							Region r_s3 = _createRegion("r", s3); {
 								State s4 = _createState("s4", r_s3);
-								_createExitAssignment(v1, s4, "3");
+								_createExitAssignment(v1, s4, 3);
 
 								State s5 = _createState("s5", r_s3);
 							}
@@ -309,14 +309,14 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 
 			Region r = _createRegion("r", sc); {
 				State s1 = _createState("s1", r); {
-					_createExitAssignment(v1, s1, "1");
+					_createExitAssignment(v1, s1, 1);
 
 					Region r_s1 = _createRegion("r", s1); {
 						State s3 = _createState("s3", r_s1); {
 							
 							Region r_s3 = _createRegion("r", s3); {
 								State s4 = _createState("s4", r_s3);
-								_createExitAssignment(v1, s4, "3");
+								_createExitAssignment(v1, s4, 3);
 
 								State s5 = _createState("s5", r_s3);
 							}
@@ -373,15 +373,15 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 
 			Region r = _createRegion("r", sc); {
 				State s1 = _createState("s1", r); {
-					_createExitAssignment(v1, s1, "1");
+					_createExitAssignment(v1, s1, 1);
 
 					Region r_s1 = _createRegion("r", s1); {
 						State s3 = _createState("s3", r_s1); {
-							_createExitAssignment(v1, s3, "2");
+							_createExitAssignment(v1, s3, 2);
 
 							Region r_s3 = _createRegion("r", s3); {
 								State s4 = _createState("s4", r_s3);
-								_createExitAssignment(v1, s4, "3");
+								_createExitAssignment(v1, s4, 3);
 
 								State s5 = _createState("s5", r_s3);
 							}

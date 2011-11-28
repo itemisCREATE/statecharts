@@ -57,10 +57,12 @@ import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.Assignment;
+import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.Expression;
+import org.yakindu.sct.model.stext.stext.IntLiteral;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.LogicalAndExpression;
 import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
@@ -719,9 +721,12 @@ public class ModelSequencer {
       StextFactory _stextFactory = this.stextFactory();
       PrimitiveValueExpression _createPrimitiveValueExpression = _stextFactory.createPrimitiveValueExpression();
       final PrimitiveValueExpression pve = _createPrimitiveValueExpression;
+      StextFactory _stextFactory_1 = this.stextFactory();
+      IntLiteral _createIntLiteral = _stextFactory_1.createIntLiteral();
+      final IntLiteral intLit = _createIntLiteral;
       int _value = tes.getValue();
-      String _string = ((Integer)_value).toString();
-      pve.setValue(_string);
+      intLit.setValue(_value);
+      pve.setValue(intLit);
       Statement _switchResult = null;
       TimeUnit _unit = tes.getUnit();
       final TimeUnit __valOfSwitchOver = _unit;
@@ -763,8 +768,12 @@ public class ModelSequencer {
       StextFactory _stextFactory_1 = this.stextFactory();
       PrimitiveValueExpression _createPrimitiveValueExpression = _stextFactory_1.createPrimitiveValueExpression();
       final PrimitiveValueExpression pve = _createPrimitiveValueExpression;
-      String _string = ((Long)divisor).toString();
-      pve.setValue(_string);
+      StextFactory _stextFactory_2 = this.stextFactory();
+      IntLiteral _createIntLiteral = _stextFactory_2.createIntLiteral();
+      final IntLiteral intLit = _createIntLiteral;
+      int _intValue = ((Long)divisor).intValue();
+      intLit.setValue(_intValue);
+      pve.setValue(intLit);
       div.setOperator(MultiplicativeOperator.DIV);
       div.setLeftOperand(stmnt);
       div.setRightOperand(pve);
@@ -782,8 +791,12 @@ public class ModelSequencer {
       StextFactory _stextFactory_1 = this.stextFactory();
       PrimitiveValueExpression _createPrimitiveValueExpression = _stextFactory_1.createPrimitiveValueExpression();
       final PrimitiveValueExpression pve = _createPrimitiveValueExpression;
-      String _string = ((Long)factor).toString();
-      pve.setValue(_string);
+      StextFactory _stextFactory_2 = this.stextFactory();
+      IntLiteral _createIntLiteral = _stextFactory_2.createIntLiteral();
+      final IntLiteral intLit = _createIntLiteral;
+      int _intValue = ((Long)factor).intValue();
+      intLit.setValue(_intValue);
+      pve.setValue(intLit);
       div.setOperator(MultiplicativeOperator.MUL);
       div.setLeftOperand(stmnt);
       div.setRightOperand(pve);
@@ -1160,7 +1173,11 @@ public class ModelSequencer {
       StextFactory _stextFactory = this.stextFactory();
       PrimitiveValueExpression _createPrimitiveValueExpression = _stextFactory.createPrimitiveValueExpression();
       final PrimitiveValueExpression r = _createPrimitiveValueExpression;
-      r.setValue("true");
+      StextFactory _stextFactory_1 = this.stextFactory();
+      BoolLiteral _createBoolLiteral = _stextFactory_1.createBoolLiteral();
+      final BoolLiteral boolLit = _createBoolLiteral;
+      boolLit.setValue(true);
+      r.setValue(boolLit);
       return r;
     }
   }
@@ -1170,7 +1187,11 @@ public class ModelSequencer {
       StextFactory _stextFactory = this.stextFactory();
       PrimitiveValueExpression _createPrimitiveValueExpression = _stextFactory.createPrimitiveValueExpression();
       final PrimitiveValueExpression r = _createPrimitiveValueExpression;
-      r.setValue("true");
+      StextFactory _stextFactory_1 = this.stextFactory();
+      BoolLiteral _createBoolLiteral = _stextFactory_1.createBoolLiteral();
+      final BoolLiteral boolLit = _createBoolLiteral;
+      boolLit.setValue(true);
+      r.setValue(boolLit);
       return r;
     }
   }
