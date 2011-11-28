@@ -390,14 +390,39 @@ class GeneratorProjectTemplate {
 	def xtendGenerator(ProjectData data) '''
 		package «data.generatorClass.packageName»
 
-		import org.yakindu.sct.model.sexec.ExecutionFlow
+		import java.io.File
+		import java.io.FileOutputStream
 		import org.yakindu.sct.model.sgen.GeneratorEntry
+		import org.yakindu.sct.model.sexec.ExecutionFlow
+		import org.yakindu.sct.model.sexec.ExecutionState
 		import org.yakindu.sct.generator.core.AbstractWorkspaceGenerator
 		
 		class «data.generatorClass.simpleName» extends AbstractWorkspaceGenerator {
 		
 			override generate(ExecutionFlow flow, GeneratorEntry entry) {
-				writeToConsole('output will go into project '+entry.targetProjectPath)
+				entry.targetFolder.write(flow.name+'.txt',flow.info)
+				refreshTargetProject(entry)
+			}
+		
+			def info(ExecutionFlow flow) {''«"'"»
+				The name of the Statemachine is '«'«'»flow.name»'
+
+				The Statemachine has the following states:
+		
+				«'«'»FOR ExecutionState state : flow.states»
+					«'«'»state.name.replaceFirst(flow.name+'\\.','')»
+				«'«'»ENDFOR»
+			''«"'"».toString}
+		
+			def write(File dir, String filename, String content) {
+				try {
+					dir.mkdirs
+					val bos = new FileOutputStream(new File(dir.path+File::separator+filename))
+					bos.write(content.bytes)
+					bos.close
+				} catch(Exception e) {
+					writeToConsole(e)
+				}
 			}
 		}
 	'''
