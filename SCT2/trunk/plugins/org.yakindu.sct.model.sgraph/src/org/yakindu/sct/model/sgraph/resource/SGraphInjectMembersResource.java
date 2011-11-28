@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -127,7 +126,7 @@ public class SGraphInjectMembersResource extends InjectMembersResource {
 	}
 
 	private Statechart getStatechart(EObject context, String substatechartId) {
-		if (StringUtils.isEmpty(substatechartId)) {
+		if (substatechartId == null || substatechartId.length() == 0) {
 			return null;
 		}
 		IScope scope = scopeProvider.getScope(context.eResource(),
