@@ -34,12 +34,12 @@ public interface ReactionPriority extends ReactionProperty
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Priority</em>' attribute.
-   * @see #setPriority(long)
+   * @see #setPriority(int)
    * @see org.yakindu.sct.model.stext.stext.StextPackage#getReactionPriority_Priority()
    * @model
    * @generated
    */
-  long getPriority();
+  int getPriority();
 
   /**
    * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.ReactionPriority#getPriority <em>Priority</em>}' attribute.
@@ -49,6 +49,6 @@ public interface ReactionPriority extends ReactionProperty
    * @see #getPriority()
    * @generated
    */
-  void setPriority(long value);
+  void setPriority(int value);
 
 } // ReactionPriority

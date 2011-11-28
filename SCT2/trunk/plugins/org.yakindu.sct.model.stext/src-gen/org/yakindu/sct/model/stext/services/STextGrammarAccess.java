@@ -11,6 +11,7 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
 
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class STextGrammarAccess extends AbstractGrammarElementFinder {
@@ -1058,17 +1059,17 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	public class ReactionPriorityElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ReactionPriority");
 		private final Assignment cPriorityAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cPriorityLONG_INTTerminalRuleCall_0 = (RuleCall)cPriorityAssignment.eContents().get(0);
+		private final RuleCall cPriorityINTTerminalRuleCall_0 = (RuleCall)cPriorityAssignment.eContents().get(0);
 		
 		//ReactionPriority:
-		//	priority=LONG_INT;
+		//	priority=INT;
 		public ParserRule getRule() { return rule; }
 
-		//priority=LONG_INT
+		//priority=INT
 		public Assignment getPriorityAssignment() { return cPriorityAssignment; }
 
-		//LONG_INT
-		public RuleCall getPriorityLONG_INTTerminalRuleCall_0() { return cPriorityLONG_INTTerminalRuleCall_0; }
+		//INT
+		public RuleCall getPriorityINTTerminalRuleCall_0() { return cPriorityINTTerminalRuleCall_0; }
 	}
 
 	public class EntryPointSpecElements extends AbstractParserRuleElementFinder {
@@ -1177,16 +1178,16 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cTypeTimeEventTypeEnumRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValueLONG_INTTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		private final RuleCall cValueINTTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		private final Assignment cUnitAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cUnitTimeUnitEnumRuleCall_2_0 = (RuleCall)cUnitAssignment_2.eContents().get(0);
 		
 		//// TODO: redefine after trigger - we need to use it with clocks
 		//TimeEventSpec:
-		//	type=TimeEventType value=LONG_INT unit=TimeUnit?;
+		//	type=TimeEventType value=INT unit=TimeUnit?;
 		public ParserRule getRule() { return rule; }
 
-		//type=TimeEventType value=LONG_INT unit=TimeUnit?
+		//type=TimeEventType value=INT unit=TimeUnit?
 		public Group getGroup() { return cGroup; }
 
 		//type=TimeEventType
@@ -1195,11 +1196,11 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//TimeEventType
 		public RuleCall getTypeTimeEventTypeEnumRuleCall_0_0() { return cTypeTimeEventTypeEnumRuleCall_0_0; }
 
-		//value=LONG_INT
+		//value=INT
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
 
-		//LONG_INT
-		public RuleCall getValueLONG_INTTerminalRuleCall_1_0() { return cValueLONG_INTTerminalRuleCall_1_0; }
+		//INT
+		public RuleCall getValueINTTerminalRuleCall_1_0() { return cValueINTTerminalRuleCall_1_0; }
 
 		//unit=TimeUnit?
 		public Assignment getUnitAssignment_2() { return cUnitAssignment_2; }
@@ -2313,23 +2314,23 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cIntLiteralAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValueLONG_INTTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		private final RuleCall cValueINTTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
 		//IntLiteral:
-		//	{IntLiteral} value=LONG_INT;
+		//	{IntLiteral} value=INT;
 		public ParserRule getRule() { return rule; }
 
-		//{IntLiteral} value=LONG_INT
+		//{IntLiteral} value=INT
 		public Group getGroup() { return cGroup; }
 
 		//{IntLiteral}
 		public Action getIntLiteralAction_0() { return cIntLiteralAction_0; }
 
-		//value=LONG_INT
+		//value=INT
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
 
-		//LONG_INT
-		public RuleCall getValueLONG_INTTerminalRuleCall_1_0() { return cValueLONG_INTTerminalRuleCall_1_0; }
+		//INT
+		public RuleCall getValueINTTerminalRuleCall_1_0() { return cValueINTTerminalRuleCall_1_0; }
 	}
 
 	public class RealLiteralElements extends AbstractParserRuleElementFinder {
@@ -2903,26 +2904,29 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private IntLiteralElements pIntLiteral;
 	private RealLiteralElements pRealLiteral;
 	private HexLiteralElements pHexLiteral;
-	private TerminalRule tLONG_INT;
 	private TerminalRule tBOOL;
 	private TerminalRule tHEX;
 	private TerminalRule tDOUBLE;
-	private TerminalRule tID;
-	private TerminalRule tML_COMMENT;
-	private TerminalRule tSL_COMMENT;
-	private TerminalRule tWS;
 	
 	private final GrammarProvider grammarProvider;
 
+	private TerminalsGrammarAccess gaTerminals;
+
 	@Inject
-	public STextGrammarAccess(GrammarProvider grammarProvider) {
+	public STextGrammarAccess(GrammarProvider grammarProvider,
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
+		this.gaTerminals = gaTerminals;
 	}
 	
 	public Grammar getGrammar() {	
 		return grammarProvider.getGrammar(this);
 	}
 	
+
+	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
+		return gaTerminals;
+	}
 
 	
 	/// * ---- root rules ----
@@ -3241,7 +3245,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ReactionPriority:
-	//	priority=LONG_INT;
+	//	priority=INT;
 	public ReactionPriorityElements getReactionPriorityAccess() {
 		return (pReactionPriority != null) ? pReactionPriority : (pReactionPriority = new ReactionPriorityElements());
 	}
@@ -3292,7 +3296,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// TODO: redefine after trigger - we need to use it with clocks
 	//TimeEventSpec:
-	//	type=TimeEventType value=LONG_INT unit=TimeUnit?;
+	//	type=TimeEventType value=INT unit=TimeUnit?;
 	public TimeEventSpecElements getTimeEventSpecAccess() {
 		return (pTimeEventSpec != null) ? pTimeEventSpec : (pTimeEventSpec = new TimeEventSpecElements());
 	}
@@ -3725,7 +3729,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IntLiteral:
-	//	{IntLiteral} value=LONG_INT;
+	//	{IntLiteral} value=INT;
 	public IntLiteralElements getIntLiteralAccess() {
 		return (pIntLiteral != null) ? pIntLiteral : (pIntLiteral = new IntLiteralElements());
 	}
@@ -3754,12 +3758,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getHexLiteralAccess().getRule();
 	}
 
-	//terminal LONG_INT returns ecore::ELong:
-	//	"0".."9"+;
-	public TerminalRule getLONG_INTRule() {
-		return (tLONG_INT != null) ? tLONG_INT : (tLONG_INT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "LONG_INT"));
-	} 
-
 	//terminal BOOL returns ecore::EBoolean:
 	//	"true" | "false" | "yes" | "no";
 	public TerminalRule getBOOLRule() {
@@ -3773,7 +3771,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal DOUBLE returns ecore::EDouble:
-	//	(LONG_INT "." LONG_INT) ("e" ("-" | "+") LONG_INT)? ("f" | "F" | "d" | "D")?;
+	//	(INT "." INT) ("e" ("-" | "+") INT)? ("f" | "F" | "d" | "D")?;
 	public TerminalRule getDOUBLERule() {
 		return (tDOUBLE != null) ? tDOUBLE : (tDOUBLE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "DOUBLE"));
 	} 
@@ -3781,24 +3779,43 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
-		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+		return gaTerminals.getIDRule();
+	} 
+
+	//terminal INT returns ecore::EInt:
+	//	"0".."9"+;
+	public TerminalRule getINTRule() {
+		return gaTerminals.getINTRule();
+	} 
+
+	//terminal STRING:
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
+	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
-		return (tML_COMMENT != null) ? tML_COMMENT : (tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
-		return (tSL_COMMENT != null) ? tSL_COMMENT : (tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
-		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return gaTerminals.getWSRule();
+	} 
+
+	//terminal ANY_OTHER:
+	//	.;
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

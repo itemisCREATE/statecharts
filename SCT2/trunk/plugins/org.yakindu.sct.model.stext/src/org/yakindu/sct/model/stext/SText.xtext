@@ -1,4 +1,4 @@
-grammar org.yakindu.sct.model.stext.SText  hidden(WS, ML_COMMENT, SL_COMMENT)
+grammar org.yakindu.sct.model.stext.SText  with org.eclipse.xtext.common.Terminals
 
 generate stext "http://www.yakindu.org/sct/statechart/SText"
 import "platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore" as sct
@@ -127,7 +127,7 @@ ReactionProperty:
 	ReactionPriority | EntryPointSpec | ExitPointSpec;
 
 ReactionPriority:
-	priority=LONG_INT;
+	priority=INT;
 
 EntryPointSpec:
 	'>' entrypoint=[Entrypoint|FQN];
@@ -143,7 +143,7 @@ RegularEventSpec:
 
 	// TODO: redefine after trigger - we need to use it with clocks
 TimeEventSpec: 
-	type=TimeEventType value=LONG_INT (unit=TimeUnit)?;
+	type=TimeEventType value=INT (unit=TimeUnit)?;
 
 enum TimeEventType: after | every;
 
@@ -317,7 +317,7 @@ BoolLiteral:
 	{BoolLiteral} value=BOOL
 ;
 IntLiteral:
-	{IntLiteral} value = LONG_INT
+	{IntLiteral} value = INT
 ;
 RealLiteral: 
 	{RealLiteral} value = DOUBLE
@@ -325,8 +325,6 @@ RealLiteral:
 HexLiteral:
 	{HexLiteral} value = HEX
 ;
-
-terminal LONG_INT returns ecore::ELong: ('0'..'9')+;
 
 terminal BOOL returns ecore::EBoolean:
 	'true' | 'false' | 'yes' | 'no';
@@ -336,13 +334,7 @@ terminal HEX returns ecore::ELong:
 ;
 
 terminal DOUBLE returns ecore::EDouble:
-	(LONG_INT '.' LONG_INT) ('e' ('-' | '+') LONG_INT)? ('f'|'F'|'d'|'D')?
+	(INT '.' INT) ('e' ('-' | '+') INT)? ('f'|'F'|'d'|'D')?
 ;
-terminal ID :
-	'^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
-;
-terminal ML_COMMENT	: '/*' -> '*/';
-terminal SL_COMMENT 	: '//' !('\n'|'\r')* ('\r'? '\n')?;
 
-terminal WS			: (' '|'\t'|'\r'|'\n')+;
 

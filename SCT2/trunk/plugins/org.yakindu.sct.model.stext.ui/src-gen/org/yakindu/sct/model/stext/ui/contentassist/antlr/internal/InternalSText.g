@@ -10835,8 +10835,8 @@ rule__ReactionPriority__PriorityAssignment
     }
 :
 (
-{ before(grammarAccess.getReactionPriorityAccess().getPriorityLONG_INTTerminalRuleCall_0()); }
-	RULE_LONG_INT{ after(grammarAccess.getReactionPriorityAccess().getPriorityLONG_INTTerminalRuleCall_0()); }
+{ before(grammarAccess.getReactionPriorityAccess().getPriorityINTTerminalRuleCall_0()); }
+	RULE_INT{ after(grammarAccess.getReactionPriorityAccess().getPriorityINTTerminalRuleCall_0()); }
 )
 
 ;
@@ -10922,8 +10922,8 @@ rule__TimeEventSpec__ValueAssignment_1
     }
 :
 (
-{ before(grammarAccess.getTimeEventSpecAccess().getValueLONG_INTTerminalRuleCall_1_0()); }
-	RULE_LONG_INT{ after(grammarAccess.getTimeEventSpecAccess().getValueLONG_INTTerminalRuleCall_1_0()); }
+{ before(grammarAccess.getTimeEventSpecAccess().getValueINTTerminalRuleCall_1_0()); }
+	RULE_INT{ after(grammarAccess.getTimeEventSpecAccess().getValueINTTerminalRuleCall_1_0()); }
 )
 
 ;
@@ -11460,8 +11460,8 @@ rule__IntLiteral__ValueAssignment_1
     }
 :
 (
-{ before(grammarAccess.getIntLiteralAccess().getValueLONG_INTTerminalRuleCall_1_0()); }
-	RULE_LONG_INT{ after(grammarAccess.getIntLiteralAccess().getValueLONG_INTTerminalRuleCall_1_0()); }
+{ before(grammarAccess.getIntLiteralAccess().getValueINTTerminalRuleCall_1_0()); }
+	RULE_INT{ after(grammarAccess.getIntLiteralAccess().getValueINTTerminalRuleCall_1_0()); }
 )
 
 ;
@@ -11500,20 +11500,24 @@ finally {
 }
 
 
-RULE_LONG_INT : ('0'..'9')+;
-
 RULE_BOOL : ('true'|'false'|'yes'|'no');
 
 RULE_HEX : '0' ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+;
 
-RULE_DOUBLE : RULE_LONG_INT '.' RULE_LONG_INT ('e' ('-'|'+') RULE_LONG_INT)? ('f'|'F'|'d'|'D')?;
+RULE_DOUBLE : RULE_INT '.' RULE_INT ('e' ('-'|'+') RULE_INT)? ('f'|'F'|'d'|'D')?;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+RULE_INT : ('0'..'9')+;
+
+RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
+
+RULE_ANY_OTHER : .;
 
 

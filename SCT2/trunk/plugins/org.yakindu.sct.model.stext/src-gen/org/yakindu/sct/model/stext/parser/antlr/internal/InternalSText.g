@@ -1816,9 +1816,9 @@ ruleReactionPriority returns [EObject current=null]
     @after { leaveRule(); }:
 (
 (
-		lv_priority_0_0=RULE_LONG_INT
+		lv_priority_0_0=RULE_INT
 		{
-			newLeafNode(lv_priority_0_0, grammarAccess.getReactionPriorityAccess().getPriorityLONG_INTTerminalRuleCall_0()); 
+			newLeafNode(lv_priority_0_0, grammarAccess.getReactionPriorityAccess().getPriorityINTTerminalRuleCall_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -1828,7 +1828,7 @@ ruleReactionPriority returns [EObject current=null]
        			$current, 
        			"priority",
         		lv_priority_0_0, 
-        		"LONG_INT");
+        		"INT");
 	    }
 
 )
@@ -2039,9 +2039,9 @@ ruleTimeEventSpec returns [EObject current=null]
 )
 )(
 (
-		lv_value_1_0=RULE_LONG_INT
+		lv_value_1_0=RULE_INT
 		{
-			newLeafNode(lv_value_1_0, grammarAccess.getTimeEventSpecAccess().getValueLONG_INTTerminalRuleCall_1_0()); 
+			newLeafNode(lv_value_1_0, grammarAccess.getTimeEventSpecAccess().getValueINTTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -2051,7 +2051,7 @@ ruleTimeEventSpec returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_1_0, 
-        		"LONG_INT");
+        		"INT");
 	    }
 
 )
@@ -3906,9 +3906,9 @@ ruleIntLiteral returns [EObject current=null]
     }
 )(
 (
-		lv_value_1_0=RULE_LONG_INT
+		lv_value_1_0=RULE_INT
 		{
-			newLeafNode(lv_value_1_0, grammarAccess.getIntLiteralAccess().getValueLONG_INTTerminalRuleCall_1_0()); 
+			newLeafNode(lv_value_1_0, grammarAccess.getIntLiteralAccess().getValueINTTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -3918,7 +3918,7 @@ ruleIntLiteral returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_1_0, 
-        		"LONG_INT");
+        		"INT");
 	    }
 
 )
@@ -4329,20 +4329,24 @@ ruleType returns [Enumerator current=null]
 
 
 
-RULE_LONG_INT : ('0'..'9')+;
-
 RULE_BOOL : ('true'|'false'|'yes'|'no');
 
 RULE_HEX : '0' ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+;
 
-RULE_DOUBLE : RULE_LONG_INT '.' RULE_LONG_INT ('e' ('-'|'+') RULE_LONG_INT)? ('f'|'F'|'d'|'D')?;
+RULE_DOUBLE : RULE_INT '.' RULE_INT ('e' ('-'|'+') RULE_INT)? ('f'|'F'|'d'|'D')?;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+RULE_INT : ('0'..'9')+;
+
+RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
+
+RULE_ANY_OTHER : .;
 
 

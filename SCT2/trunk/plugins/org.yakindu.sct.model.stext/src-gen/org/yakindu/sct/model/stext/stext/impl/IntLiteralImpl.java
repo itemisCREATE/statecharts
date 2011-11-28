@@ -38,7 +38,7 @@ public class IntLiteralImpl extends LiteralImpl implements IntLiteral
    * @generated
    * @ordered
    */
-  protected static final long VALUE_EDEFAULT = 0L;
+  protected static final int VALUE_EDEFAULT = 0;
 
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -48,7 +48,7 @@ public class IntLiteralImpl extends LiteralImpl implements IntLiteral
    * @generated
    * @ordered
    */
-  protected long value = VALUE_EDEFAULT;
+  protected int value = VALUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -76,7 +76,7 @@ public class IntLiteralImpl extends LiteralImpl implements IntLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  public long getValue()
+  public int getValue()
   {
     return value;
   }
@@ -86,9 +86,9 @@ public class IntLiteralImpl extends LiteralImpl implements IntLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(long newValue)
+  public void setValue(int newValue)
   {
-    long oldValue = value;
+    int oldValue = value;
     value = newValue;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.INT_LITERAL__VALUE, oldValue, value));
@@ -121,7 +121,7 @@ public class IntLiteralImpl extends LiteralImpl implements IntLiteral
     switch (featureID)
     {
       case StextPackage.INT_LITERAL__VALUE:
-        setValue((Long)newValue);
+        setValue((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);
