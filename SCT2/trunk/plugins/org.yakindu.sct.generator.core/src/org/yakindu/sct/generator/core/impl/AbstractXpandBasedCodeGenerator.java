@@ -14,6 +14,7 @@ import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTL
 
 import java.io.File;
 import java.util.Collections;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -23,6 +24,7 @@ import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.Output;
 import org.eclipse.xpand2.output.OutputImpl;
+import org.eclipse.xpand2.output.PostProcessor;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -92,9 +94,20 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 				.toOSString() + File.separator + targetFolder.getValue();
 		Output output = new OutputImpl();
 		Outlet outlet = new Outlet(absoluteTargetFolder);
+		for (PostProcessor postProcessor : getPostProcessors()) {
+			outlet.addPostprocessor(postProcessor);
+		}
 		outlet.setOverwrite(true);
 		output.addOutlet(outlet);
 		return output;
+	}
+	
+	/**
+	 * Override this Method to add some {@link PostProcessor}s to the XPand outlet.
+	 * @return An empty {@link Set} for {@link PostProcessor}s
+	 */
+	protected Set<PostProcessor> getPostProcessors() {
+		return Collections.emptySet();
 	}
 
 }

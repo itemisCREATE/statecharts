@@ -13,7 +13,9 @@ package org.yakindu.sct.generator.java;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -26,6 +28,8 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.launching.JavaRuntime;
+import org.eclipse.xpand2.output.JavaBeautifier;
+import org.eclipse.xpand2.output.PostProcessor;
 import org.yakindu.sct.generator.core.ISCTGenerator;
 import org.yakindu.sct.generator.core.impl.AbstractXpandBasedCodeGenerator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
@@ -83,6 +87,13 @@ public class JavaSCTGenerator extends AbstractXpandBasedCodeGenerator {
 				targetFolder);
 		entries.add(JavaCore.newSourceEntry(sourceFolderPath));
 		return entries.toArray(new IClasspathEntry[] {});
+	}
+	
+	@Override
+	protected Set<PostProcessor> getPostProcessors() {
+		Set<PostProcessor> set = new HashSet<PostProcessor>();
+		set.add(new JavaBeautifier());
+		return set;
 	}
 
 }
