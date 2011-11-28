@@ -31,5 +31,7 @@ public interface IGeneratorBridge {
 
 	void refreshTargetProject(GeneratorEntry entry);
 
-	File getTargetProjectPath(GeneratorEntry entry);
+	File getTargetProject(GeneratorEntry entry);
+
+	File getTargetFolder(GeneratorEntry entry);
 }

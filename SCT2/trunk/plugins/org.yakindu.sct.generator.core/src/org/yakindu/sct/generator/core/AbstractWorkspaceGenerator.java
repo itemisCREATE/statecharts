@@ -48,8 +48,12 @@ public abstract class AbstractWorkspaceGenerator implements IGeneratorBridge {
 		bridge.refreshTargetProject(entry);
 	}
 
-	public final File getTargetProjectPath(GeneratorEntry entry) {
-		return bridge.getTargetProjectPath(entry);
+	public final File getTargetProject(GeneratorEntry entry) {
+		return bridge.getTargetProject(entry);
+	}
+
+	public final File getTargetFolder(GeneratorEntry entry) {
+		return bridge.getTargetFolder(entry);
 	}
 
 }
