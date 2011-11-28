@@ -19,6 +19,8 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.Scope;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.Direction;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
@@ -96,7 +98,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 					StextPackage.Literals.EVENT_DEFINITION__DIRECTION);
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkOperation(Operation operation) {
 		if (operation.eContainer() instanceof SimpleScope) {
@@ -105,13 +107,23 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkLocalReaction(LocalReaction localReaction) {
 		if (localReaction.eContainer() instanceof InterfaceScope) {
 			error("Local reactions are not allowed in interface scope.",
 					localReaction,
 					StextPackage.Literals.LOCAL_REACTION__PROPERTIES,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkInterfaceScope(InterfaceScope interfaceScope) {
+		if (getInterfaceCount(interfaceScope) > 1) {
+			error("It can only exist one default/unamed interface",
+					interfaceScope,
+					StextPackage.Literals.INTERFACE_SCOPE__NAME,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 		}
 	}
@@ -124,6 +136,21 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			element = element.eContainer();
 		}
 		return false;
+	}
+
+	private int getInterfaceCount(InterfaceScope interfaceScope) {
+		int count = 1;
+		if (interfaceScope.eContainer() instanceof Statechart) {
+			Statechart statechart = (Statechart) interfaceScope.eContainer();
+
+			for (Scope scope : statechart.getScopes()) {
+				if (scope != interfaceScope && scope instanceof InterfaceScope
+						&& ((InterfaceScope) scope).getName() == null) {
+					count++;
+				}
+			}
+		}
+		return count;
 	}
 
 	@Override
