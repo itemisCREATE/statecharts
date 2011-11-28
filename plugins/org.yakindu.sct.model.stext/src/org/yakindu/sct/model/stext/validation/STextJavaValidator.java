@@ -11,6 +11,8 @@
  */
 package org.yakindu.sct.model.stext.validation;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
@@ -119,15 +121,24 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	}
 
 	@Check(CheckType.FAST)
-	public void checkInterfaceScope(InterfaceScope interfaceScope) {
-		if (getNotNamedInterfaceCount(interfaceScope) > 1) {
-			error("It can only exist one default/unamed interface",
-					interfaceScope,
-					StextPackage.Literals.INTERFACE_SCOPE__NAME,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
+	public void checkInterfaceScope(Statechart statechart) {
+		List<InterfaceScope> defaultInterfaces = new LinkedList<InterfaceScope>();
+
+		for (Scope scope : statechart.getScopes()) {
+			if (scope instanceof InterfaceScope
+					&& ((InterfaceScope) scope).getName() == null) {
+				defaultInterfaces.add((InterfaceScope) scope);
+			}
+		}
+		if (defaultInterfaces.size() > 1) {
+			for (InterfaceScope scope : defaultInterfaces) {
+				error("It can only exist one default/unamed interface", scope,
+						StextPackage.Literals.INTERFACE_SCOPE__NAME,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
+			}
 		}
 	}
-	
+
 	private boolean isStatechartDefinitionChild(EObject element) {
 		while (element.eContainer() != null) {
 			if (element.eContainer() instanceof StatechartDefinition) {
@@ -136,21 +147,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			element = element.eContainer();
 		}
 		return false;
-	}
-	
-	private int getNotNamedInterfaceCount(InterfaceScope interfaceScope) {
-		int count = 0;
-		if (interfaceScope.eContainer() instanceof Statechart) {
-			Statechart statechart = (Statechart) interfaceScope.eContainer();
-
-			for (Scope scope : statechart.getScopes()) {
-				if (scope instanceof InterfaceScope
-						&& ((InterfaceScope) scope).getName() == null) {
-					count++;
-				}
-			}
-		}
-		return count;
 	}
 
 	@Override
