@@ -9867,11 +9867,11 @@ rule__BoolLiteral__Group__0__Impl
     }
 :
 (
-{ before(grammarAccess.getBoolLiteralAccess().getBooleanLiteralAction_0()); }
+{ before(grammarAccess.getBoolLiteralAccess().getBoolLiteralAction_0()); }
 (
 
 )
-{ after(grammarAccess.getBoolLiteralAccess().getBooleanLiteralAction_0()); }
+{ after(grammarAccess.getBoolLiteralAccess().getBoolLiteralAction_0()); }
 )
 
 ;
@@ -9993,11 +9993,11 @@ rule__RealLiteral__Group__0__Impl
     }
 :
 (
-{ before(grammarAccess.getRealLiteralAccess().getFloatLiteralAction_0()); }
+{ before(grammarAccess.getRealLiteralAccess().getRealLiteralAction_0()); }
 (
 
 )
-{ after(grammarAccess.getRealLiteralAccess().getFloatLiteralAction_0()); }
+{ after(grammarAccess.getRealLiteralAccess().getRealLiteralAction_0()); }
 )
 
 ;
@@ -11509,5 +11509,11 @@ RULE_HEX : '0' ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+;
 RULE_DOUBLE : RULE_LONG_INT '.' RULE_LONG_INT ('e' ('-'|'+') RULE_LONG_INT)? ('f'|'F'|'d'|'D')?;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
+
+RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
+
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 

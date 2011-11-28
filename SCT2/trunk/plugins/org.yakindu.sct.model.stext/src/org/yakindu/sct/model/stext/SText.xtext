@@ -1,4 +1,4 @@
-grammar org.yakindu.sct.model.stext.SText 
+grammar org.yakindu.sct.model.stext.SText  hidden(WS, ML_COMMENT, SL_COMMENT)
 
 generate stext "http://www.yakindu.org/sct/statechart/SText"
 import "platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore" as sct
@@ -341,4 +341,8 @@ terminal DOUBLE returns ecore::EDouble:
 terminal ID :
 	'^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
 ;
+terminal ML_COMMENT	: '/*' -> '*/';
+terminal SL_COMMENT 	: '//' !('\n'|'\r')* ('\r'? '\n')?;
+
+terminal WS			: (' '|'\t'|'\r'|'\n')+;
 
