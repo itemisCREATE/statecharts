@@ -370,7 +370,7 @@ public class SGraphBuilder extends Function implements ISGraphExecutionBuilder {
 				if (eventSpec instanceof TimeEventSpec) {
 					final TimeUnit unit = ((TimeEventSpec) eventSpec).getUnit();
 
-					final int value = ((TimeEventSpec) eventSpec).getValue();
+					final long value = ((TimeEventSpec) eventSpec).getValue();
 					timeTrigger = new RTTimeEvent("id") {
 						@Override
 						public long getDuration() {
