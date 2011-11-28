@@ -20,6 +20,21 @@ Templates for the main statechart c file.
 // ActionCode for Step not defined
 «ENDDEFINE»
 
+«DEFINE ActionCode FOR StateSwitch»
+// ActionCode for StateSwitch
+// «this.comment»
+	switch(((StatemachineBase*)handle)->state[0/* TODO: must be set correctly */]) {
+«FOREACH this.cases AS caseid»
+  case _«caseid.state.simpleName» : {
+  «EXPAND ActionCode FOR caseid.step»
+  break;
+  }
+«ENDFOREACH»
+  default:
+    break;
+	}
+«ENDDEFINE»
+
 «DEFINE ActionCode FOR Execution»
 	«this.statement.toCCode()»
 «ENDDEFINE»
@@ -56,9 +71,11 @@ ENDDEFINE»
 if («EXPAND ActionCode FOR this.check») { 
   «EXPAND ActionCode FOR this.thenStep»
 }
+«IF (this.elseStep != null)»
 else {
   «EXPAND ActionCode FOR this.elseStep»
 }
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR EnterState»
@@ -203,6 +220,26 @@ void «this.exitSequence.exitSequenceFunctionName()»(«StName()»* handle)
 «EXPAND EnterSequenceImplement FOREACH this.states»
 «EXPAND ExitSequenceImplement FOREACH this.states»
 
+«REM»
+boolean «stName()»_is_in(«StName()»* handle, States state)
+{
+	switch (((StatemachineBase*)handle)->state[0 /* TODO: change to correct parallel region (may need a for loop */]) {
+	«FOREACH this.states AS state»
+	    case _«state.simpleName»:
+			«IF state.leaf == true»
+			  return bool_true;
+			«ELSE»
+			  if ( bool_true == bool_true )
+			    return bool_true;
+			«ENDIF»  
+	        break;
+	«ENDFOREACH»
+	    default:
+	        break;
+	}
+	return bool_false;
+}
+«ENDREM»
 void «stName()»_init(«StName()»* handle, Timer* timer, EventPool* eventPool)
 {
 	statemachine_cy_init(&handle->base, MAX_PARALLEL_STATES,
