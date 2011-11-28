@@ -78,17 +78,31 @@ public abstract class AbstractDefaultFeatureValueProvider implements
 	}
 
 	protected boolean projectExists(String value) {
-		return ResourcesPlugin.getWorkspace().getRoot().getProject(value)
-				.exists();
+		try {
+			return ResourcesPlugin.getWorkspace().getRoot().getProject(value)
+					.exists();
+		} catch (IllegalArgumentException e) {
+			return false;
+		}
 	}
 
 	protected boolean folderExists(String projectName, String folderPath) {
-		return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName)
-				.getFolder(new Path(folderPath)).exists();
+		try {
+			return ResourcesPlugin.getWorkspace().getRoot()
+					.getProject(projectName).getFolder(new Path(folderPath))
+					.exists();
+		} catch (IllegalArgumentException e) {
+			return false;
+		}
 	}
 
 	protected boolean fileExists(String projectName, String folderPath) {
-		return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName)
-				.getFile(new Path(folderPath)).exists();
+		try {
+			return ResourcesPlugin.getWorkspace().getRoot()
+					.getProject(projectName).getFile(new Path(folderPath))
+					.exists();
+		} catch (IllegalArgumentException e) {
+			return false;
+		}
 	}
 }
