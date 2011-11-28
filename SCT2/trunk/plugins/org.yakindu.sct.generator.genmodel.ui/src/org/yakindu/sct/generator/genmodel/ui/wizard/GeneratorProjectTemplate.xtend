@@ -376,14 +376,45 @@ class GeneratorProjectTemplate {
 	def javaGenerator(ProjectData data) '''
 		package «data.generatorClass.packageName»;
 
+		import java.io.File;
+		import java.io.FileOutputStream;
 		import org.yakindu.sct.generator.core.AbstractWorkspaceGenerator;
 		import org.yakindu.sct.model.sexec.ExecutionFlow;
+		import org.yakindu.sct.model.sexec.ExecutionState;
 		import org.yakindu.sct.model.sgen.GeneratorEntry;
 		
 		public class «data.generatorClass.simpleName» extends AbstractWorkspaceGenerator {
+			private static final String LBR = "\n\r";
+
 			@Override
 			public void generate(ExecutionFlow flow, GeneratorEntry entry) {
-				writeToConsole("Output shall go into project "+getTargetProjectPath(entry));
+				StringBuilder builder = new StringBuilder();
+				builder.append("The name of the Statemachine is ");
+				builder.append(flow.getName());
+				builder.append(LBR).append(LBR);
+				builder.append("The Statemachine has the following states:");
+				builder.append(LBR).append(LBR);
+				for (ExecutionState state : flow.getStates()) {
+					builder.append(
+							state.getName().replaceFirst(flow.getName() + "\\.", ""))
+							.append(LBR);
+				}
+				File targetFolder = getTargetFolder(entry);
+				File targetFile = new File(targetFolder.getPath() + File.separator
+						+ flow.getName() + ".txt");
+				write(targetFolder, targetFile, builder.toString());
+				refreshTargetProject(entry);
+			}
+		
+			private void write(File targetFolder, File targetFile, String content) {
+				try {
+					targetFolder.mkdirs();
+					FileOutputStream out = new FileOutputStream(targetFile);
+					out.write(content.getBytes());
+					out.close();
+				} catch (Exception e) {
+					writeToConsole(e);
+				}
 			}
 		}
 	'''
