@@ -46,6 +46,7 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getReactionPropertyAccess().getAlternatives(), "rule__ReactionProperty__Alternatives");
 					put(grammarAccess.getEventSpecAccess().getAlternatives(), "rule__EventSpec__Alternatives");
 					put(grammarAccess.getBuiltinEventSpecAccess().getAlternatives(), "rule__BuiltinEventSpec__Alternatives");
+					put(grammarAccess.getDefaultEventAccess().getAlternatives_1(), "rule__DefaultEvent__Alternatives_1");
 					put(grammarAccess.getStatementAccess().getAlternatives(), "rule__Statement__Alternatives");
 					put(grammarAccess.getLogicalNotExpressionAccess().getAlternatives(), "rule__LogicalNotExpression__Alternatives");
 					put(grammarAccess.getNumericalUnaryExpressionAccess().getAlternatives(), "rule__NumericalUnaryExpression__Alternatives");
@@ -106,6 +107,7 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getExitEventAccess().getGroup(), "rule__ExitEvent__Group__0");
 					put(grammarAccess.getOnCycleEventAccess().getGroup(), "rule__OnCycleEvent__Group__0");
 					put(grammarAccess.getAlwaysEventAccess().getGroup(), "rule__AlwaysEvent__Group__0");
+					put(grammarAccess.getDefaultEventAccess().getGroup(), "rule__DefaultEvent__Group__0");
 					put(grammarAccess.getAssignmentAccess().getGroup(), "rule__Assignment__Group__0");
 					put(grammarAccess.getEventRaisingAccess().getGroup(), "rule__EventRaising__Group__0");
 					put(grammarAccess.getEventRaisingAccess().getGroup_2(), "rule__EventRaising__Group_2__0");
@@ -134,9 +136,16 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPrimaryExpressionAccess().getGroup_1(), "rule__PrimaryExpression__Group_1__0");
 					put(grammarAccess.getPrimitiveValueExpressionAccess().getGroup(), "rule__PrimitiveValueExpression__Group__0");
 					put(grammarAccess.getElementReferenceExpressionAccess().getGroup(), "rule__ElementReferenceExpression__Group__0");
+					put(grammarAccess.getEventValueReferenceExpressionAccess().getGroup(), "rule__EventValueReferenceExpression__Group__0");
+					put(grammarAccess.getEventRaisedReferenceExpressionAccess().getGroup(), "rule__EventRaisedReferenceExpression__Group__0");
+					put(grammarAccess.getActiveStateReferenceExpressionAccess().getGroup(), "rule__ActiveStateReferenceExpression__Group__0");
 					put(grammarAccess.getOperationCallAccess().getGroup(), "rule__OperationCall__Group__0");
 					put(grammarAccess.getOperationCallAccess().getGroup_3(), "rule__OperationCall__Group_3__0");
 					put(grammarAccess.getOperationCallAccess().getGroup_3_1(), "rule__OperationCall__Group_3_1__0");
+					put(grammarAccess.getBoolLiteralAccess().getGroup(), "rule__BoolLiteral__Group__0");
+					put(grammarAccess.getIntLiteralAccess().getGroup(), "rule__IntLiteral__Group__0");
+					put(grammarAccess.getRealLiteralAccess().getGroup(), "rule__RealLiteral__Group__0");
+					put(grammarAccess.getHexLiteralAccess().getGroup(), "rule__HexLiteral__Group__0");
 					put(grammarAccess.getRootAccess().getRootsAssignment(), "rule__Root__RootsAssignment");
 					put(grammarAccess.getStatechartRootAccess().getDefAssignment_1(), "rule__StatechartRoot__DefAssignment_1");
 					put(grammarAccess.getStateRootAccess().getDefAssignment_1(), "rule__StateRoot__DefAssignment_1");
@@ -210,9 +219,16 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNumericalUnaryExpressionAccess().getOperandAssignment_1_2(), "rule__NumericalUnaryExpression__OperandAssignment_1_2");
 					put(grammarAccess.getPrimitiveValueExpressionAccess().getValueAssignment_1(), "rule__PrimitiveValueExpression__ValueAssignment_1");
 					put(grammarAccess.getElementReferenceExpressionAccess().getValueAssignment_1(), "rule__ElementReferenceExpression__ValueAssignment_1");
+					put(grammarAccess.getEventValueReferenceExpressionAccess().getValueAssignment_3(), "rule__EventValueReferenceExpression__ValueAssignment_3");
+					put(grammarAccess.getEventRaisedReferenceExpressionAccess().getValueAssignment_3(), "rule__EventRaisedReferenceExpression__ValueAssignment_3");
+					put(grammarAccess.getActiveStateReferenceExpressionAccess().getValueAssignment_3(), "rule__ActiveStateReferenceExpression__ValueAssignment_3");
 					put(grammarAccess.getOperationCallAccess().getOperationAssignment_1(), "rule__OperationCall__OperationAssignment_1");
 					put(grammarAccess.getOperationCallAccess().getArgsAssignment_3_0(), "rule__OperationCall__ArgsAssignment_3_0");
 					put(grammarAccess.getOperationCallAccess().getArgsAssignment_3_1_1(), "rule__OperationCall__ArgsAssignment_3_1_1");
+					put(grammarAccess.getBoolLiteralAccess().getValueAssignment_1(), "rule__BoolLiteral__ValueAssignment_1");
+					put(grammarAccess.getIntLiteralAccess().getValueAssignment_1(), "rule__IntLiteral__ValueAssignment_1");
+					put(grammarAccess.getRealLiteralAccess().getValueAssignment_1(), "rule__RealLiteral__ValueAssignment_1");
+					put(grammarAccess.getHexLiteralAccess().getValueAssignment_1(), "rule__HexLiteral__ValueAssignment_1");
 					put(grammarAccess.getVariableDefinitionAccess().getUnorderedGroup_2(), "rule__VariableDefinition__UnorderedGroup_2");
 				}
 			};
@@ -233,7 +249,7 @@ public class STextParser extends AbstractContentAssistParser {
 	
 	@Override
 	protected String[] getInitialHiddenTokens() {
-		return new String[] { "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT" };
+		return new String[] {  };
 	}
 	
 	public STextGrammarAccess getGrammarAccess() {

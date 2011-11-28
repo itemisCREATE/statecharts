@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -37,7 +38,7 @@ public class ReactionPriorityImpl extends ReactionPropertyImpl implements Reacti
    * @generated
    * @ordered
    */
-  protected static final int PRIORITY_EDEFAULT = 0;
+  protected static final long PRIORITY_EDEFAULT = 0L;
 
   /**
    * The cached value of the '{@link #getPriority() <em>Priority</em>}' attribute.
@@ -47,7 +48,7 @@ public class ReactionPriorityImpl extends ReactionPropertyImpl implements Reacti
    * @generated
    * @ordered
    */
-  protected int priority = PRIORITY_EDEFAULT;
+  protected long priority = PRIORITY_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -75,7 +76,7 @@ public class ReactionPriorityImpl extends ReactionPropertyImpl implements Reacti
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getPriority()
+  public long getPriority()
   {
     return priority;
   }
@@ -85,9 +86,9 @@ public class ReactionPriorityImpl extends ReactionPropertyImpl implements Reacti
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPriority(int newPriority)
+  public void setPriority(long newPriority)
   {
-    int oldPriority = priority;
+    long oldPriority = priority;
     priority = newPriority;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.REACTION_PRIORITY__PRIORITY, oldPriority, priority));
@@ -120,7 +121,7 @@ public class ReactionPriorityImpl extends ReactionPropertyImpl implements Reacti
     switch (featureID)
     {
       case StextPackage.REACTION_PRIORITY__PRIORITY:
-        setPriority((Integer)newValue);
+        setPriority((Long)newValue);
         return;
     }
     super.eSet(featureID, newValue);

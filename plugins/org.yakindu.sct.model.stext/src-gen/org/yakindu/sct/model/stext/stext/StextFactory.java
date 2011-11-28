@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext;
 
@@ -242,6 +243,15 @@ public interface StextFactory extends EFactory
   AlwaysEvent createAlwaysEvent();
 
   /**
+   * Returns a new object of class '<em>Default Event</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Default Event</em>'.
+   * @generated
+   */
+  DefaultEvent createDefaultEvent();
+
+  /**
    * Returns a new object of class '<em>Assignment</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -267,6 +277,87 @@ public interface StextFactory extends EFactory
    * @generated
    */
   Expression createExpression();
+
+  /**
+   * Returns a new object of class '<em>Element Reference Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Element Reference Expression</em>'.
+   * @generated
+   */
+  ElementReferenceExpression createElementReferenceExpression();
+
+  /**
+   * Returns a new object of class '<em>Event Value Reference Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Event Value Reference Expression</em>'.
+   * @generated
+   */
+  EventValueReferenceExpression createEventValueReferenceExpression();
+
+  /**
+   * Returns a new object of class '<em>Event Raised Reference Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Event Raised Reference Expression</em>'.
+   * @generated
+   */
+  EventRaisedReferenceExpression createEventRaisedReferenceExpression();
+
+  /**
+   * Returns a new object of class '<em>Active State Reference Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Active State Reference Expression</em>'.
+   * @generated
+   */
+  ActiveStateReferenceExpression createActiveStateReferenceExpression();
+
+  /**
+   * Returns a new object of class '<em>Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Literal</em>'.
+   * @generated
+   */
+  Literal createLiteral();
+
+  /**
+   * Returns a new object of class '<em>Bool Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bool Literal</em>'.
+   * @generated
+   */
+  BoolLiteral createBoolLiteral();
+
+  /**
+   * Returns a new object of class '<em>Int Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Int Literal</em>'.
+   * @generated
+   */
+  IntLiteral createIntLiteral();
+
+  /**
+   * Returns a new object of class '<em>Real Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Real Literal</em>'.
+   * @generated
+   */
+  RealLiteral createRealLiteral();
+
+  /**
+   * Returns a new object of class '<em>Hex Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Hex Literal</em>'.
+   * @generated
+   */
+  HexLiteral createHexLiteral();
 
   /**
    * Returns a new object of class '<em>Simple Scope</em>'.
@@ -485,15 +576,6 @@ public interface StextFactory extends EFactory
   PrimitiveValueExpression createPrimitiveValueExpression();
 
   /**
-   * Returns a new object of class '<em>Element Reference Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Element Reference Expression</em>'.
-   * @generated
-   */
-  ElementReferenceExpression createElementReferenceExpression();
-
-  /**
    * Returns a new object of class '<em>Operation Call</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -501,6 +583,24 @@ public interface StextFactory extends EFactory
    * @generated
    */
   OperationCall createOperationCall();
+
+  /**
+   * Returns a new object of class '<em>Boolean Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Boolean Literal</em>'.
+   * @generated
+   */
+  BooleanLiteral createBooleanLiteral();
+
+  /**
+   * Returns a new object of class '<em>Float Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Float Literal</em>'.
+   * @generated
+   */
+  FloatLiteral createFloatLiteral();
 
   /**
    * Returns the package supported by this factory.

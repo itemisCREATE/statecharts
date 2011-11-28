@@ -2,17 +2,21 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.yakindu.sct.model.sgraph.impl.VariableImpl;
 
+import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
@@ -96,24 +100,14 @@ public class VariableDefinitionImpl extends VariableImpl implements VariableDefi
   protected Type type = TYPE_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getInitialValue() <em>Initial Value</em>}' attribute.
+   * The cached value of the '{@link #getInitialValue() <em>Initial Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getInitialValue()
    * @generated
    * @ordered
    */
-  protected static final String INITIAL_VALUE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getInitialValue() <em>Initial Value</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getInitialValue()
-   * @generated
-   * @ordered
-   */
-  protected String initialValue = INITIAL_VALUE_EDEFAULT;
+  protected Expression initialValue;
 
   /**
    * <!-- begin-user-doc -->
@@ -210,7 +204,7 @@ public class VariableDefinitionImpl extends VariableImpl implements VariableDefi
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getInitialValue()
+  public Expression getInitialValue()
   {
     return initialValue;
   }
@@ -220,12 +214,53 @@ public class VariableDefinitionImpl extends VariableImpl implements VariableDefi
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setInitialValue(String newInitialValue)
+  public NotificationChain basicSetInitialValue(Expression newInitialValue, NotificationChain msgs)
   {
-    String oldInitialValue = initialValue;
+    Expression oldInitialValue = initialValue;
     initialValue = newInitialValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE, oldInitialValue, initialValue));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE, oldInitialValue, newInitialValue);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setInitialValue(Expression newInitialValue)
+  {
+    if (newInitialValue != initialValue)
+    {
+      NotificationChain msgs = null;
+      if (initialValue != null)
+        msgs = ((InternalEObject)initialValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE, null, msgs);
+      if (newInitialValue != null)
+        msgs = ((InternalEObject)newInitialValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE, null, msgs);
+      msgs = basicSetInitialValue(newInitialValue, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE, newInitialValue, newInitialValue));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE:
+        return basicSetInitialValue(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -270,7 +305,7 @@ public class VariableDefinitionImpl extends VariableImpl implements VariableDefi
         setType((Type)newValue);
         return;
       case StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE:
-        setInitialValue((String)newValue);
+        setInitialValue((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -296,7 +331,7 @@ public class VariableDefinitionImpl extends VariableImpl implements VariableDefi
         setType(TYPE_EDEFAULT);
         return;
       case StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE:
-        setInitialValue(INITIAL_VALUE_EDEFAULT);
+        setInitialValue((Expression)null);
         return;
     }
     super.eUnset(featureID);
@@ -319,7 +354,7 @@ public class VariableDefinitionImpl extends VariableImpl implements VariableDefi
       case StextPackage.VARIABLE_DEFINITION__TYPE:
         return type != TYPE_EDEFAULT;
       case StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE:
-        return INITIAL_VALUE_EDEFAULT == null ? initialValue != null : !INITIAL_VALUE_EDEFAULT.equals(initialValue);
+        return initialValue != null;
     }
     return super.eIsSet(featureID);
   }
@@ -341,8 +376,6 @@ public class VariableDefinitionImpl extends VariableImpl implements VariableDefi
     result.append(external);
     result.append(", type: ");
     result.append(type);
-    result.append(", initialValue: ");
-    result.append(initialValue);
     result.append(')');
     return result.toString();
   }
