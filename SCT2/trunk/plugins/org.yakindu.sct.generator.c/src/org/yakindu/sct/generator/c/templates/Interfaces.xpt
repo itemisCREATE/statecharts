@@ -108,7 +108,7 @@ void «interface.interfaceName()»_init(«interface.interfaceClassName()»* handle, 
 «FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
 «IF variable.initialValue != null»
 «REM»change to correctLValue«ENDREM»
-	handle->«variable.name» = «variable.initialValue.correctLValue()»;
+	handle->«variable.name» = «variable.initialValue.toCCode()»;
 «ENDIF»
 «ENDFOREACH»
 
