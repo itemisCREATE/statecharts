@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
+import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
@@ -15,6 +16,7 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.Assignment;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
@@ -23,6 +25,7 @@ import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
+import org.yakindu.sct.model.stext.stext.OnCycleEvent;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
@@ -61,6 +64,18 @@ public class SCTTestUtil {
 		e1Spec.setEvent(e1);
 		if (rt!=null) rt.getTriggers().add(e1Spec);
 		return e1Spec;
+	}
+
+	public static OnCycleEvent _createOncycleEventSpec(ReactionTrigger rt) {
+		OnCycleEvent oce = StextFactory.eINSTANCE.createOnCycleEvent();
+		if (rt!=null) rt.getTriggers().add(oce);
+		return oce;
+	}
+
+	public static AlwaysEvent _createAlwaysEventSpec(ReactionTrigger rt) {
+		AlwaysEvent always = StextFactory.eINSTANCE.createAlwaysEvent();
+		if (rt!=null) rt.getTriggers().add(always);
+		return always;
 	}
 
 	
@@ -110,6 +125,12 @@ public class SCTTestUtil {
 	public static State _createState(String name, Region r) {
 		State state = SGraphFactory.eINSTANCE.createState();
 		state.setName(name);
+		if (r!=null) r.getVertices().add(state);
+		return state;
+	}
+	
+	public static FinalState _createFinalState(Region r) {
+		FinalState state = SGraphFactory.eINSTANCE.createFinalState();
 		if (r!=null) r.getVertices().add(state);
 		return state;
 	}

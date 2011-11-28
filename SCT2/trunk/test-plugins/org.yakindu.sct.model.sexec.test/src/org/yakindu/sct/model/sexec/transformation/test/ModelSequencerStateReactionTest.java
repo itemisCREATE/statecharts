@@ -4,19 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEventDefinition;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createInterfaceScope;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createReactionTrigger;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegion;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegularEventSpec;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createState;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createStatechart;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createTimeEventSpec;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createTimeTriggeredReaction;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createTransition;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createValue;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableAssignment;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableDefinition;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.*;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -92,7 +80,41 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		assertTrue(((LogicalOrExpression) s).getRightOperand() instanceof ElementReferenceExpression);
 	}
 
+
 	
+	/**
+	 * The 'onclycle' trigger event will be converted to a simple 'true' condition.
+	 */
+	@Test public void testOnCycleTriggerCondition() {
+
+		ReactionTrigger tr1 = _createReactionTrigger(null);
+		_createOncycleEventSpec(tr1);
+
+		Statement s = sequencer.buildCondition(tr1);
+
+		assertNotNull(s);
+		assertTrue(s instanceof PrimitiveValueExpression);
+		assertEquals("true", ((PrimitiveValueExpression) s).getValue());
+	}
+
+	/**
+	 * The 'always' trigger event will be converted to a simple 'true' condition.
+	 */
+	@Test public void testAlwaysTriggerCondition() {
+
+		ReactionTrigger tr1 = _createReactionTrigger(null);
+		_createOncycleEventSpec(tr1);
+
+		Statement s = sequencer.buildCondition(tr1);
+
+		assertNotNull(s);
+		assertTrue(s instanceof PrimitiveValueExpression);
+		assertEquals("true", ((PrimitiveValueExpression) s).getValue());
+	}
+
+
+
+
 	@Test public void testTransitionCheckSequenceWithoutGuard() {
 
 		EventDefinition e1 = _createEventDefinition("e1", null);

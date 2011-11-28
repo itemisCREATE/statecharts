@@ -55,6 +55,7 @@ import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.Assignment;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
@@ -65,6 +66,7 @@ import org.yakindu.sct.model.stext.stext.LogicalAndExpression;
 import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
 import org.yakindu.sct.model.stext.stext.MultiplicativeOperator;
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
+import org.yakindu.sct.model.stext.stext.OnCycleEvent;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
@@ -1141,6 +1143,26 @@ public class ModelSequencer {
     }
   }
   
+  protected Expression _raised(final OnCycleEvent e) {
+    {
+      StextFactory _stextFactory = this.stextFactory();
+      PrimitiveValueExpression _createPrimitiveValueExpression = _stextFactory.createPrimitiveValueExpression();
+      final PrimitiveValueExpression r = _createPrimitiveValueExpression;
+      r.setValue("true");
+      return r;
+    }
+  }
+  
+  protected Expression _raised(final AlwaysEvent e) {
+    {
+      StextFactory _stextFactory = this.stextFactory();
+      PrimitiveValueExpression _createPrimitiveValueExpression = _stextFactory.createPrimitiveValueExpression();
+      final PrimitiveValueExpression r = _createPrimitiveValueExpression;
+      r.setValue("true");
+      return r;
+    }
+  }
+  
   private final HashMap<ArrayList<?>,TimeEvent> _createCache_createDerivedEvent = new HashMap<ArrayList<?>,TimeEvent>();
   
   public TimeEvent createDerivedEvent(final TimeEventSpec tes) {
@@ -1694,7 +1716,11 @@ public class ModelSequencer {
   }
   
   public Expression raised(final EventSpec e) {
-    if ((e instanceof RegularEventSpec)) {
+    if ((e instanceof AlwaysEvent)) {
+      return _raised((AlwaysEvent)e);
+    } else if ((e instanceof OnCycleEvent)) {
+      return _raised((OnCycleEvent)e);
+    } else if ((e instanceof RegularEventSpec)) {
       return _raised((RegularEventSpec)e);
     } else if ((e instanceof TimeEventSpec)) {
       return _raised((TimeEventSpec)e);
