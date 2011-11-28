@@ -19,9 +19,11 @@ import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.Assignment;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
+import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.Expression;
+import org.yakindu.sct.model.stext.stext.IntLiteral;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
@@ -212,13 +214,13 @@ public class SCTTestUtil {
 	}
 	
 	
-	public static void _createExitAssignment(VariableDefinition v1, State s1, String value) {
+	public static void _createExitAssignment(VariableDefinition v1, State s1, int value) {
 		LocalReaction exitAction = _createExitAction(s1);
 		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(value), (ReactionEffect) exitAction.getEffect());
 	}
 
 
-	public static void _createEntryAssignment(VariableDefinition v1, State s1, String value) {
+	public static void _createEntryAssignment(VariableDefinition v1, State s1, int value) {
 		LocalReaction entryAction = _createEntryAction(s1);
 		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(value), (ReactionEffect) entryAction.getEffect());
 	}
@@ -235,13 +237,29 @@ public class SCTTestUtil {
 		return assignment;
 	}
 	
-	public static PrimitiveValueExpression _createValue(String s) {
+//	public static PrimitiveValueExpression _createValue(String s) {
+//		PrimitiveValueExpression assignment = StextFactory.eINSTANCE.createPrimitiveValueExpression();
+//		assignment.setValue(s);
+//		return assignment;
+//	}
+//	
+
+	public static PrimitiveValueExpression _createValue(int i) {
 		PrimitiveValueExpression assignment = StextFactory.eINSTANCE.createPrimitiveValueExpression();
-		assignment.setValue(s);
+		IntLiteral intLit = StextFactory.eINSTANCE.createIntLiteral();
+		intLit.setValue(i);
+		assignment.setValue(intLit);
 		return assignment;
 	}
 	
-
+	public static PrimitiveValueExpression _createValue(boolean b) {
+		PrimitiveValueExpression assignment = StextFactory.eINSTANCE.createPrimitiveValueExpression();
+		BoolLiteral boolLit = StextFactory.eINSTANCE.createBoolLiteral();
+		boolLit.setValue(b);
+		assignment.setValue(boolLit);
+		return assignment;
+	}
+	
 	
 	public static State findState(Statechart sc, final String name) {
 		Collection<EObject> states = Collections2.filter(EcoreUtil2.eAllContentsAsList(sc), new Predicate<Object>() {

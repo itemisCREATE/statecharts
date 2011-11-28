@@ -19,6 +19,7 @@ import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.OrthogonalFla
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.SimpleFlatTSC;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
+import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
@@ -58,7 +59,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		_createTransition(e, s1);
 		_createTransition(s1, s2);
 		LocalReaction entryAction = _createEntryAction(s2);
-		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), (ReactionEffect) entryAction.getEffect());
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), (ReactionEffect) entryAction.getEffect());
 		
 		ExecutionFlow flow = sequencer.transform(sc);
 		
@@ -86,9 +87,9 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		Region s2_r = _createRegion("sub", s2);
 		State s2_1 = _createState("s2_1", s2_r);
 		LocalReaction entryAction = _createEntryAction(s2_1);
-		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), (ReactionEffect) entryAction.getEffect());
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), (ReactionEffect) entryAction.getEffect());
 		LocalReaction exitAction = _createExitAction(s2_1);
-		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("43"), (ReactionEffect) exitAction.getEffect());
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(43), (ReactionEffect) exitAction.getEffect());
 		
 		ExecutionFlow flow = sequencer.transform(sc);
 		
@@ -119,7 +120,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		_createTransition(e, s1);
 		_createTransition(s1, s2);
 		LocalReaction exitAction = _createExitAction(s1);
-		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("21"), (ReactionEffect) exitAction.getEffect());
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(21), (ReactionEffect) exitAction.getEffect());
 		
 		ExecutionFlow flow = sequencer.transform(sc);
 		
@@ -145,7 +146,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		Region r = _createRegion("r", sc);
 		State s1 = _createState("s1", r);
 		LocalReaction entryAction = _createEntryAction(s1);
-		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), (ReactionEffect) entryAction.getEffect());
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), (ReactionEffect) entryAction.getEffect());
 		
 		ExecutionFlow flow = sequencer.transform(sc);
 		
@@ -173,7 +174,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 
 			Region r = _createRegion("r", sc); {
 				State s1 = _createState("s1", r); {
-					_createEntryAssignment(v1, s1, "1");
+					_createEntryAssignment(v1, s1, 1);
 					Region r1_s1 = _createRegion("r1", s1); {
 						Entry e = _createEntry(EntryKind.INITIAL, null, r1_s1);
 						State s2 = _createState("s2", r1_s1);
@@ -223,7 +224,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		Region r = _createRegion("r", sc);
 		State s1 = _createState("s1", r);
 		LocalReaction entryAction = _createExitAction(s1);
-		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), (ReactionEffect) entryAction.getEffect());
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), (ReactionEffect) entryAction.getEffect());
 		
 		ExecutionFlow flow = sequencer.transform(sc);
 		
@@ -252,7 +253,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 
 			Region r = _createRegion("r", sc); {
 				State s1 = _createState("s1", r); {
-					_createExitAssignment(v1, s1, "1");
+					_createExitAssignment(v1, s1, 1);
 					Region r1_s1 = _createRegion("r1", s1); {
 						Entry e = _createEntry(EntryKind.INITIAL, null, r1_s1);
 						State s2 = _createState("s2", r1_s1);
@@ -343,7 +344,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		SimpleFlatTSC tsc = new SimpleFlatTSC();
 		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
 		ReactionEffect effect = _createReactionEffect(tsc.t1);
-		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), effect); 
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), effect); 
 		
 		ExecutionFlow flow = sequencer.transform(tsc.sc);
 
@@ -383,7 +384,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 
 		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
 		LocalReaction exitAction = _createExitAction(tsc.s1);
-		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("21"), (ReactionEffect) exitAction.getEffect());
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(21), (ReactionEffect) exitAction.getEffect());
 
 		ExecutionFlow flow = sequencer.transform(tsc.sc);
 		
@@ -415,7 +416,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 
 		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
 		LocalReaction entryAction = _createEntryAction(tsc.s2);
-		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("21"), (ReactionEffect) entryAction.getEffect());
+		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(21), (ReactionEffect) entryAction.getEffect());
 
 		
 		ExecutionFlow flow = sequencer.transform(tsc.sc);
@@ -493,7 +494,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		LocalReaction lr1 = _createLocalReaction(tsc.s1, null);
 		_createRegularEventSpec(tsc.e1, (ReactionTrigger) lr1.getTrigger());
 		ReactionEffect lr1_eff = _createReactionEffect(lr1);
-		Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), lr1_eff); 
+		Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), lr1_eff); 
 
 		// the secont local reaction conforms to "e1 [x==42] / x=0;" 
 		LocalReaction lr2 = _createLocalReaction(tsc.s1, null);
@@ -502,12 +503,12 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		lr2_equals.setOperator(RelationalOperator.EQUALS);
 		ElementReferenceExpression lr2_varRef = StextFactory.eINSTANCE.createElementReferenceExpression();
 		lr2_varRef.setValue(v1);
-		PrimitiveValueExpression lr2_value = _createValue("42");
+		PrimitiveValueExpression lr2_value = _createValue(42);
 		lr2_equals.setLeftOperand(lr2_varRef);
 		lr2_equals.setRightOperand(lr2_value);
 		((ReactionTrigger) lr2.getTrigger()).setGuardExpression(lr2_equals);
 		ReactionEffect lr2_eff = _createReactionEffect(lr2);
-		Assignment assign2 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("0"), lr2_eff); 
+		Assignment assign2 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(0), lr2_eff); 
 
 		// the third local reaction conforms to: "[x==0] / x=1;"
 		LocalReaction lr3 = _createLocalReaction(tsc.s1, null);
@@ -515,12 +516,12 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		lr3_equals.setOperator(RelationalOperator.EQUALS);
 		ElementReferenceExpression lr3_varRef = StextFactory.eINSTANCE.createElementReferenceExpression();
 		lr3_varRef.setValue(v1);
-		PrimitiveValueExpression lr3_value = _createValue("0");
+		PrimitiveValueExpression lr3_value = _createValue(0);
 		lr3_equals.setLeftOperand(lr3_varRef);
 		lr3_equals.setRightOperand(lr3_value);
 		((ReactionTrigger) lr3.getTrigger()).setGuardExpression(lr3_equals);
 		ReactionEffect lr3_eff = _createReactionEffect(lr3);
-		Assignment assign3 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("1"), lr3_eff); 
+		Assignment assign3 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(1), lr3_eff); 
 		
 		
 		ExecutionFlow flow = sequencer.transform(tsc.sc);
@@ -580,7 +581,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		LocalReaction lr1 = _createLocalReaction(tsc.s1, null);
 		_createRegularEventSpec(tsc.e1, (ReactionTrigger) lr1.getTrigger());
 		ReactionEffect lr1_eff = _createReactionEffect(lr1);
-		Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), lr1_eff); 
+		Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), lr1_eff); 
 
 		// the secont local reaction conforms to "e1 [x==42] / x=0;" 
 		LocalReaction lr2 = _createLocalReaction(tsc.s1, null);
@@ -589,12 +590,12 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		lr2_equals.setOperator(RelationalOperator.EQUALS);
 		ElementReferenceExpression lr2_varRef = StextFactory.eINSTANCE.createElementReferenceExpression();
 		lr2_varRef.setValue(v1);
-		PrimitiveValueExpression lr2_value = _createValue("42");
+		PrimitiveValueExpression lr2_value = _createValue(42);
 		lr2_equals.setLeftOperand(lr2_varRef);
 		lr2_equals.setRightOperand(lr2_value);
 		((ReactionTrigger) lr2.getTrigger()).setGuardExpression(lr2_equals);
 		ReactionEffect lr2_eff = _createReactionEffect(lr2);
-		Assignment assign2 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("0"), lr2_eff); 
+		Assignment assign2 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(0), lr2_eff); 
 
 		// the third local reaction conforms to: "[x==0] / x=1;"
 		LocalReaction lr3 = _createLocalReaction(tsc.s1, null);
@@ -602,12 +603,12 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		lr3_equals.setOperator(RelationalOperator.EQUALS);
 		ElementReferenceExpression lr3_varRef = StextFactory.eINSTANCE.createElementReferenceExpression();
 		lr3_varRef.setValue(v1);
-		PrimitiveValueExpression lr3_value = _createValue("0");
+		PrimitiveValueExpression lr3_value = _createValue(0);
 		lr3_equals.setLeftOperand(lr3_varRef);
 		lr3_equals.setRightOperand(lr3_value);
 		((ReactionTrigger) lr3.getTrigger()).setGuardExpression(lr3_equals);
 		ReactionEffect lr3_eff = _createReactionEffect(lr3);
-		Assignment assign3 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("1"), lr3_eff); 
+		Assignment assign3 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(1), lr3_eff); 
 		
 		
 		ExecutionFlow flow = sequencer.transform(tsc.sc);
@@ -657,7 +658,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		// add a simple entry action: "entry / x=42;" 
 		LocalReaction lr = _createEntryAction(tsc.s1);
 		ReactionEffect lr_eff = _createReactionEffect(lr);
-		Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), lr_eff); 
+		Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), lr_eff); 
 
 		
 		// TRANSFORM
@@ -682,7 +683,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		// add a simple entry action: "entry / x=42;" 
 		LocalReaction lr = _createExitAction(tsc.s1);
 		ReactionEffect lr_eff = _createReactionEffect(lr);
-		Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), lr_eff); 
+		Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), lr_eff); 
 
 		
 		// TRANSFORM
@@ -708,7 +709,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		LocalReaction lr = _createEntryAction(tsc.s1);
 		_createRegularEventSpec(tsc.e1, (ReactionTrigger) lr.getTrigger());
 		ReactionEffect lr_eff = _createReactionEffect(lr);
-		Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), lr_eff); 
+		Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), lr_eff); 
 
 		
 		// TRANSFORM
@@ -751,15 +752,15 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 					LocalReaction lr1 = _createLocalReaction(s1, null);
 					_createRegularEventSpec(e1, (ReactionTrigger) lr1.getTrigger());
 					ReactionEffect lr1_eff = _createReactionEffect(lr1);
-					Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue("42"), lr1_eff); 
+					Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), lr1_eff); 
 
 					Region r_s1 = _createRegion("r", s1); {
 						State s3 = _createState("s3", r_s1); {
-							_createEntryAssignment(v1, s3, "2");
+							_createEntryAssignment(v1, s3, 2);
 							
 							Region r_s3 = _createRegion("r", s3); {
 								State s4 = _createState("s4", r_s3);
-								_createEntryAssignment(v1, s4, "3");
+								_createEntryAssignment(v1, s4, 3);
 
 								State s5 = _createState("s5", r_s3);
 							}
@@ -825,5 +826,95 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 
 	}
 
-	
+
+	/**
+	 * A final state must be transformed into a execution state with name '_final_'. and must include parent reactions.
+	 */
+	@Test public void testFinalState() {
+		
+		Statechart sc = _createStatechart("sc"); {  
+			
+			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
+			VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, s_scope);
+			EventDefinition e1 = _createEventDefinition("e1", s_scope);
+			
+
+			Region r = _createRegion("r", sc); {
+				State s1 = _createState("s1", r); {
+					// a local reaction: "e1 / x=42;" 
+					LocalReaction lr1 = _createLocalReaction(s1, null);
+					_createRegularEventSpec(e1, (ReactionTrigger) lr1.getTrigger());
+					ReactionEffect lr1_eff = _createReactionEffect(lr1);
+					Assignment assign1 = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), lr1_eff); 
+
+					Region r_s1 = _createRegion("r", s1); {
+						State s3 = _createState("s3", r_s1); {
+							_createEntryAssignment(v1, s3, 2);
+							
+							Region r_s3 = _createRegion("r", s3); {
+								State s4 = _createState("s4", r_s3);
+								_createEntryAssignment(v1, s4, 3);
+
+								FinalState fs = _createFinalState(r_s3);
+
+								Transition t_s4_fs = _createTransition(findState(sc, "s4"), fs);
+								_createRegularEventSpec(e1, (ReactionTrigger) t_s4_fs.getTrigger());
+							
+							}
+						}
+					}
+				}		
+				State s2 = _createState("s2", r); {
+					Region r_s1 = _createRegion("r", s2); {
+						_createState("s6", r_s1);
+					}
+				}
+			}
+
+
+			
+			Transition t_s3_s6 =_createTransition(findState(sc, "s3"), findState(sc, "s6"));
+			_createRegularEventSpec(e1, (ReactionTrigger) t_s3_s6.getTrigger());
+		
+		}
+		
+
+		ExecutionFlow flow = sequencer.transform(sc);
+		 
+		
+		ExecutionState _s1 = flow.getStates().get(0);
+		assertEquals("sc.r.s1", _s1.getName());
+
+		ExecutionState _s3 = flow.getStates().get(1);
+		assertEquals("sc.r.s1.r.s3", _s3.getName());
+
+		ExecutionState _s4 = flow.getStates().get(2);
+		assertEquals("sc.r.s1.r.s3.r.s4", _s4.getName());
+		
+		ExecutionState _fs = flow.getStates().get(3);
+		assertEquals("sc.r.s1.r.s3.r._final_", _fs.getName());
+		
+		ExecutionState _s6 = flow.getStates().get(5);
+		assertEquals("sc.r.s2.r.s6", _s6.getName());
+		
+			
+		Cycle cycle = _fs.getCycle();
+		
+		Sequence _seq = (Sequence) cycle.getSteps().get(0);
+		
+		// first entry is the s1 local reaction
+		If _if = (If) _seq.getSteps().get(0);
+		assertCall(_if.getThenStep(), _s1.getReactions().get(0).getEffect());
+		
+		// second entry is the s3 cycle with the transition reaction
+		cycle = (Cycle) _seq.getSteps().get(1);
+		_if = (If) cycle.getSteps().get(0);
+		assertCall(_if.getThenStep(), _s3.getReactions().get(0).getEffect());
+		assertTrue(_s3.getReactions().get(0).isTransition());
+		assertEquals(1,	cycle.getSteps().size());
+		assertNull( _if.getElseStep() );
+
+	}
+
+
 }
