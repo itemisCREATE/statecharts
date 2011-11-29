@@ -93,32 +93,6 @@ String toCCode(NumericalAddSubtractExpression expression) :
 String toCCode(NumericalMultiplyDivideExpression expression) :
   	" ( " + expression.leftOperand.toCCode() + " ) " + getOperator(expression.operator) + " ( " + expression.rightOperand.toCCode() + " ) ";
 
-// is this just relevant for events?
-String toCCode(ElementReferenceExpression ref) :
-	ref.value.toCCode();
-
-String toCCode(Declaration dec) :
-	"Declartion type not specified";
-
-String toCCode(TimeEvent time_ev) :
-    " ( eventSet_check( &handle->base.eventSet, ev_" + time_ev.name.toLowerCase() + ") ) ";
-
-String toCCode(VariableDefinition var) :
-    " handle->"+ var.getInterface() + "." + var.name.toLowerCase() + " ";
-	
-String toCCode(EventDefinition evDef) :
-    " ( eventSet_check( &handle->base.eventSet, ev_" + evDef.name.toLowerCase() + ") ) ";
-
-/*
-String getScope(EObject eo) :
-"unkownScope";
-
-String getScope(InterfaceScope ifScope) :
-	"if->";
-	
-String getScope(InternalScope inScope) :
-	"internal->";
-*/
 /* can not handle internal scope  */
 
 ExecutionFlow getExecutionFlow(InterfaceScope this) : ((ExecutionFlow)this.eContainer);
@@ -173,5 +147,31 @@ Set[EventDefinition] getOutEvents(InterfaceScope interface) :
 Set[EventDefinition] getLocalEvents(InterfaceScope interface) : 
 	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::LOCAL);
 
+// is this just relevant for events?
+String toCCode(ElementReferenceExpression ref) :
+	ref.value.toCCode();
+
+String toCCode(Declaration dec) :
+	"Declartion type not specified";
+
+String toCCode(TimeEvent time_ev) :
+    " ( eventSet_check( &handle->base.eventSet, ev_" + time_ev.name.toLowerCase() + ") ) ";
+
+String toCCode(VariableDefinition var) :
+    " handle->"+ var.getInterface() + "." + var.name.toLowerCase() + " ";
+	
+String toCCode(EventDefinition evDef) :
+    " ( eventSet_check( &handle->base.eventSet, ev_" + evDef.name.toLowerCase() + ") ) ";
+
+/*
+String getScope(EObject eo) :
+"unkownScope";
+
+String getScope(InterfaceScope ifScope) :
+	"if->";
+	
+String getScope(InternalScope inScope) :
+	"internal->";
+*/
 
 	
