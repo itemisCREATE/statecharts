@@ -249,7 +249,7 @@
             class="org.yakindu.sct.ui.editor.wizards.CreationWizard"
             icon="icons/obj16/logo-16.png"
             id="org.yakindu.sct.ui.editor.StatechartDiagramWizard"
-            name="YAKINDU Statechart Diagram"
+            name="YAKINDU Statechart Model"
             project="false">
       </wizard>
    </extension>
