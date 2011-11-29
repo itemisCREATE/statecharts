@@ -17,7 +17,7 @@ import sgraph;
 import sgen;
 
 extension org::yakindu::sct::generator::java::templates::Expression;
-extension org::yakindu::sct::generator::java::templates::BaseExtension;
+extension org::yakindu::sct::generator::java::templates::ExecutionModelExtensions;
 
 String getStatemachineName(ExecutionFlow this) : (name.toLowerCase() == "default")? name.toFirstUpper()+"SM" : name.toFirstUpper();
 String getBaseStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "AbstractBaseStatemachine";
