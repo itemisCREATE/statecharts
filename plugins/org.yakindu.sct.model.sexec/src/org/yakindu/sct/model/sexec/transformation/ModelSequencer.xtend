@@ -66,6 +66,8 @@ import org.yakindu.sct.model.stext.stext.AlwaysEvent
 import org.yakindu.sct.model.stext.stext.IntLiteral
 import org.yakindu.sct.model.stext.stext.BoolLiteral
 import javax.sound.sampled.BooleanControl$Type
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.FinalState
 
 class ModelSequencer {
 	
@@ -149,22 +151,31 @@ class ModelSequencer {
 		
 	def ExecutionFlow mapStates(Statechart statechart, ExecutionFlow r){
 		var content = EcoreUtil2::eAllContentsAsList(statechart)
-		val allStates = statechart.allStates
+		val allStates = statechart.allRegularStates
 		r.states.addAll(allStates.map( s | s.mapState));
 		return r
 	}
 
 
 	// TODO : move to other extension
-	def List<State> allStates(Statechart sc) {
+	def List<RegularState> allRegularStates(Statechart sc) {
 		var content = EcoreUtil2::eAllContentsAsList(sc)
-		val allStates = content.filter( typeof(State) )
+		val allStates = content.filter( typeof(RegularState) )
 		
 		return allStates.toList
 	}
 	
 	
-	def ExecutionState mapState(State state) {
+	
+	def dispatch ExecutionState mapState(FinalState state) {
+		val _state = state.create
+		_state.leaf = true
+		_state.entryAction = null
+		_state.exitAction = null
+		return _state		
+	}
+	
+	def dispatch ExecutionState mapState(State state) {
 		val _state = state.create
 		_state.leaf = state.simple
 		_state.entryAction = state.mapEntryAction
@@ -172,6 +183,8 @@ class ModelSequencer {
 		return _state
 	}
 	 
+	def dispatch ExecutionState mapState(RegularState state) {}
+	
 
 	/** Time trigger will be mapped to execution model time events for each real state. */
 	def ExecutionFlow mapTimeEvents(Statechart statechart, ExecutionFlow r) {
@@ -311,8 +324,8 @@ class ModelSequencer {
 		l.filter( typeof(State) ).toList
 	}
 	
-	def List<State> parentStates(State s) {
-		s.containers.filter( typeof(State) ).toList		
+	def List<RegularState> parentStates(RegularState s) {
+		s.containers.filter( typeof(RegularState) ).toList		
 	}
 	
 	
@@ -446,15 +459,16 @@ class ModelSequencer {
 	
 	def defineStateCycles(ExecutionFlow flow, Statechart sc) {
 		
-		val states = sc.allStates
-		states.filter(s | s.isSimple()).forEach(s | defineCycle(s as State))
+		val states = sc.allRegularStates
 		
-//		flow.states.filter(s | s.leaf).forEach(s | defineCycle(s))	
+		states.filter(typeof(State)).filter(s | s.simple).forEach(s | defineCycle(s))
+		states.filter(typeof(FinalState)).forEach(s | defineCycle(s))
+		
 		return flow
 	}
 	
 
-	def Cycle defineCycle(State state) {
+	def Cycle defineCycle(RegularState state) {
 	
 		val execState = state.create
 		val stateReaction = execState.createReactionSequence(null)
@@ -466,10 +480,24 @@ class ModelSequencer {
 		return execState.cycle
 	}	
 
-	def Cycle defineCycle(ExecutionState state) {	
-		state.cycle = state.createReactionSequence(null)
-		return state.cycle
-	}
+
+//	def Cycle defineCycle(FinalState state) {
+//	
+//		val execState = state.create
+//		val stateReaction = execState.createReactionSequence(null)
+//		val parents = state.parentStates		
+//		execState.cycle = parents.fold(null, [r, s | {
+//			s.create.createReactionSequence(r)
+//		}])
+//		
+//		return execState.cycle
+//	}	
+
+
+//	def Cycle defineCycle(ExecutionState state) {	
+//		state.cycle = state.createReactionSequence(null)
+//		return state.cycle
+//	}
 	
 
 	def Cycle createReactionSequence(ExecutionState state, Step localStep) {	
@@ -692,6 +720,13 @@ class ModelSequencer {
 				
 				val StateSwitch sSwitch = sexecFactory.createStateSwitch
 				
+				// collect leaf states
+				val List<State> leafStates = new ArrayList<State>()
+				
+				// create a case for each leaf state
+				// include exitAction calls up to the direct child level.
+				
+				
 				for ( s : r.states ) {
 					if (s.create.exitSequence != null) sSwitch.cases.add(s.create.newCase(s.create.exitSequence.newCall))
 				}
@@ -702,6 +737,18 @@ class ModelSequencer {
 		if (execState.exitAction != null) seq.steps.add(execState.exitAction.newCall)
 		execState.exitSequence = seq
 	}
+	
+	
+	
+//	def List<State> collectLeafStates(State state, List<State> leafStates) {
+//		if ( state.simple ) 
+//			leafStates += state
+//		else
+//			
+//			
+//		return leafStates	
+//	}
+	
 	
 	
 	def newCase(ExecutionState it, Step step) {
