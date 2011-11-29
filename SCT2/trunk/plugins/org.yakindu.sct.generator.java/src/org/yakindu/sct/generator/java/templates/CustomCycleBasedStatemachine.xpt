@@ -19,7 +19,7 @@ Contributors:
 
 «DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow»
 «FILE getImplementationPackagePath(entry)+"/"+getCycleBasedStatemachineName() + '.java'»
-«getLicenseHeader()»
+«getLicenseHeader(entry)»
 package «getImplementationPackageName(entry)»;
 
 import java.util.HashSet;

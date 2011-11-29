@@ -27,9 +27,12 @@ String toCode(Expression statement) :
  
 String toCode(Statement statement) : 
 	null; //polymorphic placeholder (abstract rule)
- 
+
+String toCode(Literal statement) : 
+	null; //polymorphic placeholder (abstract rule)
+
 String toCode(PrimitiveValueExpression primValue) :
-	primValue.value;
+	primValue.value.toCode();
 	
 String getterCall(Assignment this) :
 	getContext(varRef).toFirstLower()+"getVar"+ varRef.name.toFirstUpper()+ "()";
@@ -54,7 +57,15 @@ String toCode(Assignment this) :
   default : ""
   };
 		
-/* EventRaising */
+/* Literals */
+String toCode(BoolLiteral expression) :
+	expression.value.toString();
+	
+String toCode(IntLiteral expression) :
+	expression.value.toString();
+	
+String toCode(RealLiteral expression) :
+	expression.value.toString();
 
 /* Logical Expressions */
 String toCode(LogicalOrExpression expression) :
@@ -123,3 +134,36 @@ String toCode(EventRaising this) :
 		event.getContext().toFirstLower()+"raise"+event.name.toFirstUpper()+"("+value.toCode()+");"
 	else
 		event.getContext().toFirstLower()+"raise"+event.name.toFirstUpper()+"();";
+		
+String getJavaType(Type type) :
+		switch (type) {
+		case (Type::real) : "double"
+		case (Type::integer) : "int"
+		case (Type::boolean) : "boolean"
+		case (Type::string) : "string"
+		default : ""
+		};
+		
+String getJavaClassType(Type type) :
+		switch (type) {
+		case (Type::real) : "Double"
+		case (Type::integer) : "Integer"
+		case (Type::boolean) : "Boolean"
+		case (Type::string) : "String"
+		case (Type::void) : "Void"
+		default : ""
+		};
+		
+String getInitialValue(EventDefinition this) :
+	if derivation != null then
+		derivation.condition.toCode()
+	else
+		//if no initial value expression is declared set default value to avoid npe exceptions
+		switch (type) {
+		case (Type::real) : "0D"
+		case (Type::integer) : "0"
+		case (Type::boolean) : "false"
+		case (Type::string) : ""
+		case (Type::void) : "null"
+		default : ""
+		};

@@ -39,20 +39,6 @@ String getInterfaceName(InterfaceScope this) :
 		 
 String getInterfaceImplName(InterfaceScope this) :  getInterfaceName() + "Impl";
 
-String getInitialValue(EventDefinition this) :
-	if derivation != null then
-		derivation.condition.toCode()
-	else
-		//if no initial value expression is declared set default value to avoid npe exceptions
-		switch (type) {
-		case (Type::real) : "0D"
-		case (Type::integer) : "0"
-		case (Type::boolean) : "false"
-		case (Type::string) : ""
-		case (Type::void) : "null"
-		default : ""
-		};
-
 String getCreationSignature(EventDefinition this) :
 	if type == Type::void then
 		"\""+name+"\""
@@ -68,7 +54,7 @@ String getEventType(EventDefinition this) :
 	
 String getInitialValueAssignment(VariableDefinition this) : 
 	if initialValue != null then
-		" = " + initialValue
+		" = " + initialValue.toCode()
 	else
 		null;
 
@@ -85,25 +71,6 @@ String getName(Event this) :
 
 String getName(TimeEvent this) :
 	name.replaceAll(" ","").toFirstUpper();
-
-String getJavaType(Type type) :
-		switch (type) {
-		case (Type::real) : "double"
-		case (Type::integer) : "int"
-		case (Type::boolean) : "boolean"
-		case (Type::string) : "string"
-		default : ""
-		};
-		
-String getJavaClassType(Type type) :
-		switch (type) {
-		case (Type::real) : "Double"
-		case (Type::integer) : "Integer"
-		case (Type::boolean) : "Boolean"
-		case (Type::string) : "String"
-		case (Type::void) : "Void"
-		default : ""
-		};
 				
 cached String functionName(Step step) : 
 	(step.isEffect()) ? step.actionFunctionName() : (
@@ -174,6 +141,12 @@ String getBasePackage() :
  
 String getImplementationSuffix() :
  JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getImplementationSuffix();
+ 
+String getLicenseFeature() :
+ JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getLicenseHeader();
+ 
+String getLicenseText() :
+ JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getLicenseText();
 		
 String getBasePackageName(GeneratorEntry entry):
 	if entry.getFeatureConfiguration(getNamingFeature())!=null 
@@ -204,13 +177,9 @@ String getImplementationPackageName(ExecutionFlow this, GeneratorEntry entry):
 String getImplementationPackageName(InterfaceScope this, GeneratorEntry entry):
 	((ExecutionFlow)eContainer).getImplementationPackageName(entry);
 	
-String getLicenseHeader() : "/**
- * Copyright (c) 2011 committers of YAKINDU and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * Contributors:
- * 	committers of YAKINDU - initial API and implementation
- * 
- */";
+String getLicenseHeader(GeneratorEntry entry) :
+	if entry.getFeatureConfiguration(getLicenseFeature())!=null
+		&& entry.getFeatureConfiguration(getLicenseFeature()).getParameterValue(getLicenseText()) != null then
+		entry.getFeatureConfiguration(getLicenseFeature()).getParameterValue(getLicenseText()).getStringValue()
+	else 
+		null;

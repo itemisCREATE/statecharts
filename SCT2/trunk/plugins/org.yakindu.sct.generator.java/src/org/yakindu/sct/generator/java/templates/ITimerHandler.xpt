@@ -17,7 +17,7 @@ Contributors:
 
 «DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
 «FILE entry.getBasePackagePath()+'/ITimerHandler.java'-»
-«getLicenseHeader()»
+«getLicenseHeader(entry)»
 package «entry.getBasePackageName()»;
 
 public interface ITimerHandler {

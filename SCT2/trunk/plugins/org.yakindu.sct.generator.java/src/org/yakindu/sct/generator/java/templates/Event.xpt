@@ -18,7 +18,7 @@ Contributors:
 «DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
 «IF name != null-»
 «FILE entry.getBasePackagePath()+'/Event.java'-»
-«getLicenseHeader()»
+«getLicenseHeader(entry)»
 package «entry.getBasePackageName()»;
 
 public class Event {

@@ -17,7 +17,7 @@ Contributors:
 
 «DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
 «FILE entry.getBasePackagePath()+'/IStatemachine.java'-»
-«getLicenseHeader()»
+«getLicenseHeader(entry)»
 package «entry.getBasePackageName()»;
 
 public interface IStatemachine {
