@@ -18,6 +18,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.Strings;
 import org.yakindu.sct.model.sgraph.Declaration;
+import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -28,13 +29,17 @@ import com.google.inject.Inject;
  * NameProvider for SGraph elements like statecharts, scopes and declarations.
  * 
  * @author benjamin schwertfeger
+ * @author andreas muelder
  * 
  */
 public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider {
-	@Inject
-	IQualifiedNameConverter nameConverter;
 
-	QualifiedName qualifiedName(Statechart ele) {
+	private static final String _FINAL_STATE_NAME = "_final_";
+
+	@Inject
+	private IQualifiedNameConverter nameConverter;
+
+	public QualifiedName qualifiedName(Statechart ele) {
 		String scName = ele.getName();
 		if (Strings.isEmpty(scName)) {
 			return null;
@@ -47,7 +52,7 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
 		return name;
 	}
 
-	QualifiedName qualifiedName(Scope ele) {
+	public QualifiedName qualifiedName(Scope ele) {
 		QualifiedName name = null;
 		String nameString = SimpleAttributeResolver.NAME_RESOLVER.apply(ele);
 		if (!Strings.isEmpty(nameString)) {
@@ -61,7 +66,19 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
 		return name;
 	}
 
-	QualifiedName qualifiedName(Declaration ele) {
+	public QualifiedName qualifiedName(FinalState ele) {
+		EObject temp = ele;
+		QualifiedName qualifiedNameFromConverter =QualifiedName.create(_FINAL_STATE_NAME);
+		while (temp.eContainer() != null) {
+			temp = temp.eContainer();
+			QualifiedName parentsQualifiedName = getFullyQualifiedName(temp);
+			if (parentsQualifiedName != null)
+				return parentsQualifiedName.append(qualifiedNameFromConverter);
+		}
+		return qualifiedNameFromConverter;
+	}
+
+	public QualifiedName qualifiedName(Declaration ele) {
 		QualifiedName name = null;
 		if (!Strings.isEmpty(ele.getName())) {
 			name = nameConverter.toQualifiedName(ele.getName());
