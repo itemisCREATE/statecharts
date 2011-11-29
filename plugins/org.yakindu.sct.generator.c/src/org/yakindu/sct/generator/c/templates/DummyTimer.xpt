@@ -31,12 +31,17 @@ extern void dummyTimer_init(Timer* handle);
 
 «FILE 'DummyTimer.c'»
 #include "DummyTimer.h"
+#include <stdio.h>
 
 void setTimer(const uint32_t evid, const uint32_t time_ms, boolean periodic)
-{}
+{
+	printf("set event <%d> with time %dms\n", evid, time_ms);
+}
 
 void unsetTimer(const uint32_t evid)
-{}
+{
+	printf("unset event <%d>\n", evid);
+}
 
 void dummyTimer_init(Timer* handle)
 {

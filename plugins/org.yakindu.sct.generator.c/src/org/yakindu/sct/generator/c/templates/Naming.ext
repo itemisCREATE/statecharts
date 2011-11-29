@@ -8,6 +8,7 @@ ExecutionFlow getExecutionFlow(InterfaceScope this) : ((ExecutionFlow)this.eCont
 String scName(Expression statement) : ((ExecutionFlow)statement.eRootContainer).name ;
 
 List[EventDefinition] declaredEvents(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(EventDefinition);
+List[TimeEvent] declaredTimerEvents(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(TimeEvent);
 
 List[VariableDefinition] declaredVariables(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(VariableDefinition);
 
@@ -53,11 +54,10 @@ String interfaceName(InterfaceScope this) : this.getExecutionFlow().name.toFirst
 String interfaceClassName(InterfaceScope this) : this.getExecutionFlow().name.toFirstUpper() + "If" + ((this.name == null)?"":this.name.toFirstUpper());
 String interfaceObjectName(InterfaceScope this) : "interface" + ((this.name == null)?"":this.name.toFirstUpper());
 
-String getEventEnumName(EventDefinition this) : "ev_" + this.name;
+String getEventEnumName(EventDefinition this) : "ev_" + this.name.toFirstLower();
 
-/**
 String correctLValue(String literal) :
     (literal == "true" ? "bool_true" :
 	(literal == "false" ? "bool_false" :
 	literal ));
-**/    
+    
