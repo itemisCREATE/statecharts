@@ -15,7 +15,7 @@ Contributors:
 
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 «EXTENSION org::yakindu::sct::generator::java::templates::Expression»
-«EXTENSION org::yakindu::sct::generator::java::templates::BaseExtension»
+«EXTENSION org::yakindu::sct::generator::java::templates::ExecutionModelExtensions»
 
 «DEFINE file(sgen::GeneratorEntry entry) FOR InterfaceScope-»
 «FILE getImplementationPackagePath(entry)+"/"+getInterfaceName() + '.java'-»
