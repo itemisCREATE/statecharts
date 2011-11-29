@@ -31,7 +31,6 @@ public final class StatechartElementTypes extends AbstractElementTypeEnumerator 
 	public static final IElementType SUBMACHINE_STATE = getElementType("org.yakindu.sct.ui.editor.SubmachineState");
 	public static final IElementType TRANSITION = getElementType("org.yakindu.sct.ui.editor.Transition");
 	public static final IElementType CHOICE = getElementType("org.yakindu.sct.ui.editor.Choice");
-	public static final IElementType JUNCTION = getElementType("org.yakindu.sct.ui.editor.Junction");
 	public static final IElementType ENTRY = getElementType("org.yakindu.sct.ui.editor.Entry");
 	public static final IElementType DEEPHISTORY = getElementType("org.yakindu.sct.ui.editor.DeepHistory");
 	public static final IElementType SHALLOWHISTORY = getElementType("org.yakindu.sct.ui.editor.ShallowHistory");

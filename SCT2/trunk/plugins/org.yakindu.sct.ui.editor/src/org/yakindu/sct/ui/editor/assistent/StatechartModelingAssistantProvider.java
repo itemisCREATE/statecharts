@@ -13,7 +13,6 @@ package org.yakindu.sct.ui.editor.assistent;
 import static org.yakindu.sct.ui.editor.editor.StatechartElementTypes.CHOICE;
 import static org.yakindu.sct.ui.editor.editor.StatechartElementTypes.ENTRY;
 import static org.yakindu.sct.ui.editor.editor.StatechartElementTypes.FINALSTATE;
-import static org.yakindu.sct.ui.editor.editor.StatechartElementTypes.JUNCTION;
 import static org.yakindu.sct.ui.editor.editor.StatechartElementTypes.REGION;
 import static org.yakindu.sct.ui.editor.editor.StatechartElementTypes.STATE;
 import static org.yakindu.sct.ui.editor.editor.StatechartElementTypes.TRANSITION;
@@ -35,7 +34,7 @@ import com.google.common.collect.Lists;
 
 /**
  * 
- * @author muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class StatechartModelingAssistantProvider extends
@@ -48,8 +47,7 @@ public class StatechartModelingAssistantProvider extends
 
 		if (editPart instanceof RegionEditPart
 				|| editPart instanceof RegionCompartmentEditPart)
-			return Lists.newArrayList(ENTRY, STATE, FINALSTATE,
-					ENTRY, JUNCTION, CHOICE);
+			return Lists.newArrayList(ENTRY, STATE, FINALSTATE, ENTRY, CHOICE);
 
 		if (editPart instanceof StateEditPart
 				|| editPart instanceof StateFigureCompartmentEditPart)
@@ -63,7 +61,7 @@ public class StatechartModelingAssistantProvider extends
 	public List<IElementType> getTypesForTarget(IAdaptable source,
 			IElementType relationshipType) {
 		if (StatechartElementTypes.TRANSITION.equals(relationshipType))
-			return Lists.newArrayList(STATE, FINALSTATE, JUNCTION, CHOICE);
+			return Lists.newArrayList(STATE, FINALSTATE, CHOICE);
 		return Collections.EMPTY_LIST;
 	}
 
