@@ -21,8 +21,9 @@ Templates for the main statechart c file.
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR StateSwitch»
-// ActionCode for StateSwitch
-// «this.comment»
+«IF this.comment != null»
+/* «this.comment» */
+«ENDIF»
 	switch(((StatemachineBase*)handle)->state[0/* TODO: must be set correctly */]) {
 «FOREACH this.cases AS caseid»
   case _«caseid.state.simpleName» : {
@@ -33,6 +34,21 @@ Templates for the main statechart c file.
   default:
     break;
 	}
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR ScheduleTimeEvent»
+«IF this.comment != null»
+/* «this.comment» */
+«ENDIF»
+	(*((StatemachineBase*)handle)->timer->setTimer)(ev_«this.timeEvent.name.toFirstLower()», «this.timeValue.toCCode()», «IF this.timeEvent.periodic == true -»bool_true«ELSE -»bool_false«ENDIF -»);
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR UnscheduleTimeEvent»
+«IF this.comment != null»
+/* «this.comment» */
+	(*((StatemachineBase*)handle->timer->unsetTimer)(ev_«this.name.toFirstLower()»);
+«ENDIF»
+
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Execution»

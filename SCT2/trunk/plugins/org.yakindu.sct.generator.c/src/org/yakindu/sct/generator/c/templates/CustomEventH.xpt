@@ -23,19 +23,27 @@ Templates for the main statechart cpp file.
 #include "Event.h"
 
 typedef enum {
-«FOREACH this.declaredEvents() AS ev»
+«FOREACH this.declaredEvents() AS ev -»
   ev_«((EventDefinition)ev).name.toLowerCase()»,
-«ENDFOREACH»
+«ENDFOREACH -»
+«FOREACH this.declaredTimerEvents() AS ev -»
+  ev_«((TimeEvent)ev).name.toLowerCase()»,
+«ENDFOREACH -»
   event_last
 } EventID;
 
 «FOREACH this.declaredEvents() AS ev»
 typedef struct { 
   _Event baseEvent;
-  «IF ((EventDefinition)ev).type != Type::void»
+  «IF ((EventDefinition)ev).type != Type::void -»
   «eventTypeToString(((EventDefinition)ev).type)» value;    
-  «ENDIF»
+  «ENDIF -»
 } «((EventDefinition)ev).name»;
+«ENDFOREACH -»
+«FOREACH this.declaredTimerEvents() AS ev»
+typedef struct { 
+  _Event baseEvent;
+} «((TimeEvent)ev).name»;
 «ENDFOREACH»
  
 

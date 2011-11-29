@@ -86,21 +86,11 @@ String toCCode(ElementReferenceExpression ref) :
 String toCCode(Declaration dec) :
 	"Declartion type not specified";
 
-String toCCode(Clock clockDef) :
-	"Clock to C not defined";
-	
-String toCCode(Operation op) :
-	"Operation to C not defined";
+String toCCode(TimeEvent time_ev) :
+    " ( eventSet_check( &handle->base.eventSet, ev_" + time_ev.name.toLowerCase() + ") ) ";
 
-String toCCode(LocalReaction localReac) :
-	"Local Reaction to C not defined";
-
-String toCCode(Entrypoint op) :
-	"Entrypoint to C not defined";
-
-String toCCode(Exitpoint op) :
-	"Exitpoint to C not defined";
-
+String toCCode(VariableDefinition var) :
+    " handle->"+ var.getInterface() + "." + var.name.toLowerCase() + " ";
 	
 String toCCode(EventDefinition evDef) :
     " ( eventSet_check( &handle->base.eventSet, ev_" + evDef.name.toLowerCase() + ") ) ";
@@ -123,8 +113,6 @@ String interfaceObjectName(InterfaceScope this) : "interface" + ((this.name == n
 String getInterface(VariableDefinition var) :
 	((InterfaceScope)var.eContainer).interfaceObjectName();
 
-String toCCode(VariableDefinition var) :
-    " handle->"+ var.getInterface() + "." + var.name.toLowerCase() + " ";
 
 String getOperator(AdditiveOperator operator) : 
     switch(operator) {
