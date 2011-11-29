@@ -24,4 +24,8 @@ public interface IJavaFeatureConstants {
 	public static final String BASE_PACKAGE = "basePackage";
 
 	public static final String IMPLEMENTATION_SUFFIX = "implementationSuffix";
+	
+	public static final String LICENSE_HEADER = "licenseHeader";
+	
+	public static final String LICENSE_TEXT = "licenseText";
 }

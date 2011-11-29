@@ -18,7 +18,7 @@ Contributors:
 «DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
 «IF name != null-»
 «FILE entry.getBasePackagePath()+'/NotificationType.java'-»
-«getLicenseHeader()»
+«getLicenseHeader(entry)»
 package «entry.getBasePackageName()»;
 
 public enum NotificationType {

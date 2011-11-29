@@ -18,7 +18,7 @@ Contributors:
 «DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
 «IF name != null-»
 «FILE entry.getBasePackagePath()+'/NotificationSender.java'-»
-«getLicenseHeader()»
+«getLicenseHeader(entry)»
 package «entry.getBasePackageName()»;
 
 import java.util.HashSet;

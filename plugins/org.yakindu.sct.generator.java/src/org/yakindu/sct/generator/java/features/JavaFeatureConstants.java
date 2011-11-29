@@ -27,4 +27,12 @@ public final class JavaFeatureConstants implements IJavaFeatureConstants {
 	public static final String getImplementationSuffix() {
 		return IMPLEMENTATION_SUFFIX;
 	}
+	
+	public static final String getLicenseHeader() {
+		return LICENSE_HEADER;
+	}
+	
+	public static final String getLicenseText() {
+		return LICENSE_TEXT;
+	}
 }
