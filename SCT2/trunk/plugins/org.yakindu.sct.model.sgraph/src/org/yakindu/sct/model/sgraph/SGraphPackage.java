@@ -607,13 +607,22 @@ public interface SGraphPackage extends EPackage {
 	int CHOICE__OUTGOING_TRANSITIONS = PSEUDOSTATE__OUTGOING_TRANSITIONS;
 
 	/**
+	 * The feature id for the '<em><b>Kind</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE__KIND = PSEUDOSTATE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Choice</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHOICE_FEATURE_COUNT = PSEUDOSTATE_FEATURE_COUNT + 0;
+	int CHOICE_FEATURE_COUNT = PSEUDOSTATE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl <em>Statechart</em>}' class.
@@ -1259,6 +1268,17 @@ public interface SGraphPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.ChoiceKind <em>Choice Kind</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgraph.ChoiceKind
+	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getChoiceKind()
+	 * @generated
+	 */
+	int CHOICE_KIND = 25;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Pseudostate <em>Pseudostate</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1566,6 +1586,17 @@ public interface SGraphPackage extends EPackage {
 	EClass getChoice();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.Choice#getKind <em>Kind</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Kind</em>'.
+	 * @see org.yakindu.sct.model.sgraph.Choice#getKind()
+	 * @see #getChoice()
+	 * @generated
+	 */
+	EAttribute getChoice_Kind();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Statechart <em>Statechart</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1826,6 +1857,16 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getEntryKind();
+
+	/**
+	 * Returns the meta object for enum '{@link org.yakindu.sct.model.sgraph.ChoiceKind <em>Choice Kind</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Choice Kind</em>'.
+	 * @see org.yakindu.sct.model.sgraph.ChoiceKind
+	 * @generated
+	 */
+	EEnum getChoiceKind();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2106,6 +2147,14 @@ public interface SGraphPackage extends EPackage {
 		EClass CHOICE = eINSTANCE.getChoice();
 
 		/**
+		 * The meta object literal for the '<em><b>Kind</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CHOICE__KIND = eINSTANCE.getChoice_Kind();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl <em>Statechart</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2330,6 +2379,16 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum ENTRY_KIND = eINSTANCE.getEntryKind();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.ChoiceKind <em>Choice Kind</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgraph.ChoiceKind
+		 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getChoiceKind()
+		 * @generated
+		 */
+		EEnum CHOICE_KIND = eINSTANCE.getChoiceKind();
 
 	}
 

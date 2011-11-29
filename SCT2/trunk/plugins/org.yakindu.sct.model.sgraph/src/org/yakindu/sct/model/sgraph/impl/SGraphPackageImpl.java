@@ -226,6 +226,13 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	private EEnum entryKindEEnum = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum choiceKindEEnum = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -595,6 +602,15 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getChoice_Kind() {
+        return (EAttribute)getChoice().getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getStatechart() {
 		if (statechartEClass == null) {
 			statechartEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(9);
@@ -852,6 +868,18 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 			entryKindEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(16);
 		}
 		return entryKindEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getChoiceKind() {
+		if (choiceKindEEnum == null) {
+			choiceKindEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(25);
+		}
+		return choiceKindEEnum;
 	}
 
 	/**
