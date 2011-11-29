@@ -40,13 +40,13 @@ Templates for the main statechart c file.
 «IF this.comment != null»
 /* «this.comment» */
 «ENDIF»
-	(*((StatemachineBase*)handle)->timer->setTimer)(ev_«this.timeEvent.name.toFirstLower()», «this.timeValue.toCCode()», «IF this.timeEvent.periodic == true -»bool_true«ELSE -»bool_false«ENDIF -»);
+	(*((StatemachineBase*)handle)->timer->setTimer)(«this.timeEvent.getEventEnumName()», «this.timeValue.toCCode()», «IF this.timeEvent.periodic == true -» «getBoolTrue()» «ELSE -» «getBoolFalse()» «ENDIF -»);
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR UnscheduleTimeEvent»
 «IF this.comment != null»
 /* «this.comment» */
-	(*((StatemachineBase*)handle->timer->unsetTimer)(ev_«this.name.toFirstLower()»);
+	(*((StatemachineBase*)handle->timer->unsetTimer)(«this.timeEvent.getEventEnumName()»);
 «ENDIF»
 
 «ENDDEFINE»
@@ -67,7 +67,7 @@ Templates for the main statechart c file.
   «IF this != null -»
 «this.condition.toCCode() -»
   «ELSE -»
- bool_true «
+ «getBoolTrue()» «
  ENDIF -»«
   ENDDEFINE»
 
@@ -75,7 +75,7 @@ Templates for the main statechart c file.
   «IF this.check != null -»
   «this.check.functionName()»(handle) «
   ELSE -»
- bool_true «
+ «getBoolTrue()» «
   ENDIF -»«
 ENDDEFINE»
 
@@ -113,9 +113,9 @@ static boolean «r.check.functionName()»(«StName()»* handle);
   «FOREACH reactions AS r -»
   «IF r.check != null -»
 boolean «r.check.functionName()»(«StName()»* handle) {
-  boolean retValue = bool_false;
+  boolean retValue = «getBoolFalse()»;
   if («r.check.condition.toCCode()»)
-    retValue = bool_true;
+    retValue = «getBoolTrue()»;
   
   return retValue;
 }

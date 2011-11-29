@@ -105,13 +105,14 @@ void «interface.interfaceName()»_init(«interface.interfaceClassName()»* handle, 
 	handle->eventSet = eventSet;
 	/* initial values */
 	
+	/* TODO: This should be done by sexec */
 «FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
 «IF variable.initialValue != null»
 «REM»change to correctLValue«ENDREM»
-	handle->«variable.name» = «variable.initialValue.correctLValue()»;
+	handle->«variable.name» = «variable.initialValue.toCCode()»;
 «ENDIF»
 «ENDFOREACH»
-
+	/* */ 
 	«interface.interfaceName()»_reset_event(handle);
 
 	handle->statemachine = statemachine;

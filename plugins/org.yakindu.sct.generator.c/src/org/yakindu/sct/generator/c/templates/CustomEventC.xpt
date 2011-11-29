@@ -25,8 +25,12 @@ uint32_t getSizeofEvent(uint32_t evid)
 	switch((EventID) evid) {
 
 «FOREACH this.declaredEvents() AS ev -»
-  case ev_«((EventDefinition)ev).name.toLowerCase()»:
+  case «((EventDefinition)ev).getEventEnumName()»:
     return sizeof(«((EventDefinition)ev).name»);
+«ENDFOREACH -»
+«FOREACH this.declaredTimerEvents() AS ev -»
+  case «((TimeEvent)ev).getEventEnumName()»:
+    return sizeof(«((TimeEvent)ev).name»);
 «ENDFOREACH -»
 	default:
 		break;
