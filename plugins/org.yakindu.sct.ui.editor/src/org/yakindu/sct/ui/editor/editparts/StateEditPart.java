@@ -210,7 +210,9 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		// If a redraw is done in this method the state is drawn on creation
 		// process at position 0,0 and then "jumps" to the correct position (See
 		// YAKHMI-62).
-		// nodeFigure.getUpdateManager().performUpdate();
+		if (isActive()) {
+			nodeFigure.getUpdateManager().performUpdate();
+		}
 	}
 
 	/**
