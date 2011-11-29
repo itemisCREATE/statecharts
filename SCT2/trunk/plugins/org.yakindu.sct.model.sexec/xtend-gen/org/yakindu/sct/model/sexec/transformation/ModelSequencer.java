@@ -45,7 +45,9 @@ import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Event;
+import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
@@ -177,33 +179,44 @@ public class ModelSequencer {
     {
       List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(statechart);
       List<EObject> content = _eAllContentsAsList;
-      List<State> _allStates = this.allStates(statechart);
-      final List<State> allStates = _allStates;
+      List<RegularState> _allRegularStates = this.allRegularStates(statechart);
+      final List<RegularState> allStates = _allRegularStates;
       EList<ExecutionState> _states = r.getStates();
-      final Function1<State,ExecutionState> _function = new Function1<State,ExecutionState>() {
-          public ExecutionState apply(final State s) {
+      final Function1<RegularState,ExecutionState> _function = new Function1<RegularState,ExecutionState>() {
+          public ExecutionState apply(final RegularState s) {
             ExecutionState _mapState = ModelSequencer.this.mapState(s);
             return _mapState;
           }
         };
-      List<ExecutionState> _map = ListExtensions.<State, ExecutionState>map(allStates, _function);
+      List<ExecutionState> _map = ListExtensions.<RegularState, ExecutionState>map(allStates, _function);
       _states.addAll(_map);
       return r;
     }
   }
   
-  public List<State> allStates(final Statechart sc) {
+  public List<RegularState> allRegularStates(final Statechart sc) {
     {
       List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(sc);
       List<EObject> content = _eAllContentsAsList;
-      Iterable<State> _filter = IterableExtensions.<State>filter(content, org.yakindu.sct.model.sgraph.State.class);
-      final Iterable<State> allStates = _filter;
-      List<State> _list = IterableExtensions.<State>toList(allStates);
+      Iterable<RegularState> _filter = IterableExtensions.<RegularState>filter(content, org.yakindu.sct.model.sgraph.RegularState.class);
+      final Iterable<RegularState> allStates = _filter;
+      List<RegularState> _list = IterableExtensions.<RegularState>toList(allStates);
       return _list;
     }
   }
   
-  public ExecutionState mapState(final State state) {
+  protected ExecutionState _mapState(final FinalState state) {
+    {
+      ExecutionState _create = this.factory.create(state);
+      final ExecutionState _state = _create;
+      _state.setLeaf(true);
+      _state.setEntryAction(null);
+      _state.setExitAction(null);
+      return _state;
+    }
+  }
+  
+  protected ExecutionState _mapState(final State state) {
     {
       ExecutionState _create = this.factory.create(state);
       final ExecutionState _state = _create;
@@ -215,6 +228,10 @@ public class ModelSequencer {
       _state.setExitAction(_mapExitAction);
       return _state;
     }
+  }
+  
+  protected ExecutionState _mapState(final RegularState state) {
+    return null;
   }
   
   public ExecutionFlow mapTimeEvents(final Statechart statechart, final ExecutionFlow r) {
@@ -564,10 +581,10 @@ public class ModelSequencer {
     return _xblockexpression;
   }
   
-  public List<State> parentStates(final State s) {
+  public List<RegularState> parentStates(final RegularState s) {
     List<EObject> _containers = this.containers(s);
-    Iterable<State> _filter = IterableExtensions.<State>filter(_containers, org.yakindu.sct.model.sgraph.State.class);
-    List<State> _list = IterableExtensions.<State>toList(_filter);
+    Iterable<RegularState> _filter = IterableExtensions.<RegularState>filter(_containers, org.yakindu.sct.model.sgraph.RegularState.class);
+    List<RegularState> _list = IterableExtensions.<RegularState>toList(_filter);
     return _list;
   }
   
@@ -869,53 +886,53 @@ public class ModelSequencer {
   
   public ExecutionFlow defineStateCycles(final ExecutionFlow flow, final Statechart sc) {
     {
-      List<State> _allStates = this.allStates(sc);
-      final List<State> states = _allStates;
+      List<RegularState> _allRegularStates = this.allRegularStates(sc);
+      final List<RegularState> states = _allRegularStates;
+      Iterable<State> _filter = IterableExtensions.<State>filter(states, org.yakindu.sct.model.sgraph.State.class);
       final Function1<State,Boolean> _function = new Function1<State,Boolean>() {
           public Boolean apply(final State s) {
             boolean _isSimple = s.isSimple();
             return ((Boolean)_isSimple);
           }
         };
-      Iterable<State> _filter = IterableExtensions.<State>filter(states, _function);
+      Iterable<State> _filter_1 = IterableExtensions.<State>filter(_filter, _function);
       final Function1<State,Cycle> _function_1 = new Function1<State,Cycle>() {
           public Cycle apply(final State s_1) {
-            Cycle _defineCycle = ModelSequencer.this.defineCycle(((State) s_1));
+            Cycle _defineCycle = ModelSequencer.this.defineCycle(s_1);
             return _defineCycle;
           }
         };
-      IterableExtensions.<State>forEach(_filter, _function_1);
+      IterableExtensions.<State>forEach(_filter_1, _function_1);
+      Iterable<FinalState> _filter_2 = IterableExtensions.<FinalState>filter(states, org.yakindu.sct.model.sgraph.FinalState.class);
+      final Function1<FinalState,Cycle> _function_2 = new Function1<FinalState,Cycle>() {
+          public Cycle apply(final FinalState s_2) {
+            Cycle _defineCycle_1 = ModelSequencer.this.defineCycle(s_2);
+            return _defineCycle_1;
+          }
+        };
+      IterableExtensions.<FinalState>forEach(_filter_2, _function_2);
       return flow;
     }
   }
   
-  public Cycle defineCycle(final State state) {
+  public Cycle defineCycle(final RegularState state) {
     {
       ExecutionState _create = this.factory.create(state);
       final ExecutionState execState = _create;
       Cycle _createReactionSequence = this.createReactionSequence(execState, null);
       final Cycle stateReaction = _createReactionSequence;
-      List<State> _parentStates = this.parentStates(state);
-      final List<State> parents = _parentStates;
-      final Function2<Cycle,State,Cycle> _function = new Function2<Cycle,State,Cycle>() {
-          public Cycle apply(final Cycle r , final State s) {
+      List<RegularState> _parentStates = this.parentStates(state);
+      final List<RegularState> parents = _parentStates;
+      final Function2<Cycle,RegularState,Cycle> _function = new Function2<Cycle,RegularState,Cycle>() {
+          public Cycle apply(final Cycle r , final RegularState s) {
             ExecutionState _create_1 = ModelSequencer.this.factory.create(s);
             Cycle _createReactionSequence_1 = ModelSequencer.this.createReactionSequence(_create_1, r);
             return _createReactionSequence_1;
           }
         };
-      Cycle _fold = IterableExtensions.<State, Cycle>fold(parents, null, _function);
+      Cycle _fold = IterableExtensions.<RegularState, Cycle>fold(parents, null, _function);
       execState.setCycle(_fold);
       Cycle _cycle = execState.getCycle();
-      return _cycle;
-    }
-  }
-  
-  public Cycle defineCycle(final ExecutionState state) {
-    {
-      Cycle _createReactionSequence = this.createReactionSequence(state, null);
-      state.setCycle(_createReactionSequence);
-      Cycle _cycle = state.getCycle();
       return _cycle;
     }
   }
@@ -1357,6 +1374,8 @@ public class ModelSequencer {
             SexecFactory _sexecFactory_1 = this.sexecFactory();
             StateSwitch _createStateSwitch = _sexecFactory_1.createStateSwitch();
             final StateSwitch sSwitch = _createStateSwitch;
+            ArrayList<State> _arrayList = new ArrayList<State>();
+            final List<State> leafStates = _arrayList;
             Iterable<State> _states = this.states(r);
             for (State s : _states) {
               ExecutionState _create_1 = this.factory.create(s);
@@ -1712,6 +1731,19 @@ public class ModelSequencer {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         java.util.Arrays.<Object>asList(e).toString());
+    }
+  }
+  
+  public ExecutionState mapState(final RegularState state) {
+    if ((state instanceof FinalState)) {
+      return _mapState((FinalState)state);
+    } else if ((state instanceof State)) {
+      return _mapState((State)state);
+    } else if ((state instanceof RegularState)) {
+      return _mapState((RegularState)state);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        java.util.Arrays.<Object>asList(state).toString());
     }
   }
   

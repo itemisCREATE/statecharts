@@ -24,8 +24,11 @@ import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.Assignment;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
+import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
+import org.yakindu.sct.model.stext.stext.IntLiteral;
+import org.yakindu.sct.model.stext.stext.Literal;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.LogicalAndExpression;
 import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
@@ -95,9 +98,21 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		assertNotNull(s);
 		assertTrue(s instanceof PrimitiveValueExpression);
-		assertEquals("true", ((PrimitiveValueExpression) s).getValue());
+		assertBoolLiteral(true, ((PrimitiveValueExpression) s).getValue());
 	}
 
+	
+	public static void assertBoolLiteral(boolean value, Literal lit) {
+		assertTrue("Literal is no BoolLiteral", lit instanceof BoolLiteral);
+		assertEquals(value, ((BoolLiteral)lit).isValue() );
+	}
+	
+	public static void assertIntLiteral(int value, Literal lit) {
+		assertTrue("Literal is no IntLiteral", lit instanceof IntLiteral);
+		assertEquals(value, ((IntLiteral)lit).getValue() );
+	}
+	
+	
 	/**
 	 * The 'always' trigger event will be converted to a simple 'true' condition.
 	 */
@@ -110,7 +125,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		assertNotNull(s);
 		assertTrue(s instanceof PrimitiveValueExpression);
-		assertEquals("true", ((PrimitiveValueExpression) s).getValue());
+		assertBoolLiteral(true, ((PrimitiveValueExpression) s).getValue());
 	}
 
 
@@ -172,7 +187,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		assertEquals(e2.getName(),
 				((ElementReferenceExpression) triggerCheck.getRightOperand()).getValue().getName());
 		
-		assertEquals(exp.getValue(), guardCheck.getValue());
+		assertBoolLiteral(false, guardCheck.getValue());
 	}
 
 	
@@ -191,7 +206,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		
 		// the root is an and condition with the trigger check as the first (left) part and the guard as the right (second) part.
 		PrimitiveValueExpression guard = (PrimitiveValueExpression) reaction.getCheck().getCondition();
-		assertEquals(exp.getValue(), guard.getValue());
+		assertBoolLiteral(false, guard.getValue());
 	}
 
 	
@@ -237,8 +252,8 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		ScheduleTimeEvent ste = (ScheduleTimeEvent) entryAction.getSteps().get(0);
 		assertSame(te, ste.getTimeEvent());
 		NumericalMultiplyDivideExpression multiply = (NumericalMultiplyDivideExpression) ste.getTimeValue();
-		assertEquals("1", ((PrimitiveValueExpression)multiply.getLeftOperand()).getValue());
-		assertEquals("1000", ((PrimitiveValueExpression)multiply.getRightOperand()).getValue());
+		assertIntLiteral(1, ((PrimitiveValueExpression)multiply.getLeftOperand()).getValue());
+		assertIntLiteral(1000, ((PrimitiveValueExpression)multiply.getRightOperand()).getValue());
 		assertEquals(MultiplicativeOperator.MUL, multiply.getOperator());
 						
 		// assert the unscheduling of the time events during state exit
@@ -278,7 +293,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		ScheduleTimeEvent ste = (ScheduleTimeEvent) entryAction.getSteps().get(0);
 		assertSame(te, ste.getTimeEvent());
 		PrimitiveValueExpression value = (PrimitiveValueExpression) ste.getTimeValue();
-		assertEquals("2", value.getValue());
+		assertIntLiteral(2, value.getValue());
 		assertNotNull(_s.getExitAction());
 		Sequence exitAction = (Sequence) _s.getExitAction();
 		UnscheduleTimeEvent ute = (UnscheduleTimeEvent) exitAction.getSteps().get(0);
@@ -309,7 +324,8 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		// assert that a local reaction is created
 		Reaction reaction = _s.getReactions().get(0);
 		PrimitiveValueExpression pve = (PrimitiveValueExpression) reaction.getCheck().getCondition();
-		assertSame("true", pve.getValue());
+		assertBoolLiteral(true, pve.getValue());
+		
 		
 	}
 	
@@ -336,7 +352,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		// assert that a local reaction is created
 		Reaction reaction = _s.getReactions().get(0);
 		PrimitiveValueExpression pve = (PrimitiveValueExpression) reaction.getCheck().getCondition();
-		assertSame("true", pve.getValue());
+		assertBoolLiteral(true, pve.getValue());
 		
 	}
 	

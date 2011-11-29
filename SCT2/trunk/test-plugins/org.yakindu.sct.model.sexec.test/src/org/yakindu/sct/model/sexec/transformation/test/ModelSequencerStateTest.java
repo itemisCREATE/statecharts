@@ -897,6 +897,8 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		ExecutionState _s6 = flow.getStates().get(5);
 		assertEquals("sc.r.s2.r.s6", _s6.getName());
 		
+		assertNull(_fs.getEntryAction());
+		assertNull(_fs.getExitAction());
 			
 		Cycle cycle = _fs.getCycle();
 		

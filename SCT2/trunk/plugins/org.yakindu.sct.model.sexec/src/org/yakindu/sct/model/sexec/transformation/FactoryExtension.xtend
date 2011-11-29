@@ -35,6 +35,8 @@ import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sgraph.Statement
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.stext.stext.LocalReaction
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.FinalState
 
 class FactoryExtension {
 	
@@ -59,9 +61,9 @@ class FactoryExtension {
 	def VariableDefinition create r : EcoreUtil::copy(v) create(VariableDefinition v) {}
 	
 	
-	def ExecutionState create r : sexecFactory.createExecutionState create(State state){
+	def ExecutionState create r : sexecFactory.createExecutionState create(RegularState state){
 		if (state != null) {
-			r.simpleName = state.name
+			r.simpleName = if (state instanceof FinalState) "_final_" else state.name
 			r.name = state.fullyQualifiedName.toString.replaceAll(" ", "")		
 		}
 	}

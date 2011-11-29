@@ -20,8 +20,8 @@ import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
 import org.yakindu.sct.model.sgraph.Reaction;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Scope;
-import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
@@ -131,7 +131,7 @@ public class FactoryExtension {
   
   private final HashMap<ArrayList<?>,ExecutionState> _createCache_create_5 = new HashMap<ArrayList<?>,ExecutionState>();
   
-  public ExecutionState create(final State state) {
+  public ExecutionState create(final RegularState state) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(state);
     ExecutionState r;
     synchronized (_createCache_create_5) {
@@ -146,8 +146,14 @@ public class FactoryExtension {
     boolean _operator_notEquals = ObjectExtensions.operator_notEquals(state, null);
     if (_operator_notEquals) {
       {
-        String _name = state.getName();
-        r.setSimpleName(_name);
+        String _xifexpression = null;
+        if ((state instanceof org.yakindu.sct.model.sgraph.FinalState)) {
+          _xifexpression = "_final_";
+        } else {
+          String _name = state.getName();
+          _xifexpression = _name;
+        }
+        r.setSimpleName(_xifexpression);
         QualifiedName _fullyQualifiedName = this.qfnProvider.getFullyQualifiedName(state);
         String _string = _fullyQualifiedName.toString();
         String _replaceAll = _string.replaceAll(" ", "");
