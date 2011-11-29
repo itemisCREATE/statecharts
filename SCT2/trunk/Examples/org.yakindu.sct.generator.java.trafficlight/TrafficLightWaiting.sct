@@ -1,252 +1,296 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/2.0.0" xmlns:stext="http://www.yakindu.org/sct/statechart/SText">
   <sgraph:Statechart xmi:id="_NPjBgBA-EeGQ0KsLDV4EFg" name="TrafficLightWaiting" expression="interface TrafficLight:&#xD;&#xA;&#x9;var red:boolean&#xD;&#xA;&#x9;var yellow:boolean&#xD;&#xA;&#x9;var green:boolean&#xD;&#xA;&#xD;&#xA;interface Pedestrian:&#xD;&#xA;&#x9;var request:boolean&#xD;&#xA;&#x9;var red:boolean&#xD;&#xA;&#x9;var green:boolean&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;&#x9;in event keypress1&#xD;&#xA;&#x9;in event keypress2&#xD;&#xA;&#x9;in event keypress3">
-    <scopes xsi:type="stext:InterfaceScope" xmi:id="_p39HMRBQEeGZ49VSHcJZNw" name="TrafficLight">
-      <declarations xsi:type="stext:VariableDefinition" xmi:id="_p39HMhBQEeGZ49VSHcJZNw" name="red" type="boolean"/>
-      <declarations xsi:type="stext:VariableDefinition" xmi:id="_p39HMxBQEeGZ49VSHcJZNw" name="yellow" type="boolean"/>
-      <declarations xsi:type="stext:VariableDefinition" xmi:id="_p39HNBBQEeGZ49VSHcJZNw" name="green" type="boolean"/>
+    <scopes xsi:type="stext:InterfaceScope" xmi:id="_ZdMr4BqLEeGkDZRZy8Mgeg" name="TrafficLight">
+      <declarations xsi:type="stext:VariableDefinition" xmi:id="_ZdMr4RqLEeGkDZRZy8Mgeg" name="red" type="boolean"/>
+      <declarations xsi:type="stext:VariableDefinition" xmi:id="_ZdMr4hqLEeGkDZRZy8Mgeg" name="yellow" type="boolean"/>
+      <declarations xsi:type="stext:VariableDefinition" xmi:id="_ZdMr4xqLEeGkDZRZy8Mgeg" name="green" type="boolean"/>
     </scopes>
-    <scopes xsi:type="stext:InterfaceScope" xmi:id="_p39HNRBQEeGZ49VSHcJZNw" name="Pedestrian">
-      <declarations xsi:type="stext:VariableDefinition" xmi:id="_p39HNhBQEeGZ49VSHcJZNw" name="request" type="boolean"/>
-      <declarations xsi:type="stext:VariableDefinition" xmi:id="_p39HNxBQEeGZ49VSHcJZNw" name="red" type="boolean"/>
-      <declarations xsi:type="stext:VariableDefinition" xmi:id="_p39HOBBQEeGZ49VSHcJZNw" name="green" type="boolean"/>
+    <scopes xsi:type="stext:InterfaceScope" xmi:id="_ZdMr5BqLEeGkDZRZy8Mgeg" name="Pedestrian">
+      <declarations xsi:type="stext:VariableDefinition" xmi:id="_ZdMr5RqLEeGkDZRZy8Mgeg" name="request" type="boolean"/>
+      <declarations xsi:type="stext:VariableDefinition" xmi:id="_ZdMr5hqLEeGkDZRZy8Mgeg" name="red" type="boolean"/>
+      <declarations xsi:type="stext:VariableDefinition" xmi:id="_ZdMr5xqLEeGkDZRZy8Mgeg" name="green" type="boolean"/>
     </scopes>
-    <scopes xsi:type="stext:InterfaceScope" xmi:id="_p39HORBQEeGZ49VSHcJZNw">
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_p39HOhBQEeGZ49VSHcJZNw" name="keypress1" direction="in"/>
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_p39HOxBQEeGZ49VSHcJZNw" name="keypress2" direction="in"/>
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_p39HPBBQEeGZ49VSHcJZNw" name="keypress3" direction="in"/>
+    <scopes xsi:type="stext:InterfaceScope" xmi:id="_ZdMr6BqLEeGkDZRZy8Mgeg">
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_ZdMr6RqLEeGkDZRZy8Mgeg" name="keypress1" direction="in"/>
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_ZdMr6hqLEeGkDZRZy8Mgeg" name="keypress2" direction="in"/>
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_ZdMr6xqLEeGkDZRZy8Mgeg" name="keypress3" direction="in"/>
     </scopes>
     <regions xmi:id="_NPjBgxA-EeGQ0KsLDV4EFg" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_NPjBjRA-EeGQ0KsLDV4EFg">
         <outgoingTransitions xmi:id="_NPsyhxA-EeGQ0KsLDV4EFg" target="_NPjBmBA-EeGQ0KsLDV4EFg"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_NPjBmBA-EeGQ0KsLDV4EFg" name="on" incomingTransitions="_NPsyhxA-EeGQ0KsLDV4EFg _6kP60BBPEeGQ0KsLDV4EFg __OsQsBBPEeGQ0KsLDV4EFg">
+        <scopes xmi:id="_ZdQWQBqLEeGkDZRZy8Mgeg"/>
         <outgoingTransitions xmi:id="_Av3wkBBFEeGQ0KsLDV4EFg" expression="keypress3" target="_7PkwwBBEEeGQ0KsLDV4EFg">
-          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p4G4MRBQEeGZ49VSHcJZNw">
-            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_p4G4MhBQEeGZ49VSHcJZNw" event="_p39HPBBQEeGZ49VSHcJZNw"/>
+          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ZdSLcBqLEeGkDZRZy8Mgeg">
+            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_ZdSLcRqLEeGkDZRZy8Mgeg" event="_ZdMr6xqLEeGkDZRZy8Mgeg"/>
           </trigger>
         </outgoingTransitions>
         <outgoingTransitions xmi:id="_XlIREBBFEeGQ0KsLDV4EFg" expression="keypress2" target="_MF4mkBBFEeGQ0KsLDV4EFg">
-          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p5mF8BBQEeGZ49VSHcJZNw">
-            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_p5mF8RBQEeGZ49VSHcJZNw" event="_p39HOxBQEeGZ49VSHcJZNw"/>
+          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ZdVOwBqLEeGkDZRZy8Mgeg">
+            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_ZdVOwRqLEeGkDZRZy8Mgeg" event="_ZdMr6hqLEeGkDZRZy8Mgeg"/>
           </trigger>
         </outgoingTransitions>
-        <scopes xmi:id="_p4G4MBBQEeGZ49VSHcJZNw"/>
         <subRegions xmi:id="_vZz18BA_EeGQ0KsLDV4EFg" name="r1">
-          <vertices xsi:type="sgraph:State" xmi:id="_w8meYBA_EeGQ0KsLDV4EFg" name="StreetGreen" incomingTransitions="_pddaABBEEeGQ0KsLDV4EFg _yYuD0BBPEeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = false; &#xD;&#xA;&#x9;TrafficLight.yellow = false;&#xD;&#xA;&#x9;TrafficLight.green = true;&#xD;&#xA;&#x9;Pedestrian.red = true;&#xD;&#xA;&#x9;Pedestrian.green = false;&#xD;&#xA;&#x9;Pedestrian.request = false;">
+          <vertices xsi:type="sgraph:State" xmi:id="_w8meYBA_EeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = false; &#xD;&#xA;&#x9;TrafficLight.yellow = false;&#xD;&#xA;&#x9;TrafficLight.green = true;&#xD;&#xA;&#x9;Pedestrian.red = true;&#xD;&#xA;&#x9;Pedestrian.green = false;&#xD;&#xA;&#x9;Pedestrian.request = false;" name="StreetGreen" incomingTransitions="_pddaABBEEeGQ0KsLDV4EFg _yYuD0BBPEeGQ0KsLDV4EFg">
+            <scopes xmi:id="_ZdZgMBqLEeGkDZRZy8Mgeg">
+              <declarations xsi:type="stext:LocalReaction" xmi:id="_ZdZgMRqLEeGkDZRZy8Mgeg">
+                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ZdZgMhqLEeGkDZRZy8Mgeg">
+                  <triggers xsi:type="stext:EntryEvent" xmi:id="_ZdZgMxqLEeGkDZRZy8Mgeg"/>
+                </trigger>
+                <effect xsi:type="stext:ReactionEffect" xmi:id="_ZdZgNBqLEeGkDZRZy8Mgeg">
+                  <actions xsi:type="stext:Assignment" xmi:id="_ZdZgNRqLEeGkDZRZy8Mgeg" varRef="_ZdMr4RqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZdZgNhqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_ZdZgNxqLEeGkDZRZy8Mgeg"/>
+                    </expression>
+                  </actions>
+                  <actions xsi:type="stext:Assignment" xmi:id="_ZdZgOBqLEeGkDZRZy8Mgeg" varRef="_ZdMr4hqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZdZgORqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_ZdZgOhqLEeGkDZRZy8Mgeg"/>
+                    </expression>
+                  </actions>
+                  <actions xsi:type="stext:Assignment" xmi:id="_ZdZgOxqLEeGkDZRZy8Mgeg" varRef="_ZdMr4xqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZdZgPBqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_ZdZgPRqLEeGkDZRZy8Mgeg" value="true"/>
+                    </expression>
+                  </actions>
+                  <actions xsi:type="stext:Assignment" xmi:id="_ZdZgPhqLEeGkDZRZy8Mgeg" varRef="_ZdMr5hqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZdZgPxqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_ZdZgQBqLEeGkDZRZy8Mgeg" value="true"/>
+                    </expression>
+                  </actions>
+                  <actions xsi:type="stext:Assignment" xmi:id="_ZdZgQRqLEeGkDZRZy8Mgeg" varRef="_ZdMr5xqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZdZgQhqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_ZdZgQxqLEeGkDZRZy8Mgeg"/>
+                    </expression>
+                  </actions>
+                  <actions xsi:type="stext:Assignment" xmi:id="_ZdZgRBqLEeGkDZRZy8Mgeg" varRef="_ZdMr5RqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZdZgRRqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_ZdZgRhqLEeGkDZRZy8Mgeg"/>
+                    </expression>
+                  </actions>
+                </effect>
+              </declarations>
+            </scopes>
             <outgoingTransitions xmi:id="_Lo2CEBBBEeGQ0KsLDV4EFg" expression="keypress1" target="_iAKe0BBAEeGQ0KsLDV4EFg">
-              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p7h_oBBQEeGZ49VSHcJZNw">
-                <triggers xsi:type="stext:RegularEventSpec" xmi:id="_p7h_oRBQEeGZ49VSHcJZNw" event="_p39HOhBQEeGZ49VSHcJZNw"/>
+              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ZdnioBqLEeGkDZRZy8Mgeg">
+                <triggers xsi:type="stext:RegularEventSpec" xmi:id="_ZdnioRqLEeGkDZRZy8Mgeg" event="_ZdMr6RqLEeGkDZRZy8Mgeg"/>
               </trigger>
             </outgoingTransitions>
-            <scopes xmi:id="_p6L70BBQEeGZ49VSHcJZNw">
-              <declarations xsi:type="stext:LocalReaction" xmi:id="_p6L70RBQEeGZ49VSHcJZNw">
-                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p6L70hBQEeGZ49VSHcJZNw">
-                  <triggers xsi:type="stext:EntryEvent" xmi:id="_p6L70xBQEeGZ49VSHcJZNw"/>
-                </trigger>
-                <effect xsi:type="stext:ReactionEffect" xmi:id="_p6L71BBQEeGZ49VSHcJZNw">
-                  <actions xsi:type="stext:Assignment" xmi:id="_p6L71RBQEeGZ49VSHcJZNw" varRef="_p39HMhBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p6L71hBQEeGZ49VSHcJZNw" value="false"/>
-                  </actions>
-                  <actions xsi:type="stext:Assignment" xmi:id="_p6L71xBQEeGZ49VSHcJZNw" varRef="_p39HMxBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p6L72BBQEeGZ49VSHcJZNw" value="false"/>
-                  </actions>
-                  <actions xsi:type="stext:Assignment" xmi:id="_p6L72RBQEeGZ49VSHcJZNw" varRef="_p39HNBBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p6L72hBQEeGZ49VSHcJZNw" value="true"/>
-                  </actions>
-                  <actions xsi:type="stext:Assignment" xmi:id="_p6L72xBQEeGZ49VSHcJZNw" varRef="_p39HNxBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p6L73BBQEeGZ49VSHcJZNw" value="true"/>
-                  </actions>
-                  <actions xsi:type="stext:Assignment" xmi:id="_p6L73RBQEeGZ49VSHcJZNw" varRef="_p39HOBBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p6L73hBQEeGZ49VSHcJZNw" value="false"/>
-                  </actions>
-                  <actions xsi:type="stext:Assignment" xmi:id="_p6L73xBQEeGZ49VSHcJZNw" varRef="_p39HNhBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p6L74BBQEeGZ49VSHcJZNw" value="false"/>
-                  </actions>
-                </effect>
-              </declarations>
-            </scopes>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_iAKe0BBAEeGQ0KsLDV4EFg" name="PedWaiting" incomingTransitions="_Lo2CEBBBEeGQ0KsLDV4EFg" expression="exit / Pedestrian.request = false;">
-            <outgoingTransitions xmi:id="_LDXEgBBDEeGQ0KsLDV4EFg" expression="after 7s" target="_SKct4BBBEeGQ0KsLDV4EFg">
-              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p8H1gBBQEeGZ49VSHcJZNw">
-                <triggers xsi:type="stext:TimeEventSpec" xmi:id="_p8H1gRBQEeGZ49VSHcJZNw" value="7"/>
-              </trigger>
-            </outgoingTransitions>
-            <scopes xmi:id="_p706kBBQEeGZ49VSHcJZNw">
-              <declarations xsi:type="stext:LocalReaction" xmi:id="_p706kRBQEeGZ49VSHcJZNw">
-                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p706khBQEeGZ49VSHcJZNw">
-                  <triggers xsi:type="stext:ExitEvent" xmi:id="_p706kxBQEeGZ49VSHcJZNw"/>
+          <vertices xsi:type="sgraph:State" xmi:id="_iAKe0BBAEeGQ0KsLDV4EFg" expression="exit / Pedestrian.request = false;" name="PedWaiting" incomingTransitions="_Lo2CEBBBEeGQ0KsLDV4EFg">
+            <scopes xmi:id="_Zdql8BqLEeGkDZRZy8Mgeg">
+              <declarations xsi:type="stext:LocalReaction" xmi:id="_Zdql8RqLEeGkDZRZy8Mgeg">
+                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Zdql8hqLEeGkDZRZy8Mgeg">
+                  <triggers xsi:type="stext:ExitEvent" xmi:id="_Zdql8xqLEeGkDZRZy8Mgeg"/>
                 </trigger>
-                <effect xsi:type="stext:ReactionEffect" xmi:id="_p706lBBQEeGZ49VSHcJZNw">
-                  <actions xsi:type="stext:Assignment" xmi:id="_p706lRBQEeGZ49VSHcJZNw" varRef="_p39HNhBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p706lhBQEeGZ49VSHcJZNw" value="false"/>
+                <effect xsi:type="stext:ReactionEffect" xmi:id="_Zdql9BqLEeGkDZRZy8Mgeg">
+                  <actions xsi:type="stext:Assignment" xmi:id="_Zdql9RqLEeGkDZRZy8Mgeg" varRef="_ZdMr5RqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_Zdql9hqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_Zdql9xqLEeGkDZRZy8Mgeg"/>
+                    </expression>
                   </actions>
                 </effect>
               </declarations>
             </scopes>
+            <outgoingTransitions xmi:id="_LDXEgBBDEeGQ0KsLDV4EFg" expression="after 7s" target="_SKct4BBBEeGQ0KsLDV4EFg">
+              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Zdu3YBqLEeGkDZRZy8Mgeg">
+                <triggers xsi:type="stext:TimeEventSpec" xmi:id="_Zdu3YRqLEeGkDZRZy8Mgeg" value="7"/>
+              </trigger>
+            </outgoingTransitions>
             <subRegions xmi:id="_iAKe0hBAEeGQ0KsLDV4EFg" name="r1">
-              <vertices xsi:type="sgraph:State" xmi:id="_mjm00BBAEeGQ0KsLDV4EFg" name="waitOn" incomingTransitions="_wTHnEBBAEeGQ0KsLDV4EFg _OXpxsBBBEeGQ0KsLDV4EFg" expression="entry / &#xD;&#xA;Pedestrian.request = true;">
+              <vertices xsi:type="sgraph:State" xmi:id="_mjm00BBAEeGQ0KsLDV4EFg" expression="entry / &#xD;&#xA;Pedestrian.request = true;" name="waitOn" incomingTransitions="_wTHnEBBAEeGQ0KsLDV4EFg _OXpxsBBBEeGQ0KsLDV4EFg">
+                <scopes xmi:id="_ZdvecBqLEeGkDZRZy8Mgeg">
+                  <declarations xsi:type="stext:LocalReaction" xmi:id="_ZdvecRqLEeGkDZRZy8Mgeg">
+                    <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ZdvechqLEeGkDZRZy8Mgeg">
+                      <triggers xsi:type="stext:EntryEvent" xmi:id="_ZdvecxqLEeGkDZRZy8Mgeg"/>
+                    </trigger>
+                    <effect xsi:type="stext:ReactionEffect" xmi:id="_ZdvedBqLEeGkDZRZy8Mgeg">
+                      <actions xsi:type="stext:Assignment" xmi:id="_ZdvedRqLEeGkDZRZy8Mgeg" varRef="_ZdMr5RqLEeGkDZRZy8Mgeg">
+                        <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZdvedhqLEeGkDZRZy8Mgeg">
+                          <value xsi:type="stext:BoolLiteral" xmi:id="_ZdvedxqLEeGkDZRZy8Mgeg" value="true"/>
+                        </expression>
+                      </actions>
+                    </effect>
+                  </declarations>
+                </scopes>
                 <outgoingTransitions xmi:id="_6LZ60BBAEeGQ0KsLDV4EFg" expression="after 500ms" target="_n6DDUBBAEeGQ0KsLDV4EFg">
-                  <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p8RmgBBQEeGZ49VSHcJZNw">
-                    <triggers xsi:type="stext:TimeEventSpec" xmi:id="_p8RmgRBQEeGZ49VSHcJZNw" value="500" unit="ms"/>
+                  <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ZdyhwBqLEeGkDZRZy8Mgeg">
+                    <triggers xsi:type="stext:TimeEventSpec" xmi:id="_ZdyhwRqLEeGkDZRZy8Mgeg" value="500" unit="ms"/>
                   </trigger>
                 </outgoingTransitions>
-                <scopes xmi:id="_p8H1ghBQEeGZ49VSHcJZNw">
-                  <declarations xsi:type="stext:LocalReaction" xmi:id="_p8H1gxBQEeGZ49VSHcJZNw">
-                    <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p8H1hBBQEeGZ49VSHcJZNw">
-                      <triggers xsi:type="stext:EntryEvent" xmi:id="_p8H1hRBQEeGZ49VSHcJZNw"/>
-                    </trigger>
-                    <effect xsi:type="stext:ReactionEffect" xmi:id="_p8H1hhBQEeGZ49VSHcJZNw">
-                      <actions xsi:type="stext:Assignment" xmi:id="_p8H1hxBQEeGZ49VSHcJZNw" varRef="_p39HNhBQEeGZ49VSHcJZNw">
-                        <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p8H1iBBQEeGZ49VSHcJZNw" value="true"/>
-                      </actions>
-                    </effect>
-                  </declarations>
-                </scopes>
               </vertices>
-              <vertices xsi:type="sgraph:State" xmi:id="_n6DDUBBAEeGQ0KsLDV4EFg" name="waitOff" incomingTransitions="_6LZ60BBAEeGQ0KsLDV4EFg" expression="entry / &#xD;&#xA;Pedestrian.request = false;">
-                <outgoingTransitions xmi:id="_OXpxsBBBEeGQ0KsLDV4EFg" expression="after 500ms" target="_mjm00BBAEeGQ0KsLDV4EFg">
-                  <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p8khcBBQEeGZ49VSHcJZNw">
-                    <triggers xsi:type="stext:TimeEventSpec" xmi:id="_p8khcRBQEeGZ49VSHcJZNw" value="500" unit="ms"/>
-                  </trigger>
-                </outgoingTransitions>
-                <scopes xmi:id="_p8awcBBQEeGZ49VSHcJZNw">
-                  <declarations xsi:type="stext:LocalReaction" xmi:id="_p8awcRBQEeGZ49VSHcJZNw">
-                    <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p8awchBQEeGZ49VSHcJZNw">
-                      <triggers xsi:type="stext:EntryEvent" xmi:id="_p8awcxBQEeGZ49VSHcJZNw"/>
+              <vertices xsi:type="sgraph:State" xmi:id="_n6DDUBBAEeGQ0KsLDV4EFg" expression="entry / &#xD;&#xA;Pedestrian.request = false;" name="waitOff" incomingTransitions="_6LZ60BBAEeGQ0KsLDV4EFg">
+                <scopes xmi:id="_ZdzI0BqLEeGkDZRZy8Mgeg">
+                  <declarations xsi:type="stext:LocalReaction" xmi:id="_ZdzI0RqLEeGkDZRZy8Mgeg">
+                    <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ZdzI0hqLEeGkDZRZy8Mgeg">
+                      <triggers xsi:type="stext:EntryEvent" xmi:id="_ZdzI0xqLEeGkDZRZy8Mgeg"/>
                     </trigger>
-                    <effect xsi:type="stext:ReactionEffect" xmi:id="_p8awdBBQEeGZ49VSHcJZNw">
-                      <actions xsi:type="stext:Assignment" xmi:id="_p8awdRBQEeGZ49VSHcJZNw" varRef="_p39HNhBQEeGZ49VSHcJZNw">
-                        <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p8awdhBQEeGZ49VSHcJZNw" value="false"/>
+                    <effect xsi:type="stext:ReactionEffect" xmi:id="_ZdzI1BqLEeGkDZRZy8Mgeg">
+                      <actions xsi:type="stext:Assignment" xmi:id="_ZdzI1RqLEeGkDZRZy8Mgeg" varRef="_ZdMr5RqLEeGkDZRZy8Mgeg">
+                        <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZdzI1hqLEeGkDZRZy8Mgeg">
+                          <value xsi:type="stext:BoolLiteral" xmi:id="_ZdzI1xqLEeGkDZRZy8Mgeg"/>
+                        </expression>
                       </actions>
                     </effect>
                   </declarations>
                 </scopes>
+                <outgoingTransitions xmi:id="_OXpxsBBBEeGQ0KsLDV4EFg" expression="after 500ms" target="_mjm00BBAEeGQ0KsLDV4EFg">
+                  <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Zd2zMBqLEeGkDZRZy8Mgeg">
+                    <triggers xsi:type="stext:TimeEventSpec" xmi:id="_Zd2zMRqLEeGkDZRZy8Mgeg" value="500" unit="ms"/>
+                  </trigger>
+                </outgoingTransitions>
               </vertices>
               <vertices xsi:type="sgraph:Entry" xmi:id="_pqXxcBBAEeGQ0KsLDV4EFg">
                 <outgoingTransitions xmi:id="_wTHnEBBAEeGQ0KsLDV4EFg" target="_mjm00BBAEeGQ0KsLDV4EFg"/>
               </vertices>
             </subRegions>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_SKct4BBBEeGQ0KsLDV4EFg" name="StreetAttention" incomingTransitions="_LDXEgBBDEeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = false;&#xD;&#xA;&#x9;TrafficLight.yellow = true;&#xD;&#xA;&#x9;TrafficLight.green = false;">
+          <vertices xsi:type="sgraph:State" xmi:id="_SKct4BBBEeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = false;&#xD;&#xA;&#x9;TrafficLight.yellow = true;&#xD;&#xA;&#x9;TrafficLight.green = false;" name="StreetAttention" incomingTransitions="_LDXEgBBDEeGQ0KsLDV4EFg">
+            <scopes xmi:id="_Zd3aQBqLEeGkDZRZy8Mgeg">
+              <declarations xsi:type="stext:LocalReaction" xmi:id="_Zd3aQRqLEeGkDZRZy8Mgeg">
+                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Zd3aQhqLEeGkDZRZy8Mgeg">
+                  <triggers xsi:type="stext:EntryEvent" xmi:id="_Zd3aQxqLEeGkDZRZy8Mgeg"/>
+                </trigger>
+                <effect xsi:type="stext:ReactionEffect" xmi:id="_Zd3aRBqLEeGkDZRZy8Mgeg">
+                  <actions xsi:type="stext:Assignment" xmi:id="_Zd3aRRqLEeGkDZRZy8Mgeg" varRef="_ZdMr4RqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_Zd3aRhqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_Zd3aRxqLEeGkDZRZy8Mgeg"/>
+                    </expression>
+                  </actions>
+                  <actions xsi:type="stext:Assignment" xmi:id="_Zd3aSBqLEeGkDZRZy8Mgeg" varRef="_ZdMr4hqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_Zd3aSRqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_Zd3aShqLEeGkDZRZy8Mgeg" value="true"/>
+                    </expression>
+                  </actions>
+                  <actions xsi:type="stext:Assignment" xmi:id="_Zd3aSxqLEeGkDZRZy8Mgeg" varRef="_ZdMr4xqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_Zd3aTBqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_Zd3aTRqLEeGkDZRZy8Mgeg"/>
+                    </expression>
+                  </actions>
+                </effect>
+              </declarations>
+            </scopes>
             <outgoingTransitions xmi:id="_fS31UBBEEeGQ0KsLDV4EFg" expression="after 2s" target="_fO-pQBBDEeGQ0KsLDV4EFg">
-              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p9BNYBBQEeGZ49VSHcJZNw">
-                <triggers xsi:type="stext:TimeEventSpec" xmi:id="_p9BNYRBQEeGZ49VSHcJZNw" value="2"/>
+              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Zd_WEBqLEeGkDZRZy8Mgeg">
+                <triggers xsi:type="stext:TimeEventSpec" xmi:id="_Zd_WERqLEeGkDZRZy8Mgeg" value="2"/>
               </trigger>
             </outgoingTransitions>
-            <scopes xmi:id="_p8khchBQEeGZ49VSHcJZNw">
-              <declarations xsi:type="stext:LocalReaction" xmi:id="_p8khcxBQEeGZ49VSHcJZNw">
-                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p8khdBBQEeGZ49VSHcJZNw">
-                  <triggers xsi:type="stext:EntryEvent" xmi:id="_p8khdRBQEeGZ49VSHcJZNw"/>
+          </vertices>
+          <vertices xsi:type="sgraph:State" xmi:id="_fO-pQBBDEeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = true;&#xD;&#xA;TrafficLight.yellow = false;&#xD;&#xA;TrafficLight.green = false;" name="StreetRed" incomingTransitions="_fS31UBBEEeGQ0KsLDV4EFg">
+            <scopes xmi:id="_Zd_WEhqLEeGkDZRZy8Mgeg">
+              <declarations xsi:type="stext:LocalReaction" xmi:id="_Zd_WExqLEeGkDZRZy8Mgeg">
+                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Zd_9IBqLEeGkDZRZy8Mgeg">
+                  <triggers xsi:type="stext:EntryEvent" xmi:id="_Zd_9IRqLEeGkDZRZy8Mgeg"/>
                 </trigger>
-                <effect xsi:type="stext:ReactionEffect" xmi:id="_p8khdhBQEeGZ49VSHcJZNw">
-                  <actions xsi:type="stext:Assignment" xmi:id="_p8khdxBQEeGZ49VSHcJZNw" varRef="_p39HMhBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p8kheBBQEeGZ49VSHcJZNw" value="false"/>
+                <effect xsi:type="stext:ReactionEffect" xmi:id="_Zd_9IhqLEeGkDZRZy8Mgeg">
+                  <actions xsi:type="stext:Assignment" xmi:id="_Zd_9IxqLEeGkDZRZy8Mgeg" varRef="_ZdMr4RqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_Zd_9JBqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_Zd_9JRqLEeGkDZRZy8Mgeg" value="true"/>
+                    </expression>
                   </actions>
-                  <actions xsi:type="stext:Assignment" xmi:id="_p8kheRBQEeGZ49VSHcJZNw" varRef="_p39HMxBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p8khehBQEeGZ49VSHcJZNw" value="true"/>
+                  <actions xsi:type="stext:Assignment" xmi:id="_Zd_9JhqLEeGkDZRZy8Mgeg" varRef="_ZdMr4hqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_Zd_9JxqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_Zd_9KBqLEeGkDZRZy8Mgeg"/>
+                    </expression>
                   </actions>
-                  <actions xsi:type="stext:Assignment" xmi:id="_p8khexBQEeGZ49VSHcJZNw" varRef="_p39HNBBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p8khfBBQEeGZ49VSHcJZNw" value="false"/>
+                  <actions xsi:type="stext:Assignment" xmi:id="_Zd_9KRqLEeGkDZRZy8Mgeg" varRef="_ZdMr4xqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_Zd_9KhqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_Zd_9KxqLEeGkDZRZy8Mgeg"/>
+                    </expression>
                   </actions>
                 </effect>
               </declarations>
             </scopes>
-          </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_fO-pQBBDEeGQ0KsLDV4EFg" name="StreetRed" incomingTransitions="_fS31UBBEEeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = true;&#xD;&#xA;TrafficLight.yellow = false;&#xD;&#xA;TrafficLight.green = false;">
             <outgoingTransitions xmi:id="_g7TywBBEEeGQ0KsLDV4EFg" expression="after 2s" target="_12GAEBBDEeGQ0KsLDV4EFg">
-              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p9d5UBBQEeGZ49VSHcJZNw">
-                <triggers xsi:type="stext:TimeEventSpec" xmi:id="_p9d5URBQEeGZ49VSHcJZNw" value="2"/>
+              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ZeHR4BqLEeGkDZRZy8Mgeg">
+                <triggers xsi:type="stext:TimeEventSpec" xmi:id="_ZeHR4RqLEeGkDZRZy8Mgeg" value="2"/>
               </trigger>
             </outgoingTransitions>
-            <scopes xmi:id="_p9BNYhBQEeGZ49VSHcJZNw">
-              <declarations xsi:type="stext:LocalReaction" xmi:id="_p9BNYxBQEeGZ49VSHcJZNw">
-                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p9BNZBBQEeGZ49VSHcJZNw">
-                  <triggers xsi:type="stext:EntryEvent" xmi:id="_p9BNZRBQEeGZ49VSHcJZNw"/>
+          </vertices>
+          <vertices xsi:type="sgraph:State" xmi:id="_12GAEBBDEeGQ0KsLDV4EFg" expression="entry / Pedestrian.red = false;&#xD;&#xA;Pedestrian.green = true;" name="PedestrianGreen" incomingTransitions="_g7TywBBEEeGQ0KsLDV4EFg">
+            <scopes xmi:id="_ZeH48BqLEeGkDZRZy8Mgeg">
+              <declarations xsi:type="stext:LocalReaction" xmi:id="_ZeH48RqLEeGkDZRZy8Mgeg">
+                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ZeH48hqLEeGkDZRZy8Mgeg">
+                  <triggers xsi:type="stext:EntryEvent" xmi:id="_ZeH48xqLEeGkDZRZy8Mgeg"/>
                 </trigger>
-                <effect xsi:type="stext:ReactionEffect" xmi:id="_p9BNZhBQEeGZ49VSHcJZNw">
-                  <actions xsi:type="stext:Assignment" xmi:id="_p9BNZxBQEeGZ49VSHcJZNw" varRef="_p39HMhBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p9BNaBBQEeGZ49VSHcJZNw" value="true"/>
+                <effect xsi:type="stext:ReactionEffect" xmi:id="_ZeH49BqLEeGkDZRZy8Mgeg">
+                  <actions xsi:type="stext:Assignment" xmi:id="_ZeH49RqLEeGkDZRZy8Mgeg" varRef="_ZdMr5hqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZeH49hqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_ZeH49xqLEeGkDZRZy8Mgeg"/>
+                    </expression>
                   </actions>
-                  <actions xsi:type="stext:Assignment" xmi:id="_p9BNaRBQEeGZ49VSHcJZNw" varRef="_p39HMxBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p9BNahBQEeGZ49VSHcJZNw" value="false"/>
-                  </actions>
-                  <actions xsi:type="stext:Assignment" xmi:id="_p9BNaxBQEeGZ49VSHcJZNw" varRef="_p39HNBBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p9BNbBBQEeGZ49VSHcJZNw" value="false"/>
+                  <actions xsi:type="stext:Assignment" xmi:id="_ZeH4-BqLEeGkDZRZy8Mgeg" varRef="_ZdMr5xqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZeH4-RqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_ZeH4-hqLEeGkDZRZy8Mgeg" value="true"/>
+                    </expression>
                   </actions>
                 </effect>
               </declarations>
             </scopes>
-          </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_12GAEBBDEeGQ0KsLDV4EFg" name="PedestrianGreen" incomingTransitions="_g7TywBBEEeGQ0KsLDV4EFg" expression="entry / Pedestrian.red = false;&#xD;&#xA;Pedestrian.green = true;">
             <outgoingTransitions xmi:id="_iZox8BBEEeGQ0KsLDV4EFg" expression="after 7s" target="_K-JX7RBEEeGQ0KsLDV4EFg">
-              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p9w0QBBQEeGZ49VSHcJZNw">
-                <triggers xsi:type="stext:TimeEventSpec" xmi:id="_p9w0QRBQEeGZ49VSHcJZNw" value="7"/>
+              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ZeNYgBqLEeGkDZRZy8Mgeg">
+                <triggers xsi:type="stext:TimeEventSpec" xmi:id="_ZeNYgRqLEeGkDZRZy8Mgeg" value="7"/>
               </trigger>
             </outgoingTransitions>
-            <scopes xmi:id="_p9d5UhBQEeGZ49VSHcJZNw">
-              <declarations xsi:type="stext:LocalReaction" xmi:id="_p9d5UxBQEeGZ49VSHcJZNw">
-                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p9d5VBBQEeGZ49VSHcJZNw">
-                  <triggers xsi:type="stext:EntryEvent" xmi:id="_p9d5VRBQEeGZ49VSHcJZNw"/>
+          </vertices>
+          <vertices xsi:type="sgraph:State" xmi:id="_K-JX7RBEEeGQ0KsLDV4EFg" expression="entry / Pedestrian.red = true;&#xD;&#xA;Pedestrian.green = false;" name="PedestrianRed" incomingTransitions="_iZox8BBEEeGQ0KsLDV4EFg">
+            <scopes xmi:id="_ZeNYghqLEeGkDZRZy8Mgeg">
+              <declarations xsi:type="stext:LocalReaction" xmi:id="_ZeNYgxqLEeGkDZRZy8Mgeg">
+                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ZeNYhBqLEeGkDZRZy8Mgeg">
+                  <triggers xsi:type="stext:EntryEvent" xmi:id="_ZeNYhRqLEeGkDZRZy8Mgeg"/>
                 </trigger>
-                <effect xsi:type="stext:ReactionEffect" xmi:id="_p9d5VhBQEeGZ49VSHcJZNw">
-                  <actions xsi:type="stext:Assignment" xmi:id="_p9d5VxBQEeGZ49VSHcJZNw" varRef="_p39HNxBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p9d5WBBQEeGZ49VSHcJZNw" value="false"/>
+                <effect xsi:type="stext:ReactionEffect" xmi:id="_ZeNYhhqLEeGkDZRZy8Mgeg">
+                  <actions xsi:type="stext:Assignment" xmi:id="_ZeNYhxqLEeGkDZRZy8Mgeg" varRef="_ZdMr5hqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZeNYiBqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_ZeNYiRqLEeGkDZRZy8Mgeg" value="true"/>
+                    </expression>
                   </actions>
-                  <actions xsi:type="stext:Assignment" xmi:id="_p9d5WRBQEeGZ49VSHcJZNw" varRef="_p39HOBBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p9d5WhBQEeGZ49VSHcJZNw" value="true"/>
+                  <actions xsi:type="stext:Assignment" xmi:id="_ZeNYihqLEeGkDZRZy8Mgeg" varRef="_ZdMr5xqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZeNYixqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_ZeNYjBqLEeGkDZRZy8Mgeg"/>
+                    </expression>
                   </actions>
                 </effect>
               </declarations>
             </scopes>
-          </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_K-JX7RBEEeGQ0KsLDV4EFg" name="PedestrianRed" incomingTransitions="_iZox8BBEEeGQ0KsLDV4EFg" expression="entry / Pedestrian.red = true;&#xD;&#xA;Pedestrian.green = false;">
             <outgoingTransitions xmi:id="_nVCU8BBEEeGQ0KsLDV4EFg" expression="after 3s" target="_TfjYTRBEEeGQ0KsLDV4EFg">
-              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p95-MBBQEeGZ49VSHcJZNw">
-                <triggers xsi:type="stext:TimeEventSpec" xmi:id="_p95-MRBQEeGZ49VSHcJZNw" value="3"/>
+              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ZeS4EBqLEeGkDZRZy8Mgeg">
+                <triggers xsi:type="stext:TimeEventSpec" xmi:id="_ZeS4ERqLEeGkDZRZy8Mgeg" value="3"/>
               </trigger>
             </outgoingTransitions>
-            <scopes xmi:id="_p9w0QhBQEeGZ49VSHcJZNw">
-              <declarations xsi:type="stext:LocalReaction" xmi:id="_p9w0QxBQEeGZ49VSHcJZNw">
-                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p9w0RBBQEeGZ49VSHcJZNw">
-                  <triggers xsi:type="stext:EntryEvent" xmi:id="_p9w0RRBQEeGZ49VSHcJZNw"/>
-                </trigger>
-                <effect xsi:type="stext:ReactionEffect" xmi:id="_p9w0RhBQEeGZ49VSHcJZNw">
-                  <actions xsi:type="stext:Assignment" xmi:id="_p9w0RxBQEeGZ49VSHcJZNw" varRef="_p39HNxBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p9w0SBBQEeGZ49VSHcJZNw" value="true"/>
-                  </actions>
-                  <actions xsi:type="stext:Assignment" xmi:id="_p9w0SRBQEeGZ49VSHcJZNw" varRef="_p39HOBBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p9w0ShBQEeGZ49VSHcJZNw" value="false"/>
-                  </actions>
-                </effect>
-              </declarations>
-            </scopes>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_TfjYTRBEEeGQ0KsLDV4EFg" name="StreetPrepare" incomingTransitions="_nVCU8BBEEeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = true;&#xD;&#xA;&#x9;TrafficLight.yellow = true;&#xD;&#xA;&#x9;TrafficLight.green = false;">
-            <outgoingTransitions xmi:id="_pddaABBEEeGQ0KsLDV4EFg" expression="after 2s" target="_w8meYBA_EeGQ0KsLDV4EFg">
-              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p-NgMBBQEeGZ49VSHcJZNw">
-                <triggers xsi:type="stext:TimeEventSpec" xmi:id="_p-NgMRBQEeGZ49VSHcJZNw" value="2"/>
-              </trigger>
-            </outgoingTransitions>
-            <scopes xmi:id="_p-DvMBBQEeGZ49VSHcJZNw">
-              <declarations xsi:type="stext:LocalReaction" xmi:id="_p-DvMRBQEeGZ49VSHcJZNw">
-                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p-DvMhBQEeGZ49VSHcJZNw">
-                  <triggers xsi:type="stext:EntryEvent" xmi:id="_p-DvMxBQEeGZ49VSHcJZNw"/>
+          <vertices xsi:type="sgraph:State" xmi:id="_TfjYTRBEEeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = true;&#xD;&#xA;&#x9;TrafficLight.yellow = true;&#xD;&#xA;&#x9;TrafficLight.green = false;" name="StreetPrepare" incomingTransitions="_nVCU8BBEEeGQ0KsLDV4EFg">
+            <scopes xmi:id="_ZeTfIBqLEeGkDZRZy8Mgeg">
+              <declarations xsi:type="stext:LocalReaction" xmi:id="_ZeTfIRqLEeGkDZRZy8Mgeg">
+                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ZeTfIhqLEeGkDZRZy8Mgeg">
+                  <triggers xsi:type="stext:EntryEvent" xmi:id="_ZeTfIxqLEeGkDZRZy8Mgeg"/>
                 </trigger>
-                <effect xsi:type="stext:ReactionEffect" xmi:id="_p-DvNBBQEeGZ49VSHcJZNw">
-                  <actions xsi:type="stext:Assignment" xmi:id="_p-DvNRBQEeGZ49VSHcJZNw" varRef="_p39HMhBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p-DvNhBQEeGZ49VSHcJZNw" value="true"/>
+                <effect xsi:type="stext:ReactionEffect" xmi:id="_ZeTfJBqLEeGkDZRZy8Mgeg">
+                  <actions xsi:type="stext:Assignment" xmi:id="_ZeTfJRqLEeGkDZRZy8Mgeg" varRef="_ZdMr4RqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZeTfJhqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_ZeTfJxqLEeGkDZRZy8Mgeg" value="true"/>
+                    </expression>
                   </actions>
-                  <actions xsi:type="stext:Assignment" xmi:id="_p-DvNxBQEeGZ49VSHcJZNw" varRef="_p39HMxBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p-DvOBBQEeGZ49VSHcJZNw" value="true"/>
+                  <actions xsi:type="stext:Assignment" xmi:id="_ZeTfKBqLEeGkDZRZy8Mgeg" varRef="_ZdMr4hqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZeTfKRqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_ZeTfKhqLEeGkDZRZy8Mgeg" value="true"/>
+                    </expression>
                   </actions>
-                  <actions xsi:type="stext:Assignment" xmi:id="_p-DvORBQEeGZ49VSHcJZNw" varRef="_p39HNBBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p-DvOhBQEeGZ49VSHcJZNw" value="false"/>
+                  <actions xsi:type="stext:Assignment" xmi:id="_ZeTfKxqLEeGkDZRZy8Mgeg" varRef="_ZdMr4xqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZeTfLBqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_ZeTfLRqLEeGkDZRZy8Mgeg"/>
+                    </expression>
                   </actions>
                 </effect>
               </declarations>
             </scopes>
+            <outgoingTransitions xmi:id="_pddaABBEEeGQ0KsLDV4EFg" expression="after 2s" target="_w8meYBA_EeGQ0KsLDV4EFg">
+              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Zeaz4BqLEeGkDZRZy8Mgeg">
+                <triggers xsi:type="stext:TimeEventSpec" xmi:id="_Zeaz4RqLEeGkDZRZy8Mgeg" value="2"/>
+              </trigger>
+            </outgoingTransitions>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_xz0nABBPEeGQ0KsLDV4EFg">
             <outgoingTransitions xmi:id="_yYuD0BBPEeGQ0KsLDV4EFg" target="_w8meYBA_EeGQ0KsLDV4EFg"/>
@@ -254,59 +298,72 @@
         </subRegions>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_7PkwwBBEEeGQ0KsLDV4EFg" name="freeze" incomingTransitions="_Av3wkBBFEeGQ0KsLDV4EFg">
+        <scopes xmi:id="_Zeba8BqLEeGkDZRZy8Mgeg"/>
         <outgoingTransitions xmi:id="_6kP60BBPEeGQ0KsLDV4EFg" expression="keypress3" target="_NPjBmBA-EeGQ0KsLDV4EFg">
-          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p-NgMxBQEeGZ49VSHcJZNw">
-            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_p-NgNBBQEeGZ49VSHcJZNw" event="_p39HPBBQEeGZ49VSHcJZNw"/>
+          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Zeba8RqLEeGkDZRZy8Mgeg">
+            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_Zeba8hqLEeGkDZRZy8Mgeg" event="_ZdMr6xqLEeGkDZRZy8Mgeg"/>
           </trigger>
         </outgoingTransitions>
-        <scopes xmi:id="_p-NgMhBQEeGZ49VSHcJZNw"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_MF4mkBBFEeGQ0KsLDV4EFg" name="off" incomingTransitions="_XlIREBBFEeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = false;&#xD;&#xA;&#x9;TrafficLight.green = false;&#xD;&#xA;&#x9;TrafficLight.yellow = false;&#xD;&#xA;&#x9;Pedestrian.red = true;">
-        <outgoingTransitions xmi:id="__OsQsBBPEeGQ0KsLDV4EFg" expression="keypress2" target="_NPjBmBA-EeGQ0KsLDV4EFg">
-          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p-plEBBQEeGZ49VSHcJZNw">
-            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_p-plERBQEeGZ49VSHcJZNw" event="_p39HOxBQEeGZ49VSHcJZNw"/>
-          </trigger>
-        </outgoingTransitions>
-        <scopes xmi:id="_p-WqIBBQEeGZ49VSHcJZNw">
-          <declarations xsi:type="stext:LocalReaction" xmi:id="_p-WqIRBQEeGZ49VSHcJZNw">
-            <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p-WqIhBQEeGZ49VSHcJZNw">
-              <triggers xsi:type="stext:EntryEvent" xmi:id="_p-WqIxBQEeGZ49VSHcJZNw"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_MF4mkBBFEeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = false;&#xD;&#xA;&#x9;TrafficLight.green = false;&#xD;&#xA;&#x9;TrafficLight.yellow = false;&#xD;&#xA;&#x9;Pedestrian.red = true;" name="off" incomingTransitions="_XlIREBBFEeGQ0KsLDV4EFg">
+        <scopes xmi:id="_ZefFUBqLEeGkDZRZy8Mgeg">
+          <declarations xsi:type="stext:LocalReaction" xmi:id="_ZefFURqLEeGkDZRZy8Mgeg">
+            <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ZefFUhqLEeGkDZRZy8Mgeg">
+              <triggers xsi:type="stext:EntryEvent" xmi:id="_ZefFUxqLEeGkDZRZy8Mgeg"/>
             </trigger>
-            <effect xsi:type="stext:ReactionEffect" xmi:id="_p-WqJBBQEeGZ49VSHcJZNw">
-              <actions xsi:type="stext:Assignment" xmi:id="_p-WqJRBQEeGZ49VSHcJZNw" varRef="_p39HMhBQEeGZ49VSHcJZNw">
-                <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p-WqJhBQEeGZ49VSHcJZNw" value="false"/>
+            <effect xsi:type="stext:ReactionEffect" xmi:id="_ZefFVBqLEeGkDZRZy8Mgeg">
+              <actions xsi:type="stext:Assignment" xmi:id="_ZefFVRqLEeGkDZRZy8Mgeg" varRef="_ZdMr4RqLEeGkDZRZy8Mgeg">
+                <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZefFVhqLEeGkDZRZy8Mgeg">
+                  <value xsi:type="stext:BoolLiteral" xmi:id="_ZefFVxqLEeGkDZRZy8Mgeg"/>
+                </expression>
               </actions>
-              <actions xsi:type="stext:Assignment" xmi:id="_p-WqJxBQEeGZ49VSHcJZNw" varRef="_p39HNBBQEeGZ49VSHcJZNw">
-                <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p-WqKBBQEeGZ49VSHcJZNw" value="false"/>
+              <actions xsi:type="stext:Assignment" xmi:id="_ZefFWBqLEeGkDZRZy8Mgeg" varRef="_ZdMr4xqLEeGkDZRZy8Mgeg">
+                <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZefFWRqLEeGkDZRZy8Mgeg">
+                  <value xsi:type="stext:BoolLiteral" xmi:id="_ZefFWhqLEeGkDZRZy8Mgeg"/>
+                </expression>
               </actions>
-              <actions xsi:type="stext:Assignment" xmi:id="_p-WqKRBQEeGZ49VSHcJZNw" varRef="_p39HMxBQEeGZ49VSHcJZNw">
-                <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p-WqKhBQEeGZ49VSHcJZNw" value="false"/>
+              <actions xsi:type="stext:Assignment" xmi:id="_ZefFWxqLEeGkDZRZy8Mgeg" varRef="_ZdMr4hqLEeGkDZRZy8Mgeg">
+                <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZefFXBqLEeGkDZRZy8Mgeg">
+                  <value xsi:type="stext:BoolLiteral" xmi:id="_ZefFXRqLEeGkDZRZy8Mgeg"/>
+                </expression>
               </actions>
-              <actions xsi:type="stext:Assignment" xmi:id="_p-WqKxBQEeGZ49VSHcJZNw" varRef="_p39HNxBQEeGZ49VSHcJZNw">
-                <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p-WqLBBQEeGZ49VSHcJZNw" value="true"/>
+              <actions xsi:type="stext:Assignment" xmi:id="_ZefFXhqLEeGkDZRZy8Mgeg" varRef="_ZdMr5hqLEeGkDZRZy8Mgeg">
+                <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_ZefFXxqLEeGkDZRZy8Mgeg">
+                  <value xsi:type="stext:BoolLiteral" xmi:id="_ZefFYBqLEeGkDZRZy8Mgeg" value="true"/>
+                </expression>
               </actions>
             </effect>
           </declarations>
         </scopes>
+        <outgoingTransitions xmi:id="__OsQsBBPEeGQ0KsLDV4EFg" expression="keypress2" target="_NPjBmBA-EeGQ0KsLDV4EFg">
+          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Zeo2UBqLEeGkDZRZy8Mgeg">
+            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_Zeo2URqLEeGkDZRZy8Mgeg" event="_ZdMr6hqLEeGkDZRZy8Mgeg"/>
+          </trigger>
+        </outgoingTransitions>
         <subRegions xmi:id="_xHG2gBBFEeGQ0KsLDV4EFg" name="r1">
-          <vertices xsi:type="sgraph:State" xmi:id="_BVnsgBBGEeGQ0KsLDV4EFg" name="BlinkYellow" incomingTransitions="_EwURwBBGEeGQ0KsLDV4EFg _Lpu1EBBQEeGQ0KsLDV4EFg" expression="entry / TrafficLight.yellow = true;">
-            <outgoingTransitions xmi:id="_Lpu1EBBQEeGQ0KsLDV4EFg" expression="/ TrafficLight.yellow = !TrafficLight.yellow;" target="_BVnsgBBGEeGQ0KsLDV4EFg">
-              <effect xsi:type="stext:ReactionEffect" xmi:id="_p-zWFxBQEeGZ49VSHcJZNw">
-                <actions xsi:type="stext:Assignment" xmi:id="_p-zWGBBQEeGZ49VSHcJZNw" varRef="_p39HMxBQEeGZ49VSHcJZNw">
-                  <expression xsi:type="stext:LogicalNotExpression" xmi:id="_p-zWGRBQEeGZ49VSHcJZNw">
-                    <operand xsi:type="stext:ElementReferenceExpression" xmi:id="_p-zWGhBQEeGZ49VSHcJZNw" value="_p39HMxBQEeGZ49VSHcJZNw"/>
-                  </expression>
-                </actions>
-              </effect>
-            </outgoingTransitions>
-            <scopes xmi:id="_p-zWEBBQEeGZ49VSHcJZNw">
-              <declarations xsi:type="stext:LocalReaction" xmi:id="_p-zWERBQEeGZ49VSHcJZNw">
-                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_p-zWEhBQEeGZ49VSHcJZNw">
-                  <triggers xsi:type="stext:EntryEvent" xmi:id="_p-zWExBQEeGZ49VSHcJZNw"/>
+          <vertices xsi:type="sgraph:State" xmi:id="_BVnsgBBGEeGQ0KsLDV4EFg" expression="entry / &#xA;&#x9;TrafficLight.yellow = true;&#xA;every 500ms / &#xA;&#x9;TrafficLight.yellow = !TrafficLight.yellow;" name="BlinkYellow" incomingTransitions="_EwURwBBGEeGQ0KsLDV4EFg">
+            <scopes xmi:id="_Zer5oBqLEeGkDZRZy8Mgeg">
+              <declarations xsi:type="stext:LocalReaction" xmi:id="_Zer5oRqLEeGkDZRZy8Mgeg">
+                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Zer5ohqLEeGkDZRZy8Mgeg">
+                  <triggers xsi:type="stext:EntryEvent" xmi:id="_Zer5oxqLEeGkDZRZy8Mgeg"/>
                 </trigger>
-                <effect xsi:type="stext:ReactionEffect" xmi:id="_p-zWFBBQEeGZ49VSHcJZNw">
-                  <actions xsi:type="stext:Assignment" xmi:id="_p-zWFRBQEeGZ49VSHcJZNw" varRef="_p39HMxBQEeGZ49VSHcJZNw">
-                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_p-zWFhBQEeGZ49VSHcJZNw" value="true"/>
+                <effect xsi:type="stext:ReactionEffect" xmi:id="_Zer5pBqLEeGkDZRZy8Mgeg">
+                  <actions xsi:type="stext:Assignment" xmi:id="_Zer5pRqLEeGkDZRZy8Mgeg" varRef="_ZdMr4hqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:PrimitiveValueExpression" xmi:id="_Zer5phqLEeGkDZRZy8Mgeg">
+                      <value xsi:type="stext:BoolLiteral" xmi:id="_Zer5pxqLEeGkDZRZy8Mgeg" value="true"/>
+                    </expression>
+                  </actions>
+                </effect>
+              </declarations>
+              <declarations xsi:type="stext:LocalReaction" xmi:id="_Zer5qBqLEeGkDZRZy8Mgeg">
+                <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Zer5qRqLEeGkDZRZy8Mgeg">
+                  <triggers xsi:type="stext:TimeEventSpec" xmi:id="_Zer5qhqLEeGkDZRZy8Mgeg" type="every" value="500" unit="ms"/>
+                </trigger>
+                <effect xsi:type="stext:ReactionEffect" xmi:id="_Zer5qxqLEeGkDZRZy8Mgeg">
+                  <actions xsi:type="stext:Assignment" xmi:id="_Zer5rBqLEeGkDZRZy8Mgeg" varRef="_ZdMr4hqLEeGkDZRZy8Mgeg">
+                    <expression xsi:type="stext:LogicalNotExpression" xmi:id="_Zer5rRqLEeGkDZRZy8Mgeg">
+                      <operand xsi:type="stext:ElementReferenceExpression" xmi:id="_Zer5rhqLEeGkDZRZy8Mgeg" value="_ZdMr4hqLEeGkDZRZy8Mgeg"/>
+                    </expression>
                   </actions>
                 </effect>
               </declarations>
@@ -616,12 +673,12 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_MGCXkRBFEeGQ0KsLDV4EFg" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_MGCXkhBFEeGQ0KsLDV4EFg"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_MGMIlBBFEeGQ0KsLDV4EFg"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_MGCXkxBFEeGQ0KsLDV4EFg" x="944" y="204" width="311" height="286"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_MGCXkxBFEeGQ0KsLDV4EFg" x="944" y="204" width="341" height="286"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_NPjBixA-EeGQ0KsLDV4EFg"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="_NPjBhRA-EeGQ0KsLDV4EFg" fontName="Verdana" fillColor="15790320" lineColor="12632256"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_NPjBjBA-EeGQ0KsLDV4EFg" x="220" y="10" width="1286" height="811"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_NPjBjBA-EeGQ0KsLDV4EFg" x="220" y="10" width="1307" height="811"/>
     </children>
     <children xsi:type="notation:Shape" xmi:id="_NPsyjxA-EeGQ0KsLDV4EFg" type="StatechartText" fontName="Verdana" lineColor="4210752">
       <children xsi:type="notation:DecorationNode" xmi:id="_NPsykRA-EeGQ0KsLDV4EFg" type="StatechartName">
@@ -815,17 +872,6 @@
       <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="__O1aohBPEeGQ0KsLDV4EFg" points="[-4, -4, 180, 0]$[-172, -6, 12, -2]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="__PSGkBBPEeGQ0KsLDV4EFg" id="(0.006430868167202572,0.44405594405594406)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="__PSGkRBPEeGQ0KsLDV4EFg" id="(0.9929906542056075,0.40804597701149425)"/>
-    </edges>
-    <edges xmi:id="_Lp4mEBBQEeGQ0KsLDV4EFg" type="Transition" element="_Lpu1EBBQEeGQ0KsLDV4EFg" source="_BV6ncBBGEeGQ0KsLDV4EFg" target="_BV6ncBBGEeGQ0KsLDV4EFg">
-      <children xsi:type="notation:DecorationNode" xmi:id="_Lp4mFBBQEeGQ0KsLDV4EFg" type="TransitionExpression">
-        <styles xsi:type="notation:ShapeStyle" xmi:id="_Lp4mFRBQEeGQ0KsLDV4EFg"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_Lp4mFhBQEeGQ0KsLDV4EFg" x="64" y="-17"/>
-      </children>
-      <styles xsi:type="notation:ConnectorStyle" xmi:id="_Lp4mERBQEeGQ0KsLDV4EFg" lineColor="4210752"/>
-      <styles xsi:type="notation:FontStyle" xmi:id="_Lp4mExBQEeGQ0KsLDV4EFg" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_Lp4mEhBQEeGQ0KsLDV4EFg" points="[2, 0, 125, -21]$[19, 0, 142, -21]$[19, 48, 142, 27]$[-123, 48, 0, 27]$[-123, 30, 0, 9]"/>
-      <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_LqVSABBQEeGQ0KsLDV4EFg" id="(0.9912280701754386,0.5161290322580645)"/>
-      <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_LqVSARBQEeGQ0KsLDV4EFg" id="(0.4517543859649123,0.8548387096774194)"/>
     </edges>
   </notation:Diagram>
 </xmi:XMI>
