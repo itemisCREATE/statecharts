@@ -15,11 +15,24 @@ String toCCode(Expression statement) :
  
 String toCCode(Statement statement) : 
 	null; //polymorphic placeholder (abstract rule)
+
+String toCCode(Literal lit) :
+   "Unknown Literal Type" ;
+
+String toCCode(BoolLiteral bLit) :
+   (bLit.value == true) ? "bool_true" : "bool_false"; 
+
+String toCCode(IntLiteral iLit) :
+	iLit.value.toString();
  
+String toCCode(RealLiteral rLit) :
+	rLit.value.toString();
+
+String toCCode(HexLiteral hLit) :
+	hLit.value.toString();
+
 String toCCode(PrimitiveValueExpression primValue) :
-	(primValue.value == "true" ? "bool_true" :
-	(primValue.value == "false" ? "bool_false" :
-	primValue.value ));
+	primValue.value.toCCode();
 
 /* Assignment */
 String toCCode(Assignment assignment) :
@@ -41,7 +54,8 @@ String toCCode(Assignment assignment) :
 /* EventRaising */
 String toCCode(EventRaising eventRaising) :
 	((eventRaising.value == null)?"":
-	"((" + eventRaising.event.name + "*) handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.name + ")->value = " + eventRaising.value.toCCode() + ";") + 
+	"((" + eventRaising.event.name + "*) handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.name + ")->value = " 
+	+ eventRaising.value.toCCode() + ";") + 
 	" statemachine_cy_setEvent(&handle->base, handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.name + "); ";
 //  "{ _Event* ev = eventPool_createEvent(handle->base.eventPool, ev_"+eventRaising.event.name+"); if (ev) { " + eventRaising.addValue() + "statemachine_cy_setEvent(&handle->base, ev); } }";
 

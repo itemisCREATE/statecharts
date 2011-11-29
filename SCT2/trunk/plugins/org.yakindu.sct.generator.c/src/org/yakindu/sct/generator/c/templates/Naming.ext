@@ -55,9 +55,14 @@ String interfaceClassName(InterfaceScope this) : this.getExecutionFlow().name.to
 String interfaceObjectName(InterfaceScope this) : "interface" + ((this.name == null)?"":this.name.toFirstUpper());
 
 String getEventEnumName(EventDefinition this) : "ev_" + this.name.toFirstLower();
+String getEventEnumName(TimeEvent this) : "ev_" + this.name.toFirstLower();
 
+String getBoolTrue() : "bool_true";
+String getBoolFalse() : "bool_false";
+
+/*
 String correctLValue(String literal) :
     (literal == "true" ? "bool_true" :
 	(literal == "false" ? "bool_false" :
 	literal ));
-    
+*/  

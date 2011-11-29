@@ -22,12 +22,17 @@ Templates for the main statechart cpp file.
 
 #include "Event.h"
 
+«REM» lost things:
+  ev_«((EventDefinition)ev).name.toLowerCase()»,
+  ev_«((TimeEvent)ev).name.toLowerCase()»,
+«ENDREM»
+
 typedef enum {
 «FOREACH this.declaredEvents() AS ev -»
-  ev_«((EventDefinition)ev).name.toLowerCase()»,
+  «((EventDefinition)ev).getEventEnumName()»,
 «ENDFOREACH -»
 «FOREACH this.declaredTimerEvents() AS ev -»
-  ev_«((TimeEvent)ev).name.toLowerCase()»,
+  «((TimeEvent)ev).getEventEnumName()»,
 «ENDFOREACH -»
   event_last
 } EventID;
