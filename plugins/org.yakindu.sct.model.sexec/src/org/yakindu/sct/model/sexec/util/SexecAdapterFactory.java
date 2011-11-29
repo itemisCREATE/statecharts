@@ -14,7 +14,6 @@ import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
-import org.yakindu.sct.model.sexec.Cycle;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -91,20 +90,12 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	protected SexecSwitch<Adapter> modelSwitch =
 		new SexecSwitch<Adapter>() {
 			@Override
-			public Adapter caseExecutionFlow(ExecutionFlow object) {
-				return createExecutionFlowAdapter();
-			}
-			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
 			}
 			@Override
-			public Adapter caseStateVector(StateVector object) {
-				return createStateVectorAdapter();
-			}
-			@Override
-			public Adapter caseTimeEvent(TimeEvent object) {
-				return createTimeEventAdapter();
+			public Adapter caseExecutionFlow(ExecutionFlow object) {
+				return createExecutionFlowAdapter();
 			}
 			@Override
 			public Adapter caseExecutionState(ExecutionState object) {
@@ -115,16 +106,20 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createReactionAdapter();
 			}
 			@Override
+			public Adapter caseStateVector(StateVector object) {
+				return createStateVectorAdapter();
+			}
+			@Override
+			public Adapter caseTimeEvent(TimeEvent object) {
+				return createTimeEventAdapter();
+			}
+			@Override
 			public Adapter caseStep(Step object) {
 				return createStepAdapter();
 			}
 			@Override
 			public Adapter caseSequence(Sequence object) {
 				return createSequenceAdapter();
-			}
-			@Override
-			public Adapter caseCycle(Cycle object) {
-				return createCycleAdapter();
 			}
 			@Override
 			public Adapter caseCheck(Check object) {
@@ -259,20 +254,6 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.Cycle <em>Cycle</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.sexec.Cycle
-	 * @generated
-	 */
-	public Adapter createCycleAdapter() {
 		return null;
 	}
 

@@ -5,7 +5,6 @@ import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.*;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.Call;
-import org.yakindu.sct.model.sexec.Cycle;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -454,9 +453,9 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		ExecutionState s2 = flow.getStates().get(1);
 		assertEquals(tsc.s1.getName(), s1.getSimpleName());
 		assertEquals(tsc.s2.getName(), s2.getSimpleName());
-		assertNotNull(s1.getCycle());
+		assertNotNull(s1.getReactSequence());
 		
-		If _if = (If) s1.getCycle().getSteps().get(0);
+		If _if = (If) s1.getReactSequence().getSteps().get(0);
 		assertNotNull(_if.getThenStep());
 		assertTrue(_if.getThenStep() instanceof Call);
 		assertNull(_if.getElseStep());
@@ -473,9 +472,9 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		// test state with two outgoing transitions
 		ExecutionState s3 = flow.getStates().get(2);
 		assertEquals(tsc.s3.getName(), s3.getSimpleName());
-		assertNotNull(s3.getCycle());
+		assertNotNull(s3.getReactSequence());
 		
-		_if = (If) s3.getCycle().getSteps().get(0);
+		_if = (If) s3.getReactSequence().getSteps().get(0);
 		assertNotNull(_if.getThenStep());
 		assertTrue(_if.getThenStep() instanceof Call);
 		assertNotNull(_if.getElseStep());
@@ -534,9 +533,9 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		
 		assertEquals(4, s1.getReactions().size());
 		
-		assertNotNull(s1.getCycle());
+		assertNotNull(s1.getReactSequence());
 		
-		If _if = (If) s1.getCycle().getSteps().get(0);
+		If _if = (If) s1.getReactSequence().getSteps().get(0);
 		assertNotNull(_if.getThenStep());
 		assertTrue(_if.getThenStep() instanceof Call);
 		assertNotNull(_if.getElseStep());
@@ -619,10 +618,10 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		
 		assertEquals(3, s1.getReactions().size());
 		
-		assertNotNull(s1.getCycle());
+		assertNotNull(s1.getReactSequence());
 		
 
-		Sequence _seq = (Sequence) s1.getCycle().getSteps().get(0);
+		Sequence _seq = (Sequence) s1.getReactSequence().getSteps().get(0);
 		assertEquals(3, _seq.getSteps().size());
 		
 		// check first local reaction
@@ -669,8 +668,8 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		ExecutionState s1 = flow.getStates().get(0);
 		
 		assertEquals(0, s1.getReactions().size());		
-		assertNotNull(s1.getCycle());
-		assertEquals(0, s1.getCycle().getSteps().size());		
+		assertNotNull(s1.getReactSequence());
+		assertEquals(0, s1.getReactSequence().getSteps().size());		
 	}
 
 	
@@ -694,8 +693,8 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		ExecutionState s1 = flow.getStates().get(0);
 		
 		assertEquals(0, s1.getReactions().size());		
-		assertNotNull(s1.getCycle());
-		assertEquals(0, s1.getCycle().getSteps().size());		
+		assertNotNull(s1.getReactSequence());
+		assertEquals(0, s1.getReactSequence().getSteps().size());		
 	}
 
 
@@ -720,10 +719,10 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		ExecutionState s1 = flow.getStates().get(0);
 		
 		assertEquals(1, s1.getReactions().size());		
-		assertNotNull(s1.getCycle());
-		assertEquals(1, s1.getCycle().getSteps().size());	
+		assertNotNull(s1.getReactSequence());
+		assertEquals(1, s1.getReactSequence().getSteps().size());	
 	
-		Sequence _seq = (Sequence) s1.getCycle().getSteps().get(0);
+		Sequence _seq = (Sequence) s1.getReactSequence().getSteps().get(0);
 		
 		If _lr1 = (If) _seq.getSteps().get(0);
 		assertTrue(_lr1.getCheck().getCondition() instanceof ElementReferenceExpression);
@@ -800,7 +799,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertEquals("sc.r.s2.r.s6", _s6.getName());
 		
 			
-		Cycle cycle = _s4.getCycle();
+		Sequence cycle = _s4.getReactSequence();
 		
 		Sequence _seq = (Sequence) cycle.getSteps().get(0);
 		
@@ -809,7 +808,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertCall(_if.getThenStep(), _s1.getReactions().get(0).getEffect());
 		
 		// second entry is the s3 cycle with the transition reaction
-		cycle = (Cycle) _seq.getSteps().get(1);
+		cycle = (Sequence) _seq.getSteps().get(1);
 		_if = (If) cycle.getSteps().get(0);
 		assertCall(_if.getThenStep(), _s3.getReactions().get(0).getEffect());
 		assertTrue(_s3.getReactions().get(0).isTransition());
@@ -817,7 +816,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 				
 		// third is the s4 cycle with the transition reaction
 		_seq = (Sequence) _if.getElseStep();
-		cycle = (Cycle) _seq.getSteps().get(0);
+		cycle = (Sequence) _seq.getSteps().get(0);
 		_if = (If) cycle.getSteps().get(0);
 		assertCall(_if.getThenStep(), _s4.getReactions().get(0).getEffect());
 		assertTrue(_s4.getReactions().get(0).isTransition());
@@ -900,7 +899,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertNull(_fs.getEntryAction());
 		assertNull(_fs.getExitAction());
 			
-		Cycle cycle = _fs.getCycle();
+		Sequence cycle = _fs.getReactSequence();
 		
 		Sequence _seq = (Sequence) cycle.getSteps().get(0);
 		
@@ -909,12 +908,12 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertCall(_if.getThenStep(), _s1.getReactions().get(0).getEffect());
 		
 		// second entry is the s3 cycle with the transition reaction
-		cycle = (Cycle) _seq.getSteps().get(1);
+		cycle = (Sequence) _seq.getSteps().get(1);
 		_if = (If) cycle.getSteps().get(0);
 		assertCall(_if.getThenStep(), _s3.getReactions().get(0).getEffect());
 		assertTrue(_s3.getReactions().get(0).isTransition());
 		assertEquals(1,	cycle.getSteps().size());
-		assertNull( _if.getElseStep() );
+		assertNotNull( _if.getElseStep() );
 
 	}
 

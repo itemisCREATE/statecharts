@@ -94,14 +94,14 @@ void «this.StName()»::«r.effect.functionName()»() {
   «ENDFOREACH»
 «ENDDEFINE»
 
-«DEFINE CycleCode FOR Cycle» 
+«DEFINE ReactCode FOR Sequence» 
 «EXPAND ActionCode FOREACH this.steps»
 «ENDDEFINE»
 
-«DEFINE CycleMethodsImplement FOR ExecutionState»
-void «StNameEv()»::cycle_«this.simpleName»(const _Event& ev)
+«DEFINE ReactMethodsImplement FOR ExecutionState»
+void «StNameEv()»::react_«this.simpleName»(const _Event& ev)
 {
-	«EXPAND CycleCode FOR cycle»
+	«EXPAND ReactCode FOR reactSequence»
 }
 «ENDDEFINE»
 
@@ -138,7 +138,7 @@ void «StNameEv()»::«this.exitAction.exitActionFunctionName()»()
 
 «EXPAND StatementMethodsImplement FOREACH this.states»
 
-«EXPAND CycleMethodsImplement FOREACH this.states»
+«EXPAND ReactMethodsImplement FOREACH this.states»
 
 «EXPAND EnterMethodImplement FOREACH this.states»
 
@@ -172,7 +172,7 @@ void «StNameEv()»::_runCycle(Event ev)
 		switch(state[i]) {
 	«FOREACH this.states AS state»
 	    case _«state.simpleName»:
-	        cycle_«state.simpleName»(*ev);
+	        react_«state.simpleName»(*ev);
 	        break;
 	«ENDFOREACH»
 		default:

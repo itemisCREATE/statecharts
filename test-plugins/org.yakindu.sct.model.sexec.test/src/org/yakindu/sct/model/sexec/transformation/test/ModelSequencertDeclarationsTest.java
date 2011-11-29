@@ -103,7 +103,7 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 		
 		assertEquals(2, flow.getStates().size());
 		assertEquals(s1.getName(), flow.getStates().get(0).getSimpleName());
-		If _if = (If) flow.getStates().get(0).getCycle().getSteps().get(0);
+		If _if = (If) flow.getStates().get(0).getReactSequence().getSteps().get(0);
 
 		ElementReferenceExpression _ere = (ElementReferenceExpression) _if.getCheck().getCondition();
 		assertSame(_e1, _ere.getValue());

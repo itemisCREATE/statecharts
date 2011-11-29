@@ -18,12 +18,13 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#getSimpleName <em>Simple Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#isLeaf <em>Leaf</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#getCycle <em>Cycle</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#getReactSequence <em>React Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#getEntryAction <em>Entry Action</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#getExitAction <em>Exit Action</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#getEnterSequence <em>Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#getExitSequence <em>Exit Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#getStateVector <em>State Vector</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,32 +58,6 @@ public interface ExecutionState extends NamedElement {
 	 * @generated
 	 */
 	void setSimpleName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Cycle</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Cycle</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Cycle</em>' containment reference.
-	 * @see #setCycle(Cycle)
-	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionState_Cycle()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Cycle getCycle();
-
-	/**
-	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.ExecutionState#getCycle <em>Cycle</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Cycle</em>' containment reference.
-	 * @see #getCycle()
-	 * @generated
-	 */
-	void setCycle(Cycle value);
 
 	/**
 	 * Returns the value of the '<em><b>Reactions</b></em>' containment reference list.
@@ -205,6 +180,32 @@ public interface ExecutionState extends NamedElement {
 	void setExitSequence(Sequence value);
 
 	/**
+	 * Returns the value of the '<em><b>State Vector</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>State Vector</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>State Vector</em>' containment reference.
+	 * @see #setStateVector(StateVector)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionState_StateVector()
+	 * @model containment="true"
+	 * @generated
+	 */
+	StateVector getStateVector();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.ExecutionState#getStateVector <em>State Vector</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>State Vector</em>' containment reference.
+	 * @see #getStateVector()
+	 * @generated
+	 */
+	void setStateVector(StateVector value);
+
+	/**
 	 * Returns the value of the '<em><b>Leaf</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
@@ -230,5 +231,31 @@ public interface ExecutionState extends NamedElement {
 	 * @generated
 	 */
 	void setLeaf(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>React Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>React Sequence</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>React Sequence</em>' containment reference.
+	 * @see #setReactSequence(Sequence)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionState_ReactSequence()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Sequence getReactSequence();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.ExecutionState#getReactSequence <em>React Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>React Sequence</em>' containment reference.
+	 * @see #getReactSequence()
+	 * @generated
+	 */
+	void setReactSequence(Sequence value);
 
 } // ExecutionState

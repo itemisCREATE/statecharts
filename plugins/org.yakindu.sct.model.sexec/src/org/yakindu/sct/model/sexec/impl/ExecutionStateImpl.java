@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.yakindu.sct.model.sexec.Cycle;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecPackage;
+import org.yakindu.sct.model.sexec.StateVector;
 import org.yakindu.sct.model.sexec.Step;
 
 /**
@@ -32,12 +32,13 @@ import org.yakindu.sct.model.sexec.Step;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getSimpleName <em>Simple Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#isLeaf <em>Leaf</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getCycle <em>Cycle</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getReactSequence <em>React Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getEntryAction <em>Entry Action</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getExitAction <em>Exit Action</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getEnterSequence <em>Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getExitSequence <em>Exit Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getStateVector <em>State Vector</em>}</li>
  * </ul>
  * </p>
  *
@@ -85,14 +86,14 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	protected boolean leaf = LEAF_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getCycle() <em>Cycle</em>}' containment reference.
+	 * The cached value of the '{@link #getReactSequence() <em>React Sequence</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCycle()
+	 * @see #getReactSequence()
 	 * @generated
 	 * @ordered
 	 */
-	protected Cycle cycle;
+	protected Sequence reactSequence;
 
 	/**
 	 * The cached value of the '{@link #getReactions() <em>Reactions</em>}' containment reference list.
@@ -145,6 +146,16 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	protected Sequence exitSequence;
 
 	/**
+	 * The cached value of the '{@link #getStateVector() <em>State Vector</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStateVector()
+	 * @generated
+	 * @ordered
+	 */
+	protected StateVector stateVector;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -182,49 +193,6 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 		simpleName = newSimpleName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__SIMPLE_NAME, oldSimpleName, simpleName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Cycle getCycle() {
-		return cycle;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetCycle(Cycle newCycle, NotificationChain msgs) {
-		Cycle oldCycle = cycle;
-		cycle = newCycle;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__CYCLE, oldCycle, newCycle);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCycle(Cycle newCycle) {
-		if (newCycle != cycle) {
-			NotificationChain msgs = null;
-			if (cycle != null)
-				msgs = ((InternalEObject)cycle).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_STATE__CYCLE, null, msgs);
-			if (newCycle != null)
-				msgs = ((InternalEObject)newCycle).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_STATE__CYCLE, null, msgs);
-			msgs = basicSetCycle(newCycle, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__CYCLE, newCycle, newCycle));
 	}
 
 	/**
@@ -416,6 +384,49 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public StateVector getStateVector() {
+		return stateVector;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetStateVector(StateVector newStateVector, NotificationChain msgs) {
+		StateVector oldStateVector = stateVector;
+		stateVector = newStateVector;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__STATE_VECTOR, oldStateVector, newStateVector);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStateVector(StateVector newStateVector) {
+		if (newStateVector != stateVector) {
+			NotificationChain msgs = null;
+			if (stateVector != null)
+				msgs = ((InternalEObject)stateVector).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_STATE__STATE_VECTOR, null, msgs);
+			if (newStateVector != null)
+				msgs = ((InternalEObject)newStateVector).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_STATE__STATE_VECTOR, null, msgs);
+			msgs = basicSetStateVector(newStateVector, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__STATE_VECTOR, newStateVector, newStateVector));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isLeaf() {
 		return leaf;
 	}
@@ -437,11 +448,54 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Sequence getReactSequence() {
+		return reactSequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetReactSequence(Sequence newReactSequence, NotificationChain msgs) {
+		Sequence oldReactSequence = reactSequence;
+		reactSequence = newReactSequence;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__REACT_SEQUENCE, oldReactSequence, newReactSequence);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReactSequence(Sequence newReactSequence) {
+		if (newReactSequence != reactSequence) {
+			NotificationChain msgs = null;
+			if (reactSequence != null)
+				msgs = ((InternalEObject)reactSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_STATE__REACT_SEQUENCE, null, msgs);
+			if (newReactSequence != null)
+				msgs = ((InternalEObject)newReactSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_STATE__REACT_SEQUENCE, null, msgs);
+			msgs = basicSetReactSequence(newReactSequence, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__REACT_SEQUENCE, newReactSequence, newReactSequence));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SexecPackage.EXECUTION_STATE__CYCLE:
-				return basicSetCycle(null, msgs);
+			case SexecPackage.EXECUTION_STATE__REACT_SEQUENCE:
+				return basicSetReactSequence(null, msgs);
 			case SexecPackage.EXECUTION_STATE__REACTIONS:
 				return ((InternalEList<?>)getReactions()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
@@ -452,6 +506,8 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 				return basicSetEnterSequence(null, msgs);
 			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
 				return basicSetExitSequence(null, msgs);
+			case SexecPackage.EXECUTION_STATE__STATE_VECTOR:
+				return basicSetStateVector(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -468,8 +524,8 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 				return getSimpleName();
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				return isLeaf();
-			case SexecPackage.EXECUTION_STATE__CYCLE:
-				return getCycle();
+			case SexecPackage.EXECUTION_STATE__REACT_SEQUENCE:
+				return getReactSequence();
 			case SexecPackage.EXECUTION_STATE__REACTIONS:
 				return getReactions();
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
@@ -480,6 +536,8 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 				return getEnterSequence();
 			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
 				return getExitSequence();
+			case SexecPackage.EXECUTION_STATE__STATE_VECTOR:
+				return getStateVector();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -499,8 +557,8 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				setLeaf((Boolean)newValue);
 				return;
-			case SexecPackage.EXECUTION_STATE__CYCLE:
-				setCycle((Cycle)newValue);
+			case SexecPackage.EXECUTION_STATE__REACT_SEQUENCE:
+				setReactSequence((Sequence)newValue);
 				return;
 			case SexecPackage.EXECUTION_STATE__REACTIONS:
 				getReactions().clear();
@@ -517,6 +575,9 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 				return;
 			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
 				setExitSequence((Sequence)newValue);
+				return;
+			case SexecPackage.EXECUTION_STATE__STATE_VECTOR:
+				setStateVector((StateVector)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -536,8 +597,8 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				setLeaf(LEAF_EDEFAULT);
 				return;
-			case SexecPackage.EXECUTION_STATE__CYCLE:
-				setCycle((Cycle)null);
+			case SexecPackage.EXECUTION_STATE__REACT_SEQUENCE:
+				setReactSequence((Sequence)null);
 				return;
 			case SexecPackage.EXECUTION_STATE__REACTIONS:
 				getReactions().clear();
@@ -553,6 +614,9 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 				return;
 			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
 				setExitSequence((Sequence)null);
+				return;
+			case SexecPackage.EXECUTION_STATE__STATE_VECTOR:
+				setStateVector((StateVector)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -570,8 +634,8 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 				return SIMPLE_NAME_EDEFAULT == null ? simpleName != null : !SIMPLE_NAME_EDEFAULT.equals(simpleName);
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				return leaf != LEAF_EDEFAULT;
-			case SexecPackage.EXECUTION_STATE__CYCLE:
-				return cycle != null;
+			case SexecPackage.EXECUTION_STATE__REACT_SEQUENCE:
+				return reactSequence != null;
 			case SexecPackage.EXECUTION_STATE__REACTIONS:
 				return reactions != null && !reactions.isEmpty();
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
@@ -582,6 +646,8 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 				return enterSequence != null;
 			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
 				return exitSequence != null;
+			case SexecPackage.EXECUTION_STATE__STATE_VECTOR:
+				return stateVector != null;
 		}
 		return super.eIsSet(featureID);
 	}

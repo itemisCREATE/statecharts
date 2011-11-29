@@ -53,9 +53,9 @@ protected:
 	  «ENDFOREACH -»
 	«ENDFOREACH -»
 
-	/* cycles */
+	/* state reactions */
 	«FOREACH states AS state -»
-	void cycle_«state.simpleName»();
+	void react_«state.simpleName»();
 	«ENDFOREACH -»
 	
 	/* entrys */

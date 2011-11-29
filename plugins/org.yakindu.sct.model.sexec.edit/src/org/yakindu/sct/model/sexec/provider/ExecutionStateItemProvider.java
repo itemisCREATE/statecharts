@@ -123,12 +123,13 @@ public class ExecutionStateItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__CYCLE);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__REACT_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__REACTIONS);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__ENTER_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__EXIT_SEQUENCE);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__STATE_VECTOR);
 		}
 		return childrenFeatures;
 	}
@@ -187,12 +188,13 @@ public class ExecutionStateItemProvider
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case SexecPackage.EXECUTION_STATE__CYCLE:
+			case SexecPackage.EXECUTION_STATE__REACT_SEQUENCE:
 			case SexecPackage.EXECUTION_STATE__REACTIONS:
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
 			case SexecPackage.EXECUTION_STATE__EXIT_ACTION:
 			case SexecPackage.EXECUTION_STATE__ENTER_SEQUENCE:
 			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
+			case SexecPackage.EXECUTION_STATE__STATE_VECTOR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -212,8 +214,8 @@ public class ExecutionStateItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_STATE__CYCLE,
-				 SexecFactory.eINSTANCE.createCycle()));
+				(SexecPackage.Literals.EXECUTION_STATE__REACT_SEQUENCE,
+				 SexecFactory.eINSTANCE.createSequence()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -228,11 +230,6 @@ public class ExecutionStateItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION,
-				 SexecFactory.eINSTANCE.createCycle()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION,
 				 SexecFactory.eINSTANCE.createCheck()));
 
 		newChildDescriptors.add
@@ -284,11 +281,6 @@ public class ExecutionStateItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
-				 SexecFactory.eINSTANCE.createCycle()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -347,18 +339,13 @@ public class ExecutionStateItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_STATE__ENTER_SEQUENCE,
-				 SexecFactory.eINSTANCE.createCycle()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__EXIT_SEQUENCE,
 				 SexecFactory.eINSTANCE.createSequence()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_STATE__EXIT_SEQUENCE,
-				 SexecFactory.eINSTANCE.createCycle()));
+				(SexecPackage.Literals.EXECUTION_STATE__STATE_VECTOR,
+				 SexecFactory.eINSTANCE.createStateVector()));
 	}
 
 	/**
@@ -373,7 +360,7 @@ public class ExecutionStateItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == SexecPackage.Literals.EXECUTION_STATE__CYCLE ||
+			childFeature == SexecPackage.Literals.EXECUTION_STATE__REACT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION ||
 			childFeature == SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION ||
 			childFeature == SexecPackage.Literals.EXECUTION_STATE__ENTER_SEQUENCE ||
