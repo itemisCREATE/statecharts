@@ -9,7 +9,6 @@ String scName(Expression statement) : ((ExecutionFlow)statement.eRootContainer).
 
 List[EventDefinition] declaredEvents(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(EventDefinition);
 List[TimeEvent] declaredTimerEvents(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(TimeEvent);
-
 List[VariableDefinition] declaredVariables(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(VariableDefinition);
 
 String test(NamedElement obj) :  "";
