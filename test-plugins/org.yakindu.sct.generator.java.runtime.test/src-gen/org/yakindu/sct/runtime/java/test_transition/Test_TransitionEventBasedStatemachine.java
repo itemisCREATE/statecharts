@@ -16,13 +16,14 @@ import java.util.Queue;
 
 import org.yakindu.sct.runtime.java.Event;
 
-public class Test_TransitionEventBasedStatemachine extends Test_TransitionAbstractBaseStatemachine {
+public class Test_TransitionEventBasedStatemachine
+		extends
+			Test_TransitionAbstractBaseStatemachine {
 
 	public Test_TransitionEventBasedStatemachine() {
 		super(new LinkedList<Event>());
 	}
-	
-	@Override
+
 	protected Queue<Event> getOccuredEvents() {
 		return (Queue<Event>) super.getOccuredEvents();
 	}

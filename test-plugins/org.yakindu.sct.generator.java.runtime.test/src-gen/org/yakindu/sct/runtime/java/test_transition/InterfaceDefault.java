@@ -4,28 +4,26 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ *
  * Contributors:
- * 	committers of YAKINDU - initial API and implementation
- * 
+ *     committers of YAKINDU - initial API and implementation
  */
 package org.yakindu.sct.runtime.java.test_transition;
 
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.INotificationSender;
 
-
 public interface InterfaceDefault extends INotificationSender {
-	
+
 	public void raiseEvent5();
 	public void raiseEvent5(boolean value);
 	public void raiseEvent6();
 	public boolean isRaisedEvent7();
-		
+
 	public Event getEventEvent7();
-	
-	
+
 	public int getVarI();
-	public void setVarI(int value);	
+	public void setVarI(int value);
 	public double getVarJ();
-	public void setVarJ(double value);	
+	public void setVarJ(double value);
 }

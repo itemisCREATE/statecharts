@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sexec:ExecutionFlow xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sexec="http://www.yakindu.org/sct/sexec/1.0.0" xmlns:stext="http://www.yakindu.org/sct/statechart/SText" name="Test_LocalActions">
+  <scopes xsi:type="stext:InterfaceScope">
+    <declarations xsi:type="stext:EventDefinition" name="Event1" direction="in"/>
+    <declarations xsi:type="stext:EventDefinition" name="Event2" direction="in"/>
+    <declarations xsi:type="stext:EventDefinition" name="Event3" direction="in"/>
+    <declarations xsi:type="stext:EventDefinition" name="Event4" direction="in"/>
+    <declarations xsi:type="stext:VariableDefinition" name="i" type="integer"/>
+    <declarations xsi:type="stext:VariableDefinition" name="j" type="integer"/>
+    <declarations xsi:type="stext:VariableDefinition" name="c" type="integer"/>
+  </scopes>
+  <scopes>
+    <declarations xsi:type="sexec:TimeEvent" name="State1_time_event_0" periodic="true"/>
+    <declarations xsi:type="sexec:TimeEvent" name="State2_time_event_0"/>
+  </scopes>
+  <states name="Test_LocalActions.mainregion.State1" simpleName="State1" leaf="true">
+    <cycle>
+      <steps xsi:type="sexec:If">
+        <check xsi:type="sexec:CheckRef" check="//@states.0/@reactions.0/@check"/>
+        <thenStep xsi:type="sexec:Call" step="//@states.0/@reactions.0/@effect"/>
+        <elseStep xsi:type="sexec:Sequence">
+          <steps xsi:type="sexec:If">
+            <check xsi:type="sexec:CheckRef" check="//@states.0/@reactions.1/@check"/>
+            <thenStep xsi:type="sexec:Call" step="//@states.0/@reactions.1/@effect"/>
+          </steps>
+          <steps xsi:type="sexec:If">
+            <check xsi:type="sexec:CheckRef" check="//@states.0/@reactions.2/@check"/>
+            <thenStep xsi:type="sexec:Call" step="//@states.0/@reactions.2/@effect"/>
+          </steps>
+          <steps xsi:type="sexec:If">
+            <check xsi:type="sexec:CheckRef" check="//@states.0/@reactions.3/@check"/>
+            <thenStep xsi:type="sexec:Call" step="//@states.0/@reactions.3/@effect"/>
+          </steps>
+        </elseStep>
+      </steps>
+    </cycle>
+    <reactions name="tr0" transition="true">
+      <check name="tr0">
+        <condition xsi:type="stext:ElementReferenceExpression" value="//@scopes.0/@declarations.0"/>
+      </check>
+      <effect xsi:type="sexec:Sequence">
+        <steps xsi:type="sexec:Call" step="//@states.0/@exitSequence"/>
+        <steps xsi:type="sexec:Call" step="//@states.1/@enterSequence"/>
+      </effect>
+    </reactions>
+    <reactions name="lr2">
+      <check name="lr2">
+        <condition xsi:type="stext:PrimitiveValueExpression">
+          <value xsi:type="stext:BoolLiteral" value="true"/>
+        </condition>
+      </check>
+      <effect xsi:type="sexec:Sequence" name="reaction_action">
+        <steps xsi:type="sexec:Execution">
+          <statement xsi:type="stext:Assignment" varRef="//@scopes.0/@declarations.4">
+            <expression xsi:type="stext:PrimitiveValueExpression">
+              <value xsi:type="stext:IntLiteral" value="2"/>
+            </expression>
+          </statement>
+        </steps>
+      </effect>
+    </reactions>
+    <reactions name="lr3">
+      <check name="lr3">
+        <condition xsi:type="stext:ElementReferenceExpression" value="//@scopes.0/@declarations.1"/>
+      </check>
+      <effect xsi:type="sexec:Sequence" name="reaction_action">
+        <steps xsi:type="sexec:Execution">
+          <statement xsi:type="stext:Assignment" varRef="//@scopes.0/@declarations.4">
+            <expression xsi:type="stext:PrimitiveValueExpression">
+              <value xsi:type="stext:IntLiteral" value="3"/>
+            </expression>
+          </statement>
+        </steps>
+      </effect>
+    </reactions>
+    <reactions name="lr4">
+      <check name="lr4">
+        <condition xsi:type="stext:ElementReferenceExpression" value="//@scopes.1/@declarations.0"/>
+      </check>
+      <effect xsi:type="sexec:Sequence" name="reaction_action">
+        <steps xsi:type="sexec:Execution">
+          <statement xsi:type="stext:Assignment" varRef="//@scopes.0/@declarations.6" operator="+=">
+            <expression xsi:type="stext:PrimitiveValueExpression">
+              <value xsi:type="stext:IntLiteral" value="1"/>
+            </expression>
+          </statement>
+        </steps>
+      </effect>
+    </reactions>
+    <entryAction xsi:type="sexec:Sequence" name="entryAction" comment="Entry action for state 'State1'.">
+      <steps xsi:type="sexec:ScheduleTimeEvent" timeEvent="//@scopes.1/@declarations.0">
+        <timeValue xsi:type="stext:PrimitiveValueExpression">
+          <value xsi:type="stext:IntLiteral" value="100"/>
+        </timeValue>
+      </steps>
+      <steps xsi:type="sexec:Sequence" name="reaction_action">
+        <steps xsi:type="sexec:Execution">
+          <statement xsi:type="stext:Assignment" varRef="//@scopes.0/@declarations.4">
+            <expression xsi:type="stext:PrimitiveValueExpression">
+              <value xsi:type="stext:IntLiteral" value="1"/>
+            </expression>
+          </statement>
+        </steps>
+      </steps>
+    </entryAction>
+    <exitAction xsi:type="sexec:Sequence" name="exitAction">
+      <steps xsi:type="sexec:UnscheduleTimeEvent" timeEvent="//@scopes.1/@declarations.0"/>
+      <steps xsi:type="sexec:Sequence" name="reaction_action">
+        <steps xsi:type="sexec:Execution">
+          <statement xsi:type="stext:Assignment" varRef="//@scopes.0/@declarations.4">
+            <expression xsi:type="stext:PrimitiveValueExpression">
+              <value xsi:type="stext:IntLiteral"/>
+            </expression>
+          </statement>
+        </steps>
+      </steps>
+    </exitAction>
+    <enterSequence name="enterSequence" comment="Default enter sequence for state State1">
+      <steps xsi:type="sexec:Call" step="//@states.0/@entryAction"/>
+      <steps xsi:type="sexec:EnterState" state="//@states.0"/>
+    </enterSequence>
+    <exitSequence name="exitSequence" comment="Default exit sequence for state State1">
+      <steps xsi:type="sexec:ExitState" state="//@states.0"/>
+      <steps xsi:type="sexec:Call" step="//@states.0/@exitAction"/>
+    </exitSequence>
+  </states>
+  <states name="Test_LocalActions.mainregion.State2" simpleName="State2" leaf="true">
+    <cycle>
+      <steps xsi:type="sexec:If">
+        <check xsi:type="sexec:CheckRef" check="//@states.1/@reactions.0/@check"/>
+        <thenStep xsi:type="sexec:Call" step="//@states.1/@reactions.0/@effect"/>
+        <elseStep xsi:type="sexec:Sequence">
+          <steps xsi:type="sexec:If">
+            <check xsi:type="sexec:CheckRef" check="//@states.1/@reactions.1/@check"/>
+            <thenStep xsi:type="sexec:Call" step="//@states.1/@reactions.1/@effect"/>
+          </steps>
+          <steps xsi:type="sexec:If">
+            <check xsi:type="sexec:CheckRef" check="//@states.1/@reactions.2/@check"/>
+            <thenStep xsi:type="sexec:Call" step="//@states.1/@reactions.2/@effect"/>
+          </steps>
+        </elseStep>
+      </steps>
+    </cycle>
+    <reactions name="tr0" transition="true">
+      <check name="tr0">
+        <condition xsi:type="stext:ElementReferenceExpression" value="//@scopes.0/@declarations.2"/>
+      </check>
+      <effect xsi:type="sexec:Sequence">
+        <steps xsi:type="sexec:Call" step="//@states.1/@exitSequence"/>
+        <steps xsi:type="sexec:Call" step="//@states.0/@enterSequence"/>
+      </effect>
+    </reactions>
+    <reactions name="lr2">
+      <check name="lr2">
+        <condition xsi:type="stext:LogicalOrExpression">
+          <leftOperand xsi:type="stext:ElementReferenceExpression" value="//@scopes.0/@declarations.1"/>
+          <rightOperand xsi:type="stext:ElementReferenceExpression" value="//@scopes.0/@declarations.3"/>
+        </condition>
+      </check>
+      <effect xsi:type="sexec:Sequence" name="reaction_action">
+        <steps xsi:type="sexec:Execution">
+          <statement xsi:type="stext:Assignment" varRef="//@scopes.0/@declarations.5">
+            <expression xsi:type="stext:PrimitiveValueExpression">
+              <value xsi:type="stext:IntLiteral" value="2"/>
+            </expression>
+          </statement>
+        </steps>
+      </effect>
+    </reactions>
+    <reactions name="lr3">
+      <check name="lr3">
+        <condition xsi:type="stext:ElementReferenceExpression" value="//@scopes.1/@declarations.1"/>
+      </check>
+      <effect xsi:type="sexec:Sequence" name="reaction_action">
+        <steps xsi:type="sexec:Execution">
+          <statement xsi:type="stext:Assignment" varRef="//@scopes.0/@declarations.5">
+            <expression xsi:type="stext:PrimitiveValueExpression">
+              <value xsi:type="stext:IntLiteral" value="3"/>
+            </expression>
+          </statement>
+        </steps>
+      </effect>
+    </reactions>
+    <entryAction xsi:type="sexec:Sequence" name="entryAction" comment="Entry action for state 'State2'.">
+      <steps xsi:type="sexec:ScheduleTimeEvent" timeEvent="//@scopes.1/@declarations.1">
+        <timeValue xsi:type="stext:PrimitiveValueExpression">
+          <value xsi:type="stext:IntLiteral" value="200"/>
+        </timeValue>
+      </steps>
+      <steps xsi:type="sexec:Sequence" name="reaction_action">
+        <steps xsi:type="sexec:Execution">
+          <statement xsi:type="stext:Assignment" varRef="//@scopes.0/@declarations.5">
+            <expression xsi:type="stext:PrimitiveValueExpression">
+              <value xsi:type="stext:IntLiteral" value="1"/>
+            </expression>
+          </statement>
+        </steps>
+      </steps>
+    </entryAction>
+    <exitAction xsi:type="sexec:Sequence" name="exitAction">
+      <steps xsi:type="sexec:UnscheduleTimeEvent" timeEvent="//@scopes.1/@declarations.1"/>
+      <steps xsi:type="sexec:Sequence" name="reaction_action">
+        <steps xsi:type="sexec:Execution">
+          <statement xsi:type="stext:Assignment" varRef="//@scopes.0/@declarations.5">
+            <expression xsi:type="stext:PrimitiveValueExpression">
+              <value xsi:type="stext:IntLiteral"/>
+            </expression>
+          </statement>
+        </steps>
+      </steps>
+    </exitAction>
+    <enterSequence name="enterSequence" comment="Default enter sequence for state State2">
+      <steps xsi:type="sexec:Call" step="//@states.1/@entryAction"/>
+      <steps xsi:type="sexec:EnterState" state="//@states.1"/>
+    </enterSequence>
+    <exitSequence name="exitSequence" comment="Default exit sequence for state State2">
+      <steps xsi:type="sexec:ExitState" state="//@states.1"/>
+      <steps xsi:type="sexec:Call" step="//@states.1/@exitAction"/>
+    </exitSequence>
+  </states>
+  <enterSequence name="enter" comment="Default enter sequence for statechart Test_LocalActions">
+    <steps xsi:type="sexec:Call" step="//@states.0/@enterSequence"/>
+  </enterSequence>
+  <stateVector/>
+</sexec:ExecutionFlow>

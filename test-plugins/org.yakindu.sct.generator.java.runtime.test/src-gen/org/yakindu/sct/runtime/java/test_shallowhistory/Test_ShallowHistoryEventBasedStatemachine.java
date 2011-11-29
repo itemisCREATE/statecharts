@@ -16,13 +16,14 @@ import java.util.Queue;
 
 import org.yakindu.sct.runtime.java.Event;
 
-public class Test_ShallowHistoryEventBasedStatemachine extends Test_ShallowHistoryAbstractBaseStatemachine {
+public class Test_ShallowHistoryEventBasedStatemachine
+		extends
+			Test_ShallowHistoryAbstractBaseStatemachine {
 
 	public Test_ShallowHistoryEventBasedStatemachine() {
 		super(new LinkedList<Event>());
 	}
-	
-	@Override
+
 	protected Queue<Event> getOccuredEvents() {
 		return (Queue<Event>) super.getOccuredEvents();
 	}

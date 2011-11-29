@@ -16,16 +16,18 @@ import java.util.Queue;
 
 import org.yakindu.sct.runtime.java.Event;
 
-public class InterfaceTestEventBasedStatemachine extends InterfaceTestAbstractBaseStatemachine {
+public class InterfaceTestEventBasedStatemachine
+		extends
+			InterfaceTestAbstractBaseStatemachine {
 
 	public InterfaceTestEventBasedStatemachine() {
 		super(new LinkedList<Event>());
 	}
-	
+
 	protected Queue<Event> getOccuredEvents() {
 		return (Queue<Event>) super.getOccuredEvents();
 	}
-	
+
 	public void runCycle() {
 		if (eventOccured()) {
 			Event event = getOccuredEvents().poll();

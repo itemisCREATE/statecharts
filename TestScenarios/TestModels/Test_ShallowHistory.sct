@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/2.0.0" xmlns:stext="http://www.yakindu.org/sct/statechart/SText">
-  <sgraph:Statechart xmi:id="_S0vmMPZlEeCSetPXFd1ZUw" name="Test_ShallowHistory" expression="interface:&#xA;in event event1&#xA;in event event2&#xA;in event event3&#xA;in event event4&#xA;in event event5&#xA;in event event6&#xA;in event event7&#xA;in event event8&#xA;">
-    <scopes xsi:type="stext:InterfaceScope" xmi:id="_IkV8oAFWEeGBE7eesluF0A">
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_IkV8oQFWEeGBE7eesluF0A" name="event1" direction="in"/>
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_IkV8ogFWEeGBE7eesluF0A" name="event2" direction="in"/>
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_IkV8owFWEeGBE7eesluF0A" name="event3" direction="in"/>
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_IkV8pAFWEeGBE7eesluF0A" name="event4" direction="in"/>
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_IkV8pQFWEeGBE7eesluF0A" name="event5" direction="in"/>
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_IkV8pgFWEeGBE7eesluF0A" name="event6" direction="in"/>
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_IkV8pwFWEeGBE7eesluF0A" name="event7" direction="in"/>
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_IkV8qAFWEeGBE7eesluF0A" name="event8" direction="in"/>
+  <sgraph:Statechart xmi:id="_S0vmMPZlEeCSetPXFd1ZUw" name="Test_ShallowHistory" expression="interface:&#xA;in event event1&#xA;in event event2&#xA;in event event3&#xA;in event event4&#xA;in event event5&#xA;in event event6&#xA;in event event7&#xA;in event event8&#xA;&#xA;">
+    <scopes xsi:type="stext:InterfaceScope" xmi:id="_zh_6UBm2EeGfc7cITFSsmg">
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_zh_6URm2EeGfc7cITFSsmg" name="event1" direction="in"/>
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_zh_6Uhm2EeGfc7cITFSsmg" name="event2" direction="in"/>
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_zh_6Uxm2EeGfc7cITFSsmg" name="event3" direction="in"/>
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_zh_6VBm2EeGfc7cITFSsmg" name="event4" direction="in"/>
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_zh_6VRm2EeGfc7cITFSsmg" name="event5" direction="in"/>
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_zh_6Vhm2EeGfc7cITFSsmg" name="event6" direction="in"/>
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_zh_6Vxm2EeGfc7cITFSsmg" name="event7" direction="in"/>
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_zh_6WBm2EeGfc7cITFSsmg" name="event8" direction="in"/>
     </scopes>
     <regions xmi:id="_S0wNQvZlEeCSetPXFd1ZUw" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_S0w0VvZlEeCSetPXFd1ZUw">
@@ -17,73 +17,73 @@
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_S0yCcfZlEeCSetPXFd1ZUw" name="State1" incomingTransitions="_S0zQk_ZlEeCSetPXFd1ZUw _euHxIPiYEeC4at_AzcYiGg">
         <outgoingTransitions xmi:id="_dD98cPiYEeC4at_AzcYiGg" expression="event1" target="_aHsYkPiYEeC4at_AzcYiGg">
-          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_IkWjsQFWEeGBE7eesluF0A">
-            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_IkWjsgFWEeGBE7eesluF0A" event="_IkV8oQFWEeGBE7eesluF0A"/>
+          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ziCWkRm2EeGfc7cITFSsmg">
+            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_ziCWkhm2EeGfc7cITFSsmg" event="_zh_6URm2EeGfc7cITFSsmg"/>
           </trigger>
         </outgoingTransitions>
-        <scopes xmi:id="_IkWjsAFWEeGBE7eesluF0A"/>
+        <scopes xmi:id="_ziCWkBm2EeGfc7cITFSsmg"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_aHsYkPiYEeC4at_AzcYiGg" name="State2" incomingTransitions="_dD98cPiYEeC4at_AzcYiGg">
         <outgoingTransitions xmi:id="_euHxIPiYEeC4at_AzcYiGg" expression="event2" target="_S0yCcfZlEeCSetPXFd1ZUw">
-          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_IkZnAQFWEeGBE7eesluF0A">
-            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_IkZnAgFWEeGBE7eesluF0A" event="_IkV8ogFWEeGBE7eesluF0A"/>
+          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ziFZ4Bm2EeGfc7cITFSsmg">
+            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_ziFZ4Rm2EeGfc7cITFSsmg" event="_zh_6Uhm2EeGfc7cITFSsmg"/>
           </trigger>
         </outgoingTransitions>
-        <scopes xmi:id="_IkZnAAFWEeGBE7eesluF0A"/>
+        <scopes xmi:id="_ziEy0Bm2EeGfc7cITFSsmg"/>
         <subRegions xmi:id="_qbNqYPiYEeC4at_AzcYiGg">
           <vertices xsi:type="sgraph:Entry" xmi:id="_qxmxIPiYEeC4at_AzcYiGg" kind="SHALLOW_HISTORY">
             <outgoingTransitions xmi:id="_xD6csPiYEeC4at_AzcYiGg" target="_tZdkMPiYEeC4at_AzcYiGg"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_tZdkMPiYEeC4at_AzcYiGg" name="State3" incomingTransitions="_xD6csPiYEeC4at_AzcYiGg">
             <outgoingTransitions xmi:id="_yUM_4PiYEeC4at_AzcYiGg" expression="event3" target="_umzhEPiYEeC4at_AzcYiGg">
-              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_IkcqUQFWEeGBE7eesluF0A">
-                <triggers xsi:type="stext:RegularEventSpec" xmi:id="_IkcqUgFWEeGBE7eesluF0A" event="_IkV8owFWEeGBE7eesluF0A"/>
+              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ziH2IRm2EeGfc7cITFSsmg">
+                <triggers xsi:type="stext:RegularEventSpec" xmi:id="_ziH2Ihm2EeGfc7cITFSsmg" event="_zh_6Uxm2EeGfc7cITFSsmg"/>
               </trigger>
             </outgoingTransitions>
-            <scopes xmi:id="_IkcqUAFWEeGBE7eesluF0A"/>
+            <scopes xmi:id="_ziH2IBm2EeGfc7cITFSsmg"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_umzhEPiYEeC4at_AzcYiGg" name="State4" incomingTransitions="_yUM_4PiYEeC4at_AzcYiGg">
             <outgoingTransitions xmi:id="_1j6dIPiYEeC4at_AzcYiGg" expression="event4" target="_vcfL4PiYEeC4at_AzcYiGg">
-              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_IkftoAFWEeGBE7eesluF0A">
-                <triggers xsi:type="stext:RegularEventSpec" xmi:id="_IkftoQFWEeGBE7eesluF0A" event="_IkV8pAFWEeGBE7eesluF0A"/>
+              <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ziK5cBm2EeGfc7cITFSsmg">
+                <triggers xsi:type="stext:RegularEventSpec" xmi:id="_ziK5cRm2EeGfc7cITFSsmg" event="_zh_6VBm2EeGfc7cITFSsmg"/>
               </trigger>
             </outgoingTransitions>
-            <scopes xmi:id="_IkfGkAFWEeGBE7eesluF0A"/>
+            <scopes xmi:id="_ziKSYBm2EeGfc7cITFSsmg"/>
             <subRegions xmi:id="_2HyUUPiaEeC4at_AzcYiGg">
               <vertices xsi:type="sgraph:Entry" xmi:id="_22hCkPiaEeC4at_AzcYiGg">
                 <outgoingTransitions xmi:id="_-HGUQPiaEeC4at_AzcYiGg" target="_3WtlkPiaEeC4at_AzcYiGg"/>
               </vertices>
               <vertices xsi:type="sgraph:State" xmi:id="_3WtlkPiaEeC4at_AzcYiGg" name="State6" incomingTransitions="_-HGUQPiaEeC4at_AzcYiGg _BveJIPibEeC4at_AzcYiGg">
                 <outgoingTransitions xmi:id="__CvdIPiaEeC4at_AzcYiGg" expression="event5" target="_46dQQPiaEeC4at_AzcYiGg">
-                  <trigger xsi:type="stext:ReactionTrigger" xmi:id="_IkiJ4QFWEeGBE7eesluF0A">
-                    <triggers xsi:type="stext:RegularEventSpec" xmi:id="_IkiJ4gFWEeGBE7eesluF0A" event="_IkV8pQFWEeGBE7eesluF0A"/>
+                  <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ziNVsBm2EeGfc7cITFSsmg">
+                    <triggers xsi:type="stext:RegularEventSpec" xmi:id="_ziNVsRm2EeGfc7cITFSsmg" event="_zh_6VRm2EeGfc7cITFSsmg"/>
                   </trigger>
                 </outgoingTransitions>
-                <scopes xmi:id="_IkiJ4AFWEeGBE7eesluF0A"/>
+                <scopes xmi:id="_ziMuoBm2EeGfc7cITFSsmg"/>
               </vertices>
               <vertices xsi:type="sgraph:State" xmi:id="_46dQQPiaEeC4at_AzcYiGg" name="State7" incomingTransitions="__CvdIPiaEeC4at_AzcYiGg">
                 <outgoingTransitions xmi:id="_BveJIPibEeC4at_AzcYiGg" expression="event6" target="_3WtlkPiaEeC4at_AzcYiGg">
-                  <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Ikl0QAFWEeGBE7eesluF0A">
-                    <triggers xsi:type="stext:RegularEventSpec" xmi:id="_Ikl0QQFWEeGBE7eesluF0A" event="_IkV8pgFWEeGBE7eesluF0A"/>
+                  <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ziPx8Rm2EeGfc7cITFSsmg">
+                    <triggers xsi:type="stext:RegularEventSpec" xmi:id="_ziPx8hm2EeGfc7cITFSsmg" event="_zh_6Vhm2EeGfc7cITFSsmg"/>
                   </trigger>
                 </outgoingTransitions>
-                <scopes xmi:id="_IklNMAFWEeGBE7eesluF0A"/>
+                <scopes xmi:id="_ziPx8Bm2EeGfc7cITFSsmg"/>
                 <subRegions xmi:id="_Hjbr0PibEeC4at_AzcYiGg">
                   <vertices xsi:type="sgraph:State" xmi:id="_R2fQAPibEeC4at_AzcYiGg" name="State8" incomingTransitions="_h07CoPibEeC4at_AzcYiGg _nMoHIPibEeC4at_AzcYiGg">
                     <outgoingTransitions xmi:id="_ZKN8UPibEeC4at_AzcYiGg" expression="event7" target="_Tl6mQPibEeC4at_AzcYiGg">
-                      <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Iko3kAFWEeGBE7eesluF0A">
-                        <triggers xsi:type="stext:RegularEventSpec" xmi:id="_Iko3kQFWEeGBE7eesluF0A" event="_IkV8pwFWEeGBE7eesluF0A"/>
+                      <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ziSOMRm2EeGfc7cITFSsmg">
+                        <triggers xsi:type="stext:RegularEventSpec" xmi:id="_ziSOMhm2EeGfc7cITFSsmg" event="_zh_6Vxm2EeGfc7cITFSsmg"/>
                       </trigger>
                     </outgoingTransitions>
-                    <scopes xmi:id="_IkoQgAFWEeGBE7eesluF0A"/>
+                    <scopes xmi:id="_ziSOMBm2EeGfc7cITFSsmg"/>
                   </vertices>
                   <vertices xsi:type="sgraph:State" xmi:id="_Tl6mQPibEeC4at_AzcYiGg" name="State9" incomingTransitions="_ZKN8UPibEeC4at_AzcYiGg">
                     <outgoingTransitions xmi:id="_nMoHIPibEeC4at_AzcYiGg" expression="event8" target="_R2fQAPibEeC4at_AzcYiGg">
-                      <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Ikr64AFWEeGBE7eesluF0A">
-                        <triggers xsi:type="stext:RegularEventSpec" xmi:id="_Ikr64QFWEeGBE7eesluF0A" event="_IkV8qAFWEeGBE7eesluF0A"/>
+                      <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ziVRgBm2EeGfc7cITFSsmg">
+                        <triggers xsi:type="stext:RegularEventSpec" xmi:id="_ziVRgRm2EeGfc7cITFSsmg" event="_zh_6WBm2EeGfc7cITFSsmg"/>
                       </trigger>
                     </outgoingTransitions>
-                    <scopes xmi:id="_IkrT0AFWEeGBE7eesluF0A"/>
+                    <scopes xmi:id="_ziUqcBm2EeGfc7cITFSsmg"/>
                   </vertices>
                   <vertices xsi:type="sgraph:Entry" xmi:id="_grXZkPibEeC4at_AzcYiGg" kind="SHALLOW_HISTORY">
                     <outgoingTransitions xmi:id="_h07CoPibEeC4at_AzcYiGg" expression="" target="_R2fQAPibEeC4at_AzcYiGg"/>
@@ -93,7 +93,7 @@
             </subRegions>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_vcfL4PiYEeC4at_AzcYiGg" name="State5" incomingTransitions="_1j6dIPiYEeC4at_AzcYiGg">
-            <scopes xmi:id="_IkuXIAFWEeGBE7eesluF0A"/>
+            <scopes xmi:id="_ziYU0Bm2EeGfc7cITFSsmg"/>
           </vertices>
         </subRegions>
       </vertices>

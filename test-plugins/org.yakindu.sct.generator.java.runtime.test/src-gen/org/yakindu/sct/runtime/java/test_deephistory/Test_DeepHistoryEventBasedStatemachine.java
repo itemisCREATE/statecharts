@@ -16,17 +16,18 @@ import java.util.Queue;
 
 import org.yakindu.sct.runtime.java.Event;
 
-public class Test_DeepHistoryEventBasedStatemachine extends Test_DeepHistoryAbstractBaseStatemachine {
+public class Test_DeepHistoryEventBasedStatemachine
+		extends
+			Test_DeepHistoryAbstractBaseStatemachine {
 
 	public Test_DeepHistoryEventBasedStatemachine() {
 		super(new LinkedList<Event>());
 	}
-	
-	@Override
+
 	protected Queue<Event> getOccuredEvents() {
 		return (Queue<Event>) super.getOccuredEvents();
 	}
-	
+
 	public void runCycle() {
 		if (eventOccured()) {
 			Event event = getOccuredEvents().poll();
