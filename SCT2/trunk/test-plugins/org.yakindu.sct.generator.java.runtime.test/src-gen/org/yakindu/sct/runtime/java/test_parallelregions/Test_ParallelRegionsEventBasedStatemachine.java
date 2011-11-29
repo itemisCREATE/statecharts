@@ -16,12 +16,14 @@ import java.util.Queue;
 
 import org.yakindu.sct.runtime.java.Event;
 
-public class Test_ParallelRegionsEventBasedStatemachine extends Test_ParallelRegionsAbstractBaseStatemachine {
+public class Test_ParallelRegionsEventBasedStatemachine
+		extends
+			Test_ParallelRegionsAbstractBaseStatemachine {
 
 	public Test_ParallelRegionsEventBasedStatemachine() {
 		super(new LinkedList<Event>());
 	}
-	
+
 	protected Queue<Event> getOccuredEvents() {
 		return (Queue<Event>) super.getOccuredEvents();
 	}

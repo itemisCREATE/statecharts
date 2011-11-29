@@ -4,9 +4,9 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ *
  * Contributors:
- * 	committers of YAKINDU - initial API and implementation
- * 
+ *     committers of YAKINDU - initial API and implementation
  */
 package org.yakindu.sct.runtime.java;
 
@@ -43,10 +43,10 @@ public class TimerHandler implements ITimerHandler {
 				statemachine.notify(new EventNotification(event));
 			}
 		});
-		
+
 		//set time field of event
 		event.setTime(time);
-		
+
 		// start scheduling the timer
 		if (event.getValue()) {
 			timer.scheduleAtFixedRate(timerTaskMap.get(event),
@@ -64,7 +64,7 @@ public class TimerHandler implements ITimerHandler {
 		}
 		timerTaskMap.remove(event);
 	}
-	
+
 	/**
 	 * Cancels all running TimersTasks
 	 */

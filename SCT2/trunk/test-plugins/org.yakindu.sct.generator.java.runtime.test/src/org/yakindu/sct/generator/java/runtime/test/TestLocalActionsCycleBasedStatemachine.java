@@ -44,7 +44,7 @@ public class TestLocalActionsCycleBasedStatemachine {
 	public void setUp() {
 		statemachine = new Test_LocalActionsCyleBasedStatemachine();
 		statemachine.setTimerHandler(new TimerHandler(statemachine));
-		statemachine.entry();
+		statemachine.enterSequenceStatechartTest_LocalActions();
 	}
 
 	@After
@@ -57,7 +57,7 @@ public class TestLocalActionsCycleBasedStatemachine {
 	public void testExceptionHandling() {
 		try {
 			Test_LocalActionsCyleBasedStatemachine statemachine = new Test_LocalActionsCyleBasedStatemachine();
-			statemachine.entry();
+			statemachine.enterSequenceStatechartTest_LocalActions();
 			fail("Statemachine should throw a NullPointerException if entered without TimerHandler set before");
 		} catch (NullPointerException exception) {
 
@@ -82,9 +82,8 @@ public class TestLocalActionsCycleBasedStatemachine {
 				statemachine.getInterfaceDefault().getVarI());
 
 		statemachine.runCycle();
-		// assertEquals("Error in local reaction \"onCycle / i=2;\" of State1",
-		// 2,
-		// statemachine.getInterfaceDefault().getVarI());
+		assertEquals("Error in local reaction \"onCycle / i=2;\" of State1", 2,
+				statemachine.getInterfaceDefault().getVarI());
 
 		statemachine.getInterfaceDefault().raiseEvent2();
 		statemachine.runCycle();

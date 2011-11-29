@@ -4,16 +4,14 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ *
  * Contributors:
- * 	committers of YAKINDU - initial API and implementation
- * 
+ *     committers of YAKINDU - initial API and implementation
  */
 package org.yakindu.sct.runtime.java.test_hierarchy;
 
-
-
 public interface InterfaceDefault {
-	
+
 	public void raiseEvent1();
 	public void raiseEvent2();
 	public void raiseEvent3();
@@ -30,9 +28,9 @@ public interface InterfaceDefault {
 	public void raiseEvent14();
 	public void raiseEvent15();
 	public void raiseEvent16();
-	
+
 	public int getVarS1();
-	public void setVarS1(int value);	
+	public void setVarS1(int value);
 	public int getVarS2();
-	public void setVarS2(int value);	
+	public void setVarS2(int value);
 }
