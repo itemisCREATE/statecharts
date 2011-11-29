@@ -184,6 +184,8 @@ public class SGraphValidator extends EObjectValidator {
 				return validateRegularState((RegularState)value, diagnostics, context);
 			case SGraphPackage.ENTRY_KIND:
 				return validateEntryKind((EntryKind)value, diagnostics, context);
+			case SGraphPackage.CHOICE_KIND:
+				return validateChoiceKind((ChoiceKind)value, diagnostics, context);
 			default:
 				return true;
 		}
@@ -659,6 +661,15 @@ public class SGraphValidator extends EObjectValidator {
 	 */
 	public boolean validateEntryKind(EntryKind entryKind,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateChoiceKind(ChoiceKind choiceKind, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

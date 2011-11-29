@@ -111,6 +111,8 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 		switch (eDataType.getClassifierID()) {
 			case SGraphPackage.ENTRY_KIND:
 				return createEntryKindFromString(eDataType, initialValue);
+			case SGraphPackage.CHOICE_KIND:
+				return createChoiceKindFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -126,6 +128,8 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 		switch (eDataType.getClassifierID()) {
 			case SGraphPackage.ENTRY_KIND:
 				return convertEntryKindToString(eDataType, instanceValue);
+			case SGraphPackage.CHOICE_KIND:
+				return convertChoiceKindToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -268,6 +272,26 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 	 * @generated
 	 */
 	public String convertEntryKindToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ChoiceKind createChoiceKindFromString(EDataType eDataType, String initialValue) {
+		ChoiceKind result = ChoiceKind.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertChoiceKindToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

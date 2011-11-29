@@ -38,7 +38,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="#//RegularState"/>
   <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//Declaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true" eSuperTypes="#//Declaration"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Choice" eSuperTypes="#//Pseudostate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Choice" eSuperTypes="#//Pseudostate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//ChoiceKind"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statechart" eSuperTypes="#//NamedElement #//ExpressionElement #//ReactiveElement #//ScopedElement">
     <eAnnotations source="InjectMembers"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="regions" ordered="false"
@@ -112,4 +114,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statement"/>
   <eClassifiers xsi:type="ecore:EClass" name="RegularState" eSuperTypes="#//Vertex"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="ChoiceKind">
+    <eLiterals name="dynamic"/>
+    <eLiterals name="static" value="1"/>
+  </eClassifiers>
 </ecore:EPackage>
