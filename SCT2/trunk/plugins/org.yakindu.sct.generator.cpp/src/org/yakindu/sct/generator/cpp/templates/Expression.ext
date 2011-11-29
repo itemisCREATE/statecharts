@@ -2,6 +2,7 @@ import stext;
 import sexec;
 import ecore;
 import sgraph;
+
 toCppCode(Void void) :
 	"/*toCppCode() called with NULL element. Polymorphic resolver could not match callable method!*/";
 String toCppCode(Void o, String statechartReference) : 
@@ -12,9 +13,12 @@ String toCppCode(Expression statement) :
  
 String toCppCode(Statement statement) : 
 	null; //polymorphic placeholder (abstract rule)
- 
+
+String toCppCode(Literal lit) :
+   lit.toString() ;
+
 String toCppCode(PrimitiveValueExpression primValue) :
-	primValue.value;
+	primValue.value.toCppCode();
 
 /* Assignment */
 String toCppCode(Assignment assignment) :
@@ -34,6 +38,21 @@ String toCppCode(Assignment assignment) :
   };
 		
 /* EventRaising */
+
+String toCppCode(EventRaising eventRaising) :
+	((eventRaising.value == null)?"":
+	"((" + eventRaising.event.name + "*) handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.name + ")->value = " 
+	+ eventRaising.value.toCppCode() + ";") + 
+	" statemachine_cy_setEvent(&handle->base, handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.name + "); ";
+//  "{ _Event* ev = eventPool_createEvent(handle->base.eventPool, ev_"+eventRaising.event.name+"); if (ev) { " + eventRaising.addValue() + "statemachine_cy_setEvent(&handle->base, ev); } }";
+
+String getInterfaceName(EventRaising event) :
+	"interface" + (( ((InterfaceScope)event.event.eContainer).name == null)?"":((InterfaceScope)event.event.eContainer).name.toFirstUpper());
+
+String addValue(EventRaising event) :
+  ( (event.value == null)?"":("((" +event.event.name + "*)ev)->value = " + event.value.toCppCode() + "; ") );
+
+
 
 /* Logical Expressions */
 String toCppCode(LogicalOrExpression expression) :
@@ -102,4 +121,17 @@ String eventTypeToString(Type type) :
   case (Type::string)  : "strng"
   default : "unknownType"
   };
+  
+Set[EventDefinition] getInEvents(InterfaceScope interface) : 
+	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::IN);
+
+Set[EventDefinition] getOutEvents(InterfaceScope interface) : 
+	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::OUT);
+
+Set[EventDefinition] getLocalEvents(InterfaceScope interface) : 
+	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::LOCAL);
+ 
+/* Timer handling */
+
+ 
 	

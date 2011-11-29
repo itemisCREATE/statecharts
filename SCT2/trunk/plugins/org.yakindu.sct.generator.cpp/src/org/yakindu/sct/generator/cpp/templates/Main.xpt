@@ -47,6 +47,8 @@ Contais the root templates that call the different file templates.
 	
 	«REM» custom code «ENDREM»	
 
+	«EXPAND Interfaces::file FOR this»
+
 	«EXPAND CustomStatemachine_cyH::file FOR this»
 	«EXPAND CustomStatemachine_cyCPP::file FOR this»
 
