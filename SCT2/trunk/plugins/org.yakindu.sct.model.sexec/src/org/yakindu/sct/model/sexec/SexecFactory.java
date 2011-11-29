@@ -62,15 +62,6 @@ public interface SexecFactory extends EFactory {
 	NamedElement createNamedElement();
 
 	/**
-	 * Returns a new object of class '<em>Cycle</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Cycle</em>'.
-	 * @generated
-	 */
-	Cycle createCycle();
-
-	/**
 	 * Returns a new object of class '<em>Check</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

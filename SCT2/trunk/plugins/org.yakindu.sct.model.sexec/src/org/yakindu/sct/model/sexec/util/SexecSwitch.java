@@ -13,7 +13,6 @@ import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
-import org.yakindu.sct.model.sexec.Cycle;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -90,6 +89,12 @@ public class SexecSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case SexecPackage.NAMED_ELEMENT: {
+				NamedElement namedElement = (NamedElement)theEObject;
+				T result = caseNamedElement(namedElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case SexecPackage.EXECUTION_FLOW: {
 				ExecutionFlow executionFlow = (ExecutionFlow)theEObject;
 				T result = caseExecutionFlow(executionFlow);
@@ -98,9 +103,17 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SexecPackage.NAMED_ELEMENT: {
-				NamedElement namedElement = (NamedElement)theEObject;
-				T result = caseNamedElement(namedElement);
+			case SexecPackage.EXECUTION_STATE: {
+				ExecutionState executionState = (ExecutionState)theEObject;
+				T result = caseExecutionState(executionState);
+				if (result == null) result = caseNamedElement(executionState);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.REACTION: {
+				Reaction reaction = (Reaction)theEObject;
+				T result = caseReaction(reaction);
+				if (result == null) result = caseNamedElement(reaction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -119,20 +132,6 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SexecPackage.EXECUTION_STATE: {
-				ExecutionState executionState = (ExecutionState)theEObject;
-				T result = caseExecutionState(executionState);
-				if (result == null) result = caseNamedElement(executionState);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case SexecPackage.REACTION: {
-				Reaction reaction = (Reaction)theEObject;
-				T result = caseReaction(reaction);
-				if (result == null) result = caseNamedElement(reaction);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case SexecPackage.STEP: {
 				Step step = (Step)theEObject;
 				T result = caseStep(step);
@@ -145,15 +144,6 @@ public class SexecSwitch<T> extends Switch<T> {
 				T result = caseSequence(sequence);
 				if (result == null) result = caseStep(sequence);
 				if (result == null) result = caseNamedElement(sequence);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case SexecPackage.CYCLE: {
-				Cycle cycle = (Cycle)theEObject;
-				T result = caseCycle(cycle);
-				if (result == null) result = caseSequence(cycle);
-				if (result == null) result = caseStep(cycle);
-				if (result == null) result = caseNamedElement(cycle);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -305,21 +295,6 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNamedElement(NamedElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Cycle</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Cycle</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCycle(Cycle object) {
 		return null;
 	}
 

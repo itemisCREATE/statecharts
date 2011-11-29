@@ -166,29 +166,6 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.Cycle} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected CycleItemProvider cycleItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.Cycle}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createCycleAdapter() {
-		if (cycleItemProvider == null) {
-			cycleItemProvider = new CycleItemProvider(this);
-		}
-
-		return cycleItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.Check} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -609,14 +586,13 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	 * @generated
 	 */
 	public void dispose() {
-		if (executionFlowItemProvider != null) executionFlowItemProvider.dispose();
 		if (namedElementItemProvider != null) namedElementItemProvider.dispose();
-		if (stateVectorItemProvider != null) stateVectorItemProvider.dispose();
-		if (timeEventItemProvider != null) timeEventItemProvider.dispose();
+		if (executionFlowItemProvider != null) executionFlowItemProvider.dispose();
 		if (executionStateItemProvider != null) executionStateItemProvider.dispose();
 		if (reactionItemProvider != null) reactionItemProvider.dispose();
+		if (stateVectorItemProvider != null) stateVectorItemProvider.dispose();
+		if (timeEventItemProvider != null) timeEventItemProvider.dispose();
 		if (sequenceItemProvider != null) sequenceItemProvider.dispose();
-		if (cycleItemProvider != null) cycleItemProvider.dispose();
 		if (checkItemProvider != null) checkItemProvider.dispose();
 		if (checkRefItemProvider != null) checkRefItemProvider.dispose();
 		if (ifItemProvider != null) ifItemProvider.dispose();

@@ -468,16 +468,16 @@ class ModelSequencer {
 	}
 	
 
-	def Cycle defineCycle(RegularState state) {
+	def Sequence defineCycle(RegularState state) {
 	
 		val execState = state.create
 		val stateReaction = execState.createReactionSequence(null)
 		val parents = state.parentStates		
-		execState.cycle = parents.fold(null, [r, s | {
+		execState.reactSequence = parents.fold(null, [r, s | {
 			s.create.createReactionSequence(r)
 		}])
 		
-		return execState.cycle
+		return execState.reactSequence
 	}	
 
 
@@ -500,8 +500,8 @@ class ModelSequencer {
 //	}
 	
 
-	def Cycle createReactionSequence(ExecutionState state, Step localStep) {	
-		val cycle = sexecFactory.createCycle
+	def Sequence createReactionSequence(ExecutionState state, Step localStep) {	
+		val cycle = sexecFactory.createSequence
 		
 		val localReactions = state.reactions.filter(r | ! r.transition).toList
 		var localSteps = sexecFactory.createSequence

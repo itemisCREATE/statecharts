@@ -18,9 +18,9 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getStates <em>States</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getSequences <em>Sequences</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getEnterSequence <em>Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getStateVector <em>State Vector</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getExitSequence <em>Exit Sequence</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,22 +44,6 @@ public interface ExecutionFlow extends ScopedElement, NamedElement {
 	 * @generated
 	 */
 	EList<ExecutionState> getStates();
-
-	/**
-	 * Returns the value of the '<em><b>Sequences</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.sct.model.sexec.Sequence}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Sequences</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sequences</em>' containment reference list.
-	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionFlow_Sequences()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Sequence> getSequences();
 
 	/**
 	 * Returns the value of the '<em><b>Enter Sequence</b></em>' containment reference.
@@ -112,5 +96,31 @@ public interface ExecutionFlow extends ScopedElement, NamedElement {
 	 * @generated
 	 */
 	void setStateVector(StateVector value);
+
+	/**
+	 * Returns the value of the '<em><b>Exit Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Exit Sequence</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Exit Sequence</em>' containment reference.
+	 * @see #setExitSequence(Sequence)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionFlow_ExitSequence()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Sequence getExitSequence();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.ExecutionFlow#getExitSequence <em>Exit Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Exit Sequence</em>' containment reference.
+	 * @see #getExitSequence()
+	 * @generated
+	 */
+	void setExitSequence(Sequence value);
 
 } // ExecutionFlow

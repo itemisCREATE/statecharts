@@ -33,9 +33,9 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getStates <em>States</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSequences <em>Sequences</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getEnterSequence <em>Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getStateVector <em>State Vector</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getExitSequence <em>Exit Sequence</em>}</li>
  * </ul>
  * </p>
  *
@@ -73,16 +73,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	protected EList<ExecutionState> states;
 
 	/**
-	 * The cached value of the '{@link #getSequences() <em>Sequences</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSequences()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Sequence> sequences;
-
-	/**
 	 * The cached value of the '{@link #getEnterSequence() <em>Enter Sequence</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -101,6 +91,16 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected StateVector stateVector;
+
+	/**
+	 * The cached value of the '{@link #getExitSequence() <em>Exit Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExitSequence()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sequence exitSequence;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -152,18 +152,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			states = new EObjectContainmentEList<ExecutionState>(ExecutionState.class, this, SexecPackage.EXECUTION_FLOW__STATES);
 		}
 		return states;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Sequence> getSequences() {
-		if (sequences == null) {
-			sequences = new EObjectContainmentEList<Sequence>(Sequence.class, this, SexecPackage.EXECUTION_FLOW__SEQUENCES);
-		}
-		return sequences;
 	}
 
 	/**
@@ -257,17 +245,60 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Sequence getExitSequence() {
+		return exitSequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetExitSequence(Sequence newExitSequence, NotificationChain msgs) {
+		Sequence oldExitSequence = exitSequence;
+		exitSequence = newExitSequence;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE, oldExitSequence, newExitSequence);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExitSequence(Sequence newExitSequence) {
+		if (newExitSequence != exitSequence) {
+			NotificationChain msgs = null;
+			if (exitSequence != null)
+				msgs = ((InternalEObject)exitSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE, null, msgs);
+			if (newExitSequence != null)
+				msgs = ((InternalEObject)newExitSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE, null, msgs);
+			msgs = basicSetExitSequence(newExitSequence, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE, newExitSequence, newExitSequence));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case SexecPackage.EXECUTION_FLOW__STATES:
 				return ((InternalEList<?>)getStates()).basicRemove(otherEnd, msgs);
-			case SexecPackage.EXECUTION_FLOW__SEQUENCES:
-				return ((InternalEList<?>)getSequences()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
 				return basicSetEnterSequence(null, msgs);
 			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
 				return basicSetStateVector(null, msgs);
+			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
+				return basicSetExitSequence(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -284,12 +315,12 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return getName();
 			case SexecPackage.EXECUTION_FLOW__STATES:
 				return getStates();
-			case SexecPackage.EXECUTION_FLOW__SEQUENCES:
-				return getSequences();
 			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
 				return getEnterSequence();
 			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
 				return getStateVector();
+			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
+				return getExitSequence();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -310,15 +341,14 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				getStates().clear();
 				getStates().addAll((Collection<? extends ExecutionState>)newValue);
 				return;
-			case SexecPackage.EXECUTION_FLOW__SEQUENCES:
-				getSequences().clear();
-				getSequences().addAll((Collection<? extends Sequence>)newValue);
-				return;
 			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
 				setEnterSequence((Sequence)newValue);
 				return;
 			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
 				setStateVector((StateVector)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
+				setExitSequence((Sequence)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -338,14 +368,14 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__STATES:
 				getStates().clear();
 				return;
-			case SexecPackage.EXECUTION_FLOW__SEQUENCES:
-				getSequences().clear();
-				return;
 			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
 				setEnterSequence((Sequence)null);
 				return;
 			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
 				setStateVector((StateVector)null);
+				return;
+			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
+				setExitSequence((Sequence)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -363,12 +393,12 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case SexecPackage.EXECUTION_FLOW__STATES:
 				return states != null && !states.isEmpty();
-			case SexecPackage.EXECUTION_FLOW__SEQUENCES:
-				return sequences != null && !sequences.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
 				return enterSequence != null;
 			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
 				return stateVector != null;
+			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
+				return exitSequence != null;
 		}
 		return super.eIsSet(featureID);
 	}

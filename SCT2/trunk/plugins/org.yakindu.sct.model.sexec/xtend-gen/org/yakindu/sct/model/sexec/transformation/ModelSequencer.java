@@ -22,7 +22,6 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
-import org.yakindu.sct.model.sexec.Cycle;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -896,17 +895,17 @@ public class ModelSequencer {
           }
         };
       Iterable<State> _filter_1 = IterableExtensions.<State>filter(_filter, _function);
-      final Function1<State,Cycle> _function_1 = new Function1<State,Cycle>() {
-          public Cycle apply(final State s_1) {
-            Cycle _defineCycle = ModelSequencer.this.defineCycle(s_1);
+      final Function1<State,Sequence> _function_1 = new Function1<State,Sequence>() {
+          public Sequence apply(final State s_1) {
+            Sequence _defineCycle = ModelSequencer.this.defineCycle(s_1);
             return _defineCycle;
           }
         };
       IterableExtensions.<State>forEach(_filter_1, _function_1);
       Iterable<FinalState> _filter_2 = IterableExtensions.<FinalState>filter(states, org.yakindu.sct.model.sgraph.FinalState.class);
-      final Function1<FinalState,Cycle> _function_2 = new Function1<FinalState,Cycle>() {
-          public Cycle apply(final FinalState s_2) {
-            Cycle _defineCycle_1 = ModelSequencer.this.defineCycle(s_2);
+      final Function1<FinalState,Sequence> _function_2 = new Function1<FinalState,Sequence>() {
+          public Sequence apply(final FinalState s_2) {
+            Sequence _defineCycle_1 = ModelSequencer.this.defineCycle(s_2);
             return _defineCycle_1;
           }
         };
@@ -915,33 +914,33 @@ public class ModelSequencer {
     }
   }
   
-  public Cycle defineCycle(final RegularState state) {
+  public Sequence defineCycle(final RegularState state) {
     {
       ExecutionState _create = this.factory.create(state);
       final ExecutionState execState = _create;
-      Cycle _createReactionSequence = this.createReactionSequence(execState, null);
-      final Cycle stateReaction = _createReactionSequence;
+      Sequence _createReactionSequence = this.createReactionSequence(execState, null);
+      final Sequence stateReaction = _createReactionSequence;
       List<RegularState> _parentStates = this.parentStates(state);
       final List<RegularState> parents = _parentStates;
-      final Function2<Cycle,RegularState,Cycle> _function = new Function2<Cycle,RegularState,Cycle>() {
-          public Cycle apply(final Cycle r , final RegularState s) {
+      final Function2<Sequence,RegularState,Sequence> _function = new Function2<Sequence,RegularState,Sequence>() {
+          public Sequence apply(final Sequence r , final RegularState s) {
             ExecutionState _create_1 = ModelSequencer.this.factory.create(s);
-            Cycle _createReactionSequence_1 = ModelSequencer.this.createReactionSequence(_create_1, r);
+            Sequence _createReactionSequence_1 = ModelSequencer.this.createReactionSequence(_create_1, r);
             return _createReactionSequence_1;
           }
         };
-      Cycle _fold = IterableExtensions.<RegularState, Cycle>fold(parents, null, _function);
-      execState.setCycle(_fold);
-      Cycle _cycle = execState.getCycle();
-      return _cycle;
+      Sequence _fold = IterableExtensions.<RegularState, Sequence>fold(parents, null, _function);
+      execState.setReactSequence(_fold);
+      Sequence _reactSequence = execState.getReactSequence();
+      return _reactSequence;
     }
   }
   
-  public Cycle createReactionSequence(final ExecutionState state, final Step localStep) {
+  public Sequence createReactionSequence(final ExecutionState state, final Step localStep) {
     {
       SexecFactory _sexecFactory = this.sexecFactory();
-      Cycle _createCycle = _sexecFactory.createCycle();
-      final Cycle cycle = _createCycle;
+      Sequence _createSequence = _sexecFactory.createSequence();
+      final Sequence cycle = _createSequence;
       EList<Reaction> _reactions = state.getReactions();
       final Function1<Reaction,Boolean> _function = new Function1<Reaction,Boolean>() {
           public Boolean apply(final Reaction r) {
@@ -954,8 +953,8 @@ public class ModelSequencer {
       List<Reaction> _list = IterableExtensions.<Reaction>toList(_filter);
       final List<Reaction> localReactions = _list;
       SexecFactory _sexecFactory_1 = this.sexecFactory();
-      Sequence _createSequence = _sexecFactory_1.createSequence();
-      Sequence localSteps = _createSequence;
+      Sequence _createSequence_1 = _sexecFactory_1.createSequence();
+      Sequence localSteps = _createSequence_1;
       EList<Step> _steps = localSteps.getSteps();
       final Function1<Reaction,If> _function_1 = new Function1<Reaction,If>() {
           public If apply(final Reaction lr) {

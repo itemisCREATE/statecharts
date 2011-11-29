@@ -103,9 +103,9 @@ public class ExecutionFlowItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__STATES);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__SEQUENCES);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__ENTER_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__STATE_VECTOR);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__EXIT_SEQUENCE);
 		}
 		return childrenFeatures;
 	}
@@ -164,9 +164,9 @@ public class ExecutionFlowItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SexecPackage.EXECUTION_FLOW__STATES:
-			case SexecPackage.EXECUTION_FLOW__SEQUENCES:
 			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
+			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -191,28 +191,18 @@ public class ExecutionFlowItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__SEQUENCES,
-				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__SEQUENCES,
-				 SexecFactory.eINSTANCE.createCycle()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__ENTER_SEQUENCE,
 				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__ENTER_SEQUENCE,
-				 SexecFactory.eINSTANCE.createCycle()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__STATE_VECTOR,
 				 SexecFactory.eINSTANCE.createStateVector()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_SEQUENCE,
+				 SexecFactory.eINSTANCE.createSequence()));
 	}
 
 	/**
@@ -227,8 +217,8 @@ public class ExecutionFlowItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == SexecPackage.Literals.EXECUTION_FLOW__SEQUENCES ||
-			childFeature == SexecPackage.Literals.EXECUTION_FLOW__ENTER_SEQUENCE;
+			childFeature == SexecPackage.Literals.EXECUTION_FLOW__ENTER_SEQUENCE ||
+			childFeature == SexecPackage.Literals.EXECUTION_FLOW__EXIT_SEQUENCE;
 
 		if (qualify) {
 			return getString

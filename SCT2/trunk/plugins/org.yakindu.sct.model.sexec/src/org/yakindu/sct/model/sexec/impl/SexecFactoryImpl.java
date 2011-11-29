@@ -15,7 +15,6 @@ import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
-import org.yakindu.sct.model.sexec.Cycle;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -76,14 +75,13 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case SexecPackage.EXECUTION_FLOW: return createExecutionFlow();
 			case SexecPackage.NAMED_ELEMENT: return createNamedElement();
-			case SexecPackage.STATE_VECTOR: return createStateVector();
-			case SexecPackage.TIME_EVENT: return createTimeEvent();
+			case SexecPackage.EXECUTION_FLOW: return createExecutionFlow();
 			case SexecPackage.EXECUTION_STATE: return createExecutionState();
 			case SexecPackage.REACTION: return createReaction();
+			case SexecPackage.STATE_VECTOR: return createStateVector();
+			case SexecPackage.TIME_EVENT: return createTimeEvent();
 			case SexecPackage.SEQUENCE: return createSequence();
-			case SexecPackage.CYCLE: return createCycle();
 			case SexecPackage.CHECK: return createCheck();
 			case SexecPackage.CHECK_REF: return createCheckRef();
 			case SexecPackage.IF: return createIf();
@@ -138,16 +136,6 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public NamedElement createNamedElement() {
 		NamedElementImpl namedElement = new NamedElementImpl();
 		return namedElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Cycle createCycle() {
-		CycleImpl cycle = new CycleImpl();
-		return cycle;
 	}
 
 	/**

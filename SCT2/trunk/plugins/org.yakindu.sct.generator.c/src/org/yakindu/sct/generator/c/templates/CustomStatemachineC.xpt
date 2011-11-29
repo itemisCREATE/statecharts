@@ -137,18 +137,18 @@ void «r.effect.functionName()»(«StName()»* handle) {
   «ENDFOREACH -»
 «ENDDEFINE»
 
-«DEFINE CycleCode FOR Cycle» 
+«DEFINE ReactCode FOR Sequence» 
 «EXPAND ActionCode FOREACH this.steps»
 «ENDDEFINE»
 
-«DEFINE CycleMethodsProto FOR ExecutionState»
-static void «StName().toFirstLower()»_cycle_«this.simpleName»(«StName()»* handle);
+«DEFINE ReactMethodsProto FOR ExecutionState»
+static void «StName().toFirstLower()»_react_«this.simpleName»(«StName()»* handle);
 «ENDDEFINE»
 
-«DEFINE CycleMethodsImplement FOR ExecutionState»
-void «StName().toFirstLower()»_cycle_«this.simpleName»(«StName()»* handle)
+«DEFINE ReactMethodsImplement FOR ExecutionState»
+void «StName().toFirstLower()»_react_«this.simpleName»(«StName()»* handle)
 {
-	«EXPAND CycleCode FOR cycle»
+	«EXPAND ReactCode FOR reactSequence»
 }
 «ENDDEFINE»
 
@@ -222,7 +222,7 @@ void «this.exitSequence.exitSequenceFunctionName()»(«StName()»* handle)
 
 «EXPAND ConditionMethodsProto FOREACH this.states»
 «EXPAND StatementMethodsProto FOREACH this.states»
-«EXPAND CycleMethodsProto FOREACH this.states»
+«EXPAND ReactMethodsProto FOREACH this.states»
 «EXPAND EnterMethodProto FOREACH this.states»
 «EXPAND ExitMethodProto FOREACH this.states»
 «EXPAND EnterSequenceProto FOREACH this.states»
@@ -230,7 +230,7 @@ void «this.exitSequence.exitSequenceFunctionName()»(«StName()»* handle)
 
 «EXPAND ConditionMethodsImplement FOREACH this.states»
 «EXPAND StatementMethodsImplement FOREACH this.states»
-«EXPAND CycleMethodsImplement FOREACH this.states»
+«EXPAND ReactMethodsImplement FOREACH this.states»
 «EXPAND EnterMethodImplement FOREACH this.states»
 «EXPAND ExitMethodImplement FOREACH this.states»
 «EXPAND EnterSequenceImplement FOREACH this.states»
@@ -310,7 +310,7 @@ void statemachine_cy__runCycle(Statemachine_cy* handle)
 		switch(((StatemachineBase*)handle)->state[i]) {
 	«FOREACH this.states AS state»
 	    case _«state.simpleName»:
-	        «stName()»_cycle_«state.simpleName»((«StName()»*) handle);
+	        «stName()»_react_«state.simpleName»((«StName()»*) handle);
 	        break;
 	«ENDFOREACH»
 		default:

@@ -61,7 +61,7 @@ Simple Name: «this.simpleName»
 
 «EXPAND ReactionFunctions FOR this»
 
-Cycle: «EXPAND code FOR this.cycle»
+React: «EXPAND code FOR this.reactSequence»
 «ENDDEFINE»
 
 

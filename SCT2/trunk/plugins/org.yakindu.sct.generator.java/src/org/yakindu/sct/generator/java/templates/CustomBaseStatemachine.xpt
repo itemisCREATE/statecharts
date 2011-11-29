@@ -117,9 +117,9 @@ else {
   «ENDFOREACH-»
 «ENDDEFINE»
 
-«DEFINE CycleMethodsImplement FOR ExecutionState-»
-	private void cycle«getName()»(Collection<?> events) {
-		«EXPAND ActionCode FOREACH cycle.steps-»
+«DEFINE ReactMethodsImplement FOR ExecutionState-»
+	private void react«getName()»(Collection<?> events) {
+		«EXPAND ActionCode FOREACH reactSequence.steps-»
 	}
 «ENDDEFINE»
 
@@ -316,7 +316,7 @@ public abstract class «getBaseStatemachineName()» implements «getStatemachineImp
 «EXPAND ExitMethodImplement FOREACH this.states-»
 «EXPAND EnterSequenceImplement FOREACH this.states-»
 «EXPAND ExitSequenceImplement FOREACH this.states-»
-«EXPAND CycleMethodsImplement FOREACH this.states-»
+«EXPAND ReactMethodsImplement FOREACH this.states-»
 	protected void runCycle(Collection<?> events) {
 		«IF isTimedStatemachine()-»
 		cycleStartTime = System.currentTimeMillis();
@@ -326,7 +326,7 @@ public abstract class «getBaseStatemachineName()» implements «getStatemachineImp
 			switch (state) {
 			«FOREACH this.states AS state-»
     		case «state.getName()»:
-        		cycle«state.getName()»(events);
+        		react«state.getName()»(events);
         		break;
 			«ENDFOREACH-»
 			default:
