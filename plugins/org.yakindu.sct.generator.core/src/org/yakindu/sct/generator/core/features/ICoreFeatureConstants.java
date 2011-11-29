@@ -27,4 +27,6 @@ public interface ICoreFeatureConstants {
 	public static final String DEBUG_FEATURE = "Debug";
 	public static final String DEBUG_FEATURE_DUMP_SEXEC = "dumpSexec";
 	
+	public static final String LICENSE_HEADER = "licenseHeader";
+	public static final String LICENSE_TEXT = "licenseText";
 }

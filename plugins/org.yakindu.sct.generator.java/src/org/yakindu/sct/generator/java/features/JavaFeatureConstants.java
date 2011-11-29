@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.generator.java.features;
 
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LICENSE_HEADER;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LICENSE_TEXT;
 /**
  * 
  * @author muehlbrandt
