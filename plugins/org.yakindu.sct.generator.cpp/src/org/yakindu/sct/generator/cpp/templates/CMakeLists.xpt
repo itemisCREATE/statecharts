@@ -16,7 +16,6 @@ Templates for the main statechart cpp file.
 «DEFINE file FOR ExecutionFlow»
 
 «FILE 'CMakeLists.txt'»
-cmake_minimum_required(VERSION 2.8)
 
 set ( SRC_BASE
 	DataRepository.cpp
@@ -25,23 +24,26 @@ set ( SRC_BASE
 	StatemachineBase.cpp
 )
 
+set ( SRC_IFACE
+«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
+	«interface.interfaceClassName()».cpp
+«ENDFOREACH»
+)	
+
 set ( SRC_EV
 	Statemachine_ev.cpp
 	Statemachine_ev.h
-	main_ev.cpp
 	«StName()»_ev.cpp
 )
 
 set ( SRC_CY
 	Statemachine_cy.cpp
 	Statemachine_cy.h
-	main_cy.cpp
 	«StName()»_cy.cpp
 )
 
-add_definitions( -Wall -O0 -g)
-add_executable(«StName()»_ev_main ${SRC_BASE} ${SRC_EV})
-add_executable(«StName()»_cy_main ${SRC_BASE} ${SRC_CY})
+add_library(«StName()»_ev ${SRC_BASE} ${SRC_IFACE} ${SRC_EV})
+add_library(«StName()»_cy ${SRC_BASE} ${SRC_IFACE} ${SRC_CY})
 
 «ENDFILE»
 
