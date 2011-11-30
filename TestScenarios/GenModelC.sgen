@@ -24,6 +24,9 @@ GeneratorModel for yakindu::c {
 		}
 	}
 	statechart Test_LocalActions {
+		feature Debug {
+			dumpSexec = true
+		}
 		feature Outlet {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-c/Test_LocalActions"

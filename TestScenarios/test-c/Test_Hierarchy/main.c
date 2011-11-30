@@ -17,7 +17,17 @@
 /*@DTestSuite: Hierachy Statechart Test (Test_Hierarchy.sct) */
 
 #define MAXEVENTSPERTYPE 4
-const char* stateName[6] = {"State1", "State2", "State3", "State4", "State5", "State6"};
+const char* stateName[13] = {"State1", "State2", "State3", "State4", "State5", "State6", "State7", "State8", "State9", "State10", "State11", "State12", "none"};
+const int EnumTostateStr[10] = { _State1, _State2, _State3, _State4, _State5, _State6, _State7, _State8, _State9, _State10 };
+
+const char* getStateString(uint32_t index)
+{
+	int i;
+	for (i=0; i<10; ++i)
+		if (EnumTostateStr[i] == index)
+			return stateName[i];
+	return stateName[12];
+}
 
 void setupStatemachine(Test_HierarchyStatemachine* machine, Timer* dummyTimer, EventPool* eventPool)
 {
@@ -58,12 +68,48 @@ int test_state9_state10_transition()
 	/*@Desc: setup initial statemachine */
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
-	/*@Desc: run the statechart for the first time (initially) */
+	/*@Desc: check wether state is initial state (State9) */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State9") == 0);
+
+	/*@Desc: check whether s1 is set to 2 as State 9 is in second hierarchy level */
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
+
+	/*@Desc: run the statechart for the first time (just as dummy) */
 	test_HierarchyStatemachine_runCycle(&machine);
 
-	/*@Desc: check wether state is initial state (State9) */
-	printf("%s\n", stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)]);
-	assert( strcmp(stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)], "State9") == 0);
+	/*@Desc: check wether state is still in initial state (State9) */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State9") == 0);
+
+	/*@Desc: check whether s1 is set to 2 as State 9 is in second hierarchy level */
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
+
+	/*@Desc: raise event9 on default interface */
+	test_Hierarchy_if_raise_event9(&machine.interface);
+
+	/*@Desc: run the statechart to trigger state change */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state10 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State10") == 0);
+
+	/*@Desc: check whether s1 is set to 2 as State 9 is in second hierarchy level */
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
+
+	/*@Desc: raise event10 on default interface */
+	test_Hierarchy_if_raise_event10(&machine.interface);
+
+	/*@Desc: run the statechart to trigger state change */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state10 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State9") == 0);
+
+	/*@Desc: check whether s1 is set to 2 as State 9 is in second hierarchy level */
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
 
 	/*@Desc: teardown statemachine */
 	teardownStatemachine(&machine, &dummyTimer, &eventPool);
@@ -71,7 +117,7 @@ int test_state9_state10_transition()
 	return 0;
 }
 
-/*@Test: test_default_var1 test behavior of var1 in default and other interface */
+/*@Test: test_state1_state2_back_transition test of event1 raised on default interface to enter state 3 */
 int test_state1_state2_back_transition()
 {
 	Test_HierarchyStatemachine machine;
@@ -81,10 +127,104 @@ int test_state1_state2_back_transition()
 	/*@Desc: setup initial statemachine */
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
-	/*@Desc: run an explicit cycle - without any waiting event (for initialization) */
+	/*@Desc: check wether state is initial state (State9) */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State9") == 0);
+
+	/*@Desc: check whether s1 is set to 2 as State 9 is in second hierarchy level */
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
+
+	/*@Desc: raise event1 on default interface */
+	test_Hierarchy_if_raise_event1(&machine.interface);
+
+	/*@Desc: run the statechart for the first time (just as dummy) */
 	test_HierarchyStatemachine_runCycle(&machine);
 
-	/*@Desc:  */
+	/*@Desc: check wether state is changed  to state3 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State3") == 0);
+
+	/*@Desc: check whether s2 is set to 2 as State 3 is in second hierarchy level */
+	assert( test_Hierarchy_if_get_s2(&machine.interface) == 2 );
+
+	/*@Desc: check whether s1 is set to 0 as State 1 has been left */
+	printf( " s1 = %d\n", test_Hierarchy_if_get_s1(&machine.interface));
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 0 );
+
+	/*@Desc: raise event6 on default interface */
+	test_Hierarchy_if_raise_event6(&machine.interface);
+
+	/*@Desc: run the statechart for the first time (just as dummy) */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state10 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State9") == 0);
+
+	/*@Desc: check whether s2 is set to 2 as State 3 is in second hierarchy level */
+	assert( test_Hierarchy_if_get_s2(&machine.interface) == 0 );
+
+	/*@Desc: check whether s1 is set to 0 as State 1 has been left */
+	printf( " s1 = %d\n", test_Hierarchy_if_get_s1(&machine.interface));
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
+
+
+	/*@Desc: teardown statemachine */
+	teardownStatemachine(&machine, &dummyTimer, &eventPool);
+
+	return 0;
+}
+
+/*@Test: test_state1_state2_back_transition test of event1 raised on default interface to enter state 3 */
+int test_state1_state2_back_with_event14_transition()
+{
+	Test_HierarchyStatemachine machine;
+	Timer dummyTimer;
+	EventPool eventPool;
+
+	/*@Desc: setup initial statemachine */
+	setupStatemachine(&machine, &dummyTimer, &eventPool);
+
+	/*@Desc: check wether state is initial state (State9) */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State9") == 0);
+
+	/*@Desc: check whether s1 is set to 2 as State 9 is in second hierarchy level */
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
+
+	/*@Desc: raise event1 on default interface */
+	test_Hierarchy_if_raise_event1(&machine.interface);
+
+	/*@Desc: run the statechart for the first time (just as dummy) */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state3 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State3") == 0);
+
+	/*@Desc: check whether s2 is set to 2 as State 3 is in second hierarchy level */
+	assert( test_Hierarchy_if_get_s2(&machine.interface) == 2 );
+
+	/*@Desc: check whether s1 is set to 0 as State 1 has been left */
+	printf( " s1 = %d\n", test_Hierarchy_if_get_s1(&machine.interface));
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 0 );
+
+	/*@Desc: raise event6 on default interface */
+	test_Hierarchy_if_raise_event14(&machine.interface);
+
+	/*@Desc: run the statechart for the first time (just as dummy) */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state10 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State9") == 0);
+
+	/*@Desc: check whether s2 is set to 2 as State 3 is in second hierarchy level */
+	assert( test_Hierarchy_if_get_s2(&machine.interface) == 0 );
+
+	/*@Desc: check whether s1 is set to 0 as State 1 has been left */
+	printf( " s1 = %d\n", test_Hierarchy_if_get_s1(&machine.interface));
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
 
 
 	/*@Desc: teardown statemachine */
@@ -94,7 +234,403 @@ int test_state1_state2_back_transition()
 }
 
 
+/*@Test: test_traverse_to_State5_back_with_event6_transition tests whether transition to state5 and back to state9 works correct */
+int test_traverse_to_State5_back_with_event6_transition()
+{
+	Test_HierarchyStatemachine machine;
+	Timer dummyTimer;
+	EventPool eventPool;
 
+	/*@Desc: setup initial statemachine */
+	setupStatemachine(&machine, &dummyTimer, &eventPool);
+
+	/*@Desc: check wether state is initial state (State9) */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State9") == 0);
+
+	/*@Desc: check whether s1 is set to 2 as State 9 is in second hierarchy level */
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
+
+	/*@Desc: raise event1 on default interface */
+	test_Hierarchy_if_raise_event1(&machine.interface);
+
+	/*@Desc: run the statechart cycle */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state3 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State3") == 0);
+
+	/*@Desc: raise event2 on default interface */
+	test_Hierarchy_if_raise_event2(&machine.interface);
+
+	/*@Desc: run the statechart cycle */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state3 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State5") == 0);
+
+
+	/*@Desc: check whether s2 is set to 3 as State 5 is in third hierarchy level */
+	assert( test_Hierarchy_if_get_s2(&machine.interface) == 3 );
+
+	/*@Desc: check whether s1 is set to 0 as State 1 has been left */
+	printf( " s1 = %d\n", test_Hierarchy_if_get_s1(&machine.interface));
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 0 );
+
+	/*@Desc: raise event6 on default interface */
+	test_Hierarchy_if_raise_event6(&machine.interface);
+
+	/*@Desc: run the statechart for the first time (just as dummy) */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state10 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State9") == 0);
+
+	/*@Desc: check whether s2 is set to 2 as State 3 is in second hierarchy level */
+	printf( " s2 = %d\n", test_Hierarchy_if_get_s2(&machine.interface));
+	assert( test_Hierarchy_if_get_s2(&machine.interface) == 0 );
+
+	/*@Desc: check whether s1 is set to 0 as State 1 has been left */
+	printf( " s1 = %d\n", test_Hierarchy_if_get_s1(&machine.interface));
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
+
+
+	/*@Desc: teardown statemachine */
+	teardownStatemachine(&machine, &dummyTimer, &eventPool);
+
+	return 0;
+}
+
+
+/*@Test: test_default_var1 test behavior of var1 in default and other interface */
+int test_traverse_to_State5_back_with_event15_transition()
+{
+	Test_HierarchyStatemachine machine;
+	Timer dummyTimer;
+	EventPool eventPool;
+
+	/*@Desc: setup initial statemachine */
+	setupStatemachine(&machine, &dummyTimer, &eventPool);
+
+	/*@Desc: check wether state is initial state (State9) */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State9") == 0);
+
+	/*@Desc: check whether s1 is set to 2 as State 9 is in second hierarchy level */
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
+
+	/*@Desc: raise event1 on default interface */
+	test_Hierarchy_if_raise_event1(&machine.interface);
+
+	/*@Desc: run the statechart cycle */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state3 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State3") == 0);
+
+	/*@Desc: raise event2 on default interface */
+	test_Hierarchy_if_raise_event2(&machine.interface);
+
+	/*@Desc: run the statechart cycle */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state3 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State5") == 0);
+
+
+	/*@Desc: check whether s2 is set to 3 as State 5 is in third hierarchy level */
+	assert( test_Hierarchy_if_get_s2(&machine.interface) == 3 );
+
+	/*@Desc: check whether s1 is set to 0 as State 1 has been left */
+	printf( " s1 = %d\n", test_Hierarchy_if_get_s1(&machine.interface));
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 0 );
+
+	/*@Desc: raise event6 on default interface */
+	test_Hierarchy_if_raise_event15(&machine.interface);
+
+	/*@Desc: run the statechart for the first time (just as dummy) */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state10 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State10") == 0);
+
+	/*@Desc: check whether s2 is set to 2 as State 3 is in second hierarchy level */
+	printf( " s2 = %d\n", test_Hierarchy_if_get_s2(&machine.interface));
+	assert( test_Hierarchy_if_get_s2(&machine.interface) == 0 );
+
+	/*@Desc: check whether s1 is set to 0 as State 1 has been left */
+	printf( " s1 = %d\n", test_Hierarchy_if_get_s1(&machine.interface));
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
+
+
+	/*@Desc: teardown statemachine */
+	teardownStatemachine(&machine, &dummyTimer, &eventPool);
+
+	return 0;
+}
+
+/*@Test: test_traverse_to_State7_back_with_event6_transition tests whether transition to state7 and back to state9 works correct */
+int test_traverse_to_State7_back_with_event6_transition()
+{
+	Test_HierarchyStatemachine machine;
+	Timer dummyTimer;
+	EventPool eventPool;
+
+	/*@Desc: setup initial statemachine */
+	setupStatemachine(&machine, &dummyTimer, &eventPool);
+
+	/*@Desc: check wether state is initial state (State9) */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State9") == 0);
+
+	/*@Desc: check whether s1 is set to 2 as State 9 is in second hierarchy level */
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
+
+	/*@Desc: raise event1 on default interface */
+	test_Hierarchy_if_raise_event1(&machine.interface);
+
+	/*@Desc: run the statechart cycle */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state3 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State3") == 0);
+
+	/*@Desc: raise event2 on default interface */
+	test_Hierarchy_if_raise_event2(&machine.interface);
+
+	/*@Desc: run the statechart cycle */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state5 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State5") == 0);
+
+	/*@Desc: raise event2 on default interface */
+	test_Hierarchy_if_raise_event3(&machine.interface);
+
+	/*@Desc: run the statechart cycle */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state7 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State7") == 0);
+
+	/*@Desc: check whether s2 is set to 3 as State 7 is in 4th hierarchy level */
+	assert( test_Hierarchy_if_get_s2(&machine.interface) == 4 );
+
+	/*@Desc: check whether s1 is set to 0 as State 1 has been left */
+	printf( " s1 = %d\n", test_Hierarchy_if_get_s1(&machine.interface));
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 0 );
+
+	/*@Desc: raise event6 on default interface */
+	test_Hierarchy_if_raise_event6(&machine.interface);
+
+	/*@Desc: run the statechart for the first time (just as dummy) */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state9 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State9") == 0);
+
+	/*@Desc: check whether s2 is set to 2 as State 3 is in second hierarchy level */
+	printf( " s2 = %d\n", test_Hierarchy_if_get_s2(&machine.interface));
+	assert( test_Hierarchy_if_get_s2(&machine.interface) == 0 );
+
+	/*@Desc: check whether s1 is set to 0 as State 1 has been left */
+	printf( " s1 = %d\n", test_Hierarchy_if_get_s1(&machine.interface));
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
+
+
+	/*@Desc: teardown statemachine */
+	teardownStatemachine(&machine, &dummyTimer, &eventPool);
+
+	return 0;
+}
+
+/*@Test: test_traverse_to_State8_back_with_event6_transition tests whether transition to state8 and back to state9 works correct */
+int test_traverse_to_State8_back_with_event6_transition()
+{
+	Test_HierarchyStatemachine machine;
+	Timer dummyTimer;
+	EventPool eventPool;
+
+	/*@Desc: setup initial statemachine */
+	setupStatemachine(&machine, &dummyTimer, &eventPool);
+
+	/*@Desc: check wether state is initial state (State9) */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State9") == 0);
+
+	/*@Desc: check whether s1 is set to 2 as State 9 is in second hierarchy level */
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
+
+	/*@Desc: raise event1 on default interface */
+	test_Hierarchy_if_raise_event1(&machine.interface);
+
+	/*@Desc: run the statechart cycle */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state3 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State3") == 0);
+
+	/*@Desc: raise event2 on default interface */
+	test_Hierarchy_if_raise_event2(&machine.interface);
+
+	/*@Desc: run the statechart cycle */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state5 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State5") == 0);
+
+	/*@Desc: raise event3 on default interface */
+	test_Hierarchy_if_raise_event3(&machine.interface);
+
+	/*@Desc: run the statechart cycle */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state7 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State7") == 0);
+
+	/*@Desc: raise event4 on default interface */
+	test_Hierarchy_if_raise_event4(&machine.interface);
+
+	/*@Desc: run the statechart cycle */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state8 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State8") == 0);
+
+	/*@Desc: check whether s2 is set to 3 as State 7 is in 4th hierarchy level */
+	assert( test_Hierarchy_if_get_s2(&machine.interface) == 4 );
+
+	/*@Desc: check whether s1 is set to 0 as State 1 has been left */
+	printf( " s1 = %d\n", test_Hierarchy_if_get_s1(&machine.interface));
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 0 );
+
+	/*@Desc: raise event6 on default interface */
+	test_Hierarchy_if_raise_event6(&machine.interface);
+
+	/*@Desc: run the statechart for the first time (just as dummy) */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state9 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State9") == 0);
+
+	/*@Desc: check whether s2 is set to 2 as State 3 is in second hierarchy level */
+	printf( " s2 = %d\n", test_Hierarchy_if_get_s2(&machine.interface));
+	assert( test_Hierarchy_if_get_s2(&machine.interface) == 0 );
+
+	/*@Desc: check whether s1 is set to 0 as State 1 has been left */
+	printf( " s1 = %d\n", test_Hierarchy_if_get_s1(&machine.interface));
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
+
+
+	/*@Desc: teardown statemachine */
+	teardownStatemachine(&machine, &dummyTimer, &eventPool);
+
+	return 0;
+}
+
+/*@Test: test_traverse_to_State8_back_with_event16_transition tests whether transition to state8 and back to state10 works correct */
+int test_traverse_to_State8_back_with_event16_transition()
+{
+	Test_HierarchyStatemachine machine;
+	Timer dummyTimer;
+	EventPool eventPool;
+
+	/*@Desc: setup initial statemachine */
+	setupStatemachine(&machine, &dummyTimer, &eventPool);
+
+	/*@Desc: check wether state is initial state (State9) */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State9") == 0);
+
+	/*@Desc: check whether s1 is set to 2 as State 9 is in second hierarchy level */
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
+
+	/*@Desc: raise event1 on default interface */
+	test_Hierarchy_if_raise_event1(&machine.interface);
+
+	/*@Desc: run the statechart cycle */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state3 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State3") == 0);
+
+	/*@Desc: raise event2 on default interface */
+	test_Hierarchy_if_raise_event2(&machine.interface);
+
+	/*@Desc: run the statechart cycle */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state5 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State5") == 0);
+
+	/*@Desc: raise event3 on default interface */
+	test_Hierarchy_if_raise_event3(&machine.interface);
+
+	/*@Desc: run the statechart cycle */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state7 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State7") == 0);
+
+	/*@Desc: raise event4 on default interface */
+	test_Hierarchy_if_raise_event4(&machine.interface);
+
+	/*@Desc: run the statechart cycle */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state8 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State8") == 0);
+
+	/*@Desc: check whether s2 is set to 3 as State 7 is in 4th hierarchy level */
+	assert( test_Hierarchy_if_get_s2(&machine.interface) == 4 );
+
+	/*@Desc: check whether s1 is set to 0 as State 1 has been left */
+	printf( " s1 = %d\n", test_Hierarchy_if_get_s1(&machine.interface));
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 0 );
+
+	/*@Desc: raise event16 on default interface */
+	test_Hierarchy_if_raise_event16(&machine.interface);
+
+	/*@Desc: run the statechart for the first time (just as dummy) */
+	test_HierarchyStatemachine_runCycle(&machine);
+
+	/*@Desc: check wether state is changed  to state10 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State10") == 0);
+
+	/*@Desc: check whether s2 is set to 2 as State 3 is in second hierarchy level */
+	printf( " s2 = %d\n", test_Hierarchy_if_get_s2(&machine.interface));
+	assert( test_Hierarchy_if_get_s2(&machine.interface) == 0 );
+
+	/*@Desc: check whether s1 is set to 0 as State 1 has been left */
+	printf( " s1 = %d\n", test_Hierarchy_if_get_s1(&machine.interface));
+	assert( test_Hierarchy_if_get_s1(&machine.interface) == 2 );
+
+
+	/*@Desc: teardown statemachine */
+	teardownStatemachine(&machine, &dummyTimer, &eventPool);
+
+	return 0;
+}
 
 
 
@@ -108,7 +644,20 @@ int main(int argc, char** argv)
 		return test_state9_state10_transition();
 	case 2:
 		return test_state1_state2_back_transition();
+	case 3:
+		return test_traverse_to_State5_back_with_event6_transition();
+	case 4:
+		return test_traverse_to_State5_back_with_event15_transition();
+	case 5:
+		return test_state1_state2_back_with_event14_transition();
+	case 6:
+		return test_traverse_to_State7_back_with_event6_transition();
+	case 7:
+		return test_traverse_to_State8_back_with_event6_transition();
+	case 8:
+		return test_traverse_to_State8_back_with_event16_transition();
 	}
+
 
 	return -1;
 
