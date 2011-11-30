@@ -95,6 +95,12 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SexecPackage.MAPPED_ELEMENT: {
+				MappedElement mappedElement = (MappedElement)theEObject;
+				T result = caseMappedElement(mappedElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case SexecPackage.EXECUTION_FLOW: {
 				ExecutionFlow executionFlow = (ExecutionFlow)theEObject;
 				T result = caseExecutionFlow(executionFlow);
@@ -107,6 +113,7 @@ public class SexecSwitch<T> extends Switch<T> {
 				ExecutionState executionState = (ExecutionState)theEObject;
 				T result = caseExecutionState(executionState);
 				if (result == null) result = caseNamedElement(executionState);
+				if (result == null) result = caseMappedElement(executionState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -114,6 +121,7 @@ public class SexecSwitch<T> extends Switch<T> {
 				Reaction reaction = (Reaction)theEObject;
 				T result = caseReaction(reaction);
 				if (result == null) result = caseNamedElement(reaction);
+				if (result == null) result = caseMappedElement(reaction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -234,6 +242,23 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SexecPackage.TRACE: {
+				Trace trace = (Trace)theEObject;
+				T result = caseTrace(trace);
+				if (result == null) result = caseStep(trace);
+				if (result == null) result = caseNamedElement(trace);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.REACTION_FIRED: {
+				ReactionFired reactionFired = (ReactionFired)theEObject;
+				T result = caseReactionFired(reactionFired);
+				if (result == null) result = caseTrace(reactionFired);
+				if (result == null) result = caseStep(reactionFired);
+				if (result == null) result = caseNamedElement(reactionFired);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -295,6 +320,21 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNamedElement(NamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mapped Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mapped Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMappedElement(MappedElement object) {
 		return null;
 	}
 
@@ -475,6 +515,36 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseStateCase(StateCase object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Trace</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Trace</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTrace(Trace object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Reaction Fired</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Reaction Fired</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReactionFired(ReactionFired object) {
 		return null;
 	}
 

@@ -202,6 +202,11 @@ public class SequenceItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.SEQUENCE__STEPS,
 				 SexecFactory.eINSTANCE.createStateSwitch()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SEQUENCE__STEPS,
+				 SexecFactory.eINSTANCE.createReactionFired()));
 	}
 
 }

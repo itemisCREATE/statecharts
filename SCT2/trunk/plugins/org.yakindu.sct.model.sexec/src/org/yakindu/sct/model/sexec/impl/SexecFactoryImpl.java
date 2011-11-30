@@ -76,6 +76,7 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case SexecPackage.NAMED_ELEMENT: return createNamedElement();
+			case SexecPackage.MAPPED_ELEMENT: return createMappedElement();
 			case SexecPackage.EXECUTION_FLOW: return createExecutionFlow();
 			case SexecPackage.EXECUTION_STATE: return createExecutionState();
 			case SexecPackage.REACTION: return createReaction();
@@ -93,6 +94,7 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 			case SexecPackage.UNSCHEDULE_TIME_EVENT: return createUnscheduleTimeEvent();
 			case SexecPackage.STATE_SWITCH: return createStateSwitch();
 			case SexecPackage.STATE_CASE: return createStateCase();
+			case SexecPackage.REACTION_FIRED: return createReactionFired();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -136,6 +138,16 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public NamedElement createNamedElement() {
 		NamedElementImpl namedElement = new NamedElementImpl();
 		return namedElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MappedElement createMappedElement() {
+		MappedElementImpl mappedElement = new MappedElementImpl();
+		return mappedElement;
 	}
 
 	/**
@@ -246,6 +258,16 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public StateCase createStateCase() {
 		StateCaseImpl stateCase = new StateCaseImpl();
 		return stateCase;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ReactionFired createReactionFired() {
+		ReactionFiredImpl reactionFired = new ReactionFiredImpl();
+		return reactionFired;
 	}
 
 	/**

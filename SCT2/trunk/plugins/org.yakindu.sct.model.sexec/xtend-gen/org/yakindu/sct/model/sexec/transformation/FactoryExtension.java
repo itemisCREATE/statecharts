@@ -158,6 +158,7 @@ public class FactoryExtension {
         String _string = _fullyQualifiedName.toString();
         String _replaceAll = _string.replaceAll(" ", "");
         r.setName(_replaceAll);
+        r.setSourceElement(state);
       }
     }
     return r;
@@ -201,6 +202,7 @@ public class FactoryExtension {
       String _id = this.sce.id(tr);
       r.setName(_id);
       r.setTransition(true);
+      r.setSourceElement(tr);
     }
     return r;
   }

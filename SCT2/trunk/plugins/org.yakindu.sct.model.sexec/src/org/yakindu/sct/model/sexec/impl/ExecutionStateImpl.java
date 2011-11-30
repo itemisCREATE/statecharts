@@ -12,11 +12,13 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sexec.MappedElement;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecPackage;
@@ -30,6 +32,7 @@ import org.yakindu.sct.model.sexec.Step;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getSourceElement <em>Source Element</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getSimpleName <em>Simple Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#isLeaf <em>Leaf</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getReactSequence <em>React Sequence</em>}</li>
@@ -45,6 +48,16 @@ import org.yakindu.sct.model.sexec.Step;
  * @generated
  */
 public class ExecutionStateImpl extends NamedElementImpl implements ExecutionState {
+	/**
+	 * The cached value of the '{@link #getSourceElement() <em>Source Element</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceElement()
+	 * @generated
+	 * @ordered
+	 */
+	protected EObject sourceElement;
+
 	/**
 	 * The default value of the '{@link #getSimpleName() <em>Simple Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -172,6 +185,44 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	@Override
 	protected EClass eStaticClass() {
 		return SexecPackage.Literals.EXECUTION_STATE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EObject getSourceElement() {
+		if (sourceElement != null && sourceElement.eIsProxy()) {
+			InternalEObject oldSourceElement = (InternalEObject)sourceElement;
+			sourceElement = eResolveProxy(oldSourceElement);
+			if (sourceElement != oldSourceElement) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SexecPackage.EXECUTION_STATE__SOURCE_ELEMENT, oldSourceElement, sourceElement));
+			}
+		}
+		return sourceElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EObject basicGetSourceElement() {
+		return sourceElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSourceElement(EObject newSourceElement) {
+		EObject oldSourceElement = sourceElement;
+		sourceElement = newSourceElement;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__SOURCE_ELEMENT, oldSourceElement, sourceElement));
 	}
 
 	/**
@@ -520,6 +571,9 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case SexecPackage.EXECUTION_STATE__SOURCE_ELEMENT:
+				if (resolve) return getSourceElement();
+				return basicGetSourceElement();
 			case SexecPackage.EXECUTION_STATE__SIMPLE_NAME:
 				return getSimpleName();
 			case SexecPackage.EXECUTION_STATE__LEAF:
@@ -551,6 +605,9 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case SexecPackage.EXECUTION_STATE__SOURCE_ELEMENT:
+				setSourceElement((EObject)newValue);
+				return;
 			case SexecPackage.EXECUTION_STATE__SIMPLE_NAME:
 				setSimpleName((String)newValue);
 				return;
@@ -591,6 +648,9 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case SexecPackage.EXECUTION_STATE__SOURCE_ELEMENT:
+				setSourceElement((EObject)null);
+				return;
 			case SexecPackage.EXECUTION_STATE__SIMPLE_NAME:
 				setSimpleName(SIMPLE_NAME_EDEFAULT);
 				return;
@@ -630,6 +690,8 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case SexecPackage.EXECUTION_STATE__SOURCE_ELEMENT:
+				return sourceElement != null;
 			case SexecPackage.EXECUTION_STATE__SIMPLE_NAME:
 				return SIMPLE_NAME_EDEFAULT == null ? simpleName != null : !SIMPLE_NAME_EDEFAULT.equals(simpleName);
 			case SexecPackage.EXECUTION_STATE__LEAF:
@@ -650,6 +712,38 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 				return stateVector != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == MappedElement.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_STATE__SOURCE_ELEMENT: return SexecPackage.MAPPED_ELEMENT__SOURCE_ELEMENT;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == MappedElement.class) {
+			switch (baseFeatureID) {
+				case SexecPackage.MAPPED_ELEMENT__SOURCE_ELEMENT: return SexecPackage.EXECUTION_STATE__SOURCE_ELEMENT;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

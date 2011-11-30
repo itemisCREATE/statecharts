@@ -25,7 +25,7 @@ package org.yakindu.sct.model.sexec;
  * @model
  * @generated
  */
-public interface Reaction extends NamedElement {
+public interface Reaction extends NamedElement, MappedElement {
 	/**
 	 * Returns the value of the '<em><b>Check</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

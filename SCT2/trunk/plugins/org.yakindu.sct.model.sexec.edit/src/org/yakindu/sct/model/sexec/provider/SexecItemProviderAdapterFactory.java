@@ -166,6 +166,29 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.MappedElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MappedElementItemProvider mappedElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.MappedElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMappedElementAdapter() {
+		if (mappedElementItemProvider == null) {
+			mappedElementItemProvider = new MappedElementItemProvider(this);
+		}
+
+		return mappedElementItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.Check} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -419,6 +442,29 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.ReactionFired} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ReactionFiredItemProvider reactionFiredItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.ReactionFired}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createReactionFiredAdapter() {
+		if (reactionFiredItemProvider == null) {
+			reactionFiredItemProvider = new ReactionFiredItemProvider(this);
+		}
+
+		return reactionFiredItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.CheckRef} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -587,6 +633,7 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	 */
 	public void dispose() {
 		if (namedElementItemProvider != null) namedElementItemProvider.dispose();
+		if (mappedElementItemProvider != null) mappedElementItemProvider.dispose();
 		if (executionFlowItemProvider != null) executionFlowItemProvider.dispose();
 		if (executionStateItemProvider != null) executionStateItemProvider.dispose();
 		if (reactionItemProvider != null) reactionItemProvider.dispose();
@@ -604,6 +651,7 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (unscheduleTimeEventItemProvider != null) unscheduleTimeEventItemProvider.dispose();
 		if (stateSwitchItemProvider != null) stateSwitchItemProvider.dispose();
 		if (stateCaseItemProvider != null) stateCaseItemProvider.dispose();
+		if (reactionFiredItemProvider != null) reactionFiredItemProvider.dispose();
 	}
 
 }

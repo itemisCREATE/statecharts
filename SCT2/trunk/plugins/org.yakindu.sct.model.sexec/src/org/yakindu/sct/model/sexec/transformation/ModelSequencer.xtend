@@ -233,6 +233,10 @@ class ModelSequencer {
 		val r = t.create 
 		if (t.trigger != null) r.check = mapToCheck(t.trigger)
 		r.effect = mapToEffect(t)
+		
+		// TODO: move to other extension that can be added to module
+		(r.effect as Sequence).steps += r.newReactionFired()
+	
 		return r
 	}
 
@@ -307,10 +311,17 @@ class ModelSequencer {
 		if (t.target != null && t.target instanceof State) {
 			sequence.steps.add((t.target as State).create.enterSequence.newCall)	
 		}
+		
 			
 		return sequence
 	}	
 	
+	
+	def newReactionFired(Reaction r) {
+		val rf = sexecFactory.createReactionFired
+		rf.reaction = r
+		rf
+	}
 	
 	
 	def List<State> exitStates(Transition t) {

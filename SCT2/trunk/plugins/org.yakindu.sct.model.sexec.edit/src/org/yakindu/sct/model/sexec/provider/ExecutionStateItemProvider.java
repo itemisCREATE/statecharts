@@ -61,10 +61,33 @@ public class ExecutionStateItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addSourceElementPropertyDescriptor(object);
 			addSimpleNamePropertyDescriptor(object);
 			addLeafPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Source Element feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSourceElementPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_MappedElement_sourceElement_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_MappedElement_sourceElement_feature", "_UI_MappedElement_type"),
+				 SexecPackage.Literals.MAPPED_ELEMENT__SOURCE_ELEMENT,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -279,6 +302,11 @@ public class ExecutionStateItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createReactionFired()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createSequence()));
 
@@ -331,6 +359,11 @@ public class ExecutionStateItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createStateSwitch()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createReactionFired()));
 
 		newChildDescriptors.add
 			(createChildParameter

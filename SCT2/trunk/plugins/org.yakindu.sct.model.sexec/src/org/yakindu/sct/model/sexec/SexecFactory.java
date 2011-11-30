@@ -62,6 +62,15 @@ public interface SexecFactory extends EFactory {
 	NamedElement createNamedElement();
 
 	/**
+	 * Returns a new object of class '<em>Mapped Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mapped Element</em>'.
+	 * @generated
+	 */
+	MappedElement createMappedElement();
+
+	/**
 	 * Returns a new object of class '<em>Check</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -159,6 +168,15 @@ public interface SexecFactory extends EFactory {
 	 * @generated
 	 */
 	StateCase createStateCase();
+
+	/**
+	 * Returns a new object of class '<em>Reaction Fired</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Reaction Fired</em>'.
+	 * @generated
+	 */
+	ReactionFired createReactionFired();
 
 	/**
 	 * Returns a new object of class '<em>Check Ref</em>'.

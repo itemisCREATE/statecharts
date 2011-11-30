@@ -94,6 +94,10 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createNamedElementAdapter();
 			}
 			@Override
+			public Adapter caseMappedElement(MappedElement object) {
+				return createMappedElementAdapter();
+			}
+			@Override
 			public Adapter caseExecutionFlow(ExecutionFlow object) {
 				return createExecutionFlowAdapter();
 			}
@@ -164,6 +168,14 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseStateCase(StateCase object) {
 				return createStateCaseAdapter();
+			}
+			@Override
+			public Adapter caseTrace(Trace object) {
+				return createTraceAdapter();
+			}
+			@Override
+			public Adapter caseReactionFired(ReactionFired object) {
+				return createReactionFiredAdapter();
 			}
 			@Override
 			public Adapter caseScopedElement(ScopedElement object) {
@@ -254,6 +266,20 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.MappedElement <em>Mapped Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.MappedElement
+	 * @generated
+	 */
+	public Adapter createMappedElementAdapter() {
 		return null;
 	}
 
@@ -422,6 +448,34 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStateCaseAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.Trace <em>Trace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.Trace
+	 * @generated
+	 */
+	public Adapter createTraceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.ReactionFired <em>Reaction Fired</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.ReactionFired
+	 * @generated
+	 */
+	public Adapter createReactionFiredAdapter() {
 		return null;
 	}
 

@@ -32,7 +32,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ExecutionState extends NamedElement {
+public interface ExecutionState extends NamedElement, MappedElement {
 	/**
 	 * Returns the value of the '<em><b>Simple Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
