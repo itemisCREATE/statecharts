@@ -49,6 +49,16 @@ public class Assert {
 	}
 
 
+	public static Sequence assertedSequence(Step step) {
+
+		assertNotNull("Step is null", step);
+		assertTrue("Step is no Sequence (was " + step.getClass().getName() +")", step instanceof Sequence);
+
+		return (Sequence) step;
+	}
+
+
+
 	public static void assertStateSwitch(Step step, ExecutionState ... states ) {
 		
 		assertNotNull("Step is null", step);

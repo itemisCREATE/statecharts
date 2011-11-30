@@ -68,6 +68,7 @@ import org.yakindu.sct.model.stext.stext.BoolLiteral
 import javax.sound.sampled.BooleanControl$Type
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.FinalState
+import org.yakindu.sct.model.sgraph.Vertex
 
 class ModelSequencer {
 	
@@ -324,6 +325,7 @@ class ModelSequencer {
 		l.filter( typeof(State) ).toList
 	}
 	
+	// TODO: rename since this list also includes the start state or change implementation and usages
 	def List<RegularState> parentStates(RegularState s) {
 		s.containers.filter( typeof(RegularState) ).toList		
 	}
@@ -477,27 +479,11 @@ class ModelSequencer {
 			s.create.createReactionSequence(r)
 		}])
 		
+		execState.reactSequence.name = 'react'
+		execState.reactSequence.comment = 'The reactions of state ' + state.name + '.'
+		
 		return execState.reactSequence
 	}	
-
-
-//	def Cycle defineCycle(FinalState state) {
-//	
-//		val execState = state.create
-//		val stateReaction = execState.createReactionSequence(null)
-//		val parents = state.parentStates		
-//		execState.cycle = parents.fold(null, [r, s | {
-//			s.create.createReactionSequence(r)
-//		}])
-//		
-//		return execState.cycle
-//	}	
-
-
-//	def Cycle defineCycle(ExecutionState state) {	
-//		state.cycle = state.createReactionSequence(null)
-//		return state.cycle
-//	}
 	
 
 	def Sequence createReactionSequence(ExecutionState state, Step localStep) {	
@@ -695,14 +681,24 @@ class ModelSequencer {
 	}
 	
 
-	def void defineStateExitSequence(Region r) {
+	def dispatch void defineStateExitSequence(Region r) {
 		
 		// process all states of a region
-		for ( s : r.vertices.filter(typeof(State))) defineStateExitSequence(s)
+		for ( s : r.vertices ) defineStateExitSequence(s)
 	}
 	
+	def dispatch void defineStateExitSequence(Vertex v) {}
 	
-	def void defineStateExitSequence(State state) {
+	def dispatch void defineStateExitSequence(FinalState s) {
+		val execState = s.create
+		val seq = sexecFactory.createSequence
+		seq.name = "exitSequence"
+		seq.comment = "Default exit sequence for final state."
+		seq.steps += s.newExitStateStep
+		execState.exitSequence = seq
+	}
+	
+	def dispatch void defineStateExitSequence(State state) {
 		
 		val execState = state.create
 		val seq = sexecFactory.createSequence
@@ -714,24 +710,50 @@ class ModelSequencer {
 			seq.steps += state.newExitStateStep
 					
 		} else {
-	
-			for ( r : state.subRegions ) {
-				defineStateExitSequence(r)
+
+			// first enforce calculation of all child exit sequences
+			state.subRegions.forEach( r | { r.defineStateExitSequence null })
+			
+			// collect leaf states
+			val List<RegularState> leafStates = state.collectLeafStates(new ArrayList<RegularState>())
+
+			// create a state switch
+			val StateSwitch sSwitch = sexecFactory.createStateSwitch
+							
+			// create a case for each leaf state				
+			for ( s : leafStates ) {
+
+				val caseSeq = sexecFactory.createSequence
 				
-				val StateSwitch sSwitch = sexecFactory.createStateSwitch
+				caseSeq.steps += s.create.exitSequence.newCall
 				
-				// collect leaf states
-				val List<State> leafStates = new ArrayList<State>()
+				val exitStates = s.parentStates
+				exitStates.removeAll(state.parentStates)
+				exitStates.remove(s)
 				
-				// create a case for each leaf state
 				// include exitAction calls up to the direct child level.
+				exitStates.fold(caseSeq , [ cs, exitState | {
+					 if (exitState.create.exitAction != null) cs.steps.add(exitState.create.exitAction.newCall) 
+					 cs
+				}]) 
 				
-				
-				for ( s : r.states ) {
-					if (s.create.exitSequence != null) sSwitch.cases.add(s.create.newCase(s.create.exitSequence.newCall))
-				}
-				seq.steps.add(sSwitch);
-			} 
+				if (s.create.exitSequence != null) sSwitch.cases.add(s.create.newCase(caseSeq))
+
+			}
+			
+			seq.steps.add(sSwitch);
+			
+	
+//			for ( r : state.subRegions ) {
+//				defineStateExitSequence(r)
+//				
+//				val StateSwitch sSwitch = sexecFactory.createStateSwitch
+//								
+//				for ( s : r.states ) {
+//					if (s.create.exitSequence != null) sSwitch.cases.add(s.create.newCase(s.create.exitSequence.newCall))
+//				}
+//				seq.steps.add(sSwitch);
+//			} 
 		}
 
 		if (execState.exitAction != null) seq.steps.add(execState.exitAction.newCall)
@@ -740,15 +762,26 @@ class ModelSequencer {
 	
 	
 	
-//	def List<State> collectLeafStates(State state, List<State> leafStates) {
-//		if ( state.simple ) 
-//			leafStates += state
-//		else
-//			
-//			
-//		return leafStates	
-//	}
+	def List<RegularState> collectLeafStates(RegularState state, List<RegularState> leafStates) {
+		if ( state.isLeaf ) 
+			leafStates += state
+		else if ( state instanceof State ) {
+			val State s = state as State		
+			for ( r : s.subRegions ) {
+				for ( v : r.vertices ) {
+					if (v instanceof RegularState) collectLeafStates(v as RegularState, leafStates)
+				}
+			}
+		}
+		return leafStates	
+	}
 	
+	
+	def dispatch isLeaf(RegularState s) { false }
+	
+	def dispatch isLeaf(FinalState s) {true}
+	
+	def dispatch isLeaf(State s) { s.simple }
 	
 	
 	def newCase(ExecutionState it, Step step) {
@@ -782,7 +815,7 @@ class ModelSequencer {
 	}
 	
 	
-	def newEnterStateStep(State s) {
+	def newEnterStateStep(RegularState s) {
 		var ess  = null as EnterState
 		if (s != null) {
 			ess = sexecFactory.createEnterState
@@ -791,7 +824,7 @@ class ModelSequencer {
 		return ess
 	}
 	
-	def newExitStateStep(State s) {
+	def newExitStateStep(RegularState s) {
 		var ess  = null as ExitState
 		if (s != null) {
 			ess = sexecFactory.createExitState
