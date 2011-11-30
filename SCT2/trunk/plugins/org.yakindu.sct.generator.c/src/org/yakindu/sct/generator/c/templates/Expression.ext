@@ -157,16 +157,19 @@ String toCCode(Declaration dec) :
 	"Declartion type not specified";
 
 String toCCode(TimeEvent time_ev) :
-    " ( eventSet_check( &handle->base.eventSet, ev_" + time_ev.name.toLowerCase() + ") ) ";
+    " ( eventSet_check( &handle->base.eventSet, " + time_ev.getEventEnumName() + ") ) ";
 
 String toCCode(VariableDefinition var) :
     " handle->"+ var.getInterface() + "." + var.name.toLowerCase() + " ";
 	
 String toCCode(EventDefinition evDef) :
-    " ( eventSet_check( &handle->base.eventSet, ev_" + evDef.name.toLowerCase() + ") ) ";
+    " ( eventSet_check( &handle->base.eventSet, " + evDef.getEventEnumName() + ") ) ";
 
 String toCCode(EventValueReferenceExpression evrExp) :
 	"((" +evrExp.value.name + "*)handle->base.eventList[" + evrExp.value.getEventEnumName() + "])->value";
+
+String toCCode(EventRaisedReferenceExpression errExp) :
+	" eventSet_check( &handle->base.eventSet, " + errExp.value.getEventEnumName() + ")";
 
 /*
 String getScope(EObject eo) :

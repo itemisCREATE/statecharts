@@ -53,9 +53,18 @@ String interfaceName(InterfaceScope this) : this.getExecutionFlow().name.toFirst
 String interfaceClassName(InterfaceScope this) : this.getExecutionFlow().name.toFirstUpper() + "If" + ((this.name == null)?"":this.name.toFirstUpper());
 String interfaceObjectName(InterfaceScope this) : "interface" + ((this.name == null)?"":this.name.toFirstUpper());
 
-String getEventEnumName(EventDefinition this) : "ev_" + this.name.toFirstLower();
+//String getEventEnumName(EventDefinition this) : "ev_"+ ((InterfaceScope)this.eContainer).name + this.name.toFirstLower();
 String getEventEnumName(TimeEvent this) : "ev_" + this.name.toFirstLower();
-String getEventEnumName(Event this) : "ev_" + this.name.toFirstLower();
+String getEventEnumName(Event this) : "ev_" + this.eContainer.getScopeName() + "_" + this.name.toFirstLower();
+
+String getScopeName(emf::EObject eo) :
+	"<scope not defined>";
+
+String getScopeName(InternalScope inScope) :
+ 	"internal";
+ 	
+String getScopeName(InterfaceScope ifScope) :
+	(ifScope.name == null)?"default":ifScope.name;
 
 String getBoolTrue() : "bool_true";
 String getBoolFalse() : "bool_false";
