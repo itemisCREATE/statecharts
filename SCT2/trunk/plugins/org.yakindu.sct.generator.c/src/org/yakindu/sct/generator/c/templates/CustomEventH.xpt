@@ -51,6 +51,7 @@ typedef struct {
 } «((TimeEvent)ev).name»;
 «ENDFOREACH»
  
+extern uint32_t «scName()»_getSizeofEvent(uint32_t evid);
 
 #endif /* «name.toUpperCase()»_H_ */
 

@@ -20,6 +20,8 @@ Templates for the main statechart c file.
 #include "Event.h"
 #include "definition.h"
 
+typedef uint32_t(*getSizeOfEventFP)(uint32_t evid);
+
 typedef struct {
 	_Event* memptr;
 	boolean inuse;
@@ -31,24 +33,21 @@ typedef struct {
 } TypePool;
 
 typedef struct {
-	TypePool* typePoolMemPtr;
-	uint32_t  maxTypeEventMemElements;
-	boolean   isStatic;
+	TypePool*         typePoolMemPtr;
+	uint32_t          maxTypeEventMemElements;
+	boolean           isStatic;
 } EventPool;
 
 extern _Event* eventPool_createEvent(EventPool* handle, uint32_t evid);
 extern void eventPool_freeEvent(EventPool* handle, _Event* delEvent);
 
 extern void eventPool_init_heap(EventPool* handle,
-		uint32_t maxTypeEventMemElements, uint32_t maxEventsPerType);
+		uint32_t maxTypeEventMemElements, uint32_t maxEventsPerType, getSizeOfEventFP fp);
 
 extern void eventPool_init_static(EventPool* handle, TypePool* eventPool,
 		uint32_t maxTypeEventMemElements);
 
 extern void eventPool_exit(EventPool* handle);
-
-/* please fill me */
-extern uint32_t getSizeofEvent(uint32_t evid);
 
 #endif /* EVENTPOOL_H_ */
 «ENDFILE»

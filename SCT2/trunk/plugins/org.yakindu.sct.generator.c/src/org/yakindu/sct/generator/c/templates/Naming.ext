@@ -5,7 +5,9 @@ import sgraph;
 
 ExecutionFlow getExecutionFlow(InterfaceScope this) : ((ExecutionFlow)this.eContainer);
 
-String scName(Expression statement) : ((ExecutionFlow)statement.eRootContainer).name ;
+String scName(Expression statement) : ((ExecutionFlow)statement.eRootContainer).name;
+String scName(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toFirstLower();
+String ScName(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toFirstUpper();
 
 List[EventDefinition] declaredEvents(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(EventDefinition);
 List[TimeEvent] declaredTimerEvents(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(TimeEvent);

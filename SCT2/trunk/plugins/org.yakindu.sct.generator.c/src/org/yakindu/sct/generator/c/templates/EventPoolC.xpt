@@ -56,7 +56,8 @@ void eventPool_freeEvent(EventPool* handle, _Event* delEvent) {
 
 }
 
-void eventPool_init_heap(EventPool* handle, uint32_t maxTypeEventMemElements, uint32_t maxEventsPerType) {
+void eventPool_init_heap(EventPool* handle, uint32_t maxTypeEventMemElements, 
+        uint32_t maxEventsPerType, getSizeOfEventFP getSizeofEvent) {
 
 	uint32_t i,j;
 	EventMemory* evPtr;
@@ -69,7 +70,7 @@ void eventPool_init_heap(EventPool* handle, uint32_t maxTypeEventMemElements, ui
 		handle->typePoolMemPtr[i].maxEventsPerType = maxEventsPerType;
 		for(j=0; j<maxEventsPerType; ++j) {
 			evPtr = &handle->typePoolMemPtr[i].typedEventMemPtr[j];
-			evPtr->memptr = malloc(getSizeofEvent(i));
+			evPtr->memptr = malloc((*getSizeofEvent)(i));
 			_event_init((_Event*)evPtr->memptr, i); // initialize event ID
 			evPtr->inuse = bool_false;
 		}
