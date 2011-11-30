@@ -22,14 +22,17 @@ String toCode(Void void) :
 String toCode(Void o, String statechartReference) : 
 	""; //polymorphic placeholder (abstract rule)
 
-String toCode(Expression statement) : 
-	null; //polymorphic placeholder (abstract rule)
- 
-String toCode(Statement statement) : 
-	null; //polymorphic placeholder (abstract rule)
+//polymorphic placeholder (abstract rule)
+String toCode(Expression expression) : 
+	"/* Unknown expression: "+expression+" */"; 
 
-String toCode(Literal statement) : 
-	null; //polymorphic placeholder (abstract rule)
+//polymorphic placeholder (abstract rule) 
+String toCode(Statement statement) : 
+	"/* Unknown statement: "+statement+" */";
+
+//polymorphic placeholder (abstract rule)
+String toCode(Literal literal) : 
+	"/* Unknown literal: "+literal+" */";
 
 String toCode(PrimitiveValueExpression primValue) :
 	primValue.value.toCode();
@@ -67,6 +70,12 @@ String toCode(IntLiteral expression) :
 String toCode(RealLiteral expression) :
 	expression.value.toString();
 
+String toCode(EventValueReferenceExpression expression):
+	expression.value.getContext().toFirstLower()+"get"+expression.value.getName()+"().getValue()";
+
+String toCode(EventRaisedReferenceExpression expression):
+	"occuredEvents.contains("+expression.value.getContext().toFirstLower()+"get"+expression.value.getName()+"())";
+
 /* Logical Expressions */
 String toCode(LogicalOrExpression expression) :
   	"("+expression.leftOperand.toCode() + " || " + expression.rightOperand.toCode()+")";
@@ -97,11 +106,11 @@ String toCode(NumericalMultiplyDivideExpression expression) :
 
 String toCode(ElementReferenceExpression exp) :
     if (EventDefinition.isInstance(exp.value)) then
-    	"getOccuredEvents().contains("+((EventDefinition)exp.value).getContext().toFirstLower()+"get"+((EventDefinition)exp.value).getName()+"())"
+    	"occuredEvents.contains("+((EventDefinition)exp.value).getContext().toFirstLower()+"get"+((EventDefinition)exp.value).getName()+"())"
     else if (VariableDefinition.isInstance(exp.value)) then
     	getContext((VariableDefinition)exp.value)+"getVar"+exp.value.name.toFirstUpper()+"()"
     else if (TimeEvent.isInstance(exp.value)) then
-    	"getOccuredEvents().contains("+getName((TimeEvent)exp.value)+")";
+    	"occuredEvents.contains("+getName((TimeEvent)exp.value)+")";
 
 String getOperator(AdditiveOperator operator) : 
     switch(operator) {

@@ -12,10 +12,10 @@ package org.yakindu.sct.runtime.java.trafficlightwaiting;
 
 public class InterfacePedestrianImpl implements InterfacePedestrian {
 
-	private TrafficLightWaitingAbstractBaseStatemachine statemachine;
+	private TrafficLightWaitingCycleBasedStatemachine statemachine;
 
 	public InterfacePedestrianImpl(
-			TrafficLightWaitingAbstractBaseStatemachine statemachine) {
+			TrafficLightWaitingCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 

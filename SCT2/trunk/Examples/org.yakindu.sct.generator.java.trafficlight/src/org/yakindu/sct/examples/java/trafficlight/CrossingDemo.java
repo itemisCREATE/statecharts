@@ -31,13 +31,13 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.yakindu.sct.runtime.java.TimerHandler;
-import org.yakindu.sct.runtime.java.trafficlightwaiting.TrafficLightWaitingCyleBasedStatemachine;
+import org.yakindu.sct.runtime.java.trafficlightwaiting.TrafficLightWaitingCycleBasedStatemachine;
 
 public class CrossingDemo {
 
 	public static void main(String[] args) {
 
-		final TrafficLightWaitingCyleBasedStatemachine statemachine = new TrafficLightWaitingCyleBasedStatemachine();
+		final TrafficLightWaitingCycleBasedStatemachine statemachine = new TrafficLightWaitingCycleBasedStatemachine();
 
 		// create display and shell
 		Display display = new Display();
@@ -125,7 +125,7 @@ public class CrossingDemo {
 	}
 
 	private static void createButtonComposite(
-			final TrafficLightWaitingCyleBasedStatemachine statemachine,
+			final TrafficLightWaitingCycleBasedStatemachine statemachine,
 			Shell shell) {
 		// create a composite to hold the buttons
 		Composite buttonComposite = new Composite(shell, SWT.NO_SCROLL);

@@ -51,8 +51,6 @@ Contributors:
 	«EXPAND CustomInterfaceImpl::file(entry) FOR scope»
 	«ENDFOREACH»
 	
-	«EXPAND CustomBaseStatemachine::file(entry) FOR this»
-	
 	«EXPAND CustomCycleBasedStatemachine::file(entry) FOR this»
 	
 	«REM»Exclude event based statemachines from generation
