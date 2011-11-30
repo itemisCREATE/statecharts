@@ -68,7 +68,7 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 		return interfaceOther;
 	}
 
-	public void enterSequenceStatechartTest_Expression() {
+	public void enter() {
 		enterSequenceState1();
 	}
 

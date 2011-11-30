@@ -310,6 +310,12 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	}
 	«ENDIF-»
 	
+	«IF exitSequence.steps.size > 0-»
+	public void «exitSequenceName()»(){
+		«EXPAND ActionCode FOREACH exitSequence.steps-»
+	}
+	«ENDIF»
+	
 «EXPAND ConditionMethodsImplement FOREACH this.states-»
 «EXPAND StatementMethodsImplement FOREACH this.states-»
 «EXPAND EnterMethodImplement FOREACH this.states-»

@@ -62,7 +62,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 		return interfaceDefault;
 	}
 
-	public void enterSequenceStatechartTest_Hierarchy() {
+	public void enter() {
 		enterSequenceState1();
 	}
 

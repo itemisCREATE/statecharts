@@ -15,4 +15,6 @@ public interface IStatemachine {
 	public void init();
 
 	public void runCycle();
+
+	public void enter();
 }

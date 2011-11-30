@@ -62,7 +62,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine implements IStatemachine 
 		return interfaceDefault;
 	}
 
-	public void enterSequenceStatechartTest_ShallowHistory() {
+	public void enter() {
 		enterSequenceState1();
 	}
 

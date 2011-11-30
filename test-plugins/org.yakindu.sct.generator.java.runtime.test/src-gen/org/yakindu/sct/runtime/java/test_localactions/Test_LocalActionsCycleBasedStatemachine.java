@@ -96,7 +96,7 @@ public class Test_LocalActionsCycleBasedStatemachine
 		return interfaceDefault;
 	}
 
-	public void enterSequenceStatechartTest_LocalActions() {
+	public void enter() {
 		cycleStartTime = System.currentTimeMillis();
 		enterSequenceState1();
 	}
