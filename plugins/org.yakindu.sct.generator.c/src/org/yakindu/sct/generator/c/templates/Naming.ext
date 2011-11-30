@@ -55,6 +55,7 @@ String interfaceObjectName(InterfaceScope this) : "interface" + ((this.name == n
 
 String getEventEnumName(EventDefinition this) : "ev_" + this.name.toFirstLower();
 String getEventEnumName(TimeEvent this) : "ev_" + this.name.toFirstLower();
+String getEventEnumName(Event this) : "ev_" + this.name.toFirstLower();
 
 String getBoolTrue() : "bool_true";
 String getBoolFalse() : "bool_false";

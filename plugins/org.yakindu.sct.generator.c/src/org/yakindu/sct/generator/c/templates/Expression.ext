@@ -3,6 +3,8 @@ import sexec;
 import ecore;
 import sgraph;
 
+extension org::yakindu::sct::generator::c::templates::Naming;
+
 InterfaceScope getInterfaceScope(Assignment this) : ((InterfaceScope)this.varRef.eContainer);
 
 toCCode(Void void) :
@@ -162,6 +164,9 @@ String toCCode(VariableDefinition var) :
 	
 String toCCode(EventDefinition evDef) :
     " ( eventSet_check( &handle->base.eventSet, ev_" + evDef.name.toLowerCase() + ") ) ";
+
+String toCCode(EventValueReferenceExpression evrExp) :
+	"((" +evrExp.value.name + "*)handle->base.eventList[" + evrExp.value.getEventEnumName() + "])->value";
 
 /*
 String getScope(EObject eo) :

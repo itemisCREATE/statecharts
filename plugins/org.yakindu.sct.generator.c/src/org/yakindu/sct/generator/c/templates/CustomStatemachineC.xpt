@@ -275,7 +275,6 @@ void «stName()»_init(«StName()»* handle, Timer* timer, EventPool* eventPool)
 
 «ENDFOREACH»	
 	
-	//((StatemachineBase*)handle)->state[0] = st_State1;
 
 	«EXPAND ActionCode FOREACH this.enterSequence.steps»
 }
