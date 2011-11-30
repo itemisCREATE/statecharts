@@ -29,6 +29,7 @@ import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.Reaction;
+import org.yakindu.sct.model.sexec.ReactionFired;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecFactory;
@@ -333,6 +334,10 @@ public class ModelSequencer {
       }
       Sequence _mapToEffect = this.mapToEffect(t);
       r.setEffect(_mapToEffect);
+      Step _effect = r.getEffect();
+      EList<Step> _steps = ((Sequence) _effect).getSteps();
+      ReactionFired _newReactionFired = this.newReactionFired(r);
+      CollectionExtensions.<ReactionFired>operator_add(_steps, _newReactionFired);
       return r;
     }
   }
@@ -547,6 +552,18 @@ public class ModelSequencer {
       }
       return sequence;
     }
+  }
+  
+  public ReactionFired newReactionFired(final Reaction r) {
+    ReactionFired _xblockexpression = null;
+    {
+      SexecFactory _sexecFactory = this.sexecFactory();
+      ReactionFired _createReactionFired = _sexecFactory.createReactionFired();
+      final ReactionFired rf = _createReactionFired;
+      rf.setReaction(r);
+      _xblockexpression = (rf);
+    }
+    return _xblockexpression;
   }
   
   public List<State> exitStates(final Transition t) {

@@ -9,9 +9,11 @@ package org.yakindu.sct.model.sexec.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.yakindu.sct.model.sexec.Check;
+import org.yakindu.sct.model.sexec.MappedElement;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.Step;
@@ -23,6 +25,7 @@ import org.yakindu.sct.model.sexec.Step;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ReactionImpl#getSourceElement <em>Source Element</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ReactionImpl#getCheck <em>Check</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ReactionImpl#getEffect <em>Effect</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ReactionImpl#isTransition <em>Transition</em>}</li>
@@ -32,6 +35,16 @@ import org.yakindu.sct.model.sexec.Step;
  * @generated
  */
 public class ReactionImpl extends NamedElementImpl implements Reaction {
+	/**
+	 * The cached value of the '{@link #getSourceElement() <em>Source Element</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceElement()
+	 * @generated
+	 * @ordered
+	 */
+	protected EObject sourceElement;
+
 	/**
 	 * The cached value of the '{@link #getCheck() <em>Check</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -89,6 +102,44 @@ public class ReactionImpl extends NamedElementImpl implements Reaction {
 	@Override
 	protected EClass eStaticClass() {
 		return SexecPackage.Literals.REACTION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EObject getSourceElement() {
+		if (sourceElement != null && sourceElement.eIsProxy()) {
+			InternalEObject oldSourceElement = (InternalEObject)sourceElement;
+			sourceElement = eResolveProxy(oldSourceElement);
+			if (sourceElement != oldSourceElement) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SexecPackage.REACTION__SOURCE_ELEMENT, oldSourceElement, sourceElement));
+			}
+		}
+		return sourceElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EObject basicGetSourceElement() {
+		return sourceElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSourceElement(EObject newSourceElement) {
+		EObject oldSourceElement = sourceElement;
+		sourceElement = newSourceElement;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.REACTION__SOURCE_ELEMENT, oldSourceElement, sourceElement));
 	}
 
 	/**
@@ -222,6 +273,9 @@ public class ReactionImpl extends NamedElementImpl implements Reaction {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case SexecPackage.REACTION__SOURCE_ELEMENT:
+				if (resolve) return getSourceElement();
+				return basicGetSourceElement();
 			case SexecPackage.REACTION__CHECK:
 				return getCheck();
 			case SexecPackage.REACTION__EFFECT:
@@ -240,6 +294,9 @@ public class ReactionImpl extends NamedElementImpl implements Reaction {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case SexecPackage.REACTION__SOURCE_ELEMENT:
+				setSourceElement((EObject)newValue);
+				return;
 			case SexecPackage.REACTION__CHECK:
 				setCheck((Check)newValue);
 				return;
@@ -261,6 +318,9 @@ public class ReactionImpl extends NamedElementImpl implements Reaction {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case SexecPackage.REACTION__SOURCE_ELEMENT:
+				setSourceElement((EObject)null);
+				return;
 			case SexecPackage.REACTION__CHECK:
 				setCheck((Check)null);
 				return;
@@ -282,6 +342,8 @@ public class ReactionImpl extends NamedElementImpl implements Reaction {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case SexecPackage.REACTION__SOURCE_ELEMENT:
+				return sourceElement != null;
 			case SexecPackage.REACTION__CHECK:
 				return check != null;
 			case SexecPackage.REACTION__EFFECT:
@@ -290,6 +352,38 @@ public class ReactionImpl extends NamedElementImpl implements Reaction {
 				return transition != TRANSITION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == MappedElement.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.REACTION__SOURCE_ELEMENT: return SexecPackage.MAPPED_ELEMENT__SOURCE_ELEMENT;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == MappedElement.class) {
+			switch (baseFeatureID) {
+				case SexecPackage.MAPPED_ELEMENT__SOURCE_ELEMENT: return SexecPackage.REACTION__SOURCE_ELEMENT;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

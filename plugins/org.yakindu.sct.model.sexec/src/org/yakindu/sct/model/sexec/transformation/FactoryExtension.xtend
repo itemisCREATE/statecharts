@@ -64,7 +64,8 @@ class FactoryExtension {
 	def ExecutionState create r : sexecFactory.createExecutionState create(RegularState state){
 		if (state != null) {
 			r.simpleName = if (state instanceof FinalState) "_final_" else state.name
-			r.name = state.fullyQualifiedName.toString.replaceAll(" ", "")		
+			r.name = state.fullyQualifiedName.toString.replaceAll(" ", "")	
+			r.sourceElement = state	
 		}
 	}
 	
@@ -75,6 +76,7 @@ class FactoryExtension {
 	def Reaction create r : sexecFactory.createReaction create(Transition tr){
 		r.name = tr.id
 		r.transition = true
+		r.sourceElement = tr
 	}
 	
 	def Reaction create r : sexecFactory.createReaction create(LocalReaction lr){

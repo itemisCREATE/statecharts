@@ -229,6 +229,11 @@ public class StateCaseItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createStateSwitch()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATE_CASE__STEP,
+				 SexecFactory.eINSTANCE.createReactionFired()));
 	}
 
 	/**
