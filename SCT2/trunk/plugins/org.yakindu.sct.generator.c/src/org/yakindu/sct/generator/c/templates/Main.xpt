@@ -12,7 +12,9 @@ Contais the root templates that call the different file templates.
 «IMPORT stext»
 «IMPORT sgraph»
 
+
 «IMPORT org::yakindu::sct::generator::c::templates»
+
 
 «DEFINE main(sgen::GeneratorEntry entry) FOR ExecutionFlow»
 
