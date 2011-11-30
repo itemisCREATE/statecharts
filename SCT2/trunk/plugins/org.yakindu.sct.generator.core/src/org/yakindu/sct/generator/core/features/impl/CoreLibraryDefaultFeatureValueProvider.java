@@ -14,6 +14,7 @@ import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.DEBU
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LIBRARY_NAME;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LICENSE_TEXT;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -43,6 +44,8 @@ public class CoreLibraryDefaultFeatureValueProvider extends
 			parameterValue.setValue(getProject(statechart).getName());
 		} else if (DEBUG_FEATURE_DUMP_SEXEC.equals(parameterName)) {
 			parameterValue.setValue(false);
+		} else if (LICENSE_TEXT.equals(parameterName)) {
+			parameterValue.setValue("/*Enter license text here*/");
 		}
 	}
 
