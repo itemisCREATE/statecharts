@@ -1,48 +1,48 @@
 GeneratorModel for yakindu::cpp {
 	statechart InterfaceTest {
-		feature Outlet {
+		feature OutletFeature {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-cpp/InterfaceTest"
 		}
 	}
 	statechart Test_DeepHistory {
-		feature Outlet {
+		feature OutletFeature {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-cpp/Test_DeepHistory"
 		}
 	}
 	statechart Test_Expression {
-		feature Outlet {
+		feature OutletFeature {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-cpp/Test_Expression"
 		}
 	}
 	statechart Test_Hierarchy {
-		feature Outlet {
+		feature OutletFeature {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-cpp/Test_Hierarchy"
 		}
 	}
 	statechart Test_LocalActions {
-		feature Outlet {
+		feature OutletFeature {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-cpp/Test_LocalActions"
 		}
 	}
 	statechart Test_ParallelRegions {
-		feature Outlet {
+		feature OutletFeature {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-cpp/Test_ParallelRegions"
 		}
 	}
 	statechart Test_ShallowHistory {
-		feature Outlet {
+		feature OutletFeature {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-cpp/Test_ShallowHistory"
 		}
 	}
 	statechart Test_Transition {
-		feature Outlet {
+		feature OutletFeature {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-cpp/Test_Transition"
 		}

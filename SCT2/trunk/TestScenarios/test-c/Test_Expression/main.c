@@ -61,8 +61,9 @@ int test_initialization_and_first_entry()
 			(test_Expression_if_get_var3(&machine.interface) < testvalue1u) );
 
 	/*@Desc: check, whether var4 from default interface is between 43.3 and 43.5 */
-	assert( (test_Expression_if_get_var4(&machine.interface) > 43.3) &&
-			(test_Expression_if_get_var4(&machine.interface) < 43.5) );
+	printf("Var4 is set to %f\n", test_Expression_if_get_var4(&machine.interface));
+	assert( (test_Expression_if_get_var4(&machine.interface) > 43.2) &&
+			(test_Expression_if_get_var4(&machine.interface) < 43.4) );
 
 	/*@Desc: check whether var5 from default interface is initially set to false */
 	assert( test_Expression_if_get_var5(&machine.interface) == bool_false);
@@ -140,11 +141,11 @@ int test_default_other_var2_var3()
 	Timer dummyTimer;
 	EventPool eventPool;
 
-//	real testvalue1u = (19.4 + 19.4*123 + 0.1);
-//	real testvalue1l = (19.4 + 19.4*123 - 0.1);
+	real testvalue1u = (19.4 + 19.4*123 + 0.1);
+	real testvalue1l = (19.4 + 19.4*123 - 0.1);
 
-	real testvalue2u = 19.4 + 19.4*123/5.0 + 0.1;
-	real testvalue2l = 19.4 + 19.4*123/5.0 - 0.1;
+	real testvalue2u = (19.4 + 19.4*123)/5.0 + 0.1;
+	real testvalue2l = (19.4 + 19.4*123)/5.0 - 0.1;
 
 	/*@Desc: setup initial statemachine */
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
@@ -153,8 +154,9 @@ int test_default_other_var2_var3()
 	assert( test_Expression_if_get_var2(&machine.interface) == 123 );
 
 	/*@Desc: check initial value for var3 (19.4) */
-	assert( (test_Expression_if_get_var3(&machine.interface) > 19.3) &&
-			(test_Expression_if_get_var3(&machine.interface) < 19.5));
+	printf("Var3 is set to %f\n", test_Expression_if_get_var3(&machine.interface));
+	assert( (test_Expression_if_get_var3(&machine.interface) > testvalue1l) &&
+			(test_Expression_if_get_var3(&machine.interface) < testvalue1u));
 
 	/*@Desc: run an explicit cycle - without any waiting event */
 	test_ExpressionStatemachine_runCycle(&machine);
