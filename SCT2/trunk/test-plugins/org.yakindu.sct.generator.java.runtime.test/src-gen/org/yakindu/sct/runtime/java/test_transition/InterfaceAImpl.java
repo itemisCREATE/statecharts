@@ -23,9 +23,9 @@ public class InterfaceAImpl extends NotificationSender implements InterfaceA {
 	private final Event EventEvent3 = new Event("event3");
 	private final Event EventEvent4 = new Event("event4");
 
-	private Test_TransitionAbstractBaseStatemachine statemachine;
+	private Test_TransitionCycleBasedStatemachine statemachine;
 
-	public InterfaceAImpl(Test_TransitionAbstractBaseStatemachine statemachine) {
+	public InterfaceAImpl(Test_TransitionCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 

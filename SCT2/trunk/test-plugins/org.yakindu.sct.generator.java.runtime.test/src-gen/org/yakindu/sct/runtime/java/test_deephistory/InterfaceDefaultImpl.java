@@ -24,10 +24,10 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 	private final Event EventEvent8 = new Event("event8");
 	private final Event EventEvent9 = new Event("event9");
 
-	private Test_DeepHistoryAbstractBaseStatemachine statemachine;
+	private Test_DeepHistoryCycleBasedStatemachine statemachine;
 
 	public InterfaceDefaultImpl(
-			Test_DeepHistoryAbstractBaseStatemachine statemachine) {
+			Test_DeepHistoryCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 

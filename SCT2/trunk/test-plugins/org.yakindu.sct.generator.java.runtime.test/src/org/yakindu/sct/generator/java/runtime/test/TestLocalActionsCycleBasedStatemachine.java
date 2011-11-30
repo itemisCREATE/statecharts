@@ -18,8 +18,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.yakindu.sct.runtime.java.TimerHandler;
-import org.yakindu.sct.runtime.java.test_localactions.Test_LocalActionsAbstractBaseStatemachine.State;
-import org.yakindu.sct.runtime.java.test_localactions.Test_LocalActionsCyleBasedStatemachine;
+import org.yakindu.sct.runtime.java.test_localactions.Test_LocalActionsCycleBasedStatemachine.State;
+import org.yakindu.sct.runtime.java.test_localactions.Test_LocalActionsCycleBasedStatemachine;
 
 /**
  * Testcases for 'Test_LocalActions' cycle based statemachine.
@@ -29,7 +29,7 @@ import org.yakindu.sct.runtime.java.test_localactions.Test_LocalActionsCyleBased
  */
 public class TestLocalActionsCycleBasedStatemachine {
 
-	private Test_LocalActionsCyleBasedStatemachine statemachine;
+	private Test_LocalActionsCycleBasedStatemachine statemachine;
 
 	// Define the error threshold in ms. 10 ms are required to satisfy
 	// soft-realtime requirements.
@@ -42,7 +42,7 @@ public class TestLocalActionsCycleBasedStatemachine {
 
 	@Before
 	public void setUp() {
-		statemachine = new Test_LocalActionsCyleBasedStatemachine();
+		statemachine = new Test_LocalActionsCycleBasedStatemachine();
 		statemachine.setTimerHandler(new TimerHandler(statemachine));
 		statemachine.enterSequenceStatechartTest_LocalActions();
 	}
@@ -56,7 +56,7 @@ public class TestLocalActionsCycleBasedStatemachine {
 	@Test
 	public void testExceptionHandling() {
 		try {
-			Test_LocalActionsCyleBasedStatemachine statemachine = new Test_LocalActionsCyleBasedStatemachine();
+			Test_LocalActionsCycleBasedStatemachine statemachine = new Test_LocalActionsCycleBasedStatemachine();
 			statemachine.enterSequenceStatechartTest_LocalActions();
 			fail("Statemachine should throw a NullPointerException if entered without TimerHandler set before");
 		} catch (NullPointerException exception) {

@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.runtime.java.test_expression;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -17,9 +18,7 @@ import java.util.Set;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.IStatemachine;
 
-public abstract class Test_ExpressionAbstractBaseStatemachine
-		implements
-			IStatemachine {
+public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 
 	public enum State {
 		State1, State2,
@@ -30,14 +29,13 @@ public abstract class Test_ExpressionAbstractBaseStatemachine
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 
-	private final Collection<Event> occuredEvents;
+	private final ArrayList<Event> occuredEvents;
 
 	private final Collection<Event> outEvents;
 
-	public Test_ExpressionAbstractBaseStatemachine(
-			Collection<Event> occuredEvents) {
-		this.occuredEvents = occuredEvents;
-		this.outEvents = new HashSet<Event>();
+	public Test_ExpressionCycleBasedStatemachine() {
+		occuredEvents = new ArrayList<Event>();
+		outEvents = new HashSet<Event>();
 		interfaceDefault = new InterfaceDefaultImpl(this);
 		interfaceOther = new InterfaceOtherImpl(this);
 	}
@@ -51,7 +49,7 @@ public abstract class Test_ExpressionAbstractBaseStatemachine
 	}
 
 	protected boolean eventOccured() {
-		return !getOccuredEvents().isEmpty();
+		return !occuredEvents.isEmpty();
 	}
 
 	public void init() {
@@ -74,15 +72,15 @@ public abstract class Test_ExpressionAbstractBaseStatemachine
 		enterSequenceState1();
 	}
 
-	private boolean conditionState1Tr0(Collection<?> events) {
-		return (getOccuredEvents().contains(interfaceDefault.getEventEvent1()) && ((interfaceOther
+	private boolean conditionState1Tr0() {
+		return (occuredEvents.contains(interfaceDefault.getEventEvent1()) && ((interfaceOther
 				.getVarVar1() == true) || (interfaceDefault.getVarVar5() == false)));
 	}
-	private boolean conditionState2Tr0(Collection<?> events) {
-		return (getOccuredEvents().contains(interfaceDefault.getEventEvent1()) && (interfaceDefault
+	private boolean conditionState2Tr0() {
+		return (occuredEvents.contains(interfaceDefault.getEventEvent1()) && (interfaceDefault
 				.getVarVar3() > 0));
 	}
-	private boolean conditionState2Lr2(Collection<?> events) {
+	private boolean conditionState2Lr2() {
 		return true;
 	}
 	private void actionsState1Tr0() {
@@ -138,34 +136,35 @@ public abstract class Test_ExpressionAbstractBaseStatemachine
 	private void exitSequenceState2() {
 		activeStates.remove(State.State2);
 	}
-	private void cycleState1(Collection<?> events) {
-		if (conditionState1Tr0(events)) {
+	private void reactState1() {
+		if (conditionState1Tr0()) {
 			actionsState1Tr0();
 		}
 	}
-	private void cycleState2(Collection<?> events) {
-		if (conditionState2Tr0(events)) {
+	private void reactState2() {
+		if (conditionState2Tr0()) {
 			actionsState2Tr0();
 		} else {
-			if (conditionState2Lr2(events)) {
+			if (conditionState2Lr2()) {
 				actionsState2Lr2();
 			}
 
 		}
 	}
-	protected void runCycle(Collection<?> events) {
-		getOutEvents().clear();
+	public void runCycle() {
+		outEvents.clear();
 		for (State state : activeStates) {
 			switch (state) {
 				case State1 :
-					cycleState1(events);
+					reactState1();
 					break;
 				case State2 :
-					cycleState2(events);
+					reactState2();
 					break;
 				default :
 					// no state found
 			}
 		}
+		occuredEvents.clear();
 	}
 }

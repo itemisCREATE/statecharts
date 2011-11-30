@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.runtime.java.test_transition;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -22,7 +23,7 @@ import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Notification;
 import org.yakindu.sct.runtime.java.ValuedEvent;
 
-public abstract class Test_TransitionAbstractBaseStatemachine
+public class Test_TransitionCycleBasedStatemachine
 		implements
 			ITimedStatemachine {
 
@@ -43,7 +44,7 @@ public abstract class Test_TransitionAbstractBaseStatemachine
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 
-	private final Collection<Event> occuredEvents;
+	private final ArrayList<Event> occuredEvents;
 
 	private final Collection<Event> outEvents;
 
@@ -51,10 +52,9 @@ public abstract class Test_TransitionAbstractBaseStatemachine
 
 	private long cycleStartTime;
 
-	public Test_TransitionAbstractBaseStatemachine(
-			Collection<Event> occuredEvents) {
-		this.occuredEvents = occuredEvents;
-		this.outEvents = new HashSet<Event>();
+	public Test_TransitionCycleBasedStatemachine() {
+		occuredEvents = new ArrayList<Event>();
+		outEvents = new HashSet<Event>();
 		interfaceA = new InterfaceAImpl(this);
 		interfaceDefault = new InterfaceDefaultImpl(this);
 	}
@@ -68,7 +68,7 @@ public abstract class Test_TransitionAbstractBaseStatemachine
 	}
 
 	protected boolean eventOccured() {
-		return !getOccuredEvents().isEmpty();
+		return !occuredEvents.isEmpty();
 	}
 
 	public void init() {
@@ -124,36 +124,36 @@ public abstract class Test_TransitionAbstractBaseStatemachine
 		enterSequenceState1();
 	}
 
-	private boolean conditionState1Tr0(Collection<?> events) {
-		return (getOccuredEvents().contains(interfaceA.getEventEvent1()) || getOccuredEvents()
+	private boolean conditionState1Tr0() {
+		return (occuredEvents.contains(interfaceA.getEventEvent1()) || occuredEvents
 				.contains(interfaceA.getEventEvent2()));
 	}
-	private boolean conditionState1Tr1(Collection<?> events) {
+	private boolean conditionState1Tr1() {
 		return (interfaceDefault.getVarI() == 5);
 	}
-	private boolean conditionState1Tr2(Collection<?> events) {
-		return (getOccuredEvents().contains(interfaceA.getEventEvent3()) && (interfaceDefault
+	private boolean conditionState1Tr2() {
+		return (occuredEvents.contains(interfaceA.getEventEvent3()) && (interfaceDefault
 				.getVarJ() < 20));
 	}
-	private boolean conditionState1Tr3(Collection<?> events) {
-		return ((getOccuredEvents().contains(interfaceA.getEventEvent3()) || getOccuredEvents()
+	private boolean conditionState1Tr3() {
+		return ((occuredEvents.contains(interfaceA.getEventEvent3()) || occuredEvents
 				.contains(interfaceA.getEventEvent4())) && (interfaceDefault
 				.getVarJ() > 30));
 	}
-	private boolean conditionState1Tr4(Collection<?> events) {
-		return getOccuredEvents().contains(interfaceDefault.getEventEvent6());
+	private boolean conditionState1Tr4() {
+		return occuredEvents.contains(interfaceDefault.getEventEvent6());
 	}
-	private boolean conditionState1Tr5(Collection<?> events) {
-		return getOccuredEvents().contains(interfaceDefault.getEventEvent7());
+	private boolean conditionState1Tr5() {
+		return occuredEvents.contains(interfaceDefault.getEventEvent7());
 	}
-	private boolean conditionState1Tr6(Collection<?> events) {
-		return getOccuredEvents().contains(State1_time_event_0);
+	private boolean conditionState1Tr6() {
+		return occuredEvents.contains(State1_time_event_0);
 	}
-	private boolean conditionState1Tr7(Collection<?> events) {
-		return getOccuredEvents().contains(State1_time_event_1);
+	private boolean conditionState1Tr7() {
+		return occuredEvents.contains(State1_time_event_1);
 	}
-	private boolean conditionState1Tr8(Collection<?> events) {
-		return getOccuredEvents().contains(interfaceA.getEventEvent1());
+	private boolean conditionState1Tr8() {
+		return occuredEvents.contains(interfaceA.getEventEvent1());
 	}
 	private void actionsState1Tr0() {
 		exitSequenceState1();
@@ -231,32 +231,32 @@ public abstract class Test_TransitionAbstractBaseStatemachine
 	private void exitSequenceState2() {
 		activeStates.remove(State.State2);
 	}
-	private void cycleState1(Collection<?> events) {
-		if (conditionState1Tr0(events)) {
+	private void reactState1() {
+		if (conditionState1Tr0()) {
 			actionsState1Tr0();
 		} else {
-			if (conditionState1Tr1(events)) {
+			if (conditionState1Tr1()) {
 				actionsState1Tr1();
 			} else {
-				if (conditionState1Tr2(events)) {
+				if (conditionState1Tr2()) {
 					actionsState1Tr2();
 				} else {
-					if (conditionState1Tr3(events)) {
+					if (conditionState1Tr3()) {
 						actionsState1Tr3();
 					} else {
-						if (conditionState1Tr4(events)) {
+						if (conditionState1Tr4()) {
 							actionsState1Tr4();
 						} else {
-							if (conditionState1Tr5(events)) {
+							if (conditionState1Tr5()) {
 								actionsState1Tr5();
 							} else {
-								if (conditionState1Tr6(events)) {
+								if (conditionState1Tr6()) {
 									actionsState1Tr6();
 								} else {
-									if (conditionState1Tr7(events)) {
+									if (conditionState1Tr7()) {
 										actionsState1Tr7();
 									} else {
-										if (conditionState1Tr8(events)) {
+										if (conditionState1Tr8()) {
 											actionsState1Tr8();
 										}
 									}
@@ -268,22 +268,23 @@ public abstract class Test_TransitionAbstractBaseStatemachine
 			}
 		}
 	}
-	private void cycleState2(Collection<?> events) {
+	private void reactState2() {
 	}
-	protected void runCycle(Collection<?> events) {
+	public void runCycle() {
 		cycleStartTime = System.currentTimeMillis();
-		getOutEvents().clear();
+		outEvents.clear();
 		for (State state : activeStates) {
 			switch (state) {
 				case State1 :
-					cycleState1(events);
+					reactState1();
 					break;
 				case State2 :
-					cycleState2(events);
+					reactState2();
 					break;
 				default :
 					// no state found
 			}
 		}
+		occuredEvents.clear();
 	}
 }

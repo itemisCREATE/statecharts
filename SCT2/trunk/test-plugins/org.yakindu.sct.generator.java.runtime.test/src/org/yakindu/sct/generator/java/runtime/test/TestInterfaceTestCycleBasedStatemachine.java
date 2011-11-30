@@ -18,8 +18,8 @@ import static org.junit.Assert.fail;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.runtime.java.interfacetest.InterfaceTestAbstractBaseStatemachine.State;
-import org.yakindu.sct.runtime.java.interfacetest.InterfaceTestCyleBasedStatemachine;
+import org.yakindu.sct.runtime.java.interfacetest.InterfaceTestCycleBasedStatemachine.State;
+import org.yakindu.sct.runtime.java.interfacetest.InterfaceTestCycleBasedStatemachine;
 
 /**
  * Testcases for 'InterfaceTest' cycle based statemachine.
@@ -29,11 +29,11 @@ import org.yakindu.sct.runtime.java.interfacetest.InterfaceTestCyleBasedStatemac
  */
 public class TestInterfaceTestCycleBasedStatemachine {
 
-	private InterfaceTestCyleBasedStatemachine statemachine;
+	private InterfaceTestCycleBasedStatemachine statemachine;
 
 	@Before
 	public void setUp() {
-		statemachine = new InterfaceTestCyleBasedStatemachine();
+		statemachine = new InterfaceTestCycleBasedStatemachine();
 		statemachine.enterSequenceStatechartInterfaceTest();
 	}
 

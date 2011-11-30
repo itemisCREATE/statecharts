@@ -21,10 +21,10 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 	private final Event EventEvent5 = new Event("event5");
 	private final Event EventEvent6 = new Event("event6");
 
-	private Test_ParallelRegionsAbstractBaseStatemachine statemachine;
+	private Test_ParallelRegionsCycleBasedStatemachine statemachine;
 
 	public InterfaceDefaultImpl(
-			Test_ParallelRegionsAbstractBaseStatemachine statemachine) {
+			Test_ParallelRegionsCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 

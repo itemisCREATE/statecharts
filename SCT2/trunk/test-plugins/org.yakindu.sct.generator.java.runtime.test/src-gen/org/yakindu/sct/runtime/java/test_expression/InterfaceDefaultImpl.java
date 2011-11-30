@@ -23,10 +23,10 @@ public class InterfaceDefaultImpl extends NotificationSender
 	private final ValuedEvent<Double> EventEvent2 = new ValuedEvent<Double>(
 			"event2", 0D);
 
-	private Test_ExpressionAbstractBaseStatemachine statemachine;
+	private Test_ExpressionCycleBasedStatemachine statemachine;
 
 	public InterfaceDefaultImpl(
-			Test_ExpressionAbstractBaseStatemachine statemachine) {
+			Test_ExpressionCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 

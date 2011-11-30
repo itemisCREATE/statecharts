@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.runtime.java.test_localactions;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -21,7 +22,7 @@ import org.yakindu.sct.runtime.java.ITimerHandler;
 import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Notification;
 
-public abstract class Test_LocalActionsAbstractBaseStatemachine
+public class Test_LocalActionsCycleBasedStatemachine
 		implements
 			ITimedStatemachine {
 
@@ -38,7 +39,7 @@ public abstract class Test_LocalActionsAbstractBaseStatemachine
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 
-	private final Collection<Event> occuredEvents;
+	private final ArrayList<Event> occuredEvents;
 
 	private final Collection<Event> outEvents;
 
@@ -46,10 +47,9 @@ public abstract class Test_LocalActionsAbstractBaseStatemachine
 
 	private long cycleStartTime;
 
-	public Test_LocalActionsAbstractBaseStatemachine(
-			Collection<Event> occuredEvents) {
-		this.occuredEvents = occuredEvents;
-		this.outEvents = new HashSet<Event>();
+	public Test_LocalActionsCycleBasedStatemachine() {
+		occuredEvents = new ArrayList<Event>();
+		outEvents = new HashSet<Event>();
 		interfaceDefault = new InterfaceDefaultImpl(this);
 	}
 
@@ -62,7 +62,7 @@ public abstract class Test_LocalActionsAbstractBaseStatemachine
 	}
 
 	protected boolean eventOccured() {
-		return !getOccuredEvents().isEmpty();
+		return !occuredEvents.isEmpty();
 	}
 
 	public void init() {
@@ -101,27 +101,27 @@ public abstract class Test_LocalActionsAbstractBaseStatemachine
 		enterSequenceState1();
 	}
 
-	private boolean conditionState1Tr0(Collection<?> events) {
-		return getOccuredEvents().contains(interfaceDefault.getEventEvent1());
+	private boolean conditionState1Tr0() {
+		return occuredEvents.contains(interfaceDefault.getEventEvent1());
 	}
-	private boolean conditionState1Lr2(Collection<?> events) {
+	private boolean conditionState1Lr2() {
 		return true;
 	}
-	private boolean conditionState1Lr3(Collection<?> events) {
-		return getOccuredEvents().contains(interfaceDefault.getEventEvent2());
+	private boolean conditionState1Lr3() {
+		return occuredEvents.contains(interfaceDefault.getEventEvent2());
 	}
-	private boolean conditionState1Lr4(Collection<?> events) {
-		return getOccuredEvents().contains(State1_time_event_0);
+	private boolean conditionState1Lr4() {
+		return occuredEvents.contains(State1_time_event_0);
 	}
-	private boolean conditionState2Tr0(Collection<?> events) {
-		return getOccuredEvents().contains(interfaceDefault.getEventEvent3());
+	private boolean conditionState2Tr0() {
+		return occuredEvents.contains(interfaceDefault.getEventEvent3());
 	}
-	private boolean conditionState2Lr2(Collection<?> events) {
-		return (getOccuredEvents().contains(interfaceDefault.getEventEvent2()) || getOccuredEvents()
+	private boolean conditionState2Lr2() {
+		return (occuredEvents.contains(interfaceDefault.getEventEvent2()) || occuredEvents
 				.contains(interfaceDefault.getEventEvent4()));
 	}
-	private boolean conditionState2Lr3(Collection<?> events) {
-		return getOccuredEvents().contains(State2_time_event_0);
+	private boolean conditionState2Lr3() {
+		return occuredEvents.contains(State2_time_event_0);
 	}
 	private void actionsState1Tr0() {
 		exitSequenceState1();
@@ -191,49 +191,50 @@ public abstract class Test_LocalActionsAbstractBaseStatemachine
 		activeStates.remove(State.State2);
 		exitActionState2();
 	}
-	private void cycleState1(Collection<?> events) {
-		if (conditionState1Tr0(events)) {
+	private void reactState1() {
+		if (conditionState1Tr0()) {
 			actionsState1Tr0();
 		} else {
-			if (conditionState1Lr2(events)) {
+			if (conditionState1Lr2()) {
 				actionsState1Lr2();
 			}
-			if (conditionState1Lr3(events)) {
+			if (conditionState1Lr3()) {
 				actionsState1Lr3();
 			}
-			if (conditionState1Lr4(events)) {
+			if (conditionState1Lr4()) {
 				actionsState1Lr4();
 			}
 
 		}
 	}
-	private void cycleState2(Collection<?> events) {
-		if (conditionState2Tr0(events)) {
+	private void reactState2() {
+		if (conditionState2Tr0()) {
 			actionsState2Tr0();
 		} else {
-			if (conditionState2Lr2(events)) {
+			if (conditionState2Lr2()) {
 				actionsState2Lr2();
 			}
-			if (conditionState2Lr3(events)) {
+			if (conditionState2Lr3()) {
 				actionsState2Lr3();
 			}
 
 		}
 	}
-	protected void runCycle(Collection<?> events) {
+	public void runCycle() {
 		cycleStartTime = System.currentTimeMillis();
-		getOutEvents().clear();
+		outEvents.clear();
 		for (State state : activeStates) {
 			switch (state) {
 				case State1 :
-					cycleState1(events);
+					reactState1();
 					break;
 				case State2 :
-					cycleState2(events);
+					reactState2();
 					break;
 				default :
 					// no state found
 			}
 		}
+		occuredEvents.clear();
 	}
 }

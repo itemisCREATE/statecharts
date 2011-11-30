@@ -21,9 +21,9 @@ public class InterfaceOtherImpl extends NotificationSender
 	private final Event EventEvent3 = new Event("event3");
 	private final Event EventEvent4 = new Event("event4");
 
-	private InterfaceTestAbstractBaseStatemachine statemachine;
+	private InterfaceTestCycleBasedStatemachine statemachine;
 
-	public InterfaceOtherImpl(InterfaceTestAbstractBaseStatemachine statemachine) {
+	public InterfaceOtherImpl(InterfaceTestCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 

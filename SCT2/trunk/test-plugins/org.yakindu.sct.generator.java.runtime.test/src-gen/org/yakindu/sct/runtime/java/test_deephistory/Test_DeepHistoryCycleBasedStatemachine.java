@@ -8,8 +8,9 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.runtime.java.test_shallowhistory;
+package org.yakindu.sct.runtime.java.test_deephistory;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -17,9 +18,7 @@ import java.util.Set;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.IStatemachine;
 
-public abstract class Test_ShallowHistoryAbstractBaseStatemachine
-		implements
-			IStatemachine {
+public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 
 	public enum State {
 		State1, State2, State3, State4, State6, State7, State8, State9, State5,
@@ -29,14 +28,13 @@ public abstract class Test_ShallowHistoryAbstractBaseStatemachine
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 
-	private final Collection<Event> occuredEvents;
+	private final ArrayList<Event> occuredEvents;
 
 	private final Collection<Event> outEvents;
 
-	public Test_ShallowHistoryAbstractBaseStatemachine(
-			Collection<Event> occuredEvents) {
-		this.occuredEvents = occuredEvents;
-		this.outEvents = new HashSet<Event>();
+	public Test_DeepHistoryCycleBasedStatemachine() {
+		occuredEvents = new ArrayList<Event>();
+		outEvents = new HashSet<Event>();
 		interfaceDefault = new InterfaceDefaultImpl(this);
 	}
 
@@ -49,7 +47,7 @@ public abstract class Test_ShallowHistoryAbstractBaseStatemachine
 	}
 
 	protected boolean eventOccured() {
-		return !getOccuredEvents().isEmpty();
+		return !occuredEvents.isEmpty();
 	}
 
 	public void init() {
@@ -64,33 +62,33 @@ public abstract class Test_ShallowHistoryAbstractBaseStatemachine
 		return interfaceDefault;
 	}
 
-	public void enterSequenceStatechartTest_ShallowHistory() {
+	public void enterSequenceStatechartTest_DeepHistory() {
 		enterSequenceState1();
 	}
 
-	private boolean conditionState1Tr0(Collection<?> events) {
-		return getOccuredEvents().contains(interfaceDefault.getEventEvent1());
+	private boolean conditionState1Tr0() {
+		return occuredEvents.contains(interfaceDefault.getEventEvent1());
 	}
-	private boolean conditionState2Tr0(Collection<?> events) {
-		return getOccuredEvents().contains(interfaceDefault.getEventEvent2());
+	private boolean conditionState2Tr0() {
+		return occuredEvents.contains(interfaceDefault.getEventEvent2());
 	}
-	private boolean conditionState3Tr0(Collection<?> events) {
-		return getOccuredEvents().contains(interfaceDefault.getEventEvent3());
+	private boolean conditionState3Tr0() {
+		return occuredEvents.contains(interfaceDefault.getEventEvent3());
 	}
-	private boolean conditionState4Tr0(Collection<?> events) {
-		return getOccuredEvents().contains(interfaceDefault.getEventEvent4());
+	private boolean conditionState4Tr0() {
+		return occuredEvents.contains(interfaceDefault.getEventEvent4());
 	}
-	private boolean conditionState6Tr0(Collection<?> events) {
-		return getOccuredEvents().contains(interfaceDefault.getEventEvent5());
+	private boolean conditionState6Tr0() {
+		return occuredEvents.contains(interfaceDefault.getEventEvent5());
 	}
-	private boolean conditionState7Tr0(Collection<?> events) {
-		return getOccuredEvents().contains(interfaceDefault.getEventEvent6());
+	private boolean conditionState7Tr0() {
+		return occuredEvents.contains(interfaceDefault.getEventEvent6());
 	}
-	private boolean conditionState8Tr0(Collection<?> events) {
-		return getOccuredEvents().contains(interfaceDefault.getEventEvent7());
+	private boolean conditionState8Tr0() {
+		return occuredEvents.contains(interfaceDefault.getEventEvent7());
 	}
-	private boolean conditionState9Tr0(Collection<?> events) {
-		return getOccuredEvents().contains(interfaceDefault.getEventEvent8());
+	private boolean conditionState9Tr0() {
+		return occuredEvents.contains(interfaceDefault.getEventEvent8());
 	}
 	private void actionsState1Tr0() {
 		exitSequenceState1();
@@ -175,8 +173,14 @@ public abstract class Test_ShallowHistoryAbstractBaseStatemachine
 		if (activeStates.contains(State.State3)) {
 			exitSequenceState3();
 
-		} else if (activeStates.contains(State.State4)) {
-			exitSequenceState4();
+		} else if (activeStates.contains(State.State6)) {
+			exitSequenceState6();
+
+		} else if (activeStates.contains(State.State8)) {
+			exitSequenceState8();
+
+		} else if (activeStates.contains(State.State9)) {
+			exitSequenceState9();
 
 		} else if (activeStates.contains(State.State5)) {
 			exitSequenceState5();
@@ -190,8 +194,11 @@ public abstract class Test_ShallowHistoryAbstractBaseStatemachine
 		if (activeStates.contains(State.State6)) {
 			exitSequenceState6();
 
-		} else if (activeStates.contains(State.State7)) {
-			exitSequenceState7();
+		} else if (activeStates.contains(State.State8)) {
+			exitSequenceState8();
+
+		} else if (activeStates.contains(State.State9)) {
+			exitSequenceState9();
 
 		}
 	}
@@ -216,33 +223,33 @@ public abstract class Test_ShallowHistoryAbstractBaseStatemachine
 	private void exitSequenceState5() {
 		activeStates.remove(State.State5);
 	}
-	private void cycleState1(Collection<?> events) {
-		if (conditionState1Tr0(events)) {
+	private void reactState1() {
+		if (conditionState1Tr0()) {
 			actionsState1Tr0();
 		}
 	}
-	private void cycleState2(Collection<?> events) {
+	private void reactState2() {
 	}
-	private void cycleState3(Collection<?> events) {
-		if (conditionState2Tr0(events)) {
+	private void reactState3() {
+		if (conditionState2Tr0()) {
 			actionsState2Tr0();
 		} else {
-			if (conditionState3Tr0(events)) {
+			if (conditionState3Tr0()) {
 				actionsState3Tr0();
 			}
 
 		}
 	}
-	private void cycleState4(Collection<?> events) {
+	private void reactState4() {
 	}
-	private void cycleState6(Collection<?> events) {
-		if (conditionState2Tr0(events)) {
+	private void reactState6() {
+		if (conditionState2Tr0()) {
 			actionsState2Tr0();
 		} else {
-			if (conditionState4Tr0(events)) {
+			if (conditionState4Tr0()) {
 				actionsState4Tr0();
 			} else {
-				if (conditionState6Tr0(events)) {
+				if (conditionState6Tr0()) {
 					actionsState6Tr0();
 				}
 
@@ -250,19 +257,19 @@ public abstract class Test_ShallowHistoryAbstractBaseStatemachine
 
 		}
 	}
-	private void cycleState7(Collection<?> events) {
+	private void reactState7() {
 	}
-	private void cycleState8(Collection<?> events) {
-		if (conditionState2Tr0(events)) {
+	private void reactState8() {
+		if (conditionState2Tr0()) {
 			actionsState2Tr0();
 		} else {
-			if (conditionState4Tr0(events)) {
+			if (conditionState4Tr0()) {
 				actionsState4Tr0();
 			} else {
-				if (conditionState7Tr0(events)) {
+				if (conditionState7Tr0()) {
 					actionsState7Tr0();
 				} else {
-					if (conditionState8Tr0(events)) {
+					if (conditionState8Tr0()) {
 						actionsState8Tr0();
 					}
 
@@ -272,17 +279,17 @@ public abstract class Test_ShallowHistoryAbstractBaseStatemachine
 
 		}
 	}
-	private void cycleState9(Collection<?> events) {
-		if (conditionState2Tr0(events)) {
+	private void reactState9() {
+		if (conditionState2Tr0()) {
 			actionsState2Tr0();
 		} else {
-			if (conditionState4Tr0(events)) {
+			if (conditionState4Tr0()) {
 				actionsState4Tr0();
 			} else {
-				if (conditionState7Tr0(events)) {
+				if (conditionState7Tr0()) {
 					actionsState7Tr0();
 				} else {
-					if (conditionState9Tr0(events)) {
+					if (conditionState9Tr0()) {
 						actionsState9Tr0();
 					}
 
@@ -292,47 +299,48 @@ public abstract class Test_ShallowHistoryAbstractBaseStatemachine
 
 		}
 	}
-	private void cycleState5(Collection<?> events) {
-		if (conditionState2Tr0(events)) {
+	private void reactState5() {
+		if (conditionState2Tr0()) {
 			actionsState2Tr0();
 		} else {
 
 		}
 	}
-	protected void runCycle(Collection<?> events) {
-		getOutEvents().clear();
+	public void runCycle() {
+		outEvents.clear();
 		for (State state : activeStates) {
 			switch (state) {
 				case State1 :
-					cycleState1(events);
+					reactState1();
 					break;
 				case State2 :
-					cycleState2(events);
+					reactState2();
 					break;
 				case State3 :
-					cycleState3(events);
+					reactState3();
 					break;
 				case State4 :
-					cycleState4(events);
+					reactState4();
 					break;
 				case State6 :
-					cycleState6(events);
+					reactState6();
 					break;
 				case State7 :
-					cycleState7(events);
+					reactState7();
 					break;
 				case State8 :
-					cycleState8(events);
+					reactState8();
 					break;
 				case State9 :
-					cycleState9(events);
+					reactState9();
 					break;
 				case State5 :
-					cycleState5(events);
+					reactState5();
 					break;
 				default :
 					// no state found
 			}
 		}
+		occuredEvents.clear();
 	}
 }
