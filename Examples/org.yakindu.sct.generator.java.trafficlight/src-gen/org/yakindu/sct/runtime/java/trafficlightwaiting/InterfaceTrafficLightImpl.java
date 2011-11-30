@@ -12,10 +12,10 @@ package org.yakindu.sct.runtime.java.trafficlightwaiting;
 
 public class InterfaceTrafficLightImpl implements InterfaceTrafficLight {
 
-	private TrafficLightWaitingAbstractBaseStatemachine statemachine;
+	private TrafficLightWaitingCycleBasedStatemachine statemachine;
 
 	public InterfaceTrafficLightImpl(
-			TrafficLightWaitingAbstractBaseStatemachine statemachine) {
+			TrafficLightWaitingCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 

@@ -23,7 +23,8 @@ String getStatemachineName(ExecutionFlow this) : (name.toLowerCase() == "default
 String getBaseStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "AbstractBaseStatemachine";
 String getBaseStatemachineName(InterfaceScope this) : ((ExecutionFlow)eContainer).getBaseStatemachineName();
 String getEventBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "EventBasedStatemachine";
-String getCycleBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "CyleBasedStatemachine";
+String getCycleBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "CycleBasedStatemachine";
+String getCycleBasedStatemachineName(InterfaceScope this) : ((ExecutionFlow)eContainer).getCycleBasedStatemachineName();
 
 String getStatemachineImplementationType(ExecutionFlow this):
 	if isTimedStatemachine() then

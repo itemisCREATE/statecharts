@@ -28,7 +28,7 @@ import java.util.Queue;
 
 import «entry.getBasePackageName()».Event;
 
-public class «getEventBasedStatemachineName()» extends «getBaseStatemachineName()» {
+public class «getEventBasedStatemachineName()» extends «getCycleBasedStatemachineName()» {
 
 	public «getEventBasedStatemachineName()»() {
 		super(new LinkedList<Event>());

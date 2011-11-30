@@ -39,9 +39,9 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension()» implements «g
 	private final «event.getEventType()» «event.getName()» = new «event.getEventType()»(«event.getCreationSignature()»); 
 	«ENDFOREACH-»
 	
-	private «getBaseStatemachineName()» statemachine; 
+	private «getCycleBasedStatemachineName()» statemachine; 
 	
-	public «getInterfaceImplName()»(«getBaseStatemachineName()» statemachine) {
+	public «getInterfaceImplName()»(«getCycleBasedStatemachineName()» statemachine) {
 		this.statemachine = statemachine;
 	}
 	

@@ -18,10 +18,10 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 	private final Event EventKeypress2 = new Event("keypress2");
 	private final Event EventKeypress3 = new Event("keypress3");
 
-	private TrafficLightWaitingAbstractBaseStatemachine statemachine;
+	private TrafficLightWaitingCycleBasedStatemachine statemachine;
 
 	public InterfaceDefaultImpl(
-			TrafficLightWaitingAbstractBaseStatemachine statemachine) {
+			TrafficLightWaitingCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 

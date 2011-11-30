@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.runtime.java.trafficlightwaiting;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -21,7 +22,7 @@ import org.yakindu.sct.runtime.java.ITimerHandler;
 import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Notification;
 
-public abstract class TrafficLightWaitingAbstractBaseStatemachine
+public class TrafficLightWaitingCycleBasedStatemachine
 		implements
 			ITimedStatemachine {
 
@@ -54,7 +55,7 @@ public abstract class TrafficLightWaitingAbstractBaseStatemachine
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 
-	private final Collection<Event> occuredEvents;
+	private final ArrayList<Event> occuredEvents;
 
 	private final Collection<Event> outEvents;
 
@@ -62,10 +63,9 @@ public abstract class TrafficLightWaitingAbstractBaseStatemachine
 
 	private long cycleStartTime;
 
-	public TrafficLightWaitingAbstractBaseStatemachine(
-			Collection<Event> occuredEvents) {
-		this.occuredEvents = occuredEvents;
-		this.outEvents = new HashSet<Event>();
+	public TrafficLightWaitingCycleBasedStatemachine() {
+		occuredEvents = new ArrayList<Event>();
+		outEvents = new HashSet<Event>();
 		interfaceTrafficLight = new InterfaceTrafficLightImpl(this);
 		interfacePedestrian = new InterfacePedestrianImpl(this);
 		interfaceDefault = new InterfaceDefaultImpl(this);
@@ -80,7 +80,7 @@ public abstract class TrafficLightWaitingAbstractBaseStatemachine
 	}
 
 	protected boolean eventOccured() {
-		return !getOccuredEvents().isEmpty();
+		return !occuredEvents.isEmpty();
 	}
 
 	public void init() {
@@ -127,52 +127,47 @@ public abstract class TrafficLightWaitingAbstractBaseStatemachine
 		enterSequenceOn();
 	}
 
-	private boolean conditionOnTr0(Collection<?> events) {
-		return getOccuredEvents()
-				.contains(interfaceDefault.getEventKeypress3());
+	private boolean conditionOnTr0() {
+		return occuredEvents.contains(interfaceDefault.getEventKeypress3());
 	}
-	private boolean conditionOnTr1(Collection<?> events) {
-		return getOccuredEvents()
-				.contains(interfaceDefault.getEventKeypress2());
+	private boolean conditionOnTr1() {
+		return occuredEvents.contains(interfaceDefault.getEventKeypress2());
 	}
-	private boolean conditionStreetGreenTr0(Collection<?> events) {
-		return getOccuredEvents()
-				.contains(interfaceDefault.getEventKeypress1());
+	private boolean conditionStreetGreenTr0() {
+		return occuredEvents.contains(interfaceDefault.getEventKeypress1());
 	}
-	private boolean conditionPedWaitingTr0(Collection<?> events) {
-		return getOccuredEvents().contains(PedWaiting_time_event_0);
+	private boolean conditionPedWaitingTr0() {
+		return occuredEvents.contains(PedWaiting_time_event_0);
 	}
-	private boolean conditionWaitOnTr0(Collection<?> events) {
-		return getOccuredEvents().contains(WaitOn_time_event_0);
+	private boolean conditionWaitOnTr0() {
+		return occuredEvents.contains(WaitOn_time_event_0);
 	}
-	private boolean conditionWaitOffTr0(Collection<?> events) {
-		return getOccuredEvents().contains(WaitOff_time_event_0);
+	private boolean conditionWaitOffTr0() {
+		return occuredEvents.contains(WaitOff_time_event_0);
 	}
-	private boolean conditionStreetAttentionTr0(Collection<?> events) {
-		return getOccuredEvents().contains(StreetAttention_time_event_0);
+	private boolean conditionStreetAttentionTr0() {
+		return occuredEvents.contains(StreetAttention_time_event_0);
 	}
-	private boolean conditionStreetRedTr0(Collection<?> events) {
-		return getOccuredEvents().contains(StreetRed_time_event_0);
+	private boolean conditionStreetRedTr0() {
+		return occuredEvents.contains(StreetRed_time_event_0);
 	}
-	private boolean conditionPedestrianGreenTr0(Collection<?> events) {
-		return getOccuredEvents().contains(PedestrianGreen_time_event_0);
+	private boolean conditionPedestrianGreenTr0() {
+		return occuredEvents.contains(PedestrianGreen_time_event_0);
 	}
-	private boolean conditionPedestrianRedTr0(Collection<?> events) {
-		return getOccuredEvents().contains(PedestrianRed_time_event_0);
+	private boolean conditionPedestrianRedTr0() {
+		return occuredEvents.contains(PedestrianRed_time_event_0);
 	}
-	private boolean conditionStreetPrepareTr0(Collection<?> events) {
-		return getOccuredEvents().contains(StreetPrepare_time_event_0);
+	private boolean conditionStreetPrepareTr0() {
+		return occuredEvents.contains(StreetPrepare_time_event_0);
 	}
-	private boolean conditionFreezeTr0(Collection<?> events) {
-		return getOccuredEvents()
-				.contains(interfaceDefault.getEventKeypress3());
+	private boolean conditionFreezeTr0() {
+		return occuredEvents.contains(interfaceDefault.getEventKeypress3());
 	}
-	private boolean conditionOffTr0(Collection<?> events) {
-		return getOccuredEvents()
-				.contains(interfaceDefault.getEventKeypress2());
+	private boolean conditionOffTr0() {
+		return occuredEvents.contains(interfaceDefault.getEventKeypress2());
 	}
-	private boolean conditionBlinkYellowLr1(Collection<?> events) {
-		return getOccuredEvents().contains(BlinkYellow_time_event_0);
+	private boolean conditionBlinkYellowLr1() {
+		return occuredEvents.contains(BlinkYellow_time_event_0);
 	}
 	private void actionsOnTr0() {
 		exitSequenceOn();
@@ -423,8 +418,13 @@ public abstract class TrafficLightWaitingAbstractBaseStatemachine
 		if (activeStates.contains(State.StreetGreen)) {
 			exitSequenceStreetGreen();
 
-		} else if (activeStates.contains(State.PedWaiting)) {
-			exitSequencePedWaiting();
+		} else if (activeStates.contains(State.WaitOn)) {
+			exitSequenceWaitOn();
+			exitActionPedWaiting();
+
+		} else if (activeStates.contains(State.WaitOff)) {
+			exitSequenceWaitOff();
+			exitActionPedWaiting();
 
 		} else if (activeStates.contains(State.StreetAttention)) {
 			exitSequenceStreetAttention();
@@ -497,35 +497,35 @@ public abstract class TrafficLightWaitingAbstractBaseStatemachine
 		activeStates.remove(State.BlinkYellow);
 		exitActionBlinkYellow();
 	}
-	private void cycleOn(Collection<?> events) {
+	private void reactOn() {
 	}
-	private void cycleStreetGreen(Collection<?> events) {
-		if (conditionOnTr0(events)) {
+	private void reactStreetGreen() {
+		if (conditionOnTr0()) {
 			actionsOnTr0();
 		} else {
-			if (conditionOnTr1(events)) {
+			if (conditionOnTr1()) {
 				actionsOnTr1();
 			} else {
-				if (conditionStreetGreenTr0(events)) {
+				if (conditionStreetGreenTr0()) {
 					actionsStreetGreenTr0();
 				}
 
 			}
 		}
 	}
-	private void cyclePedWaiting(Collection<?> events) {
+	private void reactPedWaiting() {
 	}
-	private void cycleWaitOn(Collection<?> events) {
-		if (conditionOnTr0(events)) {
+	private void reactWaitOn() {
+		if (conditionOnTr0()) {
 			actionsOnTr0();
 		} else {
-			if (conditionOnTr1(events)) {
+			if (conditionOnTr1()) {
 				actionsOnTr1();
 			} else {
-				if (conditionPedWaitingTr0(events)) {
+				if (conditionPedWaitingTr0()) {
 					actionsPedWaitingTr0();
 				} else {
-					if (conditionWaitOnTr0(events)) {
+					if (conditionWaitOnTr0()) {
 						actionsWaitOnTr0();
 					}
 
@@ -534,17 +534,17 @@ public abstract class TrafficLightWaitingAbstractBaseStatemachine
 			}
 		}
 	}
-	private void cycleWaitOff(Collection<?> events) {
-		if (conditionOnTr0(events)) {
+	private void reactWaitOff() {
+		if (conditionOnTr0()) {
 			actionsOnTr0();
 		} else {
-			if (conditionOnTr1(events)) {
+			if (conditionOnTr1()) {
 				actionsOnTr1();
 			} else {
-				if (conditionPedWaitingTr0(events)) {
+				if (conditionPedWaitingTr0()) {
 					actionsPedWaitingTr0();
 				} else {
-					if (conditionWaitOffTr0(events)) {
+					if (conditionWaitOffTr0()) {
 						actionsWaitOffTr0();
 					}
 
@@ -553,140 +553,141 @@ public abstract class TrafficLightWaitingAbstractBaseStatemachine
 			}
 		}
 	}
-	private void cycleStreetAttention(Collection<?> events) {
-		if (conditionOnTr0(events)) {
+	private void reactStreetAttention() {
+		if (conditionOnTr0()) {
 			actionsOnTr0();
 		} else {
-			if (conditionOnTr1(events)) {
+			if (conditionOnTr1()) {
 				actionsOnTr1();
 			} else {
-				if (conditionStreetAttentionTr0(events)) {
+				if (conditionStreetAttentionTr0()) {
 					actionsStreetAttentionTr0();
 				}
 
 			}
 		}
 	}
-	private void cycleStreetRed(Collection<?> events) {
-		if (conditionOnTr0(events)) {
+	private void reactStreetRed() {
+		if (conditionOnTr0()) {
 			actionsOnTr0();
 		} else {
-			if (conditionOnTr1(events)) {
+			if (conditionOnTr1()) {
 				actionsOnTr1();
 			} else {
-				if (conditionStreetRedTr0(events)) {
+				if (conditionStreetRedTr0()) {
 					actionsStreetRedTr0();
 				}
 
 			}
 		}
 	}
-	private void cyclePedestrianGreen(Collection<?> events) {
-		if (conditionOnTr0(events)) {
+	private void reactPedestrianGreen() {
+		if (conditionOnTr0()) {
 			actionsOnTr0();
 		} else {
-			if (conditionOnTr1(events)) {
+			if (conditionOnTr1()) {
 				actionsOnTr1();
 			} else {
-				if (conditionPedestrianGreenTr0(events)) {
+				if (conditionPedestrianGreenTr0()) {
 					actionsPedestrianGreenTr0();
 				}
 
 			}
 		}
 	}
-	private void cyclePedestrianRed(Collection<?> events) {
-		if (conditionOnTr0(events)) {
+	private void reactPedestrianRed() {
+		if (conditionOnTr0()) {
 			actionsOnTr0();
 		} else {
-			if (conditionOnTr1(events)) {
+			if (conditionOnTr1()) {
 				actionsOnTr1();
 			} else {
-				if (conditionPedestrianRedTr0(events)) {
+				if (conditionPedestrianRedTr0()) {
 					actionsPedestrianRedTr0();
 				}
 
 			}
 		}
 	}
-	private void cycleStreetPrepare(Collection<?> events) {
-		if (conditionOnTr0(events)) {
+	private void reactStreetPrepare() {
+		if (conditionOnTr0()) {
 			actionsOnTr0();
 		} else {
-			if (conditionOnTr1(events)) {
+			if (conditionOnTr1()) {
 				actionsOnTr1();
 			} else {
-				if (conditionStreetPrepareTr0(events)) {
+				if (conditionStreetPrepareTr0()) {
 					actionsStreetPrepareTr0();
 				}
 
 			}
 		}
 	}
-	private void cycleFreeze(Collection<?> events) {
-		if (conditionFreezeTr0(events)) {
+	private void reactFreeze() {
+		if (conditionFreezeTr0()) {
 			actionsFreezeTr0();
 		}
 	}
-	private void cycleOff(Collection<?> events) {
+	private void reactOff() {
 	}
-	private void cycleBlinkYellow(Collection<?> events) {
-		if (conditionOffTr0(events)) {
+	private void reactBlinkYellow() {
+		if (conditionOffTr0()) {
 			actionsOffTr0();
 		} else {
-			if (conditionBlinkYellowLr1(events)) {
+			if (conditionBlinkYellowLr1()) {
 				actionsBlinkYellowLr1();
 			}
 
 		}
 	}
-	protected void runCycle(Collection<?> events) {
+	public void runCycle() {
 		cycleStartTime = System.currentTimeMillis();
-		getOutEvents().clear();
+		outEvents.clear();
 		for (State state : activeStates) {
 			switch (state) {
 				case On :
-					cycleOn(events);
+					reactOn();
 					break;
 				case StreetGreen :
-					cycleStreetGreen(events);
+					reactStreetGreen();
 					break;
 				case PedWaiting :
-					cyclePedWaiting(events);
+					reactPedWaiting();
 					break;
 				case WaitOn :
-					cycleWaitOn(events);
+					reactWaitOn();
 					break;
 				case WaitOff :
-					cycleWaitOff(events);
+					reactWaitOff();
 					break;
 				case StreetAttention :
-					cycleStreetAttention(events);
+					reactStreetAttention();
 					break;
 				case StreetRed :
-					cycleStreetRed(events);
+					reactStreetRed();
 					break;
 				case PedestrianGreen :
-					cyclePedestrianGreen(events);
+					reactPedestrianGreen();
 					break;
 				case PedestrianRed :
-					cyclePedestrianRed(events);
+					reactPedestrianRed();
 					break;
 				case StreetPrepare :
-					cycleStreetPrepare(events);
+					reactStreetPrepare();
 					break;
 				case Freeze :
-					cycleFreeze(events);
+					reactFreeze();
 					break;
 				case Off :
-					cycleOff(events);
+					reactOff();
 					break;
 				case BlinkYellow :
-					cycleBlinkYellow(events);
+					reactBlinkYellow();
 					break;
 				default :
 					// no state found
 			}
 		}
+		occuredEvents.clear();
 	}
 }
