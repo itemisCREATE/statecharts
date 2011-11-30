@@ -13,6 +13,7 @@ import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.Sequence;
+import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.MinimalTSC;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.OrthogonalFlatTSC;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.SimpleFlatTSC;
@@ -243,7 +244,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	
 	/**
 	 * A composite state must have a exit sequence. 
-	 * This exit sequence consists of an exit action call and a exit sequence call for each sub region.
+	 * This exit sequence consists of an exit action call and a state switch for all final states.
 	 */
 	@Test public void testCompositeStateExitSequence() {
 		Statechart sc = _createStatechart("cs"); {
@@ -294,23 +295,98 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		
 		assertNotNull(_s1.getExitAction());
 		assertNotNull(_s1.getExitSequence());
-		assertEquals(3, _s1.getExitSequence().getSteps().size());
+		assertEquals(2, _s1.getExitSequence().getSteps().size());
 		
-		assertStateSwitch(_s1.getExitSequence().getSteps().get(0), _s2, _s3);
-		assertCall( assertedStateCase(_s1.getExitSequence().getSteps().get(0), _s2).getStep(), _s2.getExitSequence());
-		assertCall( assertedStateCase(_s1.getExitSequence().getSteps().get(0), _s3).getStep(), _s3.getExitSequence());
-		
-		assertStateSwitch(_s1.getExitSequence().getSteps().get(1), _s4, _s5, _s6);
-		assertCall( assertedStateCase(_s1.getExitSequence().getSteps().get(1), _s4).getStep(), _s4.getExitSequence());
-		assertCall( assertedStateCase(_s1.getExitSequence().getSteps().get(1), _s5).getStep(), _s5.getExitSequence());
-		assertCall( assertedStateCase(_s1.getExitSequence().getSteps().get(1), _s6).getStep(), _s6.getExitSequence());
+		Step _switch =  _s1.getExitSequence().getSteps().get(0);
+		assertStateSwitch(_switch, _s2, _s3, _s4, _s5, _s6);
+		assertCall( assertedSequence(assertedStateCase(_switch, _s2).getStep()), 0, _s2.getExitSequence());
+		assertCall( assertedSequence(assertedStateCase(_switch, _s3).getStep()), 0, _s3.getExitSequence());
+		assertCall( assertedSequence(assertedStateCase(_switch, _s4).getStep()), 0, _s4.getExitSequence());
+		assertCall( assertedSequence(assertedStateCase(_switch, _s5).getStep()), 0, _s5.getExitSequence());
+		assertCall( assertedSequence(assertedStateCase(_switch, _s6).getStep()), 0, _s6.getExitSequence());
 
-		assertCall(_s1.getExitSequence(), 2, _s1.getExitAction());
-
+		assertCall(_s1.getExitSequence(), 1, _s1.getExitAction());
 	}
 
 
 	
+	
+	/**
+	 * A composite state must have a exit sequence. 
+	 * This exit sequence consists of an exit action call and a state switch for all final states.
+	 */
+	@Test public void testCompositeStateExitSequence_Deep() {
+		
+		Statechart sc = _createStatechart("sc"); {  
+			
+			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
+			VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, s_scope);
+			EventDefinition e1 = _createEventDefinition("e1", s_scope);
+			
+
+			Region r = _createRegion("r", sc); {
+				State s1 = _createState("s1", r); {
+					_createExitAssignment(v1, s1,  1);
+
+					Region r_s1 = _createRegion("r", s1); {
+						State s3 = _createState("s3", r_s1); {
+							_createExitAssignment(v1, s3, 2);
+							
+							Region r_s3 = _createRegion("r", s3); {
+								State s4 = _createState("s4", r_s3);
+								_createExitAssignment(v1, s4, 3);
+
+								FinalState fs = _createFinalState(r_s3);
+
+							}
+						}
+					}
+				}		
+				State s2 = _createState("s2", r); {
+					Region r_s1 = _createRegion("r", s2); {
+						_createState("s6", r_s1);
+					}
+				}
+			}
+
+		}
+		
+
+		ExecutionFlow flow = sequencer.transform(sc);
+		 
+		
+		ExecutionState _s1 = flow.getStates().get(0);
+		assertEquals("sc.r.s1", _s1.getName());
+
+		ExecutionState _s3 = flow.getStates().get(1);
+		assertEquals("sc.r.s1.r.s3", _s3.getName());
+
+		ExecutionState _s4 = flow.getStates().get(2);
+		assertEquals("sc.r.s1.r.s3.r.s4", _s4.getName());
+		
+		ExecutionState _fs = flow.getStates().get(3);
+		assertEquals("sc.r.s1.r.s3.r._final_", _fs.getName());
+		
+		ExecutionState _s6 = flow.getStates().get(5);
+		assertEquals("sc.r.s2.r.s6", _s6.getName());
+		
+		assertNull(_fs.getEntryAction());
+		assertNull(_fs.getExitAction());
+		assertNotNull(_fs.getExitSequence());
+		assertEquals(2, _s1.getExitSequence().getSteps().size());
+		
+		Step _switch =  _s1.getExitSequence().getSteps().get(0);
+		assertStateSwitch(_switch, _s4, _fs);
+		assertCall( assertedSequence(assertedStateCase(_switch, _s4).getStep()), 0, _s4.getExitSequence());
+		assertCall( assertedSequence(assertedStateCase(_switch, _s4).getStep()), 1, _s3.getExitAction());
+		assertCall( assertedSequence(assertedStateCase(_switch, _fs).getStep()), 0, _fs.getExitSequence());
+		assertCall( assertedSequence(assertedStateCase(_switch, _fs).getStep()), 1, _s3.getExitAction());
+
+		assertCall(_s1.getExitSequence(), 1, _s1.getExitAction());
+
+	
+	}
+
 
 	@Test public void testStateReaction_SimpleFlatTSC() {
 		SimpleFlatTSC tsc = new SimpleFlatTSC();
