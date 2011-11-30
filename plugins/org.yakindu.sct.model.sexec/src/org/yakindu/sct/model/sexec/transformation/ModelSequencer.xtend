@@ -77,6 +77,15 @@ class ModelSequencer {
 	@Inject extension StatechartExtensions sct
 
 
+	boolean _addTraceSteps 
+
+
+	def addTraceSteps(boolean b) {
+		_addTraceSteps = b
+	}
+	
+	
+	
 	/* ==========================================================================
 	 * TRANSFORMATION ROOT
 	 */
@@ -235,7 +244,7 @@ class ModelSequencer {
 		r.effect = mapToEffect(t)
 		
 		// TODO: move to other extension that can be added to module
-		(r.effect as Sequence).steps += r.newReactionFired()
+		if (_addTraceSteps) { (r.effect as Sequence).steps += r.newReactionFired() }
 	
 		return r
 	}

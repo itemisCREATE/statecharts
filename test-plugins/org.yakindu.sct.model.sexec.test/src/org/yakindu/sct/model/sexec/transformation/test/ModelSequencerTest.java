@@ -98,9 +98,6 @@ public class ModelSequencerTest extends Assert {
 		injector.injectMembers(this);
 	}
 
-	
 
-
-	
 
 }
