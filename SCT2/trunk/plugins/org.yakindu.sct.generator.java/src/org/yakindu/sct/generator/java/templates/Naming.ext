@@ -94,10 +94,10 @@ String entryActionFunctionName(Step this) : "entryAction" + getName(state());
 String exitActionFunctionName(Step this) : "exitAction" + getName(state());
 String enterSequenceName(Step this) : "enterSequence"+getName(state()); 
 String enterSequenceName(ExecutionState this) : "enterSequence"+getName();
-String enterSequenceName(ExecutionFlow this) : "enterSequenceStatechart"+getName();
+String enterSequenceName(ExecutionFlow this) : "enter";
 String exitSequenceName(Step this) : "exitSequence"+getName(state()); 
 String exitSequenceName(ExecutionState this) : "exitSequence"+getName();
-String exitSequenceName(ExecutionFlow this) : "enterSequenceStatechart"+getName();
+String exitSequenceName(ExecutionFlow this) : "exit";
 
 isEffect(Step step) : (! Check.isInstance(step)) && Reaction.isInstance(step.eContainer) ;
 isReactionCheck(Step step) : Reaction.isInstance(step.eContainer) && Check.isInstance(step);

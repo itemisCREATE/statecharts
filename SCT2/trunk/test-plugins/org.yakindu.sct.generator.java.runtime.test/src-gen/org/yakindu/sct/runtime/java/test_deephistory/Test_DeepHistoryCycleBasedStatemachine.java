@@ -62,7 +62,7 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 		return interfaceDefault;
 	}
 
-	public void enterSequenceStatechartTest_DeepHistory() {
+	public void enter() {
 		enterSequenceState1();
 	}
 

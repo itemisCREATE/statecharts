@@ -64,7 +64,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 		return interfaceDefault;
 	}
 
-	public void enterSequenceStatechartTest_ParallelRegions() {
+	public void enter() {
 		enterSequenceState1();
 	}
 

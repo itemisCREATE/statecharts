@@ -119,7 +119,7 @@ public class Test_TransitionCycleBasedStatemachine
 		return EventEvent10;
 	}
 
-	public void enterSequenceStatechartTest_Transition() {
+	public void enter() {
 		cycleStartTime = System.currentTimeMillis();
 		enterSequenceState1();
 	}

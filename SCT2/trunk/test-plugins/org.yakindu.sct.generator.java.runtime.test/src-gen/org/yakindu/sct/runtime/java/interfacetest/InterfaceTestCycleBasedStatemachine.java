@@ -74,7 +74,7 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 		return interfaceThird;
 	}
 
-	public void enterSequenceStatechartInterfaceTest() {
+	public void enter() {
 		enterSequenceState1();
 	}
 
