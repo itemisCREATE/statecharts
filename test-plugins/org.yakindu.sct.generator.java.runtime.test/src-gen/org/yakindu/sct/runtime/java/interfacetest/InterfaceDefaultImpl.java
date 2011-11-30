@@ -23,10 +23,9 @@ public class InterfaceDefaultImpl extends NotificationSender
 	private final ValuedEvent<Integer> EventEvent2 = new ValuedEvent<Integer>(
 			"event2", 0);
 
-	private InterfaceTestAbstractBaseStatemachine statemachine;
+	private InterfaceTestCycleBasedStatemachine statemachine;
 
-	public InterfaceDefaultImpl(
-			InterfaceTestAbstractBaseStatemachine statemachine) {
+	public InterfaceDefaultImpl(InterfaceTestCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 

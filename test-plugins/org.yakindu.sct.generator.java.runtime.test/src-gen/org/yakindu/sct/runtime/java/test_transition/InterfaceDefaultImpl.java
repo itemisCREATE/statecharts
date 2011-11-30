@@ -24,10 +24,10 @@ public class InterfaceDefaultImpl extends NotificationSender
 	private final Event EventEvent6 = new Event("event6");
 	private final Event EventEvent7 = new Event("event7");
 
-	private Test_TransitionAbstractBaseStatemachine statemachine;
+	private Test_TransitionCycleBasedStatemachine statemachine;
 
 	public InterfaceDefaultImpl(
-			Test_TransitionAbstractBaseStatemachine statemachine) {
+			Test_TransitionCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 

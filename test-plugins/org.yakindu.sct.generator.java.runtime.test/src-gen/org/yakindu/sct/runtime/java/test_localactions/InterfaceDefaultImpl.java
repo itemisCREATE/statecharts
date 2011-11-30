@@ -19,10 +19,10 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 	private final Event EventEvent3 = new Event("Event3");
 	private final Event EventEvent4 = new Event("Event4");
 
-	private Test_LocalActionsAbstractBaseStatemachine statemachine;
+	private Test_LocalActionsCycleBasedStatemachine statemachine;
 
 	public InterfaceDefaultImpl(
-			Test_LocalActionsAbstractBaseStatemachine statemachine) {
+			Test_LocalActionsCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 

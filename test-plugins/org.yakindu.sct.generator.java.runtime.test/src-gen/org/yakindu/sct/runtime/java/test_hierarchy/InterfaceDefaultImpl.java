@@ -31,10 +31,10 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 	private final Event EventEvent15 = new Event("event15");
 	private final Event EventEvent16 = new Event("event16");
 
-	private Test_HierarchyAbstractBaseStatemachine statemachine;
+	private Test_HierarchyCycleBasedStatemachine statemachine;
 
 	public InterfaceDefaultImpl(
-			Test_HierarchyAbstractBaseStatemachine statemachine) {
+			Test_HierarchyCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 
@@ -166,7 +166,7 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 		return EventEvent16;
 	}
 
-	private int varS1;
+	private int varS1 = 0;
 
 	public int getVarS1() {
 		return varS1;

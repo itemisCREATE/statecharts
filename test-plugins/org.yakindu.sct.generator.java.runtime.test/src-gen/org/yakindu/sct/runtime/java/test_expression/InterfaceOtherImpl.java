@@ -12,10 +12,9 @@ package org.yakindu.sct.runtime.java.test_expression;
 
 public class InterfaceOtherImpl implements InterfaceOther {
 
-	private Test_ExpressionAbstractBaseStatemachine statemachine;
+	private Test_ExpressionCycleBasedStatemachine statemachine;
 
-	public InterfaceOtherImpl(
-			Test_ExpressionAbstractBaseStatemachine statemachine) {
+	public InterfaceOtherImpl(Test_ExpressionCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 

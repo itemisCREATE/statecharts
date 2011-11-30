@@ -5,15 +5,15 @@ import static org.junit.Assert.assertEquals;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.runtime.java.test_expression.Test_ExpressionCyleBasedStatemachine;
+import org.yakindu.sct.runtime.java.test_expression.Test_ExpressionCycleBasedStatemachine;
 
 public class TestExpressionCycleBasedStatemachine {
 	
-	private Test_ExpressionCyleBasedStatemachine statemachine;
+	private Test_ExpressionCycleBasedStatemachine statemachine;
 	
 	@Before
 	public void setUp() {
-		statemachine = new Test_ExpressionCyleBasedStatemachine();
+		statemachine = new Test_ExpressionCycleBasedStatemachine();
 		statemachine.enterSequenceStatechartTest_Expression();
 	}
 

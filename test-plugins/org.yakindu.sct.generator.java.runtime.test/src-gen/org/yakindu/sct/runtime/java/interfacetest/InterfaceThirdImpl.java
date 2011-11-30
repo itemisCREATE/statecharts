@@ -23,9 +23,9 @@ public class InterfaceThirdImpl extends NotificationSender
 	private final ValuedEvent<Boolean> EventEvent6 = new ValuedEvent<Boolean>(
 			"event6", false);
 
-	private InterfaceTestAbstractBaseStatemachine statemachine;
+	private InterfaceTestCycleBasedStatemachine statemachine;
 
-	public InterfaceThirdImpl(InterfaceTestAbstractBaseStatemachine statemachine) {
+	public InterfaceThirdImpl(InterfaceTestCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 
