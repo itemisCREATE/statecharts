@@ -20,7 +20,7 @@ Templates for the main statechart cpp file.
 #include "«EvName()».h"
 
 /* This is needed by the EventPool */
-uint32_t getSizeofEvent(uint32_t evid)
+uint32_t «scName()»_getSizeofEvent(uint32_t evid)
 {
 	switch((EventID) evid) {
 

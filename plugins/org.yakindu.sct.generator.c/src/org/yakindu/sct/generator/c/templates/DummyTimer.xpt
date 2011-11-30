@@ -45,7 +45,7 @@ void unsetTimer(const uint32_t evid)
 
 void dummyTimer_init(Timer* handle)
 {
-	timer_setFPtr(handle, &setTimer, unsetTimer);
+	timer_setFPtr(handle, &setTimer, &unsetTimer);
 }
 «ENDFILE»
 

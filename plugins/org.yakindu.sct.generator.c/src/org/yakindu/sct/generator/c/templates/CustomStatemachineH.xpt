@@ -24,6 +24,7 @@ Templates for the main statechart cpp file.
 «ENDFOREACH»
 #include "Statemachine_cy.h"
 #include "«EvName()».h"
+#include "EventPool.h"
 
 typedef enum {
     «FOREACH this.states AS exState-»
@@ -66,6 +67,7 @@ extern boolean «StName().toFirstLower()»_eventWaiting(«StName()»* handle);
 	/* virtual function form state machine must be implemented here */
 extern void statemachine_cy__runCycle(Statemachine_cy* handle);
 
+#define «scName()»_eventPool_init_heap(handle, maxElemPerEvent) eventPool_init_heap(handle, event_last, maxElemPerEvent, &«scName()»_getSizeofEvent )
 
 #endif /* «STNAME()»_H_ */
 
