@@ -94,6 +94,13 @@ public class ModelSequencer {
   @Inject
   private StatechartExtensions sct;
   
+  private boolean _addTraceSteps;
+  
+  public boolean addTraceSteps(final boolean b) {
+    boolean __addTraceSteps = this._addTraceSteps = b;
+    return __addTraceSteps;
+  }
+  
   public ExecutionFlow transform(final Statechart sc) {
     {
       ExecutionFlow _create = this.factory.create(sc);
@@ -334,10 +341,12 @@ public class ModelSequencer {
       }
       Sequence _mapToEffect = this.mapToEffect(t);
       r.setEffect(_mapToEffect);
-      Step _effect = r.getEffect();
-      EList<Step> _steps = ((Sequence) _effect).getSteps();
-      ReactionFired _newReactionFired = this.newReactionFired(r);
-      CollectionExtensions.<ReactionFired>operator_add(_steps, _newReactionFired);
+      if (this._addTraceSteps) {
+        Step _effect = r.getEffect();
+        EList<Step> _steps = ((Sequence) _effect).getSteps();
+        ReactionFired _newReactionFired = this.newReactionFired(r);
+        CollectionExtensions.<ReactionFired>operator_add(_steps, _newReactionFired);
+      }
       return r;
     }
   }
