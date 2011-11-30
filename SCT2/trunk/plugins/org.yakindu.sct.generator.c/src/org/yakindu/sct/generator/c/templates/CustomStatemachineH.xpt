@@ -45,6 +45,13 @@ typedef struct {
 «ENDFOREACH»
 	raiseEventFPtr raiseEvent;
 	
+«REM» no plain variables in structure
+«FOREACH this.declaredEvents() AS ev»
+  «IF (((EventDefinition)ev).direction != Direction::OUT) && (((EventDefinition)ev).type != Type::void) -»
+  «eventTypeToString(((EventDefinition)ev).type)» «ev.name»_value;    
+  «ENDIF -»
+«ENDFOREACH -»
+«ENDREM»		
 } «StName()»;
 
 /* Explicit Constructor & Destructor */

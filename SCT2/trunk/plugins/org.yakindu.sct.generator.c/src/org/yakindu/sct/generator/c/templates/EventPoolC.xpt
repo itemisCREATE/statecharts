@@ -41,7 +41,7 @@ void eventPool_freeEvent(EventPool* handle, _Event* delEvent) {
 	uint32_t i;
 	TypePool* pool = 0;
 
-	if (delEvent->id >= handle->maxTypeEventMemElements)
+	if ((delEvent == 0) || (delEvent->id >= handle->maxTypeEventMemElements))
 		return;
 
 	pool = &handle->typePoolMemPtr[delEvent->id];
