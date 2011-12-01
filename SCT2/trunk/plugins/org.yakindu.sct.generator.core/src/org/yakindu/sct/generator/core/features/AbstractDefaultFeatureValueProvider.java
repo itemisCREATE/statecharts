@@ -34,7 +34,7 @@ public abstract class AbstractDefaultFeatureValueProvider implements
 		for (FeatureParameter parameter : parameters) {
 			FeatureParameterValue parameterValue = createParameterValue(
 					parameter, statechart);
-			if (parameterValue != null) {
+			if (parameterValue != null && parameterValue.getExpression() != null) {
 				config.getParameterValues().add(parameterValue);
 			}
 		}
