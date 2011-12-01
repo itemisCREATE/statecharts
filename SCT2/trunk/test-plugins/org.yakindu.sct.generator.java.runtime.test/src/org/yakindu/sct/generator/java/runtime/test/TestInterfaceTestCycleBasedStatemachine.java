@@ -34,7 +34,7 @@ public class TestInterfaceTestCycleBasedStatemachine {
 	@Before
 	public void setUp() {
 		statemachine = new InterfaceTestCycleBasedStatemachine();
-		statemachine.enterSequenceStatechartInterfaceTest();
+		statemachine.enter();
 	}
 
 	@After

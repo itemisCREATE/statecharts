@@ -44,7 +44,7 @@ public class TestLocalActionsCycleBasedStatemachine {
 	public void setUp() {
 		statemachine = new Test_LocalActionsCycleBasedStatemachine();
 		statemachine.setTimerHandler(new TimerHandler(statemachine));
-		statemachine.enterSequenceStatechartTest_LocalActions();
+		statemachine.enter();
 	}
 
 	@After
@@ -57,7 +57,7 @@ public class TestLocalActionsCycleBasedStatemachine {
 	public void testExceptionHandling() {
 		try {
 			Test_LocalActionsCycleBasedStatemachine statemachine = new Test_LocalActionsCycleBasedStatemachine();
-			statemachine.enterSequenceStatechartTest_LocalActions();
+			statemachine.enter();
 			fail("Statemachine should throw a NullPointerException if entered without TimerHandler set before");
 		} catch (NullPointerException exception) {
 

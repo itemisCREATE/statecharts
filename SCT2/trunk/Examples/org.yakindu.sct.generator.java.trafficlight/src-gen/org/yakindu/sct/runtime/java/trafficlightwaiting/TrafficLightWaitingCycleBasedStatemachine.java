@@ -122,7 +122,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 		return interfaceDefault;
 	}
 
-	public void enterSequenceStatechartTrafficLightWaiting() {
+	public void enter() {
 		cycleStartTime = System.currentTimeMillis();
 		enterSequenceOn();
 	}

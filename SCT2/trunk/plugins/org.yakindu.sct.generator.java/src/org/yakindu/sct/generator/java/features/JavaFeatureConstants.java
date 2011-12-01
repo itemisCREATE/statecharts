@@ -42,7 +42,7 @@ public final class JavaFeatureConstants implements IJavaFeatureConstants {
 		return LICENSE_TEXT;
 	}
 	
-	public static final String getStatemachineName(String name) {
+	public static final String getValidStatemachineName(String name) {
 		//remove whitespaces;
 		String newName = name.replace(" ", "").toLowerCase();
 		for (String keyword : Arrays.asList(JAVA_KEYWORDS)) {				
