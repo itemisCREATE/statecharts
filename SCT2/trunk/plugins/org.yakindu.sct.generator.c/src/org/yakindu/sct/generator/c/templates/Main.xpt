@@ -50,9 +50,6 @@ Contais the root templates that call the different file templates.
 
 	«EXPAND CMakeLists::file FOR this»
 	
-	«REM» Test Code
-	«EXPAND TestMain::file FOR this»
-	 «ENDREM»
 	«EXPAND DummyTimer::file FOR this»
 
 «ENDDEFINE»
