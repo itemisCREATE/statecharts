@@ -11,6 +11,7 @@
 package org.yakindu.sct.generator.genmodel.ui.action;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -18,13 +19,18 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
+import org.yakindu.sct.generator.core.GeneratorActivator;
 import org.yakindu.sct.generator.core.ISCTGenerator;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
@@ -47,6 +53,15 @@ public class GenerateModelAction implements IObjectActionDelegate {
 
 	public void run(IAction action) {
 		IFile file = unwrap();
+		
+		if (file.getMarker(IMarker.SEVERITY_ERROR) != null) {
+			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			ErrorDialog.openError(shell, "Generator Error",
+					"Cannot execute Generator", new Status(IStatus.ERROR,
+							GeneratorActivator.PLUGIN_ID, "The file contains errors"));
+			return;
+		}
+		
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(),
 				true);
 		Resource resource = loadResource(uri);
