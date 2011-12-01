@@ -40,6 +40,7 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 		defaultInterface = new DefaultInterfaceImpl(this);
 		interfaceOther = new InterfaceOtherImpl(this);
 		interfaceThird = new InterfaceThirdImpl(this);
+
 	}
 
 	protected Collection<Event> getOccuredEvents() {

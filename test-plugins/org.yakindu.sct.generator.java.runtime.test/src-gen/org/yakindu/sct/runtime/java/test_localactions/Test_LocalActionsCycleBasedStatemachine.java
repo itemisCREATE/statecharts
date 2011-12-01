@@ -51,6 +51,9 @@ public class Test_LocalActionsCycleBasedStatemachine
 		occuredEvents = new ArrayList<Event>();
 		outEvents = new HashSet<Event>();
 		defaultInterface = new DefaultInterfaceImpl(this);
+		State1_time_event_0.setStatemachine(this);
+		State2_time_event_0.setStatemachine(this);
+
 	}
 
 	protected Collection<Event> getOccuredEvents() {

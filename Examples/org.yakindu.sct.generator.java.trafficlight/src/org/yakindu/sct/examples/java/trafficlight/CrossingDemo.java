@@ -71,7 +71,7 @@ public class CrossingDemo {
 				// Generator is used in this case. You can add your own
 				// implementation of a TimerHandler. It has to implement the
 				// ITimerHandler interface.
-				statemachine.setTimerHandler(new TimerHandler(statemachine));
+				statemachine.setTimerHandler(new TimerHandler());
 				statemachine.enter();
 				while (!isInterrupted()) {
 					statemachine.runCycle();

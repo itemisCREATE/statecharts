@@ -43,7 +43,7 @@ public class TestLocalActionsCycleBasedStatemachine {
 	@Before
 	public void setUp() {
 		statemachine = new Test_LocalActionsCycleBasedStatemachine();
-		statemachine.setTimerHandler(new TimerHandler(statemachine));
+		statemachine.setTimerHandler(new TimerHandler());
 		statemachine.enter();
 	}
 

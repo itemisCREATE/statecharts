@@ -19,15 +19,9 @@ import org.yakindu.sct.runtime.java.EventNotification;
 
 public class TimerHandler implements ITimerHandler {
 
-	private final ITimedStatemachine statemachine;
-
 	private final Timer timer = new Timer();
 
-	private final Map<TimeEvent, TimerTask> timerTaskMap = new HashMap<TimeEvent, TimerTask>();;
-
-	public TimerHandler(ITimedStatemachine statemachine) {
-		this.statemachine = statemachine;
-	}
+	private final Map<TimeEvent, TimerTask> timerTaskMap = new HashMap<TimeEvent, TimerTask>();
 
 	public void setTimer(final TimeEvent event, long time, long cycleStartTime) {
 		// Reset existing TimerTask for event. This step isn't necessary if
@@ -40,11 +34,11 @@ public class TimerHandler implements ITimerHandler {
 		timerTaskMap.put(event, new TimerTask() {
 			@Override
 			public void run() {
-				statemachine.notify(new EventNotification(event));
+				event.getStatemachine().notify(new EventNotification(event));
 			}
 		});
 
-		//set time field of event
+		// set time field of event
 		event.setTime(time);
 
 		// start scheduling the timer

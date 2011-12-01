@@ -36,6 +36,7 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 		occuredEvents = new ArrayList<Event>();
 		outEvents = new HashSet<Event>();
 		defaultInterface = new DefaultInterfaceImpl(this);
+
 	}
 
 	protected Collection<Event> getOccuredEvents() {
