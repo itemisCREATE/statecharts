@@ -95,7 +95,7 @@ else {
 	activeStates.remove(State.«state.getName()»);
 «ENDDEFINE»
 
-«DEFINE ConditionMethodsImplement FOR ExecutionState-»
+«DEFINE ConditionMethodsImplement FOR ExecutionNode-»
 	«FOREACH reactions AS r-»
 		«IF r.check != null && r.check.refs.size > 0 -»
 	private boolean «r.check.functionName()»() {
@@ -317,6 +317,7 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	«ENDIF»
 	
 «EXPAND ConditionMethodsImplement FOREACH this.states-»
+«EXPAND ConditionMethodsImplement FOREACH this.nodes-»
 «EXPAND StatementMethodsImplement FOREACH this.states-»
 «EXPAND EnterMethodImplement FOREACH this.states-»
 «EXPAND ExitMethodImplement FOREACH this.states-»
