@@ -19,7 +19,10 @@ import sgen;
 extension org::yakindu::sct::generator::java::templates::Expression;
 extension org::yakindu::sct::generator::java::templates::ExecutionModelExtensions;
 
-String getStatemachineName(ExecutionFlow this) : (name.toLowerCase() == "default")? name.toFirstUpper()+"SM" : name.toFirstUpper();
+String getStatemachineName(String name) :
+	JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getStatemachineName(java.lang.String);
+String getStatemachineName(ExecutionFlow this) : 
+	 name.getStatemachineName();
 String getBaseStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "AbstractBaseStatemachine";
 String getBaseStatemachineName(InterfaceScope this) : ((ExecutionFlow)eContainer).getBaseStatemachineName();
 String getEventBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "EventBasedStatemachine";
@@ -162,7 +165,7 @@ String getBasePackagePath(GeneratorEntry entry):
 String getImplementationSuffix(GeneratorEntry entry, ExecutionFlow flow):
 	if entry.getFeatureConfiguration(getNamingFeature())!=null
 		&& entry.getFeatureConfiguration(getNamingFeature()).getParameterValue(getImplementationSuffix()) != null then
-		entry.getFeatureConfiguration(getNamingFeature()).getParameterValue(getImplementationSuffix()).getStringValue()
+		flow.getStatemachineName()+entry.getFeatureConfiguration(getNamingFeature()).getParameterValue(getImplementationSuffix()).getStringValue()
 	else 
 		flow.getStatemachineName();
 

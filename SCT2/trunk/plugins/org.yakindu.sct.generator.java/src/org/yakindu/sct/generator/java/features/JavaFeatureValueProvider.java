@@ -13,6 +13,11 @@ package org.yakindu.sct.generator.java.features;
 import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.BASE_PACKAGE;
 import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.IMPLEMENTATION_SUFFIX;
 import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.LIBRARY_NAME;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.JAVA_KEYWORDS;
+
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -49,15 +54,34 @@ public class JavaFeatureValueProvider extends
 
 	public IStatus validateParameterValue(FeatureParameterValue value) {
 		String name = value.getParameter().getName();
-		if (BASE_PACKAGE.equals(name)
-				&& !value.getStringValue().matches(PACKAGE_NAME_REGEX)) {
+		if (BASE_PACKAGE.equals(name)) {
+			if (!value.getStringValue().matches(PACKAGE_NAME_REGEX)) {
 				return error("Invalid package name");
+			}
+			//Filter out java keywords
+			for (String keyword : Arrays.asList(JAVA_KEYWORDS)) {				
+				Pattern pattern= Pattern.compile("(?:^|\\.)" +keyword+"(?:$|\\.)");
+				Matcher matcher = pattern.matcher(value.getStringValue());
+				while (matcher.find()) {
+					return error("Java keyword '" + matcher.group()
+							+ "' is not allowed in package names.");
+				}
+			}
 		}
-		if (IMPLEMENTATION_SUFFIX.equals(name)
-				&& !value.getStringValue().matches(SUFFIX_REGEX)) {
-			return error("Invalid value");
-		}
+		if (IMPLEMENTATION_SUFFIX.equals(name)) {
+			if (!value.getStringValue().matches(SUFFIX_REGEX)) {
+				return error("Invalid value");
+			}
+			for (String keyword : Arrays.asList(JAVA_KEYWORDS)) {				
+				Pattern pattern= Pattern.compile("^" +keyword+"$");
+				Matcher matcher = pattern.matcher(value.getStringValue());
+				while (matcher.find()) {
+					return error("Java keyword '" + matcher.group()
+							+ "' is not allowed as suffix.");
+				}
+			}
+			
+		}		
 		return Status.OK_STATUS;
 	}
-
 }

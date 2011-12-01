@@ -2,6 +2,6 @@
 <sgen:FeatureTypeLibrary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:sgen="http://www.yakindu.org/sct/statechart/SGen" name="Java Generator">
   <types name="Naming" optional="true">
     <parameters name="basePackage"/>
-    <parameters name="implementationSuffix"/>
+    <parameters name="implementationSuffix" optional="true"/>
   </types>
 </sgen:FeatureTypeLibrary>
