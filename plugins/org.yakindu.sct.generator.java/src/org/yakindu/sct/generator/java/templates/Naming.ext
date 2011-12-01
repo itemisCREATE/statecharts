@@ -20,7 +20,7 @@ extension org::yakindu::sct::generator::java::templates::Expression;
 extension org::yakindu::sct::generator::java::templates::ExecutionModelExtensions;
 
 String getStatemachineName(String name) :
-	JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getStatemachineName(java.lang.String);
+	JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getValidStatemachineName(java.lang.String);
 String getStatemachineName(ExecutionFlow this) : 
 	 name.getStatemachineName();
 String getBaseStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "AbstractBaseStatemachine";

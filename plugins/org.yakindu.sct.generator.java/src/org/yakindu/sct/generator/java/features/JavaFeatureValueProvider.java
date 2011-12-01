@@ -14,6 +14,7 @@ import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.BASE
 import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.IMPLEMENTATION_SUFFIX;
 import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.LIBRARY_NAME;
 import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.JAVA_KEYWORDS;
+import org.yakindu.sct.generator.java.features.JavaFeatureConstants;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -41,7 +42,8 @@ public class JavaFeatureValueProvider extends
 	protected void setDefaultValue(FeatureParameterValue parameterValue,
 			Statechart statechart) {
 		if (parameterValue.getParameter().getName().equals(BASE_PACKAGE)) {
-			parameterValue.setValue("org.yakindu.sct." + statechart.getName());
+			parameterValue.setValue("org.yakindu.sct."
+					+ JavaFeatureConstants.getValidStatemachineName(statechart.getName()));
 		} else if (parameterValue.getParameter().getName()
 				.equals(IMPLEMENTATION_SUFFIX)) {
 			parameterValue.setValue("impl");
@@ -58,9 +60,10 @@ public class JavaFeatureValueProvider extends
 			if (!value.getStringValue().matches(PACKAGE_NAME_REGEX)) {
 				return error("Invalid package name");
 			}
-			//Filter out java keywords
-			for (String keyword : Arrays.asList(JAVA_KEYWORDS)) {				
-				Pattern pattern= Pattern.compile("(?:^|\\.)" +keyword+"(?:$|\\.)");
+			// Filter out java keywords
+			for (String keyword : Arrays.asList(JAVA_KEYWORDS)) {
+				Pattern pattern = Pattern.compile("(?:^|\\.)" + keyword
+						+ "(?:$|\\.)");
 				Matcher matcher = pattern.matcher(value.getStringValue());
 				while (matcher.find()) {
 					return error("Java keyword '" + matcher.group()
@@ -72,16 +75,16 @@ public class JavaFeatureValueProvider extends
 			if (!value.getStringValue().matches(SUFFIX_REGEX)) {
 				return error("Invalid value");
 			}
-			for (String keyword : Arrays.asList(JAVA_KEYWORDS)) {				
-				Pattern pattern= Pattern.compile("^" +keyword+"$");
+			for (String keyword : Arrays.asList(JAVA_KEYWORDS)) {
+				Pattern pattern = Pattern.compile("^" + keyword + "$");
 				Matcher matcher = pattern.matcher(value.getStringValue());
 				while (matcher.find()) {
 					return error("Java keyword '" + matcher.group()
 							+ "' is not allowed as suffix.");
 				}
 			}
-			
-		}		
+
+		}
 		return Status.OK_STATUS;
 	}
 }

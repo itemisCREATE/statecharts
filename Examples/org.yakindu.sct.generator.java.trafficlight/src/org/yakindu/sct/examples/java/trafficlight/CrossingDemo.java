@@ -72,7 +72,7 @@ public class CrossingDemo {
 				// implementation of a TimerHandler. It has to implement the
 				// ITimerHandler interface.
 				statemachine.setTimerHandler(new TimerHandler(statemachine));
-				statemachine.enterSequenceStatechartTrafficLightWaiting();
+				statemachine.enter();
 				while (!isInterrupted()) {
 					statemachine.runCycle();
 					try {
