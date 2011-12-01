@@ -51,7 +51,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 	private InterfaceTrafficLightImpl interfaceTrafficLight;
 	private InterfacePedestrianImpl interfacePedestrian;
-	private InterfaceDefaultImpl interfaceDefault;
+	private DefaultInterfaceImpl defaultInterface;
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 
@@ -68,7 +68,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 		outEvents = new HashSet<Event>();
 		interfaceTrafficLight = new InterfaceTrafficLightImpl(this);
 		interfacePedestrian = new InterfacePedestrianImpl(this);
-		interfaceDefault = new InterfaceDefaultImpl(this);
+		defaultInterface = new DefaultInterfaceImpl(this);
 	}
 
 	protected Collection<Event> getOccuredEvents() {
@@ -118,8 +118,8 @@ public class TrafficLightWaitingCycleBasedStatemachine
 		return interfacePedestrian;
 	}
 
-	public InterfaceDefault getInterfaceDefault() {
-		return interfaceDefault;
+	public DefaultInterface getDefaultInterface() {
+		return defaultInterface;
 	}
 
 	public void enter() {
@@ -128,13 +128,13 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 
 	private boolean conditionOnTr0() {
-		return occuredEvents.contains(interfaceDefault.getEventKeypress3());
+		return occuredEvents.contains(defaultInterface.getEventKeypress3());
 	}
 	private boolean conditionOnTr1() {
-		return occuredEvents.contains(interfaceDefault.getEventKeypress2());
+		return occuredEvents.contains(defaultInterface.getEventKeypress2());
 	}
 	private boolean conditionStreetGreenTr0() {
-		return occuredEvents.contains(interfaceDefault.getEventKeypress1());
+		return occuredEvents.contains(defaultInterface.getEventKeypress1());
 	}
 	private boolean conditionPedWaitingTr0() {
 		return occuredEvents.contains(PedWaiting_time_event_0);
@@ -161,10 +161,10 @@ public class TrafficLightWaitingCycleBasedStatemachine
 		return occuredEvents.contains(StreetPrepare_time_event_0);
 	}
 	private boolean conditionFreezeTr0() {
-		return occuredEvents.contains(interfaceDefault.getEventKeypress3());
+		return occuredEvents.contains(defaultInterface.getEventKeypress3());
 	}
 	private boolean conditionOffTr0() {
-		return occuredEvents.contains(interfaceDefault.getEventKeypress2());
+		return occuredEvents.contains(defaultInterface.getEventKeypress2());
 	}
 	private boolean conditionBlinkYellowLr1() {
 		return occuredEvents.contains(BlinkYellow_time_event_0);

@@ -8,9 +8,9 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.runtime.java.test_shallowhistory;
+package org.yakindu.sct.runtime.java.test_parallelregions;
 
-public interface InterfaceDefault {
+public interface Interface {
 
 	public void raiseEvent1();
 	public void raiseEvent2();
@@ -18,7 +18,5 @@ public interface InterfaceDefault {
 	public void raiseEvent4();
 	public void raiseEvent5();
 	public void raiseEvent6();
-	public void raiseEvent7();
-	public void raiseEvent8();
 
 }

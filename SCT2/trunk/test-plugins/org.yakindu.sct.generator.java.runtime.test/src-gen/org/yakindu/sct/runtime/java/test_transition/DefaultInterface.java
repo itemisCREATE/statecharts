@@ -13,7 +13,7 @@ package org.yakindu.sct.runtime.java.test_transition;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.INotificationSender;
 
-public interface InterfaceDefault extends INotificationSender {
+public interface DefaultInterface extends INotificationSender {
 
 	public void raiseEvent5();
 	public void raiseEvent5(boolean value);

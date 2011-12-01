@@ -8,12 +8,17 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.runtime.java.trafficlightwaiting;
+package org.yakindu.sct.runtime.java.test_shallowhistory;
 
-public interface InterfaceDefault {
+public interface Interface {
 
-	public void raiseKeypress1();
-	public void raiseKeypress2();
-	public void raiseKeypress3();
+	public void raiseEvent1();
+	public void raiseEvent2();
+	public void raiseEvent3();
+	public void raiseEvent4();
+	public void raiseEvent5();
+	public void raiseEvent6();
+	public void raiseEvent7();
+	public void raiseEvent8();
 
 }

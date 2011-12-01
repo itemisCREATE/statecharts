@@ -26,7 +26,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 		State1, State2, State3, State4, State5, State6, State9, State7, State8,
 	};
 
-	private InterfaceDefaultImpl interfaceDefault;
+	private DefaultInterfaceImpl defaultInterface;
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 
@@ -37,7 +37,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 	public Test_ParallelRegionsCycleBasedStatemachine() {
 		occuredEvents = new ArrayList<Event>();
 		outEvents = new HashSet<Event>();
-		interfaceDefault = new InterfaceDefaultImpl(this);
+		defaultInterface = new DefaultInterfaceImpl(this);
 	}
 
 	protected Collection<Event> getOccuredEvents() {
@@ -60,8 +60,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 		return EnumSet.copyOf(activeStates);
 	}
 
-	public InterfaceDefault getInterfaceDefault() {
-		return interfaceDefault;
+	public DefaultInterface getDefaultInterface() {
+		return defaultInterface;
 	}
 
 	public void enter() {
@@ -69,23 +69,23 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 	}
 
 	private boolean conditionState1Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent1());
+		return occuredEvents.contains(defaultInterface.getEventEvent1());
 	}
 	private boolean conditionState3Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent2());
+		return occuredEvents.contains(defaultInterface.getEventEvent2());
 	}
 	private boolean conditionState5Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent3());
+		return occuredEvents.contains(defaultInterface.getEventEvent3());
 	}
 	private boolean conditionState6Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent4());
+		return occuredEvents.contains(defaultInterface.getEventEvent4());
 	}
 	private boolean conditionState7Tr0() {
-		return (occuredEvents.contains(interfaceDefault.getEventEvent5()) || occuredEvents
-				.contains(interfaceDefault.getEventEvent3()));
+		return (occuredEvents.contains(defaultInterface.getEventEvent5()) || occuredEvents
+				.contains(defaultInterface.getEventEvent3()));
 	}
 	private boolean conditionState8Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent6());
+		return occuredEvents.contains(defaultInterface.getEventEvent6());
 	}
 	private void actionsState1Tr0() {
 		exitSequenceState1();
@@ -158,41 +158,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 	private void exitSequenceState1() {
 		activeStates.remove(State.State1);
 	}
-	private void exitSequenceState2() {
-		if (activeStates.contains(State.State3)) {
-			exitSequenceState3();
-
-		} else if (activeStates.contains(State.State5)) {
-			exitSequenceState5();
-
-		} else if (activeStates.contains(State.State6)) {
-			exitSequenceState6();
-
-		} else if (activeStates.contains(State.State9)) {
-			exitSequenceState9();
-
-		} else if (activeStates.contains(State.State7)) {
-			exitSequenceState7();
-
-		} else if (activeStates.contains(State.State8)) {
-			exitSequenceState8();
-
-		}
-	}
 	private void exitSequenceState3() {
 		activeStates.remove(State.State3);
-	}
-	private void exitSequenceState4() {
-		if (activeStates.contains(State.State5)) {
-			exitSequenceState5();
-
-		} else if (activeStates.contains(State.State6)) {
-			exitSequenceState6();
-
-		} else if (activeStates.contains(State.State9)) {
-			exitSequenceState9();
-
-		}
 	}
 	private void exitSequenceState5() {
 		activeStates.remove(State.State5);

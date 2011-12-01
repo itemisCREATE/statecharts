@@ -12,7 +12,7 @@ package org.yakindu.sct.runtime.java.test_shallowhistory;
 
 import org.yakindu.sct.runtime.java.Event;
 
-public class InterfaceDefaultImpl implements InterfaceDefault {
+public class InterfaceImpl implements Interface {
 
 	private final Event EventEvent1 = new Event("event1");
 	private final Event EventEvent2 = new Event("event2");
@@ -25,8 +25,7 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 
 	private Test_ShallowHistoryCycleBasedStatemachine statemachine;
 
-	public InterfaceDefaultImpl(
-			Test_ShallowHistoryCycleBasedStatemachine statemachine) {
+	public InterfaceImpl(Test_ShallowHistoryCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 

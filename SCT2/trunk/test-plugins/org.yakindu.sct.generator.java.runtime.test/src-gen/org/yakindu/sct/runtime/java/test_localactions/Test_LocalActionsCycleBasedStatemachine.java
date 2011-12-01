@@ -35,7 +35,7 @@ public class Test_LocalActionsCycleBasedStatemachine
 		State1, State2,
 	};
 
-	private InterfaceDefaultImpl interfaceDefault;
+	private DefaultInterfaceImpl defaultInterface;
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 
@@ -50,7 +50,7 @@ public class Test_LocalActionsCycleBasedStatemachine
 	public Test_LocalActionsCycleBasedStatemachine() {
 		occuredEvents = new ArrayList<Event>();
 		outEvents = new HashSet<Event>();
-		interfaceDefault = new InterfaceDefaultImpl(this);
+		defaultInterface = new DefaultInterfaceImpl(this);
 	}
 
 	protected Collection<Event> getOccuredEvents() {
@@ -92,8 +92,8 @@ public class Test_LocalActionsCycleBasedStatemachine
 		return EnumSet.copyOf(activeStates);
 	}
 
-	public InterfaceDefault getInterfaceDefault() {
-		return interfaceDefault;
+	public DefaultInterface getDefaultInterface() {
+		return defaultInterface;
 	}
 
 	public void enter() {
@@ -102,23 +102,23 @@ public class Test_LocalActionsCycleBasedStatemachine
 	}
 
 	private boolean conditionState1Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent1());
+		return occuredEvents.contains(defaultInterface.getEventEvent1());
 	}
 	private boolean conditionState1Lr2() {
 		return true;
 	}
 	private boolean conditionState1Lr3() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent2());
+		return occuredEvents.contains(defaultInterface.getEventEvent2());
 	}
 	private boolean conditionState1Lr4() {
 		return occuredEvents.contains(State1_time_event_0);
 	}
 	private boolean conditionState2Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent3());
+		return occuredEvents.contains(defaultInterface.getEventEvent3());
 	}
 	private boolean conditionState2Lr2() {
-		return (occuredEvents.contains(interfaceDefault.getEventEvent2()) || occuredEvents
-				.contains(interfaceDefault.getEventEvent4()));
+		return (occuredEvents.contains(defaultInterface.getEventEvent2()) || occuredEvents
+				.contains(defaultInterface.getEventEvent4()));
 	}
 	private boolean conditionState2Lr3() {
 		return occuredEvents.contains(State2_time_event_0);
@@ -129,15 +129,15 @@ public class Test_LocalActionsCycleBasedStatemachine
 
 	}
 	private void actionsState1Lr2() {
-		interfaceDefault.setVarI(2);
+		defaultInterface.setVarI(2);
 
 	}
 	private void actionsState1Lr3() {
-		interfaceDefault.setVarI(3);
+		defaultInterface.setVarI(3);
 
 	}
 	private void actionsState1Lr4() {
-		interfaceDefault.setVarC(interfaceDefault.getVarC() + (1));
+		defaultInterface.setVarC(defaultInterface.getVarC() + (1));
 
 	}
 	private void actionsState2Tr0() {
@@ -146,31 +146,31 @@ public class Test_LocalActionsCycleBasedStatemachine
 
 	}
 	private void actionsState2Lr2() {
-		interfaceDefault.setVarJ(2);
+		defaultInterface.setVarJ(2);
 
 	}
 	private void actionsState2Lr3() {
-		interfaceDefault.setVarJ(3);
+		defaultInterface.setVarJ(3);
 
 	}
 	private void entryActionState1() {
 		getTimerHandler().setTimer(State1_time_event_0, 100, cycleStartTime);
-		interfaceDefault.setVarI(1);
+		defaultInterface.setVarI(1);
 
 	}
 	private void entryActionState2() {
 		getTimerHandler().setTimer(State2_time_event_0, 200, cycleStartTime);
-		interfaceDefault.setVarJ(1);
+		defaultInterface.setVarJ(1);
 
 	}
 	private void exitActionState1() {
 		getTimerHandler().resetTimer(State1_time_event_0);
-		interfaceDefault.setVarI(0);
+		defaultInterface.setVarI(0);
 
 	}
 	private void exitActionState2() {
 		getTimerHandler().resetTimer(State2_time_event_0);
-		interfaceDefault.setVarJ(0);
+		defaultInterface.setVarJ(0);
 
 	}
 

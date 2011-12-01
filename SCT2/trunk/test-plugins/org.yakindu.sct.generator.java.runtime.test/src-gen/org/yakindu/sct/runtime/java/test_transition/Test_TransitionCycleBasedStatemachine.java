@@ -40,7 +40,7 @@ public class Test_TransitionCycleBasedStatemachine
 	};
 
 	private InterfaceAImpl interfaceA;
-	private InterfaceDefaultImpl interfaceDefault;
+	private DefaultInterfaceImpl defaultInterface;
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 
@@ -56,7 +56,7 @@ public class Test_TransitionCycleBasedStatemachine
 		occuredEvents = new ArrayList<Event>();
 		outEvents = new HashSet<Event>();
 		interfaceA = new InterfaceAImpl(this);
-		interfaceDefault = new InterfaceDefaultImpl(this);
+		defaultInterface = new DefaultInterfaceImpl(this);
 	}
 
 	protected Collection<Event> getOccuredEvents() {
@@ -102,8 +102,8 @@ public class Test_TransitionCycleBasedStatemachine
 		return interfaceA;
 	}
 
-	public InterfaceDefault getInterfaceDefault() {
-		return interfaceDefault;
+	public DefaultInterface getDefaultInterface() {
+		return defaultInterface;
 	}
 
 	private void raiseEvent10() {
@@ -129,22 +129,22 @@ public class Test_TransitionCycleBasedStatemachine
 				.contains(interfaceA.getEventEvent2()));
 	}
 	private boolean conditionState1Tr1() {
-		return (interfaceDefault.getVarI() == 5);
+		return (defaultInterface.getVarI() == 5);
 	}
 	private boolean conditionState1Tr2() {
-		return (occuredEvents.contains(interfaceA.getEventEvent3()) && (interfaceDefault
+		return (occuredEvents.contains(interfaceA.getEventEvent3()) && (defaultInterface
 				.getVarJ() < 20));
 	}
 	private boolean conditionState1Tr3() {
 		return ((occuredEvents.contains(interfaceA.getEventEvent3()) || occuredEvents
-				.contains(interfaceA.getEventEvent4())) && (interfaceDefault
+				.contains(interfaceA.getEventEvent4())) && (defaultInterface
 				.getVarJ() > 30));
 	}
 	private boolean conditionState1Tr4() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent6());
+		return occuredEvents.contains(defaultInterface.getEventEvent6());
 	}
 	private boolean conditionState1Tr5() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent7());
+		return occuredEvents.contains(defaultInterface.getEventEvent7());
 	}
 	private boolean conditionState1Tr6() {
 		return occuredEvents.contains(State1_time_event_0);
@@ -177,14 +177,14 @@ public class Test_TransitionCycleBasedStatemachine
 	}
 	private void actionsState1Tr4() {
 		exitSequenceState1();
-		interfaceDefault.setVarI(15);
+		defaultInterface.setVarI(15);
 
 		enterSequenceState2();
 
 	}
 	private void actionsState1Tr5() {
 		exitSequenceState1();
-		interfaceDefault.setVarJ((interfaceDefault.getVarI() * 9));
+		defaultInterface.setVarJ((defaultInterface.getVarI() * 9));
 
 		enterSequenceState2();
 
@@ -227,9 +227,6 @@ public class Test_TransitionCycleBasedStatemachine
 	private void exitSequenceState1() {
 		activeStates.remove(State.State1);
 		exitActionState1();
-	}
-	private void exitSequenceState2() {
-		activeStates.remove(State.State2);
 	}
 	private void reactState1() {
 		if (conditionState1Tr0()) {

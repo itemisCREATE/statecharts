@@ -39,7 +39,7 @@ String getInterfaceName(InterfaceScope this) :
 	if name!=null then
 		"Interface" + name.toFirstUpper()
 	else
-		"InterfaceDefault";
+		"DefaultInterface";
 		 
 String getInterfaceImplName(InterfaceScope this) :  getInterfaceName() + "Impl";
 

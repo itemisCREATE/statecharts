@@ -12,7 +12,7 @@ package org.yakindu.sct.runtime.java.test_localactions;
 
 import org.yakindu.sct.runtime.java.Event;
 
-public class InterfaceDefaultImpl implements InterfaceDefault {
+public class DefaultInterfaceImpl implements DefaultInterface {
 
 	private final Event EventEvent1 = new Event("Event1");
 	private final Event EventEvent2 = new Event("Event2");
@@ -21,7 +21,7 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 
 	private Test_LocalActionsCycleBasedStatemachine statemachine;
 
-	public InterfaceDefaultImpl(
+	public DefaultInterfaceImpl(
 			Test_LocalActionsCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}

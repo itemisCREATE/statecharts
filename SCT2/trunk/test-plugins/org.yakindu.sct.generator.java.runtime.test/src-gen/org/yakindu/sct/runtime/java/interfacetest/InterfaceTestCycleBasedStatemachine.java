@@ -24,7 +24,7 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 		State1, State2, State3, State4,
 	};
 
-	private InterfaceDefaultImpl interfaceDefault;
+	private DefaultInterfaceImpl defaultInterface;
 	private InterfaceOtherImpl interfaceOther;
 	private InterfaceThirdImpl interfaceThird;
 
@@ -37,7 +37,7 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 	public InterfaceTestCycleBasedStatemachine() {
 		occuredEvents = new ArrayList<Event>();
 		outEvents = new HashSet<Event>();
-		interfaceDefault = new InterfaceDefaultImpl(this);
+		defaultInterface = new DefaultInterfaceImpl(this);
 		interfaceOther = new InterfaceOtherImpl(this);
 		interfaceThird = new InterfaceThirdImpl(this);
 	}
@@ -62,8 +62,8 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 		return EnumSet.copyOf(activeStates);
 	}
 
-	public InterfaceDefault getInterfaceDefault() {
-		return interfaceDefault;
+	public DefaultInterface getDefaultInterface() {
+		return defaultInterface;
 	}
 
 	public InterfaceOther getInterfaceOther() {
@@ -79,19 +79,19 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 	}
 
 	private boolean conditionState1Tr0() {
-		return (occuredEvents.contains(interfaceDefault.getEventEvent1()) && (interfaceDefault
+		return (occuredEvents.contains(defaultInterface.getEventEvent1()) && (defaultInterface
 				.getVarVar2() > 0));
 	}
 	private boolean conditionState1Tr1() {
-		return (occuredEvents.contains(interfaceOther.getEventEvent3()) && (interfaceDefault
+		return (occuredEvents.contains(interfaceOther.getEventEvent3()) && (defaultInterface
 				.getVarVar3() == 1));
 	}
 	private boolean conditionState1Tr2() {
-		return (occuredEvents.contains(interfaceThird.getEventEvent5()) && (interfaceDefault
+		return (occuredEvents.contains(interfaceThird.getEventEvent5()) && (defaultInterface
 				.getVarVar1() == true));
 	}
 	private boolean conditionState2Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent1());
+		return occuredEvents.contains(defaultInterface.getEventEvent1());
 	}
 	private boolean conditionState3Tr0() {
 		return occuredEvents.contains(interfaceOther.getEventEvent3());
@@ -130,7 +130,7 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 
 	}
 	private void entryActionState2() {
-		interfaceDefault.raiseEvent2(22);
+		defaultInterface.raiseEvent2(22);
 
 	}
 	private void entryActionState3() {

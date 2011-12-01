@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.runtime.java.test_hierarchy;
 
-public interface InterfaceDefault {
+public interface DefaultInterface {
 
 	public void raiseEvent1();
 	public void raiseEvent2();

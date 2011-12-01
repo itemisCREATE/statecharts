@@ -150,10 +150,10 @@ public class CrossingDemo {
 					// Shorter call for code commented out below
 					try {
 						Class<?> interfaceClass = statemachine
-								.getInterfaceDefault().getClass();
+								.getDefaultInterface().getClass();
 						interfaceClass.getDeclaredMethod(
 								"raiseKeypress" + (j + 1), new Class[0])
-								.invoke(statemachine.getInterfaceDefault(),
+								.invoke(statemachine.getDefaultInterface(),
 										new Object[0]);
 					} catch (IllegalAccessException e) {
 						e.printStackTrace();

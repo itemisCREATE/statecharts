@@ -8,15 +8,22 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.runtime.java.test_parallelregions;
+package org.yakindu.sct.runtime.java.test_transition;
 
-public interface InterfaceDefault {
+import org.yakindu.sct.runtime.java.Event;
+import org.yakindu.sct.runtime.java.INotificationSender;
 
-	public void raiseEvent1();
-	public void raiseEvent2();
-	public void raiseEvent3();
-	public void raiseEvent4();
+public interface Interface extends INotificationSender {
+
 	public void raiseEvent5();
+	public void raiseEvent5(boolean value);
 	public void raiseEvent6();
+	public boolean isRaisedEvent7();
 
+	public Event getEventEvent7();
+
+	public int getVarI();
+	public void setVarI(int value);
+	public double getVarJ();
+	public void setVarJ(double value);
 }
