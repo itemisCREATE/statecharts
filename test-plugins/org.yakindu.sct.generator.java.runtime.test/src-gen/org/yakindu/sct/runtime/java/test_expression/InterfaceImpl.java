@@ -8,24 +8,22 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.runtime.java.interfacetest;
+package org.yakindu.sct.runtime.java.test_expression;
 
-import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.NotificationSender;
 import org.yakindu.sct.runtime.java.ValuedEvent;
 
-public class InterfaceDefaultImpl extends NotificationSender
-		implements
-			InterfaceDefault {
+public class InterfaceImpl extends NotificationSender implements Interface {
 
-	private final Event EventEvent1 = new Event("event1");
-	private final ValuedEvent<Integer> EventEvent2 = new ValuedEvent<Integer>(
-			"event2", 0);
+	private final ValuedEvent<Integer> EventEvent1 = new ValuedEvent<Integer>(
+			"event1", 0);
+	private final ValuedEvent<Double> EventEvent2 = new ValuedEvent<Double>(
+			"event2", 0D);
 
-	private InterfaceTestCycleBasedStatemachine statemachine;
+	private Test_ExpressionCycleBasedStatemachine statemachine;
 
-	public InterfaceDefaultImpl(InterfaceTestCycleBasedStatemachine statemachine) {
+	public InterfaceImpl(Test_ExpressionCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 
@@ -33,7 +31,12 @@ public class InterfaceDefaultImpl extends NotificationSender
 		statemachine.getOccuredEvents().add(EventEvent1);
 	}
 
-	public Event getEventEvent1() {
+	public void raiseEvent1(int value) {
+		EventEvent1.setValue(value);
+		statemachine.getOccuredEvents().add(EventEvent1);
+	}
+
+	public ValuedEvent<Integer> getEventEvent1() {
 		return EventEvent1;
 	}
 
@@ -43,14 +46,14 @@ public class InterfaceDefaultImpl extends NotificationSender
 		notifyListeners(new EventNotification(EventEvent2));
 	}
 
-	public void raiseEvent2(int value) {
+	public void raiseEvent2(double value) {
 		EventEvent2.setValue(value);
 		statemachine.getOccuredEvents().add(EventEvent2);
 		statemachine.getOutEvents().add(EventEvent2);
 		notifyListeners(new EventNotification(EventEvent2));
 	}
 
-	public ValuedEvent<Integer> getEventEvent2() {
+	public ValuedEvent<Double> getEventEvent2() {
 		return EventEvent2;
 	}
 
@@ -58,31 +61,49 @@ public class InterfaceDefaultImpl extends NotificationSender
 		return statemachine.getOutEvents().contains(EventEvent2);
 	}
 
-	private boolean varVar1;
+	private int varVar1 = 6;
 
-	public boolean getVarVar1() {
+	public int getVarVar1() {
 		return varVar1;
 	}
 
-	public void setVarVar1(boolean value) {
+	public void setVarVar1(int value) {
 		varVar1 = value;
 	}
-	private double varVar2 = 2.3;
+	private int varVar2 = 123;
 
-	public double getVarVar2() {
+	public int getVarVar2() {
 		return varVar2;
 	}
 
-	public void setVarVar2(double value) {
+	public void setVarVar2(int value) {
 		varVar2 = value;
 	}
-	private int varVar3 = 1;
+	private double varVar3 = 19.4;
 
-	public int getVarVar3() {
+	public double getVarVar3() {
 		return varVar3;
 	}
 
-	public void setVarVar3(int value) {
+	public void setVarVar3(double value) {
 		varVar3 = value;
+	}
+	private double varVar4 = 43.3;
+
+	public double getVarVar4() {
+		return varVar4;
+	}
+
+	public void setVarVar4(double value) {
+		varVar4 = value;
+	}
+	private boolean varVar5 = false;
+
+	public boolean getVarVar5() {
+		return varVar5;
+	}
+
+	public void setVarVar5(boolean value) {
+		varVar5 = value;
 	}
 }

@@ -24,7 +24,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 		State1, State9, State10, State2, State3, State4, State5, State6, State7, State8,
 	};
 
-	private InterfaceDefaultImpl interfaceDefault;
+	private DefaultInterfaceImpl defaultInterface;
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 
@@ -35,7 +35,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 	public Test_HierarchyCycleBasedStatemachine() {
 		occuredEvents = new ArrayList<Event>();
 		outEvents = new HashSet<Event>();
-		interfaceDefault = new InterfaceDefaultImpl(this);
+		defaultInterface = new DefaultInterfaceImpl(this);
 	}
 
 	protected Collection<Event> getOccuredEvents() {
@@ -58,8 +58,8 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 		return EnumSet.copyOf(activeStates);
 	}
 
-	public InterfaceDefault getInterfaceDefault() {
-		return interfaceDefault;
+	public DefaultInterface getDefaultInterface() {
+		return defaultInterface;
 	}
 
 	public void enter() {
@@ -67,52 +67,52 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 	}
 
 	private boolean conditionState1Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent1());
+		return occuredEvents.contains(defaultInterface.getEventEvent1());
 	}
 	private boolean conditionState9Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent9());
+		return occuredEvents.contains(defaultInterface.getEventEvent9());
 	}
 	private boolean conditionState10Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent10());
+		return occuredEvents.contains(defaultInterface.getEventEvent10());
 	}
 	private boolean conditionState2Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent6());
+		return occuredEvents.contains(defaultInterface.getEventEvent6());
 	}
 	private boolean conditionState3Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent2());
+		return occuredEvents.contains(defaultInterface.getEventEvent2());
 	}
 	private boolean conditionState3Tr1() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent11());
+		return occuredEvents.contains(defaultInterface.getEventEvent11());
 	}
 	private boolean conditionState3Tr2() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent14());
+		return occuredEvents.contains(defaultInterface.getEventEvent14());
 	}
 	private boolean conditionState4Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent7());
+		return occuredEvents.contains(defaultInterface.getEventEvent7());
 	}
 	private boolean conditionState5Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent3());
+		return occuredEvents.contains(defaultInterface.getEventEvent3());
 	}
 	private boolean conditionState5Tr1() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent12());
+		return occuredEvents.contains(defaultInterface.getEventEvent12());
 	}
 	private boolean conditionState5Tr2() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent15());
+		return occuredEvents.contains(defaultInterface.getEventEvent15());
 	}
 	private boolean conditionState6Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent8());
+		return occuredEvents.contains(defaultInterface.getEventEvent8());
 	}
 	private boolean conditionState7Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent4());
+		return occuredEvents.contains(defaultInterface.getEventEvent4());
 	}
 	private boolean conditionState8Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent5());
+		return occuredEvents.contains(defaultInterface.getEventEvent5());
 	}
 	private boolean conditionState8Tr1() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent13());
+		return occuredEvents.contains(defaultInterface.getEventEvent13());
 	}
 	private boolean conditionState8Tr2() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent16());
+		return occuredEvents.contains(defaultInterface.getEventEvent16());
 	}
 	private void actionsState1Tr0() {
 		exitSequenceState1();
@@ -210,83 +210,83 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 
 	}
 	private void entryActionState1() {
-		interfaceDefault.setVarS1(1);
+		defaultInterface.setVarS1(1);
 
 	}
 	private void entryActionState9() {
-		interfaceDefault.setVarS1(interfaceDefault.getVarS1() + (1));
+		defaultInterface.setVarS1(defaultInterface.getVarS1() + (1));
 
 	}
 	private void entryActionState10() {
-		interfaceDefault.setVarS1(interfaceDefault.getVarS1() + (1));
+		defaultInterface.setVarS1(defaultInterface.getVarS1() + (1));
 
 	}
 	private void entryActionState2() {
-		interfaceDefault.setVarS2(1);
+		defaultInterface.setVarS2(1);
 
 	}
 	private void entryActionState3() {
-		interfaceDefault.setVarS2(interfaceDefault.getVarS2() + (1));
+		defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
 
 	}
 	private void entryActionState4() {
-		interfaceDefault.setVarS2(interfaceDefault.getVarS2() + (1));
+		defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
 
 	}
 	private void entryActionState5() {
-		interfaceDefault.setVarS2(interfaceDefault.getVarS2() + (1));
+		defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
 
 	}
 	private void entryActionState6() {
-		interfaceDefault.setVarS2(interfaceDefault.getVarS2() + (1));
+		defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
 
 	}
 	private void entryActionState7() {
-		interfaceDefault.setVarS2(interfaceDefault.getVarS2() + (1));
+		defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
 
 	}
 	private void entryActionState8() {
-		interfaceDefault.setVarS2(interfaceDefault.getVarS2() + (1));
+		defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
 
 	}
 	private void exitActionState1() {
-		interfaceDefault.setVarS1(interfaceDefault.getVarS1() - (1));
+		defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
 
 	}
 	private void exitActionState9() {
-		interfaceDefault.setVarS1(interfaceDefault.getVarS1() - (1));
+		defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
 
 	}
 	private void exitActionState10() {
-		interfaceDefault.setVarS1(interfaceDefault.getVarS1() - (1));
+		defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
 
 	}
 	private void exitActionState2() {
-		interfaceDefault.setVarS2(interfaceDefault.getVarS2() - (1));
+		defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 	}
 	private void exitActionState3() {
-		interfaceDefault.setVarS2(interfaceDefault.getVarS2() - (1));
+		defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 	}
 	private void exitActionState4() {
-		interfaceDefault.setVarS2(interfaceDefault.getVarS2() - (1));
+		defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 	}
 	private void exitActionState5() {
-		interfaceDefault.setVarS2(interfaceDefault.getVarS2() - (1));
+		defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 	}
 	private void exitActionState6() {
-		interfaceDefault.setVarS2(interfaceDefault.getVarS2() - (1));
+		defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 	}
 	private void exitActionState7() {
-		interfaceDefault.setVarS2(interfaceDefault.getVarS2() - (1));
+		defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 	}
 	private void exitActionState8() {
-		interfaceDefault.setVarS2(interfaceDefault.getVarS2() - (1));
+		defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 	}
 

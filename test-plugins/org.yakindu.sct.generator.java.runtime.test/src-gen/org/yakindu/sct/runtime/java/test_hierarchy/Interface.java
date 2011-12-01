@@ -8,9 +8,9 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.runtime.java.test_deephistory;
+package org.yakindu.sct.runtime.java.test_hierarchy;
 
-public interface InterfaceDefault {
+public interface Interface {
 
 	public void raiseEvent1();
 	public void raiseEvent2();
@@ -21,5 +21,16 @@ public interface InterfaceDefault {
 	public void raiseEvent7();
 	public void raiseEvent8();
 	public void raiseEvent9();
+	public void raiseEvent10();
+	public void raiseEvent11();
+	public void raiseEvent12();
+	public void raiseEvent13();
+	public void raiseEvent14();
+	public void raiseEvent15();
+	public void raiseEvent16();
 
+	public int getVarS1();
+	public void setVarS1(int value);
+	public int getVarS2();
+	public void setVarS2(int value);
 }

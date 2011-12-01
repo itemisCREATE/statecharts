@@ -24,7 +24,7 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 		State1, State2,
 	};
 
-	private InterfaceDefaultImpl interfaceDefault;
+	private DefaultInterfaceImpl defaultInterface;
 	private InterfaceOtherImpl interfaceOther;
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
@@ -36,7 +36,7 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 	public Test_ExpressionCycleBasedStatemachine() {
 		occuredEvents = new ArrayList<Event>();
 		outEvents = new HashSet<Event>();
-		interfaceDefault = new InterfaceDefaultImpl(this);
+		defaultInterface = new DefaultInterfaceImpl(this);
 		interfaceOther = new InterfaceOtherImpl(this);
 	}
 
@@ -60,8 +60,8 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 		return EnumSet.copyOf(activeStates);
 	}
 
-	public InterfaceDefault getInterfaceDefault() {
-		return interfaceDefault;
+	public DefaultInterface getDefaultInterface() {
+		return defaultInterface;
 	}
 
 	public InterfaceOther getInterfaceOther() {
@@ -73,11 +73,11 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 	}
 
 	private boolean conditionState1Tr0() {
-		return (occuredEvents.contains(interfaceDefault.getEventEvent1()) && ((interfaceOther
-				.getVarVar1() == true) || (interfaceDefault.getVarVar5() == false)));
+		return (occuredEvents.contains(defaultInterface.getEventEvent1()) && ((interfaceOther
+				.getVarVar1() == true) || (defaultInterface.getVarVar5() == false)));
 	}
 	private boolean conditionState2Tr0() {
-		return (occuredEvents.contains(interfaceDefault.getEventEvent1()) && (interfaceDefault
+		return (occuredEvents.contains(defaultInterface.getEventEvent1()) && (defaultInterface
 				.getVarVar3() > 0));
 	}
 	private boolean conditionState2Lr2() {
@@ -92,31 +92,31 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 	}
 	private void actionsState2Tr0() {
 		exitSequenceState2();
-		interfaceDefault.setVarVar5(true);
+		defaultInterface.setVarVar5(true);
 
 		enterSequenceState1();
 
 	}
 	private void actionsState2Lr2() {
-		interfaceDefault.setVarVar1(interfaceDefault.getVarVar1() + (1));
+		defaultInterface.setVarVar1(defaultInterface.getVarVar1() + (1));
 
 	}
 	private void entryActionState1() {
-		interfaceDefault.setVarVar3(interfaceDefault.getVarVar3()
-				+ ((interfaceDefault.getVarVar2() * interfaceDefault
+		defaultInterface.setVarVar3(defaultInterface.getVarVar3()
+				+ ((defaultInterface.getVarVar2() * defaultInterface
 						.getVarVar3())));
 
 	}
 	private void entryActionState2() {
-		interfaceDefault.setVarVar3(interfaceDefault.getVarVar3() / (5));
+		defaultInterface.setVarVar3(defaultInterface.getVarVar3() / (5));
 
-		interfaceDefault.setVarVar1(interfaceDefault.getVarVar1() + (1));
+		defaultInterface.setVarVar1(defaultInterface.getVarVar1() + (1));
 
 	}
 	private void exitActionState1() {
-		interfaceDefault.setVarVar2(1);
+		defaultInterface.setVarVar2(1);
 
-		interfaceDefault.setVarVar4(22.3);
+		defaultInterface.setVarVar4(22.3);
 
 	}
 

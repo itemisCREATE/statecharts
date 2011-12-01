@@ -24,7 +24,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine implements IStatemachine 
 		State1, State2, State3, State4, State6, State7, State8, State9, State5,
 	};
 
-	private InterfaceDefaultImpl interfaceDefault;
+	private DefaultInterfaceImpl defaultInterface;
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 
@@ -35,7 +35,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine implements IStatemachine 
 	public Test_ShallowHistoryCycleBasedStatemachine() {
 		occuredEvents = new ArrayList<Event>();
 		outEvents = new HashSet<Event>();
-		interfaceDefault = new InterfaceDefaultImpl(this);
+		defaultInterface = new DefaultInterfaceImpl(this);
 	}
 
 	protected Collection<Event> getOccuredEvents() {
@@ -58,8 +58,8 @@ public class Test_ShallowHistoryCycleBasedStatemachine implements IStatemachine 
 		return EnumSet.copyOf(activeStates);
 	}
 
-	public InterfaceDefault getInterfaceDefault() {
-		return interfaceDefault;
+	public DefaultInterface getDefaultInterface() {
+		return defaultInterface;
 	}
 
 	public void enter() {
@@ -67,28 +67,28 @@ public class Test_ShallowHistoryCycleBasedStatemachine implements IStatemachine 
 	}
 
 	private boolean conditionState1Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent1());
+		return occuredEvents.contains(defaultInterface.getEventEvent1());
 	}
 	private boolean conditionState2Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent2());
+		return occuredEvents.contains(defaultInterface.getEventEvent2());
 	}
 	private boolean conditionState3Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent3());
+		return occuredEvents.contains(defaultInterface.getEventEvent3());
 	}
 	private boolean conditionState4Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent4());
+		return occuredEvents.contains(defaultInterface.getEventEvent4());
 	}
 	private boolean conditionState6Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent5());
+		return occuredEvents.contains(defaultInterface.getEventEvent5());
 	}
 	private boolean conditionState7Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent6());
+		return occuredEvents.contains(defaultInterface.getEventEvent6());
 	}
 	private boolean conditionState8Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent7());
+		return occuredEvents.contains(defaultInterface.getEventEvent7());
 	}
 	private boolean conditionState9Tr0() {
-		return occuredEvents.contains(interfaceDefault.getEventEvent8());
+		return occuredEvents.contains(defaultInterface.getEventEvent8());
 	}
 	private void actionsState1Tr0() {
 		exitSequenceState1();

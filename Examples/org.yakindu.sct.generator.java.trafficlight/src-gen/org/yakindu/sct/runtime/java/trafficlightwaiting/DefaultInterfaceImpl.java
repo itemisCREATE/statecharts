@@ -12,7 +12,7 @@ package org.yakindu.sct.runtime.java.trafficlightwaiting;
 
 import org.yakindu.sct.runtime.java.Event;
 
-public class InterfaceDefaultImpl implements InterfaceDefault {
+public class DefaultInterfaceImpl implements DefaultInterface {
 
 	private final Event EventKeypress1 = new Event("keypress1");
 	private final Event EventKeypress2 = new Event("keypress2");
@@ -20,7 +20,7 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 
 	private TrafficLightWaitingCycleBasedStatemachine statemachine;
 
-	public InterfaceDefaultImpl(
+	public DefaultInterfaceImpl(
 			TrafficLightWaitingCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}

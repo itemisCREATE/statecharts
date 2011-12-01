@@ -15,9 +15,9 @@ import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.NotificationSender;
 import org.yakindu.sct.runtime.java.ValuedEvent;
 
-public class InterfaceDefaultImpl extends NotificationSender
+public class DefaultInterfaceImpl extends NotificationSender
 		implements
-			InterfaceDefault {
+			DefaultInterface {
 
 	private final ValuedEvent<Boolean> EventEvent5 = new ValuedEvent<Boolean>(
 			"event5", false);
@@ -26,7 +26,7 @@ public class InterfaceDefaultImpl extends NotificationSender
 
 	private Test_TransitionCycleBasedStatemachine statemachine;
 
-	public InterfaceDefaultImpl(
+	public DefaultInterfaceImpl(
 			Test_TransitionCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}

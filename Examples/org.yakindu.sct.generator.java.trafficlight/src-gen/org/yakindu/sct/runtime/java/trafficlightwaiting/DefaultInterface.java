@@ -8,19 +8,12 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.runtime.java.test_localactions;
+package org.yakindu.sct.runtime.java.trafficlightwaiting;
 
-public interface InterfaceDefault {
+public interface DefaultInterface {
 
-	public void raiseEvent1();
-	public void raiseEvent2();
-	public void raiseEvent3();
-	public void raiseEvent4();
+	public void raiseKeypress1();
+	public void raiseKeypress2();
+	public void raiseKeypress3();
 
-	public int getVarI();
-	public void setVarI(int value);
-	public int getVarJ();
-	public void setVarJ(int value);
-	public int getVarC();
-	public void setVarC(int value);
 }

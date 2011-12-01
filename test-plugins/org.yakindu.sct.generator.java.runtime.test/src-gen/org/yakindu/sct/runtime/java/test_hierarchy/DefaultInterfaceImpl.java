@@ -12,7 +12,7 @@ package org.yakindu.sct.runtime.java.test_hierarchy;
 
 import org.yakindu.sct.runtime.java.Event;
 
-public class InterfaceDefaultImpl implements InterfaceDefault {
+public class DefaultInterfaceImpl implements DefaultInterface {
 
 	private final Event EventEvent1 = new Event("event1");
 	private final Event EventEvent2 = new Event("event2");
@@ -33,7 +33,7 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 
 	private Test_HierarchyCycleBasedStatemachine statemachine;
 
-	public InterfaceDefaultImpl(
+	public DefaultInterfaceImpl(
 			Test_HierarchyCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}

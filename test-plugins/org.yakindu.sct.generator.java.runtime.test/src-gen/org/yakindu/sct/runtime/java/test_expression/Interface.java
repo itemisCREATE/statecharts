@@ -8,22 +8,27 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.runtime.java.interfacetest;
+package org.yakindu.sct.runtime.java.test_expression;
 
 import org.yakindu.sct.runtime.java.INotificationSender;
 import org.yakindu.sct.runtime.java.ValuedEvent;
 
-public interface InterfaceDefault extends INotificationSender {
+public interface Interface extends INotificationSender {
 
 	public void raiseEvent1();
+	public void raiseEvent1(int value);
 	public boolean isRaisedEvent2();
 
-	public ValuedEvent<Integer> getEventEvent2();
+	public ValuedEvent<Double> getEventEvent2();
 
-	public boolean getVarVar1();
-	public void setVarVar1(boolean value);
-	public double getVarVar2();
-	public void setVarVar2(double value);
-	public int getVarVar3();
-	public void setVarVar3(int value);
+	public int getVarVar1();
+	public void setVarVar1(int value);
+	public int getVarVar2();
+	public void setVarVar2(int value);
+	public double getVarVar3();
+	public void setVarVar3(double value);
+	public double getVarVar4();
+	public void setVarVar4(double value);
+	public boolean getVarVar5();
+	public void setVarVar5(boolean value);
 }

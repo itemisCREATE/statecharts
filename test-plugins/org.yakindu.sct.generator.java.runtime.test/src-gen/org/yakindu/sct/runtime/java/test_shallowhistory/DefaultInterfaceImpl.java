@@ -8,11 +8,11 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.runtime.java.test_parallelregions;
+package org.yakindu.sct.runtime.java.test_shallowhistory;
 
 import org.yakindu.sct.runtime.java.Event;
 
-public class InterfaceDefaultImpl implements InterfaceDefault {
+public class DefaultInterfaceImpl implements DefaultInterface {
 
 	private final Event EventEvent1 = new Event("event1");
 	private final Event EventEvent2 = new Event("event2");
@@ -20,11 +20,13 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 	private final Event EventEvent4 = new Event("event4");
 	private final Event EventEvent5 = new Event("event5");
 	private final Event EventEvent6 = new Event("event6");
+	private final Event EventEvent7 = new Event("event7");
+	private final Event EventEvent8 = new Event("event8");
 
-	private Test_ParallelRegionsCycleBasedStatemachine statemachine;
+	private Test_ShallowHistoryCycleBasedStatemachine statemachine;
 
-	public InterfaceDefaultImpl(
-			Test_ParallelRegionsCycleBasedStatemachine statemachine) {
+	public DefaultInterfaceImpl(
+			Test_ShallowHistoryCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
 	}
 
@@ -74,6 +76,22 @@ public class InterfaceDefaultImpl implements InterfaceDefault {
 
 	public Event getEventEvent6() {
 		return EventEvent6;
+	}
+
+	public void raiseEvent7() {
+		statemachine.getOccuredEvents().add(EventEvent7);
+	}
+
+	public Event getEventEvent7() {
+		return EventEvent7;
+	}
+
+	public void raiseEvent8() {
+		statemachine.getOccuredEvents().add(EventEvent8);
+	}
+
+	public Event getEventEvent8() {
+		return EventEvent8;
 	}
 
 }

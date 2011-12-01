@@ -13,7 +13,7 @@ package org.yakindu.sct.runtime.java.test_expression;
 import org.yakindu.sct.runtime.java.INotificationSender;
 import org.yakindu.sct.runtime.java.ValuedEvent;
 
-public interface InterfaceDefault extends INotificationSender {
+public interface DefaultInterface extends INotificationSender {
 
 	public void raiseEvent1();
 	public void raiseEvent1(int value);
