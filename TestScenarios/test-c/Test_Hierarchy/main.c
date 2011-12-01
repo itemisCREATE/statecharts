@@ -35,7 +35,7 @@ void setupStatemachine(Test_HierarchyStatemachine* machine, Timer* dummyTimer, E
 	dummyTimer_init(dummyTimer);
 
 	/* Set up Event Pool */
-	eventPool_init_heap(eventPool, event_last, MAXEVENTSPERTYPE);
+	test_Hierarchy_eventPool_init_heap(eventPool, MAXEVENTSPERTYPE);
 
 	/* initialize state machine */
 	test_HierarchyStatemachine_init(machine, dummyTimer, eventPool);

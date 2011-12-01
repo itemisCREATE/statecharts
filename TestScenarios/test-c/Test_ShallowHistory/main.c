@@ -25,7 +25,7 @@ void setupStatemachine(Test_ShallowHistoryStatemachine* machine, Timer* dummyTim
 	dummyTimer_init(dummyTimer);
 
 	/* Set up Event Pool */
-	eventPool_init_heap(eventPool, event_last, MAXEVENTSPERTYPE);
+	test_ShallowHistory_eventPool_init_heap(eventPool, MAXEVENTSPERTYPE);
 
 	/* initialize state machine */
 	test_ShallowHistoryStatemachine_init(machine, dummyTimer, eventPool);

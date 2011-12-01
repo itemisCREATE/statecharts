@@ -25,7 +25,7 @@ void setupStatemachine(Test_ParallelRegionsStatemachine* machine, Timer* dummyTi
 	dummyTimer_init(dummyTimer);
 
 	/* Set up Event Pool */
-	eventPool_init_heap(eventPool, event_last, MAXEVENTSPERTYPE);
+	test_ParallelRegions_eventPool_init_heap(eventPool, MAXEVENTSPERTYPE);
 
 	/* initialize state machine */
 	test_ParallelRegionsStatemachine_init(machine, dummyTimer, eventPool);

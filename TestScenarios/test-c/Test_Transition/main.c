@@ -25,7 +25,7 @@ void setupStatemachine(Test_TransitionStatemachine* machine, Timer* dummyTimer, 
 	dummyTimer_init(dummyTimer);
 
 	/* Set up Event Pool */
-	eventPool_init_heap(eventPool, event_last, MAXEVENTSPERTYPE);
+	test_Transition_eventPool_init_heap(eventPool, MAXEVENTSPERTYPE);
 
 	/* initialize state machine */
 	test_TransitionStatemachine_init(machine, dummyTimer, eventPool);
