@@ -363,7 +363,7 @@ public class STextBuilder extends Function {
 	}
 	@FunctionMethod("build")
 	public RTExpression buildRealLiteral(EObject object){
-		return new Constant(getDouble(object, "value"));
+		return new Constant(getFloat(object, "value"));
 	}
 
 	@FunctionMethod("build")
@@ -435,11 +435,11 @@ public class STextBuilder extends Function {
 		}
 		throw new BuilderException();
 	}
-	protected Double getDouble(EObject obj, String name) {
+	protected Float getFloat(EObject obj, String name) {
 		EStructuralFeature feature = obj.eClass().getEStructuralFeature(name);
 		if (feature instanceof EAttribute) {
 			EAttribute attr = (EAttribute) feature;
-			return (Double) obj.eGet(attr);
+			return (Float) obj.eGet(attr);
 		}
 		throw new BuilderException();
 	}
