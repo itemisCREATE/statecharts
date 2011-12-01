@@ -351,43 +351,19 @@ public class STextBuilder extends Function {
 
 	@FunctionMethod("build")
 	public RTExpression buildPrimitiveValueExpression(EObject obj) {
-
-		String value = getString(obj, "value");
-
-		// TODO: nur provisrisch - Grammatik muss noch ge�ndert werden,
-		// um unterschiedliche Literaltypen unterscheiden zu koennen
-		if (value != null) {
-
-			if ("true".equals(value))
-				return new Constant(Boolean.TRUE);
-
-			if ("false".equals(value))
-				return new Constant(Boolean.FALSE);
-
-			try { // flaot
-				if (value.contains("."))
-					return new Constant(Float.parseFloat(value));
-			} catch (NumberFormatException e1) { /* need to be quite */
-			}
-
-			try { // hex int
-				if (value.startsWith("0x"))
-					return new Constant(new Integer(Integer.parseInt(
-							value.substring(2), 16)));
-			} catch (NumberFormatException e1) { /* need to be quite */
-			}
-
-			try { // int
-				return new Constant(new Integer(Integer.parseInt(value)));
-			} catch (NumberFormatException e1) { /* need to be quite */
-			}
-
-			if ((value.startsWith("'") && value.endsWith("'"))
-					|| (value.startsWith("\"") && value.endsWith("\"")))
-				return new Constant(value.substring(1, value.length() - 1));
-		}
-
-		return new Constant(value);
+		return buildRefExpression(obj, "value");
+	}
+	@FunctionMethod("build")
+	public RTExpression buildIntLiteral(EObject object){
+		return new Constant(getInteger(object, "value"));
+	}
+	@FunctionMethod("build")
+	public RTExpression buildBoolLiteral(EObject object){
+		return new Constant(getBoolean(object, "value"));
+	}
+	@FunctionMethod("build")
+	public RTExpression buildRealLiteral(EObject object){
+		return new Constant(getDouble(object, "value"));
 	}
 
 	@FunctionMethod("build")
@@ -448,6 +424,22 @@ public class STextBuilder extends Function {
 		if (feature instanceof EAttribute) {
 			EAttribute attr = (EAttribute) feature;
 			return (Integer) obj.eGet(attr);
+		}
+		throw new BuilderException();
+	}
+	protected Boolean getBoolean(EObject obj, String name) {
+		EStructuralFeature feature = obj.eClass().getEStructuralFeature(name);
+		if (feature instanceof EAttribute) {
+			EAttribute attr = (EAttribute) feature;
+			return (Boolean) obj.eGet(attr);
+		}
+		throw new BuilderException();
+	}
+	protected Double getDouble(EObject obj, String name) {
+		EStructuralFeature feature = obj.eClass().getEStructuralFeature(name);
+		if (feature instanceof EAttribute) {
+			EAttribute attr = (EAttribute) feature;
+			return (Double) obj.eGet(attr);
 		}
 		throw new BuilderException();
 	}
