@@ -12,6 +12,8 @@ package org.yakindu.sct.generator.genmodel.ui.action;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -19,7 +21,6 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.ErrorDialog;
@@ -54,11 +55,13 @@ public class GenerateModelAction implements IObjectActionDelegate {
 	public void run(IAction action) {
 		IFile file = unwrap();
 		
-		if (file.getMarker(IMarker.SEVERITY_ERROR) != null) {
-			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		if (hasError(file)) {
+			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+					.getShell();
 			ErrorDialog.openError(shell, "Generator Error",
 					"Cannot execute Generator", new Status(IStatus.ERROR,
-							GeneratorActivator.PLUGIN_ID, "The file contains errors"));
+							GeneratorActivator.PLUGIN_ID,
+							"The file contains errors"));
 			return;
 		}
 		
@@ -73,6 +76,7 @@ public class GenerateModelAction implements IObjectActionDelegate {
 		final ISCTGenerator generator = description.createGenerator();
 		final EList<GeneratorEntry> entries = model.getEntries();
 		Job generatorJob = new Job("Execute SCT Genmodel " + file.getName()) {
+			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				for (GeneratorEntry generatorEntry : entries) {
 					if (monitor.isCanceled()) {
@@ -85,6 +89,24 @@ public class GenerateModelAction implements IObjectActionDelegate {
 		};
 		generatorJob.schedule();
 
+	}
+
+	private boolean hasError(IFile file) {
+		IMarker[] findMarkers = null;
+		try {
+			findMarkers = file.findMarkers(IMarker.PROBLEM, true,
+					IResource.DEPTH_INFINITE);
+			for (IMarker iMarker : findMarkers) {
+				Integer attribute = (Integer) iMarker
+						.getAttribute(IMarker.SEVERITY);
+				if (attribute.intValue() == IMarker.SEVERITY_ERROR) {
+					return true;
+				}
+			}
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	protected Resource loadResource(URI uri) {
