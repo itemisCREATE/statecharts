@@ -17,7 +17,7 @@ void setupStatemachine(InterfaceTestStatemachine* machine, Timer* dummyTimer, Ev
 	dummyTimer_init(dummyTimer);
 
 	/* Set up Event Pool */
-	eventPool_init_heap(eventPool, event_last, MAXEVENTSPERTYPE);
+	interfaceTest_eventPool_init_heap(eventPool, MAXEVENTSPERTYPE);
 
 	/* initialize state machine */
 	interfaceTestStatemachine_init(machine, dummyTimer, eventPool);

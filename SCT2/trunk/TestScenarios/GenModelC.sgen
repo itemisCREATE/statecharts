@@ -1,5 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart InterfaceTest {
+		feature Debug {
+			dumpSexec = true
+		}
 		feature	Outlet {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-c/InterfaceTest"

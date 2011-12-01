@@ -19,7 +19,7 @@ void setupStatemachine(Test_ExpressionStatemachine* machine, Timer* dummyTimer, 
 	dummyTimer_init(dummyTimer);
 
 	/* Set up Event Pool */
-	eventPool_init_heap(eventPool, event_last, MAXEVENTSPERTYPE);
+	test_Expression_eventPool_init_heap(eventPool, MAXEVENTSPERTYPE);
 
 	/* initialize state machine */
 	test_ExpressionStatemachine_init(machine, dummyTimer, eventPool);
