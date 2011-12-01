@@ -24,7 +24,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalSTextParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_BOOL", "RULE_DOUBLE", "RULE_HEX", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'default'", "'else'", "'local'", "'in'", "'out'", "'after'", "'every'", "'='", "'*='", "'/='", "'%='", "'+='", "'-='", "'<<='", "'>>='", "'&='", "'^='", "'|='", "'<<'", "'>>'", "'+'", "'-'", "'*'", "'/'", "'%'", "'~'", "'<'", "'<='", "'>'", "'>='", "'=='", "'!='", "'s'", "'ms'", "'ns'", "'void'", "'integer'", "'real'", "'boolean'", "'string'", "'@@statechart@@'", "'@@state@@'", "'@@transition@@'", "'namespace'", "'interface'", "':'", "'internal'", "'event'", "'var'", "'clock'", "'operation'", "'('", "')'", "','", "'entrypoint'", "'exitpoint'", "'.'", "'#'", "'['", "']'", "';'", "'entry'", "'exit'", "'oncycle'", "'always'", "'raise'", "'?'", "'||'", "'&&'", "'!'", "'^'", "'|'", "'&'", "'valueof'", "'raised'", "'active'", "'readonly'", "'external'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_BOOL", "RULE_FLOAT", "RULE_HEX", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'default'", "'else'", "'local'", "'in'", "'out'", "'after'", "'every'", "'='", "'*='", "'/='", "'%='", "'+='", "'-='", "'<<='", "'>>='", "'&='", "'^='", "'|='", "'<<'", "'>>'", "'+'", "'-'", "'*'", "'/'", "'%'", "'~'", "'<'", "'<='", "'>'", "'>='", "'=='", "'!='", "'s'", "'ms'", "'ns'", "'void'", "'integer'", "'real'", "'boolean'", "'string'", "'@@statechart@@'", "'@@state@@'", "'@@transition@@'", "'namespace'", "'interface'", "':'", "'internal'", "'event'", "'var'", "'clock'", "'operation'", "'('", "')'", "','", "'entrypoint'", "'exitpoint'", "'.'", "'#'", "'['", "']'", "';'", "'entry'", "'exit'", "'oncycle'", "'always'", "'raise'", "'?'", "'||'", "'&&'", "'!'", "'^'", "'|'", "'&'", "'valueof'", "'raised'", "'active'", "'readonly'", "'external'"
     };
     public static final int RULE_ID=4;
     public static final int T__29=29;
@@ -102,8 +102,8 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
     public static final int T__45=45;
     public static final int T__48=48;
     public static final int T__49=49;
+    public static final int RULE_FLOAT=7;
     public static final int RULE_SL_COMMENT=11;
-    public static final int RULE_DOUBLE=7;
     public static final int T__30=30;
     public static final int T__31=31;
     public static final int T__32=32;
@@ -7904,7 +7904,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             switch ( input.LA(1) ) {
             case RULE_INT:
             case RULE_BOOL:
-            case RULE_DOUBLE:
+            case RULE_FLOAT:
             case RULE_HEX:
                 {
                 alt14=1;
@@ -8096,7 +8096,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
                 alt15=3;
                 }
                 break;
-            case RULE_DOUBLE:
+            case RULE_FLOAT:
                 {
                 alt15=4;
                 }
@@ -32919,24 +32919,24 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RealLiteral__ValueAssignment_1"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11472:1: rule__RealLiteral__ValueAssignment_1 : ( RULE_DOUBLE ) ;
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11472:1: rule__RealLiteral__ValueAssignment_1 : ( RULE_FLOAT ) ;
     public final void rule__RealLiteral__ValueAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11476:1: ( ( RULE_DOUBLE ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11477:1: ( RULE_DOUBLE )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11476:1: ( ( RULE_FLOAT ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11477:1: ( RULE_FLOAT )
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11477:1: ( RULE_DOUBLE )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11478:1: RULE_DOUBLE
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11477:1: ( RULE_FLOAT )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11478:1: RULE_FLOAT
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRealLiteralAccess().getValueDOUBLETerminalRuleCall_1_0()); 
+               before(grammarAccess.getRealLiteralAccess().getValueFLOATTerminalRuleCall_1_0()); 
             }
-            match(input,RULE_DOUBLE,FOLLOW_RULE_DOUBLE_in_rule__RealLiteral__ValueAssignment_123401); if (state.failed) return ;
+            match(input,RULE_FLOAT,FOLLOW_RULE_FLOAT_in_rule__RealLiteral__ValueAssignment_123401); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRealLiteralAccess().getValueDOUBLETerminalRuleCall_1_0()); 
+               after(grammarAccess.getRealLiteralAccess().getValueFLOATTerminalRuleCall_1_0()); 
             }
 
             }
@@ -34294,7 +34294,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleExpression_in_rule__OperationCall__ArgsAssignment_3_1_123308 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_BOOL_in_rule__BoolLiteral__ValueAssignment_123339 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_INT_in_rule__IntLiteral__ValueAssignment_123370 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_DOUBLE_in_rule__RealLiteral__ValueAssignment_123401 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_FLOAT_in_rule__RealLiteral__ValueAssignment_123401 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_HEX_in_rule__HexLiteral__ValueAssignment_123432 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__VariableDefinition__UnorderedGroup_2__0_in_synpred101_InternalSText20487 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__VariableDefinition__ReadonlyAssignment_2_0_in_synpred102_InternalSText20574 = new BitSet(new long[]{0x0000000000000002L});

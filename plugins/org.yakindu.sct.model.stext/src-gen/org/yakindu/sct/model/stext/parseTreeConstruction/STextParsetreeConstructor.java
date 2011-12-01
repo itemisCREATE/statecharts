@@ -11649,11 +11649,11 @@ protected class IntLiteral_ValueAssignment_1 extends AssignmentToken  {
 /************ begin Rule RealLiteral ****************
  *
  * RealLiteral:
- * 	{RealLiteral} value=DOUBLE;
+ * 	{RealLiteral} value=FLOAT;
  *
  **/
 
-// {RealLiteral} value=DOUBLE
+// {RealLiteral} value=FLOAT
 protected class RealLiteral_Group extends GroupToken {
 	
 	public RealLiteral_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -11708,7 +11708,7 @@ protected class RealLiteral_RealLiteralAction_0 extends ActionToken  {
 	}
 }
 
-// value=DOUBLE
+// value=FLOAT
 protected class RealLiteral_ValueAssignment_1 extends AssignmentToken  {
 	
 	public RealLiteral_ValueAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -11732,9 +11732,9 @@ protected class RealLiteral_ValueAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getRealLiteralAccess().getValueDOUBLETerminalRuleCall_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getRealLiteralAccess().getValueFLOATTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getRealLiteralAccess().getValueDOUBLETerminalRuleCall_1_0();
+			element = grammarAccess.getRealLiteralAccess().getValueFLOATTerminalRuleCall_1_0();
 			return obj;
 		}
 		return null;

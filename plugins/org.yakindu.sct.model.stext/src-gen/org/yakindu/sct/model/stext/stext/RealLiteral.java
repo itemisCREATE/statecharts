@@ -34,12 +34,12 @@ public interface RealLiteral extends Literal
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' attribute.
-   * @see #setValue(double)
+   * @see #setValue(float)
    * @see org.yakindu.sct.model.stext.stext.StextPackage#getRealLiteral_Value()
    * @model
    * @generated
    */
-  double getValue();
+  float getValue();
 
   /**
    * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.RealLiteral#getValue <em>Value</em>}' attribute.
@@ -49,6 +49,6 @@ public interface RealLiteral extends Literal
    * @see #getValue()
    * @generated
    */
-  void setValue(double value);
+  void setValue(float value);
 
 } // RealLiteral

@@ -313,6 +313,7 @@ OperationCall returns Expression:
 
 Literal:
 	BoolLiteral | IntLiteral | HexLiteral |  RealLiteral;
+	
 BoolLiteral:
 	{BoolLiteral} value=BOOL
 ;
@@ -320,7 +321,7 @@ IntLiteral:
 	{IntLiteral} value = INT
 ;
 RealLiteral: 
-	{RealLiteral} value = DOUBLE
+	{RealLiteral} value = FLOAT
 ;
 HexLiteral:
 	{HexLiteral} value = HEX
@@ -329,11 +330,11 @@ HexLiteral:
 terminal BOOL returns ecore::EBoolean:
 	'true' | 'false' | 'yes' | 'no';
 
-terminal HEX returns ecore::ELong: 
+terminal HEX returns ecore::EInt: 
 	('0') ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+
 ;
 
-terminal DOUBLE returns ecore::EDouble:
+terminal FLOAT returns ecore::EFloat:
 	(INT '.' INT) ('e' ('-' | '+') INT)? ('f'|'F'|'d'|'D')?
 ;
 
