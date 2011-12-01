@@ -2,7 +2,9 @@ cmake_minimum_required(VERSION 2.8)
 
 enable_testing()
 
+if(CMAKE_COMPILER_IS_GNUCC)
 add_definitions( -Wall -O0 -g)
+endif(CMAKE_COMPILER_IS_GNUCC)
 
 add_subdirectory(src-gen-c/InterfaceTest)
 add_subdirectory(src-gen-c/Test_Expression)
