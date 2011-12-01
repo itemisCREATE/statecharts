@@ -44,6 +44,9 @@ class FlowOptimizer {
 		if (_inlineEnterSequences) flow.states.forEach( state | state.enterSequence.inline )
 		if (_inlineExitSequences)  flow.states.forEach( state | state.exitSequence.inline )
 				
+		flow.nodes.forEach( node | { node.reactions.forEach( r | { r.check.inline r.effect.inline }) node })
+		flow.nodes.forEach( node | node.reactSequence.inline )
+		
 		flow
 	}
 	
@@ -62,14 +65,17 @@ class FlowOptimizer {
 	}
 	
 	def inline(Check c) {
-		val List<CheckRef> cRefs = new ArrayList<CheckRef>()
-		cRefs.addAll(c.refs)
-		
-		for ( ref : cRefs ) {
-			val clone = EcoreUtil::copy(c)
-			ref.eContainer.substitute(ref, clone)
-			ref.check = null
+		if ( c != null ) {
+			val List<CheckRef> cRefs = new ArrayList<CheckRef>()
+			cRefs.addAll(c.refs)
+			
+			for ( ref : cRefs ) {
+				val clone = EcoreUtil::copy(c)
+				ref.eContainer.substitute(ref, clone)
+				ref.check = null
+			}
 		}
+		
 		c
 	}
 	
@@ -169,8 +175,8 @@ class FlowOptimizer {
 		_copy.name = _if.name
 		_copy.comment = _if.comment
 		_copy.check =  _if.check.stepCopy as Check
-		_copy.thenStep = _if.thenStep.stepCopy
-		_copy.elseStep = _if.elseStep.stepCopy
+		_copy.thenStep = if (_if.thenStep != null ) _if.thenStep.stepCopy else null
+		_copy.elseStep = if (_if.elseStep != null ) _if.elseStep.stepCopy else null
 
 		_copy
 	}

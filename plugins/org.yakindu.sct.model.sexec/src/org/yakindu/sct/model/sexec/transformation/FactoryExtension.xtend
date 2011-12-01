@@ -37,6 +37,8 @@ import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.FinalState
+import org.yakindu.sct.model.sgraph.Choice
+import org.yakindu.sct.model.sexec.ExecutionChoice
 
 class FactoryExtension {
 	
@@ -66,6 +68,16 @@ class FactoryExtension {
 			r.simpleName = if (state instanceof FinalState) "_final_" else state.name
 			r.name = state.fullyQualifiedName.toString.replaceAll(" ", "")	
 			r.sourceElement = state	
+		}
+	}
+	
+	def ExecutionChoice create r : sexecFactory.createExecutionChoice create(Choice choice){
+		if (choice != null) {
+			val n = choice.parentRegion.vertices.filter( typeof ( Choice) ).toList.indexOf(choice)
+			r.simpleName =   "_choice" + n + "_"
+			r.name = choice.fullyQualifiedName.toString.replaceAll(" ", "")	
+			r.sourceElement = choice	
+			r.reactSequence = sexecFactory.createSequence
 		}
 	}
 	
