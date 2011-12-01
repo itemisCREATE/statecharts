@@ -56,16 +56,26 @@ String toCCode(Assignment assignment) :
 /* EventRaising */
 String toCCode(EventRaising eventRaising) :
 	((eventRaising.value == null)?"":
-	"((" + eventRaising.event.name + "*) handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.name + ")->value = " 
+	"((" + eventRaising.event.getEventName() + "*) handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.getEventName() + ")->value = " 
 	+ eventRaising.value.toCCode() + ";") + 
-	" statemachine_cy_setEvent(&handle->base, handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.name + "); ";
+	" statemachine_cy_setEvent(&handle->base, handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.getEventName() + "); ";
 //  "{ _Event* ev = eventPool_createEvent(handle->base.eventPool, ev_"+eventRaising.event.name+"); if (ev) { " + eventRaising.addValue() + "statemachine_cy_setEvent(&handle->base, ev); } }";
 
+String getScopeName(emf::EObject o) :
+  "unknownScopeName";
+  
+String getScopeName(InterfaceScope is) :
+  is.name;
+  
+String getScopeName(InternalScope inls) :
+  "internal";
+
 String getInterfaceName(EventRaising event) :
-	"interface" + (( ((InterfaceScope)event.event.eContainer).name == null)?"":((InterfaceScope)event.event.eContainer).name.toFirstUpper());
+	"interface" + (( event.event.eContainer.getScopeName() == null)?"":event.event.eContainer.getScopeName().toFirstUpper());
+//	"interface" + (( ((InterfaceScope)event.event.eContainer).name == null)?"":((InterfaceScope)event.event.eContainer).name.toFirstUpper());
 
 String addValue(EventRaising event) :
-  ( (event.value == null)?"":("((" +event.event.name + "*)ev)->value = " + event.value.toCCode() + "; ") );
+  ( (event.value == null)?"":("((" +event.event.getEventName() + "*)ev)->value = " + event.value.toCCode() + "; ") );
 
 /* Logical Expressions */
 String toCCode(LogicalOrExpression expression) :
@@ -139,6 +149,15 @@ String eventTypeToString(Type type) :
   case (Type::string)  : "string"
   default : "unknownType"
  };
+
+Set[EventDefinition] getInEvents(Scope interface) : 
+	{};
+
+Set[EventDefinition] getOutEvents(Scope interface) : 
+	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::OUT);
+
+Set[EventDefinition] getLocalEvents(Scope interface) : 
+	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::LOCAL);
   
 Set[EventDefinition] getInEvents(InterfaceScope interface) : 
 	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::IN);
@@ -147,6 +166,15 @@ Set[EventDefinition] getOutEvents(InterfaceScope interface) :
 	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::OUT);
 
 Set[EventDefinition] getLocalEvents(InterfaceScope interface) : 
+	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::LOCAL);
+
+Set[EventDefinition] getInEvents(InternalScope interface) : 
+	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::IN);
+
+Set[EventDefinition] getOutEvents(InternalScope interface) : 
+	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::OUT);
+
+Set[EventDefinition] getLocalEvents(InternalScope interface) : 
 	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::LOCAL);
 
 // is this just relevant for events?
@@ -170,6 +198,9 @@ String toCCode(EventRaisedReferenceExpression errExp) :
 
 String toCCode(EventValueReferenceExpression evrExp) :
 	"((" +evrExp.value.name + "*)handle->base.eventList[" + evrExp.value.getEventEnumName() + "])->value";
+
+List[Scope] getUsableScopes(List[Scope] scList) :
+	scList.select(e| InterfaceScope.isInstance(e) || InternalScope.isInstance(e));
 
 /*
 String getScope(EObject eo) :

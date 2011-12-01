@@ -15,7 +15,7 @@ Templates for the main statechart cpp file.
 
 
 «DEFINE file FOR ExecutionFlow»
-«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface»
+«FOREACH this.scopes.getUsableScopes() AS interface»
 «FILE interface.interfaceClassName()+".h"»
 
 #ifndef «interface.interfaceClassName().toUpperCase()»_H_
@@ -37,9 +37,15 @@ typedef struct {
 	handleEvent handleEventCallback;
 #else
 	EventPool* eventPool;
+«IF InternalScope.isInstance(interface) -»
+«FOREACH interface.declarations.typeSelect(EventDefinition) AS event -»
+    _Event* «event.getEventName()»;
+«ENDFOREACH -»
+«ELSE -»
 «FOREACH interface.getOutEvents() AS event -»
-    _Event* «event.name»;
-«ENDFOREACH»
+    _Event* «event.getEventName()»;
+«ENDFOREACH -»
+«ENDIF -»
 #endif // INTERFACE_LISTENER
 
 «FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
@@ -120,8 +126,8 @@ void «interface.interfaceName()»_init(«interface.interfaceClassName()»* handle, 
 #ifndef INTERFACE_LISTENER
 	handle->eventPool = eventPool;
 «FOREACH interface.getOutEvents() AS event -»
-	handle->«event.name» = eventPool_createEvent(handle->eventPool, «event.getEventEnumName()»);
-	// ((«event.name»*)handle->«event.name»)->value = initial value for events is missing in model;
+	handle->«event.getEventName()» = eventPool_createEvent(handle->eventPool, «event.getEventEnumName()»);
+	// ((«event.getEventName()»*)handle->«event.getEventName()»)->value = initial value for events is missing in model;
 «ENDFOREACH»
 #endif
 
@@ -178,7 +184,7 @@ extern boolean «interface.interfaceName()»_is_«event.name»_raised(«interface.int
 	boolean ret = bool_false;
 	if (eventSet_check(handle->eventSet,«event.getEventEnumName()»)) {
 «IF event.type != Type::void -»	
-		*value = ((«event.name»*)handle->«event.name»)->value;
+		*value = ((«event.getEventName()»*)handle->«event.getEventName()»)->value;
 «ENDIF»
 		ret = bool_true;
 	}
@@ -195,7 +201,7 @@ ENDIF»)
 	_Event* ev = eventPool_createEvent(handle->eventPool, «event.getEventEnumName()»);
 
 «IF event.type != Type::void -»
-	((«event.name»*)ev)->value = value;
+	((«event.getEventName()»*)ev)->value = value;
 «ENDIF»
 
 	if (ev != NULL)

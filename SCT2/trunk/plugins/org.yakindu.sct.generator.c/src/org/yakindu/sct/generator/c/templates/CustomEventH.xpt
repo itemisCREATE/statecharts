@@ -43,7 +43,7 @@ typedef struct {
   «IF ((EventDefinition)ev).type != Type::void -»
   «eventTypeToString(((EventDefinition)ev).type)» value;    
   «ENDIF -»
-} «((EventDefinition)ev).name»;
+} «((EventDefinition)ev).getEventName()»;
 «ENDFOREACH -»
 «FOREACH this.declaredTimerEvents() AS ev»
 typedef struct { 

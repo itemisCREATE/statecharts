@@ -142,11 +142,11 @@ void «r.effect.functionName()»(«StName()»* handle) {
 «ENDDEFINE»
 
 «DEFINE ReactMethodsProto FOR ExecutionState»
-static void «StName().toFirstLower()»_react_«this.simpleName»(«StName()»* handle);
+static void «stName()»_react_«this.simpleName»(«StName()»* handle);
 «ENDDEFINE»
 
 «DEFINE ReactMethodsImplement FOR ExecutionState»
-void «StName().toFirstLower()»_react_«this.simpleName»(«StName()»* handle)
+void «stName()»_react_«this.simpleName»(«StName()»* handle)
 {
 	«EXPAND ReactCode FOR reactSequence»
 }
@@ -262,8 +262,9 @@ void «stName()»_init(«StName()»* handle, Timer* timer, EventPool* eventPool)
 	statemachine_cy_init(&handle->base, MAX_PARALLEL_STATES,
 			event_last, timer, eventPool);
 			
-«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
+«FOREACH this.scopes.getUsableScopes() AS interface -»
 	«interface.interfaceName()»_init(&handle->«interface.interfaceObjectName().toFirstLower()», &handle->base, &handle->base.eventSet, eventPool);
+
 «FOREACH interface.getInEvents() AS event -»
 	eventSet_set_type(&handle->base.eventSet, «event.getEventEnumName()», ev_type_input); 
 «ENDFOREACH -»
@@ -279,6 +280,14 @@ void «stName()»_init(«StName()»* handle, Timer* timer, EventPool* eventPool)
 
 	«EXPAND ActionCode FOREACH this.enterSequence.steps»
 }
+
+«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface»
+extern «interface.interfaceClassName()»* «stName()»_get_«interface.interfaceObjectName().toFirstLower()»(«StName()»* handle)
+{
+  return &handle->«interface.interfaceObjectName()»;
+}
+«ENDFOREACH»
+
 
 void «stName()»_exit(«StName()»* handle)
 {
@@ -297,7 +306,7 @@ void «stName()»_setEvent(«StName()»* handle, _Event* ev)
 	statemachine_cy_setEvent(&handle->base, ev);
 }
 
-boolean «StName().toFirstLower()»_eventWaiting(«StName()»* handle)
+boolean «stName()»_eventWaiting(«StName()»* handle)
 {
 	return statemachine_cy_eventWaiting(&handle->base);
 }
