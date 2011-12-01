@@ -51,7 +51,7 @@ public class ModelCreator {
 		for (FeatureType featureType : featureTypes) {
 			FeatureConfiguration config = createFeatureConfiguration(
 					statechart, featureType);
-			if (config != null) {
+			if (config != null && !config.getParameterValues().isEmpty()) {
 				entry.getFeatures().add(config);
 			}
 		}
