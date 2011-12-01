@@ -38,6 +38,7 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 		outEvents = new HashSet<Event>();
 		defaultInterface = new DefaultInterfaceImpl(this);
 		interfaceOther = new InterfaceOtherImpl(this);
+
 	}
 
 	protected Collection<Event> getOccuredEvents() {

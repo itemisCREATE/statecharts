@@ -57,6 +57,9 @@ public class Test_TransitionCycleBasedStatemachine
 		outEvents = new HashSet<Event>();
 		interfaceA = new InterfaceAImpl(this);
 		defaultInterface = new DefaultInterfaceImpl(this);
+		State1_time_event_0.setStatemachine(this);
+		State1_time_event_1.setStatemachine(this);
+
 	}
 
 	protected Collection<Event> getOccuredEvents() {

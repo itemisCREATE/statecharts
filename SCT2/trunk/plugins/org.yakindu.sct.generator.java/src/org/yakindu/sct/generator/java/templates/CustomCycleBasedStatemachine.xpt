@@ -221,6 +221,9 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 		«FOREACH getInterfaceScope() AS interface-»
 		«interface.getInterfaceName().toFirstLower()» = new «interface.getInterfaceImplName()»(this);
 		«ENDFOREACH-»
+		«FOREACH getTimeEvents() AS timeEvent-»
+			«timeEvent.getName()».setStatemachine(this);
+		«ENDFOREACH»
 	}
 	
 	protected Collection<Event> getOccuredEvents() {

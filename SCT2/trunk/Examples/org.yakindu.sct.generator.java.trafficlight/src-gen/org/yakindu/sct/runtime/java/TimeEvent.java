@@ -14,6 +14,8 @@ public class TimeEvent extends ValuedEvent<Boolean> {
 
 	private long time = -1;
 
+	private ITimedStatemachine statemachine;
+
 	public TimeEvent(String name, boolean periodic) {
 		super(name, periodic);
 	}
@@ -24,5 +26,13 @@ public class TimeEvent extends ValuedEvent<Boolean> {
 
 	public long getTime() {
 		return time;
+	}
+
+	public ITimedStatemachine getStatemachine() {
+		return statemachine;
+	}
+
+	public void setStatemachine(ITimedStatemachine statemachine) {
+		this.statemachine = statemachine;
 	}
 }

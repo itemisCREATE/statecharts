@@ -22,22 +22,31 @@ Contributors:
 package «entry.getBasePackageName()»;
 
 public class TimeEvent extends ValuedEvent<Boolean> {
-	
+
 	private long time = -1;
-	
+
+	private ITimedStatemachine statemachine;
+
 	public TimeEvent(String name, boolean periodic) {
 		super(name, periodic);
 	}
-	
-	public void setTime(long time){
+
+	public void setTime(long time) {
 		this.time = time;
 	}
-	
-	public long getTime(){
+
+	public long getTime() {
 		return time;
 	}
-}
 
+	public ITimedStatemachine getStatemachine() {
+		return statemachine;
+	}
+
+	public void setStatemachine(ITimedStatemachine statemachine) {
+		this.statemachine = statemachine;
+	}
+}
 «ENDFILE-»
 «ENDIF-»
 «ENDDEFINE»

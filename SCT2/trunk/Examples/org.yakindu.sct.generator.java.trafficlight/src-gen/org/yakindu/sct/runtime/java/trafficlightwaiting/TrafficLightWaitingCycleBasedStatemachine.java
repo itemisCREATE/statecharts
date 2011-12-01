@@ -69,6 +69,16 @@ public class TrafficLightWaitingCycleBasedStatemachine
 		interfaceTrafficLight = new InterfaceTrafficLightImpl(this);
 		interfacePedestrian = new InterfacePedestrianImpl(this);
 		defaultInterface = new DefaultInterfaceImpl(this);
+		PedWaiting_time_event_0.setStatemachine(this);
+		WaitOn_time_event_0.setStatemachine(this);
+		WaitOff_time_event_0.setStatemachine(this);
+		StreetAttention_time_event_0.setStatemachine(this);
+		StreetRed_time_event_0.setStatemachine(this);
+		PedestrianGreen_time_event_0.setStatemachine(this);
+		PedestrianRed_time_event_0.setStatemachine(this);
+		StreetPrepare_time_event_0.setStatemachine(this);
+		BlinkYellow_time_event_0.setStatemachine(this);
+
 	}
 
 	protected Collection<Event> getOccuredEvents() {
