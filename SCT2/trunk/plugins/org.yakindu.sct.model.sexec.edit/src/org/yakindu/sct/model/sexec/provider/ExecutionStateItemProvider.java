@@ -33,7 +33,7 @@ import org.yakindu.sct.model.sexec.SexecPackage;
  * @generated
  */
 public class ExecutionStateItemProvider
-	extends NamedElementItemProvider
+	extends ExecutionNodeItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -61,55 +61,9 @@ public class ExecutionStateItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSourceElementPropertyDescriptor(object);
-			addSimpleNamePropertyDescriptor(object);
 			addLeafPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Source Element feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSourceElementPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_MappedElement_sourceElement_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_MappedElement_sourceElement_feature", "_UI_MappedElement_type"),
-				 SexecPackage.Literals.MAPPED_ELEMENT__SOURCE_ELEMENT,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Simple Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSimpleNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ExecutionState_simpleName_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ExecutionState_simpleName_feature", "_UI_ExecutionState_type"),
-				 SexecPackage.Literals.EXECUTION_STATE__SIMPLE_NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -146,8 +100,6 @@ public class ExecutionStateItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__REACT_SEQUENCE);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__REACTIONS);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__ENTER_SEQUENCE);
@@ -207,12 +159,9 @@ public class ExecutionStateItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ExecutionState.class)) {
-			case SexecPackage.EXECUTION_STATE__SIMPLE_NAME:
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case SexecPackage.EXECUTION_STATE__REACT_SEQUENCE:
-			case SexecPackage.EXECUTION_STATE__REACTIONS:
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
 			case SexecPackage.EXECUTION_STATE__EXIT_ACTION:
 			case SexecPackage.EXECUTION_STATE__ENTER_SEQUENCE:
@@ -234,16 +183,6 @@ public class ExecutionStateItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_STATE__REACT_SEQUENCE,
-				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_STATE__REACTIONS,
-				 SexecFactory.eINSTANCE.createReaction()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -393,7 +332,7 @@ public class ExecutionStateItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == SexecPackage.Literals.EXECUTION_STATE__REACT_SEQUENCE ||
+			childFeature == SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION ||
 			childFeature == SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION ||
 			childFeature == SexecPackage.Literals.EXECUTION_STATE__ENTER_SEQUENCE ||

@@ -26,7 +26,15 @@ public interface ICoreFeatureConstants {
 
 	public static final String DEBUG_FEATURE = "Debug";
 	public static final String DEBUG_FEATURE_DUMP_SEXEC = "dumpSexec";
-	
+
+	public static final String OPTIMIZE_FEATURE = "Optimize";
+
+	public static final String OPTIMIZE_FEATURE_INLINE_REACTIONS = "inlineReactions";
+	public static final String OPTIMIZE_FEATURE_INLINE_ENTRY_ACTIONS = "inlineEntryActions";
+	public static final String OPTIMIZE_FEATURE_INLINE_ENTER_SEQUENCES = "inlineEnterSequences";
+	public static final String OPTIMIZE_FEATURE_INLINE_EXIT_ACTIONS = "inlineExitActions";
+	public static final String OPTIMIZE_FEATURE_INLINE_EXIT_SEQUENCES = "inlineExitSequences";
+
 	public static final String LICENSE_HEADER = "licenseHeader";
 	public static final String LICENSE_TEXT = "licenseText";
 }

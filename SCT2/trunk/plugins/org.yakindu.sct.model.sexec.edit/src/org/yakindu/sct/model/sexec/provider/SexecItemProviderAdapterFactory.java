@@ -97,6 +97,29 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.ExecutionNode} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExecutionNodeItemProvider executionNodeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.ExecutionNode}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExecutionNodeAdapter() {
+		if (executionNodeItemProvider == null) {
+			executionNodeItemProvider = new ExecutionNodeItemProvider(this);
+		}
+
+		return executionNodeItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.ExecutionState} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -117,6 +140,29 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		}
 
 		return executionStateItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.ExecutionChoice} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExecutionChoiceItemProvider executionChoiceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.ExecutionChoice}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExecutionChoiceAdapter() {
+		if (executionChoiceItemProvider == null) {
+			executionChoiceItemProvider = new ExecutionChoiceItemProvider(this);
+		}
+
+		return executionChoiceItemProvider;
 	}
 
 	/**
@@ -635,7 +681,9 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (namedElementItemProvider != null) namedElementItemProvider.dispose();
 		if (mappedElementItemProvider != null) mappedElementItemProvider.dispose();
 		if (executionFlowItemProvider != null) executionFlowItemProvider.dispose();
+		if (executionNodeItemProvider != null) executionNodeItemProvider.dispose();
 		if (executionStateItemProvider != null) executionStateItemProvider.dispose();
+		if (executionChoiceItemProvider != null) executionChoiceItemProvider.dispose();
 		if (reactionItemProvider != null) reactionItemProvider.dispose();
 		if (stateVectorItemProvider != null) stateVectorItemProvider.dispose();
 		if (timeEventItemProvider != null) timeEventItemProvider.dispose();

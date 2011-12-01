@@ -35,6 +35,15 @@ public interface SexecFactory extends EFactory {
 	ExecutionFlow createExecutionFlow();
 
 	/**
+	 * Returns a new object of class '<em>Execution Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Execution Node</em>'.
+	 * @generated
+	 */
+	ExecutionNode createExecutionNode();
+
+	/**
 	 * Returns a new object of class '<em>Execution State</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -42,6 +51,15 @@ public interface SexecFactory extends EFactory {
 	 * @generated
 	 */
 	ExecutionState createExecutionState();
+
+	/**
+	 * Returns a new object of class '<em>Execution Choice</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Execution Choice</em>'.
+	 * @generated
+	 */
+	ExecutionChoice createExecutionChoice();
 
 	/**
 	 * Returns a new object of class '<em>Reaction</em>'.

@@ -18,15 +18,19 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exitSequence" eType="#//Sequence"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="#//ExecutionNode" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExecutionState" eSuperTypes="#//NamedElement #//MappedElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leaf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="reactSequence" eType="#//Sequence"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionNode" eSuperTypes="#//NamedElement #//MappedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reactions" upperBound="-1"
         eType="#//Reaction" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reactSequence" eType="#//Sequence"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionState" eSuperTypes="#//ExecutionNode">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leaf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="entryAction" eType="#//Step"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exitAction" eType="#//Step"
@@ -38,6 +42,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="stateVector" eType="#//StateVector"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionChoice" eSuperTypes="#//ExecutionNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="Reaction" eSuperTypes="#//NamedElement #//MappedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="check" eType="#//Check"
         containment="true"/>
@@ -57,6 +62,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Step" abstract="true" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="caller" upperBound="-1"
+        eType="#//Call" eOpposite="#//Call/step"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Sequence" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="steps" upperBound="-1"
@@ -65,9 +72,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="Check" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Statement"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refs" upperBound="-1" eType="#//CheckRef"
+        eOpposite="#//CheckRef/check"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CheckRef" eSuperTypes="#//Check">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="check" eType="#//Check"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="check" eType="#//Check"
+        eOpposite="#//Check/refs"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="If" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="check" eType="#//Check"
@@ -88,7 +98,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Call" eSuperTypes="#//Step">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="step" eType="#//Step"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="step" eType="#//Step" eOpposite="#//Step/caller"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScheduleTimeEvent" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="timeEvent" eType="#//TimeEvent"/>

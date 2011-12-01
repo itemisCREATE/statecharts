@@ -12,8 +12,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -23,19 +24,19 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.sct.model.sexec.ExecutionFlow;
+
+import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.SexecPackage;
-import org.yakindu.sct.model.sgraph.provider.ScopedElementItemProvider;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.sct.model.sexec.ExecutionFlow} object.
+ * This is the item provider adapter for a {@link org.yakindu.sct.model.sexec.ExecutionNode} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ExecutionFlowItemProvider
-	extends ScopedElementItemProvider
+public class ExecutionNodeItemProvider
+	extends NamedElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -48,7 +49,7 @@ public class ExecutionFlowItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExecutionFlowItemProvider(AdapterFactory adapterFactory) {
+	public ExecutionNodeItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -63,25 +64,48 @@ public class ExecutionFlowItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
+			addSourceElementPropertyDescriptor(object);
+			addSimpleNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
+	 * This adds a property descriptor for the Source Element feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamePropertyDescriptor(Object object) {
+	protected void addSourceElementPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_NamedElement_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
-				 SexecPackage.Literals.NAMED_ELEMENT__NAME,
+				 getString("_UI_MappedElement_sourceElement_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_MappedElement_sourceElement_feature", "_UI_MappedElement_type"),
+				 SexecPackage.Literals.MAPPED_ELEMENT__SOURCE_ELEMENT,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Simple Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSimpleNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ExecutionNode_simpleName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ExecutionNode_simpleName_feature", "_UI_ExecutionNode_type"),
+				 SexecPackage.Literals.EXECUTION_NODE__SIMPLE_NAME,
 				 true,
 				 false,
 				 false,
@@ -102,11 +126,8 @@ public class ExecutionFlowItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__STATES);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__ENTER_SEQUENCE);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__STATE_VECTOR);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__EXIT_SEQUENCE);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__NODES);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__REACTIONS);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE);
 		}
 		return childrenFeatures;
 	}
@@ -125,14 +146,14 @@ public class ExecutionFlowItemProvider
 	}
 
 	/**
-	 * This returns ExecutionFlow.gif.
+	 * This returns ExecutionNode.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ExecutionFlow"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ExecutionNode"));
 	}
 
 	/**
@@ -143,10 +164,10 @@ public class ExecutionFlowItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ExecutionFlow)object).getName();
+		String label = ((ExecutionNode)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ExecutionFlow_type") :
-			getString("_UI_ExecutionFlow_type") + " " + label;
+			getString("_UI_ExecutionNode_type") :
+			getString("_UI_ExecutionNode_type") + " " + label;
 	}
 
 	/**
@@ -160,15 +181,12 @@ public class ExecutionFlowItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ExecutionFlow.class)) {
-			case SexecPackage.EXECUTION_FLOW__NAME:
+		switch (notification.getFeatureID(ExecutionNode.class)) {
+			case SexecPackage.EXECUTION_NODE__SIMPLE_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case SexecPackage.EXECUTION_FLOW__STATES:
-			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
-			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
-			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
-			case SexecPackage.EXECUTION_FLOW__NODES:
+			case SexecPackage.EXECUTION_NODE__REACTIONS:
+			case SexecPackage.EXECUTION_NODE__REACT_SEQUENCE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -188,74 +206,13 @@ public class ExecutionFlowItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__STATES,
-				 SexecFactory.eINSTANCE.createExecutionState()));
+				(SexecPackage.Literals.EXECUTION_NODE__REACTIONS,
+				 SexecFactory.eINSTANCE.createReaction()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__ENTER_SEQUENCE,
+				(SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE,
 				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__STATE_VECTOR,
-				 SexecFactory.eINSTANCE.createStateVector()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_SEQUENCE,
-				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__NODES,
-				 SexecFactory.eINSTANCE.createExecutionNode()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__NODES,
-				 SexecFactory.eINSTANCE.createExecutionState()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__NODES,
-				 SexecFactory.eINSTANCE.createExecutionChoice()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == SexecPackage.Literals.EXECUTION_FLOW__STATES ||
-			childFeature == SexecPackage.Literals.EXECUTION_FLOW__NODES ||
-			childFeature == SexecPackage.Literals.EXECUTION_FLOW__ENTER_SEQUENCE ||
-			childFeature == SexecPackage.Literals.EXECUTION_FLOW__EXIT_SEQUENCE;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return SexecEditPlugin.INSTANCE;
 	}
 
 }

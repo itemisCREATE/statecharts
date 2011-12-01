@@ -7,6 +7,7 @@
 package org.yakindu.sct.model.sexec.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -89,11 +90,63 @@ public class CheckRefImpl extends CheckImpl implements CheckRef {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCheck(Check newCheck) {
+	public NotificationChain basicSetCheck(Check newCheck, NotificationChain msgs) {
 		Check oldCheck = check;
 		check = newCheck;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.CHECK_REF__CHECK, oldCheck, check));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.CHECK_REF__CHECK, oldCheck, newCheck);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCheck(Check newCheck) {
+		if (newCheck != check) {
+			NotificationChain msgs = null;
+			if (check != null)
+				msgs = ((InternalEObject)check).eInverseRemove(this, SexecPackage.CHECK__REFS, Check.class, msgs);
+			if (newCheck != null)
+				msgs = ((InternalEObject)newCheck).eInverseAdd(this, SexecPackage.CHECK__REFS, Check.class, msgs);
+			msgs = basicSetCheck(newCheck, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.CHECK_REF__CHECK, newCheck, newCheck));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SexecPackage.CHECK_REF__CHECK:
+				if (check != null)
+					msgs = ((InternalEObject)check).eInverseRemove(this, SexecPackage.CHECK__REFS, Check.class, msgs);
+				return basicSetCheck((Check)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SexecPackage.CHECK_REF__CHECK:
+				return basicSetCheck(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

@@ -7,6 +7,7 @@
 package org.yakindu.sct.model.sexec.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -88,11 +89,63 @@ public class CallImpl extends StepImpl implements Call {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStep(Step newStep) {
+	public NotificationChain basicSetStep(Step newStep, NotificationChain msgs) {
 		Step oldStep = step;
 		step = newStep;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.CALL__STEP, oldStep, step));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.CALL__STEP, oldStep, newStep);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStep(Step newStep) {
+		if (newStep != step) {
+			NotificationChain msgs = null;
+			if (step != null)
+				msgs = ((InternalEObject)step).eInverseRemove(this, SexecPackage.STEP__CALLER, Step.class, msgs);
+			if (newStep != null)
+				msgs = ((InternalEObject)newStep).eInverseAdd(this, SexecPackage.STEP__CALLER, Step.class, msgs);
+			msgs = basicSetStep(newStep, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.CALL__STEP, newStep, newStep));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SexecPackage.CALL__STEP:
+				if (step != null)
+					msgs = ((InternalEObject)step).eInverseRemove(this, SexecPackage.STEP__CALLER, Step.class, msgs);
+				return basicSetStep((Step)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SexecPackage.CALL__STEP:
+				return basicSetStep(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

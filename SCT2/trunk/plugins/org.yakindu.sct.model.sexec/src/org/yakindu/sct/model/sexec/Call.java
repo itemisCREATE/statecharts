@@ -26,6 +26,7 @@ package org.yakindu.sct.model.sexec;
 public interface Call extends Step {
 	/**
 	 * Returns the value of the '<em><b>Step</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.yakindu.sct.model.sexec.Step#getCaller <em>Caller</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Step</em>' reference isn't clear,
@@ -35,7 +36,8 @@ public interface Call extends Step {
 	 * @return the value of the '<em>Step</em>' reference.
 	 * @see #setStep(Step)
 	 * @see org.yakindu.sct.model.sexec.SexecPackage#getCall_Step()
-	 * @model
+	 * @see org.yakindu.sct.model.sexec.Step#getCaller
+	 * @model opposite="caller"
 	 * @generated
 	 */
 	Step getStep();

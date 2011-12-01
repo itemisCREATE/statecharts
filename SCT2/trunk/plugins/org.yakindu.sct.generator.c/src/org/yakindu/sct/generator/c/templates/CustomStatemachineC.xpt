@@ -109,7 +109,7 @@ static boolean «r.check.functionName()»(«StName()»* handle);
   «ENDIF -»«ENDFOREACH -»
 «ENDDEFINE»
 
-«DEFINE ConditionMethodsImplement FOR ExecutionState»
+«DEFINE ConditionMethodsImplement FOR ExecutionNode»
   «FOREACH reactions AS r -»
   «IF r.check != null -»
 boolean «r.check.functionName()»(«StName()»* handle) {
@@ -229,6 +229,7 @@ void «this.exitSequence.exitSequenceFunctionName()»(«StName()»* handle)
 «EXPAND ExitSequenceProto FOREACH this.states»
 
 «EXPAND ConditionMethodsImplement FOREACH this.states»
+«EXPAND ConditionMethodsImplement FOREACH this.nodes»
 «EXPAND StatementMethodsImplement FOREACH this.states»
 «EXPAND ReactMethodsImplement FOREACH this.states»
 «EXPAND EnterMethodImplement FOREACH this.states»
