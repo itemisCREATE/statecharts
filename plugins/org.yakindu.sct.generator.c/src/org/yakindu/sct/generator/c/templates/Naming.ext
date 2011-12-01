@@ -4,6 +4,7 @@ import ecore;
 import sgraph;
 
 ExecutionFlow getExecutionFlow(InterfaceScope this) : ((ExecutionFlow)this.eContainer);
+ExecutionFlow getExecutionFlow(InternalScope this) : ((ExecutionFlow)this.eContainer);
 
 String scName(Expression statement) : ((ExecutionFlow)statement.eRootContainer).name;
 String scName(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toFirstLower();
@@ -13,7 +14,7 @@ List[EventDefinition] declaredEvents(ExecutionFlow flow) : flow.scopes.declarati
 List[TimeEvent] declaredTimerEvents(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(TimeEvent);
 List[VariableDefinition] declaredVariables(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(VariableDefinition);
 
-String test(NamedElement obj) :  "";
+String test(NamedElement obj) : "";
 String StName(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toFirstUpper() + "Statemachine";
 String STNAME(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toUpperCase() + "STATEMACHINE";
 String stName(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toFirstLower() + "Statemachine";
@@ -51,13 +52,24 @@ Reaction reaction(Step this) : (Reaction) this.eContainer ;
 ExecutionState state(Reaction this) : (ExecutionState) eContainer;
 ExecutionState state(Step this) : (ExecutionState) eContainer;
 
+String interfaceName(Scope this) : "unknownScope";
+String interfaceClassName(Scope this) : "unknownScope";
+String interfaceObjectName(Scope this) : "unknownScope";
+
+
 String interfaceName(InterfaceScope this) : this.getExecutionFlow().name.toFirstLower() + ((this.name == null) ? "_if" : "_if_" + this.name);
 String interfaceClassName(InterfaceScope this) : this.getExecutionFlow().name.toFirstUpper() + "If" + ((this.name == null)?"":this.name.toFirstUpper());
 String interfaceObjectName(InterfaceScope this) : "interface" + ((this.name == null)?"":this.name.toFirstUpper());
 
+String interfaceName(InternalScope this) : this.getExecutionFlow().name.toFirstLower() + "internal";
+String interfaceClassName(InternalScope this) : this.getExecutionFlow().name.toFirstUpper() + "Internal";
+String interfaceObjectName(InternalScope this) : "interfaceInternal";
+
 //String getEventEnumName(EventDefinition this) : "ev_"+ ((InterfaceScope)this.eContainer).name + this.name.toFirstLower();
 String getEventEnumName(TimeEvent this) : "ev_" + this.name.toFirstLower();
 String getEventEnumName(Event this) : "ev_" + this.eContainer.getScopeName() + "_" + this.name.toFirstLower();
+
+String getEventName(Event this) : this.eContainer.getScopeName().toFirstUpper() + this.name.toFirstUpper();
 
 String getScopeName(emf::EObject eo) :
 	"<scope not defined>";

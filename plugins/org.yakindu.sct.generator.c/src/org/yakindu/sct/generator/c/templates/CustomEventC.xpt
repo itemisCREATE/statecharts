@@ -26,7 +26,7 @@ uint32_t «scName()»_getSizeofEvent(uint32_t evid)
 
 «FOREACH this.declaredEvents() AS ev -»
   case «((EventDefinition)ev).getEventEnumName()»:
-    return sizeof(«((EventDefinition)ev).name»);
+    return sizeof(«((EventDefinition)ev).getEventName()»);
 «ENDFOREACH -»
 «FOREACH this.declaredTimerEvents() AS ev -»
   case «((TimeEvent)ev).getEventEnumName()»:

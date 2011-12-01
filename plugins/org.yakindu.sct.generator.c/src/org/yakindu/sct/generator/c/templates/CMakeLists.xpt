@@ -24,7 +24,7 @@ set( SRC
 	EventPool.c
 	«StName()».c
 	«EvName()».c
-«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
+«FOREACH this.scopes.getUsableScopes() AS interface -»
 	«interface.interfaceClassName()».c
 «ENDFOREACH»
 	Timer.c

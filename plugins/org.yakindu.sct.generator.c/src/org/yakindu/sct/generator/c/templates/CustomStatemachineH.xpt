@@ -19,7 +19,7 @@ Templates for the main statechart cpp file.
 #ifndef «STNAME()»_H_
 #define «STNAME()»_H_
 
-«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
+«FOREACH this.scopes.getUsableScopes() AS interface -»
 #include "«interface.interfaceClassName()».h"
 «ENDFOREACH»
 #include "Statemachine_cy.h"
@@ -41,7 +41,7 @@ typedef void(*raiseEventFPtr)(_Event* evPtr);
 typedef struct {
 
 	Statemachine_cy  base;
-«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface»
+«FOREACH this.scopes.getUsableScopes() AS interface»
 	«interface.interfaceClassName()» «interface.interfaceObjectName().toFirstLower()»;
 «ENDFOREACH»
 	raiseEventFPtr raiseEvent;
@@ -56,13 +56,17 @@ typedef struct {
 } «StName()»;
 
 /* Explicit Constructor & Destructor */
-extern void «StName().toFirstLower()»_init(«StName()»* handle, Timer* timer, EventPool* eventPool);
-extern void «StName().toFirstLower()»_exit(«StName()»* handle);
+extern void «stName()»_init(«StName()»* handle, Timer* timer, EventPool* eventPool);
+extern void «stName()»_exit(«StName()»* handle);
 
-extern void «StName().toFirstLower()»_setEvent(«StName()»* handle, _Event* ev);
-extern void «StName().toFirstLower()»_runCycle(«StName()»* handle);
+extern void «stName()»_setEvent(«StName()»* handle, _Event* ev);
+extern void «stName()»_runCycle(«StName()»* handle);
 
-extern boolean «StName().toFirstLower()»_eventWaiting(«StName()»* handle);
+extern boolean «stName()»_eventWaiting(«StName()»* handle);
+
+«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface»
+extern «interface.interfaceClassName()»* «stName()»_get_«interface.interfaceObjectName()»(«StName()»* handle);
+«ENDFOREACH»
 
 	/* virtual function form state machine must be implemented here */
 extern void statemachine_cy__runCycle(Statemachine_cy* handle);
