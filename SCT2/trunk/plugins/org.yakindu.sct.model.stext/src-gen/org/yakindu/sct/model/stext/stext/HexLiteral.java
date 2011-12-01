@@ -34,12 +34,12 @@ public interface HexLiteral extends Literal
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' attribute.
-   * @see #setValue(long)
+   * @see #setValue(int)
    * @see org.yakindu.sct.model.stext.stext.StextPackage#getHexLiteral_Value()
    * @model
    * @generated
    */
-  long getValue();
+  int getValue();
 
   /**
    * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.HexLiteral#getValue <em>Value</em>}' attribute.
@@ -49,6 +49,6 @@ public interface HexLiteral extends Literal
    * @see #getValue()
    * @generated
    */
-  void setValue(long value);
+  void setValue(int value);
 
 } // HexLiteral

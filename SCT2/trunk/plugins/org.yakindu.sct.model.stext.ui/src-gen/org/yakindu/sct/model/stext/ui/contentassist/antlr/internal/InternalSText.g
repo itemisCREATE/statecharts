@@ -11475,8 +11475,8 @@ rule__RealLiteral__ValueAssignment_1
     }
 :
 (
-{ before(grammarAccess.getRealLiteralAccess().getValueDOUBLETerminalRuleCall_1_0()); }
-	RULE_DOUBLE{ after(grammarAccess.getRealLiteralAccess().getValueDOUBLETerminalRuleCall_1_0()); }
+{ before(grammarAccess.getRealLiteralAccess().getValueFLOATTerminalRuleCall_1_0()); }
+	RULE_FLOAT{ after(grammarAccess.getRealLiteralAccess().getValueFLOATTerminalRuleCall_1_0()); }
 )
 
 ;
@@ -11504,7 +11504,7 @@ RULE_BOOL : ('true'|'false'|'yes'|'no');
 
 RULE_HEX : '0' ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+;
 
-RULE_DOUBLE : RULE_INT '.' RULE_INT ('e' ('-'|'+') RULE_INT)? ('f'|'F'|'d'|'D')?;
+RULE_FLOAT : RULE_INT '.' RULE_INT ('e' ('-'|'+') RULE_INT)? ('f'|'F'|'d'|'D')?;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

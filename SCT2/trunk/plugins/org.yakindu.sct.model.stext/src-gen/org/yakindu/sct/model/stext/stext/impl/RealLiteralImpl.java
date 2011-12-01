@@ -38,7 +38,7 @@ public class RealLiteralImpl extends LiteralImpl implements RealLiteral
    * @generated
    * @ordered
    */
-  protected static final double VALUE_EDEFAULT = 0.0;
+  protected static final float VALUE_EDEFAULT = 0.0F;
 
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -48,7 +48,7 @@ public class RealLiteralImpl extends LiteralImpl implements RealLiteral
    * @generated
    * @ordered
    */
-  protected double value = VALUE_EDEFAULT;
+  protected float value = VALUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -76,7 +76,7 @@ public class RealLiteralImpl extends LiteralImpl implements RealLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  public double getValue()
+  public float getValue()
   {
     return value;
   }
@@ -86,9 +86,9 @@ public class RealLiteralImpl extends LiteralImpl implements RealLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(double newValue)
+  public void setValue(float newValue)
   {
-    double oldValue = value;
+    float oldValue = value;
     value = newValue;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.REAL_LITERAL__VALUE, oldValue, value));
@@ -121,7 +121,7 @@ public class RealLiteralImpl extends LiteralImpl implements RealLiteral
     switch (featureID)
     {
       case StextPackage.REAL_LITERAL__VALUE:
-        setValue((Double)newValue);
+        setValue((Float)newValue);
         return;
     }
     super.eSet(featureID, newValue);

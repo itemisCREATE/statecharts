@@ -2338,23 +2338,23 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cRealLiteralAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValueDOUBLETerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		private final RuleCall cValueFLOATTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
 		//RealLiteral:
-		//	{RealLiteral} value=DOUBLE;
+		//	{RealLiteral} value=FLOAT;
 		public ParserRule getRule() { return rule; }
 
-		//{RealLiteral} value=DOUBLE
+		//{RealLiteral} value=FLOAT
 		public Group getGroup() { return cGroup; }
 
 		//{RealLiteral}
 		public Action getRealLiteralAction_0() { return cRealLiteralAction_0; }
 
-		//value=DOUBLE
+		//value=FLOAT
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
 
-		//DOUBLE
-		public RuleCall getValueDOUBLETerminalRuleCall_1_0() { return cValueDOUBLETerminalRuleCall_1_0; }
+		//FLOAT
+		public RuleCall getValueFLOATTerminalRuleCall_1_0() { return cValueFLOATTerminalRuleCall_1_0; }
 	}
 
 	public class HexLiteralElements extends AbstractParserRuleElementFinder {
@@ -2906,7 +2906,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private HexLiteralElements pHexLiteral;
 	private TerminalRule tBOOL;
 	private TerminalRule tHEX;
-	private TerminalRule tDOUBLE;
+	private TerminalRule tFLOAT;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -3739,7 +3739,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RealLiteral:
-	//	{RealLiteral} value=DOUBLE;
+	//	{RealLiteral} value=FLOAT;
 	public RealLiteralElements getRealLiteralAccess() {
 		return (pRealLiteral != null) ? pRealLiteral : (pRealLiteral = new RealLiteralElements());
 	}
@@ -3764,16 +3764,16 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return (tBOOL != null) ? tBOOL : (tBOOL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "BOOL"));
 	} 
 
-	//terminal HEX returns ecore::ELong:
+	//terminal HEX returns ecore::EInt:
 	//	"0" ("x" | "X") ("0".."9" | "a".."f" | "A".."F")+;
 	public TerminalRule getHEXRule() {
 		return (tHEX != null) ? tHEX : (tHEX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "HEX"));
 	} 
 
-	//terminal DOUBLE returns ecore::EDouble:
+	//terminal FLOAT returns ecore::EFloat:
 	//	(INT "." INT) ("e" ("-" | "+") INT)? ("f" | "F" | "d" | "D")?;
-	public TerminalRule getDOUBLERule() {
-		return (tDOUBLE != null) ? tDOUBLE : (tDOUBLE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "DOUBLE"));
+	public TerminalRule getFLOATRule() {
+		return (tFLOAT != null) ? tFLOAT : (tFLOAT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "FLOAT"));
 	} 
 
 	//terminal ID:

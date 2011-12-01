@@ -3951,9 +3951,9 @@ ruleRealLiteral returns [EObject current=null]
     }
 )(
 (
-		lv_value_1_0=RULE_DOUBLE
+		lv_value_1_0=RULE_FLOAT
 		{
-			newLeafNode(lv_value_1_0, grammarAccess.getRealLiteralAccess().getValueDOUBLETerminalRuleCall_1_0()); 
+			newLeafNode(lv_value_1_0, grammarAccess.getRealLiteralAccess().getValueFLOATTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -3963,7 +3963,7 @@ ruleRealLiteral returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_1_0, 
-        		"DOUBLE");
+        		"FLOAT");
 	    }
 
 )
@@ -4333,7 +4333,7 @@ RULE_BOOL : ('true'|'false'|'yes'|'no');
 
 RULE_HEX : '0' ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+;
 
-RULE_DOUBLE : RULE_INT '.' RULE_INT ('e' ('-'|'+') RULE_INT)? ('f'|'F'|'d'|'D')?;
+RULE_FLOAT : RULE_INT '.' RULE_INT ('e' ('-'|'+') RULE_INT)? ('f'|'F'|'d'|'D')?;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
