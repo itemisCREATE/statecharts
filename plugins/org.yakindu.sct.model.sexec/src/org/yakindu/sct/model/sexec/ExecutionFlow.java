@@ -21,6 +21,7 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getEnterSequence <em>Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getStateVector <em>State Vector</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getExitSequence <em>Exit Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getNodes <em>Nodes</em>}</li>
  * </ul>
  * </p>
  *
@@ -122,5 +123,21 @@ public interface ExecutionFlow extends ScopedElement, NamedElement {
 	 * @generated
 	 */
 	void setExitSequence(Sequence value);
+
+	/**
+	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.yakindu.sct.model.sexec.ExecutionNode}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Nodes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Nodes</em>' containment reference list.
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionFlow_Nodes()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ExecutionNode> getNodes();
 
 } // ExecutionFlow

@@ -78,7 +78,9 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 			case SexecPackage.NAMED_ELEMENT: return createNamedElement();
 			case SexecPackage.MAPPED_ELEMENT: return createMappedElement();
 			case SexecPackage.EXECUTION_FLOW: return createExecutionFlow();
+			case SexecPackage.EXECUTION_NODE: return createExecutionNode();
 			case SexecPackage.EXECUTION_STATE: return createExecutionState();
+			case SexecPackage.EXECUTION_CHOICE: return createExecutionChoice();
 			case SexecPackage.REACTION: return createReaction();
 			case SexecPackage.STATE_VECTOR: return createStateVector();
 			case SexecPackage.TIME_EVENT: return createTimeEvent();
@@ -115,9 +117,29 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ExecutionNode createExecutionNode() {
+		ExecutionNodeImpl executionNode = new ExecutionNodeImpl();
+		return executionNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ExecutionState createExecutionState() {
 		ExecutionStateImpl executionState = new ExecutionStateImpl();
 		return executionState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExecutionChoice createExecutionChoice() {
+		ExecutionChoiceImpl executionChoice = new ExecutionChoiceImpl();
+		return executionChoice;
 	}
 
 	/**

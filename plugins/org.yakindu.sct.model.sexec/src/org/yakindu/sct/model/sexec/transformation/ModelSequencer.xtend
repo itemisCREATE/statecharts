@@ -28,7 +28,6 @@ import org.yakindu.sct.model.sgraph.SGraphFactory
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import apple.awt.CRenderer$Tracer
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sgraph.SGraphPackage

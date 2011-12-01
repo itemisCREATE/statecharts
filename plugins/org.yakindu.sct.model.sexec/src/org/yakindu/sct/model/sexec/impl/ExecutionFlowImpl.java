@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.NamedElement;
 import org.yakindu.sct.model.sexec.Sequence;
@@ -36,6 +37,7 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getEnterSequence <em>Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getStateVector <em>State Vector</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getExitSequence <em>Exit Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getNodes <em>Nodes</em>}</li>
  * </ul>
  * </p>
  *
@@ -101,6 +103,16 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected Sequence exitSequence;
+
+	/**
+	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExecutionNode> nodes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -288,6 +300,18 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ExecutionNode> getNodes() {
+		if (nodes == null) {
+			nodes = new EObjectContainmentEList<ExecutionNode>(ExecutionNode.class, this, SexecPackage.EXECUTION_FLOW__NODES);
+		}
+		return nodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -299,6 +323,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return basicSetStateVector(null, msgs);
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				return basicSetExitSequence(null, msgs);
+			case SexecPackage.EXECUTION_FLOW__NODES:
+				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -321,6 +347,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return getStateVector();
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				return getExitSequence();
+			case SexecPackage.EXECUTION_FLOW__NODES:
+				return getNodes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -350,6 +378,10 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				setExitSequence((Sequence)newValue);
 				return;
+			case SexecPackage.EXECUTION_FLOW__NODES:
+				getNodes().clear();
+				getNodes().addAll((Collection<? extends ExecutionNode>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -377,6 +409,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				setExitSequence((Sequence)null);
 				return;
+			case SexecPackage.EXECUTION_FLOW__NODES:
+				getNodes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -399,6 +434,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return stateVector != null;
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				return exitSequence != null;
+			case SexecPackage.EXECUTION_FLOW__NODES:
+				return nodes != null && !nodes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

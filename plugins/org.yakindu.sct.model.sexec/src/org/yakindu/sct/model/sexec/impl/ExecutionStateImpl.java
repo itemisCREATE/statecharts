@@ -32,11 +32,7 @@ import org.yakindu.sct.model.sexec.Step;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getSourceElement <em>Source Element</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getSimpleName <em>Simple Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#isLeaf <em>Leaf</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getReactSequence <em>React Sequence</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getEntryAction <em>Entry Action</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getExitAction <em>Exit Action</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getEnterSequence <em>Enter Sequence</em>}</li>
@@ -47,37 +43,7 @@ import org.yakindu.sct.model.sexec.Step;
  *
  * @generated
  */
-public class ExecutionStateImpl extends NamedElementImpl implements ExecutionState {
-	/**
-	 * The cached value of the '{@link #getSourceElement() <em>Source Element</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSourceElement()
-	 * @generated
-	 * @ordered
-	 */
-	protected EObject sourceElement;
-
-	/**
-	 * The default value of the '{@link #getSimpleName() <em>Simple Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSimpleName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SIMPLE_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSimpleName() <em>Simple Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSimpleName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String simpleName = SIMPLE_NAME_EDEFAULT;
-
+public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionState {
 	/**
 	 * The default value of the '{@link #isLeaf() <em>Leaf</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -97,26 +63,6 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	 * @ordered
 	 */
 	protected boolean leaf = LEAF_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getReactSequence() <em>React Sequence</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReactSequence()
-	 * @generated
-	 * @ordered
-	 */
-	protected Sequence reactSequence;
-
-	/**
-	 * The cached value of the '{@link #getReactions() <em>Reactions</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReactions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Reaction> reactions;
 
 	/**
 	 * The cached value of the '{@link #getEntryAction() <em>Entry Action</em>}' containment reference.
@@ -185,77 +131,6 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	@Override
 	protected EClass eStaticClass() {
 		return SexecPackage.Literals.EXECUTION_STATE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EObject getSourceElement() {
-		if (sourceElement != null && sourceElement.eIsProxy()) {
-			InternalEObject oldSourceElement = (InternalEObject)sourceElement;
-			sourceElement = eResolveProxy(oldSourceElement);
-			if (sourceElement != oldSourceElement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SexecPackage.EXECUTION_STATE__SOURCE_ELEMENT, oldSourceElement, sourceElement));
-			}
-		}
-		return sourceElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EObject basicGetSourceElement() {
-		return sourceElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSourceElement(EObject newSourceElement) {
-		EObject oldSourceElement = sourceElement;
-		sourceElement = newSourceElement;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__SOURCE_ELEMENT, oldSourceElement, sourceElement));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getSimpleName() {
-		return simpleName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSimpleName(String newSimpleName) {
-		String oldSimpleName = simpleName;
-		simpleName = newSimpleName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__SIMPLE_NAME, oldSimpleName, simpleName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Reaction> getReactions() {
-		if (reactions == null) {
-			reactions = new EObjectContainmentEList<Reaction>(Reaction.class, this, SexecPackage.EXECUTION_STATE__REACTIONS);
-		}
-		return reactions;
 	}
 
 	/**
@@ -499,56 +374,9 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Sequence getReactSequence() {
-		return reactSequence;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetReactSequence(Sequence newReactSequence, NotificationChain msgs) {
-		Sequence oldReactSequence = reactSequence;
-		reactSequence = newReactSequence;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__REACT_SEQUENCE, oldReactSequence, newReactSequence);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setReactSequence(Sequence newReactSequence) {
-		if (newReactSequence != reactSequence) {
-			NotificationChain msgs = null;
-			if (reactSequence != null)
-				msgs = ((InternalEObject)reactSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_STATE__REACT_SEQUENCE, null, msgs);
-			if (newReactSequence != null)
-				msgs = ((InternalEObject)newReactSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_STATE__REACT_SEQUENCE, null, msgs);
-			msgs = basicSetReactSequence(newReactSequence, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__REACT_SEQUENCE, newReactSequence, newReactSequence));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SexecPackage.EXECUTION_STATE__REACT_SEQUENCE:
-				return basicSetReactSequence(null, msgs);
-			case SexecPackage.EXECUTION_STATE__REACTIONS:
-				return ((InternalEList<?>)getReactions()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
 				return basicSetEntryAction(null, msgs);
 			case SexecPackage.EXECUTION_STATE__EXIT_ACTION:
@@ -571,17 +399,8 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SexecPackage.EXECUTION_STATE__SOURCE_ELEMENT:
-				if (resolve) return getSourceElement();
-				return basicGetSourceElement();
-			case SexecPackage.EXECUTION_STATE__SIMPLE_NAME:
-				return getSimpleName();
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				return isLeaf();
-			case SexecPackage.EXECUTION_STATE__REACT_SEQUENCE:
-				return getReactSequence();
-			case SexecPackage.EXECUTION_STATE__REACTIONS:
-				return getReactions();
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
 				return getEntryAction();
 			case SexecPackage.EXECUTION_STATE__EXIT_ACTION:
@@ -605,21 +424,8 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SexecPackage.EXECUTION_STATE__SOURCE_ELEMENT:
-				setSourceElement((EObject)newValue);
-				return;
-			case SexecPackage.EXECUTION_STATE__SIMPLE_NAME:
-				setSimpleName((String)newValue);
-				return;
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				setLeaf((Boolean)newValue);
-				return;
-			case SexecPackage.EXECUTION_STATE__REACT_SEQUENCE:
-				setReactSequence((Sequence)newValue);
-				return;
-			case SexecPackage.EXECUTION_STATE__REACTIONS:
-				getReactions().clear();
-				getReactions().addAll((Collection<? extends Reaction>)newValue);
 				return;
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
 				setEntryAction((Step)newValue);
@@ -648,20 +454,8 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SexecPackage.EXECUTION_STATE__SOURCE_ELEMENT:
-				setSourceElement((EObject)null);
-				return;
-			case SexecPackage.EXECUTION_STATE__SIMPLE_NAME:
-				setSimpleName(SIMPLE_NAME_EDEFAULT);
-				return;
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				setLeaf(LEAF_EDEFAULT);
-				return;
-			case SexecPackage.EXECUTION_STATE__REACT_SEQUENCE:
-				setReactSequence((Sequence)null);
-				return;
-			case SexecPackage.EXECUTION_STATE__REACTIONS:
-				getReactions().clear();
 				return;
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
 				setEntryAction((Step)null);
@@ -690,16 +484,8 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SexecPackage.EXECUTION_STATE__SOURCE_ELEMENT:
-				return sourceElement != null;
-			case SexecPackage.EXECUTION_STATE__SIMPLE_NAME:
-				return SIMPLE_NAME_EDEFAULT == null ? simpleName != null : !SIMPLE_NAME_EDEFAULT.equals(simpleName);
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				return leaf != LEAF_EDEFAULT;
-			case SexecPackage.EXECUTION_STATE__REACT_SEQUENCE:
-				return reactSequence != null;
-			case SexecPackage.EXECUTION_STATE__REACTIONS:
-				return reactions != null && !reactions.isEmpty();
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
 				return entryAction != null;
 			case SexecPackage.EXECUTION_STATE__EXIT_ACTION:
@@ -720,45 +506,11 @@ public class ExecutionStateImpl extends NamedElementImpl implements ExecutionSta
 	 * @generated
 	 */
 	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == MappedElement.class) {
-			switch (derivedFeatureID) {
-				case SexecPackage.EXECUTION_STATE__SOURCE_ELEMENT: return SexecPackage.MAPPED_ELEMENT__SOURCE_ELEMENT;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == MappedElement.class) {
-			switch (baseFeatureID) {
-				case SexecPackage.MAPPED_ELEMENT__SOURCE_ELEMENT: return SexecPackage.EXECUTION_STATE__SOURCE_ELEMENT;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (simpleName: ");
-		result.append(simpleName);
-		result.append(", leaf: ");
+		result.append(" (leaf: ");
 		result.append(leaf);
 		result.append(')');
 		return result.toString();

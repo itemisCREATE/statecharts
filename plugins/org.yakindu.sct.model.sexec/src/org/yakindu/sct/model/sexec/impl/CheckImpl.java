@@ -6,12 +6,17 @@
  */
 package org.yakindu.sct.model.sexec.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.sct.model.sexec.Check;
+import org.yakindu.sct.model.sexec.CheckRef;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sgraph.Statement;
 
@@ -23,6 +28,7 @@ import org.yakindu.sct.model.sgraph.Statement;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.CheckImpl#getCondition <em>Condition</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.CheckImpl#getRefs <em>Refs</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,6 +44,16 @@ public class CheckImpl extends StepImpl implements Check {
 	 * @ordered
 	 */
 	protected Statement condition;
+
+	/**
+	 * The cached value of the '{@link #getRefs() <em>Refs</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRefs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CheckRef> refs;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -106,11 +122,40 @@ public class CheckImpl extends StepImpl implements Check {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<CheckRef> getRefs() {
+		if (refs == null) {
+			refs = new EObjectWithInverseResolvingEList<CheckRef>(CheckRef.class, this, SexecPackage.CHECK__REFS, SexecPackage.CHECK_REF__CHECK);
+		}
+		return refs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SexecPackage.CHECK__REFS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRefs()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case SexecPackage.CHECK__CONDITION:
 				return basicSetCondition(null, msgs);
+			case SexecPackage.CHECK__REFS:
+				return ((InternalEList<?>)getRefs()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -125,6 +170,8 @@ public class CheckImpl extends StepImpl implements Check {
 		switch (featureID) {
 			case SexecPackage.CHECK__CONDITION:
 				return getCondition();
+			case SexecPackage.CHECK__REFS:
+				return getRefs();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -134,11 +181,16 @@ public class CheckImpl extends StepImpl implements Check {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SexecPackage.CHECK__CONDITION:
 				setCondition((Statement)newValue);
+				return;
+			case SexecPackage.CHECK__REFS:
+				getRefs().clear();
+				getRefs().addAll((Collection<? extends CheckRef>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -155,6 +207,9 @@ public class CheckImpl extends StepImpl implements Check {
 			case SexecPackage.CHECK__CONDITION:
 				setCondition((Statement)null);
 				return;
+			case SexecPackage.CHECK__REFS:
+				getRefs().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -169,6 +224,8 @@ public class CheckImpl extends StepImpl implements Check {
 		switch (featureID) {
 			case SexecPackage.CHECK__CONDITION:
 				return condition != null;
+			case SexecPackage.CHECK__REFS:
+				return refs != null && !refs.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

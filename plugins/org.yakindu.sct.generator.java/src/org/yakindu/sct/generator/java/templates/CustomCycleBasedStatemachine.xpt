@@ -97,7 +97,7 @@ else {
 
 «DEFINE ConditionMethodsImplement FOR ExecutionState-»
 	«FOREACH reactions AS r-»
-		«IF r.check != null -»
+		«IF r.check != null && r.check.refs.size > 0 -»
 	private boolean «r.check.functionName()»() {
 		«IF r.check.condition != null-»
 		return «r.check.condition.toCode()»;
@@ -110,7 +110,7 @@ else {
 «ENDDEFINE»
 
 «DEFINE StatementMethodsImplement FOR ExecutionState-»
-  «FOREACH reactions AS r-»
+  «FOREACH reactions.select(e| e.effect.caller.size > 0 ) AS r-»
 	private void «r.effect.functionName()»() {
 		«EXPAND ActionCode FOR r.effect-»
 	}
@@ -124,7 +124,7 @@ else {
 «ENDDEFINE»
 
 «DEFINE EnterMethodImplement FOR ExecutionState-»
-	«IF this.entryAction != null-»
+	«IF this.entryAction != null && entryAction.caller.size > 0 -»
 	private void «entryAction.entryActionFunctionName()»() {
 		«EXPAND ActionCode FOR this.entryAction-»
 	}
@@ -132,7 +132,7 @@ else {
 «ENDDEFINE»
 
 «DEFINE ExitMethodImplement FOR ExecutionState-»
-	«IF this.exitAction != null-»
+	«IF this.exitAction != null && exitAction.caller.size > 0 -»
 	private void «this.exitAction.exitActionFunctionName()»() {
 		«EXPAND ActionCode FOR this.exitAction-»
 	}
@@ -140,7 +140,7 @@ else {
 «ENDDEFINE»
 
 «DEFINE EnterSequenceImplement FOR ExecutionState»
-	«IF enterSequence.steps.size > 0 -»
+	«IF enterSequence.steps.size > 0 && enterSequence.caller.size > 0-»
 	private void «enterSequenceName()»() {
 		«EXPAND ActionCode FOREACH enterSequence.steps-»
 	}
@@ -148,7 +148,7 @@ else {
 «ENDDEFINE»
 
 «DEFINE ExitSequenceImplement FOR ExecutionState-»
-	«IF exitSequence.steps.size > 0 -»
+	«IF exitSequence.steps.size > 0 && exitSequence.caller.size > 0-»
 	private void «exitSequenceName()»() {
 		«EXPAND ActionCode FOREACH exitSequence.steps-»
 	}

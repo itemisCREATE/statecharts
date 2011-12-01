@@ -10,10 +10,7 @@
  */
 package org.yakindu.sct.generator.core.impl;
 
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.DEBUG_FEATURE;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.DEBUG_FEATURE_DUMP_SEXEC;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,6 +37,7 @@ import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.xpand2.output.Output;
 import org.yakindu.sct.generator.core.ISCTGenerator;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.transformation.FlowOptimizer;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.SequencerModule;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
@@ -86,7 +84,7 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 				.getStatechart().getName()));
 		try {
 			prepareGenerator(entry);
-			generate(createExecutionFlow(entry.getStatechart()), entry);
+			generate(createExecutionFlow(entry.getStatechart(), entry), entry);
 			writeToConsole("Done.");
 		} catch (Exception e) {
 			writeToConsole(e);
@@ -112,14 +110,34 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 	/**
 	 * Transforms the {@link Statechart} model to a {@link ExecutionFlow} model
 	 */
-	protected ExecutionFlow createExecutionFlow(Statechart statechart) {
+	protected ExecutionFlow createExecutionFlow(Statechart statechart, GeneratorEntry entry) {
 		Injector injector = Guice.createInjector(new SequencerModule());
 		ModelSequencer sequencer = injector.getInstance(ModelSequencer.class);
 		ExecutionFlow flow = sequencer.transform(statechart);
 		Assert.isNotNull(flow, "Error creation ExecutionFlow");
+
+		FeatureConfiguration optimizeConfig = entry.getFeatureConfiguration(OPTIMIZE_FEATURE);
+		
+		FlowOptimizer optimizer = injector.getInstance(FlowOptimizer.class);
+		
+		optimizer.inlineReactions( getBoolValue(optimizeConfig, OPTIMIZE_FEATURE_INLINE_REACTIONS, false) );
+		optimizer.inlineExitActions( getBoolValue(optimizeConfig, OPTIMIZE_FEATURE_INLINE_EXIT_ACTIONS, false) );
+		optimizer.inlineEntryActions( getBoolValue(optimizeConfig, OPTIMIZE_FEATURE_INLINE_ENTRY_ACTIONS, false) );
+		optimizer.inlineEnterSequences( getBoolValue(optimizeConfig, OPTIMIZE_FEATURE_INLINE_ENTER_SEQUENCES, false) );
+		optimizer.inlineExitSequences( getBoolValue(optimizeConfig, OPTIMIZE_FEATURE_INLINE_EXIT_SEQUENCES, false) );
+		
+		flow = optimizer.transform(flow);
+
 		return flow;
 	}
 
+	boolean getBoolValue(FeatureConfiguration conf, String param, boolean defaultValue) {
+		if ( conf != null && conf.getParameterValue(param) != null ) 
+			return conf.getParameterValue(param).getBooleanValue();
+		
+		return defaultValue;
+	}
+	
 	protected final void writeToConsole(Throwable t) {
 		PrintWriter printWriter = new PrintWriter(error);
 		t.printStackTrace(printWriter);

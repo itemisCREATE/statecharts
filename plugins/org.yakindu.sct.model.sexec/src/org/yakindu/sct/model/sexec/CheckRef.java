@@ -26,6 +26,7 @@ package org.yakindu.sct.model.sexec;
 public interface CheckRef extends Check {
 	/**
 	 * Returns the value of the '<em><b>Check</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.yakindu.sct.model.sexec.Check#getRefs <em>Refs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Check</em>' reference isn't clear,
@@ -35,7 +36,8 @@ public interface CheckRef extends Check {
 	 * @return the value of the '<em>Check</em>' reference.
 	 * @see #setCheck(Check)
 	 * @see org.yakindu.sct.model.sexec.SexecPackage#getCheckRef_Check()
-	 * @model
+	 * @see org.yakindu.sct.model.sexec.Check#getRefs
+	 * @model opposite="refs"
 	 * @generated
 	 */
 	Check getCheck();

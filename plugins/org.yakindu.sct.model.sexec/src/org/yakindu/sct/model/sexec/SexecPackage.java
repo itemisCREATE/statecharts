@@ -190,13 +190,86 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_FLOW__EXIT_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_FLOW__NODES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Execution Flow</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW_FEATURE_COUNT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 5;
+	int EXECUTION_FLOW_FEATURE_COUNT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl <em>Execution Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecutionNode()
+	 * @generated
+	 */
+	int EXECUTION_NODE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_NODE__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Source Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_NODE__SOURCE_ELEMENT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_NODE__REACTIONS = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_NODE__SIMPLE_NAME = NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>React Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_NODE__REACT_SEQUENCE = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Execution Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_NODE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl <em>Execution State</em>}' class.
@@ -206,7 +279,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecutionState()
 	 * @generated
 	 */
-	int EXECUTION_STATE = 3;
+	int EXECUTION_STATE = 4;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ReactionImpl <em>Reaction</em>}' class.
@@ -216,7 +289,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getReaction()
 	 * @generated
 	 */
-	int REACTION = 4;
+	int REACTION = 6;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StepImpl <em>Step</em>}' class.
@@ -226,7 +299,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStep()
 	 * @generated
 	 */
-	int STEP = 7;
+	int STEP = 9;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.SequenceImpl <em>Sequence</em>}' class.
@@ -236,7 +309,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getSequence()
 	 * @generated
 	 */
-	int SEQUENCE = 8;
+	int SEQUENCE = 10;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CheckImpl <em>Check</em>}' class.
@@ -246,7 +319,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCheck()
 	 * @generated
 	 */
-	int CHECK = 9;
+	int CHECK = 11;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.IfImpl <em>If</em>}' class.
@@ -256,7 +329,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getIf()
 	 * @generated
 	 */
-	int IF = 11;
+	int IF = 13;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionImpl <em>Execution</em>}' class.
@@ -266,7 +339,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecution()
 	 * @generated
 	 */
-	int EXECUTION = 12;
+	int EXECUTION = 14;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.EnterStateImpl <em>Enter State</em>}' class.
@@ -276,7 +349,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getEnterState()
 	 * @generated
 	 */
-	int ENTER_STATE = 13;
+	int ENTER_STATE = 15;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExitStateImpl <em>Exit State</em>}' class.
@@ -286,7 +359,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExitState()
 	 * @generated
 	 */
-	int EXIT_STATE = 14;
+	int EXIT_STATE = 16;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StateVectorImpl <em>State Vector</em>}' class.
@@ -296,7 +369,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateVector()
 	 * @generated
 	 */
-	int STATE_VECTOR = 5;
+	int STATE_VECTOR = 7;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TimeEventImpl <em>Time Event</em>}' class.
@@ -306,7 +379,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTimeEvent()
 	 * @generated
 	 */
-	int TIME_EVENT = 6;
+	int TIME_EVENT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -315,7 +388,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__NAME = NAMED_ELEMENT__NAME;
+	int EXECUTION_STATE__NAME = EXECUTION_NODE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Source Element</b></em>' reference.
@@ -324,34 +397,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__SOURCE_ELEMENT = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_STATE__SIMPLE_NAME = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Leaf</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_STATE__LEAF = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>React Sequence</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_STATE__REACT_SEQUENCE = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int EXECUTION_STATE__SOURCE_ELEMENT = EXECUTION_NODE__SOURCE_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
@@ -360,7 +406,34 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__REACTIONS = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int EXECUTION_STATE__REACTIONS = EXECUTION_NODE__REACTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__SIMPLE_NAME = EXECUTION_NODE__SIMPLE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>React Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__REACT_SEQUENCE = EXECUTION_NODE__REACT_SEQUENCE;
+
+	/**
+	 * The feature id for the '<em><b>Leaf</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__LEAF = EXECUTION_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Entry Action</b></em>' containment reference.
@@ -369,7 +442,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__ENTRY_ACTION = NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int EXECUTION_STATE__ENTRY_ACTION = EXECUTION_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Exit Action</b></em>' containment reference.
@@ -378,7 +451,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__EXIT_ACTION = NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int EXECUTION_STATE__EXIT_ACTION = EXECUTION_NODE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Enter Sequence</b></em>' containment reference.
@@ -387,7 +460,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__ENTER_SEQUENCE = NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int EXECUTION_STATE__ENTER_SEQUENCE = EXECUTION_NODE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Exit Sequence</b></em>' containment reference.
@@ -396,7 +469,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__EXIT_SEQUENCE = NAMED_ELEMENT_FEATURE_COUNT + 8;
+	int EXECUTION_STATE__EXIT_SEQUENCE = EXECUTION_NODE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>State Vector</b></em>' containment reference.
@@ -405,7 +478,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__STATE_VECTOR = NAMED_ELEMENT_FEATURE_COUNT + 9;
+	int EXECUTION_STATE__STATE_VECTOR = EXECUTION_NODE_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Execution State</em>' class.
@@ -414,7 +487,71 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 10;
+	int EXECUTION_STATE_FEATURE_COUNT = EXECUTION_NODE_FEATURE_COUNT + 6;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionChoiceImpl <em>Execution Choice</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.ExecutionChoiceImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecutionChoice()
+	 * @generated
+	 */
+	int EXECUTION_CHOICE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CHOICE__NAME = EXECUTION_NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Source Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CHOICE__SOURCE_ELEMENT = EXECUTION_NODE__SOURCE_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CHOICE__REACTIONS = EXECUTION_NODE__REACTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CHOICE__SIMPLE_NAME = EXECUTION_NODE__SIMPLE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>React Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CHOICE__REACT_SEQUENCE = EXECUTION_NODE__REACT_SEQUENCE;
+
+	/**
+	 * The number of structural features of the '<em>Execution Choice</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CHOICE_FEATURE_COUNT = EXECUTION_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -543,13 +680,22 @@ public interface SexecPackage extends EPackage {
 	int STEP__COMMENT = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP__CALLER = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Step</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STEP_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int STEP_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -568,6 +714,15 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int SEQUENCE__COMMENT = STEP__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQUENCE__CALLER = STEP__CALLER;
 
 	/**
 	 * The feature id for the '<em><b>Steps</b></em>' containment reference list.
@@ -606,6 +761,15 @@ public interface SexecPackage extends EPackage {
 	int CHECK__COMMENT = STEP__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK__CALLER = STEP__CALLER;
+
+	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -615,13 +779,22 @@ public interface SexecPackage extends EPackage {
 	int CHECK__CONDITION = STEP_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Refs</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK__REFS = STEP_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Check</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHECK_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
+	int CHECK_FEATURE_COUNT = STEP_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CallImpl <em>Call</em>}' class.
@@ -631,7 +804,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCall()
 	 * @generated
 	 */
-	int CALL = 15;
+	int CALL = 17;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ScheduleTimeEventImpl <em>Schedule Time Event</em>}' class.
@@ -641,7 +814,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getScheduleTimeEvent()
 	 * @generated
 	 */
-	int SCHEDULE_TIME_EVENT = 16;
+	int SCHEDULE_TIME_EVENT = 18;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.UnscheduleTimeEventImpl <em>Unschedule Time Event</em>}' class.
@@ -651,7 +824,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getUnscheduleTimeEvent()
 	 * @generated
 	 */
-	int UNSCHEDULE_TIME_EVENT = 17;
+	int UNSCHEDULE_TIME_EVENT = 19;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CheckRefImpl <em>Check Ref</em>}' class.
@@ -661,7 +834,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCheckRef()
 	 * @generated
 	 */
-	int CHECK_REF = 10;
+	int CHECK_REF = 12;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -682,6 +855,15 @@ public interface SexecPackage extends EPackage {
 	int CHECK_REF__COMMENT = CHECK__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK_REF__CALLER = CHECK__CALLER;
+
+	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -689,6 +871,15 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHECK_REF__CONDITION = CHECK__CONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Refs</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK_REF__REFS = CHECK__REFS;
 
 	/**
 	 * The feature id for the '<em><b>Check</b></em>' reference.
@@ -725,6 +916,15 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int IF__COMMENT = STEP__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF__CALLER = STEP__CALLER;
 
 	/**
 	 * The feature id for the '<em><b>Check</b></em>' containment reference.
@@ -781,6 +981,15 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION__COMMENT = STEP__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION__CALLER = STEP__CALLER;
+
+	/**
 	 * The feature id for the '<em><b>Statement</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -815,6 +1024,15 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENTER_STATE__COMMENT = STEP__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTER_STATE__CALLER = STEP__CALLER;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' reference.
@@ -853,6 +1071,15 @@ public interface SexecPackage extends EPackage {
 	int EXIT_STATE__COMMENT = STEP__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXIT_STATE__CALLER = STEP__CALLER;
+
+	/**
 	 * The feature id for the '<em><b>State</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -889,6 +1116,15 @@ public interface SexecPackage extends EPackage {
 	int CALL__COMMENT = STEP__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL__CALLER = STEP__CALLER;
+
+	/**
 	 * The feature id for the '<em><b>Step</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -923,6 +1159,15 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int SCHEDULE_TIME_EVENT__COMMENT = STEP__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_TIME_EVENT__CALLER = STEP__CALLER;
 
 	/**
 	 * The feature id for the '<em><b>Time Event</b></em>' reference.
@@ -970,6 +1215,15 @@ public interface SexecPackage extends EPackage {
 	int UNSCHEDULE_TIME_EVENT__COMMENT = STEP__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNSCHEDULE_TIME_EVENT__CALLER = STEP__CALLER;
+
+	/**
 	 * The feature id for the '<em><b>Time Event</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -996,7 +1250,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateSwitch()
 	 * @generated
 	 */
-	int STATE_SWITCH = 18;
+	int STATE_SWITCH = 20;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1015,6 +1269,15 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int STATE_SWITCH__COMMENT = STEP__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_SWITCH__CALLER = STEP__CALLER;
 
 	/**
 	 * The feature id for the '<em><b>Cases</b></em>' containment reference list.
@@ -1042,7 +1305,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateCase()
 	 * @generated
 	 */
-	int STATE_CASE = 19;
+	int STATE_CASE = 21;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' reference.
@@ -1080,7 +1343,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTrace()
 	 * @generated
 	 */
-	int TRACE = 20;
+	int TRACE = 22;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1101,6 +1364,15 @@ public interface SexecPackage extends EPackage {
 	int TRACE__COMMENT = STEP__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE__CALLER = STEP__CALLER;
+
+	/**
 	 * The number of structural features of the '<em>Trace</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1117,7 +1389,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getReactionFired()
 	 * @generated
 	 */
-	int REACTION_FIRED = 21;
+	int REACTION_FIRED = 23;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1136,6 +1408,15 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int REACTION_FIRED__COMMENT = TRACE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REACTION_FIRED__CALLER = TRACE__CALLER;
 
 	/**
 	 * The feature id for the '<em><b>Reaction</b></em>' reference.
@@ -1211,6 +1492,60 @@ public interface SexecPackage extends EPackage {
 	EReference getExecutionFlow_ExitSequence();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sexec.ExecutionFlow#getNodes <em>Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Nodes</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionFlow#getNodes()
+	 * @see #getExecutionFlow()
+	 * @generated
+	 */
+	EReference getExecutionFlow_Nodes();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionNode <em>Execution Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Execution Node</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionNode
+	 * @generated
+	 */
+	EClass getExecutionNode();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sexec.ExecutionNode#getReactions <em>Reactions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Reactions</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionNode#getReactions()
+	 * @see #getExecutionNode()
+	 * @generated
+	 */
+	EReference getExecutionNode_Reactions();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sexec.ExecutionNode#getSimpleName <em>Simple Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Simple Name</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionNode#getSimpleName()
+	 * @see #getExecutionNode()
+	 * @generated
+	 */
+	EAttribute getExecutionNode_SimpleName();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionNode#getReactSequence <em>React Sequence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>React Sequence</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionNode#getReactSequence()
+	 * @see #getExecutionNode()
+	 * @generated
+	 */
+	EReference getExecutionNode_ReactSequence();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionState <em>Execution State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1219,28 +1554,6 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getExecutionState();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sexec.ExecutionState#getSimpleName <em>Simple Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Simple Name</em>'.
-	 * @see org.yakindu.sct.model.sexec.ExecutionState#getSimpleName()
-	 * @see #getExecutionState()
-	 * @generated
-	 */
-	EAttribute getExecutionState_SimpleName();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sexec.ExecutionState#getReactions <em>Reactions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Reactions</em>'.
-	 * @see org.yakindu.sct.model.sexec.ExecutionState#getReactions()
-	 * @see #getExecutionState()
-	 * @generated
-	 */
-	EReference getExecutionState_Reactions();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionState#getEntryAction <em>Entry Action</em>}'.
@@ -1298,6 +1611,16 @@ public interface SexecPackage extends EPackage {
 	EReference getExecutionState_StateVector();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionChoice <em>Execution Choice</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Execution Choice</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionChoice
+	 * @generated
+	 */
+	EClass getExecutionChoice();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sexec.ExecutionState#isLeaf <em>Leaf</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1307,17 +1630,6 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getExecutionState_Leaf();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionState#getReactSequence <em>React Sequence</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>React Sequence</em>'.
-	 * @see org.yakindu.sct.model.sexec.ExecutionState#getReactSequence()
-	 * @see #getExecutionState()
-	 * @generated
-	 */
-	EReference getExecutionState_ReactSequence();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.Reaction <em>Reaction</em>}'.
@@ -1426,6 +1738,17 @@ public interface SexecPackage extends EPackage {
 	EReference getCheck_Condition();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.yakindu.sct.model.sexec.Check#getRefs <em>Refs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Refs</em>'.
+	 * @see org.yakindu.sct.model.sexec.Check#getRefs()
+	 * @see #getCheck()
+	 * @generated
+	 */
+	EReference getCheck_Refs();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.Step <em>Step</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1445,6 +1768,17 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getStep_Comment();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.yakindu.sct.model.sexec.Step#getCaller <em>Caller</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Caller</em>'.
+	 * @see org.yakindu.sct.model.sexec.Step#getCaller()
+	 * @see #getStep()
+	 * @generated
+	 */
+	EReference getStep_Caller();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.Sequence <em>Sequence</em>}'.
@@ -1870,6 +2204,48 @@ public interface SexecPackage extends EPackage {
 		EReference EXECUTION_FLOW__EXIT_SEQUENCE = eINSTANCE.getExecutionFlow_ExitSequence();
 
 		/**
+		 * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_FLOW__NODES = eINSTANCE.getExecutionFlow_Nodes();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl <em>Execution Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecutionNode()
+		 * @generated
+		 */
+		EClass EXECUTION_NODE = eINSTANCE.getExecutionNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Reactions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_NODE__REACTIONS = eINSTANCE.getExecutionNode_Reactions();
+
+		/**
+		 * The meta object literal for the '<em><b>Simple Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXECUTION_NODE__SIMPLE_NAME = eINSTANCE.getExecutionNode_SimpleName();
+
+		/**
+		 * The meta object literal for the '<em><b>React Sequence</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_NODE__REACT_SEQUENCE = eINSTANCE.getExecutionNode_ReactSequence();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl <em>Execution State</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1878,22 +2254,6 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EXECUTION_STATE = eINSTANCE.getExecutionState();
-
-		/**
-		 * The meta object literal for the '<em><b>Simple Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXECUTION_STATE__SIMPLE_NAME = eINSTANCE.getExecutionState_SimpleName();
-
-		/**
-		 * The meta object literal for the '<em><b>Reactions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXECUTION_STATE__REACTIONS = eINSTANCE.getExecutionState_Reactions();
 
 		/**
 		 * The meta object literal for the '<em><b>Entry Action</b></em>' containment reference feature.
@@ -1936,20 +2296,22 @@ public interface SexecPackage extends EPackage {
 		EReference EXECUTION_STATE__STATE_VECTOR = eINSTANCE.getExecutionState_StateVector();
 
 		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionChoiceImpl <em>Execution Choice</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.ExecutionChoiceImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecutionChoice()
+		 * @generated
+		 */
+		EClass EXECUTION_CHOICE = eINSTANCE.getExecutionChoice();
+
+		/**
 		 * The meta object literal for the '<em><b>Leaf</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute EXECUTION_STATE__LEAF = eINSTANCE.getExecutionState_Leaf();
-
-		/**
-		 * The meta object literal for the '<em><b>React Sequence</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXECUTION_STATE__REACT_SEQUENCE = eINSTANCE.getExecutionState_ReactSequence();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ReactionImpl <em>Reaction</em>}' class.
@@ -2040,6 +2402,14 @@ public interface SexecPackage extends EPackage {
 		EReference CHECK__CONDITION = eINSTANCE.getCheck_Condition();
 
 		/**
+		 * The meta object literal for the '<em><b>Refs</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CHECK__REFS = eINSTANCE.getCheck_Refs();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.StepImpl <em>Step</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2056,6 +2426,14 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STEP__COMMENT = eINSTANCE.getStep_Comment();
+
+		/**
+		 * The meta object literal for the '<em><b>Caller</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STEP__CALLER = eINSTANCE.getStep_Caller();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.SequenceImpl <em>Sequence</em>}' class.

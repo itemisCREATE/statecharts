@@ -102,8 +102,16 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createExecutionFlowAdapter();
 			}
 			@Override
+			public Adapter caseExecutionNode(ExecutionNode object) {
+				return createExecutionNodeAdapter();
+			}
+			@Override
 			public Adapter caseExecutionState(ExecutionState object) {
 				return createExecutionStateAdapter();
+			}
+			@Override
+			public Adapter caseExecutionChoice(ExecutionChoice object) {
+				return createExecutionChoiceAdapter();
 			}
 			@Override
 			public Adapter caseReaction(Reaction object) {
@@ -228,6 +236,20 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.ExecutionNode <em>Execution Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.ExecutionNode
+	 * @generated
+	 */
+	public Adapter createExecutionNodeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.ExecutionState <em>Execution State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -238,6 +260,20 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExecutionStateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.ExecutionChoice <em>Execution Choice</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.ExecutionChoice
+	 * @generated
+	 */
+	public Adapter createExecutionChoiceAdapter() {
 		return null;
 	}
 

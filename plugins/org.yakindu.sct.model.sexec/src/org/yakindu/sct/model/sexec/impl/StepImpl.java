@@ -6,9 +6,16 @@
  */
 package org.yakindu.sct.model.sexec.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.Step;
 
@@ -20,6 +27,7 @@ import org.yakindu.sct.model.sexec.Step;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.StepImpl#getComment <em>Comment</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.StepImpl#getCaller <em>Caller</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,6 +53,16 @@ public abstract class StepImpl extends NamedElementImpl implements Step {
 	 * @ordered
 	 */
 	protected String comment = COMMENT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getCaller() <em>Caller</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCaller()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Call> caller;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -91,11 +109,54 @@ public abstract class StepImpl extends NamedElementImpl implements Step {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Call> getCaller() {
+		if (caller == null) {
+			caller = new EObjectWithInverseResolvingEList<Call>(Call.class, this, SexecPackage.STEP__CALLER, SexecPackage.CALL__STEP);
+		}
+		return caller;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SexecPackage.STEP__CALLER:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getCaller()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SexecPackage.STEP__CALLER:
+				return ((InternalEList<?>)getCaller()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SexecPackage.STEP__COMMENT:
 				return getComment();
+			case SexecPackage.STEP__CALLER:
+				return getCaller();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -105,11 +166,16 @@ public abstract class StepImpl extends NamedElementImpl implements Step {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SexecPackage.STEP__COMMENT:
 				setComment((String)newValue);
+				return;
+			case SexecPackage.STEP__CALLER:
+				getCaller().clear();
+				getCaller().addAll((Collection<? extends Call>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -126,6 +192,9 @@ public abstract class StepImpl extends NamedElementImpl implements Step {
 			case SexecPackage.STEP__COMMENT:
 				setComment(COMMENT_EDEFAULT);
 				return;
+			case SexecPackage.STEP__CALLER:
+				getCaller().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -140,6 +209,8 @@ public abstract class StepImpl extends NamedElementImpl implements Step {
 		switch (featureID) {
 			case SexecPackage.STEP__COMMENT:
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
+			case SexecPackage.STEP__CALLER:
+				return caller != null && !caller.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
