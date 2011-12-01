@@ -67,6 +67,9 @@ String getValueName(VariableDefinition this) : "var"+name.toFirstUpper();
 String getName(ExecutionState this) :
 	simpleName.replaceAll(" ","").toFirstUpper();
 	
+String getName(ExecutionNode this) :
+	simpleName.replaceAll(" ","").toFirstUpper();
+	
 String getName(ExecutionFlow this) :
 	name.replaceAll(" ","").toFirstUpper();
 
@@ -82,8 +85,9 @@ cached String functionName(Step step) :
 	(step.isEntryAction()) ? step.entryActionFunctionName() : ( 
 	(step.isExitAction()) ? step.exitActionFunctionName() :  (
 	(step.isEnterSequence()) ? step.enterSequenceName() : (
-	(step.isExitSequence()) ? step.exitSequenceName() :
-	" // unknown function type "+step )))));
+	(step.isExitSequence()) ? step.exitSequenceName() : (
+	(step.isReactSequence()) ? step.reactSequenceName() :
+	" // unknown function type "+step ))))));
  
 String statemachineEntryFunctionName(EnterState this):
 	if (this.name != null) then
@@ -101,6 +105,7 @@ String enterSequenceName(ExecutionFlow this) : "enter";
 String exitSequenceName(Step this) : "exitSequence"+getName(state()); 
 String exitSequenceName(ExecutionState this) : "exitSequence"+getName();
 String exitSequenceName(ExecutionFlow this) : "exit";
+String reactSequenceName(Step this) : "react"+getName(state()); 
 
 isEffect(Step step) : (! Check.isInstance(step)) && Reaction.isInstance(step.eContainer) ;
 isReactionCheck(Step step) : Reaction.isInstance(step.eContainer) && Check.isInstance(step);
@@ -108,6 +113,7 @@ isEntryAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.st
 isExitAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().exitAction == step;
 isEnterSequence(Step step) : Sequence.isInstance(step) && step.name == "enterSequence";
 isExitSequence(Step step) : Sequence.isInstance(step) && step.name == "exitSequence";
+isReactSequence(Step step) : Sequence.isInstance(step) && step.name == "react";
 
 Reaction reaction(Step this) : (Reaction) this.eContainer ;
 ExecutionState state(Reaction this) : (ExecutionState) eContainer;

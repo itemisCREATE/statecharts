@@ -16,6 +16,7 @@ import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.Reaction;
@@ -125,6 +126,41 @@ public class FlowOptimizer {
           };
         IterableExtensions.<ExecutionState>forEach(_states_3, _function_3);
       }
+      EList<ExecutionNode> _nodes = flow.getNodes();
+      final Function1<ExecutionNode,ExecutionNode> _function_4 = new Function1<ExecutionNode,ExecutionNode>() {
+          public ExecutionNode apply(final ExecutionNode node) {
+            ExecutionNode _xblockexpression_1 = null;
+            {
+              EList<Reaction> _reactions = node.getReactions();
+              final Function1<Reaction,Step> _function_5 = new Function1<Reaction,Step>() {
+                  public Step apply(final Reaction r) {
+                    Step _xblockexpression_2 = null;
+                    {
+                      Check _check = r.getCheck();
+                      FlowOptimizer.this.inline(_check);
+                      Step _effect = r.getEffect();
+                      Step _inline_4 = FlowOptimizer.this.inline(_effect);
+                      _xblockexpression_2 = (_inline_4);
+                    }
+                    return _xblockexpression_2;
+                  }
+                };
+              IterableExtensions.<Reaction>forEach(_reactions, _function_5);
+              _xblockexpression_1 = (node);
+            }
+            return _xblockexpression_1;
+          }
+        };
+      IterableExtensions.<ExecutionNode>forEach(_nodes, _function_4);
+      EList<ExecutionNode> _nodes_1 = flow.getNodes();
+      final Function1<ExecutionNode,Step> _function_6 = new Function1<ExecutionNode,Step>() {
+          public Step apply(final ExecutionNode node_1) {
+            Sequence _reactSequence = node_1.getReactSequence();
+            Step _inline_5 = FlowOptimizer.this.inline(_reactSequence);
+            return _inline_5;
+          }
+        };
+      IterableExtensions.<ExecutionNode>forEach(_nodes_1, _function_6);
       _xblockexpression = (flow);
     }
     return _xblockexpression;
@@ -169,17 +205,22 @@ public class FlowOptimizer {
   public Check inline(final Check c) {
     Check _xblockexpression = null;
     {
-      ArrayList<CheckRef> _arrayList = new ArrayList<CheckRef>();
-      final List<CheckRef> cRefs = _arrayList;
-      EList<CheckRef> _refs = c.getRefs();
-      cRefs.addAll(_refs);
-      for (CheckRef ref : cRefs) {
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(c, null);
+      if (_operator_notEquals) {
         {
-          Check _copy = EcoreUtil.<Check>copy(c);
-          final Check clone = _copy;
-          EObject _eContainer = ref.eContainer();
-          this.substitute(_eContainer, ref, clone);
-          ref.setCheck(null);
+          ArrayList<CheckRef> _arrayList = new ArrayList<CheckRef>();
+          final List<CheckRef> cRefs = _arrayList;
+          EList<CheckRef> _refs = c.getRefs();
+          cRefs.addAll(_refs);
+          for (CheckRef ref : cRefs) {
+            {
+              Check _copy = EcoreUtil.<Check>copy(c);
+              final Check clone = _copy;
+              EObject _eContainer = ref.eContainer();
+              this.substitute(_eContainer, ref, clone);
+              ref.setCheck(null);
+            }
+          }
         }
       }
       _xblockexpression = (c);
@@ -379,12 +420,28 @@ public class FlowOptimizer {
       Check _check = _if.getCheck();
       Step _stepCopy = this.stepCopy(_check);
       _copy.setCheck(((Check) _stepCopy));
+      Step _xifexpression = null;
       Step _thenStep = _if.getThenStep();
-      Step _stepCopy_1 = this.stepCopy(_thenStep);
-      _copy.setThenStep(_stepCopy_1);
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_thenStep, null);
+      if (_operator_notEquals) {
+        Step _thenStep_1 = _if.getThenStep();
+        Step _stepCopy_1 = this.stepCopy(_thenStep_1);
+        _xifexpression = _stepCopy_1;
+      } else {
+        _xifexpression = null;
+      }
+      _copy.setThenStep(_xifexpression);
+      Step _xifexpression_1 = null;
       Step _elseStep = _if.getElseStep();
-      Step _stepCopy_2 = this.stepCopy(_elseStep);
-      _copy.setElseStep(_stepCopy_2);
+      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_elseStep, null);
+      if (_operator_notEquals_1) {
+        Step _elseStep_1 = _if.getElseStep();
+        Step _stepCopy_2 = this.stepCopy(_elseStep_1);
+        _xifexpression_1 = _stepCopy_2;
+      } else {
+        _xifexpression_1 = null;
+      }
+      _copy.setElseStep(_xifexpression_1);
       _xblockexpression = (_copy);
     }
     return _xblockexpression;

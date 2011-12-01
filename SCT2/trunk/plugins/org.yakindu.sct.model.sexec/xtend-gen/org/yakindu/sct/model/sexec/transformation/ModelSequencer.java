@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
+import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -24,7 +25,9 @@ import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
+import org.yakindu.sct.model.sexec.ExecutionChoice;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.If;
@@ -41,6 +44,7 @@ import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sexec.transformation.FactoryExtension;
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
+import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Entry;
@@ -61,11 +65,13 @@ import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.Assignment;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
+import org.yakindu.sct.model.stext.stext.DefaultEvent;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.IntLiteral;
+import org.yakindu.sct.model.stext.stext.Literal;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.LogicalAndExpression;
 import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
@@ -106,7 +112,8 @@ public class ModelSequencer {
       ExecutionFlow _create = this.factory.create(sc);
       final ExecutionFlow ef = _create;
       this.mapScopes(sc, ef);
-      this.mapStates(sc, ef);
+      this.mapRegularStates(sc, ef);
+      this.mapPseudoStates(sc, ef);
       this.mapTimeEvents(sc, ef);
       this.defineStateVector(ef, sc);
       this.defineStateEnterSequences(ef, sc);
@@ -114,7 +121,9 @@ public class ModelSequencer {
       this.defineEnterSequence(ef, sc);
       this.mapTransitions(sc, ef);
       this.mapLocalReactions(sc, ef);
-      this.defineStateCycles(ef, sc);
+      this.mapChoiceTransitions(sc, ef);
+      this.defineRegularStateReactions(ef, sc);
+      this.definePseudoStateReactions(ef, sc);
       this.retargetDeclRefs(ef);
       return ef;
     }
@@ -183,7 +192,7 @@ public class ModelSequencer {
     }
   }
   
-  public ExecutionFlow mapStates(final Statechart statechart, final ExecutionFlow r) {
+  public ExecutionFlow mapRegularStates(final Statechart statechart, final ExecutionFlow r) {
     {
       List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(statechart);
       List<EObject> content = _eAllContentsAsList;
@@ -209,6 +218,36 @@ public class ModelSequencer {
       Iterable<RegularState> _filter = IterableExtensions.<RegularState>filter(content, org.yakindu.sct.model.sgraph.RegularState.class);
       final Iterable<RegularState> allStates = _filter;
       List<RegularState> _list = IterableExtensions.<RegularState>toList(allStates);
+      return _list;
+    }
+  }
+  
+  public ExecutionFlow mapPseudoStates(final Statechart statechart, final ExecutionFlow r) {
+    {
+      List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(statechart);
+      List<EObject> content = _eAllContentsAsList;
+      List<Choice> _allChoices = this.allChoices(statechart);
+      final List<Choice> allChoices = _allChoices;
+      EList<ExecutionNode> _nodes = r.getNodes();
+      final Function1<Choice,ExecutionChoice> _function = new Function1<Choice,ExecutionChoice>() {
+          public ExecutionChoice apply(final Choice choice) {
+            ExecutionChoice _create = ModelSequencer.this.factory.create(choice);
+            return _create;
+          }
+        };
+      List<ExecutionChoice> _map = ListExtensions.<Choice, ExecutionChoice>map(allChoices, _function);
+      _nodes.addAll(_map);
+      return r;
+    }
+  }
+  
+  public List<Choice> allChoices(final Statechart sc) {
+    {
+      List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(sc);
+      List<EObject> content = _eAllContentsAsList;
+      Iterable<Choice> _filter = IterableExtensions.<Choice>filter(content, org.yakindu.sct.model.sgraph.Choice.class);
+      final Iterable<Choice> allChoices = _filter;
+      List<Choice> _list = IterableExtensions.<Choice>toList(allChoices);
       return _list;
     }
   }
@@ -286,6 +325,38 @@ public class ModelSequencer {
       _xblockexpression = (result);
     }
     return _xblockexpression;
+  }
+  
+  public ExecutionFlow mapChoiceTransitions(final Statechart statechart, final ExecutionFlow r) {
+    {
+      List<Choice> _allChoices = this.allChoices(statechart);
+      final Function1<Choice,ExecutionChoice> _function = new Function1<Choice,ExecutionChoice>() {
+          public ExecutionChoice apply(final Choice choice) {
+            ExecutionChoice _mapChoiceTransition = ModelSequencer.this.mapChoiceTransition(choice);
+            return _mapChoiceTransition;
+          }
+        };
+      IterableExtensions.<Choice>forEach(_allChoices, _function);
+      return r;
+    }
+  }
+  
+  public ExecutionChoice mapChoiceTransition(final Choice choice) {
+    {
+      ExecutionChoice _create = this.factory.create(choice);
+      final ExecutionChoice _choice = _create;
+      EList<Reaction> _reactions = _choice.getReactions();
+      EList<Transition> _outgoingTransitions = choice.getOutgoingTransitions();
+      final Function1<Transition,Reaction> _function = new Function1<Transition,Reaction>() {
+          public Reaction apply(final Transition t) {
+            Reaction _mapTransition = ModelSequencer.this.mapTransition(t);
+            return _mapTransition;
+          }
+        };
+      List<Reaction> _map = ListExtensions.<Transition, Reaction>map(_outgoingTransitions, _function);
+      _reactions.addAll(_map);
+      return _choice;
+    }
   }
   
   public ExecutionFlow mapTransitions(final Statechart statechart, final ExecutionFlow r) {
@@ -542,22 +613,28 @@ public class ModelSequencer {
           }
         };
       IterableExtensions.<State, Sequence>fold(_reverse, sequence, _function_1);
-      boolean _operator_and_3 = false;
       Vertex _target_1 = t.getTarget();
       boolean _operator_notEquals_6 = ObjectExtensions.operator_notEquals(_target_1, null);
-      if (!_operator_notEquals_6) {
-        _operator_and_3 = false;
-      } else {
+      if (_operator_notEquals_6) {
         Vertex _target_2 = t.getTarget();
-        _operator_and_3 = BooleanExtensions.operator_and(_operator_notEquals_6, (_target_2 instanceof org.yakindu.sct.model.sgraph.State));
-      }
-      if (_operator_and_3) {
-        EList<Step> _steps_4 = sequence.getSteps();
-        Vertex _target_3 = t.getTarget();
-        ExecutionState _create_5 = this.factory.create(((State) _target_3));
-        Sequence _enterSequence = _create_5.getEnterSequence();
-        Call _newCall_3 = this.factory.newCall(_enterSequence);
-        _steps_4.add(_newCall_3);
+        if ((_target_2 instanceof org.yakindu.sct.model.sgraph.State)) {
+          EList<Step> _steps_4 = sequence.getSteps();
+          Vertex _target_3 = t.getTarget();
+          ExecutionState _create_5 = this.factory.create(((State) _target_3));
+          Sequence _enterSequence = _create_5.getEnterSequence();
+          Call _newCall_3 = this.factory.newCall(_enterSequence);
+          _steps_4.add(_newCall_3);
+        } else {
+          Vertex _target_4 = t.getTarget();
+          if ((_target_4 instanceof org.yakindu.sct.model.sgraph.Choice)) {
+            EList<Step> _steps_5 = sequence.getSteps();
+            Vertex _target_5 = t.getTarget();
+            ExecutionChoice _create_6 = this.factory.create(((Choice) _target_5));
+            Sequence _reactSequence = _create_6.getReactSequence();
+            Call _newCall_4 = this.factory.newCall(_reactSequence);
+            _steps_5.add(_newCall_4);
+          }
+        }
       }
       return sequence;
     }
@@ -910,7 +987,7 @@ public class ModelSequencer {
     return _xblockexpression;
   }
   
-  public ExecutionFlow defineStateCycles(final ExecutionFlow flow, final Statechart sc) {
+  public ExecutionFlow defineRegularStateReactions(final ExecutionFlow flow, final Statechart sc) {
     {
       List<RegularState> _allRegularStates = this.allRegularStates(sc);
       final List<RegularState> states = _allRegularStates;
@@ -938,6 +1015,89 @@ public class ModelSequencer {
         };
       IterableExtensions.<FinalState>forEach(_filter_2, _function_2);
       return flow;
+    }
+  }
+  
+  public void definePseudoStateReactions(final ExecutionFlow flow, final Statechart sc) {
+    List<Choice> _allChoices = this.allChoices(sc);
+    final Function1<Choice,Sequence> _function = new Function1<Choice,Sequence>() {
+        public Sequence apply(final Choice choice) {
+          Sequence _defineReaction = ModelSequencer.this.defineReaction(choice);
+          return _defineReaction;
+        }
+      };
+    IterableExtensions.<Choice>forEach(_allChoices, _function);
+  }
+  
+  public Sequence defineReaction(final Choice choice) {
+    {
+      ExecutionChoice _create = this.factory.create(choice);
+      final ExecutionChoice execChoice = _create;
+      EList<Reaction> _reactions = execChoice.getReactions();
+      final Function1<Reaction,Boolean> _function = new Function1<Reaction,Boolean>() {
+          public Boolean apply(final Reaction r) {
+            Check _check = r.getCheck();
+            boolean _alwaysTrue = ModelSequencer.this.alwaysTrue(_check);
+            return ((Boolean)_alwaysTrue);
+          }
+        };
+      Iterable<Reaction> _filter = IterableExtensions.<Reaction>filter(_reactions, _function);
+      List<Reaction> _list = IterableExtensions.<Reaction>toList(_filter);
+      Reaction _head = IterableExtensions.<Reaction>head(_list);
+      final Reaction _default_ = _head;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_default_, null);
+      if (_operator_notEquals) {
+        EList<Reaction> _reactions_1 = execChoice.getReactions();
+        EList<Reaction> _reactions_2 = execChoice.getReactions();
+        int _size = _reactions_2.size();
+        int _operator_minus = IntegerExtensions.operator_minus(((Integer)_size), ((Integer)1));
+        _reactions_1.move(_operator_minus, _default_);
+      }
+      Sequence _createReactionSequence = this.createReactionSequence(execChoice, null);
+      final Sequence stateReaction = _createReactionSequence;
+      Sequence _reactSequence = execChoice.getReactSequence();
+      EList<Step> _steps = _reactSequence.getSteps();
+      EList<Step> _steps_1 = stateReaction.getSteps();
+      _steps.addAll(_steps_1);
+      Sequence _reactSequence_1 = execChoice.getReactSequence();
+      _reactSequence_1.setName("react");
+      Sequence _reactSequence_2 = execChoice.getReactSequence();
+      String _name = choice.getName();
+      String _operator_plus = StringExtensions.operator_plus("The reactions of state ", _name);
+      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ".");
+      _reactSequence_2.setComment(_operator_plus_1);
+      Sequence _reactSequence_3 = execChoice.getReactSequence();
+      return _reactSequence_3;
+    }
+  }
+  
+  public boolean alwaysTrue(final Check check) {
+    {
+      boolean _operator_and = false;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(check, null);
+      if (!_operator_notEquals) {
+        _operator_and = false;
+      } else {
+        Statement _condition = check.getCondition();
+        _operator_and = BooleanExtensions.operator_and(_operator_notEquals, (_condition instanceof org.yakindu.sct.model.stext.stext.PrimitiveValueExpression));
+      }
+      if (_operator_and) {
+        {
+          Statement _condition_1 = check.getCondition();
+          final PrimitiveValueExpression pve = ((PrimitiveValueExpression) _condition_1);
+          boolean _operator_and_1 = false;
+          Literal _value = pve.getValue();
+          if (!(_value instanceof org.yakindu.sct.model.stext.stext.BoolLiteral)) {
+            _operator_and_1 = false;
+          } else {
+            Literal _value_1 = pve.getValue();
+            boolean _isValue = ((BoolLiteral) _value_1).isValue();
+            _operator_and_1 = BooleanExtensions.operator_and((_value instanceof org.yakindu.sct.model.stext.stext.BoolLiteral), _isValue);
+          }
+          return _operator_and_1;
+        }
+      }
+      return false;
     }
   }
   
@@ -970,7 +1130,7 @@ public class ModelSequencer {
     }
   }
   
-  public Sequence createReactionSequence(final ExecutionState state, final Step localStep) {
+  public Sequence createReactionSequence(final ExecutionNode state, final Step localStep) {
     {
       SexecFactory _sexecFactory = this.sexecFactory();
       Sequence _createSequence = _sexecFactory.createSequence();
@@ -1233,6 +1393,20 @@ public class ModelSequencer {
   }
   
   protected Expression _raised(final AlwaysEvent e) {
+    {
+      StextFactory _stextFactory = this.stextFactory();
+      PrimitiveValueExpression _createPrimitiveValueExpression = _stextFactory.createPrimitiveValueExpression();
+      final PrimitiveValueExpression r = _createPrimitiveValueExpression;
+      StextFactory _stextFactory_1 = this.stextFactory();
+      BoolLiteral _createBoolLiteral = _stextFactory_1.createBoolLiteral();
+      final BoolLiteral boolLit = _createBoolLiteral;
+      boolLit.setValue(true);
+      r.setValue(boolLit);
+      return r;
+    }
+  }
+  
+  protected Expression _raised(final DefaultEvent e) {
     {
       StextFactory _stextFactory = this.stextFactory();
       PrimitiveValueExpression _createPrimitiveValueExpression = _stextFactory.createPrimitiveValueExpression();
@@ -1912,6 +2086,8 @@ public class ModelSequencer {
   public Expression raised(final EventSpec e) {
     if ((e instanceof AlwaysEvent)) {
       return _raised((AlwaysEvent)e);
+    } else if ((e instanceof DefaultEvent)) {
+      return _raised((DefaultEvent)e);
     } else if ((e instanceof OnCycleEvent)) {
       return _raised((OnCycleEvent)e);
     } else if ((e instanceof RegularEventSpec)) {

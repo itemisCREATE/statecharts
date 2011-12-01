@@ -68,6 +68,10 @@ import javax.sound.sampled.BooleanControl$Type
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Vertex
+import org.yakindu.sct.model.sgraph.Choice
+import org.yakindu.sct.model.sexec.ExecutionChoice
+import org.yakindu.sct.model.stext.stext.DefaultEvent
+import org.yakindu.sct.model.sexec.ExecutionNode
 
 class ModelSequencer {
 	
@@ -94,7 +98,8 @@ class ModelSequencer {
 		
 		// during mapping the basic structural elements will be mapped from the source statechart to the execution flow
 		sc.mapScopes(ef)
-		sc.mapStates(ef)
+		sc.mapRegularStates(ef)
+		sc.mapPseudoStates(ef)
 		sc.mapTimeEvents(ef)
 		
 		// derive all additional information that is necessary for the execution
@@ -105,8 +110,10 @@ class ModelSequencer {
 		
 		sc.mapTransitions(ef)
 		sc.mapLocalReactions(ef)
+		sc.mapChoiceTransitions(ef)
 		
-		ef.defineStateCycles(sc)
+		ef.defineRegularStateReactions(sc)
+		ef.definePseudoStateReactions(sc)
 		
 		// retarget declaration refs
 		ef.retargetDeclRefs
@@ -158,7 +165,7 @@ class ModelSequencer {
 	 */
 
 		
-	def ExecutionFlow mapStates(Statechart statechart, ExecutionFlow r){
+	def ExecutionFlow mapRegularStates(Statechart statechart, ExecutionFlow r){
 		var content = EcoreUtil2::eAllContentsAsList(statechart)
 		val allStates = statechart.allRegularStates
 		r.states.addAll(allStates.map( s | s.mapState));
@@ -175,6 +182,23 @@ class ModelSequencer {
 	}
 	
 	
+	def ExecutionFlow mapPseudoStates(Statechart statechart, ExecutionFlow r){
+		var content = EcoreUtil2::eAllContentsAsList(statechart)
+		val allChoices = statechart.allChoices
+		r.nodes.addAll( allChoices.map( choice | choice.create ) );
+		return r
+	}
+
+
+	// TODO : move to other extension
+	def List<Choice> allChoices(Statechart sc) {
+		var content = EcoreUtil2::eAllContentsAsList(sc)
+		val allChoices = content.filter( typeof(Choice) )
+		
+		return allChoices.toList
+	}
+	
+
 	
 	def dispatch ExecutionState mapState(FinalState state) {
 		val _state = state.create
@@ -222,6 +246,20 @@ class ModelSequencer {
 	
 
 
+	def ExecutionFlow mapChoiceTransitions(Statechart statechart, ExecutionFlow r) {
+		statechart.allChoices.forEach( choice | choice.mapChoiceTransition);		
+		return r
+	}
+
+
+	def ExecutionChoice mapChoiceTransition(Choice choice) {
+		val _choice = choice.create
+		_choice.reactions.addAll( choice.outgoingTransitions.map(t | t.mapTransition) )
+		return _choice
+	}
+
+
+
 	def ExecutionFlow mapTransitions(Statechart statechart, ExecutionFlow r){
 		var content = EcoreUtil2::eAllContentsAsList(statechart)
 		val allStates = content.filter(e | e instanceof State)
@@ -235,6 +273,8 @@ class ModelSequencer {
 		_state.reactions.addAll( state.outgoingTransitions.map(t | t.mapTransition))
 		return _state
 	}
+	 
+	 
 	 
 	 
 	def Reaction mapTransition(Transition t) {
@@ -316,10 +356,12 @@ class ModelSequencer {
 			seq
 		}])
 		
-		if (t.target != null && t.target instanceof State) {
-			sequence.steps.add((t.target as State).create.enterSequence.newCall)	
-		}
-		
+		if (t.target != null ) 
+			if ( t.target instanceof State) {
+				sequence.steps.add((t.target as State).create.enterSequence.newCall )	
+			} else if ( t.target instanceof Choice ) {
+				sequence.steps.add((t.target as Choice).create.reactSequence.newCall )	
+			}
 			
 		return sequence
 	}	
@@ -478,7 +520,7 @@ class ModelSequencer {
 	 * SEQUENCING
 	 */
 	
-	def defineStateCycles(ExecutionFlow flow, Statechart sc) {
+	def defineRegularStateReactions(ExecutionFlow flow, Statechart sc) {
 		
 		val states = sc.allRegularStates
 		
@@ -488,6 +530,48 @@ class ModelSequencer {
 		return flow
 	}
 	
+
+	def definePseudoStateReactions(ExecutionFlow flow, Statechart sc) {
+		
+		sc.allChoices().forEach( choice | choice.defineReaction() )
+//		val states = sc.allRegularStates
+//		
+//		states.filter(typeof(State)).filter(s | s.simple).forEach(s | defineCycle(s))
+//		states.filter(typeof(FinalState)).forEach(s | defineCycle(s))
+//		
+//		return flow
+	}
+	
+
+	def Sequence defineReaction(Choice choice) {
+	
+		val execChoice = choice.create
+		
+		// move the default transition to the end of the reaction list
+		val _default_ = execChoice.reactions.filter([ r | r.check.alwaysTrue ]).toList.head
+		if ( _default_ != null ) execChoice.reactions.move(execChoice.reactions.size -1, _default_)
+		// TODO: raise an error if no default exists 
+		
+		val stateReaction = execChoice.createReactionSequence(null)
+		execChoice.reactSequence.steps.addAll(stateReaction.steps)
+
+		execChoice.reactSequence.name = 'react'
+		execChoice.reactSequence.comment = 'The reactions of state ' + choice.name + '.'
+		
+		return execChoice.reactSequence
+	}	
+	
+
+	def alwaysTrue(Check check) {
+		if (check != null && check.condition instanceof PrimitiveValueExpression) {
+			val pve = (check.condition as PrimitiveValueExpression)
+			return ( pve.value instanceof BoolLiteral && ( pve.value as BoolLiteral ).value )
+		} 
+		
+		return false
+	}
+
+
 
 	def Sequence defineCycle(RegularState state) {
 	
@@ -505,7 +589,7 @@ class ModelSequencer {
 	}	
 	
 
-	def Sequence createReactionSequence(ExecutionState state, Step localStep) {	
+	def Sequence createReactionSequence(ExecutionNode state, Step localStep) {	
 		val cycle = sexecFactory.createSequence
 		
 		val localReactions = state.reactions.filter(r | ! r.transition).toList
@@ -615,6 +699,14 @@ class ModelSequencer {
 		return r
 	}
 
+	def dispatch Expression raised(DefaultEvent e) {
+		val r = stextFactory.createPrimitiveValueExpression
+		val BoolLiteral boolLit = stextFactory.createBoolLiteral
+		boolLit.value = true		
+		r.value = boolLit
+		return r
+	}
+	
 	
 	/* ==========================================================================
 	 * HANDLING TIME EVENTS

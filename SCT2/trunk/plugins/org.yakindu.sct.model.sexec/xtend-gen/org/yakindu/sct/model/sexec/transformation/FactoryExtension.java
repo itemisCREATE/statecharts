@@ -3,28 +3,37 @@ package org.yakindu.sct.model.sexec.transformation;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
+import org.yakindu.sct.model.sexec.ExecutionChoice;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
+import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
+import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Reaction;
+import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -164,6 +173,45 @@ public class FactoryExtension {
     return r;
   }
   
+  private final HashMap<ArrayList<?>,ExecutionChoice> _createCache_create_6 = new HashMap<ArrayList<?>,ExecutionChoice>();
+  
+  public ExecutionChoice create(final Choice choice) {
+    final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(choice);
+    ExecutionChoice r;
+    synchronized (_createCache_create_6) {
+      if (_createCache_create_6.containsKey(_cacheKey)) {
+        return _createCache_create_6.get(_cacheKey);
+      }
+      SexecFactory _sexecFactory = this.sexecFactory();
+      ExecutionChoice _createExecutionChoice = _sexecFactory.createExecutionChoice();
+      r = _createExecutionChoice;
+      _createCache_create_6.put(_cacheKey, r);
+    }
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(choice, null);
+    if (_operator_notEquals) {
+      {
+        Region _parentRegion = choice.getParentRegion();
+        EList<Vertex> _vertices = _parentRegion.getVertices();
+        Iterable<Choice> _filter = IterableExtensions.<Choice>filter(_vertices, org.yakindu.sct.model.sgraph.Choice.class);
+        List<Choice> _list = IterableExtensions.<Choice>toList(_filter);
+        int _indexOf = _list.indexOf(choice);
+        final int n = _indexOf;
+        String _operator_plus = StringExtensions.operator_plus("_choice", ((Integer)n));
+        String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "_");
+        r.setSimpleName(_operator_plus_1);
+        QualifiedName _fullyQualifiedName = this.qfnProvider.getFullyQualifiedName(choice);
+        String _string = _fullyQualifiedName.toString();
+        String _replaceAll = _string.replaceAll(" ", "");
+        r.setName(_replaceAll);
+        r.setSourceElement(choice);
+        SexecFactory _sexecFactory_1 = this.sexecFactory();
+        Sequence _createSequence = _sexecFactory_1.createSequence();
+        r.setReactSequence(_createSequence);
+      }
+    }
+    return r;
+  }
+  
   private final HashMap<ArrayList<?>,Check> _createCache_createCheck = new HashMap<ArrayList<?>,Check>();
   
   public Check createCheck(final ReactionTrigger tr) {
@@ -184,19 +232,19 @@ public class FactoryExtension {
     return r;
   }
   
-  private final HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_6 = new HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction>();
+  private final HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_7 = new HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction>();
   
   public org.yakindu.sct.model.sexec.Reaction create(final Transition tr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(tr);
     org.yakindu.sct.model.sexec.Reaction r;
-    synchronized (_createCache_create_6) {
-      if (_createCache_create_6.containsKey(_cacheKey)) {
-        return _createCache_create_6.get(_cacheKey);
+    synchronized (_createCache_create_7) {
+      if (_createCache_create_7.containsKey(_cacheKey)) {
+        return _createCache_create_7.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       org.yakindu.sct.model.sexec.Reaction _createReaction = _sexecFactory.createReaction();
       r = _createReaction;
-      _createCache_create_6.put(_cacheKey, r);
+      _createCache_create_7.put(_cacheKey, r);
     }
     {
       String _id = this.sce.id(tr);
@@ -207,19 +255,19 @@ public class FactoryExtension {
     return r;
   }
   
-  private final HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_7 = new HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction>();
+  private final HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_8 = new HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction>();
   
   public org.yakindu.sct.model.sexec.Reaction create(final LocalReaction lr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(lr);
     org.yakindu.sct.model.sexec.Reaction r;
-    synchronized (_createCache_create_7) {
-      if (_createCache_create_7.containsKey(_cacheKey)) {
-        return _createCache_create_7.get(_cacheKey);
+    synchronized (_createCache_create_8) {
+      if (_createCache_create_8.containsKey(_cacheKey)) {
+        return _createCache_create_8.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       org.yakindu.sct.model.sexec.Reaction _createReaction = _sexecFactory.createReaction();
       r = _createReaction;
-      _createCache_create_7.put(_cacheKey, r);
+      _createCache_create_8.put(_cacheKey, r);
     }
     {
       String _id = this.sce.id(lr);
