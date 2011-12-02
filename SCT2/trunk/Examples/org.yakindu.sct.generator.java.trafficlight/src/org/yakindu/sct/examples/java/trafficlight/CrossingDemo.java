@@ -40,7 +40,7 @@ public class CrossingDemo {
 		final TrafficLightWaitingCycleBasedStatemachine statemachine = new TrafficLightWaitingCycleBasedStatemachine();
 
 		// create display and shell
-		Display display = new Display();
+		Display display = Display.getDefault();
 		Shell shell = new Shell(display);
 		shell.setSize(400, 400);
 		shell.setText("Traffic Light Demo");
