@@ -42,11 +42,13 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			"PedestrianRed_time_event_0", false);
 	private static final TimeEvent StreetPrepare_time_event_0 = new TimeEvent(
 			"StreetPrepare_time_event_0", false);
-	private static final TimeEvent BlinkYellow_time_event_0 = new TimeEvent(
-			"BlinkYellow_time_event_0", true);
+	private static final TimeEvent YellowOn_time_event_0 = new TimeEvent(
+			"YellowOn_time_event_0", false);
+	private static final TimeEvent YellowOff_time_event_0 = new TimeEvent(
+			"YellowOff_time_event_0", false);
 
 	public enum State {
-		On, StreetGreen, PedWaiting, WaitOn, WaitOff, StreetAttention, StreetRed, PedestrianGreen, PedestrianRed, StreetPrepare, Off, BlinkYellow,
+		On, StreetGreen, PedWaiting, WaitOn, WaitOff, StreetAttention, StreetRed, PedestrianGreen, PedestrianRed, StreetPrepare, Off, YellowOn, YellowOff,
 	};
 
 	private InterfaceTrafficLightImpl interfaceTrafficLight;
@@ -77,7 +79,8 @@ public class TrafficLightWaitingCycleBasedStatemachine
 		PedestrianGreen_time_event_0.setStatemachine(this);
 		PedestrianRed_time_event_0.setStatemachine(this);
 		StreetPrepare_time_event_0.setStatemachine(this);
-		BlinkYellow_time_event_0.setStatemachine(this);
+		YellowOn_time_event_0.setStatemachine(this);
+		YellowOff_time_event_0.setStatemachine(this);
 
 	}
 
@@ -194,11 +197,11 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			interfacePedestrian.setVarRed(false);
 			interfacePedestrian.setVarGreen(false);
 
-			getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
+			getTimerHandler().setTimer(YellowOn_time_event_0, 500,
 					cycleStartTime);
 			interfaceTrafficLight.setVarYellow(true);
 
-			activeStates.add(State.BlinkYellow);
+			activeStates.add(State.YellowOn);
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventKeypress1())) {
@@ -266,11 +269,11 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			interfacePedestrian.setVarRed(false);
 			interfacePedestrian.setVarGreen(false);
 
-			getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
+			getTimerHandler().setTimer(YellowOn_time_event_0, 500,
 					cycleStartTime);
 			interfaceTrafficLight.setVarYellow(true);
 
-			activeStates.add(State.BlinkYellow);
+			activeStates.add(State.YellowOn);
 
 		} else {
 			if (occuredEvents.contains(PedWaiting_time_event_0)) {
@@ -358,11 +361,11 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			interfacePedestrian.setVarRed(false);
 			interfacePedestrian.setVarGreen(false);
 
-			getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
+			getTimerHandler().setTimer(YellowOn_time_event_0, 500,
 					cycleStartTime);
 			interfaceTrafficLight.setVarYellow(true);
 
-			activeStates.add(State.BlinkYellow);
+			activeStates.add(State.YellowOn);
 
 		} else {
 			if (occuredEvents.contains(PedWaiting_time_event_0)) {
@@ -450,11 +453,11 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			interfacePedestrian.setVarRed(false);
 			interfacePedestrian.setVarGreen(false);
 
-			getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
+			getTimerHandler().setTimer(YellowOn_time_event_0, 500,
 					cycleStartTime);
 			interfaceTrafficLight.setVarYellow(true);
 
-			activeStates.add(State.BlinkYellow);
+			activeStates.add(State.YellowOn);
 
 		} else {
 			if (occuredEvents.contains(StreetAttention_time_event_0)) {
@@ -520,11 +523,11 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			interfacePedestrian.setVarRed(false);
 			interfacePedestrian.setVarGreen(false);
 
-			getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
+			getTimerHandler().setTimer(YellowOn_time_event_0, 500,
 					cycleStartTime);
 			interfaceTrafficLight.setVarYellow(true);
 
-			activeStates.add(State.BlinkYellow);
+			activeStates.add(State.YellowOn);
 
 		} else {
 			if (occuredEvents.contains(StreetRed_time_event_0)) {
@@ -589,11 +592,11 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			interfacePedestrian.setVarRed(false);
 			interfacePedestrian.setVarGreen(false);
 
-			getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
+			getTimerHandler().setTimer(YellowOn_time_event_0, 500,
 					cycleStartTime);
 			interfaceTrafficLight.setVarYellow(true);
 
-			activeStates.add(State.BlinkYellow);
+			activeStates.add(State.YellowOn);
 
 		} else {
 			if (occuredEvents.contains(PedestrianGreen_time_event_0)) {
@@ -658,11 +661,11 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			interfacePedestrian.setVarRed(false);
 			interfacePedestrian.setVarGreen(false);
 
-			getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
+			getTimerHandler().setTimer(YellowOn_time_event_0, 500,
 					cycleStartTime);
 			interfaceTrafficLight.setVarYellow(true);
 
-			activeStates.add(State.BlinkYellow);
+			activeStates.add(State.YellowOn);
 
 		} else {
 			if (occuredEvents.contains(PedestrianRed_time_event_0)) {
@@ -728,11 +731,11 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			interfacePedestrian.setVarRed(false);
 			interfacePedestrian.setVarGreen(false);
 
-			getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
+			getTimerHandler().setTimer(YellowOn_time_event_0, 500,
 					cycleStartTime);
 			interfaceTrafficLight.setVarYellow(true);
 
-			activeStates.add(State.BlinkYellow);
+			activeStates.add(State.YellowOn);
 
 		} else {
 			if (occuredEvents.contains(StreetPrepare_time_event_0)) {
@@ -754,11 +757,15 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactOff() {
 	}
-	private void reactBlinkYellow() {
+	private void reactYellowOn() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (activeStates.contains(State.BlinkYellow)) {
-				activeStates.remove(State.BlinkYellow);
-				getTimerHandler().resetTimer(BlinkYellow_time_event_0);
+			if (activeStates.contains(State.YellowOn)) {
+				activeStates.remove(State.YellowOn);
+				getTimerHandler().resetTimer(YellowOn_time_event_0);
+
+			} else if (activeStates.contains(State.YellowOff)) {
+				activeStates.remove(State.YellowOff);
+				getTimerHandler().resetTimer(YellowOff_time_event_0);
 
 			}
 
@@ -772,9 +779,51 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			activeStates.add(State.StreetGreen);
 
 		} else {
-			if (occuredEvents.contains(BlinkYellow_time_event_0)) {
-				interfaceTrafficLight.setVarYellow(!interfaceTrafficLight
-						.getVarYellow());
+			if (occuredEvents.contains(YellowOn_time_event_0)) {
+				activeStates.remove(State.YellowOn);
+				getTimerHandler().resetTimer(YellowOn_time_event_0);
+
+				getTimerHandler().setTimer(YellowOff_time_event_0, 500,
+						cycleStartTime);
+				interfaceTrafficLight.setVarYellow(false);
+
+				activeStates.add(State.YellowOff);
+
+			}
+
+		}
+	}
+	private void reactYellowOff() {
+		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
+			if (activeStates.contains(State.YellowOn)) {
+				activeStates.remove(State.YellowOn);
+				getTimerHandler().resetTimer(YellowOn_time_event_0);
+
+			} else if (activeStates.contains(State.YellowOff)) {
+				activeStates.remove(State.YellowOff);
+				getTimerHandler().resetTimer(YellowOff_time_event_0);
+
+			}
+
+			interfaceTrafficLight.setVarRed(false);
+			interfaceTrafficLight.setVarYellow(false);
+			interfaceTrafficLight.setVarGreen(true);
+			interfacePedestrian.setVarRed(true);
+			interfacePedestrian.setVarGreen(false);
+			interfacePedestrian.setVarRequest(false);
+
+			activeStates.add(State.StreetGreen);
+
+		} else {
+			if (occuredEvents.contains(YellowOff_time_event_0)) {
+				activeStates.remove(State.YellowOff);
+				getTimerHandler().resetTimer(YellowOff_time_event_0);
+
+				getTimerHandler().setTimer(YellowOn_time_event_0, 500,
+						cycleStartTime);
+				interfaceTrafficLight.setVarYellow(true);
+
+				activeStates.add(State.YellowOn);
 
 			}
 
@@ -818,8 +867,11 @@ public class TrafficLightWaitingCycleBasedStatemachine
 				case Off :
 					reactOff();
 					break;
-				case BlinkYellow :
-					reactBlinkYellow();
+				case YellowOn :
+					reactYellowOn();
+					break;
+				case YellowOff :
+					reactYellowOff();
 					break;
 				default :
 					// no state found
