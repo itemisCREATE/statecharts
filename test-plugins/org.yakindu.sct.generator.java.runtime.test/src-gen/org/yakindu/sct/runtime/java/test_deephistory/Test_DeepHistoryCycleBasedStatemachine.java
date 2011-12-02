@@ -64,179 +64,47 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	}
 
 	public void enter() {
-		enterSequenceState1();
-	}
-
-	private boolean conditionState1Tr0() {
-		return occuredEvents.contains(defaultInterface.getEventEvent1());
-	}
-	private boolean conditionState2Tr0() {
-		return occuredEvents.contains(defaultInterface.getEventEvent2());
-	}
-	private boolean conditionState3Tr0() {
-		return occuredEvents.contains(defaultInterface.getEventEvent3());
-	}
-	private boolean conditionState4Tr0() {
-		return occuredEvents.contains(defaultInterface.getEventEvent4());
-	}
-	private boolean conditionState6Tr0() {
-		return occuredEvents.contains(defaultInterface.getEventEvent5());
-	}
-	private boolean conditionState7Tr0() {
-		return occuredEvents.contains(defaultInterface.getEventEvent6());
-	}
-	private boolean conditionState8Tr0() {
-		return occuredEvents.contains(defaultInterface.getEventEvent7());
-	}
-	private boolean conditionState9Tr0() {
-		return occuredEvents.contains(defaultInterface.getEventEvent8());
-	}
-	private void actionsState1Tr0() {
-		exitSequenceState1();
-		enterSequenceState2();
-
-	}
-	private void actionsState2Tr0() {
-		exitSequenceState2();
-		enterSequenceState1();
-
-	}
-	private void actionsState3Tr0() {
-		exitSequenceState3();
-		enterSequenceState4();
-
-	}
-	private void actionsState4Tr0() {
-		exitSequenceState4();
-		enterSequenceState5();
-
-	}
-	private void actionsState6Tr0() {
-		exitSequenceState6();
-		enterSequenceState7();
-
-	}
-	private void actionsState7Tr0() {
-		exitSequenceState7();
-		enterSequenceState6();
-
-	}
-	private void actionsState8Tr0() {
-		exitSequenceState8();
-		enterSequenceState9();
-
-	}
-	private void actionsState9Tr0() {
-		exitSequenceState9();
-		enterSequenceState8();
-
-	}
-
-	private void enterSequenceState1() {
 		activeStates.add(State.State1);
+
 	}
 
-	private void enterSequenceState2() {
-		enterSequenceState3();
-	}
-
-	private void enterSequenceState3() {
-		activeStates.add(State.State3);
-	}
-
-	private void enterSequenceState4() {
-		enterSequenceState6();
-	}
-
-	private void enterSequenceState6() {
-		activeStates.add(State.State6);
-	}
-
-	private void enterSequenceState7() {
-		enterSequenceState8();
-	}
-
-	private void enterSequenceState8() {
-		activeStates.add(State.State8);
-	}
-
-	private void enterSequenceState9() {
-		activeStates.add(State.State9);
-	}
-
-	private void enterSequenceState5() {
-		activeStates.add(State.State5);
-	}
-	private void exitSequenceState1() {
-		activeStates.remove(State.State1);
-	}
-	private void exitSequenceState2() {
-		if (activeStates.contains(State.State3)) {
-			exitSequenceState3();
-
-		} else if (activeStates.contains(State.State6)) {
-			exitSequenceState6();
-
-		} else if (activeStates.contains(State.State8)) {
-			exitSequenceState8();
-
-		} else if (activeStates.contains(State.State9)) {
-			exitSequenceState9();
-
-		} else if (activeStates.contains(State.State5)) {
-			exitSequenceState5();
-
-		}
-	}
-	private void exitSequenceState3() {
-		activeStates.remove(State.State3);
-	}
-	private void exitSequenceState4() {
-		if (activeStates.contains(State.State6)) {
-			exitSequenceState6();
-
-		} else if (activeStates.contains(State.State8)) {
-			exitSequenceState8();
-
-		} else if (activeStates.contains(State.State9)) {
-			exitSequenceState9();
-
-		}
-	}
-	private void exitSequenceState6() {
-		activeStates.remove(State.State6);
-	}
-	private void exitSequenceState7() {
-		if (activeStates.contains(State.State8)) {
-			exitSequenceState8();
-
-		} else if (activeStates.contains(State.State9)) {
-			exitSequenceState9();
-
-		}
-	}
-	private void exitSequenceState8() {
-		activeStates.remove(State.State8);
-	}
-	private void exitSequenceState9() {
-		activeStates.remove(State.State9);
-	}
-	private void exitSequenceState5() {
-		activeStates.remove(State.State5);
-	}
 	private void reactState1() {
-		if (conditionState1Tr0()) {
-			actionsState1Tr0();
+		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
+			activeStates.remove(State.State1);
+
+			activeStates.add(State.State3);
+
 		}
 	}
 	private void reactState2() {
 	}
 	private void reactState3() {
-		if (conditionState2Tr0()) {
-			actionsState2Tr0();
+		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
+			if (activeStates.contains(State.State3)) {
+				activeStates.remove(State.State3);
+
+			} else if (activeStates.contains(State.State6)) {
+				activeStates.remove(State.State6);
+
+			} else if (activeStates.contains(State.State8)) {
+				activeStates.remove(State.State8);
+
+			} else if (activeStates.contains(State.State9)) {
+				activeStates.remove(State.State9);
+
+			} else if (activeStates.contains(State.State5)) {
+				activeStates.remove(State.State5);
+
+			}
+
+			activeStates.add(State.State1);
+
 		} else {
-			if (conditionState3Tr0()) {
-				actionsState3Tr0();
+			if (occuredEvents.contains(defaultInterface.getEventEvent3())) {
+				activeStates.remove(State.State3);
+
+				activeStates.add(State.State6);
+
 			}
 
 		}
@@ -244,14 +112,47 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	private void reactState4() {
 	}
 	private void reactState6() {
-		if (conditionState2Tr0()) {
-			actionsState2Tr0();
+		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
+			if (activeStates.contains(State.State3)) {
+				activeStates.remove(State.State3);
+
+			} else if (activeStates.contains(State.State6)) {
+				activeStates.remove(State.State6);
+
+			} else if (activeStates.contains(State.State8)) {
+				activeStates.remove(State.State8);
+
+			} else if (activeStates.contains(State.State9)) {
+				activeStates.remove(State.State9);
+
+			} else if (activeStates.contains(State.State5)) {
+				activeStates.remove(State.State5);
+
+			}
+
+			activeStates.add(State.State1);
+
 		} else {
-			if (conditionState4Tr0()) {
-				actionsState4Tr0();
+			if (occuredEvents.contains(defaultInterface.getEventEvent4())) {
+				if (activeStates.contains(State.State6)) {
+					activeStates.remove(State.State6);
+
+				} else if (activeStates.contains(State.State8)) {
+					activeStates.remove(State.State8);
+
+				} else if (activeStates.contains(State.State9)) {
+					activeStates.remove(State.State9);
+
+				}
+
+				activeStates.add(State.State5);
+
 			} else {
-				if (conditionState6Tr0()) {
-					actionsState6Tr0();
+				if (occuredEvents.contains(defaultInterface.getEventEvent5())) {
+					activeStates.remove(State.State6);
+
+					activeStates.add(State.State8);
+
 				}
 
 			}
@@ -261,17 +162,60 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	private void reactState7() {
 	}
 	private void reactState8() {
-		if (conditionState2Tr0()) {
-			actionsState2Tr0();
+		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
+			if (activeStates.contains(State.State3)) {
+				activeStates.remove(State.State3);
+
+			} else if (activeStates.contains(State.State6)) {
+				activeStates.remove(State.State6);
+
+			} else if (activeStates.contains(State.State8)) {
+				activeStates.remove(State.State8);
+
+			} else if (activeStates.contains(State.State9)) {
+				activeStates.remove(State.State9);
+
+			} else if (activeStates.contains(State.State5)) {
+				activeStates.remove(State.State5);
+
+			}
+
+			activeStates.add(State.State1);
+
 		} else {
-			if (conditionState4Tr0()) {
-				actionsState4Tr0();
+			if (occuredEvents.contains(defaultInterface.getEventEvent4())) {
+				if (activeStates.contains(State.State6)) {
+					activeStates.remove(State.State6);
+
+				} else if (activeStates.contains(State.State8)) {
+					activeStates.remove(State.State8);
+
+				} else if (activeStates.contains(State.State9)) {
+					activeStates.remove(State.State9);
+
+				}
+
+				activeStates.add(State.State5);
+
 			} else {
-				if (conditionState7Tr0()) {
-					actionsState7Tr0();
+				if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
+					if (activeStates.contains(State.State8)) {
+						activeStates.remove(State.State8);
+
+					} else if (activeStates.contains(State.State9)) {
+						activeStates.remove(State.State9);
+
+					}
+
+					activeStates.add(State.State6);
+
 				} else {
-					if (conditionState8Tr0()) {
-						actionsState8Tr0();
+					if (occuredEvents.contains(defaultInterface
+							.getEventEvent7())) {
+						activeStates.remove(State.State8);
+
+						activeStates.add(State.State9);
+
 					}
 
 				}
@@ -281,17 +225,60 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 		}
 	}
 	private void reactState9() {
-		if (conditionState2Tr0()) {
-			actionsState2Tr0();
+		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
+			if (activeStates.contains(State.State3)) {
+				activeStates.remove(State.State3);
+
+			} else if (activeStates.contains(State.State6)) {
+				activeStates.remove(State.State6);
+
+			} else if (activeStates.contains(State.State8)) {
+				activeStates.remove(State.State8);
+
+			} else if (activeStates.contains(State.State9)) {
+				activeStates.remove(State.State9);
+
+			} else if (activeStates.contains(State.State5)) {
+				activeStates.remove(State.State5);
+
+			}
+
+			activeStates.add(State.State1);
+
 		} else {
-			if (conditionState4Tr0()) {
-				actionsState4Tr0();
+			if (occuredEvents.contains(defaultInterface.getEventEvent4())) {
+				if (activeStates.contains(State.State6)) {
+					activeStates.remove(State.State6);
+
+				} else if (activeStates.contains(State.State8)) {
+					activeStates.remove(State.State8);
+
+				} else if (activeStates.contains(State.State9)) {
+					activeStates.remove(State.State9);
+
+				}
+
+				activeStates.add(State.State5);
+
 			} else {
-				if (conditionState7Tr0()) {
-					actionsState7Tr0();
+				if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
+					if (activeStates.contains(State.State8)) {
+						activeStates.remove(State.State8);
+
+					} else if (activeStates.contains(State.State9)) {
+						activeStates.remove(State.State9);
+
+					}
+
+					activeStates.add(State.State6);
+
 				} else {
-					if (conditionState9Tr0()) {
-						actionsState9Tr0();
+					if (occuredEvents.contains(defaultInterface
+							.getEventEvent8())) {
+						activeStates.remove(State.State9);
+
+						activeStates.add(State.State8);
+
 					}
 
 				}
@@ -301,8 +288,26 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 		}
 	}
 	private void reactState5() {
-		if (conditionState2Tr0()) {
-			actionsState2Tr0();
+		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
+			if (activeStates.contains(State.State3)) {
+				activeStates.remove(State.State3);
+
+			} else if (activeStates.contains(State.State6)) {
+				activeStates.remove(State.State6);
+
+			} else if (activeStates.contains(State.State8)) {
+				activeStates.remove(State.State8);
+
+			} else if (activeStates.contains(State.State9)) {
+				activeStates.remove(State.State9);
+
+			} else if (activeStates.contains(State.State5)) {
+				activeStates.remove(State.State5);
+
+			}
+
+			activeStates.add(State.State1);
+
 		} else {
 
 		}
