@@ -12,6 +12,8 @@ package org.yakindu.sct.simulation.runtime.sgraph;
 
 public class StatechartRuntimeException extends RuntimeException {
 
+	private static final long serialVersionUID = 1L;
+
 	public StatechartRuntimeException() {
 	}
 

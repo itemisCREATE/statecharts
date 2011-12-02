@@ -17,6 +17,7 @@ import com.google.inject.Inject;
 /**
  * Encapsulates the model changes of a rename refactoring.  
  */
+@SuppressWarnings("all")
 public class SGenRenameStrategy extends AbstractJvmModelRenameStrategy {
 
 	public static class Provider extends DefaultRenameStrategy.Provider {
