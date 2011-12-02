@@ -29,11 +29,15 @@
           id="yakindu::xpand"
           name="YAKINDU Generic Xpand Generator">
     </SCTGenerator>
-    <SCTGenerator
+ </extension>
+ <extension
+       point="org.yakindu.sct.generator.core.generator">
+   <SCTGenerator
           class="org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator"
           description="Generate Code using Xpand Templates"
           id="yakindu::generic"
           name="YAKINDU Generic Java Generator">
     </SCTGenerator>
  </extension>
+ 
 </plugin>

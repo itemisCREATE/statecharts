@@ -1,6 +1,5 @@
 package org.yakindu.sct.model.sexec.transformation;
 
-import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.yakindu.sct.model.sgraph.naming.SGraphNameProvider;
 

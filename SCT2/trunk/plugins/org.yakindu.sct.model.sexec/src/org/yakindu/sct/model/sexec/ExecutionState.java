@@ -6,7 +6,6 @@
  */
 package org.yakindu.sct.model.sexec;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->

@@ -16,7 +16,7 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternal
 import com.google.inject.Inject;
 
 import org.yakindu.sct.generator.genmodel.services.SGenGrammarAccess;
-
+@SuppressWarnings("all")
 public class SGenParser extends AbstractContentAssistParser {
 	
 	@Inject
