@@ -73,6 +73,13 @@ public class FlowOptimizer {
     return __inlineExitSequences;
   }
   
+  private boolean _inlineChoices;
+  
+  public boolean inlineChoices(final boolean b) {
+    boolean __inlineChoices = this._inlineChoices = b;
+    return __inlineChoices;
+  }
+  
   public ExecutionFlow transform(final ExecutionFlow flow) {
     ExecutionFlow _xblockexpression = null;
     {
@@ -126,41 +133,45 @@ public class FlowOptimizer {
           };
         IterableExtensions.<ExecutionState>forEach(_states_3, _function_3);
       }
-      EList<ExecutionNode> _nodes = flow.getNodes();
-      final Function1<ExecutionNode,ExecutionNode> _function_4 = new Function1<ExecutionNode,ExecutionNode>() {
-          public ExecutionNode apply(final ExecutionNode node) {
-            ExecutionNode _xblockexpression_1 = null;
-            {
-              EList<Reaction> _reactions = node.getReactions();
-              final Function1<Reaction,Step> _function_5 = new Function1<Reaction,Step>() {
-                  public Step apply(final Reaction r) {
-                    Step _xblockexpression_2 = null;
-                    {
-                      Check _check = r.getCheck();
-                      FlowOptimizer.this.inline(_check);
-                      Step _effect = r.getEffect();
-                      Step _inline_4 = FlowOptimizer.this.inline(_effect);
-                      _xblockexpression_2 = (_inline_4);
-                    }
-                    return _xblockexpression_2;
-                  }
-                };
-              IterableExtensions.<Reaction>forEach(_reactions, _function_5);
-              _xblockexpression_1 = (node);
-            }
-            return _xblockexpression_1;
-          }
-        };
-      IterableExtensions.<ExecutionNode>forEach(_nodes, _function_4);
-      EList<ExecutionNode> _nodes_1 = flow.getNodes();
-      final Function1<ExecutionNode,Step> _function_6 = new Function1<ExecutionNode,Step>() {
-          public Step apply(final ExecutionNode node_1) {
-            Sequence _reactSequence = node_1.getReactSequence();
-            Step _inline_5 = FlowOptimizer.this.inline(_reactSequence);
-            return _inline_5;
-          }
-        };
-      IterableExtensions.<ExecutionNode>forEach(_nodes_1, _function_6);
+      if (this._inlineChoices) {
+        {
+          EList<ExecutionNode> _nodes = flow.getNodes();
+          final Function1<ExecutionNode,ExecutionNode> _function_4 = new Function1<ExecutionNode,ExecutionNode>() {
+              public ExecutionNode apply(final ExecutionNode node) {
+                ExecutionNode _xblockexpression_1 = null;
+                {
+                  EList<Reaction> _reactions = node.getReactions();
+                  final Function1<Reaction,Step> _function_5 = new Function1<Reaction,Step>() {
+                      public Step apply(final Reaction r) {
+                        Step _xblockexpression_2 = null;
+                        {
+                          Check _check = r.getCheck();
+                          FlowOptimizer.this.inline(_check);
+                          Step _effect = r.getEffect();
+                          Step _inline_4 = FlowOptimizer.this.inline(_effect);
+                          _xblockexpression_2 = (_inline_4);
+                        }
+                        return _xblockexpression_2;
+                      }
+                    };
+                  IterableExtensions.<Reaction>forEach(_reactions, _function_5);
+                  _xblockexpression_1 = (node);
+                }
+                return _xblockexpression_1;
+              }
+            };
+          IterableExtensions.<ExecutionNode>forEach(_nodes, _function_4);
+          EList<ExecutionNode> _nodes_1 = flow.getNodes();
+          final Function1<ExecutionNode,Step> _function_6 = new Function1<ExecutionNode,Step>() {
+              public Step apply(final ExecutionNode node_1) {
+                Sequence _reactSequence = node_1.getReactSequence();
+                Step _inline_5 = FlowOptimizer.this.inline(_reactSequence);
+                return _inline_5;
+              }
+            };
+          IterableExtensions.<ExecutionNode>forEach(_nodes_1, _function_6);
+        }
+      }
       _xblockexpression = (flow);
     }
     return _xblockexpression;
