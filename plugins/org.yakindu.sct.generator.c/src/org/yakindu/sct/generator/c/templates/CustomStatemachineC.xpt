@@ -17,7 +17,7 @@ Templates for the main statechart c file.
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
 «DEFINE ActionCode FOR Step»
-// ActionCode for Step not defined
+/* ActionCode for Step not defined */
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR StateSwitch»
@@ -102,14 +102,14 @@ else {
 ((StatemachineBase*)handle)->state[0] = last_state;
 «ENDDEFINE»
 
-«DEFINE ConditionMethodsProto FOR ExecutionNode»
+«DEFINE ConditionMethodsProto FOR ExecutionNode -»
   «FOREACH reactions.select(e|e.check.refs.size > 0) AS r -»
   «IF r.check != null -»
 static boolean «r.check.functionName()»(«StName()»* handle);
   «ENDIF -»«ENDFOREACH -»
 «ENDDEFINE»
 
-«DEFINE ConditionMethodsImplement FOR ExecutionNode»
+«DEFINE ConditionMethodsImplement FOR ExecutionNode -»
   «FOREACH reactions.select(e|e.check.refs.size > 0) AS r -»
   «IF r.check != null -»
 boolean «r.check.functionName()»(«StName()»* handle) {
@@ -120,16 +120,16 @@ boolean «r.check.functionName()»(«StName()»* handle) {
   return retValue;
 }
   «ENDIF -»
-  «ENDFOREACH»
+  «ENDFOREACH -»
 «ENDDEFINE»
 
-«DEFINE StatementMethodsProto FOR ExecutionNode»
+«DEFINE StatementMethodsProto FOR ExecutionNode -»
   «FOREACH reactions.select(e|e.effect.caller.size > 0) AS r -»
 static void «r.effect.functionName()»(«StName()»* handle);
  «ENDFOREACH -»
 «ENDDEFINE»
 
-«DEFINE StatementMethodsImplement FOR ExecutionNode»
+«DEFINE StatementMethodsImplement FOR ExecutionNode -»
   «FOREACH reactions.select(e|e.effect.caller.size > 0) AS r -»
 void «r.effect.functionName()»(«StName()»* handle) {   
   «EXPAND ActionCode FOR r.effect -»
@@ -141,13 +141,13 @@ void «r.effect.functionName()»(«StName()»* handle) {
 «EXPAND ActionCode FOREACH this.steps»
 «ENDDEFINE»
 
-«DEFINE ReactMethodsProto FOR ExecutionNode»
+«DEFINE ReactMethodsProto FOR ExecutionNode -»
 «IF (ExecutionState.isInstance(this) || this.reactSequence.caller.size > 0) -»
 static void «stName()»_react_«this.simpleName»(«StName()»* handle);
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE ReactMethodsImplement FOR ExecutionNode»
+«DEFINE ReactMethodsImplement FOR ExecutionNode -»
 «IF (ExecutionState.isInstance(this) || this.reactSequence.caller.size > 0) -»
 void «stName()»_react_«this.simpleName»(«StName()»* handle)
 {
@@ -156,66 +156,66 @@ void «stName()»_react_«this.simpleName»(«StName()»* handle)
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE EnterMethodProto FOR ExecutionState»
+«DEFINE EnterMethodProto FOR ExecutionState -»
 «IF this.entryAction != null && entryAction.caller.size > 0 -»
 static void «this.entryAction.entryActionFunctionName()»(«StName()»* handle);
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE EnterMethodImplement FOR ExecutionState»
+«DEFINE EnterMethodImplement FOR ExecutionState -»
 «IF this.entryAction != null && entryAction.caller.size > 0»
 void «this.entryAction.entryActionFunctionName()»(«StName()»* handle)
 {
 «EXPAND ActionCode FOR this.entryAction»
 }
-«ENDIF»
+«ENDIF -»
 «ENDDEFINE»
 
-«DEFINE ExitMethodProto FOR ExecutionState»
+«DEFINE ExitMethodProto FOR ExecutionState -»
 «IF this.exitAction != null && exitAction.caller.size > 0 -»
 static void «this.exitAction.exitActionFunctionName()»(«StName()»* handle);
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE ExitMethodImplement FOR ExecutionState»
+«DEFINE ExitMethodImplement FOR ExecutionState -»
 «IF this.exitAction != null && exitAction.caller.size > 0 »
 void «this.exitAction.exitActionFunctionName()»(«StName()»* handle)
 {
 «EXPAND ActionCode FOR this.exitAction»
 }
-«ENDIF»
+«ENDIF -»
 «ENDDEFINE»
 
 
 
-«DEFINE EnterSequenceProto FOR ExecutionState»
+«DEFINE EnterSequenceProto FOR ExecutionState -»
 «IF this.enterSequence != null && enterSequence.caller.size > 0 -»
 static void «this.enterSequence.enterSequenceFunctionName()»(«StName()»* handle);
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE EnterSequenceImplement FOR ExecutionState»
+«DEFINE EnterSequenceImplement FOR ExecutionState -»
 «IF this.enterSequence != null && enterSequence .caller.size > 0 »
 void «this.enterSequence.enterSequenceFunctionName()»(«StName()»* handle)
 {
 «EXPAND ActionCode FOR this.enterSequence»
 }
-«ENDIF»
+«ENDIF -»
 «ENDDEFINE»
 
-«DEFINE ExitSequenceProto FOR ExecutionState»
+«DEFINE ExitSequenceProto FOR ExecutionState -»
 «IF this.exitSequence != null && exitSequence.caller.size > 0 -»
 static void «this.exitSequence.exitSequenceFunctionName()»(«StName()»* handle);
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE ExitSequenceImplement FOR ExecutionState»
+«DEFINE ExitSequenceImplement FOR ExecutionState -»
 «IF this.exitSequence != null && exitSequence.caller.size > 0 -»
 void «this.exitSequence.exitSequenceFunctionName()»(«StName()»* handle)
 {
 «EXPAND ActionCode FOR this.exitSequence»
 }
-«ENDIF»
+«ENDIF -»
 «ENDDEFINE»
 
 
@@ -224,27 +224,27 @@ void «this.exitSequence.exitSequenceFunctionName()»(«StName()»* handle)
 «FILE StName()+'.c'»
 #include "«StName()».h"
 
-«EXPAND ConditionMethodsProto FOREACH this.states»
-«EXPAND ConditionMethodsProto FOREACH this.nodes»
-«EXPAND StatementMethodsProto FOREACH this.states»
-«EXPAND StatementMethodsProto FOREACH this.nodes»
-«EXPAND EnterMethodProto FOREACH this.states»
-«EXPAND ExitMethodProto FOREACH this.states»
-«EXPAND EnterSequenceProto FOREACH this.states»
-«EXPAND ExitSequenceProto FOREACH this.states»
-«EXPAND ReactMethodsProto FOREACH this.states»
-«EXPAND ReactMethodsProto FOREACH this.nodes»
+«EXPAND ConditionMethodsProto FOREACH this.states -»
+«EXPAND ConditionMethodsProto FOREACH this.nodes -»
+«EXPAND StatementMethodsProto FOREACH this.states -»
+«EXPAND StatementMethodsProto FOREACH this.nodes -»
+«EXPAND EnterMethodProto FOREACH this.states -»
+«EXPAND ExitMethodProto FOREACH this.states -»
+«EXPAND EnterSequenceProto FOREACH this.states -»
+«EXPAND ExitSequenceProto FOREACH this.states -»
+«EXPAND ReactMethodsProto FOREACH this.states -»
+«EXPAND ReactMethodsProto FOREACH this.nodes -»
 
-«EXPAND ConditionMethodsImplement FOREACH this.states»
-«EXPAND ConditionMethodsImplement FOREACH this.nodes»
-«EXPAND StatementMethodsImplement FOREACH this.states»
-«EXPAND StatementMethodsImplement FOREACH this.nodes»
-«EXPAND EnterMethodImplement FOREACH this.states»
-«EXPAND ExitMethodImplement FOREACH this.states»
-«EXPAND EnterSequenceImplement FOREACH this.states»
-«EXPAND ExitSequenceImplement FOREACH this.states»
-«EXPAND ReactMethodsImplement FOREACH this.states»
-«EXPAND ReactMethodsImplement FOREACH this.nodes»
+«EXPAND ConditionMethodsImplement FOREACH this.states -»
+«EXPAND ConditionMethodsImplement FOREACH this.nodes -»
+«EXPAND StatementMethodsImplement FOREACH this.states -»
+«EXPAND StatementMethodsImplement FOREACH this.nodes -»
+«EXPAND EnterMethodImplement FOREACH this.states -»
+«EXPAND ExitMethodImplement FOREACH this.states -»
+«EXPAND EnterSequenceImplement FOREACH this.states -»
+«EXPAND ExitSequenceImplement FOREACH this.states -»
+«EXPAND ReactMethodsImplement FOREACH this.states -»
+«EXPAND ReactMethodsImplement FOREACH this.nodes -»
 
 «REM»
 boolean «stName()»_is_in(«StName()»* handle, States state)
@@ -301,8 +301,7 @@ extern «interface.interfaceClassName()»* «stName()»_get_«interface.interfaceObje
 void «stName()»_exit(«StName()»* handle)
 {
 	statemachine_cy_exit(&handle->base);
-//	variableData_exit(&handle->variableData);
-
+«REM»	variableData_exit(&handle->variableData); «ENDREM»
 }
 
 void «stName()»_runCycle(«StName()»* handle)
