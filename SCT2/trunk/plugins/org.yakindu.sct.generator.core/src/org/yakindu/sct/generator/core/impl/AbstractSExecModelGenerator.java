@@ -116,15 +116,16 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 		ExecutionFlow flow = sequencer.transform(statechart);
 		Assert.isNotNull(flow, "Error creation ExecutionFlow");
 
-		FeatureConfiguration optimizeConfig = entry.getFeatureConfiguration(OPTIMIZE_FEATURE);
+		FeatureConfiguration optimizeConfig = entry.getFeatureConfiguration(FUNCTION_INLINING_FEATURE);
 		
 		FlowOptimizer optimizer = injector.getInstance(FlowOptimizer.class);
 		
-		optimizer.inlineReactions( getBoolValue(optimizeConfig, OPTIMIZE_FEATURE_INLINE_REACTIONS, false) );
-		optimizer.inlineExitActions( getBoolValue(optimizeConfig, OPTIMIZE_FEATURE_INLINE_EXIT_ACTIONS, false) );
-		optimizer.inlineEntryActions( getBoolValue(optimizeConfig, OPTIMIZE_FEATURE_INLINE_ENTRY_ACTIONS, false) );
-		optimizer.inlineEnterSequences( getBoolValue(optimizeConfig, OPTIMIZE_FEATURE_INLINE_ENTER_SEQUENCES, false) );
-		optimizer.inlineExitSequences( getBoolValue(optimizeConfig, OPTIMIZE_FEATURE_INLINE_EXIT_SEQUENCES, false) );
+		optimizer.inlineReactions( getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_REACTIONS, true) );
+		optimizer.inlineExitActions( getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS, true) );
+		optimizer.inlineEntryActions( getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS, true) );
+		optimizer.inlineEnterSequences( getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_ENTER_SEQUENCES, true) );
+		optimizer.inlineExitSequences( getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES, true) );
+		optimizer.inlineChoices( getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_CHOICES, true) );
 		
 		flow = optimizer.transform(flow);
 

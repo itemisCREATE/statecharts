@@ -10,11 +10,12 @@
   <types name="licenseHeader" optional="true">
     <parameters name="licenseText"/>
   </types>
-  <types name="Optimize" optional="true">
+  <types name="FunctionInlining" optional="true">
     <parameters name="inlineReactions" optional="true" parameterType="BOOLEAN"/>
     <parameters name="inlineEntryActions" optional="true" parameterType="BOOLEAN"/>
     <parameters name="inlineExitActions" optional="true" parameterType="BOOLEAN"/>
     <parameters name="inlineEnterSequences" optional="true" parameterType="BOOLEAN"/>
     <parameters name="inlineExitSequences" optional="true" parameterType="BOOLEAN"/>
+    <parameters name="inlineChoices" optional="true" parameterType="BOOLEAN"/>
   </types>
 </sgen:FeatureTypeLibrary>

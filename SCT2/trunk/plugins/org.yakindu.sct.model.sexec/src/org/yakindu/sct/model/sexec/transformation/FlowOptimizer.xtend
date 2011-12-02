@@ -30,6 +30,7 @@ class FlowOptimizer {
 	boolean _inlineExitActions      def inlineExitActions(boolean b)    {_inlineExitActions = b}
 	boolean _inlineEnterSequences   def inlineEnterSequences(boolean b) {_inlineEnterSequences = b}
 	boolean _inlineExitSequences    def inlineExitSequences(boolean b)  {_inlineExitSequences = b}
+	boolean _inlineChoices          def inlineChoices(boolean b)        {_inlineChoices = b}
 	
 	
 	
@@ -43,10 +44,13 @@ class FlowOptimizer {
 		if (_inlineExitActions)   flow.states.forEach( state | state.exitAction.inline )
 		if (_inlineEnterSequences) flow.states.forEach( state | state.enterSequence.inline )
 		if (_inlineExitSequences)  flow.states.forEach( state | state.exitSequence.inline )
+
 				
-		flow.nodes.forEach( node | { node.reactions.forEach( r | { r.check.inline r.effect.inline }) node })
-		flow.nodes.forEach( node | node.reactSequence.inline )
-		
+		if (_inlineChoices) {
+			flow.nodes.forEach( node | { node.reactions.forEach( r | { r.check.inline r.effect.inline }) node })
+			flow.nodes.forEach( node | node.reactSequence.inline )
+		}
+
 		flow
 	}
 	
