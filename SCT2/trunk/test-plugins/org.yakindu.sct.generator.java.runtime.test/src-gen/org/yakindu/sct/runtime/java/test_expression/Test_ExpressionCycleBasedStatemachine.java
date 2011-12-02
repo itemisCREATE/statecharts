@@ -70,84 +70,50 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 	}
 
 	public void enter() {
-		enterSequenceState1();
-	}
-
-	private boolean conditionState1Tr0() {
-		return (occuredEvents.contains(defaultInterface.getEventEvent1()) && ((interfaceOther
-				.getVarVar1() == true) || (defaultInterface.getVarVar5() == false)));
-	}
-	private boolean conditionState2Tr0() {
-		return (occuredEvents.contains(defaultInterface.getEventEvent1()) && (defaultInterface
-				.getVarVar3() > 0));
-	}
-	private boolean conditionState2Lr2() {
-		return true;
-	}
-	private void actionsState1Tr0() {
-		exitSequenceState1();
-		interfaceOther.setVarVar1(false);
-
-		enterSequenceState2();
-
-	}
-	private void actionsState2Tr0() {
-		exitSequenceState2();
-		defaultInterface.setVarVar5(true);
-
-		enterSequenceState1();
-
-	}
-	private void actionsState2Lr2() {
-		defaultInterface.setVarVar1(defaultInterface.getVarVar1() + (1));
-
-	}
-	private void entryActionState1() {
 		defaultInterface.setVarVar3(defaultInterface.getVarVar3()
 				+ ((defaultInterface.getVarVar2() * defaultInterface
 						.getVarVar3())));
 
-	}
-	private void entryActionState2() {
-		defaultInterface.setVarVar3(defaultInterface.getVarVar3() / (5));
-
-		defaultInterface.setVarVar1(defaultInterface.getVarVar1() + (1));
-
-	}
-	private void exitActionState1() {
-		defaultInterface.setVarVar2(1);
-
-		defaultInterface.setVarVar4(22.3);
-
-	}
-
-	private void enterSequenceState1() {
-		entryActionState1();
 		activeStates.add(State.State1);
+
 	}
 
-	private void enterSequenceState2() {
-		entryActionState2();
-		activeStates.add(State.State2);
-	}
-	private void exitSequenceState1() {
-		activeStates.remove(State.State1);
-		exitActionState1();
-	}
-	private void exitSequenceState2() {
-		activeStates.remove(State.State2);
-	}
 	private void reactState1() {
-		if (conditionState1Tr0()) {
-			actionsState1Tr0();
+		if ((occuredEvents.contains(defaultInterface.getEventEvent1()) && ((interfaceOther
+				.getVarVar1() == true) || (defaultInterface.getVarVar5() == false)))) {
+			activeStates.remove(State.State1);
+			defaultInterface.setVarVar2(1);
+
+			defaultInterface.setVarVar4(22.3);
+
+			interfaceOther.setVarVar1(false);
+
+			defaultInterface.setVarVar3(defaultInterface.getVarVar3() / (5));
+
+			defaultInterface.setVarVar1(defaultInterface.getVarVar1() + (1));
+
+			activeStates.add(State.State2);
+
 		}
 	}
 	private void reactState2() {
-		if (conditionState2Tr0()) {
-			actionsState2Tr0();
+		if ((occuredEvents.contains(defaultInterface.getEventEvent1()) && (defaultInterface
+				.getVarVar3() > 0))) {
+			activeStates.remove(State.State2);
+
+			defaultInterface.setVarVar5(true);
+
+			defaultInterface.setVarVar3(defaultInterface.getVarVar3()
+					+ ((defaultInterface.getVarVar2() * defaultInterface
+							.getVarVar3())));
+
+			activeStates.add(State.State1);
+
 		} else {
-			if (conditionState2Lr2()) {
-				actionsState2Lr2();
+			if (true) {
+				defaultInterface
+						.setVarVar1(defaultInterface.getVarVar1() + (1));
+
 			}
 
 		}

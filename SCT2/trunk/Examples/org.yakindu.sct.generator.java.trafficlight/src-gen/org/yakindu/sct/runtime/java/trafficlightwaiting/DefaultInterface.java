@@ -14,6 +14,5 @@ public interface DefaultInterface {
 
 	public void raiseKeypress1();
 	public void raiseKeypress2();
-	public void raiseKeypress3();
 
 }

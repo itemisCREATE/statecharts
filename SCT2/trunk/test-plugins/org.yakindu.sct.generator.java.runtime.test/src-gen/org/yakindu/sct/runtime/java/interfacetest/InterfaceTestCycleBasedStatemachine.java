@@ -76,129 +76,63 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 	}
 
 	public void enter() {
-		enterSequenceState1();
-	}
-
-	private boolean conditionState1Tr0() {
-		return (occuredEvents.contains(defaultInterface.getEventEvent1()) && (defaultInterface
-				.getVarVar2() > 0));
-	}
-	private boolean conditionState1Tr1() {
-		return (occuredEvents.contains(interfaceOther.getEventEvent3()) && (defaultInterface
-				.getVarVar3() == 1));
-	}
-	private boolean conditionState1Tr2() {
-		return (occuredEvents.contains(interfaceThird.getEventEvent5()) && (defaultInterface
-				.getVarVar1() == true));
-	}
-	private boolean conditionState2Tr0() {
-		return occuredEvents.contains(defaultInterface.getEventEvent1());
-	}
-	private boolean conditionState3Tr0() {
-		return occuredEvents.contains(interfaceOther.getEventEvent3());
-	}
-	private boolean conditionState4Tr0() {
-		return occuredEvents.contains(interfaceThird.getEventEvent5());
-	}
-	private void actionsState1Tr0() {
-		exitSequenceState1();
-		enterSequenceState2();
-
-	}
-	private void actionsState1Tr1() {
-		exitSequenceState1();
-		enterSequenceState3();
-
-	}
-	private void actionsState1Tr2() {
-		exitSequenceState1();
-		enterSequenceState4();
-
-	}
-	private void actionsState2Tr0() {
-		exitSequenceState2();
-		enterSequenceState1();
-
-	}
-	private void actionsState3Tr0() {
-		exitSequenceState3();
-		enterSequenceState1();
-
-	}
-	private void actionsState4Tr0() {
-		exitSequenceState4();
-		enterSequenceState1();
-
-	}
-	private void entryActionState2() {
-		defaultInterface.raiseEvent2(22);
-
-	}
-	private void entryActionState3() {
-		interfaceOther.raiseEvent4();
-
-	}
-	private void entryActionState4() {
-		interfaceThird.raiseEvent6(true);
-
-	}
-
-	private void enterSequenceState1() {
 		activeStates.add(State.State1);
+
 	}
 
-	private void enterSequenceState2() {
-		entryActionState2();
-		activeStates.add(State.State2);
-	}
-
-	private void enterSequenceState3() {
-		entryActionState3();
-		activeStates.add(State.State3);
-	}
-
-	private void enterSequenceState4() {
-		entryActionState4();
-		activeStates.add(State.State4);
-	}
-	private void exitSequenceState1() {
-		activeStates.remove(State.State1);
-	}
-	private void exitSequenceState2() {
-		activeStates.remove(State.State2);
-	}
-	private void exitSequenceState3() {
-		activeStates.remove(State.State3);
-	}
-	private void exitSequenceState4() {
-		activeStates.remove(State.State4);
-	}
 	private void reactState1() {
-		if (conditionState1Tr0()) {
-			actionsState1Tr0();
+		if ((occuredEvents.contains(defaultInterface.getEventEvent1()) && (defaultInterface
+				.getVarVar2() > 0))) {
+			activeStates.remove(State.State1);
+
+			defaultInterface.raiseEvent2(22);
+
+			activeStates.add(State.State2);
+
 		} else {
-			if (conditionState1Tr1()) {
-				actionsState1Tr1();
+			if ((occuredEvents.contains(interfaceOther.getEventEvent3()) && (defaultInterface
+					.getVarVar3() == 1))) {
+				activeStates.remove(State.State1);
+
+				interfaceOther.raiseEvent4();
+
+				activeStates.add(State.State3);
+
 			} else {
-				if (conditionState1Tr2()) {
-					actionsState1Tr2();
+				if ((occuredEvents.contains(interfaceThird.getEventEvent5()) && (defaultInterface
+						.getVarVar1() == true))) {
+					activeStates.remove(State.State1);
+
+					interfaceThird.raiseEvent6(true);
+
+					activeStates.add(State.State4);
+
 				}
 			}
 		}
 	}
 	private void reactState2() {
-		if (conditionState2Tr0()) {
-			actionsState2Tr0();
+		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
+			activeStates.remove(State.State2);
+
+			activeStates.add(State.State1);
+
 		}
 	}
 	private void reactState3() {
-		if (conditionState3Tr0()) {
-			actionsState3Tr0();
+		if (occuredEvents.contains(interfaceOther.getEventEvent3())) {
+			activeStates.remove(State.State3);
+
+			activeStates.add(State.State1);
+
 		}
 	}
 	private void reactState4() {
-		if (conditionState4Tr0()) {
-			actionsState4Tr0();
+		if (occuredEvents.contains(interfaceThird.getEventEvent5())) {
+			activeStates.remove(State.State4);
+
+			activeStates.add(State.State1);
+
 		}
 	}
 	public void runCycle() {

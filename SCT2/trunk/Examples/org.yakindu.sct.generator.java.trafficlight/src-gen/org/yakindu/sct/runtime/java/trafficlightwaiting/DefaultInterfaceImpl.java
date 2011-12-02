@@ -16,7 +16,6 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 
 	private final Event EventKeypress1 = new Event("keypress1");
 	private final Event EventKeypress2 = new Event("keypress2");
-	private final Event EventKeypress3 = new Event("keypress3");
 
 	private TrafficLightWaitingCycleBasedStatemachine statemachine;
 
@@ -39,14 +38,6 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 
 	public Event getEventKeypress2() {
 		return EventKeypress2;
-	}
-
-	public void raiseKeypress3() {
-		statemachine.getOccuredEvents().add(EventKeypress3);
-	}
-
-	public Event getEventKeypress3() {
-		return EventKeypress3;
 	}
 
 }

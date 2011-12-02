@@ -101,124 +101,62 @@ public class Test_LocalActionsCycleBasedStatemachine
 
 	public void enter() {
 		cycleStartTime = System.currentTimeMillis();
-		enterSequenceState1();
-	}
-
-	private boolean conditionState1Tr0() {
-		return occuredEvents.contains(defaultInterface.getEventEvent1());
-	}
-	private boolean conditionState1Lr2() {
-		return true;
-	}
-	private boolean conditionState1Lr3() {
-		return occuredEvents.contains(defaultInterface.getEventEvent2());
-	}
-	private boolean conditionState1Lr4() {
-		return occuredEvents.contains(State1_time_event_0);
-	}
-	private boolean conditionState2Tr0() {
-		return occuredEvents.contains(defaultInterface.getEventEvent3());
-	}
-	private boolean conditionState2Lr2() {
-		return (occuredEvents.contains(defaultInterface.getEventEvent2()) || occuredEvents
-				.contains(defaultInterface.getEventEvent4()));
-	}
-	private boolean conditionState2Lr3() {
-		return occuredEvents.contains(State2_time_event_0);
-	}
-	private void actionsState1Tr0() {
-		exitSequenceState1();
-		enterSequenceState2();
-
-	}
-	private void actionsState1Lr2() {
-		defaultInterface.setVarI(2);
-
-	}
-	private void actionsState1Lr3() {
-		defaultInterface.setVarI(3);
-
-	}
-	private void actionsState1Lr4() {
-		defaultInterface.setVarC(defaultInterface.getVarC() + (1));
-
-	}
-	private void actionsState2Tr0() {
-		exitSequenceState2();
-		enterSequenceState1();
-
-	}
-	private void actionsState2Lr2() {
-		defaultInterface.setVarJ(2);
-
-	}
-	private void actionsState2Lr3() {
-		defaultInterface.setVarJ(3);
-
-	}
-	private void entryActionState1() {
 		getTimerHandler().setTimer(State1_time_event_0, 100, cycleStartTime);
 		defaultInterface.setVarI(1);
 
-	}
-	private void entryActionState2() {
-		getTimerHandler().setTimer(State2_time_event_0, 200, cycleStartTime);
-		defaultInterface.setVarJ(1);
-
-	}
-	private void exitActionState1() {
-		getTimerHandler().resetTimer(State1_time_event_0);
-		defaultInterface.setVarI(0);
-
-	}
-	private void exitActionState2() {
-		getTimerHandler().resetTimer(State2_time_event_0);
-		defaultInterface.setVarJ(0);
-
-	}
-
-	private void enterSequenceState1() {
-		entryActionState1();
 		activeStates.add(State.State1);
+
 	}
 
-	private void enterSequenceState2() {
-		entryActionState2();
-		activeStates.add(State.State2);
-	}
-	private void exitSequenceState1() {
-		activeStates.remove(State.State1);
-		exitActionState1();
-	}
-	private void exitSequenceState2() {
-		activeStates.remove(State.State2);
-		exitActionState2();
-	}
 	private void reactState1() {
-		if (conditionState1Tr0()) {
-			actionsState1Tr0();
+		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
+			activeStates.remove(State.State1);
+			getTimerHandler().resetTimer(State1_time_event_0);
+			defaultInterface.setVarI(0);
+
+			getTimerHandler()
+					.setTimer(State2_time_event_0, 200, cycleStartTime);
+			defaultInterface.setVarJ(1);
+
+			activeStates.add(State.State2);
+
 		} else {
-			if (conditionState1Lr2()) {
-				actionsState1Lr2();
+			if (true) {
+				defaultInterface.setVarI(2);
+
 			}
-			if (conditionState1Lr3()) {
-				actionsState1Lr3();
+			if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
+				defaultInterface.setVarI(3);
+
 			}
-			if (conditionState1Lr4()) {
-				actionsState1Lr4();
+			if (occuredEvents.contains(State1_time_event_0)) {
+				defaultInterface.setVarC(defaultInterface.getVarC() + (1));
+
 			}
 
 		}
 	}
 	private void reactState2() {
-		if (conditionState2Tr0()) {
-			actionsState2Tr0();
+		if (occuredEvents.contains(defaultInterface.getEventEvent3())) {
+			activeStates.remove(State.State2);
+			getTimerHandler().resetTimer(State2_time_event_0);
+			defaultInterface.setVarJ(0);
+
+			getTimerHandler()
+					.setTimer(State1_time_event_0, 100, cycleStartTime);
+			defaultInterface.setVarI(1);
+
+			activeStates.add(State.State1);
+
 		} else {
-			if (conditionState2Lr2()) {
-				actionsState2Lr2();
+			if ((occuredEvents.contains(defaultInterface.getEventEvent2()) || occuredEvents
+					.contains(defaultInterface.getEventEvent4()))) {
+				defaultInterface.setVarJ(2);
+
 			}
-			if (conditionState2Lr3()) {
-				actionsState2Lr3();
+			if (occuredEvents.contains(State2_time_event_0)) {
+				defaultInterface.setVarJ(3);
+
 			}
 
 		}

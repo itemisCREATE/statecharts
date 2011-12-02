@@ -124,140 +124,107 @@ public class Test_TransitionCycleBasedStatemachine
 
 	public void enter() {
 		cycleStartTime = System.currentTimeMillis();
-		enterSequenceState1();
-	}
-
-	private boolean conditionState1Tr0() {
-		return (occuredEvents.contains(interfaceA.getEventEvent1()) || occuredEvents
-				.contains(interfaceA.getEventEvent2()));
-	}
-	private boolean conditionState1Tr1() {
-		return (defaultInterface.getVarI() == 5);
-	}
-	private boolean conditionState1Tr2() {
-		return (occuredEvents.contains(interfaceA.getEventEvent3()) && (defaultInterface
-				.getVarJ() < 20));
-	}
-	private boolean conditionState1Tr3() {
-		return ((occuredEvents.contains(interfaceA.getEventEvent3()) || occuredEvents
-				.contains(interfaceA.getEventEvent4())) && (defaultInterface
-				.getVarJ() > 30));
-	}
-	private boolean conditionState1Tr4() {
-		return occuredEvents.contains(defaultInterface.getEventEvent6());
-	}
-	private boolean conditionState1Tr5() {
-		return occuredEvents.contains(defaultInterface.getEventEvent7());
-	}
-	private boolean conditionState1Tr6() {
-		return occuredEvents.contains(State1_time_event_0);
-	}
-	private boolean conditionState1Tr7() {
-		return occuredEvents.contains(State1_time_event_1);
-	}
-	private boolean conditionState1Tr8() {
-		return occuredEvents.contains(interfaceA.getEventEvent1());
-	}
-	private void actionsState1Tr0() {
-		exitSequenceState1();
-		enterSequenceState2();
-
-	}
-	private void actionsState1Tr1() {
-		exitSequenceState1();
-		enterSequenceState2();
-
-	}
-	private void actionsState1Tr2() {
-		exitSequenceState1();
-		enterSequenceState2();
-
-	}
-	private void actionsState1Tr3() {
-		exitSequenceState1();
-		enterSequenceState2();
-
-	}
-	private void actionsState1Tr4() {
-		exitSequenceState1();
-		defaultInterface.setVarI(15);
-
-		enterSequenceState2();
-
-	}
-	private void actionsState1Tr5() {
-		exitSequenceState1();
-		defaultInterface.setVarJ((defaultInterface.getVarI() * 9));
-
-		enterSequenceState2();
-
-	}
-	private void actionsState1Tr6() {
-		exitSequenceState1();
-		enterSequenceState2();
-
-	}
-	private void actionsState1Tr7() {
-		exitSequenceState1();
-		enterSequenceState2();
-
-	}
-	private void actionsState1Tr8() {
-		exitSequenceState1();
-		enterSequenceState2();
-
-	}
-	private void entryActionState1() {
 		getTimerHandler().setTimer(State1_time_event_0, (10 * 1000),
 				cycleStartTime);
 		getTimerHandler().setTimer(State1_time_event_1, 100, cycleStartTime);
 
-	}
-	private void exitActionState1() {
-		getTimerHandler().resetTimer(State1_time_event_0);
-		getTimerHandler().resetTimer(State1_time_event_1);
-
-	}
-
-	private void enterSequenceState1() {
-		entryActionState1();
 		activeStates.add(State.State1);
+
 	}
 
-	private void enterSequenceState2() {
-		activeStates.add(State.State2);
-	}
-	private void exitSequenceState1() {
-		activeStates.remove(State.State1);
-		exitActionState1();
-	}
 	private void reactState1() {
-		if (conditionState1Tr0()) {
-			actionsState1Tr0();
+		if ((occuredEvents.contains(interfaceA.getEventEvent1()) || occuredEvents
+				.contains(interfaceA.getEventEvent2()))) {
+			activeStates.remove(State.State1);
+			getTimerHandler().resetTimer(State1_time_event_0);
+			getTimerHandler().resetTimer(State1_time_event_1);
+
+			activeStates.add(State.State2);
+
 		} else {
-			if (conditionState1Tr1()) {
-				actionsState1Tr1();
+			if ((defaultInterface.getVarI() == 5)) {
+				activeStates.remove(State.State1);
+				getTimerHandler().resetTimer(State1_time_event_0);
+				getTimerHandler().resetTimer(State1_time_event_1);
+
+				activeStates.add(State.State2);
+
 			} else {
-				if (conditionState1Tr2()) {
-					actionsState1Tr2();
+				if ((occuredEvents.contains(interfaceA.getEventEvent3()) && (defaultInterface
+						.getVarJ() < 20))) {
+					activeStates.remove(State.State1);
+					getTimerHandler().resetTimer(State1_time_event_0);
+					getTimerHandler().resetTimer(State1_time_event_1);
+
+					activeStates.add(State.State2);
+
 				} else {
-					if (conditionState1Tr3()) {
-						actionsState1Tr3();
+					if (((occuredEvents.contains(interfaceA.getEventEvent3()) || occuredEvents
+							.contains(interfaceA.getEventEvent4())) && (defaultInterface
+							.getVarJ() > 30))) {
+						activeStates.remove(State.State1);
+						getTimerHandler().resetTimer(State1_time_event_0);
+						getTimerHandler().resetTimer(State1_time_event_1);
+
+						activeStates.add(State.State2);
+
 					} else {
-						if (conditionState1Tr4()) {
-							actionsState1Tr4();
+						if (occuredEvents.contains(defaultInterface
+								.getEventEvent6())) {
+							activeStates.remove(State.State1);
+							getTimerHandler().resetTimer(State1_time_event_0);
+							getTimerHandler().resetTimer(State1_time_event_1);
+
+							defaultInterface.setVarI(15);
+
+							activeStates.add(State.State2);
+
 						} else {
-							if (conditionState1Tr5()) {
-								actionsState1Tr5();
+							if (occuredEvents.contains(defaultInterface
+									.getEventEvent7())) {
+								activeStates.remove(State.State1);
+								getTimerHandler().resetTimer(
+										State1_time_event_0);
+								getTimerHandler().resetTimer(
+										State1_time_event_1);
+
+								defaultInterface.setVarJ((defaultInterface
+										.getVarI() * 9));
+
+								activeStates.add(State.State2);
+
 							} else {
-								if (conditionState1Tr6()) {
-									actionsState1Tr6();
+								if (occuredEvents.contains(State1_time_event_0)) {
+									activeStates.remove(State.State1);
+									getTimerHandler().resetTimer(
+											State1_time_event_0);
+									getTimerHandler().resetTimer(
+											State1_time_event_1);
+
+									activeStates.add(State.State2);
+
 								} else {
-									if (conditionState1Tr7()) {
-										actionsState1Tr7();
+									if (occuredEvents
+											.contains(State1_time_event_1)) {
+										activeStates.remove(State.State1);
+										getTimerHandler().resetTimer(
+												State1_time_event_0);
+										getTimerHandler().resetTimer(
+												State1_time_event_1);
+
+										activeStates.add(State.State2);
+
 									} else {
-										if (conditionState1Tr8()) {
-											actionsState1Tr8();
+										if (occuredEvents.contains(interfaceA
+												.getEventEvent1())) {
+											activeStates.remove(State.State1);
+											getTimerHandler().resetTimer(
+													State1_time_event_0);
+											getTimerHandler().resetTimer(
+													State1_time_event_1);
+
+											activeStates.add(State.State2);
+
 										}
 									}
 								}

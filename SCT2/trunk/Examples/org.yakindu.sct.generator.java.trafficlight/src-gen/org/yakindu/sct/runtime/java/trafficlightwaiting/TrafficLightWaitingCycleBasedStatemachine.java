@@ -46,7 +46,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			"BlinkYellow_time_event_0", true);
 
 	public enum State {
-		On, StreetGreen, PedWaiting, WaitOn, WaitOff, StreetAttention, StreetRed, PedestrianGreen, PedestrianRed, StreetPrepare, Freeze, Off, BlinkYellow,
+		On, StreetGreen, PedWaiting, WaitOn, WaitOff, StreetAttention, StreetRed, PedestrianGreen, PedestrianRed, StreetPrepare, Off, BlinkYellow,
 	};
 
 	private InterfaceTrafficLightImpl interfaceTrafficLight;
@@ -134,122 +134,6 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 	public void enter() {
 		cycleStartTime = System.currentTimeMillis();
-		enterSequenceOn();
-	}
-
-	private boolean conditionOnTr0() {
-		return occuredEvents.contains(defaultInterface.getEventKeypress3());
-	}
-	private boolean conditionOnTr1() {
-		return occuredEvents.contains(defaultInterface.getEventKeypress2());
-	}
-	private boolean conditionStreetGreenTr0() {
-		return occuredEvents.contains(defaultInterface.getEventKeypress1());
-	}
-	private boolean conditionPedWaitingTr0() {
-		return occuredEvents.contains(PedWaiting_time_event_0);
-	}
-	private boolean conditionWaitOnTr0() {
-		return occuredEvents.contains(WaitOn_time_event_0);
-	}
-	private boolean conditionWaitOffTr0() {
-		return occuredEvents.contains(WaitOff_time_event_0);
-	}
-	private boolean conditionStreetAttentionTr0() {
-		return occuredEvents.contains(StreetAttention_time_event_0);
-	}
-	private boolean conditionStreetRedTr0() {
-		return occuredEvents.contains(StreetRed_time_event_0);
-	}
-	private boolean conditionPedestrianGreenTr0() {
-		return occuredEvents.contains(PedestrianGreen_time_event_0);
-	}
-	private boolean conditionPedestrianRedTr0() {
-		return occuredEvents.contains(PedestrianRed_time_event_0);
-	}
-	private boolean conditionStreetPrepareTr0() {
-		return occuredEvents.contains(StreetPrepare_time_event_0);
-	}
-	private boolean conditionFreezeTr0() {
-		return occuredEvents.contains(defaultInterface.getEventKeypress3());
-	}
-	private boolean conditionOffTr0() {
-		return occuredEvents.contains(defaultInterface.getEventKeypress2());
-	}
-	private boolean conditionBlinkYellowLr1() {
-		return occuredEvents.contains(BlinkYellow_time_event_0);
-	}
-	private void actionsOnTr0() {
-		exitSequenceOn();
-		enterSequenceFreeze();
-
-	}
-	private void actionsOnTr1() {
-		exitSequenceOn();
-		enterSequenceOff();
-
-	}
-	private void actionsStreetGreenTr0() {
-		exitSequenceStreetGreen();
-		enterSequencePedWaiting();
-
-	}
-	private void actionsPedWaitingTr0() {
-		exitSequencePedWaiting();
-		enterSequenceStreetAttention();
-
-	}
-	private void actionsWaitOnTr0() {
-		exitSequenceWaitOn();
-		enterSequenceWaitOff();
-
-	}
-	private void actionsWaitOffTr0() {
-		exitSequenceWaitOff();
-		enterSequenceWaitOn();
-
-	}
-	private void actionsStreetAttentionTr0() {
-		exitSequenceStreetAttention();
-		enterSequenceStreetRed();
-
-	}
-	private void actionsStreetRedTr0() {
-		exitSequenceStreetRed();
-		enterSequencePedestrianGreen();
-
-	}
-	private void actionsPedestrianGreenTr0() {
-		exitSequencePedestrianGreen();
-		enterSequencePedestrianRed();
-
-	}
-	private void actionsPedestrianRedTr0() {
-		exitSequencePedestrianRed();
-		enterSequenceStreetPrepare();
-
-	}
-	private void actionsStreetPrepareTr0() {
-		exitSequenceStreetPrepare();
-		enterSequenceStreetGreen();
-
-	}
-	private void actionsFreezeTr0() {
-		exitSequenceFreeze();
-		enterSequenceOn();
-
-	}
-	private void actionsOffTr0() {
-		exitSequenceOff();
-		enterSequenceOn();
-
-	}
-	private void actionsBlinkYellowLr1() {
-		interfaceTrafficLight.setVarYellow(!interfaceTrafficLight
-				.getVarYellow());
-
-	}
-	private void entryActionStreetGreen() {
 		interfaceTrafficLight.setVarRed(false);
 		interfaceTrafficLight.setVarYellow(false);
 		interfaceTrafficLight.setVarGreen(true);
@@ -257,395 +141,641 @@ public class TrafficLightWaitingCycleBasedStatemachine
 		interfacePedestrian.setVarGreen(false);
 		interfacePedestrian.setVarRequest(false);
 
-	}
-	private void entryActionPedWaiting() {
-		getTimerHandler().setTimer(PedWaiting_time_event_0, (7 * 1000),
-				cycleStartTime);
-
-	}
-	private void entryActionWaitOn() {
-		getTimerHandler().setTimer(WaitOn_time_event_0, 500, cycleStartTime);
-		interfacePedestrian.setVarRequest(true);
-
-	}
-	private void entryActionWaitOff() {
-		getTimerHandler().setTimer(WaitOff_time_event_0, 500, cycleStartTime);
-		interfacePedestrian.setVarRequest(false);
-
-	}
-	private void entryActionStreetAttention() {
-		getTimerHandler().setTimer(StreetAttention_time_event_0, (2 * 1000),
-				cycleStartTime);
-		interfaceTrafficLight.setVarRed(false);
-		interfaceTrafficLight.setVarYellow(true);
-		interfaceTrafficLight.setVarGreen(false);
-
-	}
-	private void entryActionStreetRed() {
-		getTimerHandler().setTimer(StreetRed_time_event_0, (2 * 1000),
-				cycleStartTime);
-		interfaceTrafficLight.setVarRed(true);
-		interfaceTrafficLight.setVarYellow(false);
-		interfaceTrafficLight.setVarGreen(false);
-
-	}
-	private void entryActionPedestrianGreen() {
-		getTimerHandler().setTimer(PedestrianGreen_time_event_0, (7 * 1000),
-				cycleStartTime);
-		interfacePedestrian.setVarRed(false);
-		interfacePedestrian.setVarGreen(true);
-
-	}
-	private void entryActionPedestrianRed() {
-		getTimerHandler().setTimer(PedestrianRed_time_event_0, (3 * 1000),
-				cycleStartTime);
-		interfacePedestrian.setVarRed(true);
-		interfacePedestrian.setVarGreen(false);
-
-	}
-	private void entryActionStreetPrepare() {
-		getTimerHandler().setTimer(StreetPrepare_time_event_0, (2 * 1000),
-				cycleStartTime);
-		interfaceTrafficLight.setVarRed(true);
-		interfaceTrafficLight.setVarYellow(true);
-		interfaceTrafficLight.setVarGreen(false);
-
-	}
-	private void entryActionOff() {
-		interfaceTrafficLight.setVarRed(false);
-		interfaceTrafficLight.setVarGreen(false);
-		interfaceTrafficLight.setVarYellow(false);
-		interfacePedestrian.setVarRed(true);
-
-	}
-	private void entryActionBlinkYellow() {
-		getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
-				cycleStartTime);
-		interfaceTrafficLight.setVarYellow(true);
-
-	}
-	private void exitActionPedWaiting() {
-		getTimerHandler().resetTimer(PedWaiting_time_event_0);
-		interfacePedestrian.setVarRequest(false);
-
-	}
-	private void exitActionWaitOn() {
-		getTimerHandler().resetTimer(WaitOn_time_event_0);
-
-	}
-	private void exitActionWaitOff() {
-		getTimerHandler().resetTimer(WaitOff_time_event_0);
-
-	}
-	private void exitActionStreetAttention() {
-		getTimerHandler().resetTimer(StreetAttention_time_event_0);
-
-	}
-	private void exitActionStreetRed() {
-		getTimerHandler().resetTimer(StreetRed_time_event_0);
-
-	}
-	private void exitActionPedestrianGreen() {
-		getTimerHandler().resetTimer(PedestrianGreen_time_event_0);
-
-	}
-	private void exitActionPedestrianRed() {
-		getTimerHandler().resetTimer(PedestrianRed_time_event_0);
-
-	}
-	private void exitActionStreetPrepare() {
-		getTimerHandler().resetTimer(StreetPrepare_time_event_0);
-
-	}
-	private void exitActionBlinkYellow() {
-		getTimerHandler().resetTimer(BlinkYellow_time_event_0);
-
-	}
-
-	private void enterSequenceOn() {
-		enterSequenceStreetGreen();
-	}
-
-	private void enterSequenceStreetGreen() {
-		entryActionStreetGreen();
 		activeStates.add(State.StreetGreen);
+
 	}
 
-	private void enterSequencePedWaiting() {
-		entryActionPedWaiting();
-		enterSequenceWaitOn();
-	}
-
-	private void enterSequenceWaitOn() {
-		entryActionWaitOn();
-		activeStates.add(State.WaitOn);
-	}
-
-	private void enterSequenceWaitOff() {
-		entryActionWaitOff();
-		activeStates.add(State.WaitOff);
-	}
-
-	private void enterSequenceStreetAttention() {
-		entryActionStreetAttention();
-		activeStates.add(State.StreetAttention);
-	}
-
-	private void enterSequenceStreetRed() {
-		entryActionStreetRed();
-		activeStates.add(State.StreetRed);
-	}
-
-	private void enterSequencePedestrianGreen() {
-		entryActionPedestrianGreen();
-		activeStates.add(State.PedestrianGreen);
-	}
-
-	private void enterSequencePedestrianRed() {
-		entryActionPedestrianRed();
-		activeStates.add(State.PedestrianRed);
-	}
-
-	private void enterSequenceStreetPrepare() {
-		entryActionStreetPrepare();
-		activeStates.add(State.StreetPrepare);
-	}
-
-	private void enterSequenceFreeze() {
-		activeStates.add(State.Freeze);
-	}
-
-	private void enterSequenceOff() {
-		entryActionOff();
-		enterSequenceBlinkYellow();
-	}
-
-	private void enterSequenceBlinkYellow() {
-		entryActionBlinkYellow();
-		activeStates.add(State.BlinkYellow);
-	}
-	private void exitSequenceOn() {
-		if (activeStates.contains(State.StreetGreen)) {
-			exitSequenceStreetGreen();
-
-		} else if (activeStates.contains(State.WaitOn)) {
-			exitSequenceWaitOn();
-			exitActionPedWaiting();
-
-		} else if (activeStates.contains(State.WaitOff)) {
-			exitSequenceWaitOff();
-			exitActionPedWaiting();
-
-		} else if (activeStates.contains(State.StreetAttention)) {
-			exitSequenceStreetAttention();
-
-		} else if (activeStates.contains(State.StreetRed)) {
-			exitSequenceStreetRed();
-
-		} else if (activeStates.contains(State.PedestrianGreen)) {
-			exitSequencePedestrianGreen();
-
-		} else if (activeStates.contains(State.PedestrianRed)) {
-			exitSequencePedestrianRed();
-
-		} else if (activeStates.contains(State.StreetPrepare)) {
-			exitSequenceStreetPrepare();
-
-		}
-	}
-	private void exitSequenceStreetGreen() {
-		activeStates.remove(State.StreetGreen);
-	}
-	private void exitSequencePedWaiting() {
-		if (activeStates.contains(State.WaitOn)) {
-			exitSequenceWaitOn();
-
-		} else if (activeStates.contains(State.WaitOff)) {
-			exitSequenceWaitOff();
-
-		}
-		exitActionPedWaiting();
-	}
-	private void exitSequenceWaitOn() {
-		activeStates.remove(State.WaitOn);
-		exitActionWaitOn();
-	}
-	private void exitSequenceWaitOff() {
-		activeStates.remove(State.WaitOff);
-		exitActionWaitOff();
-	}
-	private void exitSequenceStreetAttention() {
-		activeStates.remove(State.StreetAttention);
-		exitActionStreetAttention();
-	}
-	private void exitSequenceStreetRed() {
-		activeStates.remove(State.StreetRed);
-		exitActionStreetRed();
-	}
-	private void exitSequencePedestrianGreen() {
-		activeStates.remove(State.PedestrianGreen);
-		exitActionPedestrianGreen();
-	}
-	private void exitSequencePedestrianRed() {
-		activeStates.remove(State.PedestrianRed);
-		exitActionPedestrianRed();
-	}
-	private void exitSequenceStreetPrepare() {
-		activeStates.remove(State.StreetPrepare);
-		exitActionStreetPrepare();
-	}
-	private void exitSequenceFreeze() {
-		activeStates.remove(State.Freeze);
-	}
-	private void exitSequenceOff() {
-		if (activeStates.contains(State.BlinkYellow)) {
-			exitSequenceBlinkYellow();
-
-		}
-	}
-	private void exitSequenceBlinkYellow() {
-		activeStates.remove(State.BlinkYellow);
-		exitActionBlinkYellow();
-	}
 	private void reactOn() {
 	}
 	private void reactStreetGreen() {
-		if (conditionOnTr0()) {
-			actionsOnTr0();
-		} else {
-			if (conditionOnTr1()) {
-				actionsOnTr1();
-			} else {
-				if (conditionStreetGreenTr0()) {
-					actionsStreetGreenTr0();
-				}
+		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
+			if (activeStates.contains(State.StreetGreen)) {
+				activeStates.remove(State.StreetGreen);
+
+			} else if (activeStates.contains(State.WaitOn)) {
+				activeStates.remove(State.WaitOn);
+				getTimerHandler().resetTimer(WaitOn_time_event_0);
+
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+			} else if (activeStates.contains(State.WaitOff)) {
+				activeStates.remove(State.WaitOff);
+				getTimerHandler().resetTimer(WaitOff_time_event_0);
+
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+			} else if (activeStates.contains(State.StreetAttention)) {
+				activeStates.remove(State.StreetAttention);
+				getTimerHandler().resetTimer(StreetAttention_time_event_0);
+
+			} else if (activeStates.contains(State.StreetRed)) {
+				activeStates.remove(State.StreetRed);
+				getTimerHandler().resetTimer(StreetRed_time_event_0);
+
+			} else if (activeStates.contains(State.PedestrianGreen)) {
+				activeStates.remove(State.PedestrianGreen);
+				getTimerHandler().resetTimer(PedestrianGreen_time_event_0);
+
+			} else if (activeStates.contains(State.PedestrianRed)) {
+				activeStates.remove(State.PedestrianRed);
+				getTimerHandler().resetTimer(PedestrianRed_time_event_0);
+
+			} else if (activeStates.contains(State.StreetPrepare)) {
+				activeStates.remove(State.StreetPrepare);
+				getTimerHandler().resetTimer(StreetPrepare_time_event_0);
 
 			}
+
+			interfaceTrafficLight.setVarRed(false);
+			interfaceTrafficLight.setVarGreen(false);
+			interfaceTrafficLight.setVarYellow(false);
+			interfacePedestrian.setVarRed(false);
+			interfacePedestrian.setVarGreen(false);
+
+			getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
+					cycleStartTime);
+			interfaceTrafficLight.setVarYellow(true);
+
+			activeStates.add(State.BlinkYellow);
+
+		} else {
+			if (occuredEvents.contains(defaultInterface.getEventKeypress1())) {
+				activeStates.remove(State.StreetGreen);
+
+				getTimerHandler().setTimer(PedWaiting_time_event_0, (7 * 1000),
+						cycleStartTime);
+
+				getTimerHandler().setTimer(WaitOn_time_event_0, 500,
+						cycleStartTime);
+				interfacePedestrian.setVarRequest(true);
+
+				activeStates.add(State.WaitOn);
+
+			}
+
 		}
 	}
 	private void reactPedWaiting() {
 	}
 	private void reactWaitOn() {
-		if (conditionOnTr0()) {
-			actionsOnTr0();
+		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
+			if (activeStates.contains(State.StreetGreen)) {
+				activeStates.remove(State.StreetGreen);
+
+			} else if (activeStates.contains(State.WaitOn)) {
+				activeStates.remove(State.WaitOn);
+				getTimerHandler().resetTimer(WaitOn_time_event_0);
+
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+			} else if (activeStates.contains(State.WaitOff)) {
+				activeStates.remove(State.WaitOff);
+				getTimerHandler().resetTimer(WaitOff_time_event_0);
+
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+			} else if (activeStates.contains(State.StreetAttention)) {
+				activeStates.remove(State.StreetAttention);
+				getTimerHandler().resetTimer(StreetAttention_time_event_0);
+
+			} else if (activeStates.contains(State.StreetRed)) {
+				activeStates.remove(State.StreetRed);
+				getTimerHandler().resetTimer(StreetRed_time_event_0);
+
+			} else if (activeStates.contains(State.PedestrianGreen)) {
+				activeStates.remove(State.PedestrianGreen);
+				getTimerHandler().resetTimer(PedestrianGreen_time_event_0);
+
+			} else if (activeStates.contains(State.PedestrianRed)) {
+				activeStates.remove(State.PedestrianRed);
+				getTimerHandler().resetTimer(PedestrianRed_time_event_0);
+
+			} else if (activeStates.contains(State.StreetPrepare)) {
+				activeStates.remove(State.StreetPrepare);
+				getTimerHandler().resetTimer(StreetPrepare_time_event_0);
+
+			}
+
+			interfaceTrafficLight.setVarRed(false);
+			interfaceTrafficLight.setVarGreen(false);
+			interfaceTrafficLight.setVarYellow(false);
+			interfacePedestrian.setVarRed(false);
+			interfacePedestrian.setVarGreen(false);
+
+			getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
+					cycleStartTime);
+			interfaceTrafficLight.setVarYellow(true);
+
+			activeStates.add(State.BlinkYellow);
+
 		} else {
-			if (conditionOnTr1()) {
-				actionsOnTr1();
+			if (occuredEvents.contains(PedWaiting_time_event_0)) {
+				if (activeStates.contains(State.WaitOn)) {
+					activeStates.remove(State.WaitOn);
+					getTimerHandler().resetTimer(WaitOn_time_event_0);
+
+				} else if (activeStates.contains(State.WaitOff)) {
+					activeStates.remove(State.WaitOff);
+					getTimerHandler().resetTimer(WaitOff_time_event_0);
+
+				}
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+				getTimerHandler().setTimer(StreetAttention_time_event_0,
+						(2 * 1000), cycleStartTime);
+				interfaceTrafficLight.setVarRed(false);
+				interfaceTrafficLight.setVarYellow(true);
+				interfaceTrafficLight.setVarGreen(false);
+
+				activeStates.add(State.StreetAttention);
+
 			} else {
-				if (conditionPedWaitingTr0()) {
-					actionsPedWaitingTr0();
-				} else {
-					if (conditionWaitOnTr0()) {
-						actionsWaitOnTr0();
-					}
+				if (occuredEvents.contains(WaitOn_time_event_0)) {
+					activeStates.remove(State.WaitOn);
+					getTimerHandler().resetTimer(WaitOn_time_event_0);
+
+					getTimerHandler().setTimer(WaitOff_time_event_0, 500,
+							cycleStartTime);
+					interfacePedestrian.setVarRequest(false);
+
+					activeStates.add(State.WaitOff);
 
 				}
 
 			}
+
 		}
 	}
 	private void reactWaitOff() {
-		if (conditionOnTr0()) {
-			actionsOnTr0();
+		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
+			if (activeStates.contains(State.StreetGreen)) {
+				activeStates.remove(State.StreetGreen);
+
+			} else if (activeStates.contains(State.WaitOn)) {
+				activeStates.remove(State.WaitOn);
+				getTimerHandler().resetTimer(WaitOn_time_event_0);
+
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+			} else if (activeStates.contains(State.WaitOff)) {
+				activeStates.remove(State.WaitOff);
+				getTimerHandler().resetTimer(WaitOff_time_event_0);
+
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+			} else if (activeStates.contains(State.StreetAttention)) {
+				activeStates.remove(State.StreetAttention);
+				getTimerHandler().resetTimer(StreetAttention_time_event_0);
+
+			} else if (activeStates.contains(State.StreetRed)) {
+				activeStates.remove(State.StreetRed);
+				getTimerHandler().resetTimer(StreetRed_time_event_0);
+
+			} else if (activeStates.contains(State.PedestrianGreen)) {
+				activeStates.remove(State.PedestrianGreen);
+				getTimerHandler().resetTimer(PedestrianGreen_time_event_0);
+
+			} else if (activeStates.contains(State.PedestrianRed)) {
+				activeStates.remove(State.PedestrianRed);
+				getTimerHandler().resetTimer(PedestrianRed_time_event_0);
+
+			} else if (activeStates.contains(State.StreetPrepare)) {
+				activeStates.remove(State.StreetPrepare);
+				getTimerHandler().resetTimer(StreetPrepare_time_event_0);
+
+			}
+
+			interfaceTrafficLight.setVarRed(false);
+			interfaceTrafficLight.setVarGreen(false);
+			interfaceTrafficLight.setVarYellow(false);
+			interfacePedestrian.setVarRed(false);
+			interfacePedestrian.setVarGreen(false);
+
+			getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
+					cycleStartTime);
+			interfaceTrafficLight.setVarYellow(true);
+
+			activeStates.add(State.BlinkYellow);
+
 		} else {
-			if (conditionOnTr1()) {
-				actionsOnTr1();
+			if (occuredEvents.contains(PedWaiting_time_event_0)) {
+				if (activeStates.contains(State.WaitOn)) {
+					activeStates.remove(State.WaitOn);
+					getTimerHandler().resetTimer(WaitOn_time_event_0);
+
+				} else if (activeStates.contains(State.WaitOff)) {
+					activeStates.remove(State.WaitOff);
+					getTimerHandler().resetTimer(WaitOff_time_event_0);
+
+				}
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+				getTimerHandler().setTimer(StreetAttention_time_event_0,
+						(2 * 1000), cycleStartTime);
+				interfaceTrafficLight.setVarRed(false);
+				interfaceTrafficLight.setVarYellow(true);
+				interfaceTrafficLight.setVarGreen(false);
+
+				activeStates.add(State.StreetAttention);
+
 			} else {
-				if (conditionPedWaitingTr0()) {
-					actionsPedWaitingTr0();
-				} else {
-					if (conditionWaitOffTr0()) {
-						actionsWaitOffTr0();
-					}
+				if (occuredEvents.contains(WaitOff_time_event_0)) {
+					activeStates.remove(State.WaitOff);
+					getTimerHandler().resetTimer(WaitOff_time_event_0);
+
+					getTimerHandler().setTimer(WaitOn_time_event_0, 500,
+							cycleStartTime);
+					interfacePedestrian.setVarRequest(true);
+
+					activeStates.add(State.WaitOn);
 
 				}
 
 			}
+
 		}
 	}
 	private void reactStreetAttention() {
-		if (conditionOnTr0()) {
-			actionsOnTr0();
-		} else {
-			if (conditionOnTr1()) {
-				actionsOnTr1();
-			} else {
-				if (conditionStreetAttentionTr0()) {
-					actionsStreetAttentionTr0();
-				}
+		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
+			if (activeStates.contains(State.StreetGreen)) {
+				activeStates.remove(State.StreetGreen);
+
+			} else if (activeStates.contains(State.WaitOn)) {
+				activeStates.remove(State.WaitOn);
+				getTimerHandler().resetTimer(WaitOn_time_event_0);
+
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+			} else if (activeStates.contains(State.WaitOff)) {
+				activeStates.remove(State.WaitOff);
+				getTimerHandler().resetTimer(WaitOff_time_event_0);
+
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+			} else if (activeStates.contains(State.StreetAttention)) {
+				activeStates.remove(State.StreetAttention);
+				getTimerHandler().resetTimer(StreetAttention_time_event_0);
+
+			} else if (activeStates.contains(State.StreetRed)) {
+				activeStates.remove(State.StreetRed);
+				getTimerHandler().resetTimer(StreetRed_time_event_0);
+
+			} else if (activeStates.contains(State.PedestrianGreen)) {
+				activeStates.remove(State.PedestrianGreen);
+				getTimerHandler().resetTimer(PedestrianGreen_time_event_0);
+
+			} else if (activeStates.contains(State.PedestrianRed)) {
+				activeStates.remove(State.PedestrianRed);
+				getTimerHandler().resetTimer(PedestrianRed_time_event_0);
+
+			} else if (activeStates.contains(State.StreetPrepare)) {
+				activeStates.remove(State.StreetPrepare);
+				getTimerHandler().resetTimer(StreetPrepare_time_event_0);
 
 			}
+
+			interfaceTrafficLight.setVarRed(false);
+			interfaceTrafficLight.setVarGreen(false);
+			interfaceTrafficLight.setVarYellow(false);
+			interfacePedestrian.setVarRed(false);
+			interfacePedestrian.setVarGreen(false);
+
+			getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
+					cycleStartTime);
+			interfaceTrafficLight.setVarYellow(true);
+
+			activeStates.add(State.BlinkYellow);
+
+		} else {
+			if (occuredEvents.contains(StreetAttention_time_event_0)) {
+				activeStates.remove(State.StreetAttention);
+				getTimerHandler().resetTimer(StreetAttention_time_event_0);
+
+				getTimerHandler().setTimer(StreetRed_time_event_0, (2 * 1000),
+						cycleStartTime);
+				interfaceTrafficLight.setVarRed(true);
+				interfaceTrafficLight.setVarYellow(false);
+				interfaceTrafficLight.setVarGreen(false);
+
+				activeStates.add(State.StreetRed);
+
+			}
+
 		}
 	}
 	private void reactStreetRed() {
-		if (conditionOnTr0()) {
-			actionsOnTr0();
-		} else {
-			if (conditionOnTr1()) {
-				actionsOnTr1();
-			} else {
-				if (conditionStreetRedTr0()) {
-					actionsStreetRedTr0();
-				}
+		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
+			if (activeStates.contains(State.StreetGreen)) {
+				activeStates.remove(State.StreetGreen);
+
+			} else if (activeStates.contains(State.WaitOn)) {
+				activeStates.remove(State.WaitOn);
+				getTimerHandler().resetTimer(WaitOn_time_event_0);
+
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+			} else if (activeStates.contains(State.WaitOff)) {
+				activeStates.remove(State.WaitOff);
+				getTimerHandler().resetTimer(WaitOff_time_event_0);
+
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+			} else if (activeStates.contains(State.StreetAttention)) {
+				activeStates.remove(State.StreetAttention);
+				getTimerHandler().resetTimer(StreetAttention_time_event_0);
+
+			} else if (activeStates.contains(State.StreetRed)) {
+				activeStates.remove(State.StreetRed);
+				getTimerHandler().resetTimer(StreetRed_time_event_0);
+
+			} else if (activeStates.contains(State.PedestrianGreen)) {
+				activeStates.remove(State.PedestrianGreen);
+				getTimerHandler().resetTimer(PedestrianGreen_time_event_0);
+
+			} else if (activeStates.contains(State.PedestrianRed)) {
+				activeStates.remove(State.PedestrianRed);
+				getTimerHandler().resetTimer(PedestrianRed_time_event_0);
+
+			} else if (activeStates.contains(State.StreetPrepare)) {
+				activeStates.remove(State.StreetPrepare);
+				getTimerHandler().resetTimer(StreetPrepare_time_event_0);
 
 			}
+
+			interfaceTrafficLight.setVarRed(false);
+			interfaceTrafficLight.setVarGreen(false);
+			interfaceTrafficLight.setVarYellow(false);
+			interfacePedestrian.setVarRed(false);
+			interfacePedestrian.setVarGreen(false);
+
+			getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
+					cycleStartTime);
+			interfaceTrafficLight.setVarYellow(true);
+
+			activeStates.add(State.BlinkYellow);
+
+		} else {
+			if (occuredEvents.contains(StreetRed_time_event_0)) {
+				activeStates.remove(State.StreetRed);
+				getTimerHandler().resetTimer(StreetRed_time_event_0);
+
+				getTimerHandler().setTimer(PedestrianGreen_time_event_0,
+						(7 * 1000), cycleStartTime);
+				interfacePedestrian.setVarRed(false);
+				interfacePedestrian.setVarGreen(true);
+
+				activeStates.add(State.PedestrianGreen);
+
+			}
+
 		}
 	}
 	private void reactPedestrianGreen() {
-		if (conditionOnTr0()) {
-			actionsOnTr0();
-		} else {
-			if (conditionOnTr1()) {
-				actionsOnTr1();
-			} else {
-				if (conditionPedestrianGreenTr0()) {
-					actionsPedestrianGreenTr0();
-				}
+		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
+			if (activeStates.contains(State.StreetGreen)) {
+				activeStates.remove(State.StreetGreen);
+
+			} else if (activeStates.contains(State.WaitOn)) {
+				activeStates.remove(State.WaitOn);
+				getTimerHandler().resetTimer(WaitOn_time_event_0);
+
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+			} else if (activeStates.contains(State.WaitOff)) {
+				activeStates.remove(State.WaitOff);
+				getTimerHandler().resetTimer(WaitOff_time_event_0);
+
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+			} else if (activeStates.contains(State.StreetAttention)) {
+				activeStates.remove(State.StreetAttention);
+				getTimerHandler().resetTimer(StreetAttention_time_event_0);
+
+			} else if (activeStates.contains(State.StreetRed)) {
+				activeStates.remove(State.StreetRed);
+				getTimerHandler().resetTimer(StreetRed_time_event_0);
+
+			} else if (activeStates.contains(State.PedestrianGreen)) {
+				activeStates.remove(State.PedestrianGreen);
+				getTimerHandler().resetTimer(PedestrianGreen_time_event_0);
+
+			} else if (activeStates.contains(State.PedestrianRed)) {
+				activeStates.remove(State.PedestrianRed);
+				getTimerHandler().resetTimer(PedestrianRed_time_event_0);
+
+			} else if (activeStates.contains(State.StreetPrepare)) {
+				activeStates.remove(State.StreetPrepare);
+				getTimerHandler().resetTimer(StreetPrepare_time_event_0);
 
 			}
+
+			interfaceTrafficLight.setVarRed(false);
+			interfaceTrafficLight.setVarGreen(false);
+			interfaceTrafficLight.setVarYellow(false);
+			interfacePedestrian.setVarRed(false);
+			interfacePedestrian.setVarGreen(false);
+
+			getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
+					cycleStartTime);
+			interfaceTrafficLight.setVarYellow(true);
+
+			activeStates.add(State.BlinkYellow);
+
+		} else {
+			if (occuredEvents.contains(PedestrianGreen_time_event_0)) {
+				activeStates.remove(State.PedestrianGreen);
+				getTimerHandler().resetTimer(PedestrianGreen_time_event_0);
+
+				getTimerHandler().setTimer(PedestrianRed_time_event_0,
+						(5 * 1000), cycleStartTime);
+				interfacePedestrian.setVarRed(true);
+				interfacePedestrian.setVarGreen(false);
+
+				activeStates.add(State.PedestrianRed);
+
+			}
+
 		}
 	}
 	private void reactPedestrianRed() {
-		if (conditionOnTr0()) {
-			actionsOnTr0();
-		} else {
-			if (conditionOnTr1()) {
-				actionsOnTr1();
-			} else {
-				if (conditionPedestrianRedTr0()) {
-					actionsPedestrianRedTr0();
-				}
+		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
+			if (activeStates.contains(State.StreetGreen)) {
+				activeStates.remove(State.StreetGreen);
+
+			} else if (activeStates.contains(State.WaitOn)) {
+				activeStates.remove(State.WaitOn);
+				getTimerHandler().resetTimer(WaitOn_time_event_0);
+
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+			} else if (activeStates.contains(State.WaitOff)) {
+				activeStates.remove(State.WaitOff);
+				getTimerHandler().resetTimer(WaitOff_time_event_0);
+
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+			} else if (activeStates.contains(State.StreetAttention)) {
+				activeStates.remove(State.StreetAttention);
+				getTimerHandler().resetTimer(StreetAttention_time_event_0);
+
+			} else if (activeStates.contains(State.StreetRed)) {
+				activeStates.remove(State.StreetRed);
+				getTimerHandler().resetTimer(StreetRed_time_event_0);
+
+			} else if (activeStates.contains(State.PedestrianGreen)) {
+				activeStates.remove(State.PedestrianGreen);
+				getTimerHandler().resetTimer(PedestrianGreen_time_event_0);
+
+			} else if (activeStates.contains(State.PedestrianRed)) {
+				activeStates.remove(State.PedestrianRed);
+				getTimerHandler().resetTimer(PedestrianRed_time_event_0);
+
+			} else if (activeStates.contains(State.StreetPrepare)) {
+				activeStates.remove(State.StreetPrepare);
+				getTimerHandler().resetTimer(StreetPrepare_time_event_0);
 
 			}
+
+			interfaceTrafficLight.setVarRed(false);
+			interfaceTrafficLight.setVarGreen(false);
+			interfaceTrafficLight.setVarYellow(false);
+			interfacePedestrian.setVarRed(false);
+			interfacePedestrian.setVarGreen(false);
+
+			getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
+					cycleStartTime);
+			interfaceTrafficLight.setVarYellow(true);
+
+			activeStates.add(State.BlinkYellow);
+
+		} else {
+			if (occuredEvents.contains(PedestrianRed_time_event_0)) {
+				activeStates.remove(State.PedestrianRed);
+				getTimerHandler().resetTimer(PedestrianRed_time_event_0);
+
+				getTimerHandler().setTimer(StreetPrepare_time_event_0,
+						(2 * 1000), cycleStartTime);
+				interfaceTrafficLight.setVarRed(true);
+				interfaceTrafficLight.setVarYellow(true);
+				interfaceTrafficLight.setVarGreen(false);
+
+				activeStates.add(State.StreetPrepare);
+
+			}
+
 		}
 	}
 	private void reactStreetPrepare() {
-		if (conditionOnTr0()) {
-			actionsOnTr0();
-		} else {
-			if (conditionOnTr1()) {
-				actionsOnTr1();
-			} else {
-				if (conditionStreetPrepareTr0()) {
-					actionsStreetPrepareTr0();
-				}
+		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
+			if (activeStates.contains(State.StreetGreen)) {
+				activeStates.remove(State.StreetGreen);
+
+			} else if (activeStates.contains(State.WaitOn)) {
+				activeStates.remove(State.WaitOn);
+				getTimerHandler().resetTimer(WaitOn_time_event_0);
+
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+			} else if (activeStates.contains(State.WaitOff)) {
+				activeStates.remove(State.WaitOff);
+				getTimerHandler().resetTimer(WaitOff_time_event_0);
+
+				getTimerHandler().resetTimer(PedWaiting_time_event_0);
+				interfacePedestrian.setVarRequest(false);
+
+			} else if (activeStates.contains(State.StreetAttention)) {
+				activeStates.remove(State.StreetAttention);
+				getTimerHandler().resetTimer(StreetAttention_time_event_0);
+
+			} else if (activeStates.contains(State.StreetRed)) {
+				activeStates.remove(State.StreetRed);
+				getTimerHandler().resetTimer(StreetRed_time_event_0);
+
+			} else if (activeStates.contains(State.PedestrianGreen)) {
+				activeStates.remove(State.PedestrianGreen);
+				getTimerHandler().resetTimer(PedestrianGreen_time_event_0);
+
+			} else if (activeStates.contains(State.PedestrianRed)) {
+				activeStates.remove(State.PedestrianRed);
+				getTimerHandler().resetTimer(PedestrianRed_time_event_0);
+
+			} else if (activeStates.contains(State.StreetPrepare)) {
+				activeStates.remove(State.StreetPrepare);
+				getTimerHandler().resetTimer(StreetPrepare_time_event_0);
 
 			}
-		}
-	}
-	private void reactFreeze() {
-		if (conditionFreezeTr0()) {
-			actionsFreezeTr0();
+
+			interfaceTrafficLight.setVarRed(false);
+			interfaceTrafficLight.setVarGreen(false);
+			interfaceTrafficLight.setVarYellow(false);
+			interfacePedestrian.setVarRed(false);
+			interfacePedestrian.setVarGreen(false);
+
+			getTimerHandler().setTimer(BlinkYellow_time_event_0, 500,
+					cycleStartTime);
+			interfaceTrafficLight.setVarYellow(true);
+
+			activeStates.add(State.BlinkYellow);
+
+		} else {
+			if (occuredEvents.contains(StreetPrepare_time_event_0)) {
+				activeStates.remove(State.StreetPrepare);
+				getTimerHandler().resetTimer(StreetPrepare_time_event_0);
+
+				interfaceTrafficLight.setVarRed(false);
+				interfaceTrafficLight.setVarYellow(false);
+				interfaceTrafficLight.setVarGreen(true);
+				interfacePedestrian.setVarRed(true);
+				interfacePedestrian.setVarGreen(false);
+				interfacePedestrian.setVarRequest(false);
+
+				activeStates.add(State.StreetGreen);
+
+			}
+
 		}
 	}
 	private void reactOff() {
 	}
 	private void reactBlinkYellow() {
-		if (conditionOffTr0()) {
-			actionsOffTr0();
+		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
+			if (activeStates.contains(State.BlinkYellow)) {
+				activeStates.remove(State.BlinkYellow);
+				getTimerHandler().resetTimer(BlinkYellow_time_event_0);
+
+			}
+
+			interfaceTrafficLight.setVarRed(false);
+			interfaceTrafficLight.setVarYellow(false);
+			interfaceTrafficLight.setVarGreen(true);
+			interfacePedestrian.setVarRed(true);
+			interfacePedestrian.setVarGreen(false);
+			interfacePedestrian.setVarRequest(false);
+
+			activeStates.add(State.StreetGreen);
+
 		} else {
-			if (conditionBlinkYellowLr1()) {
-				actionsBlinkYellowLr1();
+			if (occuredEvents.contains(BlinkYellow_time_event_0)) {
+				interfaceTrafficLight.setVarYellow(!interfaceTrafficLight
+						.getVarYellow());
+
 			}
 
 		}
@@ -684,9 +814,6 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 				case StreetPrepare :
 					reactStreetPrepare();
-					break;
-				case Freeze :
-					reactFreeze();
 					break;
 				case Off :
 					reactOff();

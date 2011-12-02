@@ -138,8 +138,8 @@ public class CrossingDemo {
 		buttonComposite.setLayout(new FillLayout());
 
 		// create a button for each KEYPRESS event
-		Button[] button = new Button[3];
-		for (int i = 0; i < 3; i++) {
+		Button[] button = new Button[2];
+		for (int i = 0; i < 2; i++) {
 			button[i] = new Button(buttonComposite, SWT.PUSH);
 			button[i].setText("key" + (i + 1));
 			final int j = i;
