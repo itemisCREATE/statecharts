@@ -93,7 +93,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//ExpressionElement #//ReactiveElement #//ScopedElement #//RegularState">
     <eAnnotations source="InjectMembers"/>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="NameIsNotEmpty"/>
+      <details key="constraints" value="NameIsNotEmpty NameIsValidJavaIdentifier"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subRegions" ordered="false"
         upperBound="-1" eType="#//Region" containment="true"/>

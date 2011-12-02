@@ -32,7 +32,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NameIsNotEmpty'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NameIsNotEmpty NameIsValidJavaIdentifier'"
  * @generated
  */
 public interface State extends ExpressionElement, ReactiveElement, ScopedElement, RegularState {
