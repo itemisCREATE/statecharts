@@ -31,8 +31,9 @@ cached String functionName(Step step) :
 	(step.isEntryAction()) ? step.entryActionFunctionName() : ( 
 	(step.isExitAction()) ? step.exitActionFunctionName() : (
 	(step.isEnterSequence()) ? step.enterSequenceFunctionName() : ( 
-	(step.isExitSequence()) ? step.exitSequenceFunctionName() : 
-	" !! unknown function type !!" )))));
+	(step.isExitSequence()) ? step.exitSequenceFunctionName() : (
+	(step.isReactSequence()) ? step.reactSequenceFunctionName() :
+	" !! unknown function type !!" ))))));
  
 String actionFunctionName(Step this) :  this.stName() + "_actions_" + this.reaction().state().simpleName + "_" + this.reaction().name; 
 String checkFunctionName(Step this) : this.stName() + "_condition_" + this.reaction().state().simpleName + "_" + this.reaction().name; 
@@ -40,6 +41,8 @@ String entryActionFunctionName(Step this) : this.stName() + "_entryActions_" + t
 String exitActionFunctionName(Step this) : this.stName() + "_exitActions_" + this.state().simpleName; 
 String enterSequenceFunctionName(Step this) : this.stName() + "_enterSequence_" + this.state().simpleName; 
 String exitSequenceFunctionName(Step this) : this.stName() + "_exitSequence_" + this.state().simpleName; 
+String reactSequenceFunctionName(Step this) : "react"+ this.state().simpleName; 
+
 
 boolean isEffect(Step step) : (! Check.isInstance(step)) && Reaction.isInstance(step.eContainer) ;
 boolean isReactionCheck(Step step) : Reaction.isInstance(step.eContainer) && Check.isInstance(step);
@@ -47,6 +50,7 @@ boolean isEntryAction(Step step) : ExecutionState.isInstance(step.eContainer) &&
 boolean isExitAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().exitAction == step;
 boolean isEnterSequence(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().enterSequence == step;
 boolean isExitSequence(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().exitSequence == step;
+isReactSequence(Step step) : Sequence.isInstance(step) && step.name == "react";
 
 Reaction reaction(Step this) : (Reaction) this.eContainer ;
 ExecutionState state(Reaction this) : (ExecutionState) eContainer;
