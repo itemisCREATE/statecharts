@@ -127,7 +127,7 @@ void «interface.interfaceName()»_init(«interface.interfaceClassName()»* handle, 
 	handle->eventPool = eventPool;
 «FOREACH interface.getOutEvents() AS event -»
 	handle->«event.getEventName()» = eventPool_createEvent(handle->eventPool, «event.getEventEnumName()»);
-	// ((«event.getEventName()»*)handle->«event.getEventName()»)->value = initial value for events is missing in model;
+«REM»	// ((«event.getEventName()»*)handle->«event.getEventName()»)->value = initial value for events is missing in model; «ENDREM»
 «ENDFOREACH»
 #endif
 
