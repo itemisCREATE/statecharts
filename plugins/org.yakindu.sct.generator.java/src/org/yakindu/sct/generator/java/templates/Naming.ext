@@ -193,3 +193,9 @@ String getLicenseHeader(GeneratorEntry entry) :
 		entry.getFeatureConfiguration(getLicenseFeature()).getParameterValue(getLicenseText()).getStringValue()
 	else 
 		null;
+		
+String getComment(Step this) :
+	if comment!=null then
+		"//"+comment
+	else
+		null;
