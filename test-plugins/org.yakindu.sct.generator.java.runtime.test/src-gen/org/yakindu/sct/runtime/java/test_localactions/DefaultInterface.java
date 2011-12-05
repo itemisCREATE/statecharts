@@ -12,6 +12,10 @@ package org.yakindu.sct.runtime.java.test_localactions;
 
 public interface DefaultInterface {
 
+	public enum Events {
+		Event1, Event2, Event3, Event4,
+	}
+
 	public void raiseEvent1();
 	public void raiseEvent2();
 	public void raiseEvent3();

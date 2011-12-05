@@ -27,13 +27,21 @@ public class Test_TransitionCycleBasedStatemachine
 		implements
 			ITimedStatemachine {
 
-	private final ValuedEvent<Integer> EventEvent10 = new ValuedEvent<Integer>(
-			"event10", 0);
+	private enum Events {
+		Event10,
+	}
 
-	private static final TimeEvent State1_time_event_0 = new TimeEvent(
-			"State1_time_event_0", false);
-	private static final TimeEvent State1_time_event_1 = new TimeEvent(
-			"State1_time_event_1", false);
+	private enum TimeEvents {
+		State1_time_event_0, State1_time_event_1,
+	}
+
+	private final ValuedEvent<Events, Integer> EventEvent10 = new ValuedEvent<Events, Integer>(
+			Events.Event10, 0);
+
+	private static final TimeEvent<TimeEvents> State1_time_event_0 = new TimeEvent<TimeEvents>(
+			TimeEvents.State1_time_event_0, false);
+	private static final TimeEvent<TimeEvents> State1_time_event_1 = new TimeEvent<TimeEvents>(
+			TimeEvents.State1_time_event_1, false);
 
 	public enum State {
 		State1, State2,
@@ -44,17 +52,17 @@ public class Test_TransitionCycleBasedStatemachine
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 
-	private final ArrayList<Event> occuredEvents;
+	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
 
-	private final Collection<Event> outEvents;
+	private final Collection<Event<? extends Enum<?>>> outEvents;
 
 	private ITimerHandler timerHandler;
 
 	private long cycleStartTime;
 
 	public Test_TransitionCycleBasedStatemachine() {
-		occuredEvents = new ArrayList<Event>();
-		outEvents = new HashSet<Event>();
+		occuredEvents = new ArrayList<Event<? extends Enum<?>>>();
+		outEvents = new HashSet<Event<? extends Enum<?>>>();
 		interfaceA = new InterfaceAImpl(this);
 		defaultInterface = new DefaultInterfaceImpl(this);
 		State1_time_event_0.setStatemachine(this);
@@ -62,11 +70,11 @@ public class Test_TransitionCycleBasedStatemachine
 
 	}
 
-	protected Collection<Event> getOccuredEvents() {
+	protected Collection<Event<? extends Enum<?>>> getOccuredEvents() {
 		return occuredEvents;
 	}
 
-	protected Collection<Event> getOutEvents() {
+	protected Collection<Event<? extends Enum<?>>> getOutEvents() {
 		return outEvents;
 	}
 
@@ -118,7 +126,7 @@ public class Test_TransitionCycleBasedStatemachine
 		getOccuredEvents().add(EventEvent10);
 	}
 
-	private ValuedEvent<Integer> getEventEvent10() {
+	private ValuedEvent<Events, Integer> getEventEvent10() {
 		return EventEvent10;
 	}
 

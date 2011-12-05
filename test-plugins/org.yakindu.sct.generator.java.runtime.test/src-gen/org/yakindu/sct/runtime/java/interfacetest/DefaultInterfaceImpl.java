@@ -19,9 +19,9 @@ public class DefaultInterfaceImpl extends NotificationSender
 		implements
 			DefaultInterface {
 
-	private final Event EventEvent1 = new Event("event1");
-	private final ValuedEvent<Integer> EventEvent2 = new ValuedEvent<Integer>(
-			"event2", 0);
+	private final Event<Events> EventEvent1 = new Event<Events>(Events.Event1);
+	private final ValuedEvent<Events, Integer> EventEvent2 = new ValuedEvent<Events, Integer>(
+			Events.Event2, 0);
 
 	private InterfaceTestCycleBasedStatemachine statemachine;
 
@@ -33,7 +33,7 @@ public class DefaultInterfaceImpl extends NotificationSender
 		statemachine.getOccuredEvents().add(EventEvent1);
 	}
 
-	public Event getEventEvent1() {
+	public Event<Events> getEventEvent1() {
 		return EventEvent1;
 	}
 
@@ -50,7 +50,7 @@ public class DefaultInterfaceImpl extends NotificationSender
 		notifyListeners(new EventNotification(EventEvent2));
 	}
 
-	public ValuedEvent<Integer> getEventEvent2() {
+	public ValuedEvent<Events, Integer> getEventEvent2() {
 		return EventEvent2;
 	}
 

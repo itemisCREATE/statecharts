@@ -30,24 +30,24 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 
-	private final ArrayList<Event> occuredEvents;
+	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
 
-	private final Collection<Event> outEvents;
+	private final Collection<Event<? extends Enum<?>>> outEvents;
 
 	public InterfaceTestCycleBasedStatemachine() {
-		occuredEvents = new ArrayList<Event>();
-		outEvents = new HashSet<Event>();
+		occuredEvents = new ArrayList<Event<? extends Enum<?>>>();
+		outEvents = new HashSet<Event<? extends Enum<?>>>();
 		defaultInterface = new DefaultInterfaceImpl(this);
 		interfaceOther = new InterfaceOtherImpl(this);
 		interfaceThird = new InterfaceThirdImpl(this);
 
 	}
 
-	protected Collection<Event> getOccuredEvents() {
+	protected Collection<Event<? extends Enum<?>>> getOccuredEvents() {
 		return occuredEvents;
 	}
 
-	protected Collection<Event> getOutEvents() {
+	protected Collection<Event<? extends Enum<?>>> getOutEvents() {
 		return outEvents;
 	}
 

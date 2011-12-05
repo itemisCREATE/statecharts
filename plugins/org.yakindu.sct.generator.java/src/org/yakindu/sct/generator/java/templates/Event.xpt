@@ -21,15 +21,15 @@ Contributors:
 «getLicenseHeader(entry)»
 package «entry.getBasePackageName()»;
 
-public class Event {
-	
-	private String name;
-	
-	public Event(String name) {
+public class Event<Type extends Enum<Type>> {
+
+	private Type name;
+
+	public Event(Type name) {
 		this.name = name;
 	}
-	
-	public String getName() {
+
+	public Type getName() {
 		return name;
 	}
 }

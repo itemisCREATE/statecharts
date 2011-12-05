@@ -7,3 +7,4 @@ Export-Package: org.yakindu.sct.examples.java.trafficlight,
  org.yakindu.sct.runtime.java,
  org.yakindu.sct.runtime.java.trafficlightwaiting
 Require-Bundle: org.eclipse.draw2d;bundle-version="3.7.0"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

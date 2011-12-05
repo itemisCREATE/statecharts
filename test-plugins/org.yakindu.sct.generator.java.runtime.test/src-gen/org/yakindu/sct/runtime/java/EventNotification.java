@@ -12,9 +12,9 @@ package org.yakindu.sct.runtime.java;
 
 import org.yakindu.sct.runtime.java.Event;
 
-public class EventNotification extends Notification<Event> {
+public class EventNotification extends Notification<Event<?>> {
 
-	public EventNotification(Event element) {
+	public EventNotification(Event<? extends Enum<?>> element) {
 		super(NotificationType.EventNotification, element);
 	}
 
