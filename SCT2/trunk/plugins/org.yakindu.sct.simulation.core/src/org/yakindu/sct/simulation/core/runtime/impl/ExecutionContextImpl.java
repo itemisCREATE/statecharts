@@ -48,7 +48,6 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	}
 
 	public void declareEvent(ExecutionEvent event) {
-		System.out.println("Declaring event " + event.getName());
 		synchronized (declaredEvents) {
 			declaredEvents.add(event);
 		}
@@ -115,7 +114,6 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	}
 
 	public void declareVariable(ExecutionVariable variable) {
-		System.out.println("Declaring variable " + variable.getName());
 		synchronized (variables) {
 			variables.add(variable);
 		}
