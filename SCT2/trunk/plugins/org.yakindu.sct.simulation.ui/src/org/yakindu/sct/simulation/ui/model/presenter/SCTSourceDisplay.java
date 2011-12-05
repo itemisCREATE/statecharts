@@ -23,12 +23,13 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.FileEditorInput;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
-import org.yakindu.sct.simulation.core.ISGraphExecutionFacade;
-import org.yakindu.sct.simulation.core.ISimulationSessionListener;
-import org.yakindu.sct.simulation.core.ISimulationSessionListener.SimulationSessionListenerAdapter;
-import org.yakindu.sct.simulation.core.SGraphSimulationSession;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugElement;
 import org.yakindu.sct.simulation.core.debugmodel.SCTStackFrame;
+import org.yakindu.sct.simulation.core.runtime.IExecutionContextListener;
+import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
+import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeListener;
+import org.yakindu.sct.simulation.core.session.ISimulationSessionListener;
+import org.yakindu.sct.simulation.core.session.SimulationSession;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 
 import de.itemis.gmf.runtime.commons.highlighting.HighlightingParameters;
@@ -47,26 +48,29 @@ import de.itemis.gmf.runtime.commons.util.EditPartUtils;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SCTSourceDisplay extends SimulationSessionListenerAdapter
-		implements ISimulationSessionListener, ISourceDisplay {
+public class SCTSourceDisplay implements ISimulationSessionListener,
+		IExecutionFacadeListener, ISourceDisplay {
 
 	private IHighlightingSupport support = new IHighlightingSupport.HighlightingSupportNullImpl();
 
-	private SGraphSimulationSession lastActiveSession;
+	private SimulationSession lastActiveSession;
 
 	private HighlightingParameters parameters = new HighlightingParameters();
 
 	public SCTSourceDisplay() {
 	}
-	
+
 	public void displaySource(Object element, IWorkbenchPage page,
 			boolean forceSourceLookup) {
 
 		SCTDebugElement debugElement = (SCTDebugElement) element;
-		SGraphSimulationSession session = (SGraphSimulationSession) debugElement
-				.getAdapter(SGraphSimulationSession.class);
-		ISGraphExecutionFacade facade = (ISGraphExecutionFacade) debugElement
-				.getAdapter(ISGraphExecutionFacade.class);
+		SimulationSession session = (SimulationSession) debugElement
+				.getAdapter(SimulationSession.class);
+		IExecutionFacade facade = (IExecutionFacade) debugElement
+				.getAdapter(IExecutionFacade.class);
+		
+		//TODO CHECK FOR MULTI EDITOR SIM
+		facade.addExecutionListener(this);
 
 		StatechartDiagramEditor editor = openEditorAndSelectElements(
 				debugElement, page);
@@ -85,7 +89,8 @@ public class SCTSourceDisplay extends SimulationSessionListenerAdapter
 		// Paint the active states if the session is not terminated
 		if (session.getCurrentState() != SimulationState.TERMINATED) {
 			support.lockEditor();
-			Set<Vertex> stateConfiguration = facade.getStateConfiguration();
+			Set<Vertex> stateConfiguration = facade.getExecutionContext()
+					.getActiveStates();
 			for (Vertex vertex : stateConfiguration) {
 				support.highlight(vertex, new HighlightingParameters());
 			}
@@ -124,7 +129,6 @@ public class SCTSourceDisplay extends SimulationSessionListenerAdapter
 		});
 	}
 
-	@Override
 	public void simulationStateChanged(SimulationState oldState,
 			SimulationState newState) {
 		if (newState == SimulationState.TERMINATED) {

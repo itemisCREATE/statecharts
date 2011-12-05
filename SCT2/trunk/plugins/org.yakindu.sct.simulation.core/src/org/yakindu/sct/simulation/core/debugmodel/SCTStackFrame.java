@@ -17,8 +17,8 @@ import org.eclipse.debug.core.model.IRegisterGroup;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IVariable;
 import org.yakindu.sct.model.sgraph.Vertex;
-import org.yakindu.sct.simulation.core.ISGraphExecutionFacade;
-import org.yakindu.sct.simulation.core.SGraphSimulationSession;
+import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
+import org.yakindu.sct.simulation.core.session.SimulationSession;
 
 /**
  * 
@@ -160,10 +160,10 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 	}
 
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
-		if (adapter == SGraphSimulationSession.class)
-			return thread.getAdapter(SGraphSimulationSession.class);
-		if (adapter == ISGraphExecutionFacade.class)
-			return getDebugTarget().getAdapter(ISGraphExecutionFacade.class);
+		if (adapter == SimulationSession.class)
+			return thread.getAdapter(SimulationSession.class);
+		if (adapter == IExecutionFacade.class)
+			return getDebugTarget().getAdapter(IExecutionFacade.class);
 		return super.getAdapter(adapter);
 	}
 

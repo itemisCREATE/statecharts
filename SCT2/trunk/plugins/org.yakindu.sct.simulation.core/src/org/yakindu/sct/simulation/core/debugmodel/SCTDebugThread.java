@@ -19,8 +19,8 @@ import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Vertex;
-import org.yakindu.sct.simulation.core.ISGraphExecutionFacade;
-import org.yakindu.sct.simulation.core.SGraphSimulationSession;
+import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
+import org.yakindu.sct.simulation.core.session.SimulationSession;
 
 /**
  * 
@@ -31,7 +31,7 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 
 	private final Region region;
 
-	public SCTDebugThread(SCTDebugTarget target, ISGraphExecutionFacade facade,
+	public SCTDebugThread(SCTDebugTarget target, IExecutionFacade facade,
 			String resourceString, Region region) {
 		super(target, resourceString);
 		this.region = region;
@@ -127,10 +127,10 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
-		if (adapter == SGraphSimulationSession.class)
-			return getDebugTarget().getAdapter(SGraphSimulationSession.class);
-		if (adapter == ISGraphExecutionFacade.class)
-			return getDebugTarget().getAdapter(ISGraphExecutionFacade.class);
+		if (adapter == SimulationSession.class)
+			return getDebugTarget().getAdapter(SimulationSession.class);
+		if (adapter == IExecutionFacade.class)
+			return getDebugTarget().getAdapter(IExecutionFacade.class);
 		return super.getAdapter(adapter);
 	}
 

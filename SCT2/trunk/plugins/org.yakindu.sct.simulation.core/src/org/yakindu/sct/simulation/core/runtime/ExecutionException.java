@@ -4,21 +4,22 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ *
  * Contributors:
- * 	committers of YAKINDU - initial API and implementation
- * 
+ *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.simulation.ui.view;
-
-import org.yakindu.sct.simulation.core.session.SimulationSession;
+package org.yakindu.sct.simulation.core.runtime;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public interface ActiveSessionProvider {
+public class ExecutionException extends RuntimeException {
 
-	SimulationSession getActiveSession();
+	private static final long serialVersionUID = 1L;
 
+	public ExecutionException(String cause) {
+		super(cause);
+	}
 }
