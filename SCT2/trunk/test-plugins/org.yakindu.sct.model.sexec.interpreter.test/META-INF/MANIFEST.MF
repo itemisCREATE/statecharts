@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Interpreter Test Plugin
+Bundle-SymbolicName: org.yakindu.sct.model.sexec.interpreter.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: YAKINDU
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.xtext;bundle-version="2.0.0",
+ org.junit;bundle-version="4.8.2",
+ org.yakindu.sct.model.sexec;bundle-version="1.0.0",
+ org.yakindu.sct.simulation.core;bundle-version="1.0.0",
+ org.yakindu.sct.model.sexec.interpreter;bundle-version="1.0.0",
+ org.yakindu.sct.model.stext;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
