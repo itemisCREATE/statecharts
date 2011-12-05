@@ -17,7 +17,8 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({ 
 		TestInterfaceTestCycleBasedStatemachine.class,
 		TestLocalActionsCycleBasedStatemachine.class,
-		TestExpressionCycleBasedStatemachine.class
+		TestExpressionCycleBasedStatemachine.class,
+		TestHierarchyCycleBasedStatemachine.class
 		})
 
 public class AllCycleBasedStatemachineTests {
