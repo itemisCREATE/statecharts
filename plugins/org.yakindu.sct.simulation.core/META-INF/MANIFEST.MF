@@ -9,11 +9,17 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.debug.core,
  org.eclipse.emf.ecore,
  org.yakindu.sct.model.sgraph,
- org.eclipse.jdt.debug
+ org.eclipse.jdt.debug,
+ org.yakindu.sct.model.sexec;bundle-version="1.0.0",
+ com.google.collect;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.simulation.core,
  org.yakindu.sct.simulation.core.debugmodel,
  org.yakindu.sct.simulation.core.extensions,
  org.yakindu.sct.simulation.core.hmr,
- org.yakindu.sct.simulation.core.launch
+ org.yakindu.sct.simulation.core.launch,
+ org.yakindu.sct.simulation.core.runtime,
+ org.yakindu.sct.simulation.core.runtime.impl,
+ org.yakindu.sct.simulation.core.session,
+ org.yakindu.sct.simulation.core.util

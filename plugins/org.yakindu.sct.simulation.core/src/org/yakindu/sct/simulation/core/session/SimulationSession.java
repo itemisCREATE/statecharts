@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.simulation.core;
+package org.yakindu.sct.simulation.core.session;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,18 +17,17 @@ import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.sgraph.Vertex;
-import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeEvent;
-import org.yakindu.sct.simulation.core.ISimulationSessionListener.SimulationState;
+import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
+import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
+import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
+import org.yakindu.sct.simulation.core.session.ISimulationSessionListener.SimulationState;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SGraphSimulationSession implements Runnable,
-		ISGraphExecutionListener {
+public class SimulationSession implements Runnable {
 
 	// TODO: Add to launch tab config
 	private static final int CYCLE_SLEEP_TIME = 100;
@@ -39,13 +38,12 @@ public class SGraphSimulationSession implements Runnable,
 
 	private SimulationState currentState;
 
-	private final ISGraphExecutionFacade facade;
+	private final IExecutionFacade facade;
 
 	private Timer timer;
 
-	public SGraphSimulationSession(ISGraphExecutionFacade facade) {
+	public SimulationSession(IExecutionFacade facade) {
 		this.facade = facade;
-		facade.addExecutionListener(this);
 		listeners = new ArrayList<ISimulationSessionListener>();
 		taskQueue = new LinkedBlockingQueue<Runnable>();
 		timer = new Timer();
@@ -93,18 +91,16 @@ public class SGraphSimulationSession implements Runnable,
 				changeSimulationState(SimulationState.TERMINATED);
 			}
 		});
+		facade.tearDown();
 	}
 
-	public void raiseEvent(final ScopeEvent event) {
+	public void raiseEvent(final ExecutionEvent event) {
 		taskQueue.add(new Runnable() {
 			public void run() {
-				facade.getExecutionScope().raise(event);
+				facade.getExecutionContext().raiseEvent(event.getName(),
+						event.getValue());
 			}
 		});
-	}
-
-	public void setVariableValue(String variableName, Object value) {
-
 	}
 
 	protected void scheduleCycle() {
@@ -143,30 +139,6 @@ public class SGraphSimulationSession implements Runnable,
 		}
 	}
 
-	public void stateEntered(Vertex vertex) {
-		synchronized (listeners) {
-			for (ISimulationSessionListener listener : listeners) {
-				listener.stateEntered(vertex);
-			}
-		}
-	}
-
-	public void stateLeft(Vertex vertex) {
-		synchronized (listeners) {
-			for (ISimulationSessionListener listener : listeners) {
-				listener.stateLeft(vertex);
-			}
-		}
-	}
-
-	public void transitionFired(Transition transition) {
-		synchronized (listeners) {
-			for (ISimulationSessionListener listener : listeners) {
-				listener.transitionFired(transition);
-			}
-		}
-	}
-
 	public void addSimulationListener(ISimulationSessionListener listener) {
 		synchronized (listeners) {
 			listeners.add(listener);
@@ -179,26 +151,8 @@ public class SGraphSimulationSession implements Runnable,
 		}
 	}
 
-	public void variableValueChanged(String variableName, Object value) {
-		synchronized (listeners) {
-			for (ISimulationSessionListener listener : listeners) {
-				listener.variableValueChanged(variableName, value);
-			}
-		}
-
-	}
-
-	public void eventRaised(String eventName) {
-synchronized (listeners) {
-	for (ISimulationSessionListener listener : listeners) {
-		listener.eventRaised(eventName);
-	}
-	
-}
-	}
-
-	public ISGraphExecutionScope getExecutionScope() {
-		return facade.getExecutionScope();
+	public IExecutionContext getExecutionScope() {
+		return facade.getExecutionContext();
 	}
 
 	public SimulationState getCurrentState() {

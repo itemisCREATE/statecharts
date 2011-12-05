@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.simulation.core;
+package org.yakindu.sct.simulation.core.runtime;
 
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
@@ -18,16 +18,12 @@ import org.yakindu.sct.model.sgraph.Vertex;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public interface ISGraphExecutionListener {
+public interface IExecutionFacadeListener {
 
 	void stateEntered(Vertex vertex);
 
 	void stateLeft(Vertex vertex);
 
 	void transitionFired(Transition transition);
-
-	void variableValueChanged(String variableName, Object value);
-
-	void eventRaised(String eventName);
 
 }

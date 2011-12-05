@@ -35,12 +35,11 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
-import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.sgraph.Vertex;
-import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeEvent;
-import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeVariable;
-import org.yakindu.sct.simulation.core.ISimulationSessionListener;
-import org.yakindu.sct.simulation.core.SGraphSimulationSession;
+import org.yakindu.sct.simulation.core.runtime.IExecutionContextListener;
+import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
+import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
+import org.yakindu.sct.simulation.core.session.ISimulationSessionListener;
+import org.yakindu.sct.simulation.core.session.SimulationSession;
 import org.yakindu.sct.simulation.ui.view.editing.BooleanEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.IntegerEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.MultiEditingSupport;
@@ -52,7 +51,7 @@ import org.yakindu.sct.simulation.ui.view.editing.RealEditingSupport;
  * 
  */
 public class DeclarationView extends ViewPart implements IDebugContextListener,
-		ISimulationSessionListener, ActiveSessionProvider {
+		ISimulationSessionListener, IExecutionContextListener, ActiveSessionProvider {
 
 	private TableViewer eventViewer;
 
@@ -60,7 +59,7 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 
 	private List<Control> controls;
 
-	private SGraphSimulationSession activeSession;
+	private SimulationSession activeSession;
 
 	public DeclarationView() {
 		controls = new ArrayList<Control>();
@@ -133,8 +132,8 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 
 	public void setEventViewerInput() {
 		if (activeSession != null) {
-			List<ScopeEvent> events = activeSession.getExecutionScope()
-					.getEvents();
+			List<ExecutionEvent> events = activeSession.getExecutionScope()
+					.getDeclaredEvents();
 			eventViewer.setInput(events);
 			TableItem[] items = eventViewer.getTable().getItems();
 			for (TableItem tableItem : items) {
@@ -155,7 +154,7 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 
 	private void setVariableViewerInput() {
 		if (activeSession != null) {
-			List<ScopeVariable> variables = activeSession.getExecutionScope()
+			List<ExecutionVariable> variables = activeSession.getExecutionScope()
 					.getVariables();
 			variableViewer.setInput(variables);
 		}
@@ -169,39 +168,6 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 		variableViewer.setInput(null);
 	}
 
-	public void variableValueChanged(String variableName, Object value) {
-		Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
-				setVariableViewerInput();
-			}
-		});
-	}
-
-	@Override
-	public void dispose() {
-		super.dispose();
-	}
-
-	public void stateEntered(Vertex vertex) {
-		// Nothing to do
-	}
-
-	public void stateLeft(Vertex vertex) {
-		// Nothing to do
-	}
-
-	public void transitionFired(Transition transition) {
-		// Nothing to do
-	}
-
-	public void eventRaised(String eventName) {
-		Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
-				setEventViewerInput();
-			}
-		});
-	}
-
 	private final class ButtonListener implements SelectionListener {
 
 		private final String eventName;
@@ -212,7 +178,7 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 
 		public void widgetSelected(SelectionEvent e) {
 			if (activeSession != null) {
-				activeSession.raiseEvent(new ScopeEvent(eventName));
+				activeSession.raiseEvent(new ExecutionEvent(eventName));
 			}
 		}
 
@@ -227,8 +193,8 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 		if (firstElement == null) {
 			return;
 		}
-		SGraphSimulationSession selectedSession = (SGraphSimulationSession) firstElement
-				.getAdapter(SGraphSimulationSession.class);
+		SimulationSession selectedSession = (SimulationSession) firstElement
+				.getAdapter(SimulationSession.class);
 		if (selectedSession == null
 				|| selectedSession.getCurrentState() == SimulationState.TERMINATED) {
 			activeSession = selectedSession;
@@ -237,16 +203,18 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 		if (!(selectedSession == activeSession) && selectedSession != null) {
 			if (activeSession != null) {
 				activeSession.removeSimulationListener(this);
+				activeSession.getExecutionScope().removeExecutionContextListener(this);
 			}
 			activeSession = selectedSession;
 			selectedSession.addSimulationListener(this);
+			selectedSession.getExecutionScope().addExecutionContextListener(this);
 			clearViewerInput();
 			setEventViewerInput();
 			setVariableViewerInput();
 		}
 	}
 
-	public SGraphSimulationSession getActiveSession() {
+	public SimulationSession getActiveSession() {
 		return activeSession;
 	}
 
@@ -270,5 +238,29 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 			;
 			break;
 		}
+	}
+
+	public void variableDeclared(ExecutionVariable variable) {
+		//Nothing to do
+	}
+
+	public void eventDeclared(ExecutionEvent event) {
+		//Nothing to do
+	}
+
+	public void eventRaised(ExecutionEvent event) {
+		Display.getDefault().asyncExec(new Runnable() {
+			public void run() {
+				setEventViewerInput();
+			}
+		});
+	}
+
+	public void variableValueChanged(ExecutionVariable variable) {
+		Display.getDefault().asyncExec(new Runnable() {
+			public void run() {
+				setVariableViewerInput();
+			}
+		});
 	}
 }

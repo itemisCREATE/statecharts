@@ -33,12 +33,12 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
-import org.yakindu.sct.simulation.core.ISGraphExecutionBuilder;
-import org.yakindu.sct.simulation.core.ISGraphExecutionFacade;
-import org.yakindu.sct.simulation.core.ISGraphExecutionListener;
-import org.yakindu.sct.simulation.core.SGraphSimulationSession;
-import org.yakindu.sct.simulation.core.extensions.Extensions;
-import org.yakindu.sct.simulation.core.extensions.IExtensionPoints;
+import org.yakindu.sct.simulation.core.extensions.ExecutionFactoryExtensions;
+import org.yakindu.sct.simulation.core.extensions.ExecutionFactoryExtensions.ExecutionFactoryDescriptor;
+import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
+import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeFactory;
+import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeListener;
+import org.yakindu.sct.simulation.core.session.SimulationSession;
 
 /**
  * 
@@ -46,15 +46,15 @@ import org.yakindu.sct.simulation.core.extensions.IExtensionPoints;
  * 
  */
 public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
-		ISGraphExecutionListener {
+		IExecutionFacadeListener {
 
 	private IProcess process;
 
 	private ILaunch launch;
 
-	private ISGraphExecutionFacade facade;
+	private IExecutionFacade facade;
 
-	private SGraphSimulationSession session;
+	private SimulationSession session;
 
 	private boolean stepping = false;
 	private boolean terminated = false;
@@ -79,18 +79,20 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 	}
 
 	private void createExecutionModel(Statechart statechart) {
-		ISGraphExecutionBuilder builder = getBuilder(statechart);
-		facade = builder.build(statechart);
+		IExecutionFacadeFactory factory = getExecutionFacadeFactory(statechart);
+		facade = factory.createExecutionFacade(statechart);
 		facade.addExecutionListener(this);
-		session = new SGraphSimulationSession(facade);
+		session = new SimulationSession(facade);
 		new Thread(session).start();
 		session.start();
 	}
 
-	protected ISGraphExecutionBuilder getBuilder(EObject context) {
-		Extensions<ISGraphExecutionBuilder> extensions = new Extensions<ISGraphExecutionBuilder>(
-				IExtensionPoints.EXECUTION_BUILDER);
-		return extensions.getRegisteredProvider(context);
+	protected IExecutionFacadeFactory getExecutionFacadeFactory(EObject context) {
+		Iterable<ExecutionFactoryDescriptor> executionFactoryDescriptor = ExecutionFactoryExtensions
+				.getExecutionFactoryDescriptor();
+		//7TODO: Handle more than one registered factory
+		ExecutionFactoryDescriptor next = executionFactoryDescriptor.iterator().next();
+		return next.createExecutableExtensionFactory();
 	}
 
 	public IProcess getProcess() {
@@ -117,7 +119,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 	}
 
 	public String getName() throws DebugException {
-		return facade.getId();
+		return facade.getName();
 	}
 
 	public boolean supportsBreakpoint(IBreakpoint breakpoint) {
@@ -205,9 +207,9 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 	}
 
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
-		if (adapter == SGraphSimulationSession.class)
+		if (adapter == SimulationSession.class)
 			return session;
-		if (adapter == ISGraphExecutionFacade.class)
+		if (adapter == IExecutionFacade.class)
 			return facade;
 		return super.getAdapter(adapter);
 	}
@@ -287,5 +289,4 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 	public Statechart getStatechart() {
 		return statechart;
 	}
-
 }

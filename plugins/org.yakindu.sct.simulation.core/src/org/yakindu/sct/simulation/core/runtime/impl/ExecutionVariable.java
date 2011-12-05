@@ -8,24 +8,24 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.simulation.core;
+package org.yakindu.sct.simulation.core.runtime.impl;
 
-import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
+
 
 /**
+ * Read only access to ScopeVariables. Value can only be changed via
+ * {@link IExecutionContext}#setVariableValue
+ * 
  * 
  * @author andreas muelder - Initial contribution and API
  * 
+ * 
  */
-public interface ISGraphExecutionBuilder extends ISCTBuilder{
-	/**
-	 * Returns an execution facade for a statechart model. Execution Builder can
-	 * be registered via extension point
-	 * "org.yakindu.sct.simulation.core.sgraph.executionbuilder"
-	 * 
-	 * @param statechart
-	 * @return
-	 */
-	public ISGraphExecutionFacade build(Statechart statechart);
+public class ExecutionVariable extends AbstractSlot {
+
+	public ExecutionVariable(String name, Class<?> type, Object value) {
+		super(name, type, value);
+	}
 
 }

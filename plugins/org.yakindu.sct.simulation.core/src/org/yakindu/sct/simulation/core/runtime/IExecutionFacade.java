@@ -8,11 +8,9 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.simulation.core;
+package org.yakindu.sct.simulation.core.runtime;
 
-import java.util.Set;
 
-import org.yakindu.sct.model.sgraph.Vertex;
 
 /**
  * Facade for executable statechart implementation.
@@ -20,20 +18,26 @@ import org.yakindu.sct.model.sgraph.Vertex;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public interface ISGraphExecutionFacade {
-
-	public String getId();
+public interface IExecutionFacade {
+	/**
+	 * Returns a name for the Execution Facade implementation
+	 */
+	public String getName();
 	
+	public void tearDown();
+	/**
+	 * Startes the execution
+	 */
 	public void enter();
-
+	/**
+	 * Executes one cycle
+	 */
 	public void runCycle();
 
-	public void addExecutionListener(ISGraphExecutionListener listener);
+	public void addExecutionListener(IExecutionFacadeListener listener);
 
-	public void removeExecutionListener(ISGraphExecutionListener listener);
+	public void removeExecutionListener(IExecutionFacadeListener listener);
 
-	public ISGraphExecutionScope getExecutionScope();
-	
-	public Set<Vertex> getStateConfiguration(); 
+	public IExecutionContext getExecutionContext();
 	
 }

@@ -11,8 +11,8 @@
 package org.yakindu.sct.simulation.ui.view.editing;
 
 import org.eclipse.jface.viewers.ColumnViewer;
-import org.yakindu.sct.simulation.core.ISGraphExecutionScope;
-import org.yakindu.sct.simulation.core.ISGraphExecutionScope.ScopeSlot;
+import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
+import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 import org.yakindu.sct.simulation.ui.view.ActiveSessionProvider;
 
 /**
@@ -36,16 +36,17 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 
 	@Override
 	public boolean canEdit(Object element) {
-		if (element instanceof ScopeSlot) {
-			return getSupportedType().equals(((ScopeSlot) element).getType());
+		if (element instanceof AbstractSlot) {
+			return getSupportedType()
+					.equals(((AbstractSlot) element).getType());
 		}
 		return false;
 	}
 
 	@Override
 	public Object getValue(Object element) {
-		if (element instanceof ScopeSlot) {
-			return String.valueOf(((ScopeSlot) element).getValue());
+		if (element instanceof AbstractSlot) {
+			return String.valueOf(((AbstractSlot) element).getValue());
 		}
 		return null;
 	}
@@ -55,10 +56,11 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 		value = convertValue(value);
 		if (value == null)
 			return;
-		if (element instanceof ScopeSlot) {
-			ISGraphExecutionScope scope = provider.getActiveSession()
-					.getExecutionScope();
-			scope.setSlotValue((ScopeSlot) element, value);
+		if (element instanceof ExecutionVariable) {
+			provider.getActiveSession()
+					.getExecutionScope()
+					.setVariableValue(((ExecutionVariable) element).getName(),
+							value);
 		}
 	}
 }
