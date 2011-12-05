@@ -37,18 +37,23 @@ Contributors:
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR ScheduleTimeEvent-»
+«getComment()-»
 getTimerHandler().setTimer(«timeEvent.getName()», «timeValue.toCode()», cycleStartTime);
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR UnscheduleTimeEvent-»
+«getComment()-»
 getTimerHandler().resetTimer(«timeEvent.getName()»);
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Execution-»
+	«getComment()-»
 	«statement.toCode()»
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Call-»
+
+«getComment()-»
 «this.step.functionName()»();
 «ENDDEFINE»
 
@@ -66,6 +71,7 @@ getTimerHandler().resetTimer(«timeEvent.getName()»);
 
 «DEFINE ActionCode FOR CheckRef -»
 «IF this.check != null -»
+«getComment()-»
 «this.check.functionName()»() «
 ELSE -»
 true 
@@ -77,6 +83,7 @@ true
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR If-»
+«getComment()-»
 if («EXPAND ActionCode FOR this.check») { 
 	«EXPAND ActionCode FOR this.thenStep-»
 }
@@ -88,10 +95,12 @@ else {
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR EnterState-»
+	«getComment()-»
 	activeStates.add(State.«state.getName()»);
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR ExitState-»
+	«getComment()-»
 	activeStates.remove(State.«state.getName()»);
 «ENDDEFINE»
 
