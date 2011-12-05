@@ -10,11 +10,13 @@
  */
 package org.yakindu.sct.runtime.java;
 
-public class ValuedEvent<DataType> extends Event {
+public class ValuedEvent<EnumType extends Enum<EnumType>, DataType>
+		extends
+			Event<EnumType> {
 
 	private DataType value;
 
-	public ValuedEvent(String name, DataType value) {
+	public ValuedEvent(EnumType name, DataType value) {
 		super(name);
 		this.value = value;
 	}

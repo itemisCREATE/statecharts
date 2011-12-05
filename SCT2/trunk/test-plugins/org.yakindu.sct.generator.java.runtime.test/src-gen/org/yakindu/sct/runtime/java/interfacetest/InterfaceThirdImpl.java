@@ -19,9 +19,9 @@ public class InterfaceThirdImpl extends NotificationSender
 		implements
 			InterfaceThird {
 
-	private final Event EventEvent5 = new Event("event5");
-	private final ValuedEvent<Boolean> EventEvent6 = new ValuedEvent<Boolean>(
-			"event6", false);
+	private final Event<Events> EventEvent5 = new Event<Events>(Events.Event5);
+	private final ValuedEvent<Events, Boolean> EventEvent6 = new ValuedEvent<Events, Boolean>(
+			Events.Event6, false);
 
 	private InterfaceTestCycleBasedStatemachine statemachine;
 
@@ -33,7 +33,7 @@ public class InterfaceThirdImpl extends NotificationSender
 		statemachine.getOccuredEvents().add(EventEvent5);
 	}
 
-	public Event getEventEvent5() {
+	public Event<Events> getEventEvent5() {
 		return EventEvent5;
 	}
 
@@ -50,7 +50,7 @@ public class InterfaceThirdImpl extends NotificationSender
 		notifyListeners(new EventNotification(EventEvent6));
 	}
 
-	public ValuedEvent<Boolean> getEventEvent6() {
+	public ValuedEvent<Events, Boolean> getEventEvent6() {
 		return EventEvent6;
 	}
 

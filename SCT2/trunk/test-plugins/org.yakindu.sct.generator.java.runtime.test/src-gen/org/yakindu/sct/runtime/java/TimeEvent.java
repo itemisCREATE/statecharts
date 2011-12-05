@@ -10,13 +10,15 @@
  */
 package org.yakindu.sct.runtime.java;
 
-public class TimeEvent extends ValuedEvent<Boolean> {
+public class TimeEvent<EnumType extends Enum<EnumType>>
+		extends
+			ValuedEvent<EnumType, Boolean> {
 
 	private long time = -1;
 
 	private ITimedStatemachine statemachine;
 
-	public TimeEvent(String name, boolean periodic) {
+	public TimeEvent(EnumType name, boolean periodic) {
 		super(name, periodic);
 	}
 

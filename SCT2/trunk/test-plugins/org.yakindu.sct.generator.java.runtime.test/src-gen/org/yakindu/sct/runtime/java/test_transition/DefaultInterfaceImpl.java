@@ -19,10 +19,10 @@ public class DefaultInterfaceImpl extends NotificationSender
 		implements
 			DefaultInterface {
 
-	private final ValuedEvent<Boolean> EventEvent5 = new ValuedEvent<Boolean>(
-			"event5", false);
-	private final Event EventEvent6 = new Event("event6");
-	private final Event EventEvent7 = new Event("event7");
+	private final ValuedEvent<Events, Boolean> EventEvent5 = new ValuedEvent<Events, Boolean>(
+			Events.Event5, false);
+	private final Event<Events> EventEvent6 = new Event<Events>(Events.Event6);
+	private final Event<Events> EventEvent7 = new Event<Events>(Events.Event7);
 
 	private Test_TransitionCycleBasedStatemachine statemachine;
 
@@ -40,7 +40,7 @@ public class DefaultInterfaceImpl extends NotificationSender
 		statemachine.getOccuredEvents().add(EventEvent5);
 	}
 
-	public ValuedEvent<Boolean> getEventEvent5() {
+	public ValuedEvent<Events, Boolean> getEventEvent5() {
 		return EventEvent5;
 	}
 
@@ -48,7 +48,7 @@ public class DefaultInterfaceImpl extends NotificationSender
 		statemachine.getOccuredEvents().add(EventEvent6);
 	}
 
-	public Event getEventEvent6() {
+	public Event<Events> getEventEvent6() {
 		return EventEvent6;
 	}
 
@@ -58,7 +58,7 @@ public class DefaultInterfaceImpl extends NotificationSender
 		notifyListeners(new EventNotification(EventEvent7));
 	}
 
-	public Event getEventEvent7() {
+	public Event<Events> getEventEvent7() {
 		return EventEvent7;
 	}
 

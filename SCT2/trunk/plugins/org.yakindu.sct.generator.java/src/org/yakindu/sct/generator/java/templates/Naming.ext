@@ -45,15 +45,15 @@ String getInterfaceImplName(InterfaceScope this) :  getInterfaceName() + "Impl";
 
 String getCreationSignature(EventDefinition this) :
 	if type == Type::void then
-		"\""+name+"\""
+		"Events."+name.toFirstUpper()
 	else
-		"\""+name+"\", "+getInitialValue();
+		"Events."+name.toFirstUpper()+", "+getInitialValue();
 
 String getEventType(EventDefinition this) :
 	if type == Type::void then
-		"Event"
+		"Event<Events>"
 	else
-		"ValuedEvent<"+type.getJavaClassType()+">";
+		"ValuedEvent<Events, "+type.getJavaClassType()+">";
 
 	
 String getInitialValueAssignment(VariableDefinition this) : 

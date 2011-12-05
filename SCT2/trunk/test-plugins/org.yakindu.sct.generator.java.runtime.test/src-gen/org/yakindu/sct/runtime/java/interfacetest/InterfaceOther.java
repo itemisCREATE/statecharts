@@ -15,10 +15,14 @@ import org.yakindu.sct.runtime.java.INotificationSender;
 
 public interface InterfaceOther extends INotificationSender {
 
+	public enum Events {
+		Event3, Event4,
+	}
+
 	public void raiseEvent3();
 	public boolean isRaisedEvent4();
 
-	public Event getEventEvent4();
+	public Event<Events> getEventEvent4();
 
 	public int getVarV1();
 	public void setVarV1(int value);

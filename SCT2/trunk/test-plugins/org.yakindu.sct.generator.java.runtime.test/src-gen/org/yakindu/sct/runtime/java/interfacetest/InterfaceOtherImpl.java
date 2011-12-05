@@ -18,8 +18,8 @@ public class InterfaceOtherImpl extends NotificationSender
 		implements
 			InterfaceOther {
 
-	private final Event EventEvent3 = new Event("event3");
-	private final Event EventEvent4 = new Event("event4");
+	private final Event<Events> EventEvent3 = new Event<Events>(Events.Event3);
+	private final Event<Events> EventEvent4 = new Event<Events>(Events.Event4);
 
 	private InterfaceTestCycleBasedStatemachine statemachine;
 
@@ -31,7 +31,7 @@ public class InterfaceOtherImpl extends NotificationSender
 		statemachine.getOccuredEvents().add(EventEvent3);
 	}
 
-	public Event getEventEvent3() {
+	public Event<Events> getEventEvent3() {
 		return EventEvent3;
 	}
 
@@ -41,7 +41,7 @@ public class InterfaceOtherImpl extends NotificationSender
 		notifyListeners(new EventNotification(EventEvent4));
 	}
 
-	public Event getEventEvent4() {
+	public Event<Events> getEventEvent4() {
 		return EventEvent4;
 	}
 

@@ -12,9 +12,10 @@ package org.yakindu.sct.runtime.java;
 
 public interface ITimerHandler {
 
-	public void setTimer(TimeEvent event, long time, long cycleStartTime);
+	public void setTimer(TimeEvent<? extends Enum<?>> event, long time,
+			long cycleStartTime);
 
-	public void resetTimer(TimeEvent event);
+	public void resetTimer(TimeEvent<? extends Enum<?>> event);
 
 	public void cancel();
 }

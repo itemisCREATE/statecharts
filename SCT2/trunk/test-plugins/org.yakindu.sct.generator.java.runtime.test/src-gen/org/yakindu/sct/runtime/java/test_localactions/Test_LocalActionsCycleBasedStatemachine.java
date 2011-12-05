@@ -26,10 +26,14 @@ public class Test_LocalActionsCycleBasedStatemachine
 		implements
 			ITimedStatemachine {
 
-	private static final TimeEvent State1_time_event_0 = new TimeEvent(
-			"State1_time_event_0", true);
-	private static final TimeEvent State2_time_event_0 = new TimeEvent(
-			"State2_time_event_0", false);
+	private enum TimeEvents {
+		State1_time_event_0, State2_time_event_0,
+	}
+
+	private static final TimeEvent<TimeEvents> State1_time_event_0 = new TimeEvent<TimeEvents>(
+			TimeEvents.State1_time_event_0, true);
+	private static final TimeEvent<TimeEvents> State2_time_event_0 = new TimeEvent<TimeEvents>(
+			TimeEvents.State2_time_event_0, false);
 
 	public enum State {
 		State1, State2,
@@ -39,28 +43,28 @@ public class Test_LocalActionsCycleBasedStatemachine
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 
-	private final ArrayList<Event> occuredEvents;
+	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
 
-	private final Collection<Event> outEvents;
+	private final Collection<Event<? extends Enum<?>>> outEvents;
 
 	private ITimerHandler timerHandler;
 
 	private long cycleStartTime;
 
 	public Test_LocalActionsCycleBasedStatemachine() {
-		occuredEvents = new ArrayList<Event>();
-		outEvents = new HashSet<Event>();
+		occuredEvents = new ArrayList<Event<? extends Enum<?>>>();
+		outEvents = new HashSet<Event<? extends Enum<?>>>();
 		defaultInterface = new DefaultInterfaceImpl(this);
 		State1_time_event_0.setStatemachine(this);
 		State2_time_event_0.setStatemachine(this);
 
 	}
 
-	protected Collection<Event> getOccuredEvents() {
+	protected Collection<Event<? extends Enum<?>>> getOccuredEvents() {
 		return occuredEvents;
 	}
 
-	protected Collection<Event> getOutEvents() {
+	protected Collection<Event<? extends Enum<?>>> getOutEvents() {
 		return outEvents;
 	}
 

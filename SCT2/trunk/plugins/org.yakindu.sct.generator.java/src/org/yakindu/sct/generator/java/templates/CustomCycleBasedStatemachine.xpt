@@ -183,12 +183,28 @@ import «entry.getBasePackageName()».ValuedEvent;
 
 public class «getCycleBasedStatemachineName()» implements «getStatemachineImplementationType()» {
 	
+	«IF getInternalScopeEvents().size > 0-»
+	private enum Events {
+	«FOREACH getInternalScopeEvents() AS event-»
+		«event.name.toFirstUpper()»,
+	«ENDFOREACH-»
+	}
+	«ENDIF-»
+	
+	«IF isTimedStatemachine()-»
+	private enum TimeEvents {
+	«FOREACH getTimeEvents() AS timeEvent-»
+		«timeEvent.getName().toFirstUpper()»,
+	«ENDFOREACH-»
+	}
+	«ENDIF-»
+	
 	«FOREACH getInternalScopeEvents() AS event-»
 	private final «event.getEventType()» «event.getName()» = new «event.getEventType()»(«event.getCreationSignature()»); 
 	«ENDFOREACH-»
 	
 	«FOREACH getTimeEvents() AS timeEvent-»
-	private static final TimeEvent «timeEvent.getName()» = new TimeEvent("«timeEvent.getName()»", «timeEvent.periodic»); 
+	private static final TimeEvent<TimeEvents> «timeEvent.getName()» = new TimeEvent<TimeEvents>(TimeEvents.«timeEvent.getName().toFirstUpper()», «timeEvent.periodic»); 
 	«ENDFOREACH»
 	
 	public enum State {
@@ -207,9 +223,9 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 	
-	private final ArrayList<Event> occuredEvents;
+	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
 	
-	private final Collection<Event> outEvents;
+	private final Collection<Event<? extends Enum<?>>> outEvents;
 	
 	«IF isTimedStatemachine()-»
 	private ITimerHandler timerHandler;
@@ -218,8 +234,8 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	«ENDIF-»
 	
 	public «getCycleBasedStatemachineName()»() {
-		occuredEvents = new ArrayList<Event>();
-		outEvents = new HashSet<Event>();
+		occuredEvents = new ArrayList<Event<? extends Enum<?>>>();
+		outEvents = new HashSet<Event<? extends Enum<?>>>();
 		«FOREACH getInterfaceScope() AS interface-»
 		«interface.getInterfaceName().toFirstLower()» = new «interface.getInterfaceImplName()»(this);
 		«ENDFOREACH-»
@@ -228,11 +244,11 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 		«ENDFOREACH»
 	}
 	
-	protected Collection<Event> getOccuredEvents() {
+	protected Collection<Event<? extends Enum<?>>> getOccuredEvents() {
 		return occuredEvents;
 	}
 	
-	protected Collection<Event> getOutEvents(){
+	protected Collection<Event<? extends Enum<?>>> getOutEvents(){
 		return outEvents;
 	}
 	

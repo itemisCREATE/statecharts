@@ -10,15 +10,15 @@
  */
 package org.yakindu.sct.runtime.java;
 
-public class Event {
+public class Event<Type extends Enum<Type>> {
 
-	private String name;
+	private Type name;
 
-	public Event(String name) {
+	public Event(Type name) {
 		this.name = name;
 	}
 
-	public String getName() {
+	public Type getName() {
 		return name;
 	}
 }

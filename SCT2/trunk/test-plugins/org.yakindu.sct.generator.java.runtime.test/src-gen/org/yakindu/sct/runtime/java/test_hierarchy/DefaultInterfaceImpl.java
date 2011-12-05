@@ -14,22 +14,22 @@ import org.yakindu.sct.runtime.java.Event;
 
 public class DefaultInterfaceImpl implements DefaultInterface {
 
-	private final Event EventEvent1 = new Event("event1");
-	private final Event EventEvent2 = new Event("event2");
-	private final Event EventEvent3 = new Event("event3");
-	private final Event EventEvent4 = new Event("event4");
-	private final Event EventEvent5 = new Event("event5");
-	private final Event EventEvent6 = new Event("event6");
-	private final Event EventEvent7 = new Event("event7");
-	private final Event EventEvent8 = new Event("event8");
-	private final Event EventEvent9 = new Event("event9");
-	private final Event EventEvent10 = new Event("event10");
-	private final Event EventEvent11 = new Event("event11");
-	private final Event EventEvent12 = new Event("event12");
-	private final Event EventEvent13 = new Event("event13");
-	private final Event EventEvent14 = new Event("event14");
-	private final Event EventEvent15 = new Event("event15");
-	private final Event EventEvent16 = new Event("event16");
+	private final Event<Events> EventEvent1 = new Event<Events>(Events.Event1);
+	private final Event<Events> EventEvent2 = new Event<Events>(Events.Event2);
+	private final Event<Events> EventEvent3 = new Event<Events>(Events.Event3);
+	private final Event<Events> EventEvent4 = new Event<Events>(Events.Event4);
+	private final Event<Events> EventEvent5 = new Event<Events>(Events.Event5);
+	private final Event<Events> EventEvent6 = new Event<Events>(Events.Event6);
+	private final Event<Events> EventEvent7 = new Event<Events>(Events.Event7);
+	private final Event<Events> EventEvent8 = new Event<Events>(Events.Event8);
+	private final Event<Events> EventEvent9 = new Event<Events>(Events.Event9);
+	private final Event<Events> EventEvent10 = new Event<Events>(Events.Event10);
+	private final Event<Events> EventEvent11 = new Event<Events>(Events.Event11);
+	private final Event<Events> EventEvent12 = new Event<Events>(Events.Event12);
+	private final Event<Events> EventEvent13 = new Event<Events>(Events.Event13);
+	private final Event<Events> EventEvent14 = new Event<Events>(Events.Event14);
+	private final Event<Events> EventEvent15 = new Event<Events>(Events.Event15);
+	private final Event<Events> EventEvent16 = new Event<Events>(Events.Event16);
 
 	private Test_HierarchyCycleBasedStatemachine statemachine;
 
@@ -42,7 +42,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent1);
 	}
 
-	public Event getEventEvent1() {
+	public Event<Events> getEventEvent1() {
 		return EventEvent1;
 	}
 
@@ -50,7 +50,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent2);
 	}
 
-	public Event getEventEvent2() {
+	public Event<Events> getEventEvent2() {
 		return EventEvent2;
 	}
 
@@ -58,7 +58,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent3);
 	}
 
-	public Event getEventEvent3() {
+	public Event<Events> getEventEvent3() {
 		return EventEvent3;
 	}
 
@@ -66,7 +66,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent4);
 	}
 
-	public Event getEventEvent4() {
+	public Event<Events> getEventEvent4() {
 		return EventEvent4;
 	}
 
@@ -74,7 +74,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent5);
 	}
 
-	public Event getEventEvent5() {
+	public Event<Events> getEventEvent5() {
 		return EventEvent5;
 	}
 
@@ -82,7 +82,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent6);
 	}
 
-	public Event getEventEvent6() {
+	public Event<Events> getEventEvent6() {
 		return EventEvent6;
 	}
 
@@ -90,7 +90,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent7);
 	}
 
-	public Event getEventEvent7() {
+	public Event<Events> getEventEvent7() {
 		return EventEvent7;
 	}
 
@@ -98,7 +98,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent8);
 	}
 
-	public Event getEventEvent8() {
+	public Event<Events> getEventEvent8() {
 		return EventEvent8;
 	}
 
@@ -106,7 +106,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent9);
 	}
 
-	public Event getEventEvent9() {
+	public Event<Events> getEventEvent9() {
 		return EventEvent9;
 	}
 
@@ -114,7 +114,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent10);
 	}
 
-	public Event getEventEvent10() {
+	public Event<Events> getEventEvent10() {
 		return EventEvent10;
 	}
 
@@ -122,7 +122,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent11);
 	}
 
-	public Event getEventEvent11() {
+	public Event<Events> getEventEvent11() {
 		return EventEvent11;
 	}
 
@@ -130,7 +130,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent12);
 	}
 
-	public Event getEventEvent12() {
+	public Event<Events> getEventEvent12() {
 		return EventEvent12;
 	}
 
@@ -138,7 +138,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent13);
 	}
 
-	public Event getEventEvent13() {
+	public Event<Events> getEventEvent13() {
 		return EventEvent13;
 	}
 
@@ -146,7 +146,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent14);
 	}
 
-	public Event getEventEvent14() {
+	public Event<Events> getEventEvent14() {
 		return EventEvent14;
 	}
 
@@ -154,7 +154,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent15);
 	}
 
-	public Event getEventEvent15() {
+	public Event<Events> getEventEvent15() {
 		return EventEvent15;
 	}
 
@@ -162,7 +162,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent16);
 	}
 
-	public Event getEventEvent16() {
+	public Event<Events> getEventEvent16() {
 		return EventEvent16;
 	}
 

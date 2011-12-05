@@ -35,6 +35,14 @@ import «entry.getBasePackageName()».ValuedEvent;
 
 public interface «getInterfaceName()»«getInterfaceExtension()» {
 	
+	«IF declarations.typeSelect(EventDefinition).size > 0-»
+	public enum Events {
+	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
+		«event.name.toFirstUpper()»,
+	«ENDFOREACH-»
+	}
+	«ENDIF-»
+	
 	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
 	«IF  event.direction ==  Direction::IN-»
 	public void raise«event.name.toFirstUpper()»();

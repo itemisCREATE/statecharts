@@ -21,9 +21,10 @@ public class TimerHandler implements ITimerHandler {
 
 	private final Timer timer = new Timer();
 
-	private final Map<TimeEvent, TimerTask> timerTaskMap = new HashMap<TimeEvent, TimerTask>();
+	private final Map<TimeEvent<? extends Enum<?>>, TimerTask> timerTaskMap = new HashMap<TimeEvent<? extends Enum<?>>, TimerTask>();
 
-	public void setTimer(final TimeEvent event, long time, long cycleStartTime) {
+	public void setTimer(final TimeEvent<? extends Enum<?>> event, long time,
+			long cycleStartTime) {
 		// Reset existing TimerTask for event. This step isn't necessary if
 		// timer tasks are properly reset by sexec model.
 		if (timerTaskMap.containsKey(event)) {
@@ -51,7 +52,7 @@ public class TimerHandler implements ITimerHandler {
 		}
 	}
 
-	public void resetTimer(TimeEvent event) {
+	public void resetTimer(TimeEvent<? extends Enum<?>> event) {
 		if (timerTaskMap.containsKey(event) && timerTaskMap.get(event) != null) {
 			timerTaskMap.get(event).cancel();
 			timer.purge();

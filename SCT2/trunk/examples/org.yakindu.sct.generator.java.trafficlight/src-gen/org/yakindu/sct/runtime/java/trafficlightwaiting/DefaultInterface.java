@@ -12,6 +12,10 @@ package org.yakindu.sct.runtime.java.trafficlightwaiting;
 
 public interface DefaultInterface {
 
+	public enum Events {
+		Keypress1, Keypress2,
+	}
+
 	public void raiseKeypress1();
 	public void raiseKeypress2();
 

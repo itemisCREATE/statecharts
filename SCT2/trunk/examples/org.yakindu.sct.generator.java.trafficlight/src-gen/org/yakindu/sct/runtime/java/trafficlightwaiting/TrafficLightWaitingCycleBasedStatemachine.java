@@ -26,26 +26,30 @@ public class TrafficLightWaitingCycleBasedStatemachine
 		implements
 			ITimedStatemachine {
 
-	private static final TimeEvent PedWaiting_time_event_0 = new TimeEvent(
-			"PedWaiting_time_event_0", false);
-	private static final TimeEvent WaitOn_time_event_0 = new TimeEvent(
-			"WaitOn_time_event_0", false);
-	private static final TimeEvent WaitOff_time_event_0 = new TimeEvent(
-			"WaitOff_time_event_0", false);
-	private static final TimeEvent StreetAttention_time_event_0 = new TimeEvent(
-			"StreetAttention_time_event_0", false);
-	private static final TimeEvent StreetRed_time_event_0 = new TimeEvent(
-			"StreetRed_time_event_0", false);
-	private static final TimeEvent PedestrianGreen_time_event_0 = new TimeEvent(
-			"PedestrianGreen_time_event_0", false);
-	private static final TimeEvent PedestrianRed_time_event_0 = new TimeEvent(
-			"PedestrianRed_time_event_0", false);
-	private static final TimeEvent StreetPrepare_time_event_0 = new TimeEvent(
-			"StreetPrepare_time_event_0", false);
-	private static final TimeEvent YellowOn_time_event_0 = new TimeEvent(
-			"YellowOn_time_event_0", false);
-	private static final TimeEvent YellowOff_time_event_0 = new TimeEvent(
-			"YellowOff_time_event_0", false);
+	private enum TimeEvents {
+		PedWaiting_time_event_0, WaitOn_time_event_0, WaitOff_time_event_0, StreetAttention_time_event_0, StreetRed_time_event_0, PedestrianGreen_time_event_0, PedestrianRed_time_event_0, StreetPrepare_time_event_0, YellowOn_time_event_0, YellowOff_time_event_0,
+	}
+
+	private static final TimeEvent<TimeEvents> PedWaiting_time_event_0 = new TimeEvent<TimeEvents>(
+			TimeEvents.PedWaiting_time_event_0, false);
+	private static final TimeEvent<TimeEvents> WaitOn_time_event_0 = new TimeEvent<TimeEvents>(
+			TimeEvents.WaitOn_time_event_0, false);
+	private static final TimeEvent<TimeEvents> WaitOff_time_event_0 = new TimeEvent<TimeEvents>(
+			TimeEvents.WaitOff_time_event_0, false);
+	private static final TimeEvent<TimeEvents> StreetAttention_time_event_0 = new TimeEvent<TimeEvents>(
+			TimeEvents.StreetAttention_time_event_0, false);
+	private static final TimeEvent<TimeEvents> StreetRed_time_event_0 = new TimeEvent<TimeEvents>(
+			TimeEvents.StreetRed_time_event_0, false);
+	private static final TimeEvent<TimeEvents> PedestrianGreen_time_event_0 = new TimeEvent<TimeEvents>(
+			TimeEvents.PedestrianGreen_time_event_0, false);
+	private static final TimeEvent<TimeEvents> PedestrianRed_time_event_0 = new TimeEvent<TimeEvents>(
+			TimeEvents.PedestrianRed_time_event_0, false);
+	private static final TimeEvent<TimeEvents> StreetPrepare_time_event_0 = new TimeEvent<TimeEvents>(
+			TimeEvents.StreetPrepare_time_event_0, false);
+	private static final TimeEvent<TimeEvents> YellowOn_time_event_0 = new TimeEvent<TimeEvents>(
+			TimeEvents.YellowOn_time_event_0, false);
+	private static final TimeEvent<TimeEvents> YellowOff_time_event_0 = new TimeEvent<TimeEvents>(
+			TimeEvents.YellowOff_time_event_0, false);
 
 	public enum State {
 		On, StreetGreen, PedWaiting, WaitOn, WaitOff, StreetAttention, StreetRed, PedestrianGreen, PedestrianRed, StreetPrepare, Off, YellowOn, YellowOff,
@@ -57,17 +61,17 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 	private final Set<State> activeStates = EnumSet.noneOf(State.class);
 
-	private final ArrayList<Event> occuredEvents;
+	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
 
-	private final Collection<Event> outEvents;
+	private final Collection<Event<? extends Enum<?>>> outEvents;
 
 	private ITimerHandler timerHandler;
 
 	private long cycleStartTime;
 
 	public TrafficLightWaitingCycleBasedStatemachine() {
-		occuredEvents = new ArrayList<Event>();
-		outEvents = new HashSet<Event>();
+		occuredEvents = new ArrayList<Event<? extends Enum<?>>>();
+		outEvents = new HashSet<Event<? extends Enum<?>>>();
 		interfaceTrafficLight = new InterfaceTrafficLightImpl(this);
 		interfacePedestrian = new InterfacePedestrianImpl(this);
 		defaultInterface = new DefaultInterfaceImpl(this);
@@ -84,11 +88,11 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 	}
 
-	protected Collection<Event> getOccuredEvents() {
+	protected Collection<Event<? extends Enum<?>>> getOccuredEvents() {
 		return occuredEvents;
 	}
 
-	protected Collection<Event> getOutEvents() {
+	protected Collection<Event<? extends Enum<?>>> getOutEvents() {
 		return outEvents;
 	}
 

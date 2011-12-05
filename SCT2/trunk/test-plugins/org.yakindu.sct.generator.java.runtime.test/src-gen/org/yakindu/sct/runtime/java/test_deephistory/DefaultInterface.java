@@ -12,6 +12,10 @@ package org.yakindu.sct.runtime.java.test_deephistory;
 
 public interface DefaultInterface {
 
+	public enum Events {
+		Event1, Event2, Event3, Event4, Event5, Event6, Event7, Event8, Event9,
+	}
+
 	public void raiseEvent1();
 	public void raiseEvent2();
 	public void raiseEvent3();

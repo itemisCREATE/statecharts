@@ -14,10 +14,10 @@ import org.yakindu.sct.runtime.java.Event;
 
 public class DefaultInterfaceImpl implements DefaultInterface {
 
-	private final Event EventEvent1 = new Event("Event1");
-	private final Event EventEvent2 = new Event("Event2");
-	private final Event EventEvent3 = new Event("Event3");
-	private final Event EventEvent4 = new Event("Event4");
+	private final Event<Events> EventEvent1 = new Event<Events>(Events.Event1);
+	private final Event<Events> EventEvent2 = new Event<Events>(Events.Event2);
+	private final Event<Events> EventEvent3 = new Event<Events>(Events.Event3);
+	private final Event<Events> EventEvent4 = new Event<Events>(Events.Event4);
 
 	private Test_LocalActionsCycleBasedStatemachine statemachine;
 
@@ -30,7 +30,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent1);
 	}
 
-	public Event getEventEvent1() {
+	public Event<Events> getEventEvent1() {
 		return EventEvent1;
 	}
 
@@ -38,7 +38,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent2);
 	}
 
-	public Event getEventEvent2() {
+	public Event<Events> getEventEvent2() {
 		return EventEvent2;
 	}
 
@@ -46,7 +46,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent3);
 	}
 
-	public Event getEventEvent3() {
+	public Event<Events> getEventEvent3() {
 		return EventEvent3;
 	}
 
@@ -54,7 +54,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventEvent4);
 	}
 
-	public Event getEventEvent4() {
+	public Event<Events> getEventEvent4() {
 		return EventEvent4;
 	}
 

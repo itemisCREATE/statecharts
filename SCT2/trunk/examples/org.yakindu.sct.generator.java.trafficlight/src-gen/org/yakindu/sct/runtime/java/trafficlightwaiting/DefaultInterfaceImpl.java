@@ -14,8 +14,10 @@ import org.yakindu.sct.runtime.java.Event;
 
 public class DefaultInterfaceImpl implements DefaultInterface {
 
-	private final Event EventKeypress1 = new Event("keypress1");
-	private final Event EventKeypress2 = new Event("keypress2");
+	private final Event<Events> EventKeypress1 = new Event<Events>(
+			Events.Keypress1);
+	private final Event<Events> EventKeypress2 = new Event<Events>(
+			Events.Keypress2);
 
 	private TrafficLightWaitingCycleBasedStatemachine statemachine;
 
@@ -28,7 +30,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventKeypress1);
 	}
 
-	public Event getEventKeypress1() {
+	public Event<Events> getEventKeypress1() {
 		return EventKeypress1;
 	}
 
@@ -36,7 +38,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		statemachine.getOccuredEvents().add(EventKeypress2);
 	}
 
-	public Event getEventKeypress2() {
+	public Event<Events> getEventKeypress2() {
 		return EventKeypress2;
 	}
 
