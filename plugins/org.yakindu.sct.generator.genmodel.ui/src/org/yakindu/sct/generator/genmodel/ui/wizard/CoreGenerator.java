@@ -13,6 +13,18 @@ package org.yakindu.sct.generator.genmodel.ui.wizard;
 /**
  * @author holger willebrandt - Initial contribution and API
  */
-public enum GeneratorType {
-	Java, Xpand, Xtend
+public enum CoreGenerator {
+
+	Java("yakindu::java"), C("yakindu::c"), Cpp("yakindu::cpp");
+
+	private String id;
+
+	private CoreGenerator(String id) {
+		this.id = id;
+	}
+
+	public String getId() {
+		return id;
+	}
+
 }

@@ -13,8 +13,12 @@ package org.yakindu.sct.generator.genmodel.ui.wizard;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -64,6 +68,15 @@ import com.google.common.collect.Lists;
 public class SGenWizardPage2 extends WizardPage {
 
 	protected static final String STATECHART_FILE_EXTENSION = "sct";
+	static Map<String, CoreGenerator> natureDefaultGenerators = new TreeMap<String, CoreGenerator>();
+	static {
+		natureDefaultGenerators.put("org.eclipse.cdt.core.cnature",
+				CoreGenerator.C);
+		natureDefaultGenerators.put("org.eclipse.cdt.core.ccnature",
+				CoreGenerator.Cpp);
+		natureDefaultGenerators.put("org.eclipse.jdt.core.javanature",
+				CoreGenerator.Java);
+	}
 	private ComboViewer generatorCombo;
 	protected CheckboxTreeViewer stateChartTree;
 	private final SGenWizardPage1 fileSelectionPage;
@@ -252,7 +265,29 @@ public class SGenWizardPage2 extends WizardPage {
 			} catch (CoreException e) {
 				// input will be empty
 			}
+			preselectGenerator(folder);
 			checkComplete();
+		}
+	}
+
+	private void preselectGenerator(IFolder folder) {
+		String generatorId = CoreGenerator.Java.getId();
+		IProject project = folder.getProject();
+		try {
+			for (Entry<String, CoreGenerator> entry : natureDefaultGenerators
+					.entrySet()) {
+				if (project.getNature(entry.getKey()) != null) {
+					generatorId = entry.getValue().getId();
+				}
+			}
+		} catch (CoreException e) {
+			// nothing will be pre-selected
+		}
+		GeneratorDescriptor descriptor = generatorId != null ? GeneratorExtensions
+				.getGeneratorDescriptorForId(generatorId) : null;
+		if (descriptor != null) {
+			generatorCombo.setSelection(new StructuredSelection(
+					new Object[] { descriptor }), true);
 		}
 	}
 
