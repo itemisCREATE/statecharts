@@ -20,6 +20,7 @@ import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeFactory;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
+import com.google.inject.util.Modules;
 
 /**
  * Factory registered via extension point
@@ -36,8 +37,9 @@ public class SexecExecutionFacadeFactory implements IExecutionFacadeFactory {
 	private IExecutionFlowInterpreter interpreter;
 
 	public SexecExecutionFacadeFactory() {
-		Guice.createInjector(new SequencerModule(), new InterpreterModule())
-				.injectMembers(this);
+		Guice.createInjector(
+				Modules.override(new SequencerModule()).with(
+						new InterpreterModule())).injectMembers(this);
 	}
 
 	public IExecutionFlowInterpreter createExecutionFacade(Statechart statechart) {

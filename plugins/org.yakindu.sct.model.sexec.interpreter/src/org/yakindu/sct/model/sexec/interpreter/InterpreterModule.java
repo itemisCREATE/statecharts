@@ -13,6 +13,7 @@ package org.yakindu.sct.model.sexec.interpreter;
 import org.yakindu.sct.model.sexec.interpreter.impl.ExecutionFlowInterpreter;
 import org.yakindu.sct.model.sexec.interpreter.impl.TimerTaskTimingService;
 import org.yakindu.sct.model.sexec.interpreter.stext.StextStatementInterpreter;
+import org.yakindu.sct.model.sexec.transformation.SequencerModule;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionContextImpl;
 
@@ -30,14 +31,16 @@ public class InterpreterModule implements Module {
 	public static final String INTERPRETER_NAME = "InterpreterName";
 
 	public void configure(Binder binder) {
-
+		binder.bind(Boolean.class)
+				.annotatedWith(Names.named(SequencerModule.ADD_TRACES))
+				.toInstance(Boolean.TRUE);
 		binder.bind(String.class).annotatedWith(Names.named(INTERPRETER_NAME))
 				.toInstance("SExecution Interpreter");
-
 		binder.bind(IStatementInterpreter.class).to(
 				StextStatementInterpreter.class);
 		binder.bind(IExecutionContext.class).to(ExecutionContextImpl.class);
 		binder.bind(ITimingService.class).to(TimerTaskTimingService.class);
-		binder.bind(IExecutionFlowInterpreter.class).to(ExecutionFlowInterpreter.class);
+		binder.bind(IExecutionFlowInterpreter.class).to(
+				ExecutionFlowInterpreter.class);
 	}
 }
