@@ -8,7 +8,7 @@
             class="org.yakindu.sct.generator.cpp.CppCodeGenerator"
             description="YAKINDU.org C++ Code Generator"
             id="yakindu::cpp"
-            name="YAKINDU.org C++ Code Generator">
+            name="YAKINDU C++ Code Generator">
       </SCTGenerator>
    </extension>
    <extension

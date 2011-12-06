@@ -7,7 +7,7 @@
             class="org.yakindu.sct.generator.java.JavaSCTGenerator"
             description="YAKINDU Java Code Generator"
             id="yakindu::java"
-            name="YAKINDU Java generator">
+            name="YAKINDU Java Code Generator">
       </SCTGenerator>
    </extension>
    <extension
