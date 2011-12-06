@@ -30,6 +30,7 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTreeViewer;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -53,6 +54,7 @@ import org.yakindu.sct.ui.editor.StatechartImages;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 
 /**
@@ -130,22 +132,26 @@ public class SGenWizardPage2 extends WizardPage {
 		}
 	};
 
+	private final IStructuredSelection selection;
+
 	/**
 	 * @param pageName
+	 * @param selection
 	 * @param resourceDescriptions
 	 * @param selection
 	 */
-	protected SGenWizardPage2(String pageName, SGenWizardPage1 fileSelectionPage) {
+	protected SGenWizardPage2(String pageName,
+			SGenWizardPage1 fileSelectionPage, IStructuredSelection selection) {
 		super(pageName);
 		this.fileSelectionPage = fileSelectionPage;
+		this.selection = selection;
 	}
 
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
 		setControl(container);
 		container.setLayout(new GridLayout(1, false));
-		
-		
+
 		Label lblGenerator = new Label(container, SWT.NONE);
 		lblGenerator.setText("Generator");
 
@@ -184,8 +190,6 @@ public class SGenWizardPage2 extends WizardPage {
 				.addDoubleClickListener(new TreeExpandingDoubleClickListener(
 						stateChartTree, checkStateListener));
 		stateChartTree.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
-
-		
 
 		checkComplete();
 
@@ -244,10 +248,19 @@ public class SGenWizardPage2 extends WizardPage {
 				TreeNode projectTree = new TreeNode(folder.getProject());
 				projectTree.children.add(buildTree(folder.getProject()));
 				stateChartTree.setInput(projectTree);
+				applyPreselection(projectTree);
 			} catch (CoreException e) {
 				// input will be empty
 			}
 			checkComplete();
+		}
+	}
+
+	private void applyPreselection(TreeNode treeNode) {
+		if (treeNode.isPreselected())
+			stateChartTree.setChecked(treeNode, true);
+		for (TreeNode child : treeNode.children) {
+			applyPreselection(child);
 		}
 	}
 
@@ -276,8 +289,9 @@ public class SGenWizardPage2 extends WizardPage {
 		List<IResource> statecharts = Lists.newArrayList();
 		resource.accept(new StatechartVisitor(resource, statecharts));
 		if (!statecharts.isEmpty()) {
-			Iterables.addAll(root.children,
-					Iterables.transform(statecharts, toTreeNode));
+			Iterables.addAll(root.children, Iterables.transform(
+					Iterables.transform(statecharts, toTreeNode),
+					preselect(selection)));
 		}
 		List<IResource> folders = Lists.newArrayList();
 		resource.accept(new FolderVisitor(resource, folders));
@@ -288,6 +302,20 @@ public class SGenWizardPage2 extends WizardPage {
 			}
 		}
 		return root;
+	}
+
+	private Function<TreeNode, TreeNode> preselect(
+			final IStructuredSelection selection) {
+
+		return new Function<TreeNode, TreeNode>() {
+
+			public TreeNode apply(TreeNode from) {
+				if (Iterators.contains(selection.iterator(), from.resource)) {
+					from.setPreselected(true);
+				}
+				return from;
+			}
+		};
 	}
 
 	protected static boolean isStatechartResource(IResource resource) {
@@ -305,6 +333,7 @@ public class SGenWizardPage2 extends WizardPage {
 
 	private static class TreeNode {
 		final IResource resource;
+		private boolean preselected;
 		final List<TreeNode> children = Lists.newArrayList();
 
 		public TreeNode(IResource project) {
@@ -314,6 +343,14 @@ public class SGenWizardPage2 extends WizardPage {
 		public boolean isEmpty() {
 			return resource.getType() == IResource.FOLDER
 					&& (children.isEmpty() || Iterables.all(children, isEmpty));
+		}
+
+		public boolean isPreselected() {
+			return preselected;
+		}
+
+		public void setPreselected(boolean preselect) {
+			this.preselected = preselect;
 		}
 
 		static final Predicate<TreeNode> isEmpty = new Predicate<TreeNode>() {

@@ -44,7 +44,7 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 	private IStructuredSelection selection;
 
 	protected SGenWizardPage2 generatorConfigPage;
-	
+
 	@Inject
 	private ResourceSet resourceSet;
 
@@ -62,7 +62,8 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 		modelFilePage
 				.setDescription("Create a new YAKINDU Statechart Generator Model");
 		addPage(modelFilePage);
-		generatorConfigPage = new SGenWizardPage2("Statecharts", modelFilePage);
+		generatorConfigPage = new SGenWizardPage2("Statecharts", modelFilePage,
+				selection);
 		generatorConfigPage
 				.setTitle("YAKINDU Statechart Generator Model Configuration");
 		generatorConfigPage
@@ -91,10 +92,10 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 	private void createDefaultModel(URI uri) {
 		List<Statechart> statecharts = generatorConfigPage.getStatecharts();
 		String generatorId = generatorConfigPage.getGeneratorId();
-		
+
 		ModelCreator creator = new ModelCreator(generatorId, statecharts);
 		GeneratorModel model = creator.create();
-		
+
 		Resource resource = resourceSet.createResource(uri);
 		resource.getContents().add(model);
 		try {
