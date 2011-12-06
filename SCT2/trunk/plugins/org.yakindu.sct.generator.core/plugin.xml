@@ -27,7 +27,7 @@
           class="org.yakindu.sct.generator.core.impl.GenericXPandCodeGenerator"
           description="Generate Code using Xpand Templates"
           id="yakindu::xpand"
-          name="Custom Xpand Generator">
+          name="Custom Xpand-based Generator">
     </SCTGenerator>
  </extension>
  <extension
@@ -36,7 +36,9 @@
           class="org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator"
           description="Generate Code using Xpand Templates"
           id="yakindu::generic"
-          name="Custom Xtend2/Java Generator">
+          name="Custom Java-based Generator">
     </SCTGenerator>
  </extension>
+ 
+
 </plugin>
