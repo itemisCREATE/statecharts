@@ -72,22 +72,16 @@ import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sexec.ExecutionChoice
 import org.yakindu.sct.model.stext.stext.DefaultEvent
 import org.yakindu.sct.model.sexec.ExecutionNode
+import com.google.inject.name.Named
 
 class ModelSequencer {
 	
 	@Inject extension IQualifiedNameProvider qfnProvider
 	@Inject extension FactoryExtension factory
 	@Inject extension StatechartExtensions sct
-
-
+	@Inject
+	@Named(SequencerModule::ADD_TRACES)
 	boolean _addTraceSteps 
-
-
-	def addTraceSteps(boolean b) {
-		_addTraceSteps = b
-	}
-	
-	
 	
 	/* ==========================================================================
 	 * TRANSFORMATION ROOT
