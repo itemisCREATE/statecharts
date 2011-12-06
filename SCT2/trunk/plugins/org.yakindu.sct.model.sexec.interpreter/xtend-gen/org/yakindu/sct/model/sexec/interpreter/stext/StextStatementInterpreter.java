@@ -151,8 +151,9 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
         return _value_1;
       }
       Declaration _value_2 = expression.getValue();
-      String _name = _value_2.getName();
-      boolean _isEventRaised = this.context.isEventRaised(_name);
+      QualifiedName _qualifiedName_1 = this.provider.qualifiedName(_value_2);
+      String _string_1 = _qualifiedName_1.toString();
+      boolean _isEventRaised = this.context.isEventRaised(_string_1);
       return ((Boolean)_isEventRaised);
     }
   }
