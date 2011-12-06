@@ -5,6 +5,7 @@ import org.yakindu.sct.model.sgraph.naming.SGraphNameProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
+import com.google.inject.name.Names;
 
 /**
  * 
@@ -13,11 +14,12 @@ import com.google.inject.Module;
  */
 public class SequencerModule implements Module {
 
+	public static final String ADD_TRACES = "ADD_TRACES";
+
 	public void configure(Binder binder) {
-
-		binder.bind(IQualifiedNameProvider.class).to(
-				SGraphNameProvider.class);
-
+		binder.bind(IQualifiedNameProvider.class).to(SGraphNameProvider.class);
+		binder.bind(Boolean.class).annotatedWith(Names.named(ADD_TRACES))
+				.toInstance(Boolean.FALSE);
 	}
 
 }
