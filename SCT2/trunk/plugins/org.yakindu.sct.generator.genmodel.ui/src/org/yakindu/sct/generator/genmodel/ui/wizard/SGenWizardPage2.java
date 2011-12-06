@@ -81,6 +81,7 @@ public class SGenWizardPage2 extends WizardPage {
 	protected CheckboxTreeViewer stateChartTree;
 	private final SGenWizardPage1 fileSelectionPage;
 
+
 	private static final ITreeContentProvider treeContentProvider = new ITreeContentProvider() {
 
 		public Object[] getElements(Object inputElement) {
@@ -173,10 +174,10 @@ public class SGenWizardPage2 extends WizardPage {
 				new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		generatorCombo.setLabelProvider(new GeneratorDescriptorLabelProvider());
 		generatorCombo.setContentProvider(new ArrayContentProvider());
-		GeneratorDescriptor[] generatorArray = Iterables.toArray(
-				GeneratorExtensions.getGeneratorDescriptors(),
-				GeneratorDescriptor.class);
-		generatorCombo.setInput(generatorArray);
+		List<GeneratorDescriptor> descriptors = Lists
+				.newArrayList(GeneratorExtensions.getGeneratorDescriptors());
+		Collections.sort(descriptors, CoreGenerator.generatorOrder);
+		generatorCombo.setInput(descriptors);
 		generatorCombo.getCombo().select(0);
 
 		Label lblNewLabel = new Label(container, SWT.NONE);
@@ -292,8 +293,9 @@ public class SGenWizardPage2 extends WizardPage {
 	}
 
 	private void applyPreselection(TreeNode treeNode) {
-		if (treeNode.isPreselected())
+		if (treeNode.isPreselected()) {
 			stateChartTree.setChecked(treeNode, true);
+		}
 		for (TreeNode child : treeNode.children) {
 			applyPreselection(child);
 		}
