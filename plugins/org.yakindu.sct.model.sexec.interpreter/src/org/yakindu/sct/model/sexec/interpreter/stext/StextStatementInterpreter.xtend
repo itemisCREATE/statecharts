@@ -101,7 +101,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		if(variableRef != null){
 			return variableRef.getValue
 		}
-		return context.isEventRaised(expression.value.name)
+		return context.isEventRaised(expression.value.qualifiedName.toString)
 	}
 	
 	def dispatch execute(EventValueReferenceExpression expression){
