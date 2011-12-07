@@ -81,7 +81,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
 	@Check
 	public void checkParameterValue(final FeatureParameterValue value) {
-		if (value.getValue() == null)
+		if (value.getExpression() == null || value.getValue() == null)
 			return;
 		GeneratorModel model = (GeneratorModel) EcoreUtil2
 				.getRootContainer(value);
