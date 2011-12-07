@@ -32637,30 +32637,34 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ActiveStateReferenceExpression__ValueAssignment_3"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11374:1: rule__ActiveStateReferenceExpression__ValueAssignment_3 : ( ( RULE_ID ) ) ;
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11374:1: rule__ActiveStateReferenceExpression__ValueAssignment_3 : ( ( ruleFQN ) ) ;
     public final void rule__ActiveStateReferenceExpression__ValueAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11378:1: ( ( ( RULE_ID ) ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11379:1: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11378:1: ( ( ( ruleFQN ) ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11379:1: ( ( ruleFQN ) )
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11379:1: ( ( RULE_ID ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11380:1: ( RULE_ID )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11379:1: ( ( ruleFQN ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11380:1: ( ruleFQN )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getActiveStateReferenceExpressionAccess().getValueRegularStateCrossReference_3_0()); 
             }
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11381:1: ( RULE_ID )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11382:1: RULE_ID
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11381:1: ( ruleFQN )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11382:1: ruleFQN
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getActiveStateReferenceExpressionAccess().getValueRegularStateIDTerminalRuleCall_3_0_1()); 
+               before(grammarAccess.getActiveStateReferenceExpressionAccess().getValueRegularStateFQNParserRuleCall_3_0_1()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ActiveStateReferenceExpression__ValueAssignment_323203); if (state.failed) return ;
+            pushFollow(FOLLOW_ruleFQN_in_rule__ActiveStateReferenceExpression__ValueAssignment_323203);
+            ruleFQN();
+
+            state._fsp--;
+            if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getActiveStateReferenceExpressionAccess().getValueRegularStateIDTerminalRuleCall_3_0_1()); 
+               after(grammarAccess.getActiveStateReferenceExpressionAccess().getValueRegularStateFQNParserRuleCall_3_0_1()); 
             }
 
             }
@@ -34288,7 +34292,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleFQN_in_rule__ElementReferenceExpression__ValueAssignment_123086 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFQN_in_rule__EventValueReferenceExpression__ValueAssignment_323125 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFQN_in_rule__EventRaisedReferenceExpression__ValueAssignment_323164 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__ActiveStateReferenceExpression__ValueAssignment_323203 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_rule__ActiveStateReferenceExpression__ValueAssignment_323203 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFQN_in_rule__OperationCall__OperationAssignment_123242 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__OperationCall__ArgsAssignment_3_023277 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__OperationCall__ArgsAssignment_3_1_123308 = new BitSet(new long[]{0x0000000000000002L});

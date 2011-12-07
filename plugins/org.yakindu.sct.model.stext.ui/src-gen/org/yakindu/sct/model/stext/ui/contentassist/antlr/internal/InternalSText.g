@@ -11379,8 +11379,8 @@ rule__ActiveStateReferenceExpression__ValueAssignment_3
 (
 { before(grammarAccess.getActiveStateReferenceExpressionAccess().getValueRegularStateCrossReference_3_0()); }
 (
-{ before(grammarAccess.getActiveStateReferenceExpressionAccess().getValueRegularStateIDTerminalRuleCall_3_0_1()); }
-	RULE_ID{ after(grammarAccess.getActiveStateReferenceExpressionAccess().getValueRegularStateIDTerminalRuleCall_3_0_1()); }
+{ before(grammarAccess.getActiveStateReferenceExpressionAccess().getValueRegularStateFQNParserRuleCall_3_0_1()); }
+	ruleFQN{ after(grammarAccess.getActiveStateReferenceExpressionAccess().getValueRegularStateFQNParserRuleCall_3_0_1()); }
 )
 { after(grammarAccess.getActiveStateReferenceExpressionAccess().getValueRegularStateCrossReference_3_0()); }
 )

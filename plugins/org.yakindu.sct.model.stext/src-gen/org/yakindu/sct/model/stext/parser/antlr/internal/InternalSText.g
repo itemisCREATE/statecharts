@@ -3672,10 +3672,12 @@ ruleActiveStateReferenceExpression returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getActiveStateReferenceExpressionRule());
 	        }
         }
-	otherlv_3=RULE_ID
-	{
-		newLeafNode(otherlv_3, grammarAccess.getActiveStateReferenceExpressionAccess().getValueRegularStateCrossReference_3_0()); 
-	}
+		{ 
+	        newCompositeNode(grammarAccess.getActiveStateReferenceExpressionAccess().getValueRegularStateCrossReference_3_0()); 
+	    }
+		ruleFQN		{ 
+	        afterParserOrEnumRuleCall();
+	    }
 
 )
 )	otherlv_4=')' 

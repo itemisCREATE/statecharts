@@ -2161,14 +2161,14 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cValueAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final CrossReference cValueRegularStateCrossReference_3_0 = (CrossReference)cValueAssignment_3.eContents().get(0);
-		private final RuleCall cValueRegularStateIDTerminalRuleCall_3_0_1 = (RuleCall)cValueRegularStateCrossReference_3_0.eContents().get(1);
+		private final RuleCall cValueRegularStateFQNParserRuleCall_3_0_1 = (RuleCall)cValueRegularStateCrossReference_3_0.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//ActiveStateReferenceExpression:
-		//	{ActiveStateReferenceExpression} "active" "(" value=[sct::RegularState] ")";
+		//	{ActiveStateReferenceExpression} "active" "(" value=[sct::RegularState|FQN] ")";
 		public ParserRule getRule() { return rule; }
 
-		//{ActiveStateReferenceExpression} "active" "(" value=[sct::RegularState] ")"
+		//{ActiveStateReferenceExpression} "active" "(" value=[sct::RegularState|FQN] ")"
 		public Group getGroup() { return cGroup; }
 
 		//{ActiveStateReferenceExpression}
@@ -2180,14 +2180,14 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//"("
 		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
-		//value=[sct::RegularState]
+		//value=[sct::RegularState|FQN]
 		public Assignment getValueAssignment_3() { return cValueAssignment_3; }
 
-		//[sct::RegularState]
+		//[sct::RegularState|FQN]
 		public CrossReference getValueRegularStateCrossReference_3_0() { return cValueRegularStateCrossReference_3_0; }
 
-		//ID
-		public RuleCall getValueRegularStateIDTerminalRuleCall_3_0_1() { return cValueRegularStateIDTerminalRuleCall_3_0_1; }
+		//FQN
+		public RuleCall getValueRegularStateFQNParserRuleCall_3_0_1() { return cValueRegularStateFQNParserRuleCall_3_0_1; }
 
 		//")"
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
@@ -3689,7 +3689,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ActiveStateReferenceExpression:
-	//	{ActiveStateReferenceExpression} "active" "(" value=[sct::RegularState] ")";
+	//	{ActiveStateReferenceExpression} "active" "(" value=[sct::RegularState|FQN] ")";
 	public ActiveStateReferenceExpressionElements getActiveStateReferenceExpressionAccess() {
 		return (pActiveStateReferenceExpression != null) ? pActiveStateReferenceExpression : (pActiveStateReferenceExpression = new ActiveStateReferenceExpressionElements());
 	}

@@ -10780,11 +10780,11 @@ protected class EventRaisedReferenceExpression_RightParenthesisKeyword_4 extends
 /************ begin Rule ActiveStateReferenceExpression ****************
  *
  * ActiveStateReferenceExpression:
- * 	{ActiveStateReferenceExpression} "active" "(" value=[sct::RegularState] ")";
+ * 	{ActiveStateReferenceExpression} "active" "(" value=[sct::RegularState|FQN] ")";
  *
  **/
 
-// {ActiveStateReferenceExpression} "active" "(" value=[sct::RegularState] ")"
+// {ActiveStateReferenceExpression} "active" "(" value=[sct::RegularState|FQN] ")"
 protected class ActiveStateReferenceExpression_Group extends GroupToken {
 	
 	public ActiveStateReferenceExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10883,7 +10883,7 @@ protected class ActiveStateReferenceExpression_LeftParenthesisKeyword_2 extends 
 
 }
 
-// value=[sct::RegularState]
+// value=[sct::RegularState|FQN]
 protected class ActiveStateReferenceExpression_ValueAssignment_3 extends AssignmentToken  {
 	
 	public ActiveStateReferenceExpression_ValueAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

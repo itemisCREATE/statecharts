@@ -14,7 +14,7 @@ public class StextNameProvider extends SGraphNameProvider {
 	@Inject
 	IQualifiedNameConverter nameConverter;
 
-	QualifiedName qualifiedName(InterfaceScope ele) {
+	public QualifiedName qualifiedName(InterfaceScope ele) {
 		QualifiedName name = null;
 		if (!Strings.isEmpty(ele.getName())) {
 			name = nameConverter.toQualifiedName(ele.getName());

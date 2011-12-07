@@ -304,7 +304,7 @@ EventRaisedReferenceExpression:
 	{EventRaisedReferenceExpression} 'raised' '(' value=[sct::Event|FQN]')';
 	
 ActiveStateReferenceExpression:
-	{ActiveStateReferenceExpression}'active' '(' value=[sct::RegularState] ')' 
+	{ActiveStateReferenceExpression}'active' '(' value=[sct::RegularState|FQN] ')' 
 ;
 
 
