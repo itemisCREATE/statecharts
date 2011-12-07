@@ -26,8 +26,6 @@ import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.editparts.LayerManager;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
-import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
@@ -75,42 +73,14 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 		IProject project = getEditorInput().getFile().getProject();
 		if (project != null && !XtextProjectHelper.hasNature(project)
 				&& project.isAccessible() && !project.isHidden()) {
-			String title = "Add Xtext Nature";
-			String message = "Do you want to add the Xtext nature to the project '"
-					+ project.getName() + "'?";
-
-			MessageDialog dialog = new MessageDialog(
-					getEditorSite().getShell(), title, null, message,
-					MessageDialog.QUESTION, new String[] {
-							IDialogConstants.YES_LABEL,
-							IDialogConstants.NO_LABEL,
-							IDialogConstants.CANCEL_LABEL }, 0);
-			int open = dialog.open();
-			if (open == 0) {
-				toggleNature(project);
-			}
+			addNature(project);
 		}
 	}
 
-	public void toggleNature(IProject project) {
+	public void addNature(IProject project) {
 		try {
 			IProjectDescription description = project.getDescription();
 			String[] natures = description.getNatureIds();
-
-			for (int i = 0; i < natures.length; ++i) {
-				if (XtextProjectHelper.NATURE_ID.equals(natures[i])) {
-					// Remove the nature
-					String[] newNatures = new String[natures.length - 1];
-					System.arraycopy(natures, 0, newNatures, 0, i);
-					System.arraycopy(natures, i + 1, newNatures, i,
-							natures.length - i - 1);
-					description.setNatureIds(newNatures);
-					project.setDescription(description, null);
-					return;
-				}
-			}
-
-			// Add the nature
 			String[] newNatures = new String[natures.length + 1];
 			System.arraycopy(natures, 0, newNatures, 0, natures.length);
 			newNatures[natures.length] = XtextProjectHelper.NATURE_ID;
