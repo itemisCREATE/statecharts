@@ -23,6 +23,7 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.Direction;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
@@ -40,6 +41,8 @@ import org.yakindu.sct.model.stext.stext.StatechartDefinition;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
+import com.google.inject.Inject;
+
 import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
 
 /**
@@ -49,6 +52,22 @@ import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
  * 
  */
 public class STextJavaValidator extends AbstractSTextJavaValidator {
+
+	@Inject
+	private StaticTypeAnalyzer analyzer;
+
+	@Check
+	public void checkExpression(final Statement statement) {
+		try {
+			analyzer.check(statement);
+		} catch (TypeCheckException e) {
+			error(e.getMessage(), null);
+		} catch (IllegalArgumentException e) {
+			// This happens, when the expression is not completed for Unhandled
+			// parameter types: [null]
+			// We can safely ignore this exception
+		}
+	}
 
 	@Check(CheckType.FAST)
 	public void checkReactionTrigger(ReactionTrigger reactionTrigger) {
