@@ -9,6 +9,7 @@ Templates for the main statechart cpp file.
 «IMPORT sexec»
 «IMPORT stext»
 «IMPORT sgraph»
+«IMPORT genmodel»
 
 «EXTENSION org::yakindu::sct::generator::c::templates::Expression»
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
@@ -57,9 +58,10 @@ typedef struct {
 
 /* Explicit Constructor & Destructor */
 extern void «stName()»_init(«StName()»* handle, Timer* timer, EventPool* eventPool);
+extern void «stName()»_enter(«StName()»* handle);
 extern void «stName()»_exit(«StName()»* handle);
+extern void «stName()»_destruct(«StName()»* handle);
 
-extern void «stName()»_setEvent(«StName()»* handle, _Event* ev);
 extern void «stName()»_runCycle(«StName()»* handle);
 
 extern boolean «stName()»_eventWaiting(«StName()»* handle);
@@ -68,10 +70,17 @@ extern boolean «stName()»_eventWaiting(«StName()»* handle);
 extern «interface.interfaceClassName()»* «stName()»_get_«interface.interfaceObjectName()»(«StName()»* handle);
 «ENDFOREACH»
 
-	/* virtual function form state machine must be implemented here */
+#define «scName()»_eventPool_init_heap(handle, maxElemPerEvent) eventPool_init_heap(handle, event_last, maxElemPerEvent, &«scName()»_getSizeofEvent )
+
+/* only friends can see these functions */
+#ifdef «STNAME()»_FRIENDS
+
+extern void «stName()»_setEvent(«StName()»* handle, _Event* ev);
+
+/* virtual function form state machine must be implemented here */
 extern void statemachine_cy__runCycle(Statemachine_cy* handle);
 
-#define «scName()»_eventPool_init_heap(handle, maxElemPerEvent) eventPool_init_heap(handle, event_last, maxElemPerEvent, &«scName()»_getSizeofEvent )
+#endif /* «STNAME()»_FRIENDS */
 
 #endif /* «STNAME()»_H_ */
 
