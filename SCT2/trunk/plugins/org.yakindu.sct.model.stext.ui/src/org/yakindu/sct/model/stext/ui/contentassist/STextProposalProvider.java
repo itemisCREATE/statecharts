@@ -24,7 +24,7 @@ import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
-import org.yakindu.sct.model.stext.stext.StatechartDefinition;
+import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
 
 import com.google.inject.Inject;
@@ -77,7 +77,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 					.getGroup().eContents()));
 		}
 		// context Statechart
-		else if (contentAssistContext.getRootModel() instanceof StatechartDefinition) {
+		else if (contentAssistContext.getRootModel() instanceof StatechartSpecification) {
 			keywords.addAll(getKeywords(grammarAccess.getExitEventAccess()
 					.getGroup().eContents()));
 			keywords.addAll(getKeywords(grammarAccess.getEntryEventAccess()
@@ -88,8 +88,6 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			keywords.addAll(getKeywords(grammarAccess.getLocalReactionAccess()
 					.getGroup().eContents()));
 			keywords.addAll(getKeywords(grammarAccess.getAlwaysEventAccess()
-					.getGroup().eContents()));
-			keywords.addAll(getKeywords(grammarAccess.getClockAccess()
 					.getGroup().eContents()));
 			keywords.addAll(getKeywords(grammarAccess.getOnCycleEventAccess()
 					.getGroup().eContents()));

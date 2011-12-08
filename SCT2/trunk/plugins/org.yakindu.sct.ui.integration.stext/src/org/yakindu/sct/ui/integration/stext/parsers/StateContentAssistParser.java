@@ -19,7 +19,7 @@ public class StateContentAssistParser extends STextParser   {
 			AbstractInternalContentAssistParser parser) {
 		try {
 			InternalSTextParser typedParser = (InternalSTextParser) parser;
-			typedParser.entryRuleSimpleScope();
+			typedParser.entryRuleStateSpecification();
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
 			throw new RuntimeException(ex);

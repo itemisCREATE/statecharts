@@ -37,7 +37,7 @@ import org.yakindu.sct.model.stext.stext.OnCycleEvent;
 import org.yakindu.sct.model.stext.stext.Operation;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
-import org.yakindu.sct.model.stext.stext.StatechartDefinition;
+import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
@@ -160,7 +160,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	private boolean isStatechartDefinitionChild(EObject element) {
 		while (element.eContainer() != null) {
-			if (element.eContainer() instanceof StatechartDefinition) {
+			if (element.eContainer() instanceof StatechartSpecification) {
 				return true;
 			}
 			element = element.eContainer();

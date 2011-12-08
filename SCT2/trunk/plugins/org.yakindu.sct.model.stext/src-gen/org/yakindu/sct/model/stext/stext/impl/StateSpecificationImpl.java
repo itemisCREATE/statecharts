@@ -13,44 +13,44 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.yakindu.sct.model.sgraph.impl.ReactionImpl;
+import org.yakindu.sct.model.sgraph.Scope;
 
-import org.yakindu.sct.model.stext.stext.ReactionProperties;
+import org.yakindu.sct.model.stext.stext.StateSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
-import org.yakindu.sct.model.stext.stext.TransitionReaction;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Transition Reaction</b></em>'.
+ * An implementation of the model object '<em><b>State Specification</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.TransitionReactionImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.impl.StateSpecificationImpl#getScope <em>Scope</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class TransitionReactionImpl extends ReactionImpl implements TransitionReaction
+public class StateSpecificationImpl extends MinimalEObjectImpl.Container implements StateSpecification
 {
   /**
-   * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference.
+   * The cached value of the '{@link #getScope() <em>Scope</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getProperties()
+   * @see #getScope()
    * @generated
    * @ordered
    */
-  protected ReactionProperties properties;
+  protected Scope scope;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected TransitionReactionImpl()
+  protected StateSpecificationImpl()
   {
     super();
   }
@@ -63,7 +63,7 @@ public class TransitionReactionImpl extends ReactionImpl implements TransitionRe
   @Override
   protected EClass eStaticClass()
   {
-    return StextPackage.Literals.TRANSITION_REACTION;
+    return StextPackage.Literals.STATE_SPECIFICATION;
   }
 
   /**
@@ -71,9 +71,9 @@ public class TransitionReactionImpl extends ReactionImpl implements TransitionRe
    * <!-- end-user-doc -->
    * @generated
    */
-  public ReactionProperties getProperties()
+  public Scope getScope()
   {
-    return properties;
+    return scope;
   }
 
   /**
@@ -81,13 +81,13 @@ public class TransitionReactionImpl extends ReactionImpl implements TransitionRe
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetProperties(ReactionProperties newProperties, NotificationChain msgs)
+  public NotificationChain basicSetScope(Scope newScope, NotificationChain msgs)
   {
-    ReactionProperties oldProperties = properties;
-    properties = newProperties;
+    Scope oldScope = scope;
+    scope = newScope;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.TRANSITION_REACTION__PROPERTIES, oldProperties, newProperties);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.STATE_SPECIFICATION__SCOPE, oldScope, newScope);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -98,20 +98,20 @@ public class TransitionReactionImpl extends ReactionImpl implements TransitionRe
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setProperties(ReactionProperties newProperties)
+  public void setScope(Scope newScope)
   {
-    if (newProperties != properties)
+    if (newScope != scope)
     {
       NotificationChain msgs = null;
-      if (properties != null)
-        msgs = ((InternalEObject)properties).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.TRANSITION_REACTION__PROPERTIES, null, msgs);
-      if (newProperties != null)
-        msgs = ((InternalEObject)newProperties).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.TRANSITION_REACTION__PROPERTIES, null, msgs);
-      msgs = basicSetProperties(newProperties, msgs);
+      if (scope != null)
+        msgs = ((InternalEObject)scope).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.STATE_SPECIFICATION__SCOPE, null, msgs);
+      if (newScope != null)
+        msgs = ((InternalEObject)newScope).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.STATE_SPECIFICATION__SCOPE, null, msgs);
+      msgs = basicSetScope(newScope, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.TRANSITION_REACTION__PROPERTIES, newProperties, newProperties));
+      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.STATE_SPECIFICATION__SCOPE, newScope, newScope));
   }
 
   /**
@@ -124,8 +124,8 @@ public class TransitionReactionImpl extends ReactionImpl implements TransitionRe
   {
     switch (featureID)
     {
-      case StextPackage.TRANSITION_REACTION__PROPERTIES:
-        return basicSetProperties(null, msgs);
+      case StextPackage.STATE_SPECIFICATION__SCOPE:
+        return basicSetScope(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -140,8 +140,8 @@ public class TransitionReactionImpl extends ReactionImpl implements TransitionRe
   {
     switch (featureID)
     {
-      case StextPackage.TRANSITION_REACTION__PROPERTIES:
-        return getProperties();
+      case StextPackage.STATE_SPECIFICATION__SCOPE:
+        return getScope();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -156,8 +156,8 @@ public class TransitionReactionImpl extends ReactionImpl implements TransitionRe
   {
     switch (featureID)
     {
-      case StextPackage.TRANSITION_REACTION__PROPERTIES:
-        setProperties((ReactionProperties)newValue);
+      case StextPackage.STATE_SPECIFICATION__SCOPE:
+        setScope((Scope)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -173,8 +173,8 @@ public class TransitionReactionImpl extends ReactionImpl implements TransitionRe
   {
     switch (featureID)
     {
-      case StextPackage.TRANSITION_REACTION__PROPERTIES:
-        setProperties((ReactionProperties)null);
+      case StextPackage.STATE_SPECIFICATION__SCOPE:
+        setScope((Scope)null);
         return;
     }
     super.eUnset(featureID);
@@ -190,10 +190,10 @@ public class TransitionReactionImpl extends ReactionImpl implements TransitionRe
   {
     switch (featureID)
     {
-      case StextPackage.TRANSITION_REACTION__PROPERTIES:
-        return properties != null;
+      case StextPackage.STATE_SPECIFICATION__SCOPE:
+        return scope != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //TransitionReactionImpl
+} //StateSpecificationImpl

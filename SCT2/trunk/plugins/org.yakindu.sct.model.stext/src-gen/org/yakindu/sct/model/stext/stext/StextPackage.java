@@ -195,14 +195,14 @@ public interface StextPackage extends EPackage
   int TRANSITION_ROOT_FEATURE_COUNT = DEF_ROOT_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.StatechartDefinitionImpl <em>Statechart Definition</em>}' class.
+   * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.StatechartSpecificationImpl <em>Statechart Specification</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.yakindu.sct.model.stext.stext.impl.StatechartDefinitionImpl
-   * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getStatechartDefinition()
+   * @see org.yakindu.sct.model.stext.stext.impl.StatechartSpecificationImpl
+   * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getStatechartSpecification()
    * @generated
    */
-  int STATECHART_DEFINITION = 5;
+  int STATECHART_SPECIFICATION = 5;
 
   /**
    * The feature id for the '<em><b>Namespace</b></em>' attribute.
@@ -211,7 +211,7 @@ public interface StextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATECHART_DEFINITION__NAMESPACE = 0;
+  int STATECHART_SPECIFICATION__NAMESPACE = 0;
 
   /**
    * The feature id for the '<em><b>Definition Scopes</b></em>' containment reference list.
@@ -220,26 +220,26 @@ public interface StextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATECHART_DEFINITION__DEFINITION_SCOPES = 1;
+  int STATECHART_SPECIFICATION__DEFINITION_SCOPES = 1;
 
   /**
-   * The number of structural features of the '<em>Statechart Definition</em>' class.
+   * The number of structural features of the '<em>Statechart Specification</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STATECHART_DEFINITION_FEATURE_COUNT = 2;
+  int STATECHART_SPECIFICATION_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.StateDeclarationImpl <em>State Declaration</em>}' class.
+   * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.StateSpecificationImpl <em>State Specification</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.yakindu.sct.model.stext.stext.impl.StateDeclarationImpl
-   * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getStateDeclaration()
+   * @see org.yakindu.sct.model.stext.stext.impl.StateSpecificationImpl
+   * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getStateSpecification()
    * @generated
    */
-  int STATE_DECLARATION = 6;
+  int STATE_SPECIFICATION = 6;
 
   /**
    * The feature id for the '<em><b>Scope</b></em>' containment reference.
@@ -248,35 +248,44 @@ public interface StextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATE_DECLARATION__SCOPE = 0;
+  int STATE_SPECIFICATION__SCOPE = 0;
 
   /**
-   * The number of structural features of the '<em>State Declaration</em>' class.
+   * The number of structural features of the '<em>State Specification</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STATE_DECLARATION_FEATURE_COUNT = 1;
+  int STATE_SPECIFICATION_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.TransitionStatementImpl <em>Transition Statement</em>}' class.
+   * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.TransitionSpecificationImpl <em>Transition Specification</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.yakindu.sct.model.stext.stext.impl.TransitionStatementImpl
-   * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTransitionStatement()
+   * @see org.yakindu.sct.model.stext.stext.impl.TransitionSpecificationImpl
+   * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTransitionSpecification()
    * @generated
    */
-  int TRANSITION_STATEMENT = 7;
+  int TRANSITION_SPECIFICATION = 7;
 
   /**
-   * The number of structural features of the '<em>Transition Statement</em>' class.
+   * The feature id for the '<em><b>Reaction</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TRANSITION_STATEMENT_FEATURE_COUNT = 0;
+  int TRANSITION_SPECIFICATION__REACTION = 0;
+
+  /**
+   * The number of structural features of the '<em>Transition Specification</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_SPECIFICATION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.EventDerivationImpl <em>Event Derivation</em>}' class.
@@ -387,7 +396,7 @@ public interface StextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_REACTION__TRIGGER = TRANSITION_STATEMENT_FEATURE_COUNT + 0;
+  int TRANSITION_REACTION__TRIGGER = SGraphPackage.REACTION__TRIGGER;
 
   /**
    * The feature id for the '<em><b>Effect</b></em>' containment reference.
@@ -396,7 +405,7 @@ public interface StextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_REACTION__EFFECT = TRANSITION_STATEMENT_FEATURE_COUNT + 1;
+  int TRANSITION_REACTION__EFFECT = SGraphPackage.REACTION__EFFECT;
 
   /**
    * The feature id for the '<em><b>Properties</b></em>' containment reference.
@@ -405,7 +414,7 @@ public interface StextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_REACTION__PROPERTIES = TRANSITION_STATEMENT_FEATURE_COUNT + 2;
+  int TRANSITION_REACTION__PROPERTIES = SGraphPackage.REACTION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Transition Reaction</em>' class.
@@ -414,7 +423,7 @@ public interface StextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_REACTION_FEATURE_COUNT = TRANSITION_STATEMENT_FEATURE_COUNT + 3;
+  int TRANSITION_REACTION_FEATURE_COUNT = SGraphPackage.REACTION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.ReactionPropertiesImpl <em>Reaction Properties</em>}' class.
@@ -1366,34 +1375,6 @@ public interface StextPackage extends EPackage
   int VARIABLE_DEFINITION_FEATURE_COUNT = SGraphPackage.VARIABLE_FEATURE_COUNT + 4;
 
   /**
-   * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.ClockImpl <em>Clock</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.yakindu.sct.model.stext.stext.impl.ClockImpl
-   * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getClock()
-   * @generated
-   */
-  int CLOCK = 42;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CLOCK__NAME = SGraphPackage.DECLARATION__NAME;
-
-  /**
-   * The number of structural features of the '<em>Clock</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CLOCK_FEATURE_COUNT = SGraphPackage.DECLARATION_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.OperationImpl <em>Operation</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1401,7 +1382,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getOperation()
    * @generated
    */
-  int OPERATION = 43;
+  int OPERATION = 42;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1447,7 +1428,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getEntrypoint()
    * @generated
    */
-  int ENTRYPOINT = 44;
+  int ENTRYPOINT = 43;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1475,7 +1456,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getExitpoint()
    * @generated
    */
-  int EXITPOINT = 45;
+  int EXITPOINT = 44;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1503,7 +1484,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getReactionTrigger()
    * @generated
    */
-  int REACTION_TRIGGER = 46;
+  int REACTION_TRIGGER = 45;
 
   /**
    * The feature id for the '<em><b>Triggers</b></em>' containment reference list.
@@ -1540,7 +1521,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getReactionEffect()
    * @generated
    */
-  int REACTION_EFFECT = 47;
+  int REACTION_EFFECT = 46;
 
   /**
    * The feature id for the '<em><b>Actions</b></em>' containment reference list.
@@ -1568,7 +1549,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getConditionalExpression()
    * @generated
    */
-  int CONDITIONAL_EXPRESSION = 48;
+  int CONDITIONAL_EXPRESSION = 47;
 
   /**
    * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -1614,7 +1595,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getLogicalOrExpression()
    * @generated
    */
-  int LOGICAL_OR_EXPRESSION = 49;
+  int LOGICAL_OR_EXPRESSION = 48;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1651,7 +1632,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getLogicalAndExpression()
    * @generated
    */
-  int LOGICAL_AND_EXPRESSION = 50;
+  int LOGICAL_AND_EXPRESSION = 49;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1688,7 +1669,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getLogicalNotExpression()
    * @generated
    */
-  int LOGICAL_NOT_EXPRESSION = 51;
+  int LOGICAL_NOT_EXPRESSION = 50;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1716,7 +1697,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getBitwiseXorExpression()
    * @generated
    */
-  int BITWISE_XOR_EXPRESSION = 52;
+  int BITWISE_XOR_EXPRESSION = 51;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1753,7 +1734,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getBitwiseOrExpression()
    * @generated
    */
-  int BITWISE_OR_EXPRESSION = 53;
+  int BITWISE_OR_EXPRESSION = 52;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1790,7 +1771,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getBitwiseAndExpression()
    * @generated
    */
-  int BITWISE_AND_EXPRESSION = 54;
+  int BITWISE_AND_EXPRESSION = 53;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1827,7 +1808,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getLogicalRelationExpression()
    * @generated
    */
-  int LOGICAL_RELATION_EXPRESSION = 55;
+  int LOGICAL_RELATION_EXPRESSION = 54;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1873,7 +1854,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getShiftExpression()
    * @generated
    */
-  int SHIFT_EXPRESSION = 56;
+  int SHIFT_EXPRESSION = 55;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1919,7 +1900,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getNumericalAddSubtractExpression()
    * @generated
    */
-  int NUMERICAL_ADD_SUBTRACT_EXPRESSION = 57;
+  int NUMERICAL_ADD_SUBTRACT_EXPRESSION = 56;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1965,7 +1946,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getNumericalMultiplyDivideExpression()
    * @generated
    */
-  int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = 58;
+  int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = 57;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -2011,7 +1992,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getNumericalUnaryExpression()
    * @generated
    */
-  int NUMERICAL_UNARY_EXPRESSION = 59;
+  int NUMERICAL_UNARY_EXPRESSION = 58;
 
   /**
    * The feature id for the '<em><b>Operator</b></em>' attribute.
@@ -2048,7 +2029,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getPrimitiveValueExpression()
    * @generated
    */
-  int PRIMITIVE_VALUE_EXPRESSION = 60;
+  int PRIMITIVE_VALUE_EXPRESSION = 59;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -2076,7 +2057,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getOperationCall()
    * @generated
    */
-  int OPERATION_CALL = 61;
+  int OPERATION_CALL = 60;
 
   /**
    * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2113,7 +2094,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getDirection()
    * @generated
    */
-  int DIRECTION = 62;
+  int DIRECTION = 61;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}' enum.
@@ -2123,7 +2104,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeEventType()
    * @generated
    */
-  int TIME_EVENT_TYPE = 63;
+  int TIME_EVENT_TYPE = 62;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.AssignmentOperator <em>Assignment Operator</em>}' enum.
@@ -2133,7 +2114,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getAssignmentOperator()
    * @generated
    */
-  int ASSIGNMENT_OPERATOR = 64;
+  int ASSIGNMENT_OPERATOR = 63;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.ShiftOperator <em>Shift Operator</em>}' enum.
@@ -2143,7 +2124,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getShiftOperator()
    * @generated
    */
-  int SHIFT_OPERATOR = 65;
+  int SHIFT_OPERATOR = 64;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -2153,7 +2134,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getAdditiveOperator()
    * @generated
    */
-  int ADDITIVE_OPERATOR = 66;
+  int ADDITIVE_OPERATOR = 65;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -2163,7 +2144,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getMultiplicativeOperator()
    * @generated
    */
-  int MULTIPLICATIVE_OPERATOR = 67;
+  int MULTIPLICATIVE_OPERATOR = 66;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -2173,7 +2154,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getUnaryOperator()
    * @generated
    */
-  int UNARY_OPERATOR = 68;
+  int UNARY_OPERATOR = 67;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -2183,7 +2164,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getRelationalOperator()
    * @generated
    */
-  int RELATIONAL_OPERATOR = 69;
+  int RELATIONAL_OPERATOR = 68;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.TimeUnit <em>Time Unit</em>}' enum.
@@ -2193,7 +2174,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeUnit()
    * @generated
    */
-  int TIME_UNIT = 70;
+  int TIME_UNIT = 69;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.Type <em>Type</em>}' enum.
@@ -2203,7 +2184,7 @@ public interface StextPackage extends EPackage
    * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getType()
    * @generated
    */
-  int TYPE = 71;
+  int TYPE = 70;
 
 
   /**
@@ -2301,67 +2282,78 @@ public interface StextPackage extends EPackage
   EReference getTransitionRoot_Def();
 
   /**
-   * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.StatechartDefinition <em>Statechart Definition</em>}'.
+   * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.StatechartSpecification <em>Statechart Specification</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Statechart Definition</em>'.
-   * @see org.yakindu.sct.model.stext.stext.StatechartDefinition
+   * @return the meta object for class '<em>Statechart Specification</em>'.
+   * @see org.yakindu.sct.model.stext.stext.StatechartSpecification
    * @generated
    */
-  EClass getStatechartDefinition();
+  EClass getStatechartSpecification();
 
   /**
-   * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.StatechartDefinition#getNamespace <em>Namespace</em>}'.
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.StatechartSpecification#getNamespace <em>Namespace</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Namespace</em>'.
-   * @see org.yakindu.sct.model.stext.stext.StatechartDefinition#getNamespace()
-   * @see #getStatechartDefinition()
+   * @see org.yakindu.sct.model.stext.stext.StatechartSpecification#getNamespace()
+   * @see #getStatechartSpecification()
    * @generated
    */
-  EAttribute getStatechartDefinition_Namespace();
+  EAttribute getStatechartSpecification_Namespace();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.stext.stext.StatechartDefinition#getDefinitionScopes <em>Definition Scopes</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.stext.stext.StatechartSpecification#getDefinitionScopes <em>Definition Scopes</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Definition Scopes</em>'.
-   * @see org.yakindu.sct.model.stext.stext.StatechartDefinition#getDefinitionScopes()
-   * @see #getStatechartDefinition()
+   * @see org.yakindu.sct.model.stext.stext.StatechartSpecification#getDefinitionScopes()
+   * @see #getStatechartSpecification()
    * @generated
    */
-  EReference getStatechartDefinition_DefinitionScopes();
+  EReference getStatechartSpecification_DefinitionScopes();
 
   /**
-   * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.StateDeclaration <em>State Declaration</em>}'.
+   * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.StateSpecification <em>State Specification</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>State Declaration</em>'.
-   * @see org.yakindu.sct.model.stext.stext.StateDeclaration
+   * @return the meta object for class '<em>State Specification</em>'.
+   * @see org.yakindu.sct.model.stext.stext.StateSpecification
    * @generated
    */
-  EClass getStateDeclaration();
+  EClass getStateSpecification();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.stext.stext.StateDeclaration#getScope <em>Scope</em>}'.
+   * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.stext.stext.StateSpecification#getScope <em>Scope</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Scope</em>'.
-   * @see org.yakindu.sct.model.stext.stext.StateDeclaration#getScope()
-   * @see #getStateDeclaration()
+   * @see org.yakindu.sct.model.stext.stext.StateSpecification#getScope()
+   * @see #getStateSpecification()
    * @generated
    */
-  EReference getStateDeclaration_Scope();
+  EReference getStateSpecification_Scope();
 
   /**
-   * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.TransitionStatement <em>Transition Statement</em>}'.
+   * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.TransitionSpecification <em>Transition Specification</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Transition Statement</em>'.
-   * @see org.yakindu.sct.model.stext.stext.TransitionStatement
+   * @return the meta object for class '<em>Transition Specification</em>'.
+   * @see org.yakindu.sct.model.stext.stext.TransitionSpecification
    * @generated
    */
-  EClass getTransitionStatement();
+  EClass getTransitionSpecification();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.stext.stext.TransitionSpecification#getReaction <em>Reaction</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Reaction</em>'.
+   * @see org.yakindu.sct.model.stext.stext.TransitionSpecification#getReaction()
+   * @see #getTransitionSpecification()
+   * @generated
+   */
+  EReference getTransitionSpecification_Reaction();
 
   /**
    * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.EventDerivation <em>Event Derivation</em>}'.
@@ -3065,16 +3057,6 @@ public interface StextPackage extends EPackage
    * @generated
    */
   EReference getVariableDefinition_InitialValue();
-
-  /**
-   * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.Clock <em>Clock</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Clock</em>'.
-   * @see org.yakindu.sct.model.stext.stext.Clock
-   * @generated
-   */
-  EClass getClock();
 
   /**
    * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.Operation <em>Operation</em>}'.
@@ -3868,14 +3850,14 @@ public interface StextPackage extends EPackage
     EReference TRANSITION_ROOT__DEF = eINSTANCE.getTransitionRoot_Def();
 
     /**
-     * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.StatechartDefinitionImpl <em>Statechart Definition</em>}' class.
+     * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.StatechartSpecificationImpl <em>Statechart Specification</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.yakindu.sct.model.stext.stext.impl.StatechartDefinitionImpl
-     * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getStatechartDefinition()
+     * @see org.yakindu.sct.model.stext.stext.impl.StatechartSpecificationImpl
+     * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getStatechartSpecification()
      * @generated
      */
-    EClass STATECHART_DEFINITION = eINSTANCE.getStatechartDefinition();
+    EClass STATECHART_SPECIFICATION = eINSTANCE.getStatechartSpecification();
 
     /**
      * The meta object literal for the '<em><b>Namespace</b></em>' attribute feature.
@@ -3883,7 +3865,7 @@ public interface StextPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute STATECHART_DEFINITION__NAMESPACE = eINSTANCE.getStatechartDefinition_Namespace();
+    EAttribute STATECHART_SPECIFICATION__NAMESPACE = eINSTANCE.getStatechartSpecification_Namespace();
 
     /**
      * The meta object literal for the '<em><b>Definition Scopes</b></em>' containment reference list feature.
@@ -3891,17 +3873,17 @@ public interface StextPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference STATECHART_DEFINITION__DEFINITION_SCOPES = eINSTANCE.getStatechartDefinition_DefinitionScopes();
+    EReference STATECHART_SPECIFICATION__DEFINITION_SCOPES = eINSTANCE.getStatechartSpecification_DefinitionScopes();
 
     /**
-     * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.StateDeclarationImpl <em>State Declaration</em>}' class.
+     * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.StateSpecificationImpl <em>State Specification</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.yakindu.sct.model.stext.stext.impl.StateDeclarationImpl
-     * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getStateDeclaration()
+     * @see org.yakindu.sct.model.stext.stext.impl.StateSpecificationImpl
+     * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getStateSpecification()
      * @generated
      */
-    EClass STATE_DECLARATION = eINSTANCE.getStateDeclaration();
+    EClass STATE_SPECIFICATION = eINSTANCE.getStateSpecification();
 
     /**
      * The meta object literal for the '<em><b>Scope</b></em>' containment reference feature.
@@ -3909,17 +3891,25 @@ public interface StextPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference STATE_DECLARATION__SCOPE = eINSTANCE.getStateDeclaration_Scope();
+    EReference STATE_SPECIFICATION__SCOPE = eINSTANCE.getStateSpecification_Scope();
 
     /**
-     * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.TransitionStatementImpl <em>Transition Statement</em>}' class.
+     * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.TransitionSpecificationImpl <em>Transition Specification</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.yakindu.sct.model.stext.stext.impl.TransitionStatementImpl
-     * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTransitionStatement()
+     * @see org.yakindu.sct.model.stext.stext.impl.TransitionSpecificationImpl
+     * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTransitionSpecification()
      * @generated
      */
-    EClass TRANSITION_STATEMENT = eINSTANCE.getTransitionStatement();
+    EClass TRANSITION_SPECIFICATION = eINSTANCE.getTransitionSpecification();
+
+    /**
+     * The meta object literal for the '<em><b>Reaction</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_SPECIFICATION__REACTION = eINSTANCE.getTransitionSpecification_Reaction();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.EventDerivationImpl <em>Event Derivation</em>}' class.
@@ -4524,16 +4514,6 @@ public interface StextPackage extends EPackage
      * @generated
      */
     EReference VARIABLE_DEFINITION__INITIAL_VALUE = eINSTANCE.getVariableDefinition_InitialValue();
-
-    /**
-     * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.ClockImpl <em>Clock</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.yakindu.sct.model.stext.stext.impl.ClockImpl
-     * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getClock()
-     * @generated
-     */
-    EClass CLOCK = eINSTANCE.getClock();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.OperationImpl <em>Operation</em>}' class.

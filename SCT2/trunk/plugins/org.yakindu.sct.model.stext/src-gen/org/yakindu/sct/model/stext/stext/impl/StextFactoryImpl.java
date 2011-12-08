@@ -74,9 +74,9 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.STATECHART_ROOT: return createStatechartRoot();
       case StextPackage.STATE_ROOT: return createStateRoot();
       case StextPackage.TRANSITION_ROOT: return createTransitionRoot();
-      case StextPackage.STATECHART_DEFINITION: return createStatechartDefinition();
-      case StextPackage.STATE_DECLARATION: return createStateDeclaration();
-      case StextPackage.TRANSITION_STATEMENT: return createTransitionStatement();
+      case StextPackage.STATECHART_SPECIFICATION: return createStatechartSpecification();
+      case StextPackage.STATE_SPECIFICATION: return createStateSpecification();
+      case StextPackage.TRANSITION_SPECIFICATION: return createTransitionSpecification();
       case StextPackage.EVENT_DERIVATION: return createEventDerivation();
       case StextPackage.LOCAL_REACTION: return createLocalReaction();
       case StextPackage.TRANSITION_REACTION: return createTransitionReaction();
@@ -111,7 +111,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.INTERNAL_SCOPE: return createInternalScope();
       case StextPackage.EVENT_DEFINITION: return createEventDefinition();
       case StextPackage.VARIABLE_DEFINITION: return createVariableDefinition();
-      case StextPackage.CLOCK: return createClock();
       case StextPackage.OPERATION: return createOperation();
       case StextPackage.ENTRYPOINT: return createEntrypoint();
       case StextPackage.EXITPOINT: return createExitpoint();
@@ -266,10 +265,10 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public StatechartDefinition createStatechartDefinition()
+  public StatechartSpecification createStatechartSpecification()
   {
-    StatechartDefinitionImpl statechartDefinition = new StatechartDefinitionImpl();
-    return statechartDefinition;
+    StatechartSpecificationImpl statechartSpecification = new StatechartSpecificationImpl();
+    return statechartSpecification;
   }
 
   /**
@@ -277,10 +276,10 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateDeclaration createStateDeclaration()
+  public StateSpecification createStateSpecification()
   {
-    StateDeclarationImpl stateDeclaration = new StateDeclarationImpl();
-    return stateDeclaration;
+    StateSpecificationImpl stateSpecification = new StateSpecificationImpl();
+    return stateSpecification;
   }
 
   /**
@@ -288,10 +287,10 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public TransitionStatement createTransitionStatement()
+  public TransitionSpecification createTransitionSpecification()
   {
-    TransitionStatementImpl transitionStatement = new TransitionStatementImpl();
-    return transitionStatement;
+    TransitionSpecificationImpl transitionSpecification = new TransitionSpecificationImpl();
+    return transitionSpecification;
   }
 
   /**
@@ -666,17 +665,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     VariableDefinitionImpl variableDefinition = new VariableDefinitionImpl();
     return variableDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Clock createClock()
-  {
-    ClockImpl clock = new ClockImpl();
-    return clock;
   }
 
   /**

@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.yakindu.sct.model.stext.stext.StateDeclaration;
 import org.yakindu.sct.model.stext.stext.StateRoot;
+import org.yakindu.sct.model.stext.stext.StateSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
@@ -41,7 +41,7 @@ public class StateRootImpl extends DefRootImpl implements StateRoot
    * @generated
    * @ordered
    */
-  protected StateDeclaration def;
+  protected StateSpecification def;
 
   /**
    * <!-- begin-user-doc -->
@@ -69,7 +69,7 @@ public class StateRootImpl extends DefRootImpl implements StateRoot
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateDeclaration getDef()
+  public StateSpecification getDef()
   {
     return def;
   }
@@ -79,9 +79,9 @@ public class StateRootImpl extends DefRootImpl implements StateRoot
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetDef(StateDeclaration newDef, NotificationChain msgs)
+  public NotificationChain basicSetDef(StateSpecification newDef, NotificationChain msgs)
   {
-    StateDeclaration oldDef = def;
+    StateSpecification oldDef = def;
     def = newDef;
     if (eNotificationRequired())
     {
@@ -96,7 +96,7 @@ public class StateRootImpl extends DefRootImpl implements StateRoot
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDef(StateDeclaration newDef)
+  public void setDef(StateSpecification newDef)
   {
     if (newDef != def)
     {
@@ -155,7 +155,7 @@ public class StateRootImpl extends DefRootImpl implements StateRoot
     switch (featureID)
     {
       case StextPackage.STATE_ROOT__DEF:
-        setDef((StateDeclaration)newValue);
+        setDef((StateSpecification)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -172,7 +172,7 @@ public class StateRootImpl extends DefRootImpl implements StateRoot
     switch (featureID)
     {
       case StextPackage.STATE_ROOT__DEF:
-        setDef((StateDeclaration)null);
+        setDef((StateSpecification)null);
         return;
     }
     super.eUnset(featureID);

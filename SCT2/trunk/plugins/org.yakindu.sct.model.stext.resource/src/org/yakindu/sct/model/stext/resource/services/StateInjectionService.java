@@ -18,7 +18,7 @@ import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.model.stext.stext.SimpleScope;
+import org.yakindu.sct.model.stext.stext.StateSpecification;
 
 import de.itemis.xtext.utils.gmf.resource.AbstractXtextMemberInjectionService;
 import de.itemis.xtext.utils.gmf.resource.IMemberInjectionService;
@@ -31,7 +31,7 @@ import de.itemis.xtext.utils.gmf.resource.IMemberInjectionService;
  * 
  */
 public class StateInjectionService extends
-		AbstractXtextMemberInjectionService<State, SimpleScope> {
+		AbstractXtextMemberInjectionService<State, StateSpecification> {
 
 	@Override
 	public String getExpression(State object) {
@@ -40,13 +40,13 @@ public class StateInjectionService extends
 
 	@Override
 	public String getParserRule() {
-		return SimpleScope.class.getSimpleName();
+		return StateSpecification.class.getSimpleName();
 	}
 
 	@Override
-	public void setFeatures(State original, SimpleScope rootAST) {
+	public void setFeatures(State original, StateSpecification rootAST) {
 		Scope localScope = SGraphFactory.eINSTANCE.createScope();
-		EList<Declaration> declarations = rootAST.getDeclarations();
+		EList<Declaration> declarations = rootAST.getScope().getDeclarations();
 		localScope.getDeclarations().addAll(declarations);
 		original.getScopes().clear();
 		original.getScopes().add(localScope);

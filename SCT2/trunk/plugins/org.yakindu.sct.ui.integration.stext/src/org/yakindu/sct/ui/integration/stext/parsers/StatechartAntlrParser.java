@@ -1,7 +1,7 @@
 package org.yakindu.sct.ui.integration.stext.parsers;
 
 import org.yakindu.sct.model.stext.parser.antlr.STextParser;
-import org.yakindu.sct.model.stext.stext.StatechartDefinition;
+import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 
 /**
  * 
@@ -11,6 +11,6 @@ import org.yakindu.sct.model.stext.stext.StatechartDefinition;
 public class StatechartAntlrParser extends STextParser {
 	@Override
 	protected String getDefaultRuleName() {
-		return StatechartDefinition.class.getSimpleName();
+		return StatechartSpecification.class.getSimpleName();
 	}
 }

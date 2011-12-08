@@ -34,12 +34,12 @@ public interface TransitionRoot extends DefRoot
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Def</em>' containment reference.
-   * @see #setDef(TransitionStatement)
+   * @see #setDef(TransitionSpecification)
    * @see org.yakindu.sct.model.stext.stext.StextPackage#getTransitionRoot_Def()
    * @model containment="true"
    * @generated
    */
-  TransitionStatement getDef();
+  TransitionSpecification getDef();
 
   /**
    * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.TransitionRoot#getDef <em>Def</em>}' containment reference.
@@ -49,6 +49,6 @@ public interface TransitionRoot extends DefRoot
    * @see #getDef()
    * @generated
    */
-  void setDef(TransitionStatement value);
+  void setDef(TransitionSpecification value);
 
 } // TransitionRoot

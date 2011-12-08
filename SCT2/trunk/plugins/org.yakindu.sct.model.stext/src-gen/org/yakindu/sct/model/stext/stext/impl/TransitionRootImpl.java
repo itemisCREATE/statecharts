@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TransitionRoot;
-import org.yakindu.sct.model.stext.stext.TransitionStatement;
+import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +41,7 @@ public class TransitionRootImpl extends DefRootImpl implements TransitionRoot
    * @generated
    * @ordered
    */
-  protected TransitionStatement def;
+  protected TransitionSpecification def;
 
   /**
    * <!-- begin-user-doc -->
@@ -69,7 +69,7 @@ public class TransitionRootImpl extends DefRootImpl implements TransitionRoot
    * <!-- end-user-doc -->
    * @generated
    */
-  public TransitionStatement getDef()
+  public TransitionSpecification getDef()
   {
     return def;
   }
@@ -79,9 +79,9 @@ public class TransitionRootImpl extends DefRootImpl implements TransitionRoot
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetDef(TransitionStatement newDef, NotificationChain msgs)
+  public NotificationChain basicSetDef(TransitionSpecification newDef, NotificationChain msgs)
   {
-    TransitionStatement oldDef = def;
+    TransitionSpecification oldDef = def;
     def = newDef;
     if (eNotificationRequired())
     {
@@ -96,7 +96,7 @@ public class TransitionRootImpl extends DefRootImpl implements TransitionRoot
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDef(TransitionStatement newDef)
+  public void setDef(TransitionSpecification newDef)
   {
     if (newDef != def)
     {
@@ -155,7 +155,7 @@ public class TransitionRootImpl extends DefRootImpl implements TransitionRoot
     switch (featureID)
     {
       case StextPackage.TRANSITION_ROOT__DEF:
-        setDef((TransitionStatement)newValue);
+        setDef((TransitionSpecification)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -172,7 +172,7 @@ public class TransitionRootImpl extends DefRootImpl implements TransitionRoot
     switch (featureID)
     {
       case StextPackage.TRANSITION_ROOT__DEF:
-        setDef((TransitionStatement)null);
+        setDef((TransitionSpecification)null);
         return;
     }
     super.eUnset(featureID);
