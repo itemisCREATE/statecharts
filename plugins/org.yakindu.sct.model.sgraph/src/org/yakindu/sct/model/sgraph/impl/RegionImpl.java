@@ -19,7 +19,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Vertex;
@@ -33,6 +35,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.RegionImpl#getVertices <em>Vertices</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.RegionImpl#getPriority <em>Priority</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.RegionImpl#getComposite <em>Composite</em>}</li>
  * </ul>
  * </p>
  *
@@ -133,12 +136,57 @@ public class RegionImpl extends NamedElementImpl implements Region {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CompositeElement getComposite() {
+		if (eContainerFeatureID() != SGraphPackage.REGION__COMPOSITE) return null;
+		return (CompositeElement)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetComposite(CompositeElement newComposite, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newComposite, SGraphPackage.REGION__COMPOSITE, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setComposite(CompositeElement newComposite) {
+		if (newComposite != eInternalContainer() || (eContainerFeatureID() != SGraphPackage.REGION__COMPOSITE && newComposite != null)) {
+			if (EcoreUtil.isAncestor(this, newComposite))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newComposite != null)
+				msgs = ((InternalEObject)newComposite).eInverseAdd(this, SGraphPackage.COMPOSITE_ELEMENT__REGIONS, CompositeElement.class, msgs);
+			msgs = basicSetComposite(newComposite, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.REGION__COMPOSITE, newComposite, newComposite));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case SGraphPackage.REGION__VERTICES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getVertices()).basicAdd(otherEnd, msgs);
+			case SGraphPackage.REGION__COMPOSITE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetComposite((CompositeElement)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -153,8 +201,24 @@ public class RegionImpl extends NamedElementImpl implements Region {
 		switch (featureID) {
 			case SGraphPackage.REGION__VERTICES:
 				return ((InternalEList<?>)getVertices()).basicRemove(otherEnd, msgs);
+			case SGraphPackage.REGION__COMPOSITE:
+				return basicSetComposite(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case SGraphPackage.REGION__COMPOSITE:
+				return eInternalContainer().eInverseRemove(this, SGraphPackage.COMPOSITE_ELEMENT__REGIONS, CompositeElement.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -169,6 +233,8 @@ public class RegionImpl extends NamedElementImpl implements Region {
 				return getVertices();
 			case SGraphPackage.REGION__PRIORITY:
 				return getPriority();
+			case SGraphPackage.REGION__COMPOSITE:
+				return getComposite();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -189,6 +255,9 @@ public class RegionImpl extends NamedElementImpl implements Region {
 			case SGraphPackage.REGION__PRIORITY:
 				setPriority((Integer)newValue);
 				return;
+			case SGraphPackage.REGION__COMPOSITE:
+				setComposite((CompositeElement)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -207,6 +276,9 @@ public class RegionImpl extends NamedElementImpl implements Region {
 			case SGraphPackage.REGION__PRIORITY:
 				setPriority(PRIORITY_EDEFAULT);
 				return;
+			case SGraphPackage.REGION__COMPOSITE:
+				setComposite((CompositeElement)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -223,6 +295,8 @@ public class RegionImpl extends NamedElementImpl implements Region {
 				return vertices != null && !vertices.isEmpty();
 			case SGraphPackage.REGION__PRIORITY:
 				return priority != PRIORITY_EDEFAULT;
+			case SGraphPackage.REGION__COMPOSITE:
+				return getComposite() != null;
 		}
 		return super.eIsSet(featureID);
 	}

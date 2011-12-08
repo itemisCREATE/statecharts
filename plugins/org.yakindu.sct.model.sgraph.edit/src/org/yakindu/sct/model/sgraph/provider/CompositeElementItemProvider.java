@@ -16,28 +16,32 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.sct.model.sgraph.Statechart} object.
+ * This is the item provider adapter for a {@link org.yakindu.sct.model.sgraph.CompositeElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class StatechartItemProvider
-	extends NamedElementItemProvider
+public class CompositeElementItemProvider
+	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -57,7 +61,7 @@ public class StatechartItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StatechartItemProvider(AdapterFactory adapterFactory) {
+	public CompositeElementItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -72,77 +76,8 @@ public class StatechartItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addExpressionPropertyDescriptor(object);
-			addReactionsPropertyDescriptor(object);
-			addNamespacePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Expression feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addExpressionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ExpressionElement_expression_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ExpressionElement_expression_feature", "_UI_ExpressionElement_type"),
-				 SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Reactions feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addReactionsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ReactiveElement_reactions_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ReactiveElement_reactions_feature", "_UI_ReactiveElement_type"),
-				 SGraphPackage.Literals.REACTIVE_ELEMENT__REACTIONS,
-				 false,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Namespace feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamespacePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ScopedElement_namespace_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ScopedElement_namespace_feature", "_UI_ScopedElement_type"),
-				 SGraphPackage.Literals.SCOPED_ELEMENT__NAMESPACE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -157,8 +92,6 @@ public class StatechartItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(SGraphPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS);
-			childrenFeatures.add(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES);
 			childrenFeatures.add(SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS);
 		}
 		return childrenFeatures;
@@ -178,17 +111,6 @@ public class StatechartItemProvider
 	}
 
 	/**
-	 * This returns Statechart.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Statechart"));
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -196,10 +118,7 @@ public class StatechartItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Statechart)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Statechart_type") :
-			getString("_UI_Statechart_type") + " " + label;
+		return getString("_UI_CompositeElement_type");
 	}
 
 	/**
@@ -213,14 +132,8 @@ public class StatechartItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Statechart.class)) {
-			case SGraphPackage.STATECHART__EXPRESSION:
-			case SGraphPackage.STATECHART__NAMESPACE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case SGraphPackage.STATECHART__LOCAL_REACTIONS:
-			case SGraphPackage.STATECHART__SCOPES:
-			case SGraphPackage.STATECHART__REGIONS:
+		switch (notification.getFeatureID(CompositeElement.class)) {
+			case SGraphPackage.COMPOSITE_ELEMENT__REGIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -240,18 +153,19 @@ public class StatechartItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGraphPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS,
-				 SGraphFactory.eINSTANCE.createTransition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-				 SGraphFactory.eINSTANCE.createScope()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS,
 				 SGraphFactory.eINSTANCE.createRegion()));
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return SGraphEditPlugin.INSTANCE;
 	}
 
 }
