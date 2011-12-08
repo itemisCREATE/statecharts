@@ -118,6 +118,13 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass compositeElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass variableEClass = null;
 
 	/**
@@ -407,6 +414,15 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getRegion_Composite() {
+        return (EReference)getRegion().getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTransition() {
 		if (transitionEClass == null) {
 			transitionEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(4);
@@ -470,17 +486,8 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getState_SubRegions() {
-        return (EReference)getState().getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getState_Orthogonal() {
-        return (EAttribute)getState().getEStructuralFeatures().get(1);
+        return (EAttribute)getState().getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -489,7 +496,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getState_Substatechart() {
-        return (EReference)getState().getEStructuralFeatures().get(2);
+        return (EReference)getState().getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -498,6 +505,15 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EAttribute getState_SubstatechartId() {
+        return (EAttribute)getState().getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getState_Subchart() {
         return (EAttribute)getState().getEStructuralFeatures().get(3);
 	}
 
@@ -506,7 +522,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getState_Submachine() {
+	public EAttribute getState_Simple() {
         return (EAttribute)getState().getEStructuralFeatures().get(4);
 	}
 
@@ -515,7 +531,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getState_Simple() {
+	public EAttribute getState_Composite() {
         return (EAttribute)getState().getEStructuralFeatures().get(5);
 	}
 
@@ -524,17 +540,8 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getState_Composite() {
-        return (EAttribute)getState().getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getState_Leaf() {
-        return (EAttribute)getState().getEStructuralFeatures().get(7);
+        return (EAttribute)getState().getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -559,6 +566,27 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 			regularStateEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(24);
 		}
 		return regularStateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCompositeElement() {
+		if (compositeElementEClass == null) {
+			compositeElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(26);
+		}
+		return compositeElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompositeElement_Regions() {
+        return (EReference)getCompositeElement().getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -616,15 +644,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 			statechartEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(9);
 		}
 		return statechartEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getStatechart_Regions() {
-        return (EReference)getStatechart().getEStructuralFeatures().get(0);
 	}
 
 	/**

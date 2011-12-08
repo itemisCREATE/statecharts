@@ -20,7 +20,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.ExpressionElement;
 import org.yakindu.sct.model.sgraph.Reaction;
@@ -227,9 +229,24 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	 */
 	public EList<Region> getRegions() {
 		if (regions == null) {
-			regions = new EObjectContainmentEList<Region>(Region.class, this, SGraphPackage.STATECHART__REGIONS);
+			regions = new EObjectContainmentWithInverseEList<Region>(Region.class, this, SGraphPackage.STATECHART__REGIONS, SGraphPackage.REGION__COMPOSITE);
 		}
 		return regions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SGraphPackage.STATECHART__REGIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRegions()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -374,6 +391,12 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 				default: return -1;
 			}
 		}
+		if (baseClass == CompositeElement.class) {
+			switch (derivedFeatureID) {
+				case SGraphPackage.STATECHART__REGIONS: return SGraphPackage.COMPOSITE_ELEMENT__REGIONS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -401,6 +424,12 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 			switch (baseFeatureID) {
 				case SGraphPackage.SCOPED_ELEMENT__SCOPES: return SGraphPackage.STATECHART__SCOPES;
 				case SGraphPackage.SCOPED_ELEMENT__NAMESPACE: return SGraphPackage.STATECHART__NAMESPACE;
+				default: return -1;
+			}
+		}
+		if (baseClass == CompositeElement.class) {
+			switch (baseFeatureID) {
+				case SGraphPackage.COMPOSITE_ELEMENT__REGIONS: return SGraphPackage.STATECHART__REGIONS;
 				default: return -1;
 			}
 		}

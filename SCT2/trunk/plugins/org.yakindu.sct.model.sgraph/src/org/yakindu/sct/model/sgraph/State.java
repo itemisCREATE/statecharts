@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.model.sgraph;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,11 +19,10 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sgraph.State#getSubRegions <em>Sub Regions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#isOrthogonal <em>Orthogonal</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#getSubstatechart <em>Substatechart</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#getSubstatechartId <em>Substatechart Id</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sgraph.State#isSubmachine <em>Submachine</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.State#isSubchart <em>Subchart</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#isSimple <em>Simple</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#isComposite <em>Composite</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#isLeaf <em>Leaf</em>}</li>
@@ -35,29 +33,13 @@ import org.eclipse.emf.common.util.EList;
  * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NameIsNotEmpty NameIsValidJavaIdentifier'"
  * @generated
  */
-public interface State extends ExpressionElement, ReactiveElement, ScopedElement, RegularState {
+public interface State extends ExpressionElement, ReactiveElement, ScopedElement, RegularState, CompositeElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	String copyright = "Copyright (c) 2011 committers of YAKINDU and others.\r\nAll rights reserved. This program and the accompanying materials\r\nare made available under the terms of the Eclipse Public License v1.0\r\nwhich accompanies this distribution, and is available at\r\nhttp://www.eclipse.org/legal/epl-v10.html\r\nContributors:\r\ncommitters of YAKINDU - initial API and implementation\r\n";
-
-	/**
-	 * Returns the value of the '<em><b>Sub Regions</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.sct.model.sgraph.Region}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Sub Regions</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sub Regions</em>' containment reference list.
-	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_SubRegions()
-	 * @model containment="true" ordered="false"
-	 * @generated
-	 */
-	EList<Region> getSubRegions();
 
 	/**
 	 * Returns the value of the '<em><b>Orthogonal</b></em>' attribute.
@@ -127,19 +109,19 @@ public interface State extends ExpressionElement, ReactiveElement, ScopedElement
 	void setSubstatechartId(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Submachine</b></em>' attribute.
+	 * Returns the value of the '<em><b>Subchart</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Submachine</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Subchart</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Submachine</em>' attribute.
-	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_Submachine()
+	 * @return the value of the '<em>Subchart</em>' attribute.
+	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_Subchart()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	boolean isSubmachine();
+	boolean isSubchart();
 
 	/**
 	 * Returns the value of the '<em><b>Simple</b></em>' attribute.

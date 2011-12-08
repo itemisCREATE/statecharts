@@ -79,7 +79,7 @@ public class StateItemProvider
 			addOrthogonalPropertyDescriptor(object);
 			addSubstatechartPropertyDescriptor(object);
 			addSubstatechartIdPropertyDescriptor(object);
-			addSubmachinePropertyDescriptor(object);
+			addSubchartPropertyDescriptor(object);
 			addSimplePropertyDescriptor(object);
 			addCompositePropertyDescriptor(object);
 			addLeafPropertyDescriptor(object);
@@ -242,19 +242,19 @@ public class StateItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Submachine feature.
+	 * This adds a property descriptor for the Subchart feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSubmachinePropertyDescriptor(Object object) {
+	protected void addSubchartPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_State_submachine_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_State_submachine_feature", "_UI_State_type"),
-				 SGraphPackage.Literals.STATE__SUBMACHINE,
+				 getString("_UI_State_subchart_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_State_subchart_feature", "_UI_State_type"),
+				 SGraphPackage.Literals.STATE__SUBCHART,
 				 false,
 				 false,
 				 false,
@@ -344,7 +344,7 @@ public class StateItemProvider
 			childrenFeatures.add(SGraphPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS);
 			childrenFeatures.add(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES);
 			childrenFeatures.add(SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS);
-			childrenFeatures.add(SGraphPackage.Literals.STATE__SUB_REGIONS);
+			childrenFeatures.add(SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS);
 		}
 		return childrenFeatures;
 	}
@@ -403,7 +403,7 @@ public class StateItemProvider
 			case SGraphPackage.STATE__NAME:
 			case SGraphPackage.STATE__ORTHOGONAL:
 			case SGraphPackage.STATE__SUBSTATECHART_ID:
-			case SGraphPackage.STATE__SUBMACHINE:
+			case SGraphPackage.STATE__SUBCHART:
 			case SGraphPackage.STATE__SIMPLE:
 			case SGraphPackage.STATE__COMPOSITE:
 			case SGraphPackage.STATE__LEAF:
@@ -412,7 +412,7 @@ public class StateItemProvider
 			case SGraphPackage.STATE__LOCAL_REACTIONS:
 			case SGraphPackage.STATE__SCOPES:
 			case SGraphPackage.STATE__OUTGOING_TRANSITIONS:
-			case SGraphPackage.STATE__SUB_REGIONS:
+			case SGraphPackage.STATE__REGIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -447,7 +447,7 @@ public class StateItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGraphPackage.Literals.STATE__SUB_REGIONS,
+				(SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS,
 				 SGraphFactory.eINSTANCE.createRegion()));
 	}
 

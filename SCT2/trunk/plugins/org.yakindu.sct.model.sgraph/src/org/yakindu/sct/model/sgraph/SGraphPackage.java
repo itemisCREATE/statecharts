@@ -247,13 +247,22 @@ public interface SGraphPackage extends EPackage {
 	int REGION__PRIORITY = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Composite</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGION__COMPOSITE = NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REGION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int REGION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ExpressionElementImpl <em>Expression Element</em>}' class.
@@ -1157,13 +1166,13 @@ public interface SGraphPackage extends EPackage {
 	int STATE__OUTGOING_TRANSITIONS = EXPRESSION_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Sub Regions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SUB_REGIONS = EXPRESSION_ELEMENT_FEATURE_COUNT + 8;
+	int STATE__REGIONS = EXPRESSION_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Orthogonal</b></em>' attribute.
@@ -1193,13 +1202,13 @@ public interface SGraphPackage extends EPackage {
 	int STATE__SUBSTATECHART_ID = EXPRESSION_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
-	 * The feature id for the '<em><b>Submachine</b></em>' attribute.
+	 * The feature id for the '<em><b>Subchart</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SUBMACHINE = EXPRESSION_ELEMENT_FEATURE_COUNT + 12;
+	int STATE__SUBCHART = EXPRESSION_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Simple</b></em>' attribute.
@@ -1257,6 +1266,34 @@ public interface SGraphPackage extends EPackage {
 	int STATEMENT_FEATURE_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.CompositeElementImpl <em>Composite Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgraph.impl.CompositeElementImpl
+	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getCompositeElement()
+	 * @generated
+	 */
+	int COMPOSITE_ELEMENT = 24;
+
+	/**
+	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_ELEMENT__REGIONS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Composite Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_ELEMENT_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.EntryKind <em>Entry Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1264,7 +1301,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEntryKind()
 	 * @generated
 	 */
-	int ENTRY_KIND = 24;
+	int ENTRY_KIND = 25;
 
 
 	/**
@@ -1275,7 +1312,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getChoiceKind()
 	 * @generated
 	 */
-	int CHOICE_KIND = 25;
+	int CHOICE_KIND = 26;
 
 
 	/**
@@ -1385,6 +1422,17 @@ public interface SGraphPackage extends EPackage {
 	EAttribute getRegion_Priority();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.yakindu.sct.model.sgraph.Region#getComposite <em>Composite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Composite</em>'.
+	 * @see org.yakindu.sct.model.sgraph.Region#getComposite()
+	 * @see #getRegion()
+	 * @generated
+	 */
+	EReference getRegion_Composite();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Transition <em>Transition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1448,17 +1496,6 @@ public interface SGraphPackage extends EPackage {
 	EClass getState();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgraph.State#getSubRegions <em>Sub Regions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Sub Regions</em>'.
-	 * @see org.yakindu.sct.model.sgraph.State#getSubRegions()
-	 * @see #getState()
-	 * @generated
-	 */
-	EReference getState_SubRegions();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.State#isOrthogonal <em>Orthogonal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1492,15 +1529,15 @@ public interface SGraphPackage extends EPackage {
 	EAttribute getState_SubstatechartId();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.State#isSubmachine <em>Submachine</em>}'.
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.State#isSubchart <em>Subchart</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Submachine</em>'.
-	 * @see org.yakindu.sct.model.sgraph.State#isSubmachine()
+	 * @return the meta object for the attribute '<em>Subchart</em>'.
+	 * @see org.yakindu.sct.model.sgraph.State#isSubchart()
 	 * @see #getState()
 	 * @generated
 	 */
-	EAttribute getState_Submachine();
+	EAttribute getState_Subchart();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.State#isSimple <em>Simple</em>}'.
@@ -1556,6 +1593,27 @@ public interface SGraphPackage extends EPackage {
 	EClass getRegularState();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.CompositeElement <em>Composite Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Composite Element</em>'.
+	 * @see org.yakindu.sct.model.sgraph.CompositeElement
+	 * @generated
+	 */
+	EClass getCompositeElement();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgraph.CompositeElement#getRegions <em>Regions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Regions</em>'.
+	 * @see org.yakindu.sct.model.sgraph.CompositeElement#getRegions()
+	 * @see #getCompositeElement()
+	 * @generated
+	 */
+	EReference getCompositeElement_Regions();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Variable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1605,17 +1663,6 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getStatechart();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgraph.Statechart#getRegions <em>Regions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Regions</em>'.
-	 * @see org.yakindu.sct.model.sgraph.Statechart#getRegions()
-	 * @see #getStatechart()
-	 * @generated
-	 */
-	EReference getStatechart_Regions();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Entry <em>Entry</em>}'.
@@ -1979,6 +2026,14 @@ public interface SGraphPackage extends EPackage {
 		EAttribute REGION__PRIORITY = eINSTANCE.getRegion_Priority();
 
 		/**
+		 * The meta object literal for the '<em><b>Composite</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REGION__COMPOSITE = eINSTANCE.getRegion_Composite();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl <em>Transition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2033,14 +2088,6 @@ public interface SGraphPackage extends EPackage {
 		EClass STATE = eINSTANCE.getState();
 
 		/**
-		 * The meta object literal for the '<em><b>Sub Regions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STATE__SUB_REGIONS = eINSTANCE.getState_SubRegions();
-
-		/**
 		 * The meta object literal for the '<em><b>Orthogonal</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2065,12 +2112,12 @@ public interface SGraphPackage extends EPackage {
 		EAttribute STATE__SUBSTATECHART_ID = eINSTANCE.getState_SubstatechartId();
 
 		/**
-		 * The meta object literal for the '<em><b>Submachine</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Subchart</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute STATE__SUBMACHINE = eINSTANCE.getState_Submachine();
+		EAttribute STATE__SUBCHART = eINSTANCE.getState_Subchart();
 
 		/**
 		 * The meta object literal for the '<em><b>Simple</b></em>' attribute feature.
@@ -2115,6 +2162,24 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EClass REGULAR_STATE = eINSTANCE.getRegularState();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.CompositeElementImpl <em>Composite Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgraph.impl.CompositeElementImpl
+		 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getCompositeElement()
+		 * @generated
+		 */
+		EClass COMPOSITE_ELEMENT = eINSTANCE.getCompositeElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Regions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_ELEMENT__REGIONS = eINSTANCE.getCompositeElement_Regions();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.VariableImpl <em>Variable</em>}' class.
@@ -2163,14 +2228,6 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EClass STATECHART = eINSTANCE.getStatechart();
-
-		/**
-		 * The meta object literal for the '<em><b>Regions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STATECHART__REGIONS = eINSTANCE.getStatechart_Regions();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.EntryImpl <em>Entry</em>}' class.

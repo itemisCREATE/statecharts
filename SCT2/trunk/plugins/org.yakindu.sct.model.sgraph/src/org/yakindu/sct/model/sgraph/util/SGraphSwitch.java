@@ -13,6 +13,7 @@ package org.yakindu.sct.model.sgraph.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
@@ -180,6 +181,7 @@ public class SGraphSwitch<T> extends Switch<T> {
 				if (result == null) result = caseExpressionElement(statechart);
 				if (result == null) result = caseReactiveElement(statechart);
 				if (result == null) result = caseScopedElement(statechart);
+				if (result == null) result = caseCompositeElement(statechart);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -266,6 +268,7 @@ public class SGraphSwitch<T> extends Switch<T> {
 				if (result == null) result = caseReactiveElement(state);
 				if (result == null) result = caseScopedElement(state);
 				if (result == null) result = caseRegularState(state);
+				if (result == null) result = caseCompositeElement(state);
 				if (result == null) result = caseVertex(state);
 				if (result == null) result = caseNamedElement(state);
 				if (result == null) result = defaultCase(theEObject);
@@ -282,6 +285,12 @@ public class SGraphSwitch<T> extends Switch<T> {
 				T result = caseRegularState(regularState);
 				if (result == null) result = caseVertex(regularState);
 				if (result == null) result = caseNamedElement(regularState);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SGraphPackage.COMPOSITE_ELEMENT: {
+				CompositeElement compositeElement = (CompositeElement)theEObject;
+				T result = caseCompositeElement(compositeElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -421,6 +430,21 @@ public class SGraphSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRegularState(RegularState object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Composite Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Composite Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCompositeElement(CompositeElement object) {
 		return null;
 	}
 
