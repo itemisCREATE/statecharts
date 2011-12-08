@@ -26,7 +26,7 @@
    <extension
          point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
       <metamodel
-            nsURI="http://www.yakindu.org/sct/2.0.0">
+            nsURI="http://www.yakindu.org/sct/sgraph/2.0.0">
          <metamodelType
                eclass="Statechart"
                icon="icons/obj16/logo-16.png"

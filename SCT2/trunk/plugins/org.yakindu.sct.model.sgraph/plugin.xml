@@ -15,7 +15,7 @@
 <plugin>
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.yakindu.org/sct/2.0.0"
+            uri="http://www.yakindu.org/sct/sgraph/2.0.0"
             class="org.yakindu.sct.model.sgraph.SGraphPackage"
             genModel="model/emf/sgraph.genmodel"/>
    </extension>

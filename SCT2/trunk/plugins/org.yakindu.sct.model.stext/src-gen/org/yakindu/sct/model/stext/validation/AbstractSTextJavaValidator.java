@@ -14,7 +14,7 @@ public class AbstractSTextJavaValidator extends AbstractDeclarativeValidator {
 	protected List<EPackage> getEPackages() {
 	    List<EPackage> result = new ArrayList<EPackage>();
 	    result.add(org.yakindu.sct.model.stext.stext.StextPackage.eINSTANCE);
-	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.yakindu.org/sct/2.0.0"));
+	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.yakindu.org/sct/sgraph/2.0.0"));
 		return result;
 	}
 
