@@ -288,8 +288,6 @@ void «stName()»_init(«StName()»* handle, Timer* timer, EventPool* eventPool)
 
 «ENDFOREACH»	
 	
-
-	«EXPAND ActionCode FOREACH this.enterSequence.steps»
 }
 
 «FOREACH this.scopes.typeSelect(InterfaceScope) AS interface»
