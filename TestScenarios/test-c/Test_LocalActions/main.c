@@ -30,12 +30,23 @@ void setupStatemachine(Test_LocalActionsStatemachine* machine, Timer* dummyTimer
 	/* initialize state machine */
 	test_LocalActionsStatemachine_init(machine, dummyTimer, eventPool);
 
+	/* call all necessary enter functions */
+	test_LocalActionsStatemachine_enter(machine);
+
 }
 
 void teardownStatemachine(Test_LocalActionsStatemachine* machine, Timer* dummyTimer, EventPool* eventPool)
 {
+	/* call all exit actions for this state machine */
 	test_LocalActionsStatemachine_exit(machine);
+
+	/* free all internal memory for this state machine */
+	test_LocalActionsStatemachine_destruct(machine);
+
+	/* free the timer */
 	timer_exit(dummyTimer);
+
+	/* free all events in the event pool */
 	eventPool_exit(eventPool);
 
 }

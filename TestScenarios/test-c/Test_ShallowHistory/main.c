@@ -30,12 +30,23 @@ void setupStatemachine(Test_ShallowHistoryStatemachine* machine, Timer* dummyTim
 	/* initialize state machine */
 	test_ShallowHistoryStatemachine_init(machine, dummyTimer, eventPool);
 
+	/* call all necessary enter functions */
+	test_ShallowHistoryStatemachine_enter(machine);
+
 }
 
 void teardownStatemachine(Test_ShallowHistoryStatemachine* machine, Timer* dummyTimer, EventPool* eventPool)
 {
+	/* call all exit actions for this state machine */
 	test_ShallowHistoryStatemachine_exit(machine);
+
+	/* free all internal memory for this state machine */
+	test_ShallowHistoryStatemachine_destruct(machine);
+
+	/* free the timer */
 	timer_exit(dummyTimer);
+
+	/* free all events in the event pool */
 	eventPool_exit(eventPool);
 
 }

@@ -30,12 +30,23 @@ void setupStatemachine(Test_TransitionStatemachine* machine, Timer* dummyTimer, 
 	/* initialize state machine */
 	test_TransitionStatemachine_init(machine, dummyTimer, eventPool);
 
+	/* call all necessary enter functions */
+	test_TransitionStatemachine_enter(machine);
+
 }
 
 void teardownStatemachine(Test_TransitionStatemachine* machine, Timer* dummyTimer, EventPool* eventPool)
 {
+	/* call all exit actions for this state machine */
 	test_TransitionStatemachine_exit(machine);
+
+	/* free all internal memory for this state machine */
+	test_TransitionStatemachine_destruct(machine);
+
+	/* free the timer */
 	timer_exit(dummyTimer);
+
+	/* free all events in the event pool */
 	eventPool_exit(eventPool);
 
 }

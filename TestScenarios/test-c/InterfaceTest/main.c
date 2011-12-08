@@ -22,12 +22,22 @@ void setupStatemachine(InterfaceTestStatemachine* machine, Timer* dummyTimer, Ev
 	/* initialize state machine */
 	interfaceTestStatemachine_init(machine, dummyTimer, eventPool);
 
+	/* call all necessary enter functions */
+	interfaceTestStatemachine_enter(machine);
 }
 
 void teardownStatemachine(InterfaceTestStatemachine* machine, Timer* dummyTimer, EventPool* eventPool)
 {
+	/* call all exit actions for this state machine */
 	interfaceTestStatemachine_exit(machine);
+
+	/* free all internal memory for this state machine */
+	interfaceTestStatemachine_destruct(machine);
+
+	/* free the timer */
 	timer_exit(dummyTimer);
+
+	/* free all events in the event pool */
 	eventPool_exit(eventPool);
 
 }
