@@ -74,11 +74,11 @@
             </annotation>
             <simpleType>
                <restriction base="string">
-                  <enumeration value="StatechartInterface">
+                  <enumeration value="StatechartSpecification">
                   </enumeration>
-                  <enumeration value="StateDeclaration">
+                  <enumeration value="StateSpecification">
                   </enumeration>
-                  <enumeration value="TransitionExpression">
+                  <enumeration value="TransitionSpecification">
                   </enumeration>
                </restriction>
             </simpleType>

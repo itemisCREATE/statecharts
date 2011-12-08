@@ -41,7 +41,7 @@ public class StatePropertySection extends NamePropertySection {
 			List<IFormPropertyDescriptor> descriptors) {
 		super.createPropertyDescriptors(descriptors);
 
-		Injector injector = getInjector(SemanticTarget.StateDeclaration);
+		Injector injector = getInjector(SemanticTarget.StateSpecification);
 		if (injector != null) {
 			XtextPropertyDescriptor descriptor = new XtextPropertyDescriptor(
 					SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,

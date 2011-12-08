@@ -44,7 +44,7 @@ public class StatechartPropertySection extends AbstractEditorPropertySection {
 				SGraphPackage.Literals.NAMED_ELEMENT__NAME, "Name: ");
 		descriptors.add(nameDescriptor);
 		
-		Injector injector = getInjector(SemanticTarget.StatechartInterface);
+		Injector injector = getInjector(SemanticTarget.StatechartSpecification);
 		
 		if (injector != null) {
 			XtextPropertyDescriptor descriptor = new XtextPropertyDescriptor(
