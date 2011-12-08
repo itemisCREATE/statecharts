@@ -34,12 +34,12 @@ public interface StateRoot extends DefRoot
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Def</em>' containment reference.
-   * @see #setDef(StateDeclaration)
+   * @see #setDef(StateSpecification)
    * @see org.yakindu.sct.model.stext.stext.StextPackage#getStateRoot_Def()
    * @model containment="true"
    * @generated
    */
-  StateDeclaration getDef();
+  StateSpecification getDef();
 
   /**
    * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.StateRoot#getDef <em>Def</em>}' containment reference.
@@ -49,6 +49,6 @@ public interface StateRoot extends DefRoot
    * @see #getDef()
    * @generated
    */
-  void setDef(StateDeclaration value);
+  void setDef(StateSpecification value);
 
 } // StateRoot

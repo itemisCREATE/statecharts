@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.stext.stext.TransitionReaction;
+import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 
 import de.itemis.xtext.utils.gmf.resource.AbstractXtextMemberInjectionService;
 
@@ -23,12 +23,13 @@ import de.itemis.xtext.utils.gmf.resource.AbstractXtextMemberInjectionService;
  * @author andreas muelder (andreas.muelder@itemis.de)
  * 
  */
-public class TransitionInjectionService extends
-		AbstractXtextMemberInjectionService<Transition, TransitionReaction> {
+public class TransitionInjectionService
+		extends
+		AbstractXtextMemberInjectionService<Transition, TransitionSpecification> {
 
 	@Override
 	public String getParserRule() {
-		return TransitionReaction.class.getSimpleName();
+		return TransitionSpecification.class.getSimpleName();
 	}
 
 	@Override
@@ -37,9 +38,9 @@ public class TransitionInjectionService extends
 	}
 
 	@Override
-	public void setFeatures(Transition original, TransitionReaction rootAST) {
-		original.setTrigger(rootAST.getTrigger());
-		original.setEffect(rootAST.getEffect());
+	public void setFeatures(Transition original, TransitionSpecification rootAST) {
+		original.setTrigger(rootAST.getReaction().getTrigger());
+		original.setEffect(rootAST.getReaction().getEffect());
 
 	}
 

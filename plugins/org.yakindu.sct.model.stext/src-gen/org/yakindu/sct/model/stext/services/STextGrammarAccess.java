@@ -65,23 +65,23 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cStatechartKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cDefAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cDefStatechartDefinitionParserRuleCall_1_0 = (RuleCall)cDefAssignment_1.eContents().get(0);
+		private final RuleCall cDefStatechartSpecificationParserRuleCall_1_0 = (RuleCall)cDefAssignment_1.eContents().get(0);
 		
 		//StatechartRoot:
-		//	"@@statechart@@" def=StatechartDefinition;
+		//	"@@statechart@@" def=StatechartSpecification;
 		public ParserRule getRule() { return rule; }
 
-		//"@@statechart@@" def=StatechartDefinition
+		//"@@statechart@@" def=StatechartSpecification
 		public Group getGroup() { return cGroup; }
 
 		//"@@statechart@@"
 		public Keyword getStatechartKeyword_0() { return cStatechartKeyword_0; }
 
-		//def=StatechartDefinition
+		//def=StatechartSpecification
 		public Assignment getDefAssignment_1() { return cDefAssignment_1; }
 
-		//StatechartDefinition
-		public RuleCall getDefStatechartDefinitionParserRuleCall_1_0() { return cDefStatechartDefinitionParserRuleCall_1_0; }
+		//StatechartSpecification
+		public RuleCall getDefStatechartSpecificationParserRuleCall_1_0() { return cDefStatechartSpecificationParserRuleCall_1_0; }
 	}
 
 	public class StateRootElements extends AbstractParserRuleElementFinder {
@@ -89,23 +89,23 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cStateKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cDefAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cDefStateDeclarationParserRuleCall_1_0 = (RuleCall)cDefAssignment_1.eContents().get(0);
+		private final RuleCall cDefStateSpecificationParserRuleCall_1_0 = (RuleCall)cDefAssignment_1.eContents().get(0);
 		
 		//StateRoot:
-		//	"@@state@@" def=StateDeclaration;
+		//	"@@state@@" def=StateSpecification;
 		public ParserRule getRule() { return rule; }
 
-		//"@@state@@" def=StateDeclaration
+		//"@@state@@" def=StateSpecification
 		public Group getGroup() { return cGroup; }
 
 		//"@@state@@"
 		public Keyword getStateKeyword_0() { return cStateKeyword_0; }
 
-		//def=StateDeclaration
+		//def=StateSpecification
 		public Assignment getDefAssignment_1() { return cDefAssignment_1; }
 
-		//StateDeclaration
-		public RuleCall getDefStateDeclarationParserRuleCall_1_0() { return cDefStateDeclarationParserRuleCall_1_0; }
+		//StateSpecification
+		public RuleCall getDefStateSpecificationParserRuleCall_1_0() { return cDefStateSpecificationParserRuleCall_1_0; }
 	}
 
 	public class TransitionRootElements extends AbstractParserRuleElementFinder {
@@ -113,29 +113,29 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTransitionKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cDefAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cDefTransitionStatementParserRuleCall_1_0 = (RuleCall)cDefAssignment_1.eContents().get(0);
+		private final RuleCall cDefTransitionSpecificationParserRuleCall_1_0 = (RuleCall)cDefAssignment_1.eContents().get(0);
 		
 		//TransitionRoot:
-		//	"@@transition@@" def=TransitionStatement;
+		//	"@@transition@@" def=TransitionSpecification;
 		public ParserRule getRule() { return rule; }
 
-		//"@@transition@@" def=TransitionStatement
+		//"@@transition@@" def=TransitionSpecification
 		public Group getGroup() { return cGroup; }
 
 		//"@@transition@@"
 		public Keyword getTransitionKeyword_0() { return cTransitionKeyword_0; }
 
-		//def=TransitionStatement
+		//def=TransitionSpecification
 		public Assignment getDefAssignment_1() { return cDefAssignment_1; }
 
-		//TransitionStatement
-		public RuleCall getDefTransitionStatementParserRuleCall_1_0() { return cDefTransitionStatementParserRuleCall_1_0; }
+		//TransitionSpecification
+		public RuleCall getDefTransitionSpecificationParserRuleCall_1_0() { return cDefTransitionSpecificationParserRuleCall_1_0; }
 	}
 
-	public class StatechartDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StatechartDefinition");
+	public class StatechartSpecificationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StatechartSpecification");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cStatechartDefinitionAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cStatechartSpecificationAction_0 = (Action)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cNamespaceKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cNamespaceAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
@@ -145,15 +145,15 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		
 		/// * ---- start rules ----
 		//Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
-		// * / StatechartDefinition:
-		//	{StatechartDefinition} ("namespace" namespace=FQN)? definitionScopes+=StatechartScope*;
+		// * / StatechartSpecification:
+		//	{StatechartSpecification} ("namespace" namespace=FQN)? definitionScopes+=StatechartScope*;
 		public ParserRule getRule() { return rule; }
 
-		//{StatechartDefinition} ("namespace" namespace=FQN)? definitionScopes+=StatechartScope*
+		//{StatechartSpecification} ("namespace" namespace=FQN)? definitionScopes+=StatechartScope*
 		public Group getGroup() { return cGroup; }
 
-		//{StatechartDefinition}
-		public Action getStatechartDefinitionAction_0() { return cStatechartDefinitionAction_0; }
+		//{StatechartSpecification}
+		public Action getStatechartSpecificationAction_0() { return cStatechartSpecificationAction_0; }
 
 		//("namespace" namespace=FQN)?
 		public Group getGroup_1() { return cGroup_1; }
@@ -174,80 +174,95 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getDefinitionScopesStatechartScopeParserRuleCall_2_0() { return cDefinitionScopesStatechartScopeParserRuleCall_2_0; }
 	}
 
-	public class StateDeclarationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StateDeclaration");
+	public class StateSpecificationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StateSpecification");
 		private final Assignment cScopeAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cScopeSimpleScopeParserRuleCall_0 = (RuleCall)cScopeAssignment.eContents().get(0);
+		private final RuleCall cScopeStateScopeParserRuleCall_0 = (RuleCall)cScopeAssignment.eContents().get(0);
 		
-		//StateDeclaration:
-		//	scope=SimpleScope;
+		//StateSpecification:
+		//	scope=StateScope;
 		public ParserRule getRule() { return rule; }
 
-		//scope=SimpleScope
+		//scope=StateScope
 		public Assignment getScopeAssignment() { return cScopeAssignment; }
 
-		//SimpleScope
-		public RuleCall getScopeSimpleScopeParserRuleCall_0() { return cScopeSimpleScopeParserRuleCall_0; }
+		//StateScope
+		public RuleCall getScopeStateScopeParserRuleCall_0() { return cScopeStateScopeParserRuleCall_0; }
 	}
 
-	public class TransitionStatementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TransitionStatement");
-		private final RuleCall cTransitionReactionParserRuleCall = (RuleCall)rule.eContents().get(1);
+	public class TransitionSpecificationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TransitionSpecification");
+		private final Assignment cReactionAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cReactionTransitionReactionParserRuleCall_0 = (RuleCall)cReactionAssignment.eContents().get(0);
 		
-		//TransitionStatement: //	Reaction;
-		//	TransitionReaction;
+		//TransitionSpecification:
+		//	reaction=TransitionReaction;
 		public ParserRule getRule() { return rule; }
 
-		////	Reaction;
+		//reaction=TransitionReaction
+		public Assignment getReactionAssignment() { return cReactionAssignment; }
+
 		//TransitionReaction
-		public RuleCall getTransitionReactionParserRuleCall() { return cTransitionReactionParserRuleCall; }
+		public RuleCall getReactionTransitionReactionParserRuleCall_0() { return cReactionTransitionReactionParserRuleCall_0; }
 	}
 
 	public class ScopeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Scope");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cSimpleScopeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cStateScopeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cStatechartScopeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		/// * ---- scope rules ----
 		//Defines different kinds of scopes that contain element definitions. Scopes are used for element definitions in statechart, regions, and state 
 		// * / Scope returns sct::Scope:
-		//	SimpleScope | StatechartScope;
+		//	StateScope | StatechartScope;
 		public ParserRule getRule() { return rule; }
 
-		//SimpleScope | StatechartScope
+		//StateScope | StatechartScope
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//SimpleScope
-		public RuleCall getSimpleScopeParserRuleCall_0() { return cSimpleScopeParserRuleCall_0; }
+		//StateScope
+		public RuleCall getStateScopeParserRuleCall_0() { return cStateScopeParserRuleCall_0; }
 
 		//StatechartScope
 		public RuleCall getStatechartScopeParserRuleCall_1() { return cStatechartScopeParserRuleCall_1; }
 	}
 
-	public class SimpleScopeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleScope");
+	public class StateScopeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StateScope");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cSimpleScopeAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cDeclarationsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cDeclarationsDeclarationParserRuleCall_1_0 = (RuleCall)cDeclarationsAssignment_1.eContents().get(0);
+		private final Alternatives cDeclarationsAlternatives_1_0 = (Alternatives)cDeclarationsAssignment_1.eContents().get(0);
+		private final RuleCall cDeclarationsLocalReactionParserRuleCall_1_0_0 = (RuleCall)cDeclarationsAlternatives_1_0.eContents().get(0);
+		private final RuleCall cDeclarationsEntrypointParserRuleCall_1_0_1 = (RuleCall)cDeclarationsAlternatives_1_0.eContents().get(1);
+		private final RuleCall cDeclarationsExitpointParserRuleCall_1_0_2 = (RuleCall)cDeclarationsAlternatives_1_0.eContents().get(2);
 		
 		//// a SimpleScope is used for states and regions
-		//SimpleScope returns sct::Scope:
-		//	{SimpleScope} declarations+=Declaration*;
+		//StateScope returns sct::Scope:
+		//	{SimpleScope} declarations+=(LocalReaction | Entrypoint | Exitpoint)*;
 		public ParserRule getRule() { return rule; }
 
-		//{SimpleScope} declarations+=Declaration*
+		//{SimpleScope} declarations+=(LocalReaction | Entrypoint | Exitpoint)*
 		public Group getGroup() { return cGroup; }
 
 		//{SimpleScope}
 		public Action getSimpleScopeAction_0() { return cSimpleScopeAction_0; }
 
-		//declarations+=Declaration*
+		//declarations+=(LocalReaction | Entrypoint | Exitpoint)*
 		public Assignment getDeclarationsAssignment_1() { return cDeclarationsAssignment_1; }
 
-		//Declaration
-		public RuleCall getDeclarationsDeclarationParserRuleCall_1_0() { return cDeclarationsDeclarationParserRuleCall_1_0; }
+		//LocalReaction | Entrypoint | Exitpoint
+		public Alternatives getDeclarationsAlternatives_1_0() { return cDeclarationsAlternatives_1_0; }
+
+		//LocalReaction
+		public RuleCall getDeclarationsLocalReactionParserRuleCall_1_0_0() { return cDeclarationsLocalReactionParserRuleCall_1_0_0; }
+
+		//Entrypoint
+		public RuleCall getDeclarationsEntrypointParserRuleCall_1_0_1() { return cDeclarationsEntrypointParserRuleCall_1_0_1; }
+
+		//Exitpoint
+		public RuleCall getDeclarationsExitpointParserRuleCall_1_0_2() { return cDeclarationsExitpointParserRuleCall_1_0_2; }
 	}
 
 	public class StatechartScopeElements extends AbstractParserRuleElementFinder {
@@ -280,13 +295,18 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cColonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cDeclarationsAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cDeclarationsDeclarationParserRuleCall_4_0 = (RuleCall)cDeclarationsAssignment_4.eContents().get(0);
+		private final Alternatives cDeclarationsAlternatives_4_0 = (Alternatives)cDeclarationsAssignment_4.eContents().get(0);
+		private final RuleCall cDeclarationsEventDefinitionParserRuleCall_4_0_0 = (RuleCall)cDeclarationsAlternatives_4_0.eContents().get(0);
+		private final RuleCall cDeclarationsVariableDefinitionParserRuleCall_4_0_1 = (RuleCall)cDeclarationsAlternatives_4_0.eContents().get(1);
+		private final RuleCall cDeclarationsEntrypointParserRuleCall_4_0_2 = (RuleCall)cDeclarationsAlternatives_4_0.eContents().get(2);
+		private final RuleCall cDeclarationsExitpointParserRuleCall_4_0_3 = (RuleCall)cDeclarationsAlternatives_4_0.eContents().get(3);
 		
 		//InterfaceScope returns sct::Scope:
-		//	{InterfaceScope} "interface" name=ID? ":" declarations+=Declaration*;
+		//	{InterfaceScope} "interface" name=ID? ":" declarations+=(EventDefinition | VariableDefinition | Entrypoint |
+		//	Exitpoint)*;
 		public ParserRule getRule() { return rule; }
 
-		//{InterfaceScope} "interface" name=ID? ":" declarations+=Declaration*
+		//{InterfaceScope} "interface" name=ID? ":" declarations+=(EventDefinition | VariableDefinition | Entrypoint | Exitpoint)*
 		public Group getGroup() { return cGroup; }
 
 		//{InterfaceScope}
@@ -304,11 +324,23 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//":"
 		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
 
-		//declarations+=Declaration*
+		//declarations+=(EventDefinition | VariableDefinition | Entrypoint | Exitpoint)*
 		public Assignment getDeclarationsAssignment_4() { return cDeclarationsAssignment_4; }
 
-		//Declaration
-		public RuleCall getDeclarationsDeclarationParserRuleCall_4_0() { return cDeclarationsDeclarationParserRuleCall_4_0; }
+		//EventDefinition | VariableDefinition | Entrypoint | Exitpoint
+		public Alternatives getDeclarationsAlternatives_4_0() { return cDeclarationsAlternatives_4_0; }
+
+		//EventDefinition
+		public RuleCall getDeclarationsEventDefinitionParserRuleCall_4_0_0() { return cDeclarationsEventDefinitionParserRuleCall_4_0_0; }
+
+		//VariableDefinition
+		public RuleCall getDeclarationsVariableDefinitionParserRuleCall_4_0_1() { return cDeclarationsVariableDefinitionParserRuleCall_4_0_1; }
+
+		//Entrypoint
+		public RuleCall getDeclarationsEntrypointParserRuleCall_4_0_2() { return cDeclarationsEntrypointParserRuleCall_4_0_2; }
+
+		//Exitpoint
+		public RuleCall getDeclarationsExitpointParserRuleCall_4_0_3() { return cDeclarationsExitpointParserRuleCall_4_0_3; }
 	}
 
 	public class InternalScopeElements extends AbstractParserRuleElementFinder {
@@ -318,13 +350,17 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cInternalKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cDeclarationsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cDeclarationsDeclarationParserRuleCall_3_0 = (RuleCall)cDeclarationsAssignment_3.eContents().get(0);
+		private final Alternatives cDeclarationsAlternatives_3_0 = (Alternatives)cDeclarationsAssignment_3.eContents().get(0);
+		private final RuleCall cDeclarationsEventDefinitionParserRuleCall_3_0_0 = (RuleCall)cDeclarationsAlternatives_3_0.eContents().get(0);
+		private final RuleCall cDeclarationsVariableDefinitionParserRuleCall_3_0_1 = (RuleCall)cDeclarationsAlternatives_3_0.eContents().get(1);
+		private final RuleCall cDeclarationsOperationParserRuleCall_3_0_2 = (RuleCall)cDeclarationsAlternatives_3_0.eContents().get(2);
+		private final RuleCall cDeclarationsLocalReactionParserRuleCall_3_0_3 = (RuleCall)cDeclarationsAlternatives_3_0.eContents().get(3);
 		
 		//InternalScope returns sct::Scope:
-		//	{InternalScope} "internal" ":" declarations+=Declaration*;
+		//	{InternalScope} "internal" ":" declarations+=(EventDefinition | VariableDefinition | Operation | LocalReaction)*;
 		public ParserRule getRule() { return rule; }
 
-		//{InternalScope} "internal" ":" declarations+=Declaration*
+		//{InternalScope} "internal" ":" declarations+=(EventDefinition | VariableDefinition | Operation | LocalReaction)*
 		public Group getGroup() { return cGroup; }
 
 		//{InternalScope}
@@ -336,11 +372,23 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//":"
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
-		//declarations+=Declaration*
+		//declarations+=(EventDefinition | VariableDefinition | Operation | LocalReaction)*
 		public Assignment getDeclarationsAssignment_3() { return cDeclarationsAssignment_3; }
 
-		//Declaration
-		public RuleCall getDeclarationsDeclarationParserRuleCall_3_0() { return cDeclarationsDeclarationParserRuleCall_3_0; }
+		//EventDefinition | VariableDefinition | Operation | LocalReaction
+		public Alternatives getDeclarationsAlternatives_3_0() { return cDeclarationsAlternatives_3_0; }
+
+		//EventDefinition
+		public RuleCall getDeclarationsEventDefinitionParserRuleCall_3_0_0() { return cDeclarationsEventDefinitionParserRuleCall_3_0_0; }
+
+		//VariableDefinition
+		public RuleCall getDeclarationsVariableDefinitionParserRuleCall_3_0_1() { return cDeclarationsVariableDefinitionParserRuleCall_3_0_1; }
+
+		//Operation
+		public RuleCall getDeclarationsOperationParserRuleCall_3_0_2() { return cDeclarationsOperationParserRuleCall_3_0_2; }
+
+		//LocalReaction
+		public RuleCall getDeclarationsLocalReactionParserRuleCall_3_0_3() { return cDeclarationsLocalReactionParserRuleCall_3_0_3; }
 	}
 
 	public class DeclarationElements extends AbstractParserRuleElementFinder {
@@ -348,18 +396,17 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEventDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cVariableDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cClockParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cOperationParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cLocalReactionParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
-		private final RuleCall cEntrypointParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
-		private final RuleCall cExitpointParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cOperationParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cLocalReactionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cEntrypointParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cExitpointParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		/// * ---- declarations ----
 		//a definition is a top level element of a definition scope. * / Declaration returns sct::Declaration:
-		//	EventDefinition | VariableDefinition | Clock | Operation | LocalReaction | Entrypoint | Exitpoint;
+		//	EventDefinition | VariableDefinition | Operation | LocalReaction | Entrypoint | Exitpoint;
 		public ParserRule getRule() { return rule; }
 
-		//EventDefinition | VariableDefinition | Clock | Operation | LocalReaction | Entrypoint | Exitpoint
+		//EventDefinition | VariableDefinition | Operation | LocalReaction | Entrypoint | Exitpoint
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//EventDefinition
@@ -368,20 +415,17 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//VariableDefinition
 		public RuleCall getVariableDefinitionParserRuleCall_1() { return cVariableDefinitionParserRuleCall_1; }
 
-		//Clock
-		public RuleCall getClockParserRuleCall_2() { return cClockParserRuleCall_2; }
-
 		//Operation
-		public RuleCall getOperationParserRuleCall_3() { return cOperationParserRuleCall_3; }
+		public RuleCall getOperationParserRuleCall_2() { return cOperationParserRuleCall_2; }
 
 		//LocalReaction
-		public RuleCall getLocalReactionParserRuleCall_4() { return cLocalReactionParserRuleCall_4; }
+		public RuleCall getLocalReactionParserRuleCall_3() { return cLocalReactionParserRuleCall_3; }
 
 		//Entrypoint
-		public RuleCall getEntrypointParserRuleCall_5() { return cEntrypointParserRuleCall_5; }
+		public RuleCall getEntrypointParserRuleCall_4() { return cEntrypointParserRuleCall_4; }
 
 		//Exitpoint
-		public RuleCall getExitpointParserRuleCall_6() { return cExitpointParserRuleCall_6; }
+		public RuleCall getExitpointParserRuleCall_5() { return cExitpointParserRuleCall_5; }
 	}
 
 	public class EventDefinitionElements extends AbstractParserRuleElementFinder {
@@ -563,34 +607,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getInitialValueExpressionParserRuleCall_6_1_0() { return cInitialValueExpressionParserRuleCall_6_1_0; }
 	}
 
-	public class ClockElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Clock");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cClockAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cClockKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		
-		/// * ---- clock definition ---- * / Clock returns sct::Declaration:
-		//	{Clock} "clock" name=ID;
-		public ParserRule getRule() { return rule; }
-
-		//{Clock} "clock" name=ID
-		public Group getGroup() { return cGroup; }
-
-		//{Clock}
-		public Action getClockAction_0() { return cClockAction_0; }
-
-		//"clock"
-		public Keyword getClockKeyword_1() { return cClockKeyword_1; }
-
-		//name=ID
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
-	}
-
 	public class OperationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Operation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -612,7 +628,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cTypeAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
 		private final RuleCall cTypeTypeEnumRuleCall_6_1_0 = (RuleCall)cTypeAssignment_6_1.eContents().get(0);
 		
-		/// * ---- clock definition ---- * / Operation returns sct::Declaration:
+		/// * ---- operation definition ---- * / Operation returns sct::Declaration:
 		//	{Operation} "operation" name=ID "(" (paramTypes+=Type ("," paramTypes+=Type)*)? ")" (":" type=Type)?;
 		public ParserRule getRule() { return rule; }
 
@@ -1218,7 +1234,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAlwaysEventParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cDefaultEventParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
-		//// TODO: add dereived events like in(state), entered(state)	
+		////TODO: Group OnCycleEvent and AlwaysEvent, maybe replace it by a DoEvent
 		//BuiltinEventSpec:
 		//	EntryEvent | ExitEvent | OnCycleEvent | AlwaysEvent | DefaultEvent;
 		public ParserRule getRule() { return rule; }
@@ -2829,11 +2845,11 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private StatechartRootElements pStatechartRoot;
 	private StateRootElements pStateRoot;
 	private TransitionRootElements pTransitionRoot;
-	private StatechartDefinitionElements pStatechartDefinition;
-	private StateDeclarationElements pStateDeclaration;
-	private TransitionStatementElements pTransitionStatement;
+	private StatechartSpecificationElements pStatechartSpecification;
+	private StateSpecificationElements pStateSpecification;
+	private TransitionSpecificationElements pTransitionSpecification;
 	private ScopeElements pScope;
-	private SimpleScopeElements pSimpleScope;
+	private StateScopeElements pStateScope;
 	private StatechartScopeElements pStatechartScope;
 	private InterfaceScopeElements pInterfaceScope;
 	private InternalScopeElements pInternalScope;
@@ -2842,7 +2858,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private EventDerivationElements pEventDerivation;
 	private DirectionElements unknownRuleDirection;
 	private VariableDefinitionElements pVariableDefinition;
-	private ClockElements pClock;
 	private OperationElements pOperation;
 	private EntrypointElements pEntrypoint;
 	private ExitpointElements pExitpoint;
@@ -2953,7 +2968,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StatechartRoot:
-	//	"@@statechart@@" def=StatechartDefinition;
+	//	"@@statechart@@" def=StatechartSpecification;
 	public StatechartRootElements getStatechartRootAccess() {
 		return (pStatechartRoot != null) ? pStatechartRoot : (pStatechartRoot = new StatechartRootElements());
 	}
@@ -2963,7 +2978,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StateRoot:
-	//	"@@state@@" def=StateDeclaration;
+	//	"@@state@@" def=StateSpecification;
 	public StateRootElements getStateRootAccess() {
 		return (pStateRoot != null) ? pStateRoot : (pStateRoot = new StateRootElements());
 	}
@@ -2973,7 +2988,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TransitionRoot:
-	//	"@@transition@@" def=TransitionStatement;
+	//	"@@transition@@" def=TransitionSpecification;
 	public TransitionRootElements getTransitionRootAccess() {
 		return (pTransitionRoot != null) ? pTransitionRoot : (pTransitionRoot = new TransitionRootElements());
 	}
@@ -2984,40 +2999,40 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// * ---- start rules ----
 	//Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
-	// * / StatechartDefinition:
-	//	{StatechartDefinition} ("namespace" namespace=FQN)? definitionScopes+=StatechartScope*;
-	public StatechartDefinitionElements getStatechartDefinitionAccess() {
-		return (pStatechartDefinition != null) ? pStatechartDefinition : (pStatechartDefinition = new StatechartDefinitionElements());
+	// * / StatechartSpecification:
+	//	{StatechartSpecification} ("namespace" namespace=FQN)? definitionScopes+=StatechartScope*;
+	public StatechartSpecificationElements getStatechartSpecificationAccess() {
+		return (pStatechartSpecification != null) ? pStatechartSpecification : (pStatechartSpecification = new StatechartSpecificationElements());
 	}
 	
-	public ParserRule getStatechartDefinitionRule() {
-		return getStatechartDefinitionAccess().getRule();
+	public ParserRule getStatechartSpecificationRule() {
+		return getStatechartSpecificationAccess().getRule();
 	}
 
-	//StateDeclaration:
-	//	scope=SimpleScope;
-	public StateDeclarationElements getStateDeclarationAccess() {
-		return (pStateDeclaration != null) ? pStateDeclaration : (pStateDeclaration = new StateDeclarationElements());
+	//StateSpecification:
+	//	scope=StateScope;
+	public StateSpecificationElements getStateSpecificationAccess() {
+		return (pStateSpecification != null) ? pStateSpecification : (pStateSpecification = new StateSpecificationElements());
 	}
 	
-	public ParserRule getStateDeclarationRule() {
-		return getStateDeclarationAccess().getRule();
+	public ParserRule getStateSpecificationRule() {
+		return getStateSpecificationAccess().getRule();
 	}
 
-	//TransitionStatement: //	Reaction;
-	//	TransitionReaction;
-	public TransitionStatementElements getTransitionStatementAccess() {
-		return (pTransitionStatement != null) ? pTransitionStatement : (pTransitionStatement = new TransitionStatementElements());
+	//TransitionSpecification:
+	//	reaction=TransitionReaction;
+	public TransitionSpecificationElements getTransitionSpecificationAccess() {
+		return (pTransitionSpecification != null) ? pTransitionSpecification : (pTransitionSpecification = new TransitionSpecificationElements());
 	}
 	
-	public ParserRule getTransitionStatementRule() {
-		return getTransitionStatementAccess().getRule();
+	public ParserRule getTransitionSpecificationRule() {
+		return getTransitionSpecificationAccess().getRule();
 	}
 
 	/// * ---- scope rules ----
 	//Defines different kinds of scopes that contain element definitions. Scopes are used for element definitions in statechart, regions, and state 
 	// * / Scope returns sct::Scope:
-	//	SimpleScope | StatechartScope;
+	//	StateScope | StatechartScope;
 	public ScopeElements getScopeAccess() {
 		return (pScope != null) ? pScope : (pScope = new ScopeElements());
 	}
@@ -3027,14 +3042,14 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// a SimpleScope is used for states and regions
-	//SimpleScope returns sct::Scope:
-	//	{SimpleScope} declarations+=Declaration*;
-	public SimpleScopeElements getSimpleScopeAccess() {
-		return (pSimpleScope != null) ? pSimpleScope : (pSimpleScope = new SimpleScopeElements());
+	//StateScope returns sct::Scope:
+	//	{SimpleScope} declarations+=(LocalReaction | Entrypoint | Exitpoint)*;
+	public StateScopeElements getStateScopeAccess() {
+		return (pStateScope != null) ? pStateScope : (pStateScope = new StateScopeElements());
 	}
 	
-	public ParserRule getSimpleScopeRule() {
-		return getSimpleScopeAccess().getRule();
+	public ParserRule getStateScopeRule() {
+		return getStateScopeAccess().getRule();
 	}
 
 	//// defines the poosible scopes for statecharts
@@ -3049,7 +3064,8 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//InterfaceScope returns sct::Scope:
-	//	{InterfaceScope} "interface" name=ID? ":" declarations+=Declaration*;
+	//	{InterfaceScope} "interface" name=ID? ":" declarations+=(EventDefinition | VariableDefinition | Entrypoint |
+	//	Exitpoint)*;
 	public InterfaceScopeElements getInterfaceScopeAccess() {
 		return (pInterfaceScope != null) ? pInterfaceScope : (pInterfaceScope = new InterfaceScopeElements());
 	}
@@ -3059,7 +3075,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//InternalScope returns sct::Scope:
-	//	{InternalScope} "internal" ":" declarations+=Declaration*;
+	//	{InternalScope} "internal" ":" declarations+=(EventDefinition | VariableDefinition | Operation | LocalReaction)*;
 	public InternalScopeElements getInternalScopeAccess() {
 		return (pInternalScope != null) ? pInternalScope : (pInternalScope = new InternalScopeElements());
 	}
@@ -3070,7 +3086,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// * ---- declarations ----
 	//a definition is a top level element of a definition scope. * / Declaration returns sct::Declaration:
-	//	EventDefinition | VariableDefinition | Clock | Operation | LocalReaction | Entrypoint | Exitpoint;
+	//	EventDefinition | VariableDefinition | Operation | LocalReaction | Entrypoint | Exitpoint;
 	public DeclarationElements getDeclarationAccess() {
 		return (pDeclaration != null) ? pDeclaration : (pDeclaration = new DeclarationElements());
 	}
@@ -3121,17 +3137,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getVariableDefinitionAccess().getRule();
 	}
 
-	/// * ---- clock definition ---- * / Clock returns sct::Declaration:
-	//	{Clock} "clock" name=ID;
-	public ClockElements getClockAccess() {
-		return (pClock != null) ? pClock : (pClock = new ClockElements());
-	}
-	
-	public ParserRule getClockRule() {
-		return getClockAccess().getRule();
-	}
-
-	/// * ---- clock definition ---- * / Operation returns sct::Declaration:
+	/// * ---- operation definition ---- * / Operation returns sct::Declaration:
 	//	{Operation} "operation" name=ID "(" (paramTypes+=Type ("," paramTypes+=Type)*)? ")" (":" type=Type)?;
 	public OperationElements getOperationAccess() {
 		return (pOperation != null) ? pOperation : (pOperation = new OperationElements());
@@ -3315,7 +3321,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getTimeEventTypeAccess().getRule();
 	}
 
-	//// TODO: add dereived events like in(state), entered(state)	
+	////TODO: Group OnCycleEvent and AlwaysEvent, maybe replace it by a DoEvent
 	//BuiltinEventSpec:
 	//	EntryEvent | ExitEvent | OnCycleEvent | AlwaysEvent | DefaultEvent;
 	public BuiltinEventSpecElements getBuiltinEventSpecAccess() {

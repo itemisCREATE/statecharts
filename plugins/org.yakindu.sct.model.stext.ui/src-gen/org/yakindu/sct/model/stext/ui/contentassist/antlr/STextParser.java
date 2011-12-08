@@ -39,7 +39,10 @@ public class STextParser extends AbstractContentAssistParser {
 				{
 					put(grammarAccess.getDefRootAccess().getAlternatives(), "rule__DefRoot__Alternatives");
 					put(grammarAccess.getScopeAccess().getAlternatives(), "rule__Scope__Alternatives");
+					put(grammarAccess.getStateScopeAccess().getDeclarationsAlternatives_1_0(), "rule__StateScope__DeclarationsAlternatives_1_0");
 					put(grammarAccess.getStatechartScopeAccess().getAlternatives(), "rule__StatechartScope__Alternatives");
+					put(grammarAccess.getInterfaceScopeAccess().getDeclarationsAlternatives_4_0(), "rule__InterfaceScope__DeclarationsAlternatives_4_0");
+					put(grammarAccess.getInternalScopeAccess().getDeclarationsAlternatives_3_0(), "rule__InternalScope__DeclarationsAlternatives_3_0");
 					put(grammarAccess.getDeclarationAccess().getAlternatives(), "rule__Declaration__Alternatives");
 					put(grammarAccess.getReactionAccess().getAlternatives(), "rule__Reaction__Alternatives");
 					put(grammarAccess.getReactionTriggerAccess().getAlternatives_1(), "rule__ReactionTrigger__Alternatives_1");
@@ -66,9 +69,9 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStatechartRootAccess().getGroup(), "rule__StatechartRoot__Group__0");
 					put(grammarAccess.getStateRootAccess().getGroup(), "rule__StateRoot__Group__0");
 					put(grammarAccess.getTransitionRootAccess().getGroup(), "rule__TransitionRoot__Group__0");
-					put(grammarAccess.getStatechartDefinitionAccess().getGroup(), "rule__StatechartDefinition__Group__0");
-					put(grammarAccess.getStatechartDefinitionAccess().getGroup_1(), "rule__StatechartDefinition__Group_1__0");
-					put(grammarAccess.getSimpleScopeAccess().getGroup(), "rule__SimpleScope__Group__0");
+					put(grammarAccess.getStatechartSpecificationAccess().getGroup(), "rule__StatechartSpecification__Group__0");
+					put(grammarAccess.getStatechartSpecificationAccess().getGroup_1(), "rule__StatechartSpecification__Group_1__0");
+					put(grammarAccess.getStateScopeAccess().getGroup(), "rule__StateScope__Group__0");
 					put(grammarAccess.getInterfaceScopeAccess().getGroup(), "rule__InterfaceScope__Group__0");
 					put(grammarAccess.getInternalScopeAccess().getGroup(), "rule__InternalScope__Group__0");
 					put(grammarAccess.getEventDefinitionAccess().getGroup(), "rule__EventDefinition__Group__0");
@@ -77,7 +80,6 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEventDerivationAccess().getGroup_2(), "rule__EventDerivation__Group_2__0");
 					put(grammarAccess.getVariableDefinitionAccess().getGroup(), "rule__VariableDefinition__Group__0");
 					put(grammarAccess.getVariableDefinitionAccess().getGroup_6(), "rule__VariableDefinition__Group_6__0");
-					put(grammarAccess.getClockAccess().getGroup(), "rule__Clock__Group__0");
 					put(grammarAccess.getOperationAccess().getGroup(), "rule__Operation__Group__0");
 					put(grammarAccess.getOperationAccess().getGroup_4(), "rule__Operation__Group_4__0");
 					put(grammarAccess.getOperationAccess().getGroup_4_1(), "rule__Operation__Group_4_1__0");
@@ -150,10 +152,11 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStatechartRootAccess().getDefAssignment_1(), "rule__StatechartRoot__DefAssignment_1");
 					put(grammarAccess.getStateRootAccess().getDefAssignment_1(), "rule__StateRoot__DefAssignment_1");
 					put(grammarAccess.getTransitionRootAccess().getDefAssignment_1(), "rule__TransitionRoot__DefAssignment_1");
-					put(grammarAccess.getStatechartDefinitionAccess().getNamespaceAssignment_1_1(), "rule__StatechartDefinition__NamespaceAssignment_1_1");
-					put(grammarAccess.getStatechartDefinitionAccess().getDefinitionScopesAssignment_2(), "rule__StatechartDefinition__DefinitionScopesAssignment_2");
-					put(grammarAccess.getStateDeclarationAccess().getScopeAssignment(), "rule__StateDeclaration__ScopeAssignment");
-					put(grammarAccess.getSimpleScopeAccess().getDeclarationsAssignment_1(), "rule__SimpleScope__DeclarationsAssignment_1");
+					put(grammarAccess.getStatechartSpecificationAccess().getNamespaceAssignment_1_1(), "rule__StatechartSpecification__NamespaceAssignment_1_1");
+					put(grammarAccess.getStatechartSpecificationAccess().getDefinitionScopesAssignment_2(), "rule__StatechartSpecification__DefinitionScopesAssignment_2");
+					put(grammarAccess.getStateSpecificationAccess().getScopeAssignment(), "rule__StateSpecification__ScopeAssignment");
+					put(grammarAccess.getTransitionSpecificationAccess().getReactionAssignment(), "rule__TransitionSpecification__ReactionAssignment");
+					put(grammarAccess.getStateScopeAccess().getDeclarationsAssignment_1(), "rule__StateScope__DeclarationsAssignment_1");
 					put(grammarAccess.getInterfaceScopeAccess().getNameAssignment_2(), "rule__InterfaceScope__NameAssignment_2");
 					put(grammarAccess.getInterfaceScopeAccess().getDeclarationsAssignment_4(), "rule__InterfaceScope__DeclarationsAssignment_4");
 					put(grammarAccess.getInternalScopeAccess().getDeclarationsAssignment_3(), "rule__InternalScope__DeclarationsAssignment_3");
@@ -168,7 +171,6 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVariableDefinitionAccess().getNameAssignment_3(), "rule__VariableDefinition__NameAssignment_3");
 					put(grammarAccess.getVariableDefinitionAccess().getTypeAssignment_5(), "rule__VariableDefinition__TypeAssignment_5");
 					put(grammarAccess.getVariableDefinitionAccess().getInitialValueAssignment_6_1(), "rule__VariableDefinition__InitialValueAssignment_6_1");
-					put(grammarAccess.getClockAccess().getNameAssignment_2(), "rule__Clock__NameAssignment_2");
 					put(grammarAccess.getOperationAccess().getNameAssignment_2(), "rule__Operation__NameAssignment_2");
 					put(grammarAccess.getOperationAccess().getParamTypesAssignment_4_0(), "rule__Operation__ParamTypesAssignment_4_0");
 					put(grammarAccess.getOperationAccess().getParamTypesAssignment_4_1_1(), "rule__Operation__ParamTypesAssignment_4_1_1");

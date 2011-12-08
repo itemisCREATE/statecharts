@@ -124,24 +124,24 @@ public class StextSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case StextPackage.STATECHART_DEFINITION:
+      case StextPackage.STATECHART_SPECIFICATION:
       {
-        StatechartDefinition statechartDefinition = (StatechartDefinition)theEObject;
-        T result = caseStatechartDefinition(statechartDefinition);
+        StatechartSpecification statechartSpecification = (StatechartSpecification)theEObject;
+        T result = caseStatechartSpecification(statechartSpecification);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case StextPackage.STATE_DECLARATION:
+      case StextPackage.STATE_SPECIFICATION:
       {
-        StateDeclaration stateDeclaration = (StateDeclaration)theEObject;
-        T result = caseStateDeclaration(stateDeclaration);
+        StateSpecification stateSpecification = (StateSpecification)theEObject;
+        T result = caseStateSpecification(stateSpecification);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case StextPackage.TRANSITION_STATEMENT:
+      case StextPackage.TRANSITION_SPECIFICATION:
       {
-        TransitionStatement transitionStatement = (TransitionStatement)theEObject;
-        T result = caseTransitionStatement(transitionStatement);
+        TransitionSpecification transitionSpecification = (TransitionSpecification)theEObject;
+        T result = caseTransitionSpecification(transitionSpecification);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -166,7 +166,6 @@ public class StextSwitch<T> extends Switch<T>
       {
         TransitionReaction transitionReaction = (TransitionReaction)theEObject;
         T result = caseTransitionReaction(transitionReaction);
-        if (result == null) result = caseTransitionStatement(transitionReaction);
         if (result == null) result = caseReaction(transitionReaction);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -428,15 +427,6 @@ public class StextSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case StextPackage.CLOCK:
-      {
-        Clock clock = (Clock)theEObject;
-        T result = caseClock(clock);
-        if (result == null) result = caseDeclaration(clock);
-        if (result == null) result = caseNamedElement(clock);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case StextPackage.OPERATION:
       {
         Operation operation = (Operation)theEObject;
@@ -691,49 +681,49 @@ public class StextSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Statechart Definition</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Statechart Specification</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Statechart Definition</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Statechart Specification</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseStatechartDefinition(StatechartDefinition object)
+  public T caseStatechartSpecification(StatechartSpecification object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>State Declaration</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>State Specification</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>State Declaration</em>'.
+   * @return the result of interpreting the object as an instance of '<em>State Specification</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseStateDeclaration(StateDeclaration object)
+  public T caseStateSpecification(StateSpecification object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Transition Statement</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Transition Specification</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Transition Statement</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Transition Specification</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseTransitionStatement(TransitionStatement object)
+  public T caseTransitionSpecification(TransitionSpecification object)
   {
     return null;
   }
@@ -1278,22 +1268,6 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseVariableDefinition(VariableDefinition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Clock</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Clock</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseClock(Clock object)
   {
     return null;
   }

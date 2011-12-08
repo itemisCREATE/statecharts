@@ -15,42 +15,41 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.yakindu.sct.model.sgraph.Scope;
-
-import org.yakindu.sct.model.stext.stext.StateDeclaration;
 import org.yakindu.sct.model.stext.stext.StextPackage;
+import org.yakindu.sct.model.stext.stext.TransitionReaction;
+import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>State Declaration</b></em>'.
+ * An implementation of the model object '<em><b>Transition Specification</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.StateDeclarationImpl#getScope <em>Scope</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.impl.TransitionSpecificationImpl#getReaction <em>Reaction</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class StateDeclarationImpl extends MinimalEObjectImpl.Container implements StateDeclaration
+public class TransitionSpecificationImpl extends MinimalEObjectImpl.Container implements TransitionSpecification
 {
   /**
-   * The cached value of the '{@link #getScope() <em>Scope</em>}' containment reference.
+   * The cached value of the '{@link #getReaction() <em>Reaction</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getScope()
+   * @see #getReaction()
    * @generated
    * @ordered
    */
-  protected Scope scope;
+  protected TransitionReaction reaction;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected StateDeclarationImpl()
+  protected TransitionSpecificationImpl()
   {
     super();
   }
@@ -63,7 +62,7 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
   @Override
   protected EClass eStaticClass()
   {
-    return StextPackage.Literals.STATE_DECLARATION;
+    return StextPackage.Literals.TRANSITION_SPECIFICATION;
   }
 
   /**
@@ -71,9 +70,9 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public Scope getScope()
+  public TransitionReaction getReaction()
   {
-    return scope;
+    return reaction;
   }
 
   /**
@@ -81,13 +80,13 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetScope(Scope newScope, NotificationChain msgs)
+  public NotificationChain basicSetReaction(TransitionReaction newReaction, NotificationChain msgs)
   {
-    Scope oldScope = scope;
-    scope = newScope;
+    TransitionReaction oldReaction = reaction;
+    reaction = newReaction;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.STATE_DECLARATION__SCOPE, oldScope, newScope);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.TRANSITION_SPECIFICATION__REACTION, oldReaction, newReaction);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -98,20 +97,20 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setScope(Scope newScope)
+  public void setReaction(TransitionReaction newReaction)
   {
-    if (newScope != scope)
+    if (newReaction != reaction)
     {
       NotificationChain msgs = null;
-      if (scope != null)
-        msgs = ((InternalEObject)scope).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.STATE_DECLARATION__SCOPE, null, msgs);
-      if (newScope != null)
-        msgs = ((InternalEObject)newScope).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.STATE_DECLARATION__SCOPE, null, msgs);
-      msgs = basicSetScope(newScope, msgs);
+      if (reaction != null)
+        msgs = ((InternalEObject)reaction).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.TRANSITION_SPECIFICATION__REACTION, null, msgs);
+      if (newReaction != null)
+        msgs = ((InternalEObject)newReaction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.TRANSITION_SPECIFICATION__REACTION, null, msgs);
+      msgs = basicSetReaction(newReaction, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.STATE_DECLARATION__SCOPE, newScope, newScope));
+      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.TRANSITION_SPECIFICATION__REACTION, newReaction, newReaction));
   }
 
   /**
@@ -124,8 +123,8 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case StextPackage.STATE_DECLARATION__SCOPE:
-        return basicSetScope(null, msgs);
+      case StextPackage.TRANSITION_SPECIFICATION__REACTION:
+        return basicSetReaction(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -140,8 +139,8 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case StextPackage.STATE_DECLARATION__SCOPE:
-        return getScope();
+      case StextPackage.TRANSITION_SPECIFICATION__REACTION:
+        return getReaction();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -156,8 +155,8 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case StextPackage.STATE_DECLARATION__SCOPE:
-        setScope((Scope)newValue);
+      case StextPackage.TRANSITION_SPECIFICATION__REACTION:
+        setReaction((TransitionReaction)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -173,8 +172,8 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case StextPackage.STATE_DECLARATION__SCOPE:
-        setScope((Scope)null);
+      case StextPackage.TRANSITION_SPECIFICATION__REACTION:
+        setReaction((TransitionReaction)null);
         return;
     }
     super.eUnset(featureID);
@@ -190,10 +189,10 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case StextPackage.STATE_DECLARATION__SCOPE:
-        return scope != null;
+      case StextPackage.TRANSITION_SPECIFICATION__REACTION:
+        return reaction != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //StateDeclarationImpl
+} //TransitionSpecificationImpl

@@ -24,7 +24,7 @@ import org.yakindu.sct.model.sgraph.Reaction;
  * @model
  * @generated
  */
-public interface TransitionReaction extends TransitionStatement, Reaction
+public interface TransitionReaction extends Reaction
 {
   /**
    * Returns the value of the '<em><b>Properties</b></em>' containment reference.

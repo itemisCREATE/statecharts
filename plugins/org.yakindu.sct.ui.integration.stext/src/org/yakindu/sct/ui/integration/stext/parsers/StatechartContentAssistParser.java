@@ -20,7 +20,7 @@ public class StatechartContentAssistParser extends STextParser {
 			AbstractInternalContentAssistParser parser) {
 		try {
 			InternalSTextParser typedParser = (InternalSTextParser) parser;
-			typedParser.entryRuleStatechartDefinition();
+			typedParser.entryRuleStatechartSpecification();
 			return typedParser.getFollowElements();
 		} catch (RecognitionException ex) {
 			throw new RuntimeException(ex);

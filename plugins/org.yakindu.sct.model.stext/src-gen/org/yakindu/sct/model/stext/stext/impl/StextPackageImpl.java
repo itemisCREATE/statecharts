@@ -26,7 +26,6 @@ import org.yakindu.sct.model.stext.stext.BitwiseOrExpression;
 import org.yakindu.sct.model.stext.stext.BitwiseXorExpression;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
-import org.yakindu.sct.model.stext.stext.Clock;
 import org.yakindu.sct.model.stext.stext.ConditionalExpression;
 import org.yakindu.sct.model.stext.stext.DefRoot;
 import org.yakindu.sct.model.stext.stext.DefaultEvent;
@@ -75,10 +74,10 @@ import org.yakindu.sct.model.stext.stext.Root;
 import org.yakindu.sct.model.stext.stext.ShiftExpression;
 import org.yakindu.sct.model.stext.stext.ShiftOperator;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
-import org.yakindu.sct.model.stext.stext.StateDeclaration;
 import org.yakindu.sct.model.stext.stext.StateRoot;
-import org.yakindu.sct.model.stext.stext.StatechartDefinition;
+import org.yakindu.sct.model.stext.stext.StateSpecification;
 import org.yakindu.sct.model.stext.stext.StatechartRoot;
+import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
@@ -86,7 +85,7 @@ import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
 import org.yakindu.sct.model.stext.stext.TransitionRoot;
-import org.yakindu.sct.model.stext.stext.TransitionStatement;
+import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.UnaryOperator;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
@@ -139,21 +138,21 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass statechartDefinitionEClass = null;
+  private EClass statechartSpecificationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass stateDeclarationEClass = null;
+  private EClass stateSpecificationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass transitionStatementEClass = null;
+  private EClass transitionSpecificationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -392,13 +391,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * @generated
    */
   private EClass variableDefinitionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass clockEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -764,9 +756,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getStatechartDefinition()
+  public EClass getStatechartSpecification()
   {
-    return statechartDefinitionEClass;
+    return statechartSpecificationEClass;
   }
 
   /**
@@ -774,9 +766,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getStatechartDefinition_Namespace()
+  public EAttribute getStatechartSpecification_Namespace()
   {
-    return (EAttribute)statechartDefinitionEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)statechartSpecificationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -784,9 +776,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getStatechartDefinition_DefinitionScopes()
+  public EReference getStatechartSpecification_DefinitionScopes()
   {
-    return (EReference)statechartDefinitionEClass.getEStructuralFeatures().get(1);
+    return (EReference)statechartSpecificationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -794,9 +786,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getStateDeclaration()
+  public EClass getStateSpecification()
   {
-    return stateDeclarationEClass;
+    return stateSpecificationEClass;
   }
 
   /**
@@ -804,9 +796,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getStateDeclaration_Scope()
+  public EReference getStateSpecification_Scope()
   {
-    return (EReference)stateDeclarationEClass.getEStructuralFeatures().get(0);
+    return (EReference)stateSpecificationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -814,9 +806,19 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTransitionStatement()
+  public EClass getTransitionSpecification()
   {
-    return transitionStatementEClass;
+    return transitionSpecificationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTransitionSpecification_Reaction()
+  {
+    return (EReference)transitionSpecificationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1487,16 +1489,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
   public EReference getVariableDefinition_InitialValue()
   {
     return (EReference)variableDefinitionEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getClock()
-  {
-    return clockEClass;
   }
 
   /**
@@ -2193,14 +2185,15 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     transitionRootEClass = createEClass(TRANSITION_ROOT);
     createEReference(transitionRootEClass, TRANSITION_ROOT__DEF);
 
-    statechartDefinitionEClass = createEClass(STATECHART_DEFINITION);
-    createEAttribute(statechartDefinitionEClass, STATECHART_DEFINITION__NAMESPACE);
-    createEReference(statechartDefinitionEClass, STATECHART_DEFINITION__DEFINITION_SCOPES);
+    statechartSpecificationEClass = createEClass(STATECHART_SPECIFICATION);
+    createEAttribute(statechartSpecificationEClass, STATECHART_SPECIFICATION__NAMESPACE);
+    createEReference(statechartSpecificationEClass, STATECHART_SPECIFICATION__DEFINITION_SCOPES);
 
-    stateDeclarationEClass = createEClass(STATE_DECLARATION);
-    createEReference(stateDeclarationEClass, STATE_DECLARATION__SCOPE);
+    stateSpecificationEClass = createEClass(STATE_SPECIFICATION);
+    createEReference(stateSpecificationEClass, STATE_SPECIFICATION__SCOPE);
 
-    transitionStatementEClass = createEClass(TRANSITION_STATEMENT);
+    transitionSpecificationEClass = createEClass(TRANSITION_SPECIFICATION);
+    createEReference(transitionSpecificationEClass, TRANSITION_SPECIFICATION__REACTION);
 
     eventDerivationEClass = createEClass(EVENT_DERIVATION);
     createEReference(eventDerivationEClass, EVENT_DERIVATION__CONDITION);
@@ -2302,8 +2295,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__EXTERNAL);
     createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__TYPE);
     createEReference(variableDefinitionEClass, VARIABLE_DEFINITION__INITIAL_VALUE);
-
-    clockEClass = createEClass(CLOCK);
 
     operationEClass = createEClass(OPERATION);
     createEAttribute(operationEClass, OPERATION__PARAM_TYPES);
@@ -2429,7 +2420,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     transitionRootEClass.getESuperTypes().add(this.getDefRoot());
     localReactionEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
     localReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
-    transitionReactionEClass.getESuperTypes().add(this.getTransitionStatement());
     transitionReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
     reactionPriorityEClass.getESuperTypes().add(this.getReactionProperty());
     entryPointSpecEClass.getESuperTypes().add(this.getReactionProperty());
@@ -2458,7 +2448,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     internalScopeEClass.getESuperTypes().add(theSGraphPackage.getScope());
     eventDefinitionEClass.getESuperTypes().add(theSGraphPackage.getEvent());
     variableDefinitionEClass.getESuperTypes().add(theSGraphPackage.getVariable());
-    clockEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
     operationEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
     entrypointEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
     exitpointEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
@@ -2486,22 +2475,23 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEClass(defRootEClass, DefRoot.class, "DefRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(statechartRootEClass, StatechartRoot.class, "StatechartRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getStatechartRoot_Def(), this.getStatechartDefinition(), null, "def", null, 0, 1, StatechartRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStatechartRoot_Def(), this.getStatechartSpecification(), null, "def", null, 0, 1, StatechartRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stateRootEClass, StateRoot.class, "StateRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getStateRoot_Def(), this.getStateDeclaration(), null, "def", null, 0, 1, StateRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStateRoot_Def(), this.getStateSpecification(), null, "def", null, 0, 1, StateRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(transitionRootEClass, TransitionRoot.class, "TransitionRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTransitionRoot_Def(), this.getTransitionStatement(), null, "def", null, 0, 1, TransitionRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTransitionRoot_Def(), this.getTransitionSpecification(), null, "def", null, 0, 1, TransitionRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(statechartDefinitionEClass, StatechartDefinition.class, "StatechartDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getStatechartDefinition_Namespace(), ecorePackage.getEString(), "namespace", null, 0, 1, StatechartDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStatechartDefinition_DefinitionScopes(), theSGraphPackage.getScope(), null, "definitionScopes", null, 0, -1, StatechartDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(statechartSpecificationEClass, StatechartSpecification.class, "StatechartSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getStatechartSpecification_Namespace(), ecorePackage.getEString(), "namespace", null, 0, 1, StatechartSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStatechartSpecification_DefinitionScopes(), theSGraphPackage.getScope(), null, "definitionScopes", null, 0, -1, StatechartSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(stateDeclarationEClass, StateDeclaration.class, "StateDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getStateDeclaration_Scope(), theSGraphPackage.getScope(), null, "scope", null, 0, 1, StateDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(stateSpecificationEClass, StateSpecification.class, "StateSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getStateSpecification_Scope(), theSGraphPackage.getScope(), null, "scope", null, 0, 1, StateSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(transitionStatementEClass, TransitionStatement.class, "TransitionStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(transitionSpecificationEClass, TransitionSpecification.class, "TransitionSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTransitionSpecification_Reaction(), this.getTransitionReaction(), null, "reaction", null, 0, 1, TransitionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eventDerivationEClass, EventDerivation.class, "EventDerivation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEventDerivation_Condition(), this.getExpression(), null, "condition", null, 0, 1, EventDerivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2603,8 +2593,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEAttribute(getVariableDefinition_External(), ecorePackage.getEBoolean(), "external", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getVariableDefinition_Type(), this.getType(), "type", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getVariableDefinition_InitialValue(), this.getExpression(), null, "initialValue", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(clockEClass, Clock.class, "Clock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getOperation_ParamTypes(), this.getType(), "paramTypes", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

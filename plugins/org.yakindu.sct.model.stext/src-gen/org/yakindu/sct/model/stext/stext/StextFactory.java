@@ -72,31 +72,31 @@ public interface StextFactory extends EFactory
   TransitionRoot createTransitionRoot();
 
   /**
-   * Returns a new object of class '<em>Statechart Definition</em>'.
+   * Returns a new object of class '<em>Statechart Specification</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Statechart Definition</em>'.
+   * @return a new object of class '<em>Statechart Specification</em>'.
    * @generated
    */
-  StatechartDefinition createStatechartDefinition();
+  StatechartSpecification createStatechartSpecification();
 
   /**
-   * Returns a new object of class '<em>State Declaration</em>'.
+   * Returns a new object of class '<em>State Specification</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>State Declaration</em>'.
+   * @return a new object of class '<em>State Specification</em>'.
    * @generated
    */
-  StateDeclaration createStateDeclaration();
+  StateSpecification createStateSpecification();
 
   /**
-   * Returns a new object of class '<em>Transition Statement</em>'.
+   * Returns a new object of class '<em>Transition Specification</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Transition Statement</em>'.
+   * @return a new object of class '<em>Transition Specification</em>'.
    * @generated
    */
-  TransitionStatement createTransitionStatement();
+  TransitionSpecification createTransitionSpecification();
 
   /**
    * Returns a new object of class '<em>Event Derivation</em>'.
@@ -403,15 +403,6 @@ public interface StextFactory extends EFactory
    * @generated
    */
   VariableDefinition createVariableDefinition();
-
-  /**
-   * Returns a new object of class '<em>Clock</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Clock</em>'.
-   * @generated
-   */
-  Clock createClock();
 
   /**
    * Returns a new object of class '<em>Operation</em>'.

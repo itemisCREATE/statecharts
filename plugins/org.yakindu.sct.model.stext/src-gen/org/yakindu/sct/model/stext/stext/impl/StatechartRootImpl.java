@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.yakindu.sct.model.stext.stext.StatechartDefinition;
 import org.yakindu.sct.model.stext.stext.StatechartRoot;
+import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
@@ -41,7 +41,7 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot
    * @generated
    * @ordered
    */
-  protected StatechartDefinition def;
+  protected StatechartSpecification def;
 
   /**
    * <!-- begin-user-doc -->
@@ -69,7 +69,7 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot
    * <!-- end-user-doc -->
    * @generated
    */
-  public StatechartDefinition getDef()
+  public StatechartSpecification getDef()
   {
     return def;
   }
@@ -79,9 +79,9 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetDef(StatechartDefinition newDef, NotificationChain msgs)
+  public NotificationChain basicSetDef(StatechartSpecification newDef, NotificationChain msgs)
   {
-    StatechartDefinition oldDef = def;
+    StatechartSpecification oldDef = def;
     def = newDef;
     if (eNotificationRequired())
     {
@@ -96,7 +96,7 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDef(StatechartDefinition newDef)
+  public void setDef(StatechartSpecification newDef)
   {
     if (newDef != def)
     {
@@ -155,7 +155,7 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot
     switch (featureID)
     {
       case StextPackage.STATECHART_ROOT__DEF:
-        setDef((StatechartDefinition)newValue);
+        setDef((StatechartSpecification)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -172,7 +172,7 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot
     switch (featureID)
     {
       case StextPackage.STATECHART_ROOT__DEF:
-        setDef((StatechartDefinition)null);
+        setDef((StatechartSpecification)null);
         return;
     }
     super.eUnset(featureID);

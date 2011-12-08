@@ -1,7 +1,7 @@
 package org.yakindu.sct.ui.integration.stext.parsers;
 
 import org.yakindu.sct.model.stext.parser.antlr.STextParser;
-import org.yakindu.sct.model.stext.stext.TransitionStatement;
+import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 
 /**
  * @author muelder
@@ -9,6 +9,6 @@ import org.yakindu.sct.model.stext.stext.TransitionStatement;
 public class TransitionAntlrParser extends STextParser {
 	@Override
 	protected String getDefaultRuleName() {
-		return TransitionStatement.class.getSimpleName();
+		return TransitionSpecification.class.getSimpleName();
 	}
 }

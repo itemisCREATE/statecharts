@@ -1,4 +1,4 @@
-grammar org.yakindu.sct.model.stext.SText  with org.eclipse.xtext.common.Terminals
+grammar org.yakindu.sct.model.stext.SText with org.eclipse.xtext.common.Terminals
 
 generate stext "http://www.yakindu.org/sct/statechart/SText"
 import "platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore" as sct
@@ -14,53 +14,53 @@ DefRoot:
 	StatechartRoot | StateRoot | TransitionRoot;
 
 StatechartRoot:
-	'@@statechart@@' def=StatechartDefinition;
+	'@@statechart@@' def=StatechartSpecification;
 
 StateRoot:
-	'@@state@@' def=StateDeclaration;
+	'@@state@@' def=StateSpecification;
 
 TransitionRoot:
-	'@@transition@@' def=TransitionStatement;
+	'@@transition@@' def=TransitionSpecification;
 
 	/* ---- start rules ----
 Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
 */
-StatechartDefinition:
-	{StatechartDefinition}
-	('namespace' namespace = FQN)?
+StatechartSpecification:
+	{StatechartSpecification}
+	('namespace' namespace=FQN)?
 	(definitionScopes+=StatechartScope)*;
 
-StateDeclaration:
-	scope=SimpleScope;
+StateSpecification:
+	scope=StateScope;
 
-TransitionStatement:
-//	Reaction;
-	TransitionReaction;
+TransitionSpecification:
+	reaction=TransitionReaction;
 
 	/* ---- scope rules ----
 Defines different kinds of scopes that contain element definitions. Scopes are used for element definitions in statechart, regions, and state 
 */
 Scope returns sct::Scope:
-	(SimpleScope | StatechartScope);
+	(StateScope | StatechartScope);
 
 	// a SimpleScope is used for states and regions
-SimpleScope returns sct::Scope:
-	{SimpleScope} (declarations+=Declaration)*;
+StateScope returns sct::Scope:
+	{SimpleScope} (declarations+=(LocalReaction | Entrypoint | Exitpoint))*;
 
 	// defines the poosible scopes for statecharts
 StatechartScope returns sct::Scope:
 	InterfaceScope | InternalScope;
 
 InterfaceScope returns sct::Scope:
-	{InterfaceScope} 'interface' (name=ID)? ':' (declarations+=Declaration)*;
+	{InterfaceScope} 'interface' (name=ID)? ':' (declarations+=(EventDefinition | VariableDefinition | Entrypoint |
+	Exitpoint))*;
 
 InternalScope returns sct::Scope:
-	{InternalScope} 'internal' ':' (declarations+=Declaration)*;
+	{InternalScope} 'internal' ':' (declarations+=(EventDefinition | VariableDefinition | Operation | LocalReaction))*;
 
 	/* ---- declarations ----
 a definition is a top level element of a definition scope. */
 Declaration returns sct::Declaration:
-	EventDefinition | VariableDefinition | Clock | Operation | LocalReaction | Entrypoint | Exitpoint;
+	EventDefinition | VariableDefinition | Operation | LocalReaction | Entrypoint | Exitpoint;
 
 	// DataElement: EventDefinition | VariableDefinition;
 
@@ -79,11 +79,7 @@ VariableDefinition returns sct::Variable:
 	{VariableDefinition} 'var' ((readonly?='readonly')? & (external?='external')?) name=ID ':' type=Type ('='
 	initialValue=Expression)?;
 
-/* ---- clock definition ---- */
-Clock returns sct::Declaration:
-	{Clock}'clock' name=ID;
-
-/* ---- clock definition ---- */
+/* ---- operation definition ---- */
 Operation returns sct::Declaration:
 	{Operation} 'operation' name=ID '(' (paramTypes+=Type (',' paramTypes+=Type)*)? ')' (':' type=Type)?;
 
@@ -97,7 +93,7 @@ Exitpoint returns sct::Declaration:
 
 /* ---- Datatype rules ---- */
 FQN:
-	ID ('.'ID)*;
+	ID ('.' ID)*;
 
 	/* ---- reaction rules ----
 Define the structure of reactions that are central for describing the statecharts behavior. 
@@ -111,11 +107,9 @@ LocalReaction:
 TransitionReaction:
 	{TransitionReaction} (trigger=ReactionTrigger)? ('/' effect=ReactionEffect)? ('#' properties=ReactionProperties)?;
 
-
 ReactionTrigger returns sct::Trigger:
-	{ReactionTrigger} (
-		(triggers+=EventSpec ("," triggers+=EventSpec)* (=>'[' guardExpression=Expression ']')?)
-		| ('[' guardExpression=Expression ']'));
+	{ReactionTrigger} ((triggers+=EventSpec ("," triggers+=EventSpec)* (=> '[' guardExpression=Expression ']')?)
+	| ('[' guardExpression=Expression ']'));
 
 ReactionEffect returns sct::Effect:
 	{ReactionEffect} (actions+=Statement ';')+;
@@ -142,12 +136,13 @@ RegularEventSpec:
 	event=[sct::Event|FQN];
 
 	// TODO: redefine after trigger - we need to use it with clocks
-TimeEventSpec: 
+TimeEventSpec:
 	type=TimeEventType value=INT (unit=TimeUnit)?;
 
-enum TimeEventType: after | every;
+enum TimeEventType:
+	after | every;
 
-	// TODO: add dereived events like in(state), entered(state)	
+	//TODO: Group OnCycleEvent and AlwaysEvent, maybe replace it by a DoEvent
 BuiltinEventSpec:
 	EntryEvent | ExitEvent | OnCycleEvent | AlwaysEvent | DefaultEvent;
 
@@ -173,28 +168,24 @@ Statement returns sct::Statement:
 
 Assignment:
 	varRef=[sct::Variable|FQN] operator=AssignmentOperator expression=Expression;
-	
-	
-enum AssignmentOperator
-: assign = '=' 
-| multAssign = '*=' 
-| divAssign = '/=' 
-| modAssign = '%=' 
-| addAssign = '+=' 
-| subAssign = '-=' 
-| leftShiftAssign = '<<=' 
-| rightShiftAssign = '>>=' 
-| andAssign = '&=' 
-| xorAssign = '^=' 
-| orAssign = '|='
-;
 
+enum AssignmentOperator:
+	assign='='
+	| multAssign='*='
+	| divAssign='/='
+	| modAssign='%='
+	| addAssign='+='
+	| subAssign='-='
+	| leftShiftAssign='<<='
+	| rightShiftAssign='>>='
+	| andAssign='&='
+	| xorAssign='^='
+	| orAssign='|=';
 
 EventRaising:
 	'raise' event=[sct::Event|FQN] (':' value=Expression)?;
 
-
-//****************
+	//****************
 // Expression Grammar
 //****************
 //ExpressionRule:
@@ -202,10 +193,9 @@ EventRaising:
 Expression returns Expression:
 	ConditionalExpression;
 
-
-ConditionalExpression returns Expression
-:  	LogicalOrExpression ( {ConditionalExpression.condition=current} '?' trueCase=LogicalOrExpression ':' falseCase=LogicalOrExpression)?
-;
+ConditionalExpression returns Expression:
+	LogicalOrExpression ({ConditionalExpression.condition=current} '?' trueCase=LogicalOrExpression ':'
+	falseCase=LogicalOrExpression)?;
 
 LogicalOrExpression returns Expression:
 	LogicalAndExpression ({LogicalOrExpression.leftOperand=current} '||'
@@ -219,33 +209,27 @@ LogicalNotExpression returns Expression:
 	BitwiseXorExpression | {LogicalNotExpression} '!'
 	operand=BitwiseXorExpression;
 
-BitwiseXorExpression returns Expression
-	: BitwiseOrExpression ({BitwiseXorExpression.leftOperand=current} '^' rightOperand = BitwiseOrExpression)*
-	;
+BitwiseXorExpression returns Expression:
+	BitwiseOrExpression ({BitwiseXorExpression.leftOperand=current} '^' rightOperand=BitwiseOrExpression)*;
 
-BitwiseOrExpression returns Expression
-	: BitwiseAndExpression ({BitwiseOrExpression.leftOperand=current} '|' rightOperand = BitwiseAndExpression)*
-	;
+BitwiseOrExpression returns Expression:
+	BitwiseAndExpression ({BitwiseOrExpression.leftOperand=current} '|' rightOperand=BitwiseAndExpression)*;
 
-BitwiseAndExpression returns Expression
-	: LogicalRelationExpression ({BitwiseAndExpression.leftOperand=current} '&' rightOperand = LogicalRelationExpression)*
-	;
+BitwiseAndExpression returns Expression:
+	LogicalRelationExpression ({BitwiseAndExpression.leftOperand=current} '&' rightOperand=LogicalRelationExpression)*;
 
 LogicalRelationExpression returns Expression:
 	ShiftExpression
 	({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
 	rightOperand=ShiftExpression)*;
 
-ShiftExpression returns Expression
-:	NumericalAddSubtractExpression ({ShiftExpression.leftOperand=current} operator=ShiftOperator
-	rightOperand=NumericalAddSubtractExpression)*
-;	
-	
-enum ShiftOperator
-:	left = '<<'
-|   right = '>>'
-;
+ShiftExpression returns Expression:
+	NumericalAddSubtractExpression ({ShiftExpression.leftOperand=current} operator=ShiftOperator
+	rightOperand=NumericalAddSubtractExpression)*;
 
+enum ShiftOperator:
+	left='<<'
+	| right='>>';
 
 NumericalAddSubtractExpression returns Expression:
 	NumericalMultiplyDivideExpression
@@ -264,8 +248,7 @@ NumericalUnaryExpression returns Expression:
 	operator=UnaryOperator operand=PrimaryExpression;
 
 PrimaryExpression returns Expression:
-	ValueExpression | '(' Expression ')' | OperationCall ;
-	
+	ValueExpression | '(' Expression ')' | OperationCall;
 
 enum AdditiveOperator:
 	plus='+' | minus='-';
@@ -289,7 +272,8 @@ enum Type:
 	void | integer | real | boolean | string;
 
 ValueExpression returns Expression:
-	PrimitiveValueExpression | ElementReferenceExpression | ActiveStateReferenceExpression| EventValueReferenceExpression | EventRaisedReferenceExpression;
+	PrimitiveValueExpression | ElementReferenceExpression | ActiveStateReferenceExpression | EventValueReferenceExpression
+	| EventRaisedReferenceExpression;
 
 PrimitiveValueExpression returns Expression:
 	{PrimitiveValueExpression} value=Literal;
@@ -298,44 +282,39 @@ ElementReferenceExpression:
 	{ElementReferenceExpression} value=[sct::Declaration|FQN];
 
 EventValueReferenceExpression:
-	{EventValueReferenceExpression} 'valueof' '(' value=[sct::Event|FQN]')';
+	{EventValueReferenceExpression} 'valueof' '(' value=[sct::Event|FQN] ')';
 
 EventRaisedReferenceExpression:
-	{EventRaisedReferenceExpression} 'raised' '(' value=[sct::Event|FQN]')';
-	
-ActiveStateReferenceExpression:
-	{ActiveStateReferenceExpression}'active' '(' value=[sct::RegularState|FQN] ')' 
-;
+	{EventRaisedReferenceExpression} 'raised' '(' value=[sct::Event|FQN] ')';
 
+ActiveStateReferenceExpression:
+	{ActiveStateReferenceExpression} 'active' '(' value=[sct::RegularState|FQN] ')';
 
 OperationCall returns Expression:
 	{OperationCall} operation=[Operation|FQN] '(' (args+=Expression (',' args+=Expression)*)? ')';
 
 Literal:
-	BoolLiteral | IntLiteral | HexLiteral |  RealLiteral;
-	
+	BoolLiteral | IntLiteral | HexLiteral | RealLiteral;
+
 BoolLiteral:
-	{BoolLiteral} value=BOOL
-;
+	{BoolLiteral} value=BOOL;
+
 IntLiteral:
-	{IntLiteral} value = INT
-;
-RealLiteral: 
-	{RealLiteral} value = FLOAT
-;
+	{IntLiteral} value=INT;
+
+RealLiteral:
+	{RealLiteral} value=FLOAT;
+
 HexLiteral:
-	{HexLiteral} value = HEX
-;
+	{HexLiteral} value=HEX;
 
 terminal BOOL returns ecore::EBoolean:
 	'true' | 'false' | 'yes' | 'no';
 
-terminal HEX returns ecore::EInt: 
-	('0') ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+
-;
+terminal HEX returns ecore::EInt:
+	('0') ('x' | 'X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
 
 terminal FLOAT returns ecore::EFloat:
-	(INT '.' INT) ('e' ('-' | '+') INT)? ('f'|'F'|'d'|'D')?
-;
+	(INT '.' INT) ('e' ('-' | '+') INT)? ('f' | 'F' | 'd' | 'D')?;
 
 

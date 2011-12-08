@@ -60,9 +60,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true" eSuperTypes="#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Reaction" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" eType="#//Trigger"
-        containment="true"/>
+        transient="true" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="effect" eType="#//Effect"
-        containment="true"/>
+        transient="true" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EntryKind">
     <eLiterals name="initial" literal="INITIAL"/>
@@ -87,7 +87,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScopedElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
-        eType="#//Scope" containment="true"/>
+        eType="#//Scope" transient="true" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="namespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Synchronization" eSuperTypes="#//Pseudostate"/>

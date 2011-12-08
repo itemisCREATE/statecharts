@@ -24,24 +24,24 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.yakindu.sct.model.sgraph.Scope;
 
-import org.yakindu.sct.model.stext.stext.StatechartDefinition;
+import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Statechart Definition</b></em>'.
+ * An implementation of the model object '<em><b>Statechart Specification</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.StatechartDefinitionImpl#getNamespace <em>Namespace</em>}</li>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.StatechartDefinitionImpl#getDefinitionScopes <em>Definition Scopes</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.impl.StatechartSpecificationImpl#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.impl.StatechartSpecificationImpl#getDefinitionScopes <em>Definition Scopes</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container implements StatechartDefinition
+public class StatechartSpecificationImpl extends MinimalEObjectImpl.Container implements StatechartSpecification
 {
   /**
    * The default value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
@@ -78,7 +78,7 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  protected StatechartDefinitionImpl()
+  protected StatechartSpecificationImpl()
   {
     super();
   }
@@ -91,7 +91,7 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   @Override
   protected EClass eStaticClass()
   {
-    return StextPackage.Literals.STATECHART_DEFINITION;
+    return StextPackage.Literals.STATECHART_SPECIFICATION;
   }
 
   /**
@@ -114,7 +114,7 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
     String oldNamespace = namespace;
     namespace = newNamespace;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.STATECHART_DEFINITION__NAMESPACE, oldNamespace, namespace));
+      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.STATECHART_SPECIFICATION__NAMESPACE, oldNamespace, namespace));
   }
 
   /**
@@ -126,7 +126,7 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     if (definitionScopes == null)
     {
-      definitionScopes = new EObjectContainmentEList<Scope>(Scope.class, this, StextPackage.STATECHART_DEFINITION__DEFINITION_SCOPES);
+      definitionScopes = new EObjectContainmentEList<Scope>(Scope.class, this, StextPackage.STATECHART_SPECIFICATION__DEFINITION_SCOPES);
     }
     return definitionScopes;
   }
@@ -141,7 +141,7 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case StextPackage.STATECHART_DEFINITION__DEFINITION_SCOPES:
+      case StextPackage.STATECHART_SPECIFICATION__DEFINITION_SCOPES:
         return ((InternalEList<?>)getDefinitionScopes()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -157,9 +157,9 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case StextPackage.STATECHART_DEFINITION__NAMESPACE:
+      case StextPackage.STATECHART_SPECIFICATION__NAMESPACE:
         return getNamespace();
-      case StextPackage.STATECHART_DEFINITION__DEFINITION_SCOPES:
+      case StextPackage.STATECHART_SPECIFICATION__DEFINITION_SCOPES:
         return getDefinitionScopes();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -176,10 +176,10 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case StextPackage.STATECHART_DEFINITION__NAMESPACE:
+      case StextPackage.STATECHART_SPECIFICATION__NAMESPACE:
         setNamespace((String)newValue);
         return;
-      case StextPackage.STATECHART_DEFINITION__DEFINITION_SCOPES:
+      case StextPackage.STATECHART_SPECIFICATION__DEFINITION_SCOPES:
         getDefinitionScopes().clear();
         getDefinitionScopes().addAll((Collection<? extends Scope>)newValue);
         return;
@@ -197,10 +197,10 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case StextPackage.STATECHART_DEFINITION__NAMESPACE:
+      case StextPackage.STATECHART_SPECIFICATION__NAMESPACE:
         setNamespace(NAMESPACE_EDEFAULT);
         return;
-      case StextPackage.STATECHART_DEFINITION__DEFINITION_SCOPES:
+      case StextPackage.STATECHART_SPECIFICATION__DEFINITION_SCOPES:
         getDefinitionScopes().clear();
         return;
     }
@@ -217,9 +217,9 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case StextPackage.STATECHART_DEFINITION__NAMESPACE:
+      case StextPackage.STATECHART_SPECIFICATION__NAMESPACE:
         return NAMESPACE_EDEFAULT == null ? namespace != null : !NAMESPACE_EDEFAULT.equals(namespace);
-      case StextPackage.STATECHART_DEFINITION__DEFINITION_SCOPES:
+      case StextPackage.STATECHART_SPECIFICATION__DEFINITION_SCOPES:
         return definitionScopes != null && !definitionScopes.isEmpty();
     }
     return super.eIsSet(featureID);
@@ -242,4 +242,4 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
     return result.toString();
   }
 
-} //StatechartDefinitionImpl
+} //StatechartSpecificationImpl

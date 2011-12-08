@@ -20,7 +20,7 @@ public class TransitionContentAssistParser extends STextParser {
 			AbstractInternalContentAssistParser parser) {
 		try {
 			InternalSTextParser typedParser = (InternalSTextParser) parser;
-			typedParser.entryRuleTransitionStatement();
+			typedParser.entryRuleTransitionSpecification();
 			return typedParser.getFollowElements();
 		} catch (RecognitionException ex) {
 			throw new RuntimeException(ex);

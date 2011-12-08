@@ -114,19 +114,19 @@ public class StextAdapterFactory extends AdapterFactoryImpl
         return createTransitionRootAdapter();
       }
       @Override
-      public Adapter caseStatechartDefinition(StatechartDefinition object)
+      public Adapter caseStatechartSpecification(StatechartSpecification object)
       {
-        return createStatechartDefinitionAdapter();
+        return createStatechartSpecificationAdapter();
       }
       @Override
-      public Adapter caseStateDeclaration(StateDeclaration object)
+      public Adapter caseStateSpecification(StateSpecification object)
       {
-        return createStateDeclarationAdapter();
+        return createStateSpecificationAdapter();
       }
       @Override
-      public Adapter caseTransitionStatement(TransitionStatement object)
+      public Adapter caseTransitionSpecification(TransitionSpecification object)
       {
-        return createTransitionStatementAdapter();
+        return createTransitionSpecificationAdapter();
       }
       @Override
       public Adapter caseEventDerivation(EventDerivation object)
@@ -297,11 +297,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
       public Adapter caseVariableDefinition(VariableDefinition object)
       {
         return createVariableDefinitionAdapter();
-      }
-      @Override
-      public Adapter caseClock(Clock object)
-      {
-        return createClockAdapter();
       }
       @Override
       public Adapter caseOperation(Operation object)
@@ -541,46 +536,46 @@ public class StextAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.StatechartDefinition <em>Statechart Definition</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.StatechartSpecification <em>Statechart Specification</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.StatechartDefinition
+   * @see org.yakindu.sct.model.stext.stext.StatechartSpecification
    * @generated
    */
-  public Adapter createStatechartDefinitionAdapter()
+  public Adapter createStatechartSpecificationAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.StateDeclaration <em>State Declaration</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.StateSpecification <em>State Specification</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.StateDeclaration
+   * @see org.yakindu.sct.model.stext.stext.StateSpecification
    * @generated
    */
-  public Adapter createStateDeclarationAdapter()
+  public Adapter createStateSpecificationAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.TransitionStatement <em>Transition Statement</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.TransitionSpecification <em>Transition Specification</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.TransitionStatement
+   * @see org.yakindu.sct.model.stext.stext.TransitionSpecification
    * @generated
    */
-  public Adapter createTransitionStatementAdapter()
+  public Adapter createTransitionSpecificationAdapter()
   {
     return null;
   }
@@ -1091,21 +1086,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVariableDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.Clock <em>Clock</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.Clock
-   * @generated
-   */
-  public Adapter createClockAdapter()
   {
     return null;
   }
