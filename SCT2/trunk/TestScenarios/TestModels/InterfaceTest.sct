@@ -1,131 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/2.0.0" xmlns:stext="http://www.yakindu.org/sct/statechart/SText">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0" xmlns:stext="http://www.yakindu.org/sct/statechart/SText">
   <sgraph:Statechart xmi:id="_p-KfMAn1EeGuZq6TN7cDtg" name="InterfaceTest" expression="interface:&#xA;&#xA;in event event1&#xA;out event event2 : integer&#xA;&#xA;var var1 : boolean&#xA;var var2 : real = 2.3&#xA;var var3 : integer = 1&#xA;&#xA;interface other:&#xA;&#xA;in event event3&#xA;out event event4&#xA;&#xA;var v1 : integer = 5&#xA;&#xA;interface third:&#xA;&#xA;in event event5&#xA;out event event6 : boolean&#xA;&#xA;var v1 : real&#xA;">
-    <scopes xsi:type="stext:InterfaceScope" xmi:id="_wuiNkBy-EeGM3fgW4NKLkw">
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_wuiNkRy-EeGM3fgW4NKLkw" name="event1" direction="in"/>
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_wuiNkhy-EeGM3fgW4NKLkw" name="event2" direction="out" type="integer"/>
-      <declarations xsi:type="stext:VariableDefinition" xmi:id="_wuiNkxy-EeGM3fgW4NKLkw" name="var1" type="boolean"/>
-      <declarations xsi:type="stext:VariableDefinition" xmi:id="_wuiNlBy-EeGM3fgW4NKLkw" name="var2" type="real">
-        <initialValue xsi:type="stext:PrimitiveValueExpression" xmi:id="_wuiNlRy-EeGM3fgW4NKLkw">
-          <value xsi:type="stext:RealLiteral" xmi:id="_wuiNlhy-EeGM3fgW4NKLkw" value="2.3"/>
+    <scopes xsi:type="stext:InterfaceScope" xmi:id="_HjOEUCG3EeGI0q-nGwuxGQ">
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_HjOEUSG3EeGI0q-nGwuxGQ" name="event1" direction="in"/>
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_HjOEUiG3EeGI0q-nGwuxGQ" name="event2" direction="out" type="integer"/>
+      <declarations xsi:type="stext:VariableDefinition" xmi:id="_HjOEUyG3EeGI0q-nGwuxGQ" name="var1" type="boolean"/>
+      <declarations xsi:type="stext:VariableDefinition" xmi:id="_HjOEVCG3EeGI0q-nGwuxGQ" name="var2" type="real">
+        <initialValue xsi:type="stext:PrimitiveValueExpression" xmi:id="_HjOEVSG3EeGI0q-nGwuxGQ">
+          <value xsi:type="stext:RealLiteral" xmi:id="_HjOEViG3EeGI0q-nGwuxGQ" value="2.3"/>
         </initialValue>
       </declarations>
-      <declarations xsi:type="stext:VariableDefinition" xmi:id="_wuiNlxy-EeGM3fgW4NKLkw" name="var3" type="integer">
-        <initialValue xsi:type="stext:PrimitiveValueExpression" xmi:id="_wuiNmBy-EeGM3fgW4NKLkw">
-          <value xsi:type="stext:IntLiteral" xmi:id="_wuiNmRy-EeGM3fgW4NKLkw" value="1"/>
-        </initialValue>
-      </declarations>
-    </scopes>
-    <scopes xsi:type="stext:InterfaceScope" xmi:id="_wuiNmhy-EeGM3fgW4NKLkw" name="other">
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_wuiNmxy-EeGM3fgW4NKLkw" name="event3" direction="in"/>
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_wuiNnBy-EeGM3fgW4NKLkw" name="event4" direction="out"/>
-      <declarations xsi:type="stext:VariableDefinition" xmi:id="_wuiNnRy-EeGM3fgW4NKLkw" name="v1" type="integer">
-        <initialValue xsi:type="stext:PrimitiveValueExpression" xmi:id="_wuiNnhy-EeGM3fgW4NKLkw">
-          <value xsi:type="stext:IntLiteral" xmi:id="_wuiNnxy-EeGM3fgW4NKLkw" value="5"/>
+      <declarations xsi:type="stext:VariableDefinition" xmi:id="_HjOEVyG3EeGI0q-nGwuxGQ" name="var3" type="integer">
+        <initialValue xsi:type="stext:PrimitiveValueExpression" xmi:id="_HjOEWCG3EeGI0q-nGwuxGQ">
+          <value xsi:type="stext:IntLiteral" xmi:id="_HjOEWSG3EeGI0q-nGwuxGQ" value="1"/>
         </initialValue>
       </declarations>
     </scopes>
-    <scopes xsi:type="stext:InterfaceScope" xmi:id="_wuiNoBy-EeGM3fgW4NKLkw" name="third">
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_wuiNoRy-EeGM3fgW4NKLkw" name="event5" direction="in"/>
-      <declarations xsi:type="stext:EventDefinition" xmi:id="_wuiNohy-EeGM3fgW4NKLkw" name="event6" direction="out" type="boolean"/>
-      <declarations xsi:type="stext:VariableDefinition" xmi:id="_wuiNoxy-EeGM3fgW4NKLkw" name="v1" type="real"/>
+    <scopes xsi:type="stext:InterfaceScope" xmi:id="_HjOEWiG3EeGI0q-nGwuxGQ" name="other">
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_HjOEWyG3EeGI0q-nGwuxGQ" name="event3" direction="in"/>
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_HjOEXCG3EeGI0q-nGwuxGQ" name="event4" direction="out"/>
+      <declarations xsi:type="stext:VariableDefinition" xmi:id="_HjOEXSG3EeGI0q-nGwuxGQ" name="v1" type="integer">
+        <initialValue xsi:type="stext:PrimitiveValueExpression" xmi:id="_HjOEXiG3EeGI0q-nGwuxGQ">
+          <value xsi:type="stext:IntLiteral" xmi:id="_HjOEXyG3EeGI0q-nGwuxGQ" value="5"/>
+        </initialValue>
+      </declarations>
+    </scopes>
+    <scopes xsi:type="stext:InterfaceScope" xmi:id="_HjOEYCG3EeGI0q-nGwuxGQ" name="third">
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_HjOrYCG3EeGI0q-nGwuxGQ" name="event5" direction="in"/>
+      <declarations xsi:type="stext:EventDefinition" xmi:id="_HjOrYSG3EeGI0q-nGwuxGQ" name="event6" direction="out" type="boolean"/>
+      <declarations xsi:type="stext:VariableDefinition" xmi:id="_HjOrYiG3EeGI0q-nGwuxGQ" name="v1" type="real"/>
     </scopes>
     <regions xmi:id="_p-LtUgn1EeGuZq6TN7cDtg" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_p-RM4Qn1EeGuZq6TN7cDtg">
         <outgoingTransitions xmi:id="_p-TpIwn1EeGuZq6TN7cDtg" expression="" target="_p-Rz9wn1EeGuZq6TN7cDtg"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_p-Rz9wn1EeGuZq6TN7cDtg" expression="" name="state1" incomingTransitions="_p-TpIwn1EeGuZq6TN7cDtg _IduY8An2EeGuZq6TN7cDtg _aUmT4An2EeGuZq6TN7cDtg _ezdE0An2EeGuZq6TN7cDtg">
-        <scopes xmi:id="_wui0oBy-EeGM3fgW4NKLkw"/>
+        <scopes xmi:id="_HjPScCG3EeGI0q-nGwuxGQ"/>
         <outgoingTransitions xmi:id="_Fp0t8An2EeGuZq6TN7cDtg" expression="event1[var2 > 0]" target="_DQwk0An2EeGuZq6TN7cDtg">
-          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_wui0oRy-EeGM3fgW4NKLkw">
-            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_wui0ohy-EeGM3fgW4NKLkw" event="_wuiNkRy-EeGM3fgW4NKLkw"/>
-            <guardExpression xsi:type="stext:LogicalRelationExpression" xmi:id="_wui0oxy-EeGM3fgW4NKLkw" operator=">">
-              <leftOperand xsi:type="stext:ElementReferenceExpression" xmi:id="_wui0pBy-EeGM3fgW4NKLkw" value="_wuiNlBy-EeGM3fgW4NKLkw"/>
-              <rightOperand xsi:type="stext:PrimitiveValueExpression" xmi:id="_wui0pRy-EeGM3fgW4NKLkw">
-                <value xsi:type="stext:IntLiteral" xmi:id="_wui0phy-EeGM3fgW4NKLkw"/>
+          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_HjPScSG3EeGI0q-nGwuxGQ">
+            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_HjPSciG3EeGI0q-nGwuxGQ" event="_HjOEUSG3EeGI0q-nGwuxGQ"/>
+            <guardExpression xsi:type="stext:LogicalRelationExpression" xmi:id="_HjPScyG3EeGI0q-nGwuxGQ" operator=">">
+              <leftOperand xsi:type="stext:ElementReferenceExpression" xmi:id="_HjPSdCG3EeGI0q-nGwuxGQ" value="_HjOEVCG3EeGI0q-nGwuxGQ"/>
+              <rightOperand xsi:type="stext:PrimitiveValueExpression" xmi:id="_HjPSdSG3EeGI0q-nGwuxGQ">
+                <value xsi:type="stext:IntLiteral" xmi:id="_HjPSdiG3EeGI0q-nGwuxGQ"/>
               </rightOperand>
             </guardExpression>
           </trigger>
         </outgoingTransitions>
         <outgoingTransitions xmi:id="_Wx7eYAn2EeGuZq6TN7cDtg" expression="other.event3[var3 == 1]" target="_N8IiYAn2EeGuZq6TN7cDtg">
-          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_wunGEBy-EeGM3fgW4NKLkw">
-            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_wunGERy-EeGM3fgW4NKLkw" event="_wuiNmxy-EeGM3fgW4NKLkw"/>
-            <guardExpression xsi:type="stext:LogicalRelationExpression" xmi:id="_wunGEhy-EeGM3fgW4NKLkw" operator="==">
-              <leftOperand xsi:type="stext:ElementReferenceExpression" xmi:id="_wunGExy-EeGM3fgW4NKLkw" value="_wuiNlxy-EeGM3fgW4NKLkw"/>
-              <rightOperand xsi:type="stext:PrimitiveValueExpression" xmi:id="_wunGFBy-EeGM3fgW4NKLkw">
-                <value xsi:type="stext:IntLiteral" xmi:id="_wunGFRy-EeGM3fgW4NKLkw" value="1"/>
+          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_HjUyACG3EeGI0q-nGwuxGQ">
+            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_HjUyASG3EeGI0q-nGwuxGQ" event="_HjOEWyG3EeGI0q-nGwuxGQ"/>
+            <guardExpression xsi:type="stext:LogicalRelationExpression" xmi:id="_HjUyAiG3EeGI0q-nGwuxGQ" operator="==">
+              <leftOperand xsi:type="stext:ElementReferenceExpression" xmi:id="_HjUyAyG3EeGI0q-nGwuxGQ" value="_HjOEVyG3EeGI0q-nGwuxGQ"/>
+              <rightOperand xsi:type="stext:PrimitiveValueExpression" xmi:id="_HjUyBCG3EeGI0q-nGwuxGQ">
+                <value xsi:type="stext:IntLiteral" xmi:id="_HjUyBSG3EeGI0q-nGwuxGQ" value="1"/>
               </rightOperand>
             </guardExpression>
           </trigger>
         </outgoingTransitions>
         <outgoingTransitions xmi:id="_dQp1UAn2EeGuZq6TN7cDtg" expression="third.event5[var1 == true]" target="_b6-b0An2EeGuZq6TN7cDtg">
-          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_wusloBy-EeGM3fgW4NKLkw">
-            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_wusloRy-EeGM3fgW4NKLkw" event="_wuiNoRy-EeGM3fgW4NKLkw"/>
-            <guardExpression xsi:type="stext:LogicalRelationExpression" xmi:id="_wuslohy-EeGM3fgW4NKLkw" operator="==">
-              <leftOperand xsi:type="stext:ElementReferenceExpression" xmi:id="_wusloxy-EeGM3fgW4NKLkw" value="_wuiNkxy-EeGM3fgW4NKLkw"/>
-              <rightOperand xsi:type="stext:PrimitiveValueExpression" xmi:id="_wuslpBy-EeGM3fgW4NKLkw">
-                <value xsi:type="stext:BoolLiteral" xmi:id="_wuslpRy-EeGM3fgW4NKLkw" value="true"/>
+          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_HjZqgCG3EeGI0q-nGwuxGQ">
+            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_HjZqgSG3EeGI0q-nGwuxGQ" event="_HjOrYCG3EeGI0q-nGwuxGQ"/>
+            <guardExpression xsi:type="stext:LogicalRelationExpression" xmi:id="_HjZqgiG3EeGI0q-nGwuxGQ" operator="==">
+              <leftOperand xsi:type="stext:ElementReferenceExpression" xmi:id="_HjZqgyG3EeGI0q-nGwuxGQ" value="_HjOEUyG3EeGI0q-nGwuxGQ"/>
+              <rightOperand xsi:type="stext:PrimitiveValueExpression" xmi:id="_HjZqhCG3EeGI0q-nGwuxGQ">
+                <value xsi:type="stext:BoolLiteral" xmi:id="_HjZqhSG3EeGI0q-nGwuxGQ" value="true"/>
               </rightOperand>
             </guardExpression>
           </trigger>
         </outgoingTransitions>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_DQwk0An2EeGuZq6TN7cDtg" expression="entry / raise event2 : 22;" name="state2" incomingTransitions="_Fp0t8An2EeGuZq6TN7cDtg">
-        <scopes xmi:id="_wuxeIBy-EeGM3fgW4NKLkw">
-          <declarations xsi:type="stext:LocalReaction" xmi:id="_wuxeIRy-EeGM3fgW4NKLkw">
-            <trigger xsi:type="stext:ReactionTrigger" xmi:id="_wuxeIhy-EeGM3fgW4NKLkw">
-              <triggers xsi:type="stext:EntryEvent" xmi:id="_wuxeIxy-EeGM3fgW4NKLkw"/>
+        <scopes xmi:id="_Hjd78CG3EeGI0q-nGwuxGQ">
+          <declarations xsi:type="stext:LocalReaction" xmi:id="_Hjd78SG3EeGI0q-nGwuxGQ">
+            <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Hjd78iG3EeGI0q-nGwuxGQ">
+              <triggers xsi:type="stext:EntryEvent" xmi:id="_Hjd78yG3EeGI0q-nGwuxGQ"/>
             </trigger>
-            <effect xsi:type="stext:ReactionEffect" xmi:id="_wuxeJBy-EeGM3fgW4NKLkw">
-              <actions xsi:type="stext:EventRaising" xmi:id="_wuxeJRy-EeGM3fgW4NKLkw" event="_wuiNkhy-EeGM3fgW4NKLkw">
-                <value xsi:type="stext:PrimitiveValueExpression" xmi:id="_wuxeJhy-EeGM3fgW4NKLkw">
-                  <value xsi:type="stext:IntLiteral" xmi:id="_wuxeJxy-EeGM3fgW4NKLkw" value="22"/>
+            <effect xsi:type="stext:ReactionEffect" xmi:id="_Hjd79CG3EeGI0q-nGwuxGQ">
+              <actions xsi:type="stext:EventRaising" xmi:id="_Hjd79SG3EeGI0q-nGwuxGQ" event="_HjOEUiG3EeGI0q-nGwuxGQ">
+                <value xsi:type="stext:PrimitiveValueExpression" xmi:id="_Hjd79iG3EeGI0q-nGwuxGQ">
+                  <value xsi:type="stext:IntLiteral" xmi:id="_Hjd79yG3EeGI0q-nGwuxGQ" value="22"/>
                 </value>
               </actions>
             </effect>
           </declarations>
         </scopes>
         <outgoingTransitions xmi:id="_IduY8An2EeGuZq6TN7cDtg" expression="event1" target="_p-Rz9wn1EeGuZq6TN7cDtg">
-          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_wu0hcBy-EeGM3fgW4NKLkw">
-            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_wu0hcRy-EeGM3fgW4NKLkw" event="_wuiNkRy-EeGM3fgW4NKLkw"/>
+          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Hjg_QCG3EeGI0q-nGwuxGQ">
+            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_Hjg_QSG3EeGI0q-nGwuxGQ" event="_HjOEUSG3EeGI0q-nGwuxGQ"/>
           </trigger>
         </outgoingTransitions>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_N8IiYAn2EeGuZq6TN7cDtg" expression="entry / raise other.event4;" name="state3" incomingTransitions="_Wx7eYAn2EeGuZq6TN7cDtg">
-        <scopes xmi:id="_wu29sBy-EeGM3fgW4NKLkw">
-          <declarations xsi:type="stext:LocalReaction" xmi:id="_wu29sRy-EeGM3fgW4NKLkw">
-            <trigger xsi:type="stext:ReactionTrigger" xmi:id="_wu29shy-EeGM3fgW4NKLkw">
-              <triggers xsi:type="stext:EntryEvent" xmi:id="_wu29sxy-EeGM3fgW4NKLkw"/>
+        <scopes xmi:id="_HjkCkCG3EeGI0q-nGwuxGQ">
+          <declarations xsi:type="stext:LocalReaction" xmi:id="_HjkCkSG3EeGI0q-nGwuxGQ">
+            <trigger xsi:type="stext:ReactionTrigger" xmi:id="_HjkCkiG3EeGI0q-nGwuxGQ">
+              <triggers xsi:type="stext:EntryEvent" xmi:id="_HjkCkyG3EeGI0q-nGwuxGQ"/>
             </trigger>
-            <effect xsi:type="stext:ReactionEffect" xmi:id="_wu29tBy-EeGM3fgW4NKLkw">
-              <actions xsi:type="stext:EventRaising" xmi:id="_wu29tRy-EeGM3fgW4NKLkw" event="_wuiNnBy-EeGM3fgW4NKLkw"/>
+            <effect xsi:type="stext:ReactionEffect" xmi:id="_HjkClCG3EeGI0q-nGwuxGQ">
+              <actions xsi:type="stext:EventRaising" xmi:id="_HjkClSG3EeGI0q-nGwuxGQ" event="_HjOEXCG3EeGI0q-nGwuxGQ"/>
             </effect>
           </declarations>
         </scopes>
         <outgoingTransitions xmi:id="_aUmT4An2EeGuZq6TN7cDtg" expression="other.event3" target="_p-Rz9wn1EeGuZq6TN7cDtg">
-          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_wu6BABy-EeGM3fgW4NKLkw">
-            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_wu6BARy-EeGM3fgW4NKLkw" event="_wuiNmxy-EeGM3fgW4NKLkw"/>
+          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Hjme0CG3EeGI0q-nGwuxGQ">
+            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_Hjme0SG3EeGI0q-nGwuxGQ" event="_HjOEWyG3EeGI0q-nGwuxGQ"/>
           </trigger>
         </outgoingTransitions>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_b6-b0An2EeGuZq6TN7cDtg" expression="entry / raise third.event6 : true;" name="state4" incomingTransitions="_dQp1UAn2EeGuZq6TN7cDtg">
-        <scopes xmi:id="_wu8dQBy-EeGM3fgW4NKLkw">
-          <declarations xsi:type="stext:LocalReaction" xmi:id="_wu8dQRy-EeGM3fgW4NKLkw">
-            <trigger xsi:type="stext:ReactionTrigger" xmi:id="_wu8dQhy-EeGM3fgW4NKLkw">
-              <triggers xsi:type="stext:EntryEvent" xmi:id="_wu8dQxy-EeGM3fgW4NKLkw"/>
+        <scopes xmi:id="_Hjo7ECG3EeGI0q-nGwuxGQ">
+          <declarations xsi:type="stext:LocalReaction" xmi:id="_Hjo7ESG3EeGI0q-nGwuxGQ">
+            <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Hjo7EiG3EeGI0q-nGwuxGQ">
+              <triggers xsi:type="stext:EntryEvent" xmi:id="_Hjo7EyG3EeGI0q-nGwuxGQ"/>
             </trigger>
-            <effect xsi:type="stext:ReactionEffect" xmi:id="_wu8dRBy-EeGM3fgW4NKLkw">
-              <actions xsi:type="stext:EventRaising" xmi:id="_wu8dRRy-EeGM3fgW4NKLkw" event="_wuiNohy-EeGM3fgW4NKLkw">
-                <value xsi:type="stext:PrimitiveValueExpression" xmi:id="_wu8dRhy-EeGM3fgW4NKLkw">
-                  <value xsi:type="stext:BoolLiteral" xmi:id="_wu8dRxy-EeGM3fgW4NKLkw" value="true"/>
+            <effect xsi:type="stext:ReactionEffect" xmi:id="_Hjo7FCG3EeGI0q-nGwuxGQ">
+              <actions xsi:type="stext:EventRaising" xmi:id="_Hjo7FSG3EeGI0q-nGwuxGQ" event="_HjOrYSG3EeGI0q-nGwuxGQ">
+                <value xsi:type="stext:PrimitiveValueExpression" xmi:id="_Hjo7FiG3EeGI0q-nGwuxGQ">
+                  <value xsi:type="stext:BoolLiteral" xmi:id="_Hjo7FyG3EeGI0q-nGwuxGQ" value="true"/>
                 </value>
               </actions>
             </effect>
           </declarations>
         </scopes>
         <outgoingTransitions xmi:id="_ezdE0An2EeGuZq6TN7cDtg" expression="third.event5" target="_p-Rz9wn1EeGuZq6TN7cDtg">
-          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_wu-5gBy-EeGM3fgW4NKLkw">
-            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_wu-5gRy-EeGM3fgW4NKLkw" event="_wuiNoRy-EeGM3fgW4NKLkw"/>
+          <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Hjr-YCG3EeGI0q-nGwuxGQ">
+            <triggers xsi:type="stext:RegularEventSpec" xmi:id="_Hjr-YSG3EeGI0q-nGwuxGQ" event="_HjOrYCG3EeGI0q-nGwuxGQ"/>
           </trigger>
         </outgoingTransitions>
       </vertices>
@@ -164,7 +164,7 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_p-SbAgn1EeGuZq6TN7cDtg" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_p-SbAwn1EeGuZq6TN7cDtg"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_p-TpIQn1EeGuZq6TN7cDtg"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_p-TpIgn1EeGuZq6TN7cDtg" x="116" y="63"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_p-TpIgn1EeGuZq6TN7cDtg" x="94" y="69"/>
         </children>
         <children xmi:id="_DQ-AMAn2EeGuZq6TN7cDtg" type="State" element="_DQwk0An2EeGuZq6TN7cDtg">
           <children xsi:type="notation:DecorationNode" xmi:id="_DQ-nQAn2EeGuZq6TN7cDtg" type="StateName">
