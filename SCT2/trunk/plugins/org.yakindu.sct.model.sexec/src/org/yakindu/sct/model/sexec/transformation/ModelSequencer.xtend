@@ -761,7 +761,7 @@ class ModelSequencer {
 					
 		} else {
 	
-			for ( r : state.subRegions ) {
+			for ( r : state.regions ) {
 				defineStateEnterSequence(r)
 				
 				val entryState = r.entry?.target?.create
@@ -817,7 +817,7 @@ class ModelSequencer {
 		} else {
 
 			// first enforce calculation of all child exit sequences
-			state.subRegions.forEach( r | { r.defineStateExitSequence null })
+			state.regions.forEach( r | { r.defineStateExitSequence null })
 			
 			// collect leaf states
 			val List<RegularState> leafStates = state.collectLeafStates(new ArrayList<RegularState>())
@@ -872,7 +872,7 @@ class ModelSequencer {
 			leafStates += state
 		else if ( state instanceof State ) {
 			val State s = state as State		
-			for ( r : s.subRegions ) {
+			for ( r : s.regions ) {
 				for ( v : r.vertices ) {
 					if (v instanceof RegularState) collectLeafStates(v as RegularState, leafStates)
 				}

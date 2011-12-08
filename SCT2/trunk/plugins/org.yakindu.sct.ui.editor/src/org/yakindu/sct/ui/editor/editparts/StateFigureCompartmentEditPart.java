@@ -66,7 +66,7 @@ public class StateFigureCompartmentEditPart extends
 				new DragDropEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE,
 				new CompartmentLayoutEditPolicy(
-						SGraphPackage.Literals.STATE__SUB_REGIONS));
+						SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS));
 
 	}
 

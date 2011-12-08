@@ -29,7 +29,7 @@ public class StateCompartmentCanonicalEditPolicy extends CanonicalEditPolicy {
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected List getSemanticChildrenList() {
-		return getSemanticHost().getSubRegions();
+		return getSemanticHost().getRegions();
 	}
 
 	@Override
