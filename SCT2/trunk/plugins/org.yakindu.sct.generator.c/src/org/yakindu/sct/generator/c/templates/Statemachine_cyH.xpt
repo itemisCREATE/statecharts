@@ -36,7 +36,7 @@ extern void statemachine_cy_init_staticData(Statemachine_cy* handle,
 		uint16_t maxEvents, Timer* timer, uint32_t* staticStateData,
 		boolean* staticEventSet, EventType* eventTypes, _Event** staticListPtr, EventPool* eventPool);
 
-extern void statemachine_cy_exit(Statemachine_cy* handle);
+extern void statemachine_cy_destruct(Statemachine_cy* handle);
 
 extern void statemachine_cy_runCycle(Statemachine_cy* handle);
 

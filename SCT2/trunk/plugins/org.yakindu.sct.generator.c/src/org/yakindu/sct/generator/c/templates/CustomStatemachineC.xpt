@@ -222,6 +222,8 @@ void «this.exitSequence.exitSequenceFunctionName()»(«StName()»* handle)
 
 «DEFINE file FOR ExecutionFlow»
 «FILE StName()+'.c'»
+#define «STNAME()»_FRIENDS
+
 #include "«StName()».h"
 
 «EXPAND ConditionMethodsProto FOREACH this.states -»
@@ -297,10 +299,19 @@ extern «interface.interfaceClassName()»* «stName()»_get_«interface.interfaceObje
 }
 «ENDFOREACH»
 
+void «stName()»_enter(«StName()»* handle)
+{
+	«EXPAND ActionCode FOR this.enterSequence»
+}
 
 void «stName()»_exit(«StName()»* handle)
 {
-	statemachine_cy_exit(&handle->base);
+	«EXPAND ActionCode FOR this.exitSequence»
+}
+
+void «stName()»_destruct(«StName()»* handle)
+{
+	statemachine_cy_destruct(&handle->base);
 «REM»	variableData_exit(&handle->variableData); «ENDREM»
 }
 

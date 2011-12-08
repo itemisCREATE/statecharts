@@ -35,7 +35,7 @@ extern void statemachineBase_init(StatemachineBase* handle, uint16_t maxStates, 
 extern void statemachineBase_init_staticData(StatemachineBase* handle,
 		uint32_t* staticData, Timer* timer);
 
-extern void statemachineBase_exit(StatemachineBase* handle);
+extern void statemachineBase_destruct(StatemachineBase* handle);
 
 extern uint32_t statemachineBase_getState(StatemachineBase* handle, uint16_t pos);
 

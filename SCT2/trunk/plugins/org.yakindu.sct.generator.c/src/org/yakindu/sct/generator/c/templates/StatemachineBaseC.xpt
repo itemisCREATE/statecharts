@@ -33,7 +33,7 @@ void statemachineBase_init_staticData(StatemachineBase* handle, uint32_t* static
 	handle->statePtr = 0; /* actual state referencer */
 }
 
-void statemachineBase_exit(StatemachineBase* handle) {
+void statemachineBase_destruct(StatemachineBase* handle) {
 	if (!handle->isStaticData)
 		free(handle->state);
 }

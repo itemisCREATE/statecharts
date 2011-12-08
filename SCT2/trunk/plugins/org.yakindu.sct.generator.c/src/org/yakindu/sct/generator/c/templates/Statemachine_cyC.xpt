@@ -54,7 +54,7 @@ void statemachine_cy_init_staticData(Statemachine_cy* handle,
 
 }
 
-void statemachine_cy_exit(Statemachine_cy* handle) {
+void statemachine_cy_destruct(Statemachine_cy* handle) {
 
 	uint32_t i;
 	// the active events, which are not been handled need to be freed
@@ -67,7 +67,7 @@ void statemachine_cy_exit(Statemachine_cy* handle) {
 		free(handle->eventList);
 
 	eventSet_exit(&handle->eventSet);
-	statemachineBase_exit((StatemachineBase*) handle);
+	statemachineBase_destruct((StatemachineBase*) handle);
 
 }
 
