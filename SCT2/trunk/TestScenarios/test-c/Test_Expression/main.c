@@ -24,12 +24,23 @@ void setupStatemachine(Test_ExpressionStatemachine* machine, Timer* dummyTimer, 
 	/* initialize state machine */
 	test_ExpressionStatemachine_init(machine, dummyTimer, eventPool);
 
+	/* call all necessary enter functions */
+	test_ExpressionStatemachine_enter(machine);
+
 }
 
 void teardownStatemachine(Test_ExpressionStatemachine* machine, Timer* dummyTimer, EventPool* eventPool)
 {
+	/* call all exit actions for this state machine */
 	test_ExpressionStatemachine_exit(machine);
+
+	/* free all internal memory for this state machine */
+	test_ExpressionStatemachine_destruct(machine);
+
+	/* free the timer */
 	timer_exit(dummyTimer);
+
+	/* free all events in the event pool */
 	eventPool_exit(eventPool);
 
 }

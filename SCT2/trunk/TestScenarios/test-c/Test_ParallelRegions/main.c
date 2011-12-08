@@ -30,12 +30,23 @@ void setupStatemachine(Test_ParallelRegionsStatemachine* machine, Timer* dummyTi
 	/* initialize state machine */
 	test_ParallelRegionsStatemachine_init(machine, dummyTimer, eventPool);
 
+	/* call all necessary enter functions */
+	test_ParallelRegionsStatemachine_enter(machine);
+
 }
 
 void teardownStatemachine(Test_ParallelRegionsStatemachine* machine, Timer* dummyTimer, EventPool* eventPool)
 {
+	/* call all exit actions for this state machine */
 	test_ParallelRegionsStatemachine_exit(machine);
+
+	/* free all internal memory for this state machine */
+	test_ParallelRegionsStatemachine_destruct(machine);
+
+	/* free the timer */
 	timer_exit(dummyTimer);
+
+	/* free all events in the event pool */
 	eventPool_exit(eventPool);
 
 }
