@@ -18,7 +18,7 @@ public class StatechartTextExpressionEditPart extends
 		PlugableXtextLabelEditPart {
 
 	public StatechartTextExpressionEditPart(View view) {
-		super(view, SemanticTarget.StatechartInterface);
+		super(view, SemanticTarget.StatechartSpecification);
 	}
 
 	@Override

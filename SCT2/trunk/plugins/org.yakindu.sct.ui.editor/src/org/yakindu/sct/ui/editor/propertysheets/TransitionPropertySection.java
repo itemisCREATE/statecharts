@@ -37,7 +37,7 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 	@Override
 	protected void createPropertyDescriptors(
 			List<IFormPropertyDescriptor> descriptors) {
-		Injector injector = getInjector(SemanticTarget.TransitionExpression);
+		Injector injector = getInjector(SemanticTarget.TransitionSpecification);
 		if (injector != null) {
 			XtextPropertyDescriptor descriptor = new XtextPropertyDescriptor(
 					SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,

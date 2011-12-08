@@ -28,7 +28,7 @@ public class TransitionExpressionEditPart extends
 		PlugableExternalXtextLabelEditPart implements IXtextAwareEditPart {
 
 	public TransitionExpressionEditPart(View view) {
-		super(view, SemanticTarget.TransitionExpression);
+		super(view, SemanticTarget.TransitionSpecification);
 	}
 
 	@Override

@@ -6,17 +6,17 @@
       <ExpressionLanguageProvider
             class="org.yakindu.sct.ui.integration.stext.StatechartExpressionProvider"
             resourceExtension="sct"
-            semanticTarget="StatechartInterface">
+            semanticTarget="StatechartSpecification">
       </ExpressionLanguageProvider>
       <ExpressionLanguageProvider
             class="org.yakindu.sct.ui.integration.stext.StateExpressionProvider"
             resourceExtension="sct"
-            semanticTarget="StateDeclaration">
+            semanticTarget="StateSpecification">
       </ExpressionLanguageProvider>
       <ExpressionLanguageProvider
             class="org.yakindu.sct.ui.integration.stext.TransitionExpressionProvider"
             resourceExtension="sct"
-            semanticTarget="TransitionExpression">
+            semanticTarget="TransitionSpecification">
       </ExpressionLanguageProvider>
    </extension>
 </plugin>

@@ -18,7 +18,7 @@ public class StateTextCompartmentExpressionEditPart extends
 		PlugableXtextLabelEditPart implements IXtextAwareEditPart {
 
 	public StateTextCompartmentExpressionEditPart(View view) {
-		super(view, SemanticTarget.StateDeclaration);
+		super(view, SemanticTarget.StateSpecification);
 	}
 
 	@Override

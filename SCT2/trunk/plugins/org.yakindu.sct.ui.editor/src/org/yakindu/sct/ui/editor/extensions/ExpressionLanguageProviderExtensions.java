@@ -30,7 +30,7 @@ public class ExpressionLanguageProviderExtensions {
 	private static final String ATTR_SEMANTIC_TARGET = "semanticTarget";
 
 	public enum SemanticTarget {
-		StatechartInterface, StateDeclaration, TransitionExpression
+		StatechartSpecification, StateSpecification, TransitionSpecification
 	}
 
 	protected ExpressionLanguageProviderExtensions() {
