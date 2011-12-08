@@ -35,8 +35,8 @@ class StatechartExtensions {
 	
 	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of a state */
 	def dispatch int maxOrthogonality(State s) { 
-		if ( s.subRegions.size > 0 ) {
-			s.subRegions.fold(0, [o, r | r.maxOrthogonality + o])		
+		if ( s.regions.size > 0 ) {
+			s.regions.fold(0, [o, r | r.maxOrthogonality + o])		
 		} else 1
 	}
 

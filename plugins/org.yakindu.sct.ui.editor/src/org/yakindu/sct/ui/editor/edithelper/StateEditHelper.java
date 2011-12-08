@@ -72,7 +72,7 @@ public class StateEditHelper extends VertexEditHelper {
 		Region region2 = SGraphFactory.eINSTANCE.createRegion();
 		region2.setName("r2");
 		return new SetValueCommand(new SetRequest(req.getElementToConfigure(),
-				SGraphPackage.Literals.STATE__SUB_REGIONS,
+				SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS,
 				com.google.common.collect.Lists.newArrayList(region, region2)));
 	}
 
@@ -80,6 +80,6 @@ public class StateEditHelper extends VertexEditHelper {
 		Region region = SGraphFactory.eINSTANCE.createRegion();
 		region.setName("r1");
 		return new SetValueCommand(new SetRequest(req.getElementToConfigure(),
-				SGraphPackage.Literals.STATE__SUB_REGIONS, region));
+				SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS, region));
 	}
 }
