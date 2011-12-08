@@ -5,7 +5,7 @@
       <ePackage href="http://www.yakindu.org/sct/statechart/SGen#/"/>
     </metamodelDeclarations>
     <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="sct">
-      <ePackage href="http://www.yakindu.org/sct/2.0.0#/"/>
+      <ePackage href="http://www.yakindu.org/sct/sgraph/2.0.0#/"/>
     </metamodelDeclarations>
     <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="xbase">
       <ePackage href="http://www.eclipse.org/xtext/xbase/Xbase#/"/>
@@ -36,7 +36,7 @@
         <elements xsi:type="xtext:Assignment" feature="statechart" operator="=">
           <terminal xsi:type="xtext:CrossReference">
             <type metamodel="/0/@metamodelDeclarations.1">
-              <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/2.0.0#//Statechart"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/sgraph/2.0.0#//Statechart"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.11"/>
           </terminal>
