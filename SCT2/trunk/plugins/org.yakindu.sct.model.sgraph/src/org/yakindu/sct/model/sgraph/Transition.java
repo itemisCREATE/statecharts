@@ -29,7 +29,7 @@ package org.yakindu.sct.model.sgraph;
  * @model
  * @generated
  */
-public interface Transition extends ExpressionElement, Reaction {
+public interface Transition extends SpecificationElement, Reaction {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

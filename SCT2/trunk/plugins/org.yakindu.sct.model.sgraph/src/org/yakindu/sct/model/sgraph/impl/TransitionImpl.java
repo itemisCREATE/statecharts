@@ -40,7 +40,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
  *
  * @generated
  */
-public class TransitionImpl extends ExpressionElementImpl implements Transition {
+public class TransitionImpl extends SpecificationElementImpl implements Transition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

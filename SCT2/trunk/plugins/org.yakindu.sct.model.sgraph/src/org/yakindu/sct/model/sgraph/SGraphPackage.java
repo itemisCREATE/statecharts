@@ -265,32 +265,32 @@ public interface SGraphPackage extends EPackage {
 	int REGION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ExpressionElementImpl <em>Expression Element</em>}' class.
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.SpecificationElementImpl <em>Specification Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sgraph.impl.ExpressionElementImpl
-	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getExpressionElement()
+	 * @see org.yakindu.sct.model.sgraph.impl.SpecificationElementImpl
+	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getSpecificationElement()
 	 * @generated
 	 */
-	int EXPRESSION_ELEMENT = 13;
+	int SPECIFICATION_ELEMENT = 13;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' attribute.
+	 * The feature id for the '<em><b>Specification</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_ELEMENT__EXPRESSION = 0;
+	int SPECIFICATION_ELEMENT__SPECIFICATION = 0;
 
 	/**
-	 * The number of structural features of the '<em>Expression Element</em>' class.
+	 * The number of structural features of the '<em>Specification Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_ELEMENT_FEATURE_COUNT = 1;
+	int SPECIFICATION_ELEMENT_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl <em>Transition</em>}' class.
@@ -303,13 +303,13 @@ public interface SGraphPackage extends EPackage {
 	int TRANSITION = 4;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' attribute.
+	 * The feature id for the '<em><b>Specification</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__EXPRESSION = EXPRESSION_ELEMENT__EXPRESSION;
+	int TRANSITION__SPECIFICATION = SPECIFICATION_ELEMENT__SPECIFICATION;
 
 	/**
 	 * The feature id for the '<em><b>Trigger</b></em>' containment reference.
@@ -318,7 +318,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__TRIGGER = EXPRESSION_ELEMENT_FEATURE_COUNT + 0;
+	int TRANSITION__TRIGGER = SPECIFICATION_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Effect</b></em>' containment reference.
@@ -327,7 +327,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__EFFECT = EXPRESSION_ELEMENT_FEATURE_COUNT + 1;
+	int TRANSITION__EFFECT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -336,7 +336,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__TARGET = EXPRESSION_ELEMENT_FEATURE_COUNT + 2;
+	int TRANSITION__TARGET = SPECIFICATION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' container reference.
@@ -345,7 +345,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__SOURCE = EXPRESSION_ELEMENT_FEATURE_COUNT + 3;
+	int TRANSITION__SOURCE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Priority</b></em>' attribute.
@@ -354,7 +354,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__PRIORITY = EXPRESSION_ELEMENT_FEATURE_COUNT + 4;
+	int TRANSITION__PRIORITY = SPECIFICATION_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Transition</em>' class.
@@ -363,7 +363,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_FEATURE_COUNT = EXPRESSION_ELEMENT_FEATURE_COUNT + 5;
+	int TRANSITION_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.RegularStateImpl <em>Regular State</em>}' class.
@@ -653,13 +653,13 @@ public interface SGraphPackage extends EPackage {
 	int STATECHART__NAME = NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' attribute.
+	 * The feature id for the '<em><b>Specification</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__EXPRESSION = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int STATECHART__SPECIFICATION = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Reactions</b></em>' reference list.
@@ -1085,13 +1085,13 @@ public interface SGraphPackage extends EPackage {
 	int SYNCHRONIZATION_FEATURE_COUNT = PSEUDOSTATE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' attribute.
+	 * The feature id for the '<em><b>Specification</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__EXPRESSION = EXPRESSION_ELEMENT__EXPRESSION;
+	int STATE__SPECIFICATION = SPECIFICATION_ELEMENT__SPECIFICATION;
 
 	/**
 	 * The feature id for the '<em><b>Reactions</b></em>' reference list.
@@ -1100,7 +1100,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__REACTIONS = EXPRESSION_ELEMENT_FEATURE_COUNT + 0;
+	int STATE__REACTIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Local Reactions</b></em>' reference list.
@@ -1109,7 +1109,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__LOCAL_REACTIONS = EXPRESSION_ELEMENT_FEATURE_COUNT + 1;
+	int STATE__LOCAL_REACTIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Scopes</b></em>' containment reference list.
@@ -1118,7 +1118,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SCOPES = EXPRESSION_ELEMENT_FEATURE_COUNT + 2;
+	int STATE__SCOPES = SPECIFICATION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
@@ -1127,7 +1127,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__NAMESPACE = EXPRESSION_ELEMENT_FEATURE_COUNT + 3;
+	int STATE__NAMESPACE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1136,7 +1136,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__NAME = EXPRESSION_ELEMENT_FEATURE_COUNT + 4;
+	int STATE__NAME = SPECIFICATION_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Parent Region</b></em>' container reference.
@@ -1145,7 +1145,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__PARENT_REGION = EXPRESSION_ELEMENT_FEATURE_COUNT + 5;
+	int STATE__PARENT_REGION = SPECIFICATION_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Transitions</b></em>' reference list.
@@ -1154,7 +1154,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__INCOMING_TRANSITIONS = EXPRESSION_ELEMENT_FEATURE_COUNT + 6;
+	int STATE__INCOMING_TRANSITIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
@@ -1163,7 +1163,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__OUTGOING_TRANSITIONS = EXPRESSION_ELEMENT_FEATURE_COUNT + 7;
+	int STATE__OUTGOING_TRANSITIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
@@ -1172,7 +1172,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__REGIONS = EXPRESSION_ELEMENT_FEATURE_COUNT + 8;
+	int STATE__REGIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Orthogonal</b></em>' attribute.
@@ -1181,7 +1181,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__ORTHOGONAL = EXPRESSION_ELEMENT_FEATURE_COUNT + 9;
+	int STATE__ORTHOGONAL = SPECIFICATION_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Substatechart</b></em>' reference.
@@ -1190,7 +1190,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SUBSTATECHART = EXPRESSION_ELEMENT_FEATURE_COUNT + 10;
+	int STATE__SUBSTATECHART = SPECIFICATION_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Substatechart Id</b></em>' attribute.
@@ -1199,7 +1199,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SUBSTATECHART_ID = EXPRESSION_ELEMENT_FEATURE_COUNT + 11;
+	int STATE__SUBSTATECHART_ID = SPECIFICATION_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Subchart</b></em>' attribute.
@@ -1208,7 +1208,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SUBCHART = EXPRESSION_ELEMENT_FEATURE_COUNT + 12;
+	int STATE__SUBCHART = SPECIFICATION_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Simple</b></em>' attribute.
@@ -1217,7 +1217,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SIMPLE = EXPRESSION_ELEMENT_FEATURE_COUNT + 13;
+	int STATE__SIMPLE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Composite</b></em>' attribute.
@@ -1226,7 +1226,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__COMPOSITE = EXPRESSION_ELEMENT_FEATURE_COUNT + 14;
+	int STATE__COMPOSITE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Leaf</b></em>' attribute.
@@ -1235,7 +1235,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__LEAF = EXPRESSION_ELEMENT_FEATURE_COUNT + 15;
+	int STATE__LEAF = SPECIFICATION_ELEMENT_FEATURE_COUNT + 15;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -1244,7 +1244,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = EXPRESSION_ELEMENT_FEATURE_COUNT + 16;
+	int STATE_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 16;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.StatementImpl <em>Statement</em>}' class.
@@ -1706,25 +1706,25 @@ public interface SGraphPackage extends EPackage {
 	EClass getEffect();
 
 	/**
-	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.ExpressionElement <em>Expression Element</em>}'.
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.SpecificationElement <em>Specification Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Expression Element</em>'.
-	 * @see org.yakindu.sct.model.sgraph.ExpressionElement
+	 * @return the meta object for class '<em>Specification Element</em>'.
+	 * @see org.yakindu.sct.model.sgraph.SpecificationElement
 	 * @generated
 	 */
-	EClass getExpressionElement();
+	EClass getSpecificationElement();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.ExpressionElement#getExpression <em>Expression</em>}'.
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.SpecificationElement#getSpecification <em>Specification</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Expression</em>'.
-	 * @see org.yakindu.sct.model.sgraph.ExpressionElement#getExpression()
-	 * @see #getExpressionElement()
+	 * @return the meta object for the attribute '<em>Specification</em>'.
+	 * @see org.yakindu.sct.model.sgraph.SpecificationElement#getSpecification()
+	 * @see #getSpecificationElement()
 	 * @generated
 	 */
-	EAttribute getExpressionElement_Expression();
+	EAttribute getSpecificationElement_Specification();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Declaration <em>Declaration</em>}'.
@@ -2268,22 +2268,22 @@ public interface SGraphPackage extends EPackage {
 		EClass EFFECT = eINSTANCE.getEffect();
 
 		/**
-		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.ExpressionElementImpl <em>Expression Element</em>}' class.
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.SpecificationElementImpl <em>Specification Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.yakindu.sct.model.sgraph.impl.ExpressionElementImpl
-		 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getExpressionElement()
+		 * @see org.yakindu.sct.model.sgraph.impl.SpecificationElementImpl
+		 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getSpecificationElement()
 		 * @generated
 		 */
-		EClass EXPRESSION_ELEMENT = eINSTANCE.getExpressionElement();
+		EClass SPECIFICATION_ELEMENT = eINSTANCE.getSpecificationElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Expression</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Specification</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute EXPRESSION_ELEMENT__EXPRESSION = eINSTANCE.getExpressionElement_Expression();
+		EAttribute SPECIFICATION_ELEMENT__SPECIFICATION = eINSTANCE.getSpecificationElement_Specification();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.DeclarationImpl <em>Declaration</em>}' class.

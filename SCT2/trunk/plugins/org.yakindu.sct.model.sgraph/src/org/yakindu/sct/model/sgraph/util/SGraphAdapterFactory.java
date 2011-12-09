@@ -14,14 +14,13 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
+import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Exit;
-import org.yakindu.sct.model.sgraph.ExpressionElement;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.NamedElement;
 import org.yakindu.sct.model.sgraph.Pseudostate;
@@ -32,6 +31,7 @@ import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
@@ -157,8 +157,8 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 				return createEffectAdapter();
 			}
 			@Override
-			public Adapter caseExpressionElement(ExpressionElement object) {
-				return createExpressionElementAdapter();
+			public Adapter caseSpecificationElement(SpecificationElement object) {
+				return createSpecificationElementAdapter();
 			}
 			@Override
 			public Adapter caseDeclaration(Declaration object) {
@@ -463,16 +463,16 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.ExpressionElement <em>Expression Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.SpecificationElement <em>Specification Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.sgraph.ExpressionElement
+	 * @see org.yakindu.sct.model.sgraph.SpecificationElement
 	 * @generated
 	 */
-	public Adapter createExpressionElementAdapter() {
+	public Adapter createSpecificationElementAdapter() {
 		return null;
 	}
 

@@ -25,8 +25,8 @@ import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
-import org.yakindu.sct.model.sgraph.ExpressionElement;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
@@ -93,8 +93,8 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 	}
 
 	@Override
-	public ExpressionElement resolveSemanticElement() {
-		return (ExpressionElement) super.resolveSemanticElement();
+	public SpecificationElement resolveSemanticElement() {
+		return (SpecificationElement) super.resolveSemanticElement();
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 	}
 
 	private EAttribute getFeature() {
-		return SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION;
+		return SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION;
 	}
 
 	public Injector getInjector() {
@@ -115,7 +115,7 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 	}
 
 	public String getEditText() {
-		String exp = resolveSemanticElement().getExpression();
+		String exp = resolveSemanticElement().getSpecification();
 		return exp != null ? exp : "";
 	}
 

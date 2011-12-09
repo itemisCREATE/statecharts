@@ -37,7 +37,7 @@ import org.yakindu.sct.model.sgraph.State;
  * @generated
  */
 public class StateItemProvider
-	extends ExpressionElementItemProvider
+	extends SpecificationElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,

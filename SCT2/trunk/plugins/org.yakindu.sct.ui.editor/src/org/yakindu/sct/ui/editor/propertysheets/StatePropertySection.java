@@ -44,7 +44,7 @@ public class StatePropertySection extends NamePropertySection {
 		Injector injector = getInjector(SemanticTarget.StateSpecification);
 		if (injector != null) {
 			XtextPropertyDescriptor descriptor = new XtextPropertyDescriptor(
-					SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
+					SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION,
 					"Expression: ",
 					IYakinduSctHelpContextIds.SC_PROPERTIES_STATE_EXPRESSION,
 					injector, new CloningBasedFakeContextResourcesProvider(
@@ -53,7 +53,7 @@ public class StatePropertySection extends NamePropertySection {
 			descriptors.add(descriptor);
 		} else {
 			TextAreaPropertyDescriptor descriptor = new TextAreaPropertyDescriptor(
-					SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
+					SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION,
 					"Expression: ");
 			descriptors.add(descriptor);
 		}

@@ -174,7 +174,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass expressionElementEClass = null;
+	private EClass specificationElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -696,11 +696,11 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getExpressionElement() {
-		if (expressionElementEClass == null) {
-			expressionElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(13);
+	public EClass getSpecificationElement() {
+		if (specificationElementEClass == null) {
+			specificationElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(13);
 		}
-		return expressionElementEClass;
+		return specificationElementEClass;
 	}
 
 	/**
@@ -708,8 +708,8 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getExpressionElement_Expression() {
-        return (EAttribute)getExpressionElement().getEStructuralFeatures().get(0);
+	public EAttribute getSpecificationElement_Specification() {
+        return (EAttribute)getSpecificationElement().getEStructuralFeatures().get(0);
 	}
 
 	/**

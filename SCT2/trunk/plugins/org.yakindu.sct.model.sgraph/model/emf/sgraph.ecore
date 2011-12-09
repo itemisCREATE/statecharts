@@ -29,7 +29,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="composite" lowerBound="1"
         eType="#//CompositeElement" eOpposite="#//CompositeElement/regions"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="#//ExpressionElement #//Reaction">
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="#//SpecificationElement #//Reaction">
     <eAnnotations source="InjectMembers"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
         lowerBound="1" eType="#//Vertex" eOpposite="#//Vertex/incomingTransitions"/>
@@ -43,7 +43,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Choice" eSuperTypes="#//Pseudostate">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//ChoiceKind"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Statechart" eSuperTypes="#//NamedElement #//ExpressionElement #//ReactiveElement #//ScopedElement #//CompositeElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Statechart" eSuperTypes="#//NamedElement #//SpecificationElement #//ReactiveElement #//ScopedElement #//CompositeElement">
     <eAnnotations source="InjectMembers"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Entry" eSuperTypes="#//Pseudostate">
@@ -54,8 +54,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Trigger" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Effect" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SpecificationElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="specification" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true" eSuperTypes="#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Reaction" abstract="true">
@@ -91,7 +91,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="namespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Synchronization" eSuperTypes="#//Pseudostate"/>
-  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//ExpressionElement #//ReactiveElement #//ScopedElement #//RegularState #//CompositeElement">
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//SpecificationElement #//ReactiveElement #//ScopedElement #//RegularState #//CompositeElement">
     <eAnnotations source="InjectMembers"/>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="NameIsNotEmpty NameIsValidJavaIdentifier"/>

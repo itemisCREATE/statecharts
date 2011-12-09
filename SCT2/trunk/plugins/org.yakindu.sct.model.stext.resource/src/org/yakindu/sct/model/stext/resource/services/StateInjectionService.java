@@ -34,11 +34,6 @@ public class StateInjectionService extends
 		AbstractXtextMemberInjectionService<State, StateSpecification> {
 
 	@Override
-	public String getExpression(State object) {
-		return object.getExpression();
-	}
-
-	@Override
 	public String getParserRule() {
 		return StateSpecification.class.getSimpleName();
 	}
@@ -57,7 +52,7 @@ public class StateInjectionService extends
 	}
 
 	public EStructuralFeature getSourceFeature() {
-		return SGraphPackage.eINSTANCE.getExpressionElement_Expression();
+		return SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION;
 	}
 
 }

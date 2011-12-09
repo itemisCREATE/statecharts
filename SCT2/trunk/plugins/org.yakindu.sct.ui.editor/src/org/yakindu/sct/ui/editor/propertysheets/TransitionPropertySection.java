@@ -40,7 +40,7 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 		Injector injector = getInjector(SemanticTarget.TransitionSpecification);
 		if (injector != null) {
 			XtextPropertyDescriptor descriptor = new XtextPropertyDescriptor(
-					SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
+					SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION,
 					"Expression: ",
 					IYakinduSctHelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION,
 					injector, new CloningBasedFakeContextResourcesProvider(
@@ -49,7 +49,7 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 			descriptors.add(descriptor);
 		} else {
 			TextAreaPropertyDescriptor descriptor = new TextAreaPropertyDescriptor(
-					SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
+					SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION,
 					"Expression: ");
 			descriptors.add(descriptor);
 		}

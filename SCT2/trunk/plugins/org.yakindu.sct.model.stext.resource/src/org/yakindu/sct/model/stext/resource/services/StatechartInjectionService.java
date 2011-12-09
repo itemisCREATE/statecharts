@@ -45,7 +45,7 @@ public class StatechartInjectionService extends
 	}
 
 	public EStructuralFeature getSourceFeature() {
-		return SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION;
+		return SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION;
 	}
 
 	@Override

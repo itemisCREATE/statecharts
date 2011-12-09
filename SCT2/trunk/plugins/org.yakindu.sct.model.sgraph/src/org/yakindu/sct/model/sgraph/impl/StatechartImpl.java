@@ -24,13 +24,13 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
-import org.yakindu.sct.model.sgraph.ExpressionElement;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
@@ -40,7 +40,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getSpecification <em>Specification</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getLocalReactions <em>Local Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getScopes <em>Scopes</em>}</li>
@@ -60,24 +60,24 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	public static final String copyright = "Copyright (c) 2011 committers of YAKINDU and others.\r\nAll rights reserved. This program and the accompanying materials\r\nare made available under the terms of the Eclipse Public License v1.0\r\nwhich accompanies this distribution, and is available at\r\nhttp://www.eclipse.org/legal/epl-v10.html\r\nContributors:\r\ncommitters of YAKINDU - initial API and implementation\r\n";
 
 	/**
-	 * The default value of the '{@link #getExpression() <em>Expression</em>}' attribute.
+	 * The default value of the '{@link #getSpecification() <em>Specification</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpression()
+	 * @see #getSpecification()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String EXPRESSION_EDEFAULT = null;
+	protected static final String SPECIFICATION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' attribute.
+	 * The cached value of the '{@link #getSpecification() <em>Specification</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpression()
+	 * @see #getSpecification()
 	 * @generated
 	 * @ordered
 	 */
-	protected String expression = EXPRESSION_EDEFAULT;
+	protected String specification = SPECIFICATION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getScopes() <em>Scopes</em>}' containment reference list.
@@ -143,8 +143,8 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getExpression() {
-		return expression;
+	public String getSpecification() {
+		return specification;
 	}
 
 	/**
@@ -152,11 +152,11 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpression(String newExpression) {
-		String oldExpression = expression;
-		expression = newExpression;
+	public void setSpecification(String newSpecification) {
+		String oldSpecification = specification;
+		specification = newSpecification;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__EXPRESSION, oldExpression, expression));
+			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__SPECIFICATION, oldSpecification, specification));
 	}
 
 	/**
@@ -273,8 +273,8 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SGraphPackage.STATECHART__EXPRESSION:
-				return getExpression();
+			case SGraphPackage.STATECHART__SPECIFICATION:
+				return getSpecification();
 			case SGraphPackage.STATECHART__REACTIONS:
 				return getReactions();
 			case SGraphPackage.STATECHART__LOCAL_REACTIONS:
@@ -298,8 +298,8 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SGraphPackage.STATECHART__EXPRESSION:
-				setExpression((String)newValue);
+			case SGraphPackage.STATECHART__SPECIFICATION:
+				setSpecification((String)newValue);
 				return;
 			case SGraphPackage.STATECHART__SCOPES:
 				getScopes().clear();
@@ -324,8 +324,8 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SGraphPackage.STATECHART__EXPRESSION:
-				setExpression(EXPRESSION_EDEFAULT);
+			case SGraphPackage.STATECHART__SPECIFICATION:
+				setSpecification(SPECIFICATION_EDEFAULT);
 				return;
 			case SGraphPackage.STATECHART__SCOPES:
 				getScopes().clear();
@@ -348,8 +348,8 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SGraphPackage.STATECHART__EXPRESSION:
-				return EXPRESSION_EDEFAULT == null ? expression != null : !EXPRESSION_EDEFAULT.equals(expression);
+			case SGraphPackage.STATECHART__SPECIFICATION:
+				return SPECIFICATION_EDEFAULT == null ? specification != null : !SPECIFICATION_EDEFAULT.equals(specification);
 			case SGraphPackage.STATECHART__REACTIONS:
 				return !getReactions().isEmpty();
 			case SGraphPackage.STATECHART__LOCAL_REACTIONS:
@@ -371,9 +371,9 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ExpressionElement.class) {
+		if (baseClass == SpecificationElement.class) {
 			switch (derivedFeatureID) {
-				case SGraphPackage.STATECHART__EXPRESSION: return SGraphPackage.EXPRESSION_ELEMENT__EXPRESSION;
+				case SGraphPackage.STATECHART__SPECIFICATION: return SGraphPackage.SPECIFICATION_ELEMENT__SPECIFICATION;
 				default: return -1;
 			}
 		}
@@ -407,9 +407,9 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ExpressionElement.class) {
+		if (baseClass == SpecificationElement.class) {
 			switch (baseFeatureID) {
-				case SGraphPackage.EXPRESSION_ELEMENT__EXPRESSION: return SGraphPackage.STATECHART__EXPRESSION;
+				case SGraphPackage.SPECIFICATION_ELEMENT__SPECIFICATION: return SGraphPackage.STATECHART__SPECIFICATION;
 				default: return -1;
 			}
 		}
@@ -446,8 +446,8 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (expression: ");
-		result.append(expression);
+		result.append(" (specification: ");
+		result.append(specification);
 		result.append(", namespace: ");
 		result.append(namespace);
 		result.append(')');
