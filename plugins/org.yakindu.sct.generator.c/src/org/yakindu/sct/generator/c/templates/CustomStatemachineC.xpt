@@ -14,8 +14,9 @@ Templates for the main statechart c file.
 «IMPORT org::yakindu::sct::generator::c::templates»
 
 «EXTENSION org::yakindu::sct::generator::c::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::c::templates::Constants»
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
-
+ 
 «DEFINE ActionCode FOR Step»
 /* ActionCode for Step not defined */
 «ENDDEFINE»
@@ -220,8 +221,10 @@ void «this.exitSequence.exitSequenceFunctionName()»(«StName()»* handle)
 
 
 
-«DEFINE file FOR ExecutionFlow»
+«DEFINE file(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
 «FILE StName()+'.c'»
+«getLicenseHeader(genEntry)»
+
 #define «STNAME()»_FRIENDS
 
 #include "«StName()».h"

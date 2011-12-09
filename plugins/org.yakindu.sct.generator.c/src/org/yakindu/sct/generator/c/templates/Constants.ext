@@ -1,0 +1,5 @@
+String getBoolTrue() : "bool_true";
+String getBoolFalse() : "bool_false";
+String getLicenseFeature() : "licenseHeader";
+String getLicenseText() : "licenseText";
+

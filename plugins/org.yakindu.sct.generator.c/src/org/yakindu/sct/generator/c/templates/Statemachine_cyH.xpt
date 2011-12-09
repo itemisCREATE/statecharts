@@ -10,10 +10,12 @@ Templates for the main statechart c file.
 «IMPORT stext»
 «IMPORT sgraph»
 
+«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
-«DEFINE file FOR ExecutionFlow»
+«DEFINE file(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
 
 «FILE 'Statemachine_cy.h'»
+«getLicenseHeader(genEntry)»
 #ifndef STATEMACHINE_CY_H_
 #define STATEMACHINE_CY_H_
 

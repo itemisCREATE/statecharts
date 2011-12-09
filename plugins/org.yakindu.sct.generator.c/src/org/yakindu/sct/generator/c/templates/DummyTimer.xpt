@@ -10,10 +10,12 @@ Templates for the main statechart c file.
 «IMPORT stext»
 «IMPORT sgraph»
 
+«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
-«DEFINE file FOR ExecutionFlow»
+«DEFINE file(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
 
 «FILE 'DummyTimer.h'»
+«getLicenseHeader(genEntry)»
 #ifndef DUMMYTIMER_H_
 #define DUMMYTIMER_H_
 

@@ -13,9 +13,10 @@ Templates for the main statechart cpp file.
 «EXTENSION org::yakindu::sct::generator::c::templates::Expression»
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
-«DEFINE file FOR ExecutionFlow»
+«DEFINE file(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
 
 «FILE 'CMakeLists.txt'»
+«getLicenseHeaderPlain(genEntry)»
 set( SRC
 	Statemachine_cy.c
 	StatemachineBase.c

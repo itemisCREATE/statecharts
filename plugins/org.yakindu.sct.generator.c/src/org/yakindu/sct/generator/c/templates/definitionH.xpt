@@ -10,10 +10,12 @@ Templates for the main statechart cpp file.
 «IMPORT stext»
 «IMPORT sgraph»
 
+«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
-«DEFINE file FOR ExecutionFlow»
+«DEFINE file(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
 
 «FILE 'definition.h'»
+«getLicenseHeader(genEntry)»
 #ifndef DEFINITION_H_
 #define DEFINITION_H_
 
