@@ -15,6 +15,7 @@ Contributors:
 «IMPORT sgen»
 
 «IMPORT org::yakindu::sct::generator::java::templates»
+«EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
 «DEFINE main(sgen::GeneratorEntry entry) FOR ExecutionFlow»
 	
@@ -53,7 +54,9 @@ Contributors:
 	
 	«EXPAND CustomCycleBasedStatemachine::file(entry) FOR this»
 	
-	«EXPAND CustomEventBasedStatemachine::file(entry) FOR this»
+	«IF entry.createEventBasedStatemachine()»
+		«EXPAND CustomEventBasedStatemachine::file(entry) FOR this»
+	«ENDIF»
 
 «ENDDEFINE»
 

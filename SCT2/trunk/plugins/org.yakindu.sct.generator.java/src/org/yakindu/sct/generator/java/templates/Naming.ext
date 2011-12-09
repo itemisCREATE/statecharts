@@ -157,6 +157,12 @@ String getLicenseFeature() :
  
 String getLicenseText() :
  JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getLicenseText();
+ 
+String getGeneralFeature() :
+ JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getGeneralFeature();
+ 
+String getCreateEventBasedStatemachine() :
+ JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getCreateEventBasedStatemachine();
 		
 String getBasePackageName(GeneratorEntry entry):
 	if entry.getFeatureConfiguration(getNamingFeature())!=null 
@@ -193,7 +199,14 @@ String getLicenseHeader(GeneratorEntry entry) :
 		entry.getFeatureConfiguration(getLicenseFeature()).getParameterValue(getLicenseText()).getStringValue()
 	else 
 		null;
-		
+
+boolean createEventBasedStatemachine(GeneratorEntry entry) :
+	if entry.getFeatureConfiguration(getGeneralFeature())!=null
+		&& entry.getFeatureConfiguration(getGeneralFeature()).getParameterValue(getCreateEventBasedStatemachine()) != null then
+		entry.getFeatureConfiguration(getGeneralFeature()).getParameterValue(getCreateEventBasedStatemachine()).getBooleanValue()
+	else
+		false;
+	
 String getComment(Step this) :
 	if comment!=null then
 		"//"+comment

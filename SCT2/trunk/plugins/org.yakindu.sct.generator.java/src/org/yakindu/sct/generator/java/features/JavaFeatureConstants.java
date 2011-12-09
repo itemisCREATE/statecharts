@@ -42,6 +42,14 @@ public final class JavaFeatureConstants implements IJavaFeatureConstants {
 		return LICENSE_TEXT;
 	}
 	
+	public static final String getGeneralFeature() {
+		return GENERAL_FEATURES;
+	}
+	
+	public static final String getCreateEventBasedStatemachine() {
+		return CREATE_EVENTBASEDSTATEMACHINE;
+	}
+	
 	public static final String getValidStatemachineName(String name) {
 		//remove whitespaces;
 		String newName = name.replace(" ", "").toLowerCase();
