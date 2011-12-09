@@ -34,7 +34,7 @@ public class «getEventBasedStatemachineName()» extends «getCycleBasedStatemachin
 	
 	private long cyclePeriod;
 	
-	public TrafficLightWaitingEventBasedStatemachine(long cyclePeriod) {
+	public «getEventBasedStatemachineName()»(long cyclePeriod) {
 		eventQueue = new LinkedList<Event<? extends Enum<?>>>();
 		this.cyclePeriod = cyclePeriod;
 	}
@@ -58,7 +58,7 @@ public class «getEventBasedStatemachineName()» extends «getCycleBasedStatemachin
 					startTime = System.currentTimeMillis();
 					if (eventOccured()) {
 						Event<? extends Enum<?>> event = getOccuredEvents().poll();
-						TrafficLightWaitingEventBasedStatemachine.super.getOccuredEvents().add(event);
+						«getEventBasedStatemachineName()».super.getOccuredEvents().add(event);
 						runCycle();
 					}
 					try {
