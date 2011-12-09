@@ -120,7 +120,7 @@ public class SCTTestUtil {
 	public static Region _createRegion(String name, State state) {
 		Region region = SGraphFactory.eINSTANCE.createRegion();
 		region.setName(name);
-		if (state != null ) state.getSubRegions().add(region);
+		if (state != null ) state.getRegions().add(region);
 		return region;
 	}
 	
