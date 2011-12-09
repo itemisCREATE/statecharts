@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/2.0.0" xmlns:stext="http://www.yakindu.org/sct/statechart/SText">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0" xmlns:stext="http://www.yakindu.org/sct/statechart/SText">
   <sgraph:Statechart xmi:id="_NPjBgBA-EeGQ0KsLDV4EFg" name="TrafficLightWaiting" expression="interface TrafficLight:&#xD;&#xA;&#x9;var red:boolean&#xD;&#xA;&#x9;var yellow:boolean&#xD;&#xA;&#x9;var green:boolean&#xD;&#xA;&#xD;&#xA;interface Pedestrian:&#xD;&#xA;&#x9;var request:boolean&#xD;&#xA;&#x9;var red:boolean&#xD;&#xA;&#x9;var green:boolean&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;&#x9;in event keypress1&#xD;&#xA;&#x9;in event keypress2">
     <scopes xsi:type="stext:InterfaceScope" xmi:id="_TnWbMBzuEeGEC4raFz1JbQ" name="TrafficLight">
       <declarations xsi:type="stext:VariableDefinition" xmi:id="_TnWbMRzuEeGEC4raFz1JbQ" name="red" type="boolean"/>
@@ -26,7 +26,7 @@
             <triggers xsi:type="stext:RegularEventSpec" xmi:id="_TnbTsRzuEeGEC4raFz1JbQ" event="_TnWbOhzuEeGEC4raFz1JbQ"/>
           </trigger>
         </outgoingTransitions>
-        <subRegions xmi:id="_vZz18BA_EeGQ0KsLDV4EFg" name="r1">
+        <regions xmi:id="_vZz18BA_EeGQ0KsLDV4EFg" name="r1">
           <vertices xsi:type="sgraph:State" xmi:id="_w8meYBA_EeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = false; &#xD;&#xA;&#x9;TrafficLight.yellow = false;&#xD;&#xA;&#x9;TrafficLight.green = true;&#xD;&#xA;&#x9;Pedestrian.red = true;&#xD;&#xA;&#x9;Pedestrian.green = false;&#xD;&#xA;&#x9;Pedestrian.request = false;" name="StreetGreen" incomingTransitions="_pddaABBEEeGQ0KsLDV4EFg _yYuD0BBPEeGQ0KsLDV4EFg">
             <scopes xmi:id="_Tne-EBzuEeGEC4raFz1JbQ">
               <declarations xsi:type="stext:LocalReaction" xmi:id="_Tne-ERzuEeGEC4raFz1JbQ">
@@ -93,7 +93,7 @@
                 <triggers xsi:type="stext:TimeEventSpec" xmi:id="_Tn7C8RzuEeGEC4raFz1JbQ" value="7"/>
               </trigger>
             </outgoingTransitions>
-            <subRegions xmi:id="_iAKe0hBAEeGQ0KsLDV4EFg" name="r1">
+            <regions xmi:id="_iAKe0hBAEeGQ0KsLDV4EFg" name="r1">
               <vertices xsi:type="sgraph:State" xmi:id="_mjm00BBAEeGQ0KsLDV4EFg" expression="entry / &#xD;&#xA;Pedestrian.request = true;" name="waitOn" incomingTransitions="_wTHnEBBAEeGQ0KsLDV4EFg _OXpxsBBBEeGQ0KsLDV4EFg">
                 <scopes xmi:id="_Tn7qABzuEeGEC4raFz1JbQ">
                   <declarations xsi:type="stext:LocalReaction" xmi:id="_Tn7qARzuEeGEC4raFz1JbQ">
@@ -139,7 +139,7 @@
               <vertices xsi:type="sgraph:Entry" xmi:id="_pqXxcBBAEeGQ0KsLDV4EFg">
                 <outgoingTransitions xmi:id="_wTHnEBBAEeGQ0KsLDV4EFg" target="_mjm00BBAEeGQ0KsLDV4EFg"/>
               </vertices>
-            </subRegions>
+            </regions>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_SKct4BBBEeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = false;&#xD;&#xA;&#x9;TrafficLight.yellow = true;&#xD;&#xA;&#x9;TrafficLight.green = false;" name="StreetAttention" incomingTransitions="_LDXEgBBDEeGQ0KsLDV4EFg">
             <scopes xmi:id="_ToC-wBzuEeGEC4raFz1JbQ">
@@ -289,7 +289,7 @@
           <vertices xsi:type="sgraph:Entry" xmi:id="_xz0nABBPEeGQ0KsLDV4EFg">
             <outgoingTransitions xmi:id="_yYuD0BBPEeGQ0KsLDV4EFg" target="_w8meYBA_EeGQ0KsLDV4EFg"/>
           </vertices>
-        </subRegions>
+        </regions>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_MF4mkBBFEeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = false;&#xD;&#xA;&#x9;TrafficLight.green = false;&#xD;&#xA;&#x9;TrafficLight.yellow = false;&#xD;&#xA;&#x9;Pedestrian.red = false;&#xD;&#xA;&#x9;Pedestrian.green = false;" name="off" incomingTransitions="_XlIREBBFEeGQ0KsLDV4EFg">
         <scopes xmi:id="_TopbsBzuEeGEC4raFz1JbQ">
@@ -331,7 +331,7 @@
             <triggers xsi:type="stext:RegularEventSpec" xmi:id="_To1o8RzuEeGEC4raFz1JbQ" event="_TnWbOhzuEeGEC4raFz1JbQ"/>
           </trigger>
         </outgoingTransitions>
-        <subRegions xmi:id="_xHG2gBBFEeGQ0KsLDV4EFg" name="r1">
+        <regions xmi:id="_xHG2gBBFEeGQ0KsLDV4EFg" name="r1">
           <vertices xsi:type="sgraph:State" xmi:id="_BVnsgBBGEeGQ0KsLDV4EFg" expression="entry / &#xA;&#x9;TrafficLight.yellow = true;&#xA;" name="YellowOn" incomingTransitions="_EwURwBBGEeGQ0KsLDV4EFg _S4HWoBzuEeGEC4raFz1JbQ">
             <scopes xmi:id="_To4sQBzuEeGEC4raFz1JbQ">
               <declarations xsi:type="stext:LocalReaction" xmi:id="_To4sQRzuEeGEC4raFz1JbQ">
@@ -377,7 +377,7 @@
               </trigger>
             </outgoingTransitions>
           </vertices>
-        </subRegions>
+        </regions>
       </vertices>
     </regions>
   </sgraph:Statechart>

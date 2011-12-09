@@ -53,9 +53,7 @@ Contributors:
 	
 	«EXPAND CustomCycleBasedStatemachine::file(entry) FOR this»
 	
-	«REM»Exclude event based statemachines from generation
 	«EXPAND CustomEventBasedStatemachine::file(entry) FOR this»
-	«ENDREM»
 
 «ENDDEFINE»
 
