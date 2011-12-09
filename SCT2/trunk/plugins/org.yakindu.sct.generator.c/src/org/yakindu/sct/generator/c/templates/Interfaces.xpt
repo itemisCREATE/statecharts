@@ -14,9 +14,10 @@ Templates for the main statechart cpp file.
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
 
-«DEFINE file FOR ExecutionFlow»
+«DEFINE file(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
 «FOREACH this.scopes.getUsableScopes() AS interface»
 «FILE interface.interfaceClassName()+".h"»
+«getLicenseHeader(genEntry)»
 
 #ifndef «interface.interfaceClassName().toUpperCase()»_H_
 #define «interface.interfaceClassName().toUpperCase()»_H_
@@ -95,6 +96,7 @@ IF event.type != Type::void -», «event.type.eventTypeToString()» value «ENDIF»);
 «ENDFILE»
 
 «FILE interface.interfaceClassName()+".c"»
+«getLicenseHeader(genEntry)»
 #include "«interface.interfaceClassName()».h"
 #include <stdlib.h>
 

@@ -2,6 +2,10 @@ import stext;
 import sexec;
 import ecore;
 import sgraph;
+import sgen;
+
+extension org::yakindu::sct::generator::c::templates::Constants;
+
 
 ExecutionFlow getExecutionFlow(InterfaceScope this) : ((ExecutionFlow)this.eContainer);
 ExecutionFlow getExecutionFlow(InternalScope this) : ((ExecutionFlow)this.eContainer);
@@ -84,8 +88,25 @@ String getScopeName(InternalScope inScope) :
 String getScopeName(InterfaceScope ifScope) :
 	(ifScope.name == null)?"default":ifScope.name;
 
-String getBoolTrue() : "bool_true";
-String getBoolFalse() : "bool_false";
+String getLicenseHeader(GeneratorEntry entry) :
+	if entry.getFeatureConfiguration(getLicenseFeature())!=null
+		&& entry.getFeatureConfiguration(getLicenseFeature()).getParameterValue(getLicenseText()) != null then
+		"/**" + entry.getFeatureConfiguration(getLicenseFeature()).getParameterValue(getLicenseText()).getStringValue()+"*/"
+	else 
+		null;
+		
+String getLicenseHeaderPlain(GeneratorEntry entry) :
+	if entry.getFeatureConfiguration(getLicenseFeature())!=null
+		&& entry.getFeatureConfiguration(getLicenseFeature()).getParameterValue(getLicenseText()) != null then
+		entry.getFeatureConfiguration(getLicenseFeature()).getParameterValue(getLicenseText()).getStringValue()
+	else 
+		null;
+
+String getComment(Step this) :
+	if comment!=null then
+		"//"+comment
+	else
+		null;
 
 /*
 String correctLValue(String literal) :

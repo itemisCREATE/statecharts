@@ -11,9 +11,12 @@ Templates for the main statechart c file.
 «IMPORT sgraph»
 
 
-«DEFINE file FOR ExecutionFlow»
+«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
+
+«DEFINE file(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
 
 «FILE 'Event.h'»
+«getLicenseHeader(genEntry)»
 #ifndef EVENT_H_
 #define EVENT_H_
 

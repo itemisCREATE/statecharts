@@ -9,14 +9,15 @@ Templates for the main statechart cpp file.
 «IMPORT sexec»
 «IMPORT stext»
 «IMPORT sgraph»
-«IMPORT genmodel»
 
 «EXTENSION org::yakindu::sct::generator::c::templates::Expression»
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
-«DEFINE file FOR ExecutionFlow»
+«DEFINE file(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
 
 «FILE StName()+'.h'»
+«getLicenseHeader(genEntry)»
+
 #ifndef «STNAME()»_H_
 #define «STNAME()»_H_
 
@@ -27,43 +28,37 @@ Templates for the main statechart cpp file.
 #include "«EvName()».h"
 #include "EventPool.h"
 
-typedef enum {
-    «FOREACH this.states AS exState-»
-      _«exState.simpleName», 
-    «ENDFOREACH»
-	last_state
-} States;
-
 #define MAX_PARALLEL_STATES «this.stateVector.size»
-
 
 typedef void(*raiseEventFPtr)(_Event* evPtr);
 
+typedef enum {
+
+    «FOREACH this.states AS exState-»
+      _«exState.simpleName», 
+    «ENDFOREACH -»
+	last_state
+
+} States;
+
 typedef struct {
 
-	Statemachine_cy  base;
-«FOREACH this.scopes.getUsableScopes() AS interface»
+	Statemachine_cy base;
+«FOREACH this.scopes.getUsableScopes() AS interface -»
 	«interface.interfaceClassName()» «interface.interfaceObjectName().toFirstLower()»;
-«ENDFOREACH»
+«ENDFOREACH -»
 	raiseEventFPtr raiseEvent;
 	
-«REM» no plain variables in structure
-«FOREACH this.declaredEvents() AS ev»
-  «IF (((EventDefinition)ev).direction != Direction::OUT) && (((EventDefinition)ev).type != Type::void) -»
-  «eventTypeToString(((EventDefinition)ev).type)» «ev.name»_value;    
-  «ENDIF -»
-«ENDFOREACH -»
-«ENDREM»		
 } «StName()»;
 
+«REM» «IF genEntry.features[genEntry.getFeatureConfiguration("")]»
+ «ENDREM» 
 /* Explicit Constructor & Destructor */
 extern void «stName()»_init(«StName()»* handle, Timer* timer, EventPool* eventPool);
 extern void «stName()»_enter(«StName()»* handle);
 extern void «stName()»_exit(«StName()»* handle);
 extern void «stName()»_destruct(«StName()»* handle);
-
 extern void «stName()»_runCycle(«StName()»* handle);
-
 extern boolean «stName()»_eventWaiting(«StName()»* handle);
 
 «FOREACH this.scopes.typeSelect(InterfaceScope) AS interface»
