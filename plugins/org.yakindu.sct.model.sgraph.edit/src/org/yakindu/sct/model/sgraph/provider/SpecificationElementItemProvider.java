@@ -16,7 +16,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -27,16 +29,17 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.sct.model.sgraph.ExpressionElement;
+
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.sct.model.sgraph.ExpressionElement} object.
+ * This is the item provider adapter for a {@link org.yakindu.sct.model.sgraph.SpecificationElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ExpressionElementItemProvider
+public class SpecificationElementItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -57,7 +60,7 @@ public class ExpressionElementItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpressionElementItemProvider(AdapterFactory adapterFactory) {
+	public SpecificationElementItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -72,25 +75,25 @@ public class ExpressionElementItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addExpressionPropertyDescriptor(object);
+			addSpecificationPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Expression feature.
+	 * This adds a property descriptor for the Specification feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addExpressionPropertyDescriptor(Object object) {
+	protected void addSpecificationPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ExpressionElement_expression_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ExpressionElement_expression_feature", "_UI_ExpressionElement_type"),
-				 SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
+				 getString("_UI_SpecificationElement_specification_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SpecificationElement_specification_feature", "_UI_SpecificationElement_type"),
+				 SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION,
 				 true,
 				 false,
 				 false,
@@ -107,10 +110,10 @@ public class ExpressionElementItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ExpressionElement)object).getExpression();
+		String label = ((SpecificationElement)object).getSpecification();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ExpressionElement_type") :
-			getString("_UI_ExpressionElement_type") + " " + label;
+			getString("_UI_SpecificationElement_type") :
+			getString("_UI_SpecificationElement_type") + " " + label;
 	}
 
 	/**
@@ -124,8 +127,8 @@ public class ExpressionElementItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ExpressionElement.class)) {
-			case SGraphPackage.EXPRESSION_ELEMENT__EXPRESSION:
+		switch (notification.getFeatureID(SpecificationElement.class)) {
+			case SGraphPackage.SPECIFICATION_ELEMENT__SPECIFICATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

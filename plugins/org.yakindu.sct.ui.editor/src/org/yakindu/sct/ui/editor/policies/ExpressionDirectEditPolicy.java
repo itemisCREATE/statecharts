@@ -34,7 +34,7 @@ public class ExpressionDirectEditPolicy extends DirectEditPolicy implements
 	protected Command getDirectEditCommand(DirectEditRequest request) {
 		SetRequest setRequest = new SetRequest(getHost()
 				.resolveSemanticElement(),
-				SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
+				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION,
 				request.getCellEditor().getValue());
 		SetValueCommand setCommand = new SetValueCommand(setRequest);
 		return new ICommandProxy(setCommand);

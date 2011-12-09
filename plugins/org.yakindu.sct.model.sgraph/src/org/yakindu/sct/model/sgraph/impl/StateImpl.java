@@ -66,7 +66,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
  *
  * @generated
  */
-public class StateImpl extends ExpressionElementImpl implements State {
+public class StateImpl extends SpecificationElementImpl implements State {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated

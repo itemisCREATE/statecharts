@@ -21,7 +21,7 @@ package org.yakindu.sct.model.sgraph;
  * @model
  * @generated
  */
-public interface Statechart extends NamedElement, ExpressionElement, ReactiveElement, ScopedElement, CompositeElement {
+public interface Statechart extends NamedElement, SpecificationElement, ReactiveElement, ScopedElement, CompositeElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

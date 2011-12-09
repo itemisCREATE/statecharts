@@ -49,7 +49,7 @@ public class TransitionInjectionService
 	}
 
 	public EAttribute getSourceFeature() {
-		return SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION;
+		return SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION;
 	}
 
 }

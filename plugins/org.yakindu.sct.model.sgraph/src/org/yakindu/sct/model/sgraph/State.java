@@ -33,7 +33,7 @@ package org.yakindu.sct.model.sgraph;
  * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NameIsNotEmpty NameIsValidJavaIdentifier'"
  * @generated
  */
-public interface State extends ExpressionElement, ReactiveElement, ScopedElement, RegularState, CompositeElement {
+public interface State extends SpecificationElement, ReactiveElement, ScopedElement, RegularState, CompositeElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

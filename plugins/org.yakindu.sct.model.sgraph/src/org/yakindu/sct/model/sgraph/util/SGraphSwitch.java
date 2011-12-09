@@ -13,14 +13,13 @@ package org.yakindu.sct.model.sgraph.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
+import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Exit;
-import org.yakindu.sct.model.sgraph.ExpressionElement;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.NamedElement;
 import org.yakindu.sct.model.sgraph.Pseudostate;
@@ -31,6 +30,7 @@ import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
@@ -135,7 +135,7 @@ public class SGraphSwitch<T> extends Switch<T> {
 			case SGraphPackage.TRANSITION: {
 				Transition transition = (Transition)theEObject;
 				T result = caseTransition(transition);
-				if (result == null) result = caseExpressionElement(transition);
+				if (result == null) result = caseSpecificationElement(transition);
 				if (result == null) result = caseReaction(transition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -178,7 +178,7 @@ public class SGraphSwitch<T> extends Switch<T> {
 				Statechart statechart = (Statechart)theEObject;
 				T result = caseStatechart(statechart);
 				if (result == null) result = caseNamedElement(statechart);
-				if (result == null) result = caseExpressionElement(statechart);
+				if (result == null) result = caseSpecificationElement(statechart);
 				if (result == null) result = caseReactiveElement(statechart);
 				if (result == null) result = caseScopedElement(statechart);
 				if (result == null) result = caseCompositeElement(statechart);
@@ -206,9 +206,9 @@ public class SGraphSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SGraphPackage.EXPRESSION_ELEMENT: {
-				ExpressionElement expressionElement = (ExpressionElement)theEObject;
-				T result = caseExpressionElement(expressionElement);
+			case SGraphPackage.SPECIFICATION_ELEMENT: {
+				SpecificationElement specificationElement = (SpecificationElement)theEObject;
+				T result = caseSpecificationElement(specificationElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -264,7 +264,7 @@ public class SGraphSwitch<T> extends Switch<T> {
 			case SGraphPackage.STATE: {
 				State state = (State)theEObject;
 				T result = caseState(state);
-				if (result == null) result = caseExpressionElement(state);
+				if (result == null) result = caseSpecificationElement(state);
 				if (result == null) result = caseReactiveElement(state);
 				if (result == null) result = caseScopedElement(state);
 				if (result == null) result = caseRegularState(state);
@@ -554,17 +554,17 @@ public class SGraphSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Expression Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Specification Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Expression Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Specification Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseExpressionElement(ExpressionElement object) {
+	public T caseSpecificationElement(SpecificationElement object) {
 		return null;
 	}
 

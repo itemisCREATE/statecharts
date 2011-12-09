@@ -36,7 +36,7 @@ import org.yakindu.sct.model.sgraph.Transition;
  * @generated
  */
 public class TransitionItemProvider
-	extends ExpressionElementItemProvider
+	extends SpecificationElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -171,7 +171,7 @@ public class TransitionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Transition)object).getExpression();
+		String label = ((Transition)object).getSpecification();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Transition_type") :
 			getString("_UI_Transition_type") + " " + label;

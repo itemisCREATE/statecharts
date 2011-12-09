@@ -11,26 +11,29 @@
 package org.yakindu.sct.model.sgraph.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.yakindu.sct.model.sgraph.ExpressionElement;
+
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Expression Element</b></em>'.
+ * An implementation of the model object '<em><b>Specification Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sgraph.impl.ExpressionElementImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.SpecificationElementImpl#getSpecification <em>Specification</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class ExpressionElementImpl extends EObjectImpl implements ExpressionElement {
+public abstract class SpecificationElementImpl extends EObjectImpl implements SpecificationElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -39,31 +42,31 @@ public abstract class ExpressionElementImpl extends EObjectImpl implements Expre
 	public static final String copyright = "Copyright (c) 2011 committers of YAKINDU and others.\r\nAll rights reserved. This program and the accompanying materials\r\nare made available under the terms of the Eclipse Public License v1.0\r\nwhich accompanies this distribution, and is available at\r\nhttp://www.eclipse.org/legal/epl-v10.html\r\nContributors:\r\ncommitters of YAKINDU - initial API and implementation\r\n";
 
 	/**
-	 * The default value of the '{@link #getExpression() <em>Expression</em>}' attribute.
+	 * The default value of the '{@link #getSpecification() <em>Specification</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpression()
+	 * @see #getSpecification()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String EXPRESSION_EDEFAULT = null;
+	protected static final String SPECIFICATION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' attribute.
+	 * The cached value of the '{@link #getSpecification() <em>Specification</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpression()
+	 * @see #getSpecification()
 	 * @generated
 	 * @ordered
 	 */
-	protected String expression = EXPRESSION_EDEFAULT;
+	protected String specification = SPECIFICATION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ExpressionElementImpl() {
+	protected SpecificationElementImpl() {
 		super();
 	}
 
@@ -74,7 +77,7 @@ public abstract class ExpressionElementImpl extends EObjectImpl implements Expre
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return SGraphPackage.Literals.EXPRESSION_ELEMENT;
+		return SGraphPackage.Literals.SPECIFICATION_ELEMENT;
 	}
 
 	/**
@@ -82,8 +85,8 @@ public abstract class ExpressionElementImpl extends EObjectImpl implements Expre
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getExpression() {
-		return expression;
+	public String getSpecification() {
+		return specification;
 	}
 
 	/**
@@ -91,11 +94,11 @@ public abstract class ExpressionElementImpl extends EObjectImpl implements Expre
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpression(String newExpression) {
-		String oldExpression = expression;
-		expression = newExpression;
+	public void setSpecification(String newSpecification) {
+		String oldSpecification = specification;
+		specification = newSpecification;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.EXPRESSION_ELEMENT__EXPRESSION, oldExpression, expression));
+			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.SPECIFICATION_ELEMENT__SPECIFICATION, oldSpecification, specification));
 	}
 
 	/**
@@ -106,8 +109,8 @@ public abstract class ExpressionElementImpl extends EObjectImpl implements Expre
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SGraphPackage.EXPRESSION_ELEMENT__EXPRESSION:
-				return getExpression();
+			case SGraphPackage.SPECIFICATION_ELEMENT__SPECIFICATION:
+				return getSpecification();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -120,8 +123,8 @@ public abstract class ExpressionElementImpl extends EObjectImpl implements Expre
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SGraphPackage.EXPRESSION_ELEMENT__EXPRESSION:
-				setExpression((String)newValue);
+			case SGraphPackage.SPECIFICATION_ELEMENT__SPECIFICATION:
+				setSpecification((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -135,8 +138,8 @@ public abstract class ExpressionElementImpl extends EObjectImpl implements Expre
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SGraphPackage.EXPRESSION_ELEMENT__EXPRESSION:
-				setExpression(EXPRESSION_EDEFAULT);
+			case SGraphPackage.SPECIFICATION_ELEMENT__SPECIFICATION:
+				setSpecification(SPECIFICATION_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -150,8 +153,8 @@ public abstract class ExpressionElementImpl extends EObjectImpl implements Expre
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SGraphPackage.EXPRESSION_ELEMENT__EXPRESSION:
-				return EXPRESSION_EDEFAULT == null ? expression != null : !EXPRESSION_EDEFAULT.equals(expression);
+			case SGraphPackage.SPECIFICATION_ELEMENT__SPECIFICATION:
+				return SPECIFICATION_EDEFAULT == null ? specification != null : !SPECIFICATION_EDEFAULT.equals(specification);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -166,10 +169,10 @@ public abstract class ExpressionElementImpl extends EObjectImpl implements Expre
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (expression: ");
-		result.append(expression);
+		result.append(" (specification: ");
+		result.append(specification);
 		result.append(')');
 		return result.toString();
 	}
 
-} //ExpressionElementImpl
+} //SpecificationElementImpl

@@ -71,7 +71,7 @@ public class StatechartMarkerNavigationProvider extends
 			if (type.equals(XTEXT_MARKER_TYPE)) {
 				final DirectEditRequest request = new DirectEditRequest();
 				request.setDirectEditFeature(SGraphPackage.eINSTANCE
-						.getExpressionElement_Expression());
+						.getSpecificationElement_Specification());
 				List<EObject> allNotationElements = EcoreUtil2
 						.eAllContentsAsList(targetView);
 				for (EObject eObject : allNotationElements) {

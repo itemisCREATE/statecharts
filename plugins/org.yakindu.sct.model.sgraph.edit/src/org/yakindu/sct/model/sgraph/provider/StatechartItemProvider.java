@@ -72,7 +72,7 @@ public class StatechartItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addExpressionPropertyDescriptor(object);
+			addSpecificationPropertyDescriptor(object);
 			addReactionsPropertyDescriptor(object);
 			addNamespacePropertyDescriptor(object);
 		}
@@ -80,19 +80,19 @@ public class StatechartItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Expression feature.
+	 * This adds a property descriptor for the Specification feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addExpressionPropertyDescriptor(Object object) {
+	protected void addSpecificationPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ExpressionElement_expression_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ExpressionElement_expression_feature", "_UI_ExpressionElement_type"),
-				 SGraphPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
+				 getString("_UI_SpecificationElement_specification_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SpecificationElement_specification_feature", "_UI_SpecificationElement_type"),
+				 SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION,
 				 true,
 				 false,
 				 false,
@@ -214,7 +214,7 @@ public class StatechartItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Statechart.class)) {
-			case SGraphPackage.STATECHART__EXPRESSION:
+			case SGraphPackage.STATECHART__SPECIFICATION:
 			case SGraphPackage.STATECHART__NAMESPACE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

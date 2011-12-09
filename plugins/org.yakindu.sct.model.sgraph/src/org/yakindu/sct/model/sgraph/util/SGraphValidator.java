@@ -18,16 +18,15 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
-import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.ChoiceKind;
+import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Exit;
-import org.yakindu.sct.model.sgraph.ExpressionElement;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.NamedElement;
 import org.yakindu.sct.model.sgraph.Pseudostate;
@@ -38,6 +37,7 @@ import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
@@ -162,8 +162,8 @@ public class SGraphValidator extends EObjectValidator {
 				return validateTrigger((Trigger)value, diagnostics, context);
 			case SGraphPackage.EFFECT:
 				return validateEffect((Effect)value, diagnostics, context);
-			case SGraphPackage.EXPRESSION_ELEMENT:
-				return validateExpressionElement((ExpressionElement)value, diagnostics, context);
+			case SGraphPackage.SPECIFICATION_ELEMENT:
+				return validateSpecificationElement((SpecificationElement)value, diagnostics, context);
 			case SGraphPackage.DECLARATION:
 				return validateDeclaration((Declaration)value, diagnostics, context);
 			case SGraphPackage.REACTION:
@@ -582,13 +582,12 @@ public class SGraphValidator extends EObjectValidator {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateExpressionElement(
-			ExpressionElement expressionElement, DiagnosticChain diagnostics,
-			Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(expressionElement, diagnostics, context);
+	public boolean validateSpecificationElement(SpecificationElement specificationElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(specificationElement, diagnostics, context);
 	}
 
 	/**
