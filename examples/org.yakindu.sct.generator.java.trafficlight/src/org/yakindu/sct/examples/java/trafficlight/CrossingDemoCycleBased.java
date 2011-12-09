@@ -33,7 +33,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.yakindu.sct.runtime.java.TimerHandler;
 import org.yakindu.sct.runtime.java.trafficlightwaiting.TrafficLightWaitingCycleBasedStatemachine;
 
-public class CrossingDemo {
+public class CrossingDemoCycleBased {
 
 	public static void main(String[] args) {
 
@@ -62,6 +62,8 @@ public class CrossingDemo {
 		crossing.add(pl);
 		crossing.getLayoutManager().setConstraint(pl,
 				new Rectangle(50, 10, 70, 20));
+		
+		statemachine.setTimerHandler(new TimerHandler());
 
 		Thread thread = new Thread() {
 			@Override
