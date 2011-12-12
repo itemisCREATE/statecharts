@@ -70,6 +70,39 @@ public class GeneratorExtensions {
 			// getClass(), iconPath);
 			// return descriptor.createImage();
 		}
+
+		@Override
+		public int hashCode() {
+			String id = getId();
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((id == null) ? 0 : id.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) {
+				return true;
+			}
+			if (obj == null) {
+				return false;
+			}
+			if (getClass() != obj.getClass()) {
+				return false;
+			}
+			GeneratorDescriptor other = (GeneratorDescriptor) obj;
+			String id = getId();
+			if (id == null) {
+				if (other.getId() != null) {
+					return false;
+				}
+			} else if (!id.equals(other.getId())) {
+				return false;
+			}
+			return true;
+		}
+
 	}
 
 	public static Iterable<GeneratorDescriptor> getGeneratorDescriptors() {
