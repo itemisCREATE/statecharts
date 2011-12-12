@@ -5,9 +5,7 @@ are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html
 Contributors:
-	committers of YAKINDU - initial API and implementation
- 	
-@author Markus Muehlbrandt - Initial contribution and API
+	Markus Muehlbrandt - Initial contribution and API
 «ENDREM»
 «IMPORT sexec»
 «IMPORT stext»
@@ -29,14 +27,9 @@ import «entry.getBasePackageName()».Event;
 public class «getEventBasedStatemachineName()» extends «getCycleBasedStatemachineName()» {
 
 	private LinkedList<Event<? extends Enum<?>>> eventQueue;
-	
-	private Thread runtimeThread;
-	
-	private long cyclePeriod;
-	
-	public «getEventBasedStatemachineName()»(long cyclePeriod) {
+
+	public «getEventBasedStatemachineName()»() {
 		eventQueue = new LinkedList<Event<? extends Enum<?>>>();
-		this.cyclePeriod = cyclePeriod;
 	}
 	
 	@Override
@@ -49,32 +42,13 @@ public class «getEventBasedStatemachineName()» extends «getCycleBasedStatemachin
 		return !eventQueue.isEmpty();
 	}
 	
-	public void start() {
-		runtimeThread = new Thread() {
-			@Override
-			public void run() {
-				long startTime;
-				while (!isInterrupted()) {
-					startTime = System.currentTimeMillis();
-					if (eventOccured()) {
-						Event<? extends Enum<?>> event = getOccuredEvents().poll();
-						«getEventBasedStatemachineName()».super.getOccuredEvents().add(event);
-						runCycle();
-					}
-					try {
-						Thread.sleep(cyclePeriod-System.currentTimeMillis()+startTime);
-					} catch (InterruptedException e) {
-						interrupt();
-					}
-				}
-			}
-		};
-		runtimeThread.start();
-	}
-	
-	public boolean stop() {
-		runtimeThread.interrupt();
-		return runtimeThread.isAlive();
+	@Override
+	public void runCycle() {
+		if (eventOccured()) {
+			Event<? extends Enum<?>> event = getOccuredEvents().poll();
+			super.getOccuredEvents().add(event);
+			super.runCycle();
+		}
 	}
 }
 «ENDFILE-»

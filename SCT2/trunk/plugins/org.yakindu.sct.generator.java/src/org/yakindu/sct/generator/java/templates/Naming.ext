@@ -5,10 +5,8 @@
   which accompanies this distribution, and is available at
   http://www.eclipse.org/legal/epl-v10.html
   Contributors:
-  	committers of YAKINDU - initial API and implementation  
-  	
-  	@author Joern Seger - Initial contribution and API
-  	@author Markus Muehlbrandt - Java adaptions and extensions
+  	Joern Seger - Initial contribution and API
+  	Markus Muehlbrandt - Java adaptions and extensions
  */
 import stext;
 import sexec;

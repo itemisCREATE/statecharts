@@ -31,10 +31,6 @@ public class DefaultInterfaceImpl extends NotificationSender
 		this.statemachine = statemachine;
 	}
 
-	public void raiseEvent5() {
-		statemachine.getOccuredEvents().add(EventEvent5);
-	}
-
 	public void raiseEvent5(boolean value) {
 		EventEvent5.setValue(value);
 		statemachine.getOccuredEvents().add(EventEvent5);

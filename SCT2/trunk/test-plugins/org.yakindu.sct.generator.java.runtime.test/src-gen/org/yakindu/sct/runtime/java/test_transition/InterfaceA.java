@@ -19,9 +19,10 @@ public interface InterfaceA extends INotificationSender {
 		Event1, Event2, Event3, Event4,
 	}
 
-	public void raiseEvent1();
 	public void raiseEvent1(int value);
+
 	public void raiseEvent2();
+
 	public void raiseEvent3();
 	public boolean isRaisedEvent4();
 

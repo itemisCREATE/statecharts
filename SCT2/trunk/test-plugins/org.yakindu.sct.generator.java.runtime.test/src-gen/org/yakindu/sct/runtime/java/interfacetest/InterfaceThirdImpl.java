@@ -37,12 +37,6 @@ public class InterfaceThirdImpl extends NotificationSender
 		return EventEvent5;
 	}
 
-	public void raiseEvent6() {
-		statemachine.getOccuredEvents().add(EventEvent6);
-		statemachine.getOutEvents().add(EventEvent6);
-		notifyListeners(new EventNotification(EventEvent6));
-	}
-
 	public void raiseEvent6(boolean value) {
 		EventEvent6.setValue(value);
 		statemachine.getOccuredEvents().add(EventEvent6);

@@ -18,8 +18,8 @@ public class TimeEvent<EnumType extends Enum<EnumType>>
 
 	private ITimedStatemachine statemachine;
 
-	public TimeEvent(EnumType name, boolean periodic) {
-		super(name, periodic);
+	public TimeEvent(EnumType id, boolean periodic) {
+		super(id, periodic);
 	}
 
 	public void setTime(long time) {

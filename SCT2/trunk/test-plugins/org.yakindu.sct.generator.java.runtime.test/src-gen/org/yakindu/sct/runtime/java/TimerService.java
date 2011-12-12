@@ -1,33 +1,23 @@
-«REM»
-Copyright (c) 2011 committers of YAKINDU and others.
-All rights reserved. This program and the accompanying materials
-are made available under the terms of the Eclipse Public License v1.0
-which accompanies this distribution, and is available at
-http://www.eclipse.org/legal/epl-v10.html
-Contributors:
-	committers of YAKINDU - initial API and implementation
- 	
-@author Markus Muehlbrandt - Initial contribution and API
-«ENDREM»
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
-
-«EXTENSION org::yakindu::sct::generator::java::templates::Naming»
-
-«DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
-«FILE entry.getBasePackagePath()+'/TimerHandler.java'-»
-«getLicenseHeader(entry)»
-package «entry.getBasePackageName()»;
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     committers of YAKINDU - initial API and implementation
+ */
+package org.yakindu.sct.runtime.java;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import «entry.getBasePackageName()».EventNotification;
+import org.yakindu.sct.runtime.java.EventNotification;
 
-public class TimerHandler implements ITimerHandler {
+public class TimerService implements ITimerService {
 
 	private final Timer timer = new Timer();
 
@@ -77,5 +67,3 @@ public class TimerHandler implements ITimerHandler {
 		timer.cancel();
 	}
 }
-«ENDFILE-»
-«ENDDEFINE»

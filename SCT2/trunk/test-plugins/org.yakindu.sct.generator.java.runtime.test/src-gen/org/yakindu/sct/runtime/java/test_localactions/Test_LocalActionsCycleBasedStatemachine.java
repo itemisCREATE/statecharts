@@ -18,7 +18,7 @@ import java.util.Set;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.TimeEvent;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
-import org.yakindu.sct.runtime.java.ITimerHandler;
+import org.yakindu.sct.runtime.java.ITimerService;
 import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Notification;
 
@@ -47,7 +47,7 @@ public class Test_LocalActionsCycleBasedStatemachine
 
 	private final Collection<Event<? extends Enum<?>>> outEvents;
 
-	private ITimerHandler timerHandler;
+	private ITimerService timerService;
 
 	private long cycleStartTime;
 
@@ -76,16 +76,16 @@ public class Test_LocalActionsCycleBasedStatemachine
 
 	}
 
-	public void setTimerHandler(ITimerHandler timerHandler) {
-		this.timerHandler = timerHandler;
+	public void setTimerService(ITimerService timerService) {
+		this.timerService = timerService;
 	}
 
-	public ITimerHandler getTimerHandler() {
-		if (timerHandler == null) {
+	public ITimerService getTimerService() {
+		if (timerService == null) {
 			throw new NullPointerException(
-					"TimerHandler of statemachine \"+Test_LocalActions+\" not set!");
+					"TimerService of statemachine \"+Test_LocalActions+\" not set!");
 		}
-		return timerHandler;
+		return timerService;
 	}
 
 	public void notify(Notification<?> notification) {
@@ -105,7 +105,7 @@ public class Test_LocalActionsCycleBasedStatemachine
 
 	public void enter() {
 		cycleStartTime = System.currentTimeMillis();
-		getTimerHandler().setTimer(State1_time_event_0, 100, cycleStartTime);
+		getTimerService().setTimer(State1_time_event_0, 100, cycleStartTime);
 		defaultInterface.setVarI(1);
 
 		activeStates.add(State.State1);
@@ -115,10 +115,10 @@ public class Test_LocalActionsCycleBasedStatemachine
 	private void reactState1() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
 			activeStates.remove(State.State1);
-			getTimerHandler().resetTimer(State1_time_event_0);
+			getTimerService().resetTimer(State1_time_event_0);
 			defaultInterface.setVarI(0);
 
-			getTimerHandler()
+			getTimerService()
 					.setTimer(State2_time_event_0, 200, cycleStartTime);
 			defaultInterface.setVarJ(1);
 
@@ -143,10 +143,10 @@ public class Test_LocalActionsCycleBasedStatemachine
 	private void reactState2() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent3())) {
 			activeStates.remove(State.State2);
-			getTimerHandler().resetTimer(State2_time_event_0);
+			getTimerService().resetTimer(State2_time_event_0);
 			defaultInterface.setVarJ(0);
 
-			getTimerHandler()
+			getTimerService()
 					.setTimer(State1_time_event_0, 100, cycleStartTime);
 			defaultInterface.setVarI(1);
 

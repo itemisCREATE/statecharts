@@ -5,10 +5,9 @@ are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html
 Contributors:
-	committers of YAKINDU - initial API and implementation
- 	
-@author Markus Muehlbrandt - Initial contribution and API
+ 	Markus Muehlbrandt - Initial contribution and API
 «ENDREM»
+
 «IMPORT sexec»
 «IMPORT stext»
 «IMPORT sgraph»
@@ -24,9 +23,11 @@ Contributors:
 	
 	«EXPAND ITimedStatemachine::file(entry) FOR this»
 	
-	«EXPAND ITimerHandler::file(entry) FOR this»
+	«EXPAND ITimerService::file(entry) FOR this»
 	
-	«EXPAND TimerHandler::file(entry) FOR this»
+	«EXPAND TimerService::file(entry) FOR this»
+	
+	«EXPAND RuntimeService::file(entry) FOR this»
 	
 	«EXPAND Event::file(entry) FOR this»
 	

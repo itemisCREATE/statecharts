@@ -5,9 +5,7 @@ are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html
 Contributors:
-	committers of YAKINDU - initial API and implementation
- 	
-@author Markus Muehlbrandt - Initial contribution and API
+	Markus Muehlbrandt - Initial contribution and API
 «ENDREM»
 «IMPORT sexec»
 «IMPORT stext»
@@ -23,14 +21,14 @@ package «entry.getBasePackageName()»;
 
 public class Event<Type extends Enum<Type>> {
 
-	private Type name;
+	private Type id;
 
-	public Event(Type name) {
-		this.name = name;
+	public Event(Type id) {
+		this.id = id;
 	}
 
-	public Type getName() {
-		return name;
+	public Type getId() {
+		return id;
 	}
 }
 «ENDFILE-»
