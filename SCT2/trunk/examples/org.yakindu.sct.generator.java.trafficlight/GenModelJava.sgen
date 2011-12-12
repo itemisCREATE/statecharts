@@ -18,6 +18,10 @@ GeneratorModel for yakindu::java {
  *     committers of YAKINDU - initial API and implementation
  */"
 		}
+		
+		feature GeneralFeatures {
+			createEventBasedStatemachine = true
+		}
 
 		//create a dump file of execution model (sexec)
 		//This feature is disabled by default if it's not declared explicit in a generator model.
