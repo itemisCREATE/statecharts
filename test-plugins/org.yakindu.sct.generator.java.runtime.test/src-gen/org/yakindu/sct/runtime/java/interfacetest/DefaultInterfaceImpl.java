@@ -37,12 +37,6 @@ public class DefaultInterfaceImpl extends NotificationSender
 		return EventEvent1;
 	}
 
-	public void raiseEvent2() {
-		statemachine.getOccuredEvents().add(EventEvent2);
-		statemachine.getOutEvents().add(EventEvent2);
-		notifyListeners(new EventNotification(EventEvent2));
-	}
-
 	public void raiseEvent2(int value) {
 		EventEvent2.setValue(value);
 		statemachine.getOccuredEvents().add(EventEvent2);

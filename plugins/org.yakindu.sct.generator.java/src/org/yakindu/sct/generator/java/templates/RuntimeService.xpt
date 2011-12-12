@@ -1,0 +1,71 @@
+«REM»
+Copyright (c) 2011 committers of YAKINDU and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+Contributors:
+	Markus Muehlbrandt - Initial contribution and API
+«ENDREM»
+
+«IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
+
+«EXTENSION org::yakindu::sct::generator::java::templates::Naming»
+
+«DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
+«FILE entry.getBasePackagePath()+'/RuntimeService.java'-»
+«getLicenseHeader(entry)»
+package «entry.getBasePackageName()»;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+public class RuntimeService {
+
+	private Timer timer = new Timer();
+
+	private Set<IStatemachine> statemachineSet = new HashSet<IStatemachine>();
+
+	private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+
+	private TimerTask timerTask = new TimerTask() {
+
+		@Override
+		public void run() {
+			lock.readLock().lock();
+			for (IStatemachine statemachine : statemachineSet) {
+				statemachine.runCycle();
+			}
+			lock.readLock().unlock();
+		}
+	};
+
+	public RuntimeService(long cyclePeriod) {
+		timer.scheduleAtFixedRate(timerTask, 0, cyclePeriod);
+	}
+
+	public boolean addStatemachine(IStatemachine statemachine) {
+		lock.writeLock().lock();
+		boolean ret = statemachineSet.add(statemachine);
+		lock.writeLock().unlock();
+		return ret;
+	}
+
+	public boolean removeStatemachine(IStatemachine statemachine) {
+		lock.writeLock().lock();
+		boolean ret = statemachineSet.remove(statemachine);
+		lock.writeLock().unlock();
+		return ret;
+	}
+
+	public void cancel() {
+		timer.cancel();
+	}
+}
+«ENDFILE-»
+«ENDDEFINE»

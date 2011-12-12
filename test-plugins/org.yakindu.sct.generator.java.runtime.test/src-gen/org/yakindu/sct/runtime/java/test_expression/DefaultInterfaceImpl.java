@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.runtime.java.test_expression;
 
+import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.NotificationSender;
 import org.yakindu.sct.runtime.java.ValuedEvent;
@@ -22,16 +23,13 @@ public class DefaultInterfaceImpl extends NotificationSender
 			Events.Event1, 0);
 	private final ValuedEvent<Events, Double> EventEvent2 = new ValuedEvent<Events, Double>(
 			Events.Event2, 0D);
+	private final Event<Events> EventEvent3 = new Event<Events>(Events.Event3);
 
 	private Test_ExpressionCycleBasedStatemachine statemachine;
 
 	public DefaultInterfaceImpl(
 			Test_ExpressionCycleBasedStatemachine statemachine) {
 		this.statemachine = statemachine;
-	}
-
-	public void raiseEvent1() {
-		statemachine.getOccuredEvents().add(EventEvent1);
 	}
 
 	public void raiseEvent1(int value) {
@@ -41,12 +39,6 @@ public class DefaultInterfaceImpl extends NotificationSender
 
 	public ValuedEvent<Events, Integer> getEventEvent1() {
 		return EventEvent1;
-	}
-
-	public void raiseEvent2() {
-		statemachine.getOccuredEvents().add(EventEvent2);
-		statemachine.getOutEvents().add(EventEvent2);
-		notifyListeners(new EventNotification(EventEvent2));
 	}
 
 	public void raiseEvent2(double value) {
@@ -62,6 +54,14 @@ public class DefaultInterfaceImpl extends NotificationSender
 
 	public boolean isRaisedEvent2() {
 		return statemachine.getOutEvents().contains(EventEvent2);
+	}
+
+	public void raiseEvent3() {
+		statemachine.getOccuredEvents().add(EventEvent3);
+	}
+
+	public Event<Events> getEventEvent3() {
+		return EventEvent3;
 	}
 
 	private int varVar1 = 6;

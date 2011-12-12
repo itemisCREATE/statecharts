@@ -5,10 +5,9 @@ are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html
 Contributors:
-	committers of YAKINDU - initial API and implementation
- 	
-@author Markus Muehlbrandt - Initial contribution and API
+	Markus Muehlbrandt - Initial contribution and API
 «ENDREM»
+
 «IMPORT sexec»
 «IMPORT stext»
 «IMPORT sgraph»
@@ -45,9 +44,10 @@ public interface «getInterfaceName()»«getInterfaceExtension()» {
 	
 	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
 	«IF  event.direction ==  Direction::IN-»
-	public void raise«event.name.toFirstUpper()»();
 		«IF event.type != Type::void-»
-	public void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value);
+			public void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value);
+		«ELSE»
+			public void raise«event.name.toFirstUpper()»();
 		«ENDIF-»
 	«ELSEIF event.direction ==  Direction::OUT-»
 	public boolean isRaised«event.name.toFirstUpper()»();

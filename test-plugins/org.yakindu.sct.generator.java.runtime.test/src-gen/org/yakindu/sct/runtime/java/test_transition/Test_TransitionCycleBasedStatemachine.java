@@ -18,7 +18,7 @@ import java.util.Set;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.TimeEvent;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
-import org.yakindu.sct.runtime.java.ITimerHandler;
+import org.yakindu.sct.runtime.java.ITimerService;
 import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Notification;
 import org.yakindu.sct.runtime.java.ValuedEvent;
@@ -56,7 +56,7 @@ public class Test_TransitionCycleBasedStatemachine
 
 	private final Collection<Event<? extends Enum<?>>> outEvents;
 
-	private ITimerHandler timerHandler;
+	private ITimerService timerService;
 
 	private long cycleStartTime;
 
@@ -86,16 +86,16 @@ public class Test_TransitionCycleBasedStatemachine
 
 	}
 
-	public void setTimerHandler(ITimerHandler timerHandler) {
-		this.timerHandler = timerHandler;
+	public void setTimerService(ITimerService timerService) {
+		this.timerService = timerService;
 	}
 
-	public ITimerHandler getTimerHandler() {
-		if (timerHandler == null) {
+	public ITimerService getTimerService() {
+		if (timerService == null) {
 			throw new NullPointerException(
-					"TimerHandler of statemachine \"+Test_Transition+\" not set!");
+					"TimerService of statemachine \"+Test_Transition+\" not set!");
 		}
-		return timerHandler;
+		return timerService;
 	}
 
 	public void notify(Notification<?> notification) {
@@ -132,9 +132,9 @@ public class Test_TransitionCycleBasedStatemachine
 
 	public void enter() {
 		cycleStartTime = System.currentTimeMillis();
-		getTimerHandler().setTimer(State1_time_event_0, (10 * 1000),
+		getTimerService().setTimer(State1_time_event_0, (10 * 1000),
 				cycleStartTime);
-		getTimerHandler().setTimer(State1_time_event_1, 100, cycleStartTime);
+		getTimerService().setTimer(State1_time_event_1, 100, cycleStartTime);
 
 		activeStates.add(State.State1);
 
@@ -144,16 +144,16 @@ public class Test_TransitionCycleBasedStatemachine
 		if ((occuredEvents.contains(interfaceA.getEventEvent1()) || occuredEvents
 				.contains(interfaceA.getEventEvent2()))) {
 			activeStates.remove(State.State1);
-			getTimerHandler().resetTimer(State1_time_event_0);
-			getTimerHandler().resetTimer(State1_time_event_1);
+			getTimerService().resetTimer(State1_time_event_0);
+			getTimerService().resetTimer(State1_time_event_1);
 
 			activeStates.add(State.State2);
 
 		} else {
 			if ((defaultInterface.getVarI() == 5)) {
 				activeStates.remove(State.State1);
-				getTimerHandler().resetTimer(State1_time_event_0);
-				getTimerHandler().resetTimer(State1_time_event_1);
+				getTimerService().resetTimer(State1_time_event_0);
+				getTimerService().resetTimer(State1_time_event_1);
 
 				activeStates.add(State.State2);
 
@@ -161,8 +161,8 @@ public class Test_TransitionCycleBasedStatemachine
 				if ((occuredEvents.contains(interfaceA.getEventEvent3()) && (defaultInterface
 						.getVarJ() < 20))) {
 					activeStates.remove(State.State1);
-					getTimerHandler().resetTimer(State1_time_event_0);
-					getTimerHandler().resetTimer(State1_time_event_1);
+					getTimerService().resetTimer(State1_time_event_0);
+					getTimerService().resetTimer(State1_time_event_1);
 
 					activeStates.add(State.State2);
 
@@ -171,8 +171,8 @@ public class Test_TransitionCycleBasedStatemachine
 							.contains(interfaceA.getEventEvent4())) && (defaultInterface
 							.getVarJ() > 30))) {
 						activeStates.remove(State.State1);
-						getTimerHandler().resetTimer(State1_time_event_0);
-						getTimerHandler().resetTimer(State1_time_event_1);
+						getTimerService().resetTimer(State1_time_event_0);
+						getTimerService().resetTimer(State1_time_event_1);
 
 						activeStates.add(State.State2);
 
@@ -180,8 +180,8 @@ public class Test_TransitionCycleBasedStatemachine
 						if (occuredEvents.contains(defaultInterface
 								.getEventEvent6())) {
 							activeStates.remove(State.State1);
-							getTimerHandler().resetTimer(State1_time_event_0);
-							getTimerHandler().resetTimer(State1_time_event_1);
+							getTimerService().resetTimer(State1_time_event_0);
+							getTimerService().resetTimer(State1_time_event_1);
 
 							defaultInterface.setVarI(15);
 
@@ -191,9 +191,9 @@ public class Test_TransitionCycleBasedStatemachine
 							if (occuredEvents.contains(defaultInterface
 									.getEventEvent7())) {
 								activeStates.remove(State.State1);
-								getTimerHandler().resetTimer(
+								getTimerService().resetTimer(
 										State1_time_event_0);
-								getTimerHandler().resetTimer(
+								getTimerService().resetTimer(
 										State1_time_event_1);
 
 								defaultInterface.setVarJ((defaultInterface
@@ -204,9 +204,9 @@ public class Test_TransitionCycleBasedStatemachine
 							} else {
 								if (occuredEvents.contains(State1_time_event_0)) {
 									activeStates.remove(State.State1);
-									getTimerHandler().resetTimer(
+									getTimerService().resetTimer(
 											State1_time_event_0);
-									getTimerHandler().resetTimer(
+									getTimerService().resetTimer(
 											State1_time_event_1);
 
 									activeStates.add(State.State2);
@@ -215,9 +215,9 @@ public class Test_TransitionCycleBasedStatemachine
 									if (occuredEvents
 											.contains(State1_time_event_1)) {
 										activeStates.remove(State.State1);
-										getTimerHandler().resetTimer(
+										getTimerService().resetTimer(
 												State1_time_event_0);
-										getTimerHandler().resetTimer(
+										getTimerService().resetTimer(
 												State1_time_event_1);
 
 										activeStates.add(State.State2);
@@ -226,9 +226,9 @@ public class Test_TransitionCycleBasedStatemachine
 										if (occuredEvents.contains(interfaceA
 												.getEventEvent1())) {
 											activeStates.remove(State.State1);
-											getTimerHandler().resetTimer(
+											getTimerService().resetTimer(
 													State1_time_event_0);
-											getTimerHandler().resetTimer(
+											getTimerService().resetTimer(
 													State1_time_event_1);
 
 											activeStates.add(State.State2);

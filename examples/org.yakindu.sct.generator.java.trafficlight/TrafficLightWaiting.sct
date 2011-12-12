@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0" xmlns:stext="http://www.yakindu.org/sct/statechart/SText">
-  <sgraph:Statechart xmi:id="_NPjBgBA-EeGQ0KsLDV4EFg" name="TrafficLightWaiting" expression="interface TrafficLight:&#xD;&#xA;&#x9;var red:boolean&#xD;&#xA;&#x9;var yellow:boolean&#xD;&#xA;&#x9;var green:boolean&#xD;&#xA;&#xD;&#xA;interface Pedestrian:&#xD;&#xA;&#x9;var request:boolean&#xD;&#xA;&#x9;var red:boolean&#xD;&#xA;&#x9;var green:boolean&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;&#x9;in event keypress1&#xD;&#xA;&#x9;in event keypress2">
+  <sgraph:Statechart xmi:id="_NPjBgBA-EeGQ0KsLDV4EFg" name="TrafficLightWaiting" specification="interface TrafficLight:&#xD;&#xA;&#x9;var red:boolean&#xD;&#xA;&#x9;var yellow:boolean&#xD;&#xA;&#x9;var green:boolean&#xD;&#xA;&#xD;&#xA;interface Pedestrian:&#xD;&#xA;&#x9;var request:boolean&#xD;&#xA;&#x9;var red:boolean&#xD;&#xA;&#x9;var green:boolean&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;&#x9;in event keypress1&#xD;&#xA;&#x9;in event keypress2">
     <scopes xsi:type="stext:InterfaceScope" xmi:id="_TnWbMBzuEeGEC4raFz1JbQ" name="TrafficLight">
       <declarations xsi:type="stext:VariableDefinition" xmi:id="_TnWbMRzuEeGEC4raFz1JbQ" name="red" type="boolean"/>
       <declarations xsi:type="stext:VariableDefinition" xmi:id="_TnWbMhzuEeGEC4raFz1JbQ" name="yellow" type="boolean"/>
@@ -21,13 +21,13 @@
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_NPjBmBA-EeGQ0KsLDV4EFg" name="on" incomingTransitions="_NPsyhxA-EeGQ0KsLDV4EFg __OsQsBBPEeGQ0KsLDV4EFg">
         <scopes xmi:id="_TnasoBzuEeGEC4raFz1JbQ"/>
-        <outgoingTransitions xmi:id="_XlIREBBFEeGQ0KsLDV4EFg" expression="keypress2" target="_MF4mkBBFEeGQ0KsLDV4EFg">
+        <outgoingTransitions xmi:id="_XlIREBBFEeGQ0KsLDV4EFg" specification="keypress2" target="_MF4mkBBFEeGQ0KsLDV4EFg">
           <trigger xsi:type="stext:ReactionTrigger" xmi:id="_TnbTsBzuEeGEC4raFz1JbQ">
             <triggers xsi:type="stext:RegularEventSpec" xmi:id="_TnbTsRzuEeGEC4raFz1JbQ" event="_TnWbOhzuEeGEC4raFz1JbQ"/>
           </trigger>
         </outgoingTransitions>
         <regions xmi:id="_vZz18BA_EeGQ0KsLDV4EFg" name="r1">
-          <vertices xsi:type="sgraph:State" xmi:id="_w8meYBA_EeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = false; &#xD;&#xA;&#x9;TrafficLight.yellow = false;&#xD;&#xA;&#x9;TrafficLight.green = true;&#xD;&#xA;&#x9;Pedestrian.red = true;&#xD;&#xA;&#x9;Pedestrian.green = false;&#xD;&#xA;&#x9;Pedestrian.request = false;" name="StreetGreen" incomingTransitions="_pddaABBEEeGQ0KsLDV4EFg _yYuD0BBPEeGQ0KsLDV4EFg">
+          <vertices xsi:type="sgraph:State" xmi:id="_w8meYBA_EeGQ0KsLDV4EFg" specification="entry / TrafficLight.red = false; &#xD;&#xA;&#x9;TrafficLight.yellow = false;&#xD;&#xA;&#x9;TrafficLight.green = true;&#xD;&#xA;&#x9;Pedestrian.red = true;&#xD;&#xA;&#x9;Pedestrian.green = false;&#xD;&#xA;&#x9;Pedestrian.request = false;" name="StreetGreen" incomingTransitions="_pddaABBEEeGQ0KsLDV4EFg _yYuD0BBPEeGQ0KsLDV4EFg">
             <scopes xmi:id="_Tne-EBzuEeGEC4raFz1JbQ">
               <declarations xsi:type="stext:LocalReaction" xmi:id="_Tne-ERzuEeGEC4raFz1JbQ">
                 <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Tne-EhzuEeGEC4raFz1JbQ">
@@ -67,13 +67,13 @@
                 </effect>
               </declarations>
             </scopes>
-            <outgoingTransitions xmi:id="_Lo2CEBBBEeGQ0KsLDV4EFg" expression="keypress1" target="_iAKe0BBAEeGQ0KsLDV4EFg">
+            <outgoingTransitions xmi:id="_Lo2CEBBBEeGQ0KsLDV4EFg" specification="keypress1" target="_iAKe0BBAEeGQ0KsLDV4EFg">
               <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Tn08UBzuEeGEC4raFz1JbQ">
                 <triggers xsi:type="stext:RegularEventSpec" xmi:id="_Tn08URzuEeGEC4raFz1JbQ" event="_TnWbORzuEeGEC4raFz1JbQ"/>
               </trigger>
             </outgoingTransitions>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_iAKe0BBAEeGQ0KsLDV4EFg" expression="exit / Pedestrian.request = false;" name="PedWaiting" incomingTransitions="_Lo2CEBBBEeGQ0KsLDV4EFg">
+          <vertices xsi:type="sgraph:State" xmi:id="_iAKe0BBAEeGQ0KsLDV4EFg" specification="exit / Pedestrian.request = false;" name="PedWaiting" incomingTransitions="_Lo2CEBBBEeGQ0KsLDV4EFg">
             <scopes xmi:id="_Tn3_oBzuEeGEC4raFz1JbQ">
               <declarations xsi:type="stext:LocalReaction" xmi:id="_Tn3_oRzuEeGEC4raFz1JbQ">
                 <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Tn3_ohzuEeGEC4raFz1JbQ">
@@ -88,13 +88,13 @@
                 </effect>
               </declarations>
             </scopes>
-            <outgoingTransitions xmi:id="_LDXEgBBDEeGQ0KsLDV4EFg" expression="after 7s" target="_SKct4BBBEeGQ0KsLDV4EFg">
+            <outgoingTransitions xmi:id="_LDXEgBBDEeGQ0KsLDV4EFg" specification="after 7s" target="_SKct4BBBEeGQ0KsLDV4EFg">
               <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Tn7C8BzuEeGEC4raFz1JbQ">
                 <triggers xsi:type="stext:TimeEventSpec" xmi:id="_Tn7C8RzuEeGEC4raFz1JbQ" value="7"/>
               </trigger>
             </outgoingTransitions>
             <regions xmi:id="_iAKe0hBAEeGQ0KsLDV4EFg" name="r1">
-              <vertices xsi:type="sgraph:State" xmi:id="_mjm00BBAEeGQ0KsLDV4EFg" expression="entry / &#xD;&#xA;Pedestrian.request = true;" name="waitOn" incomingTransitions="_wTHnEBBAEeGQ0KsLDV4EFg _OXpxsBBBEeGQ0KsLDV4EFg">
+              <vertices xsi:type="sgraph:State" xmi:id="_mjm00BBAEeGQ0KsLDV4EFg" specification="entry / &#xD;&#xA;Pedestrian.request = true;" name="waitOn" incomingTransitions="_wTHnEBBAEeGQ0KsLDV4EFg _OXpxsBBBEeGQ0KsLDV4EFg">
                 <scopes xmi:id="_Tn7qABzuEeGEC4raFz1JbQ">
                   <declarations xsi:type="stext:LocalReaction" xmi:id="_Tn7qARzuEeGEC4raFz1JbQ">
                     <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Tn7qAhzuEeGEC4raFz1JbQ">
@@ -109,13 +109,13 @@
                     </effect>
                   </declarations>
                 </scopes>
-                <outgoingTransitions xmi:id="_6LZ60BBAEeGQ0KsLDV4EFg" expression="after 500ms" target="_n6DDUBBAEeGQ0KsLDV4EFg">
+                <outgoingTransitions xmi:id="_6LZ60BBAEeGQ0KsLDV4EFg" specification="after 500ms" target="_n6DDUBBAEeGQ0KsLDV4EFg">
                   <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Tn-tUBzuEeGEC4raFz1JbQ">
                     <triggers xsi:type="stext:TimeEventSpec" xmi:id="_Tn-tURzuEeGEC4raFz1JbQ" value="500" unit="ms"/>
                   </trigger>
                 </outgoingTransitions>
               </vertices>
-              <vertices xsi:type="sgraph:State" xmi:id="_n6DDUBBAEeGQ0KsLDV4EFg" expression="entry / &#xD;&#xA;Pedestrian.request = false;" name="waitOff" incomingTransitions="_6LZ60BBAEeGQ0KsLDV4EFg">
+              <vertices xsi:type="sgraph:State" xmi:id="_n6DDUBBAEeGQ0KsLDV4EFg" specification="entry / &#xD;&#xA;Pedestrian.request = false;" name="waitOff" incomingTransitions="_6LZ60BBAEeGQ0KsLDV4EFg">
                 <scopes xmi:id="_Tn_UYBzuEeGEC4raFz1JbQ">
                   <declarations xsi:type="stext:LocalReaction" xmi:id="_Tn_UYRzuEeGEC4raFz1JbQ">
                     <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Tn_UYhzuEeGEC4raFz1JbQ">
@@ -130,7 +130,7 @@
                     </effect>
                   </declarations>
                 </scopes>
-                <outgoingTransitions xmi:id="_OXpxsBBBEeGQ0KsLDV4EFg" expression="after 500ms" target="_mjm00BBAEeGQ0KsLDV4EFg">
+                <outgoingTransitions xmi:id="_OXpxsBBBEeGQ0KsLDV4EFg" specification="after 500ms" target="_mjm00BBAEeGQ0KsLDV4EFg">
                   <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ToCXsBzuEeGEC4raFz1JbQ">
                     <triggers xsi:type="stext:TimeEventSpec" xmi:id="_ToCXsRzuEeGEC4raFz1JbQ" value="500" unit="ms"/>
                   </trigger>
@@ -141,7 +141,7 @@
               </vertices>
             </regions>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_SKct4BBBEeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = false;&#xD;&#xA;&#x9;TrafficLight.yellow = true;&#xD;&#xA;&#x9;TrafficLight.green = false;" name="StreetAttention" incomingTransitions="_LDXEgBBDEeGQ0KsLDV4EFg">
+          <vertices xsi:type="sgraph:State" xmi:id="_SKct4BBBEeGQ0KsLDV4EFg" specification="entry / TrafficLight.red = false;&#xD;&#xA;&#x9;TrafficLight.yellow = true;&#xD;&#xA;&#x9;TrafficLight.green = false;" name="StreetAttention" incomingTransitions="_LDXEgBBDEeGQ0KsLDV4EFg">
             <scopes xmi:id="_ToC-wBzuEeGEC4raFz1JbQ">
               <declarations xsi:type="stext:LocalReaction" xmi:id="_ToC-wRzuEeGEC4raFz1JbQ">
                 <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ToC-whzuEeGEC4raFz1JbQ">
@@ -166,13 +166,13 @@
                 </effect>
               </declarations>
             </scopes>
-            <outgoingTransitions xmi:id="_fS31UBBEEeGQ0KsLDV4EFg" expression="after 2s" target="_fO-pQBBDEeGQ0KsLDV4EFg">
+            <outgoingTransitions xmi:id="_fS31UBBEEeGQ0KsLDV4EFg" specification="after 2s" target="_fO-pQBBDEeGQ0KsLDV4EFg">
               <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ToJscBzuEeGEC4raFz1JbQ">
                 <triggers xsi:type="stext:TimeEventSpec" xmi:id="_ToJscRzuEeGEC4raFz1JbQ" value="2"/>
               </trigger>
             </outgoingTransitions>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_fO-pQBBDEeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = true;&#xD;&#xA;TrafficLight.yellow = false;&#xD;&#xA;TrafficLight.green = false;" name="StreetRed" incomingTransitions="_fS31UBBEEeGQ0KsLDV4EFg">
+          <vertices xsi:type="sgraph:State" xmi:id="_fO-pQBBDEeGQ0KsLDV4EFg" specification="entry / TrafficLight.red = true;&#xD;&#xA;TrafficLight.yellow = false;&#xD;&#xA;TrafficLight.green = false;" name="StreetRed" incomingTransitions="_fS31UBBEEeGQ0KsLDV4EFg">
             <scopes xmi:id="_ToKTgBzuEeGEC4raFz1JbQ">
               <declarations xsi:type="stext:LocalReaction" xmi:id="_ToKTgRzuEeGEC4raFz1JbQ">
                 <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ToKTghzuEeGEC4raFz1JbQ">
@@ -197,13 +197,13 @@
                 </effect>
               </declarations>
             </scopes>
-            <outgoingTransitions xmi:id="_g7TywBBEEeGQ0KsLDV4EFg" expression="after 2s" target="_12GAEBBDEeGQ0KsLDV4EFg">
+            <outgoingTransitions xmi:id="_g7TywBBEEeGQ0KsLDV4EFg" specification="after 2s" target="_12GAEBBDEeGQ0KsLDV4EFg">
               <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ToRoQBzuEeGEC4raFz1JbQ">
                 <triggers xsi:type="stext:TimeEventSpec" xmi:id="_ToRoQRzuEeGEC4raFz1JbQ" value="2"/>
               </trigger>
             </outgoingTransitions>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_12GAEBBDEeGQ0KsLDV4EFg" expression="entry / Pedestrian.red = false;&#xD;&#xA;Pedestrian.green = true;" name="PedestrianGreen" incomingTransitions="_g7TywBBEEeGQ0KsLDV4EFg">
+          <vertices xsi:type="sgraph:State" xmi:id="_12GAEBBDEeGQ0KsLDV4EFg" specification="entry / Pedestrian.red = false;&#xD;&#xA;Pedestrian.green = true;" name="PedestrianGreen" incomingTransitions="_g7TywBBEEeGQ0KsLDV4EFg">
             <scopes xmi:id="_ToRoQhzuEeGEC4raFz1JbQ">
               <declarations xsi:type="stext:LocalReaction" xmi:id="_ToRoQxzuEeGEC4raFz1JbQ">
                 <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ToRoRBzuEeGEC4raFz1JbQ">
@@ -223,13 +223,13 @@
                 </effect>
               </declarations>
             </scopes>
-            <outgoingTransitions xmi:id="_iZox8BBEEeGQ0KsLDV4EFg" expression="after 7s" target="_K-JX7RBEEeGQ0KsLDV4EFg">
+            <outgoingTransitions xmi:id="_iZox8BBEEeGQ0KsLDV4EFg" specification="after 7s" target="_K-JX7RBEEeGQ0KsLDV4EFg">
               <trigger xsi:type="stext:ReactionTrigger" xmi:id="_ToayMBzuEeGEC4raFz1JbQ">
                 <triggers xsi:type="stext:TimeEventSpec" xmi:id="_ToayMRzuEeGEC4raFz1JbQ" value="7"/>
               </trigger>
             </outgoingTransitions>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_K-JX7RBEEeGQ0KsLDV4EFg" expression="entry / Pedestrian.red = true;&#xD;&#xA;Pedestrian.green = false;" name="PedestrianRed" incomingTransitions="_iZox8BBEEeGQ0KsLDV4EFg">
+          <vertices xsi:type="sgraph:State" xmi:id="_K-JX7RBEEeGQ0KsLDV4EFg" specification="entry / Pedestrian.red = true;&#xD;&#xA;Pedestrian.green = false;" name="PedestrianRed" incomingTransitions="_iZox8BBEEeGQ0KsLDV4EFg">
             <scopes xmi:id="_TobZQBzuEeGEC4raFz1JbQ">
               <declarations xsi:type="stext:LocalReaction" xmi:id="_TobZQRzuEeGEC4raFz1JbQ">
                 <trigger xsi:type="stext:ReactionTrigger" xmi:id="_TobZQhzuEeGEC4raFz1JbQ">
@@ -249,13 +249,13 @@
                 </effect>
               </declarations>
             </scopes>
-            <outgoingTransitions xmi:id="_nVCU8BBEEeGQ0KsLDV4EFg" expression="after 5s" target="_TfjYTRBEEeGQ0KsLDV4EFg">
+            <outgoingTransitions xmi:id="_nVCU8BBEEeGQ0KsLDV4EFg" specification="after 5s" target="_TfjYTRBEEeGQ0KsLDV4EFg">
               <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Tog40BzuEeGEC4raFz1JbQ">
                 <triggers xsi:type="stext:TimeEventSpec" xmi:id="_Tog40RzuEeGEC4raFz1JbQ" value="5"/>
               </trigger>
             </outgoingTransitions>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_TfjYTRBEEeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = true;&#xD;&#xA;&#x9;TrafficLight.yellow = true;&#xD;&#xA;&#x9;TrafficLight.green = false;" name="StreetPrepare" incomingTransitions="_nVCU8BBEEeGQ0KsLDV4EFg">
+          <vertices xsi:type="sgraph:State" xmi:id="_TfjYTRBEEeGQ0KsLDV4EFg" specification="entry / TrafficLight.red = true;&#xD;&#xA;&#x9;TrafficLight.yellow = true;&#xD;&#xA;&#x9;TrafficLight.green = false;" name="StreetPrepare" incomingTransitions="_nVCU8BBEEeGQ0KsLDV4EFg">
             <scopes xmi:id="_Tohf4BzuEeGEC4raFz1JbQ">
               <declarations xsi:type="stext:LocalReaction" xmi:id="_Tohf4RzuEeGEC4raFz1JbQ">
                 <trigger xsi:type="stext:ReactionTrigger" xmi:id="_Tohf4hzuEeGEC4raFz1JbQ">
@@ -280,7 +280,7 @@
                 </effect>
               </declarations>
             </scopes>
-            <outgoingTransitions xmi:id="_pddaABBEEeGQ0KsLDV4EFg" expression="after 2s" target="_w8meYBA_EeGQ0KsLDV4EFg">
+            <outgoingTransitions xmi:id="_pddaABBEEeGQ0KsLDV4EFg" specification="after 2s" target="_w8meYBA_EeGQ0KsLDV4EFg">
               <trigger xsi:type="stext:ReactionTrigger" xmi:id="_TooNkBzuEeGEC4raFz1JbQ">
                 <triggers xsi:type="stext:TimeEventSpec" xmi:id="_TooNkRzuEeGEC4raFz1JbQ" value="2"/>
               </trigger>
@@ -291,7 +291,7 @@
           </vertices>
         </regions>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_MF4mkBBFEeGQ0KsLDV4EFg" expression="entry / TrafficLight.red = false;&#xD;&#xA;&#x9;TrafficLight.green = false;&#xD;&#xA;&#x9;TrafficLight.yellow = false;&#xD;&#xA;&#x9;Pedestrian.red = false;&#xD;&#xA;&#x9;Pedestrian.green = false;" name="off" incomingTransitions="_XlIREBBFEeGQ0KsLDV4EFg">
+      <vertices xsi:type="sgraph:State" xmi:id="_MF4mkBBFEeGQ0KsLDV4EFg" specification="entry / TrafficLight.red = false;&#xD;&#xA;&#x9;TrafficLight.green = false;&#xD;&#xA;&#x9;TrafficLight.yellow = false;&#xD;&#xA;&#x9;Pedestrian.red = false;&#xD;&#xA;&#x9;Pedestrian.green = false;" name="off" incomingTransitions="_XlIREBBFEeGQ0KsLDV4EFg">
         <scopes xmi:id="_TopbsBzuEeGEC4raFz1JbQ">
           <declarations xsi:type="stext:LocalReaction" xmi:id="_TopbsRzuEeGEC4raFz1JbQ">
             <trigger xsi:type="stext:ReactionTrigger" xmi:id="_TopbshzuEeGEC4raFz1JbQ">
@@ -326,13 +326,13 @@
             </effect>
           </declarations>
         </scopes>
-        <outgoingTransitions xmi:id="__OsQsBBPEeGQ0KsLDV4EFg" expression="keypress2" target="_NPjBmBA-EeGQ0KsLDV4EFg">
+        <outgoingTransitions xmi:id="__OsQsBBPEeGQ0KsLDV4EFg" specification="keypress2" target="_NPjBmBA-EeGQ0KsLDV4EFg">
           <trigger xsi:type="stext:ReactionTrigger" xmi:id="_To1o8BzuEeGEC4raFz1JbQ">
             <triggers xsi:type="stext:RegularEventSpec" xmi:id="_To1o8RzuEeGEC4raFz1JbQ" event="_TnWbOhzuEeGEC4raFz1JbQ"/>
           </trigger>
         </outgoingTransitions>
         <regions xmi:id="_xHG2gBBFEeGQ0KsLDV4EFg" name="r1">
-          <vertices xsi:type="sgraph:State" xmi:id="_BVnsgBBGEeGQ0KsLDV4EFg" expression="entry / &#xA;&#x9;TrafficLight.yellow = true;&#xA;" name="YellowOn" incomingTransitions="_EwURwBBGEeGQ0KsLDV4EFg _S4HWoBzuEeGEC4raFz1JbQ">
+          <vertices xsi:type="sgraph:State" xmi:id="_BVnsgBBGEeGQ0KsLDV4EFg" specification="entry / &#xA;&#x9;TrafficLight.yellow = true;&#xA;" name="YellowOn" incomingTransitions="_EwURwBBGEeGQ0KsLDV4EFg _S4HWoBzuEeGEC4raFz1JbQ">
             <scopes xmi:id="_To4sQBzuEeGEC4raFz1JbQ">
               <declarations xsi:type="stext:LocalReaction" xmi:id="_To4sQRzuEeGEC4raFz1JbQ">
                 <trigger xsi:type="stext:ReactionTrigger" xmi:id="_To4sQhzuEeGEC4raFz1JbQ">
@@ -347,7 +347,7 @@
                 </effect>
               </declarations>
             </scopes>
-            <outgoingTransitions xmi:id="_P6yC0BzuEeGEC4raFz1JbQ" expression="after 500ms" target="_B6YqMBzuEeGEC4raFz1JbQ">
+            <outgoingTransitions xmi:id="_P6yC0BzuEeGEC4raFz1JbQ" specification="after 500ms" target="_B6YqMBzuEeGEC4raFz1JbQ">
               <trigger xsi:type="stext:ReactionTrigger" xmi:id="_To7vkBzuEeGEC4raFz1JbQ">
                 <triggers xsi:type="stext:TimeEventSpec" xmi:id="_To7vkRzuEeGEC4raFz1JbQ" value="500" unit="ms"/>
               </trigger>
@@ -356,7 +356,7 @@
           <vertices xsi:type="sgraph:Entry" xmi:id="_EUWHcBBGEeGQ0KsLDV4EFg">
             <outgoingTransitions xmi:id="_EwURwBBGEeGQ0KsLDV4EFg" target="_BVnsgBBGEeGQ0KsLDV4EFg"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_B6YqMBzuEeGEC4raFz1JbQ" expression="entry /&#xA;&#x9;TrafficLight.yellow = false;" name="YellowOff" incomingTransitions="_P6yC0BzuEeGEC4raFz1JbQ">
+          <vertices xsi:type="sgraph:State" xmi:id="_B6YqMBzuEeGEC4raFz1JbQ" specification="entry /&#xA;&#x9;TrafficLight.yellow = false;" name="YellowOff" incomingTransitions="_P6yC0BzuEeGEC4raFz1JbQ">
             <scopes xmi:id="_To7vkhzuEeGEC4raFz1JbQ">
               <declarations xsi:type="stext:LocalReaction" xmi:id="_To7vkxzuEeGEC4raFz1JbQ">
                 <trigger xsi:type="stext:ReactionTrigger" xmi:id="_To7vlBzuEeGEC4raFz1JbQ">
@@ -371,7 +371,7 @@
                 </effect>
               </declarations>
             </scopes>
-            <outgoingTransitions xmi:id="_S4HWoBzuEeGEC4raFz1JbQ" expression="after 500ms" target="_BVnsgBBGEeGQ0KsLDV4EFg">
+            <outgoingTransitions xmi:id="_S4HWoBzuEeGEC4raFz1JbQ" specification="after 500ms" target="_BVnsgBBGEeGQ0KsLDV4EFg">
               <trigger xsi:type="stext:ReactionTrigger" xmi:id="_To-y4BzuEeGEC4raFz1JbQ">
                 <triggers xsi:type="stext:TimeEventSpec" xmi:id="_To-y4RzuEeGEC4raFz1JbQ" value="500" unit="ms"/>
               </trigger>

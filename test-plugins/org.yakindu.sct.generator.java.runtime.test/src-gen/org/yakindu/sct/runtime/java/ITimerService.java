@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.runtime.java;
 
-public interface ITimerHandler {
+public interface ITimerService {
 
 	public void setTimer(TimeEvent<? extends Enum<?>> event, long time,
 			long cycleStartTime);

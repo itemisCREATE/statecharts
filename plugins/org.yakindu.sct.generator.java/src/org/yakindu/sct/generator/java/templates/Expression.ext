@@ -6,9 +6,8 @@
   http://www.eclipse.org/legal/epl-v10.html
   Contributors:
   	committers of YAKINDU - initial API and implementation  
-  	
-  	@author Joern Seger - Initial contribution and API
-  	@author Markus Muehlbrandt - Java adaptions
+  	Joern Seger - Initial contribution and API
+  	Markus Muehlbrandt - Java adaptions
  */
 import stext;
 import sexec;

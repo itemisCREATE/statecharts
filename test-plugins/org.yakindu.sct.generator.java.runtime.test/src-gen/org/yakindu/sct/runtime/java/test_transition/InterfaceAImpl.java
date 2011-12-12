@@ -29,10 +29,6 @@ public class InterfaceAImpl extends NotificationSender implements InterfaceA {
 		this.statemachine = statemachine;
 	}
 
-	public void raiseEvent1() {
-		statemachine.getOccuredEvents().add(EventEvent1);
-	}
-
 	public void raiseEvent1(int value) {
 		EventEvent1.setValue(value);
 		statemachine.getOccuredEvents().add(EventEvent1);
