@@ -10,12 +10,12 @@
  */
 import stext;
 import sexec;
-import ecore;
 import sgraph;
 import sgen;
 
 extension org::yakindu::sct::generator::java::templates::Expression;
 extension org::yakindu::sct::generator::java::templates::ExecutionModelExtensions;
+extension org::yakindu::sct::generator::java::templates::GenmodelEntries;
 
 String getStatemachineName(String name) :
 	JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getValidStatemachineName(java.lang.String);
@@ -129,81 +129,17 @@ String getContext(Event this) :
 	else 
 		"";
 	
-String getInterfaceExtension(Scope this):
-	if (hasOutgoingEvents()) then
+String getInterfaceExtension(Scope this, GeneratorEntry entry):
+	if (hasOutgoingEvents() && entry.createInterfaceObserverSupport()) then
 		" extends INotificationSender"
 	else
 		null;
 		
-String getInterfaceImplExtension(Scope this):
-	if (hasOutgoingEvents()) then
+String getInterfaceImplExtension(Scope this, GeneratorEntry entry):
+	if (hasOutgoingEvents() && entry.createInterfaceObserverSupport()) then
 		" extends NotificationSender"
 	else
 		null;
-
-String getNamingFeature() :
- JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getNamingFeature();
- 
-String getBasePackage() :
- JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getBasePackage();
- 
-String getImplementationSuffix() :
- JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getImplementationSuffix();
- 
-String getLicenseFeature() :
- JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getLicenseHeader();
- 
-String getLicenseText() :
- JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getLicenseText();
- 
-String getGeneralFeature() :
- JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getGeneralFeature();
- 
-String getCreateEventBasedStatemachine() :
- JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getCreateEventBasedStatemachine();
-		
-String getBasePackageName(GeneratorEntry entry):
-	if entry.getFeatureConfiguration(getNamingFeature())!=null 
-		&& entry.getFeatureConfiguration(getNamingFeature()).getParameterValue(getBasePackage())!=null then
-		entry.getFeatureConfiguration(getNamingFeature()).getParameterValue(getBasePackage()).getStringValue()
-	else
-		"org.yakindu.sct.runtime.java";
-
-String getBasePackagePath(GeneratorEntry entry):
-	entry.getBasePackageName().replaceAll("\\.","/");
-	
-String getImplementationSuffix(GeneratorEntry entry, ExecutionFlow flow):
-	if entry.getFeatureConfiguration(getNamingFeature())!=null
-		&& entry.getFeatureConfiguration(getNamingFeature()).getParameterValue(getImplementationSuffix()) != null then
-		flow.getStatemachineName()+entry.getFeatureConfiguration(getNamingFeature()).getParameterValue(getImplementationSuffix()).getStringValue()
-	else 
-		flow.getStatemachineName();
-
-String getImplementationPackagePath(ExecutionFlow this, GeneratorEntry entry):
-	entry.getBasePackagePath()+"/"+entry.getImplementationSuffix(this).toLowerCase();
-
-String getImplementationPackagePath(InterfaceScope this, GeneratorEntry entry):
-	((ExecutionFlow)eContainer).getImplementationPackagePath(entry);
-
-String getImplementationPackageName(ExecutionFlow this, GeneratorEntry entry):
-	entry.getBasePackageName()+"."+entry.getImplementationSuffix(this).toLowerCase();
-
-String getImplementationPackageName(InterfaceScope this, GeneratorEntry entry):
-	((ExecutionFlow)eContainer).getImplementationPackageName(entry);
-	
-String getLicenseHeader(GeneratorEntry entry) :
-	if entry.getFeatureConfiguration(getLicenseFeature())!=null
-		&& entry.getFeatureConfiguration(getLicenseFeature()).getParameterValue(getLicenseText()) != null then
-		entry.getFeatureConfiguration(getLicenseFeature()).getParameterValue(getLicenseText()).getStringValue()
-	else 
-		null;
-
-boolean createEventBasedStatemachine(GeneratorEntry entry) :
-	if entry.getFeatureConfiguration(getGeneralFeature())!=null
-		&& entry.getFeatureConfiguration(getGeneralFeature()).getParameterValue(getCreateEventBasedStatemachine()) != null then
-		entry.getFeatureConfiguration(getGeneralFeature()).getParameterValue(getCreateEventBasedStatemachine()).getBooleanValue()
-	else
-		false;
 	
 String getComment(Step this) :
 	if comment!=null then

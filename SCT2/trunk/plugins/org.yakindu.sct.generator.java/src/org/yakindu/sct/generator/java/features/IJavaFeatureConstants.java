@@ -25,9 +25,15 @@ public interface IJavaFeatureConstants {
 
 	public static final String IMPLEMENTATION_SUFFIX = "implementationSuffix";
 	
-	public static final String CREATE_EVENTBASEDSTATEMACHINE = "createEventBasedStatemachine";
-	
 	public static final String GENERAL_FEATURES = "GeneralFeatures";
+	
+	public static final String CREATE_EVENTBASEDSTATEMACHINE = "EventBasedStatemachine";
+	
+	public static final String RUNTIME_SERVICE = "RuntimeService";
+	
+	public static final String TIMER_SERVICE = "TimerService";
+	
+	public static final String INTERFACE_OBSERVER_SUPPORT = "InterfaceObserverSupport";
 	
 	public static final String[] JAVA_KEYWORDS = { "abstract", "assert",
 		"boolean", "break", "byte", "case", "catch", "char", "class",

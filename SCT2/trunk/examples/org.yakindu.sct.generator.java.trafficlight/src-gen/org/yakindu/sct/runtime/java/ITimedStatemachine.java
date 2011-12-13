@@ -17,7 +17,7 @@ public interface ITimedStatemachine
 			IStatemachine,
 			INotificationListener {
 
-	public void setTimerHandler(ITimerHandler timerHandler);
+	public void setTimerService(ITimerService timerService);
 
-	public ITimerHandler getTimerHandler();
+	public ITimerService getTimerService();
 }

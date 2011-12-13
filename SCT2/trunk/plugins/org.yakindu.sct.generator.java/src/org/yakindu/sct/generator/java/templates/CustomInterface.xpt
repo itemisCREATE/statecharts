@@ -7,14 +7,12 @@ http://www.eclipse.org/legal/epl-v10.html
 Contributors:
 	Markus Muehlbrandt - Initial contribution and API
 «ENDREM»
-
-«IMPORT sexec»
 «IMPORT stext»
-«IMPORT sgraph»
 
-«EXTENSION org::yakindu::sct::generator::java::templates::Naming»
-«EXTENSION org::yakindu::sct::generator::java::templates::Expression»
 «EXTENSION org::yakindu::sct::generator::java::templates::ExecutionModelExtensions»
+«EXTENSION org::yakindu::sct::generator::java::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::java::templates::GenmodelEntries»
+«EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
 «DEFINE file(sgen::GeneratorEntry entry) FOR InterfaceScope-»
 «FILE getImplementationPackagePath(entry)+"/"+getInterfaceName() + '.java'-»
@@ -24,7 +22,7 @@ package «getImplementationPackageName(entry)»;
 «IF hasOutgoingVoidEvents()-»
 import «entry.getBasePackageName()».Event;
 «ENDIF-»
-«IF hasOutgoingEvents()-»
+«IF hasOutgoingEvents() && entry.createInterfaceObserverSupport()-»
 import «entry.getBasePackageName()».INotificationSender;
 «ENDIF-»
 «IF hasOutgoingValuedEvents()-»
@@ -32,7 +30,7 @@ import «entry.getBasePackageName()».ValuedEvent;
 «ENDIF-»
 
 
-public interface «getInterfaceName()»«getInterfaceExtension()» {
+public interface «getInterfaceName()»«getInterfaceExtension(entry)» {
 	
 	«IF declarations.typeSelect(EventDefinition).size > 0-»
 	public enum Events {

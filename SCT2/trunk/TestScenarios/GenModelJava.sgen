@@ -5,6 +5,13 @@ GeneratorModel for yakindu::java {
 			targetFolder = "src-gen"
 		}
 		
+		feature GeneralFeatures{
+			EventBasedStatemachine = true
+			InterfaceObserverSupport = true
+			TimerService = true
+			RuntimeService = true
+		}
+		
 		feature licenseHeader {
 			licenseText = "/**
  * Copyright (c) 2011 committers of YAKINDU and others.
@@ -23,59 +30,12 @@ GeneratorModel for yakindu::java {
 			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
-		feature licenseHeader {
-			licenseText = "/**
- * Copyright (c) 2011 committers of YAKINDU and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     committers of YAKINDU - initial API and implementation
- */"
-		}
-	}
-	statechart Test_Expression {
-		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
-			targetFolder = "src-gen"
-		}
-		feature licenseHeader {
-			licenseText = "/**
- * Copyright (c) 2011 committers of YAKINDU and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     committers of YAKINDU - initial API and implementation
- */"
-		}
-	}
-	statechart Test_Hierarchy {
-		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
-			targetFolder = "src-gen"
-		}
-		feature licenseHeader {
-			licenseText = "/**
- * Copyright (c) 2011 committers of YAKINDU and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     committers of YAKINDU - initial API and implementation
- */"
-		}
-	}
-	statechart Test_LocalActions {
-		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
-			targetFolder = "src-gen"
+		
+		feature GeneralFeatures{
+			EventBasedStatemachine = true
+			InterfaceObserverSupport = true
+			TimerService = true
+			RuntimeService = true
 		}
 		
 		feature licenseHeader {
@@ -91,11 +51,101 @@ GeneratorModel for yakindu::java {
  */"
 		}
 	}
+	
+	statechart Test_Expression {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetFolder = "src-gen"
+		}
+		
+		feature GeneralFeatures{
+			EventBasedStatemachine = true
+			InterfaceObserverSupport = true
+			TimerService = true
+			RuntimeService = true
+		}
+		
+		feature licenseHeader {
+			licenseText = "/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     committers of YAKINDU - initial API and implementation
+ */"
+		}
+	}
+	
+	statechart Test_Hierarchy {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetFolder = "src-gen"
+		}
+		
+		feature GeneralFeatures{
+			EventBasedStatemachine = true
+			InterfaceObserverSupport = true
+			TimerService = true
+			RuntimeService = true
+		}
+		
+		feature licenseHeader {
+			licenseText = "/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     committers of YAKINDU - initial API and implementation
+ */"
+		}
+	}
+	
+	statechart Test_LocalActions {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetFolder = "src-gen"
+		}
+		
+		feature GeneralFeatures{
+			EventBasedStatemachine = true
+			InterfaceObserverSupport = true
+			TimerService = true
+			RuntimeService = true
+		}
+		
+		feature licenseHeader {
+			licenseText = "/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     committers of YAKINDU - initial API and implementation
+ */"
+		}
+	}
+	
 	statechart Test_ParallelRegions {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
+		
+		feature GeneralFeatures{
+			EventBasedStatemachine = true
+			InterfaceObserverSupport = true
+			TimerService = true
+			RuntimeService = true
+		}
+		
 		feature licenseHeader {
 			licenseText = "/**
  * Copyright (c) 2011 committers of YAKINDU and others.
@@ -109,11 +159,20 @@ GeneratorModel for yakindu::java {
  */"
 		}
 	}
+	
 	statechart Test_ShallowHistory {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
+		
+		feature GeneralFeatures{
+			EventBasedStatemachine = true
+			InterfaceObserverSupport = true
+			TimerService = true
+			RuntimeService = true
+		}
+		
 		feature licenseHeader {
 			licenseText = "/**
  * Copyright (c) 2011 committers of YAKINDU and others.
@@ -127,11 +186,20 @@ GeneratorModel for yakindu::java {
  */"
 		}
 	}
+	
 	statechart Test_Transition {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
+		
+		feature GeneralFeatures{
+			EventBasedStatemachine = true
+			InterfaceObserverSupport = true
+			TimerService = true
+			RuntimeService = true
+		}	
+		
 		feature licenseHeader {
 			licenseText = "/**
  * Copyright (c) 2011 committers of YAKINDU and others.

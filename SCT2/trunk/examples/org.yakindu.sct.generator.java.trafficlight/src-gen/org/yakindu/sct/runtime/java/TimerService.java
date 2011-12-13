@@ -17,7 +17,7 @@ import java.util.TimerTask;
 
 import org.yakindu.sct.runtime.java.EventNotification;
 
-public class TimerHandler implements ITimerHandler {
+public class TimerService implements ITimerService {
 
 	private final Timer timer = new Timer();
 

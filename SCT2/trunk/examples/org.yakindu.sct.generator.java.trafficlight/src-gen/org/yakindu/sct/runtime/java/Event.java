@@ -12,13 +12,13 @@ package org.yakindu.sct.runtime.java;
 
 public class Event<Type extends Enum<Type>> {
 
-	private Type name;
+	private Type id;
 
-	public Event(Type name) {
-		this.name = name;
+	public Event(Type id) {
+		this.id = id;
 	}
 
-	public Type getName() {
-		return name;
+	public Type getId() {
+		return id;
 	}
 }

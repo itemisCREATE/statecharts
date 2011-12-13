@@ -20,13 +20,8 @@ public class TrafficLightWaitingEventBasedStatemachine
 
 	private LinkedList<Event<? extends Enum<?>>> eventQueue;
 
-	private Thread runtimeThread;
-
-	private long cyclePeriod;
-
-	public TrafficLightWaitingEventBasedStatemachine(long cyclePeriod) {
+	public TrafficLightWaitingEventBasedStatemachine() {
 		eventQueue = new LinkedList<Event<? extends Enum<?>>>();
-		this.cyclePeriod = cyclePeriod;
 	}
 
 	@Override
@@ -39,34 +34,12 @@ public class TrafficLightWaitingEventBasedStatemachine
 		return !eventQueue.isEmpty();
 	}
 
-	public void start() {
-		runtimeThread = new Thread() {
-			@Override
-			public void run() {
-				long startTime;
-				while (!isInterrupted()) {
-					startTime = System.currentTimeMillis();
-					if (eventOccured()) {
-						Event<? extends Enum<?>> event = getOccuredEvents()
-								.poll();
-						TrafficLightWaitingEventBasedStatemachine.super
-								.getOccuredEvents().add(event);
-						runCycle();
-					}
-					try {
-						Thread.sleep(cyclePeriod - System.currentTimeMillis()
-								+ startTime);
-					} catch (InterruptedException e) {
-						interrupt();
-					}
-				}
-			}
-		};
-		runtimeThread.start();
-	}
-
-	public boolean stop() {
-		runtimeThread.interrupt();
-		return runtimeThread.isAlive();
+	@Override
+	public void runCycle() {
+		if (eventOccured()) {
+			Event<? extends Enum<?>> event = getOccuredEvents().poll();
+			super.getOccuredEvents().add(event);
+			super.runCycle();
+		}
 	}
 }

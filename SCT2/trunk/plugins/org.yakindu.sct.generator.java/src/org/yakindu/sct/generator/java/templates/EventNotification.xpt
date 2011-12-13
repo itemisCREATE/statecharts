@@ -8,10 +8,8 @@ Contributors:
 	Markus Muehlbrandt - Initial contribution and API
 «ENDREM»
 «IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
 
-«EXTENSION org::yakindu::sct::generator::java::templates::Naming»
+«EXTENSION org::yakindu::sct::generator::java::templates::GenmodelEntries»
 
 «DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
 «IF name != null-»

@@ -12,6 +12,8 @@ package org.yakindu.sct.examples.java.trafficlight;
 
 /**
  * Example to show how to integrate the generated statemachine code into existing projects.
+ * It uses the event based statemachine approach and the generated RuntimeService to execute it.
+ * To refresh the view the generated observer support of the statemachine's interfaces is used.
  * 
  * @author a.nyssen - initial API and implementation
  * @author m.muehlbrandt - adaptions to new statemachine code.
@@ -30,7 +32,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
-import org.yakindu.sct.runtime.java.TimerHandler;
+import org.yakindu.sct.runtime.java.RuntimeService;
+import org.yakindu.sct.runtime.java.TimerService;
 import org.yakindu.sct.runtime.java.trafficlightwaiting.TrafficLightWaitingCycleBasedStatemachine;
 import org.yakindu.sct.runtime.java.trafficlightwaiting.TrafficLightWaitingEventBasedStatemachine;
 
@@ -38,7 +41,7 @@ public class CrossingDemoEventBased {
 
 	public static void main(String[] args) {
 
-		final TrafficLightWaitingEventBasedStatemachine statemachine = new TrafficLightWaitingEventBasedStatemachine(100);
+		final TrafficLightWaitingEventBasedStatemachine statemachine = new TrafficLightWaitingEventBasedStatemachine();
 
 		// create display and shell
 		Display display = Display.getDefault();
@@ -63,10 +66,11 @@ public class CrossingDemoEventBased {
 		crossing.add(pl);
 		crossing.getLayoutManager().setConstraint(pl,
 				new Rectangle(50, 10, 70, 20));
-		
-		statemachine.setTimerHandler(new TimerHandler());
+
+		statemachine.setTimerService(new TimerService());
 		statemachine.enter();
-		statemachine.start();
+		RuntimeService runtimeService = new RuntimeService(100);
+		runtimeService.addStatemachine(statemachine);
 
 		shell.open();
 		while (!shell.isDisposed()) {
@@ -85,9 +89,8 @@ public class CrossingDemoEventBased {
 				display.sleep();
 			}
 		}
-		
-		statemachine.stop();
-		statemachine.getTimerHandler().cancel();
+		runtimeService.cancel();
+		statemachine.getTimerService().cancel();
 	}
 
 	private static LightweightSystem createLightweightsystem(Shell shell) {
@@ -126,7 +129,6 @@ public class CrossingDemoEventBased {
 				public void handleEvent(
 						final org.eclipse.swt.widgets.Event event) {
 
-					// Shorter call for code commented out below
 					try {
 						Class<?> interfaceClass = statemachine
 								.getDefaultInterface().getClass();

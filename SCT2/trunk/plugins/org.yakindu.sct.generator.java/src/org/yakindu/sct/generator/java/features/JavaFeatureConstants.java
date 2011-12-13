@@ -46,8 +46,20 @@ public final class JavaFeatureConstants implements IJavaFeatureConstants {
 		return GENERAL_FEATURES;
 	}
 	
-	public static final String getCreateEventBasedStatemachine() {
+	public static final String getEventBasedStatemachine() {
 		return CREATE_EVENTBASEDSTATEMACHINE;
+	}
+	
+	public static final String getRuntimeService() {
+		return RUNTIME_SERVICE;
+	}
+	
+	public static final String getTimerService() {
+		return TIMER_SERVICE;
+	}
+	
+	public static final String getInterfaceObserverSupport() {
+		return INTERFACE_OBSERVER_SUPPORT;
 	}
 	
 	public static final String getValidStatemachineName(String name) {
