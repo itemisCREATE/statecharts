@@ -21,22 +21,14 @@ import org.yakindu.sct.runtime.java.ITimedStatemachine;
 import org.yakindu.sct.runtime.java.ITimerService;
 import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.Notification;
-import org.yakindu.sct.runtime.java.ValuedEvent;
 
 public class Test_TransitionCycleBasedStatemachine
 		implements
 			ITimedStatemachine {
 
-	private enum Events {
-		Event10,
-	}
-
 	private enum TimeEvents {
 		State1_time_event_0, State1_time_event_1,
 	}
-
-	private final ValuedEvent<Events, Integer> EventEvent10 = new ValuedEvent<Events, Integer>(
-			Events.Event10, 0);
 
 	private static final TimeEvent<TimeEvents> State1_time_event_0 = new TimeEvent<TimeEvents>(
 			TimeEvents.State1_time_event_0, false);
@@ -115,19 +107,6 @@ public class Test_TransitionCycleBasedStatemachine
 
 	public DefaultInterface getDefaultInterface() {
 		return defaultInterface;
-	}
-
-	private void raiseEvent10() {
-		getOccuredEvents().add(EventEvent10);
-	}
-
-	private void raiseEvent10(int value) {
-		EventEvent10.setValue(value);
-		getOccuredEvents().add(EventEvent10);
-	}
-
-	private ValuedEvent<Events, Integer> getEventEvent10() {
-		return EventEvent10;
 	}
 
 	public void enter() {

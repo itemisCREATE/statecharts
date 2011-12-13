@@ -37,7 +37,7 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 		occuredEvents = new ArrayList<Event<? extends Enum<?>>>();
 		outEvents = new HashSet<Event<? extends Enum<?>>>();
 		defaultInterface = new DefaultInterfaceImpl(this);
-		interfaceOther = new InterfaceOtherImpl(this);
+		interfaceOther = new InterfaceOtherImpl();
 
 	}
 
