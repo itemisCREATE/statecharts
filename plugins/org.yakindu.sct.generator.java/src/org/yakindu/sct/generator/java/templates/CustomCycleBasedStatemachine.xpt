@@ -242,7 +242,7 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 		occuredEvents = new ArrayList<Event<? extends Enum<?>>>();
 		outEvents = new HashSet<Event<? extends Enum<?>>>();
 		«FOREACH getInterfaceScope() AS interface-»
-		«interface.getInterfaceName().toFirstLower()» = new «interface.getInterfaceImplName()»(this);
+		«interface.getInterfaceName().toFirstLower()» = new «interface.getInterfaceImplName()»(«interface.getInterfaceParameter()»);
 		«ENDFOREACH-»
 		«FOREACH getTimeEvents() AS timeEvent-»
 			«timeEvent.getName()».setStatemachine(this);
@@ -299,20 +299,20 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	«ENDFOREACH-»
 	«REM»create getters and setters for events«ENDREM»
 	«FOREACH getInternalScopeEvents() AS event-»
-	private void raise«event.name.toFirstUpper()»() {
-		getOccuredEvents().add(«event.getName()»);
-	}
 	
-	«IF event.type != Type::void-»
-	private void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value) {
-		«event.getName()».setValue(value);
-		getOccuredEvents().add(«event.getName()»);
-	}
-	
-	«ENDIF-»
-	private «event.getEventType()» get«event.getName()»() {
-		return «event.getName()»;
-	}
+		«IF event.type != Type::void-»
+			private void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value) {
+				«event.getName()».setValue(value);
+				getOccuredEvents().add(«event.getName()»);
+			}
+		«ELSE-»
+			private void raise«event.name.toFirstUpper()»() {
+				getOccuredEvents().add(«event.getName()»);
+			}
+		«ENDIF-»
+		private «event.getEventType()» get«event.getName()»() {
+			return «event.getName()»;
+		}
 	
 	«ENDFOREACH-»
 	«REM»Create getters and setters for variables«ENDREM»
@@ -328,18 +328,18 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	«ENDFOREACH-»
 	«REM»Create enterSequences for statemachine«ENDREM»
 	«IF enterSequence.steps.size > 0 -»
-	public void «enterSequenceName()»() {
-		«IF isTimedStatemachine()-»
-		cycleStartTime = System.currentTimeMillis();
-		«ENDIF-»
-		«EXPAND ActionCode FOREACH enterSequence.steps-»
-	}
+		public void «enterSequenceName()»() {
+			«IF isTimedStatemachine()-»
+				cycleStartTime = System.currentTimeMillis();
+			«ENDIF-»
+			«EXPAND ActionCode FOREACH enterSequence.steps-»
+		}
 	«ENDIF-»
 	
 	«IF exitSequence.steps.size > 0-»
-	public void «exitSequenceName()»(){
-		«EXPAND ActionCode FOREACH exitSequence.steps-»
-	}
+		public void «exitSequenceName()»(){
+			«EXPAND ActionCode FOREACH exitSequence.steps-»
+		}
 	«ENDIF»
 	
 «EXPAND ConditionMethodsImplement FOREACH this.states-»

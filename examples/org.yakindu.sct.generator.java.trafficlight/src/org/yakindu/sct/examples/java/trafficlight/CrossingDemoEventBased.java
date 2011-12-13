@@ -13,7 +13,6 @@ package org.yakindu.sct.examples.java.trafficlight;
 /**
  * Example to show how to integrate the generated statemachine code into existing projects.
  * It uses the event based statemachine approach and the generated RuntimeService to execute it.
- * To refresh the view the generated observer support of the statemachine's interfaces is used.
  * 
  * @author a.nyssen - initial API and implementation
  * @author m.muehlbrandt - adaptions to new statemachine code.

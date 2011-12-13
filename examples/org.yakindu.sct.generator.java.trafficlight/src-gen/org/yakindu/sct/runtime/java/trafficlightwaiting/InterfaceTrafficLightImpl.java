@@ -12,13 +12,6 @@ package org.yakindu.sct.runtime.java.trafficlightwaiting;
 
 public class InterfaceTrafficLightImpl implements InterfaceTrafficLight {
 
-	private TrafficLightWaitingCycleBasedStatemachine statemachine;
-
-	public InterfaceTrafficLightImpl(
-			TrafficLightWaitingCycleBasedStatemachine statemachine) {
-		this.statemachine = statemachine;
-	}
-
 	private boolean varRed;
 
 	public boolean getVarRed() {

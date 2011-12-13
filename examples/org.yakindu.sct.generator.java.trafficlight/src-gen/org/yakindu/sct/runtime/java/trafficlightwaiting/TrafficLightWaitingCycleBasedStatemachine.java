@@ -72,8 +72,8 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	public TrafficLightWaitingCycleBasedStatemachine() {
 		occuredEvents = new ArrayList<Event<? extends Enum<?>>>();
 		outEvents = new HashSet<Event<? extends Enum<?>>>();
-		interfaceTrafficLight = new InterfaceTrafficLightImpl(this);
-		interfacePedestrian = new InterfacePedestrianImpl(this);
+		interfaceTrafficLight = new InterfaceTrafficLightImpl();
+		interfacePedestrian = new InterfacePedestrianImpl();
 		defaultInterface = new DefaultInterfaceImpl(this);
 		PedWaiting_time_event_0.setStatemachine(this);
 		WaitOn_time_event_0.setStatemachine(this);
