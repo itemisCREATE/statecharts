@@ -7,13 +7,12 @@ http://www.eclipse.org/legal/epl-v10.html
 Contributors:
 	Markus Muehlbrandt - Initial contribution and API
 «ENDREM»
-«IMPORT sexec»
 «IMPORT stext»
-«IMPORT sgraph»
 
 «EXTENSION org::yakindu::sct::generator::java::templates::ExecutionModelExtensions»
-«EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 «EXTENSION org::yakindu::sct::generator::java::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::java::templates::GenmodelEntries»
+«EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
 «DEFINE file(sgen::GeneratorEntry entry) FOR InterfaceScope»
 «FILE getImplementationPackagePath(entry)+"/"+getInterfaceImplName() + '.java'-»
@@ -23,7 +22,7 @@ package «getImplementationPackageName(entry)»;
 «IF hasEvents()-»
 import «entry.getBasePackageName()».Event;
 «ENDIF-»
-«IF hasOutgoingEvents()-»
+«IF hasOutgoingEvents() && entry.createInterfaceObserverSupport()-»
 import «entry.getBasePackageName()».EventNotification;
 import «entry.getBasePackageName()».NotificationSender;
 «ENDIF-»
@@ -31,7 +30,7 @@ import «entry.getBasePackageName()».NotificationSender;
 import «entry.getBasePackageName()».ValuedEvent;
 «ENDIF-»
 
-public class «getInterfaceImplName()»«getInterfaceImplExtension()» implements «getInterfaceName()» {
+public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implements «getInterfaceName()» {
 	
 	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
 	private final «event.getEventType()» «event.getName()» = new «event.getEventType()»(«event.getCreationSignature()»); 
@@ -51,7 +50,9 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension()» implements «g
 		statemachine.getOccuredEvents().add(«event.getName()»);
 		«IF event.direction ==  Direction::OUT-»
 		statemachine.getOutEvents().add(«event.getName()»);
-		notifyListeners(new EventNotification(«event.getName()»));
+		«IF entry.createInterfaceObserverSupport()-»
+			notifyListeners(new EventNotification(«event.getName()»));
+		«ENDIF-»
 		«ENDIF-»
 	}
 	«ELSE»
@@ -59,7 +60,9 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension()» implements «g
 		statemachine.getOccuredEvents().add(«event.getName()»);
 		«IF event.direction ==  Direction::OUT-»
 		statemachine.getOutEvents().add(«event.getName()»);
-		notifyListeners(new EventNotification(«event.getName()»));
+		«IF entry.createInterfaceObserverSupport()-»
+			notifyListeners(new EventNotification(«event.getName()»));
+		«ENDIF-»
 		«ENDIF-»
 	}
 	«ENDIF-»

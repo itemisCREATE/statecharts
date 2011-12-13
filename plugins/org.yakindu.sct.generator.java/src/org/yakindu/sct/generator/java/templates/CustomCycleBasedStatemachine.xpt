@@ -10,12 +10,10 @@ Contributors:
 
 «IMPORT sexec»
 «IMPORT stext»
-«IMPORT sgraph»
-«IMPORT ecore»
-«IMPORT org::yakindu::sct::generator::java::templates»
 
 «EXTENSION org::yakindu::sct::generator::java::templates::ExecutionModelExtensions»
 «EXTENSION org::yakindu::sct::generator::java::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::java::templates::GenmodelEntries»
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
 «DEFINE ActionCode FOR Step-»

@@ -1,21 +1,14 @@
-«REM»
-Copyright (c) 2011 committers of YAKINDU and others.
-All rights reserved. This program and the accompanying materials
-are made available under the terms of the Eclipse Public License v1.0
-which accompanies this distribution, and is available at
-http://www.eclipse.org/legal/epl-v10.html
-Contributors:
-	Markus Muehlbrandt - Initial contribution and API
-«ENDREM»
-
-«IMPORT sexec»
-
-«EXTENSION org::yakindu::sct::generator::java::templates::GenmodelEntries»
-
-«DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
-«FILE entry.getBasePackagePath()+'/RuntimeService.java'-»
-«getLicenseHeader(entry)»
-package «entry.getBasePackageName()»;
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     committers of YAKINDU - initial API and implementation
+ */
+package org.yakindu.sct.runtime.java;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -65,5 +58,3 @@ public class RuntimeService {
 		timer.cancel();
 	}
 }
-«ENDFILE-»
-«ENDDEFINE»

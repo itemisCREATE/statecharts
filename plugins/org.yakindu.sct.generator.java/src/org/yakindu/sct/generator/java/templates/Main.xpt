@@ -10,11 +10,9 @@ Contributors:
 
 «IMPORT sexec»
 «IMPORT stext»
-«IMPORT sgraph»
 «IMPORT sgen»
 
-«IMPORT org::yakindu::sct::generator::java::templates»
-«EXTENSION org::yakindu::sct::generator::java::templates::Naming»
+«EXTENSION org::yakindu::sct::generator::java::templates::GenmodelEntries»
 
 «DEFINE main(sgen::GeneratorEntry entry) FOR ExecutionFlow»
 	
@@ -25,9 +23,13 @@ Contributors:
 	
 	«EXPAND ITimerService::file(entry) FOR this»
 	
-	«EXPAND TimerService::file(entry) FOR this»
+	«IF entry.createTimerService()»
+		«EXPAND TimerService::file(entry) FOR this»
+	«ENDIF»
 	
-	«EXPAND RuntimeService::file(entry) FOR this»
+	«IF entry.createRuntimeService()»
+		«EXPAND RuntimeService::file(entry) FOR this»
+	«ENDIF»
 	
 	«EXPAND Event::file(entry) FOR this»
 	

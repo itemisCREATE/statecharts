@@ -5,13 +5,11 @@
   which accompanies this distribution, and is available at
   http://www.eclipse.org/legal/epl-v10.html
   Contributors:
-  	committers of YAKINDU - initial API and implementation  
   	Joern Seger - Initial contribution and API
   	Markus Muehlbrandt - Java adaptions
  */
 import stext;
 import sexec;
-import ecore;
 import sgraph;
 
 extension org::yakindu::sct::generator::java::templates::Naming;

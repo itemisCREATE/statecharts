@@ -20,7 +20,10 @@
 		}
 		
 		feature GeneralFeatures {
-			createEventBasedStatemachine = true
+			EventBasedStatemachine = true
+			InterfaceObserverSupport = false
+			TimerService = true
+			RuntimeService = true
 		}
 
 		//create a dump file of execution model (sexec)

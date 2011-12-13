@@ -30,7 +30,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
-import org.yakindu.sct.runtime.java.TimerHandler;
+import org.yakindu.sct.runtime.java.TimerService;
 import org.yakindu.sct.runtime.java.trafficlightwaiting.TrafficLightWaitingCycleBasedStatemachine;
 
 public class CrossingDemoCycleBased {
@@ -63,7 +63,7 @@ public class CrossingDemoCycleBased {
 		crossing.getLayoutManager().setConstraint(pl,
 				new Rectangle(50, 10, 70, 20));
 		
-		statemachine.setTimerHandler(new TimerHandler());
+		statemachine.setTimerService(new TimerService());
 
 		Thread thread = new Thread() {
 			@Override
@@ -73,23 +73,18 @@ public class CrossingDemoCycleBased {
 				// Generator is used in this case. You can add your own
 				// implementation of a TimerHandler. It has to implement the
 				// ITimerHandler interface.
-				statemachine.setTimerHandler(new TimerHandler());
+				statemachine.setTimerService(new TimerService());
 				statemachine.enter();
 				while (!isInterrupted()) {
 					statemachine.runCycle();
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e) {
-						// if Thread is interrupted from outside while sleeping
-						// the interrupt flag resets. Thread.sleep() reacts on
-						// interrupt() calls too. Therefore interrupt has to be
-						// called again to set the flag again and end the top
-						// while loop.
 						interrupt();
 					}
 				}
 				// End TimerHandler and timing thread.
-				statemachine.getTimerHandler().cancel();
+				statemachine.getTimerService().cancel();
 			}
 		};
 		thread.start();
@@ -149,7 +144,6 @@ public class CrossingDemoCycleBased {
 				public void handleEvent(
 						final org.eclipse.swt.widgets.Event event) {
 
-					// Shorter call for code commented out below
 					try {
 						Class<?> interfaceClass = statemachine
 								.getDefaultInterface().getClass();
