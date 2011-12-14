@@ -9,7 +9,7 @@ GeneratorModel for yakindu::c {
 		}
 		feature CCodeFeature {
 			InterfaceEventListener = true
-			Singleton = true
+			Singleton = false
 		}
 		feature licenseHeader {
 			licenseText = "
@@ -31,7 +31,7 @@ GeneratorModel for yakindu::c {
 		}
 		feature CCodeFeature {
 			InterfaceEventListener = true
-			Singleton = true
+			Singleton = false
 		}
 		feature licenseHeader {
 			licenseText = "
@@ -54,7 +54,7 @@ GeneratorModel for yakindu::c {
 		}
 		feature CCodeFeature {
 			InterfaceEventListener = true
-			Singleton = true
+			Singleton = false
 		}
 		feature licenseHeader {
 			licenseText = "
@@ -77,7 +77,7 @@ GeneratorModel for yakindu::c {
 		}
 		feature CCodeFeature {
 			InterfaceEventListener = true
-			Singleton = true
+			Singleton = false
 		}
 		feature licenseHeader {
 			licenseText = "
@@ -102,7 +102,7 @@ GeneratorModel for yakindu::c {
 		}
 		feature CCodeFeature {
 			InterfaceEventListener = true
-			Singleton = true
+			Singleton = false
 		}
 		feature licenseHeader {
 			licenseText = "
@@ -124,7 +124,7 @@ GeneratorModel for yakindu::c {
 		}
 		feature CCodeFeature {
 			InterfaceEventListener = true
-			Singleton = true
+			Singleton = false
 		}
 		feature licenseHeader {
 			licenseText = "
@@ -146,7 +146,7 @@ GeneratorModel for yakindu::c {
 		}
 		feature CCodeFeature {
 			InterfaceEventListener = true
-			Singleton = true
+			Singleton = false
 		}
 		feature licenseHeader {
 			licenseText = "
@@ -165,6 +165,191 @@ GeneratorModel for yakindu::c {
 		feature Outlet {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-c/Test_Transition"
+		}
+		feature CCodeFeature {
+			InterfaceEventListener = true
+			Singleton = false
+		}
+		feature licenseHeader {
+			licenseText = "
+ # Copyright (c) 2011 committers of YAKINDU and others.
+ # All rights reserved. This program and the accompanying materials
+ # are made available under the terms of the Eclipse Public License v1.0
+ # which accompanies this distribution, and is available at
+ # http://www.eclipse.org/legal/epl-v10.html
+ #
+ # Contributors:
+ #     committers of YAKINDU - initial API and implementation
+ "
+		}
+	}
+
+
+
+
+
+
+
+	statechart InterfaceTest {
+		feature	Outlet {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-c-sgltn/InterfaceTest"
+		}
+		feature CCodeFeature {
+			InterfaceEventListener = true
+			Singleton = true
+		}
+		feature licenseHeader {
+			licenseText = "
+ # Copyright (c) 2011 committers of YAKINDU and others.
+ # All rights reserved. This program and the accompanying materials
+ # are made available under the terms of the Eclipse Public License v1.0
+ # which accompanies this distribution, and is available at
+ # http://www.eclipse.org/legal/epl-v10.html
+ #
+ # Contributors:
+ #     committers of YAKINDU - initial API and implementation
+ "
+		}
+	}
+	statechart Test_DeepHistory {
+		feature Outlet {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-c-sgltn/Test_DeepHistory"
+		}
+		feature CCodeFeature {
+			InterfaceEventListener = true
+			Singleton = true
+		}
+		feature licenseHeader {
+			licenseText = "
+ # Copyright (c) 2011 committers of YAKINDU and others.
+ # All rights reserved. This program and the accompanying materials
+ # are made available under the terms of the Eclipse Public License v1.0
+ # which accompanies this distribution, and is available at
+ # http://www.eclipse.org/legal/epl-v10.html
+ #
+ # Contributors:
+ #     committers of YAKINDU - initial API and implementation
+ "
+		}
+		
+	}
+	statechart Test_Expression {
+		feature Outlet {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-c-sgltn/Test_Expression"
+		}
+		feature CCodeFeature {
+			InterfaceEventListener = true
+			Singleton = true
+		}
+		feature licenseHeader {
+			licenseText = "
+ # Copyright (c) 2011 committers of YAKINDU and others.
+ # All rights reserved. This program and the accompanying materials
+ # are made available under the terms of the Eclipse Public License v1.0
+ # which accompanies this distribution, and is available at
+ # http://www.eclipse.org/legal/epl-v10.html
+ #
+ # Contributors:
+ #     committers of YAKINDU - initial API and implementation
+ "
+		}
+
+	}
+	statechart Test_Hierarchy {
+		feature Outlet {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-c-sgltn/Test_Hierarchy"
+		}
+		feature CCodeFeature {
+			InterfaceEventListener = true
+			Singleton = true
+		}
+		feature licenseHeader {
+			licenseText = "
+ # Copyright (c) 2011 committers of YAKINDU and others.
+ # All rights reserved. This program and the accompanying materials
+ # are made available under the terms of the Eclipse Public License v1.0
+ # which accompanies this distribution, and is available at
+ # http://www.eclipse.org/legal/epl-v10.html
+ #
+ # Contributors:
+ #     committers of YAKINDU - initial API and implementation
+ "
+		}
+	}
+	statechart Test_LocalActions {
+		feature Outlet {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-c-sgltn/Test_LocalActions"
+		}
+		feature CCodeFeature {
+			InterfaceEventListener = true
+			Singleton = true
+		}
+		feature licenseHeader {
+			licenseText = "
+ # Copyright (c) 2011 committers of YAKINDU and others.
+ # All rights reserved. This program and the accompanying materials
+ # are made available under the terms of the Eclipse Public License v1.0
+ # which accompanies this distribution, and is available at
+ # http://www.eclipse.org/legal/epl-v10.html
+ #
+ # Contributors:
+ #     committers of YAKINDU - initial API and implementation
+ "
+		}
+	}
+	statechart Test_ParallelRegions {
+		feature Outlet {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-c-sgltn/Test_ParallelRegions"
+		}
+		feature CCodeFeature {
+			InterfaceEventListener = true
+			Singleton = true
+		}
+		feature licenseHeader {
+			licenseText = "
+ # Copyright (c) 2011 committers of YAKINDU and others.
+ # All rights reserved. This program and the accompanying materials
+ # are made available under the terms of the Eclipse Public License v1.0
+ # which accompanies this distribution, and is available at
+ # http://www.eclipse.org/legal/epl-v10.html
+ #
+ # Contributors:
+ #     committers of YAKINDU - initial API and implementation
+ "
+		}
+	}
+	statechart Test_ShallowHistory {
+		feature Outlet {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-c-sgltn/Test_ShallowHistory"
+		}
+		feature CCodeFeature {
+			InterfaceEventListener = true
+			Singleton = true
+		}
+		feature licenseHeader {
+			licenseText = "
+ # Copyright (c) 2011 committers of YAKINDU and others.
+ # All rights reserved. This program and the accompanying materials
+ # are made available under the terms of the Eclipse Public License v1.0
+ # which accompanies this distribution, and is available at
+ # http://www.eclipse.org/legal/epl-v10.html
+ #
+ # Contributors:
+ #     committers of YAKINDU - initial API and implementation
+ "
+		}
+	}
+	statechart Test_Transition {
+		feature Outlet {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-c-sgltn/Test_Transition"
 		}
 		feature CCodeFeature {
 			InterfaceEventListener = true
