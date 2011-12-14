@@ -56,10 +56,12 @@ String toCCode(Assignment assignment) :
 /* EventRaising */
 String toCCode(EventRaising eventRaising) :
 	((eventRaising.value == null)?"":
-	"((" + eventRaising.event.getEventName() + "*) handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.getEventName() + ")->value = " 
+	"((" + eventRaising.event.getEventName() + "*)" + eventRaising.statemachineHandleName() + "->" + eventRaising.getInterfaceName() + "." + eventRaising.event.getEventName() + ")->value = " 
 	+ eventRaising.value.toCCode() + ";") + 
-	" statemachine_cy_setEvent(&handle->base, handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.getEventName() + "); ";
-//  "{ _Event* ev = eventPool_createEvent(handle->base.eventPool, ev_"+eventRaising.event.name+"); if (ev) { " + eventRaising.addValue() + "statemachine_cy_setEvent(&handle->base, ev); } }";
+	" statemachine_cy_setEvent(&" + eventRaising.statemachineHandleName() + 
+	"->base, " + eventRaising.statemachineHandleName() + "->" + 
+	eventRaising.getInterfaceName() + "." + 
+	eventRaising.event.getEventName() + "); ";
 
 String getScopeName(emf::EObject o) :
   "unknownScopeName";
@@ -72,7 +74,6 @@ String getScopeName(InternalScope inls) :
 
 String getInterfaceName(EventRaising event) :
 	"interface" + (( event.event.eContainer.getScopeName() == null)?"":event.event.eContainer.getScopeName().toFirstUpper());
-//	"interface" + (( ((InterfaceScope)event.event.eContainer).name == null)?"":((InterfaceScope)event.event.eContainer).name.toFirstUpper());
 
 String addValue(EventRaising event) :
   ( (event.value == null)?"":("((" +event.event.getEventName() + "*)ev)->value = " + event.value.toCCode() + "; ") );
@@ -185,19 +186,20 @@ String toCCode(Declaration dec) :
 	"Declartion type not specified";
 
 String toCCode(TimeEvent time_ev) :
-    " ( eventSet_check( &handle->base.eventSet, " + time_ev.getEventEnumName() + ") ) ";
+    " ( eventSet_check( &"+time_ev.statemachineHandleName()+"->base.eventSet, " + time_ev.getEventEnumName() + ") ) ";
 
 String toCCode(VariableDefinition var) :
-    " handle->"+ var.getInterface() + "." + var.name.toLowerCase() + " ";
+    " " + var.statemachineHandleName() + "->" + var.getInterface() + 
+    "." + var.name.toLowerCase() + " ";
 	
 String toCCode(EventDefinition evDef) :
-    " ( eventSet_check( &handle->base.eventSet, " + evDef.getEventEnumName() + ") ) ";
+    " ( eventSet_check( &" + evDef.statemachineHandleName() + "->base.eventSet, " + evDef.getEventEnumName() + ") ) ";
 
 String toCCode(EventRaisedReferenceExpression errExp) :
-	" eventSet_check( &handle->base.eventSet, " + errExp.value.getEventEnumName() + ")";
+	" eventSet_check( &" + errExp.statemachineHandleName() + "->base.eventSet, " + errExp.value.getEventEnumName() + ")";
 
 String toCCode(EventValueReferenceExpression evrExp) :
-	"((" +evrExp.value.name + "*)handle->base.eventList[" + evrExp.value.getEventEnumName() + "])->value";
+	"((" +evrExp.value.name + "*)" + evrExp.statemachineHandleName() + "->base.eventList[" + evrExp.value.getEventEnumName() + "])->value";
 
 List[Scope] getUsableScopes(List[Scope] scList) :
 	scList.select(e| InterfaceScope.isInstance(e) || InternalScope.isInstance(e));

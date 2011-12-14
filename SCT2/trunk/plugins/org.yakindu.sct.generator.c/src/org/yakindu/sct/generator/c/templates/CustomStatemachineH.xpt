@@ -11,6 +11,7 @@ Templates for the main statechart cpp file.
 «IMPORT sgraph»
 
 «EXTENSION org::yakindu::sct::generator::c::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::c::templates::Constants»
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
 «DEFINE file(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
@@ -51,26 +52,30 @@ typedef struct {
 	
 } «StName()»;
 
-«REM» «IF genEntry.features[genEntry.getFeatureConfiguration("")]»
- «ENDREM» 
 /* Explicit Constructor & Destructor */
-extern void «stName()»_init(«StName()»* handle, Timer* timer, EventPool* eventPool);
-extern void «stName()»_enter(«StName()»* handle);
-extern void «stName()»_exit(«StName()»* handle);
-extern void «stName()»_destruct(«StName()»* handle);
-extern void «stName()»_runCycle(«StName()»* handle);
-extern boolean «stName()»_eventWaiting(«StName()»* handle);
+extern void «stName()»_init(«this.handleAdditionComma(genEntry)» Timer* timer, EventPool* eventPool);
+extern void «stName()»_enter(«this.handleAddition(genEntry)»);
+extern void «stName()»_exit(«this.handleAddition(genEntry)»);
+extern void «stName()»_destruct(«this.handleAddition(genEntry)»);
+extern void «stName()»_runCycle(«this.handleAddition(genEntry)»);
+extern boolean «stName()»_eventWaiting(«this.handleAddition(genEntry)»);
 
-«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface»
-extern «interface.interfaceClassName()»* «stName()»_get_«interface.interfaceObjectName()»(«StName()»* handle);
-«ENDFOREACH»
+«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
+extern «interface.interfaceClassName()»* «stName()»_get_«interface.interfaceObjectName()»(«this.handleAddition(genEntry)»);
+«ENDFOREACH -»
+
+«IF isSingleton(genEntry) == true»
+«StName()»* «scName()»_get_handle();
+«ENDIF»
+
 
 #define «scName()»_eventPool_init_heap(handle, maxElemPerEvent) eventPool_init_heap(handle, event_last, maxElemPerEvent, &«scName()»_getSizeofEvent )
 
 /* only friends can see these functions */
 #ifdef «STNAME()»_FRIENDS
 
-extern void «stName()»_setEvent(«StName()»* handle, _Event* ev);
+extern void «stName()»_setEvent(«this.handleAdditionComma(genEntry)»_Event* ev);
+
 
 /* virtual function form state machine must be implemented here */
 extern void statemachine_cy__runCycle(Statemachine_cy* handle);

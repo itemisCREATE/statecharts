@@ -10,6 +10,7 @@ Templates for the main statechart c file.
 «IMPORT stext»
 «IMPORT sgraph»
 «IMPORT ecore»
+«IMPORT genmodel»
 
 «IMPORT org::yakindu::sct::generator::c::templates»
 
@@ -18,14 +19,14 @@ Templates for the main statechart c file.
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
  
 «DEFINE ActionCode FOR Step»
-/* ActionCode for Step not defined */
+#warning ActionCode for Step not defined 
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR StateSwitch»
 «IF this.comment != null»
 /* «this.comment» */
 «ENDIF»
-	switch(((StatemachineBase*)handle)->state[0/* TODO: must be set correctly */]) {
+	switch(((StatemachineBase*)«statemachineHandleName()»)->state[0/* TODO: must be set correctly */]) {
 «FOREACH this.cases AS caseid»
   case _«caseid.state.simpleName» : {
   «EXPAND ActionCode FOR caseid.step»
@@ -41,13 +42,13 @@ Templates for the main statechart c file.
 «IF this.comment != null»
 /* «this.comment» */
 «ENDIF»
-	(*((StatemachineBase*)handle)->timer->setTimer)(«this.timeEvent.getEventEnumName()», «this.timeValue.toCCode()», «IF this.timeEvent.periodic == true -» «getBoolTrue()» «ELSE -» «getBoolFalse()» «ENDIF -»);
+	(*((StatemachineBase*)«statemachineHandleName()»)->timer->setTimer)(«this.timeEvent.getEventEnumName()», «this.timeValue.toCCode()», «IF this.timeEvent.periodic == true -» «getBoolTrue()» «ELSE -» «getBoolFalse()» «ENDIF -»);
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR UnscheduleTimeEvent»
 «IF this.comment != null»
 /* «this.comment» */
-	(*((StatemachineBase*)handle->timer->unsetTimer)(«this.timeEvent.getEventEnumName()»);
+	(*((StatemachineBase*)«statemachineHandleName()»)->timer->unsetTimer)(«this.timeEvent.getEventEnumName()»);
 «ENDIF»
 
 «ENDDEFINE»
@@ -57,7 +58,8 @@ Templates for the main statechart c file.
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Call»
-«this.step.functionName()»(handle);
+«REM»«this.step.functionName()»(handle);«ENDREM»
+#error Action Code for Call missing!!
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Sequence»
@@ -73,8 +75,11 @@ Templates for the main statechart c file.
   ENDDEFINE»
 
 «DEFINE ActionCode FOR CheckRef -»
-  «IF this.check != null -»
+  «IF this.check != null -» 
+ #error Action Code for CheckRef missing
+  «REM»
   «this.check.functionName()»(handle) «
+  «ENDREM»
   ELSE -»
  «getBoolTrue()» «
   ENDIF -»«
@@ -96,24 +101,24 @@ else {
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR EnterState»
-((StatemachineBase*)handle)->state[0] = _«this.state.simpleName»;
+((StatemachineBase*)«statemachineHandleName()»)->state[0] = _«this.state.simpleName»;
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR ExitState»
-((StatemachineBase*)handle)->state[0] = last_state;
+((StatemachineBase*)«statemachineHandleName()»)->state[0] = last_state;
 «ENDDEFINE»
 
-«DEFINE ConditionMethodsProto FOR ExecutionNode -»
+«DEFINE ConditionMethodsProto(sgen::GeneratorEntry genEntry) FOR ExecutionNode -»
   «FOREACH reactions.select(e|e.check.refs.size > 0) AS r -»
   «IF r.check != null -»
-static boolean «r.check.functionName()»(«StName()»* handle);
+static boolean «r.check.functionNamePrototype(genEntry)»
   «ENDIF -»«ENDFOREACH -»
 «ENDDEFINE»
 
-«DEFINE ConditionMethodsImplement FOR ExecutionNode -»
+«DEFINE ConditionMethodsImplement(sgen::GeneratorEntry genEntry) FOR ExecutionNode -»
   «FOREACH reactions.select(e|e.check.refs.size > 0) AS r -»
   «IF r.check != null -»
-boolean «r.check.functionName()»(«StName()»* handle) {
+boolean «r.check.functionName(genEntry)»(«StName()»* «statemachineHandleName()») {
   boolean retValue = «getBoolFalse()»;
   if («r.check.condition.toCCode()»)
     retValue = «getBoolTrue()»;
@@ -124,15 +129,16 @@ boolean «r.check.functionName()»(«StName()»* handle) {
   «ENDFOREACH -»
 «ENDDEFINE»
 
-«DEFINE StatementMethodsProto FOR ExecutionNode -»
+«DEFINE StatementMethodsProto(sgen::GeneratorEntry genEntry) FOR ExecutionNode -»
   «FOREACH reactions.select(e|e.effect.caller.size > 0) AS r -»
-static void «r.effect.functionName()»(«StName()»* handle);
+static void «r.effect.functionName(genEntry)»
  «ENDFOREACH -»
 «ENDDEFINE»
 
-«DEFINE StatementMethodsImplement FOR ExecutionNode -»
+«DEFINE StatementMethodsImplement(sgen::GeneratorEntry genEntry) FOR ExecutionNode -»
   «FOREACH reactions.select(e|e.effect.caller.size > 0) AS r -»
-void «r.effect.functionName()»(«StName()»* handle) {   
+void «r.effect.functionName(genEntry)»
+{   
   «EXPAND ActionCode FOR r.effect -»
 }
   «ENDFOREACH -»
@@ -142,45 +148,47 @@ void «r.effect.functionName()»(«StName()»* handle) {
 «EXPAND ActionCode FOREACH this.steps»
 «ENDDEFINE»
 
-«DEFINE ReactMethodsProto FOR ExecutionNode -»
+«DEFINE ReactMethodsProto(sgen::GeneratorEntry genEntry) FOR ExecutionNode -»
 «IF (ExecutionState.isInstance(this) || this.reactSequence.caller.size > 0) -»
-static void «stName()»_react_«this.simpleName»(«StName()»* handle);
+static void «this.reactSequenceFunction(genEntry, true)»
+«REM»«stName()»_react_«this.simpleName»(«StName()»* handle);«ENDREM»
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE ReactMethodsImplement FOR ExecutionNode -»
+«DEFINE ReactMethodsImplement(sgen::GeneratorEntry genEntry) FOR ExecutionNode -»
 «IF (ExecutionState.isInstance(this) || this.reactSequence.caller.size > 0) -»
-void «stName()»_react_«this.simpleName»(«StName()»* handle)
+void «this.reactSequenceFunction(genEntry, false)»
+«REM»void «stName()»_react_«this.simpleName»(«StName()»* handle)«ENDREM»
 {
 	«EXPAND ReactCode FOR reactSequence»
 }
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE EnterMethodProto FOR ExecutionState -»
+«DEFINE EnterMethodProto(sgen::GeneratorEntry genEntry) FOR ExecutionState -»
 «IF this.entryAction != null && entryAction.caller.size > 0 -»
-static void «this.entryAction.entryActionFunctionName()»(«StName()»* handle);
+static void «entryAction.functionNamePrototype(genEntry)»
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE EnterMethodImplement FOR ExecutionState -»
+«DEFINE EnterMethodImplement(sgen::GeneratorEntry genEntry) FOR ExecutionState -»
 «IF this.entryAction != null && entryAction.caller.size > 0»
-void «this.entryAction.entryActionFunctionName()»(«StName()»* handle)
+void «entryAction.functionName(genEntry)»
 {
 «EXPAND ActionCode FOR this.entryAction»
 }
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE ExitMethodProto FOR ExecutionState -»
+«DEFINE ExitMethodProto(sgen::GeneratorEntry genEntry) FOR ExecutionState -»
 «IF this.exitAction != null && exitAction.caller.size > 0 -»
-static void «this.exitAction.exitActionFunctionName()»(«StName()»* handle);
+static void «this.exitAction.functionNamePrototype(genEntry)»
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE ExitMethodImplement FOR ExecutionState -»
+«DEFINE ExitMethodImplement(sgen::GeneratorEntry genEntry) FOR ExecutionState -»
 «IF this.exitAction != null && exitAction.caller.size > 0 »
-void «this.exitAction.exitActionFunctionName()»(«StName()»* handle)
+void «this.exitAction.functionName(genEntry)»
 {
 «EXPAND ActionCode FOR this.exitAction»
 }
@@ -189,30 +197,30 @@ void «this.exitAction.exitActionFunctionName()»(«StName()»* handle)
 
 
 
-«DEFINE EnterSequenceProto FOR ExecutionState -»
+«DEFINE EnterSequenceProto(sgen::GeneratorEntry genEntry) FOR ExecutionState -»
 «IF this.enterSequence != null && enterSequence.caller.size > 0 -»
-static void «this.enterSequence.enterSequenceFunctionName()»(«StName()»* handle);
+static void «this.enterSequence.functionNamePrototype(genEntry)»
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE EnterSequenceImplement FOR ExecutionState -»
+«DEFINE EnterSequenceImplement(sgen::GeneratorEntry genEntry) FOR ExecutionState -»
 «IF this.enterSequence != null && enterSequence .caller.size > 0 »
-void «this.enterSequence.enterSequenceFunctionName()»(«StName()»* handle)
+void «this.enterSequence.functionName(genEntry)»
 {
 «EXPAND ActionCode FOR this.enterSequence»
 }
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE ExitSequenceProto FOR ExecutionState -»
+«DEFINE ExitSequenceProto(sgen::GeneratorEntry genEntry) FOR ExecutionState -»
 «IF this.exitSequence != null && exitSequence.caller.size > 0 -»
-static void «this.exitSequence.exitSequenceFunctionName()»(«StName()»* handle);
+static void «this.exitSequence.functionName(genEntry)»
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE ExitSequenceImplement FOR ExecutionState -»
+«DEFINE ExitSequenceImplement(sgen::GeneratorEntry genEntry) FOR ExecutionState -»
 «IF this.exitSequence != null && exitSequence.caller.size > 0 -»
-void «this.exitSequence.exitSequenceFunctionName()»(«StName()»* handle)
+void «this.exitSequence.functionName(genEntry)»
 {
 «EXPAND ActionCode FOR this.exitSequence»
 }
@@ -229,108 +237,103 @@ void «this.exitSequence.exitSequenceFunctionName()»(«StName()»* handle)
 
 #include "«StName()».h"
 
-«EXPAND ConditionMethodsProto FOREACH this.states -»
-«EXPAND ConditionMethodsProto FOREACH this.nodes -»
-«EXPAND StatementMethodsProto FOREACH this.states -»
-«EXPAND StatementMethodsProto FOREACH this.nodes -»
-«EXPAND EnterMethodProto FOREACH this.states -»
-«EXPAND ExitMethodProto FOREACH this.states -»
-«EXPAND EnterSequenceProto FOREACH this.states -»
-«EXPAND ExitSequenceProto FOREACH this.states -»
-«EXPAND ReactMethodsProto FOREACH this.states -»
-«EXPAND ReactMethodsProto FOREACH this.nodes -»
+«IF isSingleton(genEntry) == true»
+/* singleton handle and singleton handle pointer declaration */
+static «StName()» static_«statemachineHandleName()»;
+static «StName()»* «statemachineHandleName()»;
+«ENDIF»
 
-«EXPAND ConditionMethodsImplement FOREACH this.states -»
-«EXPAND ConditionMethodsImplement FOREACH this.nodes -»
-«EXPAND StatementMethodsImplement FOREACH this.states -»
-«EXPAND StatementMethodsImplement FOREACH this.nodes -»
-«EXPAND EnterMethodImplement FOREACH this.states -»
-«EXPAND ExitMethodImplement FOREACH this.states -»
-«EXPAND EnterSequenceImplement FOREACH this.states -»
-«EXPAND ExitSequenceImplement FOREACH this.states -»
-«EXPAND ReactMethodsImplement FOREACH this.states -»
-«EXPAND ReactMethodsImplement FOREACH this.nodes -»
+«EXPAND ConditionMethodsProto(genEntry) FOREACH this.states -»
+«EXPAND ConditionMethodsProto(genEntry) FOREACH this.nodes -»
+«EXPAND StatementMethodsProto(genEntry) FOREACH this.states -»
+«EXPAND StatementMethodsProto(genEntry) FOREACH this.nodes -»
+«EXPAND EnterMethodProto(genEntry) FOREACH this.states -»
+«EXPAND ExitMethodProto(genEntry) FOREACH this.states -»
+«EXPAND EnterSequenceProto(genEntry) FOREACH this.states -»
+«EXPAND ExitSequenceProto(genEntry) FOREACH this.states -»
+«EXPAND ReactMethodsProto(genEntry) FOREACH this.states -»
+«EXPAND ReactMethodsProto(genEntry) FOREACH this.nodes -»
 
-«REM»
-boolean «stName()»_is_in(«StName()»* handle, States state)
+«EXPAND ConditionMethodsImplement(genEntry) FOREACH this.states -»
+«EXPAND ConditionMethodsImplement(genEntry) FOREACH this.nodes -»
+«EXPAND StatementMethodsImplement(genEntry) FOREACH this.states -»
+«EXPAND StatementMethodsImplement(genEntry) FOREACH this.nodes -»
+«EXPAND EnterMethodImplement(genEntry) FOREACH this.states -»
+«EXPAND ExitMethodImplement(genEntry) FOREACH this.states -»
+«EXPAND EnterSequenceImplement(genEntry) FOREACH this.states -»
+«EXPAND ExitSequenceImplement(genEntry) FOREACH this.states -»
+«EXPAND ReactMethodsImplement(genEntry) FOREACH this.states -»
+«EXPAND ReactMethodsImplement(genEntry) FOREACH this.nodes -»
+
+void «stName()»_init(«handleAdditionComma(genEntry)» Timer* timer, EventPool* eventPool)
 {
-	switch (((StatemachineBase*)handle)->state[0 /* TODO: change to correct parallel region (may need a for loop */]) {
-	«FOREACH this.states AS state»
-	    case _«state.simpleName»:
-			«IF state.leaf == true»
-			  return bool_true;
-			«ELSE»
-			  if ( bool_true == bool_true )
-			    return bool_true;
-			«ENDIF»  
-	        break;
-	«ENDFOREACH»
-	    default:
-	        break;
-	}
-	return bool_false;
-}
-«ENDREM»
-void «stName()»_init(«StName()»* handle, Timer* timer, EventPool* eventPool)
-{
-	statemachine_cy_init(&handle->base, MAX_PARALLEL_STATES,
+«IF isSingleton(genEntry)»
+	«statemachineHandleName()» = &static_«statemachineHandleName()»;
+«ENDIF»
+	statemachine_cy_init(&«statemachineHandleName()»->base, MAX_PARALLEL_STATES,
 			event_last, timer, eventPool);
 			
 «FOREACH this.scopes.getUsableScopes() AS interface -»
-	«interface.interfaceName()»_init(&handle->«interface.interfaceObjectName().toFirstLower()», &handle->base, &handle->base.eventSet, eventPool);
+«IF isSingleton(genEntry) -»
+     «interface.interfaceName()»_set_interface_singleton(&«statemachineHandleName()»->«interface.interfaceObjectName()»);
+     «interface.interfaceName()»_init(&«statemachineHandleName()»->base, &«statemachineHandleName()»->base.eventSet, eventPool);
+«ELSE -»
+	«interface.interfaceName()»_init(&«statemachineHandleName()»->«interface.interfaceObjectName().toFirstLower()», 
+	&«statemachineHandleName()»->base, &«statemachineHandleName()»->base.eventSet, eventPool);
+«ENDIF»
 
 «FOREACH interface.getInEvents() AS event -»
-	eventSet_set_type(&handle->base.eventSet, «event.getEventEnumName()», ev_type_input); 
+	eventSet_set_type(&«statemachineHandleName()»->base.eventSet, «event.getEventEnumName()», ev_type_input); 
 «ENDFOREACH -»
 «FOREACH interface.getOutEvents() AS event -»
-	eventSet_set_type(&handle->base.eventSet, «event.getEventEnumName()», ev_type_output); 
+	eventSet_set_type(&«statemachineHandleName()»->base.eventSet, «event.getEventEnumName()», ev_type_output); 
 «ENDFOREACH -»
 «FOREACH interface.getLocalEvents() AS event -»
-	eventSet_set_type(&handle->base.eventSet, «event.getEventEnumName()», ev_type_local); 
+	eventSet_set_type(&«statemachineHandleName()»->base.eventSet, «event.getEventEnumName()», ev_type_local); 
 «ENDFOREACH -»
-
 «ENDFOREACH»	
-	
 }
 
+«IF isSingleton(genEntry) == true»
+«StName()»* «scName()»_get_handle()
+{ return «statemachineHandleName()»; } 
+«ELSE»
 «FOREACH this.scopes.typeSelect(InterfaceScope) AS interface»
-extern «interface.interfaceClassName()»* «stName()»_get_«interface.interfaceObjectName().toFirstLower()»(«StName()»* handle)
-{
-  return &handle->«interface.interfaceObjectName()»;
-}
+extern «interface.interfaceClassName()»* «stName()»_get_«interface.interfaceObjectName().toFirstLower()»(«handleAddition(genEntry)»)
+{  return &«statemachineHandleName()»->«interface.interfaceObjectName()»; }
 «ENDFOREACH»
+«ENDIF»
 
-void «stName()»_enter(«StName()»* handle)
+void «stName()»_enter(«handleAddition(genEntry)»)
 {
 	«EXPAND ActionCode FOR this.enterSequence»
 }
 
-void «stName()»_exit(«StName()»* handle)
+void «stName()»_exit(«handleAddition(genEntry)»)
 {
 	«EXPAND ActionCode FOR this.exitSequence»
 }
 
-void «stName()»_destruct(«StName()»* handle)
+void «stName()»_destruct(«handleAddition(genEntry)»)
 {
-	statemachine_cy_destruct(&handle->base);
+	statemachine_cy_destruct(&«statemachineHandleName()»->base);
 «REM»	variableData_exit(&handle->variableData); «ENDREM»
 }
 
-void «stName()»_runCycle(«StName()»* handle)
+void «stName()»_runCycle(«handleAddition(genEntry)»)
 {
-	statemachine_cy_runCycle(&handle->base);
+	statemachine_cy_runCycle(&«statemachineHandleName()»->base);
 }
 
-void «stName()»_setEvent(«StName()»* handle, _Event* ev)
+void «stName()»_setEvent(«handleAdditionComma(genEntry)» _Event* ev)
 {
-	statemachine_cy_setEvent(&handle->base, ev);
+	statemachine_cy_setEvent(&«statemachineHandleName()»->base, ev);
 }
 
-boolean «stName()»_eventWaiting(«StName()»* handle)
+boolean «stName()»_eventWaiting(«handleAddition(genEntry)»)
 {
-	return statemachine_cy_eventWaiting(&handle->base);
+	return statemachine_cy_eventWaiting(&«statemachineHandleName()»->base);
 }
-
 
 void statemachine_cy__runCycle(Statemachine_cy* handle)
 {
@@ -339,7 +342,7 @@ void statemachine_cy__runCycle(Statemachine_cy* handle)
 		switch(((StatemachineBase*)handle)->state[i]) {
 	«FOREACH this.states AS state»
 	    case _«state.simpleName»:
-	        «stName()»_react_«state.simpleName»((«StName()»*) handle);
+	    	«this.stName()»_reaction_«state.simpleName»(«IF isSingleton(genEntry) == false»(«StName()»*) handle«ENDIF»);
 	        break;
 	«ENDFOREACH»
 		default:
