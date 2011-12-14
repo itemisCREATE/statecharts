@@ -1,0 +1,13 @@
+include_directories(../../src-gen-c-sgltn/Test_Hierarchy)
+
+add_executable(TestHierarchyMain main.c)
+target_link_libraries(TestHierarchyMain Test_HierarchyStatemachine)
+
+add_test(Hierarchy_test_state9_state10_transition TestHierarchyMain "1")
+add_test(Hierarchy_test_state1_state2_back_transition TestHierarchyMain "2")
+add_test(Hierarchy_traverse_to_State5_back_with_event6_transition TestHierarchyMain "3")
+add_test(Hierarchy_traverse_to_State5_back_with_event15_transition TestHierarchyMain "4")
+add_test(Hierarchy_state2_back_with_event14_transition TestHierarchyMain "5")
+add_test(Hierarchy_traverse_to_State7_back_with_event6_transition TestHierarchyMain "6")
+add_test(Hierarchy_traverse_to_State8_back_with_event6_transition TestHierarchyMain "7")
+add_test(Hierarchy_traverse_to_State8_back_with_event16_transition TestHierarchyMain "8")
