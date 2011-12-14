@@ -29,16 +29,25 @@ String DRNAME(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).nam
 String EvName(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toFirstUpper() + "Event";
 String EVNAME(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toUpperCase() + "EVENT";
 
-cached String functionName(Step step) : 
-	(step.isEffect()) ? step.actionFunctionName() : (
-	(step.isReactionCheck()) ? step.checkFunctionName() : (
-	(step.isEntryAction()) ? step.entryActionFunctionName() : ( 
-	(step.isExitAction()) ? step.exitActionFunctionName() : (
-	(step.isEnterSequence()) ? step.enterSequenceFunctionName() : ( 
-	(step.isExitSequence()) ? step.exitSequenceFunctionName() : (
-	(step.isReactSequence()) ? step.reactSequenceFunctionName() :
-	" !! unknown function type !!" ))))));
+cached String functionName(Step step, GeneratorEntry genEntry) : 
+	(step.isEffect()) ? step.actionFunction(genEntry, false) : (
+	(step.isReactionCheck()) ? step.checkFunction(genEntry, false) : (
+	(step.isEntryAction()) ? step.entryActionFunction(genEntry, false) : ( 
+	(step.isExitAction()) ? step.exitActionFunction(genEntry, false) : (
+	(step.isEnterSequence()) ? step.enterSequenceFunction(genEntry, false) : ( 
+	(step.isExitSequence()) ? step.exitSequenceFunction(genEntry, false) : 
+	" !! unknown function type !!" )))));
  
+cached String functionNamePrototype(Step step, GeneratorEntry genEntry) : 
+	(step.isEffect()) ? step.actionFunction(genEntry, true) : (
+	(step.isReactionCheck()) ? step.checkFunction(genEntry, true) : (
+	(step.isEntryAction()) ? step.entryActionFunction(genEntry, true) : ( 
+	(step.isExitAction()) ? step.exitActionFunction(genEntry, true) : (
+	(step.isEnterSequence()) ? step.enterSequenceFunction(genEntry, true) : ( 
+	(step.isExitSequence()) ? step.exitSequenceFunction(genEntry, true) :
+	" !! unknown function type !!" )))));
+
+/*
 String actionFunctionName(Step this) :  this.stName() + "_actions_" + this.reaction().state().simpleName + "_" + this.reaction().name; 
 String checkFunctionName(Step this) : this.stName() + "_condition_" + this.reaction().state().simpleName + "_" + this.reaction().name; 
 String entryActionFunctionName(Step this) : this.stName() + "_entryActions_" + this.state().simpleName; 
@@ -46,8 +55,46 @@ String exitActionFunctionName(Step this) : this.stName() + "_exitActions_" + thi
 String enterSequenceFunctionName(Step this) : this.stName() + "_enterSequence_" + this.state().simpleName; 
 String exitSequenceFunctionName(Step this) : this.stName() + "_exitSequence_" + this.state().simpleName; 
 String reactSequenceFunctionName(Step this) : "react"+ this.state().simpleName; 
+*/
+
+String handleAddition(Object this, GeneratorEntry genEntry) :
+	(isSingleton(genEntry) == true) ? "" : StName() + "* " + this.statemachineHandleName();
+
+String handleAdditionComma(Object this, GeneratorEntry genEntry) :
+	(isSingleton(genEntry) == true) ? "" : StName() + "* " + this.statemachineHandleName() + ", ";
 
 
+String handleInterfaceAddition(Scope this, GeneratorEntry genEntry) :
+	(isSingleton(genEntry) == true) ? "" : this.interfaceClassName() + "* handle";
+
+String handleInterfaceAdditionComma(Scope this, GeneratorEntry genEntry) :
+	(isSingleton(genEntry) == true) ? "" : this.interfaceClassName() + "* handle, ";
+
+String prototypeEnd(Boolean isPrototype) :
+	(isPrototype == true) ? ";" : "";
+
+String actionFunction(Step this, GeneratorEntry genEntry, Boolean prototype) :  
+	  (this.stName() + "_actions_" + this.reaction().state().simpleName + "_" + this.reaction().name + "("+ handleAddition(genEntry) + ")"+prototypeEnd(prototype));
+
+String checkFunction(Step this, GeneratorEntry genEntry, Boolean prototype) :  
+	  (this.stName() + "_condition_" + this.reaction().state().simpleName + "_" + this.reaction().name + "("+ handleAddition(genEntry) + ")"+prototypeEnd(prototype));
+
+String entryActionFunction(Step this, GeneratorEntry genEntry, Boolean prototype) :  
+	  (this.stName() + "_entryActions_" + this.reaction().state().simpleName + "_" + this.reaction().name + "("+ handleAddition(genEntry) + ")"+prototypeEnd(prototype));
+ 
+String exitActionFunction(Step this, GeneratorEntry genEntry, Boolean prototype) :  
+	  (this.stName() + "_exitActions_" + this.reaction().state().simpleName + "_" + this.reaction().name + "("+ handleAddition(genEntry) + ")"+prototypeEnd(prototype));
+ 
+String enterSequenceFunction(Step this, GeneratorEntry genEntry, Boolean prototype) :  
+	  (this.stName() + "_enterSequence_" + this.reaction().state().simpleName + "_" + this.reaction().name + "("+ handleAddition(genEntry) + ")"+prototypeEnd(prototype));
+
+String exitSequenceFunction(Step this, GeneratorEntry genEntry, Boolean prototype) :  
+	  (this.stName() + "_exitSequence_" + this.reaction().state().simpleName + "_" + this.reaction().name + "("+ handleAddition(genEntry) + ")"+prototypeEnd(prototype));
+
+/* for some reason, this is handled completely different */ 
+String reactSequenceFunction(ExecutionNode this, GeneratorEntry genEntry, Boolean prototype) :  
+	  (this.stName() + "_reaction_" + this.simpleName + "("+ handleAddition(genEntry) + ")"+prototypeEnd(prototype));
+ 
 boolean isEffect(Step step) : (! Check.isInstance(step)) && Reaction.isInstance(step.eContainer) ;
 boolean isReactionCheck(Step step) : Reaction.isInstance(step.eContainer) && Check.isInstance(step);
 boolean isEntryAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().entryAction == step;
@@ -64,6 +111,7 @@ String interfaceName(Scope this) : "unknownScope";
 String interfaceClassName(Scope this) : "unknownScope";
 String interfaceObjectName(Scope this) : "unknownScope";
 
+String statemachineHandleName(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toFirstLower()+"_handle";
 
 String interfaceName(InterfaceScope this) : this.getExecutionFlow().name.toFirstLower() + ((this.name == null) ? "_if" : "_if_" + this.name);
 String interfaceClassName(InterfaceScope this) : this.getExecutionFlow().name.toFirstUpper() + "If" + ((this.name == null)?"":this.name.toFirstUpper());
@@ -102,6 +150,16 @@ String getLicenseHeaderPlain(GeneratorEntry entry) :
 	else 
 		null;
 
+Boolean isSingleton(GeneratorEntry genEntry) : (
+	(genEntry.getFeatureConfiguration(getCCodeFeature()) != null) ? (
+      ((genEntry.getFeatureConfiguration(getCCodeFeature()).getParameterValue(getSingleton()) != null) ?
+       genEntry.getFeatureConfiguration(getCCodeFeature()).getParameterValue(getSingleton()).getBooleanValue()
+     : getSingletonDefault()))
+     : getSingletonDefault());
+ 
+//(
+//     (genEntry.getFeatureConfiguration(getCCodeFeature()).getParameterValue(getSingleton()).getBooleanValue() == true) ? 
+//     getBoolTrue():getBoolFalse())
 String getComment(Step this) :
 	if comment!=null then
 		"//"+comment
