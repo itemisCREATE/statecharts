@@ -11,6 +11,7 @@
 package org.yakindu.sct.simulation.ui.view;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.runtime.PlatformObject;
@@ -31,6 +32,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.PartInitException;
@@ -51,7 +53,8 @@ import org.yakindu.sct.simulation.ui.view.editing.RealEditingSupport;
  * 
  */
 public class DeclarationView extends ViewPart implements IDebugContextListener,
-		ISimulationSessionListener, IExecutionContextListener, ActiveSessionProvider {
+		ISimulationSessionListener, IExecutionContextListener,
+		ActiveSessionProvider {
 
 	private TableViewer eventViewer;
 
@@ -154,16 +157,30 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 
 	private void setVariableViewerInput() {
 		if (activeSession != null) {
-			List<ExecutionVariable> variables = activeSession.getExecutionScope()
-					.getVariables();
+			List<ExecutionVariable> variables = activeSession
+					.getExecutionScope().getVariables();
 			variableViewer.setInput(variables);
 		}
 	}
 
 	public void clearViewerInput() {
 		for (Control control : controls) {
+			// Listeners have to be removed manually otherwise the garbage
+			// collector can't cleanup the button
+			if (control instanceof Button) {
+				Listener[] llist = control.getListeners(SWT.Selection);
+				for (Listener listener : Arrays.asList(llist)) {
+					((Button) control)
+							.removeSelectionListener((SelectionListener) listener);
+				}
+			}
+
 			control.dispose();
+
 		}
+		// if the controls are disposed they are never used again and should not
+		// use memory anymore.
+		controls.clear();
 		eventViewer.setInput(null);
 		variableViewer.setInput(null);
 	}
@@ -203,11 +220,13 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 		if (!(selectedSession == activeSession) && selectedSession != null) {
 			if (activeSession != null) {
 				activeSession.removeSimulationListener(this);
-				activeSession.getExecutionScope().removeExecutionContextListener(this);
+				activeSession.getExecutionScope()
+						.removeExecutionContextListener(this);
 			}
 			activeSession = selectedSession;
 			selectedSession.addSimulationListener(this);
-			selectedSession.getExecutionScope().addExecutionContextListener(this);
+			selectedSession.getExecutionScope().addExecutionContextListener(
+					this);
 			clearViewerInput();
 			setEventViewerInput();
 			setVariableViewerInput();
@@ -241,11 +260,11 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 	}
 
 	public void variableDeclared(ExecutionVariable variable) {
-		//Nothing to do
+		// Nothing to do
 	}
 
 	public void eventDeclared(ExecutionEvent event) {
-		//Nothing to do
+		// Nothing to do
 	}
 
 	public void eventRaised(ExecutionEvent event) {
