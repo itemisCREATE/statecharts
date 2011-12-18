@@ -17,6 +17,7 @@ import org.yakindu.sct.model.sexec.interpreter.stext.StextStatementInterpreter;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.stext.STextStandaloneSetup;
+import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionContextImpl;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
@@ -116,14 +117,14 @@ public class AbstractSTextTest {
 
 	protected Scope createContextScope(String contextScope) {
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
-		parserRule.setName("SimpleScope");
+		parserRule.setName("InternalScope");
 		IParseResult result = parser.parse(parserRule, new StringReader(
 				contextScope));
 		return (Scope) result.getRootASTElement();
 	}
 
 	protected Object executeWithDefaultScope(String expression) {
-		Scope defaultScope = createContextScope("event abc : integer operation foo() var myInt : integer var myBool : boolean var myFloat : real");
+		Scope defaultScope = createContextScope("internal: event abc : integer operation foo() var myInt : integer var myBool : boolean var myFloat : real");
 		Statement statement = (Statement) parseExpression(expression,
 				defaultScope, Statement.class.getSimpleName());
 		return interpreter.evaluateStatement(statement, context);
@@ -133,6 +134,13 @@ public class AbstractSTextTest {
 		Scope defaultScope = createContextScope(scope);
 		Statement statement = (Statement) parseExpression(expression,
 				defaultScope, Statement.class.getSimpleName());
+		return interpreter.evaluateStatement(statement, context);
+	}
+	
+	protected Object executeExpression(String scope, String expression) {
+		Scope defaultScope = createContextScope(scope);
+		Statement statement = (Statement) parseExpression(expression,
+				defaultScope, Expression.class.getSimpleName());
 		return interpreter.evaluateStatement(statement, context);
 	}
 
