@@ -625,4 +625,11 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	// }
 	// }
 
+	@Test public void testPlainTrue() {
+		assertEquals(true, executeExpression("", "true"));
+	}
+	
+	@Test public void testPlainFalse() {
+		assertEquals(false, executeExpression("", "false"));
+	}
 }
