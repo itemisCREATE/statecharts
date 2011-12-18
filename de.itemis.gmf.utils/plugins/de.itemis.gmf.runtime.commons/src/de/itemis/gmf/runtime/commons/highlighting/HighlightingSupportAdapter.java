@@ -25,7 +25,8 @@ import de.itemis.gmf.runtime.commons.util.EditPartUtils;
 /**
  * 
  * @author Alexander Nyssen
- * @author Andreas Mülder
+ * @author Andreas Muelder
+ * @author Axel Terfloth
  * 
  */
 public class HighlightingSupportAdapter implements IHighlightingSupport {
