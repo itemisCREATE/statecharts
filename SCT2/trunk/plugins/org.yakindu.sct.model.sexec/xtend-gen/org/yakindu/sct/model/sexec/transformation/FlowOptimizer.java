@@ -223,7 +223,7 @@ public class FlowOptimizer {
           final List<CheckRef> cRefs = _arrayList;
           EList<CheckRef> _refs = c.getRefs();
           cRefs.addAll(_refs);
-          for (final CheckRef ref : cRefs) {
+          for (CheckRef ref : cRefs) {
             {
               Check _copy = EcoreUtil.<Check>copy(c);
               final Check clone = _copy;
@@ -322,7 +322,7 @@ public class FlowOptimizer {
           final List<Call> calls = _arrayList;
           EList<Call> _caller = step.getCaller();
           calls.addAll(_caller);
-          for (final Call caller : calls) {
+          for (Call caller : calls) {
             {
               Step _stepCopy = this.stepCopy(step);
               final Step clone = _stepCopy;

@@ -42,9 +42,11 @@ import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.StateVector;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
+import org.yakindu.sct.model.sexec.TraceNodeExecuted;
+import org.yakindu.sct.model.sexec.TraceStateEntered;
+import org.yakindu.sct.model.sexec.TraceStateExited;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sexec.transformation.FactoryExtension;
-import org.yakindu.sct.model.sexec.transformation.SequencerModule;
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Declaration;
@@ -103,7 +105,7 @@ public class ModelSequencer {
   private StatechartExtensions sct;
   
   @Inject
-  @Named(SequencerModule.ADD_TRACES)
+  @Named("ADD_TRACES")
   private boolean _addTraceSteps;
   
   public ExecutionFlow transform(final Statechart sc) {
@@ -304,7 +306,7 @@ public class ModelSequencer {
       final List<TimeEventSpec> timeEventSpecs = _timeEventSpecs;
       ArrayList<TimeEvent> _arrayList = new ArrayList<TimeEvent>();
       final ArrayList<TimeEvent> result = _arrayList;
-      for (final TimeEventSpec tes : timeEventSpecs) {
+      for (TimeEventSpec tes : timeEventSpecs) {
         {
           TimeEvent _createDerivedEvent = this.createDerivedEvent(tes);
           final TimeEvent timeEvent = _createDerivedEvent;
@@ -364,7 +366,7 @@ public class ModelSequencer {
       List<EObject> content = _eAllContentsAsList;
       final Function1<EObject,Boolean> _function = new Function1<EObject,Boolean>() {
           public Boolean apply(final EObject e) {
-            return ((Boolean)(e instanceof org.yakindu.sct.model.sgraph.State));
+            return (e instanceof org.yakindu.sct.model.sgraph.State);
           }
         };
       Iterable<EObject> _filter = IterableExtensions.<EObject>filter(content, _function);
@@ -409,14 +411,8 @@ public class ModelSequencer {
         Check _mapToCheck = this.mapToCheck(_trigger_1);
         r.setCheck(_mapToCheck);
       }
-      Sequence _mapToEffect = this.mapToEffect(t);
+      Sequence _mapToEffect = this.mapToEffect(t, r);
       r.setEffect(_mapToEffect);
-      if (this._addTraceSteps) {
-        Step _effect = r.getEffect();
-        EList<Step> _steps = ((Sequence) _effect).getSteps();
-        ReactionFired _newReactionFired = this.newReactionFired(r);
-        CollectionExtensions.<Step>operator_add(_steps, _newReactionFired);
-      }
       return r;
     }
   }
@@ -427,7 +423,7 @@ public class ModelSequencer {
       List<EObject> content = _eAllContentsAsList;
       final Function1<EObject,Boolean> _function = new Function1<EObject,Boolean>() {
           public Boolean apply(final EObject e) {
-            return ((Boolean)(e instanceof org.yakindu.sct.model.sgraph.State));
+            return (e instanceof org.yakindu.sct.model.sgraph.State);
           }
         };
       Iterable<EObject> _filter = IterableExtensions.<EObject>filter(content, _function);
@@ -523,7 +519,7 @@ public class ModelSequencer {
     }
   }
   
-  public Sequence mapToEffect(final Transition t) {
+  public Sequence mapToEffect(final Transition t, final Reaction r) {
     {
       SexecFactory _sexecFactory = this.sexecFactory();
       Sequence _createSequence = _sexecFactory.createSequence();
@@ -550,23 +546,27 @@ public class ModelSequencer {
           public Sequence apply(final Sequence seq , final State state) {
             Sequence _xblockexpression = null;
             {
-              boolean _operator_and_1 = false;
               Vertex _source_3 = t.getSource();
               boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(state, _source_3);
-              if (!_operator_notEquals_1) {
-                _operator_and_1 = false;
-              } else {
-                ExecutionState _create_1 = ModelSequencer.this.factory.create(state);
-                Step _exitAction = _create_1.getExitAction();
-                boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_exitAction, null);
-                _operator_and_1 = BooleanExtensions.operator_and(_operator_notEquals_1, _operator_notEquals_2);
-              }
-              if (_operator_and_1) {
-                EList<Step> _steps_1 = seq.getSteps();
-                ExecutionState _create_2 = ModelSequencer.this.factory.create(state);
-                Step _exitAction_1 = _create_2.getExitAction();
-                Call _newCall_1 = ModelSequencer.this.factory.newCall(_exitAction_1);
-                _steps_1.add(_newCall_1);
+              if (_operator_notEquals_1) {
+                {
+                  ExecutionState _create_1 = ModelSequencer.this.factory.create(state);
+                  Step _exitAction = _create_1.getExitAction();
+                  boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_exitAction, null);
+                  if (_operator_notEquals_2) {
+                    EList<Step> _steps_1 = seq.getSteps();
+                    ExecutionState _create_2 = ModelSequencer.this.factory.create(state);
+                    Step _exitAction_1 = _create_2.getExitAction();
+                    Call _newCall_1 = ModelSequencer.this.factory.newCall(_exitAction_1);
+                    _steps_1.add(_newCall_1);
+                  }
+                  if (ModelSequencer.this._addTraceSteps) {
+                    EList<Step> _steps_2 = seq.getSteps();
+                    ExecutionState _create_3 = ModelSequencer.this.factory.create(state);
+                    TraceStateExited _newTraceStateExited = ModelSequencer.this.newTraceStateExited(_create_3);
+                    CollectionExtensions.<TraceStateExited>operator_add(_steps_2, _newTraceStateExited);
+                  }
+                }
               }
               _xblockexpression = (seq);
             }
@@ -577,10 +577,15 @@ public class ModelSequencer {
       Effect _effect = t.getEffect();
       boolean _operator_notEquals_3 = ObjectExtensions.operator_notEquals(_effect, null);
       if (_operator_notEquals_3) {
-        EList<Step> _steps_2 = sequence.getSteps();
+        EList<Step> _steps_3 = sequence.getSteps();
         Effect _effect_1 = t.getEffect();
         Sequence _mapEffect = this.mapEffect(_effect_1);
-        _steps_2.add(_mapEffect);
+        _steps_3.add(_mapEffect);
+      }
+      if (this._addTraceSteps) {
+        EList<Step> _steps_4 = sequence.getSteps();
+        ReactionFired _newTraceReactionFired = this.newTraceReactionFired(r);
+        CollectionExtensions.<ReactionFired>operator_add(_steps_4, _newTraceReactionFired);
       }
       List<State> _entryStates = this.entryStates(t);
       List<State> _reverse = ListExtensions.<State>reverse(_entryStates);
@@ -588,23 +593,27 @@ public class ModelSequencer {
           public Sequence apply(final Sequence seq_1 , final State state_1) {
             Sequence _xblockexpression_1 = null;
             {
-              boolean _operator_and_2 = false;
               Vertex _target = t.getTarget();
               boolean _operator_notEquals_4 = ObjectExtensions.operator_notEquals(state_1, _target);
-              if (!_operator_notEquals_4) {
-                _operator_and_2 = false;
-              } else {
-                ExecutionState _create_3 = ModelSequencer.this.factory.create(state_1);
-                Step _entryAction = _create_3.getEntryAction();
-                boolean _operator_notEquals_5 = ObjectExtensions.operator_notEquals(_entryAction, null);
-                _operator_and_2 = BooleanExtensions.operator_and(_operator_notEquals_4, _operator_notEquals_5);
-              }
-              if (_operator_and_2) {
-                EList<Step> _steps_3 = seq_1.getSteps();
-                ExecutionState _create_4 = ModelSequencer.this.factory.create(state_1);
-                Step _entryAction_1 = _create_4.getEntryAction();
-                Call _newCall_2 = ModelSequencer.this.factory.newCall(_entryAction_1);
-                _steps_3.add(_newCall_2);
+              if (_operator_notEquals_4) {
+                {
+                  ExecutionState _create_4 = ModelSequencer.this.factory.create(state_1);
+                  Step _entryAction = _create_4.getEntryAction();
+                  boolean _operator_notEquals_5 = ObjectExtensions.operator_notEquals(_entryAction, null);
+                  if (_operator_notEquals_5) {
+                    EList<Step> _steps_5 = seq_1.getSteps();
+                    ExecutionState _create_5 = ModelSequencer.this.factory.create(state_1);
+                    Step _entryAction_1 = _create_5.getEntryAction();
+                    Call _newCall_2 = ModelSequencer.this.factory.newCall(_entryAction_1);
+                    _steps_5.add(_newCall_2);
+                  }
+                  if (ModelSequencer.this._addTraceSteps) {
+                    EList<Step> _steps_6 = seq_1.getSteps();
+                    ExecutionState _create_6 = ModelSequencer.this.factory.create(state_1);
+                    TraceStateEntered _newTraceStateEntered = ModelSequencer.this.newTraceStateEntered(_create_6);
+                    CollectionExtensions.<TraceStateEntered>operator_add(_steps_6, _newTraceStateEntered);
+                  }
+                }
               }
               _xblockexpression_1 = (seq_1);
             }
@@ -617,21 +626,21 @@ public class ModelSequencer {
       if (_operator_notEquals_6) {
         Vertex _target_2 = t.getTarget();
         if ((_target_2 instanceof org.yakindu.sct.model.sgraph.State)) {
-          EList<Step> _steps_4 = sequence.getSteps();
+          EList<Step> _steps_7 = sequence.getSteps();
           Vertex _target_3 = t.getTarget();
-          ExecutionState _create_5 = this.factory.create(((State) _target_3));
-          Sequence _enterSequence = _create_5.getEnterSequence();
+          ExecutionState _create_7 = this.factory.create(((State) _target_3));
+          Sequence _enterSequence = _create_7.getEnterSequence();
           Call _newCall_3 = this.factory.newCall(_enterSequence);
-          _steps_4.add(_newCall_3);
+          _steps_7.add(_newCall_3);
         } else {
           Vertex _target_4 = t.getTarget();
           if ((_target_4 instanceof org.yakindu.sct.model.sgraph.Choice)) {
-            EList<Step> _steps_5 = sequence.getSteps();
+            EList<Step> _steps_8 = sequence.getSteps();
             Vertex _target_5 = t.getTarget();
-            ExecutionChoice _create_6 = this.factory.create(((Choice) _target_5));
-            Sequence _reactSequence = _create_6.getReactSequence();
+            ExecutionChoice _create_8 = this.factory.create(((Choice) _target_5));
+            Sequence _reactSequence = _create_8.getReactSequence();
             Call _newCall_4 = this.factory.newCall(_reactSequence);
-            _steps_5.add(_newCall_4);
+            _steps_8.add(_newCall_4);
           }
         }
       }
@@ -639,7 +648,7 @@ public class ModelSequencer {
     }
   }
   
-  public ReactionFired newReactionFired(final Reaction r) {
+  public ReactionFired newTraceReactionFired(final Reaction r) {
     ReactionFired _xblockexpression = null;
     {
       SexecFactory _sexecFactory = this.sexecFactory();
@@ -647,6 +656,42 @@ public class ModelSequencer {
       final ReactionFired rf = _createReactionFired;
       rf.setReaction(r);
       _xblockexpression = (rf);
+    }
+    return _xblockexpression;
+  }
+  
+  public TraceNodeExecuted newTraceNodeExecuted(final ExecutionNode node) {
+    TraceNodeExecuted _xblockexpression = null;
+    {
+      SexecFactory _sexecFactory = this.sexecFactory();
+      TraceNodeExecuted _createTraceNodeExecuted = _sexecFactory.createTraceNodeExecuted();
+      final TraceNodeExecuted t = _createTraceNodeExecuted;
+      t.setNode(node);
+      _xblockexpression = (t);
+    }
+    return _xblockexpression;
+  }
+  
+  public TraceStateEntered newTraceStateEntered(final ExecutionState state) {
+    TraceStateEntered _xblockexpression = null;
+    {
+      SexecFactory _sexecFactory = this.sexecFactory();
+      TraceStateEntered _createTraceStateEntered = _sexecFactory.createTraceStateEntered();
+      final TraceStateEntered t = _createTraceStateEntered;
+      t.setState(state);
+      _xblockexpression = (t);
+    }
+    return _xblockexpression;
+  }
+  
+  public TraceStateExited newTraceStateExited(final ExecutionState state) {
+    TraceStateExited _xblockexpression = null;
+    {
+      SexecFactory _sexecFactory = this.sexecFactory();
+      TraceStateExited _createTraceStateExited = _sexecFactory.createTraceStateExited();
+      final TraceStateExited t = _createTraceStateExited;
+      t.setState(state);
+      _xblockexpression = (t);
     }
     return _xblockexpression;
   }
@@ -779,7 +824,7 @@ public class ModelSequencer {
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "\'.");
       seq.setComment(_operator_plus_1);
       List<TimeEventSpec> _timeEventSpecs = this.sct.timeEventSpecs(state);
-      for (final TimeEventSpec tes : _timeEventSpecs) {
+      for (TimeEventSpec tes : _timeEventSpecs) {
         {
           TimeEvent _createDerivedEvent = this.createDerivedEvent(tes);
           final TimeEvent timeEvent = _createDerivedEvent;
@@ -932,7 +977,7 @@ public class ModelSequencer {
       final Sequence seq = _createSequence;
       seq.setName("exitAction");
       List<TimeEventSpec> _timeEventSpecs = this.sct.timeEventSpecs(state);
-      for (final TimeEventSpec tes : _timeEventSpecs) {
+      for (TimeEventSpec tes : _timeEventSpecs) {
         {
           TimeEvent _createDerivedEvent = this.createDerivedEvent(tes);
           final TimeEvent timeEvent = _createDerivedEvent;
@@ -1065,8 +1110,15 @@ public class ModelSequencer {
       String _operator_plus = StringExtensions.operator_plus("The reactions of state ", _name);
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ".");
       _reactSequence_2.setComment(_operator_plus_1);
-      Sequence _reactSequence_3 = execChoice.getReactSequence();
-      return _reactSequence_3;
+      if (this._addTraceSteps) {
+        Sequence _reactSequence_3 = execChoice.getReactSequence();
+        EList<Step> _steps_2 = _reactSequence_3.getSteps();
+        ExecutionChoice _create_1 = this.factory.create(choice);
+        TraceNodeExecuted _newTraceNodeExecuted = this.newTraceNodeExecuted(_create_1);
+        _steps_2.add(0, _newTraceNodeExecuted);
+      }
+      Sequence _reactSequence_4 = execChoice.getReactSequence();
+      return _reactSequence_4;
     }
   }
   
@@ -1423,7 +1475,7 @@ public class ModelSequencer {
   
   public TimeEvent createDerivedEvent(final TimeEventSpec tes) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(tes);
-    final TimeEvent r;
+    TimeEvent r;
     synchronized (_createCache_createDerivedEvent) {
       if (_createCache_createDerivedEvent.containsKey(_cacheKey)) {
         return _createCache_createDerivedEvent.get(_cacheKey);
@@ -1443,7 +1495,7 @@ public class ModelSequencer {
   
   public Scope timeEventScope(final ExecutionFlow flow) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(flow);
-    final Scope r;
+    Scope r;
     synchronized (_createCache_timeEventScope) {
       if (_createCache_timeEventScope.containsKey(_cacheKey)) {
         return _createCache_timeEventScope.get(_cacheKey);
@@ -1473,7 +1525,7 @@ public class ModelSequencer {
   
   public void defineStateEnterSequences(final ExecutionFlow flow, final Statechart sc) {
     EList<Region> _regions = sc.getRegions();
-    for (final Region r : _regions) {
+    for (Region r : _regions) {
       this.defineStateEnterSequence(r);
     }
   }
@@ -1481,7 +1533,7 @@ public class ModelSequencer {
   public void defineStateEnterSequence(final Region r) {
     EList<Vertex> _vertices = r.getVertices();
     Iterable<State> _filter = IterableExtensions.<State>filter(_vertices, org.yakindu.sct.model.sgraph.State.class);
-    for (final State s : _filter) {
+    for (State s : _filter) {
       this.defineStateEnterSequence(s);
     }
   }
@@ -1505,14 +1557,19 @@ public class ModelSequencer {
         Call _newCall = this.factory.newCall(_entryAction_1);
         _steps.add(_newCall);
       }
+      if (this._addTraceSteps) {
+        EList<Step> _steps_1 = seq.getSteps();
+        TraceStateEntered _newTraceStateEntered = this.newTraceStateEntered(execState);
+        CollectionExtensions.<TraceStateEntered>operator_add(_steps_1, _newTraceStateEntered);
+      }
       boolean _isLeaf = execState.isLeaf();
       if (_isLeaf) {
-        EList<Step> _steps_1 = seq.getSteps();
+        EList<Step> _steps_2 = seq.getSteps();
         EnterState _newEnterStateStep = this.newEnterStateStep(state);
-        CollectionExtensions.<Step>operator_add(_steps_1, _newEnterStateStep);
+        CollectionExtensions.<EnterState>operator_add(_steps_2, _newEnterStateStep);
       } else {
         EList<Region> _regions = state.getRegions();
-        for (final Region r : _regions) {
+        for (Region r : _regions) {
           {
             this.defineStateEnterSequence(r);
             Entry _entry = this.entry(r);
@@ -1529,10 +1586,10 @@ public class ModelSequencer {
               _operator_and = BooleanExtensions.operator_and(_operator_notEquals_1, _operator_notEquals_2);
             }
             if (_operator_and) {
-              EList<Step> _steps_2 = seq.getSteps();
+              EList<Step> _steps_3 = seq.getSteps();
               Sequence _enterSequence_1 = entryState.getEnterSequence();
               Call _newCall_1 = this.factory.newCall(_enterSequence_1);
-              _steps_2.add(_newCall_1);
+              _steps_3.add(_newCall_1);
             }
           }
         }
@@ -1543,14 +1600,14 @@ public class ModelSequencer {
   
   public void defineStateExitSequences(final ExecutionFlow flow, final Statechart sc) {
     EList<Region> _regions = sc.getRegions();
-    for (final Region r : _regions) {
+    for (Region r : _regions) {
       this.defineStateExitSequence(r);
     }
   }
   
   protected void _defineStateExitSequence(final Region r) {
     EList<Vertex> _vertices = r.getVertices();
-    for (final Vertex s : _vertices) {
+    for (Vertex s : _vertices) {
       this.defineStateExitSequence(s);
     }
   }
@@ -1569,7 +1626,12 @@ public class ModelSequencer {
       seq.setComment("Default exit sequence for final state.");
       EList<Step> _steps = seq.getSteps();
       ExitState _newExitStateStep = this.newExitStateStep(s);
-      CollectionExtensions.<Step>operator_add(_steps, _newExitStateStep);
+      CollectionExtensions.<ExitState>operator_add(_steps, _newExitStateStep);
+      if (this._addTraceSteps) {
+        EList<Step> _steps_1 = seq.getSteps();
+        TraceStateExited _newTraceStateExited = this.newTraceStateExited(execState);
+        CollectionExtensions.<TraceStateExited>operator_add(_steps_1, _newTraceStateExited);
+      }
       execState.setExitSequence(seq);
     }
   }
@@ -1589,7 +1651,7 @@ public class ModelSequencer {
       if (_isLeaf) {
         EList<Step> _steps = seq.getSteps();
         ExitState _newExitStateStep = this.newExitStateStep(state);
-        CollectionExtensions.<Step>operator_add(_steps, _newExitStateStep);
+        CollectionExtensions.<ExitState>operator_add(_steps, _newExitStateStep);
       } else {
         {
           EList<Region> _regions = state.getRegions();
@@ -1610,7 +1672,7 @@ public class ModelSequencer {
           SexecFactory _sexecFactory_1 = this.sexecFactory();
           StateSwitch _createStateSwitch = _sexecFactory_1.createStateSwitch();
           final StateSwitch sSwitch = _createStateSwitch;
-          for (final RegularState s : leafStates) {
+          for (RegularState s : leafStates) {
             {
               SexecFactory _sexecFactory_2 = this.sexecFactory();
               Sequence _createSequence_1 = _sexecFactory_2.createSequence();
@@ -1619,7 +1681,7 @@ public class ModelSequencer {
               ExecutionState _create_1 = this.factory.create(s);
               Sequence _exitSequence = _create_1.getExitSequence();
               Call _newCall = this.factory.newCall(_exitSequence);
-              CollectionExtensions.<Step>operator_add(_steps_1, _newCall);
+              CollectionExtensions.<Call>operator_add(_steps_1, _newCall);
               List<RegularState> _parentStates = this.parentStates(s);
               final List<RegularState> exitStates = _parentStates;
               List<RegularState> _parentStates_1 = this.parentStates(state);
@@ -1668,6 +1730,11 @@ public class ModelSequencer {
         Call _newCall_2 = this.factory.newCall(_exitAction_3);
         _steps_4.add(_newCall_2);
       }
+      if (this._addTraceSteps) {
+        EList<Step> _steps_5 = seq.getSteps();
+        TraceStateExited _newTraceStateExited = this.newTraceStateExited(execState);
+        CollectionExtensions.<TraceStateExited>operator_add(_steps_5, _newTraceStateExited);
+      }
       execState.setExitSequence(seq);
     }
   }
@@ -1682,9 +1749,9 @@ public class ModelSequencer {
           {
             final State s = ((State) state);
             EList<Region> _regions = s.getRegions();
-            for (final Region r : _regions) {
+            for (Region r : _regions) {
               EList<Vertex> _vertices = r.getVertices();
-              for (final Vertex v : _vertices) {
+              for (Vertex v : _vertices) {
                 if ((v instanceof org.yakindu.sct.model.sgraph.RegularState)) {
                   this.collectLeafStates(((RegularState) v), leafStates);
                 }
@@ -1737,7 +1804,7 @@ public class ModelSequencer {
       String _operator_plus = StringExtensions.operator_plus("Default enter sequence for statechart ", _name);
       enterSequence.setComment(_operator_plus);
       EList<Region> _regions = sc.getRegions();
-      for (final Region r : _regions) {
+      for (Region r : _regions) {
         Entry _entry = this.entry(r);
         State _target = this==null?(State)null:this.target(_entry);
         boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_target, null);
@@ -1816,7 +1883,7 @@ public class ModelSequencer {
       final List<EObject> declared = _list;
       final Function1<EObject,Boolean> _function_1 = new Function1<EObject,Boolean>() {
           public Boolean apply(final EObject e_1) {
-            return ((Boolean)(e_1 instanceof org.yakindu.sct.model.stext.stext.ElementReferenceExpression));
+            return (e_1 instanceof org.yakindu.sct.model.stext.stext.ElementReferenceExpression);
           }
         };
       Iterable<EObject> _filter_1 = IterableExtensions.<EObject>filter(allContent, _function_1);
@@ -1835,7 +1902,7 @@ public class ModelSequencer {
       IterableExtensions.<ElementReferenceExpression>forEach(_map, _function_3);
       final Function1<EObject,Boolean> _function_4 = new Function1<EObject,Boolean>() {
           public Boolean apply(final EObject e_2) {
-            return ((Boolean)(e_2 instanceof org.yakindu.sct.model.stext.stext.Assignment));
+            return (e_2 instanceof org.yakindu.sct.model.stext.stext.Assignment);
           }
         };
       Iterable<EObject> _filter_2 = IterableExtensions.<EObject>filter(allContent, _function_4);
@@ -1979,7 +2046,7 @@ public class ModelSequencer {
           EList<EventSpec> _triggers = ((ReactionTrigger) _trigger).getTriggers();
           final Function1<EventSpec,Boolean> _function_1 = new Function1<EventSpec,Boolean>() {
               public Boolean apply(final EventSpec t) {
-                return ((Boolean)(t instanceof org.yakindu.sct.model.stext.stext.EntryEvent));
+                return (t instanceof org.yakindu.sct.model.stext.stext.EntryEvent);
               }
             };
           boolean _exists = IterableExtensions.<EventSpec>exists(_triggers, _function_1);
@@ -2005,7 +2072,7 @@ public class ModelSequencer {
           EList<EventSpec> _triggers = ((ReactionTrigger) _trigger).getTriggers();
           final Function1<EventSpec,Boolean> _function_1 = new Function1<EventSpec,Boolean>() {
               public Boolean apply(final EventSpec t) {
-                return ((Boolean)(t instanceof org.yakindu.sct.model.stext.stext.ExitEvent));
+                return (t instanceof org.yakindu.sct.model.stext.stext.ExitEvent);
               }
             };
           boolean _exists = IterableExtensions.<EventSpec>exists(_triggers, _function_1);
