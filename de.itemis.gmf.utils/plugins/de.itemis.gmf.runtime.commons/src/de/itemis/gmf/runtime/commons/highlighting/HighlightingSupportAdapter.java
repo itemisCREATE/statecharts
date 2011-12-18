@@ -19,6 +19,7 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.widgets.Display;
 
+import de.itemis.gmf.runtime.commons.editparts.FixedSizeShapeNodeEditPart;
 import de.itemis.gmf.runtime.commons.util.EditPartUtils;
 
 /**
@@ -149,12 +150,19 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 					"May only highlight if editor is locked");
 		}
 		final IGraphicalEditPart editPart = getEditPartForSemanticElement(semanticElement);
-		if(editPart == null)
+		if(editPart == null) {
+			System.out.println("No edit part found for: " + semanticElement);
 			return;
+		}
 		// ensure the edit part is made visible.
 		diagramWorkbenchPart.getDiagramGraphicalViewer().reveal(editPart);
 
-		final IFigure figure = editPart.getFigure();
+		System.out.println("flash: " + semanticElement);
+
+		final IFigure figure = (editPart instanceof FixedSizeShapeNodeEditPart) 
+				? (IFigure) 	editPart.getFigure().getChildren().get(0) 
+				: editPart.getFigure();
+		
 		Display.getCurrent().asyncExec(
 				new Fader(figure, figure.getForegroundColor(),
 						parameters.foregroundFadingColor, figure
