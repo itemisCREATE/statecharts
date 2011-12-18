@@ -24,6 +24,8 @@ public interface IExecutionFacadeListener {
 
 	void stateLeft(Vertex vertex);
 
+	void pseudoStateExecuted(Vertex vertex);
+
 	void transitionFired(Transition transition);
 
 }

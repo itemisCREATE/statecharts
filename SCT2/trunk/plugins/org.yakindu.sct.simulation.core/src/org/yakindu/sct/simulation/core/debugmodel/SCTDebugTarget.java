@@ -239,6 +239,10 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 		fireChangeEvent(DebugEvent.CONTENT);
 	}
 
+	
+	public void pseudoStateExecuted(Vertex vertex) {		
+	}
+
 	public void transitionFired(Transition transition) {
 	}
 

@@ -117,7 +117,16 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="step" eType="#//Step" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Trace" abstract="true" eSuperTypes="#//Step"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceNodeExecuted" eSuperTypes="#//Trace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//ExecutionNode"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReactionFired" eSuperTypes="#//Trace">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reaction" eType="#//Reaction"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceStateEntered" eSuperTypes="#//Trace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceStateExited" eSuperTypes="#//Trace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -75,12 +75,13 @@ import org.yakindu.sct.model.sexec.ExecutionNode
 import com.google.inject.name.Named
 
 class ModelSequencer {
-	
+	 
 	@Inject extension IQualifiedNameProvider qfnProvider
 	@Inject extension FactoryExtension factory
 	@Inject extension StatechartExtensions sct
+	
 	@Inject
-	@Named(SequencerModule::ADD_TRACES)
+	@Named("ADD_TRACES")
 	boolean _addTraceSteps 
 	
 	/* ==========================================================================
@@ -277,7 +278,7 @@ class ModelSequencer {
 		r.effect = mapToEffect(t)
 		
 		// TODO: move to other extension that can be added to module
-		if (_addTraceSteps) { (r.effect as Sequence).steps += r.newReactionFired() }
+		if (_addTraceSteps) { (r.effect as Sequence).steps += r.newTraceReactionFired() }
 	
 		return r
 	}
@@ -331,9 +332,12 @@ class ModelSequencer {
 		}
 
 		t.exitStates().fold(sequence, [seq, state | {
-			if (state != t.source // since we call the exit sequence of the source state we have to exclude it's exit action here
-				&& state.create.exitAction != null
-			) seq.steps.add(state.create.exitAction.newCall)
+			if (state != t.source) { // since we call the exit sequence of the source state we have to exclude it's exit action here
+	
+				if ( state.create.exitAction != null) seq.steps.add(state.create.exitAction.newCall)
+				if ( _addTraceSteps ) seq.steps += newTraceStateExited(state.create)
+			}
+			
 			seq
 		}])
 		
@@ -344,9 +348,10 @@ class ModelSequencer {
 
 		// define entry behavior of the transition
 		t.entryStates().reverse.fold(sequence, [seq, state | {
-			if (state != t.target // since we call the entry sequence of the target state we have to exclude it here
-				&& state.create.entryAction != null
-			) seq.steps.add(state.create.entryAction.newCall)
+			if (state != t.target) { // since we call the entry sequence of the target state we have to exclude it here
+				if (state.create.entryAction != null) seq.steps.add(state.create.entryAction.newCall)
+				if ( _addTraceSteps ) seq.steps += newTraceStateEntered(state.create)
+			}
 			seq
 		}])
 		
@@ -361,10 +366,29 @@ class ModelSequencer {
 	}	
 	
 	
-	def newReactionFired(Reaction r) {
+	def newTraceReactionFired(Reaction r) {
 		val rf = sexecFactory.createReactionFired
 		rf.reaction = r
 		rf
+	}
+	
+	def newTraceNodeExecuted(ExecutionNode node) {
+		val t = sexecFactory.createTraceNodeExecuted
+		t.node = node
+		t
+	}
+	
+	
+	def newTraceStateEntered(ExecutionState state) {
+		val t = sexecFactory.createTraceStateEntered
+		t.state = state
+		t
+	}
+	
+	def newTraceStateExited(ExecutionState state) {
+		val t = sexecFactory.createTraceStateExited
+		t.state = state
+		t
 	}
 	
 	
@@ -528,12 +552,6 @@ class ModelSequencer {
 	def definePseudoStateReactions(ExecutionFlow flow, Statechart sc) {
 		
 		sc.allChoices().forEach( choice | choice.defineReaction() )
-//		val states = sc.allRegularStates
-//		
-//		states.filter(typeof(State)).filter(s | s.simple).forEach(s | defineCycle(s))
-//		states.filter(typeof(FinalState)).forEach(s | defineCycle(s))
-//		
-//		return flow
 	}
 	
 
@@ -551,6 +569,8 @@ class ModelSequencer {
 
 		execChoice.reactSequence.name = 'react'
 		execChoice.reactSequence.comment = 'The reactions of state ' + choice.name + '.'
+		
+		if ( _addTraceSteps ) execChoice.reactSequence.steps.add(0,choice.create.newTraceNodeExecuted)
 		
 		return execChoice.reactSequence
 	}	
@@ -585,7 +605,7 @@ class ModelSequencer {
 
 	def Sequence createReactionSequence(ExecutionNode state, Step localStep) {	
 		val cycle = sexecFactory.createSequence
-		
+				
 		val localReactions = state.reactions.filter(r | ! r.transition).toList
 		var localSteps = sexecFactory.createSequence
 		localSteps.steps.addAll(localReactions.map(lr | {
@@ -754,7 +774,9 @@ class ModelSequencer {
 		seq.name = "enterSequence"
 		seq.comment = "Default enter sequence for state " + state.name
 		if (execState.entryAction != null) seq.steps.add(execState.entryAction.newCall)
-
+		
+		if ( _addTraceSteps ) seq.steps += execState.newTraceStateEntered
+		
 		if ( execState.leaf ) {
 			
 			seq.steps += state.newEnterStateStep
@@ -800,6 +822,9 @@ class ModelSequencer {
 		seq.name = "exitSequence"
 		seq.comment = "Default exit sequence for final state."
 		seq.steps += s.newExitStateStep
+				
+		if ( _addTraceSteps ) seq.steps += execState.newTraceStateExited
+		
 		execState.exitSequence = seq
 	}
 	
@@ -862,6 +887,9 @@ class ModelSequencer {
 		}
 
 		if (execState.exitAction != null) seq.steps.add(execState.exitAction.newCall)
+		
+		if ( _addTraceSteps ) seq.steps += execState.newTraceStateExited
+		
 		execState.exitSequence = seq
 	}
 	

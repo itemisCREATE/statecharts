@@ -36,6 +36,9 @@ import org.yakindu.sct.model.sexec.StateVector;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.Trace;
+import org.yakindu.sct.model.sexec.TraceNodeExecuted;
+import org.yakindu.sct.model.sexec.TraceStateEntered;
+import org.yakindu.sct.model.sexec.TraceStateExited;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
@@ -191,7 +194,28 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass traceNodeExecutedEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass reactionFiredEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass traceStateEnteredEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass traceStateExitedEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -796,6 +820,24 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTraceNodeExecuted() {
+		return traceNodeExecutedEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTraceNodeExecuted_Node() {
+		return (EReference)traceNodeExecutedEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getReactionFired() {
 		return reactionFiredEClass;
 	}
@@ -807,6 +849,42 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 */
 	public EReference getReactionFired_Reaction() {
 		return (EReference)reactionFiredEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTraceStateEntered() {
+		return traceStateEnteredEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTraceStateEntered_State() {
+		return (EReference)traceStateEnteredEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTraceStateExited() {
+		return traceStateExitedEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTraceStateExited_State() {
+		return (EReference)traceStateExitedEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -987,8 +1065,17 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		traceEClass = createEClass(TRACE);
 
+		traceNodeExecutedEClass = createEClass(TRACE_NODE_EXECUTED);
+		createEReference(traceNodeExecutedEClass, TRACE_NODE_EXECUTED__NODE);
+
 		reactionFiredEClass = createEClass(REACTION_FIRED);
 		createEReference(reactionFiredEClass, REACTION_FIRED__REACTION);
+
+		traceStateEnteredEClass = createEClass(TRACE_STATE_ENTERED);
+		createEReference(traceStateEnteredEClass, TRACE_STATE_ENTERED__STATE);
+
+		traceStateExitedEClass = createEClass(TRACE_STATE_EXITED);
+		createEReference(traceStateExitedEClass, TRACE_STATE_EXITED__STATE);
 	}
 
 	/**
@@ -1044,7 +1131,10 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		unscheduleTimeEventEClass.getESuperTypes().add(this.getStep());
 		stateSwitchEClass.getESuperTypes().add(this.getStep());
 		traceEClass.getESuperTypes().add(this.getStep());
+		traceNodeExecutedEClass.getESuperTypes().add(this.getTrace());
 		reactionFiredEClass.getESuperTypes().add(this.getTrace());
+		traceStateEnteredEClass.getESuperTypes().add(this.getTrace());
+		traceStateExitedEClass.getESuperTypes().add(this.getTrace());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1134,8 +1224,17 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		initEClass(traceEClass, Trace.class, "Trace", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(traceNodeExecutedEClass, TraceNodeExecuted.class, "TraceNodeExecuted", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTraceNodeExecuted_Node(), this.getExecutionNode(), null, "node", null, 0, 1, TraceNodeExecuted.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(reactionFiredEClass, ReactionFired.class, "ReactionFired", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getReactionFired_Reaction(), this.getReaction(), null, "reaction", null, 0, 1, ReactionFired.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(traceStateEnteredEClass, TraceStateEntered.class, "TraceStateEntered", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTraceStateEntered_State(), this.getExecutionState(), null, "state", null, 0, 1, TraceStateEntered.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(traceStateExitedEClass, TraceStateExited.class, "TraceStateExited", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTraceStateExited_State(), this.getExecutionState(), null, "state", null, 0, 1, TraceStateExited.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

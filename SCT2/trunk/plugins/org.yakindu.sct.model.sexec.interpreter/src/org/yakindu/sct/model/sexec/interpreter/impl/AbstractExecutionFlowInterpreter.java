@@ -13,6 +13,7 @@ package org.yakindu.sct.model.sexec.interpreter.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ReactionFired;
 import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter;
@@ -37,7 +38,9 @@ public abstract class AbstractExecutionFlowInterpreter implements
 
 	public void addExecutionListener(IExecutionFacadeListener listener) {
 		synchronized (_listeners) {
-			_listeners.add(listener);
+			if (! _listeners.contains(listener)) {
+				_listeners.add(listener);
+			}
 		}
 	}
 
@@ -60,6 +63,14 @@ public abstract class AbstractExecutionFlowInterpreter implements
 		synchronized (_listeners) {
 			for (IExecutionFacadeListener listener : _listeners) {
 				listener.stateLeft((Vertex) executionState.getSourceElement());
+			}
+		}
+	}
+
+	protected void notifyStateExited(ExecutionNode executionState) {
+		synchronized (_listeners) {
+			for (IExecutionFacadeListener listener : _listeners) {
+				listener.pseudoStateExecuted((Vertex) executionState.getSourceElement());
 			}
 		}
 	}
