@@ -275,11 +275,8 @@ class ModelSequencer {
 	def Reaction mapTransition(Transition t) {
 		val r = t.create 
 		if (t.trigger != null) r.check = mapToCheck(t.trigger)
-		r.effect = mapToEffect(t)
+		r.effect = mapToEffect(t, r)
 		
-		// TODO: move to other extension that can be added to module
-		if (_addTraceSteps) { (r.effect as Sequence).steps += r.newTraceReactionFired() }
-	
 		return r
 	}
 
@@ -323,7 +320,7 @@ class ModelSequencer {
 	}
 
 
-	def Sequence mapToEffect(Transition t) {
+	def Sequence mapToEffect(Transition t, Reaction r) {
 		val sequence = sexecFactory.createSequence 
 
 		// define exit behavior of transition
@@ -344,7 +341,9 @@ class ModelSequencer {
 //		if (t.source != null) sequence.steps.add(newExitStateStep(t.source as State))
 		
 		// map transition actions
-		if (t.effect != null) sequence.steps.add(t.effect.mapEffect)		
+		if (t.effect != null) sequence.steps.add(t.effect.mapEffect)	
+		if (_addTraceSteps) { sequence.steps += r.newTraceReactionFired() }
+		
 
 		// define entry behavior of the transition
 		t.entryStates().reverse.fold(sequence, [seq, state | {
