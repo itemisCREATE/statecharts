@@ -488,6 +488,29 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.TraceNodeExecuted} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TraceNodeExecutedItemProvider traceNodeExecutedItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.TraceNodeExecuted}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTraceNodeExecutedAdapter() {
+		if (traceNodeExecutedItemProvider == null) {
+			traceNodeExecutedItemProvider = new TraceNodeExecutedItemProvider(this);
+		}
+
+		return traceNodeExecutedItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.ReactionFired} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -508,6 +531,52 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		}
 
 		return reactionFiredItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.TraceStateEntered} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TraceStateEnteredItemProvider traceStateEnteredItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.TraceStateEntered}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTraceStateEnteredAdapter() {
+		if (traceStateEnteredItemProvider == null) {
+			traceStateEnteredItemProvider = new TraceStateEnteredItemProvider(this);
+		}
+
+		return traceStateEnteredItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.TraceStateExited} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TraceStateExitedItemProvider traceStateExitedItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.TraceStateExited}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTraceStateExitedAdapter() {
+		if (traceStateExitedItemProvider == null) {
+			traceStateExitedItemProvider = new TraceStateExitedItemProvider(this);
+		}
+
+		return traceStateExitedItemProvider;
 	}
 
 	/**
@@ -699,7 +768,10 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (unscheduleTimeEventItemProvider != null) unscheduleTimeEventItemProvider.dispose();
 		if (stateSwitchItemProvider != null) stateSwitchItemProvider.dispose();
 		if (stateCaseItemProvider != null) stateCaseItemProvider.dispose();
+		if (traceNodeExecutedItemProvider != null) traceNodeExecutedItemProvider.dispose();
 		if (reactionFiredItemProvider != null) reactionFiredItemProvider.dispose();
+		if (traceStateEnteredItemProvider != null) traceStateEnteredItemProvider.dispose();
+		if (traceStateExitedItemProvider != null) traceStateExitedItemProvider.dispose();
 	}
 
 }

@@ -106,6 +106,7 @@ public class SCTSourceDisplay implements ISimulationSessionListener,
 	}
 
 	public void stateEntered(final Vertex vertex) {
+		System.out.println("enter state: " + vertex.getName());
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				getSupport().fadeIn(vertex, parameters);
@@ -114,6 +115,8 @@ public class SCTSourceDisplay implements ISimulationSessionListener,
 	}
 
 	public void stateLeft(final Vertex vertex) {
+		System.out.println("leave state: " + vertex.getName());
+
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				getSupport().fadeOut(vertex, parameters);
@@ -121,7 +124,20 @@ public class SCTSourceDisplay implements ISimulationSessionListener,
 		});
 	}
 
+	
+	public void pseudoStateExecuted(final Vertex vertex) {
+		System.out.println("execute: " + vertex.getName() );
+
+		Display.getDefault().asyncExec(new Runnable() {
+			public void run() {
+				getSupport().flash(vertex, parameters);
+			}
+		});		
+	}
+
 	public void transitionFired(final Transition transition) {
+		System.out.println("take: " + transition.getSource().getName() + " -> " + transition.getTarget().getName());
+
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				getSupport().flash(transition, parameters);

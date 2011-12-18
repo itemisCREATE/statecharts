@@ -1382,6 +1382,61 @@ public interface SexecPackage extends EPackage {
 	int TRACE_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceNodeExecutedImpl <em>Trace Node Executed</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.TraceNodeExecutedImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceNodeExecuted()
+	 * @generated
+	 */
+	int TRACE_NODE_EXECUTED = 23;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_NODE_EXECUTED__NAME = TRACE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_NODE_EXECUTED__COMMENT = TRACE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_NODE_EXECUTED__CALLER = TRACE__CALLER;
+
+	/**
+	 * The feature id for the '<em><b>Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_NODE_EXECUTED__NODE = TRACE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Trace Node Executed</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_NODE_EXECUTED_FEATURE_COUNT = TRACE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ReactionFiredImpl <em>Reaction Fired</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1389,7 +1444,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getReactionFired()
 	 * @generated
 	 */
-	int REACTION_FIRED = 23;
+	int REACTION_FIRED = 24;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1435,6 +1490,117 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int REACTION_FIRED_FEATURE_COUNT = TRACE_FEATURE_COUNT + 1;
+
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceStateEnteredImpl <em>Trace State Entered</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.TraceStateEnteredImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceStateEntered()
+	 * @generated
+	 */
+	int TRACE_STATE_ENTERED = 25;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_STATE_ENTERED__NAME = TRACE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_STATE_ENTERED__COMMENT = TRACE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_STATE_ENTERED__CALLER = TRACE__CALLER;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_STATE_ENTERED__STATE = TRACE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Trace State Entered</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_STATE_ENTERED_FEATURE_COUNT = TRACE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceStateExitedImpl <em>Trace State Exited</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.TraceStateExitedImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceStateExited()
+	 * @generated
+	 */
+	int TRACE_STATE_EXITED = 26;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_STATE_EXITED__NAME = TRACE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_STATE_EXITED__COMMENT = TRACE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_STATE_EXITED__CALLER = TRACE__CALLER;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_STATE_EXITED__STATE = TRACE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Trace State Exited</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_STATE_EXITED_FEATURE_COUNT = TRACE_FEATURE_COUNT + 1;
 
 
 	/**
@@ -2045,6 +2211,27 @@ public interface SexecPackage extends EPackage {
 	EClass getTrace();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.TraceNodeExecuted <em>Trace Node Executed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Trace Node Executed</em>'.
+	 * @see org.yakindu.sct.model.sexec.TraceNodeExecuted
+	 * @generated
+	 */
+	EClass getTraceNodeExecuted();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.TraceNodeExecuted#getNode <em>Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Node</em>'.
+	 * @see org.yakindu.sct.model.sexec.TraceNodeExecuted#getNode()
+	 * @see #getTraceNodeExecuted()
+	 * @generated
+	 */
+	EReference getTraceNodeExecuted_Node();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ReactionFired <em>Reaction Fired</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2064,6 +2251,48 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getReactionFired_Reaction();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.TraceStateEntered <em>Trace State Entered</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Trace State Entered</em>'.
+	 * @see org.yakindu.sct.model.sexec.TraceStateEntered
+	 * @generated
+	 */
+	EClass getTraceStateEntered();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.TraceStateEntered#getState <em>State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>State</em>'.
+	 * @see org.yakindu.sct.model.sexec.TraceStateEntered#getState()
+	 * @see #getTraceStateEntered()
+	 * @generated
+	 */
+	EReference getTraceStateEntered_State();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.TraceStateExited <em>Trace State Exited</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Trace State Exited</em>'.
+	 * @see org.yakindu.sct.model.sexec.TraceStateExited
+	 * @generated
+	 */
+	EClass getTraceStateExited();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.TraceStateExited#getState <em>State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>State</em>'.
+	 * @see org.yakindu.sct.model.sexec.TraceStateExited#getState()
+	 * @see #getTraceStateExited()
+	 * @generated
+	 */
+	EReference getTraceStateExited_State();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.CheckRef <em>Check Ref</em>}'.
@@ -2658,6 +2887,24 @@ public interface SexecPackage extends EPackage {
 		EClass TRACE = eINSTANCE.getTrace();
 
 		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.TraceNodeExecutedImpl <em>Trace Node Executed</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.TraceNodeExecutedImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceNodeExecuted()
+		 * @generated
+		 */
+		EClass TRACE_NODE_EXECUTED = eINSTANCE.getTraceNodeExecuted();
+
+		/**
+		 * The meta object literal for the '<em><b>Node</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRACE_NODE_EXECUTED__NODE = eINSTANCE.getTraceNodeExecuted_Node();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ReactionFiredImpl <em>Reaction Fired</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2674,6 +2921,42 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference REACTION_FIRED__REACTION = eINSTANCE.getReactionFired_Reaction();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.TraceStateEnteredImpl <em>Trace State Entered</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.TraceStateEnteredImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceStateEntered()
+		 * @generated
+		 */
+		EClass TRACE_STATE_ENTERED = eINSTANCE.getTraceStateEntered();
+
+		/**
+		 * The meta object literal for the '<em><b>State</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRACE_STATE_ENTERED__STATE = eINSTANCE.getTraceStateEntered_State();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.TraceStateExitedImpl <em>Trace State Exited</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.TraceStateExitedImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceStateExited()
+		 * @generated
+		 */
+		EClass TRACE_STATE_EXITED = eINSTANCE.getTraceStateExited();
+
+		/**
+		 * The meta object literal for the '<em><b>State</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRACE_STATE_EXITED__STATE = eINSTANCE.getTraceStateExited_State();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.CheckRefImpl <em>Check Ref</em>}' class.

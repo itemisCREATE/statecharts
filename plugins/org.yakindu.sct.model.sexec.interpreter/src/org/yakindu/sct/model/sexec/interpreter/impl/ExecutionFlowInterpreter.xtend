@@ -54,6 +54,9 @@ import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.sexec.interpreter.ITimingService
 import com.google.inject.name.Named
 import org.yakindu.sct.model.sexec.interpreter.InterpreterModule
+import org.yakindu.sct.model.sexec.TraceStateEntered
+import org.yakindu.sct.model.sexec.TraceStateExited
+import org.yakindu.sct.model.sexec.TraceNodeExecuted
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -70,7 +73,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
 	@Inject 
 	ITimingService timingService 
 	@Inject
-	@Named(InterpreterModule::INTERPRETER_NAME)
+	@Named("InterpreterName")
 	String interpreterName
 	
 	ExecutionFlow flow
@@ -113,7 +116,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
 	}
 	
 	override runCycle() {
-		executionContext.stateConfiguration.forEach(state | state.reactSequence.execute)
+		executionContext.stateConfiguration.toList.forEach(state | state.reactSequence.execute)
 		executionContext.resetRaisedEvents
 	} 
 
@@ -170,6 +173,21 @@ class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
 		null
 	}
 	
+	def dispatch execute(TraceStateEntered entered){
+		notifyStateEntered(entered.state)
+		null
+	}
+	
+	def dispatch execute(TraceStateExited exited){
+		notifyStateExited(exited.state)
+		null
+	}
+	
+	def dispatch execute(TraceNodeExecuted executed){
+		notifyStateExited(executed.node)
+		null
+	}
+	
 	def dispatch execute(Check check){
 		if(check.condition == null)
 			return true
@@ -179,7 +197,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
 	}
 	def dispatch execute(EnterState enterState){
 		executionContext.stateConfiguration.add(enterState.state)
-		notifyStateEntered(enterState.state)
+//		notifyStateEntered(enterState.state)
 		null
 	}
 	def dispatch execute(Execution execution){ 
@@ -188,7 +206,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
 	
 	def dispatch execute(ExitState exitState){
 		executionContext.stateConfiguration.remove(exitState.state)
-		notifyStateExited(exitState.state)
+//		notifyStateExited(exitState.state)
 		null
 	}
 	def dispatch execute(If ifStep){

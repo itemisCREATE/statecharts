@@ -188,6 +188,15 @@ public interface SexecFactory extends EFactory {
 	StateCase createStateCase();
 
 	/**
+	 * Returns a new object of class '<em>Trace Node Executed</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Trace Node Executed</em>'.
+	 * @generated
+	 */
+	TraceNodeExecuted createTraceNodeExecuted();
+
+	/**
 	 * Returns a new object of class '<em>Reaction Fired</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -195,6 +204,24 @@ public interface SexecFactory extends EFactory {
 	 * @generated
 	 */
 	ReactionFired createReactionFired();
+
+	/**
+	 * Returns a new object of class '<em>Trace State Entered</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Trace State Entered</em>'.
+	 * @generated
+	 */
+	TraceStateEntered createTraceStateEntered();
+
+	/**
+	 * Returns a new object of class '<em>Trace State Exited</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Trace State Exited</em>'.
+	 * @generated
+	 */
+	TraceStateExited createTraceStateExited();
 
 	/**
 	 * Returns a new object of class '<em>Check Ref</em>'.

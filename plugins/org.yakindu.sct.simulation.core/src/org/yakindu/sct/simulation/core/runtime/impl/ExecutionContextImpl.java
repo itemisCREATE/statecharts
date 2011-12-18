@@ -88,18 +88,18 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	}
 
 	public boolean isEventRaised(String eventName) {
-		System.out.println("IsEvent Raised: " + eventName);
+//		System.out.println("IsEvent Raised: " + eventName);
 		synchronized (raisedEvents) {
 			for (ExecutionEvent event : raisedEvents) {
 				if (eventName.equals(event.getName())) {
-					System.out.println("True");
+//					System.out.println("True");
 					return true;
 				}
 			}
 		}
-		System.out.println("False");
+//		System.out.println("False");
 		for (ExecutionEvent event : raisedEvents) {
-			System.out.println(event.getName());
+//			System.out.println(event.getName());
 		}
 		return false;
 	}

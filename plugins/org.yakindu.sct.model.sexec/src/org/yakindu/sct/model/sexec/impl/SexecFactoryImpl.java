@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -101,7 +102,10 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 			case SexecPackage.UNSCHEDULE_TIME_EVENT: return createUnscheduleTimeEvent();
 			case SexecPackage.STATE_SWITCH: return createStateSwitch();
 			case SexecPackage.STATE_CASE: return createStateCase();
+			case SexecPackage.TRACE_NODE_EXECUTED: return createTraceNodeExecuted();
 			case SexecPackage.REACTION_FIRED: return createReactionFired();
+			case SexecPackage.TRACE_STATE_ENTERED: return createTraceStateEntered();
+			case SexecPackage.TRACE_STATE_EXITED: return createTraceStateExited();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -292,9 +296,39 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public TraceNodeExecuted createTraceNodeExecuted() {
+		TraceNodeExecutedImpl traceNodeExecuted = new TraceNodeExecutedImpl();
+		return traceNodeExecuted;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ReactionFired createReactionFired() {
 		ReactionFiredImpl reactionFired = new ReactionFiredImpl();
 		return reactionFired;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TraceStateEntered createTraceStateEntered() {
+		TraceStateEnteredImpl traceStateEntered = new TraceStateEnteredImpl();
+		return traceStateEntered;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TraceStateExited createTraceStateExited() {
+		TraceStateExitedImpl traceStateExited = new TraceStateExitedImpl();
+		return traceStateExited;
 	}
 
 	/**

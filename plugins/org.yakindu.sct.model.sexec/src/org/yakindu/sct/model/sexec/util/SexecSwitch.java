@@ -9,6 +9,7 @@ package org.yakindu.sct.model.sexec.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -274,12 +275,39 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SexecPackage.TRACE_NODE_EXECUTED: {
+				TraceNodeExecuted traceNodeExecuted = (TraceNodeExecuted)theEObject;
+				T result = caseTraceNodeExecuted(traceNodeExecuted);
+				if (result == null) result = caseTrace(traceNodeExecuted);
+				if (result == null) result = caseStep(traceNodeExecuted);
+				if (result == null) result = caseNamedElement(traceNodeExecuted);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case SexecPackage.REACTION_FIRED: {
 				ReactionFired reactionFired = (ReactionFired)theEObject;
 				T result = caseReactionFired(reactionFired);
 				if (result == null) result = caseTrace(reactionFired);
 				if (result == null) result = caseStep(reactionFired);
 				if (result == null) result = caseNamedElement(reactionFired);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.TRACE_STATE_ENTERED: {
+				TraceStateEntered traceStateEntered = (TraceStateEntered)theEObject;
+				T result = caseTraceStateEntered(traceStateEntered);
+				if (result == null) result = caseTrace(traceStateEntered);
+				if (result == null) result = caseStep(traceStateEntered);
+				if (result == null) result = caseNamedElement(traceStateEntered);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.TRACE_STATE_EXITED: {
+				TraceStateExited traceStateExited = (TraceStateExited)theEObject;
+				T result = caseTraceStateExited(traceStateExited);
+				if (result == null) result = caseTrace(traceStateExited);
+				if (result == null) result = caseStep(traceStateExited);
+				if (result == null) result = caseNamedElement(traceStateExited);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -588,6 +616,21 @@ public class SexecSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Trace Node Executed</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Trace Node Executed</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTraceNodeExecuted(TraceNodeExecuted object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Reaction Fired</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -599,6 +642,36 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseReactionFired(ReactionFired object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Trace State Entered</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Trace State Entered</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTraceStateEntered(TraceStateEntered object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Trace State Exited</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Trace State Exited</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTraceStateExited(TraceStateExited object) {
 		return null;
 	}
 
