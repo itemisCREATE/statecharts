@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.policies;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewType;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalConnectionEditPolicy;
+import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Transition;
@@ -30,19 +32,18 @@ import com.google.common.collect.Lists;
 
 /**
  * 
- * @author muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class RegionCompartmentCanonicalEditPolicy extends
 		CanonicalConnectionEditPolicy {
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected List getSemanticChildrenList() {
 		return getSemanticHost().getVertices();
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected List getSemanticConnectionsList() {
 		List<Transition> transitions = Lists.newArrayList();
@@ -51,6 +52,18 @@ public class RegionCompartmentCanonicalEditPolicy extends
 			transitions.addAll(vertex.getOutgoingTransitions());
 		}
 		return transitions;
+	}
+
+	protected boolean shouldIncludeConnection(Edge connection,
+			Collection<View> children) {
+		// Connections should only be included, when the source vertex is
+		// contained in the region this edit policy belongs to
+		Transition transition = (Transition) connection.getElement();
+		Vertex source = transition.getSource();
+		if (!getSemanticHost().getVertices().contains(source)) {
+			return false;
+		}
+		return super.shouldIncludeConnection(connection, children);
 	}
 
 	@Override
@@ -84,15 +97,16 @@ public class RegionCompartmentCanonicalEditPolicy extends
 		String factoryHint = SemanticHintUtil.getSemanticHint(modelElement);
 		return factoryHint;
 	}
-	
+
 	protected boolean shouldDeleteView(View view) {
-		  if (ViewType.NOTE.equals(view.getType())
-		      | ViewType.NOTEATTACHMENT.equals(view.getType())
-		       || ViewType.TEXT.equals(view.getType())) {
-		    return false;
-		   }
-		   return true;
+		//#Bug 349119 
+		if (ViewType.NOTE.equals(view.getType())
+				| ViewType.NOTEATTACHMENT.equals(view.getType())
+				|| ViewType.TEXT.equals(view.getType())) {
+			return false;
 		}
+		return true;
+	}
 
 	@Override
 	protected String getDefaultFactoryHint() {
