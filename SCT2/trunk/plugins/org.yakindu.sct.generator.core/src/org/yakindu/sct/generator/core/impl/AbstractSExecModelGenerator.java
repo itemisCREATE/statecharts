@@ -10,7 +10,17 @@
  */
 package org.yakindu.sct.generator.core.impl;
 
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.*;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.DEBUG_FEATURE;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.DEBUG_FEATURE_DUMP_SEXEC;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_CHOICES;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTER_SEQUENCES;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_REACTIONS;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,8 +37,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
@@ -68,7 +76,6 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 		super();
 		info = getConsole().newMessageStream();
 		error = getConsole().newMessageStream();
-		error.setColor(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 		error.setActivateOnWrite(true);
 	}
 
@@ -110,35 +117,45 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 	/**
 	 * Transforms the {@link Statechart} model to a {@link ExecutionFlow} model
 	 */
-	protected ExecutionFlow createExecutionFlow(Statechart statechart, GeneratorEntry entry) {
+	protected ExecutionFlow createExecutionFlow(Statechart statechart,
+			GeneratorEntry entry) {
 		Injector injector = Guice.createInjector(new SequencerModule());
 		ModelSequencer sequencer = injector.getInstance(ModelSequencer.class);
 		ExecutionFlow flow = sequencer.transform(statechart);
 		Assert.isNotNull(flow, "Error creation ExecutionFlow");
 
-		FeatureConfiguration optimizeConfig = entry.getFeatureConfiguration(FUNCTION_INLINING_FEATURE);
-		
+		FeatureConfiguration optimizeConfig = entry
+				.getFeatureConfiguration(FUNCTION_INLINING_FEATURE);
+
 		FlowOptimizer optimizer = injector.getInstance(FlowOptimizer.class);
-		
-		optimizer.inlineReactions( getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_REACTIONS, true) );
-		optimizer.inlineExitActions( getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS, true) );
-		optimizer.inlineEntryActions( getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS, true) );
-		optimizer.inlineEnterSequences( getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_ENTER_SEQUENCES, true) );
-		optimizer.inlineExitSequences( getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES, true) );
-		optimizer.inlineChoices( getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_CHOICES, true) );
-		
+
+		optimizer.inlineReactions(getBoolValue(optimizeConfig,
+				FUNCTION_INLINING_FEATURE_INLINE_REACTIONS, true));
+		optimizer.inlineExitActions(getBoolValue(optimizeConfig,
+				FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS, true));
+		optimizer.inlineEntryActions(getBoolValue(optimizeConfig,
+				FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS, true));
+		optimizer.inlineEnterSequences(getBoolValue(optimizeConfig,
+				FUNCTION_INLINING_FEATURE_INLINE_ENTER_SEQUENCES, true));
+		optimizer.inlineExitSequences(getBoolValue(optimizeConfig,
+				FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES, true));
+		optimizer.inlineChoices(getBoolValue(optimizeConfig,
+				FUNCTION_INLINING_FEATURE_INLINE_CHOICES, true));
+
 		flow = optimizer.transform(flow);
 
 		return flow;
 	}
 
-	boolean getBoolValue(FeatureConfiguration conf, String param, boolean defaultValue) {
-		if ( conf != null && conf.getParameterValue(param) != null ) 
+	boolean getBoolValue(FeatureConfiguration conf, String param,
+			boolean defaultValue) {
+		if (conf != null && conf.getParameterValue(param) != null) {
 			return conf.getParameterValue(param).getBooleanValue();
-		
+		}
+
 		return defaultValue;
 	}
-	
+
 	protected final void writeToConsole(Throwable t) {
 		PrintWriter printWriter = new PrintWriter(error);
 		t.printStackTrace(printWriter);
@@ -211,8 +228,9 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 	protected boolean isDumpSexec(GeneratorEntry entry) {
 		FeatureParameterValue dumpSexec = getFeatureParameter(entry,
 				DEBUG_FEATURE, DEBUG_FEATURE_DUMP_SEXEC);
-		if (dumpSexec == null)
+		if (dumpSexec == null) {
 			return false;
+		}
 		return dumpSexec.getBooleanValue();
 	}
 

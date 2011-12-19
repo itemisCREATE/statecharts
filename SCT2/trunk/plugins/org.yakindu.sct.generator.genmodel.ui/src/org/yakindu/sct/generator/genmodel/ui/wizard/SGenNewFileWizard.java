@@ -14,7 +14,10 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -25,6 +28,8 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.yakindu.sct.builder.nature.SCTNature;
+import org.yakindu.sct.builder.nature.ToggleSCTNatureAction;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgraph.Statechart;
 
@@ -77,6 +82,7 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 			@Override
 			protected void execute(IProgressMonitor monitor)
 					throws CoreException, InterruptedException {
+				ensureSCTNature(getProject(modelFilePage.getContainerFullPath()));
 				createDefaultModel(modelFilePage.getURI());
 			}
 		};
@@ -87,6 +93,20 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 			return false;
 		}
 		return true;
+	}
+
+	protected void ensureSCTNature(IProject project) throws CoreException {
+		if (project.getNature(SCTNature.NATURE_ID) == null) {
+			new ToggleSCTNatureAction().toggleNature(project);
+		}
+	}
+
+	protected IProject getProject(IPath containerFullPath) {
+		if (containerFullPath.segmentCount() == 1) {
+			return ResourcesPlugin.getWorkspace().getRoot().getProject(containerFullPath.lastSegment());
+		}
+		return ResourcesPlugin.getWorkspace().getRoot()
+				.getFolder(containerFullPath).getProject();
 	}
 
 	private void createDefaultModel(URI uri) {
