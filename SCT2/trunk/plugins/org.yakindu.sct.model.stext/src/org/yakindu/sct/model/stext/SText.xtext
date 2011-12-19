@@ -112,7 +112,7 @@ ReactionTrigger returns sct::Trigger:
 	| ('[' guardExpression=Expression ']'));
 
 ReactionEffect returns sct::Effect:
-	{ReactionEffect} (actions+=Statement ';')+;
+	{ReactionEffect} actions+=Statement (';' actions+=Statement )* (';')?;
 
 ReactionProperties:
 	{ReactionProperties} (properties+=ReactionProperty)*;

@@ -996,32 +996,44 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ReactionEffect");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cReactionEffectAction_0 = (Action)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Assignment cActionsAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
-		private final RuleCall cActionsStatementParserRuleCall_1_0_0 = (RuleCall)cActionsAssignment_1_0.eContents().get(0);
-		private final Keyword cSemicolonKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cActionsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cActionsStatementParserRuleCall_1_0 = (RuleCall)cActionsAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cSemicolonKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cActionsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cActionsStatementParserRuleCall_2_1_0 = (RuleCall)cActionsAssignment_2_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//ReactionEffect returns sct::Effect:
-		//	{ReactionEffect} (actions+=Statement ";")+;
+		//	{ReactionEffect} actions+=Statement (";" actions+=Statement)* ";"?;
 		public ParserRule getRule() { return rule; }
 
-		//{ReactionEffect} (actions+=Statement ";")+
+		//{ReactionEffect} actions+=Statement (";" actions+=Statement)* ";"?
 		public Group getGroup() { return cGroup; }
 
 		//{ReactionEffect}
 		public Action getReactionEffectAction_0() { return cReactionEffectAction_0; }
 
-		//(actions+=Statement ";")+
-		public Group getGroup_1() { return cGroup_1; }
-
 		//actions+=Statement
-		public Assignment getActionsAssignment_1_0() { return cActionsAssignment_1_0; }
+		public Assignment getActionsAssignment_1() { return cActionsAssignment_1; }
 
 		//Statement
-		public RuleCall getActionsStatementParserRuleCall_1_0_0() { return cActionsStatementParserRuleCall_1_0_0; }
+		public RuleCall getActionsStatementParserRuleCall_1_0() { return cActionsStatementParserRuleCall_1_0; }
+
+		//(";" actions+=Statement)*
+		public Group getGroup_2() { return cGroup_2; }
 
 		//";"
-		public Keyword getSemicolonKeyword_1_1() { return cSemicolonKeyword_1_1; }
+		public Keyword getSemicolonKeyword_2_0() { return cSemicolonKeyword_2_0; }
+
+		//actions+=Statement
+		public Assignment getActionsAssignment_2_1() { return cActionsAssignment_2_1; }
+
+		//Statement
+		public RuleCall getActionsStatementParserRuleCall_2_1_0() { return cActionsStatementParserRuleCall_2_1_0; }
+
+		//";"?
+		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
 	public class ReactionPropertiesElements extends AbstractParserRuleElementFinder {
@@ -3221,7 +3233,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ReactionEffect returns sct::Effect:
-	//	{ReactionEffect} (actions+=Statement ";")+;
+	//	{ReactionEffect} actions+=Statement (";" actions+=Statement)* ";"?;
 	public ReactionEffectElements getReactionEffectAccess() {
 		return (pReactionEffect != null) ? pReactionEffect : (pReactionEffect = new ReactionEffectElements());
 	}
