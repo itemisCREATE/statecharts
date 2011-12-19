@@ -82,7 +82,7 @@ public interface IExecutionContext {
 	/**
 	 * Returns a Set with all currently active states
 	 */
-	public Set<Vertex> getActiveStates();
+	public Set<Vertex> getActiveLeafStates();
 	/**
 	 * Returns the active state configuration
 	 */

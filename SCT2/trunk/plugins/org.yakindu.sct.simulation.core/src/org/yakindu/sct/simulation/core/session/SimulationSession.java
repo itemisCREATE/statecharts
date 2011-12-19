@@ -11,12 +11,17 @@
 package org.yakindu.sct.simulation.core.session;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import org.yakindu.sct.model.sgraph.CompositeElement;
+import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
@@ -151,12 +156,29 @@ public class SimulationSession implements Runnable {
 		}
 	}
 
-	public IExecutionContext getExecutionScope() {
+	public IExecutionContext getExecutionContext() {
 		return facade.getExecutionContext();
 	}
 
 	public SimulationState getCurrentState() {
 		return currentState;
+	}
+
+	public Set<Vertex> getActiveStates() {
+		Set<Vertex> activeStates = new HashSet<Vertex>();
+		Set<Vertex> leafStates = facade.getExecutionContext()
+				.getActiveLeafStates();
+		activeStates.addAll(leafStates);
+		for (Vertex vertex : leafStates) {
+			CompositeElement composite = vertex.getParentRegion()
+					.getComposite();
+			while (composite instanceof State) {
+				activeStates.add((State) composite);
+				composite = ((State) composite).getParentRegion()
+						.getComposite();
+			}
+		}
+		return activeStates;
 	}
 
 }

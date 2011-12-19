@@ -145,7 +145,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		// TODO: Implement me
 	}
 
-	public Set<Vertex> getActiveStates() {
+	public Set<Vertex> getActiveLeafStates() {
 		Set<Vertex> vertices = new HashSet<Vertex>();
 		for (ExecutionState state : activeStateConfig) {
 			vertices.add((Vertex) state.getSourceElement());
