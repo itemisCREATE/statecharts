@@ -139,6 +139,31 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	 * A leaf state must have a enter sequence. 
 	 * This enter sequence consists of an entry action call and a state enter step.
 	 */
+	@Test public void testFinalStateEnterSequence() {
+		Statechart sc = _createStatechart("cs");
+		Scope scope = _createInterfaceScope("interface", sc);
+		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		Region r = _createRegion("r", sc);
+		FinalState fs = _createFinalState(r);
+		
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		ExecutionState _fs = flow.getStates().get(0);
+		assertEquals("_final_", _fs.getSimpleName());
+		assertSame(fs,  _fs.getSourceElement());
+		
+		assertNull(_fs.getEntryAction());
+		assertNotNull(_fs.getEnterSequence());
+		
+		assertEquals(1, _fs.getEnterSequence().getSteps().size());
+		assertTrue(_fs.getEnterSequence().getSteps().get(0) instanceof EnterState);
+	}
+
+
+	/**
+	 * A leaf state must have a enter sequence. 
+	 * This enter sequence consists of an entry action call and a state enter step.
+	 */
 	@Test public void testLeafStateEnterSequence() {
 		Statechart sc = _createStatechart("cs");
 		Scope scope = _createInterfaceScope("interface", sc);
@@ -162,7 +187,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertTrue(_s1.getEnterSequence().getSteps().get(1) instanceof EnterState);
 	}
 
-	
+
 	/**
 	 * A composite state must have a enter sequence. 
 	 * This enter sequence consists of an entry action call and a enter sequence call for each sub region.
@@ -238,6 +263,30 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertTrue(_s1.getExitSequence().getSteps().get(0) instanceof ExitState);
 
 		assertCall(_s1.getExitSequence(), 1, _s1.getExitAction());
+				
+	}
+
+	
+	/**
+	 * A final state must have a exit sequence. 
+	 * This exit sequence consists of a state exit step.
+	 */
+	@Test public void testFinalStateExitSequence() {
+		Statechart sc = _createStatechart("cs");
+		Scope scope = _createInterfaceScope("interface", sc);
+		Region r = _createRegion("r", sc);
+		FinalState fs = _createFinalState(r);
+		
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		ExecutionState _fs = flow.getStates().get(0);
+		assertEquals("_final_", _fs.getSimpleName());
+		
+		assertNull(_fs.getExitAction());
+		assertNotNull(_fs.getExitSequence());
+		assertEquals(1, _fs.getExitSequence().getSteps().size());
+
+		assertTrue(_fs.getExitSequence().getSteps().get(0) instanceof ExitState);
 				
 	}
 
@@ -928,7 +977,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 							
 							Region r_s3 = _createRegion("r", s3); {
 								State s4 = _createState("s4", r_s3);
-								_createEntryAssignment(v1, s4, 3);
+								//_createEntryAssignment(v1, s4, 3);
 
 								FinalState fs = _createFinalState(r_s3);
 
@@ -991,6 +1040,55 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertEquals(1,	cycle.getSteps().size());
 		assertNotNull( _if.getElseStep() );
 
+	}
+	
+	
+	/**
+	 * The enter sequence must be called withnin incoming transitions.
+	 */
+	@Test public void testFinalStateEnterSequenceCall() {
+		
+		Statechart sc = _createStatechart("sc"); {  
+			
+			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
+			VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, s_scope);
+			EventDefinition e1 = _createEventDefinition("e1", s_scope);
+			
+
+			Region r = _createRegion("r", sc); {
+				State s1 = _createState("s1", r); 
+				
+				FinalState fs = _createFinalState(r);
+
+				Transition t_s1_fs = _createTransition(s1, fs);
+				_createRegularEventSpec(e1, (ReactionTrigger) t_s1_fs.getTrigger());
+
+			}
+		}
+		
+
+		ExecutionFlow flow = sequencer.transform(sc);
+		 
+		
+		ExecutionState _s1 = flow.getStates().get(0);
+		assertEquals("sc.r.s1", _s1.getName());
+
+		ExecutionState _fs = flow.getStates().get(1);
+		assertEquals("sc.r._final_", _fs.getName());
+		
+		assertNull(_fs.getEntryAction());
+		assertNull(_fs.getExitAction());
+			
+		
+		
+		//the transition s1 -> fs must includes the fs exit sequence call
+		Sequence cycle = _s1.getReactSequence();
+		If _if = (If) cycle.getSteps().get(0);
+		assertCall(_if.getThenStep(), _s1.getReactions().get(0).getEffect());
+
+		Sequence _seq = (Sequence) _s1.getReactions().get(0).getEffect();
+		assertCall(_seq, 1, _fs.getEnterSequence());		
+		
 	}
 
 

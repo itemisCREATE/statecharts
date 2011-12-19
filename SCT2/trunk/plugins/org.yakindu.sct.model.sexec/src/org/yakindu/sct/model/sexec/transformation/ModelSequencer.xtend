@@ -324,8 +324,8 @@ class ModelSequencer {
 		val sequence = sexecFactory.createSequence 
 
 		// define exit behavior of transition
-		if (t.source != null && t.source instanceof State) {
-			sequence.steps.add((t.source as State).create.exitSequence.newCall)	
+		if (t.source != null && t.source instanceof RegularState) {
+			sequence.steps.add((t.source as RegularState).create.exitSequence.newCall)	
 		}
 
 		t.exitStates().fold(sequence, [seq, state | {
@@ -355,8 +355,8 @@ class ModelSequencer {
 		}])
 		
 		if (t.target != null ) 
-			if ( t.target instanceof State) {
-				sequence.steps.add((t.target as State).create.enterSequence.newCall )	
+			if ( t.target instanceof RegularState) {
+				sequence.steps.add((t.target as RegularState).create.enterSequence.newCall )	
 			} else if ( t.target instanceof Choice ) {
 				sequence.steps.add((t.target as Choice).create.reactSequence.newCall )	
 			}
@@ -759,14 +759,33 @@ class ModelSequencer {
 	}
 	
 
-	def void defineStateEnterSequence(Region r) {
+	def dispatch void defineStateEnterSequence(Region r) {
 		
-		// process all states of a region
-		for ( s : r.vertices.filter(typeof(State))) defineStateEnterSequence(s)
+		// process all vertices of a region
+		for ( s : r.vertices) defineStateEnterSequence(s)
 	}
 	
+
+	def dispatch void defineStateEnterSequence(Vertex v) {
+	}	
 	
-	def void defineStateEnterSequence(State state) {
+	
+	def dispatch void defineStateEnterSequence(FinalState state) {
+		val execState = state.create
+		val seq = sexecFactory.createSequence
+		seq.name = "enterSequence"
+		seq.comment = "Default enter sequence for state " + state.name
+		if (execState.entryAction != null) seq.steps.add(execState.entryAction.newCall)
+		
+		if ( _addTraceSteps ) seq.steps += execState.newTraceStateEntered
+		
+		seq.steps += state.newEnterStateStep
+		execState.enterSequence = seq
+	}	
+	
+	
+	
+	def dispatch void defineStateEnterSequence(State state) {
 		
 		val execState = state.create
 		val seq = sexecFactory.createSequence

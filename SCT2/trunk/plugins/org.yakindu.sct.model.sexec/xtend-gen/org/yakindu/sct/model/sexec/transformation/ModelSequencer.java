@@ -531,12 +531,12 @@ public class ModelSequencer {
         _operator_and = false;
       } else {
         Vertex _source_1 = t.getSource();
-        _operator_and = BooleanExtensions.operator_and(_operator_notEquals, (_source_1 instanceof org.yakindu.sct.model.sgraph.State));
+        _operator_and = BooleanExtensions.operator_and(_operator_notEquals, (_source_1 instanceof org.yakindu.sct.model.sgraph.RegularState));
       }
       if (_operator_and) {
         EList<Step> _steps = sequence.getSteps();
         Vertex _source_2 = t.getSource();
-        ExecutionState _create = this.factory.create(((State) _source_2));
+        ExecutionState _create = this.factory.create(((RegularState) _source_2));
         Sequence _exitSequence = _create.getExitSequence();
         Call _newCall = this.factory.newCall(_exitSequence);
         _steps.add(_newCall);
@@ -625,10 +625,10 @@ public class ModelSequencer {
       boolean _operator_notEquals_6 = ObjectExtensions.operator_notEquals(_target_1, null);
       if (_operator_notEquals_6) {
         Vertex _target_2 = t.getTarget();
-        if ((_target_2 instanceof org.yakindu.sct.model.sgraph.State)) {
+        if ((_target_2 instanceof org.yakindu.sct.model.sgraph.RegularState)) {
           EList<Step> _steps_7 = sequence.getSteps();
           Vertex _target_3 = t.getTarget();
-          ExecutionState _create_7 = this.factory.create(((State) _target_3));
+          ExecutionState _create_7 = this.factory.create(((RegularState) _target_3));
           Sequence _enterSequence = _create_7.getEnterSequence();
           Call _newCall_3 = this.factory.newCall(_enterSequence);
           _steps_7.add(_newCall_3);
@@ -1530,15 +1530,48 @@ public class ModelSequencer {
     }
   }
   
-  public void defineStateEnterSequence(final Region r) {
+  protected void _defineStateEnterSequence(final Region r) {
     EList<Vertex> _vertices = r.getVertices();
-    Iterable<State> _filter = IterableExtensions.<State>filter(_vertices, org.yakindu.sct.model.sgraph.State.class);
-    for (State s : _filter) {
+    for (Vertex s : _vertices) {
       this.defineStateEnterSequence(s);
     }
   }
   
-  public void defineStateEnterSequence(final State state) {
+  protected void _defineStateEnterSequence(final Vertex v) {
+  }
+  
+  protected void _defineStateEnterSequence(final FinalState state) {
+    {
+      ExecutionState _create = this.factory.create(state);
+      final ExecutionState execState = _create;
+      SexecFactory _sexecFactory = this.sexecFactory();
+      Sequence _createSequence = _sexecFactory.createSequence();
+      final Sequence seq = _createSequence;
+      seq.setName("enterSequence");
+      String _name = state.getName();
+      String _operator_plus = StringExtensions.operator_plus("Default enter sequence for state ", _name);
+      seq.setComment(_operator_plus);
+      Step _entryAction = execState.getEntryAction();
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_entryAction, null);
+      if (_operator_notEquals) {
+        EList<Step> _steps = seq.getSteps();
+        Step _entryAction_1 = execState.getEntryAction();
+        Call _newCall = this.factory.newCall(_entryAction_1);
+        _steps.add(_newCall);
+      }
+      if (this._addTraceSteps) {
+        EList<Step> _steps_1 = seq.getSteps();
+        TraceStateEntered _newTraceStateEntered = this.newTraceStateEntered(execState);
+        CollectionExtensions.<TraceStateEntered>operator_add(_steps_1, _newTraceStateEntered);
+      }
+      EList<Step> _steps_2 = seq.getSteps();
+      EnterState _newEnterStateStep = this.newEnterStateStep(state);
+      CollectionExtensions.<EnterState>operator_add(_steps_2, _newEnterStateStep);
+      execState.setEnterSequence(seq);
+    }
+  }
+  
+  protected void _defineStateEnterSequence(final State state) {
     {
       ExecutionState _create = this.factory.create(state);
       final ExecutionState execState = _create;
@@ -2165,6 +2198,21 @@ public class ModelSequencer {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         java.util.Arrays.<Object>asList(e).toString());
+    }
+  }
+  
+  public void defineStateEnterSequence(final NamedElement state) {
+    if ((state instanceof FinalState)) {
+      _defineStateEnterSequence((FinalState)state);
+    } else if ((state instanceof State)) {
+      _defineStateEnterSequence((State)state);
+    } else if ((state instanceof Region)) {
+      _defineStateEnterSequence((Region)state);
+    } else if ((state instanceof Vertex)) {
+      _defineStateEnterSequence((Vertex)state);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        java.util.Arrays.<Object>asList(state).toString());
     }
   }
   
