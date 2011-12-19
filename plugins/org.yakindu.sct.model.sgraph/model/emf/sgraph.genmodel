@@ -12,6 +12,10 @@
       <genEnumLiterals ecoreEnumLiteral="sgraph.ecore#//EntryKind/shallowHistory"/>
       <genEnumLiterals ecoreEnumLiteral="sgraph.ecore#//EntryKind/deepHistory"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="sgraph.ecore#//ChoiceKind">
+      <genEnumLiterals ecoreEnumLiteral="sgraph.ecore#//ChoiceKind/dynamic"/>
+      <genEnumLiterals ecoreEnumLiteral="sgraph.ecore#//ChoiceKind/static"/>
+    </genEnums>
     <genClasses image="false" ecoreClass="sgraph.ecore#//Pseudostate"/>
     <genClasses image="false" ecoreClass="sgraph.ecore#//Vertex">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//Vertex/parentRegion"/>
@@ -24,6 +28,7 @@
     <genClasses ecoreClass="sgraph.ecore#//Region">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Region/vertices"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Region/priority"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//Region/composite"/>
     </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//Transition">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sgraph.ecore#//Transition/target"/>
@@ -33,17 +38,17 @@
     <genClasses ecoreClass="sgraph.ecore#//FinalState"/>
     <genClasses image="false" ecoreClass="sgraph.ecore#//Variable"/>
     <genClasses ecoreClass="sgraph.ecore#//Event"/>
-    <genClasses ecoreClass="sgraph.ecore#//Choice"/>
-    <genClasses ecoreClass="sgraph.ecore#//Statechart">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Statechart/regions"/>
+    <genClasses ecoreClass="sgraph.ecore#//Choice">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Choice/kind"/>
     </genClasses>
+    <genClasses ecoreClass="sgraph.ecore#//Statechart"/>
     <genClasses ecoreClass="sgraph.ecore#//Entry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Entry/kind"/>
     </genClasses>
     <genClasses image="false" ecoreClass="sgraph.ecore#//Trigger"/>
     <genClasses image="false" ecoreClass="sgraph.ecore#//Effect"/>
-    <genClasses image="false" ecoreClass="sgraph.ecore#//ExpressionElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//ExpressionElement/expression"/>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//SpecificationElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//SpecificationElement/specification"/>
     </genClasses>
     <genClasses image="false" ecoreClass="sgraph.ecore#//Declaration"/>
     <genClasses image="false" ecoreClass="sgraph.ecore#//Reaction">
@@ -66,16 +71,18 @@
     </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//Synchronization"/>
     <genClasses ecoreClass="sgraph.ecore#//State">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//State/subRegions"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/orthogonal"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sgraph.ecore#//State/substatechart"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/substatechartId"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/submachine"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/subchart"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/simple"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/composite"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/leaf"/>
     </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//Statement"/>
     <genClasses ecoreClass="sgraph.ecore#//RegularState"/>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//CompositeElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//CompositeElement/regions"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

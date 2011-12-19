@@ -94,7 +94,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//SpecificationElement #//ReactiveElement #//ScopedElement #//RegularState #//CompositeElement">
     <eAnnotations source="InjectMembers"/>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="NameIsNotEmpty NameIsValidJavaIdentifier"/>
+      <details key="constraints" value="NameIsNotEmpty"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="orthogonal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         changeable="false" volatile="true" transient="true" derived="true"/>

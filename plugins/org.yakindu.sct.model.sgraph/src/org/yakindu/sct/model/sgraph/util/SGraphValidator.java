@@ -57,7 +57,6 @@ import org.yakindu.sct.model.sgraph.Vertex;
 public class SGraphValidator extends EObjectValidator {
 
 	public static final String ISSUE_STATE_WITHOUT_NAME = "A state must have a name.";
-	public static final String ISSUE_STATE_NAME_IDENTIFIER = "The state name must be a valid identifier.";
 	public static final String ISSUE_NODE_NOT_REACHABLE = "Node is not reachable due to missing incoming transition.";
 	public static final String ISSUE_FINAL_STATE_OUTGOING_TRANSITION = "A final state should have no outgoing transition.";
 	public static final String ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION = "A state should have at least one outgoing transition.";
@@ -393,7 +392,6 @@ public class SGraphValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(state, diagnostics, context);
 		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(state, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_NameIsNotEmpty(state, diagnostics, context);
-		if (result || diagnostics != null) result &= validateState_NameIsValidJavaIdentifier(state, diagnostics, context);
 		return result;
 	}
 
@@ -408,29 +406,6 @@ public class SGraphValidator extends EObjectValidator {
 		if ((state.getName() == null || state.getName().trim().length() == 0)
 				&& !(state instanceof FinalState)) {
 			return error(state, diagnostics, ISSUE_STATE_WITHOUT_NAME);
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the NameIsValidJavaIdentifier constraint of '<em>State</em>'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public boolean validateState_NameIsValidJavaIdentifier(State state,
-			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (state.getName() == null || state.getName().trim().length() == 0) {
-			return true;
-		}
-		char[] c = state.getName().toCharArray();
-		if (!Character.isJavaIdentifierStart(c[0])) {
-			return error(state, diagnostics, ISSUE_STATE_NAME_IDENTIFIER);
-		}
-		for (int i = 1; i < c.length; i++) {
-			if (!Character.isJavaIdentifierPart(c[i])) {
-				return error(state, diagnostics, ISSUE_STATE_NAME_IDENTIFIER);
-			}
 		}
 		return true;
 	}
