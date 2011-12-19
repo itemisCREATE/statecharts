@@ -160,9 +160,11 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 
 		System.out.println("flash: " + semanticElement);
 
-		final IFigure figure = (editPart instanceof FixedSizeShapeNodeEditPart) 
-				? (IFigure) 	editPart.getFigure().getChildren().get(0) 
-				: editPart.getFigure();
+		final IFigure figure = getTargetFigure(editPart);
+				
+//				(editPart instanceof FixedSizeShapeNodeEditPart) 
+//				? (IFigure) 	editPart.getFigure().getChildren().get(0) 
+//				: editPart.getFigure();
 		
 		Display.getCurrent().asyncExec(
 				new Fader(figure, figure.getForegroundColor(),
