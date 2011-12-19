@@ -136,7 +136,7 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 
 	public void setEventViewerInput() {
 		if (activeSession != null) {
-			List<ExecutionEvent> events = activeSession.getExecutionScope()
+			List<ExecutionEvent> events = activeSession.getExecutionContext()
 					.getDeclaredEvents();
 
 			eventViewer.setInput(events);
@@ -163,7 +163,7 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 	private void setVariableViewerInput() {
 		if (activeSession != null) {
 			List<ExecutionVariable> variables = activeSession
-					.getExecutionScope().getVariables();
+					.getExecutionContext().getVariables();
 			variableViewer.setInput(variables);
 		}
 	}
@@ -242,12 +242,12 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 		if (!(selectedSession == activeSession) && selectedSession != null) {
 			if (activeSession != null) {
 				activeSession.removeSimulationListener(this);
-				activeSession.getExecutionScope()
+				activeSession.getExecutionContext()
 						.removeExecutionContextListener(this);
 			}
 			activeSession = selectedSession;
 			selectedSession.addSimulationListener(this);
-			selectedSession.getExecutionScope().addExecutionContextListener(
+			selectedSession.getExecutionContext().addExecutionContextListener(
 					this);
 			clearViewerInput(true);
 			setEventViewerInput();

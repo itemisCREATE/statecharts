@@ -58,7 +58,7 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 			return;
 		if (element instanceof ExecutionVariable) {
 			provider.getActiveSession()
-					.getExecutionScope()
+					.getExecutionContext()
 					.setVariableValue(((ExecutionVariable) element).getName(),
 							value);
 		}
