@@ -91,7 +91,7 @@ public class StyledTextXtextAdapter {
 		// create fake resource and containing resource set
 		createFakeResourceContext(injector);
 	}
-	
+
 	public StyledTextXtextAdapter(Injector injector) {
 		this(injector, IXtextFakeContextResourcesProvider.NULL_CONTEXT_PROVIDER);
 	}
@@ -163,7 +163,8 @@ public class StyledTextXtextAdapter {
 	}
 
 	protected void createXtextSourceViewer() {
-		sourceviewer = new XtextSourceViewerEx(styledText);
+		sourceviewer = new XtextSourceViewerEx(styledText,
+				preferenceStoreAccess.getPreferenceStore());
 		sourceviewer.configure(configuration);
 		sourceviewer.setDocument(document, new AnnotationModel());
 		SourceViewerDecorationSupport support = new SourceViewerDecorationSupport(
@@ -172,15 +173,6 @@ public class StyledTextXtextAdapter {
 		configureSourceViewerDecorationSupport(support);
 	}
 
-	protected void initXtextSourceViewer() {
-		sourceviewer.configure(configuration);
-		sourceviewer.setDocument(document, new AnnotationModel());
-		SourceViewerDecorationSupport support = new SourceViewerDecorationSupport(
-				sourceviewer, null, new DefaultMarkerAnnotationAccess(),
-				getSharedColors());
-		configureSourceViewerDecorationSupport(support);
-	}
-	
 	protected ISharedTextColors getSharedColors() {
 		return EditorsPlugin.getDefault().getSharedTextColors();
 	}

@@ -2,14 +2,16 @@ package de.itemis.xtext.utils.jface.viewers;
 
 import java.lang.reflect.Field;
 
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.projection.ProjectionDocument;
+import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
-
 
 /**
  * Source viewer replacement that implements a workaround for Eclipse bug
@@ -21,13 +23,16 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 class XtextSourceViewerEx extends XtextSourceViewer {
 
 	private final StyledText styledText;
+	private final IPreferenceStore preferenceStore;
 
-	public XtextSourceViewerEx(StyledText styledText) {
+	public XtextSourceViewerEx(StyledText styledText,
+			IPreferenceStore preferenceStore) {
 		// super constructor will create a new text widget by calling
 		// createControl(). As we want to use the passed in styled text, we have
 		// to disable this mechanism.
 		super(null, null, null, false, styledText.getStyle());
 		this.styledText = styledText;
+		this.preferenceStore = preferenceStore;
 		super.createControl(styledText.getParent(), styledText.getStyle());
 	}
 
@@ -73,6 +78,22 @@ class XtextSourceViewerEx extends XtextSourceViewer {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void configure(SourceViewerConfiguration configuration) {
+		// We have to set the preference store via reflection here because Xtext
+		// uses package visibility for the setter
+		Field declaredField;
+		try {
+			declaredField = TextSourceViewerConfiguration.class
+					.getDeclaredField("fPreferenceStore");
+			declaredField.setAccessible(true);
+			declaredField.set(configuration, preferenceStore);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.configure(configuration);
 	}
 
 	/**
