@@ -4646,11 +4646,11 @@ protected class ReactionTrigger_RightSquareBracketKeyword_1_1_2 extends KeywordT
 /************ begin Rule ReactionEffect ****************
  *
  * ReactionEffect returns sct::Effect:
- * 	{ReactionEffect} (actions+=Statement ";")+;
+ * 	{ReactionEffect} actions+=Statement (";" actions+=Statement)* ";"?;
  *
  **/
 
-// {ReactionEffect} (actions+=Statement ";")+
+// {ReactionEffect} actions+=Statement (";" actions+=Statement)* ";"?
 protected class ReactionEffect_Group extends GroupToken {
 	
 	public ReactionEffect_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4665,7 +4665,8 @@ protected class ReactionEffect_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ReactionEffect_Group_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new ReactionEffect_Group_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new ReactionEffect_ActionsAssignment_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -4705,38 +4706,16 @@ protected class ReactionEffect_ReactionEffectAction_0 extends ActionToken  {
 	}
 }
 
-// (actions+=Statement ";")+
-protected class ReactionEffect_Group_1 extends GroupToken {
-	
-	public ReactionEffect_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getReactionEffectAccess().getGroup_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new ReactionEffect_SemicolonKeyword_1_1(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-}
-
 // actions+=Statement
-protected class ReactionEffect_ActionsAssignment_1_0 extends AssignmentToken  {
+protected class ReactionEffect_ActionsAssignment_1 extends AssignmentToken  {
 	
-	public ReactionEffect_ActionsAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ReactionEffect_ActionsAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getReactionEffectAccess().getActionsAssignment_1_0();
+		return grammarAccess.getReactionEffectAccess().getActionsAssignment_1();
 	}
 
     @Override
@@ -4755,7 +4734,7 @@ protected class ReactionEffect_ActionsAssignment_1_0 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getStatementRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getReactionEffectAccess().getActionsStatementParserRuleCall_1_0_0(); 
+				element = grammarAccess.getReactionEffectAccess().getActionsStatementParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4767,33 +4746,101 @@ protected class ReactionEffect_ActionsAssignment_1_0 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new ReactionEffect_Group_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new ReactionEffect_ReactionEffectAction_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new ReactionEffect_ReactionEffectAction_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
-// ";"
-protected class ReactionEffect_SemicolonKeyword_1_1 extends KeywordToken  {
+// (";" actions+=Statement)*
+protected class ReactionEffect_Group_2 extends GroupToken {
 	
-	public ReactionEffect_SemicolonKeyword_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ReactionEffect_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getReactionEffectAccess().getSemicolonKeyword_1_1();
+	public Group getGrammarElement() {
+		return grammarAccess.getReactionEffectAccess().getGroup_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ReactionEffect_ActionsAssignment_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new ReactionEffect_ActionsAssignment_2_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
+}
+
+// ";"
+protected class ReactionEffect_SemicolonKeyword_2_0 extends KeywordToken  {
+	
+	public ReactionEffect_SemicolonKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getReactionEffectAccess().getSemicolonKeyword_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new ReactionEffect_Group_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new ReactionEffect_ActionsAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// actions+=Statement
+protected class ReactionEffect_ActionsAssignment_2_1 extends AssignmentToken  {
+	
+	public ReactionEffect_ActionsAssignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getReactionEffectAccess().getActionsAssignment_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Statement_Alternatives(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("actions",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("actions");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getStatementRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getReactionEffectAccess().getActionsStatementParserRuleCall_2_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new ReactionEffect_SemicolonKeyword_2_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 

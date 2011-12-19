@@ -100,7 +100,7 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getReactionTriggerAccess().getGroup_1_0_2(), "rule__ReactionTrigger__Group_1_0_2__0");
 					put(grammarAccess.getReactionTriggerAccess().getGroup_1_1(), "rule__ReactionTrigger__Group_1_1__0");
 					put(grammarAccess.getReactionEffectAccess().getGroup(), "rule__ReactionEffect__Group__0");
-					put(grammarAccess.getReactionEffectAccess().getGroup_1(), "rule__ReactionEffect__Group_1__0");
+					put(grammarAccess.getReactionEffectAccess().getGroup_2(), "rule__ReactionEffect__Group_2__0");
 					put(grammarAccess.getReactionPropertiesAccess().getGroup(), "rule__ReactionProperties__Group__0");
 					put(grammarAccess.getEntryPointSpecAccess().getGroup(), "rule__EntryPointSpec__Group__0");
 					put(grammarAccess.getExitPointSpecAccess().getGroup(), "rule__ExitPointSpec__Group__0");
@@ -187,7 +187,8 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getReactionTriggerAccess().getTriggersAssignment_1_0_1_1(), "rule__ReactionTrigger__TriggersAssignment_1_0_1_1");
 					put(grammarAccess.getReactionTriggerAccess().getGuardExpressionAssignment_1_0_2_1(), "rule__ReactionTrigger__GuardExpressionAssignment_1_0_2_1");
 					put(grammarAccess.getReactionTriggerAccess().getGuardExpressionAssignment_1_1_1(), "rule__ReactionTrigger__GuardExpressionAssignment_1_1_1");
-					put(grammarAccess.getReactionEffectAccess().getActionsAssignment_1_0(), "rule__ReactionEffect__ActionsAssignment_1_0");
+					put(grammarAccess.getReactionEffectAccess().getActionsAssignment_1(), "rule__ReactionEffect__ActionsAssignment_1");
+					put(grammarAccess.getReactionEffectAccess().getActionsAssignment_2_1(), "rule__ReactionEffect__ActionsAssignment_2_1");
 					put(grammarAccess.getReactionPropertiesAccess().getPropertiesAssignment_1(), "rule__ReactionProperties__PropertiesAssignment_1");
 					put(grammarAccess.getReactionPriorityAccess().getPriorityAssignment(), "rule__ReactionPriority__PriorityAssignment");
 					put(grammarAccess.getEntryPointSpecAccess().getEntrypointAssignment_1(), "rule__EntryPointSpec__EntrypointAssignment_1");

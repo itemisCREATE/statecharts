@@ -1677,10 +1677,10 @@ ruleReactionEffect returns [EObject current=null]
             grammarAccess.getReactionEffectAccess().getReactionEffectAction_0(),
             $current);
     }
-)((
+)(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getReactionEffectAccess().getActionsStatementParserRuleCall_1_0_0()); 
+	        newCompositeNode(grammarAccess.getReactionEffectAccess().getActionsStatementParserRuleCall_1_0()); 
 	    }
 		lv_actions_1_0=ruleStatement		{
 	        if ($current==null) {
@@ -1695,11 +1695,33 @@ ruleReactionEffect returns [EObject current=null]
 	    }
 
 )
-)	otherlv_2=';' 
+)(	otherlv_2=';' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getReactionEffectAccess().getSemicolonKeyword_1_1());
+    	newLeafNode(otherlv_2, grammarAccess.getReactionEffectAccess().getSemicolonKeyword_2_0());
     }
-)+)
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getReactionEffectAccess().getActionsStatementParserRuleCall_2_1_0()); 
+	    }
+		lv_actions_3_0=ruleStatement		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getReactionEffectRule());
+	        }
+       		add(
+       			$current, 
+       			"actions",
+        		lv_actions_3_0, 
+        		"Statement");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*(	otherlv_4=';' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getReactionEffectAccess().getSemicolonKeyword_3());
+    }
+)?)
 ;
 
 
