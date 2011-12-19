@@ -10,9 +10,9 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.debug.ui.DebugUITools;
@@ -32,7 +32,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.PartInitException;
@@ -60,12 +59,14 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 
 	private TableViewer variableViewer;
 
-	private List<Control> controls;
+	private Map<Control, SelectionListener> controls;
+	private Map<Control, TableEditor> tableEditors;
 
 	private SimulationSession activeSession;
 
 	public DeclarationView() {
-		controls = new ArrayList<Control>();
+		controls = new HashMap<Control, SelectionListener>();
+		tableEditors = new HashMap<Control, TableEditor>();
 	}
 
 	@Override
@@ -137,20 +138,24 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 		if (activeSession != null) {
 			List<ExecutionEvent> events = activeSession.getExecutionScope()
 					.getDeclaredEvents();
+
 			eventViewer.setInput(events);
+
 			TableItem[] items = eventViewer.getTable().getItems();
 			for (TableItem tableItem : items) {
-				final TableEditor editor = new TableEditor(
+				final TableEditor tableEditor = new TableEditor(
 						eventViewer.getTable());
-				editor.horizontalAlignment = SWT.LEFT;
-				editor.grabHorizontal = true;
-				editor.grabVertical = true;
+				tableEditor.horizontalAlignment = SWT.LEFT;
+				tableEditor.grabHorizontal = true;
+				tableEditor.grabVertical = true;
 				Button button = new Button(eventViewer.getTable(), SWT.FLAT);
 				button.setText("raise");
-				button.addSelectionListener(new ButtonListener(tableItem
-						.getText()));
-				editor.setEditor(button, tableItem, 3);
-				controls.add(button);
+				ButtonListener listener = new ButtonListener(
+						tableItem.getText());
+				button.addSelectionListener(listener);
+				tableEditor.setEditor(button, tableItem, 3);
+				tableEditors.put(button, tableEditor);
+				controls.put(button, listener);
 			}
 		}
 	}
@@ -163,30 +168,43 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 		}
 	}
 
-	public void clearViewerInput() {
-		for (Control control : controls) {
-			// Listeners have to be removed manually otherwise the garbage
-			// collector can't cleanup the button
-			if (control instanceof Button) {
-				Listener[] llist = control.getListeners(SWT.Selection);
-				for (Listener listener : Arrays.asList(llist)) {
-					if (listener instanceof SelectionListener) {
-						((Button) control)
-								.removeSelectionListener((SelectionListener) listener);
+	public void clearViewerInput(boolean disposeControls) {
+		// clear the viewer input. This has to be done before the Buttons are
+		// disposed. Otherwise listeners the TableViewer adds to Buttons can't
+		// be removed from them what leads to a memory leak.
+		eventViewer.setInput(null);
+		eventViewer.refresh();
+		variableViewer.setInput(null);
+		eventViewer.refresh();
 
-					}
+		for (Control control : controls.keySet()) {
+			if (control instanceof Button) {
+				// Listeners have to be removed manually otherwise the garbage
+				// collector can't cleanup the button
+				if (controls.get(control) != null) {
+					((Button) control).removeSelectionListener(controls
+							.get(control));
+				}
+				// Same for the tableEditor
+				if (tableEditors.get(control) != null) {
+					tableEditors.get(control).dispose();
 				}
 			}
-
-			control.dispose();
-
+			if (disposeControls) {
+				control.dispose();
+			}
 		}
 		// if the controls are disposed they are never used again and should not
 		// use memory anymore.
 		controls.clear();
-		eventViewer.setInput(null);
-		variableViewer.setInput(null);
+		tableEditors.clear();
 	}
+
+	// @Override
+	// public void dispose() {
+	// clearViewerInput(false);
+	// super.dispose();
+	// }
 
 	private final class ButtonListener implements SelectionListener {
 
@@ -205,6 +223,7 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 		public void widgetDefaultSelected(SelectionEvent e) {
 			// Nothing to do
 		}
+
 	}
 
 	public void debugContextChanged(DebugContextEvent event) {
@@ -218,7 +237,7 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 		if (selectedSession == null
 				|| selectedSession.getCurrentState() == SimulationState.TERMINATED) {
 			activeSession = selectedSession;
-			clearViewerInput();
+			clearViewerInput(true);
 		}
 		if (!(selectedSession == activeSession) && selectedSession != null) {
 			if (activeSession != null) {
@@ -230,7 +249,7 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 			selectedSession.addSimulationListener(this);
 			selectedSession.getExecutionScope().addExecutionContextListener(
 					this);
-			clearViewerInput();
+			clearViewerInput(true);
 			setEventViewerInput();
 			setVariableViewerInput();
 		}
@@ -254,7 +273,7 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 		case TERMINATED:
 			Display.getDefault().asyncExec(new Runnable() {
 				public void run() {
-					clearViewerInput();
+					clearViewerInput(true);
 				}
 			});
 			;
