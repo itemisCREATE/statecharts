@@ -60,7 +60,7 @@ public class SCTDebugElement extends DebugElement {
 		Collections.reverse(qfnFragments);
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(element.getName());
+		sb.append(element.getName() != null ? element.getName() : element.eClass().getName());
 		sb.append("  (");
 		String sep = "";
 		for (String s : qfnFragments) {

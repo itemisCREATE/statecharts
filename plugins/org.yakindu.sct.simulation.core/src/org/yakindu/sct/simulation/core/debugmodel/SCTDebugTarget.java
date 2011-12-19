@@ -28,6 +28,7 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -90,8 +91,9 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 	protected IExecutionFacadeFactory getExecutionFacadeFactory(EObject context) {
 		Iterable<ExecutionFactoryDescriptor> executionFactoryDescriptor = ExecutionFactoryExtensions
 				.getExecutionFactoryDescriptor();
-		//7TODO: Handle more than one registered factory
-		ExecutionFactoryDescriptor next = executionFactoryDescriptor.iterator().next();
+		// 7TODO: Handle more than one registered factory
+		ExecutionFactoryDescriptor next = executionFactoryDescriptor.iterator()
+				.next();
 		return next.createExecutableExtensionFactory();
 	}
 
@@ -224,6 +226,9 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 				activeStates.add(vertex);
 				activeRegions.add(vertex.getParentRegion());
 			}
+		} else if (vertex instanceof FinalState) {
+			activeStates.add(vertex);
+			activeRegions.add(vertex.getParentRegion());
 		}
 		fireChangeEvent(DebugEvent.CONTENT);
 	}
@@ -235,12 +240,14 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 				if (activeRegions.contains(vertex.getParentRegion()))
 					activeRegions.remove(vertex.getParentRegion());
 			}
+		} else if (vertex instanceof FinalState) {
+			if (activeRegions.contains(vertex.getParentRegion()))
+				activeRegions.remove(vertex.getParentRegion());
 		}
 		fireChangeEvent(DebugEvent.CONTENT);
 	}
 
-	
-	public void pseudoStateExecuted(Vertex vertex) {		
+	public void pseudoStateExecuted(Vertex vertex) {
 	}
 
 	public void transitionFired(Transition transition) {
