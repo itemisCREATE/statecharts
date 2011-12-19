@@ -170,8 +170,11 @@ public class DeclarationView extends ViewPart implements IDebugContextListener,
 			if (control instanceof Button) {
 				Listener[] llist = control.getListeners(SWT.Selection);
 				for (Listener listener : Arrays.asList(llist)) {
-					((Button) control)
-							.removeSelectionListener((SelectionListener) listener);
+					if (listener instanceof SelectionListener) {
+						((Button) control)
+								.removeSelectionListener((SelectionListener) listener);
+
+					}
 				}
 			}
 
