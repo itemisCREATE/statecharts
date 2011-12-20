@@ -363,7 +363,6 @@ public interface TypesPackage extends EPackage {
 	 */
 	int PARAMETER_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 2;
 
-
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.LibraryImpl <em>Library</em>}' class.
 	 * <!-- begin-user-doc -->

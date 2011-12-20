@@ -13,32 +13,31 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.NamedElement;
-import org.yakindu.base.types.Operation;
-import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Parameter</b></em>'.
+ * An implementation of the model object '<em><b>Feature</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getOwningOperation <em>Owning Operation</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.FeatureImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.FeatureImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.FeatureImpl#getOwningType <em>Owning Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ParameterImpl extends EObjectImpl implements Parameter {
+public abstract class FeatureImpl extends EObjectImpl implements Feature {
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -74,7 +73,7 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ParameterImpl() {
+	protected FeatureImpl() {
 		super();
 	}
 
@@ -85,7 +84,7 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TypesPackage.Literals.PARAMETER;
+		return TypesPackage.Literals.FEATURE;
 	}
 
 	/**
@@ -99,7 +98,7 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 			type = (Type)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.PARAMETER__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.FEATURE__TYPE, oldType, type));
 			}
 		}
 		return type;
@@ -123,7 +122,7 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 		Type oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.PARAMETER__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.FEATURE__TYPE, oldType, type));
 	}
 
 	/**
@@ -144,7 +143,7 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.PARAMETER__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.FEATURE__NAME, oldName, name));
 	}
 
 	/**
@@ -152,9 +151,9 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Operation getOwningOperation() {
-		if (eContainerFeatureID() != TypesPackage.PARAMETER__OWNING_OPERATION) return null;
-		return (Operation)eContainer();
+	public Type getOwningType() {
+		if (eContainerFeatureID() != TypesPackage.FEATURE__OWNING_TYPE) return null;
+		return (Type)eContainer();
 	}
 
 	/**
@@ -162,8 +161,8 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwningOperation(Operation newOwningOperation, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningOperation, TypesPackage.PARAMETER__OWNING_OPERATION, msgs);
+	public NotificationChain basicSetOwningType(Type newOwningType, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningType, TypesPackage.FEATURE__OWNING_TYPE, msgs);
 		return msgs;
 	}
 
@@ -172,20 +171,20 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOwningOperation(Operation newOwningOperation) {
-		if (newOwningOperation != eInternalContainer() || (eContainerFeatureID() != TypesPackage.PARAMETER__OWNING_OPERATION && newOwningOperation != null)) {
-			if (EcoreUtil.isAncestor(this, newOwningOperation))
+	public void setOwningType(Type newOwningType) {
+		if (newOwningType != eInternalContainer() || (eContainerFeatureID() != TypesPackage.FEATURE__OWNING_TYPE && newOwningType != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningType))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwningOperation != null)
-				msgs = ((InternalEObject)newOwningOperation).eInverseAdd(this, TypesPackage.OPERATION__PARAMETERS, Operation.class, msgs);
-			msgs = basicSetOwningOperation(newOwningOperation, msgs);
+			if (newOwningType != null)
+				msgs = ((InternalEObject)newOwningType).eInverseAdd(this, TypesPackage.TYPE__FEATURES, Type.class, msgs);
+			msgs = basicSetOwningType(newOwningType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.PARAMETER__OWNING_OPERATION, newOwningOperation, newOwningOperation));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.FEATURE__OWNING_TYPE, newOwningType, newOwningType));
 	}
 
 	/**
@@ -196,10 +195,10 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.PARAMETER__OWNING_OPERATION:
+			case TypesPackage.FEATURE__OWNING_TYPE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningOperation((Operation)otherEnd, msgs);
+				return basicSetOwningType((Type)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -212,8 +211,8 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.PARAMETER__OWNING_OPERATION:
-				return basicSetOwningOperation(null, msgs);
+			case TypesPackage.FEATURE__OWNING_TYPE:
+				return basicSetOwningType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -226,8 +225,8 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case TypesPackage.PARAMETER__OWNING_OPERATION:
-				return eInternalContainer().eInverseRemove(this, TypesPackage.OPERATION__PARAMETERS, Operation.class, msgs);
+			case TypesPackage.FEATURE__OWNING_TYPE:
+				return eInternalContainer().eInverseRemove(this, TypesPackage.TYPE__FEATURES, Type.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -240,13 +239,13 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.PARAMETER__TYPE:
+			case TypesPackage.FEATURE__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case TypesPackage.PARAMETER__NAME:
+			case TypesPackage.FEATURE__NAME:
 				return getName();
-			case TypesPackage.PARAMETER__OWNING_OPERATION:
-				return getOwningOperation();
+			case TypesPackage.FEATURE__OWNING_TYPE:
+				return getOwningType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -259,14 +258,14 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.PARAMETER__TYPE:
+			case TypesPackage.FEATURE__TYPE:
 				setType((Type)newValue);
 				return;
-			case TypesPackage.PARAMETER__NAME:
+			case TypesPackage.FEATURE__NAME:
 				setName((String)newValue);
 				return;
-			case TypesPackage.PARAMETER__OWNING_OPERATION:
-				setOwningOperation((Operation)newValue);
+			case TypesPackage.FEATURE__OWNING_TYPE:
+				setOwningType((Type)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -280,14 +279,14 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.PARAMETER__TYPE:
+			case TypesPackage.FEATURE__TYPE:
 				setType((Type)null);
 				return;
-			case TypesPackage.PARAMETER__NAME:
+			case TypesPackage.FEATURE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case TypesPackage.PARAMETER__OWNING_OPERATION:
-				setOwningOperation((Operation)null);
+			case TypesPackage.FEATURE__OWNING_TYPE:
+				setOwningType((Type)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -301,12 +300,12 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.PARAMETER__TYPE:
+			case TypesPackage.FEATURE__TYPE:
 				return type != null;
-			case TypesPackage.PARAMETER__NAME:
+			case TypesPackage.FEATURE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case TypesPackage.PARAMETER__OWNING_OPERATION:
-				return getOwningOperation() != null;
+			case TypesPackage.FEATURE__OWNING_TYPE:
+				return getOwningType() != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -320,7 +319,7 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
-				case TypesPackage.PARAMETER__NAME: return TypesPackage.NAMED_ELEMENT__NAME;
+				case TypesPackage.FEATURE__NAME: return TypesPackage.NAMED_ELEMENT__NAME;
 				default: return -1;
 			}
 		}
@@ -336,7 +335,7 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
-				case TypesPackage.NAMED_ELEMENT__NAME: return TypesPackage.PARAMETER__NAME;
+				case TypesPackage.NAMED_ELEMENT__NAME: return TypesPackage.FEATURE__NAME;
 				default: return -1;
 			}
 		}
@@ -359,4 +358,4 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 		return result.toString();
 	}
 
-} //ParameterImpl
+} //FeatureImpl
