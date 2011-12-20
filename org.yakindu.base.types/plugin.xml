@@ -9,12 +9,19 @@
 -->
 
 <plugin>
-
+   <extension-point id="libraries" name="Yakindu Type Libraries" schema="schema/libraries.exsd"/>
+   
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.yakindu.org/base/types/2.0.0"
             class="org.yakindu.base.types.TypesPackage"
             genModel="model/Types.genmodel"/>
+   </extension>
+   <extension
+         point="org.yakindu.base.types.libraries">
+      <TypeLibrary
+            uri="org.yakindu.base.types.Primitives">
+      </TypeLibrary>
    </extension>
 
 </plugin>
