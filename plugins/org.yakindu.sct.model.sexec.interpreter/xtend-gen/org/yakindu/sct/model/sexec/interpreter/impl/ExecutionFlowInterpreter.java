@@ -16,6 +16,7 @@ import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.If;
@@ -26,10 +27,12 @@ import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
+import org.yakindu.sct.model.sexec.TraceNodeExecuted;
+import org.yakindu.sct.model.sexec.TraceStateEntered;
+import org.yakindu.sct.model.sexec.TraceStateExited;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sexec.interpreter.IStatementInterpreter;
 import org.yakindu.sct.model.sexec.interpreter.ITimingService;
-import org.yakindu.sct.model.sexec.interpreter.InterpreterModule;
 import org.yakindu.sct.model.sexec.interpreter.impl.AbstractExecutionFlowInterpreter;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -61,7 +64,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
   private ITimingService timingService;
   
   @Inject
-  @Named(InterpreterModule.INTERPRETER_NAME)
+  @Named("InterpreterName")
   private String interpreterName;
   
   private ExecutionFlow flow;
@@ -70,7 +73,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
     {
       this.flow = flow;
       EList<Scope> _scopes = flow.getScopes();
-      for (final Scope scope : _scopes) {
+      for (Scope scope : _scopes) {
         this.declareContents(scope);
       }
     }
@@ -90,21 +93,21 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
   
   protected void _declareContents(final InternalScope scope) throws NumberFormatException {
     EList<Declaration> _declarations = scope.getDeclarations();
-    for (final Declaration declaration : _declarations) {
+    for (Declaration declaration : _declarations) {
       this.addToScope(declaration);
     }
   }
   
   protected void _declareContents(final Scope scope) throws NumberFormatException {
     EList<Declaration> _declarations = scope.getDeclarations();
-    for (final Declaration declaration : _declarations) {
+    for (Declaration declaration : _declarations) {
       this.addToScope(declaration);
     }
   }
   
   protected void _declareContents(final InterfaceScope scope) throws NumberFormatException {
     EList<Declaration> _declarations = scope.getDeclarations();
-    for (final Declaration declaration : _declarations) {
+    for (Declaration declaration : _declarations) {
       this.addToScope(declaration);
     }
   }
@@ -112,6 +115,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
   public void runCycle() {
     {
       List<ExecutionState> _stateConfiguration = this.executionContext.getStateConfiguration();
+      List<ExecutionState> _list = IterableExtensions.<ExecutionState>toList(_stateConfiguration);
       final Function1<ExecutionState,Object> _function = new Function1<ExecutionState,Object>() {
           public Object apply(final ExecutionState state) {
             Sequence _reactSequence = state.getReactSequence();
@@ -119,7 +123,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
             return _execute;
           }
         };
-      IterableExtensions.<ExecutionState>forEach(_stateConfiguration, _function);
+      IterableExtensions.<ExecutionState>forEach(_list, _function);
       this.executionContext.resetRaisedEvents();
     }
   }
@@ -216,7 +220,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
   public void enter() throws ExecutionException {
     Sequence _enterSequence = this.flow.getEnterSequence();
     EList<Step> _steps = _enterSequence.getSteps();
-    for (final Step step : _steps) {
+    for (Step step : _steps) {
       this.execute(step);
     }
   }
@@ -246,12 +250,42 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
     return _xblockexpression;
   }
   
+  protected Object _execute(final TraceStateEntered entered) {
+    Object _xblockexpression = null;
+    {
+      ExecutionState _state = entered.getState();
+      this.notifyStateEntered(_state);
+      _xblockexpression = (null);
+    }
+    return _xblockexpression;
+  }
+  
+  protected Object _execute(final TraceStateExited exited) {
+    Object _xblockexpression = null;
+    {
+      ExecutionState _state = exited.getState();
+      this.notifyStateExited(_state);
+      _xblockexpression = (null);
+    }
+    return _xblockexpression;
+  }
+  
+  protected Object _execute(final TraceNodeExecuted executed) {
+    Object _xblockexpression = null;
+    {
+      ExecutionNode _node = executed.getNode();
+      this.notifyStateExited(_node);
+      _xblockexpression = (null);
+    }
+    return _xblockexpression;
+  }
+  
   protected Object _execute(final Check check) throws ExecutionException {
     {
       Statement _condition = check.getCondition();
       boolean _operator_equals = ObjectExtensions.operator_equals(_condition, null);
       if (_operator_equals) {
-        return ((Boolean)true);
+        return true;
       }
       Statement _condition_1 = check.getCondition();
       Object _evaluateStatement = this.interpreter.evaluateStatement(_condition_1, this.executionContext);
@@ -266,8 +300,6 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
       List<ExecutionState> _stateConfiguration = this.executionContext.getStateConfiguration();
       ExecutionState _state = enterState.getState();
       _stateConfiguration.add(_state);
-      ExecutionState _state_1 = enterState.getState();
-      this.notifyStateEntered(_state_1);
       _xblockexpression = (null);
     }
     return _xblockexpression;
@@ -285,8 +317,6 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
       List<ExecutionState> _stateConfiguration = this.executionContext.getStateConfiguration();
       ExecutionState _state = exitState.getState();
       _stateConfiguration.remove(_state);
-      ExecutionState _state_1 = exitState.getState();
-      this.notifyStateExited(_state_1);
       _xblockexpression = (null);
     }
     return _xblockexpression;
@@ -318,7 +348,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
     Object _xblockexpression = null;
     {
       EList<Step> _steps = sequence.getSteps();
-      for (final Step step : _steps) {
+      for (Step step : _steps) {
         this.execute(step);
       }
       _xblockexpression = (null);
@@ -330,7 +360,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
     Object _xblockexpression = null;
     {
       EList<StateCase> _cases = stateSwitch.getCases();
-      for (final StateCase stateCase : _cases) {
+      for (StateCase stateCase : _cases) {
         this.execute(stateCase);
       }
       _xblockexpression = (null);
@@ -409,6 +439,12 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
   public Object execute(final EObject reactionFired) throws ExecutionException {
     if ((reactionFired instanceof ReactionFired)) {
       return _execute((ReactionFired)reactionFired);
+    } else if ((reactionFired instanceof TraceNodeExecuted)) {
+      return _execute((TraceNodeExecuted)reactionFired);
+    } else if ((reactionFired instanceof TraceStateEntered)) {
+      return _execute((TraceStateEntered)reactionFired);
+    } else if ((reactionFired instanceof TraceStateExited)) {
+      return _execute((TraceStateExited)reactionFired);
     } else if ((reactionFired instanceof Call)) {
       return _execute((Call)reactionFired);
     } else if ((reactionFired instanceof Check)) {
