@@ -18,6 +18,9 @@ import de.itemis.xtext.utils.gmf.resource.InjectMembersLazyLinker;
 /**
  * Use this class to register components to be used at runtime / without the
  * Equinox extension registry.
+ * 
+ * @author andreas muelder
+ * @author axel terfloth
  */
 public class STextRuntimeModule extends
 		org.yakindu.sct.model.stext.AbstractSTextRuntimeModule {

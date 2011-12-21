@@ -52,6 +52,7 @@ import org.yakindu.sct.model.stext.stext.HexLiteral
 /**
  * 
  * @author andreas muelder - Initial contribution and API
+ * @authos axel terfloth - additions
  * 
  */
 class StextStatementInterpreter extends AbstractStatementInterpreter {

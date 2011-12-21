@@ -5,6 +5,13 @@ import org.eclipse.xtext.conversion.impl.AbstractLexerBasedConverter;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
 
+
+/**
+ * This boolean value converter recognizes 'true' 'yes' 'false' and 'no' as boolean values.
+ *  
+ * @author axel terfloth
+ *
+ */
 public class BoolValueConverter extends AbstractLexerBasedConverter<Boolean> {
 
 	@Override
