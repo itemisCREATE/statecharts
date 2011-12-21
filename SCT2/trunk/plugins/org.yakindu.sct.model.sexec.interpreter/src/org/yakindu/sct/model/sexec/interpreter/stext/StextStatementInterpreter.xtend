@@ -47,6 +47,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.sgraph.Scope
 import com.google.inject.Inject
 import org.yakindu.sct.model.stext.naming.StextNameProvider
+import org.yakindu.sct.model.stext.stext.HexLiteral
 
 /**
  * 
@@ -180,6 +181,10 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 	
 	def dispatch valueLiteral(IntLiteral literal){
+		return literal.value
+	} 
+	
+	def dispatch valueLiteral(HexLiteral literal){
 		return literal.value
 	} 
 	

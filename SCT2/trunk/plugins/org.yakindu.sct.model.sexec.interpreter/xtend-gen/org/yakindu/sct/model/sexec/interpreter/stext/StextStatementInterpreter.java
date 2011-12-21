@@ -21,9 +21,11 @@ import org.yakindu.sct.model.stext.stext.BitwiseXorExpression;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.ConditionalExpression;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
+import org.yakindu.sct.model.stext.stext.EventRaisedReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventRaising;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
+import org.yakindu.sct.model.stext.stext.HexLiteral;
 import org.yakindu.sct.model.stext.stext.IntLiteral;
 import org.yakindu.sct.model.stext.stext.Literal;
 import org.yakindu.sct.model.stext.stext.LogicalAndExpression;
@@ -154,15 +156,23 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
       QualifiedName _qualifiedName_1 = this.provider.qualifiedName(_value_2);
       String _string_1 = _qualifiedName_1.toString();
       boolean _isEventRaised = this.context.isEventRaised(_string_1);
-      return ((Boolean)_isEventRaised);
+      return _isEventRaised;
     }
+  }
+  
+  protected Object _execute(final EventRaisedReferenceExpression expression) {
+    Event _value = expression.getValue();
+    QualifiedName _fullyQualifiedName = this.provider.getFullyQualifiedName(_value);
+    String _string = _fullyQualifiedName.toString();
+    boolean _isEventRaised = this.context.isEventRaised(_string);
+    return _isEventRaised;
   }
   
   protected Object _execute(final EventValueReferenceExpression expression) {
     Object _xblockexpression = null;
     {
       List<ExecutionEvent> _raisedEvents = this.context.getRaisedEvents();
-      for (final ExecutionEvent event : _raisedEvents) {
+      for (ExecutionEvent event : _raisedEvents) {
         String _name = event.getName();
         Event _value = expression.getValue();
         String _name_1 = _value.getName();
@@ -327,6 +337,11 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     return _value;
   }
   
+  protected Comparable<? extends Object> _valueLiteral(final HexLiteral literal) {
+    int _value = literal.getValue();
+    return _value;
+  }
+  
   protected Comparable<? extends Object> _valueLiteral(final BoolLiteral bool) {
     boolean _isValue = bool.isValue();
     return _isValue;
@@ -348,6 +363,8 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
       return _execute((ConditionalExpression)expression);
     } else if ((expression instanceof ElementReferenceExpression)) {
       return _execute((ElementReferenceExpression)expression);
+    } else if ((expression instanceof EventRaisedReferenceExpression)) {
+      return _execute((EventRaisedReferenceExpression)expression);
     } else if ((expression instanceof EventValueReferenceExpression)) {
       return _execute((EventValueReferenceExpression)expression);
     } else if ((expression instanceof LogicalAndExpression)) {
@@ -383,6 +400,8 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
   public Comparable<? extends Object> valueLiteral(final Literal bool) {
     if ((bool instanceof BoolLiteral)) {
       return _valueLiteral((BoolLiteral)bool);
+    } else if ((bool instanceof HexLiteral)) {
+      return _valueLiteral((HexLiteral)bool);
     } else if ((bool instanceof IntLiteral)) {
       return _valueLiteral((IntLiteral)bool);
     } else if ((bool instanceof RealLiteral)) {

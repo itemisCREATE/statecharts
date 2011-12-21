@@ -1,9 +1,11 @@
 package org.yakindu.sct.model.stext;
 
+import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.yakindu.sct.model.stext.conversion.StextValueConverterService;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.scoping.NamespaceLocalScopeResolver;
 import org.yakindu.sct.model.stext.scoping.STextGlobalScopeProvider;
@@ -35,6 +37,12 @@ public class STextRuntimeModule extends
 		return StextNameProvider.class;
 	}
 
+	@Override
+	public Class<? extends org.eclipse.xtext.conversion.IValueConverterService> bindIValueConverterService() {
+		return StextValueConverterService.class;
+	}
+	
+	
 	// contributed by
 	// org.eclipse.xtext.generator.scoping.AbstractScopingFragment
 	public void configureIScopeProviderDelegate(Binder binder) {
