@@ -14,7 +14,6 @@ import org.eclipse.xtext.util.Strings;
  */
 public class BoolValueConverter extends AbstractLexerBasedConverter<Boolean> {
 
-	@Override
 	public Boolean toValue(String string, INode node) {
 
 		if (Strings.isEmpty(string))
