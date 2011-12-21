@@ -5,6 +5,11 @@ import org.eclipse.xtext.conversion.impl.AbstractLexerBasedConverter;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
 
+/**
+ * 
+ * @author axel terfloth
+ *
+ */
 public class HexValueConverter extends AbstractLexerBasedConverter<Integer> {
 
 	public static final String HEX_PREFIX = "0x";
@@ -26,6 +31,10 @@ public class HexValueConverter extends AbstractLexerBasedConverter<Integer> {
 
 	@Override
 	protected String toEscapedString(Integer value) {
+		if (value < 0) { 
+			return "-" + HEX_PREFIX + Integer.toString( value * -1, 16).toUpperCase();
+
+		}
 		return HEX_PREFIX + Integer.toString(value, 16).toUpperCase();
 	}
 	
