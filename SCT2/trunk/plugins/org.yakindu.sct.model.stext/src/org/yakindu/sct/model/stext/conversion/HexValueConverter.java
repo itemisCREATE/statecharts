@@ -14,7 +14,6 @@ public class HexValueConverter extends AbstractLexerBasedConverter<Integer> {
 
 	public static final String HEX_PREFIX = "0x";
 	
-	@Override
 	public Integer toValue(String string, INode node) {
 
 		if (Strings.isEmpty(string))
