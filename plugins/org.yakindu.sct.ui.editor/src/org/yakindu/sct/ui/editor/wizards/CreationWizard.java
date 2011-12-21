@@ -156,12 +156,12 @@ public class CreationWizard extends Wizard implements INewWizard {
 
 		};
 		try {
-			OperationHistoryFactory.getOperationHistory().execute(command,
-					new SubProgressMonitor(progressMonitor, 1), null);
+			command.execute(progressMonitor,null);
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
 		setCharset(WorkspaceSynchronizer.getFile(resource));
+		editingDomain.dispose();
 		return resource;
 	}
 
