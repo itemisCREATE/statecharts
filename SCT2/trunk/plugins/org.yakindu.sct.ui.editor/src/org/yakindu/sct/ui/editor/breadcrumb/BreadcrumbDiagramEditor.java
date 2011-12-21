@@ -180,5 +180,10 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor {
 		}
 
 	}
-
+	
+	@Override
+	public void dispose() {
+		history.clear();
+		super.dispose();
+	}
 }
