@@ -15,7 +15,7 @@
       <package
             uri="http://www.yakindu.org/base/types/2.0.0"
             class="org.yakindu.base.types.TypesPackage"
-            genModel="model/Types.genmodel"/>
+            genModel="model/types.genmodel"/>
    </extension>
    <extension
          point="org.yakindu.base.types.libraries">
