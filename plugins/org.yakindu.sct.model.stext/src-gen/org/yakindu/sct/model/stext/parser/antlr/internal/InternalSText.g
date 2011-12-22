@@ -835,18 +835,15 @@ ruleEventDefinition returns [EObject current=null]
     }
 (
 (
-		{ 
-	        newCompositeNode(grammarAccess.getEventDefinitionAccess().getTypeTypeEnumRuleCall_4_1_0()); 
-	    }
-		lv_type_5_0=ruleType		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getEventDefinitionRule());
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getEventDefinitionRule());
 	        }
-       		set(
-       			$current, 
-       			"type",
-        		lv_type_5_0, 
-        		"Type");
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getEventDefinitionAccess().getTypeTypeCrossReference_4_1_0()); 
+	    }
+		ruleFQN		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1059,18 +1056,15 @@ ruleVariableDefinition returns [EObject current=null]
     }
 (
 (
-		{ 
-	        newCompositeNode(grammarAccess.getVariableDefinitionAccess().getTypeTypeEnumRuleCall_5_0()); 
-	    }
-		lv_type_7_0=ruleType		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getVariableDefinitionRule());
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getVariableDefinitionRule());
 	        }
-       		set(
-       			$current, 
-       			"type",
-        		lv_type_7_0, 
-        		"Type");
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getVariableDefinitionAccess().getTypeTypeCrossReference_5_0()); 
+	    }
+		ruleFQN		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1152,18 +1146,15 @@ ruleOperation returns [EObject current=null]
     }
 ((
 (
-		{ 
-	        newCompositeNode(grammarAccess.getOperationAccess().getParamTypesTypeEnumRuleCall_4_0_0()); 
-	    }
-		lv_paramTypes_4_0=ruleType		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getOperationRule());
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getOperationRule());
 	        }
-       		add(
-       			$current, 
-       			"paramTypes",
-        		lv_paramTypes_4_0, 
-        		"Type");
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getOperationAccess().getParamTypesTypeCrossReference_4_0_0()); 
+	    }
+		ruleFQN		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1174,18 +1165,15 @@ ruleOperation returns [EObject current=null]
     }
 (
 (
-		{ 
-	        newCompositeNode(grammarAccess.getOperationAccess().getParamTypesTypeEnumRuleCall_4_1_1_0()); 
-	    }
-		lv_paramTypes_6_0=ruleType		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getOperationRule());
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getOperationRule());
 	        }
-       		add(
-       			$current, 
-       			"paramTypes",
-        		lv_paramTypes_6_0, 
-        		"Type");
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getOperationAccess().getParamTypesTypeCrossReference_4_1_1_0()); 
+	    }
+		ruleFQN		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1200,18 +1188,15 @@ ruleOperation returns [EObject current=null]
     }
 (
 (
-		{ 
-	        newCompositeNode(grammarAccess.getOperationAccess().getTypeTypeEnumRuleCall_6_1_0()); 
-	    }
-		lv_type_9_0=ruleType		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getOperationRule());
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getOperationRule());
 	        }
-       		set(
-       			$current, 
-       			"type",
-        		lv_type_9_0, 
-        		"Type");
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getOperationAccess().getTypeTypeCrossReference_6_1_0()); 
+	    }
+		ruleFQN		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4312,43 +4297,6 @@ ruleTimeUnit returns [Enumerator current=null]
 	{
         $current = grammarAccess.getTimeUnitAccess().getNanosecondEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
         newLeafNode(enumLiteral_2, grammarAccess.getTimeUnitAccess().getNanosecondEnumLiteralDeclaration_2()); 
-    }
-));
-
-
-
-// Rule Type
-ruleType returns [Enumerator current=null] 
-    @init { enterRule(); }
-    @after { leaveRule(); }:
-((	enumLiteral_0='void' 
-	{
-        $current = grammarAccess.getTypeAccess().getVoidEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-        newLeafNode(enumLiteral_0, grammarAccess.getTypeAccess().getVoidEnumLiteralDeclaration_0()); 
-    }
-)
-    |(	enumLiteral_1='integer' 
-	{
-        $current = grammarAccess.getTypeAccess().getIntegerEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-        newLeafNode(enumLiteral_1, grammarAccess.getTypeAccess().getIntegerEnumLiteralDeclaration_1()); 
-    }
-)
-    |(	enumLiteral_2='real' 
-	{
-        $current = grammarAccess.getTypeAccess().getRealEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-        newLeafNode(enumLiteral_2, grammarAccess.getTypeAccess().getRealEnumLiteralDeclaration_2()); 
-    }
-)
-    |(	enumLiteral_3='boolean' 
-	{
-        $current = grammarAccess.getTypeAccess().getBooleanEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
-        newLeafNode(enumLiteral_3, grammarAccess.getTypeAccess().getBooleanEnumLiteralDeclaration_3()); 
-    }
-)
-    |(	enumLiteral_4='string' 
-	{
-        $current = grammarAccess.getTypeAccess().getStringEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
-        newLeafNode(enumLiteral_4, grammarAccess.getTypeAccess().getStringEnumLiteralDeclaration_4()); 
     }
 ));
 

@@ -14,6 +14,7 @@ Workflow {
 	    scanClassPath = true
 		platformUri = "${runtimeProject}/.."
 		registerGenModelFile = "platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel"
+		registerGenModelFile = "platform:/resource/org.yakindu.base.types/model/types.genmodel"
 	}
 
 	component = DirectoryCleaner {

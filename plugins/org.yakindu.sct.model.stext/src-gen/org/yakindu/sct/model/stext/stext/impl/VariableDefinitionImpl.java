@@ -13,11 +13,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.yakindu.base.types.Type;
+
 import org.yakindu.sct.model.sgraph.impl.VariableImpl;
 
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.StextPackage;
-import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 /**
@@ -79,24 +80,14 @@ public class VariableDefinitionImpl extends VariableImpl implements VariableDefi
   protected boolean external = EXTERNAL_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected static final Type TYPE_EDEFAULT = Type.VOID;
-
-  /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getType()
-   * @generated
-   * @ordered
-   */
-  protected Type type = TYPE_EDEFAULT;
+  protected Type type;
 
   /**
    * The cached value of the '{@link #getInitialValue() <em>Initial Value</em>}' containment reference.
@@ -182,6 +173,26 @@ public class VariableDefinitionImpl extends VariableImpl implements VariableDefi
    */
   public Type getType()
   {
+    if (type != null && type.eIsProxy())
+    {
+      InternalEObject oldType = (InternalEObject)type;
+      type = (Type)eResolveProxy(oldType);
+      if (type != oldType)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, StextPackage.VARIABLE_DEFINITION__TYPE, oldType, type));
+      }
+    }
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Type basicGetType()
+  {
     return type;
   }
 
@@ -193,7 +204,7 @@ public class VariableDefinitionImpl extends VariableImpl implements VariableDefi
   public void setType(Type newType)
   {
     Type oldType = type;
-    type = newType == null ? TYPE_EDEFAULT : newType;
+    type = newType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.VARIABLE_DEFINITION__TYPE, oldType, type));
   }
@@ -277,7 +288,8 @@ public class VariableDefinitionImpl extends VariableImpl implements VariableDefi
       case StextPackage.VARIABLE_DEFINITION__EXTERNAL:
         return isExternal();
       case StextPackage.VARIABLE_DEFINITION__TYPE:
-        return getType();
+        if (resolve) return getType();
+        return basicGetType();
       case StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE:
         return getInitialValue();
     }
@@ -327,7 +339,7 @@ public class VariableDefinitionImpl extends VariableImpl implements VariableDefi
         setExternal(EXTERNAL_EDEFAULT);
         return;
       case StextPackage.VARIABLE_DEFINITION__TYPE:
-        setType(TYPE_EDEFAULT);
+        setType((Type)null);
         return;
       case StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE:
         setInitialValue((Expression)null);
@@ -351,7 +363,7 @@ public class VariableDefinitionImpl extends VariableImpl implements VariableDefi
       case StextPackage.VARIABLE_DEFINITION__EXTERNAL:
         return external != EXTERNAL_EDEFAULT;
       case StextPackage.VARIABLE_DEFINITION__TYPE:
-        return type != TYPE_EDEFAULT;
+        return type != null;
       case StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE:
         return initialValue != null;
     }
@@ -373,8 +385,6 @@ public class VariableDefinitionImpl extends VariableImpl implements VariableDefi
     result.append(readonly);
     result.append(", external: ");
     result.append(external);
-    result.append(", type: ");
-    result.append(type);
     result.append(')');
     return result.toString();
   }

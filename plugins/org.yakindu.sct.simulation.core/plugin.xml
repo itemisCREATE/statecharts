@@ -3,12 +3,12 @@
 <plugin>
    <extension-point id="org.yakindu.sct.simulation.core.executionfactory" name="ExecutionFactory" schema="schema/executionfactory.exsd"/>
 
-<extension point="org.eclipse.debug.core.launchConfigurationTypes">
-    <launchConfigurationType
+	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+    	<launchConfigurationType
           delegate="org.yakindu.sct.simulation.core.launch.StatechartLaunchConfigurationDelegate"
           id="org.yakindu.sct.simulation.core.launch.statechart"
           modes="run, debug"
           name="YAKINDU Statechart">
-    </launchConfigurationType>
-</extension>
+    	</launchConfigurationType>
+	</extension>
 </plugin>

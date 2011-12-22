@@ -162,8 +162,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
         return createRelationalOperatorFromString(eDataType, initialValue);
       case StextPackage.TIME_UNIT:
         return createTimeUnitFromString(eDataType, initialValue);
-      case StextPackage.TYPE:
-        return createTypeFromString(eDataType, initialValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -197,8 +195,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
         return convertRelationalOperatorToString(eDataType, instanceValue);
       case StextPackage.TIME_UNIT:
         return convertTimeUnitToString(eDataType, instanceValue);
-      case StextPackage.TYPE:
-        return convertTypeToString(eDataType, instanceValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -1069,28 +1065,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
    * @generated
    */
   public String convertTimeUnitToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Type createTypeFromString(EDataType eDataType, String initialValue)
-  {
-    Type result = Type.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertTypeToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

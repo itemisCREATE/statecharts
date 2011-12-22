@@ -7,6 +7,8 @@ package org.yakindu.sct.model.stext.stext;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.yakindu.base.types.Type;
+
 import org.yakindu.sct.model.sgraph.Declaration;
 
 /**
@@ -29,34 +31,30 @@ import org.yakindu.sct.model.sgraph.Declaration;
 public interface Operation extends Declaration
 {
   /**
-   * Returns the value of the '<em><b>Param Types</b></em>' attribute list.
-   * The list contents are of type {@link org.yakindu.sct.model.stext.stext.Type}.
-   * The literals are from the enumeration {@link org.yakindu.sct.model.stext.stext.Type}.
+   * Returns the value of the '<em><b>Param Types</b></em>' reference list.
+   * The list contents are of type {@link org.yakindu.base.types.Type}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Param Types</em>' attribute list isn't clear,
+   * If the meaning of the '<em>Param Types</em>' reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Param Types</em>' attribute list.
-   * @see org.yakindu.sct.model.stext.stext.Type
+   * @return the value of the '<em>Param Types</em>' reference list.
    * @see org.yakindu.sct.model.stext.stext.StextPackage#getOperation_ParamTypes()
-   * @model unique="false"
+   * @model
    * @generated
    */
   EList<Type> getParamTypes();
 
   /**
-   * Returns the value of the '<em><b>Type</b></em>' attribute.
-   * The literals are from the enumeration {@link org.yakindu.sct.model.stext.stext.Type}.
+   * Returns the value of the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Type</em>' attribute isn't clear,
+   * If the meaning of the '<em>Type</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' attribute.
-   * @see org.yakindu.sct.model.stext.stext.Type
+   * @return the value of the '<em>Type</em>' reference.
    * @see #setType(Type)
    * @see org.yakindu.sct.model.stext.stext.StextPackage#getOperation_Type()
    * @model
@@ -65,11 +63,10 @@ public interface Operation extends Declaration
   Type getType();
 
   /**
-   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.Operation#getType <em>Type</em>}' attribute.
+   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.Operation#getType <em>Type</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' attribute.
-   * @see org.yakindu.sct.model.stext.stext.Type
+   * @param value the new value of the '<em>Type</em>' reference.
    * @see #getType()
    * @generated
    */

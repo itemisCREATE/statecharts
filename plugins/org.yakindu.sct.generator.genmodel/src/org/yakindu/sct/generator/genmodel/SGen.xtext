@@ -27,3 +27,4 @@ FeatureParameterValue returns gen::FeatureParameterValue:
 
 QID:
 	ID (('::' | '.') ID)*; 
+

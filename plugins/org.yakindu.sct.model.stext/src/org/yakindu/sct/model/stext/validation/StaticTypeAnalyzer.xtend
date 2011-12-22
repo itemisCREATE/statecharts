@@ -40,6 +40,7 @@ import org.yakindu.sct.model.stext.stext.Type
 import com.google.inject.Inject
 import org.eclipse.xtext.validation.ValidationMessageAcceptor
 import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.base.types.Type
 
 /**
  * 
@@ -50,6 +51,20 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
  */
 class StaticTypeAnalyzer {
 	
+// begin TODO: externalize this
+	def isBoolean(Type type){
+		return type != null && type.name == "boolean";	
+	}
+	
+	def isInteger(Type type){
+		return type != null && type.name =="integer";
+	}
+	
+	def isReal(Type type){
+		return type != null && type.name == "real";	
+	}
+// end TODO
+	
 	/**
 	 * Check Variable assignments
 	 */
@@ -57,22 +72,20 @@ class StaticTypeAnalyzer {
 		var valueType = assignment.expression.check
 		var ref = assignment.varRef
 		var type = (ref as VariableDefinition).getType()
-		switch(type){
-			case Type::BOOLEAN:
-				if(!(valueType == typeof(Boolean))){
-					error("Can not assign a value of type " + valueType.simpleName + " to a variable of type " + type)
-				}
-			case Type::INTEGER:
-				if(!(valueType == typeof(Number))){
-					error("Can not assign a value of type " + valueType.simpleName + " to a variable of type " + type)
-				}
-			case Type::REAL:
-				if(!(valueType == typeof(Number))){
-					error("Can not assign a value of type " + valueType.simpleName + " to a variable of type " + type)
-				}
+		if(isBoolean(type) && !(valueType == typeof(Boolean))){
+			error("Can not assign a value of type " + valueType.simpleName + " to a variable of type " + type)
+		}
+		else if(isInteger(type) && !(valueType == typeof(Number))){
+			error("Can not assign a value of type " + valueType.simpleName + " to a variable of type " + type)
+		}
+		else if(isReal(type) && !(valueType == typeof(Number))){
+			error("Can not assign a value of type " + valueType.simpleName + " to a variable of type " + type)
 		} 
 		return null 
 	}
+	
+	
+		
 	/**
 	 * Check Event value assignments
 	 */
@@ -80,19 +93,14 @@ class StaticTypeAnalyzer {
 		var valueType = eventRaising.value.check
 		var ref = eventRaising.event
 		var type = (ref as EventDefinition).getType()
-		switch(type){
-			case Type::BOOLEAN:
-				if(!(valueType == typeof(Boolean))){
-					error("Can not assign a value of type " + valueType.simpleName + " to an event of type " + type)
-				}
-			case Type::INTEGER:
-				if(!(valueType == typeof(Number))){
-					error("Can not assign a value of type " + valueType.simpleName + " to an event of type " + type)
-				}
-			case Type::REAL:
-				if(!(valueType == typeof(Number))){
-					error("Can not assign a value of type " + valueType.simpleName + " to an event  type " + type)
-				}
+		if(isBoolean(type) && !(valueType == typeof(Boolean))){
+			error("Can not assign a value of type " + valueType.simpleName + " to an event of type " + type)
+		}
+		else if (isInteger(type) && !(valueType == typeof(Number))){
+			error("Can not assign a value of type " + valueType.simpleName + " to an event of type " + type)
+		}
+		else if(isReal(type) && !(valueType == typeof(Number))){
+			error("Can not assign a value of type " + valueType.simpleName + " to an event  type " + type)
 		} 
 		return null 
 	}
@@ -132,7 +140,7 @@ class StaticTypeAnalyzer {
 		var leftType = expression.leftOperand.check
 		var rightType = expression.rightOperand.check
 		if(leftType != rightType){
-			error("Incompatible operands " +leftType.simpleName + " and " + rightType.simpleName + " for operator '" + expression.operator.literal+"'")
+			error("Incompatible operands " +leftType.name + " and " + rightType.name + " for operator '" + expression.operator.literal+"'")
 		}
 		//If both types are boolean, only relational operators Equals and not_Equals are allowed
 		if(leftType == typeof(Boolean) && rightType == typeof(Boolean)){
@@ -174,7 +182,7 @@ class StaticTypeAnalyzer {
 		return null;
 	}
 	def dispatch check(EventRaisedReferenceExpression expression){
-		//TODO: Impement me
+		return typeof(Boolean);
 	}
 	def dispatch check(EventValueReferenceExpression expression){
 		//TODO: Implement me
@@ -193,13 +201,14 @@ class StaticTypeAnalyzer {
 	}
 	
 	def toJavaType(Type type){
-		switch(type){
-			case Type::BOOLEAN:
-				return typeof(Boolean)
-			case Type::INTEGER:
-				return typeof(Number)
-			case Type::REAL:
-				return typeof(Number)
+		if(isBoolean(type)){
+			return typeof(Boolean)
+		}
+		else if(isInteger(type)){
+			return typeof(Number)
+		}
+		else if(isReal(type)){
+			return typeof(Number)
 		} 
 		return typeof(Void)
 	}

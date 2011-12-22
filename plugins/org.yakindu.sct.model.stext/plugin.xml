@@ -2,7 +2,6 @@
 <?eclipse version="3.0"?>
 
 <plugin>
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.yakindu.org/sct/statechart/SText" 
@@ -10,5 +9,10 @@
        genModel = "org/yakindu/sct/model/stext/SText.genmodel" /> 
 	
   </extension>
-
+   <extension
+         point="org.yakindu.base.types.libraries">
+      <TypeLibrary
+            location="libraries/Primitives.types">
+      </TypeLibrary>
+   </extension>
 </plugin>

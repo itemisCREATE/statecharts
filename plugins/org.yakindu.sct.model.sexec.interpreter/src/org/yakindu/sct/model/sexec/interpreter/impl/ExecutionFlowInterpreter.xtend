@@ -57,6 +57,7 @@ import org.yakindu.sct.model.sexec.interpreter.InterpreterModule
 import org.yakindu.sct.model.sexec.TraceStateEntered
 import org.yakindu.sct.model.sexec.TraceStateExited
 import org.yakindu.sct.model.sexec.TraceNodeExecuted
+import org.yakindu.base.types.Type
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -120,29 +121,50 @@ class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
 		executionContext.resetRaisedEvents
 	} 
 
+// begin TODO: this should be externalized
+	def isBoolean(Type type){
+		return type != null && type.name == "boolean"
+	}
+	
+	def isInteger(Type type){
+		return type != null && type.name == "integer"
+	}
+	
+	def isReal(Type type){
+		return type != null && type.name == "real"
+	}
+	
+	def isVoid(Type type){
+		return type == null || type.name == "void"
+	}
+// end TODO
+
 	def dispatch addToScope(VariableDefinition variable){
 		var fqName = provider.qualifiedName(variable).toString
-		switch(variable.type){
-			case Type::BOOLEAN:
-				executionContext.declareVariable(new ExecutionVariable(fqName ,typeof(Boolean),false))
-			case Type::INTEGER:
-				executionContext.declareVariable(new ExecutionVariable(fqName,typeof(Integer),0))
-			case Type::REAL:
-				executionContext.declareVariable(new ExecutionVariable(fqName,typeof(Float),Float::parseFloat("0.0")))
+		if(isBoolean(variable.type)){
+			executionContext.declareVariable(new ExecutionVariable(fqName ,typeof(Boolean),false))
+		}
+		else if (isInteger(variable.type)){
+			executionContext.declareVariable(new ExecutionVariable(fqName,typeof(Integer),0))
+		}
+		else if(isReal(variable.type)){
+			executionContext.declareVariable(new ExecutionVariable(fqName,typeof(Float),Float::parseFloat("0.0")))
 		}
 		null 
 	}  
 	
 	def dispatch addToScope(EventDefinition event){
 		var fqName = provider.qualifiedName(event).toString
-		switch(event.type){
-			case Type::BOOLEAN:
+		if(isBoolean(event.type)){
 				executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Boolean),null))
-			case Type::INTEGER:
-				executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Integer),null))
-			case Type::REAL:
-				executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Float),null))
-			case Type::VOID:
+		}
+		else if(isInteger(event.type)){
+			executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Integer),null))
+		}
+		else if(isReal(event.type)){
+			executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Float),null))
+		}
+		else if(isVoid(event.type)){
 				executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Void)))
 		}
 		null 

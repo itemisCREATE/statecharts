@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<types:Library xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:types="http://www.yakindu.org/base/types/2.0.0" id="Primitives">
+  <types name="void"/>
+  <types name="integer"/>
+  <types name="real"/>
+  <types name="boolean"/>
+  <types name="string">
+    <features xsi:type="types:Property" type="//@types.0" name="length"/>
+  </types>
+</types:Library>
