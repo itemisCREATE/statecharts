@@ -18,11 +18,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * 
  */
 public interface IExecutionFacadeFactory {
-	/**
-	 * 
-	 * @param statechart
-	 * @return
-	 */
+
 	public IExecutionFacade createExecutionFacade(Statechart statechart);
 
 }

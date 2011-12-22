@@ -11,9 +11,9 @@
 package org.yakindu.sct.simulation.ui.view.editing;
 
 import org.eclipse.jface.viewers.ColumnViewer;
+import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
-import org.yakindu.sct.simulation.ui.view.ActiveSessionProvider;
 
 /**
  * 
@@ -22,16 +22,12 @@ import org.yakindu.sct.simulation.ui.view.ActiveSessionProvider;
  */
 public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 
-	private final ActiveSessionProvider provider;
-
 	protected abstract Class<?> getSupportedType();
 
 	protected abstract Object convertValue(Object value);
 
-	public ScopeSlotEditingSupport(ColumnViewer viewer,
-			ActiveSessionProvider provider) {
+	public ScopeSlotEditingSupport(ColumnViewer viewer) {
 		super(viewer);
-		this.provider = provider;
 	}
 
 	@Override
@@ -57,10 +53,10 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 		if (value == null)
 			return;
 		if (element instanceof ExecutionVariable) {
-			provider.getActiveSession()
-					.getExecutionContext()
-					.setVariableValue(((ExecutionVariable) element).getName(),
-							value);
+			IExecutionContext input = (IExecutionContext) getViewer()
+					.getInput();
+			input.setVariableValue(((ExecutionVariable) element).getName(),
+					value);
 		}
 	}
 }

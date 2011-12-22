@@ -84,6 +84,10 @@ public interface IExecutionContext {
 	 */
 	public Set<Vertex> getActiveLeafStates();
 	/**
+	 * Returns a set with all active leaf states including parents
+	 */
+	public Set<Vertex> getAllActiveStates();
+	/**
 	 * Returns the active state configuration
 	 */
 	public List<ExecutionState> getStateConfiguration();

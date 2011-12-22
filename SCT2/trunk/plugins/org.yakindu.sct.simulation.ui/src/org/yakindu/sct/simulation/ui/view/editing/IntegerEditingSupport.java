@@ -15,7 +15,6 @@ import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.widgets.Composite;
-import org.yakindu.sct.simulation.ui.view.ActiveSessionProvider;
 
 /**
  * {@link TextCellEditor} support for Integer values
@@ -25,8 +24,8 @@ import org.yakindu.sct.simulation.ui.view.ActiveSessionProvider;
  */
 public class IntegerEditingSupport extends ScopeSlotEditingSupport {
 
-	public IntegerEditingSupport(ColumnViewer viewer,ActiveSessionProvider provider) {
-		super(viewer, provider);
+	public IntegerEditingSupport(ColumnViewer viewer) {
+		super(viewer);
 	}
 
 	@Override

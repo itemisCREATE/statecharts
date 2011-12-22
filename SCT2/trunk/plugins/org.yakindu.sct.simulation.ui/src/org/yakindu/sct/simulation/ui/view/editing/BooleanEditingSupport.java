@@ -17,7 +17,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
-import org.yakindu.sct.simulation.ui.view.ActiveSessionProvider;
 
 /**
  * {@link CellEditor} support for Boolean values
@@ -27,8 +26,8 @@ import org.yakindu.sct.simulation.ui.view.ActiveSessionProvider;
  */
 public class BooleanEditingSupport extends ScopeSlotEditingSupport {
 
-	public BooleanEditingSupport(ColumnViewer viewer, ActiveSessionProvider provider) {
-		super(viewer, provider);
+	public BooleanEditingSupport(ColumnViewer viewer) {
+		super(viewer);
 	}
 
 	@Override

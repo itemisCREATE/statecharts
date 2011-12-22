@@ -11,12 +11,15 @@
 package org.yakindu.sct.simulation.core.runtime.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.runtime.ExecutionException;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
@@ -88,18 +91,12 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	}
 
 	public boolean isEventRaised(String eventName) {
-//		System.out.println("IsEvent Raised: " + eventName);
 		synchronized (raisedEvents) {
 			for (ExecutionEvent event : raisedEvents) {
 				if (eventName.equals(event.getName())) {
-//					System.out.println("True");
 					return true;
 				}
 			}
-		}
-//		System.out.println("False");
-		for (ExecutionEvent event : raisedEvents) {
-//			System.out.println(event.getName());
 		}
 		return false;
 	}
@@ -151,6 +148,27 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 			vertices.add((Vertex) state.getSourceElement());
 		}
 		return vertices;
+	}
+
+	public Set<Vertex> getAllActiveStates() {
+		Set<Vertex> vertices = new HashSet<Vertex>();
+		for (ExecutionState state : activeStateConfig) {
+			vertices.addAll(getActiveHierachy((Vertex) state.getSourceElement()));
+		}
+		return vertices;
+	}
+
+	private Collection<? extends Vertex> getActiveHierachy(Vertex vertex) {
+		List<Vertex> result = new ArrayList<Vertex>();
+		result.add(vertex);
+		EObject container = vertex.eContainer();
+		while (container != null) {
+			if (container instanceof State) {
+				result.add((State) container);
+			}
+			container = container.eContainer();
+		}
+		return result;
 	}
 
 }
