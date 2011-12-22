@@ -4,32 +4,33 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.base.types/src-gen"
     modelPluginID="org.yakindu.base.types" modelName="Types" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="6.0" copyrightFields="false">
-  <foreignModel>Types.ecore</foreignModel>
+  <foreignModel>types.ecore</foreignModel>
   <genPackages prefix="Types" basePackage="org.yakindu.base" disposableProviderFactory="true"
-      ecorePackage="Types.ecore#/">
-    <genClasses ecoreClass="Types.ecore#//Type">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Types.ecore#//Type/features"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Types.ecore#//Type/superTypes"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Types.ecore#//Type/owningLibrary"/>
+      ecorePackage="types.ecore#/">
+    <genClasses ecoreClass="types.ecore#//Type">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Type/features"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//Type/superTypes"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference types.ecore#//Type/owningLibrary"/>
     </genClasses>
-    <genClasses ecoreClass="Types.ecore#//Feature">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Types.ecore#//Feature/owningType"/>
+    <genClasses ecoreClass="types.ecore#//Feature">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference types.ecore#//Feature/owningType"/>
     </genClasses>
-    <genClasses ecoreClass="Types.ecore#//Operation">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Types.ecore#//Operation/parameters"/>
+    <genClasses ecoreClass="types.ecore#//Operation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Operation/parameters"/>
     </genClasses>
-    <genClasses ecoreClass="Types.ecore#//Property"/>
-    <genClasses ecoreClass="Types.ecore#//Parameter">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Types.ecore#//Parameter/owningOperation"/>
+    <genClasses ecoreClass="types.ecore#//Property"/>
+    <genClasses ecoreClass="types.ecore#//Parameter">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference types.ecore#//Parameter/owningOperation"/>
     </genClasses>
-    <genClasses ecoreClass="Types.ecore#//TypedElement">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Types.ecore#//TypedElement/type"/>
+    <genClasses ecoreClass="types.ecore#//TypedElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//TypedElement/type"/>
     </genClasses>
-    <genClasses ecoreClass="Types.ecore#//NamedElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Types.ecore#//NamedElement/name"/>
+    <genClasses ecoreClass="types.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//NamedElement/name"/>
     </genClasses>
-    <genClasses ecoreClass="Types.ecore#//Library">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Types.ecore#//Library/types"/>
+    <genClasses ecoreClass="types.ecore#//Library">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Library/types"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Library/id"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

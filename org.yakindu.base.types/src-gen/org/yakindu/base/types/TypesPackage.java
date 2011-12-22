@@ -374,22 +374,22 @@ public interface TypesPackage extends EPackage {
 	int LIBRARY = 7;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__NAME = NAMED_ELEMENT__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Types</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY__TYPES = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int LIBRARY__TYPES = 0;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY__ID = 1;
 
 	/**
 	 * The number of structural features of the '<em>Library</em>' class.
@@ -398,7 +398,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int LIBRARY_FEATURE_COUNT = 2;
 
 
 	/**
@@ -581,6 +581,17 @@ public interface TypesPackage extends EPackage {
 	EReference getLibrary_Types();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Library#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see org.yakindu.base.types.Library#getId()
+	 * @see #getLibrary()
+	 * @generated
+	 */
+	EAttribute getLibrary_Id();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -753,6 +764,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference LIBRARY__TYPES = eINSTANCE.getLibrary_Types();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LIBRARY__ID = eINSTANCE.getLibrary_Id();
 
 	}
 

@@ -126,7 +126,6 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.LIBRARY: {
 				Library library = (Library)theEObject;
 				T result = caseLibrary(library);
-				if (result == null) result = caseNamedElement(library);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
