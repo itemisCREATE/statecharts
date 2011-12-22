@@ -74,7 +74,10 @@
 		<!-- Copy plugins -->
 		<echo>Copy plugins from ${repository} to ${buildDirectory}/plugins</echo>
 		<copy todir="${buildDirectory}/plugins">
-			<fileset dir="${buildWorkspace}/svn_repository/plugins" />
+			<fileset dir="${buildWorkspace}/sct2_repository/plugins" />
+		</copy>
+		<copy todir="${buildDirectory}/plugins">
+			<fileset dir="${buildWorkspace}/base_repository/plugins" />
 		</copy>
 		<copy todir="${buildDirectory}/plugins">
 			<fileset dir="${buildWorkspace}/gmf_utils_repository/plugins" />
@@ -87,7 +90,7 @@
 		<!-- Copy features -->
 		<echo>Copy features from ${repository} to ${buildDirectory}/features</echo>
 		<copy todir="${buildDirectory}/features">
-			<fileset dir="${buildWorkspace}/svn_repository/features" />
+			<fileset dir="${buildWorkspace}/sct2_repository/features" />
 		</copy>
 		<copy todir="${buildDirectory}/features">
 			<fileset dir="${buildWorkspace}/gmf_utils_repository/features" />
@@ -115,10 +118,10 @@
 		<antcall target="prepareBuildDirectory" />
 
 		<echo message="Using buildWorspace ${buildWorkspace}" />
-		
+
 		<echo message="Cleaning up report directory ${reportDirectory}" />
-				<delete dir="${reportDirectory}" />
-				<mkdir dir="${reportDirectory}" />
+		<delete dir="${reportDirectory}" />
+		<mkdir dir="${reportDirectory}" />
 
 		<ant antfile="build.xml" dir="build" target="all" inheritall="true">
 			<property name="builder" value="${basedir}/build" />
