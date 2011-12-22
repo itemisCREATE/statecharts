@@ -4,6 +4,7 @@ import java.io.Serializable;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Statement;
@@ -35,13 +36,51 @@ import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.RealLiteral;
 import org.yakindu.sct.model.stext.stext.RelationalOperator;
 import org.yakindu.sct.model.stext.stext.ShiftExpression;
-import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.UnaryOperator;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.validation.TypeCheckException;
 
 @SuppressWarnings("all")
 public class StaticTypeAnalyzer {
+  
+  public boolean isBoolean(final Type type) {
+    boolean _operator_and = false;
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(type, null);
+    if (!_operator_notEquals) {
+      _operator_and = false;
+    } else {
+      String _name = type.getName();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_name, "boolean");
+      _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_equals);
+    }
+    return _operator_and;
+  }
+  
+  public boolean isInteger(final Type type) {
+    boolean _operator_and = false;
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(type, null);
+    if (!_operator_notEquals) {
+      _operator_and = false;
+    } else {
+      String _name = type.getName();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_name, "integer");
+      _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_equals);
+    }
+    return _operator_and;
+  }
+  
+  public boolean isReal(final Type type) {
+    boolean _operator_and = false;
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(type, null);
+    if (!_operator_notEquals) {
+      _operator_and = false;
+    } else {
+      String _name = type.getName();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_name, "real");
+      _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_equals);
+    }
+    return _operator_and;
+  }
   
   protected Class<? extends Object> _check(final Assignment assignment) throws TypeCheckException {
     {
@@ -52,42 +91,48 @@ public class StaticTypeAnalyzer {
       Variable ref = _varRef;
       Type _type = ((VariableDefinition) ref).getType();
       Type type = _type;
-      final Type type_1 = type;
-      boolean matched = false;
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(type_1,Type.BOOLEAN)) {
-          matched=true;
-          boolean _operator_equals = ObjectExtensions.operator_equals(valueType, java.lang.Boolean.class);
-          boolean _operator_not = BooleanExtensions.operator_not(_operator_equals);
-          if (_operator_not) {
-            String _simpleName = valueType.getSimpleName();
-            String _operator_plus = StringExtensions.operator_plus("Can not assign a value of type ", _simpleName);
-            String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " to a variable of type ");
-            String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, type);
-            this.error(_operator_plus_2);
-          }
-        }
+      boolean _operator_and = false;
+      boolean _isBoolean = this.isBoolean(type);
+      if (!_isBoolean) {
+        _operator_and = false;
+      } else {
+        boolean _operator_equals = ObjectExtensions.operator_equals(valueType, java.lang.Boolean.class);
+        boolean _operator_not = BooleanExtensions.operator_not(_operator_equals);
+        _operator_and = BooleanExtensions.operator_and(_isBoolean, _operator_not);
       }
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(type_1,Type.INTEGER)) {
-          matched=true;
+      if (_operator_and) {
+        String _simpleName = valueType.getSimpleName();
+        String _operator_plus = StringExtensions.operator_plus("Can not assign a value of type ", _simpleName);
+        String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " to a variable of type ");
+        String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, type);
+        this.error(_operator_plus_2);
+      } else {
+        boolean _operator_and_1 = false;
+        boolean _isInteger = this.isInteger(type);
+        if (!_isInteger) {
+          _operator_and_1 = false;
+        } else {
           boolean _operator_equals_1 = ObjectExtensions.operator_equals(valueType, java.lang.Number.class);
           boolean _operator_not_1 = BooleanExtensions.operator_not(_operator_equals_1);
-          if (_operator_not_1) {
-            String _simpleName_1 = valueType.getSimpleName();
-            String _operator_plus_3 = StringExtensions.operator_plus("Can not assign a value of type ", _simpleName_1);
-            String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, " to a variable of type ");
-            String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, type);
-            this.error(_operator_plus_5);
-          }
+          _operator_and_1 = BooleanExtensions.operator_and(_isInteger, _operator_not_1);
         }
-      }
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(type_1,Type.REAL)) {
-          matched=true;
-          boolean _operator_equals_2 = ObjectExtensions.operator_equals(valueType, java.lang.Number.class);
-          boolean _operator_not_2 = BooleanExtensions.operator_not(_operator_equals_2);
-          if (_operator_not_2) {
+        if (_operator_and_1) {
+          String _simpleName_1 = valueType.getSimpleName();
+          String _operator_plus_3 = StringExtensions.operator_plus("Can not assign a value of type ", _simpleName_1);
+          String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, " to a variable of type ");
+          String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, type);
+          this.error(_operator_plus_5);
+        } else {
+          boolean _operator_and_2 = false;
+          boolean _isReal = this.isReal(type);
+          if (!_isReal) {
+            _operator_and_2 = false;
+          } else {
+            boolean _operator_equals_2 = ObjectExtensions.operator_equals(valueType, java.lang.Number.class);
+            boolean _operator_not_2 = BooleanExtensions.operator_not(_operator_equals_2);
+            _operator_and_2 = BooleanExtensions.operator_and(_isReal, _operator_not_2);
+          }
+          if (_operator_and_2) {
             String _simpleName_2 = valueType.getSimpleName();
             String _operator_plus_6 = StringExtensions.operator_plus("Can not assign a value of type ", _simpleName_2);
             String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, " to a variable of type ");
@@ -109,42 +154,48 @@ public class StaticTypeAnalyzer {
       Event ref = _event;
       Type _type = ((EventDefinition) ref).getType();
       Type type = _type;
-      final Type type_1 = type;
-      boolean matched = false;
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(type_1,Type.BOOLEAN)) {
-          matched=true;
-          boolean _operator_equals = ObjectExtensions.operator_equals(valueType, java.lang.Boolean.class);
-          boolean _operator_not = BooleanExtensions.operator_not(_operator_equals);
-          if (_operator_not) {
-            String _simpleName = valueType.getSimpleName();
-            String _operator_plus = StringExtensions.operator_plus("Can not assign a value of type ", _simpleName);
-            String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " to an event of type ");
-            String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, type);
-            this.error(_operator_plus_2);
-          }
-        }
+      boolean _operator_and = false;
+      boolean _isBoolean = this.isBoolean(type);
+      if (!_isBoolean) {
+        _operator_and = false;
+      } else {
+        boolean _operator_equals = ObjectExtensions.operator_equals(valueType, java.lang.Boolean.class);
+        boolean _operator_not = BooleanExtensions.operator_not(_operator_equals);
+        _operator_and = BooleanExtensions.operator_and(_isBoolean, _operator_not);
       }
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(type_1,Type.INTEGER)) {
-          matched=true;
+      if (_operator_and) {
+        String _simpleName = valueType.getSimpleName();
+        String _operator_plus = StringExtensions.operator_plus("Can not assign a value of type ", _simpleName);
+        String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " to an event of type ");
+        String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, type);
+        this.error(_operator_plus_2);
+      } else {
+        boolean _operator_and_1 = false;
+        boolean _isInteger = this.isInteger(type);
+        if (!_isInteger) {
+          _operator_and_1 = false;
+        } else {
           boolean _operator_equals_1 = ObjectExtensions.operator_equals(valueType, java.lang.Number.class);
           boolean _operator_not_1 = BooleanExtensions.operator_not(_operator_equals_1);
-          if (_operator_not_1) {
-            String _simpleName_1 = valueType.getSimpleName();
-            String _operator_plus_3 = StringExtensions.operator_plus("Can not assign a value of type ", _simpleName_1);
-            String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, " to an event of type ");
-            String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, type);
-            this.error(_operator_plus_5);
-          }
+          _operator_and_1 = BooleanExtensions.operator_and(_isInteger, _operator_not_1);
         }
-      }
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(type_1,Type.REAL)) {
-          matched=true;
-          boolean _operator_equals_2 = ObjectExtensions.operator_equals(valueType, java.lang.Number.class);
-          boolean _operator_not_2 = BooleanExtensions.operator_not(_operator_equals_2);
-          if (_operator_not_2) {
+        if (_operator_and_1) {
+          String _simpleName_1 = valueType.getSimpleName();
+          String _operator_plus_3 = StringExtensions.operator_plus("Can not assign a value of type ", _simpleName_1);
+          String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, " to an event of type ");
+          String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, type);
+          this.error(_operator_plus_5);
+        } else {
+          boolean _operator_and_2 = false;
+          boolean _isReal = this.isReal(type);
+          if (!_isReal) {
+            _operator_and_2 = false;
+          } else {
+            boolean _operator_equals_2 = ObjectExtensions.operator_equals(valueType, java.lang.Number.class);
+            boolean _operator_not_2 = BooleanExtensions.operator_not(_operator_equals_2);
+            _operator_and_2 = BooleanExtensions.operator_and(_isReal, _operator_not_2);
+          }
+          if (_operator_and_2) {
             String _simpleName_2 = valueType.getSimpleName();
             String _operator_plus_6 = StringExtensions.operator_plus("Can not assign a value of type ", _simpleName_2);
             String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, " to an event  type ");
@@ -248,11 +299,11 @@ public class StaticTypeAnalyzer {
       Class<? extends Object> rightType = _check_1;
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(leftType, rightType);
       if (_operator_notEquals) {
-        String _simpleName = leftType.getSimpleName();
-        String _operator_plus = StringExtensions.operator_plus("Incompatible operands ", _simpleName);
+        String _name = leftType.getName();
+        String _operator_plus = StringExtensions.operator_plus("Incompatible operands ", _name);
         String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " and ");
-        String _simpleName_1 = rightType.getSimpleName();
-        String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _simpleName_1);
+        String _name_1 = rightType.getName();
+        String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _name_1);
         String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, " for operator \'");
         RelationalOperator _operator = expression.getOperator();
         String _literal = _operator.getLiteral();
@@ -368,7 +419,7 @@ public class StaticTypeAnalyzer {
   }
   
   protected Class<? extends Object> _check(final EventRaisedReferenceExpression expression) {
-    return null;
+    return java.lang.Boolean.class;
   }
   
   protected Class<? extends Object> _check(final EventValueReferenceExpression expression) {
@@ -389,24 +440,18 @@ public class StaticTypeAnalyzer {
   
   public Class<? extends Object> toJavaType(final Type type) {
     {
-      final Type type_1 = type;
-      boolean matched = false;
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(type_1,Type.BOOLEAN)) {
-          matched=true;
-          return java.lang.Boolean.class;
-        }
-      }
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(type_1,Type.INTEGER)) {
-          matched=true;
+      boolean _isBoolean = this.isBoolean(type);
+      if (_isBoolean) {
+        return java.lang.Boolean.class;
+      } else {
+        boolean _isInteger = this.isInteger(type);
+        if (_isInteger) {
           return java.lang.Number.class;
-        }
-      }
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(type_1,Type.REAL)) {
-          matched=true;
-          return java.lang.Number.class;
+        } else {
+          boolean _isReal = this.isReal(type);
+          if (_isReal) {
+            return java.lang.Number.class;
+          }
         }
       }
       return java.lang.Void.class;
