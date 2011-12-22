@@ -952,7 +952,7 @@ protected class TransitionSpecification_ReactionAssignment extends AssignmentTok
  *
  * / * ---- scope rules ----
  * Defines different kinds of scopes that contain element definitions. Scopes are used for element definitions in statechart, regions, and state 
- * * / Scope returns sct::Scope:
+ * * / Scope returns sgraph::Scope:
  * 	StateScope | StatechartScope;
  *
  **/
@@ -1069,7 +1069,7 @@ protected class Scope_StatechartScopeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule StateScope ****************
  *
  * // a SimpleScope is used for states and regions
- * StateScope returns sct::Scope:
+ * StateScope returns sgraph::Scope:
  * 	{SimpleScope} declarations+=(LocalReaction | Entrypoint | Exitpoint)*;
  *
  **/
@@ -1204,7 +1204,7 @@ protected class StateScope_DeclarationsAssignment_1 extends AssignmentToken  {
 /************ begin Rule StatechartScope ****************
  *
  * // defines the poosible scopes for statecharts
- * StatechartScope returns sct::Scope:
+ * StatechartScope returns sgraph::Scope:
  * 	InterfaceScope | InternalScope;
  *
  **/
@@ -1318,7 +1318,7 @@ protected class StatechartScope_InternalScopeParserRuleCall_1 extends RuleCallTo
 
 /************ begin Rule InterfaceScope ****************
  *
- * InterfaceScope returns sct::Scope:
+ * InterfaceScope returns sgraph::Scope:
  * 	{InterfaceScope} "interface" name=ID? ":" declarations+=(EventDefinition | VariableDefinition | Entrypoint |
  * 	Exitpoint)*;
  *
@@ -1542,7 +1542,7 @@ protected class InterfaceScope_DeclarationsAssignment_4 extends AssignmentToken 
 
 /************ begin Rule InternalScope ****************
  *
- * InternalScope returns sct::Scope:
+ * InternalScope returns sgraph::Scope:
  * 	{InternalScope} "internal" ":" declarations+=(EventDefinition | VariableDefinition | Operation | LocalReaction)*;
  *
  **/
@@ -1731,7 +1731,7 @@ protected class InternalScope_DeclarationsAssignment_3 extends AssignmentToken  
 /************ begin Rule Declaration ****************
  *
  * / * ---- declarations ----
- * a definition is a top level element of a definition scope. * / Declaration returns sct::Declaration:
+ * a definition is a top level element of a definition scope. * / Declaration returns sgraph::Declaration:
  * 	EventDefinition | VariableDefinition | Operation | LocalReaction | Entrypoint | Exitpoint;
  *
  **/
@@ -1998,12 +1998,12 @@ protected class Declaration_ExitpointParserRuleCall_5 extends RuleCallToken {
 /************ begin Rule EventDefinition ****************
  *
  * // DataElement: EventDefinition | VariableDefinition;
- * / * ---- event definition ---- * / EventDefinition returns sct::Event:
- * 	{EventDefinition} direction=Direction? "event" name=ID (":" type=Type)? derivation=EventDerivation?;
+ * / * ---- event definition ---- * / EventDefinition returns sgraph::Event:
+ * 	{EventDefinition} direction=Direction? "event" name=ID (":" type=[types::Type|FQN])? derivation=EventDerivation?;
  *
  **/
 
-// {EventDefinition} direction=Direction? "event" name=ID (":" type=Type)? derivation=EventDerivation?
+// {EventDefinition} direction=Direction? "event" name=ID (":" type=[types::Type|FQN])? derivation=EventDerivation?
 protected class EventDefinition_Group extends GroupToken {
 	
 	public EventDefinition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2151,7 +2151,7 @@ protected class EventDefinition_NameAssignment_3 extends AssignmentToken  {
 
 }
 
-// (":" type=Type)?
+// (":" type=[types::Type|FQN])?
 protected class EventDefinition_Group_4 extends GroupToken {
 	
 	public EventDefinition_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2195,7 +2195,7 @@ protected class EventDefinition_ColonKeyword_4_0 extends KeywordToken  {
 
 }
 
-// type=Type
+// type=[types::Type|FQN]
 protected class EventDefinition_TypeAssignment_4_1 extends AssignmentToken  {
 	
 	public EventDefinition_TypeAssignment_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2219,10 +2219,13 @@ protected class EventDefinition_TypeAssignment_4_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("type",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
-		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getEventDefinitionAccess().getTypeTypeEnumRuleCall_4_1_0(), value, null)) { 
-			type = AssignmentType.ENUM_RULE_CALL;
-			element = grammarAccess.getEventDefinitionAccess().getTypeTypeEnumRuleCall_4_1_0();
-			return obj;
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getEventDefinitionAccess().getTypeTypeCrossReference_4_1_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getEventDefinitionAccess().getTypeTypeCrossReference_4_1_0(); 
+				return obj;
+			}
 		}
 		return null;
 	}
@@ -2482,13 +2485,13 @@ protected class EventDerivation_ValueAssignment_2_1 extends AssignmentToken  {
 
 /************ begin Rule VariableDefinition ****************
  *
- * / * ---- variable definition ---- * / VariableDefinition returns sct::Variable:
- * 	{VariableDefinition} "var" (readonly?="readonly"? & external?="external"?) name=ID ":" type=Type ("="
+ * / * ---- variable definition ---- * / VariableDefinition returns sgraph::Variable:
+ * 	{VariableDefinition} "var" (readonly?="readonly"? & external?="external"?) name=ID ":" type=[types::Type|FQN] ("="
  * 	initialValue=Expression)?;
  *
  **/
 
-// {VariableDefinition} "var" (readonly?="readonly"? & external?="external"?) name=ID ":" type=Type ("="
+// {VariableDefinition} "var" (readonly?="readonly"? & external?="external"?) name=ID ":" type=[types::Type|FQN] ("="
 // initialValue=Expression)?
 protected class VariableDefinition_Group extends GroupToken {
 	
@@ -2717,7 +2720,7 @@ protected class VariableDefinition_ColonKeyword_4 extends KeywordToken  {
 
 }
 
-// type=Type
+// type=[types::Type|FQN]
 protected class VariableDefinition_TypeAssignment_5 extends AssignmentToken  {
 	
 	public VariableDefinition_TypeAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2741,10 +2744,13 @@ protected class VariableDefinition_TypeAssignment_5 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("type",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
-		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getVariableDefinitionAccess().getTypeTypeEnumRuleCall_5_0(), value, null)) { 
-			type = AssignmentType.ENUM_RULE_CALL;
-			element = grammarAccess.getVariableDefinitionAccess().getTypeTypeEnumRuleCall_5_0();
-			return obj;
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getVariableDefinitionAccess().getTypeTypeCrossReference_5_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getVariableDefinitionAccess().getTypeTypeCrossReference_5_0(); 
+				return obj;
+			}
 		}
 		return null;
 	}
@@ -2848,12 +2854,14 @@ protected class VariableDefinition_InitialValueAssignment_6_1 extends Assignment
 
 /************ begin Rule Operation ****************
  *
- * / * ---- operation definition ---- * / Operation returns sct::Declaration:
- * 	{Operation} "operation" name=ID "(" (paramTypes+=Type ("," paramTypes+=Type)*)? ")" (":" type=Type)?;
+ * / * ---- operation definition ---- * / Operation returns sgraph::Declaration:
+ * 	{Operation} "operation" name=ID "(" (paramTypes+=[types::Type|FQN] ("," paramTypes+=[types::Type|FQN])*)? ")" (":"
+ * 	type=[types::Type|FQN])?;
  *
  **/
 
-// {Operation} "operation" name=ID "(" (paramTypes+=Type ("," paramTypes+=Type)*)? ")" (":" type=Type)?
+// {Operation} "operation" name=ID "(" (paramTypes+=[types::Type|FQN] ("," paramTypes+=[types::Type|FQN])*)? ")" (":"
+// type=[types::Type|FQN])?
 protected class Operation_Group extends GroupToken {
 	
 	public Operation_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2987,7 +2995,7 @@ protected class Operation_LeftParenthesisKeyword_3 extends KeywordToken  {
 
 }
 
-// (paramTypes+=Type ("," paramTypes+=Type)*)?
+// (paramTypes+=[types::Type|FQN] ("," paramTypes+=[types::Type|FQN])*)?
 protected class Operation_Group_4 extends GroupToken {
 	
 	public Operation_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3010,7 +3018,7 @@ protected class Operation_Group_4 extends GroupToken {
 
 }
 
-// paramTypes+=Type
+// paramTypes+=[types::Type|FQN]
 protected class Operation_ParamTypesAssignment_4_0 extends AssignmentToken  {
 	
 	public Operation_ParamTypesAssignment_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3034,17 +3042,20 @@ protected class Operation_ParamTypesAssignment_4_0 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("paramTypes",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("paramTypes");
-		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getOperationAccess().getParamTypesTypeEnumRuleCall_4_0_0(), value, null)) { 
-			type = AssignmentType.ENUM_RULE_CALL;
-			element = grammarAccess.getOperationAccess().getParamTypesTypeEnumRuleCall_4_0_0();
-			return obj;
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getOperationAccess().getParamTypesTypeCrossReference_4_0_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getOperationAccess().getParamTypesTypeCrossReference_4_0_0(); 
+				return obj;
+			}
 		}
 		return null;
 	}
 
 }
 
-// ("," paramTypes+=Type)*
+// ("," paramTypes+=[types::Type|FQN])*
 protected class Operation_Group_4_1 extends GroupToken {
 	
 	public Operation_Group_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3089,7 +3100,7 @@ protected class Operation_CommaKeyword_4_1_0 extends KeywordToken  {
 
 }
 
-// paramTypes+=Type
+// paramTypes+=[types::Type|FQN]
 protected class Operation_ParamTypesAssignment_4_1_1 extends AssignmentToken  {
 	
 	public Operation_ParamTypesAssignment_4_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3113,10 +3124,13 @@ protected class Operation_ParamTypesAssignment_4_1_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("paramTypes",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("paramTypes");
-		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getOperationAccess().getParamTypesTypeEnumRuleCall_4_1_1_0(), value, null)) { 
-			type = AssignmentType.ENUM_RULE_CALL;
-			element = grammarAccess.getOperationAccess().getParamTypesTypeEnumRuleCall_4_1_1_0();
-			return obj;
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getOperationAccess().getParamTypesTypeCrossReference_4_1_1_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getOperationAccess().getParamTypesTypeCrossReference_4_1_1_0(); 
+				return obj;
+			}
 		}
 		return null;
 	}
@@ -3148,7 +3162,7 @@ protected class Operation_RightParenthesisKeyword_5 extends KeywordToken  {
 
 }
 
-// (":" type=Type)?
+// (":" type=[types::Type|FQN])?
 protected class Operation_Group_6 extends GroupToken {
 	
 	public Operation_Group_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3192,7 +3206,7 @@ protected class Operation_ColonKeyword_6_0 extends KeywordToken  {
 
 }
 
-// type=Type
+// type=[types::Type|FQN]
 protected class Operation_TypeAssignment_6_1 extends AssignmentToken  {
 	
 	public Operation_TypeAssignment_6_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3216,10 +3230,13 @@ protected class Operation_TypeAssignment_6_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("type",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
-		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getOperationAccess().getTypeTypeEnumRuleCall_6_1_0(), value, null)) { 
-			type = AssignmentType.ENUM_RULE_CALL;
-			element = grammarAccess.getOperationAccess().getTypeTypeEnumRuleCall_6_1_0();
-			return obj;
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getOperationAccess().getTypeTypeCrossReference_6_1_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getOperationAccess().getTypeTypeCrossReference_6_1_0(); 
+				return obj;
+			}
 		}
 		return null;
 	}
@@ -3233,7 +3250,7 @@ protected class Operation_TypeAssignment_6_1 extends AssignmentToken  {
 
 /************ begin Rule Entrypoint ****************
  *
- * / * ---- entrypoint definition ---- * / Entrypoint returns sct::Declaration:
+ * / * ---- entrypoint definition ---- * / Entrypoint returns sgraph::Declaration:
  * 	{Entrypoint} "entrypoint" name=ID;
  *
  **/
@@ -3355,7 +3372,7 @@ protected class Entrypoint_NameAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule Exitpoint ****************
  *
- * / * ---- exitpoint definition ---- * / Exitpoint returns sct::Declaration:
+ * / * ---- exitpoint definition ---- * / Exitpoint returns sgraph::Declaration:
  * 	{Exitpoint} "exitpoint" name=ID;
  *
  **/
@@ -3480,7 +3497,7 @@ protected class Exitpoint_NameAssignment_2 extends AssignmentToken  {
  *
  * / * ---- reaction rules ----
  * Define the structure of reactions that are central for describing the statecharts behavior. 
- * * / Reaction returns sct::Reaction:
+ * * / Reaction returns sgraph::Reaction:
  * 	LocalReaction | TransitionReaction;
  *
  **/
@@ -4162,7 +4179,7 @@ protected class TransitionReaction_PropertiesAssignment_3_1 extends AssignmentTo
 
 /************ begin Rule ReactionTrigger ****************
  *
- * ReactionTrigger returns sct::Trigger:
+ * ReactionTrigger returns sgraph::Trigger:
  * 	{ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guardExpression=Expression "]")? | "["
  * 	guardExpression=Expression "]");
  *
@@ -4645,7 +4662,7 @@ protected class ReactionTrigger_RightSquareBracketKeyword_1_1_2 extends KeywordT
 
 /************ begin Rule ReactionEffect ****************
  *
- * ReactionEffect returns sct::Effect:
+ * ReactionEffect returns sgraph::Effect:
  * 	{ReactionEffect} actions+=Statement (";" actions+=Statement)* ";"?;
  *
  **/
@@ -5518,11 +5535,11 @@ protected class EventSpec_BuiltinEventSpecParserRuleCall_2 extends RuleCallToken
 /************ begin Rule RegularEventSpec ****************
  *
  * RegularEventSpec:
- * 	event=[sct::Event|FQN];
+ * 	event=[sgraph::Event|FQN];
  *
  **/
 
-// event=[sct::Event|FQN]
+// event=[sgraph::Event|FQN]
 protected class RegularEventSpec_EventAssignment extends AssignmentToken  {
 	
 	public RegularEventSpec_EventAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6400,7 +6417,7 @@ protected class DefaultEvent_DefaultKeyword_1_0 extends KeywordToken  {
 
 /************ begin Rule Statement ****************
  *
- * / * --- statements --- * / Statement returns sct::Statement:
+ * / * --- statements --- * / Statement returns sgraph::Statement:
  * 	Assignment | EventRaising | OperationCall;
  *
  **/
@@ -6553,11 +6570,11 @@ protected class Statement_OperationCallParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule Assignment ****************
  *
  * Assignment:
- * 	varRef=[sct::Variable|FQN] operator=AssignmentOperator expression=Expression;
+ * 	varRef=[sgraph::Variable|FQN] operator=AssignmentOperator expression=Expression;
  *
  **/
 
-// varRef=[sct::Variable|FQN] operator=AssignmentOperator expression=Expression
+// varRef=[sgraph::Variable|FQN] operator=AssignmentOperator expression=Expression
 protected class Assignment_Group extends GroupToken {
 	
 	public Assignment_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6586,7 +6603,7 @@ protected class Assignment_Group extends GroupToken {
 
 }
 
-// varRef=[sct::Variable|FQN]
+// varRef=[sgraph::Variable|FQN]
 protected class Assignment_VarRefAssignment_0 extends AssignmentToken  {
 	
 	public Assignment_VarRefAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6709,11 +6726,11 @@ protected class Assignment_ExpressionAssignment_2 extends AssignmentToken  {
 /************ begin Rule EventRaising ****************
  *
  * EventRaising:
- * 	"raise" event=[sct::Event|FQN] (":" value=Expression)?;
+ * 	"raise" event=[sgraph::Event|FQN] (":" value=Expression)?;
  *
  **/
 
-// "raise" event=[sct::Event|FQN] (":" value=Expression)?
+// "raise" event=[sgraph::Event|FQN] (":" value=Expression)?
 protected class EventRaising_Group extends GroupToken {
 	
 	public EventRaising_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6764,7 +6781,7 @@ protected class EventRaising_RaiseKeyword_0 extends KeywordToken  {
 
 }
 
-// event=[sct::Event|FQN]
+// event=[sgraph::Event|FQN]
 protected class EventRaising_EventAssignment_1 extends AssignmentToken  {
 	
 	public EventRaising_EventAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10316,11 +10333,11 @@ protected class PrimitiveValueExpression_ValueAssignment_1 extends AssignmentTok
 /************ begin Rule ElementReferenceExpression ****************
  *
  * ElementReferenceExpression:
- * 	{ElementReferenceExpression} value=[sct::Declaration|FQN];
+ * 	{ElementReferenceExpression} value=[sgraph::Declaration|FQN];
  *
  **/
 
-// {ElementReferenceExpression} value=[sct::Declaration|FQN]
+// {ElementReferenceExpression} value=[sgraph::Declaration|FQN]
 protected class ElementReferenceExpression_Group extends GroupToken {
 	
 	public ElementReferenceExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10375,7 +10392,7 @@ protected class ElementReferenceExpression_ElementReferenceExpressionAction_0 ex
 	}
 }
 
-// value=[sct::Declaration|FQN]
+// value=[sgraph::Declaration|FQN]
 protected class ElementReferenceExpression_ValueAssignment_1 extends AssignmentToken  {
 	
 	public ElementReferenceExpression_ValueAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10419,11 +10436,11 @@ protected class ElementReferenceExpression_ValueAssignment_1 extends AssignmentT
 /************ begin Rule EventValueReferenceExpression ****************
  *
  * EventValueReferenceExpression:
- * 	{EventValueReferenceExpression} "valueof" "(" value=[sct::Event|FQN] ")";
+ * 	{EventValueReferenceExpression} "valueof" "(" value=[sgraph::Event|FQN] ")";
  *
  **/
 
-// {EventValueReferenceExpression} "valueof" "(" value=[sct::Event|FQN] ")"
+// {EventValueReferenceExpression} "valueof" "(" value=[sgraph::Event|FQN] ")"
 protected class EventValueReferenceExpression_Group extends GroupToken {
 	
 	public EventValueReferenceExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10522,7 +10539,7 @@ protected class EventValueReferenceExpression_LeftParenthesisKeyword_2 extends K
 
 }
 
-// value=[sct::Event|FQN]
+// value=[sgraph::Event|FQN]
 protected class EventValueReferenceExpression_ValueAssignment_3 extends AssignmentToken  {
 	
 	public EventValueReferenceExpression_ValueAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10588,11 +10605,11 @@ protected class EventValueReferenceExpression_RightParenthesisKeyword_4 extends 
 /************ begin Rule EventRaisedReferenceExpression ****************
  *
  * EventRaisedReferenceExpression:
- * 	{EventRaisedReferenceExpression} "raised" "(" value=[sct::Event|FQN] ")";
+ * 	{EventRaisedReferenceExpression} "raised" "(" value=[sgraph::Event|FQN] ")";
  *
  **/
 
-// {EventRaisedReferenceExpression} "raised" "(" value=[sct::Event|FQN] ")"
+// {EventRaisedReferenceExpression} "raised" "(" value=[sgraph::Event|FQN] ")"
 protected class EventRaisedReferenceExpression_Group extends GroupToken {
 	
 	public EventRaisedReferenceExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10691,7 +10708,7 @@ protected class EventRaisedReferenceExpression_LeftParenthesisKeyword_2 extends 
 
 }
 
-// value=[sct::Event|FQN]
+// value=[sgraph::Event|FQN]
 protected class EventRaisedReferenceExpression_ValueAssignment_3 extends AssignmentToken  {
 	
 	public EventRaisedReferenceExpression_ValueAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10757,11 +10774,11 @@ protected class EventRaisedReferenceExpression_RightParenthesisKeyword_4 extends
 /************ begin Rule ActiveStateReferenceExpression ****************
  *
  * ActiveStateReferenceExpression:
- * 	{ActiveStateReferenceExpression} "active" "(" value=[sct::RegularState|FQN] ")";
+ * 	{ActiveStateReferenceExpression} "active" "(" value=[sgraph::RegularState|FQN] ")";
  *
  **/
 
-// {ActiveStateReferenceExpression} "active" "(" value=[sct::RegularState|FQN] ")"
+// {ActiveStateReferenceExpression} "active" "(" value=[sgraph::RegularState|FQN] ")"
 protected class ActiveStateReferenceExpression_Group extends GroupToken {
 	
 	public ActiveStateReferenceExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10860,7 +10877,7 @@ protected class ActiveStateReferenceExpression_LeftParenthesisKeyword_2 extends 
 
 }
 
-// value=[sct::RegularState|FQN]
+// value=[sgraph::RegularState|FQN]
 protected class ActiveStateReferenceExpression_ValueAssignment_3 extends AssignmentToken  {
 	
 	public ActiveStateReferenceExpression_ValueAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

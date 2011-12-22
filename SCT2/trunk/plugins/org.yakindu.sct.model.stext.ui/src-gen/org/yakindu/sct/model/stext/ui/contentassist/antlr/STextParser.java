@@ -65,7 +65,6 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getUnaryOperatorAccess().getAlternatives(), "rule__UnaryOperator__Alternatives");
 					put(grammarAccess.getRelationalOperatorAccess().getAlternatives(), "rule__RelationalOperator__Alternatives");
 					put(grammarAccess.getTimeUnitAccess().getAlternatives(), "rule__TimeUnit__Alternatives");
-					put(grammarAccess.getTypeAccess().getAlternatives(), "rule__Type__Alternatives");
 					put(grammarAccess.getStatechartRootAccess().getGroup(), "rule__StatechartRoot__Group__0");
 					put(grammarAccess.getStateRootAccess().getGroup(), "rule__StateRoot__Group__0");
 					put(grammarAccess.getTransitionRootAccess().getGroup(), "rule__TransitionRoot__Group__0");

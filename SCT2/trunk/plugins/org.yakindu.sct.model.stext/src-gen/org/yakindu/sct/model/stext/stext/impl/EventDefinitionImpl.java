@@ -13,13 +13,14 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.yakindu.base.types.Type;
+
 import org.yakindu.sct.model.sgraph.impl.EventImpl;
 
 import org.yakindu.sct.model.stext.stext.Direction;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventDerivation;
 import org.yakindu.sct.model.stext.stext.StextPackage;
-import org.yakindu.sct.model.stext.stext.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,24 +60,14 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
   protected Direction direction = DIRECTION_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected static final Type TYPE_EDEFAULT = Type.VOID;
-
-  /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getType()
-   * @generated
-   * @ordered
-   */
-  protected Type type = TYPE_EDEFAULT;
+  protected Type type;
 
   /**
    * The cached value of the '{@link #getDerivation() <em>Derivation</em>}' containment reference.
@@ -139,6 +130,26 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
    */
   public Type getType()
   {
+    if (type != null && type.eIsProxy())
+    {
+      InternalEObject oldType = (InternalEObject)type;
+      type = (Type)eResolveProxy(oldType);
+      if (type != oldType)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, StextPackage.EVENT_DEFINITION__TYPE, oldType, type));
+      }
+    }
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Type basicGetType()
+  {
     return type;
   }
 
@@ -150,7 +161,7 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
   public void setType(Type newType)
   {
     Type oldType = type;
-    type = newType == null ? TYPE_EDEFAULT : newType;
+    type = newType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.EVENT_DEFINITION__TYPE, oldType, type));
   }
@@ -232,7 +243,8 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
       case StextPackage.EVENT_DEFINITION__DIRECTION:
         return getDirection();
       case StextPackage.EVENT_DEFINITION__TYPE:
-        return getType();
+        if (resolve) return getType();
+        return basicGetType();
       case StextPackage.EVENT_DEFINITION__DERIVATION:
         return getDerivation();
     }
@@ -276,7 +288,7 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
         setDirection(DIRECTION_EDEFAULT);
         return;
       case StextPackage.EVENT_DEFINITION__TYPE:
-        setType(TYPE_EDEFAULT);
+        setType((Type)null);
         return;
       case StextPackage.EVENT_DEFINITION__DERIVATION:
         setDerivation((EventDerivation)null);
@@ -298,7 +310,7 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
       case StextPackage.EVENT_DEFINITION__DIRECTION:
         return direction != DIRECTION_EDEFAULT;
       case StextPackage.EVENT_DEFINITION__TYPE:
-        return type != TYPE_EDEFAULT;
+        return type != null;
       case StextPackage.EVENT_DEFINITION__DERIVATION:
         return derivation != null;
     }
@@ -318,8 +330,6 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (direction: ");
     result.append(direction);
-    result.append(", type: ");
-    result.append(type);
     result.append(')');
     return result.toString();
   }

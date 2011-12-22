@@ -24,7 +24,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
@@ -2084,25 +2083,6 @@ finally {
 
 
 
-// Rule Type
-ruleType
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getTypeAccess().getAlternatives()); }
-(rule__Type__Alternatives)
-{ after(grammarAccess.getTypeAccess().getAlternatives()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-
 rule__DefRoot__Alternatives
     @init {
 		int stackSize = keepStackSize();
@@ -2898,51 +2878,6 @@ rule__TimeUnit__Alternatives
 (	'ns' 
 )
 { after(grammarAccess.getTimeUnitAccess().getNanosecondEnumLiteralDeclaration_2()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Type__Alternatives
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getTypeAccess().getVoidEnumLiteralDeclaration_0()); }
-(	'void' 
-)
-{ after(grammarAccess.getTypeAccess().getVoidEnumLiteralDeclaration_0()); }
-)
-
-    |(
-{ before(grammarAccess.getTypeAccess().getIntegerEnumLiteralDeclaration_1()); }
-(	'integer' 
-)
-{ after(grammarAccess.getTypeAccess().getIntegerEnumLiteralDeclaration_1()); }
-)
-
-    |(
-{ before(grammarAccess.getTypeAccess().getRealEnumLiteralDeclaration_2()); }
-(	'real' 
-)
-{ after(grammarAccess.getTypeAccess().getRealEnumLiteralDeclaration_2()); }
-)
-
-    |(
-{ before(grammarAccess.getTypeAccess().getBooleanEnumLiteralDeclaration_3()); }
-(	'boolean' 
-)
-{ after(grammarAccess.getTypeAccess().getBooleanEnumLiteralDeclaration_3()); }
-)
-
-    |(
-{ before(grammarAccess.getTypeAccess().getStringEnumLiteralDeclaration_4()); }
-(	'string' 
-)
-{ after(grammarAccess.getTypeAccess().getStringEnumLiteralDeclaration_4()); }
 )
 
 ;
@@ -10369,8 +10304,12 @@ rule__EventDefinition__TypeAssignment_4_1
     }
 :
 (
-{ before(grammarAccess.getEventDefinitionAccess().getTypeTypeEnumRuleCall_4_1_0()); }
-	ruleType{ after(grammarAccess.getEventDefinitionAccess().getTypeTypeEnumRuleCall_4_1_0()); }
+{ before(grammarAccess.getEventDefinitionAccess().getTypeTypeCrossReference_4_1_0()); }
+(
+{ before(grammarAccess.getEventDefinitionAccess().getTypeTypeFQNParserRuleCall_4_1_0_1()); }
+	ruleFQN{ after(grammarAccess.getEventDefinitionAccess().getTypeTypeFQNParserRuleCall_4_1_0_1()); }
+)
+{ after(grammarAccess.getEventDefinitionAccess().getTypeTypeCrossReference_4_1_0()); }
 )
 
 ;
@@ -10490,8 +10429,12 @@ rule__VariableDefinition__TypeAssignment_5
     }
 :
 (
-{ before(grammarAccess.getVariableDefinitionAccess().getTypeTypeEnumRuleCall_5_0()); }
-	ruleType{ after(grammarAccess.getVariableDefinitionAccess().getTypeTypeEnumRuleCall_5_0()); }
+{ before(grammarAccess.getVariableDefinitionAccess().getTypeTypeCrossReference_5_0()); }
+(
+{ before(grammarAccess.getVariableDefinitionAccess().getTypeTypeFQNParserRuleCall_5_0_1()); }
+	ruleFQN{ after(grammarAccess.getVariableDefinitionAccess().getTypeTypeFQNParserRuleCall_5_0_1()); }
+)
+{ after(grammarAccess.getVariableDefinitionAccess().getTypeTypeCrossReference_5_0()); }
 )
 
 ;
@@ -10535,8 +10478,12 @@ rule__Operation__ParamTypesAssignment_4_0
     }
 :
 (
-{ before(grammarAccess.getOperationAccess().getParamTypesTypeEnumRuleCall_4_0_0()); }
-	ruleType{ after(grammarAccess.getOperationAccess().getParamTypesTypeEnumRuleCall_4_0_0()); }
+{ before(grammarAccess.getOperationAccess().getParamTypesTypeCrossReference_4_0_0()); }
+(
+{ before(grammarAccess.getOperationAccess().getParamTypesTypeFQNParserRuleCall_4_0_0_1()); }
+	ruleFQN{ after(grammarAccess.getOperationAccess().getParamTypesTypeFQNParserRuleCall_4_0_0_1()); }
+)
+{ after(grammarAccess.getOperationAccess().getParamTypesTypeCrossReference_4_0_0()); }
 )
 
 ;
@@ -10550,8 +10497,12 @@ rule__Operation__ParamTypesAssignment_4_1_1
     }
 :
 (
-{ before(grammarAccess.getOperationAccess().getParamTypesTypeEnumRuleCall_4_1_1_0()); }
-	ruleType{ after(grammarAccess.getOperationAccess().getParamTypesTypeEnumRuleCall_4_1_1_0()); }
+{ before(grammarAccess.getOperationAccess().getParamTypesTypeCrossReference_4_1_1_0()); }
+(
+{ before(grammarAccess.getOperationAccess().getParamTypesTypeFQNParserRuleCall_4_1_1_0_1()); }
+	ruleFQN{ after(grammarAccess.getOperationAccess().getParamTypesTypeFQNParserRuleCall_4_1_1_0_1()); }
+)
+{ after(grammarAccess.getOperationAccess().getParamTypesTypeCrossReference_4_1_1_0()); }
 )
 
 ;
@@ -10565,8 +10516,12 @@ rule__Operation__TypeAssignment_6_1
     }
 :
 (
-{ before(grammarAccess.getOperationAccess().getTypeTypeEnumRuleCall_6_1_0()); }
-	ruleType{ after(grammarAccess.getOperationAccess().getTypeTypeEnumRuleCall_6_1_0()); }
+{ before(grammarAccess.getOperationAccess().getTypeTypeCrossReference_6_1_0()); }
+(
+{ before(grammarAccess.getOperationAccess().getTypeTypeFQNParserRuleCall_6_1_0_1()); }
+	ruleFQN{ after(grammarAccess.getOperationAccess().getTypeTypeFQNParserRuleCall_6_1_0_1()); }
+)
+{ after(grammarAccess.getOperationAccess().getTypeTypeCrossReference_6_1_0()); }
 )
 
 ;

@@ -144,13 +144,6 @@
     <eLiterals name="millisecond" value="1" literal="ms"/>
     <eLiterals name="nanosecond" value="2" literal="ns"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="Type">
-    <eLiterals name="void" literal="void"/>
-    <eLiterals name="integer" value="1" literal="integer"/>
-    <eLiterals name="real" value="2" literal="real"/>
-    <eLiterals name="boolean" value="3" literal="boolean"/>
-    <eLiterals name="string" value="4" literal="string"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ElementReferenceExpression" eSuperTypes="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Declaration"/>
   </eClassifiers>
@@ -183,21 +176,21 @@
   <eClassifiers xsi:type="ecore:EClass" name="InternalScope" eSuperTypes="platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Scope"/>
   <eClassifiers xsi:type="ecore:EClass" name="EventDefinition" eSuperTypes="platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="ecore:EEnum platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//Direction"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EEnum platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.yakindu.base.types/model/types.ecore#//Type"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="derivation" eType="ecore:EClass platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//EventDerivation"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableDefinition" eSuperTypes="platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Variable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="readonly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="external" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EEnum platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.yakindu.base.types/model/types.ecore#//Type"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initialValue" eType="ecore:EClass platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Declaration">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="paramTypes" unique="false"
-        upperBound="-1" eType="ecore:EEnum platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EEnum platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paramTypes" unique="false"
+        upperBound="-1" eType="ecore:EClass platform:/resource/org.yakindu.base.types/model/types.ecore#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.yakindu.base.types/model/types.ecore#//Type"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Entrypoint" eSuperTypes="platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Declaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="Exitpoint" eSuperTypes="platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Declaration"/>

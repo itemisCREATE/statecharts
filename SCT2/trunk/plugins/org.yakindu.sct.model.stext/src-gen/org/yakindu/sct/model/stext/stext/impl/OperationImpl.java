@@ -12,16 +12,18 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EDataTypeEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
+import org.yakindu.base.types.Type;
 
 import org.yakindu.sct.model.sgraph.impl.DeclarationImpl;
 
 import org.yakindu.sct.model.stext.stext.Operation;
 import org.yakindu.sct.model.stext.stext.StextPackage;
-import org.yakindu.sct.model.stext.stext.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +42,7 @@ import org.yakindu.sct.model.stext.stext.Type;
 public class OperationImpl extends DeclarationImpl implements Operation
 {
   /**
-   * The cached value of the '{@link #getParamTypes() <em>Param Types</em>}' attribute list.
+   * The cached value of the '{@link #getParamTypes() <em>Param Types</em>}' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getParamTypes()
@@ -50,24 +52,14 @@ public class OperationImpl extends DeclarationImpl implements Operation
   protected EList<Type> paramTypes;
 
   /**
-   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected static final Type TYPE_EDEFAULT = Type.VOID;
-
-  /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getType()
-   * @generated
-   * @ordered
-   */
-  protected Type type = TYPE_EDEFAULT;
+  protected Type type;
 
   /**
    * <!-- begin-user-doc -->
@@ -99,7 +91,7 @@ public class OperationImpl extends DeclarationImpl implements Operation
   {
     if (paramTypes == null)
     {
-      paramTypes = new EDataTypeEList<Type>(Type.class, this, StextPackage.OPERATION__PARAM_TYPES);
+      paramTypes = new EObjectResolvingEList<Type>(Type.class, this, StextPackage.OPERATION__PARAM_TYPES);
     }
     return paramTypes;
   }
@@ -110,6 +102,26 @@ public class OperationImpl extends DeclarationImpl implements Operation
    * @generated
    */
   public Type getType()
+  {
+    if (type != null && type.eIsProxy())
+    {
+      InternalEObject oldType = (InternalEObject)type;
+      type = (Type)eResolveProxy(oldType);
+      if (type != oldType)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, StextPackage.OPERATION__TYPE, oldType, type));
+      }
+    }
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Type basicGetType()
   {
     return type;
   }
@@ -122,7 +134,7 @@ public class OperationImpl extends DeclarationImpl implements Operation
   public void setType(Type newType)
   {
     Type oldType = type;
-    type = newType == null ? TYPE_EDEFAULT : newType;
+    type = newType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.OPERATION__TYPE, oldType, type));
   }
@@ -140,7 +152,8 @@ public class OperationImpl extends DeclarationImpl implements Operation
       case StextPackage.OPERATION__PARAM_TYPES:
         return getParamTypes();
       case StextPackage.OPERATION__TYPE:
-        return getType();
+        if (resolve) return getType();
+        return basicGetType();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -181,7 +194,7 @@ public class OperationImpl extends DeclarationImpl implements Operation
         getParamTypes().clear();
         return;
       case StextPackage.OPERATION__TYPE:
-        setType(TYPE_EDEFAULT);
+        setType((Type)null);
         return;
     }
     super.eUnset(featureID);
@@ -200,28 +213,9 @@ public class OperationImpl extends DeclarationImpl implements Operation
       case StextPackage.OPERATION__PARAM_TYPES:
         return paramTypes != null && !paramTypes.isEmpty();
       case StextPackage.OPERATION__TYPE:
-        return type != TYPE_EDEFAULT;
+        return type != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (paramTypes: ");
-    result.append(paramTypes);
-    result.append(", type: ");
-    result.append(type);
-    result.append(')');
-    return result.toString();
   }
 
 } //OperationImpl

@@ -84,6 +84,20 @@
       <import plugin="org.eclipse.emf.mwe.utils"/>
       <import plugin="org.eclipse.jface.text"/>
    </requires>
+   
+   <plugin
+         id="org.yakindu.base.types"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.yakindu.base.types.ui.scope"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
          id="org.yakindu.sct.model.sgraph"

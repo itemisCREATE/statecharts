@@ -13,6 +13,8 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.yakindu.base.types.TypesPackage;
+
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
@@ -85,7 +87,6 @@ import org.yakindu.sct.model.stext.stext.TimeUnit;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
 import org.yakindu.sct.model.stext.stext.TransitionRoot;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
-import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.UnaryOperator;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
@@ -588,13 +589,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
   private EEnum timeUnitEEnum = null;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EEnum typeEEnum = null;
-
-  /**
    * Creates an instance of the model <b>Package</b>, registered with
    * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
    * package URI value.
@@ -643,6 +637,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     isInited = true;
 
     // Initialize simple dependencies
+    TypesPackage.eINSTANCE.eClass();
     SGraphPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
@@ -1425,9 +1420,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getEventDefinition_Type()
+  public EReference getEventDefinition_Type()
   {
-    return (EAttribute)eventDefinitionEClass.getEStructuralFeatures().get(1);
+    return (EReference)eventDefinitionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1475,9 +1470,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getVariableDefinition_Type()
+  public EReference getVariableDefinition_Type()
   {
-    return (EAttribute)variableDefinitionEClass.getEStructuralFeatures().get(2);
+    return (EReference)variableDefinitionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1505,9 +1500,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getOperation_ParamTypes()
+  public EReference getOperation_ParamTypes()
   {
-    return (EAttribute)operationEClass.getEStructuralFeatures().get(0);
+    return (EReference)operationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1515,9 +1510,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getOperation_Type()
+  public EReference getOperation_Type()
   {
-    return (EAttribute)operationEClass.getEStructuralFeatures().get(1);
+    return (EReference)operationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2135,16 +2130,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EEnum getType()
-  {
-    return typeEEnum;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public StextFactory getStextFactory()
   {
     return (StextFactory)getEFactoryInstance();
@@ -2286,18 +2271,18 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     eventDefinitionEClass = createEClass(EVENT_DEFINITION);
     createEAttribute(eventDefinitionEClass, EVENT_DEFINITION__DIRECTION);
-    createEAttribute(eventDefinitionEClass, EVENT_DEFINITION__TYPE);
+    createEReference(eventDefinitionEClass, EVENT_DEFINITION__TYPE);
     createEReference(eventDefinitionEClass, EVENT_DEFINITION__DERIVATION);
 
     variableDefinitionEClass = createEClass(VARIABLE_DEFINITION);
     createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__READONLY);
     createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__EXTERNAL);
-    createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__TYPE);
+    createEReference(variableDefinitionEClass, VARIABLE_DEFINITION__TYPE);
     createEReference(variableDefinitionEClass, VARIABLE_DEFINITION__INITIAL_VALUE);
 
     operationEClass = createEClass(OPERATION);
-    createEAttribute(operationEClass, OPERATION__PARAM_TYPES);
-    createEAttribute(operationEClass, OPERATION__TYPE);
+    createEReference(operationEClass, OPERATION__PARAM_TYPES);
+    createEReference(operationEClass, OPERATION__TYPE);
 
     entrypointEClass = createEClass(ENTRYPOINT);
 
@@ -2379,7 +2364,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     unaryOperatorEEnum = createEEnum(UNARY_OPERATOR);
     relationalOperatorEEnum = createEEnum(RELATIONAL_OPERATOR);
     timeUnitEEnum = createEEnum(TIME_UNIT);
-    typeEEnum = createEEnum(TYPE);
   }
 
   /**
@@ -2408,6 +2392,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     // Obtain other dependent packages
     SGraphPackage theSGraphPackage = (SGraphPackage)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI);
+    TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
 
     // Create type parameters
 
@@ -2584,18 +2569,18 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     initEClass(eventDefinitionEClass, EventDefinition.class, "EventDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEventDefinition_Direction(), this.getDirection(), "direction", null, 0, 1, EventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEventDefinition_Type(), this.getType(), "type", null, 0, 1, EventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEventDefinition_Type(), theTypesPackage.getType(), null, "type", null, 0, 1, EventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEventDefinition_Derivation(), this.getEventDerivation(), null, "derivation", null, 0, 1, EventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(variableDefinitionEClass, VariableDefinition.class, "VariableDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getVariableDefinition_Readonly(), ecorePackage.getEBoolean(), "readonly", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getVariableDefinition_External(), ecorePackage.getEBoolean(), "external", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getVariableDefinition_Type(), this.getType(), "type", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getVariableDefinition_Type(), theTypesPackage.getType(), null, "type", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getVariableDefinition_InitialValue(), this.getExpression(), null, "initialValue", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getOperation_ParamTypes(), this.getType(), "paramTypes", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getOperation_Type(), this.getType(), "type", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getOperation_ParamTypes(), theTypesPackage.getType(), null, "paramTypes", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getOperation_Type(), theTypesPackage.getType(), null, "type", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(entrypointEClass, Entrypoint.class, "Entrypoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2720,13 +2705,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     addEEnumLiteral(timeUnitEEnum, TimeUnit.SECOND);
     addEEnumLiteral(timeUnitEEnum, TimeUnit.MILLISECOND);
     addEEnumLiteral(timeUnitEEnum, TimeUnit.NANOSECOND);
-
-    initEEnum(typeEEnum, Type.class, "Type");
-    addEEnumLiteral(typeEEnum, Type.VOID);
-    addEEnumLiteral(typeEEnum, Type.INTEGER);
-    addEEnumLiteral(typeEEnum, Type.REAL);
-    addEEnumLiteral(typeEEnum, Type.BOOLEAN);
-    addEEnumLiteral(typeEEnum, Type.STRING);
 
     // Create resource
     createResource(eNS_URI);

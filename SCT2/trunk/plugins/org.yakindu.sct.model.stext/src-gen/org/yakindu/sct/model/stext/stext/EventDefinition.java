@@ -5,6 +5,8 @@
  */
 package org.yakindu.sct.model.stext.stext;
 
+import org.yakindu.base.types.Type;
+
 import org.yakindu.sct.model.sgraph.Event;
 
 /**
@@ -57,16 +59,14 @@ public interface EventDefinition extends Event
   void setDirection(Direction value);
 
   /**
-   * Returns the value of the '<em><b>Type</b></em>' attribute.
-   * The literals are from the enumeration {@link org.yakindu.sct.model.stext.stext.Type}.
+   * Returns the value of the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Type</em>' attribute isn't clear,
+   * If the meaning of the '<em>Type</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' attribute.
-   * @see org.yakindu.sct.model.stext.stext.Type
+   * @return the value of the '<em>Type</em>' reference.
    * @see #setType(Type)
    * @see org.yakindu.sct.model.stext.stext.StextPackage#getEventDefinition_Type()
    * @model
@@ -75,11 +75,10 @@ public interface EventDefinition extends Event
   Type getType();
 
   /**
-   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.EventDefinition#getType <em>Type</em>}' attribute.
+   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.EventDefinition#getType <em>Type</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' attribute.
-   * @see org.yakindu.sct.model.stext.stext.Type
+   * @param value the new value of the '<em>Type</em>' reference.
    * @see #getType()
    * @generated
    */

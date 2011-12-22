@@ -1283,7 +1283,7 @@ public interface StextPackage extends EPackage
   int EVENT_DEFINITION__DIRECTION = SGraphPackage.EVENT_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * The feature id for the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -1347,7 +1347,7 @@ public interface StextPackage extends EPackage
   int VARIABLE_DEFINITION__EXTERNAL = SGraphPackage.VARIABLE_FEATURE_COUNT + 1;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * The feature id for the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -1393,7 +1393,7 @@ public interface StextPackage extends EPackage
   int OPERATION__NAME = SGraphPackage.DECLARATION__NAME;
 
   /**
-   * The feature id for the '<em><b>Param Types</b></em>' attribute list.
+   * The feature id for the '<em><b>Param Types</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -1402,7 +1402,7 @@ public interface StextPackage extends EPackage
   int OPERATION__PARAM_TYPES = SGraphPackage.DECLARATION_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * The feature id for the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2174,16 +2174,6 @@ public interface StextPackage extends EPackage
    * @generated
    */
   int TIME_UNIT = 69;
-
-  /**
-   * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.Type <em>Type</em>}' enum.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.yakindu.sct.model.stext.stext.Type
-   * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getType()
-   * @generated
-   */
-  int TYPE = 70;
 
 
   /**
@@ -2982,15 +2972,15 @@ public interface StextPackage extends EPackage
   EAttribute getEventDefinition_Direction();
 
   /**
-   * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.EventDefinition#getType <em>Type</em>}'.
+   * Returns the meta object for the reference '{@link org.yakindu.sct.model.stext.stext.EventDefinition#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Type</em>'.
+   * @return the meta object for the reference '<em>Type</em>'.
    * @see org.yakindu.sct.model.stext.stext.EventDefinition#getType()
    * @see #getEventDefinition()
    * @generated
    */
-  EAttribute getEventDefinition_Type();
+  EReference getEventDefinition_Type();
 
   /**
    * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.stext.stext.EventDefinition#getDerivation <em>Derivation</em>}'.
@@ -3036,15 +3026,15 @@ public interface StextPackage extends EPackage
   EAttribute getVariableDefinition_External();
 
   /**
-   * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.VariableDefinition#getType <em>Type</em>}'.
+   * Returns the meta object for the reference '{@link org.yakindu.sct.model.stext.stext.VariableDefinition#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Type</em>'.
+   * @return the meta object for the reference '<em>Type</em>'.
    * @see org.yakindu.sct.model.stext.stext.VariableDefinition#getType()
    * @see #getVariableDefinition()
    * @generated
    */
-  EAttribute getVariableDefinition_Type();
+  EReference getVariableDefinition_Type();
 
   /**
    * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.stext.stext.VariableDefinition#getInitialValue <em>Initial Value</em>}'.
@@ -3068,26 +3058,26 @@ public interface StextPackage extends EPackage
   EClass getOperation();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.yakindu.sct.model.stext.stext.Operation#getParamTypes <em>Param Types</em>}'.
+   * Returns the meta object for the reference list '{@link org.yakindu.sct.model.stext.stext.Operation#getParamTypes <em>Param Types</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Param Types</em>'.
+   * @return the meta object for the reference list '<em>Param Types</em>'.
    * @see org.yakindu.sct.model.stext.stext.Operation#getParamTypes()
    * @see #getOperation()
    * @generated
    */
-  EAttribute getOperation_ParamTypes();
+  EReference getOperation_ParamTypes();
 
   /**
-   * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.Operation#getType <em>Type</em>}'.
+   * Returns the meta object for the reference '{@link org.yakindu.sct.model.stext.stext.Operation#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Type</em>'.
+   * @return the meta object for the reference '<em>Type</em>'.
    * @see org.yakindu.sct.model.stext.stext.Operation#getType()
    * @see #getOperation()
    * @generated
    */
-  EAttribute getOperation_Type();
+  EReference getOperation_Type();
 
   /**
    * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.Entrypoint <em>Entrypoint</em>}'.
@@ -3732,16 +3722,6 @@ public interface StextPackage extends EPackage
    * @generated
    */
   EEnum getTimeUnit();
-
-  /**
-   * Returns the meta object for enum '{@link org.yakindu.sct.model.stext.stext.Type <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for enum '<em>Type</em>'.
-   * @see org.yakindu.sct.model.stext.stext.Type
-   * @generated
-   */
-  EEnum getType();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -4457,12 +4437,12 @@ public interface StextPackage extends EPackage
     EAttribute EVENT_DEFINITION__DIRECTION = eINSTANCE.getEventDefinition_Direction();
 
     /**
-     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EVENT_DEFINITION__TYPE = eINSTANCE.getEventDefinition_Type();
+    EReference EVENT_DEFINITION__TYPE = eINSTANCE.getEventDefinition_Type();
 
     /**
      * The meta object literal for the '<em><b>Derivation</b></em>' containment reference feature.
@@ -4499,12 +4479,12 @@ public interface StextPackage extends EPackage
     EAttribute VARIABLE_DEFINITION__EXTERNAL = eINSTANCE.getVariableDefinition_External();
 
     /**
-     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute VARIABLE_DEFINITION__TYPE = eINSTANCE.getVariableDefinition_Type();
+    EReference VARIABLE_DEFINITION__TYPE = eINSTANCE.getVariableDefinition_Type();
 
     /**
      * The meta object literal for the '<em><b>Initial Value</b></em>' containment reference feature.
@@ -4525,20 +4505,20 @@ public interface StextPackage extends EPackage
     EClass OPERATION = eINSTANCE.getOperation();
 
     /**
-     * The meta object literal for the '<em><b>Param Types</b></em>' attribute list feature.
+     * The meta object literal for the '<em><b>Param Types</b></em>' reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute OPERATION__PARAM_TYPES = eINSTANCE.getOperation_ParamTypes();
+    EReference OPERATION__PARAM_TYPES = eINSTANCE.getOperation_ParamTypes();
 
     /**
-     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute OPERATION__TYPE = eINSTANCE.getOperation_Type();
+    EReference OPERATION__TYPE = eINSTANCE.getOperation_Type();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.EntrypointImpl <em>Entrypoint</em>}' class.
@@ -5081,16 +5061,6 @@ public interface StextPackage extends EPackage
      * @generated
      */
     EEnum TIME_UNIT = eINSTANCE.getTimeUnit();
-
-    /**
-     * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.Type <em>Type</em>}' enum.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.yakindu.sct.model.stext.stext.Type
-     * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getType()
-     * @generated
-     */
-    EEnum TYPE = eINSTANCE.getType();
 
   }
 

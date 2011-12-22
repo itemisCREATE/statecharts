@@ -4,7 +4,9 @@
 package org.yakindu.sct.model.stext.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory;
+import org.yakindu.base.types.scope.TypeLibrariesAwareScopeProvider;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 
 /**
@@ -20,5 +22,9 @@ public class STextUiModule extends org.yakindu.sct.model.stext.ui.AbstractSTextU
 	
 	public Class<? extends StatefulFactory> bindStatefulFactory () {
 		return STextStatefulFactory.class;
+	}
+	
+	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		return TypeLibrariesAwareScopeProvider.class;
 	}
 }
