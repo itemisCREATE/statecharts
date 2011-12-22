@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.simulation.ui.view;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
@@ -11,6 +21,11 @@ import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 
 import com.google.common.collect.Iterables;
 
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
 public class ExecutionContextContentProvider implements ITreeContentProvider,
 		IExecutionContextListener {
 
@@ -52,12 +67,6 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 
 	public boolean hasChildren(Object element) {
 		return false;
-	}
-
-	public void variableDeclared(ExecutionVariable variable) {
-	}
-
-	public void eventDeclared(ExecutionEvent event) {
 	}
 
 	public void eventRaised(ExecutionEvent event) {
