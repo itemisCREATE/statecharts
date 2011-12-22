@@ -142,7 +142,8 @@
   <eClassifiers xsi:type="ecore:EEnum" name="TimeUnit">
     <eLiterals name="second" literal="s"/>
     <eLiterals name="millisecond" value="1" literal="ms"/>
-    <eLiterals name="nanosecond" value="2" literal="ns"/>
+    <eLiterals name="microsend" value="2" literal="µs"/>
+    <eLiterals name="nanosecond" value="3" literal="ns"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ElementReferenceExpression" eSuperTypes="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Declaration"/>

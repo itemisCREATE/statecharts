@@ -1197,6 +1197,10 @@
           <literal value="ms"/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
+          <enumLiteral href="http://www.yakindu.org/sct/statechart/SText#//TimeUnit/microsend"/>
+          <literal value="&#xb5;s"/>
+        </elements>
+        <elements xsi:type="xtext:EnumLiteralDeclaration">
           <enumLiteral href="http://www.yakindu.org/sct/statechart/SText#//TimeUnit/nanosecond"/>
           <literal value="ns"/>
         </elements>

@@ -2793,14 +2793,16 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSecondSKeyword_0_0 = (Keyword)cSecondEnumLiteralDeclaration_0.eContents().get(0);
 		private final EnumLiteralDeclaration cMillisecondEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
 		private final Keyword cMillisecondMsKeyword_1_0 = (Keyword)cMillisecondEnumLiteralDeclaration_1.eContents().get(0);
-		private final EnumLiteralDeclaration cNanosecondEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
-		private final Keyword cNanosecondNsKeyword_2_0 = (Keyword)cNanosecondEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cMicrosendEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cMicrosendSKeyword_2_0 = (Keyword)cMicrosendEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cNanosecondEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
+		private final Keyword cNanosecondNsKeyword_3_0 = (Keyword)cNanosecondEnumLiteralDeclaration_3.eContents().get(0);
 		
 		//enum TimeUnit:
-		//	second="s" | millisecond="ms" | nanosecond="ns";
+		//	second="s" | millisecond="ms" | microsend="탎" | nanosecond="ns";
 		public EnumRule getRule() { return rule; }
 
-		//second="s" | millisecond="ms" | nanosecond="ns"
+		//second="s" | millisecond="ms" | microsend="탎" | nanosecond="ns"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//second="s"
@@ -2815,11 +2817,17 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//"ms"
 		public Keyword getMillisecondMsKeyword_1_0() { return cMillisecondMsKeyword_1_0; }
 
+		//microsend="탎"
+		public EnumLiteralDeclaration getMicrosendEnumLiteralDeclaration_2() { return cMicrosendEnumLiteralDeclaration_2; }
+
+		//"탎"
+		public Keyword getMicrosendSKeyword_2_0() { return cMicrosendSKeyword_2_0; }
+
 		//nanosecond="ns"
-		public EnumLiteralDeclaration getNanosecondEnumLiteralDeclaration_2() { return cNanosecondEnumLiteralDeclaration_2; }
+		public EnumLiteralDeclaration getNanosecondEnumLiteralDeclaration_3() { return cNanosecondEnumLiteralDeclaration_3; }
 
 		//"ns"
-		public Keyword getNanosecondNsKeyword_2_0() { return cNanosecondNsKeyword_2_0; }
+		public Keyword getNanosecondNsKeyword_3_0() { return cNanosecondNsKeyword_3_0; }
 	}
 	
 	private RootElements pRoot;
@@ -3606,7 +3614,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//enum TimeUnit:
-	//	second="s" | millisecond="ms" | nanosecond="ns";
+	//	second="s" | millisecond="ms" | microsend="탎" | nanosecond="ns";
 	public TimeUnitElements getTimeUnitAccess() {
 		return (unknownRuleTimeUnit != null) ? unknownRuleTimeUnit : (unknownRuleTimeUnit = new TimeUnitElements());
 	}
