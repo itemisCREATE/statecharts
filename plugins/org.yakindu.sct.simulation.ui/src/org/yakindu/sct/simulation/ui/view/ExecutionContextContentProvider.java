@@ -37,6 +37,7 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 	public class Container {
 		public String name = "Default";
 		public List<AbstractSlot> slots = new ArrayList<AbstractSlot>();
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -45,6 +46,7 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 			result = prime * result + ((name == null) ? 0 : name.hashCode());
 			return result;
 		}
+
 		@Override
 		public boolean equals(Object obj) {
 			if (this == obj)
@@ -63,10 +65,11 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 				return false;
 			return true;
 		}
+
 		private ExecutionContextContentProvider getOuterType() {
 			return ExecutionContextContentProvider.this;
 		}
-		
+
 	}
 
 	public void dispose() {
@@ -93,13 +96,20 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 			List<Container> scopes = new ArrayList<ExecutionContextContentProvider.Container>();
 			Container defaultContainer = new Container();
 			scopes.add(defaultContainer);
+			Container timeEventContainer = new Container();
+			timeEventContainer.name = "Time Events";
+			scopes.add(timeEventContainer);
 			IExecutionContext context = (IExecutionContext) inputElement;
 			Iterable<AbstractSlot> concat = Iterables.concat(
 					context.getDeclaredEvents(), context.getVariables());
 			for (AbstractSlot abstractSlot : concat) {
 				String[] split = abstractSlot.getName().split("\\.");
 				if (split.length == 1) {
-					defaultContainer.slots.add(abstractSlot);
+					if (split[0].contains("time_event")) {
+						timeEventContainer.slots.add(abstractSlot);
+					} else {
+						defaultContainer.slots.add(abstractSlot);
+					}
 				} else if (split.length == 2) {
 					boolean found = false;
 					for (Container container : scopes) {
