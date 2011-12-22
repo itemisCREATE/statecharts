@@ -77,5 +77,6 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			cell.setImage(DeclarationImages.SCOPE.image());
 		}
 	}
+	
 
 }
