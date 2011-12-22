@@ -19,15 +19,6 @@ import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
  * 
  */
 public interface IExecutionContextListener {
-	/**
-	 * called when a new variable is declared
-	 */
-	public void variableDeclared(ExecutionVariable variable);
-
-	/**
-	 * called when e new event is declared
-	 */
-	public void eventDeclared(ExecutionEvent event);
 
 	/**
 	 * called when an event is raised

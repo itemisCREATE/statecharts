@@ -54,7 +54,6 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		synchronized (declaredEvents) {
 			declaredEvents.add(event);
 		}
-		notifyEventDeclared(event);
 	}
 
 	public List<ExecutionEvent> getRaisedEvents() {
@@ -120,7 +119,6 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		synchronized (variables) {
 			variables.add(variable);
 		}
-		notifyVariableDeclared(variable);
 	}
 
 	public void setVariableValue(String name, Object value)
