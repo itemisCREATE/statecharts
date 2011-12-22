@@ -14,8 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IContributor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
+import org.osgi.framework.Bundle;
 
 /**
  * 
@@ -26,20 +28,22 @@ public class LibrariesExtensions {
 
 	private static final String EXTENSION_POINT_ID = "org.yakindu.base.types.libraries";
 	private static final String ATTRIBUTE_URI = "uri";
-
-	public static Iterable<URI> getRegisteredTypeLibrariesURIs() {
-		List<URI> uris = new ArrayList<URI>();
+	
+	public static Iterable<LibraryDescriptor> getRegisteredTypeLibraries() {
+		List<LibraryDescriptor> descriptors = new ArrayList<LibraryDescriptor>();
 		IConfigurationElement[] registeredConfigElements = getRegisteredConfigElements();
 		for (IConfigurationElement configElement : registeredConfigElements) {
-			uris.add(URI.createURI(configElement
-					.getAttribute(ATTRIBUTE_URI)));
+			URI location = URI.createURI(configElement
+					.getAttribute(ATTRIBUTE_URI));
+			IContributor contributor = configElement.getContributor();
+			Bundle bundle = Platform.getBundle(contributor.getName());
+			descriptors.add(new LibraryDescriptor(location, bundle));
 		}
-		return uris;
+		return descriptors;
 	}
 
 	public static IConfigurationElement[] getRegisteredConfigElements() {
 		return Platform.getExtensionRegistry().getConfigurationElementsFor(
 				EXTENSION_POINT_ID);
 	}
-
 }
