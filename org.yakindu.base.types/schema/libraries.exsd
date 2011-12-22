@@ -49,10 +49,10 @@
 
    <element name="TypeLibrary">
       <complexType>
-         <attribute name="uri" type="string" use="required">
+         <attribute name="location" type="string" use="required">
             <annotation>
                <documentation>
-                  An uri (platform plugin) pointing to the *.types file, which contains the type definitions.
+                 Plugin-relative path pointing to the *.types file, which contains the type definitions.
                </documentation>
             </annotation>
          </attribute>

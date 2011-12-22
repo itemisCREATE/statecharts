@@ -20,7 +20,7 @@
    <extension
          point="org.yakindu.base.types.libraries">
       <TypeLibrary
-            uri="org.yakindu.base.types.Primitives">
+            location="libraries/Primitives.types">
       </TypeLibrary>
    </extension>
 

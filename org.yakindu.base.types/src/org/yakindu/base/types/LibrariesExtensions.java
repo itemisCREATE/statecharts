@@ -27,16 +27,16 @@ import org.osgi.framework.Bundle;
 public class LibrariesExtensions {
 
 	private static final String EXTENSION_POINT_ID = "org.yakindu.base.types.libraries";
-	private static final String ATTRIBUTE_URI = "uri";
+	private static final String ATTRIBUTE_LOCATION = "location";
 	
 	public static Iterable<LibraryDescriptor> getRegisteredTypeLibraries() {
 		List<LibraryDescriptor> descriptors = new ArrayList<LibraryDescriptor>();
 		IConfigurationElement[] registeredConfigElements = getRegisteredConfigElements();
 		for (IConfigurationElement configElement : registeredConfigElements) {
-			URI location = URI.createURI(configElement
-					.getAttribute(ATTRIBUTE_URI));
 			IContributor contributor = configElement.getContributor();
 			Bundle bundle = Platform.getBundle(contributor.getName());
+			URI location = URI.createPlatformPluginURI(bundle.getSymbolicName() + "/" + configElement
+					.getAttribute(ATTRIBUTE_LOCATION), true);
 			descriptors.add(new LibraryDescriptor(location, bundle));
 		}
 		return descriptors;
