@@ -44,22 +44,6 @@ public abstract class AbstractExecutionContext implements IExecutionContext {
 		}
 	}
 
-	public void notifyVariableDeclared(ExecutionVariable variable) {
-		synchronized (_listeners) {
-			for (IExecutionContextListener listener : _listeners) {
-				listener.variableDeclared(variable);
-			}
-		}
-	}
-
-	public void notifyEventDeclared(ExecutionEvent event) {
-		synchronized (_listeners) {
-			for (IExecutionContextListener listener : _listeners) {
-				listener.eventDeclared(event);
-			}
-		}
-	}
-
 	public void notifyEventRaised(ExecutionEvent event) {
 		synchronized (_listeners) {
 			for (IExecutionContextListener listener : _listeners) {
