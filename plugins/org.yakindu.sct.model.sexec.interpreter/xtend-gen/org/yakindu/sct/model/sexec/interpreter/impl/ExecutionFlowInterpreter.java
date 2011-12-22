@@ -18,24 +18,20 @@ import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
-import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.If;
-import org.yakindu.sct.model.sexec.ReactionFired;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
-import org.yakindu.sct.model.sexec.TraceNodeExecuted;
-import org.yakindu.sct.model.sexec.TraceStateEntered;
-import org.yakindu.sct.model.sexec.TraceStateExited;
+import org.yakindu.sct.model.sexec.Trace;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
+import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.model.sexec.interpreter.IStatementInterpreter;
 import org.yakindu.sct.model.sexec.interpreter.ITimingService;
-import org.yakindu.sct.model.sexec.interpreter.impl.AbstractExecutionFlowInterpreter;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statement;
@@ -44,13 +40,14 @@ import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.simulation.core.runtime.AbstractExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.ExecutionException;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 
 @SuppressWarnings("all")
-public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
+public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecutionFlowInterpreter {
   
   @Inject
   private IStatementInterpreter interpreter;
@@ -286,40 +283,10 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
     return _xblockexpression;
   }
   
-  protected Object _execute(final ReactionFired reactionFired) {
+  protected Object _execute(final Trace trace) {
     Object _xblockexpression = null;
     {
-      this.notifyTransitionFired(reactionFired);
-      _xblockexpression = (null);
-    }
-    return _xblockexpression;
-  }
-  
-  protected Object _execute(final TraceStateEntered entered) {
-    Object _xblockexpression = null;
-    {
-      ExecutionState _state = entered.getState();
-      this.notifyStateEntered(_state);
-      _xblockexpression = (null);
-    }
-    return _xblockexpression;
-  }
-  
-  protected Object _execute(final TraceStateExited exited) {
-    Object _xblockexpression = null;
-    {
-      ExecutionState _state = exited.getState();
-      this.notifyStateExited(_state);
-      _xblockexpression = (null);
-    }
-    return _xblockexpression;
-  }
-  
-  protected Object _execute(final TraceNodeExecuted executed) {
-    Object _xblockexpression = null;
-    {
-      ExecutionNode _node = executed.getNode();
-      this.notifyStateExited(_node);
+      this.notifyTraceStepEntered(trace);
       _xblockexpression = (null);
     }
     return _xblockexpression;
@@ -481,42 +448,36 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
     }
   }
   
-  public Object execute(final EObject reactionFired) throws ExecutionException {
-    if ((reactionFired instanceof ReactionFired)) {
-      return _execute((ReactionFired)reactionFired);
-    } else if ((reactionFired instanceof TraceNodeExecuted)) {
-      return _execute((TraceNodeExecuted)reactionFired);
-    } else if ((reactionFired instanceof TraceStateEntered)) {
-      return _execute((TraceStateEntered)reactionFired);
-    } else if ((reactionFired instanceof TraceStateExited)) {
-      return _execute((TraceStateExited)reactionFired);
-    } else if ((reactionFired instanceof Call)) {
-      return _execute((Call)reactionFired);
-    } else if ((reactionFired instanceof Check)) {
-      return _execute((Check)reactionFired);
-    } else if ((reactionFired instanceof EnterState)) {
-      return _execute((EnterState)reactionFired);
-    } else if ((reactionFired instanceof Execution)) {
-      return _execute((Execution)reactionFired);
-    } else if ((reactionFired instanceof ExitState)) {
-      return _execute((ExitState)reactionFired);
-    } else if ((reactionFired instanceof If)) {
-      return _execute((If)reactionFired);
-    } else if ((reactionFired instanceof ScheduleTimeEvent)) {
-      return _execute((ScheduleTimeEvent)reactionFired);
-    } else if ((reactionFired instanceof Sequence)) {
-      return _execute((Sequence)reactionFired);
-    } else if ((reactionFired instanceof StateSwitch)) {
-      return _execute((StateSwitch)reactionFired);
-    } else if ((reactionFired instanceof UnscheduleTimeEvent)) {
-      return _execute((UnscheduleTimeEvent)reactionFired);
-    } else if ((reactionFired instanceof Step)) {
-      return _execute((Step)reactionFired);
-    } else if ((reactionFired instanceof StateCase)) {
-      return _execute((StateCase)reactionFired);
+  public Object execute(final EObject call) throws ExecutionException {
+    if ((call instanceof Call)) {
+      return _execute((Call)call);
+    } else if ((call instanceof Check)) {
+      return _execute((Check)call);
+    } else if ((call instanceof EnterState)) {
+      return _execute((EnterState)call);
+    } else if ((call instanceof Execution)) {
+      return _execute((Execution)call);
+    } else if ((call instanceof ExitState)) {
+      return _execute((ExitState)call);
+    } else if ((call instanceof If)) {
+      return _execute((If)call);
+    } else if ((call instanceof ScheduleTimeEvent)) {
+      return _execute((ScheduleTimeEvent)call);
+    } else if ((call instanceof Sequence)) {
+      return _execute((Sequence)call);
+    } else if ((call instanceof StateSwitch)) {
+      return _execute((StateSwitch)call);
+    } else if ((call instanceof Trace)) {
+      return _execute((Trace)call);
+    } else if ((call instanceof UnscheduleTimeEvent)) {
+      return _execute((UnscheduleTimeEvent)call);
+    } else if ((call instanceof Step)) {
+      return _execute((Step)call);
+    } else if ((call instanceof StateCase)) {
+      return _execute((StateCase)call);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(reactionFired).toString());
+        java.util.Arrays.<Object>asList(call).toString());
     }
   }
 }
