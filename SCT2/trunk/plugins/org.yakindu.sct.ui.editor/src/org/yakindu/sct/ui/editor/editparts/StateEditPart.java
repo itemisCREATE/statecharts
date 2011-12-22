@@ -24,10 +24,13 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gef.Handle;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.UnexecutableCommand;
+import org.eclipse.gef.handles.AbstractHandle;
 import org.eclipse.gef.requests.GroupRequest;
+import org.eclipse.gef.tools.ResizeTracker;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CreationEditPolicy;
@@ -36,6 +39,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
+import org.eclipse.gmf.runtime.diagram.ui.tools.DragEditPartsTrackerEx;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
@@ -43,6 +47,7 @@ import org.eclipse.gmf.runtime.notation.Compartment;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
@@ -127,6 +132,14 @@ public class StateEditPart extends ShapeNodeEditPart implements
 						return UnexecutableCommand.INSTANCE;
 					}
 				});
+
+		if (isCollapsed()) {
+			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
+					getNonResizableEditPolicyEx());
+		} else {
+			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
+					getResizableEditPolicyEx());
+		}
 	}
 
 	@Override
@@ -172,7 +185,7 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		// mark all figures covered by the blur shadow extended bounds as dirty
 		// (an update is enforced at the end of this method to ensure the area
 		// gets repainted)
-		NodeFigure nodeFigure = getNodeFigure();
+		final NodeFigure nodeFigure = getNodeFigure();
 		Rectangle extendedBlurShadowBounds = nodeFigure.getBounds()
 				.getExpanded(new Insets(StateFigure.BLUR_SHADOW_WIDTH));
 		nodeFigure.translateToAbsolute(extendedBlurShadowBounds);
@@ -180,6 +193,7 @@ public class StateEditPart extends ShapeNodeEditPart implements
 				org.eclipse.draw2d.FigureUtilities.getRoot(nodeFigure),
 				extendedBlurShadowBounds);
 
+		// TODO: Calculate the 'default' size
 		int width = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE
 				.getSize_Width())).intValue();
 		int height = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE
@@ -193,26 +207,13 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		Point loc = new Point(x, y);
 
 		if (isCollapsed()) {
-			// TODO: Calculate the 'default' size
 			((GraphicalEditPart) getParent()).setLayoutConstraint(this,
 					getFigure(), new Rectangle(loc, new Dimension(58, 66)));
-			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-					new NonResizableEditPolicyEx());
 		} else {
 			((GraphicalEditPart) getParent()).setLayoutConstraint(this,
 					getFigure(), new Rectangle(loc, size));
-			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-					new ResizableEditPolicyEx());
 		}
 
-		// ensure repaint is performed (so blur shadow covered area is
-		// repainted)
-		// If a redraw is done in this method the state is drawn on creation
-		// process at position 0,0 and then "jumps" to the correct position (See
-		// YAKHMI-62).
-		if (isActive()) {
-			nodeFigure.getUpdateManager().performUpdate();
-		}
 	}
 
 	/**
@@ -323,11 +324,91 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		return (State) super.resolveSemanticElement();
 	}
 
+	private NonResizableEditPolicyEx getNonResizableEditPolicyEx() {
+		return new NonResizableEditPolicyEx() {
+
+			protected void replaceHandleDragEditPartsTracker(Handle handle) {
+				if (handle instanceof AbstractHandle) {
+					AbstractHandle h = (AbstractHandle) handle;
+					h.setDragTracker(new DragEditPartsTrackerEx(getHost()) {
+						protected void executeCurrentCommand() {
+							super.executeCurrentCommand();
+							// ensure repaint is performed (so blur shadow
+							// covered area is repainted)
+							if (isActive()) {
+								getNodeFigure().getUpdateManager()
+										.performUpdate();
+							}
+						};
+					});
+				}
+			}
+		};
+	}
+
+	private ResizableEditPolicyEx getResizableEditPolicyEx() {
+		return new ResizableEditPolicyEx() {
+			/**
+			 * Replaces the handle's default DragEditPartsTracker with the
+			 * extended DragEditPartsTrackerEx
+			 * 
+			 * @param handle
+			 */
+			protected void replaceHandleDragEditPartsTracker(Handle handle) {
+				if (handle instanceof AbstractHandle) {
+					AbstractHandle h = (AbstractHandle) handle;
+					h.setDragTracker(new DragEditPartsTrackerEx(getHost()) {
+						protected void executeCurrentCommand() {
+							super.executeCurrentCommand();
+							// ensure repaint is performed (so blur shadow
+							// covered area is repainted)
+							if (isActive()) {
+								getNodeFigure().getUpdateManager()
+										.performUpdate();
+							}
+						};
+					});
+				}
+			}
+
+			protected ResizeTracker getResizeTracker(int direction) {
+				return new ResizeTracker((GraphicalEditPart) getHost(),
+						direction) {
+					@Override
+					protected void executeCurrentCommand() {
+						super.executeCurrentCommand();
+						// ensure repaint is performed (so blur shadow covered
+						// area is repainted)
+						if (isActive()) {
+							getNodeFigure().getUpdateManager().performUpdate();
+						}
+					}
+				};
+			}
+		};
+	}
+
 	@Override
 	protected void handleNotificationEvent(Notification notification) {
+
 		if (notification.getFeature() == NotationPackage.Literals.DRAWER_STYLE__COLLAPSED) {
+
+			if (isCollapsed()) {
+				installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
+						getNonResizableEditPolicyEx());
+
+			} else {
+
+				installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
+						getResizableEditPolicyEx());
+			}
 			refreshVisuals();
+		} else if (notification.getFeature() == SGraphPackage.Literals.NAMED_ELEMENT__NAME) {
+			// ensure repaint is performed (so blur shadow covered area is
+			// repainted) if LabelText changes state bounds
+			getNodeFigure().getUpdateManager().performUpdate();
 		}
+
 		super.handleNotificationEvent(notification);
 	}
 }

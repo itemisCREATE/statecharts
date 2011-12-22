@@ -18,6 +18,8 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.draw2d.ConnectionLayer;
 import org.eclipse.draw2d.ViewportAwareConnectionLayerClippingStrategy;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
@@ -26,6 +28,7 @@ import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.editparts.LayerManager;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
+import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
@@ -53,9 +56,23 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 	private ResourceSetListener validationListener = new ResourceSetListenerImpl() {
 		@Override
 		public void resourceSetChanged(ResourceSetChangeEvent event) {
-			validate();
+			if (!isGraphModelAffected(event)) {
+				validate();
+			}
 		}
 	};
+	
+	private boolean isGraphModelAffected(ResourceSetChangeEvent event){
+		for (Notification notification:event.getNotifications()) {
+			if (notification.getNotifier() instanceof EObject) {
+				EObject eObject = (EObject) notification.getNotifier();
+				if (NotationPackage.eINSTANCE == eObject.eClass().getEPackage()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	public StatechartDiagramEditor() {
 		super(true);
