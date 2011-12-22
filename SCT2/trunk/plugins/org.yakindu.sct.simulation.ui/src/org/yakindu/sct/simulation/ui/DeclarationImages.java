@@ -12,6 +12,8 @@ import org.eclipse.swt.graphics.Image;
 public enum DeclarationImages {
 
 	EVENT("icons/Event.gif"),
+	
+	TIMEEVENT("icons/TimeEvent.gif"),
 
 	VARIABLE("icons/Variable.gif"),
 	
