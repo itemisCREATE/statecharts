@@ -1,44 +1,76 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.simulation.ui.view;
 
-import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.Image;
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.jface.viewers.StyledCellLabelProvider;
+import org.eclipse.jface.viewers.ViewerCell;
+import org.eclipse.swt.custom.StyleRange;
 import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
-
-public class ExecutionContextLabelProvider extends ColumnLabelProvider {
+import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
+import org.yakindu.sct.simulation.ui.DeclarationImages;
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
+public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 
 	private final int index;
-
+	
 	public ExecutionContextLabelProvider(int index) {
 		this.index = index;
 	}
 
-	@Override
-	public String getText(Object element) {
-		AbstractSlot abstractSlot = (AbstractSlot) element;
+	public void update(ViewerCell cell) {
 		switch (index) {
 		case 0:
-			return abstractSlot.getName();
+			updateNameCell(cell);
+			break;
 		case 1:
-			if (abstractSlot.getValue() != null)
-				return abstractSlot.getValue().toString();
-		default:
-			return "";
+			updateValueCell(cell);
+			break;
 		}
+		super.update(cell);
 	}
 
-	@Override
-	public Image getImage(Object element) {
-		return super.getImage(element);
-	}
-	
-	@Override
-	public Font getFont(Object element) {
-		if(element instanceof ExecutionEvent){
-			
+	private void updateValueCell(ViewerCell cell) {
+		Object element = cell.getElement();
+		if (element instanceof AbstractSlot) {
+			Object value = ((AbstractSlot) element).getValue();
+			if (value != null)
+				cell.setText(value.toString());
 		}
-		return super.getFont(element);
+
+	}
+
+	private void updateNameCell(ViewerCell cell) {
+		Object element = cell.getElement();
+		if (element instanceof ExecutionEvent) {
+			ExecutionEvent event = (ExecutionEvent) element;
+			cell.setText(event.getName());
+			StyleRange style1 = new StyleRange();
+			style1.start = 0;
+			style1.length = event.getName().length();
+			style1.underline = true;
+			style1.foreground = ColorConstants.lightBlue;
+			cell.setText(event.getName());
+			cell.setStyleRanges(new StyleRange[] { style1 });
+			cell.setImage(DeclarationImages.EVENT.image());
+		} else if (element instanceof ExecutionVariable) {
+			ExecutionVariable variable = (ExecutionVariable) element;
+			cell.setText(variable.getName());
+			cell.setImage(DeclarationImages.VARIABLE.image());
+		}
 	}
 
 }
