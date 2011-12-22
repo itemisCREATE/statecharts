@@ -13,7 +13,9 @@ public enum DeclarationImages {
 
 	EVENT("icons/Event.gif"),
 
-	VARIABLE("icons/Variable.gif");
+	VARIABLE("icons/Variable.gif"),
+	
+	SCOPE("icons/Scope.gif");
 
 	private final String path;
 

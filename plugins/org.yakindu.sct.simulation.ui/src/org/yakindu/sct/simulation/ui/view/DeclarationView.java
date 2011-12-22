@@ -15,10 +15,12 @@ import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.model.IDebugTarget;
+import org.eclipse.debug.internal.ui.actions.CollapseAllAction;
 import org.eclipse.debug.ui.AbstractDebugView;
 import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.debug.ui.contexts.DebugContextEvent;
 import org.eclipse.debug.ui.contexts.IDebugContextListener;
+import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -30,6 +32,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.handlers.ExpandAllHandler;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
@@ -94,7 +97,6 @@ public class DeclarationView extends AbstractDebugView implements
 				}
 			}
 		});
-
 		return viewer;
 	}
 
@@ -132,12 +134,15 @@ public class DeclarationView extends AbstractDebugView implements
 		IExecutionFacade facade = (IExecutionFacade) debugTarget
 				.getAdapter(IExecutionFacade.class);
 		viewer.setInput(facade.getExecutionContext());
+		viewer.expandAll();
 
 	}
 
 	@Override
 	protected void createActions() {
-
+		@SuppressWarnings("restriction")
+		IAction action = new CollapseAllAction(viewer);
+		setAction("CollapseAll",action); //$NON-NLS-1$
 	}
 
 	@Override
@@ -152,7 +157,7 @@ public class DeclarationView extends AbstractDebugView implements
 
 	@Override
 	protected void configureToolBar(IToolBarManager tbm) {
-
+		tbm.add(getAction("CollapseAll")); //$NON-NLS-1$
 	}
 
 }
