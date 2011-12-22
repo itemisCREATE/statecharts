@@ -19,7 +19,6 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.widgets.Display;
 
-import de.itemis.gmf.runtime.commons.editparts.FixedSizeShapeNodeEditPart;
 import de.itemis.gmf.runtime.commons.util.EditPartUtils;
 
 /**

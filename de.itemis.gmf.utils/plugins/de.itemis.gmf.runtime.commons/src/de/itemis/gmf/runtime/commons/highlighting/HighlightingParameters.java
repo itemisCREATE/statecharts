@@ -10,6 +10,8 @@ import org.eclipse.swt.graphics.Color;
  */
 public class HighlightingParameters {
 
+	public static final HighlightingParameters DEFAULT = new HighlightingParameters();
+	
 	public long fadingTime = 500;
 	public Color foregroundFadingColor = ColorConstants.red;
 	// light red
