@@ -156,7 +156,7 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
       QualifiedName _qualifiedName_1 = this.provider.qualifiedName(_value_2);
       String _string_1 = _qualifiedName_1.toString();
       boolean _isEventRaised = this.context.isEventRaised(_string_1);
-      return _isEventRaised;
+      return ((Boolean)_isEventRaised);
     }
   }
   
@@ -172,7 +172,7 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     Object _xblockexpression = null;
     {
       List<ExecutionEvent> _raisedEvents = this.context.getRaisedEvents();
-      for (ExecutionEvent event : _raisedEvents) {
+      for (final ExecutionEvent event : _raisedEvents) {
         String _name = event.getName();
         Event _value = expression.getValue();
         String _name_1 = _value.getName();

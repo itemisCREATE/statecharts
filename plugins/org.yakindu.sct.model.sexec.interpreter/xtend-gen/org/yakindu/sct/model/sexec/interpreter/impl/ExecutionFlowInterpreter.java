@@ -6,11 +6,13 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.EnterState;
@@ -41,7 +43,6 @@ import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
-import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.simulation.core.runtime.ExecutionException;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
@@ -73,7 +74,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
     {
       this.flow = flow;
       EList<Scope> _scopes = flow.getScopes();
-      for (Scope scope : _scopes) {
+      for (final Scope scope : _scopes) {
         this.declareContents(scope);
       }
     }
@@ -93,21 +94,21 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
   
   protected void _declareContents(final InternalScope scope) throws NumberFormatException {
     EList<Declaration> _declarations = scope.getDeclarations();
-    for (Declaration declaration : _declarations) {
+    for (final Declaration declaration : _declarations) {
       this.addToScope(declaration);
     }
   }
   
   protected void _declareContents(final Scope scope) throws NumberFormatException {
     EList<Declaration> _declarations = scope.getDeclarations();
-    for (Declaration declaration : _declarations) {
+    for (final Declaration declaration : _declarations) {
       this.addToScope(declaration);
     }
   }
   
   protected void _declareContents(final InterfaceScope scope) throws NumberFormatException {
     EList<Declaration> _declarations = scope.getDeclarations();
-    for (Declaration declaration : _declarations) {
+    for (final Declaration declaration : _declarations) {
       this.addToScope(declaration);
     }
   }
@@ -128,6 +129,58 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
     }
   }
   
+  public boolean isBoolean(final Type type) {
+    boolean _operator_and = false;
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(type, null);
+    if (!_operator_notEquals) {
+      _operator_and = false;
+    } else {
+      String _name = type.getName();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_name, "boolean");
+      _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_equals);
+    }
+    return _operator_and;
+  }
+  
+  public boolean isInteger(final Type type) {
+    boolean _operator_and = false;
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(type, null);
+    if (!_operator_notEquals) {
+      _operator_and = false;
+    } else {
+      String _name = type.getName();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_name, "integer");
+      _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_equals);
+    }
+    return _operator_and;
+  }
+  
+  public boolean isReal(final Type type) {
+    boolean _operator_and = false;
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(type, null);
+    if (!_operator_notEquals) {
+      _operator_and = false;
+    } else {
+      String _name = type.getName();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_name, "real");
+      _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_equals);
+    }
+    return _operator_and;
+  }
+  
+  public boolean isVoid(final Type type) {
+    boolean _operator_or = false;
+    boolean _operator_equals = ObjectExtensions.operator_equals(type, null);
+    if (_operator_equals) {
+      _operator_or = true;
+    } else {
+      String _name = type.getName();
+      boolean _operator_equals_1 = ObjectExtensions.operator_equals(_name, "void");
+      _operator_or = BooleanExtensions.operator_or(_operator_equals, _operator_equals_1);
+    }
+    return _operator_or;
+  }
+  
   protected Object _addToScope(final VariableDefinition variable) throws NumberFormatException {
     Object _xblockexpression = null;
     {
@@ -135,28 +188,24 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
       String _string = _qualifiedName.toString();
       String fqName = _string;
       Type _type = variable.getType();
-      final Type __valOfSwitchOver = _type;
-      boolean matched = false;
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,Type.BOOLEAN)) {
-          matched=true;
-          ExecutionVariable _executionVariable = new ExecutionVariable(fqName, java.lang.Boolean.class, ((Boolean)false));
-          this.executionContext.declareVariable(_executionVariable);
-        }
-      }
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,Type.INTEGER)) {
-          matched=true;
+      boolean _isBoolean = this.isBoolean(_type);
+      if (_isBoolean) {
+        ExecutionVariable _executionVariable = new ExecutionVariable(fqName, java.lang.Boolean.class, ((Boolean)false));
+        this.executionContext.declareVariable(_executionVariable);
+      } else {
+        Type _type_1 = variable.getType();
+        boolean _isInteger = this.isInteger(_type_1);
+        if (_isInteger) {
           ExecutionVariable _executionVariable_1 = new ExecutionVariable(fqName, java.lang.Integer.class, ((Integer)0));
           this.executionContext.declareVariable(_executionVariable_1);
-        }
-      }
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,Type.REAL)) {
-          matched=true;
-          float _parseFloat = Float.parseFloat("0.0");
-          ExecutionVariable _executionVariable_2 = new ExecutionVariable(fqName, java.lang.Float.class, ((Float)_parseFloat));
-          this.executionContext.declareVariable(_executionVariable_2);
+        } else {
+          Type _type_2 = variable.getType();
+          boolean _isReal = this.isReal(_type_2);
+          if (_isReal) {
+            float _parseFloat = Float.parseFloat("0.0");
+            ExecutionVariable _executionVariable_2 = new ExecutionVariable(fqName, java.lang.Float.class, ((Float)_parseFloat));
+            this.executionContext.declareVariable(_executionVariable_2);
+          }
         }
       }
       _xblockexpression = (null);
@@ -171,34 +220,30 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
       String _string = _qualifiedName.toString();
       String fqName = _string;
       Type _type = event.getType();
-      final Type __valOfSwitchOver = _type;
-      boolean matched = false;
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,Type.BOOLEAN)) {
-          matched=true;
-          ExecutionEvent _executionEvent = new ExecutionEvent(fqName, java.lang.Boolean.class, null);
-          this.executionContext.declareEvent(_executionEvent);
-        }
-      }
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,Type.INTEGER)) {
-          matched=true;
+      boolean _isBoolean = this.isBoolean(_type);
+      if (_isBoolean) {
+        ExecutionEvent _executionEvent = new ExecutionEvent(fqName, java.lang.Boolean.class, null);
+        this.executionContext.declareEvent(_executionEvent);
+      } else {
+        Type _type_1 = event.getType();
+        boolean _isInteger = this.isInteger(_type_1);
+        if (_isInteger) {
           ExecutionEvent _executionEvent_1 = new ExecutionEvent(fqName, java.lang.Integer.class, null);
           this.executionContext.declareEvent(_executionEvent_1);
-        }
-      }
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,Type.REAL)) {
-          matched=true;
-          ExecutionEvent _executionEvent_2 = new ExecutionEvent(fqName, java.lang.Float.class, null);
-          this.executionContext.declareEvent(_executionEvent_2);
-        }
-      }
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,Type.VOID)) {
-          matched=true;
-          ExecutionEvent _executionEvent_3 = new ExecutionEvent(fqName, java.lang.Void.class);
-          this.executionContext.declareEvent(_executionEvent_3);
+        } else {
+          Type _type_2 = event.getType();
+          boolean _isReal = this.isReal(_type_2);
+          if (_isReal) {
+            ExecutionEvent _executionEvent_2 = new ExecutionEvent(fqName, java.lang.Float.class, null);
+            this.executionContext.declareEvent(_executionEvent_2);
+          } else {
+            Type _type_3 = event.getType();
+            boolean _isVoid = this.isVoid(_type_3);
+            if (_isVoid) {
+              ExecutionEvent _executionEvent_3 = new ExecutionEvent(fqName, java.lang.Void.class);
+              this.executionContext.declareEvent(_executionEvent_3);
+            }
+          }
         }
       }
       _xblockexpression = (null);
@@ -220,7 +265,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
   public void enter() throws ExecutionException {
     Sequence _enterSequence = this.flow.getEnterSequence();
     EList<Step> _steps = _enterSequence.getSteps();
-    for (Step step : _steps) {
+    for (final Step step : _steps) {
       this.execute(step);
     }
   }
@@ -285,7 +330,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
       Statement _condition = check.getCondition();
       boolean _operator_equals = ObjectExtensions.operator_equals(_condition, null);
       if (_operator_equals) {
-        return true;
+        return ((Boolean)true);
       }
       Statement _condition_1 = check.getCondition();
       Object _evaluateStatement = this.interpreter.evaluateStatement(_condition_1, this.executionContext);
@@ -348,7 +393,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
     Object _xblockexpression = null;
     {
       EList<Step> _steps = sequence.getSteps();
-      for (Step step : _steps) {
+      for (final Step step : _steps) {
         this.execute(step);
       }
       _xblockexpression = (null);
@@ -360,7 +405,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
     Object _xblockexpression = null;
     {
       EList<StateCase> _cases = stateSwitch.getCases();
-      for (StateCase stateCase : _cases) {
+      for (final StateCase stateCase : _cases) {
         this.execute(stateCase);
       }
       _xblockexpression = (null);
