@@ -10,6 +10,9 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.widgets.Display;
@@ -31,6 +34,41 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 
 	private Viewer viewer;
 
+	public class Container {
+		public String name = "Default";
+		public List<AbstractSlot> slots = new ArrayList<AbstractSlot>();
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + getOuterType().hashCode();
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			return result;
+		}
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Container other = (Container) obj;
+			if (!getOuterType().equals(other.getOuterType()))
+				return false;
+			if (name == null) {
+				if (other.name != null)
+					return false;
+			} else if (!name.equals(other.name))
+				return false;
+			return true;
+		}
+		private ExecutionContextContentProvider getOuterType() {
+			return ExecutionContextContentProvider.this;
+		}
+		
+	}
+
 	public void dispose() {
 
 	}
@@ -51,14 +89,45 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 		if (inputElement == null) {
 			return new Object[] {};
 		}
-		IExecutionContext context = (IExecutionContext) inputElement;
-		Iterable<AbstractSlot> concat = Iterables.concat(
-				context.getDeclaredEvents(), context.getVariables());
-		return Iterables.toArray(concat, Object.class);
+		if (inputElement instanceof IExecutionContext) {
+			List<Container> scopes = new ArrayList<ExecutionContextContentProvider.Container>();
+			Container defaultContainer = new Container();
+			scopes.add(defaultContainer);
+			IExecutionContext context = (IExecutionContext) inputElement;
+			Iterable<AbstractSlot> concat = Iterables.concat(
+					context.getDeclaredEvents(), context.getVariables());
+			for (AbstractSlot abstractSlot : concat) {
+				String[] split = abstractSlot.getName().split("\\.");
+				if (split.length == 1) {
+					defaultContainer.slots.add(abstractSlot);
+				} else if (split.length == 2) {
+					boolean found = false;
+					for (Container container : scopes) {
+						if (split[0].equals(container.name)) {
+							container.slots.add(abstractSlot);
+							found = true;
+							break;
+						}
+					}
+					if (!found) {
+						Container newScope = new Container();
+						newScope.name = split[0];
+						newScope.slots.add(abstractSlot);
+						scopes.add(newScope);
+					}
+				}
+			}
+			return scopes.toArray();
+		}
+		return new Object[] {};
+
 	}
 
 	public Object[] getChildren(Object parentElement) {
-		return null;
+		if (parentElement instanceof Container) {
+			return ((Container) parentElement).slots.toArray();
+		}
+		return new Object[] {};
 	}
 
 	public Object getParent(Object element) {
@@ -66,6 +135,8 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 	}
 
 	public boolean hasChildren(Object element) {
+		if (element instanceof Container)
+			return true;
 		return false;
 	}
 

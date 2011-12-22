@@ -18,6 +18,8 @@ import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 import org.yakindu.sct.simulation.ui.DeclarationImages;
+import org.yakindu.sct.simulation.ui.view.ExecutionContextContentProvider.Container;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -26,7 +28,7 @@ import org.yakindu.sct.simulation.ui.DeclarationImages;
 public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 
 	private final int index;
-	
+
 	public ExecutionContextLabelProvider(int index) {
 		this.index = index;
 	}
@@ -70,6 +72,9 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			ExecutionVariable variable = (ExecutionVariable) element;
 			cell.setText(variable.getName());
 			cell.setImage(DeclarationImages.VARIABLE.image());
+		} else if (element instanceof Container) {
+			cell.setText(((Container) element).name);
+			cell.setImage(DeclarationImages.SCOPE.image());
 		}
 	}
 
