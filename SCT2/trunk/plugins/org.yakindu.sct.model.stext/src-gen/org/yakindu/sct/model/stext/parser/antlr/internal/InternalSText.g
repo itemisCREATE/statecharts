@@ -4293,10 +4293,16 @@ ruleTimeUnit returns [Enumerator current=null]
         newLeafNode(enumLiteral_1, grammarAccess.getTimeUnitAccess().getMillisecondEnumLiteralDeclaration_1()); 
     }
 )
-    |(	enumLiteral_2='ns' 
+    |(	enumLiteral_2='\u00B5s' 
 	{
-        $current = grammarAccess.getTimeUnitAccess().getNanosecondEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-        newLeafNode(enumLiteral_2, grammarAccess.getTimeUnitAccess().getNanosecondEnumLiteralDeclaration_2()); 
+        $current = grammarAccess.getTimeUnitAccess().getMicrosendEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+        newLeafNode(enumLiteral_2, grammarAccess.getTimeUnitAccess().getMicrosendEnumLiteralDeclaration_2()); 
+    }
+)
+    |(	enumLiteral_3='ns' 
+	{
+        $current = grammarAccess.getTimeUnitAccess().getNanosecondEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
+        newLeafNode(enumLiteral_3, grammarAccess.getTimeUnitAccess().getNanosecondEnumLiteralDeclaration_3()); 
     }
 ));
 
