@@ -10,22 +10,15 @@
  */
 package org.yakindu.sct.simulation.core.runtime;
 
-import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.sexec.Trace;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public interface IExecutionFacadeListener {
+public interface IExecutionTraceListener {
 
-	void stateEntered(Vertex vertex);
-
-	void stateLeft(Vertex vertex);
-
-	void pseudoStateExecuted(Vertex vertex);
-
-	void transitionFired(Transition transition);
+	public void traceStepExecuted(Trace trace);
 
 }

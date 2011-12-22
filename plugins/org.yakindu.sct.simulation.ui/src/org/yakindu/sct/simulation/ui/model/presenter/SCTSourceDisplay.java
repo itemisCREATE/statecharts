@@ -10,169 +10,130 @@
  */
 package org.yakindu.sct.simulation.ui.model.presenter;
 
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.debug.core.DebugEvent;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.ui.sourcelookup.ISourceDisplay;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.swt.widgets.Display;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.FileEditorInput;
-import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugElement;
-import org.yakindu.sct.simulation.core.debugmodel.SCTStackFrame;
+import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
-import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeListener;
-import org.yakindu.sct.simulation.core.session.ISimulationSessionListener;
-import org.yakindu.sct.simulation.core.session.SimulationSession;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 
-import de.itemis.gmf.runtime.commons.highlighting.HighlightingParameters;
 import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
 import de.itemis.gmf.runtime.commons.util.EditPartUtils;
 
 /**
- * The {@link SCTSourceDisplay} displays the active State of the running debug
- * session.
- * 
- * <pre>
- *  - highlights the initial active states
- *  - registers itself as a {@link ISimulationSessionListener} to paint state changes
- * </pre>
- * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SCTSourceDisplay implements ISimulationSessionListener,
-		IExecutionFacadeListener, ISourceDisplay {
+public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener {
 
-	private IHighlightingSupport support = new IHighlightingSupport.HighlightingSupportNullImpl();
+	private DiagramDocumentEditor prevEditor;
+	private SCTDebugTarget lastActiveTarget;
+	private Map<IExecutionFacade, IDynamicNotationHandler> _handler;
 
-	private SimulationSession lastActiveSession;
-
-	private HighlightingParameters parameters = new HighlightingParameters();
+	public SCTSourceDisplay() {
+		_handler = new HashMap<IExecutionFacade, IDynamicNotationHandler>();
+		DebugPlugin.getDefault().addDebugEventListener(this);
+	}
 
 	public void displaySource(Object element, IWorkbenchPage page,
 			boolean forceSourceLookup) {
-
 		SCTDebugElement debugElement = (SCTDebugElement) element;
-		SimulationSession session = (SimulationSession) debugElement
-				.getAdapter(SimulationSession.class);
-
-		if(lastActiveSession == session){
+		if (debugElement.getDebugTarget().isTerminated())
+			return;
+		DiagramDocumentEditor editor = openEditorAndSelectElements(
+				debugElement, page);
+		if (debugElement.getDebugTarget() == lastActiveTarget
+				&& prevEditor == editor) {
 			return;
 		}
-		
+		prevEditor = editor;
+		lastActiveTarget = (SCTDebugTarget) debugElement.getDebugTarget();
+
 		IExecutionFacade facade = (IExecutionFacade) debugElement
 				.getAdapter(IExecutionFacade.class);
-		
-		//TODO CHECK FOR MULTI EDITOR SIM
-		facade.addExecutionListener(this);
+		IDynamicNotationHandler handler = _handler.get(facade);
+		if (handler == null) {
+			handler = createNotationHandler(facade);
 
-		StatechartDiagramEditor editor = openEditorAndSelectElements(
-				debugElement, page);
-
-		// Release the old editor
-		if (support.isLocked())
-			support.releaseEditor();
-
-		support = (IHighlightingSupport) editor
+		}
+		IHighlightingSupport support = (IHighlightingSupport) editor
 				.getAdapter(IHighlightingSupport.class);
-
-		// Release the new editor
+		handler.setHighlightingSupport(support);
 		if (support.isLocked())
 			support.releaseEditor();
-
-		// Paint the active states if the session is not terminated
-		if (session.getCurrentState() != SimulationState.TERMINATED) {
-			support.lockEditor();
-			Set<Vertex> stateConfiguration = session.getActiveStates();
-			for (Vertex vertex : stateConfiguration) {
-				support.highlight(vertex, parameters);
-			}
-		}
-
-		// Register me as a Session Listener to control the highlighting
-		if (lastActiveSession != null) {
-			lastActiveSession.removeSimulationListener(this);
-		}
-		session.addSimulationListener(this);
-		lastActiveSession = session;
-
+		support.lockEditor();
+		handler.restoreNotationState(facade.getExecutionContext());
 	}
 
-	public void stateEntered(final Vertex vertex) {
-		Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
-				getSupport().fadeIn(vertex, parameters);
-			}
-		});
+	private IDynamicNotationHandler createNotationHandler(
+			IExecutionFacade facade) {
+		IDynamicNotationHandler handler = new DefaultDynamicNotationHandler();
+		facade.addTraceListener(handler);
+		_handler.put(facade, handler);
+		return handler;
 	}
 
-	public void stateLeft(final Vertex vertex) {
-		Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
-				getSupport().fadeOut(vertex, parameters);
-			}
-		});
-	}
-
-	
-	public void pseudoStateExecuted(final Vertex vertex) {
-		Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
-				getSupport().flash(vertex, parameters);
-			}
-		});		
-	}
-
-	public void transitionFired(final Transition transition) {
-		Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
-				getSupport().flash(transition, parameters);
-			}
-		});
-	}
-
-	public void simulationStateChanged(SimulationState oldState,
-			SimulationState newState) {
-		if (newState == SimulationState.TERMINATED) {
-			if (support.isLocked())
-				support.releaseEditor();
+	public void handleDebugEvents(DebugEvent[] events) {
+		for (DebugEvent debugEvent : events) {
+			handleDebugEvent(debugEvent);
 		}
 	}
 
-	/**
-	 * Opens the editor for this resource and selects the selected Editparts
-	 * 
-	 * @param debugElement
-	 * @param page
-	 * @return
-	 */
-	private StatechartDiagramEditor openEditorAndSelectElements(
+	private void handleDebugEvent(DebugEvent debugEvent) {
+		switch (debugEvent.getKind()) {
+		case DebugEvent.TERMINATE:
+			handleDebugTargetTerminated(debugEvent);
+			break;
+		}
+	}
+
+	private void handleDebugTargetTerminated(DebugEvent debugEvent) {
+		Object source = debugEvent.getSource();
+		if (source instanceof SCTDebugTarget) {
+			SCTDebugTarget target = (SCTDebugTarget) source;
+			IExecutionFacade facade = (IExecutionFacade) target
+					.getAdapter(IExecutionFacade.class);
+			if (_handler.containsKey(facade)) {
+				IDynamicNotationHandler handler = _handler.get(facade);
+				handler.getHighlightingSupport().releaseEditor();
+				facade.removeTraceListener(handler);
+				System.out.println("Removing handler");
+				_handler.remove(facade);
+			}
+		}
+	}
+
+	private DiagramDocumentEditor openEditorAndSelectElements(
 			SCTDebugElement debugElement, IWorkbenchPage page) {
 		String platformString = debugElement.getResourceString();
 		IResource resource = ResourcesPlugin.getWorkspace().getRoot()
 				.findMember(platformString);
-		StatechartDiagramEditor editor = null;
+		DiagramDocumentEditor editor = null;
 		try {
-			editor = (StatechartDiagramEditor) page.openEditor(
+			editor = (DiagramDocumentEditor) page.openEditor(
 					new FileEditorInput(((IFile) resource)),
 					StatechartDiagramEditor.ID);
-
-			if (debugElement instanceof SCTStackFrame) {
-				IGraphicalEditPart editPart = EditPartUtils
-						.findEditPartForSemanticElement(editor
-								.getDiagramGraphicalViewer().getRootEditPart(),
-								((SCTStackFrame) debugElement).getState());
-				if (editPart != null) {
-					editor.getDiagramGraphicalViewer().reveal(editPart);
-					editor.getDiagramGraphicalViewer().select(editPart);
-				}
+			IGraphicalEditPart editPart = EditPartUtils
+					.findEditPartForSemanticElement(editor
+							.getDiagramGraphicalViewer().getRootEditPart(),
+							(EObject) debugElement.getAdapter(EObject.class));
+			if (editPart != null) {
+				editor.getDiagramGraphicalViewer().select(editPart);
+				editor.getDiagramGraphicalViewer().reveal(editPart);
 			}
 		} catch (PartInitException e) {
 			e.printStackTrace();
@@ -180,7 +141,4 @@ public class SCTSourceDisplay implements ISimulationSessionListener,
 		return editor;
 	}
 
-	public IHighlightingSupport getSupport() {
-		return support;
-	}
 }

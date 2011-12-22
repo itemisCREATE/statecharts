@@ -11,9 +11,10 @@
 package org.yakindu.sct.simulation.core.debugmodel;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.CoreException;
@@ -27,42 +28,32 @@ import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.yakindu.sct.model.sgraph.FinalState;
-import org.yakindu.sct.model.sgraph.Region;
-import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.extensions.ExecutionFactoryExtensions;
 import org.yakindu.sct.simulation.core.extensions.ExecutionFactoryExtensions.ExecutionFactoryDescriptor;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeFactory;
-import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeListener;
-import org.yakindu.sct.simulation.core.session.SimulationSession;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
-		IExecutionFacadeListener {
+public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 
-	private IProcess process;
+	// TODO: Add to launch tab config
+	private static final int CYCLE_SLEEP_TIME = 100;
 
 	private ILaunch launch;
 
 	private IExecutionFacade facade;
 
-	private SimulationSession session;
+	private Timer timer;
 
 	private boolean stepping = false;
 	private boolean terminated = false;
 	private boolean suspended = false;
-
-	private List<Region> activeRegions = new ArrayList<Region>();
-	private List<Vertex> activeStates = new ArrayList<Vertex>();
 
 	private final Statechart statechart;
 
@@ -71,10 +62,9 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 		super(null, statechart.eResource().getURI().toPlatformString(true));
 		this.launch = launch;
 		this.statechart = statechart;
-
+		timer = new Timer();
 		DebugPlugin.getDefault().getBreakpointManager()
 				.addBreakpointListener(this);
-
 		createExecutionModel(statechart);
 
 	}
@@ -82,37 +72,45 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 	private void createExecutionModel(Statechart statechart) {
 		IExecutionFacadeFactory factory = getExecutionFacadeFactory(statechart);
 		facade = factory.createExecutionFacade(statechart);
-		facade.addExecutionListener(this);
-		session = new SimulationSession(facade);
-		new Thread(session).start();
-		session.start();
+		facade.enter();
+		scheduleCycle();
+	}
+
+	protected void scheduleCycle() {
+		if (!terminated && !suspended)
+			timer.schedule(new TimerTask() {
+				public void run() {
+					facade.runCycle();
+					scheduleCycle();
+				}
+			}, CYCLE_SLEEP_TIME);
 	}
 
 	protected IExecutionFacadeFactory getExecutionFacadeFactory(EObject context) {
 		Iterable<ExecutionFactoryDescriptor> executionFactoryDescriptor = ExecutionFactoryExtensions
 				.getExecutionFactoryDescriptor();
-		// 7TODO: Handle more than one registered factory
+		// TODO: Handle more than one registered factory
 		ExecutionFactoryDescriptor next = executionFactoryDescriptor.iterator()
 				.next();
 		return next.createExecutableExtensionFactory();
 	}
 
 	public IProcess getProcess() {
-		return process;
+		return null;
 	}
 
 	public void stepOver() {
 		fireEvent(new DebugEvent(getDebugTarget(), DebugEvent.STEP_OVER));
-		session.singleStep();
 	}
 
 	public IThread[] getThreads() throws DebugException {
 		List<SCTDebugThread> threads = new ArrayList<SCTDebugThread>();
-		for (int i = activeRegions.size() - 1; i >= 0; i--) {
+		Set<Vertex> activeLeafStates = facade.getExecutionContext()
+				.getActiveLeafStates();
+		for (Vertex vertex : activeLeafStates) {
 			threads.add(new SCTDebugThread(this, facade, getResourceString(),
-					activeRegions.get(i)));
+					vertex.getParentRegion()));
 		}
-
 		return threads.toArray(new IThread[] {});
 	}
 
@@ -137,11 +135,11 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 	}
 
 	public void terminate() throws DebugException {
-		facade.removeExecutionListener(this);
-		// activeStates = Collections.emptyList();
 		fireEvent(new DebugEvent(getDebugTarget(), DebugEvent.TERMINATE));
 		terminated = true;
-		session.terminate();
+		facade.tearDown();
+		timer.cancel();
+		timer.purge();
 	}
 
 	public boolean canResume() {
@@ -159,14 +157,13 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 	public void resume() throws DebugException {
 		fireEvent(new DebugEvent(this, DebugEvent.RESUME));
 		fireChangeEvent(DebugEvent.CONTENT);
-		session.resume();
 		suspended = false;
+		scheduleCycle();
 	}
 
 	public void suspend() throws DebugException {
 		fireEvent(new DebugEvent(this, DebugEvent.SUSPEND));
 		fireChangeEvent(DebugEvent.CONTENT);
-		session.suspend();
 		suspended = true;
 	}
 
@@ -209,10 +206,11 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 	}
 
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
-		if (adapter == SimulationSession.class)
-			return session;
 		if (adapter == IExecutionFacade.class)
 			return facade;
+		if (adapter == EObject.class) {
+			return statechart;
+		}
 		return super.getAdapter(adapter);
 	}
 
@@ -220,78 +218,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 		return isSuspended() && !isTerminated();
 	}
 
-	public void stateEntered(Vertex vertex) {
-		if (vertex instanceof State) {
-			if (((State) vertex).isLeaf()) {
-				activeStates.add(vertex);
-				activeRegions.add(vertex.getParentRegion());
-			}
-		} else if (vertex instanceof FinalState) {
-			activeStates.add(vertex);
-			activeRegions.add(vertex.getParentRegion());
-		}
-		fireChangeEvent(DebugEvent.CONTENT);
-	}
-
-	public void stateLeft(Vertex vertex) {
-		if (vertex instanceof State) {
-			activeStates.remove(vertex);
-			if (((State) vertex).isLeaf()) {
-				if (activeRegions.contains(vertex.getParentRegion()))
-					activeRegions.remove(vertex.getParentRegion());
-			}
-		} else if (vertex instanceof FinalState) {
-			if (activeRegions.contains(vertex.getParentRegion()))
-				activeRegions.remove(vertex.getParentRegion());
-		}
-		fireChangeEvent(DebugEvent.CONTENT);
-	}
-
-	public void pseudoStateExecuted(Vertex vertex) {
-	}
-
-	public void transitionFired(Transition transition) {
-	}
-
 	public boolean isStepping() {
 		return stepping;
-	}
-
-	public List<Region> getActiveRegions() {
-		return activeRegions;
-	}
-
-	public List<Vertex> getActiveStates() {
-		return activeStates;
-	}
-
-	public List<Vertex> getActiveStatesForRegion(Region region) {
-		List<Vertex> result = new ArrayList<Vertex>();
-		for (Vertex vertex : activeStates) {
-			if (EcoreUtil.isAncestor(region, vertex)) {
-				result.addAll(getActiveHierachy(vertex));
-			}
-
-			Collections.reverse(result);
-		}
-		return result;
-
-	}
-
-	private Collection<? extends Vertex> getActiveHierachy(Vertex vertex) {
-		List<Vertex> result = new ArrayList<Vertex>();
-		result.add(vertex);
-		EObject container = vertex.eContainer();
-		while (container != null) {
-			if (container instanceof State) {
-				result.add((State) container);
-			}
-			container = container.eContainer();
-		}
-		return result;
-	}
-
-	public Statechart getStatechart() {
-		return statechart;
 	}
 }

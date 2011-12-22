@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.simulation.core.runtime;
 
-
-
 /**
  * Facade for executable statechart implementation.
  * 
@@ -19,25 +17,19 @@ package org.yakindu.sct.simulation.core.runtime;
  * 
  */
 public interface IExecutionFacade {
-	/**
-	 * Returns a name for the Execution Facade implementation
-	 */
+
 	public String getName();
-	
+
 	public void tearDown();
-	/**
-	 * Startes the execution
-	 */
+
 	public void enter();
-	/**
-	 * Executes one cycle
-	 */
+
 	public void runCycle();
 
-	public void addExecutionListener(IExecutionFacadeListener listener);
+	public void addTraceListener(IExecutionTraceListener listener);
 
-	public void removeExecutionListener(IExecutionFacadeListener listener);
+	public void removeTraceListener(IExecutionTraceListener listener);
 
 	public IExecutionContext getExecutionContext();
-	
+
 }

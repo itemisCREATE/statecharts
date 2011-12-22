@@ -12,7 +12,6 @@
          </adapter>
       </factory>
    </extension>
-	
 	<!-- Launch configuration images -->
    <extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
     	<launchConfigurationTypeImage
@@ -73,6 +72,7 @@
           plugin="org.yakindu.sct.simulation.core">
     </statusHandler>
  </extension>
+ 
  <!-- Source Display Adapter factory -->
  <extension
        point="org.eclipse.core.runtime.adapters">

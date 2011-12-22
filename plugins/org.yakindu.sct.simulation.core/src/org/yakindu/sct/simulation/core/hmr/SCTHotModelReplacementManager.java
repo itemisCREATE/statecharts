@@ -28,6 +28,7 @@ import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchListener;
 import org.eclipse.debug.core.model.IDebugTarget;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
@@ -160,8 +161,8 @@ public class SCTHotModelReplacementManager implements IResourceChangeListener,
 			// Reload the Statechart form the changes resource
 			Statechart newStatechart = ResourceUtil
 					.loadStatechart(sctDebugTarget.getResourceString());
-			if (!EcoreUtil
-					.equals(newStatechart, sctDebugTarget.getStatechart())) {
+			if (!EcoreUtil.equals(newStatechart,
+					(EObject) sctDebugTarget.getAdapter(EObject.class))) {
 				// The model semantically changed, we have to create a
 				// notificiation for that....
 				modelReplacementFailedTargets.add(sctDebugTarget);

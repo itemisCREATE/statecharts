@@ -12,15 +12,16 @@ package org.yakindu.sct.simulation.core.debugmodel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
+import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
-import org.yakindu.sct.simulation.core.session.SimulationSession;
 
 /**
  * 
@@ -30,10 +31,12 @@ import org.yakindu.sct.simulation.core.session.SimulationSession;
 public class SCTDebugThread extends SCTDebugElement implements IThread {
 
 	private final Region region;
+	private final IExecutionFacade facade;
 
 	public SCTDebugThread(SCTDebugTarget target, IExecutionFacade facade,
 			String resourceString, Region region) {
 		super(target, resourceString);
+		this.facade = facade;
 		this.region = region;
 	}
 
@@ -42,12 +45,14 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public IStackFrame[] getStackFrames() throws DebugException {
-		List<Vertex> activeStates = getDebugTarget().getActiveStatesForRegion(
-				region);
 		List<IStackFrame> stackFrames = new ArrayList<IStackFrame>();
-		for (int i = activeStates.size() - 1; i >= 0; i--) {
-			stackFrames.add(new SCTStackFrame(this, activeStates.get(i),
-					getResourceString()));
+		Set<Vertex> activeLeafStates = facade.getExecutionContext()
+				.getActiveLeafStates();
+		for (Vertex vertex : activeLeafStates) {
+			if (vertex.getParentRegion() == region) {
+				stackFrames.add(new SCTStackFrame(this, vertex,
+						getResourceString()));
+			}
 		}
 		return stackFrames.toArray(new IStackFrame[] {});
 	}
@@ -127,10 +132,11 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
-		if (adapter == SimulationSession.class)
-			return getDebugTarget().getAdapter(SimulationSession.class);
 		if (adapter == IExecutionFacade.class)
 			return getDebugTarget().getAdapter(IExecutionFacade.class);
+		if (adapter == EObject.class) {
+			return region;
+		}
 		return super.getAdapter(adapter);
 	}
 
