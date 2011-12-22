@@ -103,6 +103,8 @@ public class DeclarationView extends AbstractDebugView implements
 		if ((event.getFlags() & DebugContextEvent.ACTIVATED) > 0) {
 			PlatformObject object = (PlatformObject) ((IStructuredSelection) event
 					.getContext()).getFirstElement();
+			if (object == null)
+				return;
 			SCTDebugTarget debugTarget = (SCTDebugTarget) object
 					.getAdapter(IDebugTarget.class);
 			if (debugTarget != null && !debugTarget.isTerminated())
@@ -141,7 +143,7 @@ public class DeclarationView extends AbstractDebugView implements
 	protected void createActions() {
 		@SuppressWarnings("restriction")
 		IAction action = new CollapseAllAction(viewer);
-		setAction("CollapseAll",action); //$NON-NLS-1$
+		setAction("CollapseAll", action); //$NON-NLS-1$
 	}
 
 	@Override
