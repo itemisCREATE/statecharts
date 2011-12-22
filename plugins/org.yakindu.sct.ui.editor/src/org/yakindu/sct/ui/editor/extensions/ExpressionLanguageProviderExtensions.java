@@ -10,6 +10,9 @@
  */
 package org.yakindu.sct.ui.editor.extensions;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
@@ -28,6 +31,8 @@ public class ExpressionLanguageProviderExtensions {
 	private static final String ATTR_RESOURCE_EXTENSION = "resourceExtension";
 
 	private static final String ATTR_SEMANTIC_TARGET = "semanticTarget";
+	
+	private static final Map<String, IExpressionLanguageProvider> providerMap = new HashMap<String, IExpressionLanguageProvider>();
 
 	public enum SemanticTarget {
 		StatechartSpecification, StateSpecification, TransitionSpecification
@@ -54,8 +59,17 @@ public class ExpressionLanguageProviderExtensions {
 						.getAttribute(ATTR_RESOURCE_EXTENSION);
 				if (SemanticTarget.valueOf(semanticTarget) == target
 						&& resourceExtension.endsWith(registeredExtension)) {
-					return (IExpressionLanguageProvider) configurationElement
-							.createExecutableExtension(ATTR_CLASS);
+					
+					String key = target.name()+configurationElement.getNamespaceIdentifier();
+					if (providerMap.get(key)!=null) {
+						return providerMap.get(key);
+					}
+					else {
+						IExpressionLanguageProvider provider = (IExpressionLanguageProvider) configurationElement
+								.createExecutableExtension(ATTR_CLASS);
+						providerMap.put(key, provider);
+						return provider;
+					}
 				}
 			} catch (CoreException e) {
 				e.printStackTrace();
