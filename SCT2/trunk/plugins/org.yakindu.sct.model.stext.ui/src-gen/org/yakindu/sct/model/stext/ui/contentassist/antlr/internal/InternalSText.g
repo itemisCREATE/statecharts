@@ -24,6 +24,7 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
+import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
@@ -2874,10 +2875,17 @@ rule__TimeUnit__Alternatives
 )
 
     |(
-{ before(grammarAccess.getTimeUnitAccess().getNanosecondEnumLiteralDeclaration_2()); }
+{ before(grammarAccess.getTimeUnitAccess().getMicrosendEnumLiteralDeclaration_2()); }
+(	'\u00B5s' 
+)
+{ after(grammarAccess.getTimeUnitAccess().getMicrosendEnumLiteralDeclaration_2()); }
+)
+
+    |(
+{ before(grammarAccess.getTimeUnitAccess().getNanosecondEnumLiteralDeclaration_3()); }
 (	'ns' 
 )
-{ after(grammarAccess.getTimeUnitAccess().getNanosecondEnumLiteralDeclaration_2()); }
+{ after(grammarAccess.getTimeUnitAccess().getNanosecondEnumLiteralDeclaration_3()); }
 )
 
 ;
