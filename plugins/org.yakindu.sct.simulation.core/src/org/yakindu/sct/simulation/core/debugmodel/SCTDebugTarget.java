@@ -253,12 +253,6 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 	public void transitionFired(Transition transition) {
 	}
 
-	public void variableValueChanged(String variableName, Object value) {
-	}
-
-	public void eventRaised(String eventName) {
-	}
-
 	public boolean isStepping() {
 		return stepping;
 	}
