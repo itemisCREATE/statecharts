@@ -58,12 +58,16 @@ import org.yakindu.sct.model.sexec.TraceStateEntered
 import org.yakindu.sct.model.sexec.TraceStateExited
 import org.yakindu.sct.model.sexec.TraceNodeExecuted
 import org.yakindu.base.types.Type
+import org.yakindu.sct.simulation.core.runtime.IExecutionFacade
+import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter
+import org.yakindu.sct.simulation.core.runtime.AbstractExecutionFacade
+import org.yakindu.sct.model.sexec.Trace
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
+class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecutionFlowInterpreter {
 	
 	@Inject
 	IStatementInterpreter interpreter
@@ -190,23 +194,8 @@ class ExecutionFlowInterpreter extends AbstractExecutionFlowInterpreter {
 		null
 	}
 	
-	def dispatch execute(ReactionFired reactionFired){
-		notifyTransitionFired(reactionFired)
-		null
-	}
-	
-	def dispatch execute(TraceStateEntered entered){
-		notifyStateEntered(entered.state)
-		null
-	}
-	
-	def dispatch execute(TraceStateExited exited){
-		notifyStateExited(exited.state)
-		null
-	}
-	
-	def dispatch execute(TraceNodeExecuted executed){
-		notifyStateExited(executed.node)
+	def dispatch execute(Trace trace){
+		notifyTraceStepEntered(trace)
 		null
 	}
 	
