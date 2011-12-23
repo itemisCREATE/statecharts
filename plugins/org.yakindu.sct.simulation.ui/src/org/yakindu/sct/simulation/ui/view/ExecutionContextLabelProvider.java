@@ -65,7 +65,7 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			style1.length = event.getName().length();
 			style1.underline = true;
 			style1.foreground = ColorConstants.lightBlue;
-			cell.setText(event.getName());
+			cell.setText(event.getSimpleName());
 			cell.setStyleRanges(new StyleRange[] { style1 });
 			if (event.getName().contains("time_event")) {
 				cell.setImage(DeclarationImages.TIMEEVENT.image());
@@ -74,7 +74,7 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			}
 		} else if (element instanceof ExecutionVariable) {
 			ExecutionVariable variable = (ExecutionVariable) element;
-			cell.setText(variable.getName());
+			cell.setText(variable.getSimpleName());
 			cell.setImage(DeclarationImages.VARIABLE.image());
 		} else if (element instanceof Container) {
 			cell.setText(((Container) element).name);

@@ -11,8 +11,13 @@
 package org.yakindu.sct.simulation.ui.view;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.widgets.Display;
@@ -21,7 +26,10 @@ import org.yakindu.sct.simulation.core.runtime.IExecutionContextListener;
 import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
+import org.yakindu.sct.simulation.ui.SimulationActivator;
+import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 /**
@@ -30,50 +38,16 @@ import com.google.common.collect.Iterables;
  * 
  */
 public class ExecutionContextContentProvider implements ITreeContentProvider,
-		IExecutionContextListener {
+		IExecutionContextListener, IPropertyChangeListener {
 
 	private Viewer viewer;
 
-	public class Container {
-		public String name = "Default";
-		public List<AbstractSlot> slots = new ArrayList<AbstractSlot>();
-
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + getOuterType().hashCode();
-			result = prime * result + ((name == null) ? 0 : name.hashCode());
-			return result;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			Container other = (Container) obj;
-			if (!getOuterType().equals(other.getOuterType()))
-				return false;
-			if (name == null) {
-				if (other.name != null)
-					return false;
-			} else if (!name.equals(other.name))
-				return false;
-			return true;
-		}
-
-		private ExecutionContextContentProvider getOuterType() {
-			return ExecutionContextContentProvider.this;
-		}
-
+	public void dispose() {
+		getStore().removePropertyChangeListener(this);
 	}
 
-	public void dispose() {
-
+	public ExecutionContextContentProvider() {
+		getStore().addPropertyChangeListener(this);
 	}
 
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
@@ -93,41 +67,47 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 			return new Object[] {};
 		}
 		if (inputElement instanceof IExecutionContext) {
-			List<Container> scopes = new ArrayList<ExecutionContextContentProvider.Container>();
+			Set<Container> scopes = new HashSet<Container>();
 			Container defaultContainer = new Container();
 			scopes.add(defaultContainer);
-			Container timeEventContainer = new Container();
-			timeEventContainer.name = "Time Events";
+			Container timeEventContainer = new Container("Time Events");
 			scopes.add(timeEventContainer);
 			IExecutionContext context = (IExecutionContext) inputElement;
-			Iterable<AbstractSlot> concat = Iterables.concat(
+			Iterable<AbstractSlot> slotelements = Iterables.concat(
 					context.getDeclaredEvents(), context.getVariables());
-			for (AbstractSlot abstractSlot : concat) {
-				String[] split = abstractSlot.getName().split("\\.");
-				if (split.length == 1) {
-					if (split[0].contains("time_event")) {
-						timeEventContainer.slots.add(abstractSlot);
+			for (AbstractSlot abstractSlot : slotelements) {
+				if (abstractSlot.getScopeSegment() != null) {
+					Container newScope = new Container();
+					newScope.name = abstractSlot.getScopeSegment();
+					newScope.slots.add(abstractSlot);
+					scopes.add(newScope);
+				}
+			}
+			for (AbstractSlot abstractSlot : slotelements) {
+				if (abstractSlot.getScopeSegment() == null) {
+					if (abstractSlot.getSimpleName().contains("time_event")) {
+						if (!hideTimeEvents()) {
+							timeEventContainer.slots.add(abstractSlot);
+						}
 					} else {
 						defaultContainer.slots.add(abstractSlot);
 					}
-				} else if (split.length == 2) {
-					boolean found = false;
+				} else {
 					for (Container container : scopes) {
-						if (split[0].equals(container.name)) {
+						if (abstractSlot.getScopeSegment().equals(
+								container.name)) {
 							container.slots.add(abstractSlot);
-							found = true;
 							break;
 						}
 					}
-					if (!found) {
-						Container newScope = new Container();
-						newScope.name = split[0];
-						newScope.slots.add(abstractSlot);
-						scopes.add(newScope);
-					}
 				}
 			}
-			return scopes.toArray();
+			return Iterables.toArray(
+					Iterables.filter(scopes, new Predicate<Container>() {
+						public boolean apply(Container input) {
+							return input.slots.size() > 0;
+						}
+					}), Container.class);
 		}
 		return new Object[] {};
 
@@ -156,9 +136,68 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 	public void variableValueChanged(ExecutionVariable variable) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
-				viewer.refresh();
+				if (viewer != null && !viewer.getControl().isDisposed())
+					viewer.refresh();
 			}
 		});
+	}
+
+	private IPreferenceStore getStore() {
+		return SimulationActivator.getDefault().getPreferenceStore();
+	}
+
+	private boolean hideTimeEvents() {
+		return getStore().getBoolean(HideTimeEventsAction.HIDE_KEY);
+	}
+
+	public void propertyChange(PropertyChangeEvent event) {
+		if (event.getProperty() == HideTimeEventsAction.HIDE_KEY) {
+			if (viewer != null && !viewer.getControl().isDisposed())
+				viewer.refresh();
+		}
+	}
+
+	/**
+	 * Container for grouping variables and events
+	 * 
+	 */
+	public static class Container {
+		String name = "Default";
+		List<AbstractSlot> slots = new ArrayList<AbstractSlot>();
+
+		public Container() {
+			super();
+		}
+
+		public Container(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Container other = (Container) obj;
+			if (name == null) {
+				if (other.name != null)
+					return false;
+			} else if (!name.equals(other.name))
+				return false;
+			return true;
+		}
+
 	}
 
 }

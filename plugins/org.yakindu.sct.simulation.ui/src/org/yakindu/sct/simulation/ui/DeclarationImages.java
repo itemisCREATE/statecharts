@@ -17,7 +17,11 @@ public enum DeclarationImages {
 
 	VARIABLE("icons/Variable.gif"),
 	
-	SCOPE("icons/Scope.gif");
+	SCOPE("icons/Scope.gif"),
+	
+	COLLAPSE_ALL("icons/collapseall.gif"),
+	
+	EXPAND_ALL("icons/expandall.gif");
 
 	private final String path;
 
