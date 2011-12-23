@@ -10,6 +10,7 @@ Contributors:
 «IMPORT stext»
 
 «EXTENSION org::yakindu::sct::generator::java::templates::ExecutionModelExtensions»
+«EXTENSION org::yakindu::sct::generator::java::templates::TypeModelExtensions»
 «EXTENSION org::yakindu::sct::generator::java::templates::Expression»
 «EXTENSION org::yakindu::sct::generator::java::templates::GenmodelEntries»
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
@@ -42,7 +43,7 @@ public interface «getInterfaceName()»«getInterfaceExtension(entry)» {
 	
 	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
 	«IF  event.direction ==  Direction::IN-»
-		«IF event.type != Type::void-»
+		«IF !event.type.isVoid()-»
 			public void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value);
 		«ELSE»
 			public void raise«event.name.toFirstUpper()»();

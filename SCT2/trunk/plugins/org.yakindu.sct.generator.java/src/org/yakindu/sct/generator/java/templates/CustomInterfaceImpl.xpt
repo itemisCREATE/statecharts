@@ -8,8 +8,10 @@ Contributors:
 	Markus Muehlbrandt - Initial contribution and API
 «ENDREM»
 «IMPORT stext»
+«IMPORT types»
 
 «EXTENSION org::yakindu::sct::generator::java::templates::ExecutionModelExtensions»
+«EXTENSION org::yakindu::sct::generator::java::templates::TypeModelExtensions»
 «EXTENSION org::yakindu::sct::generator::java::templates::Expression»
 «EXTENSION org::yakindu::sct::generator::java::templates::GenmodelEntries»
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
@@ -46,7 +48,7 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implemen
 		
 	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
 	
-	«IF event.type != Type::void-»
+	«IF !event.type.isVoid()-»
 	public void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value) {
 		«event.getName()».setValue(value);
 		statemachine.getOccuredEvents().add(«event.getName()»);
