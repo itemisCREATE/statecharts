@@ -11,6 +11,7 @@ Templates for the main statechart cpp file.
 «IMPORT sgraph»
 
 «EXTENSION org::yakindu::sct::generator::cpp::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::cpp::templates::TypeModelExtensions»
 «EXTENSION org::yakindu::sct::generator::cpp::templates::Naming»
 
 
@@ -62,12 +63,12 @@ public:
 	
 	«FOREACH interface.getOutEvents() AS event -»
 	boolean is_«event.name»_raised(«
-	IF event.type != Type::void -» «event.type.eventTypeToString()»* value«ENDIF» );
+	IF !event.type.isVoid() -» «event.type.eventTypeToString()»* value«ENDIF» );
 	«ENDFOREACH»
 
 	«FOREACH interface.getInEvents() AS event -»
 	void raise_«event.name»(«
-	IF event.type != Type::void -» «event.type.eventTypeToString()» value «ENDIF»);
+	IF !event.type.isVoid() -» «event.type.eventTypeToString()» value «ENDIF»);
 	«ENDFOREACH» 
 	
 
@@ -110,12 +111,12 @@ void «interfaceClassName(interface)»::resetEvent()
 	
 «FOREACH interface.getOutEvents() AS event -»
 boolean «interfaceClassName(interface)»::is_«event.name»_raised(«
-	IF event.type != Type::void -» «event.type.eventTypeToString()»* value«ENDIF» )
+	IF !event.type.isVoid() -» «event.type.eventTypeToString()»* value«ENDIF» )
 {
 	std::vector<Event>::const_iterator cit(outEventList.begin());
 	for(; cit != outEventList.end(); ++cit)
 	  if (cit->getID() == (uint32_t)«event.getEventEnumName()») {
-	  	«IF event.type != Type::void -»
+	  	«IF !event.type.isVoid() -»
 	  	*value = static_cast<«event.name»*>(cit)->value;
 	  	«ENDIF»
 	  	return true;
@@ -127,7 +128,7 @@ boolean «interfaceClassName(interface)»::is_«event.name»_raised(«
 
 «FOREACH interface.getInEvents() AS event -»
 void «interfaceClassName(interface)»::raise_«event.name»(«
-	IF event.type != Type::void -» «event.type.eventTypeToString()» value «ENDIF»)
+	IF !event.type.isVoid() -» «event.type.eventTypeToString()» value «ENDIF»)
 {
 	Event ev = new «event.name»;
 	statemachine.setEvent(ev);

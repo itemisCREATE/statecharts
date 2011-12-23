@@ -2,6 +2,7 @@ import stext;
 import sexec;
 import ecore;
 import sgraph;
+import types;
 
 extension org::yakindu::sct::generator::c::templates::Naming;
 
@@ -142,12 +143,13 @@ String getOperator(RelationalOperator operator) :
 	};
 
 String eventTypeToString(Type type) : 
-  switch (type) {
-  case (Type::void) : "void"
-  case (Type::real) : "real"
-  case (Type::integer) : "integer"
-  case (Type::boolean) : "boolean"
-  case (Type::string)  : "string"
+  switch (type.name) {
+  case null : "void"
+  case "void" : "void"
+  case "real" : "real"
+  case "integer" : "integer"
+  case "boolean" : "boolean"
+  case "string"  : "string"
   default : "unknownType"
  };
 

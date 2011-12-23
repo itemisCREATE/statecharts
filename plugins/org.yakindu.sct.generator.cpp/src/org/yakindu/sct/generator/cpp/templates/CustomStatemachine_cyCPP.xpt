@@ -13,6 +13,7 @@ Templates for the main statechart cpp file.
 
 «IMPORT org::yakindu::sct::generator::cpp::templates»
 «EXTENSION org::yakindu::sct::generator::cpp::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::cpp::templates::TypeModelExtensions»
 «EXTENSION org::yakindu::sct::generator::cpp::templates::Naming»
 
 «DEFINE ActionCode FOR Step»
@@ -138,7 +139,7 @@ void «StNameCy()»::init()
 }
 
 «FOREACH declaredEvents() AS event -»
-«IF (((EventDefinition)event).type == Type::void) -»
+«IF (((EventDefinition)event).type.isVoid()) -»
 void set«((EventDefinition)event).name.toFirstUpper()»()
 «ELSE -»
 void set«((EventDefinition)event).name.toFirstUpper()»(«eventTypeToString(((EventDefinition)event).type)» value)
@@ -146,7 +147,7 @@ void set«((EventDefinition)event).name.toFirstUpper()»(«eventTypeToString(((Even
 {
 	«((EventDefinition)event).name»* ev(new «((EventDefinition)event).name»);
 
-«IF (((EventDefinition)event).type != Type::void) -»
+«IF (((EventDefinition)event).type.isVoid()) -»
 	ev->value = value;
 «ENDIF -»
 	queueEvent(ev);
