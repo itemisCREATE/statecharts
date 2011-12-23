@@ -20,6 +20,8 @@ import org.yakindu.sct.simulation.core.runtime.ExecutionException;
 public abstract class AbstractSlot {
 
 	protected String name;
+	protected String scopeSegment;
+	protected String simpleName;
 	protected Class<?> type;
 	protected Object value;
 
@@ -27,9 +29,24 @@ public abstract class AbstractSlot {
 		super();
 		Assert.isNotNull(name);
 		this.name = name;
+		String[] split = name.split("\\.");
+		if (split.length == 2) {
+			scopeSegment = split[0];
+			simpleName = split[1];
+		} else {
+			simpleName = name;
+		}
 		this.type = type;
 		if (value != null)
 			setValue(value);
+	}
+
+	public String getScopeSegment() {
+		return scopeSegment;
+	}
+
+	public String getSimpleName() {
+		return simpleName;
 	}
 
 	public String getName() {
@@ -47,8 +64,9 @@ public abstract class AbstractSlot {
 	/* package */void setValue(Object value) {
 		Assert.isNotNull(value, "Value must not be null ");
 		if (!value.getClass().isAssignableFrom(type)) {
-			throw new ExecutionException("Error assigning value to \' "+name +"\' Can not assign value " + value
-					+ " of type" + value.getClass() + " to type " + type);
+			throw new ExecutionException("Error assigning value to \' " + name
+					+ "\' Can not assign value " + value + " of type"
+					+ value.getClass() + " to type " + type);
 		}
 		this.value = value;
 	}
