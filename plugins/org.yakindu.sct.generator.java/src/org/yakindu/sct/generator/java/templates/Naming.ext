@@ -16,6 +16,7 @@ import sgen;
 extension org::yakindu::sct::generator::java::templates::Expression;
 extension org::yakindu::sct::generator::java::templates::ExecutionModelExtensions;
 extension org::yakindu::sct::generator::java::templates::GenmodelEntries;
+extension org::yakindu::sct::generator::java::templates::TypeModelExtensions;
 
 String getStatemachineName(String name) :
 	JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getValidStatemachineName(java.lang.String);
@@ -48,13 +49,13 @@ String getInterfaceParameter(InterfaceScope this) :
 		null;
 
 String getCreationSignature(EventDefinition this) :
-	if type == Type::void then
+	if type.isVoid() then
 		"Events."+name.toFirstUpper()
 	else
 		"Events."+name.toFirstUpper()+", "+getInitialValue();
 
 String getEventType(EventDefinition this) :
-	if type == Type::void then
+	if type.isVoid() then
 		"Event<Events>"
 	else
 		"ValuedEvent<Events, "+type.getJavaClassType()+">";

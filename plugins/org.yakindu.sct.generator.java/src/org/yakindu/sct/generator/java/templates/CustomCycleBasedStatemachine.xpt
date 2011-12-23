@@ -12,6 +12,7 @@ Contributors:
 «IMPORT stext»
 
 «EXTENSION org::yakindu::sct::generator::java::templates::ExecutionModelExtensions»
+«EXTENSION org::yakindu::sct::generator::java::templates::TypeModelExtensions»
 «EXTENSION org::yakindu::sct::generator::java::templates::Expression»
 «EXTENSION org::yakindu::sct::generator::java::templates::GenmodelEntries»
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
@@ -300,7 +301,7 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	«REM»create getters and setters for events«ENDREM»
 	«FOREACH getInternalScopeEvents() AS event-»
 	
-		«IF event.type != Type::void-»
+		«IF !event.type.isVoid()-»
 			private void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value) {
 				«event.getName()».setValue(value);
 				getOccuredEvents().add(«event.getName()»);

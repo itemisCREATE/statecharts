@@ -13,6 +13,7 @@ import sexec;
 import sgraph;
 
 extension org::yakindu::sct::generator::java::templates::Naming;
+extension org::yakindu::sct::generator::java::templates::TypeModelExtensions;
 
 String toCode(Void void) :
 	"/*toCode() called with NULL element. Polymorphic resolver could not match callable method!*/";
@@ -43,17 +44,17 @@ String setterCall(Assignment this, String expression) :
 /* Assignment */
 String toCode(Assignment this) :
   switch (operator) {
-  case (AssignmentOperator::assign) : setterCall(expression.toCode())
-  case (AssignmentOperator::multAssign) : setterCall(getterCall() + " * (" + expression.toCode() + ")")
-  case (AssignmentOperator::divAssign) : setterCall(getterCall() + " / (" + expression.toCode() + ")")
-  case (AssignmentOperator::modAssign) : setterCall(getterCall() + " % (" + expression.toCode() + ")")
-  case (AssignmentOperator::addAssign) : setterCall(getterCall() + " + (" + expression.toCode() + ")")
-  case (AssignmentOperator::subAssign) : setterCall(getterCall() + " - (" + expression.toCode() + ")")
-  case (AssignmentOperator::andAssign) : setterCall(getterCall() + " & (" + expression.toCode() + ")")
-  case (AssignmentOperator::xorAssign) : setterCall(getterCall() + " ^ (" + expression.toCode() + ")")
-  case (AssignmentOperator::orAssign) : setterCall(getterCall() + " ^ (" + expression.toCode() + ")")
-  case (AssignmentOperator::leftShiftAssign) : setterCall(getterCall() + " << ("+ expression.toCode() + ")")
-  case (AssignmentOperator::rightShiftAssign) : setterCall(getterCall() + " >> (" + expression.toCode() + ")")  
+  case AssignmentOperator::assign : setterCall(expression.toCode())
+  case AssignmentOperator::multAssign : setterCall(getterCall() + " * (" + expression.toCode() + ")")
+  case AssignmentOperator::divAssign : setterCall(getterCall() + " / (" + expression.toCode() + ")")
+  case AssignmentOperator::modAssign : setterCall(getterCall() + " % (" + expression.toCode() + ")")
+  case AssignmentOperator::addAssign : setterCall(getterCall() + " + (" + expression.toCode() + ")")
+  case AssignmentOperator::subAssign : setterCall(getterCall() + " - (" + expression.toCode() + ")")
+  case AssignmentOperator::andAssign : setterCall(getterCall() + " & (" + expression.toCode() + ")")
+  case AssignmentOperator::xorAssign : setterCall(getterCall() + " ^ (" + expression.toCode() + ")")
+  case AssignmentOperator::orAssign : setterCall(getterCall() + " ^ (" + expression.toCode() + ")")
+  case AssignmentOperator::leftShiftAssign : setterCall(getterCall() + " << ("+ expression.toCode() + ")")
+  case AssignmentOperator::rightShiftAssign : setterCall(getterCall() + " >> (" + expression.toCode() + ")")  
   default : ""
   };
 		
@@ -111,27 +112,27 @@ String toCode(ElementReferenceExpression exp) :
 
 String getOperator(AdditiveOperator operator) : 
     switch(operator) {
-    	case(AdditiveOperator::plus) : " + "
-    	case(AdditiveOperator::minus) : " - "
+    	case AdditiveOperator::plus : " + "
+    	case AdditiveOperator::minus : " - "
     	default : ""
     };
 
 String getOperator(MultiplicativeOperator operator) : 
     switch(operator) {
-    	case(MultiplicativeOperator::mul) : " * "
-    	case(MultiplicativeOperator::div) : " / "
-    	case(MultiplicativeOperator::mod) : " % "
+    	case MultiplicativeOperator::mul : " * "
+    	case MultiplicativeOperator::div : " / "
+    	case MultiplicativeOperator::mod : " % "
     	default : ""
     };
 
 String getOperator(RelationalOperator operator) :
 	switch (operator) {
-	  case (RelationalOperator::greater) : " > "
-	  case (RelationalOperator::greaterEqual) : " >= "
-	  case (RelationalOperator::smaller) : " < "
-	  case (RelationalOperator::smallerEqual) : " <= "
-	  case (RelationalOperator::equals) : " == "
-	  case (RelationalOperator::notEquals) : " != "
+	  case RelationalOperator::greater : " > "
+	  case RelationalOperator::greaterEqual : " >= "
+	  case RelationalOperator::smaller : " < "
+	  case RelationalOperator::smallerEqual : " <= "
+	  case RelationalOperator::equals : " == "
+	  case RelationalOperator::notEquals : " != "
 	  default : ""
 	};
 	
@@ -141,35 +142,9 @@ String toCode(EventRaising this) :
 	else
 		event.getContext().toFirstLower()+"raise"+event.name.toFirstUpper()+"();";
 		
-String getJavaType(Type type) :
-		switch (type) {
-		case (Type::real) : "double"
-		case (Type::integer) : "int"
-		case (Type::boolean) : "boolean"
-		case (Type::string) : "string"
-		default : ""
-		};
-		
-String getJavaClassType(Type type) :
-		switch (type) {
-		case (Type::real) : "Double"
-		case (Type::integer) : "Integer"
-		case (Type::boolean) : "Boolean"
-		case (Type::string) : "String"
-		case (Type::void) : "Void"
-		default : ""
-		};
-		
 String getInitialValue(EventDefinition this) :
 	if derivation != null then
 		derivation.condition.toCode()
 	else
 		//if no initial value expression is declared set default value to avoid npe exceptions
-		switch (type) {
-		case (Type::real) : "0D"
-		case (Type::integer) : "0"
-		case (Type::boolean) : "false"
-		case (Type::string) : ""
-		case (Type::void) : "null"
-		default : ""
-		};
+		type.getInitialValue();
