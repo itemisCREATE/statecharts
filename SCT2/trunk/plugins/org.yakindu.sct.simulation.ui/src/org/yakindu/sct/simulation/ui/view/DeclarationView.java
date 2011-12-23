@@ -15,7 +15,6 @@ import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.model.IDebugTarget;
-import org.eclipse.debug.internal.ui.actions.CollapseAllAction;
 import org.eclipse.debug.ui.AbstractDebugView;
 import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.debug.ui.contexts.DebugContextEvent;
@@ -36,6 +35,9 @@ import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
+import org.yakindu.sct.simulation.ui.view.actions.CollapseAllAction;
+import org.yakindu.sct.simulation.ui.view.actions.ExpandAllAction;
+import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
 import org.yakindu.sct.simulation.ui.view.editing.BooleanEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.IntegerEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.MultiEditingSupport;
@@ -72,7 +74,7 @@ public class DeclarationView extends AbstractDebugView implements
 		TreeViewerColumn column = new TreeViewerColumn(viewer, SWT.DEFAULT);
 		column.getColumn().setText("Name");
 		column.getColumn().setMoveable(true);
-		column.getColumn().setWidth(200);
+		column.getColumn().setWidth(150);
 		column.setLabelProvider(new ExecutionContextLabelProvider(0));
 
 		TreeViewerColumn valueColumn = new TreeViewerColumn(viewer, SWT.DEFAULT);
@@ -141,9 +143,12 @@ public class DeclarationView extends AbstractDebugView implements
 
 	@Override
 	protected void createActions() {
-		@SuppressWarnings("restriction")
-		IAction action = new CollapseAllAction(viewer);
-		setAction("CollapseAll", action); //$NON-NLS-1$
+		IAction collapse = new CollapseAllAction(viewer);
+		setAction("CollapseAll", collapse); 
+		IAction expand = new ExpandAllAction(viewer);
+		setAction("ExpandAll", expand); 
+		IAction hideTimeEvent = new HideTimeEventsAction(true);
+		setAction("HideTimeEvent", hideTimeEvent);
 	}
 
 	@Override
@@ -158,7 +163,9 @@ public class DeclarationView extends AbstractDebugView implements
 
 	@Override
 	protected void configureToolBar(IToolBarManager tbm) {
-		tbm.add(getAction("CollapseAll")); //$NON-NLS-1$
+		tbm.add(getAction("CollapseAll")); 
+		tbm.add(getAction("ExpandAll"));
+		tbm.add(getAction("HideTimeEvent")); 
 	}
 
 }
