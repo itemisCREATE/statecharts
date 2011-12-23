@@ -11,5 +11,6 @@ Export-Package: org.yakindu.base.types,
  org.yakindu.base.types.impl,
  org.yakindu.base.types.util
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;bundle-version="2.7.0"
 Bundle-ActivationPolicy: lazy
