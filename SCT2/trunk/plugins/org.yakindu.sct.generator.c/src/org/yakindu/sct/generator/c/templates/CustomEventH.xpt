@@ -11,6 +11,7 @@ Templates for the main statechart cpp file.
 «IMPORT sgraph»
 
 «EXTENSION org::yakindu::sct::generator::c::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::c::templates::TypeModelExtensions»
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
 
@@ -41,7 +42,7 @@ typedef enum {
 «FOREACH this.declaredEvents() AS ev»
 typedef struct { 
   _Event baseEvent;
-  «IF ((EventDefinition)ev).type != Type::void -»
+  «IF !((EventDefinition)ev).type.isVoid() -»
   «eventTypeToString(((EventDefinition)ev).type)» value;    
   «ENDIF -»
 } «((EventDefinition)ev).getEventName()»;

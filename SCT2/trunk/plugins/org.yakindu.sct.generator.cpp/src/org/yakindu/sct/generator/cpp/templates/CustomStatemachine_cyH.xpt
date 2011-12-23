@@ -11,6 +11,7 @@ Templates for the main statechart cpp file.
 «IMPORT sgraph»
 
 «EXTENSION org::yakindu::sct::generator::cpp::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::cpp::templates::TypeModelExtensions»
 «EXTENSION org::yakindu::sct::generator::cpp::templates::Naming»
 
 «DEFINE file FOR ExecutionFlow»
@@ -82,7 +83,7 @@ public:
 	virtual void init();
 
 	«FOREACH declaredEvents() AS event -»
-	«IF (((EventDefinition)event).type == Type::void) -»
+	«IF (((EventDefinition)event).type.isVoid()) -»
 	void set«((EventDefinition)event).name.toFirstUpper()»();
 	«ELSE -»
 	void set«((EventDefinition)event).name.toFirstUpper()»(«eventTypeToString(((EventDefinition)event).type)» value);

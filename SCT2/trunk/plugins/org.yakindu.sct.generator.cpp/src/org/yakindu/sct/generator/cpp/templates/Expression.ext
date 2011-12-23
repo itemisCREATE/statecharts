@@ -2,6 +2,7 @@ import stext;
 import sexec;
 import ecore;
 import sgraph;
+import types;
 
 toCppCode(Void void) :
 	"/*toCppCode() called with NULL element. Polymorphic resolver could not match callable method!*/";
@@ -113,12 +114,13 @@ String getOperator(RelationalOperator operator) :
 	};
 
 String eventTypeToString(Type type) : 
-  switch (type) {
-  case (Type::void) : "void"
-  case (Type::real) : "real"
-  case (Type::integer) : "integer"
-  case (Type::boolean) : "boolean"
-  case (Type::string)  : "strng"
+  switch (type.name) {
+  case null : "void"
+  case "void" : "void"
+  case "real" : "real"
+  case "integer" : "integer"
+  case "boolean" : "boolean"
+  case "string"  : "strng"
   default : "unknownType"
   };
   
