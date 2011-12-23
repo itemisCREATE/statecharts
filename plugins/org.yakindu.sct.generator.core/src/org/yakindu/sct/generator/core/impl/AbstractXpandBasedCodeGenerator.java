@@ -27,6 +27,7 @@ import org.eclipse.xpand2.output.OutputImpl;
 import org.eclipse.xpand2.output.PostProcessor;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
@@ -78,7 +79,8 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 			protected EPackage[] allPackages() {
 				return new EPackage[] { SGraphPackage.eINSTANCE,
 						StextPackage.eINSTANCE, EcorePackage.eINSTANCE,
-						SexecPackage.eINSTANCE, SGenPackage.eINSTANCE };
+						SexecPackage.eINSTANCE, SGenPackage.eINSTANCE,
+						TypesPackage.eINSTANCE };
 			}
 		};
 		execCtx.registerMetaModel(metamodel);
@@ -101,9 +103,11 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 		output.addOutlet(outlet);
 		return output;
 	}
-	
+
 	/**
-	 * Override this Method to add some {@link PostProcessor}s to the XPand outlet.
+	 * Override this Method to add some {@link PostProcessor}s to the XPand
+	 * outlet.
+	 * 
 	 * @return An empty {@link Set} for {@link PostProcessor}s
 	 */
 	protected Set<PostProcessor> getPostProcessors() {
