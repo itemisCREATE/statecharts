@@ -4,16 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEventDefinition;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createInterfaceScope;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createInternalScope;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createReactionTrigger;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegion;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegularEventSpec;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createState;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createStatechart;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createTransition;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableDefinition;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.*;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -29,7 +20,6 @@ import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
-import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
@@ -61,7 +51,7 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 		InterfaceScope scope = _createInterfaceScope(null, null);
 		EventDefinition e1 = _createEventDefinition("e1", scope);
 		EventDefinition e2 = _createEventDefinition("e2", scope);
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
 		
 		Scope _scope = sequencer.map(scope);
 

@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.FinalState;
@@ -36,7 +38,6 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
-import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.common.base.Predicate;
@@ -44,6 +45,8 @@ import com.google.common.collect.Collections2;
 
 public class SCTTestUtil {
 
+	public static Type TYPE_INTEGER = _createType("integer");
+	
 	public static EventDefinition _createEventDefinition(String name, Scope scope) {
 		EventDefinition e = StextFactory.eINSTANCE.createEventDefinition();
 		e.setName(name);
@@ -60,6 +63,13 @@ public class SCTTestUtil {
 		return v;
 	}
 
+	
+	public static Type _createType(String name) {
+		Type t = TypesFactory.eINSTANCE.createType();
+		t.setName(name);
+		
+		return t;
+	}
 	
 	public static RegularEventSpec _createRegularEventSpec(EventDefinition e1, ReactionTrigger rt) {
 		RegularEventSpec e1Spec = StextFactory.eINSTANCE.createRegularEventSpec();

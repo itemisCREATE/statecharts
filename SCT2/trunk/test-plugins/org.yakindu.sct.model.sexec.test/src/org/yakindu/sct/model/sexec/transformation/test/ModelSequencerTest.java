@@ -74,7 +74,6 @@ import org.yakindu.sct.model.stext.stext.RelationalOperator;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
-import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.inject.Guice;

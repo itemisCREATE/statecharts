@@ -12,7 +12,6 @@ import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
-import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
  
@@ -27,7 +26,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 		Statechart sc = _createStatechart("sc"); {  
 			
 			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
-			VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, s_scope);
+			VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, s_scope);
 			
 
 			Region r = _createRegion("r", sc); {
@@ -99,7 +98,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 		Statechart sc = _createStatechart("sc"); {  
 			
 			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
-			VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, s_scope);
+			VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, s_scope);
 			
 
 			Region r = _createRegion("r", sc); {
@@ -167,7 +166,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 		Statechart sc = _createStatechart("sc"); {  
 			
 			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
-			VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, s_scope);
+			VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, s_scope);
 			
 
 			Region r = _createRegion("r", sc); {
@@ -237,7 +236,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 		Statechart sc = _createStatechart("sc"); {  
 			
 			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
-			VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, s_scope);
+			VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, s_scope);
 			
 
 			Region r = _createRegion("r", sc); {
@@ -304,7 +303,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 		Statechart sc = _createStatechart("sc"); {  
 			
 			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
-			VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, s_scope);
+			VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, s_scope);
 			
 
 			Region r = _createRegion("r", sc); {
@@ -368,7 +367,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 		Statechart sc = _createStatechart("sc"); {  
 			
 			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
-			VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, s_scope);
+			VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, s_scope);
 			
 
 			Region r = _createRegion("r", sc); {
