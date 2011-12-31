@@ -38,7 +38,6 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RelationalOperator;
 import org.yakindu.sct.model.stext.stext.StextFactory;
-import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 
@@ -51,7 +50,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	@Test public void testStateEntryAction() {
 		Statechart sc = _createStatechart("test");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
 		Region r = _createRegion("main", sc);
 		Entry e = _createEntry(EntryKind.INITIAL, null, r);
 		State s1 = _createState("s1", r);
@@ -79,7 +78,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	@Test public void testSubStateEntryActionExclusion() {
 		Statechart sc = _createStatechart("test");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
 		Region r = _createRegion("main", sc);
 //		Entry e = _createEntry(EntryKind.INITIAL, null, r);
 		State s2 = _createState("s2", r);
@@ -112,7 +111,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	@Test public void testStateExitAction() {
 		Statechart sc = _createStatechart("test");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
 		Region r = _createRegion("main", sc);
 		Entry e = _createEntry(EntryKind.INITIAL, null, r);
 		State s1 = _createState("s1", r);
@@ -142,7 +141,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	@Test public void testFinalStateEnterSequence() {
 		Statechart sc = _createStatechart("cs");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
 		Region r = _createRegion("r", sc);
 		FinalState fs = _createFinalState(r);
 		
@@ -167,7 +166,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	@Test public void testLeafStateEnterSequence() {
 		Statechart sc = _createStatechart("cs");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
 		Region r = _createRegion("r", sc);
 		State s1 = _createState("s1", r);
 		LocalReaction entryAction = _createEntryAction(s1);
@@ -195,7 +194,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	@Test public void testCompositeStateEnterSequence() {
 		Statechart sc = _createStatechart("cs"); {
 			Scope scope = _createInterfaceScope("interface", sc);
-			VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+			VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
 
 			Region r = _createRegion("r", sc); {
 				State s1 = _createState("s1", r); {
@@ -245,7 +244,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	@Test public void testLeafStateExitSequence() {
 		Statechart sc = _createStatechart("cs");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
 		Region r = _createRegion("r", sc);
 		State s1 = _createState("s1", r);
 		LocalReaction entryAction = _createExitAction(s1);
@@ -298,7 +297,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	@Test public void testCompositeStateExitSequence() {
 		Statechart sc = _createStatechart("cs"); {
 			Scope scope = _createInterfaceScope("interface", sc);
-			VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+			VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
 
 			Region r = _createRegion("r", sc); {
 				State s1 = _createState("s1", r); {
@@ -369,7 +368,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		Statechart sc = _createStatechart("sc"); {  
 			
 			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
-			VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, s_scope);
+			VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, s_scope);
 			EventDefinition e1 = _createEventDefinition("e1", s_scope);
 			
 
@@ -466,7 +465,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	 */
 	@Test public void testStateReaction_WithTransitionAction() {
 		SimpleFlatTSC tsc = new SimpleFlatTSC();
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, tsc.s_scope);
 		ReactionEffect effect = _createReactionEffect(tsc.t1);
 		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42), effect); 
 		
@@ -506,7 +505,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	@Test public void testStateReaction_WithExitAction() {
 		SimpleFlatTSC tsc = new SimpleFlatTSC();
 
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, tsc.s_scope);
 		LocalReaction exitAction = _createExitAction(tsc.s1);
 		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(21), (ReactionEffect) exitAction.getEffect());
 
@@ -538,7 +537,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	@Test public void testStateReaction_WithEntryAction() {
 		SimpleFlatTSC tsc = new SimpleFlatTSC();
 
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, tsc.s_scope);
 		LocalReaction entryAction = _createEntryAction(tsc.s2);
 		Assignment assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(21), (ReactionEffect) entryAction.getEffect());
 
@@ -612,7 +611,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	@Test public void testStateCycle_WithLocalReactions() {
 		SimpleFlatTSC tsc = new SimpleFlatTSC();
 
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, tsc.s_scope);
 
 		// the first local reaction conforms to "e1 / x=42;" 
 		LocalReaction lr1 = _createLocalReaction(tsc.s1, null);
@@ -699,7 +698,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	@Test public void testStateCycle_WithLocalReactionsOnly() {
 		MinimalTSC tsc = new MinimalTSC();
 
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, tsc.s_scope);
 
 		// the first local reaction conforms to "e1 / x=42;" 
 		LocalReaction lr1 = _createLocalReaction(tsc.s1, null);
@@ -777,7 +776,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	@Test public void testStateCycle_EntryActionExclusion() {
 		MinimalTSC tsc = new MinimalTSC();
 
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, tsc.s_scope);
 
 		// add a simple entry action: "entry / x=42;" 
 		LocalReaction lr = _createEntryAction(tsc.s1);
@@ -802,7 +801,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	@Test public void testStateCycle_ExitActionExclusion() {
 		MinimalTSC tsc = new MinimalTSC();
 
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, tsc.s_scope);
 
 		// add a simple entry action: "entry / x=42;" 
 		LocalReaction lr = _createExitAction(tsc.s1);
@@ -827,7 +826,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	@Test public void testStateCycle_LocalReactionWithMixedRegularAndEntryTrigger() {
 		MinimalTSC tsc = new MinimalTSC();
 
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, tsc.s_scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, tsc.s_scope);
 
 		// add a simple entry action: "entry / x=42;" 
 		LocalReaction lr = _createEntryAction(tsc.s1);
@@ -866,7 +865,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		Statechart sc = _createStatechart("sc"); {  
 			
 			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
-			VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, s_scope);
+			VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, s_scope);
 			EventDefinition e1 = _createEventDefinition("e1", s_scope);
 			
 
@@ -959,7 +958,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		Statechart sc = _createStatechart("sc"); {  
 			
 			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
-			VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, s_scope);
+			VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, s_scope);
 			EventDefinition e1 = _createEventDefinition("e1", s_scope);
 			
 
@@ -1051,7 +1050,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		Statechart sc = _createStatechart("sc"); {  
 			
 			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
-			VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, s_scope);
+			VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, s_scope);
 			EventDefinition e1 = _createEventDefinition("e1", s_scope);
 			
 

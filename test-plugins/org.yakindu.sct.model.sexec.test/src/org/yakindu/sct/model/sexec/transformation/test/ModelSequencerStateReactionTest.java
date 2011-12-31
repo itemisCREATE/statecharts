@@ -40,7 +40,6 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
-import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 public class ModelSequencerStateReactionTest extends ModelSequencerTest {
@@ -219,7 +218,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		
 		Statechart sc = _createStatechart("test");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
 		Region r = _createRegion("main", sc);
 		State s= _createState("s", r);
 
@@ -270,7 +269,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		
 		Statechart sc = _createStatechart("test");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
 		Region r = _createRegion("main", sc);
 		State s= _createState("s", r);
 
@@ -309,7 +308,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		
 		Statechart sc = _createStatechart("test");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
 		Region r = _createRegion("main", sc);
 		State s= _createState("s", r);
 
@@ -337,7 +336,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		
 		Statechart sc = _createStatechart("test");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", Type.INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
 		Region r = _createRegion("main", sc);
 		State s= _createState("s", r);
 
