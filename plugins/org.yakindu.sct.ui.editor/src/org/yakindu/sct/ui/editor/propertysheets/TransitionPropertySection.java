@@ -11,47 +11,64 @@
 package org.yakindu.sct.ui.editor.propertysheets;
 
 import java.util.Collections;
-import java.util.List;
 
+import org.eclipse.emf.databinding.EMFDataBindingContext;
+import org.eclipse.emf.databinding.IEMFValueProperty;
+import org.eclipse.emf.databinding.edit.EMFEditProperties;
+import org.eclipse.emf.transaction.util.TransactionUtil;
+import org.eclipse.jface.databinding.swt.ISWTObservableValue;
+import org.eclipse.jface.databinding.swt.WidgetProperties;
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.ui.editor.editparts.TransitionEditPart;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
-import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 
 import com.google.inject.Injector;
 
-import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
-import de.itemis.gmf.runtime.commons.properties.descriptors.TextAreaPropertyDescriptor;
-import de.itemis.gmf.runtime.commons.properties.descriptors.XtextPropertyDescriptor;
+import de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapter;
 import de.itemis.xtext.utils.jface.viewers.context.CloningBasedFakeContextResourcesProvider;
 
 /**
- * Property Section for {@link TransitionEditPart}s. Consists of a
- * {@link XtextPropertyDescriptor} for the expression.
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class TransitionPropertySection extends AbstractEditorPropertySection {
 
+	private Control textControl;
+
 	@Override
-	protected void createPropertyDescriptors(
-			List<IFormPropertyDescriptor> descriptors) {
+	public void createControls(Composite parent) {
+		Label nameLabel = getToolkit().createLabel(parent, "Specification: ");
+		GridDataFactory.fillDefaults().applyTo(nameLabel);
 		Injector injector = getInjector(SemanticTarget.TransitionSpecification);
 		if (injector != null) {
-			XtextPropertyDescriptor descriptor = new XtextPropertyDescriptor(
-					SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION,
-					"Expression: ",
-					IYakinduSctHelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION,
+			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER
+					| SWT.V_SCROLL);
+			StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(
 					injector, new CloningBasedFakeContextResourcesProvider(
 							Collections
 									.singletonList(getActiveEditorResource())));
-			descriptors.add(descriptor);
+			xtextAdapter.adapt((StyledText) textControl);
 		} else {
-			TextAreaPropertyDescriptor descriptor = new TextAreaPropertyDescriptor(
-					SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION,
-					"Expression: ");
-			descriptors.add(descriptor);
+			textControl = getToolkit().createText(parent, "", SWT.MULTI);
 		}
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(textControl);
+
 	}
+
+	@Override
+	public void bindModel(EMFDataBindingContext context) {
+		IEMFValueProperty modelProperty = EMFEditProperties.value(
+				TransactionUtil.getEditingDomain(eObject),
+				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
+		ISWTObservableValue uiProperty = WidgetProperties.text(SWT.FocusOut)
+				.observe(textControl);
+		context.bindValue(uiProperty, modelProperty.observe(eObject));
+	}
+
 }
