@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.yakindu.sct.sdk"
-      label="Yakindu Statechart Tools (SCT) 2 SDK"
+      id="org.yakindu.sct.generator"
+      label="Generator All-In-One"
       version="1.0.0.qualifier"
       provider-name="YAKINDU">
 
@@ -18,23 +18,15 @@
    </license>
 
    <includes
-         id="org.yakindu.sct"
+         id="org.yakindu.sct.generator.c"
          version="0.0.0"/>
 
    <includes
-         id="org.yakindu.sct.source"
+         id="org.yakindu.sct.generator.infrastructure"
          version="0.0.0"/>
 
    <includes
-         id="org.yakindu.sct.generator"
-         version="0.0.0"/>
-
-   <includes
-         id="org.yakindu.sct.generator.c.source"
-         version="0.0.0"/>
-
-   <includes
-         id="org.yakindu.sct.generator.java.source"
+         id="org.yakindu.sct.generator.java"
          version="0.0.0"/>
 
 </feature>
