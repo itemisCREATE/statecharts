@@ -925,7 +925,8 @@ class ModelSequencer {
 				
 				// include exitAction calls up to the direct child level.
 				exitStates.fold(caseSeq , [ cs, exitState | {
-					 if (exitState.create.exitAction != null) cs.steps.add(exitState.create.exitAction.newCall) 
+					 if (exitState.create.exitAction != null) cs.steps.add(exitState.create.exitAction.newCall)
+					 if ( _addTraceSteps ) cs.steps.add(exitState.create.newTraceStateExited)
 					 cs
 				}]) 
 				
