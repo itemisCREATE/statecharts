@@ -84,7 +84,7 @@
       <import plugin="org.eclipse.emf.mwe.utils"/>
       <import plugin="org.eclipse.jface.text"/>
    </requires>
-   
+
    <plugin
          id="org.yakindu.base.types"
          download-size="0"
@@ -183,27 +183,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.yakindu.sct.generator.genmodel"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.generator.genmodel.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.generator.cpp"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.yakindu.sct.model.stext.resource"
          download-size="0"
          install-size="0"
@@ -212,27 +191,6 @@
 
    <plugin
          id="org.yakindu.sct.model.sgen"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.generator.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.generator.c"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.generator.java"
          download-size="0"
          install-size="0"
          version="0.0.0"
