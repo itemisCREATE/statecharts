@@ -35,13 +35,13 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	private List<ExecutionVariable> variables;
 	private List<ExecutionEvent> declaredEvents;
 	private List<ExecutionEvent> raisedEvents;
-	private List<ExecutionState> activeStateConfig;
+	private ExecutionState[] activeStateConfig;
 
 	public ExecutionContextImpl() {
 		variables = new ArrayList<ExecutionVariable>();
 		declaredEvents = new ArrayList<ExecutionEvent>();
 		raisedEvents = new ArrayList<ExecutionEvent>();
-		activeStateConfig = new ArrayList<ExecutionState>();
+		activeStateConfig = null;
 	}
 
 	public List<ExecutionEvent> getDeclaredEvents() {
@@ -132,10 +132,19 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 
 	}
 
-	public List<ExecutionState> getStateConfiguration() {
+	public ExecutionState[] getStateConfiguration() {
 		return activeStateConfig;
 	}
 
+	
+	public void initStateConfigurationVector(int size) {
+		 activeStateConfig = new ExecutionState[size];
+		 for ( int i=0 ; i<size ; i++ ) {
+			 activeStateConfig[i] = null;
+		 }
+	}
+
+	
 	public void call(String procedureId) {
 		// TODO: Implement me
 	}
@@ -143,7 +152,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	public Set<Vertex> getActiveLeafStates() {
 		Set<Vertex> vertices = new HashSet<Vertex>();
 		for (ExecutionState state : activeStateConfig) {
-			vertices.add((Vertex) state.getSourceElement());
+			if (state != null) vertices.add((Vertex) state.getSourceElement());
 		}
 		return vertices;
 	}
@@ -151,7 +160,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	public Set<Vertex> getAllActiveStates() {
 		Set<Vertex> vertices = new HashSet<Vertex>();
 		for (ExecutionState state : activeStateConfig) {
-			vertices.addAll(getActiveHierachy((Vertex) state.getSourceElement()));
+			if (state != null) vertices.addAll(getActiveHierachy((Vertex) state.getSourceElement()));
 		}
 		return vertices;
 	}

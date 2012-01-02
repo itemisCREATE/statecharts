@@ -87,10 +87,13 @@ public interface IExecutionContext {
 	 * Returns a set with all active leaf states including parents
 	 */
 	public Set<Vertex> getAllActiveStates();
+	
 	/**
 	 * Returns the active state configuration
 	 */
-	public List<ExecutionState> getStateConfiguration();
+	public ExecutionState[] getStateConfiguration();
+
+	public  void initStateConfigurationVector(int size);
 
 	/**
 	 * Calls a declared operation
@@ -107,5 +110,6 @@ public interface IExecutionContext {
 	 */
 	public void removeExecutionContextListener(
 			IExecutionContextListener listener);
+
 
 }

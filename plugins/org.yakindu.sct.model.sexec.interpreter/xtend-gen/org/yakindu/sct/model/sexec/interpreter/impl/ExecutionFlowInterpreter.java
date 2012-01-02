@@ -7,8 +7,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.ComparableExtensions;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -25,6 +28,7 @@ import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
+import org.yakindu.sct.model.sexec.StateVector;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.Trace;
@@ -67,13 +71,18 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   
   private ExecutionFlow flow;
   
+  private int nextSVIdx;
+  
   public void initialize(final ExecutionFlow flow) throws NumberFormatException {
     {
       this.flow = flow;
       EList<Scope> _scopes = flow.getScopes();
-      for (final Scope scope : _scopes) {
+      for (Scope scope : _scopes) {
         this.declareContents(scope);
       }
+      StateVector _stateVector = flow.getStateVector();
+      int _size = _stateVector.getSize();
+      this.executionContext.initStateConfigurationVector(_size);
     }
   }
   
@@ -91,37 +100,50 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   
   protected void _declareContents(final InternalScope scope) throws NumberFormatException {
     EList<Declaration> _declarations = scope.getDeclarations();
-    for (final Declaration declaration : _declarations) {
+    for (Declaration declaration : _declarations) {
       this.addToScope(declaration);
     }
   }
   
   protected void _declareContents(final Scope scope) throws NumberFormatException {
     EList<Declaration> _declarations = scope.getDeclarations();
-    for (final Declaration declaration : _declarations) {
+    for (Declaration declaration : _declarations) {
       this.addToScope(declaration);
     }
   }
   
   protected void _declareContents(final InterfaceScope scope) throws NumberFormatException {
     EList<Declaration> _declarations = scope.getDeclarations();
-    for (final Declaration declaration : _declarations) {
+    for (Declaration declaration : _declarations) {
       this.addToScope(declaration);
     }
   }
   
-  public void runCycle() {
+  public void runCycle() throws ExecutionException {
     {
-      List<ExecutionState> _stateConfiguration = this.executionContext.getStateConfiguration();
-      List<ExecutionState> _list = IterableExtensions.<ExecutionState>toList(_stateConfiguration);
-      final Function1<ExecutionState,Object> _function = new Function1<ExecutionState,Object>() {
-          public Object apply(final ExecutionState state) {
+      this.nextSVIdx = 0;
+      ExecutionState[] _stateConfiguration = this.executionContext.getStateConfiguration();
+      int _size = ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration)).size();
+      boolean _operator_lessThan = ComparableExtensions.<Integer>operator_lessThan(((Integer)this.nextSVIdx), ((Integer)_size));
+      Boolean _xwhileexpression = _operator_lessThan;
+      while (_xwhileexpression) {
+        {
+          ExecutionState[] _stateConfiguration_1 = this.executionContext.getStateConfiguration();
+          ExecutionState _get = ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration_1)).get(this.nextSVIdx);
+          ExecutionState state = _get;
+          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(state, null);
+          if (_operator_notEquals) {
             Sequence _reactSequence = state.getReactSequence();
-            Object _execute = ExecutionFlowInterpreter.this.execute(_reactSequence);
-            return _execute;
+            this.execute(_reactSequence);
           }
-        };
-      IterableExtensions.<ExecutionState>forEach(_list, _function);
+          int _operator_plus = IntegerExtensions.operator_plus(((Integer)this.nextSVIdx), ((Integer)1));
+          this.nextSVIdx = _operator_plus;
+        }
+        ExecutionState[] _stateConfiguration_2 = this.executionContext.getStateConfiguration();
+        int _size_1 = ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration_2)).size();
+        boolean _operator_lessThan_1 = ComparableExtensions.<Integer>operator_lessThan(((Integer)this.nextSVIdx), ((Integer)_size_1));
+        _xwhileexpression = _operator_lessThan_1;
+      }
       this.executionContext.resetRaisedEvents();
     }
   }
@@ -262,7 +284,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   public void enter() throws ExecutionException {
     Sequence _enterSequence = this.flow.getEnterSequence();
     EList<Step> _steps = _enterSequence.getSteps();
-    for (final Step step : _steps) {
+    for (Step step : _steps) {
       this.execute(step);
     }
   }
@@ -297,7 +319,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
       Statement _condition = check.getCondition();
       boolean _operator_equals = ObjectExtensions.operator_equals(_condition, null);
       if (_operator_equals) {
-        return ((Boolean)true);
+        return true;
       }
       Statement _condition_1 = check.getCondition();
       Object _evaluateStatement = this.interpreter.evaluateStatement(_condition_1, this.executionContext);
@@ -309,9 +331,39 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   protected Object _execute(final EnterState enterState) {
     Object _xblockexpression = null;
     {
-      List<ExecutionState> _stateConfiguration = this.executionContext.getStateConfiguration();
+      ExecutionState[] _stateConfiguration = this.executionContext.getStateConfiguration();
       ExecutionState _state = enterState.getState();
-      _stateConfiguration.add(_state);
+      StateVector _stateVector = _state.getStateVector();
+      int _offset = _stateVector.getOffset();
+      ExecutionState _state_1 = enterState.getState();
+      ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration)).set(_offset, _state_1);
+      ExecutionState _state_2 = enterState.getState();
+      StateVector _stateVector_1 = _state_2.getStateVector();
+      int _offset_1 = _stateVector_1.getOffset();
+      this.nextSVIdx = _offset_1;
+      ExecutionState _state_3 = enterState.getState();
+      String _simpleName = _state_3.getSimpleName();
+      String _operator_plus = StringExtensions.operator_plus("enter ", _simpleName);
+      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " > ");
+      ExecutionState[] _stateConfiguration_1 = this.executionContext.getStateConfiguration();
+      final Function2<String,ExecutionState,String> _function = new Function2<String,ExecutionState,String>() {
+          public String apply(final String m , final ExecutionState s) {
+            String _xifexpression = null;
+            boolean _operator_equals = ObjectExtensions.operator_equals(s, null);
+            if (_operator_equals) {
+              _xifexpression = " _";
+            } else {
+              String _simpleName_1 = s.getSimpleName();
+              String _operator_plus_2 = StringExtensions.operator_plus(" ", _simpleName_1);
+              _xifexpression = _operator_plus_2;
+            }
+            String _operator_plus_3 = StringExtensions.operator_plus(m, _xifexpression);
+            return _operator_plus_3;
+          }
+        };
+      String _fold = IterableExtensions.<ExecutionState, String>fold(((Iterable<ExecutionState>)Conversions.doWrapArray(_stateConfiguration_1)), "scv: ", _function);
+      String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_1, _fold);
+      System.out.println(_operator_plus_4);
       _xblockexpression = (null);
     }
     return _xblockexpression;
@@ -326,9 +378,34 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   protected Object _execute(final ExitState exitState) {
     Object _xblockexpression = null;
     {
-      List<ExecutionState> _stateConfiguration = this.executionContext.getStateConfiguration();
+      ExecutionState[] _stateConfiguration = this.executionContext.getStateConfiguration();
       ExecutionState _state = exitState.getState();
-      _stateConfiguration.remove(_state);
+      StateVector _stateVector = _state.getStateVector();
+      int _offset = _stateVector.getOffset();
+      ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration)).set(_offset, null);
+      ExecutionState _state_1 = exitState.getState();
+      String _simpleName = _state_1.getSimpleName();
+      String _operator_plus = StringExtensions.operator_plus("exit ", _simpleName);
+      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " > ");
+      ExecutionState[] _stateConfiguration_1 = this.executionContext.getStateConfiguration();
+      final Function2<String,ExecutionState,String> _function = new Function2<String,ExecutionState,String>() {
+          public String apply(final String m , final ExecutionState s) {
+            String _xifexpression = null;
+            boolean _operator_equals = ObjectExtensions.operator_equals(s, null);
+            if (_operator_equals) {
+              _xifexpression = " _";
+            } else {
+              String _simpleName_1 = s.getSimpleName();
+              String _operator_plus_2 = StringExtensions.operator_plus(" ", _simpleName_1);
+              _xifexpression = _operator_plus_2;
+            }
+            String _operator_plus_3 = StringExtensions.operator_plus(m, _xifexpression);
+            return _operator_plus_3;
+          }
+        };
+      String _fold = IterableExtensions.<ExecutionState, String>fold(((Iterable<ExecutionState>)Conversions.doWrapArray(_stateConfiguration_1)), "scv: ", _function);
+      String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_1, _fold);
+      System.out.println(_operator_plus_4);
       _xblockexpression = (null);
     }
     return _xblockexpression;
@@ -360,7 +437,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     Object _xblockexpression = null;
     {
       EList<Step> _steps = sequence.getSteps();
-      for (final Step step : _steps) {
+      for (Step step : _steps) {
         this.execute(step);
       }
       _xblockexpression = (null);
@@ -372,7 +449,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     Object _xblockexpression = null;
     {
       EList<StateCase> _cases = stateSwitch.getCases();
-      for (final StateCase stateCase : _cases) {
+      for (StateCase stateCase : _cases) {
         this.execute(stateCase);
       }
       _xblockexpression = (null);
@@ -383,9 +460,9 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   protected Object _execute(final StateCase stateCase) throws ExecutionException {
     Object _xblockexpression = null;
     {
-      List<ExecutionState> _stateConfiguration = this.executionContext.getStateConfiguration();
+      ExecutionState[] _stateConfiguration = this.executionContext.getStateConfiguration();
       ExecutionState _state = stateCase.getState();
-      boolean _contains = _stateConfiguration.contains(_state);
+      boolean _contains = ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration)).contains(_state);
       if (_contains) {
         Step _step = stateCase.getStep();
         this.execute(_step);
