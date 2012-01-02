@@ -1811,39 +1811,45 @@ public class ModelSequencer {
                         Call _newCall_1 = ModelSequencer.this.factory.newCall(_exitAction_1);
                         _steps_2.add(_newCall_1);
                       }
+                      if (ModelSequencer.this._addTraceSteps) {
+                        EList<Step> _steps_3 = cs.getSteps();
+                        ExecutionState _create_4 = ModelSequencer.this.factory.create(exitState);
+                        TraceStateExited _newTraceStateExited = ModelSequencer.this.newTraceStateExited(_create_4);
+                        _steps_3.add(_newTraceStateExited);
+                      }
                       _xblockexpression_1 = (cs);
                     }
                     return _xblockexpression_1;
                   }
                 };
               IterableExtensions.<RegularState, Sequence>fold(exitStates, caseSeq, _function_1);
-              ExecutionState _create_4 = this.factory.create(s);
-              Sequence _exitSequence_1 = _create_4.getExitSequence();
+              ExecutionState _create_5 = this.factory.create(s);
+              Sequence _exitSequence_1 = _create_5.getExitSequence();
               boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_exitSequence_1, null);
               if (_operator_notEquals_1) {
                 EList<StateCase> _cases = sSwitch.getCases();
-                ExecutionState _create_5 = this.factory.create(s);
-                StateCase _newCase = this.newCase(_create_5, caseSeq);
+                ExecutionState _create_6 = this.factory.create(s);
+                StateCase _newCase = this.newCase(_create_6, caseSeq);
                 _cases.add(_newCase);
               }
             }
           }
-          EList<Step> _steps_3 = seq.getSteps();
-          _steps_3.add(sSwitch);
+          EList<Step> _steps_4 = seq.getSteps();
+          _steps_4.add(sSwitch);
         }
       }
       Step _exitAction_2 = execState.getExitAction();
       boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_exitAction_2, null);
       if (_operator_notEquals_2) {
-        EList<Step> _steps_4 = seq.getSteps();
+        EList<Step> _steps_5 = seq.getSteps();
         Step _exitAction_3 = execState.getExitAction();
         Call _newCall_2 = this.factory.newCall(_exitAction_3);
-        _steps_4.add(_newCall_2);
+        _steps_5.add(_newCall_2);
       }
       if (this._addTraceSteps) {
-        EList<Step> _steps_5 = seq.getSteps();
-        TraceStateExited _newTraceStateExited = this.newTraceStateExited(execState);
-        CollectionExtensions.<TraceStateExited>operator_add(_steps_5, _newTraceStateExited);
+        EList<Step> _steps_6 = seq.getSteps();
+        TraceStateExited _newTraceStateExited_1 = this.newTraceStateExited(execState);
+        CollectionExtensions.<TraceStateExited>operator_add(_steps_6, _newTraceStateExited_1);
       }
       execState.setExitSequence(seq);
     }
