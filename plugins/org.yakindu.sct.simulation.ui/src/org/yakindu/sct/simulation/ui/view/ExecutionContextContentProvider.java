@@ -10,9 +10,7 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -163,7 +161,7 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 	 */
 	public static class Container {
 		String name = "Default";
-		List<AbstractSlot> slots = new ArrayList<AbstractSlot>();
+		Set<AbstractSlot> slots = new HashSet<AbstractSlot>();
 
 		public Container() {
 			super();
