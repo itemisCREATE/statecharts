@@ -741,10 +741,54 @@ class ModelSequencer {
 	/************** Calculating Structure information **************/
 
 	def defineStateVector(ExecutionFlow flow, Statechart sc) {
+		var offset = 0
+		for ( r : sc.regions ) {
+			offset = offset + defineStateVectors(r, offset)	
+		}	
+		
+		
+//		flow.stateVector = sexecFactory.createStateVector
+//		flow.stateVector.offset = 0;
+//		flow.stateVector.size = sc.maxOrthogonality	
+		
 		flow.stateVector = sexecFactory.createStateVector
 		flow.stateVector.offset = 0;
-		flow.stateVector.size = sc.maxOrthogonality		
+		flow.stateVector.size = offset			
 	}
+
+
+	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of the statechart */
+	def int defineStateVectors(Statechart sc, int offset) {
+		sc.regions.fold(0, [o, r | r.maxOrthogonality + o])
+	}
+
+	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of a region */
+	def int defineStateVectors(Region r, int offset) {
+		r.vertices.fold(0, [s, v | {
+			val mo = v.defineStateVectors(offset)
+			if (mo > s) mo else s }])
+	}
+
+	/** the maximum orthogonality of all  pseudo states is 0 */
+	def dispatch int defineStateVectors(Vertex v, int offset) { 0 }
+	
+	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of a state */
+	def dispatch int defineStateVectors(State s, int offset) { 
+		var int maxOrthogonality = 0
+		if ( s.regions.size > 0 ) {
+			for ( r : s.regions ) {
+				maxOrthogonality = maxOrthogonality + r.defineStateVectors(offset+maxOrthogonality)
+			}
+		} else maxOrthogonality = 1
+		
+		val es = s.create
+		es.stateVector = sexecFactory.createStateVector
+		es.stateVector.offset = offset;
+		es.stateVector.size = maxOrthogonality			
+		
+		return maxOrthogonality
+	}
+
 
 
 	/************** Calculating execution sequences **************/
