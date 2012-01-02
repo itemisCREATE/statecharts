@@ -24,7 +24,5 @@ Export-Package: de.itemis.gmf.runtime.commons.commands,
  de.itemis.gmf.runtime.commons.highlighting,
  de.itemis.gmf.runtime.commons.palette,
  de.itemis.gmf.runtime.commons.parsers,
- de.itemis.gmf.runtime.commons.properties,
- de.itemis.gmf.runtime.commons.properties.descriptors,
  de.itemis.gmf.runtime.commons.util,
  de.itemis.gmf.runtime.commons.validation

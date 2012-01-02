@@ -120,6 +120,7 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 
 	public synchronized void fadeOut(EObject semanticElement,
 			HighlightingParameters parameters) {
+		System.out.println("FADE OUT : " + semanticElement);
 		if (!locked) {
 			throw new IllegalStateException(
 					"May only highlight if editor is locked");
