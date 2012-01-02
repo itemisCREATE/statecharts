@@ -62,6 +62,9 @@ import org.yakindu.sct.simulation.core.runtime.IExecutionFacade
 import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter
 import org.yakindu.sct.simulation.core.runtime.AbstractExecutionFacade
 import org.yakindu.sct.model.sexec.Trace
+import java.util.Arrays
+import org.yakindu.sct.model.sexec.impl.ExecutionStateImpl
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -82,12 +85,15 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	String interpreterName
 	
 	ExecutionFlow flow
+	int nextSVIdx
 
 	override initialize(ExecutionFlow flow) {
 		this.flow = flow;
 		for(scope : flow.scopes){
 			scope.declareContents
 		} 
+		
+		executionContext.initStateConfigurationVector(flow.stateVector.size)
 	}
 	
 	override tearDown(){
@@ -121,9 +127,19 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	}
 	
 	override runCycle() {
-		executionContext.stateConfiguration.toList.forEach(state | state.reactSequence.execute)
+		
+		nextSVIdx = 0; // this is a member that can be manipulated during state reactions in case of orthogonality
+		
+		while (nextSVIdx < executionContext.stateConfiguration.size) {
+			var state = executionContext.stateConfiguration.get(nextSVIdx)
+			if (state != null) state.reactSequence.execute			
+			nextSVIdx = nextSVIdx + 1
+		}  
+		
 		executionContext.resetRaisedEvents
+		
 	} 
+
 
 // begin TODO: this should be externalized
 	def isBoolean(Type type){
@@ -206,20 +222,28 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		return interpreterResult
 		
 	}
+	
 	def dispatch execute(EnterState enterState){
-		executionContext.stateConfiguration.add(enterState.state)
-//		notifyStateEntered(enterState.state)
+		executionContext.stateConfiguration.set(enterState.state.stateVector.offset, enterState.state)
+		nextSVIdx = enterState.state.stateVector.offset // mark all state vector elements up to this as processed ...		
+
+		System::out.println( "enter " + enterState.state.simpleName + " > " + executionContext.stateConfiguration.fold("scv: ", [ m, s | m + (if (s==null) " _" else " " + s.simpleName )] ) )
+
 		null
 	}
+	
 	def dispatch execute(Execution execution){ 
 		interpreter.evaluateStatement(execution.statement, executionContext)
 	}
 	
 	def dispatch execute(ExitState exitState){
-		executionContext.stateConfiguration.remove(exitState.state)
-//		notifyStateExited(exitState.state)
+		executionContext.stateConfiguration.set(exitState.state.stateVector.offset, null)
+
+		System::out.println( "exit " + exitState.state.simpleName + " > " + executionContext.stateConfiguration.fold("scv: ", [ m, s | m + (if (s==null) " _" else " " + s.simpleName )] ) )
+		
 		null
 	}
+	
 	def dispatch execute(If ifStep){
 		var check  = execute(ifStep.check)
 		if(check as Boolean){
