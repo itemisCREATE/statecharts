@@ -1,0 +1,65 @@
+To execute this build as a Hudson build job, you have to configure the following:
+
+Source-Code-Management:
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/releng
+	Location: releng
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/plugins
+	Location: sct2_repository/plugins
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/features
+	Location: sct2_repository/features
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.gmf.utils/plugins
+	Location: gmf_utils_repository/plugins
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.gmf.utils/features
+	Location: gmf_utils_repository/features
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/plugins
+	Location: base_repository/plugins
+    
+Build:
++ Execute Shell
+    Command 
+		if [ -d "build" ]; then
+		   rm -fr build
+		fi
+		mkdir build
+		cp -R releng/* build/
+		cp -R sct2_repository/plugins/* build/
+		cp -R sct2_repository/features/* build/
+		cp -R sct2_repository/test-plugins/* build/
+		cp -R gmf_utils_repository/plugins/* build/
+		cp -R gmf_utils_repository/features/* build/
+		cp -R base_repository/plugins/* build/
+
+
++ Invoke Maven 3
+	Goals
+		clean install
+	POM File
+		../build/org.yakindu.sct.releng/pom.xml
+	Profiles
+		CI
+	JVM Options
+
+		
++ Execute Shell
+	Command
+		if [ -d "update-site" ]; then
+      		rm -fr update-site
+		fi
+		mkdir update-site
+		cp -R build/org.yakindu.sct.repository/target/repository/* update-site/
+		
+		
+Post-Build-Actions:
++ Publish JUnit Test Results
+	Testreports in XML format
+		build/*test/target/surefire-reports/*.xml
++ Archive the artifacs
+	Files to archive
+		update-site/**
+		
