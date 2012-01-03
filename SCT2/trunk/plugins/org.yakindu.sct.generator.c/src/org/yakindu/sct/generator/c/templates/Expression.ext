@@ -107,6 +107,10 @@ String toCCode(NumericalAddSubtractExpression expression) :
 String toCCode(NumericalMultiplyDivideExpression expression) :
   	" ( " + expression.leftOperand.toCCode() + " ) " + getOperator(expression.operator) + " ( " + expression.rightOperand.toCCode() + " ) ";
 
+
+String toCCode(NumericalUnaryExpression expression) :
+    getOperator(expression.operator) + " ( " + expression.operand.toCCode() + " ) ";
+
 /* can not handle internal scope  */
 
 ExecutionFlow getExecutionFlow(InterfaceScope this) : ((ExecutionFlow)this.eContainer);
@@ -139,6 +143,14 @@ String getOperator(RelationalOperator operator) :
 	  case (RelationalOperator::smallerEqual) : " <= "
 	  case (RelationalOperator::equals) : " == "
 	  case (RelationalOperator::notEquals) : " != "
+	  default : ""
+	};
+
+String getOperator(UnaryOperator operator) :
+	switch (operator) {
+	  case (UnaryOperator::negative) : " -"
+	  case (UnaryOperator::positive) : " + "
+	  case (UnaryOperator::complement) : " ~ "
 	  default : ""
 	};
 
