@@ -80,7 +80,7 @@ Templates for the main statechart c file.
   «REM»
   «this.check.functionName()»(handle) «
   «ENDREM»
-  ELSE -»
+  «ELSE -»
  «getBoolTrue()» «
   ENDIF -»«
 ENDDEFINE»
@@ -100,12 +100,15 @@ else {
 «ENDIF»
 «ENDDEFINE»
 
+
 «DEFINE ActionCode FOR EnterState»
-((StatemachineBase*)«statemachineHandleName()»)->state[0] = _«this.state.simpleName»;
+((StatemachineBase*)«statemachineHandleName()»)->state[«this.state.stateVector.offset»] = _«this.state.simpleName»;
+((Statemachine_cy*)«statemachineHandleName()»)->parallelPosition = «this.state.stateVector.offset»;
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR ExitState»
-((StatemachineBase*)«statemachineHandleName()»)->state[0] = last_state;
+((StatemachineBase*)«statemachineHandleName()»)->state[«this.state.stateVector.offset»] = last_state;
+((Statemachine_cy*)«statemachineHandleName()»)->parallelPosition = «this.state.stateVector.offset»;
 «ENDDEFINE»
 
 «DEFINE ConditionMethodsProto(sgen::GeneratorEntry genEntry) FOR ExecutionNode -»
@@ -267,11 +270,16 @@ static «StName()»* «statemachineHandleName()»;
 
 void «stName()»_init(«handleAdditionComma(genEntry)» Timer* timer, EventPool* eventPool)
 {
+	int i;
+	
 «IF isSingleton(genEntry)»
 	«statemachineHandleName()» = &static_«statemachineHandleName()»;
 «ENDIF»
 	statemachine_cy_init(&«statemachineHandleName()»->base, MAX_PARALLEL_STATES,
 			event_last, timer, eventPool);
+
+	for (i = 0; i<MAX_PARALLEL_STATES; ++i)
+		«statemachineHandleName()»->base.base.state[i] = last_state;
 			
 «FOREACH this.scopes.getUsableScopes() AS interface -»
 «IF isSingleton(genEntry) -»
@@ -337,9 +345,10 @@ boolean «stName()»_eventWaiting(«handleAddition(genEntry)»)
 
 void statemachine_cy__runCycle(Statemachine_cy* handle)
 {
-	uint32_t i;
-	for (i=0; i<MAX_PARALLEL_STATES; ++i) {
-		switch(((StatemachineBase*)handle)->state[i]) {
+	for (handle->parallelPosition=0; 
+	     handle->parallelPosition<MAX_PARALLEL_STATES; 
+	     ++handle->parallelPosition) {
+		switch(((StatemachineBase*)handle)->state[handle->parallelPosition]) {
 	«FOREACH this.states AS state»
 	    case _«state.simpleName»:
 	    	«this.stName()»_reaction_«state.simpleName»(«IF isSingleton(genEntry) == false»(«StName()»*) handle«ENDIF»);

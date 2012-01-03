@@ -26,9 +26,10 @@ Templates for the main statechart c file.
 
 typedef struct {
   StatemachineBase base;
-  EventSet eventSet;
-  _Event** eventList;
+  EventSet   eventSet;
+  _Event**   eventList;
   EventPool* eventPool;
+  uint32_t   parallelPosition; 
 } Statemachine_cy ;
 
 extern void statemachine_cy_init(Statemachine_cy* handle, uint16_t maxStates,

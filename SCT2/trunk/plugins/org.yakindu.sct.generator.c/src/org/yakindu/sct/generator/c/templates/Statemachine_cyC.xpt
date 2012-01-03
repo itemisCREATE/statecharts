@@ -37,6 +37,7 @@ void statemachine_cy_init(Statemachine_cy* handle, uint16_t maxStates,
 
 	/* eventPool must be initialized at this point */
 	handle->eventPool = eventPool;
+	handle->parallelPosition = 0;
 
 }
 
