@@ -1,20 +1,18 @@
 /**
- * Copyright (c) 2011 committers of YAKINDU and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     committers of YAKINDU - initial API and implementation
+Copyright (c) 2011 committers of YAKINDU and others. 
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+ 
+Contributors:
+	committers of YAKINDU - initial API and implementation
  */
 package org.yakindu.sct.runtime.java.test_localactions;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.Set;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.TimeEvent;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
@@ -41,7 +39,9 @@ public class Test_LocalActionsCycleBasedStatemachine
 
 	private DefaultInterfaceImpl defaultInterface;
 
-	private final Set<State> activeStates = EnumSet.noneOf(State.class);
+	private final State[] stateVector = new State[1];
+
+	private int nextStateIndex;
 
 	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
 
@@ -76,6 +76,15 @@ public class Test_LocalActionsCycleBasedStatemachine
 
 	}
 
+	public boolean isStateActive(State state) {
+		for (int i = 0; i < stateVector.length; i++) {
+			if (stateVector[i] == state) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void setTimerService(ITimerService timerService) {
 		this.timerService = timerService;
 	}
@@ -95,10 +104,6 @@ public class Test_LocalActionsCycleBasedStatemachine
 		}
 	}
 
-	public Set<State> getActiveStates() {
-		return EnumSet.copyOf(activeStates);
-	}
-
 	public DefaultInterface getDefaultInterface() {
 		return defaultInterface;
 	}
@@ -108,13 +113,15 @@ public class Test_LocalActionsCycleBasedStatemachine
 		getTimerService().setTimer(State1_time_event_0, 100, cycleStartTime);
 		defaultInterface.setVarI(1);
 
-		activeStates.add(State.State1);
+		nextStateIndex = 0;
+		stateVector[0] = State.State1;
 
 	}
 
 	private void reactState1() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
-			activeStates.remove(State.State1);
+			stateVector[0] = null;
+
 			getTimerService().resetTimer(State1_time_event_0);
 			defaultInterface.setVarI(0);
 
@@ -122,7 +129,8 @@ public class Test_LocalActionsCycleBasedStatemachine
 					.setTimer(State2_time_event_0, 200, cycleStartTime);
 			defaultInterface.setVarJ(1);
 
-			activeStates.add(State.State2);
+			nextStateIndex = 0;
+			stateVector[0] = State.State2;
 
 		} else {
 			if (true) {
@@ -142,7 +150,8 @@ public class Test_LocalActionsCycleBasedStatemachine
 	}
 	private void reactState2() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent3())) {
-			activeStates.remove(State.State2);
+			stateVector[0] = null;
+
 			getTimerService().resetTimer(State2_time_event_0);
 			defaultInterface.setVarJ(0);
 
@@ -150,7 +159,8 @@ public class Test_LocalActionsCycleBasedStatemachine
 					.setTimer(State1_time_event_0, 100, cycleStartTime);
 			defaultInterface.setVarI(1);
 
-			activeStates.add(State.State1);
+			nextStateIndex = 0;
+			stateVector[0] = State.State1;
 
 		} else {
 			if ((occuredEvents.contains(defaultInterface.getEventEvent2()) || occuredEvents
@@ -168,16 +178,19 @@ public class Test_LocalActionsCycleBasedStatemachine
 	public void runCycle() {
 		cycleStartTime = System.currentTimeMillis();
 		outEvents.clear();
-		for (State state : activeStates) {
-			switch (state) {
-				case State1 :
-					reactState1();
-					break;
-				case State2 :
-					reactState2();
-					break;
-				default :
-					// no state found
+
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			if (stateVector[nextStateIndex] != null) {
+				switch (stateVector[nextStateIndex]) {
+					case State1 :
+						reactState1();
+						break;
+					case State2 :
+						reactState2();
+						break;
+					default :
+						// no state found
+				}
 			}
 		}
 		occuredEvents.clear();

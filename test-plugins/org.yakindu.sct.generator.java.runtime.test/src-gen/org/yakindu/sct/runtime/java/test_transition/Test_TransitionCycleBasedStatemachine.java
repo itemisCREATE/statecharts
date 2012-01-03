@@ -1,20 +1,18 @@
 /**
- * Copyright (c) 2011 committers of YAKINDU and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     committers of YAKINDU - initial API and implementation
+Copyright (c) 2011 committers of YAKINDU and others. 
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+ 
+Contributors:
+	committers of YAKINDU - initial API and implementation
  */
 package org.yakindu.sct.runtime.java.test_transition;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.Set;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.TimeEvent;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
@@ -42,7 +40,9 @@ public class Test_TransitionCycleBasedStatemachine
 	private InterfaceAImpl interfaceA;
 	private DefaultInterfaceImpl defaultInterface;
 
-	private final Set<State> activeStates = EnumSet.noneOf(State.class);
+	private final State[] stateVector = new State[1];
+
+	private int nextStateIndex;
 
 	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
 
@@ -78,6 +78,15 @@ public class Test_TransitionCycleBasedStatemachine
 
 	}
 
+	public boolean isStateActive(State state) {
+		for (int i = 0; i < stateVector.length; i++) {
+			if (stateVector[i] == state) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void setTimerService(ITimerService timerService) {
 		this.timerService = timerService;
 	}
@@ -97,10 +106,6 @@ public class Test_TransitionCycleBasedStatemachine
 		}
 	}
 
-	public Set<State> getActiveStates() {
-		return EnumSet.copyOf(activeStates);
-	}
-
 	public InterfaceA getInterfaceA() {
 		return interfaceA;
 	}
@@ -115,61 +120,73 @@ public class Test_TransitionCycleBasedStatemachine
 				cycleStartTime);
 		getTimerService().setTimer(State1_time_event_1, 100, cycleStartTime);
 
-		activeStates.add(State.State1);
+		nextStateIndex = 0;
+		stateVector[0] = State.State1;
 
 	}
 
 	private void reactState1() {
 		if ((occuredEvents.contains(interfaceA.getEventEvent1()) || occuredEvents
 				.contains(interfaceA.getEventEvent2()))) {
-			activeStates.remove(State.State1);
+			stateVector[0] = null;
+
 			getTimerService().resetTimer(State1_time_event_0);
 			getTimerService().resetTimer(State1_time_event_1);
 
-			activeStates.add(State.State2);
+			nextStateIndex = 0;
+			stateVector[0] = State.State2;
 
 		} else {
 			if ((defaultInterface.getVarI() == 5)) {
-				activeStates.remove(State.State1);
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(State1_time_event_0);
 				getTimerService().resetTimer(State1_time_event_1);
 
-				activeStates.add(State.State2);
+				nextStateIndex = 0;
+				stateVector[0] = State.State2;
 
 			} else {
 				if ((occuredEvents.contains(interfaceA.getEventEvent3()) && (defaultInterface
 						.getVarJ() < 20))) {
-					activeStates.remove(State.State1);
+					stateVector[0] = null;
+
 					getTimerService().resetTimer(State1_time_event_0);
 					getTimerService().resetTimer(State1_time_event_1);
 
-					activeStates.add(State.State2);
+					nextStateIndex = 0;
+					stateVector[0] = State.State2;
 
 				} else {
 					if (((occuredEvents.contains(interfaceA.getEventEvent3()) || occuredEvents
 							.contains(interfaceA.getEventEvent4())) && (defaultInterface
 							.getVarJ() > 30))) {
-						activeStates.remove(State.State1);
+						stateVector[0] = null;
+
 						getTimerService().resetTimer(State1_time_event_0);
 						getTimerService().resetTimer(State1_time_event_1);
 
-						activeStates.add(State.State2);
+						nextStateIndex = 0;
+						stateVector[0] = State.State2;
 
 					} else {
 						if (occuredEvents.contains(defaultInterface
 								.getEventEvent6())) {
-							activeStates.remove(State.State1);
+							stateVector[0] = null;
+
 							getTimerService().resetTimer(State1_time_event_0);
 							getTimerService().resetTimer(State1_time_event_1);
 
 							defaultInterface.setVarI(15);
 
-							activeStates.add(State.State2);
+							nextStateIndex = 0;
+							stateVector[0] = State.State2;
 
 						} else {
 							if (occuredEvents.contains(defaultInterface
 									.getEventEvent7())) {
-								activeStates.remove(State.State1);
+								stateVector[0] = null;
+
 								getTimerService().resetTimer(
 										State1_time_event_0);
 								getTimerService().resetTimer(
@@ -178,39 +195,46 @@ public class Test_TransitionCycleBasedStatemachine
 								defaultInterface.setVarJ((defaultInterface
 										.getVarI() * 9));
 
-								activeStates.add(State.State2);
+								nextStateIndex = 0;
+								stateVector[0] = State.State2;
 
 							} else {
 								if (occuredEvents.contains(State1_time_event_0)) {
-									activeStates.remove(State.State1);
+									stateVector[0] = null;
+
 									getTimerService().resetTimer(
 											State1_time_event_0);
 									getTimerService().resetTimer(
 											State1_time_event_1);
 
-									activeStates.add(State.State2);
+									nextStateIndex = 0;
+									stateVector[0] = State.State2;
 
 								} else {
 									if (occuredEvents
 											.contains(State1_time_event_1)) {
-										activeStates.remove(State.State1);
+										stateVector[0] = null;
+
 										getTimerService().resetTimer(
 												State1_time_event_0);
 										getTimerService().resetTimer(
 												State1_time_event_1);
 
-										activeStates.add(State.State2);
+										nextStateIndex = 0;
+										stateVector[0] = State.State2;
 
 									} else {
 										if (occuredEvents.contains(interfaceA
 												.getEventEvent1())) {
-											activeStates.remove(State.State1);
+											stateVector[0] = null;
+
 											getTimerService().resetTimer(
 													State1_time_event_0);
 											getTimerService().resetTimer(
 													State1_time_event_1);
 
-											activeStates.add(State.State2);
+											nextStateIndex = 0;
+											stateVector[0] = State.State2;
 
 										}
 									}
@@ -227,16 +251,19 @@ public class Test_TransitionCycleBasedStatemachine
 	public void runCycle() {
 		cycleStartTime = System.currentTimeMillis();
 		outEvents.clear();
-		for (State state : activeStates) {
-			switch (state) {
-				case State1 :
-					reactState1();
-					break;
-				case State2 :
-					reactState2();
-					break;
-				default :
-					// no state found
+
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			if (stateVector[nextStateIndex] != null) {
+				switch (stateVector[nextStateIndex]) {
+					case State1 :
+						reactState1();
+						break;
+					case State2 :
+						reactState2();
+						break;
+					default :
+						// no state found
+				}
 			}
 		}
 		occuredEvents.clear();

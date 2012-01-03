@@ -121,9 +121,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 		assertEquals("InterfaceDefault.Var3 is not correct initialized:", 1,
 				statemachine.getDefaultInterface().getVarVar3());
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
-				statemachine.getActiveStates().contains(State.State1));
-		assertEquals("More than one state is active.", 1, statemachine
-				.getActiveStates().size());
+				statemachine.isStateActive(State.State1));
 	}
 
 	@Test
@@ -133,10 +131,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 		sleep(5);
 		// Test if state is changed to State2
 		assertTrue("Statemachine isn't in State: " + State.State2.name() + ".",
-				statemachine.getActiveStates().contains(State.State2));
-		// Test if only one state is active
-		assertEquals("More than one state is active.", 1, statemachine
-				.getActiveStates().size());
+				statemachine.isStateActive(State.State2));
 		// Test if event2 is raised (happens in entry of State2
 		assertTrue("Event 2 not raised: ", events[0]);
 		// Test if event2 value is set to 22 (happens in entry of State2
@@ -147,10 +142,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 		sleep(2);
 		// Test if statemachine is back in State 1
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
-				statemachine.getActiveStates().contains(State.State1));
-		// Test if only one state is active
-		assertEquals("More than one state is active.", 1, statemachine
-				.getActiveStates().size());
+				statemachine.isStateActive(State.State1));
 		// Event 2 shouldn't be raised anymore
 		assertFalse("Event is still raised: ", statemachine
 				.getDefaultInterface().isRaisedEvent2());
@@ -163,10 +155,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 		sleep(2);
 		// Test if statemachine is still in State 1
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
-				statemachine.getActiveStates().contains(State.State1));
-		// Test if only one state is active
-		assertEquals("More than one state is active.", 1, statemachine
-				.getActiveStates().size());
+				statemachine.isStateActive(State.State1));
 		// Event 2 shouldn't be raised
 		assertFalse("Event is still raised: ", statemachine
 				.getDefaultInterface().isRaisedEvent2());
@@ -179,10 +168,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 		sleep(2);
 		// Test if state is changed to State2
 		assertTrue("Statemachine isn't in State: " + State.State2.name() + ".",
-				statemachine.getActiveStates().contains(State.State2));
-		// Test if only one state is active
-		assertEquals("More than one state is active.", 1, statemachine
-				.getActiveStates().size());
+				statemachine.isStateActive(State.State2));
 		// Test if event2 is raised (happens in entry of State2
 		assertTrue("Event 2 not raised: ", events[0]);
 		// Test if event2 value is set to 22 (happens in entry of State2
@@ -196,10 +182,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 		sleep(2);
 		// Test if state is changed to State3
 		assertTrue("Statemachine isn't in State: " + State.State3.name() + ".",
-				statemachine.getActiveStates().contains(State.State3));
-		// Test if only one state is active
-		assertEquals("More than one state is active.", 1, statemachine
-				.getActiveStates().size());
+				statemachine.isStateActive(State.State3));
 		// Test if event4 is raised (happens in entry of State3
 		assertTrue("Event not raised: ", events[1]);
 
@@ -207,10 +190,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 		sleep(2);
 		// Test if statemachine is back in State 1
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
-				statemachine.getActiveStates().contains(State.State1));
-		// Test if only one state is active
-		assertEquals("More than one state is active.", 1, statemachine
-				.getActiveStates().size());
+				statemachine.isStateActive(State.State1));
 		// Event 4 shouldn't be raised anymore
 		assertFalse("Event is still raised: ", statemachine.getInterfaceOther()
 				.isRaisedEvent4());
@@ -223,10 +203,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 		sleep(2);
 		// Test if state is changed to State1
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
-				statemachine.getActiveStates().contains(State.State1));
-		// Test if only one state is active
-		assertEquals("More than one state is active.", 1, statemachine
-				.getActiveStates().size());
+				statemachine.isStateActive(State.State1));
 		// Test if event4 is not raised
 		assertFalse("Event not raised: ", events[1]);
 
@@ -235,10 +212,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 		sleep(2);
 		// Test if state is changed to State3
 		assertTrue("Statemachine isn't in State: " + State.State3.name() + ".",
-				statemachine.getActiveStates().contains(State.State3));
-		// Test if only one state is active
-		assertEquals("More than one state is active.", 1, statemachine
-				.getActiveStates().size());
+				statemachine.isStateActive(State.State3));
 		// Test if event4 is raised (happens in entry of State3
 		assertTrue("Event not raised: ", events[1]);
 	}
@@ -250,10 +224,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 		sleep(2);
 		// Test if state is changed to State4
 		assertTrue("Statemachine isn't in State: " + State.State4.name() + ".",
-				statemachine.getActiveStates().contains(State.State4));
-		// Test if only one state is active
-		assertEquals("More than one state is active.", 1, statemachine
-				.getActiveStates().size());
+				statemachine.isStateActive(State.State4));
 		// Test if event6 is raised
 		assertTrue("Event not raised: ", events[2]);
 		// Test if event6 is set to true;
@@ -264,10 +235,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 		sleep(2);
 		// Test if state is changed to State1
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
-				statemachine.getActiveStates().contains(State.State1));
-		// Test if only one state is active
-		assertEquals("More than one state is active.", 1, statemachine
-				.getActiveStates().size());
+				statemachine.isStateActive(State.State1));
 		// Test if event6 is not raised
 		assertFalse("Event raised: ", statemachine.getInterfaceThird()
 				.isRaisedEvent6());

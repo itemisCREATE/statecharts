@@ -1,20 +1,18 @@
 /**
- * Copyright (c) 2011 committers of YAKINDU and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     committers of YAKINDU - initial API and implementation
+Copyright (c) 2011 committers of YAKINDU and others. 
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+ 
+Contributors:
+	committers of YAKINDU - initial API and implementation
  */
 package org.yakindu.sct.runtime.java.trafficlightwaiting;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.Set;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.TimeEvent;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
@@ -59,7 +57,9 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	private InterfacePedestrianImpl interfacePedestrian;
 	private DefaultInterfaceImpl defaultInterface;
 
-	private final Set<State> activeStates = EnumSet.noneOf(State.class);
+	private final State[] stateVector = new State[1];
+
+	private int nextStateIndex;
 
 	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
 
@@ -104,6 +104,15 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 	}
 
+	public boolean isStateActive(State state) {
+		for (int i = 0; i < stateVector.length; i++) {
+			if (stateVector[i] == state) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void setTimerService(ITimerService timerService) {
 		this.timerService = timerService;
 	}
@@ -121,10 +130,6 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			EventNotification eventNotification = (EventNotification) notification;
 			getOccuredEvents().add(eventNotification.getElement());
 		}
-	}
-
-	public Set<State> getActiveStates() {
-		return EnumSet.copyOf(activeStates);
 	}
 
 	public InterfaceTrafficLight getInterfaceTrafficLight() {
@@ -148,7 +153,8 @@ public class TrafficLightWaitingCycleBasedStatemachine
 		interfacePedestrian.setVarGreen(false);
 		interfacePedestrian.setVarRequest(false);
 
-		activeStates.add(State.StreetGreen);
+		nextStateIndex = 0;
+		stateVector[0] = State.StreetGreen;
 
 	}
 
@@ -156,41 +162,48 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactStreetGreen() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (activeStates.contains(State.StreetGreen)) {
-				activeStates.remove(State.StreetGreen);
+			if (isStateActive(State.StreetGreen)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.WaitOn)) {
-				activeStates.remove(State.WaitOn);
+			} else if (isStateActive(State.WaitOn)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(WaitOn_time_event_0);
 
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
-			} else if (activeStates.contains(State.WaitOff)) {
-				activeStates.remove(State.WaitOff);
+			} else if (isStateActive(State.WaitOff)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(WaitOff_time_event_0);
 
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
-			} else if (activeStates.contains(State.StreetAttention)) {
-				activeStates.remove(State.StreetAttention);
+			} else if (isStateActive(State.StreetAttention)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetAttention_time_event_0);
 
-			} else if (activeStates.contains(State.StreetRed)) {
-				activeStates.remove(State.StreetRed);
+			} else if (isStateActive(State.StreetRed)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetRed_time_event_0);
 
-			} else if (activeStates.contains(State.PedestrianGreen)) {
-				activeStates.remove(State.PedestrianGreen);
+			} else if (isStateActive(State.PedestrianGreen)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
-			} else if (activeStates.contains(State.PedestrianRed)) {
-				activeStates.remove(State.PedestrianRed);
+			} else if (isStateActive(State.PedestrianRed)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianRed_time_event_0);
 
-			} else if (activeStates.contains(State.StreetPrepare)) {
-				activeStates.remove(State.StreetPrepare);
+			} else if (isStateActive(State.StreetPrepare)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetPrepare_time_event_0);
 
 			}
@@ -205,11 +218,12 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					cycleStartTime);
 			interfaceTrafficLight.setVarYellow(true);
 
-			activeStates.add(State.YellowOn);
+			nextStateIndex = 0;
+			stateVector[0] = State.YellowOn;
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventKeypress1())) {
-				activeStates.remove(State.StreetGreen);
+				stateVector[0] = null;
 
 				getTimerService().setTimer(PedWaiting_time_event_0, (7 * 1000),
 						cycleStartTime);
@@ -218,7 +232,8 @@ public class TrafficLightWaitingCycleBasedStatemachine
 						cycleStartTime);
 				interfacePedestrian.setVarRequest(true);
 
-				activeStates.add(State.WaitOn);
+				nextStateIndex = 0;
+				stateVector[0] = State.WaitOn;
 
 			}
 
@@ -228,41 +243,48 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactWaitOn() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (activeStates.contains(State.StreetGreen)) {
-				activeStates.remove(State.StreetGreen);
+			if (isStateActive(State.StreetGreen)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.WaitOn)) {
-				activeStates.remove(State.WaitOn);
+			} else if (isStateActive(State.WaitOn)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(WaitOn_time_event_0);
 
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
-			} else if (activeStates.contains(State.WaitOff)) {
-				activeStates.remove(State.WaitOff);
+			} else if (isStateActive(State.WaitOff)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(WaitOff_time_event_0);
 
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
-			} else if (activeStates.contains(State.StreetAttention)) {
-				activeStates.remove(State.StreetAttention);
+			} else if (isStateActive(State.StreetAttention)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetAttention_time_event_0);
 
-			} else if (activeStates.contains(State.StreetRed)) {
-				activeStates.remove(State.StreetRed);
+			} else if (isStateActive(State.StreetRed)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetRed_time_event_0);
 
-			} else if (activeStates.contains(State.PedestrianGreen)) {
-				activeStates.remove(State.PedestrianGreen);
+			} else if (isStateActive(State.PedestrianGreen)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
-			} else if (activeStates.contains(State.PedestrianRed)) {
-				activeStates.remove(State.PedestrianRed);
+			} else if (isStateActive(State.PedestrianRed)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianRed_time_event_0);
 
-			} else if (activeStates.contains(State.StreetPrepare)) {
-				activeStates.remove(State.StreetPrepare);
+			} else if (isStateActive(State.StreetPrepare)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetPrepare_time_event_0);
 
 			}
@@ -277,16 +299,19 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					cycleStartTime);
 			interfaceTrafficLight.setVarYellow(true);
 
-			activeStates.add(State.YellowOn);
+			nextStateIndex = 0;
+			stateVector[0] = State.YellowOn;
 
 		} else {
 			if (occuredEvents.contains(PedWaiting_time_event_0)) {
-				if (activeStates.contains(State.WaitOn)) {
-					activeStates.remove(State.WaitOn);
+				if (isStateActive(State.WaitOn)) {
+					stateVector[0] = null;
+
 					getTimerService().resetTimer(WaitOn_time_event_0);
 
-				} else if (activeStates.contains(State.WaitOff)) {
-					activeStates.remove(State.WaitOff);
+				} else if (isStateActive(State.WaitOff)) {
+					stateVector[0] = null;
+
 					getTimerService().resetTimer(WaitOff_time_event_0);
 
 				}
@@ -299,18 +324,21 @@ public class TrafficLightWaitingCycleBasedStatemachine
 				interfaceTrafficLight.setVarYellow(true);
 				interfaceTrafficLight.setVarGreen(false);
 
-				activeStates.add(State.StreetAttention);
+				nextStateIndex = 0;
+				stateVector[0] = State.StreetAttention;
 
 			} else {
 				if (occuredEvents.contains(WaitOn_time_event_0)) {
-					activeStates.remove(State.WaitOn);
+					stateVector[0] = null;
+
 					getTimerService().resetTimer(WaitOn_time_event_0);
 
 					getTimerService().setTimer(WaitOff_time_event_0, 500,
 							cycleStartTime);
 					interfacePedestrian.setVarRequest(false);
 
-					activeStates.add(State.WaitOff);
+					nextStateIndex = 0;
+					stateVector[0] = State.WaitOff;
 
 				}
 
@@ -320,41 +348,48 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactWaitOff() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (activeStates.contains(State.StreetGreen)) {
-				activeStates.remove(State.StreetGreen);
+			if (isStateActive(State.StreetGreen)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.WaitOn)) {
-				activeStates.remove(State.WaitOn);
+			} else if (isStateActive(State.WaitOn)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(WaitOn_time_event_0);
 
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
-			} else if (activeStates.contains(State.WaitOff)) {
-				activeStates.remove(State.WaitOff);
+			} else if (isStateActive(State.WaitOff)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(WaitOff_time_event_0);
 
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
-			} else if (activeStates.contains(State.StreetAttention)) {
-				activeStates.remove(State.StreetAttention);
+			} else if (isStateActive(State.StreetAttention)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetAttention_time_event_0);
 
-			} else if (activeStates.contains(State.StreetRed)) {
-				activeStates.remove(State.StreetRed);
+			} else if (isStateActive(State.StreetRed)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetRed_time_event_0);
 
-			} else if (activeStates.contains(State.PedestrianGreen)) {
-				activeStates.remove(State.PedestrianGreen);
+			} else if (isStateActive(State.PedestrianGreen)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
-			} else if (activeStates.contains(State.PedestrianRed)) {
-				activeStates.remove(State.PedestrianRed);
+			} else if (isStateActive(State.PedestrianRed)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianRed_time_event_0);
 
-			} else if (activeStates.contains(State.StreetPrepare)) {
-				activeStates.remove(State.StreetPrepare);
+			} else if (isStateActive(State.StreetPrepare)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetPrepare_time_event_0);
 
 			}
@@ -369,16 +404,19 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					cycleStartTime);
 			interfaceTrafficLight.setVarYellow(true);
 
-			activeStates.add(State.YellowOn);
+			nextStateIndex = 0;
+			stateVector[0] = State.YellowOn;
 
 		} else {
 			if (occuredEvents.contains(PedWaiting_time_event_0)) {
-				if (activeStates.contains(State.WaitOn)) {
-					activeStates.remove(State.WaitOn);
+				if (isStateActive(State.WaitOn)) {
+					stateVector[0] = null;
+
 					getTimerService().resetTimer(WaitOn_time_event_0);
 
-				} else if (activeStates.contains(State.WaitOff)) {
-					activeStates.remove(State.WaitOff);
+				} else if (isStateActive(State.WaitOff)) {
+					stateVector[0] = null;
+
 					getTimerService().resetTimer(WaitOff_time_event_0);
 
 				}
@@ -391,18 +429,21 @@ public class TrafficLightWaitingCycleBasedStatemachine
 				interfaceTrafficLight.setVarYellow(true);
 				interfaceTrafficLight.setVarGreen(false);
 
-				activeStates.add(State.StreetAttention);
+				nextStateIndex = 0;
+				stateVector[0] = State.StreetAttention;
 
 			} else {
 				if (occuredEvents.contains(WaitOff_time_event_0)) {
-					activeStates.remove(State.WaitOff);
+					stateVector[0] = null;
+
 					getTimerService().resetTimer(WaitOff_time_event_0);
 
 					getTimerService().setTimer(WaitOn_time_event_0, 500,
 							cycleStartTime);
 					interfacePedestrian.setVarRequest(true);
 
-					activeStates.add(State.WaitOn);
+					nextStateIndex = 0;
+					stateVector[0] = State.WaitOn;
 
 				}
 
@@ -412,41 +453,48 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactStreetAttention() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (activeStates.contains(State.StreetGreen)) {
-				activeStates.remove(State.StreetGreen);
+			if (isStateActive(State.StreetGreen)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.WaitOn)) {
-				activeStates.remove(State.WaitOn);
+			} else if (isStateActive(State.WaitOn)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(WaitOn_time_event_0);
 
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
-			} else if (activeStates.contains(State.WaitOff)) {
-				activeStates.remove(State.WaitOff);
+			} else if (isStateActive(State.WaitOff)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(WaitOff_time_event_0);
 
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
-			} else if (activeStates.contains(State.StreetAttention)) {
-				activeStates.remove(State.StreetAttention);
+			} else if (isStateActive(State.StreetAttention)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetAttention_time_event_0);
 
-			} else if (activeStates.contains(State.StreetRed)) {
-				activeStates.remove(State.StreetRed);
+			} else if (isStateActive(State.StreetRed)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetRed_time_event_0);
 
-			} else if (activeStates.contains(State.PedestrianGreen)) {
-				activeStates.remove(State.PedestrianGreen);
+			} else if (isStateActive(State.PedestrianGreen)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
-			} else if (activeStates.contains(State.PedestrianRed)) {
-				activeStates.remove(State.PedestrianRed);
+			} else if (isStateActive(State.PedestrianRed)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianRed_time_event_0);
 
-			} else if (activeStates.contains(State.StreetPrepare)) {
-				activeStates.remove(State.StreetPrepare);
+			} else if (isStateActive(State.StreetPrepare)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetPrepare_time_event_0);
 
 			}
@@ -461,11 +509,13 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					cycleStartTime);
 			interfaceTrafficLight.setVarYellow(true);
 
-			activeStates.add(State.YellowOn);
+			nextStateIndex = 0;
+			stateVector[0] = State.YellowOn;
 
 		} else {
 			if (occuredEvents.contains(StreetAttention_time_event_0)) {
-				activeStates.remove(State.StreetAttention);
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetAttention_time_event_0);
 
 				getTimerService().setTimer(StreetRed_time_event_0, (2 * 1000),
@@ -474,7 +524,8 @@ public class TrafficLightWaitingCycleBasedStatemachine
 				interfaceTrafficLight.setVarYellow(false);
 				interfaceTrafficLight.setVarGreen(false);
 
-				activeStates.add(State.StreetRed);
+				nextStateIndex = 0;
+				stateVector[0] = State.StreetRed;
 
 			}
 
@@ -482,41 +533,48 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactStreetRed() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (activeStates.contains(State.StreetGreen)) {
-				activeStates.remove(State.StreetGreen);
+			if (isStateActive(State.StreetGreen)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.WaitOn)) {
-				activeStates.remove(State.WaitOn);
+			} else if (isStateActive(State.WaitOn)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(WaitOn_time_event_0);
 
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
-			} else if (activeStates.contains(State.WaitOff)) {
-				activeStates.remove(State.WaitOff);
+			} else if (isStateActive(State.WaitOff)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(WaitOff_time_event_0);
 
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
-			} else if (activeStates.contains(State.StreetAttention)) {
-				activeStates.remove(State.StreetAttention);
+			} else if (isStateActive(State.StreetAttention)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetAttention_time_event_0);
 
-			} else if (activeStates.contains(State.StreetRed)) {
-				activeStates.remove(State.StreetRed);
+			} else if (isStateActive(State.StreetRed)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetRed_time_event_0);
 
-			} else if (activeStates.contains(State.PedestrianGreen)) {
-				activeStates.remove(State.PedestrianGreen);
+			} else if (isStateActive(State.PedestrianGreen)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
-			} else if (activeStates.contains(State.PedestrianRed)) {
-				activeStates.remove(State.PedestrianRed);
+			} else if (isStateActive(State.PedestrianRed)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianRed_time_event_0);
 
-			} else if (activeStates.contains(State.StreetPrepare)) {
-				activeStates.remove(State.StreetPrepare);
+			} else if (isStateActive(State.StreetPrepare)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetPrepare_time_event_0);
 
 			}
@@ -531,11 +589,13 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					cycleStartTime);
 			interfaceTrafficLight.setVarYellow(true);
 
-			activeStates.add(State.YellowOn);
+			nextStateIndex = 0;
+			stateVector[0] = State.YellowOn;
 
 		} else {
 			if (occuredEvents.contains(StreetRed_time_event_0)) {
-				activeStates.remove(State.StreetRed);
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetRed_time_event_0);
 
 				getTimerService().setTimer(PedestrianGreen_time_event_0,
@@ -543,7 +603,8 @@ public class TrafficLightWaitingCycleBasedStatemachine
 				interfacePedestrian.setVarRed(false);
 				interfacePedestrian.setVarGreen(true);
 
-				activeStates.add(State.PedestrianGreen);
+				nextStateIndex = 0;
+				stateVector[0] = State.PedestrianGreen;
 
 			}
 
@@ -551,41 +612,48 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactPedestrianGreen() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (activeStates.contains(State.StreetGreen)) {
-				activeStates.remove(State.StreetGreen);
+			if (isStateActive(State.StreetGreen)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.WaitOn)) {
-				activeStates.remove(State.WaitOn);
+			} else if (isStateActive(State.WaitOn)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(WaitOn_time_event_0);
 
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
-			} else if (activeStates.contains(State.WaitOff)) {
-				activeStates.remove(State.WaitOff);
+			} else if (isStateActive(State.WaitOff)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(WaitOff_time_event_0);
 
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
-			} else if (activeStates.contains(State.StreetAttention)) {
-				activeStates.remove(State.StreetAttention);
+			} else if (isStateActive(State.StreetAttention)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetAttention_time_event_0);
 
-			} else if (activeStates.contains(State.StreetRed)) {
-				activeStates.remove(State.StreetRed);
+			} else if (isStateActive(State.StreetRed)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetRed_time_event_0);
 
-			} else if (activeStates.contains(State.PedestrianGreen)) {
-				activeStates.remove(State.PedestrianGreen);
+			} else if (isStateActive(State.PedestrianGreen)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
-			} else if (activeStates.contains(State.PedestrianRed)) {
-				activeStates.remove(State.PedestrianRed);
+			} else if (isStateActive(State.PedestrianRed)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianRed_time_event_0);
 
-			} else if (activeStates.contains(State.StreetPrepare)) {
-				activeStates.remove(State.StreetPrepare);
+			} else if (isStateActive(State.StreetPrepare)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetPrepare_time_event_0);
 
 			}
@@ -600,11 +668,13 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					cycleStartTime);
 			interfaceTrafficLight.setVarYellow(true);
 
-			activeStates.add(State.YellowOn);
+			nextStateIndex = 0;
+			stateVector[0] = State.YellowOn;
 
 		} else {
 			if (occuredEvents.contains(PedestrianGreen_time_event_0)) {
-				activeStates.remove(State.PedestrianGreen);
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
 				getTimerService().setTimer(PedestrianRed_time_event_0,
@@ -612,7 +682,8 @@ public class TrafficLightWaitingCycleBasedStatemachine
 				interfacePedestrian.setVarRed(true);
 				interfacePedestrian.setVarGreen(false);
 
-				activeStates.add(State.PedestrianRed);
+				nextStateIndex = 0;
+				stateVector[0] = State.PedestrianRed;
 
 			}
 
@@ -620,41 +691,48 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactPedestrianRed() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (activeStates.contains(State.StreetGreen)) {
-				activeStates.remove(State.StreetGreen);
+			if (isStateActive(State.StreetGreen)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.WaitOn)) {
-				activeStates.remove(State.WaitOn);
+			} else if (isStateActive(State.WaitOn)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(WaitOn_time_event_0);
 
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
-			} else if (activeStates.contains(State.WaitOff)) {
-				activeStates.remove(State.WaitOff);
+			} else if (isStateActive(State.WaitOff)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(WaitOff_time_event_0);
 
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
-			} else if (activeStates.contains(State.StreetAttention)) {
-				activeStates.remove(State.StreetAttention);
+			} else if (isStateActive(State.StreetAttention)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetAttention_time_event_0);
 
-			} else if (activeStates.contains(State.StreetRed)) {
-				activeStates.remove(State.StreetRed);
+			} else if (isStateActive(State.StreetRed)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetRed_time_event_0);
 
-			} else if (activeStates.contains(State.PedestrianGreen)) {
-				activeStates.remove(State.PedestrianGreen);
+			} else if (isStateActive(State.PedestrianGreen)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
-			} else if (activeStates.contains(State.PedestrianRed)) {
-				activeStates.remove(State.PedestrianRed);
+			} else if (isStateActive(State.PedestrianRed)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianRed_time_event_0);
 
-			} else if (activeStates.contains(State.StreetPrepare)) {
-				activeStates.remove(State.StreetPrepare);
+			} else if (isStateActive(State.StreetPrepare)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetPrepare_time_event_0);
 
 			}
@@ -669,11 +747,13 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					cycleStartTime);
 			interfaceTrafficLight.setVarYellow(true);
 
-			activeStates.add(State.YellowOn);
+			nextStateIndex = 0;
+			stateVector[0] = State.YellowOn;
 
 		} else {
 			if (occuredEvents.contains(PedestrianRed_time_event_0)) {
-				activeStates.remove(State.PedestrianRed);
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianRed_time_event_0);
 
 				getTimerService().setTimer(StreetPrepare_time_event_0,
@@ -682,7 +762,8 @@ public class TrafficLightWaitingCycleBasedStatemachine
 				interfaceTrafficLight.setVarYellow(true);
 				interfaceTrafficLight.setVarGreen(false);
 
-				activeStates.add(State.StreetPrepare);
+				nextStateIndex = 0;
+				stateVector[0] = State.StreetPrepare;
 
 			}
 
@@ -690,41 +771,48 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactStreetPrepare() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (activeStates.contains(State.StreetGreen)) {
-				activeStates.remove(State.StreetGreen);
+			if (isStateActive(State.StreetGreen)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.WaitOn)) {
-				activeStates.remove(State.WaitOn);
+			} else if (isStateActive(State.WaitOn)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(WaitOn_time_event_0);
 
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
-			} else if (activeStates.contains(State.WaitOff)) {
-				activeStates.remove(State.WaitOff);
+			} else if (isStateActive(State.WaitOff)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(WaitOff_time_event_0);
 
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
-			} else if (activeStates.contains(State.StreetAttention)) {
-				activeStates.remove(State.StreetAttention);
+			} else if (isStateActive(State.StreetAttention)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetAttention_time_event_0);
 
-			} else if (activeStates.contains(State.StreetRed)) {
-				activeStates.remove(State.StreetRed);
+			} else if (isStateActive(State.StreetRed)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetRed_time_event_0);
 
-			} else if (activeStates.contains(State.PedestrianGreen)) {
-				activeStates.remove(State.PedestrianGreen);
+			} else if (isStateActive(State.PedestrianGreen)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
-			} else if (activeStates.contains(State.PedestrianRed)) {
-				activeStates.remove(State.PedestrianRed);
+			} else if (isStateActive(State.PedestrianRed)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(PedestrianRed_time_event_0);
 
-			} else if (activeStates.contains(State.StreetPrepare)) {
-				activeStates.remove(State.StreetPrepare);
+			} else if (isStateActive(State.StreetPrepare)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetPrepare_time_event_0);
 
 			}
@@ -739,11 +827,13 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					cycleStartTime);
 			interfaceTrafficLight.setVarYellow(true);
 
-			activeStates.add(State.YellowOn);
+			nextStateIndex = 0;
+			stateVector[0] = State.YellowOn;
 
 		} else {
 			if (occuredEvents.contains(StreetPrepare_time_event_0)) {
-				activeStates.remove(State.StreetPrepare);
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(StreetPrepare_time_event_0);
 
 				interfaceTrafficLight.setVarRed(false);
@@ -753,7 +843,8 @@ public class TrafficLightWaitingCycleBasedStatemachine
 				interfacePedestrian.setVarGreen(false);
 				interfacePedestrian.setVarRequest(false);
 
-				activeStates.add(State.StreetGreen);
+				nextStateIndex = 0;
+				stateVector[0] = State.StreetGreen;
 
 			}
 
@@ -763,12 +854,14 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactYellowOn() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (activeStates.contains(State.YellowOn)) {
-				activeStates.remove(State.YellowOn);
+			if (isStateActive(State.YellowOn)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(YellowOn_time_event_0);
 
-			} else if (activeStates.contains(State.YellowOff)) {
-				activeStates.remove(State.YellowOff);
+			} else if (isStateActive(State.YellowOff)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(YellowOff_time_event_0);
 
 			}
@@ -780,18 +873,21 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			interfacePedestrian.setVarGreen(false);
 			interfacePedestrian.setVarRequest(false);
 
-			activeStates.add(State.StreetGreen);
+			nextStateIndex = 0;
+			stateVector[0] = State.StreetGreen;
 
 		} else {
 			if (occuredEvents.contains(YellowOn_time_event_0)) {
-				activeStates.remove(State.YellowOn);
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(YellowOn_time_event_0);
 
 				getTimerService().setTimer(YellowOff_time_event_0, 500,
 						cycleStartTime);
 				interfaceTrafficLight.setVarYellow(false);
 
-				activeStates.add(State.YellowOff);
+				nextStateIndex = 0;
+				stateVector[0] = State.YellowOff;
 
 			}
 
@@ -799,12 +895,14 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactYellowOff() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (activeStates.contains(State.YellowOn)) {
-				activeStates.remove(State.YellowOn);
+			if (isStateActive(State.YellowOn)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(YellowOn_time_event_0);
 
-			} else if (activeStates.contains(State.YellowOff)) {
-				activeStates.remove(State.YellowOff);
+			} else if (isStateActive(State.YellowOff)) {
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(YellowOff_time_event_0);
 
 			}
@@ -816,18 +914,21 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			interfacePedestrian.setVarGreen(false);
 			interfacePedestrian.setVarRequest(false);
 
-			activeStates.add(State.StreetGreen);
+			nextStateIndex = 0;
+			stateVector[0] = State.StreetGreen;
 
 		} else {
 			if (occuredEvents.contains(YellowOff_time_event_0)) {
-				activeStates.remove(State.YellowOff);
+				stateVector[0] = null;
+
 				getTimerService().resetTimer(YellowOff_time_event_0);
 
 				getTimerService().setTimer(YellowOn_time_event_0, 500,
 						cycleStartTime);
 				interfaceTrafficLight.setVarYellow(true);
 
-				activeStates.add(State.YellowOn);
+				nextStateIndex = 0;
+				stateVector[0] = State.YellowOn;
 
 			}
 
@@ -836,8 +937,9 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	public void runCycle() {
 		cycleStartTime = System.currentTimeMillis();
 		outEvents.clear();
-		for (State state : activeStates) {
-			switch (state) {
+
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
 				case On :
 					reactOn();
 					break;

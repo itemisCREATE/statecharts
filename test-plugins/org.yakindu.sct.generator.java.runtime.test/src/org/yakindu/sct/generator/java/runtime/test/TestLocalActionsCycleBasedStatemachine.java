@@ -67,9 +67,7 @@ public class TestLocalActionsCycleBasedStatemachine {
 	@Test
 	public void testStatemachineEntry() {
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
-				statemachine.getActiveStates().contains(State.State1));
-		assertEquals("More than one state is active.", 1, statemachine
-				.getActiveStates().size());
+				statemachine.isStateActive(State.State1));
 		assertEquals("Variable i not set to 1", 1, statemachine
 				.getDefaultInterface().getVarI());
 	}

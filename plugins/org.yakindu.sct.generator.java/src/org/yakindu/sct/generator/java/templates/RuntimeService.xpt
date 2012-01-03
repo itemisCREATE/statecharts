@@ -17,8 +17,8 @@ Contributors:
 «getLicenseHeader(entry)»
 package «entry.getBasePackageName()»;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -27,7 +27,7 @@ public class RuntimeService {
 
 	private Timer timer = new Timer();
 
-	private Set<IStatemachine> statemachineSet = new HashSet<IStatemachine>();
+	private List<IStatemachine> statemachineSet = new LinkedList<IStatemachine>();
 
 	private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
