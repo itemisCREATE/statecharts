@@ -75,7 +75,7 @@ String getImplementationPackageName(InterfaceScope this, GeneratorEntry entry):
 String getLicenseHeader(GeneratorEntry entry) :
 	if entry.getFeatureConfiguration(getLicenseFeature())!=null
 		&& entry.getFeatureConfiguration(getLicenseFeature()).getParameterValue(getLicenseText()) != null then
-		entry.getFeatureConfiguration(getLicenseFeature()).getParameterValue(getLicenseText()).getStringValue()
+		"/**"+entry.getFeatureConfiguration(getLicenseFeature()).getParameterValue(getLicenseText()).getStringValue()+"*/"
 	else 
 		null;
 

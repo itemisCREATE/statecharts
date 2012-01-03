@@ -1,20 +1,18 @@
 /**
- * Copyright (c) 2011 committers of YAKINDU and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     committers of YAKINDU - initial API and implementation
+Copyright (c) 2011 committers of YAKINDU and others. 
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+ 
+Contributors:
+	committers of YAKINDU - initial API and implementation
  */
 package org.yakindu.sct.runtime.java.interfacetest;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.Set;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.IStatemachine;
 
@@ -28,7 +26,9 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 	private InterfaceOtherImpl interfaceOther;
 	private InterfaceThirdImpl interfaceThird;
 
-	private final Set<State> activeStates = EnumSet.noneOf(State.class);
+	private final State[] stateVector = new State[1];
+
+	private int nextStateIndex;
 
 	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
 
@@ -59,8 +59,13 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 
 	}
 
-	public Set<State> getActiveStates() {
-		return EnumSet.copyOf(activeStates);
+	public boolean isStateActive(State state) {
+		for (int i = 0; i < stateVector.length; i++) {
+			if (stateVector[i] == state) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public DefaultInterface getDefaultInterface() {
@@ -76,36 +81,40 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 	}
 
 	public void enter() {
-		activeStates.add(State.State1);
+		nextStateIndex = 0;
+		stateVector[0] = State.State1;
 
 	}
 
 	private void reactState1() {
 		if ((occuredEvents.contains(defaultInterface.getEventEvent1()) && (defaultInterface
 				.getVarVar2() > 0))) {
-			activeStates.remove(State.State1);
+			stateVector[0] = null;
 
 			defaultInterface.raiseEvent2(22);
 
-			activeStates.add(State.State2);
+			nextStateIndex = 0;
+			stateVector[0] = State.State2;
 
 		} else {
 			if ((occuredEvents.contains(interfaceOther.getEventEvent3()) && (defaultInterface
 					.getVarVar3() == 1))) {
-				activeStates.remove(State.State1);
+				stateVector[0] = null;
 
 				interfaceOther.raiseEvent4();
 
-				activeStates.add(State.State3);
+				nextStateIndex = 0;
+				stateVector[0] = State.State3;
 
 			} else {
 				if ((occuredEvents.contains(interfaceThird.getEventEvent5()) && (defaultInterface
 						.getVarVar1() == true))) {
-					activeStates.remove(State.State1);
+					stateVector[0] = null;
 
 					interfaceThird.raiseEvent6(true);
 
-					activeStates.add(State.State4);
+					nextStateIndex = 0;
+					stateVector[0] = State.State4;
 
 				}
 			}
@@ -113,46 +122,52 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState2() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
-			activeStates.remove(State.State2);
+			stateVector[0] = null;
 
-			activeStates.add(State.State1);
+			nextStateIndex = 0;
+			stateVector[0] = State.State1;
 
 		}
 	}
 	private void reactState3() {
 		if (occuredEvents.contains(interfaceOther.getEventEvent3())) {
-			activeStates.remove(State.State3);
+			stateVector[0] = null;
 
-			activeStates.add(State.State1);
+			nextStateIndex = 0;
+			stateVector[0] = State.State1;
 
 		}
 	}
 	private void reactState4() {
 		if (occuredEvents.contains(interfaceThird.getEventEvent5())) {
-			activeStates.remove(State.State4);
+			stateVector[0] = null;
 
-			activeStates.add(State.State1);
+			nextStateIndex = 0;
+			stateVector[0] = State.State1;
 
 		}
 	}
 	public void runCycle() {
 		outEvents.clear();
-		for (State state : activeStates) {
-			switch (state) {
-				case State1 :
-					reactState1();
-					break;
-				case State2 :
-					reactState2();
-					break;
-				case State3 :
-					reactState3();
-					break;
-				case State4 :
-					reactState4();
-					break;
-				default :
-					// no state found
+
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			if (stateVector[nextStateIndex] != null) {
+				switch (stateVector[nextStateIndex]) {
+					case State1 :
+						reactState1();
+						break;
+					case State2 :
+						reactState2();
+						break;
+					case State3 :
+						reactState3();
+						break;
+					case State4 :
+						reactState4();
+						break;
+					default :
+						// no state found
+				}
 			}
 		}
 		occuredEvents.clear();

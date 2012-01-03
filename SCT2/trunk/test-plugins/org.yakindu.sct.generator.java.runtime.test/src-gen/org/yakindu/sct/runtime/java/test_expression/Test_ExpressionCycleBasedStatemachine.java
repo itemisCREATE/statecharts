@@ -1,20 +1,18 @@
 /**
- * Copyright (c) 2011 committers of YAKINDU and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     committers of YAKINDU - initial API and implementation
+Copyright (c) 2011 committers of YAKINDU and others. 
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+ 
+Contributors:
+	committers of YAKINDU - initial API and implementation
  */
 package org.yakindu.sct.runtime.java.test_expression;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.Set;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.IStatemachine;
 
@@ -27,7 +25,9 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 	private DefaultInterfaceImpl defaultInterface;
 	private InterfaceOtherImpl interfaceOther;
 
-	private final Set<State> activeStates = EnumSet.noneOf(State.class);
+	private final State[] stateVector = new State[1];
+
+	private int nextStateIndex;
 
 	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
 
@@ -57,8 +57,13 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 
 	}
 
-	public Set<State> getActiveStates() {
-		return EnumSet.copyOf(activeStates);
+	public boolean isStateActive(State state) {
+		for (int i = 0; i < stateVector.length; i++) {
+			if (stateVector[i] == state) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public DefaultInterface getDefaultInterface() {
@@ -74,14 +79,16 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 				+ ((defaultInterface.getVarVar2() * defaultInterface
 						.getVarVar3())));
 
-		activeStates.add(State.State1);
+		nextStateIndex = 0;
+		stateVector[0] = State.State1;
 
 	}
 
 	private void reactState1() {
 		if ((occuredEvents.contains(defaultInterface.getEventEvent1()) && ((interfaceOther
 				.getVarVar1() == true) || (defaultInterface.getVarVar5() == false)))) {
-			activeStates.remove(State.State1);
+			stateVector[0] = null;
+
 			defaultInterface.setVarVar2(1);
 
 			defaultInterface.setVarVar4(22.3);
@@ -92,14 +99,15 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 
 			defaultInterface.setVarVar1(defaultInterface.getVarVar1() + (1));
 
-			activeStates.add(State.State2);
+			nextStateIndex = 0;
+			stateVector[0] = State.State2;
 
 		}
 	}
 	private void reactState2() {
 		if ((occuredEvents.contains(defaultInterface.getEventEvent1()) && (defaultInterface
 				.getVarVar3() > 0))) {
-			activeStates.remove(State.State2);
+			stateVector[0] = null;
 
 			defaultInterface.setVarVar5(true);
 
@@ -107,7 +115,8 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 					+ ((defaultInterface.getVarVar2() * defaultInterface
 							.getVarVar3())));
 
-			activeStates.add(State.State1);
+			nextStateIndex = 0;
+			stateVector[0] = State.State1;
 
 		} else {
 			if (true) {
@@ -120,16 +129,19 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 	}
 	public void runCycle() {
 		outEvents.clear();
-		for (State state : activeStates) {
-			switch (state) {
-				case State1 :
-					reactState1();
-					break;
-				case State2 :
-					reactState2();
-					break;
-				default :
-					// no state found
+
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			if (stateVector[nextStateIndex] != null) {
+				switch (stateVector[nextStateIndex]) {
+					case State1 :
+						reactState1();
+						break;
+					case State2 :
+						reactState2();
+						break;
+					default :
+						// no state found
+				}
 			}
 		}
 		occuredEvents.clear();

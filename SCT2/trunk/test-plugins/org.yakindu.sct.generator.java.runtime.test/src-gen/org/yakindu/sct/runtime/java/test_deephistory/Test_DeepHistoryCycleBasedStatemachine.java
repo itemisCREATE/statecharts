@@ -1,20 +1,18 @@
 /**
- * Copyright (c) 2011 committers of YAKINDU and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     committers of YAKINDU - initial API and implementation
+Copyright (c) 2011 committers of YAKINDU and others. 
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+ 
+Contributors:
+	committers of YAKINDU - initial API and implementation
  */
 package org.yakindu.sct.runtime.java.test_deephistory;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.Set;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.IStatemachine;
 
@@ -26,7 +24,9 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 
 	private DefaultInterfaceImpl defaultInterface;
 
-	private final Set<State> activeStates = EnumSet.noneOf(State.class);
+	private final State[] stateVector = new State[1];
+
+	private int nextStateIndex;
 
 	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
 
@@ -55,8 +55,13 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 
 	}
 
-	public Set<State> getActiveStates() {
-		return EnumSet.copyOf(activeStates);
+	public boolean isStateActive(State state) {
+		for (int i = 0; i < stateVector.length; i++) {
+			if (stateVector[i] == state) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public DefaultInterface getDefaultInterface() {
@@ -64,15 +69,17 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	}
 
 	public void enter() {
-		activeStates.add(State.State1);
+		nextStateIndex = 0;
+		stateVector[0] = State.State1;
 
 	}
 
 	private void reactState1() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
-			activeStates.remove(State.State1);
+			stateVector[0] = null;
 
-			activeStates.add(State.State3);
+			nextStateIndex = 0;
+			stateVector[0] = State.State3;
 
 		}
 	}
@@ -80,30 +87,32 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState3() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-			if (activeStates.contains(State.State3)) {
-				activeStates.remove(State.State3);
+			if (isStateActive(State.State3)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State6)) {
-				activeStates.remove(State.State6);
+			} else if (isStateActive(State.State6)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State8)) {
-				activeStates.remove(State.State8);
+			} else if (isStateActive(State.State8)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State9)) {
-				activeStates.remove(State.State9);
+			} else if (isStateActive(State.State9)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State5)) {
-				activeStates.remove(State.State5);
+			} else if (isStateActive(State.State5)) {
+				stateVector[0] = null;
 
 			}
 
-			activeStates.add(State.State1);
+			nextStateIndex = 0;
+			stateVector[0] = State.State1;
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventEvent3())) {
-				activeStates.remove(State.State3);
+				stateVector[0] = null;
 
-				activeStates.add(State.State6);
+				nextStateIndex = 0;
+				stateVector[0] = State.State6;
 
 			}
 
@@ -113,45 +122,48 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState6() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-			if (activeStates.contains(State.State3)) {
-				activeStates.remove(State.State3);
+			if (isStateActive(State.State3)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State6)) {
-				activeStates.remove(State.State6);
+			} else if (isStateActive(State.State6)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State8)) {
-				activeStates.remove(State.State8);
+			} else if (isStateActive(State.State8)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State9)) {
-				activeStates.remove(State.State9);
+			} else if (isStateActive(State.State9)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State5)) {
-				activeStates.remove(State.State5);
+			} else if (isStateActive(State.State5)) {
+				stateVector[0] = null;
 
 			}
 
-			activeStates.add(State.State1);
+			nextStateIndex = 0;
+			stateVector[0] = State.State1;
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventEvent4())) {
-				if (activeStates.contains(State.State6)) {
-					activeStates.remove(State.State6);
+				if (isStateActive(State.State6)) {
+					stateVector[0] = null;
 
-				} else if (activeStates.contains(State.State8)) {
-					activeStates.remove(State.State8);
+				} else if (isStateActive(State.State8)) {
+					stateVector[0] = null;
 
-				} else if (activeStates.contains(State.State9)) {
-					activeStates.remove(State.State9);
+				} else if (isStateActive(State.State9)) {
+					stateVector[0] = null;
 
 				}
 
-				activeStates.add(State.State5);
+				nextStateIndex = 0;
+				stateVector[0] = State.State5;
 
 			} else {
 				if (occuredEvents.contains(defaultInterface.getEventEvent5())) {
-					activeStates.remove(State.State6);
+					stateVector[0] = null;
 
-					activeStates.add(State.State8);
+					nextStateIndex = 0;
+					stateVector[0] = State.State8;
 
 				}
 
@@ -163,58 +175,62 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState8() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-			if (activeStates.contains(State.State3)) {
-				activeStates.remove(State.State3);
+			if (isStateActive(State.State3)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State6)) {
-				activeStates.remove(State.State6);
+			} else if (isStateActive(State.State6)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State8)) {
-				activeStates.remove(State.State8);
+			} else if (isStateActive(State.State8)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State9)) {
-				activeStates.remove(State.State9);
+			} else if (isStateActive(State.State9)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State5)) {
-				activeStates.remove(State.State5);
+			} else if (isStateActive(State.State5)) {
+				stateVector[0] = null;
 
 			}
 
-			activeStates.add(State.State1);
+			nextStateIndex = 0;
+			stateVector[0] = State.State1;
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventEvent4())) {
-				if (activeStates.contains(State.State6)) {
-					activeStates.remove(State.State6);
+				if (isStateActive(State.State6)) {
+					stateVector[0] = null;
 
-				} else if (activeStates.contains(State.State8)) {
-					activeStates.remove(State.State8);
+				} else if (isStateActive(State.State8)) {
+					stateVector[0] = null;
 
-				} else if (activeStates.contains(State.State9)) {
-					activeStates.remove(State.State9);
+				} else if (isStateActive(State.State9)) {
+					stateVector[0] = null;
 
 				}
 
-				activeStates.add(State.State5);
+				nextStateIndex = 0;
+				stateVector[0] = State.State5;
 
 			} else {
 				if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
-					if (activeStates.contains(State.State8)) {
-						activeStates.remove(State.State8);
+					if (isStateActive(State.State8)) {
+						stateVector[0] = null;
 
-					} else if (activeStates.contains(State.State9)) {
-						activeStates.remove(State.State9);
+					} else if (isStateActive(State.State9)) {
+						stateVector[0] = null;
 
 					}
 
-					activeStates.add(State.State6);
+					nextStateIndex = 0;
+					stateVector[0] = State.State6;
 
 				} else {
 					if (occuredEvents.contains(defaultInterface
 							.getEventEvent7())) {
-						activeStates.remove(State.State8);
+						stateVector[0] = null;
 
-						activeStates.add(State.State9);
+						nextStateIndex = 0;
+						stateVector[0] = State.State9;
 
 					}
 
@@ -226,58 +242,62 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState9() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-			if (activeStates.contains(State.State3)) {
-				activeStates.remove(State.State3);
+			if (isStateActive(State.State3)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State6)) {
-				activeStates.remove(State.State6);
+			} else if (isStateActive(State.State6)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State8)) {
-				activeStates.remove(State.State8);
+			} else if (isStateActive(State.State8)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State9)) {
-				activeStates.remove(State.State9);
+			} else if (isStateActive(State.State9)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State5)) {
-				activeStates.remove(State.State5);
+			} else if (isStateActive(State.State5)) {
+				stateVector[0] = null;
 
 			}
 
-			activeStates.add(State.State1);
+			nextStateIndex = 0;
+			stateVector[0] = State.State1;
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventEvent4())) {
-				if (activeStates.contains(State.State6)) {
-					activeStates.remove(State.State6);
+				if (isStateActive(State.State6)) {
+					stateVector[0] = null;
 
-				} else if (activeStates.contains(State.State8)) {
-					activeStates.remove(State.State8);
+				} else if (isStateActive(State.State8)) {
+					stateVector[0] = null;
 
-				} else if (activeStates.contains(State.State9)) {
-					activeStates.remove(State.State9);
+				} else if (isStateActive(State.State9)) {
+					stateVector[0] = null;
 
 				}
 
-				activeStates.add(State.State5);
+				nextStateIndex = 0;
+				stateVector[0] = State.State5;
 
 			} else {
 				if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
-					if (activeStates.contains(State.State8)) {
-						activeStates.remove(State.State8);
+					if (isStateActive(State.State8)) {
+						stateVector[0] = null;
 
-					} else if (activeStates.contains(State.State9)) {
-						activeStates.remove(State.State9);
+					} else if (isStateActive(State.State9)) {
+						stateVector[0] = null;
 
 					}
 
-					activeStates.add(State.State6);
+					nextStateIndex = 0;
+					stateVector[0] = State.State6;
 
 				} else {
 					if (occuredEvents.contains(defaultInterface
 							.getEventEvent8())) {
-						activeStates.remove(State.State9);
+						stateVector[0] = null;
 
-						activeStates.add(State.State8);
+						nextStateIndex = 0;
+						stateVector[0] = State.State8;
 
 					}
 
@@ -289,24 +309,25 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState5() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-			if (activeStates.contains(State.State3)) {
-				activeStates.remove(State.State3);
+			if (isStateActive(State.State3)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State6)) {
-				activeStates.remove(State.State6);
+			} else if (isStateActive(State.State6)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State8)) {
-				activeStates.remove(State.State8);
+			} else if (isStateActive(State.State8)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State9)) {
-				activeStates.remove(State.State9);
+			} else if (isStateActive(State.State9)) {
+				stateVector[0] = null;
 
-			} else if (activeStates.contains(State.State5)) {
-				activeStates.remove(State.State5);
+			} else if (isStateActive(State.State5)) {
+				stateVector[0] = null;
 
 			}
 
-			activeStates.add(State.State1);
+			nextStateIndex = 0;
+			stateVector[0] = State.State1;
 
 		} else {
 
@@ -314,37 +335,40 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	}
 	public void runCycle() {
 		outEvents.clear();
-		for (State state : activeStates) {
-			switch (state) {
-				case State1 :
-					reactState1();
-					break;
-				case State2 :
-					reactState2();
-					break;
-				case State3 :
-					reactState3();
-					break;
-				case State4 :
-					reactState4();
-					break;
-				case State6 :
-					reactState6();
-					break;
-				case State7 :
-					reactState7();
-					break;
-				case State8 :
-					reactState8();
-					break;
-				case State9 :
-					reactState9();
-					break;
-				case State5 :
-					reactState5();
-					break;
-				default :
-					// no state found
+
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			if (stateVector[nextStateIndex] != null) {
+				switch (stateVector[nextStateIndex]) {
+					case State1 :
+						reactState1();
+						break;
+					case State2 :
+						reactState2();
+						break;
+					case State3 :
+						reactState3();
+						break;
+					case State4 :
+						reactState4();
+						break;
+					case State6 :
+						reactState6();
+						break;
+					case State7 :
+						reactState7();
+						break;
+					case State8 :
+						reactState8();
+						break;
+					case State9 :
+						reactState9();
+						break;
+					case State5 :
+						reactState5();
+						break;
+					default :
+						// no state found
+				}
 			}
 		}
 		occuredEvents.clear();

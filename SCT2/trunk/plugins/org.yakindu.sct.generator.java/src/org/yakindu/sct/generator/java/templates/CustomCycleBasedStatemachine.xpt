@@ -27,7 +27,7 @@ Contributors:
 
 «DEFINE ActionCode FOR StateSwitch-»
 	«FOREACH cases AS stateCase ITERATOR iter -»
-	«IF iter.counter1 > 1»else «ENDIF»if (activeStates.contains(State.«stateCase.state.getName()»)) {
+	«IF iter.counter1 > 1»else «ENDIF»if (isStateActive(State.«stateCase.state.getName()»)) {
 		«EXPAND ActionCode FOR stateCase.step»
 	}
 	«ENDFOREACH-»
@@ -93,12 +93,15 @@ else {
 
 «DEFINE ActionCode FOR EnterState-»
 	«getComment()-»
-	activeStates.add(State.«state.getName()»);
+	nextStateIndex = «this.state.stateVector.offset»;
+	stateVector[«this.state.stateVector.offset»] = State.«state.getName()»;
+	«REM»activeStates.add(State.«state.getName()»);«ENDREM»
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR ExitState-»
 	«getComment()-»
-	activeStates.remove(State.«state.getName()»);
+	stateVector[«this.state.stateVector.offset»] = null;
+	«REM»activeStates.remove(State.«state.getName()»);«ENDREM»
 «ENDDEFINE»
 
 «DEFINE ConditionMethodsImplement FOR ExecutionNode-»
@@ -170,9 +173,7 @@ package «getImplementationPackageName(entry)»;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.Set;
 import «entry.getBasePackageName()».Event;
 «IF isTimedStatemachine()-»
 import «entry.getBasePackageName()».TimeEvent;
@@ -227,7 +228,9 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	
 	«ENDFOREACH-»
 
-	private final Set<State> activeStates = EnumSet.noneOf(State.class);
+	private final State[] stateVector = new State[«stateVector.size»];
+	
+	private int nextStateIndex;
 	
 	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
 	
@@ -267,6 +270,15 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 		
 	}
 	
+	public boolean isStateActive(State state){
+		for (int i=0;i<stateVector.length;i++){
+			if (stateVector[i]==state) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	«IF isTimedStatemachine()-»
 	public void setTimerService(ITimerService timerService) {
 		this.timerService = timerService;
@@ -287,10 +299,6 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 		}
 	}
 	«ENDIF-»
-		
-	public Set<State> getActiveStates(){
-		return EnumSet.copyOf(activeStates);
-	}
 	
 	«FOREACH scopes.typeSelect(InterfaceScope) AS interface-»
 	public «interface.getInterfaceName()» get«interface.getInterfaceName()»() {
@@ -358,15 +366,18 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 		cycleStartTime = System.currentTimeMillis();
 		«ENDIF-»
 		outEvents.clear();
-		for (State state : activeStates) {
-			switch (state) {
-			«FOREACH this.states AS state-»
-    		case «state.getName()»:
-        		react«state.getName()»();
-        		break;
-			«ENDFOREACH-»
-			default:
-				// no state found
+		
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			if (stateVector[nextStateIndex] != null) {
+				switch (stateVector[nextStateIndex]) {
+				«FOREACH this.states AS state-»
+    			case «state.getName()»:
+        			react«state.getName()»();
+        			break;
+				«ENDFOREACH-»
+				default:
+					// no state found
+				}
 			}
 		}
 		occuredEvents.clear();
