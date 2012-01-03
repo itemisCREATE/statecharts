@@ -18,10 +18,10 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.databinding.IEMFValueProperty;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
@@ -54,6 +54,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.provider.SGraphItemProviderAdapterFactory;
 import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
@@ -72,174 +73,106 @@ import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
  */
 public class StatePropertySection extends AbstractEditorPropertySection {
 
+	private Label lblSubmachine;
+	private Control txtSpecification;
+	private Control txtName;
+	private ListViewer listViewer;
+	private Button btnUp;
+	private Button btnDown;
+	private EditPartSelectionListener editPartSelectionListener;
+	private EnableButtonListener enableButtonListener;
+	private ButtonSelectionListener upButtonListener;
+	private ButtonSelectionListener downButtonListener;
 	private UpdateLabelAdapter updateLabelAdapter;
-	private Label submachineLabel;
-	private Control textControl;
-	private Control nameText;
-	private ListViewer transitionViewer;
+
+	public StatePropertySection() {
+		editPartSelectionListener = new EditPartSelectionListener();
+		enableButtonListener = new EnableButtonListener();
+		upButtonListener = new ButtonSelectionListener(-1);
+		downButtonListener = new ButtonSelectionListener(1);
+	}
 
 	@Override
 	public void createControls(final Composite parent) {
-		createNameControl(parent);
-		createSpecificationControl(parent);
-		createSubmachineControl(parent);
-		createTransitionsControl(parent);
+		parent.setLayout(new FillLayout());
+		Composite leftColumn = getToolkit().createComposite(parent);
+		leftColumn.setLayout(createBodyLayout());
+		Composite rightColumn = getToolkit().createComposite(parent);
+		rightColumn.setLayout(createBodyLayout());
+		createNameControl(rightColumn);
+		createSpecificationControl(leftColumn);
+		createSubmachineControl(rightColumn);
+		createTransitionsControl(rightColumn);
 	}
 
 	private void createNameControl(final Composite parent) {
-		getToolkit().createLabel(parent, "Name: ");
-		nameText = getToolkit().createText(parent, "");
-		GridDataFactory.fillDefaults().applyTo(nameText);
+		Label lblName = getToolkit().createLabel(parent, "Name: ");
+		txtName = getToolkit().createText(parent, "");
+		GridDataFactory.fillDefaults().applyTo(lblName);
+		GridDataFactory.fillDefaults().applyTo(txtName);
 	}
 
 	private void createSpecificationControl(final Composite parent) {
 		Label nameLabel = getToolkit().createLabel(parent, "Specification: ");
-		GridDataFactory.fillDefaults().applyTo(nameLabel);
 		Injector injector = getInjector(SemanticTarget.StateSpecification);
 		if (injector != null) {
-			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER
+			txtSpecification = new StyledText(parent, SWT.MULTI | SWT.BORDER
 					| SWT.V_SCROLL);
 			StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(
 					injector, new CloningBasedFakeContextResourcesProvider(
 							Collections
 									.singletonList(getActiveEditorResource())));
-			xtextAdapter.adapt((StyledText) textControl);
+			xtextAdapter.adapt((StyledText) txtSpecification);
 		} else {
-			textControl = getToolkit().createText(parent, "", SWT.MULTI);
+			txtSpecification = getToolkit().createText(parent, "", SWT.MULTI);
 		}
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(textControl);
+		GridDataFactory.fillDefaults().applyTo(nameLabel);
+		GridDataFactory.fillDefaults().grab(true, true)
+				.applyTo(txtSpecification);
 	}
 
 	private void createSubmachineControl(final Composite parent) {
 		Label label = getToolkit().createLabel(parent, "Submachine:");
-		GridDataFactory.fillDefaults().applyTo(label);
-
 		Composite composite = new Composite(parent, SWT.NONE);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(composite);
 		composite.setBackground(ColorConstants.white);
 		GridLayout layout = new GridLayout(2, false);
 		layout.marginLeft = 0;
 		layout.marginRight = 0;
 		composite.setLayout(layout);
-		submachineLabel = new Label(composite, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(submachineLabel);
+		lblSubmachine = new Label(composite, SWT.BORDER);
 		Button openDialog = new Button(composite, SWT.FLAT);
-		GridDataFactory.fillDefaults().hint(SWT.DEFAULT, 10)
-				.applyTo(openDialog);
 		openDialog.setText("...");
 		openDialog.addListener(SWT.Selection, new OpenDialogHandler(parent));
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(composite);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(lblSubmachine);
+		GridDataFactory.fillDefaults().applyTo(label);
+		GridDataFactory.fillDefaults().hint(SWT.DEFAULT, 10)
+				.applyTo(openDialog);
 	}
 
 	private void createTransitionsControl(Composite parent) {
 		Label label = getToolkit().createLabel(parent, "Transition order:");
-		GridDataFactory.fillDefaults().applyTo(label);
-		Composite transitionOrderComposite = new Composite(parent, SWT.NONE);
-		transitionOrderComposite.setBackground(ColorConstants.white);
-		transitionOrderComposite.setLayout(new GridLayout(2, false));
-		transitionViewer = new ListViewer(transitionOrderComposite, SWT.SINGLE
-				| SWT.BORDER);
-		transitionViewer.setContentProvider(new ArrayContentProvider());
-		transitionViewer.setLabelProvider(new AdapterFactoryLabelProvider(
+		Composite composite = getToolkit().createComposite(parent);
+		composite.setLayout(new GridLayout(2, false));
+		listViewer = new ListViewer(composite, SWT.SINGLE | SWT.BORDER);
+		listViewer.setContentProvider(new ArrayContentProvider());
+		listViewer.setLabelProvider(new AdapterFactoryLabelProvider(
 				new SGraphItemProviderAdapterFactory()));
-		GridDataFactory.fillDefaults().applyTo(transitionViewer.getControl());
-		Composite buttonComposite = new Composite(transitionOrderComposite,
-				SWT.NONE);
+		Composite buttonComposite = getToolkit().createComposite(composite);
 		buttonComposite.setLayout(new FillLayout(SWT.VERTICAL));
-		GridDataFactory.fillDefaults().applyTo(buttonComposite);
 		buttonComposite.setBackground(ColorConstants.white);
-		final Button up = new Button(buttonComposite, SWT.PUSH);
-		up.setText("up");
-		final Button down = new Button(buttonComposite, SWT.PUSH);
-		down.setText("down");
+		btnUp = getToolkit().createButton(buttonComposite, "up", SWT.PUSH);
+		btnDown = getToolkit().createButton(buttonComposite, "down", SWT.PUSH);
+		listViewer.addSelectionChangedListener(enableButtonListener);
+		listViewer.addSelectionChangedListener(editPartSelectionListener);
+		btnUp.addSelectionListener(upButtonListener);
+		btnDown.addSelectionListener(downButtonListener);
+		GridDataFactory.fillDefaults().applyTo(listViewer.getControl());
+		GridDataFactory.fillDefaults().applyTo(buttonComposite);
 		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(transitionViewer.getControl());
-		GridDataFactory.fillDefaults().applyTo(transitionOrderComposite);
-		transitionViewer
-				.addSelectionChangedListener(new ISelectionChangedListener() {
-					public void selectionChanged(SelectionChangedEvent event) {
-						Object firstElement = ((StructuredSelection) event
-								.getSelection()).getFirstElement();
-						int indexOf = getState().getOutgoingTransitions()
-								.indexOf(firstElement);
-						if (indexOf == -1) {
-							up.setEnabled(false);
-							down.setEnabled(false);
-						} else if (indexOf == 0) {
-							up.setEnabled(false);
-							down.setEnabled(true);
-						} else if (indexOf == getState()
-								.getOutgoingTransitions().size() - 1) {
-							up.setEnabled(true);
-							down.setEnabled(false);
-						} else {
-							up.setEnabled(true);
-							down.setEnabled(true);
-						}
-					}
-				});
-		transitionViewer
-				.addSelectionChangedListener(new ISelectionChangedListener() {
-
-					public void selectionChanged(SelectionChangedEvent event) {
-						Object firstElement = ((StructuredSelection) event
-								.getSelection()).getFirstElement();
-
-						IEditorPart lastActiveEditor = ActiveEditorTracker
-								.getLastActiveEditor();
-						if (lastActiveEditor instanceof DiagramDocumentEditor) {
-							IGraphicalEditPart editPart = EditPartUtils
-									.findEditPartForSemanticElement(
-											((DiagramDocumentEditor) lastActiveEditor)
-													.getDiagramGraphicalViewer()
-													.getRootEditPart(),
-											(EObject) firstElement);
-							if (editPart != null) {
-								((DiagramDocumentEditor) lastActiveEditor)
-										.getDiagramGraphicalViewer().select(
-												editPart);
-								((DiagramDocumentEditor) lastActiveEditor)
-										.getDiagramGraphicalViewer().reveal(
-												editPart);
-							}
-						}
-					}
-				});
-		up.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				Object selection = ((StructuredSelection) transitionViewer
-						.getSelection()).getFirstElement();
-				RepositionEObjectCommand command = new RepositionEObjectCommand(
-						TransactionUtil.getEditingDomain(eObject),
-						"Reposition", getState().getOutgoingTransitions(),
-						(EObject) selection, -1);
-				try {
-					OperationHistoryFactory.getOperationHistory().execute(
-							command, new NullProgressMonitor(), null);
-				} catch (ExecutionException e1) {
-					e1.printStackTrace();
-				}
-				refreshTransitionViewerInput();
-
-			}
-		});
-		down.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				Object selection = ((StructuredSelection) transitionViewer
-						.getSelection()).getFirstElement();
-				RepositionEObjectCommand command = new RepositionEObjectCommand(
-						TransactionUtil.getEditingDomain(eObject),
-						"Reposition", getState().getOutgoingTransitions(),
-						(EObject) selection, 1);
-				try {
-					OperationHistoryFactory.getOperationHistory().execute(
-							command, new NullProgressMonitor(), null);
-				} catch (ExecutionException e1) {
-					e1.printStackTrace();
-				}
-				refreshTransitionViewerInput();
-			}
-		});
+				.applyTo(listViewer.getControl());
+		GridDataFactory.fillDefaults().applyTo(composite);
+		GridDataFactory.fillDefaults().applyTo(label);
 	}
 
 	protected State getState() {
@@ -259,9 +192,9 @@ public class StatePropertySection extends AbstractEditorPropertySection {
 	}
 
 	private void refreshTransitionViewerInput() {
-		ISelection selection = transitionViewer.getSelection();
-		transitionViewer.setInput(getState().getOutgoingTransitions());
-		transitionViewer.setSelection(selection);
+		ISelection selection = listViewer.getSelection();
+		listViewer.setInput(getState().getOutgoingTransitions());
+		listViewer.setSelection(selection);
 	}
 
 	private void bindSpecificationControl(EMFDataBindingContext context) {
@@ -269,7 +202,7 @@ public class StatePropertySection extends AbstractEditorPropertySection {
 				TransactionUtil.getEditingDomain(eObject),
 				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
 		ISWTObservableValue specificationTextProperty = WidgetProperties.text(
-				SWT.FocusOut).observe(textControl);
+				SWT.FocusOut).observe(txtSpecification);
 		context.bindValue(specificationTextProperty,
 				specificationProperty.observe(eObject));
 	}
@@ -279,16 +212,104 @@ public class StatePropertySection extends AbstractEditorPropertySection {
 				TransactionUtil.getEditingDomain(eObject),
 				SGraphPackage.Literals.NAMED_ELEMENT__NAME);
 		ISWTObservableValue nameTextProperty = WidgetProperties.text(
-				SWT.FocusOut).observe(nameText);
+				SWT.FocusOut).observe(txtName);
 		context.bindValue(nameTextProperty, nameProperty.observe(eObject));
 	}
 
 	private void updateLabel() {
 		String substatechartId = getState().getSubstatechartId();
 		if (substatechartId != null) {
-			submachineLabel.setText(substatechartId);
+			lblSubmachine.setText(substatechartId);
 		} else {
-			submachineLabel.setText("");
+			lblSubmachine.setText("");
+		}
+	}
+
+	@Override
+	public void dispose() {
+		listViewer.removeSelectionChangedListener(editPartSelectionListener);
+		listViewer.removeSelectionChangedListener(enableButtonListener);
+		if (!btnUp.isDisposed()) {
+			btnUp.removeSelectionListener(upButtonListener);
+			btnUp.dispose();
+		}
+		if (!btnDown.isDisposed()) {
+			btnDown.removeSelectionListener(downButtonListener);
+			btnDown.dispose();
+		}
+		super.dispose();
+	}
+
+	protected Transition getSelectedTransition() {
+		return (Transition) ((StructuredSelection) listViewer.getSelection())
+				.getFirstElement();
+	}
+
+	private final class ButtonSelectionListener extends SelectionAdapter {
+
+		private final int displacement;
+
+		public ButtonSelectionListener(int displacement) {
+			this.displacement = displacement;
+		}
+
+		public void widgetSelected(SelectionEvent e) {
+			RepositionEObjectCommand command = new RepositionEObjectCommand(
+					TransactionUtil.getEditingDomain(eObject), "Reposition",
+					getState().getOutgoingTransitions(),
+					getSelectedTransition(), displacement);
+			try {
+				OperationHistoryFactory.getOperationHistory().execute(command,
+						new NullProgressMonitor(), null);
+			} catch (ExecutionException e1) {
+				e1.printStackTrace();
+			}
+			refreshTransitionViewerInput();
+		}
+	}
+
+	private final class EnableButtonListener implements
+			ISelectionChangedListener {
+
+		public void selectionChanged(SelectionChangedEvent event) {
+			EList<Transition> outgoingTransitions = getState()
+					.getOutgoingTransitions();
+			int indexOf = outgoingTransitions.indexOf(getSelectedTransition());
+			if (indexOf == -1 || outgoingTransitions.size() <= 1) {
+				btnUp.setEnabled(false);
+				btnDown.setEnabled(false);
+			} else if (indexOf == 0) {
+				btnUp.setEnabled(false);
+				btnDown.setEnabled(true);
+			} else if (indexOf == outgoingTransitions.size() - 1) {
+				btnUp.setEnabled(true);
+				btnDown.setEnabled(false);
+			} else {
+				btnUp.setEnabled(true);
+				btnDown.setEnabled(true);
+			}
+		}
+	}
+
+	private final class EditPartSelectionListener implements
+			ISelectionChangedListener {
+		public void selectionChanged(SelectionChangedEvent event) {
+			IEditorPart lastActiveEditor = ActiveEditorTracker
+					.getLastActiveEditor();
+			if (lastActiveEditor instanceof DiagramDocumentEditor) {
+				IGraphicalEditPart editPart = EditPartUtils
+						.findEditPartForSemanticElement(
+								((DiagramDocumentEditor) lastActiveEditor)
+										.getDiagramGraphicalViewer()
+										.getRootEditPart(),
+								getSelectedTransition());
+				if (editPart != null) {
+					((DiagramDocumentEditor) lastActiveEditor)
+							.getDiagramGraphicalViewer().select(editPart);
+					((DiagramDocumentEditor) lastActiveEditor)
+							.getDiagramGraphicalViewer().reveal(editPart);
+				}
+			}
 		}
 	}
 
