@@ -15,18 +15,21 @@ import java.util.Collections;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.databinding.IEMFValueProperty;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.jface.databinding.swt.ISWTObservableValue;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
+import org.yakindu.sct.ui.editor.propertysheets.OrderElementControl.ISourceObjectCallback;
 
 import com.google.inject.Injector;
 
@@ -38,25 +41,41 @@ import de.itemis.xtext.utils.jface.viewers.context.CloningBasedFakeContextResour
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class StatechartPropertySection extends AbstractEditorPropertySection {
+public class StatechartPropertySection extends AbstractEditorPropertySection
+		implements ISourceObjectCallback {
 
 	private Control textControl;
-	private Text nameText;
+	private Text txtName;
+	private OrderElementControl orderElementControl;
 
 	public void createControls(Composite parent) {
-		createNameControl(parent);
-		createSpecificationControl(parent);
+		parent.setLayout(new FillLayout());
+		Composite leftColumn = getToolkit().createComposite(parent);
+		leftColumn.setLayout(createBodyLayout());
+		Composite rightColumn = getToolkit().createComposite(parent);
+		rightColumn.setLayout(createBodyLayout());
+		createSpecificationControl(leftColumn);
+		createNameControl(rightColumn);
+		createRegionsControl(rightColumn);
+	}
+
+	private void createRegionsControl(Composite rightColumn) {
+		Label label = getToolkit().createLabel(rightColumn, "Region Priority:");
+		GridDataFactory.fillDefaults().applyTo(label);
+		orderElementControl = new OrderElementControl(rightColumn,
+				SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS, this);
+		GridDataFactory.fillDefaults().span(2, 0).grab(true, false)
+				.applyTo(orderElementControl);
 	}
 
 	private void createNameControl(Composite parent) {
-		getToolkit().createLabel(parent, "Name: ");
-		nameText = getToolkit().createText(parent, "");
-		GridDataFactory.fillDefaults().applyTo(nameText);
+		Label lblName = getToolkit().createLabel(parent, "Statechart Name: ");
+		txtName = getToolkit().createText(parent, "");
+		GridDataFactory.fillDefaults().applyTo(txtName);
+		GridDataFactory.fillDefaults().applyTo(lblName);
 	}
 
 	private void createSpecificationControl(Composite parent) {
-		Label nameLabel = getToolkit().createLabel(parent, "Specification: ");
-		GridDataFactory.fillDefaults().applyTo(nameLabel);
 		Injector injector = getInjector(SemanticTarget.StatechartSpecification);
 		if (injector != null) {
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER
@@ -76,6 +95,7 @@ public class StatechartPropertySection extends AbstractEditorPropertySection {
 	public void bindModel(EMFDataBindingContext context) {
 		bindNameControl(context);
 		bindSpecificationControl(context);
+		orderElementControl.refreshInput();
 	}
 
 	private void bindSpecificationControl(EMFDataBindingContext context) {
@@ -92,8 +112,19 @@ public class StatechartPropertySection extends AbstractEditorPropertySection {
 				TransactionUtil.getEditingDomain(eObject),
 				SGraphPackage.Literals.NAMED_ELEMENT__NAME);
 		ISWTObservableValue observe = WidgetProperties.text(SWT.FocusOut)
-				.observe(nameText);
+				.observe(txtName);
 		context.bindValue(observe, property.observe(eObject));
+	}
+
+	@Override
+	public EObject getEObject() {
+		return super.getEObject();
+	}
+
+	@Override
+	public void dispose() {
+		orderElementControl.dispose();
+		super.dispose();
 	}
 
 }

@@ -23,7 +23,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Label;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 
@@ -43,8 +42,6 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 
 	@Override
 	public void createControls(Composite parent) {
-		Label nameLabel = getToolkit().createLabel(parent, "Specification: ");
-		GridDataFactory.fillDefaults().applyTo(nameLabel);
 		Injector injector = getInjector(SemanticTarget.TransitionSpecification);
 		if (injector != null) {
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER

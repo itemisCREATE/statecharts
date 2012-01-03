@@ -82,7 +82,7 @@ public abstract class AbstractEditorPropertySection extends
 	}
 
 	protected Layout createBodyLayout() {
-		return new GridLayout(2, false);
+		return new GridLayout(1, false);
 	}
 
 	public FormToolkit getToolkit() {
