@@ -169,8 +169,6 @@
 		<module>../de.itemis.xtext.utils.jface</module>
 		<module>../de.itemis.xtext.utils.jface-feature</module>
 		<module>../de.itemis.xtext.utils.jface.source-feature</module>
-		<module>../de.itemis.gmf.runtime.commons</module>
-		<module>../de.itemis.gmf.runtime.commons-feature</module>
 	</modules>
 
 </project>
