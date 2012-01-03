@@ -784,6 +784,15 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getStateSwitch_StateConfigurationIdx() {
+		return (EAttribute)stateSwitchEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getStateCase() {
 		return stateCaseEClass;
 	}
@@ -1058,6 +1067,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		stateSwitchEClass = createEClass(STATE_SWITCH);
 		createEReference(stateSwitchEClass, STATE_SWITCH__CASES);
+		createEAttribute(stateSwitchEClass, STATE_SWITCH__STATE_CONFIGURATION_IDX);
 
 		stateCaseEClass = createEClass(STATE_CASE);
 		createEReference(stateCaseEClass, STATE_CASE__STATE);
@@ -1217,6 +1227,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		initEClass(stateSwitchEClass, StateSwitch.class, "StateSwitch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStateSwitch_Cases(), this.getStateCase(), null, "cases", null, 0, -1, StateSwitch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStateSwitch_StateConfigurationIdx(), ecorePackage.getEInt(), "stateConfigurationIdx", "0", 0, 1, StateSwitch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stateCaseEClass, StateCase.class, "StateCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStateCase_State(), this.getExecutionState(), null, "state", null, 0, 1, StateCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

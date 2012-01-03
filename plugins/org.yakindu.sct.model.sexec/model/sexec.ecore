@@ -111,6 +111,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="StateSwitch" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"
         eType="#//StateCase" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stateConfigurationIdx"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StateCase">
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>

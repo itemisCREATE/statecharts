@@ -502,6 +502,8 @@ public class FlowOptimizer {
       _copy.setName(_name);
       String _comment = _switch.getComment();
       _copy.setComment(_comment);
+      int _stateConfigurationIdx = _switch.getStateConfigurationIdx();
+      _copy.setStateConfigurationIdx(_stateConfigurationIdx);
       EList<StateCase> _cases = _copy.getCases();
       EList<StateCase> _cases_1 = _switch.getCases();
       final Function1<StateCase,StateCase> _function = new Function1<StateCase,StateCase>() {

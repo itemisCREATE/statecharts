@@ -1600,6 +1600,21 @@ public class ModelSequencer {
     }
   }
   
+  protected int _defineStateVectors(final FinalState s, final int offset) {
+    {
+      ExecutionState _create = this.factory.create(s);
+      final ExecutionState es = _create;
+      SexecFactory _sexecFactory = this.sexecFactory();
+      StateVector _createStateVector = _sexecFactory.createStateVector();
+      es.setStateVector(_createStateVector);
+      StateVector _stateVector = es.getStateVector();
+      _stateVector.setOffset(offset);
+      StateVector _stateVector_1 = es.getStateVector();
+      _stateVector_1.setSize(1);
+      return 1;
+    }
+  }
+  
   public void defineStateEnterSequences(final ExecutionFlow flow, final Statechart sc) {
     EList<Region> _regions = sc.getRegions();
     for (Region r : _regions) {
@@ -1779,63 +1794,103 @@ public class ModelSequencer {
           ArrayList<RegularState> _arrayList = new ArrayList<RegularState>();
           List<RegularState> _collectLeafStates = this.collectLeafStates(state, _arrayList);
           final List<RegularState> leafStates = _collectLeafStates;
-          SexecFactory _sexecFactory_1 = this.sexecFactory();
-          StateSwitch _createStateSwitch = _sexecFactory_1.createStateSwitch();
-          final StateSwitch sSwitch = _createStateSwitch;
-          for (RegularState s : leafStates) {
+          StateVector _stateVector = execState.getStateVector();
+          final StateVector sVector = _stateVector;
+          int _offset = sVector.getOffset();
+          int _offset_1 = sVector.getOffset();
+          int _size = sVector.getSize();
+          int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)_offset_1), ((Integer)_size));
+          int _operator_minus = IntegerExtensions.operator_minus(((Integer)_operator_plus_1), ((Integer)1));
+          Iterable<Integer> _operator_upTo = IntegerExtensions.operator_upTo(((Integer)_offset), ((Integer)_operator_minus));
+          for (Integer i : _operator_upTo) {
             {
-              SexecFactory _sexecFactory_2 = this.sexecFactory();
-              Sequence _createSequence_1 = _sexecFactory_2.createSequence();
-              final Sequence caseSeq = _createSequence_1;
-              EList<Step> _steps_1 = caseSeq.getSteps();
-              ExecutionState _create_1 = this.factory.create(s);
-              Sequence _exitSequence = _create_1.getExitSequence();
-              Call _newCall = this.factory.newCall(_exitSequence);
-              CollectionExtensions.<Call>operator_add(_steps_1, _newCall);
-              List<RegularState> _parentStates = this.parentStates(s);
-              final List<RegularState> exitStates = _parentStates;
-              List<RegularState> _parentStates_1 = this.parentStates(state);
-              exitStates.removeAll(_parentStates_1);
-              exitStates.remove(s);
-              final Function2<Sequence,RegularState,Sequence> _function_1 = new Function2<Sequence,RegularState,Sequence>() {
-                  public Sequence apply(final Sequence cs , final RegularState exitState) {
-                    Sequence _xblockexpression_1 = null;
-                    {
-                      ExecutionState _create_2 = ModelSequencer.this.factory.create(exitState);
-                      Step _exitAction = _create_2.getExitAction();
-                      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_exitAction, null);
-                      if (_operator_notEquals) {
-                        EList<Step> _steps_2 = cs.getSteps();
-                        ExecutionState _create_3 = ModelSequencer.this.factory.create(exitState);
-                        Step _exitAction_1 = _create_3.getExitAction();
-                        Call _newCall_1 = ModelSequencer.this.factory.newCall(_exitAction_1);
-                        _steps_2.add(_newCall_1);
-                      }
-                      if (ModelSequencer.this._addTraceSteps) {
-                        EList<Step> _steps_3 = cs.getSteps();
-                        ExecutionState _create_4 = ModelSequencer.this.factory.create(exitState);
-                        TraceStateExited _newTraceStateExited = ModelSequencer.this.newTraceStateExited(_create_4);
-                        _steps_3.add(_newTraceStateExited);
-                      }
-                      _xblockexpression_1 = (cs);
+              final Integer idx = i;
+              SexecFactory _sexecFactory_1 = this.sexecFactory();
+              StateSwitch _createStateSwitch = _sexecFactory_1.createStateSwitch();
+              StateSwitch sSwitch = _createStateSwitch;
+              sSwitch.setStateConfigurationIdx(i);
+              int _stateConfigurationIdx = sSwitch.getStateConfigurationIdx();
+              String _operator_plus_2 = StringExtensions.operator_plus("Handle exit of all possible states on position ", ((Integer)_stateConfigurationIdx));
+              String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, "...");
+              sSwitch.setComment(_operator_plus_3);
+              final Function1<RegularState,Boolean> _function_1 = new Function1<RegularState,Boolean>() {
+                  public Boolean apply(final RegularState rs) {
+                    boolean _operator_and = false;
+                    ExecutionState _create_1 = ModelSequencer.this.factory.create(rs);
+                    StateVector _stateVector_1 = _create_1.getStateVector();
+                    int _size_1 = _stateVector_1.getSize();
+                    boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size_1), ((Integer)1));
+                    if (!_operator_equals) {
+                      _operator_and = false;
+                    } else {
+                      ExecutionState _create_2 = ModelSequencer.this.factory.create(rs);
+                      StateVector _stateVector_2 = _create_2.getStateVector();
+                      int _offset_2 = _stateVector_2.getOffset();
+                      boolean _operator_equals_1 = ObjectExtensions.operator_equals(((Integer)_offset_2), idx);
+                      _operator_and = BooleanExtensions.operator_and(_operator_equals, _operator_equals_1);
                     }
-                    return _xblockexpression_1;
+                    return ((Boolean)_operator_and);
                   }
                 };
-              IterableExtensions.<RegularState, Sequence>fold(exitStates, caseSeq, _function_1);
-              ExecutionState _create_5 = this.factory.create(s);
-              Sequence _exitSequence_1 = _create_5.getExitSequence();
-              boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_exitSequence_1, null);
-              if (_operator_notEquals_1) {
-                EList<StateCase> _cases = sSwitch.getCases();
-                ExecutionState _create_6 = this.factory.create(s);
-                StateCase _newCase = this.newCase(_create_6, caseSeq);
-                _cases.add(_newCase);
+              Iterable<RegularState> _filter = IterableExtensions.<RegularState>filter(leafStates, _function_1);
+              List<RegularState> _list = IterableExtensions.<RegularState>toList(_filter);
+              final List<RegularState> posStates = _list;
+              for (RegularState s : posStates) {
+                {
+                  SexecFactory _sexecFactory_2 = this.sexecFactory();
+                  Sequence _createSequence_1 = _sexecFactory_2.createSequence();
+                  final Sequence caseSeq = _createSequence_1;
+                  EList<Step> _steps_1 = caseSeq.getSteps();
+                  ExecutionState _create_3 = this.factory.create(s);
+                  Sequence _exitSequence = _create_3.getExitSequence();
+                  Call _newCall = this.factory.newCall(_exitSequence);
+                  CollectionExtensions.<Call>operator_add(_steps_1, _newCall);
+                  List<RegularState> _parentStates = this.parentStates(s);
+                  final List<RegularState> exitStates = _parentStates;
+                  List<RegularState> _parentStates_1 = this.parentStates(state);
+                  exitStates.removeAll(_parentStates_1);
+                  exitStates.remove(s);
+                  final Function2<Sequence,RegularState,Sequence> _function_2 = new Function2<Sequence,RegularState,Sequence>() {
+                      public Sequence apply(final Sequence cs , final RegularState exitState) {
+                        Sequence _xblockexpression_1 = null;
+                        {
+                          ExecutionState _create_4 = ModelSequencer.this.factory.create(exitState);
+                          Step _exitAction = _create_4.getExitAction();
+                          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_exitAction, null);
+                          if (_operator_notEquals) {
+                            EList<Step> _steps_2 = cs.getSteps();
+                            ExecutionState _create_5 = ModelSequencer.this.factory.create(exitState);
+                            Step _exitAction_1 = _create_5.getExitAction();
+                            Call _newCall_1 = ModelSequencer.this.factory.newCall(_exitAction_1);
+                            _steps_2.add(_newCall_1);
+                          }
+                          if (ModelSequencer.this._addTraceSteps) {
+                            EList<Step> _steps_3 = cs.getSteps();
+                            ExecutionState _create_6 = ModelSequencer.this.factory.create(exitState);
+                            TraceStateExited _newTraceStateExited = ModelSequencer.this.newTraceStateExited(_create_6);
+                            _steps_3.add(_newTraceStateExited);
+                          }
+                          _xblockexpression_1 = (cs);
+                        }
+                        return _xblockexpression_1;
+                      }
+                    };
+                  IterableExtensions.<RegularState, Sequence>fold(exitStates, caseSeq, _function_2);
+                  ExecutionState _create_7 = this.factory.create(s);
+                  Sequence _exitSequence_1 = _create_7.getExitSequence();
+                  boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_exitSequence_1, null);
+                  if (_operator_notEquals_1) {
+                    EList<StateCase> _cases = sSwitch.getCases();
+                    ExecutionState _create_8 = this.factory.create(s);
+                    StateCase _newCase = this.newCase(_create_8, caseSeq);
+                    _cases.add(_newCase);
+                  }
+                }
               }
+              EList<Step> _steps_4 = seq.getSteps();
+              _steps_4.add(sSwitch);
             }
           }
-          EList<Step> _steps_4 = seq.getSteps();
-          _steps_4.add(sSwitch);
         }
       }
       Step _exitAction_2 = execState.getExitAction();
@@ -1874,6 +1929,18 @@ public class ModelSequencer {
               }
             }
           }
+        }
+      }
+      return leafStates;
+    }
+  }
+  
+  public List<RegularState> collectLeafStates(final Region region, final List<RegularState> leafStates) {
+    {
+      EList<Vertex> _vertices = region.getVertices();
+      for (Vertex v : _vertices) {
+        if ((v instanceof org.yakindu.sct.model.sgraph.RegularState)) {
+          this.collectLeafStates(((RegularState) v), leafStates);
         }
       }
       return leafStates;
@@ -2285,7 +2352,10 @@ public class ModelSequencer {
   }
   
   public int defineStateVectors(final Vertex s, final Integer offset) {
-    if ((s instanceof State)
+    if ((s instanceof FinalState)
+         && (offset instanceof Integer)) {
+      return _defineStateVectors((FinalState)s, (Integer)offset);
+    } else if ((s instanceof State)
          && (offset instanceof Integer)) {
       return _defineStateVectors((State)s, (Integer)offset);
     } else if ((s instanceof Vertex)

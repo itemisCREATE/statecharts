@@ -8,10 +8,12 @@ package org.yakindu.sct.model.sexec.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.sct.model.sexec.SexecPackage;
@@ -26,6 +28,7 @@ import org.yakindu.sct.model.sexec.StateSwitch;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.StateSwitchImpl#getCases <em>Cases</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.StateSwitchImpl#getStateConfigurationIdx <em>State Configuration Idx</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,6 +44,25 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 	 * @ordered
 	 */
 	protected EList<StateCase> cases;
+
+	/**
+	 * The default value of the '{@link #getStateConfigurationIdx() <em>State Configuration Idx</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStateConfigurationIdx()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int STATE_CONFIGURATION_IDX_EDEFAULT = 0;
+	/**
+	 * The cached value of the '{@link #getStateConfigurationIdx() <em>State Configuration Idx</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStateConfigurationIdx()
+	 * @generated
+	 * @ordered
+	 */
+	protected int stateConfigurationIdx = STATE_CONFIGURATION_IDX_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -78,6 +100,27 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getStateConfigurationIdx() {
+		return stateConfigurationIdx;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStateConfigurationIdx(int newStateConfigurationIdx) {
+		int oldStateConfigurationIdx = stateConfigurationIdx;
+		stateConfigurationIdx = newStateConfigurationIdx;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.STATE_SWITCH__STATE_CONFIGURATION_IDX, oldStateConfigurationIdx, stateConfigurationIdx));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -97,6 +140,8 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 		switch (featureID) {
 			case SexecPackage.STATE_SWITCH__CASES:
 				return getCases();
+			case SexecPackage.STATE_SWITCH__STATE_CONFIGURATION_IDX:
+				return getStateConfigurationIdx();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -114,6 +159,9 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 				getCases().clear();
 				getCases().addAll((Collection<? extends StateCase>)newValue);
 				return;
+			case SexecPackage.STATE_SWITCH__STATE_CONFIGURATION_IDX:
+				setStateConfigurationIdx((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -129,6 +177,9 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 			case SexecPackage.STATE_SWITCH__CASES:
 				getCases().clear();
 				return;
+			case SexecPackage.STATE_SWITCH__STATE_CONFIGURATION_IDX:
+				setStateConfigurationIdx(STATE_CONFIGURATION_IDX_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -143,8 +194,26 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 		switch (featureID) {
 			case SexecPackage.STATE_SWITCH__CASES:
 				return cases != null && !cases.isEmpty();
+			case SexecPackage.STATE_SWITCH__STATE_CONFIGURATION_IDX:
+				return stateConfigurationIdx != STATE_CONFIGURATION_IDX_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (stateConfigurationIdx: ");
+		result.append(stateConfigurationIdx);
+		result.append(')');
+		return result.toString();
 	}
 
 } //StateSwitchImpl

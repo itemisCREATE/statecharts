@@ -1289,13 +1289,22 @@ public interface SexecPackage extends EPackage {
 	int STATE_SWITCH__CASES = STEP_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>State Configuration Idx</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_SWITCH__STATE_CONFIGURATION_IDX = STEP_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>State Switch</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_SWITCH_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
+	int STATE_SWITCH_FEATURE_COUNT = STEP_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StateCaseImpl <em>State Case</em>}' class.
@@ -2169,6 +2178,17 @@ public interface SexecPackage extends EPackage {
 	EReference getStateSwitch_Cases();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sexec.StateSwitch#getStateConfigurationIdx <em>State Configuration Idx</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>State Configuration Idx</em>'.
+	 * @see org.yakindu.sct.model.sexec.StateSwitch#getStateConfigurationIdx()
+	 * @see #getStateSwitch()
+	 * @generated
+	 */
+	EAttribute getStateSwitch_StateConfigurationIdx();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.StateCase <em>State Case</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2849,6 +2869,14 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STATE_SWITCH__CASES = eINSTANCE.getStateSwitch_Cases();
+
+		/**
+		 * The meta object literal for the '<em><b>State Configuration Idx</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE_SWITCH__STATE_CONFIGURATION_IDX = eINSTANCE.getStateSwitch_StateConfigurationIdx();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.StateCaseImpl <em>State Case</em>}' class.

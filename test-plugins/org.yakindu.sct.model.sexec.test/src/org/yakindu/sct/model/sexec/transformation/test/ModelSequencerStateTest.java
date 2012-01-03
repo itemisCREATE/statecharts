@@ -343,17 +343,20 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		
 		assertNotNull(_s1.getExitAction());
 		assertNotNull(_s1.getExitSequence());
-		assertEquals(2, _s1.getExitSequence().getSteps().size());
+		assertEquals(3, _s1.getExitSequence().getSteps().size());
 		
 		Step _switch =  _s1.getExitSequence().getSteps().get(0);
-		assertStateSwitch(_switch, _s2, _s3, _s4, _s5, _s6);
+		assertStateSwitch(_switch, _s2, _s3);
 		assertCall( assertedSequence(assertedStateCase(_switch, _s2).getStep()), 0, _s2.getExitSequence());
 		assertCall( assertedSequence(assertedStateCase(_switch, _s3).getStep()), 0, _s3.getExitSequence());
+
+		_switch =  _s1.getExitSequence().getSteps().get(1);
+		assertStateSwitch(_switch, _s4, _s5, _s6);
 		assertCall( assertedSequence(assertedStateCase(_switch, _s4).getStep()), 0, _s4.getExitSequence());
 		assertCall( assertedSequence(assertedStateCase(_switch, _s5).getStep()), 0, _s5.getExitSequence());
 		assertCall( assertedSequence(assertedStateCase(_switch, _s6).getStep()), 0, _s6.getExitSequence());
 
-		assertCall(_s1.getExitSequence(), 1, _s1.getExitAction());
+		assertCall(_s1.getExitSequence(), 2, _s1.getExitAction());
 	}
 
 

@@ -789,6 +789,17 @@ class ModelSequencer {
 		return maxOrthogonality
 	}
 
+	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of a state */
+	def dispatch int defineStateVectors(FinalState s, int offset) { 
+		
+		val es = s.create
+		es.stateVector = sexecFactory.createStateVector
+		es.stateVector.offset = offset;
+		es.stateVector.size = 1			
+		
+		return 1
+	}
+
 
 
 	/************** Calculating execution sequences **************/
@@ -905,48 +916,48 @@ class ModelSequencer {
 
 			// first enforce calculation of all child exit sequences
 			state.regions.forEach( r | { r.defineStateExitSequence null })
-			
+
 			// collect leaf states
 			val List<RegularState> leafStates = state.collectLeafStates(new ArrayList<RegularState>())
+			val sVector = execState.stateVector
+	
+			for ( i: sVector.offset .. sVector.offset + sVector.size - 1 ) {
+						
+				val idx = i
+				// create a state switch
+				var StateSwitch sSwitch = sexecFactory.createStateSwitch
+				sSwitch.stateConfigurationIdx = i
+				sSwitch.comment = "Handle exit of all possible states on position " + sSwitch.stateConfigurationIdx + "..."
+								
+				val List<RegularState> posStates = leafStates.filter( rs | rs.create.stateVector.size == 1 && rs.create.stateVector.offset == idx).toList					
+				
+				// create a case for each leaf state				
+				for ( s : posStates ) {
+	
+					val caseSeq = sexecFactory.createSequence
+					caseSeq.steps += s.create.exitSequence.newCall
 
-			// create a state switch
-			val StateSwitch sSwitch = sexecFactory.createStateSwitch
-							
-			// create a case for each leaf state				
-			for ( s : leafStates ) {
+	
+					val exitStates = s.parentStates
+					exitStates.removeAll(state.parentStates)
+					exitStates.remove(s)
+					
+					// include exitAction calls up to the direct child level.
+					exitStates.fold(caseSeq , [ cs, exitState | {
+						 if (exitState.create.exitAction != null) cs.steps.add(exitState.create.exitAction.newCall)
+						 if ( _addTraceSteps ) cs.steps.add(exitState.create.newTraceStateExited)
+						 cs
+					}]) 
+					
+					if (s.create.exitSequence != null) sSwitch.cases.add(s.create.newCase(caseSeq))
+					
+				}
 
-				val caseSeq = sexecFactory.createSequence
-				
-				caseSeq.steps += s.create.exitSequence.newCall
-				
-				val exitStates = s.parentStates
-				exitStates.removeAll(state.parentStates)
-				exitStates.remove(s)
-				
-				// include exitAction calls up to the direct child level.
-				exitStates.fold(caseSeq , [ cs, exitState | {
-					 if (exitState.create.exitAction != null) cs.steps.add(exitState.create.exitAction.newCall)
-					 if ( _addTraceSteps ) cs.steps.add(exitState.create.newTraceStateExited)
-					 cs
-				}]) 
-				
-				if (s.create.exitSequence != null) sSwitch.cases.add(s.create.newCase(caseSeq))
+				seq.steps.add(sSwitch);
 
 			}
 			
-			seq.steps.add(sSwitch);
 			
-	
-//			for ( r : state.subRegions ) {
-//				defineStateExitSequence(r)
-//				
-//				val StateSwitch sSwitch = sexecFactory.createStateSwitch
-//								
-//				for ( s : r.states ) {
-//					if (s.create.exitSequence != null) sSwitch.cases.add(s.create.newCase(s.create.exitSequence.newCall))
-//				}
-//				seq.steps.add(sSwitch);
-//			} 
 		}
 
 		if (execState.exitAction != null) seq.steps.add(execState.exitAction.newCall)
@@ -969,6 +980,16 @@ class ModelSequencer {
 				}
 			}
 		}
+		return leafStates	
+	}
+	
+	
+		
+	def List<RegularState> collectLeafStates(Region region, List<RegularState> leafStates) {
+		for ( v : region.vertices ) {
+			if (v instanceof RegularState) collectLeafStates(v as RegularState, leafStates)
+		}
+
 		return leafStates	
 	}
 	
