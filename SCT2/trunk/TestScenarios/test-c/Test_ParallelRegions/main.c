@@ -313,11 +313,11 @@ int test_state1_transition_to_State4()
 	/*@Desc: run an explicit cycle */
 	test_ParallelRegionsStatemachine_runCycle(&machine);
 
-	/*@Desc: check the initial state at position 0 to be State3 */
+	/*@Desc: check the initial state at position 0 to be State5 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
 	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State5") == 0);
 
-	/*@Desc: check the initial state at position 1 to be no State */
+	/*@Desc: check the initial state at position 1 to be State9 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)));
 	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)), "State9") == 0);
 
@@ -363,15 +363,15 @@ int test_parallel_event3_handling_state5_state7()
 	/*@Desc: run an explicit cycle */
 	test_ParallelRegionsStatemachine_runCycle(&machine);
 
-	/*@Desc: check the initial state at position 0 to be State3 */
+	/*@Desc: check the initial state at position 0 to be State6 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
 	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State6") == 0);
 
-	/*@Desc: check the initial state at position 1 to be no State */
+	/*@Desc: check the initial state at position 1 to be State9 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)));
 	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)), "State9") == 0);
 
-	/*@Desc: check the initial state at position 2 to be State7 */
+	/*@Desc: check the initial state at position 2 to be State8 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)));
 	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)), "State8") == 0);
 
@@ -408,7 +408,7 @@ int test_preference_event3_leaving_state3_and_state7()
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
 	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State3") == 0);
 
-	/*@Desc: check the initial state at position 0 to be State3 */
+	/*@Desc: check the initial state at position 0 to be State7 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)));
 	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)), "State7") == 0);
 
