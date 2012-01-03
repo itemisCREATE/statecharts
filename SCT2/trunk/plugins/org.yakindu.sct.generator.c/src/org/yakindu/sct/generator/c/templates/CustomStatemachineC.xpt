@@ -23,20 +23,19 @@ Templates for the main statechart c file.
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR StateSwitch»
-«IF this.comment != null»
-/* «this.comment» */
-«ENDIF»
-	switch(((StatemachineBase*)«statemachineHandleName()»)->state[0/* TODO: must be set correctly */]) {
-«FOREACH this.cases AS caseid»
-  case _«caseid.state.simpleName» : {
-  «EXPAND ActionCode FOR caseid.step»
-  break;
-  }
+«IF this.comment != null -»
+	/* «this.comment» */
+«ENDIF -»
+	switch(((StatemachineBase*)«statemachineHandleName()»)->state[ «this.stateConfigurationIdx» ]) {
+«FOREACH this.cases AS caseid -»
+		case _«caseid.state.simpleName» : {
+«EXPAND ActionCode FOR caseid.step-»
+			break;
+		}
 «ENDFOREACH»
-  default:
-    break;
+		default: break;
 	}
-«ENDDEFINE»
+«ENDDEFINE »
 
 «DEFINE ActionCode FOR ScheduleTimeEvent»
 «IF this.comment != null»
