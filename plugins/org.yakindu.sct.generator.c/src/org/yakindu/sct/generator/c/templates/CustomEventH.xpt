@@ -43,7 +43,7 @@ typedef enum {
 typedef struct { 
   _Event baseEvent;
   «IF !((EventDefinition)ev).type.isVoid() -»
-  «eventTypeToString(((EventDefinition)ev).type)» value;    
+  «asCType(((EventDefinition)ev).type)» value;    
   «ENDIF -»
 } «((EventDefinition)ev).getEventName()»;
 «ENDFOREACH -»

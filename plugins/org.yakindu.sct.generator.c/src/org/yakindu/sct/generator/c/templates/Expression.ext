@@ -142,17 +142,6 @@ String getOperator(RelationalOperator operator) :
 	  default : ""
 	};
 
-String eventTypeToString(Type type) : 
-  switch (type.name) {
-  case null : "void"
-  case "void" : "void"
-  case "real" : "real"
-  case "integer" : "integer"
-  case "boolean" : "boolean"
-  case "string"  : "string"
-  default : "unknownType"
- };
-
 Set[EventDefinition] getInEvents(Scope interface) : 
 	{};
 
