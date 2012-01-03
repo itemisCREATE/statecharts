@@ -163,6 +163,7 @@
 
 	<modules>
 		<module>../de.itemis.xtext.utils.target</module>
+		<module>../de.itemis.xtext.utils.repository</module>
 		<module>../de.itemis.xtext.utils.gmf</module>
 		<module>../de.itemis.xtext.utils.gmf-feature</module>
 		<module>../de.itemis.xtext.utils.gmf.source-feature</module>

@@ -1,0 +1,43 @@
+To execute this build as a Hudson build job, you have to configure the following:
+
+Source-Code-Management:
++ SVN
+	TODO not noted here because of build changes
+ 
+Build:
++ Execute Shell
+    Command 
+    	if [ -d "build" ]; then
+		   rm -fr build
+		fi
+		mkdir build
+		cp -R releng2 build/
+		cp -R XtextUtils_repository/plugins/* build/
+		cp -R XtextUtils_repository/features/* build/
+
+
++ Invoke Maven 3
+	Goals
+		clean install
+	POM File
+		../build/de.itemis.xtext.utils.releng/pom.xml
+	Profiles
+	JVM Options
+
++ Execute Shell
+	Command
+		if [ -d "update-site" ]; then
+			rm -fr update-site
+		fi
+		mkdir update-site
+		cp -R build/de.itemis.xtext.utils.repository/target/repository/* update-site/
+		
+	
+Post-Build-Actions:
++ Publish JUnit Test Results
+	Testreports in XML format
+		**/target/surefire-reports/*.xml
++ Archive the artifacs
+	Files to archive
+		update-site/**
+		
