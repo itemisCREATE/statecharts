@@ -2,7 +2,14 @@ To execute this build as a Hudson build job, you have to configure the following
 
 Source-Code-Management:
 + SVN
-	TODO not noted here because of build changes
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.xtext.utils/releng
+	Location: releng
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.xtext.utils/plugins
+	Location: XtextUtils_repository/plugins
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.xtext.utils/features
+	Location: XtextUtils_repository/features
  
 Build:
 + Execute Shell
@@ -11,7 +18,7 @@ Build:
 		   rm -fr build
 		fi
 		mkdir build
-		cp -R releng2 build/
+		cp -R releng build/
 		cp -R XtextUtils_repository/plugins/* build/
 		cp -R XtextUtils_repository/features/* build/
 
