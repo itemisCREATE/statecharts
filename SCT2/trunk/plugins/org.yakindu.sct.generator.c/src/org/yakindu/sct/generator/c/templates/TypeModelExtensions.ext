@@ -11,3 +11,17 @@ import types;
 
 boolean isVoid(Type this) :
 	name == null || name == "void";
+	
+	
+String asCType(Type type) : 
+  switch (type.name) {
+  case null : "void"
+  case "void" : "void"
+  case "real" : "real"
+  case "integer" : "integer"
+  case "boolean" : "boolean"
+  case "string"  : "string"
+  default : "unknownType"
+ };
+
+	

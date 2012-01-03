@@ -51,7 +51,7 @@ typedef struct {
 #endif // INTERFACE_LISTENER
 
 «FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
-	«variable.type» «variable.name»;
+	«variable.type.asCType()» «variable.name»;
 «ENDFOREACH» 
 	
 } «interfaceClassName(interface)»;
@@ -61,9 +61,9 @@ void «interface.interfaceName()»_set_interface_singleton(«interfaceClassName(int
 «ENDIF»
 
 «FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
-extern «eventTypeToString(variable.type)» «interface.interfaceName()»_get_«variable.name»(«handleInterfaceAddition(interface, genEntry)»);
+extern «asCType(variable.type)» «interface.interfaceName()»_get_«variable.name»(«handleInterfaceAddition(interface, genEntry)»);
 «IF variable.readonly == false -»
-extern void «interface.interfaceName()»_set_«variable.name»(«handleInterfaceAdditionComma(interface, genEntry)»«eventTypeToString(variable.type)» value);
+extern void «interface.interfaceName()»_set_«variable.name»(«handleInterfaceAdditionComma(interface, genEntry)»«asCType(variable.type)» value);
 «ENDIF»
 «ENDFOREACH» 
 
@@ -84,12 +84,12 @@ extern void «interface.interfaceName()»_init(«handleInterfaceAdditionComma(inter
 		
 «FOREACH interface.getOutEvents() AS event -»
 extern boolean «interface.interfaceName()»_is_«event.name»_raised(«handleInterfaceAddition(interface, genEntry)»«
-IF !event.type.isVoid() -»«IF isSingleton(genEntry) == false -», «ENDIF»«event.type.eventTypeToString()»* value«ENDIF» );
+IF !event.type.isVoid() -»«IF isSingleton(genEntry) == false -», «ENDIF»«event.type.asCType()»* value«ENDIF» );
 «ENDFOREACH»
 
 «FOREACH interface.getInEvents() AS event -»
 extern void «interface.interfaceName()»_raise_«event.name»(«handleInterfaceAddition(interface, genEntry)»«
-IF !event.type.isVoid() -»«IF isSingleton(genEntry) == false -», «ENDIF»«event.type.eventTypeToString()» value «ENDIF»);
+IF !event.type.isVoid() -»«IF isSingleton(genEntry) == false -», «ENDIF»«event.type.asCType()» value «ENDIF»);
 «ENDFOREACH» 
 
 #endif // INTERFACE_LISTENER
@@ -151,12 +151,12 @@ void «interface.interfaceName()»_set_interface_singleton(«interfaceClassName(int
 «ENDIF»
 
 «FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
-«variable.type.eventTypeToString()» «interface.interfaceName()»_get_«variable.name»(«handleInterfaceAddition(interface, genEntry)»)
+«variable.type.asCType()» «interface.interfaceName()»_get_«variable.name»(«handleInterfaceAddition(interface, genEntry)»)
 {
 	return handle->«variable.name»;
 }
 «IF variable.readonly == false -»
-void «interface.interfaceName()»_set_«variable.name»(«handleInterfaceAdditionComma(interface, genEntry)»«variable.type.eventTypeToString()» value)
+void «interface.interfaceName()»_set_«variable.name»(«handleInterfaceAdditionComma(interface, genEntry)»«variable.type.asCType()» value)
 {
 	handle->«variable.name» = value;
 }
@@ -196,7 +196,7 @@ void «interface.interfaceName()»_raiseEvent(«handleInterfaceAdditionComma(interf
 
 «FOREACH interface.getOutEvents() AS event -»
 extern boolean «interface.interfaceName()»_is_«event.name»_raised(«handleInterfaceAddition(interface, genEntry)»«
-IF !event.type.isVoid() -»«IF isSingleton(genEntry) == false -», «ENDIF»«event.type.eventTypeToString()»* value«ENDIF») 
+IF !event.type.isVoid() -»«IF isSingleton(genEntry) == false -», «ENDIF»«event.type.asCType()»* value«ENDIF») 
 {
 	boolean ret = bool_false;
 	if (eventSet_check(handle->eventSet,«event.getEventEnumName()»)) {
@@ -212,7 +212,7 @@ IF !event.type.isVoid() -»«IF isSingleton(genEntry) == false -», «ENDIF»«event.t
 
 «FOREACH interface.getInEvents() AS event -»
 extern void «interface.interfaceName()»_raise_«event.name»(«handleInterfaceAddition(interface, genEntry)»«
-IF !event.type.isVoid() -»«IF isSingleton(genEntry) == false -», «ENDIF»«event.type.eventTypeToString()» value«
+IF !event.type.isVoid() -»«IF isSingleton(genEntry) == false -», «ENDIF»«event.type.asCType()» value«
 ENDIF»)
 {
 	_Event* ev = eventPool_createEvent(handle->eventPool, «event.getEventEnumName()»);
