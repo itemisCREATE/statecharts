@@ -34,7 +34,7 @@ public class RegionPropertySection extends AbstractEditorPropertySection {
 
 	@Override
 	public void createControls(Composite parent) {
-		getToolkit().createLabel(parent, "Name: ");
+		getToolkit().createLabel(parent, "Region Name: ");
 		nameText = getToolkit().createText(parent, "");
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(nameText);
 	}
