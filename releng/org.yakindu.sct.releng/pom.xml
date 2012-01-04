@@ -113,7 +113,7 @@
 			<!-- Todo: works only with a custom java keystore because of self signed ssl-cert, local results previous build in local repo are used as fallback -->
 			<id>xtextUtils</id>
 			<layout>p2</layout>
-			<url>${xtextUtilsRepository}/artifact/update-site/</url>
+			<url>${xtextUtilsRepository}artifact/update-site/</url>
 		</repository>
 	</repositories>
 	
