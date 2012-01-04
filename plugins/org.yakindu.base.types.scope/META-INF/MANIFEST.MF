@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.yakindu.base.types.scope
-Bundle-SymbolicName: org.yakindu.base.types.ui.scope
+Bundle-SymbolicName: org.yakindu.base.types.scope
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Yakindu.org
 Require-Bundle: org.eclipse.core.runtime,
