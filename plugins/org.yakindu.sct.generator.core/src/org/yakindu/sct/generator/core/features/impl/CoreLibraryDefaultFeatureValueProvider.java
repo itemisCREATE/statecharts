@@ -45,7 +45,7 @@ public class CoreLibraryDefaultFeatureValueProvider extends
 		} else if (DEBUG_FEATURE_DUMP_SEXEC.equals(parameterName)) {
 			parameterValue.setValue(false);
 		} else if (LICENSE_TEXT.equals(parameterName)) {
-			parameterValue.setValue("/*Enter license text here*/");
+			parameterValue.setValue("Enter license text here");
 		}
 	}
 
