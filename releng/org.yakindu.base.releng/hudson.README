@@ -2,7 +2,7 @@ To execute this build as a Hudson build job, you have to configure the following
 
 Source-Code-Management:
 + SVN
-	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.xtext.utils/releng
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/releng
 	Location: releng
 + SVN
 	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.xtext.utils/plugins
