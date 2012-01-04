@@ -28,17 +28,18 @@ import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.editparts.LayerManager;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.yakindu.sct.ui.editor.DiagramActivator;
-import org.yakindu.sct.ui.editor.breadcrumb.BreadcrumbDiagramEditor;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 import org.yakindu.sct.ui.editor.validation.ValidationAction;
 
@@ -47,7 +48,7 @@ import org.yakindu.sct.ui.editor.validation.ValidationAction;
  * @author andreas muelder - Initial contribution and API
  * @author martin esser
  */
-public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
+public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 		IGotoMarker {
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
@@ -61,9 +62,9 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 			}
 		}
 	};
-	
-	private boolean isGraphModelAffected(ResourceSetChangeEvent event){
-		for (Notification notification:event.getNotifications()) {
+
+	private boolean isGraphModelAffected(ResourceSetChangeEvent event) {
+		for (Notification notification : event.getNotifications()) {
 			if (notification.getNotifier() instanceof EObject) {
 				EObject eObject = (EObject) notification.getNotifier();
 				if (NotationPackage.eINSTANCE == eObject.eClass().getEPackage()) {
@@ -87,7 +88,8 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 	}
 
 	private void checkXtextNature() {
-		IProject project = getEditorInput().getFile().getProject();
+		IFileEditorInput editorInput = (IFileEditorInput) getEditorInput();
+		IProject project = editorInput.getFile().getProject();
 		if (project != null && !XtextProjectHelper.hasNature(project)
 				&& project.isAccessible() && !project.isHidden()) {
 			addNature(project);

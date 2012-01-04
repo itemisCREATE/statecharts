@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.ui.editor.submachine;
 
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
@@ -26,11 +25,15 @@ import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget.Di
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.StatechartImages;
-import org.yakindu.sct.ui.editor.breadcrumb.BreadcrumbEditorUtil;
+import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 
 import de.itemis.gmf.runtime.commons.decorators.AbstractDecoratorProvider;
 
@@ -92,8 +95,12 @@ public class SubmachineDecorationProvider extends AbstractDecoratorProvider
 			IFile file = ResourcesPlugin.getWorkspace().getRoot()
 					.getFile(new Path(uri.toPlatformString(true)));
 			try {
-				BreadcrumbEditorUtil.openEditor(file);
-			} catch (ExecutionException e) {
+				final IWorkbenchPage page = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getActivePage();
+				page.openEditor(new FileEditorInput(file),
+						StatechartDiagramEditor.ID);
+				// BreadcrumbEditorUtil.openEditor(file);
+			} catch (PartInitException e) {
 				e.printStackTrace();
 			}
 		}
