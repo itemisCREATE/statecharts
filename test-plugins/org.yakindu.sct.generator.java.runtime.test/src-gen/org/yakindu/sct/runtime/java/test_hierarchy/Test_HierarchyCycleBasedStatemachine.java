@@ -104,7 +104,6 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 				default :
 					break;
 			}
-
 			defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
 
 			defaultInterface.setVarS2(1);
@@ -153,7 +152,6 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 				default :
 					break;
 			}
-
 			defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
 
 			defaultInterface.setVarS2(1);
@@ -235,7 +233,6 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 				default :
 					break;
 			}
-
 			defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 			defaultInterface.setVarS1(1);
@@ -358,7 +355,6 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 				default :
 					break;
 			}
-
 			defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 			defaultInterface.setVarS1(1);
@@ -406,7 +402,6 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					default :
 						break;
 				}
-
 				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 				defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
@@ -539,7 +534,6 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 				default :
 					break;
 			}
-
 			defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 			defaultInterface.setVarS1(1);
@@ -587,7 +581,6 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					default :
 						break;
 				}
-
 				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 				defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
@@ -619,7 +612,6 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 						default :
 							break;
 					}
-
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
 
@@ -706,7 +698,6 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 				default :
 					break;
 			}
-
 			defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 			defaultInterface.setVarS1(1);
@@ -754,7 +745,6 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					default :
 						break;
 				}
-
 				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 				defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
@@ -786,7 +776,6 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 						default :
 							break;
 					}
-
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
 

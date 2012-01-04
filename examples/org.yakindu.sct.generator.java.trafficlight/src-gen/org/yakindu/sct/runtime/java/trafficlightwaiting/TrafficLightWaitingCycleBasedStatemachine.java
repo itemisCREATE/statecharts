@@ -366,7 +366,6 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					default :
 						break;
 				}
-
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
@@ -502,7 +501,6 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					default :
 						break;
 				}
-
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 

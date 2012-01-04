@@ -16,8 +16,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.runtime.java.test_parallelregions.Test_ParallelRegionsCycleBasedStatemachine;
+import org.yakindu.sct.runtime.java.RuntimeService;
+import org.yakindu.sct.runtime.java.TimerService;
 import org.yakindu.sct.runtime.java.test_parallelregions.Test_ParallelRegionsCycleBasedStatemachine.State;
+import org.yakindu.sct.runtime.java.test_parallelregions.Test_ParallelRegionsEventBasedStatemachine;
 
 /**
  * Testcases for 'InterfaceTest' cycle based statemachine.
@@ -25,14 +27,21 @@ import org.yakindu.sct.runtime.java.test_parallelregions.Test_ParallelRegionsCyc
  * @author muehlbrandt
  * 
  */
-public class TestParallelRegionsCycleBasedStatemachine {
+public class TestParallelRegionsEventBasedStatemachine {
 
-	private Test_ParallelRegionsCycleBasedStatemachine statemachine;
+	private Test_ParallelRegionsEventBasedStatemachine statemachine;
+	
+	private RuntimeService runtimeService;
+
+	// Minimal cycletime
+	private final long cyclePeriod = 1;
 
 	@Before
 	public void setUp() {
-		statemachine = new Test_ParallelRegionsCycleBasedStatemachine();
+		statemachine = new Test_ParallelRegionsEventBasedStatemachine();
 		statemachine.enter();
+		runtimeService = new RuntimeService(cyclePeriod);
+		runtimeService.addStatemachine(statemachine);
 	}
 
 	@After
@@ -47,9 +56,9 @@ public class TestParallelRegionsCycleBasedStatemachine {
 	}
 
 	@Test
-	public void testStatemachineHierarchyLevelOne() {
+	public void testStatemachineHierarchyLevelOne() throws InterruptedException {
 		statemachine.getDefaultInterface().raiseEvent1();
-		statemachine.runCycle();
+		Thread.sleep(5);
 		// Test if state is changed to State3 && State7
 		assertTrue("Statemachine isn't in State: " + State.State3.name() + ".",
 				statemachine.isStateActive(State.State3));
@@ -57,7 +66,7 @@ public class TestParallelRegionsCycleBasedStatemachine {
 				statemachine.isStateActive(State.State7));
 
 		statemachine.getDefaultInterface().raiseEvent5();
-		statemachine.runCycle();
+		Thread.sleep(5);
 		// Test if state is changed to State3 && State8
 		assertTrue("Statemachine isn't in State: " + State.State3.name() + ".",
 				statemachine.isStateActive(State.State3));
@@ -68,7 +77,7 @@ public class TestParallelRegionsCycleBasedStatemachine {
 				statemachine.isStateActive(State.State7));
 
 		statemachine.getDefaultInterface().raiseEvent6();
-		statemachine.runCycle();
+		Thread.sleep(5);
 		// Test if state is changed to State3 && State7
 		assertTrue("Statemachine isn't in State: " + State.State3.name() + ".",
 				statemachine.isStateActive(State.State3));
@@ -79,7 +88,7 @@ public class TestParallelRegionsCycleBasedStatemachine {
 				statemachine.isStateActive(State.State8));
 
 		statemachine.getDefaultInterface().raiseEvent3();
-		statemachine.runCycle();
+		Thread.sleep(5);
 		// Test if state is back to State1
 		assertTrue(statemachine.isStateActive(State.State1));
 		assertFalse(statemachine.isStateActive(State.State3));
@@ -88,9 +97,9 @@ public class TestParallelRegionsCycleBasedStatemachine {
 	}
 
 	@Test
-	public void testStatemachineHierarchyLevelTwo() {
+	public void testStatemachineHierarchyLevelTwo() throws InterruptedException {
 		statemachine.getDefaultInterface().raiseEvent1();
-		statemachine.runCycle();
+		Thread.sleep(5);
 		// Test if state is changed to State3 && State7
 		assertTrue("Statemachine isn't in State: " + State.State3.name() + ".",
 				statemachine.isStateActive(State.State3));
@@ -98,7 +107,7 @@ public class TestParallelRegionsCycleBasedStatemachine {
 				statemachine.isStateActive(State.State7));
 
 		statemachine.getDefaultInterface().raiseEvent2();
-		statemachine.runCycle();
+		Thread.sleep(5);
 		// Test if state is changed to State9, State5 and State7
 		assertTrue("Statemachine isn't in State: " + State.State9.name() + ".",
 				statemachine.isStateActive(State.State9));
@@ -111,7 +120,7 @@ public class TestParallelRegionsCycleBasedStatemachine {
 				statemachine.isStateActive(State.State8));
 
 		statemachine.getDefaultInterface().raiseEvent3();
-		statemachine.runCycle();
+		Thread.sleep(5);
 		// Test if state is changed to State9, State6 and State8
 		assertTrue("Statemachine isn't in State: " + State.State9.name() + ".",
 				statemachine.isStateActive(State.State9));
@@ -124,7 +133,7 @@ public class TestParallelRegionsCycleBasedStatemachine {
 				statemachine.isStateActive(State.State8));
 
 		statemachine.getDefaultInterface().raiseEvent6();
-		statemachine.runCycle();
+		Thread.sleep(5);
 		// Test if state is changed to State9, State6 and State8
 		assertTrue("Statemachine isn't in State: " + State.State9.name() + ".",
 				statemachine.isStateActive(State.State9));

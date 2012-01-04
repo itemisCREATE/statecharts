@@ -15,12 +15,9 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ 
-		TestInterfaceTestEventBasedStatemachine.class,
-		TestLocalActionsEventBasedStatemachine.class,
-		TestExpressionEventBasedStatemachine.class,
-		TestHierarchyEventBasedStatemachine.class,
-		TestParallelRegionsEventBasedStatemachine.class
+		AllCycleBasedStatemachineTests.class,
+		AllEventBasedStatemachineTests.class
 		})
 
-public class AllEventBasedStatemachineTests {
+public class AllStatemachineTests {
 }
