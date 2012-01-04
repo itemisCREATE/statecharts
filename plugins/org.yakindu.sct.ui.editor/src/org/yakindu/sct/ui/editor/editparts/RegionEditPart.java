@@ -30,7 +30,7 @@ import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 
 /**
  * 
- * @author muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class RegionEditPart extends ShapeNodeEditPart {

@@ -21,7 +21,7 @@ import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 
 /**
  * 
- * @author muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class TransitionExpressionEditPart extends

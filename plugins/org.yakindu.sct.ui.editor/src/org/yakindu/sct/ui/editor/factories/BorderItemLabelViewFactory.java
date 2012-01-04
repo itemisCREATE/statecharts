@@ -16,7 +16,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 /**
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class BorderItemLabelViewFactory extends AbstractShapeViewFactory {
