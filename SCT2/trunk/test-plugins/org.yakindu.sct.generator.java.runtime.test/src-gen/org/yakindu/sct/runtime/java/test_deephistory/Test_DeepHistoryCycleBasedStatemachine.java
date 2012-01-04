@@ -87,21 +87,36 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState3() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-			if (isStateActive(State.State3)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			} else if (isStateActive(State.State6)) {
-				stateVector[0] = null;
+				case State3 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State8)) {
-				stateVector[0] = null;
+					break;
 
-			} else if (isStateActive(State.State9)) {
-				stateVector[0] = null;
+				case State6 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State5)) {
-				stateVector[0] = null;
+					break;
 
+				case State8 :
+					stateVector[0] = null;
+
+					break;
+
+				case State9 :
+					stateVector[0] = null;
+
+					break;
+
+				case State5 :
+					stateVector[0] = null;
+
+					break;
+
+				default :
+					break;
 			}
 
 			nextStateIndex = 0;
@@ -122,21 +137,36 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState6() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-			if (isStateActive(State.State3)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			} else if (isStateActive(State.State6)) {
-				stateVector[0] = null;
+				case State3 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State8)) {
-				stateVector[0] = null;
+					break;
 
-			} else if (isStateActive(State.State9)) {
-				stateVector[0] = null;
+				case State6 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State5)) {
-				stateVector[0] = null;
+					break;
 
+				case State8 :
+					stateVector[0] = null;
+
+					break;
+
+				case State9 :
+					stateVector[0] = null;
+
+					break;
+
+				case State5 :
+					stateVector[0] = null;
+
+					break;
+
+				default :
+					break;
 			}
 
 			nextStateIndex = 0;
@@ -144,15 +174,26 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventEvent4())) {
-				if (isStateActive(State.State6)) {
-					stateVector[0] = null;
+				//Handle exit of all possible states on position 0...
+				switch (stateVector[0]) {
 
-				} else if (isStateActive(State.State8)) {
-					stateVector[0] = null;
+					case State6 :
+						stateVector[0] = null;
 
-				} else if (isStateActive(State.State9)) {
-					stateVector[0] = null;
+						break;
 
+					case State8 :
+						stateVector[0] = null;
+
+						break;
+
+					case State9 :
+						stateVector[0] = null;
+
+						break;
+
+					default :
+						break;
 				}
 
 				nextStateIndex = 0;
@@ -175,21 +216,36 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState8() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-			if (isStateActive(State.State3)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			} else if (isStateActive(State.State6)) {
-				stateVector[0] = null;
+				case State3 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State8)) {
-				stateVector[0] = null;
+					break;
 
-			} else if (isStateActive(State.State9)) {
-				stateVector[0] = null;
+				case State6 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State5)) {
-				stateVector[0] = null;
+					break;
 
+				case State8 :
+					stateVector[0] = null;
+
+					break;
+
+				case State9 :
+					stateVector[0] = null;
+
+					break;
+
+				case State5 :
+					stateVector[0] = null;
+
+					break;
+
+				default :
+					break;
 			}
 
 			nextStateIndex = 0;
@@ -197,15 +253,26 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventEvent4())) {
-				if (isStateActive(State.State6)) {
-					stateVector[0] = null;
+				//Handle exit of all possible states on position 0...
+				switch (stateVector[0]) {
 
-				} else if (isStateActive(State.State8)) {
-					stateVector[0] = null;
+					case State6 :
+						stateVector[0] = null;
 
-				} else if (isStateActive(State.State9)) {
-					stateVector[0] = null;
+						break;
 
+					case State8 :
+						stateVector[0] = null;
+
+						break;
+
+					case State9 :
+						stateVector[0] = null;
+
+						break;
+
+					default :
+						break;
 				}
 
 				nextStateIndex = 0;
@@ -213,12 +280,21 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 
 			} else {
 				if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
-					if (isStateActive(State.State8)) {
-						stateVector[0] = null;
+					//Handle exit of all possible states on position 0...
+					switch (stateVector[0]) {
 
-					} else if (isStateActive(State.State9)) {
-						stateVector[0] = null;
+						case State8 :
+							stateVector[0] = null;
 
+							break;
+
+						case State9 :
+							stateVector[0] = null;
+
+							break;
+
+						default :
+							break;
 					}
 
 					nextStateIndex = 0;
@@ -242,21 +318,36 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState9() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-			if (isStateActive(State.State3)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			} else if (isStateActive(State.State6)) {
-				stateVector[0] = null;
+				case State3 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State8)) {
-				stateVector[0] = null;
+					break;
 
-			} else if (isStateActive(State.State9)) {
-				stateVector[0] = null;
+				case State6 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State5)) {
-				stateVector[0] = null;
+					break;
 
+				case State8 :
+					stateVector[0] = null;
+
+					break;
+
+				case State9 :
+					stateVector[0] = null;
+
+					break;
+
+				case State5 :
+					stateVector[0] = null;
+
+					break;
+
+				default :
+					break;
 			}
 
 			nextStateIndex = 0;
@@ -264,15 +355,26 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventEvent4())) {
-				if (isStateActive(State.State6)) {
-					stateVector[0] = null;
+				//Handle exit of all possible states on position 0...
+				switch (stateVector[0]) {
 
-				} else if (isStateActive(State.State8)) {
-					stateVector[0] = null;
+					case State6 :
+						stateVector[0] = null;
 
-				} else if (isStateActive(State.State9)) {
-					stateVector[0] = null;
+						break;
 
+					case State8 :
+						stateVector[0] = null;
+
+						break;
+
+					case State9 :
+						stateVector[0] = null;
+
+						break;
+
+					default :
+						break;
 				}
 
 				nextStateIndex = 0;
@@ -280,12 +382,21 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 
 			} else {
 				if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
-					if (isStateActive(State.State8)) {
-						stateVector[0] = null;
+					//Handle exit of all possible states on position 0...
+					switch (stateVector[0]) {
 
-					} else if (isStateActive(State.State9)) {
-						stateVector[0] = null;
+						case State8 :
+							stateVector[0] = null;
 
+							break;
+
+						case State9 :
+							stateVector[0] = null;
+
+							break;
+
+						default :
+							break;
 					}
 
 					nextStateIndex = 0;
@@ -309,21 +420,36 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState5() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-			if (isStateActive(State.State3)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			} else if (isStateActive(State.State6)) {
-				stateVector[0] = null;
+				case State3 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State8)) {
-				stateVector[0] = null;
+					break;
 
-			} else if (isStateActive(State.State9)) {
-				stateVector[0] = null;
+				case State6 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State5)) {
-				stateVector[0] = null;
+					break;
 
+				case State8 :
+					stateVector[0] = null;
+
+					break;
+
+				case State9 :
+					stateVector[0] = null;
+
+					break;
+
+				case State5 :
+					stateVector[0] = null;
+
+					break;
+
+				default :
+					break;
 			}
 
 			nextStateIndex = 0;

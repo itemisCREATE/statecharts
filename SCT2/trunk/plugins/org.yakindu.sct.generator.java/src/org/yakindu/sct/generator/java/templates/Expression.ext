@@ -102,6 +102,9 @@ String toCode(NumericalAddSubtractExpression expression) :
 String toCode(NumericalMultiplyDivideExpression expression) :
   	"("+expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode()+")";
 
+String toCode(NumericalUnaryExpression expression) :
+    getOperator(expression.operator) + " ( " + expression.operand.toCode() + " ) ";
+
 String toCode(ElementReferenceExpression exp) :
     if (EventDefinition.isInstance(exp.value)) then
     	"occuredEvents.contains("+((EventDefinition)exp.value).getContext().toFirstLower()+"get"+((EventDefinition)exp.value).getName()+"())"
@@ -116,6 +119,14 @@ String getOperator(AdditiveOperator operator) :
     	case AdditiveOperator::minus : " - "
     	default : ""
     };
+    
+String getOperator(UnaryOperator operator) :
+	switch (operator) {
+	  case (UnaryOperator::negative) : " -"
+	  case (UnaryOperator::positive) : " + "
+	  case (UnaryOperator::complement) : " ~ "
+	  default : ""
+	};
 
 String getOperator(MultiplicativeOperator operator) : 
     switch(operator) {

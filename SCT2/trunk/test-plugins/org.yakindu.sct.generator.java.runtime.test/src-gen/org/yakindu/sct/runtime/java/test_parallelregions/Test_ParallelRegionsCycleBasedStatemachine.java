@@ -71,208 +71,485 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 	}
 
 	public void enter() {
-
-		enterSequenceState1();
-	}
-
-	private boolean conditionState1Tr0() {
-		return occuredEvents.contains(defaultInterface.getEventEvent1());
-	}
-	private boolean conditionState3Tr0() {
-		return occuredEvents.contains(defaultInterface.getEventEvent2());
-	}
-	private boolean conditionState5Tr0() {
-		return occuredEvents.contains(defaultInterface.getEventEvent3());
-	}
-	private boolean conditionState6Tr0() {
-		return occuredEvents.contains(defaultInterface.getEventEvent4());
-	}
-	private boolean conditionState7Tr0() {
-		return (occuredEvents.contains(defaultInterface.getEventEvent5()) || occuredEvents
-				.contains(defaultInterface.getEventEvent3()));
-	}
-	private boolean conditionState8Tr0() {
-		return occuredEvents.contains(defaultInterface.getEventEvent6());
-	}
-	private void actionsState1Tr0() {
-
-		exitSequenceState1();
-
-		enterSequenceState2();
-
-	}
-	private void actionsState3Tr0() {
-
-		exitSequenceState3();
-
-		enterSequenceState4();
-
-	}
-	private void actionsState5Tr0() {
-
-		exitSequenceState5();
-
-		enterSequenceState6();
-
-	}
-	private void actionsState6Tr0() {
-
-		exitSequenceState6();
-
-		enterSequenceState5();
-
-	}
-	private void actionsState7Tr0() {
-
-		exitSequenceState7();
-
-		enterSequenceState8();
-
-	}
-	private void actionsState8Tr0() {
-
-		exitSequenceState8();
-
-		enterSequenceState7();
-
-	}
-	private void entryActionState2() {
-		defaultInterface.setVarBla(true);
-
-	}
-
-	private void enterSequenceState1() {
 		nextStateIndex = 0;
 		stateVector[0] = State.State1;
 
 	}
 
-	private void enterSequenceState2() {
-
-		entryActionState2();
-
-		enterSequenceState3();
-
-		enterSequenceState7();
-	}
-
-	private void enterSequenceState3() {
-		nextStateIndex = 0;
-		stateVector[0] = State.State3;
-
-	}
-
-	private void enterSequenceState4() {
-
-		enterSequenceState5();
-
-		enterSequenceState9();
-	}
-
-	private void enterSequenceState5() {
-		nextStateIndex = 0;
-		stateVector[0] = State.State5;
-
-	}
-
-	private void enterSequenceState6() {
-		nextStateIndex = 0;
-		stateVector[0] = State.State6;
-
-	}
-
-	private void enterSequenceState9() {
-		nextStateIndex = 1;
-		stateVector[1] = State.State9;
-
-	}
-
-	private void enterSequenceState7() {
-		nextStateIndex = 2;
-		stateVector[2] = State.State7;
-
-	}
-
-	private void enterSequenceState8() {
-		nextStateIndex = 2;
-		stateVector[2] = State.State8;
-
-	}
-	private void exitSequenceState1() {
-		stateVector[0] = null;
-
-	}
-	private void exitSequenceState3() {
-		stateVector[0] = null;
-
-	}
-	private void exitSequenceState5() {
-		stateVector[0] = null;
-
-	}
-	private void exitSequenceState6() {
-		stateVector[0] = null;
-
-	}
-	private void exitSequenceState9() {
-		stateVector[1] = null;
-
-	}
-	private void exitSequenceState7() {
-		stateVector[2] = null;
-
-	}
-	private void exitSequenceState8() {
-		stateVector[2] = null;
-
-	}
 	private void reactState1() {
-		if (conditionState1Tr0()) {
+		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
+			stateVector[0] = null;
 
-			actionsState1Tr0();
+			nextStateIndex = 0;
+			stateVector[0] = State.State3;
+
+			defaultInterface.setVarReg3(7);
+
+			nextStateIndex = 2;
+			stateVector[2] = State.State7;
+
 		}
 	}
 	private void reactState2() {
 	}
 	private void reactState3() {
-		if (conditionState3Tr0()) {
+		if (occuredEvents.contains(defaultInterface.getEventEvent10())) {
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			actionsState3Tr0();
+				case State3 :
+					stateVector[0] = null;
+
+					break;
+
+				case State5 :
+					stateVector[0] = null;
+
+					break;
+
+				case State6 :
+					stateVector[0] = null;
+
+					break;
+
+				default :
+					break;
+			}
+
+			//Handle exit of all possible states on position 1...
+			switch (stateVector[1]) {
+
+				case State9 :
+					stateVector[1] = null;
+
+					break;
+
+				default :
+					break;
+			}
+
+			//Handle exit of all possible states on position 2...
+			switch (stateVector[2]) {
+
+				case State7 :
+					stateVector[2] = null;
+
+					defaultInterface.setVarReg3(-(1));
+
+					break;
+
+				case State8 :
+					stateVector[2] = null;
+
+					defaultInterface.setVarReg3(-(1));
+
+					break;
+
+				default :
+					break;
+			}
+
+			nextStateIndex = 0;
+			stateVector[0] = State.State1;
+
+		} else {
+			if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
+				stateVector[0] = null;
+
+				nextStateIndex = 0;
+				stateVector[0] = State.State5;
+
+				nextStateIndex = 1;
+				stateVector[1] = State.State9;
+
+			} else {
+				if ((occuredEvents.contains(defaultInterface.getEventEvent3()) || occuredEvents
+						.contains(defaultInterface.getEventEvent9()))) {
+					stateVector[0] = null;
+
+					nextStateIndex = 0;
+					stateVector[0] = State.State1;
+
+				}
+			}
+
 		}
-
 	}
 	private void reactState4() {
 	}
 	private void reactState5() {
-		if (conditionState5Tr0()) {
+		if (occuredEvents.contains(defaultInterface.getEventEvent10())) {
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			actionsState5Tr0();
+				case State3 :
+					stateVector[0] = null;
+
+					break;
+
+				case State5 :
+					stateVector[0] = null;
+
+					break;
+
+				case State6 :
+					stateVector[0] = null;
+
+					break;
+
+				default :
+					break;
+			}
+
+			//Handle exit of all possible states on position 1...
+			switch (stateVector[1]) {
+
+				case State9 :
+					stateVector[1] = null;
+
+					break;
+
+				default :
+					break;
+			}
+
+			//Handle exit of all possible states on position 2...
+			switch (stateVector[2]) {
+
+				case State7 :
+					stateVector[2] = null;
+
+					defaultInterface.setVarReg3(-(1));
+
+					break;
+
+				case State8 :
+					stateVector[2] = null;
+
+					defaultInterface.setVarReg3(-(1));
+
+					break;
+
+				default :
+					break;
+			}
+
+			nextStateIndex = 0;
+			stateVector[0] = State.State1;
+
+		} else {
+			if (occuredEvents.contains(defaultInterface.getEventEvent3())) {
+				stateVector[0] = null;
+
+				nextStateIndex = 0;
+				stateVector[0] = State.State6;
+
+			}
+
 		}
-
 	}
 	private void reactState6() {
-		if (conditionState6Tr0()) {
+		if (occuredEvents.contains(defaultInterface.getEventEvent10())) {
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			actionsState6Tr0();
+				case State3 :
+					stateVector[0] = null;
+
+					break;
+
+				case State5 :
+					stateVector[0] = null;
+
+					break;
+
+				case State6 :
+					stateVector[0] = null;
+
+					break;
+
+				default :
+					break;
+			}
+
+			//Handle exit of all possible states on position 1...
+			switch (stateVector[1]) {
+
+				case State9 :
+					stateVector[1] = null;
+
+					break;
+
+				default :
+					break;
+			}
+
+			//Handle exit of all possible states on position 2...
+			switch (stateVector[2]) {
+
+				case State7 :
+					stateVector[2] = null;
+
+					defaultInterface.setVarReg3(-(1));
+
+					break;
+
+				case State8 :
+					stateVector[2] = null;
+
+					defaultInterface.setVarReg3(-(1));
+
+					break;
+
+				default :
+					break;
+			}
+
+			nextStateIndex = 0;
+			stateVector[0] = State.State1;
+
+		} else {
+			if (occuredEvents.contains(defaultInterface.getEventEvent4())) {
+				stateVector[0] = null;
+
+				nextStateIndex = 0;
+				stateVector[0] = State.State5;
+
+			}
+
 		}
-
 	}
 	private void reactState9() {
+		if (occuredEvents.contains(defaultInterface.getEventEvent10())) {
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
+				case State3 :
+					stateVector[0] = null;
+
+					break;
+
+				case State5 :
+					stateVector[0] = null;
+
+					break;
+
+				case State6 :
+					stateVector[0] = null;
+
+					break;
+
+				default :
+					break;
+			}
+
+			//Handle exit of all possible states on position 1...
+			switch (stateVector[1]) {
+
+				case State9 :
+					stateVector[1] = null;
+
+					break;
+
+				default :
+					break;
+			}
+
+			//Handle exit of all possible states on position 2...
+			switch (stateVector[2]) {
+
+				case State7 :
+					stateVector[2] = null;
+
+					defaultInterface.setVarReg3(-(1));
+
+					break;
+
+				case State8 :
+					stateVector[2] = null;
+
+					defaultInterface.setVarReg3(-(1));
+
+					break;
+
+				default :
+					break;
+			}
+
+			nextStateIndex = 0;
+			stateVector[0] = State.State1;
+
+		} else {
+			if (occuredEvents.contains(defaultInterface.getEventEvent8())) {
+				stateVector[1] = null;
+
+				nextStateIndex = 0;
+				stateVector[0] = State.State1;
+
+			}
+
+		}
 	}
 	private void reactState7() {
-		if (conditionState7Tr0()) {
+		if (occuredEvents.contains(defaultInterface.getEventEvent10())) {
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			actionsState7Tr0();
+				case State3 :
+					stateVector[0] = null;
+
+					break;
+
+				case State5 :
+					stateVector[0] = null;
+
+					break;
+
+				case State6 :
+					stateVector[0] = null;
+
+					break;
+
+				default :
+					break;
+			}
+
+			//Handle exit of all possible states on position 1...
+			switch (stateVector[1]) {
+
+				case State9 :
+					stateVector[1] = null;
+
+					break;
+
+				default :
+					break;
+			}
+
+			//Handle exit of all possible states on position 2...
+			switch (stateVector[2]) {
+
+				case State7 :
+					stateVector[2] = null;
+
+					defaultInterface.setVarReg3(-(1));
+
+					break;
+
+				case State8 :
+					stateVector[2] = null;
+
+					defaultInterface.setVarReg3(-(1));
+
+					break;
+
+				default :
+					break;
+			}
+
+			nextStateIndex = 0;
+			stateVector[0] = State.State1;
+
+		} else {
+			if ((occuredEvents.contains(defaultInterface.getEventEvent5()) || occuredEvents
+					.contains(defaultInterface.getEventEvent3()))) {
+				stateVector[2] = null;
+
+				defaultInterface.setVarReg3(-(1));
+
+				defaultInterface.setVarReg3(8);
+
+				nextStateIndex = 2;
+				stateVector[2] = State.State8;
+
+			} else {
+				if (occuredEvents.contains(defaultInterface.getEventEvent7())) {
+					stateVector[2] = null;
+
+					defaultInterface.setVarReg3(-(1));
+
+					nextStateIndex = 0;
+					stateVector[0] = State.State1;
+
+				}
+			}
+
 		}
-
 	}
 	private void reactState8() {
-		if (conditionState8Tr0()) {
+		if (occuredEvents.contains(defaultInterface.getEventEvent10())) {
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			actionsState8Tr0();
+				case State3 :
+					stateVector[0] = null;
+
+					break;
+
+				case State5 :
+					stateVector[0] = null;
+
+					break;
+
+				case State6 :
+					stateVector[0] = null;
+
+					break;
+
+				default :
+					break;
+			}
+
+			//Handle exit of all possible states on position 1...
+			switch (stateVector[1]) {
+
+				case State9 :
+					stateVector[1] = null;
+
+					break;
+
+				default :
+					break;
+			}
+
+			//Handle exit of all possible states on position 2...
+			switch (stateVector[2]) {
+
+				case State7 :
+					stateVector[2] = null;
+
+					defaultInterface.setVarReg3(-(1));
+
+					break;
+
+				case State8 :
+					stateVector[2] = null;
+
+					defaultInterface.setVarReg3(-(1));
+
+					break;
+
+				default :
+					break;
+			}
+
+			nextStateIndex = 0;
+			stateVector[0] = State.State1;
+
+		} else {
+			if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
+				stateVector[2] = null;
+
+				defaultInterface.setVarReg3(-(1));
+
+				defaultInterface.setVarReg3(7);
+
+				nextStateIndex = 2;
+				stateVector[2] = State.State7;
+
+			}
+
 		}
-
 	}
 	public void runCycle() {
 		outEvents.clear();

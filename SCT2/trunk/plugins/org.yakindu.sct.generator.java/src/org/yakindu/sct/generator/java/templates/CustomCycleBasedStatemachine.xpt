@@ -26,11 +26,16 @@ Contributors:
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR StateSwitch-»
-	«FOREACH cases AS stateCase ITERATOR iter -»
-	«IF iter.counter1 > 1»else «ENDIF»if (isStateActive(State.«stateCase.state.getName()»)) {
-		«EXPAND ActionCode FOR stateCase.step»
+	«getComment()»
+	switch(stateVector[«stateConfigurationIdx»]) {
+		«FOREACH cases AS stateCase»
+  			case «stateCase.state.getName()» :
+  				«EXPAND ActionCode FOR stateCase.step»
+  				break;
+		«ENDFOREACH»
+  			default:
+    			break;
 	}
-	«ENDFOREACH-»
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR ScheduleTimeEvent-»

@@ -162,50 +162,71 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactStreetGreen() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (isStateActive(State.StreetGreen)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			} else if (isStateActive(State.WaitOn)) {
-				stateVector[0] = null;
+				case StreetGreen :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(WaitOn_time_event_0);
+					break;
 
-				getTimerService().resetTimer(PedWaiting_time_event_0);
-				interfacePedestrian.setVarRequest(false);
+				case WaitOn :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.WaitOff)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(WaitOn_time_event_0);
 
-				getTimerService().resetTimer(WaitOff_time_event_0);
+					getTimerService().resetTimer(PedWaiting_time_event_0);
+					interfacePedestrian.setVarRequest(false);
 
-				getTimerService().resetTimer(PedWaiting_time_event_0);
-				interfacePedestrian.setVarRequest(false);
+					break;
 
-			} else if (isStateActive(State.StreetAttention)) {
-				stateVector[0] = null;
+				case WaitOff :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(StreetAttention_time_event_0);
+					getTimerService().resetTimer(WaitOff_time_event_0);
 
-			} else if (isStateActive(State.StreetRed)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(PedWaiting_time_event_0);
+					interfacePedestrian.setVarRequest(false);
 
-				getTimerService().resetTimer(StreetRed_time_event_0);
+					break;
 
-			} else if (isStateActive(State.PedestrianGreen)) {
-				stateVector[0] = null;
+				case StreetAttention :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(PedestrianGreen_time_event_0);
+					getTimerService().resetTimer(StreetAttention_time_event_0);
 
-			} else if (isStateActive(State.PedestrianRed)) {
-				stateVector[0] = null;
+					break;
 
-				getTimerService().resetTimer(PedestrianRed_time_event_0);
+				case StreetRed :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.StreetPrepare)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(StreetRed_time_event_0);
 
-				getTimerService().resetTimer(StreetPrepare_time_event_0);
+					break;
 
+				case PedestrianGreen :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(PedestrianGreen_time_event_0);
+
+					break;
+
+				case PedestrianRed :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(PedestrianRed_time_event_0);
+
+					break;
+
+				case StreetPrepare :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(StreetPrepare_time_event_0);
+
+					break;
+
+				default :
+					break;
 			}
 
 			interfaceTrafficLight.setVarRed(false);
@@ -243,50 +264,71 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactWaitOn() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (isStateActive(State.StreetGreen)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			} else if (isStateActive(State.WaitOn)) {
-				stateVector[0] = null;
+				case StreetGreen :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(WaitOn_time_event_0);
+					break;
 
-				getTimerService().resetTimer(PedWaiting_time_event_0);
-				interfacePedestrian.setVarRequest(false);
+				case WaitOn :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.WaitOff)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(WaitOn_time_event_0);
 
-				getTimerService().resetTimer(WaitOff_time_event_0);
+					getTimerService().resetTimer(PedWaiting_time_event_0);
+					interfacePedestrian.setVarRequest(false);
 
-				getTimerService().resetTimer(PedWaiting_time_event_0);
-				interfacePedestrian.setVarRequest(false);
+					break;
 
-			} else if (isStateActive(State.StreetAttention)) {
-				stateVector[0] = null;
+				case WaitOff :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(StreetAttention_time_event_0);
+					getTimerService().resetTimer(WaitOff_time_event_0);
 
-			} else if (isStateActive(State.StreetRed)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(PedWaiting_time_event_0);
+					interfacePedestrian.setVarRequest(false);
 
-				getTimerService().resetTimer(StreetRed_time_event_0);
+					break;
 
-			} else if (isStateActive(State.PedestrianGreen)) {
-				stateVector[0] = null;
+				case StreetAttention :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(PedestrianGreen_time_event_0);
+					getTimerService().resetTimer(StreetAttention_time_event_0);
 
-			} else if (isStateActive(State.PedestrianRed)) {
-				stateVector[0] = null;
+					break;
 
-				getTimerService().resetTimer(PedestrianRed_time_event_0);
+				case StreetRed :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.StreetPrepare)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(StreetRed_time_event_0);
 
-				getTimerService().resetTimer(StreetPrepare_time_event_0);
+					break;
 
+				case PedestrianGreen :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(PedestrianGreen_time_event_0);
+
+					break;
+
+				case PedestrianRed :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(PedestrianRed_time_event_0);
+
+					break;
+
+				case StreetPrepare :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(StreetPrepare_time_event_0);
+
+					break;
+
+				default :
+					break;
 			}
 
 			interfaceTrafficLight.setVarRed(false);
@@ -304,17 +346,27 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 		} else {
 			if (occuredEvents.contains(PedWaiting_time_event_0)) {
-				if (isStateActive(State.WaitOn)) {
-					stateVector[0] = null;
+				//Handle exit of all possible states on position 0...
+				switch (stateVector[0]) {
 
-					getTimerService().resetTimer(WaitOn_time_event_0);
+					case WaitOn :
+						stateVector[0] = null;
 
-				} else if (isStateActive(State.WaitOff)) {
-					stateVector[0] = null;
+						getTimerService().resetTimer(WaitOn_time_event_0);
 
-					getTimerService().resetTimer(WaitOff_time_event_0);
+						break;
 
+					case WaitOff :
+						stateVector[0] = null;
+
+						getTimerService().resetTimer(WaitOff_time_event_0);
+
+						break;
+
+					default :
+						break;
 				}
+
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
@@ -348,50 +400,71 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactWaitOff() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (isStateActive(State.StreetGreen)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			} else if (isStateActive(State.WaitOn)) {
-				stateVector[0] = null;
+				case StreetGreen :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(WaitOn_time_event_0);
+					break;
 
-				getTimerService().resetTimer(PedWaiting_time_event_0);
-				interfacePedestrian.setVarRequest(false);
+				case WaitOn :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.WaitOff)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(WaitOn_time_event_0);
 
-				getTimerService().resetTimer(WaitOff_time_event_0);
+					getTimerService().resetTimer(PedWaiting_time_event_0);
+					interfacePedestrian.setVarRequest(false);
 
-				getTimerService().resetTimer(PedWaiting_time_event_0);
-				interfacePedestrian.setVarRequest(false);
+					break;
 
-			} else if (isStateActive(State.StreetAttention)) {
-				stateVector[0] = null;
+				case WaitOff :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(StreetAttention_time_event_0);
+					getTimerService().resetTimer(WaitOff_time_event_0);
 
-			} else if (isStateActive(State.StreetRed)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(PedWaiting_time_event_0);
+					interfacePedestrian.setVarRequest(false);
 
-				getTimerService().resetTimer(StreetRed_time_event_0);
+					break;
 
-			} else if (isStateActive(State.PedestrianGreen)) {
-				stateVector[0] = null;
+				case StreetAttention :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(PedestrianGreen_time_event_0);
+					getTimerService().resetTimer(StreetAttention_time_event_0);
 
-			} else if (isStateActive(State.PedestrianRed)) {
-				stateVector[0] = null;
+					break;
 
-				getTimerService().resetTimer(PedestrianRed_time_event_0);
+				case StreetRed :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.StreetPrepare)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(StreetRed_time_event_0);
 
-				getTimerService().resetTimer(StreetPrepare_time_event_0);
+					break;
 
+				case PedestrianGreen :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(PedestrianGreen_time_event_0);
+
+					break;
+
+				case PedestrianRed :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(PedestrianRed_time_event_0);
+
+					break;
+
+				case StreetPrepare :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(StreetPrepare_time_event_0);
+
+					break;
+
+				default :
+					break;
 			}
 
 			interfaceTrafficLight.setVarRed(false);
@@ -409,17 +482,27 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 		} else {
 			if (occuredEvents.contains(PedWaiting_time_event_0)) {
-				if (isStateActive(State.WaitOn)) {
-					stateVector[0] = null;
+				//Handle exit of all possible states on position 0...
+				switch (stateVector[0]) {
 
-					getTimerService().resetTimer(WaitOn_time_event_0);
+					case WaitOn :
+						stateVector[0] = null;
 
-				} else if (isStateActive(State.WaitOff)) {
-					stateVector[0] = null;
+						getTimerService().resetTimer(WaitOn_time_event_0);
 
-					getTimerService().resetTimer(WaitOff_time_event_0);
+						break;
 
+					case WaitOff :
+						stateVector[0] = null;
+
+						getTimerService().resetTimer(WaitOff_time_event_0);
+
+						break;
+
+					default :
+						break;
 				}
+
 				getTimerService().resetTimer(PedWaiting_time_event_0);
 				interfacePedestrian.setVarRequest(false);
 
@@ -453,50 +536,71 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactStreetAttention() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (isStateActive(State.StreetGreen)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			} else if (isStateActive(State.WaitOn)) {
-				stateVector[0] = null;
+				case StreetGreen :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(WaitOn_time_event_0);
+					break;
 
-				getTimerService().resetTimer(PedWaiting_time_event_0);
-				interfacePedestrian.setVarRequest(false);
+				case WaitOn :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.WaitOff)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(WaitOn_time_event_0);
 
-				getTimerService().resetTimer(WaitOff_time_event_0);
+					getTimerService().resetTimer(PedWaiting_time_event_0);
+					interfacePedestrian.setVarRequest(false);
 
-				getTimerService().resetTimer(PedWaiting_time_event_0);
-				interfacePedestrian.setVarRequest(false);
+					break;
 
-			} else if (isStateActive(State.StreetAttention)) {
-				stateVector[0] = null;
+				case WaitOff :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(StreetAttention_time_event_0);
+					getTimerService().resetTimer(WaitOff_time_event_0);
 
-			} else if (isStateActive(State.StreetRed)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(PedWaiting_time_event_0);
+					interfacePedestrian.setVarRequest(false);
 
-				getTimerService().resetTimer(StreetRed_time_event_0);
+					break;
 
-			} else if (isStateActive(State.PedestrianGreen)) {
-				stateVector[0] = null;
+				case StreetAttention :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(PedestrianGreen_time_event_0);
+					getTimerService().resetTimer(StreetAttention_time_event_0);
 
-			} else if (isStateActive(State.PedestrianRed)) {
-				stateVector[0] = null;
+					break;
 
-				getTimerService().resetTimer(PedestrianRed_time_event_0);
+				case StreetRed :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.StreetPrepare)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(StreetRed_time_event_0);
 
-				getTimerService().resetTimer(StreetPrepare_time_event_0);
+					break;
 
+				case PedestrianGreen :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(PedestrianGreen_time_event_0);
+
+					break;
+
+				case PedestrianRed :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(PedestrianRed_time_event_0);
+
+					break;
+
+				case StreetPrepare :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(StreetPrepare_time_event_0);
+
+					break;
+
+				default :
+					break;
 			}
 
 			interfaceTrafficLight.setVarRed(false);
@@ -533,50 +637,71 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactStreetRed() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (isStateActive(State.StreetGreen)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			} else if (isStateActive(State.WaitOn)) {
-				stateVector[0] = null;
+				case StreetGreen :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(WaitOn_time_event_0);
+					break;
 
-				getTimerService().resetTimer(PedWaiting_time_event_0);
-				interfacePedestrian.setVarRequest(false);
+				case WaitOn :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.WaitOff)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(WaitOn_time_event_0);
 
-				getTimerService().resetTimer(WaitOff_time_event_0);
+					getTimerService().resetTimer(PedWaiting_time_event_0);
+					interfacePedestrian.setVarRequest(false);
 
-				getTimerService().resetTimer(PedWaiting_time_event_0);
-				interfacePedestrian.setVarRequest(false);
+					break;
 
-			} else if (isStateActive(State.StreetAttention)) {
-				stateVector[0] = null;
+				case WaitOff :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(StreetAttention_time_event_0);
+					getTimerService().resetTimer(WaitOff_time_event_0);
 
-			} else if (isStateActive(State.StreetRed)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(PedWaiting_time_event_0);
+					interfacePedestrian.setVarRequest(false);
 
-				getTimerService().resetTimer(StreetRed_time_event_0);
+					break;
 
-			} else if (isStateActive(State.PedestrianGreen)) {
-				stateVector[0] = null;
+				case StreetAttention :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(PedestrianGreen_time_event_0);
+					getTimerService().resetTimer(StreetAttention_time_event_0);
 
-			} else if (isStateActive(State.PedestrianRed)) {
-				stateVector[0] = null;
+					break;
 
-				getTimerService().resetTimer(PedestrianRed_time_event_0);
+				case StreetRed :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.StreetPrepare)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(StreetRed_time_event_0);
 
-				getTimerService().resetTimer(StreetPrepare_time_event_0);
+					break;
 
+				case PedestrianGreen :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(PedestrianGreen_time_event_0);
+
+					break;
+
+				case PedestrianRed :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(PedestrianRed_time_event_0);
+
+					break;
+
+				case StreetPrepare :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(StreetPrepare_time_event_0);
+
+					break;
+
+				default :
+					break;
 			}
 
 			interfaceTrafficLight.setVarRed(false);
@@ -612,50 +737,71 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactPedestrianGreen() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (isStateActive(State.StreetGreen)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			} else if (isStateActive(State.WaitOn)) {
-				stateVector[0] = null;
+				case StreetGreen :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(WaitOn_time_event_0);
+					break;
 
-				getTimerService().resetTimer(PedWaiting_time_event_0);
-				interfacePedestrian.setVarRequest(false);
+				case WaitOn :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.WaitOff)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(WaitOn_time_event_0);
 
-				getTimerService().resetTimer(WaitOff_time_event_0);
+					getTimerService().resetTimer(PedWaiting_time_event_0);
+					interfacePedestrian.setVarRequest(false);
 
-				getTimerService().resetTimer(PedWaiting_time_event_0);
-				interfacePedestrian.setVarRequest(false);
+					break;
 
-			} else if (isStateActive(State.StreetAttention)) {
-				stateVector[0] = null;
+				case WaitOff :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(StreetAttention_time_event_0);
+					getTimerService().resetTimer(WaitOff_time_event_0);
 
-			} else if (isStateActive(State.StreetRed)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(PedWaiting_time_event_0);
+					interfacePedestrian.setVarRequest(false);
 
-				getTimerService().resetTimer(StreetRed_time_event_0);
+					break;
 
-			} else if (isStateActive(State.PedestrianGreen)) {
-				stateVector[0] = null;
+				case StreetAttention :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(PedestrianGreen_time_event_0);
+					getTimerService().resetTimer(StreetAttention_time_event_0);
 
-			} else if (isStateActive(State.PedestrianRed)) {
-				stateVector[0] = null;
+					break;
 
-				getTimerService().resetTimer(PedestrianRed_time_event_0);
+				case StreetRed :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.StreetPrepare)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(StreetRed_time_event_0);
 
-				getTimerService().resetTimer(StreetPrepare_time_event_0);
+					break;
 
+				case PedestrianGreen :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(PedestrianGreen_time_event_0);
+
+					break;
+
+				case PedestrianRed :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(PedestrianRed_time_event_0);
+
+					break;
+
+				case StreetPrepare :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(StreetPrepare_time_event_0);
+
+					break;
+
+				default :
+					break;
 			}
 
 			interfaceTrafficLight.setVarRed(false);
@@ -691,50 +837,71 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactPedestrianRed() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (isStateActive(State.StreetGreen)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			} else if (isStateActive(State.WaitOn)) {
-				stateVector[0] = null;
+				case StreetGreen :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(WaitOn_time_event_0);
+					break;
 
-				getTimerService().resetTimer(PedWaiting_time_event_0);
-				interfacePedestrian.setVarRequest(false);
+				case WaitOn :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.WaitOff)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(WaitOn_time_event_0);
 
-				getTimerService().resetTimer(WaitOff_time_event_0);
+					getTimerService().resetTimer(PedWaiting_time_event_0);
+					interfacePedestrian.setVarRequest(false);
 
-				getTimerService().resetTimer(PedWaiting_time_event_0);
-				interfacePedestrian.setVarRequest(false);
+					break;
 
-			} else if (isStateActive(State.StreetAttention)) {
-				stateVector[0] = null;
+				case WaitOff :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(StreetAttention_time_event_0);
+					getTimerService().resetTimer(WaitOff_time_event_0);
 
-			} else if (isStateActive(State.StreetRed)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(PedWaiting_time_event_0);
+					interfacePedestrian.setVarRequest(false);
 
-				getTimerService().resetTimer(StreetRed_time_event_0);
+					break;
 
-			} else if (isStateActive(State.PedestrianGreen)) {
-				stateVector[0] = null;
+				case StreetAttention :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(PedestrianGreen_time_event_0);
+					getTimerService().resetTimer(StreetAttention_time_event_0);
 
-			} else if (isStateActive(State.PedestrianRed)) {
-				stateVector[0] = null;
+					break;
 
-				getTimerService().resetTimer(PedestrianRed_time_event_0);
+				case StreetRed :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.StreetPrepare)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(StreetRed_time_event_0);
 
-				getTimerService().resetTimer(StreetPrepare_time_event_0);
+					break;
 
+				case PedestrianGreen :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(PedestrianGreen_time_event_0);
+
+					break;
+
+				case PedestrianRed :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(PedestrianRed_time_event_0);
+
+					break;
+
+				case StreetPrepare :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(StreetPrepare_time_event_0);
+
+					break;
+
+				default :
+					break;
 			}
 
 			interfaceTrafficLight.setVarRed(false);
@@ -771,50 +938,71 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactStreetPrepare() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (isStateActive(State.StreetGreen)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-			} else if (isStateActive(State.WaitOn)) {
-				stateVector[0] = null;
+				case StreetGreen :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(WaitOn_time_event_0);
+					break;
 
-				getTimerService().resetTimer(PedWaiting_time_event_0);
-				interfacePedestrian.setVarRequest(false);
+				case WaitOn :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.WaitOff)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(WaitOn_time_event_0);
 
-				getTimerService().resetTimer(WaitOff_time_event_0);
+					getTimerService().resetTimer(PedWaiting_time_event_0);
+					interfacePedestrian.setVarRequest(false);
 
-				getTimerService().resetTimer(PedWaiting_time_event_0);
-				interfacePedestrian.setVarRequest(false);
+					break;
 
-			} else if (isStateActive(State.StreetAttention)) {
-				stateVector[0] = null;
+				case WaitOff :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(StreetAttention_time_event_0);
+					getTimerService().resetTimer(WaitOff_time_event_0);
 
-			} else if (isStateActive(State.StreetRed)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(PedWaiting_time_event_0);
+					interfacePedestrian.setVarRequest(false);
 
-				getTimerService().resetTimer(StreetRed_time_event_0);
+					break;
 
-			} else if (isStateActive(State.PedestrianGreen)) {
-				stateVector[0] = null;
+				case StreetAttention :
+					stateVector[0] = null;
 
-				getTimerService().resetTimer(PedestrianGreen_time_event_0);
+					getTimerService().resetTimer(StreetAttention_time_event_0);
 
-			} else if (isStateActive(State.PedestrianRed)) {
-				stateVector[0] = null;
+					break;
 
-				getTimerService().resetTimer(PedestrianRed_time_event_0);
+				case StreetRed :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.StreetPrepare)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(StreetRed_time_event_0);
 
-				getTimerService().resetTimer(StreetPrepare_time_event_0);
+					break;
 
+				case PedestrianGreen :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(PedestrianGreen_time_event_0);
+
+					break;
+
+				case PedestrianRed :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(PedestrianRed_time_event_0);
+
+					break;
+
+				case StreetPrepare :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(StreetPrepare_time_event_0);
+
+					break;
+
+				default :
+					break;
 			}
 
 			interfaceTrafficLight.setVarRed(false);
@@ -854,16 +1042,25 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactYellowOn() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (isStateActive(State.YellowOn)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-				getTimerService().resetTimer(YellowOn_time_event_0);
+				case YellowOn :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.YellowOff)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(YellowOn_time_event_0);
 
-				getTimerService().resetTimer(YellowOff_time_event_0);
+					break;
 
+				case YellowOff :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(YellowOff_time_event_0);
+
+					break;
+
+				default :
+					break;
 			}
 
 			interfaceTrafficLight.setVarRed(false);
@@ -895,16 +1092,25 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 	private void reactYellowOff() {
 		if (occuredEvents.contains(defaultInterface.getEventKeypress2())) {
-			if (isStateActive(State.YellowOn)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-				getTimerService().resetTimer(YellowOn_time_event_0);
+				case YellowOn :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.YellowOff)) {
-				stateVector[0] = null;
+					getTimerService().resetTimer(YellowOn_time_event_0);
 
-				getTimerService().resetTimer(YellowOff_time_event_0);
+					break;
 
+				case YellowOff :
+					stateVector[0] = null;
+
+					getTimerService().resetTimer(YellowOff_time_event_0);
+
+					break;
+
+				default :
+					break;
 			}
 
 			interfaceTrafficLight.setVarRed(false);
@@ -939,48 +1145,50 @@ public class TrafficLightWaitingCycleBasedStatemachine
 		outEvents.clear();
 
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-				case On :
-					reactOn();
-					break;
-				case StreetGreen :
-					reactStreetGreen();
-					break;
-				case PedWaiting :
-					reactPedWaiting();
-					break;
-				case WaitOn :
-					reactWaitOn();
-					break;
-				case WaitOff :
-					reactWaitOff();
-					break;
-				case StreetAttention :
-					reactStreetAttention();
-					break;
-				case StreetRed :
-					reactStreetRed();
-					break;
-				case PedestrianGreen :
-					reactPedestrianGreen();
-					break;
-				case PedestrianRed :
-					reactPedestrianRed();
-					break;
-				case StreetPrepare :
-					reactStreetPrepare();
-					break;
-				case Off :
-					reactOff();
-					break;
-				case YellowOn :
-					reactYellowOn();
-					break;
-				case YellowOff :
-					reactYellowOff();
-					break;
-				default :
-					// no state found
+			if (stateVector[nextStateIndex] != null) {
+				switch (stateVector[nextStateIndex]) {
+					case On :
+						reactOn();
+						break;
+					case StreetGreen :
+						reactStreetGreen();
+						break;
+					case PedWaiting :
+						reactPedWaiting();
+						break;
+					case WaitOn :
+						reactWaitOn();
+						break;
+					case WaitOff :
+						reactWaitOff();
+						break;
+					case StreetAttention :
+						reactStreetAttention();
+						break;
+					case StreetRed :
+						reactStreetRed();
+						break;
+					case PedestrianGreen :
+						reactPedestrianGreen();
+						break;
+					case PedestrianRed :
+						reactPedestrianRed();
+						break;
+					case StreetPrepare :
+						reactStreetPrepare();
+						break;
+					case Off :
+						reactOff();
+						break;
+					case YellowOn :
+						reactYellowOn();
+						break;
+					case YellowOff :
+						reactYellowOff();
+						break;
+					default :
+						// no state found
+				}
 			}
 		}
 		occuredEvents.clear();

@@ -18,7 +18,7 @@ String getJavaType(Type this) :
 		case "integer" : "int"
 		case "boolean" : "boolean"
 		case "string" : "string"
-		default : ""
+		default : "//"+this
 		};
 		
 String getJavaClassType(Type this) :
@@ -29,7 +29,7 @@ String getJavaClassType(Type this) :
 		case "string" : "String"
 		case "void" : "Void"
 		case null : "Void"
-		default : ""
+		default : "//"+this
 		};
 		
 String getInitialValue(Type this) :
