@@ -12,4 +12,5 @@
 	<artifactId>org.yakindu.base</artifactId>
 	<packaging>eclipse-feature</packaging>
 	<groupId>org.yakindu.base.features</groupId>
+	<name>Base :: Feature</name>
 </project>
