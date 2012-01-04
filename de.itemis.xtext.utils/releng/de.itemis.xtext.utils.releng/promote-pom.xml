@@ -45,7 +45,7 @@
 					</execution>
 					<execution>
 						<id>upload Repository</id>
-						<phase>deploy</phase>
+						<phase>install</phase>
 						<configuration>
 							<target name="push_merged_repo">
 								<scp keyfile="${yakindu.keyFile}" failonerror="${scp.fail_on_error}"
