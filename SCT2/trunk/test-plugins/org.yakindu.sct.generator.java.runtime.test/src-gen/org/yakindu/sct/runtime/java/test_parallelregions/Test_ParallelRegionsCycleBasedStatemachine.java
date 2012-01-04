@@ -115,7 +115,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				default :
 					break;
 			}
-
 			//Handle exit of all possible states on position 1...
 			switch (stateVector[1]) {
 
@@ -127,7 +126,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				default :
 					break;
 			}
-
 			//Handle exit of all possible states on position 2...
 			switch (stateVector[2]) {
 
@@ -200,7 +198,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				default :
 					break;
 			}
-
 			//Handle exit of all possible states on position 1...
 			switch (stateVector[1]) {
 
@@ -212,7 +209,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				default :
 					break;
 			}
-
 			//Handle exit of all possible states on position 2...
 			switch (stateVector[2]) {
 
@@ -271,7 +267,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				default :
 					break;
 			}
-
 			//Handle exit of all possible states on position 1...
 			switch (stateVector[1]) {
 
@@ -283,7 +278,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				default :
 					break;
 			}
-
 			//Handle exit of all possible states on position 2...
 			switch (stateVector[2]) {
 
@@ -342,7 +336,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				default :
 					break;
 			}
-
 			//Handle exit of all possible states on position 1...
 			switch (stateVector[1]) {
 
@@ -354,7 +347,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				default :
 					break;
 			}
-
 			//Handle exit of all possible states on position 2...
 			switch (stateVector[2]) {
 
@@ -413,7 +405,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				default :
 					break;
 			}
-
 			//Handle exit of all possible states on position 1...
 			switch (stateVector[1]) {
 
@@ -425,7 +416,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				default :
 					break;
 			}
-
 			//Handle exit of all possible states on position 2...
 			switch (stateVector[2]) {
 
@@ -499,7 +489,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				default :
 					break;
 			}
-
 			//Handle exit of all possible states on position 1...
 			switch (stateVector[1]) {
 
@@ -511,7 +500,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				default :
 					break;
 			}
-
 			//Handle exit of all possible states on position 2...
 			switch (stateVector[2]) {
 

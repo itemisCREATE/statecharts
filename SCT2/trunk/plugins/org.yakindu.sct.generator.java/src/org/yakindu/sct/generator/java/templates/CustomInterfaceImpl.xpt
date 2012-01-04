@@ -21,7 +21,7 @@ Contributors:
 «getLicenseHeader(entry)»
 package «getImplementationPackageName(entry)»;
 
-«IF hasEvents()-»
+«IF hasUnvaluedEvents()-»
 import «entry.getBasePackageName()».Event;
 «ENDIF-»
 «IF hasOutgoingEvents() && entry.createInterfaceObserverSupport()-»

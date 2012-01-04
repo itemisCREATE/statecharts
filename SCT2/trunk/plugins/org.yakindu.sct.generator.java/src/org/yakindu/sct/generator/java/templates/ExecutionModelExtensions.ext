@@ -44,6 +44,9 @@ boolean hasOutgoingValuedEvents(Scope this) :
 	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).select(event|!event.type.isVoid()).isEmpty;
 
 boolean hasEvents(Scope this) :
+	!declarations.typeSelect(EventDefinition).isEmpty;
+
+boolean hasUnvaluedEvents(Scope this) :
 	!declarations.typeSelect(EventDefinition).select(event|event.type.isVoid()).isEmpty;
 	
 boolean hasValuedEvents(Scope this) :
