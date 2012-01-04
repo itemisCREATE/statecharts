@@ -33,7 +33,7 @@
 						<id>replace-build-token</id>
 						<phase>generate-sources</phase>
 						<configuration>
-							<tasks>
+							<target>
 								<taskdef resource="net/sf/antcontrib/antcontrib.properties"
 									classpathref="maven.plugin.classpath" />
 								<if>
@@ -58,7 +58,7 @@
 										</replace>
 									</then>
 								</if>
-							</tasks>
+							</target>
 						</configuration>
 						<goals>
 							<goal>run</goal>
@@ -68,7 +68,7 @@
 						<id>replace-back-build-token</id>
 						<phase>verify</phase>
 						<configuration>
-							<tasks>
+							<target>
 								<taskdef resource="net/sf/antcontrib/antcontrib.properties"
 									classpathref="maven.plugin.classpath" />
 								<if>
@@ -93,7 +93,7 @@
 										</replace>
 									</then>
 								</if>
-							</tasks>
+							</target>
 						</configuration>
 						<goals>
 							<goal>run</goal>
