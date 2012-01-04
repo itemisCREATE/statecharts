@@ -43,6 +43,9 @@ Build:
 		../build/org.yakindu.sct.releng/pom.xml
 	Profiles
 		CI
+	Properties
+		xtextUtilsRepository=${env.xtextUtilsRepository}
+NOTE: This is for parameterized build with dependency to the xtextUtils Job. The URL should point to an repository with XtextUtils.
 	JVM Options
 
 		
