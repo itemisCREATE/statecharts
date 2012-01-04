@@ -177,7 +177,7 @@
 		<module>../de.itemis.gmf.runtime.commons</module>
 		<module>../de.itemis.gmf.runtime.commons-feature</module>
 		<module>../org.yakindu.base.types</module>
-		<module>../org.yakindu.base.types.ui.scope</module>
+		<module>../org.yakindu.base.types.scope</module>
 		<module>../org.yakindu.sct.doc.user</module>
 		<module>../org.yakindu.sct.model.sexec</module>
 		<module>../org.yakindu.sct.model.sexec.edit</module>
