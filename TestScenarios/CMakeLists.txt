@@ -11,6 +11,13 @@ SET(CMAKE_C_FLAGS "-g -O0 -Wall -W -fprofile-arcs -ftest-coverage")
 
 endif (CMAKE_COMPILER_IS_GNUCC)
 
+string(REGEX MATCH "clang" CMAKE_COMPILER_IS_CLANG "${CMAKE_C_COMPILER}")
+
+if (CMAKE_COMPILER_IS_CLANG)
+message("This is CLANG")
+SET(CMAKE_C_FLAGS "-g -O0 -Wall")
+endif (CMAKE_COMPILER_IS_CLANG)
+
 if (COMPILE_SINGLETON)
 
 message ("Compiling Singleton code")

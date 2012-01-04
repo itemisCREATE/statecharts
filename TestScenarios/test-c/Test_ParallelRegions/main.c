@@ -26,7 +26,7 @@ const char* getStateString(uint32_t index)
 	for (i=0; i<10; ++i)
 		if (EnumTostateStr[i] == index)
 			return stateName[i];
-	return stateName[12];
+	return stateName[last_state];
 }
 
 void setupStatemachine(Test_ParallelRegionsStatemachine* machine, Timer* dummyTimer, EventPool* eventPool)
