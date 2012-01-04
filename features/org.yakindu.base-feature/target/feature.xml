@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.yakindu.base"
+      label="Yakindu Base"
+      version="1.0.0.201201041217"
+      provider-name="YAKINDU">
+
+   <description url="">
+      %description
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <includes
+         id="de.itemis.gmf.runtime.commons"
+         version="1.0.0.201201041217"/>
+
+   <includes
+         id="de.itemis.xtext.utils.gmf"
+         version="1.0.0.201201041217"/>
+
+   <includes
+         id="de.itemis.xtext.utils.gmf.source"
+         version="1.0.0.201201041217"/>
+
+   <includes
+         id="de.itemis.xtext.utils.jface"
+         version="1.0.0.201201041217"/>
+
+   <includes
+         id="de.itemis.xtext.utils.jface.source"
+         version="1.0.0.201201041217"/>
+
+   <plugin
+         id="org.yakindu.base.types"
+         download-size="38"
+         install-size="98"
+         version="1.0.0.201201041217"
+         unpack="false"/>
+
+   <plugin
+         id="org.yakindu.base.types.scope"
+         download-size="8"
+         install-size="12"
+         version="1.0.0.201201041217"
+         unpack="false"/>
+
+</feature>

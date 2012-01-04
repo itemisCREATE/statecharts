@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<artifacts size='1'>
+  <artifact classifier='org.eclipse.update.feature' id='org.yakindu.base' version='1.0.0.201201041217'>
+    <properties size='7'>
+      <property name='artifact.size' value='14368'/>
+      <property name='download.size' value='14368'/>
+      <property name='download.md5' value='0420c7c814d06a4f57e27bc34c29efc3'/>
+      <property name='maven-groupId' value='org.yakindu.base.features'/>
+      <property name='maven-artifactId' value='org.yakindu.base'/>
+      <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+      <property name='download.contentType' value='application/zip'/>
+    </properties>
+  </artifact>
+</artifacts>
