@@ -17,9 +17,9 @@
       %license
    </license>
 
-   <includes
-         id="org.yakindu.sct.generator.infrastructure"
-         version="0.0.0"/>
+   <requires>
+      <import feature="org.yakindu.sct" version="1.0.0.qualifier"/>
+   </requires>
 
    <plugin
          id="org.yakindu.sct.generator.c"

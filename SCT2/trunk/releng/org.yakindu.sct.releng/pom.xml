@@ -12,6 +12,7 @@
 	<properties>
 		<tycho-version>0.13.0</tycho-version>
 		<antrun-version>1.6</antrun-version>
+		<xtextUtilsRepository>https://builds.itemis.de/jenkins/view/YAKINDU%202/job/XTEXT_UTILS/lastSuccessfulBuild/</xtextUtilsRepository>
 	</properties>
 
 	<build>
@@ -108,11 +109,11 @@
 
 	<repositories>
 		<repository>
-			<!-- Last stable repository for xtextUtils which are shipped with this repository  -->
+			<!-- Selected version of xtextUtils repository which is shipped with this repository  -->
 			<!-- Todo: works only with a custom java keystore because of self signed ssl-cert, local results previous build in local repo are used as fallback -->
 			<id>xtextUtils</id>
 			<layout>p2</layout>
-			<url>https://builds.itemis.de/jenkins/view/YAKINDU%202/job/XTEXT_UTILS/lastSuccessfulBuild/artifact/update-site/</url>
+			<url>${xtextUtilsRepository}/artifact/update-site/</url>
 		</repository>
 	</repositories>
 	
@@ -179,6 +180,9 @@
 		<module>../org.yakindu.base.types</module>
 		<module>../org.yakindu.base.types.scope</module>
 		<module>../org.yakindu.sct.doc.user</module>
+		<module>../org.yakindu.sct.generator.core</module>
+		<module>../org.yakindu.sct.generator.genmodel</module>
+		<module>../org.yakindu.sct.generator.genmodel.ui</module>
 		<module>../org.yakindu.sct.model.sexec</module>
 		<module>../org.yakindu.sct.model.sexec.edit</module>
 		<module>../org.yakindu.sct.model.sexec.interpreter</module>
@@ -198,21 +202,13 @@
 		<module>../org.yakindu.sct.ui.integration.stext</module>
 		<module>../org.yakindu.sct.ui.navigator</module>
 		<module>../org.yakindu.sct-feature</module>
-		<module>../org.yakindu.sct.source-feature</module>
-		
-		<module>../org.yakindu.sct.generator.infrastructure-feature</module>
-		<module>../org.yakindu.sct.generator.core</module>
-		<module>../org.yakindu.sct.generator.genmodel</module>
-		<module>../org.yakindu.sct.generator.genmodel.ui</module>
-		
+
 		<module>../org.yakindu.sct.generator.c</module>
 		<module>../org.yakindu.sct.generator.cpp</module>
 		<module>../org.yakindu.sct.generator.c-feature</module>
-		<module>../org.yakindu.sct.generator.c.source-feature</module>
 
 		<module>../org.yakindu.sct.generator.java</module>
 		<module>../org.yakindu.sct.generator.java-feature</module>
-		<module>../org.yakindu.sct.generator.java.source-feature</module>
 
 		<module>../org.yakindu.sct.generator-feature</module>
 		<module>../org.yakindu.sct.sdk-feature</module>
