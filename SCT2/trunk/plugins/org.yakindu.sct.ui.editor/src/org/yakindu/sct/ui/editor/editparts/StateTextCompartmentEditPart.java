@@ -18,7 +18,7 @@ import org.eclipse.gmf.runtime.notation.View;
 
 /**
  * 
- * @author muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class StateTextCompartmentEditPart extends ResizableCompartmentEditPart {

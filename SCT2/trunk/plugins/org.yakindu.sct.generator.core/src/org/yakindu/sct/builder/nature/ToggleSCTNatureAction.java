@@ -89,7 +89,7 @@ public class ToggleSCTNatureAction implements IObjectActionDelegate,
 		}
 	}
 
-	public void updateElement(UIElement element, Map parameters) {
+	public void updateElement(UIElement element, @SuppressWarnings("rawtypes") Map parameters) {
 
 	}
 

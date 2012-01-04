@@ -20,8 +20,8 @@ import org.yakindu.sct.ui.editor.editor.figures.TransitionFigure;
 
 /**
  * 
- * @author muelder
- *
+ * @author andreas muelder - Initial contribution and API
+ * 
  */
 public class TransitionEditPart extends ConnectionNodeEditPart {
 

@@ -22,7 +22,7 @@ import de.itemis.gmf.runtime.commons.editpolicies.BarResizeEditPolicy;
 
 /**
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class SynchronizationEditPart extends ShapeNodeEditPart {

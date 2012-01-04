@@ -20,7 +20,7 @@ import de.itemis.gmf.runtime.commons.editparts.FixedSizeShapeNodeEditPart;
 
 /**
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class ChoiceEditPart extends FixedSizeShapeNodeEditPart {

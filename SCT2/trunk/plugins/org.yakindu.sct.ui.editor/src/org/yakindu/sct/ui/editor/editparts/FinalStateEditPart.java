@@ -23,7 +23,7 @@ import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPol
 
 /**
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class FinalStateEditPart extends EllipseFixedSizeShapeNodeEditPart {

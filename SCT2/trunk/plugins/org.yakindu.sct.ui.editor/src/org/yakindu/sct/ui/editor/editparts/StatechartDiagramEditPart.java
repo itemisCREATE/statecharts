@@ -23,7 +23,7 @@ import de.itemis.gmf.runtime.commons.editparts.FixedXYLayoutEditPolicy;
 
 /**
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class StatechartDiagramEditPart extends DiagramEditPart implements

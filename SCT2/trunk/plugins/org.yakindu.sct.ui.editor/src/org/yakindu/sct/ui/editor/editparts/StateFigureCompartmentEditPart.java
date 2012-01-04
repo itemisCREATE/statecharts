@@ -30,7 +30,7 @@ import de.itemis.gmf.runtime.commons.editpolicies.CompartmentLayoutEditPolicy;
 
 /**
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class StateFigureCompartmentEditPart extends

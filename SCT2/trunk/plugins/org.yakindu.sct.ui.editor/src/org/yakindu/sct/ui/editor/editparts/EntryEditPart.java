@@ -34,7 +34,8 @@ import de.itemis.gmf.runtime.commons.figures.EllipseAnchorDefaultSizeNodeFigure;
 
 /**
  * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
+ * 
  */
 public class EntryEditPart extends BorderedShapeEditPart {
 
