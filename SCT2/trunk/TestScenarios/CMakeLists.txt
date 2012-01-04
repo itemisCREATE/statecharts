@@ -3,7 +3,12 @@ cmake_minimum_required(VERSION 2.8)
 enable_testing()
 
 if (CMAKE_COMPILER_IS_GNUCC)
-add_definitions( -Wall -O0 -g)
+#add_definitions( -Wall -O0 -g)
+SET(CMAKE_C_FLAGS "-g -O0 -Wall -W -fprofile-arcs -ftest-coverage")
+ 
+#SET(CMAKE_SHARED_LINKER_FLAGS="-fprofile-arcs -ftest-coverage")
+#SET(CMAKE_EXE_LINKER_FLAGS "-fprofile-arcs -ftest-coverage")
+
 endif (CMAKE_COMPILER_IS_GNUCC)
 
 if (COMPILE_SINGLETON)
