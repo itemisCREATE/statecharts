@@ -49,6 +49,7 @@ import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sexec.transformation.FactoryExtension;
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
 import org.yakindu.sct.model.sgraph.Choice;
+import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Entry;
@@ -597,10 +598,26 @@ public class ModelSequencer {
               boolean _operator_notEquals_4 = ObjectExtensions.operator_notEquals(state_1, _target);
               if (_operator_notEquals_4) {
                 {
+                  Region _parentRegion = state_1.getParentRegion();
+                  CompositeElement _composite = _parentRegion.getComposite();
+                  EList<Region> _regions = _composite.getRegions();
+                  final EList<Region> siblingRegions = _regions;
+                  Region _parentRegion_1 = state_1.getParentRegion();
+                  Vertex _source_4 = t.getSource();
+                  Region _parentRegion_2 = _source_4.getParentRegion();
+                  boolean _operator_notEquals_5 = ObjectExtensions.operator_notEquals(_parentRegion_1, _parentRegion_2);
+                  if (_operator_notEquals_5) {
+                    Region _parentRegion_3 = state_1.getParentRegion();
+                    int _indexOf = siblingRegions.indexOf(_parentRegion_3);
+                    Iterable<Region> _take = IterableExtensions.<Region>take(siblingRegions, _indexOf);
+                    for (Region region : _take) {
+                      ModelSequencer.this.addEnterRegion(seq_1, region);
+                    }
+                  }
                   ExecutionState _create_4 = ModelSequencer.this.factory.create(state_1);
                   Step _entryAction = _create_4.getEntryAction();
-                  boolean _operator_notEquals_5 = ObjectExtensions.operator_notEquals(_entryAction, null);
-                  if (_operator_notEquals_5) {
+                  boolean _operator_notEquals_6 = ObjectExtensions.operator_notEquals(_entryAction, null);
+                  if (_operator_notEquals_6) {
                     EList<Step> _steps_5 = seq_1.getSteps();
                     ExecutionState _create_5 = ModelSequencer.this.factory.create(state_1);
                     Step _entryAction_1 = _create_5.getEntryAction();
@@ -622,30 +639,129 @@ public class ModelSequencer {
         };
       IterableExtensions.<State, Sequence>fold(_reverse, sequence, _function_1);
       Vertex _target_1 = t.getTarget();
-      boolean _operator_notEquals_6 = ObjectExtensions.operator_notEquals(_target_1, null);
-      if (_operator_notEquals_6) {
-        Vertex _target_2 = t.getTarget();
-        if ((_target_2 instanceof org.yakindu.sct.model.sgraph.RegularState)) {
-          EList<Step> _steps_7 = sequence.getSteps();
+      boolean _operator_notEquals_7 = ObjectExtensions.operator_notEquals(_target_1, null);
+      if (_operator_notEquals_7) {
+        {
+          Vertex _target_2 = t.getTarget();
+          Region _parentRegion_4 = _target_2.getParentRegion();
+          CompositeElement _composite_1 = _parentRegion_4.getComposite();
+          EList<Region> _regions_1 = _composite_1.getRegions();
+          final EList<Region> siblingRegions_1 = _regions_1;
           Vertex _target_3 = t.getTarget();
-          ExecutionState _create_7 = this.factory.create(((RegularState) _target_3));
-          Sequence _enterSequence = _create_7.getEnterSequence();
-          Call _newCall_3 = this.factory.newCall(_enterSequence);
-          _steps_7.add(_newCall_3);
-        } else {
-          Vertex _target_4 = t.getTarget();
-          if ((_target_4 instanceof org.yakindu.sct.model.sgraph.Choice)) {
-            EList<Step> _steps_8 = sequence.getSteps();
-            Vertex _target_5 = t.getTarget();
-            ExecutionChoice _create_8 = this.factory.create(((Choice) _target_5));
-            Sequence _reactSequence = _create_8.getReactSequence();
-            Call _newCall_4 = this.factory.newCall(_reactSequence);
-            _steps_8.add(_newCall_4);
+          Region _parentRegion_5 = _target_3.getParentRegion();
+          Vertex _source_5 = t.getSource();
+          Region _parentRegion_6 = _source_5.getParentRegion();
+          boolean _operator_notEquals_8 = ObjectExtensions.operator_notEquals(_parentRegion_5, _parentRegion_6);
+          if (_operator_notEquals_8) {
+            Vertex _target_4 = t.getTarget();
+            Region _parentRegion_7 = _target_4.getParentRegion();
+            int _indexOf_1 = siblingRegions_1.indexOf(_parentRegion_7);
+            Iterable<Region> _take_1 = IterableExtensions.<Region>take(siblingRegions_1, _indexOf_1);
+            for (Region region_1 : _take_1) {
+              this.addEnterRegion(sequence, region_1);
+            }
+          }
+          Vertex _target_5 = t.getTarget();
+          if ((_target_5 instanceof org.yakindu.sct.model.sgraph.RegularState)) {
+            EList<Step> _steps_7 = sequence.getSteps();
+            Vertex _target_6 = t.getTarget();
+            ExecutionState _create_7 = this.factory.create(((RegularState) _target_6));
+            Sequence _enterSequence = _create_7.getEnterSequence();
+            Call _newCall_3 = this.factory.newCall(_enterSequence);
+            _steps_7.add(_newCall_3);
+          } else {
+            Vertex _target_7 = t.getTarget();
+            if ((_target_7 instanceof org.yakindu.sct.model.sgraph.Choice)) {
+              EList<Step> _steps_8 = sequence.getSteps();
+              Vertex _target_8 = t.getTarget();
+              ExecutionChoice _create_8 = this.factory.create(((Choice) _target_8));
+              Sequence _reactSequence = _create_8.getReactSequence();
+              Call _newCall_4 = this.factory.newCall(_reactSequence);
+              _steps_8.add(_newCall_4);
+            }
+          }
+          Vertex _target_9 = t.getTarget();
+          Region _parentRegion_8 = _target_9.getParentRegion();
+          Vertex _source_6 = t.getSource();
+          Region _parentRegion_9 = _source_6.getParentRegion();
+          boolean _operator_notEquals_9 = ObjectExtensions.operator_notEquals(_parentRegion_8, _parentRegion_9);
+          if (_operator_notEquals_9) {
+            Vertex _target_10 = t.getTarget();
+            Region _parentRegion_10 = _target_10.getParentRegion();
+            int _indexOf_2 = siblingRegions_1.indexOf(_parentRegion_10);
+            int _operator_plus = IntegerExtensions.operator_plus(((Integer)_indexOf_2), ((Integer)1));
+            Iterable<Region> _drop = IterableExtensions.<Region>drop(siblingRegions_1, _operator_plus);
+            for (Region region_2 : _drop) {
+              this.addEnterRegion(sequence, region_2);
+            }
           }
         }
       }
+      List<State> _entryStates_1 = this.entryStates(t);
+      final Function2<Sequence,State,Sequence> _function_2 = new Function2<Sequence,State,Sequence>() {
+          public Sequence apply(final Sequence seq_2 , final State state_2) {
+            Sequence _xblockexpression_2 = null;
+            {
+              Vertex _target_11 = t.getTarget();
+              boolean _operator_notEquals_10 = ObjectExtensions.operator_notEquals(state_2, _target_11);
+              if (_operator_notEquals_10) {
+                {
+                  Region _parentRegion_11 = state_2.getParentRegion();
+                  CompositeElement _composite_2 = _parentRegion_11.getComposite();
+                  EList<Region> _regions_2 = _composite_2.getRegions();
+                  final EList<Region> siblingRegions_2 = _regions_2;
+                  Region _parentRegion_12 = state_2.getParentRegion();
+                  Vertex _source_7 = t.getSource();
+                  Region _parentRegion_13 = _source_7.getParentRegion();
+                  boolean _operator_notEquals_11 = ObjectExtensions.operator_notEquals(_parentRegion_12, _parentRegion_13);
+                  if (_operator_notEquals_11) {
+                    Region _parentRegion_14 = state_2.getParentRegion();
+                    int _indexOf_3 = siblingRegions_2.indexOf(_parentRegion_14);
+                    int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)_indexOf_3), ((Integer)1));
+                    Iterable<Region> _drop_1 = IterableExtensions.<Region>drop(siblingRegions_2, _operator_plus_1);
+                    for (Region region_3 : _drop_1) {
+                      ModelSequencer.this.addEnterRegion(seq_2, region_3);
+                    }
+                  }
+                }
+              }
+              _xblockexpression_2 = (seq_2);
+            }
+            return _xblockexpression_2;
+          }
+        };
+      IterableExtensions.<State, Sequence>fold(_entryStates_1, sequence, _function_2);
       return sequence;
     }
+  }
+  
+  public Boolean addEnterRegion(final Sequence seq, final Region r) {
+    Boolean _xblockexpression = null;
+    {
+      Entry _entry = this.entry(r);
+      State _target = this==null?(State)null:this.target(_entry);
+      ExecutionState _create = this.factory==null?(ExecutionState)null:this.factory.create(_target);
+      final ExecutionState entryState = _create;
+      Boolean _xifexpression = null;
+      boolean _operator_and = false;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(entryState, null);
+      if (!_operator_notEquals) {
+        _operator_and = false;
+      } else {
+        Sequence _enterSequence = entryState.getEnterSequence();
+        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_enterSequence, null);
+        _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_notEquals_1);
+      }
+      if (_operator_and) {
+        EList<Step> _steps = seq.getSteps();
+        Sequence _enterSequence_1 = entryState.getEnterSequence();
+        Call _newCall = this.factory.newCall(_enterSequence_1);
+        boolean _add = _steps.add(_newCall);
+        _xifexpression = _add;
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
   }
   
   public ReactionFired newTraceReactionFired(final Reaction r) {
@@ -1697,25 +1813,7 @@ public class ModelSequencer {
         for (Region r : _regions) {
           {
             this.defineStateEnterSequence(r);
-            Entry _entry = this.entry(r);
-            State _target = this==null?(State)null:this.target(_entry);
-            ExecutionState _create_1 = this.factory==null?(ExecutionState)null:this.factory.create(_target);
-            final ExecutionState entryState = _create_1;
-            boolean _operator_and = false;
-            boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(entryState, null);
-            if (!_operator_notEquals_1) {
-              _operator_and = false;
-            } else {
-              Sequence _enterSequence = entryState.getEnterSequence();
-              boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_enterSequence, null);
-              _operator_and = BooleanExtensions.operator_and(_operator_notEquals_1, _operator_notEquals_2);
-            }
-            if (_operator_and) {
-              EList<Step> _steps_3 = seq.getSteps();
-              Sequence _enterSequence_1 = entryState.getEnterSequence();
-              Call _newCall_1 = this.factory.newCall(_enterSequence_1);
-              _steps_3.add(_newCall_1);
-            }
+            this.addEnterRegion(seq, r);
           }
         }
       }
@@ -1988,24 +2086,7 @@ public class ModelSequencer {
       enterSequence.setComment(_operator_plus);
       EList<Region> _regions = sc.getRegions();
       for (Region r : _regions) {
-        Entry _entry = this.entry(r);
-        State _target = this==null?(State)null:this.target(_entry);
-        boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_target, null);
-        if (_operator_notEquals) {
-          {
-            Entry _entry_1 = this.entry(r);
-            State _target_1 = this==null?(State)null:this.target(_entry_1);
-            ExecutionState _create = this.factory==null?(ExecutionState)null:this.factory.create(_target_1);
-            Sequence _enterSequence = _create.getEnterSequence();
-            Call _newCall = this.factory.newCall(_enterSequence);
-            final Call step = _newCall;
-            boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(step, null);
-            if (_operator_notEquals_1) {
-              EList<Step> _steps = enterSequence.getSteps();
-              _steps.add(step);
-            }
-          }
-        }
+        this.addEnterRegion(enterSequence, r);
       }
       flow.setEnterSequence(enterSequence);
       return enterSequence;

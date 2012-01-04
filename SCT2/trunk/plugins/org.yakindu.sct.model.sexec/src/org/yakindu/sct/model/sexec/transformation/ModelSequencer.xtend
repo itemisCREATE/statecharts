@@ -346,25 +346,89 @@ class ModelSequencer {
 		
 
 		// define entry behavior of the transition
+		
+		// first process all composite states on the path to the target state in top-down-order
 		t.entryStates().reverse.fold(sequence, [seq, state | {
 			if (state != t.target) { // since we call the entry sequence of the target state we have to exclude it here
+			
+				// in the case of orthogonal states we also have to enter sibling states.
+				val siblingRegions = state.parentRegion.composite.regions
+				
+				if (state.parentRegion != t.source.parentRegion) {
+					// process higher order sibling regions
+					for ( region : siblingRegions.take(siblingRegions.indexOf(state.parentRegion)) ) {
+						seq.addEnterRegion(region)
+					} 
+				}
+				
+				// perform entry on the transition path 			
 				if (state.create.entryAction != null) seq.steps.add(state.create.entryAction.newCall)
 				if ( _addTraceSteps ) seq.steps += newTraceStateEntered(state.create)
+				
 			}
 			seq
 		}])
 		
-		if (t.target != null ) 
+		// second process the target state entry behavior
+		if (t.target != null ) {
+
+			// in the case of orthogonal states we also have to enter sibling states.
+			val siblingRegions = t.target.parentRegion.composite.regions
+			
+			if (t.target.parentRegion != t.source.parentRegion) {
+				// process higher order sibling regions
+				for ( region : siblingRegions.take(siblingRegions.indexOf(t.target.parentRegion)) ) {
+					sequence.addEnterRegion(region)
+				} 	
+			}
+			
+			// perform entry on the transition path 			
 			if ( t.target instanceof RegularState) {
 				sequence.steps.add((t.target as RegularState).create.enterSequence.newCall )	
 			} else if ( t.target instanceof Choice ) {
 				sequence.steps.add((t.target as Choice).create.reactSequence.newCall )	
 			}
+				
+			if (t.target.parentRegion != t.source.parentRegion) {
+				// process lower order sibling regions 
+				for ( region : siblingRegions.drop(siblingRegions.indexOf(t.target.parentRegion)+1) ) {
+					sequence.addEnterRegion(region)
+				} 	
+			}
+		}
+		
+		
+		// third - process all entry behavior that has to be executed after the target state behavior in bottom-up-order
+		t.entryStates().fold(sequence, [seq, state | {
+			if (state != t.target) { // since we call the entry sequence of the target state we have to exclude it here
+			
+				// in the case of orthogonal states we also have to enter sibling states.
+				val siblingRegions = state.parentRegion.composite.regions
+				
+				if (state.parentRegion != t.source.parentRegion) {
+					// process lower order sibling regions 
+					for ( region : siblingRegions.drop(siblingRegions.indexOf(state.parentRegion)+1) ) {
+						seq.addEnterRegion(region)
+					} 				
+				}
+			}
+			seq
+		}])
+		
 			
 		return sequence
 	}	
 	
 	
+	
+	def addEnterRegion(Sequence seq, Region r) {
+		val entryState = r.entry?.target?.create
+					
+		if (entryState != null && entryState.enterSequence != null) 
+				seq.steps.add(entryState.enterSequence.newCall);
+	}
+
+
 	def newTraceReactionFired(Reaction r) {
 		val rf = sexecFactory.createReactionFired
 		rf.reaction = r
@@ -859,10 +923,11 @@ class ModelSequencer {
 			for ( r : state.regions ) {
 				defineStateEnterSequence(r)
 				
-				val entryState = r.entry?.target?.create
-				
-				if (entryState != null && entryState.enterSequence != null) 
-					seq.steps.add(entryState.enterSequence.newCall);
+				seq.addEnterRegion(r)
+//				val entryState = r.entry?.target?.create
+//				
+//				if (entryState != null && entryState.enterSequence != null) 
+//					seq.steps.add(entryState.enterSequence.newCall);
 			} 
 		}
 
@@ -879,7 +944,7 @@ class ModelSequencer {
 		// iterate over all regions
 		for ( r : sc.regions) defineStateExitSequence(r)
 	}
-	
+		
 
 	def dispatch void defineStateExitSequence(Region r) {
 		
@@ -1021,10 +1086,12 @@ class ModelSequencer {
 		enterSequence.comment = "Default enter sequence for statechart " + sc.name
 		
 		for ( r : sc.regions) {
-			if ( r.entry?.target != null) {
-				val step = r.entry?.target?.create.enterSequence.newCall
-				if (step != null) enterSequence.steps.add(step);
-			}
+			enterSequence.addEnterRegion(r)
+			
+//			if ( r.entry?.target != null) {
+//				val step = r.entry?.target?.create.enterSequence.newCall
+//				if (step != null) enterSequence.steps.add(step);
+//			}
 		} 
 		
 		flow.enterSequence = enterSequence
