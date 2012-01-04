@@ -10,15 +10,6 @@ Source-Code-Management:
 + SVN
 	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/features
 	Location: sct2_repository/features
-+ SVN
-	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.gmf.utils/plugins
-	Location: gmf_utils_repository/plugins
-+ SVN
-	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.gmf.utils/features
-	Location: gmf_utils_repository/features
-+ SVN
-	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/plugins
-	Location: base_repository/plugins
     
 Build:
 + Execute Shell
@@ -31,9 +22,6 @@ Build:
 		cp -R sct2_repository/plugins/* build/
 		cp -R sct2_repository/features/* build/
 		cp -R sct2_repository/test-plugins/* build/
-		cp -R gmf_utils_repository/plugins/* build/
-		cp -R gmf_utils_repository/features/* build/
-		cp -R base_repository/plugins/* build/
 
 
 + Invoke Maven 3

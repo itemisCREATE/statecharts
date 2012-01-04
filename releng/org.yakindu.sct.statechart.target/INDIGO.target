@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target name="INDIGO" sequenceNumber="5">
+<target name="INDIGO" sequenceNumber="6">
 <locations>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.sdk.feature.group" version="2.7.0.v20110606-0949"/>
@@ -14,6 +14,10 @@
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.platform.ide" version="3.7.0.I20110613-1736"/>
 <repository location="http://download.eclipse.org/eclipse/updates/3.7/"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.yakindu.base.feature.group" version="1.0.0.201201041403"/>
+<repository location="http://updates.yakindu.com/indigo/integration"/>
 </location>
 </locations>
 </target>

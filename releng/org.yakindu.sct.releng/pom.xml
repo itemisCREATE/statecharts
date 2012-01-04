@@ -111,18 +111,6 @@
 		</plugins>
 	</build>
 
-	<repositories>
-		<repository>
-			<!-- Selected version of xtextUtils repository which is shipped with this 
-				repository -->
-			<!-- Todo: works only with a custom java keystore because of self signed 
-				ssl-cert, local results previous build in local repo are used as fallback -->
-			<id>xtextUtils</id>
-			<layout>p2</layout>
-			<url>${xtextUtilsRepository}/artifact/update-site/</url>
-		</repository>
-	</repositories>
-
 	<profiles>
 		<profile>
 			<id>Indigo.target</id>
@@ -172,41 +160,6 @@
 									<arch>x86_64</arch>
 								</environment>
 							</environments>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>CI</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.tycho.extras</groupId>
-						<artifactId>tycho-p2-extras-plugin</artifactId>
-						<version>${tycho-version}</version>
-						<inherited>false</inherited>
-						<executions>
-							<execution>
-								<phase>prepare-package</phase>
-								<goals>
-									<goal>mirror</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<source>
-								<!-- source repositori(es) to mirror from -->
-								<repository>
-									<url>${xtextUtilsRepository}artifact/update-site/</url>
-									<layout>p2</layout>
-									<!-- sypported layouts are "p2-metadata", "p2-artifacts", and "p2" 
-										(for joint repositories) -->
-								</repository>
-							</source>
-
-							<destination>${project.build.directory}/xtextUtilsRepository</destination>
-							<compress>true</compress>
 						</configuration>
 					</plugin>
 				</plugins>
