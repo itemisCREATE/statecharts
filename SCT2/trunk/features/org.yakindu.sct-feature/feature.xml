@@ -93,7 +93,7 @@
          unpack="false"/>
 
    <plugin
-         id="org.yakindu.base.types.ui.scope"
+         id="org.yakindu.base.types.scope"
          download-size="0"
          install-size="0"
          version="0.0.0"
