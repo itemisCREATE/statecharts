@@ -22,7 +22,6 @@ import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
@@ -41,22 +40,30 @@ import de.itemis.xtext.utils.jface.viewers.context.CloningBasedFakeContextResour
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class StatechartPropertySection extends AbstractEditorPropertySection
-		implements ISourceObjectCallback {
+public class StatechartPropertySection extends
+		AbstractTwoColumnEditorPropertySection implements ISourceObjectCallback {
 
 	private Control textControl;
 	private Text txtName;
 	private OrderElementControl orderElementControl;
 
-	public void createControls(Composite parent) {
-		parent.setLayout(new FillLayout());
-		Composite leftColumn = getToolkit().createComposite(parent);
-		leftColumn.setLayout(createBodyLayout());
-		Composite rightColumn = getToolkit().createComposite(parent);
-		rightColumn.setLayout(createBodyLayout());
+	@Override
+	protected void createLeftColumnControls(Composite leftColumn) {
 		createSpecificationControl(leftColumn);
+	}
+
+	@Override
+	protected void createRightColumnControls(Composite rightColumn) {
 		createNameControl(rightColumn);
 		createRegionsControl(rightColumn);
+
+	}
+
+	private void createNameControl(Composite parent) {
+		Label lblName = getToolkit().createLabel(parent, "Statechart Name: ");
+		txtName = getToolkit().createText(parent, "");
+		GridDataFactory.fillDefaults().applyTo(txtName);
+		GridDataFactory.fillDefaults().applyTo(lblName);
 	}
 
 	private void createRegionsControl(Composite rightColumn) {
@@ -66,13 +73,6 @@ public class StatechartPropertySection extends AbstractEditorPropertySection
 				SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS, this);
 		GridDataFactory.fillDefaults().span(2, 0).grab(true, false)
 				.applyTo(orderElementControl);
-	}
-
-	private void createNameControl(Composite parent) {
-		Label lblName = getToolkit().createLabel(parent, "Statechart Name: ");
-		txtName = getToolkit().createText(parent, "");
-		GridDataFactory.fillDefaults().applyTo(txtName);
-		GridDataFactory.fillDefaults().applyTo(lblName);
 	}
 
 	private void createSpecificationControl(Composite parent) {

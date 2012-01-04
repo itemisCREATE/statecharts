@@ -30,7 +30,6 @@ import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -55,27 +54,26 @@ import de.itemis.xtext.utils.jface.viewers.context.CloningBasedFakeContextResour
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class StatePropertySection extends AbstractEditorPropertySection
-		implements ISourceObjectCallback {
+public class StatePropertySection extends
+		AbstractTwoColumnEditorPropertySection implements ISourceObjectCallback {
 
 	private Label lblSubmachine;
 	private Control txtSpecification;
 	private Control txtName;
 
-	private UpdateLabelAdapter updateLabelAdapter;
+	private UpdateLabelAdapter updateLabelAdapter = new UpdateLabelAdapter();
 	private OrderElementControl orderElementControl;
 
 	@Override
-	public void createControls(final Composite parent) {
-		parent.setLayout(new FillLayout());
-		Composite leftColumn = getToolkit().createComposite(parent);
-		leftColumn.setLayout(new FillLayout());
-		Composite rightColumn = getToolkit().createComposite(parent);
-		rightColumn.setLayout(createBodyLayout());
+	protected void createRightColumnControls(Composite rightColumn) {
 		createNameControl(rightColumn);
-		createSpecificationControl(leftColumn);
 		createSubmachineControl(rightColumn);
 		createTransitionsControl(rightColumn);
+	}
+
+	@Override
+	protected void createLeftColumnControls(Composite leftColumn) {
+		createSpecificationControl(leftColumn);
 	}
 
 	private void createNameControl(final Composite parent) {
@@ -98,6 +96,7 @@ public class StatePropertySection extends AbstractEditorPropertySection
 		} else {
 			txtSpecification = getToolkit().createText(parent, "", SWT.MULTI);
 		}
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(txtSpecification);
 	}
 
 	private void createSubmachineControl(final Composite parent) {
@@ -136,10 +135,6 @@ public class StatePropertySection extends AbstractEditorPropertySection
 	public void bindModel(EMFDataBindingContext context) {
 		bindNameControl(context);
 		bindSpecificationControl(context);
-		if (updateLabelAdapter == null) {
-			updateLabelAdapter = new UpdateLabelAdapter();
-			eObject.eAdapters().add(updateLabelAdapter);
-		}
 		orderElementControl.refreshInput();
 		updateLabel();
 	}
@@ -173,6 +168,22 @@ public class StatePropertySection extends AbstractEditorPropertySection
 	}
 
 	@Override
+	protected void setEObject(EObject object) {
+		if (getEObject() != null)
+			getEObject().eAdapters().remove(updateLabelAdapter);
+		super.setEObject(object);
+		getEObject().eAdapters().add(updateLabelAdapter);
+	}
+
+	@Override
+	public void dispose() {
+		if (getEObject() != null) {
+			getEObject().eAdapters().remove(updateLabelAdapter);
+		}
+		super.dispose();
+	}
+
+	@Override
 	public EObject getEObject() {
 		return super.getEObject();
 	}
@@ -196,7 +207,8 @@ public class StatePropertySection extends AbstractEditorPropertySection
 							new SetRequest(
 									eObject,
 									SGraphPackage.Literals.STATE__SUBSTATECHART_ID,
-									selectedSubmachine.toString()));
+									selectedSubmachine != null ? selectedSubmachine
+											.toString() : null));
 					try {
 						OperationHistoryFactory.getOperationHistory().execute(
 								command, new NullProgressMonitor(), null);
