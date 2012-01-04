@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Alexander Nyssen (itemis AG) - initial API and implementation
+ */
 package org.yakindu.base.types.scope;
 
 import java.util.Collections;
@@ -12,7 +22,6 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
-import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.yakindu.base.types.Library;
 import org.yakindu.base.types.Type;
 
@@ -24,17 +33,16 @@ public class TypeLibrariesExtensionPointScope extends AbstractScope {
 
 	private Library loadedModel;
 
-	private final XtextResourceSetProvider resourceSetProvider;
+	private final XtextResourceSet resourceSet;
 
 	private final IQualifiedNameProvider qualifiedNameProvider;
 
 	protected TypeLibrariesExtensionPointScope(IScope parent,
-			TypeLibraryLocation locationData,
-			XtextResourceSetProvider resourceSetProvider,
+			TypeLibraryLocation locationData, XtextResourceSet resourceSet,
 			IQualifiedNameProvider qualifiedNameProvider) {
 		super(parent, false);
 		this.locationData = locationData;
-		this.resourceSetProvider = resourceSetProvider;
+		this.resourceSet = resourceSet;
 		this.qualifiedNameProvider = qualifiedNameProvider;
 	}
 
@@ -61,9 +69,6 @@ public class TypeLibrariesExtensionPointScope extends AbstractScope {
 	}
 
 	protected void loadDefinitions() {
-		XtextResourceSet resourceSet = (XtextResourceSet) resourceSetProvider
-				.get(null);
-		resourceSet.setClasspathURIContext(locationData.getBundle());
 		URI uri = locationData.getLocation();
 		Resource resource = (Resource) resourceSet.getResource(uri, true);
 		if (resource != null && !resource.getContents().isEmpty()) {
