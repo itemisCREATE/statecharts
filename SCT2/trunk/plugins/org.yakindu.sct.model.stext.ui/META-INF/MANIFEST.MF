@@ -14,8 +14,7 @@ Require-Bundle: org.yakindu.sct.model.stext;visibility:=reexport,
  org.eclipse.xtext.builder,
  org.antlr.runtime,
  org.eclipse.xtext.common.types.ui,
- org.yakindu.sct.model.sgraph,
- org.yakindu.base.types.ui.scope;bundle-version="1.0.0"
+ org.yakindu.sct.model.sgraph
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

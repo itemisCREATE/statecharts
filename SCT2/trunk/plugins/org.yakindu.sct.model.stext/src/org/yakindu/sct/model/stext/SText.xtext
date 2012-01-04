@@ -167,7 +167,7 @@ DefaultEvent:
 
 /* --- statements --- */
 Statement returns sgraph::Statement:
-	Assignment | EventRaising | OperationCall;
+	Assignment | EventRaising | OperationCall; 
 
 Assignment:
 	varRef=[sgraph::Variable|FQN] operator=AssignmentOperator expression=Expression;
