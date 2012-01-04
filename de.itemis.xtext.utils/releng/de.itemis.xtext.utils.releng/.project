@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>de.itemis.xtext.utils.releng</name>
+	<name>org.yakindu.base.releng</name>
 	<comment></comment>
 	<projects>
 	</projects>

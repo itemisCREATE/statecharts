@@ -4,13 +4,12 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>de.itemis.utils</groupId>
-		<artifactId>de.itemis.utils.releng</artifactId>
+		<groupId>org.yakindu.base</groupId>
+		<artifactId>org.yakindu.base.releng</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../de.itemis.xtext.utils.releng/pom.xml</relativePath>
+		<relativePath>../org.yakindu.base.releng/pom.xml</relativePath>
 	</parent>
 	<artifactId>de.itemis.xtext.utils.promote</artifactId>
-	<groupId>de.itemis.utils</groupId>
 	<packaging>pom</packaging>
 
 	<properties>
