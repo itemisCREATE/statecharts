@@ -10,6 +10,18 @@ Source-Code-Management:
 + SVN
 	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.xtext.utils/features
 	Location: XtextUtils_repository/features
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.gmf.utils/plugins
+	Location: gmf_utils_repository/plugins
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.gmf.utils/features
+	Location: gmf_utils_repository/features
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/plugins
+	Location: base_repository/plugins
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/features
+	Location: base_repository/features
  
 Build:
 + Execute Shell
@@ -18,14 +30,18 @@ Build:
 		   rm -fr build
 		fi
 		mkdir build
-		cp -R releng build/
+		cp -R releng/* build/
 		cp -R XtextUtils_repository/plugins/* build/
 		cp -R XtextUtils_repository/features/* build/
+		cp -R gmf_utils_repository/plugins/* build/
+		cp -R gmf_utils_repository/features/* build/
+		cp -R base_repository/plugins/* build/
+		cp -R base_repository/features/* build/
 
 
 + Invoke Maven 3
 	Goals
-		clean install
+		clean verify
 	POM File
 		../build/de.itemis.xtext.utils.releng/pom.xml
 	Profiles

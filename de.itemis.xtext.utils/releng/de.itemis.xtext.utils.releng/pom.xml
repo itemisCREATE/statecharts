@@ -162,6 +162,10 @@
 	</profiles>
 
 	<modules>
+		<module>../org.yakindu.base.types</module>
+		<module>../org.yakindu.base.types.scope</module>
+		<module>../de.itemis.gmf.runtime.commons</module>
+		<module>../de.itemis.gmf.runtime.commons-feature</module>
 		<module>../de.itemis.xtext.utils.target</module>
 		<module>../de.itemis.xtext.utils.repository</module>
 		<module>../de.itemis.xtext.utils.gmf</module>
@@ -170,6 +174,7 @@
 		<module>../de.itemis.xtext.utils.jface</module>
 		<module>../de.itemis.xtext.utils.jface-feature</module>
 		<module>../de.itemis.xtext.utils.jface.source-feature</module>
+		<module>../org.yakindu.base-feature</module>
 	</modules>
 
 </project>
