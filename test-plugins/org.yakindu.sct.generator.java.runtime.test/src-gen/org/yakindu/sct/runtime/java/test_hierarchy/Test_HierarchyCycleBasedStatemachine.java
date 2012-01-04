@@ -82,17 +82,29 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState9() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
-			if (isStateActive(State.State9)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-				defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
+				case State9 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State10)) {
-				stateVector[0] = null;
+					defaultInterface
+							.setVarS1(defaultInterface.getVarS1() - (1));
 
-				defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
+					break;
 
+				case State10 :
+					stateVector[0] = null;
+
+					defaultInterface
+							.setVarS1(defaultInterface.getVarS1() - (1));
+
+					break;
+
+				default :
+					break;
 			}
+
 			defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
 
 			defaultInterface.setVarS2(1);
@@ -119,17 +131,29 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState10() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
-			if (isStateActive(State.State9)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-				defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
+				case State9 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State10)) {
-				stateVector[0] = null;
+					defaultInterface
+							.setVarS1(defaultInterface.getVarS1() - (1));
 
-				defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
+					break;
 
+				case State10 :
+					stateVector[0] = null;
+
+					defaultInterface
+							.setVarS1(defaultInterface.getVarS1() - (1));
+
+					break;
+
+				default :
+					break;
 			}
+
 			defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
 
 			defaultInterface.setVarS2(1);
@@ -158,37 +182,60 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState3() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
-			if (isStateActive(State.State3)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+				case State3 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State5)) {
-				stateVector[0] = null;
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					break;
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+				case State5 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State7)) {
-				stateVector[0] = null;
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					break;
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+				case State7 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State8)) {
-				stateVector[0] = null;
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					break;
 
+				case State8 :
+					stateVector[0] = null;
+
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
+
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
+
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
+
+					break;
+
+				default :
+					break;
 			}
+
 			defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 			defaultInterface.setVarS1(1);
@@ -258,37 +305,60 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState5() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
-			if (isStateActive(State.State3)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+				case State3 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State5)) {
-				stateVector[0] = null;
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					break;
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+				case State5 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State7)) {
-				stateVector[0] = null;
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					break;
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+				case State7 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State8)) {
-				stateVector[0] = null;
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					break;
 
+				case State8 :
+					stateVector[0] = null;
+
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
+
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
+
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
+
+					break;
+
+				default :
+					break;
 			}
+
 			defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 			defaultInterface.setVarS1(1);
@@ -300,31 +370,43 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventEvent7())) {
-				if (isStateActive(State.State5)) {
-					stateVector[0] = null;
+				//Handle exit of all possible states on position 0...
+				switch (stateVector[0]) {
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					case State5 :
+						stateVector[0] = null;
 
-				} else if (isStateActive(State.State7)) {
-					stateVector[0] = null;
+						defaultInterface
+								.setVarS2(defaultInterface.getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+						break;
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					case State7 :
+						stateVector[0] = null;
 
-				} else if (isStateActive(State.State8)) {
-					stateVector[0] = null;
+						defaultInterface
+								.setVarS2(defaultInterface.getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+						defaultInterface
+								.setVarS2(defaultInterface.getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+						break;
 
+					case State8 :
+						stateVector[0] = null;
+
+						defaultInterface
+								.setVarS2(defaultInterface.getVarS2() - (1));
+
+						defaultInterface
+								.setVarS2(defaultInterface.getVarS2() - (1));
+
+						break;
+
+					default :
+						break;
 				}
+
 				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 				defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
@@ -404,37 +486,60 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState7() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
-			if (isStateActive(State.State3)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+				case State3 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State5)) {
-				stateVector[0] = null;
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					break;
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+				case State5 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State7)) {
-				stateVector[0] = null;
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					break;
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+				case State7 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State8)) {
-				stateVector[0] = null;
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					break;
 
+				case State8 :
+					stateVector[0] = null;
+
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
+
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
+
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
+
+					break;
+
+				default :
+					break;
 			}
+
 			defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 			defaultInterface.setVarS1(1);
@@ -446,31 +551,43 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventEvent7())) {
-				if (isStateActive(State.State5)) {
-					stateVector[0] = null;
+				//Handle exit of all possible states on position 0...
+				switch (stateVector[0]) {
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					case State5 :
+						stateVector[0] = null;
 
-				} else if (isStateActive(State.State7)) {
-					stateVector[0] = null;
+						defaultInterface
+								.setVarS2(defaultInterface.getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+						break;
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					case State7 :
+						stateVector[0] = null;
 
-				} else if (isStateActive(State.State8)) {
-					stateVector[0] = null;
+						defaultInterface
+								.setVarS2(defaultInterface.getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+						defaultInterface
+								.setVarS2(defaultInterface.getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+						break;
 
+					case State8 :
+						stateVector[0] = null;
+
+						defaultInterface
+								.setVarS2(defaultInterface.getVarS2() - (1));
+
+						defaultInterface
+								.setVarS2(defaultInterface.getVarS2() - (1));
+
+						break;
+
+					default :
+						break;
 				}
+
 				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 				defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
@@ -480,19 +597,29 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 
 			} else {
 				if (occuredEvents.contains(defaultInterface.getEventEvent8())) {
-					if (isStateActive(State.State7)) {
-						stateVector[0] = null;
+					//Handle exit of all possible states on position 0...
+					switch (stateVector[0]) {
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+						case State7 :
+							stateVector[0] = null;
 
-					} else if (isStateActive(State.State8)) {
-						stateVector[0] = null;
+							defaultInterface.setVarS2(defaultInterface
+									.getVarS2() - (1));
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+							break;
 
+						case State8 :
+							stateVector[0] = null;
+
+							defaultInterface.setVarS2(defaultInterface
+									.getVarS2() - (1));
+
+							break;
+
+						default :
+							break;
 					}
+
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
 
@@ -526,37 +653,60 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState8() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
-			if (isStateActive(State.State3)) {
-				stateVector[0] = null;
+			//Handle exit of all possible states on position 0...
+			switch (stateVector[0]) {
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+				case State3 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State5)) {
-				stateVector[0] = null;
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					break;
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+				case State5 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State7)) {
-				stateVector[0] = null;
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					break;
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+				case State7 :
+					stateVector[0] = null;
 
-			} else if (isStateActive(State.State8)) {
-				stateVector[0] = null;
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+					break;
 
+				case State8 :
+					stateVector[0] = null;
+
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
+
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
+
+					defaultInterface
+							.setVarS2(defaultInterface.getVarS2() - (1));
+
+					break;
+
+				default :
+					break;
 			}
+
 			defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 			defaultInterface.setVarS1(1);
@@ -568,31 +718,43 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventEvent7())) {
-				if (isStateActive(State.State5)) {
-					stateVector[0] = null;
+				//Handle exit of all possible states on position 0...
+				switch (stateVector[0]) {
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					case State5 :
+						stateVector[0] = null;
 
-				} else if (isStateActive(State.State7)) {
-					stateVector[0] = null;
+						defaultInterface
+								.setVarS2(defaultInterface.getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+						break;
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					case State7 :
+						stateVector[0] = null;
 
-				} else if (isStateActive(State.State8)) {
-					stateVector[0] = null;
+						defaultInterface
+								.setVarS2(defaultInterface.getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+						defaultInterface
+								.setVarS2(defaultInterface.getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+						break;
 
+					case State8 :
+						stateVector[0] = null;
+
+						defaultInterface
+								.setVarS2(defaultInterface.getVarS2() - (1));
+
+						defaultInterface
+								.setVarS2(defaultInterface.getVarS2() - (1));
+
+						break;
+
+					default :
+						break;
 				}
+
 				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
 				defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
@@ -602,19 +764,29 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 
 			} else {
 				if (occuredEvents.contains(defaultInterface.getEventEvent8())) {
-					if (isStateActive(State.State7)) {
-						stateVector[0] = null;
+					//Handle exit of all possible states on position 0...
+					switch (stateVector[0]) {
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+						case State7 :
+							stateVector[0] = null;
 
-					} else if (isStateActive(State.State8)) {
-						stateVector[0] = null;
+							defaultInterface.setVarS2(defaultInterface
+									.getVarS2() - (1));
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+							break;
 
+						case State8 :
+							stateVector[0] = null;
+
+							defaultInterface.setVarS2(defaultInterface
+									.getVarS2() - (1));
+
+							break;
+
+						default :
+							break;
 					}
+
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
 

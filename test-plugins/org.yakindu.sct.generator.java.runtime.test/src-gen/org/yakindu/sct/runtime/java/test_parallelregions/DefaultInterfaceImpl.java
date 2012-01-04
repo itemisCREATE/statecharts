@@ -20,6 +20,10 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	private final Event<Events> EventEvent4 = new Event<Events>(Events.Event4);
 	private final Event<Events> EventEvent5 = new Event<Events>(Events.Event5);
 	private final Event<Events> EventEvent6 = new Event<Events>(Events.Event6);
+	private final Event<Events> EventEvent7 = new Event<Events>(Events.Event7);
+	private final Event<Events> EventEvent8 = new Event<Events>(Events.Event8);
+	private final Event<Events> EventEvent9 = new Event<Events>(Events.Event9);
+	private final Event<Events> EventEvent10 = new Event<Events>(Events.Event10);
 
 	private Test_ParallelRegionsCycleBasedStatemachine statemachine;
 
@@ -76,13 +80,45 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		return EventEvent6;
 	}
 
-	private boolean varBla;
-
-	public boolean getVarBla() {
-		return varBla;
+	public void raiseEvent7() {
+		statemachine.getOccuredEvents().add(EventEvent7);
 	}
 
-	public void setVarBla(boolean value) {
-		varBla = value;
+	public Event<Events> getEventEvent7() {
+		return EventEvent7;
+	}
+
+	public void raiseEvent8() {
+		statemachine.getOccuredEvents().add(EventEvent8);
+	}
+
+	public Event<Events> getEventEvent8() {
+		return EventEvent8;
+	}
+
+	public void raiseEvent9() {
+		statemachine.getOccuredEvents().add(EventEvent9);
+	}
+
+	public Event<Events> getEventEvent9() {
+		return EventEvent9;
+	}
+
+	public void raiseEvent10() {
+		statemachine.getOccuredEvents().add(EventEvent10);
+	}
+
+	public Event<Events> getEventEvent10() {
+		return EventEvent10;
+	}
+
+	private int varReg3 = -(1);
+
+	public int getVarReg3() {
+		return varReg3;
+	}
+
+	public void setVarReg3(int value) {
+		varReg3 = value;
 	}
 }
