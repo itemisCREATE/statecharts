@@ -11,6 +11,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ModelSequencerStateTest.class,
 	ModelSequencerStateReactionTest.class,
 	ModelSequencerHierarchyTest.class,
+	ModelSequencerOrthogonalityTest.class,
 	ModelSequencerStateVectorTest.class})
 public class AllTests {
 	
