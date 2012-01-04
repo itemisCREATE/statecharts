@@ -4,27 +4,22 @@
 package org.yakindu.sct.model.stext.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory;
-import org.yakindu.base.types.scope.TypeLibrariesAwareScopeProvider;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 
 /**
  * Use this class to register components to be used within the IDE.
  */
-public class STextUiModule extends org.yakindu.sct.model.stext.ui.AbstractSTextUiModule {
-	
+public class STextUiModule extends
+		org.yakindu.sct.model.stext.ui.AbstractSTextUiModule {
+
 	public static final String STEXT_LANGUAGE_NAME = "org.yakindu.sct.model.stext.SText";
 
 	public STextUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
-	
-	public Class<? extends StatefulFactory> bindStatefulFactory () {
+
+	public Class<? extends StatefulFactory> bindStatefulFactory() {
 		return STextStatefulFactory.class;
-	}
-	
-	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return TypeLibrariesAwareScopeProvider.class;
 	}
 }
