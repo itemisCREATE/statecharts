@@ -163,4 +163,10 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 		return super.getAdapter(adapter);
 	}
 
+	public Vertex getState() {
+		return state;
+	}
+
+	
+	
 }

@@ -11,6 +11,7 @@
 package org.yakindu.sct.simulation.core.debugmodel;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.Timer;
@@ -28,19 +29,25 @@ import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.ecore.EObject;
+import org.yakindu.sct.model.sexec.Trace;
+import org.yakindu.sct.model.sexec.TraceStateEntered;
+import org.yakindu.sct.model.sexec.TraceStateExited;
+import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.extensions.ExecutionFactoryExtensions;
 import org.yakindu.sct.simulation.core.extensions.ExecutionFactoryExtensions.ExecutionFactoryDescriptor;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeFactory;
+import org.yakindu.sct.simulation.core.runtime.IExecutionTraceListener;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
+public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
+		IExecutionTraceListener {
 
 	// TODO: Add to launch tab config
 	private static final int CYCLE_SLEEP_TIME = 100;
@@ -57,11 +64,14 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 
 	private final Statechart statechart;
 
+	private List<SCTDebugThread> threads;
+
 	public SCTDebugTarget(ILaunch launch, Statechart statechart)
 			throws CoreException {
 		super(null, statechart.eResource().getURI().toPlatformString(true));
 		this.launch = launch;
 		this.statechart = statechart;
+		threads = new ArrayList<SCTDebugThread>();
 		timer = new Timer();
 		DebugPlugin.getDefault().getBreakpointManager()
 				.addBreakpointListener(this);
@@ -72,6 +82,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 	private void createExecutionModel(Statechart statechart) {
 		IExecutionFacadeFactory factory = getExecutionFacadeFactory(statechart);
 		facade = factory.createExecutionFacade(statechart);
+		facade.addTraceListener(this);
 		facade.enter();
 		scheduleCycle();
 	}
@@ -104,12 +115,33 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 	}
 
 	public IThread[] getThreads() throws DebugException {
-		List<SCTDebugThread> threads = new ArrayList<SCTDebugThread>();
+		// Collect all active regions
 		Set<Vertex> activeLeafStates = facade.getExecutionContext()
 				.getActiveLeafStates();
+		List<Region> activeRegions = new ArrayList<Region>();
 		for (Vertex vertex : activeLeafStates) {
-			threads.add(new SCTDebugThread(this, facade, getResourceString(),
-					vertex.getParentRegion()));
+			activeRegions.add(vertex.getParentRegion());
+		}
+		// Remove orphaned debug threads
+		Iterator<SCTDebugThread> iterator = threads.iterator();
+		while (iterator.hasNext()) {
+			SCTDebugThread next = iterator.next();
+			if (!activeRegions.contains(next.getRegion())) {
+				iterator.remove();
+			}
+		}
+		// Add new debug threads
+		for (Region region : activeRegions) {
+			boolean found = false;
+			for (SCTDebugThread thread : threads) {
+				if (thread.getRegion() == region) {
+					found = true;
+				}
+			}
+			if (!found) {
+				threads.add(new SCTDebugThread(this, facade,
+						getResourceString(), region));
+			}
 		}
 		return threads.toArray(new IThread[] {});
 	}
@@ -137,6 +169,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 	public void terminate() throws DebugException {
 		fireEvent(new DebugEvent(getDebugTarget(), DebugEvent.TERMINATE));
 		terminated = true;
+		facade.removeTraceListener(this);
 		facade.tearDown();
 		timer.cancel();
 		timer.purge();
@@ -220,5 +253,11 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 
 	public boolean isStepping() {
 		return stepping;
+	}
+
+	public void traceStepExecuted(Trace trace) {
+		if (trace instanceof TraceStateEntered
+				|| trace instanceof TraceStateExited)
+			fireChangeEvent(DebugEvent.CONTENT);
 	}
 }

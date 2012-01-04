@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.simulation.core.debugmodel;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.debug.core.DebugException;
@@ -32,6 +30,7 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 
 	private final Region region;
 	private final IExecutionFacade facade;
+	private SCTStackFrame stackFrame;
 
 	public SCTDebugThread(SCTDebugTarget target, IExecutionFacade facade,
 			String resourceString, Region region) {
@@ -45,16 +44,24 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public IStackFrame[] getStackFrames() throws DebugException {
-		List<IStackFrame> stackFrames = new ArrayList<IStackFrame>();
 		Set<Vertex> activeLeafStates = facade.getExecutionContext()
 				.getActiveLeafStates();
+		Vertex activeState = null;
 		for (Vertex vertex : activeLeafStates) {
 			if (vertex.getParentRegion() == region) {
-				stackFrames.add(new SCTStackFrame(this, vertex,
-						getResourceString()));
+				activeState = vertex;
+				break;
 			}
 		}
-		return stackFrames.toArray(new IStackFrame[] {});
+		if (activeState != null) {
+			if (stackFrame == null || stackFrame.getState() != activeState) {
+				stackFrame = new SCTStackFrame(this, activeState,
+						getResourceString());
+			}
+		} else {
+			stackFrame = null;
+		}
+		return new IStackFrame[] { stackFrame };
 	}
 
 	public boolean hasStackFrames() throws DebugException {
@@ -142,6 +149,10 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 
 	public SCTDebugTarget getDebugTarget() {
 		return (SCTDebugTarget) super.getDebugTarget();
+	}
+
+	public Region getRegion() {
+		return region;
 	}
 
 }
