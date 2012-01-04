@@ -38,7 +38,7 @@ Build:
 
 + Invoke Maven 3
 	Goals
-		clean install
+		clean package
 	POM File
 		../build/org.yakindu.sct.releng/pom.xml
 	Profiles
