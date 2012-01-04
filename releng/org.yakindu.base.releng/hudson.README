@@ -43,7 +43,7 @@ Build:
 	Goals
 		clean verify
 	POM File
-		../build/de.itemis.xtext.utils.releng/pom.xml
+		../build/org.yakindu.base.releng/pom.xml
 	Profiles
 	JVM Options
 
@@ -53,7 +53,7 @@ Build:
 			rm -fr update-site
 		fi
 		mkdir update-site
-		cp -R build/de.itemis.xtext.utils.repository/target/repository/* update-site/
+		cp -R build/org.yakindu.base.repository/target/repository/* update-site/
 		
 	
 Post-Build-Actions:
