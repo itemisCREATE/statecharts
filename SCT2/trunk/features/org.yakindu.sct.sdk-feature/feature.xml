@@ -26,20 +26,6 @@
          version="0.0.0"/>
 
    <plugin
-         id="org.yakindu.base.types.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.base.types.scope.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.yakindu.sct.model.sgraph.source"
          download-size="0"
          install-size="0"
