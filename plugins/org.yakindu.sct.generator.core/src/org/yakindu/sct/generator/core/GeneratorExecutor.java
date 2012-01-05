@@ -55,9 +55,9 @@ public class GeneratorExecutor {
 				return Status.OK_STATUS;
 			}
 		};
+		generatorJob.setRule(file);
 		generatorJob.schedule();
 	}
-
 
 	protected Resource loadResource(IFile file) {
 		Resource resource = null;
