@@ -401,7 +401,7 @@ int test_preference_event3_leaving_state3_and_state7()
 	/*@Desc: run an explicit cycle */
 	test_ParallelRegionsStatemachine_runCycle(&machine);
 
-	/*@Desc: check wether reg3 is set correctly to 7 */
+	/*@Desc: check whether reg3 is set correctly to 7 */
 	assert( test_ParallelRegions_if_get_reg3(&machine.interface) == 7);
 
 	/*@Desc: check the initial state at position 0 to be State3 */
@@ -430,7 +430,332 @@ int test_preference_event3_leaving_state3_and_state7()
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)));
 	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)), "noState") == 0);
 
-	/*@Desc: check wether reg3 is set correctly to -1 */
+	/*@Desc: check whether reg3 is set correctly to -1 */
+	assert( test_ParallelRegions_if_get_reg3(&machine.interface) == -1);
+
+	/*@Desc: teardown statemachine */
+	teardownStatemachine(&machine, &dummyTimer, &eventPool);
+
+	return 0;
+}
+
+/*@Test: test_state1_transition_directly_to_state8 test the transition into Region3 to State8 and implicitly to Region1 State3 */
+int test_state1_transition_directly_to_state8()
+{
+	Test_ParallelRegionsStatemachine machine;
+	Timer dummyTimer;
+	EventPool eventPool;
+
+	/*@Desc: setup initial statemachine */
+	setupStatemachine(&machine, &dummyTimer, &eventPool);
+
+	/*@Desc: check the initial state at position 0 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State1") == 0);
+
+	/*@Desc: raise event12 on default interface */
+	test_ParallelRegions_if_raise_event12(&machine.interface);
+
+	/*@Desc: run an explicit cycle */
+	test_ParallelRegionsStatemachine_runCycle(&machine);
+
+	/*@Desc: check the initial state at position 0 to be State3 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State3") == 0);
+
+	/*@Desc: check the initial state at position 1 to be no State */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)), "noState") == 0);
+
+	/*@Desc: check the initial state at position 2 to be State8 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)), "State8") == 0);
+
+	/*@Desc: check whether reg3 is set correctly to 8 */
+	assert( test_ParallelRegions_if_get_reg3(&machine.interface) == 8);
+
+	/*@Desc: teardown statemachine */
+	teardownStatemachine(&machine, &dummyTimer, &eventPool);
+
+	return 0;
+}
+
+/*@Test: test_state1_transition_directly_to_state6 test the transition into Region2 to State6 and implicitly to Region4 State9 and Region3 State7 */
+int test_state1_transition_directly_to_state6()
+{
+	Test_ParallelRegionsStatemachine machine;
+	Timer dummyTimer;
+	EventPool eventPool;
+
+	/*@Desc: setup initial statemachine */
+	setupStatemachine(&machine, &dummyTimer, &eventPool);
+
+	/*@Desc: check the initial state at position 0 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State1") == 0);
+
+	/*@Desc: raise event12 on default interface */
+	test_ParallelRegions_if_raise_event11(&machine.interface);
+
+	/*@Desc: run an explicit cycle */
+	test_ParallelRegionsStatemachine_runCycle(&machine);
+
+	/*@Desc: check the initial state at position 0 to be State6 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State6") == 0);
+
+	/*@Desc: check the initial state at position 1 to be State9 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)), "State9") == 0);
+
+	/*@Desc: check the initial state at position 2 to be State7 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)), "State7") == 0);
+
+	/*@Desc: check whether reg3 is set correctly to 7 */
+	assert( test_ParallelRegions_if_get_reg3(&machine.interface) == 7);
+
+	/*@Desc: teardown statemachine */
+	teardownStatemachine(&machine, &dummyTimer, &eventPool);
+
+	return 0;
+}
+
+/*@Test: test_state1_transition_directly_to_state4 test the transition into Region2 to State5 and Region4 State9 and implicitly to Region3 State7 */
+int test_state1_transition_directly_to_state4()
+{
+	Test_ParallelRegionsStatemachine machine;
+	Timer dummyTimer;
+	EventPool eventPool;
+
+	/*@Desc: setup initial statemachine */
+	setupStatemachine(&machine, &dummyTimer, &eventPool);
+
+	/*@Desc: check the initial state at position 0 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State1") == 0);
+
+	/*@Desc: raise event13 on default interface */
+	test_ParallelRegions_if_raise_event13(&machine.interface);
+
+	/*@Desc: run an explicit cycle */
+	test_ParallelRegionsStatemachine_runCycle(&machine);
+
+	/*@Desc: check the initial state at position 0 to be State5 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State5") == 0);
+
+	/*@Desc: check the initial state at position 1 to be State9 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)), "State9") == 0);
+
+	/*@Desc: check the initial state at position 2 to be State7 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)), "State7") == 0);
+
+	/*@Desc: check whether reg3 is set correctly to 7 */
+	assert( test_ParallelRegions_if_get_reg3(&machine.interface) == 7);
+
+	/*@Desc: teardown statemachine */
+	teardownStatemachine(&machine, &dummyTimer, &eventPool);
+
+	return 0;
+}
+
+/*@Test: test_hierarchy_traversal_event12_event8 test the transition into Region2 to State5 and Region4 State9 and implicitly to Region3 State7 */
+int test_hierarchy_traversal_event12_event2_event8()
+{
+	Test_ParallelRegionsStatemachine machine;
+	Timer dummyTimer;
+	EventPool eventPool;
+
+	/*@Desc: setup initial statemachine */
+	setupStatemachine(&machine, &dummyTimer, &eventPool);
+
+	/*@Desc: check the initial state at position 0 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State1") == 0);
+
+	/*@Desc: raise event12 on default interface */
+	test_ParallelRegions_if_raise_event12(&machine.interface);
+
+	/*@Desc: run an explicit cycle */
+	test_ParallelRegionsStatemachine_runCycle(&machine);
+
+	/*@Desc: check whether hierarchy is set correctly to 5 */
+	assert( test_ParallelRegions_if_get_hierarchy(&machine.interface) == 2+3);
+
+	/*@Desc: raise event2 on default interface */
+	test_ParallelRegions_if_raise_event2(&machine.interface);
+
+	/*@Desc: run an explicit cycle */
+	test_ParallelRegionsStatemachine_runCycle(&machine);
+
+	/*@Desc: check whether hierarchy value is set correctly to 110 */
+	printf( "Hierarchy has value %d, should be 110\n", test_ParallelRegions_if_get_hierarchy(&machine.interface) );
+	assert( test_ParallelRegions_if_get_hierarchy(&machine.interface) == (((2+3)*4)*5)+10);
+
+	/*@Desc: check whether reg3 is set correctly to 8 */
+	assert( test_ParallelRegions_if_get_reg3(&machine.interface) == 8);
+
+	/*@Desc: raise event8 on default interface */
+	test_ParallelRegions_if_raise_event8(&machine.interface);
+
+	/*@Desc: run an explicit cycle */
+	test_ParallelRegionsStatemachine_runCycle(&machine);
+
+	/*@Desc: check the initial state at position 0 to be State5 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State1") == 0);
+
+	/*@Desc: check the initial state at position 1 to be State9 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)), "noState") == 0);
+
+	/*@Desc: check the initial state at position 2 to be State7 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)), "noState") == 0);
+
+	/*@Desc: check whether reg3 is set correctly to 2 */
+	assert( test_ParallelRegions_if_get_hierarchy(&machine.interface) == 2);
+
+	/*@Desc: check whether reg3 is set correctly to -1 */
+	assert( test_ParallelRegions_if_get_reg3(&machine.interface) == -1);
+
+	/*@Desc: teardown statemachine */
+	teardownStatemachine(&machine, &dummyTimer, &eventPool);
+
+	return 0;
+}
+
+/*@Test: test_hierarchy_traversal_event11_event10 test the transition into Region2 to State6 and Region4 State9 and implicitly to Region3 State7 */
+int test_hierarchy_traversal_event11_event10()
+{
+	Test_ParallelRegionsStatemachine machine;
+	Timer dummyTimer;
+	EventPool eventPool;
+
+	/*@Desc: setup initial statemachine */
+	setupStatemachine(&machine, &dummyTimer, &eventPool);
+
+	/*@Desc: check the initial state at position 0 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State1") == 0);
+
+	/*@Desc: raise event11 on default interface */
+	test_ParallelRegions_if_raise_event11(&machine.interface);
+
+	/*@Desc: run an explicit cycle */
+	test_ParallelRegionsStatemachine_runCycle(&machine);
+
+	/*@Desc: check the initial state at position 0 to be State5 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State6") == 0);
+
+	/*@Desc: check the initial state at position 1 to be State9 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)), "State9") == 0);
+
+	/*@Desc: check the initial state at position 2 to be State7 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)), "State7") == 0);
+
+	/*@Desc: check whether hierarchy is set correctly to 36 */
+	assert( test_ParallelRegions_if_get_hierarchy(&machine.interface) == (((2+3)*4)+6)+10);
+
+	/*@Desc: check whether reg3 is set correctly to 7 */
+	assert( test_ParallelRegions_if_get_reg3(&machine.interface) == 7);
+
+	/*@Desc: raise event2 on default interface */
+	test_ParallelRegions_if_raise_event10(&machine.interface);
+
+	/*@Desc: run an explicit cycle */
+	test_ParallelRegionsStatemachine_runCycle(&machine);
+
+	/*@Desc: check the initial state at position 0 to be State5 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State1") == 0);
+
+	/*@Desc: check the initial state at position 1 to be State9 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)), "noState") == 0);
+
+	/*@Desc: check the initial state at position 2 to be State7 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)), "noState") == 0);
+
+	/*@Desc: check whether reg3 is set correctly to 2 */
+	assert( test_ParallelRegions_if_get_hierarchy(&machine.interface) == 2);
+
+	/*@Desc: check whether reg3 is set correctly to -1 */
+	assert( test_ParallelRegions_if_get_reg3(&machine.interface) == -1);
+
+	/*@Desc: teardown statemachine */
+	teardownStatemachine(&machine, &dummyTimer, &eventPool);
+
+	return 0;
+}
+
+/*@Test: test_hierarchy_traversal_event11_event10 test the transition into Region2 to State6 and Region4 State9 and implicitly to Region3 State7 */
+int test_hierarchy_traversal_event13_event14()
+{
+	Test_ParallelRegionsStatemachine machine;
+	Timer dummyTimer;
+	EventPool eventPool;
+
+	/*@Desc: setup initial statemachine */
+	setupStatemachine(&machine, &dummyTimer, &eventPool);
+
+	/*@Desc: check the initial state at position 0 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State1") == 0);
+
+	/*@Desc: raise event11 on default interface */
+	test_ParallelRegions_if_raise_event13(&machine.interface);
+
+	/*@Desc: run an explicit cycle */
+	test_ParallelRegionsStatemachine_runCycle(&machine);
+
+	/*@Desc: check the initial state at position 0 to be State5 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State5") == 0);
+
+	/*@Desc: check the initial state at position 1 to be State9 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)), "State9") == 0);
+
+	/*@Desc: check the initial state at position 2 to be State7 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)), "State7") == 0);
+
+	/*@Desc: check whether hierarchy is set correctly to 36 */
+	assert( test_ParallelRegions_if_get_hierarchy(&machine.interface) == (((2+3)*4)*5)+10);
+
+	/*@Desc: check whether reg3 is set correctly to 7 */
+	assert( test_ParallelRegions_if_get_reg3(&machine.interface) == 7);
+
+	/*@Desc: raise event2 on default interface */
+	test_ParallelRegions_if_raise_event14(&machine.interface);
+
+	/*@Desc: run an explicit cycle */
+	test_ParallelRegionsStatemachine_runCycle(&machine);
+
+	/*@Desc: check the initial state at position 0 to be State5 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State1") == 0);
+
+	/*@Desc: check the initial state at position 1 to be State9 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 1)), "noState") == 0);
+
+	/*@Desc: check the initial state at position 2 to be State7 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)), "noState") == 0);
+
+	/*@Desc: check whether reg3 is set correctly to 2 */
+	assert( test_ParallelRegions_if_get_hierarchy(&machine.interface) == 2);
+
+	/*@Desc: check whether reg3 is set correctly to -1 */
 	assert( test_ParallelRegions_if_get_reg3(&machine.interface) == -1);
 
 	/*@Desc: teardown statemachine */
@@ -461,6 +786,18 @@ int main(int argc, char** argv)
 		return test_parallel_event3_handling_state5_state7();
 	case 8:
 		return test_preference_event3_leaving_state3_and_state7();
+	case 9:
+		return test_state1_transition_directly_to_state8();
+	case 10:
+		return test_state1_transition_directly_to_state6();
+	case 11:
+		return test_state1_transition_directly_to_state4();
+	case 12:
+		return test_hierarchy_traversal_event12_event2_event8();
+	case 13:
+		return test_hierarchy_traversal_event11_event10();
+	case 14:
+		return test_hierarchy_traversal_event13_event14();
 	}
 
 	return -1;
