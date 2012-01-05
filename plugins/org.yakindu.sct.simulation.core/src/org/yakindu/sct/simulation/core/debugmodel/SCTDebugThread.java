@@ -18,6 +18,7 @@ import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 
@@ -44,7 +45,7 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public IStackFrame[] getStackFrames() throws DebugException {
-		Set<Vertex> activeLeafStates = facade.getExecutionContext()
+		Set<RegularState> activeLeafStates = facade.getExecutionContext()
 				.getActiveLeafStates();
 		Vertex activeState = null;
 		for (Vertex vertex : activeLeafStates) {

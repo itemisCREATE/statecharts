@@ -33,8 +33,8 @@ import org.yakindu.sct.model.sexec.Trace;
 import org.yakindu.sct.model.sexec.TraceStateEntered;
 import org.yakindu.sct.model.sexec.TraceStateExited;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.extensions.ExecutionFactoryExtensions;
 import org.yakindu.sct.simulation.core.extensions.ExecutionFactoryExtensions.ExecutionFactoryDescriptor;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
@@ -116,10 +116,10 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 
 	public IThread[] getThreads() throws DebugException {
 		// Collect all active regions
-		Set<Vertex> activeLeafStates = facade.getExecutionContext()
+		Set<RegularState> activeLeafStates = facade.getExecutionContext()
 				.getActiveLeafStates();
 		List<Region> activeRegions = new ArrayList<Region>();
-		for (Vertex vertex : activeLeafStates) {
+		for (RegularState vertex : activeLeafStates) {
 			activeRegions.add(vertex.getParentRegion());
 		}
 		// Remove orphaned debug threads
