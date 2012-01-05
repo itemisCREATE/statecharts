@@ -19,8 +19,8 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.runtime.ExecutionException;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 
@@ -36,6 +36,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	private List<ExecutionEvent> declaredEvents;
 	private List<ExecutionEvent> raisedEvents;
 	private ExecutionState[] activeStateConfig;
+	
 
 	public ExecutionContextImpl() {
 		variables = new ArrayList<ExecutionVariable>();
@@ -149,24 +150,24 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		// TODO: Implement me
 	}
 
-	public Set<Vertex> getActiveLeafStates() {
-		Set<Vertex> vertices = new HashSet<Vertex>();
+	public Set<RegularState> getActiveLeafStates() {
+		Set<RegularState> vertices = new HashSet<RegularState>();
 		for (ExecutionState state : activeStateConfig) {
-			if (state != null) vertices.add((Vertex) state.getSourceElement());
+			if (state != null) vertices.add((RegularState) state.getSourceElement());
 		}
 		return vertices;
 	}
 
-	public Set<Vertex> getAllActiveStates() {
-		Set<Vertex> vertices = new HashSet<Vertex>();
+	public Set<RegularState> getAllActiveStates() {
+		Set<RegularState> vertices = new HashSet<RegularState>();
 		for (ExecutionState state : activeStateConfig) {
-			if (state != null) vertices.addAll(getActiveHierachy((Vertex) state.getSourceElement()));
+			if (state != null) vertices.addAll(getActiveHierachy((RegularState) state.getSourceElement()));
 		}
 		return vertices;
 	}
-
-	private Collection<? extends Vertex> getActiveHierachy(Vertex vertex) {
-		List<Vertex> result = new ArrayList<Vertex>();
+	
+	private Collection<? extends RegularState> getActiveHierachy(RegularState vertex) {
+		List<RegularState> result = new ArrayList<RegularState>();
 		result.add(vertex);
 		EObject container = vertex.eContainer();
 		while (container != null) {
@@ -177,5 +178,4 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		}
 		return result;
 	}
-
 }

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.yakindu.sct.model.sexec.ExecutionState;
-import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 
@@ -82,11 +82,11 @@ public interface IExecutionContext {
 	/**
 	 * Returns a Set with all currently active states
 	 */
-	public Set<Vertex> getActiveLeafStates();
+	public Set<RegularState> getActiveLeafStates();
 	/**
 	 * Returns a set with all active leaf states including parents
 	 */
-	public Set<Vertex> getAllActiveStates();
+	public Set<RegularState> getAllActiveStates();
 	
 	/**
 	 * Returns the active state configuration
