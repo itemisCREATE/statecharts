@@ -19,6 +19,10 @@ Templates for the main statechart cpp file.
 #ifndef DEFINITION_H_
 #define DEFINITION_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif 
+ 
 /* platform/compiler specific additions (#includes) */
 /* temporarly set to fix values */ 
 
@@ -33,6 +37,10 @@ typedef enum { bool_false = 0, bool_true = 1 } boolean;
 typedef double real;
 «REM»typedef string char*;«ENDREM»
 
+#ifdef __cplusplus
+}
+#endif 
+ 
 #endif /* DEFINITION_H_ */
 «ENDFILE»
 

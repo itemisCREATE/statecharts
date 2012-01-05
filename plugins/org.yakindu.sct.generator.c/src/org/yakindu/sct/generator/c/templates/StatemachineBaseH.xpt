@@ -18,9 +18,13 @@ Templates for the main statechart c file.
 «getLicenseHeader(genEntry)»
 #ifndef STATEMACHINEBASE_H_
 #define STATEMACHINEBASE_H_
-
+ 
 #include "definition.h"
 #include "Timer.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif 
 
 typedef struct {
 
@@ -42,6 +46,10 @@ extern void statemachineBase_destruct(StatemachineBase* handle);
 extern uint32_t statemachineBase_getState(StatemachineBase* handle, uint16_t pos);
 
 
+#ifdef __cplusplus
+}
+#endif 
+ 
 #endif /* STATEMACHINEBASE_H_ */
 «ENDFILE»
 

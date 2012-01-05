@@ -21,6 +21,10 @@ Templates for the main statechart c file.
 
 #include "definition.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif 
+ 
 typedef enum {
 	ev_type_input,
 	ev_type_output,
@@ -49,6 +53,10 @@ extern boolean eventSet_isAny_input(EventSet* handle);
 extern boolean eventSet_isAny_output(EventSet* handle);
 extern void eventSet_clean_single(EventSet* handle, const uint32_t evid);
 
+#ifdef __cplusplus
+}
+#endif 
+ 
 #endif /* EVENTSET_H_ */
 «ENDFILE»
 

@@ -30,6 +30,10 @@ Templates for the main statechart cpp file.
 #include "Statemachine_cy.h"
 #include "«EvName()».h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif 
+ 
 typedef struct {
 	EventSet* eventSet;
 	Statemachine_cy* statemachine;
@@ -92,7 +96,10 @@ IF !event.type.isVoid() -»«IF isSingleton(genEntry) == false -», «ENDIF»«event.t
 
 #endif // INTERFACE_LISTENER
 
-
+#ifdef __cplusplus
+}
+#endif 
+ 
 #endif /* INTERFACEBASE_H_ */
 
 

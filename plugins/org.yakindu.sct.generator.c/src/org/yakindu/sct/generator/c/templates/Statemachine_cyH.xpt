@@ -24,6 +24,10 @@ Templates for the main statechart c file.
 #include "Timer.h"
 #include "EventPool.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif 
+ 
 typedef struct {
   StatemachineBase base;
   EventSet   eventSet;
@@ -49,6 +53,10 @@ extern boolean statemachine_cy_eventWaiting(Statemachine_cy* handle);
 /* implement me in derived codegeneration */
 extern void statemachine_cy__runCycle(Statemachine_cy* handle);
 
+#ifdef __cplusplus
+}
+#endif 
+ 
 #endif /* STATEMACHINE_CY_H_ */
 «ENDFILE»
 
