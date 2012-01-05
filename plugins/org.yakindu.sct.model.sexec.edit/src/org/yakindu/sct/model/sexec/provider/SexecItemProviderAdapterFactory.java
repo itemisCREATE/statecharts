@@ -143,6 +143,75 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.ExecutionScope} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExecutionScopeItemProvider executionScopeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.ExecutionScope}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExecutionScopeAdapter() {
+		if (executionScopeItemProvider == null) {
+			executionScopeItemProvider = new ExecutionScopeItemProvider(this);
+		}
+
+		return executionScopeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.ExecutionRegion} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExecutionRegionItemProvider executionRegionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.ExecutionRegion}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExecutionRegionAdapter() {
+		if (executionRegionItemProvider == null) {
+			executionRegionItemProvider = new ExecutionRegionItemProvider(this);
+		}
+
+		return executionRegionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.ExecutionEntry} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExecutionEntryItemProvider executionEntryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.ExecutionEntry}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExecutionEntryAdapter() {
+		if (executionEntryItemProvider == null) {
+			executionEntryItemProvider = new ExecutionEntryItemProvider(this);
+		}
+
+		return executionEntryItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.ExecutionChoice} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -752,6 +821,9 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (executionFlowItemProvider != null) executionFlowItemProvider.dispose();
 		if (executionNodeItemProvider != null) executionNodeItemProvider.dispose();
 		if (executionStateItemProvider != null) executionStateItemProvider.dispose();
+		if (executionScopeItemProvider != null) executionScopeItemProvider.dispose();
+		if (executionRegionItemProvider != null) executionRegionItemProvider.dispose();
+		if (executionEntryItemProvider != null) executionEntryItemProvider.dispose();
 		if (executionChoiceItemProvider != null) executionChoiceItemProvider.dispose();
 		if (reactionItemProvider != null) reactionItemProvider.dispose();
 		if (stateVectorItemProvider != null) stateVectorItemProvider.dispose();

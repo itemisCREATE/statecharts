@@ -154,22 +154,13 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_FLOW__NAME = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>States</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Source Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__STATES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Enter Sequence</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_FLOW__ENTER_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 2;
+	int EXECUTION_FLOW__SOURCE_ELEMENT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>State Vector</b></em>' containment reference.
@@ -178,7 +169,43 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__STATE_VECTOR = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 3;
+	int EXECUTION_FLOW__STATE_VECTOR = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Sub Scopes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_FLOW__SUB_SCOPES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Super Scope</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_FLOW__SUPER_SCOPE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>States</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_FLOW__STATES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Enter Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_FLOW__ENTER_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Exit Sequence</b></em>' containment reference.
@@ -187,7 +214,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__EXIT_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 4;
+	int EXECUTION_FLOW__EXIT_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
@@ -196,7 +223,16 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__NODES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 5;
+	int EXECUTION_FLOW__NODES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_FLOW__REGIONS = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Execution Flow</em>' class.
@@ -205,7 +241,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW_FEATURE_COUNT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 6;
+	int EXECUTION_FLOW_FEATURE_COUNT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl <em>Execution Node</em>}' class.
@@ -289,7 +325,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getReaction()
 	 * @generated
 	 */
-	int REACTION = 6;
+	int REACTION = 9;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StepImpl <em>Step</em>}' class.
@@ -299,7 +335,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStep()
 	 * @generated
 	 */
-	int STEP = 9;
+	int STEP = 12;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.SequenceImpl <em>Sequence</em>}' class.
@@ -309,7 +345,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getSequence()
 	 * @generated
 	 */
-	int SEQUENCE = 10;
+	int SEQUENCE = 13;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CheckImpl <em>Check</em>}' class.
@@ -319,7 +355,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCheck()
 	 * @generated
 	 */
-	int CHECK = 11;
+	int CHECK = 14;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.IfImpl <em>If</em>}' class.
@@ -329,7 +365,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getIf()
 	 * @generated
 	 */
-	int IF = 13;
+	int IF = 16;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionImpl <em>Execution</em>}' class.
@@ -339,7 +375,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecution()
 	 * @generated
 	 */
-	int EXECUTION = 14;
+	int EXECUTION = 17;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.EnterStateImpl <em>Enter State</em>}' class.
@@ -349,7 +385,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getEnterState()
 	 * @generated
 	 */
-	int ENTER_STATE = 15;
+	int ENTER_STATE = 18;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExitStateImpl <em>Exit State</em>}' class.
@@ -359,7 +395,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExitState()
 	 * @generated
 	 */
-	int EXIT_STATE = 16;
+	int EXIT_STATE = 19;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StateVectorImpl <em>State Vector</em>}' class.
@@ -369,7 +405,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateVector()
 	 * @generated
 	 */
-	int STATE_VECTOR = 7;
+	int STATE_VECTOR = 10;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TimeEventImpl <em>Time Event</em>}' class.
@@ -379,7 +415,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTimeEvent()
 	 * @generated
 	 */
-	int TIME_EVENT = 8;
+	int TIME_EVENT = 11;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -427,13 +463,40 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_STATE__REACT_SEQUENCE = EXECUTION_NODE__REACT_SEQUENCE;
 
 	/**
+	 * The feature id for the '<em><b>State Vector</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__STATE_VECTOR = EXECUTION_NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Sub Scopes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__SUB_SCOPES = EXECUTION_NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Super Scope</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__SUPER_SCOPE = EXECUTION_NODE_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Leaf</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__LEAF = EXECUTION_NODE_FEATURE_COUNT + 0;
+	int EXECUTION_STATE__LEAF = EXECUTION_NODE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Entry Action</b></em>' containment reference.
@@ -442,7 +505,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__ENTRY_ACTION = EXECUTION_NODE_FEATURE_COUNT + 1;
+	int EXECUTION_STATE__ENTRY_ACTION = EXECUTION_NODE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Exit Action</b></em>' containment reference.
@@ -451,7 +514,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__EXIT_ACTION = EXECUTION_NODE_FEATURE_COUNT + 2;
+	int EXECUTION_STATE__EXIT_ACTION = EXECUTION_NODE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Enter Sequence</b></em>' containment reference.
@@ -460,7 +523,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__ENTER_SEQUENCE = EXECUTION_NODE_FEATURE_COUNT + 3;
+	int EXECUTION_STATE__ENTER_SEQUENCE = EXECUTION_NODE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Exit Sequence</b></em>' containment reference.
@@ -469,16 +532,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__EXIT_SEQUENCE = EXECUTION_NODE_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>State Vector</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_STATE__STATE_VECTOR = EXECUTION_NODE_FEATURE_COUNT + 5;
+	int EXECUTION_STATE__EXIT_SEQUENCE = EXECUTION_NODE_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Execution State</em>' class.
@@ -487,7 +541,199 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE_FEATURE_COUNT = EXECUTION_NODE_FEATURE_COUNT + 6;
+	int EXECUTION_STATE_FEATURE_COUNT = EXECUTION_NODE_FEATURE_COUNT + 8;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl <em>Execution Scope</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecutionScope()
+	 * @generated
+	 */
+	int EXECUTION_SCOPE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SCOPE__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Source Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SCOPE__SOURCE_ELEMENT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>State Vector</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SCOPE__STATE_VECTOR = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Sub Scopes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SCOPE__SUB_SCOPES = NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Super Scope</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SCOPE__SUPER_SCOPE = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Execution Scope</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SCOPE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionRegionImpl <em>Execution Region</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.ExecutionRegionImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecutionRegion()
+	 * @generated
+	 */
+	int EXECUTION_REGION = 6;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_REGION__NAME = EXECUTION_SCOPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Source Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_REGION__SOURCE_ELEMENT = EXECUTION_SCOPE__SOURCE_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>State Vector</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_REGION__STATE_VECTOR = EXECUTION_SCOPE__STATE_VECTOR;
+
+	/**
+	 * The feature id for the '<em><b>Sub Scopes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_REGION__SUB_SCOPES = EXECUTION_SCOPE__SUB_SCOPES;
+
+	/**
+	 * The feature id for the '<em><b>Super Scope</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_REGION__SUPER_SCOPE = EXECUTION_SCOPE__SUPER_SCOPE;
+
+	/**
+	 * The number of structural features of the '<em>Execution Region</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_REGION_FEATURE_COUNT = EXECUTION_SCOPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionEntryImpl <em>Execution Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.ExecutionEntryImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecutionEntry()
+	 * @generated
+	 */
+	int EXECUTION_ENTRY = 7;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_ENTRY__NAME = EXECUTION_NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Source Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_ENTRY__SOURCE_ELEMENT = EXECUTION_NODE__SOURCE_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_ENTRY__REACTIONS = EXECUTION_NODE__REACTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_ENTRY__SIMPLE_NAME = EXECUTION_NODE__SIMPLE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>React Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_ENTRY__REACT_SEQUENCE = EXECUTION_NODE__REACT_SEQUENCE;
+
+	/**
+	 * The number of structural features of the '<em>Execution Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_ENTRY_FEATURE_COUNT = EXECUTION_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionChoiceImpl <em>Execution Choice</em>}' class.
@@ -497,7 +743,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecutionChoice()
 	 * @generated
 	 */
-	int EXECUTION_CHOICE = 5;
+	int EXECUTION_CHOICE = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -804,7 +1050,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCall()
 	 * @generated
 	 */
-	int CALL = 17;
+	int CALL = 20;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ScheduleTimeEventImpl <em>Schedule Time Event</em>}' class.
@@ -814,7 +1060,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getScheduleTimeEvent()
 	 * @generated
 	 */
-	int SCHEDULE_TIME_EVENT = 18;
+	int SCHEDULE_TIME_EVENT = 21;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.UnscheduleTimeEventImpl <em>Unschedule Time Event</em>}' class.
@@ -824,7 +1070,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getUnscheduleTimeEvent()
 	 * @generated
 	 */
-	int UNSCHEDULE_TIME_EVENT = 19;
+	int UNSCHEDULE_TIME_EVENT = 22;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CheckRefImpl <em>Check Ref</em>}' class.
@@ -834,7 +1080,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCheckRef()
 	 * @generated
 	 */
-	int CHECK_REF = 12;
+	int CHECK_REF = 15;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1250,7 +1496,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateSwitch()
 	 * @generated
 	 */
-	int STATE_SWITCH = 20;
+	int STATE_SWITCH = 23;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1314,7 +1560,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateCase()
 	 * @generated
 	 */
-	int STATE_CASE = 21;
+	int STATE_CASE = 24;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' reference.
@@ -1352,7 +1598,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTrace()
 	 * @generated
 	 */
-	int TRACE = 22;
+	int TRACE = 25;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1398,7 +1644,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceNodeExecuted()
 	 * @generated
 	 */
-	int TRACE_NODE_EXECUTED = 23;
+	int TRACE_NODE_EXECUTED = 26;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1453,7 +1699,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getReactionFired()
 	 * @generated
 	 */
-	int REACTION_FIRED = 24;
+	int REACTION_FIRED = 27;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1509,7 +1755,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceStateEntered()
 	 * @generated
 	 */
-	int TRACE_STATE_ENTERED = 25;
+	int TRACE_STATE_ENTERED = 28;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1564,7 +1810,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceStateExited()
 	 * @generated
 	 */
-	int TRACE_STATE_EXITED = 26;
+	int TRACE_STATE_EXITED = 29;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1645,17 +1891,6 @@ public interface SexecPackage extends EPackage {
 	EReference getExecutionFlow_EnterSequence();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionFlow#getStateVector <em>State Vector</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>State Vector</em>'.
-	 * @see org.yakindu.sct.model.sexec.ExecutionFlow#getStateVector()
-	 * @see #getExecutionFlow()
-	 * @generated
-	 */
-	EReference getExecutionFlow_StateVector();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionFlow#getExitSequence <em>Exit Sequence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1676,6 +1911,17 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExecutionFlow_Nodes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sexec.ExecutionFlow#getRegions <em>Regions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Regions</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionFlow#getRegions()
+	 * @see #getExecutionFlow()
+	 * @generated
+	 */
+	EReference getExecutionFlow_Regions();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionNode <em>Execution Node</em>}'.
@@ -1775,15 +2021,67 @@ public interface SexecPackage extends EPackage {
 	EReference getExecutionState_ExitSequence();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionState#getStateVector <em>State Vector</em>}'.
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionScope <em>Execution Scope</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Execution Scope</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionScope
+	 * @generated
+	 */
+	EClass getExecutionScope();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionScope#getStateVector <em>State Vector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>State Vector</em>'.
-	 * @see org.yakindu.sct.model.sexec.ExecutionState#getStateVector()
-	 * @see #getExecutionState()
+	 * @see org.yakindu.sct.model.sexec.ExecutionScope#getStateVector()
+	 * @see #getExecutionScope()
 	 * @generated
 	 */
-	EReference getExecutionState_StateVector();
+	EReference getExecutionScope_StateVector();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.yakindu.sct.model.sexec.ExecutionScope#getSubScopes <em>Sub Scopes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Sub Scopes</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionScope#getSubScopes()
+	 * @see #getExecutionScope()
+	 * @generated
+	 */
+	EReference getExecutionScope_SubScopes();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.ExecutionScope#getSuperScope <em>Super Scope</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Super Scope</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionScope#getSuperScope()
+	 * @see #getExecutionScope()
+	 * @generated
+	 */
+	EReference getExecutionScope_SuperScope();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionRegion <em>Execution Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Execution Region</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionRegion
+	 * @generated
+	 */
+	EClass getExecutionRegion();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionEntry <em>Execution Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Execution Entry</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionEntry
+	 * @generated
+	 */
+	EClass getExecutionEntry();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionChoice <em>Execution Choice</em>}'.
@@ -2437,14 +2735,6 @@ public interface SexecPackage extends EPackage {
 		EReference EXECUTION_FLOW__ENTER_SEQUENCE = eINSTANCE.getExecutionFlow_EnterSequence();
 
 		/**
-		 * The meta object literal for the '<em><b>State Vector</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXECUTION_FLOW__STATE_VECTOR = eINSTANCE.getExecutionFlow_StateVector();
-
-		/**
 		 * The meta object literal for the '<em><b>Exit Sequence</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2459,6 +2749,14 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXECUTION_FLOW__NODES = eINSTANCE.getExecutionFlow_Nodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Regions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_FLOW__REGIONS = eINSTANCE.getExecutionFlow_Regions();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl <em>Execution Node</em>}' class.
@@ -2537,12 +2835,58 @@ public interface SexecPackage extends EPackage {
 		EReference EXECUTION_STATE__EXIT_SEQUENCE = eINSTANCE.getExecutionState_ExitSequence();
 
 		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl <em>Execution Scope</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecutionScope()
+		 * @generated
+		 */
+		EClass EXECUTION_SCOPE = eINSTANCE.getExecutionScope();
+
+		/**
 		 * The meta object literal for the '<em><b>State Vector</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXECUTION_STATE__STATE_VECTOR = eINSTANCE.getExecutionState_StateVector();
+		EReference EXECUTION_SCOPE__STATE_VECTOR = eINSTANCE.getExecutionScope_StateVector();
+
+		/**
+		 * The meta object literal for the '<em><b>Sub Scopes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_SCOPE__SUB_SCOPES = eINSTANCE.getExecutionScope_SubScopes();
+
+		/**
+		 * The meta object literal for the '<em><b>Super Scope</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_SCOPE__SUPER_SCOPE = eINSTANCE.getExecutionScope_SuperScope();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionRegionImpl <em>Execution Region</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.ExecutionRegionImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecutionRegion()
+		 * @generated
+		 */
+		EClass EXECUTION_REGION = eINSTANCE.getExecutionRegion();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionEntryImpl <em>Execution Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.ExecutionEntryImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecutionEntry()
+		 * @generated
+		 */
+		EClass EXECUTION_ENTRY = eINSTANCE.getExecutionEntry();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionChoiceImpl <em>Execution Choice</em>}' class.

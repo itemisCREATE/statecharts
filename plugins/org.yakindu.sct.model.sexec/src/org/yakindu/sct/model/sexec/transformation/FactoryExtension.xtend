@@ -39,6 +39,8 @@ import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sexec.ExecutionChoice
+import org.yakindu.sct.model.sexec.ExecutionRegion
+import org.yakindu.sct.model.sgraph.Region
 
 class FactoryExtension {
 	
@@ -80,6 +82,15 @@ class FactoryExtension {
 			r.reactSequence = sexecFactory.createSequence
 		}
 	}
+	
+	
+	def ExecutionRegion create r : sexecFactory.createExecutionRegion create(Region region){
+		if (region != null) {
+			r.name =  region.name
+			r.sourceElement = region	
+		}
+	}
+	
 	
 	def Check create r : sexecFactory.createCheck createCheck(ReactionTrigger tr){
 		r.name = tr.reaction.id

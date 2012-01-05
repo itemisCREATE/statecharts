@@ -17,8 +17,11 @@ import org.yakindu.sct.model.sexec.CheckRef;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionChoice;
+import org.yakindu.sct.model.sexec.ExecutionEntry;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionNode;
+import org.yakindu.sct.model.sexec.ExecutionRegion;
+import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.If;
@@ -69,6 +72,27 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * @generated
 	 */
 	private EClass executionStateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass executionScopeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass executionRegionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass executionEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -334,7 +358,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getExecutionFlow_StateVector() {
+	public EReference getExecutionFlow_ExitSequence() {
 		return (EReference)executionFlowEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -343,7 +367,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getExecutionFlow_ExitSequence() {
+	public EReference getExecutionFlow_Nodes() {
 		return (EReference)executionFlowEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -352,7 +376,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getExecutionFlow_Nodes() {
+	public EReference getExecutionFlow_Regions() {
 		return (EReference)executionFlowEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -442,8 +466,53 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getExecutionState_StateVector() {
-		return (EReference)executionStateEClass.getEStructuralFeatures().get(5);
+	public EClass getExecutionScope() {
+		return executionScopeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExecutionScope_StateVector() {
+		return (EReference)executionScopeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExecutionScope_SubScopes() {
+		return (EReference)executionScopeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExecutionScope_SuperScope() {
+		return (EReference)executionScopeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getExecutionRegion() {
+		return executionRegionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getExecutionEntry() {
+		return executionEntryEClass;
 	}
 
 	/**
@@ -996,9 +1065,9 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		executionFlowEClass = createEClass(EXECUTION_FLOW);
 		createEReference(executionFlowEClass, EXECUTION_FLOW__STATES);
 		createEReference(executionFlowEClass, EXECUTION_FLOW__ENTER_SEQUENCE);
-		createEReference(executionFlowEClass, EXECUTION_FLOW__STATE_VECTOR);
 		createEReference(executionFlowEClass, EXECUTION_FLOW__EXIT_SEQUENCE);
 		createEReference(executionFlowEClass, EXECUTION_FLOW__NODES);
+		createEReference(executionFlowEClass, EXECUTION_FLOW__REGIONS);
 
 		executionNodeEClass = createEClass(EXECUTION_NODE);
 		createEReference(executionNodeEClass, EXECUTION_NODE__REACTIONS);
@@ -1011,7 +1080,15 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		createEReference(executionStateEClass, EXECUTION_STATE__EXIT_ACTION);
 		createEReference(executionStateEClass, EXECUTION_STATE__ENTER_SEQUENCE);
 		createEReference(executionStateEClass, EXECUTION_STATE__EXIT_SEQUENCE);
-		createEReference(executionStateEClass, EXECUTION_STATE__STATE_VECTOR);
+
+		executionScopeEClass = createEClass(EXECUTION_SCOPE);
+		createEReference(executionScopeEClass, EXECUTION_SCOPE__STATE_VECTOR);
+		createEReference(executionScopeEClass, EXECUTION_SCOPE__SUB_SCOPES);
+		createEReference(executionScopeEClass, EXECUTION_SCOPE__SUPER_SCOPE);
+
+		executionRegionEClass = createEClass(EXECUTION_REGION);
+
+		executionEntryEClass = createEClass(EXECUTION_ENTRY);
 
 		executionChoiceEClass = createEClass(EXECUTION_CHOICE);
 
@@ -1120,10 +1197,15 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		// Add supertypes to classes
 		executionFlowEClass.getESuperTypes().add(theSGraphPackage.getScopedElement());
-		executionFlowEClass.getESuperTypes().add(this.getNamedElement());
+		executionFlowEClass.getESuperTypes().add(this.getExecutionScope());
 		executionNodeEClass.getESuperTypes().add(this.getNamedElement());
 		executionNodeEClass.getESuperTypes().add(this.getMappedElement());
 		executionStateEClass.getESuperTypes().add(this.getExecutionNode());
+		executionStateEClass.getESuperTypes().add(this.getExecutionScope());
+		executionScopeEClass.getESuperTypes().add(this.getNamedElement());
+		executionScopeEClass.getESuperTypes().add(this.getMappedElement());
+		executionRegionEClass.getESuperTypes().add(this.getExecutionScope());
+		executionEntryEClass.getESuperTypes().add(this.getExecutionNode());
 		executionChoiceEClass.getESuperTypes().add(this.getExecutionNode());
 		reactionEClass.getESuperTypes().add(this.getNamedElement());
 		reactionEClass.getESuperTypes().add(this.getMappedElement());
@@ -1156,9 +1238,9 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEClass(executionFlowEClass, ExecutionFlow.class, "ExecutionFlow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExecutionFlow_States(), this.getExecutionState(), null, "states", null, 0, -1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionFlow_EnterSequence(), this.getSequence(), null, "enterSequence", null, 0, 1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getExecutionFlow_StateVector(), this.getStateVector(), null, "stateVector", null, 0, 1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionFlow_ExitSequence(), this.getSequence(), null, "exitSequence", null, 0, 1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionFlow_Nodes(), this.getExecutionNode(), null, "nodes", null, 0, -1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionFlow_Regions(), this.getExecutionRegion(), null, "regions", null, 0, -1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionNodeEClass, ExecutionNode.class, "ExecutionNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExecutionNode_Reactions(), this.getReaction(), null, "reactions", null, 0, -1, ExecutionNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1171,7 +1253,15 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEReference(getExecutionState_ExitAction(), this.getStep(), null, "exitAction", null, 0, 1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionState_EnterSequence(), this.getSequence(), null, "enterSequence", null, 0, 1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionState_ExitSequence(), this.getSequence(), null, "exitSequence", null, 0, 1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getExecutionState_StateVector(), this.getStateVector(), null, "stateVector", null, 0, 1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(executionScopeEClass, ExecutionScope.class, "ExecutionScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExecutionScope_StateVector(), this.getStateVector(), null, "stateVector", null, 0, 1, ExecutionScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionScope_SubScopes(), this.getExecutionScope(), this.getExecutionScope_SuperScope(), "subScopes", null, 0, -1, ExecutionScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionScope_SuperScope(), this.getExecutionScope(), this.getExecutionScope_SubScopes(), "superScope", null, 0, 1, ExecutionScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(executionRegionEClass, ExecutionRegion.class, "ExecutionRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(executionEntryEClass, ExecutionEntry.class, "ExecutionEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(executionChoiceEClass, ExecutionChoice.class, "ExecutionChoice", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

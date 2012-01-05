@@ -53,6 +53,33 @@ public interface SexecFactory extends EFactory {
 	ExecutionState createExecutionState();
 
 	/**
+	 * Returns a new object of class '<em>Execution Scope</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Execution Scope</em>'.
+	 * @generated
+	 */
+	ExecutionScope createExecutionScope();
+
+	/**
+	 * Returns a new object of class '<em>Execution Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Execution Region</em>'.
+	 * @generated
+	 */
+	ExecutionRegion createExecutionRegion();
+
+	/**
+	 * Returns a new object of class '<em>Execution Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Execution Entry</em>'.
+	 * @generated
+	 */
+	ExecutionEntry createExecutionEntry();
+
+	/**
 	 * Returns a new object of class '<em>Execution Choice</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

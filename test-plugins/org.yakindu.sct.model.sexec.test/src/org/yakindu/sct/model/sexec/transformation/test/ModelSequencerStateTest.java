@@ -292,7 +292,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	
 	/**
 	 * A composite state must have a exit sequence. 
-	 * This exit sequence consists of an exit action call and a state switch for all final states.
+	 * This exit sequence consists of an exit action call and a state switch for all leaf states.
 	 */
 	@Test public void testCompositeStateExitSequence() {
 		Statechart sc = _createStatechart("cs"); {
@@ -364,7 +364,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	
 	/**
 	 * A composite state must have a exit sequence. 
-	 * This exit sequence consists of an exit action call and a state switch for all final states.
+	 * This exit sequence consists of an exit action call and a state switch for all leaf states.
 	 */
 	@Test public void testCompositeStateExitSequence_Deep() {
 		

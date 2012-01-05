@@ -17,6 +17,7 @@ import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
 import org.yakindu.sct.model.sexec.ExecutionChoice;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
@@ -212,6 +213,31 @@ public class FactoryExtension {
     return r;
   }
   
+  private final HashMap<ArrayList<?>,ExecutionRegion> _createCache_create_7 = new HashMap<ArrayList<?>,ExecutionRegion>();
+  
+  public ExecutionRegion create(final Region region) {
+    final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(region);
+    ExecutionRegion r;
+    synchronized (_createCache_create_7) {
+      if (_createCache_create_7.containsKey(_cacheKey)) {
+        return _createCache_create_7.get(_cacheKey);
+      }
+      SexecFactory _sexecFactory = this.sexecFactory();
+      ExecutionRegion _createExecutionRegion = _sexecFactory.createExecutionRegion();
+      r = _createExecutionRegion;
+      _createCache_create_7.put(_cacheKey, r);
+    }
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(region, null);
+    if (_operator_notEquals) {
+      {
+        String _name = region.getName();
+        r.setName(_name);
+        r.setSourceElement(region);
+      }
+    }
+    return r;
+  }
+  
   private final HashMap<ArrayList<?>,Check> _createCache_createCheck = new HashMap<ArrayList<?>,Check>();
   
   public Check createCheck(final ReactionTrigger tr) {
@@ -232,19 +258,19 @@ public class FactoryExtension {
     return r;
   }
   
-  private final HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_7 = new HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction>();
+  private final HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_8 = new HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction>();
   
   public org.yakindu.sct.model.sexec.Reaction create(final Transition tr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(tr);
     org.yakindu.sct.model.sexec.Reaction r;
-    synchronized (_createCache_create_7) {
-      if (_createCache_create_7.containsKey(_cacheKey)) {
-        return _createCache_create_7.get(_cacheKey);
+    synchronized (_createCache_create_8) {
+      if (_createCache_create_8.containsKey(_cacheKey)) {
+        return _createCache_create_8.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       org.yakindu.sct.model.sexec.Reaction _createReaction = _sexecFactory.createReaction();
       r = _createReaction;
-      _createCache_create_7.put(_cacheKey, r);
+      _createCache_create_8.put(_cacheKey, r);
     }
     {
       String _id = this.sce.id(tr);
@@ -255,19 +281,19 @@ public class FactoryExtension {
     return r;
   }
   
-  private final HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_8 = new HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction>();
+  private final HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_9 = new HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction>();
   
   public org.yakindu.sct.model.sexec.Reaction create(final LocalReaction lr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(lr);
     org.yakindu.sct.model.sexec.Reaction r;
-    synchronized (_createCache_create_8) {
-      if (_createCache_create_8.containsKey(_cacheKey)) {
-        return _createCache_create_8.get(_cacheKey);
+    synchronized (_createCache_create_9) {
+      if (_createCache_create_9.containsKey(_cacheKey)) {
+        return _createCache_create_9.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       org.yakindu.sct.model.sexec.Reaction _createReaction = _sexecFactory.createReaction();
       r = _createReaction;
-      _createCache_create_8.put(_cacheKey, r);
+      _createCache_create_9.put(_cacheKey, r);
     }
     {
       String _id = this.sce.id(lr);
