@@ -17,7 +17,17 @@
 /*@DTestSuite: Hierachy Statechart Test (Test_Transition.sct) */
 
 #define MAXEVENTSPERTYPE 4
-const char* stateName[6] = {"State1", "State2", "State3", "State4", "State5", "State6"};
+const char* stateName[3] = {"State1", "State2", "noState"};
+const int EnumTostateStr[3] = { _State1, _State2, last_state };
+
+const char* getStateString(uint32_t index)
+{
+	int i;
+	for (i=0; i<10; ++i)
+		if (EnumTostateStr[i] == index)
+			return stateName[i];
+	return stateName[last_state];
+}
 
 void setupStatemachine(Test_TransitionStatemachine* machine, Timer* dummyTimer, EventPool* eventPool)
 {
@@ -60,18 +70,66 @@ int test_initialization()
 
 
 /*@Test: test_state9_state10_transition test behavior of var1 in default and other interface */
-int test_state9_state10_transition()
+int test_transition_with_AEvent1_value_gt5()
 {
 	Test_TransitionStatemachine machine;
 	Timer dummyTimer;
 	EventPool eventPool;
+	Test_TransitionIfA* ifaceA = 0;
 
 	/*@Desc: setup initial statemachine */
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
-	/*@Desc: run the statechart for the first time (initially) */
+	/*@Desc: receive interface for scope A */
+	ifaceA = test_TransitionStatemachine_get_interfaceA(&machine);
+
+	/*@Desc: check the initial state at position 0 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State1") == 0);
+
+	/*@Desc: set event1 on interface A with value 6 */
+	test_Transition_if_A_raise_event1(ifaceA, 6);
+
+	/*@Desc: run an explicit cycle */
 	test_TransitionStatemachine_runCycle(&machine);
 
+	/*@Desc: check the initial state at position 0 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State2") == 0);
+
+	/*@Desc: teardown statemachine */
+	teardownStatemachine(&machine, &dummyTimer, &eventPool);
+
+	return 0;
+}
+
+/*@Test: test_state9_state10_transition test behavior of var1 in default and other interface */
+int test_transition_with_AEvent1_value_is_0()
+{
+	Test_TransitionStatemachine machine;
+	Timer dummyTimer;
+	EventPool eventPool;
+	Test_TransitionIfA* ifaceA = 0;
+
+	/*@Desc: setup initial statemachine */
+	setupStatemachine(&machine, &dummyTimer, &eventPool);
+
+	/*@Desc: receive interface for scope A */
+	ifaceA = test_TransitionStatemachine_get_interfaceA(&machine);
+
+	/*@Desc: check the initial state at position 0 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State1") == 0);
+
+	/*@Desc: set event1 on interface A with value 0 */
+	test_Transition_if_A_raise_event1(ifaceA, 0);
+
+	/*@Desc: run an explicit cycle */
+	test_TransitionStatemachine_runCycle(&machine);
+
+	/*@Desc: check the initial state at position 0 */
+	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
+	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)), "State1") == 0);
 
 	/*@Desc: teardown statemachine */
 	teardownStatemachine(&machine, &dummyTimer, &eventPool);
@@ -113,9 +171,9 @@ int main(int argc, char** argv)
 
 	switch (atoi(argv[1])) {
 	case 1:
-		return test_state9_state10_transition();
+		return test_transition_with_AEvent1_value_gt5();
 	case 2:
-		return test_state1_state2_back_transition();
+		return test_transition_with_AEvent1_value_is_0();
 	}
 
 	return -1;
