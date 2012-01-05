@@ -10,9 +10,11 @@
  */
 package org.yakindu.sct.ui.editor.edithelper;
 
+import org.eclipse.gmf.runtime.common.core.command.CompositeCommand;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
+import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.widgets.Shell;
@@ -21,8 +23,11 @@ import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.ui.editor.commands.CreateRegionCommand;
 import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
 import org.yakindu.sct.ui.editor.editor.StatechartElementTypes;
+
+import de.itemis.gmf.runtime.commons.editpolicies.CompartmentLayoutEditPolicy.RequestParameterKeys;
 
 /**
  * 
@@ -48,6 +53,14 @@ public class StateEditHelper extends VertexEditHelper {
 			return createSubmachineStateCommand(req);
 		}
 		return null;
+	}
+
+	@Override
+	protected ICommand getCreateCommand(CreateElementRequest req) {
+		if (req.getElementType() == StatechartElementTypes.REGION) {
+			return new CreateRegionCommand(req);
+		}
+		return super.getCreateCommand(req);
 	}
 
 	private ICommand createSubmachineStateCommand(ConfigureRequest req) {
