@@ -6,7 +6,7 @@
         <outgoingTransitions xmi:id="_yPtMgPZKEeCz_6s_8P8IEA" target="_yPZqgPZKEeCz_6s_8P8IEA"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_yPZqgPZKEeCz_6s_8P8IEA" name="State1" incomingTransitions="_yPtMgPZKEeCz_6s_8P8IEA">
-        <outgoingTransitions xmi:id="_N1VrwPZLEeCz_6s_8P8IEA" specification="A.event1, A.event2" target="_6jMFoPZKEeCz_6s_8P8IEA"/>
+        <outgoingTransitions xmi:id="_N1VrwPZLEeCz_6s_8P8IEA" specification="A.event1, A.event2[valueof(A.event1) &lt; 0] / i=2;" target="_6jMFoPZKEeCz_6s_8P8IEA"/>
         <outgoingTransitions xmi:id="_RSDqQPZLEeCz_6s_8P8IEA" specification="[i==5]" target="_6jMFoPZKEeCz_6s_8P8IEA"/>
         <outgoingTransitions xmi:id="_dxK2UPZLEeCz_6s_8P8IEA" specification="A.event3[j&lt;20]" target="_6jMFoPZKEeCz_6s_8P8IEA"/>
         <outgoingTransitions xmi:id="_kGjEAPZLEeCz_6s_8P8IEA" specification="A.event3,A.event4[j>30]" target="_6jMFoPZKEeCz_6s_8P8IEA"/>
@@ -14,7 +14,7 @@
         <outgoingTransitions xmi:id="_0zRgAPZLEeCz_6s_8P8IEA" specification="event7/j=i*9;" target="_6jMFoPZKEeCz_6s_8P8IEA"/>
         <outgoingTransitions xmi:id="_6xGJUPZLEeCz_6s_8P8IEA" specification="after 10s" target="_6jMFoPZKEeCz_6s_8P8IEA"/>
         <outgoingTransitions xmi:id="_KgZTwPZMEeCz_6s_8P8IEA" specification="after 100ms" target="_6jMFoPZKEeCz_6s_8P8IEA"/>
-        <outgoingTransitions xmi:id="_oEIZgAu4EeGmY4-cgZfupg" specification="A.event1" target="_6jMFoPZKEeCz_6s_8P8IEA"/>
+        <outgoingTransitions xmi:id="_oEIZgAu4EeGmY4-cgZfupg" specification="A.event1[valueof(A.event1) > 5] / i=1;" target="_6jMFoPZKEeCz_6s_8P8IEA"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_6jMFoPZKEeCz_6s_8P8IEA" name="State2" incomingTransitions="_N1VrwPZLEeCz_6s_8P8IEA _RSDqQPZLEeCz_6s_8P8IEA _dxK2UPZLEeCz_6s_8P8IEA _kGjEAPZLEeCz_6s_8P8IEA _q6VE8PZLEeCz_6s_8P8IEA _0zRgAPZLEeCz_6s_8P8IEA _6xGJUPZLEeCz_6s_8P8IEA _KgZTwPZMEeCz_6s_8P8IEA _oEIZgAu4EeGmY4-cgZfupg"/>
     </regions>
@@ -68,12 +68,12 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_6jN60fZKEeCz_6s_8P8IEA" fontName="Arial" fontHeight="10" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_6jN60vZKEeCz_6s_8P8IEA"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_6jPwAfZKEeCz_6s_8P8IEA"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_6jN60_ZKEeCz_6s_8P8IEA" x="284" y="42" height="329"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_6jN60_ZKEeCz_6s_8P8IEA" x="485" y="42" height="329"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_yOymgfZKEeCz_6s_8P8IEA"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="_yMgHgPZKEeCz_6s_8P8IEA" fontName="Arial" fontHeight="10" fillColor="15790320" lineColor="12632256"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_yO0bsPZKEeCz_6s_8P8IEA" x="240" y="10" width="400" height="431"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_yO0bsPZKEeCz_6s_8P8IEA" x="240" y="10" width="753" height="431"/>
     </children>
     <children xsi:type="notation:Shape" xmi:id="_yP9EIPZKEeCz_6s_8P8IEA" type="StatechartText" fontName="Arial" fontHeight="10" lineColor="4210752">
       <children xsi:type="notation:DecorationNode" xmi:id="_yP9EIvZKEeCz_6s_8P8IEA" type="StatechartName">
