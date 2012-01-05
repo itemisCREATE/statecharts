@@ -20,7 +20,6 @@ package org.yakindu.sct.model.sexec;
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#getExitAction <em>Exit Action</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#getEnterSequence <em>Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#getExitSequence <em>Exit Sequence</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.ExecutionState#getStateVector <em>State Vector</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,7 +27,7 @@ package org.yakindu.sct.model.sexec;
  * @model
  * @generated
  */
-public interface ExecutionState extends ExecutionNode {
+public interface ExecutionState extends ExecutionNode, ExecutionScope {
 	/**
 	 * Returns the value of the '<em><b>Entry Action</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -132,32 +131,6 @@ public interface ExecutionState extends ExecutionNode {
 	 * @generated
 	 */
 	void setExitSequence(Sequence value);
-
-	/**
-	 * Returns the value of the '<em><b>State Vector</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>State Vector</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>State Vector</em>' containment reference.
-	 * @see #setStateVector(StateVector)
-	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionState_StateVector()
-	 * @model containment="true"
-	 * @generated
-	 */
-	StateVector getStateVector();
-
-	/**
-	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.ExecutionState#getStateVector <em>State Vector</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>State Vector</em>' containment reference.
-	 * @see #getStateVector()
-	 * @generated
-	 */
-	void setStateVector(StateVector value);
 
 	/**
 	 * Returns the value of the '<em><b>Leaf</b></em>' attribute.

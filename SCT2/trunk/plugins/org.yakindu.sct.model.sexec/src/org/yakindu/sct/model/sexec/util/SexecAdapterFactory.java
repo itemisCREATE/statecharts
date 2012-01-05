@@ -117,6 +117,18 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createExecutionStateAdapter();
 			}
 			@Override
+			public Adapter caseExecutionScope(ExecutionScope object) {
+				return createExecutionScopeAdapter();
+			}
+			@Override
+			public Adapter caseExecutionRegion(ExecutionRegion object) {
+				return createExecutionRegionAdapter();
+			}
+			@Override
+			public Adapter caseExecutionEntry(ExecutionEntry object) {
+				return createExecutionEntryAdapter();
+			}
+			@Override
 			public Adapter caseExecutionChoice(ExecutionChoice object) {
 				return createExecutionChoiceAdapter();
 			}
@@ -279,6 +291,48 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExecutionStateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.ExecutionScope <em>Execution Scope</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.ExecutionScope
+	 * @generated
+	 */
+	public Adapter createExecutionScopeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.ExecutionRegion <em>Execution Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.ExecutionRegion
+	 * @generated
+	 */
+	public Adapter createExecutionRegionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.ExecutionEntry <em>Execution Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.ExecutionEntry
+	 * @generated
+	 */
+	public Adapter createExecutionEntryAdapter() {
 		return null;
 	}
 

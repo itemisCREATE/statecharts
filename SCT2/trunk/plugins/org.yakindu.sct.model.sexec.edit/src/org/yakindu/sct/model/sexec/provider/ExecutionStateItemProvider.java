@@ -61,9 +61,55 @@ public class ExecutionStateItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addSubScopesPropertyDescriptor(object);
+			addSuperScopePropertyDescriptor(object);
 			addLeafPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Sub Scopes feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSubScopesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ExecutionScope_subScopes_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ExecutionScope_subScopes_feature", "_UI_ExecutionScope_type"),
+				 SexecPackage.Literals.EXECUTION_SCOPE__SUB_SCOPES,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Super Scope feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSuperScopePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ExecutionScope_superScope_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ExecutionScope_superScope_feature", "_UI_ExecutionScope_type"),
+				 SexecPackage.Literals.EXECUTION_SCOPE__SUPER_SCOPE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -100,11 +146,11 @@ public class ExecutionStateItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__ENTER_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__EXIT_SEQUENCE);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_STATE__STATE_VECTOR);
 		}
 		return childrenFeatures;
 	}
@@ -162,11 +208,11 @@ public class ExecutionStateItemProvider
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case SexecPackage.EXECUTION_STATE__STATE_VECTOR:
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
 			case SexecPackage.EXECUTION_STATE__EXIT_ACTION:
 			case SexecPackage.EXECUTION_STATE__ENTER_SEQUENCE:
 			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
-			case SexecPackage.EXECUTION_STATE__STATE_VECTOR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -183,6 +229,11 @@ public class ExecutionStateItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR,
+				 SexecFactory.eINSTANCE.createStateVector()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -343,11 +394,6 @@ public class ExecutionStateItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__EXIT_SEQUENCE,
 				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_STATE__STATE_VECTOR,
-				 SexecFactory.eINSTANCE.createStateVector()));
 	}
 
 	/**

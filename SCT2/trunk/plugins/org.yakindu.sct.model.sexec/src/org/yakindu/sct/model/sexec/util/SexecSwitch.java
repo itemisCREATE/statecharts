@@ -112,7 +112,9 @@ public class SexecSwitch<T> extends Switch<T> {
 				ExecutionFlow executionFlow = (ExecutionFlow)theEObject;
 				T result = caseExecutionFlow(executionFlow);
 				if (result == null) result = caseScopedElement(executionFlow);
+				if (result == null) result = caseExecutionScope(executionFlow);
 				if (result == null) result = caseNamedElement(executionFlow);
+				if (result == null) result = caseMappedElement(executionFlow);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -128,8 +130,35 @@ public class SexecSwitch<T> extends Switch<T> {
 				ExecutionState executionState = (ExecutionState)theEObject;
 				T result = caseExecutionState(executionState);
 				if (result == null) result = caseExecutionNode(executionState);
+				if (result == null) result = caseExecutionScope(executionState);
 				if (result == null) result = caseNamedElement(executionState);
 				if (result == null) result = caseMappedElement(executionState);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.EXECUTION_SCOPE: {
+				ExecutionScope executionScope = (ExecutionScope)theEObject;
+				T result = caseExecutionScope(executionScope);
+				if (result == null) result = caseNamedElement(executionScope);
+				if (result == null) result = caseMappedElement(executionScope);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.EXECUTION_REGION: {
+				ExecutionRegion executionRegion = (ExecutionRegion)theEObject;
+				T result = caseExecutionRegion(executionRegion);
+				if (result == null) result = caseExecutionScope(executionRegion);
+				if (result == null) result = caseNamedElement(executionRegion);
+				if (result == null) result = caseMappedElement(executionRegion);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.EXECUTION_ENTRY: {
+				ExecutionEntry executionEntry = (ExecutionEntry)theEObject;
+				T result = caseExecutionEntry(executionEntry);
+				if (result == null) result = caseExecutionNode(executionEntry);
+				if (result == null) result = caseNamedElement(executionEntry);
+				if (result == null) result = caseMappedElement(executionEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -357,6 +386,51 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseExecutionState(ExecutionState object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Execution Scope</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Execution Scope</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExecutionScope(ExecutionScope object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Execution Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Execution Region</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExecutionRegion(ExecutionRegion object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Execution Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Execution Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExecutionEntry(ExecutionEntry object) {
 		return null;
 	}
 

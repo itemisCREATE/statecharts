@@ -73,6 +73,9 @@ import org.yakindu.sct.model.sexec.ExecutionChoice
 import org.yakindu.sct.model.stext.stext.DefaultEvent
 import org.yakindu.sct.model.sexec.ExecutionNode
 import com.google.inject.name.Named
+import org.yakindu.sct.model.sexec.ExecutionRegion
+import org.yakindu.sct.model.sexec.ExecutionScope
+import org.yakindu.sct.model.sexec.StateVector
 
 class ModelSequencer {
 	 
@@ -94,6 +97,7 @@ class ModelSequencer {
 		// during mapping the basic structural elements will be mapped from the source statechart to the execution flow
 		sc.mapScopes(ef)
 		sc.mapRegularStates(ef)
+		sc.mapRegions(ef)
 		sc.mapPseudoStates(ef)
 		sc.mapTimeEvents(ef)
 		
@@ -161,20 +165,30 @@ class ModelSequencer {
 
 		
 	def ExecutionFlow mapRegularStates(Statechart statechart, ExecutionFlow r){
-		var content = EcoreUtil2::eAllContentsAsList(statechart)
 		val allStates = statechart.allRegularStates
 		r.states.addAll(allStates.map( s | s.mapState));
 		return r
 	}
 
 
-	// TODO : move to other extension
-	def List<RegularState> allRegularStates(Statechart sc) {
-		var content = EcoreUtil2::eAllContentsAsList(sc)
-		val allStates = content.filter( typeof(RegularState) )
-		
-		return allStates.toList
+	def ExecutionFlow mapRegions(Statechart statechart, ExecutionFlow flow){
+		val allRegions = statechart.allRegions
+		flow.regions.addAll( allRegions.map( r | r.mapRegion));
+		return flow		
 	}
+	
+	
+	def ExecutionRegion mapRegion(Region region) {
+		val _region = region.create
+		
+		if ( region.composite instanceof Statechart ) _region.superScope = (region.composite as Statechart).create
+		else _region.superScope = (region.composite as State).create
+		
+		_region.subScopes.addAll( region.vertices.filter( typeof(RegularState) ).map( v | v.create as ExecutionScope ) )
+		
+		return _region
+	}
+	
 	
 	
 	def ExecutionFlow mapPseudoStates(Statechart statechart, ExecutionFlow r){
@@ -185,14 +199,6 @@ class ModelSequencer {
 	}
 
 
-	// TODO : move to other extension
-	def List<Choice> allChoices(Statechart sc) {
-		var content = EcoreUtil2::eAllContentsAsList(sc)
-		val allChoices = content.filter( typeof(Choice) )
-		
-		return allChoices.toList
-	}
-	
 
 	
 	def dispatch ExecutionState mapState(FinalState state) {
@@ -212,6 +218,8 @@ class ModelSequencer {
 	}
 	 
 	def dispatch ExecutionState mapState(RegularState state) {}
+	
+	
 	
 
 	/** Time trigger will be mapped to execution model time events for each real state. */
@@ -320,10 +328,49 @@ class ModelSequencer {
 	}
 
 
+	def dispatch StateVector stateVector(Vertex v) {
+		null	
+	}
+	
+	def dispatch StateVector stateVector(RegularState s) {
+		s.create.stateVector	
+	}
+	
+	def dispatch StateVector stateVector(Choice choice) {
+		choice.parentRegion.create.stateVector	
+	}
+	
+	def last(StateVector sv) {
+		sv.offset + sv.size -1
+	}
+	
+	def first(StateVector sv) {
+		sv.offset
+	}
+	
 	def Sequence mapToEffect(Transition t, Reaction r) {
 		val sequence = sexecFactory.createSequence 
 
 		// define exit behavior of transition
+		
+		// first process the exit behavior of orthogonal states that hase to be performed before source exit
+		val topExitState = t.exitStates.last
+		if ( topExitState != null ) {
+			val List<RegularState> leafStates = topExitState.collectLeafStates(new ArrayList<RegularState>())
+			val topVector = topExitState.stateVector
+			val sourceVector = t.source.stateVector
+		
+			val prepositions = (topVector.offset .. sourceVector.offset).take(sourceVector.offset - topVector.offset)
+			
+			for ( i: prepositions ) {
+						
+				// create a state switch for each state configuration vector position
+				var StateSwitch sSwitch = topExitState.defineExitSwitch(leafStates, i)
+				sequence.steps.add(sSwitch);
+			}
+		}
+		
+		// second process the exit path behavior from the the source state
 		if (t.source != null && t.source instanceof RegularState) {
 			sequence.steps.add((t.source as RegularState).create.exitSequence.newCall)	
 		}
@@ -337,8 +384,24 @@ class ModelSequencer {
 			
 			seq
 		}])
+
+
+		// third process the exit behavior of orthogonal states that hase to be performed after source exit
+		if ( topExitState != null ) {
+			val List<RegularState> leafStates = topExitState.collectLeafStates(new ArrayList<RegularState>())
+			val topVector = topExitState.stateVector
+			val sourceVector = t.source.stateVector
 		
-//		if (t.source != null) sequence.steps.add(newExitStateStep(t.source as State))
+			val postpositions = (sourceVector.last .. topVector.last).drop(1)
+			
+			for ( i: postpositions ) {
+						
+				// create a state switch for each state configuration vector position
+				var StateSwitch sSwitch = topExitState.defineExitSwitch(leafStates, i)
+				sequence.steps.add(sSwitch);
+			}
+		}
+		
 		
 		// map transition actions
 		if (t.effect != null) sequence.steps.add(t.effect.mapEffect)	
@@ -348,26 +411,47 @@ class ModelSequencer {
 		// define entry behavior of the transition
 		
 		// first process all composite states on the path to the target state in top-down-order
-		t.entryStates().reverse.fold(sequence, [seq, state | {
-			if (state != t.target) { // since we call the entry sequence of the target state we have to exclude it here
+//		t.entryStates().reverse.fold(sequence, [seq, state | {
+//			if (state != t.target) { // since we call the entry sequence of the target state we have to exclude it here
+//			
+//				// in the case of orthogonal states we also have to enter sibling states.
+//				val siblingRegions = state.parentRegion.composite.regions
+//				
+//				if (state.parentRegion != t.source.parentRegion) {
+//					// process higher order sibling regions
+//					for ( region : siblingRegions.take(siblingRegions.indexOf(state.parentRegion)) ) {
+//						seq.addEnterRegion(region)
+//					} 
+//				}
+//				
+//				// perform entry on the transition path 			
+//				if (state.create.entryAction != null) seq.steps.add(state.create.entryAction.newCall)
+//				if ( _addTraceSteps ) seq.steps += newTraceStateEntered(state.create)
+//				
+//			}
+//			seq
+//		}])
+		t.entryScopes().drop(1).toList.reverse.fold(sequence, [seq, scope | {
+			if (scope instanceof ExecutionRegion) { 
+				// if we enter a region than we have to process the sibling regions
 			
-				// in the case of orthogonal states we also have to enter sibling states.
-				val siblingRegions = state.parentRegion.composite.regions
+				val siblingRegions = scope.superScope.subScopes
 				
-				if (state.parentRegion != t.source.parentRegion) {
-					// process higher order sibling regions
-					for ( region : siblingRegions.take(siblingRegions.indexOf(state.parentRegion)) ) {
-						seq.addEnterRegion(region)
-					} 
+				// process higher order sibling regions
+				for ( region : siblingRegions.take(siblingRegions.indexOf(scope)) ) {
+					seq.addEnterRegion(region)
 				}
-				
+			} 
+			
+			if (scope instanceof ExecutionState) {
 				// perform entry on the transition path 			
-				if (state.create.entryAction != null) seq.steps.add(state.create.entryAction.newCall)
-				if ( _addTraceSteps ) seq.steps += newTraceStateEntered(state.create)
+				if ((scope as ExecutionState).entryAction != null) seq.steps.add((scope as ExecutionState).entryAction.newCall)
+				if ( _addTraceSteps ) seq.steps += newTraceStateEntered((scope as ExecutionState))
 				
 			}
 			seq
 		}])
+		
 		
 		// second process the target state entry behavior
 		if (t.target != null ) {
@@ -375,12 +459,12 @@ class ModelSequencer {
 			// in the case of orthogonal states we also have to enter sibling states.
 			val siblingRegions = t.target.parentRegion.composite.regions
 			
-			if (t.target.parentRegion != t.source.parentRegion) {
-				// process higher order sibling regions
-				for ( region : siblingRegions.take(siblingRegions.indexOf(t.target.parentRegion)) ) {
-					sequence.addEnterRegion(region)
-				} 	
-			}
+//			if (t.target.parentRegion != t.source.parentRegion) {
+//				// process higher order sibling regions
+//				for ( region : siblingRegions.take(siblingRegions.indexOf(t.target.parentRegion)) ) {
+//					sequence.addEnterRegion(region)
+//				} 	
+//			}
 			
 			// perform entry on the transition path 			
 			if ( t.target instanceof RegularState) {
@@ -389,40 +473,62 @@ class ModelSequencer {
 				sequence.steps.add((t.target as Choice).create.reactSequence.newCall )	
 			}
 				
-			if (t.target.parentRegion != t.source.parentRegion) {
-				// process lower order sibling regions 
-				for ( region : siblingRegions.drop(siblingRegions.indexOf(t.target.parentRegion)+1) ) {
-					sequence.addEnterRegion(region)
-				} 	
-			}
+//			if (t.target.parentRegion != t.source.parentRegion) {
+//				// process lower order sibling regions 
+//				for ( region : siblingRegions.drop(siblingRegions.indexOf(t.target.parentRegion)+1) ) {
+//					sequence.addEnterRegion(region)
+//				} 	
+//			}
 		}
 		
 		
 		// third - process all entry behavior that has to be executed after the target state behavior in bottom-up-order
-		t.entryStates().fold(sequence, [seq, state | {
-			if (state != t.target) { // since we call the entry sequence of the target state we have to exclude it here
+//		t.entryStates().fold(sequence, [seq, state | {
+//			if (state != t.target) { // since we call the entry sequence of the target state we have to exclude it here
+//			
+//				// in the case of orthogonal states we also have to enter sibling states.
+//				val siblingRegions = state.parentRegion.composite.regions
+//				
+//				if (state.parentRegion != t.source.parentRegion) {
+//					// process lower order sibling regions 
+//					for ( region : siblingRegions.drop(siblingRegions.indexOf(state.parentRegion)+1) ) {
+//						seq.addEnterRegion(region)
+//					} 				
+//				}
+//			}
+//			seq
+//		}])
+		
+		t.entryScopes().drop(1).fold(sequence, [seq, scope | {
+			if (scope instanceof ExecutionRegion) { 
+				// if we enter a region than we have to process the sibling regions
 			
-				// in the case of orthogonal states we also have to enter sibling states.
-				val siblingRegions = state.parentRegion.composite.regions
+				val siblingRegions = scope.superScope.subScopes
 				
-				if (state.parentRegion != t.source.parentRegion) {
-					// process lower order sibling regions 
-					for ( region : siblingRegions.drop(siblingRegions.indexOf(state.parentRegion)+1) ) {
-						seq.addEnterRegion(region)
-					} 				
-				}
-			}
+				// process lower order sibling regions 
+				for ( region : siblingRegions.drop(siblingRegions.indexOf(scope)+1) ) {
+					seq.addEnterRegion(region)
+				} 				
+			} 
 			seq
 		}])
-		
 			
 		return sequence
 	}	
 	
 	
 	
-	def addEnterRegion(Sequence seq, Region r) {
+	def dispatch addEnterRegion(Sequence seq, Region r) {
 		val entryState = r.entry?.target?.create
+					
+		if (entryState != null && entryState.enterSequence != null) 
+				seq.steps.add(entryState.enterSequence.newCall);
+	}
+
+
+	// TODO: refactor - don't access source element...
+	def dispatch addEnterRegion(Sequence seq, ExecutionRegion r) {
+		val entryState = (r.sourceElement as Region).entry?.target?.create
 					
 		if (entryState != null && entryState.enterSequence != null) 
 				seq.steps.add(entryState.enterSequence.newCall);
@@ -466,6 +572,25 @@ class ModelSequencer {
 		l.removeAll(t.source.containers)
 		l.filter( typeof(State) ).toList
 	}
+	
+	def List<ExecutionScope> exitScopes(Transition t) {
+//		val l = t.source.containers
+//		l.removeAll(t.target.containers)
+//		l.filter( typeof(State) ).toList
+		null
+	}
+	
+	def List<ExecutionScope> entryScopes(Transition t) {
+		val l = t.target.containers
+		l.removeAll(t.source.containers)
+		l.map( c | 
+			if ( c instanceof RegularState ) (c as RegularState).create as ExecutionScope
+			else if ( c instanceof Region ) (c as Region).create as ExecutionScope
+			else (c as Statechart).create as ExecutionScope
+		).toList
+	}
+	
+	
 	
 	// TODO: rename since this list also includes the start state or change implementation and usages
 	def List<RegularState> parentStates(RegularState s) {
@@ -828,14 +953,22 @@ class ModelSequencer {
 
 	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of a region */
 	def int defineStateVectors(Region r, int offset) {
-		r.vertices.fold(0, [s, v | {
+		val maxOrthogonality = r.vertices.fold(0, [s, v | {
 			val mo = v.defineStateVectors(offset)
 			if (mo > s) mo else s }])
+			
+		val er = r.create
+		er.stateVector = sexecFactory.createStateVector
+		er.stateVector.offset = offset;
+		er.stateVector.size = maxOrthogonality			
+	
+		return maxOrthogonality
 	}
 
 	/** the maximum orthogonality of all  pseudo states is 0 */
 	def dispatch int defineStateVectors(Vertex v, int offset) { 0 }
 	
+		
 	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of a state */
 	def dispatch int defineStateVectors(State s, int offset) { 
 		var int maxOrthogonality = 0
@@ -966,6 +1099,7 @@ class ModelSequencer {
 		execState.exitSequence = seq
 	}
 	
+	// TODO : refactor
 	def dispatch void defineStateExitSequence(State state) {
 		
 		val execState = state.create
@@ -988,36 +1122,8 @@ class ModelSequencer {
 	
 			for ( i: sVector.offset .. sVector.offset + sVector.size - 1 ) {
 						
-				val idx = i
-				// create a state switch
-				var StateSwitch sSwitch = sexecFactory.createStateSwitch
-				sSwitch.stateConfigurationIdx = i
-				sSwitch.comment = "Handle exit of all possible states on position " + sSwitch.stateConfigurationIdx + "..."
-								
-				val List<RegularState> posStates = leafStates.filter( rs | rs.create.stateVector.size == 1 && rs.create.stateVector.offset == idx).toList					
-				
-				// create a case for each leaf state				
-				for ( s : posStates ) {
-	
-					val caseSeq = sexecFactory.createSequence
-					caseSeq.steps += s.create.exitSequence.newCall
-
-	
-					val exitStates = s.parentStates
-					exitStates.removeAll(state.parentStates)
-					exitStates.remove(s)
-					
-					// include exitAction calls up to the direct child level.
-					exitStates.fold(caseSeq , [ cs, exitState | {
-						 if (exitState.create.exitAction != null) cs.steps.add(exitState.create.exitAction.newCall)
-						 if ( _addTraceSteps ) cs.steps.add(exitState.create.newTraceStateExited)
-						 cs
-					}]) 
-					
-					if (s.create.exitSequence != null) sSwitch.cases.add(s.create.newCase(caseSeq))
-					
-				}
-
+				// create a state switch for each state configuration vector position
+				var StateSwitch sSwitch = state.defineExitSwitch(leafStates, i)
 				seq.steps.add(sSwitch);
 
 			}
@@ -1032,6 +1138,41 @@ class ModelSequencer {
 		execState.exitSequence = seq
 	}
 	
+	
+	
+	def StateSwitch defineExitSwitch(State state, List<RegularState> states, int pos) {
+
+		// create a state switch
+		var StateSwitch sSwitch = sexecFactory.createStateSwitch
+		sSwitch.stateConfigurationIdx = pos
+		sSwitch.comment = "Handle exit of all possible states on position " + sSwitch.stateConfigurationIdx + "..."
+						
+		val List<RegularState> posStates = states.filter( rs | rs.create.stateVector.size == 1 && rs.create.stateVector.offset == pos).toList					
+		
+		// create a case for each leaf state				
+		for ( s : posStates ) {
+
+			val caseSeq = sexecFactory.createSequence
+			caseSeq.steps += s.create.exitSequence.newCall
+
+
+			val exitStates = s.parentStates
+			exitStates.removeAll(state.parentStates)
+			exitStates.remove(s)
+			
+			// include exitAction calls up to the direct child level.
+			exitStates.fold(caseSeq , [ cs, exitState | {
+				 if (exitState.create.exitAction != null) cs.steps.add(exitState.create.exitAction.newCall)
+				 if ( _addTraceSteps ) cs.steps.add(exitState.create.newTraceStateExited)
+				 cs
+			}]) 
+			
+			if (s.create.exitSequence != null) sSwitch.cases.add(s.create.newCase(caseSeq))
+			
+		}
+		
+		return sSwitch
+	}
 	
 	
 	def List<RegularState> collectLeafStates(RegularState state, List<RegularState> leafStates) {

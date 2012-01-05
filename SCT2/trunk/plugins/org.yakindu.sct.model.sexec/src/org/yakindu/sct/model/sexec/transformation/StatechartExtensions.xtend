@@ -14,6 +14,8 @@ import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.sgraph.ReactiveElement
 import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.Choice
 
 class StatechartExtensions {
 	
@@ -100,6 +102,33 @@ class StatechartExtensions {
 	def ReactiveElement reactiveElement(Scope s) {
 		if (s.eContainer instanceof ReactiveElement) s.eContainer as ReactiveElement
 	}	
+	
+	def List<RegularState> allRegularStates(Statechart sc) {
+		var content = EcoreUtil2::eAllContentsAsList(sc)
+		val allStates = content.filter( typeof(RegularState) )
+		
+		return allStates.toList
+	}
+	
+	
+	
+	def List<Region> allRegions(Statechart sc) {
+		var content = EcoreUtil2::eAllContentsAsList(sc)
+		val allRegions = content.filter( typeof(Region) )
+		
+		return allRegions.toList
+	}
+	
+	
+	
+	def List<Choice> allChoices(Statechart sc) {
+		var content = EcoreUtil2::eAllContentsAsList(sc)
+		val allChoices = content.filter( typeof(Choice) )
+		
+		return allChoices.toList
+	}
+	
+	
 	
 	//=================================================================
 	// naming util extensions

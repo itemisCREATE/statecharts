@@ -86,6 +86,9 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 			case SexecPackage.EXECUTION_FLOW: return createExecutionFlow();
 			case SexecPackage.EXECUTION_NODE: return createExecutionNode();
 			case SexecPackage.EXECUTION_STATE: return createExecutionState();
+			case SexecPackage.EXECUTION_SCOPE: return createExecutionScope();
+			case SexecPackage.EXECUTION_REGION: return createExecutionRegion();
+			case SexecPackage.EXECUTION_ENTRY: return createExecutionEntry();
 			case SexecPackage.EXECUTION_CHOICE: return createExecutionChoice();
 			case SexecPackage.REACTION: return createReaction();
 			case SexecPackage.STATE_VECTOR: return createStateVector();
@@ -139,6 +142,36 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public ExecutionState createExecutionState() {
 		ExecutionStateImpl executionState = new ExecutionStateImpl();
 		return executionState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExecutionScope createExecutionScope() {
+		ExecutionScopeImpl executionScope = new ExecutionScopeImpl();
+		return executionScope;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExecutionRegion createExecutionRegion() {
+		ExecutionRegionImpl executionRegion = new ExecutionRegionImpl();
+		return executionRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExecutionEntry createExecutionEntry() {
+		ExecutionEntryImpl executionEntry = new ExecutionEntryImpl();
+		return executionEntry;
 	}
 
 	/**

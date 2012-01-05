@@ -22,6 +22,7 @@ import org.yakindu.sct.model.sexec.MappedElement;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecPackage;
+import org.yakindu.sct.model.sexec.StateVector;
 
 /**
  * <!-- begin-user-doc -->

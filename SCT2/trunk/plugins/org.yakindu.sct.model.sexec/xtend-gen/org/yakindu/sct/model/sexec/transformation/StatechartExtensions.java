@@ -12,9 +12,11 @@ import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -198,6 +200,39 @@ public class StatechartExtensions {
       _xifexpression = ((ReactiveElement) _eContainer_1);
     }
     return _xifexpression;
+  }
+  
+  public List<RegularState> allRegularStates(final Statechart sc) {
+    {
+      List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(sc);
+      List<EObject> content = _eAllContentsAsList;
+      Iterable<RegularState> _filter = IterableExtensions.<RegularState>filter(content, org.yakindu.sct.model.sgraph.RegularState.class);
+      final Iterable<RegularState> allStates = _filter;
+      List<RegularState> _list = IterableExtensions.<RegularState>toList(allStates);
+      return _list;
+    }
+  }
+  
+  public List<Region> allRegions(final Statechart sc) {
+    {
+      List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(sc);
+      List<EObject> content = _eAllContentsAsList;
+      Iterable<Region> _filter = IterableExtensions.<Region>filter(content, org.yakindu.sct.model.sgraph.Region.class);
+      final Iterable<Region> allRegions = _filter;
+      List<Region> _list = IterableExtensions.<Region>toList(allRegions);
+      return _list;
+    }
+  }
+  
+  public List<Choice> allChoices(final Statechart sc) {
+    {
+      List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(sc);
+      List<EObject> content = _eAllContentsAsList;
+      Iterable<Choice> _filter = IterableExtensions.<Choice>filter(content, org.yakindu.sct.model.sgraph.Choice.class);
+      final Iterable<Choice> allChoices = _filter;
+      List<Choice> _list = IterableExtensions.<Choice>toList(allChoices);
+      return _list;
+    }
   }
   
   protected String _id(final Object obj) {
