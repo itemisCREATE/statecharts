@@ -4,3 +4,4 @@ Bundle-Name: Yakindu SCT Help
 Bundle-SymbolicName: org.yakindu.sct.doc.user;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: YAKINDU
+Eclipse-BundleShape: dir
