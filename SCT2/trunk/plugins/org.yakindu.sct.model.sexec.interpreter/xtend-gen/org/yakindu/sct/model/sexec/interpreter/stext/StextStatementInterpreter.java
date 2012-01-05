@@ -2,6 +2,7 @@ package org.yakindu.sct.model.sexec.interpreter.stext;
 
 import com.google.inject.Inject;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -9,9 +10,11 @@ import org.yakindu.sct.model.sexec.interpreter.stext.AbstractStatementInterprete
 import org.yakindu.sct.model.sexec.interpreter.stext.CoreFunction;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Event;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
+import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AdditiveOperator;
 import org.yakindu.sct.model.stext.stext.Assignment;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
@@ -187,6 +190,20 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     return _xblockexpression;
   }
   
+  protected Object _execute(final ActiveStateReferenceExpression expression) {
+    {
+      Set<RegularState> _allActiveStates = this.context.getAllActiveStates();
+      for (final RegularState activeState : _allActiveStates) {
+        RegularState _value = expression.getValue();
+        boolean _operator_equals = ObjectExtensions.operator_equals(activeState, _value);
+        if (_operator_equals) {
+          return true;
+        }
+      }
+      return false;
+    }
+  }
+  
   protected Object _execute(final LogicalAndExpression expression) throws ExecutionException {
     {
       Expression _leftOperand = expression.getLeftOperand();
@@ -353,7 +370,9 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
   }
   
   public Object execute(final Statement expression) throws ExecutionException {
-    if ((expression instanceof BitwiseAndExpression)) {
+    if ((expression instanceof ActiveStateReferenceExpression)) {
+      return _execute((ActiveStateReferenceExpression)expression);
+    } else if ((expression instanceof BitwiseAndExpression)) {
       return _execute((BitwiseAndExpression)expression);
     } else if ((expression instanceof BitwiseOrExpression)) {
       return _execute((BitwiseOrExpression)expression);
