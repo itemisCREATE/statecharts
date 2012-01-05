@@ -119,7 +119,14 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		null;
 	}
 	
-	
+	def dispatch execute(ActiveStateReferenceExpression expression){
+		for(activeState : context.allActiveStates){
+			if(activeState == expression.value){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	def dispatch execute(LogicalAndExpression expression){
 		var leftResult = execute(expression.leftOperand)
@@ -140,7 +147,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, CoreFunction::BIT_AND)
 	}
 	def dispatch execute(BitwiseOrExpression expression){
-			executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, CoreFunction::BIT_OR)
+		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, CoreFunction::BIT_OR)
 	}
 	def dispatch execute(BitwiseXorExpression expression){
 		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, CoreFunction::BIT_XOR)		

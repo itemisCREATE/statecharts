@@ -77,7 +77,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     {
       this.flow = flow;
       EList<Scope> _scopes = flow.getScopes();
-      for (Scope scope : _scopes) {
+      for (final Scope scope : _scopes) {
         this.declareContents(scope);
       }
       StateVector _stateVector = flow.getStateVector();
@@ -100,21 +100,21 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   
   protected void _declareContents(final InternalScope scope) throws NumberFormatException {
     EList<Declaration> _declarations = scope.getDeclarations();
-    for (Declaration declaration : _declarations) {
+    for (final Declaration declaration : _declarations) {
       this.addToScope(declaration);
     }
   }
   
   protected void _declareContents(final Scope scope) throws NumberFormatException {
     EList<Declaration> _declarations = scope.getDeclarations();
-    for (Declaration declaration : _declarations) {
+    for (final Declaration declaration : _declarations) {
       this.addToScope(declaration);
     }
   }
   
   protected void _declareContents(final InterfaceScope scope) throws NumberFormatException {
     EList<Declaration> _declarations = scope.getDeclarations();
-    for (Declaration declaration : _declarations) {
+    for (final Declaration declaration : _declarations) {
       this.addToScope(declaration);
     }
   }
@@ -284,7 +284,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   public void enter() throws ExecutionException {
     Sequence _enterSequence = this.flow.getEnterSequence();
     EList<Step> _steps = _enterSequence.getSteps();
-    for (Step step : _steps) {
+    for (final Step step : _steps) {
       this.execute(step);
     }
   }
@@ -319,7 +319,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
       Statement _condition = check.getCondition();
       boolean _operator_equals = ObjectExtensions.operator_equals(_condition, null);
       if (_operator_equals) {
-        return true;
+        return ((Boolean)true);
       }
       Statement _condition_1 = check.getCondition();
       Object _evaluateStatement = this.interpreter.evaluateStatement(_condition_1, this.executionContext);
@@ -437,7 +437,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     Object _xblockexpression = null;
     {
       EList<Step> _steps = sequence.getSteps();
-      for (Step step : _steps) {
+      for (final Step step : _steps) {
         this.execute(step);
       }
       _xblockexpression = (null);
@@ -449,7 +449,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     Object _xblockexpression = null;
     {
       EList<StateCase> _cases = stateSwitch.getCases();
-      for (StateCase stateCase : _cases) {
+      for (final StateCase stateCase : _cases) {
         this.execute(stateCase);
       }
       _xblockexpression = (null);
