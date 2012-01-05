@@ -23,11 +23,18 @@ String StName(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).nam
 String STNAME(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toUpperCase() + "STATEMACHINE";
 String stName(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toFirstLower() + "Statemachine";
 
-String DRName(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toFirstUpper() + "DataRepository";
-String DRNAME(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toUpperCase() + "DATAREPOSITORY";
+//String DRName(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toFirstUpper() + "DataRepository";
+//String DRNAME(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toUpperCase() + "DATAREPOSITORY";
 
 String EvName(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toFirstUpper() + "Event";
 String EVNAME(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toUpperCase() + "EVENT";
+
+/* This is from sgraph! This should not be used within code generation */
+String StateEnumName(RegularState state) :
+	"_"+state.name; /* ??? */
+
+String StateEnumName(ExecutionState state) :
+	"_"+state.simpleName;
 
 cached String functionName(Step step, GeneratorEntry genEntry) : 
 	(step.isEffect()) ? step.actionFunction(genEntry, false) : (
