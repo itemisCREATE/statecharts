@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.util;
 
@@ -180,14 +181,6 @@ public class StextSwitch<T> extends Switch<T>
       {
         ReactionProperty reactionProperty = (ReactionProperty)theEObject;
         T result = caseReactionProperty(reactionProperty);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case StextPackage.REACTION_PRIORITY:
-      {
-        ReactionPriority reactionPriority = (ReactionPriority)theEObject;
-        T result = caseReactionPriority(reactionPriority);
-        if (result == null) result = caseReactionProperty(reactionPriority);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -803,22 +796,6 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseReactionProperty(ReactionProperty object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Reaction Priority</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Reaction Priority</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseReactionPriority(ReactionPriority object)
   {
     return null;
   }

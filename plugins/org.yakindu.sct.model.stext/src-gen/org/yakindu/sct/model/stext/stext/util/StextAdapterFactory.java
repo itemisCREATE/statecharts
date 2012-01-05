@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.util;
 
@@ -151,11 +152,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
       public Adapter caseReactionProperty(ReactionProperty object)
       {
         return createReactionPropertyAdapter();
-      }
-      @Override
-      public Adapter caseReactionPriority(ReactionPriority object)
-      {
-        return createReactionPriorityAdapter();
       }
       @Override
       public Adapter caseEntryPointSpec(EntryPointSpec object)
@@ -650,21 +646,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createReactionPropertyAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.ReactionPriority <em>Reaction Priority</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.ReactionPriority
-   * @generated
-   */
-  public Adapter createReactionPriorityAdapter()
   {
     return null;
   }

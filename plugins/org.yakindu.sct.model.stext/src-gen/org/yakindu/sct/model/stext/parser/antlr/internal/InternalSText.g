@@ -1774,72 +1774,23 @@ ruleReactionProperty returns [EObject current=null]
     @after { leaveRule(); }:
 (
     { 
-        newCompositeNode(grammarAccess.getReactionPropertyAccess().getReactionPriorityParserRuleCall_0()); 
+        newCompositeNode(grammarAccess.getReactionPropertyAccess().getEntryPointSpecParserRuleCall_0()); 
     }
-    this_ReactionPriority_0=ruleReactionPriority
+    this_EntryPointSpec_0=ruleEntryPointSpec
     { 
-        $current = $this_ReactionPriority_0.current; 
+        $current = $this_EntryPointSpec_0.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getReactionPropertyAccess().getEntryPointSpecParserRuleCall_1()); 
+        newCompositeNode(grammarAccess.getReactionPropertyAccess().getExitPointSpecParserRuleCall_1()); 
     }
-    this_EntryPointSpec_1=ruleEntryPointSpec
+    this_ExitPointSpec_1=ruleExitPointSpec
     { 
-        $current = $this_EntryPointSpec_1.current; 
+        $current = $this_ExitPointSpec_1.current; 
         afterParserOrEnumRuleCall();
     }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getReactionPropertyAccess().getExitPointSpecParserRuleCall_2()); 
-    }
-    this_ExitPointSpec_2=ruleExitPointSpec
-    { 
-        $current = $this_ExitPointSpec_2.current; 
-        afterParserOrEnumRuleCall();
-    }
-)
-;
-
-
-
-
-
-// Entry rule entryRuleReactionPriority
-entryRuleReactionPriority returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getReactionPriorityRule()); }
-	 iv_ruleReactionPriority=ruleReactionPriority 
-	 { $current=$iv_ruleReactionPriority.current; } 
-	 EOF 
-;
-
-// Rule ReactionPriority
-ruleReactionPriority returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-(
-		lv_priority_0_0=RULE_INT
-		{
-			newLeafNode(lv_priority_0_0, grammarAccess.getReactionPriorityAccess().getPriorityINTTerminalRuleCall_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getReactionPriorityRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"priority",
-        		lv_priority_0_0, 
-        		"INT");
-	    }
-
-)
 )
 ;
 

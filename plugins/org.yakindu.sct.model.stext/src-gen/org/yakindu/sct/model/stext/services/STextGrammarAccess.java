@@ -1085,41 +1085,21 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	public class ReactionPropertyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ReactionProperty");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cReactionPriorityParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cEntryPointSpecParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cExitPointSpecParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cEntryPointSpecParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cExitPointSpecParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//ReactionProperty:
-		//	ReactionPriority | EntryPointSpec | ExitPointSpec;
+		//	EntryPointSpec | ExitPointSpec;
 		public ParserRule getRule() { return rule; }
 
-		//ReactionPriority | EntryPointSpec | ExitPointSpec
+		//EntryPointSpec | ExitPointSpec
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//ReactionPriority
-		public RuleCall getReactionPriorityParserRuleCall_0() { return cReactionPriorityParserRuleCall_0; }
-
 		//EntryPointSpec
-		public RuleCall getEntryPointSpecParserRuleCall_1() { return cEntryPointSpecParserRuleCall_1; }
+		public RuleCall getEntryPointSpecParserRuleCall_0() { return cEntryPointSpecParserRuleCall_0; }
 
 		//ExitPointSpec
-		public RuleCall getExitPointSpecParserRuleCall_2() { return cExitPointSpecParserRuleCall_2; }
-	}
-
-	public class ReactionPriorityElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ReactionPriority");
-		private final Assignment cPriorityAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cPriorityINTTerminalRuleCall_0 = (RuleCall)cPriorityAssignment.eContents().get(0);
-		
-		//ReactionPriority:
-		//	priority=INT;
-		public ParserRule getRule() { return rule; }
-
-		//priority=INT
-		public Assignment getPriorityAssignment() { return cPriorityAssignment; }
-
-		//INT
-		public RuleCall getPriorityINTTerminalRuleCall_0() { return cPriorityINTTerminalRuleCall_0; }
+		public RuleCall getExitPointSpecParserRuleCall_1() { return cExitPointSpecParserRuleCall_1; }
 	}
 
 	public class EntryPointSpecElements extends AbstractParserRuleElementFinder {
@@ -2859,7 +2839,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private ReactionEffectElements pReactionEffect;
 	private ReactionPropertiesElements pReactionProperties;
 	private ReactionPropertyElements pReactionProperty;
-	private ReactionPriorityElements pReactionPriority;
 	private EntryPointSpecElements pEntryPointSpec;
 	private ExitPointSpecElements pExitPointSpec;
 	private EventSpecElements pEventSpec;
@@ -3231,23 +3210,13 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ReactionProperty:
-	//	ReactionPriority | EntryPointSpec | ExitPointSpec;
+	//	EntryPointSpec | ExitPointSpec;
 	public ReactionPropertyElements getReactionPropertyAccess() {
 		return (pReactionProperty != null) ? pReactionProperty : (pReactionProperty = new ReactionPropertyElements());
 	}
 	
 	public ParserRule getReactionPropertyRule() {
 		return getReactionPropertyAccess().getRule();
-	}
-
-	//ReactionPriority:
-	//	priority=INT;
-	public ReactionPriorityElements getReactionPriorityAccess() {
-		return (pReactionPriority != null) ? pReactionPriority : (pReactionPriority = new ReactionPriorityElements());
-	}
-	
-	public ParserRule getReactionPriorityRule() {
-		return getReactionPriorityAccess().getRule();
 	}
 
 	//EntryPointSpec:

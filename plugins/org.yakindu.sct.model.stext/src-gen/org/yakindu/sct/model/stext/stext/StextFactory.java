@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext;
 
@@ -141,15 +142,6 @@ public interface StextFactory extends EFactory
    * @generated
    */
   ReactionProperty createReactionProperty();
-
-  /**
-   * Returns a new object of class '<em>Reaction Priority</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Reaction Priority</em>'.
-   * @generated
-   */
-  ReactionPriority createReactionPriority();
 
   /**
    * Returns a new object of class '<em>Entry Point Spec</em>'.
