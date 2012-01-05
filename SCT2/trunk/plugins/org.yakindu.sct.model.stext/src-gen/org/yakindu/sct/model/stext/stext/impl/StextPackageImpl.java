@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -64,7 +65,6 @@ import org.yakindu.sct.model.stext.stext.Operation;
 import org.yakindu.sct.model.stext.stext.OperationCall;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
-import org.yakindu.sct.model.stext.stext.ReactionPriority;
 import org.yakindu.sct.model.stext.stext.ReactionProperties;
 import org.yakindu.sct.model.stext.stext.ReactionProperty;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
@@ -188,13 +188,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * @generated
    */
   private EClass reactionPropertyEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass reactionPriorityEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -913,26 +906,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
   public EClass getReactionProperty()
   {
     return reactionPropertyEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getReactionPriority()
-  {
-    return reactionPriorityEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getReactionPriority_Priority()
-  {
-    return (EAttribute)reactionPriorityEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2194,9 +2167,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     reactionPropertyEClass = createEClass(REACTION_PROPERTY);
 
-    reactionPriorityEClass = createEClass(REACTION_PRIORITY);
-    createEAttribute(reactionPriorityEClass, REACTION_PRIORITY__PRIORITY);
-
     entryPointSpecEClass = createEClass(ENTRY_POINT_SPEC);
     createEReference(entryPointSpecEClass, ENTRY_POINT_SPEC__ENTRYPOINT);
 
@@ -2405,7 +2375,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     localReactionEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
     localReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
     transitionReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
-    reactionPriorityEClass.getESuperTypes().add(this.getReactionProperty());
     entryPointSpecEClass.getESuperTypes().add(this.getReactionProperty());
     exitPointSpecEClass.getESuperTypes().add(this.getReactionProperty());
     regularEventSpecEClass.getESuperTypes().add(this.getEventSpec());
@@ -2491,9 +2460,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEReference(getReactionProperties_Properties(), this.getReactionProperty(), null, "properties", null, 0, -1, ReactionProperties.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(reactionPropertyEClass, ReactionProperty.class, "ReactionProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(reactionPriorityEClass, ReactionPriority.class, "ReactionPriority", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getReactionPriority_Priority(), ecorePackage.getEInt(), "priority", null, 0, 1, ReactionPriority.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(entryPointSpecEClass, EntryPointSpec.class, "EntryPointSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEntryPointSpec_Entrypoint(), this.getEntrypoint(), null, "entrypoint", null, 0, 1, EntryPointSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

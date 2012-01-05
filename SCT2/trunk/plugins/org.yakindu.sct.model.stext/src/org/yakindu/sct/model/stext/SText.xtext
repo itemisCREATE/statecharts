@@ -121,10 +121,7 @@ ReactionProperties:
 	{ReactionProperties} (properties+=ReactionProperty)*;
 
 ReactionProperty:
-	ReactionPriority | EntryPointSpec | ExitPointSpec;
-
-ReactionPriority:
-	priority=INT;
+	EntryPointSpec | ExitPointSpec;
 
 EntryPointSpec:
 	'>' entrypoint=[Entrypoint|FQN];

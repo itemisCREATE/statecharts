@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -81,7 +82,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.TRANSITION_REACTION: return createTransitionReaction();
       case StextPackage.REACTION_PROPERTIES: return createReactionProperties();
       case StextPackage.REACTION_PROPERTY: return createReactionProperty();
-      case StextPackage.REACTION_PRIORITY: return createReactionPriority();
       case StextPackage.ENTRY_POINT_SPEC: return createEntryPointSpec();
       case StextPackage.EXIT_POINT_SPEC: return createExitPointSpec();
       case StextPackage.EVENT_SPEC: return createEventSpec();
@@ -341,17 +341,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     ReactionPropertyImpl reactionProperty = new ReactionPropertyImpl();
     return reactionProperty;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ReactionPriority createReactionPriority()
-  {
-    ReactionPriorityImpl reactionPriority = new ReactionPriorityImpl();
-    return reactionPriority;
   }
 
   /**

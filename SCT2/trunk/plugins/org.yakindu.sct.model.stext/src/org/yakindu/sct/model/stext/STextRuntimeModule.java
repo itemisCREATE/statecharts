@@ -1,6 +1,5 @@
 package org.yakindu.sct.model.stext;
 
-import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
