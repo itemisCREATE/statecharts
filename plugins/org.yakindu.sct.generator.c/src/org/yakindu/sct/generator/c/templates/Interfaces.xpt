@@ -30,8 +30,6 @@ Templates for the main statechart cpp file.
 #include "Statemachine_cy.h"
 #include "«EvName()».h"
 
-typedef void(*handleEvent)(_Event ev);
-
 typedef struct {
 	EventSet* eventSet;
 	Statemachine_cy* statemachine;

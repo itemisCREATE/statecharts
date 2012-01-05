@@ -28,6 +28,9 @@ typedef struct {
 
 extern void _event_init(_Event* handle, uint32_t id);
 
+/* event handler callback signature definition */ 
+typedef void(*handleEvent)(_Event ev);
+
 #endif /* EVENT_H_ */
 «ENDFILE»
 
