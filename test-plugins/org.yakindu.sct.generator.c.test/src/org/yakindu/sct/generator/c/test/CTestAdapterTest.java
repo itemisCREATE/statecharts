@@ -69,7 +69,8 @@ public class CTestAdapterTest {
 
 		IFile file = project.getFile("GenModelC.sgen");
 		generatorExecutor.executeGenerator(file);
-		waitForJobFinished(file);
+		waitForJobFinished(file.getProject().getWorkspace().getRuleFactory()
+				.buildRule());
 
 		// TODO parameterize cmake skript and call appropriate with conversion
 		// for to junit.xml

@@ -55,7 +55,8 @@ public class GeneratorExecutor {
 				return Status.OK_STATUS;
 			}
 		};
-		generatorJob.setRule(file);
+		generatorJob.setRule(file.getProject().getWorkspace().getRuleFactory()
+				.buildRule());
 		generatorJob.schedule();
 	}
 
@@ -66,7 +67,7 @@ public class GeneratorExecutor {
 		// if (provider != null) {
 		// resource = provider.get(file.getProject()).getResource(uri, true);
 		// } else {
-			resource = new ResourceSetImpl().getResource(uri, true);
+		resource = new ResourceSetImpl().getResource(uri, true);
 		// }
 		return resource;
 	}
