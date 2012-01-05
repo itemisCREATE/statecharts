@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Generator C Test
+Bundle-SymbolicName: org.yakindu.sct.generator.c.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: YAKINDU
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit4;bundle-version="4.8.1",
+ org.eclipse.core.resources;bundle-version="3.7.100",
+ org.eclipse.core.runtime;bundle-version="3.7.0",
+ org.yakindu.sct.generator.c;bundle-version="1.0.0",
+ org.yakindu.sct.model.sgen;bundle-version="1.0.0",
+ org.yakindu.sct.generator.core;bundle-version="1.0.0",
+ org.yakindu.sct.generator.genmodel;bundle-version="1.0.0"
