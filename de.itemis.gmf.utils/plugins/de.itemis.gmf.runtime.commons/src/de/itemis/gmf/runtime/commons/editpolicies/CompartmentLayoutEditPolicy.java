@@ -39,6 +39,7 @@ import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
 import org.eclipse.gmf.runtime.emf.commands.core.command.CompositeTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.commands.core.commands.RepositionEObjectCommand;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
+import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.notation.View;
 
 import de.itemis.gmf.runtime.commons.commands.CompartmentChildCreateCommand;
@@ -52,6 +53,10 @@ public class CompartmentLayoutEditPolicy extends
 		org.eclipse.gef.editpolicies.FlowLayoutEditPolicy {
 
 	private EStructuralFeature feature = null;
+
+	public static enum RequestParameterKeys {
+		RegionFeedbackIndex
+	}
 
 	/**
 	 * Internal command which validates if a view is already a child of parent
@@ -159,6 +164,7 @@ public class CompartmentLayoutEditPolicy extends
 		return new ICommandProxy(command);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected Command getCreateCommand(CreateRequest request) {
 		if (request instanceof CreateViewAndElementRequest) {
@@ -175,10 +181,25 @@ public class CompartmentLayoutEditPolicy extends
 				CreateViewRequest.ViewDescriptor descriptor = (CreateViewRequest.ViewDescriptor) descriptors
 						.next();
 
+				int feedBackIndex = getFeedbackIndexFor(request);
+
+				// obtain CreateElementRequest and add initial region feedback
+				// index to request map. This index is needed to add the
+				// semantic element at the correct listIndex
+				CreateElementRequest createElementRequest = (CreateElementRequest) ((CreateViewAndElementRequest) request)
+						.getViewAndElementDescriptor()
+						.getCreateElementRequestAdapter()
+						.getAdapter(CreateElementRequest.class);
+
+				if (createElementRequest != null) {
+					createElementRequest.getParameters().put(
+							RequestParameterKeys.RegionFeedbackIndex,
+							feedBackIndex);
+				}
+
 				CreateCommand createCommand = new CompartmentChildCreateCommand(
 						editingDomain, descriptor,
-						(View) (getHost().getModel()),
-						getFeedbackIndexFor(request));
+						(View) (getHost().getModel()), feedBackIndex);
 
 				cc.compose(createCommand);
 			}
