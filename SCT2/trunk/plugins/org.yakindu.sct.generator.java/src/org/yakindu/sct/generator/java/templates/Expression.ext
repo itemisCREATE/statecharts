@@ -71,9 +71,6 @@ String toCode(RealLiteral expression) :
 String toCode(EventValueReferenceExpression expression):
 	expression.value.getContext().toFirstLower()+"get"+expression.value.getName()+"().getValue()";
 
-String toCode(EventRaisedReferenceExpression expression):
-	"occuredEvents.contains("+expression.value.getContext().toFirstLower()+"get"+expression.value.getName()+"())";
-
 /* Logical Expressions */
 String toCode(LogicalOrExpression expression) :
   	"("+expression.leftOperand.toCode() + " || " + expression.rightOperand.toCode()+")";

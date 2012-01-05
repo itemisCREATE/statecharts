@@ -198,9 +198,6 @@ String toCCode(VariableDefinition var) :
 String toCCode(EventDefinition evDef) :
     " ( eventSet_check( &" + evDef.statemachineHandleName() + "->base.eventSet, " + evDef.getEventEnumName() + ") ) ";
 
-String toCCode(EventRaisedReferenceExpression errExp) :
-	" eventSet_check( &" + errExp.statemachineHandleName() + "->base.eventSet, " + errExp.value.getEventEnumName() + ")";
-
 String toCCode(EventValueReferenceExpression evrExp) :
 	"((" +evrExp.value.name + "*)" + evrExp.statemachineHandleName() + "->base.eventList[" + evrExp.value.getEventEnumName() + "])->value";
 
