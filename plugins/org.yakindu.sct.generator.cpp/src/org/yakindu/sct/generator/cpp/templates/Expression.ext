@@ -16,7 +16,19 @@ String toCppCode(Statement statement) :
 	null; //polymorphic placeholder (abstract rule)
 
 String toCppCode(Literal lit) :
-   lit.toString() ;
+   "Unknown Literal Type" ;
+
+String toCppCode(BoolLiteral bLit) :
+   (bLit.value == true) ? "bool_true" : "bool_false"; 
+
+String toCppCode(IntLiteral iLit) :
+	iLit.value.toString();
+ 
+String toCppCode(RealLiteral rLit) :
+	rLit.value.toString();
+
+String toCppCode(HexLiteral hLit) :
+	hLit.value.toString();
 
 String toCppCode(PrimitiveValueExpression primValue) :
 	primValue.value.toCppCode();
