@@ -219,6 +219,9 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
       Expression _leftOperand = expression.getLeftOperand();
       Object _execute = this.execute(_leftOperand);
       Object leftResult = _execute;
+      if (((Boolean) leftResult)) {
+        return true;
+      }
       Expression _rightOperand = expression.getRightOperand();
       Object _execute_1 = this.execute(_rightOperand);
       Object rightResult = _execute_1;

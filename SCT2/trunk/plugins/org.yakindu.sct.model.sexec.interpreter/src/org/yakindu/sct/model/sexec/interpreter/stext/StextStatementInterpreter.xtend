@@ -133,6 +133,8 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	
 	def dispatch execute(LogicalOrExpression expression){
 		var leftResult = execute(expression.leftOperand)
+		if(leftResult as Boolean)
+			return true
 		var rightResult = execute(expression.rightOperand)
 		return leftResult as Boolean || rightResult as Boolean
 	}
