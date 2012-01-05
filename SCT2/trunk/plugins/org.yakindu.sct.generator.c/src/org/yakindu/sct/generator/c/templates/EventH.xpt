@@ -22,6 +22,10 @@ Templates for the main statechart c file.
 
 #include "definition.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif 
+
 typedef struct {
   uint32_t id;
 } _Event;
@@ -31,6 +35,10 @@ extern void _event_init(_Event* handle, uint32_t id);
 /* event handler callback signature definition */ 
 typedef void(*handleEvent)(_Event ev);
 
+#ifdef __cplusplus
+}
+#endif 
+ 
 #endif /* EVENT_H_ */
 «ENDFILE»
 

@@ -22,6 +22,10 @@ Templates for the main statechart c file.
 #include "Event.h"
 #include "definition.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif 
+ 
 typedef uint32_t(*getSizeOfEventFP)(uint32_t evid);
 
 typedef struct {
@@ -51,6 +55,10 @@ extern void eventPool_init_static(EventPool* handle, TypePool* eventPool,
 
 extern void eventPool_exit(EventPool* handle);
 
+#ifdef __cplusplus
+}
+#endif 
+ 
 #endif /* EVENTPOOL_H_ */
 «ENDFILE»
 

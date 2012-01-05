@@ -21,6 +21,10 @@ Templates for the main statechart c file.
 
 #include "definition.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif 
+
 typedef void(*setTimerFPtr)(uint32_t evid, const uint32_t time_ms, boolean periodic);
 typedef void(*unsetTimerFPtr)(const uint32_t evid);
 
@@ -34,6 +38,11 @@ typedef struct {
 
 extern void timer_setFPtr(Timer* handle, setTimerFPtr stfptr, unsetTimerFPtr utfptr);
 extern void timer_exit(Timer* handle);
+
+#ifdef __cplusplus
+}
+#endif 
+ 
 #endif /* TIMER_H_ */
 «ENDFILE»
 
