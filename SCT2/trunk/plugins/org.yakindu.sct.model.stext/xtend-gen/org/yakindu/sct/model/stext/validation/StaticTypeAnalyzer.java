@@ -18,7 +18,6 @@ import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.ConditionalExpression;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
-import org.yakindu.sct.model.stext.stext.EventRaisedReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventRaising;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
@@ -418,10 +417,6 @@ public class StaticTypeAnalyzer {
     }
   }
   
-  protected Class<? extends Object> _check(final EventRaisedReferenceExpression expression) {
-    return java.lang.Boolean.class;
-  }
-  
   protected Class<? extends Object> _check(final EventValueReferenceExpression expression) {
     return null;
   }
@@ -498,8 +493,6 @@ public class StaticTypeAnalyzer {
       return _check((ConditionalExpression)expression);
     } else if ((expression instanceof ElementReferenceExpression)) {
       return _check((ElementReferenceExpression)expression);
-    } else if ((expression instanceof EventRaisedReferenceExpression)) {
-      return _check((EventRaisedReferenceExpression)expression);
     } else if ((expression instanceof EventValueReferenceExpression)) {
       return _check((EventValueReferenceExpression)expression);
     } else if ((expression instanceof LogicalAndExpression)) {

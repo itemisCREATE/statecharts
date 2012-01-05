@@ -38,7 +38,6 @@ import org.yakindu.sct.model.stext.stext.EntryPointSpec;
 import org.yakindu.sct.model.stext.stext.Entrypoint;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventDerivation;
-import org.yakindu.sct.model.stext.stext.EventRaisedReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventRaising;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
@@ -300,13 +299,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * @generated
    */
   private EClass eventValueReferenceExpressionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass eventRaisedReferenceExpressionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1196,26 +1188,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
   public EReference getEventValueReferenceExpression_Value()
   {
     return (EReference)eventValueReferenceExpressionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getEventRaisedReferenceExpression()
-  {
-    return eventRaisedReferenceExpressionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getEventRaisedReferenceExpression_Value()
-  {
-    return (EReference)eventRaisedReferenceExpressionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2212,9 +2184,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     eventValueReferenceExpressionEClass = createEClass(EVENT_VALUE_REFERENCE_EXPRESSION);
     createEReference(eventValueReferenceExpressionEClass, EVENT_VALUE_REFERENCE_EXPRESSION__VALUE);
 
-    eventRaisedReferenceExpressionEClass = createEClass(EVENT_RAISED_REFERENCE_EXPRESSION);
-    createEReference(eventRaisedReferenceExpressionEClass, EVENT_RAISED_REFERENCE_EXPRESSION__VALUE);
-
     activeStateReferenceExpressionEClass = createEClass(ACTIVE_STATE_REFERENCE_EXPRESSION);
     createEReference(activeStateReferenceExpressionEClass, ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE);
 
@@ -2390,7 +2359,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     expressionEClass.getESuperTypes().add(theSGraphPackage.getStatement());
     elementReferenceExpressionEClass.getESuperTypes().add(this.getExpression());
     eventValueReferenceExpressionEClass.getESuperTypes().add(this.getExpression());
-    eventRaisedReferenceExpressionEClass.getESuperTypes().add(this.getExpression());
     activeStateReferenceExpressionEClass.getESuperTypes().add(this.getExpression());
     boolLiteralEClass.getESuperTypes().add(this.getLiteral());
     intLiteralEClass.getESuperTypes().add(this.getLiteral());
@@ -2505,9 +2473,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     initEClass(eventValueReferenceExpressionEClass, EventValueReferenceExpression.class, "EventValueReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEventValueReferenceExpression_Value(), theSGraphPackage.getEvent(), null, "value", null, 0, 1, EventValueReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(eventRaisedReferenceExpressionEClass, EventRaisedReferenceExpression.class, "EventRaisedReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEventRaisedReferenceExpression_Value(), theSGraphPackage.getEvent(), null, "value", null, 0, 1, EventRaisedReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(activeStateReferenceExpressionEClass, ActiveStateReferenceExpression.class, "ActiveStateReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getActiveStateReferenceExpression_Value(), theSGraphPackage.getRegularState(), null, "value", null, 0, 1, ActiveStateReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

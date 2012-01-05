@@ -318,15 +318,6 @@ public class StextSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case StextPackage.EVENT_RAISED_REFERENCE_EXPRESSION:
-      {
-        EventRaisedReferenceExpression eventRaisedReferenceExpression = (EventRaisedReferenceExpression)theEObject;
-        T result = caseEventRaisedReferenceExpression(eventRaisedReferenceExpression);
-        if (result == null) result = caseExpression(eventRaisedReferenceExpression);
-        if (result == null) result = caseStatement(eventRaisedReferenceExpression);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case StextPackage.ACTIVE_STATE_REFERENCE_EXPRESSION:
       {
         ActiveStateReferenceExpression activeStateReferenceExpression = (ActiveStateReferenceExpression)theEObject;
@@ -1052,22 +1043,6 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEventValueReferenceExpression(EventValueReferenceExpression object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Event Raised Reference Expression</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Event Raised Reference Expression</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEventRaisedReferenceExpression(EventRaisedReferenceExpression object)
   {
     return null;
   }

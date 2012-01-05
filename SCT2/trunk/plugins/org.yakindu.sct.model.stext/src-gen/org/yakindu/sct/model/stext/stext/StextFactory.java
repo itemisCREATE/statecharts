@@ -288,15 +288,6 @@ public interface StextFactory extends EFactory
   EventValueReferenceExpression createEventValueReferenceExpression();
 
   /**
-   * Returns a new object of class '<em>Event Raised Reference Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Event Raised Reference Expression</em>'.
-   * @generated
-   */
-  EventRaisedReferenceExpression createEventRaisedReferenceExpression();
-
-  /**
    * Returns a new object of class '<em>Active State Reference Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

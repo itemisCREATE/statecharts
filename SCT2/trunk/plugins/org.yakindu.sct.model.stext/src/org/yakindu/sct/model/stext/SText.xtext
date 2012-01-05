@@ -270,8 +270,7 @@ enum TimeUnit:
 	| nanosecond='ns';
 
 ValueExpression returns Expression:
-	PrimitiveValueExpression | ElementReferenceExpression | ActiveStateReferenceExpression | EventValueReferenceExpression
-	| EventRaisedReferenceExpression;
+	PrimitiveValueExpression | ElementReferenceExpression | ActiveStateReferenceExpression | EventValueReferenceExpression;
 
 PrimitiveValueExpression returns Expression:
 	{PrimitiveValueExpression} value=Literal;
@@ -281,9 +280,6 @@ ElementReferenceExpression:
 
 EventValueReferenceExpression:
 	{EventValueReferenceExpression} 'valueof' '(' value=[sgraph::Event|FQN] ')';
-
-EventRaisedReferenceExpression:
-	{EventRaisedReferenceExpression} 'raised' '(' value=[sgraph::Event|FQN] ')';
 
 ActiveStateReferenceExpression:
 	{ActiveStateReferenceExpression} 'active' '(' value=[sgraph::RegularState|FQN] ')';

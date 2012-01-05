@@ -2024,15 +2024,13 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cElementReferenceExpressionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cActiveStateReferenceExpressionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cEventValueReferenceExpressionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cEventRaisedReferenceExpressionParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//ValueExpression returns Expression:
-		//	PrimitiveValueExpression | ElementReferenceExpression | ActiveStateReferenceExpression | EventValueReferenceExpression
-		//	| EventRaisedReferenceExpression;
+		//	PrimitiveValueExpression | ElementReferenceExpression | ActiveStateReferenceExpression |
+		//	EventValueReferenceExpression;
 		public ParserRule getRule() { return rule; }
 
-		//PrimitiveValueExpression | ElementReferenceExpression | ActiveStateReferenceExpression | EventValueReferenceExpression |
-		//EventRaisedReferenceExpression
+		//PrimitiveValueExpression | ElementReferenceExpression | ActiveStateReferenceExpression | EventValueReferenceExpression
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//PrimitiveValueExpression
@@ -2046,9 +2044,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//EventValueReferenceExpression
 		public RuleCall getEventValueReferenceExpressionParserRuleCall_3() { return cEventValueReferenceExpressionParserRuleCall_3; }
-
-		//EventRaisedReferenceExpression
-		public RuleCall getEventRaisedReferenceExpressionParserRuleCall_4() { return cEventRaisedReferenceExpressionParserRuleCall_4; }
 	}
 
 	public class PrimitiveValueExpressionElements extends AbstractParserRuleElementFinder {
@@ -2126,46 +2121,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"valueof"
 		public Keyword getValueofKeyword_1() { return cValueofKeyword_1; }
-
-		//"("
-		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
-
-		//value=[sgraph::Event|FQN]
-		public Assignment getValueAssignment_3() { return cValueAssignment_3; }
-
-		//[sgraph::Event|FQN]
-		public CrossReference getValueEventCrossReference_3_0() { return cValueEventCrossReference_3_0; }
-
-		//FQN
-		public RuleCall getValueEventFQNParserRuleCall_3_0_1() { return cValueEventFQNParserRuleCall_3_0_1; }
-
-		//")"
-		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
-	}
-
-	public class EventRaisedReferenceExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EventRaisedReferenceExpression");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cEventRaisedReferenceExpressionAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cRaisedKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cValueAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference cValueEventCrossReference_3_0 = (CrossReference)cValueAssignment_3.eContents().get(0);
-		private final RuleCall cValueEventFQNParserRuleCall_3_0_1 = (RuleCall)cValueEventCrossReference_3_0.eContents().get(1);
-		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		
-		//EventRaisedReferenceExpression:
-		//	{EventRaisedReferenceExpression} "raised" "(" value=[sgraph::Event|FQN] ")";
-		public ParserRule getRule() { return rule; }
-
-		//{EventRaisedReferenceExpression} "raised" "(" value=[sgraph::Event|FQN] ")"
-		public Group getGroup() { return cGroup; }
-
-		//{EventRaisedReferenceExpression}
-		public Action getEventRaisedReferenceExpressionAction_0() { return cEventRaisedReferenceExpressionAction_0; }
-
-		//"raised"
-		public Keyword getRaisedKeyword_1() { return cRaisedKeyword_1; }
 
 		//"("
 		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
@@ -2879,7 +2834,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private PrimitiveValueExpressionElements pPrimitiveValueExpression;
 	private ElementReferenceExpressionElements pElementReferenceExpression;
 	private EventValueReferenceExpressionElements pEventValueReferenceExpression;
-	private EventRaisedReferenceExpressionElements pEventRaisedReferenceExpression;
 	private ActiveStateReferenceExpressionElements pActiveStateReferenceExpression;
 	private OperationCallElements pOperationCall;
 	private LiteralElements pLiteral;
@@ -3593,8 +3547,8 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ValueExpression returns Expression:
-	//	PrimitiveValueExpression | ElementReferenceExpression | ActiveStateReferenceExpression | EventValueReferenceExpression
-	//	| EventRaisedReferenceExpression;
+	//	PrimitiveValueExpression | ElementReferenceExpression | ActiveStateReferenceExpression |
+	//	EventValueReferenceExpression;
 	public ValueExpressionElements getValueExpressionAccess() {
 		return (pValueExpression != null) ? pValueExpression : (pValueExpression = new ValueExpressionElements());
 	}
@@ -3631,16 +3585,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getEventValueReferenceExpressionRule() {
 		return getEventValueReferenceExpressionAccess().getRule();
-	}
-
-	//EventRaisedReferenceExpression:
-	//	{EventRaisedReferenceExpression} "raised" "(" value=[sgraph::Event|FQN] ")";
-	public EventRaisedReferenceExpressionElements getEventRaisedReferenceExpressionAccess() {
-		return (pEventRaisedReferenceExpression != null) ? pEventRaisedReferenceExpression : (pEventRaisedReferenceExpression = new EventRaisedReferenceExpressionElements());
-	}
-	
-	public ParserRule getEventRaisedReferenceExpressionRule() {
-		return getEventRaisedReferenceExpressionAccess().getRule();
 	}
 
 	//ActiveStateReferenceExpression:

@@ -98,7 +98,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.EXPRESSION: return createExpression();
       case StextPackage.ELEMENT_REFERENCE_EXPRESSION: return createElementReferenceExpression();
       case StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION: return createEventValueReferenceExpression();
-      case StextPackage.EVENT_RAISED_REFERENCE_EXPRESSION: return createEventRaisedReferenceExpression();
       case StextPackage.ACTIVE_STATE_REFERENCE_EXPRESSION: return createActiveStateReferenceExpression();
       case StextPackage.LITERAL: return createLiteral();
       case StextPackage.BOOL_LITERAL: return createBoolLiteral();
@@ -517,17 +516,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     EventValueReferenceExpressionImpl eventValueReferenceExpression = new EventValueReferenceExpressionImpl();
     return eventValueReferenceExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EventRaisedReferenceExpression createEventRaisedReferenceExpression()
-  {
-    EventRaisedReferenceExpressionImpl eventRaisedReferenceExpression = new EventRaisedReferenceExpressionImpl();
-    return eventRaisedReferenceExpression;
   }
 
   /**
