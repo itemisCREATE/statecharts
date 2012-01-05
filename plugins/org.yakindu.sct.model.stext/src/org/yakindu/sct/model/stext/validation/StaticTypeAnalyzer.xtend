@@ -181,9 +181,6 @@ class StaticTypeAnalyzer {
 		}
 		return null;
 	}
-	def dispatch check(EventRaisedReferenceExpression expression){
-		return typeof(Boolean);
-	}
 	def dispatch check(EventValueReferenceExpression expression){
 		//TODO: Implement me
 	}

@@ -3384,16 +3384,6 @@ ruleValueExpression returns [EObject current=null]
         $current = $this_EventValueReferenceExpression_3.current; 
         afterParserOrEnumRuleCall();
     }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getValueExpressionAccess().getEventRaisedReferenceExpressionParserRuleCall_4()); 
-    }
-    this_EventRaisedReferenceExpression_4=ruleEventRaisedReferenceExpression
-    { 
-        $current = $this_EventRaisedReferenceExpression_4.current; 
-        afterParserOrEnumRuleCall();
-    }
 )
 ;
 
@@ -3534,60 +3524,6 @@ ruleEventValueReferenceExpression returns [EObject current=null]
 )	otherlv_4=')' 
     {
     	newLeafNode(otherlv_4, grammarAccess.getEventValueReferenceExpressionAccess().getRightParenthesisKeyword_4());
-    }
-)
-;
-
-
-
-
-
-// Entry rule entryRuleEventRaisedReferenceExpression
-entryRuleEventRaisedReferenceExpression returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getEventRaisedReferenceExpressionRule()); }
-	 iv_ruleEventRaisedReferenceExpression=ruleEventRaisedReferenceExpression 
-	 { $current=$iv_ruleEventRaisedReferenceExpression.current; } 
-	 EOF 
-;
-
-// Rule EventRaisedReferenceExpression
-ruleEventRaisedReferenceExpression returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getEventRaisedReferenceExpressionAccess().getEventRaisedReferenceExpressionAction_0(),
-            $current);
-    }
-)	otherlv_1='raised' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getEventRaisedReferenceExpressionAccess().getRaisedKeyword_1());
-    }
-	otherlv_2='(' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getEventRaisedReferenceExpressionAccess().getLeftParenthesisKeyword_2());
-    }
-(
-(
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getEventRaisedReferenceExpressionRule());
-	        }
-        }
-		{ 
-	        newCompositeNode(grammarAccess.getEventRaisedReferenceExpressionAccess().getValueEventCrossReference_3_0()); 
-	    }
-		ruleFQN		{ 
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)	otherlv_4=')' 
-    {
-    	newLeafNode(otherlv_4, grammarAccess.getEventRaisedReferenceExpressionAccess().getRightParenthesisKeyword_4());
     }
 )
 ;

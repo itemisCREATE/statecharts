@@ -234,11 +234,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
         return createEventValueReferenceExpressionAdapter();
       }
       @Override
-      public Adapter caseEventRaisedReferenceExpression(EventRaisedReferenceExpression object)
-      {
-        return createEventRaisedReferenceExpressionAdapter();
-      }
-      @Override
       public Adapter caseActiveStateReferenceExpression(ActiveStateReferenceExpression object)
       {
         return createActiveStateReferenceExpressionAdapter();
@@ -886,21 +881,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEventValueReferenceExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.EventRaisedReferenceExpression <em>Event Raised Reference Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.EventRaisedReferenceExpression
-   * @generated
-   */
-  public Adapter createEventRaisedReferenceExpressionAdapter()
   {
     return null;
   }
