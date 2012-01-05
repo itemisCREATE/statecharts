@@ -91,11 +91,10 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	
 	def dispatch execute(ConditionalExpression expression){
 		if(expression.condition.execute as Boolean ){
-			expression.trueCase.execute
+			return expression.trueCase.execute
 		}else{
-			expression.falseCase.execute
+			return expression.falseCase.execute
 		}
-		null
 	} 
 	
 	def dispatch execute(ElementReferenceExpression expression){
@@ -126,6 +125,8 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	
 	def dispatch execute(LogicalAndExpression expression){
 		var leftResult = execute(expression.leftOperand)
+		if(!leftResult as Boolean)
+			return false
 		var rightResult = execute(expression.rightOperand)
 		return leftResult as Boolean && rightResult as Boolean
 	}

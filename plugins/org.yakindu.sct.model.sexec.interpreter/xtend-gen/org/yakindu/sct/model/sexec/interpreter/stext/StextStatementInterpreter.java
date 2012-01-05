@@ -126,20 +126,17 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
   }
   
   protected Object _execute(final ConditionalExpression expression) throws ExecutionException {
-    Object _xblockexpression = null;
-    {
-      Expression _condition = expression.getCondition();
-      Object _execute = this.execute(_condition);
-      if (((Boolean) _execute)) {
-        Expression _trueCase = expression.getTrueCase();
-        this.execute(_trueCase);
-      } else {
-        Expression _falseCase = expression.getFalseCase();
-        this.execute(_falseCase);
-      }
-      _xblockexpression = (null);
+    Expression _condition = expression.getCondition();
+    Object _execute = this.execute(_condition);
+    if (((Boolean) _execute)) {
+      Expression _trueCase = expression.getTrueCase();
+      Object _execute_1 = this.execute(_trueCase);
+      return _execute_1;
+    } else {
+      Expression _falseCase = expression.getFalseCase();
+      Object _execute_2 = this.execute(_falseCase);
+      return _execute_2;
     }
-    return _xblockexpression;
   }
   
   protected Object _execute(final ElementReferenceExpression expression) {
@@ -200,6 +197,10 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
       Expression _leftOperand = expression.getLeftOperand();
       Object _execute = this.execute(_leftOperand);
       Object leftResult = _execute;
+      boolean _operator_not = BooleanExtensions.operator_not(((Boolean) leftResult));
+      if (_operator_not) {
+        return false;
+      }
       Expression _rightOperand = expression.getRightOperand();
       Object _execute_1 = this.execute(_rightOperand);
       Object rightResult = _execute_1;
