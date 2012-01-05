@@ -33,6 +33,8 @@ Contributors:
 	
 	«EXPAND Event::file(entry) FOR this»
 	
+	«EXPAND EventVector::file(entry) FOR this»
+	
 	«EXPAND ValuedEvent::file(entry) FOR this»
 	
 	«EXPAND TimeEvent::file(entry) FOR this»

@@ -19,9 +19,10 @@ public class InterfaceThirdImpl extends NotificationSender
 		implements
 			InterfaceThird {
 
-	private final Event<Events> EventEvent5 = new Event<Events>(Events.Event5);
+	private final Event<Events> EventEvent5 = new Event<Events>(Events.Event5,
+			4);
 	private final ValuedEvent<Events, Boolean> EventEvent6 = new ValuedEvent<Events, Boolean>(
-			Events.Event6, false);
+			Events.Event6, 4, false);
 
 	private InterfaceTestCycleBasedStatemachine statemachine;
 

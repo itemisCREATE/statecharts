@@ -96,21 +96,11 @@ public class TestInterfaceTestEventBasedStatemachine {
 		}
 	}
 
-	@Test
+	@Test (expected = IllegalArgumentException.class)
 	public void testExceptionHandling() {
 		// Value of Event 2 should not be set to null
-		try {
-			statemachine.getDefaultInterface().getEventEvent2().setValue(null);
-			fail("statemachine.getDefaultInterface().getEventEvent2().setValue(null) should throw IllegalArgumentException");
-		} catch (IllegalArgumentException exception) {
-		}
-
-		// Value of Event 6 should not be set to null
-		try {
-			statemachine.getInterfaceThird().getEventEvent6().setValue(null);
-			fail("statemachine.getDefaultInterface().getEventEvent2().setValue(null) should throw IllegalArgumentException");
-		} catch (IllegalArgumentException exception) {
-		}
+		statemachine.getDefaultInterface().getEventEvent2().setValue(null);
+		statemachine.getInterfaceThird().getEventEvent6().setValue(null);
 	}
 
 	@Test

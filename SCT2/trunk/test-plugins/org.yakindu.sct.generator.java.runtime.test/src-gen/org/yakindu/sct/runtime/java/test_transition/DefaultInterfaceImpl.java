@@ -20,9 +20,11 @@ public class DefaultInterfaceImpl extends NotificationSender
 			DefaultInterface {
 
 	private final ValuedEvent<Events, Boolean> EventEvent5 = new ValuedEvent<Events, Boolean>(
-			Events.Event5, false);
-	private final Event<Events> EventEvent6 = new Event<Events>(Events.Event6);
-	private final Event<Events> EventEvent7 = new Event<Events>(Events.Event7);
+			Events.Event5, 4, false);
+	private final Event<Events> EventEvent6 = new Event<Events>(Events.Event6,
+			4);
+	private final Event<Events> EventEvent7 = new Event<Events>(Events.Event7,
+			4);
 
 	private Test_TransitionCycleBasedStatemachine statemachine;
 

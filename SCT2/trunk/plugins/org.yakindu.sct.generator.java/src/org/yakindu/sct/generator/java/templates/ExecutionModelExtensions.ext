@@ -51,3 +51,10 @@ boolean hasUnvaluedEvents(Scope this) :
 	
 boolean hasValuedEvents(Scope this) :
 	!declarations.typeSelect(EventDefinition).select(event|!event.type.isVoid()).isEmpty;
+	
+int getEventsCount(ExecutionFlow this):
+	scopes.declarations.typeSelect(Event).size;
+
+int getOffset(Scope scope):
+	JAVA org.yakindu.sct.generator.java.extensions.ExecutionModelExtensions.getOffset(org.yakindu.sct.model.sgraph.Scope);
+					

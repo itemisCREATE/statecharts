@@ -16,8 +16,8 @@ public class ValuedEvent<EnumType extends Enum<EnumType>, DataType>
 
 	private DataType value;
 
-	public ValuedEvent(EnumType name, DataType value) {
-		super(name);
+	public ValuedEvent(EnumType name, int offset, DataType value) {
+		super(name, offset);
 		this.value = value;
 	}
 

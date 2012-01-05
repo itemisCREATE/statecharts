@@ -14,22 +14,38 @@ import org.yakindu.sct.runtime.java.Event;
 
 public class DefaultInterfaceImpl implements DefaultInterface {
 
-	private final Event<Events> EventEvent1 = new Event<Events>(Events.Event1);
-	private final Event<Events> EventEvent2 = new Event<Events>(Events.Event2);
-	private final Event<Events> EventEvent3 = new Event<Events>(Events.Event3);
-	private final Event<Events> EventEvent4 = new Event<Events>(Events.Event4);
-	private final Event<Events> EventEvent5 = new Event<Events>(Events.Event5);
-	private final Event<Events> EventEvent6 = new Event<Events>(Events.Event6);
-	private final Event<Events> EventEvent7 = new Event<Events>(Events.Event7);
-	private final Event<Events> EventEvent8 = new Event<Events>(Events.Event8);
-	private final Event<Events> EventEvent9 = new Event<Events>(Events.Event9);
-	private final Event<Events> EventEvent10 = new Event<Events>(Events.Event10);
-	private final Event<Events> EventEvent11 = new Event<Events>(Events.Event11);
-	private final Event<Events> EventEvent12 = new Event<Events>(Events.Event12);
-	private final Event<Events> EventEvent13 = new Event<Events>(Events.Event13);
-	private final Event<Events> EventEvent14 = new Event<Events>(Events.Event14);
-	private final Event<Events> EventEvent15 = new Event<Events>(Events.Event15);
-	private final Event<Events> EventEvent16 = new Event<Events>(Events.Event16);
+	private final Event<Events> EventEvent1 = new Event<Events>(Events.Event1,
+			0);
+	private final Event<Events> EventEvent2 = new Event<Events>(Events.Event2,
+			0);
+	private final Event<Events> EventEvent3 = new Event<Events>(Events.Event3,
+			0);
+	private final Event<Events> EventEvent4 = new Event<Events>(Events.Event4,
+			0);
+	private final Event<Events> EventEvent5 = new Event<Events>(Events.Event5,
+			0);
+	private final Event<Events> EventEvent6 = new Event<Events>(Events.Event6,
+			0);
+	private final Event<Events> EventEvent7 = new Event<Events>(Events.Event7,
+			0);
+	private final Event<Events> EventEvent8 = new Event<Events>(Events.Event8,
+			0);
+	private final Event<Events> EventEvent9 = new Event<Events>(Events.Event9,
+			0);
+	private final Event<Events> EventEvent10 = new Event<Events>(
+			Events.Event10, 0);
+	private final Event<Events> EventEvent11 = new Event<Events>(
+			Events.Event11, 0);
+	private final Event<Events> EventEvent12 = new Event<Events>(
+			Events.Event12, 0);
+	private final Event<Events> EventEvent13 = new Event<Events>(
+			Events.Event13, 0);
+	private final Event<Events> EventEvent14 = new Event<Events>(
+			Events.Event14, 0);
+	private final Event<Events> EventEvent15 = new Event<Events>(
+			Events.Event15, 0);
+	private final Event<Events> EventEvent16 = new Event<Events>(
+			Events.Event16, 0);
 
 	private Test_HierarchyCycleBasedStatemachine statemachine;
 
