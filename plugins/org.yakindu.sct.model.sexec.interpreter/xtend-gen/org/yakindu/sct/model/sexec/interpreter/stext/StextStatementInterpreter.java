@@ -24,7 +24,6 @@ import org.yakindu.sct.model.stext.stext.BitwiseXorExpression;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.ConditionalExpression;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
-import org.yakindu.sct.model.stext.stext.EventRaisedReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventRaising;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
@@ -161,14 +160,6 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
       boolean _isEventRaised = this.context.isEventRaised(_string_1);
       return ((Boolean)_isEventRaised);
     }
-  }
-  
-  protected Object _execute(final EventRaisedReferenceExpression expression) {
-    Event _value = expression.getValue();
-    QualifiedName _fullyQualifiedName = this.provider.getFullyQualifiedName(_value);
-    String _string = _fullyQualifiedName.toString();
-    boolean _isEventRaised = this.context.isEventRaised(_string);
-    return _isEventRaised;
   }
   
   protected Object _execute(final EventValueReferenceExpression expression) {
@@ -382,8 +373,6 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
       return _execute((ConditionalExpression)expression);
     } else if ((expression instanceof ElementReferenceExpression)) {
       return _execute((ElementReferenceExpression)expression);
-    } else if ((expression instanceof EventRaisedReferenceExpression)) {
-      return _execute((EventRaisedReferenceExpression)expression);
     } else if ((expression instanceof EventValueReferenceExpression)) {
       return _execute((EventValueReferenceExpression)expression);
     } else if ((expression instanceof LogicalAndExpression)) {

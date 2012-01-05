@@ -106,10 +106,6 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		return context.isEventRaised(expression.value.qualifiedName.toString)
 	}
 	
-	def dispatch execute(EventRaisedReferenceExpression expression){
-		return context.isEventRaised(expression.value.fullyQualifiedName.toString);
-	}
-	
 	def dispatch execute(EventValueReferenceExpression expression){
 		for(event : context.raisedEvents){
 			if(event.getName.equals(expression.value.name)){
