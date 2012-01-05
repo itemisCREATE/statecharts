@@ -19,9 +19,10 @@ public class DefaultInterfaceImpl extends NotificationSender
 		implements
 			DefaultInterface {
 
-	private final Event<Events> EventEvent1 = new Event<Events>(Events.Event1);
+	private final Event<Events> EventEvent1 = new Event<Events>(Events.Event1,
+			0);
 	private final ValuedEvent<Events, Integer> EventEvent2 = new ValuedEvent<Events, Integer>(
-			Events.Event2, 0);
+			Events.Event2, 0, 0);
 
 	private InterfaceTestCycleBasedStatemachine statemachine;
 

@@ -14,10 +14,14 @@ import org.yakindu.sct.runtime.java.Event;
 
 public class DefaultInterfaceImpl implements DefaultInterface {
 
-	private final Event<Events> EventEvent1 = new Event<Events>(Events.Event1);
-	private final Event<Events> EventEvent2 = new Event<Events>(Events.Event2);
-	private final Event<Events> EventEvent3 = new Event<Events>(Events.Event3);
-	private final Event<Events> EventEvent4 = new Event<Events>(Events.Event4);
+	private final Event<Events> EventEvent1 = new Event<Events>(Events.Event1,
+			0);
+	private final Event<Events> EventEvent2 = new Event<Events>(Events.Event2,
+			0);
+	private final Event<Events> EventEvent3 = new Event<Events>(Events.Event3,
+			0);
+	private final Event<Events> EventEvent4 = new Event<Events>(Events.Event4,
+			0);
 
 	private Test_LocalActionsCycleBasedStatemachine statemachine;
 

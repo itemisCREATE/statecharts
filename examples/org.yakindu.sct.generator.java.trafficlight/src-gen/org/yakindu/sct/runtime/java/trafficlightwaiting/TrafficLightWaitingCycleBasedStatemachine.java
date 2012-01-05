@@ -10,10 +10,10 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java.trafficlightwaiting;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import org.yakindu.sct.runtime.java.Event;
+import org.yakindu.sct.runtime.java.EventVector;
 import org.yakindu.sct.runtime.java.TimeEvent;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
 import org.yakindu.sct.runtime.java.ITimerService;
@@ -29,25 +29,25 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 
 	private static final TimeEvent<TimeEvents> PedWaiting_time_event_0 = new TimeEvent<TimeEvents>(
-			TimeEvents.PedWaiting_time_event_0, false);
+			TimeEvents.PedWaiting_time_event_0, 2, false);
 	private static final TimeEvent<TimeEvents> WaitOn_time_event_0 = new TimeEvent<TimeEvents>(
-			TimeEvents.WaitOn_time_event_0, false);
+			TimeEvents.WaitOn_time_event_0, 2, false);
 	private static final TimeEvent<TimeEvents> WaitOff_time_event_0 = new TimeEvent<TimeEvents>(
-			TimeEvents.WaitOff_time_event_0, false);
+			TimeEvents.WaitOff_time_event_0, 2, false);
 	private static final TimeEvent<TimeEvents> StreetAttention_time_event_0 = new TimeEvent<TimeEvents>(
-			TimeEvents.StreetAttention_time_event_0, false);
+			TimeEvents.StreetAttention_time_event_0, 2, false);
 	private static final TimeEvent<TimeEvents> StreetRed_time_event_0 = new TimeEvent<TimeEvents>(
-			TimeEvents.StreetRed_time_event_0, false);
+			TimeEvents.StreetRed_time_event_0, 2, false);
 	private static final TimeEvent<TimeEvents> PedestrianGreen_time_event_0 = new TimeEvent<TimeEvents>(
-			TimeEvents.PedestrianGreen_time_event_0, false);
+			TimeEvents.PedestrianGreen_time_event_0, 2, false);
 	private static final TimeEvent<TimeEvents> PedestrianRed_time_event_0 = new TimeEvent<TimeEvents>(
-			TimeEvents.PedestrianRed_time_event_0, false);
+			TimeEvents.PedestrianRed_time_event_0, 2, false);
 	private static final TimeEvent<TimeEvents> StreetPrepare_time_event_0 = new TimeEvent<TimeEvents>(
-			TimeEvents.StreetPrepare_time_event_0, false);
+			TimeEvents.StreetPrepare_time_event_0, 2, false);
 	private static final TimeEvent<TimeEvents> YellowOn_time_event_0 = new TimeEvent<TimeEvents>(
-			TimeEvents.YellowOn_time_event_0, false);
+			TimeEvents.YellowOn_time_event_0, 2, false);
 	private static final TimeEvent<TimeEvents> YellowOff_time_event_0 = new TimeEvent<TimeEvents>(
-			TimeEvents.YellowOff_time_event_0, false);
+			TimeEvents.YellowOff_time_event_0, 2, false);
 
 	public enum State {
 		On, StreetGreen, PedWaiting, WaitOn, WaitOff, StreetAttention, StreetRed, PedestrianGreen, PedestrianRed, StreetPrepare, Off, YellowOn, YellowOff,
@@ -61,7 +61,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 	private int nextStateIndex;
 
-	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
+	private final EventVector<Event<? extends Enum<?>>> occuredEvents;
 
 	private final Collection<Event<? extends Enum<?>>> outEvents;
 
@@ -70,7 +70,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	private long cycleStartTime;
 
 	public TrafficLightWaitingCycleBasedStatemachine() {
-		occuredEvents = new ArrayList<Event<? extends Enum<?>>>();
+		occuredEvents = new EventVector<Event<? extends Enum<?>>>(12);
 		outEvents = new HashSet<Event<? extends Enum<?>>>();
 		interfaceTrafficLight = new InterfaceTrafficLightImpl();
 		interfacePedestrian = new InterfacePedestrianImpl();

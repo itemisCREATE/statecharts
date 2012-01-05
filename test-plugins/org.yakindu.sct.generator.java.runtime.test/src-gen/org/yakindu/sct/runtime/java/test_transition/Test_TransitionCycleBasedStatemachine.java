@@ -10,10 +10,10 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java.test_transition;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import org.yakindu.sct.runtime.java.Event;
+import org.yakindu.sct.runtime.java.EventVector;
 import org.yakindu.sct.runtime.java.TimeEvent;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
 import org.yakindu.sct.runtime.java.ITimerService;
@@ -29,9 +29,9 @@ public class Test_TransitionCycleBasedStatemachine
 	}
 
 	private static final TimeEvent<TimeEvents> State1_time_event_0 = new TimeEvent<TimeEvents>(
-			TimeEvents.State1_time_event_0, false);
+			TimeEvents.State1_time_event_0, 7, false);
 	private static final TimeEvent<TimeEvents> State1_time_event_1 = new TimeEvent<TimeEvents>(
-			TimeEvents.State1_time_event_1, false);
+			TimeEvents.State1_time_event_1, 7, false);
 
 	public enum State {
 		State1, State2,
@@ -44,7 +44,7 @@ public class Test_TransitionCycleBasedStatemachine
 
 	private int nextStateIndex;
 
-	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
+	private final EventVector<Event<? extends Enum<?>>> occuredEvents;
 
 	private final Collection<Event<? extends Enum<?>>> outEvents;
 
@@ -53,7 +53,7 @@ public class Test_TransitionCycleBasedStatemachine
 	private long cycleStartTime;
 
 	public Test_TransitionCycleBasedStatemachine() {
-		occuredEvents = new ArrayList<Event<? extends Enum<?>>>();
+		occuredEvents = new EventVector<Event<? extends Enum<?>>>(9);
 		outEvents = new HashSet<Event<? extends Enum<?>>>();
 		interfaceA = new InterfaceAImpl(this);
 		defaultInterface = new DefaultInterfaceImpl(this);

@@ -10,10 +10,10 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java.test_parallelregions;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import org.yakindu.sct.runtime.java.Event;
+import org.yakindu.sct.runtime.java.EventVector;
 import org.yakindu.sct.runtime.java.IStatemachine;
 
 public class Test_ParallelRegionsCycleBasedStatemachine
@@ -30,12 +30,12 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 	private int nextStateIndex;
 
-	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
+	private final EventVector<Event<? extends Enum<?>>> occuredEvents;
 
 	private final Collection<Event<? extends Enum<?>>> outEvents;
 
 	public Test_ParallelRegionsCycleBasedStatemachine() {
-		occuredEvents = new ArrayList<Event<? extends Enum<?>>>();
+		occuredEvents = new EventVector<Event<? extends Enum<?>>>(10);
 		outEvents = new HashSet<Event<? extends Enum<?>>>();
 		defaultInterface = new DefaultInterfaceImpl(this);
 

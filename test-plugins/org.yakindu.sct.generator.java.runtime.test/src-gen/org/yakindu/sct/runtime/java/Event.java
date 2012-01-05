@@ -14,11 +14,18 @@ public class Event<Type extends Enum<Type>> {
 
 	private Type id;
 
-	public Event(Type id) {
+	private int offset;
+
+	public Event(Type id, int offset) {
 		this.id = id;
+		this.offset = offset;
 	}
 
 	public Type getId() {
 		return id;
+	}
+
+	public int getIndex() {
+		return offset + id.ordinal();
 	}
 }

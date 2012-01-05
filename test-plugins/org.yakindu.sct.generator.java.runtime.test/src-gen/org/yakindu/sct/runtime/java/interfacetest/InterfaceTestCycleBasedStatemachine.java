@@ -10,10 +10,10 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java.interfacetest;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import org.yakindu.sct.runtime.java.Event;
+import org.yakindu.sct.runtime.java.EventVector;
 import org.yakindu.sct.runtime.java.IStatemachine;
 
 public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
@@ -30,12 +30,12 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 
 	private int nextStateIndex;
 
-	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
+	private final EventVector<Event<? extends Enum<?>>> occuredEvents;
 
 	private final Collection<Event<? extends Enum<?>>> outEvents;
 
 	public InterfaceTestCycleBasedStatemachine() {
-		occuredEvents = new ArrayList<Event<? extends Enum<?>>>();
+		occuredEvents = new EventVector<Event<? extends Enum<?>>>(6);
 		outEvents = new HashSet<Event<? extends Enum<?>>>();
 		defaultInterface = new DefaultInterfaceImpl(this);
 		interfaceOther = new InterfaceOtherImpl(this);

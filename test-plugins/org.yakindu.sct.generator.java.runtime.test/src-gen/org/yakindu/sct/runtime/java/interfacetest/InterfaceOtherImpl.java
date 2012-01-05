@@ -18,8 +18,10 @@ public class InterfaceOtherImpl extends NotificationSender
 		implements
 			InterfaceOther {
 
-	private final Event<Events> EventEvent3 = new Event<Events>(Events.Event3);
-	private final Event<Events> EventEvent4 = new Event<Events>(Events.Event4);
+	private final Event<Events> EventEvent3 = new Event<Events>(Events.Event3,
+			2);
+	private final Event<Events> EventEvent4 = new Event<Events>(Events.Event4,
+			2);
 
 	private InterfaceTestCycleBasedStatemachine statemachine;
 

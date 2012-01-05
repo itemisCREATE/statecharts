@@ -53,15 +53,10 @@ public class TestLocalActionsCycleBasedStatemachine {
 		statemachine = null;
 	}
 
-	@Test
+	@Test (expected = NullPointerException.class)
 	public void testExceptionHandling() {
-		try {
-			Test_LocalActionsCycleBasedStatemachine statemachine = new Test_LocalActionsCycleBasedStatemachine();
-			statemachine.enter();
-			fail("Statemachine should throw a NullPointerException if entered without TimerHandler set before");
-		} catch (NullPointerException exception) {
-
-		}
+		Test_LocalActionsCycleBasedStatemachine statemachine = new Test_LocalActionsCycleBasedStatemachine();
+		statemachine.enter();
 	}
 
 	@Test

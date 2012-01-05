@@ -20,10 +20,11 @@ public class DefaultInterfaceImpl extends NotificationSender
 			DefaultInterface {
 
 	private final ValuedEvent<Events, Integer> EventEvent1 = new ValuedEvent<Events, Integer>(
-			Events.Event1, 0);
+			Events.Event1, 0, 0);
 	private final ValuedEvent<Events, Double> EventEvent2 = new ValuedEvent<Events, Double>(
-			Events.Event2, 0D);
-	private final Event<Events> EventEvent3 = new Event<Events>(Events.Event3);
+			Events.Event2, 0, 0D);
+	private final Event<Events> EventEvent3 = new Event<Events>(Events.Event3,
+			0);
 
 	private Test_ExpressionCycleBasedStatemachine statemachine;
 

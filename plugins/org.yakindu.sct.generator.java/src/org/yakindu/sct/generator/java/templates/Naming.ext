@@ -50,9 +50,9 @@ String getInterfaceParameter(InterfaceScope this) :
 
 String getCreationSignature(EventDefinition this) :
 	if type.isVoid() then
-		"Events."+name.toFirstUpper()
+		"Events."+name.toFirstUpper()+", "+((Scope)eContainer).getOffset()
 	else
-		"Events."+name.toFirstUpper()+", "+getInitialValue();
+		"Events."+name.toFirstUpper()+", "+((Scope)eContainer).getOffset()+", "+getInitialValue();
 
 String getEventType(EventDefinition this) :
 	if type.isVoid() then

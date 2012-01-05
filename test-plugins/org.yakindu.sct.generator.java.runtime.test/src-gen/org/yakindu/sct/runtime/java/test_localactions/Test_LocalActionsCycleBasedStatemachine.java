@@ -10,10 +10,10 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java.test_localactions;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import org.yakindu.sct.runtime.java.Event;
+import org.yakindu.sct.runtime.java.EventVector;
 import org.yakindu.sct.runtime.java.TimeEvent;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
 import org.yakindu.sct.runtime.java.ITimerService;
@@ -29,9 +29,9 @@ public class Test_LocalActionsCycleBasedStatemachine
 	}
 
 	private static final TimeEvent<TimeEvents> State1_time_event_0 = new TimeEvent<TimeEvents>(
-			TimeEvents.State1_time_event_0, true);
+			TimeEvents.State1_time_event_0, 4, true);
 	private static final TimeEvent<TimeEvents> State2_time_event_0 = new TimeEvent<TimeEvents>(
-			TimeEvents.State2_time_event_0, false);
+			TimeEvents.State2_time_event_0, 4, false);
 
 	public enum State {
 		State1, State2,
@@ -43,7 +43,7 @@ public class Test_LocalActionsCycleBasedStatemachine
 
 	private int nextStateIndex;
 
-	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
+	private final EventVector<Event<? extends Enum<?>>> occuredEvents;
 
 	private final Collection<Event<? extends Enum<?>>> outEvents;
 
@@ -52,7 +52,7 @@ public class Test_LocalActionsCycleBasedStatemachine
 	private long cycleStartTime;
 
 	public Test_LocalActionsCycleBasedStatemachine() {
-		occuredEvents = new ArrayList<Event<? extends Enum<?>>>();
+		occuredEvents = new EventVector<Event<? extends Enum<?>>>(6);
 		outEvents = new HashSet<Event<? extends Enum<?>>>();
 		defaultInterface = new DefaultInterfaceImpl(this);
 		State1_time_event_0.setStatemachine(this);

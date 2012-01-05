@@ -10,6 +10,7 @@ Contributors:
 
 «IMPORT sexec»
 «IMPORT stext»
+«IMPORT sgraph»
 
 «EXTENSION org::yakindu::sct::generator::java::templates::ExecutionModelExtensions»
 «EXTENSION org::yakindu::sct::generator::java::templates::TypeModelExtensions»
@@ -176,10 +177,10 @@ else {
 «getLicenseHeader(entry)»
 package «getImplementationPackageName(entry)»;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import «entry.getBasePackageName()».Event;
+import «entry.getBasePackageName()».EventVector;
 «IF isTimedStatemachine()-»
 import «entry.getBasePackageName()».TimeEvent;
 import «entry.getBasePackageName()».ITimedStatemachine;
@@ -216,7 +217,7 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	«ENDFOREACH-»
 	
 	«FOREACH getTimeEvents() AS timeEvent-»
-	private static final TimeEvent<TimeEvents> «timeEvent.getName()» = new TimeEvent<TimeEvents>(TimeEvents.«timeEvent.getName().toFirstUpper()», «timeEvent.periodic»); 
+	private static final TimeEvent<TimeEvents> «timeEvent.getName()» = new TimeEvent<TimeEvents>(TimeEvents.«timeEvent.getName().toFirstUpper()»,«((Scope)timeEvent.eContainer).getOffset()», «timeEvent.periodic»); 
 	«ENDFOREACH»
 	
 	public enum State {
@@ -237,7 +238,7 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	
 	private int nextStateIndex;
 	
-	private final ArrayList<Event<? extends Enum<?>>> occuredEvents;
+	private final EventVector<Event<? extends Enum<?>>> occuredEvents;
 	
 	private final Collection<Event<? extends Enum<?>>> outEvents;
 	
@@ -248,7 +249,7 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	«ENDIF-»
 	
 	public «getCycleBasedStatemachineName()»() {
-		occuredEvents = new ArrayList<Event<? extends Enum<?>>>();
+		occuredEvents = new EventVector<Event<? extends Enum<?>>>(«getEventsCount()»);
 		outEvents = new HashSet<Event<? extends Enum<?>>>();
 		«FOREACH getInterfaceScope() AS interface-»
 		«interface.getInterfaceName().toFirstLower()» = new «interface.getInterfaceImplName()»(«interface.getInterfaceParameter()»);
