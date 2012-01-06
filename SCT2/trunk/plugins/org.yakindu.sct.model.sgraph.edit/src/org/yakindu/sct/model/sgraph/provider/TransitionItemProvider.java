@@ -170,7 +170,7 @@ public class TransitionItemProvider extends SpecificationElementItemProvider
 	public String getText(Object object) {
 		Transition transition = (Transition) object;
 		return transition.getSource().getName() + " -> "
-				+ transition.getTarget().getName() + " (specification: "
+				+ transition.getTarget().getName() + " ("
 				+ transition.getSpecification() + ")";
 	}
 
