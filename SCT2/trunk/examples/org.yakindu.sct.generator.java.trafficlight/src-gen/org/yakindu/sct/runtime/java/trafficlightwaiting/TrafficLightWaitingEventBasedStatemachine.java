@@ -38,7 +38,6 @@ public class TrafficLightWaitingEventBasedStatemachine
 	public void runCycle() {
 		if (eventOccured()) {
 			Event<? extends Enum<?>> event = getOccuredEvents().poll();
-			System.out.println(event);
 			super.getOccuredEvents().add(event);
 			super.runCycle();
 		}

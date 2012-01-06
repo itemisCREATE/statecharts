@@ -50,7 +50,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			TimeEvents.YellowOff_time_event_0, 2, false);
 
 	public enum State {
-		On, StreetGreen, PedWaiting, WaitOn, WaitOff, StreetAttention, StreetRed, PedestrianGreen, PedestrianRed, StreetPrepare, Off, YellowOn, YellowOff,
+		On, StreetGreen, PedWaiting, WaitOn, WaitOff, StreetAttention, StreetRed, PedestrianGreen, PedestrianRed, StreetPrepare, Off, YellowOn, YellowOff, $NullState$
 	};
 
 	private InterfaceTrafficLightImpl interfaceTrafficLight;
@@ -101,7 +101,10 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 
 	public void init() {
-
+		for (int i = 0; i < stateVector.length; i++) {
+			stateVector[i] = State.$NullState$;
+		}
+		occuredEvents.clear();
 	}
 
 	public boolean isStateActive(State state) {
@@ -166,12 +169,12 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			switch (stateVector[0]) {
 
 				case StreetGreen :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case WaitOn :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOn_time_event_0);
 
@@ -181,7 +184,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 
 				case WaitOff :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOff_time_event_0);
 
@@ -191,35 +194,35 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 
 				case StreetAttention :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetAttention_time_event_0);
 
 					break;
 
 				case StreetRed :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetRed_time_event_0);
 
 					break;
 
 				case PedestrianGreen :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
 					break;
 
 				case PedestrianRed :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(PedestrianRed_time_event_0);
 
 					break;
 
 				case StreetPrepare :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetPrepare_time_event_0);
 
@@ -244,7 +247,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventKeypress1())) {
-				stateVector[0] = null;
+				stateVector[0] = State.$NullState$;
 
 				getTimerService().setTimer(PedWaiting_time_event_0, (7 * 1000),
 						cycleStartTime);
@@ -268,12 +271,12 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			switch (stateVector[0]) {
 
 				case StreetGreen :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case WaitOn :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOn_time_event_0);
 
@@ -283,7 +286,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 
 				case WaitOff :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOff_time_event_0);
 
@@ -293,35 +296,35 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 
 				case StreetAttention :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetAttention_time_event_0);
 
 					break;
 
 				case StreetRed :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetRed_time_event_0);
 
 					break;
 
 				case PedestrianGreen :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
 					break;
 
 				case PedestrianRed :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(PedestrianRed_time_event_0);
 
 					break;
 
 				case StreetPrepare :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetPrepare_time_event_0);
 
@@ -350,14 +353,14 @@ public class TrafficLightWaitingCycleBasedStatemachine
 				switch (stateVector[0]) {
 
 					case WaitOn :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						getTimerService().resetTimer(WaitOn_time_event_0);
 
 						break;
 
 					case WaitOff :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						getTimerService().resetTimer(WaitOff_time_event_0);
 
@@ -380,7 +383,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 			} else {
 				if (occuredEvents.contains(WaitOn_time_event_0)) {
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOn_time_event_0);
 
@@ -403,12 +406,12 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			switch (stateVector[0]) {
 
 				case StreetGreen :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case WaitOn :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOn_time_event_0);
 
@@ -418,7 +421,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 
 				case WaitOff :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOff_time_event_0);
 
@@ -428,35 +431,35 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 
 				case StreetAttention :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetAttention_time_event_0);
 
 					break;
 
 				case StreetRed :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetRed_time_event_0);
 
 					break;
 
 				case PedestrianGreen :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
 					break;
 
 				case PedestrianRed :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(PedestrianRed_time_event_0);
 
 					break;
 
 				case StreetPrepare :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetPrepare_time_event_0);
 
@@ -485,14 +488,14 @@ public class TrafficLightWaitingCycleBasedStatemachine
 				switch (stateVector[0]) {
 
 					case WaitOn :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						getTimerService().resetTimer(WaitOn_time_event_0);
 
 						break;
 
 					case WaitOff :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						getTimerService().resetTimer(WaitOff_time_event_0);
 
@@ -515,7 +518,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 			} else {
 				if (occuredEvents.contains(WaitOff_time_event_0)) {
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOff_time_event_0);
 
@@ -538,12 +541,12 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			switch (stateVector[0]) {
 
 				case StreetGreen :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case WaitOn :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOn_time_event_0);
 
@@ -553,7 +556,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 
 				case WaitOff :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOff_time_event_0);
 
@@ -563,35 +566,35 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 
 				case StreetAttention :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetAttention_time_event_0);
 
 					break;
 
 				case StreetRed :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetRed_time_event_0);
 
 					break;
 
 				case PedestrianGreen :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
 					break;
 
 				case PedestrianRed :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(PedestrianRed_time_event_0);
 
 					break;
 
 				case StreetPrepare :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetPrepare_time_event_0);
 
@@ -616,7 +619,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 		} else {
 			if (occuredEvents.contains(StreetAttention_time_event_0)) {
-				stateVector[0] = null;
+				stateVector[0] = State.$NullState$;
 
 				getTimerService().resetTimer(StreetAttention_time_event_0);
 
@@ -639,12 +642,12 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			switch (stateVector[0]) {
 
 				case StreetGreen :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case WaitOn :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOn_time_event_0);
 
@@ -654,7 +657,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 
 				case WaitOff :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOff_time_event_0);
 
@@ -664,35 +667,35 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 
 				case StreetAttention :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetAttention_time_event_0);
 
 					break;
 
 				case StreetRed :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetRed_time_event_0);
 
 					break;
 
 				case PedestrianGreen :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
 					break;
 
 				case PedestrianRed :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(PedestrianRed_time_event_0);
 
 					break;
 
 				case StreetPrepare :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetPrepare_time_event_0);
 
@@ -717,7 +720,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 		} else {
 			if (occuredEvents.contains(StreetRed_time_event_0)) {
-				stateVector[0] = null;
+				stateVector[0] = State.$NullState$;
 
 				getTimerService().resetTimer(StreetRed_time_event_0);
 
@@ -739,12 +742,12 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			switch (stateVector[0]) {
 
 				case StreetGreen :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case WaitOn :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOn_time_event_0);
 
@@ -754,7 +757,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 
 				case WaitOff :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOff_time_event_0);
 
@@ -764,35 +767,35 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 
 				case StreetAttention :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetAttention_time_event_0);
 
 					break;
 
 				case StreetRed :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetRed_time_event_0);
 
 					break;
 
 				case PedestrianGreen :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
 					break;
 
 				case PedestrianRed :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(PedestrianRed_time_event_0);
 
 					break;
 
 				case StreetPrepare :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetPrepare_time_event_0);
 
@@ -817,7 +820,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 		} else {
 			if (occuredEvents.contains(PedestrianGreen_time_event_0)) {
-				stateVector[0] = null;
+				stateVector[0] = State.$NullState$;
 
 				getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
@@ -839,12 +842,12 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			switch (stateVector[0]) {
 
 				case StreetGreen :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case WaitOn :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOn_time_event_0);
 
@@ -854,7 +857,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 
 				case WaitOff :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOff_time_event_0);
 
@@ -864,35 +867,35 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 
 				case StreetAttention :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetAttention_time_event_0);
 
 					break;
 
 				case StreetRed :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetRed_time_event_0);
 
 					break;
 
 				case PedestrianGreen :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
 					break;
 
 				case PedestrianRed :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(PedestrianRed_time_event_0);
 
 					break;
 
 				case StreetPrepare :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetPrepare_time_event_0);
 
@@ -917,7 +920,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 		} else {
 			if (occuredEvents.contains(PedestrianRed_time_event_0)) {
-				stateVector[0] = null;
+				stateVector[0] = State.$NullState$;
 
 				getTimerService().resetTimer(PedestrianRed_time_event_0);
 
@@ -940,12 +943,12 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			switch (stateVector[0]) {
 
 				case StreetGreen :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case WaitOn :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOn_time_event_0);
 
@@ -955,7 +958,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 
 				case WaitOff :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(WaitOff_time_event_0);
 
@@ -965,35 +968,35 @@ public class TrafficLightWaitingCycleBasedStatemachine
 					break;
 
 				case StreetAttention :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetAttention_time_event_0);
 
 					break;
 
 				case StreetRed :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetRed_time_event_0);
 
 					break;
 
 				case PedestrianGreen :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(PedestrianGreen_time_event_0);
 
 					break;
 
 				case PedestrianRed :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(PedestrianRed_time_event_0);
 
 					break;
 
 				case StreetPrepare :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(StreetPrepare_time_event_0);
 
@@ -1018,7 +1021,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 		} else {
 			if (occuredEvents.contains(StreetPrepare_time_event_0)) {
-				stateVector[0] = null;
+				stateVector[0] = State.$NullState$;
 
 				getTimerService().resetTimer(StreetPrepare_time_event_0);
 
@@ -1044,14 +1047,14 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			switch (stateVector[0]) {
 
 				case YellowOn :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(YellowOn_time_event_0);
 
 					break;
 
 				case YellowOff :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(YellowOff_time_event_0);
 
@@ -1073,7 +1076,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 		} else {
 			if (occuredEvents.contains(YellowOn_time_event_0)) {
-				stateVector[0] = null;
+				stateVector[0] = State.$NullState$;
 
 				getTimerService().resetTimer(YellowOn_time_event_0);
 
@@ -1094,14 +1097,14 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			switch (stateVector[0]) {
 
 				case YellowOn :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(YellowOn_time_event_0);
 
 					break;
 
 				case YellowOff :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					getTimerService().resetTimer(YellowOff_time_event_0);
 
@@ -1123,7 +1126,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 		} else {
 			if (occuredEvents.contains(YellowOff_time_event_0)) {
-				stateVector[0] = null;
+				stateVector[0] = State.$NullState$;
 
 				getTimerService().resetTimer(YellowOff_time_event_0);
 
@@ -1143,52 +1146,52 @@ public class TrafficLightWaitingCycleBasedStatemachine
 		outEvents.clear();
 
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			if (stateVector[nextStateIndex] != null) {
-				switch (stateVector[nextStateIndex]) {
-					case On :
-						reactOn();
-						break;
-					case StreetGreen :
-						reactStreetGreen();
-						break;
-					case PedWaiting :
-						reactPedWaiting();
-						break;
-					case WaitOn :
-						reactWaitOn();
-						break;
-					case WaitOff :
-						reactWaitOff();
-						break;
-					case StreetAttention :
-						reactStreetAttention();
-						break;
-					case StreetRed :
-						reactStreetRed();
-						break;
-					case PedestrianGreen :
-						reactPedestrianGreen();
-						break;
-					case PedestrianRed :
-						reactPedestrianRed();
-						break;
-					case StreetPrepare :
-						reactStreetPrepare();
-						break;
-					case Off :
-						reactOff();
-						break;
-					case YellowOn :
-						reactYellowOn();
-						break;
-					case YellowOff :
-						reactYellowOff();
-						break;
-					default :
-						// no state found
-				}
+
+			switch (stateVector[nextStateIndex]) {
+				case On :
+					reactOn();
+					break;
+				case StreetGreen :
+					reactStreetGreen();
+					break;
+				case PedWaiting :
+					reactPedWaiting();
+					break;
+				case WaitOn :
+					reactWaitOn();
+					break;
+				case WaitOff :
+					reactWaitOff();
+					break;
+				case StreetAttention :
+					reactStreetAttention();
+					break;
+				case StreetRed :
+					reactStreetRed();
+					break;
+				case PedestrianGreen :
+					reactPedestrianGreen();
+					break;
+				case PedestrianRed :
+					reactPedestrianRed();
+					break;
+				case StreetPrepare :
+					reactStreetPrepare();
+					break;
+				case Off :
+					reactOff();
+					break;
+				case YellowOn :
+					reactYellowOn();
+					break;
+				case YellowOff :
+					reactYellowOff();
+					break;
+				default :
+					// $NullState$
 			}
 		}
+
 		occuredEvents.clear();
 	}
 }

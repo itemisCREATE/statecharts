@@ -19,7 +19,7 @@ import org.yakindu.sct.runtime.java.IStatemachine;
 public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 
 	public enum State {
-		State1, State9, State10, State2, State3, State4, State5, State6, State7, State8,
+		State1, State9, State10, State2, State3, State4, State5, State6, State7, State8, $NullState$
 	};
 
 	private DefaultInterfaceImpl defaultInterface;
@@ -52,7 +52,10 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 	}
 
 	public void init() {
-
+		for (int i = 0; i < stateVector.length; i++) {
+			stateVector[i] = State.$NullState$;
+		}
+		occuredEvents.clear();
 	}
 
 	public boolean isStateActive(State state) {
@@ -86,7 +89,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 			switch (stateVector[0]) {
 
 				case State9 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS1(defaultInterface.getVarS1() - (1));
@@ -94,7 +97,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State10 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS1(defaultInterface.getVarS1() - (1));
@@ -115,7 +118,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventEvent9())) {
-				stateVector[0] = null;
+				stateVector[0] = State.$NullState$;
 
 				defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
 
@@ -134,7 +137,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 			switch (stateVector[0]) {
 
 				case State9 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS1(defaultInterface.getVarS1() - (1));
@@ -142,7 +145,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State10 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS1(defaultInterface.getVarS1() - (1));
@@ -163,7 +166,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventEvent10())) {
-				stateVector[0] = null;
+				stateVector[0] = State.$NullState$;
 
 				defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
 
@@ -184,7 +187,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 			switch (stateVector[0]) {
 
 				case State3 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -192,7 +195,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State5 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -203,7 +206,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State7 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -217,7 +220,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State8 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -244,7 +247,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-				stateVector[0] = null;
+				stateVector[0] = State.$NullState$;
 
 				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
@@ -257,7 +260,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 
 			} else {
 				if (occuredEvents.contains(defaultInterface.getEventEvent11())) {
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -276,7 +279,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 				} else {
 					if (occuredEvents.contains(defaultInterface
 							.getEventEvent14())) {
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						defaultInterface
 								.setVarS2(defaultInterface.getVarS2() - (1));
@@ -306,7 +309,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 			switch (stateVector[0]) {
 
 				case State3 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -314,7 +317,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State5 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -325,7 +328,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State7 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -339,7 +342,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State8 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -370,7 +373,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 				switch (stateVector[0]) {
 
 					case State5 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						defaultInterface
 								.setVarS2(defaultInterface.getVarS2() - (1));
@@ -378,7 +381,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 						break;
 
 					case State7 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						defaultInterface
 								.setVarS2(defaultInterface.getVarS2() - (1));
@@ -389,7 +392,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 						break;
 
 					case State8 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						defaultInterface
 								.setVarS2(defaultInterface.getVarS2() - (1));
@@ -411,7 +414,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 
 			} else {
 				if (occuredEvents.contains(defaultInterface.getEventEvent3())) {
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -428,7 +431,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 				} else {
 					if (occuredEvents.contains(defaultInterface
 							.getEventEvent12())) {
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						defaultInterface
 								.setVarS2(defaultInterface.getVarS2() - (1));
@@ -450,7 +453,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					} else {
 						if (occuredEvents.contains(defaultInterface
 								.getEventEvent15())) {
-							stateVector[0] = null;
+							stateVector[0] = State.$NullState$;
 
 							defaultInterface.setVarS2(defaultInterface
 									.getVarS2() - (1));
@@ -485,7 +488,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 			switch (stateVector[0]) {
 
 				case State3 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -493,7 +496,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State5 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -504,7 +507,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State7 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -518,7 +521,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State8 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -549,7 +552,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 				switch (stateVector[0]) {
 
 					case State5 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						defaultInterface
 								.setVarS2(defaultInterface.getVarS2() - (1));
@@ -557,7 +560,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 						break;
 
 					case State7 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						defaultInterface
 								.setVarS2(defaultInterface.getVarS2() - (1));
@@ -568,7 +571,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 						break;
 
 					case State8 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						defaultInterface
 								.setVarS2(defaultInterface.getVarS2() - (1));
@@ -594,7 +597,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					switch (stateVector[0]) {
 
 						case State7 :
-							stateVector[0] = null;
+							stateVector[0] = State.$NullState$;
 
 							defaultInterface.setVarS2(defaultInterface
 									.getVarS2() - (1));
@@ -602,7 +605,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 							break;
 
 						case State8 :
-							stateVector[0] = null;
+							stateVector[0] = State.$NullState$;
 
 							defaultInterface.setVarS2(defaultInterface
 									.getVarS2() - (1));
@@ -624,7 +627,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 				} else {
 					if (occuredEvents.contains(defaultInterface
 							.getEventEvent4())) {
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						defaultInterface
 								.setVarS2(defaultInterface.getVarS2() - (1));
@@ -649,7 +652,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 			switch (stateVector[0]) {
 
 				case State3 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -657,7 +660,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State5 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -668,7 +671,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State7 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -682,7 +685,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State8 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					defaultInterface
 							.setVarS2(defaultInterface.getVarS2() - (1));
@@ -713,7 +716,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 				switch (stateVector[0]) {
 
 					case State5 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						defaultInterface
 								.setVarS2(defaultInterface.getVarS2() - (1));
@@ -721,7 +724,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 						break;
 
 					case State7 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						defaultInterface
 								.setVarS2(defaultInterface.getVarS2() - (1));
@@ -732,7 +735,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 						break;
 
 					case State8 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						defaultInterface
 								.setVarS2(defaultInterface.getVarS2() - (1));
@@ -758,7 +761,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					switch (stateVector[0]) {
 
 						case State7 :
-							stateVector[0] = null;
+							stateVector[0] = State.$NullState$;
 
 							defaultInterface.setVarS2(defaultInterface
 									.getVarS2() - (1));
@@ -766,7 +769,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 							break;
 
 						case State8 :
-							stateVector[0] = null;
+							stateVector[0] = State.$NullState$;
 
 							defaultInterface.setVarS2(defaultInterface
 									.getVarS2() - (1));
@@ -788,7 +791,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 				} else {
 					if (occuredEvents.contains(defaultInterface
 							.getEventEvent5())) {
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						defaultInterface
 								.setVarS2(defaultInterface.getVarS2() - (1));
@@ -802,7 +805,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 					} else {
 						if (occuredEvents.contains(defaultInterface
 								.getEventEvent13())) {
-							stateVector[0] = null;
+							stateVector[0] = State.$NullState$;
 
 							defaultInterface.setVarS2(defaultInterface
 									.getVarS2() - (1));
@@ -827,7 +830,7 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 						} else {
 							if (occuredEvents.contains(defaultInterface
 									.getEventEvent16())) {
-								stateVector[0] = null;
+								stateVector[0] = State.$NullState$;
 
 								defaultInterface.setVarS2(defaultInterface
 										.getVarS2() - (1));
@@ -863,43 +866,43 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 		outEvents.clear();
 
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			if (stateVector[nextStateIndex] != null) {
-				switch (stateVector[nextStateIndex]) {
-					case State1 :
-						reactState1();
-						break;
-					case State9 :
-						reactState9();
-						break;
-					case State10 :
-						reactState10();
-						break;
-					case State2 :
-						reactState2();
-						break;
-					case State3 :
-						reactState3();
-						break;
-					case State4 :
-						reactState4();
-						break;
-					case State5 :
-						reactState5();
-						break;
-					case State6 :
-						reactState6();
-						break;
-					case State7 :
-						reactState7();
-						break;
-					case State8 :
-						reactState8();
-						break;
-					default :
-						// no state found
-				}
+
+			switch (stateVector[nextStateIndex]) {
+				case State1 :
+					reactState1();
+					break;
+				case State9 :
+					reactState9();
+					break;
+				case State10 :
+					reactState10();
+					break;
+				case State2 :
+					reactState2();
+					break;
+				case State3 :
+					reactState3();
+					break;
+				case State4 :
+					reactState4();
+					break;
+				case State5 :
+					reactState5();
+					break;
+				case State6 :
+					reactState6();
+					break;
+				case State7 :
+					reactState7();
+					break;
+				case State8 :
+					reactState8();
+					break;
+				default :
+					// $NullState$
 			}
 		}
+
 		occuredEvents.clear();
 	}
 }

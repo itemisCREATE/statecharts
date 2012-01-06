@@ -76,6 +76,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 						}
 					}
 				});
+		statemachine.init();
 		statemachine.enter();
 
 		runtimeService = new RuntimeService(cyclePeriod);

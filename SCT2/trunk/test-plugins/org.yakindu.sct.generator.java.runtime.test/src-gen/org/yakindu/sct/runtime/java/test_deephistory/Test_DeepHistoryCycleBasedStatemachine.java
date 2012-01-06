@@ -19,7 +19,7 @@ import org.yakindu.sct.runtime.java.IStatemachine;
 public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 
 	public enum State {
-		State1, State2, State3, State4, State6, State7, State8, State9, State5,
+		State1, State2, State3, State4, State6, State7, State8, State9, State5, $NullState$
 	};
 
 	private DefaultInterfaceImpl defaultInterface;
@@ -52,7 +52,10 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	}
 
 	public void init() {
-
+		for (int i = 0; i < stateVector.length; i++) {
+			stateVector[i] = State.$NullState$;
+		}
+		occuredEvents.clear();
 	}
 
 	public boolean isStateActive(State state) {
@@ -76,7 +79,7 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 
 	private void reactState1() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
-			stateVector[0] = null;
+			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State3;
@@ -91,27 +94,27 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 			switch (stateVector[0]) {
 
 				case State3 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State6 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State8 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State9 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State5 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
@@ -124,7 +127,7 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventEvent3())) {
-				stateVector[0] = null;
+				stateVector[0] = State.$NullState$;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State6;
@@ -141,27 +144,27 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 			switch (stateVector[0]) {
 
 				case State3 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State6 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State8 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State9 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State5 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
@@ -178,17 +181,17 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 				switch (stateVector[0]) {
 
 					case State6 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						break;
 
 					case State8 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						break;
 
 					case State9 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						break;
 
@@ -201,7 +204,7 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 
 			} else {
 				if (occuredEvents.contains(defaultInterface.getEventEvent5())) {
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					nextStateIndex = 0;
 					stateVector[0] = State.State8;
@@ -220,27 +223,27 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 			switch (stateVector[0]) {
 
 				case State3 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State6 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State8 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State9 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State5 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
@@ -257,17 +260,17 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 				switch (stateVector[0]) {
 
 					case State6 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						break;
 
 					case State8 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						break;
 
 					case State9 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						break;
 
@@ -284,12 +287,12 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 					switch (stateVector[0]) {
 
 						case State8 :
-							stateVector[0] = null;
+							stateVector[0] = State.$NullState$;
 
 							break;
 
 						case State9 :
-							stateVector[0] = null;
+							stateVector[0] = State.$NullState$;
 
 							break;
 
@@ -303,7 +306,7 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 				} else {
 					if (occuredEvents.contains(defaultInterface
 							.getEventEvent7())) {
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						nextStateIndex = 0;
 						stateVector[0] = State.State9;
@@ -322,27 +325,27 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 			switch (stateVector[0]) {
 
 				case State3 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State6 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State8 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State9 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State5 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
@@ -359,17 +362,17 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 				switch (stateVector[0]) {
 
 					case State6 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						break;
 
 					case State8 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						break;
 
 					case State9 :
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						break;
 
@@ -386,12 +389,12 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 					switch (stateVector[0]) {
 
 						case State8 :
-							stateVector[0] = null;
+							stateVector[0] = State.$NullState$;
 
 							break;
 
 						case State9 :
-							stateVector[0] = null;
+							stateVector[0] = State.$NullState$;
 
 							break;
 
@@ -405,7 +408,7 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 				} else {
 					if (occuredEvents.contains(defaultInterface
 							.getEventEvent8())) {
-						stateVector[0] = null;
+						stateVector[0] = State.$NullState$;
 
 						nextStateIndex = 0;
 						stateVector[0] = State.State8;
@@ -424,27 +427,27 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 			switch (stateVector[0]) {
 
 				case State3 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State6 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State8 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State9 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State5 :
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					break;
 
@@ -463,40 +466,40 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 		outEvents.clear();
 
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			if (stateVector[nextStateIndex] != null) {
-				switch (stateVector[nextStateIndex]) {
-					case State1 :
-						reactState1();
-						break;
-					case State2 :
-						reactState2();
-						break;
-					case State3 :
-						reactState3();
-						break;
-					case State4 :
-						reactState4();
-						break;
-					case State6 :
-						reactState6();
-						break;
-					case State7 :
-						reactState7();
-						break;
-					case State8 :
-						reactState8();
-						break;
-					case State9 :
-						reactState9();
-						break;
-					case State5 :
-						reactState5();
-						break;
-					default :
-						// no state found
-				}
+
+			switch (stateVector[nextStateIndex]) {
+				case State1 :
+					reactState1();
+					break;
+				case State2 :
+					reactState2();
+					break;
+				case State3 :
+					reactState3();
+					break;
+				case State4 :
+					reactState4();
+					break;
+				case State6 :
+					reactState6();
+					break;
+				case State7 :
+					reactState7();
+					break;
+				case State8 :
+					reactState8();
+					break;
+				case State9 :
+					reactState9();
+					break;
+				case State5 :
+					reactState5();
+					break;
+				default :
+					// $NullState$
 			}
 		}
+
 		occuredEvents.clear();
 	}
 }

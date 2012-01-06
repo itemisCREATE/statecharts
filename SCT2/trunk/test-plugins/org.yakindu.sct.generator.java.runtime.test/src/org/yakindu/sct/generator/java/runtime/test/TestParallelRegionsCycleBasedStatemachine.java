@@ -32,6 +32,7 @@ public class TestParallelRegionsCycleBasedStatemachine {
 	@Before
 	public void setUp() {
 		statemachine = new Test_ParallelRegionsCycleBasedStatemachine();
+		statemachine.init();
 		statemachine.enter();
 	}
 

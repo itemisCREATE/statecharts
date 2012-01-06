@@ -153,3 +153,6 @@ String getComment(Step this) :
 		"//"+comment
 	else
 		null;
+		
+String getNullStateName() :
+	"$NullState$";

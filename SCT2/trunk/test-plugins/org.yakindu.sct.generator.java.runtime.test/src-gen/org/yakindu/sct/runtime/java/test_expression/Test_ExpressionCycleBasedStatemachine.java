@@ -19,7 +19,7 @@ import org.yakindu.sct.runtime.java.IStatemachine;
 public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 
 	public enum State {
-		State1, State2,
+		State1, State2, $NullState$
 	};
 
 	private DefaultInterfaceImpl defaultInterface;
@@ -54,7 +54,10 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 	}
 
 	public void init() {
-
+		for (int i = 0; i < stateVector.length; i++) {
+			stateVector[i] = State.$NullState$;
+		}
+		occuredEvents.clear();
 	}
 
 	public boolean isStateActive(State state) {
@@ -87,7 +90,7 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 	private void reactState1() {
 		if ((occuredEvents.contains(defaultInterface.getEventEvent1()) && ((interfaceOther
 				.getVarVar1() == true) || (defaultInterface.getVarVar5() == false)))) {
-			stateVector[0] = null;
+			stateVector[0] = State.$NullState$;
 
 			defaultInterface.setVarVar2(1);
 
@@ -107,7 +110,7 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 	private void reactState2() {
 		if ((occuredEvents.contains(defaultInterface.getEventEvent1()) && (defaultInterface
 				.getVarVar3() > 0))) {
-			stateVector[0] = null;
+			stateVector[0] = State.$NullState$;
 
 			defaultInterface.setVarVar5(true);
 
@@ -131,19 +134,19 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 		outEvents.clear();
 
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			if (stateVector[nextStateIndex] != null) {
-				switch (stateVector[nextStateIndex]) {
-					case State1 :
-						reactState1();
-						break;
-					case State2 :
-						reactState2();
-						break;
-					default :
-						// no state found
-				}
+
+			switch (stateVector[nextStateIndex]) {
+				case State1 :
+					reactState1();
+					break;
+				case State2 :
+					reactState2();
+					break;
+				default :
+					// $NullState$
 			}
 		}
+
 		occuredEvents.clear();
 	}
 }

@@ -106,7 +106,7 @@ else {
 
 «DEFINE ActionCode FOR ExitState-»
 	«getComment()-»
-	stateVector[«this.state.stateVector.offset»] = null;
+	stateVector[«this.state.stateVector.offset»] = State.«getNullStateName()»;
 	«REM»activeStates.remove(State.«state.getName()»);«ENDREM»
 «ENDDEFINE»
 
@@ -224,6 +224,7 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 		«FOREACH states AS state-»
 	      «state.getName()»,
 	    «ENDFOREACH-»
+	    «getNullStateName()»
 	};
 	
 	«FOREACH scopes.typeSelect(InterfaceScope) AS interface-»
@@ -271,9 +272,11 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 		return !occuredEvents.isEmpty();
 	}
 	
-	
 	public void init() {
-		
+		for (int i = 0; i < stateVector.length; i++) {
+			stateVector[i] = State.$NullState$;
+		}
+		occuredEvents.clear();
 	}
 	
 	public boolean isStateActive(State state){
@@ -374,18 +377,18 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 		outEvents.clear();
 		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			if (stateVector[nextStateIndex] != null) {
-				switch (stateVector[nextStateIndex]) {
-				«FOREACH this.states AS state-»
-    			case «state.getName()»:
-        			react«state.getName()»();
-        			break;
-				«ENDFOREACH-»
-				default:
-					// no state found
-				}
+			
+			switch (stateVector[nextStateIndex]) {
+			«FOREACH this.states AS state-»
+    		case «state.getName()»:
+        		react«state.getName()»();
+        		break;
+			«ENDFOREACH-»
+			default:
+				// «getNullStateName()»
 			}
 		}
+		
 		occuredEvents.clear();
 	}
 }

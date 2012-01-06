@@ -36,6 +36,7 @@ public class TestHierarchyEventBasedStatemachine {
 	@Before
 	public void setUp() {
 		statemachine = new Test_HierarchyEventBasedStatemachine();
+		statemachine.init();
 		statemachine.enter();
 		runtimeService = new RuntimeService(cyclePeriod);
 		runtimeService.addStatemachine(statemachine);
