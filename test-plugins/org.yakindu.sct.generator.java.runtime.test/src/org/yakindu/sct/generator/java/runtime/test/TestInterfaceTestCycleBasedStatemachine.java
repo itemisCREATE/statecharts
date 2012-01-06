@@ -34,6 +34,7 @@ public class TestInterfaceTestCycleBasedStatemachine {
 	@Before
 	public void setUp() {
 		statemachine = new InterfaceTestCycleBasedStatemachine();
+		statemachine.init();
 		statemachine.enter();
 	}
 

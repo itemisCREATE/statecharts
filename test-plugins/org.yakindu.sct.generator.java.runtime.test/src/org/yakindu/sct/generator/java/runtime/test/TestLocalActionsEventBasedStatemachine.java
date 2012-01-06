@@ -51,6 +51,7 @@ public class TestLocalActionsEventBasedStatemachine {
 	public void setUp() {
 		statemachine = new Test_LocalActionsEventBasedStatemachine();
 		statemachine.setTimerService(new TimerService());
+		statemachine.init();
 		statemachine.enter();
 		runtimeService = new RuntimeService(cyclePeriod);
 		runtimeService.addStatemachine(statemachine);

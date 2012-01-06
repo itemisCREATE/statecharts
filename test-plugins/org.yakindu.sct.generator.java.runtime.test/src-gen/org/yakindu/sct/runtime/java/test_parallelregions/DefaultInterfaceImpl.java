@@ -34,6 +34,14 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 			0);
 	private final Event<Events> EventEvent10 = new Event<Events>(
 			Events.Event10, 0);
+	private final Event<Events> EventEvent11 = new Event<Events>(
+			Events.Event11, 0);
+	private final Event<Events> EventEvent12 = new Event<Events>(
+			Events.Event12, 0);
+	private final Event<Events> EventEvent13 = new Event<Events>(
+			Events.Event13, 0);
+	private final Event<Events> EventEvent14 = new Event<Events>(
+			Events.Event14, 0);
 
 	private Test_ParallelRegionsCycleBasedStatemachine statemachine;
 
@@ -122,6 +130,38 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 		return EventEvent10;
 	}
 
+	public void raiseEvent11() {
+		statemachine.getOccuredEvents().add(EventEvent11);
+	}
+
+	public Event<Events> getEventEvent11() {
+		return EventEvent11;
+	}
+
+	public void raiseEvent12() {
+		statemachine.getOccuredEvents().add(EventEvent12);
+	}
+
+	public Event<Events> getEventEvent12() {
+		return EventEvent12;
+	}
+
+	public void raiseEvent13() {
+		statemachine.getOccuredEvents().add(EventEvent13);
+	}
+
+	public Event<Events> getEventEvent13() {
+		return EventEvent13;
+	}
+
+	public void raiseEvent14() {
+		statemachine.getOccuredEvents().add(EventEvent14);
+	}
+
+	public Event<Events> getEventEvent14() {
+		return EventEvent14;
+	}
+
 	private int varReg3 = -(1);
 
 	public int getVarReg3() {
@@ -130,5 +170,14 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 
 	public void setVarReg3(int value) {
 		varReg3 = value;
+	}
+	private int varHierarchy;
+
+	public int getVarHierarchy() {
+		return varHierarchy;
+	}
+
+	public void setVarHierarchy(int value) {
+		varHierarchy = value;
 	}
 }

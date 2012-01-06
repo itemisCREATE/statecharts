@@ -13,7 +13,7 @@ package org.yakindu.sct.runtime.java.test_parallelregions;
 public interface DefaultInterface {
 
 	public enum Events {
-		Event1, Event2, Event3, Event4, Event5, Event6, Event7, Event8, Event9, Event10,
+		Event1, Event2, Event3, Event4, Event5, Event6, Event7, Event8, Event9, Event10, Event11, Event12, Event13, Event14,
 	}
 
 	public void raiseEvent1();
@@ -36,6 +36,16 @@ public interface DefaultInterface {
 
 	public void raiseEvent10();
 
+	public void raiseEvent11();
+
+	public void raiseEvent12();
+
+	public void raiseEvent13();
+
+	public void raiseEvent14();
+
 	public int getVarReg3();
 	public void setVarReg3(int value);
+	public int getVarHierarchy();
+	public void setVarHierarchy(int value);
 }

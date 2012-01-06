@@ -20,6 +20,7 @@ public class TestExpressionEventBasedStatemachine {
 	@Before
 	public void setUp() {
 		statemachine = new Test_ExpressionEventBasedStatemachine();
+		statemachine.init();
 		statemachine.enter();
 		runtimeService = new RuntimeService(cyclePeriod);
 		runtimeService.addStatemachine(statemachine);

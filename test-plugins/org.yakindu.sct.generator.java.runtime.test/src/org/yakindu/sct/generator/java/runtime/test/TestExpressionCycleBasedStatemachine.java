@@ -14,6 +14,7 @@ public class TestExpressionCycleBasedStatemachine {
 	@Before
 	public void setUp() {
 		statemachine = new Test_ExpressionCycleBasedStatemachine();
+		statemachine.init();
 		statemachine.enter();
 	}
 

@@ -44,6 +44,7 @@ public class TestLocalActionsCycleBasedStatemachine {
 	public void setUp() {
 		statemachine = new Test_LocalActionsCycleBasedStatemachine();
 		statemachine.setTimerService(new TimerService());
+		statemachine.init();
 		statemachine.enter();
 	}
 

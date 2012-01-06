@@ -30,6 +30,7 @@ public class TestHierarchyCycleBasedStatemachine {
 	@Before
 	public void setUp() {
 		statemachine = new Test_HierarchyCycleBasedStatemachine();
+		statemachine.init();
 		statemachine.enter();
 	}
 

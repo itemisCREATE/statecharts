@@ -39,6 +39,7 @@ public class TestParallelRegionsEventBasedStatemachine {
 	@Before
 	public void setUp() {
 		statemachine = new Test_ParallelRegionsEventBasedStatemachine();
+		statemachine.init();
 		statemachine.enter();
 		runtimeService = new RuntimeService(cyclePeriod);
 		runtimeService.addStatemachine(statemachine);

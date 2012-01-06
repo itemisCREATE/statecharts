@@ -34,7 +34,7 @@ public class Test_LocalActionsCycleBasedStatemachine
 			TimeEvents.State2_time_event_0, 4, false);
 
 	public enum State {
-		State1, State2,
+		State1, State2, $NullState$
 	};
 
 	private DefaultInterfaceImpl defaultInterface;
@@ -73,7 +73,10 @@ public class Test_LocalActionsCycleBasedStatemachine
 	}
 
 	public void init() {
-
+		for (int i = 0; i < stateVector.length; i++) {
+			stateVector[i] = State.$NullState$;
+		}
+		occuredEvents.clear();
 	}
 
 	public boolean isStateActive(State state) {
@@ -120,7 +123,7 @@ public class Test_LocalActionsCycleBasedStatemachine
 
 	private void reactState1() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
-			stateVector[0] = null;
+			stateVector[0] = State.$NullState$;
 
 			getTimerService().resetTimer(State1_time_event_0);
 			defaultInterface.setVarI(0);
@@ -150,7 +153,7 @@ public class Test_LocalActionsCycleBasedStatemachine
 	}
 	private void reactState2() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent3())) {
-			stateVector[0] = null;
+			stateVector[0] = State.$NullState$;
 
 			getTimerService().resetTimer(State2_time_event_0);
 			defaultInterface.setVarJ(0);
@@ -180,19 +183,19 @@ public class Test_LocalActionsCycleBasedStatemachine
 		outEvents.clear();
 
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			if (stateVector[nextStateIndex] != null) {
-				switch (stateVector[nextStateIndex]) {
-					case State1 :
-						reactState1();
-						break;
-					case State2 :
-						reactState2();
-						break;
-					default :
-						// no state found
-				}
+
+			switch (stateVector[nextStateIndex]) {
+				case State1 :
+					reactState1();
+					break;
+				case State2 :
+					reactState2();
+					break;
+				default :
+					// $NullState$
 			}
 		}
+
 		occuredEvents.clear();
 	}
 }

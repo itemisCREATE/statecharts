@@ -19,7 +19,7 @@ import org.yakindu.sct.runtime.java.IStatemachine;
 public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 
 	public enum State {
-		State1, State2, State3, State4,
+		State1, State2, State3, State4, $NullState$
 	};
 
 	private DefaultInterfaceImpl defaultInterface;
@@ -56,7 +56,10 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 	}
 
 	public void init() {
-
+		for (int i = 0; i < stateVector.length; i++) {
+			stateVector[i] = State.$NullState$;
+		}
+		occuredEvents.clear();
 	}
 
 	public boolean isStateActive(State state) {
@@ -89,7 +92,7 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 	private void reactState1() {
 		if ((occuredEvents.contains(defaultInterface.getEventEvent1()) && (defaultInterface
 				.getVarVar2() > 0))) {
-			stateVector[0] = null;
+			stateVector[0] = State.$NullState$;
 
 			defaultInterface.raiseEvent2(22);
 
@@ -99,7 +102,7 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 		} else {
 			if ((occuredEvents.contains(interfaceOther.getEventEvent3()) && (defaultInterface
 					.getVarVar3() == 1))) {
-				stateVector[0] = null;
+				stateVector[0] = State.$NullState$;
 
 				interfaceOther.raiseEvent4();
 
@@ -109,7 +112,7 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 			} else {
 				if ((occuredEvents.contains(interfaceThird.getEventEvent5()) && (defaultInterface
 						.getVarVar1() == true))) {
-					stateVector[0] = null;
+					stateVector[0] = State.$NullState$;
 
 					interfaceThird.raiseEvent6(true);
 
@@ -122,7 +125,7 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState2() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
-			stateVector[0] = null;
+			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
@@ -131,7 +134,7 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState3() {
 		if (occuredEvents.contains(interfaceOther.getEventEvent3())) {
-			stateVector[0] = null;
+			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
@@ -140,7 +143,7 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 	}
 	private void reactState4() {
 		if (occuredEvents.contains(interfaceThird.getEventEvent5())) {
-			stateVector[0] = null;
+			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
@@ -151,25 +154,25 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 		outEvents.clear();
 
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			if (stateVector[nextStateIndex] != null) {
-				switch (stateVector[nextStateIndex]) {
-					case State1 :
-						reactState1();
-						break;
-					case State2 :
-						reactState2();
-						break;
-					case State3 :
-						reactState3();
-						break;
-					case State4 :
-						reactState4();
-						break;
-					default :
-						// no state found
-				}
+
+			switch (stateVector[nextStateIndex]) {
+				case State1 :
+					reactState1();
+					break;
+				case State2 :
+					reactState2();
+					break;
+				case State3 :
+					reactState3();
+					break;
+				case State4 :
+					reactState4();
+					break;
+				default :
+					// $NullState$
 			}
 		}
+
 		occuredEvents.clear();
 	}
 }
