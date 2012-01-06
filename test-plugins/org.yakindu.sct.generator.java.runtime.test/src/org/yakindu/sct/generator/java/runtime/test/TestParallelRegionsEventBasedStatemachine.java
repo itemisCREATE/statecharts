@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.generator.java.runtime.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -17,7 +18,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.yakindu.sct.runtime.java.RuntimeService;
-import org.yakindu.sct.runtime.java.TimerService;
+import org.yakindu.sct.runtime.java.test_parallelregions.DefaultInterface;
 import org.yakindu.sct.runtime.java.test_parallelregions.Test_ParallelRegionsCycleBasedStatemachine.State;
 import org.yakindu.sct.runtime.java.test_parallelregions.Test_ParallelRegionsEventBasedStatemachine;
 
@@ -29,7 +30,7 @@ import org.yakindu.sct.runtime.java.test_parallelregions.Test_ParallelRegionsEve
  */
 public class TestParallelRegionsEventBasedStatemachine {
 
-	private Test_ParallelRegionsEventBasedStatemachine statemachine;
+	private Test_ParallelRegionsEventBasedStatemachine sm;
 	
 	private RuntimeService runtimeService;
 
@@ -38,113 +39,155 @@ public class TestParallelRegionsEventBasedStatemachine {
 
 	@Before
 	public void setUp() {
-		statemachine = new Test_ParallelRegionsEventBasedStatemachine();
-		statemachine.init();
-		statemachine.enter();
+		sm = new Test_ParallelRegionsEventBasedStatemachine();
+		sm.init();
+		sm.enter();
 		runtimeService = new RuntimeService(cyclePeriod);
-		runtimeService.addStatemachine(statemachine);
+		runtimeService.addStatemachine(sm);
 	}
 
 	@After
 	public void tearDown() {
-		statemachine = null;
+		sm = null;
 	}
 
 	@Test
 	public void testStatemachineEnter() {
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
-				statemachine.isStateActive(State.State1));
+				sm.isStateActive(State.State1));
 	}
 
 	@Test
 	public void testStatemachineHierarchyLevelOne() throws InterruptedException {
-		statemachine.getDefaultInterface().raiseEvent1();
+		sm.getDefaultInterface().raiseEvent1();
 		Thread.sleep(5);
 		// Test if state is changed to State3 && State7
-		assertTrue("Statemachine isn't in State: " + State.State3.name() + ".",
-				statemachine.isStateActive(State.State3));
-		assertTrue("Statemachine isn't in State: " + State.State7.name() + ".",
-				statemachine.isStateActive(State.State7));
+		assertTrue(sm.isStateActive(State.State3));
+		assertTrue(sm.isStateActive(State.State7));
 
-		statemachine.getDefaultInterface().raiseEvent5();
+		sm.getDefaultInterface().raiseEvent5();
 		Thread.sleep(5);
 		// Test if state is changed to State3 && State8
-		assertTrue("Statemachine isn't in State: " + State.State3.name() + ".",
-				statemachine.isStateActive(State.State3));
-		assertTrue("Statemachine isn't in State: " + State.State8.name() + ".",
-				statemachine.isStateActive(State.State8));
-		assertFalse(
-				"Statemachine isn't in State: " + State.State7.name() + ".",
-				statemachine.isStateActive(State.State7));
+		assertTrue(sm.isStateActive(State.State3));
+		assertTrue(sm.isStateActive(State.State8));
+		assertFalse(sm.isStateActive(State.State7));
 
-		statemachine.getDefaultInterface().raiseEvent6();
+		sm.getDefaultInterface().raiseEvent6();
 		Thread.sleep(5);
 		// Test if state is changed to State3 && State7
-		assertTrue("Statemachine isn't in State: " + State.State3.name() + ".",
-				statemachine.isStateActive(State.State3));
-		assertTrue("Statemachine isn't in State: " + State.State7.name() + ".",
-				statemachine.isStateActive(State.State7));
-		assertFalse(
-				"Statemachine isn't in State: " + State.State8.name() + ".",
-				statemachine.isStateActive(State.State8));
+		assertTrue(sm.isStateActive(State.State3));
+		assertTrue(sm.isStateActive(State.State7));
+		assertFalse(sm.isStateActive(State.State8));
 
-		statemachine.getDefaultInterface().raiseEvent3();
+		sm.getDefaultInterface().raiseEvent3();
 		Thread.sleep(5);
 		// Test if state is back to State1
-		assertTrue(statemachine.isStateActive(State.State1));
-		assertFalse(statemachine.isStateActive(State.State3));
-		assertFalse(statemachine.isStateActive(State.State7));
-		assertFalse(statemachine.isStateActive(State.State8));
+		assertTrue(sm.isStateActive(State.State1));
+		assertFalse(sm.isStateActive(State.State3));
+		assertFalse(sm.isStateActive(State.State7));
+		assertFalse(sm.isStateActive(State.State8));
 	}
 
 	@Test
 	public void testStatemachineHierarchyLevelTwo() throws InterruptedException {
-		statemachine.getDefaultInterface().raiseEvent1();
+		sm.getDefaultInterface().raiseEvent1();
 		Thread.sleep(5);
 		// Test if state is changed to State3 && State7
-		assertTrue("Statemachine isn't in State: " + State.State3.name() + ".",
-				statemachine.isStateActive(State.State3));
-		assertTrue("Statemachine isn't in State: " + State.State7.name() + ".",
-				statemachine.isStateActive(State.State7));
+		assertTrue(sm.isStateActive(State.State3));
+		assertTrue(sm.isStateActive(State.State7));
 
-		statemachine.getDefaultInterface().raiseEvent2();
+		sm.getDefaultInterface().raiseEvent2();
 		Thread.sleep(5);
 		// Test if state is changed to State9, State5 and State7
-		assertTrue("Statemachine isn't in State: " + State.State9.name() + ".",
-				statemachine.isStateActive(State.State9));
-		assertTrue("Statemachine isn't in State: " + State.State5.name() + ".",
-				statemachine.isStateActive(State.State5));
-		assertTrue("Statemachine isn't in State: " + State.State7.name() + ".",
-				statemachine.isStateActive(State.State7));
-		assertFalse(
-				"Statemachine isn't in State: " + State.State8.name() + ".",
-				statemachine.isStateActive(State.State8));
+		assertTrue(sm.isStateActive(State.State9));
+		assertTrue(sm.isStateActive(State.State5));
+		assertTrue(sm.isStateActive(State.State7));
 
-		statemachine.getDefaultInterface().raiseEvent3();
+		sm.getDefaultInterface().raiseEvent3();
 		Thread.sleep(5);
 		// Test if state is changed to State9, State6 and State8
-		assertTrue("Statemachine isn't in State: " + State.State9.name() + ".",
-				statemachine.isStateActive(State.State9));
-		assertTrue("Statemachine isn't in State: " + State.State6.name() + ".",
-				statemachine.isStateActive(State.State6));
-		assertFalse(
-				"Statemachine isn't in State: " + State.State7.name() + ".",
-				statemachine.isStateActive(State.State7));
-		assertTrue("Statemachine isn't in State: " + State.State8.name() + ".",
-				statemachine.isStateActive(State.State8));
+		assertTrue(sm.isStateActive(State.State9));
+		assertTrue(sm.isStateActive(State.State6));
+		assertFalse(sm.isStateActive(State.State7));
+		assertTrue(sm.isStateActive(State.State8));
 
-		statemachine.getDefaultInterface().raiseEvent6();
+		sm.getDefaultInterface().raiseEvent6();
 		Thread.sleep(5);
 		// Test if state is changed to State9, State6 and State8
-		assertTrue("Statemachine isn't in State: " + State.State9.name() + ".",
-				statemachine.isStateActive(State.State9));
-		assertTrue("Statemachine isn't in State: " + State.State6.name() + ".",
-				statemachine.isStateActive(State.State6));
-		assertTrue("Statemachine isn't in State: " + State.State7.name() + ".",
-				statemachine.isStateActive(State.State7));
-		assertFalse(
-				"Statemachine isn't in State: " + State.State8.name() + ".",
-				statemachine.isStateActive(State.State8));
+		assertTrue(sm.isStateActive(State.State9));
+		assertTrue(sm.isStateActive(State.State6));
+		assertTrue(sm.isStateActive(State.State7));
+		assertFalse(sm.isStateActive(State.State8));
 	}
+
+	@Test
+	public void testEntryAndExitExecution() throws InterruptedException {
+		DefaultInterface di = sm.getDefaultInterface();
+
+		di.raiseEvent1();
+		Thread.sleep(5);
+		// Exit State1
+		int hierarchy = 2;
+		// Entry State2
+		hierarchy += 3;
+		assertEquals(7, di.getVarReg3());
+		assertEquals(hierarchy, di.getVarHierarchy());
+
+		di.raiseEvent5();
+		Thread.sleep(5);
+		assertEquals(8, di.getVarReg3());
+
+		di.raiseEvent6();
+		Thread.sleep(5);
+		di.raiseEvent3();
+		Thread.sleep(5);
+		// Exit State1
+		hierarchy = 2;
+		assertEquals(-1, di.getVarReg3());
+		assertEquals(hierarchy, di.getVarHierarchy());
+
+		di.raiseEvent1();
+		Thread.sleep(5);
+		// Entry State2
+		hierarchy += 3;
+
+		di.raiseEvent2();
+		Thread.sleep(5);
+		// Entry State4
+		hierarchy *= 4;
+		// Entry State9
+		hierarchy += 10;
+		// Entry State5
+		hierarchy += 5;
+		assertEquals(hierarchy, di.getVarHierarchy());
+
+		di.raiseEvent8();
+		Thread.sleep(5);
+		// Exit State9
+		hierarchy -= 10;
+		// Exit State5
+		hierarchy -= 5;
+		// Exit State 4
+		hierarchy /= 4;
+		// Exit State 2
+		hierarchy -= 3;
+		assertEquals(hierarchy, di.getVarHierarchy());
+
+		//Jump to State6 && State9
+		di.raiseEvent11();
+		Thread.sleep(5);
+		// Exit State1
+		hierarchy = 2;
+		// Entry State2
+		hierarchy += 3;
+		// Entry State4
+		hierarchy *= 4;
+		// Entry State9
+		hierarchy += 10;
+		// Entry State6
+		hierarchy += 6;
+		assertEquals(hierarchy, di.getVarHierarchy());
+	}
+
 
 }
