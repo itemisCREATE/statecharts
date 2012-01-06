@@ -416,7 +416,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 		assertTrue(_t.isTransition());
 		
 		Sequence _effect = (Sequence) _t.getEffect();
-		assertEquals(2, _effect.getSteps().size());
+		assertSequenceSize(2, _effect);
 		
 		assertCall(_effect, 0, _s4.getExitSequence());
 		

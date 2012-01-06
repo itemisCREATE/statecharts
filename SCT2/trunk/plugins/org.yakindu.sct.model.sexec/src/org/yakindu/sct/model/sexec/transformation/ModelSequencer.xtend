@@ -376,10 +376,11 @@ class ModelSequencer {
 		}
 
 		t.exitStates().fold(sequence, [seq, state | {
-			if (state != t.source) { // since we call the exit sequence of the source state we have to exclude it's exit action here
-	
-				if ( state.create.exitAction != null) seq.steps.add(state.create.exitAction.newCall)
-				if ( _addTraceSteps ) seq.steps += newTraceStateExited(state.create)
+			if (state != t.source && state != topExitState) { // since we call the exit sequence of the source state we have to exclude it's exit action here
+				if (t.source.stateVector.last == state.create.stateVector.last) {
+					if ( state.create.exitAction != null) seq.steps.add(state.create.exitAction.newCall)
+					if ( _addTraceSteps ) seq.steps += newTraceStateExited(state.create)				
+				}
 			}
 			
 			seq
@@ -400,6 +401,13 @@ class ModelSequencer {
 				var StateSwitch sSwitch = topExitState.defineExitSwitch(leafStates, i)
 				sequence.steps.add(sSwitch);
 			}
+		}
+		
+		// forth exit the top exit state
+		// TODO refactor: the algorithm shoud not depend on these special cases...
+		if ( topExitState != t.source ) {
+			if (topExitState.create.exitAction != null) sequence.steps.add(topExitState.create.exitAction.newCall)
+			if ( _addTraceSteps ) sequence.steps += topExitState.create.newTraceStateExited
 		}
 		
 		
@@ -708,6 +716,8 @@ class ModelSequencer {
 	def Step mapExitAction(State state) {
 		val seq = sexecFactory.createSequence
 		seq.name = "exitAction"
+		seq.comment = "Exit action for state '" + state.name + "'."
+		
 		
 		for (tes : state.timeEventSpecs ) {
 			val timeEvent = tes.createDerivedEvent
@@ -1154,6 +1164,7 @@ class ModelSequencer {
 
 			val caseSeq = sexecFactory.createSequence
 			caseSeq.steps += s.create.exitSequence.newCall
+			val es = s.create
 
 
 			val exitStates = s.parentStates
@@ -1162,9 +1173,11 @@ class ModelSequencer {
 			
 			// include exitAction calls up to the direct child level.
 			exitStates.fold(caseSeq , [ cs, exitState | {
-				 if (exitState.create.exitAction != null) cs.steps.add(exitState.create.exitAction.newCall)
-				 if ( _addTraceSteps ) cs.steps.add(exitState.create.newTraceStateExited)
-				 cs
+				if (es.stateVector.last == exitState.create.stateVector.last) {
+					if (exitState.create.exitAction != null) cs.steps.add(exitState.create.exitAction.newCall)
+					if ( _addTraceSteps ) cs.steps.add(exitState.create.newTraceStateExited)				
+				}
+				cs
 			}]) 
 			
 			if (s.create.exitSequence != null) sSwitch.cases.add(s.create.newCase(caseSeq))
@@ -1315,19 +1328,5 @@ class ModelSequencer {
 			}
 		}
 	}
-	 
-	def List<LocalReaction> entryReactions(State state) {
-		state.localReactions
-			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof EntryEvent))
-			.map(lr | lr as LocalReaction)
-			.toList	
-	} 
-	
-	def List<LocalReaction> exitReactions(State state) {
-		state.localReactions
-			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof ExitEvent))
-			.map(lr | lr as LocalReaction)
-			.toList	
-	} 
-	
+	 	
 }

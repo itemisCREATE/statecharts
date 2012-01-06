@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.yakindu.sct.model.sexec.Call;
+import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.StateCase;
@@ -58,7 +59,33 @@ public class Assert {
 	}
 
 
+	public static StateSwitch assertedSwitch(Step step) {
 
+		assertNotNull("Step is null", step);
+		assertTrue("Step is no StateSwitch (was " + step.getClass().getName() +") '" + stepAsString(step) + "'", step instanceof StateSwitch);
+
+		return (StateSwitch) step;
+	}
+
+
+	public static ExecutionState assertedState(ExecutionFlow flow, int idx, String id) {
+
+		assertTrue("Execution flow does not contain an state #" + idx + "!" , flow.getStates().size() > idx);
+		ExecutionState es = flow.getStates().get(idx);
+		assertEquals("wrong state id !", id, es.getName());
+
+		return es;
+	}
+
+
+
+	public static void assertSequenceSize(int size, Step seq) {
+		assertNotNull("Sequence is null", seq);
+		assertTrue("Step is no Sequence (was " + seq.getClass().getName() +")", seq instanceof Sequence);
+		assertEquals("Sequence has wrong number of steps: " + stepListAsString((Sequence)seq), size, ((Sequence)seq).getSteps().size());
+
+	}
+	
 	public static void assertStateSwitch(Step step, ExecutionState ... states ) {
 		
 		assertNotNull("Step is null", step);
@@ -75,5 +102,24 @@ public class Assert {
 	}
 
 
+	public static String stepListAsString(Sequence seq) {
+		String r = "";
+		
+		for ( Step s : seq.getSteps() ) {
+//			if (s instanceof Call) r += "call to : " + ((Call)s).getStep().getComment(); 
+//			else if (s instanceof StateSwitch) r += "switch on " + ((StateSwitch)s).getStateConfigurationIdx(); 
+//			else  r += s; 
+//			
+			r += stepAsString(s) + "; ";
+		}
+		
+		return r;
+	}
 
+	public static String stepAsString(Step step) {
+		if (step instanceof Call) return "call to : " + ((Call)step).getStep().getComment(); 
+		else if (step instanceof StateSwitch) return "switch on " + ((StateSwitch)step).getStateConfigurationIdx(); 
+		
+		return step.toString(); 
+	}
 }

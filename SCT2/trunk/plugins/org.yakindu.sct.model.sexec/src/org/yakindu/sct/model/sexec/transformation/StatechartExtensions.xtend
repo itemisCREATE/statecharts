@@ -16,6 +16,9 @@ import org.yakindu.sct.model.sgraph.ReactiveElement
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Choice
+import org.yakindu.sct.model.stext.stext.EntryEvent
+import org.yakindu.sct.model.stext.stext.ExitEvent
+import org.yakindu.sct.model.stext.stext.ReactionTrigger
 
 class StatechartExtensions {
 	
@@ -128,6 +131,20 @@ class StatechartExtensions {
 		return allChoices.toList
 	}
 	
+	
+	def List<LocalReaction> entryReactions(State state) {
+		state.localReactions
+			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof EntryEvent))
+			.map(lr | lr as LocalReaction)
+			.toList	
+	} 
+	
+	def List<LocalReaction> exitReactions(State state) {
+		state.localReactions
+			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof ExitEvent))
+			.map(lr | lr as LocalReaction)
+			.toList	
+	} 
 	
 	
 	//=================================================================

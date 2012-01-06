@@ -247,12 +247,6 @@ public class SCTTestUtil {
 		return assignment;
 	}
 	
-//	public static PrimitiveValueExpression _createValue(String s) {
-//		PrimitiveValueExpression assignment = StextFactory.eINSTANCE.createPrimitiveValueExpression();
-//		assignment.setValue(s);
-//		return assignment;
-//	}
-//	
 
 	public static PrimitiveValueExpression _createValue(int i) {
 		PrimitiveValueExpression assignment = StextFactory.eINSTANCE.createPrimitiveValueExpression();
@@ -283,6 +277,32 @@ public class SCTTestUtil {
 		return (states.size() > 0) ? (State) states.iterator().next() : null;
 	}
 	
+	public static State findStateFullyQualified(Statechart sc, final String name) {
+
+		Collection<EObject> states = Collections2.filter(EcoreUtil2.eAllContentsAsList(sc), new Predicate<Object>() {
+
+			public boolean apply(Object obj) {
+				// TODO Auto-generated method stub
+				return obj != null && obj instanceof State && name.equals(fqn((State)obj));
+			}
+		});
+		
+		return (states.size() > 0) ? (State) states.iterator().next() : null;
+	}
+	
+	
+	public static final String fqn(State state) {
+		return fqn(state.getParentRegion()) + "." + state.getName();
+	}
+
+	public static final String fqn(Region region) {
+		if (region.getComposite() instanceof State) 
+			return fqn((State)region.getComposite()) + "." + region.getName();
+		
+		return ((Statechart)region.getComposite()).getName() + "." + region.getName();
+
+	}
+
 	
 	public static class MinimalTSC {
 		
