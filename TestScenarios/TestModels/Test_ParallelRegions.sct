@@ -5,7 +5,7 @@
       <vertices xsi:type="sgraph:Entry" xmi:id="_dt0BhPZlEeCSetPXFd1ZUw">
         <outgoingTransitions xmi:id="_dt2dyfZlEeCSetPXFd1ZUw" specification="" target="_dt1PovZlEeCSetPXFd1ZUw"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_dt1PovZlEeCSetPXFd1ZUw" specification="entry / hierarchy=2;" name="State1" incomingTransitions="_dt2dyfZlEeCSetPXFd1ZUw _kSvT0DXvEeGVofhlERZOaA _p2mlADXvEeGVofhlERZOaA _2S3RYDXvEeGVofhlERZOaA _u_rFsDXxEeGVofhlERZOaA _qKcaADePEeGiNLaBTILRrw">
+      <vertices xsi:type="sgraph:State" xmi:id="_dt1PovZlEeCSetPXFd1ZUw" specification="exit / hierarchy=2;" name="State1" incomingTransitions="_dt2dyfZlEeCSetPXFd1ZUw _kSvT0DXvEeGVofhlERZOaA _p2mlADXvEeGVofhlERZOaA _2S3RYDXvEeGVofhlERZOaA _u_rFsDXxEeGVofhlERZOaA _qKcaADePEeGiNLaBTILRrw">
         <outgoingTransitions xmi:id="_l-UpUPiNEeCdY7qI3rL1gA" specification="event1" target="_jGVvkPiNEeCdY7qI3rL1gA"/>
         <outgoingTransitions xmi:id="_tMDeADbYEeGxmqzvYaHPrw" specification="event11" target="_Wan1cPiOEeCdY7qI3rL1gA"/>
         <outgoingTransitions xmi:id="_5P8tsDbYEeGxmqzvYaHPrw" specification="event12" target="_wBkacPiOEeCdY7qI3rL1gA"/>
@@ -21,7 +21,7 @@
           <vertices xsi:type="sgraph:State" xmi:id="_I7OREPiOEeCdY7qI3rL1gA" specification="entry / hierarchy *= 4&#xA;exit / hierarchy /= 4" name="State4" incomingTransitions="_PGReEPiOEeCdY7qI3rL1gA _LaX2wDbZEeGxmqzvYaHPrw">
             <outgoingTransitions xmi:id="_qKcaADePEeGiNLaBTILRrw" specification="event14" target="_dt1PovZlEeCSetPXFd1ZUw"/>
             <regions xmi:id="_TLNTIPiOEeCdY7qI3rL1gA" name="Region2">
-              <vertices xsi:type="sgraph:State" xmi:id="_VAk5UPiOEeCdY7qI3rL1gA" specification="entry / hierarchy *= 5&#xA;exit / hierarchy /= 5" name="State5" incomingTransitions="_bKalYPiOEeCdY7qI3rL1gA _eOCucPiOEeCdY7qI3rL1gA">
+              <vertices xsi:type="sgraph:State" xmi:id="_VAk5UPiOEeCdY7qI3rL1gA" specification="entry / hierarchy += 5&#xA;exit / hierarchy -= 5" name="State5" incomingTransitions="_bKalYPiOEeCdY7qI3rL1gA _eOCucPiOEeCdY7qI3rL1gA">
                 <outgoingTransitions xmi:id="_cSIbYPiOEeCdY7qI3rL1gA" specification="event3" target="_Wan1cPiOEeCdY7qI3rL1gA"/>
               </vertices>
               <vertices xsi:type="sgraph:State" xmi:id="_Wan1cPiOEeCdY7qI3rL1gA" specification="entry / hierarchy += 6&#xA;exit / hierarchy -= 6" name="State6" incomingTransitions="_cSIbYPiOEeCdY7qI3rL1gA _tMDeADbYEeGxmqzvYaHPrw">
