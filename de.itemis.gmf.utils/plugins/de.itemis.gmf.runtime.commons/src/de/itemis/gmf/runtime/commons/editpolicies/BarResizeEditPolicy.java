@@ -6,18 +6,33 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
 
 /**
- * resize edit policy for fixed width or height of 6.
+ * resize edit policy for fixed width or height.
  * 
  * @author benjamin.schwertfeger@itemis.de
  * 
  */
 public class BarResizeEditPolicy extends ResizableEditPolicyEx {
+
+	private final int thickness;
+
+	/**
+	 * Default thickness of 8.
+	 */
+	public BarResizeEditPolicy() {
+		thickness = 8;
+	}
+
+	public BarResizeEditPolicy(int thickness) {
+		this.thickness = thickness;
+	}
+
 	@Override
 	protected void showChangeBoundsFeedback(final ChangeBoundsRequest request) {
 		final IFigure feedback = getDragSourceFeedbackFigure();
@@ -37,15 +52,23 @@ public class BarResizeEditPolicy extends ResizableEditPolicyEx {
 
 	@Override
 	protected Command getResizeCommand(final ChangeBoundsRequest request) {
+		GraphicalEditPart editPart = (IGraphicalEditPart) getHost();
+		Rectangle locationAndSize = new PrecisionRectangle(editPart.getFigure()
+				.getBounds());
+		editPart.getFigure().translateToAbsolute(locationAndSize);
+
 		final Rectangle origRequestedBounds = request
-				.getTransformedRectangle(((IGraphicalEditPart) getHost())
-						.getFigure().getBounds());
+				.getTransformedRectangle(locationAndSize);
 		final Rectangle modified = origRequestedBounds.getCopy();
 		checkAndPrepareConstraint(request, modified);
-		final Dimension sizeDelta = request.getSizeDelta();
-		request.setSizeDelta(new Dimension(sizeDelta.width
-				- origRequestedBounds.width + modified.width, sizeDelta.height
-				- origRequestedBounds.height + modified.height));
+		// final Dimension sizeDelta = request.getSizeDelta();
+
+		Dimension newDelta = new Dimension(modified.width
+				- locationAndSize.width, modified.height
+				- locationAndSize.height);
+		// ((IGraphicalEditPart) getHost()).getFigure()
+		// .translateToAbsolute(newDelta);
+		request.setSizeDelta(newDelta);
 		final Point moveDelta = request.getMoveDelta();
 		request.setMoveDelta(new Point(moveDelta.x - origRequestedBounds.x
 				+ modified.x, moveDelta.y - origRequestedBounds.y + modified.y));
@@ -62,17 +85,30 @@ public class BarResizeEditPolicy extends ResizableEditPolicyEx {
 	 */
 	private void checkAndPrepareConstraint(final ChangeBoundsRequest request,
 			final Rectangle rect) {
+		GraphicalEditPart editPart = null;
+		for (Object ep : request.getEditParts()) {
+			if (editPart == null && ep instanceof GraphicalEditPart) {
+				editPart = (GraphicalEditPart) ep;
+				editPart.getFigure().translateToRelative(rect);
+			}
+		}
+
 		if (rect.width / rect.height < 1) {
 			if ((request.getResizeDirection() & PositionConstants.WEST) != 0) {
-				rect.x += rect.width - 6;
+				rect.x += rect.width - thickness;
 			}
-			rect.width = 6;
+			rect.width = thickness;
 		} else {
 			if ((request.getResizeDirection() & PositionConstants.NORTH) != 0) {
-				rect.y += rect.height - 6;
+				rect.y += rect.height - thickness;
 			}
-			rect.height = 6;
+			rect.height = thickness;
+		}
+
+		if (editPart != null) {
+			editPart.getFigure().translateToAbsolute(rect);
 		}
 		// rect.setSize(size);
 	}
+
 }
