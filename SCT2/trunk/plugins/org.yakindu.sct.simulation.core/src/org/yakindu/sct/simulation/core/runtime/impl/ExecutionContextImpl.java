@@ -36,7 +36,6 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	private List<ExecutionEvent> declaredEvents;
 	private List<ExecutionEvent> raisedEvents;
 	private ExecutionState[] activeStateConfig;
-	
 
 	public ExecutionContextImpl() {
 		variables = new ArrayList<ExecutionVariable>();
@@ -68,16 +67,18 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	}
 
 	public void raiseEvent(String eventName, Object value) {
-		ExecutionEvent event = getDeclaredEvent(eventName);
-		if (event == null)
-			throw new ExecutionException("Event with name " + eventName
-					+ "is undefined!");
-		ExecutionEvent eventCopy = event.getCopy();
-		if (value != null) {
-			eventCopy.setValue(value);
+		synchronized (raisedEvents) {
+			ExecutionEvent event = getDeclaredEvent(eventName);
+			if (event == null)
+				throw new ExecutionException("Event with name " + eventName
+						+ "is undefined!");
+			ExecutionEvent eventCopy = event.getCopy();
+			if (value != null) {
+				eventCopy.setValue(value);
+			}
+			raisedEvents.add(eventCopy);
+			notifyEventRaised(eventCopy);
 		}
-		raisedEvents.add(eventCopy);
-		notifyEventRaised(eventCopy);
 	}
 
 	private ExecutionEvent getDeclaredEvent(String eventName) {
@@ -137,15 +138,13 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		return activeStateConfig;
 	}
 
-	
 	public void initStateConfigurationVector(int size) {
-		 activeStateConfig = new ExecutionState[size];
-		 for ( int i=0 ; i<size ; i++ ) {
-			 activeStateConfig[i] = null;
-		 }
+		activeStateConfig = new ExecutionState[size];
+		for (int i = 0; i < size; i++) {
+			activeStateConfig[i] = null;
+		}
 	}
 
-	
 	public void call(String procedureId) {
 		// TODO: Implement me
 	}
@@ -153,7 +152,8 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	public Set<RegularState> getActiveLeafStates() {
 		Set<RegularState> vertices = new HashSet<RegularState>();
 		for (ExecutionState state : activeStateConfig) {
-			if (state != null) vertices.add((RegularState) state.getSourceElement());
+			if (state != null)
+				vertices.add((RegularState) state.getSourceElement());
 		}
 		return vertices;
 	}
@@ -161,12 +161,15 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	public Set<RegularState> getAllActiveStates() {
 		Set<RegularState> vertices = new HashSet<RegularState>();
 		for (ExecutionState state : activeStateConfig) {
-			if (state != null) vertices.addAll(getActiveHierachy((RegularState) state.getSourceElement()));
+			if (state != null)
+				vertices.addAll(getActiveHierachy((RegularState) state
+						.getSourceElement()));
 		}
 		return vertices;
 	}
-	
-	private Collection<? extends RegularState> getActiveHierachy(RegularState vertex) {
+
+	private Collection<? extends RegularState> getActiveHierachy(
+			RegularState vertex) {
 		List<RegularState> result = new ArrayList<RegularState>();
 		result.add(vertex);
 		EObject container = vertex.eContainer();

@@ -29,6 +29,8 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
@@ -52,6 +54,7 @@ public class DeclarationView extends AbstractDebugView implements
 		IDebugContextListener, IDebugEventSetListener {
 
 	private TreeViewer viewer;
+	private SCTDebugTarget debugTarget;
 
 	public DeclarationView() {
 		DebugUITools.getDebugContextManager().addDebugContextListener(this);
@@ -86,6 +89,7 @@ public class DeclarationView extends AbstractDebugView implements
 						viewer), new RealEditingSupport(viewer)));
 		valueColumn.setLabelProvider(new ExecutionContextLabelProvider(1));
 		viewer.setContentProvider(new ExecutionContextContentProvider());
+
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
 				Object firstElement = ((IStructuredSelection) event
@@ -107,10 +111,14 @@ public class DeclarationView extends AbstractDebugView implements
 					.getContext()).getFirstElement();
 			if (object == null)
 				return;
-			SCTDebugTarget debugTarget = (SCTDebugTarget) object
+			SCTDebugTarget newTarget = (SCTDebugTarget) object
 					.getAdapter(IDebugTarget.class);
-			if (debugTarget != null && !debugTarget.isTerminated())
-				refreshInput(debugTarget);
+
+			if (newTarget != debugTarget && newTarget != null
+					&& !newTarget.isTerminated()) {
+				refreshInput(newTarget);
+				debugTarget = newTarget;
+			}
 		}
 
 	}
@@ -133,7 +141,7 @@ public class DeclarationView extends AbstractDebugView implements
 		}
 	}
 
-	private void refreshInput(SCTDebugTarget debugTarget) {
+	private void refreshInput(final SCTDebugTarget debugTarget) {
 		IExecutionFacade facade = (IExecutionFacade) debugTarget
 				.getAdapter(IExecutionFacade.class);
 		viewer.setInput(facade.getExecutionContext());
@@ -144,9 +152,9 @@ public class DeclarationView extends AbstractDebugView implements
 	@Override
 	protected void createActions() {
 		IAction collapse = new CollapseAllAction(viewer);
-		setAction("CollapseAll", collapse); 
+		setAction("CollapseAll", collapse);
 		IAction expand = new ExpandAllAction(viewer);
-		setAction("ExpandAll", expand); 
+		setAction("ExpandAll", expand);
 		IAction hideTimeEvent = new HideTimeEventsAction(true);
 		setAction("HideTimeEvent", hideTimeEvent);
 	}
@@ -163,9 +171,9 @@ public class DeclarationView extends AbstractDebugView implements
 
 	@Override
 	protected void configureToolBar(IToolBarManager tbm) {
-		tbm.add(getAction("CollapseAll")); 
+		tbm.add(getAction("CollapseAll"));
 		tbm.add(getAction("ExpandAll"));
-		tbm.add(getAction("HideTimeEvent")); 
+		tbm.add(getAction("HideTimeEvent"));
 	}
 
 }
