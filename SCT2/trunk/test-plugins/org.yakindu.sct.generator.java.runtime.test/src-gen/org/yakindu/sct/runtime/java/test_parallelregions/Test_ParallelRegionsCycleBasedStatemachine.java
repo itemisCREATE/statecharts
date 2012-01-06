@@ -74,8 +74,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 	}
 
 	public void enter() {
-		defaultInterface.setVarHierarchy(2);
-
 		nextStateIndex = 0;
 		stateVector[0] = State.State1;
 
@@ -84,6 +82,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 	private void reactState1() {
 		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
 			stateVector[0] = State.$NullState$;
+
+			defaultInterface.setVarHierarchy(2);
 
 			defaultInterface
 					.setVarHierarchy(defaultInterface.getVarHierarchy() + (3));
@@ -99,6 +99,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventEvent11())) {
 				stateVector[0] = State.$NullState$;
+
+				defaultInterface.setVarHierarchy(2);
 
 				defaultInterface.setVarHierarchy(defaultInterface
 						.getVarHierarchy() + (3));
@@ -127,6 +129,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				if (occuredEvents.contains(defaultInterface.getEventEvent12())) {
 					stateVector[0] = State.$NullState$;
 
+					defaultInterface.setVarHierarchy(2);
+
 					defaultInterface.setVarHierarchy(defaultInterface
 							.getVarHierarchy() + (3));
 
@@ -143,6 +147,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 							.getEventEvent13())) {
 						stateVector[0] = State.$NullState$;
 
+						defaultInterface.setVarHierarchy(2);
+
 						defaultInterface.setVarHierarchy(defaultInterface
 								.getVarHierarchy() + (3));
 
@@ -150,7 +156,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 								.getVarHierarchy() * (4));
 
 						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() * (5));
+								.getVarHierarchy() + (5));
 
 						nextStateIndex = 0;
 						stateVector[0] = State.State5;
@@ -187,10 +193,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 					stateVector[0] = State.$NullState$;
 
 					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (5));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
+							.getVarHierarchy() - (5));
 
 					break;
 
@@ -199,9 +202,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 					defaultInterface.setVarHierarchy(defaultInterface
 							.getVarHierarchy() - (6));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
 
 					break;
 
@@ -248,8 +248,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 			defaultInterface
 					.setVarHierarchy(defaultInterface.getVarHierarchy() - (3));
 
-			defaultInterface.setVarHierarchy(2);
-
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
 
@@ -261,7 +259,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 						.getVarHierarchy() * (4));
 
 				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() * (5));
+						.getVarHierarchy() + (5));
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State5;
@@ -276,9 +274,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				if ((occuredEvents.contains(defaultInterface.getEventEvent3()) || occuredEvents
 						.contains(defaultInterface.getEventEvent9()))) {
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (3));
 
 					//Handle exit of all possible states on position 1...
 					switch (stateVector[1]) {
@@ -317,7 +312,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 						default :
 							break;
 					}
-					defaultInterface.setVarHierarchy(2);
+					defaultInterface.setVarHierarchy(defaultInterface
+							.getVarHierarchy() - (3));
 
 					nextStateIndex = 0;
 					stateVector[0] = State.State1;
@@ -343,10 +339,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 					stateVector[0] = State.$NullState$;
 
 					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (5));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
+							.getVarHierarchy() - (5));
 
 					break;
 
@@ -355,9 +348,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 					defaultInterface.setVarHierarchy(defaultInterface
 							.getVarHierarchy() - (6));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
 
 					break;
 
@@ -404,8 +394,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 			defaultInterface
 					.setVarHierarchy(defaultInterface.getVarHierarchy() - (3));
 
-			defaultInterface.setVarHierarchy(2);
-
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
 
@@ -418,7 +406,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 						stateVector[0] = State.$NullState$;
 
 						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() / (5));
+								.getVarHierarchy() - (5));
 
 						break;
 
@@ -450,9 +438,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				defaultInterface.setVarHierarchy(defaultInterface
 						.getVarHierarchy() / (4));
 
-				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() - (3));
-
 				//Handle exit of all possible states on position 2...
 				switch (stateVector[2]) {
 
@@ -473,7 +458,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 					default :
 						break;
 				}
-				defaultInterface.setVarHierarchy(2);
+				defaultInterface.setVarHierarchy(defaultInterface
+						.getVarHierarchy() - (3));
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State1;
@@ -483,7 +469,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 					stateVector[0] = State.$NullState$;
 
 					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (5));
+							.getVarHierarchy() - (5));
 
 					defaultInterface.setVarHierarchy(defaultInterface
 							.getVarHierarchy() + (6));
@@ -511,10 +497,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 					stateVector[0] = State.$NullState$;
 
 					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (5));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
+							.getVarHierarchy() - (5));
 
 					break;
 
@@ -523,9 +506,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 					defaultInterface.setVarHierarchy(defaultInterface
 							.getVarHierarchy() - (6));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
 
 					break;
 
@@ -572,8 +552,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 			defaultInterface
 					.setVarHierarchy(defaultInterface.getVarHierarchy() - (3));
 
-			defaultInterface.setVarHierarchy(2);
-
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
 
@@ -586,7 +564,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 						stateVector[0] = State.$NullState$;
 
 						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() / (5));
+								.getVarHierarchy() - (5));
 
 						break;
 
@@ -618,9 +596,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				defaultInterface.setVarHierarchy(defaultInterface
 						.getVarHierarchy() / (4));
 
-				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() - (3));
-
 				//Handle exit of all possible states on position 2...
 				switch (stateVector[2]) {
 
@@ -641,7 +616,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 					default :
 						break;
 				}
-				defaultInterface.setVarHierarchy(2);
+				defaultInterface.setVarHierarchy(defaultInterface
+						.getVarHierarchy() - (3));
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State1;
@@ -654,7 +630,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 							.getVarHierarchy() - (6));
 
 					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() * (5));
+							.getVarHierarchy() + (5));
 
 					nextStateIndex = 0;
 					stateVector[0] = State.State5;
@@ -679,10 +655,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 					stateVector[0] = State.$NullState$;
 
 					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (5));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
+							.getVarHierarchy() - (5));
 
 					break;
 
@@ -691,9 +664,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 					defaultInterface.setVarHierarchy(defaultInterface
 							.getVarHierarchy() - (6));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
 
 					break;
 
@@ -740,8 +710,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 			defaultInterface
 					.setVarHierarchy(defaultInterface.getVarHierarchy() - (3));
 
-			defaultInterface.setVarHierarchy(2);
-
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
 
@@ -754,7 +722,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 						stateVector[0] = State.$NullState$;
 
 						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() / (5));
+								.getVarHierarchy() - (5));
 
 						break;
 
@@ -786,9 +754,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				defaultInterface.setVarHierarchy(defaultInterface
 						.getVarHierarchy() / (4));
 
-				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() - (3));
-
 				//Handle exit of all possible states on position 2...
 				switch (stateVector[2]) {
 
@@ -809,7 +774,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 					default :
 						break;
 				}
-				defaultInterface.setVarHierarchy(2);
+				defaultInterface.setVarHierarchy(defaultInterface
+						.getVarHierarchy() - (3));
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State1;
@@ -828,10 +794,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 							stateVector[0] = State.$NullState$;
 
 							defaultInterface.setVarHierarchy(defaultInterface
-									.getVarHierarchy() / (5));
-
-							defaultInterface.setVarHierarchy(defaultInterface
-									.getVarHierarchy() / (4));
+									.getVarHierarchy() - (5));
 
 							break;
 
@@ -840,9 +803,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 							defaultInterface.setVarHierarchy(defaultInterface
 									.getVarHierarchy() - (6));
-
-							defaultInterface.setVarHierarchy(defaultInterface
-									.getVarHierarchy() / (4));
 
 							break;
 
@@ -856,9 +816,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 					defaultInterface.setVarHierarchy(defaultInterface
 							.getVarHierarchy() / (4));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (3));
 
 					//Handle exit of all possible states on position 2...
 					switch (stateVector[2]) {
@@ -880,7 +837,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 						default :
 							break;
 					}
-					defaultInterface.setVarHierarchy(2);
+					defaultInterface.setVarHierarchy(defaultInterface
+							.getVarHierarchy() - (3));
 
 					nextStateIndex = 0;
 					stateVector[0] = State.State1;
@@ -905,10 +863,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 					stateVector[0] = State.$NullState$;
 
 					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (5));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
+							.getVarHierarchy() - (5));
 
 					break;
 
@@ -917,9 +872,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 					defaultInterface.setVarHierarchy(defaultInterface
 							.getVarHierarchy() - (6));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
 
 					break;
 
@@ -965,8 +917,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 			}
 			defaultInterface
 					.setVarHierarchy(defaultInterface.getVarHierarchy() - (3));
-
-			defaultInterface.setVarHierarchy(2);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
@@ -997,10 +947,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 							stateVector[0] = State.$NullState$;
 
 							defaultInterface.setVarHierarchy(defaultInterface
-									.getVarHierarchy() / (5));
-
-							defaultInterface.setVarHierarchy(defaultInterface
-									.getVarHierarchy() / (4));
+									.getVarHierarchy() - (5));
 
 							break;
 
@@ -1009,9 +956,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 							defaultInterface.setVarHierarchy(defaultInterface
 									.getVarHierarchy() - (6));
-
-							defaultInterface.setVarHierarchy(defaultInterface
-									.getVarHierarchy() / (4));
 
 							break;
 
@@ -1042,8 +986,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 					defaultInterface.setVarHierarchy(defaultInterface
 							.getVarHierarchy() - (3));
 
-					defaultInterface.setVarHierarchy(2);
-
 					nextStateIndex = 0;
 					stateVector[0] = State.State1;
 
@@ -1066,10 +1008,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 					stateVector[0] = State.$NullState$;
 
 					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (5));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
+							.getVarHierarchy() - (5));
 
 					break;
 
@@ -1078,9 +1017,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 					defaultInterface.setVarHierarchy(defaultInterface
 							.getVarHierarchy() - (6));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
 
 					break;
 
@@ -1126,8 +1062,6 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 			}
 			defaultInterface
 					.setVarHierarchy(defaultInterface.getVarHierarchy() - (3));
-
-			defaultInterface.setVarHierarchy(2);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
