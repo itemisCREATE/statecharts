@@ -17,12 +17,67 @@
 /*@DTestSuite: LocalActions Statechart Test (Test_LocalActions.sct) */
 
 #define MAXEVENTSPERTYPE 4
-const char* stateName[6] = {"State1", "State2", "State3", "State4", "State5", "State6"};
+const char* stateName[3] = {"State1", "State2", "noState"};
+const int EnumTostateStr[3] = { _State1, _State2, last_state };
+
+const char* getStateString(uint32_t index)
+{
+	int i;
+	for (i=0; i<10; ++i)
+		if (EnumTostateStr[i] == index)
+			return stateName[i];
+	return stateName[last_state];
+}
+
+/* Timer Test Environment START */
+
+int myTimerSet = 0;
+uint32_t timerValue;
+boolean timerPeriodic;
+
+void setMyTimer(const uint32_t evid, const uint32_t time_ms, boolean periodic)
+{
+	myTimerSet = 1;
+	timerValue = time_ms;
+	timerPeriodic = periodic;
+	printf("myTimer: set event <%d> with time %dms\n", evid, time_ms);
+}
+
+void unsetMyTimer(const uint32_t evid)
+{
+	myTimerSet = -1;
+	timerValue = 0;
+	timerPeriodic = bool_false;
+	printf("myTimer: unset event <%d>\n", evid);
+}
+
+void myTimer_init(Timer* handle)
+{
+	timer_setFPtr(handle, &setMyTimer, &unsetMyTimer);
+}
+
+/* Timer Test Environment END */
 
 void setupStatemachine(Test_LocalActionsStatemachine* machine, Timer* dummyTimer, EventPool* eventPool)
 {
 	/* set up dummy Timer */
 	dummyTimer_init(dummyTimer);
+
+	/* Set up Event Pool */
+	test_LocalActions_eventPool_init_heap(eventPool, MAXEVENTSPERTYPE);
+
+	/* initialize state machine */
+	test_LocalActionsStatemachine_init(machine, dummyTimer, eventPool);
+
+	/* call all necessary enter functions */
+	test_LocalActionsStatemachine_enter(machine);
+
+}
+
+void setupStatemachineMyTimer(Test_LocalActionsStatemachine* machine, Timer* dummyTimer, EventPool* eventPool)
+{
+	/* set up dummy Timer */
+	myTimer_init(dummyTimer);
 
 	/* Set up Event Pool */
 	test_LocalActions_eventPool_init_heap(eventPool, MAXEVENTSPERTYPE);
@@ -51,16 +106,8 @@ void teardownStatemachine(Test_LocalActionsStatemachine* machine, Timer* dummyTi
 
 }
 
-/*@Test: test_default_var1 test behavior of var1 in default interface */
-int test_initialization()
-{
-
-	return 0;
-}
-
-
-/*@Test: test_state9_state10_transition test behavior of var1 in default and other interface */
-int dummy1()
+/*@Test: localActions_check_initial_entry test whether the entry action is called within initialization */
+int localActions_check_initial_entry()
 {
 	Test_LocalActionsStatemachine machine;
 	Timer dummyTimer;
@@ -68,6 +115,9 @@ int dummy1()
 
 	/*@Desc: setup initial statemachine */
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
+
+	/*@Desc: check whether entry works on initialisation*/
+	assert(test_LocalActions_if_get_i(test_LocalActionsStatemachine_get_interface(&machine)) == 1);
 
 	/*@Desc: teardown statemachine */
 	teardownStatemachine(&machine, &dummyTimer, &eventPool);
@@ -75,8 +125,8 @@ int dummy1()
 	return 0;
 }
 
-/*@Test: test_default_var1 test behavior of var1 in default and other interface */
-int dummy2()
+/*@Test: localActions_check_transition_entry test whether the entry action is called after the Event1 transition*/
+int localActions_check_transition_entry()
 {
 	Test_LocalActionsStatemachine machine;
 	Timer dummyTimer;
@@ -85,11 +135,14 @@ int dummy2()
 	/*@Desc: setup initial statemachine */
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
-	/*@Desc: run an explicit cycle - without any waiting event (for initialization) */
+	/*@Desc: raise event1 on default Interface */
+	test_LocalActions_if_raise_Event1(test_LocalActionsStatemachine_get_interface(&machine));
+
+	/*@Desc: run an explicit cycle */
 	test_LocalActionsStatemachine_runCycle(&machine);
 
-	/*@Desc:  */
-
+	/*@Desc: check whether entry works on initialisation*/
+	assert(test_LocalActions_if_get_j(test_LocalActionsStatemachine_get_interface(&machine)) == 1);
 
 	/*@Desc: teardown statemachine */
 	teardownStatemachine(&machine, &dummyTimer, &eventPool);
@@ -97,10 +150,39 @@ int dummy2()
 	return 0;
 }
 
+/*@Test: localActions_check_transition_exit test whether exit action in state 1 and 2 is called after the transitions */
+int localActions_check_transition_exit()
+{
+	Test_LocalActionsStatemachine machine;
+	Timer dummyTimer;
+	EventPool eventPool;
 
+	/*@Desc: setup initial statemachine */
+	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
+	/*@Desc: raise event1 on default Interface */
+	test_LocalActions_if_raise_Event1(test_LocalActionsStatemachine_get_interface(&machine));
 
+	/*@Desc: run an explicit cycle */
+	test_LocalActionsStatemachine_runCycle(&machine);
 
+	/*@Desc: check whether entry works on initialisation*/
+	assert(test_LocalActions_if_get_i(test_LocalActionsStatemachine_get_interface(&machine)) == 0);
+
+	/*@Desc: raise event1 on default Interface */
+	test_LocalActions_if_raise_Event3(test_LocalActionsStatemachine_get_interface(&machine));
+
+	/*@Desc: run an explicit cycle */
+	test_LocalActionsStatemachine_runCycle(&machine);
+
+	/*@Desc: check whether entry works on initialisation*/
+	assert(test_LocalActions_if_get_j(test_LocalActionsStatemachine_get_interface(&machine)) == 0);
+
+	/*@Desc: teardown statemachine */
+	teardownStatemachine(&machine, &dummyTimer, &eventPool);
+
+	return 0;
+}
 
 int main(int argc, char** argv)
 {
@@ -109,9 +191,11 @@ int main(int argc, char** argv)
 
 	switch (atoi(argv[1])) {
 	case 1:
-		return dummy1();
+		return localActions_check_initial_entry();
 	case 2:
-		return dummy2();
+		return localActions_check_transition_entry();
+	case 3:
+		return localActions_check_transition_exit();
 	}
 
 	return -1;
