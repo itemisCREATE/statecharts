@@ -47,9 +47,8 @@ Templates for the main statechart c file.
 «DEFINE ActionCode FOR UnscheduleTimeEvent»
 «IF this.comment != null»
 /* «this.comment» */
-	(*((StatemachineBase*)«statemachineHandleName()»)->timer->unsetTimer)(«this.timeEvent.getEventEnumName()»);
 «ENDIF»
-
+	(*((StatemachineBase*)«statemachineHandleName()»)->timer->unsetTimer)(«this.timeEvent.getEventEnumName()»);
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Execution»
