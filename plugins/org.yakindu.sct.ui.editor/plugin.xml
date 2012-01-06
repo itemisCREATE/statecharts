@@ -491,7 +491,7 @@
          <propertySection
             id="property.section.domain.exit" 
             tab="property.tab.domain"
-            class="org.yakindu.sct.ui.editor.propertysheets.NamePropertySection">
+            class="org.yakindu.sct.ui.editor.propertysheets.ExitPropertySection">
             <input type="org.yakindu.sct.ui.editor.editparts.ExitEditPart"/>
          </propertySection>
             <!-- Region model section -->         
@@ -500,6 +500,13 @@
             tab="property.tab.domain"
             class="org.yakindu.sct.ui.editor.propertysheets.RegionPropertySection">
             <input type="org.yakindu.sct.ui.editor.editparts.RegionEditPart"/>
+         </propertySection>
+            <!-- Choice model section -->         
+         <propertySection
+            id="property.section.domain.choice" 
+            tab="property.tab.domain"
+            class="org.yakindu.sct.ui.editor.propertysheets.ChoicePropertySection">
+            <input type="org.yakindu.sct.ui.editor.editparts.ChoiceEditPart"/>
          </propertySection>
          
          <propertySection id="property.section.ConnectorAppearancePropertySection" 
