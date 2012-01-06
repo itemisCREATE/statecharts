@@ -120,7 +120,6 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 
 	public synchronized void fadeOut(EObject semanticElement,
 			HighlightingParameters parameters) {
-		System.out.println("FADE OUT : " + semanticElement);
 		if (!locked) {
 			throw new IllegalStateException(
 					"May only highlight if editor is locked");
@@ -152,13 +151,10 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		}
 		final IGraphicalEditPart editPart = getEditPartForSemanticElement(semanticElement);
 		if(editPart == null) {
-			System.out.println("No edit part found for: " + semanticElement);
 			return;
 		}
 		// ensure the edit part is made visible.
 		diagramWorkbenchPart.getDiagramGraphicalViewer().reveal(editPart);
-
-		System.out.println("flash: " + semanticElement);
 
 		final IFigure figure = getTargetFigure(editPart);
 				
