@@ -111,7 +111,6 @@ public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener 
 				IDynamicNotationHandler handler = _handler.get(facade);
 				handler.getHighlightingSupport().releaseEditor();
 				facade.removeTraceListener(handler);
-				System.out.println("Removing handler");
 				_handler.remove(facade);
 			}
 		}
