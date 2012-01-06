@@ -19,7 +19,7 @@ import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.stext.stext.EntryEvent
 import org.yakindu.sct.model.stext.stext.ExitEvent
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
-
+ 
 class StatechartExtensions {
 	
 	
