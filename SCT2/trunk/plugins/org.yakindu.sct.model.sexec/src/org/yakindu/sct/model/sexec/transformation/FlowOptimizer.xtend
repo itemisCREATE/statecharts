@@ -19,7 +19,7 @@ import org.yakindu.sct.model.sgraph.SGraphFactory
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.StateCase
-
+ 
 class FlowOptimizer {
 
 	@Inject extension IQualifiedNameProvider qfnProvider

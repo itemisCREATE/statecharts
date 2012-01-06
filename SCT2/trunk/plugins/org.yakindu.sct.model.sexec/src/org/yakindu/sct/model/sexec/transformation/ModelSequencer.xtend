@@ -374,7 +374,7 @@ class ModelSequencer {
 		if (t.source != null && t.source instanceof RegularState) {
 			sequence.steps.add((t.source as RegularState).create.exitSequence.newCall)	
 		}
-
+ 
 		t.exitStates().fold(sequence, [seq, state | {
 			if (state != t.source && state != topExitState) { // since we call the exit sequence of the source state we have to exclude it's exit action here
 				if (t.source.stateVector.last == state.create.stateVector.last) {

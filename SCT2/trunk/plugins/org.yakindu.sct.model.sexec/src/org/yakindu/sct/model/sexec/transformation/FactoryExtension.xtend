@@ -6,7 +6,7 @@ package org.yakindu.sct.model.sexec.transformation
  * by elements from the source statechart. 
  * 
  * @author axel terfloth
- */
+ */ 
 
 import com.google.inject.Inject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
