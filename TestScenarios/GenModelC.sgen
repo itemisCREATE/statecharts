@@ -114,7 +114,7 @@ GeneratorModel for yakindu::c {
  #
  # Contributors:
  #     committers of YAKINDU - initial API and implementation
- "
+ " 
 		}
 	}
 	statechart Test_ParallelRegions {
