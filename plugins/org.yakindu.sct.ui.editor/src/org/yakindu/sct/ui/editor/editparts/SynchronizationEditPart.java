@@ -27,8 +27,8 @@ import de.itemis.gmf.runtime.commons.editpolicies.BarResizeEditPolicy;
  */
 public class SynchronizationEditPart extends ShapeNodeEditPart {
 
-	private static final int DEFAULT_WIDTH = 6;
-	private static final int DEFAULT_HEIGHT = 24;
+	private static final int DEFAULT_WIDTH = 8;
+	private static final int DEFAULT_HEIGHT = 32;
 
 	public SynchronizationEditPart(View view) {
 		super(view);
