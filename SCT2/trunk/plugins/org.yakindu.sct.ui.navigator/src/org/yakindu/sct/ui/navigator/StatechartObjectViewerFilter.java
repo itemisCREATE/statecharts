@@ -16,8 +16,11 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
+import org.yakindu.sct.model.stext.stext.LocalReaction;
+import org.yakindu.sct.model.stext.stext.ReactionEffect;
 
 /**
  * 
@@ -42,6 +45,15 @@ public class StatechartObjectViewerFilter extends ViewerFilter {
 				return true;
 			}
 			if (modelElement instanceof Scope) {
+				return false;
+			}
+			if (modelElement instanceof LocalReaction) {
+				return false;
+			}
+			if (modelElement instanceof ReactionEffect) {
+				return false;
+			}
+			if (modelElement instanceof Expression) {
 				return false;
 			}
 		}
