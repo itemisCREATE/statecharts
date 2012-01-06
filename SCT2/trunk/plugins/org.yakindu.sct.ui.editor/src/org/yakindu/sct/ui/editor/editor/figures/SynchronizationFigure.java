@@ -14,26 +14,29 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.RoundedRectangle;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
+
 /**
  * 
  * @author andreas muelder
- *
+ * 
  */
 public class SynchronizationFigure extends RoundedRectangle {
 
-	 private IMapMode mapMode;
+	private final static int defaultSize = 8;
+
+	private IMapMode mapMode;
 
 	public SynchronizationFigure(IMapMode mapMode) {
-         this.mapMode = mapMode;
-         this.setLineWidth(1);
-         this.setForegroundColor(ColorConstants.black);
-         this.setBackgroundColor(ColorConstants.black);
-         this.setPreferredSize(new Dimension(getMapMode().DPtoLP(6),
-                 getMapMode().DPtoLP(6)));
- }
+		this.mapMode = mapMode;
+		this.setLineWidth(1);
+		this.setForegroundColor(ColorConstants.black);
+		this.setBackgroundColor(ColorConstants.black);
+		this.setPreferredSize(new Dimension(getMapMode().DPtoLP(defaultSize),
+				getMapMode().DPtoLP(defaultSize)));
+	}
 
- public IMapMode getMapMode() {
-         return mapMode;
- }
-	
+	public IMapMode getMapMode() {
+		return mapMode;
+	}
+
 }
