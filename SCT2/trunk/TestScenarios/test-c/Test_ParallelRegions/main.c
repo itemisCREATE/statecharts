@@ -591,9 +591,9 @@ int test_hierarchy_traversal_event12_event2_event8()
 	/*@Desc: run an explicit cycle */
 	test_ParallelRegionsStatemachine_runCycle(&machine);
 
-	/*@Desc: check whether hierarchy value is set correctly to 110 */
-	printf( "Hierarchy has value %d, should be 110\n", test_ParallelRegions_if_get_hierarchy(&machine.interface) );
-	assert( test_ParallelRegions_if_get_hierarchy(&machine.interface) == (((2+3)*4)*5)+10);
+	/*@Desc: check whether hierarchy value is set correctly to 35 */
+	printf( "Hierarchy has value %d, should be 35\n", test_ParallelRegions_if_get_hierarchy(&machine.interface) );
+	assert( test_ParallelRegions_if_get_hierarchy(&machine.interface) == (((2+3)*4)+5)+10);
 
 	/*@Desc: check whether reg3 is set correctly to 8 */
 	assert( test_ParallelRegions_if_get_reg3(&machine.interface) == 8);
@@ -729,7 +729,7 @@ int test_hierarchy_traversal_event13_event14()
 	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)), "State7") == 0);
 
 	/*@Desc: check whether hierarchy is set correctly to 36 */
-	assert( test_ParallelRegions_if_get_hierarchy(&machine.interface) == (((2+3)*4)*5)+10);
+	assert( test_ParallelRegions_if_get_hierarchy(&machine.interface) == (((2+3)*4)+5)+10);
 
 	/*@Desc: check whether reg3 is set correctly to 7 */
 	assert( test_ParallelRegions_if_get_reg3(&machine.interface) == 7);
@@ -753,6 +753,7 @@ int test_hierarchy_traversal_event13_event14()
 	assert( strcmp(getStateString(statemachineBase_getState((StatemachineBase*)&machine, 2)), "noState") == 0);
 
 	/*@Desc: check whether reg3 is set correctly to 2 */
+	printf ("The hierarchy value is set to %d\n",test_ParallelRegions_if_get_hierarchy(&machine.interface));
 	assert( test_ParallelRegions_if_get_hierarchy(&machine.interface) == 2);
 
 	/*@Desc: check whether reg3 is set correctly to -1 */
