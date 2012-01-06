@@ -57,7 +57,6 @@ RULE_FLOAT=7
 T__85=85
 RULE_SL_COMMENT=11
 T__84=84
-T__86=86
 RULE_ML_COMMENT=10
 T__30=30
 T__31=31
@@ -98,14 +97,14 @@ T__77=77
 'raise'=74
 '+'=34
 '\u00B5s'=48
-'active'=84
+'active'=83
 '.'=65
 '^'=79
 '>>'=33
 'else'=15
 '^='=30
 '+='=25
-'readonly'=85
+'readonly'=84
 '>>='=28
 '?'=75
 'var'=58
@@ -146,11 +145,10 @@ T__77=77
 'valueof'=82
 '!='=45
 '@@transition@@'=52
-'external'=86
+'external'=85
 '<'=40
 '['=67
 '*'=36
 'local'=16
-'raised'=83
 '&'=81
 'interface'=54
