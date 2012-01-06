@@ -89,7 +89,7 @@ class ModelSequencer {
 	
 	/* ==========================================================================
 	 * TRANSFORMATION ROOT
-	 */
+	 */ 
 
 	def ExecutionFlow transform(Statechart sc) {
 		val ef = sc.create
@@ -594,7 +594,7 @@ class ModelSequencer {
 		l.map( c | 
 			if ( c instanceof RegularState ) (c as RegularState).create as ExecutionScope
 			else if ( c instanceof Region ) (c as Region).create as ExecutionScope
-			else (c as Statechart).create as ExecutionScope
+			else if ( c instanceof Statechart ) (c as Statechart).create as ExecutionScope
 		).toList
 	}
 	
