@@ -47,7 +47,7 @@
 
 							<destination>${local.update.site}</destination>
 							<compress>true</compress>
-							<append>true</append>
+							<append>false</append>
 						</configuration>
 					</execution>
 					<execution>
