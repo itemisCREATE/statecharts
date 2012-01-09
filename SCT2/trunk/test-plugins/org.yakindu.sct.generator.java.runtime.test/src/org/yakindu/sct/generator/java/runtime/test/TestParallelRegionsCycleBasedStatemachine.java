@@ -110,6 +110,8 @@ public class TestParallelRegionsCycleBasedStatemachine {
 		assertFalse(sm.isStateActive(State.State8));
 	}
 
+	
+	
 	@Test
 	public void testEntryAndExitExecution() {
 		DefaultInterface di = sm.getDefaultInterface();
