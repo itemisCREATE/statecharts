@@ -122,8 +122,8 @@ public class InterfaceScopeItemProvider
   {
     String label = ((InterfaceScope)object).getName();
     return label == null || label.length() == 0 ?
-      getString("_UI_InterfaceScope_type") :
-      getString("_UI_InterfaceScope_type") + " " + label;
+      "Interface " :
+      "Interface" + " " + label;
   }
 
   /**

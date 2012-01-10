@@ -179,8 +179,8 @@ public class EventDefinitionItemProvider
   {
     String label = ((EventDefinition)object).getName();
     return label == null || label.length() == 0 ?
-      getString("_UI_EventDefinition_type") :
-      getString("_UI_EventDefinition_type") + " " + label;
+      "Event" :
+      "Event" + " " + label;
   }
 
   /**

@@ -91,7 +91,7 @@ public class InternalScopeItemProvider
   @Override
   public String getText(Object object)
   {
-    return getString("_UI_InternalScope_type");
+    return "Internal";
   }
 
   /**
