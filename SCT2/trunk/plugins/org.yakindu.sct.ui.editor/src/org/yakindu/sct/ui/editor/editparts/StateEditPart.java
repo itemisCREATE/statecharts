@@ -24,13 +24,10 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
-import org.eclipse.gef.Handle;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.UnexecutableCommand;
-import org.eclipse.gef.handles.AbstractHandle;
 import org.eclipse.gef.requests.GroupRequest;
-import org.eclipse.gef.tools.ResizeTracker;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CreationEditPolicy;
@@ -39,7 +36,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
-import org.eclipse.gmf.runtime.diagram.ui.tools.DragEditPartsTrackerEx;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
@@ -47,7 +43,6 @@ import org.eclipse.gmf.runtime.notation.Compartment;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
@@ -103,7 +98,20 @@ public class StateEditPart extends ShapeNodeEditPart implements
 
 	@Override
 	protected NodeFigure createNodeFigure() {
-		NodeFigure figure = new DefaultSizeNodeFigure(getDefaultSize());
+		NodeFigure figure = new DefaultSizeNodeFigure(getDefaultSize()) {
+			@Override
+			// StateFigure is drawed smaller (Blurshadow size)
+			public Rectangle getHandleBounds() {
+				Insets insets = new Insets(0, 0, StateFigure.BLUR_SHADOW_WIDTH,
+						StateFigure.BLUR_SHADOW_WIDTH);
+
+				return new Rectangle(getBounds().x + insets.left, getBounds().y
+						+ insets.top, getBounds().width
+						- (insets.right + insets.left), getBounds().height
+						- (insets.bottom + insets.top));
+			}
+
+		};
 		figure.setLayoutManager(new StackLayout());
 		figure.setMinimumSize(getDefaultSize());
 		figure.add(createPrimaryShape());
@@ -135,10 +143,10 @@ public class StateEditPart extends ShapeNodeEditPart implements
 
 		if (isCollapsed()) {
 			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-					getNonResizableEditPolicyEx());
+					new NonResizableEditPolicyEx());
 		} else {
 			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-					getResizableEditPolicyEx());
+					new ResizableEditPolicyEx());
 		}
 	}
 
@@ -180,18 +188,8 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		return GridDataFactory.fillDefaults().grab(false, false).getData();
 	}
 
-	// @Override
+	@Override
 	protected void refreshBounds() {
-		// mark all figures covered by the blur shadow extended bounds as dirty
-		// (an update is enforced at the end of this method to ensure the area
-		// gets repainted)
-		final NodeFigure nodeFigure = getNodeFigure();
-		Rectangle extendedBlurShadowBounds = nodeFigure.getBounds()
-				.getExpanded(new Insets(StateFigure.BLUR_SHADOW_WIDTH));
-		nodeFigure.translateToAbsolute(extendedBlurShadowBounds);
-		markDirtyIfIntersecting(
-				org.eclipse.draw2d.FigureUtilities.getRoot(nodeFigure),
-				extendedBlurShadowBounds);
 
 		// TODO: Calculate the 'default' size
 		int width = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE
@@ -212,31 +210,6 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		} else {
 			((GraphicalEditPart) getParent()).setLayoutConstraint(this,
 					getFigure(), new Rectangle(loc, size));
-		}
-
-	}
-
-	/**
-	 * Helper method which descends the figure tree beginning with the given
-	 * figure and marks all figures dirty, whose bounds intersect with the given
-	 * absolute bounds.
-	 * 
-	 * @param figure
-	 *            The figure whose (transitive) children will be processed
-	 * @param absoluteBounds
-	 *            The bounds used for intersection testing in absolute
-	 *            coordinates
-	 */
-	private void markDirtyIfIntersecting(IFigure figure,
-			Rectangle absoluteBounds) {
-		Rectangle translatedBounds = absoluteBounds;
-		figure.translateToRelative(translatedBounds);
-		if (figure.getBounds().intersects(translatedBounds)) {
-			figure.getUpdateManager().addDirtyRegion(figure, translatedBounds);
-		}
-		// process all children transitively
-		for (Object child : figure.getChildren()) {
-			markDirtyIfIntersecting((IFigure) child, absoluteBounds);
 		}
 	}
 
@@ -324,70 +297,6 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		return (State) super.resolveSemanticElement();
 	}
 
-	private NonResizableEditPolicyEx getNonResizableEditPolicyEx() {
-		return new NonResizableEditPolicyEx() {
-
-			protected void replaceHandleDragEditPartsTracker(Handle handle) {
-				if (handle instanceof AbstractHandle) {
-					AbstractHandle h = (AbstractHandle) handle;
-					h.setDragTracker(new DragEditPartsTrackerEx(getHost()) {
-						protected void executeCurrentCommand() {
-							super.executeCurrentCommand();
-							// ensure repaint is performed (so blur shadow
-							// covered area is repainted)
-							if (isActive()) {
-								getNodeFigure().getUpdateManager()
-										.performUpdate();
-							}
-						};
-					});
-				}
-			}
-		};
-	}
-
-	private ResizableEditPolicyEx getResizableEditPolicyEx() {
-		return new ResizableEditPolicyEx() {
-			/**
-			 * Replaces the handle's default DragEditPartsTracker with the
-			 * extended DragEditPartsTrackerEx
-			 * 
-			 * @param handle
-			 */
-			protected void replaceHandleDragEditPartsTracker(Handle handle) {
-				if (handle instanceof AbstractHandle) {
-					AbstractHandle h = (AbstractHandle) handle;
-					h.setDragTracker(new DragEditPartsTrackerEx(getHost()) {
-						protected void executeCurrentCommand() {
-							super.executeCurrentCommand();
-							// ensure repaint is performed (so blur shadow
-							// covered area is repainted)
-							if (isActive()) {
-								getNodeFigure().getUpdateManager()
-										.performUpdate();
-							}
-						};
-					});
-				}
-			}
-
-			protected ResizeTracker getResizeTracker(int direction) {
-				return new ResizeTracker((GraphicalEditPart) getHost(),
-						direction) {
-					@Override
-					protected void executeCurrentCommand() {
-						super.executeCurrentCommand();
-						// ensure repaint is performed (so blur shadow covered
-						// area is repainted)
-						if (isActive()) {
-							getNodeFigure().getUpdateManager().performUpdate();
-						}
-					}
-				};
-			}
-		};
-	}
-
 	@Override
 	protected void handleNotificationEvent(Notification notification) {
 
@@ -395,18 +304,14 @@ public class StateEditPart extends ShapeNodeEditPart implements
 
 			if (isCollapsed()) {
 				installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-						getNonResizableEditPolicyEx());
+						new NonResizableEditPolicyEx());
 
 			} else {
 
 				installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-						getResizableEditPolicyEx());
+						new ResizableEditPolicyEx());
 			}
 			refreshVisuals();
-		} else if (notification.getFeature() == SGraphPackage.Literals.NAMED_ELEMENT__NAME) {
-			// ensure repaint is performed (so blur shadow covered area is
-			// repainted) if LabelText changes state bounds
-			getNodeFigure().getUpdateManager().performUpdate();
 		}
 
 		super.handleNotificationEvent(notification);
