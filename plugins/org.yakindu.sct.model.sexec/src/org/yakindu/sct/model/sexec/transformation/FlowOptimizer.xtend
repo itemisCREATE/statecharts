@@ -23,7 +23,7 @@ import org.yakindu.sct.model.sexec.StateCase
 class FlowOptimizer {
 
 	@Inject extension IQualifiedNameProvider qfnProvider
-	@Inject extension FactoryExtension factory
+	@Inject extension SexecElementMapping factory
 	
 	boolean _inlineReactions        def inlineReactions(boolean b)      {_inlineReactions = b}
 	boolean _inlineEntryActions     def inlineEntryActions(boolean b)   {_inlineEntryActions = b}

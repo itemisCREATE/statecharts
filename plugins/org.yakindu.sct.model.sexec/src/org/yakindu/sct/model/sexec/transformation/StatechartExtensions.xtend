@@ -19,6 +19,8 @@ import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.stext.stext.EntryEvent
 import org.yakindu.sct.model.stext.stext.ExitEvent
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
+import org.yakindu.sct.model.sgraph.SGraphFactory
+import org.yakindu.sct.model.stext.stext.StextFactory
  
 class StatechartExtensions {
 	
@@ -44,7 +46,6 @@ class StatechartExtensions {
 			s.regions.fold(0, [o, r | r.maxOrthogonality + o])		
 		} else 1
 	}
-
 
 
 	//=================================================================
@@ -168,6 +169,8 @@ class StatechartExtensions {
 		"lr" + if (t.reactiveElement != null) t.reactiveElement.localReactions.indexOf(t) else ""
 	}
 	
+	
+	def stextFactory() { StextFactory::eINSTANCE }
 	
 	
 }
