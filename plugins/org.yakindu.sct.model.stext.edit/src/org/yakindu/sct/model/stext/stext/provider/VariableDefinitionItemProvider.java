@@ -203,8 +203,8 @@ public class VariableDefinitionItemProvider
   {
     String label = ((VariableDefinition)object).getName();
     return label == null || label.length() == 0 ?
-      getString("_UI_VariableDefinition_type") :
-      getString("_UI_VariableDefinition_type") + " " + label;
+      "Variable" :
+      "Variable" + " " + label;
   }
 
   /**
