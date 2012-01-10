@@ -55,10 +55,8 @@ public class StateFigure extends RoundedRectangle {
 		// Name Label
 		nameFigure = new WrappingLabel();
 		nameFigure.setAlignment(PositionConstants.CENTER);
-		this.add(
-				nameFigure,
-				GridDataFactory.fillDefaults()
-						.grab(true, false).getData());
+		this.add(nameFigure, GridDataFactory.fillDefaults().grab(true, false)
+				.getData());
 		// Text compartment
 		textCompartmentPane = new Figure();
 		textCompartmentPane.setLayoutManager(new StackLayout());
@@ -81,6 +79,13 @@ public class StateFigure extends RoundedRectangle {
 
 	public Figure getFigureCompartmentPane() {
 		return figureCompartmentPane;
+	}
+	
+	@Override
+	public void setBounds(Rectangle rect) {
+		//reduce the width and height with the blur shadow
+		super.setBounds(new Rectangle(rect.x, rect.y, rect.width
+				- BLUR_SHADOW_WIDTH, rect.height - BLUR_SHADOW_WIDTH));
 	}
 
 	// ========= drawing related methods ============================
