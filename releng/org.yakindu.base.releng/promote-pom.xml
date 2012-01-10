@@ -14,72 +14,42 @@
 
 	<properties>
 		<!-- scp settings for publishing udpdate site -->
-		<yakindu.keyFile>${env.HUDSON_HOME}/jobs/${env.JOB_NAME}/yakindu.openSSH</yakindu.keyFile>
-		<yakindu.passphrase>Yakindu-Update Site Passphrase 2009</yakindu.passphrase>
-		<update.site.scp>yus@ftp.itemis.de:/data/yakindu/${env.promotionTarget}</update.site.scp>
+		<promotionTarget>indigo/integration</promotionTarget>
+		<promotionSource>http://builds.itemis.de/urlToCIJob/lastSuccessfulBuild</promotionSource>
+		<updateSiteUrl>http://updates.yakindu.com/${promotionTarget}</updateSiteUrl>
 		<local.update.site>${project.build.directory}/local-update-site</local.update.site>
 	</properties>
 
 	<build>
 		<plugins>
 			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.7</version>
-				<executions>
-					<execution>
-						<id>download Repository</id>
-						<phase>prepare-package</phase>
-						<configuration>
-							<target name="fetch_old_repo">
-								<delete dir="${local.update.site}" />
-								<mkdir dir="${local.update.site}" />
-								<scp todir="${local.update.site}" keyfile="${yakindu.keyFile}"
-									failonerror="${scp.fail_on_error}" passphrase="${yakindu.passphrase}"
-									trust="true" file="${update.site.scp}" sftp="true" />
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>upload Repository</id>
-						<phase>install</phase>
-						<configuration>
-							<target name="push_merged_repo">
-								<scp keyfile="${yakindu.keyFile}" failonerror="${scp.fail_on_error}"
-									passphrase="${yakindu.passphrase}" trust="true" toDir="${update.site.scp}"
-									sftp="true">
-									<fileset dir="${local.update.site}" />
-								</scp>
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.ant</groupId>
-						<artifactId>ant-jsch</artifactId>
-						<version>1.7.0</version>
-					</dependency>
-					<dependency>
-						<groupId>jsch</groupId>
-						<artifactId>jsch</artifactId>
-						<version>0.1.25</version>
-					</dependency>
-					
-				</dependencies>
-			</plugin>
-
-			<plugin>
 				<groupId>org.eclipse.tycho.extras</groupId>
 				<artifactId>tycho-p2-extras-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<inherited>false</inherited>
 				<executions>
+					<execution>
+						<id>copyRemoteSite</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>mirror</goal>
+						</goals>
+						<configuration>
+							<source>
+								<!-- source repositori(es) to mirror from -->
+								<repository>
+									<url>${updateSiteUrl}</url>
+									<layout>p2</layout>
+									<!-- sypported layouts are "p2-metadata", "p2-artifacts", and "p2" 
+										(for joint repositories) -->
+								</repository>
+							</source>
+
+							<destination>${local.update.site}</destination>
+							<compress>true</compress>
+							<append>false</append>
+						</configuration>
+					</execution>
 					<execution>
 						<id>appendYakinduBase</id>
 						<phase>package</phase>
