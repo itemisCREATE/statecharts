@@ -414,7 +414,7 @@
              </entry>
          </contribution>
          <Priority
-               name="Highest">
+               name="Lowest">
          </Priority>
          <editor
                class="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
