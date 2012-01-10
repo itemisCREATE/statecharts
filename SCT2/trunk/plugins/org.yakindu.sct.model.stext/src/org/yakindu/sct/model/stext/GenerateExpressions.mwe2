@@ -1,4 +1,4 @@
-module org.yakindu.sct.statechart.Expressions
+module org.yakindu.sct.model.stext.Stext
 
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
@@ -40,6 +40,7 @@ Workflow {
 
 			// generates Java API for the generated EPackages 
 			fragment = ecore.EcoreGeneratorFragment {
+				generateEdit = true
 			}
 
 			// the serialization component

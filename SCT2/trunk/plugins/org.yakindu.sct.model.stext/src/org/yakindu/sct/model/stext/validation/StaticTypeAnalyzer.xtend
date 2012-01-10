@@ -36,7 +36,6 @@ import org.yakindu.sct.model.stext.stext.EventRaising
 import org.yakindu.sct.model.stext.stext.Assignment
 import org.yakindu.sct.model.stext.stext.RelationalOperator
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.Type
 import com.google.inject.Inject
 import org.eclipse.xtext.validation.ValidationMessageAcceptor
 import org.yakindu.sct.model.stext.stext.EventDefinition
