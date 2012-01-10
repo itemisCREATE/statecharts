@@ -26,6 +26,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
+import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 
 @SuppressWarnings("all")
@@ -323,6 +324,10 @@ public class StatechartExtensions {
     }
     String _operator_plus = StringExtensions.operator_plus("lr", _xifexpression);
     return _operator_plus;
+  }
+  
+  public StextFactory stextFactory() {
+    return StextFactory.eINSTANCE;
   }
   
   public int maxOrthogonality(final Vertex s) {

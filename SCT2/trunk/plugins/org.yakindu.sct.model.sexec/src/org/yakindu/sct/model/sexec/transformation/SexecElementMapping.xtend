@@ -41,12 +41,18 @@ import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sexec.ExecutionChoice
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sgraph.Region
+import com.google.inject.Singleton
+import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import org.yakindu.sct.model.stext.stext.TimeEventType
+ 
 
-class FactoryExtension {
+@Singleton class SexecElementMapping {
 	
-	
+	  
 	@Inject extension IQualifiedNameProvider qfnProvider
 	@Inject extension StatechartExtensions sce
+	@Inject extension SgraphExtensions sgraph
+	@Inject extension SexecExtensions sexec
 	
 
 	def ExecutionFlow create r : sexecFactory.createExecutionFlow create(Statechart statechart){
@@ -58,6 +64,10 @@ class FactoryExtension {
 	}
 	
 	def dispatch Scope create r : stextFactory.createInternalScope  create(InternalScope scope) {}
+	
+	def Scope create r : sgraph.factory.createScope timeEventScope(ExecutionFlow flow) {
+		flow.scopes.add(r);
+	}
 	
 	
 	def EventDefinition create r : EcoreUtil::copy(event) create(EventDefinition event) {}
@@ -117,7 +127,7 @@ class FactoryExtension {
 		val r = sexecFactory.createCall
 		r.step = step
 		r
-	}
+	} 
 	
 	def ScheduleTimeEvent newScheduleTimeEvent(TimeEvent te, Statement timeValue) {
 		val r = sexecFactory.createScheduleTimeEvent
@@ -125,11 +135,17 @@ class FactoryExtension {
 		r.timeValue = timeValue
 		r
 	}
-
+	 
+	
 	def UnscheduleTimeEvent newUnscheduleTimeEvent(TimeEvent te) {
 		val r = sexecFactory.createUnscheduleTimeEvent
 		r.timeEvent = te
 		r
+	}
+ 
+
+	def TimeEvent create r : sexecFactory.createTimeEvent createDerivedEvent(TimeEventSpec tes) {
+		r.periodic = (tes.type == TimeEventType::EVERY)
 	}
 
 	//--------- UTILS ---------------
