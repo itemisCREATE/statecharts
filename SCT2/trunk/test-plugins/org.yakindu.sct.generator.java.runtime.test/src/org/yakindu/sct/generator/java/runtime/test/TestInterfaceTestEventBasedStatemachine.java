@@ -13,7 +13,6 @@ package org.yakindu.sct.generator.java.runtime.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
@@ -130,7 +129,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 				.getDefaultInterface().getEventEvent2().getValue().intValue());
 
 		statemachine.getDefaultInterface().raiseEvent1();
-		sleep(2);
+		sleep(5);
 		// Test if statemachine is back in State 1
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
 				statemachine.isStateActive(State.State1));
@@ -143,7 +142,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 	public void testStatemachineRunCycle_2() {
 		statemachine.getDefaultInterface().setVarVar2(-12.6);
 		statemachine.getDefaultInterface().raiseEvent1();
-		sleep(2);
+		sleep(5);
 		// Test if statemachine is still in State 1
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
 				statemachine.isStateActive(State.State1));
@@ -170,7 +169,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 	@Test
 	public void testStatemachineRunCycle_3() {
 		statemachine.getInterfaceOther().raiseEvent3();
-		sleep(2);
+		sleep(5);
 		// Test if state is changed to State3
 		assertTrue("Statemachine isn't in State: " + State.State3.name() + ".",
 				statemachine.isStateActive(State.State3));
@@ -178,7 +177,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 		assertTrue("Event not raised: ", events[1]);
 
 		statemachine.getInterfaceOther().raiseEvent3();
-		sleep(2);
+		sleep(5);
 		// Test if statemachine is back in State 1
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
 				statemachine.isStateActive(State.State1));

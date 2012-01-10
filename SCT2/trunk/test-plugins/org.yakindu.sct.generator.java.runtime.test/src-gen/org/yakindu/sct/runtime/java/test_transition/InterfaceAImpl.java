@@ -25,6 +25,8 @@ public class InterfaceAImpl extends NotificationSender implements InterfaceA {
 			0);
 	private final Event<Events> EventEvent4 = new Event<Events>(Events.Event4,
 			0);
+	private final Event<Events> EventEvent5 = new Event<Events>(Events.Event5,
+			0);
 
 	private Test_TransitionCycleBasedStatemachine statemachine;
 
@@ -59,16 +61,24 @@ public class InterfaceAImpl extends NotificationSender implements InterfaceA {
 
 	public void raiseEvent4() {
 		statemachine.getOccuredEvents().add(EventEvent4);
-		statemachine.getOutEvents().add(EventEvent4);
-		notifyListeners(new EventNotification(EventEvent4));
 	}
 
 	public Event<Events> getEventEvent4() {
 		return EventEvent4;
 	}
 
-	public boolean isRaisedEvent4() {
-		return statemachine.getOutEvents().contains(EventEvent4);
+	public void raiseEvent5() {
+		statemachine.getOccuredEvents().add(EventEvent5);
+		statemachine.getOutEvents().add(EventEvent5);
+		notifyListeners(new EventNotification(EventEvent5));
+	}
+
+	public Event<Events> getEventEvent5() {
+		return EventEvent5;
+	}
+
+	public boolean isRaisedEvent5() {
+		return statemachine.getOutEvents().contains(EventEvent5);
 	}
 
 }

@@ -83,6 +83,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
 			stateVector[0] = State.$NullState$;
 
+			defaultInterface.setVarHierarchy(2);
+
 			defaultInterface
 					.setVarHierarchy(defaultInterface.getVarHierarchy() + (3));
 
@@ -97,6 +99,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 		} else {
 			if (occuredEvents.contains(defaultInterface.getEventEvent11())) {
 				stateVector[0] = State.$NullState$;
+
+				defaultInterface.setVarHierarchy(2);
 
 				defaultInterface.setVarHierarchy(defaultInterface
 						.getVarHierarchy() + (3));
@@ -125,6 +129,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				if (occuredEvents.contains(defaultInterface.getEventEvent12())) {
 					stateVector[0] = State.$NullState$;
 
+					defaultInterface.setVarHierarchy(2);
+
 					defaultInterface.setVarHierarchy(defaultInterface
 							.getVarHierarchy() + (3));
 
@@ -140,6 +146,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 					if (occuredEvents.contains(defaultInterface
 							.getEventEvent13())) {
 						stateVector[0] = State.$NullState$;
+
+						defaultInterface.setVarHierarchy(2);
 
 						defaultInterface.setVarHierarchy(defaultInterface
 								.getVarHierarchy() + (3));
