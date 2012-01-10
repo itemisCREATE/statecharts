@@ -17,7 +17,7 @@ Parameterized-build:
 
 Source-Code-Management:
 + SVN
-	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/releng/org.yakindu.base.releng
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/releng
 	Location: releng
  
 Build:
@@ -37,7 +37,7 @@ Build:
 Post-Build-Actions:
 + Send build artifacts over SSH
 	Name: Yakindu Update Site
-	Source files: releng/target/local-update-site/**
-	Remove prefix: releng/target/local-update-site
+	Source files: releng/org.yakindu.base.releng/target/local-update-site/**
+	Remove prefix: releng/org.yakindu.base.releng/target/local-update-site
 	Remote directory: /yakindu/${promotionTarget}
 		
