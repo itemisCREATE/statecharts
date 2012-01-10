@@ -12,3 +12,4 @@ Require-Bundle: org.junit4;bundle-version="4.8.1",
  org.yakindu.sct.model.sgen;bundle-version="1.0.0",
  org.yakindu.sct.generator.core;bundle-version="1.0.0",
  org.yakindu.sct.generator.genmodel;bundle-version="1.0.0"
+Eclipse-BundleShape: dir
