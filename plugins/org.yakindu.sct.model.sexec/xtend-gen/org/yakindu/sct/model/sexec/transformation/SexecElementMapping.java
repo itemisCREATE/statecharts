@@ -29,7 +29,9 @@ import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions;
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions;
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
+import org.yakindu.sct.model.sexec.transformation.StextExtensions;
 import org.yakindu.sct.model.sgraph.Choice;
+import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
@@ -39,11 +41,20 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.stext.stext.AlwaysEvent;
+import org.yakindu.sct.model.stext.stext.BoolLiteral;
+import org.yakindu.sct.model.stext.stext.DefaultEvent;
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
+import org.yakindu.sct.model.stext.stext.EventSpec;
+import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
+import org.yakindu.sct.model.stext.stext.OnCycleEvent;
+import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
+import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
@@ -63,13 +74,16 @@ public class SexecElementMapping {
   private SgraphExtensions sgraph;
   
   @Inject
+  private StextExtensions stext;
+  
+  @Inject
   private SexecExtensions sexec;
   
   private final HashMap<ArrayList<?>,ExecutionFlow> _createCache_create = new HashMap<ArrayList<?>,ExecutionFlow>();
   
   public ExecutionFlow create(final Statechart statechart) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(statechart);
-    ExecutionFlow r;
+    final ExecutionFlow r;
     synchronized (_createCache_create) {
       if (_createCache_create.containsKey(_cacheKey)) {
         return _createCache_create.get(_cacheKey);
@@ -88,7 +102,7 @@ public class SexecElementMapping {
   
   protected Scope _create(final InterfaceScope scope) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(scope);
-    InterfaceScope r;
+    final InterfaceScope r;
     synchronized (_createCache_create_1) {
       if (_createCache_create_1.containsKey(_cacheKey)) {
         return _createCache_create_1.get(_cacheKey);
@@ -107,7 +121,7 @@ public class SexecElementMapping {
   
   protected Scope _create(final InternalScope scope) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(scope);
-    InternalScope r;
+    final InternalScope r;
     synchronized (_createCache_create_2) {
       if (_createCache_create_2.containsKey(_cacheKey)) {
         return _createCache_create_2.get(_cacheKey);
@@ -124,7 +138,7 @@ public class SexecElementMapping {
   
   public Scope timeEventScope(final ExecutionFlow flow) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(flow);
-    Scope r;
+    final Scope r;
     synchronized (_createCache_timeEventScope) {
       if (_createCache_timeEventScope.containsKey(_cacheKey)) {
         return _createCache_timeEventScope.get(_cacheKey);
@@ -143,7 +157,7 @@ public class SexecElementMapping {
   
   public EventDefinition create(final EventDefinition event) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(event);
-    EventDefinition r;
+    final EventDefinition r;
     synchronized (_createCache_create_3) {
       if (_createCache_create_3.containsKey(_cacheKey)) {
         return _createCache_create_3.get(_cacheKey);
@@ -159,7 +173,7 @@ public class SexecElementMapping {
   
   public VariableDefinition create(final VariableDefinition v) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(v);
-    VariableDefinition r;
+    final VariableDefinition r;
     synchronized (_createCache_create_4) {
       if (_createCache_create_4.containsKey(_cacheKey)) {
         return _createCache_create_4.get(_cacheKey);
@@ -175,7 +189,7 @@ public class SexecElementMapping {
   
   public ExecutionState create(final RegularState state) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(state);
-    ExecutionState r;
+    final ExecutionState r;
     synchronized (_createCache_create_5) {
       if (_createCache_create_5.containsKey(_cacheKey)) {
         return _createCache_create_5.get(_cacheKey);
@@ -210,7 +224,7 @@ public class SexecElementMapping {
   
   public ExecutionChoice create(final Choice choice) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(choice);
-    ExecutionChoice r;
+    final ExecutionChoice r;
     synchronized (_createCache_create_6) {
       if (_createCache_create_6.containsKey(_cacheKey)) {
         return _createCache_create_6.get(_cacheKey);
@@ -249,7 +263,7 @@ public class SexecElementMapping {
   
   public ExecutionRegion create(final Region region) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(region);
-    ExecutionRegion r;
+    final ExecutionRegion r;
     synchronized (_createCache_create_7) {
       if (_createCache_create_7.containsKey(_cacheKey)) {
         return _createCache_create_7.get(_cacheKey);
@@ -274,7 +288,7 @@ public class SexecElementMapping {
   
   public Check createCheck(final ReactionTrigger tr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(tr);
-    Check r;
+    final Check r;
     synchronized (_createCache_createCheck) {
       if (_createCache_createCheck.containsKey(_cacheKey)) {
         return _createCache_createCheck.get(_cacheKey);
@@ -294,7 +308,7 @@ public class SexecElementMapping {
   
   public org.yakindu.sct.model.sexec.Reaction create(final Transition tr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(tr);
-    org.yakindu.sct.model.sexec.Reaction r;
+    final org.yakindu.sct.model.sexec.Reaction r;
     synchronized (_createCache_create_8) {
       if (_createCache_create_8.containsKey(_cacheKey)) {
         return _createCache_create_8.get(_cacheKey);
@@ -317,7 +331,7 @@ public class SexecElementMapping {
   
   public org.yakindu.sct.model.sexec.Reaction create(final LocalReaction lr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(lr);
-    org.yakindu.sct.model.sexec.Reaction r;
+    final org.yakindu.sct.model.sexec.Reaction r;
     synchronized (_createCache_create_9) {
       if (_createCache_create_9.containsKey(_cacheKey)) {
         return _createCache_create_9.get(_cacheKey);
@@ -388,7 +402,7 @@ public class SexecElementMapping {
   
   public TimeEvent createDerivedEvent(final TimeEventSpec tes) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(tes);
-    TimeEvent r;
+    final TimeEvent r;
     synchronized (_createCache_createDerivedEvent) {
       if (_createCache_createDerivedEvent.containsKey(_cacheKey)) {
         return _createCache_createDerivedEvent.get(_cacheKey);
@@ -402,6 +416,75 @@ public class SexecElementMapping {
     boolean _operator_equals = ObjectExtensions.operator_equals(_type, TimeEventType.EVERY);
     r.setPeriodic(_operator_equals);
     return r;
+  }
+  
+  protected Expression _raised(final EventSpec e) {
+    return null;
+  }
+  
+  protected Expression _raised(final RegularEventSpec e) {
+    {
+      StextFactory _factory = this.stext.factory();
+      ElementReferenceExpression _createElementReferenceExpression = _factory.createElementReferenceExpression();
+      final ElementReferenceExpression r = _createElementReferenceExpression;
+      Event _event = e.getEvent();
+      EventDefinition _create = this.create(((EventDefinition) _event));
+      r.setValue(_create);
+      return r;
+    }
+  }
+  
+  protected Expression _raised(final TimeEventSpec e) {
+    {
+      StextFactory _factory = this.stext.factory();
+      ElementReferenceExpression _createElementReferenceExpression = _factory.createElementReferenceExpression();
+      final ElementReferenceExpression r = _createElementReferenceExpression;
+      TimeEvent _createDerivedEvent = this.createDerivedEvent(e);
+      r.setValue(_createDerivedEvent);
+      return r;
+    }
+  }
+  
+  protected Expression _raised(final OnCycleEvent e) {
+    {
+      StextFactory _factory = this.stext.factory();
+      PrimitiveValueExpression _createPrimitiveValueExpression = _factory.createPrimitiveValueExpression();
+      final PrimitiveValueExpression r = _createPrimitiveValueExpression;
+      StextFactory _factory_1 = this.stext.factory();
+      BoolLiteral _createBoolLiteral = _factory_1.createBoolLiteral();
+      final BoolLiteral boolLit = _createBoolLiteral;
+      boolLit.setValue(true);
+      r.setValue(boolLit);
+      return r;
+    }
+  }
+  
+  protected Expression _raised(final AlwaysEvent e) {
+    {
+      StextFactory _factory = this.stext.factory();
+      PrimitiveValueExpression _createPrimitiveValueExpression = _factory.createPrimitiveValueExpression();
+      final PrimitiveValueExpression r = _createPrimitiveValueExpression;
+      StextFactory _factory_1 = this.stext.factory();
+      BoolLiteral _createBoolLiteral = _factory_1.createBoolLiteral();
+      final BoolLiteral boolLit = _createBoolLiteral;
+      boolLit.setValue(true);
+      r.setValue(boolLit);
+      return r;
+    }
+  }
+  
+  protected Expression _raised(final DefaultEvent e) {
+    {
+      StextFactory _factory = this.stext.factory();
+      PrimitiveValueExpression _createPrimitiveValueExpression = _factory.createPrimitiveValueExpression();
+      final PrimitiveValueExpression r = _createPrimitiveValueExpression;
+      StextFactory _factory_1 = this.stext.factory();
+      BoolLiteral _createBoolLiteral = _factory_1.createBoolLiteral();
+      final BoolLiteral boolLit = _createBoolLiteral;
+      boolLit.setValue(true);
+      r.setValue(boolLit);
+      return r;
+    }
   }
   
   public SexecFactory sexecFactory() {
@@ -420,6 +503,25 @@ public class SexecElementMapping {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         java.util.Arrays.<Object>asList(scope).toString());
+    }
+  }
+  
+  public Expression raised(final EventSpec e) {
+    if ((e instanceof AlwaysEvent)) {
+      return _raised((AlwaysEvent)e);
+    } else if ((e instanceof DefaultEvent)) {
+      return _raised((DefaultEvent)e);
+    } else if ((e instanceof OnCycleEvent)) {
+      return _raised((OnCycleEvent)e);
+    } else if ((e instanceof RegularEventSpec)) {
+      return _raised((RegularEventSpec)e);
+    } else if ((e instanceof TimeEventSpec)) {
+      return _raised((TimeEventSpec)e);
+    } else if ((e instanceof EventSpec)) {
+      return _raised((EventSpec)e);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        java.util.Arrays.<Object>asList(e).toString());
     }
   }
 }

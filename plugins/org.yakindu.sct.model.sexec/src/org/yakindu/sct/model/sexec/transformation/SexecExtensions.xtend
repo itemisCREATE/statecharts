@@ -7,6 +7,13 @@ import com.google.inject.Inject
 import org.yakindu.sct.model.sexec.ExitState
 import org.yakindu.sct.model.sexec.StateVector
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.stext.stext.Expression
+import org.yakindu.sct.model.stext.stext.OnCycleEvent
+import org.yakindu.sct.model.stext.stext.BoolLiteral
+import org.yakindu.sct.model.stext.stext.AlwaysEvent
+import org.yakindu.sct.model.stext.stext.EventSpec
+import org.yakindu.sct.model.stext.stext.RegularEventSpec
+import org.yakindu.sct.model.stext.stext.TimeEventSpec
 
 class SexecExtensions {
 	
@@ -50,6 +57,4 @@ class SexecExtensions {
 	def first(StateVector sv) {
 		sv.offset
 	}
-	
-	
 }

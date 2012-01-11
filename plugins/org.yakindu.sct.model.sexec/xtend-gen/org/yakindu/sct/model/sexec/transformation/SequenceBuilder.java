@@ -62,14 +62,14 @@ public class SequenceBuilder {
   
   public void defineStateEnterSequences(final ExecutionFlow flow, final Statechart sc) {
     EList<Region> _regions = sc.getRegions();
-    for (Region r : _regions) {
+    for (final Region r : _regions) {
       this.defineStateEnterSequence(r);
     }
   }
   
   protected void _defineStateEnterSequence(final Region r) {
     EList<Vertex> _vertices = r.getVertices();
-    for (Vertex s : _vertices) {
+    for (final Vertex s : _vertices) {
       this.defineStateEnterSequence(s);
     }
   }
@@ -99,11 +99,11 @@ public class SequenceBuilder {
       if (this._addTraceSteps) {
         EList<Step> _steps_1 = seq.getSteps();
         TraceStateEntered _newTraceStateEntered = this.trace.newTraceStateEntered(execState);
-        CollectionExtensions.<TraceStateEntered>operator_add(_steps_1, _newTraceStateEntered);
+        CollectionExtensions.<Step>operator_add(_steps_1, _newTraceStateEntered);
       }
       EList<Step> _steps_2 = seq.getSteps();
       EnterState _newEnterStateStep = this.sexec.newEnterStateStep(execState);
-      CollectionExtensions.<EnterState>operator_add(_steps_2, _newEnterStateStep);
+      CollectionExtensions.<Step>operator_add(_steps_2, _newEnterStateStep);
       execState.setEnterSequence(seq);
     }
   }
@@ -130,16 +130,16 @@ public class SequenceBuilder {
       if (this._addTraceSteps) {
         EList<Step> _steps_1 = seq.getSteps();
         TraceStateEntered _newTraceStateEntered = this.trace.newTraceStateEntered(execState);
-        CollectionExtensions.<TraceStateEntered>operator_add(_steps_1, _newTraceStateEntered);
+        CollectionExtensions.<Step>operator_add(_steps_1, _newTraceStateEntered);
       }
       boolean _isLeaf = execState.isLeaf();
       if (_isLeaf) {
         EList<Step> _steps_2 = seq.getSteps();
         EnterState _newEnterStateStep = this.sexec.newEnterStateStep(execState);
-        CollectionExtensions.<EnterState>operator_add(_steps_2, _newEnterStateStep);
+        CollectionExtensions.<Step>operator_add(_steps_2, _newEnterStateStep);
       } else {
         EList<Region> _regions = state.getRegions();
-        for (Region r : _regions) {
+        for (final Region r : _regions) {
           {
             this.defineStateEnterSequence(r);
             this.addEnterRegion(seq, r);
@@ -211,14 +211,14 @@ public class SequenceBuilder {
   
   public void defineStateExitSequences(final ExecutionFlow flow, final Statechart sc) {
     EList<Region> _regions = sc.getRegions();
-    for (Region r : _regions) {
+    for (final Region r : _regions) {
       this.defineStateExitSequence(r);
     }
   }
   
   protected void _defineStateExitSequence(final Region r) {
     EList<Vertex> _vertices = r.getVertices();
-    for (Vertex s : _vertices) {
+    for (final Vertex s : _vertices) {
       this.defineStateExitSequence(s);
     }
   }
@@ -237,11 +237,11 @@ public class SequenceBuilder {
       seq.setComment("Default exit sequence for final state.");
       EList<Step> _steps = seq.getSteps();
       ExitState _newExitStateStep = this.sexec.newExitStateStep(execState);
-      CollectionExtensions.<ExitState>operator_add(_steps, _newExitStateStep);
+      CollectionExtensions.<Step>operator_add(_steps, _newExitStateStep);
       if (this._addTraceSteps) {
         EList<Step> _steps_1 = seq.getSteps();
         TraceStateExited _newTraceStateExited = this.trace.newTraceStateExited(execState);
-        CollectionExtensions.<TraceStateExited>operator_add(_steps_1, _newTraceStateExited);
+        CollectionExtensions.<Step>operator_add(_steps_1, _newTraceStateExited);
       }
       execState.setExitSequence(seq);
     }
@@ -262,7 +262,7 @@ public class SequenceBuilder {
       if (_isLeaf) {
         EList<Step> _steps = seq.getSteps();
         ExitState _newExitStateStep = this.sexec.newExitStateStep(execState);
-        CollectionExtensions.<ExitState>operator_add(_steps, _newExitStateStep);
+        CollectionExtensions.<Step>operator_add(_steps, _newExitStateStep);
       } else {
         {
           EList<Region> _regions = state.getRegions();
@@ -288,7 +288,7 @@ public class SequenceBuilder {
           int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)_offset_1), ((Integer)_size));
           int _operator_minus = IntegerExtensions.operator_minus(((Integer)_operator_plus_1), ((Integer)1));
           Iterable<Integer> _operator_upTo = IntegerExtensions.operator_upTo(((Integer)_offset), ((Integer)_operator_minus));
-          for (Integer i : _operator_upTo) {
+          for (final Integer i : _operator_upTo) {
             {
               StateSwitch _defineExitSwitch = this.defineExitSwitch(state, leafStates, i);
               StateSwitch sSwitch = _defineExitSwitch;
@@ -309,7 +309,7 @@ public class SequenceBuilder {
       if (this._addTraceSteps) {
         EList<Step> _steps_3 = seq.getSteps();
         TraceStateExited _newTraceStateExited = this.trace.newTraceStateExited(execState);
-        CollectionExtensions.<TraceStateExited>operator_add(_steps_3, _newTraceStateExited);
+        CollectionExtensions.<Step>operator_add(_steps_3, _newTraceStateExited);
       }
       execState.setExitSequence(seq);
     }
@@ -347,7 +347,7 @@ public class SequenceBuilder {
       Iterable<RegularState> _filter = IterableExtensions.<RegularState>filter(states, _function);
       List<RegularState> _list = IterableExtensions.<RegularState>toList(_filter);
       final List<RegularState> posStates = _list;
-      for (RegularState s : posStates) {
+      for (final RegularState s : posStates) {
         {
           SexecFactory _factory_1 = this.sexec.factory();
           Sequence _createSequence = _factory_1.createSequence();
@@ -356,7 +356,7 @@ public class SequenceBuilder {
           ExecutionState _create_2 = this.mapping.create(s);
           Sequence _exitSequence = _create_2.getExitSequence();
           Call _newCall = this.mapping.newCall(_exitSequence);
-          CollectionExtensions.<Call>operator_add(_steps, _newCall);
+          CollectionExtensions.<Step>operator_add(_steps, _newCall);
           ExecutionState _create_3 = this.mapping.create(s);
           final ExecutionState es = _create_3;
           List<RegularState> _parentStates = this.sgraph.parentStates(s);
@@ -425,7 +425,7 @@ public class SequenceBuilder {
       String _operator_plus = StringExtensions.operator_plus("Default enter sequence for statechart ", _name);
       enterSequence.setComment(_operator_plus);
       EList<Region> _regions = sc.getRegions();
-      for (Region r : _regions) {
+      for (final Region r : _regions) {
         this.addEnterRegion(enterSequence, r);
       }
       flow.setEnterSequence(enterSequence);

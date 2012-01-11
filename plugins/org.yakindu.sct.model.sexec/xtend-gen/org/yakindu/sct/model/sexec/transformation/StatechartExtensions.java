@@ -246,7 +246,7 @@ public class StatechartExtensions {
           EList<EventSpec> _triggers = ((ReactionTrigger) _trigger).getTriggers();
           final Function1<EventSpec,Boolean> _function_1 = new Function1<EventSpec,Boolean>() {
               public Boolean apply(final EventSpec t) {
-                return (t instanceof org.yakindu.sct.model.stext.stext.EntryEvent);
+                return ((Boolean)(t instanceof org.yakindu.sct.model.stext.stext.EntryEvent));
               }
             };
           boolean _exists = IterableExtensions.<EventSpec>exists(_triggers, _function_1);
@@ -272,7 +272,7 @@ public class StatechartExtensions {
           EList<EventSpec> _triggers = ((ReactionTrigger) _trigger).getTriggers();
           final Function1<EventSpec,Boolean> _function_1 = new Function1<EventSpec,Boolean>() {
               public Boolean apply(final EventSpec t) {
-                return (t instanceof org.yakindu.sct.model.stext.stext.ExitEvent);
+                return ((Boolean)(t instanceof org.yakindu.sct.model.stext.stext.ExitEvent));
               }
             };
           boolean _exists = IterableExtensions.<EventSpec>exists(_triggers, _function_1);

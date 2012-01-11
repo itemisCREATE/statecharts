@@ -4,10 +4,19 @@ import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.ExecutionNode
 import org.yakindu.sct.model.sexec.ExecutionState
 import com.google.inject.Inject
+import com.google.inject.name.Named
 
 class TraceExtensions {
 	
 	@Inject extension SexecExtensions sexec
+	
+	@Inject
+	@Named("ADD_TRACES") 
+	boolean _addTraceSteps
+	
+	def isAddTraceSteps() {
+		_addTraceSteps
+	}
 	
 	def newTraceReactionFired(Reaction r) {
 		val rf = sexec.factory.createReactionFired
