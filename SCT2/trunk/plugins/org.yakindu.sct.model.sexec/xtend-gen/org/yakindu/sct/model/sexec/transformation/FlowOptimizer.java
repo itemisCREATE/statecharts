@@ -25,7 +25,7 @@ import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.Step;
-import org.yakindu.sct.model.sexec.transformation.FactoryExtension;
+import org.yakindu.sct.model.sexec.transformation.SexecElementMapping;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 
@@ -36,7 +36,7 @@ public class FlowOptimizer {
   private IQualifiedNameProvider qfnProvider;
   
   @Inject
-  private FactoryExtension factory;
+  private SexecElementMapping factory;
   
   private boolean _inlineReactions;
   
@@ -223,7 +223,7 @@ public class FlowOptimizer {
           final List<CheckRef> cRefs = _arrayList;
           EList<CheckRef> _refs = c.getRefs();
           cRefs.addAll(_refs);
-          for (CheckRef ref : cRefs) {
+          for (final CheckRef ref : cRefs) {
             {
               Check _copy = EcoreUtil.<Check>copy(c);
               final Check clone = _copy;
@@ -322,7 +322,7 @@ public class FlowOptimizer {
           final List<Call> calls = _arrayList;
           EList<Call> _caller = step.getCaller();
           calls.addAll(_caller);
-          for (Call caller : calls) {
+          for (final Call caller : calls) {
             {
               Step _stepCopy = this.stepCopy(step);
               final Step clone = _stepCopy;
