@@ -140,7 +140,6 @@ class ModelSequencer {
 		return r
 	}
 
-
 	def ExecutionChoice mapChoiceTransition(Choice choice) {
 		val _choice = choice.create
 		_choice.reactions.addAll( choice.outgoingTransitions.map(t | t.mapTransition) )
