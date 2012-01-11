@@ -14,8 +14,10 @@ import org.yakindu.sct.model.sexec.StateVector;
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping;
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions;
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
+import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Vertex;
@@ -36,7 +38,7 @@ public class StateVectorBuilder {
     {
       int offset = 0;
       EList<Region> _regions = sc.getRegions();
-      for (Region r : _regions) {
+      for (final Region r : _regions) {
         int _defineStateVectors = this.defineStateVectors(r, offset);
         int _operator_plus = IntegerExtensions.operator_plus(((Integer)offset), ((Integer)_defineStateVectors));
         offset = _operator_plus;
@@ -112,7 +114,7 @@ public class StateVectorBuilder {
       boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)0));
       if (_operator_greaterThan) {
         EList<Region> _regions_1 = s.getRegions();
-        for (Region r : _regions_1) {
+        for (final Region r : _regions_1) {
           int _operator_plus = IntegerExtensions.operator_plus(((Integer)offset), ((Integer)maxOrthogonality));
           int _defineStateVectors = this.defineStateVectors(r, _operator_plus);
           int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)maxOrthogonality), ((Integer)_defineStateVectors));
@@ -149,6 +151,23 @@ public class StateVectorBuilder {
     }
   }
   
+  protected StateVector _stateVector(final Vertex v) {
+    return null;
+  }
+  
+  protected StateVector _stateVector(final RegularState s) {
+    ExecutionState _create = this.mapping.create(s);
+    StateVector _stateVector = _create.getStateVector();
+    return _stateVector;
+  }
+  
+  protected StateVector _stateVector(final Choice choice) {
+    Region _parentRegion = choice.getParentRegion();
+    ExecutionRegion _create = this.mapping.create(_parentRegion);
+    StateVector _stateVector = _create.getStateVector();
+    return _stateVector;
+  }
+  
   public int defineStateVectors(final Vertex s, final Integer offset) {
     if ((s instanceof FinalState)
          && (offset instanceof Integer)) {
@@ -162,6 +181,19 @@ public class StateVectorBuilder {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         java.util.Arrays.<Object>asList(s, offset).toString());
+    }
+  }
+  
+  public StateVector stateVector(final Vertex choice) {
+    if ((choice instanceof Choice)) {
+      return _stateVector((Choice)choice);
+    } else if ((choice instanceof RegularState)) {
+      return _stateVector((RegularState)choice);
+    } else if ((choice instanceof Vertex)) {
+      return _stateVector((Vertex)choice);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        java.util.Arrays.<Object>asList(choice).toString());
     }
   }
 }

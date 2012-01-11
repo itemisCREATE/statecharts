@@ -7,6 +7,9 @@ import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.FinalState
 import com.google.inject.Inject
+import org.yakindu.sct.model.sexec.StateVector
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.Choice
 
 class StateVectorBuilder {
 	
@@ -78,5 +81,16 @@ class StateVectorBuilder {
 		return 1
 	}
 
+	def dispatch StateVector stateVector(Vertex v) {
+		null	
+	}
+	
+	def dispatch StateVector stateVector(RegularState s) {
+		s.create.stateVector	
+	}
+	
+	def dispatch StateVector stateVector(Choice choice) {
+		choice.parentRegion.create.stateVector	
+	}
 	
 }

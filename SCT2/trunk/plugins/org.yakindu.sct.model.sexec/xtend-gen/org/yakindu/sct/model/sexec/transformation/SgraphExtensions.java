@@ -141,9 +141,9 @@ public class SgraphExtensions {
           {
             final State s = ((State) state);
             EList<Region> _regions = s.getRegions();
-            for (Region r : _regions) {
+            for (final Region r : _regions) {
               EList<Vertex> _vertices = r.getVertices();
-              for (Vertex v : _vertices) {
+              for (final Vertex v : _vertices) {
                 if ((v instanceof org.yakindu.sct.model.sgraph.RegularState)) {
                   this.collectLeafStates(((RegularState) v), leafStates);
                 }
@@ -159,7 +159,7 @@ public class SgraphExtensions {
   public List<RegularState> collectLeafStates(final Region region, final List<RegularState> leafStates) {
     {
       EList<Vertex> _vertices = region.getVertices();
-      for (Vertex v : _vertices) {
+      for (final Vertex v : _vertices) {
         if ((v instanceof org.yakindu.sct.model.sgraph.RegularState)) {
           this.collectLeafStates(((RegularState) v), leafStates);
         }

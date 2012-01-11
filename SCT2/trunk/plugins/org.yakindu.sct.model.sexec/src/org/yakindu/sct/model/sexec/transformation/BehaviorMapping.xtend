@@ -1,5 +1,7 @@
 package org.yakindu.sct.model.sexec.transformation
 
+import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
+
 import org.yakindu.sct.model.sgraph.State
 import com.google.inject.Inject
 import org.yakindu.sct.model.sexec.Step
@@ -18,6 +20,24 @@ import org.yakindu.sct.model.sexec.Execution
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Reaction
+import org.yakindu.sct.model.sgraph.Transition
+import org.yakindu.sct.model.sexec.Check
+import org.yakindu.sct.model.sgraph.Trigger
+import org.yakindu.sct.model.stext.stext.ReactionTrigger
+import org.yakindu.sct.model.stext.stext.LocalReaction
+import java.util.List
+import org.yakindu.sct.model.stext.stext.RegularEventSpec
+import org.yakindu.sct.model.stext.stext.OnCycleEvent
+import org.yakindu.sct.model.stext.stext.AlwaysEvent
+import org.yakindu.sct.model.sgraph.RegularState
+import java.util.ArrayList
+import org.yakindu.sct.model.sexec.StateSwitch
+import org.yakindu.sct.model.sexec.ExecutionScope
+import org.yakindu.sct.model.sgraph.Region
+import org.yakindu.sct.model.sexec.ExecutionRegion
+import org.yakindu.sct.model.sgraph.Choice
  
 
 class BehaviorMapping {
@@ -26,7 +46,11 @@ class BehaviorMapping {
 	@Inject extension StextExtensions stext
 	@Inject extension SexecExtensions sexec
 	@Inject extension SexecElementMapping factory
-
+	@Inject extension SgraphExtensions sgraph
+	@Inject extension StextExtensions stext
+	@Inject extension StateVectorBuilder svBuilder
+	@Inject extension SequenceBuilder seqBuilder
+	@Inject extension TraceExtensions trace
 
 
 	def ExecutionFlow mapEntryActions(Statechart statechart, ExecutionFlow r){
@@ -154,6 +178,252 @@ class BehaviorMapping {
 		exec	
 	}
 	
+	def ExecutionFlow mapTransitions(Statechart statechart, ExecutionFlow r){
+		var content = statechart.allContentsIterable
+		val allStates = content.filter(typeof(State))
+		allStates.forEach( s | s.mapStateTransition);
+		return r
+	}
+
+
+	def ExecutionState mapStateTransition(State state) {
+		val _state = state.create
+		_state.reactions.addAll( state.outgoingTransitions.map(t | t.mapTransition))
+		return _state
+	}
+	 
+	def Reaction mapTransition(Transition t) {
+		val r = t.create 
+		if (t.trigger != null) r.check = mapToCheck(t.trigger)
+		r.effect = mapToEffect(t, r)
+		
+		return r
+	}
 	
+	def dispatch Check mapToCheck(Trigger tr) { null }
+	  
+	def dispatch Check mapToCheck(ReactionTrigger tr) {
+		val check = tr.createCheck
+		check.condition = tr.buildCondition;
+		return check
+	}
+	
+	def ExecutionFlow mapLocalReactions(Statechart statechart, ExecutionFlow r){
+		var content = statechart.allContentsIterable
+		val allStates = content.filter(typeof(State))
+		allStates.forEach( s | (s as State).mapStateLocalReactions);
+		return r
+	}
+
+	def ExecutionState mapStateLocalReactions(State state) {
+		val _state = state.create
+		
+		_state.reactions.addAll( 
+			state.localReactions
+				.filter( typeof( LocalReaction ))
+				// ignore all reaction that are just entry or exit actions
+				.filter(lr | 
+					(lr.trigger as ReactionTrigger).triggers.empty 
+					|| ! (lr.trigger as ReactionTrigger).triggers.filter( t | 
+						t instanceof RegularEventSpec 
+						|| t instanceof TimeEventSpec 
+						|| t instanceof OnCycleEvent 
+						|| t instanceof AlwaysEvent
+					).toList.empty
+				)
+				.map(t | t.mapReaction)
+		)
+		return _state
+	}
+	 
+	 
+	def Reaction mapReaction(LocalReaction lr) {
+		val r = lr.create 
+		if (lr.trigger != null) r.check = mapToCheck(lr.trigger)
+		r.effect = mapToEffect(lr)
+		return r
+	}
+	
+	def Sequence mapToEffect(LocalReaction lr) {
+		if (lr.effect != null) lr.effect.mapEffect	
+	}
+	
+	def Sequence mapToEffect(Transition t, Reaction r) {
+		val sequence = sexec.factory.createSequence 
+
+		// define exit behavior of transition
+		
+		// first process the exit behavior of orthogonal states that hase to be performed before source exit
+		val topExitState = t.exitStates.last
+		if ( topExitState != null ) {
+			val List<RegularState> leafStates = topExitState.collectLeafStates(new ArrayList<RegularState>())
+			val topVector = topExitState.stateVector
+			val sourceVector = t.source.stateVector
+		
+			val prepositions = (topVector.offset .. sourceVector.offset).take(sourceVector.offset - topVector.offset)
+			
+			for ( i: prepositions ) {
+						
+				// create a state switch for each state configuration vector position
+				var StateSwitch sSwitch = topExitState.defineExitSwitch(leafStates, i)
+				sequence.steps.add(sSwitch);
+			}
+		}
+		
+		// second process the exit path behavior from the the source state
+		if (t.source != null && t.source instanceof RegularState) {
+			sequence.steps.add((t.source as RegularState).create.exitSequence.newCall)	
+		}
+ 
+		t.exitStates().fold(sequence, [seq, state | {
+			if (state != t.source && state != topExitState) { // since we call the exit sequence of the source state we have to exclude it's exit action here
+				if (t.source.stateVector.last == state.create.stateVector.last) {
+					if ( state.create.exitAction != null) seq.steps.add(state.create.exitAction.newCall)
+					if ( trace.addTraceSteps ) seq.steps.add(state.create.newTraceStateExited())			
+				}
+			}
+			
+			seq
+		}])
+
+
+		// third process the exit behavior of orthogonal states that hase to be performed after source exit
+		if ( topExitState != null ) {
+			val List<RegularState> leafStates = topExitState.collectLeafStates(new ArrayList<RegularState>())
+			val topVector = topExitState.stateVector
+			val sourceVector = t.source.stateVector
+		
+			val postpositions = (sourceVector.last .. topVector.last).drop(1)
+			
+			for ( i: postpositions ) {
+						
+				// create a state switch for each state configuration vector position
+				var StateSwitch sSwitch = topExitState.defineExitSwitch(leafStates, i)
+				sequence.steps.add(sSwitch);
+			}
+		}
+		
+		// forth exit the top exit state
+		// TODO refactor: the algorithm shoud not depend on these special cases...
+		if ( topExitState != t.source ) {
+			if (topExitState.create.exitAction != null) sequence.steps.add(topExitState.create.exitAction.newCall)
+			if ( trace.addTraceSteps ) sequence.steps += topExitState.create.newTraceStateExited
+		}
+		
+		
+		// map transition actions
+		if (t.effect != null) sequence.steps.add(t.effect.mapEffect)	
+		if (trace.addTraceSteps) { sequence.steps += r.newTraceReactionFired() }
+		
+
+		// define entry behavior of the transition
+		
+		// first process all composite states on the path to the target state in top-down-order
+		t.entryScopes().drop(1).toList.reverse.fold(sequence, [seq, scope | {
+			if (scope instanceof ExecutionRegion) { 
+				// if we enter a region than we have to process the sibling regions
+			
+				val siblingRegions = scope.superScope.subScopes
+				
+				// process higher order sibling regions
+				for ( region : siblingRegions.take(siblingRegions.indexOf(scope)) ) {
+					seq.addEnterRegion(region)
+				}
+			} 
+			
+			if (scope instanceof ExecutionState) {
+				// perform entry on the transition path 			
+				if ((scope as ExecutionState).entryAction != null) seq.steps.add((scope as ExecutionState).entryAction.newCall)
+				if ( trace.addTraceSteps ) seq.steps.add( (scope as ExecutionState).newTraceStateEntered )
+				
+			}
+			seq
+		}])
+		
+		
+		// second process the target state entry behavior
+		if (t.target != null ) {
+
+			// in the case of orthogonal states we also have to enter sibling states.
+			val siblingRegions = t.target.parentRegion.composite.regions
+			
+			
+			// perform entry on the transition path 			
+			if ( t.target instanceof RegularState) {
+				sequence.steps.add((t.target as RegularState).create.enterSequence.newCall )	
+			} else if ( t.target instanceof Choice ) {
+				sequence.steps.add((t.target as Choice).create.reactSequence.newCall )	
+			}
+				
+		}
+		
+		
+		// third - process all entry behavior that has to be executed after the target state behavior in bottom-up-order
+		
+		t.entryScopes().drop(1).fold(sequence, [seq, scope | {
+			if (scope instanceof ExecutionRegion) { 
+				// if we enter a region than we have to process the sibling regions
+			
+				val siblingRegions = scope.superScope.subScopes
+				
+				// process lower order sibling regions 
+				for ( region : siblingRegions.drop(siblingRegions.indexOf(scope)+1) ) {
+					seq.addEnterRegion(region)
+				} 				
+			} 
+			seq
+		}])
+			
+		return sequence
+	}
+	
+	def List<ExecutionScope> entryScopes(Transition t) {
+		val l = t.target.containers
+		l.removeAll(t.source.containers)
+		l.map( c | 
+			if ( c instanceof RegularState ) (c as RegularState).create as ExecutionScope
+			else if ( c instanceof Region ) (c as Region).create as ExecutionScope
+			else if ( c instanceof Statechart ) (c as Statechart).create as ExecutionScope
+		).toList
+	}
+	
+	def Iterable<State> exitStates(Transition t) {
+		val l = t.source.containers
+		l.removeAll(t.target.containers)
+		l.filter( typeof(State) )
+	}
+	
+	def Iterable<State> entryStates(Transition t) {
+		val l = t.target.containers
+		l.removeAll(t.source.containers)
+		l.filter( typeof(State) )
+	}
+	
+	def List<ExecutionScope> exitScopes(Transition t) {
+//		val l = t.source.containers
+//		l.removeAll(t.target.containers)
+//		l.filter( typeof(State) ).toList
+		null
+	}
+	
+	def dispatch Statement buildCondition (Trigger t) { null }
+	
+	def dispatch Statement buildCondition (ReactionTrigger t) {
+		val triggerCheck = if (! t.triggers.empty) t.triggers.reverseView.fold(null as Expression,
+			[s,e | {
+				val Expression raised = e.raised()
+				
+				if (raised == null) s
+				else if (s==null) raised  
+				else raised.or(s)
+			}]
+		) else null;
+		
+		val guard = if ( t.guardExpression != null ) EcoreUtil::copy(t.guardExpression) else null;
+		
+		if ( triggerCheck != null && guard != null ) stext.and(triggerCheck, guard)
+		else if ( triggerCheck != null )  triggerCheck
+		else guard
+	}
 	
 }

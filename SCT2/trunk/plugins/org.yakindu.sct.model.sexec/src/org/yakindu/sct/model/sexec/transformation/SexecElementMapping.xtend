@@ -44,6 +44,13 @@ import org.yakindu.sct.model.sgraph.Region
 import com.google.inject.Singleton
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventType
+import org.yakindu.sct.model.stext.stext.Expression
+import org.yakindu.sct.model.stext.stext.EventSpec
+import org.yakindu.sct.model.stext.stext.RegularEventSpec
+import org.yakindu.sct.model.stext.stext.OnCycleEvent
+import org.yakindu.sct.model.stext.stext.BoolLiteral
+import org.yakindu.sct.model.stext.stext.AlwaysEvent
+import org.yakindu.sct.model.stext.stext.DefaultEvent
  
 
 @Singleton class SexecElementMapping {
@@ -52,6 +59,7 @@ import org.yakindu.sct.model.stext.stext.TimeEventType
 	@Inject extension IQualifiedNameProvider qfnProvider
 	@Inject extension StatechartExtensions sce
 	@Inject extension SgraphExtensions sgraph
+	@Inject extension StextExtensions stext
 	@Inject extension SexecExtensions sexec
 	
 
@@ -146,6 +154,45 @@ import org.yakindu.sct.model.stext.stext.TimeEventType
 
 	def TimeEvent create r : sexecFactory.createTimeEvent createDerivedEvent(TimeEventSpec tes) {
 		r.periodic = (tes.type == TimeEventType::EVERY)
+	}
+	
+	def dispatch Expression raised(EventSpec e) {
+	}
+
+	def dispatch Expression raised(RegularEventSpec e) {
+		val r = stext.factory.createElementReferenceExpression
+		r.value = (e.event as EventDefinition).create
+		return r
+	} 
+	
+	def dispatch Expression raised(TimeEventSpec e) {
+		val r = stext.factory.createElementReferenceExpression
+		r.value = e.createDerivedEvent
+		return r
+	}
+
+	def dispatch Expression raised(OnCycleEvent e) {
+		val r = stext.factory.createPrimitiveValueExpression
+		val BoolLiteral boolLit = stext.factory.createBoolLiteral
+		boolLit.value = true		
+		r.value = boolLit
+		return r
+	}
+	
+	def dispatch Expression raised(AlwaysEvent e) {
+		val r = stext.factory.createPrimitiveValueExpression
+		val BoolLiteral boolLit = stext.factory.createBoolLiteral
+		boolLit.value = true		
+		r.value = boolLit
+		return r
+	}
+
+	def dispatch Expression raised(DefaultEvent e) {
+		val r = stext.factory.createPrimitiveValueExpression
+		val BoolLiteral boolLit = stext.factory.createBoolLiteral
+		boolLit.value = true		
+		r.value = boolLit
+		return r
 	}
 
 	//--------- UTILS ---------------

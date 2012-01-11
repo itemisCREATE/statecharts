@@ -242,7 +242,7 @@ public class StructureMapping {
       final List<TimeEventSpec> timeEventSpecs = _timeEventSpecs;
       ArrayList<TimeEvent> _arrayList = new ArrayList<TimeEvent>();
       final ArrayList<TimeEvent> result = _arrayList;
-      for (TimeEventSpec tes : timeEventSpecs) {
+      for (final TimeEventSpec tes : timeEventSpecs) {
         {
           TimeEvent _createDerivedEvent = this.mapping.createDerivedEvent(tes);
           final TimeEvent timeEvent = _createDerivedEvent;

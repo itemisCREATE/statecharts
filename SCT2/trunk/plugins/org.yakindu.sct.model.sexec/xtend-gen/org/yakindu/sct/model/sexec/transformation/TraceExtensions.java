@@ -1,6 +1,7 @@
 package org.yakindu.sct.model.sexec.transformation;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.Reaction;
@@ -16,6 +17,14 @@ public class TraceExtensions {
   
   @Inject
   private SexecExtensions sexec;
+  
+  @Inject
+  @Named("ADD_TRACES")
+  private boolean _addTraceSteps;
+  
+  public boolean isAddTraceSteps() {
+    return this._addTraceSteps;
+  }
   
   public ReactionFired newTraceReactionFired(final Reaction r) {
     ReactionFired _xblockexpression = null;
