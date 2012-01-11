@@ -47,6 +47,8 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 
@@ -290,11 +292,11 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 	//FIXME: See Ticket #292 Copy&Paste should only copy selected Transitions if valid.
 	public void performPostPasteProcessing(Set pastedEObjects) {
 		for (Object object : pastedEObjects) {
-			if (object instanceof Vertex) {
-				final Vertex vertex = (Vertex) object;
+			if (object instanceof State) {
+				final State state = (State) object;
 				try {
 					new AbstractTransactionalCommand(
-							TransactionUtil.getEditingDomain(vertex),
+							TransactionUtil.getEditingDomain(state),
 							"Remove invalid connections", null) {
 
 						@Override
@@ -302,20 +304,34 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 								IProgressMonitor monitor, IAdaptable info)
 								throws ExecutionException {
 
-							List<Transition> unusedTransitions = new LinkedList<Transition>();
-
-							for (Transition transition : vertex
-									.getOutgoingTransitions()) {
-								if (transition.getTarget() == null) {
-									unusedTransitions.add(transition);
-								}
-
-							}
-							vertex.getOutgoingTransitions().removeAll(
-									unusedTransitions);
-
+							removeInvalidTransitions(state);
+							
 							return CommandResult.newOKCommandResult();
 						}
+						
+						private void removeInvalidTransitions(State state) {
+							
+							List<Transition> invalidTransitions = new LinkedList<Transition>();
+
+							for (Transition transition : state
+									.getOutgoingTransitions()) {
+								if (transition.getTarget() == null) {
+									invalidTransitions.add(transition);
+								}
+							}
+							
+							state.getOutgoingTransitions().removeAll(
+									invalidTransitions);
+						
+							for (Region region: state.getRegions()) {
+								for (Vertex vertex:region.getVertices()) {
+									if (vertex instanceof State) {
+										removeInvalidTransitions((State) vertex);
+									}
+								}
+							}
+						}
+						
 					}.execute(new NullProgressMonitor(), null);
 				} catch (ExecutionException e) {
 					e.printStackTrace();
@@ -345,14 +361,17 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 	 * @return the semantic target.
 	 */
 	static EObject getSemanticPasteTarget(View view, View container) {
-		EObject semanticObjectToCopy = view.getElement();
+		EObject copiedSemanticObject = view.getElement();
 		EObject semanticTarget = container.getElement();
+		if (copiedSemanticObject instanceof Transition) {
+			semanticTarget = copiedSemanticObject.eContainer();
+		}
 		EList<EReference> eAllReferences = semanticTarget.eClass()
 				.getEAllReferences();
 		for (EReference eReference : eAllReferences) {
 			EClass eReferenceType = eReference.getEReferenceType();
 			if (eReference.isContainment()
-					&& eReferenceType.isSuperTypeOf(semanticObjectToCopy
+					&& eReferenceType.isSuperTypeOf(copiedSemanticObject
 							.eClass())) {
 				return semanticTarget;
 			}
