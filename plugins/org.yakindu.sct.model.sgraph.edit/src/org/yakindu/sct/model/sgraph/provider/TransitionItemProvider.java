@@ -169,9 +169,13 @@ public class TransitionItemProvider extends SpecificationElementItemProvider
 	@Override
 	public String getText(Object object) {
 		Transition transition = (Transition) object;
+		
+		String specification = transition.getSpecification() != null ? " ("
+				+ transition.getSpecification() + ")" : "";
+		
 		return transition.getSource().getName() + " -> "
-				+ transition.getTarget().getName() + " ("
-				+ transition.getSpecification() + ")";
+				+ transition.getTarget().getName()
+				+ specification;
 	}
 
 	/**
