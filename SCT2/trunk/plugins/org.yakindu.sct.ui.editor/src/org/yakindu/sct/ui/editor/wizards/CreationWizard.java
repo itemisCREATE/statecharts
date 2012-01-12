@@ -113,8 +113,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 		return diagram != null;
 	}
 
-	public static boolean openDiagram(Resource diagram)
-			throws PartInitException {
+	protected boolean openDiagram(Resource diagram) throws PartInitException {
 		String path = diagram.getURI().toPlatformString(true);
 		IResource workspaceResource = ResourcesPlugin.getWorkspace().getRoot()
 				.findMember(new Path(path));
@@ -127,7 +126,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 		return false;
 	}
 
-	public static Resource createDiagram(URI diagramURI, URI modelURI,
+	protected Resource createDiagram(URI diagramURI, URI modelURI,
 			IProgressMonitor progressMonitor) {
 		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE
 				.createEditingDomain();
@@ -154,7 +153,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 
 		};
 		try {
-			command.execute(progressMonitor,null);
+			command.execute(progressMonitor, null);
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
@@ -163,7 +162,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 		return resource;
 	}
 
-	public static Map<String, String> getSaveOptions() {
+	protected Map<String, String> getSaveOptions() {
 		Map<String, String> saveOptions = new HashMap<String, String>();
 		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
 		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED,
@@ -171,7 +170,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 		return saveOptions;
 	}
 
-	public static void setCharset(IFile file) {
+	protected void setCharset(IFile file) {
 		if (file == null) {
 			return;
 		}
