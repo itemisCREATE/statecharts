@@ -1,5 +1,6 @@
 package org.yakindu.sct.model.sexec.transformation
 
+import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Region
@@ -14,10 +15,13 @@ import java.util.List
 import org.yakindu.sct.model.sgraph.RegularState
 import java.util.ArrayList
 import org.yakindu.sct.model.sexec.StateSwitch
+import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.stext.stext.AssignmentOperator
 
 class SequenceBuilder {
 	
 	@Inject extension SgraphExtensions sgraph
+	@Inject extension StextExtensions stext
 	@Inject extension SexecExtensions sexec
 	@Inject extension SexecElementMapping mapping
 	@Inject extension TraceExtensions trace
@@ -222,6 +226,12 @@ class SequenceBuilder {
 		enterSequence.name = "enter"
 		enterSequence.comment = "Default enter sequence for statechart " + sc.name
 		
+		for (VariableDefinition vd : sc.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition))) {
+			if (vd.initialValue != null) {
+				enterSequence.steps.add(vd.createInitialization)
+			}
+		}
+		
 		for ( r : sc.regions) {
 			enterSequence.addEnterRegion(r)
 			
@@ -231,7 +241,15 @@ class SequenceBuilder {
 		return enterSequence
 	}
 	
-	
+	def createInitialization(VariableDefinition vd) {
+		val execution = sexec.factory.createExecution
+		val assignment = stext.factory.createAssignment
+		assignment.varRef = vd
+		assignment.operator = AssignmentOperator::ASSIGN
+		assignment.expression = vd.initialValue.copy
+		execution.statement = assignment
+		return execution
+	}
 	
 	
 }

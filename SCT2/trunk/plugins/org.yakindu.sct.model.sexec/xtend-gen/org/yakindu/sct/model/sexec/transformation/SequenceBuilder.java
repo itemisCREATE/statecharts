@@ -6,16 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.EnterState;
+import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionState;
@@ -31,21 +34,32 @@ import org.yakindu.sct.model.sexec.TraceStateExited;
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping;
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions;
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions;
+import org.yakindu.sct.model.sexec.transformation.StextExtensions;
 import org.yakindu.sct.model.sexec.transformation.TraceExtensions;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.NamedElement;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
+import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.stext.stext.Assignment;
+import org.yakindu.sct.model.stext.stext.AssignmentOperator;
+import org.yakindu.sct.model.stext.stext.Expression;
+import org.yakindu.sct.model.stext.stext.StextFactory;
+import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 @SuppressWarnings("all")
 public class SequenceBuilder {
   
   @Inject
   private SgraphExtensions sgraph;
+  
+  @Inject
+  private StextExtensions stext;
   
   @Inject
   private SexecExtensions sexec;
@@ -424,12 +438,49 @@ public class SequenceBuilder {
       String _name = sc.getName();
       String _operator_plus = StringExtensions.operator_plus("Default enter sequence for statechart ", _name);
       enterSequence.setComment(_operator_plus);
+      EList<Scope> _scopes = sc.getScopes();
+      final Function1<Scope,EList<Variable>> _function = new Function1<Scope,EList<Variable>>() {
+          public EList<Variable> apply(final Scope s) {
+            EList<Variable> _variables = s.getVariables();
+            return _variables;
+          }
+        };
+      List<EList<Variable>> _map = ListExtensions.<Scope, EList<Variable>>map(_scopes, _function);
+      Iterable<Variable> _flatten = IterableExtensions.<Variable>flatten(_map);
+      Iterable<VariableDefinition> _filter = IterableExtensions.<VariableDefinition>filter(_flatten, org.yakindu.sct.model.stext.stext.VariableDefinition.class);
+      for (final VariableDefinition vd : _filter) {
+        Expression _initialValue = vd.getInitialValue();
+        boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_initialValue, null);
+        if (_operator_notEquals) {
+          EList<Step> _steps = enterSequence.getSteps();
+          Execution _createInitialization = this.createInitialization(vd);
+          _steps.add(_createInitialization);
+        }
+      }
       EList<Region> _regions = sc.getRegions();
       for (final Region r : _regions) {
         this.addEnterRegion(enterSequence, r);
       }
       flow.setEnterSequence(enterSequence);
       return enterSequence;
+    }
+  }
+  
+  public Execution createInitialization(final VariableDefinition vd) {
+    {
+      SexecFactory _factory = this.sexec.factory();
+      Execution _createExecution = _factory.createExecution();
+      final Execution execution = _createExecution;
+      StextFactory _factory_1 = this.stext.factory();
+      Assignment _createAssignment = _factory_1.createAssignment();
+      final Assignment assignment = _createAssignment;
+      assignment.setVarRef(vd);
+      assignment.setOperator(AssignmentOperator.ASSIGN);
+      Expression _initialValue = vd.getInitialValue();
+      Expression _copy = EcoreUtil.<Expression>copy(_initialValue);
+      assignment.setExpression(_copy);
+      execution.setStatement(assignment);
+      return execution;
     }
   }
   
