@@ -24,56 +24,57 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 
-	
-
-	/** 
+	/**
 	 * the scope name must be mapped.
 	 */
-	@Test public void testScopeName() {
+	@Test
+	public void testScopeName() {
 		InterfaceScope scope = _createInterfaceScope("abc", null);
-		assertEquals(scope.getName(), ((InterfaceScope) sequencer.map(scope)).getName());
+		assertEquals(scope.getName(),
+				((InterfaceScope) structureMapping.map(scope)).getName());
 	}
-	
-	/** 
+
+	/**
 	 * An InternalScope must be mapped to an InternalScope.
 	 */
-	@Test public void testMapEmptyInternalScope() {
+	@Test
+	public void testMapEmptyInternalScope() {
 		InternalScope scope = _createInternalScope(null);
-		Scope _scope = sequencer.map(scope);
-		
+		Scope _scope = structureMapping.map(scope);
+
 		assertTrue(_scope instanceof InternalScope);
 	}
-	
-	
+
 	@Test
 	public void testMapScope() {
 
 		InterfaceScope scope = _createInterfaceScope(null, null);
 		EventDefinition e1 = _createEventDefinition("e1", scope);
 		EventDefinition e2 = _createEventDefinition("e2", scope);
-		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
-		
-		Scope _scope = sequencer.map(scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER,
+				scope);
+
+		Scope _scope = structureMapping.map(scope);
 
 		assertTrue(_scope instanceof InterfaceScope);
 		assertEquals(3, _scope.getDeclarations().size());
-		
-		
-		for ( int i =0; i<_scope.getDeclarations().size(); i++) {			
+
+		for (int i = 0; i < _scope.getDeclarations().size(); i++) {
 			Declaration s_decl = scope.getDeclarations().get(i);
 			Declaration r_decl = _scope.getDeclarations().get(i);
-			
-			assertNotSame(s_decl, r_decl);	
-			assertEquals(s_decl.getName(), r_decl.getName());	
-			assertEquals(s_decl.getClass(), r_decl.getClass());	
+
+			assertNotSame(s_decl, r_decl);
+			assertEquals(s_decl.getName(), r_decl.getName());
+			assertEquals(s_decl.getClass(), r_decl.getClass());
 		}
 	}
-	
+
 	/**
-	 * The event refs used in the trigger condition must refer to the event declarations in the flow model 
-	 * and not the sc source model.
+	 * The event refs used in the trigger condition must refer to the event
+	 * declarations in the flow model and not the sc source model.
 	 */
-	@Test public void testTriggerEventDeclarationIntegrity() {
+	@Test
+	public void testTriggerEventDeclarationIntegrity() {
 
 		Statechart sc = _createStatechart("test");
 		InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
@@ -87,18 +88,19 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 
 		ExecutionFlow flow = sequencer.transform(sc);
 
-		EventDefinition _e1 = (EventDefinition) flow.getScopes().get(0).getDeclarations().get(0); 
+		EventDefinition _e1 = (EventDefinition) flow.getScopes().get(0)
+				.getDeclarations().get(0);
 		assertNotSame(e1, _e1);
 		assertEquals(e1.getName(), _e1.getName());
-		
+
 		assertEquals(2, flow.getStates().size());
 		assertEquals(s1.getName(), flow.getStates().get(0).getSimpleName());
-		If _if = (If) flow.getStates().get(0).getReactSequence().getSteps().get(0);
+		If _if = (If) flow.getStates().get(0).getReactSequence().getSteps()
+				.get(0);
 
-		ElementReferenceExpression _ere = (ElementReferenceExpression) _if.getCheck().getCondition();
+		ElementReferenceExpression _ere = (ElementReferenceExpression) _if
+				.getCheck().getCondition();
 		assertSame(_e1, _ere.getValue());
 	}
-
-
 
 }

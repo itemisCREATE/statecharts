@@ -6,9 +6,11 @@ import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._creat
 
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.InitializingTSC;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.OrthogonalFlatTSC;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.SimpleFlatTSC;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 
 public class ModelSequencerSCTest extends ModelSequencerTest {
 
@@ -54,6 +56,22 @@ public class ModelSequencerSCTest extends ModelSequencerTest {
 		assertCall(flow.getEnterSequence(), 1, flow.getStates().get(2)
 				.getEnterSequence());
 
+	}
+
+	/**
+	 * The enter step must contain variable initialization.
+	 */
+	@Test
+	public void testSCEnterSequence_Variables() {
+		InitializingTSC tsc = new InitializingTSC();
+
+		ExecutionFlow flow = sequencer.transform(tsc.sc);
+
+		assertNotNull(flow.getEnterSequence());
+		assertEquals(1, flow.getEnterSequence().getSteps().size());
+
+		assertAssignment(flow.getEnterSequence(), 0, "e1",
+				AssignmentOperator.ASSIGN, "true");
 	}
 
 }
