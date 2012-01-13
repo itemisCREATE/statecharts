@@ -42,7 +42,7 @@ public class TransitionExpressionEditPart extends
 
 	@Override
 	protected int getEditorStyles() {
-		return SWT.SINGLE;
+		return SWT.MULTI;
 	}
 
 }
