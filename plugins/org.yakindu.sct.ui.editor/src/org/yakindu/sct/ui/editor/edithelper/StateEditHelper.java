@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.ui.editor.edithelper;
 
-import org.eclipse.gmf.runtime.common.core.command.CompositeCommand;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
@@ -26,8 +25,6 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.commands.CreateRegionCommand;
 import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
 import org.yakindu.sct.ui.editor.editor.StatechartElementTypes;
-
-import de.itemis.gmf.runtime.commons.editpolicies.CompartmentLayoutEditPolicy.RequestParameterKeys;
 
 /**
  * 
