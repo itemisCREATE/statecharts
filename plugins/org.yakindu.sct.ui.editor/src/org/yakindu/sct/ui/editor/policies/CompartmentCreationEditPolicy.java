@@ -10,10 +10,15 @@
  */
 package org.yakindu.sct.ui.editor.policies;
 
+import java.util.List;
+
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.gef.commands.UnexecutableCommand;
+import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CreationEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
+import org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 import com.google.common.collect.ImmutableList;
@@ -40,5 +45,22 @@ public class CompartmentCreationEditPolicy extends CreationEditPolicy {
 		if (fixedSizeElements.contains(semanticHint))
 			request.setSize(new Dimension(-1, -1));
 		return super.getCreateElementAndViewCommand(request);
+	}
+	
+	@Override
+	protected Command getReparentCommand(ChangeBoundsRequest request) {
+		if (!isValidSelection(request.getEditParts())) {
+			return UnexecutableCommand.INSTANCE;
+		}
+		return super.getReparentCommand(request);
+	}
+	
+	private boolean isValidSelection(List<?> editParts) {
+		for (Object editPart:editParts) {
+			if (editPart instanceof StatechartTextEditPart) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
