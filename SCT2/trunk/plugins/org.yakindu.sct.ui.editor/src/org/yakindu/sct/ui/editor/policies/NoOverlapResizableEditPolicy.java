@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2010 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.ui.editor.policies;
 
 import java.util.List;
@@ -11,6 +21,13 @@ import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableShapeEditPolicy;
 
+/**
+ * Forbids overlapping of elements. Considers minimum size of host figure if
+ * resized.
+ * 
+ * @author m.muehlbrandt
+ * 
+ */
 public class NoOverlapResizableEditPolicy extends ResizableShapeEditPolicy {
 
 	@Override
@@ -26,9 +43,9 @@ public class NoOverlapResizableEditPolicy extends ResizableShapeEditPolicy {
 		if (!isRequestValid(request)) {
 			return UnexecutableCommand.INSTANCE;
 		}
-		
+
 		if (request instanceof ChangeBoundsRequest) {
-			adjustRequest((ChangeBoundsRequest)request);
+			adjustRequest((ChangeBoundsRequest) request);
 		}
 		return super.getResizeCommand(request);
 	}
@@ -38,7 +55,8 @@ public class NoOverlapResizableEditPolicy extends ResizableShapeEditPolicy {
 		// Overlapping of nodes is not allowed
 		final IGraphicalEditPart parent = (IGraphicalEditPart) getHost()
 				.getParent();
-		final Rectangle newBounds = request.getTransformedRectangle(getHostFigure().getBounds());
+		final Rectangle newBounds = request
+				.getTransformedRectangle(getHostFigure().getBounds());
 		final List<IGraphicalEditPart> children = parent.getChildren();
 		for (final IGraphicalEditPart child : children) {
 			if (child == getHost()) {
@@ -61,10 +79,12 @@ public class NoOverlapResizableEditPolicy extends ResizableShapeEditPolicy {
 		final Rectangle newBounds = request.getTransformedRectangle(bounds);
 		final Dimension newSizeDelta = request.getSizeDelta().getCopy();
 		if (newBounds.width < minimumSize.width) {
-			newSizeDelta.width = request.getSizeDelta().width + (minimumSize.width - newBounds.width);
+			newSizeDelta.width = request.getSizeDelta().width
+					+ (minimumSize.width - newBounds.width);
 		}
 		if (newBounds.height < minimumSize.height) {
-			newSizeDelta.height = request.getSizeDelta().height + (minimumSize.height - newBounds.height);
+			newSizeDelta.height = request.getSizeDelta().height
+					+ (minimumSize.height - newBounds.height);
 		}
 		request.setSizeDelta(newSizeDelta);
 	}
