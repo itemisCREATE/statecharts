@@ -12,6 +12,7 @@ package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
@@ -23,6 +24,7 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.DestroyRequest;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.StatechartTextFigure;
+import org.yakindu.sct.ui.editor.policies.NoOverlapResizableEditPolicy;
 
 /**
  * 
@@ -35,12 +37,13 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements
 	public StatechartTextEditPart(View view) {
 		super(view);
 	}
-
+	
 	@Override
 	protected NodeFigure createNodeFigure() {
 		final NodeFigure figure = new NodeFigure();
 		figure.setLayoutManager(new StackLayout());
 		figure.add(new StatechartTextFigure(getMapMode()));
+		figure.setMinimumSize(new Dimension(0,0));
 		return figure;
 	}
 
@@ -63,6 +66,7 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements
 		installEditPolicy(EditPolicy.COMPONENT_ROLE,
 				new RootComponentEditPolicy());
 		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NoOverlapResizableEditPolicy());
 	}
 
 	@Override

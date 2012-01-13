@@ -19,13 +19,13 @@ import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.RegionFigure;
+import org.yakindu.sct.ui.editor.policies.NoOverlapResizableEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 
 /**
@@ -55,7 +55,7 @@ public class RegionEditPart extends ShapeNodeEditPart {
 		super.createDefaultEditPolicies();
 		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-				new ResizableEditPolicyEx());
+				new NoOverlapResizableEditPolicy());
 	}
 
 	@Override
