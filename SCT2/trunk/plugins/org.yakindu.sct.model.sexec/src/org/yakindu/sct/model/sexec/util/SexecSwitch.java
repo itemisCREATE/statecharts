@@ -340,24 +340,6 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SexecPackage.TRACE_REGION_EXITED: {
-				TraceRegionExited traceRegionExited = (TraceRegionExited)theEObject;
-				T result = caseTraceRegionExited(traceRegionExited);
-				if (result == null) result = caseTrace(traceRegionExited);
-				if (result == null) result = caseStep(traceRegionExited);
-				if (result == null) result = caseNamedElement(traceRegionExited);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case SexecPackage.TRACE_REGION_ENTERED: {
-				TraceRegionEntered traceRegionEntered = (TraceRegionEntered)theEObject;
-				T result = caseTraceRegionEntered(traceRegionEntered);
-				if (result == null) result = caseTrace(traceRegionEntered);
-				if (result == null) result = caseStep(traceRegionEntered);
-				if (result == null) result = caseNamedElement(traceRegionEntered);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -764,36 +746,6 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTraceStateExited(TraceStateExited object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Trace Region Exited</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Trace Region Exited</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTraceRegionExited(TraceRegionExited object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Trace Region Entered</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Trace Region Entered</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTraceRegionEntered(TraceRegionEntered object) {
 		return null;
 	}
 

@@ -41,9 +41,18 @@ class SequenceBuilder {
 	
 
 	def dispatch void defineStateEnterSequence(Region r) {
-		
+		val execState = r.create
+		val seq = sexec.factory.createSequence
+		seq.name = "enterSequence"
+		seq.comment = "Default enter sequence for region " + r.name
+
 		// process all vertices of a region
 		for ( s : r.vertices) defineStateEnterSequence(s)
+
+		val entryState = r.entry?.target?.create
+		if (entryState != null && entryState.enterSequence != null) 
+				seq.steps.add(entryState.enterSequence.newCall);
+		execState.enterSequence = seq
 	}
 	
 
@@ -84,24 +93,19 @@ class SequenceBuilder {
 	
 			for ( r : state.regions ) {
 				defineStateEnterSequence(r)
-				
-				seq.addEnterRegion(r)
+
+				val execRegion = r.create
+				if (execRegion.enterSequence != null) {
+					seq.steps.add(execRegion.enterSequence.newCall)
+				}
 			} 
 		}
 
 		execState.enterSequence = seq
 	}
-	
-	
-	def dispatch addEnterRegion(Sequence seq, Region r) {
-		val entryState = r.entry?.target?.create
-					
-		if (entryState != null && entryState.enterSequence != null) 
-				seq.steps.add(entryState.enterSequence.newCall);
-	}
-	
+
 	// TODO: refactor - don't access source element...
-	def dispatch addEnterRegion(Sequence seq, ExecutionRegion r) {
+	def addEnterRegion(Sequence seq, ExecutionRegion r) {
 		val entryState = (r.sourceElement as Region).entry?.target?.create
 					
 		if (entryState != null && entryState.enterSequence != null) 
@@ -233,8 +237,10 @@ class SequenceBuilder {
 		}
 		
 		for ( r : sc.regions) {
-			enterSequence.addEnterRegion(r)
-			
+			val execRegion = r.create
+			if (execRegion.enterSequence != null) {
+				enterSequence.steps.add(execRegion.enterSequence.newCall)
+			}
 		} 
 		
 		flow.enterSequence = enterSequence

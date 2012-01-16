@@ -251,24 +251,6 @@ public interface SexecFactory extends EFactory {
 	TraceStateExited createTraceStateExited();
 
 	/**
-	 * Returns a new object of class '<em>Trace Region Exited</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Trace Region Exited</em>'.
-	 * @generated
-	 */
-	TraceRegionExited createTraceRegionExited();
-
-	/**
-	 * Returns a new object of class '<em>Trace Region Entered</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Trace Region Entered</em>'.
-	 * @generated
-	 */
-	TraceRegionEntered createTraceRegionEntered();
-
-	/**
 	 * Returns a new object of class '<em>Check Ref</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -1895,117 +1895,6 @@ public interface SexecPackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceRegionExitedImpl <em>Trace Region Exited</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.TraceRegionExitedImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceRegionExited()
-	 * @generated
-	 */
-	int TRACE_REGION_EXITED = 30;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACE_REGION_EXITED__NAME = TRACE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACE_REGION_EXITED__COMMENT = TRACE__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Caller</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACE_REGION_EXITED__CALLER = TRACE__CALLER;
-
-	/**
-	 * The feature id for the '<em><b>Region</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACE_REGION_EXITED__REGION = TRACE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Trace Region Exited</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACE_REGION_EXITED_FEATURE_COUNT = TRACE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceRegionEnteredImpl <em>Trace Region Entered</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sexec.impl.TraceRegionEnteredImpl
-	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceRegionEntered()
-	 * @generated
-	 */
-	int TRACE_REGION_ENTERED = 31;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACE_REGION_ENTERED__NAME = TRACE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACE_REGION_ENTERED__COMMENT = TRACE__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Caller</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACE_REGION_ENTERED__CALLER = TRACE__CALLER;
-
-	/**
-	 * The feature id for the '<em><b>Region</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACE_REGION_ENTERED__REGION = TRACE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Trace Region Entered</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACE_REGION_ENTERED_FEATURE_COUNT = TRACE_FEATURE_COUNT + 1;
-
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionFlow <em>Execution Flow</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2738,48 +2627,6 @@ public interface SexecPackage extends EPackage {
 	EReference getTraceStateExited_State();
 
 	/**
-	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.TraceRegionExited <em>Trace Region Exited</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Trace Region Exited</em>'.
-	 * @see org.yakindu.sct.model.sexec.TraceRegionExited
-	 * @generated
-	 */
-	EClass getTraceRegionExited();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.TraceRegionExited#getRegion <em>Region</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Region</em>'.
-	 * @see org.yakindu.sct.model.sexec.TraceRegionExited#getRegion()
-	 * @see #getTraceRegionExited()
-	 * @generated
-	 */
-	EReference getTraceRegionExited_Region();
-
-	/**
-	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.TraceRegionEntered <em>Trace Region Entered</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Trace Region Entered</em>'.
-	 * @see org.yakindu.sct.model.sexec.TraceRegionEntered
-	 * @generated
-	 */
-	EClass getTraceRegionEntered();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.TraceRegionEntered#getRegion <em>Region</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Region</em>'.
-	 * @see org.yakindu.sct.model.sexec.TraceRegionEntered#getRegion()
-	 * @see #getTraceRegionEntered()
-	 * @generated
-	 */
-	EReference getTraceRegionEntered_Region();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.CheckRef <em>Check Ref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3480,42 +3327,6 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRACE_STATE_EXITED__STATE = eINSTANCE.getTraceStateExited_State();
-
-		/**
-		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.TraceRegionExitedImpl <em>Trace Region Exited</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.sct.model.sexec.impl.TraceRegionExitedImpl
-		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceRegionExited()
-		 * @generated
-		 */
-		EClass TRACE_REGION_EXITED = eINSTANCE.getTraceRegionExited();
-
-		/**
-		 * The meta object literal for the '<em><b>Region</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TRACE_REGION_EXITED__REGION = eINSTANCE.getTraceRegionExited_Region();
-
-		/**
-		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.TraceRegionEnteredImpl <em>Trace Region Entered</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.sct.model.sexec.impl.TraceRegionEnteredImpl
-		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceRegionEntered()
-		 * @generated
-		 */
-		EClass TRACE_REGION_ENTERED = eINSTANCE.getTraceRegionEntered();
-
-		/**
-		 * The meta object literal for the '<em><b>Region</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TRACE_REGION_ENTERED__REGION = eINSTANCE.getTraceRegionEntered_Region();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.CheckRefImpl <em>Check Ref</em>}' class.

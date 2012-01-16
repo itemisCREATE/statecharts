@@ -649,52 +649,6 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.TraceRegionExited} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected TraceRegionExitedItemProvider traceRegionExitedItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.TraceRegionExited}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createTraceRegionExitedAdapter() {
-		if (traceRegionExitedItemProvider == null) {
-			traceRegionExitedItemProvider = new TraceRegionExitedItemProvider(this);
-		}
-
-		return traceRegionExitedItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.TraceRegionEntered} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected TraceRegionEnteredItemProvider traceRegionEnteredItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.TraceRegionEntered}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createTraceRegionEnteredAdapter() {
-		if (traceRegionEnteredItemProvider == null) {
-			traceRegionEnteredItemProvider = new TraceRegionEnteredItemProvider(this);
-		}
-
-		return traceRegionEnteredItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.CheckRef} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -890,8 +844,6 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (reactionFiredItemProvider != null) reactionFiredItemProvider.dispose();
 		if (traceStateEnteredItemProvider != null) traceStateEnteredItemProvider.dispose();
 		if (traceStateExitedItemProvider != null) traceStateExitedItemProvider.dispose();
-		if (traceRegionExitedItemProvider != null) traceRegionExitedItemProvider.dispose();
-		if (traceRegionEnteredItemProvider != null) traceRegionEnteredItemProvider.dispose();
 	}
 
 }

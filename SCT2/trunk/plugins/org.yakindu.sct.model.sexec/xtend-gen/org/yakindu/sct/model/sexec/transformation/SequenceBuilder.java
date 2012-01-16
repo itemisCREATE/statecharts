@@ -82,9 +82,40 @@ public class SequenceBuilder {
   }
   
   protected void _defineStateEnterSequence(final Region r) {
-    EList<Vertex> _vertices = r.getVertices();
-    for (final Vertex s : _vertices) {
-      this.defineStateEnterSequence(s);
+    {
+      ExecutionRegion _create = this.mapping.create(r);
+      final ExecutionRegion execState = _create;
+      SexecFactory _factory = this.sexec.factory();
+      Sequence _createSequence = _factory.createSequence();
+      final Sequence seq = _createSequence;
+      seq.setName("enterSequence");
+      String _name = r.getName();
+      String _operator_plus = StringExtensions.operator_plus("Default enter sequence for region ", _name);
+      seq.setComment(_operator_plus);
+      EList<Vertex> _vertices = r.getVertices();
+      for (final Vertex s : _vertices) {
+        this.defineStateEnterSequence(s);
+      }
+      Entry _entry = this.sgraph.entry(r);
+      State _target = this.sgraph==null?(State)null:this.sgraph.target(_entry);
+      ExecutionState _create_1 = this.mapping==null?(ExecutionState)null:this.mapping.create(_target);
+      final ExecutionState entryState = _create_1;
+      boolean _operator_and = false;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(entryState, null);
+      if (!_operator_notEquals) {
+        _operator_and = false;
+      } else {
+        Sequence _enterSequence = entryState.getEnterSequence();
+        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_enterSequence, null);
+        _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_notEquals_1);
+      }
+      if (_operator_and) {
+        EList<Step> _steps = seq.getSteps();
+        Sequence _enterSequence_1 = entryState.getEnterSequence();
+        Call _newCall = this.mapping.newCall(_enterSequence_1);
+        _steps.add(_newCall);
+      }
+      execState.setEnterSequence(seq);
     }
   }
   
@@ -156,7 +187,16 @@ public class SequenceBuilder {
         for (final Region r : _regions) {
           {
             this.defineStateEnterSequence(r);
-            this.addEnterRegion(seq, r);
+            ExecutionRegion _create_1 = this.mapping.create(r);
+            final ExecutionRegion execRegion = _create_1;
+            Sequence _enterSequence = execRegion.getEnterSequence();
+            boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_enterSequence, null);
+            if (_operator_notEquals_1) {
+              EList<Step> _steps_3 = seq.getSteps();
+              Sequence _enterSequence_1 = execRegion.getEnterSequence();
+              Call _newCall_1 = this.mapping.newCall(_enterSequence_1);
+              _steps_3.add(_newCall_1);
+            }
           }
         }
       }
@@ -164,36 +204,7 @@ public class SequenceBuilder {
     }
   }
   
-  protected Boolean _addEnterRegion(final Sequence seq, final Region r) {
-    Boolean _xblockexpression = null;
-    {
-      Entry _entry = this.sgraph.entry(r);
-      State _target = this.sgraph==null?(State)null:this.sgraph.target(_entry);
-      ExecutionState _create = this.mapping==null?(ExecutionState)null:this.mapping.create(_target);
-      final ExecutionState entryState = _create;
-      Boolean _xifexpression = null;
-      boolean _operator_and = false;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(entryState, null);
-      if (!_operator_notEquals) {
-        _operator_and = false;
-      } else {
-        Sequence _enterSequence = entryState.getEnterSequence();
-        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_enterSequence, null);
-        _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_notEquals_1);
-      }
-      if (_operator_and) {
-        EList<Step> _steps = seq.getSteps();
-        Sequence _enterSequence_1 = entryState.getEnterSequence();
-        Call _newCall = this.mapping.newCall(_enterSequence_1);
-        boolean _add = _steps.add(_newCall);
-        _xifexpression = _add;
-      }
-      _xblockexpression = (_xifexpression);
-    }
-    return _xblockexpression;
-  }
-  
-  protected Boolean _addEnterRegion(final Sequence seq, final ExecutionRegion r) {
+  public Boolean addEnterRegion(final Sequence seq, final ExecutionRegion r) {
     Boolean _xblockexpression = null;
     {
       EObject _sourceElement = r.getSourceElement();
@@ -459,7 +470,18 @@ public class SequenceBuilder {
       }
       EList<Region> _regions = sc.getRegions();
       for (final Region r : _regions) {
-        this.addEnterRegion(enterSequence, r);
+        {
+          ExecutionRegion _create = this.mapping.create(r);
+          final ExecutionRegion execRegion = _create;
+          Sequence _enterSequence = execRegion.getEnterSequence();
+          boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_enterSequence, null);
+          if (_operator_notEquals_1) {
+            EList<Step> _steps_1 = enterSequence.getSteps();
+            Sequence _enterSequence_1 = execRegion.getEnterSequence();
+            Call _newCall = this.mapping.newCall(_enterSequence_1);
+            _steps_1.add(_newCall);
+          }
+        }
       }
       flow.setEnterSequence(enterSequence);
       return enterSequence;
@@ -496,19 +518,6 @@ public class SequenceBuilder {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         java.util.Arrays.<Object>asList(state).toString());
-    }
-  }
-  
-  public Boolean addEnterRegion(final Sequence seq, final EObject r) {
-    if ((seq instanceof Sequence)
-         && (r instanceof ExecutionRegion)) {
-      return _addEnterRegion((Sequence)seq, (ExecutionRegion)r);
-    } else if ((seq instanceof Sequence)
-         && (r instanceof Region)) {
-      return _addEnterRegion((Sequence)seq, (Region)r);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(seq, r).toString());
     }
   }
   

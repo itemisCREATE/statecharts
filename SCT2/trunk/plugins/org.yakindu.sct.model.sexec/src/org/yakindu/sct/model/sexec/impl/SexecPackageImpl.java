@@ -248,20 +248,6 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass traceRegionExitedEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass traceRegionEnteredEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass checkRefEClass = null;
 
 	/**
@@ -968,42 +954,6 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTraceRegionExited() {
-		return traceRegionExitedEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTraceRegionExited_Region() {
-		return (EReference)traceRegionExitedEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTraceRegionEntered() {
-		return traceRegionEnteredEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTraceRegionEntered_Region() {
-		return (EReference)traceRegionEnteredEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getCheckRef() {
 		return checkRefEClass;
 	}
@@ -1195,12 +1145,6 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		traceStateExitedEClass = createEClass(TRACE_STATE_EXITED);
 		createEReference(traceStateExitedEClass, TRACE_STATE_EXITED__STATE);
-
-		traceRegionExitedEClass = createEClass(TRACE_REGION_EXITED);
-		createEReference(traceRegionExitedEClass, TRACE_REGION_EXITED__REGION);
-
-		traceRegionEnteredEClass = createEClass(TRACE_REGION_ENTERED);
-		createEReference(traceRegionEnteredEClass, TRACE_REGION_ENTERED__REGION);
 	}
 
 	/**
@@ -1265,8 +1209,6 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		reactionFiredEClass.getESuperTypes().add(this.getTrace());
 		traceStateEnteredEClass.getESuperTypes().add(this.getTrace());
 		traceStateExitedEClass.getESuperTypes().add(this.getTrace());
-		traceRegionExitedEClass.getESuperTypes().add(this.getTrace());
-		traceRegionEnteredEClass.getESuperTypes().add(this.getTrace());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1374,12 +1316,6 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		initEClass(traceStateExitedEClass, TraceStateExited.class, "TraceStateExited", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTraceStateExited_State(), this.getExecutionState(), null, "state", null, 0, 1, TraceStateExited.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(traceRegionExitedEClass, TraceRegionExited.class, "TraceRegionExited", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTraceRegionExited_Region(), this.getExecutionRegion(), null, "region", null, 0, 1, TraceRegionExited.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(traceRegionEnteredEClass, TraceRegionEntered.class, "TraceRegionEntered", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTraceRegionEntered_Region(), this.getExecutionRegion(), null, "region", null, 0, 1, TraceRegionEntered.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
