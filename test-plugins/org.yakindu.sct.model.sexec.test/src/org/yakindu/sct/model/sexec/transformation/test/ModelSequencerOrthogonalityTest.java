@@ -2,6 +2,7 @@ package org.yakindu.sct.model.sexec.transformation.test;
 
 import static org.junit.Assert.*;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.*;
+import static org.yakindu.sct.model.sexec.transformation.test.Assert.*;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.Call;
@@ -18,6 +19,8 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+
+import com.google.common.collect.Lists;
 
 public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 
@@ -552,6 +555,8 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 
 		ExecutionFlow flow = sequencer.transform(sc);
 
+		ExecutionState _s1 = flow.getStates().get(0);
+		assertEquals("sc.r.s1", _s1.getName());
 		ExecutionState _s2 = flow.getStates().get(1);
 		assertEquals("sc.r.s1.r2.s2", _s2.getName());
 		ExecutionState _s2b = flow.getStates().get(2);
@@ -569,27 +574,14 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 		assertTrue(_t.isTransition());
 
 		Sequence _effect = (Sequence) _t.getEffect();
-		assertEquals(4, _effect.getSteps().size());
+		assertEquals(2, _effect.getSteps().size());
 
-		Step _switch = _effect.getSteps().get(0);
-		assertStateSwitch(_switch, _s2, _s2b);
-		assertCall(assertedSequence(assertedStateCase(_switch, _s2).getStep()),
-				0, _s2.getExitSequence());
-		assertCall(
-				assertedSequence(assertedStateCase(_switch, _s2b).getStep()),
-				0, _s2b.getExitSequence());
+		assertedOrder(_effect, Lists.newArrayList(_s2b, _s3, _s4b),
+				Lists.newArrayList(new StepLeaf(_s2b.getExitSequence()),
+						new StepLeaf(_s3.getExitSequence()),
+						new StepLeaf(_s4b.getExitSequence())));
 
-		assertCall(_effect, 1, _s3.getExitSequence());
-
-		_switch = _effect.getSteps().get(2);
-		assertStateSwitch(_switch, _s4, _s4b);
-		assertCall(assertedSequence(assertedStateCase(_switch, _s4).getStep()),
-				0, _s4.getExitSequence());
-		assertCall(
-				assertedSequence(assertedStateCase(_switch, _s4b).getStep()),
-				0, _s4b.getExitSequence());
-
-		assertCall(_effect, 3, _s5.getEnterSequence());
+		assertCall(_effect, 1, _s5.getEnterSequence());
 	}
 
 	/**
@@ -688,33 +680,41 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 		assertTrue(_t.isTransition());
 
 		Sequence _effect = (Sequence) _t.getEffect();
-		assertEquals(6, _effect.getSteps().size());
+		assertEquals(2, _effect.getSteps().size());
 
-		Step _switch = _effect.getSteps().get(0);
-		assertStateSwitch(_switch, _s2);
-		assertCall(assertedSequence(assertedStateCase(_switch, _s2).getStep()),
-				0, _s2.getExitSequence());
+		assertedOrder(_effect, Lists.newArrayList(_s2, _s3a, _s3b, _s3c, _s4),
+				Lists.newArrayList(new StepLeaf(_s2.getExitSequence()),
+						new StepLeaf(_s3a.getExitSequence()),
+						new StepLeaf(_s3b.getExitSequence()),
+						new StepLeaf(_s3c.getExitSequence()),
+						new StepLeaf(_s4.getExitSequence())));
+		// Step _switch = _effect.getSteps().get(0);
+		// assertStateSwitch(_switch, _s2);
+		// assertCall(assertedSequence(assertedStateCase(_switch,
+		// _s2).getStep()),
+		// 0, _s2.getExitSequence());
+		//
+		// _switch = _effect.getSteps().get(1);
+		// assertStateSwitch(_switch, _s3a);
+		// assertCall(
+		// assertedSequence(assertedStateCase(_switch, _s3a).getStep()),
+		// 0, _s3a.getExitSequence());
+		//
+		// assertCall(_effect, 2, _s3b.getExitSequence());
+		//
+		// _switch = _effect.getSteps().get(3);
+		// assertStateSwitch(_switch, _s3c);
+		// assertCall(
+		// assertedSequence(assertedStateCase(_switch, _s3c).getStep()),
+		// 0, _s3c.getExitSequence());
+		//
+		// _switch = _effect.getSteps().get(4);
+		// assertStateSwitch(_switch, _s4);
+		// assertCall(assertedSequence(assertedStateCase(_switch,
+		// _s4).getStep()),
+		// 0, _s4.getExitSequence());
 
-		_switch = _effect.getSteps().get(1);
-		assertStateSwitch(_switch, _s3a);
-		assertCall(
-				assertedSequence(assertedStateCase(_switch, _s3a).getStep()),
-				0, _s3a.getExitSequence());
-
-		assertCall(_effect, 2, _s3b.getExitSequence());
-
-		_switch = _effect.getSteps().get(3);
-		assertStateSwitch(_switch, _s3c);
-		assertCall(
-				assertedSequence(assertedStateCase(_switch, _s3c).getStep()),
-				0, _s3c.getExitSequence());
-
-		_switch = _effect.getSteps().get(4);
-		assertStateSwitch(_switch, _s4);
-		assertCall(assertedSequence(assertedStateCase(_switch, _s4).getStep()),
-				0, _s4.getExitSequence());
-
-		assertCall(_effect, 5, _s5.getEnterSequence());
+		assertCall(_effect, 1, _s5.getEnterSequence());
 	}
 
 	/**
@@ -820,24 +820,16 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 		assertTrue(_t.isTransition());
 
 		Sequence _effect = (Sequence) _t.getEffect();
-		assertEquals("wrong steps: " + stepListAsString(_effect), 4, _effect
+		assertEquals("wrong steps: " + stepListAsString(_effect), 2, _effect
 				.getSteps().size());
 
-		Step _switch = _effect.getSteps().get(0);
-		assertStateSwitch(_switch, _s3a);
-		assertCall(
-				assertedSequence(assertedStateCase(_switch, _s3a).getStep()),
-				0, _s3a.getExitSequence());
+		assertedOrder(_effect, Lists.newArrayList(_s3a, _s3b2, _s3c),
+				Lists.newArrayList(new StepLeaf(_s3a.getExitSequence()),
+						new StepLeaf(_s3b2.getExitSequence()), new StepLeaf(
+								_s3c.getExitSequence()),
+						new StepLeaf(_s3z.getEnterSequence())));
 
-		assertCall(_effect, 1, _s3b2.getExitSequence());
-
-		_switch = _effect.getSteps().get(2);
-		assertStateSwitch(_switch, _s3c);
-		assertCall(
-				assertedSequence(assertedStateCase(_switch, _s3c).getStep()),
-				0, _s3c.getExitSequence());
-
-		assertCall(_effect, 3, _s3z.getEnterSequence());
+		assertCall(_effect, 1, _s3z.getEnterSequence());
 
 	}
 
@@ -1216,66 +1208,29 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 
 		// check the exit sequence of _s
 		Sequence _exit = assertedSequence(_t.getEffect());
-		assertEquals("wrong steps: " + stepListAsString(_exit), 11, _exit
+		assertEquals("wrong steps: " + stepListAsString(_exit), 2, _exit
 				.getSteps().size());
 
-		StateSwitch _switch0 = assertedSwitch(_exit.getSteps().get(0));
-		assertStateSwitch(_switch0, _s1a1a1a);
-		assertSequenceSize(1, assertedStateCase(_switch0, _s1a1a1a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch0, _s1a1a1a)
-				.getStep()), 0, _s1a1a1a.getExitSequence());
+		assertedOrder(_exit, Lists.newArrayList(_s1a1a1a, _s1a1a2a, _s1a2a1a,
+				_s1a2a2a, _s2a1a1a, _s2a1a2a, _s2a2a1a, _s2a2a2a),
+				Lists.newArrayList(new StepLeaf(_s1a1a1a.getExitSequence()),
+						new StepLeaf(_s1a1a2a.getExitSequence()), //
+						new StepLeaf(_s1a1a.getExitAction()), //
+						new StepLeaf(_s1a2a1a.getExitSequence()), //
+						new StepLeaf(_s1a2a2a.getExitSequence()), //
+						new StepLeaf(_s1a2a.getExitAction()), //
+						new StepLeaf(_s1a.getExitAction()), //
+						new StepLeaf(_s2a1a1a.getExitSequence()), //
+						new StepLeaf(_s2a1a2a.getExitSequence()), //
+						new StepLeaf(_s2a1a.getExitAction()), //
+						new StepLeaf(_s2a2a1a.getExitSequence()), //
+						new StepLeaf(_s2a2a2a.getExitSequence()),//
+						new StepLeaf(_s2a2a.getExitAction()), //
+						new StepLeaf(_s2a.getExitAction()), //
+						new StepLeaf(_s.getExitAction()), //
+						new StepLeaf(_b.getEnterSequence())));
 
-		assertCall(_exit, 1, _s1a1a2a.getExitSequence());
-		assertCall(_exit, 2, _s1a1a.getExitAction());
-
-		StateSwitch _switch2 = assertedSwitch(_exit.getSteps().get(3));
-		assertStateSwitch(_switch2, _s1a2a1a);
-		assertSequenceSize(1, assertedStateCase(_switch2, _s1a2a1a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch2, _s1a2a1a)
-				.getStep()), 0, _s1a2a1a.getExitSequence());
-
-		StateSwitch _switch3 = assertedSwitch(_exit.getSteps().get(4));
-		assertStateSwitch(_switch3, _s1a2a2a);
-		assertSequenceSize(3, assertedStateCase(_switch3, _s1a2a2a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch3, _s1a2a2a)
-				.getStep()), 0, _s1a2a2a.getExitSequence());
-		assertCall(assertedSequence(assertedStateCase(_switch3, _s1a2a2a)
-				.getStep()), 1, _s1a2a.getExitAction());
-		assertCall(assertedSequence(assertedStateCase(_switch3, _s1a2a2a)
-				.getStep()), 2, _s1a.getExitAction());
-
-		StateSwitch _switch4 = assertedSwitch(_exit.getSteps().get(5));
-		assertStateSwitch(_switch4, _s2a1a1a);
-		assertSequenceSize(1, assertedStateCase(_switch4, _s2a1a1a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch4, _s2a1a1a)
-				.getStep()), 0, _s2a1a1a.getExitSequence());
-
-		StateSwitch _switch5 = assertedSwitch(_exit.getSteps().get(6));
-		assertStateSwitch(_switch5, _s2a1a2a);
-		assertSequenceSize(2, assertedStateCase(_switch5, _s2a1a2a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch5, _s2a1a2a)
-				.getStep()), 0, _s2a1a2a.getExitSequence());
-		assertCall(assertedSequence(assertedStateCase(_switch5, _s2a1a2a)
-				.getStep()), 1, _s2a1a.getExitAction());
-
-		StateSwitch _switch6 = assertedSwitch(_exit.getSteps().get(7));
-		assertStateSwitch(_switch6, _s2a2a1a);
-		assertSequenceSize(1, assertedStateCase(_switch6, _s2a2a1a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch6, _s2a2a1a)
-				.getStep()), 0, _s2a2a1a.getExitSequence());
-
-		StateSwitch _switch7 = assertedSwitch(_exit.getSteps().get(8));
-		assertStateSwitch(_switch7, _s2a2a2a);
-		assertSequenceSize(3, assertedStateCase(_switch7, _s2a2a2a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch7, _s2a2a2a)
-				.getStep()), 0, _s2a2a2a.getExitSequence());
-		assertCall(assertedSequence(assertedStateCase(_switch7, _s2a2a2a)
-				.getStep()), 1, _s2a2a.getExitAction());
-		assertCall(assertedSequence(assertedStateCase(_switch7, _s2a2a2a)
-				.getStep()), 2, _s2a.getExitAction());
-
-		assertCall(_exit, 9, _s.getExitAction());
-		assertCall(_exit, 10, _b.getEnterSequence());
+		assertCall(_exit, 1, _b.getEnterSequence());
 
 	}
 
@@ -1326,65 +1281,29 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 
 		// check the exit sequence of _s
 		Sequence _exit = assertedSequence(_t.getEffect());
-		assertEquals("wrong steps: " + stepListAsString(_exit), 12, _exit
+		assertEquals("wrong steps: " + stepListAsString(_exit), 2, _exit
 				.getSteps().size());
 
-		StateSwitch _switch0 = assertedSwitch(_exit.getSteps().get(0));
-		assertStateSwitch(_switch0, _s1a1a1a);
-		assertSequenceSize(1, assertedStateCase(_switch0, _s1a1a1a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch0, _s1a1a1a)
-				.getStep()), 0, _s1a1a1a.getExitSequence());
+		assertedOrder(_exit, Lists.newArrayList(_s1a1a1a, _s1a1a2a, _s1a2a1a,
+				_s1a2a2a, _s2a1a1a, _s2a1a2a, _s2a2a1a, _s2a2a2a),
+				Lists.newArrayList(new StepLeaf(_s1a1a1a.getExitSequence()),
+						new StepLeaf(_s1a1a2a.getExitSequence()), //
+						new StepLeaf(_s1a1a.getExitAction()), //
+						new StepLeaf(_s1a2a1a.getExitSequence()), //
+						new StepLeaf(_s1a2a2a.getExitSequence()), //
+						new StepLeaf(_s1a2a.getExitAction()), //
+						new StepLeaf(_s1a.getExitAction()), //
+						new StepLeaf(_s2a1a1a.getExitSequence()), //
+						new StepLeaf(_s2a1a2a.getExitSequence()), //
+						new StepLeaf(_s2a1a.getExitAction()), //
+						new StepLeaf(_s2a2a1a.getExitSequence()), //
+						new StepLeaf(_s2a2a2a.getExitSequence()),//
+						new StepLeaf(_s2a2a.getExitAction()), //
+						new StepLeaf(_s2a.getExitAction()), //
+						new StepLeaf(_s.getExitAction()), //
+						new StepLeaf(_b.getEnterSequence())));
 
-		StateSwitch _switch1 = assertedSwitch(_exit.getSteps().get(1));
-		assertStateSwitch(_switch1, _s1a1a2a);
-		assertSequenceSize(2, assertedStateCase(_switch1, _s1a1a2a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch1, _s1a1a2a)
-				.getStep()), 0, _s1a1a2a.getExitSequence());
-		assertCall(assertedSequence(assertedStateCase(_switch1, _s1a1a2a)
-				.getStep()), 1, _s1a1a.getExitAction());
-
-		StateSwitch _switch2 = assertedSwitch(_exit.getSteps().get(2));
-		assertStateSwitch(_switch2, _s1a2a1a);
-		assertSequenceSize(1, assertedStateCase(_switch2, _s1a2a1a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch2, _s1a2a1a)
-				.getStep()), 0, _s1a2a1a.getExitSequence());
-
-		StateSwitch _switch3 = assertedSwitch(_exit.getSteps().get(3));
-		assertStateSwitch(_switch3, _s1a2a2a);
-		assertSequenceSize(3, assertedStateCase(_switch3, _s1a2a2a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch3, _s1a2a2a)
-				.getStep()), 0, _s1a2a2a.getExitSequence());
-		assertCall(assertedSequence(assertedStateCase(_switch3, _s1a2a2a)
-				.getStep()), 1, _s1a2a.getExitAction());
-		assertCall(assertedSequence(assertedStateCase(_switch3, _s1a2a2a)
-				.getStep()), 2, _s1a.getExitAction());
-
-		StateSwitch _switch4 = assertedSwitch(_exit.getSteps().get(4));
-		assertStateSwitch(_switch4, _s2a1a1a);
-		assertSequenceSize(1, assertedStateCase(_switch4, _s2a1a1a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch4, _s2a1a1a)
-				.getStep()), 0, _s2a1a1a.getExitSequence());
-
-		StateSwitch _switch5 = assertedSwitch(_exit.getSteps().get(5));
-		assertStateSwitch(_switch5, _s2a1a2a);
-		assertSequenceSize(2, assertedStateCase(_switch5, _s2a1a2a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch5, _s2a1a2a)
-				.getStep()), 0, _s2a1a2a.getExitSequence());
-		assertCall(assertedSequence(assertedStateCase(_switch5, _s2a1a2a)
-				.getStep()), 1, _s2a1a.getExitAction());
-
-		StateSwitch _switch6 = assertedSwitch(_exit.getSteps().get(6));
-		assertStateSwitch(_switch6, _s2a2a1a);
-		assertSequenceSize(1, assertedStateCase(_switch6, _s2a2a1a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch6, _s2a2a1a)
-				.getStep()), 0, _s2a2a1a.getExitSequence());
-
-		assertCall(_exit, 7, _s2a2a2a.getExitSequence());
-		assertCall(_exit, 8, _s2a2a.getExitAction());
-		assertCall(_exit, 9, _s2a.getExitAction());
-		assertCall(_exit, 10, _s.getExitAction());
-
-		assertCall(_exit, 11, _b.getEnterSequence());
+		assertCall(_exit, 1, _b.getEnterSequence());
 
 	}
 
@@ -1435,76 +1354,29 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 
 		// check the exit sequence of _s
 		Sequence _exit = assertedSequence(_t.getEffect());
-		assertEquals("wrong steps: " + stepListAsString(_exit), 10, _exit
+		assertEquals("wrong steps: " + stepListAsString(_exit), 2, _exit
 				.getSteps().size());
 
-		StateSwitch _switch0 = assertedSwitch(_exit.getSteps().get(0));
-		assertStateSwitch(_switch0, _s1a1a1a);
-		assertSequenceSize(1, assertedStateCase(_switch0, _s1a1a1a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch0, _s1a1a1a)
-				.getStep()), 0, _s1a1a1a.getExitSequence());
+		assertedOrder(_exit, Lists.newArrayList(_s1a1a1a, _s1a1a2a, _s1a2a1a,
+				_s1a2a2a, _s2a1a1a, _s2a1a2a, _s2a2a1a, _s2a2a2a),
+				Lists.newArrayList(new StepLeaf(_s1a1a1a.getExitSequence()),
+						new StepLeaf(_s1a1a2a.getExitSequence()), //
+						new StepLeaf(_s1a1a.getExitAction()), //
+						new StepLeaf(_s1a2a1a.getExitSequence()), //
+						new StepLeaf(_s1a2a2a.getExitSequence()), //
+						new StepLeaf(_s1a2a.getExitAction()), //
+						new StepLeaf(_s1a.getExitAction()), //
+						new StepLeaf(_s2a1a1a.getExitSequence()), //
+						new StepLeaf(_s2a1a2a.getExitSequence()), //
+						new StepLeaf(_s2a1a.getExitAction()), //
+						new StepLeaf(_s2a2a1a.getExitSequence()), //
+						new StepLeaf(_s2a2a2a.getExitSequence()),//
+						new StepLeaf(_s2a2a.getExitAction()), //
+						new StepLeaf(_s2a.getExitAction()), //
+						new StepLeaf(_s.getExitAction()), //
+						new StepLeaf(_b.getEnterSequence())));
 
-		StateSwitch _switch1 = assertedSwitch(_exit.getSteps().get(1));
-		assertStateSwitch(_switch1, _s1a1a2a);
-		assertSequenceSize(2, assertedStateCase(_switch1, _s1a1a2a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch1, _s1a1a2a)
-				.getStep()), 0, _s1a1a2a.getExitSequence());
-		assertCall(assertedSequence(assertedStateCase(_switch1, _s1a1a2a)
-				.getStep()), 1, _s1a1a.getExitAction());
-
-		assertCall(_exit, 2, _s1a2a.getExitSequence());
-		assertCall(_exit, 3, _s1a.getExitAction());
-
-		// StateSwitch _switch2 = assertedSwitch(_exit.getSteps().get(2));
-		// assertStateSwitch(_switch2, _s1a2a1a);
-		// assertSequenceSize(1, assertedStateCase(_switch2,
-		// _s1a2a1a).getStep());
-		// assertCall( assertedSequence(assertedStateCase(_switch2,
-		// _s1a2a1a).getStep()), 0, _s1a2a1a.getExitSequence());
-		//
-		// StateSwitch _switch3 = assertedSwitch(_exit.getSteps().get(3));
-		// assertStateSwitch(_switch3, _s1a2a2a);
-		// assertSequenceSize(3, assertedStateCase(_switch3,
-		// _s1a2a2a).getStep());
-		// assertCall( assertedSequence(assertedStateCase(_switch3,
-		// _s1a2a2a).getStep()), 0, _s1a2a2a.getExitSequence());
-		// assertCall( assertedSequence(assertedStateCase(_switch3,
-		// _s1a2a2a).getStep()), 1, _s1a2a.getExitAction());
-		// assertCall( assertedSequence(assertedStateCase(_switch3,
-		// _s1a2a2a).getStep()), 2, _s1a.getExitAction());
-
-		StateSwitch _switch4 = assertedSwitch(_exit.getSteps().get(4));
-		assertStateSwitch(_switch4, _s2a1a1a);
-		assertSequenceSize(1, assertedStateCase(_switch4, _s2a1a1a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch4, _s2a1a1a)
-				.getStep()), 0, _s2a1a1a.getExitSequence());
-
-		StateSwitch _switch5 = assertedSwitch(_exit.getSteps().get(5));
-		assertStateSwitch(_switch5, _s2a1a2a);
-		assertSequenceSize(2, assertedStateCase(_switch5, _s2a1a2a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch5, _s2a1a2a)
-				.getStep()), 0, _s2a1a2a.getExitSequence());
-		assertCall(assertedSequence(assertedStateCase(_switch5, _s2a1a2a)
-				.getStep()), 1, _s2a1a.getExitAction());
-
-		StateSwitch _switch6 = assertedSwitch(_exit.getSteps().get(6));
-		assertStateSwitch(_switch6, _s2a2a1a);
-		assertSequenceSize(1, assertedStateCase(_switch6, _s2a2a1a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch6, _s2a2a1a)
-				.getStep()), 0, _s2a2a1a.getExitSequence());
-
-		StateSwitch _switch7 = assertedSwitch(_exit.getSteps().get(7));
-		assertStateSwitch(_switch7, _s2a2a2a);
-		assertSequenceSize(3, assertedStateCase(_switch7, _s2a2a2a).getStep());
-		assertCall(assertedSequence(assertedStateCase(_switch7, _s2a2a2a)
-				.getStep()), 0, _s2a2a2a.getExitSequence());
-		assertCall(assertedSequence(assertedStateCase(_switch7, _s2a2a2a)
-				.getStep()), 1, _s2a2a.getExitAction());
-		assertCall(assertedSequence(assertedStateCase(_switch7, _s2a2a2a)
-				.getStep()), 2, _s2a.getExitAction());
-
-		assertCall(_exit, 8, _s.getExitAction());
-		assertCall(_exit, 9, _b.getEnterSequence());
+		assertCall(_exit, 1, _b.getEnterSequence());
 
 	}
 

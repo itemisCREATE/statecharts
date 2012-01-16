@@ -255,62 +255,8 @@ class BehaviorMapping {
 		
 		// first process the exit behavior of orthogonal states that hase to be performed before source exit
 		val topExitState = t.exitStates.last
-		if ( topExitState != null ) {
-			val List<ExecutionState> leafStates = topExitState.collectLeafStates(new ArrayList<RegularState>()).map(rs|rs.create)
-			val topVector = topExitState.stateVector
-			val sourceVector = t.source.stateVector
-		
-			val prepositions = (topVector.offset .. sourceVector.offset).take(sourceVector.offset - topVector.offset)
-			
-			for ( i: prepositions ) {
-				
-				// create a state switch for each state configuration vector position
-				var StateSwitch sSwitch = topExitState.create.defineExitSwitch(leafStates, i)
-				sequence.steps.add(sSwitch);
-			}
-		}
-		
-		// second process the exit path behavior from the the source state
-		if (t.source != null && t.source instanceof RegularState) {
-			sequence.steps.add((t.source as RegularState).create.exitSequence.newCall)	
-		}
- 
-		t.exitStates().fold(sequence, [seq, state | {
-			if (state != t.source && state != topExitState) { // since we call the exit sequence of the source state we have to exclude it's exit action here
-				if (t.source.stateVector.last == state.create.stateVector.last) {
-					if ( state.create.exitAction != null) seq.steps.add(state.create.exitAction.newCall)
-					if ( trace.addTraceSteps ) seq.steps.add(state.create.newTraceStateExited())			
-				}
-			}
-			
-			seq
-		}])
+		sequence.steps.add(topExitState.create.exitSequence.newCall)
 
-
-		// third process the exit behavior of orthogonal states that hase to be performed after source exit
-		if ( topExitState != null ) {
-			val List<ExecutionState> leafStates = topExitState.collectLeafStates(new ArrayList<RegularState>()).map(rs|rs.create)
-			val topVector = topExitState.stateVector
-			val sourceVector = t.source.stateVector
-		
-			val postpositions = (sourceVector.last .. topVector.last).drop(1)
-			
-			for ( i: postpositions ) {
-						
-				// create a state switch for each state configuration vector position
-				var StateSwitch sSwitch = topExitState.create.defineExitSwitch(leafStates, i)
-				sequence.steps.add(sSwitch);
-			}
-		}
-		
-		// forth exit the top exit state
-		// TODO refactor: the algorithm shoud not depend on these special cases...
-		if ( topExitState != t.source ) {
-			if (topExitState.create.exitAction != null) sequence.steps.add(topExitState.create.exitAction.newCall)
-			if ( trace.addTraceSteps ) sequence.steps += topExitState.create.newTraceStateExited
-		}
-		
-		
 		// map transition actions
 		if (t.effect != null) sequence.steps.add(t.effect.mapEffect)	
 		if (trace.addTraceSteps) { sequence.steps += r.newTraceReactionFired() }
