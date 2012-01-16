@@ -3,10 +3,12 @@ package org.yakindu.sct.model.sexec.transformation;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.yakindu.sct.model.sexec.EnterState;
+import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
@@ -65,6 +67,31 @@ public class SexecExtensions {
     }
   }
   
+  protected List<ExecutionState> _collectLeafStates(final ExecutionState state, final List<ExecutionState> leafStates) {
+    {
+      boolean _isLeaf = state.isLeaf();
+      if (_isLeaf) {
+        CollectionExtensions.<ExecutionState>operator_add(leafStates, state);
+      } else {
+        EList<ExecutionScope> _subScopes = state.getSubScopes();
+        for (final ExecutionScope r : _subScopes) {
+          this.collectLeafStates(r, leafStates);
+        }
+      }
+      return leafStates;
+    }
+  }
+  
+  protected List<ExecutionState> _collectLeafStates(final ExecutionRegion region, final List<ExecutionState> leafStates) {
+    {
+      EList<ExecutionScope> _subScopes = region.getSubScopes();
+      for (final ExecutionScope r : _subScopes) {
+        this.collectLeafStates(r, leafStates);
+      }
+      return leafStates;
+    }
+  }
+  
   public int last(final StateVector sv) {
     int _offset = sv.getOffset();
     int _size = sv.getSize();
@@ -113,6 +140,19 @@ public class SexecExtensions {
         }
       }
       return leafs;
+    }
+  }
+  
+  public List<ExecutionState> collectLeafStates(final ExecutionScope region, final List<ExecutionState> leafStates) {
+    if ((region instanceof ExecutionRegion)
+         && (leafStates instanceof List)) {
+      return _collectLeafStates((ExecutionRegion)region, (List<ExecutionState>)leafStates);
+    } else if ((region instanceof ExecutionState)
+         && (leafStates instanceof List)) {
+      return _collectLeafStates((ExecutionState)region, (List<ExecutionState>)leafStates);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        java.util.Arrays.<Object>asList(region, leafStates).toString());
     }
   }
 }

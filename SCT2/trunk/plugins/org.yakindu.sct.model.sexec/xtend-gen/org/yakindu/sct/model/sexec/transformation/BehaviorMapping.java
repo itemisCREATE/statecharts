@@ -598,7 +598,14 @@ public class BehaviorMapping {
         {
           ArrayList<RegularState> _arrayList = new ArrayList<RegularState>();
           List<RegularState> _collectLeafStates = this.sgraph.collectLeafStates(topExitState, _arrayList);
-          final List<RegularState> leafStates = _collectLeafStates;
+          final Function1<RegularState,ExecutionState> _function = new Function1<RegularState,ExecutionState>() {
+              public ExecutionState apply(final RegularState rs) {
+                ExecutionState _create = BehaviorMapping.this.factory.create(rs);
+                return _create;
+              }
+            };
+          List<ExecutionState> _map = ListExtensions.<RegularState, ExecutionState>map(_collectLeafStates, _function);
+          final List<ExecutionState> leafStates = _map;
           StateVector _stateVector = this.svBuilder.stateVector(topExitState);
           final StateVector topVector = _stateVector;
           Vertex _source = t.getSource();
@@ -614,7 +621,8 @@ public class BehaviorMapping {
           final Iterable<Integer> prepositions = _take;
           for (final Integer i : prepositions) {
             {
-              StateSwitch _defineExitSwitch = this.seqBuilder.defineExitSwitch(topExitState, leafStates, i);
+              ExecutionState _create_1 = this.factory.create(topExitState);
+              StateSwitch _defineExitSwitch = this.seqBuilder.defineExitSwitch(_create_1, leafStates, i);
               StateSwitch sSwitch = _defineExitSwitch;
               EList<Step> _steps = sequence.getSteps();
               _steps.add(sSwitch);
@@ -634,13 +642,13 @@ public class BehaviorMapping {
       if (_operator_and) {
         EList<Step> _steps_1 = sequence.getSteps();
         Vertex _source_3 = t.getSource();
-        ExecutionState _create = this.factory.create(((RegularState) _source_3));
-        Sequence _exitSequence = _create.getExitSequence();
+        ExecutionState _create_2 = this.factory.create(((RegularState) _source_3));
+        Sequence _exitSequence = _create_2.getExitSequence();
         Call _newCall = this.factory.newCall(_exitSequence);
         _steps_1.add(_newCall);
       }
       Iterable<State> _exitStates_1 = this.exitStates(t);
-      final Function2<Sequence,State,Sequence> _function = new Function2<Sequence,State,Sequence>() {
+      final Function2<Sequence,State,Sequence> _function_1 = new Function2<Sequence,State,Sequence>() {
           public Sequence apply(final Sequence seq , final State state) {
             Sequence _xblockexpression = null;
             {
@@ -657,27 +665,27 @@ public class BehaviorMapping {
                 Vertex _source_5 = t.getSource();
                 StateVector _stateVector_2 = BehaviorMapping.this.svBuilder.stateVector(_source_5);
                 int _last_1 = BehaviorMapping.this.sexec.last(_stateVector_2);
-                ExecutionState _create_1 = BehaviorMapping.this.factory.create(state);
-                StateVector _stateVector_3 = _create_1.getStateVector();
+                ExecutionState _create_3 = BehaviorMapping.this.factory.create(state);
+                StateVector _stateVector_3 = _create_3.getStateVector();
                 int _last_2 = BehaviorMapping.this.sexec.last(_stateVector_3);
                 boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_last_1), ((Integer)_last_2));
                 if (_operator_equals) {
                   {
-                    ExecutionState _create_2 = BehaviorMapping.this.factory.create(state);
-                    Step _exitAction = _create_2.getExitAction();
+                    ExecutionState _create_4 = BehaviorMapping.this.factory.create(state);
+                    Step _exitAction = _create_4.getExitAction();
                     boolean _operator_notEquals_4 = ObjectExtensions.operator_notEquals(_exitAction, null);
                     if (_operator_notEquals_4) {
                       EList<Step> _steps_2 = seq.getSteps();
-                      ExecutionState _create_3 = BehaviorMapping.this.factory.create(state);
-                      Step _exitAction_1 = _create_3.getExitAction();
+                      ExecutionState _create_5 = BehaviorMapping.this.factory.create(state);
+                      Step _exitAction_1 = _create_5.getExitAction();
                       Call _newCall_1 = BehaviorMapping.this.factory.newCall(_exitAction_1);
                       _steps_2.add(_newCall_1);
                     }
                     boolean _isAddTraceSteps = BehaviorMapping.this.trace.isAddTraceSteps();
                     if (_isAddTraceSteps) {
                       EList<Step> _steps_3 = seq.getSteps();
-                      ExecutionState _create_4 = BehaviorMapping.this.factory.create(state);
-                      TraceStateExited _newTraceStateExited = BehaviorMapping.this.trace.newTraceStateExited(_create_4);
+                      ExecutionState _create_6 = BehaviorMapping.this.factory.create(state);
+                      TraceStateExited _newTraceStateExited = BehaviorMapping.this.trace.newTraceStateExited(_create_6);
                       _steps_3.add(_newTraceStateExited);
                     }
                   }
@@ -688,13 +696,20 @@ public class BehaviorMapping {
             return _xblockexpression;
           }
         };
-      IterableExtensions.<State, Sequence>fold(_exitStates_1, sequence, _function);
+      IterableExtensions.<State, Sequence>fold(_exitStates_1, sequence, _function_1);
       boolean _operator_notEquals_5 = ObjectExtensions.operator_notEquals(topExitState, null);
       if (_operator_notEquals_5) {
         {
           ArrayList<RegularState> _arrayList_1 = new ArrayList<RegularState>();
           List<RegularState> _collectLeafStates_1 = this.sgraph.collectLeafStates(topExitState, _arrayList_1);
-          final List<RegularState> leafStates_1 = _collectLeafStates_1;
+          final Function1<RegularState,ExecutionState> _function_2 = new Function1<RegularState,ExecutionState>() {
+              public ExecutionState apply(final RegularState rs_1) {
+                ExecutionState _create_7 = BehaviorMapping.this.factory.create(rs_1);
+                return _create_7;
+              }
+            };
+          List<ExecutionState> _map_1 = ListExtensions.<RegularState, ExecutionState>map(_collectLeafStates_1, _function_2);
+          final List<ExecutionState> leafStates_1 = _map_1;
           StateVector _stateVector_4 = this.svBuilder.stateVector(topExitState);
           final StateVector topVector_1 = _stateVector_4;
           Vertex _source_6 = t.getSource();
@@ -707,7 +722,8 @@ public class BehaviorMapping {
           final Iterable<Integer> postpositions = _drop;
           for (final Integer i_1 : postpositions) {
             {
-              StateSwitch _defineExitSwitch_1 = this.seqBuilder.defineExitSwitch(topExitState, leafStates_1, i_1);
+              ExecutionState _create_8 = this.factory.create(topExitState);
+              StateSwitch _defineExitSwitch_1 = this.seqBuilder.defineExitSwitch(_create_8, leafStates_1, i_1);
               StateSwitch sSwitch_1 = _defineExitSwitch_1;
               EList<Step> _steps_4 = sequence.getSteps();
               _steps_4.add(sSwitch_1);
@@ -719,21 +735,21 @@ public class BehaviorMapping {
       boolean _operator_notEquals_6 = ObjectExtensions.operator_notEquals(topExitState, _source_7);
       if (_operator_notEquals_6) {
         {
-          ExecutionState _create_5 = this.factory.create(topExitState);
-          Step _exitAction_2 = _create_5.getExitAction();
+          ExecutionState _create_9 = this.factory.create(topExitState);
+          Step _exitAction_2 = _create_9.getExitAction();
           boolean _operator_notEquals_7 = ObjectExtensions.operator_notEquals(_exitAction_2, null);
           if (_operator_notEquals_7) {
             EList<Step> _steps_5 = sequence.getSteps();
-            ExecutionState _create_6 = this.factory.create(topExitState);
-            Step _exitAction_3 = _create_6.getExitAction();
+            ExecutionState _create_10 = this.factory.create(topExitState);
+            Step _exitAction_3 = _create_10.getExitAction();
             Call _newCall_2 = this.factory.newCall(_exitAction_3);
             _steps_5.add(_newCall_2);
           }
           boolean _isAddTraceSteps_1 = this.trace.isAddTraceSteps();
           if (_isAddTraceSteps_1) {
             EList<Step> _steps_6 = sequence.getSteps();
-            ExecutionState _create_7 = this.factory.create(topExitState);
-            TraceStateExited _newTraceStateExited_1 = this.trace.newTraceStateExited(_create_7);
+            ExecutionState _create_11 = this.factory.create(topExitState);
+            TraceStateExited _newTraceStateExited_1 = this.trace.newTraceStateExited(_create_11);
             CollectionExtensions.<Step>operator_add(_steps_6, _newTraceStateExited_1);
           }
         }
@@ -756,7 +772,7 @@ public class BehaviorMapping {
       Iterable<ExecutionScope> _drop_1 = IterableExtensions.<ExecutionScope>drop(_entryScopes, 1);
       List<ExecutionScope> _list = IterableExtensions.<ExecutionScope>toList(_drop_1);
       List<ExecutionScope> _reverse = ListExtensions.<ExecutionScope>reverse(_list);
-      final Function2<Sequence,ExecutionScope,Sequence> _function_1 = new Function2<Sequence,ExecutionScope,Sequence>() {
+      final Function2<Sequence,ExecutionScope,Sequence> _function_3 = new Function2<Sequence,ExecutionScope,Sequence>() {
           public Sequence apply(final Sequence seq_1 , final ExecutionScope scope) {
             Sequence _xblockexpression_1 = null;
             {
@@ -802,7 +818,7 @@ public class BehaviorMapping {
             return _xblockexpression_1;
           }
         };
-      IterableExtensions.<ExecutionScope, Sequence>fold(_reverse, sequence, _function_1);
+      IterableExtensions.<ExecutionScope, Sequence>fold(_reverse, sequence, _function_3);
       Vertex _target = t.getTarget();
       boolean _operator_notEquals_11 = ObjectExtensions.operator_notEquals(_target, null);
       if (_operator_notEquals_11) {
@@ -816,8 +832,8 @@ public class BehaviorMapping {
           if ((_target_2 instanceof org.yakindu.sct.model.sgraph.RegularState)) {
             EList<Step> _steps_12 = sequence.getSteps();
             Vertex _target_3 = t.getTarget();
-            ExecutionState _create_8 = this.factory.create(((RegularState) _target_3));
-            Sequence _enterSequence_2 = _create_8.getEnterSequence();
+            ExecutionState _create_12 = this.factory.create(((RegularState) _target_3));
+            Sequence _enterSequence_2 = _create_12.getEnterSequence();
             Call _newCall_5 = this.factory.newCall(_enterSequence_2);
             _steps_12.add(_newCall_5);
           } else {
@@ -825,8 +841,8 @@ public class BehaviorMapping {
             if ((_target_4 instanceof org.yakindu.sct.model.sgraph.Choice)) {
               EList<Step> _steps_13 = sequence.getSteps();
               Vertex _target_5 = t.getTarget();
-              ExecutionChoice _create_9 = this.factory.create(((Choice) _target_5));
-              Sequence _reactSequence = _create_9.getReactSequence();
+              ExecutionChoice _create_13 = this.factory.create(((Choice) _target_5));
+              Sequence _reactSequence = _create_13.getReactSequence();
               Call _newCall_6 = this.factory.newCall(_reactSequence);
               _steps_13.add(_newCall_6);
             }
@@ -835,7 +851,7 @@ public class BehaviorMapping {
       }
       List<ExecutionScope> _entryScopes_1 = this.entryScopes(t);
       Iterable<ExecutionScope> _drop_2 = IterableExtensions.<ExecutionScope>drop(_entryScopes_1, 1);
-      final Function2<Sequence,ExecutionScope,Sequence> _function_2 = new Function2<Sequence,ExecutionScope,Sequence>() {
+      final Function2<Sequence,ExecutionScope,Sequence> _function_4 = new Function2<Sequence,ExecutionScope,Sequence>() {
           public Sequence apply(final Sequence seq_2 , final ExecutionScope scope_1) {
             Sequence _xblockexpression_2 = null;
             {
@@ -864,7 +880,7 @@ public class BehaviorMapping {
             return _xblockexpression_2;
           }
         };
-      IterableExtensions.<ExecutionScope, Sequence>fold(_drop_2, sequence, _function_2);
+      IterableExtensions.<ExecutionScope, Sequence>fold(_drop_2, sequence, _function_4);
       return sequence;
     }
   }
@@ -939,8 +955,44 @@ public class BehaviorMapping {
     return _xblockexpression;
   }
   
-  public List<ExecutionScope> exitScopes(final Transition t) {
-    return null;
+  public Iterable<ExecutionScope> exitScopes(final Transition t) {
+    Iterable<ExecutionScope> _xblockexpression = null;
+    {
+      Vertex _source = t.getSource();
+      final Vertex source = _source;
+      ExecutionState _switchResult = null;
+      final Vertex source_1 = source;
+      boolean matched = false;
+      if (!matched) {
+        if (source_1 instanceof RegularState) {
+          final RegularState source_2 = (RegularState) source_1;
+          matched=true;
+          ExecutionState _create = this.factory.create(source_2);
+          _switchResult = _create;
+        }
+      }
+      ExecutionState executionSource = _switchResult;
+      Vertex _target = t.getTarget();
+      final Vertex target = _target;
+      ExecutionState _switchResult_1 = null;
+      final Vertex source_3 = source;
+      boolean matched_1 = false;
+      if (!matched_1) {
+        if (source_3 instanceof RegularState) {
+          final RegularState source_4 = (RegularState) source_3;
+          matched_1=true;
+          ExecutionState _create_1 = this.factory.create(source_4);
+          _switchResult_1 = _create_1;
+        }
+      }
+      ExecutionState executionTarget = _switchResult_1;
+      List<EObject> _containers = this.sgraph.containers(executionSource);
+      final List<EObject> l = _containers;
+      List<EObject> _containers_1 = this.sgraph.containers(executionTarget);
+      l.removeAll(_containers_1);
+      _xblockexpression = (null);
+    }
+    return _xblockexpression;
   }
   
   protected Statement _buildCondition(final Trigger t) {

@@ -8,6 +8,7 @@ import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.If;
@@ -373,14 +374,19 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertNotNull(_s1.getExitSequence());
 		assertEquals(3, _s1.getExitSequence().getSteps().size());
 
-		Step _switch = _s1.getExitSequence().getSteps().get(0);
+		Sequence _r1_s1 = _s2.getSuperScope().getExitSequence();
+		assertCall(assertedSequence(_s1.getExitSequence()), 0, _r1_s1);
+		Sequence _r2_s1 = _s4.getSuperScope().getExitSequence();
+		assertCall(assertedSequence(_s1.getExitSequence()), 1, _r2_s1);
+
+		Step _switch = _r1_s1.getSteps().get(0);
 		assertStateSwitch(_switch, _s2, _s3);
 		assertCall(assertedSequence(assertedStateCase(_switch, _s2).getStep()),
 				0, _s2.getExitSequence());
 		assertCall(assertedSequence(assertedStateCase(_switch, _s3).getStep()),
 				0, _s3.getExitSequence());
 
-		_switch = _s1.getExitSequence().getSteps().get(1);
+		_switch = _r2_s1.getSteps().get(0);
 		assertStateSwitch(_switch, _s4, _s5, _s6);
 		assertCall(assertedSequence(assertedStateCase(_switch, _s4).getStep()),
 				0, _s4.getExitSequence());
@@ -463,7 +469,10 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertNotNull(_fs.getExitSequence());
 		assertEquals(2, _s1.getExitSequence().getSteps().size());
 
-		Step _switch = _s1.getExitSequence().getSteps().get(0);
+		ExecutionScope _r_s1 = _s1.getSubScopes().get(0);
+
+		assertCall(_s1.getExitSequence(), 0, _r_s1.getExitSequence());
+		Step _switch = _r_s1.getExitSequence().getSteps().get(0);
 		assertStateSwitch(_switch, _s4, _fs);
 		assertCall(assertedSequence(assertedStateCase(_switch, _s4).getStep()),
 				0, _s4.getExitSequence());
