@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.CoreException;
@@ -39,8 +37,11 @@ import org.yakindu.sct.simulation.core.extensions.ExecutionFactoryExtensions;
 import org.yakindu.sct.simulation.core.extensions.ExecutionFactoryExtensions.ExecutionFactoryDescriptor;
 import org.yakindu.sct.simulation.core.launch.IStatechartLaunchParameters;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
+import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeController;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeFactory;
 import org.yakindu.sct.simulation.core.runtime.IExecutionTraceListener;
+import org.yakindu.sct.simulation.core.runtime.impl.CycleBasedExecutionFacadeController;
+import org.yakindu.sct.simulation.core.runtime.impl.EventDrivenExecutionFacadeController;
 
 /**
  * 
@@ -54,8 +55,6 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 
 	private IExecutionFacade facade;
 
-	private Timer timer;
-
 	private boolean stepping = false;
 	private boolean terminated = false;
 	private boolean suspended = false;
@@ -64,7 +63,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 
 	private List<SCTDebugThread> threads;
 
-	private long cyclePeriod;
+	private IExecutionFacadeController controller;
 
 	public SCTDebugTarget(ILaunch launch, Statechart statechart)
 			throws CoreException {
@@ -72,31 +71,31 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 		this.launch = launch;
 		this.statechart = statechart;
 		threads = new ArrayList<SCTDebugThread>();
-		timer = new Timer();
 		DebugPlugin.getDefault().getBreakpointManager()
 				.addBreakpointListener(this);
 		createExecutionModel(statechart);
-		cyclePeriod = launch.getLaunchConfiguration().getAttribute(
-				CYCLE_PERIOD, DEFAULT_CYCLE_PERIOD);
-
 	}
 
-	private void createExecutionModel(Statechart statechart) {
+	private void createExecutionModel(Statechart statechart)
+			throws CoreException {
 		IExecutionFacadeFactory factory = getExecutionFacadeFactory(statechart);
 		facade = factory.createExecutionFacade(statechart);
 		facade.addTraceListener(this);
-		facade.enter();
-		scheduleCycle();
+		initFacadeController();
 	}
 
-	protected void scheduleCycle() {
-		if (!terminated && !suspended)
-			timer.schedule(new TimerTask() {
-				public void run() {
-					facade.runCycle();
-					scheduleCycle();
-				}
-			}, cyclePeriod);
+	private void initFacadeController() throws CoreException {
+		boolean isCycleBased = launch.getLaunchConfiguration().getAttribute(
+				IS_CYCLE_BASED, DEFAULT_IS_CYCLE_BASED);
+		if (isCycleBased) {
+			long cyclePeriod = launch.getLaunchConfiguration().getAttribute(
+					CYCLE_PERIOD, DEFAULT_CYCLE_PERIOD);
+			controller = new CycleBasedExecutionFacadeController(facade,
+					cyclePeriod);
+		} else {
+			controller = new EventDrivenExecutionFacadeController(facade);
+		}
+		controller.start();
 	}
 
 	protected IExecutionFacadeFactory getExecutionFacadeFactory(EObject context) {
@@ -172,9 +171,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 		fireEvent(new DebugEvent(getDebugTarget(), DebugEvent.TERMINATE));
 		terminated = true;
 		facade.removeTraceListener(this);
-		facade.tearDown();
-		timer.cancel();
-		timer.purge();
+		controller.terminate();
 	}
 
 	public boolean canResume() {
@@ -193,13 +190,14 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 		fireEvent(new DebugEvent(this, DebugEvent.RESUME));
 		fireChangeEvent(DebugEvent.CONTENT);
 		suspended = false;
-		scheduleCycle();
+		controller.resume();
 	}
 
 	public void suspend() throws DebugException {
 		fireEvent(new DebugEvent(this, DebugEvent.SUSPEND));
 		fireChangeEvent(DebugEvent.CONTENT);
 		suspended = true;
+		controller.suspend();
 	}
 
 	public void breakpointAdded(IBreakpoint breakpoint) {
