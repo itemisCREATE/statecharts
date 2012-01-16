@@ -19,7 +19,6 @@ import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.TimeEvent;
-import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping;
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
 import org.yakindu.sct.model.sgraph.Choice;
@@ -44,9 +43,6 @@ public class StructureMapping {
   
   @Inject
   private StatechartExtensions sct;
-  
-  @Inject
-  private BehaviorMapping behavior;
   
   public ExecutionFlow mapScopes(final Statechart sc, final ExecutionFlow flow) {
     ExecutionFlow _xblockexpression = null;

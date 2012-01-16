@@ -1,8 +1,13 @@
 package org.yakindu.sct.model.sexec.transformation;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.yakindu.sct.model.sexec.EnterState;
+import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.SexecFactory;
@@ -71,5 +76,43 @@ public class SexecExtensions {
   public int first(final StateVector sv) {
     int _offset = sv.getOffset();
     return _offset;
+  }
+  
+  public ArrayList<ExecutionScope> parentScopes(final ExecutionScope scope) {
+    {
+      ArrayList<ExecutionScope> _newArrayList = CollectionLiterals.<ExecutionScope>newArrayList();
+      final ArrayList<ExecutionScope> parents = _newArrayList;
+      ExecutionScope s = scope;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(s, null);
+      Boolean _xwhileexpression = _operator_notEquals;
+      while (_xwhileexpression) {
+        {
+          parents.add(s);
+          ExecutionScope _superScope = s.getSuperScope();
+          s = _superScope;
+        }
+        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(s, null);
+        _xwhileexpression = _operator_notEquals_1;
+      }
+      return parents;
+    }
+  }
+  
+  public List<ExecutionState> collectLeafScopes(final ExecutionScope scope, final List<ExecutionState> leafs) {
+    {
+      EList<ExecutionScope> _subScopes = scope.getSubScopes();
+      boolean _isEmpty = _subScopes.isEmpty();
+      if (_isEmpty) {
+        if ((scope instanceof org.yakindu.sct.model.sexec.ExecutionState)) {
+          leafs.add(((ExecutionState) scope));
+        }
+      } else {
+        EList<ExecutionScope> _subScopes_1 = scope.getSubScopes();
+        for (final ExecutionScope s : _subScopes_1) {
+          this.collectLeafScopes(s, leafs);
+        }
+      }
+      return leafs;
+    }
   }
 }

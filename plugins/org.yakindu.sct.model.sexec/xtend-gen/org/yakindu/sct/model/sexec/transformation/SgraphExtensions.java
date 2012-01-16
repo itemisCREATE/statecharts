@@ -46,6 +46,13 @@ public class SgraphExtensions {
     return _list;
   }
   
+  public List<RegularState> parentStates(final Region s) {
+    List<EObject> _containers = this.containers(s);
+    Iterable<RegularState> _filter = IterableExtensions.<RegularState>filter(_containers, org.yakindu.sct.model.sgraph.RegularState.class);
+    List<RegularState> _list = IterableExtensions.<RegularState>toList(_filter);
+    return _list;
+  }
+  
   public List<EObject> containers(final EObject obj) {
     {
       ArrayList<EObject> _arrayList = new ArrayList<EObject>();
