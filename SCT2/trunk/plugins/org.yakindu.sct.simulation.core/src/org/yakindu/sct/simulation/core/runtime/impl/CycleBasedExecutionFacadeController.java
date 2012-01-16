@@ -1,0 +1,67 @@
+/**
+ * Copyright (c) 2012 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
+package org.yakindu.sct.simulation.core.runtime.impl;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
+import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeController;
+
+/**
+ * Cycle based implementation of {@link IExecutionFacadeController}.
+ * 
+ * runCycle is called on {@link IExecutionFacade} periodically, depending on the
+ * cyclePeriod value.
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
+public class CycleBasedExecutionFacadeController extends
+		AbstractExecutionFacadeController {
+
+	private Timer timer;
+	
+	private long cyclePeriod;
+
+	public CycleBasedExecutionFacadeController(IExecutionFacade facade,
+			long cyclePeriod) {
+		super(facade);
+		this.cyclePeriod = cyclePeriod;
+	}
+
+	protected void scheduleCycle() {
+		if (!terminated && !suspended)
+			timer.schedule(new TimerTask() {
+				public void run() {
+					facade.runCycle();
+					scheduleCycle();
+				}
+			}, cyclePeriod);
+	}
+
+	public void start() {
+		super.start();
+		scheduleCycle();
+	}
+
+	public void resume() {
+		super.resume();
+		scheduleCycle();
+	}
+
+	public void terminate() {
+		super.terminate();
+		timer.cancel();
+		timer.purge();
+	}
+
+}
