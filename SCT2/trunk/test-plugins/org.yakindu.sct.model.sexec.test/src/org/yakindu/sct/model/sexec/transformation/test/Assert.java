@@ -6,18 +6,23 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.sql.CallableStatement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.Step;
+import org.yakindu.sct.model.sexec.Trace;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.stext.stext.Assignment;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
@@ -87,6 +92,14 @@ public class Assert {
 
 		fail("No case for state '" + state.getSimpleName() + "' exists.");
 		return null;
+	}
+
+	/**
+	 * @deprecated Already Sequence in this case. Assert will never fail
+	 */
+	@Deprecated
+	public static Sequence assertedSequence(Sequence step) {
+		return step;
 	}
 
 	public static Sequence assertedSequence(Step step) {
@@ -169,5 +182,76 @@ public class Assert {
 					+ ((StateSwitch) step).getStateConfigurationIdx();
 
 		return step.toString();
+	}
+
+	public static void assertedOrder(Step step,
+			List<? extends ExecutionState> currentStates,
+			List<? extends StepNode> requiredSteps) {
+		assertedOrder_intern(step, currentStates, requiredSteps);
+		if (!requiredSteps.isEmpty()) {
+			fail("Step was missing: " + requiredSteps.toString());
+		}
+	}
+
+	private static void assertedOrder_intern(Step step,
+			List<? extends ExecutionState> currentStates,
+			List<? extends StepNode> requiredSteps) {
+		if (requiredSteps.isEmpty()) {
+			return;
+		}
+		boolean found = false;
+
+		if (step == requiredSteps.get(0).step) {
+			found = true;
+			StepNode removed = requiredSteps.remove(0);
+			if (removed instanceof StepLeaf) {
+				return;
+			}
+		}
+		if (step instanceof Sequence) {
+			for (Step subStep : ((Sequence) step).getSteps()) {
+				assertedOrder_intern(subStep, currentStates, requiredSteps);
+			}
+		} else if (step instanceof Call) {
+			assertedOrder_intern(((Call) step).getStep(), currentStates,
+					requiredSteps);
+		} else if (step instanceof StateSwitch) {
+			StateCase stateCase = null;
+			StringBuilder sb = new StringBuilder();
+			for (StateCase caze : ((StateSwitch) step).getCases()) {
+				sb.append(", " + caze.getState().getName());
+				if (stateCase == null
+						&& caze.getState() == currentStates.get(0)) {
+					currentStates.remove(0);
+					stateCase = caze;
+				}
+			}
+			assertNotNull("No state case found for " + currentStates + " in "
+					+ sb.toString(), stateCase);
+			assertedOrder_intern(stateCase.getStep(), currentStates,
+					requiredSteps);
+		} else if (found == false) {
+			fail("Step without match: " + step);
+		}
+	}
+
+	public static class StepNode {
+		public final Step step;
+
+		public StepNode(Step step) {
+			assertNotNull(step);
+			this.step = step;
+		}
+
+		@Override
+		public String toString() {
+			return step.toString();
+		}
+	}
+
+	public static class StepLeaf extends StepNode {
+		public StepLeaf(Step step) {
+			super(step);
+		}
 	}
 }
