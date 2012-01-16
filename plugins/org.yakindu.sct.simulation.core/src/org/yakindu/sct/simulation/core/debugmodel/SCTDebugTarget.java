@@ -37,6 +37,7 @@ import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.extensions.ExecutionFactoryExtensions;
 import org.yakindu.sct.simulation.core.extensions.ExecutionFactoryExtensions.ExecutionFactoryDescriptor;
+import org.yakindu.sct.simulation.core.launch.IStatechartLaunchParameters;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeFactory;
 import org.yakindu.sct.simulation.core.runtime.IExecutionTraceListener;
@@ -47,10 +48,7 @@ import org.yakindu.sct.simulation.core.runtime.IExecutionTraceListener;
  * 
  */
 public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
-		IExecutionTraceListener {
-
-	// TODO: Add to launch tab config
-	private static final int CYCLE_SLEEP_TIME = 100;
+		IStatechartLaunchParameters, IExecutionTraceListener {
 
 	private ILaunch launch;
 
@@ -66,6 +64,8 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 
 	private List<SCTDebugThread> threads;
 
+	private long cyclePeriod;
+
 	public SCTDebugTarget(ILaunch launch, Statechart statechart)
 			throws CoreException {
 		super(null, statechart.eResource().getURI().toPlatformString(true));
@@ -76,6 +76,8 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 		DebugPlugin.getDefault().getBreakpointManager()
 				.addBreakpointListener(this);
 		createExecutionModel(statechart);
+		cyclePeriod = launch.getLaunchConfiguration().getAttribute(
+				CYCLE_PERIOD, DEFAULT_CYCLE_PERIOD);
 
 	}
 
@@ -91,10 +93,11 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 		if (!terminated && !suspended)
 			timer.schedule(new TimerTask() {
 				public void run() {
+					System.out.println("CYCLE!");
 					facade.runCycle();
 					scheduleCycle();
 				}
-			}, CYCLE_SLEEP_TIME);
+			}, cyclePeriod);
 	}
 
 	protected IExecutionFacadeFactory getExecutionFacadeFactory(EObject context) {

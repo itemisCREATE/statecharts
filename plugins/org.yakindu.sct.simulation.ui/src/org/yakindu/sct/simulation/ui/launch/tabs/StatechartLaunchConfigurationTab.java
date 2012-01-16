@@ -19,36 +19,32 @@ import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.jdt.debug.ui.launchConfigurations.JavaLaunchTab;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ResourceListSelectionDialog;
 import org.yakindu.sct.simulation.core.launch.IStatechartLaunchParameters;
+import org.yakindu.sct.simulation.ui.DeclarationImages;
 
 /**
- * 
- * @author andreas muelder
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 		IStatechartLaunchParameters {
 
-	private Image image;
 	private Text modelfile;
-
-	public StatechartLaunchConfigurationTab() {
-		image = new Image(Display.getDefault(), getClass().getClassLoader()
-				.getResourceAsStream("icons/Statechart-Launcher-16.png"));
-	}
+	private Text cyclePeriod;
+	private Button btnCycle;
+	private Button btnEvent;
 
 	public void createControl(Composite parent) {
 		Composite comp = new Composite(parent, SWT.NONE);
@@ -59,19 +55,52 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 	}
 
 	private void createFileSelectionGroup(Composite comp) {
+		createModelFileGroup(comp);
+		createCyclePeriodGroup(comp);
+		createExecutionTypeControls(comp);
+	}
+
+	private void createExecutionTypeControls(Composite parent) {
+		Group propertyGroup = new Group(parent, SWT.NONE);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(propertyGroup);
+		propertyGroup.setText("Execution Type:");
+		propertyGroup.setLayout(new GridLayout(1, true));
+		btnCycle = new Button(propertyGroup, SWT.RADIO);
+		btnCycle.setText("cycle based");
+		btnCycle.addListener(SWT.Selection, new UpdateListener());
+		GridDataFactory.fillDefaults().applyTo(btnCycle);
+		btnEvent = new Button(propertyGroup, SWT.RADIO);
+		btnEvent.setText("event driven");
+		btnEvent.addListener(SWT.Selection, new UpdateListener());
+		GridDataFactory.fillDefaults().applyTo(btnEvent);
+	}
+
+	private void createCyclePeriodGroup(Composite parent) {
+		Group propertyGroup = new Group(parent, SWT.NONE);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(propertyGroup);
+		propertyGroup.setText("Cycle Period:");
+		propertyGroup.setLayout(new GridLayout(2, false));
+		cyclePeriod = new Text(propertyGroup, SWT.BORDER);
+		cyclePeriod.addListener(SWT.Modify, new UpdateListener());
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(cyclePeriod);
+		Label lblMs = new Label(propertyGroup, SWT.NONE);
+		lblMs.setText("ms");
+		GridDataFactory.fillDefaults().applyTo(lblMs);
+	}
+
+	private void createModelFileGroup(Composite comp) {
 		Group fileGroup = new Group(comp, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(fileGroup);
 		fileGroup.setText("Model file:");
 		fileGroup.setLayout(new GridLayout(2, false));
 
 		modelfile = new Text(fileGroup, SWT.BORDER);
-		modelfile.addModifyListener(new UpdateListener());
+		modelfile.addListener(SWT.Modify, new UpdateListener());
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(modelfile);
 
 		Button browse = new Button(fileGroup, SWT.NONE);
 		browse.setText("Search");
-		browse.addSelectionListener(new SelectionListener() {
-
+		browse.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				ResourceListSelectionDialog dialog = new ResourceListSelectionDialog(
 						getShell(), ResourcesPlugin.getWorkspace().getRoot(),
@@ -84,14 +113,8 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 					modelfile.setText((file.getFullPath().toString()));
 				}
 			}
-
-			public void widgetDefaultSelected(SelectionEvent e) {
-				// Nothing to do
-			}
 		});
-
 		GridDataFactory.fillDefaults().applyTo(browse);
-
 	}
 
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
@@ -101,7 +124,12 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 		try {
 			modelfile.setText(configuration.getAttribute(FILE_NAME,
 					DEFAULT_FILE_NAME));
-
+			cyclePeriod.setText(String.valueOf(configuration.getAttribute(
+					CYCLE_PERIOD, DEFAULT_CYCLE_PERIOD)));
+			btnCycle.setSelection(configuration.getAttribute(IS_CYCLE_BASED,
+					DEFAULT_IS_CYCLE_BASED));
+			btnEvent.setSelection(configuration.getAttribute(IS_EVENT_DRIVEN,
+					DEFAULT_IS_EVENT_DRIVEN));
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
@@ -109,12 +137,15 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(FILE_NAME, modelfile.getText());
+		if (isCyclePeriodValid()) {
+			configuration.setAttribute(CYCLE_PERIOD, getCyclePeriod());
+		}
+		configuration.setAttribute(IS_CYCLE_BASED, btnCycle.getSelection());
+		configuration.setAttribute(IS_EVENT_DRIVEN, btnEvent.getSelection());
 	}
 
-	@Override
-	public void dispose() {
-		image.dispose();
-		super.dispose();
+	private int getCyclePeriod() {
+		return Integer.parseInt(cyclePeriod.getText());
 	}
 
 	public String getName() {
@@ -123,7 +154,7 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 
 	@Override
 	public Image getImage() {
-		return image;
+		return DeclarationImages.LAUNCHER_ICON.image();
 	}
 
 	@Override
@@ -136,13 +167,29 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 				setErrorMessage("file " + model + " does not exist!");
 				return false;
 			}
-
+		String cyclePeriod = this.cyclePeriod.getText();
+		if (cyclePeriod.length() == 0) {
+			setErrorMessage("Empty cycle period!");
+			return false;
+		} else if (!isCyclePeriodValid()) {
+			setErrorMessage("Cycle Period must be a number!");
+			return false;
+		}
 		return super.isValid(launchConfig);
 	}
 
-	private class UpdateListener implements ModifyListener {
+	private boolean isCyclePeriodValid() {
+		try {
+			getCyclePeriod();
+		} catch (NumberFormatException ex) {
+			return false;
+		}
+		return true;
+	}
 
-		public void modifyText(ModifyEvent e) {
+	private class UpdateListener implements Listener {
+
+		public void handleEvent(Event event) {
 			StatechartLaunchConfigurationTab.this
 					.updateLaunchConfigurationDialog();
 		}
