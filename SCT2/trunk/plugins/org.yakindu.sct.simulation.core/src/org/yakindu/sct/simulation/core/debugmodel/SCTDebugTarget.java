@@ -93,7 +93,6 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 		if (!terminated && !suspended)
 			timer.schedule(new TimerTask() {
 				public void run() {
-					System.out.println("CYCLE!");
 					facade.runCycle();
 					scheduleCycle();
 				}
