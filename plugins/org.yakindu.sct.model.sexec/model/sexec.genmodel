@@ -109,11 +109,5 @@
     <genClasses ecoreClass="sexec.ecore#//TraceStateExited">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//TraceStateExited/state"/>
     </genClasses>
-    <genClasses ecoreClass="sexec.ecore#//TraceRegionExited">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//TraceRegionExited/region"/>
-    </genClasses>
-    <genClasses ecoreClass="sexec.ecore#//TraceRegionEntered">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//TraceRegionEntered/region"/>
-    </genClasses>
   </genPackages>
 </genmodel:GenModel>

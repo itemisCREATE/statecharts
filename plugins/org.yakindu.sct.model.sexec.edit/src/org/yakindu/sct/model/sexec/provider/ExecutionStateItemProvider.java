@@ -322,16 +322,6 @@ public class ExecutionStateItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION,
-				 SexecFactory.eINSTANCE.createTraceRegionExited()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION,
-				 SexecFactory.eINSTANCE.createTraceRegionEntered()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createSequence()));
 
@@ -404,16 +394,6 @@ public class ExecutionStateItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createTraceStateExited()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
-				 SexecFactory.eINSTANCE.createTraceRegionExited()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
-				 SexecFactory.eINSTANCE.createTraceRegionEntered()));
 	}
 
 	/**

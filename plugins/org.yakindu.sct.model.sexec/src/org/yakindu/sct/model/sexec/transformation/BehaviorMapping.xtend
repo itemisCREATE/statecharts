@@ -327,7 +327,9 @@ class BehaviorMapping {
 				
 				// process higher order sibling regions
 				for ( region : siblingRegions.take(siblingRegions.indexOf(scope)) ) {
-					seq.addEnterRegion(region)
+					if (region.enterSequence != null) {
+						seq.steps.add(region.enterSequence.newCall)
+					}
 				}
 			} 
 			
@@ -368,12 +370,14 @@ class BehaviorMapping {
 				
 				// process lower order sibling regions 
 				for ( region : siblingRegions.drop(siblingRegions.indexOf(scope)+1) ) {
-					seq.addEnterRegion(region)
-				} 				
+					if (region.enterSequence != null) {
+						seq.steps.add(region.enterSequence.newCall)
+					}
+				}
 			} 
 			seq
 		}])
-			
+		
 		return sequence
 	}
 	
