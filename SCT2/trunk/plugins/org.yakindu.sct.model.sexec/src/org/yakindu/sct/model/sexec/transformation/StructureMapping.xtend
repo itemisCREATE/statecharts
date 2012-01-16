@@ -22,7 +22,6 @@ class StructureMapping {
 	 
 	@Inject extension SexecElementMapping mapping
 	@Inject extension StatechartExtensions sct
-	@Inject extension BehaviorMapping behavior
 	
 	
 	//==========================================================================
@@ -98,7 +97,7 @@ class StructureMapping {
 	def ExecutionFlow mapRegions(Statechart statechart, ExecutionFlow flow){
 		val allRegions = statechart.allRegions
 		flow.regions.addAll( allRegions.map( r | r.mapRegion));
-		return flow		
+		return flow	
 	}
 	
 	

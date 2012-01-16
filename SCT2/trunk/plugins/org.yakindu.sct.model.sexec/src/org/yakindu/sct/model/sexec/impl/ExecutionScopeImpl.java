@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.MappedElement;
+import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.StateVector;
 
@@ -38,6 +39,8 @@ import org.yakindu.sct.model.sexec.StateVector;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getStateVector <em>State Vector</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getSubScopes <em>Sub Scopes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getSuperScope <em>Super Scope</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getEnterSequence <em>Enter Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getExitSequence <em>Exit Sequence</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,6 +86,26 @@ public class ExecutionScopeImpl extends NamedElementImpl implements ExecutionSco
 	 * @ordered
 	 */
 	protected ExecutionScope superScope;
+
+	/**
+	 * The cached value of the '{@link #getEnterSequence() <em>Enter Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEnterSequence()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sequence enterSequence;
+
+	/**
+	 * The cached value of the '{@link #getExitSequence() <em>Exit Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExitSequence()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sequence exitSequence;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -261,6 +284,92 @@ public class ExecutionScopeImpl extends NamedElementImpl implements ExecutionSco
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Sequence getEnterSequence() {
+		return enterSequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEnterSequence(Sequence newEnterSequence, NotificationChain msgs) {
+		Sequence oldEnterSequence = enterSequence;
+		enterSequence = newEnterSequence;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE, oldEnterSequence, newEnterSequence);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEnterSequence(Sequence newEnterSequence) {
+		if (newEnterSequence != enterSequence) {
+			NotificationChain msgs = null;
+			if (enterSequence != null)
+				msgs = ((InternalEObject)enterSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE, null, msgs);
+			if (newEnterSequence != null)
+				msgs = ((InternalEObject)newEnterSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE, null, msgs);
+			msgs = basicSetEnterSequence(newEnterSequence, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE, newEnterSequence, newEnterSequence));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Sequence getExitSequence() {
+		return exitSequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetExitSequence(Sequence newExitSequence, NotificationChain msgs) {
+		Sequence oldExitSequence = exitSequence;
+		exitSequence = newExitSequence;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE, oldExitSequence, newExitSequence);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExitSequence(Sequence newExitSequence) {
+		if (newExitSequence != exitSequence) {
+			NotificationChain msgs = null;
+			if (exitSequence != null)
+				msgs = ((InternalEObject)exitSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE, null, msgs);
+			if (newExitSequence != null)
+				msgs = ((InternalEObject)newExitSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE, null, msgs);
+			msgs = basicSetExitSequence(newExitSequence, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE, newExitSequence, newExitSequence));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -289,6 +398,10 @@ public class ExecutionScopeImpl extends NamedElementImpl implements ExecutionSco
 				return ((InternalEList<?>)getSubScopes()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE:
 				return basicSetSuperScope(null, msgs);
+			case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE:
+				return basicSetEnterSequence(null, msgs);
+			case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE:
+				return basicSetExitSequence(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -311,6 +424,10 @@ public class ExecutionScopeImpl extends NamedElementImpl implements ExecutionSco
 			case SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE:
 				if (resolve) return getSuperScope();
 				return basicGetSuperScope();
+			case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE:
+				return getEnterSequence();
+			case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE:
+				return getExitSequence();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -337,6 +454,12 @@ public class ExecutionScopeImpl extends NamedElementImpl implements ExecutionSco
 			case SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE:
 				setSuperScope((ExecutionScope)newValue);
 				return;
+			case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE:
+				setEnterSequence((Sequence)newValue);
+				return;
+			case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE:
+				setExitSequence((Sequence)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -361,6 +484,12 @@ public class ExecutionScopeImpl extends NamedElementImpl implements ExecutionSco
 			case SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE:
 				setSuperScope((ExecutionScope)null);
 				return;
+			case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE:
+				setEnterSequence((Sequence)null);
+				return;
+			case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE:
+				setExitSequence((Sequence)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -381,6 +510,10 @@ public class ExecutionScopeImpl extends NamedElementImpl implements ExecutionSco
 				return subScopes != null && !subScopes.isEmpty();
 			case SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE:
 				return superScope != null;
+			case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE:
+				return enterSequence != null;
+			case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE:
+				return exitSequence != null;
 		}
 		return super.eIsSet(featureID);
 	}
