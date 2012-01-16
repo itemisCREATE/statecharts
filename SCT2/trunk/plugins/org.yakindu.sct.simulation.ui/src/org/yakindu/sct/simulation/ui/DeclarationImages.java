@@ -21,7 +21,9 @@ public enum DeclarationImages {
 	
 	COLLAPSE_ALL("icons/collapseall.gif"),
 	
-	EXPAND_ALL("icons/expandall.gif");
+	EXPAND_ALL("icons/expandall.gif"),
+	
+	LAUNCHER_ICON("icons/Statechart-Launcher-16.png");
 
 	private final String path;
 
