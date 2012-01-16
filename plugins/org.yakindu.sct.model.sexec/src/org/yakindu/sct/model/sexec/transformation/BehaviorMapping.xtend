@@ -256,16 +256,16 @@ class BehaviorMapping {
 		// first process the exit behavior of orthogonal states that hase to be performed before source exit
 		val topExitState = t.exitStates.last
 		if ( topExitState != null ) {
-			val List<RegularState> leafStates = topExitState.collectLeafStates(new ArrayList<RegularState>())
+			val List<ExecutionState> leafStates = topExitState.collectLeafStates(new ArrayList<RegularState>()).map(rs|rs.create)
 			val topVector = topExitState.stateVector
 			val sourceVector = t.source.stateVector
 		
 			val prepositions = (topVector.offset .. sourceVector.offset).take(sourceVector.offset - topVector.offset)
 			
 			for ( i: prepositions ) {
-						
+				
 				// create a state switch for each state configuration vector position
-				var StateSwitch sSwitch = topExitState.defineExitSwitch(leafStates, i)
+				var StateSwitch sSwitch = topExitState.create.defineExitSwitch(leafStates, i)
 				sequence.steps.add(sSwitch);
 			}
 		}
@@ -289,7 +289,7 @@ class BehaviorMapping {
 
 		// third process the exit behavior of orthogonal states that hase to be performed after source exit
 		if ( topExitState != null ) {
-			val List<RegularState> leafStates = topExitState.collectLeafStates(new ArrayList<RegularState>())
+			val List<ExecutionState> leafStates = topExitState.collectLeafStates(new ArrayList<RegularState>()).map(rs|rs.create)
 			val topVector = topExitState.stateVector
 			val sourceVector = t.source.stateVector
 		
@@ -298,7 +298,7 @@ class BehaviorMapping {
 			for ( i: postpositions ) {
 						
 				// create a state switch for each state configuration vector position
-				var StateSwitch sSwitch = topExitState.defineExitSwitch(leafStates, i)
+				var StateSwitch sSwitch = topExitState.create.defineExitSwitch(leafStates, i)
 				sequence.steps.add(sSwitch);
 			}
 		}
@@ -396,17 +396,26 @@ class BehaviorMapping {
 		l.removeAll(t.target.containers)
 		l.filter( typeof(State) )
 	}
-	
+
 	def Iterable<State> entryStates(Transition t) {
 		val l = t.target.containers
 		l.removeAll(t.source.containers)
 		l.filter( typeof(State) )
 	}
 	
-	def List<ExecutionScope> exitScopes(Transition t) {
-//		val l = t.source.containers
-//		l.removeAll(t.target.containers)
-//		l.filter( typeof(State) ).toList
+	def Iterable<ExecutionScope> exitScopes(Transition t) {
+		val source = t.source
+		var executionSource = switch (source) {
+				RegularState: source.create
+			}
+		
+		val target = t.target
+		var executionTarget = switch (source) {
+				RegularState: source.create
+			}
+		
+		val l =executionSource.containers
+		l.removeAll(executionTarget.containers)
 		null
 	}
 	

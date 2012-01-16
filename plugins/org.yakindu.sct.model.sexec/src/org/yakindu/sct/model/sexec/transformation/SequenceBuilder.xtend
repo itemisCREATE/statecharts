@@ -17,6 +17,8 @@ import java.util.ArrayList
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.AssignmentOperator
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.ExecutionScope
 
 class SequenceBuilder {
 	
@@ -125,9 +127,27 @@ class SequenceBuilder {
 		
 
 	def dispatch void defineStateExitSequence(Region r) {
+		val execRegion = r.create
+		val seq = sexec.factory.createSequence
+		seq.name = "exitSequence"
+		seq.comment = "Default exit sequence for region "+r.name
 		
 		// process all states of a region
 		for ( s : r.vertices ) defineStateExitSequence(s)
+		
+		// collect leaf states
+		val Iterable<ExecutionState> leafStates = r.collectLeafStates(new ArrayList<RegularState>()).map(rs|rs.create)
+		val sVector = execRegion.stateVector
+
+		for ( i: sVector.offset .. sVector.offset + sVector.size - 1 ) {
+					
+			// create a state switch for each state configuration vector position
+			val StateSwitch sSwitch = execRegion.defineExitSwitch(leafStates, i)
+			seq.steps.add(sSwitch);
+		}
+		
+		execRegion.exitSequence = seq
+	
 	}
 	
 	def dispatch void defineStateExitSequence(Vertex v) {}
@@ -158,22 +178,15 @@ class SequenceBuilder {
 					
 		} else {
 
-			// first enforce calculation of all child exit sequences
-			state.regions.forEach( r | { r.defineStateExitSequence null })
+			for (r : state.regions) {
+				// first enforce calculation of all child exit sequences
+				r.defineStateExitSequence
 
-			// collect leaf states
-			val List<RegularState> leafStates = state.collectLeafStates(new ArrayList<RegularState>())
-			val sVector = execState.stateVector
-	
-			for ( i: sVector.offset .. sVector.offset + sVector.size - 1 ) {
-						
-				// create a state switch for each state configuration vector position
-				var StateSwitch sSwitch = state.defineExitSwitch(leafStates, i)
-				seq.steps.add(sSwitch);
-
+				val execRegion = r.create
+				if (execRegion.exitSequence != null) {
+					seq.steps.add(execRegion.exitSequence.newCall)
+				}
 			}
-			
-			
 		}
 
 		if (execState.exitAction != null) seq.steps.add(execState.exitAction.newCall)
@@ -185,37 +198,38 @@ class SequenceBuilder {
 	
 	
 	
-	def StateSwitch defineExitSwitch(State state, List<RegularState> states, int pos) {
+	def StateSwitch defineExitSwitch(ExecutionScope state, Iterable<ExecutionState> leafStates, int pos) {
 
 		// create a state switch
 		var StateSwitch sSwitch = sexec.factory.createStateSwitch
 		sSwitch.stateConfigurationIdx = pos
-		sSwitch.comment = "Handle exit of all possible states on position " + sSwitch.stateConfigurationIdx + "..."
+		sSwitch.comment = "Handle exit of all possible states (of "+state.name+") at position " + sSwitch.stateConfigurationIdx + "..."
 						
-		val List<RegularState> posStates = states.filter( rs | rs.create.stateVector.size == 1 && rs.create.stateVector.offset == pos).toList					
+		val Iterable<ExecutionState> posStates = leafStates.filter( rs | rs.stateVector.size == 1 && rs.stateVector.offset == pos)					
 		
-		// create a case for each leaf state				
+		// create a case for each leaf state
 		for ( s : posStates ) {
 
 			val caseSeq = sexec.factory.createSequence
-			caseSeq.steps += s.create.exitSequence.newCall
-			val es = s.create
-
-
-			val exitStates = s.parentStates
-			exitStates.removeAll(state.parentStates)
-			exitStates.remove(s)
+			if (s.exitSequence != null) {
+				caseSeq.steps += s.exitSequence.newCall
+			}
+			
+			val exitScopes = s.parentScopes
+			exitScopes.removeAll(state.parentScopes)
+			exitScopes.remove(s)
 			
 			// include exitAction calls up to the direct child level.
-			exitStates.fold(caseSeq , [ cs, exitState | {
-				if (es.stateVector.last == exitState.create.stateVector.last) {
-					if (exitState.create.exitAction != null) cs.steps.add(exitState.create.exitAction.newCall)
-					if ( _addTraceSteps ) cs.steps.add(exitState.create.newTraceStateExited)				
+			exitScopes.fold(caseSeq , [ cs, exitScope | {
+				if (exitScope instanceof ExecutionState && s.stateVector.last == exitScope.stateVector.last) {
+					val execState = exitScope as ExecutionState
+					if (execState.exitAction != null) cs.steps.add(execState.exitAction.newCall)
+					if ( _addTraceSteps ) cs.steps.add(execState.newTraceStateExited)
 				}
 				cs
 			}]) 
 			
-			if (s.create.exitSequence != null) sSwitch.cases.add(s.create.newCase(caseSeq))
+			if (!caseSeq.steps.empty) sSwitch.cases.add(s.newCase(caseSeq))
 			
 		}
 		

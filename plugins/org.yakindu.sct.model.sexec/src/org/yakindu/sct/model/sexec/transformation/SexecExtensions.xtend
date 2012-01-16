@@ -17,6 +17,7 @@ import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.sexec.ExecutionScope
 import java.util.Collections
 import java.util.List
+import org.yakindu.sct.model.sexec.ExecutionRegion
 
 class SexecExtensions {
 	
@@ -50,8 +51,27 @@ class SexecExtensions {
 		sCase.step = step
 		return sCase
 	}
-	 
 	
+	def dispatch List<ExecutionState> collectLeafStates(ExecutionState state, List<ExecutionState> leafStates) {
+		if ( state.isLeaf ) 
+			leafStates += state
+		else {
+			for ( r : state.subScopes ) {
+				r.collectLeafStates(leafStates)
+			}
+		}
+		return leafStates	
+	}
+	
+	 
+		
+	def dispatch List<ExecutionState> collectLeafStates(ExecutionRegion region, List<ExecutionState> leafStates) {
+		for ( r : region.subScopes ) {
+			r.collectLeafStates(leafStates)
+		}
+		
+		return leafStates	
+	}
 	
 	def last(StateVector sv) {
 		sv.offset + sv.size -1
