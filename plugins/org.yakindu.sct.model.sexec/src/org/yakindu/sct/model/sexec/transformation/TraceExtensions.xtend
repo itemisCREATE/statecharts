@@ -5,11 +5,15 @@ import org.yakindu.sct.model.sexec.ExecutionNode
 import org.yakindu.sct.model.sexec.ExecutionState
 import com.google.inject.Inject
 import com.google.inject.name.Named
+import org.yakindu.sct.model.sexec.Sequence
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sexec.ExecutionRegion
 
 class TraceExtensions {
 	
 	@Inject extension SexecExtensions sexec
-	
+	@Inject extension SexecElementMapping mapping
+
 	@Inject
 	@Named("ADD_TRACES") 
 	boolean _addTraceSteps
@@ -41,6 +45,38 @@ class TraceExtensions {
 		val t = sexec.factory.createTraceStateExited
 		t.state = state
 		t
+	}
+
+	def newTraceRegionExited(ExecutionRegion state) {
+		val t = sexec.factory.createTraceRegionExited
+		t.region = state
+		t
+	}
+	def newTraceRegionEntered(ExecutionRegion state) {
+		val t = sexec.factory.createTraceRegionEntered
+		t.region = state
+		t
+	}
+	
+	def traceStateExited(Sequence seq, ExecutionState state) {
+		if (addTraceSteps) {
+			seq.steps.add(state.newTraceStateExited)
+		}
+	}
+	def traceRegionExited(Sequence seq, ExecutionRegion state) {
+		if (addTraceSteps) {
+			seq.steps.add(state.newTraceRegionExited)
+		}
+	}
+	def traceRegionEntered(Sequence seq, ExecutionRegion state) {
+		if (addTraceSteps) {
+			seq.steps.add(state.newTraceRegionEntered)
+		}
+	}
+	def traceStateExited(Sequence seq, RegularState state) {
+		if (addTraceSteps) {
+			traceStateExited(seq, state.create)
+		}
 	}
 	 
 }

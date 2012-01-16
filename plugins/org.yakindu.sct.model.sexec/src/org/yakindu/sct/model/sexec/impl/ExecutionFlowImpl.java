@@ -42,9 +42,9 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getStateVector <em>State Vector</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSubScopes <em>Sub Scopes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSuperScope <em>Super Scope</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getStates <em>States</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getEnterSequence <em>Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getExitSequence <em>Exit Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getStates <em>States</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getRegions <em>Regions</em>}</li>
  * </ul>
@@ -114,16 +114,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	protected ExecutionScope superScope;
 
 	/**
-	 * The cached value of the '{@link #getStates() <em>States</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStates()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ExecutionState> states;
-
-	/**
 	 * The cached value of the '{@link #getEnterSequence() <em>Enter Sequence</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -142,6 +132,16 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected Sequence exitSequence;
+
+	/**
+	 * The cached value of the '{@link #getStates() <em>States</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStates()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExecutionState> states;
 
 	/**
 	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
@@ -511,12 +511,12 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return ((InternalEList<?>)getSubScopes()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__SUPER_SCOPE:
 				return basicSetSuperScope(null, msgs);
-			case SexecPackage.EXECUTION_FLOW__STATES:
-				return ((InternalEList<?>)getStates()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
 				return basicSetEnterSequence(null, msgs);
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				return basicSetExitSequence(null, msgs);
+			case SexecPackage.EXECUTION_FLOW__STATES:
+				return ((InternalEList<?>)getStates()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__NODES:
 				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__REGIONS:
@@ -545,12 +545,12 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__SUPER_SCOPE:
 				if (resolve) return getSuperScope();
 				return basicGetSuperScope();
-			case SexecPackage.EXECUTION_FLOW__STATES:
-				return getStates();
 			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
 				return getEnterSequence();
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				return getExitSequence();
+			case SexecPackage.EXECUTION_FLOW__STATES:
+				return getStates();
 			case SexecPackage.EXECUTION_FLOW__NODES:
 				return getNodes();
 			case SexecPackage.EXECUTION_FLOW__REGIONS:
@@ -584,15 +584,15 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__SUPER_SCOPE:
 				setSuperScope((ExecutionScope)newValue);
 				return;
-			case SexecPackage.EXECUTION_FLOW__STATES:
-				getStates().clear();
-				getStates().addAll((Collection<? extends ExecutionState>)newValue);
-				return;
 			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
 				setEnterSequence((Sequence)newValue);
 				return;
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				setExitSequence((Sequence)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__STATES:
+				getStates().clear();
+				getStates().addAll((Collection<? extends ExecutionState>)newValue);
 				return;
 			case SexecPackage.EXECUTION_FLOW__NODES:
 				getNodes().clear();
@@ -629,14 +629,14 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__SUPER_SCOPE:
 				setSuperScope((ExecutionScope)null);
 				return;
-			case SexecPackage.EXECUTION_FLOW__STATES:
-				getStates().clear();
-				return;
 			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
 				setEnterSequence((Sequence)null);
 				return;
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				setExitSequence((Sequence)null);
+				return;
+			case SexecPackage.EXECUTION_FLOW__STATES:
+				getStates().clear();
 				return;
 			case SexecPackage.EXECUTION_FLOW__NODES:
 				getNodes().clear();
@@ -666,12 +666,12 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return subScopes != null && !subScopes.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__SUPER_SCOPE:
 				return superScope != null;
-			case SexecPackage.EXECUTION_FLOW__STATES:
-				return states != null && !states.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
 				return enterSequence != null;
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				return exitSequence != null;
+			case SexecPackage.EXECUTION_FLOW__STATES:
+				return states != null && !states.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__NODES:
 				return nodes != null && !nodes.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__REGIONS:
@@ -704,6 +704,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				case SexecPackage.EXECUTION_FLOW__STATE_VECTOR: return SexecPackage.EXECUTION_SCOPE__STATE_VECTOR;
 				case SexecPackage.EXECUTION_FLOW__SUB_SCOPES: return SexecPackage.EXECUTION_SCOPE__SUB_SCOPES;
 				case SexecPackage.EXECUTION_FLOW__SUPER_SCOPE: return SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE;
+				case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE: return SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE;
+				case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE: return SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE;
 				default: return -1;
 			}
 		}
@@ -734,6 +736,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				case SexecPackage.EXECUTION_SCOPE__STATE_VECTOR: return SexecPackage.EXECUTION_FLOW__STATE_VECTOR;
 				case SexecPackage.EXECUTION_SCOPE__SUB_SCOPES: return SexecPackage.EXECUTION_FLOW__SUB_SCOPES;
 				case SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE: return SexecPackage.EXECUTION_FLOW__SUPER_SCOPE;
+				case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE: return SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE;
+				case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE: return SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE;
 				default: return -1;
 			}
 		}

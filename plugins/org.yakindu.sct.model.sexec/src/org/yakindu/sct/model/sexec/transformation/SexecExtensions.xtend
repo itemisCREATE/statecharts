@@ -14,6 +14,9 @@ import org.yakindu.sct.model.stext.stext.AlwaysEvent
 import org.yakindu.sct.model.stext.stext.EventSpec
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import org.yakindu.sct.model.sexec.ExecutionScope
+import java.util.Collections
+import java.util.List
 
 class SexecExtensions {
 	
@@ -56,5 +59,31 @@ class SexecExtensions {
 	
 	def first(StateVector sv) {
 		sv.offset
+	}
+	
+	def parentScopes(ExecutionScope scope) {
+		val parents = <ExecutionScope>newArrayList
+		var s = scope
+		while(s != null) {
+			parents.add(s)
+			s=s.superScope
+		}
+		return parents
+	}
+	
+	/**
+	 * Collect all scopes beneath this scope which does not contain subscopes and are instances of ExecutionState.
+	 */
+	def List<ExecutionState> collectLeafScopes(ExecutionScope scope, List<ExecutionState> leafs) {
+		if (scope.subScopes.empty) {
+			if (scope instanceof ExecutionState) {
+				leafs.add(scope as ExecutionState)
+			}
+		} else {
+			for (s:scope.subScopes) {
+				s.collectLeafScopes(leafs)
+			}
+		}
+		return leafs
 	}
 }

@@ -26,6 +26,10 @@ class SgraphExtensions {
 		s.containers.filter( typeof(RegularState) ).toList		
 	}
 
+	def List<RegularState> parentStates(Region s) {
+		s.containers.filter( typeof(RegularState) ).toList		
+	}
+
 
 	def List<EObject> containers(EObject obj) {
 		val containerList = new ArrayList<EObject>()

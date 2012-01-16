@@ -217,6 +217,14 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createTraceStateExitedAdapter();
 			}
 			@Override
+			public Adapter caseTraceRegionExited(TraceRegionExited object) {
+				return createTraceRegionExitedAdapter();
+			}
+			@Override
+			public Adapter caseTraceRegionEntered(TraceRegionEntered object) {
+				return createTraceRegionEnteredAdapter();
+			}
+			@Override
 			public Adapter caseScopedElement(ScopedElement object) {
 				return createScopedElementAdapter();
 			}
@@ -627,6 +635,34 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTraceStateExitedAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.TraceRegionExited <em>Trace Region Exited</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.TraceRegionExited
+	 * @generated
+	 */
+	public Adapter createTraceRegionExitedAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.TraceRegionEntered <em>Trace Region Entered</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.TraceRegionEntered
+	 * @generated
+	 */
+	public Adapter createTraceRegionEnteredAdapter() {
 		return null;
 	}
 

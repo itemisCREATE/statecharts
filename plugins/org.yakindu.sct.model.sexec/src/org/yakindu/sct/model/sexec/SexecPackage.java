@@ -190,22 +190,13 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_FLOW__SUPER_SCOPE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>States</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_FLOW__STATES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
 	 * The feature id for the '<em><b>Enter Sequence</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__ENTER_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 6;
+	int EXECUTION_FLOW__ENTER_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Exit Sequence</b></em>' containment reference.
@@ -214,7 +205,16 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__EXIT_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 7;
+	int EXECUTION_FLOW__EXIT_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>States</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_FLOW__STATES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
@@ -490,40 +490,13 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_STATE__SUPER_SCOPE = EXECUTION_NODE_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Leaf</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_STATE__LEAF = EXECUTION_NODE_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Entry Action</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_STATE__ENTRY_ACTION = EXECUTION_NODE_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Exit Action</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_STATE__EXIT_ACTION = EXECUTION_NODE_FEATURE_COUNT + 5;
-
-	/**
 	 * The feature id for the '<em><b>Enter Sequence</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__ENTER_SEQUENCE = EXECUTION_NODE_FEATURE_COUNT + 6;
+	int EXECUTION_STATE__ENTER_SEQUENCE = EXECUTION_NODE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Exit Sequence</b></em>' containment reference.
@@ -532,7 +505,34 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__EXIT_SEQUENCE = EXECUTION_NODE_FEATURE_COUNT + 7;
+	int EXECUTION_STATE__EXIT_SEQUENCE = EXECUTION_NODE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Leaf</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__LEAF = EXECUTION_NODE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Entry Action</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__ENTRY_ACTION = EXECUTION_NODE_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Exit Action</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__EXIT_ACTION = EXECUTION_NODE_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Execution State</em>' class.
@@ -599,13 +599,31 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_SCOPE__SUPER_SCOPE = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Enter Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SCOPE__ENTER_SEQUENCE = NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Exit Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SCOPE__EXIT_SEQUENCE = NAMED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Execution Scope</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_SCOPE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int EXECUTION_SCOPE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionRegionImpl <em>Execution Region</em>}' class.
@@ -661,6 +679,24 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXECUTION_REGION__SUPER_SCOPE = EXECUTION_SCOPE__SUPER_SCOPE;
+
+	/**
+	 * The feature id for the '<em><b>Enter Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_REGION__ENTER_SEQUENCE = EXECUTION_SCOPE__ENTER_SEQUENCE;
+
+	/**
+	 * The feature id for the '<em><b>Exit Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_REGION__EXIT_SEQUENCE = EXECUTION_SCOPE__EXIT_SEQUENCE;
 
 	/**
 	 * The number of structural features of the '<em>Execution Region</em>' class.
@@ -1859,6 +1895,117 @@ public interface SexecPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceRegionExitedImpl <em>Trace Region Exited</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.TraceRegionExitedImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceRegionExited()
+	 * @generated
+	 */
+	int TRACE_REGION_EXITED = 30;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_REGION_EXITED__NAME = TRACE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_REGION_EXITED__COMMENT = TRACE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_REGION_EXITED__CALLER = TRACE__CALLER;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_REGION_EXITED__REGION = TRACE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Trace Region Exited</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_REGION_EXITED_FEATURE_COUNT = TRACE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceRegionEnteredImpl <em>Trace Region Entered</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.TraceRegionEnteredImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceRegionEntered()
+	 * @generated
+	 */
+	int TRACE_REGION_ENTERED = 31;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_REGION_ENTERED__NAME = TRACE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_REGION_ENTERED__COMMENT = TRACE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_REGION_ENTERED__CALLER = TRACE__CALLER;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_REGION_ENTERED__REGION = TRACE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Trace Region Entered</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_REGION_ENTERED_FEATURE_COUNT = TRACE_FEATURE_COUNT + 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionFlow <em>Execution Flow</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1878,28 +2025,6 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExecutionFlow_States();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionFlow#getEnterSequence <em>Enter Sequence</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Enter Sequence</em>'.
-	 * @see org.yakindu.sct.model.sexec.ExecutionFlow#getEnterSequence()
-	 * @see #getExecutionFlow()
-	 * @generated
-	 */
-	EReference getExecutionFlow_EnterSequence();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionFlow#getExitSequence <em>Exit Sequence</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Exit Sequence</em>'.
-	 * @see org.yakindu.sct.model.sexec.ExecutionFlow#getExitSequence()
-	 * @see #getExecutionFlow()
-	 * @generated
-	 */
-	EReference getExecutionFlow_ExitSequence();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sexec.ExecutionFlow#getNodes <em>Nodes</em>}'.
@@ -1999,28 +2124,6 @@ public interface SexecPackage extends EPackage {
 	EReference getExecutionState_ExitAction();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionState#getEnterSequence <em>Enter Sequence</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Enter Sequence</em>'.
-	 * @see org.yakindu.sct.model.sexec.ExecutionState#getEnterSequence()
-	 * @see #getExecutionState()
-	 * @generated
-	 */
-	EReference getExecutionState_EnterSequence();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionState#getExitSequence <em>Exit Sequence</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Exit Sequence</em>'.
-	 * @see org.yakindu.sct.model.sexec.ExecutionState#getExitSequence()
-	 * @see #getExecutionState()
-	 * @generated
-	 */
-	EReference getExecutionState_ExitSequence();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionScope <em>Execution Scope</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2062,6 +2165,28 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExecutionScope_SuperScope();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionScope#getEnterSequence <em>Enter Sequence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Enter Sequence</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionScope#getEnterSequence()
+	 * @see #getExecutionScope()
+	 * @generated
+	 */
+	EReference getExecutionScope_EnterSequence();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionScope#getExitSequence <em>Exit Sequence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Exit Sequence</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionScope#getExitSequence()
+	 * @see #getExecutionScope()
+	 * @generated
+	 */
+	EReference getExecutionScope_ExitSequence();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionRegion <em>Execution Region</em>}'.
@@ -2613,6 +2738,48 @@ public interface SexecPackage extends EPackage {
 	EReference getTraceStateExited_State();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.TraceRegionExited <em>Trace Region Exited</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Trace Region Exited</em>'.
+	 * @see org.yakindu.sct.model.sexec.TraceRegionExited
+	 * @generated
+	 */
+	EClass getTraceRegionExited();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.TraceRegionExited#getRegion <em>Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Region</em>'.
+	 * @see org.yakindu.sct.model.sexec.TraceRegionExited#getRegion()
+	 * @see #getTraceRegionExited()
+	 * @generated
+	 */
+	EReference getTraceRegionExited_Region();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.TraceRegionEntered <em>Trace Region Entered</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Trace Region Entered</em>'.
+	 * @see org.yakindu.sct.model.sexec.TraceRegionEntered
+	 * @generated
+	 */
+	EClass getTraceRegionEntered();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.TraceRegionEntered#getRegion <em>Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Region</em>'.
+	 * @see org.yakindu.sct.model.sexec.TraceRegionEntered#getRegion()
+	 * @see #getTraceRegionEntered()
+	 * @generated
+	 */
+	EReference getTraceRegionEntered_Region();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.CheckRef <em>Check Ref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2727,22 +2894,6 @@ public interface SexecPackage extends EPackage {
 		EReference EXECUTION_FLOW__STATES = eINSTANCE.getExecutionFlow_States();
 
 		/**
-		 * The meta object literal for the '<em><b>Enter Sequence</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXECUTION_FLOW__ENTER_SEQUENCE = eINSTANCE.getExecutionFlow_EnterSequence();
-
-		/**
-		 * The meta object literal for the '<em><b>Exit Sequence</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXECUTION_FLOW__EXIT_SEQUENCE = eINSTANCE.getExecutionFlow_ExitSequence();
-
-		/**
 		 * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2819,22 +2970,6 @@ public interface SexecPackage extends EPackage {
 		EReference EXECUTION_STATE__EXIT_ACTION = eINSTANCE.getExecutionState_ExitAction();
 
 		/**
-		 * The meta object literal for the '<em><b>Enter Sequence</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXECUTION_STATE__ENTER_SEQUENCE = eINSTANCE.getExecutionState_EnterSequence();
-
-		/**
-		 * The meta object literal for the '<em><b>Exit Sequence</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXECUTION_STATE__EXIT_SEQUENCE = eINSTANCE.getExecutionState_ExitSequence();
-
-		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl <em>Execution Scope</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2867,6 +3002,22 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXECUTION_SCOPE__SUPER_SCOPE = eINSTANCE.getExecutionScope_SuperScope();
+
+		/**
+		 * The meta object literal for the '<em><b>Enter Sequence</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_SCOPE__ENTER_SEQUENCE = eINSTANCE.getExecutionScope_EnterSequence();
+
+		/**
+		 * The meta object literal for the '<em><b>Exit Sequence</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_SCOPE__EXIT_SEQUENCE = eINSTANCE.getExecutionScope_ExitSequence();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionRegionImpl <em>Execution Region</em>}' class.
@@ -3329,6 +3480,42 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRACE_STATE_EXITED__STATE = eINSTANCE.getTraceStateExited_State();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.TraceRegionExitedImpl <em>Trace Region Exited</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.TraceRegionExitedImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceRegionExited()
+		 * @generated
+		 */
+		EClass TRACE_REGION_EXITED = eINSTANCE.getTraceRegionExited();
+
+		/**
+		 * The meta object literal for the '<em><b>Region</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRACE_REGION_EXITED__REGION = eINSTANCE.getTraceRegionExited_Region();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.TraceRegionEnteredImpl <em>Trace Region Entered</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.TraceRegionEnteredImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceRegionEntered()
+		 * @generated
+		 */
+		EClass TRACE_REGION_ENTERED = eINSTANCE.getTraceRegionEntered();
+
+		/**
+		 * The meta object literal for the '<em><b>Region</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRACE_REGION_ENTERED__REGION = eINSTANCE.getTraceRegionEntered_Region();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.CheckRefImpl <em>Check Ref</em>}' class.
