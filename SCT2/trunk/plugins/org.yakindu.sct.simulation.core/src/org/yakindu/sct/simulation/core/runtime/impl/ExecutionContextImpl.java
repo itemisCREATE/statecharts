@@ -36,11 +36,13 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	private List<ExecutionEvent> declaredEvents;
 	private List<ExecutionEvent> raisedEvents;
 	private ExecutionState[] activeStateConfig;
+	private double timeScaleFactor;
 
 	public ExecutionContextImpl() {
 		variables = new ArrayList<ExecutionVariable>();
 		declaredEvents = new ArrayList<ExecutionEvent>();
 		raisedEvents = new ArrayList<ExecutionEvent>();
+		timeScaleFactor = 1.0d;
 		activeStateConfig = null;
 	}
 
@@ -180,5 +182,15 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 			container = container.eContainer();
 		}
 		return result;
+	}
+
+	public double getTimeScaleFactor() {
+		return timeScaleFactor;
+	}
+
+	public void setTimeScaleFactor(double factor) {
+		double oldFactor = timeScaleFactor;
+		timeScaleFactor = factor;
+		notifyTimeScaleFactorChanged(oldFactor, factor);
 	}
 }

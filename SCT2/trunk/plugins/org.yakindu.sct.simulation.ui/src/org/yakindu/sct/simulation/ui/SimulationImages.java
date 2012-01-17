@@ -9,7 +9,7 @@ import org.eclipse.swt.graphics.Image;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public enum DeclarationImages {
+public enum SimulationImages {
 
 	EVENT("icons/Event.gif"),
 	
@@ -27,7 +27,7 @@ public enum DeclarationImages {
 
 	private final String path;
 
-	private DeclarationImages(String path) {
+	private SimulationImages(String path) {
 		this.path = path;
 	}
 

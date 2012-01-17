@@ -32,7 +32,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ResourceListSelectionDialog;
 import org.yakindu.sct.simulation.core.launch.IStatechartLaunchParameters;
-import org.yakindu.sct.simulation.ui.DeclarationImages;
+import org.yakindu.sct.simulation.ui.SimulationImages;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -56,8 +56,8 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 
 	private void createFileSelectionGroup(Composite comp) {
 		createModelFileGroup(comp);
-		createCyclePeriodGroup(comp);
 		createExecutionTypeControls(comp);
+		createCyclePeriodGroup(comp);
 	}
 
 	private void createExecutionTypeControls(Composite parent) {
@@ -68,10 +68,12 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 		btnCycle = new Button(propertyGroup, SWT.RADIO);
 		btnCycle.setText("cycle based");
 		btnCycle.addListener(SWT.Selection, new UpdateListener());
+		btnCycle.addListener(SWT.Selection, new EnableStateListener());
 		GridDataFactory.fillDefaults().applyTo(btnCycle);
 		btnEvent = new Button(propertyGroup, SWT.RADIO);
 		btnEvent.setText("event driven");
 		btnEvent.addListener(SWT.Selection, new UpdateListener());
+		btnCycle.addListener(SWT.Selection, new EnableStateListener());
 		GridDataFactory.fillDefaults().applyTo(btnEvent);
 	}
 
@@ -130,6 +132,7 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 					DEFAULT_IS_CYCLE_BASED));
 			btnEvent.setSelection(configuration.getAttribute(IS_EVENT_DRIVEN,
 					DEFAULT_IS_EVENT_DRIVEN));
+			cyclePeriod.setEnabled(btnCycle.getSelection());
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
@@ -154,7 +157,7 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 
 	@Override
 	public Image getImage() {
-		return DeclarationImages.LAUNCHER_ICON.image();
+		return SimulationImages.LAUNCHER_ICON.image();
 	}
 
 	@Override
@@ -185,6 +188,12 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 			return false;
 		}
 		return true;
+	}
+
+	private class EnableStateListener implements Listener {
+		public void handleEvent(Event event) {
+			cyclePeriod.setEnabled(btnCycle.getSelection());
+		}
 	}
 
 	private class UpdateListener implements Listener {

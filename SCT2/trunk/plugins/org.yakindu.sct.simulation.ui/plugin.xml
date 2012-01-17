@@ -56,10 +56,10 @@
        point="org.eclipse.ui.views">
     <view
           allowMultiple="false"
-          class="org.yakindu.sct.simulation.ui.view.DeclarationView"
+          class="org.yakindu.sct.simulation.ui.view.SimulationView"
           icon="icons/Declarations-View-16.gif"
           id="org.yakindu.sct.simulation.ui.declarationview"
-          name="Declarations View"
+          name="Simulation View"
           restorable="true">
     </view>
  </extension>

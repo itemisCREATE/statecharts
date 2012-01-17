@@ -33,7 +33,7 @@ public class EventDrivenExecutionFacadeController extends
 	private Thread cycleRunner;
 
 	private BlockingQueue<ExecutionEvent> events;
-
+	
 	public EventDrivenExecutionFacadeController(IExecutionFacade facade) {
 		super(facade);
 		facade.getExecutionContext().addExecutionContextListener(this);
@@ -79,5 +79,9 @@ public class EventDrivenExecutionFacadeController extends
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void timeScaleFactorChanged(double oldFactor, double newFactor) {
+		
 	}
 }

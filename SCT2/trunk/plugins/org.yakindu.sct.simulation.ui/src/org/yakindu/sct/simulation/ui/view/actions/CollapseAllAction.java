@@ -12,7 +12,7 @@ package org.yakindu.sct.simulation.ui.view.actions;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.yakindu.sct.simulation.ui.DeclarationImages;
+import org.yakindu.sct.simulation.ui.SimulationImages;
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -26,7 +26,7 @@ public class CollapseAllAction extends Action {
 		super("Collapse all");
 		fViewer = viewer;
 		setToolTipText("Collapse all");
-		setImageDescriptor(DeclarationImages.COLLAPSE_ALL.imageDescriptor());
+		setImageDescriptor(SimulationImages.COLLAPSE_ALL.imageDescriptor());
 	}
 
 	public void run() {

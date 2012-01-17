@@ -39,7 +39,7 @@ public interface IExecutionContext {
 	 * Returns a readonly (!) List with all currently raised events
 	 */
 	public List<ExecutionEvent> getRaisedEvents();
-	
+
 	/**
 	 * Clears the collection of raised events
 	 */
@@ -49,7 +49,8 @@ public interface IExecutionContext {
 	 * Raises an event with an value, can be null
 	 * 
 	 * @throws ExecutionException
-	 *             if the value is incompatible with the declared event type or the Event can not be found
+	 *             if the value is incompatible with the declared event type or
+	 *             the Event can not be found
 	 */
 	public void raiseEvent(String name, Object value) throws ExecutionException;
 
@@ -62,7 +63,7 @@ public interface IExecutionContext {
 	 * Returns a readonly (!) List of all variables
 	 */
 	public List<ExecutionVariable> getVariables();
-	
+
 	/**
 	 * Declares a new Variable
 	 */
@@ -83,17 +84,18 @@ public interface IExecutionContext {
 	 * Returns a Set with all currently active states
 	 */
 	public Set<RegularState> getActiveLeafStates();
+
 	/**
 	 * Returns a set with all active leaf states including parents
 	 */
 	public Set<RegularState> getAllActiveStates();
-	
+
 	/**
 	 * Returns the active state configuration
 	 */
 	public ExecutionState[] getStateConfiguration();
 
-	public  void initStateConfigurationVector(int size);
+	public void initStateConfigurationVector(int size);
 
 	/**
 	 * Calls a declared operation
@@ -111,5 +113,7 @@ public interface IExecutionContext {
 	public void removeExecutionContextListener(
 			IExecutionContextListener listener);
 
+	public double getTimeScaleFactor();
 
+	public void setTimeScaleFactor(double factor);
 }

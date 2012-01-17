@@ -130,6 +130,9 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 
 	public void eventRaised(ExecutionEvent event) {
 	}
+	public void timeScaleFactorChanged(double oldFactor, double newFactor) {
+	}
+
 
 	public void variableValueChanged(ExecutionVariable variable) {
 		Display.getDefault().asyncExec(new Runnable() {
@@ -197,5 +200,5 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 		}
 
 	}
-
+	
 }

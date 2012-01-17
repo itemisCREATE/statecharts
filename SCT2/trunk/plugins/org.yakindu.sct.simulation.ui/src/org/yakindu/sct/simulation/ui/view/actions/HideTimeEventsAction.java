@@ -12,8 +12,8 @@ package org.yakindu.sct.simulation.ui.view.actions;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.yakindu.sct.simulation.ui.DeclarationImages;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
+import org.yakindu.sct.simulation.ui.SimulationImages;
 
 /**
  * 
@@ -27,7 +27,7 @@ public class HideTimeEventsAction extends Action {
 	public HideTimeEventsAction(boolean show) {
 		super("Hide TimeEvents");
 		setToolTipText("Show TimeEvents");
-		setImageDescriptor(DeclarationImages.TIMEEVENT.imageDescriptor());
+		setImageDescriptor(SimulationImages.TIMEEVENT.imageDescriptor());
 		setChecked(getStore().getBoolean(HIDE_KEY));
 	}
 
