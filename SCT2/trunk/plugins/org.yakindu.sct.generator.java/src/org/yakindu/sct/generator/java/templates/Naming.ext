@@ -76,8 +76,22 @@ String getName(ExecutionNode this) :
 	simpleName.replaceAll(" ","").toFirstUpper();
 	
 String getName(ExecutionRegion this) :
-	name.replaceAll(" ","").toFirstUpper();
-	
+	if (ExecutionState.isInstance(superScope)) 
+	then (
+		getName((ExecutionState)superScope)+getNullSafeRegionName()
+	) else 
+		"Region"+getNullSafeRegionName();
+
+private getNullSafeRegionName(ExecutionRegion this) :
+	if (name == null)
+	then (
+		if (ExecutionScope.isInstance(superScope))
+		then
+			superScope.subScopes.indexOf(this)
+		else "DefaultRegion"
+	)
+	else name.replaceAll(" ","").toFirstUpper();
+
 String getName(ExecutionFlow this) :
 	name.replaceAll(" ","").toFirstUpper();
 
@@ -109,9 +123,11 @@ String entryActionFunctionName(Step this) : "entryAction" + getName(state());
 String exitActionFunctionName(Step this) : "exitAction" + getName(state());
 String enterSequenceName(Step this) : "enterSequence"+getName(state()); 
 String enterSequenceName(ExecutionState this) : "enterSequence"+getName();
+String enterSequenceName(ExecutionRegion this) : "enterSequence"+getName();
 String enterSequenceName(ExecutionFlow this) : "enter";
 String exitSequenceName(Step this) : "exitSequence"+getName(state()); 
 String exitSequenceName(ExecutionState this) : "exitSequence"+getName();
+String exitSequenceName(ExecutionRegion this) : "exitSequence"+getName();
 String exitSequenceName(ExecutionFlow this) : "exit";
 String reactSequenceName(Step this) : "react"+getName(state()); 
 
