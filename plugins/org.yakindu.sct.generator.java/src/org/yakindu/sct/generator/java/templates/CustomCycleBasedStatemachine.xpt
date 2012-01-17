@@ -172,6 +172,22 @@ else {
 	«ENDIF-»
 «ENDDEFINE»
 
+«DEFINE EnterSequenceImplement FOR ExecutionRegion»
+	«IF enterSequence.steps.size > 0 && enterSequence.caller.size > 0-»
+	private void «enterSequenceName()»() {
+		«EXPAND ActionCode FOREACH enterSequence.steps-»
+	}
+	«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE ExitSequenceImplement FOR ExecutionRegion-»
+	«IF exitSequence.steps.size > 0 && exitSequence.caller.size > 0-»
+	private void «exitSequenceName()»() {
+		«EXPAND ActionCode FOREACH exitSequence.steps-»
+	}
+	«ENDIF-»
+«ENDDEFINE»
+
 «DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
 «FILE getImplementationPackagePath(entry)+"/"+getCycleBasedStatemachineName()+'.java'-»
 «getLicenseHeader(entry)»
@@ -368,6 +384,8 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 «EXPAND ExitMethodImplement FOREACH this.states-»
 «EXPAND EnterSequenceImplement FOREACH this.states-»
 «EXPAND ExitSequenceImplement FOREACH this.states-»
+«EXPAND EnterSequenceImplement FOREACH this.eAllContents.typeSelect(ExecutionRegion)-»
+«EXPAND ExitSequenceImplement FOREACH this.eAllContents.typeSelect(ExecutionRegion)-»
 «EXPAND ReactMethodsImplement FOREACH this.states-»
 «EXPAND ReactMethodsImplement FOREACH this.nodes-»
 	public void runCycle() {
