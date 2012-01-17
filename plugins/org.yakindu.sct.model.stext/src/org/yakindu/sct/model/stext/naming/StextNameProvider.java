@@ -5,6 +5,9 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Strings;
+import org.yakindu.sct.model.sgraph.Event;
+import org.yakindu.sct.model.sgraph.Scope;
+import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.naming.SGraphNameProvider;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 
@@ -14,12 +17,47 @@ public class StextNameProvider extends SGraphNameProvider {
 	@Inject
 	IQualifiedNameConverter nameConverter;
 
+	public QualifiedName qualifiedName(Event ele) {
+		QualifiedName name = null;
+		if (!Strings.isEmpty(ele.getName())) {
+			name = nameConverter.toQualifiedName(ele.getName());
+		}
+		InterfaceScope scope = EcoreUtil2.getContainerOfType(ele,
+				InterfaceScope.class);
+		if (scope != null) {
+			if (!Strings.isEmpty(scope.getName())) {
+				QualifiedName namespace = nameConverter.toQualifiedName(scope
+						.getName());
+				name = namespace.append(name);
+			}
+
+		}
+		return name;
+	}
+
+	public QualifiedName qualifiedName(Variable ele) {
+		QualifiedName name = null;
+		if (!Strings.isEmpty(ele.getName())) {
+			name = nameConverter.toQualifiedName(ele.getName());
+		}
+		InterfaceScope scope = EcoreUtil2.getContainerOfType(ele,
+				InterfaceScope.class);
+		if (scope != null) {
+			if (!Strings.isEmpty(scope.getName())) {
+				QualifiedName namespace = nameConverter.toQualifiedName(scope
+						.getName());
+				name = namespace.append(name);
+			}
+
+		}
+		return name;
+	}
+
 	public QualifiedName qualifiedName(InterfaceScope ele) {
 		QualifiedName name = null;
 		if (!Strings.isEmpty(ele.getName())) {
 			name = nameConverter.toQualifiedName(ele.getName());
 		}
-
 		QualifiedName namespace = getNamespace(ele);
 		if (namespace != null && name != null) {
 			name = namespace.append(name);
