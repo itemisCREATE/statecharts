@@ -64,13 +64,14 @@ import org.yakindu.sct.simulation.core.runtime.AbstractExecutionFacade
 import org.yakindu.sct.model.sexec.Trace
 import java.util.Arrays
 import org.yakindu.sct.model.sexec.impl.ExecutionStateImpl
+import org.yakindu.sct.simulation.core.runtime.IExecutionContextListener
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecutionFlowInterpreter {
+class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecutionFlowInterpreter,IExecutionContextListener {
 	
 	@Inject
 	IStatementInterpreter interpreter
@@ -92,8 +93,11 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		for(scope : flow.scopes){
 			scope.declareContents
 		} 
-		
 		executionContext.initStateConfigurationVector(flow.stateVector.size)
+		executionContext.addExecutionContextListener(this);
+	
+		timingService.init(executionContext.virtualClock)
+		executionContext.virtualClock.start
 	}
 	
 	override tearDown(){
@@ -226,9 +230,6 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	def dispatch execute(EnterState enterState){
 		executionContext.stateConfiguration.set(enterState.state.stateVector.offset, enterState.state)
 		nextSVIdx = enterState.state.stateVector.offset // mark all state vector elements up to this as processed ...		
-
-		System::out.println( "enter " + enterState.state.simpleName + " > " + executionContext.stateConfiguration.fold("scv: ", [ m, s | m + (if (s==null) " _" else " " + s.simpleName )] ) )
-
 		null
 	}
 	
@@ -238,9 +239,6 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	
 	def dispatch execute(ExitState exitState){
 		executionContext.stateConfiguration.set(exitState.state.stateVector.offset, null)
-
-		System::out.println( "exit " + exitState.state.simpleName + " > " + executionContext.stateConfiguration.fold("scv: ", [ m, s | m + (if (s==null) " _" else " " + s.simpleName )] ) )
-		
 		null
 	}
 	
@@ -284,5 +282,17 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	def dispatch execute(UnscheduleTimeEvent timeEvent){
 		timingService.unscheduleTimeEvent(timeEvent.timeEvent.name)
 		null
+	}
+	
+	override void eventRaised(ExecutionEvent event){
+		
+	}
+
+	override void variableValueChanged(ExecutionVariable variable){
+		
+	}
+
+	override void timeScaleFactorChanged(double oldFactor, double newFactor){
+		timingService.setTimeScaleFactor(newFactor)
 	}
 }

@@ -13,28 +13,30 @@ package org.yakindu.sct.model.sexec.interpreter.impl;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import org.yakindu.sct.model.sexec.interpreter.ITimingService;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
+import org.yakindu.sct.simulation.core.runtime.timer.VirtualClock;
+import org.yakindu.sct.simulation.core.runtime.timer.VirtualTimer;
+import org.yakindu.sct.simulation.core.runtime.timer.VirtualTimerTask;
 
 /**
- * Implementation of {@link ITimingService} interface using standard 
+ * Implementation of {@link ITimingService} interface using standard
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
 public class TimerTaskTimingService implements ITimingService {
 
-	private Timer timer;
-	private Map<String, TimerTask> timerTasks;
+	private VirtualTimer timer;
+
+	private Map<String, VirtualTimerTask> timerTasks;
 
 	public TimerTaskTimingService() {
-		timer = new Timer();
-		timerTasks = new HashMap<String, TimerTask>();
+		timerTasks = new HashMap<String, VirtualTimerTask>();
 	}
 
+	
 	public void scheduleTimeEvent(IExecutionContext context, String eventName,
 			boolean isPeriodical, int duration) {
 		TimeEventTask timeEventTask = new TimeEventTask(context, eventName);
@@ -47,12 +49,12 @@ public class TimerTaskTimingService implements ITimingService {
 	}
 
 	public void unscheduleTimeEvent(String eventName) {
-		TimerTask timerTask = timerTasks.get(eventName);
+		VirtualTimerTask timerTask = timerTasks.get(eventName);
 		timerTask.cancel();
 		timer.purge();
 	}
 
-	public class TimeEventTask extends TimerTask {
+	public class TimeEventTask extends VirtualTimerTask {
 
 		private final IExecutionContext context;
 		private final String eventName;
@@ -76,9 +78,22 @@ public class TimerTaskTimingService implements ITimingService {
 	}
 
 	public void stop() {
-		Collection<TimerTask> values = timerTasks.values();
-		for (TimerTask timerTask : values) {
+		Collection<VirtualTimerTask> values = timerTasks.values();
+		for (VirtualTimerTask timerTask : values) {
 			timerTask.cancel();
 		}
 	}
+
+	public void init(VirtualClock clock) {
+		timer = new VirtualTimer(clock);
+	}
+
+	public void setTimeScaleFactor(double factor) {
+		timer.getClock().setFactor(factor);
+	}
+
+	public VirtualTimer getTimer() {
+		return timer;
+	}
+
 }
