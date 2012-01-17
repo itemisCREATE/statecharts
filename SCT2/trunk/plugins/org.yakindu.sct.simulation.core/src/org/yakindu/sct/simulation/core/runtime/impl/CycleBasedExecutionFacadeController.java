@@ -36,6 +36,7 @@ public class CycleBasedExecutionFacadeController extends
 			long cyclePeriod) {
 		super(facade);
 		this.cyclePeriod = cyclePeriod;
+		timer = new Timer();
 	}
 
 	protected void scheduleCycle() {
