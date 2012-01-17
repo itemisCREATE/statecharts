@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
+import org.apache.commons.lang.time.DurationFormatUtils;
 import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
@@ -30,12 +31,15 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Scale;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
@@ -44,6 +48,7 @@ import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
+import org.yakindu.sct.simulation.core.runtime.timer.VirtualClock;
 import org.yakindu.sct.simulation.ui.view.actions.CollapseAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.ExpandAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
@@ -62,24 +67,36 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 
 	private TreeViewer viewer;
 	private SCTDebugTarget debugTarget;
+	private Text scaleFactor;
+	private FormToolkit kit;
+	private Font font;
+	private Label lblVirtualTime;
+	private Label lblRealTime;
+	private ClockUpdater clockUpdater;
 
 	public SimulationView() {
 		DebugUITools.getDebugContextManager().addDebugContextListener(this);
 		DebugPlugin.getDefault().addDebugEventListener(this);
+		kit = new FormToolkit(Display.getDefault());
+		font = new Font(Display.getDefault(), new FontData("Courier", 10,
+				SWT.BOLD));
+		clockUpdater = new ClockUpdater();
 	}
 
 	@Override
 	public void dispose() {
+		clockUpdater.setTerminated(true);
 		super.dispose();
 		DebugUITools.getDebugContextManager().removeDebugContextListener(this);
 		DebugPlugin.getDefault().removeDebugEventListener(this);
+		font.dispose();
 	}
 
 	@Override
 	public void createPartControl(Composite parent) {
 		parent.setLayout(new FillLayout(SWT.VERTICAL));
 		createViewer(parent);
-		createTimeScalingControls(parent);
+		createTimeScalingSection(parent);
 		hookActions();
 	}
 
@@ -88,30 +105,80 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		viewer.getTree().setFocus();
 	}
 
-	private void createTimeScalingControls(Composite parent) {
-		FormToolkit kit = new FormToolkit(Display.getDefault());
+	private void createTimeScalingSection(Composite parent) {
 		Section section = kit.createSection(parent, Section.TITLE_BAR);
-		section.setText("scaled real-time");
+		section.setText("time scaling");
 		Composite client = kit.createComposite(section);
 		client.setLayout(new GridLayout(3, false));
 		section.setClient(client);
+		createClocks(client);
+		createScalingControls(client);
+	}
+
+	private void createScalingControls(Composite client) {
+		final Scale scale = new Scale(client, SWT.NONE);
+		scale.setMinimum(1);
+		scale.setMaximum(100);
+		scale.setSelection(50);
+		scale.setPageIncrement(5);
+		scale.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				int selection = scale.getSelection();
+				if (selection > 50) {
+					selection = selection - 50;
+					scaleFactor.setText(String.valueOf(1.0d * selection));
+				} else if (selection == 50) {
+					scaleFactor.setText(String.valueOf(1.0d));
+				} else {
+					selection = 50 - selection;
+					scaleFactor.setText(String.valueOf(1.0d / selection));
+				}
+				applyScaleFactor();
+			}
+		});
+		GridDataFactory.fillDefaults().span(3, 0).applyTo(scale);
 		Label label = kit.createLabel(client, "scale factor: ");
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(label);
-		final Text scaleFactor = kit.createText(client, "1.0");
+		scaleFactor = kit.createText(client, "1.0");
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(scaleFactor);
-		Button setScale = kit.createButton(client, "apply", SWT.PUSH);
+		final Button setScale = kit.createButton(client, "apply", SWT.PUSH);
 		setScale.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				try {
-					double factor = Double.parseDouble(scaleFactor.getText());
-					IExecutionFacade facade = (IExecutionFacade) debugTarget
-							.getAdapter(IExecutionFacade.class);
-					facade.getExecutionContext().setTimeScaleFactor(factor);
-				} catch (NumberFormatException ex) {
-				}
+				applyScaleFactor();
 			}
 		});
 		GridDataFactory.fillDefaults().applyTo(setScale);
+	}
+
+	private void createClocks(Composite parent) {
+		// Virtual Clock
+		Label label = kit.createLabel(parent, "virtual time:");
+		GridDataFactory.fillDefaults().applyTo(label);
+		lblVirtualTime = new Label(parent, SWT.NONE);
+		lblVirtualTime.setFont(font);
+		lblVirtualTime.setText("00:00:00:00");
+
+		GridDataFactory.fillDefaults().grab(true, false).span(2, 0)
+				.applyTo(lblVirtualTime);
+		// Real time clock
+		Label label2 = kit.createLabel(parent, "real time:");
+		GridDataFactory.fillDefaults().applyTo(label2);
+		lblRealTime = new Label(parent, SWT.NONE);
+		lblRealTime.setFont(font);
+		lblRealTime.setText("00:00:00:00");
+		GridDataFactory.fillDefaults().grab(true, false).span(2, 0)
+				.applyTo(lblRealTime);
+
+	}
+
+	private void applyScaleFactor() {
+		try {
+			double factor = Double.parseDouble(scaleFactor.getText());
+			IExecutionFacade facade = (IExecutionFacade) debugTarget
+					.getAdapter(IExecutionFacade.class);
+			facade.getExecutionContext().setTimeScaleFactor(factor);
+		} catch (NumberFormatException ex) {
+		}
 	}
 
 	protected Viewer createViewer(Composite parent) {
@@ -163,6 +230,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 					&& !newTarget.isTerminated()) {
 				refreshInput(newTarget);
 				debugTarget = newTarget;
+				new Thread(clockUpdater).start();
 			}
 		}
 
@@ -180,6 +248,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 			Display.getDefault().asyncExec(new Runnable() {
 				public void run() {
 					viewer.setInput(null);
+					clockUpdater.setTerminated(true);
 				}
 			});
 			break;
@@ -202,6 +271,53 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		mgr.add(expand);
 		IAction hideTimeEvent = new HideTimeEventsAction(true);
 		mgr.add(hideTimeEvent);
+	}
+
+	public class ClockUpdater implements Runnable {
+
+		private static final String PATTERN = "HH:mm:ss:SS";
+		private boolean terminated = false;
+
+		public void run() {
+			while (!terminated) {
+				Display.getDefault().asyncExec(new Runnable() {
+					public void run() {
+						IExecutionFacade facade = (IExecutionFacade) debugTarget
+								.getAdapter(IExecutionFacade.class);
+						VirtualClock virtualClock = facade
+								.getExecutionContext().getVirtualClock();
+						if (lblVirtualTime != null
+								&& !lblVirtualTime.isDisposed()) {
+							String text = DurationFormatUtils.formatDuration(
+									virtualClock.getTime()
+											- virtualClock.getStartTime(),
+									PATTERN);
+							lblVirtualTime.setText(text);
+						}
+						if (lblRealTime != null && !lblRealTime.isDisposed()) {
+							String text = DurationFormatUtils.formatDuration(
+									System.currentTimeMillis()
+											- virtualClock.getStartTime(),
+									PATTERN);
+							lblRealTime.setText(text);
+						}
+					}
+				});
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		public boolean isTerminated() {
+			return terminated;
+		}
+
+		public void setTerminated(boolean terminated) {
+			this.terminated = terminated;
+		}
 	}
 
 }

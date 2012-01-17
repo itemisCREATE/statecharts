@@ -44,16 +44,13 @@ public class VirtualTimer {
 	 * The timer thread.
 	 */
 
-	private VirtualClock clock = new VirtualClock();
-	{
-		clock.start();
-	}
+	private VirtualClock clock;
 
 	public VirtualClock getClock() {
 		return clock;
 	}
 
-	private TimerThread thread = new TimerThread(queue, clock);
+	private TimerThread thread;
 	/**
 	 * This object causes the timer's task execution thread to exit gracefully
 	 * when there are no live references to the Timer object and no tasks in the
@@ -88,8 +85,8 @@ public class VirtualTimer {
 	 * @see Thread
 	 * @see #cancel()
 	 */
-	public VirtualTimer() {
-		this("Timer-" + serialNumber());
+	public VirtualTimer(VirtualClock clock) {
+		this("Timer-" + serialNumber(), clock);
 	}
 
 	/**
@@ -105,8 +102,8 @@ public class VirtualTimer {
 	 * @see Thread
 	 * @see #cancel()
 	 */
-	public VirtualTimer(boolean isDaemon) {
-		this("Timer-" + serialNumber(), isDaemon);
+	public VirtualTimer(VirtualClock clock, boolean isDaemon) {
+		this("Timer-" + serialNumber(), isDaemon, clock);
 	}
 
 	/**
@@ -121,7 +118,9 @@ public class VirtualTimer {
 	 * @see Thread#isDaemon()
 	 * @since 1.5
 	 */
-	public VirtualTimer(String name) {
+	public VirtualTimer(String name, VirtualClock clock) {
+		this.clock = clock;
+		thread = new TimerThread(queue, clock);
 		thread.setName(name);
 		thread.start();
 	}
@@ -140,7 +139,8 @@ public class VirtualTimer {
 	 * @see Thread#isDaemon()
 	 * @since 1.5
 	 */
-	public VirtualTimer(String name, boolean isDaemon) {
+	public VirtualTimer(String name, boolean isDaemon, VirtualClock clock) {
+		this.clock = clock;
 		thread.setName(name);
 		thread.setDaemon(isDaemon);
 		thread.start();
@@ -392,7 +392,7 @@ class TimerThread extends Thread {
 						}
 					}
 					if (!taskFired) {
-						//CHANGED
+						// CHANGED
 						// Task hasn't yet fired; wait
 						// queue.wait((long)((executionTime - currentTime) /
 						// clock.getFactor()));
