@@ -39,6 +39,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 import org.yakindu.sct.ui.editor.validation.ValidationAction;
@@ -57,23 +58,29 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 	private ResourceSetListener validationListener = new ResourceSetListenerImpl() {
 		@Override
 		public void resourceSetChanged(ResourceSetChangeEvent event) {
-			if (!isGraphModelAffected(event)) {
-				validate();
-			}
+			validate();
+
+			// FIXME: Validation should only be done if semantic changes are
+			// done
+			// with the solution below the error marker is set not correctly
+			// (See YAK-HMI 511)
+			// if (isGraphModelAffected(event)) {
+			// validate();
+			// }
 		}
 	};
 
-	private boolean isGraphModelAffected(ResourceSetChangeEvent event) {
-		for (Notification notification : event.getNotifications()) {
-			if (notification.getNotifier() instanceof EObject) {
-				EObject eObject = (EObject) notification.getNotifier();
-				if (NotationPackage.eINSTANCE == eObject.eClass().getEPackage()) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+	// private boolean isGraphModelAffected(ResourceSetChangeEvent event) {
+	// for (Notification notification : event.getNotifications()) {
+	// if (notification.getNotifier() instanceof EObject) {
+	// EObject eObject = (EObject) notification.getNotifier();
+	// if (SGraphPackage.eINSTANCE == eObject.eClass().getEPackage()) {
+	// return true;
+	// }
+	// }
+	// }
+	// return false;
+	// }
 
 	public StatechartDiagramEditor() {
 		super(true);
