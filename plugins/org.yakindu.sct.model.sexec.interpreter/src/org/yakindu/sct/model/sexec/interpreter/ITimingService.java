@@ -11,6 +11,7 @@
 package org.yakindu.sct.model.sexec.interpreter;
 
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
+import org.yakindu.sct.simulation.core.runtime.timer.VirtualClock;
 
 /**
  * 
@@ -46,5 +47,9 @@ public interface ITimingService {
 	 * Stops all TimeEvent
 	 */
 	public void stop();
+
+	public void setTimeScaleFactor(double factor);
+	
+	public void init(VirtualClock clock);
 
 }
