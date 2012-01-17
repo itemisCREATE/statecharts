@@ -465,6 +465,35 @@ public class SequenceBuilder {
     }
   }
   
+  public Sequence defineStatechartExitSequence(final ExecutionFlow flow, final Statechart sc) {
+    {
+      SexecFactory _factory = this.sexec.factory();
+      Sequence _createSequence = _factory.createSequence();
+      final Sequence exitSequence = _createSequence;
+      exitSequence.setName("exit");
+      String _name = sc.getName();
+      String _operator_plus = StringExtensions.operator_plus("Default exit sequence for statechart ", _name);
+      exitSequence.setComment(_operator_plus);
+      EList<Region> _regions = sc.getRegions();
+      for (final Region r : _regions) {
+        {
+          ExecutionRegion _create = this.mapping.create(r);
+          final ExecutionRegion execRegion = _create;
+          Sequence _exitSequence = execRegion.getExitSequence();
+          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_exitSequence, null);
+          if (_operator_notEquals) {
+            EList<Step> _steps = exitSequence.getSteps();
+            Sequence _exitSequence_1 = execRegion.getExitSequence();
+            Call _newCall = this.mapping.newCall(_exitSequence_1);
+            _steps.add(_newCall);
+          }
+        }
+      }
+      flow.setExitSequence(exitSequence);
+      return exitSequence;
+    }
+  }
+  
   public Sequence defineStatechartEnterSequence(final ExecutionFlow flow, final Statechart sc) {
     {
       SexecFactory _factory = this.sexec.factory();
