@@ -75,6 +75,9 @@ String getName(ExecutionState this) :
 String getName(ExecutionNode this) :
 	simpleName.replaceAll(" ","").toFirstUpper();
 	
+String getName(ExecutionRegion this) :
+	name.replaceAll(" ","").toFirstUpper();
+	
 String getName(ExecutionFlow this) :
 	name.replaceAll(" ","").toFirstUpper();
 

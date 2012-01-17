@@ -19,6 +19,8 @@ import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNC
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_REACTIONS;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT;
 
@@ -141,6 +143,10 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 				FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES, true));
 		optimizer.inlineChoices(getBoolValue(optimizeConfig,
 				FUNCTION_INLINING_FEATURE_INLINE_CHOICES, true));
+		optimizer.inlineEnterRegion(getBoolValue(optimizeConfig,
+				FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION, true));
+		optimizer.inlineExitRegion(getBoolValue(optimizeConfig,
+				FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION, true));
 
 		flow = optimizer.transform(flow);
 

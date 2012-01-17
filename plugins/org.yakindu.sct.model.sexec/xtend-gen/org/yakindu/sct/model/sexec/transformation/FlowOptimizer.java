@@ -12,11 +12,13 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xtend2.lib.EObjectExtensions;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionNode;
+import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.Reaction;
@@ -64,6 +66,20 @@ public class FlowOptimizer {
   public boolean inlineEnterSequences(final boolean b) {
     boolean __inlineEnterSequences = this._inlineEnterSequences = b;
     return __inlineEnterSequences;
+  }
+  
+  private boolean _inlineEnterRegion;
+  
+  public boolean inlineEnterRegion(final boolean b) {
+    boolean __inlineEnterRegion = this._inlineEnterRegion = b;
+    return __inlineEnterRegion;
+  }
+  
+  private boolean _inlineExitRegion;
+  
+  public boolean inlineExitRegion(final boolean b) {
+    boolean __inlineExitRegion = this._inlineExitRegion = b;
+    return __inlineExitRegion;
   }
   
   private boolean _inlineExitSequences;
@@ -133,43 +149,67 @@ public class FlowOptimizer {
           };
         IterableExtensions.<ExecutionState>forEach(_states_3, _function_3);
       }
+      if (this._inlineExitRegion) {
+        Iterable<EObject> _allContentsIterable = EObjectExtensions.allContentsIterable(flow);
+        Iterable<ExecutionRegion> _filter = IterableExtensions.<ExecutionRegion>filter(_allContentsIterable, org.yakindu.sct.model.sexec.ExecutionRegion.class);
+        final Function1<ExecutionRegion,Step> _function_4 = new Function1<ExecutionRegion,Step>() {
+            public Step apply(final ExecutionRegion region) {
+              Sequence _exitSequence_1 = region.getExitSequence();
+              Step _inline_4 = FlowOptimizer.this.inline(_exitSequence_1);
+              return _inline_4;
+            }
+          };
+        IterableExtensions.<ExecutionRegion>forEach(_filter, _function_4);
+      }
+      if (this._inlineEnterRegion) {
+        Iterable<EObject> _allContentsIterable_1 = EObjectExtensions.allContentsIterable(flow);
+        Iterable<ExecutionRegion> _filter_1 = IterableExtensions.<ExecutionRegion>filter(_allContentsIterable_1, org.yakindu.sct.model.sexec.ExecutionRegion.class);
+        final Function1<ExecutionRegion,Step> _function_5 = new Function1<ExecutionRegion,Step>() {
+            public Step apply(final ExecutionRegion region_1) {
+              Sequence _enterSequence_1 = region_1.getEnterSequence();
+              Step _inline_5 = FlowOptimizer.this.inline(_enterSequence_1);
+              return _inline_5;
+            }
+          };
+        IterableExtensions.<ExecutionRegion>forEach(_filter_1, _function_5);
+      }
       if (this._inlineChoices) {
         {
           EList<ExecutionNode> _nodes = flow.getNodes();
-          final Function1<ExecutionNode,ExecutionNode> _function_4 = new Function1<ExecutionNode,ExecutionNode>() {
+          final Function1<ExecutionNode,ExecutionNode> _function_6 = new Function1<ExecutionNode,ExecutionNode>() {
               public ExecutionNode apply(final ExecutionNode node) {
                 ExecutionNode _xblockexpression_1 = null;
                 {
                   EList<Reaction> _reactions = node.getReactions();
-                  final Function1<Reaction,Step> _function_5 = new Function1<Reaction,Step>() {
+                  final Function1<Reaction,Step> _function_7 = new Function1<Reaction,Step>() {
                       public Step apply(final Reaction r) {
                         Step _xblockexpression_2 = null;
                         {
                           Check _check = r.getCheck();
                           FlowOptimizer.this.inline(_check);
                           Step _effect = r.getEffect();
-                          Step _inline_4 = FlowOptimizer.this.inline(_effect);
-                          _xblockexpression_2 = (_inline_4);
+                          Step _inline_6 = FlowOptimizer.this.inline(_effect);
+                          _xblockexpression_2 = (_inline_6);
                         }
                         return _xblockexpression_2;
                       }
                     };
-                  IterableExtensions.<Reaction>forEach(_reactions, _function_5);
+                  IterableExtensions.<Reaction>forEach(_reactions, _function_7);
                   _xblockexpression_1 = (node);
                 }
                 return _xblockexpression_1;
               }
             };
-          IterableExtensions.<ExecutionNode>forEach(_nodes, _function_4);
+          IterableExtensions.<ExecutionNode>forEach(_nodes, _function_6);
           EList<ExecutionNode> _nodes_1 = flow.getNodes();
-          final Function1<ExecutionNode,Step> _function_6 = new Function1<ExecutionNode,Step>() {
+          final Function1<ExecutionNode,Step> _function_8 = new Function1<ExecutionNode,Step>() {
               public Step apply(final ExecutionNode node_1) {
                 Sequence _reactSequence = node_1.getReactSequence();
-                Step _inline_5 = FlowOptimizer.this.inline(_reactSequence);
-                return _inline_5;
+                Step _inline_7 = FlowOptimizer.this.inline(_reactSequence);
+                return _inline_7;
               }
             };
-          IterableExtensions.<ExecutionNode>forEach(_nodes_1, _function_6);
+          IterableExtensions.<ExecutionNode>forEach(_nodes_1, _function_8);
         }
       }
       _xblockexpression = (flow);

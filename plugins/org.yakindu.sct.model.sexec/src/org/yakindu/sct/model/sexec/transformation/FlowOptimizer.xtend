@@ -1,5 +1,7 @@
 package org.yakindu.sct.model.sexec.transformation
 
+import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
+
 import com.google.inject.Inject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -19,6 +21,8 @@ import org.yakindu.sct.model.sgraph.SGraphFactory
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.StateCase
+import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.sct.model.sexec.ExecutionRegion
  
 class FlowOptimizer {
 
@@ -29,6 +33,8 @@ class FlowOptimizer {
 	boolean _inlineEntryActions     def inlineEntryActions(boolean b)   {_inlineEntryActions = b}
 	boolean _inlineExitActions      def inlineExitActions(boolean b)    {_inlineExitActions = b}
 	boolean _inlineEnterSequences   def inlineEnterSequences(boolean b) {_inlineEnterSequences = b}
+	boolean _inlineEnterRegion   def inlineEnterRegion(boolean b) {_inlineEnterRegion = b}
+	boolean _inlineExitRegion   def inlineExitRegion(boolean b) {_inlineExitRegion = b}
 	boolean _inlineExitSequences    def inlineExitSequences(boolean b)  {_inlineExitSequences = b}
 	boolean _inlineChoices          def inlineChoices(boolean b)        {_inlineChoices = b}
 	
@@ -44,6 +50,8 @@ class FlowOptimizer {
 		if (_inlineExitActions)   flow.states.forEach( state | state.exitAction.inline )
 		if (_inlineEnterSequences) flow.states.forEach( state | state.enterSequence.inline )
 		if (_inlineExitSequences)  flow.states.forEach( state | state.exitSequence.inline )
+		if (_inlineExitRegion) flow.allContentsIterable.filter(typeof(ExecutionRegion)).forEach( region | region.exitSequence.inline )
+		if (_inlineEnterRegion) flow.allContentsIterable.filter(typeof(ExecutionRegion)).forEach( region | region.enterSequence.inline )
 
 				
 		if (_inlineChoices) {

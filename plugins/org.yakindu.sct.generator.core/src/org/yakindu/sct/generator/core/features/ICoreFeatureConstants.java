@@ -19,7 +19,7 @@ package org.yakindu.sct.generator.core.features;
 public interface ICoreFeatureConstants {
 
 	public static final String LIBRARY_NAME = "Core";
-	
+
 	public static final String OUTLET_FEATURE = "Outlet";
 	public static final String OUTLET_FEATURE_TARGET_PROJECT = "targetProject";
 	public static final String OUTLET_FEATURE_TARGET_FOLDER = "targetFolder";
@@ -35,6 +35,8 @@ public interface ICoreFeatureConstants {
 	public static final String FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS = "inlineExitActions";
 	public static final String FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES = "inlineExitSequences";
 	public static final String FUNCTION_INLINING_FEATURE_INLINE_CHOICES = "inlineChoices";
+	public static final String FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION = "inlineEnterRegion";
+	public static final String FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION = "inlineExitRegion";
 
 	public static final String LICENSE_HEADER = "licenseHeader";
 	public static final String LICENSE_TEXT = "licenseText";
