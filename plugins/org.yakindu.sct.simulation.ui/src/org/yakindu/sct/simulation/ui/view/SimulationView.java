@@ -15,13 +15,12 @@ import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.model.IDebugTarget;
-import org.eclipse.debug.ui.AbstractDebugView;
 import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.debug.ui.contexts.DebugContextEvent;
 import org.eclipse.debug.ui.contexts.IDebugContextListener;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -29,8 +28,18 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.Section;
+import org.eclipse.ui.part.ViewPart;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
@@ -48,13 +57,13 @@ import org.yakindu.sct.simulation.ui.view.editing.RealEditingSupport;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class DeclarationView extends AbstractDebugView implements
-		IDebugContextListener, IDebugEventSetListener {
+public class SimulationView extends ViewPart implements IDebugContextListener,
+		IDebugEventSetListener {
 
 	private TreeViewer viewer;
 	private SCTDebugTarget debugTarget;
 
-	public DeclarationView() {
+	public SimulationView() {
 		DebugUITools.getDebugContextManager().addDebugContextListener(this);
 		DebugPlugin.getDefault().addDebugEventListener(this);
 	}
@@ -67,6 +76,44 @@ public class DeclarationView extends AbstractDebugView implements
 	}
 
 	@Override
+	public void createPartControl(Composite parent) {
+		parent.setLayout(new FillLayout(SWT.VERTICAL));
+		createViewer(parent);
+		createTimeScalingControls(parent);
+		hookActions();
+	}
+
+	@Override
+	public void setFocus() {
+		viewer.getTree().setFocus();
+	}
+
+	private void createTimeScalingControls(Composite parent) {
+		FormToolkit kit = new FormToolkit(Display.getDefault());
+		Section section = kit.createSection(parent, Section.TITLE_BAR);
+		section.setText("scaled real-time");
+		Composite client = kit.createComposite(section);
+		client.setLayout(new GridLayout(3, false));
+		section.setClient(client);
+		Label label = kit.createLabel(client, "scale factor: ");
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(label);
+		final Text scaleFactor = kit.createText(client, "1.0");
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(scaleFactor);
+		Button setScale = kit.createButton(client, "apply", SWT.PUSH);
+		setScale.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					double factor = Double.parseDouble(scaleFactor.getText());
+					IExecutionFacade facade = (IExecutionFacade) debugTarget
+							.getAdapter(IExecutionFacade.class);
+					facade.getExecutionContext().setTimeScaleFactor(factor);
+				} catch (NumberFormatException ex) {
+				}
+			}
+		});
+		GridDataFactory.fillDefaults().applyTo(setScale);
+	}
+
 	protected Viewer createViewer(Composite parent) {
 		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL
 				| SWT.FULL_SELECTION);
@@ -147,31 +194,14 @@ public class DeclarationView extends AbstractDebugView implements
 
 	}
 
-	@Override
-	protected void createActions() {
+	protected void hookActions() {
+		IToolBarManager mgr = getViewSite().getActionBars().getToolBarManager();
 		IAction collapse = new CollapseAllAction(viewer);
-		setAction("CollapseAll", collapse);
+		mgr.add(collapse);
 		IAction expand = new ExpandAllAction(viewer);
-		setAction("ExpandAll", expand);
+		mgr.add(expand);
 		IAction hideTimeEvent = new HideTimeEventsAction(true);
-		setAction("HideTimeEvent", hideTimeEvent);
-	}
-
-	@Override
-	protected String getHelpContextId() {
-		return null;
-	}
-
-	@Override
-	protected void fillContextMenu(IMenuManager menu) {
-
-	}
-
-	@Override
-	protected void configureToolBar(IToolBarManager tbm) {
-		tbm.add(getAction("CollapseAll"));
-		tbm.add(getAction("ExpandAll"));
-		tbm.add(getAction("HideTimeEvent"));
+		mgr.add(hideTimeEvent);
 	}
 
 }

@@ -17,7 +17,7 @@ import org.eclipse.swt.custom.StyleRange;
 import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
-import org.yakindu.sct.simulation.ui.DeclarationImages;
+import org.yakindu.sct.simulation.ui.SimulationImages;
 import org.yakindu.sct.simulation.ui.view.ExecutionContextContentProvider.Container;
 
 /**
@@ -68,17 +68,17 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			cell.setText(event.getSimpleName());
 			cell.setStyleRanges(new StyleRange[] { style1 });
 			if (event.getName().contains("time_event")) {
-				cell.setImage(DeclarationImages.TIMEEVENT.image());
+				cell.setImage(SimulationImages.TIMEEVENT.image());
 			} else {
-				cell.setImage(DeclarationImages.EVENT.image());
+				cell.setImage(SimulationImages.EVENT.image());
 			}
 		} else if (element instanceof ExecutionVariable) {
 			ExecutionVariable variable = (ExecutionVariable) element;
 			cell.setText(variable.getSimpleName());
-			cell.setImage(DeclarationImages.VARIABLE.image());
+			cell.setImage(SimulationImages.VARIABLE.image());
 		} else if (element instanceof Container) {
 			cell.setText(((Container) element).name);
-			cell.setImage(DeclarationImages.SCOPE.image());
+			cell.setImage(SimulationImages.SCOPE.image());
 		}
 	}
 

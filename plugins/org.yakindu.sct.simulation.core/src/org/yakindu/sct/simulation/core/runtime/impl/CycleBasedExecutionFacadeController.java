@@ -29,7 +29,7 @@ public class CycleBasedExecutionFacadeController extends
 		AbstractExecutionFacadeController {
 
 	private Timer timer;
-	
+
 	private long cyclePeriod;
 
 	public CycleBasedExecutionFacadeController(IExecutionFacade facade,
@@ -45,7 +45,8 @@ public class CycleBasedExecutionFacadeController extends
 					facade.runCycle();
 					scheduleCycle();
 				}
-			}, cyclePeriod);
+			}, (long) (cyclePeriod * facade.getExecutionContext()
+					.getTimeScaleFactor()));
 	}
 
 	public void start() {

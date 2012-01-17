@@ -12,7 +12,7 @@ package org.yakindu.sct.simulation.ui.view.actions;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.yakindu.sct.simulation.ui.DeclarationImages;
+import org.yakindu.sct.simulation.ui.SimulationImages;
 
 /**
  * 
@@ -27,7 +27,7 @@ public class ExpandAllAction extends Action {
 		super("Expand all");
 		fViewer = viewer;
 		setToolTipText("Expand all");
-		setImageDescriptor(DeclarationImages.EXPAND_ALL.imageDescriptor());
+		setImageDescriptor(SimulationImages.EXPAND_ALL.imageDescriptor());
 	}
 
 	public void run() {
