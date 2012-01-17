@@ -112,6 +112,7 @@ public class ModelSequencer {
       this.seqBuilder.defineStateEnterSequences(ef, sc);
       this.seqBuilder.defineStateExitSequences(ef, sc);
       this.seqBuilder.defineStatechartEnterSequence(ef, sc);
+      this.seqBuilder.defineStatechartExitSequence(ef, sc);
       this.behaviorMapping.mapTransitions(sc, ef);
       this.behaviorMapping.mapLocalReactions(sc, ef);
       this.mapChoiceTransitions(sc, ef);

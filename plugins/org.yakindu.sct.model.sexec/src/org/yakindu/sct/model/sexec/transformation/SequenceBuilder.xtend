@@ -238,6 +238,22 @@ class SequenceBuilder {
 	
 	
 	
+	def defineStatechartExitSequence(ExecutionFlow flow, Statechart sc) {
+		val exitSequence = sexec.factory.createSequence
+		exitSequence.name = "exit"
+		exitSequence.comment = "Default exit sequence for statechart " + sc.name
+		
+		for ( r : sc.regions) {
+			val execRegion = r.create
+			if (execRegion.exitSequence != null) {
+				exitSequence.steps.add(execRegion.exitSequence.newCall)
+			}
+		} 
+		
+		flow.exitSequence = exitSequence
+		return exitSequence
+	}
+	
 	def defineStatechartEnterSequence(ExecutionFlow flow, Statechart sc) {
 
 		val enterSequence = sexec.factory.createSequence

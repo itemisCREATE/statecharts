@@ -115,7 +115,7 @@ class ModelSequencer {
 		ef.defineStateEnterSequences(sc)
 		ef.defineStateExitSequences(sc)
 		ef.defineStatechartEnterSequence(sc)
-		// TODO: ef.defineStatechartExitSequence(sc)
+		ef.defineStatechartExitSequence(sc)
 		
 		sc.mapTransitions(ef)
 		sc.mapLocalReactions(ef)

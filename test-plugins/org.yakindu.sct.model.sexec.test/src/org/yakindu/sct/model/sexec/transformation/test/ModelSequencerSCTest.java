@@ -6,6 +6,7 @@ import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._creat
 
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.MinimalTSC;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.InitializingTSC;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.OrthogonalFlatTSC;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.SimpleFlatTSC;
@@ -82,4 +83,14 @@ public class ModelSequencerSCTest extends ModelSequencerTest {
 				AssignmentOperator.ASSIGN, "true");
 	}
 
+	@Test
+	public void testSCExitSequence() {
+		MinimalTSC sc = new MinimalTSC();
+
+		ExecutionFlow flow = sequencer.transform(sc.sc);
+
+		assertNotNull(flow.getExitSequence());
+		assertCall(flow.getExitSequence(), 0, flow.getSubScopes().get(0)
+				.getExitSequence());
+	}
 }
