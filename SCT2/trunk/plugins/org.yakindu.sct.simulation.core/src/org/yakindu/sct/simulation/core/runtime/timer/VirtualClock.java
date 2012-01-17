@@ -19,13 +19,18 @@ package org.yakindu.sct.simulation.core.runtime.timer;
  */
 public class VirtualClock {
 
+	//real time in ms since start of the clock
+	private long startTime;
+	//real time in ms since last factor change
+	private long realTime;
+	//virtual time in ms since last factor change
 	private long virtualTime;
 
-	private long realTime;
 
 	private double factor = 1.0d;
 
 	public void start() {
+		startTime = System.currentTimeMillis();
 		virtualTime = System.currentTimeMillis();
 		realTime = System.currentTimeMillis();
 	}
@@ -44,6 +49,18 @@ public class VirtualClock {
 
 	public double getFactor() {
 		return factor;
+	}
+
+	public long getStartTime() {
+		return startTime;
+	}
+
+	public long getRealTime() {
+		return realTime;
+	}
+
+	public long getVirtualTime() {
+		return virtualTime;
 	}
 
 }

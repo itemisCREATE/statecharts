@@ -23,6 +23,7 @@ import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.simulation.core.runtime.ExecutionException;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
+import org.yakindu.sct.simulation.core.runtime.timer.VirtualClock;
 
 /**
  * 
@@ -37,12 +38,14 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	private List<ExecutionEvent> raisedEvents;
 	private ExecutionState[] activeStateConfig;
 	private double timeScaleFactor;
+	private VirtualClock virtualClock;
 
 	public ExecutionContextImpl() {
 		variables = new ArrayList<ExecutionVariable>();
 		declaredEvents = new ArrayList<ExecutionEvent>();
 		raisedEvents = new ArrayList<ExecutionEvent>();
 		timeScaleFactor = 1.0d;
+		virtualClock = new VirtualClock();
 		activeStateConfig = null;
 	}
 
@@ -192,5 +195,9 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		double oldFactor = timeScaleFactor;
 		timeScaleFactor = factor;
 		notifyTimeScaleFactorChanged(oldFactor, factor);
+	}
+
+	public VirtualClock getVirtualClock() {
+		return virtualClock;
 	}
 }
