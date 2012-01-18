@@ -225,11 +225,11 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 				return;
 			SCTDebugTarget newTarget = (SCTDebugTarget) object
 					.getAdapter(IDebugTarget.class);
-
 			if (newTarget != debugTarget && newTarget != null
 					&& !newTarget.isTerminated()) {
 				refreshInput(newTarget);
 				debugTarget = newTarget;
+				clockUpdater.setTerminated(false);
 				new Thread(clockUpdater).start();
 			}
 		}
