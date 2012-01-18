@@ -53,13 +53,14 @@ cached String functionName(Step step) :
 
 
 ExecutionState state(Step this) : (ExecutionState) this.eContainer;
+ExecutionScope scope(Step this) : (ExecutionScope) this.eContainer;
 
 boolean isEffect(Step step) : Reaction.isInstance(step.eContainer) ;
 boolean isReactionCheck(Step step) : Reaction.isInstance(step.eContainer) && Check.isInstance(step);
 boolean isEntryAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().entryAction == step;
 boolean isExitAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().exitAction == step;
-boolean isEnterSequence(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().enterSequence == step;
-boolean isExitSequence(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().exitSequence == step;
+boolean isEnterSequence(Step step) : ExecutionScope.isInstance(step.eContainer) && step.scope().enterSequence == step;
+boolean isExitSequence(Step step) : ExecutionScope.isInstance(step.eContainer) && step.scope().exitSequence == step;
 boolean isReactSequence(Step step) : Sequence.isInstance(step) && step.name == "react";
 
 
@@ -136,8 +137,24 @@ String reactFunction(ExecutionNode this) :
 
 
 String getStateName(Step this) : this.eContainer.getStateName(); 
-String getStateName(Object this) : (((EObject)this).eContainer != null)?((EObject)this).eContainer.getStateName():"unkown";
+String getStateName(emf::EObject this) : (this.eContainer != null)?this.eContainer.getStateName():"unkown";
 String getStateName(ExecutionState this) : this.simpleName;
+String getStateName(ExecutionRegion this) : 
+	if (ExecutionState.isInstance(superScope)) 
+	then (
+		getStateName((ExecutionState)superScope)+getNullSafeRegionName()
+	) else 
+		"Region"+getNullSafeRegionName();
+
+private String getNullSafeRegionName(ExecutionRegion this) :
+	if (name == null)
+	then (
+		if (ExecutionScope.isInstance(superScope))
+		then
+			superScope.subScopes.indexOf(this)
+		else "DefaultRegion"
+	)
+	else name.replaceAll(" ","").toFirstUpper();
 
 String getReactionName(Object this) : "uknown";
 String getReactionName(Check this) : this.eContainer.getReactionName(); 

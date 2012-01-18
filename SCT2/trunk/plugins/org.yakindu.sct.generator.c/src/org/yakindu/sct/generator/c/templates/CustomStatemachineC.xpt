@@ -56,7 +56,7 @@ Templates for the main statechart c file.
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Call»
-«this.step.functionName()»(«IF isSingleton() == false»(«StName()»*) handle«ENDIF»);
+«this.step.functionName()»(«IF isSingleton() == false»«this.statemachineHandleName()»«ENDIF»);
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Sequence»
@@ -199,13 +199,13 @@ void «this.exitAction.exitActionFunction()»
 
 
 
-«DEFINE EnterSequenceProto FOR ExecutionState -»
+«DEFINE EnterSequenceProto FOR ExecutionScope -»
 «IF this.enterSequence != null && enterSequence.caller.size > 0 -»
 static void «this.enterSequence.enterSequenceFunction()»;
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE EnterSequenceImplement FOR ExecutionState -»
+«DEFINE EnterSequenceImplement FOR ExecutionScope -»
 «IF this.enterSequence != null && enterSequence .caller.size > 0 »
 void «this.enterSequence.enterSequenceFunction()»
 {
@@ -214,13 +214,13 @@ void «this.enterSequence.enterSequenceFunction()»
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE ExitSequenceProto FOR ExecutionState -»
+«DEFINE ExitSequenceProto FOR ExecutionScope -»
 «IF this.exitSequence != null && exitSequence.caller.size > 0 -»
 static void «this.exitSequence.exitSequenceFunction()»;
 «ENDIF -»
 «ENDDEFINE»
 
-«DEFINE ExitSequenceImplement FOR ExecutionState -»
+«DEFINE ExitSequenceImplement FOR ExecutionScope -»
 «IF this.exitSequence != null && exitSequence.caller.size > 0 -»
 void «this.exitSequence.exitSequenceFunction()»
 {
@@ -228,6 +228,7 @@ void «this.exitSequence.exitSequenceFunction()»
 }
 «ENDIF -»
 «ENDDEFINE»
+
 
 
 
@@ -253,6 +254,8 @@ static «StName()»* «statemachineHandleName()»;
 «EXPAND ExitMethodProto FOREACH this.states -»
 «EXPAND EnterSequenceProto FOREACH this.states -»
 «EXPAND ExitSequenceProto FOREACH this.states -»
+«EXPAND EnterSequenceProto FOREACH this.eAllContents.typeSelect(ExecutionRegion) -»
+«EXPAND ExitSequenceProto FOREACH this.eAllContents.typeSelect(ExecutionRegion) -»
 «EXPAND ReactMethodsProto FOREACH this.states -»
 «EXPAND ReactMethodsProto FOREACH this.nodes -»
 
@@ -264,6 +267,8 @@ static «StName()»* «statemachineHandleName()»;
 «EXPAND ExitMethodImplement FOREACH this.states -»
 «EXPAND EnterSequenceImplement FOREACH this.states -»
 «EXPAND ExitSequenceImplement FOREACH this.states -»
+«EXPAND EnterSequenceImplement FOREACH this.regions -»
+«EXPAND ExitSequenceImplement FOREACH this.regions -»
 «EXPAND ReactMethodsImplement FOREACH this.states -»
 «EXPAND ReactMethodsImplement FOREACH this.nodes -»
 
