@@ -17,6 +17,8 @@ import org.yakindu.sct.model.sexec.ExecutionScope
 import org.eclipse.xtext.EcoreUtil2
 import java.util.ArrayList
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.stext.stext.OperationCall
+import org.yakindu.sct.model.stext.stext.Operation
 
 class StructureMapping {
 	 
@@ -57,6 +59,10 @@ class StructureMapping {
 	}
 	
 	def dispatch Declaration map(VariableDefinition v) {
+		val _v = v.create
+		return _v
+	}
+	def dispatch Declaration map(Operation v) {
 		val _v = v.create
 		return _v
 	}

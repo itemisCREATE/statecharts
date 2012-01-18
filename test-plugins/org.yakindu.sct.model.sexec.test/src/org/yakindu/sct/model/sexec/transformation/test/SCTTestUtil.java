@@ -6,6 +6,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesFactory;
+import org.yakindu.sct.model.sexec.Execution;
+import org.yakindu.sct.model.sexec.Sequence;
+import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.FinalState;
@@ -30,6 +33,8 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.OnCycleEvent;
+import org.yakindu.sct.model.stext.stext.Operation;
+import org.yakindu.sct.model.stext.stext.OperationCall;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
@@ -50,6 +55,14 @@ public class SCTTestUtil {
 	public static EventDefinition _createEventDefinition(String name,
 			Scope scope) {
 		EventDefinition e = StextFactory.eINSTANCE.createEventDefinition();
+		e.setName(name);
+		if (scope != null)
+			scope.getDeclarations().add(e);
+		return e;
+	}
+
+	public static Operation _createOperation(String name, Scope scope) {
+		Operation e = StextFactory.eINSTANCE.createOperation();
 		e.setName(name);
 		if (scope != null)
 			scope.getDeclarations().add(e);
@@ -275,6 +288,12 @@ public class SCTTestUtil {
 		if (e != null)
 			e.getActions().add(assignment);
 		return assignment;
+	}
+
+	public static OperationCall _createOperationCall(Operation o) {
+		OperationCall oc = StextFactory.eINSTANCE.createOperationCall();
+		oc.setOperation(o);
+		return oc;
 	}
 
 	public static PrimitiveValueExpression _createValue(int i) {

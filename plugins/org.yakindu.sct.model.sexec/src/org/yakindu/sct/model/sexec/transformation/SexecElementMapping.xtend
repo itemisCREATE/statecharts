@@ -51,6 +51,8 @@ import org.yakindu.sct.model.stext.stext.OnCycleEvent
 import org.yakindu.sct.model.stext.stext.BoolLiteral
 import org.yakindu.sct.model.stext.stext.AlwaysEvent
 import org.yakindu.sct.model.stext.stext.DefaultEvent
+import org.yakindu.sct.model.stext.stext.OperationCall
+import org.yakindu.sct.model.stext.stext.Operation
  
 
 @Singleton class SexecElementMapping {
@@ -81,6 +83,8 @@ import org.yakindu.sct.model.stext.stext.DefaultEvent
 	def EventDefinition create r : EcoreUtil::copy(event) create(EventDefinition event) {}
 	
 	def VariableDefinition create r : EcoreUtil::copy(v) create(VariableDefinition v) {}
+	
+	def Operation create r : EcoreUtil::copy(v) create(Operation v) {}
 	
 	
 	def ExecutionState create r : sexecFactory.createExecutionState create(RegularState state){

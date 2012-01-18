@@ -71,6 +71,10 @@ import com.google.inject.name.Named
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.StateVector
+import org.yakindu.sct.model.stext.stext.OperationCall
+import org.yakindu.sct.model.stext.stext.Operation
+import java.util.Set
+import java.util.Collection
 
 class ModelSequencer {
 	 
@@ -246,29 +250,36 @@ class ModelSequencer {
 	
 	def retargetDeclRefs(ExecutionFlow flow) {
 		val allContent = EcoreUtil2::eAllContentsAsList(flow)
-		val declared = allContent.filter(e | e instanceof EventDefinition || e instanceof VariableDefinition).toList
+		val declared = allContent.filter(e | e instanceof EventDefinition || e instanceof VariableDefinition || e instanceof Operation).toSet
 		
-		allContent.filter(e | e instanceof ElementReferenceExpression).map(s | s as ElementReferenceExpression).forEach( ere | ere.retarget(declared) )
-		allContent.filter(e | e instanceof Assignment).map(s | s as Assignment).forEach( ere | ere.retarget(declared) )
+		allContent.filter(typeof(ElementReferenceExpression)).forEach( ere | ere.retarget(declared) )
+		allContent.filter(typeof(Assignment)).forEach( ere | ere.retarget(declared) )
+		allContent.filter(typeof(OperationCall)).forEach( call|call.retarget(declared))
 	}
 	
 	
-	def retarget(ElementReferenceExpression ere, List<EObject> declared) {
+	def retarget(ElementReferenceExpression ere, Collection<EObject> declared) {
 		if (! declared.contains(ere.value) ) ere.value = ere.value.replaced
 	}
 	
-	def retarget(Assignment assign, List<EObject> declared) {
+	def retarget(Assignment assign, Collection<EObject> declared) {
 		if (! declared.contains(assign.varRef) ) assign.varRef = ((assign.varRef as VariableDefinition).replaced) as Variable
+	}
+	def retarget(OperationCall call, Collection<EObject> declared) {
+		if (! declared.contains(call.operation) ) call.operation = (call.operation.replaced) as Operation
 	}
 	
 	def dispatch replaced(VariableDefinition vd) {
+		vd.create	
+	}
+	def dispatch replaced(Operation vd) {
 		vd.create	
 	}
 	
 	def dispatch replaced(EventDefinition ed) {
 		ed.create	
 	}
-	
+
 	def dispatch replaced(TimeEvent ed) {
 		ed	
 	}
