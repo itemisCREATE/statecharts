@@ -83,7 +83,6 @@ public class RegionEditPart extends ShapeNodeEditPart {
 									return false;
 								}
 							}
-
 						}
 						return true;
 					}

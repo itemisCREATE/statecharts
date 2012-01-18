@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.ui.editor.policies;
 
+import java.util.List;
+
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -17,6 +19,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.UnexecutableCommand;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableShapeEditPolicy;
 
 /**
@@ -26,7 +29,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableShapeEditPolicy;
  * @author m.muehlbrandt
  * 
  */
-public abstract class NoOverlapResizableEditPolicy extends ResizableShapeEditPolicy {
+public class NoOverlapResizableEditPolicy extends ResizableShapeEditPolicy {
 
 	@Override
 	protected Command getMoveCommand(ChangeBoundsRequest request) {
@@ -48,7 +51,31 @@ public abstract class NoOverlapResizableEditPolicy extends ResizableShapeEditPol
 		return super.getResizeCommand(request);
 	}
 
-	protected abstract boolean isRequestValid(ChangeBoundsRequest request);
+	@SuppressWarnings("unchecked")
+	protected boolean isRequestValid(ChangeBoundsRequest request) {
+		// Overlapping of nodes is not allowed
+		final IGraphicalEditPart parent = (IGraphicalEditPart) getHost()
+				.getParent();
+		final Rectangle newBounds = request
+				.getTransformedRectangle(getHostFigure()
+						.getBounds());
+		final List<IGraphicalEditPart> children = parent
+				.getChildren();
+		for (final IGraphicalEditPart child : children) {
+			if (child != getHost()
+					&& child.getFigure().getBounds()
+							.intersects(newBounds)) {
+				Rectangle intersection = child.getFigure()
+						.getBounds().getIntersection(newBounds);
+				// allow snapping to OtherEditParts
+				if (intersection.width() > 1
+						&& intersection.height() > 1) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 
 	/**
 	 * Do not allow resizing smaller than the MinimumSize of the {@link Figure}.
