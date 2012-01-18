@@ -59,8 +59,8 @@ public class RegionEditPart extends ShapeNodeEditPart {
 		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
 				new NoOverlapResizableEditPolicy() {
-					
-			@SuppressWarnings("unchecked")
+
+					@SuppressWarnings("unchecked")
 					protected boolean isRequestValid(ChangeBoundsRequest request) {
 						// Overlapping of nodes is not allowed
 						final IGraphicalEditPart parent = (IGraphicalEditPart) getHost()
@@ -71,17 +71,23 @@ public class RegionEditPart extends ShapeNodeEditPart {
 						final List<IGraphicalEditPart> children = parent
 								.getChildren();
 						for (final IGraphicalEditPart child : children) {
-							if (!(child instanceof RegionEditPart)) {
-								if (child != getHost()
-										&& child.getFigure().getBounds()
-												.intersects(newBounds)) {
+
+							if (!(child instanceof RegionEditPart)
+									&& child.getFigure().getBounds()
+											.intersects(newBounds)) {
+								Rectangle intersection = child.getFigure()
+										.getBounds().getIntersection(newBounds);
+								// allow snapping to StatechartTextEditPart
+								if (intersection.width() > 1
+										&& intersection.height() > 1) {
 									return false;
 								}
 							}
+
 						}
 						return true;
 					}
-			
+
 				});
 	}
 
