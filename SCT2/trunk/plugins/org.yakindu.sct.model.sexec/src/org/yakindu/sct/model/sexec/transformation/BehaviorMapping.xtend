@@ -38,6 +38,7 @@ import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sgraph.Choice
+import org.yakindu.sct.model.sgraph.Entry
  
 
 class BehaviorMapping {
@@ -292,15 +293,13 @@ class BehaviorMapping {
 		// second process the target state entry behavior
 		if (t.target != null ) {
 
-			// in the case of orthogonal states we also have to enter sibling states.
-			val siblingRegions = t.target.parentRegion.composite.regions
-			
-			
 			// perform entry on the transition path 			
 			if ( t.target instanceof RegularState) {
 				sequence.steps.add((t.target as RegularState).create.enterSequence.newCall )	
 			} else if ( t.target instanceof Choice ) {
 				sequence.steps.add((t.target as Choice).create.reactSequence.newCall )	
+			} else if ( t.target instanceof Entry ) {
+				sequence.steps.add((t.target as Entry).create.reactSequence.newCall )	
 			}
 				
 		}

@@ -19,6 +19,8 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.AssignmentOperator
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.ExecutionScope
+import org.yakindu.sct.model.sgraph.Entry
+import org.yakindu.sct.model.sgraph.EntryKind
 
 class SequenceBuilder {
 	
@@ -51,12 +53,35 @@ class SequenceBuilder {
 		// process all vertices of a region
 		for ( s : r.vertices) defineStateEnterSequence(s)
 
-		val entryState = r.entry?.target?.create
-		if (entryState != null && entryState.enterSequence != null) 
-				seq.steps.add(entryState.enterSequence.newCall);
+		val entryNode = r.entry?.create
+		if (entryNode != null && entryNode.reactSequence != null) {
+			seq.steps.add(entryNode.reactSequence.newCall);
+		}
+// Was before
+//		val entryState = r.entry?.target?.create
+//		if (entryState != null && entryState.enterSequence != null) 
+//				seq.steps.add(entryState.enterSequence.newCall);
 		execState.enterSequence = seq
 	}
 	
+
+	/**
+	 * For entries the EnterSequence is the react part which must be defined before
+	 * the target sequence can be calculated.
+	 */
+	def dispatch void defineStateEnterSequence(Entry e) {
+		val execEntry = e.create
+		val seq = sexec.factory.createSequence
+		seq.name = "reactSequence"
+		seq.comment = "Default react sequence for "+switch (e.kind) {
+				case EntryKind::INITIAL: "initial "
+				case EntryKind::DEEP_HISTORY: "deep history "
+				case EntryKind::SHALLOW_HISTORY: "shallow history "
+				default: ""
+			}+"entry " + e.name
+
+		execEntry.reactSequence = seq
+	}
 
 	def dispatch void defineStateEnterSequence(Vertex v) {
 	}	
@@ -106,17 +131,7 @@ class SequenceBuilder {
 		execState.enterSequence = seq
 	}
 
-	// TODO: refactor - don't access source element...
-	def addEnterRegion(Sequence seq, ExecutionRegion r) {
-		val entryState = (r.sourceElement as Region).entry?.target?.create
-					
-		if (entryState != null && entryState.enterSequence != null) 
-				seq.steps.add(entryState.enterSequence.newCall);
-	}
-	
-	
-	
-		/**
+	/**
 	 * Defines the exit sequences of all states
 	 */
 	def void defineStateExitSequences(ExecutionFlow flow, Statechart sc) {
@@ -135,6 +150,10 @@ class SequenceBuilder {
 		// process all states of a region
 		for ( s : r.vertices ) defineStateExitSequence(s)
 		
+		if (r.collectEntries.exists(e|e.kind == EntryKind::DEEP_HISTORY || e.kind == EntryKind::SHALLOW_HISTORY)) {
+			seq.steps += execRegion.newSaveHistory
+		}
+		
 		// collect leaf states
 		val Iterable<ExecutionState> leafStates = r.collectLeafStates(new ArrayList<RegularState>()).map(rs|rs.create)
 		val sVector = execRegion.stateVector
@@ -151,6 +170,18 @@ class SequenceBuilder {
 	}
 	
 	def dispatch void defineStateExitSequence(Vertex v) {}
+
+	def dispatch void defineStateExitSequence(Entry e) {
+		val execEntry = e.create
+		val seq = execEntry.reactSequence
+		val target = e.target.create
+		
+		//TODO consider shallow and deep history
+		if (target != null && target.enterSequence != null) {
+			seq.steps += target.enterSequence.newCall
+		}
+		
+	}
 	
 	def dispatch void defineStateExitSequence(FinalState s) {
 		val execState = s.create

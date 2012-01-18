@@ -109,6 +109,7 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 			case SexecPackage.REACTION_FIRED: return createReactionFired();
 			case SexecPackage.TRACE_STATE_ENTERED: return createTraceStateEntered();
 			case SexecPackage.TRACE_STATE_EXITED: return createTraceStateExited();
+			case SexecPackage.SAVE_HISTORY: return createSaveHistory();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -362,6 +363,16 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public TraceStateExited createTraceStateExited() {
 		TraceStateExitedImpl traceStateExited = new TraceStateExitedImpl();
 		return traceStateExited;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SaveHistory createSaveHistory() {
+		SaveHistoryImpl saveHistory = new SaveHistoryImpl();
+		return saveHistory;
 	}
 
 	/**

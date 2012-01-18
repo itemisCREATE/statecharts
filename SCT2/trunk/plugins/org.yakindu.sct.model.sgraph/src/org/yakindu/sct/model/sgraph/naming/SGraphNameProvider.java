@@ -22,6 +22,7 @@ import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.Strings;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Declaration;
+import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -43,6 +44,8 @@ import com.google.inject.Inject;
  */
 public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider {
 
+	private static final QualifiedName DEFAULT_ENTRY_NAME = QualifiedName
+			.create("Default");
 	private static final String _FINAL_STATE_NAME = "_final_";
 	private static final String _CHOICE_NAME = "_choice_";
 
@@ -87,6 +90,22 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
 				return parentsQualifiedName.append(qualifiedNameFromConverter);
 		}
 		return qualifiedNameFromConverter;
+	}
+
+	public QualifiedName qualifiedName(Entry ele) {
+
+		QualifiedName name = DEFAULT_ENTRY_NAME;
+		if (ele.getName() != null && !ele.getName().isEmpty()) {
+			name = QualifiedName.create(ele.getName());
+		}
+		EObject temp = ele;
+		while (temp.eContainer() != null) {
+			temp = temp.eContainer();
+			QualifiedName parentsQualifiedName = getFullyQualifiedName(temp);
+			if (parentsQualifiedName != null)
+				return parentsQualifiedName.append(name);
+		}
+		return name;
 	}
 
 	public QualifiedName qualifiedName(Scope ele) {

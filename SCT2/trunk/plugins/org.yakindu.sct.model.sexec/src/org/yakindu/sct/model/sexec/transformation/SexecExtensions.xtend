@@ -51,7 +51,13 @@ class SexecExtensions {
 		sCase.step = step
 		return sCase
 	}
-	
+
+	def newSaveHistory(ExecutionRegion r) {
+		val save = factory.createSaveHistory
+		save.region = r
+		return save
+	}
+
 	def dispatch List<ExecutionState> collectLeafStates(ExecutionState state, List<ExecutionState> leafStates) {
 		if ( state.isLeaf ) 
 			leafStates += state

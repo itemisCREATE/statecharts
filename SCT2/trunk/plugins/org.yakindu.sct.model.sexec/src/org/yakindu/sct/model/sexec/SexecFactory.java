@@ -251,6 +251,15 @@ public interface SexecFactory extends EFactory {
 	TraceStateExited createTraceStateExited();
 
 	/**
+	 * Returns a new object of class '<em>Save History</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Save History</em>'.
+	 * @generated
+	 */
+	SaveHistory createSaveHistory();
+
+	/**
 	 * Returns a new object of class '<em>Check Ref</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

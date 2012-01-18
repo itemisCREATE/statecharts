@@ -340,6 +340,14 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SexecPackage.SAVE_HISTORY: {
+				SaveHistory saveHistory = (SaveHistory)theEObject;
+				T result = caseSaveHistory(saveHistory);
+				if (result == null) result = caseStep(saveHistory);
+				if (result == null) result = caseNamedElement(saveHistory);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -746,6 +754,21 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTraceStateExited(TraceStateExited object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Save History</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Save History</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSaveHistory(SaveHistory object) {
 		return null;
 	}
 

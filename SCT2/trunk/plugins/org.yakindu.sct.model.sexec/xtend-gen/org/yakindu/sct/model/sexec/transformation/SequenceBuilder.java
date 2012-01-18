@@ -5,7 +5,6 @@ import com.google.inject.name.Named;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
@@ -19,11 +18,13 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
+import org.yakindu.sct.model.sexec.ExecutionEntry;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
+import org.yakindu.sct.model.sexec.SaveHistory;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.StateCase;
@@ -38,6 +39,7 @@ import org.yakindu.sct.model.sexec.transformation.SgraphExtensions;
 import org.yakindu.sct.model.sexec.transformation.StextExtensions;
 import org.yakindu.sct.model.sexec.transformation.TraceExtensions;
 import org.yakindu.sct.model.sgraph.Entry;
+import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.NamedElement;
 import org.yakindu.sct.model.sgraph.Region;
@@ -98,25 +100,66 @@ public class SequenceBuilder {
         this.defineStateEnterSequence(s);
       }
       Entry _entry = this.sgraph.entry(r);
-      State _target = this.sgraph==null?(State)null:this.sgraph.target(_entry);
-      ExecutionState _create_1 = this.mapping==null?(ExecutionState)null:this.mapping.create(_target);
-      final ExecutionState entryState = _create_1;
+      ExecutionEntry _create_1 = this.mapping==null?(ExecutionEntry)null:this.mapping.create(_entry);
+      final ExecutionEntry entryNode = _create_1;
       boolean _operator_and = false;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(entryState, null);
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(entryNode, null);
       if (!_operator_notEquals) {
         _operator_and = false;
       } else {
-        Sequence _enterSequence = entryState.getEnterSequence();
-        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_enterSequence, null);
+        Sequence _reactSequence = entryNode.getReactSequence();
+        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_reactSequence, null);
         _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_notEquals_1);
       }
       if (_operator_and) {
         EList<Step> _steps = seq.getSteps();
-        Sequence _enterSequence_1 = entryState.getEnterSequence();
-        Call _newCall = this.mapping.newCall(_enterSequence_1);
+        Sequence _reactSequence_1 = entryNode.getReactSequence();
+        Call _newCall = this.mapping.newCall(_reactSequence_1);
         _steps.add(_newCall);
       }
       execState.setEnterSequence(seq);
+    }
+  }
+  
+  protected void _defineStateEnterSequence(final Entry e) {
+    {
+      ExecutionEntry _create = this.mapping.create(e);
+      final ExecutionEntry execEntry = _create;
+      SexecFactory _factory = this.sexec.factory();
+      Sequence _createSequence = _factory.createSequence();
+      final Sequence seq = _createSequence;
+      seq.setName("reactSequence");
+      String _switchResult = null;
+      EntryKind _kind = e.getKind();
+      final EntryKind __valOfSwitchOver = _kind;
+      boolean matched = false;
+      if (!matched) {
+        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,EntryKind.INITIAL)) {
+          matched=true;
+          _switchResult = "initial ";
+        }
+      }
+      if (!matched) {
+        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,EntryKind.DEEP_HISTORY)) {
+          matched=true;
+          _switchResult = "deep history ";
+        }
+      }
+      if (!matched) {
+        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,EntryKind.SHALLOW_HISTORY)) {
+          matched=true;
+          _switchResult = "shallow history ";
+        }
+      }
+      if (!matched) {
+        _switchResult = "";
+      }
+      String _operator_plus = StringExtensions.operator_plus("Default react sequence for ", _switchResult);
+      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "entry ");
+      String _name = e.getName();
+      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _name);
+      seq.setComment(_operator_plus_2);
+      execEntry.setReactSequence(seq);
     }
   }
   
@@ -205,36 +248,6 @@ public class SequenceBuilder {
     }
   }
   
-  public Boolean addEnterRegion(final Sequence seq, final ExecutionRegion r) {
-    Boolean _xblockexpression = null;
-    {
-      EObject _sourceElement = r.getSourceElement();
-      Entry _entry = this.sgraph.entry(((Region) _sourceElement));
-      State _target = this.sgraph==null?(State)null:this.sgraph.target(_entry);
-      ExecutionState _create = this.mapping==null?(ExecutionState)null:this.mapping.create(_target);
-      final ExecutionState entryState = _create;
-      Boolean _xifexpression = null;
-      boolean _operator_and = false;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(entryState, null);
-      if (!_operator_notEquals) {
-        _operator_and = false;
-      } else {
-        Sequence _enterSequence = entryState.getEnterSequence();
-        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_enterSequence, null);
-        _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_notEquals_1);
-      }
-      if (_operator_and) {
-        EList<Step> _steps = seq.getSteps();
-        Sequence _enterSequence_1 = entryState.getEnterSequence();
-        Call _newCall = this.mapping.newCall(_enterSequence_1);
-        boolean _add = _steps.add(_newCall);
-        _xifexpression = _add;
-      }
-      _xblockexpression = (_xifexpression);
-    }
-    return _xblockexpression;
-  }
-  
   public void defineStateExitSequences(final ExecutionFlow flow, final Statechart sc) {
     EList<Region> _regions = sc.getRegions();
     for (final Region r : _regions) {
@@ -257,15 +270,37 @@ public class SequenceBuilder {
       for (final Vertex s : _vertices) {
         this.defineStateExitSequence(s);
       }
+      Iterable<Entry> _collectEntries = this.sgraph.collectEntries(r);
+      final Function1<Entry,Boolean> _function = new Function1<Entry,Boolean>() {
+          public Boolean apply(final Entry e) {
+            boolean _operator_or = false;
+            EntryKind _kind = e.getKind();
+            boolean _operator_equals = ObjectExtensions.operator_equals(_kind, EntryKind.DEEP_HISTORY);
+            if (_operator_equals) {
+              _operator_or = true;
+            } else {
+              EntryKind _kind_1 = e.getKind();
+              boolean _operator_equals_1 = ObjectExtensions.operator_equals(_kind_1, EntryKind.SHALLOW_HISTORY);
+              _operator_or = BooleanExtensions.operator_or(_operator_equals, _operator_equals_1);
+            }
+            return ((Boolean)_operator_or);
+          }
+        };
+      boolean _exists = IterableExtensions.<Entry>exists(_collectEntries, _function);
+      if (_exists) {
+        EList<Step> _steps = seq.getSteps();
+        SaveHistory _newSaveHistory = this.sexec.newSaveHistory(execRegion);
+        CollectionExtensions.<Step>operator_add(_steps, _newSaveHistory);
+      }
       ArrayList<RegularState> _arrayList = new ArrayList<RegularState>();
       List<RegularState> _collectLeafStates = this.sgraph.collectLeafStates(r, _arrayList);
-      final Function1<RegularState,ExecutionState> _function = new Function1<RegularState,ExecutionState>() {
+      final Function1<RegularState,ExecutionState> _function_1 = new Function1<RegularState,ExecutionState>() {
           public ExecutionState apply(final RegularState rs) {
             ExecutionState _create_1 = SequenceBuilder.this.mapping.create(rs);
             return _create_1;
           }
         };
-      List<ExecutionState> _map = ListExtensions.<RegularState, ExecutionState>map(_collectLeafStates, _function);
+      List<ExecutionState> _map = ListExtensions.<RegularState, ExecutionState>map(_collectLeafStates, _function_1);
       final Iterable<ExecutionState> leafStates = _map;
       StateVector _stateVector = execRegion.getStateVector();
       final StateVector sVector = _stateVector;
@@ -279,8 +314,8 @@ public class SequenceBuilder {
         {
           StateSwitch _defineExitSwitch = this.defineExitSwitch(execRegion, leafStates, i);
           final StateSwitch sSwitch = _defineExitSwitch;
-          EList<Step> _steps = seq.getSteps();
-          _steps.add(sSwitch);
+          EList<Step> _steps_1 = seq.getSteps();
+          _steps_1.add(sSwitch);
         }
       }
       execRegion.setExitSequence(seq);
@@ -288,6 +323,33 @@ public class SequenceBuilder {
   }
   
   protected void _defineStateExitSequence(final Vertex v) {
+  }
+  
+  protected void _defineStateExitSequence(final Entry e) {
+    {
+      ExecutionEntry _create = this.mapping.create(e);
+      final ExecutionEntry execEntry = _create;
+      Sequence _reactSequence = execEntry.getReactSequence();
+      final Sequence seq = _reactSequence;
+      State _target = this.sgraph.target(e);
+      ExecutionState _create_1 = this.mapping.create(_target);
+      final ExecutionState target = _create_1;
+      boolean _operator_and = false;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(target, null);
+      if (!_operator_notEquals) {
+        _operator_and = false;
+      } else {
+        Sequence _enterSequence = target.getEnterSequence();
+        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_enterSequence, null);
+        _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_notEquals_1);
+      }
+      if (_operator_and) {
+        EList<Step> _steps = seq.getSteps();
+        Sequence _enterSequence_1 = target.getEnterSequence();
+        Call _newCall = this.mapping.newCall(_enterSequence_1);
+        CollectionExtensions.<Step>operator_add(_steps, _newCall);
+      }
+    }
   }
   
   protected void _defineStateExitSequence(final FinalState s) {
@@ -560,33 +622,37 @@ public class SequenceBuilder {
     }
   }
   
-  public void defineStateEnterSequence(final NamedElement state) {
-    if ((state instanceof FinalState)) {
-      _defineStateEnterSequence((FinalState)state);
-    } else if ((state instanceof State)) {
-      _defineStateEnterSequence((State)state);
-    } else if ((state instanceof Region)) {
-      _defineStateEnterSequence((Region)state);
-    } else if ((state instanceof Vertex)) {
-      _defineStateEnterSequence((Vertex)state);
+  public void defineStateEnterSequence(final NamedElement e) {
+    if ((e instanceof Entry)) {
+      _defineStateEnterSequence((Entry)e);
+    } else if ((e instanceof FinalState)) {
+      _defineStateEnterSequence((FinalState)e);
+    } else if ((e instanceof State)) {
+      _defineStateEnterSequence((State)e);
+    } else if ((e instanceof Region)) {
+      _defineStateEnterSequence((Region)e);
+    } else if ((e instanceof Vertex)) {
+      _defineStateEnterSequence((Vertex)e);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(state).toString());
+        java.util.Arrays.<Object>asList(e).toString());
     }
   }
   
-  public void defineStateExitSequence(final NamedElement s) {
-    if ((s instanceof FinalState)) {
-      _defineStateExitSequence((FinalState)s);
-    } else if ((s instanceof State)) {
-      _defineStateExitSequence((State)s);
-    } else if ((s instanceof Region)) {
-      _defineStateExitSequence((Region)s);
-    } else if ((s instanceof Vertex)) {
-      _defineStateExitSequence((Vertex)s);
+  public void defineStateExitSequence(final NamedElement e) {
+    if ((e instanceof Entry)) {
+      _defineStateExitSequence((Entry)e);
+    } else if ((e instanceof FinalState)) {
+      _defineStateExitSequence((FinalState)e);
+    } else if ((e instanceof State)) {
+      _defineStateExitSequence((State)e);
+    } else if ((e instanceof Region)) {
+      _defineStateExitSequence((Region)e);
+    } else if ((e instanceof Vertex)) {
+      _defineStateExitSequence((Vertex)e);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(s).toString());
+        java.util.Arrays.<Object>asList(e).toString());
     }
   }
 }

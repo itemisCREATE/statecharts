@@ -112,9 +112,9 @@ class StructureMapping {
 		
 		if ( region.composite instanceof Statechart ) _region.superScope = (region.composite as Statechart).create
 		else _region.superScope = (region.composite as State).create
-		
+
 		_region.subScopes.addAll( region.vertices.filter( typeof(RegularState) ).map( v | v.create as ExecutionScope ) )
-		
+
 		return _region
 	}
 	
@@ -124,9 +124,9 @@ class StructureMapping {
 	//
 
 	def ExecutionFlow mapPseudoStates(Statechart statechart, ExecutionFlow r){
-		var content = EcoreUtil2::eAllContentsAsList(statechart)
 		val allChoices = statechart.allChoices
-		r.nodes.addAll( allChoices.map( choice | choice.create ) );
+		r.nodes.addAll( statechart.allChoices.map( choice | choice.create ) );
+		r.nodes.addAll( statechart.allEntries.map( entry | entry.create ) );
 		return r
 	}
 

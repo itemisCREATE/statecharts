@@ -217,6 +217,10 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createTraceStateExitedAdapter();
 			}
 			@Override
+			public Adapter caseSaveHistory(SaveHistory object) {
+				return createSaveHistoryAdapter();
+			}
+			@Override
 			public Adapter caseScopedElement(ScopedElement object) {
 				return createScopedElementAdapter();
 			}
@@ -627,6 +631,20 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTraceStateExitedAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.SaveHistory <em>Save History</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.SaveHistory
+	 * @generated
+	 */
+	public Adapter createSaveHistoryAdapter() {
 		return null;
 	}
 

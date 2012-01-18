@@ -42,6 +42,9 @@ class SgraphExtensions {
 		if (obj?.eContainer != null) collectContainers(obj.eContainer, containerList);
 	}
 
+	def collectEntries(Region r) {
+		r.vertices.filter(typeof(Entry))
+	}
 
 	def entry(Region r) {
 		r.vertices.findFirst(v | v instanceof Entry && (v.name == null || "".equals(v.name) || v.name == 'default') ) as Entry

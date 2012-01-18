@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.sct.model.sgraph.Choice;
+import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
 import org.yakindu.sct.model.sgraph.Region;
@@ -235,6 +236,16 @@ public class StatechartExtensions {
       final Iterable<Choice> allChoices = _filter;
       List<Choice> _list = IterableExtensions.<Choice>toList(allChoices);
       return _list;
+    }
+  }
+  
+  public Iterable<Entry> allEntries(final Statechart sc) {
+    {
+      List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(sc);
+      List<EObject> content = _eAllContentsAsList;
+      Iterable<Entry> _filter = IterableExtensions.<Entry>filter(content, org.yakindu.sct.model.sgraph.Entry.class);
+      final Iterable<Entry> allEntries = _filter;
+      return allEntries;
     }
   }
   

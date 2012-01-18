@@ -20,6 +20,7 @@ import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionChoice;
+import org.yakindu.sct.model.sexec.ExecutionEntry;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionScope;
@@ -42,8 +43,8 @@ import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
 import org.yakindu.sct.model.sexec.transformation.StextExtensions;
 import org.yakindu.sct.model.sexec.transformation.TraceExtensions;
 import org.yakindu.sct.model.sgraph.Choice;
-import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Effect;
+import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.State;
@@ -662,29 +663,32 @@ public class BehaviorMapping {
       Vertex _target = t.getTarget();
       boolean _operator_notEquals_3 = ObjectExtensions.operator_notEquals(_target, null);
       if (_operator_notEquals_3) {
-        {
-          Vertex _target_1 = t.getTarget();
-          Region _parentRegion = _target_1.getParentRegion();
-          CompositeElement _composite = _parentRegion.getComposite();
-          EList<Region> _regions = _composite.getRegions();
-          final EList<Region> siblingRegions_1 = _regions;
+        Vertex _target_1 = t.getTarget();
+        if ((_target_1 instanceof org.yakindu.sct.model.sgraph.RegularState)) {
+          EList<Step> _steps_6 = sequence.getSteps();
           Vertex _target_2 = t.getTarget();
-          if ((_target_2 instanceof org.yakindu.sct.model.sgraph.RegularState)) {
-            EList<Step> _steps_6 = sequence.getSteps();
-            Vertex _target_3 = t.getTarget();
-            ExecutionState _create_1 = this.factory.create(((RegularState) _target_3));
-            Sequence _enterSequence_2 = _create_1.getEnterSequence();
-            Call _newCall_3 = this.factory.newCall(_enterSequence_2);
-            _steps_6.add(_newCall_3);
-          } else {
+          ExecutionState _create_1 = this.factory.create(((RegularState) _target_2));
+          Sequence _enterSequence_2 = _create_1.getEnterSequence();
+          Call _newCall_3 = this.factory.newCall(_enterSequence_2);
+          _steps_6.add(_newCall_3);
+        } else {
+          Vertex _target_3 = t.getTarget();
+          if ((_target_3 instanceof org.yakindu.sct.model.sgraph.Choice)) {
+            EList<Step> _steps_7 = sequence.getSteps();
             Vertex _target_4 = t.getTarget();
-            if ((_target_4 instanceof org.yakindu.sct.model.sgraph.Choice)) {
-              EList<Step> _steps_7 = sequence.getSteps();
-              Vertex _target_5 = t.getTarget();
-              ExecutionChoice _create_2 = this.factory.create(((Choice) _target_5));
-              Sequence _reactSequence = _create_2.getReactSequence();
-              Call _newCall_4 = this.factory.newCall(_reactSequence);
-              _steps_7.add(_newCall_4);
+            ExecutionChoice _create_2 = this.factory.create(((Choice) _target_4));
+            Sequence _reactSequence = _create_2.getReactSequence();
+            Call _newCall_4 = this.factory.newCall(_reactSequence);
+            _steps_7.add(_newCall_4);
+          } else {
+            Vertex _target_5 = t.getTarget();
+            if ((_target_5 instanceof org.yakindu.sct.model.sgraph.Entry)) {
+              EList<Step> _steps_8 = sequence.getSteps();
+              Vertex _target_6 = t.getTarget();
+              ExecutionEntry _create_3 = this.factory.create(((Entry) _target_6));
+              Sequence _reactSequence_1 = _create_3.getReactSequence();
+              Call _newCall_5 = this.factory.newCall(_reactSequence_1);
+              _steps_8.add(_newCall_5);
             }
           }
         }
@@ -699,18 +703,18 @@ public class BehaviorMapping {
                 {
                   ExecutionScope _superScope_1 = scope_1.getSuperScope();
                   EList<ExecutionScope> _subScopes_1 = _superScope_1.getSubScopes();
-                  final EList<ExecutionScope> siblingRegions_2 = _subScopes_1;
-                  int _indexOf_1 = siblingRegions_2.indexOf(scope_1);
+                  final EList<ExecutionScope> siblingRegions_1 = _subScopes_1;
+                  int _indexOf_1 = siblingRegions_1.indexOf(scope_1);
                   int _operator_plus = IntegerExtensions.operator_plus(((Integer)_indexOf_1), ((Integer)1));
-                  Iterable<ExecutionScope> _drop_2 = IterableExtensions.<ExecutionScope>drop(siblingRegions_2, _operator_plus);
+                  Iterable<ExecutionScope> _drop_2 = IterableExtensions.<ExecutionScope>drop(siblingRegions_1, _operator_plus);
                   for (final ExecutionScope region_1 : _drop_2) {
                     Sequence _enterSequence_3 = region_1.getEnterSequence();
                     boolean _operator_notEquals_4 = ObjectExtensions.operator_notEquals(_enterSequence_3, null);
                     if (_operator_notEquals_4) {
-                      EList<Step> _steps_8 = seq_1.getSteps();
+                      EList<Step> _steps_9 = seq_1.getSteps();
                       Sequence _enterSequence_4 = region_1.getEnterSequence();
-                      Call _newCall_5 = BehaviorMapping.this.factory.newCall(_enterSequence_4);
-                      _steps_8.add(_newCall_5);
+                      Call _newCall_6 = BehaviorMapping.this.factory.newCall(_enterSequence_4);
+                      _steps_9.add(_newCall_6);
                     }
                   }
                 }
