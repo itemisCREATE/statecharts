@@ -384,8 +384,8 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 «EXPAND ExitMethodImplement FOREACH this.states-»
 «EXPAND EnterSequenceImplement FOREACH this.states-»
 «EXPAND ExitSequenceImplement FOREACH this.states-»
-«EXPAND EnterSequenceImplement FOREACH this.eAllContents.typeSelect(ExecutionRegion)-»
-«EXPAND ExitSequenceImplement FOREACH this.eAllContents.typeSelect(ExecutionRegion)-»
+«EXPAND EnterSequenceImplement FOREACH this.regions-»
+«EXPAND ExitSequenceImplement FOREACH this.regions-»
 «EXPAND ReactMethodsImplement FOREACH this.states-»
 «EXPAND ReactMethodsImplement FOREACH this.nodes-»
 	public void runCycle() {
