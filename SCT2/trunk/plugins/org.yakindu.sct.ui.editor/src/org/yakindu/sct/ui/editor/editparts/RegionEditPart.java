@@ -10,13 +10,18 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import java.util.List;
+
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
+import org.eclipse.gef.requests.ChangeBoundsRequest;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
@@ -39,7 +44,6 @@ public class RegionEditPart extends ShapeNodeEditPart {
 		super(view);
 	}
 
-	
 	@Override
 	protected NodeFigure createNodeFigure() {
 		final NodeFigure figure = new NodeFigure();
@@ -48,14 +52,37 @@ public class RegionEditPart extends ShapeNodeEditPart {
 		figure.add(new RegionFigure(getMapMode()));
 		return figure;
 	}
-	
 
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-				new NoOverlapResizableEditPolicy());
+				new NoOverlapResizableEditPolicy() {
+					
+			@SuppressWarnings("unchecked")
+					protected boolean isRequestValid(ChangeBoundsRequest request) {
+						// Overlapping of nodes is not allowed
+						final IGraphicalEditPart parent = (IGraphicalEditPart) getHost()
+								.getParent();
+						final Rectangle newBounds = request
+								.getTransformedRectangle(getHostFigure()
+										.getBounds());
+						final List<IGraphicalEditPart> children = parent
+								.getChildren();
+						for (final IGraphicalEditPart child : children) {
+							if (!(child instanceof RegionEditPart)) {
+								if (child != getHost()
+										&& child.getFigure().getBounds()
+												.intersects(newBounds)) {
+									return false;
+								}
+							}
+						}
+						return true;
+					}
+			
+				});
 	}
 
 	@Override

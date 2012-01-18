@@ -10,12 +10,17 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import java.util.List;
+
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
+import org.eclipse.gef.requests.ChangeBoundsRequest;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
@@ -37,13 +42,13 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements
 	public StatechartTextEditPart(View view) {
 		super(view);
 	}
-	
+
 	@Override
 	protected NodeFigure createNodeFigure() {
 		final NodeFigure figure = new NodeFigure();
 		figure.setLayoutManager(new StackLayout());
 		figure.add(new StatechartTextFigure(getMapMode()));
-		figure.setMinimumSize(new Dimension(0,0));
+		figure.setMinimumSize(new Dimension(0, 0));
 		return figure;
 	}
 
@@ -66,7 +71,31 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements
 		installEditPolicy(EditPolicy.COMPONENT_ROLE,
 				new RootComponentEditPolicy());
 		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
-		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NoOverlapResizableEditPolicy());
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
+				new NoOverlapResizableEditPolicy() {
+
+					@SuppressWarnings("unchecked")
+					@Override
+					protected boolean isRequestValid(ChangeBoundsRequest request) {
+						// Overlapping of nodes is not allowed
+						final IGraphicalEditPart parent = (IGraphicalEditPart) getHost()
+								.getParent();
+						final Rectangle newBounds = request
+								.getTransformedRectangle(getHostFigure()
+										.getBounds());
+						final List<IGraphicalEditPart> children = parent
+								.getChildren();
+						for (final IGraphicalEditPart child : children) {
+							if (child != getHost()
+									&& child.getFigure().getBounds()
+											.intersects(newBounds)) {
+								return false;
+							}
+						}
+						return true;
+					}
+
+				});
 	}
 
 	@Override
