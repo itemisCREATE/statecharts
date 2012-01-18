@@ -29,7 +29,7 @@ public class VirtualTimer {
 		boolean isCanceled = false;
 
 		public int compareTo(VirtualTimerTask o) {
-			return (int) (o.nextExecutionTime - nextExecutionTime);
+			return (int) (nextExecutionTime - o.nextExecutionTime);
 		}
 
 		public boolean isCanceled() {
@@ -60,7 +60,7 @@ public class VirtualTimer {
 
 	public void scheduleTask(VirtualTimerTask task, long interval) {
 		task.interval = interval;
-		scheduleInternal(task, clock.getTime() + interval, 0);
+		scheduleInternal(task, clock.getTime() + interval, -1);
 	}
 
 	public void schedulePeriodicalTask(VirtualTimerTask task, long interval,
