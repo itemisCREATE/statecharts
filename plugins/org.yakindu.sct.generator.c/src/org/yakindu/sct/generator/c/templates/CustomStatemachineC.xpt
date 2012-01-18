@@ -254,8 +254,8 @@ static «StName()»* «statemachineHandleName()»;
 «EXPAND ExitMethodProto FOREACH this.states -»
 «EXPAND EnterSequenceProto FOREACH this.states -»
 «EXPAND ExitSequenceProto FOREACH this.states -»
-«EXPAND EnterSequenceProto FOREACH this.eAllContents.typeSelect(ExecutionRegion) -»
-«EXPAND ExitSequenceProto FOREACH this.eAllContents.typeSelect(ExecutionRegion) -»
+«EXPAND EnterSequenceProto FOREACH this.regions -»
+«EXPAND ExitSequenceProto FOREACH this.regions -»
 «EXPAND ReactMethodsProto FOREACH this.states -»
 «EXPAND ReactMethodsProto FOREACH this.nodes -»
 
