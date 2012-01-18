@@ -74,6 +74,12 @@ public class SgraphExtensions {
     }
   }
   
+  public Iterable<Entry> collectEntries(final Region r) {
+    EList<Vertex> _vertices = r.getVertices();
+    Iterable<Entry> _filter = IterableExtensions.<Entry>filter(_vertices, org.yakindu.sct.model.sgraph.Entry.class);
+    return _filter;
+  }
+  
   public Entry entry(final Region r) {
     EList<Vertex> _vertices = r.getVertices();
     final Function1<Vertex,Boolean> _function = new Function1<Vertex,Boolean>() {

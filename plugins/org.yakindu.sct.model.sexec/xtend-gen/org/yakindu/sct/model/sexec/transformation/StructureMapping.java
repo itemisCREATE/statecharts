@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.sct.model.sexec.ExecutionChoice;
+import org.yakindu.sct.model.sexec.ExecutionEntry;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
@@ -24,6 +25,7 @@ import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
+import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
@@ -206,19 +208,28 @@ public class StructureMapping {
   
   public ExecutionFlow mapPseudoStates(final Statechart statechart, final ExecutionFlow r) {
     {
-      List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(statechart);
-      List<EObject> content = _eAllContentsAsList;
       List<Choice> _allChoices = this.sct.allChoices(statechart);
       final List<Choice> allChoices = _allChoices;
       EList<ExecutionNode> _nodes = r.getNodes();
+      List<Choice> _allChoices_1 = this.sct.allChoices(statechart);
       final Function1<Choice,ExecutionChoice> _function = new Function1<Choice,ExecutionChoice>() {
           public ExecutionChoice apply(final Choice choice) {
             ExecutionChoice _create = StructureMapping.this.mapping.create(choice);
             return _create;
           }
         };
-      List<ExecutionChoice> _map = ListExtensions.<Choice, ExecutionChoice>map(allChoices, _function);
+      List<ExecutionChoice> _map = ListExtensions.<Choice, ExecutionChoice>map(_allChoices_1, _function);
       _nodes.addAll(_map);
+      EList<ExecutionNode> _nodes_1 = r.getNodes();
+      Iterable<Entry> _allEntries = this.sct.allEntries(statechart);
+      final Function1<Entry,ExecutionEntry> _function_1 = new Function1<Entry,ExecutionEntry>() {
+          public ExecutionEntry apply(final Entry entry) {
+            ExecutionEntry _create_1 = StructureMapping.this.mapping.create(entry);
+            return _create_1;
+          }
+        };
+      Iterable<ExecutionEntry> _map_1 = IterableExtensions.<Entry, ExecutionEntry>map(_allEntries, _function_1);
+      CollectionExtensions.<ExecutionNode>addAll(_nodes_1, _map_1);
       return r;
     }
   }

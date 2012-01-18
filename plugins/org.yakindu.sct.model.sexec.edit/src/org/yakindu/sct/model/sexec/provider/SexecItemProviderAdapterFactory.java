@@ -649,6 +649,29 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.SaveHistory} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SaveHistoryItemProvider saveHistoryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.SaveHistory}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSaveHistoryAdapter() {
+		if (saveHistoryItemProvider == null) {
+			saveHistoryItemProvider = new SaveHistoryItemProvider(this);
+		}
+
+		return saveHistoryItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.CheckRef} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -844,6 +867,7 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (reactionFiredItemProvider != null) reactionFiredItemProvider.dispose();
 		if (traceStateEnteredItemProvider != null) traceStateEnteredItemProvider.dispose();
 		if (traceStateExitedItemProvider != null) traceStateExitedItemProvider.dispose();
+		if (saveHistoryItemProvider != null) saveHistoryItemProvider.dispose();
 	}
 
 }

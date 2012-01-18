@@ -21,6 +21,7 @@ import org.yakindu.sct.model.stext.stext.ExitEvent
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.sgraph.SGraphFactory
 import org.yakindu.sct.model.stext.stext.StextFactory
+import org.yakindu.sct.model.sgraph.Entry
  
 class StatechartExtensions {
 	
@@ -130,6 +131,13 @@ class StatechartExtensions {
 		val allChoices = content.filter( typeof(Choice) )
 		
 		return allChoices.toList
+	}
+
+	def Iterable<Entry> allEntries(Statechart sc) {
+		var content = EcoreUtil2::eAllContentsAsList(sc)
+		val allEntries = content.filter( typeof(Entry) )
+		
+		return allEntries
 	}
 	
 	

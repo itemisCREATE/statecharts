@@ -135,4 +135,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="TraceStateExited" eSuperTypes="#//Trace">
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SaveHistory" eSuperTypes="#//Step">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="region" eType="#//ExecutionRegion"/>
+  </eClassifiers>
 </ecore:EPackage>

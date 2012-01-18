@@ -1895,6 +1895,62 @@ public interface SexecPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.SaveHistoryImpl <em>Save History</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.SaveHistoryImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getSaveHistory()
+	 * @generated
+	 */
+	int SAVE_HISTORY = 30;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAVE_HISTORY__NAME = STEP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAVE_HISTORY__COMMENT = STEP__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAVE_HISTORY__CALLER = STEP__CALLER;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAVE_HISTORY__REGION = STEP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Save History</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAVE_HISTORY_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionFlow <em>Execution Flow</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2627,6 +2683,27 @@ public interface SexecPackage extends EPackage {
 	EReference getTraceStateExited_State();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.SaveHistory <em>Save History</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Save History</em>'.
+	 * @see org.yakindu.sct.model.sexec.SaveHistory
+	 * @generated
+	 */
+	EClass getSaveHistory();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.SaveHistory#getRegion <em>Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Region</em>'.
+	 * @see org.yakindu.sct.model.sexec.SaveHistory#getRegion()
+	 * @see #getSaveHistory()
+	 * @generated
+	 */
+	EReference getSaveHistory_Region();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.CheckRef <em>Check Ref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3327,6 +3404,24 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRACE_STATE_EXITED__STATE = eINSTANCE.getTraceStateExited_State();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.SaveHistoryImpl <em>Save History</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.SaveHistoryImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getSaveHistory()
+		 * @generated
+		 */
+		EClass SAVE_HISTORY = eINSTANCE.getSaveHistory();
+
+		/**
+		 * The meta object literal for the '<em><b>Region</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SAVE_HISTORY__REGION = eINSTANCE.getSaveHistory_Region();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.CheckRefImpl <em>Check Ref</em>}' class.

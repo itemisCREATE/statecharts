@@ -53,6 +53,8 @@ import org.yakindu.sct.model.stext.stext.AlwaysEvent
 import org.yakindu.sct.model.stext.stext.DefaultEvent
 import org.yakindu.sct.model.stext.stext.OperationCall
 import org.yakindu.sct.model.stext.stext.Operation
+import org.yakindu.sct.model.sgraph.Entry
+import org.yakindu.sct.model.sexec.ExecutionEntry
  
 
 @Singleton class SexecElementMapping {
@@ -101,6 +103,16 @@ import org.yakindu.sct.model.stext.stext.Operation
 			r.simpleName =   "_choice" + n + "_"
 			r.name = choice.fullyQualifiedName.toString.replaceAll(" ", "")	
 			r.sourceElement = choice	
+			r.reactSequence = sexecFactory.createSequence
+		}
+	}
+
+
+	def ExecutionEntry create r : sexecFactory.createExecutionEntry create(Entry entry){
+		if (entry != null) {
+			r.simpleName =   {if (!entry.name?.empty) entry.name else "Default"} + "_"
+			r.name = entry.fullyQualifiedName.toString.replaceAll(" ", "")	
+			r.sourceElement = entry	
 			r.reactSequence = sexecFactory.createSequence
 		}
 	}

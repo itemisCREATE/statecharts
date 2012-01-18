@@ -12,6 +12,7 @@ import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
+import org.yakindu.sct.model.sexec.SaveHistory;
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateVector;
@@ -64,6 +65,16 @@ public class SexecExtensions {
       sCase.setState(it);
       sCase.setStep(step);
       return sCase;
+    }
+  }
+  
+  public SaveHistory newSaveHistory(final ExecutionRegion r) {
+    {
+      SexecFactory _factory = this.factory();
+      SaveHistory _createSaveHistory = _factory.createSaveHistory();
+      final SaveHistory save = _createSaveHistory;
+      save.setRegion(r);
+      return save;
     }
   }
   

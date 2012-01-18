@@ -29,6 +29,7 @@ import org.yakindu.sct.model.sexec.MappedElement;
 import org.yakindu.sct.model.sexec.NamedElement;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.ReactionFired;
+import org.yakindu.sct.model.sexec.SaveHistory;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecFactory;
@@ -242,6 +243,13 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * @generated
 	 */
 	private EClass traceStateExitedEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass saveHistoryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -954,6 +962,24 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSaveHistory() {
+		return saveHistoryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSaveHistory_Region() {
+		return (EReference)saveHistoryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCheckRef() {
 		return checkRefEClass;
 	}
@@ -1145,6 +1171,9 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		traceStateExitedEClass = createEClass(TRACE_STATE_EXITED);
 		createEReference(traceStateExitedEClass, TRACE_STATE_EXITED__STATE);
+
+		saveHistoryEClass = createEClass(SAVE_HISTORY);
+		createEReference(saveHistoryEClass, SAVE_HISTORY__REGION);
 	}
 
 	/**
@@ -1209,6 +1238,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		reactionFiredEClass.getESuperTypes().add(this.getTrace());
 		traceStateEnteredEClass.getESuperTypes().add(this.getTrace());
 		traceStateExitedEClass.getESuperTypes().add(this.getTrace());
+		saveHistoryEClass.getESuperTypes().add(this.getStep());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1316,6 +1346,9 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		initEClass(traceStateExitedEClass, TraceStateExited.class, "TraceStateExited", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTraceStateExited_State(), this.getExecutionState(), null, "state", null, 0, 1, TraceStateExited.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(saveHistoryEClass, SaveHistory.class, "SaveHistory", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSaveHistory_Region(), this.getExecutionRegion(), null, "region", null, 0, 1, SaveHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
