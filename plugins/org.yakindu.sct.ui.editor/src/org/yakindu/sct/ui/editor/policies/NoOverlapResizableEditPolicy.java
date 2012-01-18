@@ -10,15 +10,13 @@
  */
 package org.yakindu.sct.ui.editor.policies;
 
-import java.util.List;
-
+import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.UnexecutableCommand;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableShapeEditPolicy;
 
 /**
@@ -28,7 +26,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableShapeEditPolicy;
  * @author m.muehlbrandt
  * 
  */
-public class NoOverlapResizableEditPolicy extends ResizableShapeEditPolicy {
+public abstract class NoOverlapResizableEditPolicy extends ResizableShapeEditPolicy {
 
 	@Override
 	protected Command getMoveCommand(ChangeBoundsRequest request) {
@@ -50,24 +48,7 @@ public class NoOverlapResizableEditPolicy extends ResizableShapeEditPolicy {
 		return super.getResizeCommand(request);
 	}
 
-	@SuppressWarnings("unchecked")
-	protected boolean isRequestValid(ChangeBoundsRequest request) {
-		// Overlapping of nodes is not allowed
-		final IGraphicalEditPart parent = (IGraphicalEditPart) getHost()
-				.getParent();
-		final Rectangle newBounds = request
-				.getTransformedRectangle(getHostFigure().getBounds());
-		final List<IGraphicalEditPart> children = parent.getChildren();
-		for (final IGraphicalEditPart child : children) {
-			if (child == getHost()) {
-				continue;
-			}
-			if (child.getFigure().getBounds().intersects(newBounds)) {
-				return false;
-			}
-		}
-		return true;
-	}
+	protected abstract boolean isRequestValid(ChangeBoundsRequest request);
 
 	/**
 	 * Do not allow resizing smaller than the MinimumSize of the {@link Figure}.
