@@ -11,6 +11,7 @@
 package org.yakindu.sct.generator.genmodel.ui.wizard;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
+import org.yakindu.sct.generator.core.extensions.FileExtensions;
+import org.yakindu.sct.generator.core.extensions.FileExtensions.FileExtensionDescriptor;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -64,10 +67,13 @@ import com.google.common.collect.Lists;
 /**
  * 
  * @author holger willebrandt - Initial contribution and API
+ * @author andreas muelder - extension point for contribution of file extensions
+ *         added
  */
 public class SGenWizardPage2 extends WizardPage {
 
-	protected static final String STATECHART_FILE_EXTENSION = "sct";
+	// protected static final String STATECHART_FILE_EXTENSION = "sct";
+
 	static Map<String, CoreGenerator> natureDefaultGenerators = new TreeMap<String, CoreGenerator>();
 	static {
 		natureDefaultGenerators.put("org.eclipse.cdt.core.cnature",
@@ -80,7 +86,6 @@ public class SGenWizardPage2 extends WizardPage {
 	private ComboViewer generatorCombo;
 	protected CheckboxTreeViewer stateChartTree;
 	private final SGenWizardPage1 fileSelectionPage;
-
 
 	private static final ITreeContentProvider treeContentProvider = new ITreeContentProvider() {
 
@@ -148,12 +153,6 @@ public class SGenWizardPage2 extends WizardPage {
 
 	private final IStructuredSelection selection;
 
-	/**
-	 * @param pageName
-	 * @param selection
-	 * @param resourceDescriptions
-	 * @param selection
-	 */
 	protected SGenWizardPage2(String pageName,
 			SGenWizardPage1 fileSelectionPage, IStructuredSelection selection) {
 		super(pageName);
@@ -165,21 +164,12 @@ public class SGenWizardPage2 extends WizardPage {
 		Composite container = new Composite(parent, SWT.NULL);
 		setControl(container);
 		container.setLayout(new GridLayout(1, false));
+		createGeneratorCombo(container);
+		createStatechartTree(container);
+		checkComplete();
+	}
 
-		Label lblGenerator = new Label(container, SWT.NONE);
-		lblGenerator.setText("Generator");
-
-		generatorCombo = new ComboViewer(container, SWT.READ_ONLY);
-		generatorCombo.getCombo().setLayoutData(
-				new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		generatorCombo.setLabelProvider(new GeneratorDescriptorLabelProvider());
-		generatorCombo.setContentProvider(new ArrayContentProvider());
-		List<GeneratorDescriptor> descriptors = Lists
-				.newArrayList(GeneratorExtensions.getGeneratorDescriptors());
-		Collections.sort(descriptors, CoreGenerator.generatorOrder);
-		generatorCombo.setInput(descriptors);
-		generatorCombo.getCombo().select(0);
-
+	private void createStatechartTree(Composite container) {
 		Label lblNewLabel = new Label(container, SWT.NONE);
 		lblNewLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true,
 				false, 1, 1));
@@ -204,9 +194,21 @@ public class SGenWizardPage2 extends WizardPage {
 				.addDoubleClickListener(new TreeExpandingDoubleClickListener(
 						stateChartTree, checkStateListener));
 		stateChartTree.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
+	}
 
-		checkComplete();
-
+	private void createGeneratorCombo(Composite container) {
+		Label lblGenerator = new Label(container, SWT.NONE);
+		lblGenerator.setText("Generator");
+		generatorCombo = new ComboViewer(container, SWT.READ_ONLY);
+		generatorCombo.getCombo().setLayoutData(
+				new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		generatorCombo.setLabelProvider(new GeneratorDescriptorLabelProvider());
+		generatorCombo.setContentProvider(new ArrayContentProvider());
+		List<GeneratorDescriptor> descriptors = Lists
+				.newArrayList(GeneratorExtensions.getGeneratorDescriptors());
+		Collections.sort(descriptors, CoreGenerator.generatorOrder);
+		generatorCombo.setInput(descriptors);
+		generatorCombo.getCombo().select(0);
 	}
 
 	public List<Statechart> getStatecharts() {
@@ -356,9 +358,14 @@ public class SGenWizardPage2 extends WizardPage {
 	}
 
 	protected static boolean isStatechartResource(IResource resource) {
+		List<String> registeredExtensions = new ArrayList<String>();
+		Iterable<FileExtensionDescriptor> fileExtensions = FileExtensions
+				.getFileExtensions();
+		for (FileExtensionDescriptor desc : fileExtensions) {
+			registeredExtensions.add(desc.getExtension());
+		}
 		return resource.getType() == IResource.FILE
-				&& STATECHART_FILE_EXTENSION
-						.equals(resource.getFileExtension());
+				&& registeredExtensions.contains(resource.getFileExtension());
 	}
 
 	private static final Function<IResource, TreeNode> toTreeNode = new Function<IResource, TreeNode>() {

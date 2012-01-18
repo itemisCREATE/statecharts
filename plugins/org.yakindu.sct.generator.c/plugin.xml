@@ -19,4 +19,11 @@
             uri="platform:/plugin/org.yakindu.sct.generator.c/library/FeatureTypeLibrary.xmi">
       </FeatureLibrary>
    </extension>
+   <extension
+         point="org.yakindu.sct.generator.core.extensions">
+      <ExtensionGeneratorMapping
+            fileExtension="sct"
+            generatorId="yakindu::c">
+      </ExtensionGeneratorMapping>
+   </extension>
 </plugin>
