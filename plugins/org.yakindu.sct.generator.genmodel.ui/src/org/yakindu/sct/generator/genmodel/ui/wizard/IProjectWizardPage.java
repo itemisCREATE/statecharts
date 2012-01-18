@@ -1,4 +1,3 @@
-«REM»
 /**
  * Copyright (c) 2011 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
@@ -9,20 +8,17 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-«ENDREM»
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
-«IMPORT sgen»
+package org.yakindu.sct.generator.genmodel.ui.wizard;
 
-«DEFINE main(sgen::GeneratorEntry entry) FOR sexec::ExecutionFlow-»
-«FILE this.name+'.txt' -»
-The name of the Statemachine is '«this.name-»'
+import org.eclipse.jface.wizard.WizardPage;
+/**
+ * @author holger willebrandt - Initial contribution and API
+ */
+public abstract class IProjectWizardPage extends WizardPage {
 
-The Statemachine has the following states:
+	protected IProjectWizardPage(String pageName) {
+		super(pageName);
+	}
 
-«FOREACH this.states AS state-»
-«state.name.replaceFirst(this.name+'\\.','')»
-«ENDFOREACH-»
-«ENDFILE-»
-«ENDDEFINE»
+	protected abstract ProjectData getProjectData();
+}

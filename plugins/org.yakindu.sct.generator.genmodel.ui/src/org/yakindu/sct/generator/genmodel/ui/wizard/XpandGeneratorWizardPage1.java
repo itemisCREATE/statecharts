@@ -1,3 +1,14 @@
+
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.generator.genmodel.ui.wizard;
 
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -14,8 +25,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-
-public class XpandGeneratorWizardPage1 extends IProjectWzardPage {
+/**
+ * 
+ * @author holger willebrandt - Initial contribution and API
+ */
+public class XpandGeneratorWizardPage1 extends IProjectWizardPage {
 	// (ID::)+ID
 	private static final String GENERATOR_ID_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*::)+[a-zA-Z_][a-zA-Z0-9_]*"; //$NON-NLS-1$
 	private static final String GENERATOR_CLASS_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*\\.)+[a-zA-Z_][a-zA-Z0-9_]*"; //$NON-NLS-1$

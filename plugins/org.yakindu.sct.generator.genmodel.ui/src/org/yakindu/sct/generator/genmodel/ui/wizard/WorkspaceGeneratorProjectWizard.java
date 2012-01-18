@@ -27,7 +27,7 @@ public class WorkspaceGeneratorProjectWizard extends
 	}
 
 	@Override
-	public IProjectWzardPage getProjectPage() {
+	public IProjectWizardPage getProjectPage() {
 		WorkspaceGeneratorWizardPage1 projectPage = new WorkspaceGeneratorWizardPage1(
 				"project"); //$NON-NLS-1$
 		projectPage.setTitle("New YAKINDU Workspace Generator Project");
