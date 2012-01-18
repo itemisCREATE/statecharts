@@ -32,6 +32,7 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
+import org.yakindu.sct.model.stext.stext.Operation;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
@@ -103,6 +104,14 @@ public class StructureMapping {
     {
       VariableDefinition _create = this.mapping.create(v);
       final VariableDefinition _v = _create;
+      return _v;
+    }
+  }
+  
+  protected Declaration _map(final Operation v) {
+    {
+      Operation _create = this.mapping.create(v);
+      final Operation _v = _create;
       return _v;
     }
   }
@@ -265,6 +274,8 @@ public class StructureMapping {
       return _map((EventDefinition)e);
     } else if ((e instanceof VariableDefinition)) {
       return _map((VariableDefinition)e);
+    } else if ((e instanceof Operation)) {
+      return _map((Operation)e);
     } else if ((e instanceof Declaration)) {
       return _map((Declaration)e);
     } else {

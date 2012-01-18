@@ -175,7 +175,7 @@ class BehaviorMapping {
 	def Execution mapToExecution(Statement stmnt) {
 		val exec = sexec.factory.createExecution
 		exec.statement = EcoreUtil::copy(stmnt)
-		exec	
+		exec
 	}
 	
 	def ExecutionFlow mapTransitions(Statechart statechart, ExecutionFlow r){

@@ -2,7 +2,9 @@ package org.yakindu.sct.model.sexec.transformation;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
@@ -54,6 +56,8 @@ import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.Literal;
+import org.yakindu.sct.model.stext.stext.Operation;
+import org.yakindu.sct.model.stext.stext.OperationCall;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
@@ -409,59 +413,51 @@ public class ModelSequencer {
       final Function1<EObject,Boolean> _function = new Function1<EObject,Boolean>() {
           public Boolean apply(final EObject e) {
             boolean _operator_or = false;
+            boolean _operator_or_1 = false;
             if ((e instanceof org.yakindu.sct.model.stext.stext.EventDefinition)) {
+              _operator_or_1 = true;
+            } else {
+              _operator_or_1 = BooleanExtensions.operator_or((e instanceof org.yakindu.sct.model.stext.stext.EventDefinition), (e instanceof org.yakindu.sct.model.stext.stext.VariableDefinition));
+            }
+            if (_operator_or_1) {
               _operator_or = true;
             } else {
-              _operator_or = BooleanExtensions.operator_or((e instanceof org.yakindu.sct.model.stext.stext.EventDefinition), (e instanceof org.yakindu.sct.model.stext.stext.VariableDefinition));
+              _operator_or = BooleanExtensions.operator_or(_operator_or_1, (e instanceof org.yakindu.sct.model.stext.stext.Operation));
             }
             return ((Boolean)_operator_or);
           }
         };
       Iterable<EObject> _filter = IterableExtensions.<EObject>filter(allContent, _function);
-      List<EObject> _list = IterableExtensions.<EObject>toList(_filter);
-      final List<EObject> declared = _list;
-      final Function1<EObject,Boolean> _function_1 = new Function1<EObject,Boolean>() {
-          public Boolean apply(final EObject e_1) {
-            return ((Boolean)(e_1 instanceof org.yakindu.sct.model.stext.stext.ElementReferenceExpression));
-          }
-        };
-      Iterable<EObject> _filter_1 = IterableExtensions.<EObject>filter(allContent, _function_1);
-      final Function1<EObject,ElementReferenceExpression> _function_2 = new Function1<EObject,ElementReferenceExpression>() {
-          public ElementReferenceExpression apply(final EObject s) {
-            return ((ElementReferenceExpression) s);
-          }
-        };
-      Iterable<ElementReferenceExpression> _map = IterableExtensions.<EObject, ElementReferenceExpression>map(_filter_1, _function_2);
-      final Function1<ElementReferenceExpression,Object> _function_3 = new Function1<ElementReferenceExpression,Object>() {
+      Set<EObject> _set = IterableExtensions.<EObject>toSet(_filter);
+      final Set<EObject> declared = _set;
+      Iterable<ElementReferenceExpression> _filter_1 = IterableExtensions.<ElementReferenceExpression>filter(allContent, org.yakindu.sct.model.stext.stext.ElementReferenceExpression.class);
+      final Function1<ElementReferenceExpression,Object> _function_1 = new Function1<ElementReferenceExpression,Object>() {
           public Object apply(final ElementReferenceExpression ere) {
             Object _retarget = ModelSequencer.this.retarget(ere, declared);
             return _retarget;
           }
         };
-      IterableExtensions.<ElementReferenceExpression>forEach(_map, _function_3);
-      final Function1<EObject,Boolean> _function_4 = new Function1<EObject,Boolean>() {
-          public Boolean apply(final EObject e_2) {
-            return ((Boolean)(e_2 instanceof org.yakindu.sct.model.stext.stext.Assignment));
-          }
-        };
-      Iterable<EObject> _filter_2 = IterableExtensions.<EObject>filter(allContent, _function_4);
-      final Function1<EObject,Assignment> _function_5 = new Function1<EObject,Assignment>() {
-          public Assignment apply(final EObject s_1) {
-            return ((Assignment) s_1);
-          }
-        };
-      Iterable<Assignment> _map_1 = IterableExtensions.<EObject, Assignment>map(_filter_2, _function_5);
-      final Function1<Assignment,Object> _function_6 = new Function1<Assignment,Object>() {
+      IterableExtensions.<ElementReferenceExpression>forEach(_filter_1, _function_1);
+      Iterable<Assignment> _filter_2 = IterableExtensions.<Assignment>filter(allContent, org.yakindu.sct.model.stext.stext.Assignment.class);
+      final Function1<Assignment,Object> _function_2 = new Function1<Assignment,Object>() {
           public Object apply(final Assignment ere_1) {
             Object _retarget_1 = ModelSequencer.this.retarget(ere_1, declared);
             return _retarget_1;
           }
         };
-      IterableExtensions.<Assignment>forEach(_map_1, _function_6);
+      IterableExtensions.<Assignment>forEach(_filter_2, _function_2);
+      Iterable<OperationCall> _filter_3 = IterableExtensions.<OperationCall>filter(allContent, org.yakindu.sct.model.stext.stext.OperationCall.class);
+      final Function1<OperationCall,Object> _function_3 = new Function1<OperationCall,Object>() {
+          public Object apply(final OperationCall call) {
+            Object _retarget_2 = ModelSequencer.this.retarget(call, declared);
+            return _retarget_2;
+          }
+        };
+      IterableExtensions.<OperationCall>forEach(_filter_3, _function_3);
     }
   }
   
-  public Object retarget(final ElementReferenceExpression ere, final List<EObject> declared) {
+  public Object retarget(final ElementReferenceExpression ere, final Collection<EObject> declared) {
     Object _xifexpression = null;
     Declaration _value = ere.getValue();
     boolean _contains = declared.contains(_value);
@@ -474,7 +470,7 @@ public class ModelSequencer {
     return _xifexpression;
   }
   
-  public Object retarget(final Assignment assign, final List<EObject> declared) {
+  public Object retarget(final Assignment assign, final Collection<EObject> declared) {
     Object _xifexpression = null;
     Variable _varRef = assign.getVarRef();
     boolean _contains = declared.contains(_varRef);
@@ -487,8 +483,26 @@ public class ModelSequencer {
     return _xifexpression;
   }
   
+  public Object retarget(final OperationCall call, final Collection<EObject> declared) {
+    Object _xifexpression = null;
+    Operation _operation = call.getOperation();
+    boolean _contains = declared.contains(_operation);
+    boolean _operator_not = BooleanExtensions.operator_not(_contains);
+    if (_operator_not) {
+      Operation _operation_1 = call.getOperation();
+      Declaration _replaced = this.replaced(_operation_1);
+      call.setOperation(((Operation) _replaced));
+    }
+    return _xifexpression;
+  }
+  
   protected Declaration _replaced(final VariableDefinition vd) {
     VariableDefinition _create = this.mapping.create(vd);
+    return _create;
+  }
+  
+  protected Declaration _replaced(final Operation vd) {
+    Operation _create = this.mapping.create(vd);
     return _create;
   }
   
@@ -508,6 +522,8 @@ public class ModelSequencer {
       return _replaced((EventDefinition)ed);
     } else if ((ed instanceof VariableDefinition)) {
       return _replaced((VariableDefinition)ed);
+    } else if ((ed instanceof Operation)) {
+      return _replaced((Operation)ed);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         java.util.Arrays.<Object>asList(ed).toString());
