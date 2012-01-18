@@ -18,7 +18,7 @@ import org.yakindu.sct.model.sexec.interpreter.ITimingService;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.timer.VirtualClock;
 import org.yakindu.sct.simulation.core.runtime.timer.VirtualTimer;
-import org.yakindu.sct.simulation.core.runtime.timer.VirtualTimerTask;
+import org.yakindu.sct.simulation.core.runtime.timer.VirtualTimer.VirtualTimerTask;
 
 /**
  * Implementation of {@link ITimingService} interface using standard
@@ -36,22 +36,20 @@ public class TimerTaskTimingService implements ITimingService {
 		timerTasks = new HashMap<String, VirtualTimerTask>();
 	}
 
-	
 	public void scheduleTimeEvent(IExecutionContext context, String eventName,
 			boolean isPeriodical, int duration) {
 		TimeEventTask timeEventTask = new TimeEventTask(context, eventName);
 		timerTasks.put(eventName, timeEventTask);
 		if (isPeriodical) {
-			timer.scheduleAtFixedRate(timeEventTask, duration, duration);
+			timer.schedulePeriodicalTask(timeEventTask, duration, duration);
 		} else {
-			timer.schedule(timeEventTask, duration);
+			timer.scheduleTask(timeEventTask, duration);
 		}
 	}
 
 	public void unscheduleTimeEvent(String eventName) {
 		VirtualTimerTask timerTask = timerTasks.get(eventName);
 		timerTask.cancel();
-		timer.purge();
 	}
 
 	public class TimeEventTask extends VirtualTimerTask {
@@ -82,6 +80,7 @@ public class TimerTaskTimingService implements ITimingService {
 		for (VirtualTimerTask timerTask : values) {
 			timerTask.cancel();
 		}
+		timer.cancel();
 	}
 
 	public void init(VirtualClock clock) {
