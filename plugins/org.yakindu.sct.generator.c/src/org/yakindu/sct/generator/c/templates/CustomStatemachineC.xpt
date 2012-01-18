@@ -56,7 +56,7 @@ Templates for the main statechart c file.
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Call»
-«this.step.functionName()»;
+«this.step.functionName()»(«IF isSingleton() == false»(«StName()»*) handle«ENDIF»);
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Sequence»
