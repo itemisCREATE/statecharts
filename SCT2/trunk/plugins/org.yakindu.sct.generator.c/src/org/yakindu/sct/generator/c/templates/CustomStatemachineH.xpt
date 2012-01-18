@@ -14,10 +14,10 @@ Templates for the main statechart cpp file.
 «EXTENSION org::yakindu::sct::generator::c::templates::Constants»
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
-«DEFINE file(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
+«DEFINE file FOR ExecutionFlow»
 
 «FILE StName()+'.h'»
-«getLicenseHeader(genEntry)»
+«this.getLicenseHeader()»
 
 #ifndef «STNAME()»_H_
 #define «STNAME()»_H_
@@ -57,18 +57,18 @@ typedef struct {
 } «StName()»;
 
 /* Explicit Constructor & Destructor */
-extern void «stName()»_init(«this.handleAdditionComma(genEntry)» Timer* timer, EventPool* eventPool);
-extern void «stName()»_enter(«this.handleAddition(genEntry)»);
-extern void «stName()»_exit(«this.handleAddition(genEntry)»);
-extern void «stName()»_destruct(«this.handleAddition(genEntry)»);
-extern void «stName()»_runCycle(«this.handleAddition(genEntry)»);
-extern boolean «stName()»_eventWaiting(«this.handleAddition(genEntry)»);
+extern void «stName()»_init(«this.handleAdditionComma()» Timer* timer, EventPool* eventPool);
+extern void «stName()»_enter(«this.handleAddition()»);
+extern void «stName()»_exit(«this.handleAddition()»);
+extern void «stName()»_destruct(«this.handleAddition()»);
+extern void «stName()»_runCycle(«this.handleAddition()»);
+extern boolean «stName()»_eventWaiting(«this.handleAddition()»);
 
 «FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
-extern «interface.interfaceClassName()»* «stName()»_get_«interface.interfaceObjectName()»(«this.handleAddition(genEntry)»);
+extern «interface.interfaceClassName()»* «stName()»_get_«interface.interfaceObjectName()»(«this.handleAddition()»);
 «ENDFOREACH -»
 
-«IF isSingleton(genEntry) == true»
+«IF this.isSingleton() == true»
 «StName()»* «scName()»_get_handle();
 «ENDIF»
 
@@ -78,7 +78,7 @@ extern «interface.interfaceClassName()»* «stName()»_get_«interface.interfaceObje
 /* only friends can see these functions */
 #ifdef «STNAME()»_FRIENDS
 
-extern void «stName()»_setEvent(«this.handleAdditionComma(genEntry)»_Event* ev);
+extern void «stName()»_setEvent(«this.handleAdditionComma()»_Event* ev);
 
 
 /* virtual function form state machine must be implemented here */

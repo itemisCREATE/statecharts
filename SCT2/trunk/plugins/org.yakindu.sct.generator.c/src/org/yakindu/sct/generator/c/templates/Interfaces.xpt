@@ -15,10 +15,10 @@ Templates for the main statechart cpp file.
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
 
-«DEFINE file(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
+«DEFINE file FOR ExecutionFlow»
 «FOREACH this.scopes.getUsableScopes() AS interface»
 «FILE interface.interfaceClassName()+".h"»
-«getLicenseHeader(genEntry)»
+«this.getLicenseHeader()»
 
 #ifndef «interface.interfaceClassName().toUpperCase()»_H_
 #define «interface.interfaceClassName().toUpperCase()»_H_
@@ -58,40 +58,40 @@ typedef struct {
 	
 } «interfaceClassName(interface)»;
 
-«IF isSingleton(genEntry)»
+«IF this.isSingleton()»
 void «interface.interfaceName()»_set_interface_singleton(«interfaceClassName(interface)»* _handle);
 «ENDIF»
 
 «FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
-extern «asCType(variable.type)» «interface.interfaceName()»_get_«variable.name»(«handleInterfaceAddition(interface, genEntry)»);
+extern «asCType(variable.type)» «interface.interfaceName()»_get_«variable.name»(«handleInterfaceAddition(interface)»);
 «IF variable.readonly == false -»
-extern void «interface.interfaceName()»_set_«variable.name»(«handleInterfaceAdditionComma(interface, genEntry)»«asCType(variable.type)» value);
+extern void «interface.interfaceName()»_set_«variable.name»(«handleInterfaceAdditionComma(interface)»«asCType(variable.type)» value);
 «ENDIF»
 «ENDFOREACH» 
 
 
-extern void «interface.interfaceName()»_reset_event(«handleInterfaceAddition(interface, genEntry)»);
+extern void «interface.interfaceName()»_reset_event(«handleInterfaceAddition(interface)»);
 
 #ifdef INTERFACE_LISTENER
 
-extern void «interface.interfaceName()»_init(«handleInterfaceAddition(interface, genEntry)»Statemachine_cy* statemachine,
+extern void «interface.interfaceName()»_init(«handleInterfaceAddition(interface)»Statemachine_cy* statemachine,
 		EventSet* eventSet);
-extern void «interface.interfaceName()»_set_listener(«handleInterfaceAdditionComma(interface, genEntry)»handleEvent handleEventPtr);
-extern void «interface.interfaceName()»_raiseEvent«handleInterfaceAdditionComma(interface, genEntry)»_Event* event);
+extern void «interface.interfaceName()»_set_listener(«handleInterfaceAdditionComma(interface)»handleEvent handleEventPtr);
+extern void «interface.interfaceName()»_raiseEvent«handleInterfaceAdditionComma(interface)»_Event* event);
 
 #else
 
-extern void «interface.interfaceName()»_init(«handleInterfaceAdditionComma(interface, genEntry)»Statemachine_cy* statemachine,
+extern void «interface.interfaceName()»_init(«handleInterfaceAdditionComma(interface)»Statemachine_cy* statemachine,
 		EventSet* eventSet, EventPool* eventPool);
 		
 «FOREACH interface.getOutEvents() AS event -»
-extern boolean «interface.interfaceName()»_is_«event.name»_raised(«handleInterfaceAddition(interface, genEntry)»«
-IF !event.type.isVoid() -»«IF isSingleton(genEntry) == false -», «ENDIF»«event.type.asCType()»* value«ENDIF» );
+extern boolean «interface.interfaceName()»_is_«event.name»_raised(«handleInterfaceAddition(interface)»«
+IF !event.type.isVoid() -»«IF this.isSingleton() == false -», «ENDIF»«event.type.asCType()»* value«ENDIF» );
 «ENDFOREACH»
 
 «FOREACH interface.getInEvents() AS event -»
-extern void «interface.interfaceName()»_raise_«event.name»(«handleInterfaceAddition(interface, genEntry)»«
-IF !event.type.isVoid() -»«IF isSingleton(genEntry) == false -», «ENDIF»«event.type.asCType()» value «ENDIF»);
+extern void «interface.interfaceName()»_raise_«event.name»(«handleInterfaceAddition(interface)»«
+IF !event.type.isVoid() -»«IF this.isSingleton() == false -», «ENDIF»«event.type.asCType()» value «ENDIF»);
 «ENDFOREACH» 
 
 #endif // INTERFACE_LISTENER
@@ -106,22 +106,22 @@ IF !event.type.isVoid() -»«IF isSingleton(genEntry) == false -», «ENDIF»«event.t
 «ENDFILE»
 
 «FILE interface.interfaceClassName()+".c"»
-«getLicenseHeader(genEntry)»
+«this.getLicenseHeader()»
 #include "«interface.interfaceClassName()».h"
 #include <stdlib.h>
 
-«IF isSingleton(genEntry)»
+«IF this.isSingleton()»
 static «interfaceClassName(interface)»* handle;
 void «interface.interfaceName()»_set_interface_singleton(«interfaceClassName(interface)»* _handle);
 «ENDIF»
 
-static boolean «interface.interfaceName()»_is_my_event(«handleInterfaceAdditionComma(interface, genEntry)»uint32_t evid);
+static boolean «interface.interfaceName()»_is_my_event(«handleInterfaceAdditionComma(interface)»uint32_t evid);
 
 #ifdef INTERFACE_LISTENER
-void «interface.interfaceName()»_init(«handleInterfaceAdditionComma(interface, genEntry)»Statemachine_cy* statemachine,
+void «interface.interfaceName()»_init(«handleInterfaceAdditionComma(interface)»Statemachine_cy* statemachine,
 		EventSet* eventSet)
 #else
-void «interface.interfaceName()»_init(«handleInterfaceAdditionComma(interface, genEntry)»Statemachine_cy* statemachine,
+void «interface.interfaceName()»_init(«handleInterfaceAdditionComma(interface)»Statemachine_cy* statemachine,
 		EventSet* eventSet, EventPool* eventPool)
 #endif
 {
@@ -150,18 +150,18 @@ void «interface.interfaceName()»_init(«handleInterfaceAdditionComma(interface, g
 
 }
 
-«IF isSingleton(genEntry)»
+«IF this.isSingleton()»
 void «interface.interfaceName()»_set_interface_singleton(«interfaceClassName(interface)»* _handle)
 { handle = _handle; }
 «ENDIF»
 
 «FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
-«variable.type.asCType()» «interface.interfaceName()»_get_«variable.name»(«handleInterfaceAddition(interface, genEntry)»)
+«variable.type.asCType()» «interface.interfaceName()»_get_«variable.name»(«handleInterfaceAddition(interface)»)
 {
 	return handle->«variable.name»;
 }
 «IF variable.readonly == false -»
-void «interface.interfaceName()»_set_«variable.name»(«handleInterfaceAdditionComma(interface, genEntry)»«variable.type.asCType()» value)
+void «interface.interfaceName()»_set_«variable.name»(«handleInterfaceAdditionComma(interface)»«variable.type.asCType()» value)
 {
 	handle->«variable.name» = value;
 }
@@ -169,14 +169,14 @@ void «interface.interfaceName()»_set_«variable.name»(«handleInterfaceAdditionCom
 «ENDFOREACH»
 
 
-boolean «interface.interfaceName()»_is_set(«handleInterfaceAdditionComma(interface, genEntry)»uint32_t evid)
+boolean «interface.interfaceName()»_is_set(«handleInterfaceAdditionComma(interface)»uint32_t evid)
 {
-	if («interface.interfaceName()»_is_my_event(«IF isSingleton(genEntry) == false -»handle, «ENDIF»evid))
+	if («interface.interfaceName()»_is_my_event(«IF this.isSingleton() == false -»handle, «ENDIF»evid))
 		return eventSet_check(handle->eventSet, evid);
 	return bool_false;
 }
 
-void «interface.interfaceName()»_reset_event(«handleInterfaceAddition(interface, genEntry)»)
+void «interface.interfaceName()»_reset_event(«handleInterfaceAddition(interface)»)
 {
 	// clean all out events
 	«FOREACH interface.getOutEvents() AS outEvent»
@@ -187,21 +187,21 @@ void «interface.interfaceName()»_reset_event(«handleInterfaceAddition(interface,
 
 #ifdef INTERFACE_LISTENER
 
-void «interface.interfaceName()»_set_listener(«handleInterfaceAdditionComma(interface, genEntry)»handleEvent handleEventPtr)
+void «interface.interfaceName()»_set_listener(«handleInterfaceAdditionComma(interface)»handleEvent handleEventPtr)
 {
 	handle->handleEventCallback = handleEventPtr;
 }
 
-void «interface.interfaceName()»_raiseEvent(«handleInterfaceAdditionComma(interface, genEntry)»_Event event) {
-	if («interface.interfaceName()»_is_my_event(«IF isSingleton(genEntry) == false -»handle, «ENDIF»event->id))
+void «interface.interfaceName()»_raiseEvent(«handleInterfaceAdditionComma(interface)»_Event event) {
+	if («interface.interfaceName()»_is_my_event(«IF this.isSingleton() == false -»handle, «ENDIF»event->id))
 		statemachine_cy_setEvent(handle->statemachine, event);
 }
 
 #else
 
 «FOREACH interface.getOutEvents() AS event -»
-extern boolean «interface.interfaceName()»_is_«event.name»_raised(«handleInterfaceAddition(interface, genEntry)»«
-IF !event.type.isVoid() -»«IF isSingleton(genEntry) == false -», «ENDIF»«event.type.asCType()»* value«ENDIF») 
+extern boolean «interface.interfaceName()»_is_«event.name»_raised(«handleInterfaceAddition(interface)»«
+IF !event.type.isVoid() -»«IF this.isSingleton() == false -», «ENDIF»«event.type.asCType()»* value«ENDIF») 
 {
 	boolean ret = bool_false;
 	if (eventSet_check(handle->eventSet,«event.getEventEnumName()»)) {
@@ -216,8 +216,8 @@ IF !event.type.isVoid() -»«IF isSingleton(genEntry) == false -», «ENDIF»«event.t
 «ENDFOREACH»
 
 «FOREACH interface.getInEvents() AS event -»
-extern void «interface.interfaceName()»_raise_«event.name»(«handleInterfaceAddition(interface, genEntry)»«
-IF !event.type.isVoid() -»«IF isSingleton(genEntry) == false -», «ENDIF»«event.type.asCType()» value«
+extern void «interface.interfaceName()»_raise_«event.name»(«handleInterfaceAddition(interface)»«
+IF !event.type.isVoid() -»«IF this.isSingleton() == false -», «ENDIF»«event.type.asCType()» value«
 ENDIF»)
 {
 	_Event* ev = eventPool_createEvent(handle->eventPool, «event.getEventEnumName()»);
@@ -234,7 +234,7 @@ ENDIF»)
 #endif // INTERFACE_LISTENER
 
 
-boolean «interface.interfaceName()»_is_my_event(«handleInterfaceAdditionComma(interface, genEntry)»uint32_t evid)
+boolean «interface.interfaceName()»_is_my_event(«handleInterfaceAdditionComma(interface)»uint32_t evid)
 {
 	boolean ret = bool_false;
 	switch (evid) {
