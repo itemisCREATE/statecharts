@@ -46,7 +46,7 @@ public class CycleBasedExecutionFacadeController extends
 					facade.runCycle();
 					scheduleCycle();
 				}
-			}, (long) (cyclePeriod * facade.getExecutionContext()
+			}, (long) (cyclePeriod / facade.getExecutionContext()
 					.getTimeScaleFactor()));
 	}
 
