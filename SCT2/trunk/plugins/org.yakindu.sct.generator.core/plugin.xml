@@ -3,6 +3,7 @@
 <plugin>
  <extension-point id="org.yakindu.sct.generator.core.generator" name="SCT Generator" schema="schema/generator.exsd"/>
   <extension-point id="org.yakindu.sct.generator.core.featuretypes" name="GenModel Feature Types" schema="schema/featuretypes.exsd"/>
+  <extension-point id="org.yakindu.sct.generator.core.extensions" name="File Extension Mapping" schema="schema/extensions.exsd"/>
  <extension
          point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary

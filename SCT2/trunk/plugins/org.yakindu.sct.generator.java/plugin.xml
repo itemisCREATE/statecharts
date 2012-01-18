@@ -18,5 +18,10 @@
             uri="platform:/plugin/org.yakindu.sct.generator.java/library/FeatureTypeLibrary.xmi">
       </FeatureLibrary>
    </extension>
+   <extension
+         point="org.yakindu.sct.generator.core.extensions">
+      <ExtensionGeneratorMapping
+            fileExtension="sct"></ExtensionGeneratorMapping>
+   </extension>
 
 </plugin>
