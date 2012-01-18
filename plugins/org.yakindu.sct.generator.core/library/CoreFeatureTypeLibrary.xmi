@@ -17,5 +17,7 @@
     <parameters name="inlineEnterSequences" optional="true" parameterType="BOOLEAN"/>
     <parameters name="inlineExitSequences" optional="true" parameterType="BOOLEAN"/>
     <parameters name="inlineChoices" optional="true" parameterType="BOOLEAN"/>
+    <parameters name="inlineEnterRegion" optional="true" parameterType="BOOLEAN"/>
+    <parameters name="inlineExitRegion" optional="true" parameterType="BOOLEAN"/>
   </types>
 </sgen:FeatureTypeLibrary>
