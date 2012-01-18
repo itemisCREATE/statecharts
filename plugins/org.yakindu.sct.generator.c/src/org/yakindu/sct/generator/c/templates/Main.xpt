@@ -14,10 +14,13 @@ Contais the root templates that call the different file templates.
 
 
 «IMPORT org::yakindu::sct::generator::c::templates»
+«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
 
 «DEFINE main(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
- 
+  
+ 	«this.setGenEntry(genEntry)»
+ 	
 	«REM» basis files «ENDREM»
 	«EXPAND EventH::file(genEntry) FOR this»
 	«EXPAND EventC::file(genEntry) FOR this»
@@ -34,7 +37,7 @@ Contais the root templates that call the different file templates.
 	«EXPAND Statemachine_cyH::file(genEntry) FOR this»
 	«EXPAND Statemachine_cyC::file(genEntry) FOR this»
 
-	«EXPAND Interfaces::file(genEntry) FOR this»
+	«EXPAND Interfaces::file FOR this»
 
     «REM» code that is created by the model «ENDREM»
 	«EXPAND definitionH::file(genEntry) FOR this»
@@ -42,8 +45,8 @@ Contais the root templates that call the different file templates.
 	«EXPAND EventPoolH::file(genEntry) FOR this»
 	«EXPAND EventPoolC::file(genEntry) FOR this»
 
-	«EXPAND CustomStatemachineH::file(genEntry) FOR this»
-	«EXPAND CustomStatemachineC::file(genEntry) FOR this»
+	«EXPAND CustomStatemachineH::file FOR this»
+	«EXPAND CustomStatemachineC::file FOR this»
 	
 	«EXPAND CustomEventH::file(genEntry) FOR this»
 	«EXPAND CustomEventC::file(genEntry) FOR this»
