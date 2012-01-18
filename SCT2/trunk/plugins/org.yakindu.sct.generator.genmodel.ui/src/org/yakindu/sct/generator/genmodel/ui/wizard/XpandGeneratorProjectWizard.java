@@ -27,7 +27,7 @@ import org.eclipse.ui.IWorkbenchWizard;
 public class XpandGeneratorProjectWizard extends Wizard implements
 		IWorkbenchWizard {
 
-	private IProjectWzardPage projectPage;
+	private IProjectWizardPage projectPage;
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		setWindowTitle("New YAKINDU Xpand Generator Project");
@@ -40,7 +40,7 @@ public class XpandGeneratorProjectWizard extends Wizard implements
 		addPage(projectPage);
 	}
 
-	protected IProjectWzardPage getProjectPage() {
+	protected IProjectWizardPage getProjectPage() {
 		XpandGeneratorWizardPage1 projectPage = new XpandGeneratorWizardPage1(
 				"project"); //$NON-NLS-1$
 		projectPage.setTitle("New YAKINDU Xpand Generator Project");
