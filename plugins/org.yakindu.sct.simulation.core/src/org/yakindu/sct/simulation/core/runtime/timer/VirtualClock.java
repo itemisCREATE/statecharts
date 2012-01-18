@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.simulation.core.runtime.timer;
 
+
 /**
  * VirtualClock to be used instead of {@link System}currentTimeMillis. Allows to
  * scale the time with a given factor.
@@ -19,39 +20,41 @@ package org.yakindu.sct.simulation.core.runtime.timer;
  */
 public class VirtualClock {
 
-	//real time in ms since start of the clock
+	// real time in ms since start of the clock
 	private long startTime;
-	//real time in ms since last factor change
+	// real time in ms since last factor change
 	private long realTime;
-	//virtual time in ms since last factor change
+	// virtual time in ms since last factor change
 	private long virtualTime;
 
+	public VirtualClock() {
+	}
 
 	private double factor = 1.0d;
 
-	public void start() {
+	public synchronized void start() {
 		startTime = System.currentTimeMillis();
 		virtualTime = System.currentTimeMillis();
 		realTime = System.currentTimeMillis();
 	}
 
-	public void setFactor(double factor) {
+	public synchronized void setFactor(double factor) {
 		virtualTime = getTime();
 		realTime = System.currentTimeMillis();
 		this.factor = factor;
 	}
 
-	public long getTime() {
+	public synchronized long getTime() {
 		long difference = System.currentTimeMillis() - this.realTime;
 		difference = (long) (difference * factor);
 		return virtualTime + difference;
 	}
 
-	public double getFactor() {
+	public synchronized double getFactor() {
 		return factor;
 	}
 
-	public long getStartTime() {
+	public synchronized long getStartTime() {
 		return startTime;
 	}
 

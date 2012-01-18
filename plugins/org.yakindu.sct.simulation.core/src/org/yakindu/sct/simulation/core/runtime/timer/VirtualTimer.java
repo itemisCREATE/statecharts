@@ -75,7 +75,7 @@ public class VirtualTimer {
 		synchronized (queue) {
 			queue.add(task);
 			if (queue.peek() == task)
-				queue.notify();
+				queue.notifyAll();
 		}
 	}
 
@@ -92,7 +92,6 @@ public class VirtualTimer {
 				while (!canceled) {
 					synchronized (queue) {
 						while (queue.isEmpty()) {
-							System.out.println("Wait");
 							queue.wait();
 						}
 						VirtualTimerTask task = queue.peek();
@@ -110,13 +109,15 @@ public class VirtualTimer {
 										task.period);
 							}
 						}
+						// long timeout = executionTime - virtualTime;
+						// timeout = (long) (timeout / clock.getFactor());
+						// queue.wait(timeout);
+						queue.wait(10);
 					}
-					Thread.sleep(10);
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-
 }
