@@ -590,14 +590,23 @@ public class BehaviorMapping {
       Iterable<State> _exitStates = this.exitStates(t);
       State _last = IterableExtensions.<State>last(_exitStates);
       final State topExitState = _last;
-      EList<Step> _steps = sequence.getSteps();
-      ExecutionState _create = this.factory.create(topExitState);
-      Sequence _exitSequence = _create.getExitSequence();
-      Call _newCall = this.factory.newCall(_exitSequence);
-      _steps.add(_newCall);
-      Effect _effect = t.getEffect();
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_effect, null);
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(topExitState, null);
       if (_operator_notEquals) {
+        {
+          ExecutionState _create = this.factory.create(topExitState);
+          Sequence _exitSequence = _create.getExitSequence();
+          final Sequence exitSequence = _exitSequence;
+          boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(exitSequence, null);
+          if (_operator_notEquals_1) {
+            EList<Step> _steps = sequence.getSteps();
+            Call _newCall = this.factory.newCall(exitSequence);
+            _steps.add(_newCall);
+          }
+        }
+      }
+      Effect _effect = t.getEffect();
+      boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_effect, null);
+      if (_operator_notEquals_2) {
         EList<Step> _steps_1 = sequence.getSteps();
         Effect _effect_1 = t.getEffect();
         Sequence _mapEffect = this.mapEffect(_effect_1);
@@ -626,8 +635,8 @@ public class BehaviorMapping {
                   Iterable<ExecutionScope> _take = IterableExtensions.<ExecutionScope>take(siblingRegions, _indexOf);
                   for (final ExecutionScope region : _take) {
                     Sequence _enterSequence = region.getEnterSequence();
-                    boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_enterSequence, null);
-                    if (_operator_notEquals_1) {
+                    boolean _operator_notEquals_3 = ObjectExtensions.operator_notEquals(_enterSequence, null);
+                    if (_operator_notEquals_3) {
                       EList<Step> _steps_3 = seq.getSteps();
                       Sequence _enterSequence_1 = region.getEnterSequence();
                       Call _newCall_1 = BehaviorMapping.this.factory.newCall(_enterSequence_1);
@@ -639,8 +648,8 @@ public class BehaviorMapping {
               if ((scope instanceof org.yakindu.sct.model.sexec.ExecutionState)) {
                 {
                   Step _entryAction = ((ExecutionState) scope).getEntryAction();
-                  boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_entryAction, null);
-                  if (_operator_notEquals_2) {
+                  boolean _operator_notEquals_4 = ObjectExtensions.operator_notEquals(_entryAction, null);
+                  if (_operator_notEquals_4) {
                     EList<Step> _steps_4 = seq.getSteps();
                     Step _entryAction_1 = ((ExecutionState) scope).getEntryAction();
                     Call _newCall_2 = BehaviorMapping.this.factory.newCall(_entryAction_1);
@@ -661,8 +670,8 @@ public class BehaviorMapping {
         };
       IterableExtensions.<ExecutionScope, Sequence>fold(_reverse, sequence, _function);
       Vertex _target = t.getTarget();
-      boolean _operator_notEquals_3 = ObjectExtensions.operator_notEquals(_target, null);
-      if (_operator_notEquals_3) {
+      boolean _operator_notEquals_5 = ObjectExtensions.operator_notEquals(_target, null);
+      if (_operator_notEquals_5) {
         Vertex _target_1 = t.getTarget();
         if ((_target_1 instanceof org.yakindu.sct.model.sgraph.RegularState)) {
           EList<Step> _steps_6 = sequence.getSteps();
@@ -709,8 +718,8 @@ public class BehaviorMapping {
                   Iterable<ExecutionScope> _drop_2 = IterableExtensions.<ExecutionScope>drop(siblingRegions_1, _operator_plus);
                   for (final ExecutionScope region_1 : _drop_2) {
                     Sequence _enterSequence_3 = region_1.getEnterSequence();
-                    boolean _operator_notEquals_4 = ObjectExtensions.operator_notEquals(_enterSequence_3, null);
-                    if (_operator_notEquals_4) {
+                    boolean _operator_notEquals_6 = ObjectExtensions.operator_notEquals(_enterSequence_3, null);
+                    if (_operator_notEquals_6) {
                       EList<Step> _steps_9 = seq_1.getSteps();
                       Sequence _enterSequence_4 = region_1.getEnterSequence();
                       Call _newCall_6 = BehaviorMapping.this.factory.newCall(_enterSequence_4);

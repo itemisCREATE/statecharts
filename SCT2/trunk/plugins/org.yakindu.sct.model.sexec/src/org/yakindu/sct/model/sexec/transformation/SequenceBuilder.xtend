@@ -173,12 +173,38 @@ class SequenceBuilder {
 
 	def dispatch void defineStateExitSequence(Entry e) {
 		val execEntry = e.create
+		//Reuse already created react sequence from defineStateEnterSequence(Entry) 
 		val seq = execEntry.reactSequence
 		val target = e.target.create
 		
-		//TODO consider shallow and deep history
-		if (target != null && target.enterSequence != null) {
-			seq.steps += target.enterSequence.newCall
+		if (e.kind == EntryKind::INITIAL) {
+			if (target != null && target.enterSequence != null) {
+				seq.steps += target.enterSequence.newCall
+			}
+		} else if (e.kind == EntryKind::SHALLOW_HISTORY) {
+			val entryStep = sexec.factory.createHistoryEntry
+			entryStep.name = "HistoryEntry"
+			entryStep.comment = "Enter the region with shallow history for each active state"
+			entryStep.deep = false
+			
+			//Initial step, if no history is known
+			if (target != null && target.enterSequence != null) {
+				entryStep.initialStep = target.enterSequence.newCall
+			}
+			//TODO handle history (Call for the last active state the enterSequence. Perhaps a StateSwitch)
+			
+			seq.steps += entryStep
+		} else if (e.kind == EntryKind::DEEP_HISTORY) {
+			val entryStep = sexec.factory.createHistoryEntry
+			entryStep.deep = true
+			
+			//Initial step, if no history is known
+			if (target != null && target.enterSequence != null) {
+				entryStep.initialStep = target.enterSequence.newCall
+			}
+			//TODO handle history
+
+			seq.steps += entryStep
 		}
 		
 	}

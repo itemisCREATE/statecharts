@@ -112,5 +112,11 @@
     <genClasses ecoreClass="sexec.ecore#//SaveHistory">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//SaveHistory/region"/>
     </genClasses>
+    <genClasses ecoreClass="sexec.ecore#//HistoryEntry">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//HistoryEntry/initialStep"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sexec.ecore#//HistoryEntry/deep"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//HistoryEntry/region"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//HistoryEntry/historyStep"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
