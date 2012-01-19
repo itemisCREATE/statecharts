@@ -29,6 +29,7 @@ Import-Package: org.apache.commons.logging,
  org.eclipse.xtext.xtend2.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.model.stext,
+ org.yakindu.sct.model.stext.conversion,
  org.yakindu.sct.model.stext.formatting,
  org.yakindu.sct.model.stext.naming,
  org.yakindu.sct.model.stext.parseTreeConstruction,
