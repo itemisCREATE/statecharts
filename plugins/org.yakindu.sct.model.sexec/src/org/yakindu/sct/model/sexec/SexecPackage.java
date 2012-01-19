@@ -1951,6 +1951,89 @@ public interface SexecPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.HistoryEntryImpl <em>History Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.HistoryEntryImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getHistoryEntry()
+	 * @generated
+	 */
+	int HISTORY_ENTRY = 31;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HISTORY_ENTRY__NAME = STEP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HISTORY_ENTRY__COMMENT = STEP__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HISTORY_ENTRY__CALLER = STEP__CALLER;
+
+	/**
+	 * The feature id for the '<em><b>Initial Step</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HISTORY_ENTRY__INITIAL_STEP = STEP_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Deep</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HISTORY_ENTRY__DEEP = STEP_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HISTORY_ENTRY__REGION = STEP_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>History Step</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HISTORY_ENTRY__HISTORY_STEP = STEP_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>History Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HISTORY_ENTRY_FEATURE_COUNT = STEP_FEATURE_COUNT + 4;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionFlow <em>Execution Flow</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2704,6 +2787,60 @@ public interface SexecPackage extends EPackage {
 	EReference getSaveHistory_Region();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.HistoryEntry <em>History Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>History Entry</em>'.
+	 * @see org.yakindu.sct.model.sexec.HistoryEntry
+	 * @generated
+	 */
+	EClass getHistoryEntry();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.HistoryEntry#getInitialStep <em>Initial Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Initial Step</em>'.
+	 * @see org.yakindu.sct.model.sexec.HistoryEntry#getInitialStep()
+	 * @see #getHistoryEntry()
+	 * @generated
+	 */
+	EReference getHistoryEntry_InitialStep();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sexec.HistoryEntry#isDeep <em>Deep</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Deep</em>'.
+	 * @see org.yakindu.sct.model.sexec.HistoryEntry#isDeep()
+	 * @see #getHistoryEntry()
+	 * @generated
+	 */
+	EAttribute getHistoryEntry_Deep();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.HistoryEntry#getRegion <em>Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Region</em>'.
+	 * @see org.yakindu.sct.model.sexec.HistoryEntry#getRegion()
+	 * @see #getHistoryEntry()
+	 * @generated
+	 */
+	EReference getHistoryEntry_Region();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.HistoryEntry#getHistoryStep <em>History Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>History Step</em>'.
+	 * @see org.yakindu.sct.model.sexec.HistoryEntry#getHistoryStep()
+	 * @see #getHistoryEntry()
+	 * @generated
+	 */
+	EReference getHistoryEntry_HistoryStep();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.CheckRef <em>Check Ref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3422,6 +3559,48 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SAVE_HISTORY__REGION = eINSTANCE.getSaveHistory_Region();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.HistoryEntryImpl <em>History Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.HistoryEntryImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getHistoryEntry()
+		 * @generated
+		 */
+		EClass HISTORY_ENTRY = eINSTANCE.getHistoryEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Initial Step</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference HISTORY_ENTRY__INITIAL_STEP = eINSTANCE.getHistoryEntry_InitialStep();
+
+		/**
+		 * The meta object literal for the '<em><b>Deep</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HISTORY_ENTRY__DEEP = eINSTANCE.getHistoryEntry_Deep();
+
+		/**
+		 * The meta object literal for the '<em><b>Region</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference HISTORY_ENTRY__REGION = eINSTANCE.getHistoryEntry_Region();
+
+		/**
+		 * The meta object literal for the '<em><b>History Step</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference HISTORY_ENTRY__HISTORY_STEP = eINSTANCE.getHistoryEntry_HistoryStep();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.CheckRefImpl <em>Check Ref</em>}' class.
