@@ -260,6 +260,15 @@ public interface SexecFactory extends EFactory {
 	SaveHistory createSaveHistory();
 
 	/**
+	 * Returns a new object of class '<em>History Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>History Entry</em>'.
+	 * @generated
+	 */
+	HistoryEntry createHistoryEntry();
+
+	/**
 	 * Returns a new object of class '<em>Check Ref</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
