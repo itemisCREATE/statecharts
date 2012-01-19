@@ -110,7 +110,11 @@ import org.yakindu.sct.model.sexec.ExecutionEntry
 
 	def ExecutionEntry create r : sexecFactory.createExecutionEntry create(Entry entry){
 		if (entry != null) {
-			r.simpleName =   {if (!entry.name?.empty) entry.name else "Default"} + "_"
+			val region = entry.eContainer as Region
+			val regionName = region.name.toFirstUpper
+			val stateName = if(region.eContainer instanceof State) {(region.eContainer as State).name.toFirstUpper}
+			val entryName = {if (!entry.name?.empty) entry.name else "Default"}
+			r.simpleName = {if (regionName!= null)regionName else ""}+"_"+{if (stateName!= null)stateName else ""}+"_"+entryName
 			r.name = entry.fullyQualifiedName.toString.replaceAll(" ", "")	
 			r.sourceElement = entry	
 			r.reactSequence = sexecFactory.createSequence

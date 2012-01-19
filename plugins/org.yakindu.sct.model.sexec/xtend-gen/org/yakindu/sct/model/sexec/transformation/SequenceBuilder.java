@@ -129,7 +129,7 @@ public class SequenceBuilder {
       SexecFactory _factory = this.sexec.factory();
       Sequence _createSequence = _factory.createSequence();
       final Sequence seq = _createSequence;
-      seq.setName("reactSequence");
+      seq.setName("react");
       String _switchResult = null;
       EntryKind _kind = e.getKind();
       final EntryKind __valOfSwitchOver = _kind;

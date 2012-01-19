@@ -72,7 +72,7 @@ class SequenceBuilder {
 	def dispatch void defineStateEnterSequence(Entry e) {
 		val execEntry = e.create
 		val seq = sexec.factory.createSequence
-		seq.name = "reactSequence"
+		seq.name = "react"
 		seq.comment = "Default react sequence for "+switch (e.kind) {
 				case EntryKind::INITIAL: "initial "
 				case EntryKind::DEEP_HISTORY: "deep history "
