@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -40,6 +41,7 @@ import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.Scope;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
@@ -296,18 +298,50 @@ public class SexecElementMapping {
     boolean _operator_notEquals = ObjectExtensions.operator_notEquals(entry, null);
     if (_operator_notEquals) {
       {
+        EObject _eContainer = entry.eContainer();
+        final Region region = ((Region) _eContainer);
+        String _name = region.getName();
+        String _firstUpper = StringExtensions.toFirstUpper(_name);
+        final String regionName = _firstUpper;
         String _xifexpression = null;
-        String _name = entry.getName();
-        boolean _isEmpty = _name==null?false:_name.isEmpty();
+        EObject _eContainer_1 = region.eContainer();
+        if ((_eContainer_1 instanceof org.yakindu.sct.model.sgraph.State)) {
+          EObject _eContainer_2 = region.eContainer();
+          String _name_1 = ((State) _eContainer_2).getName();
+          String _firstUpper_1 = StringExtensions.toFirstUpper(_name_1);
+          _xifexpression = _firstUpper_1;
+        }
+        final String stateName = _xifexpression;
+        String _xifexpression_1 = null;
+        String _name_2 = entry.getName();
+        boolean _isEmpty = _name_2==null?false:_name_2.isEmpty();
         boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
         if (_operator_not) {
-          String _name_1 = entry.getName();
-          _xifexpression = _name_1;
+          String _name_3 = entry.getName();
+          _xifexpression_1 = _name_3;
         } else {
-          _xifexpression = "Default";
+          _xifexpression_1 = "Default";
         }
-        String _operator_plus = StringExtensions.operator_plus(_xifexpression, "_");
-        r.setSimpleName(_operator_plus);
+        final String entryName = _xifexpression_1;
+        String _xifexpression_2 = null;
+        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(regionName, null);
+        if (_operator_notEquals_1) {
+          _xifexpression_2 = regionName;
+        } else {
+          _xifexpression_2 = "";
+        }
+        String _operator_plus = StringExtensions.operator_plus(_xifexpression_2, "_");
+        String _xifexpression_3 = null;
+        boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(stateName, null);
+        if (_operator_notEquals_2) {
+          _xifexpression_3 = stateName;
+        } else {
+          _xifexpression_3 = "";
+        }
+        String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _xifexpression_3);
+        String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "_");
+        String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, entryName);
+        r.setSimpleName(_operator_plus_3);
         QualifiedName _fullyQualifiedName = this.qfnProvider.getFullyQualifiedName(entry);
         String _string = _fullyQualifiedName.toString();
         String _replaceAll = _string.replaceAll(" ", "");

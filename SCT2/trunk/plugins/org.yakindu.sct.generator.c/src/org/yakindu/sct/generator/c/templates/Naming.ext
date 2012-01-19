@@ -48,8 +48,9 @@ cached String functionName(Step step) :
 	(step.isEntryAction()) ? step.entryActionFunctionName() : ( 
 	(step.isExitAction()) ? step.exitActionFunctionName() : (
 	(step.isEnterSequence()) ? step.enterSequenceFunctionName() : ( 
-	(step.isExitSequence()) ? step.exitSequenceFunctionName() : 
-	" !! unknown function type !!" )))));
+	(step.isExitSequence()) ? step.exitSequenceFunctionName() : ( 
+	(step.isReactSequence()) ? step.reactSequenceFunctionName() :
+	" !! unknown function type !!" ))))));
 
 
 ExecutionState state(Step this) : (ExecutionState) this.eContainer;
@@ -99,6 +100,9 @@ String enterSequenceFunctionName(Step this) :
 String exitSequenceFunctionName(Step this) :  
 	  this.stName() + "_exitSequence_" + this.getStateName();
 
+String reactSequenceFunctionName(Step this) :  
+	  this.stName() + "_react_" + this.getStateName();
+
 /* for some reason, this is handled completely different */ 
 String reactFunctionName(Reaction this) :  
 	  this.stName() + "_react_" + this.getStateName();
@@ -138,6 +142,7 @@ String reactFunction(ExecutionNode this) :
 
 String getStateName(Step this) : this.eContainer.getStateName(); 
 String getStateName(emf::EObject this) : (this.eContainer != null)?this.eContainer.getStateName():"unkown";
+String getStateName(ExecutionEntry this) : this.simpleName;
 String getStateName(ExecutionState this) : this.simpleName;
 String getStateName(ExecutionRegion this) : 
 	if (ExecutionState.isInstance(superScope)) 
