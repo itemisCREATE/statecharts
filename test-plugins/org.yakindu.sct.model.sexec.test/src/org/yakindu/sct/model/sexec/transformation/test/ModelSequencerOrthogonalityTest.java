@@ -6,6 +6,7 @@ import static org.yakindu.sct.model.sexec.transformation.test.Assert.*;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.Call;
+import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.Reaction;
@@ -486,10 +487,17 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 		assertCall(_effect, 2, _s3a.getSuperScope().getEnterSequence());
 		assertCall(_s3a.getSuperScope().getEnterSequence(), 0, flow.getNodes()
 				.get(3).getReactSequence());
+		assertCall(flow.getNodes().get(3).getReactSequence(), 0,
+				_s3a.getEnterSequence());
 		assertCall(_effect, 3, _s3b2.getEnterSequence());
 		assertCall(_effect, 4, _s3c.getSuperScope().getEnterSequence());
 		assertCall(_s3c.getSuperScope().getEnterSequence(), 0, flow.getNodes()
 				.get(5).getReactSequence());
+		assertCall(flow.getNodes().get(5).getReactSequence(), 0,
+				_s3c.getEnterSequence());
+		assertTrue(_s3c.getEnterSequence().getSteps().get(0).getClass()
+				.getSimpleName(),
+				_s3c.getEnterSequence().getSteps().get(0) instanceof EnterState);
 	}
 
 	/*

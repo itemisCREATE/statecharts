@@ -256,7 +256,12 @@ class BehaviorMapping {
 		
 		// first process the exit behavior of orthogonal states that hase to be performed before source exit
 		val topExitState = t.exitStates.last
-		sequence.steps.add(topExitState.create.exitSequence.newCall)
+		if (topExitState != null) {
+			val exitSequence = topExitState.create.exitSequence
+			if (exitSequence != null) {
+				sequence.steps.add(exitSequence.newCall)
+			}
+		}
 
 		// map transition actions
 		if (t.effect != null) sequence.steps.add(t.effect.mapEffect)	

@@ -40,7 +40,7 @@ import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
-public class ModelSequencerHistoryTest extends ModelSequencerTest {
+public class SelfTransitionTest extends ModelSequencerTest {
 
 	@Test
 	public void testFlowName() {
@@ -57,24 +57,14 @@ public class ModelSequencerHistoryTest extends ModelSequencerTest {
 				State s1 = _createState("s1", r);
 				State s2 = _createState("s2", r);
 				{
-
 					Region r2 = _createRegion("r2", s2);
 					{
-						Entry r2_entry1 = _createEntry(
-								EntryKind.SHALLOW_HISTORY, null, r2);
-						Entry r2_entry2 = _createEntry(EntryKind.INITIAL,
-								"Unused_Backup", r2);
+						Entry e = _createEntry(EntryKind.INITIAL, null, r2);
 						State s3 = _createState("s3", r2);
-						State s4 = _createState("s4", r2);
-						_createTransition(r2_entry1, s3);
-						_createTransition(r2_entry2, s4);
-						_createTransition(s1, r2_entry1);
+						_createTransition(e, s3);
 					}
-
 				}
-				_createTransition(s1, s2);
-				Transition _t = _createTransition(s1, s2);
-				_createTransition(r_entry, s1);
+				_createTransition(s2, s2);
 			}
 		}
 
@@ -86,33 +76,11 @@ public class ModelSequencerHistoryTest extends ModelSequencerTest {
 		assertEquals("sc.r.s2", _s2.getName());
 		ExecutionState _s3 = flow.getStates().get(2);
 		assertEquals("sc.r.s2.r2.s3", _s3.getName());
-		ExecutionState _s4 = flow.getStates().get(3);
-		assertEquals("sc.r.s2.r2.s4", _s4.getName());
-		ExecutionNode r2_history_entry = flow.getNodes().get(1);
+		ExecutionNode e = flow.getNodes().get(1);
 
-		EList<Reaction> _t1 = _s1.getReactions();
-		Sequence reactSequence_history = flow.getNodes().get(1)
-				.getReactSequence();
-		HistoryEntry historyStep = (HistoryEntry) reactSequence_history
-				.getSteps().get(0);
-		assertFalse(historyStep.isDeep());
-		assertCall(historyStep.getInitialStep(), _s3.getEnterSequence());
-		Reaction reaction_history = _t1.get(0);
-		assertCall(assertedSequence(reaction_history.getEffect()), 1,
-				reactSequence_history);
+		EList<Reaction> _t = _s2.getReactions();
 
-		Sequence reactSequence_initial = flow.getNodes().get(2)
-				.getReactSequence();
-		assertCall(reactSequence_initial, 0, _s4.getEnterSequence());
-		Reaction reaction = _t1.get(1);
-		assertCall(assertedSequence(reaction.getEffect()), 1,
-				_s2.getEnterSequence());
-
-		assertCall(_s3.getSuperScope().getEnterSequence(), 0,
-				r2_history_entry.getReactSequence());
-
-		Step saveStep = _s3.getSuperScope().getExitSequence().getSteps().get(0);
-		assertTrue(saveStep.eClass().toString(),
-				saveStep instanceof SaveHistory);
+		Reaction tr0 = _t.get(0);
+		assertCall(assertedSequence(tr0.getEffect()), 0, _s2.getEnterSequence());
 	}
 }

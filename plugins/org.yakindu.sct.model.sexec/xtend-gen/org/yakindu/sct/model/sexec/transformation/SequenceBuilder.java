@@ -24,6 +24,7 @@ import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
+import org.yakindu.sct.model.sexec.HistoryEntry;
 import org.yakindu.sct.model.sexec.SaveHistory;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecFactory;
@@ -334,20 +335,80 @@ public class SequenceBuilder {
       State _target = this.sgraph.target(e);
       ExecutionState _create_1 = this.mapping.create(_target);
       final ExecutionState target = _create_1;
-      boolean _operator_and = false;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(target, null);
-      if (!_operator_notEquals) {
-        _operator_and = false;
+      EntryKind _kind = e.getKind();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_kind, EntryKind.INITIAL);
+      if (_operator_equals) {
+        boolean _operator_and = false;
+        boolean _operator_notEquals = ObjectExtensions.operator_notEquals(target, null);
+        if (!_operator_notEquals) {
+          _operator_and = false;
+        } else {
+          Sequence _enterSequence = target.getEnterSequence();
+          boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_enterSequence, null);
+          _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_notEquals_1);
+        }
+        if (_operator_and) {
+          EList<Step> _steps = seq.getSteps();
+          Sequence _enterSequence_1 = target.getEnterSequence();
+          Call _newCall = this.mapping.newCall(_enterSequence_1);
+          CollectionExtensions.<Step>operator_add(_steps, _newCall);
+        }
       } else {
-        Sequence _enterSequence = target.getEnterSequence();
-        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_enterSequence, null);
-        _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_notEquals_1);
-      }
-      if (_operator_and) {
-        EList<Step> _steps = seq.getSteps();
-        Sequence _enterSequence_1 = target.getEnterSequence();
-        Call _newCall = this.mapping.newCall(_enterSequence_1);
-        CollectionExtensions.<Step>operator_add(_steps, _newCall);
+        EntryKind _kind_1 = e.getKind();
+        boolean _operator_equals_1 = ObjectExtensions.operator_equals(_kind_1, EntryKind.SHALLOW_HISTORY);
+        if (_operator_equals_1) {
+          {
+            SexecFactory _factory = this.sexec.factory();
+            HistoryEntry _createHistoryEntry = _factory.createHistoryEntry();
+            final HistoryEntry entryStep = _createHistoryEntry;
+            entryStep.setName("HistoryEntry");
+            entryStep.setComment("Enter the region with shallow history for each active state");
+            entryStep.setDeep(false);
+            boolean _operator_and_1 = false;
+            boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(target, null);
+            if (!_operator_notEquals_2) {
+              _operator_and_1 = false;
+            } else {
+              Sequence _enterSequence_2 = target.getEnterSequence();
+              boolean _operator_notEquals_3 = ObjectExtensions.operator_notEquals(_enterSequence_2, null);
+              _operator_and_1 = BooleanExtensions.operator_and(_operator_notEquals_2, _operator_notEquals_3);
+            }
+            if (_operator_and_1) {
+              Sequence _enterSequence_3 = target.getEnterSequence();
+              Call _newCall_1 = this.mapping.newCall(_enterSequence_3);
+              entryStep.setInitialStep(_newCall_1);
+            }
+            EList<Step> _steps_1 = seq.getSteps();
+            CollectionExtensions.<Step>operator_add(_steps_1, entryStep);
+          }
+        } else {
+          EntryKind _kind_2 = e.getKind();
+          boolean _operator_equals_2 = ObjectExtensions.operator_equals(_kind_2, EntryKind.DEEP_HISTORY);
+          if (_operator_equals_2) {
+            {
+              SexecFactory _factory_1 = this.sexec.factory();
+              HistoryEntry _createHistoryEntry_1 = _factory_1.createHistoryEntry();
+              final HistoryEntry entryStep_1 = _createHistoryEntry_1;
+              entryStep_1.setDeep(true);
+              boolean _operator_and_2 = false;
+              boolean _operator_notEquals_4 = ObjectExtensions.operator_notEquals(target, null);
+              if (!_operator_notEquals_4) {
+                _operator_and_2 = false;
+              } else {
+                Sequence _enterSequence_4 = target.getEnterSequence();
+                boolean _operator_notEquals_5 = ObjectExtensions.operator_notEquals(_enterSequence_4, null);
+                _operator_and_2 = BooleanExtensions.operator_and(_operator_notEquals_4, _operator_notEquals_5);
+              }
+              if (_operator_and_2) {
+                Sequence _enterSequence_5 = target.getEnterSequence();
+                Call _newCall_2 = this.mapping.newCall(_enterSequence_5);
+                entryStep_1.setInitialStep(_newCall_2);
+              }
+              EList<Step> _steps_2 = seq.getSteps();
+              CollectionExtensions.<Step>operator_add(_steps_2, entryStep_1);
+            }
+          }
+        }
       }
     }
   }

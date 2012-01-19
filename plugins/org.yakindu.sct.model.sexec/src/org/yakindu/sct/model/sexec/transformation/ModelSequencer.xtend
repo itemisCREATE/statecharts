@@ -131,6 +131,10 @@ class ModelSequencer {
 		// retarget declaration refs
 		ef.retargetDeclRefs
 		
+		//TODO clear create caches to avoid memory leak with repetetive generator cycles
+		//Not possible yet
+		//Bug 358564 - [Xtend][Memory Leak] Create Extensions - Possibility to clear caches. 
+		
 		return ef
 	}
 
