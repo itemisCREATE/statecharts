@@ -11,6 +11,7 @@
 package org.yakindu.sct.simulation.ui.view;
 
 import org.apache.commons.lang.time.DurationFormatUtils;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
@@ -65,6 +66,7 @@ import org.yakindu.sct.simulation.ui.view.editing.RealEditingSupport;
 public class SimulationView extends ViewPart implements IDebugContextListener,
 		IDebugEventSetListener {
 
+	private static final String INITIAL_TIME = "00:00:00:00";
 	private TreeViewer viewer;
 	private SCTDebugTarget debugTarget;
 	private Text scaleFactor;
@@ -98,6 +100,22 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		createViewer(parent);
 		createTimeScalingSection(parent);
 		hookActions();
+		setActiveSession();
+	}
+
+	private void setActiveSession() {
+		// if a simulation session is running, we should initialize with its
+		// content
+		IAdaptable debugContext = DebugUITools.getDebugContext();
+		if (debugContext != null) {
+			Object debugTarget = debugContext.getAdapter(IDebugTarget.class);
+			if (debugTarget != null && debugTarget instanceof SCTDebugTarget) {
+				if (!((SCTDebugTarget) debugTarget).isTerminated()) {
+					this.debugTarget = (SCTDebugTarget) debugTarget;
+					setInput(this.debugTarget);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -156,7 +174,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		GridDataFactory.fillDefaults().applyTo(label);
 		lblVirtualTime = new Label(parent, SWT.NONE);
 		lblVirtualTime.setFont(font);
-		lblVirtualTime.setText("00:00:00:00");
+		lblVirtualTime.setText(INITIAL_TIME);
 
 		GridDataFactory.fillDefaults().grab(true, false).span(2, 0)
 				.applyTo(lblVirtualTime);
@@ -165,7 +183,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		GridDataFactory.fillDefaults().applyTo(label2);
 		lblRealTime = new Label(parent, SWT.NONE);
 		lblRealTime.setFont(font);
-		lblRealTime.setText("00:00:00:00");
+		lblRealTime.setText(INITIAL_TIME);
 		GridDataFactory.fillDefaults().grab(true, false).span(2, 0)
 				.applyTo(lblRealTime);
 
@@ -227,13 +245,17 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 					.getAdapter(IDebugTarget.class);
 			if (newTarget != debugTarget && newTarget != null
 					&& !newTarget.isTerminated()) {
-				refreshInput(newTarget);
 				debugTarget = newTarget;
-				clockUpdater.setTerminated(false);
-				new Thread(clockUpdater).start();
+				setInput(newTarget);
 			}
 		}
 
+	}
+
+	private void setInput(SCTDebugTarget newTarget) {
+		refreshInput(newTarget);
+		clockUpdater.setTerminated(false);
+		new Thread(clockUpdater).start();
 	}
 
 	public void handleDebugEvents(DebugEvent[] events) {
@@ -249,6 +271,8 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 				public void run() {
 					viewer.setInput(null);
 					clockUpdater.setTerminated(true);
+					lblRealTime.setText(INITIAL_TIME);
+					lblVirtualTime.setText(INITIAL_TIME);
 				}
 			});
 			break;
