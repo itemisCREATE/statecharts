@@ -18,4 +18,12 @@
             name="SC Simulation">
       </perspective>
    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.yakindu.sct.ui.preferences.YakinduRootPreferencePage"
+            id="org.yakindu.sct.ui.preferences.root"
+            name="YAKINDU SCT2">
+      </page>
+   </extension>
 </plugin>
