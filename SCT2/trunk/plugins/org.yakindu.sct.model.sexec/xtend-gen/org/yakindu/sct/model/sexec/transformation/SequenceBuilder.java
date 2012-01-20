@@ -5,9 +5,11 @@ import com.google.inject.name.Named;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
@@ -290,18 +292,27 @@ public class SequenceBuilder {
       boolean _exists = IterableExtensions.<Entry>exists(_collectEntries, _function);
       if (_exists) {
         EList<Step> _steps = seq.getSteps();
-        SaveHistory _newSaveHistory = this.sexec.newSaveHistory(execRegion);
+        Iterable<Entry> _collectEntries_1 = this.sgraph.collectEntries(r);
+        final Function1<Entry,Boolean> _function_1 = new Function1<Entry,Boolean>() {
+            public Boolean apply(final Entry e_1) {
+              EntryKind _kind_2 = e_1.getKind();
+              boolean _operator_equals_2 = ObjectExtensions.operator_equals(_kind_2, EntryKind.DEEP_HISTORY);
+              return ((Boolean)_operator_equals_2);
+            }
+          };
+        boolean _exists_1 = IterableExtensions.<Entry>exists(_collectEntries_1, _function_1);
+        SaveHistory _newSaveHistory = this.sexec.newSaveHistory(execRegion, _exists_1);
         CollectionExtensions.<Step>operator_add(_steps, _newSaveHistory);
       }
       ArrayList<RegularState> _arrayList = new ArrayList<RegularState>();
       List<RegularState> _collectLeafStates = this.sgraph.collectLeafStates(r, _arrayList);
-      final Function1<RegularState,ExecutionState> _function_1 = new Function1<RegularState,ExecutionState>() {
+      final Function1<RegularState,ExecutionState> _function_2 = new Function1<RegularState,ExecutionState>() {
           public ExecutionState apply(final RegularState rs) {
             ExecutionState _create_1 = SequenceBuilder.this.mapping.create(rs);
             return _create_1;
           }
         };
-      List<ExecutionState> _map = ListExtensions.<RegularState, ExecutionState>map(_collectLeafStates, _function_1);
+      List<ExecutionState> _map = ListExtensions.<RegularState, ExecutionState>map(_collectLeafStates, _function_2);
       final Iterable<ExecutionState> leafStates = _map;
       StateVector _stateVector = execRegion.getStateVector();
       final StateVector sVector = _stateVector;
@@ -362,8 +373,11 @@ public class SequenceBuilder {
             HistoryEntry _createHistoryEntry = _factory.createHistoryEntry();
             final HistoryEntry entryStep = _createHistoryEntry;
             entryStep.setName("HistoryEntry");
-            entryStep.setComment("Enter the region with shallow history for each active state");
+            entryStep.setComment("Enter the region with shallow history");
             entryStep.setDeep(false);
+            EObject _eContainer = e.eContainer();
+            ExecutionRegion _create_2 = this.mapping.create(((Region) _eContainer));
+            entryStep.setRegion(_create_2);
             boolean _operator_and_1 = false;
             boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(target, null);
             if (!_operator_notEquals_2) {
@@ -378,6 +392,10 @@ public class SequenceBuilder {
               Call _newCall_1 = this.mapping.newCall(_enterSequence_3);
               entryStep.setInitialStep(_newCall_1);
             }
+            EObject _eContainer_1 = e.eContainer();
+            StateSwitch _defineShallowHistorySwitch = this.defineShallowHistorySwitch(((Region) _eContainer_1));
+            final StateSwitch sSwitch = _defineShallowHistorySwitch;
+            entryStep.setHistoryStep(sSwitch);
             EList<Step> _steps_1 = seq.getSteps();
             CollectionExtensions.<Step>operator_add(_steps_1, entryStep);
           }
@@ -389,6 +407,11 @@ public class SequenceBuilder {
               SexecFactory _factory_1 = this.sexec.factory();
               HistoryEntry _createHistoryEntry_1 = _factory_1.createHistoryEntry();
               final HistoryEntry entryStep_1 = _createHistoryEntry_1;
+              entryStep_1.setName("HistoryEntry");
+              entryStep_1.setComment("Enter the region with deep history");
+              EObject _eContainer_2 = e.eContainer();
+              ExecutionRegion _create_3 = this.mapping.create(((Region) _eContainer_2));
+              entryStep_1.setRegion(_create_3);
               entryStep_1.setDeep(true);
               boolean _operator_and_2 = false;
               boolean _operator_notEquals_4 = ObjectExtensions.operator_notEquals(target, null);
@@ -404,6 +427,10 @@ public class SequenceBuilder {
                 Call _newCall_2 = this.mapping.newCall(_enterSequence_5);
                 entryStep_1.setInitialStep(_newCall_2);
               }
+              EObject _eContainer_3 = e.eContainer();
+              StateSwitch _defineDeepHistorySwitch = this.defineDeepHistorySwitch(((Region) _eContainer_3));
+              final StateSwitch sSwitch_1 = _defineDeepHistorySwitch;
+              entryStep_1.setHistoryStep(sSwitch_1);
               EList<Step> _steps_2 = seq.getSteps();
               CollectionExtensions.<Step>operator_add(_steps_2, entryStep_1);
             }
@@ -482,6 +509,141 @@ public class SequenceBuilder {
         CollectionExtensions.<Step>operator_add(_steps_3, _newTraceStateExited);
       }
       execState.setExitSequence(seq);
+    }
+  }
+  
+  public StateSwitch defineDeepHistorySwitch(final Region r) {
+    ExecutionRegion _create = this.mapping.create(r);
+    StateSwitch _defineDeepHistorySwitch = this.defineDeepHistorySwitch(r, _create);
+    return _defineDeepHistorySwitch;
+  }
+  
+  public StateSwitch defineDeepHistorySwitch(final Region r, final ExecutionRegion historyRegion) {
+    {
+      ExecutionRegion _create = this.mapping.create(r);
+      final ExecutionRegion execRegion = _create;
+      SexecFactory _factory = this.sexec.factory();
+      StateSwitch _createStateSwitch = _factory.createStateSwitch();
+      final StateSwitch sSwitch = _createStateSwitch;
+      StateVector _stateVector = execRegion.getStateVector();
+      int _offset = _stateVector.getOffset();
+      sSwitch.setStateConfigurationIdx(_offset);
+      String _name = r.getName();
+      String _operator_plus = StringExtensions.operator_plus("Handle shallow history entry of ", _name);
+      sSwitch.setComment(_operator_plus);
+      sSwitch.setHistoryRegion(historyRegion);
+      EList<Vertex> _vertices = r.getVertices();
+      Iterable<State> _filter = IterableExtensions.<State>filter(_vertices, org.yakindu.sct.model.sgraph.State.class);
+      for (final State child : _filter) {
+        ArrayList<RegularState> _newArrayList = CollectionLiterals.<RegularState>newArrayList();
+        List<RegularState> _collectLeafStates = this.sgraph.collectLeafStates(child, _newArrayList);
+        final Function1<RegularState,Boolean> _function = new Function1<RegularState,Boolean>() {
+            public Boolean apply(final RegularState c) {
+              ExecutionState _create_1 = SequenceBuilder.this.mapping.create(c);
+              StateVector _stateVector_1 = _create_1.getStateVector();
+              int _offset_1 = _stateVector_1.getOffset();
+              int _stateConfigurationIdx = sSwitch.getStateConfigurationIdx();
+              boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_offset_1), ((Integer)_stateConfigurationIdx));
+              return ((Boolean)_operator_equals);
+            }
+          };
+        Iterable<RegularState> _filter_1 = IterableExtensions.<RegularState>filter(_collectLeafStates, _function);
+        for (final RegularState childLeaf : _filter_1) {
+          {
+            ExecutionState _create_2 = this.mapping.create(child);
+            final ExecutionState execChild = _create_2;
+            SexecFactory _factory_1 = this.sexec.factory();
+            Sequence _createSequence = _factory_1.createSequence();
+            final Sequence seq = _createSequence;
+            seq.setName("enterSequence");
+            String _name_1 = child.getName();
+            String _operator_plus_1 = StringExtensions.operator_plus("enterSequence with history in child ", _name_1);
+            String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, " for leaf ");
+            String _name_2 = childLeaf.getName();
+            String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, _name_2);
+            seq.setComment(_operator_plus_3);
+            Step _entryAction = execChild.getEntryAction();
+            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_entryAction, null);
+            if (_operator_notEquals) {
+              EList<Step> _steps = seq.getSteps();
+              Step _entryAction_1 = execChild.getEntryAction();
+              Call _newCall = this.mapping.newCall(_entryAction_1);
+              CollectionExtensions.<Step>operator_add(_steps, _newCall);
+            }
+            if (this._addTraceSteps) {
+              EList<Step> _steps_1 = seq.getSteps();
+              TraceStateEntered _newTraceStateEntered = this.trace.newTraceStateEntered(execChild);
+              CollectionExtensions.<Step>operator_add(_steps_1, _newTraceStateEntered);
+            }
+            boolean _isLeaf = execChild.isLeaf();
+            if (_isLeaf) {
+              EList<Step> _steps_2 = seq.getSteps();
+              EnterState _newEnterStateStep = this.sexec.newEnterStateStep(execChild);
+              CollectionExtensions.<Step>operator_add(_steps_2, _newEnterStateStep);
+            } else {
+              EList<Region> _regions = child.getRegions();
+              for (final Region childRegion : _regions) {
+                EList<Step> _steps_3 = seq.getSteps();
+                StateSwitch _defineDeepHistorySwitch = this.defineDeepHistorySwitch(childRegion, historyRegion);
+                CollectionExtensions.<Step>operator_add(_steps_3, _defineDeepHistorySwitch);
+              }
+            }
+            EList<StateCase> _cases = sSwitch.getCases();
+            ExecutionState _create_3 = this.mapping.create(childLeaf);
+            StateCase _newCase = this.sexec.newCase(_create_3, seq);
+            CollectionExtensions.<StateCase>operator_add(_cases, _newCase);
+          }
+        }
+      }
+      return sSwitch;
+    }
+  }
+  
+  public StateSwitch defineShallowHistorySwitch(final Region r) {
+    {
+      ExecutionRegion _create = this.mapping.create(r);
+      final ExecutionRegion execRegion = _create;
+      SexecFactory _factory = this.sexec.factory();
+      StateSwitch _createStateSwitch = _factory.createStateSwitch();
+      final StateSwitch sSwitch = _createStateSwitch;
+      StateVector _stateVector = execRegion.getStateVector();
+      int _offset = _stateVector.getOffset();
+      sSwitch.setStateConfigurationIdx(_offset);
+      String _name = r.getName();
+      String _operator_plus = StringExtensions.operator_plus("Handle shallow history entry of ", _name);
+      sSwitch.setComment(_operator_plus);
+      ExecutionRegion _create_1 = this.mapping.create(r);
+      sSwitch.setHistoryRegion(_create_1);
+      EList<Vertex> _vertices = r.getVertices();
+      Iterable<State> _filter = IterableExtensions.<State>filter(_vertices, org.yakindu.sct.model.sgraph.State.class);
+      for (final State child : _filter) {
+        {
+          ExecutionState _create_2 = this.mapping.create(child);
+          final ExecutionState execChild = _create_2;
+          ArrayList<RegularState> _newArrayList = CollectionLiterals.<RegularState>newArrayList();
+          List<RegularState> _collectLeafStates = this.sgraph.collectLeafStates(child, _newArrayList);
+          final Function1<RegularState,Boolean> _function = new Function1<RegularState,Boolean>() {
+              public Boolean apply(final RegularState c) {
+                ExecutionState _create_3 = SequenceBuilder.this.mapping.create(c);
+                StateVector _stateVector_1 = _create_3.getStateVector();
+                int _offset_1 = _stateVector_1.getOffset();
+                int _stateConfigurationIdx = sSwitch.getStateConfigurationIdx();
+                boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_offset_1), ((Integer)_stateConfigurationIdx));
+                return ((Boolean)_operator_equals);
+              }
+            };
+          Iterable<RegularState> _filter_1 = IterableExtensions.<RegularState>filter(_collectLeafStates, _function);
+          for (final RegularState childLeaf : _filter_1) {
+            EList<StateCase> _cases = sSwitch.getCases();
+            ExecutionState _create_4 = this.mapping.create(childLeaf);
+            Sequence _enterSequence = execChild.getEnterSequence();
+            Call _newCall = this.mapping.newCall(_enterSequence);
+            StateCase _newCase = this.sexec.newCase(_create_4, _newCall);
+            CollectionExtensions.<StateCase>operator_add(_cases, _newCase);
+          }
+        }
+      }
+      return sSwitch;
     }
   }
   
