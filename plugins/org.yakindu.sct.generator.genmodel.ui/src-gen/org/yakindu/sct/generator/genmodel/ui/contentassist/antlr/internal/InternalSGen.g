@@ -24,7 +24,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
@@ -12734,8 +12733,8 @@ rule__GeneratorEntry__StatechartAssignment_1
 (
 { before(grammarAccess.getGeneratorEntryAccess().getStatechartStatechartCrossReference_1_0()); }
 (
-{ before(grammarAccess.getGeneratorEntryAccess().getStatechartStatechartIDTerminalRuleCall_1_0_1()); }
-	RULE_ID{ after(grammarAccess.getGeneratorEntryAccess().getStatechartStatechartIDTerminalRuleCall_1_0_1()); }
+{ before(grammarAccess.getGeneratorEntryAccess().getStatechartStatechartQIDParserRuleCall_1_0_1()); }
+	ruleQID{ after(grammarAccess.getGeneratorEntryAccess().getStatechartStatechartQIDParserRuleCall_1_0_1()); }
 )
 { after(grammarAccess.getGeneratorEntryAccess().getStatechartStatechartCrossReference_1_0()); }
 )
