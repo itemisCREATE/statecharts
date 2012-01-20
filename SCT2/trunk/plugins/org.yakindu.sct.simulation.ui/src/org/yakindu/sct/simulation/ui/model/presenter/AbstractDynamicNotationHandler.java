@@ -1,7 +1,11 @@
 package org.yakindu.sct.simulation.ui.model.presenter;
 
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.widgets.Display;
 import org.yakindu.sct.model.sexec.Trace;
+import org.yakindu.sct.simulation.ui.SimulationActivator;
+import org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants;
 
 import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
 
@@ -10,9 +14,16 @@ import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
  * 
  */
 public abstract class AbstractDynamicNotationHandler implements
-		IDynamicNotationHandler {
+		IDynamicNotationHandler, IPropertyChangeListener {
 
 	protected abstract void visualizeStep(Trace trace);
+
+	protected abstract void updatePreferences();
+
+	public AbstractDynamicNotationHandler() {
+		SimulationActivator.getDefault().getPreferenceStore()
+				.addPropertyChangeListener(this);
+	}
 
 	private IHighlightingSupport support;
 
@@ -30,5 +41,16 @@ public abstract class AbstractDynamicNotationHandler implements
 				visualizeStep(trace);
 			}
 		});
+	}
+
+	public void propertyChange(PropertyChangeEvent event) {
+		if (SimulationPreferenceConstants.STATE_BACKGROUND_HIGHLIGHTING_COLOR
+				.equals(event.getProperty())
+				|| SimulationPreferenceConstants.TRANSITION_HIGHLIGHTING_COLOR
+						.equals(event.getProperty())
+				|| SimulationPreferenceConstants.STATE_FOREGROUND_HIGHLIGHTING_COLOR
+						.equals(event.getProperty())) {
+			updatePreferences();
+		}
 	}
 }

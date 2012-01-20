@@ -98,4 +98,19 @@
        </adapter>
     </factory>
  </extension>
+ <extension
+       point="org.eclipse.ui.preferencePages">
+    <page
+          class="org.yakindu.sct.simulation.ui.preferences.SimulationPreferencePage"
+          id="org.yakindu.sct.simulation.ui.preferences.SimulationPreferencePage"
+          name="Simulation"
+          category="org.yakindu.sct.ui.preferences.root">
+    </page>
+ </extension>
+ <extension
+       point="org.eclipse.core.runtime.preferences">
+    <initializer
+          class="org.yakindu.sct.simulation.ui.preferences.PreferenceInitializer">
+    </initializer>
+ </extension>
 </plugin>
