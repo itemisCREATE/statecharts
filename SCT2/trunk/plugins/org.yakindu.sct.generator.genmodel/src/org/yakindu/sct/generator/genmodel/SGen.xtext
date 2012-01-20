@@ -13,7 +13,7 @@ GeneratorModel returns gen::GeneratorModel:
 	'}';
 
 GeneratorEntry returns gen::GeneratorEntry:
-	'statechart' statechart=[sct::Statechart] '{'
+	'statechart' statechart=[sct::Statechart|QID] '{'
 	(features+=FeatureConfiguration)*
 	'}';
 
