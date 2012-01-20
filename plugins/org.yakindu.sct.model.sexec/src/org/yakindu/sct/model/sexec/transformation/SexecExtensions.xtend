@@ -52,9 +52,10 @@ class SexecExtensions {
 		return sCase
 	}
 
-	def newSaveHistory(ExecutionRegion r) {
+	def newSaveHistory(ExecutionRegion r, boolean deep) {
 		val save = factory.createSaveHistory
 		save.region = r
+		save.deep = deep
 		return save
 	}
 

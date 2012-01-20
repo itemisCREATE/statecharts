@@ -290,6 +290,11 @@ public class ReactionItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.REACTION__EFFECT,
 				 SexecFactory.eINSTANCE.createSaveHistory()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.REACTION__EFFECT,
+				 SexecFactory.eINSTANCE.createHistoryEntry()));
 	}
 
 	/**

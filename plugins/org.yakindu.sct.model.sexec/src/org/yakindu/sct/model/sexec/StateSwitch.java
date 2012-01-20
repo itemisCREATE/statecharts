@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.StateSwitch#getCases <em>Cases</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.StateSwitch#getStateConfigurationIdx <em>State Configuration Idx</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.StateSwitch#getHistoryRegion <em>History Region</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,5 +69,31 @@ public interface StateSwitch extends Step {
 	 * @generated
 	 */
 	void setStateConfigurationIdx(int value);
+
+	/**
+	 * Returns the value of the '<em><b>History Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>History Region</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>History Region</em>' reference.
+	 * @see #setHistoryRegion(ExecutionRegion)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getStateSwitch_HistoryRegion()
+	 * @model
+	 * @generated
+	 */
+	ExecutionRegion getHistoryRegion();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.StateSwitch#getHistoryRegion <em>History Region</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>History Region</em>' reference.
+	 * @see #getHistoryRegion()
+	 * @generated
+	 */
+	void setHistoryRegion(ExecutionRegion value);
 
 } // StateSwitch

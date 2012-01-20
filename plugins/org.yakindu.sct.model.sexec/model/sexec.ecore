@@ -117,6 +117,7 @@
         eType="#//StateCase" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="stateConfigurationIdx"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="historyRegion" eType="#//ExecutionRegion"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StateCase">
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>
@@ -137,6 +138,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SaveHistory" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="region" eType="#//ExecutionRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="HistoryEntry" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="initialStep" eType="#//Step"

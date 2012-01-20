@@ -65,6 +65,7 @@ public class StateSwitchItemProvider
 			super.getPropertyDescriptors(object);
 
 			addStateConfigurationIdxPropertyDescriptor(object);
+			addHistoryRegionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -87,6 +88,28 @@ public class StateSwitchItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the History Region feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addHistoryRegionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_StateSwitch_historyRegion_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StateSwitch_historyRegion_feature", "_UI_StateSwitch_type"),
+				 SexecPackage.Literals.STATE_SWITCH__HISTORY_REGION,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

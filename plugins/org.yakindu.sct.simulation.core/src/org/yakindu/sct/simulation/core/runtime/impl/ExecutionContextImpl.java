@@ -15,15 +15,20 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.simulation.core.runtime.ExecutionException;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.timer.VirtualClock;
+
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 
 /**
  * 
@@ -37,6 +42,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	private List<ExecutionEvent> declaredEvents;
 	private List<ExecutionEvent> raisedEvents;
 	private ExecutionState[] activeStateConfig;
+	private Map<ExecutionRegion, ExecutionState[]> historyStateConfig;
 	private double timeScaleFactor;
 	private VirtualClock virtualClock;
 
@@ -47,6 +53,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		timeScaleFactor = 1.0d;
 		virtualClock = new VirtualClock();
 		activeStateConfig = null;
+		historyStateConfig = null;
 	}
 
 	public List<ExecutionEvent> getDeclaredEvents() {
@@ -143,11 +150,30 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		return activeStateConfig;
 	}
 
+	public ExecutionState[] getHistoryStateConfiguration(ExecutionRegion region) {
+		return historyStateConfig.get(region);
+	}
+
+	public void saveHistoryStateConfiguration(ExecutionRegion region,
+			boolean deep) {
+		ExecutionState[] history = null;
+		if (deep) {
+			history = new ExecutionState[region.getStateVector().getSize()];
+			System.arraycopy(activeStateConfig, region.getStateVector()
+					.getOffset(), history, 0, region.getStateVector().getSize());
+		} else {
+			history = new ExecutionState[1];
+			history[1] = activeStateConfig[region.getStateVector().getOffset()];
+		}
+		historyStateConfig.put(region, history);
+	}
+
 	public void initStateConfigurationVector(int size) {
 		activeStateConfig = new ExecutionState[size];
 		for (int i = 0; i < size; i++) {
 			activeStateConfig[i] = null;
 		}
+		historyStateConfig = Maps.newHashMap();
 	}
 
 	public void call(String procedureId) {

@@ -227,6 +227,11 @@ public class SequenceItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.SEQUENCE__STEPS,
 				 SexecFactory.eINSTANCE.createSaveHistory()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SEQUENCE__STEPS,
+				 SexecFactory.eINSTANCE.createHistoryEntry()));
 	}
 
 }

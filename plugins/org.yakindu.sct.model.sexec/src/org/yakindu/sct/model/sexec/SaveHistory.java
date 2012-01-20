@@ -16,6 +16,7 @@ package org.yakindu.sct.model.sexec;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.SaveHistory#getRegion <em>Region</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.SaveHistory#isDeep <em>Deep</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,5 +50,31 @@ public interface SaveHistory extends Step {
 	 * @generated
 	 */
 	void setRegion(ExecutionRegion value);
+
+	/**
+	 * Returns the value of the '<em><b>Deep</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Deep</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Deep</em>' attribute.
+	 * @see #setDeep(boolean)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getSaveHistory_Deep()
+	 * @model
+	 * @generated
+	 */
+	boolean isDeep();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.SaveHistory#isDeep <em>Deep</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Deep</em>' attribute.
+	 * @see #isDeep()
+	 * @generated
+	 */
+	void setDeep(boolean value);
 
 } // SaveHistory

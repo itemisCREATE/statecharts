@@ -8,6 +8,7 @@ package org.yakindu.sct.model.sexec;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -1580,13 +1581,22 @@ public interface SexecPackage extends EPackage {
 	int STATE_SWITCH__STATE_CONFIGURATION_IDX = STEP_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>History Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_SWITCH__HISTORY_REGION = STEP_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>State Switch</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_SWITCH_FEATURE_COUNT = STEP_FEATURE_COUNT + 2;
+	int STATE_SWITCH_FEATURE_COUNT = STEP_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StateCaseImpl <em>State Case</em>}' class.
@@ -1941,13 +1951,22 @@ public interface SexecPackage extends EPackage {
 	int SAVE_HISTORY__REGION = STEP_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Deep</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAVE_HISTORY__DEEP = STEP_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Save History</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SAVE_HISTORY_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
+	int SAVE_HISTORY_FEATURE_COUNT = STEP_FEATURE_COUNT + 2;
 
 
 	/**
@@ -2640,6 +2659,17 @@ public interface SexecPackage extends EPackage {
 	EAttribute getStateSwitch_StateConfigurationIdx();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.StateSwitch#getHistoryRegion <em>History Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>History Region</em>'.
+	 * @see org.yakindu.sct.model.sexec.StateSwitch#getHistoryRegion()
+	 * @see #getStateSwitch()
+	 * @generated
+	 */
+	EReference getStateSwitch_HistoryRegion();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.StateCase <em>State Case</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2785,6 +2815,17 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSaveHistory_Region();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sexec.SaveHistory#isDeep <em>Deep</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Deep</em>'.
+	 * @see org.yakindu.sct.model.sexec.SaveHistory#isDeep()
+	 * @see #getSaveHistory()
+	 * @generated
+	 */
+	EAttribute getSaveHistory_Deep();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.HistoryEntry <em>History Entry</em>}'.
@@ -3435,6 +3476,14 @@ public interface SexecPackage extends EPackage {
 		EAttribute STATE_SWITCH__STATE_CONFIGURATION_IDX = eINSTANCE.getStateSwitch_StateConfigurationIdx();
 
 		/**
+		 * The meta object literal for the '<em><b>History Region</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATE_SWITCH__HISTORY_REGION = eINSTANCE.getStateSwitch_HistoryRegion();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.StateCaseImpl <em>State Case</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3559,6 +3608,14 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SAVE_HISTORY__REGION = eINSTANCE.getSaveHistory_Region();
+
+		/**
+		 * The meta object literal for the '<em><b>Deep</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SAVE_HISTORY__DEEP = eINSTANCE.getSaveHistory_Deep();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.HistoryEntryImpl <em>History Entry</em>}' class.
