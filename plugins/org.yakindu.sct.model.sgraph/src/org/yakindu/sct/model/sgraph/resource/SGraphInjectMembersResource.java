@@ -62,9 +62,9 @@ public class SGraphInjectMembersResource extends InjectMembersResource {
 		super(uri);
 	}
 
-//	protected XMLLoad createXMLLoad() {
-//		return new SGraphLoad(createXMLHelper());
-//	}
+	protected XMLLoad createXMLLoad() {
+		return new SGraphLoad(createXMLHelper());
+	}
 
 	@Override
 	public void doLoad(InputStream inputStream, Map<?, ?> options)
