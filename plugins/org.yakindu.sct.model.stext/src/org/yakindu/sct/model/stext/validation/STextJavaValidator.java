@@ -151,7 +151,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		}
 		if (defaultInterfaces.size() > 1) {
 			for (InterfaceScope scope : defaultInterfaces) {
-				error("It can only exist one default/unamed interface", scope,
+				error("It can only exist one default/unnamed interface", scope,
 						StextPackage.Literals.INTERFACE_SCOPE__NAME,
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 			}
