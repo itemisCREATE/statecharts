@@ -161,10 +161,12 @@ ruleGeneratorEntry returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getGeneratorEntryRule());
 	        }
         }
-	otherlv_1=RULE_ID
-	{
-		newLeafNode(otherlv_1, grammarAccess.getGeneratorEntryAccess().getStatechartStatechartCrossReference_1_0()); 
-	}
+		{ 
+	        newCompositeNode(grammarAccess.getGeneratorEntryAccess().getStatechartStatechartCrossReference_1_0()); 
+	    }
+		ruleQID		{ 
+	        afterParserOrEnumRuleCall();
+	    }
 
 )
 )	otherlv_2='{' 

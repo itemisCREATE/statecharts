@@ -14,7 +14,6 @@ import org.eclipse.xtext.service.AbstractElementFinder.*;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 
-@SuppressWarnings("all")
 @Singleton
 public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	
@@ -71,30 +70,30 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cStatechartKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cStatechartAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cStatechartStatechartCrossReference_1_0 = (CrossReference)cStatechartAssignment_1.eContents().get(0);
-		private final RuleCall cStatechartStatechartIDTerminalRuleCall_1_0_1 = (RuleCall)cStatechartStatechartCrossReference_1_0.eContents().get(1);
+		private final RuleCall cStatechartStatechartQIDParserRuleCall_1_0_1 = (RuleCall)cStatechartStatechartCrossReference_1_0.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cFeaturesAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cFeaturesFeatureConfigurationParserRuleCall_3_0 = (RuleCall)cFeaturesAssignment_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//GeneratorEntry returns gen::GeneratorEntry:
-		//	"statechart" statechart=[sct::Statechart] "{" features+=FeatureConfiguration* "}";
+		//	"statechart" statechart=[sct::Statechart|QID] "{" features+=FeatureConfiguration* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"statechart" statechart=[sct::Statechart] "{" features+=FeatureConfiguration* "}"
+		//"statechart" statechart=[sct::Statechart|QID] "{" features+=FeatureConfiguration* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"statechart"
 		public Keyword getStatechartKeyword_0() { return cStatechartKeyword_0; }
 
-		//statechart=[sct::Statechart]
+		//statechart=[sct::Statechart|QID]
 		public Assignment getStatechartAssignment_1() { return cStatechartAssignment_1; }
 
-		//[sct::Statechart]
+		//[sct::Statechart|QID]
 		public CrossReference getStatechartStatechartCrossReference_1_0() { return cStatechartStatechartCrossReference_1_0; }
 
-		//ID
-		public RuleCall getStatechartStatechartIDTerminalRuleCall_1_0_1() { return cStatechartStatechartIDTerminalRuleCall_1_0_1; }
+		//QID
+		public RuleCall getStatechartStatechartQIDParserRuleCall_1_0_1() { return cStatechartStatechartQIDParserRuleCall_1_0_1; }
 
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
@@ -274,7 +273,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//GeneratorEntry returns gen::GeneratorEntry:
-	//	"statechart" statechart=[sct::Statechart] "{" features+=FeatureConfiguration* "}";
+	//	"statechart" statechart=[sct::Statechart|QID] "{" features+=FeatureConfiguration* "}";
 	public GeneratorEntryElements getGeneratorEntryAccess() {
 		return (pGeneratorEntry != null) ? pGeneratorEntry : (pGeneratorEntry = new GeneratorEntryElements());
 	}
