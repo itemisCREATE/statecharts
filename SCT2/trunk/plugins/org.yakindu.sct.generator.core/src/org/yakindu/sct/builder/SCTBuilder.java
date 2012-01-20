@@ -59,6 +59,8 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 		public boolean apply(GeneratorEntry input) {
 			// return input.getStatechart().equals(statechart);
 			return statechart != null
+					&& input.getStatechart() != null
+					&& !input.getStatechart().eIsProxy()
 					&& input.getStatechart().getName()
 							.equals(statechart.getName());
 		}
