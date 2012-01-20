@@ -91,6 +91,7 @@
     <genClasses ecoreClass="sexec.ecore#//StateSwitch">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//StateSwitch/cases"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sexec.ecore#//StateSwitch/stateConfigurationIdx"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//StateSwitch/historyRegion"/>
     </genClasses>
     <genClasses ecoreClass="sexec.ecore#//StateCase">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//StateCase/state"/>
@@ -111,6 +112,7 @@
     </genClasses>
     <genClasses ecoreClass="sexec.ecore#//SaveHistory">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//SaveHistory/region"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sexec.ecore#//SaveHistory/deep"/>
     </genClasses>
     <genClasses ecoreClass="sexec.ecore#//HistoryEntry">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//HistoryEntry/initialStep"/>

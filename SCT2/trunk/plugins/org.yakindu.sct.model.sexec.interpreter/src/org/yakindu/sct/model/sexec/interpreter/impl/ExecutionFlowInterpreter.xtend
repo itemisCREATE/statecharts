@@ -65,6 +65,8 @@ import org.yakindu.sct.model.sexec.Trace
 import java.util.Arrays
 import org.yakindu.sct.model.sexec.impl.ExecutionStateImpl
 import org.yakindu.sct.simulation.core.runtime.IExecutionContextListener
+import org.yakindu.sct.model.sexec.SaveHistory
+import org.yakindu.sct.model.sexec.HistoryEntry
 
 /**
  * 
@@ -232,6 +234,20 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		nextSVIdx = enterState.state.stateVector.offset // mark all state vector elements up to this as processed ...		
 		null
 	}
+
+	def dispatch execute(HistoryEntry entry){
+		if (executionContext.getHistoryStateConfiguration(entry.region) != null) {
+			entry.historyStep.execute
+		} else {
+			if (entry.initialStep == null) {
+				//TODO handle model error
+				println("Missing initial transition " + entry)
+			} else {
+				entry.initialStep.execute
+			}
+		}
+		null
+	}
 	
 	def dispatch execute(Execution execution){ 
 		interpreter.evaluateStatement(execution.statement, executionContext)
@@ -260,18 +276,30 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		null
 	}
 	
+	def dispatch execute(SaveHistory action){
+		executionContext.saveHistoryStateConfiguration(action.region, action.deep);
+		null
+	}
+	
 	def dispatch execute(StateSwitch stateSwitch){
-		for(stateCase : stateSwitch.cases)
-			stateCase.execute 
+		val historyRegion = stateSwitch.historyRegion
+		if (historyRegion != null) {
+			val historyState = executionContext.getHistoryStateConfiguration(historyRegion)
+			for(stateCase : stateSwitch.cases) {
+				if(historyState.contains(stateCase.state)){
+					stateCase.step.execute
+				}
+			}
+			
+		} else {			
+			for(stateCase : stateSwitch.cases)
+				if(executionContext.stateConfiguration.contains(stateCase.state)){
+					stateCase.step.execute
+				} 
+		}
 		null 
 	}
 	
-	def dispatch execute(StateCase stateCase){
-		if(executionContext.stateConfiguration.contains(stateCase.state)){
-			stateCase.step.execute
-		}
-		null
-	}
 	def dispatch execute(ScheduleTimeEvent scheduleTimeEvent){
 		var timeEvent = scheduleTimeEvent.timeEvent
 		var duration = interpreter.evaluateStatement(scheduleTimeEvent.timeValue, executionContext)

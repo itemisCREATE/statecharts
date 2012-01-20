@@ -16,9 +16,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
+import org.yakindu.sct.model.sexec.StateVectorType;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,6 +31,7 @@ import org.yakindu.sct.model.sexec.StateSwitch;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.StateSwitchImpl#getCases <em>Cases</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.StateSwitchImpl#getStateConfigurationIdx <em>State Configuration Idx</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.StateSwitchImpl#getHistoryRegion <em>History Region</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,6 +66,16 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 	 * @ordered
 	 */
 	protected int stateConfigurationIdx = STATE_CONFIGURATION_IDX_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getHistoryRegion() <em>History Region</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHistoryRegion()
+	 * @generated
+	 * @ordered
+	 */
+	protected ExecutionRegion historyRegion;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,6 +134,44 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ExecutionRegion getHistoryRegion() {
+		if (historyRegion != null && historyRegion.eIsProxy()) {
+			InternalEObject oldHistoryRegion = (InternalEObject)historyRegion;
+			historyRegion = (ExecutionRegion)eResolveProxy(oldHistoryRegion);
+			if (historyRegion != oldHistoryRegion) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SexecPackage.STATE_SWITCH__HISTORY_REGION, oldHistoryRegion, historyRegion));
+			}
+		}
+		return historyRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExecutionRegion basicGetHistoryRegion() {
+		return historyRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHistoryRegion(ExecutionRegion newHistoryRegion) {
+		ExecutionRegion oldHistoryRegion = historyRegion;
+		historyRegion = newHistoryRegion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.STATE_SWITCH__HISTORY_REGION, oldHistoryRegion, historyRegion));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -142,6 +193,9 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 				return getCases();
 			case SexecPackage.STATE_SWITCH__STATE_CONFIGURATION_IDX:
 				return getStateConfigurationIdx();
+			case SexecPackage.STATE_SWITCH__HISTORY_REGION:
+				if (resolve) return getHistoryRegion();
+				return basicGetHistoryRegion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -162,6 +216,9 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 			case SexecPackage.STATE_SWITCH__STATE_CONFIGURATION_IDX:
 				setStateConfigurationIdx((Integer)newValue);
 				return;
+			case SexecPackage.STATE_SWITCH__HISTORY_REGION:
+				setHistoryRegion((ExecutionRegion)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -180,6 +237,9 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 			case SexecPackage.STATE_SWITCH__STATE_CONFIGURATION_IDX:
 				setStateConfigurationIdx(STATE_CONFIGURATION_IDX_EDEFAULT);
 				return;
+			case SexecPackage.STATE_SWITCH__HISTORY_REGION:
+				setHistoryRegion((ExecutionRegion)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -196,6 +256,8 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 				return cases != null && !cases.isEmpty();
 			case SexecPackage.STATE_SWITCH__STATE_CONFIGURATION_IDX:
 				return stateConfigurationIdx != STATE_CONFIGURATION_IDX_EDEFAULT;
+			case SexecPackage.STATE_SWITCH__HISTORY_REGION:
+				return historyRegion != null;
 		}
 		return super.eIsSet(featureID);
 	}

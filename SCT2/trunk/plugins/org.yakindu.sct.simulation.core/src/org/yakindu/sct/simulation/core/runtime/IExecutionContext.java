@@ -13,6 +13,7 @@ package org.yakindu.sct.simulation.core.runtime;
 import java.util.List;
 import java.util.Set;
 
+import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
@@ -117,8 +118,17 @@ public interface IExecutionContext {
 	public double getTimeScaleFactor();
 
 	public void setTimeScaleFactor(double factor);
-	
+
 	public VirtualClock getVirtualClock();
-	
-	
+
+	/**
+	 * 
+	 * @param region
+	 * @return
+	 */
+	public ExecutionState[] getHistoryStateConfiguration(ExecutionRegion region);
+
+	public void saveHistoryStateConfiguration(ExecutionRegion region,
+			boolean deep);
+
 }

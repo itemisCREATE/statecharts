@@ -8,6 +8,7 @@ package org.yakindu.sct.model.sexec.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
@@ -38,6 +39,7 @@ import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.StateVector;
+import org.yakindu.sct.model.sexec.StateVectorType;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.Trace;
@@ -862,6 +864,15 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getStateSwitch_HistoryRegion() {
+		return (EReference)stateSwitchEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getStateCase() {
 		return stateCaseEClass;
 	}
@@ -981,6 +992,15 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 */
 	public EReference getSaveHistory_Region() {
 		return (EReference)saveHistoryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSaveHistory_Deep() {
+		return (EAttribute)saveHistoryEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1206,6 +1226,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		stateSwitchEClass = createEClass(STATE_SWITCH);
 		createEReference(stateSwitchEClass, STATE_SWITCH__CASES);
 		createEAttribute(stateSwitchEClass, STATE_SWITCH__STATE_CONFIGURATION_IDX);
+		createEReference(stateSwitchEClass, STATE_SWITCH__HISTORY_REGION);
 
 		stateCaseEClass = createEClass(STATE_CASE);
 		createEReference(stateCaseEClass, STATE_CASE__STATE);
@@ -1227,6 +1248,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		saveHistoryEClass = createEClass(SAVE_HISTORY);
 		createEReference(saveHistoryEClass, SAVE_HISTORY__REGION);
+		createEAttribute(saveHistoryEClass, SAVE_HISTORY__DEEP);
 
 		historyEntryEClass = createEClass(HISTORY_ENTRY);
 		createEReference(historyEntryEClass, HISTORY_ENTRY__INITIAL_STEP);
@@ -1388,6 +1410,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEClass(stateSwitchEClass, StateSwitch.class, "StateSwitch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStateSwitch_Cases(), this.getStateCase(), null, "cases", null, 0, -1, StateSwitch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStateSwitch_StateConfigurationIdx(), ecorePackage.getEInt(), "stateConfigurationIdx", "0", 0, 1, StateSwitch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStateSwitch_HistoryRegion(), this.getExecutionRegion(), null, "historyRegion", null, 0, 1, StateSwitch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stateCaseEClass, StateCase.class, "StateCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStateCase_State(), this.getExecutionState(), null, "state", null, 0, 1, StateCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1409,6 +1432,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		initEClass(saveHistoryEClass, SaveHistory.class, "SaveHistory", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSaveHistory_Region(), this.getExecutionRegion(), null, "region", null, 0, 1, SaveHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSaveHistory_Deep(), ecorePackage.getEBoolean(), "deep", null, 0, 1, SaveHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(historyEntryEClass, HistoryEntry.class, "HistoryEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getHistoryEntry_InitialStep(), this.getStep(), null, "initialStep", null, 0, 1, HistoryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

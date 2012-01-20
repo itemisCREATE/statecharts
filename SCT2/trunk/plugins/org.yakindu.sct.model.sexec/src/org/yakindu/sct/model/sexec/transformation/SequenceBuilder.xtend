@@ -21,6 +21,7 @@ import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sgraph.EntryKind
+import org.yakindu.sct.model.sexec.StateVectorType
 
 class SequenceBuilder {
 	
@@ -151,7 +152,7 @@ class SequenceBuilder {
 		for ( s : r.vertices ) defineStateExitSequence(s)
 		
 		if (r.collectEntries.exists(e|e.kind == EntryKind::DEEP_HISTORY || e.kind == EntryKind::SHALLOW_HISTORY)) {
-			seq.steps += execRegion.newSaveHistory
+			seq.steps += execRegion.newSaveHistory(r.collectEntries.exists(e|e.kind == EntryKind::DEEP_HISTORY))
 		}
 		
 		// collect leaf states
@@ -184,25 +185,31 @@ class SequenceBuilder {
 		} else if (e.kind == EntryKind::SHALLOW_HISTORY) {
 			val entryStep = sexec.factory.createHistoryEntry
 			entryStep.name = "HistoryEntry"
-			entryStep.comment = "Enter the region with shallow history for each active state"
+			entryStep.comment = "Enter the region with shallow history"
 			entryStep.deep = false
+			entryStep.region = (e.eContainer as Region).create
 			
 			//Initial step, if no history is known
 			if (target != null && target.enterSequence != null) {
 				entryStep.initialStep = target.enterSequence.newCall
 			}
-			//TODO handle history (Call for the last active state the enterSequence. Perhaps a StateSwitch)
+			val sSwitch = (e.eContainer as Region).defineShallowHistorySwitch()
+			entryStep.historyStep = sSwitch
 			
 			seq.steps += entryStep
 		} else if (e.kind == EntryKind::DEEP_HISTORY) {
 			val entryStep = sexec.factory.createHistoryEntry
+			entryStep.name = "HistoryEntry"
+			entryStep.comment = "Enter the region with deep history"
+			entryStep.region = (e.eContainer as Region).create
 			entryStep.deep = true
 			
 			//Initial step, if no history is known
 			if (target != null && target.enterSequence != null) {
 				entryStep.initialStep = target.enterSequence.newCall
 			}
-			//TODO handle history
+			val sSwitch = (e.eContainer as Region).defineDeepHistorySwitch()
+			entryStep.historyStep = sSwitch
 
 			seq.steps += entryStep
 		}
@@ -255,6 +262,63 @@ class SequenceBuilder {
 	
 	
 	
+	/**
+	 * Enter switch for a region with a deep history, which must be save before
+	 */
+	def StateSwitch defineDeepHistorySwitch(Region r) {
+		r.defineDeepHistorySwitch(r.create)
+	}
+	
+	def StateSwitch defineDeepHistorySwitch(Region r, ExecutionRegion historyRegion) {
+		val execRegion = r.create
+		
+		val StateSwitch sSwitch = sexec.factory.createStateSwitch
+		sSwitch.stateConfigurationIdx = execRegion.stateVector.offset
+		sSwitch.comment = "Handle shallow history entry of " +r.name
+		sSwitch.historyRegion = historyRegion
+		
+		for (child : r.vertices.filter(typeof(State))) {
+			for (childLeaf : child.collectLeafStates(newArrayList).filter(c|c.create.stateVector.offset == sSwitch.stateConfigurationIdx)) {
+				val execChild = child.create
+				val seq = sexec.factory.createSequence
+				seq.name = "enterSequence"
+				seq.comment = "enterSequence with history in child " + child.name+" for leaf "+childLeaf.name
+				if (execChild.entryAction != null ) seq.steps += execChild.entryAction.newCall
+				if ( _addTraceSteps ) seq.steps += execChild.newTraceStateEntered
+				if ( execChild.leaf ) {
+					seq.steps += execChild.newEnterStateStep
+				} else {
+					for (childRegion : child.regions) {
+						seq.steps += childRegion.defineDeepHistorySwitch(historyRegion)
+					}
+				}
+				sSwitch.cases += childLeaf.create.newCase(seq)
+			}
+		}
+		
+		return sSwitch
+	}
+
+	/**
+	 * Enter switch for a region with a shallow history, which must be save before
+	 */
+	def StateSwitch defineShallowHistorySwitch(Region r) {
+		val execRegion = r.create
+		
+		val StateSwitch sSwitch = sexec.factory.createStateSwitch
+		sSwitch.stateConfigurationIdx = execRegion.stateVector.offset
+		sSwitch.comment = "Handle shallow history entry of " +r.name
+		sSwitch.historyRegion = r.create
+		
+		for (child : r.vertices.filter(typeof(State))) {
+			val execChild = child.create
+			for (childLeaf : child.collectLeafStates(newArrayList).filter(c|c.create.stateVector.offset == sSwitch.stateConfigurationIdx)) {
+				sSwitch.cases += childLeaf.create.newCase(execChild.enterSequence.newCall)
+			}
+		}
+		
+		return sSwitch
+	}
 	def StateSwitch defineExitSwitch(ExecutionScope state, Iterable<ExecutionState> leafStates, int pos) {
 
 		// create a state switch
