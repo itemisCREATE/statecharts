@@ -154,7 +154,7 @@ public class StatePropertySection extends
 				TransactionUtil.getEditingDomain(eObject),
 				SGraphPackage.Literals.NAMED_ELEMENT__NAME);
 		ISWTObservableValue nameTextProperty = WidgetProperties.text(
-				SWT.FocusOut).observe(txtName);
+				new int[]{SWT.FocusOut, SWT.DefaultSelection}).observe(txtName);
 		context.bindValue(nameTextProperty, nameProperty.observe(eObject));
 	}
 

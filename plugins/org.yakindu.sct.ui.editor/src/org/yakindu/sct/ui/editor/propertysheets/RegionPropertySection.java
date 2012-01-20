@@ -44,7 +44,7 @@ public class RegionPropertySection extends AbstractEditorPropertySection {
 		IEMFValueProperty property = EMFEditProperties.value(
 				TransactionUtil.getEditingDomain(eObject),
 				SGraphPackage.Literals.NAMED_ELEMENT__NAME);
-		ISWTObservableValue observe = WidgetProperties.text(SWT.FocusOut)
+		ISWTObservableValue observe = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.DefaultSelection})
 				.observe(nameText);
 		context.bindValue(observe, property.observe(eObject));
 	}

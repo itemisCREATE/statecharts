@@ -111,7 +111,7 @@ public class StatechartPropertySection extends
 		IEMFValueProperty property = EMFEditProperties.value(
 				TransactionUtil.getEditingDomain(eObject),
 				SGraphPackage.Literals.NAMED_ELEMENT__NAME);
-		ISWTObservableValue observe = WidgetProperties.text(SWT.FocusOut)
+		ISWTObservableValue observe = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.DefaultSelection})
 				.observe(txtName);
 		context.bindValue(observe, property.observe(eObject));
 	}
