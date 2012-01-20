@@ -68,12 +68,13 @@ public class SexecExtensions {
     }
   }
   
-  public SaveHistory newSaveHistory(final ExecutionRegion r) {
+  public SaveHistory newSaveHistory(final ExecutionRegion r, final boolean deep) {
     {
       SexecFactory _factory = this.factory();
       SaveHistory _createSaveHistory = _factory.createSaveHistory();
       final SaveHistory save = _createSaveHistory;
       save.setRegion(r);
+      save.setDeep(deep);
       return save;
     }
   }
