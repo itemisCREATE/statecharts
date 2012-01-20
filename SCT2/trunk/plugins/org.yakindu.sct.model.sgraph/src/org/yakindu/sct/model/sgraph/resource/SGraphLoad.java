@@ -32,16 +32,20 @@ public class SGraphLoad extends GMFLoad {
 	public void load(XMLResource r, InputStream s,
 			@SuppressWarnings("rawtypes") Map o) throws IOException {
 		IFile file = WorkspaceSynchronizer.getFile(r);
-		String osString = file.getLocation().makeAbsolute().toOSString();
-		String filecontent = readFileAsString(osString);
-		// TODO: on check the first line for old ns uri, not neccessary to read
-		// the whole file content
-		if (filecontent.contains(NS_URI_TO_MIGRATE)) {
-			filecontent = migratePreM10Models(filecontent);
-			BufferedWriter writer = new BufferedWriter(new FileWriter(osString));
-			writer.write(filecontent);
-			writer.flush();
-			writer.close();
+		if (file != null) {
+			String osString = file.getLocation().makeAbsolute().toOSString();
+			String filecontent = readFileAsString(osString);
+			// TODO: on check the first line for old ns uri, not neccessary to
+			// read
+			// the whole file content
+			if (filecontent.contains(NS_URI_TO_MIGRATE)) {
+				filecontent = migratePreM10Models(filecontent);
+				BufferedWriter writer = new BufferedWriter(new FileWriter(
+						osString));
+				writer.write(filecontent);
+				writer.flush();
+				writer.close();
+			}
 		}
 		super.load(r, s, o);
 	}
