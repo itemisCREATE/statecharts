@@ -10,6 +10,10 @@
  */
 package org.yakindu.sct.simulation.core.runtime.timer;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * VirtualClock to be used instead of {@link System}currentTimeMillis. Allows to
@@ -27,7 +31,10 @@ public class VirtualClock {
 	// virtual time in ms since last factor change
 	private long virtualTime;
 
+	private List<PropertyChangeListener> _listeners;
+
 	public VirtualClock() {
+		_listeners = new ArrayList<PropertyChangeListener>();
 	}
 
 	private double factor = 1.0d;
@@ -38,10 +45,37 @@ public class VirtualClock {
 		realTime = System.currentTimeMillis();
 	}
 
+	public synchronized void pause() {
+		
+	}
+
+	public synchronized void stop() {
+		virtualTime = 0;
+		realTime = 0;
+		startTime = 0;
+	}
+
 	public synchronized void setFactor(double factor) {
 		virtualTime = getTime();
 		realTime = System.currentTimeMillis();
+		double oldFactor = this.factor;
 		this.factor = factor;
+		notifyListeners(new PropertyChangeEvent(this, "factor", oldFactor,
+				factor));
+	}
+
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		synchronized (_listeners) {
+			_listeners.add(listener);
+		}
+	}
+
+	protected void notifyListeners(PropertyChangeEvent event) {
+		synchronized (_listeners) {
+			for (PropertyChangeListener listener : _listeners) {
+				listener.propertyChange(event);
+			}
+		}
 	}
 
 	public synchronized long getTime() {
