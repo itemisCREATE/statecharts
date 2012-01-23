@@ -136,6 +136,7 @@ class ReactionBuilder {
 		
 		if (e.kind == EntryKind::INITIAL) {
 			if (target != null && target.enterSequence != null) {
+				if (trace.addTraceSteps) seq.steps += e.outgoingTransitions.get(0).create.newTraceReactionFired
 				seq.steps += target.enterSequence.newCall
 			}
 		} else if (e.kind == EntryKind::SHALLOW_HISTORY) {
@@ -147,6 +148,7 @@ class ReactionBuilder {
 			
 			//Initial step, if no history is known
 			if (target != null && target.enterSequence != null) {
+				if (trace.addTraceSteps) seq.steps += e.outgoingTransitions.get(0).create.newTraceReactionFired
 				entryStep.initialStep = target.enterSequence.newCall
 			}
 			val sSwitch = (e.eContainer as Region).defineShallowHistorySwitch()
@@ -162,6 +164,7 @@ class ReactionBuilder {
 			
 			//Initial step, if no history is known
 			if (target != null && target.enterSequence != null) {
+				if (trace.addTraceSteps) seq.steps += e.outgoingTransitions.get(0).create.newTraceReactionFired
 				entryStep.initialStep = target.enterSequence.newCall
 			}
 			val sSwitch = (e.eContainer as Region).defineDeepHistorySwitch()

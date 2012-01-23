@@ -27,6 +27,7 @@ import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.HistoryEntry;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.Reaction;
+import org.yakindu.sct.model.sexec.ReactionFired;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.StateCase;
@@ -49,6 +50,7 @@ import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
+import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.Literal;
@@ -365,11 +367,24 @@ public class ReactionBuilder {
           _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_notEquals_1);
         }
         if (_operator_and) {
-          EList<Step> _steps_1 = seq.getSteps();
-          Sequence _enterSequence_1 = target.getEnterSequence();
-          Call _newCall = this.mapping.newCall(_enterSequence_1);
-          boolean _operator_add = CollectionExtensions.<Step>operator_add(_steps_1, _newCall);
-          _xifexpression_1 = _operator_add;
+          boolean _xblockexpression_1 = false;
+          {
+            boolean _isAddTraceSteps_1 = this.trace.isAddTraceSteps();
+            if (_isAddTraceSteps_1) {
+              EList<Step> _steps_1 = seq.getSteps();
+              EList<Transition> _outgoingTransitions = e.getOutgoingTransitions();
+              Transition _get = _outgoingTransitions.get(0);
+              Reaction _create_2 = this.mapping.create(_get);
+              ReactionFired _newTraceReactionFired = this.trace.newTraceReactionFired(_create_2);
+              CollectionExtensions.<Step>operator_add(_steps_1, _newTraceReactionFired);
+            }
+            EList<Step> _steps_2 = seq.getSteps();
+            Sequence _enterSequence_1 = target.getEnterSequence();
+            Call _newCall = this.mapping.newCall(_enterSequence_1);
+            boolean _operator_add = CollectionExtensions.<Step>operator_add(_steps_2, _newCall);
+            _xblockexpression_1 = (_operator_add);
+          }
+          _xifexpression_1 = _xblockexpression_1;
         }
         _xifexpression = _xifexpression_1;
       } else {
@@ -377,7 +392,7 @@ public class ReactionBuilder {
         EntryKind _kind_1 = e.getKind();
         boolean _operator_equals_1 = ObjectExtensions.operator_equals(_kind_1, EntryKind.SHALLOW_HISTORY);
         if (_operator_equals_1) {
-          boolean _xblockexpression_1 = false;
+          boolean _xblockexpression_2 = false;
           {
             SexecFactory _factory = this.sexec.factory();
             HistoryEntry _createHistoryEntry = _factory.createHistoryEntry();
@@ -386,8 +401,8 @@ public class ReactionBuilder {
             entryStep.setComment("Enter the region with shallow history");
             entryStep.setDeep(false);
             EObject _eContainer = e.eContainer();
-            ExecutionRegion _create_2 = this.mapping.create(((Region) _eContainer));
-            entryStep.setRegion(_create_2);
+            ExecutionRegion _create_3 = this.mapping.create(((Region) _eContainer));
+            entryStep.setRegion(_create_3);
             boolean _operator_and_1 = false;
             boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(target, null);
             if (!_operator_notEquals_2) {
@@ -398,25 +413,36 @@ public class ReactionBuilder {
               _operator_and_1 = BooleanExtensions.operator_and(_operator_notEquals_2, _operator_notEquals_3);
             }
             if (_operator_and_1) {
-              Sequence _enterSequence_3 = target.getEnterSequence();
-              Call _newCall_1 = this.mapping.newCall(_enterSequence_3);
-              entryStep.setInitialStep(_newCall_1);
+              {
+                boolean _isAddTraceSteps_2 = this.trace.isAddTraceSteps();
+                if (_isAddTraceSteps_2) {
+                  EList<Step> _steps_3 = seq.getSteps();
+                  EList<Transition> _outgoingTransitions_1 = e.getOutgoingTransitions();
+                  Transition _get_1 = _outgoingTransitions_1.get(0);
+                  Reaction _create_4 = this.mapping.create(_get_1);
+                  ReactionFired _newTraceReactionFired_1 = this.trace.newTraceReactionFired(_create_4);
+                  CollectionExtensions.<Step>operator_add(_steps_3, _newTraceReactionFired_1);
+                }
+                Sequence _enterSequence_3 = target.getEnterSequence();
+                Call _newCall_1 = this.mapping.newCall(_enterSequence_3);
+                entryStep.setInitialStep(_newCall_1);
+              }
             }
             EObject _eContainer_1 = e.eContainer();
             StateSwitch _defineShallowHistorySwitch = this.defineShallowHistorySwitch(((Region) _eContainer_1));
             final StateSwitch sSwitch = _defineShallowHistorySwitch;
             entryStep.setHistoryStep(sSwitch);
-            EList<Step> _steps_2 = seq.getSteps();
-            boolean _operator_add_1 = CollectionExtensions.<Step>operator_add(_steps_2, entryStep);
-            _xblockexpression_1 = (_operator_add_1);
+            EList<Step> _steps_4 = seq.getSteps();
+            boolean _operator_add_1 = CollectionExtensions.<Step>operator_add(_steps_4, entryStep);
+            _xblockexpression_2 = (_operator_add_1);
           }
-          _xifexpression_2 = _xblockexpression_1;
+          _xifexpression_2 = _xblockexpression_2;
         } else {
           Boolean _xifexpression_3 = null;
           EntryKind _kind_2 = e.getKind();
           boolean _operator_equals_2 = ObjectExtensions.operator_equals(_kind_2, EntryKind.DEEP_HISTORY);
           if (_operator_equals_2) {
-            boolean _xblockexpression_2 = false;
+            boolean _xblockexpression_3 = false;
             {
               SexecFactory _factory_1 = this.sexec.factory();
               HistoryEntry _createHistoryEntry_1 = _factory_1.createHistoryEntry();
@@ -424,8 +450,8 @@ public class ReactionBuilder {
               entryStep_1.setName("HistoryEntry");
               entryStep_1.setComment("Enter the region with deep history");
               EObject _eContainer_2 = e.eContainer();
-              ExecutionRegion _create_3 = this.mapping.create(((Region) _eContainer_2));
-              entryStep_1.setRegion(_create_3);
+              ExecutionRegion _create_5 = this.mapping.create(((Region) _eContainer_2));
+              entryStep_1.setRegion(_create_5);
               entryStep_1.setDeep(true);
               boolean _operator_and_2 = false;
               boolean _operator_notEquals_4 = ObjectExtensions.operator_notEquals(target, null);
@@ -437,19 +463,30 @@ public class ReactionBuilder {
                 _operator_and_2 = BooleanExtensions.operator_and(_operator_notEquals_4, _operator_notEquals_5);
               }
               if (_operator_and_2) {
-                Sequence _enterSequence_5 = target.getEnterSequence();
-                Call _newCall_2 = this.mapping.newCall(_enterSequence_5);
-                entryStep_1.setInitialStep(_newCall_2);
+                {
+                  boolean _isAddTraceSteps_3 = this.trace.isAddTraceSteps();
+                  if (_isAddTraceSteps_3) {
+                    EList<Step> _steps_5 = seq.getSteps();
+                    EList<Transition> _outgoingTransitions_2 = e.getOutgoingTransitions();
+                    Transition _get_2 = _outgoingTransitions_2.get(0);
+                    Reaction _create_6 = this.mapping.create(_get_2);
+                    ReactionFired _newTraceReactionFired_2 = this.trace.newTraceReactionFired(_create_6);
+                    CollectionExtensions.<Step>operator_add(_steps_5, _newTraceReactionFired_2);
+                  }
+                  Sequence _enterSequence_5 = target.getEnterSequence();
+                  Call _newCall_2 = this.mapping.newCall(_enterSequence_5);
+                  entryStep_1.setInitialStep(_newCall_2);
+                }
               }
               EObject _eContainer_3 = e.eContainer();
               StateSwitch _defineDeepHistorySwitch = this.defineDeepHistorySwitch(((Region) _eContainer_3));
               final StateSwitch sSwitch_1 = _defineDeepHistorySwitch;
               entryStep_1.setHistoryStep(sSwitch_1);
-              EList<Step> _steps_3 = seq.getSteps();
-              boolean _operator_add_2 = CollectionExtensions.<Step>operator_add(_steps_3, entryStep_1);
-              _xblockexpression_2 = (_operator_add_2);
+              EList<Step> _steps_6 = seq.getSteps();
+              boolean _operator_add_2 = CollectionExtensions.<Step>operator_add(_steps_6, entryStep_1);
+              _xblockexpression_3 = (_operator_add_2);
             }
-            _xifexpression_3 = _xblockexpression_2;
+            _xifexpression_3 = _xblockexpression_3;
           }
           _xifexpression_2 = _xifexpression_3;
         }
