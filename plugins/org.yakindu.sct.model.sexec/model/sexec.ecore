@@ -44,7 +44,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="exitSequence" eType="#//Sequence"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExecutionRegion" eSuperTypes="#//ExecutionScope"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionRegion" eSuperTypes="#//ExecutionScope">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="historyStateVector" eType="#//StateVector"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionEntry" eSuperTypes="#//ExecutionNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionChoice" eSuperTypes="#//ExecutionNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="Reaction" eSuperTypes="#//NamedElement #//MappedElement">

@@ -700,13 +700,22 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_REGION__EXIT_SEQUENCE = EXECUTION_SCOPE__EXIT_SEQUENCE;
 
 	/**
+	 * The feature id for the '<em><b>History State Vector</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_REGION__HISTORY_STATE_VECTOR = EXECUTION_SCOPE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Execution Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_REGION_FEATURE_COUNT = EXECUTION_SCOPE_FEATURE_COUNT + 0;
+	int EXECUTION_REGION_FEATURE_COUNT = EXECUTION_SCOPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionEntryImpl <em>Execution Entry</em>}' class.
@@ -2246,6 +2255,17 @@ public interface SexecPackage extends EPackage {
 	EClass getExecutionRegion();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionRegion#getHistoryStateVector <em>History State Vector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>History State Vector</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionRegion#getHistoryStateVector()
+	 * @see #getExecutionRegion()
+	 * @generated
+	 */
+	EReference getExecutionRegion_HistoryStateVector();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionEntry <em>Execution Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3130,6 +3150,14 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EXECUTION_REGION = eINSTANCE.getExecutionRegion();
+
+		/**
+		 * The meta object literal for the '<em><b>History State Vector</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_REGION__HISTORY_STATE_VECTOR = eINSTANCE.getExecutionRegion_HistoryStateVector();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionEntryImpl <em>Execution Entry</em>}' class.
