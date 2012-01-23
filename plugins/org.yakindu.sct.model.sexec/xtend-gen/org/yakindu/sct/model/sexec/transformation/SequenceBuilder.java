@@ -562,30 +562,33 @@ public class SequenceBuilder {
             String _name_2 = childLeaf.getName();
             String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, _name_2);
             seq.setComment(_operator_plus_3);
-            Step _entryAction = execChild.getEntryAction();
-            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_entryAction, null);
-            if (_operator_notEquals) {
-              EList<Step> _steps = seq.getSteps();
-              Step _entryAction_1 = execChild.getEntryAction();
-              Call _newCall = this.mapping.newCall(_entryAction_1);
-              CollectionExtensions.<Step>operator_add(_steps, _newCall);
-            }
-            if (this._addTraceSteps) {
-              EList<Step> _steps_1 = seq.getSteps();
-              TraceStateEntered _newTraceStateEntered = this.trace.newTraceStateEntered(execChild);
-              CollectionExtensions.<Step>operator_add(_steps_1, _newTraceStateEntered);
-            }
             boolean _isLeaf = execChild.isLeaf();
             if (_isLeaf) {
-              EList<Step> _steps_2 = seq.getSteps();
-              EnterState _newEnterStateStep = this.sexec.newEnterStateStep(execChild);
-              CollectionExtensions.<Step>operator_add(_steps_2, _newEnterStateStep);
+              EList<Step> _steps = seq.getSteps();
+              Sequence _enterSequence = execChild.getEnterSequence();
+              Call _newCall = this.mapping.newCall(_enterSequence);
+              CollectionExtensions.<Step>operator_add(_steps, _newCall);
             } else {
-              EList<Region> _regions = child.getRegions();
-              for (final Region childRegion : _regions) {
-                EList<Step> _steps_3 = seq.getSteps();
-                StateSwitch _defineDeepHistorySwitch = this.defineDeepHistorySwitch(childRegion, historyRegion);
-                CollectionExtensions.<Step>operator_add(_steps_3, _defineDeepHistorySwitch);
+              {
+                Step _entryAction = execChild.getEntryAction();
+                boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_entryAction, null);
+                if (_operator_notEquals) {
+                  EList<Step> _steps_1 = seq.getSteps();
+                  Step _entryAction_1 = execChild.getEntryAction();
+                  Call _newCall_1 = this.mapping.newCall(_entryAction_1);
+                  CollectionExtensions.<Step>operator_add(_steps_1, _newCall_1);
+                }
+                if (this._addTraceSteps) {
+                  EList<Step> _steps_2 = seq.getSteps();
+                  TraceStateEntered _newTraceStateEntered = this.trace.newTraceStateEntered(execChild);
+                  CollectionExtensions.<Step>operator_add(_steps_2, _newTraceStateEntered);
+                }
+                EList<Region> _regions = child.getRegions();
+                for (final Region childRegion : _regions) {
+                  EList<Step> _steps_3 = seq.getSteps();
+                  StateSwitch _defineDeepHistorySwitch = this.defineDeepHistorySwitch(childRegion, historyRegion);
+                  CollectionExtensions.<Step>operator_add(_steps_3, _defineDeepHistorySwitch);
+                }
               }
             }
             EList<StateCase> _cases = sSwitch.getCases();

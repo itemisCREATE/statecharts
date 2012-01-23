@@ -10,18 +10,24 @@ import java.sql.CallableStatement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
+import org.yakindu.sct.model.sexec.HistoryEntry;
+import org.yakindu.sct.model.sexec.Reaction;
+import org.yakindu.sct.model.sexec.SaveHistory;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.Trace;
+import org.yakindu.sct.model.sexec.transformation.test.Assert.StepNode;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.stext.stext.Assignment;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
@@ -184,8 +190,14 @@ public class Assert {
 		return step.toString();
 	}
 
+	public static void assertClass(Class<?> clazz, Object actual) {
+		assertTrue(clazz.getSimpleName() + " expected, but got "
+				+ actual.getClass().getSimpleName(), clazz.isInstance(actual));
+
+	}
+
 	public static void assertedOrder(Step step,
-			List<? extends ExecutionState> currentStates,
+			Collection<? extends ExecutionState> currentStates,
 			List<? extends StepNode> requiredSteps) {
 		assertedOrder_intern(step, currentStates, requiredSteps);
 		if (!requiredSteps.isEmpty()) {
@@ -194,53 +206,78 @@ public class Assert {
 	}
 
 	private static void assertedOrder_intern(Step step,
-			List<? extends ExecutionState> currentStates,
+			Collection<? extends ExecutionState> currentStates,
 			List<? extends StepNode> requiredSteps) {
 		if (requiredSteps.isEmpty()) {
 			return;
 		}
 		boolean found = false;
 
-		if (step == requiredSteps.get(0).step) {
+		Iterable<Step> next = null;
+		if (requiredSteps.get(0).matches(step)) {
 			found = true;
-			StepNode removed = requiredSteps.remove(0);
-			if (removed instanceof StepLeaf) {
+			StepNode matched = requiredSteps.remove(0);
+			if (matched.isLeaf()) {
 				return;
 			}
+			next = matched.next();
 		}
-		if (step instanceof Sequence) {
-			for (Step subStep : ((Sequence) step).getSteps()) {
-				assertedOrder_intern(subStep, currentStates, requiredSteps);
+		if (next == null) {
+			next = findNext(step, currentStates, requiredSteps);
+		}
+		if (next != null) {
+			for (Step s : next) {
+				assertedOrder_intern(s, currentStates, requiredSteps);
 			}
+		} else if (found == false) {
+			fail("Step without match: " + step);
+		}
+	}
+
+	protected static Iterable<Step> findNext(Step step,
+			Collection<? extends ExecutionState> currentStates,
+			List<? extends StepNode> requiredSteps) {
+		if (step instanceof Sequence) {
+			return ((Sequence) step).getSteps();
 		} else if (step instanceof Call) {
-			assertedOrder_intern(((Call) step).getStep(), currentStates,
-					requiredSteps);
+			return Collections.singleton(((Call) step).getStep());
 		} else if (step instanceof StateSwitch) {
 			StateCase stateCase = null;
 			StringBuilder sb = new StringBuilder();
 			for (StateCase caze : ((StateSwitch) step).getCases()) {
 				sb.append(", " + caze.getState().getName());
 				if (stateCase == null
-						&& caze.getState() == currentStates.get(0)) {
-					currentStates.remove(0);
+						&& currentStates.contains(caze.getState())) {
 					stateCase = caze;
 				}
 			}
 			assertNotNull("No state case found for " + currentStates + " in "
 					+ sb.toString(), stateCase);
-			assertedOrder_intern(stateCase.getStep(), currentStates,
-					requiredSteps);
-		} else if (found == false) {
-			fail("Step without match: " + step);
+			return Collections.singleton(stateCase.getStep());
 		}
+		return null;
 	}
 
 	public static class StepNode {
 		public final Step step;
+		protected boolean leaf;
+
+		public boolean matches(Step s) {
+			return s == step;
+		}
+
+		public boolean isLeaf() {
+			return leaf;
+		}
+
+		public Iterable<Step> next() {
+			return null;
+		}
 
 		public StepNode(Step step) {
 			assertNotNull(step);
 			this.step = step;
+			leaf = false;
 		}
 
 		@Override
@@ -252,6 +289,29 @@ public class Assert {
 	public static class StepLeaf extends StepNode {
 		public StepLeaf(Step step) {
 			super(step);
+			leaf = true;
+		}
+	}
+
+	public static class StepHistory extends StepNode {
+		private final boolean history;
+
+		public StepHistory(Step step, boolean withHistory) {
+			super(step);
+			this.history = withHistory;
+			leaf = false;
+			assertClass(HistoryEntry.class, step);
+		}
+
+		@Override
+		public Iterable<Step> next() {
+			if (history) {
+				return Collections.singleton(((HistoryEntry) step)
+						.getHistoryStep());
+			} else {
+				return Collections.singleton(((HistoryEntry) step)
+						.getInitialStep());
+			}
 		}
 	}
 }
