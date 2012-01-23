@@ -125,7 +125,7 @@ import org.yakindu.sct.model.sexec.ExecutionEntry
 	def ExecutionRegion create r : sexecFactory.createExecutionRegion create(Region region){
 		if (region != null) {
 			r.name =  region.name
-			r.sourceElement = region	
+			r.sourceElement = region
 		}
 	}
 	
