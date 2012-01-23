@@ -35,7 +35,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionScope/enterSequence"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionScope/exitSequence"/>
     </genClasses>
-    <genClasses ecoreClass="sexec.ecore#//ExecutionRegion"/>
+    <genClasses ecoreClass="sexec.ecore#//ExecutionRegion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionRegion/historyStateVector"/>
+    </genClasses>
     <genClasses ecoreClass="sexec.ecore#//ExecutionEntry"/>
     <genClasses ecoreClass="sexec.ecore#//ExecutionChoice"/>
     <genClasses ecoreClass="sexec.ecore#//Reaction">

@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -20,7 +21,9 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
+import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.SexecPackage;
 
 /**
@@ -63,6 +66,36 @@ public class ExecutionRegionItemProvider
 	}
 
 	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_REGION__HISTORY_STATE_VECTOR);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
+	}
+
+	/**
 	 * This returns ExecutionRegion.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -97,6 +130,12 @@ public class ExecutionRegionItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(ExecutionRegion.class)) {
+			case SexecPackage.EXECUTION_REGION__HISTORY_STATE_VECTOR:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
@@ -110,6 +149,11 @@ public class ExecutionRegionItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_REGION__HISTORY_STATE_VECTOR,
+				 SexecFactory.eINSTANCE.createStateVector()));
 	}
 
 	/**
@@ -124,6 +168,8 @@ public class ExecutionRegionItemProvider
 		Object childObject = child;
 
 		boolean qualify =
+			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR ||
+			childFeature == SexecPackage.Literals.EXECUTION_REGION__HISTORY_STATE_VECTOR ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE;
 
