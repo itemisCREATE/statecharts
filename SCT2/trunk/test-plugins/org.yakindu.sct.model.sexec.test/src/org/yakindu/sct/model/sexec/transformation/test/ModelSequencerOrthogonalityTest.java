@@ -22,6 +22,7 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 
@@ -1219,7 +1220,7 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 		assertEquals("wrong steps: " + stepListAsString(_exit), 2, _exit
 				.getSteps().size());
 
-		assertedOrder(_exit, Lists.newArrayList(_s1a1a1a, _s1a1a2a, _s1a2a1a,
+		assertedOrder(_exit, Sets.newHashSet(_s1a1a1a, _s1a1a2a, _s1a2a1a,
 				_s1a2a2a, _s2a1a1a, _s2a1a2a, _s2a2a1a, _s2a2a2a),
 				Lists.newArrayList(new StepLeaf(_s1a1a1a.getExitSequence()),
 						new StepLeaf(_s1a1a2a.getExitSequence()), //

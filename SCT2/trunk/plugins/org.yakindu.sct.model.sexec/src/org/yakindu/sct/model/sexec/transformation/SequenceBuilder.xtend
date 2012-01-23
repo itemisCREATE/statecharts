@@ -283,11 +283,11 @@ class SequenceBuilder {
 				val seq = sexec.factory.createSequence
 				seq.name = "enterSequence"
 				seq.comment = "enterSequence with history in child " + child.name+" for leaf "+childLeaf.name
-				if (execChild.entryAction != null ) seq.steps += execChild.entryAction.newCall
-				if ( _addTraceSteps ) seq.steps += execChild.newTraceStateEntered
 				if ( execChild.leaf ) {
-					seq.steps += execChild.newEnterStateStep
+					seq.steps += execChild.enterSequence.newCall
 				} else {
+					if (execChild.entryAction != null ) seq.steps += execChild.entryAction.newCall
+					if ( _addTraceSteps ) seq.steps += execChild.newTraceStateEntered
 					for (childRegion : child.regions) {
 						seq.steps += childRegion.defineDeepHistorySwitch(historyRegion)
 					}
