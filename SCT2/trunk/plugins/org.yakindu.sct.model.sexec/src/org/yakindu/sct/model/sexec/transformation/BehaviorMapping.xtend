@@ -39,6 +39,7 @@ import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.Entry
+import org.yakindu.sct.model.sexec.ExecutionChoice
  
 
 class BehaviorMapping {
@@ -82,17 +83,22 @@ class BehaviorMapping {
 		if (seq.steps.size > 0) seq else null
 	}	
 
+	def ExecutionFlow mapChoiceTransitions(Statechart statechart, ExecutionFlow r) {
+		statechart.allChoices.forEach( choice | choice.mapChoiceTransition);		
+		return r
+	}
 
-
-
+	def ExecutionChoice mapChoiceTransition(Choice choice) {
+		val _choice = choice.create
+		_choice.reactions.addAll( choice.outgoingTransitions.map(t | t.mapTransition) )
+		return _choice
+	}
 
 	def ExecutionFlow mapExitActions(Statechart statechart, ExecutionFlow r){
 		val allStates = statechart.allRegularStates.filter(typeof(State))
 		allStates.forEach( s | { s.create.exitAction = s.mapExitAction() null } )
 		return r
 	}
-
-
 
 	/** 
 	 * The exit action sequence of a state consist all action that are specified with the 'exit' pseudo trigger within local reactions

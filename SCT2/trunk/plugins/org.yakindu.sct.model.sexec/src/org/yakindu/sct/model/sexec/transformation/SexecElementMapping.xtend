@@ -55,6 +55,7 @@ import org.yakindu.sct.model.stext.stext.OperationCall
 import org.yakindu.sct.model.stext.stext.Operation
 import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sexec.ExecutionEntry
+import org.yakindu.sct.model.sgraph.EntryKind
  
 
 @Singleton class SexecElementMapping {
@@ -117,7 +118,16 @@ import org.yakindu.sct.model.sexec.ExecutionEntry
 			r.simpleName = {if (regionName!= null)regionName else ""}+"_"+{if (stateName!= null)stateName else ""}+"_"+entryName
 			r.name = entry.fullyQualifiedName.toString.replaceAll(" ", "")	
 			r.sourceElement = entry	
-			r.reactSequence = sexecFactory.createSequence
+			val seq = sexec.factory.createSequence
+			seq.name = "react"
+			seq.comment = "Default react sequence for "+switch (entry.kind) {
+					case EntryKind::INITIAL: "initial "
+					case EntryKind::DEEP_HISTORY: "deep history "
+					case EntryKind::SHALLOW_HISTORY: "shallow history "
+					default: ""
+				}+"entry " + entry.name
+
+			r.reactSequence = seq
 		}
 	}
 	
