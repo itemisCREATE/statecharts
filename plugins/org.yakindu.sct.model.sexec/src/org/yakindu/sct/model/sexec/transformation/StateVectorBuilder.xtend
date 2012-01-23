@@ -1,5 +1,7 @@
 package org.yakindu.sct.model.sexec.transformation
 
+import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
+
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Region
@@ -10,6 +12,9 @@ import com.google.inject.Inject
 import org.yakindu.sct.model.sexec.StateVector
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Choice
+import org.yakindu.sct.model.sexec.ExecutionRegion
+import org.yakindu.sct.model.sgraph.EntryKind
+import org.yakindu.sct.model.sgraph.Entry
 
 class StateVectorBuilder {
 	
@@ -28,6 +33,20 @@ class StateVectorBuilder {
 		flow.stateVector.offset = 0;
 		flow.stateVector.size = offset			
 	}
+	def defineHistoryStateVector(ExecutionFlow flow, Statechart sc) {
+		for (Region r : sc.allContentsIterable.filter(typeof(Region))) {
+			val execRegion = r.create
+			if (r.vertices.filter(typeof(Entry)).exists(v|v.kind== EntryKind::DEEP_HISTORY)) {
+				execRegion.historyStateVector = sexec.factory.createStateVector
+				execRegion.historyStateVector.offset = execRegion.stateVector.offset;
+				execRegion.historyStateVector.size = execRegion.stateVector.size
+			} else if (r.vertices.filter(typeof(Entry)).exists(v|v.kind== EntryKind::SHALLOW_HISTORY)) {
+				execRegion.historyStateVector = sexec.factory.createStateVector
+				execRegion.historyStateVector.offset = execRegion.stateVector.offset;
+				execRegion.historyStateVector.size = 1
+			}
+		}
+	}
  
 
 	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of the statechart */
@@ -44,7 +63,7 @@ class StateVectorBuilder {
 		val er = r.create
 		er.stateVector = sexec.factory.createStateVector
 		er.stateVector.offset = offset;
-		er.stateVector.size = maxOrthogonality			
+		er.stateVector.size = maxOrthogonality
 	
 		return maxOrthogonality
 	}

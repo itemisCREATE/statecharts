@@ -111,6 +111,7 @@ class ModelSequencer {
 
 		// calculate state vectors
 		ef.defineStateVector(sc)
+		ef.defineHistoryStateVector(sc)
 		
 		// derive all additional information that is necessary for the execution
 		sc.mapEntryActions(ef)
