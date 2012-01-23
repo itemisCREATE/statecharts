@@ -208,18 +208,18 @@ public class StructureMapping {
   
   public ExecutionFlow mapPseudoStates(final Statechart statechart, final ExecutionFlow r) {
     {
-      List<Choice> _allChoices = this.sct.allChoices(statechart);
-      final List<Choice> allChoices = _allChoices;
+      Iterable<Choice> _allChoices = this.sct.allChoices(statechart);
+      final Iterable<Choice> allChoices = _allChoices;
       EList<ExecutionNode> _nodes = r.getNodes();
-      List<Choice> _allChoices_1 = this.sct.allChoices(statechart);
+      Iterable<Choice> _allChoices_1 = this.sct.allChoices(statechart);
       final Function1<Choice,ExecutionChoice> _function = new Function1<Choice,ExecutionChoice>() {
           public ExecutionChoice apply(final Choice choice) {
             ExecutionChoice _create = StructureMapping.this.mapping.create(choice);
             return _create;
           }
         };
-      List<ExecutionChoice> _map = ListExtensions.<Choice, ExecutionChoice>map(_allChoices_1, _function);
-      _nodes.addAll(_map);
+      Iterable<ExecutionChoice> _map = IterableExtensions.<Choice, ExecutionChoice>map(_allChoices_1, _function);
+      CollectionExtensions.<ExecutionNode>addAll(_nodes, _map);
       EList<ExecutionNode> _nodes_1 = r.getNodes();
       Iterable<Entry> _allEntries = this.sct.allEntries(statechart);
       final Function1<Entry,ExecutionEntry> _function_1 = new Function1<Entry,ExecutionEntry>() {

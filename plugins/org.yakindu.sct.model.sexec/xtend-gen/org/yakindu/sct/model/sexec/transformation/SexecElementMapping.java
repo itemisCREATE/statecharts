@@ -35,6 +35,7 @@ import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
 import org.yakindu.sct.model.sexec.transformation.StextExtensions;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
+import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.Region;
@@ -347,9 +348,41 @@ public class SexecElementMapping {
         String _replaceAll = _string.replaceAll(" ", "");
         r.setName(_replaceAll);
         r.setSourceElement(entry);
-        SexecFactory _sexecFactory_1 = this.sexecFactory();
-        Sequence _createSequence = _sexecFactory_1.createSequence();
-        r.setReactSequence(_createSequence);
+        SexecFactory _factory = this.sexec.factory();
+        Sequence _createSequence = _factory.createSequence();
+        final Sequence seq = _createSequence;
+        seq.setName("react");
+        String _switchResult = null;
+        EntryKind _kind = entry.getKind();
+        final EntryKind __valOfSwitchOver = _kind;
+        boolean matched = false;
+        if (!matched) {
+          if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,EntryKind.INITIAL)) {
+            matched=true;
+            _switchResult = "initial ";
+          }
+        }
+        if (!matched) {
+          if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,EntryKind.DEEP_HISTORY)) {
+            matched=true;
+            _switchResult = "deep history ";
+          }
+        }
+        if (!matched) {
+          if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,EntryKind.SHALLOW_HISTORY)) {
+            matched=true;
+            _switchResult = "shallow history ";
+          }
+        }
+        if (!matched) {
+          _switchResult = "";
+        }
+        String _operator_plus_4 = StringExtensions.operator_plus("Default react sequence for ", _switchResult);
+        String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, "entry ");
+        String _name_4 = entry.getName();
+        String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, _name_4);
+        seq.setComment(_operator_plus_6);
+        r.setReactSequence(seq);
       }
     }
     return r;

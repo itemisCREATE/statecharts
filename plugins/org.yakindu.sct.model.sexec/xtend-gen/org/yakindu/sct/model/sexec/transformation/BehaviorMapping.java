@@ -185,6 +185,38 @@ public class BehaviorMapping {
     return _xblockexpression;
   }
   
+  public ExecutionFlow mapChoiceTransitions(final Statechart statechart, final ExecutionFlow r) {
+    {
+      Iterable<Choice> _allChoices = this.sc.allChoices(statechart);
+      final Function1<Choice,ExecutionChoice> _function = new Function1<Choice,ExecutionChoice>() {
+          public ExecutionChoice apply(final Choice choice) {
+            ExecutionChoice _mapChoiceTransition = BehaviorMapping.this.mapChoiceTransition(choice);
+            return _mapChoiceTransition;
+          }
+        };
+      IterableExtensions.<Choice>forEach(_allChoices, _function);
+      return r;
+    }
+  }
+  
+  public ExecutionChoice mapChoiceTransition(final Choice choice) {
+    {
+      ExecutionChoice _create = this.factory.create(choice);
+      final ExecutionChoice _choice = _create;
+      EList<Reaction> _reactions = _choice.getReactions();
+      EList<Transition> _outgoingTransitions = choice.getOutgoingTransitions();
+      final Function1<Transition,Reaction> _function = new Function1<Transition,Reaction>() {
+          public Reaction apply(final Transition t) {
+            Reaction _mapTransition = BehaviorMapping.this.mapTransition(t);
+            return _mapTransition;
+          }
+        };
+      List<Reaction> _map = ListExtensions.<Transition, Reaction>map(_outgoingTransitions, _function);
+      _reactions.addAll(_map);
+      return _choice;
+    }
+  }
+  
   public ExecutionFlow mapExitActions(final Statechart statechart, final ExecutionFlow r) {
     {
       List<RegularState> _allRegularStates = this.sc.allRegularStates(statechart);

@@ -1,5 +1,7 @@
 package org.yakindu.sct.model.sexec.transformation
 
+import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
+
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.Vertex
@@ -124,22 +126,16 @@ class StatechartExtensions {
 		return allRegions.toList
 	}
 	
-	
-	
-	def List<Choice> allChoices(Statechart sc) {
+	def Iterable<Choice> allChoices(Statechart sc) {
 		var content = EcoreUtil2::eAllContentsAsList(sc)
 		val allChoices = content.filter( typeof(Choice) )
 		
-		return allChoices.toList
+		return allChoices
 	}
 
 	def Iterable<Entry> allEntries(Statechart sc) {
-		var content = EcoreUtil2::eAllContentsAsList(sc)
-		val allEntries = content.filter( typeof(Entry) )
-		
-		return allEntries
+		return sc.allContentsIterable.filter( typeof(Entry) )
 	}
-	
 	
 	def List<LocalReaction> entryReactions(State state) {
 		state.localReactions

@@ -12,6 +12,7 @@ import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xtend2.lib.EObjectExtensions;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Reaction;
@@ -228,25 +229,20 @@ public class StatechartExtensions {
     }
   }
   
-  public List<Choice> allChoices(final Statechart sc) {
+  public Iterable<Choice> allChoices(final Statechart sc) {
     {
       List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(sc);
       List<EObject> content = _eAllContentsAsList;
       Iterable<Choice> _filter = IterableExtensions.<Choice>filter(content, org.yakindu.sct.model.sgraph.Choice.class);
       final Iterable<Choice> allChoices = _filter;
-      List<Choice> _list = IterableExtensions.<Choice>toList(allChoices);
-      return _list;
+      return allChoices;
     }
   }
   
   public Iterable<Entry> allEntries(final Statechart sc) {
-    {
-      List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(sc);
-      List<EObject> content = _eAllContentsAsList;
-      Iterable<Entry> _filter = IterableExtensions.<Entry>filter(content, org.yakindu.sct.model.sgraph.Entry.class);
-      final Iterable<Entry> allEntries = _filter;
-      return allEntries;
-    }
+    Iterable<EObject> _allContentsIterable = EObjectExtensions.allContentsIterable(sc);
+    Iterable<Entry> _filter = IterableExtensions.<Entry>filter(_allContentsIterable, org.yakindu.sct.model.sgraph.Entry.class);
+    return _filter;
   }
   
   public List<LocalReaction> entryReactions(final State state) {

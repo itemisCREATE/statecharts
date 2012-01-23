@@ -64,28 +64,8 @@ class SequenceBuilder {
 //				seq.steps.add(entryState.enterSequence.newCall);
 		execState.enterSequence = seq
 	}
-	
 
-	/**
-	 * For entries the EnterSequence is the react part which must be defined before
-	 * the target sequence can be calculated.
-	 */
-	def dispatch void defineStateEnterSequence(Entry e) {
-		val execEntry = e.create
-		val seq = sexec.factory.createSequence
-		seq.name = "react"
-		seq.comment = "Default react sequence for "+switch (e.kind) {
-				case EntryKind::INITIAL: "initial "
-				case EntryKind::DEEP_HISTORY: "deep history "
-				case EntryKind::SHALLOW_HISTORY: "shallow history "
-				default: ""
-			}+"entry " + e.name
-
-		execEntry.reactSequence = seq
-	}
-
-	def dispatch void defineStateEnterSequence(Vertex v) {
-	}	
+	def dispatch void defineStateEnterSequence(Vertex v) {}	
 	
 	
 	def dispatch void defineStateEnterSequence(FinalState state) {
@@ -172,50 +152,6 @@ class SequenceBuilder {
 	
 	def dispatch void defineStateExitSequence(Vertex v) {}
 
-	def dispatch void defineStateExitSequence(Entry e) {
-		val execEntry = e.create
-		//Reuse already created react sequence from defineStateEnterSequence(Entry) 
-		val seq = execEntry.reactSequence
-		val target = e.target.create
-		
-		if (e.kind == EntryKind::INITIAL) {
-			if (target != null && target.enterSequence != null) {
-				seq.steps += target.enterSequence.newCall
-			}
-		} else if (e.kind == EntryKind::SHALLOW_HISTORY) {
-			val entryStep = sexec.factory.createHistoryEntry
-			entryStep.name = "HistoryEntry"
-			entryStep.comment = "Enter the region with shallow history"
-			entryStep.deep = false
-			entryStep.region = (e.eContainer as Region).create
-			
-			//Initial step, if no history is known
-			if (target != null && target.enterSequence != null) {
-				entryStep.initialStep = target.enterSequence.newCall
-			}
-			val sSwitch = (e.eContainer as Region).defineShallowHistorySwitch()
-			entryStep.historyStep = sSwitch
-			
-			seq.steps += entryStep
-		} else if (e.kind == EntryKind::DEEP_HISTORY) {
-			val entryStep = sexec.factory.createHistoryEntry
-			entryStep.name = "HistoryEntry"
-			entryStep.comment = "Enter the region with deep history"
-			entryStep.region = (e.eContainer as Region).create
-			entryStep.deep = true
-			
-			//Initial step, if no history is known
-			if (target != null && target.enterSequence != null) {
-				entryStep.initialStep = target.enterSequence.newCall
-			}
-			val sSwitch = (e.eContainer as Region).defineDeepHistorySwitch()
-			entryStep.historyStep = sSwitch
-
-			seq.steps += entryStep
-		}
-		
-	}
-	
 	def dispatch void defineStateExitSequence(FinalState s) {
 		val execState = s.create
 		val seq = sexec.factory.createSequence
@@ -259,66 +195,7 @@ class SequenceBuilder {
 		
 		execState.exitSequence = seq
 	}
-	
-	
-	
-	/**
-	 * Enter switch for a region with a deep history, which must be save before
-	 */
-	def StateSwitch defineDeepHistorySwitch(Region r) {
-		r.defineDeepHistorySwitch(r.create)
-	}
-	
-	def StateSwitch defineDeepHistorySwitch(Region r, ExecutionRegion historyRegion) {
-		val execRegion = r.create
-		
-		val StateSwitch sSwitch = sexec.factory.createStateSwitch
-		sSwitch.stateConfigurationIdx = execRegion.stateVector.offset
-		sSwitch.comment = "Handle shallow history entry of " +r.name
-		sSwitch.historyRegion = historyRegion
-		
-		for (child : r.vertices.filter(typeof(State))) {
-			for (childLeaf : child.collectLeafStates(newArrayList).filter(c|c.create.stateVector.offset == sSwitch.stateConfigurationIdx)) {
-				val execChild = child.create
-				val seq = sexec.factory.createSequence
-				seq.name = "enterSequence"
-				seq.comment = "enterSequence with history in child " + child.name+" for leaf "+childLeaf.name
-				if ( execChild.leaf ) {
-					seq.steps += execChild.enterSequence.newCall
-				} else {
-					if (execChild.entryAction != null ) seq.steps += execChild.entryAction.newCall
-					if ( _addTraceSteps ) seq.steps += execChild.newTraceStateEntered
-					for (childRegion : child.regions) {
-						seq.steps += childRegion.defineDeepHistorySwitch(historyRegion)
-					}
-				}
-				sSwitch.cases += childLeaf.create.newCase(seq)
-			}
-		}
-		
-		return sSwitch
-	}
 
-	/**
-	 * Enter switch for a region with a shallow history, which must be save before
-	 */
-	def StateSwitch defineShallowHistorySwitch(Region r) {
-		val execRegion = r.create
-		
-		val StateSwitch sSwitch = sexec.factory.createStateSwitch
-		sSwitch.stateConfigurationIdx = execRegion.stateVector.offset
-		sSwitch.comment = "Handle shallow history entry of " +r.name
-		sSwitch.historyRegion = r.create
-		
-		for (child : r.vertices.filter(typeof(State))) {
-			val execChild = child.create
-			for (childLeaf : child.collectLeafStates(newArrayList).filter(c|c.create.stateVector.offset == sSwitch.stateConfigurationIdx)) {
-				sSwitch.cases += childLeaf.create.newCase(execChild.enterSequence.newCall)
-			}
-		}
-		
-		return sSwitch
-	}
 	def StateSwitch defineExitSwitch(ExecutionScope state, Iterable<ExecutionState> leafStates, int pos) {
 
 		// create a state switch

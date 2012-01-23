@@ -86,6 +86,7 @@ class ModelSequencer {
 	@Inject extension SexecExtensions sexec
 	@Inject extension StructureMapping structureMapping
 	@Inject extension BehaviorMapping behaviorMapping
+	@Inject extension ReactionBuilder reactBuilder
 	@Inject extension SequenceBuilder seqBuilder
 	@Inject extension StateVectorBuilder svBuilder
 	@Inject extension TraceExtensions trace
@@ -126,6 +127,7 @@ class ModelSequencer {
 		sc.mapLocalReactions(ef)
 		sc.mapChoiceTransitions(ef)
 		
+		sc.defineEntryReactions(ef)
 		ef.defineRegularStateReactions(sc)
 		ef.definePseudoStateReactions(sc)
 		
@@ -139,118 +141,6 @@ class ModelSequencer {
 		return ef
 	}
 
-
-	/* ==========================================================================
-	 * STRUCTURAL MAPPING
-	 */
-
-	def ExecutionFlow mapChoiceTransitions(Statechart statechart, ExecutionFlow r) {
-		statechart.allChoices.forEach( choice | choice.mapChoiceTransition);		
-		return r
-	}
-
-	def ExecutionChoice mapChoiceTransition(Choice choice) {
-		val _choice = choice.create
-		_choice.reactions.addAll( choice.outgoingTransitions.map(t | t.mapTransition) )
-		return _choice
-	}
-
-	def defineRegularStateReactions(ExecutionFlow flow, Statechart sc) {
-		
-		val states = sc.allRegularStates
-		
-		states.filter(typeof(State)).filter(s | s.simple).forEach(s | defineCycle(s))
-		states.filter(typeof(FinalState)).forEach(s | defineCycle(s))
-		
-		return flow
-	}
-	
-
-	def definePseudoStateReactions(ExecutionFlow flow, Statechart sc) {
-		
-		sc.allChoices().forEach( choice | choice.defineReaction() )
-	}
-	
-
-	def Sequence defineReaction(Choice choice) {
-	
-		val execChoice = choice.create
-		
-		// move the default transition to the end of the reaction list
-		val _default_ = execChoice.reactions.filter([ r | r.check.alwaysTrue ]).toList.head
-		if ( _default_ != null ) execChoice.reactions.move(execChoice.reactions.size -1, _default_)
-		// TODO: raise an error if no default exists 
-		
-		val stateReaction = execChoice.createReactionSequence(null)
-		execChoice.reactSequence.steps.addAll(stateReaction.steps)
-
-		execChoice.reactSequence.name = 'react'
-		execChoice.reactSequence.comment = 'The reactions of state ' + choice.name + '.'
-		
-		if ( _addTraceSteps ) execChoice.reactSequence.steps.add(0,choice.create.newTraceNodeExecuted)
-		
-		return execChoice.reactSequence
-	}	
-	
-
-	def alwaysTrue(Check check) {
-		if (check != null && check.condition instanceof PrimitiveValueExpression) {
-			val pve = (check.condition as PrimitiveValueExpression)
-			return ( pve.value instanceof BoolLiteral && ( pve.value as BoolLiteral ).value )
-		} 
-		
-		return false
-	}
-
-
-
-	def Sequence defineCycle(RegularState state) {
-	
-		val execState = state.create
-		val stateReaction = execState.createReactionSequence(null)
-		val parents = state.parentStates		
-		execState.reactSequence = parents.fold(null, [r, s | {
-			s.create.createReactionSequence(r)
-		}])
-		
-		execState.reactSequence.name = 'react'
-		execState.reactSequence.comment = 'The reactions of state ' + state.name + '.'
-		
-		return execState.reactSequence
-	}	
-	
-
-	def Sequence createReactionSequence(ExecutionNode state, Step localStep) {	
-		val cycle = sexec.factory.createSequence
-				
-		val localReactions = state.reactions.filter(r | ! r.transition).toList
-		var localSteps = sexec.factory.createSequence
-		localSteps.steps.addAll(localReactions.map(lr | {
-				var ifStep = sexec.factory.createIf
-				ifStep.check = lr.check.newRef		
-				ifStep.thenStep = lr.effect.newCall
-				ifStep
-		}))
-		if (localStep != null) localSteps.steps += localStep
-		if (localSteps.steps.empty) localSteps = null
-				
-				
-		val transitionReactions = state.reactions.filter(r | r.transition).toList
-		val transitionStep = transitionReactions.reverseView.fold(localSteps as Step, [s, reaction | {
-				var ifStep = sexec.factory.createIf
-				ifStep.check = reaction.check.newRef		
-				ifStep.thenStep = reaction.effect.newCall
-				ifStep.elseStep = s
-				ifStep as Step
-			}])
-
-	
-		if (transitionStep != null) cycle.steps.add(transitionStep)		
-		else if (localSteps != null) cycle.steps.add(localSteps)
-		
-		return cycle
-	}
-	
 	/************** retarget declaration refs **************/
 	
 	def retargetDeclRefs(ExecutionFlow flow) {
