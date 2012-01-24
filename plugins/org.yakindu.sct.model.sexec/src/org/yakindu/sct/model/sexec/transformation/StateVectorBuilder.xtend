@@ -24,7 +24,7 @@ class StateVectorBuilder {
 	@Inject extension SgraphExtensions sgraph
 	
 	def defineHistoryVector(ExecutionFlow flow, Statechart sc) {
-		var offset = 0
+		var offset = -1
 		for ( r : sc.allContentsIterable.filter(typeof(Region)) ) {
 			if (r.requireHistory) {
 				offset = offset+1
@@ -37,7 +37,7 @@ class StateVectorBuilder {
 		
 		flow.historyVector = sexec.factory.createStateVector
 		flow.historyVector.offset = 0;
-		flow.historyVector.size = offset
+		flow.historyVector.size = offset+1
 	}
 
 	def defineStateVector(ExecutionFlow flow, Statechart sc) {

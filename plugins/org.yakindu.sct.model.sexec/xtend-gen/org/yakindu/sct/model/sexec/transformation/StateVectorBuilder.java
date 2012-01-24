@@ -42,7 +42,8 @@ public class StateVectorBuilder {
   
   public void defineHistoryVector(final ExecutionFlow flow, final Statechart sc) {
     {
-      int offset = 0;
+      int _operator_minus = IntegerExtensions.operator_minus(1);
+      int offset = _operator_minus;
       Iterable<EObject> _allContentsIterable = EObjectExtensions.allContentsIterable(sc);
       Iterable<Region> _filter = IterableExtensions.<Region>filter(_allContentsIterable, org.yakindu.sct.model.sgraph.Region.class);
       for (final Region r : _filter) {
@@ -69,7 +70,8 @@ public class StateVectorBuilder {
       StateVector _historyVector_2 = flow.getHistoryVector();
       _historyVector_2.setOffset(0);
       StateVector _historyVector_3 = flow.getHistoryVector();
-      _historyVector_3.setSize(offset);
+      int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)offset), ((Integer)1));
+      _historyVector_3.setSize(_operator_plus_1);
     }
   }
   
