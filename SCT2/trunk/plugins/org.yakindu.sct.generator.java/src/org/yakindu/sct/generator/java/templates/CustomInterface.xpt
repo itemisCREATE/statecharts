@@ -41,6 +41,14 @@ public interface «getInterfaceName()»«getInterfaceExtension(entry)» {
 	}
 	«ENDIF-»
 	
+	«IF entry.createInterfaceObserverSupport() && declarations.typeSelect(VariableDefinition).size > 0-»
+	public enum Variables {
+		«FOREACH declarations.typeSelect(VariableDefinition) AS variable-»
+		«variable.name.toFirstUpper()»,
+		«ENDFOREACH-»
+	}
+	«ENDIF-»
+	
 	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
 	«IF  event.direction ==  Direction::IN-»
 		«IF !event.type.isVoid()-»

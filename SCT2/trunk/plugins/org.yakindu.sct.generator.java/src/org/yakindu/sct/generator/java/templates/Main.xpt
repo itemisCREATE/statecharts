@@ -29,6 +29,7 @@ Contributors:
 	
 	«IF entry.createRuntimeService()»
 		«EXPAND RuntimeService::file(entry) FOR this»
+		«EXPAND RuntimeCycleNotification::file(entry) FOR this»
 	«ENDIF»
 	
 	«EXPAND Event::file(entry) FOR this»
@@ -40,6 +41,8 @@ Contributors:
 	«EXPAND TimeEvent::file(entry) FOR this»
 	
 	«EXPAND EventNotification::file(entry) FOR this»
+	
+	«EXPAND VariableNotification::file(entry) FOR this»
 	
 	«EXPAND INotificationListener::file(entry) FOR this»
 	

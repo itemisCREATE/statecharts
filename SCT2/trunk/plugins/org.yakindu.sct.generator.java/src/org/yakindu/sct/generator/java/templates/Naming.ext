@@ -165,7 +165,7 @@ String getInterfaceExtension(Scope this, GeneratorEntry entry):
 		null;
 		
 String getInterfaceImplExtension(Scope this, GeneratorEntry entry):
-	if (hasOutgoingEvents() && entry.createInterfaceObserverSupport()) then
+	if ((hasVariables() || hasOutgoingEvents()) && entry.createInterfaceObserverSupport()) then
 		" extends NotificationSender"
 	else
 		null;

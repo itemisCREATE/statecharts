@@ -48,6 +48,9 @@ boolean hasOutgoingValuedEvents(Scope this) :
 
 boolean hasEvents(Scope this) :
 	!declarations.typeSelect(EventDefinition).isEmpty;
+	
+boolean hasVariables(Scope this) :
+	!declarations.typeSelect(VariableDefinition).isEmpty;
 
 boolean hasHistory(ExecutionFlow this) :
 	!getHistoryRegions().isEmpty;

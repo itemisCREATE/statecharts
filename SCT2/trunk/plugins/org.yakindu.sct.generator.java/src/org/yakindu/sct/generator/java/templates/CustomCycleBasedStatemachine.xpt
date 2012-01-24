@@ -343,10 +343,10 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 		return timerService;
 	}
 	
-	public void notify(Notification<?> notification) {
+	public void notify(Notification notification) {
 		if (notification instanceof EventNotification) {
 			EventNotification eventNotification = (EventNotification) notification;
-			getOccuredEvents().add(eventNotification.getElement());
+			getOccuredEvents().add(eventNotification.getEvent());
 		}
 	}
 	«ENDIF-»

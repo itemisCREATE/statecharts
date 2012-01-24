@@ -13,20 +13,32 @@ Contributors:
 
 «DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
 «IF name != null-»
-«FILE entry.getBasePackagePath()+'/Notification.java'-»
+«FILE entry.getBasePackagePath()+'/VariableNotification.java'-»
 «getLicenseHeader(entry)»
 package «entry.getBasePackageName()»;
 
-public class Notification {
+public class VariableNotification<Type> extends Notification {
 
-	private NotificationType notificationType;
+	private Type oldValue;
+	private Type newValue;
+	private Enum<?> id;
 
-	public Notification(NotificationType notificationType) {
-		this.notificationType = notificationType;
+	public VariableNotification(Enum<?> id, Type newValue, Type oldValue) {
+		super(NotificationType.VariableNotification);
+		this.oldValue = oldValue;
+		this.newValue = newValue;
 	}
 
-	public NotificationType getNotificationType() {
-		return notificationType;
+	public Enum<?> getId() {
+		return id;
+	}
+
+	public Type getNewValue() {
+		return newValue;
+	}
+
+	public Type getOldValue() {
+		return oldValue;
 	}
 }
 «ENDFILE-»

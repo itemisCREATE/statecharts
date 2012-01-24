@@ -23,16 +23,16 @@ import java.util.Set;
 public class NotificationSender implements INotificationSender {
 
 	private Set<INotificationListener> listeners = new HashSet<INotificationListener>();
-	
+
 	public boolean addNotificationListener(INotificationListener listener) {
 		return listeners.add(listener);
 	}
-	
+
 	public boolean removeNotificationListener(INotificationListener listener) {
 		return listeners.remove(listener);
 	}
-	
-	protected void notifyListeners(Notification<?> notification) {
+
+	protected void notifyListeners(Notification notification) {
 		for (INotificationListener listener : listeners) {
 			listener.notify(notification);
 		}
