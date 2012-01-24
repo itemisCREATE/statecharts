@@ -74,6 +74,9 @@ String getName(ExecutionState this) :
 	
 String getName(ExecutionNode this) :
 	simpleName.replaceAll(" ","").toFirstUpper();
+
+String getHistoryVectorName(ExecutionRegion this) :
+	getName()+"HistoryVector";
 	
 String getName(ExecutionRegion this) :
 	if (ExecutionState.isInstance(superScope)) 
