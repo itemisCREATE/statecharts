@@ -75,7 +75,6 @@ void «interface.interfaceClassNameOOW()»::raise_«event.name»(«IF !event.type.isV
 «ENDFOREACH» 
 
 
-
 #endif
 
 «ENDFILE»
