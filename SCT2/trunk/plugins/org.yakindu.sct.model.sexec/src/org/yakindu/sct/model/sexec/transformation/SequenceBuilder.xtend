@@ -54,7 +54,7 @@ class SequenceBuilder {
 		
 		val execRegion = r.create
 		val seq = sexec.factory.createSequence
-		seq.name = "enterSequence"
+		seq.name = "deepEnterSequence"
 		seq.comment = "deep enterSequence with history in child " + r.name
 		
 		seq.steps += r.defineDeepHistorySwitch
@@ -96,7 +96,7 @@ class SequenceBuilder {
 		for ( r : sc.allContentsIterable.filter(typeof(Region))) {
 			val execRegion = r.create
 			val seq = sexec.factory.createSequence
-			seq.name = "enterSequence"
+			seq.name = "shallowEnterSequence"
 			seq.comment = "shallow enterSequence with history in child " + r.name
 			
 			seq.steps += r.defineShallowHistorySwitch

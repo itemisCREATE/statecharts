@@ -110,9 +110,11 @@ cached String functionName(Step step) :
 	(step.isEntryAction()) ? step.entryActionFunctionName() : ( 
 	(step.isExitAction()) ? step.exitActionFunctionName() :  (
 	(step.isEnterSequence()) ? step.enterSequenceName() : (
+	(step.isDeepEnterSequence()) ? step.deepEnterSequenceName() : (
+	(step.isShallowEnterSequence()) ? step.shallowEnterSequenceName() : (
 	(step.isExitSequence()) ? step.exitSequenceName() : (
 	(step.isReactSequence()) ? step.reactSequenceName() :
-	" // unknown function type "+step ))))));
+	" // unknown function type "+step ))))))));
  
 String statemachineEntryFunctionName(EnterState this):
 	if (this.name != null) then
@@ -127,6 +129,10 @@ String exitActionFunctionName(Step this) : "exitAction" + getName(state());
 String enterSequenceName(Step this) : "enterSequence"+getName(state()); 
 String enterSequenceName(ExecutionState this) : "enterSequence"+getName();
 String enterSequenceName(ExecutionRegion this) : "enterSequence"+getName();
+String deepEnterSequenceName(Step this) : ((ExecutionRegion)this.eContainer).deepEnterSequenceName();
+String deepEnterSequenceName(ExecutionRegion this) : "deepEnterSequence"+getName();
+String shallowEnterSequenceName(Step this) : ((ExecutionRegion)this.eContainer).deepEnterSequenceName();
+String shallowEnterSequenceName(ExecutionRegion this) : "shallowEnterSequence"+getName();
 String enterSequenceName(ExecutionFlow this) : "enter";
 String exitSequenceName(Step this) : "exitSequence"+getName(state()); 
 String exitSequenceName(ExecutionState this) : "exitSequence"+getName();
@@ -139,6 +145,8 @@ isReactionCheck(Step step) : Reaction.isInstance(step.eContainer) && Check.isIns
 isEntryAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().entryAction == step;
 isExitAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().exitAction == step;
 isEnterSequence(Step step) : Sequence.isInstance(step) && step.name == "enterSequence";
+isDeepEnterSequence(Step step) : Sequence.isInstance(step) && step.name == "deepEnterSequence";
+isShallowEnterSequence(Step step) : Sequence.isInstance(step) && step.name == "shallowEnterSequence";
 isExitSequence(Step step) : Sequence.isInstance(step) && step.name == "exitSequence";
 isReactSequence(Step step) : Sequence.isInstance(step) && step.name == "react";
 

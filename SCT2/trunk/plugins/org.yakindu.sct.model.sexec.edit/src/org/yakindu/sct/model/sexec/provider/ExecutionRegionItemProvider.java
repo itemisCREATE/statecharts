@@ -77,7 +77,9 @@ public class ExecutionRegionItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_REGION__HISTORY_STATE_VECTOR);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_REGION__DEEP_ENTER_SEQUENCE);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_REGION__SHALLOW_ENTER_SEQUENCE);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_REGION__HISTORY_VECTOR);
 		}
 		return childrenFeatures;
 	}
@@ -132,7 +134,9 @@ public class ExecutionRegionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ExecutionRegion.class)) {
-			case SexecPackage.EXECUTION_REGION__HISTORY_STATE_VECTOR:
+			case SexecPackage.EXECUTION_REGION__DEEP_ENTER_SEQUENCE:
+			case SexecPackage.EXECUTION_REGION__SHALLOW_ENTER_SEQUENCE:
+			case SexecPackage.EXECUTION_REGION__HISTORY_VECTOR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -152,7 +156,17 @@ public class ExecutionRegionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_REGION__HISTORY_STATE_VECTOR,
+				(SexecPackage.Literals.EXECUTION_REGION__DEEP_ENTER_SEQUENCE,
+				 SexecFactory.eINSTANCE.createSequence()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_REGION__SHALLOW_ENTER_SEQUENCE,
+				 SexecFactory.eINSTANCE.createSequence()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_REGION__HISTORY_VECTOR,
 				 SexecFactory.eINSTANCE.createStateVector()));
 	}
 
@@ -169,9 +183,11 @@ public class ExecutionRegionItemProvider
 
 		boolean qualify =
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR ||
-			childFeature == SexecPackage.Literals.EXECUTION_REGION__HISTORY_STATE_VECTOR ||
+			childFeature == SexecPackage.Literals.EXECUTION_REGION__HISTORY_VECTOR ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCE ||
-			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE;
+			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE ||
+			childFeature == SexecPackage.Literals.EXECUTION_REGION__DEEP_ENTER_SEQUENCE ||
+			childFeature == SexecPackage.Literals.EXECUTION_REGION__SHALLOW_ENTER_SEQUENCE;
 
 		if (qualify) {
 			return getString

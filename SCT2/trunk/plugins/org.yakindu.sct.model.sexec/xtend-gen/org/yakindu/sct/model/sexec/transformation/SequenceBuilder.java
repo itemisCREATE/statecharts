@@ -105,7 +105,7 @@ public class SequenceBuilder {
       SexecFactory _factory = this.sexec.factory();
       Sequence _createSequence = _factory.createSequence();
       final Sequence seq = _createSequence;
-      seq.setName("enterSequence");
+      seq.setName("deepEnterSequence");
       String _name = r.getName();
       String _operator_plus = StringExtensions.operator_plus("deep enterSequence with history in child ", _name);
       seq.setComment(_operator_plus);
@@ -213,7 +213,7 @@ public class SequenceBuilder {
         SexecFactory _factory = this.sexec.factory();
         Sequence _createSequence = _factory.createSequence();
         final Sequence seq = _createSequence;
-        seq.setName("enterSequence");
+        seq.setName("shallowEnterSequence");
         String _name = r.getName();
         String _operator_plus = StringExtensions.operator_plus("shallow enterSequence with history in child ", _name);
         seq.setComment(_operator_plus);

@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
@@ -19,9 +18,12 @@ import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
+import org.yakindu.sct.model.sexec.HistoryEntry;
 import org.yakindu.sct.model.sexec.If;
+import org.yakindu.sct.model.sexec.SaveHistory;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.StateCase;
@@ -351,6 +353,31 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     return _xblockexpression;
   }
   
+  protected Object _execute(final HistoryEntry entry) throws ExecutionException {
+    Object _xblockexpression = null;
+    {
+      ExecutionRegion _region = entry.getRegion();
+      ExecutionState _historyStateConfiguration = this.executionContext.getHistoryStateConfiguration(_region);
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_historyStateConfiguration, null);
+      if (_operator_notEquals) {
+        Step _historyStep = entry.getHistoryStep();
+        this.execute(_historyStep);
+      } else {
+        Step _initialStep = entry.getInitialStep();
+        boolean _operator_equals = ObjectExtensions.operator_equals(_initialStep, null);
+        if (_operator_equals) {
+          String _operator_plus = StringExtensions.operator_plus("Missing initial transition ", entry);
+          InputOutput.<String>println(_operator_plus);
+        } else {
+          Step _initialStep_1 = entry.getInitialStep();
+          this.execute(_initialStep_1);
+        }
+      }
+      _xblockexpression = (null);
+    }
+    return _xblockexpression;
+  }
+  
   protected Object _execute(final Execution execution) throws ExecutionException {
     Statement _statement = execution.getStatement();
     Object _evaluateStatement = this.interpreter.evaluateStatement(_statement, this.executionContext);
@@ -404,27 +431,47 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     return _xblockexpression;
   }
   
-  protected Object _execute(final StateSwitch stateSwitch) throws ExecutionException {
+  protected Object _execute(final SaveHistory action) {
     Object _xblockexpression = null;
     {
-      EList<StateCase> _cases = stateSwitch.getCases();
-      for (final StateCase stateCase : _cases) {
-        this.execute(stateCase);
-      }
+      ExecutionRegion _region = action.getRegion();
+      this.executionContext.saveHistoryStateConfiguration(_region);
       _xblockexpression = (null);
     }
     return _xblockexpression;
   }
   
-  protected Object _execute(final StateCase stateCase) throws ExecutionException {
+  protected Object _execute(final StateSwitch stateSwitch) throws ExecutionException {
     Object _xblockexpression = null;
     {
-      ExecutionState[] _stateConfiguration = this.executionContext.getStateConfiguration();
-      ExecutionState _state = stateCase.getState();
-      boolean _contains = ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration)).contains(_state);
-      if (_contains) {
-        Step _step = stateCase.getStep();
-        this.execute(_step);
+      ExecutionRegion _historyRegion = stateSwitch.getHistoryRegion();
+      final ExecutionRegion historyRegion = _historyRegion;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(historyRegion, null);
+      if (_operator_notEquals) {
+        {
+          ExecutionState _historyStateConfiguration = this.executionContext.getHistoryStateConfiguration(historyRegion);
+          final ExecutionState historyState = _historyStateConfiguration;
+          EList<StateCase> _cases = stateSwitch.getCases();
+          for (final StateCase stateCase : _cases) {
+            ExecutionState _state = stateCase.getState();
+            boolean _operator_equals = ObjectExtensions.operator_equals(historyState, _state);
+            if (_operator_equals) {
+              Step _step = stateCase.getStep();
+              this.execute(_step);
+            }
+          }
+        }
+      } else {
+        EList<StateCase> _cases_1 = stateSwitch.getCases();
+        for (final StateCase stateCase_1 : _cases_1) {
+          ExecutionState[] _stateConfiguration = this.executionContext.getStateConfiguration();
+          ExecutionState _state_1 = stateCase_1.getState();
+          boolean _contains = ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration)).contains(_state_1);
+          if (_contains) {
+            Step _step_1 = stateCase_1.getStep();
+            this.execute(_step_1);
+          }
+        }
       }
       _xblockexpression = (null);
     }
@@ -494,7 +541,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     }
   }
   
-  public Object execute(final EObject call) throws ExecutionException {
+  public Object execute(final Step call) throws ExecutionException {
     if ((call instanceof Call)) {
       return _execute((Call)call);
     } else if ((call instanceof Check)) {
@@ -505,8 +552,12 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
       return _execute((Execution)call);
     } else if ((call instanceof ExitState)) {
       return _execute((ExitState)call);
+    } else if ((call instanceof HistoryEntry)) {
+      return _execute((HistoryEntry)call);
     } else if ((call instanceof If)) {
       return _execute((If)call);
+    } else if ((call instanceof SaveHistory)) {
+      return _execute((SaveHistory)call);
     } else if ((call instanceof ScheduleTimeEvent)) {
       return _execute((ScheduleTimeEvent)call);
     } else if ((call instanceof Sequence)) {
@@ -519,8 +570,6 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
       return _execute((UnscheduleTimeEvent)call);
     } else if ((call instanceof Step)) {
       return _execute((Step)call);
-    } else if ((call instanceof StateCase)) {
-      return _execute((StateCase)call);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         java.util.Arrays.<Object>asList(call).toString());

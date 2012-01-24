@@ -5,12 +5,13 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ ModelSequencerSCTest.class,
+@SuiteClasses({ HistoryTest.class, ModelSequencerSCTest.class,
 		ModelSequencertDeclarationsTest.class, ModelSequencerStateTest.class,
 		ModelSequencerStateReactionTest.class,
 		ModelSequencerHierarchyTest.class,
 		ModelSequencerOrthogonalityTest.class,
-		ModelSequencerStateVectorTest.class, ModelSequencerHistoryTest.class })
+		ModelSequencerStateVectorTest.class, ModelSequencerHistoryTest.class,
+		SelfTransitionTest.class })
 public class AllTests {
 
 }

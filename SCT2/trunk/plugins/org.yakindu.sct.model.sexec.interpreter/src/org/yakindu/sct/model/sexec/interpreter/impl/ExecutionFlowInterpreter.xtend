@@ -277,7 +277,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	}
 	
 	def dispatch execute(SaveHistory action){
-		executionContext.saveHistoryStateConfiguration(action.region, action.deep);
+		executionContext.saveHistoryStateConfiguration(action.region);
 		null
 	}
 	
@@ -286,7 +286,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		if (historyRegion != null) {
 			val historyState = executionContext.getHistoryStateConfiguration(historyRegion)
 			for(stateCase : stateSwitch.cases) {
-				if(historyState.contains(stateCase.state)){
+				if(historyState == stateCase.state){
 					stateCase.step.execute
 				}
 			}

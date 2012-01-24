@@ -28,9 +28,6 @@ getInternalScopeVariables(ExecutionFlow this) :	getInternalScopeDeclarations().t
 getInternalScopeEvents(ExecutionFlow this) : getInternalScopeDeclarations().typeSelect(EventDefinition);
 getInternalScopeVoidEvents(ExecutionFlow this) :getInternalScopeEvents().select(e|e.type.isVoid());
 getInternalScopeValuedEvents(ExecutionFlow this) : getInternalScopeEvents().select(e|!e.type.isVoid());
-
-getHistoryRegions(ExecutionFlow this) : 
-	regions.select(region|region.historyStateVector.size > 0);
 	
 getTimeEvents(ExecutionFlow this) : scopes.typeSelect(Scope).declarations.typeSelect(TimeEvent);
 
@@ -53,7 +50,7 @@ boolean hasVariables(Scope this) :
 	!declarations.typeSelect(VariableDefinition).isEmpty;
 
 boolean hasHistory(ExecutionFlow this) :
-	!getHistoryRegions().isEmpty;
+	historyVector.size > 0;
 
 boolean hasUnvaluedEvents(Scope this) :
 	!declarations.typeSelect(EventDefinition).select(event|event.type.isVoid()).isEmpty;

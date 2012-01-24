@@ -29,7 +29,7 @@ Contributors:
 «DEFINE ActionCode FOR StateSwitch-»
 	«getComment()»
 	«IF historyRegion!=null-»
-	switch(«historyRegion.getHistoryVectorName()»[«stateConfigurationIdx»]) {
+	switch(historyVector[«historyRegion.historyVector.offset»]) {
 	«ELSE-»
 	switch(stateVector[«stateConfigurationIdx»]) {
 	«ENDIF-»
@@ -113,15 +113,16 @@ else {
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR HistoryEntry»
-	«IF historyStep != null-»
+	«getComment()»
+	if (historyVector[«region.historyVector.offset»] != State.$NullState$) {
 		«EXPAND ActionCode FOR historyStep-»
-	«ELSE-»
+	} else {
 		«EXPAND ActionCode FOR initialStep-»
-	«ENDIF-»
+	}
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR SaveHistory»
-	«region.getHistoryVectorName()» = Arrays.copyOfRange(stateVector, «region.stateVector.offset», «region.stateVector.size»);
+	historyVector[«region.historyVector.offset»] = stateVector[«region.stateVector.offset»];
 «ENDDEFINE»
 
 «DEFINE ConditionMethodsImplement FOR ExecutionNode-»
@@ -190,6 +191,20 @@ else {
 	«IF enterSequence.steps.size > 0 && enterSequence.caller.size > 0-»
 	private void «enterSequenceName()»() {
 		«EXPAND ActionCode FOREACH enterSequence.steps-»
+	}
+	«ENDIF-»
+«ENDDEFINE»
+«DEFINE DeepEnterSequenceImplement FOR ExecutionRegion»
+	«IF deepEnterSequence.steps.size > 0 && deepEnterSequence.caller.size > 0-»
+	private void «deepEnterSequenceName()»() {
+		«EXPAND ActionCode FOREACH deepEnterSequence.steps-»
+	}
+	«ENDIF-»
+«ENDDEFINE»
+«DEFINE ShallowEnterSequenceImplement FOR ExecutionRegion»
+	«IF shallowEnterSequence.steps.size > 0 && shallowEnterSequence.caller.size > 0-»
+	private void «shallowEnterSequenceName()»() {
+		«EXPAND ActionCode FOREACH shallowEnterSequence.steps-»
 	}
 	«ENDIF-»
 «ENDDEFINE»
@@ -268,9 +283,7 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	
 	«ENDFOREACH-»
 	
-	«FOREACH getHistoryRegions() AS region-»
-		private State[] «region.getHistoryVectorName()» = new State[«region.historyStateVector.size»];
-	«ENDFOREACH-»
+	private State[] historyVector = new State[«historyVector.size»];
 
 	private final State[] stateVector = new State[«stateVector.size»];
 	
@@ -313,11 +326,9 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 		for (int i = 0; i < stateVector.length; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		«FOREACH getHistoryRegions() AS region-»
-			for (int i = 0; i < «region.getHistoryVectorName()».length; i++) {
-			«region.getHistoryVectorName()»[i] = State.$NullState$;
-			}
-		«ENDFOREACH-»
+		for (int i = 0; i < «historyVector.size»; i++) {
+			historyVector[i] = State.$NullState$;
+		}
 		occuredEvents.clear();
 	}
 	
@@ -412,6 +423,8 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 «EXPAND ExitSequenceImplement FOREACH this.states-»
 «EXPAND EnterSequenceImplement FOREACH this.regions-»
 «EXPAND ExitSequenceImplement FOREACH this.regions-»
+«EXPAND DeepEnterSequenceImplement FOREACH this.regions-»
+«EXPAND ShallowEnterSequenceImplement FOREACH this.regions-»
 «EXPAND ReactMethodsImplement FOREACH this.states-»
 «EXPAND ReactMethodsImplement FOREACH this.nodes-»
 	public void runCycle() {
