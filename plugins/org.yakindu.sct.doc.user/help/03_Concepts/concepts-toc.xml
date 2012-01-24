@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<toc topic="help/03_Concepts/concepts.html" label="concepts">
+	<topic href="help/03_Concepts/concepts.html" label="Yakindu Statechart tool concepts">
+		<topic href="help/03_Concepts/concepts.html#ModelValidateSimulateGenerate" label="Model, Validate, Simulate, Generate"></topic>
+		<topic href="help/03_Concepts/concepts.html#Stext" label="Stext"></topic>
+	</topic>
+</toc>

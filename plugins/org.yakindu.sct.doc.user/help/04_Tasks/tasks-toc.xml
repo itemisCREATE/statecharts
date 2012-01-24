@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<toc topic="help/04_Tasks/tasks.html" label="tasks">
+	<topic href="help/04_Tasks/tasks.html" label="Tasks">
+		<topic href="help/04_Tasks/tasks.html#Modelastatemachine" label="Model a statemachine"></topic>
+		<topic href="help/04_Tasks/tasks.html#Validateastatemachine" label="Validate a statemachine"></topic>
+		<topic href="help/04_Tasks/tasks.html#Simulateastatemachine" label="Simulate a statemachine"></topic>
+		<topic href="help/04_Tasks/tasks.html#GenerateC" label="Generate C"></topic>
+		<topic href="help/04_Tasks/tasks.html#GenerateJava" label="Generate Java"></topic>
+	</topic>
+</toc>

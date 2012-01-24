@@ -1,0 +1,18 @@
+h2. Using the Example Projects
+
+h3. Example State Machine
+
+h3. Creating a New Project
+
+h3. Defining a State Machine 
+
+h3. Checking the State Machine
+
+h3. Project Type and Dependencies
+
+h3. Creating Check Files
+
+h3. Editing Check Files
+
+h3. Simulating a State Machine
+

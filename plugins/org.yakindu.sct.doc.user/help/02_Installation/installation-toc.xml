@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<toc topic="help/02_Installation/installation.html" label="installation">
-	<topic href="help/02_Installation/installation.html" label="Installation">
-		<topic href="help/02_Installation/installation.html#EclipseInstallation" label="Eclipse Installation"></topic>
-		<topic href="help/02_Installation/installation.html#InstallingtheYAKINDUPlugIns" label="Installing the YAKINDU-Plug-Ins"></topic>
-		<topic href="help/02_Installation/installation.html#InstallingfromZip" label="Installing from Zip"></topic>
-	</topic>
-</toc>

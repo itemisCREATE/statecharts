@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?NLS TYPE="org.eclipse.help.toc"?>
 
-<toc label="YAKINDU Statechart Tools Guide">
+<toc label="YAKINDU Statechart User Guide">
    <link toc="help/01_Overview/overview-toc.xml"/>
-   <link toc="help/02_Installation/installation-toc.xml"/>
-   <link toc="help/03_Statechart_Modeling_and_Simulation/modeling_simulation-toc.xml"/>
-   <link toc="help/04_C-Code_Generator/c_code_generator-toc.xml"/>
-   <link toc="help/05_Java-Code_Generator/java_code_generator-toc.xml"/>
-   <link toc="help/06_UML_Transformation/uml_transformation-toc.xml"/>
-   <link toc="help/07_Reference/sc_reference-toc.xml"/>
+   <link toc="help/02_Getting_Started/getting_started-toc.xml"/>
+   <link toc="help/03_Concepts/concepts-toc.xml"/>
+   <link toc="help/04_Tasks/tasks-toc.xml"/>
 </toc>

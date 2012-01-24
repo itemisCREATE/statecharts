@@ -1,2 +1,0 @@
-
-h2. Setting Up the Example Project

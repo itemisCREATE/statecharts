@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<toc topic="help/02_Getting_Started/getting_started.html" label="getting_started">
+	<topic href="help/02_Getting_Started/getting_started.html" label="Getting started">
+		<topic href="help/02_Getting_Started/getting_started.html#Installation" label="Installation">
+			<topic href="help/02_Getting_Started/getting_started.html#Prerequisites" label="Prerequisites"></topic>
+			<topic href="help/02_Getting_Started/getting_started.html#InstallingtheYAKINDUPlugIns" label="Installing the YAKINDU-Plug-Ins "></topic>
+		</topic>
+		<topic href="help/02_Getting_Started/getting_started.html#TheYakinduperspective" label="The Yakindu perspective"></topic>
+		<topic href="help/02_Getting_Started/getting_started.html#Yakinduproject" label="Yakindu project"></topic>
+		<topic href="help/02_Getting_Started/getting_started.html#Editors" label="Editors"></topic>
+		<topic href="help/02_Getting_Started/getting_started.html#Views" label="Views"></topic>
+		<topic href="help/02_Getting_Started/getting_started.html#Wizards" label="Wizards"></topic>
+		<topic href="help/02_Getting_Started/getting_started.html#Generators" label="Generators"></topic>
+	</topic>
+</toc>

@@ -13,27 +13,15 @@
             primary="false">
       </toc>
       <toc
-            file="help/02_Installation/installation-toc.xml"
+            file="help/02_Getting_Started/getting_started-toc.xml"
             primary="false">
       </toc>
       <toc
-            file="help/03_Statechart_Modeling_and_Simulation/modeling_simulation-toc.xml"
+            file="help/03_Concepts/concepts-toc.xml"
             primary="false">
       </toc>
       <toc
-            file="help/04_C-Code_Generator/c_code_generator-toc.xml"
-            primary="false">
-      </toc>
-      <toc
-            file="help/05_Java-Code_Generator/java_code_generator-toc.xml"
-            primary="false">
-      </toc>
-      <toc
-            file="help/06_UML_Transformation/uml_transformation-toc.xml"
-            primary="false">
-      </toc>
-      <toc
-            file="help/07_Reference/sc_reference-toc.xml"
+            file="help/04_Tasks/tasks-toc.xml"
             primary="false">
       </toc>
    </extension>
