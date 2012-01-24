@@ -1,0 +1,110 @@
+«REM»
+
+Templates for the main statechart cpp file.
+
+@auther joern seger
+
+«ENDREM»
+
+«IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
+
+«EXTENSION org::yakindu::sct::generator::c::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::c::templates::Constants»
+«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
+«EXTENSION org::yakindu::sct::generator::c::templates::NamingOO»
+
+«DEFINE file FOR ExecutionFlow»
+
+«FILE StName()+'OOW.h'»
+«this.getLicenseHeader()»
+
+#include "«StName()».h"
+
+#ifndef «STNAME()»OOW_H_
+#define «STNAME()»OOW_H_
+
+class «StName()»OOW {
+
+private:
+    «StName()» «stName()»;
+	EventPool eventPool;
+
+	static const MAXEVENTSPERTYPE=4;
+public:
+
+   «StName()»OOW(Timer* timer);
+   virtual ~«StName()»OOW();
+   void enter();
+   void exit();
+   void runCycle();
+   boolean eventWaiting();
+
+«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
+   «interface.interfaceClassNameOOW()»* get_«interface.interfaceObjectNameOOW()»();
+«ENDFOREACH -»
+
+};
+
+
+inline «StName()»OOW::«StName()»OOW(Timer* timer)
+{
+	/* Set up Event Pool */
+	«stName()»_eventPool_init_heap(&eventPool, MAXEVENTSPERTYPE);
+
+	/* initialize state machine */
+	«stName()»_init(&«stName()», timer, &eventPool);
+
+	/* call all necessary enter functions */
+	interfaceTestStatemachine_enter(&«stName()»);
+}
+
+inline «StName()»OOW::~«StName()»OOW(Timer* timer)
+{
+	/* call all exit actions for this state machine */
+	«stName()»_exit(&«stName()»);
+
+	/* free all internal memory for this state machine */
+	«stName()»_destruct(&«stName()»);
+
+	/* free all events in the event pool */
+	eventPool_exit(&eventPool);
+
+}
+
+void «StName()»OOW::enter()
+{
+	«stName()»_enter(&«stName()»);
+}
+
+void «StName()»OOW::exit()
+{
+	«stName()»_exit(&«stName()»);
+}
+
+void «StName()»OOW::runCycle()
+{
+	«stName()»_runCycle(&«stName()»);
+}
+
+boolean «StName()»OOW::eventWaiting()
+{
+	return «stName()»_eventWaiting(&«stName()»);
+}
+
+«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
+«interface.interfaceClassNameOOW()» «StName()»OOW::get_«interface.interfaceObjectNameOOW()»()
+{
+	«interface.interfaceClassNameOOW()» retType(«stName()»_get_«interface.interfaceObjectName().toFirstLower()»(&«stName()»));
+	return retType;
+}
+«ENDFOREACH -»
+
+
+#endif // «STNAME()»OOW_H_
+
+
+
+«ENDFILE»
+«ENDDEFINE»
