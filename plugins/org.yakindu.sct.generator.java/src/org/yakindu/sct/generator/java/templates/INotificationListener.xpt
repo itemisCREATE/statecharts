@@ -18,9 +18,9 @@ Contributors:
 package «entry.getBasePackageName()»;
 
 public interface INotificationListener {
-	
-	public void notify(Notification<?> notification);
-	
+
+	public void notify(Notification notification);
+
 }
 «ENDFILE-»
 «ENDIF-»

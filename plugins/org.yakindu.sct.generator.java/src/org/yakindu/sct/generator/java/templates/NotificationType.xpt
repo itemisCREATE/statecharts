@@ -18,7 +18,7 @@ Contributors:
 package «entry.getBasePackageName()»;
 
 public enum NotificationType {
-	EventNotification, RuntimeCycleNotification
+	EventNotification, VariableNotification, RuntimeCycleNotification
 }
 «ENDFILE-»
 «ENDIF-»

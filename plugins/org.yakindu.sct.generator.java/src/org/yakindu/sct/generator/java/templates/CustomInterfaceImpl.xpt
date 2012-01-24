@@ -24,9 +24,14 @@ package «getImplementationPackageName(entry)»;
 «IF hasUnvaluedEvents()-»
 import «entry.getBasePackageName()».Event;
 «ENDIF-»
-«IF hasOutgoingEvents() && entry.createInterfaceObserverSupport()-»
-import «entry.getBasePackageName()».EventNotification;
+«IF entry.createInterfaceObserverSupport()-»
 import «entry.getBasePackageName()».NotificationSender;
+«IF hasOutgoingEvents()-»
+import «entry.getBasePackageName()».EventNotification;
+«ENDIF-»
+«IF hasVariables() && entry.createInterfaceObserverSupport()-»
+import «entry.getBasePackageName()».VariableNotification;
+«ENDIF-»
 «ENDIF-»
 «IF hasValuedEvents()-»
 import «entry.getBasePackageName()».ValuedEvent;
@@ -90,7 +95,13 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implemen
 	}
 	
 	public void set«variable.getValueName().toFirstUpper()»(«variable.type.getJavaType()» value) {
+		«IF entry.createInterfaceObserverSupport()-»
+		«variable.type.getJavaType()» oldValue = «variable.getValueName()»;
+		«ENDIF-»
 		«variable.getValueName()» = value;
+		«IF entry.createInterfaceObserverSupport()-»
+			notifyListeners(new VariableNotification<«variable.type.getJavaClassType()»>(Variables.«variable.name.toFirstUpper()», «variable.getValueName()», oldValue));
+		«ENDIF-»
 	}	
 	«ENDFOREACH-»
 }

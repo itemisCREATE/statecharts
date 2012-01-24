@@ -13,20 +13,21 @@ Contributors:
 
 «DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
 «IF name != null-»
-«FILE entry.getBasePackagePath()+'/Notification.java'-»
+«FILE entry.getBasePackagePath()+'/RuntimeCycleNotification.java'-»
 «getLicenseHeader(entry)»
 package «entry.getBasePackageName()»;
 
-public class Notification {
+public class RuntimeCycleNotification extends Notification {
 
-	private NotificationType notificationType;
+	private IStatemachine statemachine;
 
-	public Notification(NotificationType notificationType) {
-		this.notificationType = notificationType;
+	public RuntimeCycleNotification(IStatemachine statemachine) {
+		super(NotificationType.RuntimeCycleNotification);
+		this.statemachine = statemachine;
 	}
 
-	public NotificationType getNotificationType() {
-		return notificationType;
+	public IStatemachine getStatemachine() {
+		return statemachine;
 	}
 }
 «ENDFILE-»
