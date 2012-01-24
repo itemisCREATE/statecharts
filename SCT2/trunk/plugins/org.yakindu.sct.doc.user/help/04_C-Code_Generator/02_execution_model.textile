@@ -1,6 +1,0 @@
-
-h2. Description of the 'Execution Model' used in YAKINDU statechart environment
-
-The following figure shows the eCore model for the execution model (date 18:10:11):
-
-!../04_C-Code_Generator/images/execution_model.png! 

@@ -1,7 +1,0 @@
-h1. Installation
-
-h2. Eclipse Installation
-
-h2. Installing the YAKINDU-Plug-Ins
-
-h2. Installing from Zip

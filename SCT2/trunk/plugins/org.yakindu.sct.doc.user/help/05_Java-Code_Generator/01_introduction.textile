@@ -1,3 +1,0 @@
-h1. Java-Code Generator
-
-h2. Introduction

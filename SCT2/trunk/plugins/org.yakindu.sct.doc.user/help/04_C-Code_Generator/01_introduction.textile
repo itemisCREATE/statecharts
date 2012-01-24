@@ -1,5 +1,0 @@
-h1. Yakindu Statechart Generator
-
-h2. Introduction
-
-Within this documentation, we want to create a common view about the Yakindu Statechart Generator and a number of implementation variations.

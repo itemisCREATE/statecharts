@@ -1,0 +1,19 @@
+h1. Getting started
+
+h2. Installation
+
+h3. Prerequisites
+
+h3. Installing the YAKINDU-Plug-Ins 
+
+h2. The Yakindu perspective
+
+h2. Yakindu project
+
+h2. Editors
+
+h2. Views
+
+h2. Wizards
+
+h2. Generators
