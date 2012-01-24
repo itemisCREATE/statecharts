@@ -28,7 +28,11 @@ Contributors:
 
 «DEFINE ActionCode FOR StateSwitch-»
 	«getComment()»
+	«IF historyRegion!=null-»
+	switch(«historyRegion.getHistoryVectorName()»[«stateConfigurationIdx»]) {
+	«ELSE-»
 	switch(stateVector[«stateConfigurationIdx»]) {
+	«ENDIF-»
 		«FOREACH cases AS stateCase»
   			case «stateCase.state.getName()» :
   				«EXPAND ActionCode FOR stateCase.step»
@@ -101,13 +105,23 @@ else {
 	«getComment()-»
 	nextStateIndex = «this.state.stateVector.offset»;
 	stateVector[«this.state.stateVector.offset»] = State.«state.getName()»;
-	«REM»activeStates.add(State.«state.getName()»);«ENDREM»
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR ExitState-»
 	«getComment()-»
 	stateVector[«this.state.stateVector.offset»] = State.«getNullStateName()»;
-	«REM»activeStates.remove(State.«state.getName()»);«ENDREM»
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR HistoryEntry»
+	«IF historyStep != null-»
+		«EXPAND ActionCode FOR historyStep-»
+	«ELSE-»
+		«EXPAND ActionCode FOR initialStep-»
+	«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR SaveHistory»
+	«region.getHistoryVectorName()» = Arrays.copyOfRange(stateVector, «region.stateVector.offset», «region.stateVector.size»);
 «ENDDEFINE»
 
 «DEFINE ConditionMethodsImplement FOR ExecutionNode-»
@@ -193,21 +207,24 @@ else {
 «getLicenseHeader(entry)»
 package «getImplementationPackageName(entry)»;
 
+«IF hasHistory()-»
+	import java.util.Arrays;
+«ENDIF-»
 import java.util.Collection;
 import java.util.HashSet;
 import «entry.getBasePackageName()».Event;
 import «entry.getBasePackageName()».EventVector;
 «IF isTimedStatemachine()-»
-import «entry.getBasePackageName()».TimeEvent;
-import «entry.getBasePackageName()».ITimedStatemachine;
-import «entry.getBasePackageName()».ITimerService;
-import «entry.getBasePackageName()».EventNotification;
-import «entry.getBasePackageName()».Notification;
+	import «entry.getBasePackageName()».TimeEvent;
+	import «entry.getBasePackageName()».ITimedStatemachine;
+	import «entry.getBasePackageName()».ITimerService;
+	import «entry.getBasePackageName()».EventNotification;
+	import «entry.getBasePackageName()».Notification;
 «ELSE-»
-import «entry.getBasePackageName()».IStatemachine;
+	import «entry.getBasePackageName()».IStatemachine;
 «ENDIF-»
 «IF getInternalScopeValuedEvents().size > 0 -»
-import «entry.getBasePackageName()».ValuedEvent;
+	import «entry.getBasePackageName()».ValuedEvent;
 «ENDIF-»
 
 public class «getCycleBasedStatemachineName()» implements «getStatemachineImplementationType()» {
@@ -249,6 +266,10 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	«FOREACH getInternalScopeVariables() AS variable-»
 	private «variable.type.getJavaType()» «variable.getValueName()»«variable.getInitialValueAssignment()»;
 	
+	«ENDFOREACH-»
+	
+	«FOREACH getHistoryRegions() AS region-»
+		private State[] «region.getHistoryVectorName()» = new State[«region.historyStateVector.size»];
 	«ENDFOREACH-»
 
 	private final State[] stateVector = new State[«stateVector.size»];
@@ -292,6 +313,11 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 		for (int i = 0; i < stateVector.length; i++) {
 			stateVector[i] = State.$NullState$;
 		}
+		«FOREACH getHistoryRegions() AS region-»
+			for (int i = 0; i < «region.getHistoryVectorName()».length; i++) {
+			«region.getHistoryVectorName()»[i] = State.$NullState$;
+			}
+		«ENDFOREACH-»
 		occuredEvents.clear();
 	}
 	

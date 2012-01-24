@@ -29,6 +29,9 @@ getInternalScopeEvents(ExecutionFlow this) : getInternalScopeDeclarations().type
 getInternalScopeVoidEvents(ExecutionFlow this) :getInternalScopeEvents().select(e|e.type.isVoid());
 getInternalScopeValuedEvents(ExecutionFlow this) : getInternalScopeEvents().select(e|!e.type.isVoid());
 
+getHistoryRegions(ExecutionFlow this) : 
+	regions.select(region|region.historyStateVector.size > 0);
+	
 getTimeEvents(ExecutionFlow this) : scopes.typeSelect(Scope).declarations.typeSelect(TimeEvent);
 
 boolean isTimedStatemachine(ExecutionFlow this) :
@@ -45,6 +48,9 @@ boolean hasOutgoingValuedEvents(Scope this) :
 
 boolean hasEvents(Scope this) :
 	!declarations.typeSelect(EventDefinition).isEmpty;
+
+boolean hasHistory(ExecutionFlow this) :
+	!getHistoryRegions().isEmpty;
 
 boolean hasUnvaluedEvents(Scope this) :
 	!declarations.typeSelect(EventDefinition).select(event|event.type.isVoid()).isEmpty;
