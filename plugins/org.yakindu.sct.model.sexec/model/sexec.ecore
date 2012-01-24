@@ -16,6 +16,8 @@
         eType="#//ExecutionNode" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="regions" upperBound="-1"
         eType="#//ExecutionRegion" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="historyVector" eType="#//StateVector"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionNode" eSuperTypes="#//NamedElement #//MappedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reactions" upperBound="-1"
@@ -45,7 +47,11 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionRegion" eSuperTypes="#//ExecutionScope">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="historyStateVector" eType="#//StateVector"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deepEnterSequence" eType="#//Sequence"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="shallowEnterSequence" eType="#//Sequence"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="historyVector" eType="#//StateVector"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionEntry" eSuperTypes="#//ExecutionNode"/>

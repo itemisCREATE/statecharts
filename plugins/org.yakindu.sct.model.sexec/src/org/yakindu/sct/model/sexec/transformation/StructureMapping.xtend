@@ -19,10 +19,14 @@ import java.util.ArrayList
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.stext.stext.OperationCall
 import org.yakindu.sct.model.stext.stext.Operation
+import org.yakindu.sct.model.sgraph.Entry
+import org.yakindu.sct.model.sgraph.EntryKind
 
 class StructureMapping {
 	 
 	@Inject extension SexecElementMapping mapping
+	@Inject extension SexecExtensions sexec
+	@Inject extension SgraphExtensions sgraph
 	@Inject extension StatechartExtensions sct
 	
 	

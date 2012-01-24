@@ -47,6 +47,7 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getStates <em>States</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getRegions <em>Regions</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getHistoryVector <em>History Vector</em>}</li>
  * </ul>
  * </p>
  *
@@ -162,6 +163,16 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected EList<ExecutionRegion> regions;
+
+	/**
+	 * The cached value of the '{@link #getHistoryVector() <em>History Vector</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHistoryVector()
+	 * @generated
+	 * @ordered
+	 */
+	protected StateVector historyVector;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -483,6 +494,49 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public StateVector getHistoryVector() {
+		return historyVector;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetHistoryVector(StateVector newHistoryVector, NotificationChain msgs) {
+		StateVector oldHistoryVector = historyVector;
+		historyVector = newHistoryVector;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR, oldHistoryVector, newHistoryVector);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHistoryVector(StateVector newHistoryVector) {
+		if (newHistoryVector != historyVector) {
+			NotificationChain msgs = null;
+			if (historyVector != null)
+				msgs = ((InternalEObject)historyVector).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR, null, msgs);
+			if (newHistoryVector != null)
+				msgs = ((InternalEObject)newHistoryVector).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR, null, msgs);
+			msgs = basicSetHistoryVector(newHistoryVector, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR, newHistoryVector, newHistoryVector));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -521,6 +575,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__REGIONS:
 				return ((InternalEList<?>)getRegions()).basicRemove(otherEnd, msgs);
+			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
+				return basicSetHistoryVector(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -555,6 +611,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return getNodes();
 			case SexecPackage.EXECUTION_FLOW__REGIONS:
 				return getRegions();
+			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
+				return getHistoryVector();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -602,6 +660,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				getRegions().clear();
 				getRegions().addAll((Collection<? extends ExecutionRegion>)newValue);
 				return;
+			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
+				setHistoryVector((StateVector)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -644,6 +705,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__REGIONS:
 				getRegions().clear();
 				return;
+			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
+				setHistoryVector((StateVector)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -676,6 +740,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return nodes != null && !nodes.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__REGIONS:
 				return regions != null && !regions.isEmpty();
+			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
+				return historyVector != null;
 		}
 		return super.eIsSet(featureID);
 	}

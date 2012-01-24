@@ -112,7 +112,7 @@ class ModelSequencer {
 
 		// calculate state vectors
 		ef.defineStateVector(sc)
-		ef.defineHistoryStateVector(sc)
+		ef.defineHistoryVector(sc)
 		
 		// derive all additional information that is necessary for the execution
 		sc.mapEntryActions(ef)
@@ -120,6 +120,8 @@ class ModelSequencer {
 		
 		ef.defineStateEnterSequences(sc)
 		ef.defineStateExitSequences(sc)
+		ef.defineDeepEnterSequences(sc)
+		ef.defineShallowEnterSequences(sc)
 		ef.defineStatechartEnterSequence(sc)
 		ef.defineStatechartExitSequence(sc)
 		

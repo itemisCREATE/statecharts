@@ -20,6 +20,7 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getStates <em>States</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getRegions <em>Regions</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getHistoryVector <em>History Vector</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,5 +76,31 @@ public interface ExecutionFlow extends ScopedElement, ExecutionScope {
 	 * @generated
 	 */
 	EList<ExecutionRegion> getRegions();
+
+	/**
+	 * Returns the value of the '<em><b>History Vector</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>History Vector</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>History Vector</em>' containment reference.
+	 * @see #setHistoryVector(StateVector)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionFlow_HistoryVector()
+	 * @model containment="true"
+	 * @generated
+	 */
+	StateVector getHistoryVector();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.ExecutionFlow#getHistoryVector <em>History Vector</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>History Vector</em>' containment reference.
+	 * @see #getHistoryVector()
+	 * @generated
+	 */
+	void setHistoryVector(StateVector value);
 
 } // ExecutionFlow

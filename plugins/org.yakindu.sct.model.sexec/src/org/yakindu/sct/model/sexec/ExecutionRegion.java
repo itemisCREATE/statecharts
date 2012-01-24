@@ -15,7 +15,9 @@ package org.yakindu.sct.model.sexec;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sexec.ExecutionRegion#getHistoryStateVector <em>History State Vector</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.ExecutionRegion#getDeepEnterSequence <em>Deep Enter Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.ExecutionRegion#getShallowEnterSequence <em>Shallow Enter Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.ExecutionRegion#getHistoryVector <em>History Vector</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,28 +28,80 @@ package org.yakindu.sct.model.sexec;
 public interface ExecutionRegion extends ExecutionScope {
 
 	/**
-	 * Returns the value of the '<em><b>History State Vector</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Deep Enter Sequence</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>History State Vector</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Deep Enter Sequence</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>History State Vector</em>' containment reference.
-	 * @see #setHistoryStateVector(StateVector)
-	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionRegion_HistoryStateVector()
+	 * @return the value of the '<em>Deep Enter Sequence</em>' containment reference.
+	 * @see #setDeepEnterSequence(Sequence)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionRegion_DeepEnterSequence()
 	 * @model containment="true"
 	 * @generated
 	 */
-	StateVector getHistoryStateVector();
+	Sequence getDeepEnterSequence();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.ExecutionRegion#getHistoryStateVector <em>History State Vector</em>}' containment reference.
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.ExecutionRegion#getDeepEnterSequence <em>Deep Enter Sequence</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>History State Vector</em>' containment reference.
-	 * @see #getHistoryStateVector()
+	 * @param value the new value of the '<em>Deep Enter Sequence</em>' containment reference.
+	 * @see #getDeepEnterSequence()
 	 * @generated
 	 */
-	void setHistoryStateVector(StateVector value);
+	void setDeepEnterSequence(Sequence value);
+
+	/**
+	 * Returns the value of the '<em><b>Shallow Enter Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Shallow Enter Sequence</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Shallow Enter Sequence</em>' containment reference.
+	 * @see #setShallowEnterSequence(Sequence)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionRegion_ShallowEnterSequence()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Sequence getShallowEnterSequence();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.ExecutionRegion#getShallowEnterSequence <em>Shallow Enter Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Shallow Enter Sequence</em>' containment reference.
+	 * @see #getShallowEnterSequence()
+	 * @generated
+	 */
+	void setShallowEnterSequence(Sequence value);
+
+	/**
+	 * Returns the value of the '<em><b>History Vector</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>History Vector</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>History Vector</em>' containment reference.
+	 * @see #setHistoryVector(StateVector)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionRegion_HistoryVector()
+	 * @model containment="true"
+	 * @generated
+	 */
+	StateVector getHistoryVector();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.ExecutionRegion#getHistoryVector <em>History Vector</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>History Vector</em>' containment reference.
+	 * @see #getHistoryVector()
+	 * @generated
+	 */
+	void setHistoryVector(StateVector value);
 } // ExecutionRegion

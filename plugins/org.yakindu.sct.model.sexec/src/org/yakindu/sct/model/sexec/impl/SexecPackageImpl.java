@@ -387,6 +387,15 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getExecutionFlow_HistoryVector() {
+		return (EReference)executionFlowEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getExecutionNode() {
 		return executionNodeEClass;
 	}
@@ -513,8 +522,26 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getExecutionRegion_HistoryStateVector() {
+	public EReference getExecutionRegion_DeepEnterSequence() {
 		return (EReference)executionRegionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExecutionRegion_ShallowEnterSequence() {
+		return (EReference)executionRegionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExecutionRegion_HistoryVector() {
+		return (EReference)executionRegionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1158,6 +1185,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		createEReference(executionFlowEClass, EXECUTION_FLOW__STATES);
 		createEReference(executionFlowEClass, EXECUTION_FLOW__NODES);
 		createEReference(executionFlowEClass, EXECUTION_FLOW__REGIONS);
+		createEReference(executionFlowEClass, EXECUTION_FLOW__HISTORY_VECTOR);
 
 		executionNodeEClass = createEClass(EXECUTION_NODE);
 		createEReference(executionNodeEClass, EXECUTION_NODE__REACTIONS);
@@ -1177,7 +1205,9 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		createEReference(executionScopeEClass, EXECUTION_SCOPE__EXIT_SEQUENCE);
 
 		executionRegionEClass = createEClass(EXECUTION_REGION);
-		createEReference(executionRegionEClass, EXECUTION_REGION__HISTORY_STATE_VECTOR);
+		createEReference(executionRegionEClass, EXECUTION_REGION__DEEP_ENTER_SEQUENCE);
+		createEReference(executionRegionEClass, EXECUTION_REGION__SHALLOW_ENTER_SEQUENCE);
+		createEReference(executionRegionEClass, EXECUTION_REGION__HISTORY_VECTOR);
 
 		executionEntryEClass = createEClass(EXECUTION_ENTRY);
 
@@ -1343,6 +1373,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEReference(getExecutionFlow_States(), this.getExecutionState(), null, "states", null, 0, -1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionFlow_Nodes(), this.getExecutionNode(), null, "nodes", null, 0, -1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionFlow_Regions(), this.getExecutionRegion(), null, "regions", null, 0, -1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionFlow_HistoryVector(), this.getStateVector(), null, "historyVector", null, 0, 1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionNodeEClass, ExecutionNode.class, "ExecutionNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExecutionNode_Reactions(), this.getReaction(), null, "reactions", null, 0, -1, ExecutionNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1362,7 +1393,9 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEReference(getExecutionScope_ExitSequence(), this.getSequence(), null, "exitSequence", null, 0, 1, ExecutionScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionRegionEClass, ExecutionRegion.class, "ExecutionRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExecutionRegion_HistoryStateVector(), this.getStateVector(), null, "historyStateVector", null, 0, 1, ExecutionRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionRegion_DeepEnterSequence(), this.getSequence(), null, "deepEnterSequence", null, 0, 1, ExecutionRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionRegion_ShallowEnterSequence(), this.getSequence(), null, "shallowEnterSequence", null, 0, 1, ExecutionRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionRegion_HistoryVector(), this.getStateVector(), null, "historyVector", null, 0, 1, ExecutionRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionEntryEClass, ExecutionEntry.class, "ExecutionEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
