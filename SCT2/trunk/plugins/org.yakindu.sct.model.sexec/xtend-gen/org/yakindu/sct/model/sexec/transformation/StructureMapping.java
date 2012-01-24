@@ -21,6 +21,8 @@ import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping;
+import org.yakindu.sct.model.sexec.transformation.SexecExtensions;
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions;
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
@@ -43,6 +45,12 @@ public class StructureMapping {
   
   @Inject
   private SexecElementMapping mapping;
+  
+  @Inject
+  private SexecExtensions sexec;
+  
+  @Inject
+  private SgraphExtensions sgraph;
   
   @Inject
   private StatechartExtensions sct;

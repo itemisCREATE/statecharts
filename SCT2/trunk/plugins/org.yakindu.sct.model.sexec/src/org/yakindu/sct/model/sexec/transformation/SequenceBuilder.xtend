@@ -1,5 +1,6 @@
 package org.yakindu.sct.model.sexec.transformation
 
+import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgraph.Statechart
@@ -35,7 +36,94 @@ class SequenceBuilder {
 	boolean _addTraceSteps 
 	
 	
-		/**
+	def void defineDeepEnterSequences(ExecutionFlow flow, Statechart sc) {
+		for ( r : sc.regions) {
+			r.defineDeepEnterSequence
+		}
+	}
+	def void defineDeepEnterSequence(State s) {
+		for (r : s.regions) {
+			r.defineDeepEnterSequence
+		}
+	}
+
+	def void defineDeepEnterSequence(Region r) {
+		for (s : r.vertices.filter(typeof(State))) {
+			s.defineDeepEnterSequence
+		}
+		
+		val execRegion = r.create
+		val seq = sexec.factory.createSequence
+		seq.name = "enterSequence"
+		seq.comment = "deep enterSequence with history in child " + r.name
+		
+		seq.steps += r.defineDeepHistorySwitch
+		execRegion.deepEnterSequence = seq
+	}
+
+	def StateSwitch defineDeepHistorySwitch(Region r) {
+		val execRegion = r.create
+		
+		val StateSwitch sSwitch = sexec.factory.createStateSwitch
+		sSwitch.stateConfigurationIdx = execRegion.stateVector.offset
+		sSwitch.comment = "Handle deep history entry of " +r.name
+		sSwitch.historyRegion = execRegion
+		
+		for (child : r.vertices.filter(typeof(State))) {
+			//TODO consider direct children
+			for (childLeaf : child.collectLeafStates(newArrayList).filter(c|c.create.stateVector.offset == sSwitch.stateConfigurationIdx)) {
+				val execChild = child.create
+				val seq = sexec.factory.createSequence
+				seq.name = "enterSequence"
+				seq.comment = "enterSequence with history in child " + child.name+" for leaf "+childLeaf.name
+				if ( execChild.leaf ) {
+					seq.steps += execChild.enterSequence.newCall
+				} else {
+					if (execChild.entryAction != null ) seq.steps += execChild.entryAction.newCall
+					if ( trace.addTraceSteps ) seq.steps += execChild.newTraceStateEntered
+					for (childRegion : child.regions) {
+						seq.steps += childRegion.create.deepEnterSequence.newCall
+					}
+				}
+				sSwitch.cases += childLeaf.create.newCase(seq)
+			}
+		}
+		
+		return sSwitch
+	}
+	
+	def void defineShallowEnterSequences(ExecutionFlow flow, Statechart sc) {
+		for ( r : sc.allContentsIterable.filter(typeof(Region))) {
+			val execRegion = r.create
+			val seq = sexec.factory.createSequence
+			seq.name = "enterSequence"
+			seq.comment = "shallow enterSequence with history in child " + r.name
+			
+			seq.steps += r.defineShallowHistorySwitch
+			execRegion.shallowEnterSequence = seq
+		}
+	}
+	
+	def StateSwitch defineShallowHistorySwitch(Region r) {
+		val execRegion = r.create
+		
+		val StateSwitch sSwitch = sexec.factory.createStateSwitch
+		sSwitch.stateConfigurationIdx = execRegion.stateVector.offset
+		sSwitch.comment = "Handle shallow history entry of " +r.name
+		sSwitch.historyRegion = r.create
+		
+		for (child : r.vertices.filter(typeof(State))) {
+			val execChild = child.create
+			//TODO consider direct children
+			for (childLeaf : child.collectLeafStates(newArrayList).filter(c|c.create.stateVector.offset == sSwitch.stateConfigurationIdx)) {
+				sSwitch.cases += childLeaf.create.newCase(execChild.enterSequence.newCall)
+			}
+		}
+		
+		return sSwitch
+	}
+	
+	/**
 	 * Defines the enter sequences of all states
 	 */
 	def void defineStateEnterSequences(ExecutionFlow flow, Statechart sc) {
@@ -131,8 +219,8 @@ class SequenceBuilder {
 		// process all states of a region
 		for ( s : r.vertices ) defineStateExitSequence(s)
 		
-		if (r.collectEntries.exists(e|e.kind == EntryKind::DEEP_HISTORY || e.kind == EntryKind::SHALLOW_HISTORY)) {
-			seq.steps += execRegion.newSaveHistory(r.collectEntries.exists(e|e.kind == EntryKind::DEEP_HISTORY))
+		if (execRegion.historyVector != null) {
+			seq.steps += execRegion.newSaveHistory()
 		}
 		
 		// collect leaf states

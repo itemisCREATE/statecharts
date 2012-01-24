@@ -87,11 +87,13 @@ public class ModelSequencer {
       this.structureMapping.mapPseudoStates(sc, ef);
       this.structureMapping.mapTimeEvents(sc, ef);
       this.svBuilder.defineStateVector(ef, sc);
-      this.svBuilder.defineHistoryStateVector(ef, sc);
+      this.svBuilder.defineHistoryVector(ef, sc);
       this.behaviorMapping.mapEntryActions(sc, ef);
       this.behaviorMapping.mapExitActions(sc, ef);
       this.seqBuilder.defineStateEnterSequences(ef, sc);
       this.seqBuilder.defineStateExitSequences(ef, sc);
+      this.seqBuilder.defineDeepEnterSequences(ef, sc);
+      this.seqBuilder.defineShallowEnterSequences(ef, sc);
       this.seqBuilder.defineStatechartEnterSequence(ef, sc);
       this.seqBuilder.defineStatechartExitSequence(ef, sc);
       this.behaviorMapping.mapTransitions(sc, ef);

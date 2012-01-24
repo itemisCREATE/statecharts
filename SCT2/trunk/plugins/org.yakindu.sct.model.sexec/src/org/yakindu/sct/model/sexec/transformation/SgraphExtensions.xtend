@@ -9,6 +9,7 @@ import org.yakindu.sct.model.sgraph.Entry
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import java.util.ArrayList
+import org.yakindu.sct.model.sgraph.EntryKind
 
 class SgraphExtensions {
 	
@@ -88,6 +89,13 @@ class SgraphExtensions {
 		return leafStates	
 	}
 	
-	
+	def requireDeepHistory(Region r) {
+		r.vertices.filter(typeof(Entry)).exists(v|v.kind == EntryKind::DEEP_HISTORY)
+	}
+
+	def requireHistory(Region r) {
+		r.vertices.filter(typeof(Entry)).exists(v|v.kind == EntryKind::SHALLOW_HISTORY)
+		|| r.containers.filter(typeof(Region)).exists(p|p.requireDeepHistory)
+	}
 	
 }

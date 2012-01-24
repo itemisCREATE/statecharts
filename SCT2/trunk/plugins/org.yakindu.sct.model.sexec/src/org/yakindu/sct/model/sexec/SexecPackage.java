@@ -236,13 +236,22 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_FLOW__REGIONS = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>History Vector</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_FLOW__HISTORY_VECTOR = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 10;
+
+	/**
 	 * The number of structural features of the '<em>Execution Flow</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW_FEATURE_COUNT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 10;
+	int EXECUTION_FLOW_FEATURE_COUNT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl <em>Execution Node</em>}' class.
@@ -700,13 +709,31 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_REGION__EXIT_SEQUENCE = EXECUTION_SCOPE__EXIT_SEQUENCE;
 
 	/**
-	 * The feature id for the '<em><b>History State Vector</b></em>' containment reference.
+	 * The feature id for the '<em><b>Deep Enter Sequence</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_REGION__HISTORY_STATE_VECTOR = EXECUTION_SCOPE_FEATURE_COUNT + 0;
+	int EXECUTION_REGION__DEEP_ENTER_SEQUENCE = EXECUTION_SCOPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Shallow Enter Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_REGION__SHALLOW_ENTER_SEQUENCE = EXECUTION_SCOPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>History Vector</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_REGION__HISTORY_VECTOR = EXECUTION_SCOPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Execution Region</em>' class.
@@ -715,7 +742,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_REGION_FEATURE_COUNT = EXECUTION_SCOPE_FEATURE_COUNT + 1;
+	int EXECUTION_REGION_FEATURE_COUNT = EXECUTION_SCOPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionEntryImpl <em>Execution Entry</em>}' class.
@@ -2105,6 +2132,17 @@ public interface SexecPackage extends EPackage {
 	EReference getExecutionFlow_Regions();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionFlow#getHistoryVector <em>History Vector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>History Vector</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionFlow#getHistoryVector()
+	 * @see #getExecutionFlow()
+	 * @generated
+	 */
+	EReference getExecutionFlow_HistoryVector();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionNode <em>Execution Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2255,15 +2293,37 @@ public interface SexecPackage extends EPackage {
 	EClass getExecutionRegion();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionRegion#getHistoryStateVector <em>History State Vector</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionRegion#getDeepEnterSequence <em>Deep Enter Sequence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>History State Vector</em>'.
-	 * @see org.yakindu.sct.model.sexec.ExecutionRegion#getHistoryStateVector()
+	 * @return the meta object for the containment reference '<em>Deep Enter Sequence</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionRegion#getDeepEnterSequence()
 	 * @see #getExecutionRegion()
 	 * @generated
 	 */
-	EReference getExecutionRegion_HistoryStateVector();
+	EReference getExecutionRegion_DeepEnterSequence();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionRegion#getShallowEnterSequence <em>Shallow Enter Sequence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Shallow Enter Sequence</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionRegion#getShallowEnterSequence()
+	 * @see #getExecutionRegion()
+	 * @generated
+	 */
+	EReference getExecutionRegion_ShallowEnterSequence();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionRegion#getHistoryVector <em>History Vector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>History Vector</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionRegion#getHistoryVector()
+	 * @see #getExecutionRegion()
+	 * @generated
+	 */
+	EReference getExecutionRegion_HistoryVector();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionEntry <em>Execution Entry</em>}'.
@@ -3032,6 +3092,14 @@ public interface SexecPackage extends EPackage {
 		EReference EXECUTION_FLOW__REGIONS = eINSTANCE.getExecutionFlow_Regions();
 
 		/**
+		 * The meta object literal for the '<em><b>History Vector</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_FLOW__HISTORY_VECTOR = eINSTANCE.getExecutionFlow_HistoryVector();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl <em>Execution Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3152,12 +3220,28 @@ public interface SexecPackage extends EPackage {
 		EClass EXECUTION_REGION = eINSTANCE.getExecutionRegion();
 
 		/**
-		 * The meta object literal for the '<em><b>History State Vector</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Deep Enter Sequence</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXECUTION_REGION__HISTORY_STATE_VECTOR = eINSTANCE.getExecutionRegion_HistoryStateVector();
+		EReference EXECUTION_REGION__DEEP_ENTER_SEQUENCE = eINSTANCE.getExecutionRegion_DeepEnterSequence();
+
+		/**
+		 * The meta object literal for the '<em><b>Shallow Enter Sequence</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_REGION__SHALLOW_ENTER_SEQUENCE = eINSTANCE.getExecutionRegion_ShallowEnterSequence();
+
+		/**
+		 * The meta object literal for the '<em><b>History Vector</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_REGION__HISTORY_VECTOR = eINSTANCE.getExecutionRegion_HistoryVector();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionEntryImpl <em>Execution Entry</em>}' class.

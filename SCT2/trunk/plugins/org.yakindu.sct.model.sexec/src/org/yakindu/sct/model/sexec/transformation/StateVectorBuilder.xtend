@@ -21,7 +21,25 @@ class StateVectorBuilder {
 	@Inject extension SexecExtensions sexec
 	@Inject extension SexecElementMapping mapping
 	@Inject extension StatechartExtensions sc
+	@Inject extension SgraphExtensions sgraph
 	
+	def defineHistoryVector(ExecutionFlow flow, Statechart sc) {
+		var offset = 0
+		for ( r : sc.allContentsIterable.filter(typeof(Region)) ) {
+			if (r.requireHistory) {
+				offset = offset+1
+				val er = r.create
+				er.historyVector = sexec.factory.createStateVector
+				er.historyVector.offset = offset;
+				er.historyVector.size = 1
+			}
+		}
+		
+		flow.historyVector = sexec.factory.createStateVector
+		flow.historyVector.offset = 0;
+		flow.historyVector.size = offset
+	}
+
 	def defineStateVector(ExecutionFlow flow, Statechart sc) {
 		var offset = 0
 		for ( r : sc.regions ) {
@@ -33,21 +51,6 @@ class StateVectorBuilder {
 		flow.stateVector.offset = 0;
 		flow.stateVector.size = offset			
 	}
-	def defineHistoryStateVector(ExecutionFlow flow, Statechart sc) {
-		for (Region r : sc.allContentsIterable.filter(typeof(Region))) {
-			val execRegion = r.create
-			if (r.vertices.filter(typeof(Entry)).exists(v|v.kind== EntryKind::DEEP_HISTORY)) {
-				execRegion.historyStateVector = sexec.factory.createStateVector
-				execRegion.historyStateVector.offset = execRegion.stateVector.offset;
-				execRegion.historyStateVector.size = execRegion.stateVector.size
-			} else if (r.vertices.filter(typeof(Entry)).exists(v|v.kind== EntryKind::SHALLOW_HISTORY)) {
-				execRegion.historyStateVector = sexec.factory.createStateVector
-				execRegion.historyStateVector.offset = execRegion.stateVector.offset;
-				execRegion.historyStateVector.size = 1
-			}
-		}
-	}
- 
 
 	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of the statechart */
 	def int defineStateVectors(Statechart sc, int offset) {

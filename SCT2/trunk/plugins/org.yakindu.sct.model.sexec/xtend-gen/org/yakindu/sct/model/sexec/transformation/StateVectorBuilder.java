@@ -4,11 +4,9 @@ import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xtend2.lib.EObjectExtensions;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
@@ -17,10 +15,9 @@ import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.StateVector;
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping;
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions;
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions;
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
 import org.yakindu.sct.model.sgraph.Choice;
-import org.yakindu.sct.model.sgraph.Entry;
-import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
@@ -40,6 +37,42 @@ public class StateVectorBuilder {
   @Inject
   private StatechartExtensions sc;
   
+  @Inject
+  private SgraphExtensions sgraph;
+  
+  public void defineHistoryVector(final ExecutionFlow flow, final Statechart sc) {
+    {
+      int offset = 0;
+      Iterable<EObject> _allContentsIterable = EObjectExtensions.allContentsIterable(sc);
+      Iterable<Region> _filter = IterableExtensions.<Region>filter(_allContentsIterable, org.yakindu.sct.model.sgraph.Region.class);
+      for (final Region r : _filter) {
+        boolean _requireHistory = this.sgraph.requireHistory(r);
+        if (_requireHistory) {
+          {
+            int _operator_plus = IntegerExtensions.operator_plus(((Integer)offset), ((Integer)1));
+            offset = _operator_plus;
+            ExecutionRegion _create = this.mapping.create(r);
+            final ExecutionRegion er = _create;
+            SexecFactory _factory = this.sexec.factory();
+            StateVector _createStateVector = _factory.createStateVector();
+            er.setHistoryVector(_createStateVector);
+            StateVector _historyVector = er.getHistoryVector();
+            _historyVector.setOffset(offset);
+            StateVector _historyVector_1 = er.getHistoryVector();
+            _historyVector_1.setSize(1);
+          }
+        }
+      }
+      SexecFactory _factory_1 = this.sexec.factory();
+      StateVector _createStateVector_1 = _factory_1.createStateVector();
+      flow.setHistoryVector(_createStateVector_1);
+      StateVector _historyVector_2 = flow.getHistoryVector();
+      _historyVector_2.setOffset(0);
+      StateVector _historyVector_3 = flow.getHistoryVector();
+      _historyVector_3.setSize(offset);
+    }
+  }
+  
   public void defineStateVector(final ExecutionFlow flow, final Statechart sc) {
     {
       int offset = 0;
@@ -56,66 +89,6 @@ public class StateVectorBuilder {
       _stateVector.setOffset(0);
       StateVector _stateVector_1 = flow.getStateVector();
       _stateVector_1.setSize(offset);
-    }
-  }
-  
-  public void defineHistoryStateVector(final ExecutionFlow flow, final Statechart sc) {
-    Iterable<EObject> _allContentsIterable = EObjectExtensions.allContentsIterable(sc);
-    Iterable<Region> _filter = IterableExtensions.<Region>filter(_allContentsIterable, org.yakindu.sct.model.sgraph.Region.class);
-    for (final Region r : _filter) {
-      {
-        ExecutionRegion _create = this.mapping.create(r);
-        final ExecutionRegion execRegion = _create;
-        EList<Vertex> _vertices = r.getVertices();
-        Iterable<Entry> _filter_1 = IterableExtensions.<Entry>filter(_vertices, org.yakindu.sct.model.sgraph.Entry.class);
-        final Function1<Entry,Boolean> _function = new Function1<Entry,Boolean>() {
-            public Boolean apply(final Entry v) {
-              EntryKind _kind = v.getKind();
-              boolean _operator_equals = ObjectExtensions.operator_equals(_kind, EntryKind.DEEP_HISTORY);
-              return ((Boolean)_operator_equals);
-            }
-          };
-        boolean _exists = IterableExtensions.<Entry>exists(_filter_1, _function);
-        if (_exists) {
-          {
-            SexecFactory _factory = this.sexec.factory();
-            StateVector _createStateVector = _factory.createStateVector();
-            execRegion.setHistoryStateVector(_createStateVector);
-            StateVector _historyStateVector = execRegion.getHistoryStateVector();
-            StateVector _stateVector = execRegion.getStateVector();
-            int _offset = _stateVector.getOffset();
-            _historyStateVector.setOffset(_offset);
-            StateVector _historyStateVector_1 = execRegion.getHistoryStateVector();
-            StateVector _stateVector_1 = execRegion.getStateVector();
-            int _size = _stateVector_1.getSize();
-            _historyStateVector_1.setSize(_size);
-          }
-        } else {
-          EList<Vertex> _vertices_1 = r.getVertices();
-          Iterable<Entry> _filter_2 = IterableExtensions.<Entry>filter(_vertices_1, org.yakindu.sct.model.sgraph.Entry.class);
-          final Function1<Entry,Boolean> _function_1 = new Function1<Entry,Boolean>() {
-              public Boolean apply(final Entry v_1) {
-                EntryKind _kind_1 = v_1.getKind();
-                boolean _operator_equals_1 = ObjectExtensions.operator_equals(_kind_1, EntryKind.SHALLOW_HISTORY);
-                return ((Boolean)_operator_equals_1);
-              }
-            };
-          boolean _exists_1 = IterableExtensions.<Entry>exists(_filter_2, _function_1);
-          if (_exists_1) {
-            {
-              SexecFactory _factory_1 = this.sexec.factory();
-              StateVector _createStateVector_1 = _factory_1.createStateVector();
-              execRegion.setHistoryStateVector(_createStateVector_1);
-              StateVector _historyStateVector_2 = execRegion.getHistoryStateVector();
-              StateVector _stateVector_2 = execRegion.getStateVector();
-              int _offset_1 = _stateVector_2.getOffset();
-              _historyStateVector_2.setOffset(_offset_1);
-              StateVector _historyStateVector_3 = execRegion.getHistoryStateVector();
-              _historyStateVector_3.setSize(1);
-            }
-          }
-        }
-      }
     }
   }
   
