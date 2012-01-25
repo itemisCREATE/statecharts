@@ -1,0 +1,14 @@
+
+
+include_directories(../../src-gen-c/InterfaceTest)
+
+add_executable(InterfaceTestStatemachineMainOO main.cpp)
+target_link_libraries(InterfaceTestStatemachineMainOO InterfaceTestStatemachine)
+
+add_test(Interface_test_default_interface_good_1 InterfaceTestStatemachineMainOO "1")
+add_test(Interface_test_default_interface_bad_2 InterfaceTestStatemachineMain "2")
+add_test(Interface_test_other_interface_good_3 InterfaceTestStatemachineMain "3")
+add_test(Interface_test_other_interface_bad_4 InterfaceTestStatemachineMain "4")
+add_test(Interface_test_third_interface_good_5 InterfaceTestStatemachineMain "5")
+add_test(Interface_test_third_interface_bad_6 InterfaceTestStatemachineMain "6")
+add_test(Interface_test_namespaces_7 InterfaceTestStatemachineMain "7")
