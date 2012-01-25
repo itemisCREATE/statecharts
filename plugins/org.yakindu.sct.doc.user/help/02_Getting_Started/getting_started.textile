@@ -4,7 +4,31 @@ h2. Installation
 
 h3. Prerequisites
 
-h3. Installing the YAKINDU-Plug-Ins 
+The *Yakindu Statechart Tools 2* are built upon Java and Xtext. So you need to have installed a "Java Runtime Environment":http://www.oracle.com/technetwork/java/index.html and Xtext installed. The easier way to get this is to install the "pre configured Xtext contribution":http://xtext.itemis.com.
+
+The *Yakindu Statechart Tools 2* need *Eclipse Indigo 3.7* or higher and *Xtext 2.0.1* exactly (no higher) to work correctly.
+
+h3. Installing the YAKINDU-Plug-Ins
+
+You install the Yakindu Plug-Ins from the update site: http://updates.yakindu.com/indigo/milestones. 
+
+* Choose *Help* -> *Install new software...* from the menu bar and _Add.._ the update site *Yakindu SCT2 milestones* - http://updates.yakindu.com/indigo/milestones/
+* On this update site you find two main items:
+** Xtext integration utilities
+*** Xtext GMF integration (XGI)
+*** Xtext JFace integration (XJI)
+*** Yakindu Base
+** Yakindu SCT 2
+*** Generator C
+*** Generator Java
+*** Yakindu SCT 2
+*** Yakindu SCT 2 SDK
+
+!{width: 50%}images/updatesite_4.jpg!
+
+The Xtext integration utilities provide Xtext functionality for Yakindu. Additionally to the base integration also GMF and JFace integration is provided here. For more details check [[Xtext GMF Integration (XGI)]] and [[Xtext JFace Integration (XJI)]].
+
+Under Yakindu SCT 2 you can select what code generators you need and if you need the Yakindu SCT2 SDK (for developers). For users only the Yakindu SCT 2 is sufficient.
 
 h2. The Yakindu perspective
 
@@ -17,3 +41,7 @@ h2. Views
 h2. Wizards
 
 h2. Generators
+
+h2. Xtext GMF Integration (XGI)
+
+h2. Xtext JFace Integration (XJI)
