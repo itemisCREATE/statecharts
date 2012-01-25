@@ -2,10 +2,10 @@
 
 include_directories(../../src-gen-c/InterfaceTest)
 
-add_executable(InterfaceTestStatemachineMain main.c)
-target_link_libraries(InterfaceTestStatemachineMain InterfaceTestStatemachine)
+add_executable(InterfaceTestStatemachineMainOO main.cpp)
+target_link_libraries(InterfaceTestStatemachineMainOO InterfaceTestStatemachine)
 
-add_test(Interface_test_default_interface_good_1 InterfaceTestStatemachineMain "1")
+add_test(Interface_test_default_interface_good_1 InterfaceTestStatemachineMainOO "1")
 add_test(Interface_test_default_interface_bad_2 InterfaceTestStatemachineMain "2")
 add_test(Interface_test_other_interface_good_3 InterfaceTestStatemachineMain "3")
 add_test(Interface_test_other_interface_bad_4 InterfaceTestStatemachineMain "4")
