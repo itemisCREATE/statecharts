@@ -23,8 +23,9 @@ Templates for the main statechart cpp file.
 #ifndef «STNAME()»OOW_H_
 #define «STNAME()»OOW_H_
 
-#include "«StName()».h"
+#include <vector>
 
+#include "«StName()».h"
 «FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
 #include "«interface.interfaceClassNameOOW()».hpp"
 «ENDFOREACH -»
@@ -44,6 +45,8 @@ public:
    void exit();
    void runCycle();
    boolean eventWaiting();
+
+   std::vector<States> getStates(); 
 
 «FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
    «interface.interfaceClassNameOOW()» get_«interface.interfaceObjectNameOOW()»();
@@ -104,6 +107,14 @@ inline «interface.interfaceClassNameOOW()» «StName()»OOW::get_«interface.interfa
 }
 «ENDFOREACH -»
 
+inline std::vector<States> «StName()»OOW::getStates()
+{
+	std::vector<States> states;
+	for(int i(0); i<MAX_PARALLEL_STATES; ++i) {
+	  states.push_back((States)«stName()».base.base.state[i]);
+	}
+	return states;
+}
 
 #endif // «STNAME()»OOW_H_
 
