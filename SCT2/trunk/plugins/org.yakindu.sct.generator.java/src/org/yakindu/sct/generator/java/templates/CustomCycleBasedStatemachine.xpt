@@ -330,8 +330,8 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 		for (int i = 0; i < «historyVector.size»; i++) {
 			historyVector[i] = State.$NullState$;
 		}
-		«ENDIF-»
 		
+		«ENDIF-»
 		occuredEvents.clear();
 	}
 	

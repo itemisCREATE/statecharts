@@ -34,10 +34,11 @@ class StateVectorBuilder {
 				er.historyVector.size = 1
 			}
 		}
-		
-		flow.historyVector = sexec.factory.createStateVector
-		flow.historyVector.offset = 0;
-		flow.historyVector.size = offset+1
+		if (offset != -1) {			
+			flow.historyVector = sexec.factory.createStateVector
+			flow.historyVector.offset = 0;
+			flow.historyVector.size = offset+1
+		}
 	}
 
 	def defineStateVector(ExecutionFlow flow, Statechart sc) {

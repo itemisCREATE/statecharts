@@ -50,7 +50,7 @@ boolean hasVariables(Scope this) :
 	!declarations.typeSelect(VariableDefinition).isEmpty;
 
 boolean hasHistory(ExecutionFlow this) :
-	historyVector.size > 0;
+	historyVector != null && historyVector.size > 0;
 
 boolean hasUnvaluedEvents(Scope this) :
 	!declarations.typeSelect(EventDefinition).select(event|event.type.isVoid()).isEmpty;

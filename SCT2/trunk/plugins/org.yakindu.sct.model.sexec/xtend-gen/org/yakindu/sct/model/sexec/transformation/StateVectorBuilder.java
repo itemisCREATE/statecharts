@@ -7,6 +7,7 @@ import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xtend2.lib.EObjectExtensions;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
@@ -40,7 +41,8 @@ public class StateVectorBuilder {
   @Inject
   private SgraphExtensions sgraph;
   
-  public void defineHistoryVector(final ExecutionFlow flow, final Statechart sc) {
+  public Object defineHistoryVector(final ExecutionFlow flow, final Statechart sc) {
+    Object _xblockexpression = null;
     {
       int _operator_minus = IntegerExtensions.operator_minus(1);
       int offset = _operator_minus;
@@ -64,15 +66,24 @@ public class StateVectorBuilder {
           }
         }
       }
-      SexecFactory _factory_1 = this.sexec.factory();
-      StateVector _createStateVector_1 = _factory_1.createStateVector();
-      flow.setHistoryVector(_createStateVector_1);
-      StateVector _historyVector_2 = flow.getHistoryVector();
-      _historyVector_2.setOffset(0);
-      StateVector _historyVector_3 = flow.getHistoryVector();
-      int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)offset), ((Integer)1));
-      _historyVector_3.setSize(_operator_plus_1);
+      Object _xifexpression = null;
+      int _operator_minus_1 = IntegerExtensions.operator_minus(1);
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(((Integer)offset), ((Integer)_operator_minus_1));
+      if (_operator_notEquals) {
+        {
+          SexecFactory _factory_1 = this.sexec.factory();
+          StateVector _createStateVector_1 = _factory_1.createStateVector();
+          flow.setHistoryVector(_createStateVector_1);
+          StateVector _historyVector_2 = flow.getHistoryVector();
+          _historyVector_2.setOffset(0);
+          StateVector _historyVector_3 = flow.getHistoryVector();
+          int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)offset), ((Integer)1));
+          _historyVector_3.setSize(_operator_plus_1);
+        }
+      }
+      _xblockexpression = (_xifexpression);
     }
+    return _xblockexpression;
   }
   
   public void defineStateVector(final ExecutionFlow flow, final Statechart sc) {
