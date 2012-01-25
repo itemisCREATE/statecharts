@@ -17,13 +17,17 @@ Templates for the main statechart cpp file.
 
 «DEFINE file FOR ExecutionFlow»
 
-«FILE StName()+'OOW.h'»
+«FILE StName()+'OOW.hpp'»
 «this.getLicenseHeader()»
-
-#include "«StName()».h"
 
 #ifndef «STNAME()»OOW_H_
 #define «STNAME()»OOW_H_
+
+#include "«StName()».h"
+
+«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
+#include "«interface.interfaceClassNameOOW()».hpp"
+«ENDFOREACH -»
 
 class «StName()»OOW {
 
@@ -31,7 +35,7 @@ private:
     «StName()» «stName()»;
 	EventPool eventPool;
 
-	static const MAXEVENTSPERTYPE=4;
+	static const int MAXEVENTSPERTYPE=4;
 public:
 
    «StName()»OOW(Timer* timer);
@@ -42,11 +46,10 @@ public:
    boolean eventWaiting();
 
 «FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
-   «interface.interfaceClassNameOOW()»* get_«interface.interfaceObjectNameOOW()»();
+   «interface.interfaceClassNameOOW()» get_«interface.interfaceObjectNameOOW()»();
 «ENDFOREACH -»
 
 };
-
 
 inline «StName()»OOW::«StName()»OOW(Timer* timer)
 {
@@ -60,7 +63,7 @@ inline «StName()»OOW::«StName()»OOW(Timer* timer)
 	interfaceTestStatemachine_enter(&«stName()»);
 }
 
-inline «StName()»OOW::~«StName()»OOW(Timer* timer)
+inline «StName()»OOW::~«StName()»OOW()
 {
 	/* call all exit actions for this state machine */
 	«stName()»_exit(&«stName()»);
@@ -73,28 +76,28 @@ inline «StName()»OOW::~«StName()»OOW(Timer* timer)
 
 }
 
-void «StName()»OOW::enter()
+inline void «StName()»OOW::enter()
 {
 	«stName()»_enter(&«stName()»);
 }
 
-void «StName()»OOW::exit()
+inline void «StName()»OOW::exit()
 {
 	«stName()»_exit(&«stName()»);
 }
 
-void «StName()»OOW::runCycle()
+inline void «StName()»OOW::runCycle()
 {
 	«stName()»_runCycle(&«stName()»);
 }
 
-boolean «StName()»OOW::eventWaiting()
+inline boolean «StName()»OOW::eventWaiting()
 {
 	return «stName()»_eventWaiting(&«stName()»);
 }
 
 «FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
-«interface.interfaceClassNameOOW()» «StName()»OOW::get_«interface.interfaceObjectNameOOW()»()
+inline «interface.interfaceClassNameOOW()» «StName()»OOW::get_«interface.interfaceObjectNameOOW()»()
 {
 	«interface.interfaceClassNameOOW()» retType(«stName()»_get_«interface.interfaceObjectName().toFirstLower()»(&«stName()»));
 	return retType;

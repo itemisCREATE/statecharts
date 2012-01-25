@@ -38,6 +38,7 @@ Contais the root templates that call the different file templates.
 	«EXPAND Statemachine_cyC::file(genEntry) FOR this»
 
 	«EXPAND Interfaces::file FOR this»
+	«EXPAND InterfaceOOW::file FOR this»
 
     «REM» code that is created by the model «ENDREM»
 	«EXPAND definitionH::file(genEntry) FOR this»
@@ -47,6 +48,7 @@ Contais the root templates that call the different file templates.
 
 	«EXPAND CustomStatemachineH::file FOR this»
 	«EXPAND CustomStatemachineC::file FOR this»
+	«EXPAND CustomStatemachineHOOW::file FOR this»
 	
 	«EXPAND CustomEventH::file(genEntry) FOR this»
 	«EXPAND CustomEventC::file(genEntry) FOR this»
