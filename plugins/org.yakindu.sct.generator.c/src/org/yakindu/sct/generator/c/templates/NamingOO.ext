@@ -1,0 +1,21 @@
+import stext;
+import sexec;
+import ecore;
+import sgraph;
+import sgen;
+
+extension org::yakindu::sct::generator::c::templates::Constants;
+extension org::eclipse::xtend::util::stdlib::elementprops;
+extension org::yakindu::sct::generator::c::templates::Naming;
+
+String interfaceNameOOW(Scope this) : "unknownScope";
+String interfaceClassNameOOW(Scope this) : "unknownScope";
+String interfaceObjectNameOOW(Scope this) : "unknownScope";
+
+String interfaceNameOOW(InterfaceScope this) : ((this.name == null) ? "_if" : "_if_" + this.name);
+String interfaceClassNameOOW(InterfaceScope this) :  this.getExecutionFlow().name.toFirstUpper() + "If" + ((this.name == null)?"":this.name.toFirstUpper())+"OO";
+String interfaceObjectNameOOW(InterfaceScope this) : "iface" + ((this.name == null)?"":this.name.toFirstUpper());
+
+String interfaceNameOOW(InternalScope this) : "internal";
+String interfaceClassNameOOW(InternalScope this) : this.getExecutionFlow().name.toFirstUpper() + "InternalOO";
+String interfaceObjectNameOOW(InternalScope this) : "ifaceInternal";

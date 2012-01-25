@@ -17,12 +17,13 @@ Templates for the main statechart cpp file.
 
 «DEFINE file FOR ExecutionFlow»
 «FOREACH this.scopes.getUsableScopes() AS interface»
-«FILE interface.interfaceClassNameOOW()+".h"»
+«FILE interface.interfaceClassNameOOW()+".hpp"»
 «this.getLicenseHeader()»
  
 #ifndef «interface.interfaceClassNameOOW().toUpperCase()»_H_
 #define «interface.interfaceClassNameOOW().toUpperCase()»_H_
 
+#include "definition.h"
 #include "«interface.interfaceClassName()».h"
 #include "«StName()».h"
 
@@ -30,7 +31,7 @@ class «interface.interfaceClassNameOOW()» {
 private:
 	«interface.interfaceClassName()»* «interface.interfaceObjectName()»;
 public:
-	«interface.interfaceClassNameOOW()»(«this.StName()»);
+	«interface.interfaceClassNameOOW()»(«this.StName()»* iface);
 	virtual ~«interface.interfaceClassNameOOW()»();
 
 «FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
@@ -55,14 +56,14 @@ inline «interface.interfaceClassNameOOW()»::«interface.interfaceClassNameOOW()»(
 	«interface.interfaceObjectName()» = «stName()»_get_«interface.interfaceObjectName()»(statemachine);
 }
 
-inline «interface.interfaceClassNameOOW()»::~«interface.interfaceClassNameOOW()»(«this.StName()»* statemachine)
+inline «interface.interfaceClassNameOOW()»::~«interface.interfaceClassNameOOW()»()
 {
 }
 
 «FOREACH interface.getOutEvents() AS event -»
 inline boolean «interface.interfaceClassNameOOW()»::is_«event.name»_raised(«IF !event.type.isVoid() -»«event.type.asCType()»* value«ENDIF» )
 {
-  return «interface.interfaceName()»_is_«event.name»_raised(«interface.interfaceObjectName()», «IF !event.type.isVoid() -»value«ENDIF» );
+  return «interface.interfaceName()»_is_«event.name»_raised(«interface.interfaceObjectName()»«IF !event.type.isVoid() -», value«ENDIF» );
 
 }
 «ENDFOREACH»
@@ -70,7 +71,7 @@ inline boolean «interface.interfaceClassNameOOW()»::is_«event.name»_raised(«IF !
 «FOREACH interface.getInEvents() AS event -»
 void «interface.interfaceClassNameOOW()»::raise_«event.name»(«IF !event.type.isVoid() -»«event.type.asCType()» value «ENDIF»)
 {
-	«interface.interfaceName()»_raise_«event.name»(«interface.interfaceObjectName()», «IF !event.type.isVoid() -»value«ENDIF»)
+	«interface.interfaceName()»_raise_«event.name»(«interface.interfaceObjectName()»«IF !event.type.isVoid() -», value«ENDIF»);
 }
 «ENDFOREACH» 
 
