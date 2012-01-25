@@ -54,7 +54,7 @@ public:
 inline «StName()»OOW::«StName()»OOW(Timer* timer)
 {
 	/* Set up Event Pool */
-	«stName()»_eventPool_init_heap(&eventPool, MAXEVENTSPERTYPE);
+	«scName()»_eventPool_init_heap(&eventPool, MAXEVENTSPERTYPE);
 
 	/* initialize state machine */
 	«stName()»_init(&«stName()», timer, &eventPool);
@@ -99,7 +99,7 @@ inline boolean «StName()»OOW::eventWaiting()
 «FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
 inline «interface.interfaceClassNameOOW()» «StName()»OOW::get_«interface.interfaceObjectNameOOW()»()
 {
-	«interface.interfaceClassNameOOW()» retType(«stName()»_get_«interface.interfaceObjectName().toFirstLower()»(&«stName()»));
+	«interface.interfaceClassNameOOW()» retType(&«stName()»);
 	return retType;
 }
 «ENDFOREACH -»
