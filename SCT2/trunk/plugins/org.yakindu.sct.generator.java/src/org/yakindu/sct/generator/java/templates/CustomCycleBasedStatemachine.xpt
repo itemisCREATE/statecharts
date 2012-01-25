@@ -61,7 +61,7 @@ getTimerService().resetTimer(«timeEvent.getName()»);
 «DEFINE ActionCode FOR Call-»
 
 «getComment()-»
-«this.step.functionName()»();
+«step.functionName()»();
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Sequence-»
@@ -222,9 +222,6 @@ else {
 «getLicenseHeader(entry)»
 package «getImplementationPackageName(entry)»;
 
-«IF hasHistory()-»
-	import java.util.Arrays;
-«ENDIF-»
 import java.util.Collection;
 import java.util.HashSet;
 import «entry.getBasePackageName()».Event;
@@ -283,7 +280,9 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	
 	«ENDFOREACH-»
 	
+	«IF hasHistory()-»
 	private State[] historyVector = new State[«historyVector.size»];
+	«ENDIF-»
 
 	private final State[] stateVector = new State[«stateVector.size»];
 	
@@ -323,12 +322,16 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	}
 	
 	public void init() {
-		for (int i = 0; i < stateVector.length; i++) {
+		for (int i = 0; i < «stateVector.size»; i++) {
 			stateVector[i] = State.$NullState$;
 		}
+		
+		«IF hasHistory()-»
 		for (int i = 0; i < «historyVector.size»; i++) {
 			historyVector[i] = State.$NullState$;
 		}
+		«ENDIF-»
+		
 		occuredEvents.clear();
 	}
 	
