@@ -51,7 +51,9 @@ class SequenceBuilder {
 		for (s : r.vertices.filter(typeof(State))) {
 			s.defineDeepEnterSequence
 		}
-		
+		if (!r.requireHistory) {
+			return
+		}
 		val execRegion = r.create
 		val seq = sexec.factory.createSequence
 		seq.name = "deepEnterSequence"
@@ -94,13 +96,15 @@ class SequenceBuilder {
 	
 	def void defineShallowEnterSequences(ExecutionFlow flow, Statechart sc) {
 		for ( r : sc.allContentsIterable.filter(typeof(Region))) {
-			val execRegion = r.create
-			val seq = sexec.factory.createSequence
-			seq.name = "shallowEnterSequence"
-			seq.comment = "shallow enterSequence with history in child " + r.name
-			
-			seq.steps += r.defineShallowHistorySwitch
-			execRegion.shallowEnterSequence = seq
+			if (r.requireHistory) {
+				val execRegion = r.create
+				val seq = sexec.factory.createSequence
+				seq.name = "shallowEnterSequence"
+				seq.comment = "shallow enterSequence with history in child " + r.name
+				
+				seq.steps += r.defineShallowHistorySwitch
+				execRegion.shallowEnterSequence = seq
+			}
 		}
 	}
 	

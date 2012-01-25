@@ -2,6 +2,7 @@ package org.yakindu.sct.model.sexec.transformation.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
@@ -276,4 +277,9 @@ public class HistoryTest extends ModelSequencerTest {
 		// _s2.getEnterSequence());
 	}
 
+	public void testNoHistory() {
+		SimpleFlatTSC sc = new SCTTestUtil.SimpleFlatTSC();
+		ExecutionFlow flow = sequencer.transform(sc.sc);
+		assertNull(flow.getHistoryVector());
+	}
 }

@@ -100,6 +100,11 @@ public class SequenceBuilder {
       for (final State s : _filter) {
         this.defineDeepEnterSequence(s);
       }
+      boolean _requireHistory = this.sgraph.requireHistory(r);
+      boolean _operator_not = BooleanExtensions.operator_not(_requireHistory);
+      if (_operator_not) {
+        return;
+      }
       ExecutionRegion _create = this.mapping.create(r);
       final ExecutionRegion execRegion = _create;
       SexecFactory _factory = this.sexec.factory();
@@ -207,20 +212,23 @@ public class SequenceBuilder {
     Iterable<EObject> _allContentsIterable = EObjectExtensions.allContentsIterable(sc);
     Iterable<Region> _filter = IterableExtensions.<Region>filter(_allContentsIterable, org.yakindu.sct.model.sgraph.Region.class);
     for (final Region r : _filter) {
-      {
-        ExecutionRegion _create = this.mapping.create(r);
-        final ExecutionRegion execRegion = _create;
-        SexecFactory _factory = this.sexec.factory();
-        Sequence _createSequence = _factory.createSequence();
-        final Sequence seq = _createSequence;
-        seq.setName("shallowEnterSequence");
-        String _name = r.getName();
-        String _operator_plus = StringExtensions.operator_plus("shallow enterSequence with history in child ", _name);
-        seq.setComment(_operator_plus);
-        EList<Step> _steps = seq.getSteps();
-        StateSwitch _defineShallowHistorySwitch = this.defineShallowHistorySwitch(r);
-        CollectionExtensions.<Step>operator_add(_steps, _defineShallowHistorySwitch);
-        execRegion.setShallowEnterSequence(seq);
+      boolean _requireHistory = this.sgraph.requireHistory(r);
+      if (_requireHistory) {
+        {
+          ExecutionRegion _create = this.mapping.create(r);
+          final ExecutionRegion execRegion = _create;
+          SexecFactory _factory = this.sexec.factory();
+          Sequence _createSequence = _factory.createSequence();
+          final Sequence seq = _createSequence;
+          seq.setName("shallowEnterSequence");
+          String _name = r.getName();
+          String _operator_plus = StringExtensions.operator_plus("shallow enterSequence with history in child ", _name);
+          seq.setComment(_operator_plus);
+          EList<Step> _steps = seq.getSteps();
+          StateSwitch _defineShallowHistorySwitch = this.defineShallowHistorySwitch(r);
+          CollectionExtensions.<Step>operator_add(_steps, _defineShallowHistorySwitch);
+          execRegion.setShallowEnterSequence(seq);
+        }
       }
     }
   }
