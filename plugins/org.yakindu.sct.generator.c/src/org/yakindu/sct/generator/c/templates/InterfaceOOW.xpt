@@ -69,10 +69,23 @@ inline boolean «interface.interfaceClassNameOOW()»::is_«event.name»_raised(«IF !
 «ENDFOREACH»
 
 «FOREACH interface.getInEvents() AS event -»
-void «interface.interfaceClassNameOOW()»::raise_«event.name»(«IF !event.type.isVoid() -»«event.type.asCType()» value «ENDIF»)
+inline void «interface.interfaceClassNameOOW()»::raise_«event.name»(«IF !event.type.isVoid() -»«event.type.asCType()» value «ENDIF»)
 {
 	«interface.interfaceName()»_raise_«event.name»(«interface.interfaceObjectName()»«IF !event.type.isVoid() -», value«ENDIF»);
 }
+«ENDFOREACH» 
+
+«FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
+inline «asCType(variable.type)» «interface.interfaceClassNameOOW()»::get_«variable.name»()
+{
+	return «interface.interfaceName()»_get_«variable.name»(«interface.interfaceObjectName()»); 
+}   
+«IF variable.readonly == false -»
+inline void «interface.interfaceClassNameOOW()»::set_«variable.name»(«asCType(variable.type)» value)
+{
+	«interface.interfaceName()»_set_«variable.name»(«interface.interfaceObjectName()», value);
+}
+«ENDIF»
 «ENDFOREACH» 
 
 
