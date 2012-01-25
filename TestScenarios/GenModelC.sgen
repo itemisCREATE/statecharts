@@ -1,11 +1,19 @@
 GeneratorModel for yakindu::c {
 	statechart InterfaceTest {
 		feature Debug {
-			dumpSexec = true
+			dumpSexec = false
 		}
 		feature	Outlet {
 			targetProject = "TestScenarios"
 			targetFolder = "src-gen-c/InterfaceTest"
+		}
+		feature FunctionInlining {
+			inlineReactions = true
+			inlineChoices = true
+			inlineEnterSequences = true
+			inlineEntryActions = true
+			inlineExitActions = true
+			inlineExitSequences = true
 		}
 		feature CCodeFeature {
 			InterfaceEventListener = true
@@ -23,6 +31,14 @@ GeneratorModel for yakindu::c {
  #     committers of YAKINDU - initial API and implementation
  "
 		}
+//		feature FunctionInlining {
+//			inlineChoices = false
+//			inlineEnterSequences = false
+//			inlineEntryActions = false
+//			inlineExitActions = false
+//			inlineExitSequences = false
+//			inlineReactions = false
+//		}
 	}
 	statechart Test_DeepHistory {
 		feature Outlet {

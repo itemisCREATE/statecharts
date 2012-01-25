@@ -58,6 +58,8 @@ add_subdirectory(test-c/Test_Transition)
 add_subdirectory(test-c/Test_ShallowHistory)
 add_subdirectory(test-c/Test_LocalActions)
 
-add_subdirectory(test-c/TimingTest_ParallelRegions)
+#add_subdirectory(test-c/TimingTest_ParallelRegions)
+add_subdirectory(test-cpp/InterfaceTest)
+
 
 endif (COMPILE_SINGLETON)
