@@ -42,7 +42,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	private List<ExecutionEvent> declaredEvents;
 	private List<ExecutionEvent> raisedEvents;
 	private ExecutionState[] activeStateConfig;
-	private Map<ExecutionRegion, ExecutionState[]> historyStateConfig;
+	private Map<Integer, ExecutionState> historyStateConfig;
 	private double timeScaleFactor;
 	private VirtualClock virtualClock;
 
@@ -150,22 +150,13 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		return activeStateConfig;
 	}
 
-	public ExecutionState[] getHistoryStateConfiguration(ExecutionRegion region) {
-		return historyStateConfig.get(region);
+	public ExecutionState getHistoryStateConfiguration(ExecutionRegion region) {
+		return historyStateConfig.get(region.getHistoryVector().getOffset());
 	}
 
-	public void saveHistoryStateConfiguration(ExecutionRegion region,
-			boolean deep) {
-		ExecutionState[] history = null;
-		if (deep) {
-			history = new ExecutionState[region.getStateVector().getSize()];
-			System.arraycopy(activeStateConfig, region.getStateVector()
-					.getOffset(), history, 0, region.getStateVector().getSize());
-		} else {
-			history = new ExecutionState[1];
-			history[1] = activeStateConfig[region.getStateVector().getOffset()];
-		}
-		historyStateConfig.put(region, history);
+	public void saveHistoryStateConfiguration(ExecutionRegion region) {
+		historyStateConfig.put(region.getHistoryVector().getOffset(),
+				getStateConfiguration()[region.getStateVector().getOffset()]);
 	}
 
 	public void initStateConfigurationVector(int size) {

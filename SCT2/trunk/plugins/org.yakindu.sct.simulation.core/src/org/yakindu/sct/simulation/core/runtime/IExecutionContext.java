@@ -126,9 +126,8 @@ public interface IExecutionContext {
 	 * @param region
 	 * @return
 	 */
-	public ExecutionState[] getHistoryStateConfiguration(ExecutionRegion region);
+	public ExecutionState getHistoryStateConfiguration(ExecutionRegion region);
 
-	public void saveHistoryStateConfiguration(ExecutionRegion region,
-			boolean deep);
+	public void saveHistoryStateConfiguration(ExecutionRegion region);
 
 }
