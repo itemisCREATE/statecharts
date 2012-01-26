@@ -100,8 +100,8 @@ public class SequenceBuilder {
       for (final State s : _filter) {
         this.defineDeepEnterSequence(s);
       }
-      boolean _requireHistory = this.sgraph.requireHistory(r);
-      boolean _operator_not = BooleanExtensions.operator_not(_requireHistory);
+      boolean _requireDeepHistory = this.sgraph.requireDeepHistory(r);
+      boolean _operator_not = BooleanExtensions.operator_not(_requireDeepHistory);
       if (_operator_not) {
         return;
       }
@@ -212,8 +212,8 @@ public class SequenceBuilder {
     Iterable<EObject> _allContentsIterable = EObjectExtensions.allContentsIterable(sc);
     Iterable<Region> _filter = IterableExtensions.<Region>filter(_allContentsIterable, org.yakindu.sct.model.sgraph.Region.class);
     for (final Region r : _filter) {
-      boolean _requireHistory = this.sgraph.requireHistory(r);
-      if (_requireHistory) {
+      boolean _requireShallowHistory = this.sgraph.requireShallowHistory(r);
+      if (_requireShallowHistory) {
         {
           ExecutionRegion _create = this.mapping.create(r);
           final ExecutionRegion execRegion = _create;
