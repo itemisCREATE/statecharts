@@ -51,7 +51,7 @@ class SequenceBuilder {
 		for (s : r.vertices.filter(typeof(State))) {
 			s.defineDeepEnterSequence
 		}
-		if (!r.requireHistory) {
+		if (!r.requireDeepHistory) {
 			return
 		}
 		val execRegion = r.create
@@ -96,7 +96,7 @@ class SequenceBuilder {
 	
 	def void defineShallowEnterSequences(ExecutionFlow flow, Statechart sc) {
 		for ( r : sc.allContentsIterable.filter(typeof(Region))) {
-			if (r.requireHistory) {
+			if (r.requireShallowHistory) {
 				val execRegion = r.create
 				val seq = sexec.factory.createSequence
 				seq.name = "shallowEnterSequence"

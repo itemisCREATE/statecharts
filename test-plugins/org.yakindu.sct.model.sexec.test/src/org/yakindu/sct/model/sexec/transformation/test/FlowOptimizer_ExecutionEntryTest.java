@@ -1,8 +1,11 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
+import static org.junit.Assert.fail;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEntry;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEntryAssignment;
@@ -12,14 +15,26 @@ import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._creat
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createStatechart;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createTransition;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableDefinition;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.findState;
 
+import java.util.ArrayList;
+
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.Call;
+import org.yakindu.sct.model.sexec.ExecutionEntry;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.ExecutionNode;
+import org.yakindu.sct.model.sexec.ExecutionRegion;
+import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sexec.HistoryEntry;
+import org.yakindu.sct.model.sexec.Reaction;
+import org.yakindu.sct.model.sexec.SaveHistory;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.Step;
+import org.yakindu.sct.model.sexec.transformation.FlowOptimizer;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.MinimalTSC;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.InitializingTSC;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.OrthogonalFlatTSC;
@@ -29,96 +44,19 @@ import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
-public class ModelSequencerSCTest extends ModelSequencerTest {
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
-	/**
-	 * The name of the execution flow must be equal to the statechart name.
-	 */
-	@Test
-	public void testFlowName() {
-		Statechart sc = _createStatechart("Test");
-		assertEquals(sc.getName(), sequencer.transform(sc).getName());
-	}
+public class FlowOptimizer_ExecutionEntryTest extends ModelSequencerTest {
 
-	/**
-	 * In the simplest case the a state without an actions will be entered.
-	 */
-	@Test
-	public void testSCEnterSequence_SimpleFlatTSC() {
-		SimpleFlatTSC tsc = new SimpleFlatTSC();
-
-		ExecutionFlow flow = sequencer.transform(tsc.sc);
-
-		assertNotNull(flow.getEnterSequence());
-		assertEquals(1, flow.getEnterSequence().getSteps().size());
-
-		assertCall(flow.getEnterSequence(), 0, flow.getStates().get(0)
-				.getSuperScope().getEnterSequence());
-
-		assertCall(flow.getStates().get(0).getSuperScope().getEnterSequence(),
-				0, flow.getNodes().get(0).getReactSequence());
-		assertCall(flow.getNodes().get(0).getReactSequence(), 0, flow
-				.getStates().get(0).getEnterSequence());
-	}
-
-	/**
-	 * For each top level region a EnterState step must be performed.
-	 */
-	@Test
-	public void testSCEnterSequence_OrthogonalFlatTSC() {
-		OrthogonalFlatTSC tsc = new OrthogonalFlatTSC();
-
-		ExecutionFlow flow = sequencer.transform(tsc.sc);
-
-		assertNotNull(flow.getEnterSequence());
-		assertEquals(2, flow.getEnterSequence().getSteps().size());
-
-		assertCall(flow.getEnterSequence(), 0, flow.getStates().get(0)
-				.getSuperScope().getEnterSequence());
-		assertCall(flow.getStates().get(0).getSuperScope().getEnterSequence(),
-				0, flow.getNodes().get(0).getReactSequence());
-		assertCall(flow.getNodes().get(0).getReactSequence(), 0, flow
-				.getStates().get(0).getEnterSequence());
-
-		assertCall(flow.getEnterSequence(), 1, flow.getStates().get(2)
-				.getSuperScope().getEnterSequence());
-		assertCall(flow.getStates().get(2).getSuperScope().getEnterSequence(),
-				0, flow.getNodes().get(1).getReactSequence());
-		assertCall(flow.getNodes().get(1).getReactSequence(), 0, flow
-				.getStates().get(2).getEnterSequence());
-
-	}
-
-	/**
-	 * The enter step must contain variable initialization.
-	 */
-	@Test
-	public void testSCEnterSequence_Variables() {
-		InitializingTSC tsc = new InitializingTSC();
-
-		ExecutionFlow flow = sequencer.transform(tsc.sc);
-
-		assertNotNull(flow.getEnterSequence());
-		assertEquals(1, flow.getEnterSequence().getSteps().size());
-
-		assertAssignment(flow.getEnterSequence(), 0, "e1",
-				AssignmentOperator.ASSIGN, "true");
-	}
-
-	@Test
-	public void testSCExitSequence() {
-		MinimalTSC sc = new MinimalTSC();
-
-		ExecutionFlow flow = sequencer.transform(sc.sc);
-
-		assertNotNull(flow.getExitSequence());
-		assertCall(flow.getExitSequence(), 0, flow.getSubScopes().get(0)
-				.getExitSequence());
-	}
+	@Inject
+	FlowOptimizer optimizer;
 
 	@Test
 	public void testNoNullCall() {
@@ -168,15 +106,28 @@ public class ModelSequencerSCTest extends ModelSequencerTest {
 
 		ExecutionFlow flow = sequencer.transform(sc);
 
+		optimizer.inlineChoices(true);
+		optimizer.inlineEnterSequences(true);
+		optimizer.inlineEntryActions(true);
+		optimizer.inlineExitActions(true);
+		optimizer.inlineExitRegion(true);
+		optimizer.inlineExitSequences(true);
+		optimizer.inlineReactions(true);
+		optimizer.inlineEntries(true);
+		optimizer.transform(flow);
+
 		TreeIterator<EObject> iter = flow.eAllContents();
 		while (iter.hasNext()) {
 			EObject child = iter.next();
 			if (child instanceof Call) {
 				Call childCall = (Call) child;
 				if (childCall.getStep() == null) {
-					Sequence sequence = assertedSequence((Step) childCall
-							.eContainer());
-					fail(sequence.getName() + ": " + sequence.getComment());
+					if (childCall.eContainer() instanceof Sequence) {
+						Sequence sequence = (Sequence) childCall.eContainer();
+						fail(sequence.getName() + ": " + sequence.getComment());
+					} else {
+						fail("Call of null-Step in " + childCall.eContainer());
+					}
 				}
 			}
 		}

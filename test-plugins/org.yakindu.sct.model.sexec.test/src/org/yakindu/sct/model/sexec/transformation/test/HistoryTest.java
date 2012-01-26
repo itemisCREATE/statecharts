@@ -277,9 +277,121 @@ public class HistoryTest extends ModelSequencerTest {
 		// _s2.getEnterSequence());
 	}
 
+	@Test
 	public void testNoHistory() {
 		SimpleFlatTSC sc = new SCTTestUtil.SimpleFlatTSC();
 		ExecutionFlow flow = sequencer.transform(sc.sc);
 		assertNull(flow.getHistoryVector());
+	}
+
+	@Test
+	public void testHistoryAsEntry() {
+		Statechart sc = _createStatechart("sc");
+		{
+			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
+			VariableDefinition v1 = _createVariableDefinition("v1",
+					TYPE_INTEGER, s_scope);
+			Region r = _createRegion("r", sc);
+			{
+				Entry r_entry = _createEntry(EntryKind.INITIAL, null, r);
+				State s1 = _createState("s1", r);
+				State s2 = _createState("s2", r);
+				{
+					_createEntryAssignment(v1, s2, 3);
+					Region r2 = _createRegion("r2", s2);
+					{
+						Entry e = _createEntry(EntryKind.DEEP_HISTORY, null, r2);
+
+						State s3 = _createState("s3", r2);
+						{
+							_createEntryAssignment(v1, s3, 4);
+						}
+						State s4 = _createState("s4", r2);
+						{
+							_createEntryAssignment(v1, s4, 6);
+						}
+						_createTransition(e, s3);
+						_createTransition(s3, s4);
+						_createTransition(s4, s3);
+					}
+				}
+				_createTransition(r_entry, s2);
+				_createTransition(s1, s2);
+				_createTransition(s2, s1);
+			}
+		}
+
+		ExecutionFlow flow = sequencer.transform(sc);
+
+		ExecutionState _s2 = flow.getStates().get(1);
+		assertEquals("sc.r.s2", _s2.getName());
+		ExecutionState _s3 = flow.getStates().get(2);
+		assertEquals("sc.r.s2.r2.s3", _s3.getName());
+		ExecutionNode e = flow.getNodes().get(1);
+		assertTrue(e.eClass().getName(), e instanceof ExecutionEntry);
+
+		Sequence reactSequence = e.getReactSequence();
+
+		assertEquals("Default react sequence for deep history entry ",
+				reactSequence.getComment());
+		Step historyEntryStep = reactSequence.getSteps().get(0);
+		assertTrue(historyEntryStep.eClass().getName(),
+				historyEntryStep instanceof HistoryEntry);
+
+		HistoryEntry historyEntry = (HistoryEntry) historyEntryStep;
+		assertCall(historyEntry.getInitialStep(), _s3.getEnterSequence());
+		ExecutionRegion _r2 = (ExecutionRegion) _s3.getSuperScope();
+		assertCall(historyEntry.getHistoryStep(), _r2.getDeepEnterSequence());
+
+		Step _s3EnterStep = assertedStateCase(
+				_r2.getDeepEnterSequence().getSteps().get(0), _s3).getStep();
+		Step _s3EnterCall = assertedSequence(_s3EnterStep).getSteps().get(0);
+		assertCall(_s3EnterCall, _s3.getEnterSequence());
+	}
+
+	@Test
+	public void testEnterStatechart() {
+		Statechart sc = _createStatechart("sc");
+		{
+			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
+			VariableDefinition v1 = _createVariableDefinition("v1",
+					TYPE_INTEGER, s_scope);
+			Region r = _createRegion("r", sc);
+			{
+				Entry r_entry = _createEntry(EntryKind.INITIAL, null, r);
+				State s1 = _createState("s1", r);
+				State s2 = _createState("s2", r);
+				{
+					_createEntryAssignment(v1, s2, 3);
+					Region r2 = _createRegion("r2", s2);
+					{
+						Entry e = _createEntry(EntryKind.DEEP_HISTORY, null, r2);
+
+						State s3 = _createState("s3", r2);
+						{
+							_createEntryAssignment(v1, s3, 4);
+						}
+						State s4 = _createState("s4", r2);
+						{
+							_createEntryAssignment(v1, s4, 6);
+						}
+						_createTransition(e, s3);
+						_createTransition(s3, s4);
+						_createTransition(s4, s3);
+					}
+				}
+				_createTransition(r_entry, s2);
+				_createTransition(s1, s2);
+				_createTransition(s2, s1);
+			}
+		}
+
+		ExecutionFlow flow = sequencer.transform(sc);
+		ExecutionState _s1 = flow.getStates().get(0);
+		assertEquals("sc.r.s1", _s1.getName());
+		Sequence enterSequence = flow.getEnterSequence();
+		ExecutionRegion _r = (ExecutionRegion) _s1.getSuperScope();
+
+		assertCall(enterSequence, 0, _r.getEnterSequence());
 	}
 }

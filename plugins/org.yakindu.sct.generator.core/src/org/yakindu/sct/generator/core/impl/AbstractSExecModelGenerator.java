@@ -16,6 +16,7 @@ import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNC
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_CHOICES;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTER_SEQUENCES;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTRIES;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_REACTIONS;
@@ -143,6 +144,8 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 				FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES, true));
 		optimizer.inlineChoices(getBoolValue(optimizeConfig,
 				FUNCTION_INLINING_FEATURE_INLINE_CHOICES, true));
+		optimizer.inlineEntries(getBoolValue(optimizeConfig,
+				FUNCTION_INLINING_FEATURE_INLINE_ENTRIES, true));
 		optimizer.inlineEnterRegion(getBoolValue(optimizeConfig,
 				FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION, true));
 		optimizer.inlineExitRegion(getBoolValue(optimizeConfig,
