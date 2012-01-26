@@ -16,10 +16,13 @@ import org.eclipse.xtext.xtend2.lib.EObjectExtensions;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
+import org.yakindu.sct.model.sexec.ExecutionChoice;
+import org.yakindu.sct.model.sexec.ExecutionEntry;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sexec.HistoryEntry;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.Sequence;
@@ -94,6 +97,13 @@ public class FlowOptimizer {
   public boolean inlineChoices(final boolean b) {
     boolean __inlineChoices = this._inlineChoices = b;
     return __inlineChoices;
+  }
+  
+  private boolean _inlineEntries;
+  
+  public boolean inlineEntries(final boolean b) {
+    boolean __inlineEntries = this._inlineEntries = b;
+    return __inlineEntries;
   }
   
   public ExecutionFlow transform(final ExecutionFlow flow) {
@@ -176,9 +186,10 @@ public class FlowOptimizer {
       if (this._inlineChoices) {
         {
           EList<ExecutionNode> _nodes = flow.getNodes();
-          final Function1<ExecutionNode,ExecutionNode> _function_6 = new Function1<ExecutionNode,ExecutionNode>() {
-              public ExecutionNode apply(final ExecutionNode node) {
-                ExecutionNode _xblockexpression_1 = null;
+          Iterable<ExecutionChoice> _filter_2 = IterableExtensions.<ExecutionChoice>filter(_nodes, org.yakindu.sct.model.sexec.ExecutionChoice.class);
+          final Function1<ExecutionChoice,ExecutionChoice> _function_6 = new Function1<ExecutionChoice,ExecutionChoice>() {
+              public ExecutionChoice apply(final ExecutionChoice node) {
+                ExecutionChoice _xblockexpression_1 = null;
                 {
                   EList<Reaction> _reactions = node.getReactions();
                   final Function1<Reaction,Step> _function_7 = new Function1<Reaction,Step>() {
@@ -200,16 +211,58 @@ public class FlowOptimizer {
                 return _xblockexpression_1;
               }
             };
-          IterableExtensions.<ExecutionNode>forEach(_nodes, _function_6);
+          IterableExtensions.<ExecutionChoice>forEach(_filter_2, _function_6);
           EList<ExecutionNode> _nodes_1 = flow.getNodes();
-          final Function1<ExecutionNode,Step> _function_8 = new Function1<ExecutionNode,Step>() {
-              public Step apply(final ExecutionNode node_1) {
+          Iterable<ExecutionChoice> _filter_3 = IterableExtensions.<ExecutionChoice>filter(_nodes_1, org.yakindu.sct.model.sexec.ExecutionChoice.class);
+          final Function1<ExecutionChoice,Step> _function_8 = new Function1<ExecutionChoice,Step>() {
+              public Step apply(final ExecutionChoice node_1) {
                 Sequence _reactSequence = node_1.getReactSequence();
                 Step _inline_7 = FlowOptimizer.this.inline(_reactSequence);
                 return _inline_7;
               }
             };
-          IterableExtensions.<ExecutionNode>forEach(_nodes_1, _function_8);
+          IterableExtensions.<ExecutionChoice>forEach(_filter_3, _function_8);
+        }
+      }
+      if (this._inlineEntries) {
+        {
+          EList<ExecutionNode> _nodes_2 = flow.getNodes();
+          Iterable<ExecutionEntry> _filter_4 = IterableExtensions.<ExecutionEntry>filter(_nodes_2, org.yakindu.sct.model.sexec.ExecutionEntry.class);
+          final Function1<ExecutionEntry,ExecutionEntry> _function_9 = new Function1<ExecutionEntry,ExecutionEntry>() {
+              public ExecutionEntry apply(final ExecutionEntry node_2) {
+                ExecutionEntry _xblockexpression_3 = null;
+                {
+                  EList<Reaction> _reactions_1 = node_2.getReactions();
+                  final Function1<Reaction,Step> _function_10 = new Function1<Reaction,Step>() {
+                      public Step apply(final Reaction r_1) {
+                        Step _xblockexpression_4 = null;
+                        {
+                          Check _check_1 = r_1.getCheck();
+                          FlowOptimizer.this.inline(_check_1);
+                          Step _effect_1 = r_1.getEffect();
+                          Step _inline_8 = FlowOptimizer.this.inline(_effect_1);
+                          _xblockexpression_4 = (_inline_8);
+                        }
+                        return _xblockexpression_4;
+                      }
+                    };
+                  IterableExtensions.<Reaction>forEach(_reactions_1, _function_10);
+                  _xblockexpression_3 = (node_2);
+                }
+                return _xblockexpression_3;
+              }
+            };
+          IterableExtensions.<ExecutionEntry>forEach(_filter_4, _function_9);
+          EList<ExecutionNode> _nodes_3 = flow.getNodes();
+          Iterable<ExecutionEntry> _filter_5 = IterableExtensions.<ExecutionEntry>filter(_nodes_3, org.yakindu.sct.model.sexec.ExecutionEntry.class);
+          final Function1<ExecutionEntry,Step> _function_11 = new Function1<ExecutionEntry,Step>() {
+              public Step apply(final ExecutionEntry node_3) {
+                Sequence _reactSequence_1 = node_3.getReactSequence();
+                Step _inline_9 = FlowOptimizer.this.inline(_reactSequence_1);
+                return _inline_9;
+              }
+            };
+          IterableExtensions.<ExecutionEntry>forEach(_filter_5, _function_11);
         }
       }
       _xblockexpression = (flow);
@@ -372,8 +425,11 @@ public class FlowOptimizer {
                 caller.setStep(null);
               } else {
                 String _operator_plus = StringExtensions.operator_plus("Did not substitute \'", step);
-                String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "\'.");
-                System.out.println(_operator_plus_1);
+                String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "\' call from \'");
+                EObject _eContainer_1 = caller.eContainer();
+                String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _eContainer_1);
+                String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, "\'.");
+                System.out.println(_operator_plus_3);
               }
             }
           }
@@ -386,6 +442,42 @@ public class FlowOptimizer {
   
   protected boolean _substituteCall(final EObject owner, final Call pre, final Step post) {
     return false;
+  }
+  
+  protected boolean _substituteCall(final StateCase owner, final Call pre, final Step post) {
+    {
+      Step _step = owner.getStep();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_step, pre);
+      if (_operator_equals) {
+        {
+          owner.setStep(post);
+          return true;
+        }
+      }
+      return false;
+    }
+  }
+  
+  protected boolean _substituteCall(final HistoryEntry owner, final Call pre, final Step post) {
+    {
+      Step _initialStep = owner.getInitialStep();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_initialStep, pre);
+      if (_operator_equals) {
+        {
+          owner.setInitialStep(post);
+          return true;
+        }
+      }
+      Step _historyStep = owner.getHistoryStep();
+      boolean _operator_equals_1 = ObjectExtensions.operator_equals(_historyStep, pre);
+      if (_operator_equals_1) {
+        {
+          owner.setHistoryStep(post);
+          return true;
+        }
+      }
+      return false;
+    }
   }
   
   protected boolean _substituteCall(final Sequence owner, final Call call, final Step step) {
@@ -532,6 +624,31 @@ public class FlowOptimizer {
     return _xblockexpression;
   }
   
+  protected Step _stepCopy(final HistoryEntry cref) {
+    HistoryEntry _xblockexpression = null;
+    {
+      SexecFactory _sexecFactory = this.sexecFactory();
+      HistoryEntry _createHistoryEntry = _sexecFactory.createHistoryEntry();
+      final HistoryEntry _copy = _createHistoryEntry;
+      String _name = cref.getName();
+      _copy.setName(_name);
+      String _comment = cref.getComment();
+      _copy.setComment(_comment);
+      boolean _isDeep = cref.isDeep();
+      _copy.setDeep(_isDeep);
+      ExecutionRegion _region = cref.getRegion();
+      _copy.setRegion(_region);
+      Step _initialStep = cref.getInitialStep();
+      Step _stepCopy = this.stepCopy(_initialStep);
+      _copy.setInitialStep(_stepCopy);
+      Step _historyStep = cref.getHistoryStep();
+      Step _stepCopy_1 = this.stepCopy(_historyStep);
+      _copy.setHistoryStep(_stepCopy_1);
+      _xblockexpression = (_copy);
+    }
+    return _xblockexpression;
+  }
+  
   protected Step _stepCopy(final StateSwitch _switch) {
     StateSwitch _xblockexpression = null;
     {
@@ -602,22 +719,30 @@ public class FlowOptimizer {
     }
   }
   
-  public boolean substituteCall(final EObject owner, final Call call, final Step step) {
-    if ((owner instanceof If)
-         && (call instanceof Call)
-         && (step instanceof Step)) {
-      return _substituteCall((If)owner, (Call)call, (Step)step);
+  public boolean substituteCall(final EObject owner, final Call pre, final Step post) {
+    if ((owner instanceof HistoryEntry)
+         && (pre instanceof Call)
+         && (post instanceof Step)) {
+      return _substituteCall((HistoryEntry)owner, (Call)pre, (Step)post);
+    } else if ((owner instanceof If)
+         && (pre instanceof Call)
+         && (post instanceof Step)) {
+      return _substituteCall((If)owner, (Call)pre, (Step)post);
     } else if ((owner instanceof Sequence)
-         && (call instanceof Call)
-         && (step instanceof Step)) {
-      return _substituteCall((Sequence)owner, (Call)call, (Step)step);
+         && (pre instanceof Call)
+         && (post instanceof Step)) {
+      return _substituteCall((Sequence)owner, (Call)pre, (Step)post);
+    } else if ((owner instanceof StateCase)
+         && (pre instanceof Call)
+         && (post instanceof Step)) {
+      return _substituteCall((StateCase)owner, (Call)pre, (Step)post);
     } else if ((owner instanceof EObject)
-         && (call instanceof Call)
-         && (step instanceof Step)) {
-      return _substituteCall((EObject)owner, (Call)call, (Step)step);
+         && (pre instanceof Call)
+         && (post instanceof Step)) {
+      return _substituteCall((EObject)owner, (Call)pre, (Step)post);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(owner, call, step).toString());
+        java.util.Arrays.<Object>asList(owner, pre, post).toString());
     }
   }
   
@@ -626,6 +751,8 @@ public class FlowOptimizer {
       return _stepCopy((CheckRef)cref);
     } else if ((cref instanceof Call)) {
       return _stepCopy((Call)cref);
+    } else if ((cref instanceof HistoryEntry)) {
+      return _stepCopy((HistoryEntry)cref);
     } else if ((cref instanceof If)) {
       return _stepCopy((If)cref);
     } else if ((cref instanceof Sequence)) {

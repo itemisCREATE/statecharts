@@ -183,21 +183,28 @@ public class SgraphExtensions {
   }
   
   public boolean requireDeepHistory(final Region r) {
-    EList<Vertex> _vertices = r.getVertices();
-    Iterable<Entry> _filter = IterableExtensions.<Entry>filter(_vertices, org.yakindu.sct.model.sgraph.Entry.class);
-    final Function1<Entry,Boolean> _function = new Function1<Entry,Boolean>() {
-        public Boolean apply(final Entry v) {
-          EntryKind _kind = v.getKind();
-          boolean _operator_equals = ObjectExtensions.operator_equals(_kind, EntryKind.DEEP_HISTORY);
-          return ((Boolean)_operator_equals);
+    List<EObject> _containers = this.containers(r);
+    Iterable<Region> _filter = IterableExtensions.<Region>filter(_containers, org.yakindu.sct.model.sgraph.Region.class);
+    final Function1<Region,Boolean> _function = new Function1<Region,Boolean>() {
+        public Boolean apply(final Region p) {
+          EList<Vertex> _vertices = p.getVertices();
+          Iterable<Entry> _filter_1 = IterableExtensions.<Entry>filter(_vertices, org.yakindu.sct.model.sgraph.Entry.class);
+          final Function1<Entry,Boolean> _function_1 = new Function1<Entry,Boolean>() {
+              public Boolean apply(final Entry v) {
+                EntryKind _kind = v.getKind();
+                boolean _operator_equals = ObjectExtensions.operator_equals(_kind, EntryKind.DEEP_HISTORY);
+                return ((Boolean)_operator_equals);
+              }
+            };
+          boolean _exists = IterableExtensions.<Entry>exists(_filter_1, _function_1);
+          return ((Boolean)_exists);
         }
       };
-    boolean _exists = IterableExtensions.<Entry>exists(_filter, _function);
-    return _exists;
+    boolean _exists_1 = IterableExtensions.<Region>exists(_filter, _function);
+    return _exists_1;
   }
   
-  public boolean requireHistory(final Region r) {
-    boolean _operator_or = false;
+  public boolean requireShallowHistory(final Region r) {
     EList<Vertex> _vertices = r.getVertices();
     Iterable<Entry> _filter = IterableExtensions.<Entry>filter(_vertices, org.yakindu.sct.model.sgraph.Entry.class);
     final Function1<Entry,Boolean> _function = new Function1<Entry,Boolean>() {
@@ -208,19 +215,17 @@ public class SgraphExtensions {
         }
       };
     boolean _exists = IterableExtensions.<Entry>exists(_filter, _function);
-    if (_exists) {
+    return _exists;
+  }
+  
+  public boolean requireHistory(final Region r) {
+    boolean _operator_or = false;
+    boolean _requireDeepHistory = this.requireDeepHistory(r);
+    if (_requireDeepHistory) {
       _operator_or = true;
     } else {
-      List<EObject> _containers = this.containers(r);
-      Iterable<Region> _filter_1 = IterableExtensions.<Region>filter(_containers, org.yakindu.sct.model.sgraph.Region.class);
-      final Function1<Region,Boolean> _function_1 = new Function1<Region,Boolean>() {
-          public Boolean apply(final Region p) {
-            boolean _requireDeepHistory = SgraphExtensions.this.requireDeepHistory(p);
-            return ((Boolean)_requireDeepHistory);
-          }
-        };
-      boolean _exists_1 = IterableExtensions.<Region>exists(_filter_1, _function_1);
-      _operator_or = BooleanExtensions.operator_or(_exists, _exists_1);
+      boolean _requireShallowHistory = this.requireShallowHistory(r);
+      _operator_or = BooleanExtensions.operator_or(_requireDeepHistory, _requireShallowHistory);
     }
     return _operator_or;
   }
