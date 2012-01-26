@@ -90,12 +90,13 @@ class SgraphExtensions {
 	}
 	
 	def requireDeepHistory(Region r) {
-		r.vertices.filter(typeof(Entry)).exists(v|v.kind == EntryKind::DEEP_HISTORY)
+		 r.containers.filter(typeof(Region)).exists(p|p.vertices.filter(typeof(Entry)).exists(v|v.kind == EntryKind::DEEP_HISTORY))
 	}
-
+	def requireShallowHistory(Region r) {
+		r.vertices.filter(typeof(Entry)).exists(v|v.kind == EntryKind::SHALLOW_HISTORY)		
+	}
 	def requireHistory(Region r) {
-		r.vertices.filter(typeof(Entry)).exists(v|v.kind == EntryKind::SHALLOW_HISTORY)
-		|| r.containers.filter(typeof(Region)).exists(p|p.requireDeepHistory)
+		r.requireDeepHistory || r.requireShallowHistory
 	}
 	
 }

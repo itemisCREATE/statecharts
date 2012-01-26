@@ -35,6 +35,7 @@ public interface ICoreFeatureConstants {
 	public static final String FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS = "inlineExitActions";
 	public static final String FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES = "inlineExitSequences";
 	public static final String FUNCTION_INLINING_FEATURE_INLINE_CHOICES = "inlineChoices";
+	public static final String FUNCTION_INLINING_FEATURE_INLINE_ENTRIES = "inlineEntries";
 	public static final String FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION = "inlineEnterRegion";
 	public static final String FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION = "inlineExitRegion";
 

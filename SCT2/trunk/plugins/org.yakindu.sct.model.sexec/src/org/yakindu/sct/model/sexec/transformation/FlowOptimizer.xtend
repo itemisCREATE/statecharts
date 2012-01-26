@@ -23,6 +23,9 @@ import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.StateCase
 import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.sct.model.sexec.ExecutionRegion
+import org.yakindu.sct.model.sexec.HistoryEntry
+import org.yakindu.sct.model.sexec.ExecutionChoice
+import org.yakindu.sct.model.sexec.ExecutionEntry
  
 class FlowOptimizer {
 
@@ -37,6 +40,7 @@ class FlowOptimizer {
 	boolean _inlineExitRegion   def inlineExitRegion(boolean b) {_inlineExitRegion = b}
 	boolean _inlineExitSequences    def inlineExitSequences(boolean b)  {_inlineExitSequences = b}
 	boolean _inlineChoices          def inlineChoices(boolean b)        {_inlineChoices = b}
+	boolean _inlineEntries          def inlineEntries(boolean b)        {_inlineEntries = b}
 	
 	
 	
@@ -55,8 +59,12 @@ class FlowOptimizer {
 
 				
 		if (_inlineChoices) {
-			flow.nodes.forEach( node | { node.reactions.forEach( r | { r.check.inline r.effect.inline }) node })
-			flow.nodes.forEach( node | node.reactSequence.inline )
+			flow.nodes.filter(typeof(ExecutionChoice)).forEach( node | { node.reactions.forEach( r | { r.check.inline r.effect.inline }) node })
+			flow.nodes.filter(typeof(ExecutionChoice)).forEach( node | node.reactSequence.inline )
+		}
+		if (_inlineEntries) {
+			flow.nodes.filter(typeof(ExecutionEntry)).forEach( node | { node.reactions.forEach( r | { r.check.inline r.effect.inline }) node })
+			flow.nodes.filter(typeof(ExecutionEntry)).forEach( node | node.reactSequence.inline )
 		}
 
 		flow
@@ -135,7 +143,7 @@ class FlowOptimizer {
 				val clone = step.stepCopy
 				if ( caller.eContainer.substituteCall(caller, clone) )
 					caller.step = null
-				else System::out.println("Did not substitute '" + step + "'.");
+				else System::out.println("Did not substitute '" + step + "' call from '"+caller.eContainer+"'.");
 			}		
 		}
 		step
@@ -145,7 +153,27 @@ class FlowOptimizer {
 	
 	// CALL SUBSTITUTION
 	def dispatch boolean substituteCall(EObject owner, Call pre, Step post) { false }
-	
+
+	def dispatch boolean substituteCall(StateCase owner, Call pre, Step post) {
+		if (owner.step == pre) {
+			owner.step = post
+			return true
+		}
+		return false
+	}
+
+	def dispatch boolean substituteCall(HistoryEntry owner, Call pre, Step post) {
+		if (owner.initialStep == pre) {
+			owner.initialStep = post
+			return true
+		}
+		if (owner.historyStep == pre) {
+			owner.historyStep = post
+			return true
+		}
+		return false
+	}
+
 	def dispatch boolean substituteCall(Sequence owner, Call call, Step step) {
 		if ( owner.steps.contains(call) ) { 
 			owner.steps.set(owner.steps.indexOf(call), step)
@@ -208,6 +236,17 @@ class FlowOptimizer {
 		_copy.name = cref.name
 		_copy.comment = cref.comment
 		_copy.check =  cref.check
+
+		_copy
+	}
+	def dispatch Step stepCopy(HistoryEntry cref) {
+		val _copy = sexecFactory.createHistoryEntry
+		_copy.name = cref.name
+		_copy.comment = cref.comment
+		_copy.deep =  cref.deep
+		_copy.region =  cref.region
+		_copy.initialStep =  cref.initialStep.stepCopy
+		_copy.historyStep =  cref.historyStep.stepCopy
 
 		_copy
 	}

@@ -5,9 +5,9 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ HistoryTest.class, ModelSequencerSCTest.class,
-		ModelSequencertDeclarationsTest.class, ModelSequencerStateTest.class,
-		ModelSequencerStateReactionTest.class,
+@SuiteClasses({ FlowOptimizer_ExecutionEntryTest.class, HistoryTest.class,
+		ModelSequencerSCTest.class, ModelSequencertDeclarationsTest.class,
+		ModelSequencerStateTest.class, ModelSequencerStateReactionTest.class,
 		ModelSequencerHierarchyTest.class,
 		ModelSequencerOrthogonalityTest.class,
 		ModelSequencerStateVectorTest.class, ModelSequencerHistoryTest.class,
