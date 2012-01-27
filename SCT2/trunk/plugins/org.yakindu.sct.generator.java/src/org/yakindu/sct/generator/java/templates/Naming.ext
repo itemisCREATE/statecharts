@@ -134,7 +134,7 @@ String enterSequenceName(ExecutionState this) : "enterSequence"+getName();
 String enterSequenceName(ExecutionRegion this) : "enterSequence"+getName();
 String deepEnterSequenceName(Step this) : ((ExecutionRegion)this.eContainer).deepEnterSequenceName();
 String deepEnterSequenceName(ExecutionRegion this) : "deepEnterSequence"+getName();
-String shallowEnterSequenceName(Step this) : ((ExecutionRegion)this.eContainer).deepEnterSequenceName();
+String shallowEnterSequenceName(Step this) : ((ExecutionRegion)this.eContainer).shallowEnterSequenceName();
 String shallowEnterSequenceName(ExecutionRegion this) : "shallowEnterSequence"+getName();
 String enterSequenceName(ExecutionFlow this) : "enter";
 String exitSequenceName(Step this) : "exitSequence"+getName(state()); 
