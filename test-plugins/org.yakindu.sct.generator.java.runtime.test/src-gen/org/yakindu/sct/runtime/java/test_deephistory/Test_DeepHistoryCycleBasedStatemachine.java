@@ -24,6 +24,8 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 
 	private DefaultInterfaceImpl defaultInterface;
 
+	private State[] historyVector = new State[3];
+
 	private final State[] stateVector = new State[1];
 
 	private int nextStateIndex;
@@ -52,9 +54,14 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	}
 
 	public void init() {
-		for (int i = 0; i < stateVector.length; i++) {
+		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
+
+		for (int i = 0; i < 3; i++) {
+			historyVector[i] = State.$NullState$;
+		}
+
 		occuredEvents.clear();
 	}
 
@@ -71,26 +78,166 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 		return defaultInterface;
 	}
 
+	private DefaultInterfaceImpl getDefaultInterfaceImpl() {
+		return defaultInterface;
+	}
+
 	public void enter() {
 		nextStateIndex = 0;
 		stateVector[0] = State.State1;
 
 	}
 
+	public void exit() {
+		//Handle exit of all possible states (of main region) at position 0...
+		switch (stateVector[0]) {
+
+			case State1 :
+				stateVector[0] = State.$NullState$;
+
+				break;
+
+			case State3 :
+				stateVector[0] = State.$NullState$;
+
+				break;
+
+			case State6 :
+				stateVector[0] = State.$NullState$;
+
+				break;
+
+			case State8 :
+				stateVector[0] = State.$NullState$;
+
+				break;
+
+			case State9 :
+				stateVector[0] = State.$NullState$;
+
+				break;
+
+			case State5 :
+				stateVector[0] = State.$NullState$;
+
+				break;
+
+			default :
+				break;
+		}
+
+	}
+
+	private void deepEnterSequenceState20() {
+		//Handle deep history entry of null
+		switch (historyVector[0]) {
+
+			case State3 :
+				nextStateIndex = 0;
+				stateVector[0] = State.State3;
+
+				break;
+
+			case State6 :
+
+				deepEnterSequenceState40();
+
+				break;
+
+			case State8 :
+
+				deepEnterSequenceState40();
+
+				break;
+
+			case State9 :
+
+				deepEnterSequenceState40();
+
+				break;
+
+			case State5 :
+				nextStateIndex = 0;
+				stateVector[0] = State.State5;
+
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	private void deepEnterSequenceState40() {
+		//Handle deep history entry of null
+		switch (historyVector[1]) {
+
+			case State6 :
+				nextStateIndex = 0;
+				stateVector[0] = State.State6;
+
+				break;
+
+			case State8 :
+
+				deepEnterSequenceState70();
+
+				break;
+
+			case State9 :
+
+				deepEnterSequenceState70();
+
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	private void deepEnterSequenceState70() {
+		//Handle deep history entry of null
+		switch (historyVector[2]) {
+
+			case State8 :
+				nextStateIndex = 0;
+				stateVector[0] = State.State8;
+
+				break;
+
+			case State9 :
+				nextStateIndex = 0;
+				stateVector[0] = State.State9;
+
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	private void reactState1() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent1())) {
 			stateVector[0] = State.$NullState$;
 
-			nextStateIndex = 0;
-			stateVector[0] = State.State3;
+			//Enter the region with deep history
+			if (historyVector[0] != State.$NullState$) {
+
+				deepEnterSequenceState20();
+			} else {
+				nextStateIndex = 0;
+				stateVector[0] = State.State3;
+
+			}
 
 		}
 	}
 	private void reactState2() {
 	}
 	private void reactState3() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent2())) {
+
+			historyVector[0] = stateVector[0];
+			//Handle exit of all possible states (of null) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
@@ -126,7 +273,8 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 			stateVector[0] = State.State1;
 
 		} else {
-			if (occuredEvents.contains(defaultInterface.getEventEvent3())) {
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent3())) {
 				stateVector[0] = State.$NullState$;
 
 				nextStateIndex = 0;
@@ -139,8 +287,10 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	private void reactState4() {
 	}
 	private void reactState6() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent2())) {
+
+			historyVector[0] = stateVector[0];
+			//Handle exit of all possible states (of null) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
@@ -176,8 +326,11 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 			stateVector[0] = State.State1;
 
 		} else {
-			if (occuredEvents.contains(defaultInterface.getEventEvent4())) {
-				//Handle exit of all possible states on position 0...
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent4())) {
+
+				historyVector[1] = stateVector[0];
+				//Handle exit of all possible states (of null) at position 0...
 				switch (stateVector[0]) {
 
 					case State6 :
@@ -203,7 +356,8 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 				stateVector[0] = State.State5;
 
 			} else {
-				if (occuredEvents.contains(defaultInterface.getEventEvent5())) {
+				if (occuredEvents.contains(getDefaultInterfaceImpl()
+						.getEventEvent5())) {
 					stateVector[0] = State.$NullState$;
 
 					nextStateIndex = 0;
@@ -218,8 +372,10 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	private void reactState7() {
 	}
 	private void reactState8() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent2())) {
+
+			historyVector[0] = stateVector[0];
+			//Handle exit of all possible states (of null) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
@@ -255,8 +411,11 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 			stateVector[0] = State.State1;
 
 		} else {
-			if (occuredEvents.contains(defaultInterface.getEventEvent4())) {
-				//Handle exit of all possible states on position 0...
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent4())) {
+
+				historyVector[1] = stateVector[0];
+				//Handle exit of all possible states (of null) at position 0...
 				switch (stateVector[0]) {
 
 					case State6 :
@@ -282,8 +441,11 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 				stateVector[0] = State.State5;
 
 			} else {
-				if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
-					//Handle exit of all possible states on position 0...
+				if (occuredEvents.contains(getDefaultInterfaceImpl()
+						.getEventEvent6())) {
+
+					historyVector[2] = stateVector[0];
+					//Handle exit of all possible states (of null) at position 0...
 					switch (stateVector[0]) {
 
 						case State8 :
@@ -304,7 +466,7 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 					stateVector[0] = State.State6;
 
 				} else {
-					if (occuredEvents.contains(defaultInterface
+					if (occuredEvents.contains(getDefaultInterfaceImpl()
 							.getEventEvent7())) {
 						stateVector[0] = State.$NullState$;
 
@@ -320,8 +482,10 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 		}
 	}
 	private void reactState9() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent2())) {
+
+			historyVector[0] = stateVector[0];
+			//Handle exit of all possible states (of null) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
@@ -357,8 +521,11 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 			stateVector[0] = State.State1;
 
 		} else {
-			if (occuredEvents.contains(defaultInterface.getEventEvent4())) {
-				//Handle exit of all possible states on position 0...
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent4())) {
+
+				historyVector[1] = stateVector[0];
+				//Handle exit of all possible states (of null) at position 0...
 				switch (stateVector[0]) {
 
 					case State6 :
@@ -384,8 +551,11 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 				stateVector[0] = State.State5;
 
 			} else {
-				if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
-					//Handle exit of all possible states on position 0...
+				if (occuredEvents.contains(getDefaultInterfaceImpl()
+						.getEventEvent6())) {
+
+					historyVector[2] = stateVector[0];
+					//Handle exit of all possible states (of null) at position 0...
 					switch (stateVector[0]) {
 
 						case State8 :
@@ -406,7 +576,7 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 					stateVector[0] = State.State6;
 
 				} else {
-					if (occuredEvents.contains(defaultInterface
+					if (occuredEvents.contains(getDefaultInterfaceImpl()
 							.getEventEvent8())) {
 						stateVector[0] = State.$NullState$;
 
@@ -422,8 +592,10 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 		}
 	}
 	private void reactState5() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent2())) {
+
+			historyVector[0] = stateVector[0];
+			//Handle exit of all possible states (of null) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :

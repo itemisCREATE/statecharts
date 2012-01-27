@@ -54,9 +54,10 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 	}
 
 	public void init() {
-		for (int i = 0; i < stateVector.length; i++) {
+		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
+
 		occuredEvents.clear();
 	}
 
@@ -73,34 +74,73 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 		return defaultInterface;
 	}
 
+	private DefaultInterfaceImpl getDefaultInterfaceImpl() {
+		return defaultInterface;
+	}
 	public InterfaceOther getInterfaceOther() {
 		return interfaceOther;
 	}
 
+	private InterfaceOtherImpl getInterfaceOtherImpl() {
+		return interfaceOther;
+	}
+
 	public void enter() {
-		defaultInterface.setVarVar3(defaultInterface.getVarVar3()
-				+ ((defaultInterface.getVarVar2() * defaultInterface
-						.getVarVar3())));
+		getDefaultInterfaceImpl().setVarVar1(6);
+		getDefaultInterfaceImpl().setVarVar2(123);
+		getDefaultInterfaceImpl().setVarVar3(19.4);
+		getDefaultInterfaceImpl().setVarVar4(43.3);
+		getDefaultInterfaceImpl().setVarVar5(false);
+		getDefaultInterfaceImpl()
+				.setVarVar3(
+						getDefaultInterfaceImpl().getVarVar3()
+								+ ((getDefaultInterfaceImpl().getVarVar2() * getDefaultInterfaceImpl()
+										.getVarVar3())));
 
 		nextStateIndex = 0;
 		stateVector[0] = State.State1;
 
 	}
 
+	public void exit() {
+		//Handle exit of all possible states (of main region) at position 0...
+		switch (stateVector[0]) {
+
+			case State1 :
+				stateVector[0] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarVar2(1);
+
+				getDefaultInterfaceImpl().setVarVar4(22.3);
+
+				break;
+
+			case State2 :
+				stateVector[0] = State.$NullState$;
+
+				break;
+
+			default :
+				break;
+		}
+
+	}
+
 	private void reactState1() {
-		if ((occuredEvents.contains(defaultInterface.getEventEvent1()) && ((interfaceOther
-				.getVarVar1() == true) || (defaultInterface.getVarVar5() == false)))) {
+		if ((occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent1()) && ((getInterfaceOtherImpl()
+				.getVarVar1() == true) || (getDefaultInterfaceImpl()
+				.getVarVar5() == false)))) {
 			stateVector[0] = State.$NullState$;
+			getDefaultInterfaceImpl().setVarVar2(1);
 
-			defaultInterface.setVarVar2(1);
+			getDefaultInterfaceImpl().setVarVar4(22.3);
 
-			defaultInterface.setVarVar4(22.3);
+			getInterfaceOtherImpl().setVarVar1(false);
 
-			interfaceOther.setVarVar1(false);
+			getDefaultInterfaceImpl().setVarVar3(
+					getDefaultInterfaceImpl().getVarVar3() / (5));
 
-			defaultInterface.setVarVar3(defaultInterface.getVarVar3() / (5));
-
-			defaultInterface.setVarVar1(defaultInterface.getVarVar1() + (1));
+			getDefaultInterfaceImpl().setVarVar1(
+					getDefaultInterfaceImpl().getVarVar1() + (1));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State2;
@@ -108,23 +148,25 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 		}
 	}
 	private void reactState2() {
-		if ((occuredEvents.contains(defaultInterface.getEventEvent1()) && (defaultInterface
+		if ((occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent1()) && (getDefaultInterfaceImpl()
 				.getVarVar3() > 0))) {
 			stateVector[0] = State.$NullState$;
 
-			defaultInterface.setVarVar5(true);
+			getDefaultInterfaceImpl().setVarVar5(true);
 
-			defaultInterface.setVarVar3(defaultInterface.getVarVar3()
-					+ ((defaultInterface.getVarVar2() * defaultInterface
-							.getVarVar3())));
+			getDefaultInterfaceImpl()
+					.setVarVar3(
+							getDefaultInterfaceImpl().getVarVar3()
+									+ ((getDefaultInterfaceImpl().getVarVar2() * getDefaultInterfaceImpl()
+											.getVarVar3())));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
 
 		} else {
 			if (true) {
-				defaultInterface
-						.setVarVar1(defaultInterface.getVarVar1() + (1));
+				getDefaultInterfaceImpl().setVarVar1(
+						getDefaultInterfaceImpl().getVarVar1() + (1));
 
 			}
 

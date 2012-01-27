@@ -31,8 +31,7 @@ public class RuntimeService extends NotificationSender {
 			lock.readLock().lock();
 			for (IStatemachine statemachine : statemachineSet) {
 				statemachine.runCycle();
-				notifyListeners(new Notification<IStatemachine>(
-						NotificationType.RuntimeCycleNotification, statemachine));
+				notifyListeners(new RuntimeCycleNotification(statemachine));
 			}
 			lock.readLock().unlock();
 		}

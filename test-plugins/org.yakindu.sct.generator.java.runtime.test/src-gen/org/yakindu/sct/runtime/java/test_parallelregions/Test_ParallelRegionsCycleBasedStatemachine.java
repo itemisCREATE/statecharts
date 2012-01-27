@@ -54,9 +54,10 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 	}
 
 	public void init() {
-		for (int i = 0; i < stateVector.length; i++) {
+		for (int i = 0; i < 3; i++) {
 			stateVector[i] = State.$NullState$;
 		}
+
 		occuredEvents.clear();
 	}
 
@@ -73,101 +74,187 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 		return defaultInterface;
 	}
 
+	private DefaultInterfaceImpl getDefaultInterfaceImpl() {
+		return defaultInterface;
+	}
+
 	public void enter() {
+		getDefaultInterfaceImpl().setVarReg3(-(1));
 		nextStateIndex = 0;
 		stateVector[0] = State.State1;
 
 	}
 
+	public void exit() {
+		//Handle exit of all possible states (of main region) at position 0...
+		switch (stateVector[0]) {
+
+			case State1 :
+				stateVector[0] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarHierarchy(2);
+
+				break;
+
+			case State3 :
+				stateVector[0] = State.$NullState$;
+
+				break;
+
+			case State5 :
+				stateVector[0] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarHierarchy(
+						getDefaultInterfaceImpl().getVarHierarchy() - (5));
+
+				break;
+
+			case State6 :
+				stateVector[0] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarHierarchy(
+						getDefaultInterfaceImpl().getVarHierarchy() - (6));
+
+				break;
+
+			default :
+				break;
+		}
+		//Handle exit of all possible states (of main region) at position 1...
+		switch (stateVector[1]) {
+
+			case State9 :
+				stateVector[1] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarHierarchy(
+						getDefaultInterfaceImpl().getVarHierarchy() - (10));
+
+				getDefaultInterfaceImpl().setVarHierarchy(
+						getDefaultInterfaceImpl().getVarHierarchy() / (4));
+
+				break;
+
+			default :
+				break;
+		}
+		//Handle exit of all possible states (of main region) at position 2...
+		switch (stateVector[2]) {
+
+			case State7 :
+				stateVector[2] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarReg3(-(1));
+
+				getDefaultInterfaceImpl().setVarHierarchy(
+						getDefaultInterfaceImpl().getVarHierarchy() - (3));
+
+				break;
+
+			case State8 :
+				stateVector[2] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarReg3(-(1));
+
+				getDefaultInterfaceImpl().setVarHierarchy(
+						getDefaultInterfaceImpl().getVarHierarchy() - (3));
+
+				break;
+
+			default :
+				break;
+		}
+
+	}
+
 	private void reactState1() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent1())) {
 			stateVector[0] = State.$NullState$;
+			getDefaultInterfaceImpl().setVarHierarchy(2);
 
-			defaultInterface.setVarHierarchy(2);
-
-			defaultInterface
-					.setVarHierarchy(defaultInterface.getVarHierarchy() + (3));
+			getDefaultInterfaceImpl().setVarHierarchy(
+					getDefaultInterfaceImpl().getVarHierarchy() + (3));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State3;
 
-			defaultInterface.setVarReg3(7);
+			getDefaultInterfaceImpl().setVarReg3(7);
 
 			nextStateIndex = 2;
 			stateVector[2] = State.State7;
 
 		} else {
-			if (occuredEvents.contains(defaultInterface.getEventEvent11())) {
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent11())) {
 				stateVector[0] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarHierarchy(2);
 
-				defaultInterface.setVarHierarchy(2);
+				getDefaultInterfaceImpl().setVarHierarchy(
+						getDefaultInterfaceImpl().getVarHierarchy() + (3));
 
-				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() + (3));
+				getDefaultInterfaceImpl().setVarHierarchy(
+						getDefaultInterfaceImpl().getVarHierarchy() * (4));
 
-				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() * (4));
-
-				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() + (6));
+				getDefaultInterfaceImpl().setVarHierarchy(
+						getDefaultInterfaceImpl().getVarHierarchy() + (6));
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State6;
 
-				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() + (10));
+				getDefaultInterfaceImpl().setVarHierarchy(
+						getDefaultInterfaceImpl().getVarHierarchy() + (10));
 
 				nextStateIndex = 1;
 				stateVector[1] = State.State9;
 
-				defaultInterface.setVarReg3(7);
+				getDefaultInterfaceImpl().setVarReg3(7);
 
 				nextStateIndex = 2;
 				stateVector[2] = State.State7;
 
 			} else {
-				if (occuredEvents.contains(defaultInterface.getEventEvent12())) {
+				if (occuredEvents.contains(getDefaultInterfaceImpl()
+						.getEventEvent12())) {
 					stateVector[0] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarHierarchy(2);
 
-					defaultInterface.setVarHierarchy(2);
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() + (3));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() + (3));
 
 					nextStateIndex = 0;
 					stateVector[0] = State.State3;
 
-					defaultInterface.setVarReg3(8);
+					getDefaultInterfaceImpl().setVarReg3(8);
 
 					nextStateIndex = 2;
 					stateVector[2] = State.State8;
 
 				} else {
-					if (occuredEvents.contains(defaultInterface
+					if (occuredEvents.contains(getDefaultInterfaceImpl()
 							.getEventEvent13())) {
 						stateVector[0] = State.$NullState$;
+						getDefaultInterfaceImpl().setVarHierarchy(2);
 
-						defaultInterface.setVarHierarchy(2);
+						getDefaultInterfaceImpl()
+								.setVarHierarchy(
+										getDefaultInterfaceImpl()
+												.getVarHierarchy() + (3));
 
-						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() + (3));
+						getDefaultInterfaceImpl()
+								.setVarHierarchy(
+										getDefaultInterfaceImpl()
+												.getVarHierarchy() * (4));
 
-						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() * (4));
-
-						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() + (5));
+						getDefaultInterfaceImpl()
+								.setVarHierarchy(
+										getDefaultInterfaceImpl()
+												.getVarHierarchy() + (5));
 
 						nextStateIndex = 0;
 						stateVector[0] = State.State5;
 
-						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() + (10));
+						getDefaultInterfaceImpl()
+								.setVarHierarchy(
+										getDefaultInterfaceImpl()
+												.getVarHierarchy() + (10));
 
 						nextStateIndex = 1;
 						stateVector[1] = State.State9;
 
-						defaultInterface.setVarReg3(7);
+						getDefaultInterfaceImpl().setVarReg3(7);
 
 						nextStateIndex = 2;
 						stateVector[2] = State.State7;
@@ -180,8 +267,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 	private void reactState2() {
 	}
 	private void reactState3() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent10())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent10())) {
+			//Handle exit of all possible states (of Region1) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
@@ -191,129 +278,158 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 				case State5 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (5));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (5));
 
 					break;
 
 				case State6 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (6));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (6));
 
 					break;
 
 				default :
 					break;
 			}
-			//Handle exit of all possible states on position 1...
+			//Handle exit of all possible states (of Region1) at position 1...
 			switch (stateVector[1]) {
 
 				case State9 :
 					stateVector[1] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (10));
 
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (10));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() / (4));
 
 					break;
 
 				default :
 					break;
 			}
-			//Handle exit of all possible states on position 2...
+
+			//Handle exit of all possible states (of Region3) at position 2...
 			switch (stateVector[2]) {
 
 				case State7 :
 					stateVector[2] = State.$NullState$;
-
-					defaultInterface.setVarReg3(-(1));
+					getDefaultInterfaceImpl().setVarReg3(-(1));
 
 					break;
 
 				case State8 :
 					stateVector[2] = State.$NullState$;
-
-					defaultInterface.setVarReg3(-(1));
+					getDefaultInterfaceImpl().setVarReg3(-(1));
 
 					break;
 
 				default :
 					break;
 			}
-			defaultInterface
-					.setVarHierarchy(defaultInterface.getVarHierarchy() - (3));
+
+			getDefaultInterfaceImpl().setVarHierarchy(
+					getDefaultInterfaceImpl().getVarHierarchy() - (3));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
 
 		} else {
-			if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent2())) {
 				stateVector[0] = State.$NullState$;
 
-				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() * (4));
+				getDefaultInterfaceImpl().setVarHierarchy(
+						getDefaultInterfaceImpl().getVarHierarchy() * (4));
 
-				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() + (5));
+				getDefaultInterfaceImpl().setVarHierarchy(
+						getDefaultInterfaceImpl().getVarHierarchy() + (5));
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State5;
 
-				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() + (10));
+				getDefaultInterfaceImpl().setVarHierarchy(
+						getDefaultInterfaceImpl().getVarHierarchy() + (10));
 
 				nextStateIndex = 1;
 				stateVector[1] = State.State9;
 
 			} else {
-				if ((occuredEvents.contains(defaultInterface.getEventEvent3()) || occuredEvents
-						.contains(defaultInterface.getEventEvent9()))) {
-					stateVector[0] = State.$NullState$;
+				if ((occuredEvents.contains(getDefaultInterfaceImpl()
+						.getEventEvent3()) || occuredEvents
+						.contains(getDefaultInterfaceImpl().getEventEvent9()))) {
+					//Handle exit of all possible states (of Region1) at position 0...
+					switch (stateVector[0]) {
 
-					//Handle exit of all possible states on position 1...
-					switch (stateVector[1]) {
+						case State3 :
+							stateVector[0] = State.$NullState$;
 
-						case State9 :
-							stateVector[1] = State.$NullState$;
+							break;
 
-							defaultInterface.setVarHierarchy(defaultInterface
-									.getVarHierarchy() - (10));
+						case State5 :
+							stateVector[0] = State.$NullState$;
+							getDefaultInterfaceImpl()
+									.setVarHierarchy(
+											getDefaultInterfaceImpl()
+													.getVarHierarchy() - (5));
 
-							defaultInterface.setVarHierarchy(defaultInterface
-									.getVarHierarchy() / (4));
+							break;
+
+						case State6 :
+							stateVector[0] = State.$NullState$;
+							getDefaultInterfaceImpl()
+									.setVarHierarchy(
+											getDefaultInterfaceImpl()
+													.getVarHierarchy() - (6));
 
 							break;
 
 						default :
 							break;
 					}
-					//Handle exit of all possible states on position 2...
+					//Handle exit of all possible states (of Region1) at position 1...
+					switch (stateVector[1]) {
+
+						case State9 :
+							stateVector[1] = State.$NullState$;
+							getDefaultInterfaceImpl()
+									.setVarHierarchy(
+											getDefaultInterfaceImpl()
+													.getVarHierarchy() - (10));
+
+							getDefaultInterfaceImpl()
+									.setVarHierarchy(
+											getDefaultInterfaceImpl()
+													.getVarHierarchy() / (4));
+
+							break;
+
+						default :
+							break;
+					}
+
+					//Handle exit of all possible states (of Region3) at position 2...
 					switch (stateVector[2]) {
 
 						case State7 :
 							stateVector[2] = State.$NullState$;
-
-							defaultInterface.setVarReg3(-(1));
+							getDefaultInterfaceImpl().setVarReg3(-(1));
 
 							break;
 
 						case State8 :
 							stateVector[2] = State.$NullState$;
-
-							defaultInterface.setVarReg3(-(1));
+							getDefaultInterfaceImpl().setVarReg3(-(1));
 
 							break;
 
 						default :
 							break;
 					}
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (3));
+
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (3));
 
 					nextStateIndex = 0;
 					stateVector[0] = State.State1;
@@ -326,8 +442,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 	private void reactState4() {
 	}
 	private void reactState5() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent10())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent10())) {
+			//Handle exit of all possible states (of Region1) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
@@ -337,142 +453,150 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 				case State5 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (5));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (5));
 
 					break;
 
 				case State6 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (6));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (6));
 
 					break;
 
 				default :
 					break;
 			}
-			//Handle exit of all possible states on position 1...
+			//Handle exit of all possible states (of Region1) at position 1...
 			switch (stateVector[1]) {
 
 				case State9 :
 					stateVector[1] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (10));
 
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (10));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() / (4));
 
 					break;
 
 				default :
 					break;
 			}
-			//Handle exit of all possible states on position 2...
+
+			//Handle exit of all possible states (of Region3) at position 2...
 			switch (stateVector[2]) {
 
 				case State7 :
 					stateVector[2] = State.$NullState$;
-
-					defaultInterface.setVarReg3(-(1));
+					getDefaultInterfaceImpl().setVarReg3(-(1));
 
 					break;
 
 				case State8 :
 					stateVector[2] = State.$NullState$;
-
-					defaultInterface.setVarReg3(-(1));
+					getDefaultInterfaceImpl().setVarReg3(-(1));
 
 					break;
 
 				default :
 					break;
 			}
-			defaultInterface
-					.setVarHierarchy(defaultInterface.getVarHierarchy() - (3));
+
+			getDefaultInterfaceImpl().setVarHierarchy(
+					getDefaultInterfaceImpl().getVarHierarchy() - (3));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
 
 		} else {
-			if (occuredEvents.contains(defaultInterface.getEventEvent14())) {
-				//Handle exit of all possible states on position 0...
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent14())) {
+				//Handle exit of all possible states (of Region1) at position 0...
 				switch (stateVector[0]) {
+
+					case State3 :
+						stateVector[0] = State.$NullState$;
+
+						break;
 
 					case State5 :
 						stateVector[0] = State.$NullState$;
-
-						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() - (5));
+						getDefaultInterfaceImpl()
+								.setVarHierarchy(
+										getDefaultInterfaceImpl()
+												.getVarHierarchy() - (5));
 
 						break;
 
 					case State6 :
 						stateVector[0] = State.$NullState$;
-
-						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() - (6));
+						getDefaultInterfaceImpl()
+								.setVarHierarchy(
+										getDefaultInterfaceImpl()
+												.getVarHierarchy() - (6));
 
 						break;
 
 					default :
 						break;
 				}
-				//Handle exit of all possible states on position 1...
+				//Handle exit of all possible states (of Region1) at position 1...
 				switch (stateVector[1]) {
 
 					case State9 :
 						stateVector[1] = State.$NullState$;
+						getDefaultInterfaceImpl()
+								.setVarHierarchy(
+										getDefaultInterfaceImpl()
+												.getVarHierarchy() - (10));
 
-						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() - (10));
+						getDefaultInterfaceImpl()
+								.setVarHierarchy(
+										getDefaultInterfaceImpl()
+												.getVarHierarchy() / (4));
 
 						break;
 
 					default :
 						break;
 				}
-				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() / (4));
 
-				//Handle exit of all possible states on position 2...
+				//Handle exit of all possible states (of Region3) at position 2...
 				switch (stateVector[2]) {
 
 					case State7 :
 						stateVector[2] = State.$NullState$;
-
-						defaultInterface.setVarReg3(-(1));
+						getDefaultInterfaceImpl().setVarReg3(-(1));
 
 						break;
 
 					case State8 :
 						stateVector[2] = State.$NullState$;
-
-						defaultInterface.setVarReg3(-(1));
+						getDefaultInterfaceImpl().setVarReg3(-(1));
 
 						break;
 
 					default :
 						break;
 				}
-				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() - (3));
+
+				getDefaultInterfaceImpl().setVarHierarchy(
+						getDefaultInterfaceImpl().getVarHierarchy() - (3));
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State1;
 
 			} else {
-				if (occuredEvents.contains(defaultInterface.getEventEvent3())) {
+				if (occuredEvents.contains(getDefaultInterfaceImpl()
+						.getEventEvent3())) {
 					stateVector[0] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (5));
 
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (5));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() + (6));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() + (6));
 
 					nextStateIndex = 0;
 					stateVector[0] = State.State6;
@@ -484,8 +608,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 		}
 	}
 	private void reactState6() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent10())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent10())) {
+			//Handle exit of all possible states (of Region1) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
@@ -495,142 +619,150 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 				case State5 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (5));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (5));
 
 					break;
 
 				case State6 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (6));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (6));
 
 					break;
 
 				default :
 					break;
 			}
-			//Handle exit of all possible states on position 1...
+			//Handle exit of all possible states (of Region1) at position 1...
 			switch (stateVector[1]) {
 
 				case State9 :
 					stateVector[1] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (10));
 
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (10));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() / (4));
 
 					break;
 
 				default :
 					break;
 			}
-			//Handle exit of all possible states on position 2...
+
+			//Handle exit of all possible states (of Region3) at position 2...
 			switch (stateVector[2]) {
 
 				case State7 :
 					stateVector[2] = State.$NullState$;
-
-					defaultInterface.setVarReg3(-(1));
+					getDefaultInterfaceImpl().setVarReg3(-(1));
 
 					break;
 
 				case State8 :
 					stateVector[2] = State.$NullState$;
-
-					defaultInterface.setVarReg3(-(1));
+					getDefaultInterfaceImpl().setVarReg3(-(1));
 
 					break;
 
 				default :
 					break;
 			}
-			defaultInterface
-					.setVarHierarchy(defaultInterface.getVarHierarchy() - (3));
+
+			getDefaultInterfaceImpl().setVarHierarchy(
+					getDefaultInterfaceImpl().getVarHierarchy() - (3));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
 
 		} else {
-			if (occuredEvents.contains(defaultInterface.getEventEvent14())) {
-				//Handle exit of all possible states on position 0...
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent14())) {
+				//Handle exit of all possible states (of Region1) at position 0...
 				switch (stateVector[0]) {
+
+					case State3 :
+						stateVector[0] = State.$NullState$;
+
+						break;
 
 					case State5 :
 						stateVector[0] = State.$NullState$;
-
-						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() - (5));
+						getDefaultInterfaceImpl()
+								.setVarHierarchy(
+										getDefaultInterfaceImpl()
+												.getVarHierarchy() - (5));
 
 						break;
 
 					case State6 :
 						stateVector[0] = State.$NullState$;
-
-						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() - (6));
+						getDefaultInterfaceImpl()
+								.setVarHierarchy(
+										getDefaultInterfaceImpl()
+												.getVarHierarchy() - (6));
 
 						break;
 
 					default :
 						break;
 				}
-				//Handle exit of all possible states on position 1...
+				//Handle exit of all possible states (of Region1) at position 1...
 				switch (stateVector[1]) {
 
 					case State9 :
 						stateVector[1] = State.$NullState$;
+						getDefaultInterfaceImpl()
+								.setVarHierarchy(
+										getDefaultInterfaceImpl()
+												.getVarHierarchy() - (10));
 
-						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() - (10));
+						getDefaultInterfaceImpl()
+								.setVarHierarchy(
+										getDefaultInterfaceImpl()
+												.getVarHierarchy() / (4));
 
 						break;
 
 					default :
 						break;
 				}
-				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() / (4));
 
-				//Handle exit of all possible states on position 2...
+				//Handle exit of all possible states (of Region3) at position 2...
 				switch (stateVector[2]) {
 
 					case State7 :
 						stateVector[2] = State.$NullState$;
-
-						defaultInterface.setVarReg3(-(1));
+						getDefaultInterfaceImpl().setVarReg3(-(1));
 
 						break;
 
 					case State8 :
 						stateVector[2] = State.$NullState$;
-
-						defaultInterface.setVarReg3(-(1));
+						getDefaultInterfaceImpl().setVarReg3(-(1));
 
 						break;
 
 					default :
 						break;
 				}
-				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() - (3));
+
+				getDefaultInterfaceImpl().setVarHierarchy(
+						getDefaultInterfaceImpl().getVarHierarchy() - (3));
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State1;
 
 			} else {
-				if (occuredEvents.contains(defaultInterface.getEventEvent4())) {
+				if (occuredEvents.contains(getDefaultInterfaceImpl()
+						.getEventEvent4())) {
 					stateVector[0] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (6));
 
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (6));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() + (5));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() + (5));
 
 					nextStateIndex = 0;
 					stateVector[0] = State.State5;
@@ -642,8 +774,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 		}
 	}
 	private void reactState9() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent10())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent10())) {
+			//Handle exit of all possible states (of Region1) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
@@ -653,136 +785,145 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 				case State5 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (5));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (5));
 
 					break;
 
 				case State6 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (6));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (6));
 
 					break;
 
 				default :
 					break;
 			}
-			//Handle exit of all possible states on position 1...
+			//Handle exit of all possible states (of Region1) at position 1...
 			switch (stateVector[1]) {
 
 				case State9 :
 					stateVector[1] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (10));
 
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (10));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() / (4));
 
 					break;
 
 				default :
 					break;
 			}
-			//Handle exit of all possible states on position 2...
+
+			//Handle exit of all possible states (of Region3) at position 2...
 			switch (stateVector[2]) {
 
 				case State7 :
 					stateVector[2] = State.$NullState$;
-
-					defaultInterface.setVarReg3(-(1));
+					getDefaultInterfaceImpl().setVarReg3(-(1));
 
 					break;
 
 				case State8 :
 					stateVector[2] = State.$NullState$;
-
-					defaultInterface.setVarReg3(-(1));
+					getDefaultInterfaceImpl().setVarReg3(-(1));
 
 					break;
 
 				default :
 					break;
 			}
-			defaultInterface
-					.setVarHierarchy(defaultInterface.getVarHierarchy() - (3));
+
+			getDefaultInterfaceImpl().setVarHierarchy(
+					getDefaultInterfaceImpl().getVarHierarchy() - (3));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
 
 		} else {
-			if (occuredEvents.contains(defaultInterface.getEventEvent14())) {
-				//Handle exit of all possible states on position 0...
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent14())) {
+				//Handle exit of all possible states (of Region1) at position 0...
 				switch (stateVector[0]) {
+
+					case State3 :
+						stateVector[0] = State.$NullState$;
+
+						break;
 
 					case State5 :
 						stateVector[0] = State.$NullState$;
-
-						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() - (5));
+						getDefaultInterfaceImpl()
+								.setVarHierarchy(
+										getDefaultInterfaceImpl()
+												.getVarHierarchy() - (5));
 
 						break;
 
 					case State6 :
 						stateVector[0] = State.$NullState$;
-
-						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() - (6));
+						getDefaultInterfaceImpl()
+								.setVarHierarchy(
+										getDefaultInterfaceImpl()
+												.getVarHierarchy() - (6));
 
 						break;
 
 					default :
 						break;
 				}
-				//Handle exit of all possible states on position 1...
+				//Handle exit of all possible states (of Region1) at position 1...
 				switch (stateVector[1]) {
 
 					case State9 :
 						stateVector[1] = State.$NullState$;
+						getDefaultInterfaceImpl()
+								.setVarHierarchy(
+										getDefaultInterfaceImpl()
+												.getVarHierarchy() - (10));
 
-						defaultInterface.setVarHierarchy(defaultInterface
-								.getVarHierarchy() - (10));
+						getDefaultInterfaceImpl()
+								.setVarHierarchy(
+										getDefaultInterfaceImpl()
+												.getVarHierarchy() / (4));
 
 						break;
 
 					default :
 						break;
 				}
-				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() / (4));
 
-				//Handle exit of all possible states on position 2...
+				//Handle exit of all possible states (of Region3) at position 2...
 				switch (stateVector[2]) {
 
 					case State7 :
 						stateVector[2] = State.$NullState$;
-
-						defaultInterface.setVarReg3(-(1));
+						getDefaultInterfaceImpl().setVarReg3(-(1));
 
 						break;
 
 					case State8 :
 						stateVector[2] = State.$NullState$;
-
-						defaultInterface.setVarReg3(-(1));
+						getDefaultInterfaceImpl().setVarReg3(-(1));
 
 						break;
 
 					default :
 						break;
 				}
-				defaultInterface.setVarHierarchy(defaultInterface
-						.getVarHierarchy() - (3));
+
+				getDefaultInterfaceImpl().setVarHierarchy(
+						getDefaultInterfaceImpl().getVarHierarchy() - (3));
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State1;
 
 			} else {
-				if (occuredEvents.contains(defaultInterface.getEventEvent8())) {
-					//Handle exit of all possible states on position 0...
+				if (occuredEvents.contains(getDefaultInterfaceImpl()
+						.getEventEvent8())) {
+					//Handle exit of all possible states (of Region1) at position 0...
 					switch (stateVector[0]) {
 
 						case State3 :
@@ -792,53 +933,67 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 						case State5 :
 							stateVector[0] = State.$NullState$;
-
-							defaultInterface.setVarHierarchy(defaultInterface
-									.getVarHierarchy() - (5));
+							getDefaultInterfaceImpl()
+									.setVarHierarchy(
+											getDefaultInterfaceImpl()
+													.getVarHierarchy() - (5));
 
 							break;
 
 						case State6 :
 							stateVector[0] = State.$NullState$;
-
-							defaultInterface.setVarHierarchy(defaultInterface
-									.getVarHierarchy() - (6));
+							getDefaultInterfaceImpl()
+									.setVarHierarchy(
+											getDefaultInterfaceImpl()
+													.getVarHierarchy() - (6));
 
 							break;
 
 						default :
 							break;
 					}
-					stateVector[1] = State.$NullState$;
+					//Handle exit of all possible states (of Region1) at position 1...
+					switch (stateVector[1]) {
 
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (10));
+						case State9 :
+							stateVector[1] = State.$NullState$;
+							getDefaultInterfaceImpl()
+									.setVarHierarchy(
+											getDefaultInterfaceImpl()
+													.getVarHierarchy() - (10));
 
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
+							getDefaultInterfaceImpl()
+									.setVarHierarchy(
+											getDefaultInterfaceImpl()
+													.getVarHierarchy() / (4));
 
-					//Handle exit of all possible states on position 2...
+							break;
+
+						default :
+							break;
+					}
+
+					//Handle exit of all possible states (of Region3) at position 2...
 					switch (stateVector[2]) {
 
 						case State7 :
 							stateVector[2] = State.$NullState$;
-
-							defaultInterface.setVarReg3(-(1));
+							getDefaultInterfaceImpl().setVarReg3(-(1));
 
 							break;
 
 						case State8 :
 							stateVector[2] = State.$NullState$;
-
-							defaultInterface.setVarReg3(-(1));
+							getDefaultInterfaceImpl().setVarReg3(-(1));
 
 							break;
 
 						default :
 							break;
 					}
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (3));
+
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (3));
 
 					nextStateIndex = 0;
 					stateVector[0] = State.State1;
@@ -850,8 +1005,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 		}
 	}
 	private void reactState7() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent10())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent10())) {
+			//Handle exit of all possible states (of Region1) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
@@ -861,81 +1016,79 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 				case State5 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (5));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (5));
 
 					break;
 
 				case State6 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (6));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (6));
 
 					break;
 
 				default :
 					break;
 			}
-			//Handle exit of all possible states on position 1...
+			//Handle exit of all possible states (of Region1) at position 1...
 			switch (stateVector[1]) {
 
 				case State9 :
 					stateVector[1] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (10));
 
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (10));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() / (4));
 
 					break;
 
 				default :
 					break;
 			}
-			//Handle exit of all possible states on position 2...
+
+			//Handle exit of all possible states (of Region3) at position 2...
 			switch (stateVector[2]) {
 
 				case State7 :
 					stateVector[2] = State.$NullState$;
-
-					defaultInterface.setVarReg3(-(1));
+					getDefaultInterfaceImpl().setVarReg3(-(1));
 
 					break;
 
 				case State8 :
 					stateVector[2] = State.$NullState$;
-
-					defaultInterface.setVarReg3(-(1));
+					getDefaultInterfaceImpl().setVarReg3(-(1));
 
 					break;
 
 				default :
 					break;
 			}
-			defaultInterface
-					.setVarHierarchy(defaultInterface.getVarHierarchy() - (3));
+
+			getDefaultInterfaceImpl().setVarHierarchy(
+					getDefaultInterfaceImpl().getVarHierarchy() - (3));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
 
 		} else {
-			if ((occuredEvents.contains(defaultInterface.getEventEvent5()) || occuredEvents
-					.contains(defaultInterface.getEventEvent3()))) {
+			if ((occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent5()) || occuredEvents
+					.contains(getDefaultInterfaceImpl().getEventEvent3()))) {
 				stateVector[2] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarReg3(-(1));
 
-				defaultInterface.setVarReg3(-(1));
-
-				defaultInterface.setVarReg3(8);
+				getDefaultInterfaceImpl().setVarReg3(8);
 
 				nextStateIndex = 2;
 				stateVector[2] = State.State8;
 
 			} else {
-				if (occuredEvents.contains(defaultInterface.getEventEvent7())) {
-					//Handle exit of all possible states on position 0...
+				if (occuredEvents.contains(getDefaultInterfaceImpl()
+						.getEventEvent7())) {
+					//Handle exit of all possible states (of Region1) at position 0...
 					switch (stateVector[0]) {
 
 						case State3 :
@@ -945,46 +1098,67 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 						case State5 :
 							stateVector[0] = State.$NullState$;
-
-							defaultInterface.setVarHierarchy(defaultInterface
-									.getVarHierarchy() - (5));
+							getDefaultInterfaceImpl()
+									.setVarHierarchy(
+											getDefaultInterfaceImpl()
+													.getVarHierarchy() - (5));
 
 							break;
 
 						case State6 :
 							stateVector[0] = State.$NullState$;
-
-							defaultInterface.setVarHierarchy(defaultInterface
-									.getVarHierarchy() - (6));
+							getDefaultInterfaceImpl()
+									.setVarHierarchy(
+											getDefaultInterfaceImpl()
+													.getVarHierarchy() - (6));
 
 							break;
 
 						default :
 							break;
 					}
-					//Handle exit of all possible states on position 1...
+					//Handle exit of all possible states (of Region1) at position 1...
 					switch (stateVector[1]) {
 
 						case State9 :
 							stateVector[1] = State.$NullState$;
+							getDefaultInterfaceImpl()
+									.setVarHierarchy(
+											getDefaultInterfaceImpl()
+													.getVarHierarchy() - (10));
 
-							defaultInterface.setVarHierarchy(defaultInterface
-									.getVarHierarchy() - (10));
-
-							defaultInterface.setVarHierarchy(defaultInterface
-									.getVarHierarchy() / (4));
+							getDefaultInterfaceImpl()
+									.setVarHierarchy(
+											getDefaultInterfaceImpl()
+													.getVarHierarchy() / (4));
 
 							break;
 
 						default :
 							break;
 					}
-					stateVector[2] = State.$NullState$;
 
-					defaultInterface.setVarReg3(-(1));
+					//Handle exit of all possible states (of Region3) at position 2...
+					switch (stateVector[2]) {
 
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (3));
+						case State7 :
+							stateVector[2] = State.$NullState$;
+							getDefaultInterfaceImpl().setVarReg3(-(1));
+
+							break;
+
+						case State8 :
+							stateVector[2] = State.$NullState$;
+							getDefaultInterfaceImpl().setVarReg3(-(1));
+
+							break;
+
+						default :
+							break;
+					}
+
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (3));
 
 					nextStateIndex = 0;
 					stateVector[0] = State.State1;
@@ -995,8 +1169,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 		}
 	}
 	private void reactState8() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent10())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent10())) {
+			//Handle exit of all possible states (of Region1) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
@@ -1006,73 +1180,70 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 
 				case State5 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (5));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (5));
 
 					break;
 
 				case State6 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (6));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (6));
 
 					break;
 
 				default :
 					break;
 			}
-			//Handle exit of all possible states on position 1...
+			//Handle exit of all possible states (of Region1) at position 1...
 			switch (stateVector[1]) {
 
 				case State9 :
 					stateVector[1] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() - (10));
 
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() - (10));
-
-					defaultInterface.setVarHierarchy(defaultInterface
-							.getVarHierarchy() / (4));
+					getDefaultInterfaceImpl().setVarHierarchy(
+							getDefaultInterfaceImpl().getVarHierarchy() / (4));
 
 					break;
 
 				default :
 					break;
 			}
-			//Handle exit of all possible states on position 2...
+
+			//Handle exit of all possible states (of Region3) at position 2...
 			switch (stateVector[2]) {
 
 				case State7 :
 					stateVector[2] = State.$NullState$;
-
-					defaultInterface.setVarReg3(-(1));
+					getDefaultInterfaceImpl().setVarReg3(-(1));
 
 					break;
 
 				case State8 :
 					stateVector[2] = State.$NullState$;
-
-					defaultInterface.setVarReg3(-(1));
+					getDefaultInterfaceImpl().setVarReg3(-(1));
 
 					break;
 
 				default :
 					break;
 			}
-			defaultInterface
-					.setVarHierarchy(defaultInterface.getVarHierarchy() - (3));
+
+			getDefaultInterfaceImpl().setVarHierarchy(
+					getDefaultInterfaceImpl().getVarHierarchy() - (3));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
 
 		} else {
-			if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent6())) {
 				stateVector[2] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarReg3(-(1));
 
-				defaultInterface.setVarReg3(-(1));
-
-				defaultInterface.setVarReg3(7);
+				getDefaultInterfaceImpl().setVarReg3(7);
 
 				nextStateIndex = 2;
 				stateVector[2] = State.State7;

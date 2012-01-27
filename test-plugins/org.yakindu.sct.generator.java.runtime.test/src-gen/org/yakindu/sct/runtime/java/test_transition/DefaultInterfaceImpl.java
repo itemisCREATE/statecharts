@@ -11,14 +11,14 @@ Contributors:
 package org.yakindu.sct.runtime.java.test_transition;
 
 import org.yakindu.sct.runtime.java.Event;
-import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.NotificationSender;
+import org.yakindu.sct.runtime.java.EventNotification;
+import org.yakindu.sct.runtime.java.VariableNotification;
 import org.yakindu.sct.runtime.java.ValuedEvent;
 
 public class DefaultInterfaceImpl extends NotificationSender
 		implements
 			DefaultInterface {
-
 	private final ValuedEvent<Events, Boolean> EventEvent5 = new ValuedEvent<Events, Boolean>(
 			Events.Event5, 5, false);
 	private final Event<Events> EventEvent6 = new Event<Events>(Events.Event6,
@@ -34,8 +34,8 @@ public class DefaultInterfaceImpl extends NotificationSender
 	}
 
 	public void raiseEvent5(boolean value) {
-		EventEvent5.setValue(value);
-		statemachine.getOccuredEvents().add(EventEvent5);
+		getEventEvent5().setValue(value);
+		statemachine.getOccuredEvents().add(getEventEvent5());
 	}
 
 	public ValuedEvent<Events, Boolean> getEventEvent5() {
@@ -43,7 +43,7 @@ public class DefaultInterfaceImpl extends NotificationSender
 	}
 
 	public void raiseEvent6() {
-		statemachine.getOccuredEvents().add(EventEvent6);
+		statemachine.getOccuredEvents().add(getEventEvent6());
 	}
 
 	public Event<Events> getEventEvent6() {
@@ -51,9 +51,9 @@ public class DefaultInterfaceImpl extends NotificationSender
 	}
 
 	public void raiseEvent7() {
-		statemachine.getOccuredEvents().add(EventEvent7);
-		statemachine.getOutEvents().add(EventEvent7);
-		notifyListeners(new EventNotification(EventEvent7));
+		statemachine.getOccuredEvents().add(getEventEvent7());
+		statemachine.getOutEvents().add(getEventEvent7());
+		notifyListeners(new EventNotification(getEventEvent7()));
 	}
 
 	public Event<Events> getEventEvent7() {
@@ -61,25 +61,30 @@ public class DefaultInterfaceImpl extends NotificationSender
 	}
 
 	public boolean isRaisedEvent7() {
-		return statemachine.getOutEvents().contains(EventEvent7);
+		return statemachine.getOutEvents().contains(getEventEvent7());
 	}
 
 	private int varI;
-
 	public int getVarI() {
 		return varI;
 	}
 
 	public void setVarI(int value) {
+		int oldValue = getVarI();
 		varI = value;
+		notifyListeners(new VariableNotification<Integer>(Variables.i,
+				getVarI(), oldValue));
 	}
 	private double varJ;
-
 	public double getVarJ() {
 		return varJ;
 	}
 
 	public void setVarJ(double value) {
+		double oldValue = getVarJ();
 		varJ = value;
+		notifyListeners(new VariableNotification<Double>(Variables.j,
+				getVarJ(), oldValue));
 	}
+
 }

@@ -19,6 +19,10 @@ public interface DefaultInterface extends INotificationSender {
 		Event1, Event2, Event3,
 	}
 
+	public enum Variables {
+		var1, var2, var3, var4, var5,
+	}
+
 	public void raiseEvent1(int value);
 	public boolean isRaisedEvent2();
 

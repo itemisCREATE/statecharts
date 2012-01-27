@@ -11,5 +11,5 @@ Contributors:
 package org.yakindu.sct.runtime.java;
 
 public enum NotificationType {
-	EventNotification, RuntimeCycleNotification
+	EventNotification, VariableNotification, RuntimeCycleNotification
 }

@@ -25,7 +25,7 @@ public class NotificationSender implements INotificationSender {
 		return listeners.remove(listener);
 	}
 
-	protected void notifyListeners(Notification<?> notification) {
+	protected void notifyListeners(Notification notification) {
 		for (INotificationListener listener : listeners) {
 			listener.notify(notification);
 		}

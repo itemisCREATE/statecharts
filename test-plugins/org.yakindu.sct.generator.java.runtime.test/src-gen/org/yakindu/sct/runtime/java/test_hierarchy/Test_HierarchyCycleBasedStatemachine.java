@@ -52,9 +52,10 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 	}
 
 	public void init() {
-		for (int i = 0; i < stateVector.length; i++) {
+		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
+
 		occuredEvents.clear();
 	}
 
@@ -71,58 +72,152 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 		return defaultInterface;
 	}
 
-	public void enter() {
-		defaultInterface.setVarS1(1);
+	private DefaultInterfaceImpl getDefaultInterfaceImpl() {
+		return defaultInterface;
+	}
 
-		defaultInterface.setVarS1(defaultInterface.getVarS1() + (1));
+	public void enter() {
+		getDefaultInterfaceImpl().setVarS1(0);
+		getDefaultInterfaceImpl().setVarS1(1);
+
+		getDefaultInterfaceImpl().setVarS1(
+				getDefaultInterfaceImpl().getVarS1() + (1));
 
 		nextStateIndex = 0;
 		stateVector[0] = State.State9;
 
 	}
 
+	public void exit() {
+		//Handle exit of all possible states (of main region) at position 0...
+		switch (stateVector[0]) {
+
+			case State9 :
+				stateVector[0] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarS1(
+						getDefaultInterfaceImpl().getVarS1() - (1));
+
+				getDefaultInterfaceImpl().setVarS1(
+						getDefaultInterfaceImpl().getVarS1() - (1));
+
+				break;
+
+			case State10 :
+				stateVector[0] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarS1(
+						getDefaultInterfaceImpl().getVarS1() - (1));
+
+				getDefaultInterfaceImpl().setVarS1(
+						getDefaultInterfaceImpl().getVarS1() - (1));
+
+				break;
+
+			case State3 :
+				stateVector[0] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
+
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
+
+				break;
+
+			case State5 :
+				stateVector[0] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
+
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
+
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
+
+				break;
+
+			case State7 :
+				stateVector[0] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
+
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
+
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
+
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
+
+				break;
+
+			case State8 :
+				stateVector[0] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
+
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
+
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
+
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
+
+				break;
+
+			default :
+				break;
+		}
+
+	}
+
 	private void reactState1() {
 	}
 	private void reactState9() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent1())) {
+			//Handle exit of all possible states (of Region1) at position 0...
 			switch (stateVector[0]) {
 
 				case State9 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface
-							.setVarS1(defaultInterface.getVarS1() - (1));
+					getDefaultInterfaceImpl().setVarS1(
+							getDefaultInterfaceImpl().getVarS1() - (1));
 
 					break;
 
 				case State10 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface
-							.setVarS1(defaultInterface.getVarS1() - (1));
+					getDefaultInterfaceImpl().setVarS1(
+							getDefaultInterfaceImpl().getVarS1() - (1));
 
 					break;
 
 				default :
 					break;
 			}
-			defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
 
-			defaultInterface.setVarS2(1);
+			getDefaultInterfaceImpl().setVarS1(
+					getDefaultInterfaceImpl().getVarS1() - (1));
 
-			defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
+			getDefaultInterfaceImpl().setVarS2(1);
+
+			getDefaultInterfaceImpl().setVarS2(
+					getDefaultInterfaceImpl().getVarS2() + (1));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State3;
 
 		} else {
-			if (occuredEvents.contains(defaultInterface.getEventEvent9())) {
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent9())) {
 				stateVector[0] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarS1(
+						getDefaultInterfaceImpl().getVarS1() - (1));
 
-				defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
-
-				defaultInterface.setVarS1(defaultInterface.getVarS1() + (1));
+				getDefaultInterfaceImpl().setVarS1(
+						getDefaultInterfaceImpl().getVarS1() + (1));
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State10;
@@ -132,45 +227,48 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 		}
 	}
 	private void reactState10() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent1())) {
+			//Handle exit of all possible states (of Region1) at position 0...
 			switch (stateVector[0]) {
 
 				case State9 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface
-							.setVarS1(defaultInterface.getVarS1() - (1));
+					getDefaultInterfaceImpl().setVarS1(
+							getDefaultInterfaceImpl().getVarS1() - (1));
 
 					break;
 
 				case State10 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface
-							.setVarS1(defaultInterface.getVarS1() - (1));
+					getDefaultInterfaceImpl().setVarS1(
+							getDefaultInterfaceImpl().getVarS1() - (1));
 
 					break;
 
 				default :
 					break;
 			}
-			defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
 
-			defaultInterface.setVarS2(1);
+			getDefaultInterfaceImpl().setVarS1(
+					getDefaultInterfaceImpl().getVarS1() - (1));
 
-			defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
+			getDefaultInterfaceImpl().setVarS2(1);
+
+			getDefaultInterfaceImpl().setVarS2(
+					getDefaultInterfaceImpl().getVarS2() + (1));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State3;
 
 		} else {
-			if (occuredEvents.contains(defaultInterface.getEventEvent10())) {
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent10())) {
 				stateVector[0] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarS1(
+						getDefaultInterfaceImpl().getVarS1() - (1));
 
-				defaultInterface.setVarS1(defaultInterface.getVarS1() - (1));
-
-				defaultInterface.setVarS1(defaultInterface.getVarS1() + (1));
+				getDefaultInterfaceImpl().setVarS1(
+						getDefaultInterfaceImpl().getVarS1() + (1));
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State9;
@@ -182,115 +280,226 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 	private void reactState2() {
 	}
 	private void reactState3() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent6())) {
+			//Handle exit of all possible states (of Region2) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
 					break;
 
 				case State5 :
 					stateVector[0] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
 					break;
 
 				case State7 :
 					stateVector[0] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
 					break;
 
 				case State8 :
 					stateVector[0] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
 					break;
 
 				default :
 					break;
 			}
-			defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
-			defaultInterface.setVarS1(1);
+			getDefaultInterfaceImpl().setVarS2(
+					getDefaultInterfaceImpl().getVarS2() - (1));
 
-			defaultInterface.setVarS1(defaultInterface.getVarS1() + (1));
+			getDefaultInterfaceImpl().setVarS1(1);
+
+			getDefaultInterfaceImpl().setVarS1(
+					getDefaultInterfaceImpl().getVarS1() + (1));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State9;
 
 		} else {
-			if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent2())) {
 				stateVector[0] = State.$NullState$;
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() + (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
-
-				defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() + (1));
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State5;
 
 			} else {
-				if (occuredEvents.contains(defaultInterface.getEventEvent11())) {
-					stateVector[0] = State.$NullState$;
+				if (occuredEvents.contains(getDefaultInterfaceImpl()
+						.getEventEvent11())) {
+					//Handle exit of all possible states (of Region2) at position 0...
+					switch (stateVector[0]) {
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+						case State3 :
+							stateVector[0] = State.$NullState$;
+							getDefaultInterfaceImpl().setVarS2(
+									getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+							break;
 
-					defaultInterface.setVarS1(1);
+						case State5 :
+							stateVector[0] = State.$NullState$;
+							getDefaultInterfaceImpl().setVarS2(
+									getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS1(defaultInterface.getVarS1() + (1));
+							getDefaultInterfaceImpl().setVarS2(
+									getDefaultInterfaceImpl().getVarS2() - (1));
+
+							break;
+
+						case State7 :
+							stateVector[0] = State.$NullState$;
+							getDefaultInterfaceImpl().setVarS2(
+									getDefaultInterfaceImpl().getVarS2() - (1));
+
+							getDefaultInterfaceImpl().setVarS2(
+									getDefaultInterfaceImpl().getVarS2() - (1));
+
+							getDefaultInterfaceImpl().setVarS2(
+									getDefaultInterfaceImpl().getVarS2() - (1));
+
+							break;
+
+						case State8 :
+							stateVector[0] = State.$NullState$;
+							getDefaultInterfaceImpl().setVarS2(
+									getDefaultInterfaceImpl().getVarS2() - (1));
+
+							getDefaultInterfaceImpl().setVarS2(
+									getDefaultInterfaceImpl().getVarS2() - (1));
+
+							getDefaultInterfaceImpl().setVarS2(
+									getDefaultInterfaceImpl().getVarS2() - (1));
+
+							break;
+
+						default :
+							break;
+					}
+
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
+
+					getDefaultInterfaceImpl().setVarS1(1);
+
+					getDefaultInterfaceImpl().setVarS1(
+							getDefaultInterfaceImpl().getVarS1() + (1));
 
 					nextStateIndex = 0;
 					stateVector[0] = State.State9;
 
 				} else {
-					if (occuredEvents.contains(defaultInterface
+					if (occuredEvents.contains(getDefaultInterfaceImpl()
 							.getEventEvent14())) {
-						stateVector[0] = State.$NullState$;
+						//Handle exit of all possible states (of Region2) at position 0...
+						switch (stateVector[0]) {
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+							case State3 :
+								stateVector[0] = State.$NullState$;
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+								break;
 
-						defaultInterface.setVarS1(1);
+							case State5 :
+								stateVector[0] = State.$NullState$;
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
 
-						defaultInterface
-								.setVarS1(defaultInterface.getVarS1() + (1));
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+								break;
+
+							case State7 :
+								stateVector[0] = State.$NullState$;
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+								break;
+
+							case State8 :
+								stateVector[0] = State.$NullState$;
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+								break;
+
+							default :
+								break;
+						}
+
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
+
+						getDefaultInterfaceImpl().setVarS1(1);
+
+						getDefaultInterfaceImpl().setVarS1(
+								getDefaultInterfaceImpl().getVarS1() + (1));
 
 						nextStateIndex = 0;
 						stateVector[0] = State.State9;
@@ -304,170 +513,281 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 	private void reactState4() {
 	}
 	private void reactState5() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent6())) {
+			//Handle exit of all possible states (of Region2) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
 					break;
 
 				case State5 :
 					stateVector[0] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
 					break;
 
 				case State7 :
 					stateVector[0] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
 					break;
 
 				case State8 :
 					stateVector[0] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
 					break;
 
 				default :
 					break;
 			}
-			defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
-			defaultInterface.setVarS1(1);
+			getDefaultInterfaceImpl().setVarS2(
+					getDefaultInterfaceImpl().getVarS2() - (1));
 
-			defaultInterface.setVarS1(defaultInterface.getVarS1() + (1));
+			getDefaultInterfaceImpl().setVarS1(1);
+
+			getDefaultInterfaceImpl().setVarS1(
+					getDefaultInterfaceImpl().getVarS1() + (1));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State9;
 
 		} else {
-			if (occuredEvents.contains(defaultInterface.getEventEvent7())) {
-				//Handle exit of all possible states on position 0...
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent7())) {
+				//Handle exit of all possible states (of Region4) at position 0...
 				switch (stateVector[0]) {
 
 					case State5 :
 						stateVector[0] = State.$NullState$;
-
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
 						break;
 
 					case State7 :
 						stateVector[0] = State.$NullState$;
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
-
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
 						break;
 
 					case State8 :
 						stateVector[0] = State.$NullState$;
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
-
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
 						break;
 
 					default :
 						break;
 				}
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
+
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() + (1));
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State3;
 
 			} else {
-				if (occuredEvents.contains(defaultInterface.getEventEvent3())) {
+				if (occuredEvents.contains(getDefaultInterfaceImpl()
+						.getEventEvent3())) {
 					stateVector[0] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() + (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() + (1));
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() + (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() + (1));
 
 					nextStateIndex = 0;
 					stateVector[0] = State.State7;
 
 				} else {
-					if (occuredEvents.contains(defaultInterface
+					if (occuredEvents.contains(getDefaultInterfaceImpl()
 							.getEventEvent12())) {
-						stateVector[0] = State.$NullState$;
+						//Handle exit of all possible states (of Region2) at position 0...
+						switch (stateVector[0]) {
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+							case State3 :
+								stateVector[0] = State.$NullState$;
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+								break;
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+							case State5 :
+								stateVector[0] = State.$NullState$;
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
 
-						defaultInterface.setVarS1(1);
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
 
-						defaultInterface
-								.setVarS1(defaultInterface.getVarS1() + (1));
+								break;
+
+							case State7 :
+								stateVector[0] = State.$NullState$;
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+								break;
+
+							case State8 :
+								stateVector[0] = State.$NullState$;
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+								break;
+
+							default :
+								break;
+						}
+
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
+
+						getDefaultInterfaceImpl().setVarS1(1);
+
+						getDefaultInterfaceImpl().setVarS1(
+								getDefaultInterfaceImpl().getVarS1() + (1));
 
 						nextStateIndex = 0;
 						stateVector[0] = State.State9;
 
 					} else {
-						if (occuredEvents.contains(defaultInterface
+						if (occuredEvents.contains(getDefaultInterfaceImpl()
 								.getEventEvent15())) {
-							stateVector[0] = State.$NullState$;
+							//Handle exit of all possible states (of Region2) at position 0...
+							switch (stateVector[0]) {
 
-							defaultInterface.setVarS2(defaultInterface
-									.getVarS2() - (1));
+								case State3 :
+									stateVector[0] = State.$NullState$;
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
 
-							defaultInterface.setVarS2(defaultInterface
-									.getVarS2() - (1));
+									break;
 
-							defaultInterface.setVarS2(defaultInterface
-									.getVarS2() - (1));
+								case State5 :
+									stateVector[0] = State.$NullState$;
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
 
-							defaultInterface.setVarS1(1);
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
 
-							defaultInterface.setVarS1(defaultInterface
-									.getVarS1() + (1));
+									break;
+
+								case State7 :
+									stateVector[0] = State.$NullState$;
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
+
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
+
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
+
+									break;
+
+								case State8 :
+									stateVector[0] = State.$NullState$;
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
+
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
+
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
+
+									break;
+
+								default :
+									break;
+							}
+
+							getDefaultInterfaceImpl().setVarS2(
+									getDefaultInterfaceImpl().getVarS2() - (1));
+
+							getDefaultInterfaceImpl().setVarS1(1);
+
+							getDefaultInterfaceImpl().setVarS1(
+									getDefaultInterfaceImpl().getVarS1() + (1));
 
 							nextStateIndex = 0;
 							stateVector[0] = State.State10;
@@ -483,157 +803,156 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 	private void reactState6() {
 	}
 	private void reactState7() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent6())) {
+			//Handle exit of all possible states (of Region2) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
 					break;
 
 				case State5 :
 					stateVector[0] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
 					break;
 
 				case State7 :
 					stateVector[0] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
 					break;
 
 				case State8 :
 					stateVector[0] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
 					break;
 
 				default :
 					break;
 			}
-			defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
-			defaultInterface.setVarS1(1);
+			getDefaultInterfaceImpl().setVarS2(
+					getDefaultInterfaceImpl().getVarS2() - (1));
 
-			defaultInterface.setVarS1(defaultInterface.getVarS1() + (1));
+			getDefaultInterfaceImpl().setVarS1(1);
+
+			getDefaultInterfaceImpl().setVarS1(
+					getDefaultInterfaceImpl().getVarS1() + (1));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State9;
 
 		} else {
-			if (occuredEvents.contains(defaultInterface.getEventEvent7())) {
-				//Handle exit of all possible states on position 0...
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent7())) {
+				//Handle exit of all possible states (of Region4) at position 0...
 				switch (stateVector[0]) {
 
 					case State5 :
 						stateVector[0] = State.$NullState$;
-
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
 						break;
 
 					case State7 :
 						stateVector[0] = State.$NullState$;
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
-
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
 						break;
 
 					case State8 :
 						stateVector[0] = State.$NullState$;
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
-
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
 						break;
 
 					default :
 						break;
 				}
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
+
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() + (1));
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State3;
 
 			} else {
-				if (occuredEvents.contains(defaultInterface.getEventEvent8())) {
-					//Handle exit of all possible states on position 0...
+				if (occuredEvents.contains(getDefaultInterfaceImpl()
+						.getEventEvent8())) {
+					//Handle exit of all possible states (of Region6) at position 0...
 					switch (stateVector[0]) {
 
 						case State7 :
 							stateVector[0] = State.$NullState$;
-
-							defaultInterface.setVarS2(defaultInterface
-									.getVarS2() - (1));
+							getDefaultInterfaceImpl().setVarS2(
+									getDefaultInterfaceImpl().getVarS2() - (1));
 
 							break;
 
 						case State8 :
 							stateVector[0] = State.$NullState$;
-
-							defaultInterface.setVarS2(defaultInterface
-									.getVarS2() - (1));
+							getDefaultInterfaceImpl().setVarS2(
+									getDefaultInterfaceImpl().getVarS2() - (1));
 
 							break;
 
 						default :
 							break;
 					}
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() + (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
+
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() + (1));
 
 					nextStateIndex = 0;
 					stateVector[0] = State.State5;
 
 				} else {
-					if (occuredEvents.contains(defaultInterface
+					if (occuredEvents.contains(getDefaultInterfaceImpl()
 							.getEventEvent4())) {
 						stateVector[0] = State.$NullState$;
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
-
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() + (1));
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() + (1));
 
 						nextStateIndex = 0;
 						stateVector[0] = State.State8;
@@ -647,207 +966,307 @@ public class Test_HierarchyCycleBasedStatemachine implements IStatemachine {
 		}
 	}
 	private void reactState8() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
-			//Handle exit of all possible states on position 0...
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent6())) {
+			//Handle exit of all possible states (of Region2) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
 					stateVector[0] = State.$NullState$;
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
 					break;
 
 				case State5 :
 					stateVector[0] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
 					break;
 
 				case State7 :
 					stateVector[0] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
 					break;
 
 				case State8 :
 					stateVector[0] = State.$NullState$;
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
-
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
 
 					break;
 
 				default :
 					break;
 			}
-			defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
-			defaultInterface.setVarS1(1);
+			getDefaultInterfaceImpl().setVarS2(
+					getDefaultInterfaceImpl().getVarS2() - (1));
 
-			defaultInterface.setVarS1(defaultInterface.getVarS1() + (1));
+			getDefaultInterfaceImpl().setVarS1(1);
+
+			getDefaultInterfaceImpl().setVarS1(
+					getDefaultInterfaceImpl().getVarS1() + (1));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State9;
 
 		} else {
-			if (occuredEvents.contains(defaultInterface.getEventEvent7())) {
-				//Handle exit of all possible states on position 0...
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent7())) {
+				//Handle exit of all possible states (of Region4) at position 0...
 				switch (stateVector[0]) {
 
 					case State5 :
 						stateVector[0] = State.$NullState$;
-
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
 						break;
 
 					case State7 :
 						stateVector[0] = State.$NullState$;
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
-
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
 						break;
 
 					case State8 :
 						stateVector[0] = State.$NullState$;
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
-
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
 						break;
 
 					default :
 						break;
 				}
-				defaultInterface.setVarS2(defaultInterface.getVarS2() - (1));
 
-				defaultInterface.setVarS2(defaultInterface.getVarS2() + (1));
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() - (1));
+
+				getDefaultInterfaceImpl().setVarS2(
+						getDefaultInterfaceImpl().getVarS2() + (1));
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State3;
 
 			} else {
-				if (occuredEvents.contains(defaultInterface.getEventEvent8())) {
-					//Handle exit of all possible states on position 0...
+				if (occuredEvents.contains(getDefaultInterfaceImpl()
+						.getEventEvent8())) {
+					//Handle exit of all possible states (of Region6) at position 0...
 					switch (stateVector[0]) {
 
 						case State7 :
 							stateVector[0] = State.$NullState$;
-
-							defaultInterface.setVarS2(defaultInterface
-									.getVarS2() - (1));
+							getDefaultInterfaceImpl().setVarS2(
+									getDefaultInterfaceImpl().getVarS2() - (1));
 
 							break;
 
 						case State8 :
 							stateVector[0] = State.$NullState$;
-
-							defaultInterface.setVarS2(defaultInterface
-									.getVarS2() - (1));
+							getDefaultInterfaceImpl().setVarS2(
+									getDefaultInterfaceImpl().getVarS2() - (1));
 
 							break;
 
 						default :
 							break;
 					}
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() - (1));
 
-					defaultInterface
-							.setVarS2(defaultInterface.getVarS2() + (1));
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() - (1));
+
+					getDefaultInterfaceImpl().setVarS2(
+							getDefaultInterfaceImpl().getVarS2() + (1));
 
 					nextStateIndex = 0;
 					stateVector[0] = State.State5;
 
 				} else {
-					if (occuredEvents.contains(defaultInterface
+					if (occuredEvents.contains(getDefaultInterfaceImpl()
 							.getEventEvent5())) {
 						stateVector[0] = State.$NullState$;
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() - (1));
 
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() - (1));
-
-						defaultInterface
-								.setVarS2(defaultInterface.getVarS2() + (1));
+						getDefaultInterfaceImpl().setVarS2(
+								getDefaultInterfaceImpl().getVarS2() + (1));
 
 						nextStateIndex = 0;
 						stateVector[0] = State.State7;
 
 					} else {
-						if (occuredEvents.contains(defaultInterface
+						if (occuredEvents.contains(getDefaultInterfaceImpl()
 								.getEventEvent13())) {
-							stateVector[0] = State.$NullState$;
+							//Handle exit of all possible states (of Region2) at position 0...
+							switch (stateVector[0]) {
 
-							defaultInterface.setVarS2(defaultInterface
-									.getVarS2() - (1));
+								case State3 :
+									stateVector[0] = State.$NullState$;
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
 
-							defaultInterface.setVarS2(defaultInterface
-									.getVarS2() - (1));
+									break;
 
-							defaultInterface.setVarS2(defaultInterface
-									.getVarS2() - (1));
+								case State5 :
+									stateVector[0] = State.$NullState$;
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
 
-							defaultInterface.setVarS2(defaultInterface
-									.getVarS2() - (1));
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
 
-							defaultInterface.setVarS1(1);
+									break;
 
-							defaultInterface.setVarS1(defaultInterface
-									.getVarS1() + (1));
+								case State7 :
+									stateVector[0] = State.$NullState$;
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
+
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
+
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
+
+									break;
+
+								case State8 :
+									stateVector[0] = State.$NullState$;
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
+
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
+
+									getDefaultInterfaceImpl().setVarS2(
+											getDefaultInterfaceImpl()
+													.getVarS2() - (1));
+
+									break;
+
+								default :
+									break;
+							}
+
+							getDefaultInterfaceImpl().setVarS2(
+									getDefaultInterfaceImpl().getVarS2() - (1));
+
+							getDefaultInterfaceImpl().setVarS1(1);
+
+							getDefaultInterfaceImpl().setVarS1(
+									getDefaultInterfaceImpl().getVarS1() + (1));
 
 							nextStateIndex = 0;
 							stateVector[0] = State.State9;
 
 						} else {
-							if (occuredEvents.contains(defaultInterface
-									.getEventEvent16())) {
-								stateVector[0] = State.$NullState$;
+							if (occuredEvents
+									.contains(getDefaultInterfaceImpl()
+											.getEventEvent16())) {
+								//Handle exit of all possible states (of Region2) at position 0...
+								switch (stateVector[0]) {
 
-								defaultInterface.setVarS2(defaultInterface
-										.getVarS2() - (1));
+									case State3 :
+										stateVector[0] = State.$NullState$;
+										getDefaultInterfaceImpl().setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
 
-								defaultInterface.setVarS2(defaultInterface
-										.getVarS2() - (1));
+										break;
 
-								defaultInterface.setVarS2(defaultInterface
-										.getVarS2() - (1));
+									case State5 :
+										stateVector[0] = State.$NullState$;
+										getDefaultInterfaceImpl().setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
 
-								defaultInterface.setVarS2(defaultInterface
-										.getVarS2() - (1));
+										getDefaultInterfaceImpl().setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
 
-								defaultInterface.setVarS1(1);
+										break;
 
-								defaultInterface.setVarS1(defaultInterface
-										.getVarS1() + (1));
+									case State7 :
+										stateVector[0] = State.$NullState$;
+										getDefaultInterfaceImpl().setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+										getDefaultInterfaceImpl().setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+										getDefaultInterfaceImpl().setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+										break;
+
+									case State8 :
+										stateVector[0] = State.$NullState$;
+										getDefaultInterfaceImpl().setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+										getDefaultInterfaceImpl().setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+										getDefaultInterfaceImpl().setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+										break;
+
+									default :
+										break;
+								}
+
+								getDefaultInterfaceImpl()
+										.setVarS2(
+												getDefaultInterfaceImpl()
+														.getVarS2() - (1));
+
+								getDefaultInterfaceImpl().setVarS1(1);
+
+								getDefaultInterfaceImpl()
+										.setVarS1(
+												getDefaultInterfaceImpl()
+														.getVarS1() + (1));
 
 								nextStateIndex = 0;
 								stateVector[0] = State.State10;

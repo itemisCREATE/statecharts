@@ -10,23 +10,16 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java;
 
-public class ValuedEvent<T extends Enum<T>, D> extends Event<T> {
+public class RuntimeCycleNotification extends Notification {
 
-	private D value;
+	private IStatemachine statemachine;
 
-	public ValuedEvent(T name, int offset, D value) {
-		super(name, offset);
-		this.value = value;
+	public RuntimeCycleNotification(IStatemachine statemachine) {
+		super(NotificationType.RuntimeCycleNotification);
+		this.statemachine = statemachine;
 	}
 
-	public D getValue() {
-		return value;
-	}
-
-	public void setValue(D value) {
-		if (value == null) {
-			throw new IllegalArgumentException();
-		}
-		this.value = value;
+	public IStatemachine getStatemachine() {
+		return statemachine;
 	}
 }

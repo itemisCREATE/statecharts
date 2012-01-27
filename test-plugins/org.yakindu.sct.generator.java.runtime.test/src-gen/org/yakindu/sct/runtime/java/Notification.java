@@ -10,22 +10,15 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java;
 
-public class Notification<Element> {
+public class Notification {
 
 	private NotificationType notificationType;
 
-	private Element element;
-
-	public Notification(NotificationType notificationType, Element element) {
+	public Notification(NotificationType notificationType) {
 		this.notificationType = notificationType;
-		this.element = element;
 	}
 
 	public NotificationType getNotificationType() {
 		return notificationType;
-	}
-
-	public Element getElement() {
-		return element;
 	}
 }

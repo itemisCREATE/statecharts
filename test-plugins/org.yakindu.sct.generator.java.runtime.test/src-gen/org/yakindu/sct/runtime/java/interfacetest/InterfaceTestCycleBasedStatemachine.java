@@ -14,17 +14,22 @@ import java.util.Collection;
 import java.util.HashSet;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.EventVector;
+import java.util.HashMap;
+import java.util.Map;
+import org.yakindu.sct.runtime.java.IGenericAccessStatemachine;
+import org.yakindu.sct.runtime.java.IGenericAccessInterface;
 import org.yakindu.sct.runtime.java.IStatemachine;
 
-public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
+public class InterfaceTestCycleBasedStatemachine
+		implements
+			IGenericAccessStatemachine,
+			IStatemachine {
 
 	public enum State {
 		State1, State2, State3, State4, $NullState$
 	};
 
-	private DefaultInterfaceImpl defaultInterface;
-	private InterfaceOtherImpl interfaceOther;
-	private InterfaceThirdImpl interfaceThird;
+	private Map<String, IGenericAccessInterface> interfaceMap;
 
 	private final State[] stateVector = new State[1];
 
@@ -37,9 +42,10 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 	public InterfaceTestCycleBasedStatemachine() {
 		occuredEvents = new EventVector<Event<? extends Enum<?>>>(6);
 		outEvents = new HashSet<Event<? extends Enum<?>>>();
-		defaultInterface = new DefaultInterfaceImpl(this);
-		interfaceOther = new InterfaceOtherImpl(this);
-		interfaceThird = new InterfaceThirdImpl(this);
+		interfaceMap = new HashMap<String, IGenericAccessInterface>();
+		interfaceMap.put("DefaultInterface", new DefaultInterfaceImpl(this));
+		interfaceMap.put("InterfaceOther", new InterfaceOtherImpl(this));
+		interfaceMap.put("InterfaceThird", new InterfaceThirdImpl(this));
 
 	}
 
@@ -56,9 +62,10 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 	}
 
 	public void init() {
-		for (int i = 0; i < stateVector.length; i++) {
+		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
+
 		occuredEvents.clear();
 	}
 
@@ -71,50 +78,99 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 		return false;
 	}
 
+	public IGenericAccessInterface getInterface(String name) {
+		return interfaceMap.get(name);
+	}
+
 	public DefaultInterface getDefaultInterface() {
-		return defaultInterface;
+		return (DefaultInterface) getInterface("DefaultInterface");
 	}
 
+	private DefaultInterfaceImpl getDefaultInterfaceImpl() {
+		return (DefaultInterfaceImpl) getInterface("DefaultInterface");
+	}
 	public InterfaceOther getInterfaceOther() {
-		return interfaceOther;
+		return (InterfaceOther) getInterface("InterfaceOther");
 	}
 
+	private InterfaceOtherImpl getInterfaceOtherImpl() {
+		return (InterfaceOtherImpl) getInterface("InterfaceOther");
+	}
 	public InterfaceThird getInterfaceThird() {
-		return interfaceThird;
+		return (InterfaceThird) getInterface("InterfaceThird");
+	}
+
+	private InterfaceThirdImpl getInterfaceThirdImpl() {
+		return (InterfaceThirdImpl) getInterface("InterfaceThird");
 	}
 
 	public void enter() {
+		getDefaultInterfaceImpl().setVarVar2(2.3);
+		getDefaultInterfaceImpl().setVarVar3(1);
+		getInterfaceOtherImpl().setVarV1(5);
 		nextStateIndex = 0;
 		stateVector[0] = State.State1;
 
 	}
 
+	public void exit() {
+		//Handle exit of all possible states (of main region) at position 0...
+		switch (stateVector[0]) {
+
+			case State1 :
+				stateVector[0] = State.$NullState$;
+
+				break;
+
+			case State2 :
+				stateVector[0] = State.$NullState$;
+
+				break;
+
+			case State3 :
+				stateVector[0] = State.$NullState$;
+
+				break;
+
+			case State4 :
+				stateVector[0] = State.$NullState$;
+
+				break;
+
+			default :
+				break;
+		}
+
+	}
+
 	private void reactState1() {
-		if ((occuredEvents.contains(defaultInterface.getEventEvent1()) && (defaultInterface
+		if ((occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent1()) && (getDefaultInterfaceImpl()
 				.getVarVar2() > 0))) {
 			stateVector[0] = State.$NullState$;
 
-			defaultInterface.raiseEvent2(22);
+			getDefaultInterfaceImpl().raiseEvent2(22);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State2;
 
 		} else {
-			if ((occuredEvents.contains(interfaceOther.getEventEvent3()) && (defaultInterface
+			if ((occuredEvents.contains(getInterfaceOtherImpl()
+					.getEventEvent3()) && (getDefaultInterfaceImpl()
 					.getVarVar3() == 1))) {
 				stateVector[0] = State.$NullState$;
 
-				interfaceOther.raiseEvent4();
+				getInterfaceOtherImpl().raiseEvent4();
 
 				nextStateIndex = 0;
 				stateVector[0] = State.State3;
 
 			} else {
-				if ((occuredEvents.contains(interfaceThird.getEventEvent5()) && (defaultInterface
+				if ((occuredEvents.contains(getInterfaceThirdImpl()
+						.getEventEvent5()) && (getDefaultInterfaceImpl()
 						.getVarVar1() == true))) {
 					stateVector[0] = State.$NullState$;
 
-					interfaceThird.raiseEvent6(true);
+					getInterfaceThirdImpl().raiseEvent6(true);
 
 					nextStateIndex = 0;
 					stateVector[0] = State.State4;
@@ -124,7 +180,7 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 		}
 	}
 	private void reactState2() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent1())) {
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
@@ -133,7 +189,7 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 		}
 	}
 	private void reactState3() {
-		if (occuredEvents.contains(interfaceOther.getEventEvent3())) {
+		if (occuredEvents.contains(getInterfaceOtherImpl().getEventEvent3())) {
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
@@ -142,7 +198,7 @@ public class InterfaceTestCycleBasedStatemachine implements IStatemachine {
 		}
 	}
 	private void reactState4() {
-		if (occuredEvents.contains(interfaceThird.getEventEvent5())) {
+		if (occuredEvents.contains(getInterfaceThirdImpl().getEventEvent5())) {
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;

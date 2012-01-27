@@ -37,7 +37,7 @@ import «entry.getBasePackageName()».EventNotification;
 import «entry.getBasePackageName()».VariableNotification;
 «ENDIF-»
 «ENDIF-»
-«IF hasValuedEvents()-»
+«IF hasValuedEvents() || entry.createGenericInterfaceSupport()-»
 import «entry.getBasePackageName()».ValuedEvent;
 «ENDIF-»
 

@@ -12,11 +12,19 @@ package org.yakindu.sct.runtime.java.interfacetest;
 
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.INotificationSender;
+import org.yakindu.sct.runtime.java.IGenericAccessInterface;
 
-public interface InterfaceOther extends INotificationSender {
+public interface InterfaceOther
+		extends
+			INotificationSender,
+			IGenericAccessInterface {
 
 	public enum Events {
 		Event3, Event4,
+	}
+
+	public enum Variables {
+		v1,
 	}
 
 	public void raiseEvent3();

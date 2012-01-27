@@ -10,7 +10,13 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java.test_expression;
 
-public interface InterfaceOther {
+import org.yakindu.sct.runtime.java.INotificationSender;
+
+public interface InterfaceOther extends INotificationSender {
+
+	public enum Variables {
+		var1, var2, var3,
+	}
 
 	public boolean getVarVar1();
 	public void setVarVar1(boolean value);

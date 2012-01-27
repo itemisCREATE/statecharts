@@ -25,6 +25,7 @@ public class VariableNotification<T> extends Notification {
 
 	public VariableNotification(Enum<?> id, T newValue, T oldValue) {
 		super(NotificationType.VariableNotification);
+		this.id = id;
 		this.oldValue = oldValue;
 		this.newValue = newValue;
 	}

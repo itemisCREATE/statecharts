@@ -10,23 +10,13 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java;
 
-public class ValuedEvent<T extends Enum<T>, D> extends Event<T> {
+public interface IGenericAccessInterface {
 
-	private D value;
+	public boolean raiseEvent(String name);
 
-	public ValuedEvent(T name, int offset, D value) {
-		super(name, offset);
-		this.value = value;
-	}
+	public boolean raiseEvent(String name, Object value);
 
-	public D getValue() {
-		return value;
-	}
+	public boolean setVariable(String name, Object value);
 
-	public void setValue(D value) {
-		if (value == null) {
-			throw new IllegalArgumentException();
-		}
-		this.value = value;
-	}
+	public Object getVariable(String name);
 }

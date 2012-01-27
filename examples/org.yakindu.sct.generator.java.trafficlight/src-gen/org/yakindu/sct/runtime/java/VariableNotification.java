@@ -10,22 +10,28 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java;
 
-public class Event<T extends Enum<T>> {
+public class VariableNotification<T> extends Notification {
 
-	private T id;
+	private T oldValue;
+	private T newValue;
+	private Enum<?> id;
 
-	private int offset;
-
-	public Event(T id, int offset) {
+	public VariableNotification(Enum<?> id, T newValue, T oldValue) {
+		super(NotificationType.VariableNotification);
 		this.id = id;
-		this.offset = offset;
+		this.oldValue = oldValue;
+		this.newValue = newValue;
 	}
 
-	public T getId() {
+	public Enum<?> getId() {
 		return id;
 	}
 
-	public int getIndex() {
-		return offset + id.ordinal();
+	public T getNewValue() {
+		return newValue;
+	}
+
+	public T getOldValue() {
+		return oldValue;
 	}
 }

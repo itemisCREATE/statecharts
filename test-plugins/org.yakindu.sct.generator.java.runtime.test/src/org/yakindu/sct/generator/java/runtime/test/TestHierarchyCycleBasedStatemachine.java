@@ -11,14 +11,11 @@
 package org.yakindu.sct.generator.java.runtime.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.runtime.java.test_hierarchy.DefaultInterface;
 import org.yakindu.sct.runtime.java.test_hierarchy.Test_HierarchyCycleBasedStatemachine;
-import org.yakindu.sct.runtime.java.test_hierarchy.Test_HierarchyCycleBasedStatemachine.State;
 
 /**
  * Testcases for 'Test_LocalActions' cycle based statemachine.

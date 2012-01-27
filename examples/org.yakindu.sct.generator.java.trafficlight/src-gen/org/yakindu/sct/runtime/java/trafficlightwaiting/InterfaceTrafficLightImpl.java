@@ -13,7 +13,6 @@ package org.yakindu.sct.runtime.java.trafficlightwaiting;
 public class InterfaceTrafficLightImpl implements InterfaceTrafficLight {
 
 	private boolean varRed;
-
 	public boolean getVarRed() {
 		return varRed;
 	}
@@ -22,7 +21,6 @@ public class InterfaceTrafficLightImpl implements InterfaceTrafficLight {
 		varRed = value;
 	}
 	private boolean varYellow;
-
 	public boolean getVarYellow() {
 		return varYellow;
 	}
@@ -31,7 +29,6 @@ public class InterfaceTrafficLightImpl implements InterfaceTrafficLight {
 		varYellow = value;
 	}
 	private boolean varGreen;
-
 	public boolean getVarGreen() {
 		return varGreen;
 	}
@@ -39,4 +36,5 @@ public class InterfaceTrafficLightImpl implements InterfaceTrafficLight {
 	public void setVarGreen(boolean value) {
 		varGreen = value;
 	}
+
 }
