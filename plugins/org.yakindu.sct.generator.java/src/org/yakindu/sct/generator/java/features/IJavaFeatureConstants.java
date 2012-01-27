@@ -37,12 +37,14 @@ public interface IJavaFeatureConstants {
 	
 	public static final String GENERIC_INTERFACE_SUPPORT = "GenericInterfaceSupport";
 	
+	public static final String STATEMACHINE_FACTORY_SUPPORT = "StatemachineFactorySupport";
+	
 	public static final String[] JAVA_KEYWORDS = { "abstract", "assert",
 		"boolean", "break", "byte", "case", "catch", "char", "class",
 		"const", "continue", "default", "do", "double", "else", "enum",
 		"extends", "false", "final", "finally", "float", "for", "goto", "if",
 		"implements", "import", "instanceof", "int", "interface", "long",
-		"native", "new","null", "package", "private", "protected", "public",
+		"native", "new", "null", "package", "private", "protected", "public",
 		"return", "short", "static", "strictfp", "super", "switch",
 		"synchronized", "this", "throw", "throws", "transient", "true" , "try",
 		"void", "volatile", "while" };

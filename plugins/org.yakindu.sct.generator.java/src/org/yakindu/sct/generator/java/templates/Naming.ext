@@ -23,11 +23,11 @@ String getStatemachineName(String name) :
 
 String getStatemachineName(ExecutionFlow this) : 
 	 name.getStatemachineName();
-String getBaseStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "AbstractBaseStatemachine";
-String getBaseStatemachineName(InterfaceScope this) : ((ExecutionFlow)eContainer).getBaseStatemachineName();
+
 String getEventBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "EventBasedStatemachine";
 String getCycleBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "CycleBasedStatemachine";
 String getCycleBasedStatemachineName(InterfaceScope this) : ((ExecutionFlow)eContainer).getCycleBasedStatemachineName();
+String getStatemachineFactoryName(ExecutionFlow this) : name.getStatemachineName().toFirstUpper() + "StatemachineFactory";
 
 String getStatemachineInterfaceTypes(ExecutionFlow this, GeneratorEntry entry):
 	JAVA org.yakindu.sct.generator.java.extensions.JavaExtensions.getStatemachineInterfaceTypes(org.yakindu.sct.model.sexec.ExecutionFlow, org.yakindu.sct.model.sgen.GeneratorEntry);
