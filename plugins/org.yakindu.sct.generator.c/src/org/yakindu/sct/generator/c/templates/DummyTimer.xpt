@@ -26,7 +26,7 @@ extern "C" {
 #endif 
  
 extern void setTimer(const uint32_t evid, const uint32_t time_ms,
-		boolean periodic);
+		sc_boolean periodic);
 
 extern void unsetTimer(const uint32_t evid);
 
@@ -43,7 +43,7 @@ extern void dummyTimer_init(Timer* handle);
 #include "DummyTimer.h"
 #include <stdio.h>
 
-void setTimer(const uint32_t evid, const uint32_t time_ms, boolean periodic)
+void setTimer(const uint32_t evid, const uint32_t time_ms, sc_boolean periodic)
 {
 	printf("set event <%d> with time %dms\n", evid, time_ms);
 }

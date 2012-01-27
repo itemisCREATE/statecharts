@@ -85,7 +85,7 @@ extern void «interface.interfaceName()»_init(«handleInterfaceAdditionComma(inter
 		EventSet* eventSet, EventPool* eventPool);
 		
 «FOREACH interface.getOutEvents() AS event -»
-extern boolean «interface.interfaceName()»_is_«event.name»_raised(«handleInterfaceAddition(interface)»«
+extern sc_boolean «interface.interfaceName()»_is_«event.name»_raised(«handleInterfaceAddition(interface)»«
 IF !event.type.isVoid() -»«IF this.isSingleton() == false -», «ENDIF»«event.type.asCType()»* value«ENDIF» );
 «ENDFOREACH»
 
@@ -115,7 +115,7 @@ static «interfaceClassName(interface)»* handle;
 void «interface.interfaceName()»_set_interface_singleton(«interfaceClassName(interface)»* _handle);
 «ENDIF»
 
-static boolean «interface.interfaceName()»_is_my_event(«handleInterfaceAdditionComma(interface)»uint32_t evid);
+static sc_boolean «interface.interfaceName()»_is_my_event(«handleInterfaceAdditionComma(interface)»uint32_t evid);
 
 #ifdef INTERFACE_LISTENER
 void «interface.interfaceName()»_init(«handleInterfaceAdditionComma(interface)»Statemachine_cy* statemachine,
@@ -169,7 +169,7 @@ void «interface.interfaceName()»_set_«variable.name»(«handleInterfaceAdditionCom
 «ENDFOREACH»
 
 
-boolean «interface.interfaceName()»_is_set(«handleInterfaceAdditionComma(interface)»uint32_t evid)
+sc_boolean «interface.interfaceName()»_is_set(«handleInterfaceAdditionComma(interface)»uint32_t evid)
 {
 	if («interface.interfaceName()»_is_my_event(«IF this.isSingleton() == false -»handle, «ENDIF»evid))
 		return eventSet_check(handle->eventSet, evid);
@@ -200,10 +200,10 @@ void «interface.interfaceName()»_raiseEvent(«handleInterfaceAdditionComma(interf
 #else
 
 «FOREACH interface.getOutEvents() AS event -»
-extern boolean «interface.interfaceName()»_is_«event.name»_raised(«handleInterfaceAddition(interface)»«
+extern sc_boolean «interface.interfaceName()»_is_«event.name»_raised(«handleInterfaceAddition(interface)»«
 IF !event.type.isVoid() -»«IF this.isSingleton() == false -», «ENDIF»«event.type.asCType()»* value«ENDIF») 
 {
-	boolean ret = bool_false;
+	sc_boolean ret = bool_false;
 	if (eventSet_check(handle->eventSet,«event.getEventEnumName()»)) {
 «IF !event.type.isVoid() -»	
 		*value = ((«event.getEventName()»*)handle->«event.getEventName()»)->value;
@@ -234,9 +234,9 @@ ENDIF»)
 #endif // INTERFACE_LISTENER
 
 
-boolean «interface.interfaceName()»_is_my_event(«handleInterfaceAdditionComma(interface)»uint32_t evid)
+sc_boolean «interface.interfaceName()»_is_my_event(«handleInterfaceAdditionComma(interface)»uint32_t evid)
 {
-	boolean ret = bool_false;
+	sc_boolean ret = bool_false;
 	switch (evid) {
 «FOREACH interface.getInEvents() AS event -»
 	case «event.getEventEnumName()»:

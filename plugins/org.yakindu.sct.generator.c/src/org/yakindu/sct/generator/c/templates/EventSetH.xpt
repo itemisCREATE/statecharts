@@ -32,25 +32,25 @@ typedef enum {
 } EventType;
 
 typedef struct {
-	boolean* _set;
+	sc_boolean* _set;
 	EventType* eventType;
 	uint32_t maxEvents;
-	boolean isStaticData;
+	sc_boolean isStaticData;
 } EventSet;
 
 /* constructor and destructor */
 extern void eventSet_init(EventSet* handle, const uint32_t maxEvents);
 extern void eventSet_init_staticData(EventSet* handle, const uint32_t maxEvents,
-		boolean* _dataSet, EventType* _eventTypes);
+		sc_boolean* _dataSet, EventType* _eventTypes);
 extern void eventSet_exit(EventSet* handle);
 
 extern void eventSet_set_type(EventSet* handle, const uint32_t evid, const EventType type);
-extern boolean eventSet_is_type(EventSet* handle, const uint32_t evid, const EventType type);
-extern boolean eventSet_check(EventSet* handle, const uint32_t evid);
+extern sc_boolean eventSet_is_type(EventSet* handle, const uint32_t evid, const EventType type);
+extern sc_boolean eventSet_check(EventSet* handle, const uint32_t evid);
 extern void eventSet_clean(EventSet* handle);
 extern void eventSet_set(EventSet* handle, const uint32_t evid);
-extern boolean eventSet_isAny_input(EventSet* handle);
-extern boolean eventSet_isAny_output(EventSet* handle);
+extern sc_boolean eventSet_isAny_input(EventSet* handle);
+extern sc_boolean eventSet_isAny_output(EventSet* handle);
 extern void eventSet_clean_single(EventSet* handle, const uint32_t evid);
 
 #ifdef __cplusplus

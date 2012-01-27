@@ -176,11 +176,11 @@ String statemachineHandleName(Object this) : ((ExecutionFlow)((EObject)this).eRo
 
 String interfaceName(InterfaceScope this) : this.getExecutionFlow().name.toFirstLower() + ((this.name == null) ? "_if" : "_if_" + this.name);
 String interfaceClassName(InterfaceScope this) : this.getExecutionFlow().name.toFirstUpper() + "If" + ((this.name == null)?"":this.name.toFirstUpper());
-String interfaceObjectName(InterfaceScope this) : "interface" + ((this.name == null)?"":this.name.toFirstUpper());
+String interfaceObjectName(InterfaceScope this) : "iface" + ((this.name == null)?"":this.name.toFirstUpper());
 
 String interfaceName(InternalScope this) : this.getExecutionFlow().name.toFirstLower() + "internal";
 String interfaceClassName(InternalScope this) : this.getExecutionFlow().name.toFirstUpper() + "Internal";
-String interfaceObjectName(InternalScope this) : "interfaceInternal";
+String interfaceObjectName(InternalScope this) : "ifaceInternal";
 
 /* Event name information  */
 String getEventEnumName(TimeEvent this) : "ev_" + this.name.toFirstLower();
