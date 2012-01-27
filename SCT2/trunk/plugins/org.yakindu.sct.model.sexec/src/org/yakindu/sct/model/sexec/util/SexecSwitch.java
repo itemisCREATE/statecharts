@@ -340,6 +340,24 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SexecPackage.TRACE_BEGIN_RUN_CYCLE: {
+				TraceBeginRunCycle traceBeginRunCycle = (TraceBeginRunCycle)theEObject;
+				T result = caseTraceBeginRunCycle(traceBeginRunCycle);
+				if (result == null) result = caseTrace(traceBeginRunCycle);
+				if (result == null) result = caseStep(traceBeginRunCycle);
+				if (result == null) result = caseNamedElement(traceBeginRunCycle);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.TRACE_END_RUN_CYCLE: {
+				TraceEndRunCycle traceEndRunCycle = (TraceEndRunCycle)theEObject;
+				T result = caseTraceEndRunCycle(traceEndRunCycle);
+				if (result == null) result = caseTrace(traceEndRunCycle);
+				if (result == null) result = caseStep(traceEndRunCycle);
+				if (result == null) result = caseNamedElement(traceEndRunCycle);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case SexecPackage.SAVE_HISTORY: {
 				SaveHistory saveHistory = (SaveHistory)theEObject;
 				T result = caseSaveHistory(saveHistory);
@@ -762,6 +780,36 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTraceStateExited(TraceStateExited object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Trace Begin Run Cycle</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Trace Begin Run Cycle</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTraceBeginRunCycle(TraceBeginRunCycle object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Trace End Run Cycle</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Trace End Run Cycle</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTraceEndRunCycle(TraceEndRunCycle object) {
 		return null;
 	}
 

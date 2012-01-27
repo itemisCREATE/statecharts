@@ -26,6 +26,8 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 import org.yakindu.sct.model.sexec.ReactionFired;
 import org.yakindu.sct.model.sexec.Trace;
+import org.yakindu.sct.model.sexec.TraceBeginRunCycle;
+import org.yakindu.sct.model.sexec.TraceEndRunCycle;
 import org.yakindu.sct.model.sexec.TraceNodeExecuted;
 import org.yakindu.sct.model.sexec.TraceStateEntered;
 import org.yakindu.sct.model.sexec.TraceStateExited;
@@ -34,6 +36,8 @@ import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
 
 import de.itemis.gmf.runtime.commons.highlighting.HighlightingParameters;
+import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
+import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport.Action;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -43,12 +47,11 @@ import de.itemis.gmf.runtime.commons.highlighting.HighlightingParameters;
 public class DefaultDynamicNotationHandler extends
 		AbstractDynamicNotationHandler {
 
-	private static HighlightingParameters TRANSITION_PARAMS = new HighlightingParameters(
+	protected static HighlightingParameters TRANSITION_PARAMS = new HighlightingParameters(
 			0, ColorConstants.darkGreen, ColorConstants.gray, false);
 
-	private static HighlightingParameters STATE_PARAMS = HighlightingParameters.DEFAULT;
+	protected static HighlightingParameters STATE_PARAMS = HighlightingParameters.DEFAULT;
 
-	private List<EObject> lastTransitionPath = new ArrayList<EObject>();
 
 	public DefaultDynamicNotationHandler() {
 		updatePreferences();
@@ -59,12 +62,18 @@ public class DefaultDynamicNotationHandler extends
 			getHighlightingSupport().fadeIn(vertex,
 					HighlightingParameters.DEFAULT);
 		}
-		for (EObject obj : lastTransitionPath) {
-			getHighlightingSupport().fadeIn(obj, TRANSITION_PARAMS);
-		}
 
 	}
 
+
+	public void visualizeStep(final TraceBeginRunCycle trace) {
+	}
+
+	
+	public void visualizeStep(final TraceEndRunCycle trace) {
+	}
+
+	
 	public void visualizeStep(final TraceStateEntered trace) {
 		getHighlightingSupport().fadeIn(
 				((TraceStateEntered) trace).getState().getSourceElement(),
@@ -75,27 +84,26 @@ public class DefaultDynamicNotationHandler extends
 		getHighlightingSupport().fadeOut(
 				((TraceStateExited) trace).getState().getSourceElement(),
 				HighlightingParameters.DEFAULT);
-
-		for (EObject obj : lastTransitionPath) {
-			getHighlightingSupport().fadeOut(obj, TRANSITION_PARAMS);
-		}
-		lastTransitionPath.clear();
 	}
 
 	public void visualizeStep(final ReactionFired trace) {
-		EObject transition = trace.getReaction().getSourceElement();
-		getHighlightingSupport().fadeIn(transition, TRANSITION_PARAMS);
-		lastTransitionPath.add(transition);
+		getHighlightingSupport().flash(
+				trace.getReaction().getSourceElement(),
+				HighlightingParameters.DEFAULT);
 	}
 
 	public void visualizeStep(final TraceNodeExecuted trace) {
-		EObject node = trace.getNode().getSourceElement();
-		getHighlightingSupport().fadeIn(node, TRANSITION_PARAMS);
-		lastTransitionPath.add(node);
+		getHighlightingSupport().flash(
+				trace.getNode().getSourceElement(),
+				HighlightingParameters.DEFAULT);
 	}
 
-	// dispatch
+	/** 
+	 * this dispatch method invokes the appropriate handler methods for the different trace step types. 
+	 */
 	public void visualizeStep(final Trace trace) {
+		if (trace instanceof TraceBeginRunCycle)
+			visualizeStep((TraceBeginRunCycle) trace);
 		if (trace instanceof TraceStateEntered)
 			visualizeStep((TraceStateEntered) trace);
 		if (trace instanceof TraceStateExited)
@@ -104,8 +112,11 @@ public class DefaultDynamicNotationHandler extends
 			visualizeStep((ReactionFired) trace);
 		if (trace instanceof TraceNodeExecuted)
 			visualizeStep((TraceNodeExecuted) trace);
+		if (trace instanceof TraceEndRunCycle)
+			visualizeStep((TraceEndRunCycle) trace);
 	}
 
+	
 	protected void updatePreferences() {
 		IPreferenceStore store = SimulationActivator.getDefault()
 				.getPreferenceStore();

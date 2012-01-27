@@ -110,6 +110,8 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 			case SexecPackage.REACTION_FIRED: return createReactionFired();
 			case SexecPackage.TRACE_STATE_ENTERED: return createTraceStateEntered();
 			case SexecPackage.TRACE_STATE_EXITED: return createTraceStateExited();
+			case SexecPackage.TRACE_BEGIN_RUN_CYCLE: return createTraceBeginRunCycle();
+			case SexecPackage.TRACE_END_RUN_CYCLE: return createTraceEndRunCycle();
 			case SexecPackage.SAVE_HISTORY: return createSaveHistory();
 			case SexecPackage.HISTORY_ENTRY: return createHistoryEntry();
 			default:
@@ -365,6 +367,26 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public TraceStateExited createTraceStateExited() {
 		TraceStateExitedImpl traceStateExited = new TraceStateExitedImpl();
 		return traceStateExited;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TraceBeginRunCycle createTraceBeginRunCycle() {
+		TraceBeginRunCycleImpl traceBeginRunCycle = new TraceBeginRunCycleImpl();
+		return traceBeginRunCycle;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TraceEndRunCycle createTraceEndRunCycle() {
+		TraceEndRunCycleImpl traceEndRunCycle = new TraceEndRunCycleImpl();
+		return traceEndRunCycle;
 	}
 
 	/**

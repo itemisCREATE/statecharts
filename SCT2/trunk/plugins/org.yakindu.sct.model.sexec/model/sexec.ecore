@@ -145,6 +145,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="TraceStateExited" eSuperTypes="#//Trace">
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceBeginRunCycle" eSuperTypes="#//Trace"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceEndRunCycle" eSuperTypes="#//Trace"/>
   <eClassifiers xsi:type="ecore:EClass" name="SaveHistory" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="region" eType="#//ExecutionRegion"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="deep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

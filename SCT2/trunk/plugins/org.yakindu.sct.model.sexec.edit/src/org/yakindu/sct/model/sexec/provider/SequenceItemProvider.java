@@ -226,6 +226,16 @@ public class SequenceItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.SEQUENCE__STEPS,
+				 SexecFactory.eINSTANCE.createTraceBeginRunCycle()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SEQUENCE__STEPS,
+				 SexecFactory.eINSTANCE.createTraceEndRunCycle()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SEQUENCE__STEPS,
 				 SexecFactory.eINSTANCE.createSaveHistory()));
 
 		newChildDescriptors.add

@@ -26,12 +26,15 @@ import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.SaveHistory;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
+import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.StateVector;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.Trace;
+import org.yakindu.sct.model.sexec.TraceBeginRunCycle;
+import org.yakindu.sct.model.sexec.TraceEndRunCycle;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.model.sexec.interpreter.IStatementInterpreter;
@@ -75,6 +78,10 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   
   private int nextSVIdx;
   
+  private TraceBeginRunCycle brc;
+  
+  private TraceEndRunCycle erc;
+  
   public void initialize(final ExecutionFlow flow) throws NumberFormatException {
     {
       this.flow = flow;
@@ -90,6 +97,10 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
       this.timingService.init(_virtualClock);
       VirtualClock _virtualClock_1 = this.executionContext.getVirtualClock();
       _virtualClock_1.start();
+      TraceBeginRunCycle _createTraceBeginRunCycle = SexecFactory.eINSTANCE.createTraceBeginRunCycle();
+      this.brc = _createTraceBeginRunCycle;
+      TraceEndRunCycle _createTraceEndRunCycle = SexecFactory.eINSTANCE.createTraceEndRunCycle();
+      this.erc = _createTraceEndRunCycle;
     }
   }
   
@@ -129,6 +140,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   public void runCycle() throws ExecutionException {
     {
       this.nextSVIdx = 0;
+      this.execute(this.brc);
       ExecutionState[] _stateConfiguration = this.executionContext.getStateConfiguration();
       int _size = ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration)).size();
       boolean _operator_lessThan = ComparableExtensions.<Integer>operator_lessThan(((Integer)this.nextSVIdx), ((Integer)_size));
@@ -152,6 +164,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
         _xwhileexpression = _operator_lessThan_1;
       }
       this.executionContext.resetRaisedEvents();
+      this.execute(this.erc);
     }
   }
   
