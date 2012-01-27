@@ -35,6 +35,8 @@ public interface IJavaFeatureConstants {
 	
 	public static final String INTERFACE_OBSERVER_SUPPORT = "InterfaceObserverSupport";
 	
+	public static final String GENERIC_INTERFACE_SUPPORT = "GenericInterfaceSupport";
+	
 	public static final String[] JAVA_KEYWORDS = { "abstract", "assert",
 		"boolean", "break", "byte", "case", "catch", "char", "class",
 		"const", "continue", "default", "do", "double", "else", "enum",

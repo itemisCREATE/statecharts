@@ -226,6 +226,12 @@ import java.util.Collection;
 import java.util.HashSet;
 import «entry.getBasePackageName()».Event;
 import «entry.getBasePackageName()».EventVector;
+«IF entry.createGenericInterfaceSupport()-»
+	import java.util.HashMap;
+	import java.util.Map;
+	import «entry.getBasePackageName()».IGenericAccessStatemachine;
+	import «entry.getBasePackageName()».IGenericAccessInterface;
+«ENDIF-»
 «IF isTimedStatemachine()-»
 	import «entry.getBasePackageName()».TimeEvent;
 	import «entry.getBasePackageName()».ITimedStatemachine;
@@ -239,7 +245,7 @@ import «entry.getBasePackageName()».EventVector;
 	import «entry.getBasePackageName()».ValuedEvent;
 «ENDIF-»
 
-public class «getCycleBasedStatemachineName()» implements «getStatemachineImplementationType()» {
+public class «getCycleBasedStatemachineName()» implements «getStatemachineInterfaceTypes(entry)» {
 	
 	«IF getInternalScopeEvents().size > 0-»
 	private enum Events {
@@ -272,9 +278,14 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	    «getNullStateName()»
 	};
 	
-	«FOREACH scopes.typeSelect(InterfaceScope) AS interface-»
-	private «interface.getInterfaceImplName()» «interface.getInterfaceName().toFirstLower()»;
-	«ENDFOREACH-»
+	«IF entry.createGenericInterfaceSupport()-»
+		private Map<String,IGenericAccessInterface> interfaceMap;
+	«ELSE-»
+		«FOREACH scopes.typeSelect(InterfaceScope) AS interface-»
+		private «interface.getInterfaceImplName()» «interface.getInterfaceName().toFirstLower()»;
+		«ENDFOREACH-»
+	«ENDIF-»
+	
 	«FOREACH getInternalScopeVariables() AS variable-»
 	private «variable.type.getJavaType()» «variable.getValueName()»«variable.getInitialValueAssignment()»;
 	
@@ -301,9 +312,16 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	public «getCycleBasedStatemachineName()»() {
 		occuredEvents = new EventVector<Event<? extends Enum<?>>>(«getEventsCount()»);
 		outEvents = new HashSet<Event<? extends Enum<?>>>();
-		«FOREACH getInterfaceScope() AS interface-»
-		«interface.getInterfaceName().toFirstLower()» = new «interface.getInterfaceImplName()»(«interface.getInterfaceParameter()»);
-		«ENDFOREACH-»
+		«IF entry.createGenericInterfaceSupport()-»
+			interfaceMap = new HashMap<String, IGenericAccessInterface>();
+			«FOREACH getInterfaceScope() AS interface-»
+			interfaceMap.put("«interface.getInterfaceName()»", new «interface.getInterfaceImplName()»(«interface.getInterfaceParameter()»));
+			«ENDFOREACH-»
+		«ELSE-»
+			«FOREACH getInterfaceScope() AS interface-»
+			«interface.getInterfaceName().toFirstLower()» = new «interface.getInterfaceImplName()»(«interface.getInterfaceParameter()»);
+			«ENDFOREACH-»
+		«ENDIF-»
 		«FOREACH getTimeEvents() AS timeEvent-»
 			«timeEvent.getName()».setStatemachine(this);
 		«ENDFOREACH»
@@ -330,8 +348,8 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 		for (int i = 0; i < «historyVector.size»; i++) {
 			historyVector[i] = State.$NullState$;
 		}
-		
 		«ENDIF-»
+		
 		occuredEvents.clear();
 	}
 	
@@ -343,6 +361,12 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 		}
 		return false;
 	}
+	
+	«IF entry.createGenericInterfaceSupport()-»
+	public IGenericAccessInterface getInterface(String name) {
+		return interfaceMap.get(name);
+	}
+	«ENDIF-»
 	
 	«IF isTimedStatemachine()-»
 	public void setTimerService(ITimerService timerService) {
@@ -367,9 +391,21 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineImplem
 	
 	«FOREACH scopes.typeSelect(InterfaceScope) AS interface-»
 	public «interface.getInterfaceName()» get«interface.getInterfaceName()»() {
+		«IF entry.createGenericInterfaceSupport()-»
+		return («interface.getInterfaceName()») getInterface("«interface.getInterfaceName()»");
+		«ELSE-»
 		return «interface.getInterfaceName().toFirstLower()»;
+		«ENDIF-»
 	}
 	
+	
+	private «interface.getInterfaceImplName()» get«interface.getInterfaceImplName()»() {
+		«IF entry.createGenericInterfaceSupport()-»
+		return («interface.getInterfaceImplName()») getInterface("«interface.getInterfaceName()»");
+		«ELSE-»
+		return «interface.getInterfaceName().toFirstLower()»;
+		«ENDIF-»
+	}
 	«ENDFOREACH-»
 	«REM»create getters and setters for events«ENDREM»
 	«FOREACH getInternalScopeEvents() AS event-»

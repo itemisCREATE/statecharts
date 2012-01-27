@@ -12,17 +12,19 @@ Contributors:
 «EXTENSION org::yakindu::sct::generator::java::templates::GenmodelEntries»
 
 «DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
-«FILE entry.getBasePackagePath()+'/IStatemachine.java'-»
+«FILE entry.getBasePackagePath()+'/IGenericAccessInterface.java'-»
 «getLicenseHeader(entry)»
 package «entry.getBasePackageName()»;
 
-public interface IStatemachine {
-	
-	public void init();
+public interface IGenericAccessInterface {
 
-	public void runCycle();
+	public boolean raiseEvent(String name);
 	
-	public void enter();
+	public boolean raiseEvent(String name, Object value);
+	
+	public boolean setVariable(String name, Object value);
+	
+	public Object getVariable(String name);
 }
 «ENDFILE-»
 «ENDDEFINE»

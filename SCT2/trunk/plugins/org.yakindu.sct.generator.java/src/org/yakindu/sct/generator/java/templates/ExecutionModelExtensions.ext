@@ -33,6 +33,9 @@ getTimeEvents(ExecutionFlow this) : scopes.typeSelect(Scope).declarations.typeSe
 
 boolean isTimedStatemachine(ExecutionFlow this) :
 	getTimeEvents().size > 0;
+
+boolean hasIncomingEvents(Scope this) :
+	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::IN).isEmpty;
 	
 boolean hasOutgoingEvents(Scope this) :
 	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).isEmpty;
