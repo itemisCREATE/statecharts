@@ -62,6 +62,10 @@ public final class JavaFeatureConstants implements IJavaFeatureConstants {
 		return INTERFACE_OBSERVER_SUPPORT;
 	}
 	
+	public static final String getGenericInterfaceSupport() {
+		return GENERIC_INTERFACE_SUPPORT;
+	}
+	
 	public static final String getValidStatemachineName(String name) {
 		//remove whitespaces;
 		String newName = name.replace(" ", "").toLowerCase();

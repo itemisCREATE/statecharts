@@ -17,13 +17,13 @@ Contributors:
 «getLicenseHeader(entry)»
 package «entry.getBasePackageName()»;
 
-public class TimeEvent<EnumType extends Enum<EnumType>> extends ValuedEvent<EnumType, Boolean> {
+public class TimeEvent<T extends Enum<T>> extends ValuedEvent<T, Boolean> {
 
 	private long time = -1;
 
 	private ITimedStatemachine statemachine;
 
-	public TimeEvent(EnumType id, int offset, boolean periodic) {
+	public TimeEvent(T id, int offset, boolean periodic) {
 		super(id, offset, periodic);
 	}
 

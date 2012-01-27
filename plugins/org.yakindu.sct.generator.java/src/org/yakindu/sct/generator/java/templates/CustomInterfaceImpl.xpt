@@ -21,10 +21,14 @@ Contributors:
 «getLicenseHeader(entry)»
 package «getImplementationPackageName(entry)»;
 
+«IF (hasVariables() || hasIncomingEvents()) && entry.createGenericInterfaceSupport()-»
+import java.util.HashMap;
+import java.util.Map;
+«ENDIF-»
 «IF hasUnvaluedEvents()-»
 import «entry.getBasePackageName()».Event;
 «ENDIF-»
-«IF entry.createInterfaceObserverSupport()-»
+«IF (hasVariables() || hasOutgoingEvents()) && entry.createInterfaceObserverSupport()-»
 import «entry.getBasePackageName()».NotificationSender;
 «IF hasOutgoingEvents()-»
 import «entry.getBasePackageName()».EventNotification;
@@ -38,16 +42,44 @@ import «entry.getBasePackageName()».ValuedEvent;
 «ENDIF-»
 
 public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implements «getInterfaceName()» {
-	
-	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
-		private final «event.getEventType()» «event.getName()» = new «event.getEventType()»(«event.getCreationSignature()»); 
-	«ENDFOREACH-»
+	«IF entry.createGenericInterfaceSupport()-»
+		private Map<String,Object> variableMap;
+		«IF hasOutgoingEvents()-»
+		private Map<String, Event<Events>> outEventMap;
+		«ENDIF-»
+		«IF hasIncomingEvents()-»
+		private Map<String, Event<Events>> inEventMap;
+		«ENDIF-»
+	«ELSE-»
+		«FOREACH declarations.typeSelect(EventDefinition) AS event-»
+		private final «event.getEventType()» «event.getName()» = new «event.getEventType()»(«event.getCreationSignature()»);
+		«ENDFOREACH-»
+	«ENDIF-» 
 	
 	«IF hasEvents()-»
 		private «getCycleBasedStatemachineName()-» statemachine;
 		
 		public «getInterfaceImplName()»(«getCycleBasedStatemachineName()» statemachine) {
 		this.statemachine = statemachine;
+		«IF entry.createGenericInterfaceSupport()-»
+			variableMap = new HashMap<String, Object>();
+			«IF hasIncomingEvents()-»
+			inEventMap = new HashMap<String, Event<Events>>();
+			«ENDIF-»
+			«IF hasOutgoingEvents()-»
+			outEventMap = new HashMap<String, Event<Events>>();
+			«ENDIF-»
+			«FOREACH declarations.typeSelect(VariableDefinition) AS variable-»
+			variableMap.put("«variable.name»", new «variable.type.getJavaClassType()»(«variable.type.getInitialValue()»));
+			«ENDFOREACH-»
+			«FOREACH declarations.typeSelect(EventDefinition) AS event-»
+			«IF event.direction == Direction::IN-»
+			inEventMap.put("«event.name»", new «event.getEventType()»(«event.getCreationSignature()»));
+			«ELSE-»
+			outEventMap.put("«event.name»", new «event.getEventType()»(«event.getCreationSignature()»));
+			«ENDIF-»
+			«ENDFOREACH-»	
+		«ENDIF-»
 	}
 	«ENDIF-»
 		
@@ -55,55 +87,122 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implemen
 	
 	«IF !event.type.isVoid()-»
 	public void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value) {
-		«event.getName()».setValue(value);
-		statemachine.getOccuredEvents().add(«event.getName()»);
+		«event.getter()».setValue(value);
+		statemachine.getOccuredEvents().add(«event.getter()»);
 		«IF event.direction ==  Direction::OUT-»
-		statemachine.getOutEvents().add(«event.getName()»);
+		statemachine.getOutEvents().add(«event.getter()»);
 		«IF entry.createInterfaceObserverSupport()-»
-			notifyListeners(new EventNotification(«event.getName()»));
+			notifyListeners(new EventNotification(«event.getter()»));
 		«ENDIF-»
 		«ENDIF-»
 	}
 	«ELSE»
 	public void raise«event.name.toFirstUpper()»() {
-		statemachine.getOccuredEvents().add(«event.getName()»);
+		statemachine.getOccuredEvents().add(«event.getter()»);
 		«IF event.direction ==  Direction::OUT-»
-		statemachine.getOutEvents().add(«event.getName()»);
-		«IF entry.createInterfaceObserverSupport()-»
-			notifyListeners(new EventNotification(«event.getName()»));
-		«ENDIF-»
+			statemachine.getOutEvents().add(«event.getter()»);
+			«IF entry.createInterfaceObserverSupport()-»
+			notifyListeners(new EventNotification(«event.getter()»));
+			«ENDIF-»
 		«ENDIF-»
 	}
 	«ENDIF-»
 	
-	public «event.getEventType()» get«event.getName()»() {
+	«IF !event.type.isVoid() && entry.createGenericInterfaceSupport()-»
+	@SuppressWarnings("unchecked")
+	«ENDIF-»
+	public «event.getEventType()» «event.getter()» {
+		«IF entry.createGenericInterfaceSupport()-»
+			«IF event.type.isVoid()-»
+				«IF event.direction == Direction::IN-»
+				return inEventMap.get("«event.name»");
+				«ELSE-»
+				return outEventMap.get("«event.name»");
+				«ENDIF-»
+			«ELSE-»
+				«IF event.direction == Direction::OUT-»
+				return («event.getEventType()») outEventMap.get("«event.name»");
+				«ELSE-»
+				return («event.getEventType()») inEventMap.get("«event.name»");
+				«ENDIF-»
+			«ENDIF-»
+		«ELSE-»
 		return «event.getName()»;
+		«ENDIF-»
 	}
 	
 	«IF event.direction ==  Direction::OUT-»
 	public boolean isRaised«event.name.toFirstUpper()»() {
-		return statemachine.getOutEvents().contains(«event.getName()»);
+		return statemachine.getOutEvents().contains(«event.getter()»);
 	}
 	«ENDIF-»
 	«ENDFOREACH-»
 	
 	«FOREACH declarations.typeSelect(VariableDefinition) AS variable-»
-	private «variable.type.getJavaType()» «variable.getValueName()»«variable.getInitialValueAssignment()»;
-	
-	public «variable.type.getJavaType()» get«variable.getValueName().toFirstUpper()»() {
+	«IF !entry.createGenericInterfaceSupport()-»
+		private «variable.type.getJavaType()» «variable.getValueName()»«variable.getInitialValueAssignment()»;
+	«ENDIF-»
+	public «variable.type.getJavaType()» «variable.getter()» {
+		«IF entry.createGenericInterfaceSupport()-»
+		return («variable.type.getJavaClassType()») variableMap.get("«variable.name»");
+		«ELSE-»
 		return «variable.getValueName()»;
+		«ENDIF-»
 	}
 	
 	public void set«variable.getValueName().toFirstUpper()»(«variable.type.getJavaType()» value) {
 		«IF entry.createInterfaceObserverSupport()-»
-		«variable.type.getJavaType()» oldValue = «variable.getValueName()»;
+		«variable.type.getJavaType()» oldValue = «variable.getter()»;
 		«ENDIF-»
+		«IF entry.createGenericInterfaceSupport()-»
+		variableMap.put("«variable.name»", new «variable.type.getJavaClassType()»(value));
+		«ELSE-»
 		«variable.getValueName()» = value;
+		«ENDIF-»
 		«IF entry.createInterfaceObserverSupport()-»
-			notifyListeners(new VariableNotification<«variable.type.getJavaClassType()»>(Variables.«variable.name.toFirstUpper()», «variable.getValueName()», oldValue));
+			notifyListeners(new VariableNotification<«variable.type.getJavaClassType()»>(Variables.«variable.name», «variable.getter()», oldValue));
 		«ENDIF-»
 	}	
 	«ENDFOREACH-»
+	
+	«IF (hasVariables() || hasIncomingEvents()) && entry.createGenericInterfaceSupport()-»
+	public boolean raiseEvent(String name) {
+		if (inEventMap.get(name) != null) {
+			return statemachine.getOccuredEvents().add(inEventMap.get(name));
+		}
+		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	public boolean raiseEvent(String name, Object value) {
+		if (inEventMap.get(name) != null
+				&& inEventMap.get(name) instanceof ValuedEvent) {
+			ValuedEvent<?, ?> event = (ValuedEvent<?, ?>) inEventMap.get(name);
+			if (event.getValue().getClass() == value.getClass()) {
+				((ValuedEvent<Events, Object>) event).setValue(value);
+				return statemachine.getOccuredEvents()
+						.add(inEventMap.get(name));
+			}
+		}
+		return false;
+	}
+
+	public boolean setVariable(String name, Object value) {
+		if (variableMap.get(name) != null
+				&& variableMap.get(name).getClass() == value.getClass()) {
+			Object oldValue = variableMap.get(name);
+			variableMap.put(name, value);
+			notifyListeners(new VariableNotification<Object>(
+					Variables.valueOf(name), variableMap.get(name), oldValue));
+			return true;
+		}
+		return false;
+	}
+	
+	public Object getVariable(String name) {
+		return variableMap.get(name);
+	}
+	«ENDIF-»
 }
 «ENDFILE-»
 «ENDDEFINE»

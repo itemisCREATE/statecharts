@@ -20,6 +20,7 @@ extension org::yakindu::sct::generator::java::templates::TypeModelExtensions;
 
 String getStatemachineName(String name) :
 	JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getValidStatemachineName(java.lang.String);
+
 String getStatemachineName(ExecutionFlow this) : 
 	 name.getStatemachineName();
 String getBaseStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "AbstractBaseStatemachine";
@@ -28,11 +29,8 @@ String getEventBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() +
 String getCycleBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "CycleBasedStatemachine";
 String getCycleBasedStatemachineName(InterfaceScope this) : ((ExecutionFlow)eContainer).getCycleBasedStatemachineName();
 
-String getStatemachineImplementationType(ExecutionFlow this):
-	if isTimedStatemachine() then
-		"ITimedStatemachine"
-	else
-		"IStatemachine"; 
+String getStatemachineInterfaceTypes(ExecutionFlow this, GeneratorEntry entry):
+	JAVA org.yakindu.sct.generator.java.extensions.JavaExtensions.getStatemachineInterfaceTypes(org.yakindu.sct.model.sexec.ExecutionFlow, org.yakindu.sct.model.sgen.GeneratorEntry);
 
 String getInterfaceName(InterfaceScope this) :  
 	if name!=null then
@@ -67,7 +65,9 @@ String getInitialValueAssignment(VariableDefinition this) :
 	else
 		null;
 
-String getValueName(VariableDefinition this) : "var"+name.toFirstUpper();
+String getValueName(VariableDefinition this) : "var" + name.toFirstUpper();
+
+String getter(VariableDefinition this) : "get" + getValueName().toFirstUpper() + "()";
 
 String getName(ExecutionState this) :
 	simpleName.replaceAll(" ","").toFirstUpper();
@@ -100,6 +100,9 @@ String getName(ExecutionFlow this) :
 
 String getName(Event this) :
 	"Event"+name.toFirstUpper();
+	
+String getter(Event this) :
+	"get"+getName()+"()";
 
 String getName(TimeEvent this) :
 	name.replaceAll(" ","").toFirstUpper();
@@ -156,21 +159,18 @@ ExecutionState state(Step this) : (ExecutionState) eContainer;
 
 String getContext(Variable this) : 
 	if (InterfaceScope.isInstance(eContainer)) then  
-		getInterfaceName((InterfaceScope)eContainer).toFirstLower()+"."
+		"get"+getInterfaceImplName((InterfaceScope)eContainer)+"()."
 	else 
 		"";
 		
 String getContext(Event this) : 
 	if (InterfaceScope.isInstance(eContainer)) then  
-		getInterfaceName((InterfaceScope)eContainer).toFirstUpper()+"."
+		"get"+getInterfaceImplName((InterfaceScope)eContainer)+"()."
 	else 
 		"";
 	
 String getInterfaceExtension(Scope this, GeneratorEntry entry):
-	if (hasOutgoingEvents() && entry.createInterfaceObserverSupport()) then
-		" extends INotificationSender"
-	else
-		null;
+	JAVA org.yakindu.sct.generator.java.extensions.JavaExtensions.getInterfaceExtensions(org.yakindu.sct.model.sgraph.Scope, org.yakindu.sct.model.sgen.GeneratorEntry);
 		
 String getInterfaceImplExtension(Scope this, GeneratorEntry entry):
 	if ((hasVariables() || hasOutgoingEvents()) && entry.createInterfaceObserverSupport()) then

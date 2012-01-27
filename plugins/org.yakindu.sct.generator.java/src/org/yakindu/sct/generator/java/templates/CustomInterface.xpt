@@ -23,8 +23,11 @@ package «getImplementationPackageName(entry)»;
 «IF hasOutgoingVoidEvents()-»
 import «entry.getBasePackageName()».Event;
 «ENDIF-»
-«IF hasOutgoingEvents() && entry.createInterfaceObserverSupport()-»
+«IF (hasOutgoingEvents() || hasVariables()) && entry.createInterfaceObserverSupport()-»
 import «entry.getBasePackageName()».INotificationSender;
+«ENDIF-»
+«IF (hasVariables() || hasIncomingEvents()) && entry.createGenericInterfaceSupport()-»
+import «entry.getBasePackageName()».IGenericAccessInterface;
 «ENDIF-»
 «IF hasOutgoingValuedEvents()-»
 import «entry.getBasePackageName()».ValuedEvent;
@@ -44,7 +47,7 @@ public interface «getInterfaceName()»«getInterfaceExtension(entry)» {
 	«IF entry.createInterfaceObserverSupport() && declarations.typeSelect(VariableDefinition).size > 0-»
 	public enum Variables {
 		«FOREACH declarations.typeSelect(VariableDefinition) AS variable-»
-		«variable.name.toFirstUpper()»,
+		«variable.name»,
 		«ENDFOREACH-»
 	}
 	«ENDIF-»

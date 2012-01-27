@@ -17,13 +17,13 @@ Contributors:
 «getLicenseHeader(entry)»
 package «entry.getBasePackageName()»;
 
-public class VariableNotification<Type> extends Notification {
+public class VariableNotification<T> extends Notification {
 
-	private Type oldValue;
-	private Type newValue;
+	private T oldValue;
+	private T newValue;
 	private Enum<?> id;
 
-	public VariableNotification(Enum<?> id, Type newValue, Type oldValue) {
+	public VariableNotification(Enum<?> id, T newValue, T oldValue) {
 		super(NotificationType.VariableNotification);
 		this.oldValue = oldValue;
 		this.newValue = newValue;
@@ -33,11 +33,11 @@ public class VariableNotification<Type> extends Notification {
 		return id;
 	}
 
-	public Type getNewValue() {
+	public T getNewValue() {
 		return newValue;
 	}
 
-	public Type getOldValue() {
+	public T getOldValue() {
 		return oldValue;
 	}
 }
