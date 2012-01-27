@@ -10,18 +10,18 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java;
 
-public class Event<Type extends Enum<Type>> {
+public class Event<T extends Enum<T>> {
 
-	private Type id;
+	private T id;
 
 	private int offset;
 
-	public Event(Type id, int offset) {
+	public Event(T id, int offset) {
 		this.id = id;
 		this.offset = offset;
 	}
 
-	public Type getId() {
+	public T getId() {
 		return id;
 	}
 

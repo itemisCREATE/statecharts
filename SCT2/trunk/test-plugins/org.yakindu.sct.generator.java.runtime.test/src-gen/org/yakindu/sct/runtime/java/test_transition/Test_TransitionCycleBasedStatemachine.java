@@ -75,9 +75,10 @@ public class Test_TransitionCycleBasedStatemachine
 	}
 
 	public void init() {
-		for (int i = 0; i < stateVector.length; i++) {
+		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
+
 		occuredEvents.clear();
 	}
 
@@ -102,10 +103,10 @@ public class Test_TransitionCycleBasedStatemachine
 		return timerService;
 	}
 
-	public void notify(Notification<?> notification) {
+	public void notify(Notification notification) {
 		if (notification instanceof EventNotification) {
 			EventNotification eventNotification = (EventNotification) notification;
-			getOccuredEvents().add(eventNotification.getElement());
+			getOccuredEvents().add(eventNotification.getEvent());
 		}
 	}
 
@@ -113,7 +114,14 @@ public class Test_TransitionCycleBasedStatemachine
 		return interfaceA;
 	}
 
+	private InterfaceAImpl getInterfaceAImpl() {
+		return interfaceA;
+	}
 	public DefaultInterface getDefaultInterface() {
+		return defaultInterface;
+	}
+
+	private DefaultInterfaceImpl getDefaultInterfaceImpl() {
 		return defaultInterface;
 	}
 
@@ -128,24 +136,44 @@ public class Test_TransitionCycleBasedStatemachine
 
 	}
 
+	public void exit() {
+		//Handle exit of all possible states (of ) at position 0...
+		switch (stateVector[0]) {
+
+			case State1 :
+				stateVector[0] = State.$NullState$;
+				getTimerService().resetTimer(State1_time_event_0);
+				getTimerService().resetTimer(State1_time_event_1);
+
+				break;
+
+			case State2 :
+				stateVector[0] = State.$NullState$;
+
+				break;
+
+			default :
+				break;
+		}
+
+	}
+
 	private void reactState1() {
-		if (((occuredEvents.contains(interfaceA.getEventEvent1()) || occuredEvents
-				.contains(interfaceA.getEventEvent2())) && (interfaceA
+		if (((occuredEvents.contains(getInterfaceAImpl().getEventEvent1()) || occuredEvents
+				.contains(getInterfaceAImpl().getEventEvent2())) && (getInterfaceAImpl()
 				.getEventEvent1().getValue() < 0))) {
 			stateVector[0] = State.$NullState$;
-
 			getTimerService().resetTimer(State1_time_event_0);
 			getTimerService().resetTimer(State1_time_event_1);
 
-			defaultInterface.setVarI(2);
+			getDefaultInterfaceImpl().setVarI(2);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State2;
 
 		} else {
-			if ((defaultInterface.getVarI() == 5)) {
+			if ((getDefaultInterfaceImpl().getVarI() == 5)) {
 				stateVector[0] = State.$NullState$;
-
 				getTimerService().resetTimer(State1_time_event_0);
 				getTimerService().resetTimer(State1_time_event_1);
 
@@ -153,10 +181,10 @@ public class Test_TransitionCycleBasedStatemachine
 				stateVector[0] = State.State2;
 
 			} else {
-				if ((occuredEvents.contains(interfaceA.getEventEvent3()) && (defaultInterface
+				if ((occuredEvents.contains(getInterfaceAImpl()
+						.getEventEvent3()) && (getDefaultInterfaceImpl()
 						.getVarJ() < 20))) {
 					stateVector[0] = State.$NullState$;
-
 					getTimerService().resetTimer(State1_time_event_0);
 					getTimerService().resetTimer(State1_time_event_1);
 
@@ -164,11 +192,11 @@ public class Test_TransitionCycleBasedStatemachine
 					stateVector[0] = State.State2;
 
 				} else {
-					if (((occuredEvents.contains(interfaceA.getEventEvent3()) || occuredEvents
-							.contains(interfaceA.getEventEvent4())) && (defaultInterface
+					if (((occuredEvents.contains(getInterfaceAImpl()
+							.getEventEvent3()) || occuredEvents
+							.contains(getInterfaceAImpl().getEventEvent4())) && (getDefaultInterfaceImpl()
 							.getVarJ() > 30))) {
 						stateVector[0] = State.$NullState$;
-
 						getTimerService().resetTimer(State1_time_event_0);
 						getTimerService().resetTimer(State1_time_event_1);
 
@@ -178,7 +206,6 @@ public class Test_TransitionCycleBasedStatemachine
 					} else {
 						if (occuredEvents.contains(State1_time_event_0)) {
 							stateVector[0] = State.$NullState$;
-
 							getTimerService().resetTimer(State1_time_event_0);
 							getTimerService().resetTimer(State1_time_event_1);
 
@@ -188,7 +215,6 @@ public class Test_TransitionCycleBasedStatemachine
 						} else {
 							if (occuredEvents.contains(State1_time_event_1)) {
 								stateVector[0] = State.$NullState$;
-
 								getTimerService().resetTimer(
 										State1_time_event_0);
 								getTimerService().resetTimer(
@@ -198,17 +224,16 @@ public class Test_TransitionCycleBasedStatemachine
 								stateVector[0] = State.State2;
 
 							} else {
-								if ((occuredEvents.contains(interfaceA
-										.getEventEvent1()) && (interfaceA
+								if ((occuredEvents.contains(getInterfaceAImpl()
+										.getEventEvent1()) && (getInterfaceAImpl()
 										.getEventEvent1().getValue() > 5))) {
 									stateVector[0] = State.$NullState$;
-
 									getTimerService().resetTimer(
 											State1_time_event_0);
 									getTimerService().resetTimer(
 											State1_time_event_1);
 
-									defaultInterface.setVarI(1);
+									getDefaultInterfaceImpl().setVarI(1);
 
 									nextStateIndex = 0;
 									stateVector[0] = State.State2;
@@ -222,7 +247,7 @@ public class Test_TransitionCycleBasedStatemachine
 		}
 	}
 	private void reactState2() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent6())) {
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent6())) {
 			stateVector[0] = State.$NullState$;
 
 			getTimerService().setTimer(State1_time_event_0, (10 * 1000),

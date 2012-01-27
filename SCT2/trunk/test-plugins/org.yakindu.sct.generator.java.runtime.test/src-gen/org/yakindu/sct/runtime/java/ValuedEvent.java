@@ -10,22 +10,20 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java;
 
-public class ValuedEvent<EnumType extends Enum<EnumType>, DataType>
-		extends
-			Event<EnumType> {
+public class ValuedEvent<T extends Enum<T>, D> extends Event<T> {
 
-	private DataType value;
+	private D value;
 
-	public ValuedEvent(EnumType name, int offset, DataType value) {
+	public ValuedEvent(T name, int offset, D value) {
 		super(name, offset);
 		this.value = value;
 	}
 
-	public DataType getValue() {
+	public D getValue() {
 		return value;
 	}
 
-	public void setValue(DataType value) {
+	public void setValue(D value) {
 		if (value == null) {
 			throw new IllegalArgumentException();
 		}

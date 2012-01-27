@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.yakindu.sct.runtime.java.INotificationListener;
 import org.yakindu.sct.runtime.java.Notification;
 import org.yakindu.sct.runtime.java.NotificationType;
+import org.yakindu.sct.runtime.java.RuntimeCycleNotification;
 import org.yakindu.sct.runtime.java.RuntimeService;
 import org.yakindu.sct.runtime.java.test_expression.Test_ExpressionEventBasedStatemachine;
 
@@ -30,9 +31,9 @@ public class TestExpressionEventBasedStatemachine {
 		shouldWait = true;
 		runtimeService = new RuntimeService(cyclePeriod);
 		runtimeService.addNotificationListener(new INotificationListener() {
-			public void notify(Notification<?> notification) {
+			public void notify(Notification notification) {
 				if (notification.getNotificationType() == NotificationType.RuntimeCycleNotification
-						&& notification.getElement() == statemachine) {
+						&& ((RuntimeCycleNotification)notification).getStatemachine() == statemachine) {
 					shouldWait = false;
 				}
 			}

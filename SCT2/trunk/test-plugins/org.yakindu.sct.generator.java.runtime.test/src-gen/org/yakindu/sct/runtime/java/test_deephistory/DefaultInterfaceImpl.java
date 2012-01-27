@@ -13,7 +13,6 @@ package org.yakindu.sct.runtime.java.test_deephistory;
 import org.yakindu.sct.runtime.java.Event;
 
 public class DefaultInterfaceImpl implements DefaultInterface {
-
 	private final Event<Events> EventEvent1 = new Event<Events>(Events.Event1,
 			0);
 	private final Event<Events> EventEvent2 = new Event<Events>(Events.Event2,
@@ -41,7 +40,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent1() {
-		statemachine.getOccuredEvents().add(EventEvent1);
+		statemachine.getOccuredEvents().add(getEventEvent1());
 	}
 
 	public Event<Events> getEventEvent1() {
@@ -49,7 +48,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent2() {
-		statemachine.getOccuredEvents().add(EventEvent2);
+		statemachine.getOccuredEvents().add(getEventEvent2());
 	}
 
 	public Event<Events> getEventEvent2() {
@@ -57,7 +56,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent3() {
-		statemachine.getOccuredEvents().add(EventEvent3);
+		statemachine.getOccuredEvents().add(getEventEvent3());
 	}
 
 	public Event<Events> getEventEvent3() {
@@ -65,7 +64,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent4() {
-		statemachine.getOccuredEvents().add(EventEvent4);
+		statemachine.getOccuredEvents().add(getEventEvent4());
 	}
 
 	public Event<Events> getEventEvent4() {
@@ -73,7 +72,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent5() {
-		statemachine.getOccuredEvents().add(EventEvent5);
+		statemachine.getOccuredEvents().add(getEventEvent5());
 	}
 
 	public Event<Events> getEventEvent5() {
@@ -81,7 +80,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent6() {
-		statemachine.getOccuredEvents().add(EventEvent6);
+		statemachine.getOccuredEvents().add(getEventEvent6());
 	}
 
 	public Event<Events> getEventEvent6() {
@@ -89,7 +88,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent7() {
-		statemachine.getOccuredEvents().add(EventEvent7);
+		statemachine.getOccuredEvents().add(getEventEvent7());
 	}
 
 	public Event<Events> getEventEvent7() {
@@ -97,7 +96,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent8() {
-		statemachine.getOccuredEvents().add(EventEvent8);
+		statemachine.getOccuredEvents().add(getEventEvent8());
 	}
 
 	public Event<Events> getEventEvent8() {
@@ -105,7 +104,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent9() {
-		statemachine.getOccuredEvents().add(EventEvent9);
+		statemachine.getOccuredEvents().add(getEventEvent9());
 	}
 
 	public Event<Events> getEventEvent9() {

@@ -10,6 +10,7 @@ GeneratorModel for yakindu::java {
 			InterfaceObserverSupport = true
 			TimerService = true
 			RuntimeService = true
+			GenericInterfaceSupport = true
 		}
 		
 		feature licenseHeader {

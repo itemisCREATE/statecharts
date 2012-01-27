@@ -11,9 +11,12 @@ Contributors:
 package org.yakindu.sct.runtime.java.test_localactions;
 
 import org.yakindu.sct.runtime.java.Event;
+import org.yakindu.sct.runtime.java.NotificationSender;
+import org.yakindu.sct.runtime.java.VariableNotification;
 
-public class DefaultInterfaceImpl implements DefaultInterface {
-
+public class DefaultInterfaceImpl extends NotificationSender
+		implements
+			DefaultInterface {
 	private final Event<Events> EventEvent1 = new Event<Events>(Events.Event1,
 			0);
 	private final Event<Events> EventEvent2 = new Event<Events>(Events.Event2,
@@ -31,7 +34,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent1() {
-		statemachine.getOccuredEvents().add(EventEvent1);
+		statemachine.getOccuredEvents().add(getEventEvent1());
 	}
 
 	public Event<Events> getEventEvent1() {
@@ -39,7 +42,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent2() {
-		statemachine.getOccuredEvents().add(EventEvent2);
+		statemachine.getOccuredEvents().add(getEventEvent2());
 	}
 
 	public Event<Events> getEventEvent2() {
@@ -47,7 +50,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent3() {
-		statemachine.getOccuredEvents().add(EventEvent3);
+		statemachine.getOccuredEvents().add(getEventEvent3());
 	}
 
 	public Event<Events> getEventEvent3() {
@@ -55,7 +58,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent4() {
-		statemachine.getOccuredEvents().add(EventEvent4);
+		statemachine.getOccuredEvents().add(getEventEvent4());
 	}
 
 	public Event<Events> getEventEvent4() {
@@ -63,30 +66,37 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	private int varI;
-
 	public int getVarI() {
 		return varI;
 	}
 
 	public void setVarI(int value) {
+		int oldValue = getVarI();
 		varI = value;
+		notifyListeners(new VariableNotification<Integer>(Variables.i,
+				getVarI(), oldValue));
 	}
 	private int varJ;
-
 	public int getVarJ() {
 		return varJ;
 	}
 
 	public void setVarJ(int value) {
+		int oldValue = getVarJ();
 		varJ = value;
+		notifyListeners(new VariableNotification<Integer>(Variables.j,
+				getVarJ(), oldValue));
 	}
 	private int varC;
-
 	public int getVarC() {
 		return varC;
 	}
 
 	public void setVarC(int value) {
+		int oldValue = getVarC();
 		varC = value;
+		notifyListeners(new VariableNotification<Integer>(Variables.c,
+				getVarC(), oldValue));
 	}
+
 }

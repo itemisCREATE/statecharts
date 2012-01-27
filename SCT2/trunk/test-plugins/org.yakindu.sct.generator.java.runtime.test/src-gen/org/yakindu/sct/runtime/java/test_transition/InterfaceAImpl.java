@@ -11,12 +11,11 @@ Contributors:
 package org.yakindu.sct.runtime.java.test_transition;
 
 import org.yakindu.sct.runtime.java.Event;
-import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.NotificationSender;
+import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.ValuedEvent;
 
 public class InterfaceAImpl extends NotificationSender implements InterfaceA {
-
 	private final ValuedEvent<Events, Integer> EventEvent1 = new ValuedEvent<Events, Integer>(
 			Events.Event1, 0, 1);
 	private final Event<Events> EventEvent2 = new Event<Events>(Events.Event2,
@@ -35,8 +34,8 @@ public class InterfaceAImpl extends NotificationSender implements InterfaceA {
 	}
 
 	public void raiseEvent1(int value) {
-		EventEvent1.setValue(value);
-		statemachine.getOccuredEvents().add(EventEvent1);
+		getEventEvent1().setValue(value);
+		statemachine.getOccuredEvents().add(getEventEvent1());
 	}
 
 	public ValuedEvent<Events, Integer> getEventEvent1() {
@@ -44,7 +43,7 @@ public class InterfaceAImpl extends NotificationSender implements InterfaceA {
 	}
 
 	public void raiseEvent2() {
-		statemachine.getOccuredEvents().add(EventEvent2);
+		statemachine.getOccuredEvents().add(getEventEvent2());
 	}
 
 	public Event<Events> getEventEvent2() {
@@ -52,7 +51,7 @@ public class InterfaceAImpl extends NotificationSender implements InterfaceA {
 	}
 
 	public void raiseEvent3() {
-		statemachine.getOccuredEvents().add(EventEvent3);
+		statemachine.getOccuredEvents().add(getEventEvent3());
 	}
 
 	public Event<Events> getEventEvent3() {
@@ -60,7 +59,7 @@ public class InterfaceAImpl extends NotificationSender implements InterfaceA {
 	}
 
 	public void raiseEvent4() {
-		statemachine.getOccuredEvents().add(EventEvent4);
+		statemachine.getOccuredEvents().add(getEventEvent4());
 	}
 
 	public Event<Events> getEventEvent4() {
@@ -68,9 +67,9 @@ public class InterfaceAImpl extends NotificationSender implements InterfaceA {
 	}
 
 	public void raiseEvent5() {
-		statemachine.getOccuredEvents().add(EventEvent5);
-		statemachine.getOutEvents().add(EventEvent5);
-		notifyListeners(new EventNotification(EventEvent5));
+		statemachine.getOccuredEvents().add(getEventEvent5());
+		statemachine.getOutEvents().add(getEventEvent5());
+		notifyListeners(new EventNotification(getEventEvent5()));
 	}
 
 	public Event<Events> getEventEvent5() {
@@ -78,7 +77,7 @@ public class InterfaceAImpl extends NotificationSender implements InterfaceA {
 	}
 
 	public boolean isRaisedEvent5() {
-		return statemachine.getOutEvents().contains(EventEvent5);
+		return statemachine.getOutEvents().contains(getEventEvent5());
 	}
 
 }

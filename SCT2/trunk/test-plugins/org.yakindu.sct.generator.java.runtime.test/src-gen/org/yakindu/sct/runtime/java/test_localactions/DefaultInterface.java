@@ -10,10 +10,16 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java.test_localactions;
 
-public interface DefaultInterface {
+import org.yakindu.sct.runtime.java.INotificationSender;
+
+public interface DefaultInterface extends INotificationSender {
 
 	public enum Events {
 		Event1, Event2, Event3, Event4,
+	}
+
+	public enum Variables {
+		i, j, c,
 	}
 
 	public void raiseEvent1();

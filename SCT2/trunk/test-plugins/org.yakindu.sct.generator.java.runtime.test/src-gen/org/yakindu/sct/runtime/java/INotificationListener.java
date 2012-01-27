@@ -12,6 +12,6 @@ package org.yakindu.sct.runtime.java;
 
 public interface INotificationListener {
 
-	public void notify(Notification<?> notification);
+	public void notify(Notification notification);
 
 }

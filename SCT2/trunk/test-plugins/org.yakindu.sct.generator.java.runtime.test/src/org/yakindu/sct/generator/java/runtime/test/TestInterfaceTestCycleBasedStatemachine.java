@@ -13,13 +13,12 @@ package org.yakindu.sct.generator.java.runtime.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.runtime.java.interfacetest.InterfaceTestCycleBasedStatemachine.State;
 import org.yakindu.sct.runtime.java.interfacetest.InterfaceTestCycleBasedStatemachine;
+import org.yakindu.sct.runtime.java.interfacetest.InterfaceTestCycleBasedStatemachine.State;
 
 /**
  * Testcases for 'InterfaceTest' cycle based statemachine.

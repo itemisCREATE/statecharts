@@ -73,9 +73,10 @@ public class Test_LocalActionsCycleBasedStatemachine
 	}
 
 	public void init() {
-		for (int i = 0; i < stateVector.length; i++) {
+		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
+
 		occuredEvents.clear();
 	}
 
@@ -100,10 +101,10 @@ public class Test_LocalActionsCycleBasedStatemachine
 		return timerService;
 	}
 
-	public void notify(Notification<?> notification) {
+	public void notify(Notification notification) {
 		if (notification instanceof EventNotification) {
 			EventNotification eventNotification = (EventNotification) notification;
-			getOccuredEvents().add(eventNotification.getElement());
+			getOccuredEvents().add(eventNotification.getEvent());
 		}
 	}
 
@@ -111,68 +112,97 @@ public class Test_LocalActionsCycleBasedStatemachine
 		return defaultInterface;
 	}
 
+	private DefaultInterfaceImpl getDefaultInterfaceImpl() {
+		return defaultInterface;
+	}
+
 	public void enter() {
 		cycleStartTime = System.currentTimeMillis();
 		getTimerService().setTimer(State1_time_event_0, 100, cycleStartTime);
-		defaultInterface.setVarI(1);
+		getDefaultInterfaceImpl().setVarI(1);
 
 		nextStateIndex = 0;
 		stateVector[0] = State.State1;
 
 	}
 
-	private void reactState1() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent1())) {
-			stateVector[0] = State.$NullState$;
+	public void exit() {
+		//Handle exit of all possible states (of main region) at position 0...
+		switch (stateVector[0]) {
 
+			case State1 :
+				stateVector[0] = State.$NullState$;
+				getTimerService().resetTimer(State1_time_event_0);
+				getDefaultInterfaceImpl().setVarI(0);
+
+				break;
+
+			case State2 :
+				stateVector[0] = State.$NullState$;
+				getTimerService().resetTimer(State2_time_event_0);
+				getDefaultInterfaceImpl().setVarJ(0);
+
+				break;
+
+			default :
+				break;
+		}
+
+	}
+
+	private void reactState1() {
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent1())) {
+			stateVector[0] = State.$NullState$;
 			getTimerService().resetTimer(State1_time_event_0);
-			defaultInterface.setVarI(0);
+			getDefaultInterfaceImpl().setVarI(0);
 
 			getTimerService()
 					.setTimer(State2_time_event_0, 200, cycleStartTime);
-			defaultInterface.setVarJ(1);
+			getDefaultInterfaceImpl().setVarJ(1);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State2;
 
 		} else {
 			if (true) {
-				defaultInterface.setVarI(2);
+				getDefaultInterfaceImpl().setVarI(2);
 
 			}
-			if (occuredEvents.contains(defaultInterface.getEventEvent2())) {
-				defaultInterface.setVarI(3);
+			if (occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent2())) {
+				getDefaultInterfaceImpl().setVarI(3);
 
 			}
 			if (occuredEvents.contains(State1_time_event_0)) {
-				defaultInterface.setVarC(defaultInterface.getVarC() + (1));
+				getDefaultInterfaceImpl().setVarC(
+						getDefaultInterfaceImpl().getVarC() + (1));
 
 			}
 
 		}
 	}
 	private void reactState2() {
-		if (occuredEvents.contains(defaultInterface.getEventEvent3())) {
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent3())) {
 			stateVector[0] = State.$NullState$;
-
 			getTimerService().resetTimer(State2_time_event_0);
-			defaultInterface.setVarJ(0);
+			getDefaultInterfaceImpl().setVarJ(0);
 
 			getTimerService()
 					.setTimer(State1_time_event_0, 100, cycleStartTime);
-			defaultInterface.setVarI(1);
+			getDefaultInterfaceImpl().setVarI(1);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
 
 		} else {
-			if ((occuredEvents.contains(defaultInterface.getEventEvent2()) || occuredEvents
-					.contains(defaultInterface.getEventEvent4()))) {
-				defaultInterface.setVarJ(2);
+			if ((occuredEvents.contains(getDefaultInterfaceImpl()
+					.getEventEvent2()) || occuredEvents
+					.contains(getDefaultInterfaceImpl().getEventEvent4()))) {
+				getDefaultInterfaceImpl().setVarJ(2);
 
 			}
 			if (occuredEvents.contains(State2_time_event_0)) {
-				defaultInterface.setVarJ(3);
+				getDefaultInterfaceImpl().setVarJ(3);
 
 			}
 

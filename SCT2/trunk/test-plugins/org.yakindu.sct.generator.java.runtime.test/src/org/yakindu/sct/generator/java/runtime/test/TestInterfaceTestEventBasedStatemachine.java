@@ -17,8 +17,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.INotificationListener;
 import org.yakindu.sct.runtime.java.Notification;
+import org.yakindu.sct.runtime.java.NotificationType;
 import org.yakindu.sct.runtime.java.RuntimeService;
 import org.yakindu.sct.runtime.java.interfacetest.InterfaceTestCycleBasedStatemachine.State;
 import org.yakindu.sct.runtime.java.interfacetest.InterfaceTestEventBasedStatemachine;
@@ -49,29 +51,35 @@ public class TestInterfaceTestEventBasedStatemachine {
 		statemachine.getDefaultInterface().addNotificationListener(
 				new INotificationListener() {
 
-					public void notify(Notification<?> notification) {
-						if (notification.getElement() == statemachine
-								.getDefaultInterface().getEventEvent2()) {
-							events[0] = true;
+					public void notify(Notification notification) {
+						if (notification.getNotificationType() == NotificationType.EventNotification) {
+							EventNotification ev = (EventNotification) notification;
+							if (ev.getEvent() == statemachine.getDefaultInterface().getEventEvent2()) {
+								events[0] = true;
+							}
 						}
 					}
 				});
 		statemachine.getInterfaceOther().addNotificationListener(
 				new INotificationListener() {
 
-					public void notify(Notification<?> notification) {
-						if (notification.getElement() == statemachine
-								.getInterfaceOther().getEventEvent4()) {
-							events[1] = true;
+					public void notify(Notification notification) {
+						if (notification.getNotificationType() == NotificationType.EventNotification) {
+							EventNotification ev = (EventNotification) notification;
+							if (ev.getEvent() == statemachine.getInterfaceOther().getEventEvent4()) {
+								events[1] = true;
+							}
 						}
 					}
 				});
 		statemachine.getInterfaceThird().addNotificationListener(
 				new INotificationListener() {
-					public void notify(Notification<?> notification) {
-						if (notification.getElement() == statemachine
-								.getInterfaceThird().getEventEvent6()) {
-							events[2] = true;
+					public void notify(Notification notification) {
+						if (notification.getNotificationType() == NotificationType.EventNotification) {
+							EventNotification ev = (EventNotification) notification;
+							if (ev.getEvent() == statemachine.getInterfaceThird().getEventEvent6()) {
+								events[2] = true;
+							}
 						}
 					}
 				});

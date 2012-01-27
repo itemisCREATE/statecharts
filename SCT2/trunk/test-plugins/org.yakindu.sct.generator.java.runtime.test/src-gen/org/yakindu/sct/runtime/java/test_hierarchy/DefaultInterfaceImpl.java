@@ -11,9 +11,12 @@ Contributors:
 package org.yakindu.sct.runtime.java.test_hierarchy;
 
 import org.yakindu.sct.runtime.java.Event;
+import org.yakindu.sct.runtime.java.NotificationSender;
+import org.yakindu.sct.runtime.java.VariableNotification;
 
-public class DefaultInterfaceImpl implements DefaultInterface {
-
+public class DefaultInterfaceImpl extends NotificationSender
+		implements
+			DefaultInterface {
 	private final Event<Events> EventEvent1 = new Event<Events>(Events.Event1,
 			0);
 	private final Event<Events> EventEvent2 = new Event<Events>(Events.Event2,
@@ -55,7 +58,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent1() {
-		statemachine.getOccuredEvents().add(EventEvent1);
+		statemachine.getOccuredEvents().add(getEventEvent1());
 	}
 
 	public Event<Events> getEventEvent1() {
@@ -63,7 +66,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent2() {
-		statemachine.getOccuredEvents().add(EventEvent2);
+		statemachine.getOccuredEvents().add(getEventEvent2());
 	}
 
 	public Event<Events> getEventEvent2() {
@@ -71,7 +74,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent3() {
-		statemachine.getOccuredEvents().add(EventEvent3);
+		statemachine.getOccuredEvents().add(getEventEvent3());
 	}
 
 	public Event<Events> getEventEvent3() {
@@ -79,7 +82,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent4() {
-		statemachine.getOccuredEvents().add(EventEvent4);
+		statemachine.getOccuredEvents().add(getEventEvent4());
 	}
 
 	public Event<Events> getEventEvent4() {
@@ -87,7 +90,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent5() {
-		statemachine.getOccuredEvents().add(EventEvent5);
+		statemachine.getOccuredEvents().add(getEventEvent5());
 	}
 
 	public Event<Events> getEventEvent5() {
@@ -95,7 +98,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent6() {
-		statemachine.getOccuredEvents().add(EventEvent6);
+		statemachine.getOccuredEvents().add(getEventEvent6());
 	}
 
 	public Event<Events> getEventEvent6() {
@@ -103,7 +106,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent7() {
-		statemachine.getOccuredEvents().add(EventEvent7);
+		statemachine.getOccuredEvents().add(getEventEvent7());
 	}
 
 	public Event<Events> getEventEvent7() {
@@ -111,7 +114,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent8() {
-		statemachine.getOccuredEvents().add(EventEvent8);
+		statemachine.getOccuredEvents().add(getEventEvent8());
 	}
 
 	public Event<Events> getEventEvent8() {
@@ -119,7 +122,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent9() {
-		statemachine.getOccuredEvents().add(EventEvent9);
+		statemachine.getOccuredEvents().add(getEventEvent9());
 	}
 
 	public Event<Events> getEventEvent9() {
@@ -127,7 +130,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent10() {
-		statemachine.getOccuredEvents().add(EventEvent10);
+		statemachine.getOccuredEvents().add(getEventEvent10());
 	}
 
 	public Event<Events> getEventEvent10() {
@@ -135,7 +138,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent11() {
-		statemachine.getOccuredEvents().add(EventEvent11);
+		statemachine.getOccuredEvents().add(getEventEvent11());
 	}
 
 	public Event<Events> getEventEvent11() {
@@ -143,7 +146,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent12() {
-		statemachine.getOccuredEvents().add(EventEvent12);
+		statemachine.getOccuredEvents().add(getEventEvent12());
 	}
 
 	public Event<Events> getEventEvent12() {
@@ -151,7 +154,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent13() {
-		statemachine.getOccuredEvents().add(EventEvent13);
+		statemachine.getOccuredEvents().add(getEventEvent13());
 	}
 
 	public Event<Events> getEventEvent13() {
@@ -159,7 +162,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent14() {
-		statemachine.getOccuredEvents().add(EventEvent14);
+		statemachine.getOccuredEvents().add(getEventEvent14());
 	}
 
 	public Event<Events> getEventEvent14() {
@@ -167,7 +170,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent15() {
-		statemachine.getOccuredEvents().add(EventEvent15);
+		statemachine.getOccuredEvents().add(getEventEvent15());
 	}
 
 	public Event<Events> getEventEvent15() {
@@ -175,7 +178,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public void raiseEvent16() {
-		statemachine.getOccuredEvents().add(EventEvent16);
+		statemachine.getOccuredEvents().add(getEventEvent16());
 	}
 
 	public Event<Events> getEventEvent16() {
@@ -183,21 +186,26 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	private int varS1 = 0;
-
 	public int getVarS1() {
 		return varS1;
 	}
 
 	public void setVarS1(int value) {
+		int oldValue = getVarS1();
 		varS1 = value;
+		notifyListeners(new VariableNotification<Integer>(Variables.s1,
+				getVarS1(), oldValue));
 	}
 	private int varS2;
-
 	public int getVarS2() {
 		return varS2;
 	}
 
 	public void setVarS2(int value) {
+		int oldValue = getVarS2();
 		varS2 = value;
+		notifyListeners(new VariableNotification<Integer>(Variables.s2,
+				getVarS2(), oldValue));
 	}
+
 }

@@ -12,10 +12,16 @@ package org.yakindu.sct.runtime.java;
 
 import org.yakindu.sct.runtime.java.Event;
 
-public class EventNotification extends Notification<Event<? extends Enum<?>>> {
+public class EventNotification extends Notification {
 
-	public EventNotification(Event<? extends Enum<?>> element) {
-		super(NotificationType.EventNotification, element);
+	private Event<? extends Enum<?>> event;
+
+	public EventNotification(Event<? extends Enum<?>> event) {
+		super(NotificationType.EventNotification);
+		this.event = event;
 	}
 
+	public Event<? extends Enum<?>> getEvent() {
+		return event;
+	}
 }

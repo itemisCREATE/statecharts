@@ -10,10 +10,16 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java.test_hierarchy;
 
-public interface DefaultInterface {
+import org.yakindu.sct.runtime.java.INotificationSender;
+
+public interface DefaultInterface extends INotificationSender {
 
 	public enum Events {
 		Event1, Event2, Event3, Event4, Event5, Event6, Event7, Event8, Event9, Event10, Event11, Event12, Event13, Event14, Event15, Event16,
+	}
+
+	public enum Variables {
+		s1, s2,
 	}
 
 	public void raiseEvent1();
