@@ -61,23 +61,23 @@ int test_initialization_and_first_entry()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: check whether var1 from default interface is initially set to 6 */
-	assert( test_Expression_if_get_var1(&machine.interface) == 6);
+	assert( test_Expression_if_get_var1(&machine.iface) == 6);
 
 	/*@Desc: check whether var2 from default is initially set to 123 */
-	assert( test_Expression_if_get_var2(&machine.interface) == 123);
+	assert( test_Expression_if_get_var2(&machine.iface) == 123);
 
 	/*@Desc: check, wether var3 from default interface is set correct after state1 entry */
-	printf("Var3 is set to %f\n", test_Expression_if_get_var3(&machine.interface));
-	assert( (test_Expression_if_get_var3(&machine.interface) > testvalue1l) &&
-			(test_Expression_if_get_var3(&machine.interface) < testvalue1u) );
+	printf("Var3 is set to %f\n", test_Expression_if_get_var3(&machine.iface));
+	assert( (test_Expression_if_get_var3(&machine.iface) > testvalue1l) &&
+			(test_Expression_if_get_var3(&machine.iface) < testvalue1u) );
 
 	/*@Desc: check, whether var4 from default interface is between 43.3 and 43.5 */
-	printf("Var4 is set to %f\n", test_Expression_if_get_var4(&machine.interface));
-	assert( (test_Expression_if_get_var4(&machine.interface) > 43.2) &&
-			(test_Expression_if_get_var4(&machine.interface) < 43.4) );
+	printf("Var4 is set to %f\n", test_Expression_if_get_var4(&machine.iface));
+	assert( (test_Expression_if_get_var4(&machine.iface) > 43.2) &&
+			(test_Expression_if_get_var4(&machine.iface) < 43.4) );
 
 	/*@Desc: check whether var5 from default interface is initially set to false */
-	assert( test_Expression_if_get_var5(&machine.interface) == bool_false);
+	assert( test_Expression_if_get_var5(&machine.iface) == bool_false);
 
 	/*@Desc: teardown statemachine */
 	teardownStatemachine(&machine, &dummyTimer, &eventPool);
@@ -102,7 +102,7 @@ int test_default_other_var1()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: check initial value for var1 ( == 6) */
-	assert( test_Expression_if_get_var1(&machine.interface) == 6 );
+	assert( test_Expression_if_get_var1(&machine.iface) == 6 );
 
 	/*@Desc: run an explicit cycle - without any waiting event */
 	test_ExpressionStatemachine_runCycle(&machine);
@@ -112,13 +112,13 @@ int test_default_other_var1()
 	assert( strcmp(stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)], "State1") == 0);
 
 	/*@Desc: check value for var1 after state1 entry / var1 is not changed during entry into state1 */
-	assert( test_Expression_if_get_var1(&machine.interface) == 6 );
+	assert( test_Expression_if_get_var1(&machine.iface) == 6 );
 
 	/*@Desc: raise event1 on default interface with value 5 (actually unused) */
-	test_Expression_if_raise_event1(&machine.interface, 5);
+	test_Expression_if_raise_event1(&machine.iface, 5);
 
 	/*@Desc: set other.var1 to "true" to let transition take place */
-	test_Expression_if_other_set_var1(&machine.interfaceOther, bool_true);
+	test_Expression_if_other_set_var1(&machine.ifaceOther, bool_true);
 
 	/*@Desc: run an explicit cycle */
 	test_ExpressionStatemachine_runCycle(&machine);
@@ -128,10 +128,10 @@ int test_default_other_var1()
 	assert( strcmp(stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)], "State2") == 0);
 
 	/*@Desc: check whether the transition action was executed */
-	assert( test_Expression_if_other_get_var1(&machine.interfaceOther) == bool_false);
+	assert( test_Expression_if_other_get_var1(&machine.ifaceOther) == bool_false);
 
 	/*@Desc: check whether var1 has been increased by 1 (==7) */
-	assert( test_Expression_if_get_var1(&machine.interface) == 7 );
+	assert( test_Expression_if_get_var1(&machine.iface) == 7 );
 
 	/*@Desc: run an explicit cycle */
 	test_ExpressionStatemachine_runCycle(&machine);
@@ -162,12 +162,12 @@ int test_default_other_var2_var3()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: check initial value for var2 ( == 123) */
-	assert( test_Expression_if_get_var2(&machine.interface) == 123 );
+	assert( test_Expression_if_get_var2(&machine.iface) == 123 );
 
 	/*@Desc: check initial value for var3 (19.4) */
-	printf("Var3 is set to %f\n", test_Expression_if_get_var3(&machine.interface));
-	assert( (test_Expression_if_get_var3(&machine.interface) > testvalue1l) &&
-			(test_Expression_if_get_var3(&machine.interface) < testvalue1u));
+	printf("Var3 is set to %f\n", test_Expression_if_get_var3(&machine.iface));
+	assert( (test_Expression_if_get_var3(&machine.iface) > testvalue1l) &&
+			(test_Expression_if_get_var3(&machine.iface) < testvalue1u));
 
 	/*@Desc: run an explicit cycle - without any waiting event */
 	test_ExpressionStatemachine_runCycle(&machine);
@@ -177,7 +177,7 @@ int test_default_other_var2_var3()
 	assert( strcmp(stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)], "State1") == 0);
 
 	/*@Desc: raise event1 on default interface with value 5 (actually unused) */
-	test_Expression_if_raise_event1(&machine.interface, 5);
+	test_Expression_if_raise_event1(&machine.iface, 5);
 
 	/*@Desc: run an explicit cycle - without any waiting event */
 	test_ExpressionStatemachine_runCycle(&machine);
@@ -188,25 +188,25 @@ int test_default_other_var2_var3()
 
 
 	/*@Desc: check, wether var3 on default interface is set correct after state1 entry */
-	assert( test_Expression_if_get_var2(&machine.interface) == 1 );
+	assert( test_Expression_if_get_var2(&machine.iface) == 1 );
 
 	/*@Desc: set var5 to "false" to let transition take place */
-	test_Expression_if_set_var5(&machine.interface, bool_false);
+	test_Expression_if_set_var5(&machine.iface, bool_false);
 
 	/*@Desc: raise event1 on default interface with value 5 (actually unused) */
-	test_Expression_if_raise_event1(&machine.interface, 5);
+	test_Expression_if_raise_event1(&machine.iface, 5);
 
 	/*@Desc: check the initial state */
 	printf("%s\n", stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)]);
 	assert( strcmp(stateName[statemachineBase_getState((StatemachineBase*)&machine, 0)], "State2") == 0);
 
 	/*@Desc: check, wether var3 on default interface is set correct after entry */
-	printf("Var3 is set to %f\n", test_Expression_if_get_var3(&machine.interface));
-	assert( (test_Expression_if_get_var3(&machine.interface) > testvalue2l) &&
-			(test_Expression_if_get_var3(&machine.interface) < testvalue2u) );
+	printf("Var3 is set to %f\n", test_Expression_if_get_var3(&machine.iface));
+	assert( (test_Expression_if_get_var3(&machine.iface) > testvalue2l) &&
+			(test_Expression_if_get_var3(&machine.iface) < testvalue2u) );
 
 	/*@Desc: set event1 with variable 5 (acutally unused) */
-	test_Expression_if_raise_event1(&machine.interface, 5);
+	test_Expression_if_raise_event1(&machine.iface, 5);
 
 	/*@Desc: run an explicit cycle */
 	test_ExpressionStatemachine_runCycle(&machine);
@@ -236,28 +236,28 @@ int test_onCycle()
 	test_ExpressionStatemachine_runCycle(&machine);
 
 	/*@Desc: raise event1 on default interface with value 5 (actually unused) */
-	test_Expression_if_raise_event1(&machine.interface, 5);
+	test_Expression_if_raise_event1(&machine.iface, 5);
 
 	/*@Desc: set other.var1 to "true" to let transition take place */
-	test_Expression_if_other_set_var1(&machine.interfaceOther, bool_true);
+	test_Expression_if_other_set_var1(&machine.ifaceOther, bool_true);
 
 	/*@Desc: run an explicit cycle */
 	test_ExpressionStatemachine_runCycle(&machine);
 
 	/*@Desc: check whether var1 has been increased by one (==7) */
-	assert( test_Expression_if_get_var1(&machine.interface) == 7 );
+	assert( test_Expression_if_get_var1(&machine.iface) == 7 );
 
 	/*@Desc: run an explicit cycle - without any change */
 	test_ExpressionStatemachine_runCycle(&machine);
 
 	/*@Desc: check whether var1 has been increased by 1 on onCycle (==8) */
-	assert( test_Expression_if_get_var1(&machine.interface) == 8 );
+	assert( test_Expression_if_get_var1(&machine.iface) == 8 );
 
 	/*@Desc: run an explicit cycle - without any change */
 	test_ExpressionStatemachine_runCycle(&machine);
 
 	/*@Desc: check whether var1 has been increased by 1 on onCycle (==9) */
-	assert( test_Expression_if_get_var1(&machine.interface) == 9 );
+	assert( test_Expression_if_get_var1(&machine.iface) == 9 );
 
 	/*@Desc: teardown statemachine */
 	teardownStatemachine(&machine, &dummyTimer, &eventPool);
