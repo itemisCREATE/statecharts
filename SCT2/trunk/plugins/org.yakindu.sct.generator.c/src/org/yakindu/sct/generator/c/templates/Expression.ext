@@ -5,6 +5,7 @@ import sgraph;
 import types;
 
 extension org::yakindu::sct::generator::c::templates::Naming;
+extension org::yakindu::sct::generator::c::templates::Constants;
 
 InterfaceScope getInterfaceScope(Assignment this) : ((InterfaceScope)this.varRef.eContainer);
 
@@ -23,7 +24,7 @@ String toCCode(Literal lit) :
    "Unknown Literal Type" ;
 
 String toCCode(BoolLiteral bLit) :
-   (bLit.value == true) ? "bool_true" : "bool_false"; 
+   (bLit.value == true) ? getBoolTrue() : getBoolFalse(); 
 
 String toCCode(IntLiteral iLit) :
 	iLit.value.toString();
@@ -74,7 +75,7 @@ String getScopeName(InternalScope inls) :
   "internal";
 
 String getInterfaceName(EventRaising event) :
-	"interface" + (( event.event.eContainer.getScopeName() == null)?"":event.event.eContainer.getScopeName().toFirstUpper());
+	"iface" + (( event.event.eContainer.getScopeName() == null)?"":event.event.eContainer.getScopeName().toFirstUpper());
 
 String addValue(EventRaising event) :
   ( (event.value == null)?"":("((" +event.event.getEventName() + "*)ev)->value = " + event.value.toCCode() + "; ") );
@@ -114,7 +115,7 @@ String toCCode(NumericalUnaryExpression expression) :
 /* can not handle internal scope  */
 
 ExecutionFlow getExecutionFlow(InterfaceScope this) : ((ExecutionFlow)this.eContainer);
-String interfaceObjectName(InterfaceScope this) : "interface" + ((this.name == null)?"":this.name.toFirstUpper());
+String interfaceObjectName(InterfaceScope this) : "iface" + ((this.name == null)?"":this.name.toFirstUpper());
 
 String getInterface(VariableDefinition var) :
 	((InterfaceScope)var.eContainer).interfaceObjectName();

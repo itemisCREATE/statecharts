@@ -33,7 +33,7 @@ typedef int int32_t;
 typedef short int16_t;
 
 typedef int32_t integer; 
-typedef enum { bool_false = 0, bool_true = 1 } boolean;
+typedef enum { bool_false = 0, bool_true = 1 } sc_boolean;
 typedef double real;
 «REM»typedef string char*;«ENDREM»
 

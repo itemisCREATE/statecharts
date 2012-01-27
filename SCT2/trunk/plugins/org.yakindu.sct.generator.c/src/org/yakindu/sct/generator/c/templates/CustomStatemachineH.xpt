@@ -62,7 +62,7 @@ extern void «stName()»_enter(«this.handleAddition()»);
 extern void «stName()»_exit(«this.handleAddition()»);
 extern void «stName()»_destruct(«this.handleAddition()»);
 extern void «stName()»_runCycle(«this.handleAddition()»);
-extern boolean «stName()»_eventWaiting(«this.handleAddition()»);
+extern sc_boolean «stName()»_eventWaiting(«this.handleAddition()»);
 
 «FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
 extern «interface.interfaceClassName()»* «stName()»_get_«interface.interfaceObjectName()»(«this.handleAddition()»);

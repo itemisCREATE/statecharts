@@ -19,7 +19,7 @@ String asCType(Type type) :
   case "void" : "void"
   case "real" : "real"
   case "integer" : "integer"
-  case "boolean" : "boolean"
+  case "boolean" : "sc_boolean"
   case "string"  : "string"
   default : "unknownType"
  };

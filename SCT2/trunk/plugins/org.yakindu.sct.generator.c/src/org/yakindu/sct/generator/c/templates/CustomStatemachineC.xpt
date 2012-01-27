@@ -19,7 +19,7 @@ Templates for the main statechart c file.
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
  
 «DEFINE ActionCode FOR Step»
-#warning ActionCode for Step not defined 
+//#warning ActionCode for Step not defined 
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR StateSwitch»
@@ -111,15 +111,15 @@ else {
 «DEFINE ConditionMethodsProto FOR ExecutionNode -»
   «FOREACH reactions.select(e|e.check.refs.size > 0) AS r -»
   «IF r.check != null -»
-static boolean «r.check.checkFunction()»; 
+static sc_boolean «r.check.checkFunction()»; 
   «ENDIF -»«ENDFOREACH -»
 «ENDDEFINE»
 
 «DEFINE ConditionMethodsImplement FOR ExecutionNode -»
   «FOREACH reactions.select(e|e.check.refs.size > 0) AS r -»
   «IF r.check != null -»
-boolean «r.check.checkFunction()» {
-  boolean retValue = «getBoolFalse()»;
+sc_boolean «r.check.checkFunction()» {
+  sc_boolean retValue = «getBoolFalse()»;
   if («r.check.condition.toCCode()»)
     retValue = «getBoolTrue()»;
   
@@ -341,7 +341,7 @@ void «stName()»_setEvent(«handleAdditionComma()» _Event* ev)
 	statemachine_cy_setEvent(&«statemachineHandleName()»->base, ev);
 }
 
-boolean «stName()»_eventWaiting(«handleAddition()»)
+sc_boolean «stName()»_eventWaiting(«handleAddition()»)
 {
 	return statemachine_cy_eventWaiting(&«statemachineHandleName()»->base);
 }

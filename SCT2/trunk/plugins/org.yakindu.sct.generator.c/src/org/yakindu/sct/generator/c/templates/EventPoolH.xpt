@@ -30,7 +30,7 @@ typedef uint32_t(*getSizeOfEventFP)(uint32_t evid);
 
 typedef struct {
 	_Event* memptr;
-	boolean inuse;
+	sc_boolean inuse;
 } EventMemory;
 
 typedef struct {
@@ -41,7 +41,7 @@ typedef struct {
 typedef struct {
 	TypePool*         typePoolMemPtr;
 	uint32_t          maxTypeEventMemElements;
-	boolean           isStatic;
+	sc_boolean           isStatic;
 } EventPool;
 
 extern _Event* eventPool_createEvent(EventPool* handle, uint32_t evid);

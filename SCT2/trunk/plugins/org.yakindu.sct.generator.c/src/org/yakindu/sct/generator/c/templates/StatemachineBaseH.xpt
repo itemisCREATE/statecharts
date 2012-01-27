@@ -32,7 +32,7 @@ typedef struct {
 	uint16_t statePtr;
 
 	Timer* timer;
-	boolean isStaticData;
+	sc_boolean isStaticData;
 
 } StatemachineBase;
 
