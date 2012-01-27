@@ -66,6 +66,10 @@ public final class JavaFeatureConstants implements IJavaFeatureConstants {
 		return GENERIC_INTERFACE_SUPPORT;
 	}
 	
+	public static final String getStatemachineFactorySupport() {
+		return STATEMACHINE_FACTORY_SUPPORT;
+	}
+	
 	public static final String getValidStatemachineName(String name) {
 		//remove whitespaces;
 		String newName = name.replace(" ", "").toLowerCase();

@@ -45,7 +45,10 @@ String getInterfaceObserverSupport() :
  
 String getGenericInterfaceSupport() :
  JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getGenericInterfaceSupport();
-		
+
+String getStatemachineFactorySupport() :
+ JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getStatemachineFactorySupport();
+
 String getBasePackageName(GeneratorEntry entry):
 	if entry.getFeatureConfiguration(getNamingFeature())!=null 
 		&& entry.getFeatureConfiguration(getNamingFeature()).getParameterValue(getBasePackage())!=null then
@@ -114,5 +117,12 @@ boolean createGenericInterfaceSupport(GeneratorEntry entry) :
 	if entry.getFeatureConfiguration(getGeneralFeature())!=null
 		&& entry.getFeatureConfiguration(getGeneralFeature()).getParameterValue(getGenericInterfaceSupport()) != null then
 		entry.getFeatureConfiguration(getGeneralFeature()).getParameterValue(getGenericInterfaceSupport()).getBooleanValue()
+	else
+		false;
+		
+boolean createStatemachineFactory(GeneratorEntry entry) :
+	if entry.getFeatureConfiguration(getGeneralFeature())!=null
+		&& entry.getFeatureConfiguration(getGeneralFeature()).getParameterValue(getStatemachineFactorySupport()) != null then
+		entry.getFeatureConfiguration(getGeneralFeature()).getParameterValue(getStatemachineFactorySupport()).getBooleanValue()
 	else
 		false;

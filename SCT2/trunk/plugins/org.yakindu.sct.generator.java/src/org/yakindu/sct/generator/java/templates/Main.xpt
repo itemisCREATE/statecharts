@@ -27,6 +27,11 @@ Contributors:
 		«EXPAND TimerService::file(entry) FOR this»
 	«ENDIF»
 	
+	«IF entry.createStatemachineFactory()»
+		«EXPAND IStatemachineCreationFactory::file(entry) FOR this»
+		«EXPAND CustomStatemachineCreationFactory::file(entry) FOR this»
+	«ENDIF»
+	
 	«IF entry.createGenericInterfaceSupport()»
 		«EXPAND IGenericAccessInterface::file(entry) FOR this»
 		«EXPAND IGenericAccessStatemachine::file(entry) FOR this»

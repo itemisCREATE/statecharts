@@ -10,5 +10,6 @@
     <parameters name="RuntimeService" optional="true" parameterType="BOOLEAN"/>
     <parameters name="TimerService" optional="true" parameterType="BOOLEAN"/>
     <parameters name="GenericInterfaceSupport" optional="true" parameterType="BOOLEAN"/>
+    <parameters name="StatemachineFactorySupport" optional="true" parameterType="BOOLEAN"/>
   </types>
 </sgen:FeatureTypeLibrary>
