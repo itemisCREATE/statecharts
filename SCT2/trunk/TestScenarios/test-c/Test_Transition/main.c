@@ -33,9 +33,9 @@ const char* getStateString(uint32_t index)
 
 int myTimerSet = 0;
 uint32_t timerValue;
-boolean timerPeriodic;
+sc_boolean timerPeriodic;
 
-void setMyTimer(const uint32_t evid, const uint32_t time_ms, boolean periodic)
+void setMyTimer(const uint32_t evid, const uint32_t time_ms, sc_boolean periodic)
 {
 	myTimerSet = 1;
 	timerValue = time_ms;
@@ -127,10 +127,10 @@ int test_transition_with_AEvent1_value_gt5()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: receive interface for scope A */
-	ifaceA = test_TransitionStatemachine_get_interfaceA(&machine);
+	ifaceA = test_TransitionStatemachine_get_ifaceA(&machine);
 
 	/*@Desc: receive interface for default scope */
-	iface = test_TransitionStatemachine_get_interface(&machine);
+	iface = test_TransitionStatemachine_get_iface(&machine);
 
 	/*@Desc: check the initial state at position 0 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
@@ -168,10 +168,10 @@ int test_transition_with_AEvent1_value_is_0()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: receive interface for scope A */
-	ifaceA = test_TransitionStatemachine_get_interfaceA(&machine);
+	ifaceA = test_TransitionStatemachine_get_ifaceA(&machine);
 
 	/*@Desc: receive interface for default scope */
-	iface = test_TransitionStatemachine_get_interface(&machine);
+	iface = test_TransitionStatemachine_get_iface(&machine);
 
 	/*@Desc: check the initial state at position 0 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
@@ -209,10 +209,10 @@ int test_transition_with_AEvent1_value_lt0()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: receive interface for scope A */
-	ifaceA = test_TransitionStatemachine_get_interfaceA(&machine);
+	ifaceA = test_TransitionStatemachine_get_ifaceA(&machine);
 
 	/*@Desc: receive interface for default scope */
-	iface = test_TransitionStatemachine_get_interface(&machine);
+	iface = test_TransitionStatemachine_get_iface(&machine);
 
 	/*@Desc: check the initial state at position 0 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
@@ -249,7 +249,7 @@ int test_transition_with_no_event_and_i_eq_5()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: receive interface for scope A */
-	iface = test_TransitionStatemachine_get_interface(&machine);
+	iface = test_TransitionStatemachine_get_iface(&machine);
 
 	/*@Desc: check the initial state at position 0 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
@@ -283,7 +283,7 @@ int test_transition_event2_set_with_event1_unconditioned()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: receive interface for scope A */
-	ifaceA = test_TransitionStatemachine_get_interfaceA(&machine);
+	ifaceA = test_TransitionStatemachine_get_ifaceA(&machine);
 
 	/*@Desc: check the initial state at position 0 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
@@ -319,10 +319,10 @@ int test_transition_event2_set_with_event1_value_set_before()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: receive interface for scope A */
-	ifaceA = test_TransitionStatemachine_get_interfaceA(&machine);
+	ifaceA = test_TransitionStatemachine_get_ifaceA(&machine);
 
 	/*@Desc: receive interface for default scope */
-	iface = test_TransitionStatemachine_get_interface(&machine);
+	iface = test_TransitionStatemachine_get_iface(&machine);
 
 	/*@Desc: check the initial state at position 0 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
@@ -377,10 +377,10 @@ int test_transition_with_Event3_j_lt_20()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: receive interface for scope A */
-	ifaceA = test_TransitionStatemachine_get_interfaceA(&machine);
+	ifaceA = test_TransitionStatemachine_get_ifaceA(&machine);
 
 	/*@Desc: receive interface for default scope */
-	iface = test_TransitionStatemachine_get_interface(&machine);
+	iface = test_TransitionStatemachine_get_iface(&machine);
 
 	/*@Desc: check the initial state at position 0 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
@@ -417,10 +417,10 @@ int test_transition_with_Event3_j_gt_30()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: receive interface for scope A */
-	ifaceA = test_TransitionStatemachine_get_interfaceA(&machine);
+	ifaceA = test_TransitionStatemachine_get_ifaceA(&machine);
 
 	/*@Desc: receive interface for default scope */
-	iface = test_TransitionStatemachine_get_interface(&machine);
+	iface = test_TransitionStatemachine_get_iface(&machine);
 
 	/*@Desc: check the initial state at position 0 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
@@ -457,10 +457,10 @@ int test_transition_with_Event3_j_eq_25()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: receive interface for scope A */
-	ifaceA = test_TransitionStatemachine_get_interfaceA(&machine);
+	ifaceA = test_TransitionStatemachine_get_ifaceA(&machine);
 
 	/*@Desc: receive interface for default scope */
-	iface = test_TransitionStatemachine_get_interface(&machine);
+	iface = test_TransitionStatemachine_get_iface(&machine);
 
 	/*@Desc: check the initial state at position 0 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
@@ -497,10 +497,10 @@ int test_transition_with_Event4_j_gt_30()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: receive interface for scope A */
-	ifaceA = test_TransitionStatemachine_get_interfaceA(&machine);
+	ifaceA = test_TransitionStatemachine_get_ifaceA(&machine);
 
 	/*@Desc: receive interface for default scope */
-	iface = test_TransitionStatemachine_get_interface(&machine);
+	iface = test_TransitionStatemachine_get_iface(&machine);
 
 	/*@Desc: check the initial state at position 0 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
@@ -537,10 +537,10 @@ int test_transition_with_Event4_j_lt_30()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: receive interface for scope A */
-	ifaceA = test_TransitionStatemachine_get_interfaceA(&machine);
+	ifaceA = test_TransitionStatemachine_get_ifaceA(&machine);
 
 	/*@Desc: receive interface for default scope */
-	iface = test_TransitionStatemachine_get_interface(&machine);
+	iface = test_TransitionStatemachine_get_iface(&machine);
 
 	/*@Desc: check the initial state at position 0 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
@@ -577,10 +577,10 @@ int test_after_transition_at_100_ms()
 	setupStatemachineMyTimer(&machine, &myTimer, &eventPool);
 
 	/*@Desc: receive interface for scope A */
-	ifaceA = test_TransitionStatemachine_get_interfaceA(&machine);
+	ifaceA = test_TransitionStatemachine_get_ifaceA(&machine);
 
 	/*@Desc: receive interface for default scope */
-	iface = test_TransitionStatemachine_get_interface(&machine);
+	iface = test_TransitionStatemachine_get_iface(&machine);
 
 	/*@Desc: check the initial state at position 0 */
 	printf("%s\n", getStateString(statemachineBase_getState((StatemachineBase*)&machine, 0)));
@@ -620,6 +620,7 @@ int test_after_transition_eventHandling_100ms()
 	EventPool eventPool;
 	Test_TransitionIfA* ifaceA = 0;
 	Test_TransitionIf* iface = 0;
+	_Event* time_100ms;
 
 	/*@Desc: setup initial statemachine */
 	setupStatemachineMyTimer(&machine, &myTimer, &eventPool);
@@ -633,7 +634,7 @@ int test_after_transition_eventHandling_100ms()
 	assert (timerPeriodic == bool_false);
 
 	/*@Desc: create timer event */
-	_Event* time_100ms = eventPool_createEvent(machine.base.eventPool, ev_state1_time_event_0);
+	time_100ms = eventPool_createEvent(machine.base.eventPool, ev_state1_time_event_0);
 
 	/*@Desc: set event1 on interface A with value 0 */
 	statemachine_cy_setEvent((Statemachine_cy*)&machine, time_100ms);
@@ -662,6 +663,7 @@ int test_after_transition_eventHandling_10s()
 	EventPool eventPool;
 	Test_TransitionIfA* ifaceA = 0;
 	Test_TransitionIf* iface = 0;
+	_Event* time_100ms;
 
 	/*@Desc: setup initial statemachine */
 	setupStatemachineMyTimer(&machine, &myTimer, &eventPool);
@@ -675,7 +677,7 @@ int test_after_transition_eventHandling_10s()
 	assert (timerPeriodic == bool_false);
 
 	/*@Desc: create timer event */
-	_Event* time_100ms = eventPool_createEvent(machine.base.eventPool, ev_state1_time_event_1);
+	time_100ms = eventPool_createEvent(machine.base.eventPool, ev_state1_time_event_1);
 
 	/*@Desc: set event1 on interface A with value 0 */
 	statemachine_cy_setEvent((Statemachine_cy*)&machine, time_100ms);

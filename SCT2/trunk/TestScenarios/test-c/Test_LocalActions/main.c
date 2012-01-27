@@ -33,9 +33,9 @@ const char* getStateString(uint32_t index)
 
 int myTimerSet = 0;
 uint32_t timerValue;
-boolean timerPeriodic;
+sc_boolean timerPeriodic;
 
-void setMyTimer(const uint32_t evid, const uint32_t time_ms, boolean periodic)
+void setMyTimer(const uint32_t evid, const uint32_t time_ms, sc_boolean periodic)
 {
 	myTimerSet = 1;
 	timerValue = time_ms;
@@ -117,7 +117,7 @@ int localActions_check_initial_entry()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: check whether entry works on initialisation*/
-	assert(test_LocalActions_if_get_i(test_LocalActionsStatemachine_get_interface(&machine)) == 1);
+	assert(test_LocalActions_if_get_i(test_LocalActionsStatemachine_get_iface(&machine)) == 1);
 
 	/*@Desc: teardown statemachine */
 	teardownStatemachine(&machine, &dummyTimer, &eventPool);
@@ -136,13 +136,13 @@ int localActions_check_transition_entry()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: raise event1 on default Interface */
-	test_LocalActions_if_raise_Event1(test_LocalActionsStatemachine_get_interface(&machine));
+	test_LocalActions_if_raise_Event1(test_LocalActionsStatemachine_get_iface(&machine));
 
 	/*@Desc: run an explicit cycle */
 	test_LocalActionsStatemachine_runCycle(&machine);
 
 	/*@Desc: check whether entry works on initialisation*/
-	assert(test_LocalActions_if_get_j(test_LocalActionsStatemachine_get_interface(&machine)) == 1);
+	assert(test_LocalActions_if_get_j(test_LocalActionsStatemachine_get_iface(&machine)) == 1);
 
 	/*@Desc: teardown statemachine */
 	teardownStatemachine(&machine, &dummyTimer, &eventPool);
@@ -161,22 +161,22 @@ int localActions_check_transition_exit()
 	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
 	/*@Desc: raise event1 on default Interface */
-	test_LocalActions_if_raise_Event1(test_LocalActionsStatemachine_get_interface(&machine));
+	test_LocalActions_if_raise_Event1(test_LocalActionsStatemachine_get_iface(&machine));
 
 	/*@Desc: run an explicit cycle */
 	test_LocalActionsStatemachine_runCycle(&machine);
 
 	/*@Desc: check whether entry works on initialisation*/
-	assert(test_LocalActions_if_get_i(test_LocalActionsStatemachine_get_interface(&machine)) == 0);
+	assert(test_LocalActions_if_get_i(test_LocalActionsStatemachine_get_iface(&machine)) == 0);
 
 	/*@Desc: raise event1 on default Interface */
-	test_LocalActions_if_raise_Event3(test_LocalActionsStatemachine_get_interface(&machine));
+	test_LocalActions_if_raise_Event3(test_LocalActionsStatemachine_get_iface(&machine));
 
 	/*@Desc: run an explicit cycle */
 	test_LocalActionsStatemachine_runCycle(&machine);
 
 	/*@Desc: check whether entry works on initialisation*/
-	assert(test_LocalActions_if_get_j(test_LocalActionsStatemachine_get_interface(&machine)) == 0);
+	assert(test_LocalActions_if_get_j(test_LocalActionsStatemachine_get_iface(&machine)) == 0);
 
 	/*@Desc: teardown statemachine */
 	teardownStatemachine(&machine, &dummyTimer, &eventPool);
