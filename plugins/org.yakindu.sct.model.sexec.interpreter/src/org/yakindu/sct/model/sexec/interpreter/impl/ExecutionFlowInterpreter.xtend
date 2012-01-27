@@ -67,6 +67,9 @@ import org.yakindu.sct.model.sexec.impl.ExecutionStateImpl
 import org.yakindu.sct.simulation.core.runtime.IExecutionContextListener
 import org.yakindu.sct.model.sexec.SaveHistory
 import org.yakindu.sct.model.sexec.HistoryEntry
+import org.yakindu.sct.model.sexec.TraceBeginRunCycle
+import org.yakindu.sct.model.sexec.SexecFactory
+import org.yakindu.sct.model.sexec.TraceEndRunCycle
 
 /**
  * 
@@ -89,6 +92,9 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	
 	ExecutionFlow flow
 	int nextSVIdx
+	
+	TraceBeginRunCycle brc  
+	TraceEndRunCycle erc  
 
 	override initialize(ExecutionFlow flow) {
 		this.flow = flow;
@@ -100,6 +106,9 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	
 		timingService.init(executionContext.virtualClock)
 		executionContext.virtualClock.start
+		
+		brc = SexecFactory::eINSTANCE.createTraceBeginRunCycle
+		erc = SexecFactory::eINSTANCE.createTraceEndRunCycle
 	}
 	
 	override tearDown(){
@@ -136,6 +145,8 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		
 		nextSVIdx = 0; // this is a member that can be manipulated during state reactions in case of orthogonality
 		
+		brc.execute
+		
 		while (nextSVIdx < executionContext.stateConfiguration.size) {
 			var state = executionContext.stateConfiguration.get(nextSVIdx)
 			if (state != null) state.reactSequence.execute			
@@ -143,7 +154,8 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		}  
 		
 		executionContext.resetRaisedEvents
-		
+
+		erc.execute		
 	} 
 
 

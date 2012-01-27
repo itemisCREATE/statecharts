@@ -323,6 +323,16 @@ public class ExecutionStateItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createTraceBeginRunCycle()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createTraceEndRunCycle()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__ENTRY_ACTION,
 				 SexecFactory.eINSTANCE.createSaveHistory()));
 
 		newChildDescriptors.add
@@ -404,6 +414,16 @@ public class ExecutionStateItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createTraceStateExited()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createTraceBeginRunCycle()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_STATE__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createTraceEndRunCycle()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -1941,6 +1941,98 @@ public interface SexecPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceBeginRunCycleImpl <em>Trace Begin Run Cycle</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.TraceBeginRunCycleImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceBeginRunCycle()
+	 * @generated
+	 */
+	int TRACE_BEGIN_RUN_CYCLE = 30;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_BEGIN_RUN_CYCLE__NAME = TRACE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_BEGIN_RUN_CYCLE__COMMENT = TRACE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_BEGIN_RUN_CYCLE__CALLER = TRACE__CALLER;
+
+	/**
+	 * The number of structural features of the '<em>Trace Begin Run Cycle</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_BEGIN_RUN_CYCLE_FEATURE_COUNT = TRACE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceEndRunCycleImpl <em>Trace End Run Cycle</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.TraceEndRunCycleImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceEndRunCycle()
+	 * @generated
+	 */
+	int TRACE_END_RUN_CYCLE = 31;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_END_RUN_CYCLE__NAME = TRACE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_END_RUN_CYCLE__COMMENT = TRACE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_END_RUN_CYCLE__CALLER = TRACE__CALLER;
+
+	/**
+	 * The number of structural features of the '<em>Trace End Run Cycle</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_END_RUN_CYCLE_FEATURE_COUNT = TRACE_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.SaveHistoryImpl <em>Save History</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1948,7 +2040,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getSaveHistory()
 	 * @generated
 	 */
-	int SAVE_HISTORY = 30;
+	int SAVE_HISTORY = 32;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2013,7 +2105,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getHistoryEntry()
 	 * @generated
 	 */
-	int HISTORY_ENTRY = 31;
+	int HISTORY_ENTRY = 33;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2876,6 +2968,26 @@ public interface SexecPackage extends EPackage {
 	EReference getTraceStateExited_State();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.TraceBeginRunCycle <em>Trace Begin Run Cycle</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Trace Begin Run Cycle</em>'.
+	 * @see org.yakindu.sct.model.sexec.TraceBeginRunCycle
+	 * @generated
+	 */
+	EClass getTraceBeginRunCycle();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.TraceEndRunCycle <em>Trace End Run Cycle</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Trace End Run Cycle</em>'.
+	 * @see org.yakindu.sct.model.sexec.TraceEndRunCycle
+	 * @generated
+	 */
+	EClass getTraceEndRunCycle();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.SaveHistory <em>Save History</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3702,6 +3814,26 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRACE_STATE_EXITED__STATE = eINSTANCE.getTraceStateExited_State();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.TraceBeginRunCycleImpl <em>Trace Begin Run Cycle</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.TraceBeginRunCycleImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceBeginRunCycle()
+		 * @generated
+		 */
+		EClass TRACE_BEGIN_RUN_CYCLE = eINSTANCE.getTraceBeginRunCycle();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.TraceEndRunCycleImpl <em>Trace End Run Cycle</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.TraceEndRunCycleImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceEndRunCycle()
+		 * @generated
+		 */
+		EClass TRACE_END_RUN_CYCLE = eINSTANCE.getTraceEndRunCycle();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.SaveHistoryImpl <em>Save History</em>}' class.

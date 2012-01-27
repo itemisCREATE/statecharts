@@ -251,6 +251,24 @@ public interface SexecFactory extends EFactory {
 	TraceStateExited createTraceStateExited();
 
 	/**
+	 * Returns a new object of class '<em>Trace Begin Run Cycle</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Trace Begin Run Cycle</em>'.
+	 * @generated
+	 */
+	TraceBeginRunCycle createTraceBeginRunCycle();
+
+	/**
+	 * Returns a new object of class '<em>Trace End Run Cycle</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Trace End Run Cycle</em>'.
+	 * @generated
+	 */
+	TraceEndRunCycle createTraceEndRunCycle();
+
+	/**
 	 * Returns a new object of class '<em>Save History</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

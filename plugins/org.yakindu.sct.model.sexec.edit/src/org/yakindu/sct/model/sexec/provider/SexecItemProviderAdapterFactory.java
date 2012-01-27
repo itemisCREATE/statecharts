@@ -649,6 +649,52 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.TraceBeginRunCycle} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TraceBeginRunCycleItemProvider traceBeginRunCycleItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.TraceBeginRunCycle}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTraceBeginRunCycleAdapter() {
+		if (traceBeginRunCycleItemProvider == null) {
+			traceBeginRunCycleItemProvider = new TraceBeginRunCycleItemProvider(this);
+		}
+
+		return traceBeginRunCycleItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.TraceEndRunCycle} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TraceEndRunCycleItemProvider traceEndRunCycleItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.TraceEndRunCycle}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTraceEndRunCycleAdapter() {
+		if (traceEndRunCycleItemProvider == null) {
+			traceEndRunCycleItemProvider = new TraceEndRunCycleItemProvider(this);
+		}
+
+		return traceEndRunCycleItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.SaveHistory} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -890,6 +936,8 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (reactionFiredItemProvider != null) reactionFiredItemProvider.dispose();
 		if (traceStateEnteredItemProvider != null) traceStateEnteredItemProvider.dispose();
 		if (traceStateExitedItemProvider != null) traceStateExitedItemProvider.dispose();
+		if (traceBeginRunCycleItemProvider != null) traceBeginRunCycleItemProvider.dispose();
+		if (traceEndRunCycleItemProvider != null) traceEndRunCycleItemProvider.dispose();
 		if (saveHistoryItemProvider != null) saveHistoryItemProvider.dispose();
 		if (historyEntryItemProvider != null) historyEntryItemProvider.dispose();
 	}

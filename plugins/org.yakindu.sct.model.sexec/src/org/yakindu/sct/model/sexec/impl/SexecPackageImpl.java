@@ -43,6 +43,8 @@ import org.yakindu.sct.model.sexec.StateVectorType;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.Trace;
+import org.yakindu.sct.model.sexec.TraceBeginRunCycle;
+import org.yakindu.sct.model.sexec.TraceEndRunCycle;
 import org.yakindu.sct.model.sexec.TraceNodeExecuted;
 import org.yakindu.sct.model.sexec.TraceRegionEntered;
 import org.yakindu.sct.model.sexec.TraceRegionExited;
@@ -246,6 +248,20 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * @generated
 	 */
 	private EClass traceStateExitedEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass traceBeginRunCycleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass traceEndRunCycleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1017,6 +1033,24 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTraceBeginRunCycle() {
+		return traceBeginRunCycleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTraceEndRunCycle() {
+		return traceEndRunCycleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSaveHistory() {
 		return saveHistoryEClass;
 	}
@@ -1286,6 +1320,10 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		traceStateExitedEClass = createEClass(TRACE_STATE_EXITED);
 		createEReference(traceStateExitedEClass, TRACE_STATE_EXITED__STATE);
 
+		traceBeginRunCycleEClass = createEClass(TRACE_BEGIN_RUN_CYCLE);
+
+		traceEndRunCycleEClass = createEClass(TRACE_END_RUN_CYCLE);
+
 		saveHistoryEClass = createEClass(SAVE_HISTORY);
 		createEReference(saveHistoryEClass, SAVE_HISTORY__REGION);
 		createEAttribute(saveHistoryEClass, SAVE_HISTORY__DEEP);
@@ -1359,6 +1397,8 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		reactionFiredEClass.getESuperTypes().add(this.getTrace());
 		traceStateEnteredEClass.getESuperTypes().add(this.getTrace());
 		traceStateExitedEClass.getESuperTypes().add(this.getTrace());
+		traceBeginRunCycleEClass.getESuperTypes().add(this.getTrace());
+		traceEndRunCycleEClass.getESuperTypes().add(this.getTrace());
 		saveHistoryEClass.getESuperTypes().add(this.getStep());
 		historyEntryEClass.getESuperTypes().add(this.getStep());
 
@@ -1473,6 +1513,10 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		initEClass(traceStateExitedEClass, TraceStateExited.class, "TraceStateExited", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTraceStateExited_State(), this.getExecutionState(), null, "state", null, 0, 1, TraceStateExited.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(traceBeginRunCycleEClass, TraceBeginRunCycle.class, "TraceBeginRunCycle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(traceEndRunCycleEClass, TraceEndRunCycle.class, "TraceEndRunCycle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(saveHistoryEClass, SaveHistory.class, "SaveHistory", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSaveHistory_Region(), this.getExecutionRegion(), null, "region", null, 0, 1, SaveHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

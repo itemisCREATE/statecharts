@@ -81,7 +81,7 @@ public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener 
 
 	private IDynamicNotationHandler createNotationHandler(
 			IExecutionFacade facade) {
-		IDynamicNotationHandler handler = new DefaultDynamicNotationHandler();
+		IDynamicNotationHandler handler = new ExecutionPathDynamicNotationHandler();
 		facade.addTraceListener(handler);
 		_handler.put(facade, handler);
 		return handler;
