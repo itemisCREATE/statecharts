@@ -1,5 +1,7 @@
 package de.itemis.gmf.runtime.commons.highlighting;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -49,6 +51,35 @@ public interface IHighlightingSupport {
 	 */
 	void flash(EObject semanticElemesnt, HighlightingParameters parameters);
 
+	/**
+	 * 
+	 * @param actions
+	 */
+	void executeBatch(List<Action> actions);
+	
+	
+	public static interface Action {
+		public void execute(IHighlightingSupport hs);
+	}
+	
+
+	public static class Highlight implements Action {
+
+		protected EObject semanticElement;
+		protected HighlightingParameters highligtingParams;
+		
+		public Highlight(EObject semanticElement, HighlightingParameters parameters) {
+			this.semanticElement = semanticElement;
+			this.highligtingParams = parameters;
+		}
+		
+		public void execute(IHighlightingSupport hs) {
+			hs.highlight(semanticElement, highligtingParams);
+		}
+		
+	}
+
+	
 	public static class HighlightingSupportNullImpl implements
 			IHighlightingSupport {
 
@@ -76,8 +107,12 @@ public interface IHighlightingSupport {
 		}
 
 		public boolean isLocked() {
-			// TODO Auto-generated method stub
 			return false;
 		}
+
+		public void executeBatch(List<Action> actions) {
+		}
+		
+		
 	}
 }

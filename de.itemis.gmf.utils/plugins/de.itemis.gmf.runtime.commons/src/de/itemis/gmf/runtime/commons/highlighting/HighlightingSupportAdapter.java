@@ -2,6 +2,7 @@ package de.itemis.gmf.runtime.commons.highlighting;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Assert;
@@ -259,14 +260,32 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		IGraphicalEditPart editPartForSemanticElement = getEditPartForSemanticElement(semanticElement);
 		if (editPartForSemanticElement != null) {
 			IFigure figure = getTargetFigure(editPartForSemanticElement);
-			figure.setForegroundColor(parameters.foregroundFadingColor);
-			figure.setBackgroundColor(parameters.backgroundFadingColor);
-			figure.invalidate();
+			if (parameters != null) {
+				figure.setForegroundColor(parameters.foregroundFadingColor);
+				figure.setBackgroundColor(parameters.backgroundFadingColor);
+				figure.invalidate();
+			} else {
+				ColorMemento memento = figureStates.get(figure);
+				if ( memento != null ) memento.restore();
+			}
 		}
 
 	}
 
 	public boolean isLocked() {
 		return locked;
+	}
+
+	public void executeBatch(final List<Action> actions) {
+		if ( actions != null ) {
+			
+			Display.getCurrent().asyncExec( new Runnable() {				
+				public void run() {
+					for ( Action a : actions ) {
+						a.execute(HighlightingSupportAdapter.this);
+					}
+				}
+			});
+		}
 	}
 }
