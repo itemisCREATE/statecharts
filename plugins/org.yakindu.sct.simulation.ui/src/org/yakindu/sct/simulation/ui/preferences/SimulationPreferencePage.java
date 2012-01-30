@@ -40,6 +40,14 @@ public class SimulationPreferencePage extends FieldEditorPreferencePage
 				"&state highlighting background color:", getFieldEditorParent()));
 
 		addField(new ColorFieldEditor(
+				SimulationPreferenceConstants.VERTEX_FOREGROUND_TRANSIENT_COLOR,
+				"&vertex transient foreground color:", getFieldEditorParent()));
+
+		addField(new ColorFieldEditor(
+				SimulationPreferenceConstants.VERTEX_BACKGROUND_TRANSIENT_COLOR,
+				"&vertex transient background color:", getFieldEditorParent()));
+
+		addField(new ColorFieldEditor(
 				SimulationPreferenceConstants.TRANSITION_HIGHLIGHTING_COLOR,
 				"&transition highlighting color", getFieldEditorParent()));
 	}

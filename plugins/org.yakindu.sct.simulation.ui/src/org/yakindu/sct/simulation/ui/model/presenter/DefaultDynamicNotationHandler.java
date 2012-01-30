@@ -10,15 +10,10 @@
  */
 package org.yakindu.sct.simulation.ui.model.presenter;
 
-import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants.STATE_FOREGROUND_HIGHLIGHTING_COLOR;
-import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants.STATE_BACKGROUND_HIGHLIGHTING_COLOR;
-import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants.TRANSITION_HIGHLIGHTING_COLOR;
+import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.eclipse.draw2d.ColorConstants;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.graphics.Color;
@@ -36,8 +31,6 @@ import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
 
 import de.itemis.gmf.runtime.commons.highlighting.HighlightingParameters;
-import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
-import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport.Action;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -50,7 +43,10 @@ public class DefaultDynamicNotationHandler extends
 	protected static HighlightingParameters TRANSITION_PARAMS = new HighlightingParameters(
 			0, ColorConstants.darkGreen, ColorConstants.gray, false);
 
-	protected static HighlightingParameters STATE_PARAMS = HighlightingParameters.DEFAULT;
+	protected static HighlightingParameters STATE_HIGHLIGHT_PARAMS = HighlightingParameters.DEFAULT;
+
+	protected static HighlightingParameters VERTEX_TRANSIENT_PARAMS = new HighlightingParameters(
+			0, ColorConstants.darkGreen, ColorConstants.green, false);;
 
 
 	public DefaultDynamicNotationHandler() {
@@ -125,13 +121,22 @@ public class DefaultDynamicNotationHandler extends
 				STATE_FOREGROUND_HIGHLIGHTING_COLOR);
 		RGB backgroundColor = PreferenceConverter.getColor(store,
 				STATE_BACKGROUND_HIGHLIGHTING_COLOR);
+		RGB vertexForegroundColor = PreferenceConverter.getColor(store,
+				VERTEX_FOREGROUND_TRANSIENT_COLOR);
+		RGB vertexBackgroundColor = PreferenceConverter.getColor(store,
+				VERTEX_BACKGROUND_TRANSIENT_COLOR);
 		RGB transitionColor = PreferenceConverter.getColor(store,
-				TRANSITION_HIGHLIGHTING_COLOR);
+				TRANSITION_HIGHLIGHTING_COLOR);	
+		
 		// Set the new colors
-		STATE_PARAMS.foregroundFadingColor = new Color(Display.getDefault(),
+		STATE_HIGHLIGHT_PARAMS.foregroundFadingColor = new Color(Display.getDefault(),
 				foregroundColor);
-		STATE_PARAMS.backgroundFadingColor = new Color(Display.getDefault(),
+		STATE_HIGHLIGHT_PARAMS.backgroundFadingColor = new Color(Display.getDefault(),
 				backgroundColor);
+		VERTEX_TRANSIENT_PARAMS.foregroundFadingColor = new Color(Display.getDefault(),
+				vertexForegroundColor);
+		VERTEX_TRANSIENT_PARAMS.backgroundFadingColor = new Color(Display.getDefault(),
+				vertexBackgroundColor);
 		TRANSITION_PARAMS.foregroundFadingColor = new Color(
 				Display.getDefault(), transitionColor);
 	}

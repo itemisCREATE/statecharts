@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.model.sexec.ReactionFired;
-import org.yakindu.sct.model.sexec.Trace;
 import org.yakindu.sct.model.sexec.TraceBeginRunCycle;
 import org.yakindu.sct.model.sexec.TraceEndRunCycle;
 import org.yakindu.sct.model.sexec.TraceNodeExecuted;
@@ -42,7 +41,7 @@ public class ExecutionPathDynamicNotationHandler extends
 		
 		for (RegularState state : context.getAllActiveStates()) {
 			active.add(state);
-			actionList.add( new IHighlightingSupport.Highlight(state, HighlightingParameters.DEFAULT) );
+			actionList.add( new IHighlightingSupport.Highlight(state, STATE_HIGHLIGHT_PARAMS) );
 		}
 		
 		getHighlightingSupport().executeBatch(actionList);
@@ -84,7 +83,7 @@ public class ExecutionPathDynamicNotationHandler extends
 
 		active.remove(state);
 		previousActive.add(state);
-		cycleUpdates.add(new IHighlightingSupport.Highlight(trace.getState().getSourceElement(), TRANSITION_PARAMS) );
+		cycleUpdates.add(new IHighlightingSupport.Highlight(trace.getState().getSourceElement(), VERTEX_TRANSIENT_PARAMS) );
 
 	}
 
@@ -98,7 +97,7 @@ public class ExecutionPathDynamicNotationHandler extends
 	public void visualizeStep(final TraceNodeExecuted trace) {
 		
 		executionPathElements.add(trace.getNode().getSourceElement());
-		cycleUpdates.add(new IHighlightingSupport.Highlight(trace.getNode().getSourceElement(), TRANSITION_PARAMS) );
+		cycleUpdates.add(new IHighlightingSupport.Highlight(trace.getNode().getSourceElement(), VERTEX_TRANSIENT_PARAMS) );
 
 	}
 
