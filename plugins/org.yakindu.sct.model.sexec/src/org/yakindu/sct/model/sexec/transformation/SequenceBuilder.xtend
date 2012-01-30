@@ -288,12 +288,12 @@ class SequenceBuilder {
 		execState.exitSequence = seq
 	}
 
-	def StateSwitch defineExitSwitch(ExecutionScope state, Iterable<ExecutionState> leafStates, int pos) {
+	def StateSwitch defineExitSwitch(ExecutionRegion region, Iterable<ExecutionState> leafStates, int pos) {
 
 		// create a state switch
 		var StateSwitch sSwitch = sexec.factory.createStateSwitch
 		sSwitch.stateConfigurationIdx = pos
-		sSwitch.comment = "Handle exit of all possible states (of "+state.name+") at position " + sSwitch.stateConfigurationIdx + "..."
+		sSwitch.comment = "Handle exit of all possible states (of "+region.name+") at position " + sSwitch.stateConfigurationIdx + "..."
 						
 		val Iterable<ExecutionState> posStates = leafStates.filter( rs | rs.stateVector.size == 1 && rs.stateVector.offset == pos)					
 		
@@ -301,13 +301,23 @@ class SequenceBuilder {
 		for ( s : posStates ) {
 
 			val caseSeq = sexec.factory.createSequence
+
+			//Save regions if necessary
+			val exitScopes = s.parentScopes
+			exitScopes.removeAll(region.parentScopes)
+			exitScopes.remove(s)
+			exitScopes.reverse.fold(caseSeq , [ cs, exitScope | {
+				if (exitScope instanceof ExecutionRegion && (exitScope as ExecutionRegion).historyVector != null) {
+					val execRegion = exitScope as ExecutionRegion
+					cs.steps += execRegion.newSaveHistory
+				}
+				cs
+			}]) 
+
+			//Leave leaf
 			if (s.exitSequence != null) {
 				caseSeq.steps += s.exitSequence.newCall
 			}
-			
-			val exitScopes = s.parentScopes
-			exitScopes.removeAll(state.parentScopes)
-			exitScopes.remove(s)
 			
 			// include exitAction calls up to the direct child level.
 			exitScopes.fold(caseSeq , [ cs, exitScope | {

@@ -544,13 +544,13 @@ public class SequenceBuilder {
     }
   }
   
-  public StateSwitch defineExitSwitch(final ExecutionScope state, final Iterable<ExecutionState> leafStates, final int pos) {
+  public StateSwitch defineExitSwitch(final ExecutionRegion region, final Iterable<ExecutionState> leafStates, final int pos) {
     {
       SexecFactory _factory = this.sexec.factory();
       StateSwitch _createStateSwitch = _factory.createStateSwitch();
       StateSwitch sSwitch = _createStateSwitch;
       sSwitch.setStateConfigurationIdx(pos);
-      String _name = state.getName();
+      String _name = region.getName();
       String _operator_plus = StringExtensions.operator_plus("Handle exit of all possible states (of ", _name);
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ") at position ");
       int _stateConfigurationIdx = sSwitch.getStateConfigurationIdx();
@@ -581,50 +581,30 @@ public class SequenceBuilder {
           SexecFactory _factory_1 = this.sexec.factory();
           Sequence _createSequence = _factory_1.createSequence();
           final Sequence caseSeq = _createSequence;
-          Sequence _exitSequence = s.getExitSequence();
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_exitSequence, null);
-          if (_operator_notEquals) {
-            EList<Step> _steps = caseSeq.getSteps();
-            Sequence _exitSequence_1 = s.getExitSequence();
-            Call _newCall = this.mapping.newCall(_exitSequence_1);
-            CollectionExtensions.<Step>operator_add(_steps, _newCall);
-          }
           ArrayList<ExecutionScope> _parentScopes = this.sexec.parentScopes(s);
           final ArrayList<ExecutionScope> exitScopes = _parentScopes;
-          ArrayList<ExecutionScope> _parentScopes_1 = this.sexec.parentScopes(state);
+          ArrayList<ExecutionScope> _parentScopes_1 = this.sexec.parentScopes(region);
           exitScopes.removeAll(_parentScopes_1);
           exitScopes.remove(s);
+          List<ExecutionScope> _reverse = ListExtensions.<ExecutionScope>reverse(exitScopes);
           final Function2<Sequence,ExecutionScope,Sequence> _function_1 = new Function2<Sequence,ExecutionScope,Sequence>() {
               public Sequence apply(final Sequence cs , final ExecutionScope exitScope) {
                 Sequence _xblockexpression = null;
                 {
                   boolean _operator_and_1 = false;
-                  if (!(exitScope instanceof org.yakindu.sct.model.sexec.ExecutionState)) {
+                  if (!(exitScope instanceof org.yakindu.sct.model.sexec.ExecutionRegion)) {
                     _operator_and_1 = false;
                   } else {
-                    StateVector _stateVector_2 = s.getStateVector();
-                    int _last = SequenceBuilder.this.sexec.last(_stateVector_2);
-                    StateVector _stateVector_3 = exitScope.getStateVector();
-                    int _last_1 = SequenceBuilder.this.sexec.last(_stateVector_3);
-                    boolean _operator_equals_2 = ObjectExtensions.operator_equals(((Integer)_last), ((Integer)_last_1));
-                    _operator_and_1 = BooleanExtensions.operator_and((exitScope instanceof org.yakindu.sct.model.sexec.ExecutionState), _operator_equals_2);
+                    StateVector _historyVector = ((ExecutionRegion) exitScope).getHistoryVector();
+                    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_historyVector, null);
+                    _operator_and_1 = BooleanExtensions.operator_and((exitScope instanceof org.yakindu.sct.model.sexec.ExecutionRegion), _operator_notEquals);
                   }
                   if (_operator_and_1) {
                     {
-                      final ExecutionState execState = ((ExecutionState) exitScope);
-                      Step _exitAction = execState.getExitAction();
-                      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_exitAction, null);
-                      if (_operator_notEquals_1) {
-                        EList<Step> _steps_1 = cs.getSteps();
-                        Step _exitAction_1 = execState.getExitAction();
-                        Call _newCall_1 = SequenceBuilder.this.mapping.newCall(_exitAction_1);
-                        _steps_1.add(_newCall_1);
-                      }
-                      if (SequenceBuilder.this._addTraceSteps) {
-                        EList<Step> _steps_2 = cs.getSteps();
-                        TraceStateExited _newTraceStateExited = SequenceBuilder.this.trace.newTraceStateExited(execState);
-                        _steps_2.add(_newTraceStateExited);
-                      }
+                      final ExecutionRegion execRegion = ((ExecutionRegion) exitScope);
+                      EList<Step> _steps = cs.getSteps();
+                      SaveHistory _newSaveHistory = SequenceBuilder.this.sexec.newSaveHistory(execRegion);
+                      CollectionExtensions.<Step>operator_add(_steps, _newSaveHistory);
                     }
                   }
                   _xblockexpression = (cs);
@@ -632,9 +612,56 @@ public class SequenceBuilder {
                 return _xblockexpression;
               }
             };
-          IterableExtensions.<ExecutionScope, Sequence>fold(exitScopes, caseSeq, _function_1);
-          EList<Step> _steps_3 = caseSeq.getSteps();
-          boolean _isEmpty = _steps_3.isEmpty();
+          IterableExtensions.<ExecutionScope, Sequence>fold(_reverse, caseSeq, _function_1);
+          Sequence _exitSequence = s.getExitSequence();
+          boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_exitSequence, null);
+          if (_operator_notEquals_1) {
+            EList<Step> _steps_1 = caseSeq.getSteps();
+            Sequence _exitSequence_1 = s.getExitSequence();
+            Call _newCall = this.mapping.newCall(_exitSequence_1);
+            CollectionExtensions.<Step>operator_add(_steps_1, _newCall);
+          }
+          final Function2<Sequence,ExecutionScope,Sequence> _function_2 = new Function2<Sequence,ExecutionScope,Sequence>() {
+              public Sequence apply(final Sequence cs_1 , final ExecutionScope exitScope_1) {
+                Sequence _xblockexpression_1 = null;
+                {
+                  boolean _operator_and_2 = false;
+                  if (!(exitScope_1 instanceof org.yakindu.sct.model.sexec.ExecutionState)) {
+                    _operator_and_2 = false;
+                  } else {
+                    StateVector _stateVector_2 = s.getStateVector();
+                    int _last = SequenceBuilder.this.sexec.last(_stateVector_2);
+                    StateVector _stateVector_3 = exitScope_1.getStateVector();
+                    int _last_1 = SequenceBuilder.this.sexec.last(_stateVector_3);
+                    boolean _operator_equals_2 = ObjectExtensions.operator_equals(((Integer)_last), ((Integer)_last_1));
+                    _operator_and_2 = BooleanExtensions.operator_and((exitScope_1 instanceof org.yakindu.sct.model.sexec.ExecutionState), _operator_equals_2);
+                  }
+                  if (_operator_and_2) {
+                    {
+                      final ExecutionState execState = ((ExecutionState) exitScope_1);
+                      Step _exitAction = execState.getExitAction();
+                      boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_exitAction, null);
+                      if (_operator_notEquals_2) {
+                        EList<Step> _steps_2 = cs_1.getSteps();
+                        Step _exitAction_1 = execState.getExitAction();
+                        Call _newCall_1 = SequenceBuilder.this.mapping.newCall(_exitAction_1);
+                        _steps_2.add(_newCall_1);
+                      }
+                      if (SequenceBuilder.this._addTraceSteps) {
+                        EList<Step> _steps_3 = cs_1.getSteps();
+                        TraceStateExited _newTraceStateExited = SequenceBuilder.this.trace.newTraceStateExited(execState);
+                        _steps_3.add(_newTraceStateExited);
+                      }
+                    }
+                  }
+                  _xblockexpression_1 = (cs_1);
+                }
+                return _xblockexpression_1;
+              }
+            };
+          IterableExtensions.<ExecutionScope, Sequence>fold(exitScopes, caseSeq, _function_2);
+          EList<Step> _steps_4 = caseSeq.getSteps();
+          boolean _isEmpty = _steps_4.isEmpty();
           boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
           if (_operator_not) {
             EList<StateCase> _cases = sSwitch.getCases();
