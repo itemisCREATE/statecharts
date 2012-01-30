@@ -24,24 +24,55 @@ You install the Yakindu Plug-Ins from the update site: http://updates.yakindu.co
 *** Yakindu SCT 2
 *** Yakindu SCT 2 SDK
 
-!{width: 50%}images/updatesite_4.jpg!
+!images/updatesite_4.jpg!
 
-The Xtext integration utilities provide Xtext functionality for Yakindu. Additionally to the base integration also GMF and JFace integration is provided here. For more details check [[Xtext GMF Integration (XGI)]] and [[Xtext JFace Integration (XJI)]].
+The Xtext integration utilities provide Xtext functionality for Yakindu. Additionally to the base integration also GMF and JFace integration is provided here. For more details check the parts "XGI":#XGI and "XJI":#XJI.
 
 Under Yakindu SCT 2 you can select what code generators you need and if you need the Yakindu SCT2 SDK (for developers). For users only the Yakindu SCT 2 is sufficient.
 
-h2. The Yakindu perspective
+h2. Yakindu SC Modeling perspective
 
-h2. Yakindu project
+For state machine modeling purposes open the Yakindu *SC Modeling* perspective by choosing *Window* - *Open Perspective* - *SC Modeling*. This perspective is optimized for statechart modeling. It consists of 
+* <a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cnav.htm">Project Explorer</a> on the left
+* <a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/coutline.htm">Outline</a> View on the right
+* YAKINDU Statechart Editor at the top
+* <a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cprbview.htm">Problems</a> and <a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cpropview.htm">Properties View</a> at the bottom
 
-h2. Editors
+!images/sc_modeling_perspective.jpg!
 
-h2. Views
+
+h2. Yakindu SC Simulation perspective
+
+To simulate a state machine use the Yakindu *SC Simulation* perspective by choosing *Window* - *Open Perspective* - *SC Simulation*. This perspective is optimized for simulation purposes and consists of:
+
+* <a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cnav.htm">Project Explorer</a> on the left
+* <a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/coutline.htm">Outline</a> view on the right top
+* Simulation View on the right bottom
+* Debug view at the top
+* YAKINDU Statechart Editor at the bottom
+
+!{width:70%}images/sc_simulation_perspective.jpg!
+
+h2. Yakindu Xpand Generator Project
+
+In the context of model driven software development generators play an important role. The generator transforms the model to either another model or text like code. Yakindu generators can be writen in different languages. One is Xpand. By choosing *File* - *New* - *Other...* - *YAKINDU Xpand Generator Project* you create a project optimized for writing a generator in Xpand. For more details regarding Xpand see <a href="PLUGINS_ROOT/org.eclipse.xpand.doc/help/index.html">Xpand Documentation</a>.
+
+!images/new_xpand_project_simple.jpg!
+
+All you need to do is to give it a speaking name and click *Finish*. The setting *Configure for Plugin Export* is an option for plugin developers and can be neglected here.
+
+
+
+h2. Yakindu Xtend2/Java Generator Project
+
+h2. YAKINDU Statechart Editor
+
+h2. Simulation View
 
 h2. Wizards
 
 h2. Generators
 
-h2. Xtext GMF Integration (XGI)
+h2. XGI
 
-h2. Xtext JFace Integration (XJI)
+h2. XJI

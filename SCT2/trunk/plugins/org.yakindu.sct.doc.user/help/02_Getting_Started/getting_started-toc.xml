@@ -5,13 +5,15 @@
 			<topic href="help/02_Getting_Started/getting_started.html#Prerequisites" label="Prerequisites"></topic>
 			<topic href="help/02_Getting_Started/getting_started.html#InstallingtheYAKINDUPlugIns" label="Installing the YAKINDU-Plug-Ins"></topic>
 		</topic>
-		<topic href="help/02_Getting_Started/getting_started.html#TheYakinduperspective" label="The Yakindu perspective"></topic>
-		<topic href="help/02_Getting_Started/getting_started.html#Yakinduproject" label="Yakindu project"></topic>
+		<topic href="help/02_Getting_Started/getting_started.html#YakinduSCModelingperspective" label="Yakindu SC Modeling perspective"></topic>
+		<topic href="help/02_Getting_Started/getting_started.html#YakinduSCSimulationperspective" label="Yakindu SC Simulation perspective"></topic>
+		<topic href="help/02_Getting_Started/getting_started.html#YakinduXpandGeneratorProject" label="Yakindu Xpand Generator Project"></topic>
+		<topic href="help/02_Getting_Started/getting_started.html#YakinduXtend2JavaGeneratorProject" label="Yakindu Xtend2/Java Generator Project"></topic>
 		<topic href="help/02_Getting_Started/getting_started.html#Editors" label="Editors"></topic>
 		<topic href="help/02_Getting_Started/getting_started.html#Views" label="Views"></topic>
 		<topic href="help/02_Getting_Started/getting_started.html#Wizards" label="Wizards"></topic>
 		<topic href="help/02_Getting_Started/getting_started.html#Generators" label="Generators"></topic>
-		<topic href="help/02_Getting_Started/getting_started.html#XtextGMFIntegrationXGI" label="Xtext GMF Integration (XGI)"></topic>
-		<topic href="help/02_Getting_Started/getting_started.html#XtextJFaceIntegrationXJI" label="Xtext JFace Integration (XJI)"></topic>
+		<topic href="help/02_Getting_Started/getting_started.html#XGI" label="XGI"></topic>
+		<topic href="help/02_Getting_Started/getting_started.html#XJI" label="XJI"></topic>
 	</topic>
 </toc>
