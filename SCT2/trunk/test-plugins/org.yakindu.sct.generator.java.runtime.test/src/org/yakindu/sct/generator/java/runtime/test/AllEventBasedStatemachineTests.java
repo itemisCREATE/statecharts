@@ -20,7 +20,8 @@ import org.junit.runners.Suite;
 		TestExpressionEventBasedStatemachine.class,
 		TestHierarchyEventBasedStatemachine.class,
 		TestParallelRegionsEventBasedStatemachine.class,
-		TestShallowHistoryEventBasedStatemachine.class
+		TestShallowHistoryEventBasedStatemachine.class,
+		TestDeepHistoryEventBasedStatemachine.class
 		})
 
 public class AllEventBasedStatemachineTests {
