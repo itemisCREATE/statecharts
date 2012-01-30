@@ -20,6 +20,7 @@ import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.debug.ui.contexts.DebugContextEvent;
 import org.eclipse.debug.ui.contexts.IDebugContextListener;
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.layout.GridDataFactory;
@@ -30,6 +31,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Font;
@@ -75,6 +77,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 	private Label lblVirtualTime;
 	private Label lblRealTime;
 	private ClockUpdater clockUpdater;
+	private Label executionType;
 
 	public SimulationView() {
 		DebugUITools.getDebugContextManager().addDebugContextListener(this);
@@ -97,8 +100,17 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 	@Override
 	public void createPartControl(Composite parent) {
 		parent.setLayout(new FillLayout(SWT.VERTICAL));
-		createViewer(parent);
-		createTimeScalingSection(parent);
+		SashForm sashForm = new SashForm(parent, SWT.VERTICAL | SWT.SMOOTH);
+		sashForm.setSashWidth(5);
+		sashForm.setBackground(ColorConstants.white);
+		sashForm.setLayout(new FillLayout());
+		Composite top = kit.createComposite(sashForm);
+		top.setLayout(new FillLayout(SWT.VERTICAL));
+		Composite bottom = kit.createComposite(sashForm);
+		bottom.setLayout(new FillLayout(SWT.VERTICAL));
+		sashForm.setWeights(new int[] { 3, 2 });
+		createViewer(top);
+		createTimeScalingSection(bottom);
 		hookActions();
 		setActiveSession();
 	}
@@ -253,7 +265,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 	}
 
 	private void setInput(SCTDebugTarget newTarget) {
-		refreshInput(newTarget);
+		refreshViewerInput(newTarget);
 		clockUpdater.setTerminated(false);
 		new Thread(clockUpdater).start();
 	}
@@ -279,7 +291,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		}
 	}
 
-	private void refreshInput(final SCTDebugTarget debugTarget) {
+	private void refreshViewerInput(final SCTDebugTarget debugTarget) {
 		IExecutionFacade facade = (IExecutionFacade) debugTarget
 				.getAdapter(IExecutionFacade.class);
 		viewer.setInput(facade.getExecutionContext());
@@ -313,16 +325,14 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 						if (lblVirtualTime != null
 								&& !lblVirtualTime.isDisposed()) {
 							String text = DurationFormatUtils.formatDuration(
-									virtualClock.getTime()
+									virtualClock.getVirtualTime()
 											- virtualClock.getStartTime(),
 									PATTERN);
 							lblVirtualTime.setText(text);
 						}
 						if (lblRealTime != null && !lblRealTime.isDisposed()) {
 							String text = DurationFormatUtils.formatDuration(
-									System.currentTimeMillis()
-											- virtualClock.getStartTime(),
-									PATTERN);
+									virtualClock.getRealTime(), PATTERN);
 							lblRealTime.setText(text);
 						}
 					}
