@@ -19,7 +19,8 @@ import org.junit.runners.Suite;
 		TestLocalActionsEventBasedStatemachine.class,
 		TestExpressionEventBasedStatemachine.class,
 		TestHierarchyEventBasedStatemachine.class,
-		TestParallelRegionsEventBasedStatemachine.class
+		TestParallelRegionsEventBasedStatemachine.class,
+		TestShallowHistoryEventBasedStatemachine.class
 		})
 
 public class AllEventBasedStatemachineTests {

@@ -19,7 +19,8 @@ import org.junit.runners.Suite;
 		TestLocalActionsCycleBasedStatemachine.class,
 		TestExpressionCycleBasedStatemachine.class,
 		TestHierarchyCycleBasedStatemachine.class,
-		TestParallelRegionsCycleBasedStatemachine.class
+		TestParallelRegionsCycleBasedStatemachine.class,
+		TestShallowHistoryCycleBasedStatemachine.class
 		})
 
 public class AllCycleBasedStatemachineTests {
