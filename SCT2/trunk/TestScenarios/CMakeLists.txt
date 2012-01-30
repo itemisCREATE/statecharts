@@ -27,6 +27,7 @@ add_subdirectory(src-gen-c-sgltn/Test_Hierarchy)
 add_subdirectory(src-gen-c-sgltn/Test_ParallelRegions)
 add_subdirectory(src-gen-c-sgltn/Test_Transition)
 add_subdirectory(src-gen-c-sgltn/Test_ShallowHistory)
+add_subdirectory(src-gen-c-sgltn/Test_DeepHistory)
 add_subdirectory(src-gen-c-sgltn/Test_LocalActions)
 
 
@@ -36,6 +37,7 @@ add_subdirectory(test-c-sgltn/Test_Hierarchy)
 add_subdirectory(test-c-sgltn/Test_ParallelRegions)
 add_subdirectory(test-c-sgltn/Test_Transition)
 add_subdirectory(test-c-sgltn/Test_ShallowHistory)
+add_subdirectory(test-c-sgltn/Test_DeepHistory)
 add_subdirectory(test-c-sgltn/Test_LocalActions)
 
 else (COMPILE_SINGLETON)
@@ -47,6 +49,7 @@ add_subdirectory(src-gen-c/Test_Hierarchy)
 add_subdirectory(src-gen-c/Test_ParallelRegions)
 add_subdirectory(src-gen-c/Test_Transition)
 add_subdirectory(src-gen-c/Test_ShallowHistory)
+add_subdirectory(src-gen-c/Test_DeepHistory)
 add_subdirectory(src-gen-c/Test_LocalActions)
 
 
@@ -56,6 +59,7 @@ add_subdirectory(test-c/Test_Hierarchy)
 add_subdirectory(test-c/Test_ParallelRegions)
 add_subdirectory(test-c/Test_Transition)
 add_subdirectory(test-c/Test_ShallowHistory)
+add_subdirectory(test-c/Test_DeepHistory)
 add_subdirectory(test-c/Test_LocalActions)
 
 if (CMAKE_COMPILER_IS_GNUCC)
@@ -64,6 +68,6 @@ add_subdirectory(test-c/TimingTest_ParallelRegions)
 
 endif (CMAKE_COMPILER_IS_GNUCC)
 
-add_subdirectory(test-cppwrapper/InterfaceTest)
+# add_subdirectory(test-cppwrapper/InterfaceTest)
 
 endif (COMPILE_SINGLETON)

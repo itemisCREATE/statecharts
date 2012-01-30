@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
   <sgraph:Statechart xmi:id="_wXk3MAuIEeGVgpgRVT1uXw" name="Test_Expression" specification="interface:&#xA;in event event1 : integer&#xA;out event event2 : real&#xA;in event event3&#xA;var var1 : integer = 6&#xA;var var2 : integer = 123&#xA;var var3 : real = 19.4&#xA;var var4 : real = 43.3&#xA;var var5 : boolean = false&#xA;&#xA;interface other:&#xA;var var1 : boolean&#xA;var var2 : real&#xA;var var3 : integer&#xA;&#xA;&#xA;">
-    <regions xmi:id="_wXmFUguIEeGVgpgRVT1uXw" name="main region">
+    <regions xmi:id="_wXmFUguIEeGVgpgRVT1uXw" name="mainRegion">
       <vertices xsi:type="sgraph:Entry" xmi:id="_wXpIoQuIEeGVgpgRVT1uXw">
         <outgoingTransitions xmi:id="_wXrk4wuIEeGVgpgRVT1uXw" target="_wXqWwAuIEeGVgpgRVT1uXw"/>
       </vertices>
