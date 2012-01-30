@@ -36,12 +36,12 @@ typedef struct {
   uint32_t   parallelPosition; 
 } Statemachine_cy ;
 
-extern void statemachine_cy_init(Statemachine_cy* handle, uint16_t maxStates,
+extern void statemachine_cy_init(Statemachine_cy* handle, uint16_t maxStates, uint16_t maxHistorys,
 		uint16_t maxEvents,	Timer* timer, EventPool* eventPool);
 
 extern void statemachine_cy_init_staticData(Statemachine_cy* handle,
 		uint16_t maxEvents, Timer* timer, uint32_t* staticStateData,
-		sc_boolean* staticEventSet, EventType* eventTypes, _Event** staticListPtr, EventPool* eventPool);
+		sc_boolean* staticEventSet, EventType* eventTypes, _Event** staticListPtr, EventPool* eventPool, uint16_t maxStates);
 
 extern void statemachine_cy_destruct(Statemachine_cy* handle);
 

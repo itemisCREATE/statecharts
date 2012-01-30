@@ -29,17 +29,17 @@ extern "C" {
 typedef struct {
 
 	uint32_t* state;
-	uint16_t statePtr;
+	uint32_t* history;
 
-	Timer* timer;
+	Timer*    timer;
 	sc_boolean isStaticData;
 
 } StatemachineBase;
 
 
-extern void statemachineBase_init(StatemachineBase* handle, uint16_t maxStates, Timer* timer);
+extern void statemachineBase_init(StatemachineBase* handle, uint16_t maxStates, uint16_t maxHistorys, Timer* timer);
 extern void statemachineBase_init_staticData(StatemachineBase* handle,
-		uint32_t* staticData, Timer* timer);
+		uint32_t* staticData, uint16_t maxStates, Timer* timer);
 
 extern void statemachineBase_destruct(StatemachineBase* handle);
 

@@ -34,6 +34,11 @@ extern "C" {
 #endif 
 
 #define MAX_PARALLEL_STATES «this.stateVector.size»
+«IF historyVector == null»
+#define MAX_HISTORY_STATES 0
+«ELSE»
+#define MAX_HISTORY_STATES «historyVector.size»
+«ENDIF»
 
 typedef void(*raiseEventFPtr)(_Event* evPtr);
 

@@ -19,25 +19,28 @@ Templates for the main statechart c file.
 #include "StatemachineBase.h"
 #include <stdlib.h>
 
-void statemachineBase_init(StatemachineBase* handle, uint16_t maxStates, Timer* _timer)
+void statemachineBase_init(StatemachineBase* handle, uint16_t maxStates, uint16_t maxHistorys, Timer* _timer)
 {
 	handle->isStaticData = bool_false;
 	handle->timer = _timer;
 	handle->state = malloc(sizeof(uint32_t)*maxStates); /* memory allocation for all states */
-	handle->statePtr = 0; /* actual state referencer */
+	handle->history = malloc(sizeof(uint32_t)*maxHistorys); /* memory allocation for all histories */
 }
 
-void statemachineBase_init_staticData(StatemachineBase* handle, uint32_t* staticData, Timer* _timer)
+/* TODO: this concept needs rework */
+void statemachineBase_init_staticData(StatemachineBase* handle, uint32_t* staticData, uint16_t maxStates, Timer* _timer)
 {
 	handle->isStaticData = bool_true;
 	handle->timer = _timer;
 	handle->state = staticData;
-	handle->statePtr = 0; /* actual state referencer */
+	handle->history = staticData + maxStates;
 }
 
 void statemachineBase_destruct(StatemachineBase* handle) {
-	if (!handle->isStaticData)
+	if (!handle->isStaticData) {
 		free(handle->state);
+		free(handle->history);	
+	}
 }
 
 uint32_t statemachineBase_getState(StatemachineBase* handle, uint16_t pos)
