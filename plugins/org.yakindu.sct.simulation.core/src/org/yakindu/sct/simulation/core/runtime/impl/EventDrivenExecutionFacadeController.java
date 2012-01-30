@@ -33,7 +33,7 @@ public class EventDrivenExecutionFacadeController extends
 	private Thread cycleRunner;
 
 	private BlockingQueue<ExecutionEvent> events;
-	
+
 	public EventDrivenExecutionFacadeController(IExecutionFacade facade) {
 		super(facade);
 		facade.getExecutionContext().addExecutionContextListener(this);
@@ -73,7 +73,9 @@ public class EventDrivenExecutionFacadeController extends
 			try {
 				while (!terminated && !suspended) {
 					events.take();
-					facade.runCycle();
+					if (facade.getExecutionContext().getRaisedEvents().size() > 0) {
+						facade.runCycle();
+					}
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -82,6 +84,6 @@ public class EventDrivenExecutionFacadeController extends
 	}
 
 	public void timeScaleFactorChanged(double oldFactor, double newFactor) {
-		
+
 	}
 }
