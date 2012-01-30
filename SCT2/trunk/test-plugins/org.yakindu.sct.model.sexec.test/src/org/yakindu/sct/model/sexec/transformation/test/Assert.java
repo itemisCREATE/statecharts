@@ -17,6 +17,7 @@ import java.util.Set;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.HistoryEntry;
@@ -198,7 +199,7 @@ public class Assert {
 
 	public static void assertedOrder(Step step,
 			Collection<? extends ExecutionState> currentStates,
-			List<? extends StepNode> requiredSteps) {
+			List<? extends AbstractStep> requiredSteps) {
 		assertedOrder_intern(step, currentStates, requiredSteps);
 		if (!requiredSteps.isEmpty()) {
 			fail("Step was missing: " + requiredSteps.toString());
@@ -207,7 +208,7 @@ public class Assert {
 
 	private static void assertedOrder_intern(Step step,
 			Collection<? extends ExecutionState> currentStates,
-			List<? extends StepNode> requiredSteps) {
+			List<? extends AbstractStep> requiredSteps) {
 		if (requiredSteps.isEmpty()) {
 			return;
 		}
@@ -216,7 +217,7 @@ public class Assert {
 		Iterable<Step> next = null;
 		if (requiredSteps.get(0).matches(step)) {
 			found = true;
-			StepNode matched = requiredSteps.remove(0);
+			AbstractStep matched = requiredSteps.remove(0);
 			if (matched.isLeaf()) {
 				return;
 			}
@@ -236,7 +237,7 @@ public class Assert {
 
 	protected static Iterable<Step> findNext(Step step,
 			Collection<? extends ExecutionState> currentStates,
-			List<? extends StepNode> requiredSteps) {
+			List<? extends AbstractStep> requiredSteps) {
 		if (step instanceof Sequence) {
 			return ((Sequence) step).getSteps();
 		} else if (step instanceof Call) {
@@ -258,7 +259,16 @@ public class Assert {
 		return null;
 	}
 
-	public static class StepNode {
+	public abstract static class AbstractStep {
+		public abstract boolean matches(Step s);
+
+		public abstract boolean isLeaf();
+
+		public abstract Iterable<Step> next();
+
+	}
+
+	public static class StepNode extends AbstractStep {
 		public final Step step;
 		protected boolean leaf;
 
@@ -312,6 +322,33 @@ public class Assert {
 				return Collections.singleton(((HistoryEntry) step)
 						.getInitialStep());
 			}
+		}
+	}
+
+	public static class StepSaveHistory extends AbstractStep {
+		private final ExecutionRegion region;
+
+		public StepSaveHistory(ExecutionRegion region) {
+			this.region = region;
+		}
+
+		@Override
+		public boolean matches(Step s) {
+			if (s instanceof SaveHistory
+					&& ((SaveHistory) s).getRegion() == region) {
+				return true;
+			}
+			return false;
+		}
+
+		@Override
+		public boolean isLeaf() {
+			return true;
+		}
+
+		@Override
+		public Iterable<Step> next() {
+			return null;
 		}
 	}
 }

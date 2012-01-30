@@ -40,6 +40,8 @@ import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
+import com.google.common.collect.Lists;
+
 public class ModelSequencerHistoryTest extends ModelSequencerTest {
 
 	@Test
@@ -115,4 +117,74 @@ public class ModelSequencerHistoryTest extends ModelSequencerTest {
 		assertTrue(saveStep.eClass().toString(),
 				saveStep instanceof SaveHistory);
 	}
+
+	@Test
+	public void testDeepHistorySave() {
+		Statechart sc = _createStatechart("sc");
+		{
+			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
+			VariableDefinition v1 = _createVariableDefinition("v1",
+					TYPE_INTEGER, s_scope);
+			Region r = _createRegion("r", sc);
+			{
+				Entry r_entry = _createEntry(EntryKind.DEEP_HISTORY, null, r);
+				State s1 = _createState("s1", r);
+				State s2 = _createState("s2", r);
+				{
+					_createEntryAssignment(v1, s2, 3);
+					Region r2 = _createRegion("r2", s2);
+					{
+						Entry e = _createEntry(EntryKind.INITIAL, null, r2);
+						Entry history = _createEntry(EntryKind.SHALLOW_HISTORY,
+								"history", r2);
+
+						State s3 = _createState("s3", r2);
+						{
+							_createEntryAssignment(v1, s3, 4);
+						}
+						State s4 = _createState("s4", r2);
+						{
+							Region r4 = _createRegion("r4", s4);
+							{
+								Entry e4 = _createEntry(EntryKind.INITIAL,
+										null, r2);
+								State s5 = _createState("s5", r4);
+								_createTransition(e4, s5);
+								_createTransition(s5, s1);
+							}
+						}
+						_createTransition(e, s3);
+						_createTransition(history, s3);
+						_createTransition(s3, s4);
+						_createTransition(s1, history);
+					}
+				}
+				_createTransition(r_entry, s1);
+				_createTransition(s1, s2);
+			}
+		}
+
+		ExecutionFlow flow = sequencer.transform(sc);
+
+		ExecutionState _s1 = flow.getStates().get(0);
+		assertEquals("sc.r.s1", _s1.getName());
+		ExecutionState _s2 = flow.getStates().get(1);
+		assertEquals("sc.r.s2", _s2.getName());
+		ExecutionState _s4 = flow.getStates().get(3);
+		assertEquals("sc.r.s2.r2.s4", _s4.getName());
+		ExecutionState _s5 = flow.getStates().get(4);
+		assertEquals("sc.r.s2.r2.s4.r4.s5", _s5.getName());
+
+		Step effect = _s5.getReactions().get(0).getEffect();
+
+		assertedOrder(effect, Lists.newArrayList(_s5), Lists.newArrayList(
+		//
+		// new StepSaveHistory((ExecutionRegion) _s2.getSuperScope()),//
+				new StepSaveHistory((ExecutionRegion) _s4.getSuperScope()),//
+				new StepSaveHistory((ExecutionRegion) _s5.getSuperScope()),//
+				new StepLeaf(_s5.getExitSequence().getSteps().get(0)),//
+				new StepLeaf(_s1.getEnterSequence().getSteps().get(0))//
+				));
+	}
+
 }
