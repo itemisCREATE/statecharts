@@ -20,12 +20,12 @@ Templates for the main statechart c file.
 #include "definition.h"
 #include "Statemachine_cy.h"
 
-void statemachine_cy_init(Statemachine_cy* handle, uint16_t maxStates,
+void statemachine_cy_init(Statemachine_cy* handle, uint16_t maxStates, uint16_t maxHistorys,
 		uint16_t maxEvents, Timer* timer, EventPool* eventPool) {
 
 	uint32_t i;
 
-	statemachineBase_init((StatemachineBase*) handle, maxStates, timer);
+	statemachineBase_init((StatemachineBase*) handle, maxStates, maxHistorys, timer);
 	eventSet_init(&handle->eventSet, maxEvents);
 
 	/* This is only a place for the pointers to the actual Events */
@@ -44,9 +44,9 @@ void statemachine_cy_init(Statemachine_cy* handle, uint16_t maxStates,
 
 void statemachine_cy_init_staticData(Statemachine_cy* handle,
 		uint16_t maxEvents, Timer* timer, uint32_t* staticStateData,
-		sc_boolean* staticEventSet, EventType* eventTypes, _Event** staticListPtr, EventPool* eventPool) {
+		sc_boolean* staticEventSet, EventType* eventTypes, _Event** staticListPtr, EventPool* eventPool, uint16_t maxStates) {
 	statemachineBase_init_staticData((StatemachineBase*) handle,
-			staticStateData, timer);
+			staticStateData, maxStates, timer);
 	eventSet_init_staticData(&handle->eventSet, maxEvents, staticEventSet, eventTypes);
 
 	/* Hand out event List */

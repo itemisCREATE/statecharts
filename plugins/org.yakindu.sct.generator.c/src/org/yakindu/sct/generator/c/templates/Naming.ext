@@ -49,8 +49,10 @@ cached String functionName(Step step) :
 	(step.isExitAction()) ? step.exitActionFunctionName() : (
 	(step.isEnterSequence()) ? step.enterSequenceFunctionName() : ( 
 	(step.isExitSequence()) ? step.exitSequenceFunctionName() : ( 
-	(step.isReactSequence()) ? step.reactSequenceFunctionName() :
-	" !! unknown function type !!" ))))));
+	(step.isReactSequence()) ? step.reactSequenceFunctionName() : (
+	(step.isShallowEnterSequence()) ? step.shallowEnterSequenceFunctionName() : (
+	(step.isDeepEnterSequence()) ? step.deepEnterSequenceFunctionName() : (
+	" !! unknown function type !!" )))))))));
 
 
 ExecutionState state(Step this) : (ExecutionState) this.eContainer;
@@ -63,6 +65,8 @@ boolean isExitAction(Step step) : ExecutionState.isInstance(step.eContainer) && 
 boolean isEnterSequence(Step step) : ExecutionScope.isInstance(step.eContainer) && step.scope().enterSequence == step;
 boolean isExitSequence(Step step) : ExecutionScope.isInstance(step.eContainer) && step.scope().exitSequence == step;
 boolean isReactSequence(Step step) : Sequence.isInstance(step) && step.name == "react";
+boolean isDeepEnterSequence(Step step) : Sequence.isInstance(step) && step.name == "deepEnterSequence";
+boolean isShallowEnterSequence(Step step) : Sequence.isInstance(step) && step.name == "shallowEnterSequence";
 
 
 /* If this is a singleton, we do not need any additional information for the 
@@ -100,6 +104,12 @@ String enterSequenceFunctionName(Step this) :
 String exitSequenceFunctionName(Step this) :  
 	  this.stName() + "_exitSequence_" + this.getStateName();
 
+String shallowEnterSequenceFunctionName(Step this) :  
+	  this.stName() + "_shallowEnterSequence_" + this.getStateName();
+
+String deepEnterSequenceFunctionName(Step this) :  
+	  this.stName() + "_deepEnterSequence_" + this.getStateName();
+
 String reactSequenceFunctionName(Step this) :  
 	  this.stName() + "_react_" + this.getStateName();
 
@@ -132,12 +142,19 @@ String enterSequenceFunction(Step this) :
 String exitSequenceFunction(Step this) :  
 	  this.exitSequenceFunctionName() + "("+ handleAddition() + ")";
 
+String shallowEnterFunction(Step this) :  
+	  this.shallowEnterSequenceFunctionName() + "("+ handleAddition() + ")";
+
+String deepEnterFunction(Step this) :  
+	  this.deepEnterSequenceFunctionName() + "("+ handleAddition() + ")";
+
 /* for some reason, this is handled completely different */ 
 String reactFunction(Reaction this) :  
 	  this.reactFunctionName() + "("+ handleAddition() + ")";
 
 String reactFunction(ExecutionNode this) :  
 	  this.reactFunctionName() + "("+ handleAddition() + ")";
+
 
 
 String getStateName(Step this) : this.eContainer.getStateName(); 

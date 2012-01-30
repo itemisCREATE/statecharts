@@ -19,14 +19,37 @@ Templates for the main statechart c file.
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
  
 «DEFINE ActionCode FOR Step»
-//#warning ActionCode for Step not defined 
+#warning ActionCode for Step not defined 
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR SaveHistory»
+«IF this.comment != null -»
+	/* «this.comment» */
+«ENDIF»
+	«statemachineHandleName()»->base.base.history[«region.historyVector.offset»] = «statemachineHandleName()»->base.base.state[«region.stateVector.offset»];
+«ENDDEFINE»
+
+«DEFINE ActionCode FOR HistoryEntry»
+«IF this.comment != null -»
+	/* «this.comment» */
+«ENDIF»
+if («statemachineHandleName()»->base.base.history[«region.historyVector.offset»] != last_state) {
+	«EXPAND ActionCode FOR historyStep-»
+} else {
+	«EXPAND ActionCode FOR initialStep-»
+}
+
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR StateSwitch»
 «IF this.comment != null -»
 	/* «this.comment» */
 «ENDIF -»
+«IF this.historyRegion != null»
+	switch(((StatemachineBase*)«statemachineHandleName()»)->history[ «historyRegion.historyVector.offset» ]) {
+«ELSE»
 	switch(((StatemachineBase*)«statemachineHandleName()»)->state[ «this.stateConfigurationIdx» ]) {
+«ENDIF»
 «FOREACH this.cases AS caseid -»
 		case _«caseid.state.simpleName» : {
 «EXPAND ActionCode FOR caseid.step-»
@@ -130,14 +153,12 @@ sc_boolean «r.check.checkFunction()» {
 «ENDDEFINE»
 
 «DEFINE StatementMethodsProto FOR ExecutionNode -»
-/* statement method prototypes */
   «FOREACH reactions.select(e|e.effect.caller.size > 0) AS r -»
 static void «r.reactFunction()»;
  «ENDFOREACH -»
 «ENDDEFINE»
 
 «DEFINE StatementMethodsImplement FOR ExecutionNode -»
-/* statement method implementations */
   «FOREACH reactions.select(e|e.effect.caller.size > 0) AS r -»
 void «r.reactFunction()»
 {   
@@ -224,13 +245,40 @@ static void «this.exitSequence.exitSequenceFunction()»;
 «IF this.exitSequence != null && exitSequence.caller.size > 0 -»
 void «this.exitSequence.exitSequenceFunction()»
 {
-«EXPAND ActionCode FOR this.exitSequence»
+«EXPAND ActionCode FOR exitSequence»
 }
 «ENDIF -»
 «ENDDEFINE»
 
+«DEFINE ShallowEnterSequenceProto FOR ExecutionRegion -»
+«IF shallowEnterSequence != null && shallowEnterSequence.caller.size > 0 -»
+static void «shallowEnterSequence.shallowEnterFunction()»;
+«ENDIF -»
+«ENDDEFINE»
 
+«DEFINE ShallowEnterSequenceImplement FOR ExecutionRegion -»
+«IF shallowEnterSequence != null && shallowEnterSequence.caller.size > 0 -»
+void «shallowEnterSequence.shallowEnterFunction()»
+{
+«EXPAND ActionCode FOR shallowEnterSequence»
+}
+«ENDIF -»
+«ENDDEFINE»
 
+«DEFINE DeepEnterSequenceProto FOR ExecutionRegion -»
+«IF deepEnterSequence != null && deepEnterSequence.caller.size > 0 -»
+static void «deepEnterSequence.deepEnterFunction()»;
+«ENDIF -»
+«ENDDEFINE»
+
+«DEFINE DeepEnterSequenceImplement FOR ExecutionRegion -»
+«IF deepEnterSequence != null && deepEnterSequence.caller.size > 0 -»
+void «deepEnterSequence.deepEnterFunction()»
+{
+«EXPAND ActionCode FOR deepEnterSequence»
+}
+«ENDIF -»
+«ENDDEFINE»
 
 «DEFINE file FOR ExecutionFlow»
 «FILE StName()+'.c'»
@@ -256,6 +304,8 @@ static «StName()»* «statemachineHandleName()»;
 «EXPAND ExitSequenceProto FOREACH this.states -»
 «EXPAND EnterSequenceProto FOREACH this.regions -»
 «EXPAND ExitSequenceProto FOREACH this.regions -»
+«EXPAND ShallowEnterSequenceProto FOREACH this.regions -»
+«EXPAND DeepEnterSequenceProto FOREACH this.regions -»
 «EXPAND ReactMethodsProto FOREACH this.states -»
 «EXPAND ReactMethodsProto FOREACH this.nodes -»
 
@@ -269,6 +319,8 @@ static «StName()»* «statemachineHandleName()»;
 «EXPAND ExitSequenceImplement FOREACH this.states -»
 «EXPAND EnterSequenceImplement FOREACH this.regions -»
 «EXPAND ExitSequenceImplement FOREACH this.regions -»
+«EXPAND ShallowEnterSequenceImplement FOREACH this.regions -»
+«EXPAND DeepEnterSequenceImplement FOREACH this.regions -»
 «EXPAND ReactMethodsImplement FOREACH this.states -»
 «EXPAND ReactMethodsImplement FOREACH this.nodes -»
 
@@ -279,12 +331,15 @@ void «stName()»_init(«this.handleAdditionComma()» Timer* timer, EventPool* event
 «IF this.isSingleton()»
 	«statemachineHandleName()» = &static_«statemachineHandleName()»;
 «ENDIF»
-	statemachine_cy_init(&«statemachineHandleName()»->base, MAX_PARALLEL_STATES,
+	statemachine_cy_init(&«statemachineHandleName()»->base, MAX_PARALLEL_STATES, MAX_HISTORY_STATES,
 			event_last, timer, eventPool);
 
 	for (i = 0; i<MAX_PARALLEL_STATES; ++i)
 		«statemachineHandleName()»->base.base.state[i] = last_state;
 			
+	for (i = 0; i<MAX_HISTORY_STATES; ++i)
+		«statemachineHandleName()»->base.base.history[i] = last_state;
+
 «FOREACH this.scopes.getUsableScopes() AS interface -»
 «IF this.isSingleton() -»
      «interface.interfaceName()»_set_interface_singleton(&«statemachineHandleName()»->«interface.interfaceObjectName()»);
