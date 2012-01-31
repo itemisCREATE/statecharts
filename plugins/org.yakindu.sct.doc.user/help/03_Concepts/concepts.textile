@@ -2,7 +2,7 @@ h1. Yakindu Statechart tool concepts
 
 h2. Model, Validate, Simulate, Generate
 
-h2. Stext
+h2. SText
 
 
 

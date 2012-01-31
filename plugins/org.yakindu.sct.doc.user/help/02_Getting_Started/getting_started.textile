@@ -69,14 +69,26 @@ h2. Yakindu Xtend2/Java Generator Project
 
 The generator that transforms the state machine model into code or documentation can be written in Xtend2 and Java. Find a detailed description on Xtend2 in the "Xtend2 documentation":PLUGIN_ROOT/org.eclipse.xtext.doc/contents/01-Xtend_Introduction.html. Yakindu comes with a predefined project setting for such projects. To create such a project choose *File* - *New* - *Other...* - *YAKINDU Xtend2/Java Generator Project*. 
 
-!images/new_java_xtend_project!X
-Give the project a speaking full qualified name and name also the generator java class with a full qualified name. If you also want to use Xtend activate the checkbox *Use Xtend*.
+!images/new_java_xtend_project.jpg!X
+
+Give the project a speaking full qualified name and name also the generator java class with a full qualified name. If you also want to use Xtend activate the checkbox *Use Xtend*. A new project is created with an initial xtend file and an initial java class.
 
 h2. YAKINDU Statechart Editor
 
+The YAKINDU Statechart editor is used to create or modify state models. The editor automatically opens on .sct files. To create a new YAKINDU statechart model choose *File* - *New* - *Other...* - *YAKINDU Statechart model*. Give it a speaking name and click *Finish*. The newly created model is opened in the statechart editor. If you haven't already opened the SC Modeling perspective you are asked to do so.
+
+!images/sc_editor_01.jpg!
+
+
+The editor consists of three parts: the graphic canvas where the state machine is designed, the palette on the right that owns the elements to design the state machine and an integrated text editor on the left. This can be used to define internal behavior of states e.g. The language used here is called SText. The SText reference explains this language.
+
+Warnings or errors are displayed directly on the elements that cause the problems. For more details about the problems open the Problems View if it is not already open.
+
 h2. Simulation View
 
-h2. Wizards
+
+
+h2. YAKINDU Project Natures
 
 h2. Generators
 
