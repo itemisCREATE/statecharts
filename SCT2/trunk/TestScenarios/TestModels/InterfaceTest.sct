@@ -10,7 +10,7 @@
         <outgoingTransitions xmi:id="_Wx7eYAn2EeGuZq6TN7cDtg" specification="other.event3[var3 == 1]" target="_N8IiYAn2EeGuZq6TN7cDtg"/>
         <outgoingTransitions xmi:id="_dQp1UAn2EeGuZq6TN7cDtg" specification="third.event5[var1 == true]" target="_b6-b0An2EeGuZq6TN7cDtg"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_DQwk0An2EeGuZq6TN7cDtg" specification="entry / raise event2 : 22;" name="state2" incomingTransitions="_Fp0t8An2EeGuZq6TN7cDtg">
+      <vertices xsi:type="sgraph:State" xmi:id="_DQwk0An2EeGuZq6TN7cDtg" specification="entry / raise event2 : 22;&#xD;&#xA;exit / other.v1 = 10;" name="state2" incomingTransitions="_Fp0t8An2EeGuZq6TN7cDtg">
         <outgoingTransitions xmi:id="_IduY8An2EeGuZq6TN7cDtg" specification="event1" target="_p-Rz9wn1EeGuZq6TN7cDtg"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_N8IiYAn2EeGuZq6TN7cDtg" specification="entry / raise other.event4;" name="state3" incomingTransitions="_Wx7eYAn2EeGuZq6TN7cDtg">
@@ -54,7 +54,7 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_p-SbAgn1EeGuZq6TN7cDtg" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_p-SbAwn1EeGuZq6TN7cDtg"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_p-TpIQn1EeGuZq6TN7cDtg"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_p-TpIgn1EeGuZq6TN7cDtg" x="94" y="69"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_p-TpIgn1EeGuZq6TN7cDtg" x="54" y="69" width="92"/>
         </children>
         <children xmi:id="_DQ-AMAn2EeGuZq6TN7cDtg" type="State" element="_DQwk0An2EeGuZq6TN7cDtg">
           <children xsi:type="notation:DecorationNode" xmi:id="_DQ-nQAn2EeGuZq6TN7cDtg" type="StateName">
@@ -70,7 +70,7 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_DQ-AMQn2EeGuZq6TN7cDtg" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_DQ-AMgn2EeGuZq6TN7cDtg"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_DQ_OUQn2EeGuZq6TN7cDtg"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_DQ-AMwn2EeGuZq6TN7cDtg" x="329" y="34" width="192"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_DQ-AMwn2EeGuZq6TN7cDtg" x="329" y="34" width="221"/>
         </children>
         <children xmi:id="_N8RsUAn2EeGuZq6TN7cDtg" type="State" element="_N8IiYAn2EeGuZq6TN7cDtg">
           <children xsi:type="notation:DecorationNode" xmi:id="_N8STYAn2EeGuZq6TN7cDtg" type="StateName">
@@ -86,7 +86,7 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_N8RsUQn2EeGuZq6TN7cDtg" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_N8RsUgn2EeGuZq6TN7cDtg"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_N8ThgAn2EeGuZq6TN7cDtg"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_N8RsUwn2EeGuZq6TN7cDtg" x="336" y="183"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_N8RsUwn2EeGuZq6TN7cDtg" x="336" y="183" width="214"/>
         </children>
         <children xmi:id="_b7G-sAn2EeGuZq6TN7cDtg" type="State" element="_b6-b0An2EeGuZq6TN7cDtg">
           <children xsi:type="notation:DecorationNode" xmi:id="_b7HlwAn2EeGuZq6TN7cDtg" type="StateName">
@@ -179,6 +179,7 @@
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_dQs4oQn2EeGuZq6TN7cDtg" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_dQtfsAn2EeGuZq6TN7cDtg" fontName="Verdana"/>
       <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_dQs4ogn2EeGuZq6TN7cDtg" points="[4, 32, -15, -195]$[28, 196, 9, -31]"/>
+      <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_cyvaYEwaEeGx9o1-RdQ_9w" id="(0.3392857142857143,0.01639344262295082)"/>
     </edges>
     <edges xmi:id="_ezgIIAn2EeGuZq6TN7cDtg" type="Transition" element="_ezdE0An2EeGuZq6TN7cDtg" source="_b7G-sAn2EeGuZq6TN7cDtg" target="_p-SbAQn1EeGuZq6TN7cDtg">
       <children xsi:type="notation:DecorationNode" xmi:id="_ezgIJAn2EeGuZq6TN7cDtg" type="TransitionExpression">
