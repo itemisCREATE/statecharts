@@ -1,0 +1,22 @@
+GeneratorModel for yakindu::c {
+
+	statechart InterfaceTest {
+
+		feature Outlet {
+			targetProject = "TestScenarios"
+			targetFolder = "src-gen-yacop"
+		}
+
+		feature Debug {
+			dumpSexec = false
+		}
+
+		feature licenseHeader {
+			licenseText = "blubblub"
+		}
+		feature YacopFeature {
+			withYacop = true
+		}
+		
+	}
+}

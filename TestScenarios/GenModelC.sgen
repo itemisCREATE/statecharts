@@ -19,6 +19,9 @@ GeneratorModel for yakindu::c {
 			InterfaceEventListener = true
 			Singleton = false
 		}
+		feature YacopFeature {
+			withYacop = true
+		}
 	feature licenseHeader {
 			licenseText = "
  # Copyright (c) 2011 committers of YAKINDU and others.
