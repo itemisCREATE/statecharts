@@ -77,7 +77,6 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 	private Label lblVirtualTime;
 	private Label lblRealTime;
 	private ClockUpdater clockUpdater;
-	private Label executionType;
 
 	public SimulationView() {
 		DebugUITools.getDebugContextManager().addDebugContextListener(this);
@@ -265,7 +264,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 	}
 
 	private void setInput(SCTDebugTarget newTarget) {
-		refreshViewerInput(newTarget);
+		refreshInput(newTarget);
 		clockUpdater.setTerminated(false);
 		new Thread(clockUpdater).start();
 	}
@@ -291,7 +290,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		}
 	}
 
-	private void refreshViewerInput(final SCTDebugTarget debugTarget) {
+	private void refreshInput(final SCTDebugTarget debugTarget) {
 		IExecutionFacade facade = (IExecutionFacade) debugTarget
 				.getAdapter(IExecutionFacade.class);
 		viewer.setInput(facade.getExecutionContext());
@@ -325,14 +324,16 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 						if (lblVirtualTime != null
 								&& !lblVirtualTime.isDisposed()) {
 							String text = DurationFormatUtils.formatDuration(
-									virtualClock.getVirtualTime()
+									virtualClock.getTime()
 											- virtualClock.getStartTime(),
 									PATTERN);
 							lblVirtualTime.setText(text);
 						}
 						if (lblRealTime != null && !lblRealTime.isDisposed()) {
 							String text = DurationFormatUtils.formatDuration(
-									virtualClock.getRealTime(), PATTERN);
+									System.currentTimeMillis()
+											- virtualClock.getStartTime(),
+									PATTERN);
 							lblRealTime.setText(text);
 						}
 					}
