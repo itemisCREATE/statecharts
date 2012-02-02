@@ -92,10 +92,17 @@ Start a simulation by choosing *Run* - *Run* from the menu bar when the statecha
 
 During the simulation in the statechart editor the active state is colored red. The previous transition is colored green. The simulation view shows the events that trigger the states. In more complex statecharts you can also change values here. Beneath the table there are two clocks. One for the virtual time and one for the real time and a slider to slow down virtual time or make it faster.
 
-h2. YAKINDU Project Natures
+h2. YAKINDU SCT Nature
 
-h2. Generators
+YAKINDU model projects are associated with the YAKINDU SCT nature. For general information regarding natures read the "project nature documentation":PLUGIN_ROOT/org.eclipse.platform.doc.isv/reference/extension-points/org_eclipse_core_resources_natures.html. On projects with SCT nature _.sct_ and _.sgen_ files are automatically build and checked for problems. So you get fast feedback when you edit the state machine and make a mistake. You can toggle the SCT nature on the project by choosing *Configure* - *Add* or *Remove YAKINDU SCT Nature*.
+
 
 h2. XGI
 
+XGI is an Xtext integration for GMF (=Xtext GMF integration). Technically the statechart editor is based on the Graphical modeling Framework (GMF). Xtext is an eclipse framework for textual modeling languages. Xtext provides comfortable functionality like _syntax highlighting_, _code completion_, _live validation_ and more. XGI adds these features to SCT editor fields. The result is the following:
+
+TODO Add image 
+
 h2. XJI
+
+XJI is an Xtext integration for JFace e.g. fields in the Properties View. It adds Xtext editor functionality like _syntax highlighting_, _code completion_, _live validation_ and others to these fields. This can be a great help especially for new users to YAKINDU SCT.
