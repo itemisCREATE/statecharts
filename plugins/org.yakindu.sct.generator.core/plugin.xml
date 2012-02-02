@@ -42,7 +42,7 @@
  </extension>
   <extension
          id="org.yakindu.sct.builder.SCTBuilder"
-         name="YAKINDU HMI Builder"
+         name="YAKINDU SCT Builder"
          point="org.eclipse.core.resources.builders">
       <builder hasNature="true">
          <run  class="org.yakindu.sct.builder.SCTBuilder">
