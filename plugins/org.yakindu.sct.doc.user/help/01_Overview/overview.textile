@@ -1,7 +1,22 @@
 h1. Overview
 
-h2. YAKINDU Statechart Tools 2
+h2. What are the YAKINDU Statechart Tools 2
 
-h3. YAKINDU and Eclipse
+The statechart tools are one central part of YAKINDU: the modular toolkit for model driven development of embedded systems. It is based on the open source development platform Eclipse. The YAKINDU Statechart tools provide the following tools to deal with state machine diagramms:
 
-h3. Status, Warranty and License
+* *YAKINDU SCT editor* to create and edit state charts
+* *YAKINDU simulator* to simulate the behavior of state charts
+* *YAKINDU Xpand generator projects* to create a transformation of the state chart in Xpand
+* *YAKINDU Xtend/Java generator projects* to create a transformation in Xtend/Java 
+
+h2. How does it work?
+
+The YAKINDU SCT 2 are integrated in Eclipse and use the textual modeling toolkit Xtext and the graphical modeling toolkit GMF. 
+
+h2. Who is behind YAKINDU Statechart Tools 2?
+
+The YAKINDU SCT 2 are developed mainly by developers at itemis. But as main parts of YAKINDU SCT 2 are open source every developer is invited to extend the tools.
+
+h2. Who uses the YAKINDU Statechart Tools 2?
+
+Users that often describe behaviors of systems with the help of state charts 
