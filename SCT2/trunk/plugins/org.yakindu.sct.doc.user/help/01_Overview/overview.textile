@@ -41,4 +41,4 @@ You may ask: Where does the money for Open-Source development come from? Well, w
 
 h2. Who uses the YAKINDU Statechart Tools 2?
 
-Users that often describe behaviors of systems with the help of state charts 
+Initially the YAKINDU SCT 2 were designed for the embedded systems industry: automotive, system controls, vending machines etc. But it brings benefit to everyone who needs to design, simulate and develop behavior. People can use the YAKINDU SCT 2 to generate Java, C, or C++.
