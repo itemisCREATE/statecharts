@@ -13,21 +13,76 @@ TODO
 
 h3. Logical Expressions
 
-Logical expressions in SText are similar to other programming languages. The return type is *boolean*. The operators are explained in the following table:
+Logical expressions in SText are similar to other programming languages. The return type is *boolean*. The operators are explained in the following:
 
-|_.Operator |_.Notation |
-|and	| var1 && var2 |
-|or | var1 || var2 |
-|not | !var1 |
-|conditional | var1 ? var2 : 23 |
+h4. and
+
+bc.. 
+var1 && var2 
+
+h4. or
+
+bc.. 
+var1 ||  var2 
+
+h4. not
+
+bc.. 
+!var1 
+
+h4. conditional expression
+ var1 ? var2 : 23 
 
 h3. Bitwise Arithmetic
 
+h4. Bitwise XOR
+
+bc.. 
+var1 ^ var2
+
+h4. Bitwise OR
+
+bc.. 
+var1 | var2
+
+h4. Bitwise AND
+
+bc.. 
+var1 & var2
+
+
+
 h3. Logical Relations and Shift
+
+h4. Operators
+
+|less than | < |
+|equal or less than | <= |
+|greater than | > |
+|equal or greater than | >= |
+|equal | == |
+|not equal | != |
+|shift left | << |
+|shift right | >> |
+
 
 h3. Arithmetic Expressions
 
-h3. Primary Expressions
+h4. Binary operators
+
+|plus | + |
+|minus | - |
+|multiply | * |
+|divide | / |
+|modulo | % |
+
+h4. Unary operators
+
+|positive | + |
+|negative | - |
+| 	| ~ |
+
+
 
 h3. Scopes
 
