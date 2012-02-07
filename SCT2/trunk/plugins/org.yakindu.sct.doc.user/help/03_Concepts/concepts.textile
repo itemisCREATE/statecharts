@@ -4,6 +4,137 @@ h2. Model, Validate, Simulate, Generate
 
 h2. SText
 
+SText is the textual modeling language for the YAKINDU statecharts.
+
+
+h3. Typesystem
+
+TODO
+
+h3. Logical Expressions
+
+Logical expressions in SText are similar to other programming languages. The return type is *boolean*. The operators are explained in the following table:
+
+|_.Operator |_.Notation |
+|and	| var1 && var2 |
+|or | var1 || var2 |
+|not | !var1 |
+|conditional | var1 ? var2 : 23 |
+
+h3. Bitwise Arithmetic
+
+h3. Logical Relations and Shift
+
+h3. Arithmetic Expressions
+
+h3. Primary Expressions
+
+h3. Scopes
+
+h4. namespace definition
+
+SText allows to define unique namespaces, which can be used to qualify references to the statechart.
+
+
+bc.. 
+namespace trafficlights
+
+h4. interface scope
+
+Declarations in the interface scope are externally visible. They can be shared within the environment.
+
+
+bc.. 
+interface NamedInterface:
+in event event1
+out event event3
+var variable1 : real
+entrypoint entry1
+exitpoint exit1
+
+
+h4. internal scope
+
+Declarations made in an internal scope are only visible for contained states.
+
+bc.. 
+internal:
+var localVariable1: integer
+event localEvent: integer
+local event localEvent2: NamedInterface.event1 || localEvent
+local event localEvent3: localEvent || localEvent2 : 25
+operation localOperation (integer, integer): integer
+localEvent3 / raise NamedInterface.event3 :
+localOperation(valueOf(localEvent),NamedInterface.variable1);
+
+h4. Declarations
+
+Within scopes there can be declarations of various elements:
+
+h5. Events
+
+Within interface scope events have an direction. They can either be ingoing or outgoing:
+
+bc.. 
+interface NamedInterface:
+in event event1
+out event event2
+
+p. Within local scope events can carry variables:
+
+bc.. 
+internal:
+event localEvent1 : integer
+
+p. Local events can be derived from interface events or other local events and can have a value assignment:
+
+bc.. 
+internal:
+event localEvent1: integer
+local event localEvent2 = NamedInterface.event1 || localEvent1
+local event localEvent3 = localEvent2 || 25
+
+
+h5. Variables
+
+Variables can have different visibilities. They can be visible for the environment:
+
+bc.. 
+var variable1: real
+
+p. Variables can be *readonly* (constants):
+
+bc.. 
+var readonly pi: real = 3.1415
+
+p. Variables can be referenced by the environment.
+
+bc.. 
+var external variable3: integer = 34
+
+h5. Operations
+
+bc.. 
+operation localOperation (integer, integer):integer
+localEvent3/ raise NamedInterface3.event1
+
+h5. LocalReactions
+
+bc.. 
+localReaction (valueOf(localEvent), NamedInterface.variable1);
+
+h5. EntryPoints
+
+bc.. 
+entrypoint entry1
+
+h5. ExitPoints
+
+bc.. 
+exitpoint exit1
+
+
+
 h2. SGraph
 
 h2. SExec
