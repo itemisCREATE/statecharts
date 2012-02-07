@@ -14,6 +14,63 @@ The following graph shows these features and their relation to each other:
 
 !images/overview_yakindu.jpg! 
 
+h3. Modeling
+
+Yakindu Statechart Models are based on statecharts as defined by David
+Harel and are close to UML state machines. Thus, they support all
+structural model elements as defined by the UML specification, which are
+States (orthogonal and hierarchical), Regions, Transitions and Pseudo
+States (History, Deep History, Initial, Final, Choice, Join / Fork).
+In addition, Yakindu Statechart Models specify interfaces that define
+the interaction of the state machine with its environment. Besides some
+more advanced concepts like Entry / Exit Points, an interface basically
+consists of in and out Events as well as Variables including types.
+These well-defined statechart interfaces are especially useful in the
+context of component models and product line engineering.
+For defining interfaces and modeling the dynamic aspects of statecharts
+(triggers, guards and actions) SCT provides a statically typed, textual
+action language called *SText*. It tightly integrates into the graphical
+editor and supports the user with code completion, syntax highlighting,
+cross referencing and validation during modeling.
+
+h3. Simulation
+
+Yakindu Statechart Models can be executed via an integrated simulation
+engine. The simulation engine supports two different types of execution
+semantics, cycle based and event driven execution. The default execution
+semantic is cycle based which executes a statechart cycle within a fixed
+period of time and thus allows processing of concurrent events. In
+contrast, the event based approach executes a statechart cycle as soon
+as an event occurred.
+During simulation, the currently active states and the transition path
+including the previous states are highlighted in the editor for visual debugging. An additional view
+shows the variable values and allows to raise events.
+Apart from that, the engine uses a virtual time during simulation. The
+user can provide a time scaling factor that is multiplied with the real
+time. This is especially useful during debugging, if the statechart
+model contains very tight or long running time triggers.
+
+h3. Code Generation
+
+Yakindu Statechart Tools currently support the generation of Java, C and
+C++ Code.  All generators can be customized with a generator model. This
+is a textual model file where generator features, like the execution
+type (event or cycle based), or the interface styles (static or
+generic), can be specified.
+The code generation process can either be executed with a builder that
+starts code generation on resource change or manually with a context
+menu action.
+
+h3. Domain specific adaptability
+
+Yakindu Statechart Tools were developed with a domain specific
+adaptability in mind. Several extension points allow the customization
+of all mentioned aspects. It is possible to contribute a custom type
+system or custom action languages which may be a dialect of SText or a
+complete new language.
+Also, the different code generators can be customized or new code
+generators for other target languages can be plugged in easily.
+
 h2. How does it work?
 
 The YAKINDU SCT 2 are integrated in Eclipse and use the textual modeling toolkit Xtext and the graphical modeling toolkit GMF. Behind the scenes of the statechart tools there are some meta models: 
