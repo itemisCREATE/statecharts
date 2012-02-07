@@ -54,6 +54,7 @@ Export-Package: org.yakindu.sct.ui.editor,
  org.yakindu.sct.ui.editor.editparts,
  org.yakindu.sct.ui.editor.extensions,
  org.yakindu.sct.ui.editor.policies,
+ org.yakindu.sct.ui.editor.propertysheets,
  org.yakindu.sct.ui.editor.providers,
  org.yakindu.sct.ui.editor.submachine,
  org.yakindu.sct.ui.editor.wizards
