@@ -36,7 +36,13 @@ private:
     «StName()» «stName()»;
 	EventPool eventPool;
 
+«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
+	«interface.interfaceClassNameOOW()»* «interface.interfaceObjectNameOOW()»;
+«ENDFOREACH -»
+
 	static const int MAXEVENTSPERTYPE=4;
+
+
 public:
 
    «StName()»OOW(Timer* timer);
@@ -44,12 +50,12 @@ public:
    void enter();
    void exit();
    void runCycle();
-   boolean eventWaiting();
+   sc_boolean eventWaiting();
 
    std::vector<States> getStates(); 
 
 «FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
-   «interface.interfaceClassNameOOW()» get_«interface.interfaceObjectNameOOW()»();
+   «interface.interfaceClassNameOOW()»* get_«interface.interfaceObjectNameOOW()»();
 «ENDFOREACH -»
 
 };
@@ -63,7 +69,11 @@ inline «StName()»OOW::«StName()»OOW(Timer* timer)
 	«stName()»_init(&«stName()», timer, &eventPool);
 
 	/* call all necessary enter functions */
-	interfaceTestStatemachine_enter(&«stName()»);
+	«stName()»_enter(&«stName()»);
+	
+«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
+	«interface.interfaceObjectNameOOW()» = new «interface.interfaceClassNameOOW()»(&«stName()»);
+«ENDFOREACH -»
 }
 
 inline «StName()»OOW::~«StName()»OOW()
@@ -94,16 +104,15 @@ inline void «StName()»OOW::runCycle()
 	«stName()»_runCycle(&«stName()»);
 }
 
-inline boolean «StName()»OOW::eventWaiting()
+inline sc_boolean «StName()»OOW::eventWaiting()
 {
 	return «stName()»_eventWaiting(&«stName()»);
 }
 
 «FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
-inline «interface.interfaceClassNameOOW()» «StName()»OOW::get_«interface.interfaceObjectNameOOW()»()
+inline «interface.interfaceClassNameOOW()»* «StName()»OOW::get_«interface.interfaceObjectNameOOW()»()
 {
-	«interface.interfaceClassNameOOW()» retType(&«stName()»);
-	return retType;
+	return «interface.interfaceObjectNameOOW()»;
 }
 «ENDFOREACH -»
 
