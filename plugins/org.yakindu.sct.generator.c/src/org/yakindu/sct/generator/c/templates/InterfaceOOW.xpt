@@ -42,7 +42,7 @@ public:
 «ENDFOREACH» 
 
 «FOREACH interface.getOutEvents() AS event -»
-    boolean is_«event.name»_raised(«IF !event.type.isVoid() -»«event.type.asCType()»* value«ENDIF» );
+    sc_boolean is_«event.name»_raised(«IF !event.type.isVoid() -»«event.type.asCType()»* value«ENDIF» );
 «ENDFOREACH»
 
 «FOREACH interface.getInEvents() AS event -»
@@ -61,7 +61,7 @@ inline «interface.interfaceClassNameOOW()»::~«interface.interfaceClassNameOOW()»
 }
 
 «FOREACH interface.getOutEvents() AS event -»
-inline boolean «interface.interfaceClassNameOOW()»::is_«event.name»_raised(«IF !event.type.isVoid() -»«event.type.asCType()»* value«ENDIF» )
+inline sc_boolean «interface.interfaceClassNameOOW()»::is_«event.name»_raised(«IF !event.type.isVoid() -»«event.type.asCType()»* value«ENDIF» )
 {
   return «interface.interfaceName()»_is_«event.name»_raised(«interface.interfaceObjectName()»«IF !event.type.isVoid() -», value«ENDIF» );
 

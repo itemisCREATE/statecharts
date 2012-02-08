@@ -4,4 +4,12 @@ String getLicenseFeature() : "licenseHeader";
 String getLicenseText() : "licenseText";
 String getCCodeFeature() : "CCodeFeature";
 String getSingleton() : "Singleton";
+String getDefaultReal() : "0.0";
+String getDefaultInteger() : "0";
+String getDefaultBoolean() : getBoolFalse();
 Boolean getSingletonDefault() : false;
+String getYacopFeature() : "YacopFeature";
+String getDebugFeature() : "debugType";
+String debugTypeCout() : "cout";
+String debugTypeCandera() : "candera";
+

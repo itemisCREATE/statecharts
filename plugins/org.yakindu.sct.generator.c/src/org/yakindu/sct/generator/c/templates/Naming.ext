@@ -231,10 +231,22 @@ String getLicenseHeaderPlain(Object this) :
 
 Boolean isSingleton(Object this) : (
 	(this.genEntry().getFeatureConfiguration(getCCodeFeature()) != null) ? (
-      ((this.genEntry().getFeatureConfiguration(getCCodeFeature()).getParameterValue(getSingleton()) != null) ?
+      (this.genEntry().getFeatureConfiguration(getCCodeFeature()).getParameterValue(getSingleton()) != null) ?
        this.genEntry().getFeatureConfiguration(getCCodeFeature()).getParameterValue(getSingleton()).getBooleanValue()
-     : getSingletonDefault()))
+     : getSingletonDefault())
      : getSingletonDefault());
+
+String getDebugFeatureValue(Object this) :
+(
+ (this.genEntry().getFeatureConfiguration(getYacopFeature()) != null) ? (
+  (this.genEntry().getFeatureConfiguration(getYacopFeature()).getParameterValue(getDebugFeature()) != null) ?
+       this.genEntry().getFeatureConfiguration(getYacopFeature()).getParameterValue(getDebugFeature()).getStringValue()
+     : "") 
+  : "" 
+); 
+
+Boolean isDebugCout(Object this) : (getDebugFeatureValue() == debugTypeCout());
+Boolean isDebugCandera(Object this) : (getDebugFeatureValue() == debugTypeCandera());
  
 String getComment(Step this) :
 	if comment!=null then

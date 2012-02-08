@@ -9,6 +9,9 @@
  */
 import types;
 
+extension org::yakindu::sct::generator::c::templates::Constants;
+
+
 boolean isVoid(Type this) :
 	name == null || name == "void";
 	
@@ -24,4 +27,14 @@ String asCType(Type type) :
   default : "unknownType"
  };
 
+String defaultType(Type type) : 
+  switch (type.name) {
+  case null : "0"
+  case "void" : ""
+  case "real" : getDefaultReal()
+  case "integer" : getDefaultInteger()
+  case "boolean" : getDefaultBoolean()
+  case "string"  : ""
+  default : "unknownType"
+ };
 	

@@ -28,6 +28,7 @@ Templates for the main statechart cpp file.
 #include "Statemachine_cy.h"
 #include "«EvName()».h"
 #include "EventPool.h"
+#include "States.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -41,15 +42,6 @@ extern "C" {
 «ENDIF»
 
 typedef void(*raiseEventFPtr)(_Event* evPtr);
-
-typedef enum {
-
-    «FOREACH this.states AS exState-»
-      _«exState.simpleName», 
-    «ENDFOREACH -»
-	last_state
-
-} States;
 
 typedef struct {
 

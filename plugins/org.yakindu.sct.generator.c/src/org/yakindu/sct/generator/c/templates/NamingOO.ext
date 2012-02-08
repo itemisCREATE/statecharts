@@ -26,9 +26,17 @@ String interfaceClassNameOOY(Scope this) : "unknownScope";
 String interfaceObjectNameOOY(Scope this) : "unknownScope";
 
 String interfaceNameOOY(InterfaceScope this) : ((this.name == null) ? "_if" : "_if_" + this.name);
-String interfaceClassNameOOY(InterfaceScope this) :  this.getExecutionFlow().name.toFirstUpper() + "If" + ((this.name == null)?"":this.name.toFirstUpper())+"OO";
+String interfaceClassNameOOY(InterfaceScope this) :  this.getExecutionFlow().name.toFirstUpper() + "If" + ((this.name == null)?"":this.name.toFirstUpper())+"OOY";
 String interfaceObjectNameOOY(InterfaceScope this) : "iface" + ((this.name == null)?"":this.name.toFirstUpper());
 
 String interfaceNameOOY(InternalScope this) : "internal";
-String interfaceClassNameOOY(InternalScope this) : this.getExecutionFlow().name.toFirstUpper() + "InternalOO";
+String interfaceClassNameOOY(InternalScope this) : this.getExecutionFlow().name.toFirstUpper() + "InternalOOY";
 String interfaceObjectNameOOY(InternalScope this) : "ifaceInternal";
+
+Boolean interfaceHasName(Scope this) : false;
+Boolean interfaceHasName(InterfaceScope this) : (this.name == null) ? false : true;
+Boolean interfaceHasName(InternalScope this) : false;
+
+String interfaceSimpleName(Scope this) : "unknown";
+String interfaceSimpleName(InterfaceScope this) : (interfaceHasName()? this.name : "");
+String interfaceSimpleName(InternalScope this) : "";
