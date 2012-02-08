@@ -4,36 +4,38 @@ h2. Model, Validate, Simulate, Generate
 
 h2. SText
 
-SText is the textual modeling language for the YAKINDU statecharts.
+SText is the textual modeling language for the YAKINDU statecharts. It is case sensitive.
 
 
 h3. Typesystem
 
 TODO
 
-h3. Logical Expressions
+h3. Expressions
 
-Logical expressions in SText are similar to other programming languages. The return type is *boolean*. The operators are explained in the following:
+Expressions can be defined similar to other programming languages. SText offers operators to define logical expressions, bitwise arithmetic, and arithmetic expressions and bit shifting.
 
-h4. and
+Logical expressions in SText are similar to other programming languages. The return type is *boolean*. In the following there are some examples of these:
+
+h4. Logical AND
 
 bc.. 
 var1 && var2 
 
-h4. or
+h4. Logical OR
 
 bc.. 
 var1 ||  var2 
 
-h4. not
+h4. Logical NOT
 
 bc.. 
 !var1 
 
-h4. conditional expression
- var1 ? var2 : 23 
+h4. Conditional expression
 
-h3. Bitwise Arithmetic
+bc.. 
+var1 ? var2 : 23 
 
 h4. Bitwise XOR
 
@@ -51,10 +53,7 @@ bc..
 var1 & var2
 
 
-
-h3. Logical Relations and Shift
-
-h4. Operators
+h4. Logical Relations and Shift Operators
 
 |less than | < |
 |equal or less than | <= |
@@ -66,9 +65,7 @@ h4. Operators
 |shift right | >> |
 
 
-h3. Arithmetic Expressions
-
-h4. Binary operators
+h4. Binary arithmetic operators
 
 |plus | + |
 |minus | - |
@@ -76,17 +73,39 @@ h4. Binary operators
 |divide | / |
 |modulo | % |
 
-h4. Unary operators
+h4. Unary arithmetic operators
 
 |positive | + |
 |negative | - |
-| 	| ~ |
+|circa	| ~ |
 
+
+h3. Statements
+
+A statements can be either an assignment, raising an event or call an operation. SText has the following assignment operators:
+
+|Operator | Description |
+| = | simple assignment |
+| *= | multiply and assign |
+| /= | divide and assign |
+| %= | calculate modulo and assign |
+| += | add and assign |
+| -= | subtract and assign |
+| <<= | bitshift left and assign |
+| >>= | bitshift right and assign |
+| &= | bitwise AND and assign |
+| ^= | bitwise XOR and assign |
+| |= | bitwise OR and assign | 
+
+
+An event is raised by the keyword _raise_ followed by the event name and if it is an interface event the name of the interface.
+
+An operation is called similar to other programming languages with the operation name and passing concrete parameters. The parameters can be expressions.
 
 
 h3. Scopes
 
-h4. namespace definition
+h4. Namespace
 
 SText allows to define unique namespaces, which can be used to qualify references to the statechart.
 
@@ -122,11 +141,11 @@ operation localOperation (integer, integer): integer
 localEvent3 / raise NamedInterface.event3 :
 localOperation(valueOf(localEvent),NamedInterface.variable1);
 
-h4. Declarations
+h3. Declarations
 
-Within scopes there can be declarations of various elements:
+Within scopes there can be declarations of Events, Variables, Operations, LocalReactions, EntryPoints and ExitPoints.
 
-h5. Events
+h3. Events
 
 Within interface scope events have an direction. They can either be ingoing or outgoing:
 
@@ -150,7 +169,7 @@ local event localEvent2 = NamedInterface.event1 || localEvent1
 local event localEvent3 = localEvent2 || 25
 
 
-h5. Variables
+h3. Variables
 
 Variables can have different visibilities. They can be visible for the environment:
 
@@ -167,23 +186,56 @@ p. Variables can be referenced by the environment.
 bc.. 
 var external variable3: integer = 34
 
-h5. Operations
+h3. Operations
+
+Operations can have none, one or multiple parameters. The parameters are only declarated by their type. An operation can have one return type similar to Java.
 
 bc.. 
 operation localOperation (integer, integer):integer
 localEvent3/ raise NamedInterface3.event1
 
-h5. LocalReactions
+h3. LocalReactions
+
+Local reactions describe the internal behavior of a state. So they have internal scope. A local reaction is  declared as follows:
 
 bc.. 
-localReaction (valueOf(localEvent), NamedInterface.variable1);
 
-h5. EntryPoints
+LocalReaction: ReactionTrigger '/' ReactionEffect ('#' ReactionProperties)?
+
+ReactionTrigger: (Event ("," Event	)* 	(=> '[' Expression ']')?) | '[' Expression ']'					
+
+ReactionEffect:  Statement (';' Statement )* (';')?
+
+Statement: Assignment | EventRaising | OperationCall
+
+ReactionProperties: (EntryPoint | ExitPoint)*
+
+
+  
+
+p. Within a local reaction an interface event can be raised:
+
+bc.. 
+internal:
+localEvent1 / raise NamedInterface.event3 : localOperation (valueOf(localEvent), NamedInterface.variable1);
+
+
+p. Local reactions can have priority values. These are defined by a following # and the integer number of priority:
+
+bc.. 
+localEvent2 / NamedInterface.variable2 += 3; #1
+localEvent3 / NamedInterface.variable4 += 2.0; #2
+
+h3. EntryPoints
+
+Every state chart has an entry point. An entry point can be declared like the following:
 
 bc.. 
 entrypoint entry1
 
-h5. ExitPoints
+h3. ExitPoints
+
+Every state chart has an exit point. This exit point can be declared like the following.
 
 bc.. 
 exitpoint exit1
