@@ -12,10 +12,10 @@ Templates for the main statechart c file.
 
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
-«DEFINE file(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
+«DEFINE file FOR ExecutionFlow»
 
 «FILE 'Statemachine_cy.c'»
-«getLicenseHeader(genEntry)»
+«getLicenseHeader()»
 #include <stdlib.h>
 #include "definition.h"
 #include "Statemachine_cy.h"
@@ -79,31 +79,13 @@ void statemachine_cy_runCycle(Statemachine_cy* handle) {
 	uint32_t i;
 
 	/* delete all outgoing events */
-	for (i=0; i<handle->eventSet.maxEvents; ++i) {
-		// only delete events, that were marked as out
-		if (eventSet_is_type(&handle->eventSet,i,ev_type_output) && eventSet_check(&handle->eventSet, i)) {
-«REM»
-			// output events are out of our control
-		    // eventPool_freeEvent(handle->eventPool, handle->eventList[i]);
-«ENDREM»
-			eventSet_clean_single(&handle->eventSet, i);
-«REM»//			handle->eventList[i] = 0; «ENDREM»
-		}
-	}
-
+	eventSet_clean_output(&handle->eventSet);
+	
 	/* call internal cycle */
 	statemachine_cy__runCycle(handle);
 
 	/* delete all incoming events */
-	for (i=0; i<handle->eventSet.maxEvents; ++i) {
-		// only delete events, that where marked as out
-		if (eventSet_is_type(&handle->eventSet,i,ev_type_input) && eventSet_check(&handle->eventSet, i)) {
-«REM»//			eventPool_freeEvent(handle->eventPool, handle->eventList[i]); «ENDREM»
-			eventSet_clean_single(&handle->eventSet, i);
-«REM»//			handle->eventList[i] = 0;«ENDREM»
-		}
-	}
-
+	eventSet_clean_input(&handle->eventSet);
 }
 
 void statemachine_cy_setEvent(Statemachine_cy* handle, _Event* ev) {

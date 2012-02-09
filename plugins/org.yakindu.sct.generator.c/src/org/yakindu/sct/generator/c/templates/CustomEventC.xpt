@@ -14,10 +14,10 @@ Templates for the main statechart cpp file.
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
 
-«DEFINE file(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
+«DEFINE file FOR ExecutionFlow»
 
 «FILE EvName()+'.c'»
-«getLicenseHeader(genEntry)»
+«getLicenseHeader()»
 #include "«EvName()».h"
 
 /* This is needed by the EventPool */

@@ -21,40 +21,40 @@ Contais the root templates that call the different file templates.
  	«this.setGenEntry(genEntry)»
  	
 	«REM» basis files «ENDREM»
-	«EXPAND EventH::file(genEntry) FOR this»
-	«EXPAND EventC::file(genEntry) FOR this»
+	«EXPAND EventH::file FOR this» 
+	«EXPAND EventC::file FOR this»
 
-	«EXPAND TimerH::file(genEntry) FOR this»
-	«EXPAND TimerC::file(genEntry) FOR this»
+	«EXPAND TimerH::file FOR this»
+	«EXPAND TimerC::file FOR this»
 
-	«EXPAND EventSetH::file(genEntry) FOR this»
-	«EXPAND EventSetC::file(genEntry) FOR this»
+	«EXPAND EventSetH::file FOR this»
+	«EXPAND EventSetC::file FOR this»
 
-	«EXPAND StatemachineBaseH::file(genEntry) FOR this» 
-	«EXPAND StatemachineBaseC::file(genEntry) FOR this»
+	«EXPAND StatemachineBaseH::file FOR this» 
+	«EXPAND StatemachineBaseC::file FOR this»
 
-	«EXPAND Statemachine_cyH::file(genEntry) FOR this»
-	«EXPAND Statemachine_cyC::file(genEntry) FOR this»
+	«EXPAND Statemachine_cyH::file FOR this»
+	«EXPAND Statemachine_cyC::file FOR this»
 
 	«EXPAND Interfaces::file FOR this»
 	«EXPAND InterfaceOOW::file FOR this»
 
     «REM» code that is created by the model «ENDREM»
-	«EXPAND definitionH::file(genEntry) FOR this»
+	«EXPAND definitionH::file FOR this»
 
-	«EXPAND EventPoolH::file(genEntry) FOR this»
-	«EXPAND EventPoolC::file(genEntry) FOR this»
+	«EXPAND EventPoolH::file FOR this»
+	«EXPAND EventPoolC::file FOR this»
 
 	«EXPAND CustomStatemachineH::file FOR this»
 	«EXPAND CustomStatemachineC::file FOR this»
 	«EXPAND CustomStatemachineHOOW::file FOR this»
 	
-	«EXPAND CustomEventH::file(genEntry) FOR this»
-	«EXPAND CustomEventC::file(genEntry) FOR this»
+	«EXPAND CustomEventH::file FOR this»
+	«EXPAND CustomEventC::file FOR this»
 
-	«EXPAND CMakeLists::file(genEntry) FOR this»
+	«EXPAND CMakeLists::file FOR this»
 	
-	«EXPAND DummyTimer::file(genEntry) FOR this»
+	«EXPAND DummyTimer::file FOR this»
 
 «ENDDEFINE»
 
