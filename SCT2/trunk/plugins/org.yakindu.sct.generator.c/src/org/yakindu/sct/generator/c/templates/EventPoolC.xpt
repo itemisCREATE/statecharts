@@ -12,10 +12,10 @@ Templates for the main statechart c file.
 
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
-«DEFINE file(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
+«DEFINE file FOR ExecutionFlow»
 
 «FILE 'EventPool.c'»
-«getLicenseHeader(genEntry)»
+«getLicenseHeader()»
 #include "EventPool.h"
 #include <stdlib.h>
 

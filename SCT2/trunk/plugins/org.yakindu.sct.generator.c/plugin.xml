@@ -2,6 +2,7 @@
 <?eclipse version="3.4"?>
 
 <plugin>
+<!--
    <extension
          point="org.yakindu.sct.generator.core.generator">
       <SCTGenerator
@@ -11,6 +12,7 @@
             name="YAKINDU C Code Generator">
       </SCTGenerator>
    </extension>
+  -->
    <extension
          point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary

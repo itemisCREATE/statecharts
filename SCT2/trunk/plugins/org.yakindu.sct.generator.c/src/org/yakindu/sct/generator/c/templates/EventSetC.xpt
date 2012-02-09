@@ -12,10 +12,10 @@ Templates for the main statechart c file.
 
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
-«DEFINE file(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
+«DEFINE file FOR ExecutionFlow»
 
 «FILE 'EventSet.c'»
-«getLicenseHeader(genEntry)»
+«getLicenseHeader()»
 #include "EventSet.h"
 #include <stdlib.h>
 
@@ -89,6 +89,20 @@ void eventSet_clean(EventSet* handle) {
 		handle->_set[i] = bool_false;
 }
 
+void eventSet_clean_input(EventSet* handle) {
+	uint32_t i;
+	for (i = 0; i < handle->maxEvents; ++i)
+	  if (handle->eventType[i] == ev_type_input)	
+		handle->_set[i] = bool_false;
+}
+
+void eventSet_clean_output(EventSet* handle) {
+	uint32_t i;
+	for (i = 0; i < handle->maxEvents; ++i)
+	  if (handle->eventType[i] == ev_type_output)
+		handle->_set[i] = bool_false;
+}
+
 void eventSet_set(EventSet* handle, const uint32_t evid) {
 	if (evid < handle->maxEvents) {
 		handle->_set[evid] = bool_true;
@@ -98,17 +112,17 @@ void eventSet_set(EventSet* handle, const uint32_t evid) {
 sc_boolean eventSet_isAny_input(EventSet* handle) {
 	uint32_t i;
 	for (i = 0; i < handle->maxEvents; ++i)
-		if (handle->eventType[i] == ev_type_input &&handle->_set[i])
-			return (bool_true);
-	return (bool_false);
+		if ((handle->eventType[i] == ev_type_input) && (handle->_set[i] == bool_true))
+			return bool_true;
+	return bool_false;
 }
 
 sc_boolean eventSet_isAny_output(EventSet* handle) {
 	uint32_t i;
 	for (i = 0; i < handle->maxEvents; ++i)
-		if (handle->eventType[i] == ev_type_output && handle->_set[i])
-			return (bool_true);
-	return (bool_false);
+		if ((handle->eventType[i] == ev_type_output) && (handle->_set[i] == bool_true))
+			return bool_true;
+	return bool_false;
 }
 
 void eventSet_clean_single(EventSet* handle, const uint32_t evid)

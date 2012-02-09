@@ -12,10 +12,10 @@ Templates for the main statechart c file.
 
 «EXTENSION org::yakindu::sct::generator::c::templates::Naming»
 
-«DEFINE file(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
+«DEFINE file FOR ExecutionFlow»
 
 «FILE 'EventSet.h'»
-«getLicenseHeader(genEntry)»
+«getLicenseHeader()»
 #ifndef EVENTSET_H_
 #define EVENTSET_H_
 
@@ -52,6 +52,8 @@ extern void eventSet_set(EventSet* handle, const uint32_t evid);
 extern sc_boolean eventSet_isAny_input(EventSet* handle);
 extern sc_boolean eventSet_isAny_output(EventSet* handle);
 extern void eventSet_clean_single(EventSet* handle, const uint32_t evid);
+extern void eventSet_clean_input(EventSet* handle);
+extern void eventSet_clean_output(EventSet* handle);
 
 #ifdef __cplusplus
 }
