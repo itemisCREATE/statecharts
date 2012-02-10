@@ -41,37 +41,48 @@ import «entry.getBasePackageName()».VariableNotification;
 import «entry.getBasePackageName()».ValuedEvent;
 «ENDIF-»
 
-public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implements «getInterfaceName()» {
+public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implements «getIInterfaceImplName()» {
 	«IF entry.createGenericInterfaceSupport()-»
-		private Map<String,Object> variableMap;
+		«IF hasVariables()-»
+		protected Map<String,Object> variableMap;
+		«ENDIF-»
 		«IF hasOutgoingEvents()-»
-		private Map<String, Event<Events>> outEventMap;
+		protected Map<String, Event<Events>> outEventMap;
 		«ENDIF-»
 		«IF hasIncomingEvents()-»
-		private Map<String, Event<Events>> inEventMap;
+		protected Map<String, Event<Events>> inEventMap;
 		«ENDIF-»
 	«ELSE-»
 		«FOREACH declarations.typeSelect(EventDefinition) AS event-»
-		private final «event.getEventType()» «event.getName()» = new «event.getEventType()»(«event.getCreationSignature()»);
+		protected final «event.getEventType()» «event.getName()» = new «event.getEventType()»(«event.getCreationSignature()»);
 		«ENDFOREACH-»
 	«ENDIF-» 
 	
 	«IF hasEvents()-»
-		private «getCycleBasedStatemachineName()-» statemachine;
+		protected «getCycleBasedStatemachineName()-» statemachine;
 		
 		public «getInterfaceImplName()»(«getCycleBasedStatemachineName()» statemachine) {
-		this.statemachine = statemachine;
+			
+			this.statemachine = statemachine;
+	«ELSE-»
+		public «getInterfaceImplName()»() {
+	«ENDIF-»
 		«IF entry.createGenericInterfaceSupport()-»
+			«IF hasVariables()-»
 			variableMap = new HashMap<String, Object>();
+				«FOREACH declarations.typeSelect(VariableDefinition) AS variable-»
+				variableMap.put("«variable.name»", new «variable.type.getJavaClassType()»(«variable.type.getInitialValue()»));
+				«ENDFOREACH-»
+			«ENDIF-»
+			
 			«IF hasIncomingEvents()-»
 			inEventMap = new HashMap<String, Event<Events>>();
 			«ENDIF-»
+			
 			«IF hasOutgoingEvents()-»
 			outEventMap = new HashMap<String, Event<Events>>();
 			«ENDIF-»
-			«FOREACH declarations.typeSelect(VariableDefinition) AS variable-»
-			variableMap.put("«variable.name»", new «variable.type.getJavaClassType()»(«variable.type.getInitialValue()»));
-			«ENDFOREACH-»
+			
 			«FOREACH declarations.typeSelect(EventDefinition) AS event-»
 			«IF event.direction == Direction::IN-»
 			inEventMap.put("«event.name»", new «event.getEventType()»(«event.getCreationSignature()»));
@@ -81,7 +92,7 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implemen
 			«ENDFOREACH-»	
 		«ENDIF-»
 	}
-	«ENDIF-»
+	
 		
 	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
 	
@@ -167,14 +178,19 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implemen
 	
 	«IF (hasVariables() || hasIncomingEvents()) && entry.createGenericInterfaceSupport()-»
 	public boolean raiseEvent(String name) {
+		«IF hasIncomingEvents()-»
 		if (inEventMap.get(name) != null) {
 			return statemachine.getOccuredEvents().add(inEventMap.get(name));
 		}
+		«ENDIF-»
 		return false;
 	}
-
+	
+	«IF hasIncomingEvents()-»
 	@SuppressWarnings("unchecked")
+	«ENDIF-»
 	public boolean raiseEvent(String name, Object value) {
+		«IF hasIncomingEvents()-»
 		if (inEventMap.get(name) != null
 				&& inEventMap.get(name) instanceof ValuedEvent) {
 			ValuedEvent<?, ?> event = (ValuedEvent<?, ?>) inEventMap.get(name);
@@ -184,10 +200,12 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implemen
 						.add(inEventMap.get(name));
 			}
 		}
+		«ENDIF-»
 		return false;
 	}
 
 	public boolean setVariable(String name, Object value) {
+		«IF hasVariables()-»
 		if (variableMap.get(name) != null
 				&& variableMap.get(name).getClass() == value.getClass()) {
 			Object oldValue = variableMap.get(name);
@@ -196,11 +214,16 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implemen
 					Variables.valueOf(name), variableMap.get(name), oldValue));
 			return true;
 		}
+		«ENDIF-»
 		return false;
 	}
 	
 	public Object getVariable(String name) {
+		«IF hasVariables()-»
 		return variableMap.get(name);
+		«ELSE-»
+		return null;
+		«ENDIF-»
 	}
 	«ENDIF-»
 }

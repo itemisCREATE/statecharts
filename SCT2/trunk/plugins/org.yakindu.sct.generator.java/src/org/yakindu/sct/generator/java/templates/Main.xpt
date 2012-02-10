@@ -13,6 +13,7 @@ Contributors:
 «IMPORT sgen»
 
 «EXTENSION org::yakindu::sct::generator::java::templates::GenmodelEntries»
+«EXTENSION org::yakindu::sct::generator::java::templates::ExecutionModelExtensions»
 
 «DEFINE main(sgen::GeneratorEntry entry) FOR ExecutionFlow»
 	
@@ -67,7 +68,11 @@ Contributors:
 	«REM» concrete files «ENDREM»
 	«FOREACH this.scopes.typeSelect(InterfaceScope) AS scope»
 	«EXPAND CustomInterface::file(entry) FOR scope»
+	«EXPAND CustomIInterfaceImpl::file(entry) FOR scope»
 	«EXPAND CustomInterfaceImpl::file(entry) FOR scope»
+	«IF entry.createEventBasedStatemachine() && scope.hasIncomingEvents()»
+		«EXPAND CustomEventBasedInterfaceImpl::file(entry) FOR scope»
+	«ENDIF»
 	«ENDFOREACH»
 	
 	«EXPAND CustomCycleBasedStatemachine::file(entry) FOR this»

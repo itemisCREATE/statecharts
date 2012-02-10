@@ -22,6 +22,13 @@ public class InterfaceTestEventBasedStatemachine
 
 	public InterfaceTestEventBasedStatemachine() {
 		eventQueue = new LinkedList<Event<? extends Enum<?>>>();
+		//Replace interface map entries of cycle based statemachine super class
+		getInterfaceMap().put("DefaultInterface",
+				new DefaultInterfaceEventBasedImpl(this));
+		getInterfaceMap().put("InterfaceOther",
+				new InterfaceOtherEventBasedImpl(this));
+		getInterfaceMap().put("InterfaceThird",
+				new InterfaceThirdEventBasedImpl(this));
 	}
 
 	@Override

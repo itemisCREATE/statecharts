@@ -37,6 +37,9 @@ boolean isTimedStatemachine(ExecutionFlow this) :
 boolean hasIncomingEvents(Scope this) :
 	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::IN).isEmpty;
 	
+boolean hasIncomingValuedEvents(Scope this) :
+	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::IN).select(event|!event.type.isVoid()).isEmpty;
+	
 boolean hasOutgoingEvents(Scope this) :
 	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).isEmpty;
 

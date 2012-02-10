@@ -25,7 +25,7 @@ http://www.eclipse.org/legal/epl-v10.html
 Contributors:
 	committers of YAKINDU - initial API and implementation
 "
-		}
+		 }
 	}
 	statechart Test_DeepHistory {
 		feature Outlet {
@@ -38,6 +38,7 @@ Contributors:
 			InterfaceObserverSupport = true
 			TimerService = true
 			RuntimeService = true
+			GenericInterfaceSupport = true
 		}
 		
 		feature licenseHeader {
@@ -66,6 +67,7 @@ Contributors:
 			InterfaceObserverSupport = true
 			TimerService = true
 			RuntimeService = true
+			GenericInterfaceSupport = true
 		}
 		
 		feature licenseHeader {
@@ -94,6 +96,7 @@ Contributors:
 			InterfaceObserverSupport = true
 			TimerService = true
 			RuntimeService = true
+			GenericInterfaceSupport = true
 		}
 		
 		feature licenseHeader {
@@ -122,6 +125,7 @@ Contributors:
 			InterfaceObserverSupport = true
 			TimerService = true
 			RuntimeService = true
+			GenericInterfaceSupport = true
 		}
 		
 		feature licenseHeader {
@@ -150,6 +154,7 @@ Contributors:
 			InterfaceObserverSupport = true
 			TimerService = true
 			RuntimeService = true
+			GenericInterfaceSupport = true
 		}
 		
 		feature licenseHeader {
@@ -187,6 +192,7 @@ Contributors:
 			InterfaceObserverSupport = true
 			TimerService = true
 			RuntimeService = true
+			GenericInterfaceSupport = true
 		}
 		
 		feature licenseHeader {
@@ -215,6 +221,7 @@ Contributors:
 			InterfaceObserverSupport = true
 			TimerService = true
 			RuntimeService = true
+			GenericInterfaceSupport = true
 		}	
 		
 		feature licenseHeader {

@@ -22,6 +22,9 @@ public class Test_ExpressionEventBasedStatemachine
 
 	public Test_ExpressionEventBasedStatemachine() {
 		eventQueue = new LinkedList<Event<? extends Enum<?>>>();
+		//Replace interface map entries of cycle based statemachine super class
+		getInterfaceMap().put("DefaultInterface",
+				new DefaultInterfaceEventBasedImpl(this));
 	}
 
 	@Override

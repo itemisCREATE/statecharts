@@ -40,6 +40,10 @@ String getInterfaceName(InterfaceScope this) :
 		 
 String getInterfaceImplName(InterfaceScope this) :  getInterfaceName() + "Impl";
 
+String getIInterfaceImplName(InterfaceScope this) : "I" + getInterfaceName() + "Impl";
+
+String getEventBasedInterfaceImplName(InterfaceScope this) : getInterfaceName() + "EventBasedImpl";
+
 String getInterfaceParameter(InterfaceScope this) :
 	if hasEvents() then
 		"this"

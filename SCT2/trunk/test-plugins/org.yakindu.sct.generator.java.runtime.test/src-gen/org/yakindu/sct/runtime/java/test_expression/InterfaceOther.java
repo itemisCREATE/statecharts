@@ -11,8 +11,12 @@ Contributors:
 package org.yakindu.sct.runtime.java.test_expression;
 
 import org.yakindu.sct.runtime.java.INotificationSender;
+import org.yakindu.sct.runtime.java.IGenericAccessInterface;
 
-public interface InterfaceOther extends INotificationSender {
+public interface InterfaceOther
+		extends
+			INotificationSender,
+			IGenericAccessInterface {
 
 	public enum Variables {
 		var1, var2, var3,

@@ -14,6 +14,8 @@ import java.util.LinkedList;
 
 import org.yakindu.sct.runtime.java.Event;
 
+import org.yakindu.sct.runtime.java.Notification;
+
 public class Test_TransitionEventBasedStatemachine
 		extends
 			Test_TransitionCycleBasedStatemachine {
@@ -22,6 +24,15 @@ public class Test_TransitionEventBasedStatemachine
 
 	public Test_TransitionEventBasedStatemachine() {
 		eventQueue = new LinkedList<Event<? extends Enum<?>>>();
+		//Replace interface map entries of cycle based statemachine super class
+		getInterfaceMap().put("InterfaceA", new InterfaceAEventBasedImpl(this));
+		getInterfaceMap().put("DefaultInterface",
+				new DefaultInterfaceEventBasedImpl(this));
+	}
+
+	public void notify(Notification notification) {
+		super.notify(notification);
+		runCycle();
 	}
 
 	@Override

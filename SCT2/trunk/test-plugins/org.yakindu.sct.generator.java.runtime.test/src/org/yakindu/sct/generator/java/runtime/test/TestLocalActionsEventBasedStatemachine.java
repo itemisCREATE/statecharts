@@ -16,7 +16,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.runtime.java.RuntimeService;
 import org.yakindu.sct.runtime.java.TimerService;
 import org.yakindu.sct.runtime.java.test_localactions.Test_LocalActionsCycleBasedStatemachine;
 import org.yakindu.sct.runtime.java.test_localactions.Test_LocalActionsCycleBasedStatemachine.State;
@@ -41,24 +40,16 @@ public class TestLocalActionsEventBasedStatemachine {
 	// within the timerThreshold time.
 	private final long junitSleepTime = 1;
 
-	private RuntimeService runtimeService;
-
-	// Minimal cycletime
-	private final long cyclePeriod = 1;
-
 	@Before
 	public void setUp() {
 		statemachine = new Test_LocalActionsEventBasedStatemachine();
 		statemachine.setTimerService(new TimerService());
 		statemachine.init();
 		statemachine.enter();
-		runtimeService = new RuntimeService(cyclePeriod);
-		runtimeService.addStatemachine(statemachine);
 	}
 
 	@After
 	public void tearDown() {
-		runtimeService.cancel();
 		statemachine.getTimerService().cancel();
 		statemachine = null;
 	}
@@ -85,12 +76,10 @@ public class TestLocalActionsEventBasedStatemachine {
 				statemachine.getDefaultInterface().getVarI());
 
 		statemachine.getDefaultInterface().raiseEvent3();
-		Thread.sleep(5);
 		assertEquals("Error in local reaction \"onCycle / i=2;\" of State1", 2,
 				statemachine.getDefaultInterface().getVarI());
 
 		statemachine.getDefaultInterface().raiseEvent2();
-		Thread.sleep(5);
 		assertEquals("Error in local reaction \"Event2 / i=3;\" of State1", 3,
 				statemachine.getDefaultInterface().getVarI());
 
@@ -110,7 +99,6 @@ public class TestLocalActionsEventBasedStatemachine {
 	public void testState2LocalReaction() throws InterruptedException {
 		// Switch to State2;
 		statemachine.getDefaultInterface().raiseEvent1();
-		Thread.sleep(5);
 		final long time = System.currentTimeMillis();
 
 		assertEquals("Error in local reaction \"exit / i=0;\" of State1", 0,
@@ -121,7 +109,6 @@ public class TestLocalActionsEventBasedStatemachine {
 
 		// Check local reaction for Event2
 		statemachine.getDefaultInterface().raiseEvent2();
-		Thread.sleep(5);
 		assertEquals(
 				"Error in local reaction \"Event2, Event4 / j=2;\" of State2",
 				2, statemachine.getDefaultInterface().getVarJ());
@@ -140,14 +127,12 @@ public class TestLocalActionsEventBasedStatemachine {
 
 		// Check local reaction for Event4
 		statemachine.getDefaultInterface().raiseEvent4();
-		Thread.sleep(5);
 		assertEquals(
 				"Error in local reaction \"Event2, Event4 / j=2;\" of State2",
 				2, statemachine.getDefaultInterface().getVarJ());
 
 		// Check local reaction for exit
 		statemachine.getDefaultInterface().raiseEvent3();
-		Thread.sleep(5);
 		assertEquals("Error in local reaction \"exit / j=0;\" of State2", 0,
 				statemachine.getDefaultInterface().getVarJ());
 	}

@@ -10,6 +10,8 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java.test_expression;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.NotificationSender;
 import org.yakindu.sct.runtime.java.EventNotification;
@@ -18,19 +20,33 @@ import org.yakindu.sct.runtime.java.ValuedEvent;
 
 public class DefaultInterfaceImpl extends NotificationSender
 		implements
-			DefaultInterface {
-	private final ValuedEvent<Events, Integer> EventEvent1 = new ValuedEvent<Events, Integer>(
-			Events.Event1, 0, 0);
-	private final ValuedEvent<Events, Double> EventEvent2 = new ValuedEvent<Events, Double>(
-			Events.Event2, 0, 0D);
-	private final Event<Events> EventEvent3 = new Event<Events>(Events.Event3,
-			0);
+			IDefaultInterfaceImpl {
+	protected Map<String, Object> variableMap;
+	protected Map<String, Event<Events>> outEventMap;
+	protected Map<String, Event<Events>> inEventMap;
 
-	private Test_ExpressionCycleBasedStatemachine statemachine;
+	protected Test_ExpressionCycleBasedStatemachine statemachine;
 
 	public DefaultInterfaceImpl(
 			Test_ExpressionCycleBasedStatemachine statemachine) {
+
 		this.statemachine = statemachine;
+		variableMap = new HashMap<String, Object>();
+		variableMap.put("var1", new Integer(0));
+		variableMap.put("var2", new Integer(0));
+		variableMap.put("var3", new Double(0D));
+		variableMap.put("var4", new Double(0D));
+		variableMap.put("var5", new Boolean(false));
+
+		inEventMap = new HashMap<String, Event<Events>>();
+
+		outEventMap = new HashMap<String, Event<Events>>();
+
+		inEventMap.put("event1", new ValuedEvent<Events, Integer>(
+				Events.Event1, 0, 0));
+		outEventMap.put("event2", new ValuedEvent<Events, Double>(
+				Events.Event2, 0, 0D));
+		inEventMap.put("event3", new Event<Events>(Events.Event3, 0));
 	}
 
 	public void raiseEvent1(int value) {
@@ -38,8 +54,9 @@ public class DefaultInterfaceImpl extends NotificationSender
 		statemachine.getOccuredEvents().add(getEventEvent1());
 	}
 
+	@SuppressWarnings("unchecked")
 	public ValuedEvent<Events, Integer> getEventEvent1() {
-		return EventEvent1;
+		return (ValuedEvent<Events, Integer>) inEventMap.get("event1");
 	}
 
 	public void raiseEvent2(double value) {
@@ -49,8 +66,9 @@ public class DefaultInterfaceImpl extends NotificationSender
 		notifyListeners(new EventNotification(getEventEvent2()));
 	}
 
+	@SuppressWarnings("unchecked")
 	public ValuedEvent<Events, Double> getEventEvent2() {
-		return EventEvent2;
+		return (ValuedEvent<Events, Double>) outEventMap.get("event2");
 	}
 
 	public boolean isRaisedEvent2() {
@@ -62,63 +80,94 @@ public class DefaultInterfaceImpl extends NotificationSender
 	}
 
 	public Event<Events> getEventEvent3() {
-		return EventEvent3;
+		return inEventMap.get("event3");
 	}
 
-	private int varVar1 = 6;
 	public int getVarVar1() {
-		return varVar1;
+		return (Integer) variableMap.get("var1");
 	}
 
 	public void setVarVar1(int value) {
 		int oldValue = getVarVar1();
-		varVar1 = value;
+		variableMap.put("var1", new Integer(value));
 		notifyListeners(new VariableNotification<Integer>(Variables.var1,
 				getVarVar1(), oldValue));
 	}
-	private int varVar2 = 123;
 	public int getVarVar2() {
-		return varVar2;
+		return (Integer) variableMap.get("var2");
 	}
 
 	public void setVarVar2(int value) {
 		int oldValue = getVarVar2();
-		varVar2 = value;
+		variableMap.put("var2", new Integer(value));
 		notifyListeners(new VariableNotification<Integer>(Variables.var2,
 				getVarVar2(), oldValue));
 	}
-	private double varVar3 = 19.4;
 	public double getVarVar3() {
-		return varVar3;
+		return (Double) variableMap.get("var3");
 	}
 
 	public void setVarVar3(double value) {
 		double oldValue = getVarVar3();
-		varVar3 = value;
+		variableMap.put("var3", new Double(value));
 		notifyListeners(new VariableNotification<Double>(Variables.var3,
 				getVarVar3(), oldValue));
 	}
-	private double varVar4 = 43.3;
 	public double getVarVar4() {
-		return varVar4;
+		return (Double) variableMap.get("var4");
 	}
 
 	public void setVarVar4(double value) {
 		double oldValue = getVarVar4();
-		varVar4 = value;
+		variableMap.put("var4", new Double(value));
 		notifyListeners(new VariableNotification<Double>(Variables.var4,
 				getVarVar4(), oldValue));
 	}
-	private boolean varVar5 = false;
 	public boolean getVarVar5() {
-		return varVar5;
+		return (Boolean) variableMap.get("var5");
 	}
 
 	public void setVarVar5(boolean value) {
 		boolean oldValue = getVarVar5();
-		varVar5 = value;
+		variableMap.put("var5", new Boolean(value));
 		notifyListeners(new VariableNotification<Boolean>(Variables.var5,
 				getVarVar5(), oldValue));
 	}
 
+	public boolean raiseEvent(String name) {
+		if (inEventMap.get(name) != null) {
+			return statemachine.getOccuredEvents().add(inEventMap.get(name));
+		}
+		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	public boolean raiseEvent(String name, Object value) {
+		if (inEventMap.get(name) != null
+				&& inEventMap.get(name) instanceof ValuedEvent) {
+			ValuedEvent<?, ?> event = (ValuedEvent<?, ?>) inEventMap.get(name);
+			if (event.getValue().getClass() == value.getClass()) {
+				((ValuedEvent<Events, Object>) event).setValue(value);
+				return statemachine.getOccuredEvents()
+						.add(inEventMap.get(name));
+			}
+		}
+		return false;
+	}
+
+	public boolean setVariable(String name, Object value) {
+		if (variableMap.get(name) != null
+				&& variableMap.get(name).getClass() == value.getClass()) {
+			Object oldValue = variableMap.get(name);
+			variableMap.put(name, value);
+			notifyListeners(new VariableNotification<Object>(
+					Variables.valueOf(name), variableMap.get(name), oldValue));
+			return true;
+		}
+		return false;
+	}
+
+	public Object getVariable(String name) {
+		return variableMap.get(name);
+	}
 }

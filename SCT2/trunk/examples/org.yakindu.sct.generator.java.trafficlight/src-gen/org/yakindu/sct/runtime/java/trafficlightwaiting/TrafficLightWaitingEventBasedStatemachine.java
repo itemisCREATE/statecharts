@@ -14,14 +14,32 @@ import java.util.LinkedList;
 
 import org.yakindu.sct.runtime.java.Event;
 
+import org.yakindu.sct.runtime.java.Notification;
+
 public class TrafficLightWaitingEventBasedStatemachine
 		extends
 			TrafficLightWaitingCycleBasedStatemachine {
 
 	private LinkedList<Event<? extends Enum<?>>> eventQueue;
 
+	private DefaultInterfaceEventBasedImpl defaultInterface;
+
 	public TrafficLightWaitingEventBasedStatemachine() {
 		eventQueue = new LinkedList<Event<? extends Enum<?>>>();
+		defaultInterface = new DefaultInterfaceEventBasedImpl(this);
+	}
+
+	public DefaultInterface getDefaultInterface() {
+		return defaultInterface;
+	}
+
+	protected IDefaultInterfaceImpl getDefaultInterfaceImpl() {
+		return defaultInterface;
+	}
+
+	public void notify(Notification notification) {
+		super.notify(notification);
+		runCycle();
 	}
 
 	@Override

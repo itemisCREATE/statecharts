@@ -8,7 +8,10 @@ Contributors:
 	Markus Muehlbrandt - Initial contribution and API
 «ENDREM»
 «IMPORT sexec»
+«IMPORT stext»
+«IMPORT sgraph»
 
+«EXTENSION org::yakindu::sct::generator::java::templates::ExecutionModelExtensions»
 «EXTENSION org::yakindu::sct::generator::java::templates::GenmodelEntries»
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
@@ -21,13 +24,60 @@ import java.util.LinkedList;
 
 import «entry.getBasePackageName()».Event;
 
+«IF isTimedStatemachine()-»
+	import «entry.getBasePackageName()».Notification;
+«ENDIF-»
+
 public class «getEventBasedStatemachineName()» extends «getCycleBasedStatemachineName()» {
 
 	private LinkedList<Event<? extends Enum<?>>> eventQueue;
-
+	
+	«IF !entry.createGenericInterfaceSupport()-»
+		«FOREACH scopes.typeSelect(InterfaceScope) AS interface-»
+			«IF interface.hasIncomingEvents()-»
+			private «interface.getEventBasedInterfaceImplName()» «interface.getInterfaceName().toFirstLower()»;
+			«ENDIF-»
+		«ENDFOREACH-»
+	«ENDIF-»
+	
 	public «getEventBasedStatemachineName()»() {
 		eventQueue = new LinkedList<Event<? extends Enum<?>>>();
+		«IF entry.createGenericInterfaceSupport()-»
+			//Replace interface map entries of cycle based statemachine super class
+			«FOREACH getInterfaceScope() AS interface-»
+				«IF interface.hasIncomingEvents()-»
+				getInterfaceMap().put("«interface.getInterfaceName()»", new «interface.getEventBasedInterfaceImplName()»(«interface.getInterfaceParameter()»));
+				«ENDIF-»
+			«ENDFOREACH-»
+		«ELSE-»
+			«FOREACH getInterfaceScope() AS interface-»
+				«IF interface.hasIncomingEvents()-»
+				«interface.getInterfaceName().toFirstLower()» = new «interface.getEventBasedInterfaceImplName()»(«interface.getInterfaceParameter()»);
+				«ENDIF-»		
+			«ENDFOREACH-»
+		«ENDIF-»
 	}
+	
+	«IF !entry.createGenericInterfaceSupport()-»
+		«FOREACH scopes.typeSelect(InterfaceScope) AS interface-»
+		«IF interface.hasIncomingEvents()-»
+		public «interface.getInterfaceName()» get«interface.getInterfaceName()»() {
+			return «interface.getInterfaceName().toFirstLower()»;
+		}
+		
+		protected «interface.getIInterfaceImplName()» get«interface.getInterfaceImplName()»() {
+			return «interface.getInterfaceName().toFirstLower()»;
+		}
+		«ENDIF-»
+		«ENDFOREACH-»
+	«ENDIF-»
+	
+	«IF isTimedStatemachine()-»	
+	public void notify(Notification notification) {
+		super.notify(notification);
+		runCycle();
+	}
+	«ENDIF-»
 	
 	@Override
 	protected LinkedList<Event<? extends Enum<?>>> getOccuredEvents() {

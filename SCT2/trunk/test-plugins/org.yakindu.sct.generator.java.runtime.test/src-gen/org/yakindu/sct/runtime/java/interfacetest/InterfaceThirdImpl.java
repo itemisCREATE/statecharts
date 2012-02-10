@@ -20,19 +20,23 @@ import org.yakindu.sct.runtime.java.ValuedEvent;
 
 public class InterfaceThirdImpl extends NotificationSender
 		implements
-			InterfaceThird {
-	private Map<String, Object> variableMap;
-	private Map<String, Event<Events>> outEventMap;
-	private Map<String, Event<Events>> inEventMap;
+			IInterfaceThirdImpl {
+	protected Map<String, Object> variableMap;
+	protected Map<String, Event<Events>> outEventMap;
+	protected Map<String, Event<Events>> inEventMap;
 
-	private InterfaceTestCycleBasedStatemachine statemachine;
+	protected InterfaceTestCycleBasedStatemachine statemachine;
 
 	public InterfaceThirdImpl(InterfaceTestCycleBasedStatemachine statemachine) {
+
 		this.statemachine = statemachine;
 		variableMap = new HashMap<String, Object>();
-		inEventMap = new HashMap<String, Event<Events>>();
-		outEventMap = new HashMap<String, Event<Events>>();
 		variableMap.put("v1", new Double(0D));
+
+		inEventMap = new HashMap<String, Event<Events>>();
+
+		outEventMap = new HashMap<String, Event<Events>>();
+
 		inEventMap.put("event5", new Event<Events>(Events.Event5, 4));
 		outEventMap.put("event6", new ValuedEvent<Events, Boolean>(
 				Events.Event6, 4, false));

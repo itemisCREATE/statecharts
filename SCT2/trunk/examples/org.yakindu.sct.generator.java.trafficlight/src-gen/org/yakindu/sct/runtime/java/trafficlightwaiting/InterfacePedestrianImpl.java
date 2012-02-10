@@ -10,7 +10,10 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java.trafficlightwaiting;
 
-public class InterfacePedestrianImpl implements InterfacePedestrian {
+public class InterfacePedestrianImpl implements IInterfacePedestrianImpl {
+
+	public InterfacePedestrianImpl() {
+	}
 
 	private boolean varRequest;
 	public boolean getVarRequest() {
