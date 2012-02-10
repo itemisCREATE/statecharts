@@ -14,16 +14,22 @@ import java.util.Collection;
 import java.util.HashSet;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.EventVector;
+import java.util.HashMap;
+import java.util.Map;
+import org.yakindu.sct.runtime.java.IGenericAccessStatemachine;
+import org.yakindu.sct.runtime.java.IGenericAccessInterface;
 import org.yakindu.sct.runtime.java.IStatemachine;
 
-public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
+public class Test_ExpressionCycleBasedStatemachine
+		implements
+			IGenericAccessStatemachine,
+			IStatemachine {
 
 	public enum State {
 		State1, State2, $NullState$
 	};
 
-	private DefaultInterfaceImpl defaultInterface;
-	private InterfaceOtherImpl interfaceOther;
+	protected Map<String, IGenericAccessInterface> interfaceMap;
 
 	private final State[] stateVector = new State[1];
 
@@ -36,8 +42,9 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 	public Test_ExpressionCycleBasedStatemachine() {
 		occuredEvents = new EventVector<Event<? extends Enum<?>>>(3);
 		outEvents = new HashSet<Event<? extends Enum<?>>>();
-		defaultInterface = new DefaultInterfaceImpl(this);
-		interfaceOther = new InterfaceOtherImpl();
+		interfaceMap = new HashMap<String, IGenericAccessInterface>();
+		interfaceMap.put("DefaultInterface", new DefaultInterfaceImpl(this));
+		interfaceMap.put("InterfaceOther", new InterfaceOtherImpl());
 
 	}
 
@@ -70,19 +77,27 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 		return false;
 	}
 
-	public DefaultInterface getDefaultInterface() {
-		return defaultInterface;
+	public IGenericAccessInterface getInterface(String name) {
+		return interfaceMap.get(name);
 	}
 
-	private DefaultInterfaceImpl getDefaultInterfaceImpl() {
-		return defaultInterface;
+	protected Map<String, IGenericAccessInterface> getInterfaceMap() {
+		return interfaceMap;
+	}
+
+	public DefaultInterface getDefaultInterface() {
+		return (DefaultInterface) getInterface("DefaultInterface");
+	}
+
+	protected IDefaultInterfaceImpl getDefaultInterfaceImpl() {
+		return (IDefaultInterfaceImpl) getInterface("DefaultInterface");
 	}
 	public InterfaceOther getInterfaceOther() {
-		return interfaceOther;
+		return (InterfaceOther) getInterface("InterfaceOther");
 	}
 
-	private InterfaceOtherImpl getInterfaceOtherImpl() {
-		return interfaceOther;
+	protected IInterfaceOtherImpl getInterfaceOtherImpl() {
+		return (IInterfaceOtherImpl) getInterface("InterfaceOther");
 	}
 
 	public void enter() {
@@ -103,7 +118,7 @@ public class Test_ExpressionCycleBasedStatemachine implements IStatemachine {
 	}
 
 	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
+		//Handle exit of all possible states (of mainRegion) at position 0...
 		switch (stateVector[0]) {
 
 			case State1 :

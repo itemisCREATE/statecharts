@@ -279,7 +279,7 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineInterf
 	};
 	
 	«IF entry.createGenericInterfaceSupport()-»
-		private Map<String,IGenericAccessInterface> interfaceMap;
+		protected Map<String,IGenericAccessInterface> interfaceMap;
 	«ELSE-»
 		«FOREACH scopes.typeSelect(InterfaceScope) AS interface-»
 		private «interface.getInterfaceImplName()» «interface.getInterfaceName().toFirstLower()»;
@@ -362,12 +362,6 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineInterf
 		return false;
 	}
 	
-	«IF entry.createGenericInterfaceSupport()-»
-	public IGenericAccessInterface getInterface(String name) {
-		return interfaceMap.get(name);
-	}
-	«ENDIF-»
-	
 	«IF isTimedStatemachine()-»
 	public void setTimerService(ITimerService timerService) {
 		this.timerService = timerService;
@@ -389,6 +383,16 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineInterf
 	}
 	«ENDIF-»
 	
+	«IF entry.createGenericInterfaceSupport()-»
+	public IGenericAccessInterface getInterface(String name) {
+		return interfaceMap.get(name);
+	}
+	
+	protected Map<String, IGenericAccessInterface> getInterfaceMap() {
+		return interfaceMap;
+	}
+	«ENDIF-»
+	
 	«FOREACH scopes.typeSelect(InterfaceScope) AS interface-»
 	public «interface.getInterfaceName()» get«interface.getInterfaceName()»() {
 		«IF entry.createGenericInterfaceSupport()-»
@@ -399,9 +403,9 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineInterf
 	}
 	
 	
-	private «interface.getInterfaceImplName()» get«interface.getInterfaceImplName()»() {
+	protected «interface.getIInterfaceImplName()» get«interface.getInterfaceImplName()»() {
 		«IF entry.createGenericInterfaceSupport()-»
-		return («interface.getInterfaceImplName()») getInterface("«interface.getInterfaceName()»");
+		return («interface.getIInterfaceImplName()») getInterface("«interface.getInterfaceName()»");
 		«ELSE-»
 		return «interface.getInterfaceName().toFirstLower()»;
 		«ENDIF-»

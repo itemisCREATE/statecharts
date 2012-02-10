@@ -10,7 +10,9 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java.test_shallowhistory;
 
-public interface DefaultInterface {
+import org.yakindu.sct.runtime.java.IGenericAccessInterface;
+
+public interface DefaultInterface extends IGenericAccessInterface {
 
 	public enum Events {
 		Event1, Event2, Event3, Event4, Event5, Event6, Event7, Event8,

@@ -14,15 +14,22 @@ import java.util.Collection;
 import java.util.HashSet;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.EventVector;
+import java.util.HashMap;
+import java.util.Map;
+import org.yakindu.sct.runtime.java.IGenericAccessStatemachine;
+import org.yakindu.sct.runtime.java.IGenericAccessInterface;
 import org.yakindu.sct.runtime.java.IStatemachine;
 
-public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
+public class Test_DeepHistoryCycleBasedStatemachine
+		implements
+			IGenericAccessStatemachine,
+			IStatemachine {
 
 	public enum State {
 		State1, State2, State3, State4, State6, State7, State8, State9, State5, $NullState$
 	};
 
-	private DefaultInterfaceImpl defaultInterface;
+	protected Map<String, IGenericAccessInterface> interfaceMap;
 
 	private State[] historyVector = new State[3];
 
@@ -37,7 +44,8 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	public Test_DeepHistoryCycleBasedStatemachine() {
 		occuredEvents = new EventVector<Event<? extends Enum<?>>>(9);
 		outEvents = new HashSet<Event<? extends Enum<?>>>();
-		defaultInterface = new DefaultInterfaceImpl(this);
+		interfaceMap = new HashMap<String, IGenericAccessInterface>();
+		interfaceMap.put("DefaultInterface", new DefaultInterfaceImpl(this));
 
 	}
 
@@ -74,12 +82,20 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 		return false;
 	}
 
-	public DefaultInterface getDefaultInterface() {
-		return defaultInterface;
+	public IGenericAccessInterface getInterface(String name) {
+		return interfaceMap.get(name);
 	}
 
-	private DefaultInterfaceImpl getDefaultInterfaceImpl() {
-		return defaultInterface;
+	protected Map<String, IGenericAccessInterface> getInterfaceMap() {
+		return interfaceMap;
+	}
+
+	public DefaultInterface getDefaultInterface() {
+		return (DefaultInterface) getInterface("DefaultInterface");
+	}
+
+	protected IDefaultInterfaceImpl getDefaultInterfaceImpl() {
+		return (IDefaultInterfaceImpl) getInterface("DefaultInterface");
 	}
 
 	public void enter() {
@@ -89,7 +105,7 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 	}
 
 	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
+		//Handle exit of all possible states (of mainRegion) at position 0...
 		switch (stateVector[0]) {
 
 			case State1 :
@@ -98,26 +114,46 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 				break;
 
 			case State3 :
+
+				historyVector[0] = stateVector[0];
 				stateVector[0] = State.$NullState$;
 
 				break;
 
 			case State6 :
+
+				historyVector[0] = stateVector[0];
+
+				historyVector[1] = stateVector[0];
 				stateVector[0] = State.$NullState$;
 
 				break;
 
 			case State8 :
+
+				historyVector[0] = stateVector[0];
+
+				historyVector[1] = stateVector[0];
+
+				historyVector[2] = stateVector[0];
 				stateVector[0] = State.$NullState$;
 
 				break;
 
 			case State9 :
+
+				historyVector[0] = stateVector[0];
+
+				historyVector[1] = stateVector[0];
+
+				historyVector[2] = stateVector[0];
 				stateVector[0] = State.$NullState$;
 
 				break;
 
 			case State5 :
+
+				historyVector[0] = stateVector[0];
 				stateVector[0] = State.$NullState$;
 
 				break;
@@ -246,16 +282,26 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State6 :
+
+					historyVector[1] = stateVector[0];
 					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State8 :
+
+					historyVector[1] = stateVector[0];
+
+					historyVector[2] = stateVector[0];
 					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State9 :
+
+					historyVector[1] = stateVector[0];
+
+					historyVector[2] = stateVector[0];
 					stateVector[0] = State.$NullState$;
 
 					break;
@@ -299,16 +345,26 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State6 :
+
+					historyVector[1] = stateVector[0];
 					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State8 :
+
+					historyVector[1] = stateVector[0];
+
+					historyVector[2] = stateVector[0];
 					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State9 :
+
+					historyVector[1] = stateVector[0];
+
+					historyVector[2] = stateVector[0];
 					stateVector[0] = State.$NullState$;
 
 					break;
@@ -339,11 +395,15 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 						break;
 
 					case State8 :
+
+						historyVector[2] = stateVector[0];
 						stateVector[0] = State.$NullState$;
 
 						break;
 
 					case State9 :
+
+						historyVector[2] = stateVector[0];
 						stateVector[0] = State.$NullState$;
 
 						break;
@@ -384,16 +444,26 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State6 :
+
+					historyVector[1] = stateVector[0];
 					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State8 :
+
+					historyVector[1] = stateVector[0];
+
+					historyVector[2] = stateVector[0];
 					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State9 :
+
+					historyVector[1] = stateVector[0];
+
+					historyVector[2] = stateVector[0];
 					stateVector[0] = State.$NullState$;
 
 					break;
@@ -424,11 +494,15 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 						break;
 
 					case State8 :
+
+						historyVector[2] = stateVector[0];
 						stateVector[0] = State.$NullState$;
 
 						break;
 
 					case State9 :
+
+						historyVector[2] = stateVector[0];
 						stateVector[0] = State.$NullState$;
 
 						break;
@@ -494,16 +568,26 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State6 :
+
+					historyVector[1] = stateVector[0];
 					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State8 :
+
+					historyVector[1] = stateVector[0];
+
+					historyVector[2] = stateVector[0];
 					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State9 :
+
+					historyVector[1] = stateVector[0];
+
+					historyVector[2] = stateVector[0];
 					stateVector[0] = State.$NullState$;
 
 					break;
@@ -534,11 +618,15 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 						break;
 
 					case State8 :
+
+						historyVector[2] = stateVector[0];
 						stateVector[0] = State.$NullState$;
 
 						break;
 
 					case State9 :
+
+						historyVector[2] = stateVector[0];
 						stateVector[0] = State.$NullState$;
 
 						break;
@@ -604,16 +692,26 @@ public class Test_DeepHistoryCycleBasedStatemachine implements IStatemachine {
 					break;
 
 				case State6 :
+
+					historyVector[1] = stateVector[0];
 					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State8 :
+
+					historyVector[1] = stateVector[0];
+
+					historyVector[2] = stateVector[0];
 					stateVector[0] = State.$NullState$;
 
 					break;
 
 				case State9 :
+
+					historyVector[1] = stateVector[0];
+
+					historyVector[2] = stateVector[0];
 					stateVector[0] = State.$NullState$;
 
 					break;

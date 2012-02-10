@@ -12,8 +12,12 @@ package org.yakindu.sct.runtime.java.test_transition;
 
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.INotificationSender;
+import org.yakindu.sct.runtime.java.IGenericAccessInterface;
 
-public interface DefaultInterface extends INotificationSender {
+public interface DefaultInterface
+		extends
+			INotificationSender,
+			IGenericAccessInterface {
 
 	public enum Events {
 		Event5, Event6, Event7,

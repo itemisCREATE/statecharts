@@ -14,6 +14,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.EventVector;
+import java.util.HashMap;
+import java.util.Map;
+import org.yakindu.sct.runtime.java.IGenericAccessStatemachine;
+import org.yakindu.sct.runtime.java.IGenericAccessInterface;
 import org.yakindu.sct.runtime.java.TimeEvent;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
 import org.yakindu.sct.runtime.java.ITimerService;
@@ -22,6 +26,7 @@ import org.yakindu.sct.runtime.java.Notification;
 
 public class Test_TransitionCycleBasedStatemachine
 		implements
+			IGenericAccessStatemachine,
 			ITimedStatemachine {
 
 	private enum TimeEvents {
@@ -37,8 +42,7 @@ public class Test_TransitionCycleBasedStatemachine
 		State1, State2, $NullState$
 	};
 
-	private InterfaceAImpl interfaceA;
-	private DefaultInterfaceImpl defaultInterface;
+	protected Map<String, IGenericAccessInterface> interfaceMap;
 
 	private final State[] stateVector = new State[1];
 
@@ -55,8 +59,9 @@ public class Test_TransitionCycleBasedStatemachine
 	public Test_TransitionCycleBasedStatemachine() {
 		occuredEvents = new EventVector<Event<? extends Enum<?>>>(10);
 		outEvents = new HashSet<Event<? extends Enum<?>>>();
-		interfaceA = new InterfaceAImpl(this);
-		defaultInterface = new DefaultInterfaceImpl(this);
+		interfaceMap = new HashMap<String, IGenericAccessInterface>();
+		interfaceMap.put("InterfaceA", new InterfaceAImpl(this));
+		interfaceMap.put("DefaultInterface", new DefaultInterfaceImpl(this));
 		State1_time_event_0.setStatemachine(this);
 		State1_time_event_1.setStatemachine(this);
 
@@ -110,19 +115,27 @@ public class Test_TransitionCycleBasedStatemachine
 		}
 	}
 
-	public InterfaceA getInterfaceA() {
-		return interfaceA;
+	public IGenericAccessInterface getInterface(String name) {
+		return interfaceMap.get(name);
 	}
 
-	private InterfaceAImpl getInterfaceAImpl() {
-		return interfaceA;
+	protected Map<String, IGenericAccessInterface> getInterfaceMap() {
+		return interfaceMap;
+	}
+
+	public InterfaceA getInterfaceA() {
+		return (InterfaceA) getInterface("InterfaceA");
+	}
+
+	protected IInterfaceAImpl getInterfaceAImpl() {
+		return (IInterfaceAImpl) getInterface("InterfaceA");
 	}
 	public DefaultInterface getDefaultInterface() {
-		return defaultInterface;
+		return (DefaultInterface) getInterface("DefaultInterface");
 	}
 
-	private DefaultInterfaceImpl getDefaultInterfaceImpl() {
-		return defaultInterface;
+	protected IDefaultInterfaceImpl getDefaultInterfaceImpl() {
+		return (IDefaultInterfaceImpl) getInterface("DefaultInterface");
 	}
 
 	public void enter() {

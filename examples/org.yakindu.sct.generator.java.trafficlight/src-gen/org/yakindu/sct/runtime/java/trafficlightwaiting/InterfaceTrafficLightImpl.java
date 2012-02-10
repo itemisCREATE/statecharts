@@ -10,7 +10,10 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java.trafficlightwaiting;
 
-public class InterfaceTrafficLightImpl implements InterfaceTrafficLight {
+public class InterfaceTrafficLightImpl implements IInterfaceTrafficLightImpl {
+
+	public InterfaceTrafficLightImpl() {
+	}
 
 	private boolean varRed;
 	public boolean getVarRed() {

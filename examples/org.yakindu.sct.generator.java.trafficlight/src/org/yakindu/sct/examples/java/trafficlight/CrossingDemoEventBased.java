@@ -31,7 +31,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
-import org.yakindu.sct.runtime.java.RuntimeService;
 import org.yakindu.sct.runtime.java.TimerService;
 import org.yakindu.sct.runtime.java.trafficlightwaiting.TrafficLightWaitingCycleBasedStatemachine;
 import org.yakindu.sct.runtime.java.trafficlightwaiting.TrafficLightWaitingEventBasedStatemachine;
@@ -68,8 +67,6 @@ public class CrossingDemoEventBased {
 
 		statemachine.setTimerService(new TimerService());
 		statemachine.enter();
-		RuntimeService runtimeService = new RuntimeService(100);
-		runtimeService.addStatemachine(statemachine);
 
 		shell.open();
 		while (!shell.isDisposed()) {
@@ -88,7 +85,6 @@ public class CrossingDemoEventBased {
 				display.sleep();
 			}
 		}
-		runtimeService.cancel();
 		statemachine.getTimerService().cancel();
 	}
 

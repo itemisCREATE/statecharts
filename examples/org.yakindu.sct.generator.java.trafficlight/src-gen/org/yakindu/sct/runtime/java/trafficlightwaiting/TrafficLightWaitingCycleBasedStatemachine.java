@@ -140,21 +140,21 @@ public class TrafficLightWaitingCycleBasedStatemachine
 		return interfaceTrafficLight;
 	}
 
-	private InterfaceTrafficLightImpl getInterfaceTrafficLightImpl() {
+	protected IInterfaceTrafficLightImpl getInterfaceTrafficLightImpl() {
 		return interfaceTrafficLight;
 	}
 	public InterfacePedestrian getInterfacePedestrian() {
 		return interfacePedestrian;
 	}
 
-	private InterfacePedestrianImpl getInterfacePedestrianImpl() {
+	protected IInterfacePedestrianImpl getInterfacePedestrianImpl() {
 		return interfacePedestrian;
 	}
 	public DefaultInterface getDefaultInterface() {
 		return defaultInterface;
 	}
 
-	private DefaultInterfaceImpl getDefaultInterfaceImpl() {
+	protected IDefaultInterfaceImpl getDefaultInterfaceImpl() {
 		return defaultInterface;
 	}
 

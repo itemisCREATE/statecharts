@@ -17,7 +17,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.runtime.java.RuntimeService;
 import org.yakindu.sct.runtime.java.test_parallelregions.DefaultInterface;
 import org.yakindu.sct.runtime.java.test_parallelregions.Test_ParallelRegionsCycleBasedStatemachine.State;
 import org.yakindu.sct.runtime.java.test_parallelregions.Test_ParallelRegionsEventBasedStatemachine;
@@ -31,19 +30,12 @@ import org.yakindu.sct.runtime.java.test_parallelregions.Test_ParallelRegionsEve
 public class TestParallelRegionsEventBasedStatemachine {
 
 	private Test_ParallelRegionsEventBasedStatemachine sm;
-	
-	private RuntimeService runtimeService;
-
-	// Minimal cycletime
-	private final long cyclePeriod = 1;
 
 	@Before
 	public void setUp() {
 		sm = new Test_ParallelRegionsEventBasedStatemachine();
 		sm.init();
 		sm.enter();
-		runtimeService = new RuntimeService(cyclePeriod);
-		runtimeService.addStatemachine(sm);
 	}
 
 	@After
@@ -60,27 +52,23 @@ public class TestParallelRegionsEventBasedStatemachine {
 	@Test
 	public void testStatemachineHierarchyLevelOne() throws InterruptedException {
 		sm.getDefaultInterface().raiseEvent1();
-		Thread.sleep(5);
 		// Test if state is changed to State3 && State7
 		assertTrue(sm.isStateActive(State.State3));
 		assertTrue(sm.isStateActive(State.State7));
 
 		sm.getDefaultInterface().raiseEvent5();
-		Thread.sleep(5);
 		// Test if state is changed to State3 && State8
 		assertTrue(sm.isStateActive(State.State3));
 		assertTrue(sm.isStateActive(State.State8));
 		assertFalse(sm.isStateActive(State.State7));
 
 		sm.getDefaultInterface().raiseEvent6();
-		Thread.sleep(5);
 		// Test if state is changed to State3 && State7
 		assertTrue(sm.isStateActive(State.State3));
 		assertTrue(sm.isStateActive(State.State7));
 		assertFalse(sm.isStateActive(State.State8));
 
 		sm.getDefaultInterface().raiseEvent3();
-		Thread.sleep(5);
 		// Test if state is back to State1
 		assertTrue(sm.isStateActive(State.State1));
 		assertFalse(sm.isStateActive(State.State3));
@@ -91,20 +79,17 @@ public class TestParallelRegionsEventBasedStatemachine {
 	@Test
 	public void testStatemachineHierarchyLevelTwo() throws InterruptedException {
 		sm.getDefaultInterface().raiseEvent1();
-		Thread.sleep(5);
 		// Test if state is changed to State3 && State7
 		assertTrue(sm.isStateActive(State.State3));
 		assertTrue(sm.isStateActive(State.State7));
 
 		sm.getDefaultInterface().raiseEvent2();
-		Thread.sleep(5);
 		// Test if state is changed to State9, State5 and State7
 		assertTrue(sm.isStateActive(State.State9));
 		assertTrue(sm.isStateActive(State.State5));
 		assertTrue(sm.isStateActive(State.State7));
 
 		sm.getDefaultInterface().raiseEvent3();
-		Thread.sleep(5);
 		// Test if state is changed to State9, State6 and State8
 		assertTrue(sm.isStateActive(State.State9));
 		assertTrue(sm.isStateActive(State.State6));
@@ -112,7 +97,6 @@ public class TestParallelRegionsEventBasedStatemachine {
 		assertTrue(sm.isStateActive(State.State8));
 
 		sm.getDefaultInterface().raiseEvent6();
-		Thread.sleep(5);
 		// Test if state is changed to State9, State6 and State8
 		assertTrue(sm.isStateActive(State.State9));
 		assertTrue(sm.isStateActive(State.State6));
@@ -125,7 +109,6 @@ public class TestParallelRegionsEventBasedStatemachine {
 		DefaultInterface di = sm.getDefaultInterface();
 
 		di.raiseEvent1();
-		Thread.sleep(5);
 		// Exit State1
 		int hierarchy = 2;
 		// Entry State2
@@ -134,25 +117,20 @@ public class TestParallelRegionsEventBasedStatemachine {
 		assertEquals(hierarchy, di.getVarHierarchy());
 
 		di.raiseEvent5();
-		Thread.sleep(5);
 		assertEquals(8, di.getVarReg3());
 
 		di.raiseEvent6();
-		Thread.sleep(5);
 		di.raiseEvent3();
-		Thread.sleep(5);
 		// Exit State1
 		hierarchy = 2;
 		assertEquals(-1, di.getVarReg3());
 		assertEquals(hierarchy, di.getVarHierarchy());
 
 		di.raiseEvent1();
-		Thread.sleep(5);
 		// Entry State2
 		hierarchy += 3;
 
 		di.raiseEvent2();
-		Thread.sleep(5);
 		// Entry State4
 		hierarchy *= 4;
 		// Entry State9
@@ -162,7 +140,6 @@ public class TestParallelRegionsEventBasedStatemachine {
 		assertEquals(hierarchy, di.getVarHierarchy());
 
 		di.raiseEvent8();
-		Thread.sleep(5);
 		// Exit State9
 		hierarchy -= 10;
 		// Exit State5
@@ -175,7 +152,6 @@ public class TestParallelRegionsEventBasedStatemachine {
 
 		//Jump to State6 && State9
 		di.raiseEvent11();
-		Thread.sleep(5);
 		// Exit State1
 		hierarchy = 2;
 		// Entry State2

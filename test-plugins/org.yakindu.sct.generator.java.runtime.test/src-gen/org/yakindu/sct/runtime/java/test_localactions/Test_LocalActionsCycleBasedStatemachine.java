@@ -14,6 +14,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.EventVector;
+import java.util.HashMap;
+import java.util.Map;
+import org.yakindu.sct.runtime.java.IGenericAccessStatemachine;
+import org.yakindu.sct.runtime.java.IGenericAccessInterface;
 import org.yakindu.sct.runtime.java.TimeEvent;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
 import org.yakindu.sct.runtime.java.ITimerService;
@@ -22,6 +26,7 @@ import org.yakindu.sct.runtime.java.Notification;
 
 public class Test_LocalActionsCycleBasedStatemachine
 		implements
+			IGenericAccessStatemachine,
 			ITimedStatemachine {
 
 	private enum TimeEvents {
@@ -37,7 +42,7 @@ public class Test_LocalActionsCycleBasedStatemachine
 		State1, State2, $NullState$
 	};
 
-	private DefaultInterfaceImpl defaultInterface;
+	protected Map<String, IGenericAccessInterface> interfaceMap;
 
 	private final State[] stateVector = new State[1];
 
@@ -54,7 +59,8 @@ public class Test_LocalActionsCycleBasedStatemachine
 	public Test_LocalActionsCycleBasedStatemachine() {
 		occuredEvents = new EventVector<Event<? extends Enum<?>>>(6);
 		outEvents = new HashSet<Event<? extends Enum<?>>>();
-		defaultInterface = new DefaultInterfaceImpl(this);
+		interfaceMap = new HashMap<String, IGenericAccessInterface>();
+		interfaceMap.put("DefaultInterface", new DefaultInterfaceImpl(this));
 		State1_time_event_0.setStatemachine(this);
 		State2_time_event_0.setStatemachine(this);
 
@@ -108,12 +114,20 @@ public class Test_LocalActionsCycleBasedStatemachine
 		}
 	}
 
-	public DefaultInterface getDefaultInterface() {
-		return defaultInterface;
+	public IGenericAccessInterface getInterface(String name) {
+		return interfaceMap.get(name);
 	}
 
-	private DefaultInterfaceImpl getDefaultInterfaceImpl() {
-		return defaultInterface;
+	protected Map<String, IGenericAccessInterface> getInterfaceMap() {
+		return interfaceMap;
+	}
+
+	public DefaultInterface getDefaultInterface() {
+		return (DefaultInterface) getInterface("DefaultInterface");
+	}
+
+	protected IDefaultInterfaceImpl getDefaultInterfaceImpl() {
+		return (IDefaultInterfaceImpl) getInterface("DefaultInterface");
 	}
 
 	public void enter() {
@@ -127,7 +141,7 @@ public class Test_LocalActionsCycleBasedStatemachine
 	}
 
 	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
+		//Handle exit of all possible states (of mainRegion) at position 0...
 		switch (stateVector[0]) {
 
 			case State1 :

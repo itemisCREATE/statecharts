@@ -14,17 +14,22 @@ import java.util.Collection;
 import java.util.HashSet;
 import org.yakindu.sct.runtime.java.Event;
 import org.yakindu.sct.runtime.java.EventVector;
+import java.util.HashMap;
+import java.util.Map;
+import org.yakindu.sct.runtime.java.IGenericAccessStatemachine;
+import org.yakindu.sct.runtime.java.IGenericAccessInterface;
 import org.yakindu.sct.runtime.java.IStatemachine;
 
 public class Test_ParallelRegionsCycleBasedStatemachine
 		implements
+			IGenericAccessStatemachine,
 			IStatemachine {
 
 	public enum State {
 		State1, State2, State3, State4, State5, State6, State9, State7, State8, $NullState$
 	};
 
-	private DefaultInterfaceImpl defaultInterface;
+	protected Map<String, IGenericAccessInterface> interfaceMap;
 
 	private final State[] stateVector = new State[3];
 
@@ -37,7 +42,8 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 	public Test_ParallelRegionsCycleBasedStatemachine() {
 		occuredEvents = new EventVector<Event<? extends Enum<?>>>(14);
 		outEvents = new HashSet<Event<? extends Enum<?>>>();
-		defaultInterface = new DefaultInterfaceImpl(this);
+		interfaceMap = new HashMap<String, IGenericAccessInterface>();
+		interfaceMap.put("DefaultInterface", new DefaultInterfaceImpl(this));
 
 	}
 
@@ -70,12 +76,20 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 		return false;
 	}
 
-	public DefaultInterface getDefaultInterface() {
-		return defaultInterface;
+	public IGenericAccessInterface getInterface(String name) {
+		return interfaceMap.get(name);
 	}
 
-	private DefaultInterfaceImpl getDefaultInterfaceImpl() {
-		return defaultInterface;
+	protected Map<String, IGenericAccessInterface> getInterfaceMap() {
+		return interfaceMap;
+	}
+
+	public DefaultInterface getDefaultInterface() {
+		return (DefaultInterface) getInterface("DefaultInterface");
+	}
+
+	protected IDefaultInterfaceImpl getDefaultInterfaceImpl() {
+		return (IDefaultInterfaceImpl) getInterface("DefaultInterface");
 	}
 
 	public void enter() {
@@ -86,7 +100,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 	}
 
 	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
+		//Handle exit of all possible states (of mainRegion) at position 0...
 		switch (stateVector[0]) {
 
 			case State1 :
@@ -117,7 +131,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 			default :
 				break;
 		}
-		//Handle exit of all possible states (of main region) at position 1...
+		//Handle exit of all possible states (of mainRegion) at position 1...
 		switch (stateVector[1]) {
 
 			case State9 :
@@ -133,7 +147,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 			default :
 				break;
 		}
-		//Handle exit of all possible states (of main region) at position 2...
+		//Handle exit of all possible states (of mainRegion) at position 2...
 		switch (stateVector[2]) {
 
 			case State7 :

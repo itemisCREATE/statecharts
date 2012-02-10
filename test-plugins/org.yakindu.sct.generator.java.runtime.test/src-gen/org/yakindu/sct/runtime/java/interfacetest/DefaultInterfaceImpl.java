@@ -20,21 +20,25 @@ import org.yakindu.sct.runtime.java.ValuedEvent;
 
 public class DefaultInterfaceImpl extends NotificationSender
 		implements
-			DefaultInterface {
-	private Map<String, Object> variableMap;
-	private Map<String, Event<Events>> outEventMap;
-	private Map<String, Event<Events>> inEventMap;
+			IDefaultInterfaceImpl {
+	protected Map<String, Object> variableMap;
+	protected Map<String, Event<Events>> outEventMap;
+	protected Map<String, Event<Events>> inEventMap;
 
-	private InterfaceTestCycleBasedStatemachine statemachine;
+	protected InterfaceTestCycleBasedStatemachine statemachine;
 
 	public DefaultInterfaceImpl(InterfaceTestCycleBasedStatemachine statemachine) {
+
 		this.statemachine = statemachine;
 		variableMap = new HashMap<String, Object>();
-		inEventMap = new HashMap<String, Event<Events>>();
-		outEventMap = new HashMap<String, Event<Events>>();
 		variableMap.put("var1", new Boolean(false));
 		variableMap.put("var2", new Double(0D));
 		variableMap.put("var3", new Integer(0));
+
+		inEventMap = new HashMap<String, Event<Events>>();
+
+		outEventMap = new HashMap<String, Event<Events>>();
+
 		inEventMap.put("event1", new Event<Events>(Events.Event1, 0));
 		outEventMap.put("event2", new ValuedEvent<Events, Integer>(
 				Events.Event2, 0, 0));

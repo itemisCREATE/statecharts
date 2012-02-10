@@ -22,6 +22,9 @@ public class Test_ParallelRegionsEventBasedStatemachine
 
 	public Test_ParallelRegionsEventBasedStatemachine() {
 		eventQueue = new LinkedList<Event<? extends Enum<?>>>();
+		//Replace interface map entries of cycle based statemachine super class
+		getInterfaceMap().put("DefaultInterface",
+				new DefaultInterfaceEventBasedImpl(this));
 	}
 
 	@Override

@@ -10,33 +10,32 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java.test_deephistory;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.yakindu.sct.runtime.java.Event;
+import org.yakindu.sct.runtime.java.ValuedEvent;
 
-public class DefaultInterfaceImpl implements DefaultInterface {
-	private final Event<Events> EventEvent1 = new Event<Events>(Events.Event1,
-			0);
-	private final Event<Events> EventEvent2 = new Event<Events>(Events.Event2,
-			0);
-	private final Event<Events> EventEvent3 = new Event<Events>(Events.Event3,
-			0);
-	private final Event<Events> EventEvent4 = new Event<Events>(Events.Event4,
-			0);
-	private final Event<Events> EventEvent5 = new Event<Events>(Events.Event5,
-			0);
-	private final Event<Events> EventEvent6 = new Event<Events>(Events.Event6,
-			0);
-	private final Event<Events> EventEvent7 = new Event<Events>(Events.Event7,
-			0);
-	private final Event<Events> EventEvent8 = new Event<Events>(Events.Event8,
-			0);
-	private final Event<Events> EventEvent9 = new Event<Events>(Events.Event9,
-			0);
+public class DefaultInterfaceImpl implements IDefaultInterfaceImpl {
+	protected Map<String, Event<Events>> inEventMap;
 
-	private Test_DeepHistoryCycleBasedStatemachine statemachine;
+	protected Test_DeepHistoryCycleBasedStatemachine statemachine;
 
 	public DefaultInterfaceImpl(
 			Test_DeepHistoryCycleBasedStatemachine statemachine) {
+
 		this.statemachine = statemachine;
+
+		inEventMap = new HashMap<String, Event<Events>>();
+
+		inEventMap.put("event1", new Event<Events>(Events.Event1, 0));
+		inEventMap.put("event2", new Event<Events>(Events.Event2, 0));
+		inEventMap.put("event3", new Event<Events>(Events.Event3, 0));
+		inEventMap.put("event4", new Event<Events>(Events.Event4, 0));
+		inEventMap.put("event5", new Event<Events>(Events.Event5, 0));
+		inEventMap.put("event6", new Event<Events>(Events.Event6, 0));
+		inEventMap.put("event7", new Event<Events>(Events.Event7, 0));
+		inEventMap.put("event8", new Event<Events>(Events.Event8, 0));
+		inEventMap.put("event9", new Event<Events>(Events.Event9, 0));
 	}
 
 	public void raiseEvent1() {
@@ -44,7 +43,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public Event<Events> getEventEvent1() {
-		return EventEvent1;
+		return inEventMap.get("event1");
 	}
 
 	public void raiseEvent2() {
@@ -52,7 +51,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public Event<Events> getEventEvent2() {
-		return EventEvent2;
+		return inEventMap.get("event2");
 	}
 
 	public void raiseEvent3() {
@@ -60,7 +59,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public Event<Events> getEventEvent3() {
-		return EventEvent3;
+		return inEventMap.get("event3");
 	}
 
 	public void raiseEvent4() {
@@ -68,7 +67,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public Event<Events> getEventEvent4() {
-		return EventEvent4;
+		return inEventMap.get("event4");
 	}
 
 	public void raiseEvent5() {
@@ -76,7 +75,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public Event<Events> getEventEvent5() {
-		return EventEvent5;
+		return inEventMap.get("event5");
 	}
 
 	public void raiseEvent6() {
@@ -84,7 +83,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public Event<Events> getEventEvent6() {
-		return EventEvent6;
+		return inEventMap.get("event6");
 	}
 
 	public void raiseEvent7() {
@@ -92,7 +91,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public Event<Events> getEventEvent7() {
-		return EventEvent7;
+		return inEventMap.get("event7");
 	}
 
 	public void raiseEvent8() {
@@ -100,7 +99,7 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public Event<Events> getEventEvent8() {
-		return EventEvent8;
+		return inEventMap.get("event8");
 	}
 
 	public void raiseEvent9() {
@@ -108,7 +107,35 @@ public class DefaultInterfaceImpl implements DefaultInterface {
 	}
 
 	public Event<Events> getEventEvent9() {
-		return EventEvent9;
+		return inEventMap.get("event9");
 	}
 
+	public boolean raiseEvent(String name) {
+		if (inEventMap.get(name) != null) {
+			return statemachine.getOccuredEvents().add(inEventMap.get(name));
+		}
+		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	public boolean raiseEvent(String name, Object value) {
+		if (inEventMap.get(name) != null
+				&& inEventMap.get(name) instanceof ValuedEvent) {
+			ValuedEvent<?, ?> event = (ValuedEvent<?, ?>) inEventMap.get(name);
+			if (event.getValue().getClass() == value.getClass()) {
+				((ValuedEvent<Events, Object>) event).setValue(value);
+				return statemachine.getOccuredEvents()
+						.add(inEventMap.get(name));
+			}
+		}
+		return false;
+	}
+
+	public boolean setVariable(String name, Object value) {
+		return false;
+	}
+
+	public Object getVariable(String name) {
+		return null;
+	}
 }

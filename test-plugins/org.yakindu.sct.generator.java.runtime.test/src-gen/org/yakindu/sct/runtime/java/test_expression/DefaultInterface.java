@@ -11,9 +11,13 @@ Contributors:
 package org.yakindu.sct.runtime.java.test_expression;
 
 import org.yakindu.sct.runtime.java.INotificationSender;
+import org.yakindu.sct.runtime.java.IGenericAccessInterface;
 import org.yakindu.sct.runtime.java.ValuedEvent;
 
-public interface DefaultInterface extends INotificationSender {
+public interface DefaultInterface
+		extends
+			INotificationSender,
+			IGenericAccessInterface {
 
 	public enum Events {
 		Event1, Event2, Event3,

@@ -1,0 +1,63 @@
+«REM»
+Copyright (c) 2011 committers of YAKINDU and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+Contributors:
+	Markus Muehlbrandt - Initial contribution and API
+«ENDREM»
+«IMPORT stext»
+«IMPORT types»
+
+«EXTENSION org::yakindu::sct::generator::java::templates::ExecutionModelExtensions»
+«EXTENSION org::yakindu::sct::generator::java::templates::TypeModelExtensions»
+«EXTENSION org::yakindu::sct::generator::java::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::java::templates::GenmodelEntries»
+«EXTENSION org::yakindu::sct::generator::java::templates::Naming»
+
+«DEFINE file(sgen::GeneratorEntry entry) FOR InterfaceScope»
+«FILE getImplementationPackagePath(entry)+"/"+getEventBasedInterfaceImplName() + '.java'-»
+«getLicenseHeader(entry)»
+package «getImplementationPackageName(entry)»;
+
+public class «getEventBasedInterfaceImplName()» extends «getInterfaceImplName()» {
+			
+	public «getEventBasedInterfaceImplName()»(«getCycleBasedStatemachineName()» statemachine) {
+		super(statemachine);
+	}
+		
+	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
+		«IF !event.type.isVoid()-»
+		public void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value) {
+			super.raise«event.name.toFirstUpper()»(value);
+			statemachine.runCycle();
+		}
+		«ELSE-»
+		public void raise«event.name.toFirstUpper()»() {
+			super.raise«event.name.toFirstUpper()»();
+		statemachine.runCycle();
+		}
+		«ENDIF-»
+	«ENDFOREACH-»
+	
+	«IF entry.createGenericInterfaceSupport()-»
+	public boolean raiseEvent(String name) {
+		boolean raised = super.raiseEvent(name);
+		if (raised) {
+			statemachine.runCycle();
+		}
+		return raised;
+	}
+	
+	public boolean raiseEvent(String name, Object value) {
+		boolean raised = super.raiseEvent(name, value);
+		if (raised) {
+			statemachine.runCycle();
+		}
+		return raised;
+	}
+	«ENDIF-»
+}
+«ENDFILE-»
+«ENDDEFINE»

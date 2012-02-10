@@ -21,7 +21,6 @@ import org.yakindu.sct.runtime.java.EventNotification;
 import org.yakindu.sct.runtime.java.INotificationListener;
 import org.yakindu.sct.runtime.java.Notification;
 import org.yakindu.sct.runtime.java.NotificationType;
-import org.yakindu.sct.runtime.java.RuntimeService;
 import org.yakindu.sct.runtime.java.interfacetest.InterfaceTestCycleBasedStatemachine.State;
 import org.yakindu.sct.runtime.java.interfacetest.InterfaceTestEventBasedStatemachine;
 
@@ -34,11 +33,6 @@ import org.yakindu.sct.runtime.java.interfacetest.InterfaceTestEventBasedStatema
 public class TestInterfaceTestEventBasedStatemachine {
 
 	private InterfaceTestEventBasedStatemachine statemachine;
-
-	private RuntimeService runtimeService;
-
-	// Minimal cycletime
-	private final long cyclePeriod = 1;
 
 	private static boolean[] events = new boolean[3];
 
@@ -85,23 +79,11 @@ public class TestInterfaceTestEventBasedStatemachine {
 				});
 		statemachine.init();
 		statemachine.enter();
-
-		runtimeService = new RuntimeService(cyclePeriod);
-		runtimeService.addStatemachine(statemachine);
 	}
 
 	@After
 	public void tearDown() {
-		runtimeService.cancel();
 		statemachine = null;
-	}
-
-	private void sleep(long time) {
-		try {
-			Thread.sleep(time);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Test (expected = IllegalArgumentException.class)
@@ -126,7 +108,6 @@ public class TestInterfaceTestEventBasedStatemachine {
 	public void testStatemachineRunCycle_1() {
 
 		statemachine.getDefaultInterface().raiseEvent1();
-		sleep(5);
 		// Test if state is changed to State2
 		assertTrue("Statemachine isn't in State: " + State.State2.name() + ".",
 				statemachine.isStateActive(State.State2));
@@ -137,7 +118,6 @@ public class TestInterfaceTestEventBasedStatemachine {
 				.getDefaultInterface().getEventEvent2().getValue().intValue());
 
 		statemachine.getDefaultInterface().raiseEvent1();
-		sleep(5);
 		// Test if statemachine is back in State 1
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
 				statemachine.isStateActive(State.State1));
@@ -150,7 +130,6 @@ public class TestInterfaceTestEventBasedStatemachine {
 	public void testStatemachineRunCycle_2() {
 		statemachine.getDefaultInterface().setVarVar2(-12.6);
 		statemachine.getDefaultInterface().raiseEvent1();
-		sleep(5);
 		// Test if statemachine is still in State 1
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
 				statemachine.isStateActive(State.State1));
@@ -163,7 +142,6 @@ public class TestInterfaceTestEventBasedStatemachine {
 
 		statemachine.getDefaultInterface().setVarVar2(213.55);
 		statemachine.getDefaultInterface().raiseEvent1();
-		sleep(2);
 		// Test if state is changed to State2
 		assertTrue("Statemachine isn't in State: " + State.State2.name() + ".",
 				statemachine.isStateActive(State.State2));
@@ -177,7 +155,6 @@ public class TestInterfaceTestEventBasedStatemachine {
 	@Test
 	public void testStatemachineRunCycle_3() {
 		statemachine.getInterfaceOther().raiseEvent3();
-		sleep(5);
 		// Test if state is changed to State3
 		assertTrue("Statemachine isn't in State: " + State.State3.name() + ".",
 				statemachine.isStateActive(State.State3));
@@ -185,7 +162,6 @@ public class TestInterfaceTestEventBasedStatemachine {
 		assertTrue("Event not raised: ", events[1]);
 
 		statemachine.getInterfaceOther().raiseEvent3();
-		sleep(5);
 		// Test if statemachine is back in State 1
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
 				statemachine.isStateActive(State.State1));
@@ -198,7 +174,6 @@ public class TestInterfaceTestEventBasedStatemachine {
 	public void testStatemachineRunCycle_4() {
 		statemachine.getDefaultInterface().setVarVar3(2);
 		statemachine.getInterfaceOther().raiseEvent3();
-		sleep(2);
 		// Test if state is changed to State1
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
 				statemachine.isStateActive(State.State1));
@@ -207,7 +182,6 @@ public class TestInterfaceTestEventBasedStatemachine {
 
 		statemachine.getDefaultInterface().setVarVar3(1);
 		statemachine.getInterfaceOther().raiseEvent3();
-		sleep(2);
 		// Test if state is changed to State3
 		assertTrue("Statemachine isn't in State: " + State.State3.name() + ".",
 				statemachine.isStateActive(State.State3));
@@ -219,7 +193,6 @@ public class TestInterfaceTestEventBasedStatemachine {
 	public void testStatemachineRunCycle_5() {
 		statemachine.getDefaultInterface().setVarVar1(true);
 		statemachine.getInterfaceThird().raiseEvent5();
-		sleep(2);
 		// Test if state is changed to State4
 		assertTrue("Statemachine isn't in State: " + State.State4.name() + ".",
 				statemachine.isStateActive(State.State4));
@@ -230,7 +203,6 @@ public class TestInterfaceTestEventBasedStatemachine {
 				.getEventEvent6().getValue());
 
 		statemachine.getInterfaceThird().raiseEvent5();
-		sleep(2);
 		// Test if state is changed to State1
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
 				statemachine.isStateActive(State.State1));

@@ -29,7 +29,7 @@ public class InterfaceTestCycleBasedStatemachine
 		State1, State2, State3, State4, $NullState$
 	};
 
-	private Map<String, IGenericAccessInterface> interfaceMap;
+	protected Map<String, IGenericAccessInterface> interfaceMap;
 
 	private final State[] stateVector = new State[1];
 
@@ -82,26 +82,30 @@ public class InterfaceTestCycleBasedStatemachine
 		return interfaceMap.get(name);
 	}
 
+	protected Map<String, IGenericAccessInterface> getInterfaceMap() {
+		return interfaceMap;
+	}
+
 	public DefaultInterface getDefaultInterface() {
 		return (DefaultInterface) getInterface("DefaultInterface");
 	}
 
-	private DefaultInterfaceImpl getDefaultInterfaceImpl() {
-		return (DefaultInterfaceImpl) getInterface("DefaultInterface");
+	protected IDefaultInterfaceImpl getDefaultInterfaceImpl() {
+		return (IDefaultInterfaceImpl) getInterface("DefaultInterface");
 	}
 	public InterfaceOther getInterfaceOther() {
 		return (InterfaceOther) getInterface("InterfaceOther");
 	}
 
-	private InterfaceOtherImpl getInterfaceOtherImpl() {
-		return (InterfaceOtherImpl) getInterface("InterfaceOther");
+	protected IInterfaceOtherImpl getInterfaceOtherImpl() {
+		return (IInterfaceOtherImpl) getInterface("InterfaceOther");
 	}
 	public InterfaceThird getInterfaceThird() {
 		return (InterfaceThird) getInterface("InterfaceThird");
 	}
 
-	private InterfaceThirdImpl getInterfaceThirdImpl() {
-		return (InterfaceThirdImpl) getInterface("InterfaceThird");
+	protected IInterfaceThirdImpl getInterfaceThirdImpl() {
+		return (IInterfaceThirdImpl) getInterface("InterfaceThird");
 	}
 
 	public void enter() {
@@ -114,7 +118,7 @@ public class InterfaceTestCycleBasedStatemachine
 	}
 
 	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
+		//Handle exit of all possible states (of mainRegion) at position 0...
 		switch (stateVector[0]) {
 
 			case State1 :
@@ -124,6 +128,7 @@ public class InterfaceTestCycleBasedStatemachine
 
 			case State2 :
 				stateVector[0] = State.$NullState$;
+				getInterfaceOtherImpl().setVarV1(10);
 
 				break;
 
@@ -182,6 +187,7 @@ public class InterfaceTestCycleBasedStatemachine
 	private void reactState2() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent1())) {
 			stateVector[0] = State.$NullState$;
+			getInterfaceOtherImpl().setVarV1(10);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.State1;
