@@ -76,6 +76,7 @@ public enum CoreGenerator {
 			}
 			int result = Integer.valueOf(a).compareTo(b);
 			if (result == 0) {
+				//FIXME NullPointerCheck: sth could be null
 				result = o1.getName().compareTo(o2.getName());
 			}
 			return result;

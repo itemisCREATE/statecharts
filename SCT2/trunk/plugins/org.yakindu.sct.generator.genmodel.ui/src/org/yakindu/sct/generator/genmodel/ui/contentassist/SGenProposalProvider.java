@@ -38,6 +38,7 @@ public class SGenProposalProvider extends AbstractSGenProposalProvider {
 		Iterable<GeneratorDescriptor> descriptions = GeneratorExtensions
 				.getGeneratorDescriptors();
 		for (GeneratorDescriptor desc : descriptions) {
+			//FIXME NullPointerCheck: desc could be Null
 			ICompletionProposal proposal = createCompletionProposal(
 					desc.getId(), new StyledString(desc.getName()),
 					desc.getImage(), context);
