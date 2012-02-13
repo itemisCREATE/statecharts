@@ -107,6 +107,7 @@ public class SGenScopeProvider extends XbaseScopeProvider {
 		Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions
 				.getLibraryDescriptor(generatorId);
 		for (LibraryDescriptor desc : libraryDescriptor) {
+			//FIXME Error, if URL could not be resolved
 			Resource library = resourceSet.getResource(desc.getURI(), true);
 			FeatureResourceDescription description = new FeatureResourceDescription(
 					library);
