@@ -122,7 +122,7 @@ public class GeneratorExtensions {
 		return Iterables.find(getGeneratorDescriptors(),
 				new Predicate<GeneratorDescriptor>() {
 					public boolean apply(GeneratorDescriptor input) {
-						return input.getId()!= null && input.getId().equals(generatorId);
+						return input != null && input.getId() != null && input.getId().equals(generatorId);
 					}
 				});
 	}

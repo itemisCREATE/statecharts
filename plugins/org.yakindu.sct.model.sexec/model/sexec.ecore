@@ -3,9 +3,6 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sexec"
     nsURI="http://www.yakindu.org/sct/sexec/1.0.0" nsPrefix="sexec">
-  <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceElement" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
@@ -19,7 +16,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="historyVector" eType="#//StateVector"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExecutionNode" eSuperTypes="#//NamedElement #//MappedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionNode" eSuperTypes="#//MappedElement ../../org.yakindu.base.types/model/base.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reactions" upperBound="-1"
         eType="#//Reaction" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -34,7 +31,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="exitAction" eType="#//Step"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExecutionScope" eSuperTypes="#//NamedElement #//MappedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionScope" eSuperTypes="#//MappedElement ../../org.yakindu.base.types/model/base.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="stateVector" eType="#//StateVector"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subScopes" upperBound="-1"
@@ -56,7 +53,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionEntry" eSuperTypes="#//ExecutionNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionChoice" eSuperTypes="#//ExecutionNode"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Reaction" eSuperTypes="#//NamedElement #//MappedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Reaction" eSuperTypes="#//MappedElement ../../org.yakindu.base.types/model/base.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="check" eType="#//Check"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="effect" eType="#//Step"
@@ -73,7 +70,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="periodic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Step" abstract="true" eSuperTypes="#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Step" abstract="true" eSuperTypes="../../org.yakindu.base.types/model/base.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="caller" upperBound="-1"
         eType="#//Call" eOpposite="#//Call/step"/>

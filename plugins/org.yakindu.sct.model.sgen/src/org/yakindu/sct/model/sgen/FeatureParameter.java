@@ -6,7 +6,7 @@
  */
 package org.yakindu.sct.model.sgen;
 
-import org.yakindu.sct.model.sgraph.NamedElement;
+import org.yakindu.base.base.NamedElement;
 
 /**
  * <!-- begin-user-doc -->

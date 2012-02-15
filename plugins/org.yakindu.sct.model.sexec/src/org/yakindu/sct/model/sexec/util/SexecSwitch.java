@@ -9,22 +9,26 @@ package org.yakindu.sct.model.sexec.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.yakindu.sct.model.sexec.*;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionChoice;
+import org.yakindu.sct.model.sexec.ExecutionEntry;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionNode;
+import org.yakindu.sct.model.sexec.ExecutionRegion;
+import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
+import org.yakindu.sct.model.sexec.HistoryEntry;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.MappedElement;
-import org.yakindu.sct.model.sexec.NamedElement;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.ReactionFired;
+import org.yakindu.sct.model.sexec.SaveHistory;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecPackage;
@@ -34,6 +38,11 @@ import org.yakindu.sct.model.sexec.StateVector;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.Trace;
+import org.yakindu.sct.model.sexec.TraceBeginRunCycle;
+import org.yakindu.sct.model.sexec.TraceEndRunCycle;
+import org.yakindu.sct.model.sexec.TraceNodeExecuted;
+import org.yakindu.sct.model.sexec.TraceStateEntered;
+import org.yakindu.sct.model.sexec.TraceStateExited;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Event;
@@ -96,12 +105,6 @@ public class SexecSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case SexecPackage.NAMED_ELEMENT: {
-				NamedElement namedElement = (NamedElement)theEObject;
-				T result = caseNamedElement(namedElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case SexecPackage.MAPPED_ELEMENT: {
 				MappedElement mappedElement = (MappedElement)theEObject;
 				T result = caseMappedElement(mappedElement);
@@ -113,16 +116,16 @@ public class SexecSwitch<T> extends Switch<T> {
 				T result = caseExecutionFlow(executionFlow);
 				if (result == null) result = caseScopedElement(executionFlow);
 				if (result == null) result = caseExecutionScope(executionFlow);
-				if (result == null) result = caseNamedElement(executionFlow);
 				if (result == null) result = caseMappedElement(executionFlow);
+				if (result == null) result = caseNamedElement(executionFlow);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case SexecPackage.EXECUTION_NODE: {
 				ExecutionNode executionNode = (ExecutionNode)theEObject;
 				T result = caseExecutionNode(executionNode);
-				if (result == null) result = caseNamedElement(executionNode);
 				if (result == null) result = caseMappedElement(executionNode);
+				if (result == null) result = caseNamedElement(executionNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -131,16 +134,16 @@ public class SexecSwitch<T> extends Switch<T> {
 				T result = caseExecutionState(executionState);
 				if (result == null) result = caseExecutionNode(executionState);
 				if (result == null) result = caseExecutionScope(executionState);
-				if (result == null) result = caseNamedElement(executionState);
 				if (result == null) result = caseMappedElement(executionState);
+				if (result == null) result = caseNamedElement(executionState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case SexecPackage.EXECUTION_SCOPE: {
 				ExecutionScope executionScope = (ExecutionScope)theEObject;
 				T result = caseExecutionScope(executionScope);
-				if (result == null) result = caseNamedElement(executionScope);
 				if (result == null) result = caseMappedElement(executionScope);
+				if (result == null) result = caseNamedElement(executionScope);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -148,8 +151,8 @@ public class SexecSwitch<T> extends Switch<T> {
 				ExecutionRegion executionRegion = (ExecutionRegion)theEObject;
 				T result = caseExecutionRegion(executionRegion);
 				if (result == null) result = caseExecutionScope(executionRegion);
-				if (result == null) result = caseNamedElement(executionRegion);
 				if (result == null) result = caseMappedElement(executionRegion);
+				if (result == null) result = caseNamedElement(executionRegion);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -157,8 +160,8 @@ public class SexecSwitch<T> extends Switch<T> {
 				ExecutionEntry executionEntry = (ExecutionEntry)theEObject;
 				T result = caseExecutionEntry(executionEntry);
 				if (result == null) result = caseExecutionNode(executionEntry);
-				if (result == null) result = caseNamedElement(executionEntry);
 				if (result == null) result = caseMappedElement(executionEntry);
+				if (result == null) result = caseNamedElement(executionEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -166,16 +169,16 @@ public class SexecSwitch<T> extends Switch<T> {
 				ExecutionChoice executionChoice = (ExecutionChoice)theEObject;
 				T result = caseExecutionChoice(executionChoice);
 				if (result == null) result = caseExecutionNode(executionChoice);
-				if (result == null) result = caseNamedElement(executionChoice);
 				if (result == null) result = caseMappedElement(executionChoice);
+				if (result == null) result = caseNamedElement(executionChoice);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case SexecPackage.REACTION: {
 				Reaction reaction = (Reaction)theEObject;
 				T result = caseReaction(reaction);
-				if (result == null) result = caseNamedElement(reaction);
 				if (result == null) result = caseMappedElement(reaction);
+				if (result == null) result = caseNamedElement(reaction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -190,7 +193,7 @@ public class SexecSwitch<T> extends Switch<T> {
 				T result = caseTimeEvent(timeEvent);
 				if (result == null) result = caseEvent(timeEvent);
 				if (result == null) result = caseDeclaration(timeEvent);
-				if (result == null) result = caseSGraph_NamedElement(timeEvent);
+				if (result == null) result = caseNamedElement(timeEvent);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -900,21 +903,6 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseScopedElement(ScopedElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSGraph_NamedElement(org.yakindu.sct.model.sgraph.NamedElement object) {
 		return null;
 	}
 

@@ -45,7 +45,7 @@ class StructureMapping {
 	
 	
 	/**
-	 * 
+	 *  
 	 */
 	def Scope map(Scope scope) {
 		val _scope = scope.create

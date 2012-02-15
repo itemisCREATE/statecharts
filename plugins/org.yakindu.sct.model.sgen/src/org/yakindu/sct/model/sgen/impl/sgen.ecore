@@ -12,7 +12,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="configurations" upperBound="-1"
         eType="#//FeatureConfiguration" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FeatureType" eSuperTypes="http://www.yakindu.org/sct/sgraph/2.0.0#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureType" eSuperTypes="http://www.yakindu.org/base/base/2.0.0#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//FeatureParameter" containment="true" eOpposite="#//FeatureParameter/featureType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="library" lowerBound="1"
@@ -21,7 +21,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FeatureParameter" eSuperTypes="http://www.yakindu.org/sct/sgraph/2.0.0#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureParameter" eSuperTypes="http://www.yakindu.org/base/base/2.0.0#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="featureType" eType="#//FeatureType"
         eOpposite="#//FeatureType/parameters"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"

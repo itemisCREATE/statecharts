@@ -7,6 +7,7 @@
 package org.yakindu.sct.model.sexec;
 
 import org.eclipse.emf.common.util.EList;
+import org.yakindu.base.base.NamedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +29,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ExecutionScope extends NamedElement, MappedElement {
+public interface ExecutionScope extends MappedElement, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>State Vector</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EObject
 import java.util.List
 import com.google.inject.Inject
 
-/**
+/** 
  * <p>Infers a JVM model from the source model.</p> 
  *
  * <p>The JVM model should contain all elements that would appear in the Java code 

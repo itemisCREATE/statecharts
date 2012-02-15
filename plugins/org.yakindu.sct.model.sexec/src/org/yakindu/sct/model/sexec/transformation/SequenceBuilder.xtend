@@ -1,5 +1,5 @@
 package org.yakindu.sct.model.sexec.transformation
-
+ 
 import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import org.yakindu.sct.model.sexec.ExecutionFlow

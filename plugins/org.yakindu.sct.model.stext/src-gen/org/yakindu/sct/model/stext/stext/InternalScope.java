@@ -2,11 +2,9 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext;
 
-import org.yakindu.sct.model.sgraph.Scope;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,6 +16,6 @@ import org.yakindu.sct.model.sgraph.Scope;
  * @model
  * @generated
  */
-public interface InternalScope extends Scope
+public interface InternalScope extends StatechartScope
 {
 } // InternalScope

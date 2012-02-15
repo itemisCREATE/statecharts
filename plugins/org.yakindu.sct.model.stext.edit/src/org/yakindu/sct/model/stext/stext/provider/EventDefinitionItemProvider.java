@@ -26,7 +26,9 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.yakindu.sct.model.sgraph.provider.EventItemProvider;
+import org.yakindu.base.types.TypesPackage;
+
+import org.yakindu.sct.model.sgraph.provider.DeclarationItemProvider;
 
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.StextFactory;
@@ -39,7 +41,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * @generated
  */
 public class EventDefinitionItemProvider
-  extends EventItemProvider
+  extends DeclarationItemProvider
   implements
     IEditingDomainItemProvider,
     IStructuredItemContentProvider,
@@ -71,10 +73,33 @@ public class EventDefinitionItemProvider
     {
       super.getPropertyDescriptors(object);
 
-      addDirectionPropertyDescriptor(object);
       addTypePropertyDescriptor(object);
+      addDirectionPropertyDescriptor(object);
     }
     return itemPropertyDescriptors;
+  }
+
+  /**
+   * This adds a property descriptor for the Type feature.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected void addTypePropertyDescriptor(Object object)
+  {
+    itemPropertyDescriptors.add
+      (createItemPropertyDescriptor
+        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+         getResourceLocator(),
+         getString("_UI_TypedElement_type_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_TypedElement_type_feature", "_UI_TypedElement_type"),
+         TypesPackage.Literals.TYPED_ELEMENT__TYPE,
+         true,
+         false,
+         true,
+         null,
+         null,
+         null));
   }
 
   /**
@@ -96,29 +121,6 @@ public class EventDefinitionItemProvider
          false,
          false,
          ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-         null,
-         null));
-  }
-
-  /**
-   * This adds a property descriptor for the Type feature.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected void addTypePropertyDescriptor(Object object)
-  {
-    itemPropertyDescriptors.add
-      (createItemPropertyDescriptor
-        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-         getResourceLocator(),
-         getString("_UI_EventDefinition_type_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_EventDefinition_type_feature", "_UI_EventDefinition_type"),
-         StextPackage.Literals.EVENT_DEFINITION__TYPE,
-         true,
-         false,
-         true,
-         null,
          null,
          null));
   }
@@ -179,8 +181,8 @@ public class EventDefinitionItemProvider
   {
     String label = ((EventDefinition)object).getName();
     return label == null || label.length() == 0 ?
-      "Event" :
-      "Event" + " " + label;
+      getString("_UI_EventDefinition_type") :
+      getString("_UI_EventDefinition_type") + " " + label;
   }
 
   /**

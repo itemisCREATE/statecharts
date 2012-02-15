@@ -2,13 +2,10 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
-import org.yakindu.sct.model.sgraph.impl.ScopeImpl;
 
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -22,7 +19,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  *
  * @generated
  */
-public class InternalScopeImpl extends ScopeImpl implements InternalScope
+public class InternalScopeImpl extends StatechartScopeImpl implements InternalScope
 {
   /**
    * <!-- begin-user-doc -->

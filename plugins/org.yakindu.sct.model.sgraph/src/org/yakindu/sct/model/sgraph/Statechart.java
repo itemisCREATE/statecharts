@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.model.sgraph;
 
+import org.yakindu.base.base.NamedElement;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +23,7 @@ package org.yakindu.sct.model.sgraph;
  * @model
  * @generated
  */
-public interface Statechart extends NamedElement, SpecificationElement, ReactiveElement, ScopedElement, CompositeElement {
+public interface Statechart extends SpecificationElement, ReactiveElement, ScopedElement, CompositeElement, NamedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

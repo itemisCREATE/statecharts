@@ -26,6 +26,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.propertysheets.OrderElementControl.ISourceObjectCallback;
@@ -110,7 +111,7 @@ public class StatechartPropertySection extends
 	private void bindNameControl(EMFDataBindingContext context) {
 		IEMFValueProperty property = EMFEditProperties.value(
 				TransactionUtil.getEditingDomain(eObject),
-				SGraphPackage.Literals.NAMED_ELEMENT__NAME);
+				BasePackage.Literals.NAMED_ELEMENT__NAME);
 		ISWTObservableValue observe = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.DefaultSelection})
 				.observe(txtName);
 		context.bindValue(observe, property.observe(eObject));

@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext;
 
@@ -97,6 +96,42 @@ public interface StextFactory extends EFactory
    * @generated
    */
   TransitionSpecification createTransitionSpecification();
+
+  /**
+   * Returns a new object of class '<em>Statechart Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Statechart Scope</em>'.
+   * @generated
+   */
+  StatechartScope createStatechartScope();
+
+  /**
+   * Returns a new object of class '<em>Interface Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Interface Scope</em>'.
+   * @generated
+   */
+  InterfaceScope createInterfaceScope();
+
+  /**
+   * Returns a new object of class '<em>Internal Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Internal Scope</em>'.
+   * @generated
+   */
+  InternalScope createInternalScope();
+
+  /**
+   * Returns a new object of class '<em>Event Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Event Definition</em>'.
+   * @generated
+   */
+  EventDefinition createEventDefinition();
 
   /**
    * Returns a new object of class '<em>Event Derivation</em>'.
@@ -349,33 +384,6 @@ public interface StextFactory extends EFactory
    * @generated
    */
   SimpleScope createSimpleScope();
-
-  /**
-   * Returns a new object of class '<em>Interface Scope</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Interface Scope</em>'.
-   * @generated
-   */
-  InterfaceScope createInterfaceScope();
-
-  /**
-   * Returns a new object of class '<em>Internal Scope</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Internal Scope</em>'.
-   * @generated
-   */
-  InternalScope createInternalScope();
-
-  /**
-   * Returns a new object of class '<em>Event Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Event Definition</em>'.
-   * @generated
-   */
-  EventDefinition createEventDefinition();
 
   /**
    * Returns a new object of class '<em>Variable Definition</em>'.

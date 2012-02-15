@@ -7,6 +7,7 @@
 package org.yakindu.sct.model.sexec;
 
 import org.eclipse.emf.common.util.EList;
+import org.yakindu.base.base.NamedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ExecutionNode extends NamedElement, MappedElement {
+public interface ExecutionNode extends MappedElement, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Reactions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.sct.model.sexec.Reaction}.

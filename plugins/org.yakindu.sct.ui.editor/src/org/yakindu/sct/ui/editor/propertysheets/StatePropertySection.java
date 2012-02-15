@@ -38,6 +38,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
@@ -152,7 +153,7 @@ public class StatePropertySection extends
 	private void bindNameControl(EMFDataBindingContext context) {
 		IEMFValueProperty nameProperty = EMFEditProperties.value(
 				TransactionUtil.getEditingDomain(eObject),
-				SGraphPackage.Literals.NAMED_ELEMENT__NAME);
+				BasePackage.Literals.NAMED_ELEMENT__NAME);
 		ISWTObservableValue nameTextProperty = WidgetProperties.text(
 				new int[]{SWT.FocusOut, SWT.DefaultSelection}).observe(txtName);
 		context.bindValue(nameTextProperty, nameProperty.observe(eObject));

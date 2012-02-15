@@ -8,10 +8,10 @@ package org.yakindu.sct.model.sexec.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -28,7 +28,6 @@ import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.HistoryEntry;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.MappedElement;
-import org.yakindu.sct.model.sexec.NamedElement;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.ReactionFired;
 import org.yakindu.sct.model.sexec.SaveHistory;
@@ -39,15 +38,12 @@ import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.StateVector;
-import org.yakindu.sct.model.sexec.StateVectorType;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.Trace;
 import org.yakindu.sct.model.sexec.TraceBeginRunCycle;
 import org.yakindu.sct.model.sexec.TraceEndRunCycle;
 import org.yakindu.sct.model.sexec.TraceNodeExecuted;
-import org.yakindu.sct.model.sexec.TraceRegionEntered;
-import org.yakindu.sct.model.sexec.TraceRegionExited;
 import org.yakindu.sct.model.sexec.TraceStateEntered;
 import org.yakindu.sct.model.sexec.TraceStateExited;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
@@ -115,13 +111,6 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * @generated
 	 */
 	private EClass reactionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass namedElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -621,24 +610,6 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 */
 	public EAttribute getReaction_Transition() {
 		return (EAttribute)reactionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getNamedElement() {
-		return namedElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getNamedElement_Name() {
-		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1209,9 +1180,6 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		namedElementEClass = createEClass(NAMED_ELEMENT);
-		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
-
 		mappedElementEClass = createEClass(MAPPED_ELEMENT);
 		createEReference(mappedElementEClass, MAPPED_ELEMENT__SOURCE_ELEMENT);
 
@@ -1360,6 +1328,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		// Obtain other dependent packages
 		SGraphPackage theSGraphPackage = (SGraphPackage)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI);
+		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1368,19 +1337,19 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		// Add supertypes to classes
 		executionFlowEClass.getESuperTypes().add(theSGraphPackage.getScopedElement());
 		executionFlowEClass.getESuperTypes().add(this.getExecutionScope());
-		executionNodeEClass.getESuperTypes().add(this.getNamedElement());
 		executionNodeEClass.getESuperTypes().add(this.getMappedElement());
+		executionNodeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		executionStateEClass.getESuperTypes().add(this.getExecutionNode());
 		executionStateEClass.getESuperTypes().add(this.getExecutionScope());
-		executionScopeEClass.getESuperTypes().add(this.getNamedElement());
 		executionScopeEClass.getESuperTypes().add(this.getMappedElement());
+		executionScopeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		executionRegionEClass.getESuperTypes().add(this.getExecutionScope());
 		executionEntryEClass.getESuperTypes().add(this.getExecutionNode());
 		executionChoiceEClass.getESuperTypes().add(this.getExecutionNode());
-		reactionEClass.getESuperTypes().add(this.getNamedElement());
 		reactionEClass.getESuperTypes().add(this.getMappedElement());
+		reactionEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		timeEventEClass.getESuperTypes().add(theSGraphPackage.getEvent());
-		stepEClass.getESuperTypes().add(this.getNamedElement());
+		stepEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		sequenceEClass.getESuperTypes().add(this.getStep());
 		checkEClass.getESuperTypes().add(this.getStep());
 		checkRefEClass.getESuperTypes().add(this.getCheck());
@@ -1403,9 +1372,6 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		historyEntryEClass.getESuperTypes().add(this.getStep());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(namedElementEClass, NamedElement.class, "NamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(mappedElementEClass, MappedElement.class, "MappedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappedElement_SourceElement(), ecorePackage.getEObject(), null, "sourceElement", null, 0, 1, MappedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

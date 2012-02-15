@@ -7,8 +7,7 @@
 package org.yakindu.sct.model.sgen;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.yakindu.sct.model.sgraph.NamedElement;
+import org.yakindu.base.base.NamedElement;
 
 /**
  * <!-- begin-user-doc -->

@@ -2,15 +2,12 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
-
-import org.yakindu.sct.model.sgraph.Scope;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,7 +56,7 @@ public interface StatechartSpecification extends EObject
 
   /**
    * Returns the value of the '<em><b>Definition Scopes</b></em>' containment reference list.
-   * The list contents are of type {@link org.yakindu.sct.model.sgraph.Scope}.
+   * The list contents are of type {@link org.yakindu.sct.model.stext.stext.StatechartScope}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Definition Scopes</em>' containment reference list isn't clear,
@@ -71,6 +68,6 @@ public interface StatechartSpecification extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<Scope> getDefinitionScopes();
+  EList<StatechartScope> getDefinitionScopes();
 
 } // StatechartSpecification

@@ -12,6 +12,7 @@ package org.yakindu.sct.model.sgraph.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.yakindu.base.base.provider.BaseEditPlugin;
 
 /**
  * This is the central singleton for the SGraph edit plugin.
@@ -52,6 +53,7 @@ public final class SGraphEditPlugin extends EMFPlugin {
 	public SGraphEditPlugin() {
 		super
 		  (new ResourceLocator [] {
+		     BaseEditPlugin.INSTANCE,
 		   });
 	}
 

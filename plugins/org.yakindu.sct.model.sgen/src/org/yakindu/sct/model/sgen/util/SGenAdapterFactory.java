@@ -8,14 +8,18 @@ package org.yakindu.sct.model.sgen.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.yakindu.sct.model.sgen.*;
-
-import org.yakindu.sct.model.sgraph.NamedElement;
+import org.yakindu.base.base.NamedElement;
+import org.yakindu.sct.model.sgen.FeatureConfiguration;
+import org.yakindu.sct.model.sgen.FeatureParameter;
+import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.FeatureType;
+import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
+import org.yakindu.sct.model.sgen.GeneratorConfiguration;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
+import org.yakindu.sct.model.sgen.GeneratorModel;
+import org.yakindu.sct.model.sgen.SGenPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -242,13 +246,13 @@ public class SGenAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.NamedElement <em>Named Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.base.NamedElement <em>Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.sgraph.NamedElement
+	 * @see org.yakindu.base.base.NamedElement
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {

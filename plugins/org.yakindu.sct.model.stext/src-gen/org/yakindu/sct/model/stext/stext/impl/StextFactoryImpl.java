@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -77,6 +76,10 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.STATECHART_SPECIFICATION: return createStatechartSpecification();
       case StextPackage.STATE_SPECIFICATION: return createStateSpecification();
       case StextPackage.TRANSITION_SPECIFICATION: return createTransitionSpecification();
+      case StextPackage.STATECHART_SCOPE: return createStatechartScope();
+      case StextPackage.INTERFACE_SCOPE: return createInterfaceScope();
+      case StextPackage.INTERNAL_SCOPE: return createInternalScope();
+      case StextPackage.EVENT_DEFINITION: return createEventDefinition();
       case StextPackage.EVENT_DERIVATION: return createEventDerivation();
       case StextPackage.LOCAL_REACTION: return createLocalReaction();
       case StextPackage.TRANSITION_REACTION: return createTransitionReaction();
@@ -105,9 +108,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.REAL_LITERAL: return createRealLiteral();
       case StextPackage.HEX_LITERAL: return createHexLiteral();
       case StextPackage.SIMPLE_SCOPE: return createSimpleScope();
-      case StextPackage.INTERFACE_SCOPE: return createInterfaceScope();
-      case StextPackage.INTERNAL_SCOPE: return createInternalScope();
-      case StextPackage.EVENT_DEFINITION: return createEventDefinition();
       case StextPackage.VARIABLE_DEFINITION: return createVariableDefinition();
       case StextPackage.OPERATION: return createOperation();
       case StextPackage.ENTRYPOINT: return createEntrypoint();
@@ -285,6 +285,50 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     TransitionSpecificationImpl transitionSpecification = new TransitionSpecificationImpl();
     return transitionSpecification;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public StatechartScope createStatechartScope()
+  {
+    StatechartScopeImpl statechartScope = new StatechartScopeImpl();
+    return statechartScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InterfaceScope createInterfaceScope()
+  {
+    InterfaceScopeImpl interfaceScope = new InterfaceScopeImpl();
+    return interfaceScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InternalScope createInternalScope()
+  {
+    InternalScopeImpl internalScope = new InternalScopeImpl();
+    return internalScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EventDefinition createEventDefinition()
+  {
+    EventDefinitionImpl eventDefinition = new EventDefinitionImpl();
+    return eventDefinition;
   }
 
   /**
@@ -593,39 +637,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     SimpleScopeImpl simpleScope = new SimpleScopeImpl();
     return simpleScope;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InterfaceScope createInterfaceScope()
-  {
-    InterfaceScopeImpl interfaceScope = new InterfaceScopeImpl();
-    return interfaceScope;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InternalScope createInternalScope()
-  {
-    InternalScopeImpl internalScope = new InternalScopeImpl();
-    return internalScope;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EventDefinition createEventDefinition()
-  {
-    EventDefinitionImpl eventDefinition = new EventDefinitionImpl();
-    return eventDefinition;
   }
 
   /**

@@ -43,7 +43,7 @@ typedef enum {
 «ENDFOREACH -»
   event_last
 } EventID;
-
+ 
 «FOREACH this.declaredEvents() AS ev»
 typedef struct { 
   _Event baseEvent;

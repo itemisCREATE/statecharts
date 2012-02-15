@@ -11,8 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
-import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.base.base.BasePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -144,7 +143,7 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_TYPE__NAME = SGraphPackage.NAMED_ELEMENT__NAME;
+	int FEATURE_TYPE__NAME = BasePackage.NAMED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -153,7 +152,7 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_TYPE__PARAMETERS = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int FEATURE_TYPE__PARAMETERS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Library</b></em>' reference.
@@ -162,7 +161,7 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_TYPE__LIBRARY = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int FEATURE_TYPE__LIBRARY = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -171,7 +170,7 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_TYPE__OPTIONAL = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int FEATURE_TYPE__OPTIONAL = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Feature Type</em>' class.
@@ -180,7 +179,7 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_TYPE_FEATURE_COUNT = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int FEATURE_TYPE_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.FeatureParameterImpl <em>Feature Parameter</em>}' class.
@@ -199,7 +198,7 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_PARAMETER__NAME = SGraphPackage.NAMED_ELEMENT__NAME;
+	int FEATURE_PARAMETER__NAME = BasePackage.NAMED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Feature Type</b></em>' container reference.
@@ -208,7 +207,7 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_PARAMETER__FEATURE_TYPE = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int FEATURE_PARAMETER__FEATURE_TYPE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -217,7 +216,7 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_PARAMETER__OPTIONAL = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int FEATURE_PARAMETER__OPTIONAL = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Type</b></em>' attribute.
@@ -226,7 +225,7 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_PARAMETER__PARAMETER_TYPE = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int FEATURE_PARAMETER__PARAMETER_TYPE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Feature Parameter</em>' class.
@@ -235,7 +234,7 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_PARAMETER_FEATURE_COUNT = SGraphPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int FEATURE_PARAMETER_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.FeatureConfigurationImpl <em>Feature Configuration</em>}' class.

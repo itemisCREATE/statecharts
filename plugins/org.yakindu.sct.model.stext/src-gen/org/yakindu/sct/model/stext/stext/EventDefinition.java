@@ -2,12 +2,10 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext;
 
-import org.yakindu.base.types.Type;
-
+import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Event;
 
 /**
@@ -19,7 +17,6 @@ import org.yakindu.sct.model.sgraph.Event;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.stext.stext.EventDefinition#getDirection <em>Direction</em>}</li>
- *   <li>{@link org.yakindu.sct.model.stext.stext.EventDefinition#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.EventDefinition#getDerivation <em>Derivation</em>}</li>
  * </ul>
  * </p>
@@ -28,7 +25,7 @@ import org.yakindu.sct.model.sgraph.Event;
  * @model
  * @generated
  */
-public interface EventDefinition extends Event
+public interface EventDefinition extends Declaration, Event, org.yakindu.base.types.Event
 {
   /**
    * Returns the value of the '<em><b>Direction</b></em>' attribute.
@@ -58,32 +55,6 @@ public interface EventDefinition extends Event
    * @generated
    */
   void setDirection(Direction value);
-
-  /**
-   * Returns the value of the '<em><b>Type</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(Type)
-   * @see org.yakindu.sct.model.stext.stext.StextPackage#getEventDefinition_Type()
-   * @model
-   * @generated
-   */
-  Type getType();
-
-  /**
-   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.EventDefinition#getType <em>Type</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' reference.
-   * @see #getType()
-   * @generated
-   */
-  void setType(Type value);
 
   /**
    * Returns the value of the '<em><b>Derivation</b></em>' containment reference.

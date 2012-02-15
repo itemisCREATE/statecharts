@@ -12,11 +12,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.yakindu.base.base.impl.NamedElementImpl;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.ParameterTypes;
 import org.yakindu.sct.model.sgen.SGenPackage;
-import org.yakindu.sct.model.sgraph.impl.NamedElementImpl;
 
 /**
  * <!-- begin-user-doc -->

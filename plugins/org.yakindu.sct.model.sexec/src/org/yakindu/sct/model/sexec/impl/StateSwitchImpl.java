@@ -20,7 +20,6 @@ import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
-import org.yakindu.sct.model.sexec.StateVectorType;
 
 /**
  * <!-- begin-user-doc -->

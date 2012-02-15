@@ -27,8 +27,6 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.yakindu.sct.model.sgraph.SGraphFactory;
-
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -199,7 +197,7 @@ public class StatechartSpecificationItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.STATECHART_SPECIFICATION__DEFINITION_SCOPES,
-         StextFactory.eINSTANCE.createSimpleScope()));
+         StextFactory.eINSTANCE.createStatechartScope()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -210,11 +208,6 @@ public class StatechartSpecificationItemProvider
       (createChildParameter
         (StextPackage.Literals.STATECHART_SPECIFICATION__DEFINITION_SCOPES,
          StextFactory.eINSTANCE.createInternalScope()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.STATECHART_SPECIFICATION__DEFINITION_SCOPES,
-         SGraphFactory.eINSTANCE.createScope()));
   }
 
   /**

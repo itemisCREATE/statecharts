@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.yakindu.base.base.BasePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -72,34 +73,6 @@ public interface SGraphPackage extends EPackage {
 	SGraphPackage eINSTANCE = org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.NamedElementImpl <em>Named Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sgraph.impl.NamedElementImpl
-	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getNamedElement()
-	 * @generated
-	 */
-	int NAMED_ELEMENT = 2;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT__NAME = 0;
-
-	/**
-	 * The number of structural features of the '<em>Named Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.VertexImpl <em>Vertex</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -116,7 +89,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VERTEX__NAME = NAMED_ELEMENT__NAME;
+	int VERTEX__NAME = BasePackage.NAMED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parent Region</b></em>' container reference.
@@ -125,7 +98,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VERTEX__PARENT_REGION = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int VERTEX__PARENT_REGION = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Transitions</b></em>' reference list.
@@ -134,7 +107,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VERTEX__INCOMING_TRANSITIONS = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int VERTEX__INCOMING_TRANSITIONS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
@@ -143,7 +116,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VERTEX__OUTGOING_TRANSITIONS = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int VERTEX__OUTGOING_TRANSITIONS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Vertex</em>' class.
@@ -152,7 +125,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VERTEX_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int VERTEX_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.PseudostateImpl <em>Pseudostate</em>}' class.
@@ -217,7 +190,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getRegion()
 	 * @generated
 	 */
-	int REGION = 3;
+	int REGION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -226,7 +199,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__NAME = NAMED_ELEMENT__NAME;
+	int REGION__NAME = BasePackage.NAMED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Vertices</b></em>' containment reference list.
@@ -235,7 +208,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__VERTICES = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int REGION__VERTICES = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Priority</b></em>' attribute.
@@ -244,7 +217,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__PRIORITY = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int REGION__PRIORITY = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Composite</b></em>' container reference.
@@ -253,7 +226,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__COMPOSITE = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int REGION__COMPOSITE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Region</em>' class.
@@ -262,7 +235,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int REGION_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.SpecificationElementImpl <em>Specification Element</em>}' class.
@@ -272,7 +245,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getSpecificationElement()
 	 * @generated
 	 */
-	int SPECIFICATION_ELEMENT = 13;
+	int SPECIFICATION_ELEMENT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Specification</b></em>' attribute.
@@ -300,7 +273,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getTransition()
 	 * @generated
 	 */
-	int TRANSITION = 4;
+	int TRANSITION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Specification</b></em>' attribute.
@@ -373,7 +346,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getRegularState()
 	 * @generated
 	 */
-	int REGULAR_STATE = 23;
+	int REGULAR_STATE = 22;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -428,7 +401,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getState()
 	 * @generated
 	 */
-	int STATE = 21;
+	int STATE = 20;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.FinalStateImpl <em>Final State</em>}' class.
@@ -438,7 +411,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getFinalState()
 	 * @generated
 	 */
-	int FINAL_STATE = 5;
+	int FINAL_STATE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -493,7 +466,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getDeclaration()
 	 * @generated
 	 */
-	int DECLARATION = 14;
+	int DECLARATION = 13;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -502,7 +475,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARATION__NAME = NAMED_ELEMENT__NAME;
+	int DECLARATION__NAME = BasePackage.NAMED_ELEMENT__NAME;
 
 	/**
 	 * The number of structural features of the '<em>Declaration</em>' class.
@@ -511,7 +484,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARATION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int DECLARATION_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.VariableImpl <em>Variable</em>}' class.
@@ -521,7 +494,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getVariable()
 	 * @generated
 	 */
-	int VARIABLE = 6;
+	int VARIABLE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -549,7 +522,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEvent()
 	 * @generated
 	 */
-	int EVENT = 7;
+	int EVENT = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -577,7 +550,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getChoice()
 	 * @generated
 	 */
-	int CHOICE = 8;
+	int CHOICE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -641,16 +614,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getStatechart()
 	 * @generated
 	 */
-	int STATECHART = 9;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATECHART__NAME = NAMED_ELEMENT__NAME;
+	int STATECHART = 8;
 
 	/**
 	 * The feature id for the '<em><b>Specification</b></em>' attribute.
@@ -659,7 +623,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__SPECIFICATION = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int STATECHART__SPECIFICATION = SPECIFICATION_ELEMENT__SPECIFICATION;
 
 	/**
 	 * The feature id for the '<em><b>Reactions</b></em>' reference list.
@@ -668,7 +632,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__REACTIONS = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int STATECHART__REACTIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Local Reactions</b></em>' reference list.
@@ -677,7 +641,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__LOCAL_REACTIONS = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int STATECHART__LOCAL_REACTIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Scopes</b></em>' containment reference list.
@@ -686,7 +650,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__SCOPES = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int STATECHART__SCOPES = SPECIFICATION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
@@ -695,7 +659,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__NAMESPACE = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int STATECHART__NAMESPACE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
@@ -704,7 +668,16 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__REGIONS = NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int STATECHART__REGIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATECHART__NAME = SPECIFICATION_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Statechart</em>' class.
@@ -713,7 +686,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int STATECHART_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.EntryImpl <em>Entry</em>}' class.
@@ -723,7 +696,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEntry()
 	 * @generated
 	 */
-	int ENTRY = 10;
+	int ENTRY = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -787,7 +760,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getTrigger()
 	 * @generated
 	 */
-	int TRIGGER = 11;
+	int TRIGGER = 10;
 
 	/**
 	 * The number of structural features of the '<em>Trigger</em>' class.
@@ -806,7 +779,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEffect()
 	 * @generated
 	 */
-	int EFFECT = 12;
+	int EFFECT = 11;
 
 	/**
 	 * The number of structural features of the '<em>Effect</em>' class.
@@ -825,7 +798,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getReaction()
 	 * @generated
 	 */
-	int REACTION = 15;
+	int REACTION = 14;
 
 	/**
 	 * The feature id for the '<em><b>Trigger</b></em>' containment reference.
@@ -862,7 +835,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getReactiveElement()
 	 * @generated
 	 */
-	int REACTIVE_ELEMENT = 16;
+	int REACTIVE_ELEMENT = 15;
 
 	/**
 	 * The feature id for the '<em><b>Reactions</b></em>' reference list.
@@ -899,7 +872,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getExit()
 	 * @generated
 	 */
-	int EXIT = 17;
+	int EXIT = 16;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -954,7 +927,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getScope()
 	 * @generated
 	 */
-	int SCOPE = 18;
+	int SCOPE = 17;
 
 	/**
 	 * The feature id for the '<em><b>Declarations</b></em>' containment reference list.
@@ -1000,7 +973,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getScopedElement()
 	 * @generated
 	 */
-	int SCOPED_ELEMENT = 19;
+	int SCOPED_ELEMENT = 18;
 
 	/**
 	 * The feature id for the '<em><b>Scopes</b></em>' containment reference list.
@@ -1037,7 +1010,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getSynchronization()
 	 * @generated
 	 */
-	int SYNCHRONIZATION = 20;
+	int SYNCHRONIZATION = 19;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1254,7 +1227,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getStatement()
 	 * @generated
 	 */
-	int STATEMENT = 22;
+	int STATEMENT = 21;
 
 	/**
 	 * The number of structural features of the '<em>Statement</em>' class.
@@ -1273,7 +1246,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getCompositeElement()
 	 * @generated
 	 */
-	int COMPOSITE_ELEMENT = 24;
+	int COMPOSITE_ELEMENT = 23;
 
 	/**
 	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
@@ -1301,7 +1274,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEntryKind()
 	 * @generated
 	 */
-	int ENTRY_KIND = 25;
+	int ENTRY_KIND = 24;
 
 
 	/**
@@ -1312,7 +1285,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getChoiceKind()
 	 * @generated
 	 */
-	int CHOICE_KIND = 26;
+	int CHOICE_KIND = 25;
 
 
 	/**
@@ -1367,27 +1340,6 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getVertex_OutgoingTransitions();
-
-	/**
-	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.NamedElement <em>Named Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Named Element</em>'.
-	 * @see org.yakindu.sct.model.sgraph.NamedElement
-	 * @generated
-	 */
-	EClass getNamedElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.NamedElement#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.yakindu.sct.model.sgraph.NamedElement#getName()
-	 * @see #getNamedElement()
-	 * @generated
-	 */
-	EAttribute getNamedElement_Name();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Region <em>Region</em>}'.
@@ -1980,24 +1932,6 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VERTEX__OUTGOING_TRANSITIONS = eINSTANCE.getVertex_OutgoingTransitions();
-
-		/**
-		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.NamedElementImpl <em>Named Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.sct.model.sgraph.impl.NamedElementImpl
-		 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getNamedElement()
-		 * @generated
-		 */
-		EClass NAMED_ELEMENT = eINSTANCE.getNamedElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.RegionImpl <em>Region</em>}' class.

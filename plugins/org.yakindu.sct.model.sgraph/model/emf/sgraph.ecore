@@ -5,7 +5,7 @@
     nsURI="http://www.yakindu.org/sct/sgraph/2.0.0" nsPrefix="sgraph">
   <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel"/>
   <eClassifiers xsi:type="ecore:EClass" name="Pseudostate" abstract="true" eSuperTypes="#//Vertex"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Vertex" abstract="true" eSuperTypes="#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Vertex" abstract="true" eSuperTypes="../../../org.yakindu.base.types/model/base.ecore#//NamedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="IncomingTransitionCount OutgoingTransitionCount"/>
     </eAnnotations>
@@ -16,10 +16,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransitions" ordered="false"
         upperBound="-1" eType="#//Transition" containment="true" eOpposite="#//Transition/source"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Region" eSuperTypes="#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Region" eSuperTypes="../../../org.yakindu.base.types/model/base.ecore#//NamedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="ExactlyOneInitialState"/>
     </eAnnotations>
@@ -43,7 +40,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Choice" eSuperTypes="#//Pseudostate">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//ChoiceKind"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Statechart" eSuperTypes="#//NamedElement #//SpecificationElement #//ReactiveElement #//ScopedElement #//CompositeElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Statechart" eSuperTypes="#//SpecificationElement #//ReactiveElement #//ScopedElement #//CompositeElement ../../../org.yakindu.base.types/model/base.ecore#//NamedElement">
     <eAnnotations source="InjectMembers"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Entry" eSuperTypes="#//Pseudostate">
@@ -57,7 +54,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="SpecificationElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="specification" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true" eSuperTypes="../../../org.yakindu.base.types/model/base.ecore#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Reaction" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" eType="#//Trigger"
         transient="true" containment="true"/>

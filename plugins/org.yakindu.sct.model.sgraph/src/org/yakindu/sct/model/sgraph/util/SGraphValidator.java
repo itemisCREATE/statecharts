@@ -28,7 +28,6 @@ import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
-import org.yakindu.sct.model.sgraph.NamedElement;
 import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
@@ -139,8 +138,6 @@ public class SGraphValidator extends EObjectValidator {
 				return validatePseudostate((Pseudostate)value, diagnostics, context);
 			case SGraphPackage.VERTEX:
 				return validateVertex((Vertex)value, diagnostics, context);
-			case SGraphPackage.NAMED_ELEMENT:
-				return validateNamedElement((NamedElement)value, diagnostics, context);
 			case SGraphPackage.REGION:
 				return validateRegion((Region)value, diagnostics, context);
 			case SGraphPackage.TRANSITION:
@@ -287,15 +284,6 @@ public class SGraphValidator extends EObjectValidator {
 		}
 
 		return true;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateNamedElement(NamedElement namedElement,
-			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(namedElement, diagnostics, context);
 	}
 
 	/**

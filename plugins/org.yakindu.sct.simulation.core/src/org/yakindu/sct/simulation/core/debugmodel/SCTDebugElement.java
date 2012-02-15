@@ -17,7 +17,7 @@ import java.util.List;
 import org.eclipse.debug.core.model.DebugElement;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.sct.model.sgraph.NamedElement;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
