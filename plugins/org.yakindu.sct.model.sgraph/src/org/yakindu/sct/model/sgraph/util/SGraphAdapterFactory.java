@@ -15,31 +15,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.sct.model.sgraph.Choice;
-import org.yakindu.sct.model.sgraph.CompositeElement;
-import org.yakindu.sct.model.sgraph.Declaration;
-import org.yakindu.sct.model.sgraph.Effect;
-import org.yakindu.sct.model.sgraph.Entry;
-import org.yakindu.sct.model.sgraph.Event;
-import org.yakindu.sct.model.sgraph.Exit;
-import org.yakindu.sct.model.sgraph.FinalState;
-import org.yakindu.sct.model.sgraph.Pseudostate;
-import org.yakindu.sct.model.sgraph.Reaction;
-import org.yakindu.sct.model.sgraph.ReactiveElement;
-import org.yakindu.sct.model.sgraph.Region;
-import org.yakindu.sct.model.sgraph.RegularState;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.sgraph.Scope;
-import org.yakindu.sct.model.sgraph.ScopedElement;
-import org.yakindu.sct.model.sgraph.SpecificationElement;
-import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.Statement;
-import org.yakindu.sct.model.sgraph.Synchronization;
-import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.sgraph.Trigger;
-import org.yakindu.sct.model.sgraph.Variable;
-import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.sgraph.*;
 
 /**
  * <!-- begin-user-doc -->
