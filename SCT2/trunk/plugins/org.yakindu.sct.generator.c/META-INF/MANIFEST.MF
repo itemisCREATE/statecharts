@@ -23,5 +23,8 @@ Require-Bundle: org.yakindu.sct.model.sexec,
  org.eclipse.xtend.util.stdlib;bundle-version="1.0.1",
  org.yakindu.base.types;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.yakindu.sct.generator.c.templates
+Export-Package: org.yakindu.sct.generator.c,
+ org.yakindu.sct.generator.c.features,
+ org.yakindu.sct.generator.c.templates
 Bundle-Vendor: YAKINDU
+Eclipse-BundleShape: dir

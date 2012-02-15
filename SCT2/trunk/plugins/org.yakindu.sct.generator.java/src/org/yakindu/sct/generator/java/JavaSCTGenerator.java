@@ -11,6 +11,7 @@
 package org.yakindu.sct.generator.java;
 
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER;
+import static org.yakindu.sct.generator.core.util.GeneratorUtils.getOutletFeatureConfiguration;
 
 import java.util.ArrayList;
 import java.util.HashSet;

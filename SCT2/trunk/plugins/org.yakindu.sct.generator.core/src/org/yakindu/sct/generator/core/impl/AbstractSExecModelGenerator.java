@@ -10,31 +10,24 @@
  */
 package org.yakindu.sct.generator.core.impl;
 
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.DEBUG_FEATURE;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.DEBUG_FEATURE_DUMP_SEXEC;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_CHOICES;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTER_SEQUENCES;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTRIES;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_REACTIONS;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT;
+import static org.yakindu.sct.generator.core.util.GeneratorUtils.getBoolValue;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collections;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -47,12 +40,12 @@ import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.xpand2.output.Output;
 import org.yakindu.sct.generator.core.ISCTGenerator;
+import org.yakindu.sct.generator.core.util.GeneratorUtils;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.transformation.FlowOptimizer;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.SequencerModule;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
-import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
@@ -156,15 +149,6 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 		return flow;
 	}
 
-	boolean getBoolValue(FeatureConfiguration conf, String param,
-			boolean defaultValue) {
-		if (conf != null && conf.getParameterValue(param) != null) {
-			return conf.getParameterValue(param).getBooleanValue();
-		}
-
-		return defaultValue;
-	}
-
 	protected final void writeToConsole(Throwable t) {
 		PrintWriter printWriter = new PrintWriter(error);
 		t.printStackTrace(printWriter);
@@ -191,22 +175,8 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 		return myConsole;
 	}
 
-	protected final void refreshTargetProject(GeneratorEntry entry) {
-		try {
-			IProject project = getTargetProject(entry);
-			project.refreshLocal(IResource.DEPTH_INFINITE,
-					new NullProgressMonitor());
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-	};
-
 	protected final IProject getTargetProject(GeneratorEntry entry) {
-		FeatureConfiguration outletConfig = getOutletFeatureConfiguration(entry);
-		String projectName = outletConfig.getParameterValue(
-				OUTLET_FEATURE_TARGET_PROJECT).getStringValue();
-		IProject project = ResourcesPlugin.getWorkspace().getRoot()
-				.getProject(projectName);
+		IProject project = GeneratorUtils.getTargetProject(entry);
 		if (!project.exists()) {
 			createProject(project, entry);
 		}
@@ -218,41 +188,7 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 	 * may override if they want to contribute generatorspecific project setup
 	 */
 	protected void createProject(IProject project, GeneratorEntry entry) {
-		try {
-			NullProgressMonitor monitor = new NullProgressMonitor();
-			project.create(monitor);
-			project.open(monitor);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-	}
-
-	protected FeatureConfiguration getOutletFeatureConfiguration(
-			GeneratorEntry entry) {
-		FeatureConfiguration outletConfig = entry
-				.getFeatureConfiguration(OUTLET_FEATURE);
-		return outletConfig;
-	}
-
-	protected boolean isDumpSexec(GeneratorEntry entry) {
-		FeatureParameterValue dumpSexec = getFeatureParameter(entry,
-				DEBUG_FEATURE, DEBUG_FEATURE_DUMP_SEXEC);
-		if (dumpSexec == null) {
-			return false;
-		}
-		return dumpSexec.getBooleanValue();
-	}
-
-	protected FeatureParameterValue getFeatureParameter(GeneratorEntry entry,
-			String featureName, String paramName) {
-		FeatureConfiguration feature = entry
-				.getFeatureConfiguration(featureName);
-
-		if (feature != null) {
-			return feature.getParameterValue(paramName);
-		}
-
-		return null;
+		GeneratorUtils.createEmptyProject(project);
 	}
 
 	protected void dumpSexec(GeneratorEntry entry, ExecutionFlow flow,
