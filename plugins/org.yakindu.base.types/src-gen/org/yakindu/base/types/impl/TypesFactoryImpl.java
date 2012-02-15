@@ -9,12 +9,17 @@ package org.yakindu.base.types.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
 import org.yakindu.base.types.*;
+import org.yakindu.base.types.Event;
+import org.yakindu.base.types.Library;
+import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.Parameter;
+import org.yakindu.base.types.Property;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypesFactory;
+import org.yakindu.base.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,11 +65,12 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case TypesPackage.LIBRARY: return createLibrary();
 			case TypesPackage.TYPE: return createType();
 			case TypesPackage.OPERATION: return createOperation();
 			case TypesPackage.PROPERTY: return createProperty();
 			case TypesPackage.PARAMETER: return createParameter();
-			case TypesPackage.LIBRARY: return createLibrary();
+			case TypesPackage.EVENT: return createEvent();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -118,6 +124,16 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public Library createLibrary() {
 		LibraryImpl library = new LibraryImpl();
 		return library;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Event createEvent() {
+		EventImpl event = new EventImpl();
+		return event;
 	}
 
 	/**

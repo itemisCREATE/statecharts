@@ -8,17 +8,14 @@ package org.yakindu.base.types.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
+import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.Feature;
-import org.yakindu.base.types.NamedElement;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesPackage;
 
@@ -192,6 +189,7 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -255,6 +253,7 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -319,7 +318,7 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
-				case TypesPackage.FEATURE__NAME: return TypesPackage.NAMED_ELEMENT__NAME;
+				case TypesPackage.FEATURE__NAME: return BasePackage.NAMED_ELEMENT__NAME;
 				default: return -1;
 			}
 		}
@@ -335,7 +334,7 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
-				case TypesPackage.NAMED_ELEMENT__NAME: return TypesPackage.FEATURE__NAME;
+				case BasePackage.NAMED_ELEMENT__NAME: return TypesPackage.FEATURE__NAME;
 				default: return -1;
 			}
 		}

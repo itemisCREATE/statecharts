@@ -10,20 +10,15 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.yakindu.base.base.impl.NamedElementImpl;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Library;
 import org.yakindu.base.types.Type;
@@ -36,7 +31,6 @@ import org.yakindu.base.types.TypesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getFeatures <em>Features</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getSuperTypes <em>Super Types</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getOwningLibrary <em>Owning Library</em>}</li>
@@ -45,27 +39,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public class TypeImpl extends EObjectImpl implements Type {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
+public class TypeImpl extends NamedElementImpl implements Type {
 	/**
 	 * The cached value of the '{@link #getFeatures() <em>Features</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -103,27 +77,6 @@ public class TypeImpl extends EObjectImpl implements Type {
 	@Override
 	protected EClass eStaticClass() {
 		return TypesPackage.Literals.TYPE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE__NAME, oldName, name));
 	}
 
 	/**
@@ -248,8 +201,6 @@ public class TypeImpl extends EObjectImpl implements Type {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.TYPE__NAME:
-				return getName();
 			case TypesPackage.TYPE__FEATURES:
 				return getFeatures();
 			case TypesPackage.TYPE__SUPER_TYPES:
@@ -269,9 +220,6 @@ public class TypeImpl extends EObjectImpl implements Type {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.TYPE__NAME:
-				setName((String)newValue);
-				return;
 			case TypesPackage.TYPE__FEATURES:
 				getFeatures().clear();
 				getFeatures().addAll((Collection<? extends Feature>)newValue);
@@ -295,9 +243,6 @@ public class TypeImpl extends EObjectImpl implements Type {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case TypesPackage.TYPE__FEATURES:
 				getFeatures().clear();
 				return;
@@ -319,8 +264,6 @@ public class TypeImpl extends EObjectImpl implements Type {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TypesPackage.TYPE__FEATURES:
 				return features != null && !features.isEmpty();
 			case TypesPackage.TYPE__SUPER_TYPES:

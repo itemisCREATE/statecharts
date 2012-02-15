@@ -19,78 +19,71 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected String packageFilename = "types.ecore";
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass typeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass featureEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass operationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass propertyEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass parameterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass typedElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass namedElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass libraryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass eventEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -113,7 +106,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private static boolean isInited = false;
@@ -132,16 +124,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public static TypesPackage init() {
-		if (isInited)
-			return (TypesPackage) EPackage.Registry.INSTANCE
-					.getEPackage(TypesPackage.eNS_URI);
+		if (isInited) return (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
 
 		// Obtain or create and register package
-		TypesPackageImpl theTypesPackage = (TypesPackageImpl) (EPackage.Registry.INSTANCE
-				.get(eNS_URI) instanceof TypesPackageImpl ? EPackage.Registry.INSTANCE
-				.get(eNS_URI) : new TypesPackageImpl());
+		TypesPackageImpl theTypesPackage = (TypesPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TypesPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TypesPackageImpl());
 
 		isInited = true;
+
+		// Initialize simple dependencies
+		BasePackage.eINSTANCE.eClass();
 
 		// Load packages
 		theTypesPackage.loadPackage();
@@ -152,6 +143,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		// Mark meta-data to indicate it can't be changed
 		theTypesPackage.freeze();
 
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(TypesPackage.eNS_URI, theTypesPackage);
 		return theTypesPackage;
@@ -159,273 +151,235 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getType() {
 		if (typeEClass == null) {
-			typeEClass = (EClass) EPackage.Registry.INSTANCE
-					.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(0);
+			typeEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(1);
 		}
 		return typeEClass;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getType_Features() {
-		return (EReference) getType().getEStructuralFeatures().get(0);
+        return (EReference)getType().getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getType_SuperTypes() {
-		return (EReference) getType().getEStructuralFeatures().get(1);
+        return (EReference)getType().getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getType_OwningLibrary() {
-		return (EReference) getType().getEStructuralFeatures().get(2);
+        return (EReference)getType().getEStructuralFeatures().get(2);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getFeature() {
 		if (featureEClass == null) {
-			featureEClass = (EClass) EPackage.Registry.INSTANCE
-					.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(1);
+			featureEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(2);
 		}
 		return featureEClass;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getFeature_OwningType() {
-		return (EReference) getFeature().getEStructuralFeatures().get(0);
+        return (EReference)getFeature().getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getOperation() {
 		if (operationEClass == null) {
-			operationEClass = (EClass) EPackage.Registry.INSTANCE
-					.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(2);
+			operationEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(3);
 		}
 		return operationEClass;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getOperation_Parameters() {
-		return (EReference) getOperation().getEStructuralFeatures().get(0);
+        return (EReference)getOperation().getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getProperty() {
 		if (propertyEClass == null) {
-			propertyEClass = (EClass) EPackage.Registry.INSTANCE
-					.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(3);
+			propertyEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(4);
 		}
 		return propertyEClass;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getParameter() {
 		if (parameterEClass == null) {
-			parameterEClass = (EClass) EPackage.Registry.INSTANCE
-					.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(4);
+			parameterEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(5);
 		}
 		return parameterEClass;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getParameter_OwningOperation() {
-		return (EReference) getParameter().getEStructuralFeatures().get(0);
+        return (EReference)getParameter().getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getTypedElement() {
 		if (typedElementEClass == null) {
-			typedElementEClass = (EClass) EPackage.Registry.INSTANCE
-					.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(5);
+			typedElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(6);
 		}
 		return typedElementEClass;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getTypedElement_Type() {
-		return (EReference) getTypedElement().getEStructuralFeatures().get(0);
+        return (EReference)getTypedElement().getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EClass getNamedElement() {
-		if (namedElementEClass == null) {
-			namedElementEClass = (EClass) EPackage.Registry.INSTANCE
-					.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(6);
-		}
-		return namedElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EAttribute getNamedElement_Name() {
-		return (EAttribute) getNamedElement().getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getLibrary() {
 		if (libraryEClass == null) {
-			libraryEClass = (EClass) EPackage.Registry.INSTANCE
-					.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(7);
+			libraryEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(0);
 		}
 		return libraryEClass;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getLibrary_Types() {
-		return (EReference) getLibrary().getEStructuralFeatures().get(0);
+        return (EReference)getLibrary().getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getLibrary_Id() {
-		return (EAttribute) getLibrary().getEStructuralFeatures().get(1);
+        return (EAttribute)getLibrary().getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEvent() {
+		if (eventEClass == null) {
+			eventEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(7);
+		}
+		return eventEClass;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public TypesFactory getTypesFactory() {
-		return (TypesFactory) getEFactoryInstance();
+		return (TypesFactory)getEFactoryInstance();
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private boolean isLoaded = false;
 
 	/**
-	 * Laods the package and any sub-packages from their serialized form. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Laods the package and any sub-packages from their serialized form.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void loadPackage() {
-		if (isLoaded)
-			return;
+		if (isLoaded) return;
 		isLoaded = true;
 
 		URL url = getClass().getResource(packageFilename);
 		if (url == null) {
-			throw new RuntimeException("Missing serialized package: "
-					+ packageFilename);
+			throw new RuntimeException("Missing serialized package: " + packageFilename);
 		}
 		URI uri = URI.createURI(url.toString());
 		Resource resource = new EcoreResourceFactoryImpl().createResource(uri);
 		try {
 			resource.load(null);
-		} catch (IOException exception) {
+		}
+		catch (IOException exception) {
 			throw new WrappedException(exception);
 		}
-		initializeFromLoadedEPackage(this, (EPackage) resource.getContents()
-				.get(0));
+		initializeFromLoadedEPackage(this, (EPackage)resource.getContents().get(0));
 		createResource(eNS_URI);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private boolean isFixed = false;
 
 	/**
-	 * Fixes up the loaded package, to make it appear as if it had been
-	 * programmatically built. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Fixes up the loaded package, to make it appear as if it had been programmatically built.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void fixPackageContents() {
-		if (isFixed)
-			return;
+		if (isFixed) return;
 		isFixed = true;
 		fixEClassifiers();
 	}
 
 	/**
-	 * Sets the instance class on the given classifier. <!-- begin-user-doc -->
+	 * Sets the instance class on the given classifier.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected void fixInstanceClass(EClassifier eClassifier) {
 		if (eClassifier.getInstanceClassName() == null) {
-			eClassifier.setInstanceClassName("org.yakindu.base.types."
-					+ eClassifier.getName());
+			eClassifier.setInstanceClassName("org.yakindu.base.types." + eClassifier.getName());
 			setGeneratedClassName(eClassifier);
 		}
 	}

@@ -6,6 +6,8 @@
  */
 package org.yakindu.base.types;
 
+import org.yakindu.base.base.NamedElement;
+
 
 /**
  * <!-- begin-user-doc -->

@@ -7,7 +7,6 @@
 package org.yakindu.base.types.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.TypesPackage;
 

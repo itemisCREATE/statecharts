@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package org.yakindu.base.types;
+package org.yakindu.base.base;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -16,12 +16,12 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.yakindu.base.types.NamedElement#getName <em>Name</em>}</li>
+ *   <li>{@link org.yakindu.base.base.NamedElement#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.yakindu.base.types.TypesPackage#getNamedElement()
- * @model interface="true" abstract="true"
+ * @see org.yakindu.base.base.BasePackage#getNamedElement()
+ * @model
  * @generated
  */
 public interface NamedElement extends EObject {
@@ -35,14 +35,14 @@ public interface NamedElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.yakindu.base.types.TypesPackage#getNamedElement_Name()
+	 * @see org.yakindu.base.base.BasePackage#getNamedElement_Name()
 	 * @model
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.base.types.NamedElement#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.yakindu.base.base.NamedElement#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.

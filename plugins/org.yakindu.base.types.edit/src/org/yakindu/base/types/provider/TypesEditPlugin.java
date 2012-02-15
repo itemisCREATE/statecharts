@@ -7,8 +7,9 @@
 package org.yakindu.base.types.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.yakindu.base.base.provider.BaseEditPlugin;
+import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
 
 /**
  * This is the central singleton for the Types edit plugin.
@@ -42,6 +43,7 @@ public final class TypesEditPlugin extends EMFPlugin {
 	public TypesEditPlugin() {
 		super
 		  (new ResourceLocator [] {
+		     BaseEditPlugin.INSTANCE,
 		   });
 	}
 

@@ -7,7 +7,10 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.yakindu.base.types,
+Export-Package: org.yakindu.base.base,
+ org.yakindu.base.base.impl,
+ org.yakindu.base.base.util,
+ org.yakindu.base.types,
  org.yakindu.base.types.impl,
  org.yakindu.base.types.util
 Require-Bundle: org.eclipse.core.runtime,

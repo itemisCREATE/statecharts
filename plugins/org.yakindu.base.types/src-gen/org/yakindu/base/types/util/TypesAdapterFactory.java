@@ -8,12 +8,18 @@ package org.yakindu.base.types.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.yakindu.base.types.*;
+import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.types.Event;
+import org.yakindu.base.types.Feature;
+import org.yakindu.base.types.Library;
+import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.Parameter;
+import org.yakindu.base.types.Property;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypedElement;
+import org.yakindu.base.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -72,6 +78,10 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	protected TypesSwitch<Adapter> modelSwitch =
 		new TypesSwitch<Adapter>() {
 			@Override
+			public Adapter caseLibrary(Library object) {
+				return createLibraryAdapter();
+			}
+			@Override
 			public Adapter caseType(Type object) {
 				return createTypeAdapter();
 			}
@@ -96,12 +106,12 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 				return createTypedElementAdapter();
 			}
 			@Override
-			public Adapter caseNamedElement(NamedElement object) {
-				return createNamedElementAdapter();
+			public Adapter caseEvent(Event object) {
+				return createEventAdapter();
 			}
 			@Override
-			public Adapter caseLibrary(Library object) {
-				return createLibraryAdapter();
+			public Adapter caseNamedElement(NamedElement object) {
+				return createNamedElementAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -208,13 +218,13 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.NamedElement <em>Named Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.base.NamedElement <em>Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.yakindu.base.types.NamedElement
+	 * @see org.yakindu.base.base.NamedElement
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {
@@ -232,6 +242,20 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLibraryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Event <em>Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.Event
+	 * @generated
+	 */
+	public Adapter createEventAdapter() {
 		return null;
 	}
 

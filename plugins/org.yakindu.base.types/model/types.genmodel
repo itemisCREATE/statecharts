@@ -3,10 +3,14 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.base.types/src-gen"
     modelPluginID="org.yakindu.base.types" modelName="Types" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false">
+    complianceLevel="6.0" copyrightFields="false" usedGenPackages="base.genmodel#//base">
   <foreignModel>types.ecore</foreignModel>
   <genPackages prefix="Types" basePackage="org.yakindu.base" disposableProviderFactory="true"
       loadInitialization="true" ecorePackage="types.ecore#/">
+    <genClasses ecoreClass="types.ecore#//Library">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Library/types"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Library/id"/>
+    </genClasses>
     <genClasses ecoreClass="types.ecore#//Type">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Type/features"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//Type/superTypes"/>
@@ -25,12 +29,6 @@
     <genClasses ecoreClass="types.ecore#//TypedElement">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//TypedElement/type"/>
     </genClasses>
-    <genClasses ecoreClass="types.ecore#//NamedElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//NamedElement/name"/>
-    </genClasses>
-    <genClasses ecoreClass="types.ecore#//Library">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Library/types"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Library/id"/>
-    </genClasses>
+    <genClasses ecoreClass="types.ecore#//Event"/>
   </genPackages>
 </genmodel:GenModel>
