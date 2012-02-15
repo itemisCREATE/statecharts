@@ -60,7 +60,7 @@
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//TimeUnit">
       <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//TimeUnit/second"/>
       <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//TimeUnit/millisecond"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//TimeUnit/microsend"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//TimeUnit/microsecond"/>
       <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//TimeUnit/nanosecond"/>
     </genEnums>
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//Root">

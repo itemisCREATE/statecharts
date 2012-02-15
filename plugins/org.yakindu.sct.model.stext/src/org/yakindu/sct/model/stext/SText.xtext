@@ -277,7 +277,7 @@ enum RelationalOperator:
 enum TimeUnit:
 	second='s'
 	| millisecond='ms'
-	| microsend = '�s'
+	| microsecond = 'mics'
 	| nanosecond='ns';
 
 ValueExpression returns Expression:

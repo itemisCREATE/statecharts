@@ -43,14 +43,14 @@ public enum TimeUnit implements Enumerator
   MILLISECOND(1, "millisecond", "ms"),
 
   /**
-   * The '<em><b>Microsend</b></em>' literal object.
+   * The '<em><b>Microsecond</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #MICROSEND_VALUE
+   * @see #MICROSECOND_VALUE
    * @generated
    * @ordered
    */
-  MICROSEND(2, "microsend", "\u00d4\u00f8\u03a9s"),
+  MICROSECOND(2, "microsecond", "mics"),
 
   /**
    * The '<em><b>Nanosecond</b></em>' literal object.
@@ -93,19 +93,19 @@ public enum TimeUnit implements Enumerator
   public static final int MILLISECOND_VALUE = 1;
 
   /**
-   * The '<em><b>Microsend</b></em>' literal value.
+   * The '<em><b>Microsecond</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Microsend</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>Microsecond</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #MICROSEND
-   * @model name="microsend" literal="\324\370\u03a9s"
+   * @see #MICROSECOND
+   * @model name="microsecond" literal="mics"
    * @generated
    * @ordered
    */
-  public static final int MICROSEND_VALUE = 2;
+  public static final int MICROSECOND_VALUE = 2;
 
   /**
    * The '<em><b>Nanosecond</b></em>' literal value.
@@ -133,7 +133,7 @@ public enum TimeUnit implements Enumerator
     {
       SECOND,
       MILLISECOND,
-      MICROSEND,
+      MICROSECOND,
       NANOSECOND,
     };
 
@@ -195,7 +195,7 @@ public enum TimeUnit implements Enumerator
     {
       case SECOND_VALUE: return SECOND;
       case MILLISECOND_VALUE: return MILLISECOND;
-      case MICROSEND_VALUE: return MICROSEND;
+      case MICROSECOND_VALUE: return MICROSECOND;
       case NANOSECOND_VALUE: return NANOSECOND;
     }
     return null;
