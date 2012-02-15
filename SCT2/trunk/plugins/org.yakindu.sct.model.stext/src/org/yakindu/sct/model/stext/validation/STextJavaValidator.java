@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -101,7 +102,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public void checkVariable(VariableDefinition variable) {
 		if (variable.eContainer() instanceof SimpleScope) {
 			error("Variables can not be defined in states.", variable,
-					SGraphPackage.Literals.NAMED_ELEMENT__NAME,
+					BasePackage.Literals.NAMED_ELEMENT__NAME,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 		}
 	}
@@ -152,7 +153,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		if (defaultInterfaces.size() > 1) {
 			for (InterfaceScope scope : defaultInterfaces) {
 				error("It can only exist one default/unnamed interface", scope,
-						StextPackage.Literals.INTERFACE_SCOPE__NAME,
+						BasePackage.Literals.NAMED_ELEMENT__NAME,
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 			}
 		}

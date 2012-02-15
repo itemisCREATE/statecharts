@@ -7,27 +7,29 @@
 package org.yakindu.sct.model.sexec.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionChoice;
+import org.yakindu.sct.model.sexec.ExecutionEntry;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionNode;
+import org.yakindu.sct.model.sexec.ExecutionRegion;
+import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExitState;
+import org.yakindu.sct.model.sexec.HistoryEntry;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.MappedElement;
-import org.yakindu.sct.model.sexec.NamedElement;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.ReactionFired;
+import org.yakindu.sct.model.sexec.SaveHistory;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecFactory;
@@ -36,6 +38,11 @@ import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.StateVector;
 import org.yakindu.sct.model.sexec.TimeEvent;
+import org.yakindu.sct.model.sexec.TraceBeginRunCycle;
+import org.yakindu.sct.model.sexec.TraceEndRunCycle;
+import org.yakindu.sct.model.sexec.TraceNodeExecuted;
+import org.yakindu.sct.model.sexec.TraceStateEntered;
+import org.yakindu.sct.model.sexec.TraceStateExited;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 
 /**
@@ -82,7 +89,6 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case SexecPackage.NAMED_ELEMENT: return createNamedElement();
 			case SexecPackage.MAPPED_ELEMENT: return createMappedElement();
 			case SexecPackage.EXECUTION_FLOW: return createExecutionFlow();
 			case SexecPackage.EXECUTION_NODE: return createExecutionNode();
@@ -197,16 +203,6 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public Reaction createReaction() {
 		ReactionImpl reaction = new ReactionImpl();
 		return reaction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NamedElement createNamedElement() {
-		NamedElementImpl namedElement = new NamedElementImpl();
-		return namedElement;
 	}
 
 	/**

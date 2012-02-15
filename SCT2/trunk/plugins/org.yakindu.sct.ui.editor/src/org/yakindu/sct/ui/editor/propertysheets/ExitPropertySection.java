@@ -21,6 +21,7 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 /**
@@ -43,7 +44,7 @@ public class ExitPropertySection extends AbstractEditorPropertySection {
 	public void bindModel(EMFDataBindingContext context) {
 		IEMFValueProperty property = EMFEditProperties.value(
 				TransactionUtil.getEditingDomain(eObject),
-				SGraphPackage.Literals.NAMED_ELEMENT__NAME);
+				BasePackage.Literals.NAMED_ELEMENT__NAME);
 		ISWTObservableValue observe = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.DefaultSelection})
 				.observe(nameText);
 		context.bindValue(observe, property.observe(eObject));

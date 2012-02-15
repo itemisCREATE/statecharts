@@ -19,7 +19,7 @@ import org.eclipse.jface.viewers.BaseLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.graphics.Image;
-import org.yakindu.sct.model.sgraph.NamedElement;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 
 /**

@@ -10,7 +10,7 @@
  *  
  */
 package org.yakindu.sct.model.stext.validation
-
+ 
 import org.yakindu.sct.model.stext.stext.Expression
 import org.yakindu.sct.model.stext.stext.LogicalAndExpression
 import org.yakindu.sct.model.sgraph.Statement

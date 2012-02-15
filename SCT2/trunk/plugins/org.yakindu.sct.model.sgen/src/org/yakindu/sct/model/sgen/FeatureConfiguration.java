@@ -7,7 +7,6 @@
 package org.yakindu.sct.model.sgen;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**

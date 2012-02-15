@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -22,8 +21,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.yakindu.sct.model.sgraph.Scope;
-
+import org.yakindu.sct.model.stext.stext.StatechartScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -71,7 +69,7 @@ public class StatechartSpecificationImpl extends MinimalEObjectImpl.Container im
    * @generated
    * @ordered
    */
-  protected EList<Scope> definitionScopes;
+  protected EList<StatechartScope> definitionScopes;
 
   /**
    * <!-- begin-user-doc -->
@@ -122,11 +120,11 @@ public class StatechartSpecificationImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Scope> getDefinitionScopes()
+  public EList<StatechartScope> getDefinitionScopes()
   {
     if (definitionScopes == null)
     {
-      definitionScopes = new EObjectContainmentEList<Scope>(Scope.class, this, StextPackage.STATECHART_SPECIFICATION__DEFINITION_SCOPES);
+      definitionScopes = new EObjectContainmentEList<StatechartScope>(StatechartScope.class, this, StextPackage.STATECHART_SPECIFICATION__DEFINITION_SCOPES);
     }
     return definitionScopes;
   }
@@ -181,7 +179,7 @@ public class StatechartSpecificationImpl extends MinimalEObjectImpl.Container im
         return;
       case StextPackage.STATECHART_SPECIFICATION__DEFINITION_SCOPES:
         getDefinitionScopes().clear();
-        getDefinitionScopes().addAll((Collection<? extends Scope>)newValue);
+        getDefinitionScopes().addAll((Collection<? extends StatechartScope>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

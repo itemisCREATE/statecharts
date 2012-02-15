@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -77,6 +76,7 @@ import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StateRoot;
 import org.yakindu.sct.model.stext.stext.StateSpecification;
 import org.yakindu.sct.model.stext.stext.StatechartRoot;
+import org.yakindu.sct.model.stext.stext.StatechartScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -152,6 +152,34 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * @generated
    */
   private EClass transitionSpecificationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass statechartScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass interfaceScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass internalScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eventDefinitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -348,27 +376,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * @generated
    */
   private EClass simpleScopeEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass interfaceScopeEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass internalScopeEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass eventDefinitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -798,6 +805,66 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
   public EReference getTransitionSpecification_Reaction()
   {
     return (EReference)transitionSpecificationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getStatechartScope()
+  {
+    return statechartScopeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getInterfaceScope()
+  {
+    return interfaceScopeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getInternalScope()
+  {
+    return internalScopeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEventDefinition()
+  {
+    return eventDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEventDefinition_Direction()
+  {
+    return (EAttribute)eventDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEventDefinition_Derivation()
+  {
+    return (EReference)eventDefinitionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1308,76 +1375,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
   public EClass getSimpleScope()
   {
     return simpleScopeEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getInterfaceScope()
-  {
-    return interfaceScopeEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getInterfaceScope_Name()
-  {
-    return (EAttribute)interfaceScopeEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getInternalScope()
-  {
-    return internalScopeEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getEventDefinition()
-  {
-    return eventDefinitionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getEventDefinition_Direction()
-  {
-    return (EAttribute)eventDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getEventDefinition_Type()
-  {
-    return (EReference)eventDefinitionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getEventDefinition_Derivation()
-  {
-    return (EReference)eventDefinitionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -2124,6 +2121,16 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     transitionSpecificationEClass = createEClass(TRANSITION_SPECIFICATION);
     createEReference(transitionSpecificationEClass, TRANSITION_SPECIFICATION__REACTION);
 
+    statechartScopeEClass = createEClass(STATECHART_SCOPE);
+
+    interfaceScopeEClass = createEClass(INTERFACE_SCOPE);
+
+    internalScopeEClass = createEClass(INTERNAL_SCOPE);
+
+    eventDefinitionEClass = createEClass(EVENT_DEFINITION);
+    createEAttribute(eventDefinitionEClass, EVENT_DEFINITION__DIRECTION);
+    createEReference(eventDefinitionEClass, EVENT_DEFINITION__DERIVATION);
+
     eventDerivationEClass = createEClass(EVENT_DERIVATION);
     createEReference(eventDerivationEClass, EVENT_DERIVATION__CONDITION);
     createEReference(eventDerivationEClass, EVENT_DERIVATION__VALUE);
@@ -2202,16 +2209,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     createEAttribute(hexLiteralEClass, HEX_LITERAL__VALUE);
 
     simpleScopeEClass = createEClass(SIMPLE_SCOPE);
-
-    interfaceScopeEClass = createEClass(INTERFACE_SCOPE);
-    createEAttribute(interfaceScopeEClass, INTERFACE_SCOPE__NAME);
-
-    internalScopeEClass = createEClass(INTERNAL_SCOPE);
-
-    eventDefinitionEClass = createEClass(EVENT_DEFINITION);
-    createEAttribute(eventDefinitionEClass, EVENT_DEFINITION__DIRECTION);
-    createEReference(eventDefinitionEClass, EVENT_DEFINITION__TYPE);
-    createEReference(eventDefinitionEClass, EVENT_DEFINITION__DERIVATION);
 
     variableDefinitionEClass = createEClass(VARIABLE_DEFINITION);
     createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__READONLY);
@@ -2341,6 +2338,13 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     statechartRootEClass.getESuperTypes().add(this.getDefRoot());
     stateRootEClass.getESuperTypes().add(this.getDefRoot());
     transitionRootEClass.getESuperTypes().add(this.getDefRoot());
+    statechartScopeEClass.getESuperTypes().add(theSGraphPackage.getScope());
+    statechartScopeEClass.getESuperTypes().add(theTypesPackage.getType());
+    interfaceScopeEClass.getESuperTypes().add(this.getStatechartScope());
+    internalScopeEClass.getESuperTypes().add(this.getStatechartScope());
+    eventDefinitionEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
+    eventDefinitionEClass.getESuperTypes().add(theSGraphPackage.getEvent());
+    eventDefinitionEClass.getESuperTypes().add(theTypesPackage.getEvent());
     localReactionEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
     localReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
     transitionReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
@@ -2365,9 +2369,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     realLiteralEClass.getESuperTypes().add(this.getLiteral());
     hexLiteralEClass.getESuperTypes().add(this.getLiteral());
     simpleScopeEClass.getESuperTypes().add(theSGraphPackage.getScope());
-    interfaceScopeEClass.getESuperTypes().add(theSGraphPackage.getScope());
-    internalScopeEClass.getESuperTypes().add(theSGraphPackage.getScope());
-    eventDefinitionEClass.getESuperTypes().add(theSGraphPackage.getEvent());
     variableDefinitionEClass.getESuperTypes().add(theSGraphPackage.getVariable());
     operationEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
     entrypointEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
@@ -2406,13 +2407,23 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     initEClass(statechartSpecificationEClass, StatechartSpecification.class, "StatechartSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStatechartSpecification_Namespace(), ecorePackage.getEString(), "namespace", null, 0, 1, StatechartSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStatechartSpecification_DefinitionScopes(), theSGraphPackage.getScope(), null, "definitionScopes", null, 0, -1, StatechartSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStatechartSpecification_DefinitionScopes(), this.getStatechartScope(), null, "definitionScopes", null, 0, -1, StatechartSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stateSpecificationEClass, StateSpecification.class, "StateSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getStateSpecification_Scope(), theSGraphPackage.getScope(), null, "scope", null, 0, 1, StateSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(transitionSpecificationEClass, TransitionSpecification.class, "TransitionSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTransitionSpecification_Reaction(), this.getTransitionReaction(), null, "reaction", null, 0, 1, TransitionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(statechartScopeEClass, StatechartScope.class, "StatechartScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(interfaceScopeEClass, InterfaceScope.class, "InterfaceScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(internalScopeEClass, InternalScope.class, "InternalScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(eventDefinitionEClass, EventDefinition.class, "EventDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEventDefinition_Direction(), this.getDirection(), "direction", null, 0, 1, EventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEventDefinition_Derivation(), this.getEventDerivation(), null, "derivation", null, 0, 1, EventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eventDerivationEClass, EventDerivation.class, "EventDerivation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEventDerivation_Condition(), this.getExpression(), null, "condition", null, 0, 1, EventDerivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2492,16 +2503,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEAttribute(getHexLiteral_Value(), ecorePackage.getEInt(), "value", null, 0, 1, HexLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleScopeEClass, SimpleScope.class, "SimpleScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(interfaceScopeEClass, InterfaceScope.class, "InterfaceScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getInterfaceScope_Name(), ecorePackage.getEString(), "name", null, 0, 1, InterfaceScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(internalScopeEClass, InternalScope.class, "InternalScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(eventDefinitionEClass, EventDefinition.class, "EventDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEventDefinition_Direction(), this.getDirection(), "direction", null, 0, 1, EventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEventDefinition_Type(), theTypesPackage.getType(), null, "type", null, 0, 1, EventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEventDefinition_Derivation(), this.getEventDerivation(), null, "derivation", null, 0, 1, EventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(variableDefinitionEClass, VariableDefinition.class, "VariableDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getVariableDefinition_Readonly(), ecorePackage.getEBoolean(), "readonly", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

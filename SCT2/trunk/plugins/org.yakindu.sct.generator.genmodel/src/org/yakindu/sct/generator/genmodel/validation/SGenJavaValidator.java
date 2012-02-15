@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
@@ -34,7 +35,6 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgen.ParameterTypes;
 import org.yakindu.sct.model.sgen.SGenPackage;
-import org.yakindu.sct.model.sgraph.NamedElement;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;

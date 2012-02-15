@@ -11,6 +11,7 @@
 package org.yakindu.sct.model.sgraph.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.yakindu.base.base.impl.NamedElementImpl;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 

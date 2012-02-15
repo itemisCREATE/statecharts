@@ -13,6 +13,7 @@ package org.yakindu.sct.ui.editor.editparts;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -28,7 +29,7 @@ import de.itemis.gmf.runtime.commons.editparts.TextAwareLabelEditPart;
 public class StateNameEditPart extends TextAwareLabelEditPart {
 
 	public StateNameEditPart(View view) {
-		super(view, SGraphPackage.Literals.NAMED_ELEMENT__NAME,
+		super(view, BasePackage.Literals.NAMED_ELEMENT__NAME,
 				DiagramActivator.PLUGIN_ID);
 	}
 

@@ -24,7 +24,7 @@ FeatureConfiguration returns gen::FeatureConfiguration:
 
 FeatureParameterValue returns gen::FeatureParameterValue:
 	{gen::FeatureParameterValue} parameter=[gen::FeatureParameter] '=' expression=XLiteral;
-
+ 
 QID:
 	ID (('::' | '.') ID)*; 
-
+	

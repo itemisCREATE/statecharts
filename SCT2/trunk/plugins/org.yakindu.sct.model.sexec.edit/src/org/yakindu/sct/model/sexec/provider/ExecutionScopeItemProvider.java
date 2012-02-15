@@ -22,8 +22,10 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.SexecPackage;
@@ -35,7 +37,7 @@ import org.yakindu.sct.model.sexec.SexecPackage;
  * @generated
  */
 public class ExecutionScopeItemProvider
-	extends NamedElementItemProvider
+	extends MappedElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -63,7 +65,7 @@ public class ExecutionScopeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSourceElementPropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
 			addSubScopesPropertyDescriptor(object);
 			addSuperScopePropertyDescriptor(object);
 		}
@@ -71,23 +73,23 @@ public class ExecutionScopeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Source Element feature.
+	 * This adds a property descriptor for the Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSourceElementPropertyDescriptor(Object object) {
+	protected void addNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_MappedElement_sourceElement_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_MappedElement_sourceElement_feature", "_UI_MappedElement_type"),
-				 SexecPackage.Literals.MAPPED_ELEMENT__SOURCE_ELEMENT,
+				 getString("_UI_NamedElement_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
+				 BasePackage.Literals.NAMED_ELEMENT__NAME,
 				 true,
 				 false,
-				 true,
-				 null,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -205,6 +207,9 @@ public class ExecutionScopeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ExecutionScope.class)) {
+			case SexecPackage.EXECUTION_SCOPE__NAME:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case SexecPackage.EXECUTION_SCOPE__STATE_VECTOR:
 			case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE:
 			case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE:

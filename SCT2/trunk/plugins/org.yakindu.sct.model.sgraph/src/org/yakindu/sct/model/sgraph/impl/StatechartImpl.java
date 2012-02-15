@@ -22,6 +22,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Reaction;
@@ -40,44 +42,24 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getSpecification <em>Specification</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getLocalReactions <em>Local Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getScopes <em>Scopes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getRegions <em>Regions</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class StatechartImpl extends NamedElementImpl implements Statechart {
+public class StatechartImpl extends SpecificationElementImpl implements Statechart {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (c) 2011 committers of YAKINDU and others.\r\nAll rights reserved. This program and the accompanying materials\r\nare made available under the terms of the Eclipse Public License v1.0\r\nwhich accompanies this distribution, and is available at\r\nhttp://www.eclipse.org/legal/epl-v10.html\r\nContributors:\r\ncommitters of YAKINDU - initial API and implementation\r\n";
-
-	/**
-	 * The default value of the '{@link #getSpecification() <em>Specification</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSpecification()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SPECIFICATION_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSpecification() <em>Specification</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSpecification()
-	 * @generated
-	 * @ordered
-	 */
-	protected String specification = SPECIFICATION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getScopes() <em>Scopes</em>}' containment reference list.
@@ -120,6 +102,26 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	protected EList<Region> regions;
 
 	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -136,27 +138,6 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	@Override
 	protected EClass eStaticClass() {
 		return SGraphPackage.Literals.STATECHART;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getSpecification() {
-		return specification;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSpecification(String newSpecification) {
-		String oldSpecification = specification;
-		specification = newSpecification;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__SPECIFICATION, oldSpecification, specification));
 	}
 
 	/**
@@ -239,6 +220,27 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -273,8 +275,6 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SGraphPackage.STATECHART__SPECIFICATION:
-				return getSpecification();
 			case SGraphPackage.STATECHART__REACTIONS:
 				return getReactions();
 			case SGraphPackage.STATECHART__LOCAL_REACTIONS:
@@ -285,6 +285,8 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 				return getNamespace();
 			case SGraphPackage.STATECHART__REGIONS:
 				return getRegions();
+			case SGraphPackage.STATECHART__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -298,9 +300,6 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SGraphPackage.STATECHART__SPECIFICATION:
-				setSpecification((String)newValue);
-				return;
 			case SGraphPackage.STATECHART__SCOPES:
 				getScopes().clear();
 				getScopes().addAll((Collection<? extends Scope>)newValue);
@@ -311,6 +310,9 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 			case SGraphPackage.STATECHART__REGIONS:
 				getRegions().clear();
 				getRegions().addAll((Collection<? extends Region>)newValue);
+				return;
+			case SGraphPackage.STATECHART__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -324,9 +326,6 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SGraphPackage.STATECHART__SPECIFICATION:
-				setSpecification(SPECIFICATION_EDEFAULT);
-				return;
 			case SGraphPackage.STATECHART__SCOPES:
 				getScopes().clear();
 				return;
@@ -335,6 +334,9 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 				return;
 			case SGraphPackage.STATECHART__REGIONS:
 				getRegions().clear();
+				return;
+			case SGraphPackage.STATECHART__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -348,8 +350,6 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SGraphPackage.STATECHART__SPECIFICATION:
-				return SPECIFICATION_EDEFAULT == null ? specification != null : !SPECIFICATION_EDEFAULT.equals(specification);
 			case SGraphPackage.STATECHART__REACTIONS:
 				return !getReactions().isEmpty();
 			case SGraphPackage.STATECHART__LOCAL_REACTIONS:
@@ -360,6 +360,8 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 				return NAMESPACE_EDEFAULT == null ? namespace != null : !NAMESPACE_EDEFAULT.equals(namespace);
 			case SGraphPackage.STATECHART__REGIONS:
 				return regions != null && !regions.isEmpty();
+			case SGraphPackage.STATECHART__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -371,12 +373,6 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == SpecificationElement.class) {
-			switch (derivedFeatureID) {
-				case SGraphPackage.STATECHART__SPECIFICATION: return SGraphPackage.SPECIFICATION_ELEMENT__SPECIFICATION;
-				default: return -1;
-			}
-		}
 		if (baseClass == ReactiveElement.class) {
 			switch (derivedFeatureID) {
 				case SGraphPackage.STATECHART__REACTIONS: return SGraphPackage.REACTIVE_ELEMENT__REACTIONS;
@@ -397,6 +393,12 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 				default: return -1;
 			}
 		}
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case SGraphPackage.STATECHART__NAME: return BasePackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -407,12 +409,6 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == SpecificationElement.class) {
-			switch (baseFeatureID) {
-				case SGraphPackage.SPECIFICATION_ELEMENT__SPECIFICATION: return SGraphPackage.STATECHART__SPECIFICATION;
-				default: return -1;
-			}
-		}
 		if (baseClass == ReactiveElement.class) {
 			switch (baseFeatureID) {
 				case SGraphPackage.REACTIVE_ELEMENT__REACTIONS: return SGraphPackage.STATECHART__REACTIONS;
@@ -433,6 +429,12 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 				default: return -1;
 			}
 		}
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case BasePackage.NAMED_ELEMENT__NAME: return SGraphPackage.STATECHART__NAME;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -446,10 +448,10 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (specification: ");
-		result.append(specification);
-		result.append(", namespace: ");
+		result.append(" (namespace: ");
 		result.append(namespace);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}

@@ -24,9 +24,10 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
-import org.yakindu.sct.model.sgraph.NamedElement;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
 import org.yakindu.sct.model.sgraph.Region;
@@ -747,7 +748,7 @@ public class StateImpl extends SpecificationElementImpl implements State {
 		}
 		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
-				case SGraphPackage.STATE__NAME: return SGraphPackage.NAMED_ELEMENT__NAME;
+				case SGraphPackage.STATE__NAME: return BasePackage.NAMED_ELEMENT__NAME;
 				default: return -1;
 			}
 		}
@@ -795,7 +796,7 @@ public class StateImpl extends SpecificationElementImpl implements State {
 		}
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
-				case SGraphPackage.NAMED_ELEMENT__NAME: return SGraphPackage.STATE__NAME;
+				case BasePackage.NAMED_ELEMENT__NAME: return SGraphPackage.STATE__NAME;
 				default: return -1;
 			}
 		}

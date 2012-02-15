@@ -9,6 +9,7 @@ Templates for the main statechart cpp file.
 «IMPORT sexec»
 «IMPORT stext»
 «IMPORT sgraph»
+«IMPORT base»
 
 «EXTENSION org::yakindu::sct::generator::cpp::templates::Expression»
 «EXTENSION org::yakindu::sct::generator::cpp::templates::Naming»
@@ -33,7 +34,7 @@ Templates for the main statechart cpp file.
 	// unknown declaration «name»
 «ENDDEFINE»
 
-«DEFINE declaration FOR EventDefinition -»
+«DEFINE declaration FOR EventDefinition -» 
 «ENDDEFINE»
 
 «DEFINE declaration FOR VariableDefinition -»

@@ -265,6 +265,18 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getDeclarationsExitpointParserRuleCall_1_0_2() { return cDeclarationsExitpointParserRuleCall_1_0_2; }
 	}
 
+	public class TypeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
+		private final RuleCall cStatechartScopeParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//Type returns types::Type:
+		//	StatechartScope;
+		public ParserRule getRule() { return rule; }
+
+		//StatechartScope
+		public RuleCall getStatechartScopeParserRuleCall() { return cStatechartScopeParserRuleCall; }
+	}
+
 	public class StatechartScopeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StatechartScope");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -272,7 +284,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cInternalScopeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//// defines the poosible scopes for statecharts
-		//StatechartScope returns sgraph::Scope:
+		//StatechartScope:
 		//	InterfaceScope | InternalScope;
 		public ParserRule getRule() { return rule; }
 
@@ -301,7 +313,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDeclarationsEntrypointParserRuleCall_4_0_2 = (RuleCall)cDeclarationsAlternatives_4_0.eContents().get(2);
 		private final RuleCall cDeclarationsExitpointParserRuleCall_4_0_3 = (RuleCall)cDeclarationsAlternatives_4_0.eContents().get(3);
 		
-		//InterfaceScope returns sgraph::Scope:
+		//InterfaceScope:
 		//	{InterfaceScope} "interface" name=ID? ":" declarations+=(EventDefinition | VariableDefinition | Entrypoint |
 		//	Exitpoint)*;
 		public ParserRule getRule() { return rule; }
@@ -356,7 +368,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDeclarationsOperationParserRuleCall_3_0_2 = (RuleCall)cDeclarationsAlternatives_3_0.eContents().get(2);
 		private final RuleCall cDeclarationsLocalReactionParserRuleCall_3_0_3 = (RuleCall)cDeclarationsAlternatives_3_0.eContents().get(3);
 		
-		//InternalScope returns sgraph::Scope:
+		//InternalScope:
 		//	{InternalScope} "internal" ":" declarations+=(EventDefinition | VariableDefinition | Operation | LocalReaction)*;
 		public ParserRule getRule() { return rule; }
 
@@ -428,69 +440,91 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getExitpointParserRuleCall_5() { return cExitpointParserRuleCall_5; }
 	}
 
+	public class EventDeclarartionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EventDeclarartion");
+		private final RuleCall cEventDefinitionParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//EventDeclarartion returns sgraph::Event:
+		//	EventDefinition;
+		public ParserRule getRule() { return rule; }
+
+		//EventDefinition
+		public RuleCall getEventDefinitionParserRuleCall() { return cEventDefinitionParserRuleCall; }
+	}
+
+	public class EventFeatureElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EventFeature");
+		private final RuleCall cEventDefinitionParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//// DataElement: EventDefinition | VariableDefinition;
+		//EventFeature returns types::Event:
+		//	EventDefinition;
+		public ParserRule getRule() { return rule; }
+
+		//EventDefinition
+		public RuleCall getEventDefinitionParserRuleCall() { return cEventDefinitionParserRuleCall; }
+	}
+
 	public class EventDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EventDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cEventDefinitionAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cDirectionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cDirectionDirectionEnumRuleCall_1_0 = (RuleCall)cDirectionAssignment_1.eContents().get(0);
-		private final Keyword cEventKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cColonKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cTypeAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final CrossReference cTypeTypeCrossReference_4_1_0 = (CrossReference)cTypeAssignment_4_1.eContents().get(0);
-		private final RuleCall cTypeTypeFQNParserRuleCall_4_1_0_1 = (RuleCall)cTypeTypeCrossReference_4_1_0.eContents().get(1);
-		private final Assignment cDerivationAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cDerivationEventDerivationParserRuleCall_5_0 = (RuleCall)cDerivationAssignment_5.eContents().get(0);
+		private final Assignment cDirectionAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cDirectionDirectionEnumRuleCall_0_0 = (RuleCall)cDirectionAssignment_0.eContents().get(0);
+		private final Keyword cEventKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cColonKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cTypeAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final CrossReference cTypeTypeCrossReference_3_1_0 = (CrossReference)cTypeAssignment_3_1.eContents().get(0);
+		private final RuleCall cTypeTypeFQNParserRuleCall_3_1_0_1 = (RuleCall)cTypeTypeCrossReference_3_1_0.eContents().get(1);
+		private final Assignment cDerivationAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cDerivationEventDerivationParserRuleCall_4_0 = (RuleCall)cDerivationAssignment_4.eContents().get(0);
 		
-		//// DataElement: EventDefinition | VariableDefinition;
-		/// * ---- event definition ---- * / EventDefinition returns sgraph::Event:
-		//	{EventDefinition} direction=Direction? "event" name=ID (":" type=[types::Type|FQN])? derivation=EventDerivation?;
+		////PropertyFeature returns types::Property : VariableDefinition ;
+		////OperationFeature returns types::Operation : Operation ;
+		/// * ---- event definition ---- * / EventDefinition:
+		//	direction=Direction? "event" name=ID (":" type=[types::Type|FQN])? derivation=EventDerivation?;
 		public ParserRule getRule() { return rule; }
 
-		//{EventDefinition} direction=Direction? "event" name=ID (":" type=[types::Type|FQN])? derivation=EventDerivation?
+		//direction=Direction? "event" name=ID (":" type=[types::Type|FQN])? derivation=EventDerivation?
 		public Group getGroup() { return cGroup; }
 
-		//{EventDefinition}
-		public Action getEventDefinitionAction_0() { return cEventDefinitionAction_0; }
-
 		//direction=Direction?
-		public Assignment getDirectionAssignment_1() { return cDirectionAssignment_1; }
+		public Assignment getDirectionAssignment_0() { return cDirectionAssignment_0; }
 
 		//Direction
-		public RuleCall getDirectionDirectionEnumRuleCall_1_0() { return cDirectionDirectionEnumRuleCall_1_0; }
+		public RuleCall getDirectionDirectionEnumRuleCall_0_0() { return cDirectionDirectionEnumRuleCall_0_0; }
 
 		//"event"
-		public Keyword getEventKeyword_2() { return cEventKeyword_2; }
+		public Keyword getEventKeyword_1() { return cEventKeyword_1; }
 
 		//name=ID
-		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_3_0() { return cNameIDTerminalRuleCall_3_0; }
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
 		//(":" type=[types::Type|FQN])?
-		public Group getGroup_4() { return cGroup_4; }
+		public Group getGroup_3() { return cGroup_3; }
 
 		//":"
-		public Keyword getColonKeyword_4_0() { return cColonKeyword_4_0; }
+		public Keyword getColonKeyword_3_0() { return cColonKeyword_3_0; }
 
 		//type=[types::Type|FQN]
-		public Assignment getTypeAssignment_4_1() { return cTypeAssignment_4_1; }
+		public Assignment getTypeAssignment_3_1() { return cTypeAssignment_3_1; }
 
 		//[types::Type|FQN]
-		public CrossReference getTypeTypeCrossReference_4_1_0() { return cTypeTypeCrossReference_4_1_0; }
+		public CrossReference getTypeTypeCrossReference_3_1_0() { return cTypeTypeCrossReference_3_1_0; }
 
 		//FQN
-		public RuleCall getTypeTypeFQNParserRuleCall_4_1_0_1() { return cTypeTypeFQNParserRuleCall_4_1_0_1; }
+		public RuleCall getTypeTypeFQNParserRuleCall_3_1_0_1() { return cTypeTypeFQNParserRuleCall_3_1_0_1; }
 
 		//derivation=EventDerivation?
-		public Assignment getDerivationAssignment_5() { return cDerivationAssignment_5; }
+		public Assignment getDerivationAssignment_4() { return cDerivationAssignment_4; }
 
 		//EventDerivation
-		public RuleCall getDerivationEventDerivationParserRuleCall_5_0() { return cDerivationEventDerivationParserRuleCall_5_0; }
+		public RuleCall getDerivationEventDerivationParserRuleCall_4_0() { return cDerivationEventDerivationParserRuleCall_4_0; }
 	}
 
 	public class EventDerivationElements extends AbstractParserRuleElementFinder {
@@ -2734,10 +2768,10 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cNanosecondNsKeyword_3_0 = (Keyword)cNanosecondEnumLiteralDeclaration_3.eContents().get(0);
 		
 		//enum TimeUnit:
-		//	second="s" | millisecond="ms" | microsend="µs" | nanosecond="ns";
+		//	second="s" | millisecond="ms" | microsend="ï¿½s" | nanosecond="ns";
 		public EnumRule getRule() { return rule; }
 
-		//second="s" | millisecond="ms" | microsend="µs" | nanosecond="ns"
+		//second="s" | millisecond="ms" | microsend="ï¿½s" | nanosecond="ns"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//second="s"
@@ -2752,10 +2786,10 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//"ms"
 		public Keyword getMillisecondMsKeyword_1_0() { return cMillisecondMsKeyword_1_0; }
 
-		//microsend="µs"
+		//microsend="ï¿½s"
 		public EnumLiteralDeclaration getMicrosendEnumLiteralDeclaration_2() { return cMicrosendEnumLiteralDeclaration_2; }
 
-		//"µs"
+		//"ï¿½s"
 		public Keyword getMicrosendSKeyword_2_0() { return cMicrosendSKeyword_2_0; }
 
 		//nanosecond="ns"
@@ -2775,10 +2809,13 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private TransitionSpecificationElements pTransitionSpecification;
 	private ScopeElements pScope;
 	private StateScopeElements pStateScope;
+	private TypeElements pType;
 	private StatechartScopeElements pStatechartScope;
 	private InterfaceScopeElements pInterfaceScope;
 	private InternalScopeElements pInternalScope;
 	private DeclarationElements pDeclaration;
+	private EventDeclarartionElements pEventDeclarartion;
+	private EventFeatureElements pEventFeature;
 	private EventDefinitionElements pEventDefinition;
 	private EventDerivationElements pEventDerivation;
 	private DirectionElements unknownRuleDirection;
@@ -2974,8 +3011,18 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getStateScopeAccess().getRule();
 	}
 
+	//Type returns types::Type:
+	//	StatechartScope;
+	public TypeElements getTypeAccess() {
+		return (pType != null) ? pType : (pType = new TypeElements());
+	}
+	
+	public ParserRule getTypeRule() {
+		return getTypeAccess().getRule();
+	}
+
 	//// defines the poosible scopes for statecharts
-	//StatechartScope returns sgraph::Scope:
+	//StatechartScope:
 	//	InterfaceScope | InternalScope;
 	public StatechartScopeElements getStatechartScopeAccess() {
 		return (pStatechartScope != null) ? pStatechartScope : (pStatechartScope = new StatechartScopeElements());
@@ -2985,7 +3032,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getStatechartScopeAccess().getRule();
 	}
 
-	//InterfaceScope returns sgraph::Scope:
+	//InterfaceScope:
 	//	{InterfaceScope} "interface" name=ID? ":" declarations+=(EventDefinition | VariableDefinition | Entrypoint |
 	//	Exitpoint)*;
 	public InterfaceScopeElements getInterfaceScopeAccess() {
@@ -2996,7 +3043,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getInterfaceScopeAccess().getRule();
 	}
 
-	//InternalScope returns sgraph::Scope:
+	//InternalScope:
 	//	{InternalScope} "internal" ":" declarations+=(EventDefinition | VariableDefinition | Operation | LocalReaction)*;
 	public InternalScopeElements getInternalScopeAccess() {
 		return (pInternalScope != null) ? pInternalScope : (pInternalScope = new InternalScopeElements());
@@ -3017,9 +3064,31 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getDeclarationAccess().getRule();
 	}
 
+	//EventDeclarartion returns sgraph::Event:
+	//	EventDefinition;
+	public EventDeclarartionElements getEventDeclarartionAccess() {
+		return (pEventDeclarartion != null) ? pEventDeclarartion : (pEventDeclarartion = new EventDeclarartionElements());
+	}
+	
+	public ParserRule getEventDeclarartionRule() {
+		return getEventDeclarartionAccess().getRule();
+	}
+
 	//// DataElement: EventDefinition | VariableDefinition;
-	/// * ---- event definition ---- * / EventDefinition returns sgraph::Event:
-	//	{EventDefinition} direction=Direction? "event" name=ID (":" type=[types::Type|FQN])? derivation=EventDerivation?;
+	//EventFeature returns types::Event:
+	//	EventDefinition;
+	public EventFeatureElements getEventFeatureAccess() {
+		return (pEventFeature != null) ? pEventFeature : (pEventFeature = new EventFeatureElements());
+	}
+	
+	public ParserRule getEventFeatureRule() {
+		return getEventFeatureAccess().getRule();
+	}
+
+	////PropertyFeature returns types::Property : VariableDefinition ;
+	////OperationFeature returns types::Operation : Operation ;
+	/// * ---- event definition ---- * / EventDefinition:
+	//	direction=Direction? "event" name=ID (":" type=[types::Type|FQN])? derivation=EventDerivation?;
 	public EventDefinitionElements getEventDefinitionAccess() {
 		return (pEventDefinition != null) ? pEventDefinition : (pEventDefinition = new EventDefinitionElements());
 	}
@@ -3537,7 +3606,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//enum TimeUnit:
-	//	second="s" | millisecond="ms" | microsend="µs" | nanosecond="ns";
+	//	second="s" | millisecond="ms" | microsend="ï¿½s" | nanosecond="ns";
 	public TimeUnitElements getTimeUnitAccess() {
 		return (unknownRuleTimeUnit != null) ? unknownRuleTimeUnit : (unknownRuleTimeUnit = new TimeUnitElements());
 	}

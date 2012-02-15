@@ -277,6 +277,106 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
   }
 
   /**
+   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.StatechartScope} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected StatechartScopeItemProvider statechartScopeItemProvider;
+
+  /**
+   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.StatechartScope}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createStatechartScopeAdapter()
+  {
+    if (statechartScopeItemProvider == null)
+    {
+      statechartScopeItemProvider = new StatechartScopeItemProvider(this);
+    }
+
+    return statechartScopeItemProvider;
+  }
+
+  /**
+   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.InterfaceScope} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected InterfaceScopeItemProvider interfaceScopeItemProvider;
+
+  /**
+   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.InterfaceScope}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createInterfaceScopeAdapter()
+  {
+    if (interfaceScopeItemProvider == null)
+    {
+      interfaceScopeItemProvider = new InterfaceScopeItemProvider(this);
+    }
+
+    return interfaceScopeItemProvider;
+  }
+
+  /**
+   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.InternalScope} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected InternalScopeItemProvider internalScopeItemProvider;
+
+  /**
+   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.InternalScope}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createInternalScopeAdapter()
+  {
+    if (internalScopeItemProvider == null)
+    {
+      internalScopeItemProvider = new InternalScopeItemProvider(this);
+    }
+
+    return internalScopeItemProvider;
+  }
+
+  /**
+   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventDefinition} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected EventDefinitionItemProvider eventDefinitionItemProvider;
+
+  /**
+   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EventDefinition}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createEventDefinitionAdapter()
+  {
+    if (eventDefinitionItemProvider == null)
+    {
+      eventDefinitionItemProvider = new EventDefinitionItemProvider(this);
+    }
+
+    return eventDefinitionItemProvider;
+  }
+
+  /**
    * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventDerivation} instances.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -977,81 +1077,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
   }
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.InterfaceScope} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected InterfaceScopeItemProvider interfaceScopeItemProvider;
-
-  /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.InterfaceScope}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createInterfaceScopeAdapter()
-  {
-    if (interfaceScopeItemProvider == null)
-    {
-      interfaceScopeItemProvider = new InterfaceScopeItemProvider(this);
-    }
-
-    return interfaceScopeItemProvider;
-  }
-
-  /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.InternalScope} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected InternalScopeItemProvider internalScopeItemProvider;
-
-  /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.InternalScope}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createInternalScopeAdapter()
-  {
-    if (internalScopeItemProvider == null)
-    {
-      internalScopeItemProvider = new InternalScopeItemProvider(this);
-    }
-
-    return internalScopeItemProvider;
-  }
-
-  /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventDefinition} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected EventDefinitionItemProvider eventDefinitionItemProvider;
-
-  /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EventDefinition}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createEventDefinitionAdapter()
-  {
-    if (eventDefinitionItemProvider == null)
-    {
-      eventDefinitionItemProvider = new EventDefinitionItemProvider(this);
-    }
-
-    return eventDefinitionItemProvider;
-  }
-
-  /**
    * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.VariableDefinition} instances.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1670,6 +1695,10 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
     if (statechartSpecificationItemProvider != null) statechartSpecificationItemProvider.dispose();
     if (stateSpecificationItemProvider != null) stateSpecificationItemProvider.dispose();
     if (transitionSpecificationItemProvider != null) transitionSpecificationItemProvider.dispose();
+    if (statechartScopeItemProvider != null) statechartScopeItemProvider.dispose();
+    if (interfaceScopeItemProvider != null) interfaceScopeItemProvider.dispose();
+    if (internalScopeItemProvider != null) internalScopeItemProvider.dispose();
+    if (eventDefinitionItemProvider != null) eventDefinitionItemProvider.dispose();
     if (eventDerivationItemProvider != null) eventDerivationItemProvider.dispose();
     if (localReactionItemProvider != null) localReactionItemProvider.dispose();
     if (transitionReactionItemProvider != null) transitionReactionItemProvider.dispose();
@@ -1698,9 +1727,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
     if (realLiteralItemProvider != null) realLiteralItemProvider.dispose();
     if (hexLiteralItemProvider != null) hexLiteralItemProvider.dispose();
     if (simpleScopeItemProvider != null) simpleScopeItemProvider.dispose();
-    if (interfaceScopeItemProvider != null) interfaceScopeItemProvider.dispose();
-    if (internalScopeItemProvider != null) internalScopeItemProvider.dispose();
-    if (eventDefinitionItemProvider != null) eventDefinitionItemProvider.dispose();
     if (variableDefinitionItemProvider != null) variableDefinitionItemProvider.dispose();
     if (operationItemProvider != null) operationItemProvider.dispose();
     if (entrypointItemProvider != null) entrypointItemProvider.dispose();

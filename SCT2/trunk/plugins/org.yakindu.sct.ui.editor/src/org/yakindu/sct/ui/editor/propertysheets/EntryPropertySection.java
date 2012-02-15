@@ -26,6 +26,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
@@ -71,7 +72,7 @@ public class EntryPropertySection extends AbstractEditorPropertySection {
 	private void bindNameControl(EMFDataBindingContext context) {
 		IEMFValueProperty property = EMFEditProperties.value(
 				TransactionUtil.getEditingDomain(eObject),
-				SGraphPackage.Literals.NAMED_ELEMENT__NAME);
+				BasePackage.Literals.NAMED_ELEMENT__NAME);
 		ISWTObservableValue observe = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.DefaultSelection})
 				.observe(nameText);
 		context.bindValue(observe, property.observe(eObject));

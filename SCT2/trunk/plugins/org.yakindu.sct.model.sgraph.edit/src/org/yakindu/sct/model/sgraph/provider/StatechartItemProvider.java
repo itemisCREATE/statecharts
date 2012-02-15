@@ -26,6 +26,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -37,7 +38,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * @generated
  */
 public class StatechartItemProvider
-	extends NamedElementItemProvider
+	extends SpecificationElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -72,33 +73,11 @@ public class StatechartItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSpecificationPropertyDescriptor(object);
 			addReactionsPropertyDescriptor(object);
 			addNamespacePropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Specification feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSpecificationPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SpecificationElement_specification_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SpecificationElement_specification_feature", "_UI_SpecificationElement_type"),
-				 SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -137,6 +116,28 @@ public class StatechartItemProvider
 				 getString("_UI_ScopedElement_namespace_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ScopedElement_namespace_feature", "_UI_ScopedElement_type"),
 				 SGraphPackage.Literals.SCOPED_ELEMENT__NAMESPACE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NamedElement_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
+				 BasePackage.Literals.NAMED_ELEMENT__NAME,
 				 true,
 				 false,
 				 false,
@@ -214,8 +215,8 @@ public class StatechartItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Statechart.class)) {
-			case SGraphPackage.STATECHART__SPECIFICATION:
 			case SGraphPackage.STATECHART__NAMESPACE:
+			case SGraphPackage.STATECHART__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SGraphPackage.STATECHART__LOCAL_REACTIONS:

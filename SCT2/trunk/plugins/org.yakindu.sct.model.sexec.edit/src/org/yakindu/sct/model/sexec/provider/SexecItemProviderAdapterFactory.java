@@ -258,29 +258,6 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.NamedElement} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected NamedElementItemProvider namedElementItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.NamedElement}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createNamedElementAdapter() {
-		if (namedElementItemProvider == null) {
-			namedElementItemProvider = new NamedElementItemProvider(this);
-		}
-
-		return namedElementItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.MappedElement} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -908,7 +885,6 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	 * @generated
 	 */
 	public void dispose() {
-		if (namedElementItemProvider != null) namedElementItemProvider.dispose();
 		if (mappedElementItemProvider != null) mappedElementItemProvider.dispose();
 		if (executionFlowItemProvider != null) executionFlowItemProvider.dispose();
 		if (executionNodeItemProvider != null) executionNodeItemProvider.dispose();

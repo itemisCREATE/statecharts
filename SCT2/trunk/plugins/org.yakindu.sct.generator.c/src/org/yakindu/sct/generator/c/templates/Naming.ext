@@ -1,13 +1,15 @@
+import ecore;
+import base;
+import sgraph;
 import stext;
 import sexec;
-import ecore;
-import sgraph;
-import sgen;
+import sgen; 
+
 
 extension org::yakindu::sct::generator::c::templates::Constants;
 extension org::eclipse::xtend::util::stdlib::elementprops;
 
-
+ 
 // TODO: move to other extension
 
 GeneratorEntry genEntry(Object obj) : ((EObject)obj).eRootContainer.getProperty("_GEN_ENTRY_");
@@ -35,9 +37,9 @@ String EvName(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).nam
 String EVNAME(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toUpperCase() + "EVENT";
 
 /* This is from sgraph! This should not be used within code generation */
-String StateEnumName(RegularState state) :
-	"_"+state.name; /* ??? */
-
+String StateEnumName(RegularState state) : 
+	"_"+ state.name; /* ??? */
+  
 String StateEnumName(ExecutionState state) :
 	"_"+state.simpleName;
 

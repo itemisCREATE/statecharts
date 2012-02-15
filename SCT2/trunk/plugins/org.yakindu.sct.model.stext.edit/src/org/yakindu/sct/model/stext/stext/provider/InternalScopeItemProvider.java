@@ -12,8 +12,6 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -21,11 +19,11 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import org.yakindu.base.types.TypesPackage;
+
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
-import org.yakindu.sct.model.sgraph.provider.ScopeItemProvider;
-
-import org.yakindu.sct.model.stext.stext.StextFactory;
+import org.yakindu.sct.model.stext.stext.InternalScope;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.InternalScope} object.
@@ -34,7 +32,7 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
  * @generated
  */
 public class InternalScopeItemProvider
-  extends ScopeItemProvider
+  extends StatechartScopeItemProvider
   implements
     IEditingDomainItemProvider,
     IStructuredItemContentProvider,
@@ -91,7 +89,10 @@ public class InternalScopeItemProvider
   @Override
   public String getText(Object object)
   {
-    return "Internal";
+    String label = ((InternalScope)object).getName();
+    return label == null || label.length() == 0 ?
+      getString("_UI_InternalScope_type") :
+      getString("_UI_InternalScope_type") + " " + label;
   }
 
   /**
@@ -119,48 +120,31 @@ public class InternalScopeItemProvider
   protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
   {
     super.collectNewChildDescriptors(newChildDescriptors, object);
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPE__DECLARATIONS,
-         StextFactory.eINSTANCE.createLocalReaction()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPE__DECLARATIONS,
-         StextFactory.eINSTANCE.createEventDefinition()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPE__DECLARATIONS,
-         StextFactory.eINSTANCE.createVariableDefinition()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPE__DECLARATIONS,
-         StextFactory.eINSTANCE.createOperation()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPE__DECLARATIONS,
-         StextFactory.eINSTANCE.createEntrypoint()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPE__DECLARATIONS,
-         StextFactory.eINSTANCE.createExitpoint()));
   }
 
   /**
-   * Return the resource locator for this item provider's resources.
+   * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
   @Override
-  public ResourceLocator getResourceLocator()
+  public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection)
   {
-    return STextEditPlugin.INSTANCE;
+    Object childFeature = feature;
+    Object childObject = child;
+
+    boolean qualify =
+      childFeature == SGraphPackage.Literals.SCOPE__DECLARATIONS ||
+      childFeature == TypesPackage.Literals.TYPE__FEATURES;
+
+    if (qualify)
+    {
+      return getString
+        ("_UI_CreateChild_text2",
+         new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+    }
+    return super.getCreateChildText(owner, feature, child, selection);
   }
 
 }

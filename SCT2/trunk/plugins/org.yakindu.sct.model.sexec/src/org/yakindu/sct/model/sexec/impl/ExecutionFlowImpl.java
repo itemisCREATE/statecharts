@@ -18,13 +18,14 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.MappedElement;
-import org.yakindu.sct.model.sexec.NamedElement;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.StateVector;
@@ -37,8 +38,8 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSourceElement <em>Source Element</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getStateVector <em>State Vector</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSubScopes <em>Sub Scopes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSuperScope <em>Super Scope</em>}</li>
@@ -54,6 +55,16 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  * @generated
  */
 public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlow {
+	/**
+	 * The cached value of the '{@link #getSourceElement() <em>Source Element</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceElement()
+	 * @generated
+	 * @ordered
+	 */
+	protected EObject sourceElement;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -73,16 +84,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getSourceElement() <em>Source Element</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSourceElement()
-	 * @generated
-	 * @ordered
-	 */
-	protected EObject sourceElement;
 
 	/**
 	 * The cached value of the '{@link #getStateVector() <em>State Vector</em>}' containment reference.
@@ -589,11 +590,11 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SexecPackage.EXECUTION_FLOW__NAME:
-				return getName();
 			case SexecPackage.EXECUTION_FLOW__SOURCE_ELEMENT:
 				if (resolve) return getSourceElement();
 				return basicGetSourceElement();
+			case SexecPackage.EXECUTION_FLOW__NAME:
+				return getName();
 			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
 				return getStateVector();
 			case SexecPackage.EXECUTION_FLOW__SUB_SCOPES:
@@ -626,11 +627,11 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SexecPackage.EXECUTION_FLOW__NAME:
-				setName((String)newValue);
-				return;
 			case SexecPackage.EXECUTION_FLOW__SOURCE_ELEMENT:
 				setSourceElement((EObject)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__NAME:
+				setName((String)newValue);
 				return;
 			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
 				setStateVector((StateVector)newValue);
@@ -675,11 +676,11 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SexecPackage.EXECUTION_FLOW__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case SexecPackage.EXECUTION_FLOW__SOURCE_ELEMENT:
 				setSourceElement((EObject)null);
+				return;
+			case SexecPackage.EXECUTION_FLOW__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
 				setStateVector((StateVector)null);
@@ -720,10 +721,10 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SexecPackage.EXECUTION_FLOW__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case SexecPackage.EXECUTION_FLOW__SOURCE_ELEMENT:
 				return sourceElement != null;
+			case SexecPackage.EXECUTION_FLOW__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
 				return stateVector != null;
 			case SexecPackage.EXECUTION_FLOW__SUB_SCOPES:
@@ -753,15 +754,15 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == NamedElement.class) {
-			switch (derivedFeatureID) {
-				case SexecPackage.EXECUTION_FLOW__NAME: return SexecPackage.NAMED_ELEMENT__NAME;
-				default: return -1;
-			}
-		}
 		if (baseClass == MappedElement.class) {
 			switch (derivedFeatureID) {
 				case SexecPackage.EXECUTION_FLOW__SOURCE_ELEMENT: return SexecPackage.MAPPED_ELEMENT__SOURCE_ELEMENT;
+				default: return -1;
+			}
+		}
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_FLOW__NAME: return BasePackage.NAMED_ELEMENT__NAME;
 				default: return -1;
 			}
 		}
@@ -785,15 +786,15 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == NamedElement.class) {
-			switch (baseFeatureID) {
-				case SexecPackage.NAMED_ELEMENT__NAME: return SexecPackage.EXECUTION_FLOW__NAME;
-				default: return -1;
-			}
-		}
 		if (baseClass == MappedElement.class) {
 			switch (baseFeatureID) {
 				case SexecPackage.MAPPED_ELEMENT__SOURCE_ELEMENT: return SexecPackage.EXECUTION_FLOW__SOURCE_ELEMENT;
+				default: return -1;
+			}
+		}
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case BasePackage.NAMED_ELEMENT__NAME: return SexecPackage.EXECUTION_FLOW__NAME;
 				default: return -1;
 			}
 		}

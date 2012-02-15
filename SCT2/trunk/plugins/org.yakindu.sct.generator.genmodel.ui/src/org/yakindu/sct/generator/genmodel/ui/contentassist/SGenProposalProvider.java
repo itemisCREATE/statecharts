@@ -40,7 +40,7 @@ public class SGenProposalProvider extends AbstractSGenProposalProvider {
 		for (GeneratorDescriptor desc : descriptions) {
 			//FIXME NullPointerCheck: desc could be Null
 			ICompletionProposal proposal = createCompletionProposal(
-					desc.getId(), new StyledString(desc.getName()),
+					desc.getId(), new StyledString((desc.getName()!=null) ? desc.getName() : "null"),
 					desc.getImage(), context);
 			acceptor.accept(proposal);
 		}

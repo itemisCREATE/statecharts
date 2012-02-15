@@ -529,5 +529,5 @@ class GeneratorProjectTemplate {
 			bin.includes = META-INF/,.
 		«ENDIF»
 	'''
-	
+	 
  }

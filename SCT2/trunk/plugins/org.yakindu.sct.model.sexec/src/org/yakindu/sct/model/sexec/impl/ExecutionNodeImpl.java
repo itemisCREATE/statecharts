@@ -12,17 +12,16 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sexec.ExecutionNode;
-import org.yakindu.sct.model.sexec.MappedElement;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecPackage;
-import org.yakindu.sct.model.sexec.StateVector;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +30,7 @@ import org.yakindu.sct.model.sexec.StateVector;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getSourceElement <em>Source Element</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getSimpleName <em>Simple Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getReactSequence <em>React Sequence</em>}</li>
@@ -40,16 +39,26 @@ import org.yakindu.sct.model.sexec.StateVector;
  *
  * @generated
  */
-public class ExecutionNodeImpl extends NamedElementImpl implements ExecutionNode {
+public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNode {
 	/**
-	 * The cached value of the '{@link #getSourceElement() <em>Source Element</em>}' reference.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSourceElement()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected EObject sourceElement;
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getReactions() <em>Reactions</em>}' containment reference list.
@@ -115,16 +124,8 @@ public class ExecutionNodeImpl extends NamedElementImpl implements ExecutionNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EObject getSourceElement() {
-		if (sourceElement != null && sourceElement.eIsProxy()) {
-			InternalEObject oldSourceElement = (InternalEObject)sourceElement;
-			sourceElement = eResolveProxy(oldSourceElement);
-			if (sourceElement != oldSourceElement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SexecPackage.EXECUTION_NODE__SOURCE_ELEMENT, oldSourceElement, sourceElement));
-			}
-		}
-		return sourceElement;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -132,20 +133,11 @@ public class ExecutionNodeImpl extends NamedElementImpl implements ExecutionNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EObject basicGetSourceElement() {
-		return sourceElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSourceElement(EObject newSourceElement) {
-		EObject oldSourceElement = sourceElement;
-		sourceElement = newSourceElement;
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_NODE__SOURCE_ELEMENT, oldSourceElement, sourceElement));
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_NODE__NAME, oldName, name));
 	}
 
 	/**
@@ -248,9 +240,8 @@ public class ExecutionNodeImpl extends NamedElementImpl implements ExecutionNode
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SexecPackage.EXECUTION_NODE__SOURCE_ELEMENT:
-				if (resolve) return getSourceElement();
-				return basicGetSourceElement();
+			case SexecPackage.EXECUTION_NODE__NAME:
+				return getName();
 			case SexecPackage.EXECUTION_NODE__REACTIONS:
 				return getReactions();
 			case SexecPackage.EXECUTION_NODE__SIMPLE_NAME:
@@ -270,8 +261,8 @@ public class ExecutionNodeImpl extends NamedElementImpl implements ExecutionNode
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SexecPackage.EXECUTION_NODE__SOURCE_ELEMENT:
-				setSourceElement((EObject)newValue);
+			case SexecPackage.EXECUTION_NODE__NAME:
+				setName((String)newValue);
 				return;
 			case SexecPackage.EXECUTION_NODE__REACTIONS:
 				getReactions().clear();
@@ -295,8 +286,8 @@ public class ExecutionNodeImpl extends NamedElementImpl implements ExecutionNode
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SexecPackage.EXECUTION_NODE__SOURCE_ELEMENT:
-				setSourceElement((EObject)null);
+			case SexecPackage.EXECUTION_NODE__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case SexecPackage.EXECUTION_NODE__REACTIONS:
 				getReactions().clear();
@@ -319,8 +310,8 @@ public class ExecutionNodeImpl extends NamedElementImpl implements ExecutionNode
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SexecPackage.EXECUTION_NODE__SOURCE_ELEMENT:
-				return sourceElement != null;
+			case SexecPackage.EXECUTION_NODE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case SexecPackage.EXECUTION_NODE__REACTIONS:
 				return reactions != null && !reactions.isEmpty();
 			case SexecPackage.EXECUTION_NODE__SIMPLE_NAME:
@@ -338,9 +329,9 @@ public class ExecutionNodeImpl extends NamedElementImpl implements ExecutionNode
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == MappedElement.class) {
+		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
-				case SexecPackage.EXECUTION_NODE__SOURCE_ELEMENT: return SexecPackage.MAPPED_ELEMENT__SOURCE_ELEMENT;
+				case SexecPackage.EXECUTION_NODE__NAME: return BasePackage.NAMED_ELEMENT__NAME;
 				default: return -1;
 			}
 		}
@@ -354,9 +345,9 @@ public class ExecutionNodeImpl extends NamedElementImpl implements ExecutionNode
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == MappedElement.class) {
+		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
-				case SexecPackage.MAPPED_ELEMENT__SOURCE_ELEMENT: return SexecPackage.EXECUTION_NODE__SOURCE_ELEMENT;
+				case BasePackage.NAMED_ELEMENT__NAME: return SexecPackage.EXECUTION_NODE__NAME;
 				default: return -1;
 			}
 		}
@@ -373,7 +364,9 @@ public class ExecutionNodeImpl extends NamedElementImpl implements ExecutionNode
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (simpleName: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", simpleName: ");
 		result.append(simpleName);
 		result.append(')');
 		return result.toString();

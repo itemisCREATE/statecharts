@@ -123,12 +123,12 @@ public class SimpleScopeItemProvider
     newChildDescriptors.add
       (createChildParameter
         (SGraphPackage.Literals.SCOPE__DECLARATIONS,
-         StextFactory.eINSTANCE.createLocalReaction()));
+         StextFactory.eINSTANCE.createEventDefinition()));
 
     newChildDescriptors.add
       (createChildParameter
         (SGraphPackage.Literals.SCOPE__DECLARATIONS,
-         StextFactory.eINSTANCE.createEventDefinition()));
+         StextFactory.eINSTANCE.createLocalReaction()));
 
     newChildDescriptors.add
       (createChildParameter

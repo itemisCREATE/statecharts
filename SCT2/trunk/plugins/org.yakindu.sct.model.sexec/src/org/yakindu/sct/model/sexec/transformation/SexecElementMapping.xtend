@@ -76,7 +76,9 @@ import org.yakindu.sct.model.sgraph.EntryKind
 		r.name = scope.name
 	}
 	
-	def dispatch Scope create r : stextFactory.createInternalScope  create(InternalScope scope) {}
+	def dispatch Scope create r : stextFactory.createInternalScope  create(Scope scope) {}
+	
+	
 	
 	def Scope create r : sgraph.factory.createScope timeEventScope(ExecutionFlow flow) {
 		flow.scopes.add(r);

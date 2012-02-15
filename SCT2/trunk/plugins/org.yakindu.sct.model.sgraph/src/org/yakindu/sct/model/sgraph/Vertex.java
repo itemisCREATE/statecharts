@@ -11,6 +11,7 @@
 package org.yakindu.sct.model.sgraph;
 
 import org.eclipse.emf.common.util.EList;
+import org.yakindu.base.base.NamedElement;
 
 /**
  * <!-- begin-user-doc -->

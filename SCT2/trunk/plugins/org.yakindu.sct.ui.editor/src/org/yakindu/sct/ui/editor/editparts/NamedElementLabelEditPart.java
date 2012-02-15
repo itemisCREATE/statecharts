@@ -11,7 +11,7 @@
 package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 
 import de.itemis.gmf.runtime.commons.editparts.TextAwareLabelEditPart;
@@ -24,7 +24,7 @@ import de.itemis.gmf.runtime.commons.editparts.TextAwareLabelEditPart;
 public class NamedElementLabelEditPart extends TextAwareLabelEditPart {
 
 	public NamedElementLabelEditPart(View view) {
-		super(view, SGraphPackage.Literals.NAMED_ELEMENT__NAME,
+		super(view, BasePackage.Literals.NAMED_ELEMENT__NAME,
 				DiagramActivator.PLUGIN_ID);
 	}
 }

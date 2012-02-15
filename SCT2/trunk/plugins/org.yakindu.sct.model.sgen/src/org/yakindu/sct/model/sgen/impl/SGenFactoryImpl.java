@@ -10,12 +10,19 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.yakindu.sct.model.sgen.*;
+import org.yakindu.sct.model.sgen.FeatureConfiguration;
+import org.yakindu.sct.model.sgen.FeatureParameter;
+import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.FeatureType;
+import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
+import org.yakindu.sct.model.sgen.GeneratorConfiguration;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
+import org.yakindu.sct.model.sgen.GeneratorModel;
+import org.yakindu.sct.model.sgen.ParameterTypes;
+import org.yakindu.sct.model.sgen.SGenFactory;
+import org.yakindu.sct.model.sgen.SGenPackage;
 
 /**
  * <!-- begin-user-doc -->

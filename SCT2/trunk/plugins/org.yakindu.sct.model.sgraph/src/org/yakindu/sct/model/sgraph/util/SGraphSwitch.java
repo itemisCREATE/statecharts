@@ -13,6 +13,7 @@ package org.yakindu.sct.model.sgraph.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
@@ -21,7 +22,6 @@ import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
-import org.yakindu.sct.model.sgraph.NamedElement;
 import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
@@ -119,12 +119,6 @@ public class SGraphSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SGraphPackage.NAMED_ELEMENT: {
-				NamedElement namedElement = (NamedElement)theEObject;
-				T result = caseNamedElement(namedElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case SGraphPackage.REGION: {
 				Region region = (Region)theEObject;
 				T result = caseRegion(region);
@@ -177,11 +171,11 @@ public class SGraphSwitch<T> extends Switch<T> {
 			case SGraphPackage.STATECHART: {
 				Statechart statechart = (Statechart)theEObject;
 				T result = caseStatechart(statechart);
-				if (result == null) result = caseNamedElement(statechart);
 				if (result == null) result = caseSpecificationElement(statechart);
 				if (result == null) result = caseReactiveElement(statechart);
 				if (result == null) result = caseScopedElement(statechart);
 				if (result == null) result = caseCompositeElement(statechart);
+				if (result == null) result = caseNamedElement(statechart);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
