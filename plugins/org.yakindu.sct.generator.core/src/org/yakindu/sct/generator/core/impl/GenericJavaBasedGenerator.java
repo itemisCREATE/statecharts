@@ -22,7 +22,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.yakindu.sct.generator.core.AbstractWorkspaceGenerator;
 import org.yakindu.sct.generator.core.IGeneratorBridge;
-import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
+import org.yakindu.sct.generator.core.util.GeneratorUtils;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -47,12 +47,12 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 
 		public FeatureParameterValue getFeatureParameter(GeneratorEntry entry,
 				String featureName, String paramName) {
-			return GenericJavaBasedGenerator.this.getFeatureParameter(entry,
+			return GeneratorUtils.getFeatureParameter(entry,
 					featureName, paramName);
 		}
 
 		public void refreshTargetProject(GeneratorEntry entry) {
-			GenericJavaBasedGenerator.this.refreshTargetProject(entry);
+			GeneratorUtils.refreshTargetProject(entry);
 		}
 
 		public File getTargetProject(GeneratorEntry entry) {
@@ -62,12 +62,7 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 		}
 
 		public File getTargetFolder(GeneratorEntry entry) {
-			String targetFolder = getOutletFeatureConfiguration(entry)
-					.getParameterValue(
-							ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER)
-					.getStringValue();
-			return new File(getTargetProject(entry).getPath() + File.separator
-					+ targetFolder);
+			return GeneratorUtils.getTargetFolder(entry);
 		}
 	};
 

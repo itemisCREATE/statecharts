@@ -11,6 +11,9 @@
 package org.yakindu.sct.generator.core.impl;
 
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER;
+import static org.yakindu.sct.generator.core.util.GeneratorUtils.getOutletFeatureConfiguration;
+import static org.yakindu.sct.generator.core.util.GeneratorUtils.isDumpSexec;
+import static org.yakindu.sct.generator.core.util.GeneratorUtils.refreshTargetProject;
 
 import java.io.File;
 import java.util.Collections;
