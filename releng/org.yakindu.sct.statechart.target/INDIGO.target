@@ -17,7 +17,7 @@
 <repository location="http://download.eclipse.org/eclipse/updates/3.7/"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.yakindu.base.feature.group" version="1.0.0.201201271024"/>
+<unit id="org.yakindu.base.feature.group" version="1.0.0.201202150731"/>
 <repository location="http://updates.yakindu.com/indigo/integration"/>
 </location>
 </locations>
