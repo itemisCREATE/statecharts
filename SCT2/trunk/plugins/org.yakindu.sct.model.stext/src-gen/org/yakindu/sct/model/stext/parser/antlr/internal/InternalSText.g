@@ -4180,10 +4180,10 @@ ruleTimeUnit returns [Enumerator current=null]
         newLeafNode(enumLiteral_1, grammarAccess.getTimeUnitAccess().getMillisecondEnumLiteralDeclaration_1()); 
     }
 )
-    |(	enumLiteral_2='\u00D4\u00F8\u03A9s' 
+    |(	enumLiteral_2='mics' 
 	{
-        $current = grammarAccess.getTimeUnitAccess().getMicrosendEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-        newLeafNode(enumLiteral_2, grammarAccess.getTimeUnitAccess().getMicrosendEnumLiteralDeclaration_2()); 
+        $current = grammarAccess.getTimeUnitAccess().getMicrosecondEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+        newLeafNode(enumLiteral_2, grammarAccess.getTimeUnitAccess().getMicrosecondEnumLiteralDeclaration_2()); 
     }
 )
     |(	enumLiteral_3='ns' 

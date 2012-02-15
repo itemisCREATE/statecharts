@@ -2812,10 +2812,10 @@ rule__TimeUnit__Alternatives
 )
 
     |(
-{ before(grammarAccess.getTimeUnitAccess().getMicrosendEnumLiteralDeclaration_2()); }
-(	'\u00D4\u00F8\u03A9s' 
+{ before(grammarAccess.getTimeUnitAccess().getMicrosecondEnumLiteralDeclaration_2()); }
+(	'mics' 
 )
-{ after(grammarAccess.getTimeUnitAccess().getMicrosendEnumLiteralDeclaration_2()); }
+{ after(grammarAccess.getTimeUnitAccess().getMicrosecondEnumLiteralDeclaration_2()); }
 )
 
     |(

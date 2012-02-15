@@ -2636,7 +2636,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEEnum(timeUnitEEnum, TimeUnit.class, "TimeUnit");
     addEEnumLiteral(timeUnitEEnum, TimeUnit.SECOND);
     addEEnumLiteral(timeUnitEEnum, TimeUnit.MILLISECOND);
-    addEEnumLiteral(timeUnitEEnum, TimeUnit.MICROSEND);
+    addEEnumLiteral(timeUnitEEnum, TimeUnit.MICROSECOND);
     addEEnumLiteral(timeUnitEEnum, TimeUnit.NANOSECOND);
 
     // Create resource

@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalSTextParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_BOOL", "RULE_FLOAT", "RULE_HEX", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'default'", "'else'", "'local'", "'in'", "'out'", "'after'", "'every'", "'='", "'*='", "'/='", "'%='", "'+='", "'-='", "'<<='", "'>>='", "'&='", "'^='", "'|='", "'<<'", "'>>'", "'+'", "'-'", "'*'", "'/'", "'%'", "'~'", "'<'", "'<='", "'>'", "'>='", "'=='", "'!='", "'s'", "'ms'", "'\\u00D4\\u00F8\\u03A9s'", "'ns'", "'@@statechart@@'", "'@@state@@'", "'@@transition@@'", "'namespace'", "'interface'", "':'", "'internal'", "'event'", "'var'", "'operation'", "'('", "')'", "','", "'entrypoint'", "'exitpoint'", "'.'", "'#'", "'['", "']'", "';'", "'entry'", "'exit'", "'oncycle'", "'always'", "'raise'", "'?'", "'||'", "'&&'", "'!'", "'^'", "'|'", "'&'", "'valueof'", "'active'", "'readonly'", "'external'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_BOOL", "RULE_FLOAT", "RULE_HEX", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'default'", "'else'", "'local'", "'in'", "'out'", "'after'", "'every'", "'='", "'*='", "'/='", "'%='", "'+='", "'-='", "'<<='", "'>>='", "'&='", "'^='", "'|='", "'<<'", "'>>'", "'+'", "'-'", "'*'", "'/'", "'%'", "'~'", "'<'", "'<='", "'>'", "'>='", "'=='", "'!='", "'s'", "'ms'", "'mics'", "'ns'", "'@@statechart@@'", "'@@state@@'", "'@@transition@@'", "'namespace'", "'interface'", "':'", "'internal'", "'event'", "'var'", "'operation'", "'('", "')'", "','", "'entrypoint'", "'exitpoint'", "'.'", "'#'", "'['", "']'", "';'", "'entry'", "'exit'", "'oncycle'", "'always'", "'raise'", "'?'", "'||'", "'&&'", "'!'", "'^'", "'|'", "'&'", "'valueof'", "'active'", "'readonly'", "'external'"
     };
     public static final int T__68=68;
     public static final int T__69=69;
@@ -9200,13 +9200,13 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TimeUnit__Alternatives"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:2795:1: rule__TimeUnit__Alternatives : ( ( ( 's' ) ) | ( ( 'ms' ) ) | ( ( '\\u00D4\\u00F8\\u03A9s' ) ) | ( ( 'ns' ) ) );
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:2795:1: rule__TimeUnit__Alternatives : ( ( ( 's' ) ) | ( ( 'ms' ) ) | ( ( 'mics' ) ) | ( ( 'ns' ) ) );
     public final void rule__TimeUnit__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:2799:1: ( ( ( 's' ) ) | ( ( 'ms' ) ) | ( ( '\\u00D4\\u00F8\\u03A9s' ) ) | ( ( 'ns' ) ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:2799:1: ( ( ( 's' ) ) | ( ( 'ms' ) ) | ( ( 'mics' ) ) | ( ( 'ns' ) ) )
             int alt26=4;
             switch ( input.LA(1) ) {
             case 46:
@@ -9289,23 +9289,23 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:2814:6: ( ( '\\u00D4\\u00F8\\u03A9s' ) )
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:2814:6: ( ( 'mics' ) )
                     {
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:2814:6: ( ( '\\u00D4\\u00F8\\u03A9s' ) )
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:2815:1: ( '\\u00D4\\u00F8\\u03A9s' )
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:2814:6: ( ( 'mics' ) )
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:2815:1: ( 'mics' )
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getTimeUnitAccess().getMicrosendEnumLiteralDeclaration_2()); 
+                       before(grammarAccess.getTimeUnitAccess().getMicrosecondEnumLiteralDeclaration_2()); 
                     }
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:2816:1: ( '\\u00D4\\u00F8\\u03A9s' )
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:2816:3: '\\u00D4\\u00F8\\u03A9s'
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:2816:1: ( 'mics' )
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:2816:3: 'mics'
                     {
                     match(input,48,FOLLOW_48_in_rule__TimeUnit__Alternatives6157); if (state.failed) return ;
 
                     }
 
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getTimeUnitAccess().getMicrosendEnumLiteralDeclaration_2()); 
+                       after(grammarAccess.getTimeUnitAccess().getMicrosecondEnumLiteralDeclaration_2()); 
                     }
 
                     }
