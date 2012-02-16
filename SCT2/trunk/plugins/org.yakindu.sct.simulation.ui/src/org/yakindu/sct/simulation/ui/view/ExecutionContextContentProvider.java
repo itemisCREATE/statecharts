@@ -129,7 +129,9 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 	}
 
 	public void eventRaised(ExecutionEvent event) {
+		System.out.println("raised " + event.getName());
 	}
+	
 	public void timeScaleFactorChanged(double oldFactor, double newFactor) {
 	}
 

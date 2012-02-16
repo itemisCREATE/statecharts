@@ -98,13 +98,19 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 		controller.start();
 	}
 
-	protected IExecutionFacadeFactory getExecutionFacadeFactory(EObject context) {
+	protected IExecutionFacadeFactory getExecutionFacadeFactory(Statechart sc) {
 		Iterable<ExecutionFactoryDescriptor> executionFactoryDescriptor = ExecutionFactoryExtensions
 				.getExecutionFactoryDescriptor();
+		
+		for ( ExecutionFactoryDescriptor desc : executionFactoryDescriptor) {
+			IExecutionFacadeFactory f = desc.createExecutableExtensionFactory();
+			if ( f.isApplicable(sc) ) return f;
+		}
 		// TODO: Handle more than one registered factory
-		ExecutionFactoryDescriptor next = executionFactoryDescriptor.iterator()
-				.next();
-		return next.createExecutableExtensionFactory();
+//		ExecutionFactoryDescriptor next = executionFactoryDescriptor.iterator()
+//				.next();
+//		return next.createExecutableExtensionFactory();
+		return null;
 	}
 
 	public IProcess getProcess() {

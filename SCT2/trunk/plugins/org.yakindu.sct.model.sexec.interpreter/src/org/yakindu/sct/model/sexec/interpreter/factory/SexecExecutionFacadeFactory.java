@@ -49,4 +49,9 @@ public class SexecExecutionFacadeFactory implements IExecutionFacadeFactory {
 
 	}
 
+	public boolean isApplicable(Statechart statechart) {
+		return statechart.eResource().getURI().toString().endsWith("sct");
+	}
+
+   
 }

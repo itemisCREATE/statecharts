@@ -328,10 +328,17 @@ public class BehaviorMapping {
         }
       }
       if (!matched) {
+        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,TimeUnit.MICROSECOND)) {
+          matched=true;
+          Statement _divide = this.divide(pve, 1000);
+          _switchResult = _divide;
+        }
+      }
+      if (!matched) {
         if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,TimeUnit.NANOSECOND)) {
           matched=true;
-          Statement _divide = this.divide(pve, 1000000);
-          _switchResult = _divide;
+          Statement _divide_1 = this.divide(pve, 1000000);
+          _switchResult = _divide_1;
         }
       }
       if (!matched) {
