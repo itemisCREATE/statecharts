@@ -10,8 +10,13 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.IPropertyChangeListener;
@@ -166,7 +171,13 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 	 */
 	public static class Container {
 		String name = "Default";
-		Set<AbstractSlot> slots = new HashSet<AbstractSlot>();
+		Set<AbstractSlot> slots = new TreeSet<AbstractSlot>(new Comparator<AbstractSlot>() {
+
+			public int compare(AbstractSlot arg0, AbstractSlot arg1) {
+				return arg0.getName().compareTo(arg1.getName());
+			}
+			
+		});
 
 		public Container() {
 			super();
