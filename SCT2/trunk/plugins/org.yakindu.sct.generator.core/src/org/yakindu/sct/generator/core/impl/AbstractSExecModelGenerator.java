@@ -115,7 +115,7 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 	 */
 	protected ExecutionFlow createExecutionFlow(Statechart statechart,
 			GeneratorEntry entry) {
-		Injector injector = Guice.createInjector(new SequencerModule());
+		Injector injector = createInjector();
 		ModelSequencer sequencer = injector.getInstance(ModelSequencer.class);
 		ExecutionFlow flow = sequencer.transform(statechart);
 		Assert.isNotNull(flow, "Error creation ExecutionFlow");
@@ -147,6 +147,10 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 		flow = optimizer.transform(flow);
 
 		return flow;
+	}
+
+	protected Injector createInjector() {
+		return Guice.createInjector(new SequencerModule());
 	}
 
 	protected final void writeToConsole(Throwable t) {
