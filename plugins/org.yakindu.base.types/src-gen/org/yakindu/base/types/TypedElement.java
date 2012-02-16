@@ -36,7 +36,7 @@ public interface TypedElement extends EObject {
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(Type)
 	 * @see org.yakindu.base.types.TypesPackage#getTypedElement_Type()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Type getType();
