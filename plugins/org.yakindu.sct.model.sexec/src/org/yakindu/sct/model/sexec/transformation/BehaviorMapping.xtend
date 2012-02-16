@@ -133,6 +133,7 @@ class BehaviorMapping {
 	
 		switch (tes.unit) {
 			case TimeUnit::MILLISECOND : pve
+			case TimeUnit::MICROSECOND : pve.divide(1000)
 			case TimeUnit::NANOSECOND  : pve.divide(1000000)
 			case TimeUnit::SECOND      : pve.multiply(1000)
 			default : pve

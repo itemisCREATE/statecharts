@@ -126,7 +126,7 @@ public class SexecElementMapping {
   
   private final HashMap<ArrayList<?>,InternalScope> _createCache_create_2 = new HashMap<ArrayList<?>,InternalScope>();
   
-  protected Scope _create(final InternalScope scope) {
+  protected Scope _create(final Scope scope) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(scope);
     final InternalScope r;
     synchronized (_createCache_create_2) {
@@ -627,8 +627,8 @@ public class SexecElementMapping {
   public Scope create(final Scope scope) {
     if ((scope instanceof InterfaceScope)) {
       return _create((InterfaceScope)scope);
-    } else if ((scope instanceof InternalScope)) {
-      return _create((InternalScope)scope);
+    } else if ((scope instanceof Scope)) {
+      return _create((Scope)scope);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         java.util.Arrays.<Object>asList(scope).toString());

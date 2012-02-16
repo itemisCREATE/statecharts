@@ -20,5 +20,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 public interface IExecutionFacadeFactory {
 
 	public IExecutionFacade createExecutionFacade(Statechart statechart);
+	
+	public boolean isApplicable(Statechart statechart);
 
 }
