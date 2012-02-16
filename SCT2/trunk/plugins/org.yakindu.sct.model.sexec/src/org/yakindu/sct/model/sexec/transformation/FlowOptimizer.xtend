@@ -26,6 +26,8 @@ import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.HistoryEntry
 import org.yakindu.sct.model.sexec.ExecutionChoice
 import org.yakindu.sct.model.sexec.ExecutionEntry
+import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
+import org.yakindu.sct.model.stext.stext.BoolLiteral
  
 class FlowOptimizer {
 
@@ -36,8 +38,8 @@ class FlowOptimizer {
 	boolean _inlineEntryActions     def inlineEntryActions(boolean b)   {_inlineEntryActions = b}
 	boolean _inlineExitActions      def inlineExitActions(boolean b)    {_inlineExitActions = b}
 	boolean _inlineEnterSequences   def inlineEnterSequences(boolean b) {_inlineEnterSequences = b}
-	boolean _inlineEnterRegion   def inlineEnterRegion(boolean b) {_inlineEnterRegion = b}
-	boolean _inlineExitRegion   def inlineExitRegion(boolean b) {_inlineExitRegion = b}
+	boolean _inlineEnterRegion   	def inlineEnterRegion(boolean b) 	{_inlineEnterRegion = b}
+	boolean _inlineExitRegion   	def inlineExitRegion(boolean b) 	{_inlineExitRegion = b}
 	boolean _inlineExitSequences    def inlineExitSequences(boolean b)  {_inlineExitSequences = b}
 	boolean _inlineChoices          def inlineChoices(boolean b)        {_inlineChoices = b}
 	boolean _inlineEntries          def inlineEntries(boolean b)        {_inlineEntries = b}
@@ -45,6 +47,11 @@ class FlowOptimizer {
 	
 	
 	def ExecutionFlow transform(ExecutionFlow flow) {
+		
+		// first replace all 'if true' steps by then step.
+		flow.replaceTrueIfs
+		 
+		// perform inlining
 		if (_inlineReactions) {
 			flow.inlineReactionChecks	
 			flow.inlineReactionEffects		
@@ -70,6 +77,41 @@ class FlowOptimizer {
 		flow
 	}
 	
+	
+	// REPLACE TRUE IF STEPS
+	def replaceTrueIfs(ExecutionFlow flow) {
+		flow.allContentsIterable.filter(typeof(If)).filter( i | i.check.alwaysTrue ).forEach( i | i.substituteBy(i.thenStep) );
+	}
+	
+	def substituteBy(Step orig, Step substitute) {
+		orig.eContainer.substitute(orig, substitute)
+	}
+	
+	
+	def dispatch substitute(Object parent, Step orig, Step subst) {}
+
+	def dispatch substitute(Sequence parent, Step orig, Step subst) {
+		if (parent.steps.contains(orig)) parent.steps.set(parent.steps.indexOf(orig), subst);
+	}
+	
+	def dispatch substitute(If parent, Step orig, Step subst) {
+		if (parent.thenStep == orig) parent.thenStep = subst
+		else if (parent.elseStep == orig) parent.elseStep = subst
+		subst
+	}
+	
+	
+	def alwaysTrue(Check check) {
+		if (check != null && check.condition instanceof PrimitiveValueExpression) {
+			val pve = (check.condition as PrimitiveValueExpression)
+			return ( pve.value instanceof BoolLiteral && ( pve.value as BoolLiteral ).value )
+		} 
+		
+		return false
+	}
+	
+	def dispatch empty(Step step) { false }
+	def dispatch empty(Sequence seq) { seq.steps.size == 0 }
 	
 	// INLINE REACTION CHECKS
 	def inlineReactionChecks(ExecutionFlow flow) {
@@ -104,6 +146,7 @@ class FlowOptimizer {
 	
 	def dispatch substitute(If owner, Check pre, Check post) {
 		if ( owner.check == pre ) owner.check = post
+		post
 	} 
 	
 	

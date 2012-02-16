@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -32,6 +33,10 @@ import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
+import org.yakindu.sct.model.sgraph.Statement;
+import org.yakindu.sct.model.stext.stext.BoolLiteral;
+import org.yakindu.sct.model.stext.stext.Literal;
+import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 
 @SuppressWarnings("all")
@@ -109,6 +114,7 @@ public class FlowOptimizer {
   public ExecutionFlow transform(final ExecutionFlow flow) {
     ExecutionFlow _xblockexpression = null;
     {
+      this.replaceTrueIfs(flow);
       if (this._inlineReactions) {
         {
           this.inlineReactionChecks(flow);
@@ -270,6 +276,111 @@ public class FlowOptimizer {
     return _xblockexpression;
   }
   
+  public void replaceTrueIfs(final ExecutionFlow flow) {
+    Iterable<EObject> _allContentsIterable = EObjectExtensions.allContentsIterable(flow);
+    Iterable<If> _filter = IterableExtensions.<If>filter(_allContentsIterable, org.yakindu.sct.model.sexec.If.class);
+    final Function1<If,Boolean> _function = new Function1<If,Boolean>() {
+        public Boolean apply(final If i) {
+          Check _check = i.getCheck();
+          boolean _alwaysTrue = FlowOptimizer.this.alwaysTrue(_check);
+          return ((Boolean)_alwaysTrue);
+        }
+      };
+    Iterable<If> _filter_1 = IterableExtensions.<If>filter(_filter, _function);
+    final Function1<If,Step> _function_1 = new Function1<If,Step>() {
+        public Step apply(final If i_1) {
+          Step _thenStep = i_1.getThenStep();
+          Step _substituteBy = FlowOptimizer.this.substituteBy(i_1, _thenStep);
+          return _substituteBy;
+        }
+      };
+    IterableExtensions.<If>forEach(_filter_1, _function_1);
+  }
+  
+  public Step substituteBy(final Step orig, final Step substitute) {
+    EObject _eContainer = orig.eContainer();
+    Step _substitute = this.substitute(_eContainer, orig, substitute);
+    return _substitute;
+  }
+  
+  protected Step _substitute(final Object parent, final Step orig, final Step subst) {
+    return null;
+  }
+  
+  protected Step _substitute(final Sequence parent, final Step orig, final Step subst) {
+    Step _xifexpression = null;
+    EList<Step> _steps = parent.getSteps();
+    boolean _contains = _steps.contains(orig);
+    if (_contains) {
+      EList<Step> _steps_1 = parent.getSteps();
+      EList<Step> _steps_2 = parent.getSteps();
+      int _indexOf = _steps_2.indexOf(orig);
+      Step _set = _steps_1.set(_indexOf, subst);
+      _xifexpression = _set;
+    }
+    return _xifexpression;
+  }
+  
+  protected Step _substitute(final If parent, final Step orig, final Step subst) {
+    Step _xblockexpression = null;
+    {
+      Step _thenStep = parent.getThenStep();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_thenStep, orig);
+      if (_operator_equals) {
+        parent.setThenStep(subst);
+      } else {
+        Step _elseStep = parent.getElseStep();
+        boolean _operator_equals_1 = ObjectExtensions.operator_equals(_elseStep, orig);
+        if (_operator_equals_1) {
+          parent.setElseStep(subst);
+        }
+      }
+      _xblockexpression = (subst);
+    }
+    return _xblockexpression;
+  }
+  
+  public boolean alwaysTrue(final Check check) {
+    {
+      boolean _operator_and = false;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(check, null);
+      if (!_operator_notEquals) {
+        _operator_and = false;
+      } else {
+        Statement _condition = check.getCondition();
+        _operator_and = BooleanExtensions.operator_and(_operator_notEquals, (_condition instanceof org.yakindu.sct.model.stext.stext.PrimitiveValueExpression));
+      }
+      if (_operator_and) {
+        {
+          Statement _condition_1 = check.getCondition();
+          final PrimitiveValueExpression pve = ((PrimitiveValueExpression) _condition_1);
+          boolean _operator_and_1 = false;
+          Literal _value = pve.getValue();
+          if (!(_value instanceof org.yakindu.sct.model.stext.stext.BoolLiteral)) {
+            _operator_and_1 = false;
+          } else {
+            Literal _value_1 = pve.getValue();
+            boolean _isValue = ((BoolLiteral) _value_1).isValue();
+            _operator_and_1 = BooleanExtensions.operator_and((_value instanceof org.yakindu.sct.model.stext.stext.BoolLiteral), _isValue);
+          }
+          return _operator_and_1;
+        }
+      }
+      return false;
+    }
+  }
+  
+  protected boolean _empty(final Step step) {
+    return false;
+  }
+  
+  protected boolean _empty(final Sequence seq) {
+    EList<Step> _steps = seq.getSteps();
+    int _size = _steps.size();
+    boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)0));
+    return _operator_equals;
+  }
+  
   public void inlineReactionChecks(final ExecutionFlow flow) {
     EList<ExecutionState> _states = flow.getStates();
     final Function1<ExecutionState,ExecutionState> _function = new Function1<ExecutionState,ExecutionState>() {
@@ -332,18 +443,21 @@ public class FlowOptimizer {
     return _xblockexpression;
   }
   
-  protected Object _substitute(final EObject owner, final Check pre, final Check post) {
+  protected Step _substitute(final EObject owner, final Check pre, final Check post) {
     return null;
   }
   
-  protected Object _substitute(final If owner, final Check pre, final Check post) {
-    Object _xifexpression = null;
-    Check _check = owner.getCheck();
-    boolean _operator_equals = ObjectExtensions.operator_equals(_check, pre);
-    if (_operator_equals) {
-      owner.setCheck(post);
+  protected Step _substitute(final If owner, final Check pre, final Check post) {
+    Check _xblockexpression = null;
+    {
+      Check _check = owner.getCheck();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_check, pre);
+      if (_operator_equals) {
+        owner.setCheck(post);
+      }
+      _xblockexpression = (post);
     }
-    return _xifexpression;
+    return _xblockexpression;
   }
   
   public void inlineReactionEffects(final ExecutionFlow flow) {
@@ -704,18 +818,41 @@ public class FlowOptimizer {
     return StextFactory.eINSTANCE;
   }
   
-  public Object substitute(final EObject owner, final Check pre, final Check post) {
+  public Step substitute(final Object owner, final Step pre, final Step post) {
     if ((owner instanceof If)
          && (pre instanceof Check)
          && (post instanceof Check)) {
       return _substitute((If)owner, (Check)pre, (Check)post);
+    } else if ((owner instanceof If)
+         && (pre instanceof Step)
+         && (post instanceof Step)) {
+      return _substitute((If)owner, (Step)pre, (Step)post);
+    } else if ((owner instanceof Sequence)
+         && (pre instanceof Step)
+         && (post instanceof Step)) {
+      return _substitute((Sequence)owner, (Step)pre, (Step)post);
     } else if ((owner instanceof EObject)
          && (pre instanceof Check)
          && (post instanceof Check)) {
       return _substitute((EObject)owner, (Check)pre, (Check)post);
+    } else if ((owner instanceof Object)
+         && (pre instanceof Step)
+         && (post instanceof Step)) {
+      return _substitute((Object)owner, (Step)pre, (Step)post);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         java.util.Arrays.<Object>asList(owner, pre, post).toString());
+    }
+  }
+  
+  public boolean empty(final Step seq) {
+    if ((seq instanceof Sequence)) {
+      return _empty((Sequence)seq);
+    } else if ((seq instanceof Step)) {
+      return _empty((Step)seq);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        java.util.Arrays.<Object>asList(seq).toString());
     }
   }
   
