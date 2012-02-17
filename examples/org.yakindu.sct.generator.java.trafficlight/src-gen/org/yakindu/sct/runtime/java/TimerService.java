@@ -35,7 +35,7 @@ public class TimerService implements ITimerService {
 		timerTaskMap.put(event, new TimerTask() {
 			@Override
 			public void run() {
-				event.getStatemachine().notify(new EventNotification(event));
+				event.getStatemachine().onTimeEventRaised(event);
 			}
 		});
 

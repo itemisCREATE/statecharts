@@ -18,10 +18,12 @@ Contributors:
 package «entry.getBasePackageName()»;
 
 public interface INotificationListener {
+	
+	public void onEventRaised(EventNotification notification);
+	
+	public void onVariableChanged(VariableNotification<?> notification);
 
-	public void notify(Notification notification);
-
-}
+}	
 «ENDFILE-»
 «ENDIF-»
 «ENDDEFINE»

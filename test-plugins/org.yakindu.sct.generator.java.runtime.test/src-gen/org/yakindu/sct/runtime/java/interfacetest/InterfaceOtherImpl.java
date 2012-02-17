@@ -52,7 +52,7 @@ public class InterfaceOtherImpl extends NotificationSender
 	public void raiseEvent4() {
 		statemachine.getOccuredEvents().add(getEventEvent4());
 		statemachine.getOutEvents().add(getEventEvent4());
-		notifyListeners(new EventNotification(getEventEvent4()));
+		notifyListenersOnEventRaised(new EventNotification(getEventEvent4()));
 	}
 
 	public Event<Events> getEventEvent4() {
@@ -70,8 +70,8 @@ public class InterfaceOtherImpl extends NotificationSender
 	public void setVarV1(int value) {
 		int oldValue = getVarV1();
 		variableMap.put("v1", new Integer(value));
-		notifyListeners(new VariableNotification<Integer>(Variables.v1,
-				getVarV1(), oldValue));
+		notifyListenersOnVariableChanged(new VariableNotification<Integer>(
+				Variables.v1, getVarV1(), oldValue));
 	}
 
 	public boolean raiseEvent(String name) {
@@ -100,7 +100,7 @@ public class InterfaceOtherImpl extends NotificationSender
 				&& variableMap.get(name).getClass() == value.getClass()) {
 			Object oldValue = variableMap.get(name);
 			variableMap.put(name, value);
-			notifyListeners(new VariableNotification<Object>(
+			notifyListenersOnVariableChanged(new VariableNotification<Object>(
 					Variables.valueOf(name), variableMap.get(name), oldValue));
 			return true;
 		}

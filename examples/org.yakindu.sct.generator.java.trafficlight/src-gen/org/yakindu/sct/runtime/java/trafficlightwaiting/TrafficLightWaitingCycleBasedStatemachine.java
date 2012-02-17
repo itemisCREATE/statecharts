@@ -17,8 +17,6 @@ import org.yakindu.sct.runtime.java.EventVector;
 import org.yakindu.sct.runtime.java.TimeEvent;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
 import org.yakindu.sct.runtime.java.ITimerService;
-import org.yakindu.sct.runtime.java.EventNotification;
-import org.yakindu.sct.runtime.java.Notification;
 
 public class TrafficLightWaitingCycleBasedStatemachine
 		implements
@@ -129,11 +127,8 @@ public class TrafficLightWaitingCycleBasedStatemachine
 		return timerService;
 	}
 
-	public void notify(Notification notification) {
-		if (notification instanceof EventNotification) {
-			EventNotification eventNotification = (EventNotification) notification;
-			getOccuredEvents().add(eventNotification.getEvent());
-		}
+	public void onTimeEventRaised(TimeEvent<? extends Enum<?>> timeEvent) {
+		getOccuredEvents().add(timeEvent);
 	}
 
 	public InterfaceTrafficLight getInterfaceTrafficLight() {

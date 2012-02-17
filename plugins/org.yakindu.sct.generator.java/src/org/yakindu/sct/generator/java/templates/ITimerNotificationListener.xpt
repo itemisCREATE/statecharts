@@ -12,18 +12,16 @@ Contributors:
 «EXTENSION org::yakindu::sct::generator::java::templates::GenmodelEntries»
 
 «DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
-«FILE entry.getBasePackagePath()+'/ITimedStatemachine.java'-»
+«IF name != null-»
+«FILE entry.getBasePackagePath()+'/ITimerNotificationListener.java'-»
 «getLicenseHeader(entry)»
 package «entry.getBasePackageName()»;
 
-import «entry.getBasePackageName()».ITimerNotificationListener;
+public interface ITimerNotificationListener {
+	
+	public void onTimeEventRaised(TimeEvent<? extends Enum<?>> timeEvent);
 
-public interface ITimedStatemachine extends
-		IStatemachine, ITimerNotificationListener {
-
-	public void setTimerService(ITimerService timerService);
-
-	public ITimerService getTimerService();
-}
+}	
 «ENDFILE-»
+«ENDIF-»
 «ENDDEFINE»

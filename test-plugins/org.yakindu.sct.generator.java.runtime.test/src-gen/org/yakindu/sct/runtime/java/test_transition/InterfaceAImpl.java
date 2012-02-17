@@ -78,7 +78,7 @@ public class InterfaceAImpl extends NotificationSender
 	public void raiseEvent5() {
 		statemachine.getOccuredEvents().add(getEventEvent5());
 		statemachine.getOutEvents().add(getEventEvent5());
-		notifyListeners(new EventNotification(getEventEvent5()));
+		notifyListenersOnEventRaised(new EventNotification(getEventEvent5()));
 	}
 
 	public Event<Events> getEventEvent5() {

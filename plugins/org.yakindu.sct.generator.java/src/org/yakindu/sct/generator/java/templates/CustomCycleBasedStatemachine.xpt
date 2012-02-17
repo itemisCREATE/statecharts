@@ -236,8 +236,6 @@ import «entry.getBasePackageName()».EventVector;
 	import «entry.getBasePackageName()».TimeEvent;
 	import «entry.getBasePackageName()».ITimedStatemachine;
 	import «entry.getBasePackageName()».ITimerService;
-	import «entry.getBasePackageName()».EventNotification;
-	import «entry.getBasePackageName()».Notification;
 «ELSE-»
 	import «entry.getBasePackageName()».IStatemachine;
 «ENDIF-»
@@ -375,11 +373,8 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineInterf
 		return timerService;
 	}
 	
-	public void notify(Notification notification) {
-		if (notification instanceof EventNotification) {
-			EventNotification eventNotification = (EventNotification) notification;
-			getOccuredEvents().add(eventNotification.getEvent());
-		}
+	public void onTimeEventRaised(TimeEvent<? extends Enum<?>> timeEvent) {
+		getOccuredEvents().add(timeEvent);
 	}
 	«ENDIF-»
 	

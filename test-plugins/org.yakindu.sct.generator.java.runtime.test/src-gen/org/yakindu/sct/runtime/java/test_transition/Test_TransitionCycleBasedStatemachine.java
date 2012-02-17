@@ -21,8 +21,6 @@ import org.yakindu.sct.runtime.java.IGenericAccessInterface;
 import org.yakindu.sct.runtime.java.TimeEvent;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
 import org.yakindu.sct.runtime.java.ITimerService;
-import org.yakindu.sct.runtime.java.EventNotification;
-import org.yakindu.sct.runtime.java.Notification;
 
 public class Test_TransitionCycleBasedStatemachine
 		implements
@@ -108,11 +106,8 @@ public class Test_TransitionCycleBasedStatemachine
 		return timerService;
 	}
 
-	public void notify(Notification notification) {
-		if (notification instanceof EventNotification) {
-			EventNotification eventNotification = (EventNotification) notification;
-			getOccuredEvents().add(eventNotification.getEvent());
-		}
+	public void onTimeEventRaised(TimeEvent<? extends Enum<?>> timeEvent) {
+		getOccuredEvents().add(timeEvent);
 	}
 
 	public IGenericAccessInterface getInterface(String name) {

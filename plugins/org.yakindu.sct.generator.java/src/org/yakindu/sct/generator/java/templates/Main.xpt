@@ -24,6 +24,8 @@ Contributors:
 	
 	«EXPAND ITimerService::file(entry) FOR this»
 	
+	«EXPAND ITimerNotificationListener::file(entry) FOR this»
+	
 	«IF entry.createTimerService()»
 		«EXPAND TimerService::file(entry) FOR this»
 	«ENDIF»

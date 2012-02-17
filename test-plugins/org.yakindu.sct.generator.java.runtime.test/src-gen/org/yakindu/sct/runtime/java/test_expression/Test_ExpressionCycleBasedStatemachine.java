@@ -179,11 +179,8 @@ public class Test_ExpressionCycleBasedStatemachine
 			stateVector[0] = State.State1;
 
 		} else {
-			if (true) {
-				getDefaultInterfaceImpl().setVarVar1(
-						getDefaultInterfaceImpl().getVarVar1() + (1));
-
-			}
+			getDefaultInterfaceImpl().setVarVar1(
+					getDefaultInterfaceImpl().getVarVar1() + (1));
 
 		}
 	}

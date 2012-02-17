@@ -81,8 +81,8 @@ public class DefaultInterfaceImpl extends NotificationSender
 	public void setVarI(int value) {
 		int oldValue = getVarI();
 		variableMap.put("i", new Integer(value));
-		notifyListeners(new VariableNotification<Integer>(Variables.i,
-				getVarI(), oldValue));
+		notifyListenersOnVariableChanged(new VariableNotification<Integer>(
+				Variables.i, getVarI(), oldValue));
 	}
 	public int getVarJ() {
 		return (Integer) variableMap.get("j");
@@ -91,8 +91,8 @@ public class DefaultInterfaceImpl extends NotificationSender
 	public void setVarJ(int value) {
 		int oldValue = getVarJ();
 		variableMap.put("j", new Integer(value));
-		notifyListeners(new VariableNotification<Integer>(Variables.j,
-				getVarJ(), oldValue));
+		notifyListenersOnVariableChanged(new VariableNotification<Integer>(
+				Variables.j, getVarJ(), oldValue));
 	}
 	public int getVarC() {
 		return (Integer) variableMap.get("c");
@@ -101,8 +101,8 @@ public class DefaultInterfaceImpl extends NotificationSender
 	public void setVarC(int value) {
 		int oldValue = getVarC();
 		variableMap.put("c", new Integer(value));
-		notifyListeners(new VariableNotification<Integer>(Variables.c,
-				getVarC(), oldValue));
+		notifyListenersOnVariableChanged(new VariableNotification<Integer>(
+				Variables.c, getVarC(), oldValue));
 	}
 
 	public boolean raiseEvent(String name) {
@@ -131,7 +131,7 @@ public class DefaultInterfaceImpl extends NotificationSender
 				&& variableMap.get(name).getClass() == value.getClass()) {
 			Object oldValue = variableMap.get(name);
 			variableMap.put(name, value);
-			notifyListeners(new VariableNotification<Object>(
+			notifyListenersOnVariableChanged(new VariableNotification<Object>(
 					Variables.valueOf(name), variableMap.get(name), oldValue));
 			return true;
 		}

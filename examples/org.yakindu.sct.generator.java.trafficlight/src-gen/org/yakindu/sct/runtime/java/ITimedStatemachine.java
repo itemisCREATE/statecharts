@@ -10,12 +10,12 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java;
 
-import org.yakindu.sct.runtime.java.INotificationListener;
+import org.yakindu.sct.runtime.java.ITimerNotificationListener;
 
 public interface ITimedStatemachine
 		extends
 			IStatemachine,
-			INotificationListener {
+			ITimerNotificationListener {
 
 	public void setTimerService(ITimerService timerService);
 
