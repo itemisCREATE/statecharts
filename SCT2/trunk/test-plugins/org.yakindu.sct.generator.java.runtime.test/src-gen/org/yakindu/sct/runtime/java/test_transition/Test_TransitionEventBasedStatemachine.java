@@ -14,7 +14,7 @@ import java.util.LinkedList;
 
 import org.yakindu.sct.runtime.java.Event;
 
-import org.yakindu.sct.runtime.java.Notification;
+import org.yakindu.sct.runtime.java.TimeEvent;
 
 public class Test_TransitionEventBasedStatemachine
 		extends
@@ -30,8 +30,8 @@ public class Test_TransitionEventBasedStatemachine
 				new DefaultInterfaceEventBasedImpl(this));
 	}
 
-	public void notify(Notification notification) {
-		super.notify(notification);
+	public void onTimeEventRaised(TimeEvent<? extends Enum<?>> timeEvent) {
+		super.onTimeEventRaised(timeEvent);
 		runCycle();
 	}
 

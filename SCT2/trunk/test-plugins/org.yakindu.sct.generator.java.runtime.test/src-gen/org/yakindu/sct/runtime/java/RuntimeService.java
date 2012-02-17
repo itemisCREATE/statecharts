@@ -16,7 +16,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class RuntimeService extends NotificationSender {
+public class RuntimeService {
 
 	private Timer timer = new Timer();
 
@@ -31,7 +31,6 @@ public class RuntimeService extends NotificationSender {
 			lock.readLock().lock();
 			for (IStatemachine statemachine : statemachineSet) {
 				statemachine.runCycle();
-				notifyListeners(new RuntimeCycleNotification(statemachine));
 			}
 			lock.readLock().unlock();
 		}

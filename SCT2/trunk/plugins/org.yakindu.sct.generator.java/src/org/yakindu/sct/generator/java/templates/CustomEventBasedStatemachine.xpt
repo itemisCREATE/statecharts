@@ -25,7 +25,7 @@ import java.util.LinkedList;
 import «entry.getBasePackageName()».Event;
 
 «IF isTimedStatemachine()-»
-	import «entry.getBasePackageName()».Notification;
+	import org.yakindu.sct.runtime.java.TimeEvent;
 «ENDIF-»
 
 public class «getEventBasedStatemachineName()» extends «getCycleBasedStatemachineName()» {
@@ -73,8 +73,8 @@ public class «getEventBasedStatemachineName()» extends «getCycleBasedStatemachin
 	«ENDIF-»
 	
 	«IF isTimedStatemachine()-»	
-	public void notify(Notification notification) {
-		super.notify(notification);
+	public void onTimeEventRaised(TimeEvent<? extends Enum<?>> timeEvent) {
+		super.onTimeEventRaised(timeEvent);
 		runCycle();
 	}
 	«ENDIF-»

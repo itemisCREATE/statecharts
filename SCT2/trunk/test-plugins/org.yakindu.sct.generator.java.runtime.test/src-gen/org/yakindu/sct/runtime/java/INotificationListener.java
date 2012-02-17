@@ -12,6 +12,8 @@ package org.yakindu.sct.runtime.java;
 
 public interface INotificationListener {
 
-	public void notify(Notification notification);
+	public void onEventRaised(EventNotification notification);
+
+	public void onVariableChanged(VariableNotification<?> notification);
 
 }

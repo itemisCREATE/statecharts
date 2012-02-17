@@ -103,7 +103,7 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implemen
 		«IF event.direction ==  Direction::OUT-»
 		statemachine.getOutEvents().add(«event.getter()»);
 		«IF entry.createInterfaceObserverSupport()-»
-			notifyListeners(new EventNotification(«event.getter()»));
+			notifyListenersOnEventRaised(new EventNotification(«event.getter()»));
 		«ENDIF-»
 		«ENDIF-»
 	}
@@ -113,7 +113,7 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implemen
 		«IF event.direction ==  Direction::OUT-»
 			statemachine.getOutEvents().add(«event.getter()»);
 			«IF entry.createInterfaceObserverSupport()-»
-			notifyListeners(new EventNotification(«event.getter()»));
+			notifyListenersOnEventRaised(new EventNotification(«event.getter()»));
 			«ENDIF-»
 		«ENDIF-»
 	}
@@ -171,7 +171,7 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implemen
 		«variable.getValueName()» = value;
 		«ENDIF-»
 		«IF entry.createInterfaceObserverSupport()-»
-			notifyListeners(new VariableNotification<«variable.type.getJavaClassType()»>(Variables.«variable.name», «variable.getter()», oldValue));
+			notifyListenersOnVariableChanged(new VariableNotification<«variable.type.getJavaClassType()»>(Variables.«variable.name», «variable.getter()», oldValue));
 		«ENDIF-»
 	}	
 	«ENDFOREACH-»
@@ -210,7 +210,7 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implemen
 				&& variableMap.get(name).getClass() == value.getClass()) {
 			Object oldValue = variableMap.get(name);
 			variableMap.put(name, value);
-			notifyListeners(new VariableNotification<Object>(
+			notifyListenersOnVariableChanged(new VariableNotification<Object>(
 					Variables.valueOf(name), variableMap.get(name), oldValue));
 			return true;
 		}

@@ -54,7 +54,7 @@ public class InterfaceThirdImpl extends NotificationSender
 		getEventEvent6().setValue(value);
 		statemachine.getOccuredEvents().add(getEventEvent6());
 		statemachine.getOutEvents().add(getEventEvent6());
-		notifyListeners(new EventNotification(getEventEvent6()));
+		notifyListenersOnEventRaised(new EventNotification(getEventEvent6()));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -73,8 +73,8 @@ public class InterfaceThirdImpl extends NotificationSender
 	public void setVarV1(double value) {
 		double oldValue = getVarV1();
 		variableMap.put("v1", new Double(value));
-		notifyListeners(new VariableNotification<Double>(Variables.v1,
-				getVarV1(), oldValue));
+		notifyListenersOnVariableChanged(new VariableNotification<Double>(
+				Variables.v1, getVarV1(), oldValue));
 	}
 
 	public boolean raiseEvent(String name) {
@@ -103,7 +103,7 @@ public class InterfaceThirdImpl extends NotificationSender
 				&& variableMap.get(name).getClass() == value.getClass()) {
 			Object oldValue = variableMap.get(name);
 			variableMap.put(name, value);
-			notifyListeners(new VariableNotification<Object>(
+			notifyListenersOnVariableChanged(new VariableNotification<Object>(
 					Variables.valueOf(name), variableMap.get(name), oldValue));
 			return true;
 		}

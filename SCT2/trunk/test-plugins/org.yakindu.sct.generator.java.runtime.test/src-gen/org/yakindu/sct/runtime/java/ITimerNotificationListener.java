@@ -10,10 +10,8 @@ Contributors:
  */
 package org.yakindu.sct.runtime.java;
 
-public interface INotificationListener {
+public interface ITimerNotificationListener {
 
-	public void onEventRaised(EventNotification notification);
-
-	public void onVariableChanged(VariableNotification<?> notification);
+	public void onTimeEventRaised(TimeEvent<? extends Enum<?>> timeEvent);
 
 }

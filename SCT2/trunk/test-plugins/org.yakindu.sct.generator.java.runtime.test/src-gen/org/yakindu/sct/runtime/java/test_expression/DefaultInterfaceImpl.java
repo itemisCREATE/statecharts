@@ -63,7 +63,7 @@ public class DefaultInterfaceImpl extends NotificationSender
 		getEventEvent2().setValue(value);
 		statemachine.getOccuredEvents().add(getEventEvent2());
 		statemachine.getOutEvents().add(getEventEvent2());
-		notifyListeners(new EventNotification(getEventEvent2()));
+		notifyListenersOnEventRaised(new EventNotification(getEventEvent2()));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -90,8 +90,8 @@ public class DefaultInterfaceImpl extends NotificationSender
 	public void setVarVar1(int value) {
 		int oldValue = getVarVar1();
 		variableMap.put("var1", new Integer(value));
-		notifyListeners(new VariableNotification<Integer>(Variables.var1,
-				getVarVar1(), oldValue));
+		notifyListenersOnVariableChanged(new VariableNotification<Integer>(
+				Variables.var1, getVarVar1(), oldValue));
 	}
 	public int getVarVar2() {
 		return (Integer) variableMap.get("var2");
@@ -100,8 +100,8 @@ public class DefaultInterfaceImpl extends NotificationSender
 	public void setVarVar2(int value) {
 		int oldValue = getVarVar2();
 		variableMap.put("var2", new Integer(value));
-		notifyListeners(new VariableNotification<Integer>(Variables.var2,
-				getVarVar2(), oldValue));
+		notifyListenersOnVariableChanged(new VariableNotification<Integer>(
+				Variables.var2, getVarVar2(), oldValue));
 	}
 	public double getVarVar3() {
 		return (Double) variableMap.get("var3");
@@ -110,8 +110,8 @@ public class DefaultInterfaceImpl extends NotificationSender
 	public void setVarVar3(double value) {
 		double oldValue = getVarVar3();
 		variableMap.put("var3", new Double(value));
-		notifyListeners(new VariableNotification<Double>(Variables.var3,
-				getVarVar3(), oldValue));
+		notifyListenersOnVariableChanged(new VariableNotification<Double>(
+				Variables.var3, getVarVar3(), oldValue));
 	}
 	public double getVarVar4() {
 		return (Double) variableMap.get("var4");
@@ -120,8 +120,8 @@ public class DefaultInterfaceImpl extends NotificationSender
 	public void setVarVar4(double value) {
 		double oldValue = getVarVar4();
 		variableMap.put("var4", new Double(value));
-		notifyListeners(new VariableNotification<Double>(Variables.var4,
-				getVarVar4(), oldValue));
+		notifyListenersOnVariableChanged(new VariableNotification<Double>(
+				Variables.var4, getVarVar4(), oldValue));
 	}
 	public boolean getVarVar5() {
 		return (Boolean) variableMap.get("var5");
@@ -130,8 +130,8 @@ public class DefaultInterfaceImpl extends NotificationSender
 	public void setVarVar5(boolean value) {
 		boolean oldValue = getVarVar5();
 		variableMap.put("var5", new Boolean(value));
-		notifyListeners(new VariableNotification<Boolean>(Variables.var5,
-				getVarVar5(), oldValue));
+		notifyListenersOnVariableChanged(new VariableNotification<Boolean>(
+				Variables.var5, getVarVar5(), oldValue));
 	}
 
 	public boolean raiseEvent(String name) {
@@ -160,7 +160,7 @@ public class DefaultInterfaceImpl extends NotificationSender
 				&& variableMap.get(name).getClass() == value.getClass()) {
 			Object oldValue = variableMap.get(name);
 			variableMap.put(name, value);
-			notifyListeners(new VariableNotification<Object>(
+			notifyListenersOnVariableChanged(new VariableNotification<Object>(
 					Variables.valueOf(name), variableMap.get(name), oldValue));
 			return true;
 		}
