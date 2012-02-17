@@ -151,7 +151,9 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
 
 	public QualifiedName qualifiedName(Region ele) {
 		EObject temp = ele;
-		ele.getName();
+		if (ele.getName() == null) {
+			return null;
+		}
 		QualifiedName qualifiedNameFromConverter = QualifiedName
 				.create(identifierConverer.toIdentifier(ele.getName()));
 		while (temp.eContainer() != null) {
