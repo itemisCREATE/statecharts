@@ -83,7 +83,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 			ExecutionEvent event = getDeclaredEvent(eventName);
 			if (event == null)
 				throw new ExecutionException("Event with name " + eventName
-						+ "is undefined!");
+						+ " is undefined!");
 			ExecutionEvent eventCopy = event.getCopy();
 			if (value != null) {
 				eventCopy.setValue(value);
