@@ -21,7 +21,8 @@
    <extension
          point="org.yakindu.sct.generator.core.extensions">
       <ExtensionGeneratorMapping
-            fileExtension="sct"></ExtensionGeneratorMapping>
+            fileExtension="sct"
+            generatorId="yakindu::java"></ExtensionGeneratorMapping>
    </extension>
 
 </plugin>
