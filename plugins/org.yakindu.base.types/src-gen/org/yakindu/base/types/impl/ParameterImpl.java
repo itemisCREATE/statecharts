@@ -190,7 +190,6 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -254,7 +253,6 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -345,15 +343,16 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer();
 		result.append(" (name: ");
 		result.append(name);
+		result.append(" type: ");
+		result.append(getType());
 		result.append(')');
 		return result.toString();
 	}
