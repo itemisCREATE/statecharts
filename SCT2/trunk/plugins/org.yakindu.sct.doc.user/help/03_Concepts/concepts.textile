@@ -2,6 +2,74 @@ h1. Yakindu Statechart tool concepts
 
 h2. Model, Validate, Simulate, Generate
 
+h2. State chart elements
+
+In the following the elements of statecharts that are used in the YAKINDU
+SCT 2 editor are described. The meta model of the YAKINDU SCT 2 is the model of finite state machines. It is based on the view of a system that is defined by a finite number of states. The behavior of that system is based on the current states. A current state is determined by the history of the state machine. Very important are the models for state machines by Mealy and Moore. Mealy state machines associate actions with transitions. Moore machines associate actions with states (entry, do, exit).
+
+The YAKINDU SCT 2 meta model is designed similar to the UML state chart meta model with the following differences
+
+* self contained with interfaces well defined by events and variables
+* core execution semantics are cycle driven, not event driven
+* * this allows processing concurrent events
+* * event driven behavior can be defined on top
+* time is an abstract concept for state charts
+* time control is delegated to the environment
+
+The model interpreter and different flavors of generated code follow these same core semantics.
+
+h3. Regions
+
+As already mentioned the YAKINDU state charts are self contained. They are organized in regions. Due to this it is possible to organize multiple state machines in different regions and to run them concurrently.  
+
+h3. States
+
+States are the central elements of a state machine. A state has to be placed inside a region and needs a unique name inside this region. During simulation each state can be active or passive. An active state has actions that are accomplished. Either an action is carried out on entering a state, during active state or on exit.   
+
+h3. Transitions
+
+A transition is the transfer of one state to another. They are diagrammed as arrows and can carry events and actions but must not. 
+
+Events are written in SText. Please refer to the documentation section Events for more details. For more details on Actions refer to the chapter Actions.
+
+If a state has more than one outgoing transition without event that transition is carried out first that was modeled first.
+
+h3. Initial state and final state
+
+Initial and final states are pseudo states, because the state chart does not rest on them. Pseudostates express characteristics that are hardly to express by simple states. 
+
+The initial state is always the first state that is active during interpretation or simulation of the state machine. An initial state can only have one outgoing transition and no incoming. This transition has no events or actions.
+
+Inside a region only one initial state is allowed, but every region can have an initial state.
+
+h3. Choice
+
+Choice is a decision node. It is also a pseudo state. It can be used to model a conditional path. Choice nodes divide a transition into multiple parts. 
+
+Usually the first transition points towards the choice node. One of the choice outgoing transitions can carry a condition. 
+
+h3. Junction
+
+A junction is a pseudo state do combine transitions. This is very comfortable if a state machine has many similar transitions. Junctions add clear arrangement to the state machine.
+
+h3. Composite State
+
+A composite state is a state that is composed of other state machines. These are also organized in regions. YAKINDU knows three kinds of composite states: Composite states, orthogonal state and submachine states.
+
+Composite states contain other state machine branches.
+
+Orthogonal states ???
+
+Submachine states may contain complete state machines. Here the user can chose another state machine to be included. 
+
+h3. Shallow History
+
+
+
+h3. Deep History
+
+
+
 h2. SText
 
 SText is the textual modeling language for the YAKINDU statecharts. It is case sensitive.
@@ -145,7 +213,11 @@ h3. Declarations
 
 Within scopes there can be declarations of Events, Variables, Operations, LocalReactions, EntryPoints and ExitPoints.
 
+
+
 h3. Events
+
+
 
 Within interface scope events have an direction. They can either be ingoing or outgoing:
 
@@ -185,6 +257,48 @@ p. Variables can be referenced by the environment.
 
 bc.. 
 var external variable3: integer = 34
+
+h3. Actions
+
+Actions are key constructs in state machines to model behavior. The YAKINDU SCT 2 knows the following kinds of actions.
+
+h4. after
+
+With the keyword _after_ you can model a transition after a certain period of time:
+
+bc.. 
+after 1s
+after 345mics
+after 4050ns
+after 1234ms
+
+h4. always
+
+The keyword always is used only for local reactions that are executed always.
+
+h4. default
+
+The keyword default marks transitions that are always accomplished.
+
+h4. else
+
+The keyword _else_ marks transitions that are carried out in case of a condition. ???
+
+h4. entry
+
+The keyword entry marks actions that are carried out on entering a state.
+
+h4. every
+
+_Every_ marks a periodic transition.
+
+h4. exit
+
+_Exit_ marks actions on leaving a state.
+
+h4. onCycle
+
+_OnCycle_ marks actions that are carried out.
 
 h3. Operations
 

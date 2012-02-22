@@ -2,6 +2,57 @@
 <toc topic="help/03_Concepts/concepts.html" label="concepts">
 	<topic href="help/03_Concepts/concepts.html" label="Yakindu Statechart tool concepts">
 		<topic href="help/03_Concepts/concepts.html#ModelValidateSimulateGenerate" label="Model, Validate, Simulate, Generate"></topic>
-		<topic href="help/03_Concepts/concepts.html#Stext" label="Stext"></topic>
+		<topic href="help/03_Concepts/concepts.html#Statechartelements" label="State chart elements">
+			<topic href="help/03_Concepts/concepts.html#Regions" label="Regions"></topic>
+			<topic href="help/03_Concepts/concepts.html#States" label="States"></topic>
+			<topic href="help/03_Concepts/concepts.html#Transitions" label="Transitions"></topic>
+			<topic href="help/03_Concepts/concepts.html#Initialstateandfinalstate" label="Initial state and final state"></topic>
+			<topic href="help/03_Concepts/concepts.html#Choice" label="Choice"></topic>
+			<topic href="help/03_Concepts/concepts.html#Junction" label="Junction"></topic>
+			<topic href="help/03_Concepts/concepts.html#CompositeState" label="Composite State"></topic>
+			<topic href="help/03_Concepts/concepts.html#ShallowHistory" label="Shallow History"></topic>
+			<topic href="help/03_Concepts/concepts.html#DeepHistory" label="Deep History"></topic>
+		</topic>
+		<topic href="help/03_Concepts/concepts.html#SText" label="SText">
+			<topic href="help/03_Concepts/concepts.html#Typesystem" label="Typesystem"></topic>
+			<topic href="help/03_Concepts/concepts.html#Expressions" label="Expressions">
+				<topic href="help/03_Concepts/concepts.html#LogicalAND" label="Logical AND"></topic>
+				<topic href="help/03_Concepts/concepts.html#LogicalOR" label="Logical OR"></topic>
+				<topic href="help/03_Concepts/concepts.html#LogicalNOT" label="Logical NOT"></topic>
+				<topic href="help/03_Concepts/concepts.html#Conditionalexpression" label="Conditional expression"></topic>
+				<topic href="help/03_Concepts/concepts.html#BitwiseXOR" label="Bitwise XOR"></topic>
+				<topic href="help/03_Concepts/concepts.html#BitwiseOR" label="Bitwise OR"></topic>
+				<topic href="help/03_Concepts/concepts.html#BitwiseAND" label="Bitwise AND"></topic>
+				<topic href="help/03_Concepts/concepts.html#LogicalRelationsandShiftOperators" label="Logical Relations and Shift Operators"></topic>
+				<topic href="help/03_Concepts/concepts.html#Binaryarithmeticoperators" label="Binary arithmetic operators"></topic>
+				<topic href="help/03_Concepts/concepts.html#Unaryarithmeticoperators" label="Unary arithmetic operators"></topic>
+			</topic>
+			<topic href="help/03_Concepts/concepts.html#Statements" label="Statements"></topic>
+			<topic href="help/03_Concepts/concepts.html#Scopes" label="Scopes">
+				<topic href="help/03_Concepts/concepts.html#Namespace" label="Namespace"></topic>
+				<topic href="help/03_Concepts/concepts.html#interfacescope" label="interface scope"></topic>
+				<topic href="help/03_Concepts/concepts.html#internalscope" label="internal scope"></topic>
+			</topic>
+			<topic href="help/03_Concepts/concepts.html#Declarations" label="Declarations"></topic>
+			<topic href="help/03_Concepts/concepts.html#Events" label="Events"></topic>
+			<topic href="help/03_Concepts/concepts.html#Variables" label="Variables"></topic>
+			<topic href="help/03_Concepts/concepts.html#Actions" label="Actions">
+				<topic href="help/03_Concepts/concepts.html#after" label="after"></topic>
+				<topic href="help/03_Concepts/concepts.html#always" label="always"></topic>
+				<topic href="help/03_Concepts/concepts.html#default" label="default"></topic>
+				<topic href="help/03_Concepts/concepts.html#else" label="else"></topic>
+				<topic href="help/03_Concepts/concepts.html#entry" label="entry"></topic>
+				<topic href="help/03_Concepts/concepts.html#every" label="every"></topic>
+				<topic href="help/03_Concepts/concepts.html#exit" label="exit"></topic>
+				<topic href="help/03_Concepts/concepts.html#onCycle" label="onCycle"></topic>
+			</topic>
+			<topic href="help/03_Concepts/concepts.html#Operations" label="Operations"></topic>
+			<topic href="help/03_Concepts/concepts.html#LocalReactions" label="LocalReactions"></topic>
+			<topic href="help/03_Concepts/concepts.html#EntryPoints" label="EntryPoints"></topic>
+			<topic href="help/03_Concepts/concepts.html#ExitPoints" label="ExitPoints"></topic>
+		</topic>
+		<topic href="help/03_Concepts/concepts.html#SGraph" label="SGraph"></topic>
+		<topic href="help/03_Concepts/concepts.html#SExec" label="SExec"></topic>
+		<topic href="help/03_Concepts/concepts.html#SGen" label="SGen"></topic>
 	</topic>
 </toc>

@@ -1,6 +1,18 @@
 @CHARSET "UTF-8";
+
+
 li img {
 	display: block;
 	margin-top: 0.5ex;
 	margin-bottom: 0.5ex;
+}
+
+table {
+ 
+ border: 1px solid #666;
+
+}
+
+td, th {
+ padding: 3px;
 }
