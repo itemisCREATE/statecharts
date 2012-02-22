@@ -9,7 +9,10 @@
 			<topic href="help/03_Concepts/concepts.html#Initialstateandfinalstate" label="Initial state and final state"></topic>
 			<topic href="help/03_Concepts/concepts.html#Choice" label="Choice"></topic>
 			<topic href="help/03_Concepts/concepts.html#Junction" label="Junction"></topic>
-			<topic href="help/03_Concepts/concepts.html#CompositeState" label="Composite State"></topic>
+			<topic href="help/03_Concepts/concepts.html#CompositeState" label="Composite State">
+				<topic href="help/03_Concepts/concepts.html#Orthogonalstates" label="Orthogonal states"></topic>
+				<topic href="help/03_Concepts/concepts.html#Submachinestates" label="Submachine states"></topic>
+			</topic>
 			<topic href="help/03_Concepts/concepts.html#ShallowHistory" label="Shallow History"></topic>
 			<topic href="help/03_Concepts/concepts.html#DeepHistory" label="Deep History"></topic>
 		</topic>
