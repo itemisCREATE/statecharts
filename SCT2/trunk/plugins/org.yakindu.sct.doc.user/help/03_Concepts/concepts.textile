@@ -4,15 +4,14 @@ h2. Model, Validate, Simulate, Generate
 
 h2. State chart elements
 
-In the following the elements of statecharts that are used in the YAKINDU
-SCT 2 editor are described. The meta model of the YAKINDU SCT 2 is the model of finite state machines. It is based on the view of a system that is defined by a finite number of states. The behavior of that system is based on the current states. A current state is determined by the history of the state machine. Very important are the models for state machines by Mealy and Moore. Mealy state machines associate actions with transitions. Moore machines associate actions with states (entry, do, exit).
+In the following the state chart elements of the YAKINDU SCT 2 editor are described. The meta model of the YAKINDU SCT 2 is the model of finite state machines. It is based on the view of a system that is defined by a finite number of states. The behavior of that system is based on the active states. This state is determined by the history of the state machine. Very important are the theoretical models for state machines by Mealy and Moore. Mealy state machines associate actions with transitions. Moore machines associate actions with states (entry, do, exit). In the YAKINDU SCT 2 both is possible.
 
 The YAKINDU SCT 2 meta model is designed similar to the UML state chart meta model with the following differences
 
-* self contained with interfaces well defined by events and variables
+* they are self contained with interfaces defined by events and variables
 * core execution semantics are cycle driven, not event driven
-* * this allows processing concurrent events
-* * event driven behavior can be defined on top
+** this allows to process concurrent events
+** event driven behavior can be defined on top
 * time is an abstract concept for state charts
 * time control is delegated to the environment
 
@@ -28,15 +27,15 @@ States are the central elements of a state machine. A state has to be placed ins
 
 h3. Transitions
 
-A transition is the transfer of one state to another. They are diagrammed as arrows and can carry events and actions but must not. 
+A transition is the transfer of one state to another. Transitions are diagrammed as arrows and can carry events and actions but must not. 
 
-Events are written in SText. Please refer to the documentation section Events for more details. For more details on Actions refer to the chapter Actions.
+The syntax of events and actions is defined by the language "SText":#SText. Please refer to the documentation section "Events":#Events for more details. For more details on Actions refer to the chapter "Actions":#Actions.
 
 If a state has more than one outgoing transition without event that transition is carried out first that was modeled first.
 
 h3. Initial state and final state
 
-Initial and final states are pseudo states, because the state chart does not rest on them. Pseudostates express characteristics that are hardly to express by simple states. 
+Initial and final states are pseudo states, because the state chart does not rest on them. Pseudo states express characteristics that are impossible to express by simple states. 
 
 The initial state is always the first state that is active during interpretation or simulation of the state machine. An initial state can only have one outgoing transition and no incoming. This transition has no events or actions.
 
@@ -44,7 +43,7 @@ Inside a region only one initial state is allowed, but every region can have an 
 
 h3. Choice
 
-Choice is a decision node. It is also a pseudo state. It can be used to model a conditional path. Choice nodes divide a transition into multiple parts. 
+Choice is also a pseudo state. It can be used to model a conditional path. Choice nodes divide a transition into multiple parts. 
 
 Usually the first transition points towards the choice node. One of the choice outgoing transitions can carry a condition. 
 
@@ -54,13 +53,21 @@ A junction is a pseudo state do combine transitions. This is very comfortable if
 
 h3. Composite State
 
-A composite state is a state that is composed of other state machines. These are also organized in regions. YAKINDU knows three kinds of composite states: Composite states, orthogonal state and submachine states.
+A composite state is a state that is composed of other state machines. These are also organized in regions. Besides the simple composite state YAKINDU knows two kinds of composite states: orthogonal state and submachine states.
 
 Composite states contain other state machine branches.
 
-Orthogonal states ???
+h4. Orthogonal states
 
-Submachine states may contain complete state machines. Here the user can chose another state machine to be included. 
+In the context of state machines orthogonal states are states that are independent from each other. The most famous example is the keyboard example:
+
+!images/orthogonalState_example.jpg!
+
+h4. Submachine states
+
+Submachine states may contain complete state machines. Here the user can chose another state machine to be included or create a new sub statemachine. During simulation only the top level statemachine is interpreted. It is not possible to jump to the sub level state machines and back.
+
+!images/substatemachine_example.jpg!
 
 h3. Shallow History
 
