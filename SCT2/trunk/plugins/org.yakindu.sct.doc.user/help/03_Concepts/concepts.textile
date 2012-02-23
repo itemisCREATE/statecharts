@@ -4,7 +4,7 @@ h2. Model, Validate, Simulate, Generate
 
 h2. State chart elements
 
-In the following the state chart elements of the YAKINDU SCT 2 editor are described. The meta model of the YAKINDU SCT 2 is the model of finite state machines. It is based on the view of a system that is defined by a finite number of states. The behavior of that system is based on the active states. This state is determined by the history of the state machine. Very important are the theoretical models for state machines by Mealy and Moore. Mealy state machines associate actions with transitions. Moore machines associate actions with states (entry, do, exit). In the YAKINDU SCT 2 both is possible.
+In the following the state chart elements of the YAKINDU SCT 2 editor are described. The meta model of the YAKINDU SCT 2 is the model of finite state machines. It is based on the view of a system that is defined by a finite number of states. The behavior of that system is based on the active states. These states are determined by the history of the state machine. Very important are the theoretical models for state machines by Mealy and Moore. Mealy state machines associate actions with transitions. Moore machines associate actions with states (entry, exit). In the YAKINDU SCT 2 both is possible.
 
 The YAKINDU SCT 2 meta model is designed similar to the UML state chart meta model with the following differences
 
@@ -16,6 +16,8 @@ The YAKINDU SCT 2 meta model is designed similar to the UML state chart meta mod
 * time control is delegated to the environment
 
 The model interpreter and different flavors of generated code follow these same core semantics.
+
+Please refer to the description of the "UML Statecharts":http://en.wikipedia.org/wiki/UML_state_machine for more details.
 
 h3. Regions
 
@@ -71,11 +73,21 @@ Submachine states may contain complete state machines. Here the user can chose a
 
 h3. Shallow History
 
+The shallow history state is a pseudo state that is placed inside regions of composite states. It is used to 'remember' the last active state inside a composite state. So it is possible to jump to this state instead of starting at the inner entry state again. The following example of a questionaire answering will explain this:
 
+!images/shallowHistory01.jpg!
+
+The interesting parts in this state chart are the events _checkProgress_ and _goon_. CheckProgress jumps back to the init state while assigning the current progress count to the variable _temp_. _goon_ jumps to the shallow history state that was placed inside the composite state.
+
+!images/shallowHistory02.jpg!
+
+!images/shallowHistory03.jpg!
+
+On triggering the _goon_ event the last active state is activated again.
 
 h3. Deep History
 
-
+Deep history is similar to shallow history but more complex. With a deep history the latest state of multiple nested states is remembered.
 
 h2. SText
 
