@@ -19,10 +19,13 @@ import java.util.Map;
 import org.yakindu.sct.runtime.java.IGenericAccessStatemachine;
 import org.yakindu.sct.runtime.java.IGenericAccessInterface;
 import org.yakindu.sct.runtime.java.IStatemachine;
+import org.yakindu.sct.runtime.java.ValuedEvent;
+import org.yakindu.sct.runtime.java.NotificationSender;
 
-public class Test_ExpressionCycleBasedStatemachine
+public class Test_ExpressionCycleBasedStatemachine extends NotificationSender
 		implements
 			IGenericAccessStatemachine,
+			DefaultInterface,
 			IStatemachine {
 
 	public enum State {
@@ -98,6 +101,75 @@ public class Test_ExpressionCycleBasedStatemachine
 
 	protected IInterfaceOtherImpl getInterfaceOtherImpl() {
 		return (IInterfaceOtherImpl) getInterface("InterfaceOther");
+	}
+
+	public void raiseEvent1(int value) {
+		getDefaultInterface().raiseEvent1(value);
+	}
+
+	public boolean isRaisedEvent2() {
+		return getOutEvents().contains(getEventEvent2());
+	}
+
+	public ValuedEvent<Events, Double> getEventEvent2() {
+		return getDefaultInterface().getEventEvent2();
+	}
+
+	public void raiseEvent3() {
+		getDefaultInterface().raiseEvent3();
+	}
+
+	public int getVarVar1() {
+		return getDefaultInterface().getVarVar1();
+	}
+
+	public void setVarVar1(int value) {
+		getDefaultInterface().setVarVar1(value);
+	}
+	public int getVarVar2() {
+		return getDefaultInterface().getVarVar2();
+	}
+
+	public void setVarVar2(int value) {
+		getDefaultInterface().setVarVar2(value);
+	}
+	public double getVarVar3() {
+		return getDefaultInterface().getVarVar3();
+	}
+
+	public void setVarVar3(double value) {
+		getDefaultInterface().setVarVar3(value);
+	}
+	public double getVarVar4() {
+		return getDefaultInterface().getVarVar4();
+	}
+
+	public void setVarVar4(double value) {
+		getDefaultInterface().setVarVar4(value);
+	}
+	public boolean getVarVar5() {
+		return getDefaultInterface().getVarVar5();
+	}
+
+	public void setVarVar5(boolean value) {
+		getDefaultInterface().setVarVar5(value);
+	}
+
+	public boolean raiseEvent(String name) {
+		return getDefaultInterface().raiseEvent(name);
+	}
+
+	@SuppressWarnings("unchecked")
+	public boolean raiseEvent(String name, Object value) {
+		return getDefaultInterface().raiseEvent(name, value);
+	}
+
+	public boolean setVariable(String name, Object value) {
+		return getDefaultInterface().setVariable(name, value);
+	}
+
+	public Object getVariable(String name) {
+		return getDefaultInterface().getVariable(name);
 	}
 
 	public void enter() {

@@ -23,6 +23,7 @@ import org.yakindu.sct.runtime.java.IStatemachine;
 public class Test_ShallowHistoryCycleBasedStatemachine
 		implements
 			IGenericAccessStatemachine,
+			DefaultInterface,
 			IStatemachine {
 
 	public enum State {
@@ -96,6 +97,55 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 
 	protected IDefaultInterfaceImpl getDefaultInterfaceImpl() {
 		return (IDefaultInterfaceImpl) getInterface("DefaultInterface");
+	}
+
+	public void raiseEvent1() {
+		getDefaultInterface().raiseEvent1();
+	}
+
+	public void raiseEvent2() {
+		getDefaultInterface().raiseEvent2();
+	}
+
+	public void raiseEvent3() {
+		getDefaultInterface().raiseEvent3();
+	}
+
+	public void raiseEvent4() {
+		getDefaultInterface().raiseEvent4();
+	}
+
+	public void raiseEvent5() {
+		getDefaultInterface().raiseEvent5();
+	}
+
+	public void raiseEvent6() {
+		getDefaultInterface().raiseEvent6();
+	}
+
+	public void raiseEvent7() {
+		getDefaultInterface().raiseEvent7();
+	}
+
+	public void raiseEvent8() {
+		getDefaultInterface().raiseEvent8();
+	}
+
+	public boolean raiseEvent(String name) {
+		return getDefaultInterface().raiseEvent(name);
+	}
+
+	@SuppressWarnings("unchecked")
+	public boolean raiseEvent(String name, Object value) {
+		return getDefaultInterface().raiseEvent(name, value);
+	}
+
+	public boolean setVariable(String name, Object value) {
+		return getDefaultInterface().setVariable(name, value);
+	}
+
+	public Object getVariable(String name) {
+		return getDefaultInterface().getVariable(name);
 	}
 
 	public void enter() {

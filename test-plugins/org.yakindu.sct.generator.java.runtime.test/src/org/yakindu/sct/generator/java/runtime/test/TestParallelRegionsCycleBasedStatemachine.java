@@ -51,27 +51,27 @@ public class TestParallelRegionsCycleBasedStatemachine {
 
 	@Test
 	public void testStatemachineHierarchyLevelOne() {
-		sm.getDefaultInterface().raiseEvent1();
+		sm.raiseEvent1();
 		sm.runCycle();
 		// Test if state is changed to State3 && State7
 		assertTrue(sm.isStateActive(State.State3));
 		assertTrue(sm.isStateActive(State.State7));
 
-		sm.getDefaultInterface().raiseEvent5();
+		sm.raiseEvent5();
 		sm.runCycle();
 		// Test if state is changed to State3 && State8
 		assertTrue(sm.isStateActive(State.State3));
 		assertTrue(sm.isStateActive(State.State8));
 		assertFalse(sm.isStateActive(State.State7));
 
-		sm.getDefaultInterface().raiseEvent6();
+		sm.raiseEvent6();
 		sm.runCycle();
 		// Test if state is changed to State3 && State7
 		assertTrue(sm.isStateActive(State.State3));
 		assertTrue(sm.isStateActive(State.State7));
 		assertFalse(sm.isStateActive(State.State8));
 
-		sm.getDefaultInterface().raiseEvent3();
+		sm.raiseEvent3();
 		sm.runCycle();
 		// Test if state is back to State1
 		assertTrue(sm.isStateActive(State.State1));
@@ -82,20 +82,20 @@ public class TestParallelRegionsCycleBasedStatemachine {
 
 	@Test
 	public void testStatemachineHierarchyLevelTwo() {
-		sm.getDefaultInterface().raiseEvent1();
+		sm.raiseEvent1();
 		sm.runCycle();
 		// Test if state is changed to State3 && State7
 		assertTrue(sm.isStateActive(State.State3));
 		assertTrue(sm.isStateActive(State.State7));
 
-		sm.getDefaultInterface().raiseEvent2();
+		sm.raiseEvent2();
 		sm.runCycle();
 		// Test if state is changed to State9, State5 and State7
 		assertTrue(sm.isStateActive(State.State9));
 		assertTrue(sm.isStateActive(State.State5));
 		assertTrue(sm.isStateActive(State.State7));
 
-		sm.getDefaultInterface().raiseEvent3();
+		sm.raiseEvent3();
 		sm.runCycle();
 		// Test if state is changed to State9, State6 and State8
 		assertTrue(sm.isStateActive(State.State9));
@@ -103,7 +103,7 @@ public class TestParallelRegionsCycleBasedStatemachine {
 		assertFalse(sm.isStateActive(State.State7));
 		assertTrue(sm.isStateActive(State.State8));
 
-		sm.getDefaultInterface().raiseEvent6();
+		sm.raiseEvent6();
 		sm.runCycle();
 		// Test if state is changed to State9, State6 and State8
 		assertTrue(sm.isStateActive(State.State9));
@@ -112,11 +112,9 @@ public class TestParallelRegionsCycleBasedStatemachine {
 		assertFalse(sm.isStateActive(State.State8));
 	}
 
-	
-	
 	@Test
 	public void testEntryAndExitExecution() {
-		DefaultInterface di = sm.getDefaultInterface();
+		DefaultInterface di = sm;
 
 		di.raiseEvent1();
 		sm.runCycle();
@@ -167,7 +165,7 @@ public class TestParallelRegionsCycleBasedStatemachine {
 		hierarchy -= 3;
 		assertEquals(hierarchy, di.getVarHierarchy());
 
-		//Jump to State6 && State9
+		// Jump to State6 && State9
 		di.raiseEvent11();
 		sm.runCycle();
 		// Exit State1

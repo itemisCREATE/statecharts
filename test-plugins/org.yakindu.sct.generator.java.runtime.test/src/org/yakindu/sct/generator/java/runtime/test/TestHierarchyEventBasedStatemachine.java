@@ -41,94 +41,66 @@ public class TestHierarchyEventBasedStatemachine {
 
 	@Test
 	public void testState1() {
-		assertEquals("s1 value not set correct: ", 2, statemachine
-				.getDefaultInterface().getVarS1());
-		assertEquals("s2 value not set correct: ", 0, statemachine
-				.getDefaultInterface().getVarS2());
+		assertEquals("s1 value not set correct: ", 2, statemachine.getVarS1());
+		assertEquals("s2 value not set correct: ", 0, statemachine.getVarS2());
 
-		statemachine.getDefaultInterface().raiseEvent9();
-		assertEquals("s1 value not set correct: ", 2, statemachine
-				.getDefaultInterface().getVarS1());
-		assertEquals("s2 value not set correct: ", 0, statemachine
-				.getDefaultInterface().getVarS2());
+		statemachine.raiseEvent9();
+		assertEquals("s1 value not set correct: ", 2, statemachine.getVarS1());
+		assertEquals("s2 value not set correct: ", 0, statemachine.getVarS2());
 
-		statemachine.getDefaultInterface().raiseEvent10();
-		assertEquals("s1 value not set correct: ", 2, statemachine
-				.getDefaultInterface().getVarS1());
-		assertEquals("s2 value not set correct: ", 0, statemachine
-				.getDefaultInterface().getVarS2());
+		statemachine.raiseEvent10();
+		assertEquals("s1 value not set correct: ", 2, statemachine.getVarS1());
+		assertEquals("s2 value not set correct: ", 0, statemachine.getVarS2());
 
-		statemachine.getDefaultInterface().raiseEvent1();
-		assertEquals("s1 value not set correct: ", 0, statemachine
-				.getDefaultInterface().getVarS1());
-		assertEquals("s2 value not set correct: ", 2, statemachine
-				.getDefaultInterface().getVarS2());
+		statemachine.raiseEvent1();
+		assertEquals("s1 value not set correct: ", 0, statemachine.getVarS1());
+		assertEquals("s2 value not set correct: ", 2, statemachine.getVarS2());
 
-		statemachine.getDefaultInterface().raiseEvent14();
-		assertEquals("s1 value not set correct: ", 2, statemachine
-				.getDefaultInterface().getVarS1());
-		assertEquals("s2 value not set correct: ", 0, statemachine
-				.getDefaultInterface().getVarS2());
+		statemachine.raiseEvent14();
+		assertEquals("s1 value not set correct: ", 2, statemachine.getVarS1());
+		assertEquals("s2 value not set correct: ", 0, statemachine.getVarS2());
 
-		statemachine.getDefaultInterface().raiseEvent1();
-		statemachine.getDefaultInterface().raiseEvent2();
-		assertEquals("s1 value not set correct: ", 0, statemachine
-				.getDefaultInterface().getVarS1());
-		assertEquals("s2 value not set correct: ", 3, statemachine
-				.getDefaultInterface().getVarS2());
+		statemachine.raiseEvent1();
+		statemachine.raiseEvent2();
+		assertEquals("s1 value not set correct: ", 0, statemachine.getVarS1());
+		assertEquals("s2 value not set correct: ", 3, statemachine.getVarS2());
 
-		statemachine.getDefaultInterface().raiseEvent15();
-		assertEquals("s1 value not set correct: ", 2, statemachine
-				.getDefaultInterface().getVarS1());
-		assertEquals("s2 value not set correct: ", 0, statemachine
-				.getDefaultInterface().getVarS2());
+		statemachine.raiseEvent15();
+		assertEquals("s1 value not set correct: ", 2, statemachine.getVarS1());
+		assertEquals("s2 value not set correct: ", 0, statemachine.getVarS2());
 
-		statemachine.getDefaultInterface().raiseEvent1();
-		statemachine.getDefaultInterface().raiseEvent2();
-		statemachine.getDefaultInterface().raiseEvent3();
-		assertEquals("s1 value not set correct: ", 0, statemachine
-				.getDefaultInterface().getVarS1());
-		assertEquals("s2 value not set correct: ", 4, statemachine
-				.getDefaultInterface().getVarS2());
+		statemachine.raiseEvent1();
+		statemachine.raiseEvent2();
+		statemachine.raiseEvent3();
+		assertEquals("s1 value not set correct: ", 0, statemachine.getVarS1());
+		assertEquals("s2 value not set correct: ", 4, statemachine.getVarS2());
 
-		statemachine.getDefaultInterface().raiseEvent4();
-		assertEquals("s1 value not set correct: ", 0, statemachine
-				.getDefaultInterface().getVarS1());
-		assertEquals("s2 value not set correct: ", 4, statemachine
-				.getDefaultInterface().getVarS2());
+		statemachine.raiseEvent4();
+		assertEquals("s1 value not set correct: ", 0, statemachine.getVarS1());
+		assertEquals("s2 value not set correct: ", 4, statemachine.getVarS2());
 
-		statemachine.getDefaultInterface().raiseEvent16();
-		assertEquals("s1 value not set correct: ", 2, statemachine
-				.getDefaultInterface().getVarS1());
-		assertEquals("s2 value not set correct: ", 0, statemachine
-				.getDefaultInterface().getVarS2());
+		statemachine.raiseEvent16();
+		assertEquals("s1 value not set correct: ", 2, statemachine.getVarS1());
+		assertEquals("s2 value not set correct: ", 0, statemachine.getVarS2());
 
-		statemachine.getDefaultInterface().raiseEvent1();
-		statemachine.getDefaultInterface().raiseEvent2();
-		statemachine.getDefaultInterface().raiseEvent3();
-		statemachine.getDefaultInterface().raiseEvent4();
-		statemachine.getDefaultInterface().raiseEvent5();
-		assertEquals("s1 value not set correct: ", 0, statemachine
-				.getDefaultInterface().getVarS1());
-		assertEquals("s2 value not set correct: ", 4, statemachine
-				.getDefaultInterface().getVarS2());
+		statemachine.raiseEvent1();
+		statemachine.raiseEvent2();
+		statemachine.raiseEvent3();
+		statemachine.raiseEvent4();
+		statemachine.raiseEvent5();
+		assertEquals("s1 value not set correct: ", 0, statemachine.getVarS1());
+		assertEquals("s2 value not set correct: ", 4, statemachine.getVarS2());
 
-		statemachine.getDefaultInterface().raiseEvent8();
-		assertEquals("s1 value not set correct: ", 0, statemachine
-				.getDefaultInterface().getVarS1());
-		assertEquals("s2 value not set correct: ", 3, statemachine
-				.getDefaultInterface().getVarS2());
+		statemachine.raiseEvent8();
+		assertEquals("s1 value not set correct: ", 0, statemachine.getVarS1());
+		assertEquals("s2 value not set correct: ", 3, statemachine.getVarS2());
 
-		statemachine.getDefaultInterface().raiseEvent7();
-		assertEquals("s1 value not set correct: ", 0, statemachine
-				.getDefaultInterface().getVarS1());
-		assertEquals("s2 value not set correct: ", 2, statemachine
-				.getDefaultInterface().getVarS2());
+		statemachine.raiseEvent7();
+		assertEquals("s1 value not set correct: ", 0, statemachine.getVarS1());
+		assertEquals("s2 value not set correct: ", 2, statemachine.getVarS2());
 
-		statemachine.getDefaultInterface().raiseEvent6();
-		assertEquals("s1 value not set correct: ", 2, statemachine
-				.getDefaultInterface().getVarS1());
-		assertEquals("s2 value not set correct: ", 0, statemachine
-				.getDefaultInterface().getVarS2());
+		statemachine.raiseEvent6();
+		assertEquals("s1 value not set correct: ", 2, statemachine.getVarS1());
+		assertEquals("s2 value not set correct: ", 0, statemachine.getVarS2());
 	}
 }

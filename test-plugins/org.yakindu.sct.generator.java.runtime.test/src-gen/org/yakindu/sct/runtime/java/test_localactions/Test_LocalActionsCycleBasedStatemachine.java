@@ -21,10 +21,12 @@ import org.yakindu.sct.runtime.java.IGenericAccessInterface;
 import org.yakindu.sct.runtime.java.TimeEvent;
 import org.yakindu.sct.runtime.java.ITimedStatemachine;
 import org.yakindu.sct.runtime.java.ITimerService;
+import org.yakindu.sct.runtime.java.NotificationSender;
 
-public class Test_LocalActionsCycleBasedStatemachine
+public class Test_LocalActionsCycleBasedStatemachine extends NotificationSender
 		implements
 			IGenericAccessStatemachine,
+			DefaultInterface,
 			ITimedStatemachine {
 
 	private enum TimeEvents {
@@ -121,6 +123,61 @@ public class Test_LocalActionsCycleBasedStatemachine
 
 	protected IDefaultInterfaceImpl getDefaultInterfaceImpl() {
 		return (IDefaultInterfaceImpl) getInterface("DefaultInterface");
+	}
+
+	public void raiseEvent1() {
+		getDefaultInterface().raiseEvent1();
+	}
+
+	public void raiseEvent2() {
+		getDefaultInterface().raiseEvent2();
+	}
+
+	public void raiseEvent3() {
+		getDefaultInterface().raiseEvent3();
+	}
+
+	public void raiseEvent4() {
+		getDefaultInterface().raiseEvent4();
+	}
+
+	public int getVarI() {
+		return getDefaultInterface().getVarI();
+	}
+
+	public void setVarI(int value) {
+		getDefaultInterface().setVarI(value);
+	}
+	public int getVarJ() {
+		return getDefaultInterface().getVarJ();
+	}
+
+	public void setVarJ(int value) {
+		getDefaultInterface().setVarJ(value);
+	}
+	public int getVarC() {
+		return getDefaultInterface().getVarC();
+	}
+
+	public void setVarC(int value) {
+		getDefaultInterface().setVarC(value);
+	}
+
+	public boolean raiseEvent(String name) {
+		return getDefaultInterface().raiseEvent(name);
+	}
+
+	@SuppressWarnings("unchecked")
+	public boolean raiseEvent(String name, Object value) {
+		return getDefaultInterface().raiseEvent(name, value);
+	}
+
+	public boolean setVariable(String name, Object value) {
+		return getDefaultInterface().setVariable(name, value);
+	}
+
+	public Object getVariable(String name) {
+		return getDefaultInterface().getVariable(name);
 	}
 
 	public void enter() {

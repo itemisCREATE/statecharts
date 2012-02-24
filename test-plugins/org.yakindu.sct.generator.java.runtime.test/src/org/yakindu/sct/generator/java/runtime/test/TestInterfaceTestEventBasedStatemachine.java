@@ -96,17 +96,17 @@ public class TestInterfaceTestEventBasedStatemachine {
 	@Test (expected = IllegalArgumentException.class)
 	public void testExceptionHandling() {
 		// Value of Event 2 should not be set to null
-		statemachine.getDefaultInterface().getEventEvent2().setValue(null);
+		statemachine.getEventEvent2().setValue(null);
 		statemachine.getInterfaceThird().getEventEvent6().setValue(null);
 	}
 
 	@Test
 	public void testStatemachineEntry() {
 		assertEquals("InterfaceDefault.Var2 is not correct initialized:", 2.3,
-				statemachine.getDefaultInterface().getVarVar2(),
+				statemachine.getVarVar2(),
 				Math.pow(10, -8));
 		assertEquals("InterfaceDefault.Var3 is not correct initialized:", 1,
-				statemachine.getDefaultInterface().getVarVar3());
+				statemachine.getVarVar3());
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
 				statemachine.isStateActive(State.State1));
 	}
@@ -114,7 +114,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 	@Test
 	public void testStatemachineRunCycle_1() {
 
-		statemachine.getDefaultInterface().raiseEvent1();
+		statemachine.raiseEvent1();
 		// Test if state is changed to State2
 		assertTrue("Statemachine isn't in State: " + State.State2.name() + ".",
 				statemachine.isStateActive(State.State2));
@@ -122,33 +122,33 @@ public class TestInterfaceTestEventBasedStatemachine {
 		assertTrue("Event 2 not raised: ", events[0]);
 		// Test if event2 value is set to 22 (happens in entry of State2
 		assertEquals("Event 2 value not set correct: ", 22, statemachine
-				.getDefaultInterface().getEventEvent2().getValue().intValue());
+				.getEventEvent2().getValue().intValue());
 
-		statemachine.getDefaultInterface().raiseEvent1();
+		statemachine.raiseEvent1();
 		// Test if statemachine is back in State 1
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
 				statemachine.isStateActive(State.State1));
 		// Event 2 shouldn't be raised anymore
 		assertFalse("Event is still raised: ", statemachine
-				.getDefaultInterface().isRaisedEvent2());
+				.isRaisedEvent2());
 	}
 
 	@Test
 	public void testStatemachineRunCycle_2() {
-		statemachine.getDefaultInterface().setVarVar2(-12.6);
-		statemachine.getDefaultInterface().raiseEvent1();
+		statemachine.setVarVar2(-12.6);
+		statemachine.raiseEvent1();
 		// Test if statemachine is still in State 1
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
 				statemachine.isStateActive(State.State1));
 		// Event 2 shouldn't be raised
 		assertFalse("Event is still raised: ", statemachine
-				.getDefaultInterface().isRaisedEvent2());
+				.isRaisedEvent2());
 		// Event 2 value should not be set to 22
 		assertTrue("Event value is set to 22: ", statemachine
-				.getDefaultInterface().getEventEvent2().getValue() != 22);
+				.getEventEvent2().getValue() != 22);
 
-		statemachine.getDefaultInterface().setVarVar2(213.55);
-		statemachine.getDefaultInterface().raiseEvent1();
+		statemachine.setVarVar2(213.55);
+		statemachine.raiseEvent1();
 		// Test if state is changed to State2
 		assertTrue("Statemachine isn't in State: " + State.State2.name() + ".",
 				statemachine.isStateActive(State.State2));
@@ -156,7 +156,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 		assertTrue("Event 2 not raised: ", events[0]);
 		// Test if event2 value is set to 22 (happens in entry of State2
 		assertEquals("Event 2 value not set correct: ", 22, statemachine
-				.getDefaultInterface().getEventEvent2().getValue().intValue());
+				.getEventEvent2().getValue().intValue());
 	}
 
 	@Test
@@ -179,7 +179,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 
 	@Test
 	public void testStatemachineRunCycle_4() {
-		statemachine.getDefaultInterface().setVarVar3(2);
+		statemachine.setVarVar3(2);
 		statemachine.getInterfaceOther().raiseEvent3();
 		// Test if state is changed to State1
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
@@ -187,7 +187,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 		// Test if event4 is not raised
 		assertFalse("Event not raised: ", events[1]);
 
-		statemachine.getDefaultInterface().setVarVar3(1);
+		statemachine.setVarVar3(1);
 		statemachine.getInterfaceOther().raiseEvent3();
 		// Test if state is changed to State3
 		assertTrue("Statemachine isn't in State: " + State.State3.name() + ".",
@@ -198,7 +198,7 @@ public class TestInterfaceTestEventBasedStatemachine {
 
 	@Test
 	public void testStatemachineRunCycle_5() {
-		statemachine.getDefaultInterface().setVarVar1(true);
+		statemachine.setVarVar1(true);
 		statemachine.getInterfaceThird().raiseEvent5();
 		// Test if state is changed to State4
 		assertTrue("Statemachine isn't in State: " + State.State4.name() + ".",

@@ -19,10 +19,13 @@ import java.util.Map;
 import org.yakindu.sct.runtime.java.IGenericAccessStatemachine;
 import org.yakindu.sct.runtime.java.IGenericAccessInterface;
 import org.yakindu.sct.runtime.java.IStatemachine;
+import org.yakindu.sct.runtime.java.ValuedEvent;
+import org.yakindu.sct.runtime.java.NotificationSender;
 
-public class InterfaceTestCycleBasedStatemachine
+public class InterfaceTestCycleBasedStatemachine extends NotificationSender
 		implements
 			IGenericAccessStatemachine,
+			DefaultInterface,
 			IStatemachine {
 
 	public enum State {
@@ -106,6 +109,57 @@ public class InterfaceTestCycleBasedStatemachine
 
 	protected IInterfaceThirdImpl getInterfaceThirdImpl() {
 		return (IInterfaceThirdImpl) getInterface("InterfaceThird");
+	}
+
+	public void raiseEvent1() {
+		getDefaultInterface().raiseEvent1();
+	}
+
+	public boolean isRaisedEvent2() {
+		return getOutEvents().contains(getEventEvent2());
+	}
+
+	public ValuedEvent<Events, Integer> getEventEvent2() {
+		return getDefaultInterface().getEventEvent2();
+	}
+
+	public boolean getVarVar1() {
+		return getDefaultInterface().getVarVar1();
+	}
+
+	public void setVarVar1(boolean value) {
+		getDefaultInterface().setVarVar1(value);
+	}
+	public double getVarVar2() {
+		return getDefaultInterface().getVarVar2();
+	}
+
+	public void setVarVar2(double value) {
+		getDefaultInterface().setVarVar2(value);
+	}
+	public int getVarVar3() {
+		return getDefaultInterface().getVarVar3();
+	}
+
+	public void setVarVar3(int value) {
+		getDefaultInterface().setVarVar3(value);
+	}
+
+	public boolean raiseEvent(String name) {
+		return getDefaultInterface().raiseEvent(name);
+	}
+
+	@SuppressWarnings("unchecked")
+	public boolean raiseEvent(String name, Object value) {
+		return getDefaultInterface().raiseEvent(name, value);
+	}
+
+	public boolean setVariable(String name, Object value) {
+		return getDefaultInterface().setVariable(name, value);
+	}
+
+	public Object getVariable(String name) {
+		return getDefaultInterface().getVariable(name);
 	}
 
 	public void enter() {

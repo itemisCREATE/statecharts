@@ -53,7 +53,7 @@ public class TestLocalActionsCycleBasedStatemachine {
 		statemachine = null;
 	}
 
-	@Test (expected = NullPointerException.class)
+	@Test(expected = NullPointerException.class)
 	public void testExceptionHandling() {
 		Test_LocalActionsCycleBasedStatemachine statemachine = new Test_LocalActionsCycleBasedStatemachine();
 		statemachine.enter();
@@ -63,8 +63,7 @@ public class TestLocalActionsCycleBasedStatemachine {
 	public void testStatemachineEntry() {
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
 				statemachine.isStateActive(State.State1));
-		assertEquals("Variable i not set to 1", 1, statemachine
-				.getDefaultInterface().getVarI());
+		assertEquals("Variable i not set to 1", 1, statemachine.getVarI());
 	}
 
 	@Test
@@ -72,24 +71,24 @@ public class TestLocalActionsCycleBasedStatemachine {
 		final long time = System.currentTimeMillis();
 
 		assertEquals("Error in local reaction \"Entry / i=1;\" of State1", 1,
-				statemachine.getDefaultInterface().getVarI());
+				statemachine.getVarI());
 
 		statemachine.runCycle();
 		assertEquals("Error in local reaction \"onCycle / i=2;\" of State1", 2,
-				statemachine.getDefaultInterface().getVarI());
+				statemachine.getVarI());
 
-		statemachine.getDefaultInterface().raiseEvent2();
+		statemachine.raiseEvent2();
 		statemachine.runCycle();
 		assertEquals("Error in local reaction \"Event2 / i=3;\" of State1", 3,
-				statemachine.getDefaultInterface().getVarI());
+				statemachine.getVarI());
 
 		// Check timer behavior
-		while (statemachine.getDefaultInterface().getVarC() < 10) {
+		while (statemachine.getVarC() < 10) {
 			statemachine.runCycle();
 			Thread.sleep(junitSleepTime);
 		}
 		final long time2 = System.currentTimeMillis() - time;
-		final long expectedTime = statemachine.getDefaultInterface().getVarC() * 100;
+		final long expectedTime = statemachine.getVarC() * 100;
 		final long delta = time2 - expectedTime;
 		assertTrue("Timer threshold overflow in State 1. Delta is " + delta
 				+ " ms. Threshold is: " + timerThreshold + " ms.",
@@ -99,25 +98,25 @@ public class TestLocalActionsCycleBasedStatemachine {
 	@Test
 	public void testState2LocalReaction() throws InterruptedException {
 		// Switch to State2;
-		statemachine.getDefaultInterface().raiseEvent1();
+		statemachine.raiseEvent1();
 		statemachine.runCycle();
 		final long time = System.currentTimeMillis();
 
 		assertEquals("Error in local reaction \"exit / i=0;\" of State1", 0,
-				statemachine.getDefaultInterface().getVarI());
+				statemachine.getVarI());
 
 		assertEquals("Error in local reaction \"entry / j=0;\" of State2", 1,
-				statemachine.getDefaultInterface().getVarJ());
+				statemachine.getVarJ());
 
 		// Check local reaction for Event2
-		statemachine.getDefaultInterface().raiseEvent2();
+		statemachine.raiseEvent2();
 		statemachine.runCycle();
 		assertEquals(
 				"Error in local reaction \"Event2, Event4 / j=2;\" of State2",
-				2, statemachine.getDefaultInterface().getVarJ());
+				2, statemachine.getVarJ());
 
 		// Check timer behavior
-		while (statemachine.getDefaultInterface().getVarJ() != 3) {
+		while (statemachine.getVarJ() != 3) {
 			statemachine.runCycle();
 			Thread.sleep(junitSleepTime);
 		}
@@ -130,16 +129,16 @@ public class TestLocalActionsCycleBasedStatemachine {
 				time2 <= expectedTime + timerThreshold);
 
 		// Check local reaction for Event4
-		statemachine.getDefaultInterface().raiseEvent4();
+		statemachine.raiseEvent4();
 		statemachine.runCycle();
 		assertEquals(
 				"Error in local reaction \"Event2, Event4 / j=2;\" of State2",
-				2, statemachine.getDefaultInterface().getVarJ());
+				2, statemachine.getVarJ());
 
 		// Check local reaction for exit
-		statemachine.getDefaultInterface().raiseEvent3();
+		statemachine.raiseEvent3();
 		statemachine.runCycle();
 		assertEquals("Error in local reaction \"exit / j=0;\" of State2", 0,
-				statemachine.getDefaultInterface().getVarJ());
+				statemachine.getVarJ());
 	}
 }
