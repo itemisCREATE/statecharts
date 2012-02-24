@@ -92,7 +92,6 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implemen
 			«ENDFOREACH-»	
 		«ENDIF-»
 	}
-	
 		
 	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
 	

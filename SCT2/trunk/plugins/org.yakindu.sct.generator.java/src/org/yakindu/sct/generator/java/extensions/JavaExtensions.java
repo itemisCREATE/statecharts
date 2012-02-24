@@ -11,6 +11,7 @@ import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.Direction;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
+import org.yakindu.sct.model.stext.stext.InterfaceScope;
 
 public class JavaExtensions implements IJavaFeatureConstants {
 
@@ -21,6 +22,10 @@ public class JavaExtensions implements IJavaFeatureConstants {
 
 		if (hasGenericInterfaceSupport(entry)) {
 			interfaces += "IGenericAccessStatemachine, ";
+		}
+		
+		if (hasDefaultInterface(flow)) {
+			interfaces += "DefaultInterface,";
 		}
 
 		if (isTimedStatemachine(flow)) {
@@ -112,6 +117,15 @@ public class JavaExtensions implements IJavaFeatureConstants {
 			return entry.getFeatureConfiguration(GENERAL_FEATURES)
 					.getParameterValue(INTERFACE_OBSERVER_SUPPORT)
 					.getBooleanValue();
+		}
+		return false;
+	}
+	
+	private static final boolean hasDefaultInterface(ExecutionFlow flow) {
+		for (Scope scope: flow.getScopes()) {
+			if (scope instanceof InterfaceScope && ((InterfaceScope) scope).getName() == null) {
+				return true;
+			}
 		}
 		return false;
 	}

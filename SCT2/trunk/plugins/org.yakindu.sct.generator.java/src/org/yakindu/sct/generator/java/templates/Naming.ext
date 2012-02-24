@@ -181,6 +181,12 @@ String getInterfaceImplExtension(Scope this, GeneratorEntry entry):
 		" extends NotificationSender"
 	else
 		null;
+		
+String getStatemachineExtension(ExecutionFlow this, GeneratorEntry entry):
+	if (!getDefaultInterface().isEmpty) then
+		getInterfaceImplExtension(getDefaultInterface().get(0),entry)
+	else
+		null;
 	
 String getComment(Step this) :
 	if comment!=null then

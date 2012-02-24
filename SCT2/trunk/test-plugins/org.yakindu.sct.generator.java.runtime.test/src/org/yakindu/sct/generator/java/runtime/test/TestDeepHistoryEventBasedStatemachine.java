@@ -14,15 +14,12 @@ public class TestDeepHistoryEventBasedStatemachine {
 
 	private Test_DeepHistoryEventBasedStatemachine statemachine;
 
-	private DefaultInterface dInterface;
-
 	@Before
 	public void setUp() {
 		statemachine = new Test_DeepHistoryEventBasedStatemachine();
 		statemachine.init();
 		statemachine.enter();
-		dInterface = statemachine.getDefaultInterface();
-		dInterface = statemachine.getDefaultInterface();
+
 	}
 
 	@After
@@ -33,20 +30,20 @@ public class TestDeepHistoryEventBasedStatemachine {
 	@Test
 	public void testDeepHistory() {
 		// Change active states to State9;
-		dInterface.raiseEvent1();
-		dInterface.raiseEvent3();
-		dInterface.raiseEvent5();
-		dInterface.raiseEvent7();
+		statemachine.raiseEvent1();
+		statemachine.raiseEvent3();
+		statemachine.raiseEvent5();
+		statemachine.raiseEvent7();
 		assertFalse(statemachine.isStateActive(State.State1));
 		assertTrue(statemachine.isStateActive(State.State9));
 
 		// Leave State2. State4 and State9 should be saved as history.
-		dInterface.raiseEvent2();
+		statemachine.raiseEvent2();
 		assertTrue(statemachine.isStateActive(State.State1));
 		assertFalse(statemachine.isStateActive(State.State9));
 
 		// Reenter State2. State9 should be activated (History of State2).
-		dInterface.raiseEvent1();
+		statemachine.raiseEvent1();
 		assertFalse(statemachine.isStateActive(State.State1));
 		assertTrue(statemachine.isStateActive(State.State9));
 	}
