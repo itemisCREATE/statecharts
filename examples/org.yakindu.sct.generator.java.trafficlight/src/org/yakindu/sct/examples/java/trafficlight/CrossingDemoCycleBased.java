@@ -62,8 +62,6 @@ public class CrossingDemoCycleBased {
 		crossing.add(pl);
 		crossing.getLayoutManager().setConstraint(pl,
 				new Rectangle(50, 10, 70, 20));
-		
-		statemachine.setTimerService(new TimerService());
 
 		Thread thread = new Thread() {
 			@Override
@@ -74,6 +72,7 @@ public class CrossingDemoCycleBased {
 				// implementation of a TimerHandler. It has to implement the
 				// ITimerHandler interface.
 				statemachine.setTimerService(new TimerService());
+				statemachine.init();
 				statemachine.enter();
 				while (!isInterrupted()) {
 					statemachine.runCycle();

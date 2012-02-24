@@ -77,6 +77,7 @@ public class Test_LocalActionsCycleBasedStatemachine
 	}
 
 	public void init() {
+		assert timerService != null;
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -98,10 +99,7 @@ public class Test_LocalActionsCycleBasedStatemachine
 	}
 
 	public ITimerService getTimerService() {
-		if (timerService == null) {
-			throw new NullPointerException(
-					"TimerService of statemachine \"+Test_LocalActions+\" not set!");
-		}
+		assert timerService != null;
 		return timerService;
 	}
 
