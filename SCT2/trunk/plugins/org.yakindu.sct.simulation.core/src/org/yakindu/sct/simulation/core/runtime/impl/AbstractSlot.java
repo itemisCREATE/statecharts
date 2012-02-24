@@ -63,6 +63,15 @@ public abstract class AbstractSlot {
 
 	/* package */void setValue(Object value) {
 		Assert.isNotNull(value, "Value must not be null ");
+		//TODO refactor
+		if (type == Float.class && value != null && !value.getClass().isAssignableFrom(type)) {
+			try {
+				value = Float.parseFloat(value.toString());
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		if (!value.getClass().isAssignableFrom(type)) {
 			throw new ExecutionException("Error assigning value to \' " + name
 					+ "\' Can not assign value " + value + " of type"
