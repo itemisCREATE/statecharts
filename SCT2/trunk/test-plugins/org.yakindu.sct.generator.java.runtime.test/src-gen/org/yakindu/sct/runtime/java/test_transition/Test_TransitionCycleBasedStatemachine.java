@@ -78,6 +78,7 @@ public class Test_TransitionCycleBasedStatemachine
 	}
 
 	public void init() {
+		assert timerService != null;
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -99,10 +100,7 @@ public class Test_TransitionCycleBasedStatemachine
 	}
 
 	public ITimerService getTimerService() {
-		if (timerService == null) {
-			throw new NullPointerException(
-					"TimerService of statemachine \"+Test_Transition+\" not set!");
-		}
+		assert timerService != null;
 		return timerService;
 	}
 

@@ -99,6 +99,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 
 	public void init() {
+		assert timerService != null;
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -120,10 +121,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	}
 
 	public ITimerService getTimerService() {
-		if (timerService == null) {
-			throw new NullPointerException(
-					"TimerService of statemachine \"+TrafficLightWaiting+\" not set!");
-		}
+		assert timerService != null;
 		return timerService;
 	}
 

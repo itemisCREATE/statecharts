@@ -338,6 +338,9 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineInterf
 	}
 	
 	public void init() {
+		«IF isTimedStatemachine()-»
+		assert timerService != null;
+		«ENDIF-»
 		for (int i = 0; i < «stateVector.size»; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -367,9 +370,7 @@ public class «getCycleBasedStatemachineName()» implements «getStatemachineInterf
 
 	
 	public ITimerService getTimerService() {
-		if (timerService == null) {
-			throw new NullPointerException("TimerService of statemachine \"+«name»+\" not set!");
-		}
+		assert timerService != null;
 		return timerService;
 	}
 	
