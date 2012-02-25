@@ -31,6 +31,7 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Vertex;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.inject.Inject;
@@ -53,6 +54,11 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
 	private IQualifiedNameConverter nameConverter;
 	@Inject
 	private IdentifierConverter identifierConverer;
+
+	@Override
+	protected Function<EObject, String> getResolver() {
+		return SimpleAttributeResolver.NAME_RESOLVER;
+	}
 
 	public QualifiedName qualifiedName(Statechart ele) {
 		String scName = ele.getName();
