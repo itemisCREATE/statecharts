@@ -1,11 +1,11 @@
 h1. Tasks
 
-h2. Model a statemachine
+h2. Modeling a statemachine
 
-h2. Validate a statemachine
+h2. Validating a statemachine
 
-h2. Simulate a statemachine
+h2. Simulating a statemachine
 
-h2. Generate C
+h2. Generating C code
 
-h2. Generate Java
+h2. Generating Java code
