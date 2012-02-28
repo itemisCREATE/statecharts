@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.ui.editor.propertysheets;
 
-import java.util.Collections;
-
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.databinding.IEMFValueProperty;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
@@ -32,9 +30,6 @@ import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions
 import org.yakindu.sct.ui.editor.propertysheets.OrderElementControl.ISourceObjectCallback;
 
 import com.google.inject.Injector;
-
-import de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapter;
-import de.itemis.xtext.utils.jface.viewers.context.CloningBasedFakeContextResourcesProvider;
 
 /**
  * 
@@ -81,11 +76,7 @@ public class StatechartPropertySection extends
 		if (injector != null) {
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER
 					| SWT.V_SCROLL);
-			StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(
-					injector, new CloningBasedFakeContextResourcesProvider(
-							Collections
-									.singletonList(getActiveEditorResource())));
-			xtextAdapter.adapt((StyledText) textControl);
+			enableXtext(textControl, injector);
 		} else {
 			textControl = getToolkit().createText(parent, "", SWT.MULTI);
 		}
@@ -112,8 +103,9 @@ public class StatechartPropertySection extends
 		IEMFValueProperty property = EMFEditProperties.value(
 				TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.NAMED_ELEMENT__NAME);
-		ISWTObservableValue observe = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.DefaultSelection})
-				.observe(txtName);
+		ISWTObservableValue observe = WidgetProperties.text(
+				new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
+				txtName);
 		context.bindValue(observe, property.observe(eObject));
 	}
 

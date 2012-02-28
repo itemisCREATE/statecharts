@@ -14,22 +14,18 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.draw2d.ConnectionLayer;
 import org.eclipse.draw2d.ViewportAwareConnectionLayerClippingStrategy;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.editparts.LayerManager;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
-import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
@@ -39,10 +35,11 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
 import org.yakindu.sct.ui.editor.validation.ValidationAction;
+
+import de.itemis.xtext.utils.gmf.resource.DirtyStateListener;
 
 /**
  * 
@@ -54,33 +51,14 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 
-	// Listenes the ResourceSet for semantic changes
 	private ResourceSetListener validationListener = new ResourceSetListenerImpl() {
 		@Override
 		public void resourceSetChanged(ResourceSetChangeEvent event) {
 			validate();
-
-			// FIXME: Validation should only be done if semantic changes are
-			// done
-			// with the solution below the error marker is set not correctly
-			// (See YAK-HMI 511)
-			// if (isGraphModelAffected(event)) {
-			// validate();
-			// }
 		}
 	};
 
-	// private boolean isGraphModelAffected(ResourceSetChangeEvent event) {
-	// for (Notification notification : event.getNotifications()) {
-	// if (notification.getNotifier() instanceof EObject) {
-	// EObject eObject = (EObject) notification.getNotifier();
-	// if (SGraphPackage.eINSTANCE == eObject.eClass().getEPackage()) {
-	// return true;
-	// }
-	// }
-	// }
-	// return false;
-	// }
+	private DirtyStateListener domainAdapter;
 
 	public StatechartDiagramEditor() {
 		super(true);
@@ -113,12 +91,16 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 			description.setNatureIds(newNatures);
 			project.setDescription(description, null);
 		} catch (CoreException e) {
-			DiagramActivator
-					.getDefault()
-					.getLog()
-					.log(new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID,
-							"Xtext nature can't be added", e));
+			e.printStackTrace();
 		}
+	}
+
+	@Override
+	protected TransactionalEditingDomain createEditingDomain() {
+		TransactionalEditingDomain domain = super.createEditingDomain();
+		domainAdapter = new DirtyStateListener();
+		domain.addResourceSetListener(domainAdapter);
+		return domain;
 	}
 
 	@Override
@@ -175,6 +157,8 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 	@Override
 	public void dispose() {
 		getEditingDomain().removeResourceSetListener(validationListener);
+		getEditingDomain().removeResourceSetListener(domainAdapter);
+		domainAdapter.dispose();
 		super.dispose();
 	}
 }

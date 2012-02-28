@@ -10,10 +10,9 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
-import java.util.Collections;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editpolicies.DirectEditPolicy;
 import org.eclipse.gef.tools.DirectEditManager;
@@ -38,7 +37,7 @@ import com.google.inject.Injector;
 import de.itemis.gmf.runtime.commons.parsers.AttributeParser;
 import de.itemis.xtext.utils.gmf.directedit.ExternalXtextLabelEditPart;
 import de.itemis.xtext.utils.gmf.directedit.XtextDirectEditManager;
-import de.itemis.xtext.utils.jface.viewers.context.CloningBasedFakeContextResourcesProvider;
+import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
 
 /**
  * 
@@ -46,7 +45,8 @@ import de.itemis.xtext.utils.jface.viewers.context.CloningBasedFakeContextResour
  * 
  */
 public abstract class PlugableExternalXtextLabelEditPart extends
-		ExternalXtextLabelEditPart implements ITextAwareEditPart {
+		ExternalXtextLabelEditPart implements ITextAwareEditPart,
+		IContextElementProvider {
 
 	private Injector injector;
 
@@ -82,11 +82,8 @@ public abstract class PlugableExternalXtextLabelEditPart extends
 	@Override
 	protected DirectEditManager createDirectEditManager() {
 		if (injector != null) {
-			CloningBasedFakeContextResourcesProvider fakeContext = new CloningBasedFakeContextResourcesProvider(
-					Collections.singletonList(resolveSemanticElement()
-							.eResource()));
 			return new XtextDirectEditManager(this, injector,
-					getEditorStyles(), fakeContext);
+					getEditorStyles(), this);
 		} else {
 			return new TextDirectEditManager(this);
 		}
@@ -95,6 +92,10 @@ public abstract class PlugableExternalXtextLabelEditPart extends
 	@Override
 	public SpecificationElement resolveSemanticElement() {
 		return (SpecificationElement) super.resolveSemanticElement();
+	}
+
+	public EObject getContextObject() {
+		return super.resolveSemanticElement();
 	}
 
 	@Override

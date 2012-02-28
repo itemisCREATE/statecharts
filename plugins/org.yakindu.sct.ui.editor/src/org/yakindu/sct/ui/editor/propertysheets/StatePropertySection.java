@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.ui.editor.propertysheets;
 
-import java.util.Collections;
-
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -46,9 +44,6 @@ import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions
 import org.yakindu.sct.ui.editor.propertysheets.OrderElementControl.ISourceObjectCallback;
 
 import com.google.inject.Injector;
-
-import de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapter;
-import de.itemis.xtext.utils.jface.viewers.context.CloningBasedFakeContextResourcesProvider;
 
 /**
  * 
@@ -89,15 +84,12 @@ public class StatePropertySection extends
 		if (injector != null) {
 			txtSpecification = new StyledText(parent, SWT.MULTI | SWT.BORDER
 					| SWT.V_SCROLL);
-			StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(
-					injector, new CloningBasedFakeContextResourcesProvider(
-							Collections
-									.singletonList(getActiveEditorResource())));
-			xtextAdapter.adapt((StyledText) txtSpecification);
+			enableXtext(txtSpecification, injector);
 		} else {
 			txtSpecification = getToolkit().createText(parent, "", SWT.MULTI);
 		}
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(txtSpecification);
+		GridDataFactory.fillDefaults().grab(true, true)
+				.applyTo(txtSpecification);
 	}
 
 	private void createSubmachineControl(final Composite parent) {
@@ -155,7 +147,8 @@ public class StatePropertySection extends
 				TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.NAMED_ELEMENT__NAME);
 		ISWTObservableValue nameTextProperty = WidgetProperties.text(
-				new int[]{SWT.FocusOut, SWT.DefaultSelection}).observe(txtName);
+				new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
+				txtName);
 		context.bindValue(nameTextProperty, nameProperty.observe(eObject));
 	}
 
