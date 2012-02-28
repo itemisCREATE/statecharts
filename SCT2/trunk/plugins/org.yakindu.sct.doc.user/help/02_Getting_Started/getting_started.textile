@@ -97,6 +97,8 @@ Start a simulation by clicking *Run* > *Run*.
 
 During the simulation in the statechart editor the active state gets a red color. The previous transition is green. The simulation view shows the events that trigger the states. You can change values here to trigger events. Beneath the table there are two clocks. One for the _virtual time_ and one for the _real time_ and a slider to change virtual time.
 
+You can also select an _event driven_ or _cycle based_ run configuration.
+
 h2. YAKINDU SCT Nature
 
 YAKINDU model projects are associated with the *YAKINDU SCT nature*. For general information regarding natures read the "project nature documentation":PLUGIN_ROOT/org.eclipse.platform.doc.isv/reference/extension-points/org_eclipse_core_resources_natures.html. On projects with *YAKINDU SCT nature* _.sct_ and _.sgen_ files are automatically build and checked for problems. So you get fast feedback during editing. You can toggle the SCT nature by right clicking *Configure* > *Add* or *Remove YAKINDU SCT Nature* on the project.

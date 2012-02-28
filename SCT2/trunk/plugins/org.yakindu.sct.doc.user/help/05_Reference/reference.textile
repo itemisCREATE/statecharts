@@ -395,10 +395,23 @@ exitpoint exit1
 
 h2. SGraph
 
+SGraph is the metamodel for the graphical part of the statechart editor. It owns all core elements of a state machine like states, pseudostates, transitons etc. but it describes how these elements shall be shown by the editor.
+
 h2. SExec
+
+SExec is the name of an intermediate execution model. This intermediate model is used behind the scenes as a foundation for the code generators and the simulation engine. This guarantees that the simulation behaves in the same way as the generated Statechart implementations. It captures the execution behavior and may also serve as the basis of custom code generators.
 
 h2. SGen
 
+All generators can be customized with a generator model. This is a textual model file where generator features, like i.e. the outlet path, can be specified. The following screenshot shows an example configuration for the java code generator. In future releases, we will add generator features for the execution type (event or cycle based), interface styles (static or generic) and much more.
+
+!images/sGenEditor.png!
+
+To get started with the generator model, we included a new Eclipse wizard that creates a basic configuration file with default values.
+
+!images/sGenEditor.png!
+
+To execute the Generator Model, select “Generate Model” from the context menu of the resource in the “Project Explorer”.
 
 
 
