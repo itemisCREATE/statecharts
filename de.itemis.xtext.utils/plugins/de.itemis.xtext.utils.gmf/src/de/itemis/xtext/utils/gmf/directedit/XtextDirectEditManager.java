@@ -64,11 +64,12 @@ import org.eclipse.ui.part.CellEditorActionHandler;
 import com.google.inject.Injector;
 
 import de.itemis.xtext.utils.gmf.viewers.XtextStyledTextCellEditorEx;
+import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
 import de.itemis.xtext.utils.jface.viewers.context.IXtextFakeContextResourcesProvider;
 
 /**
- * Full copy of the TextDirectEditManager for a StyledText 
- *
+ * Full copy of the TextDirectEditManager for a StyledText
+ * 
  */
 @SuppressWarnings("restriction")
 public class XtextDirectEditManager extends DirectEditManager {
@@ -123,7 +124,9 @@ public class XtextDirectEditManager extends DirectEditManager {
 	private final int style;
 
 	private IXtextFakeContextResourcesProvider fakeProvider;
-	
+
+	private IContextElementProvider contextProvider;
+
 	private static final int LABEL_MIN_WIDTH = 75;
 
 	/**
@@ -144,7 +147,12 @@ public class XtextDirectEditManager extends DirectEditManager {
 			IXtextFakeContextResourcesProvider provider) {
 		this(source, null, getTextCellEditorLocator(source), injector, style);
 		this.fakeProvider = provider;
+	}
 
+	public XtextDirectEditManager(IXtextAwareEditPart source,
+			Injector injector, int style, IContextElementProvider provider) {
+		this(source, null, getTextCellEditorLocator(source), injector, style);
+		this.contextProvider = provider;
 	}
 
 	/**
@@ -253,8 +261,9 @@ public class XtextDirectEditManager extends DirectEditManager {
 			public void relocate(CellEditor celleditor) {
 				StyledText text = (StyledText) celleditor.getControl();
 				Rectangle rect = source.getFigure().getBounds().getCopy();
-				//Added min width because it looks silly if the label has a width of 0
-				if(rect.width == 0)
+				// Added min width because it looks silly if the label has a
+				// width of 0
+				if (rect.width == 0)
 					rect.width = LABEL_MIN_WIDTH;
 				source.getFigure().translateToAbsolute(rect);
 				if (!rect.equals(new Rectangle(text.getBounds()))) {
@@ -283,6 +292,10 @@ public class XtextDirectEditManager extends DirectEditManager {
 		if (fakeProvider != null) {
 			editor = new XtextStyledTextCellEditorEx(style, injector,
 					fakeProvider);
+			editor.create(composite);
+		} else if (contextProvider != null) {
+			editor = new XtextStyledTextCellEditorEx(style, injector,
+					contextProvider);
 			editor.create(composite);
 		} else {
 			editor = new XtextStyledTextCellEditorEx(style, injector);

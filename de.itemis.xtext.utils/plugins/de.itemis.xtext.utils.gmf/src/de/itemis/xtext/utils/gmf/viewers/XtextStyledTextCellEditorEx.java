@@ -14,6 +14,7 @@ package de.itemis.xtext.utils.gmf.viewers;
 import com.google.inject.Injector;
 
 import de.itemis.xtext.utils.jface.viewers.XtextStyledTextCellEditor;
+import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
 import de.itemis.xtext.utils.jface.viewers.context.IXtextFakeContextResourcesProvider;
 
 /**
@@ -35,6 +36,11 @@ public class XtextStyledTextCellEditorEx extends XtextStyledTextCellEditor {
 
 	public XtextStyledTextCellEditorEx(int style, Injector injector) {
 		super(style, injector);
+	}
+
+	public XtextStyledTextCellEditorEx(int style, Injector injector,
+			IContextElementProvider provider) {
+		super(style, injector, provider);
 	}
 
 	/**
