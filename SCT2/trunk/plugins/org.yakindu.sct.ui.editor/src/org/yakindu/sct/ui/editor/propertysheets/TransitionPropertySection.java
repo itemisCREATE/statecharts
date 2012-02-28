@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.ui.editor.propertysheets;
 
-import java.util.Collections;
-
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.databinding.IEMFValueProperty;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
@@ -28,9 +26,6 @@ import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions
 
 import com.google.inject.Injector;
 
-import de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapter;
-import de.itemis.xtext.utils.jface.viewers.context.CloningBasedFakeContextResourcesProvider;
-
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -46,17 +41,14 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 		if (injector != null) {
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER
 					| SWT.V_SCROLL);
-			StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(
-					injector, new CloningBasedFakeContextResourcesProvider(
-							Collections
-									.singletonList(getActiveEditorResource())));
-			xtextAdapter.adapt((StyledText) textControl);
+			enableXtext(textControl, injector);
 		} else {
 			textControl = getToolkit().createText(parent, "", SWT.MULTI);
 		}
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(textControl);
 
 	}
+
 
 	@Override
 	public void bindModel(EMFDataBindingContext context) {

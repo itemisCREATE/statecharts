@@ -22,7 +22,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.yakindu.base.base.BasePackage;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 /**
  * 

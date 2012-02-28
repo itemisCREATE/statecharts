@@ -10,55 +10,84 @@
  */
 package org.yakindu.sct.model.stext.scoping;
 
+import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
-import org.eclipse.xtext.scoping.impl.ResourceSetGlobalScopeProvider;
-import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.scope.TypeLibrariesExtensionPointScopeHelper;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.stext.stext.StextPackage;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
+import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
+
 /**
- * This Global Scope provider exposes only Statecharts as global objects to
- * prevent crossreferencing of Events and Variables between Statecharts.
- * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class STextGlobalScopeProvider extends ResourceSetGlobalScopeProvider {
-
-	@Inject
-	private DefaultGlobalScopeProvider delegate;
+public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 
 	@Inject
 	private TypeLibrariesExtensionPointScopeHelper typeScopeHelper;
 
 	public IScope getScope(Resource context, EReference reference,
 			Predicate<IEObjectDescription> filter) {
-		IScope scope = super.getScope(context, reference, filter);
-		IScope globalScope = delegate.getScope(context, reference, filter);
-		FilteringScope filteringScope = new FilteringScope(globalScope,
-				new Predicate<IEObjectDescription>() {
+		IScope parentScope = super.getScope(context, reference, filter);
+		parentScope = filterExternalDeclarations(context, parentScope);
+		parentScope = addTypeLibraries(reference, parentScope);
+		return parentScope;
+	}
 
+	/**
+	 * Filter all Variables and Events that are not contained in context
+	 * resource
+	 * 
+	 * @param context
+	 * @param parentScope
+	 * @return
+	 */
+	protected IScope filterExternalDeclarations(Resource context,
+			IScope parentScope) {
+		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil
+				.getExistingAdapter(context, ContextElementAdapter.class);
+		Assert.isNotNull(provider);
+		parentScope = new FilteringScope(parentScope,
+				new Predicate<IEObjectDescription>() {
 					public boolean apply(IEObjectDescription input) {
-						return input.getEClass() == SGraphPackage.Literals.STATECHART;
+						if (input.getEClass() == StextPackage.Literals.EVENT_DEFINITION
+								|| input.getEClass() == StextPackage.Literals.VARIABLE_DEFINITION) {
+							URI sourceURI = input.getEObjectURI()
+									.trimFragment();
+							return sourceURI.equals(provider.getElement()
+									.eResource().getURI());
+						}
+						return true;
 					}
 				});
-		IScope parentScope = new SimpleScope(Iterables.concat(
-				scope.getAllElements(), filteringScope.getAllElements()));
-		
-		// add types from type libraries, in case the type of the reference refers to Type
-		if (reference.getEReferenceType().isSuperTypeOf(TypesPackage.eINSTANCE.getType())) {
+		return parentScope;
+	}
+
+	/**
+	 * add types from type libraries, in case the type of the reference refers
+	 * to Type
+	 * 
+	 * @param reference
+	 * @param parentScope
+	 * @return
+	 */
+	protected IScope addTypeLibraries(EReference reference, IScope parentScope) {
+		if (reference.getEReferenceType().isSuperTypeOf(
+				TypesPackage.eINSTANCE.getType())) {
 			return typeScopeHelper.createExtensionScope(parentScope);
 		}
 		return parentScope;
 	}
+
 }

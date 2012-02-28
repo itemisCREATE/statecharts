@@ -12,13 +12,16 @@ package org.yakindu.sct.ui.editor.propertysheets;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.gmf.runtime.diagram.ui.properties.sections.AbstractModelerPropertySection;
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.forms.widgets.Form;
@@ -30,6 +33,9 @@ import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
 
 import com.google.inject.Injector;
 
+import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
+import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
+import de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapter;
 import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 
 /**
@@ -38,7 +44,7 @@ import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
  * 
  */
 public abstract class AbstractEditorPropertySection extends
-		AbstractModelerPropertySection {
+		AbstractModelerPropertySection implements IContextElementProvider {
 
 	public abstract void createControls(Composite parent);
 
@@ -116,6 +122,14 @@ public abstract class AbstractEditorPropertySection extends
 		return resources.get(0); // always take the first resource ...
 	}
 
+	protected void enableXtext(Control styledText, Injector injector) {
+		StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(
+				injector);
+		xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters()
+				.add(new ContextElementAdapter(this));
+		xtextAdapter.adapt((StyledText) styledText);
+	}
+
 	protected Injector getInjector(SemanticTarget semanticTarget) {
 		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions
 				.getRegisteredProvider(semanticTarget,
@@ -123,6 +137,10 @@ public abstract class AbstractEditorPropertySection extends
 		return registeredProvider.getInjector();
 	}
 
+	public EObject getContextObject() {
+		return getEObject();
+	}
+	// FIXME
 	// public void createHelpColumn(final Composite parent, final Control
 	// control) {
 	// final ImageHyperlink helpWidget = toolkit.createImageHyperlink(parent,
