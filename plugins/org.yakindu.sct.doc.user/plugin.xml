@@ -24,6 +24,10 @@
             file="help/04_Tasks/tasks-toc.xml"
             primary="false">
       </toc>
+          <toc
+            file="help/05_Reference/reference-toc.xml"
+            primary="false">
+      </toc>
    </extension>
    <extension
          point="org.eclipse.help.contexts">
