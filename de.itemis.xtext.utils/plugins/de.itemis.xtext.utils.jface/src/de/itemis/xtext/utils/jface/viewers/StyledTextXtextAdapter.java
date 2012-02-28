@@ -275,7 +275,7 @@ public class StyledTextXtextAdapter {
 		return contextFakeResourceProvider;
 	}
 
-	protected XtextFakeResourceContext getFakeResourceContext() {
+	public XtextFakeResourceContext getFakeResourceContext() {
 		return fakeResourceContext;
 	}
 }

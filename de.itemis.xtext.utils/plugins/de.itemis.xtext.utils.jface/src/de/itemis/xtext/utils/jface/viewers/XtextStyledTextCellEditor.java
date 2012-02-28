@@ -11,8 +11,6 @@
  */
 package de.itemis.xtext.utils.jface.viewers;
 
-import java.util.List;
-
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.SourceViewer;
@@ -27,14 +25,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.validation.Issue;
 
 import com.google.inject.Injector;
 
 import de.itemis.utils.jface.viewers.StyledTextCellEditor;
 import de.itemis.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
+import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
 import de.itemis.xtext.utils.jface.viewers.context.IXtextFakeContextResourcesProvider;
 
 /**
@@ -56,6 +53,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 	private Injector injector;
 	private StyledTextXtextAdapter xtextAdapter;
 	private IXtextFakeContextResourcesProvider contextFakeResourceProvider;
+	private IContextElementProvider provider;
 
 	public XtextStyledTextCellEditor(int style, Injector injector,
 			IXtextFakeContextResourcesProvider contextFakeResourceProvider) {
@@ -65,6 +63,13 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 
 	public XtextStyledTextCellEditor(int style, Injector injector) {
 		setStyle(style);
+		this.injector = injector;
+	}
+
+	public XtextStyledTextCellEditor(int style, Injector injector,
+			IContextElementProvider provider) {
+		setStyle(style);
+		this.provider = provider;
 		this.injector = injector;
 	}
 
@@ -88,6 +93,10 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 				contextFakeResourceProvider == null ? IXtextFakeContextResourcesProvider.NULL_CONTEXT_PROVIDER
 						: contextFakeResourceProvider);
 		xtextAdapter.adapt(styledText);
+		if (provider != null) {
+			xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters()
+					.add(new ContextElementAdapter(provider));
+		}
 
 		// configure content assist
 		final IContentAssistant contentAssistant = xtextAdapter
@@ -112,7 +121,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 		}
 		styledText.addListener(3005, new Listener() {
 			public void handleEvent(Event event) {
-				 if (event.character == '\u001b' //ESC
+				if (event.character == '\u001b' // ESC
 						&& !completionProposalAdapter.isProposalPopupOpen()) {
 					XtextStyledTextCellEditor.this.fireCancelEditor();
 				}
@@ -194,14 +203,6 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 	@Override
 	protected boolean dependsOnExternalFocusListener() {
 		return false;
-	}
-
-	public List<Issue> getXtextValidationIssues() {
-		return xtextAdapter.getXtextValidationIssues();
-	}
-
-	public IParseResult getXtextParseResult() {
-		return xtextAdapter.getXtextParseResult();
 	}
 
 	public void setVisibleRegion(int start, int length) {
