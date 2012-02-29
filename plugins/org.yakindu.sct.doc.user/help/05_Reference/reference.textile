@@ -114,8 +114,6 @@ var stringVar : string
 var voidVar : void
 event addInt : integer
 event checkValidity : boolean
-
-
 h3. Expressions
 
 Expressions can be defined similar to other programming languages. SText offers operators to define logical expressions, bitwise arithmetic, and arithmetic expressions and bit shifting.
@@ -125,39 +123,31 @@ Logical expressions in SText are similar to other programming languages. The ret
 h4. Logical AND
 
 bc.. 
-var1 && var2 
-
+var1 && var2
 h4. Logical OR
 
 bc.. 
 var1 ||  var2 
-
 h4. Logical NOT
 
 bc.. 
 !var1 
-
 h4. Conditional expression
 
 bc.. 
 var1 ? var2 : 23 
-
 h4. Bitwise XOR
 
 bc.. 
 var1 ^ var2
-
 h4. Bitwise OR
 
 bc.. 
 var1 | var2
-
 h4. Bitwise AND
 
 bc.. 
 var1 & var2
-
-
 h4. Logical Relations and Shift Operators
 
 |less than | < |
@@ -189,19 +179,17 @@ h3. Statements
 
 A statements can be either an assignment, raising an event or call an operation. SText has the following assignment operators:
 
-|Operator | Description |
-| = | simple assignment |
-| *= | multiply and assign |
-| /= | divide and assign |
-| %= | calculate modulo and assign |
-| += | add and assign |
-| -= | subtract and assign |
-| <<= | bitshift left and assign |
-| >>= | bitshift right and assign |
-| &= | bitwise AND and assign |
-| ^= | bitwise XOR and assign |
-| |= | bitwise OR and assign | 
-
+* simple assignment:  = 
+* multiply and assign: *= 
+* divide and assign: /= 
+* calculate modulo and assign: %= 
+* add and assign: += 
+* subtract and assign: -= 
+* bitshift left and assign: <<= 
+* bitshift right and assign: >>= 
+* bitwise AND and assign: &= 
+* bitwise XOR and assign: ^= 
+* bitwise OR and assign: @|=@ 
 
 An event is raised by the keyword _raise_ followed by the event name and if it is an interface event the name of the interface.
 
@@ -217,7 +205,6 @@ SText allows to define unique namespaces, which can be used to qualify reference
 
 bc.. 
 namespace trafficlights
-
 h4. interface scope
 
 Declarations in the interface scope are externally visible. They can be shared within the environment.
@@ -230,8 +217,6 @@ out event event3
 var variable1 : real
 entrypoint entry1
 exitpoint exit1
-
-
 h4. internal scope
 
 Declarations made in an internal scope are only visible for contained states.
@@ -245,7 +230,6 @@ local event localEvent3: localEvent || localEvent2 : 25
 operation localOperation (integer, integer): integer
 localEvent3 / raise NamedInterface.event3 :
 localOperation(valueOf(localEvent),NamedInterface.variable1);
-
 h3. Declarations
 
 Within scopes there can be declarations of Events, Variables, Operations, LocalReactions, EntryPoints and ExitPoints.
@@ -254,21 +238,17 @@ Within scopes there can be declarations of Events, Variables, Operations, LocalR
 
 h3. Events
 
-
-
 Within interface scope events have an direction. They can either be ingoing or outgoing:
 
 bc.. 
 interface NamedInterface:
 in event event1
 out event event2
-
 p. Within local scope events can carry variables:
 
 bc.. 
 internal:
 event localEvent1 : integer
-
 p. Local events can be derived from interface events or other local events and can have a value assignment:
 
 bc.. 
@@ -276,25 +256,20 @@ internal:
 event localEvent1: integer
 local event localEvent2 = NamedInterface.event1 || localEvent1
 local event localEvent3 = localEvent2 || 25
-
-
 h3. Variables
 
 Variables can have different visibilities. They can be visible for the environment:
 
 bc.. 
 var variable1: real
-
 p. Variables can be *readonly* (constants):
 
 bc.. 
 var readonly pi: real = 3.1415
-
 p. Variables can be referenced by the environment.
 
 bc.. 
 var external variable3: integer = 34
-
 h3. Actions
 
 Actions are key constructs in state machines to model behavior. The YAKINDU SCT 2 knows the following kinds of actions.
@@ -308,7 +283,6 @@ after 1s
 after 345mics
 after 4050ns
 after 1234ms
-
 h4. always
 
 The keyword always is used only for local reactions that are executed always.
@@ -344,13 +318,11 @@ Operations can have none, one or multiple parameters. The parameters are only de
 bc.. 
 operation localOperation (integer, integer):integer
 localEvent3/ raise NamedInterface3.event1
-
 h3. LocalReactions
 
 Local reactions describe the internal behavior of a state. So they have internal scope. A local reaction is  declared as follows:
 
 bc.. 
-
 LocalReaction: ReactionTrigger '/' ReactionEffect ('#' ReactionProperties)?
 
 ReactionTrigger: (Event ("," Event	)* 	(=> '[' Expression ']')?) | '[' Expression ']'					
@@ -360,39 +332,28 @@ ReactionEffect:  Statement (';' Statement )* (';')?
 Statement: Assignment | EventRaising | OperationCall
 
 ReactionProperties: (EntryPoint | ExitPoint)*
-
-
-  
-
 p. Within a local reaction an interface event can be raised:
 
 bc.. 
 internal:
 localEvent1 / raise NamedInterface.event3 : localOperation (valueOf(localEvent), NamedInterface.variable1);
-
-
 p. Local reactions can have priority values. These are defined by a following # and the integer number of priority:
 
 bc.. 
 localEvent2 / NamedInterface.variable2 += 3; #1
 localEvent3 / NamedInterface.variable4 += 2.0; #2
-
 h3. EntryPoints
 
 Every state chart has an entry point. An entry point can be declared like the following:
 
 bc.. 
 entrypoint entry1
-
 h3. ExitPoints
 
 Every state chart has an exit point. This exit point can be declared like the following.
 
 bc.. 
 exitpoint exit1
-
-
-
 h2. SGraph
 
 SGraph is the metamodel for the graphical part of the statechart editor. It owns all core elements of a state machine like states, pseudostates, transitons etc. but it describes how these elements shall be shown by the editor.
