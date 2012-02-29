@@ -57,20 +57,21 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 			IScope parentScope) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil
 				.getExistingAdapter(context, ContextElementAdapter.class);
-		Assert.isNotNull(provider);
-		parentScope = new FilteringScope(parentScope,
-				new Predicate<IEObjectDescription>() {
-					public boolean apply(IEObjectDescription input) {
-						if (input.getEClass() == StextPackage.Literals.EVENT_DEFINITION
-								|| input.getEClass() == StextPackage.Literals.VARIABLE_DEFINITION) {
-							URI sourceURI = input.getEObjectURI()
-									.trimFragment();
-							return sourceURI.equals(provider.getElement()
-									.eResource().getURI());
+		if (provider != null) {
+			parentScope = new FilteringScope(parentScope,
+					new Predicate<IEObjectDescription>() {
+						public boolean apply(IEObjectDescription input) {
+							if (input.getEClass() == StextPackage.Literals.EVENT_DEFINITION
+									|| input.getEClass() == StextPackage.Literals.VARIABLE_DEFINITION) {
+								URI sourceURI = input.getEObjectURI()
+										.trimFragment();
+								return sourceURI.equals(provider.getElement()
+										.eResource().getURI());
+							}
+							return true;
 						}
-						return true;
-					}
-				});
+					});
+		}
 		return parentScope;
 	}
 
