@@ -1,9 +1,9 @@
 @CHARSET "UTF-8";
+/* use this statement to integrate the stylesheet to all html filed manually :( 
+<link rel="stylesheet" type="text/css" href="../style.css"></link>
+*/
 
 
-body {
-font-family:Verdana;
-}
 
 li img {
 	display: block;
@@ -11,11 +11,33 @@ li img {
 	margin-bottom: 0.5ex;
 }
 
-table { 
- border: 1px solid #666666;
+code{ 
+ border: 1px solid #bbb;
+padding: 7px;
+margin-right:10px;
+margin-left:5px;
+display:block;
+color:#6d0479;
+
+}
+
+h2 {
+margin-top:85px;
+}
+
+h4 {
+margin-top:10px;
+}
+
+table {
+width: 80%;
+margin-left:5px;
+margin-right:10px;
 
 }
 
 td, th {
- padding: 3px;
+border : 1px solid #bbb;
+padding: 7px;
 }
+
