@@ -761,6 +761,16 @@
             </ElementType>
          </ViewId>
       </GlobalActionHandlerProvider>
+       <GlobalActionHandlerProvider class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider" id="ideActionHandlerProvider">
+         <Priority name="Lowest">
+         </Priority>
+         <ViewId id="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="bookmark">
+               </GlobalActionId>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
       </extension>
    
    <!-- context menu contribution -->
@@ -822,5 +832,7 @@
             priority="medium">
       </factory>
    </extension>
+   
+   
 
 </plugin>
