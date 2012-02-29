@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.model.stext.scoping;
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
