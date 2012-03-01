@@ -2,10 +2,71 @@ h1. Tasks
 
 h2. Modeling a statemachine
 
+# Make sure the YAKINDU Modeling perspective is active.
+# Create a new project.
+# Click *File* > *New* > *Other...* > *YAKINDU* > *YAKINDU Statechart Model*. 
+# Click *Next* name the sct file and click *Finish*
+# The YAKINDU statechart editor opens on the statechart model. It already has an initial state and an unnamed simple state connected by a transition.
+# Now you can add states and transitions from the palette.
+
+To edit the states and transitions you can use the properties view. It has an integrated Xtext support. This makes correct editing easier. You can also change the appearance of the model elements. 
+
+On the palette you will also find a composite submachine state. This is a state that contains a complete statemachine. You can choose an existing statemachine or create a new one.
+
+h3. Related topics
+
+"Xtext JFace Integration":http://127.0.0.1:50304/help/topic/org.yakindu.sct.doc.user/help/02_Getting_Started/getting_started.html?path=0_1_9#XJI
+"Statemachine Elements reference":http://127.0.0.1:50304/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=0_4_0#Statechartelements
+"SText Reference":http://127.0.0.1:50304/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=0_4_1#SText
+
+
 h2. Validating a statemachine
+
+The statemachine is validated automatically during build. The elements that cause problems get error markers. You can find the details about the problems on the problems view.
 
 h2. Simulating a statemachine
 
+The YAKINDU simulation engine supports simulation modes:
+
+* event driven
+* cycle based
+
+The default setting is _cycle based_ with a cycle period of 300 ms. In this mode the simulation engine processes the state machine transitions in steps of the given cycle duration. The following statechart illustrates this. It is simulated cycle based with a cycle period of 3 seconds.
+
+!images/cycleBasedVsEventDriven.png!
+
+What happend during simulation is the following:
+
+# After 3s *init* switches to *pre1*
+# After 3 further seconds recursive transition to *pre1* is processed (not after 2s the transition says)
+# After 3 further seconds recursive transition to *pre1* is processed again and the condition becomes *true* so *result* gets activated
+
+In contrast to cycle based the event driven simulation mode concentrates on the events of a state machine. The same state machine above could be simulated as follows:
+
+# Immediately *init* switches to *pre1*
+# Immediately the event *touch* is raised twice
+# The condition becomes true so that the *result* state is reached after 2 or 3 seconds instead of 9 
+
+Start a simulation with the different modes as follows
+
+# Make sure the YAKINDU Simulation Perspectiv is opened.
+# Start the simulation by clicking *Run* > *Run Configurations...*.
+# Select the statechart you want to simulate and the simulation mode.
+# *Apply* the setting and *Run* the simulation.
+
+!images/simulationRunConfiguration.png!
+
+"Simulation Concept":http://127.0.0.1:50051/help/topic/org.yakindu.sct.doc.user/help/03_Concepts/concepts.html?path=0_2_1#Simulation
+"Simulation perspective":http://127.0.0.1:50051/help/topic/org.yakindu.sct.doc.user/help/02_Getting_Started/getting_started.html?path=0_1_2#YakinduSCSimulationperspective
+"Simulation View":http://127.0.0.1:50051/help/topic/org.yakindu.sct.doc.user/help/02_Getting_Started/getting_started.html?path=0_1_6#SimulationView
+
+
 h2. Generating C code
 
+* creating project
+* modifying genmodel
+
 h2. Generating Java code
+
+* creating project
+* modifying genmodel

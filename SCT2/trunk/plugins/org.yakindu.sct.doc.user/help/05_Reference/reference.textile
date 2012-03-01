@@ -1,4 +1,4 @@
-h1. YAKINDU SCT 2Reference
+h1. YAKINDU SCT 2 Reference
 
 h2. State chart elements
 
