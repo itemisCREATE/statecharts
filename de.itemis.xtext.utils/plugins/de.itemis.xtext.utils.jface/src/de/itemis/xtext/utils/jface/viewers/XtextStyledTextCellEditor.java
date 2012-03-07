@@ -12,6 +12,8 @@
 package de.itemis.xtext.utils.jface.viewers;
 
 import org.eclipse.jface.bindings.keys.KeyStroke;
+import org.eclipse.jface.text.ITextListener;
+import org.eclipse.jface.text.TextEvent;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.viewers.CellEditor;
@@ -101,9 +103,19 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 		// configure content assist
 		final IContentAssistant contentAssistant = xtextAdapter
 				.getContentAssistant();
+
 		completionProposalAdapter = new CompletionProposalAdapter(styledText,
 				contentAssistant, KeyStroke.getInstance(SWT.CTRL, SWT.SPACE),
 				null);
+
+		// This listener notifies the modification, when text is selected via
+		// proposal. A ModifyEvent is not thrown by the StyledText in this case.
+		xtextAdapter.getXtextSourceviewer().addTextListener(
+				new ITextListener() {
+					public void textChanged(TextEvent event) {
+						editOccured(null);
+					}
+				});
 
 		if ((styledText.getStyle() & SWT.SINGLE) != 0) {
 			// The regular key down event is too late (after popup is closed
