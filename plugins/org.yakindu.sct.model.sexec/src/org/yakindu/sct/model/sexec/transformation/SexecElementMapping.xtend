@@ -56,6 +56,12 @@ import org.yakindu.sct.model.stext.stext.Operation
 import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sexec.ExecutionEntry
 import org.yakindu.sct.model.sgraph.EntryKind
+import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression
+import org.yakindu.sct.model.stext.stext.FeatureCall
+import org.yakindu.base.base.NamedElement
+import org.apache.commons.logging.LogFactory
+import org.apache.commons.logging.LogConfigurationException
+import org.yakindu.sct.model.stext.stext.OperationDefinition
  
 
 @Singleton class SexecElementMapping {
@@ -89,7 +95,7 @@ import org.yakindu.sct.model.sgraph.EntryKind
 	
 	def VariableDefinition create r : EcoreUtil::copy(v) create(VariableDefinition v) {}
 	
-	def Operation create r : EcoreUtil::copy(v) create(Operation v) {}
+	def OperationDefinition create r : EcoreUtil::copy(v) create(OperationDefinition v) {}
 	
 	
 	def ExecutionState create r : sexecFactory.createExecutionState create(RegularState state){
@@ -192,14 +198,27 @@ import org.yakindu.sct.model.sgraph.EntryKind
 	}
 
 	def dispatch Expression raised(RegularEventSpec e) {
-		val r = stext.factory.createElementReferenceExpression
-		r.value = (e.event as EventDefinition).create
+		val r = stext.factory.createTypedElementReferenceExpression
+//		val event = e.event
+//		val target = switch (event) {
+//			FeatureCall: event.feature
+//			TypedElementReferenceExpression: event.reference
+//		}
+//		r.reference = (target as EventDefinition).create
+		r.reference = e.resolveRegularEventSpec(e.eContainer)
 		return r
-	} 
+	} 	 
+	
+	def dispatch NamedElement resolveRegularEventSpec(Object o, Object context) { null }
+	def dispatch NamedElement resolveRegularEventSpec(RegularEventSpec re, Object context) { if ( re.event != null ) re.event.resolveRegularEventSpec(re) }
+	def dispatch NamedElement resolveRegularEventSpec(FeatureCall fc, Object context) { if (fc.feature != null) fc.feature.resolveRegularEventSpec(fc) }
+	def dispatch NamedElement resolveRegularEventSpec(TypedElementReferenceExpression ter, Object context) { if (ter.reference != null) ter.reference.resolveRegularEventSpec(ter) }
+	def dispatch NamedElement resolveRegularEventSpec(EventDefinition ed, Object context) { ed.create }
+	
 	
 	def dispatch Expression raised(TimeEventSpec e) {
-		val r = stext.factory.createElementReferenceExpression
-		r.value = e.createDerivedEvent
+		val r = stext.factory.createTypedElementReferenceExpression
+		r.reference = e.createDerivedEvent
 		return r
 	}
 

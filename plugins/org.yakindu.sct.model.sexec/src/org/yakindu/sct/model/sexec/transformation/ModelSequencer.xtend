@@ -75,6 +75,13 @@ import org.yakindu.sct.model.stext.stext.OperationCall
 import org.yakindu.sct.model.stext.stext.Operation
 import java.util.Set
 import java.util.Collection
+import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression
+import org.yakindu.base.base.NamedElement
+import org.apache.commons.logging.LogFactory
+import org.yakindu.sct.model.stext.stext.FeatureCall
+import org.apache.commons.logging.LogConfigurationException
+import org.yakindu.base.types.Feature
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class ModelSequencer {
 	 
@@ -148,29 +155,44 @@ class ModelSequencer {
 	
 	def retargetDeclRefs(ExecutionFlow flow) {
 		val allContent = EcoreUtil2::eAllContentsAsList(flow)
-		val declared = allContent.filter(e | e instanceof EventDefinition || e instanceof VariableDefinition || e instanceof Operation).toSet
+		val declared = allContent.filter(e | e instanceof EventDefinition || e instanceof VariableDefinition || e instanceof OperationDefinition).toSet
 		
-		allContent.filter(typeof(ElementReferenceExpression)).forEach( ere | ere.retarget(declared) )
-		allContent.filter(typeof(Assignment)).forEach( ere | ere.retarget(declared) )
-		allContent.filter(typeof(OperationCall)).forEach( call|call.retarget(declared))
+		allContent.filter(typeof(TypedElementReferenceExpression)).forEach( ere | ere.retarget(declared) )
+		allContent.filter(typeof(FeatureCall)).forEach( call|call.retarget(declared))
 	}
 	
 	
-	def retarget(ElementReferenceExpression ere, Collection<EObject> declared) {
-		if (! declared.contains(ere.value) ) ere.value = ere.value.replaced
+	def retarget(TypedElementReferenceExpression ere, Collection<EObject> declared) {
+		if (ere.reference != null && ! declared.contains(ere.reference) ) {
+			val r = ere.reference.replaced 
+			if (r != null) ere.reference = r
+		}
+	}
+
+	def retarget(FeatureCall call, Collection<EObject> declared) {
+		if (call.feature != null && ! declared.contains(call.feature) ) {
+			val r = call.feature.replaced 
+			if ( r != null ) call.feature = r as Feature	
+		}
 	}
 	
-	def retarget(Assignment assign, Collection<EObject> declared) {
-		if (! declared.contains(assign.varRef) ) assign.varRef = ((assign.varRef as VariableDefinition).replaced) as Variable
-	}
-	def retarget(OperationCall call, Collection<EObject> declared) {
-		if (! declared.contains(call.operation) ) call.operation = (call.operation.replaced) as Operation
+	
+	def dispatch Declaration replaced(NamedElement ne) {
+		try {
+			println("Replace with unknown NamedElement called: "+if (ne ==null) "null" else ne.name)
+			
+			LogFactory::getLog(typeof(ModelSequencer)).error("Replace with unknown NamedElement called: "+if (ne ==null) "null" else ne.name)
+		} catch (LogConfigurationException e) {
+			e.printStackTrace
+			println("Replace with unknown NamedElement called: "+if (ne ==null) "null" else ne.name)
+		}
+		null;
 	}
 	
 	def dispatch replaced(VariableDefinition vd) {
 		vd.create	
 	}
-	def dispatch replaced(Operation vd) {
+	def dispatch replaced(OperationDefinition vd) {
 		vd.create	
 	}
 	

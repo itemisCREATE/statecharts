@@ -122,8 +122,6 @@ class BehaviorMapping {
 		
 		if (seq.steps.size > 0) seq else null
 	}
-	
-
 
 	def Statement buildValueExpression(TimeEventSpec tes) {
 		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
