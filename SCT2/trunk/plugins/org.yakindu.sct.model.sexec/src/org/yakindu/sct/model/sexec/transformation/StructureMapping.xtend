@@ -21,6 +21,7 @@ import org.yakindu.sct.model.stext.stext.OperationCall
 import org.yakindu.sct.model.stext.stext.Operation
 import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sgraph.EntryKind
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class StructureMapping {
 	 
@@ -66,7 +67,7 @@ class StructureMapping {
 		val _v = v.create
 		return _v
 	}
-	def dispatch Declaration map(Operation v) {
+	def dispatch Declaration map(OperationDefinition v) {
 		val _v = v.create
 		return _v
 	}

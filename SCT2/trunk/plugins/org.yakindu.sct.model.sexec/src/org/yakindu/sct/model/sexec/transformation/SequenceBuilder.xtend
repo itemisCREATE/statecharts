@@ -379,8 +379,10 @@ class SequenceBuilder {
 	
 	def createInitialization(VariableDefinition vd) {
 		val execution = sexec.factory.createExecution
-		val assignment = stext.factory.createAssignment
-		assignment.varRef = vd
+		val assignment = stext.factory.createAssignmentExpression 
+		val reference = stext.factory.createTypedElementReferenceExpression
+		reference.reference = vd
+		assignment.varRef = reference
 		assignment.operator = AssignmentOperator::ASSIGN
 		assignment.expression = vd.initialValue.copy
 		execution.statement = assignment
