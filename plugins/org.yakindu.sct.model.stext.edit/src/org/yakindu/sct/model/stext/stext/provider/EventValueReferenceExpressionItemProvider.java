@@ -12,14 +12,18 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
+import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
@@ -61,32 +65,41 @@ public class EventValueReferenceExpressionItemProvider
     {
       super.getPropertyDescriptors(object);
 
-      addValuePropertyDescriptor(object);
     }
     return itemPropertyDescriptors;
   }
 
   /**
-   * This adds a property descriptor for the Value feature.
+   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+   * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+   * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected void addValuePropertyDescriptor(Object object)
+  @Override
+  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
   {
-    itemPropertyDescriptors.add
-      (createItemPropertyDescriptor
-        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-         getResourceLocator(),
-         getString("_UI_EventValueReferenceExpression_value_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_EventValueReferenceExpression_value_feature", "_UI_EventValueReferenceExpression_type"),
-         StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
-         true,
-         false,
-         true,
-         null,
-         null,
-         null));
+    if (childrenFeatures == null)
+    {
+      super.getChildrenFeatures(object);
+      childrenFeatures.add(StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE);
+    }
+    return childrenFeatures;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  protected EStructuralFeature getChildFeature(Object object, Object child)
+  {
+    // Check the type of the specified child object and return the proper feature to use for
+    // adding (see {@link AddCommand}) it as a child.
+
+    return super.getChildFeature(object, child);
   }
 
   /**
@@ -124,6 +137,13 @@ public class EventValueReferenceExpressionItemProvider
   public void notifyChanged(Notification notification)
   {
     updateChildren(notification);
+
+    switch (notification.getFeatureID(EventValueReferenceExpression.class))
+    {
+      case StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE:
+        fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+        return;
+    }
     super.notifyChanged(notification);
   }
 
@@ -138,6 +158,106 @@ public class EventValueReferenceExpressionItemProvider
   protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
   {
     super.collectNewChildDescriptors(newChildDescriptors, object);
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createEventRaisingExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createAssignmentExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createConditionalExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createLogicalOrExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createLogicalAndExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createLogicalNotExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createBitwiseXorExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createBitwiseOrExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createBitwiseAndExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createLogicalRelationExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createShiftExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createNumericalAddSubtractExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createNumericalUnaryExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createPrimitiveValueExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createFeatureCall()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
   }
 
 }

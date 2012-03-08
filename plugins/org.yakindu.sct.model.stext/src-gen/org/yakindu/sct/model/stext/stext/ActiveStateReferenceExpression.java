@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext;
 
-import org.yakindu.sct.model.sgraph.RegularState;
+import org.yakindu.sct.model.sgraph.State;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,12 +35,12 @@ public interface ActiveStateReferenceExpression extends Expression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' reference.
-   * @see #setValue(RegularState)
+   * @see #setValue(State)
    * @see org.yakindu.sct.model.stext.stext.StextPackage#getActiveStateReferenceExpression_Value()
    * @model
    * @generated
    */
-  RegularState getValue();
+  State getValue();
 
   /**
    * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression#getValue <em>Value</em>}' reference.
@@ -49,6 +50,6 @@ public interface ActiveStateReferenceExpression extends Expression
    * @see #getValue()
    * @generated
    */
-  void setValue(RegularState value);
+  void setValue(State value);
 
 } // ActiveStateReferenceExpression

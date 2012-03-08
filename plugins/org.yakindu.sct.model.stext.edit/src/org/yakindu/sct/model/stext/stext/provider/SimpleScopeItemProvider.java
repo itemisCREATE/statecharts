@@ -128,17 +128,17 @@ public class SimpleScopeItemProvider
     newChildDescriptors.add
       (createChildParameter
         (SGraphPackage.Literals.SCOPE__DECLARATIONS,
-         StextFactory.eINSTANCE.createLocalReaction()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPE__DECLARATIONS,
          StextFactory.eINSTANCE.createVariableDefinition()));
 
     newChildDescriptors.add
       (createChildParameter
         (SGraphPackage.Literals.SCOPE__DECLARATIONS,
-         StextFactory.eINSTANCE.createOperation()));
+         StextFactory.eINSTANCE.createOperationDefinition()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (SGraphPackage.Literals.SCOPE__DECLARATIONS,
+         StextFactory.eINSTANCE.createLocalReaction()));
 
     newChildDescriptors.add
       (createChildParameter

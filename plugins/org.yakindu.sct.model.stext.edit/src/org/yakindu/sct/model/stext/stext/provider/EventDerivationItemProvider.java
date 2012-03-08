@@ -172,17 +172,12 @@ public class EventDerivationItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.EVENT_DERIVATION__CONDITION,
-         StextFactory.eINSTANCE.createElementReferenceExpression()));
+         StextFactory.eINSTANCE.createEventRaisingExpression()));
 
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.EVENT_DERIVATION__CONDITION,
-         StextFactory.eINSTANCE.createEventValueReferenceExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_DERIVATION__CONDITION,
-         StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+         StextFactory.eINSTANCE.createAssignmentExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -252,7 +247,22 @@ public class EventDerivationItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.EVENT_DERIVATION__CONDITION,
-         StextFactory.eINSTANCE.createOperationCall()));
+         StextFactory.eINSTANCE.createFeatureCall()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_DERIVATION__CONDITION,
+         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_DERIVATION__CONDITION,
+         StextFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_DERIVATION__CONDITION,
+         StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -262,17 +272,12 @@ public class EventDerivationItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.EVENT_DERIVATION__VALUE,
-         StextFactory.eINSTANCE.createElementReferenceExpression()));
+         StextFactory.eINSTANCE.createEventRaisingExpression()));
 
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.EVENT_DERIVATION__VALUE,
-         StextFactory.eINSTANCE.createEventValueReferenceExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_DERIVATION__VALUE,
-         StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+         StextFactory.eINSTANCE.createAssignmentExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -342,7 +347,22 @@ public class EventDerivationItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.EVENT_DERIVATION__VALUE,
-         StextFactory.eINSTANCE.createOperationCall()));
+         StextFactory.eINSTANCE.createFeatureCall()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_DERIVATION__VALUE,
+         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_DERIVATION__VALUE,
+         StextFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_DERIVATION__VALUE,
+         StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
   }
 
   /**

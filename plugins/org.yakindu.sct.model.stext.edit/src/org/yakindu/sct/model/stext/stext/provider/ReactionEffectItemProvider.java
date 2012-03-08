@@ -24,8 +24,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.yakindu.sct.model.sgraph.SGraphFactory;
-
 import org.yakindu.sct.model.sgraph.provider.EffectItemProvider;
 
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
@@ -168,32 +166,17 @@ public class ReactionEffectItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
-         StextFactory.eINSTANCE.createAssignment()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
-         StextFactory.eINSTANCE.createEventRaising()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
          StextFactory.eINSTANCE.createExpression()));
 
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
-         StextFactory.eINSTANCE.createElementReferenceExpression()));
+         StextFactory.eINSTANCE.createEventRaisingExpression()));
 
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
-         StextFactory.eINSTANCE.createEventValueReferenceExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
-         StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+         StextFactory.eINSTANCE.createAssignmentExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -263,12 +246,22 @@ public class ReactionEffectItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
-         StextFactory.eINSTANCE.createOperationCall()));
+         StextFactory.eINSTANCE.createFeatureCall()));
 
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
-         SGraphFactory.eINSTANCE.createStatement()));
+         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
+         StextFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
+         StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
   }
 
   /**

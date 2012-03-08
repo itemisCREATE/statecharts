@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.util;
 
@@ -15,7 +16,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.base.NamedElement;
 
 import org.yakindu.base.types.Feature;
-import org.yakindu.base.types.Type;
+import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.Property;
 import org.yakindu.base.types.TypedElement;
 
 import org.yakindu.sct.model.sgraph.Declaration;
@@ -158,6 +160,16 @@ public class StextAdapterFactory extends AdapterFactoryImpl
         return createEventDerivationAdapter();
       }
       @Override
+      public Adapter caseVariableDefinition(VariableDefinition object)
+      {
+        return createVariableDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseOperationDefinition(OperationDefinition object)
+      {
+        return createOperationDefinitionAdapter();
+      }
+      @Override
       public Adapter caseLocalReaction(LocalReaction object)
       {
         return createLocalReactionAdapter();
@@ -233,34 +245,9 @@ public class StextAdapterFactory extends AdapterFactoryImpl
         return createDefaultEventAdapter();
       }
       @Override
-      public Adapter caseAssignment(Assignment object)
-      {
-        return createAssignmentAdapter();
-      }
-      @Override
-      public Adapter caseEventRaising(EventRaising object)
-      {
-        return createEventRaisingAdapter();
-      }
-      @Override
       public Adapter caseExpression(Expression object)
       {
         return createExpressionAdapter();
-      }
-      @Override
-      public Adapter caseElementReferenceExpression(ElementReferenceExpression object)
-      {
-        return createElementReferenceExpressionAdapter();
-      }
-      @Override
-      public Adapter caseEventValueReferenceExpression(EventValueReferenceExpression object)
-      {
-        return createEventValueReferenceExpressionAdapter();
-      }
-      @Override
-      public Adapter caseActiveStateReferenceExpression(ActiveStateReferenceExpression object)
-      {
-        return createActiveStateReferenceExpressionAdapter();
       }
       @Override
       public Adapter caseLiteral(Literal object)
@@ -288,19 +275,14 @@ public class StextAdapterFactory extends AdapterFactoryImpl
         return createHexLiteralAdapter();
       }
       @Override
+      public Adapter caseStringLiteral(StringLiteral object)
+      {
+        return createStringLiteralAdapter();
+      }
+      @Override
       public Adapter caseSimpleScope(SimpleScope object)
       {
         return createSimpleScopeAdapter();
-      }
-      @Override
-      public Adapter caseVariableDefinition(VariableDefinition object)
-      {
-        return createVariableDefinitionAdapter();
-      }
-      @Override
-      public Adapter caseOperation(Operation object)
-      {
-        return createOperationAdapter();
       }
       @Override
       public Adapter caseEntrypoint(Entrypoint object)
@@ -321,6 +303,16 @@ public class StextAdapterFactory extends AdapterFactoryImpl
       public Adapter caseReactionEffect(ReactionEffect object)
       {
         return createReactionEffectAdapter();
+      }
+      @Override
+      public Adapter caseEventRaisingExpression(EventRaisingExpression object)
+      {
+        return createEventRaisingExpressionAdapter();
+      }
+      @Override
+      public Adapter caseAssignmentExpression(AssignmentExpression object)
+      {
+        return createAssignmentExpressionAdapter();
       }
       @Override
       public Adapter caseConditionalExpression(ConditionalExpression object)
@@ -388,9 +380,24 @@ public class StextAdapterFactory extends AdapterFactoryImpl
         return createPrimitiveValueExpressionAdapter();
       }
       @Override
-      public Adapter caseOperationCall(OperationCall object)
+      public Adapter caseFeatureCall(FeatureCall object)
       {
-        return createOperationCallAdapter();
+        return createFeatureCallAdapter();
+      }
+      @Override
+      public Adapter caseTypedElementReferenceExpression(TypedElementReferenceExpression object)
+      {
+        return createTypedElementReferenceExpressionAdapter();
+      }
+      @Override
+      public Adapter caseEventValueReferenceExpression(EventValueReferenceExpression object)
+      {
+        return createEventValueReferenceExpressionAdapter();
+      }
+      @Override
+      public Adapter caseActiveStateReferenceExpression(ActiveStateReferenceExpression object)
+      {
+        return createActiveStateReferenceExpressionAdapter();
       }
       @Override
       public Adapter caseScope(Scope object)
@@ -401,11 +408,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
       public Adapter caseNamedElement(NamedElement object)
       {
         return createNamedElementAdapter();
-      }
-      @Override
-      public Adapter caseType(Type object)
-      {
-        return createTypeAdapter();
       }
       @Override
       public Adapter caseDeclaration(Declaration object)
@@ -433,6 +435,21 @@ public class StextAdapterFactory extends AdapterFactoryImpl
         return createTypes_EventAdapter();
       }
       @Override
+      public Adapter caseVariable(Variable object)
+      {
+        return createVariableAdapter();
+      }
+      @Override
+      public Adapter caseProperty(Property object)
+      {
+        return createPropertyAdapter();
+      }
+      @Override
+      public Adapter caseOperation(Operation object)
+      {
+        return createOperationAdapter();
+      }
+      @Override
       public Adapter caseReaction(Reaction object)
       {
         return createReactionAdapter();
@@ -441,11 +458,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
       public Adapter caseStatement(Statement object)
       {
         return createStatementAdapter();
-      }
-      @Override
-      public Adapter caseVariable(Variable object)
-      {
-        return createVariableAdapter();
       }
       @Override
       public Adapter caseTrigger(Trigger object)
@@ -670,6 +682,36 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEventDerivationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.VariableDefinition <em>Variable Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.VariableDefinition
+   * @generated
+   */
+  public Adapter createVariableDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.OperationDefinition <em>Operation Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.OperationDefinition
+   * @generated
+   */
+  public Adapter createOperationDefinitionAdapter()
   {
     return null;
   }
@@ -900,36 +942,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.Assignment <em>Assignment</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.Assignment
-   * @generated
-   */
-  public Adapter createAssignmentAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.EventRaising <em>Event Raising</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.EventRaising
-   * @generated
-   */
-  public Adapter createEventRaisingAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.Expression <em>Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -940,51 +952,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression <em>Element Reference Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.ElementReferenceExpression
-   * @generated
-   */
-  public Adapter createElementReferenceExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.EventValueReferenceExpression <em>Event Value Reference Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
-   * @generated
-   */
-  public Adapter createEventValueReferenceExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression <em>Active State Reference Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
-   * @generated
-   */
-  public Adapter createActiveStateReferenceExpressionAdapter()
   {
     return null;
   }
@@ -1065,6 +1032,21 @@ public class StextAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.StringLiteral <em>String Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.StringLiteral
+   * @generated
+   */
+  public Adapter createStringLiteralAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.SimpleScope <em>Simple Scope</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1075,36 +1057,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createSimpleScopeAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.VariableDefinition <em>Variable Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.VariableDefinition
-   * @generated
-   */
-  public Adapter createVariableDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.Operation <em>Operation</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.Operation
-   * @generated
-   */
-  public Adapter createOperationAdapter()
   {
     return null;
   }
@@ -1165,6 +1117,36 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createReactionEffectAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.EventRaisingExpression <em>Event Raising Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.EventRaisingExpression
+   * @generated
+   */
+  public Adapter createEventRaisingExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.AssignmentExpression <em>Assignment Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.AssignmentExpression
+   * @generated
+   */
+  public Adapter createAssignmentExpressionAdapter()
   {
     return null;
   }
@@ -1365,16 +1347,61 @@ public class StextAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.OperationCall <em>Operation Call</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.FeatureCall <em>Feature Call</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.OperationCall
+   * @see org.yakindu.sct.model.stext.stext.FeatureCall
    * @generated
    */
-  public Adapter createOperationCallAdapter()
+  public Adapter createFeatureCallAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression <em>Typed Element Reference Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression
+   * @generated
+   */
+  public Adapter createTypedElementReferenceExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.EventValueReferenceExpression <em>Event Value Reference Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
+   * @generated
+   */
+  public Adapter createEventValueReferenceExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression <em>Active State Reference Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
+   * @generated
+   */
+  public Adapter createActiveStateReferenceExpressionAdapter()
   {
     return null;
   }
@@ -1405,21 +1432,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createNamedElementAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Type <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.base.types.Type
-   * @generated
-   */
-  public Adapter createTypeAdapter()
   {
     return null;
   }
@@ -1500,6 +1512,51 @@ public class StextAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Variable <em>Variable</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.sgraph.Variable
+   * @generated
+   */
+  public Adapter createVariableAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Property <em>Property</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.base.types.Property
+   * @generated
+   */
+  public Adapter createPropertyAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Operation <em>Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.base.types.Operation
+   * @generated
+   */
+  public Adapter createOperationAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Reaction <em>Reaction</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1525,21 +1582,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createStatementAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Variable <em>Variable</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.sgraph.Variable
-   * @generated
-   */
-  public Adapter createVariableAdapter()
   {
     return null;
   }

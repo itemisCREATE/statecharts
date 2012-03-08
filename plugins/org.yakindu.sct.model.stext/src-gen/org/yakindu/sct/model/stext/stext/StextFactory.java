@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext;
 
@@ -143,6 +144,24 @@ public interface StextFactory extends EFactory
   EventDerivation createEventDerivation();
 
   /**
+   * Returns a new object of class '<em>Variable Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Variable Definition</em>'.
+   * @generated
+   */
+  VariableDefinition createVariableDefinition();
+
+  /**
+   * Returns a new object of class '<em>Operation Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Operation Definition</em>'.
+   * @generated
+   */
+  OperationDefinition createOperationDefinition();
+
+  /**
    * Returns a new object of class '<em>Local Reaction</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -278,24 +297,6 @@ public interface StextFactory extends EFactory
   DefaultEvent createDefaultEvent();
 
   /**
-   * Returns a new object of class '<em>Assignment</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Assignment</em>'.
-   * @generated
-   */
-  Assignment createAssignment();
-
-  /**
-   * Returns a new object of class '<em>Event Raising</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Event Raising</em>'.
-   * @generated
-   */
-  EventRaising createEventRaising();
-
-  /**
    * Returns a new object of class '<em>Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -303,33 +304,6 @@ public interface StextFactory extends EFactory
    * @generated
    */
   Expression createExpression();
-
-  /**
-   * Returns a new object of class '<em>Element Reference Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Element Reference Expression</em>'.
-   * @generated
-   */
-  ElementReferenceExpression createElementReferenceExpression();
-
-  /**
-   * Returns a new object of class '<em>Event Value Reference Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Event Value Reference Expression</em>'.
-   * @generated
-   */
-  EventValueReferenceExpression createEventValueReferenceExpression();
-
-  /**
-   * Returns a new object of class '<em>Active State Reference Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Active State Reference Expression</em>'.
-   * @generated
-   */
-  ActiveStateReferenceExpression createActiveStateReferenceExpression();
 
   /**
    * Returns a new object of class '<em>Literal</em>'.
@@ -377,6 +351,15 @@ public interface StextFactory extends EFactory
   HexLiteral createHexLiteral();
 
   /**
+   * Returns a new object of class '<em>String Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>String Literal</em>'.
+   * @generated
+   */
+  StringLiteral createStringLiteral();
+
+  /**
    * Returns a new object of class '<em>Simple Scope</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -384,24 +367,6 @@ public interface StextFactory extends EFactory
    * @generated
    */
   SimpleScope createSimpleScope();
-
-  /**
-   * Returns a new object of class '<em>Variable Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable Definition</em>'.
-   * @generated
-   */
-  VariableDefinition createVariableDefinition();
-
-  /**
-   * Returns a new object of class '<em>Operation</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Operation</em>'.
-   * @generated
-   */
-  Operation createOperation();
 
   /**
    * Returns a new object of class '<em>Entrypoint</em>'.
@@ -438,6 +403,24 @@ public interface StextFactory extends EFactory
    * @generated
    */
   ReactionEffect createReactionEffect();
+
+  /**
+   * Returns a new object of class '<em>Event Raising Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Event Raising Expression</em>'.
+   * @generated
+   */
+  EventRaisingExpression createEventRaisingExpression();
+
+  /**
+   * Returns a new object of class '<em>Assignment Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Assignment Expression</em>'.
+   * @generated
+   */
+  AssignmentExpression createAssignmentExpression();
 
   /**
    * Returns a new object of class '<em>Conditional Expression</em>'.
@@ -557,13 +540,40 @@ public interface StextFactory extends EFactory
   PrimitiveValueExpression createPrimitiveValueExpression();
 
   /**
-   * Returns a new object of class '<em>Operation Call</em>'.
+   * Returns a new object of class '<em>Feature Call</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Operation Call</em>'.
+   * @return a new object of class '<em>Feature Call</em>'.
    * @generated
    */
-  OperationCall createOperationCall();
+  FeatureCall createFeatureCall();
+
+  /**
+   * Returns a new object of class '<em>Typed Element Reference Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Typed Element Reference Expression</em>'.
+   * @generated
+   */
+  TypedElementReferenceExpression createTypedElementReferenceExpression();
+
+  /**
+   * Returns a new object of class '<em>Event Value Reference Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Event Value Reference Expression</em>'.
+   * @generated
+   */
+  EventValueReferenceExpression createEventValueReferenceExpression();
+
+  /**
+   * Returns a new object of class '<em>Active State Reference Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Active State Reference Expression</em>'.
+   * @generated
+   */
+  ActiveStateReferenceExpression createActiveStateReferenceExpression();
 
   /**
    * Returns the package supported by this factory.

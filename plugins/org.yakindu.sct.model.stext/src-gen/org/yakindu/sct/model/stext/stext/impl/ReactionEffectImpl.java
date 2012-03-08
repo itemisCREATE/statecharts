@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -17,10 +18,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.yakindu.sct.model.sgraph.Statement;
-
 import org.yakindu.sct.model.sgraph.impl.EffectImpl;
 
+import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -47,7 +47,7 @@ public class ReactionEffectImpl extends EffectImpl implements ReactionEffect
    * @generated
    * @ordered
    */
-  protected EList<Statement> actions;
+  protected EList<Expression> actions;
 
   /**
    * <!-- begin-user-doc -->
@@ -75,11 +75,11 @@ public class ReactionEffectImpl extends EffectImpl implements ReactionEffect
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Statement> getActions()
+  public EList<Expression> getActions()
   {
     if (actions == null)
     {
-      actions = new EObjectContainmentEList<Statement>(Statement.class, this, StextPackage.REACTION_EFFECT__ACTIONS);
+      actions = new EObjectContainmentEList<Expression>(Expression.class, this, StextPackage.REACTION_EFFECT__ACTIONS);
     }
     return actions;
   }
@@ -129,7 +129,7 @@ public class ReactionEffectImpl extends EffectImpl implements ReactionEffect
     {
       case StextPackage.REACTION_EFFECT__ACTIONS:
         getActions().clear();
-        getActions().addAll((Collection<? extends Statement>)newValue);
+        getActions().addAll((Collection<? extends Expression>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

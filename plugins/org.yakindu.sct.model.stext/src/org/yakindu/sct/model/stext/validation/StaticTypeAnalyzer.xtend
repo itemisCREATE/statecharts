@@ -40,7 +40,13 @@ import com.google.inject.Inject
 import org.eclipse.xtext.validation.ValidationMessageAcceptor
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.base.types.Type
-
+import org.yakindu.sct.model.stext.stext.EventRaisingExpression
+import org.yakindu.sct.model.stext.stext.AssignmentExpression
+import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression
+import org.yakindu.base.types.Feature
+import javax.lang.model.element.TypeElement
+import org.yakindu.sct.model.stext.stext.FeatureCall
+ 
 /**
  * 
  * The Static type analyzer checks an expression AST for type conformance
@@ -56,7 +62,7 @@ class StaticTypeAnalyzer {
 	}
 	
 	def isInteger(Type type){
-		return type != null && type.name =="integer";
+		return type != null && (type.name =="integer" || type.name =="int");
 	}
 	
 	def isReal(Type type){
@@ -64,43 +70,36 @@ class StaticTypeAnalyzer {
 	}
 // end TODO
 	
+	def dispatch check(Statement statement){
+		null
+	}
+	
 	/**
 	 * Check Variable assignments
 	 */
-	def dispatch check(Assignment assignment){
+	def dispatch check(AssignmentExpression assignment){
 		var valueType = assignment.expression.check
-		var ref = assignment.varRef
-		var type = (ref as VariableDefinition).getType()
-		if(isBoolean(type) && !(valueType == typeof(Boolean))){
+		var type = assignment.varRef.check
+		if(type == typeof(Boolean) && !(valueType == typeof(Boolean))){
 			error("Can not assign a value of type " + valueType.simpleName + " to a variable of type " + type)
 		}
-		else if(isInteger(type) && !(valueType == typeof(Number))){
+		else if(type == typeof(Number) && !(valueType == typeof(Number))){
 			error("Can not assign a value of type " + valueType.simpleName + " to a variable of type " + type)
 		}
-		else if(isReal(type) && !(valueType == typeof(Number))){
-			error("Can not assign a value of type " + valueType.simpleName + " to a variable of type " + type)
-		} 
 		return null 
 	}
-	
-	
-		
 	/**
 	 * Check Event value assignments
 	 */
-	def dispatch check(EventRaising eventRaising){
+	def dispatch check(EventRaisingExpression eventRaising){
 		var valueType = eventRaising.value.check
-		var ref = eventRaising.event
-		var type = (ref as EventDefinition).getType()
-		if(isBoolean(type) && !(valueType == typeof(Boolean))){
+		var type = eventRaising.event.check
+		if(type == typeof(Boolean) && !(valueType == typeof(Boolean))){
 			error("Can not assign a value of type " + valueType.simpleName + " to an event of type " + type)
 		}
-		else if (isInteger(type) && !(valueType == typeof(Number))){
+		else if (type == typeof(Number) && !(valueType == typeof(Number))){
 			error("Can not assign a value of type " + valueType.simpleName + " to an event of type " + type)
 		}
-		else if(isReal(type) && !(valueType == typeof(Number))){
-			error("Can not assign a value of type " + valueType.simpleName + " to an event  type " + type)
-		} 
 		return null 
 	}
 	
@@ -173,13 +172,26 @@ class StaticTypeAnalyzer {
 	def dispatch check(ConditionalExpression expression){
 		//TODO: Implement me
 	} 
-	def dispatch check(ElementReferenceExpression expression){
-		var declaration = expression.value
-		if(declaration instanceof VariableDefinition){
-			return (declaration as VariableDefinition).type.toJavaType
-		}
-		return null;
+	
+	def dispatch check(FeatureCall featureCall){
+		return featureCall.feature.type.toJavaType
 	}
+	
+	def dispatch check (TypedElementReferenceExpression expression){
+		var reference  = expression.reference
+		if(reference instanceof VariableDefinition){
+			return (reference as VariableDefinition).type.toJavaType
+		}
+		
+	}
+	
+//	def dispatch check(ElementReferenceExpression expression){
+//		var declaration = expression.value
+//		if(declaration instanceof VariableDefinition){
+//			return (declaration as VariableDefinition).type.toJavaType
+//		}
+//		return null;
+//	}
 	def dispatch check(EventValueReferenceExpression expression){
 		//TODO: Implement me
 	}

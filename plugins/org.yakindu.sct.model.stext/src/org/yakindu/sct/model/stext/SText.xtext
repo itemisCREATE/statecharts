@@ -45,40 +45,36 @@ TransitionSpecification:
 Defines different kinds of scopes that contain element definitions. Scopes are used for element definitions in statechart, regions, and state 
 */
 Scope returns sgraph::Scope:
-	(StateScope | StatechartScope);
+	(StateScope |StatechartScope);
+
 
 	// a SimpleScope is used for states and regions
 StateScope returns sgraph::Scope:
 	{SimpleScope} (declarations+=(LocalReaction | Entrypoint | Exitpoint))*;
 
-
-Type returns types::Type :  StatechartScope ;
-
 	// defines the poosible scopes for statecharts
-StatechartScope  :
+StatechartScope:
 	InterfaceScope | InternalScope;
 
+NamedInterfaceScope returns base::NamedElement:
+	InterfaceScope
+;
+
 InterfaceScope:
-	{InterfaceScope} 'interface' (name=ID)? ':' (declarations+=(EventDefinition | VariableDefinition | Entrypoint |
+	{InterfaceScope} 'interface' (name=ID)? ':' (declarations+=(EventDeclarartion | VariableDeclaration | OperationDeclaration | Entrypoint |
 	Exitpoint))*;
 
 InternalScope :
-	{InternalScope} 'internal' ':' (declarations+=(EventDefinition | VariableDefinition | Operation | LocalReaction))*;
+	{InternalScope} 'internal' ':' (declarations+=(EventDeclarartion | VariableDeclaration | OperationDeclaration | LocalReaction))*;
 
 	/* ---- declarations ----
 a definition is a top level element of a definition scope. */
 Declaration returns sgraph::Declaration:
-	EventDefinition | VariableDefinition | Operation | LocalReaction | Entrypoint | Exitpoint;
+	EventDeclarartion | VariableDeclaration | OperationDeclaration | LocalReaction | Entrypoint | Exitpoint;
 
-EventDeclarartion returns sgraph::Event: EventDefinition;
-
-	// DataElement: EventDefinition | VariableDefinition;
-
-EventFeature returns types::Event : EventDefinition ;
-//PropertyFeature returns types::Property : VariableDefinition ;
-//OperationFeature returns types::Operation : Operation ;
-  
 /* ---- event definition ---- */
+EventDeclarartion returns sgraph::Event: EventDefinition;
+EventFeature returns types::Event : EventDefinition;
 EventDefinition:
 	 (direction=Direction)? 'event' name=ID (':' type=[types::Type|FQN])? (derivation=EventDerivation)?;
 
@@ -89,13 +85,18 @@ enum Direction:
 	LOCAL='local' | IN='in' | OUT='out';
 
 /* ---- variable definition ---- */
-VariableDefinition returns sgraph::Variable:
+VariableDeclaration returns sgraph::Variable:VariableDefinition;
+VariableFeature returns types::Property: VariableDefinition ;
+
+VariableDefinition:
 	{VariableDefinition} 'var' ((readonly?='readonly')? & (external?='external')?) name=ID ':' type=[types::Type|FQN] ('='
 	initialValue=Expression)?;
 
 /* ---- operation definition ---- */
-Operation returns sgraph::Declaration:
-	{Operation} 'operation' name=ID '(' (paramTypes+=[types::Type|FQN] (',' paramTypes+=[types::Type|FQN])*)? ')' (':' type=[types::Type|FQN])?;
+OperationDeclaration returns sgraph::Declaration: OperationDefinition;
+OperationFeature returns types::Operation: OperationDefinition;
+OperationDefinition:
+	{OperationDefinition} 'operation' name=ID '(' (paramTypes+=[types::Type|FQN] (',' paramTypes+=[types::Type|FQN])*)? ')' (':' type=[types::Type|FQN])?;
 
 /* ---- entrypoint definition ---- */
 Entrypoint returns sgraph::Declaration:
@@ -116,7 +117,7 @@ Reaction returns sgraph::Reaction:
 	LocalReaction | TransitionReaction;
 
 LocalReaction:
-	(trigger=ReactionTrigger) ('/' effect=ReactionEffect) ('#' properties=ReactionProperties)?;
+	(trigger=ReactionTrigger) =>('/' effect=ReactionEffect) ('#' properties=ReactionProperties)?;
 
 TransitionReaction:
 	{TransitionReaction} (trigger=ReactionTrigger)? ('/' effect=ReactionEffect)? ('#' properties=ReactionProperties)?;
@@ -126,7 +127,7 @@ ReactionTrigger returns sgraph::Trigger:
 	| ('[' guardExpression=Expression ']'));
 
 ReactionEffect returns sgraph::Effect:
-	{ReactionEffect} actions+=Statement (';' actions+=Statement )* (';')?;
+	{ReactionEffect} actions+=(Expression | EventRaisingExpression) (=> ';' actions+=(Expression|EventRaisingExpression) )* ; // (';')?;
 
 ReactionProperties:
 	{ReactionProperties} (properties+=ReactionProperty)*;
@@ -144,7 +145,7 @@ EventSpec:
 	RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
 
 RegularEventSpec:
-	event=[sgraph::Event|FQN];
+	event=FeatureCall;
 
 	// TODO: redefine after trigger - we need to use it with clocks
 TimeEventSpec:
@@ -173,37 +174,25 @@ DefaultEvent:
 	{DefaultEvent} ('default' | 'else')
 ;
 
-/* --- statements --- */
-Statement returns sgraph::Statement:
-	Assignment | EventRaising | OperationCall; 
-
-Assignment:
-	varRef=[sgraph::Variable|FQN] operator=AssignmentOperator expression=Expression;
-
-enum AssignmentOperator:
-	assign='='
-	| multAssign='*='
-	| divAssign='/='
-	| modAssign='%='
-	| addAssign='+='
-	| subAssign='-='
-	| leftShiftAssign='<<='
-	| rightShiftAssign='>>='
-	| andAssign='&='
-	| xorAssign='^='
-	| orAssign='|=';
-
-EventRaising:
-	'raise' event=[sgraph::Event|FQN] (':' value=Expression)?;
-
-	//****************
+//****************
 // Expression Grammar
 //****************
-//ExpressionRule:
-//	expression=(LogicalOrExpression | RaiseEventExpression);
-Expression returns Expression:
-	ConditionalExpression;
 
+EventRaisingExpression returns Expression:
+	{EventRaisingExpression}'raise' event=FeatureCall  (':' value=Expression)?
+;	
+
+StatementExpression returns sgraph::Statement:
+	Expression
+;
+Expression:
+	 AssignmentExpression
+;
+
+AssignmentExpression returns Expression:
+	ConditionalExpression ({AssignmentExpression.varRef=current} operator=AssignmentOperator expression=ConditionalExpression)*
+;
+ 
 ConditionalExpression returns Expression:
 	LogicalOrExpression ({ConditionalExpression.condition=current} '?' trueCase=LogicalOrExpression ':'
 	falseCase=LogicalOrExpression)?;
@@ -238,10 +227,6 @@ ShiftExpression returns Expression:
 	NumericalAddSubtractExpression ({ShiftExpression.leftOperand=current} operator=ShiftOperator
 	rightOperand=NumericalAddSubtractExpression)*;
 
-enum ShiftOperator:
-	left='<<'
-	| right='>>';
-
 NumericalAddSubtractExpression returns Expression:
 	NumericalMultiplyDivideExpression
 	({NumericalAddSubtractExpression.leftOperand=current}
@@ -258,8 +243,72 @@ NumericalUnaryExpression returns Expression:
 	PrimaryExpression | {NumericalUnaryExpression}
 	operator=UnaryOperator operand=PrimaryExpression;
 
+
 PrimaryExpression returns Expression:
-	ValueExpression | '(' Expression ')' | OperationCall;
+	PrimitiveValueExpression 
+	| FeatureCall 
+	| ActiveStateReferenceExpression 
+	| EventValueReferenceExpression  | '(' Expression ')'; 
+
+PrimitiveValueExpression returns Expression:
+	{PrimitiveValueExpression} value=Literal;
+
+FeatureCall returns Expression:
+	 TypedElementReferenceExpression  ({FeatureCall.owner=current} '.' feature=[types::Feature]
+	 	 (	=>operationCall?='(' 
+				(
+				    (args+=Expression (',' args+=Expression)*)?
+				)? 
+			')')?
+	 )*
+;
+
+TypedElementReferenceExpression returns Expression:
+	{TypedElementReferenceExpression} reference=[base::NamedElement|ID]
+;
+
+EventValueReferenceExpression returns Expression:
+	{EventValueReferenceExpression} 'valueof'  '(' value=FeatureCall ')';
+
+ActiveStateReferenceExpression returns Expression:
+	{ActiveStateReferenceExpression} 'active' '(' value=[sgraph::State|FQN] ')';
+	
+
+Literal:
+	BoolLiteral | IntLiteral | HexLiteral | RealLiteral | StringLiteral;
+
+BoolLiteral:
+	{BoolLiteral} value=BOOL;
+
+IntLiteral:
+	{IntLiteral} value=INT;
+
+RealLiteral:
+	{RealLiteral} value=FLOAT;
+
+HexLiteral:
+	{HexLiteral} value=HEX;
+
+StringLiteral:
+	{StringLiteral} value=STRING
+;	
+
+enum AssignmentOperator:
+	assign='='
+	| multAssign='*='
+	| divAssign='/='
+	| modAssign='%='
+	| addAssign='+='
+	| subAssign='-='
+	| leftShiftAssign='<<='
+	| rightShiftAssign='>>='
+	| andAssign='&='
+	| xorAssign='^='
+	| orAssign='|=';
+	
+enum ShiftOperator:
+	left='<<'
+	| right='>>';
 
 enum AdditiveOperator:
 	plus='+' | minus='-';
@@ -277,41 +326,8 @@ enum RelationalOperator:
 enum TimeUnit:
 	second='s'
 	| millisecond='ms'
-	| microsecond = 'mics'
+	| microsecond = 'us'
 	| nanosecond='ns';
-
-ValueExpression returns Expression:
-	PrimitiveValueExpression | ElementReferenceExpression | ActiveStateReferenceExpression | EventValueReferenceExpression;
-
-PrimitiveValueExpression returns Expression:
-	{PrimitiveValueExpression} value=Literal;
-
-ElementReferenceExpression:
-	{ElementReferenceExpression} value=[sgraph::Declaration|FQN];
-
-EventValueReferenceExpression:
-	{EventValueReferenceExpression} 'valueof' '(' value=[sgraph::Event|FQN] ')';
-
-ActiveStateReferenceExpression:
-	{ActiveStateReferenceExpression} 'active' '(' value=[sgraph::RegularState|FQN] ')';
-
-OperationCall returns Expression:
-	{OperationCall} operation=[Operation|FQN] '(' (args+=Expression (',' args+=Expression)*)? ')';
-
-Literal:
-	BoolLiteral | IntLiteral | HexLiteral | RealLiteral;
-
-BoolLiteral:
-	{BoolLiteral} value=BOOL;
-
-IntLiteral:
-	{IntLiteral} value=INT;
-
-RealLiteral:
-	{RealLiteral} value=FLOAT;
-
-HexLiteral:
-	{HexLiteral} value=HEX;
 
 terminal BOOL returns ecore::EBoolean:
 	'true' | 'false' | 'yes' | 'no';
@@ -321,5 +337,6 @@ terminal HEX returns ecore::EInt:
 
 terminal FLOAT returns ecore::EFloat:
 	(INT '.' INT) ('e' ('-' | '+') INT)? ('f' | 'F' | 'd' | 'D')?;
+	
 
 

@@ -169,17 +169,12 @@ public class LogicalOrExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.LOGICAL_OR_EXPRESSION__LEFT_OPERAND,
-         StextFactory.eINSTANCE.createElementReferenceExpression()));
+         StextFactory.eINSTANCE.createEventRaisingExpression()));
 
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.LOGICAL_OR_EXPRESSION__LEFT_OPERAND,
-         StextFactory.eINSTANCE.createEventValueReferenceExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.LOGICAL_OR_EXPRESSION__LEFT_OPERAND,
-         StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+         StextFactory.eINSTANCE.createAssignmentExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -249,7 +244,22 @@ public class LogicalOrExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.LOGICAL_OR_EXPRESSION__LEFT_OPERAND,
-         StextFactory.eINSTANCE.createOperationCall()));
+         StextFactory.eINSTANCE.createFeatureCall()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.LOGICAL_OR_EXPRESSION__LEFT_OPERAND,
+         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.LOGICAL_OR_EXPRESSION__LEFT_OPERAND,
+         StextFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.LOGICAL_OR_EXPRESSION__LEFT_OPERAND,
+         StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -259,17 +269,12 @@ public class LogicalOrExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND,
-         StextFactory.eINSTANCE.createElementReferenceExpression()));
+         StextFactory.eINSTANCE.createEventRaisingExpression()));
 
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND,
-         StextFactory.eINSTANCE.createEventValueReferenceExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND,
-         StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+         StextFactory.eINSTANCE.createAssignmentExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -339,7 +344,22 @@ public class LogicalOrExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND,
-         StextFactory.eINSTANCE.createOperationCall()));
+         StextFactory.eINSTANCE.createFeatureCall()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND,
+         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND,
+         StextFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND,
+         StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
   }
 
   /**

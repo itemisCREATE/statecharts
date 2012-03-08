@@ -2,13 +2,13 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.yakindu.sct.model.sgraph.Effect;
-import org.yakindu.sct.model.sgraph.Statement;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +30,7 @@ public interface ReactionEffect extends Effect
 {
   /**
    * Returns the value of the '<em><b>Actions</b></em>' containment reference list.
-   * The list contents are of type {@link org.yakindu.sct.model.sgraph.Statement}.
+   * The list contents are of type {@link org.yakindu.sct.model.stext.stext.Expression}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Actions</em>' containment reference list isn't clear,
@@ -42,6 +42,6 @@ public interface ReactionEffect extends Effect
    * @model containment="true"
    * @generated
    */
-  EList<Statement> getActions();
+  EList<Expression> getActions();
 
 } // ReactionEffect

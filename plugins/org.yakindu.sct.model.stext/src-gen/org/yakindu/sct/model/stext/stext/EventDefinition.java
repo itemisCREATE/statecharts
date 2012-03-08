@@ -2,10 +2,10 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext;
 
-import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Event;
 
 /**
@@ -25,7 +25,7 @@ import org.yakindu.sct.model.sgraph.Event;
  * @model
  * @generated
  */
-public interface EventDefinition extends Declaration, Event, org.yakindu.base.types.Event
+public interface EventDefinition extends Event, org.yakindu.base.types.Event
 {
   /**
    * Returns the value of the '<em><b>Direction</b></em>' attribute.

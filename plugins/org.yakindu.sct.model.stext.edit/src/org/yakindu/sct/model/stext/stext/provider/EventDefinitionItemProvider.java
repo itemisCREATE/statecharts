@@ -28,7 +28,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.yakindu.base.types.TypesPackage;
 
-import org.yakindu.sct.model.sgraph.provider.DeclarationItemProvider;
+import org.yakindu.sct.model.sgraph.provider.EventItemProvider;
 
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.StextFactory;
@@ -41,7 +41,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * @generated
  */
 public class EventDefinitionItemProvider
-  extends DeclarationItemProvider
+  extends EventItemProvider
   implements
     IEditingDomainItemProvider,
     IStructuredItemContentProvider,

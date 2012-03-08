@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext;
 
@@ -50,7 +51,7 @@ public enum TimeUnit implements Enumerator
    * @generated
    * @ordered
    */
-  MICROSECOND(2, "microsecond", "mics"),
+  MICROSECOND(2, "microsecond", "us"),
 
   /**
    * The '<em><b>Nanosecond</b></em>' literal object.
@@ -101,7 +102,7 @@ public enum TimeUnit implements Enumerator
    * </p>
    * <!-- end-user-doc -->
    * @see #MICROSECOND
-   * @model name="microsecond" literal="mics"
+   * @model name="microsecond" literal="us"
    * @generated
    * @ordered
    */

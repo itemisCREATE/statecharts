@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -12,7 +13,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.yakindu.sct.model.sgraph.RegularState;
+import org.yakindu.sct.model.sgraph.State;
 
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -40,7 +41,7 @@ public class ActiveStateReferenceExpressionImpl extends ExpressionImpl implement
    * @generated
    * @ordered
    */
-  protected RegularState value;
+  protected State value;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,12 +69,12 @@ public class ActiveStateReferenceExpressionImpl extends ExpressionImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public RegularState getValue()
+  public State getValue()
   {
     if (value != null && value.eIsProxy())
     {
       InternalEObject oldValue = (InternalEObject)value;
-      value = (RegularState)eResolveProxy(oldValue);
+      value = (State)eResolveProxy(oldValue);
       if (value != oldValue)
       {
         if (eNotificationRequired())
@@ -88,7 +89,7 @@ public class ActiveStateReferenceExpressionImpl extends ExpressionImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public RegularState basicGetValue()
+  public State basicGetValue()
   {
     return value;
   }
@@ -98,9 +99,9 @@ public class ActiveStateReferenceExpressionImpl extends ExpressionImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(RegularState newValue)
+  public void setValue(State newValue)
   {
-    RegularState oldValue = value;
+    State oldValue = value;
     value = newValue;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE, oldValue, value));
@@ -134,7 +135,7 @@ public class ActiveStateReferenceExpressionImpl extends ExpressionImpl implement
     switch (featureID)
     {
       case StextPackage.ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE:
-        setValue((RegularState)newValue);
+        setValue((State)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -151,7 +152,7 @@ public class ActiveStateReferenceExpressionImpl extends ExpressionImpl implement
     switch (featureID)
     {
       case StextPackage.ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE:
-        setValue((RegularState)null);
+        setValue((State)null);
         return;
     }
     super.eUnset(featureID);

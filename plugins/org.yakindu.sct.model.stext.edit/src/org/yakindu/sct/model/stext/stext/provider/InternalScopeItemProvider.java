@@ -19,12 +19,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.yakindu.base.types.TypesPackage;
-
-import org.yakindu.sct.model.sgraph.SGraphPackage;
-
-import org.yakindu.sct.model.stext.stext.InternalScope;
-
 /**
  * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.InternalScope} object.
  * <!-- begin-user-doc -->
@@ -89,10 +83,7 @@ public class InternalScopeItemProvider
   @Override
   public String getText(Object object)
   {
-    String label = ((InternalScope)object).getName();
-    return label == null || label.length() == 0 ?
-      getString("_UI_InternalScope_type") :
-      getString("_UI_InternalScope_type") + " " + label;
+    return getString("_UI_InternalScope_type");
   }
 
   /**
@@ -120,31 +111,6 @@ public class InternalScopeItemProvider
   protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
   {
     super.collectNewChildDescriptors(newChildDescriptors, object);
-  }
-
-  /**
-   * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection)
-  {
-    Object childFeature = feature;
-    Object childObject = child;
-
-    boolean qualify =
-      childFeature == SGraphPackage.Literals.SCOPE__DECLARATIONS ||
-      childFeature == TypesPackage.Literals.TYPE__FEATURES;
-
-    if (qualify)
-    {
-      return getString
-        ("_UI_CreateChild_text2",
-         new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-    }
-    return super.getCreateChildText(owner, feature, child, selection);
   }
 
 }
