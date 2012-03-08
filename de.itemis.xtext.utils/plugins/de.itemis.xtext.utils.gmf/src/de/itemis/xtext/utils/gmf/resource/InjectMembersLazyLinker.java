@@ -45,21 +45,20 @@ public class InjectMembersLazyLinker extends Linker implements
 	@Override
 	protected void ensureModelLinked(EObject model,
 			final IDiagnosticProducer producer) {
-		ensureLinked(model, producer);
-		// The default implementation checks the whole eAllContents. We only
-		// want to check the cross references for all successors that do not
-		// have a parent with an inject annotation. Theses successors are linked
-		// afterwards. If we would not override this method here, we would have
-		// multiple problem markers in the diagram for broken references.
+		// The order of link resolution have to be changed here.
+		// The FeatureCall is a container of the TypedElementReference,
+		// but the child have to be resolved to determine the correct
+		// for the FeatureCall
 		List<EObject> contents = model.eContents();
 		for (EObject current : contents) {
 			EAnnotation eAnnotation = current.eClass().getEAnnotation(
 					INJECT_MEMBERS);
 			if (eAnnotation == null) {
-				ensureLinked(current, producer);
 				ensureModelLinked(current, producer);
+				ensureLinked(current, producer);
 			}
 		}
+		ensureLinked(model, producer);
 	}
 
 }
