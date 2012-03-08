@@ -11,24 +11,23 @@
 package org.yakindu.sct.model.sexec.interpreter.test;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
 
 import org.junit.Test;
 
 public class STextInterpreterTest extends AbstractSTextTest {
 
-	@Test
-	public void testRaise() {
-		executeWithDefaultScope("raise abc");
-		assertTrue(getContext().getRaisedEvents().size() == 1);
-	}
-
-	@Test
-	public void testRaiseWithValue() {
-		executeWithDefaultScope("raise abc:42");
-		assertTrue(getContext().getRaisedEvents().size() == 1);
-		assertEquals(42, getContext().getRaisedEvents().get(0).getValue());
-	}
+//	@Test
+//	public void testRaise() {
+//		executeWithDefaultScope("raise abc");
+//		assertTrue(getContext().getRaisedEvents().size() == 1);
+//	}
+//
+//	@Test
+//	public void testRaiseWithValue() {
+//		executeWithDefaultScope("raise abc:42");
+//		assertTrue(getContext().getRaisedEvents().size() == 1);
+//		assertEquals(42, getContext().getRaisedEvents().get(0).getValue());
+//	}
 
 //	@Test
 //	public void testProcedureCall() {

@@ -124,16 +124,16 @@ public class AbstractSTextTest {
 	}
 
 	protected Object executeWithDefaultScope(String expression) {
-		Scope defaultScope = createContextScope("internal: event abc : integer operation foo() var myInt : integer var myBool : boolean var myFloat : real");
-		Statement statement = (Statement) parseExpression(expression,
-				defaultScope, Statement.class.getSimpleName());
+		Scope defaultScope = createContextScope("internal: in event abc : integer operation foo() var myInt : integer var myBool : boolean var myFloat : real");
+		Expression statement = (Expression) parseExpression(expression,
+				defaultScope, Expression.class.getSimpleName());
 		return interpreter.evaluateStatement(statement, context);
 	}
 
 	protected Object execute(String scope, String expression) {
 		Scope defaultScope = createContextScope(scope);
-		Statement statement = (Statement) parseExpression(expression,
-				defaultScope, Statement.class.getSimpleName());
+		Expression statement = (Expression) parseExpression(expression,
+				defaultScope, Expression.class.getSimpleName());
 		return interpreter.evaluateStatement(statement, context);
 	}
 	
