@@ -82,6 +82,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	IStatementInterpreter interpreter
 	@Inject
 	IExecutionContext executionContext
+	BufferingExecutionContext externalExecutionContext
 	@Inject
 	StextNameProvider provider
 	@Inject 
@@ -109,6 +110,8 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		
 		brc = SexecFactory::eINSTANCE.createTraceBeginRunCycle
 		erc = SexecFactory::eINSTANCE.createTraceEndRunCycle
+		
+		externalExecutionContext = new BufferingExecutionContext(executionContext)
 	}
 	
 	override tearDown(){
@@ -120,7 +123,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	}
 	
 	override getExecutionContext(){
-		return executionContext
+		return externalExecutionContext
 	}
 	
 	def dispatch declareContents(InternalScope scope) {
@@ -142,6 +145,8 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	}
 	
 	override runCycle() {
+		
+		externalExecutionContext.flush
 		
 		nextSVIdx = 0; // this is a member that can be manipulated during state reactions in case of orthogonality
 		
