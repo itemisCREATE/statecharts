@@ -183,6 +183,11 @@ public class PrimitiveValueExpressionItemProvider
       (createChildParameter
         (StextPackage.Literals.PRIMITIVE_VALUE_EXPRESSION__VALUE,
          StextFactory.eINSTANCE.createHexLiteral()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.PRIMITIVE_VALUE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createStringLiteral()));
   }
 
 }

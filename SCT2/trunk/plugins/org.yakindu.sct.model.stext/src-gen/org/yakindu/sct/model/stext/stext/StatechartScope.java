@@ -2,10 +2,9 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext;
-
-import org.yakindu.base.types.Type;
 
 import org.yakindu.sct.model.sgraph.Scope;
 
@@ -19,6 +18,6 @@ import org.yakindu.sct.model.sgraph.Scope;
  * @model
  * @generated
  */
-public interface StatechartScope extends Scope, Type
+public interface StatechartScope extends Scope
 {
 } // StatechartScope

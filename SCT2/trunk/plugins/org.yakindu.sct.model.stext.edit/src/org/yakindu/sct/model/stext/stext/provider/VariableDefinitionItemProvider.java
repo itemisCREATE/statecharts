@@ -26,6 +26,8 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import org.yakindu.base.types.TypesPackage;
+
 import org.yakindu.sct.model.sgraph.provider.VariableItemProvider;
 
 import org.yakindu.sct.model.stext.stext.StextFactory;
@@ -71,11 +73,34 @@ public class VariableDefinitionItemProvider
     {
       super.getPropertyDescriptors(object);
 
+      addTypePropertyDescriptor(object);
       addReadonlyPropertyDescriptor(object);
       addExternalPropertyDescriptor(object);
-      addTypePropertyDescriptor(object);
     }
     return itemPropertyDescriptors;
+  }
+
+  /**
+   * This adds a property descriptor for the Type feature.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected void addTypePropertyDescriptor(Object object)
+  {
+    itemPropertyDescriptors.add
+      (createItemPropertyDescriptor
+        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+         getResourceLocator(),
+         getString("_UI_TypedElement_type_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_TypedElement_type_feature", "_UI_TypedElement_type"),
+         TypesPackage.Literals.TYPED_ELEMENT__TYPE,
+         true,
+         false,
+         true,
+         null,
+         null,
+         null));
   }
 
   /**
@@ -120,29 +145,6 @@ public class VariableDefinitionItemProvider
          false,
          false,
          ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-         null,
-         null));
-  }
-
-  /**
-   * This adds a property descriptor for the Type feature.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected void addTypePropertyDescriptor(Object object)
-  {
-    itemPropertyDescriptors.add
-      (createItemPropertyDescriptor
-        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-         getResourceLocator(),
-         getString("_UI_VariableDefinition_type_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_VariableDefinition_type_feature", "_UI_VariableDefinition_type"),
-         StextPackage.Literals.VARIABLE_DEFINITION__TYPE,
-         true,
-         false,
-         true,
-         null,
          null,
          null));
   }
@@ -252,17 +254,12 @@ public class VariableDefinitionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createElementReferenceExpression()));
+         StextFactory.eINSTANCE.createEventRaisingExpression()));
 
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createEventValueReferenceExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+         StextFactory.eINSTANCE.createAssignmentExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -332,7 +329,22 @@ public class VariableDefinitionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createOperationCall()));
+         StextFactory.eINSTANCE.createFeatureCall()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         StextFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
   }
 
   /**

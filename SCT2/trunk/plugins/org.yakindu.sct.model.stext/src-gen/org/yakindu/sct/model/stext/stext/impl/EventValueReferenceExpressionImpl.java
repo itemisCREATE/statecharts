@@ -2,19 +2,20 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.yakindu.sct.model.sgraph.Event;
-
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
+import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
@@ -33,14 +34,14 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class EventValueReferenceExpressionImpl extends ExpressionImpl implements EventValueReferenceExpression
 {
   /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
+   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getValue()
    * @generated
    * @ordered
    */
-  protected Event value;
+  protected Expression value;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,27 +69,7 @@ public class EventValueReferenceExpressionImpl extends ExpressionImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public Event getValue()
-  {
-    if (value != null && value.eIsProxy())
-    {
-      InternalEObject oldValue = (InternalEObject)value;
-      value = (Event)eResolveProxy(oldValue);
-      if (value != oldValue)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, oldValue, value));
-      }
-    }
-    return value;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Event basicGetValue()
+  public Expression getValue()
   {
     return value;
   }
@@ -98,12 +79,53 @@ public class EventValueReferenceExpressionImpl extends ExpressionImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(Event newValue)
+  public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs)
   {
-    Event oldValue = value;
+    Expression oldValue = value;
     value = newValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, oldValue, value));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, oldValue, newValue);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setValue(Expression newValue)
+  {
+    if (newValue != value)
+    {
+      NotificationChain msgs = null;
+      if (value != null)
+        msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, null, msgs);
+      if (newValue != null)
+        msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, null, msgs);
+      msgs = basicSetValue(newValue, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, newValue, newValue));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE:
+        return basicSetValue(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -117,8 +139,7 @@ public class EventValueReferenceExpressionImpl extends ExpressionImpl implements
     switch (featureID)
     {
       case StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE:
-        if (resolve) return getValue();
-        return basicGetValue();
+        return getValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -134,7 +155,7 @@ public class EventValueReferenceExpressionImpl extends ExpressionImpl implements
     switch (featureID)
     {
       case StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE:
-        setValue((Event)newValue);
+        setValue((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -151,7 +172,7 @@ public class EventValueReferenceExpressionImpl extends ExpressionImpl implements
     switch (featureID)
     {
       case StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE:
-        setValue((Event)null);
+        setValue((Expression)null);
         return;
     }
     super.eUnset(featureID);

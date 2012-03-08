@@ -123,7 +123,6 @@ T__77=77
 '!'=78
 '|'=80
 'ms'=47
-'mics'=48
 'every'=20
 '|='=31
 '@@statechart@@'=50
@@ -139,6 +138,7 @@ T__77=77
 'operation'=59
 'after'=19
 'entrypoint'=63
+'us'=48
 'namespace'=53
 '<<'=32
 '<='=41

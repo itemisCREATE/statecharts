@@ -2,9 +2,11 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext;
 
+import org.yakindu.base.base.NamedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +18,6 @@ package org.yakindu.sct.model.stext.stext;
  * @model
  * @generated
  */
-public interface InterfaceScope extends StatechartScope
+public interface InterfaceScope extends StatechartScope, NamedElement
 {
 } // InterfaceScope

@@ -2,18 +2,19 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.yakindu.sct.model.sgraph.Event;
-
+import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -33,14 +34,14 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventSpec
 {
   /**
-   * The cached value of the '{@link #getEvent() <em>Event</em>}' reference.
+   * The cached value of the '{@link #getEvent() <em>Event</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getEvent()
    * @generated
    * @ordered
    */
-  protected Event event;
+  protected Expression event;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,27 +69,7 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
    * <!-- end-user-doc -->
    * @generated
    */
-  public Event getEvent()
-  {
-    if (event != null && event.eIsProxy())
-    {
-      InternalEObject oldEvent = (InternalEObject)event;
-      event = (Event)eResolveProxy(oldEvent);
-      if (event != oldEvent)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, StextPackage.REGULAR_EVENT_SPEC__EVENT, oldEvent, event));
-      }
-    }
-    return event;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Event basicGetEvent()
+  public Expression getEvent()
   {
     return event;
   }
@@ -98,12 +79,53 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setEvent(Event newEvent)
+  public NotificationChain basicSetEvent(Expression newEvent, NotificationChain msgs)
   {
-    Event oldEvent = event;
+    Expression oldEvent = event;
     event = newEvent;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.REGULAR_EVENT_SPEC__EVENT, oldEvent, event));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.REGULAR_EVENT_SPEC__EVENT, oldEvent, newEvent);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setEvent(Expression newEvent)
+  {
+    if (newEvent != event)
+    {
+      NotificationChain msgs = null;
+      if (event != null)
+        msgs = ((InternalEObject)event).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.REGULAR_EVENT_SPEC__EVENT, null, msgs);
+      if (newEvent != null)
+        msgs = ((InternalEObject)newEvent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.REGULAR_EVENT_SPEC__EVENT, null, msgs);
+      msgs = basicSetEvent(newEvent, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.REGULAR_EVENT_SPEC__EVENT, newEvent, newEvent));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case StextPackage.REGULAR_EVENT_SPEC__EVENT:
+        return basicSetEvent(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -117,8 +139,7 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
     switch (featureID)
     {
       case StextPackage.REGULAR_EVENT_SPEC__EVENT:
-        if (resolve) return getEvent();
-        return basicGetEvent();
+        return getEvent();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -134,7 +155,7 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
     switch (featureID)
     {
       case StextPackage.REGULAR_EVENT_SPEC__EVENT:
-        setEvent((Event)newValue);
+        setEvent((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -151,7 +172,7 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
     switch (featureID)
     {
       case StextPackage.REGULAR_EVENT_SPEC__EVENT:
-        setEvent((Event)null);
+        setEvent((Expression)null);
         return;
     }
     super.eUnset(featureID);

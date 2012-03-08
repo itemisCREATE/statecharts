@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -15,14 +16,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesPackage;
 
-import org.yakindu.sct.model.sgraph.Event;
-
-import org.yakindu.sct.model.sgraph.impl.DeclarationImpl;
+import org.yakindu.sct.model.sgraph.impl.EventImpl;
 
 import org.yakindu.sct.model.stext.stext.Direction;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
@@ -45,7 +45,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  *
  * @generated
  */
-public class EventDefinitionImpl extends DeclarationImpl implements EventDefinition
+public class EventDefinitionImpl extends EventImpl implements EventDefinition
 {
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' reference.
@@ -424,13 +424,6 @@ public class EventDefinitionImpl extends DeclarationImpl implements EventDefinit
   @Override
   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
   {
-    if (baseClass == Event.class)
-    {
-      switch (derivedFeatureID)
-      {
-        default: return -1;
-      }
-    }
     if (baseClass == TypedElement.class)
     {
       switch (derivedFeatureID)
@@ -447,7 +440,7 @@ public class EventDefinitionImpl extends DeclarationImpl implements EventDefinit
         default: return -1;
       }
     }
-    if (baseClass == org.yakindu.base.types.Event.class)
+    if (baseClass == Event.class)
     {
       switch (derivedFeatureID)
       {
@@ -465,13 +458,6 @@ public class EventDefinitionImpl extends DeclarationImpl implements EventDefinit
   @Override
   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
   {
-    if (baseClass == Event.class)
-    {
-      switch (baseFeatureID)
-      {
-        default: return -1;
-      }
-    }
     if (baseClass == TypedElement.class)
     {
       switch (baseFeatureID)
@@ -488,7 +474,7 @@ public class EventDefinitionImpl extends DeclarationImpl implements EventDefinit
         default: return -1;
       }
     }
-    if (baseClass == org.yakindu.base.types.Event.class)
+    if (baseClass == Event.class)
     {
       switch (baseFeatureID)
       {
