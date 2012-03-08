@@ -26,7 +26,7 @@ Templates for the main statechart cpp file.
 typedef enum {
 
     «FOREACH this.states AS exState-»
-      _«exState.simpleName», 
+      _«exState.getStateName()», 
     «ENDFOREACH -»
 	last_state
 

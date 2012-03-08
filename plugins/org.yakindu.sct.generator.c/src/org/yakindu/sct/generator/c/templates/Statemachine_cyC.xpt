@@ -98,7 +98,7 @@ void statemachine_cy_setEvent(Statemachine_cy* handle, _Event* ev) {
 
 sc_boolean statemachine_cy_eventWaiting(Statemachine_cy* handle) {
 
-	return eventSet_isAny_input(&handle->eventSet);
+	return (eventSet_isAny_input(&handle->eventSet) || eventSet_isAny_output(&handle->eventSet)) ;
 }
 
 «ENDFILE»

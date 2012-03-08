@@ -3,6 +3,17 @@ import sexec;
 import ecore;
 import sgraph;
 
+//TODO Workaround for error in Typesystem
+String name(Declaration this) : this.metaType.getProperty("name").toString();
+String name(Vertex this) : this.metaType.getProperty("name").toString();
+
+String name(Expression this):
+	"/*Name of "+this+"*/";
+String name(FeatureCall this):
+	feature.name;
+String name(TypedElementReferenceExpression this):
+	reference.name;
+
 ExecutionFlow getExecutionFlow(InterfaceScope this) : ((ExecutionFlow)this.eContainer);
 
 String scName(Expression statement) : ((ExecutionFlow)statement.eRootContainer).name ;
@@ -11,7 +22,7 @@ List[EventDefinition] declaredEvents(ExecutionFlow flow) : flow.scopes.declarati
 List[TimeEvent] declaredTimerEvents(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(TimeEvent);
 List[VariableDefinition] declaredVariables(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(VariableDefinition);
 
-String test(NamedElement obj) :  "";
+String test(ecore::ENamedElement obj) :  "";
 String StName(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toFirstUpper();// + "Statemachine";
 String STNAME(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toUpperCase() + "STATEMACHINE";
 String StNameEv(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).name.toFirstUpper();// + "Statemachine_ev";

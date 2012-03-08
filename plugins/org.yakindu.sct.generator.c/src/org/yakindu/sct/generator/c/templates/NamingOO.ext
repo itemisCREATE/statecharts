@@ -5,7 +5,6 @@ import sgraph;
 import sgen;
 
 extension org::yakindu::sct::generator::c::templates::Constants;
-extension org::eclipse::xtend::util::stdlib::elementprops;
 extension org::yakindu::sct::generator::c::templates::Naming;
 
 String interfaceNameOOW(Scope this) : "unknownScope";

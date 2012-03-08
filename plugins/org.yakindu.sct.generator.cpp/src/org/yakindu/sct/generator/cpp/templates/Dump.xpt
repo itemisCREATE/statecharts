@@ -11,7 +11,7 @@ Templates for writing a test dump file.
 «IMPORT sgraph»
 
 «IMPORT org::yakindu::sct::generator::cpp::templates»
-
+«EXTENSION org::yakindu::sct::generator::cpp::templates::Naming»
 
 «DEFINE file FOR ExecutionFlow»
 
@@ -44,7 +44,7 @@ internal :
 «ENDDEFINE»
 
 «DEFINE declaration FOR Declaration -»
-	unknown declaration «name»
+	unknown declaration «name()»
 «ENDDEFINE»
 
 «DEFINE declaration FOR EventDefinition -»
@@ -112,8 +112,8 @@ take_«this.step.name -»()
 «ENDDEFINE»
 
 
-«DEFINE code FOR ElementReferenceExpression -»
-«this.value.name -»
+«DEFINE code FOR TypedElementReferenceExpression -»
+«this.reference.name -»
 «ENDDEFINE»
 
 

@@ -23,7 +23,7 @@ String asCType(Type type) :
   case "real" : "real"
   case "integer" : "integer"
   case "boolean" : "sc_boolean"
-  case "string"  : "string"
+  case "string"  : "sc_string"
   default : "unknownType"
  };
 

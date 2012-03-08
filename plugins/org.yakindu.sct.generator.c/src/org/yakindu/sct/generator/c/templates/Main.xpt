@@ -55,6 +55,7 @@ Contais the root templates that call the different file templates.
 	«EXPAND CMakeLists::file FOR this»
 	
 	«EXPAND DummyTimer::file FOR this»
+	«EXPAND States::file FOR this»
 
 «ENDDEFINE»
 

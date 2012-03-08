@@ -7,7 +7,7 @@ import types;
 extension org::yakindu::sct::generator::c::templates::Naming;
 extension org::yakindu::sct::generator::c::templates::Constants;
 
-InterfaceScope getInterfaceScope(Assignment this) : ((InterfaceScope)this.varRef.eContainer);
+InterfaceScope getInterfaceScope(AssignmentExpression this) : ((InterfaceScope)this.varRef.eContainer);
 
 toCCode(Void void) :
 	"/*toCCode() called with NULL element. Polymorphic resolver could not match callable method!*/";
@@ -39,7 +39,7 @@ String toCCode(PrimitiveValueExpression primValue) :
 	primValue.value.toCCode();
 
 /* Assignment */
-String toCCode(Assignment assignment) :
+String toCCode(AssignmentExpression assignment) :
   switch (assignment.operator) {
   case (AssignmentOperator::assign) : assignment.varRef.toCCode() + " = " + assignment.expression.toCCode() + ";"  
   case (AssignmentOperator::multAssign) : assignment.varRef.toCCode() + " *= " + assignment.expression.toCCode() + ";"
@@ -56,7 +56,7 @@ String toCCode(Assignment assignment) :
   };
 		
 /* EventRaising */
-String toCCode(EventRaising eventRaising) :
+String toCCode(EventRaisingExpression eventRaising) :
 	((eventRaising.value == null)?"":
 	"((" + eventRaising.event.getEventName() + "*)" + eventRaising.statemachineHandleName() + "->" + eventRaising.getInterfaceName() + "." + eventRaising.event.getEventName() + ")->value = " 
 	+ eventRaising.value.toCCode() + ";") + 
@@ -65,19 +65,7 @@ String toCCode(EventRaising eventRaising) :
 	eventRaising.getInterfaceName() + "." + 
 	eventRaising.event.getEventName() + "); ";
 
-String getScopeName(emf::EObject o) :
-  "unknownScopeName";
-  
-String getScopeName(InterfaceScope is) :
-  is.name;
-  
-String getScopeName(InternalScope inls) :
-  "internal";
-
-String getInterfaceName(EventRaising event) :
-	"iface" + (( event.event.eContainer.getScopeName() == null)?"":event.event.eContainer.getScopeName().toFirstUpper());
-
-String addValue(EventRaising event) :
+String addValue(EventRaisingExpression event) :
   ( (event.value == null)?"":("((" +event.event.getEventName() + "*)ev)->value = " + event.value.toCCode() + "; ") );
 
 /* Logical Expressions */
@@ -119,7 +107,6 @@ String interfaceObjectName(InterfaceScope this) : "iface" + ((this.name == null)
 
 String getInterface(VariableDefinition var) :
 	((InterfaceScope)var.eContainer).interfaceObjectName();
-
 
 String getOperator(AdditiveOperator operator) : 
     switch(operator) {
@@ -183,8 +170,14 @@ Set[EventDefinition] getLocalEvents(InternalScope interface) :
 	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::LOCAL);
 
 // is this just relevant for events?
-String toCCode(ElementReferenceExpression ref) :
-	ref.value.toCCode();
+String toCCode(TypedElementReferenceExpression ref) :
+	ref.reference.toCCode();
+String toCCode(base::NamedElement ref) :
+	"/* toCode not defined for: "+ref+" */";
+String toCCode(Feature ref) :
+	"/* toCode not defined for: "+ref+" */";
+String toCCode(FeatureCall ref) :
+	ref.feature.toCCode();
 
 String toCCode(Declaration dec) :
 	"Declartion type not specified";
@@ -194,7 +187,7 @@ String toCCode(TimeEvent time_ev) :
 
 String toCCode(VariableDefinition var) :
     " " + var.statemachineHandleName() + "->" + var.getInterface() + 
-    "." + var.name.toLowerCase() + " ";
+    "." + var.getName() + " ";
 	
 String toCCode(EventDefinition evDef) :
     " ( eventSet_check( &" + evDef.statemachineHandleName() + "->base.eventSet, " + evDef.getEventEnumName() + ") ) ";

@@ -53,7 +53,7 @@ typedef struct {
 #endif // INTERFACE_LISTENER
 
 «FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
-	«variable.type.asCType()» «variable.name»;
+	«variable.type.asCType()» «variable.getName()»;
 «ENDFOREACH» 
 	
 } «interfaceClassName(interface)»;
@@ -63,9 +63,9 @@ void «interface.interfaceName()»_set_interface_singleton(«interfaceClassName(int
 «ENDIF»
 
 «FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
-extern «asCType(variable.type)» «interface.interfaceName()»_get_«variable.name»(«handleInterfaceAddition(interface)»);
+extern «asCType(variable.type)» «interface.interfaceName()»_get_«variable.getName()»(«handleInterfaceAddition(interface)»);
 «IF variable.readonly == false -»
-extern void «interface.interfaceName()»_set_«variable.name»(«handleInterfaceAdditionComma(interface)»«asCType(variable.type)» value);
+extern void «interface.interfaceName()»_set_«variable.getName()»(«handleInterfaceAdditionComma(interface)»«asCType(variable.type)» value);
 «ENDIF»
 «ENDFOREACH» 
 
@@ -128,13 +128,18 @@ void «interface.interfaceName()»_init(«handleInterfaceAdditionComma(interface)»S
 	handle->eventSet = eventSet;
 	/* initial values */
 	
+«LET interface.declarations.typeSelect(VariableDefinition) AS variables-»
+«IF !variables.isEmpty-»
 	/* TODO: This should be done by sexec */
-«FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
-«IF variable.initialValue != null»
+
+«FOREACH variables AS variable -»
+«IF variable.initialValue != null-»
 «REM»change to correctLValue«ENDREM»
-	handle->«variable.name» = «variable.initialValue.toCCode()»;
-«ENDIF»
-«ENDFOREACH»
+	handle->«variable.getName()» = «variable.initialValue.toCCode()»;
+«ENDIF-»
+«ENDFOREACH-»
+«ENDIF-»
+«ENDLET-»
 	/* */ 
 	«interface.interfaceName()»_reset_event(handle);
 
@@ -156,14 +161,14 @@ void «interface.interfaceName()»_set_interface_singleton(«interfaceClassName(int
 «ENDIF»
 
 «FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
-«variable.type.asCType()» «interface.interfaceName()»_get_«variable.name»(«handleInterfaceAddition(interface)»)
+«variable.type.asCType()» «interface.interfaceName()»_get_«variable.getName()»(«handleInterfaceAddition(interface)»)
 {
-	return handle->«variable.name»;
+	return handle->«variable.getName()»;
 }
 «IF variable.readonly == false -»
-void «interface.interfaceName()»_set_«variable.name»(«handleInterfaceAdditionComma(interface)»«variable.type.asCType()» value)
+void «interface.interfaceName()»_set_«variable.getName()»(«handleInterfaceAdditionComma(interface)»«variable.type.asCType()» value)
 {
-	handle->«variable.name» = value;
+	handle->«variable.getName()» = value;
 }
 «ENDIF»
 «ENDFOREACH»

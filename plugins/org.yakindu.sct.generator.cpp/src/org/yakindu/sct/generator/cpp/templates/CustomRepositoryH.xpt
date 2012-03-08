@@ -31,7 +31,7 @@ Templates for the main statechart cpp file.
 «ENDDEFINE»
 
 «DEFINE declaration FOR Declaration -»
-	// unknown declaration «name»
+	// unknown declaration «name()»
 «ENDDEFINE»
 
 «DEFINE declaration FOR EventDefinition -» 
