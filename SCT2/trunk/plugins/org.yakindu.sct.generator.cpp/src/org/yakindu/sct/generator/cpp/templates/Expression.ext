@@ -4,6 +4,8 @@ import ecore;
 import sgraph;
 import types;
 
+extension org::yakindu::sct::generator::cpp::templates::Naming;
+
 toCppCode(Void void) :
 	"/*toCppCode() called with NULL element. Polymorphic resolver could not match callable method!*/";
 String toCppCode(Void o, String statechartReference) : 
@@ -34,36 +36,36 @@ String toCppCode(PrimitiveValueExpression primValue) :
 	primValue.value.toCppCode();
 
 /* Assignment */
-String toCppCode(Assignment assignment) :
+String toCppCode(AssignmentExpression assignment) :
   switch (assignment.operator) {
-  case (AssignmentOperator::assign) : "set_" + assignment.varRef.name + "(" + assignment.expression.toCppCode() + ");"  
-  case (AssignmentOperator::multAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() * (" + assignment.expression.toCppCode() + "));"
-  case (AssignmentOperator::divAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() / (" + assignment.expression.toCppCode() + "));"
-  case (AssignmentOperator::modAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() % (" + assignment.expression.toCppCode() + "));"
-  case (AssignmentOperator::addAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() + (" + assignment.expression.toCppCode() + "));"
-  case (AssignmentOperator::subAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() - (" + assignment.expression.toCppCode() + "));"
-  case (AssignmentOperator::leftShiftAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() << ("+ assignment.expression.toCppCode() + "));"
-  case (AssignmentOperator::rightShiftAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() >> (" + assignment.expression.toCppCode() + "));"
-  case (AssignmentOperator::andAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() & (" + assignment.expression.toCppCode() + "));"
-  case (AssignmentOperator::xorAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() ^ (" + assignment.expression.toCppCode() + "));"
-  case (AssignmentOperator::orAssign) : "set_" + assignment.varRef.name + "(get_"+ assignment.varRef.name+ "() ^ (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::assign) : "set_" + assignment.varRef.name() + "(" + assignment.expression.toCppCode() + ");"  
+  case (AssignmentOperator::multAssign) : "set_" + assignment.varRef.name() + "(get_"+ assignment.varRef.name()+ "() * (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::divAssign) : "set_" + assignment.varRef.name() + "(get_"+ assignment.varRef.name()+ "() / (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::modAssign) : "set_" + assignment.varRef.name() + "(get_"+ assignment.varRef.name()+ "() % (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::addAssign) : "set_" + assignment.varRef.name() + "(get_"+ assignment.varRef.name()+ "() + (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::subAssign) : "set_" + assignment.varRef.name() + "(get_"+ assignment.varRef.name()+ "() - (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::leftShiftAssign) : "set_" + assignment.varRef.name() + "(get_"+ assignment.varRef.name()+ "() << ("+ assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::rightShiftAssign) : "set_" + assignment.varRef.name() + "(get_"+ assignment.varRef.name()+ "() >> (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::andAssign) : "set_" + assignment.varRef.name() + "(get_"+ assignment.varRef.name()+ "() & (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::xorAssign) : "set_" + assignment.varRef.name() + "(get_"+ assignment.varRef.name()+ "() ^ (" + assignment.expression.toCppCode() + "));"
+  case (AssignmentOperator::orAssign) : "set_" + assignment.varRef.name() + "(get_"+ assignment.varRef.name()+ "() ^ (" + assignment.expression.toCppCode() + "));"
   default : ""
   };
 		
 /* EventRaising */
 
-String toCppCode(EventRaising eventRaising) :
+String toCppCode(EventRaisingExpression eventRaising) :
 	((eventRaising.value == null)?"":
-	"((" + eventRaising.event.name + "*) handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.name + ")->value = " 
+	"((" + eventRaising.event.name() + "*) handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.name() + ")->value = " 
 	+ eventRaising.value.toCppCode() + ";") + 
-	" statemachine_cy_setEvent(&handle->base, handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.name + "); ";
+	" statemachine_cy_setEvent(&handle->base, handle->" + eventRaising.getInterfaceName() + "." + eventRaising.event.name() + "); ";
 //  "{ _Event* ev = eventPool_createEvent(handle->base.eventPool, ev_"+eventRaising.event.name+"); if (ev) { " + eventRaising.addValue() + "statemachine_cy_setEvent(&handle->base, ev); } }";
 
-String getInterfaceName(EventRaising event) :
+String getInterfaceName(EventRaisingExpression event) :
 	"interface" + (( ((InterfaceScope)event.event.eContainer).name == null)?"":((InterfaceScope)event.event.eContainer).name.toFirstUpper());
 
-String addValue(EventRaising event) :
-  ( (event.value == null)?"":("((" +event.event.name + "*)ev)->value = " + event.value.toCppCode() + "; ") );
+String addValue(EventRaisingExpression event) :
+  ( (event.value == null)?"":("((" +event.event.name() + "*)ev)->value = " + event.value.toCppCode() + "; ") );
 
 
 
@@ -96,8 +98,8 @@ String toCppCode(NumericalMultiplyDivideExpression expression) :
   	expression.leftOperand.toCppCode() + getOperator(expression.operator) + expression.rightOperand.toCppCode();
 
 // is this just relevant for events?
-String toCppCode(ElementReferenceExpression ev) :
-    " eventSet.check( ev_" + ev.value.name.toLowerCase() + ") ";
+String toCppCode(TypedElementReferenceExpression ev) :
+    " eventSet.check( ev_" + ev.reference.name.toLowerCase() + ") ";
 
 String getOperator(AdditiveOperator operator) : 
     switch(operator) {

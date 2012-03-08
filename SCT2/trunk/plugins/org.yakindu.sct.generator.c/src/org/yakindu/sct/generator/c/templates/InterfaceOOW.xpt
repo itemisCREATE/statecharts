@@ -78,12 +78,12 @@ inline void «interface.interfaceClassNameOOW()»::raise_«event.name»(«IF !event.t
 «FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
 inline «asCType(variable.type)» «interface.interfaceClassNameOOW()»::get_«variable.name»()
 {
-	return «interface.interfaceName()»_get_«variable.name»(«interface.interfaceObjectName()»); 
+	return «interface.interfaceName()»_get_«variable.name.toFirstLower()»(«interface.interfaceObjectName()»); 
 }   
 «IF variable.readonly == false -»
 inline void «interface.interfaceClassNameOOW()»::set_«variable.name»(«asCType(variable.type)» value)
 {
-	«interface.interfaceName()»_set_«variable.name»(«interface.interfaceObjectName()», value);
+	«interface.interfaceName()»_set_«variable.name.toFirstLower()»(«interface.interfaceObjectName()», value);
 }
 «ENDIF»
 «ENDFOREACH» 

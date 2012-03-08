@@ -9,11 +9,18 @@ import sgen;
 extension org::yakindu::sct::generator::c::templates::Constants;
 extension org::eclipse::xtend::util::stdlib::elementprops;
 
+//TODO Workaround (WA) for error in Typesystem
+String getNameWA(Declaration this) : this.metaType.getProperty("name").toString();
+String getNameWA(Vertex this) : this.metaType.getProperty("name").toString();
+
  
 // TODO: move to other extension
-
-GeneratorEntry genEntry(Object obj) : ((EObject)obj).eRootContainer.getProperty("_GEN_ENTRY_");
-Object setGenEntry(Object obj, GeneratorEntry genEntry) : ((EObject)obj).eRootContainer.setProperty("_GEN_ENTRY_", genEntry) -> "";
+Void setGeneratorEntry(emf::EObject obj, GeneratorEntry entry):
+	JAVA org.yakindu.sct.generator.c.GeneratorEntryAccess.setGeneratorEntry(org.eclipse.emf.ecore.EObject, org.yakindu.sct.model.sgen.GeneratorEntry);
+GeneratorEntry getGeneratorEntry(emf::EObject obj):
+	JAVA org.yakindu.sct.generator.c.GeneratorEntryAccess.getGeneratorEntry(org.eclipse.emf.ecore.EObject);
+GeneratorEntry genEntry(Object obj) : getGeneratorEntry(((EObject)obj).eRootContainer);
+Object setGenEntry(Object obj, GeneratorEntry genEntry) : setGeneratorEntry(((EObject)obj).eRootContainer,genEntry) -> "";
  
 
 ExecutionFlow getExecutionFlow(InterfaceScope this) : ((ExecutionFlow)this.eContainer);
@@ -38,7 +45,7 @@ String EVNAME(Object this) : ((ExecutionFlow)((EObject)this).eRootContainer).nam
 
 /* This is from sgraph! This should not be used within code generation */
 String StateEnumName(RegularState state) : 
-	"_"+ state.name; /* ??? */
+	"_"+ state.getNameWA(); /* ??? */
   
 String StateEnumName(ExecutionState state) :
 	"_"+state.simpleName;
@@ -74,17 +81,17 @@ boolean isShallowEnterSequence(Step step) : Sequence.isInstance(step) && step.na
 /* If this is a singleton, we do not need any additional information for the 
 	statemachine or the interfaces */
 String handleAddition(Object this) :
-	(isSingleton(genEntry()) == true) ? "" : StName() + "* " + this.statemachineHandleName();
+	(isSingleton() == true) ? "" : StName() + "* " + this.statemachineHandleName();
 
 String handleAdditionComma(Object this) :
-	(isSingleton(genEntry()) == true) ? "" : StName() + "* " + this.statemachineHandleName() + ", ";
+	(isSingleton() == true) ? "" : StName() + "* " + this.statemachineHandleName() + ", ";
 
 
 String handleInterfaceAddition(Scope this) :
-	(isSingleton(genEntry()) == true) ? "" : this.interfaceClassName() + "* handle";
+	(isSingleton() == true) ? "" : this.interfaceClassName() + "* handle";
 
 String handleInterfaceAdditionComma(Scope this) :
-	(isSingleton(genEntry()) == true) ? "" : this.interfaceClassName() + "* handle, ";
+	(isSingleton() == true) ? "" : this.interfaceClassName() + "* handle, ";
 
 
 /* Function Naming */
@@ -116,7 +123,7 @@ String reactSequenceFunctionName(Step this) :
 	  this.stName() + "_react_" + this.getStateName();
 
 /* for some reason, this is handled completely different */ 
-String reactFunctionName(Reaction this) :  
+String reactFunctionName(sexec::Reaction this) :  
 	  this.stName() + "_react_" + this.getStateName();
 
 String reactFunctionName(ExecutionNode this) :  
@@ -151,24 +158,34 @@ String deepEnterFunction(Step this) :
 	  this.deepEnterSequenceFunctionName() + "("+ handleAddition() + ")";
 
 /* for some reason, this is handled completely different */ 
-String reactFunction(Reaction this) :  
+String reactFunction(sexec::Reaction this) :  
 	  this.reactFunctionName() + "("+ handleAddition() + ")";
 
 String reactFunction(ExecutionNode this) :  
 	  this.reactFunctionName() + "("+ handleAddition() + ")";
 
-
+String getName(VariableDefinition this): name.toFirstLower();
 
 String getStateName(Step this) : this.eContainer.getStateName(); 
 String getStateName(emf::EObject this) : (this.eContainer != null)?this.eContainer.getStateName():"unkown";
-String getStateName(ExecutionEntry this) : this.simpleName;
-String getStateName(ExecutionState this) : this.simpleName;
+String getStateName(ExecutionEntry this) : this.getStateFqn();
+String getStateName(ExecutionState this) : this.getStateFqn();
 String getStateName(ExecutionRegion this) : 
 	if (ExecutionState.isInstance(superScope)) 
 	then (
 		getStateName((ExecutionState)superScope)+getNullSafeRegionName()
 	) else 
 		"Region"+getNullSafeRegionName();
+
+String getStateFqn(Void element) :
+	"";
+String getStateFqn(emf::EObject element) :
+	element.eContainer.getStateFqn();
+String getStateFqn(ExecutionScope this) :
+	(this.superScope.getStateFqn()==""?"":this.superScope.getStateFqn()+"_")+this.name;
+String getStateFqn(ExecutionState this) :
+	(this.superScope.getStateFqn()==""?"":this.superScope.getStateFqn()+"_")+this.simpleName;
+
 
 private String getNullSafeRegionName(ExecutionRegion this) :
 	if (name == null)
@@ -182,7 +199,7 @@ private String getNullSafeRegionName(ExecutionRegion this) :
 
 String getReactionName(Object this) : "uknown";
 String getReactionName(Check this) : this.eContainer.getReactionName(); 
-String getReactionName(Reaction this) : this.name;
+String getReactionName(sexec::Reaction this) : this.name;
 String getReactionName(ExecutionState this) : "sequence";
 
 /* interface naming information */
@@ -203,13 +220,32 @@ String interfaceObjectName(InternalScope this) : "ifaceInternal";
 
 /* Event name information  */
 String getEventEnumName(TimeEvent this) : "ev_" + this.name.toFirstLower();
-String getEventEnumName(Event this) : "ev_" + this.eContainer.getScopeName() + "_" + this.name.toFirstLower();
+String getEventEnumName(Event this) : "ev_" + this.eContainer.getScopeName() + "_" + this.getNameWA().toFirstLower();
+String getEventEnumName(EventDefinition this) : "ev_" + this.eContainer.getScopeName() + "_" + name; //.toFirstLower();
+String getEventEnumName(FeatureCall this) : feature.getEventEnumName();
+String getEventEnumName(types::Feature this) : "/* EventEnum requested, but got Feature: "+this+" */";
+String getEventEnumName(Expression this) : "/* EventEnum requested, but got Expression: "+this+" */";
 
-String getEventName(Event this) : this.eContainer.getScopeName().toFirstUpper() + this.name.toFirstUpper();
+String getEventName(Event this) : this.eContainer.getScopeName().toFirstUpper() + this.getNameWA().toFirstUpper();
+String getEventName(EventDefinition this) : name.toFirstUpper();
+String getEventName(FeatureCall this) : feature.getEventName();
+String getEventName(base::NamedElement this) : "/* Event expected, but got NamedElement: "+this+" */";
+String getEventName(TypedElementReferenceExpression this) : reference.getEventName();
+String getEventName(types::Event this) : this.eContainer.getScopeName().toFirstUpper() + this.name.toFirstUpper();
+String getEventName(types::Feature this) : "/* Event expected, but got Feature: "+this+" */";
+String getEventName(Expression this) : "/* Event expected, but got Expression: "+this+" */";
 
+String getInterfaceName(EventRaisingExpression this) :
+	"iface" + (( this.event.getEvent().eContainer.getScopeName() == "default")?"":this.event.getEvent().eContainer.getScopeName().toFirstUpper());
+
+EventDefinition getEvent(Expression e) : null;
+EventDefinition getEvent(NamedElement e) : null;
+EventDefinition getEvent(FeatureCall this) : feature.getEvent();
+EventDefinition getEvent(TypedElementReferenceExpression this) : reference.getEvent();
+EventDefinition getEvent(EventDefinition this) : this;
 
 String getScopeName(emf::EObject eo) :
-	"<scope not defined>";
+	"<scope not defined for "+eo+">";
 
 String getScopeName(InternalScope inScope) :
  	"internal";

@@ -51,7 +51,7 @@ if («statemachineHandleName()»->base.base.history[«region.historyVector.offset»]
 	switch(((StatemachineBase*)«statemachineHandleName()»)->state[ «this.stateConfigurationIdx» ]) {
 «ENDIF»
 «FOREACH this.cases AS caseid -»
-		case _«caseid.state.simpleName» : {
+		case _«caseid.state.getStateName()» : {
 «EXPAND ActionCode FOR caseid.step-»
 			break;
 		}
@@ -122,7 +122,7 @@ else {
 
 
 «DEFINE ActionCode FOR EnterState»
-((StatemachineBase*)«statemachineHandleName()»)->state[«this.state.stateVector.offset»] = _«this.state.simpleName»;
+((StatemachineBase*)«statemachineHandleName()»)->state[«this.state.stateVector.offset»] = _«this.state.getStateName()»;
 ((Statemachine_cy*)«statemachineHandleName()»)->parallelPosition = «this.state.stateVector.offset»;
 «ENDDEFINE»
 
@@ -180,7 +180,7 @@ static void «this.reactFunction()»;
 
 «DEFINE ReactMethodsImplement FOR ExecutionNode -»
 «IF (ExecutionState.isInstance(this) || this.reactSequence.caller.size > 0) -»
-void «this.reactFunction()»
+void «this.reactFunction()-»
 «REM»void «stName()»_react_«this.simpleName»(«StName()»* handle)«ENDREM»
 {
 	«EXPAND ReactCode FOR reactSequence»
@@ -408,7 +408,7 @@ void statemachine_cy__runCycle(Statemachine_cy* handle)
 	     ++handle->parallelPosition) {
 		switch(((StatemachineBase*)handle)->state[handle->parallelPosition]) {
 	«FOREACH this.states AS state»
-	    case _«state.simpleName»:
+	    case _«state.getStateName()»:
 			«state.reactFunctionName()»(«IF isSingleton() == false»(«StName()»*) handle«ENDIF»);
 	        break;
 	«ENDFOREACH»
