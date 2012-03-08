@@ -24,10 +24,8 @@ import org.yakindu.sct.model.stext.stext.BoolLiteral
 import org.yakindu.sct.model.stext.stext.RealLiteral
 import org.yakindu.sct.simulation.core.ScopeVariable
 import org.yakindu.sct.simulation.core.ScopeEvent
-import org.yakindu.sct.model.stext.stext.Assignment
 import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
-import org.yakindu.sct.model.stext.stext.EventRaising
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.BitwiseAndExpression
 import org.yakindu.sct.model.stext.stext.BitwiseOrExpression
@@ -48,6 +46,12 @@ import org.yakindu.sct.model.sgraph.Scope
 import com.google.inject.Inject
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.HexLiteral
+import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression
+import org.yakindu.sct.model.stext.stext.FeatureCall
+import org.yakindu.sct.model.stext.stext.AssignmentExpression
+import org.yakindu.sct.model.stext.stext.EventRaisingExpression
+import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.stext.stext.EventDefinition
 
 /**
  * 
@@ -67,9 +71,13 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		this.context = context
 		statement.execute()
 	}
+	
+	def dispatch execute(Statement statement){
+		null
+	}
 
-	def dispatch execute(Assignment assignment){
-		var scopeVariable = context.getVariable(assignment.varRef.qualifiedName.toString)
+	def dispatch execute(AssignmentExpression assignment){
+		var scopeVariable = context.getVariable(assignment.varRef.variable.fullyQualifiedName.toString)
 		var result = assignment.expression.execute
 		if(assignment.operator == AssignmentOperator::ASSIGN){
 			context.setVariableValue(scopeVariable.getName, result)
@@ -80,11 +88,32 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		null		
 	}
 	
-	def dispatch execute(EventRaising eventRaising){
+	
+	def dispatch variable(TypedElementReferenceExpression e) {
+		if (e.reference instanceof VariableDefinition) e.reference else null	
+	} 
+	
+	
+	def dispatch variable(FeatureCall e) {
+		if (e.feature instanceof VariableDefinition) e.feature else null
+	}
+	
+
+	def dispatch event(TypedElementReferenceExpression e) {
+		if (e.reference instanceof EventDefinition) e.reference else null	
+	} 
+	
+	
+	def dispatch event(FeatureCall e) {
+		if (e.feature instanceof EventDefinition) e.feature else null
+	}
+	
+	
+	def dispatch execute(EventRaisingExpression eventRaising){
 		if(eventRaising.value != null){
-			context.raiseEvent(eventRaising.event.qualifiedName.toString, eventRaising.value.execute)
+			context.raiseEvent(eventRaising.event.event.fullyQualifiedName.toString, eventRaising.value.execute)
 		}else {
-			context.raiseEvent(eventRaising.event.qualifiedName.toString, null)
+			context.raiseEvent(eventRaising.event.event.fullyQualifiedName.toString, null)
 		}
 		null
 	}
@@ -97,21 +126,46 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		}
 	} 
 	
-	def dispatch execute(ElementReferenceExpression expression){
-		var variableRef = context.getVariable(expression.value.qualifiedName.toString)
+	def dispatch execute(TypedElementReferenceExpression expression){
+		var variableRef = context.getVariable(expression.reference.fullyQualifiedName.toString)
 		if(variableRef != null){
 			return variableRef.getValue
 		}
-		return context.isEventRaised(expression.value.qualifiedName.toString)
+		return context.isEventRaised(expression.reference.fullyQualifiedName.toString)
 	}
 	
 	def dispatch execute(EventValueReferenceExpression expression){
 		for(event : context.raisedEvents){
-			if(event.getName.equals(expression.value.name)){
+			if(event.getName.equals(expression.value.qname)){
 				return event.getValue
 			}
 		}
 		null;
+	}
+	
+	def dispatch name(FeatureCall e) {
+		e.feature.name
+	}
+	def dispatch name(TypedElementReferenceExpression e) {
+		e.reference.name
+	}
+
+	def dispatch qname(FeatureCall e) {
+		return e.feature.fullyQualifiedName.toString
+//		if( e.feature.eContainer instanceof InterfaceScope) {
+//			val scope = (e.feature.eContainer as InterfaceScope)
+//			if (scope.name != null && ! scope.name.empty)  return scope.name + "." + e.feature.name	
+//		}
+//		return e.feature.name
+	}
+
+	def dispatch qname(TypedElementReferenceExpression e) {
+		e.reference.fullyQualifiedName.toString
+//		if( e.reference.eContainer instanceof InterfaceScope) {
+//			val scope = (e.reference.eContainer as InterfaceScope)
+//			if (scope.name != null && ! scope.name.empty)  return scope.name + "." + e.reference.name	
+//		}
+//		return e.reference.name
 	}
 	
 	def dispatch execute(ActiveStateReferenceExpression expression){
@@ -178,8 +232,16 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		return evaluate(operator, result); 
 	}
 	
-	def dispatch execute(OperationCall call){
-		context.call(call.operation.name)
+	def dispatch execute(FeatureCall call){
+		if (call.operationCall) context.call(call.feature.name)
+		else {
+			var variableRef = context.getVariable(call.feature.fullyQualifiedName.toString)
+			if(variableRef != null){
+				return variableRef.getValue
+			}
+			return context.isEventRaised(call.feature.fullyQualifiedName.toString)
+		}
+		
 		null
 	}
 	
