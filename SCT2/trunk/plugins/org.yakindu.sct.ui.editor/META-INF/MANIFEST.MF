@@ -44,7 +44,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.model.sgraph.edit,
  org.yakindu.sct.model.stext.resource,
  org.eclipse.xtext.builder,
- org.yakindu.sct.model.sgraph.ui
+ org.yakindu.sct.model.sgraph.ui,
+ org.eclipse.gmf.runtime.emf.type.ui
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.ui.editor,
