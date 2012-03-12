@@ -6,7 +6,6 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Strings;
 import org.yakindu.sct.model.sgraph.Event;
-import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.naming.SGraphNameProvider;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
