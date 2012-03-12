@@ -4,11 +4,9 @@ import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesFactory;
-import org.yakindu.sct.model.sexec.Execution;
-import org.yakindu.sct.model.sexec.Sequence;
-import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.FinalState;
@@ -22,19 +20,19 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
-import org.yakindu.sct.model.stext.stext.Assignment;
+import org.yakindu.sct.model.stext.stext.AssignmentExpression;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.Expression;
+import org.yakindu.sct.model.stext.stext.FeatureCall;
 import org.yakindu.sct.model.stext.stext.IntLiteral;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.OnCycleEvent;
-import org.yakindu.sct.model.stext.stext.Operation;
-import org.yakindu.sct.model.stext.stext.OperationCall;
+import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
@@ -43,7 +41,7 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
-import org.yakindu.sct.model.stext.stext.TransitionReaction;
+import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.common.base.Predicate;
@@ -62,8 +60,9 @@ public class SCTTestUtil {
 		return e;
 	}
 
-	public static Operation _createOperation(String name, Scope scope) {
-		Operation e = StextFactory.eINSTANCE.createOperation();
+	public static OperationDefinition _createOperation(String name, Scope scope) {
+		OperationDefinition e = StextFactory.eINSTANCE
+				.createOperationDefinition();
 		e.setName(name);
 		if (scope != null)
 			scope.getDeclarations().add(e);
@@ -100,10 +99,18 @@ public class SCTTestUtil {
 			ReactionTrigger rt) {
 		RegularEventSpec e1Spec = StextFactory.eINSTANCE
 				.createRegularEventSpec();
-		e1Spec.setEvent(e1);
+		e1Spec.setEvent(createTypedElementReferenceExpression(e1));
 		if (rt != null)
 			rt.getTriggers().add(e1Spec);
 		return e1Spec;
+	}
+
+	public static TypedElementReferenceExpression createTypedElementReferenceExpression(
+			NamedElement target) {
+		TypedElementReferenceExpression referenceExpression = StextFactory.eINSTANCE
+				.createTypedElementReferenceExpression();
+		referenceExpression.setReference(target);
+		return referenceExpression;
 	}
 
 	public static OnCycleEvent _createOncycleEventSpec(ReactionTrigger rt) {
@@ -280,10 +287,12 @@ public class SCTTestUtil {
 				_createValue(value), (ReactionEffect) entryAction.getEffect());
 	}
 
-	public static Assignment _createVariableAssignment(VariableDefinition v,
-			AssignmentOperator op, Expression expression, ReactionEffect e) {
-		Assignment assignment = StextFactory.eINSTANCE.createAssignment();
-		assignment.setVarRef(v);
+	public static AssignmentExpression _createVariableAssignment(
+			VariableDefinition v, AssignmentOperator op, Expression expression,
+			ReactionEffect e) {
+		AssignmentExpression assignment = StextFactory.eINSTANCE
+				.createAssignmentExpression();
+		assignment.setVarRef(createTypedElementReferenceExpression(v));
 		assignment.setOperator(op);
 		assignment.setExpression(expression);
 		if (e != null)
@@ -291,9 +300,11 @@ public class SCTTestUtil {
 		return assignment;
 	}
 
-	public static OperationCall _createOperationCall(Operation o) {
-		OperationCall oc = StextFactory.eINSTANCE.createOperationCall();
-		oc.setOperation(o);
+	public static FeatureCall _createOperationCall(OperationDefinition o) {
+		// TODO add owner as TypedElementExpression
+		FeatureCall oc = StextFactory.eINSTANCE.createFeatureCall();
+		oc.setFeature(o);
+		oc.setOperationCall(true);
 		return oc;
 	}
 
