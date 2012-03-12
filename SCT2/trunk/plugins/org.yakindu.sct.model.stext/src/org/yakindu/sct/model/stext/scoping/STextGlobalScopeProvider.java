@@ -20,6 +20,7 @@ import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.scope.TypeLibrariesExtensionPointScopeHelper;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 import com.google.common.base.Predicate;
@@ -61,6 +62,8 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 					new Predicate<IEObjectDescription>() {
 						public boolean apply(IEObjectDescription input) {
 							if (input.getEClass() == StextPackage.Literals.EVENT_DEFINITION
+									|| SGraphPackage.Literals.REGULAR_STATE
+											.isSuperTypeOf(input.getEClass())
 									|| input.getEClass() == StextPackage.Literals.VARIABLE_DEFINITION) {
 								URI sourceURI = input.getEObjectURI()
 										.trimFragment();
