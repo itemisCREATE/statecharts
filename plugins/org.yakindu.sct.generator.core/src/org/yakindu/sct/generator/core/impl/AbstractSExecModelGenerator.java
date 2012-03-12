@@ -161,7 +161,9 @@ public abstract class AbstractSExecModelGenerator implements ISCTGenerator {
 	}
 
 	protected final void writeToConsole(String line) {
-		info.println(line);
+		if (!info.isClosed()) {
+			info.println(line);
+		}
 	}
 
 	private MessageConsole getConsole() {
