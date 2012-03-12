@@ -10,29 +10,16 @@
  */
 package org.yakindu.sct.model.sgraph.test;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * 
  * @author terfloth
- * 
-@RunWith(value=Suite.class)
-@SuiteClasses(value={
-		ExpressionsTest.class, 
-		FunctionsTest.class,
-		CoreFunctionsTest.class
-		}) 
-*/
-public class AllTests extends TestSuite{
-	
-	public static Test suite() {
-		TestSuite suite = new AllTests();
-		suite.addTestSuite(SGraphBaseValidationTest.class);
-			
-		return suite;
-	}
-
-	
+ */
+@RunWith(value = Suite.class)
+@SuiteClasses(value = { SGraphBaseValidationTest.class, StateImplTest.class })
+public class AllTests {
 
 }
