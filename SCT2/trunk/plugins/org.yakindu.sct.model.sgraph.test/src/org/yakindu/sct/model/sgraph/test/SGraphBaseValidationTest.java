@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.model.sgraph.test;
 
+import static org.junit.Assert.*;
+
 import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS;
 import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS;
 import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_INITIAL_ENTRY_WITH_IN_TRANS;
@@ -24,6 +26,8 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.junit.Before;
+import org.junit.Test;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.FinalState;
@@ -42,30 +46,29 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
  * 
  * @author terfloth
  */
-public class SGraphBaseValidationTest extends TestCase {
-	
+public class SGraphBaseValidationTest {
 
 	static {
-		// set up EMF - the EPackage.Registry requires a context class loader ...
+		// set up EMF - the EPackage.Registry requires a context class loader
+		// ...
 		if (Thread.currentThread().getContextClassLoader() == null) {
-			Thread.currentThread().setContextClassLoader(SGraphBaseValidationTest.class.getClassLoader());	
+			Thread.currentThread().setContextClassLoader(
+					SGraphBaseValidationTest.class.getClassLoader());
 		}
 		SGraphPackage.eINSTANCE.eClass();
 	}
-	
+
 	protected SGraphFactory factory;
 	protected StextFactory sTextFactory;
 	protected SGraphValidator validator;
 	protected BasicDiagnostic diagnostics;
-	
+
 	protected Statechart statechart;
 	protected Region region;
 	private State state;
 
-
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		validator = new SGraphValidator();
 		diagnostics = new BasicDiagnostic();
 		factory = SGraphFactory.eINSTANCE;
@@ -74,196 +77,210 @@ public class SGraphBaseValidationTest extends TestCase {
 		statechart.setName("SC");
 	}
 
-	
 	protected void prepareStateTest() {
 		region = factory.createRegion();
 		statechart.getRegions().add(region);
 		state = factory.createState();
-		state.setName(getName());
+		state.setName(getClass().getSimpleName());
 		region.getVertices().add(state);
 	}
-	
-	
+
 	/**
 	 * A regular state must have a name.
 	 */
+	@Test
 	public void testStateWithoutName() {
 		prepareStateTest();
-		
+
 		state.setName(null);
-		assertFalse(validator.validate(state,  diagnostics, new HashMap<Object,Object>()));
+		assertFalse(validator.validate(state, diagnostics,
+				new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_STATE_WITHOUT_NAME);
 	}
 
 	/**
 	 * A states name must not be empty.
 	 */
+	@Test
 	public void testStateWithEmptyName() {
 		prepareStateTest();
-		
+
 		state.setName("");
-		assertFalse(validator.validate(state,  diagnostics, new HashMap<Object,Object>()));
+		assertFalse(validator.validate(state, diagnostics,
+				new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_STATE_WITHOUT_NAME);
 	}
-	
-	
+
 	/**
 	 * A state name with just white spaces is not valid.
 	 */
+	@Test
 	public void testStateWithWhitespaceName() {
 		prepareStateTest();
-		
+
 		state.setName(" 	");
-		assertFalse(validator.validate(state,  diagnostics, new HashMap<Object,Object>()));
+		assertFalse(validator.validate(state, diagnostics,
+				new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_STATE_WITHOUT_NAME);
 	}
 
-	
 	/**
 	 * A state must be reachable.
 	 */
+	@Test
 	public void testStateUnreachable() {
 		prepareStateTest();
-		
-		assertFalse(validator.validate(state,  diagnostics, new HashMap<Object,Object>()));
+
+		assertFalse(validator.validate(state, diagnostics,
+				new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_NODE_NOT_REACHABLE);
 	}
 
-	
 	/**
 	 * A regular state may be a dead end.
 	 */
+	@Test
 	public void testStateDeadEnd() {
 		prepareStateTest();
-		
-		validator.validate(state,  diagnostics, new HashMap<Object,Object>());
+
+		validator.validate(state, diagnostics, new HashMap<Object, Object>());
 		assertNoIssue(diagnostics, ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION);
 	}
 
-	
 	/**
 	 * A valid regular state must produce no issues.
 	 */
+	@Test
 	public void testValidState() {
 		prepareStateTest();
 		Entry entry = factory.createEntry();
 		region.getVertices().add(entry);
 		createTransition(entry, state);
-				
-		assertTrue(validator.validate(state,  diagnostics, new HashMap<Object,Object>()));
+
+		assertTrue(validator.validate(state, diagnostics,
+				new HashMap<Object, Object>()));
 		assertIssueCount(diagnostics, 0);
 	}
 
-	
 	/**
 	 * An initial entry should have no incoming transition
 	 */
+	@Test
 	public void testInitialEntryWithIncomingTransition() {
 		prepareStateTest();
-		
+
 		Entry entry = factory.createEntry();
 		region.getVertices().add(entry);
 		createTransition(state, entry);
 
 		assertEquals(EntryKind.INITIAL, entry.getKind());
-		assertFalse(validator.validate(entry,  diagnostics, new HashMap<Object,Object>()));		
+		assertFalse(validator.validate(entry, diagnostics,
+				new HashMap<Object, Object>()));
 		assertWarning(diagnostics, ISSUE_INITIAL_ENTRY_WITH_IN_TRANS);
 	}
-	
-	
+
 	/**
 	 * A valid entry should have No issues
 	 */
+	@Test
 	public void testValidInitialEntry() {
 		prepareStateTest();
-		
+
 		Entry entry = factory.createEntry();
 		region.getVertices().add(entry);
 		createTransition(entry, state);
 
 		assertEquals(EntryKind.INITIAL, entry.getKind());
-		assertTrue(validator.validate(entry,  diagnostics, new HashMap<Object,Object>()));		
+		assertTrue(validator.validate(entry, diagnostics,
+				new HashMap<Object, Object>()));
 		assertIssueCount(diagnostics, 0);
 	}
-	
-	
+
 	/**
 	 * An initial entry should have an outgoing transition
 	 */
+	@Test
 	public void testInitialEntryWithoutOutTransition() {
 		prepareStateTest();
-		
+
 		Entry entry = factory.createEntry();
 		region.getVertices().add(entry);
-		
+
 		assertEquals(EntryKind.INITIAL, entry.getKind());
-		assertFalse(validator.validate(entry,  diagnostics, new HashMap<Object,Object>()));		
+		assertFalse(validator.validate(entry, diagnostics,
+				new HashMap<Object, Object>()));
 		assertWarning(diagnostics, ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS);
 	}
-	
+
 	/**
 	 * An entry should not have more than one outgoing transition
 	 */
+	@Test
 	public void testEntryMultipleOutTransition() {
 		prepareStateTest();
-		
+
 		Entry entry = factory.createEntry();
 		region.getVertices().add(entry);
-		createTransition(entry,	state);
 		createTransition(entry, state);
-		
+		createTransition(entry, state);
+
 		assertEquals(EntryKind.INITIAL, entry.getKind());
-		assertFalse(validator.validate(entry,  diagnostics, new HashMap<Object,Object>()));		
+		assertFalse(validator.validate(entry, diagnostics,
+				new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
-		
+
 		entry.setKind(EntryKind.SHALLOW_HISTORY);
-		
+
 		diagnostics = new BasicDiagnostic();
-		assertFalse(validator.validate(entry,  diagnostics, new HashMap<Object,Object>()));		
+		assertFalse(validator.validate(entry, diagnostics,
+				new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
-		
+
 		entry.setKind(EntryKind.DEEP_HISTORY);
-		
+
 		diagnostics = new BasicDiagnostic();
-		assertFalse(validator.validate(entry,  diagnostics, new HashMap<Object,Object>()));		
+		assertFalse(validator.validate(entry, diagnostics,
+				new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
-		
 
 	}
-	
+
+	@Test
 	public void testEntryWithTriggeredTransition() {
 		prepareStateTest();
-		
+
 		Entry entry = factory.createEntry();
 		region.getVertices().add(entry);
 		Transition trans = createTransition(entry, state);
 		trans.setTrigger(sTextFactory.createReactionTrigger());
 		diagnostics = new BasicDiagnostic();
-		assertFalse(validator.validate(entry, diagnostics, new HashMap<Object, Object>()));
+		assertFalse(validator.validate(entry, diagnostics,
+				new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_ENTRY_WITH_TRIGGER);
 	}
-	
-	
+
 	/**
 	 * A final state should have at least one incoming transition.
 	 */
+	@Test
 	public void testFinalStateIsolated() {
 		statechart = factory.createStatechart();
 		Region region = factory.createRegion();
 		statechart.getRegions().add(region);
 		FinalState finalState = factory.createFinalState();
 		region.getVertices().add(finalState);
-		
-		assertFalse(validator.validate(finalState,  diagnostics, new HashMap<Object,Object>()));
-		
+
+		assertFalse(validator.validate(finalState, diagnostics,
+				new HashMap<Object, Object>()));
+
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, ISSUE_NODE_NOT_REACHABLE);
 	}
 
-
 	/**
 	 * A positive case for a valid final state.
 	 */
+	@Test
 	public void testFinalStateValid() {
 		statechart = factory.createStatechart();
 		Region region = factory.createRegion();
@@ -274,14 +291,15 @@ public class SGraphBaseValidationTest extends TestCase {
 		region.getVertices().add(state);
 		createTransition(state, finalState);
 
-		assertTrue(validator.validate(finalState,  diagnostics, new HashMap<Object,Object>()));
+		assertTrue(validator.validate(finalState, diagnostics,
+				new HashMap<Object, Object>()));
 		assertIssueCount(diagnostics, 0);
 	}
 
-	
 	/**
 	 * A final state should have at least one incoming transition.
 	 */
+	@Test
 	public void testFinalStateOutgoingTransitions() {
 		statechart = factory.createStatechart();
 		Region region = factory.createRegion();
@@ -294,16 +312,14 @@ public class SGraphBaseValidationTest extends TestCase {
 		createTransition(state, finalState);
 		createTransition(finalState, state);
 
+		assertFalse(validator.validate(finalState, diagnostics,
+				new HashMap<Object, Object>()));
 
-		assertFalse(validator.validate(finalState,  diagnostics, new HashMap<Object,Object>()));
-		
 		assertIssueCount(diagnostics, 1);
-		assertWarning(diagnostics, SGraphValidator.ISSUE_FINAL_STATE_OUTGOING_TRANSITION);
+		assertWarning(diagnostics,
+				SGraphValidator.ISSUE_FINAL_STATE_OUTGOING_TRANSITION);
 	}
 
-
-	
-	
 	protected Transition createTransition(Vertex source, Vertex target) {
 		Transition trans = factory.createTransition();
 		trans.setSource(source);
@@ -312,41 +328,45 @@ public class SGraphBaseValidationTest extends TestCase {
 		target.getIncomingTransitions().add(trans);
 		return trans;
 	}
-	
 
-	
 	protected void assertError(BasicDiagnostic diag, String message) {
 		Diagnostic d = issueByName(diag, message);
-		assertNotNull("Issue '" + message + "' does not exist.", issueByName(diag, message));
-		assertEquals("Issue '" + message + "' is no error.", Diagnostic.ERROR, d.getSeverity());
+		assertNotNull("Issue '" + message + "' does not exist.",
+				issueByName(diag, message));
+		assertEquals("Issue '" + message + "' is no error.", Diagnostic.ERROR,
+				d.getSeverity());
 	}
-	
+
 	protected void assertWarning(BasicDiagnostic diag, String message) {
 		Diagnostic d = issueByName(diag, message);
-		assertNotNull("Issue '" + message + "' does not exist.", issueByName(diag, message));
-		assertEquals("Issue '" + message + "' is no warning.", Diagnostic.WARNING, d.getSeverity());
+		assertNotNull("Issue '" + message + "' does not exist.",
+				issueByName(diag, message));
+		assertEquals("Issue '" + message + "' is no warning.",
+				Diagnostic.WARNING, d.getSeverity());
 	}
-	
 
 	protected void assertIssue(BasicDiagnostic diag, String message) {
-		assertNotNull("Issue '" + message + "' does not exist.", issueByName(diag, message));
+		assertNotNull("Issue '" + message + "' does not exist.",
+				issueByName(diag, message));
 	}
-	
+
 	protected void assertNoIssue(BasicDiagnostic diag, String message) {
-		assertNull("Issue '" + message + "' does exist.", issueByName(diag, message));
+		assertNull("Issue '" + message + "' does exist.",
+				issueByName(diag, message));
 	}
 
 	protected void assertIssueCount(BasicDiagnostic diag, int count) {
 		int c = diagnostics.getChildren().size();
-		assertEquals("expected " + count + " issue(s) but were " + c + " [" + diag.toString() + "]", count, c);
+		assertEquals("expected " + count + " issue(s) but were " + c + " ["
+				+ diag.toString() + "]", count, c);
 	}
-	
-	
+
 	protected Diagnostic issueByName(BasicDiagnostic diag, String message) {
 		for (Diagnostic issue : diag.getChildren()) {
-			if (message.equals(issue.getMessage())) return issue;
+			if (message.equals(issue.getMessage()))
+				return issue;
 		}
-		
+
 		return null;
 	}
 
