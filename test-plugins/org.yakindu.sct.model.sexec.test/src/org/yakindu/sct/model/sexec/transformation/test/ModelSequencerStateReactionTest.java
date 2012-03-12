@@ -4,7 +4,22 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.*;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEventDefinition;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createInterfaceScope;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createLocalReaction;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createOncycleEventSpec;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createReactionTrigger;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegion;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegularEventSpec;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createState;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createStatechart;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createTimeEventSpec;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createTimeTriggeredReaction;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createTransition;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createValue;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableAssignment;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableDefinition;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -22,10 +37,9 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.stext.stext.Assignment;
+import org.yakindu.sct.model.stext.stext.AssignmentExpression;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.IntLiteral;
 import org.yakindu.sct.model.stext.stext.Literal;
@@ -40,6 +54,7 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
+import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 public class ModelSequencerStateReactionTest extends ModelSequencerTest {
@@ -58,7 +73,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		Statement s = behaviorMapping.buildCondition(tr1);
 
-		assertTrue(s instanceof ElementReferenceExpression);
+		assertClass(TypedElementReferenceExpression.class, s);
 	}
 
 	/**
@@ -82,8 +97,10 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		Statement s = behaviorMapping.buildCondition(tr1);
 
 		assertTrue(s instanceof LogicalOrExpression);
-		assertTrue(((LogicalOrExpression) s).getLeftOperand() instanceof ElementReferenceExpression);
-		assertTrue(((LogicalOrExpression) s).getRightOperand() instanceof ElementReferenceExpression);
+		assertClass(TypedElementReferenceExpression.class,
+				((LogicalOrExpression) s).getLeftOperand());
+		assertClass(TypedElementReferenceExpression.class,
+				((LogicalOrExpression) s).getRightOperand());
 	}
 
 	/**
@@ -146,19 +163,23 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		Reaction reaction = behaviorMapping.mapTransition(t);
 
 		assertTrue(reaction.getCheck().getCondition() instanceof LogicalOrExpression);
-		assertTrue(((LogicalOrExpression) reaction.getCheck().getCondition())
-				.getLeftOperand() instanceof ElementReferenceExpression);
-		assertTrue(((LogicalOrExpression) reaction.getCheck().getCondition())
-				.getRightOperand() instanceof ElementReferenceExpression);
+		assertClass(TypedElementReferenceExpression.class,
+				((LogicalOrExpression) reaction.getCheck().getCondition())
+						.getLeftOperand());
+		assertClass(TypedElementReferenceExpression.class,
+				((LogicalOrExpression) reaction.getCheck().getCondition())
+						.getRightOperand());
 
-		assertEquals(e1.getName(),
-				((ElementReferenceExpression) ((LogicalOrExpression) reaction
+		assertEquals(
+				e1.getName(),
+				((TypedElementReferenceExpression) ((LogicalOrExpression) reaction
 						.getCheck().getCondition()).getLeftOperand())
-						.getValue().getName());
-		assertEquals(e2.getName(),
-				((ElementReferenceExpression) ((LogicalOrExpression) reaction
+						.getReference().getName());
+		assertEquals(
+				e2.getName(),
+				((TypedElementReferenceExpression) ((LogicalOrExpression) reaction
 						.getCheck().getCondition()).getRightOperand())
-						.getValue().getName());
+						.getReference().getName());
 	}
 
 	@Test
@@ -190,14 +211,16 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		PrimitiveValueExpression guardCheck = (PrimitiveValueExpression) and
 				.getRightOperand();
 
-		assertTrue(triggerCheck.getLeftOperand() instanceof ElementReferenceExpression);
-		assertTrue(triggerCheck.getRightOperand() instanceof ElementReferenceExpression);
+		assertClass(TypedElementReferenceExpression.class,
+				triggerCheck.getLeftOperand());
+		assertClass(TypedElementReferenceExpression.class,
+				triggerCheck.getRightOperand());
 		assertEquals(e1.getName(),
-				((ElementReferenceExpression) triggerCheck.getLeftOperand())
-						.getValue().getName());
+				((TypedElementReferenceExpression) triggerCheck
+						.getLeftOperand()).getReference().getName());
 		assertEquals(e2.getName(),
-				((ElementReferenceExpression) triggerCheck.getRightOperand())
-						.getValue().getName());
+				((TypedElementReferenceExpression) triggerCheck
+						.getRightOperand()).getReference().getName());
 
 		assertBoolLiteral(false, guardCheck.getValue());
 	}
@@ -241,7 +264,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		ReactionTrigger tr1 = _createReactionTrigger(t);
 		_createTimeEventSpec(TimeEventType.AFTER, 1, TimeUnit.SECOND, tr1);
 
-		Assignment assign = _createVariableAssignment(v1,
+		AssignmentExpression assign = _createVariableAssignment(v1,
 				AssignmentOperator.ASSIGN, _createValue(42),
 				(ReactionEffect) t.getEffect());
 
@@ -260,9 +283,9 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		If _if = (If) flow.getStates().get(0).getReactSequence().getSteps()
 				.get(0);
 
-		ElementReferenceExpression _ere = (ElementReferenceExpression) _if
+		TypedElementReferenceExpression _ere = (TypedElementReferenceExpression) _if
 				.getCheck().getCondition();
-		assertSame(te, _ere.getValue());
+		assertSame(te, _ere.getReference());
 
 		// assert the scheduling of the time event during state entry
 		assertNotNull(_s.getEntryAction());
@@ -303,7 +326,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		LocalReaction timeTriggeredReaction = _createTimeTriggeredReaction(s,
 				TimeEventType.AFTER, 2, TimeUnit.MILLISECOND);
-		Assignment assign = _createVariableAssignment(v1,
+		AssignmentExpression assign = _createVariableAssignment(v1,
 				AssignmentOperator.ASSIGN, _createValue(42),
 				(ReactionEffect) timeTriggeredReaction.getEffect());
 
@@ -349,7 +372,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		LocalReaction timeTriggeredReaction = _createLocalReaction(s,
 				StextFactory.eINSTANCE.createOnCycleEvent());
-		Assignment assign = _createVariableAssignment(v1,
+		AssignmentExpression assign = _createVariableAssignment(v1,
 				AssignmentOperator.ASSIGN, _createValue(42),
 				(ReactionEffect) timeTriggeredReaction.getEffect());
 
@@ -380,7 +403,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		LocalReaction timeTriggeredReaction = _createLocalReaction(s,
 				StextFactory.eINSTANCE.createAlwaysEvent());
-		Assignment assign = _createVariableAssignment(v1,
+		AssignmentExpression assign = _createVariableAssignment(v1,
 				AssignmentOperator.ASSIGN, _createValue(42),
 				(ReactionEffect) timeTriggeredReaction.getEffect());
 
