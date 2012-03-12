@@ -11,6 +11,7 @@
 package org.yakindu.sct.builder;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
@@ -36,6 +37,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 /**
  * 
@@ -67,19 +69,21 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 	}
 
 	class DeltaVisitor implements IResourceDeltaVisitor {
+		private Set<IResource> buildSgens = Sets.newHashSet();
+
 		public boolean visit(IResourceDelta delta) throws CoreException {
 			IResource resource = delta.getResource();
 			switch (delta.getKind()) {
 			case IResourceDelta.ADDED:
 				// handle added resource
-				doIt(resource);
+				doIt(resource, buildSgens);
 				break;
 			case IResourceDelta.REMOVED:
 				// handle removed resource
 				break;
 			case IResourceDelta.CHANGED:
 				// handle changed resource
-				doIt(resource);
+				doIt(resource, buildSgens);
 				break;
 			}
 			// return true to continue visiting children.
@@ -88,8 +92,10 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 	}
 
 	class SimpleResourceVisitor implements IResourceVisitor {
+		private Set<IResource> buildSgens = Sets.newHashSet();
+
 		public boolean visit(IResource resource) {
-			doIt(resource);
+			doIt(resource, buildSgens);
 			// return true to continue visiting children.
 			return true;
 		}
@@ -125,14 +131,27 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 		delta.accept(new DeltaVisitor());
 	}
 
-	public void doIt(final IResource changedResource) {
+	/**
+	 * Build the Statecharts inside this sgen-file or find all sgen-files for
+	 * the statechart in the resource and build them.
+	 * 
+	 * @param changedResource
+	 *            Resource to check, if it can be build.
+	 * @param buildSgens
+	 *            Contains a set of already build sgen files. Accepted
+	 *            sgen-files are added inside this method.
+	 */
+	public void doIt(final IResource changedResource,
+			final Set<IResource> buildSgens) {
 		if (changedResource.getType() != IResource.FILE) {
 			return;
 		}
-		if (SGEN_FILE_EXTENSION.equals(changedResource.getFileExtension())) {
+		if (SGEN_FILE_EXTENSION.equals(changedResource.getFileExtension())
+				&& !buildSgens.contains(changedResource)) {
 			if (hasError(changedResource)) {
 				logGenmodelError(changedResource.getFullPath().toString());
 			} else {
+				buildSgens.add(changedResource);
 				executeGenmodelGenerator(changedResource);
 			}
 		} else if (SCT_FILE_EXTENSION
@@ -146,6 +165,7 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 						if (IResource.FILE == resource.getType()
 								&& SGEN_FILE_EXTENSION.equals(resource
 										.getFileExtension())
+								&& !buildSgens.contains(resource)
 								&& isGenmodelForStatechart(resource, statechart)) {
 							// TODO: would be good to filter the config for the
 							// statechart so only the sct that changed is
@@ -158,6 +178,7 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 									logGenmodelError(resource.getFullPath()
 											.toString());
 								} else {
+									buildSgens.add(resource);
 									executeGenmodelGenerator(resource);
 								}
 							}
