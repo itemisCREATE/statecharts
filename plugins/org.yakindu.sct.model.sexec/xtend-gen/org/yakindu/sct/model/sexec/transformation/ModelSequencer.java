@@ -106,6 +106,7 @@ public class ModelSequencer {
       this.behaviorMapping.mapLocalReactions(sc, ef);
       this.behaviorMapping.mapChoiceTransitions(sc, ef);
       this.reactBuilder.defineEntryReactions(sc, ef);
+      this.reactBuilder.defineStatechartReaction(ef, sc);
       this.reactBuilder.defineRegularStateReactions(ef, sc);
       this.reactBuilder.definePseudoStateReactions(ef, sc);
       this.retargetDeclRefs(ef);

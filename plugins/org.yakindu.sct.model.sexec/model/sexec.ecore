@@ -6,7 +6,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="MappedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceElement" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExecutionFlow" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//ScopedElement #//ExecutionScope">
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionFlow" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//ScopedElement #//ExecutionScope #//ExecutionNode">
     <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
         eType="#//ExecutionState" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
@@ -15,8 +15,6 @@
         eType="#//ExecutionRegion" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="historyVector" eType="#//StateVector"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="reactions" upperBound="-1"
-        eType="#//Reaction" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionNode" eSuperTypes="#//MappedElement ../../org.yakindu.base.types/model/base.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reactions" upperBound="-1"

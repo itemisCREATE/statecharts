@@ -46,11 +46,13 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSuperScope <em>Super Scope</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getEnterSequence <em>Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getExitSequence <em>Exit Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getReactions <em>Reactions</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSimpleName <em>Simple Name</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getReactSequence <em>React Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getStates <em>States</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getRegions <em>Regions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getHistoryVector <em>History Vector</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getReactions <em>Reactions</em>}</li>
  * </ul>
  * </p>
  *
@@ -138,6 +140,46 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	protected Sequence exitSequence;
 
 	/**
+	 * The cached value of the '{@link #getReactions() <em>Reactions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReactions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Reaction> reactions;
+
+	/**
+	 * The default value of the '{@link #getSimpleName() <em>Simple Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSimpleName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SIMPLE_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSimpleName() <em>Simple Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSimpleName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String simpleName = SIMPLE_NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getReactSequence() <em>React Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReactSequence()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sequence reactSequence;
+
+	/**
 	 * The cached value of the '{@link #getStates() <em>States</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -176,16 +218,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected StateVector historyVector;
-
-	/**
-	 * The cached value of the '{@link #getReactions() <em>Reactions</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReactions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Reaction> reactions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -562,6 +594,70 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getSimpleName() {
+		return simpleName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSimpleName(String newSimpleName) {
+		String oldSimpleName = simpleName;
+		simpleName = newSimpleName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__SIMPLE_NAME, oldSimpleName, simpleName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Sequence getReactSequence() {
+		return reactSequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetReactSequence(Sequence newReactSequence, NotificationChain msgs) {
+		Sequence oldReactSequence = reactSequence;
+		reactSequence = newReactSequence;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE, oldReactSequence, newReactSequence);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReactSequence(Sequence newReactSequence) {
+		if (newReactSequence != reactSequence) {
+			NotificationChain msgs = null;
+			if (reactSequence != null)
+				msgs = ((InternalEObject)reactSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE, null, msgs);
+			if (newReactSequence != null)
+				msgs = ((InternalEObject)newReactSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE, null, msgs);
+			msgs = basicSetReactSequence(newReactSequence, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE, newReactSequence, newReactSequence));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -594,6 +690,10 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return basicSetEnterSequence(null, msgs);
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				return basicSetExitSequence(null, msgs);
+			case SexecPackage.EXECUTION_FLOW__REACTIONS:
+				return ((InternalEList<?>)getReactions()).basicRemove(otherEnd, msgs);
+			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
+				return basicSetReactSequence(null, msgs);
 			case SexecPackage.EXECUTION_FLOW__STATES:
 				return ((InternalEList<?>)getStates()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__NODES:
@@ -602,8 +702,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return ((InternalEList<?>)getRegions()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 				return basicSetHistoryVector(null, msgs);
-			case SexecPackage.EXECUTION_FLOW__REACTIONS:
-				return ((InternalEList<?>)getReactions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -632,6 +730,12 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return getEnterSequence();
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				return getExitSequence();
+			case SexecPackage.EXECUTION_FLOW__REACTIONS:
+				return getReactions();
+			case SexecPackage.EXECUTION_FLOW__SIMPLE_NAME:
+				return getSimpleName();
+			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
+				return getReactSequence();
 			case SexecPackage.EXECUTION_FLOW__STATES:
 				return getStates();
 			case SexecPackage.EXECUTION_FLOW__NODES:
@@ -640,8 +744,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return getRegions();
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 				return getHistoryVector();
-			case SexecPackage.EXECUTION_FLOW__REACTIONS:
-				return getReactions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -677,6 +779,16 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				setExitSequence((Sequence)newValue);
 				return;
+			case SexecPackage.EXECUTION_FLOW__REACTIONS:
+				getReactions().clear();
+				getReactions().addAll((Collection<? extends Reaction>)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__SIMPLE_NAME:
+				setSimpleName((String)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
+				setReactSequence((Sequence)newValue);
+				return;
 			case SexecPackage.EXECUTION_FLOW__STATES:
 				getStates().clear();
 				getStates().addAll((Collection<? extends ExecutionState>)newValue);
@@ -691,10 +803,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return;
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 				setHistoryVector((StateVector)newValue);
-				return;
-			case SexecPackage.EXECUTION_FLOW__REACTIONS:
-				getReactions().clear();
-				getReactions().addAll((Collection<? extends Reaction>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -729,6 +837,15 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				setExitSequence((Sequence)null);
 				return;
+			case SexecPackage.EXECUTION_FLOW__REACTIONS:
+				getReactions().clear();
+				return;
+			case SexecPackage.EXECUTION_FLOW__SIMPLE_NAME:
+				setSimpleName(SIMPLE_NAME_EDEFAULT);
+				return;
+			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
+				setReactSequence((Sequence)null);
+				return;
 			case SexecPackage.EXECUTION_FLOW__STATES:
 				getStates().clear();
 				return;
@@ -740,9 +857,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return;
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 				setHistoryVector((StateVector)null);
-				return;
-			case SexecPackage.EXECUTION_FLOW__REACTIONS:
-				getReactions().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -770,6 +884,12 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return enterSequence != null;
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				return exitSequence != null;
+			case SexecPackage.EXECUTION_FLOW__REACTIONS:
+				return reactions != null && !reactions.isEmpty();
+			case SexecPackage.EXECUTION_FLOW__SIMPLE_NAME:
+				return SIMPLE_NAME_EDEFAULT == null ? simpleName != null : !SIMPLE_NAME_EDEFAULT.equals(simpleName);
+			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
+				return reactSequence != null;
 			case SexecPackage.EXECUTION_FLOW__STATES:
 				return states != null && !states.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__NODES:
@@ -778,8 +898,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return regions != null && !regions.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 				return historyVector != null;
-			case SexecPackage.EXECUTION_FLOW__REACTIONS:
-				return reactions != null && !reactions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -810,6 +928,14 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				case SexecPackage.EXECUTION_FLOW__SUPER_SCOPE: return SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE;
 				case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE: return SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE;
 				case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE: return SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE;
+				default: return -1;
+			}
+		}
+		if (baseClass == ExecutionNode.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_FLOW__REACTIONS: return SexecPackage.EXECUTION_NODE__REACTIONS;
+				case SexecPackage.EXECUTION_FLOW__SIMPLE_NAME: return SexecPackage.EXECUTION_NODE__SIMPLE_NAME;
+				case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE: return SexecPackage.EXECUTION_NODE__REACT_SEQUENCE;
 				default: return -1;
 			}
 		}
@@ -845,6 +971,14 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				default: return -1;
 			}
 		}
+		if (baseClass == ExecutionNode.class) {
+			switch (baseFeatureID) {
+				case SexecPackage.EXECUTION_NODE__REACTIONS: return SexecPackage.EXECUTION_FLOW__REACTIONS;
+				case SexecPackage.EXECUTION_NODE__SIMPLE_NAME: return SexecPackage.EXECUTION_FLOW__SIMPLE_NAME;
+				case SexecPackage.EXECUTION_NODE__REACT_SEQUENCE: return SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -860,6 +994,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", simpleName: ");
+		result.append(simpleName);
 		result.append(')');
 		return result.toString();
 	}

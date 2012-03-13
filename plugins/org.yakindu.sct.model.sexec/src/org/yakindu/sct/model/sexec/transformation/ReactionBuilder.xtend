@@ -18,6 +18,7 @@ import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sexec.ExecutionNode
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.FinalState
+import org.eclipse.xtext.EcoreUtil2
 
 class ReactionBuilder {
 	@Inject extension SexecElementMapping mapping
@@ -26,6 +27,13 @@ class ReactionBuilder {
 	@Inject extension StatechartExtensions sct
 	@Inject extension TraceExtensions trace
 	
+	def defineStatechartReaction(ExecutionFlow flow, Statechart sc) {
+		val reaction = flow.createReactionSequence(null)
+		
+		flow.reactSequence = reaction
+		return flow
+	}
+
 	def defineRegularStateReactions(ExecutionFlow flow, Statechart sc) {
 		
 		val states = sc.allRegularStates
@@ -76,11 +84,11 @@ class ReactionBuilder {
 	def Sequence defineCycle(RegularState state) {
 	
 		val execState = state.create
-		val stateReaction = execState.createReactionSequence(null)
 		val parents = state.parentStates		
 		execState.reactSequence = parents.fold(null, [r, s | {
 			s.create.createReactionSequence(r)
 		}])
+		execState.reactSequence = (EcoreUtil2::getRootContainer(execState) as ExecutionFlow).createReactionSequence(execState.reactSequence)
 		
 		execState.reactSequence.name = 'react'
 		execState.reactSequence.comment = 'The reactions of state ' + state.name + '.'
@@ -90,7 +98,8 @@ class ReactionBuilder {
 
 	def Sequence createReactionSequence(ExecutionNode state, Step localStep) {	
 		val cycle = sexec.factory.createSequence
-				
+		cycle.name = "react"
+		
 		val localReactions = state.reactions.filter(r | ! r.transition).toList
 		var localSteps = sexec.factory.createSequence
 		localSteps.steps.addAll(localReactions.map(lr | {

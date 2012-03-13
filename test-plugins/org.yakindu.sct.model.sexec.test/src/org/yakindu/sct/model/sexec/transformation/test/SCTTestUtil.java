@@ -1,12 +1,16 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesFactory;
+import org.yakindu.sct.model.sexec.Sequence;
+import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.FinalState;
@@ -50,6 +54,23 @@ import com.google.common.collect.Collections2;
 public class SCTTestUtil {
 
 	public static Type TYPE_INTEGER = _createType("integer");
+
+	public static List<Step> flattenSequenceStepsAsList(Step step) {
+		return flattenSequenceStepsAsList(step, new LinkedList<Step>());
+	}
+
+	public static List<Step> flattenSequenceStepsAsList(Step step,
+			List<Step> result) {
+		if (step instanceof Sequence) {
+			Sequence sequence = (Sequence) step;
+			for (Step s : sequence.getSteps()) {
+				flattenSequenceStepsAsList(s, result);
+			}
+		} else {
+			result.add(step);
+		}
+		return result;
+	}
 
 	public static EventDefinition _createEventDefinition(String name,
 			Scope scope) {
