@@ -52,7 +52,7 @@
             <outgoingTransitions xmi:id="_xv5kgPiOEeCdY7qI3rL1gA" specification="event5, event3" target="_wBkacPiOEeCdY7qI3rL1gA"/>
             <outgoingTransitions xmi:id="_2S3RYDXvEeGVofhlERZOaA" specification="event7" target="_dt1PovZlEeCSetPXFd1ZUw"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_wBkacPiOEeCdY7qI3rL1gA" specification="entry / reg3=8&#xA;exit / reg3=-1;&#xA;" name="State8" incomingTransitions="_xv5kgPiOEeCdY7qI3rL1gA _5P8tsDbYEeGxmqzvYaHPrw">
+          <vertices xsi:type="sgraph:State" xmi:id="_wBkacPiOEeCdY7qI3rL1gA" specification="entry / reg3=8&#xA;exit / reg3=-1&#xA;" name="State8" incomingTransitions="_xv5kgPiOEeCdY7qI3rL1gA _5P8tsDbYEeGxmqzvYaHPrw">
             <outgoingTransitions xmi:id="_1T-IMPiOEeCdY7qI3rL1gA" specification="event6" target="_jxK_0PiOEeCdY7qI3rL1gA"/>
           </vertices>
         </regions>
