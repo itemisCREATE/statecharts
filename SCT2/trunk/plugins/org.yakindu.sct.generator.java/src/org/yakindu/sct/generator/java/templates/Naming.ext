@@ -18,6 +18,10 @@ extension org::yakindu::sct::generator::java::templates::ExecutionModelExtension
 extension org::yakindu::sct::generator::java::templates::GenmodelEntries;
 extension org::yakindu::sct::generator::java::templates::TypeModelExtensions;
 
+//TODO Workaround (WA) for error in Typesystem
+String getNameWA(Declaration this) : this.metaType.getProperty("name").toString();
+String getNameWA(Vertex this) : this.metaType.getProperty("name").toString();
+
 String getStatemachineName(String name) :
 	JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getValidStatemachineName(java.lang.String);
 
@@ -103,8 +107,10 @@ String getName(ExecutionFlow this) :
 	name.replaceAll(" ","").toFirstUpper();
 
 String getName(Event this) :
-	"Event"+name.toFirstUpper();
-	
+	"Event"+getNameWA().toFirstUpper();
+
+String getName(Expression this) : "/* Event expected, but got Expression: "+this+" */";
+
 String getter(Event this) :
 	"get"+getName()+"()";
 
@@ -167,6 +173,9 @@ String getContext(Variable this) :
 	else 
 		"";
 		
+String getContext(Expression this) : 
+	"/* getContext for unknown element: "+this+"*/";
+	
 String getContext(Event this) : 
 	if (InterfaceScope.isInstance(eContainer)) then  
 		"get"+getInterfaceImplName((InterfaceScope)eContainer)+"()."
