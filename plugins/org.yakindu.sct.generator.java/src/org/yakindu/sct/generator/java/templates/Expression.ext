@@ -35,14 +35,14 @@ String toCode(Literal literal) :
 String toCode(PrimitiveValueExpression primValue) :
 	primValue.value.toCode();
 	
-String getterCall(Assignment this) :
-	getContext(varRef).toFirstLower()+"getVar"+ varRef.name.toFirstUpper()+ "()";
+String getterCall(AssignmentExpression this) :
+	getContext(varRef).toFirstLower()+"getVar"+ varRef.getName().toFirstUpper()+ "()";
 	
-String setterCall(Assignment this, String expression) :
-	getContext(varRef).toFirstLower()+"setVar" + varRef.name.toFirstUpper() + "(" + expression + ");";
+String setterCall(AssignmentExpression this, String expression) :
+	getContext(varRef).toFirstLower()+"setVar" + varRef.getName().toFirstUpper() + "(" + expression + ");";
 
 /* Assignment */
-String toCode(Assignment this) :
+String toCode(AssignmentExpression this) :
   switch (operator) {
   case AssignmentOperator::assign : setterCall(expression.toCode())
   case AssignmentOperator::multAssign : setterCall(getterCall() + " * (" + expression.toCode() + ")")
@@ -102,13 +102,13 @@ String toCode(NumericalMultiplyDivideExpression expression) :
 String toCode(NumericalUnaryExpression expression) :
     getOperator(expression.operator) + " ( " + expression.operand.toCode() + " ) ";
 
-String toCode(ElementReferenceExpression exp) :
-    if (EventDefinition.isInstance(exp.value)) then
-    	"occuredEvents.contains("+((EventDefinition)exp.value).getContext().toFirstLower()+"get"+((EventDefinition)exp.value).getName()+"())"
-    else if (VariableDefinition.isInstance(exp.value)) then
-    	getContext((VariableDefinition)exp.value)+"getVar"+exp.value.name.toFirstUpper()+"()"
-    else if (TimeEvent.isInstance(exp.value)) then
-    	"occuredEvents.contains("+getName((TimeEvent)exp.value)+")";
+String toCode(TypedElementReferenceExpression exp) :
+    if (EventDefinition.isInstance(exp.reference)) then
+    	"occuredEvents.contains("+((EventDefinition)exp.reference).getContext().toFirstLower()+"get"+((EventDefinition)exp.reference).getName()+"())"
+    else if (VariableDefinition.isInstance(exp.reference)) then
+    	getContext((VariableDefinition)exp.reference)+"getVar"+exp.reference.name.toFirstUpper()+"()"
+    else if (TimeEvent.isInstance(exp.reference)) then
+    	"occuredEvents.contains("+getName((TimeEvent)exp.reference)+")";
 
 String getOperator(AdditiveOperator operator) : 
     switch(operator) {
@@ -144,11 +144,11 @@ String getOperator(RelationalOperator operator) :
 	  default : ""
 	};
 	
-String toCode(EventRaising this) :
+String toCode(EventRaisingExpression this) :
 	if this.value != null then
-		event.getContext().toFirstLower()+"raise"+event.name.toFirstUpper()+"("+value.toCode()+");"
+		event.getContext().toFirstLower()+"raise"+event.getName().toFirstUpper()+"("+value.toCode()+");"
 	else
-		event.getContext().toFirstLower()+"raise"+event.name.toFirstUpper()+"();";
+		event.getContext().toFirstLower()+"raise"+event.getName().toFirstUpper()+"();";
 		
 String getInitialValue(EventDefinition this) :
 	if derivation != null then
