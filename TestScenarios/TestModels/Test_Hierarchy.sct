@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_Mv_1gPZlEeCSetPXFd1ZUw" name="Test_Hierarchy" specification="interface:&#xA;in event event1&#xA;in event event2&#xA;in event event3&#xA;in event event4&#xA;in event event5&#xA;in event event6&#xA;in event event7&#xA;in event event8&#xA;in event event9&#xA;in event event10&#xA;in event event11&#xA;in event event12&#xA;in event event13&#xA;in event event14&#xA;in event event15&#xA;in event event16&#xA;var s1 : integer = 0&#xA;var s2 : integer&#xA;">
+  <sgraph:Statechart xmi:id="_Mv_1gPZlEeCSetPXFd1ZUw" specification="interface:&#xA;in event event1&#xA;in event event2&#xA;in event event3&#xA;in event event4&#xA;in event event5&#xA;in event event6&#xA;in event event7&#xA;in event event8&#xA;in event event9&#xA;in event event10&#xA;in event event11&#xA;in event event12&#xA;in event event13&#xA;in event event14&#xA;in event event15&#xA;in event event16&#xA;var s1 : integer = 0&#xA;var s2 : integer&#xA;" name="Test_Hierarchy">
     <regions xmi:id="_MwAckvZlEeCSetPXFd1ZUw" name="mainRegion">
       <vertices xsi:type="sgraph:Entry" xmi:id="_MwBDpvZlEeCSetPXFd1ZUw">
         <outgoingTransitions xmi:id="_MwHxU_ZlEeCSetPXFd1ZUw" target="_MwBqt_ZlEeCSetPXFd1ZUw"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_MwBqt_ZlEeCSetPXFd1ZUw" specification="entry / s1=1;&#xA;exit / s1-=1;" name="State1" incomingTransitions="_MwHxU_ZlEeCSetPXFd1ZUw _gDLuUPiSEeC4at_AzcYiGg _PeCEgPiTEeC4at_AzcYiGg _R5300PiTEeC4at_AzcYiGg _VBno4PiTEeC4at_AzcYiGg">
+      <vertices xsi:type="sgraph:State" xmi:id="_MwBqt_ZlEeCSetPXFd1ZUw" specification="entry / s1=1&#xA;exit / s1-=1" name="State1" incomingTransitions="_MwHxU_ZlEeCSetPXFd1ZUw _gDLuUPiSEeC4at_AzcYiGg _PeCEgPiTEeC4at_AzcYiGg _R5300PiTEeC4at_AzcYiGg _VBno4PiTEeC4at_AzcYiGg">
         <outgoingTransitions xmi:id="_ys3bsPiREeC4at_AzcYiGg" specification="event1" target="_vau8kPiREeC4at_AzcYiGg"/>
         <regions xmi:id="_w_O_wPiSEeC4at_AzcYiGg" name="Region1">
-          <vertices xsi:type="sgraph:State" xmi:id="_yYbAQPiSEeC4at_AzcYiGg" specification="entry / s1+=1;&#xA;exit / s1-=1;" name="State9" incomingTransitions="_1vGoMPiSEeC4at_AzcYiGg _9XYoMPiSEeC4at_AzcYiGg _YoMG8PiTEeC4at_AzcYiGg">
+          <vertices xsi:type="sgraph:State" xmi:id="_yYbAQPiSEeC4at_AzcYiGg" specification="entry / s1+=1&#xA;exit / s1-=1" name="State9" incomingTransitions="_1vGoMPiSEeC4at_AzcYiGg _9XYoMPiSEeC4at_AzcYiGg _YoMG8PiTEeC4at_AzcYiGg">
             <outgoingTransitions xmi:id="_7lpk0PiSEeC4at_AzcYiGg" specification="event9" target="_3mSzUPiSEeC4at_AzcYiGg"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_0XCpEPiSEeC4at_AzcYiGg">
             <outgoingTransitions xmi:id="_1vGoMPiSEeC4at_AzcYiGg" specification="" target="_yYbAQPiSEeC4at_AzcYiGg"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_3mSzUPiSEeC4at_AzcYiGg" specification="entry / s1+=1;&#xA;exit / s1-=1;" name="State10" incomingTransitions="_7lpk0PiSEeC4at_AzcYiGg _jHEgoPiTEeC4at_AzcYiGg _qCKqgPiTEeC4at_AzcYiGg">
+          <vertices xsi:type="sgraph:State" xmi:id="_3mSzUPiSEeC4at_AzcYiGg" specification="entry / s1+=1&#xA;exit / s1-=1" name="State10" incomingTransitions="_7lpk0PiSEeC4at_AzcYiGg _jHEgoPiTEeC4at_AzcYiGg _qCKqgPiTEeC4at_AzcYiGg">
             <outgoingTransitions xmi:id="_9XYoMPiSEeC4at_AzcYiGg" specification="event10" target="_yYbAQPiSEeC4at_AzcYiGg"/>
           </vertices>
         </regions>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_vau8kPiREeC4at_AzcYiGg" specification="entry / s2 = 1;&#xA;exit / s2-=1;" name="State2" incomingTransitions="_ys3bsPiREeC4at_AzcYiGg">
+      <vertices xsi:type="sgraph:State" xmi:id="_vau8kPiREeC4at_AzcYiGg" specification="entry / s2 = 1&#xA;exit / s2-=1" name="State2" incomingTransitions="_ys3bsPiREeC4at_AzcYiGg">
         <outgoingTransitions xmi:id="_gDLuUPiSEeC4at_AzcYiGg" specification="event6" target="_MwBqt_ZlEeCSetPXFd1ZUw"/>
         <regions xmi:id="_x3yN0PiREeC4at_AzcYiGg" name="Region2">
-          <vertices xsi:type="sgraph:State" xmi:id="_08_EMPiREeC4at_AzcYiGg" specification="entry / s2+=1;&#xA;exit / s2-=1;" name="State3" incomingTransitions="_3t66wPiREeC4at_AzcYiGg _kRfh0PiSEeC4at_AzcYiGg">
+          <vertices xsi:type="sgraph:State" xmi:id="_08_EMPiREeC4at_AzcYiGg" specification="entry / s2+=1&#xA;exit / s2-=1" name="State3" incomingTransitions="_3t66wPiREeC4at_AzcYiGg _kRfh0PiSEeC4at_AzcYiGg">
             <outgoingTransitions xmi:id="_8XIhkPiREeC4at_AzcYiGg" specification="event2" target="_5TvCAPiREeC4at_AzcYiGg"/>
             <outgoingTransitions xmi:id="_PeCEgPiTEeC4at_AzcYiGg" specification="event11" target="_MwBqt_ZlEeCSetPXFd1ZUw"/>
             <outgoingTransitions xmi:id="_YoMG8PiTEeC4at_AzcYiGg" specification="event14" target="_yYbAQPiSEeC4at_AzcYiGg"/>
@@ -30,21 +30,21 @@
           <vertices xsi:type="sgraph:Entry" xmi:id="_3CQHkPiREeC4at_AzcYiGg">
             <outgoingTransitions xmi:id="_3t66wPiREeC4at_AzcYiGg" target="_08_EMPiREeC4at_AzcYiGg"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_5TvCAPiREeC4at_AzcYiGg" specification="entry / s2+=1;&#xA;exit / s2-=1;" name="State4" incomingTransitions="_8XIhkPiREeC4at_AzcYiGg">
+          <vertices xsi:type="sgraph:State" xmi:id="_5TvCAPiREeC4at_AzcYiGg" specification="entry / s2+=1&#xA;exit / s2-=1" name="State4" incomingTransitions="_8XIhkPiREeC4at_AzcYiGg">
             <outgoingTransitions xmi:id="_kRfh0PiSEeC4at_AzcYiGg" specification="event7" target="_08_EMPiREeC4at_AzcYiGg"/>
             <regions xmi:id="_-v5IsPiREeC4at_AzcYiGg" name="Region4">
-              <vertices xsi:type="sgraph:State" xmi:id="__P10EPiREeC4at_AzcYiGg" specification="entry / s2+=1;&#xA;exit / s2-=1;" name="State5" incomingTransitions="_GZpvYPiSEeC4at_AzcYiGg _nOwkMPiSEeC4at_AzcYiGg">
+              <vertices xsi:type="sgraph:State" xmi:id="__P10EPiREeC4at_AzcYiGg" specification="entry / s2+=1&#xA;exit / s2-=1" name="State5" incomingTransitions="_GZpvYPiSEeC4at_AzcYiGg _nOwkMPiSEeC4at_AzcYiGg">
                 <outgoingTransitions xmi:id="_JU70wPiSEeC4at_AzcYiGg" specification="event3" target="_DCp-YPiSEeC4at_AzcYiGg"/>
                 <outgoingTransitions xmi:id="_R5300PiTEeC4at_AzcYiGg" specification="event12" target="_MwBqt_ZlEeCSetPXFd1ZUw"/>
                 <outgoingTransitions xmi:id="_jHEgoPiTEeC4at_AzcYiGg" specification="event15" target="_3mSzUPiSEeC4at_AzcYiGg"/>
               </vertices>
-              <vertices xsi:type="sgraph:State" xmi:id="_DCp-YPiSEeC4at_AzcYiGg" specification="entry / s2+=1;&#xA;exit / s2-=1;" name="State6" incomingTransitions="_JU70wPiSEeC4at_AzcYiGg">
+              <vertices xsi:type="sgraph:State" xmi:id="_DCp-YPiSEeC4at_AzcYiGg" specification="entry / s2+=1&#xA;exit / s2-=1" name="State6" incomingTransitions="_JU70wPiSEeC4at_AzcYiGg">
                 <outgoingTransitions xmi:id="_nOwkMPiSEeC4at_AzcYiGg" specification="event8" target="__P10EPiREeC4at_AzcYiGg"/>
                 <regions xmi:id="_HPB4MPiSEeC4at_AzcYiGg" name="Region6">
-                  <vertices xsi:type="sgraph:State" xmi:id="_NwkSkPiSEeC4at_AzcYiGg" specification="entry / s2+=1;&#xA;exit / s2-=1;" name="State7" incomingTransitions="_SEyg0PiSEeC4at_AzcYiGg _VsUBIPiSEeC4at_AzcYiGg">
+                  <vertices xsi:type="sgraph:State" xmi:id="_NwkSkPiSEeC4at_AzcYiGg" specification="entry / s2+=1&#xA;exit / s2-=1" name="State7" incomingTransitions="_SEyg0PiSEeC4at_AzcYiGg _VsUBIPiSEeC4at_AzcYiGg">
                     <outgoingTransitions xmi:id="_TM8bsPiSEeC4at_AzcYiGg" specification="event4" target="_PLn7UPiSEeC4at_AzcYiGg"/>
                   </vertices>
-                  <vertices xsi:type="sgraph:State" xmi:id="_PLn7UPiSEeC4at_AzcYiGg" specification="entry / s2+=1;&#xA;exit / s2-=1;" name="State8" incomingTransitions="_TM8bsPiSEeC4at_AzcYiGg">
+                  <vertices xsi:type="sgraph:State" xmi:id="_PLn7UPiSEeC4at_AzcYiGg" specification="entry / s2+=1&#xA;exit / s2-=1" name="State8" incomingTransitions="_TM8bsPiSEeC4at_AzcYiGg">
                     <outgoingTransitions xmi:id="_VsUBIPiSEeC4at_AzcYiGg" specification="event5" target="_NwkSkPiSEeC4at_AzcYiGg"/>
                     <outgoingTransitions xmi:id="_VBno4PiTEeC4at_AzcYiGg" specification="event13" target="_MwBqt_ZlEeCSetPXFd1ZUw"/>
                     <outgoingTransitions xmi:id="_qCKqgPiTEeC4at_AzcYiGg" specification="event16" target="_3mSzUPiSEeC4at_AzcYiGg"/>

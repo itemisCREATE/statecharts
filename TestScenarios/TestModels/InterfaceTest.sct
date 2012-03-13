@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_p-KfMAn1EeGuZq6TN7cDtg" name="InterfaceTest" specification="interface:&#xA;&#xA;in event event1&#xA;out event event2 : integer&#xA;&#xA;var var1 : boolean&#xA;var var2 : real = 2.3&#xA;var var3 : integer = 1&#xA;&#xA;interface other:&#xA;&#xA;in event event3&#xA;out event event4&#xA;&#xA;var v1 : integer = 5&#xA;&#xA;interface third:&#xA;&#xA;in event event5&#xA;out event event6 : boolean&#xA;&#xA;var v1 : real">
+  <sgraph:Statechart xmi:id="_p-KfMAn1EeGuZq6TN7cDtg" specification="interface:&#xA;&#xA;in event event1&#xA;out event event2 : integer&#xA;&#xA;var var1 : boolean&#xA;var var2 : real = 2.3&#xA;var var3 : integer = 1&#xA;&#xA;interface other:&#xA;&#xA;in event event3&#xA;out event event4&#xA;&#xA;var v1 : integer = 5&#xA;&#xA;interface third:&#xA;&#xA;in event event5&#xA;out event event6 : boolean&#xA;&#xA;var v1 : real" name="InterfaceTest">
     <regions xmi:id="_p-LtUgn1EeGuZq6TN7cDtg" name="mainRegion">
       <vertices xsi:type="sgraph:Entry" xmi:id="_p-RM4Qn1EeGuZq6TN7cDtg">
         <outgoingTransitions xmi:id="_p-TpIwn1EeGuZq6TN7cDtg" specification="" target="_p-Rz9wn1EeGuZq6TN7cDtg"/>
@@ -10,13 +10,13 @@
         <outgoingTransitions xmi:id="_Wx7eYAn2EeGuZq6TN7cDtg" specification="other.event3[var3 == 1]" target="_N8IiYAn2EeGuZq6TN7cDtg"/>
         <outgoingTransitions xmi:id="_dQp1UAn2EeGuZq6TN7cDtg" specification="third.event5[var1 == true]" target="_b6-b0An2EeGuZq6TN7cDtg"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_DQwk0An2EeGuZq6TN7cDtg" specification="entry / raise event2 : 22;&#xD;&#xA;exit / other.v1 = 10;" name="state2" incomingTransitions="_Fp0t8An2EeGuZq6TN7cDtg">
+      <vertices xsi:type="sgraph:State" xmi:id="_DQwk0An2EeGuZq6TN7cDtg" specification="entry / raise event2 : 22&#xD;&#xA;exit / other.v1 = 10" name="state2" incomingTransitions="_Fp0t8An2EeGuZq6TN7cDtg">
         <outgoingTransitions xmi:id="_IduY8An2EeGuZq6TN7cDtg" specification="event1" target="_p-Rz9wn1EeGuZq6TN7cDtg"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_N8IiYAn2EeGuZq6TN7cDtg" specification="entry / raise other.event4;" name="state3" incomingTransitions="_Wx7eYAn2EeGuZq6TN7cDtg">
+      <vertices xsi:type="sgraph:State" xmi:id="_N8IiYAn2EeGuZq6TN7cDtg" specification="entry / raise other.event4" name="state3" incomingTransitions="_Wx7eYAn2EeGuZq6TN7cDtg">
         <outgoingTransitions xmi:id="_aUmT4An2EeGuZq6TN7cDtg" specification="other.event3" target="_p-Rz9wn1EeGuZq6TN7cDtg"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_b6-b0An2EeGuZq6TN7cDtg" specification="entry / raise third.event6 : true;" name="state4" incomingTransitions="_dQp1UAn2EeGuZq6TN7cDtg">
+      <vertices xsi:type="sgraph:State" xmi:id="_b6-b0An2EeGuZq6TN7cDtg" specification="entry / raise third.event6 : true" name="state4" incomingTransitions="_dQp1UAn2EeGuZq6TN7cDtg">
         <outgoingTransitions xmi:id="_ezdE0An2EeGuZq6TN7cDtg" specification="third.event5" target="_p-Rz9wn1EeGuZq6TN7cDtg"/>
       </vertices>
     </regions>

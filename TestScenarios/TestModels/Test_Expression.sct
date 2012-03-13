@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_wXk3MAuIEeGVgpgRVT1uXw" name="Test_Expression" specification="interface:&#xA;in event event1 : integer&#xA;out event event2 : real&#xA;in event event3&#xA;var var1 : integer = 6&#xA;var var2 : integer = 123&#xA;var var3 : real = 19.4&#xA;var var4 : real = 43.3&#xA;var var5 : boolean = false&#xA;&#xA;interface other:&#xA;var var1 : boolean&#xA;var var2 : real&#xA;var var3 : integer&#xA;&#xA;&#xA;">
+  <sgraph:Statechart xmi:id="_wXk3MAuIEeGVgpgRVT1uXw" specification="interface:&#xA;in event event1 : integer&#xA;out event event2 : real&#xA;in event event3&#xA;var var1 : integer = 6&#xA;var var2 : integer = 123&#xA;var var3 : real = 19.4&#xA;var var4 : real = 43.3&#xA;var var5 : boolean = false&#xA;&#xA;interface other:&#xA;var var1 : boolean&#xA;var var2 : real&#xA;var var3 : integer&#xA;&#xA;&#xA;" name="Test_Expression">
     <regions xmi:id="_wXmFUguIEeGVgpgRVT1uXw" name="mainRegion">
       <vertices xsi:type="sgraph:Entry" xmi:id="_wXpIoQuIEeGVgpgRVT1uXw">
         <outgoingTransitions xmi:id="_wXrk4wuIEeGVgpgRVT1uXw" target="_wXqWwAuIEeGVgpgRVT1uXw"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_wXqWwAuIEeGVgpgRVT1uXw" specification="entry / var3 += var2 * var3;&#xA;exit / var2 = 1;&#xA;exit / var4 = 22.3;" name="state1" incomingTransitions="_wXrk4wuIEeGVgpgRVT1uXw _foN2kAuLEeGVgpgRVT1uXw">
-        <outgoingTransitions xmi:id="_ep-FoAuLEeGVgpgRVT1uXw" specification="event1[ (other.var1 == true ) || (var5 == false) ] / other.var1 = false;" target="_dUv_IAuLEeGVgpgRVT1uXw"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_wXqWwAuIEeGVgpgRVT1uXw" specification="entry / var3 += var2 * var3&#xA;exit / var2 = 1&#xA;exit / var4 = 22.3" name="state1" incomingTransitions="_wXrk4wuIEeGVgpgRVT1uXw _foN2kAuLEeGVgpgRVT1uXw">
+        <outgoingTransitions xmi:id="_ep-FoAuLEeGVgpgRVT1uXw" specification="event1[ (other.var1 == true ) || (var5 == false) ] / other.var1 = false" target="_dUv_IAuLEeGVgpgRVT1uXw"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_dUv_IAuLEeGVgpgRVT1uXw" specification="entry / var3 /= 5;&#xA;entry / var1 += 1;&#xA;oncycle / var1 += 1;" name="state2" incomingTransitions="_ep-FoAuLEeGVgpgRVT1uXw">
-        <outgoingTransitions xmi:id="_foN2kAuLEeGVgpgRVT1uXw" specification="event1[var3 > 0] / var5 = true;" target="_wXqWwAuIEeGVgpgRVT1uXw"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_dUv_IAuLEeGVgpgRVT1uXw" specification="entry / var3 /= 5&#xA;entry / var1 += 1&#xA;oncycle / var1 += 1" name="state2" incomingTransitions="_ep-FoAuLEeGVgpgRVT1uXw">
+        <outgoingTransitions xmi:id="_foN2kAuLEeGVgpgRVT1uXw" specification="event1[var3 > 0] / var5 = true" target="_wXqWwAuIEeGVgpgRVT1uXw"/>
       </vertices>
     </regions>
   </sgraph:Statechart>
