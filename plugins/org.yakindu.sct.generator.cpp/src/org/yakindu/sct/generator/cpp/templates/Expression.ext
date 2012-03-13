@@ -62,7 +62,13 @@ String toCppCode(EventRaisingExpression eventRaising) :
 //  "{ _Event* ev = eventPool_createEvent(handle->base.eventPool, ev_"+eventRaising.event.name+"); if (ev) { " + eventRaising.addValue() + "statemachine_cy_setEvent(&handle->base, ev); } }";
 
 String getInterfaceName(EventRaisingExpression event) :
-	"interface" + (( ((InterfaceScope)event.event.eContainer).name == null)?"":((InterfaceScope)event.event.eContainer).name.toFirstUpper());
+	"interface" + (( ((InterfaceScope)event.event.getEvent().eContainer).name == null)?"":((InterfaceScope)event.event.getEvent().eContainer).name.toFirstUpper());
+
+EventDefinition getEvent(Expression e) : null;
+EventDefinition getEvent(base::NamedElement e) : null;
+EventDefinition getEvent(FeatureCall this) : feature.getEvent();
+EventDefinition getEvent(TypedElementReferenceExpression this) : reference.getEvent();
+EventDefinition getEvent(EventDefinition this) : this;
 
 String addValue(EventRaisingExpression event) :
   ( (event.value == null)?"":("((" +event.event.name() + "*)ev)->value = " + event.value.toCppCode() + "; ") );
