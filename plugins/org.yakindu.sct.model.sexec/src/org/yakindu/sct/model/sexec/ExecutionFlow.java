@@ -21,6 +21,7 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getRegions <em>Regions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getHistoryVector <em>History Vector</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getReactions <em>Reactions</em>}</li>
  * </ul>
  * </p>
  *
@@ -102,5 +103,21 @@ public interface ExecutionFlow extends ScopedElement, ExecutionScope {
 	 * @generated
 	 */
 	void setHistoryVector(StateVector value);
+
+	/**
+	 * Returns the value of the '<em><b>Reactions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.yakindu.sct.model.sexec.Reaction}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Reactions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Reactions</em>' containment reference list.
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionFlow_Reactions()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Reaction> getReactions();
 
 } // ExecutionFlow
