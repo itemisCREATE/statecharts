@@ -3,5 +3,6 @@
   <types name="CCodeFeature" optional="true">
     <parameters name="InterfaceEventListener" parameterType="BOOLEAN"/>
     <parameters name="Singleton" parameterType="BOOLEAN"/>
+    <parameters name="DebugType"/>
   </types>
 </sgen:FeatureTypeLibrary>
