@@ -45,12 +45,12 @@ Contributors:
 
 «DEFINE ActionCode FOR ScheduleTimeEvent-»
 «getComment()-»
-getTimerService().setTimer(«timeEvent.getName()», «timeValue.toCode()», cycleStartTime);
+getTimerService().setTimer(«timeEvent.getEventName()», «timeValue.toCode()», cycleStartTime);
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR UnscheduleTimeEvent-»
 «getComment()-»
-getTimerService().resetTimer(«timeEvent.getName()»);
+getTimerService().resetTimer(«timeEvent.getEventName()»);
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Execution-»
@@ -221,17 +221,17 @@ else {
 	«FOREACH getInternalScopeEvents() AS event-»
 	
 		«IF !event.type.isVoid()-»
-			private void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value) {
-				«event.getName()».setValue(value);
-				getOccuredEvents().add(«event.getName()»);
+			private void raise«event.getEventName()»(«event.type.getJavaType()» value) {
+				«event.getEventName()».setValue(value);
+				getOccuredEvents().add(«event.getEventName()»);
 			}
 		«ELSE-»
-			private void raise«event.name.toFirstUpper()»() {
-				getOccuredEvents().add(«event.getName()»);
+			private void raise«event.getEventName()»() {
+				getOccuredEvents().add(«event.getEventName()»);
 			}
 		«ENDIF-»
-		private «event.getEventType()» get«event.getName()»() {
-			return «event.getName()»;
+		private «event.getEventType()» get«event.getEventName()»() {
+			return «event.getEventName()»;
 		}
 	
 	«ENDFOREACH-»
@@ -253,18 +253,18 @@ else {
 	
 	«IF event.direction == Direction::IN-»
 		«IF !event.type.isVoid()-»
-		public void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value) {
-			getDefaultInterface().raise«event.name.toFirstUpper()»(value);
+		public void raise«event.getEventName()»(«event.type.getJavaType()» value) {
+			getDefaultInterface().raise«event.getEventName()»(value);
 		}
 		«ELSE»
-		public void raise«event.name.toFirstUpper()»() {
-			getDefaultInterface().raise«event.name.toFirstUpper()»();
+		public void raise«event.getEventName()»() {
+			getDefaultInterface().raise«event.getEventName()»();
 		}
 		«ENDIF-»
 	«ENDIF-»
 	
 	«IF event.direction ==  Direction::OUT-»
-	public boolean isRaised«event.name.toFirstUpper()»() {
+	public boolean isRaised«event.getEventName()»() {
 		return getOutEvents().contains(«event.getter()»);
 	}
 	
@@ -340,7 +340,7 @@ public class «getCycleBasedStatemachineName()» «getStatemachineExtension(entry)»
 	«IF getInternalScopeEvents().size > 0-»
 	private enum Events {
 	«FOREACH getInternalScopeEvents() AS event-»
-		«event.name.toFirstUpper()»,
+		«event.getEventName()»,
 	«ENDFOREACH-»
 	}
 	«ENDIF-»
@@ -348,17 +348,17 @@ public class «getCycleBasedStatemachineName()» «getStatemachineExtension(entry)»
 	«IF isTimedStatemachine()-»
 	private enum TimeEvents {
 	«FOREACH getTimeEvents() AS timeEvent-»
-		«timeEvent.getName().toFirstUpper()»,
+		«timeEvent.getEventName().toFirstUpper()»,
 	«ENDFOREACH-»
 	}
 	«ENDIF-»
 	
 	«FOREACH getInternalScopeEvents() AS event-»
-	private final «event.getEventType()» «event.getName()» = new «event.getEventType()»(«event.getCreationSignature()»); 
+	private final «event.getEventType()» «event.getEventName()» = new «event.getEventType()»(«event.getCreationSignature()»); 
 	«ENDFOREACH-»
 	
 	«FOREACH getTimeEvents() AS timeEvent-»
-	private static final TimeEvent<TimeEvents> «timeEvent.getName()» = new TimeEvent<TimeEvents>(TimeEvents.«timeEvent.getName().toFirstUpper()»,«((Scope)timeEvent.eContainer).getOffset()», «timeEvent.periodic»); 
+	private static final TimeEvent<TimeEvents> «timeEvent.getEventName()» = new TimeEvent<TimeEvents>(TimeEvents.«timeEvent.getEventName().toFirstUpper()»,«((Scope)timeEvent.eContainer).getOffset()», «timeEvent.periodic»); 
 	«ENDFOREACH»
 	
 	public enum State {
@@ -413,7 +413,7 @@ public class «getCycleBasedStatemachineName()» «getStatemachineExtension(entry)»
 			«ENDFOREACH-»
 		«ENDIF-»
 		«FOREACH getTimeEvents() AS timeEvent-»
-			«timeEvent.getName()».setStatemachine(this);
+			«timeEvent.getEventName()».setStatemachine(this);
 		«ENDFOREACH»
 	}
 	

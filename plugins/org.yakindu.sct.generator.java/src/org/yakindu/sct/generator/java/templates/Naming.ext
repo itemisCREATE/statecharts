@@ -19,8 +19,8 @@ extension org::yakindu::sct::generator::java::templates::GenmodelEntries;
 extension org::yakindu::sct::generator::java::templates::TypeModelExtensions;
 
 //TODO Workaround (WA) for error in Typesystem
-String getNameWA(Declaration this) : this.metaType.getProperty("name").toString();
-String getNameWA(Vertex this) : this.metaType.getProperty("name").toString();
+String getNameWA(Declaration this) : this.metaType.getProperty("name").get(this).toString();
+String getNameWA(Vertex this) : this.metaType.getProperty("name").get(this).toString();
 
 String getStatemachineName(String name) :
 	JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getValidStatemachineName(java.lang.String);
@@ -56,9 +56,9 @@ String getInterfaceParameter(InterfaceScope this) :
 
 String getCreationSignature(EventDefinition this) :
 	if type.isVoid() then
-		"Events."+name.toFirstUpper()+", "+((Scope)eContainer).getOffset()
+		"Events."+this.getEventName()+", "+((Scope)eContainer).getOffset()
 	else
-		"Events."+name.toFirstUpper()+", "+((Scope)eContainer).getOffset()+", "+getInitialValue();
+		"Events."+this.getEventName()+", "+((Scope)eContainer).getOffset()+", "+getInitialValue();
 
 String getEventType(EventDefinition this) :
 	if type.isVoid() then
@@ -79,6 +79,9 @@ String getter(VariableDefinition this) : "get" + getValueName().toFirstUpper() +
 
 String getName(ExecutionState this) :
 	simpleName.replaceAll(" ","").toFirstUpper();
+	
+String getName(State this) :
+	this.getNameWA().replaceAll(" ","").toFirstUpper();
 	
 String getName(ExecutionNode this) :
 	simpleName.replaceAll(" ","").toFirstUpper();
@@ -106,15 +109,29 @@ private getNullSafeRegionName(ExecutionRegion this) :
 String getName(ExecutionFlow this) :
 	name.replaceAll(" ","").toFirstUpper();
 
-String getName(Event this) :
-	"Event"+getNameWA().toFirstUpper();
+String getVarName(VariableDefinition this) :
+	"Var"+name.toFirstUpper();
+String getVarName(base::NamedElement this) : "/* Variable expected, but got: "+this+" */";
+String getVarName(TypedElementReferenceExpression this) : this.reference.getVarName();
+String getVarName(FeatureCall this) : this.feature.getVarName();
+String getVarName(Expression this) : "/* Variable expected, but got Expression: "+this+" */";
 
-String getName(Expression this) : "/* Event expected, but got Expression: "+this+" */";
+
+String getEventName(Event this) :
+	getNameWA().toFirstUpper();
+
+String getEventName(EventDefinition this) :
+	getNameWA().toFirstUpper();
+
+String getEventName(base::NamedElement this) : "/* Event expected, but got: "+this+" */";
+String getEventName(TypedElementReferenceExpression this) : this.reference.getEventName();
+String getEventName(FeatureCall this) : this.feature.getEventName();
+String getEventName(Expression this) : "/* Event expected, but got Expression: "+this+" */";
 
 String getter(Event this) :
-	"get"+getName()+"()";
+	"getEvent"+this.getEventName()+"()";
 
-String getName(TimeEvent this) :
+String getEventName(TimeEvent this) :
 	name.replaceAll(" ","").toFirstUpper();
 				
 cached String functionName(Step step) : 
@@ -172,10 +189,29 @@ String getContext(Variable this) :
 		"get"+getInterfaceImplName((InterfaceScope)eContainer)+"()."
 	else 
 		"";
+String getContext(VariableDefinition this) : 
+	if (InterfaceScope.isInstance(eContainer)) then  
+		"get"+getInterfaceImplName((InterfaceScope)eContainer)+"()."
+	else 
+		"";
 		
 String getContext(Expression this) : 
 	"/* getContext for unknown element: "+this+"*/";
+
+String getContext(TypedElementReferenceExpression this) : 
+	this.reference.getContext();
+
+String getContext(FeatureCall this) : 
+	this.feature.getContext();
+
+String getContext(base::NamedElement this) : 
+	"/* getContext for unknown element: "+this+"*/";
 	
+String getContext(EventDefinition this) : 
+	if (InterfaceScope.isInstance(eContainer)) then  
+		"get"+getInterfaceImplName((InterfaceScope)eContainer)+"()."
+	else 
+		"";
 String getContext(Event this) : 
 	if (InterfaceScope.isInstance(eContainer)) then  
 		"get"+getInterfaceImplName((InterfaceScope)eContainer)+"()."

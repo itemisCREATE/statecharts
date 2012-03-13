@@ -24,6 +24,15 @@ String toCode(Void o, String statechartReference) :
 String toCode(Expression expression) : 
 	"/* Unknown expression: "+expression+" */"; 
 
+String toCode(TypedElementReferenceExpression ref) :
+	ref.reference.toCode();
+String toCode(base::NamedElement ref) :
+	"/* toCode not defined for: "+ref+" */";
+String toCode(types::Feature ref) :
+	"/* toCode not defined for: "+ref+" */";
+String toCode(FeatureCall ref) :
+	ref.feature.toCode();
+
 //polymorphic placeholder (abstract rule) 
 String toCode(Statement statement) : 
 	"/* Unknown statement: "+statement+" */";
@@ -36,10 +45,10 @@ String toCode(PrimitiveValueExpression primValue) :
 	primValue.value.toCode();
 	
 String getterCall(AssignmentExpression this) :
-	getContext(varRef).toFirstLower()+"getVar"+ varRef.getName().toFirstUpper()+ "()";
+	getContext(varRef).toFirstLower()+"get"+ varRef.getVarName().toFirstUpper()+ "()";
 	
 String setterCall(AssignmentExpression this, String expression) :
-	getContext(varRef).toFirstLower()+"setVar" + varRef.getName().toFirstUpper() + "(" + expression + ");";
+	getContext(varRef).toFirstLower()+"set" + varRef.getVarName().toFirstUpper() + "(" + expression + ");";
 
 /* Assignment */
 String toCode(AssignmentExpression this) :
@@ -69,7 +78,7 @@ String toCode(RealLiteral expression) :
 	expression.value.toString();
 
 String toCode(EventValueReferenceExpression expression):
-	expression.value.getContext().toFirstLower()+"get"+expression.value.getName()+"().getValue()";
+	expression.value.getContext().toFirstLower()+"getEvent"+expression.value.getEventName()+"().getValue()";
 
 /* Logical Expressions */
 String toCode(LogicalOrExpression expression) :
@@ -102,13 +111,15 @@ String toCode(NumericalMultiplyDivideExpression expression) :
 String toCode(NumericalUnaryExpression expression) :
     getOperator(expression.operator) + " ( " + expression.operand.toCode() + " ) ";
 
-String toCode(TypedElementReferenceExpression exp) :
-    if (EventDefinition.isInstance(exp.reference)) then
-    	"occuredEvents.contains("+((EventDefinition)exp.reference).getContext().toFirstLower()+"get"+((EventDefinition)exp.reference).getName()+"())"
-    else if (VariableDefinition.isInstance(exp.reference)) then
-    	getContext((VariableDefinition)exp.reference)+"getVar"+exp.reference.name.toFirstUpper()+"()"
-    else if (TimeEvent.isInstance(exp.reference)) then
-    	"occuredEvents.contains("+getName((TimeEvent)exp.reference)+")";
+String toCode(TimeEvent exp) :
+	"occuredEvents.contains("+getEventName(exp)+")";
+String toCode(VariableDefinition exp) :
+	getContext(exp)+"get"+exp.getVarName()+"()";
+String toCode(EventDefinition exp) :
+	"occuredEvents.contains("+exp.getContext().toFirstLower()+exp.getter()+")";
+
+String toCode(ActiveStateReferenceExpression this):
+	"isStateActive(State."+this.value.getName()+")";
 
 String getOperator(AdditiveOperator operator) : 
     switch(operator) {
@@ -146,9 +157,9 @@ String getOperator(RelationalOperator operator) :
 	
 String toCode(EventRaisingExpression this) :
 	if this.value != null then
-		event.getContext().toFirstLower()+"raise"+event.getName().toFirstUpper()+"("+value.toCode()+");"
+		event.getContext().toFirstLower()+"raise"+event.getEventName()+"("+value.toCode()+");"
 	else
-		event.getContext().toFirstLower()+"raise"+event.getName().toFirstUpper()+"();";
+		event.getContext().toFirstLower()+"raise"+event.getEventName()+"();";
 		
 String getInitialValue(EventDefinition this) :
 	if derivation != null then

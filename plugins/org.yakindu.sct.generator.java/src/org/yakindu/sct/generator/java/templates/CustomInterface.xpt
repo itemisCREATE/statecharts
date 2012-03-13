@@ -39,7 +39,7 @@ public interface «getInterfaceName()»«getInterfaceExtension(entry)» {
 	«IF declarations.typeSelect(EventDefinition).size > 0-»
 	public enum Events {
 	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
-		«event.name.toFirstUpper()»,
+		«event.getEventName()»,
 	«ENDFOREACH-»
 	}
 	«ENDIF-»
@@ -55,14 +55,14 @@ public interface «getInterfaceName()»«getInterfaceExtension(entry)» {
 	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
 	«IF  event.direction ==  Direction::IN-»
 		«IF !event.type.isVoid()-»
-			public void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value);
+			public void raise«event.getEventName()»(«event.type.getJavaType()» value);
 		«ELSE»
-			public void raise«event.name.toFirstUpper()»();
+			public void raise«event.getEventName()»();
 		«ENDIF-»
 	«ELSEIF event.direction ==  Direction::OUT-»
-	public boolean isRaised«event.name.toFirstUpper()»();
+	public boolean isRaised«event.getEventName()»();
 		
-	public «event.getEventType()» get«event.getName()»();
+	public «event.getEventType()» getEvent«event.getEventName()»();
 	
 	«ENDIF-»
 	«ENDFOREACH-»

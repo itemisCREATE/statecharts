@@ -54,7 +54,7 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implemen
 		«ENDIF-»
 	«ELSE-»
 		«FOREACH declarations.typeSelect(EventDefinition) AS event-»
-		protected final «event.getEventType()» «event.getName()» = new «event.getEventType()»(«event.getCreationSignature()»);
+		protected final «event.getEventType()» «event.getEventName()» = new «event.getEventType()»(«event.getCreationSignature()»);
 		«ENDFOREACH-»
 	«ENDIF-» 
 	
@@ -96,7 +96,7 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implemen
 	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
 	
 	«IF !event.type.isVoid()-»
-	public void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value) {
+	public void raise«event.getEventName()»(«event.type.getJavaType()» value) {
 		«event.getter()».setValue(value);
 		statemachine.getOccuredEvents().add(«event.getter()»);
 		«IF event.direction ==  Direction::OUT-»
@@ -107,7 +107,7 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implemen
 		«ENDIF-»
 	}
 	«ELSE»
-	public void raise«event.name.toFirstUpper()»() {
+	public void raise«event.getEventName()»() {
 		statemachine.getOccuredEvents().add(«event.getter()»);
 		«IF event.direction ==  Direction::OUT-»
 			statemachine.getOutEvents().add(«event.getter()»);
@@ -137,12 +137,12 @@ public class «getInterfaceImplName()»«getInterfaceImplExtension(entry)» implemen
 				«ENDIF-»
 			«ENDIF-»
 		«ELSE-»
-		return «event.getName()»;
+		return «event.getEventName()»;
 		«ENDIF-»
 	}
 	
 	«IF event.direction ==  Direction::OUT-»
-	public boolean isRaised«event.name.toFirstUpper()»() {
+	public boolean isRaised«event.getEventName()»() {
 		return statemachine.getOutEvents().contains(«event.getter()»);
 	}
 	«ENDIF-»
