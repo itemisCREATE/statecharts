@@ -68,6 +68,7 @@ public class ExecutionFlowItemProvider
 			addNamePropertyDescriptor(object);
 			addSubScopesPropertyDescriptor(object);
 			addSuperScopePropertyDescriptor(object);
+			addSimpleNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -161,6 +162,28 @@ public class ExecutionFlowItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Simple Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSimpleNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ExecutionNode_simpleName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ExecutionNode_simpleName_feature", "_UI_ExecutionNode_type"),
+				 SexecPackage.Literals.EXECUTION_NODE__SIMPLE_NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -175,11 +198,12 @@ public class ExecutionFlowItemProvider
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__REACTIONS);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__STATES);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__NODES);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__REGIONS);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__HISTORY_VECTOR);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__REACTIONS);
 		}
 		return childrenFeatures;
 	}
@@ -235,16 +259,18 @@ public class ExecutionFlowItemProvider
 
 		switch (notification.getFeatureID(ExecutionFlow.class)) {
 			case SexecPackage.EXECUTION_FLOW__NAME:
+			case SexecPackage.EXECUTION_FLOW__SIMPLE_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
 			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
+			case SexecPackage.EXECUTION_FLOW__REACTIONS:
+			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__STATES:
 			case SexecPackage.EXECUTION_FLOW__NODES:
 			case SexecPackage.EXECUTION_FLOW__REGIONS:
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
-			case SexecPackage.EXECUTION_FLOW__REACTIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -279,8 +305,23 @@ public class ExecutionFlowItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_NODE__REACTIONS,
+				 SexecFactory.eINSTANCE.createReaction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE,
+				 SexecFactory.eINSTANCE.createSequence()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__STATES,
 				 SexecFactory.eINSTANCE.createExecutionState()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__NODES,
+				 SexecFactory.eINSTANCE.createExecutionFlow()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -311,11 +352,6 @@ public class ExecutionFlowItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__HISTORY_VECTOR,
 				 SexecFactory.eINSTANCE.createStateVector()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__REACTIONS,
-				 SexecFactory.eINSTANCE.createReaction()));
 	}
 
 	/**
@@ -334,6 +370,7 @@ public class ExecutionFlowItemProvider
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__HISTORY_VECTOR ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE ||
+			childFeature == SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__STATES ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__NODES;
 
