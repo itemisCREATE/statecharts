@@ -29,13 +29,13 @@ public class «getEventBasedInterfaceImplName()» extends «getInterfaceImplName()»
 		
 	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
 		«IF !event.type.isVoid()-»
-		public void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value) {
-			super.raise«event.name.toFirstUpper()»(value);
+		public void raise«event.getEventName()»(«event.type.getJavaType()» value) {
+			super.raise«event.getEventName()»(value);
 			statemachine.runCycle();
 		}
 		«ELSE-»
-		public void raise«event.name.toFirstUpper()»() {
-			super.raise«event.name.toFirstUpper()»();
+		public void raise«event.getEventName()»() {
+			super.raise«event.getEventName()»();
 		statemachine.runCycle();
 		}
 		«ENDIF-»

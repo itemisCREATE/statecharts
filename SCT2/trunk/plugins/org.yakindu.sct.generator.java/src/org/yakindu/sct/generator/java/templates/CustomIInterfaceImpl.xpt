@@ -33,9 +33,9 @@ public interface «getIInterfaceImplName()» extends «getInterfaceName()» {
 	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
 	«IF event.direction == Direction::OUT-»
 		«IF !event.type.isVoid()-»
-		public void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value);
+		public void raise«event.getEventName()»(«event.type.getJavaType()» value);
 		«ELSE»
-		public void raise«event.name.toFirstUpper()»();
+		public void raise«event.getEventName()»();
 		«ENDIF-»
 	«ELSE-»
 		public «event.getEventType()» «event.getter()»;
