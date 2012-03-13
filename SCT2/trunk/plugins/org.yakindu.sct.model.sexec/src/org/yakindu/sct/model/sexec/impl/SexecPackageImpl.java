@@ -401,15 +401,6 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getExecutionFlow_Reactions() {
-		return (EReference)executionFlowEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getExecutionNode() {
 		return executionNodeEClass;
 	}
@@ -1197,7 +1188,6 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		createEReference(executionFlowEClass, EXECUTION_FLOW__NODES);
 		createEReference(executionFlowEClass, EXECUTION_FLOW__REGIONS);
 		createEReference(executionFlowEClass, EXECUTION_FLOW__HISTORY_VECTOR);
-		createEReference(executionFlowEClass, EXECUTION_FLOW__REACTIONS);
 
 		executionNodeEClass = createEClass(EXECUTION_NODE);
 		createEReference(executionNodeEClass, EXECUTION_NODE__REACTIONS);
@@ -1347,6 +1337,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		// Add supertypes to classes
 		executionFlowEClass.getESuperTypes().add(theSGraphPackage.getScopedElement());
 		executionFlowEClass.getESuperTypes().add(this.getExecutionScope());
+		executionFlowEClass.getESuperTypes().add(this.getExecutionNode());
 		executionNodeEClass.getESuperTypes().add(this.getMappedElement());
 		executionNodeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		executionStateEClass.getESuperTypes().add(this.getExecutionNode());
@@ -1390,7 +1381,6 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEReference(getExecutionFlow_Nodes(), this.getExecutionNode(), null, "nodes", null, 0, -1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionFlow_Regions(), this.getExecutionRegion(), null, "regions", null, 0, -1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionFlow_HistoryVector(), this.getStateVector(), null, "historyVector", null, 0, 1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getExecutionFlow_Reactions(), this.getReaction(), null, "reactions", null, 0, -1, ExecutionFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionNodeEClass, ExecutionNode.class, "ExecutionNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExecutionNode_Reactions(), this.getReaction(), null, "reactions", null, 0, -1, ExecutionNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

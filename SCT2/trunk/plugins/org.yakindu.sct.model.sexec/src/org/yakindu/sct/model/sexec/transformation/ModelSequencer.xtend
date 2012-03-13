@@ -138,6 +138,7 @@ class ModelSequencer {
 		sc.mapChoiceTransitions(ef)
 		
 		sc.defineEntryReactions(ef)
+		ef.defineStatechartReaction(sc)
 		ef.defineRegularStateReactions(sc)
 		ef.definePseudoStateReactions(sc)
 		

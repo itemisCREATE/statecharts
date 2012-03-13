@@ -114,8 +114,10 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 
 		assertEquals(2, flow.getStates().size());
 		assertEquals(s1.getName(), flow.getStates().get(0).getSimpleName());
-		If _if = (If) flow.getStates().get(0).getReactSequence().getSteps()
+		Step step = flow.getStates().get(0).getReactSequence().getSteps()
 				.get(0);
+		If _if = (If) assertedSequence(assertedSequence(step).getSteps().get(0))
+				.getSteps().get(0);
 
 		TypedElementReferenceExpression _ere = (TypedElementReferenceExpression) _if
 				.getCheck().getCondition();
@@ -146,8 +148,10 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 		assertNotSame(_operation, _o1);
 		assertEquals(_operation.getName(), _o1.getName());
 
-		If _if = (If) flow.getStates().get(0).getReactSequence().getSteps()
+		Step step = flow.getStates().get(0).getReactSequence().getSteps()
 				.get(0);
+		If _if = (If) assertedSequence(assertedSequence(step).getSteps().get(0))
+				.getSteps().get(0);
 		Step thenSequence = assertedSequence(
 				((Call) _if.getThenStep()).getStep()).getSteps().get(1);
 		Execution call = (Execution) assertedSequence(thenSequence).getSteps()
