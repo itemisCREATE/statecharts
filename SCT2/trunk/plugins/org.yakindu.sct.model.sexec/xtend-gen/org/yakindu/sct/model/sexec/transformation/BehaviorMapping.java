@@ -514,17 +514,72 @@ public class BehaviorMapping {
   
   public ExecutionFlow mapLocalReactions(final Statechart statechart, final ExecutionFlow r) {
     {
+      EList<Reaction> _reactions = r.getReactions();
+      EList<org.yakindu.sct.model.sgraph.Reaction> _localReactions = statechart.getLocalReactions();
+      Iterable<LocalReaction> _filter = IterableExtensions.<LocalReaction>filter(_localReactions, org.yakindu.sct.model.stext.stext.LocalReaction.class);
+      final Function1<LocalReaction,Boolean> _function = new Function1<LocalReaction,Boolean>() {
+          public Boolean apply(final LocalReaction lr) {
+            boolean _operator_or = false;
+            Trigger _trigger = lr.getTrigger();
+            EList<EventSpec> _triggers = ((ReactionTrigger) _trigger).getTriggers();
+            boolean _isEmpty = _triggers.isEmpty();
+            if (_isEmpty) {
+              _operator_or = true;
+            } else {
+              Trigger _trigger_1 = lr.getTrigger();
+              EList<EventSpec> _triggers_1 = ((ReactionTrigger) _trigger_1).getTriggers();
+              final Function1<EventSpec,Boolean> _function_1 = new Function1<EventSpec,Boolean>() {
+                  public Boolean apply(final EventSpec t) {
+                    boolean _operator_or_1 = false;
+                    boolean _operator_or_2 = false;
+                    boolean _operator_or_3 = false;
+                    if ((t instanceof org.yakindu.sct.model.stext.stext.RegularEventSpec)) {
+                      _operator_or_3 = true;
+                    } else {
+                      _operator_or_3 = BooleanExtensions.operator_or((t instanceof org.yakindu.sct.model.stext.stext.RegularEventSpec), (t instanceof org.yakindu.sct.model.stext.stext.TimeEventSpec));
+                    }
+                    if (_operator_or_3) {
+                      _operator_or_2 = true;
+                    } else {
+                      _operator_or_2 = BooleanExtensions.operator_or(_operator_or_3, (t instanceof org.yakindu.sct.model.stext.stext.OnCycleEvent));
+                    }
+                    if (_operator_or_2) {
+                      _operator_or_1 = true;
+                    } else {
+                      _operator_or_1 = BooleanExtensions.operator_or(_operator_or_2, (t instanceof org.yakindu.sct.model.stext.stext.AlwaysEvent));
+                    }
+                    return ((Boolean)_operator_or_1);
+                  }
+                };
+              Iterable<EventSpec> _filter_1 = IterableExtensions.<EventSpec>filter(_triggers_1, _function_1);
+              List<EventSpec> _list = IterableExtensions.<EventSpec>toList(_filter_1);
+              boolean _isEmpty_1 = _list.isEmpty();
+              boolean _operator_not = BooleanExtensions.operator_not(_isEmpty_1);
+              _operator_or = BooleanExtensions.operator_or(_isEmpty, _operator_not);
+            }
+            return ((Boolean)_operator_or);
+          }
+        };
+      Iterable<LocalReaction> _filter_2 = IterableExtensions.<LocalReaction>filter(_filter, _function);
+      final Function1<LocalReaction,Reaction> _function_2 = new Function1<LocalReaction,Reaction>() {
+          public Reaction apply(final LocalReaction t_1) {
+            Reaction _mapReaction = BehaviorMapping.this.mapReaction(t_1);
+            return _mapReaction;
+          }
+        };
+      Iterable<Reaction> _map = IterableExtensions.<LocalReaction, Reaction>map(_filter_2, _function_2);
+      CollectionExtensions.<Reaction>addAll(_reactions, _map);
       Iterable<EObject> _allContentsIterable = EObjectExtensions.allContentsIterable(statechart);
       Iterable<EObject> content = _allContentsIterable;
-      Iterable<State> _filter = IterableExtensions.<State>filter(content, org.yakindu.sct.model.sgraph.State.class);
-      final Iterable<State> allStates = _filter;
-      final Function1<State,ExecutionState> _function = new Function1<State,ExecutionState>() {
+      Iterable<State> _filter_3 = IterableExtensions.<State>filter(content, org.yakindu.sct.model.sgraph.State.class);
+      final Iterable<State> allStates = _filter_3;
+      final Function1<State,ExecutionState> _function_3 = new Function1<State,ExecutionState>() {
           public ExecutionState apply(final State s) {
             ExecutionState _mapStateLocalReactions = BehaviorMapping.this.mapStateLocalReactions(((State) s));
             return _mapStateLocalReactions;
           }
         };
-      IterableExtensions.<State>forEach(allStates, _function);
+      IterableExtensions.<State>forEach(allStates, _function_3);
       return r;
     }
   }

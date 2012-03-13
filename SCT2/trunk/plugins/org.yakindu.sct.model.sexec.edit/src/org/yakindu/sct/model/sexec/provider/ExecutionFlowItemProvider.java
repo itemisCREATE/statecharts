@@ -179,6 +179,7 @@ public class ExecutionFlowItemProvider
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__NODES);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__REGIONS);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__HISTORY_VECTOR);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__REACTIONS);
 		}
 		return childrenFeatures;
 	}
@@ -243,6 +244,7 @@ public class ExecutionFlowItemProvider
 			case SexecPackage.EXECUTION_FLOW__NODES:
 			case SexecPackage.EXECUTION_FLOW__REGIONS:
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
+			case SexecPackage.EXECUTION_FLOW__REACTIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -309,6 +311,11 @@ public class ExecutionFlowItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__HISTORY_VECTOR,
 				 SexecFactory.eINSTANCE.createStateVector()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__REACTIONS,
+				 SexecFactory.eINSTANCE.createReaction()));
 	}
 
 	/**

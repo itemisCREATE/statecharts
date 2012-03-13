@@ -215,6 +215,21 @@ class BehaviorMapping {
 	}
 	
 	def ExecutionFlow mapLocalReactions(Statechart statechart, ExecutionFlow r){
+		r.reactions.addAll(statechart.localReactions
+				.filter( typeof( LocalReaction ))
+				// ignore all reaction that are just entry or exit actions
+				.filter(lr | 
+					(lr.trigger as ReactionTrigger).triggers.empty 
+					|| ! (lr.trigger as ReactionTrigger).triggers.filter( t | 
+						t instanceof RegularEventSpec 
+						|| t instanceof TimeEventSpec 
+						|| t instanceof OnCycleEvent 
+						|| t instanceof AlwaysEvent
+					).toList.empty
+				)
+				.map(t | t.mapReaction)
+		)
+		
 		var content = statechart.allContentsIterable
 		val allStates = content.filter(typeof(State))
 		allStates.forEach( s | (s as State).mapStateLocalReactions);

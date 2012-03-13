@@ -26,6 +26,7 @@ import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.MappedElement;
+import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.StateVector;
@@ -49,6 +50,7 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getRegions <em>Regions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getHistoryVector <em>History Vector</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getReactions <em>Reactions</em>}</li>
  * </ul>
  * </p>
  *
@@ -174,6 +176,16 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected StateVector historyVector;
+
+	/**
+	 * The cached value of the '{@link #getReactions() <em>Reactions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReactions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Reaction> reactions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -538,6 +550,18 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Reaction> getReactions() {
+		if (reactions == null) {
+			reactions = new EObjectContainmentEList<Reaction>(Reaction.class, this, SexecPackage.EXECUTION_FLOW__REACTIONS);
+		}
+		return reactions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -578,6 +602,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return ((InternalEList<?>)getRegions()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 				return basicSetHistoryVector(null, msgs);
+			case SexecPackage.EXECUTION_FLOW__REACTIONS:
+				return ((InternalEList<?>)getReactions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -614,6 +640,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return getRegions();
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 				return getHistoryVector();
+			case SexecPackage.EXECUTION_FLOW__REACTIONS:
+				return getReactions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -664,6 +692,10 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 				setHistoryVector((StateVector)newValue);
 				return;
+			case SexecPackage.EXECUTION_FLOW__REACTIONS:
+				getReactions().clear();
+				getReactions().addAll((Collection<? extends Reaction>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -709,6 +741,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 				setHistoryVector((StateVector)null);
 				return;
+			case SexecPackage.EXECUTION_FLOW__REACTIONS:
+				getReactions().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -743,6 +778,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return regions != null && !regions.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 				return historyVector != null;
+			case SexecPackage.EXECUTION_FLOW__REACTIONS:
+				return reactions != null && !reactions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

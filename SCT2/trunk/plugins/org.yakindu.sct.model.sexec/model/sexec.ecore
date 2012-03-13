@@ -15,6 +15,8 @@
         eType="#//ExecutionRegion" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="historyVector" eType="#//StateVector"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reactions" upperBound="-1"
+        eType="#//Reaction" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionNode" eSuperTypes="#//MappedElement ../../org.yakindu.base.types/model/base.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reactions" upperBound="-1"
