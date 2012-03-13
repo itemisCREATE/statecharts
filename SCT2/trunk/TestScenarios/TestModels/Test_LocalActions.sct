@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_TGkp8PZNEeCz_6s_8P8IEA" name="Test_LocalActions" specification="interface:&#xA;in event Event1&#xA;in event Event2&#xA;in event Event3&#xA;in event Event4&#xA;var i : integer&#xA;var j : integer&#xA;var c : integer">
+  <sgraph:Statechart xmi:id="_TGkp8PZNEeCz_6s_8P8IEA" specification="interface:&#xA;in event Event1&#xA;in event Event2&#xA;in event Event3&#xA;in event Event4&#xA;var i : integer&#xA;var j : integer&#xA;var c : integer" name="Test_LocalActions">
     <regions xmi:id="_TGkp8_ZNEeCz_6s_8P8IEA" name="mainRegion">
       <vertices xsi:type="sgraph:Entry" xmi:id="_TGmfIfZNEeCz_6s_8P8IEA">
         <outgoingTransitions xmi:id="_TGoUUfZNEeCz_6s_8P8IEA" target="_TGnGNvZNEeCz_6s_8P8IEA"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_TGnGNvZNEeCz_6s_8P8IEA" specification="entry / i=1;&#xA;exit / i=0;&#xA;oncycle / i=2;&#xA;Event2 / i=3;&#xA;every 100ms / c+=1;&#xA;" name="State1" incomingTransitions="_TGoUUfZNEeCz_6s_8P8IEA _2LQeQPZZEeCSetPXFd1ZUw">
+      <vertices xsi:type="sgraph:State" xmi:id="_TGnGNvZNEeCz_6s_8P8IEA" specification="entry / i=1&#xA;exit / i=0&#xA;oncycle / i=2&#xA;Event2 / i=3&#xA;every 100ms / c+=1&#xA;" name="State1" incomingTransitions="_TGoUUfZNEeCz_6s_8P8IEA _2LQeQPZZEeCSetPXFd1ZUw">
         <outgoingTransitions xmi:id="_6OQEgPZXEeC2DLnZHHznig" specification="Event1" target="_5VX7wPZXEeC2DLnZHHznig"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_5VX7wPZXEeC2DLnZHHznig" specification="entry / j=1;&#xA;exit / j=0;&#xA;Event2, Event4 / j=2;&#xA;after 200ms/j=3;" name="State2" incomingTransitions="_6OQEgPZXEeC2DLnZHHznig">
+      <vertices xsi:type="sgraph:State" xmi:id="_5VX7wPZXEeC2DLnZHHznig" specification="entry / j=1&#xA;exit / j=0&#xA;Event2, Event4 / j=2&#xA;after 200ms/j=3" name="State2" incomingTransitions="_6OQEgPZXEeC2DLnZHHznig">
         <outgoingTransitions xmi:id="_2LQeQPZZEeCSetPXFd1ZUw" specification="Event3" target="_TGnGNvZNEeCz_6s_8P8IEA"/>
       </vertices>
     </regions>
