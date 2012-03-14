@@ -62,6 +62,9 @@ import org.yakindu.base.base.NamedElement
 import org.apache.commons.logging.LogFactory
 import org.apache.commons.logging.LogConfigurationException
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.sct.model.sgraph.CompositeElement
  
 
 @Singleton class SexecElementMapping {
@@ -100,7 +103,8 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 	
 	def ExecutionState create r : sexecFactory.createExecutionState create(RegularState state){
 		if (state != null) {
-			r.simpleName = if (state instanceof FinalState) "_final_" else state.name
+			val n = state.parentRegion.vertices.filter(typeof (FinalState)).toList.indexOf(state)
+			r.simpleName = if (state instanceof FinalState) "_final_"+n else state.name
 			r.name = state.fullyQualifiedName.toString.replaceAll(" ", "")	
 			r.sourceElement = state	
 		}
@@ -122,7 +126,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 			val region = entry.eContainer as Region
 			val regionName = region.name.toFirstUpper
 			val stateName = if(region.eContainer instanceof State) {(region.eContainer as State).name.toFirstUpper}
-			val entryName = {if (!entry.name?.empty) entry.name else "Default"}
+			val entryName = {if (!entry.name?.empty) entry.name else "_entry_Default"}
 			r.simpleName = {if (regionName!= null)regionName else ""}+"_"+{if (stateName!= null)stateName else ""}+"_"+entryName
 			r.name = entry.fullyQualifiedName.toString.replaceAll(" ", "")	
 			r.sourceElement = entry	
@@ -142,7 +146,13 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 	
 	def ExecutionRegion create r : sexecFactory.createExecutionRegion create(Region region){
 		if (region != null) {
-			r.name =  region.name
+			if (Strings::isEmpty(region.name)) {
+				val container = region.eContainer as CompositeElement
+				val index = container.regions.indexOf(region)
+				r.name = "region"+index
+			} else {
+				r.name =  region.name
+			}
 			r.sourceElement = region
 		}
 	}

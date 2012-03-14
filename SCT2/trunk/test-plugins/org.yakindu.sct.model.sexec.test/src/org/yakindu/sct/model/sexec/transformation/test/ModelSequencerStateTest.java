@@ -184,7 +184,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		ExecutionFlow flow = sequencer.transform(sc);
 
 		ExecutionState _fs = flow.getStates().get(0);
-		assertEquals("_final_", _fs.getSimpleName());
+		assertEquals("_final_0", _fs.getSimpleName());
 		assertSame(fs, _fs.getSourceElement());
 
 		assertNull(_fs.getEntryAction());
@@ -334,7 +334,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		ExecutionFlow flow = sequencer.transform(sc);
 
 		ExecutionState _fs = flow.getStates().get(0);
-		assertEquals("_final_", _fs.getSimpleName());
+		assertEquals("_final_0", _fs.getSimpleName());
 
 		assertNull(_fs.getExitAction());
 		assertNotNull(_fs.getExitSequence());
