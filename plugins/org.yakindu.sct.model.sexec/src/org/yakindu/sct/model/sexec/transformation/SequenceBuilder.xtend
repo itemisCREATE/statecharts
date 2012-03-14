@@ -306,7 +306,7 @@ class SequenceBuilder {
 			val exitScopes = s.parentScopes
 			exitScopes.removeAll(region.parentScopes)
 			exitScopes.remove(s)
-			exitScopes.reverse.fold(caseSeq , [ cs, exitScope | {
+			newLinkedList(exitScopes).reverse.fold(caseSeq , [ cs, exitScope | {
 				if (exitScope instanceof ExecutionRegion && (exitScope as ExecutionRegion).historyVector != null) {
 					val execRegion = exitScope as ExecutionRegion
 					cs.steps += execRegion.newSaveHistory
