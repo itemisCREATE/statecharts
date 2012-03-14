@@ -7,7 +7,6 @@ import sgen;
 
 
 extension org::yakindu::sct::generator::c::templates::Constants;
-extension org::eclipse::xtend::util::stdlib::elementprops;
 
 //TODO Workaround (WA) for error in Typesystem
 String getNameWA(Declaration this) : this.metaType.getProperty("name").get(this).toString();
