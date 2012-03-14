@@ -195,10 +195,17 @@ public class Assert {
 		return step.toString();
 	}
 
-	public static void assertClass(Class<?> clazz, Object actual) {
+	@SuppressWarnings("unchecked")
+	/**
+	 * Assertion, that the given Object is of type T. If it is, the casted object is returned.
+	 * @param clazz
+	 * @param actual
+	 * @return
+	 */
+	public static <T> T assertClass(Class<T> clazz, Object actual) {
 		assertTrue(clazz.getSimpleName() + " expected, but got "
 				+ actual.getClass().getSimpleName(), clazz.isInstance(actual));
-
+		return (T) actual;
 	}
 
 	public static void assertedOrder(Step step,

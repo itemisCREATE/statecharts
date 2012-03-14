@@ -1,12 +1,15 @@
 package org.yakindu.sct.model.sexec.transformation;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
@@ -29,6 +32,8 @@ import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.ReactionFired;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecFactory;
+import org.yakindu.sct.model.sexec.StateCase;
+import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TraceNodeExecuted;
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping;
@@ -70,9 +75,48 @@ public class ReactionBuilder {
   
   public ExecutionFlow defineStatechartReaction(final ExecutionFlow flow, final Statechart sc) {
     {
-      Sequence _createReactionSequence = this.createReactionSequence(flow, null);
-      final Sequence reaction = _createReactionSequence;
-      flow.setReactSequence(reaction);
+      SexecFactory _factory = this.sexec.factory();
+      Sequence _createSequence = _factory.createSequence();
+      final Sequence sequence = _createSequence;
+      sequence.setName("react");
+      String _name = sc.getName();
+      String _operator_plus = StringExtensions.operator_plus("The reactions of statechart ", _name);
+      sequence.setComment(_operator_plus);
+      List<RegularState> _allRegularStates = this.sct.allRegularStates(sc);
+      final Function1<RegularState,Boolean> _function = new Function1<RegularState,Boolean>() {
+          public Boolean apply(final RegularState s) {
+            boolean _isLeaf = ReactionBuilder.this.sgraph.isLeaf(s);
+            return ((Boolean)_isLeaf);
+          }
+        };
+      Iterable<RegularState> _filter = IterableExtensions.<RegularState>filter(_allRegularStates, _function);
+      final Iterable<RegularState> leafStates = _filter;
+      SexecFactory _factory_1 = this.sexec.factory();
+      StateSwitch _createStateSwitch = _factory_1.createStateSwitch();
+      final StateSwitch sSwitch = _createStateSwitch;
+      EList<Step> _steps = sequence.getSteps();
+      CollectionExtensions.<Step>operator_add(_steps, sSwitch);
+      final Function1<RegularState,ExecutionState> _function_1 = new Function1<RegularState,ExecutionState>() {
+          public ExecutionState apply(final RegularState s_1) {
+            ExecutionState _create = ReactionBuilder.this.mapping.create(s_1);
+            return _create;
+          }
+        };
+      Iterable<ExecutionState> _map = IterableExtensions.<RegularState, ExecutionState>map(leafStates, _function_1);
+      for (final ExecutionState leaf : _map) {
+        {
+          SexecFactory _factory_2 = this.sexec.factory();
+          StateCase _createStateCase = _factory_2.createStateCase();
+          final StateCase sCase = _createStateCase;
+          sCase.setState(leaf);
+          Sequence _reactSequence = leaf.getReactSequence();
+          Call _newCall = this.mapping.newCall(_reactSequence);
+          sCase.setStep(_newCall);
+          EList<StateCase> _cases = sSwitch.getCases();
+          CollectionExtensions.<StateCase>operator_add(_cases, sCase);
+        }
+      }
+      flow.setReactSequence(sequence);
       return flow;
     }
   }
@@ -205,28 +249,34 @@ public class ReactionBuilder {
       final ExecutionState execState = _create;
       List<RegularState> _parentStates = this.sgraph.parentStates(state);
       final List<RegularState> parents = _parentStates;
-      final Function2<Sequence,RegularState,Sequence> _function = new Function2<Sequence,RegularState,Sequence>() {
-          public Sequence apply(final Sequence r , final RegularState s) {
-            ExecutionState _create_1 = ReactionBuilder.this.mapping.create(s);
-            Sequence _createReactionSequence = ReactionBuilder.this.createReactionSequence(_create_1, r);
+      final Function1<RegularState,ExecutionNode> _function = new Function1<RegularState,ExecutionNode>() {
+          public ExecutionNode apply(final RegularState p) {
+            ExecutionState _create_1 = ReactionBuilder.this.mapping.create(p);
+            return ((ExecutionNode) _create_1);
+          }
+        };
+      List<ExecutionNode> _map = ListExtensions.<RegularState, ExecutionNode>map(parents, _function);
+      EObject _rootContainer = EcoreUtil.getRootContainer(execState);
+      HashSet<ExecutionNode> _newHashSet = CollectionLiterals.<ExecutionNode>newHashSet(((ExecutionNode) _rootContainer));
+      Iterable<ExecutionNode> _concat = Iterables.<ExecutionNode>concat(_map, _newHashSet);
+      final Iterable<ExecutionNode> parentNodes = _concat;
+      final Function2<Sequence,ExecutionNode,Sequence> _function_1 = new Function2<Sequence,ExecutionNode,Sequence>() {
+          public Sequence apply(final Sequence r , final ExecutionNode s) {
+            Sequence _createReactionSequence = ReactionBuilder.this.createReactionSequence(s, r);
             return _createReactionSequence;
           }
         };
-      Sequence _fold = IterableExtensions.<RegularState, Sequence>fold(parents, null, _function);
+      Sequence _fold = IterableExtensions.<ExecutionNode, Sequence>fold(parentNodes, null, _function_1);
       execState.setReactSequence(_fold);
-      EObject _rootContainer = EcoreUtil.getRootContainer(execState);
       Sequence _reactSequence = execState.getReactSequence();
-      Sequence _createReactionSequence_1 = this.createReactionSequence(((ExecutionFlow) _rootContainer), _reactSequence);
-      execState.setReactSequence(_createReactionSequence_1);
+      _reactSequence.setName("react");
       Sequence _reactSequence_1 = execState.getReactSequence();
-      _reactSequence_1.setName("react");
-      Sequence _reactSequence_2 = execState.getReactSequence();
       String _name = state.getName();
       String _operator_plus = StringExtensions.operator_plus("The reactions of state ", _name);
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ".");
-      _reactSequence_2.setComment(_operator_plus_1);
-      Sequence _reactSequence_3 = execState.getReactSequence();
-      return _reactSequence_3;
+      _reactSequence_1.setComment(_operator_plus_1);
+      Sequence _reactSequence_2 = execState.getReactSequence();
+      return _reactSequence_2;
     }
   }
   

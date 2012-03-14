@@ -19,6 +19,7 @@ import org.yakindu.sct.model.sexec.ExecutionNode
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.FinalState
 import org.eclipse.xtext.EcoreUtil2
+import com.google.common.collect.Iterables
 
 class ReactionBuilder {
 	@Inject extension SexecElementMapping mapping
@@ -28,9 +29,21 @@ class ReactionBuilder {
 	@Inject extension TraceExtensions trace
 	
 	def defineStatechartReaction(ExecutionFlow flow, Statechart sc) {
-		val reaction = flow.createReactionSequence(null)
+		val sequence = sexec.factory.createSequence
+		sequence.name = "react"
+		sequence.comment = 'The reactions of statechart '+sc.name
 		
-		flow.reactSequence = reaction
+		val leafStates = sc.allRegularStates.filter(s|s.leaf)
+		val sSwitch = sexec.factory.createStateSwitch
+		sequence.steps += sSwitch
+		for (leaf : leafStates.map(s|s.create)) {
+			val sCase = sexec.factory.createStateCase
+			sCase.state = leaf
+			sCase.step = leaf.reactSequence.newCall
+			sSwitch.cases += sCase
+		}
+		
+		flow.reactSequence = sequence
 		return flow
 	}
 
@@ -84,11 +97,11 @@ class ReactionBuilder {
 	def Sequence defineCycle(RegularState state) {
 	
 		val execState = state.create
-		val parents = state.parentStates		
-		execState.reactSequence = parents.fold(null, [r, s | {
-			s.create.createReactionSequence(r)
+		val parents = state.parentStates
+		val parentNodes = Iterables::concat(parents.map(p|p.create as ExecutionNode),newHashSet(EcoreUtil2::getRootContainer(execState) as ExecutionNode))
+		execState.reactSequence = parentNodes.fold(null, [r, s | {
+			s.createReactionSequence(r)
 		}])
-		execState.reactSequence = (EcoreUtil2::getRootContainer(execState) as ExecutionFlow).createReactionSequence(execState.reactSequence)
 		
 		execState.reactSequence.name = 'react'
 		execState.reactSequence.comment = 'The reactions of state ' + state.name + '.'
