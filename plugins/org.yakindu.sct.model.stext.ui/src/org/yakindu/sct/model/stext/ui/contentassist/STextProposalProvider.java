@@ -128,15 +128,13 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	public void complete_BOOL(EObject model, RuleCall ruleCall,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		for (String s : new String[] { "true", "false", "yes", "no" }) {
-			if (s.startsWith(context.getPrefix())) {
-				ICompletionProposal proposal = createCompletionProposal(s, s
-						+ " - " + ruleCall.getRule().getName(), null, context);
-				getPriorityHelper().adjustKeywordPriority(proposal,
-						context.getPrefix());
-				alterPriority(proposal, 1);
+			ICompletionProposal proposal = createCompletionProposal(s, s
+					+ " - " + ruleCall.getRule().getName(), null, context);
+			getPriorityHelper().adjustKeywordPriority(proposal,
+					context.getPrefix());
+			alterPriority(proposal, 1);
 
-				acceptor.accept(proposal);
-			}
+			acceptor.accept(proposal);
 		}
 	}
 
