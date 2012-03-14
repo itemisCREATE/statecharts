@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -36,8 +37,10 @@ import org.yakindu.sct.model.sexec.transformation.SgraphExtensions;
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
 import org.yakindu.sct.model.sexec.transformation.StextExtensions;
 import org.yakindu.sct.model.sgraph.Choice;
+import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
+import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
@@ -227,9 +230,16 @@ public class SexecElementMapping {
     boolean _operator_notEquals = ObjectExtensions.operator_notEquals(state, null);
     if (_operator_notEquals) {
       {
+        Region _parentRegion = state.getParentRegion();
+        EList<Vertex> _vertices = _parentRegion.getVertices();
+        Iterable<FinalState> _filter = IterableExtensions.<FinalState>filter(_vertices, org.yakindu.sct.model.sgraph.FinalState.class);
+        List<FinalState> _list = IterableExtensions.<FinalState>toList(_filter);
+        int _indexOf = _list.indexOf(state);
+        final int n = _indexOf;
         String _xifexpression = null;
         if ((state instanceof org.yakindu.sct.model.sgraph.FinalState)) {
-          _xifexpression = "_final_";
+          String _operator_plus = StringExtensions.operator_plus("_final_", ((Integer)n));
+          _xifexpression = _operator_plus;
         } else {
           String _name = state.getName();
           _xifexpression = _name;
@@ -323,7 +333,7 @@ public class SexecElementMapping {
           String _name_3 = entry.getName();
           _xifexpression_1 = _name_3;
         } else {
-          _xifexpression_1 = "Default";
+          _xifexpression_1 = "_entry_Default";
         }
         final String entryName = _xifexpression_1;
         String _xifexpression_2 = null;
@@ -408,7 +418,21 @@ public class SexecElementMapping {
     if (_operator_notEquals) {
       {
         String _name = region.getName();
-        r.setName(_name);
+        boolean _isEmpty = Strings.isEmpty(_name);
+        if (_isEmpty) {
+          {
+            EObject _eContainer = region.eContainer();
+            final CompositeElement container = ((CompositeElement) _eContainer);
+            EList<Region> _regions = container.getRegions();
+            int _indexOf = _regions.indexOf(region);
+            final int index = _indexOf;
+            String _operator_plus = StringExtensions.operator_plus("region", ((Integer)index));
+            r.setName(_operator_plus);
+          }
+        } else {
+          String _name_1 = region.getName();
+          r.setName(_name_1);
+        }
         r.setSourceElement(region);
       }
     }
