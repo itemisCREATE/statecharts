@@ -15,6 +15,7 @@ import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Reaction;
+import org.yakindu.sct.model.sgraph.ReactiveElement;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -41,6 +42,7 @@ import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
+import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
@@ -270,6 +272,47 @@ public class SCTTestUtil {
 
 	public static LocalReaction _createLocalReaction(State parent,
 			EventSpec triggerEvent) {
+		LocalReaction reaction = _createLocalReaction(triggerEvent);
+
+		Scope scope = getOrCreateSimpleScope(parent);
+
+		scope.getDeclarations().add(reaction);
+
+		return reaction;
+	}
+
+	public static LocalReaction _createLocalReaction(Statechart parent,
+			EventSpec triggerEvent) {
+		LocalReaction reaction = _createLocalReaction(triggerEvent);
+
+		Scope scope = getOrCreateInternalScope(parent);
+
+		scope.getDeclarations().add(reaction);
+
+		return reaction;
+	}
+
+	public static SimpleScope getOrCreateSimpleScope(State state) {
+		for (Scope scope : state.getScopes()) {
+			if (scope instanceof SimpleScope) {
+				return (SimpleScope) scope;
+			}
+		}
+		SimpleScope scope = StextFactory.eINSTANCE.createSimpleScope();
+		state.getScopes().add(scope);
+		return scope;
+	}
+
+	public static InternalScope getOrCreateInternalScope(Statechart sc) {
+		for (Scope scope : sc.getScopes()) {
+			if (scope instanceof InternalScope) {
+				return (InternalScope) scope;
+			}
+		}
+		return _createInternalScope(sc);
+	}
+
+	public static LocalReaction _createLocalReaction(EventSpec triggerEvent) {
 		LocalReaction reaction = StextFactory.eINSTANCE.createLocalReaction();
 		ReactionTrigger trigger = StextFactory.eINSTANCE
 				.createReactionTrigger();
@@ -278,18 +321,6 @@ public class SCTTestUtil {
 		if (triggerEvent != null)
 			trigger.getTriggers().add(triggerEvent);
 		reaction.setTrigger(trigger);
-
-		Scope scope = null;
-		if (parent != null) {
-			if (parent.getScopes().size() > 0) {
-				scope = parent.getScopes().get(0);
-			} else {
-				scope = StextFactory.eINSTANCE.createSimpleScope();
-				parent.getScopes().add(scope);
-			}
-		}
-
-		scope.getDeclarations().add(reaction);
 
 		return reaction;
 	}
