@@ -17,6 +17,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
@@ -29,6 +30,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
+import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.inject.Inject;
 
@@ -127,27 +129,62 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	@Override
 	public void complete_BOOL(EObject model, RuleCall ruleCall,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(
+				model, "boolean", acceptor);
+
 		for (String s : new String[] { "true", "false", "yes", "no" }) {
 			ICompletionProposal proposal = createCompletionProposal(s, s
 					+ " - " + ruleCall.getRule().getName(), null, context);
-			getPriorityHelper().adjustKeywordPriority(proposal,
-					context.getPrefix());
-			alterPriority(proposal, 1);
 
-			acceptor.accept(proposal);
+			priorityOptimizer.accept(proposal);
 		}
+	}
+
+	protected ICompletionProposalAcceptor getCustomAcceptor(EObject model,
+			String typeName, ICompletionProposalAcceptor acceptor) {
+		ICompletionProposalAcceptor priorityOptimizer = acceptor;
+		if (model instanceof VariableDefinition) {
+			VariableDefinition vd = (VariableDefinition) model;
+			if (vd.getType() != null
+					&& typeName.equalsIgnoreCase(vd.getType().getName())) {
+				priorityOptimizer = new ICompletionProposalAcceptor.Delegate(
+						acceptor) {
+					@Override
+					public void accept(ICompletionProposal proposal) {
+						alterPriority(proposal, 1);
+						super.accept(proposal);
+					}
+				};
+			}
+		}
+		return priorityOptimizer;
+	}
+
+	@Override
+	public void complete_STRING(EObject model, RuleCall ruleCall,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+
+		super.complete_STRING(model, ruleCall, context,
+				getCustomAcceptor(model, "string", acceptor));
+	}
+
+	@Override
+	public void complete_INT(EObject model, RuleCall ruleCall,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.complete_INT(model, ruleCall, context,
+				getCustomAcceptor(model, "integer", acceptor));
 	}
 
 	@Override
 	public void complete_HEX(EObject model, RuleCall ruleCall,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(
+				model, "integer", acceptor);
+
 		String proposalText = "0x1";
 		ICompletionProposal proposal = createCompletionProposal(proposalText,
 				proposalText + " - " + ruleCall.getRule().getName(), null,
 				context);
-		getPriorityHelper()
-				.adjustKeywordPriority(proposal, context.getPrefix());
-		alterPriority(proposal, 1);
 
 		if (proposal instanceof ConfigurableCompletionProposal) {
 			ConfigurableCompletionProposal configurable = (ConfigurableCompletionProposal) proposal;
@@ -158,7 +195,20 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			configurable.setSimpleLinkedMode(context.getViewer(), '\t', ' ');
 		}
 
-		acceptor.accept(proposal);
+		priorityOptimizer.accept(proposal);
+	}
+
+	@Override
+	public void complete_FLOAT(EObject model, RuleCall ruleCall,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(
+				model, "real", acceptor);
+
+		String proposalText = "0.1";
+		ICompletionProposal proposal = createCompletionProposal(proposalText,
+				proposalText + " - " + ruleCall.getRule().getName(), null,
+				context);
+		priorityOptimizer.accept(proposal);
 	}
 
 	private void alterPriority(ICompletionProposal proposal, int delta) {
