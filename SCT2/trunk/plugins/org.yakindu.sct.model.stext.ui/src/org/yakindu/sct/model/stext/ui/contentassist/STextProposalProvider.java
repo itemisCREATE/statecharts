@@ -16,8 +16,11 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
@@ -73,8 +76,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 					.getGroup().eContents()));
 			keywords.addAll(getKeywords(grammarAccess.getDirectionAccess()
 					.getAlternatives().eContents()));
-			keywords.addAll(getKeywords(grammarAccess.getOperationDefinitionAccess()
-					.getGroup().eContents()));
+			keywords.addAll(getKeywords(grammarAccess
+					.getOperationDefinitionAccess().getGroup().eContents()));
 		}
 		// context Statechart
 		else if (contentAssistContext.getRootModel() instanceof StatechartSpecification) {
@@ -93,12 +96,15 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 					.getGroup().eContents()));
 			keywords.addAll(getKeywords(grammarAccess.getTimeEventTypeAccess()
 					.getAlternatives().eContents()));
-			keywords.add(grammarAccess.getDirectionAccess().getLOCALLocalKeyword_0_0());
+			keywords.add(grammarAccess.getDirectionAccess()
+					.getLOCALLocalKeyword_0_0());
 		}
 
 		if (contentAssistContext.getCurrentModel() instanceof InternalScope) {
-			keywords.add(grammarAccess.getDirectionAccess().getINInKeyword_1_0());
-			keywords.add(grammarAccess.getDirectionAccess().getOUTOutKeyword_2_0());
+			keywords.add(grammarAccess.getDirectionAccess()
+					.getINInKeyword_1_0());
+			keywords.add(grammarAccess.getDirectionAccess()
+					.getOUTOutKeyword_2_0());
 		}
 
 		if (!keywords.contains(keyword)) {
@@ -116,5 +122,52 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			}
 		}
 		return keywords;
+	}
+
+	@Override
+	public void complete_BOOL(EObject model, RuleCall ruleCall,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		for (String s : new String[] { "true", "false", "yes", "no" }) {
+			if (s.startsWith(context.getPrefix())) {
+				ICompletionProposal proposal = createCompletionProposal(s, s
+						+ " - " + ruleCall.getRule().getName(), null, context);
+				getPriorityHelper().adjustKeywordPriority(proposal,
+						context.getPrefix());
+				alterPriority(proposal, 1);
+
+				acceptor.accept(proposal);
+			}
+		}
+	}
+
+	@Override
+	public void complete_HEX(EObject model, RuleCall ruleCall,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		String proposalText = "0x1";
+		ICompletionProposal proposal = createCompletionProposal(proposalText,
+				proposalText + " - " + ruleCall.getRule().getName(), null,
+				context);
+		getPriorityHelper()
+				.adjustKeywordPriority(proposal, context.getPrefix());
+		alterPriority(proposal, 1);
+
+		if (proposal instanceof ConfigurableCompletionProposal) {
+			ConfigurableCompletionProposal configurable = (ConfigurableCompletionProposal) proposal;
+			configurable
+					.setSelectionStart(configurable.getReplacementOffset() + 2);
+			configurable.setSelectionLength(proposalText.length() - 2);
+			configurable.setAutoInsertable(false);
+			configurable.setSimpleLinkedMode(context.getViewer(), '\t', ' ');
+		}
+
+		acceptor.accept(proposal);
+	}
+
+	private void alterPriority(ICompletionProposal proposal, int delta) {
+		if (proposal == null
+				|| !(proposal instanceof ConfigurableCompletionProposal))
+			return;
+		ConfigurableCompletionProposal castedProposal = (ConfigurableCompletionProposal) proposal;
+		castedProposal.setPriority(castedProposal.getPriority() + delta);
 	}
 }
