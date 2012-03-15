@@ -79,6 +79,7 @@ import org.yakindu.sct.model.sgraph.CompositeElement
 
 	def ExecutionFlow create r : sexecFactory.createExecutionFlow create(Statechart statechart){
 		r.name = statechart.name
+		r.sourceElement = statechart
 	}
 
 	def dispatch Scope create r : stextFactory.createInterfaceScope  create(InterfaceScope scope) {
