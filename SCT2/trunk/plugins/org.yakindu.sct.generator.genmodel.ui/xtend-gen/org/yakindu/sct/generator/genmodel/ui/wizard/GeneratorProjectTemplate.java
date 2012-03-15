@@ -52,7 +52,7 @@ public class GeneratorProjectTemplate {
   
   public void generate(final ProjectData data) throws IOException, UnsupportedEncodingException, CoreException {
     {
-      this.monitor.beginTask("Create YAKINDU Xpand Generator Project", 15);
+      this.monitor.beginTask("Create YAKINDU Xpand Generator Project", 16);
       IWorkspace _workspace = ResourcesPlugin.getWorkspace();
       IWorkspaceRoot _root = _workspace.getRoot();
       String _projectName = data.getProjectName();
@@ -73,60 +73,63 @@ public class GeneratorProjectTemplate {
       String _encoding = ResourcesPlugin.getEncoding();
       StringConcatenation _projectSettings = this.projectSettings(data, _encoding);
       this.write(_file, _projectSettings);
+      IFile _file_1 = project.getFile(".settings/org.eclipse.jdt.core.prefs");
+      StringConcatenation _jdtSettings = this.jdtSettings(data);
+      this.write(_file_1, _jdtSettings);
       GeneratorType _generatorType_1 = data.getGeneratorType();
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_generatorType_1, GeneratorType.Java);
       if (_operator_notEquals) {
-        IFile _file_1 = project.getFile(".settings/org.eclipse.xtend.shared.ui.prefs");
+        IFile _file_2 = project.getFile(".settings/org.eclipse.xtend.shared.ui.prefs");
         StringConcatenation _xpandSettings = this.xpandSettings(data);
-        this.write(_file_1, _xpandSettings);
+        this.write(_file_2, _xpandSettings);
       }
-      IFile _file_2 = project.getFile("build.properties");
+      IFile _file_3 = project.getFile("build.properties");
       StringConcatenation _buildProperties = this.buildProperties(data);
-      this.write(_file_2, _buildProperties);
-      IFile _file_3 = project.getFile("META-INF/MANIFEST.MF");
+      this.write(_file_3, _buildProperties);
+      IFile _file_4 = project.getFile("META-INF/MANIFEST.MF");
       StringConcatenation _manifest = this.manifest(data);
-      this.write(_file_3, _manifest);
+      this.write(_file_4, _manifest);
       boolean _isPluginExport = data.isPluginExport();
       if (_isPluginExport) {
         {
-          IFile _file_4 = project.getFile("plugin.xml");
+          IFile _file_5 = project.getFile("plugin.xml");
           StringConcatenation _plugin = this.plugin(data);
-          this.write(_file_4, _plugin);
+          this.write(_file_5, _plugin);
           String _generatorClass = data.getGeneratorClass();
           String _javaFilename = this.javaFilename(_generatorClass);
           String _operator_plus = StringExtensions.operator_plus("src/", _javaFilename);
-          IFile _file_5 = project.getFile(_operator_plus);
+          IFile _file_6 = project.getFile(_operator_plus);
           StringConcatenation _xpandGenerator = this.xpandGenerator(data);
-          this.write(_file_5, _xpandGenerator);
+          this.write(_file_6, _xpandGenerator);
           boolean _isTypeLibrary = data.isTypeLibrary();
           if (_isTypeLibrary) {
             {
               this.createFolder(project, "library");
-              IFile _file_6 = project.getFile("library/FeatureTypeLibrary.xmi");
+              IFile _file_7 = project.getFile("library/FeatureTypeLibrary.xmi");
               FeatureTypeLibrary _featureLibrary = this.featureLibrary(data);
-              this.write(_file_6, _featureLibrary);
+              this.write(_file_7, _featureLibrary);
               String _providerClass = this.providerClass(data);
               String _javaFilename_1 = this.javaFilename(_providerClass);
               String _operator_plus_1 = StringExtensions.operator_plus("src/", _javaFilename_1);
-              IFile _file_7 = project.getFile(_operator_plus_1);
+              IFile _file_8 = project.getFile(_operator_plus_1);
               StringConcatenation _defaultProvider = this.defaultProvider(data);
-              this.write(_file_7, _defaultProvider);
+              this.write(_file_8, _defaultProvider);
               String _libraryConstantsClass = this.libraryConstantsClass(data);
               String _javaFilename_2 = this.javaFilename(_libraryConstantsClass);
               String _operator_plus_2 = StringExtensions.operator_plus("src/", _javaFilename_2);
-              IFile _file_8 = project.getFile(_operator_plus_2);
+              IFile _file_9 = project.getFile(_operator_plus_2);
               StringConcatenation _libraryConstants = this.libraryConstants(data);
-              this.write(_file_8, _libraryConstants);
+              this.write(_file_9, _libraryConstants);
             }
           }
         }
       }
-      IFile _file_9 = project.getFile(".classpath");
+      IFile _file_10 = project.getFile(".classpath");
       StringConcatenation _classpath = this.classpath(data);
-      this.write(_file_9, _classpath);
-      IFile _file_10 = project.getFile(".project");
+      this.write(_file_10, _classpath);
+      IFile _file_11 = project.getFile(".project");
       StringConcatenation _projectFile = this.projectFile(data);
-      this.write(_file_10, _projectFile);
+      this.write(_file_11, _projectFile);
       GeneratorType _generatorType_2 = data.getGeneratorType();
       final GeneratorType __valOfSwitchOver = _generatorType_2;
       boolean matched = false;
@@ -140,10 +143,10 @@ public class GeneratorProjectTemplate {
           String _templateName = this.templateName(data);
           String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, _templateName);
           String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, ".xpt");
-          IFile _file_11 = project.getFile(_operator_plus_6);
+          IFile _file_12 = project.getFile(_operator_plus_6);
           String _fromMyFolder = this.fromMyFolder("XpandDefaultTemplate.xpt");
           String _resource = this.resource(_fromMyFolder, "iso-8859-1");
-          this.write(_file_11, _resource);
+          this.write(_file_12, _resource);
         }
       }
       if (!matched) {
@@ -152,9 +155,9 @@ public class GeneratorProjectTemplate {
           String _generatorClass_1 = data.getGeneratorClass();
           String _xtendFilename = this.xtendFilename(_generatorClass_1);
           String _operator_plus_7 = StringExtensions.operator_plus("src/", _xtendFilename);
-          IFile _file_12 = project.getFile(_operator_plus_7);
+          IFile _file_13 = project.getFile(_operator_plus_7);
           StringConcatenation _xtendGenerator = this.xtendGenerator(data);
-          this.write(_file_12, _xtendGenerator);
+          this.write(_file_13, _xtendGenerator);
         }
       }
       if (!matched) {
@@ -163,9 +166,9 @@ public class GeneratorProjectTemplate {
           String _generatorClass_2 = data.getGeneratorClass();
           String _javaFilename_3 = this.javaFilename(_generatorClass_2);
           String _operator_plus_8 = StringExtensions.operator_plus("src/", _javaFilename_3);
-          IFile _file_13 = project.getFile(_operator_plus_8);
+          IFile _file_14 = project.getFile(_operator_plus_8);
           StringConcatenation _javaGenerator = this.javaGenerator(data);
-          this.write(_file_13, _javaGenerator);
+          this.write(_file_14, _javaGenerator);
         }
       }
     }
@@ -886,12 +889,14 @@ public class GeneratorProjectTemplate {
     _builder.newLine();
     _builder.append("import org.yakindu.sct.model.sgen.GeneratorEntry;");
     _builder.newLine();
+    _builder.append("import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator;");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
     String _generatorClass_1 = data.getGeneratorClass();
     String _simpleName = this.simpleName(_generatorClass_1);
     _builder.append(_simpleName, "");
-    _builder.append(" extends AbstractWorkspaceGenerator {");
+    _builder.append(" extends AbstractWorkspaceGenerator implements IExecutionFlowGenerator{");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("private static final String LBR = \"\\n\\r\";");
@@ -1010,12 +1015,14 @@ public class GeneratorProjectTemplate {
     _builder.newLine();
     _builder.append("import org.yakindu.sct.generator.core.AbstractWorkspaceGenerator");
     _builder.newLine();
+    _builder.append("import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("class ");
     String _generatorClass_1 = data.getGeneratorClass();
     String _simpleName = this.simpleName(_generatorClass_1);
     _builder.append(_simpleName, "");
-    _builder.append(" extends AbstractWorkspaceGenerator {");
+    _builder.append(" extends AbstractWorkspaceGenerator implements IExecutionFlowGenerator {");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
@@ -1257,6 +1264,19 @@ public class GeneratorProjectTemplate {
     _builder.append("project.specific.metamodel=true");
     _builder.newLine();
     _builder.append("metamodelContributor=org.eclipse.xtend.typesystem.emf.ui.EmfMetamodelContributor");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public StringConcatenation jdtSettings(final ProjectData data) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("eclipse.preferences.version=1");
+    _builder.newLine();
+    _builder.append("org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.5");
+    _builder.newLine();
+    _builder.append("org.eclipse.jdt.core.compiler.compliance=1.5");
+    _builder.newLine();
+    _builder.append("org.eclipse.jdt.core.compiler.source=1.5");
     _builder.newLine();
     return _builder;
   }
