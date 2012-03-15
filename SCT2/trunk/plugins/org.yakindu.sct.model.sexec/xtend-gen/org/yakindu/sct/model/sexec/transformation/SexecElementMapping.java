@@ -105,8 +105,11 @@ public class SexecElementMapping {
       r = _createExecutionFlow;
       _createCache_create.put(_cacheKey, r);
     }
-    String _name = statechart.getName();
-    r.setName(_name);
+    {
+      String _name = statechart.getName();
+      r.setName(_name);
+      r.setSourceElement(statechart);
+    }
     return r;
   }
   
