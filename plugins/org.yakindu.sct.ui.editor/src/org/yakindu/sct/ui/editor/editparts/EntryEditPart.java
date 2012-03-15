@@ -27,7 +27,7 @@ import org.yakindu.sct.ui.editor.editor.figures.InitialStateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.ShallowHistoryFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
-import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
+import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
 import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPolicy;
 import de.itemis.gmf.runtime.commons.figures.EllipseAnchorDefaultSizeNodeFigure;
@@ -53,7 +53,7 @@ public class EntryEditPart extends BorderedShapeEditPart {
 		installEditPolicy(
 				EditPolicy.SELECTION_FEEDBACK_ROLE,
 				new ContextSensitiveHelpPolicy(
-						IYakinduSctHelpContextIds.SC_PROPERTIES_ENTRY_ENTRYKIND));
+						HelpContextIds.SC_PROPERTIES_ENTRY_ENTRYKIND));
 	}
 
 	@Override

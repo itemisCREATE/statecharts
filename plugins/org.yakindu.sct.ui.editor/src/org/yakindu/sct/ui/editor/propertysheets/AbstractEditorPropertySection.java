@@ -17,15 +17,25 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.gmf.runtime.diagram.ui.properties.sections.AbstractModelerPropertySection;
+import org.eclipse.jface.dialogs.IDialogLabelKeys;
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.ImageHyperlink;
+import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
@@ -140,26 +150,33 @@ public abstract class AbstractEditorPropertySection extends
 	public EObject getContextObject() {
 		return getEObject();
 	}
-	// FIXME
-	// public void createHelpColumn(final Composite parent, final Control
-	// control) {
-	// final ImageHyperlink helpWidget = toolkit.createImageHyperlink(parent,
-	// SWT.CENTER);
-	// Image defaultImage = PlatformUI.getWorkbench().getSharedImages()
-	// .getImage(ISharedImages.IMG_LCL_LINKTO_HELP);
-	// helpWidget.setImage(defaultImage);
-	// GridDataFactory.fillDefaults().align(SWT.FILL, SWT.TOP)
-	// .applyTo(helpWidget);
-	// helpWidget.setToolTipText(JFaceResources
-	// .getString(IDialogLabelKeys.HELP_LABEL_KEY));
-	// helpWidget.addMouseListener(new MouseAdapter() {
-	// public void mouseDown(MouseEvent e) {
-	// control.setFocus();
-	// PlatformUI.getWorkbench().getHelpSystem().displayDynamicHelp();
-	// }
-	// });
-	// GridDataFactory.fillDefaults().applyTo(helpWidget);
-	// helpWidget.setEnabled(true);
-	// }
 
+
+	protected void createHelpWidget(final Composite parent, final Control control, String helpId) {
+		final ImageHyperlink helpWidget = toolkit.createImageHyperlink(parent,
+				SWT.CENTER);
+		Image defaultImage = PlatformUI.getWorkbench().getSharedImages()
+				.getImage(ISharedImages.IMG_LCL_LINKTO_HELP);
+		helpWidget.setImage(defaultImage);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.TOP)
+				.applyTo(helpWidget);
+		helpWidget.setToolTipText(JFaceResources
+				.getString(IDialogLabelKeys.HELP_LABEL_KEY));
+		helpWidget.addMouseListener(new MouseAdapter() {
+			public void mouseDown(MouseEvent e) {
+				control.setFocus();
+				PlatformUI.getWorkbench().getHelpSystem().displayDynamicHelp();
+			}
+		});
+		GridDataFactory.fillDefaults().applyTo(helpWidget);
+		helpWidget.setEnabled(true);
+		setHelpContext(control, helpId);
+	}
+
+	protected void setHelpContext(Control control, String helpId) {
+		IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench()
+				.getHelpSystem();
+		helpSystem.setHelp(control, helpId);
+	}
+	
 }

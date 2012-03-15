@@ -20,14 +20,17 @@ import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Text;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.propertysheets.OrderElementControl.ISourceObjectCallback;
+import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
 import com.google.inject.Injector;
 
@@ -44,9 +47,15 @@ public class StatechartPropertySection extends
 	private OrderElementControl orderElementControl;
 
 	@Override
+	protected Layout createLeftColumnLayout() {
+		return new GridLayout(2, false);
+	}
+
+	@Override
 	protected void createLeftColumnControls(Composite leftColumn) {
 		createSpecificationControl(leftColumn);
 	}
+
 
 	@Override
 	protected void createRightColumnControls(Composite rightColumn) {
@@ -77,6 +86,8 @@ public class StatechartPropertySection extends
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER
 					| SWT.V_SCROLL);
 			enableXtext(textControl, injector);
+			createHelpWidget(parent, textControl,
+					HelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION);
 		} else {
 			textControl = getToolkit().createText(parent, "", SWT.MULTI);
 		}

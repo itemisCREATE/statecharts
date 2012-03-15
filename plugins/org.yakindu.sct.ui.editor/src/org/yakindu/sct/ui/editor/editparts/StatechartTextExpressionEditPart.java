@@ -17,7 +17,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
-import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
+import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
 /**
  * 
@@ -59,7 +59,7 @@ public class StatechartTextExpressionEditPart extends
 		installEditPolicy(
 				EditPolicy.SELECTION_FEEDBACK_ROLE,
 				new ContextSensitiveHelpPolicy(
-						IYakinduSctHelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION));
+						HelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION));
 		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
 	}
 
