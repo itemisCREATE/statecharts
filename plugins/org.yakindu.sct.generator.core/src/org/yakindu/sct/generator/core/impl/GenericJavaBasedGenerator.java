@@ -12,7 +12,7 @@ package org.yakindu.sct.generator.core.impl;
 
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.GENERATOR_CLASS;
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.GENERATOR_PROJECT;
-import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.OVERRIDING_GUICE_MODULE;
+import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.CONFIGURATION_MODULE;
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.TEMPLATE_FEATURE;
 
 import org.eclipse.core.resources.IProject;
@@ -48,7 +48,7 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 
 		String overridingModuleClass = entry
 				.getFeatureConfiguration(TEMPLATE_FEATURE)
-				.getParameterValue(OVERRIDING_GUICE_MODULE).getStringValue();
+				.getParameterValue(CONFIGURATION_MODULE).getStringValue();
 		if (!Strings.isEmpty(overridingModuleClass)) {
 			try {
 				Class<?> moduleClass = getClassLoader(entry).loadClass(
