@@ -19,10 +19,13 @@ import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Layout;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
+import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
 import com.google.inject.Injector;
 
@@ -36,19 +39,24 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 	private Control textControl;
 
 	@Override
+	protected Layout createBodyLayout() {
+		return new GridLayout(2, false);
+	}
+
+	@Override
 	public void createControls(Composite parent) {
 		Injector injector = getInjector(SemanticTarget.TransitionSpecification);
 		if (injector != null) {
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER
 					| SWT.V_SCROLL);
 			enableXtext(textControl, injector);
+			createHelpWidget(parent, textControl,HelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION);
 		} else {
 			textControl = getToolkit().createText(parent, "", SWT.MULTI);
 		}
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(textControl);
 
 	}
-
 
 	@Override
 	public void bindModel(EMFDataBindingContext context) {

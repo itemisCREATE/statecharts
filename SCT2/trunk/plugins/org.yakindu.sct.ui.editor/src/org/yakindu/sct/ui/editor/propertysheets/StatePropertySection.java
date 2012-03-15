@@ -34,6 +34,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.yakindu.base.base.BasePackage;
@@ -42,6 +43,7 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.propertysheets.OrderElementControl.ISourceObjectCallback;
+import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
 import com.google.inject.Injector;
 
@@ -61,15 +63,20 @@ public class StatePropertySection extends
 	private OrderElementControl orderElementControl;
 
 	@Override
-	protected void createRightColumnControls(Composite rightColumn) {
-		createNameControl(rightColumn);
-		createSubmachineControl(rightColumn);
-		createTransitionsControl(rightColumn);
+	protected Layout createLeftColumnLayout() {
+		return new GridLayout(2, false);
 	}
 
 	@Override
 	protected void createLeftColumnControls(Composite leftColumn) {
 		createSpecificationControl(leftColumn);
+	}
+
+	@Override
+	protected void createRightColumnControls(Composite rightColumn) {
+		createNameControl(rightColumn);
+		createSubmachineControl(rightColumn);
+		createTransitionsControl(rightColumn);
 	}
 
 	private void createNameControl(final Composite parent) {
@@ -85,6 +92,8 @@ public class StatePropertySection extends
 			txtSpecification = new StyledText(parent, SWT.MULTI | SWT.BORDER
 					| SWT.V_SCROLL);
 			enableXtext(txtSpecification, injector);
+			createHelpWidget(parent, txtSpecification,
+					HelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION);
 		} else {
 			txtSpecification = getToolkit().createText(parent, "", SWT.MULTI);
 		}

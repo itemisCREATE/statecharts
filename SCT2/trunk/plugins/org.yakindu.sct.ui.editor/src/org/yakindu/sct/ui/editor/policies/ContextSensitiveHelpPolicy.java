@@ -15,12 +15,12 @@ import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
-import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
+import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
 /**
  * Adds context-sensitive help to the host <code>EditPart</code>. 
  * 
- * @see org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds
+ * @see org.yakindu.sct.ui.editor.utils.HelpContextIds
  * 
  * @author martin esser
  * 
@@ -48,7 +48,7 @@ public class ContextSensitiveHelpPolicy extends SelectionEditPolicy {
 	@Override
 	protected void hideSelection() {
 		if (isDynamicHelpViewShowing()) {
-			displayViewerHelpContext(IYakinduSctHelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
+			displayViewerHelpContext(HelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
 		}
 	}
 

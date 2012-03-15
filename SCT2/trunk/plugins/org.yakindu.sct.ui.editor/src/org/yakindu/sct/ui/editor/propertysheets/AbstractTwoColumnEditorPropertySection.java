@@ -15,6 +15,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Layout;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -35,12 +37,25 @@ public abstract class AbstractTwoColumnEditorPropertySection extends
 		sashForm.setBackground(ColorConstants.white);
 		sashForm.setLayout(new FillLayout());
 		Composite leftColumn = getToolkit().createComposite(sashForm);
-		leftColumn.setLayout(createBodyLayout());
+		leftColumn.setLayout(createLeftColumnLayout());
 		Composite rightColumn = getToolkit().createComposite(sashForm);
-		rightColumn.setLayout(createBodyLayout());
-		sashForm.setWeights(new int[]{2,3});
+		rightColumn.setLayout(createRightColumnLayout());
+		sashForm.setWeights(new int[] { 2, 3 });
 		createLeftColumnControls(leftColumn);
 		createRightColumnControls(rightColumn);
+	}
+
+	@Override
+	protected final Layout createBodyLayout() {
+		return super.createBodyLayout();
+	}
+
+	protected Layout createLeftColumnLayout() {
+		return createBodyLayout();
+	}
+
+	protected Layout createRightColumnLayout() {
+		return createBodyLayout();
 	}
 
 }

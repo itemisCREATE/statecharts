@@ -36,7 +36,7 @@ import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.yakindu.sct.ui.editor.DiagramActivator;
-import org.yakindu.sct.ui.editor.utils.IYakinduSctHelpContextIds;
+import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 import org.yakindu.sct.ui.editor.validation.ValidationAction;
 
 import de.itemis.xtext.utils.gmf.resource.DirtyStateListener;
@@ -131,7 +131,7 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 		IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench()
 				.getHelpSystem();
 		helpSystem.setHelp(getGraphicalViewer().getControl(),
-				IYakinduSctHelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
+				HelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
 	}
 
 	@Override
