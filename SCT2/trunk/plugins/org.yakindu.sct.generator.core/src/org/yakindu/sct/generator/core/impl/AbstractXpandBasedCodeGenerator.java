@@ -17,7 +17,6 @@ import static org.yakindu.sct.generator.core.util.GeneratorUtils.refreshTargetPr
 
 import java.io.File;
 import java.util.Collections;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -43,8 +42,6 @@ import org.yakindu.sct.model.sgen.SGenPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.stext.StextPackage;
-
-import com.google.common.collect.Maps;
 
 /**
  * abstract base class for all code generators using Xpand as the template

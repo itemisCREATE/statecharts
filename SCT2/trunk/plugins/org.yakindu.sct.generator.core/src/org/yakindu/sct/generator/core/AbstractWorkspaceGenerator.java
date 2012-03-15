@@ -12,7 +12,6 @@ package org.yakindu.sct.generator.core;
 
 import java.io.File;
 
-import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
