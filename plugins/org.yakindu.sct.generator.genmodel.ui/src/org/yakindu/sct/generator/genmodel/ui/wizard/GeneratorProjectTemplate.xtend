@@ -53,7 +53,7 @@ class GeneratorProjectTemplate {
 	}
 
 	def generate(ProjectData data) {
-		monitor.beginTask("Create YAKINDU Xpand Generator Project", 15);
+		monitor.beginTask("Create YAKINDU Xpand Generator Project", 16);
 		val project = ResourcesPlugin::workspace.root.getProject(data.projectName);
 		project.create(monitor.sub)
 		project.open(monitor.sub)
@@ -64,6 +64,8 @@ class GeneratorProjectTemplate {
 		}
 		project.getFile('.settings/org.eclipse.core.resources.prefs')
 			.write(data.projectSettings(ResourcesPlugin::encoding))
+		project.getFile('.settings/org.eclipse.jdt.core.prefs')
+			.write(data.jdtSettings())
 		if (data.generatorType != GeneratorType::Java) {
 			project.getFile('.settings/org.eclipse.xtend.shared.ui.prefs')
 				.write(data.xpandSettings)
@@ -382,8 +384,9 @@ class GeneratorProjectTemplate {
 		import org.yakindu.sct.model.sexec.ExecutionFlow;
 		import org.yakindu.sct.model.sexec.ExecutionState;
 		import org.yakindu.sct.model.sgen.GeneratorEntry;
+		import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator;
 		
-		public class «data.generatorClass.simpleName» extends AbstractWorkspaceGenerator {
+		public class «data.generatorClass.simpleName» extends AbstractWorkspaceGenerator implements IExecutionFlowGenerator{
 			private static final String LBR = "\n\r";
 
 			@Override
@@ -427,8 +430,9 @@ class GeneratorProjectTemplate {
 		import org.yakindu.sct.model.sexec.ExecutionFlow
 		import org.yakindu.sct.model.sexec.ExecutionState
 		import org.yakindu.sct.generator.core.AbstractWorkspaceGenerator
+		import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
 		
-		class «data.generatorClass.simpleName» extends AbstractWorkspaceGenerator {
+		class «data.generatorClass.simpleName» extends AbstractWorkspaceGenerator implements IExecutionFlowGenerator {
 		
 			override generate(ExecutionFlow flow, GeneratorEntry entry) {
 				entry.targetFolder.write(flow.name+'.txt',flow.info)
@@ -519,6 +523,13 @@ class GeneratorProjectTemplate {
 		eclipse.preferences.version=1
 		project.specific.metamodel=true
 		metamodelContributor=org.eclipse.xtend.typesystem.emf.ui.EmfMetamodelContributor
+	'''
+	
+	def jdtSettings(ProjectData data) '''
+		eclipse.preferences.version=1
+		org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.5
+		org.eclipse.jdt.core.compiler.compliance=1.5
+		org.eclipse.jdt.core.compiler.source=1.5
 	'''
 	
 	def buildProperties(ProjectData data) '''
