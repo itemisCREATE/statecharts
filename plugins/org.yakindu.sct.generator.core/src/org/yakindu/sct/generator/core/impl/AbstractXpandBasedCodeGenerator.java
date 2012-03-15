@@ -17,6 +17,7 @@ import static org.yakindu.sct.generator.core.util.GeneratorUtils.refreshTargetPr
 
 import java.io.File;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -29,7 +30,9 @@ import org.eclipse.xpand2.output.Output;
 import org.eclipse.xpand2.output.OutputImpl;
 import org.eclipse.xpand2.output.PostProcessor;
 import org.eclipse.xtend.expression.Variable;
+import org.eclipse.xtend.typesystem.Type;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.SexecPackage;
@@ -38,7 +41,10 @@ import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.SGenPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.stext.StextPackage;
+
+import com.google.common.collect.Maps;
 
 /**
  * abstract base class for all code generators using Xpand as the template
@@ -50,43 +56,67 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public abstract class AbstractXpandBasedCodeGenerator extends
 		AbstractSExecModelGenerator {
 
+	public static final String CONTEXT_INJECTOR_PROPERTY_NAME = "AbstractXpandBasedCodeGenerator.Injector";
+
 	public abstract String getTemplatePath();
 
 	/**
 	 * Invokes XPands template engine to generate resources
 	 */
-	@Override
-	protected final void generate(ExecutionFlow flow, GeneratorEntry entry) {
+	public final void runGenerator(Statechart statechart, GeneratorEntry entry) {
 		Output output = createOutput(entry);
 
-		if (isDumpSexec(entry)) {
-			dumpSexec(entry, flow, output);
-		}
 		String templatePath = getTemplatePath();
 
 		writeToConsole("Executing Template " + templatePath);
-		XpandExecutionContext context = createXpandContext(output);
+		XpandExecutionContext context = createXpandContext(entry, output);
 		XpandFacade facade = XpandFacade.create(context);
-		facade.evaluate(templatePath, flow, entry);
+
+		// Check, if method exists
+		boolean generatorFound = false;
+		Type targetType = context.getTypeForName("sexec::ExecutionFlow");
+		final Type[] paramTypes = new Type[1];
+		paramTypes[0] = context.getType(entry);
+		if (context.findDefinition(templatePath, targetType, paramTypes) != null) {
+			generatorFound = true;
+			ExecutionFlow flow = createExecutionFlow(statechart, entry);
+			if (isDumpSexec(entry)) {
+				dumpSexec(entry, flow, output);
+			}
+			facade.evaluate(templatePath, flow, entry);
+		}
+
+		targetType = context.getTypeForName("sgraph::Statechart");
+		if (context.findDefinition(templatePath, targetType, paramTypes) != null) {
+			generatorFound = true;
+			facade.evaluate(templatePath, statechart, entry);
+		}
+		if (!generatorFound) {
+			writeToConsole("!!! No matching define in Template found.");
+		}
 
 		// refresh the project to get external updates:
 		refreshTargetProject(entry);
 	}
 
-	protected XpandExecutionContext createXpandContext(Output output) {
+	protected XpandExecutionContext createXpandContext(GeneratorEntry entry,
+			Output output) {
 		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(
-				output, null, Collections.<String, Variable> emptyMap(), null,
-				null);
+				output, null, null, null, null);
 		EmfRegistryMetaModel metamodel = new EmfRegistryMetaModel() {
 			@Override
 			protected EPackage[] allPackages() {
 				return new EPackage[] { SGraphPackage.eINSTANCE,
 						StextPackage.eINSTANCE, EcorePackage.eINSTANCE,
 						SexecPackage.eINSTANCE, SGenPackage.eINSTANCE,
-						TypesPackage.eINSTANCE };
+						TypesPackage.eINSTANCE, BasePackage.eINSTANCE };
 			}
 		};
 		execCtx.registerMetaModel(metamodel);
+		execCtx.getGlobalVariables()
+				.put(CONTEXT_INJECTOR_PROPERTY_NAME,
+						new Variable(CONTEXT_INJECTOR_PROPERTY_NAME,
+								getInjector(entry)));
 		return execCtx;
 	}
 

@@ -12,21 +12,23 @@ package org.yakindu.sct.generator.core.impl;
 
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.GENERATOR_CLASS;
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.GENERATOR_PROJECT;
+import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.OVERRIDING_GUICE_MODULE;
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.TEMPLATE_FEATURE;
-
-import java.io.File;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.util.Strings;
 import org.yakindu.sct.generator.core.AbstractWorkspaceGenerator;
-import org.yakindu.sct.generator.core.IGeneratorBridge;
-import org.yakindu.sct.generator.core.util.GeneratorUtils;
-import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
+import org.yakindu.sct.model.sgraph.Statechart;
+
+import com.google.inject.Guice;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 
 /**
  * 
@@ -35,52 +37,72 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
  */
 public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 
-	final IGeneratorBridge bridge = new IGeneratorBridge() {
-
-		public void writeToConsole(Throwable t) {
-			GenericJavaBasedGenerator.this.writeToConsole(t);
-		}
-
-		public void writeToConsole(String s) {
-			GenericJavaBasedGenerator.this.writeToConsole(s);
-		}
-
-		public FeatureParameterValue getFeatureParameter(GeneratorEntry entry,
-				String featureName, String paramName) {
-			return GeneratorUtils.getFeatureParameter(entry,
-					featureName, paramName);
-		}
-
-		public void refreshTargetProject(GeneratorEntry entry) {
-			GeneratorUtils.refreshTargetProject(entry);
-		}
-
-		public File getTargetProject(GeneratorEntry entry) {
-			IProject targetProject = GenericJavaBasedGenerator.this
-					.getTargetProject(entry);
-			return targetProject.getLocation().toFile();
-		}
-
-		public File getTargetFolder(GeneratorEntry entry) {
-			return GeneratorUtils.getTargetFolder(entry);
-		}
-	};
+	@Override
+	protected com.google.inject.Injector createInjector(GeneratorEntry entry) {
+		return Guice.createInjector(createModule(entry));
+	}
 
 	@Override
-	protected void generate(ExecutionFlow flow, GeneratorEntry entry) {
-		String templateClass = entry.getFeatureConfiguration(TEMPLATE_FEATURE)
-				.getParameterValue(GENERATOR_CLASS).getStringValue();
+	protected Module createModule(GeneratorEntry entry) {
+		Module defaultModule = super.createModule(entry);
+
+		String overridingModuleClass = entry
+				.getFeatureConfiguration(TEMPLATE_FEATURE)
+				.getParameterValue(OVERRIDING_GUICE_MODULE).getStringValue();
+		if (!Strings.isEmpty(overridingModuleClass)) {
+			try {
+				Class<?> moduleClass = getClassLoader(entry).loadClass(
+						overridingModuleClass);
+				if (Module.class.isAssignableFrom(moduleClass)) {
+					Module module = (Module) moduleClass.newInstance();
+					defaultModule = Modules.override(defaultModule)
+							.with(module);
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				writeToConsole("Overriding module not found: "
+						+ overridingModuleClass);
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+				writeToConsole("Module can't be instantiated : "
+						+ overridingModuleClass);
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+				writeToConsole("Access to module denied: "
+						+ overridingModuleClass);
+			}
+		}
+		return defaultModule;
+	}
+
+	protected ClassLoader getClassLoader(GeneratorEntry entry) {
 		IProject project = getLookupRoot(entry);
 		final ClassLoader classLoader = new WorkspaceClassLoaderFactory()
 				.createClassLoader(project);
+		return classLoader;
+	}
+
+	@Override
+	public void runGenerator(Statechart flow, GeneratorEntry entry) {
+		String templateClass = entry.getFeatureConfiguration(TEMPLATE_FEATURE)
+				.getParameterValue(GENERATOR_CLASS).getStringValue();
+		final ClassLoader classLoader = getClassLoader(entry);
 		try {
-			@SuppressWarnings("unchecked")
-			Class<AbstractWorkspaceGenerator> delegateGeneratorClass = (Class<AbstractWorkspaceGenerator>) classLoader
+			Class<?> delegateGeneratorClass = (Class<?>) classLoader
 					.loadClass(templateClass);
-			AbstractWorkspaceGenerator delegate = delegateGeneratorClass
-					.newInstance();
-			delegate.setBridge(bridge);
-			delegate.generate(flow, entry);
+			Object delegate = getInjector(entry).getInstance(
+					delegateGeneratorClass);
+			if (delegate instanceof AbstractWorkspaceGenerator) {
+				((AbstractWorkspaceGenerator) delegate).setBridge(bridge);
+			}
+			if (delegate instanceof IExecutionFlowGenerator) {
+				IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) delegate;
+				flowGenerator.generate(createExecutionFlow(flow, entry), entry);
+			}
+			if (delegate instanceof ISGraphGenerator) {
+				ISGraphGenerator graphGenerator = (ISGraphGenerator) delegate;
+				graphGenerator.generate(flow, entry);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			writeToConsole(e);

@@ -29,8 +29,6 @@ public abstract class AbstractWorkspaceGenerator implements IGeneratorBridge {
 		this.bridge = bridge;
 	}
 
-	public abstract void generate(ExecutionFlow flow, GeneratorEntry entry);
-
 	public final void writeToConsole(String s) {
 		bridge.writeToConsole(s);
 	}

@@ -3,5 +3,6 @@
   <types name="Generator">
     <parameters name="generatorProject"/>
     <parameters name="generatorClass"/>
+    <parameters name="overridingGuiceModule" optional="true"/>
   </types>
 </sgen:FeatureTypeLibrary>
