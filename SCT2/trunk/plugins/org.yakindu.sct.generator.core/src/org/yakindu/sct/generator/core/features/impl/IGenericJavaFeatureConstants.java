@@ -15,4 +15,5 @@ public interface IGenericJavaFeatureConstants {
 	public static final String TEMPLATE_FEATURE = "Generator";
 	public static final String GENERATOR_PROJECT = "generatorProject";
 	public static final String GENERATOR_CLASS = "generatorClass";
+	public static final String OVERRIDING_GUICE_MODULE = "overridingGuiceModule";
 }
