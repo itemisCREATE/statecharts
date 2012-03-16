@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.yakindu.sct.generator.genmodel.ui.wizard.GeneratorComposite.ValidateCallback;
 /**
  * 
  * @author holger willebrandt - Initial contribution and API
@@ -41,6 +42,7 @@ public class WorkspaceGeneratorWizardPage1 extends IProjectWizardPage {
 			validate();
 		}
 	};
+	private GeneratorComposite generatorComposite;
 
 	protected WorkspaceGeneratorWizardPage1(String pageName) {
 		super(pageName);
@@ -81,6 +83,15 @@ public class WorkspaceGeneratorWizardPage1 extends IProjectWizardPage {
 
 		cbXtend = new Button(generatorCheckboxGroup, SWT.CHECK);
 
+		ValidateCallback callback = new ValidateCallback() {
+			public void validate() {
+				WorkspaceGeneratorWizardPage1.this.validate();
+			}
+		};
+		generatorComposite = new GeneratorComposite(parent, SWT.NONE, callback);
+		generatorComposite.disableGeneratorClass();
+
+		generatorComposite.setGroupEnabled(false);
 
 		setPageComplete(false);
 	}
@@ -123,6 +134,12 @@ public class WorkspaceGeneratorWizardPage1 extends IProjectWizardPage {
 			setErrorMessage("Generator class must be a full qualified java identifier");
 			return false;
 		}
+		String message = generatorComposite.validate();
+		if (message != null) {
+			setErrorMessage(message);
+			return false;
+		}
+
 		return true;
 	}
 
@@ -133,6 +150,15 @@ public class WorkspaceGeneratorWizardPage1 extends IProjectWizardPage {
 		data.generatorClass = txtGeneratorClass.getText().trim();
 		data.generatorType = cbXtend.getSelection() ? GeneratorType.Xtend
 				: GeneratorType.Java;
+		data.generatorDescription = generatorComposite.getTxtGeneratorDesc()
+				.getText().trim();
+		data.generatorId = generatorComposite.getTxtGeneratorId().getText()
+				.trim();
+		data.generatorName = generatorComposite.getTxtGeneratorName().getText()
+				.trim();
+		data.pluginExport = generatorComposite.isGeneratePlugin();
+		data.typeLibrary = generatorComposite.isGenerateLibrary();
+		
 		return data;
 	}
 

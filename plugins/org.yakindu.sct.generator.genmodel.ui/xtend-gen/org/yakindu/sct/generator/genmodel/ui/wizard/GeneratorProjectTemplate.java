@@ -95,12 +95,16 @@ public class GeneratorProjectTemplate {
           IFile _file_5 = project.getFile("plugin.xml");
           StringConcatenation _plugin = this.plugin(data);
           this.write(_file_5, _plugin);
-          String _generatorClass = data.getGeneratorClass();
-          String _javaFilename = this.javaFilename(_generatorClass);
-          String _operator_plus = StringExtensions.operator_plus("src/", _javaFilename);
-          IFile _file_6 = project.getFile(_operator_plus);
-          StringConcatenation _xpandGenerator = this.xpandGenerator(data);
-          this.write(_file_6, _xpandGenerator);
+          GeneratorType _generatorType_2 = data.getGeneratorType();
+          boolean _operator_equals_1 = ObjectExtensions.operator_equals(_generatorType_2, GeneratorType.Xpand);
+          if (_operator_equals_1) {
+            String _generatorClass = data.getGeneratorClass();
+            String _javaFilename = this.javaFilename(_generatorClass);
+            String _operator_plus = StringExtensions.operator_plus("src/", _javaFilename);
+            IFile _file_6 = project.getFile(_operator_plus);
+            StringConcatenation _xpandGenerator = this.xpandGenerator(data);
+            this.write(_file_6, _xpandGenerator);
+          }
           boolean _isTypeLibrary = data.isTypeLibrary();
           if (_isTypeLibrary) {
             {
@@ -130,8 +134,8 @@ public class GeneratorProjectTemplate {
       IFile _file_11 = project.getFile(".project");
       StringConcatenation _projectFile = this.projectFile(data);
       this.write(_file_11, _projectFile);
-      GeneratorType _generatorType_2 = data.getGeneratorType();
-      final GeneratorType __valOfSwitchOver = _generatorType_2;
+      GeneratorType _generatorType_3 = data.getGeneratorType();
+      final GeneratorType __valOfSwitchOver = _generatorType_3;
       boolean matched = false;
       if (!matched) {
         if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,GeneratorType.Xpand)) {
@@ -1284,7 +1288,17 @@ public class GeneratorProjectTemplate {
   public StringConcatenation buildProperties(final ProjectData data) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("source.. = src");
-    _builder.newLine();
+    {
+      GeneratorType _generatorType = data.getGeneratorType();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_generatorType, GeneratorType.Xtend);
+      if (_operator_equals) {
+        _builder.append(",\\");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("xtend-gen");
+        _builder.newLine();
+      }
+    }
     {
       boolean _isPluginExport = data.isPluginExport();
       if (_isPluginExport) {
