@@ -52,6 +52,8 @@ import org.yakindu.sct.model.stext.stext.AssignmentExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.impl.StringLiteralImpl
+import org.yakindu.sct.model.stext.stext.StringLiteral
 
 /**
  * 
@@ -262,6 +264,9 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 	
 	def dispatch valueLiteral(RealLiteral literal){
+		return literal.value
+	}
+	def dispatch valueLiteral(StringLiteral literal){
 		return literal.value
 	}
 		

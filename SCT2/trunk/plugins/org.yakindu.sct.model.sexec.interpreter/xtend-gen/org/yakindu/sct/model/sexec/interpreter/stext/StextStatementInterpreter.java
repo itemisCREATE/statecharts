@@ -43,6 +43,7 @@ import org.yakindu.sct.model.stext.stext.RealLiteral;
 import org.yakindu.sct.model.stext.stext.RelationalOperator;
 import org.yakindu.sct.model.stext.stext.ShiftExpression;
 import org.yakindu.sct.model.stext.stext.ShiftOperator;
+import org.yakindu.sct.model.stext.stext.StringLiteral;
 import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.UnaryOperator;
 import org.yakindu.sct.simulation.core.runtime.ExecutionException;
@@ -465,6 +466,11 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     return _value;
   }
   
+  protected Comparable<? extends Object> _valueLiteral(final StringLiteral literal) {
+    String _value = literal.getValue();
+    return _value;
+  }
+  
   public Object execute(final Statement expression) throws ExecutionException {
     if ((expression instanceof ActiveStateReferenceExpression)) {
       return _execute((ActiveStateReferenceExpression)expression);
@@ -565,6 +571,8 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
       return _valueLiteral((IntLiteral)bool);
     } else if ((bool instanceof RealLiteral)) {
       return _valueLiteral((RealLiteral)bool);
+    } else if ((bool instanceof StringLiteral)) {
+      return _valueLiteral((StringLiteral)bool);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         java.util.Arrays.<Object>asList(bool).toString());
