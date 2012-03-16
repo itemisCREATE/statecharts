@@ -226,6 +226,19 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     return _operator_or;
   }
   
+  public boolean isString(final Type type) {
+    boolean _operator_and = false;
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(type, null);
+    if (!_operator_notEquals) {
+      _operator_and = false;
+    } else {
+      String _name = type.getName();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_name, "string");
+      _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_equals);
+    }
+    return _operator_and;
+  }
+  
   protected Object _addToScope(final VariableDefinition variable) throws NumberFormatException {
     Object _xblockexpression = null;
     {
@@ -250,6 +263,13 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
             float _parseFloat = Float.parseFloat("0.0");
             ExecutionVariable _executionVariable_2 = new ExecutionVariable(fqName, java.lang.Float.class, ((Float)_parseFloat));
             this.executionContext.declareVariable(_executionVariable_2);
+          } else {
+            Type _type_3 = variable.getType();
+            boolean _isString = this.isString(_type_3);
+            if (_isString) {
+              ExecutionVariable _executionVariable_3 = new ExecutionVariable(fqName, java.lang.String.class, "");
+              this.executionContext.declareVariable(_executionVariable_3);
+            }
           }
         }
       }
@@ -287,6 +307,13 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
             if (_isVoid) {
               ExecutionEvent _executionEvent_3 = new ExecutionEvent(fqName, java.lang.Void.class);
               this.executionContext.declareEvent(_executionEvent_3);
+            } else {
+              Type _type_4 = event.getType();
+              boolean _isString = this.isString(_type_4);
+              if (_isString) {
+                ExecutionEvent _executionEvent_4 = new ExecutionEvent(fqName, java.lang.String.class, "");
+                this.executionContext.declareEvent(_executionEvent_4);
+              }
             }
           }
         }

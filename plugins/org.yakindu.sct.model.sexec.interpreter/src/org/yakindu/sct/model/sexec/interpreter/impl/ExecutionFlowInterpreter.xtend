@@ -180,6 +180,9 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	def isVoid(Type type){
 		return type == null || type.name == "void"
 	}
+	def isString(Type type){
+		return type != null && type.name =="string"
+	}
 // end TODO
 
 	def dispatch addToScope(VariableDefinition variable){
@@ -192,6 +195,9 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		}
 		else if(isReal(variable.type)){
 			executionContext.declareVariable(new ExecutionVariable(fqName,typeof(Float),Float::parseFloat("0.0")))
+		}
+		else if (isString(variable.type)){
+			executionContext.declareVariable(new ExecutionVariable(fqName,typeof(String),""))
 		}
 		null 
 	}  
@@ -209,6 +215,9 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		}
 		else if(isVoid(event.type)){
 				executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Void)))
+		}
+		else if (isString(event.type)){
+			executionContext.declareEvent(new ExecutionEvent(fqName,typeof(String),""))
 		}
 		null 
 	} 
