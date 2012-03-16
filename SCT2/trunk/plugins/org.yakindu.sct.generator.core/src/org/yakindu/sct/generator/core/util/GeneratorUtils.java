@@ -46,7 +46,14 @@ public class GeneratorUtils {
 	 */
 	public static boolean createEmptyProject(IProject project) {
 		if (!project.exists()) {
-
+			try {
+				NullProgressMonitor monitor = new NullProgressMonitor();
+				project.create(monitor);
+				project.open(monitor);
+				return true;
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
 		}
 		return false;
 	}
