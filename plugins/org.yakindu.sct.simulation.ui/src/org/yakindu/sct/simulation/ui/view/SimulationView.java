@@ -59,6 +59,7 @@ import org.yakindu.sct.simulation.ui.view.editing.BooleanEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.IntegerEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.MultiEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.RealEditingSupport;
+import org.yakindu.sct.simulation.ui.view.editing.StringEditingSupport;
 
 /**
  * 
@@ -227,7 +228,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		valueColumn.getColumn().setWidth(100);
 		valueColumn.setEditingSupport(new MultiEditingSupport(viewer,
 				new BooleanEditingSupport(viewer), new IntegerEditingSupport(
-						viewer), new RealEditingSupport(viewer)));
+						viewer), new RealEditingSupport(viewer), new StringEditingSupport(viewer)));
 		valueColumn.setLabelProvider(new ExecutionContextLabelProvider(1));
 		viewer.setContentProvider(new ExecutionContextContentProvider());
 
