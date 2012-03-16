@@ -74,8 +74,10 @@ class GeneratorProjectTemplate {
 		project.getFile('META-INF/MANIFEST.MF').write(data.manifest)
 		if (data.pluginExport) {
 			project.getFile('plugin.xml').write(data.plugin)
-			project.getFile('src/'+data.generatorClass.javaFilename)
-				.write(data.xpandGenerator)
+			if (data.generatorType == GeneratorType::Xpand) {
+				project.getFile('src/'+data.generatorClass.javaFilename)
+					.write(data.xpandGenerator)
+			}
 			if (data.typeLibrary) {
 				project.createFolder('library')
 				project.getFile('library/FeatureTypeLibrary.xmi')
@@ -533,7 +535,9 @@ class GeneratorProjectTemplate {
 	'''
 	
 	def buildProperties(ProjectData data) '''
-		source.. = src
+		source.. = src«IF data.generatorType == GeneratorType::Xtend»,\
+			xtend-gen
+		«ENDIF»
 		«IF data.pluginExport»
 			bin.includes = META-INF/,.,plugin.xml
 		«ELSE»
