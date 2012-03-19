@@ -55,7 +55,6 @@ public class InjectMembersLazyLinker extends Linker implements
 					INJECT_MEMBERS);
 			if (eAnnotation == null) {
 				ensureModelLinked(current, producer);
-				ensureLinked(current, producer);
 			}
 		}
 		ensureLinked(model, producer);
