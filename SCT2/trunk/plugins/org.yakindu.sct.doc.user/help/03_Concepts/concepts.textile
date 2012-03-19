@@ -11,12 +11,16 @@ For defining interfaces and modeling the dynamic aspects of statecharts (trigger
 
 h2. Simulation
 
-Yakindu Statechart Models can be executed via an integrated simulation engine. The simulation engine supports two different types of execution semantics, cycle based and event driven execution. The default execution semantic is cycle based which executes a statechart cycle within a fixed period of time and thus allows processing of concurrent events. In contrast, the event based approach executes a statechart cycle as soon as an event occurred.
+Yakindu Statechart Models can be executed via an integrated simulation engine. The simulation engine supports two different types of execution semantics:
 
-During simulation, the currently active states and the transition path including the previous states are highlighted in the editor for visual debugging. An additional view
-shows the variable values and allows to raise events. 
+* cycle based 
+* event driven
 
-Apart from that, the engine uses a virtual time during simulation. The user can provide a time scaling factor that is multiplied with the real time. This is especially useful during debugging, if the statechart model contains very tight or long running time triggers.
+The default execution semantic is *cycle based* which executes a statechart cycle within a fixed period of time and thus allows processing of concurrent events. In contrast, the *event based* approach executes a statechart cycle as soon as an event occurrs.
+
+During simulation, the currently active states and the transition path including the previous states are highlighted in the editor for visual debugging. An additional view shows the variable values and allows to raise events. 
+
+Apart from that, the engine uses a *virtual time* during simulation. The user can provide a time scaling factor that is multiplied with the real time. This is especially useful during debugging, if the statechart model contains very tight or long running time triggers.
 
 h2. Code Generation
 
@@ -24,6 +28,6 @@ Yakindu Statechart Tools currently support the generation of Java, C and C++ Cod
 
 h2. Domain specific adaptability
 
-Yakindu Statechart Tools were developed with a domain specific adaptability in mind. Several extension points allow the customization of all mentioned aspects. It is possible to contribute a custom type system or custom action languages which may be a dialect of SText or a complete new language.
+Yakindu Statechart Tools were developed with a domain specific adaptability in mind. Several extension points allow the customization of all mentioned aspects. It is possible to contribute a custom type system or custom action languages which may be a dialect of *SText* or a complete new language.
 
 Also, the different code generators can be customized or new code generators for other target languages can be plugged in easily.

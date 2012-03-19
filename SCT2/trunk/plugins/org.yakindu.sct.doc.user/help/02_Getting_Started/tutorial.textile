@@ -1,18 +1,74 @@
 h2. Using the Example Projects
 
-h3. Example State Machine
 
-h3. Creating a New Project
 
-h3. Defining a State Machine 
 
-h3. Checking the State Machine
+h2. Yakindu SC Modeling perspective
 
-h3. Project Type and Dependencies
+For state machine modeling purposes open the Yakindu *SC Modeling* perspective by clicking *Window* > *Open Perspective* > *SC Modeling*. This perspective is optimized for statechart modeling. It consists of 
+* "Project Explorer":PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cnav.htm on the left
+* "Outline":PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/coutline.htm View on the right
+* YAKINDU Statechart Editor at the top
+* "Problems":PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cprbview.htm and "Properties View":PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cpropview.htm at the bottom
 
-h3. Creating Check Files
+!images/sc_modeling_perspective.jpg!
 
-h3. Editing Check Files
 
-h3. Simulating a State Machine
+h2. Yakindu SC Simulation perspective
+
+To simulate a state machine use the Yakindu *SC Simulation* perspective by clicking *Window* > *Open Perspective* > *SC Simulation*. This perspective is optimized for simulation purposes and consists of:
+
+* "Project Explorer":PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cnav.htm on the left
+* "Outline":PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/coutline.htm view on the right top
+* Simulation View on the right bottom
+* Debug view at the top
+* "YAKINDU Statechart Editor":PLUGIN_ROOT/org.yakindu.sct.doc.user/help/02_Getting_Started/getting_started.html?path=0_1_5#YAKINDUStatechartEditor at the bottom
+
+!images/sc_simulation_perspective.jpg!
+
+
+
+h2. YAKINDU Statechart Editor
+
+With the YAKINDU Statechart editor you create or modify state models. The editor automatically opens on .sct files. To create a new YAKINDU statechart model click *File* > *New* > *Other...* > *YAKINDU Statechart model*. Give it a speaking name and click *Finish*. The newly created model opens in the statechart editor. Also the SC Modeling perspective opens.
+
+!images/sc_editor_01.jpg!
+
+
+The editor consists of three parts: 
+* the graphic canvas to design the state machine
+* the palette on the right that owns the elements to design the state machine 
+* a textual modeling field on the left
+
+You can use the textual modeling field to define internal behavior of states and declare events or variables. The language used here is called SText. The "SText reference":PLUGINS_ROOT/org.yakindu.sct.doc.user/help/concepts.html#SText explains this language.
+
+Elements that cause problems get warning and error markers attached. For more details about the problems open the *Problems View*.
+
+h2. Simulation View
+
+The simulation view is an interactive view to watch and control the state machine simulation. To get it open the simulation perspective. 
+
+Start a simulation by clicking *Run* > *Run*. 
+
+!images/simulation_view_active.jpg!
+
+During the simulation in the statechart editor the active state gets a red color. The previous transition is green. The simulation view shows the events that trigger the states. You can change values here to trigger events. Beneath the table there are two clocks. One for the _virtual time_ and one for the _real time_ and a slider to change virtual time.
+
+You can also select an _event driven_ or _cycle based_ run configuration.
+
+h2. YAKINDU SCT Nature
+
+YAKINDU model projects are associated with the *YAKINDU SCT nature*. For general information regarding natures read the "project nature documentation":PLUGIN_ROOT/org.eclipse.platform.doc.isv/reference/extension-points/org_eclipse_core_resources_natures.html. On projects with *YAKINDU SCT nature* _.sct_ and _.sgen_ files are automatically build and checked for problems. So you get fast feedback during editing. You can toggle the SCT nature by right clicking *Configure* > *Add* or *Remove YAKINDU SCT Nature* on the project.
+
+
+h2. XGI
+
+XGI is an Xtext integration for GMF (=Xtext GMF integration). Technically the statechart editor builds on the Graphical Modeling Framework (GMF). Xtext is an eclipse framework for textual modeling languages. Xtext provides comfortable functionality like _syntax highlighting_, _code completion_, _live validation_ and more. XGI adds these features to SCT editor fields. The result is the following:
+
+!images/sc_editor_code_completion.jpg! 
+
+h2. XJI
+
+XJI is an Xtext integration for JFace e.g. fields in the Properties View. It adds Xtext editor functionality like _syntax highlighting_, _code completion_, _live validation_ and others to these fields. This can be a great help especially for new users to YAKINDU SCT.
+
 

@@ -15,25 +15,6 @@ The following graph shows these features and their relation to each other:
 !images/overview_yakindu.jpg! 
 
 
-
-h2. How does it work?
-
-The YAKINDU SCT 2 are integrated in Eclipse and use the textual modeling toolkit Xtext and the graphical modeling toolkit GMF. Behind the scenes of the statechart tools there are some meta models: 
-
-* *SText* the meta model for the state machines and their behavior
-* *SGraph* the meta model for the graphical representation of the state machine models
-* *SExec* an intermediate model for execution
-* *SGen* an intermediate model used for generating
-
-The following graph shows these meta models, which are all defined as languages and their position in the SCT 2 work flow:
-
-!images/overview_yakindu_modules_tech.jpg!
-
-The statechart editor uses *SText* and *SGraph*. The actual model of the state machine is defined in *SText*. *SGraph* only describes the graphical representation in the editor. *SExec* is an intermediate execution model. It is used behind the scenes as a foundation for the code generators and the simulation engine. This guarantees that the simulation behaves in the same way as the generated statechart implementations. It captures the execution behavior and may also serve as the basis of custom code generators. *SGen* is a generator model. All generators can be customized with such a generator model. In fact it is a textual model file where generator features, like i.e. the outlet path, can be specified.
-
-The YAKINDU SCT 2 can be installed in a full blown Eclipse-IDE specifically tailored for your language. It already provides great default functionality for all aspects and allows to configure  the most common things very easily. 
-
-
 h2. Who is behind YAKINDU Statechart Tools 2?
 
 The main part of YAKINDU SCT 2 is an open source project ("www.yakindu.org":http://www.yakindu.org ). Most of the developers work for itemis, a well known consulting company specialized on model based development.  
