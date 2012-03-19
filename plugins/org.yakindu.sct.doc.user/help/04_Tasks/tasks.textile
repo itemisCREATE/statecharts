@@ -31,7 +31,7 @@ The YAKINDU simulation engine supports simulation modes:
 * event driven
 * cycle based
 
-The default setting is _cycle based_ with a cycle period of 300 ms. In this mode the simulation engine processes the state machine transitions in steps of the given cycle duration. The following statechart illustrates this. It is simulated cycle based with a cycle period of 3 seconds.
+The default setting is _cycle based_ with a cycle period of 200 ms. In this mode the simulation engine processes the state machine transitions in steps of the given cycle duration. The following statechart illustrates this. It is simulated cycle based with a cycle period of 3 seconds.
 
 !images/cycleBasedVsEventDriven.png!
 

@@ -26,13 +26,17 @@ You install the Yakindu Plug-Ins from the update site: http://updates.yakindu.co
 
 !images/updatesite_4.jpg!
 
-The Xtext integration utilities provide Xtext functionality for Yakindu. Additionally to the base integration it also provides GMF and JFace integration. For more details check the documentation "XGI":#XGI and "XJI":#XJI.
+The Xtext integration utilities provide Xtext functionality for Yakindu. 
 
 You can select what code generators you need (Yakindu SCT 2) and if you need the Yakindu SCT2 SDK (for developers). For users only the Yakindu SCT 2 is sufficient.
 
-h2. Yakindu SC Modeling perspective
+h2. First steps: my first state machine
 
-For state machine modeling purposes open the Yakindu *SC Modeling* perspective by clicking *Window* > *Open Perspective* > *SC Modeling*. This perspective is optimized for statechart modeling. It consists of 
+In the following you will create your first state machine with the YAKINDU Statechart tools and simulate it. 
+
+h3. Creating a New Project
+
+For modeling purposes the YAKINDU statechart tools offer a workbench perspective. Such a perspective is a bunch of editors and views that are organized in a certain way on the screen. Open the Yakindu *SC Modeling* perspective by clicking *Window* > *Open Perspective* > *SC Modeling*. This perspective is optimized for statechart modeling. It consists of 
 * "Project Explorer":PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cnav.htm on the left
 * "Outline":PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/coutline.htm View on the right
 * YAKINDU Statechart Editor at the top
@@ -40,10 +44,52 @@ For state machine modeling purposes open the Yakindu *SC Modeling* perspective b
 
 !images/sc_modeling_perspective.jpg!
 
+In the Eclipse workbench all elements are organized in projects. So first to do is to create a project. Therefore click *File* -> *New..." -> *Project*. In the wizard click *Next* and insert a project name. Click *Finish*.
 
-h2. Yakindu SC Simulation perspective
+Now you see your project in the project explorer. 
 
-To simulate a state machine use the Yakindu *SC Simulation* perspective by clicking *Window* > *Open Perspective* > *SC Simulation*. This perspective is optimized for simulation purposes and consists of:
+h3. Defining a State Machine
+
+In the new project now create a new statechart model:
+
+# Click *File* > *New* > *Other...* > *YAKINDU* > *YAKINDU Statechart Model*. 
+# Click *Next* name the sct file and click *Finish*
+# The YAKINDU statechart editor opens on the statechart model. It already has an initial state and an unnamed simple state connected by a transition.
+
+The newly created model has a problem. The new state has a red dot with a cross. This is an error marker. If you look at the problems view you see more details to that problem. In that case it says: "A state must have a name". To solve the problem. Click in the name field of the state and type the name 'off'. Save the model: Click "File" -> "Save". The error marker and the entry in the problems view vanish.
+
+!images/sc_modeling_perspective_errorview.jpg!
+
+With the *YAKINDU Statechart editor* you create or modify state models. The editor automatically opens on .sct files. 
+
+The editor consists of three parts: 
+* the graphic canvas to design the state machine
+* the palette on the right that owns the elements to design the state machine 
+* a textual modeling field on the left
+
+!images/sc_editor_01.jpg!
+
+You can use the textual modeling field for declarating internal behavior of states and events or variables.  The editor also owns comfortable functionality like _syntax highlighting_, _code completion_, _live validation_. The following image shows an example of code completion in the text fields of the editor:
+
+!images/sc_editor_code_completion.jpg! 
+
+# Add a second state: 
+## Click on the symbol *State* in the palette
+## Draw a state icon in the main region
+## Name the second state 'on'
+# Draw a transition from 'off' state to 'on' state. 
+## Click on the symbol *Transition* on the palette. 
+## Draw a line from 'off' to 'on'. 
+## Add the following statement to the transition: after 2 s.
+# Draw a transition with an event from 'on' to 'off' state. 
+## Click on the symbol 'Transition'
+## Draw a line from off to on state.
+## In the declarations view add the statement internal: event switchOff.
+## To the transition add the text switchOff
+
+h3. Simulating the State Machine
+
+YAKINDU SCT 2 comes with a perspective to simulate the models. To simulate a state machine open the Yakindu *SC Simulation* perspective by clicking *Window* > *Open Perspective* > *SC Simulation*. This perspective is optimized for simulation purposes and consists of:
 
 * "Project Explorer":PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cnav.htm on the left
 * "Outline":PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/coutline.htm view on the right top
@@ -53,63 +99,16 @@ To simulate a state machine use the Yakindu *SC Simulation* perspective by click
 
 !images/sc_simulation_perspective.jpg!
 
-h2. Yakindu Xpand Generator Project
-
-In the context of model driven software development generators play an important role. The generator transforms the model to either another model or text like code. Yakindu generators support multiple transform languages. One is Xpand. By clicking *File* > *New* > *Other...* > *YAKINDU Xpand Generator Project* you create a project optimized for writing a generator in Xpand. For more details regarding Xpand see: "Xpand documentation":"PLUGINS_ROOT/org.eclipse.xpand.doc/help/index.html.
-
-!images/new_xpand_project_simple.jpg!
-
-All you need to do is to give it a speaking name and click *Finish*. The setting *Configure for Plugin Export* is an option for plugin developers.
-
-The newly created project has a package with an Xpand starting point: the _Main.xpt_. This file the includes the needed metamodels. It has the entrance Xpand statement that iterates all states in the model and prints the names in a text file.
-
-h2. Yakindu Xtend2/Java Generator Project
-
-The generator that transforms the state machine model into code or documentation can be written in Xtend2 and Java. Find a detailed description on Xtend2 in the "Xtend2 documentation":PLUGIN_ROOT/org.eclipse.xtext.doc/contents/01-Xtend_Introduction.html. Yakindu comes with a predefined project setting for such projects. To create such a project click *File* > *New* > *Other...* > *YAKINDU Xtend2/Java Generator Project*. 
-
-!images/new_java_xtend_project.jpg!
-
-Give the project a speaking full qualified name and name also the generator java class with a full qualified name. If you also want to use Xtend select *Use Xtend*. The result is a new project with an initial Xtend file and java class.
-
-h2. YAKINDU Statechart Editor
-
-With the YAKINDU Statechart editor you create or modify state models. The editor automatically opens on .sct files. To create a new YAKINDU statechart model click *File* > *New* > *Other...* > *YAKINDU Statechart model*. Give it a speaking name and click *Finish*. The newly created model opens in the statechart editor. Also the SC Modeling perspective opens.
-
-!images/sc_editor_01.jpg!
-
-
-The editor consists of three parts: 
-* the graphic canvas to design the state machine
-* the palette on the right that owns the elements to design the state machine 
-* a textual modeling field on the left
-
-You can use the textual modeling field to define internal behavior of states and declare events or variables. The language used here is called SText. The "SText reference":PLUGINS_ROOT/org.yakindu.sct.doc.user/help/concepts.html#SText explains this language.
-
-Elements that cause problems get warning and error markers attached. For more details about the problems open the *Problems View*.
-
-h2. Simulation View
 
 The simulation view is an interactive view to watch and control the state machine simulation. To get it open the simulation perspective. 
 
-Start a simulation by clicking *Run* > *Run*. 
+# Start the simulation by clicking *Run* > *Run*. 
+# The simulation starts and state 'off' is red for 2 seconds. Then state 'on' gets active (red).
+# Raise event 'switchOff': Click on 'switchOff' in the simulation view.
+# State 'off' is active again for 2 seconds.
+# Stop the simulation: *Run* > *Terminate*.
 
 !images/simulation_view_active.jpg!
 
 During the simulation in the statechart editor the active state gets a red color. The previous transition is green. The simulation view shows the events that trigger the states. You can change values here to trigger events. Beneath the table there are two clocks. One for the _virtual time_ and one for the _real time_ and a slider to change virtual time.
 
-You can also select an _event driven_ or _cycle based_ run configuration.
-
-h2. YAKINDU SCT Nature
-
-YAKINDU model projects are associated with the *YAKINDU SCT nature*. For general information regarding natures read the "project nature documentation":PLUGIN_ROOT/org.eclipse.platform.doc.isv/reference/extension-points/org_eclipse_core_resources_natures.html. On projects with *YAKINDU SCT nature* _.sct_ and _.sgen_ files are automatically build and checked for problems. So you get fast feedback during editing. You can toggle the SCT nature by right clicking *Configure* > *Add* or *Remove YAKINDU SCT Nature* on the project.
-
-
-h2. XGI
-
-XGI is an Xtext integration for GMF (=Xtext GMF integration). Technically the statechart editor builds on the Graphical Modeling Framework (GMF). Xtext is an eclipse framework for textual modeling languages. Xtext provides comfortable functionality like _syntax highlighting_, _code completion_, _live validation_ and more. XGI adds these features to SCT editor fields. The result is the following:
-
-!images/sc_editor_code_completion.jpg! 
-
-h2. XJI
-
-XJI is an Xtext integration for JFace e.g. fields in the Properties View. It adds Xtext editor functionality like _syntax highlighting_, _code completion_, _live validation_ and others to these fields. This can be a great help especially for new users to YAKINDU SCT.
