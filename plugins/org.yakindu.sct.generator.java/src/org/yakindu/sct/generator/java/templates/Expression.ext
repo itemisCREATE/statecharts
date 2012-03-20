@@ -76,6 +76,9 @@ String toCode(IntLiteral expression) :
 	
 String toCode(RealLiteral expression) :
 	expression.value.toString();
+	
+String toCode(StringLiteral expression) :
+	"\"" + expression.value.toString() + "\"";
 
 String toCode(EventValueReferenceExpression expression):
 	expression.value.getContext().toFirstLower()+"getEvent"+expression.value.getEventName()+"().getValue()";
