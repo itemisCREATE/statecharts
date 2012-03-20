@@ -17,7 +17,7 @@ String getJavaType(Type this) :
 		case "real" : "double"
 		case "integer" : "int"
 		case "boolean" : "boolean"
-		case "string" : "string"
+		case "string" : "String"
 		default : "//"+this
 		};
 		
