@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <toc topic="help/05_Reference/reference.html" label="reference">
-	<topic href="help/05_Reference/reference.html" label="YAKINDU SCT 2Reference">
+	<topic href="help/05_Reference/reference.html" label="YAKINDU SCT 2 Reference">
 		<topic href="help/05_Reference/reference.html#Statechartelements" label="State chart elements">
 			<topic href="help/05_Reference/reference.html#Regions" label="Regions"></topic>
 			<topic href="help/05_Reference/reference.html#States" label="States"></topic>
@@ -15,7 +15,7 @@
 			<topic href="help/05_Reference/reference.html#ShallowHistory" label="Shallow History"></topic>
 			<topic href="help/05_Reference/reference.html#DeepHistory" label="Deep History"></topic>
 		</topic>
-		<topic href="help/05_Reference/reference.html#SText" label="SText">
+		<topic href="help/05_Reference/reference.html#Statechartdescriptionlanguage" label="Statechart description language">
 			<topic href="help/05_Reference/reference.html#Typesystem" label="Typesystem"></topic>
 			<topic href="help/05_Reference/reference.html#Expressions" label="Expressions">
 				<topic href="help/05_Reference/reference.html#LogicalAND" label="Logical AND"></topic>
