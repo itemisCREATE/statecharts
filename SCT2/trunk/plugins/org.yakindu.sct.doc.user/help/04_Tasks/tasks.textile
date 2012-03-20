@@ -17,7 +17,7 @@ h3. Related topics
 
 "Xtext JFace Integration":http://127.0.0.1:50304/help/topic/org.yakindu.sct.doc.user/help/02_Getting_Started/getting_started.html?path=0_1_9#XJI
 "Statemachine Elements reference":http://127.0.0.1:50304/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=0_4_0#Statechartelements
-"SText Reference":http://127.0.0.1:50304/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=0_4_1#SText
+"Textual modeling lanuage  Reference":http://127.0.0.1:49330/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_1#Statechartdescriptionlanguage
 
 
 h2. Validating a statemachine

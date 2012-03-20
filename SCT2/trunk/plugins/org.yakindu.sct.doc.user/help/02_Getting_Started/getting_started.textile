@@ -1,5 +1,7 @@
 h1. Getting started
 
+Here you learn how to install the YAKINDU SCT2 and to make the first steps.
+
 h2. Installation
 
 h3. Prerequisites
@@ -13,22 +15,16 @@ h3. Installing the YAKINDU-Plug-Ins
 You install the Yakindu Plug-Ins from the update site: http://updates.yakindu.com/indigo/milestones. 
 
 * Click *Help* > *Install new software...* and *Add..* the update site _Yakindu SCT2 milestones_ - http://updates.yakindu.com/indigo/milestones/
-* On this update site you find two main items:
-** Xtext integration utilities
-*** Xtext GMF integration (XGI)
-*** Xtext JFace integration (XJI)
-*** Yakindu Base
-** Yakindu SCT 2
-*** Generator C
-*** Generator Java
-*** Yakindu SCT 2
-*** Yakindu SCT 2 SDK
+* Check all to install the YAKINDU SCT2
+* Click *Next* to start the installation and click *Next* at the next step
+* Accept the licence agreement and click *Finish*
+* The software will be installed
+
+When the installation finished the wizard will ask to reopen Eclipse. The restart is important to make the newly installed software work correctly.
 
 !images/updatesite_4.jpg!
 
-The Xtext integration utilities provide Xtext functionality for Yakindu. 
 
-You can select what code generators you need (Yakindu SCT 2) and if you need the Yakindu SCT2 SDK (for developers). For users only the Yakindu SCT 2 is sufficient.
 
 h2. First steps: my first state machine
 
@@ -36,7 +32,7 @@ In the following you will create your first state machine with the YAKINDU State
 
 h3. Creating a New Project
 
-For modeling purposes the YAKINDU statechart tools offer a workbench perspective. Such a perspective is a bunch of editors and views that are organized in a certain way on the screen. Open the Yakindu *SC Modeling* perspective by clicking *Window* > *Open Perspective* > *SC Modeling*. This perspective is optimized for statechart modeling. It consists of 
+For modeling purposes the YAKINDU statechart tools offer a workbench perspective. Such a perspective is a bunch of editors and views that are organized in a pre defined order on the screen. Open the Yakindu *SC Modeling* perspective by clicking *Window* > *Open Perspective* > *SC Modeling*. This perspective is optimized for statechart modeling. It consists of 
 * "Project Explorer":PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cnav.htm on the left
 * "Outline":PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/coutline.htm View on the right
 * YAKINDU Statechart Editor at the top
@@ -44,7 +40,7 @@ For modeling purposes the YAKINDU statechart tools offer a workbench perspective
 
 !images/sc_modeling_perspective.jpg!
 
-In the Eclipse workbench all elements are organized in projects. So first to do is to create a project. Therefore click *File* -> *New..." -> *Project*. In the wizard click *Next* and insert a project name. Click *Finish*.
+In the Eclipse workbench all elements are organized in projects. So first to do is to create a project. Therefore click *File* > *New..." > *Project*. In the wizard click *Next* and insert a project name. Click *Finish*.
 
 Now you see your project in the project explorer. 
 
@@ -52,11 +48,16 @@ h3. Defining a State Machine
 
 In the new project now create a new statechart model:
 
-# Click *File* > *New* > *Other...* > *YAKINDU* > *YAKINDU Statechart Model*. 
-# Click *Next* name the sct file and click *Finish*
+# Click *File* > *New* > *Other...* > *YAKINDU* > *YAKINDU Statechart Model*
+# Click *Next* and name the sct file
+# Click *Finish*
 # The YAKINDU statechart editor opens on the statechart model. It already has an initial state and an unnamed simple state connected by a transition.
 
-The newly created model has a problem. The new state has a red dot with a cross. This is an error marker. If you look at the problems view you see more details to that problem. In that case it says: "A state must have a name". To solve the problem. Click in the name field of the state and type the name 'off'. Save the model: Click "File" -> "Save". The error marker and the entry in the problems view vanish.
+The newly created model has a problem. The new state has a red dot with a cross. This is an error marker. If you look at the problems view (the *Problems* tab) you see more details to that problem. In that case it says: "A state must have a name". 
+To solve the problem:
+# Click in the name field of the state and type the name 'off'. 
+# Click *File* > *Save*. 
+The error marker and the entry in the problems view vanish.
 
 !images/sc_modeling_perspective_errorview.jpg!
 
@@ -73,7 +74,7 @@ You can use the textual modeling field for declarating internal behavior of stat
 
 !images/sc_editor_code_completion.jpg! 
 
-# Add a second state: 
+# Add a second state 
 ## Click on the symbol *State* in the palette
 ## Draw a state icon in the main region
 ## Name the second state 'on'

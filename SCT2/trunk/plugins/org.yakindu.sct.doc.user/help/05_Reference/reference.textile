@@ -31,7 +31,7 @@ h3. Transitions
 
 A transition is the transfer of one state to another. Transitions are diagrammed as arrows and can carry events and actions but must not. 
 
-The syntax of events and actions is defined by the language "SText":#SText. Please refer to the documentation section "Events":#Events for more details. For more details on Actions refer to the chapter "Actions":#Actions.
+The syntax of events and actions is defined by a textual description language (#Statechartdescriptionlanguage). Please refer to the documentation section "Events":#Events for more details. For more details on Actions refer to the chapter "Actions":#Actions.
 
 If a state has more than one outgoing transition without event that transition is carried out first that was modeled first.
 
@@ -89,14 +89,14 @@ h3. Deep History
 
 Deep history is similar to shallow history but more complex. With a deep history the latest state of multiple nested states is remembered.
 
-h2. SText
+h2. Statechart description language
 
-SText is the textual modeling language for the YAKINDU statecharts. It is case sensitive.
+The textual description language is used to declare and describe behaviors in the state machine. It is case sensitive.
 
 
 h3. Typesystem
 
-SText has an integrated small typesystem with the following simple types:
+The language has an integrated small typesystem with the following simple types:
 
 * integer
 * real
@@ -116,9 +116,9 @@ event addInt : integer
 event checkValidity : boolean
 h3. Expressions
 
-Expressions can be defined similar to other programming languages. SText offers operators to define logical expressions, bitwise arithmetic, and arithmetic expressions and bit shifting.
+Expressions can be defined similar to other programming languages. The language offers operators to define logical expressions, bitwise arithmetic, and arithmetic expressions and bit shifting.
 
-Logical expressions in SText are similar to other programming languages. The return type is *boolean*. In the following there are some examples of these:
+Logical expressions are similar to other programming languages. The return type is *boolean*. In the following there are some examples of these:
 
 h4. Logical AND
 
@@ -177,7 +177,7 @@ h4. Unary arithmetic operators
 
 h3. Statements
 
-A statements can be either an assignment, raising an event or call an operation. SText has the following assignment operators:
+A statements can be either an assignment, raising an event or call an operation. The language has the following assignment operators:
 
 * simple assignment:  = 
 * multiply and assign: *= 
@@ -200,7 +200,7 @@ h3. Scopes
 
 h4. Namespace
 
-SText allows to define unique namespaces, which can be used to qualify references to the statechart.
+The language allows to define unique namespaces, which can be used to qualify references to the statechart.
 
 
 bc.. 
