@@ -963,7 +963,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getOperationDefinition_ParamTypes()
+  public EReference getOperationDefinition_Params()
   {
     return (EReference)operationDefinitionEClass.getEStructuralFeatures().get(0);
   }
@@ -2172,7 +2172,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     createEReference(variableDefinitionEClass, VARIABLE_DEFINITION__INITIAL_VALUE);
 
     operationDefinitionEClass = createEClass(OPERATION_DEFINITION);
-    createEReference(operationDefinitionEClass, OPERATION_DEFINITION__PARAM_TYPES);
+    createEReference(operationDefinitionEClass, OPERATION_DEFINITION__PARAMS);
 
     localReactionEClass = createEClass(LOCAL_REACTION);
     createEReference(localReactionEClass, LOCAL_REACTION__PROPERTIES);
@@ -2472,7 +2472,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEReference(getVariableDefinition_InitialValue(), this.getExpression(), null, "initialValue", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(operationDefinitionEClass, OperationDefinition.class, "OperationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getOperationDefinition_ParamTypes(), theTypesPackage.getType(), null, "paramTypes", null, 0, -1, OperationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getOperationDefinition_Params(), theTypesPackage.getParameter(), null, "params", null, 0, -1, OperationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(localReactionEClass, LocalReaction.class, "LocalReaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getLocalReaction_Properties(), this.getReactionProperties(), null, "properties", null, 0, 1, LocalReaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

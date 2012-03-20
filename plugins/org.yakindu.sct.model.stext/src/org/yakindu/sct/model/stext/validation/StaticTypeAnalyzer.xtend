@@ -134,7 +134,7 @@ class StaticTypeAnalyzer {
 		assertIsNumber(expression.rightOperand.check,'^')
 		typeof(Number)
 	}
-	def dispatch check(LogicalRelationExpression expression){
+	def dispatch check(LogicalRelationExpression expression){ 
 		var leftType = expression.leftOperand.check
 		var rightType = expression.rightOperand.check
 		if(leftType != rightType){
@@ -182,6 +182,10 @@ class StaticTypeAnalyzer {
 		if(reference instanceof VariableDefinition){
 			return (reference as VariableDefinition).type.toJavaType
 		}
+		if(reference instanceof EventDefinition){
+			return typeof(Boolean)
+		}
+		null
 		
 	}
 	
@@ -227,7 +231,7 @@ class StaticTypeAnalyzer {
 	}
 	def assertIsBoolean(Object object, String operator){
 		if(!(object == typeof(Boolean)))
-			error("operator '" +operator+"' can only ne applied to boolean values!")
+			error("operator '" +operator+"' can only be applied to boolean values!")
 	}
 	
 	def error(String msg){

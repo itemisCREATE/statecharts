@@ -226,7 +226,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public void checkOperation(OperationDefinition operation) {
 		if (operation.eContainer() instanceof SimpleScope) {
 			error("Operations can not be defined in states.", operation,
-					StextPackage.Literals.OPERATION_DEFINITION__PARAM_TYPES,
+					StextPackage.Literals.OPERATION_DEFINITION__PARAMS,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 		}
 	}
