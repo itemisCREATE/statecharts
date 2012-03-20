@@ -710,14 +710,12 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Assignment cParamTypesAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
-		private final CrossReference cParamTypesTypeCrossReference_4_0_0 = (CrossReference)cParamTypesAssignment_4_0.eContents().get(0);
-		private final RuleCall cParamTypesTypeFQNParserRuleCall_4_0_0_1 = (RuleCall)cParamTypesTypeCrossReference_4_0_0.eContents().get(1);
+		private final Assignment cParamsAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
+		private final RuleCall cParamsParameterParserRuleCall_4_0_0 = (RuleCall)cParamsAssignment_4_0.eContents().get(0);
 		private final Group cGroup_4_1 = (Group)cGroup_4.eContents().get(1);
 		private final Keyword cCommaKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
-		private final Assignment cParamTypesAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
-		private final CrossReference cParamTypesTypeCrossReference_4_1_1_0 = (CrossReference)cParamTypesAssignment_4_1_1.eContents().get(0);
-		private final RuleCall cParamTypesTypeFQNParserRuleCall_4_1_1_0_1 = (RuleCall)cParamTypesTypeCrossReference_4_1_1_0.eContents().get(1);
+		private final Assignment cParamsAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
+		private final RuleCall cParamsParameterParserRuleCall_4_1_1_0 = (RuleCall)cParamsAssignment_4_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
 		private final Keyword cColonKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
@@ -726,12 +724,12 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypeTypeFQNParserRuleCall_6_1_0_1 = (RuleCall)cTypeTypeCrossReference_6_1_0.eContents().get(1);
 		
 		//OperationDefinition:
-		//	{OperationDefinition} "operation" name=ID "(" (paramTypes+=[types::Type|FQN] ("," paramTypes+=[types::Type|FQN])*)?
-		//	")" (":" type=[types::Type|FQN])?;
+		//	{OperationDefinition} "operation" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" (":"
+		//	type=[types::Type|FQN])?;
 		public ParserRule getRule() { return rule; }
 
-		//{OperationDefinition} "operation" name=ID "(" (paramTypes+=[types::Type|FQN] ("," paramTypes+=[types::Type|FQN])*)? ")"
-		//(":" type=[types::Type|FQN])?
+		//{OperationDefinition} "operation" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" (":"
+		//type=[types::Type|FQN])?
 		public Group getGroup() { return cGroup; }
 
 		//{OperationDefinition}
@@ -749,32 +747,26 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//"("
 		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
 
-		//(paramTypes+=[types::Type|FQN] ("," paramTypes+=[types::Type|FQN])*)?
+		//(params+=Parameter ("," params+=Parameter)*)?
 		public Group getGroup_4() { return cGroup_4; }
 
-		//paramTypes+=[types::Type|FQN]
-		public Assignment getParamTypesAssignment_4_0() { return cParamTypesAssignment_4_0; }
+		//params+=Parameter
+		public Assignment getParamsAssignment_4_0() { return cParamsAssignment_4_0; }
 
-		//[types::Type|FQN]
-		public CrossReference getParamTypesTypeCrossReference_4_0_0() { return cParamTypesTypeCrossReference_4_0_0; }
+		//Parameter
+		public RuleCall getParamsParameterParserRuleCall_4_0_0() { return cParamsParameterParserRuleCall_4_0_0; }
 
-		//FQN
-		public RuleCall getParamTypesTypeFQNParserRuleCall_4_0_0_1() { return cParamTypesTypeFQNParserRuleCall_4_0_0_1; }
-
-		//("," paramTypes+=[types::Type|FQN])*
+		//("," params+=Parameter)*
 		public Group getGroup_4_1() { return cGroup_4_1; }
 
 		//","
 		public Keyword getCommaKeyword_4_1_0() { return cCommaKeyword_4_1_0; }
 
-		//paramTypes+=[types::Type|FQN]
-		public Assignment getParamTypesAssignment_4_1_1() { return cParamTypesAssignment_4_1_1; }
+		//params+=Parameter
+		public Assignment getParamsAssignment_4_1_1() { return cParamsAssignment_4_1_1; }
 
-		//[types::Type|FQN]
-		public CrossReference getParamTypesTypeCrossReference_4_1_1_0() { return cParamTypesTypeCrossReference_4_1_1_0; }
-
-		//FQN
-		public RuleCall getParamTypesTypeFQNParserRuleCall_4_1_1_0_1() { return cParamTypesTypeFQNParserRuleCall_4_1_1_0_1; }
+		//Parameter
+		public RuleCall getParamsParameterParserRuleCall_4_1_1_0() { return cParamsParameterParserRuleCall_4_1_1_0; }
 
 		//")"
 		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
@@ -793,6 +785,42 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//FQN
 		public RuleCall getTypeTypeFQNParserRuleCall_6_1_0_1() { return cTypeTypeFQNParserRuleCall_6_1_0_1; }
+	}
+
+	public class ParameterElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parameter");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cTypeTypeCrossReference_2_0 = (CrossReference)cTypeAssignment_2.eContents().get(0);
+		private final RuleCall cTypeTypeFQNParserRuleCall_2_0_1 = (RuleCall)cTypeTypeCrossReference_2_0.eContents().get(1);
+		
+		//Parameter returns types::Parameter:
+		//	name=ID ":" type=[types::Type|FQN];
+		public ParserRule getRule() { return rule; }
+
+		//name=ID ":" type=[types::Type|FQN]
+		public Group getGroup() { return cGroup; }
+
+		//name=ID
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
+
+		//":"
+		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+
+		//type=[types::Type|FQN]
+		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
+
+		//[types::Type|FQN]
+		public CrossReference getTypeTypeCrossReference_2_0() { return cTypeTypeCrossReference_2_0; }
+
+		//FQN
+		public RuleCall getTypeTypeFQNParserRuleCall_2_0_1() { return cTypeTypeFQNParserRuleCall_2_0_1; }
 	}
 
 	public class EntrypointElements extends AbstractParserRuleElementFinder {
@@ -2906,6 +2934,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private OperationDeclarationElements pOperationDeclaration;
 	private OperationFeatureElements pOperationFeature;
 	private OperationDefinitionElements pOperationDefinition;
+	private ParameterElements pParameter;
 	private EntrypointElements pEntrypoint;
 	private ExitpointElements pExitpoint;
 	private FQNElements pFQN;
@@ -3252,14 +3281,24 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OperationDefinition:
-	//	{OperationDefinition} "operation" name=ID "(" (paramTypes+=[types::Type|FQN] ("," paramTypes+=[types::Type|FQN])*)?
-	//	")" (":" type=[types::Type|FQN])?;
+	//	{OperationDefinition} "operation" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" (":"
+	//	type=[types::Type|FQN])?;
 	public OperationDefinitionElements getOperationDefinitionAccess() {
 		return (pOperationDefinition != null) ? pOperationDefinition : (pOperationDefinition = new OperationDefinitionElements());
 	}
 	
 	public ParserRule getOperationDefinitionRule() {
 		return getOperationDefinitionAccess().getRule();
+	}
+
+	//Parameter returns types::Parameter:
+	//	name=ID ":" type=[types::Type|FQN];
+	public ParameterElements getParameterAccess() {
+		return (pParameter != null) ? pParameter : (pParameter = new ParameterElements());
+	}
+	
+	public ParserRule getParameterRule() {
+		return getParameterAccess().getRule();
 	}
 
 	/// * ---- entrypoint definition ---- * / Entrypoint returns sgraph::Declaration:

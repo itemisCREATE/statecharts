@@ -655,13 +655,13 @@ public interface StextPackage extends EPackage
   int OPERATION_DEFINITION__PARAMETERS = SGraphPackage.DECLARATION_FEATURE_COUNT + 2;
 
   /**
-   * The feature id for the '<em><b>Param Types</b></em>' reference list.
+   * The feature id for the '<em><b>Params</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int OPERATION_DEFINITION__PARAM_TYPES = SGraphPackage.DECLARATION_FEATURE_COUNT + 3;
+  int OPERATION_DEFINITION__PARAMS = SGraphPackage.DECLARATION_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>Operation Definition</em>' class.
@@ -2565,15 +2565,15 @@ public interface StextPackage extends EPackage
   EClass getOperationDefinition();
 
   /**
-   * Returns the meta object for the reference list '{@link org.yakindu.sct.model.stext.stext.OperationDefinition#getParamTypes <em>Param Types</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.stext.stext.OperationDefinition#getParams <em>Params</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference list '<em>Param Types</em>'.
-   * @see org.yakindu.sct.model.stext.stext.OperationDefinition#getParamTypes()
+   * @return the meta object for the containment reference list '<em>Params</em>'.
+   * @see org.yakindu.sct.model.stext.stext.OperationDefinition#getParams()
    * @see #getOperationDefinition()
    * @generated
    */
-  EReference getOperationDefinition_ParamTypes();
+  EReference getOperationDefinition_Params();
 
   /**
    * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.LocalReaction <em>Local Reaction</em>}'.
@@ -4057,12 +4057,12 @@ public interface StextPackage extends EPackage
     EClass OPERATION_DEFINITION = eINSTANCE.getOperationDefinition();
 
     /**
-     * The meta object literal for the '<em><b>Param Types</b></em>' reference list feature.
+     * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference OPERATION_DEFINITION__PARAM_TYPES = eINSTANCE.getOperationDefinition_ParamTypes();
+    EReference OPERATION_DEFINITION__PARAMS = eINSTANCE.getOperationDefinition_Params();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl <em>Local Reaction</em>}' class.

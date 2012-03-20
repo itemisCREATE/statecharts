@@ -96,7 +96,12 @@ VariableDefinition:
 OperationDeclaration returns sgraph::Declaration: OperationDefinition;
 OperationFeature returns types::Operation: OperationDefinition;
 OperationDefinition:
-	{OperationDefinition} 'operation' name=ID '(' (paramTypes+=[types::Type|FQN] (',' paramTypes+=[types::Type|FQN])*)? ')' (':' type=[types::Type|FQN])?;
+	{OperationDefinition} 'operation' name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' (':' type=[types::Type|FQN])?;
+
+Parameter returns types::Parameter:
+	name=ID ':' type=[types::Type|FQN]
+;
+
 
 /* ---- entrypoint definition ---- */
 Entrypoint returns sgraph::Declaration:

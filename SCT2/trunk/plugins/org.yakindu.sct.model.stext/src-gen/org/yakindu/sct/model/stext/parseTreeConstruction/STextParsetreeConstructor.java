@@ -56,54 +56,55 @@ protected class ThisRootNode extends RootToken {
 			case 22: return new OperationDeclaration_OperationDefinitionParserRuleCall(this, this, 22, inst);
 			case 23: return new OperationFeature_OperationDefinitionParserRuleCall(this, this, 23, inst);
 			case 24: return new OperationDefinition_Group(this, this, 24, inst);
-			case 25: return new Entrypoint_Group(this, this, 25, inst);
-			case 26: return new Exitpoint_Group(this, this, 26, inst);
-			case 27: return new Reaction_Alternatives(this, this, 27, inst);
-			case 28: return new LocalReaction_Group(this, this, 28, inst);
-			case 29: return new TransitionReaction_Group(this, this, 29, inst);
-			case 30: return new ReactionTrigger_Group(this, this, 30, inst);
-			case 31: return new ReactionEffect_Group(this, this, 31, inst);
-			case 32: return new ReactionProperties_Group(this, this, 32, inst);
-			case 33: return new ReactionProperty_Alternatives(this, this, 33, inst);
-			case 34: return new EntryPointSpec_Group(this, this, 34, inst);
-			case 35: return new ExitPointSpec_Group(this, this, 35, inst);
-			case 36: return new EventSpec_Alternatives(this, this, 36, inst);
-			case 37: return new RegularEventSpec_EventAssignment(this, this, 37, inst);
-			case 38: return new TimeEventSpec_Group(this, this, 38, inst);
-			case 39: return new BuiltinEventSpec_Alternatives(this, this, 39, inst);
-			case 40: return new EntryEvent_Group(this, this, 40, inst);
-			case 41: return new ExitEvent_Group(this, this, 41, inst);
-			case 42: return new OnCycleEvent_Group(this, this, 42, inst);
-			case 43: return new AlwaysEvent_Group(this, this, 43, inst);
-			case 44: return new DefaultEvent_Group(this, this, 44, inst);
-			case 45: return new EventRaisingExpression_Group(this, this, 45, inst);
-			case 46: return new StatementExpression_ExpressionParserRuleCall(this, this, 46, inst);
-			case 47: return new Expression_AssignmentExpressionParserRuleCall(this, this, 47, inst);
-			case 48: return new AssignmentExpression_Group(this, this, 48, inst);
-			case 49: return new ConditionalExpression_Group(this, this, 49, inst);
-			case 50: return new LogicalOrExpression_Group(this, this, 50, inst);
-			case 51: return new LogicalAndExpression_Group(this, this, 51, inst);
-			case 52: return new LogicalNotExpression_Alternatives(this, this, 52, inst);
-			case 53: return new BitwiseXorExpression_Group(this, this, 53, inst);
-			case 54: return new BitwiseOrExpression_Group(this, this, 54, inst);
-			case 55: return new BitwiseAndExpression_Group(this, this, 55, inst);
-			case 56: return new LogicalRelationExpression_Group(this, this, 56, inst);
-			case 57: return new ShiftExpression_Group(this, this, 57, inst);
-			case 58: return new NumericalAddSubtractExpression_Group(this, this, 58, inst);
-			case 59: return new NumericalMultiplyDivideExpression_Group(this, this, 59, inst);
-			case 60: return new NumericalUnaryExpression_Alternatives(this, this, 60, inst);
-			case 61: return new PrimaryExpression_Alternatives(this, this, 61, inst);
-			case 62: return new PrimitiveValueExpression_Group(this, this, 62, inst);
-			case 63: return new FeatureCall_Group(this, this, 63, inst);
-			case 64: return new TypedElementReferenceExpression_Group(this, this, 64, inst);
-			case 65: return new EventValueReferenceExpression_Group(this, this, 65, inst);
-			case 66: return new ActiveStateReferenceExpression_Group(this, this, 66, inst);
-			case 67: return new Literal_Alternatives(this, this, 67, inst);
-			case 68: return new BoolLiteral_Group(this, this, 68, inst);
-			case 69: return new IntLiteral_Group(this, this, 69, inst);
-			case 70: return new RealLiteral_Group(this, this, 70, inst);
-			case 71: return new HexLiteral_Group(this, this, 71, inst);
-			case 72: return new StringLiteral_Group(this, this, 72, inst);
+			case 25: return new Parameter_Group(this, this, 25, inst);
+			case 26: return new Entrypoint_Group(this, this, 26, inst);
+			case 27: return new Exitpoint_Group(this, this, 27, inst);
+			case 28: return new Reaction_Alternatives(this, this, 28, inst);
+			case 29: return new LocalReaction_Group(this, this, 29, inst);
+			case 30: return new TransitionReaction_Group(this, this, 30, inst);
+			case 31: return new ReactionTrigger_Group(this, this, 31, inst);
+			case 32: return new ReactionEffect_Group(this, this, 32, inst);
+			case 33: return new ReactionProperties_Group(this, this, 33, inst);
+			case 34: return new ReactionProperty_Alternatives(this, this, 34, inst);
+			case 35: return new EntryPointSpec_Group(this, this, 35, inst);
+			case 36: return new ExitPointSpec_Group(this, this, 36, inst);
+			case 37: return new EventSpec_Alternatives(this, this, 37, inst);
+			case 38: return new RegularEventSpec_EventAssignment(this, this, 38, inst);
+			case 39: return new TimeEventSpec_Group(this, this, 39, inst);
+			case 40: return new BuiltinEventSpec_Alternatives(this, this, 40, inst);
+			case 41: return new EntryEvent_Group(this, this, 41, inst);
+			case 42: return new ExitEvent_Group(this, this, 42, inst);
+			case 43: return new OnCycleEvent_Group(this, this, 43, inst);
+			case 44: return new AlwaysEvent_Group(this, this, 44, inst);
+			case 45: return new DefaultEvent_Group(this, this, 45, inst);
+			case 46: return new EventRaisingExpression_Group(this, this, 46, inst);
+			case 47: return new StatementExpression_ExpressionParserRuleCall(this, this, 47, inst);
+			case 48: return new Expression_AssignmentExpressionParserRuleCall(this, this, 48, inst);
+			case 49: return new AssignmentExpression_Group(this, this, 49, inst);
+			case 50: return new ConditionalExpression_Group(this, this, 50, inst);
+			case 51: return new LogicalOrExpression_Group(this, this, 51, inst);
+			case 52: return new LogicalAndExpression_Group(this, this, 52, inst);
+			case 53: return new LogicalNotExpression_Alternatives(this, this, 53, inst);
+			case 54: return new BitwiseXorExpression_Group(this, this, 54, inst);
+			case 55: return new BitwiseOrExpression_Group(this, this, 55, inst);
+			case 56: return new BitwiseAndExpression_Group(this, this, 56, inst);
+			case 57: return new LogicalRelationExpression_Group(this, this, 57, inst);
+			case 58: return new ShiftExpression_Group(this, this, 58, inst);
+			case 59: return new NumericalAddSubtractExpression_Group(this, this, 59, inst);
+			case 60: return new NumericalMultiplyDivideExpression_Group(this, this, 60, inst);
+			case 61: return new NumericalUnaryExpression_Alternatives(this, this, 61, inst);
+			case 62: return new PrimaryExpression_Alternatives(this, this, 62, inst);
+			case 63: return new PrimitiveValueExpression_Group(this, this, 63, inst);
+			case 64: return new FeatureCall_Group(this, this, 64, inst);
+			case 65: return new TypedElementReferenceExpression_Group(this, this, 65, inst);
+			case 66: return new EventValueReferenceExpression_Group(this, this, 66, inst);
+			case 67: return new ActiveStateReferenceExpression_Group(this, this, 67, inst);
+			case 68: return new Literal_Alternatives(this, this, 68, inst);
+			case 69: return new BoolLiteral_Group(this, this, 69, inst);
+			case 70: return new IntLiteral_Group(this, this, 70, inst);
+			case 71: return new RealLiteral_Group(this, this, 71, inst);
+			case 72: return new HexLiteral_Group(this, this, 72, inst);
+			case 73: return new StringLiteral_Group(this, this, 73, inst);
 			default: return null;
 		}	
 	}	
@@ -3166,13 +3167,13 @@ protected class OperationFeature_OperationDefinitionParserRuleCall extends RuleC
 /************ begin Rule OperationDefinition ****************
  *
  * OperationDefinition:
- * 	{OperationDefinition} "operation" name=ID "(" (paramTypes+=[types::Type|FQN] ("," paramTypes+=[types::Type|FQN])*)?
- * 	")" (":" type=[types::Type|FQN])?;
+ * 	{OperationDefinition} "operation" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" (":"
+ * 	type=[types::Type|FQN])?;
  *
  **/
 
-// {OperationDefinition} "operation" name=ID "(" (paramTypes+=[types::Type|FQN] ("," paramTypes+=[types::Type|FQN])*)? ")"
-// (":" type=[types::Type|FQN])?
+// {OperationDefinition} "operation" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" (":"
+// type=[types::Type|FQN])?
 protected class OperationDefinition_Group extends GroupToken {
 	
 	public OperationDefinition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3306,7 +3307,7 @@ protected class OperationDefinition_LeftParenthesisKeyword_3 extends KeywordToke
 
 }
 
-// (paramTypes+=[types::Type|FQN] ("," paramTypes+=[types::Type|FQN])*)?
+// (params+=Parameter ("," params+=Parameter)*)?
 protected class OperationDefinition_Group_4 extends GroupToken {
 	
 	public OperationDefinition_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3322,51 +3323,60 @@ protected class OperationDefinition_Group_4 extends GroupToken {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new OperationDefinition_Group_4_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new OperationDefinition_ParamTypesAssignment_4_0(lastRuleCallOrigin, this, 1, inst);
+			case 1: return new OperationDefinition_ParamsAssignment_4_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// paramTypes+=[types::Type|FQN]
-protected class OperationDefinition_ParamTypesAssignment_4_0 extends AssignmentToken  {
+// params+=Parameter
+protected class OperationDefinition_ParamsAssignment_4_0 extends AssignmentToken  {
 	
-	public OperationDefinition_ParamTypesAssignment_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public OperationDefinition_ParamsAssignment_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getOperationDefinitionAccess().getParamTypesAssignment_4_0();
+		return grammarAccess.getOperationDefinitionAccess().getParamsAssignment_4_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new OperationDefinition_LeftParenthesisKeyword_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Parameter_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("paramTypes",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("paramTypes");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+		if((value = eObjectConsumer.getConsumable("params",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("params");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getOperationDefinitionAccess().getParamTypesTypeCrossReference_4_0_0().getType().getClassifier())) {
-				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getOperationDefinitionAccess().getParamTypesTypeCrossReference_4_0_0(); 
-				return obj;
+			if(param.isInstanceOf(grammarAccess.getParameterRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getOperationDefinitionAccess().getParamsParameterParserRuleCall_4_0_0(); 
+				consumed = obj;
+				return param;
 			}
 		}
 		return null;
 	}
 
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new OperationDefinition_LeftParenthesisKeyword_3(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
 }
 
-// ("," paramTypes+=[types::Type|FQN])*
+// ("," params+=Parameter)*
 protected class OperationDefinition_Group_4_1 extends GroupToken {
 	
 	public OperationDefinition_Group_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3381,7 +3391,7 @@ protected class OperationDefinition_Group_4_1 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new OperationDefinition_ParamTypesAssignment_4_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new OperationDefinition_ParamsAssignment_4_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3404,48 +3414,57 @@ protected class OperationDefinition_CommaKeyword_4_1_0 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new OperationDefinition_Group_4_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new OperationDefinition_ParamTypesAssignment_4_0(lastRuleCallOrigin, this, 1, inst);
+			case 1: return new OperationDefinition_ParamsAssignment_4_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// paramTypes+=[types::Type|FQN]
-protected class OperationDefinition_ParamTypesAssignment_4_1_1 extends AssignmentToken  {
+// params+=Parameter
+protected class OperationDefinition_ParamsAssignment_4_1_1 extends AssignmentToken  {
 	
-	public OperationDefinition_ParamTypesAssignment_4_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public OperationDefinition_ParamsAssignment_4_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getOperationDefinitionAccess().getParamTypesAssignment_4_1_1();
+		return grammarAccess.getOperationDefinitionAccess().getParamsAssignment_4_1_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new OperationDefinition_CommaKeyword_4_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Parameter_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("paramTypes",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("paramTypes");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+		if((value = eObjectConsumer.getConsumable("params",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("params");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getOperationDefinitionAccess().getParamTypesTypeCrossReference_4_1_1_0().getType().getClassifier())) {
-				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getOperationDefinitionAccess().getParamTypesTypeCrossReference_4_1_1_0(); 
-				return obj;
+			if(param.isInstanceOf(grammarAccess.getParameterRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getOperationDefinitionAccess().getParamsParameterParserRuleCall_4_1_1_0(); 
+				consumed = obj;
+				return param;
 			}
 		}
 		return null;
 	}
 
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new OperationDefinition_CommaKeyword_4_1_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 
@@ -3557,6 +3576,138 @@ protected class OperationDefinition_TypeAssignment_6_1 extends AssignmentToken  
 
 
 /************ end Rule OperationDefinition ****************/
+
+
+/************ begin Rule Parameter ****************
+ *
+ * Parameter returns types::Parameter:
+ * 	name=ID ":" type=[types::Type|FQN];
+ *
+ **/
+
+// name=ID ":" type=[types::Type|FQN]
+protected class Parameter_Group extends GroupToken {
+	
+	public Parameter_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getParameterAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Parameter_TypeAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getParameterRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// name=ID
+protected class Parameter_NameAssignment_0 extends AssignmentToken  {
+	
+	public Parameter_NameAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getParameterAccess().getNameAssignment_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_0_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ":"
+protected class Parameter_ColonKeyword_1 extends KeywordToken  {
+	
+	public Parameter_ColonKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getParameterAccess().getColonKeyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Parameter_NameAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// type=[types::Type|FQN]
+protected class Parameter_TypeAssignment_2 extends AssignmentToken  {
+	
+	public Parameter_TypeAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getParameterAccess().getTypeAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Parameter_ColonKeyword_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("type",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getParameterAccess().getTypeTypeCrossReference_2_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getParameterAccess().getTypeTypeCrossReference_2_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule Parameter ****************/
 
 
 /************ begin Rule Entrypoint ****************

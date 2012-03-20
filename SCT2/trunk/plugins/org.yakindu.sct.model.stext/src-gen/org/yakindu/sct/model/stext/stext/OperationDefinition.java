@@ -9,7 +9,7 @@ package org.yakindu.sct.model.stext.stext;
 import org.eclipse.emf.common.util.EList;
 
 import org.yakindu.base.types.Operation;
-import org.yakindu.base.types.Type;
+import org.yakindu.base.types.Parameter;
 
 import org.yakindu.sct.model.sgraph.Declaration;
 
@@ -21,7 +21,7 @@ import org.yakindu.sct.model.sgraph.Declaration;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.stext.stext.OperationDefinition#getParamTypes <em>Param Types</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.OperationDefinition#getParams <em>Params</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,19 +32,19 @@ import org.yakindu.sct.model.sgraph.Declaration;
 public interface OperationDefinition extends Declaration, Operation
 {
   /**
-   * Returns the value of the '<em><b>Param Types</b></em>' reference list.
-   * The list contents are of type {@link org.yakindu.base.types.Type}.
+   * Returns the value of the '<em><b>Params</b></em>' containment reference list.
+   * The list contents are of type {@link org.yakindu.base.types.Parameter}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Param Types</em>' reference list isn't clear,
+   * If the meaning of the '<em>Params</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Param Types</em>' reference list.
-   * @see org.yakindu.sct.model.stext.stext.StextPackage#getOperationDefinition_ParamTypes()
-   * @model
+   * @return the value of the '<em>Params</em>' containment reference list.
+   * @see org.yakindu.sct.model.stext.stext.StextPackage#getOperationDefinition_Params()
+   * @model containment="true"
    * @generated
    */
-  EList<Type> getParamTypes();
+  EList<Parameter> getParams();
 
 } // OperationDefinition
