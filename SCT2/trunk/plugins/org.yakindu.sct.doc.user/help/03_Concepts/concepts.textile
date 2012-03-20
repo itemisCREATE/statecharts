@@ -41,7 +41,7 @@ For state machine modeling purposes open the Yakindu *SC Modeling* perspective b
 * YAKINDU Statechart Editor at the top
 * "Problems":PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cprbview.htm and "Properties View":PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cpropview.htm at the bottom
 
-!02_Getting_Started/../images/sc_modeling_perspective.jpg!
+!../02_Getting_Started/images/sc_modeling_perspective.jpg!
 
 
 h2. Yakindu SC Simulation perspective
@@ -54,7 +54,7 @@ To simulate a state machine use the Yakindu *SC Simulation* perspective by click
 * Debug view at the top
 * "YAKINDU Statechart Editor":PLUGIN_ROOT/org.yakindu.sct.doc.user/help/02_Getting_Started/getting_started.html?path=0_1_5#YAKINDUStatechartEditor at the bottom
 
-!/../02_Getting_Started/images/sc_simulation_perspective.jpg!
+!../02_Getting_Started/images/sc_simulation_perspective.jpg!
 
 
 
@@ -62,7 +62,7 @@ h2. YAKINDU Statechart Editor
 
 With the YAKINDU Statechart editor you create or modify state models. The editor automatically opens on .sct files. To create a new YAKINDU statechart model click *File* > *New* > *Other...* > *YAKINDU Statechart model*. Give it a speaking name and click *Finish*. The newly created model opens in the statechart editor. Also the SC Modeling perspective opens.
 
-!02_Getting_Started/../images/sc_editor_01.jpg!
+!../02_Getting_Started/images/sc_editor_01.jpg!
 
 
 The editor consists of three parts: 
@@ -80,7 +80,7 @@ The simulation view is an interactive view to watch and control the state machin
 
 Start a simulation by clicking *Run* > *Run*. 
 
-!02_Getting_Started/../images/simulation_view_active.jpg!
+!../02_Getting_Started/images/simulation_view_active.jpg!
 
 During the simulation in the statechart editor the active state gets a red color. The previous transition is green. The simulation view shows the events that trigger the states. You can change values here to trigger events. Beneath the table there are two clocks. One for the _virtual time_ and one for the _real time_ and a slider to change virtual time.
 

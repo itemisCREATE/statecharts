@@ -5,14 +5,10 @@
 			<topic href="help/02_Getting_Started/getting_started.html#Prerequisites" label="Prerequisites"></topic>
 			<topic href="help/02_Getting_Started/getting_started.html#InstallingtheYAKINDUPlugIns" label="Installing the YAKINDU-Plug-Ins"></topic>
 		</topic>
-		<topic href="help/02_Getting_Started/getting_started.html#YakinduSCModelingperspective" label="Yakindu SC Modeling perspective"></topic>
-		<topic href="help/02_Getting_Started/getting_started.html#YakinduSCSimulationperspective" label="Yakindu SC Simulation perspective"></topic>
-		<topic href="help/02_Getting_Started/getting_started.html#YakinduXpandGeneratorProject" label="Yakindu Xpand Generator Project"></topic>
-		<topic href="help/02_Getting_Started/getting_started.html#YakinduXtend2JavaGeneratorProject" label="Yakindu Xtend2/Java Generator Project"></topic>
-		<topic href="help/02_Getting_Started/getting_started.html#YAKINDUStatechartEditor" label="YAKINDU Statechart Editor"></topic>
-		<topic href="help/02_Getting_Started/getting_started.html#SimulationView" label="Simulation View"></topic>
-		<topic href="help/02_Getting_Started/getting_started.html#YAKINDUSCTNature" label="YAKINDU SCT Nature"></topic>
-		<topic href="help/02_Getting_Started/getting_started.html#XGI" label="XGI"></topic>
-		<topic href="help/02_Getting_Started/getting_started.html#XJI" label="XJI"></topic>
+		<topic href="help/02_Getting_Started/getting_started.html#Firststepsmyfirststatemachine" label="First steps: my first state machine">
+			<topic href="help/02_Getting_Started/getting_started.html#CreatingaNewProject" label="Creating a New Project"></topic>
+			<topic href="help/02_Getting_Started/getting_started.html#DefiningaStateMachine" label="Defining a State Machine"></topic>
+			<topic href="help/02_Getting_Started/getting_started.html#SimulatingtheStateMachine" label="Simulating the State Machine"></topic>
+		</topic>
 	</topic>
 </toc>
