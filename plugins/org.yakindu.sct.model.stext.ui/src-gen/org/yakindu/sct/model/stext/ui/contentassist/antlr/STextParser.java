@@ -83,6 +83,7 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getOperationDefinitionAccess().getGroup_4(), "rule__OperationDefinition__Group_4__0");
 					put(grammarAccess.getOperationDefinitionAccess().getGroup_4_1(), "rule__OperationDefinition__Group_4_1__0");
 					put(grammarAccess.getOperationDefinitionAccess().getGroup_6(), "rule__OperationDefinition__Group_6__0");
+					put(grammarAccess.getParameterAccess().getGroup(), "rule__Parameter__Group__0");
 					put(grammarAccess.getEntrypointAccess().getGroup(), "rule__Entrypoint__Group__0");
 					put(grammarAccess.getExitpointAccess().getGroup(), "rule__Exitpoint__Group__0");
 					put(grammarAccess.getFQNAccess().getGroup(), "rule__FQN__Group__0");
@@ -175,9 +176,11 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVariableDefinitionAccess().getTypeAssignment_5(), "rule__VariableDefinition__TypeAssignment_5");
 					put(grammarAccess.getVariableDefinitionAccess().getInitialValueAssignment_6_1(), "rule__VariableDefinition__InitialValueAssignment_6_1");
 					put(grammarAccess.getOperationDefinitionAccess().getNameAssignment_2(), "rule__OperationDefinition__NameAssignment_2");
-					put(grammarAccess.getOperationDefinitionAccess().getParamTypesAssignment_4_0(), "rule__OperationDefinition__ParamTypesAssignment_4_0");
-					put(grammarAccess.getOperationDefinitionAccess().getParamTypesAssignment_4_1_1(), "rule__OperationDefinition__ParamTypesAssignment_4_1_1");
+					put(grammarAccess.getOperationDefinitionAccess().getParamsAssignment_4_0(), "rule__OperationDefinition__ParamsAssignment_4_0");
+					put(grammarAccess.getOperationDefinitionAccess().getParamsAssignment_4_1_1(), "rule__OperationDefinition__ParamsAssignment_4_1_1");
 					put(grammarAccess.getOperationDefinitionAccess().getTypeAssignment_6_1(), "rule__OperationDefinition__TypeAssignment_6_1");
+					put(grammarAccess.getParameterAccess().getNameAssignment_0(), "rule__Parameter__NameAssignment_0");
+					put(grammarAccess.getParameterAccess().getTypeAssignment_2(), "rule__Parameter__TypeAssignment_2");
 					put(grammarAccess.getEntrypointAccess().getNameAssignment_2(), "rule__Entrypoint__NameAssignment_2");
 					put(grammarAccess.getExitpointAccess().getNameAssignment_2(), "rule__Exitpoint__NameAssignment_2");
 					put(grammarAccess.getLocalReactionAccess().getTriggerAssignment_0(), "rule__LocalReaction__TriggerAssignment_0");
