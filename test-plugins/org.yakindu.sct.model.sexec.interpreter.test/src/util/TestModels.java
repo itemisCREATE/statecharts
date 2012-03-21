@@ -34,20 +34,20 @@ public class TestModels {
 
 	private static final String TESTMODEL_DIR = "org.yakindu.sct.model.sexec.interpreter.test/testmodels/";
 
-	private static final String SIMPLE = "Simple.sct";
+	private static final String GUARD = "Guard.sct";
 	private static final String SIMPLE_HIERACHY = "SimpleHierachy.sct";
 
 	@Inject
 	private ModelSequencer sequencer;
 
 	/**
-	 * <img src="../../images/Simple.png" /> <br />
+	 * <img src="../../images/Guard.png" /> <br />
 	 * Creates a simple {@link Statechart} with two States and one Transition
 	 * @return the {@link ExecutionFlow}
 	 * @throws IOException
 	 */
-	public ExecutionFlow createSimpleModel() throws IOException {
-		return loadFromResource(SIMPLE);
+	public ExecutionFlow createGuardModel() throws IOException {
+		return loadFromResource(GUARD);
 	}
 	
 	/**
