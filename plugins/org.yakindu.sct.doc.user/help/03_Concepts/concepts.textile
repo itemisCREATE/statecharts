@@ -52,7 +52,7 @@ To simulate a state machine use the Yakindu *SC Simulation* perspective by click
 * "Outline":PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/coutline.htm view on the right top
 * Simulation View on the right bottom
 * Debug view at the top
-* "YAKINDU Statechart Editor":PLUGIN_ROOT/org.yakindu.sct.doc.user/help/02_Getting_Started/getting_started.html?path=0_1_5#YAKINDUStatechartEditor at the bottom
+* YAKINDU Statechart Editor at the bottom
 
 !../02_Getting_Started/images/sc_simulation_perspective.jpg!
 
@@ -70,7 +70,7 @@ The editor consists of three parts:
 * the palette on the right that owns the elements to design the state machine 
 * a textual modeling field on the left
 
-You can use the textual modeling field to define internal behavior of states and declare events or variables. The language used here is called SText. The "SText reference":PLUGINS_ROOT/org.yakindu.sct.doc.user/help/concepts.html#SText explains this language.
+You can use the textual modeling field to define internal behavior of states and declare events or variables. The language used here is called SText. The "reference":http://127.0.0.1:51696/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_1#Statechartdescriptionlanguage explains this language.
 
 Elements that cause problems get warning and error markers attached. For more details about the problems open the *Problems View*.
 

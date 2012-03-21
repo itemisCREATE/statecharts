@@ -55,6 +55,28 @@
 		</topic>
 		<topic href="help/05_Reference/reference.html#SGraph" label="SGraph"></topic>
 		<topic href="help/05_Reference/reference.html#SExec" label="SExec"></topic>
-		<topic href="help/05_Reference/reference.html#SGen" label="SGen"></topic>
+		<topic href="help/05_Reference/reference.html#SGen" label="SGen">
+			<topic href="help/05_Reference/reference.html#GeneratormodelforJava" label="Generator model for Java">
+				<topic href="help/05_Reference/reference.html#FeatureOutlet" label="Feature Outlet"></topic>
+				<topic href="help/05_Reference/reference.html#FeatureLicenseHeader" label="Feature LicenseHeader"></topic>
+				<topic href="help/05_Reference/reference.html#FeatureDebug" label="Feature Debug"></topic>
+				<topic href="help/05_Reference/reference.html#FeatureFunctionInlining" label="Feature FunctionInlining"></topic>
+				<topic href="help/05_Reference/reference.html#FeatureGeneralFeatures" label="Feature GeneralFeatures"></topic>
+				<topic href="help/05_Reference/reference.html#FeatureNaming" label="Feature Naming"></topic>
+			</topic>
+			<topic href="help/05_Reference/reference.html#GeneratormodelforC" label="Generator model for C">
+				<topic href="help/05_Reference/reference.html#FeatureOutlet2" label="Feature Outlet"></topic>
+				<topic href="help/05_Reference/reference.html#FeatureLicenseHeader2" label="Feature LicenseHeader"></topic>
+				<topic href="help/05_Reference/reference.html#FeatureDebug2" label="Feature Debug"></topic>
+				<topic href="help/05_Reference/reference.html#FeatureCCodeFeature" label="Feature CCodeFeature"></topic>
+				<topic href="help/05_Reference/reference.html#FeatureFunctionInlining2" label="Feature FunctionInlining"></topic>
+			</topic>
+			<topic href="help/05_Reference/reference.html#GeneratormodelforC2" label="Generator model for C++">
+				<topic href="help/05_Reference/reference.html#FeatureOutlet3" label="Feature Outlet"></topic>
+				<topic href="help/05_Reference/reference.html#FeatureLicenseHeader3" label="Feature LicenseHeader"></topic>
+				<topic href="help/05_Reference/reference.html#FeatureDebug3" label="Feature Debug"></topic>
+				<topic href="help/05_Reference/reference.html#FeatureFunctionInlining3" label="Feature FunctionInlining"></topic>
+			</topic>
+		</topic>
 	</topic>
 </toc>

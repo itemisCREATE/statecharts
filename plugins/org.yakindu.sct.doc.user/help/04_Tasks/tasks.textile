@@ -15,7 +15,6 @@ On the palette you will also find a composite submachine state. This is a state 
 
 h3. Related topics
 
-"Xtext JFace Integration":http://127.0.0.1:50304/help/topic/org.yakindu.sct.doc.user/help/02_Getting_Started/getting_started.html?path=0_1_9#XJI
 "Statemachine Elements reference":http://127.0.0.1:50304/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=0_4_0#Statechartelements
 "Textual modeling lanuage  Reference":http://127.0.0.1:49330/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_1#Statechartdescriptionlanguage
 
@@ -57,16 +56,127 @@ Start a simulation with the different modes as follows
 !images/simulationRunConfiguration.png!
 
 "Simulation Concept":http://127.0.0.1:50051/help/topic/org.yakindu.sct.doc.user/help/03_Concepts/concepts.html?path=0_2_1#Simulation
-"Simulation perspective":http://127.0.0.1:50051/help/topic/org.yakindu.sct.doc.user/help/02_Getting_Started/getting_started.html?path=0_1_2#YakinduSCSimulationperspective
-"Simulation View":http://127.0.0.1:50051/help/topic/org.yakindu.sct.doc.user/help/02_Getting_Started/getting_started.html?path=0_1_6#SimulationView
+"Simulation perspective":http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/03_Concepts/concepts.html?path=1_2_5#YakinduSCSimulationperspective
+"Simulation View":http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/03_Concepts/concepts.html?path=1_2_7#SimulationView
+
+h2. Generating Java code
+
+To generate Java code you need a java genmodel.
+
+# Click *File* > *New* > *Other...* > *Yakindu Statechart Genmodel*
+# Type a name and click *Next*
+# Choose *YAKINDU Java Code Generator*
+# Check the model(s) to generate code from and click *Finish*
+
+
+!images/genmodelwizardchooselanguage.jpg!
+
+The result is an .sgen file that opens in the editor. It will look similar to the following and you can use it to generate Java code. It will be build automatically if you checked *Project* > *Build Automatically*. If not click *Project* > *Clean...* > *Clean all* to run the generator.
+
+bc.. 
+GeneratorModel for yakindu::java {
+
+	statechart coffeeMachine {
+
+		feature Outlet {
+			targetProject = "org.terra.coffee.machine"
+			targetFolder = "src-gen"			
+		}
+
+		feature Debug {
+			dumpSexec = false			
+		}
+
+		feature licenseHeader {
+			licenseText = "Copyright by itemis AG"			
+		}
+	}
+}
 
 
 h2. Generating C code
 
-* creating project
-* modifying genmodel
+To generate C code you need a C genmodel.
 
-h2. Generating Java code
+# Click *File* > *New* > *Other...* > *Yakindu Statechart Genmodel*
+# Type a name and click *Next*
+# Choose *YAKINDU C Code Generator*
+# Check the model(s) to generate code from and click *Finish*
 
-* creating project
-* modifying genmodel
+The result is an .sgen file that opens in the editor. It will look similar to the following and you can use it to generate Java code. It will be build automatically if you checked *Project* > *Build Automatically*. If not click *Project* > *Clean...* > *Clean all* to run the generator.
+
+bc.. 
+GeneratorModel for yakindu::c {
+
+	statechart coffeeMachine {
+
+		feature Outlet {
+			targetProject = "org.terra.coffee.machine"
+			targetFolder = "src-gen"
+		}
+
+		feature Debug {
+			dumpSexec = false
+		}
+
+		feature licenseHeader {
+			licenseText = "Enter license text here"
+		}
+		
+		feature FunctionInlining {
+			inlineChoices=true
+			inlineEnterRegion=true
+			inlineEnterSequences=true
+			inlineEntries=true
+			inlineEntryActions=true
+			inlineExitActions=true
+			inlineExitRegion=true
+			inlineExitSequences=true
+			inlineReactions=true
+		}
+	}
+}
+
+
+h2. Generating C++ Code
+
+To generate C++ code you need a C++ genmodel.
+
+# Click *File* > *New* > *Other...* > *Yakindu Statechart Genmodel*
+# Type a name and click *Next*
+# Choose *YAKINDU C++ Code Generator*
+# Check the model(s) to generate code from and click *Finish*
+
+The result is an .sgen file that opens in the editor. It will look similar to the following and you can use it to generate Java code. It will be build automatically if you checked *Project* > *Build Automatically*. If not click *Project* > *Clean...* > *Clean all* to run the generator.
+
+bc.. 
+GeneratorModel for yakindu::cpp {
+
+	statechart coffeeMachine {
+
+		feature Outlet {
+			targetProject = "org.terra.coffee.machine"
+			targetFolder = "src-gen"
+		}
+
+		feature Debug {
+			dumpSexec = false
+		}
+
+		feature licenseHeader {
+			licenseText = "Enter license text here"
+		}
+		
+		feature FunctionInlining {
+			inlineChoices=true
+			inlineEnterRegion=true
+			inlineEnterSequences=true
+			inlineEntries=true
+			inlineEntryActions=true
+			inlineExitActions=true
+			inlineExitRegion=true
+			inlineExitSequences=true
+			inlineReactions=true
+		}
+	}
+}
