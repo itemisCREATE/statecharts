@@ -26,13 +26,22 @@ public class ExecutionFlowInterpreterTest extends AbstractExecutionFlowTest {
 
 	@Test
 	public void testSimpleTransition() throws Exception {
-		loadAndconfigureInterpreter(models.createSimpleModel());
+		loadAndconfigureInterpreter(models.createGuardModel());
 		assertIsActive("A");
 		assertVarValue("MyVar", 0);
 		context().raiseEvent("Event1", null);
 		interpreter.runCycle();
-		assertIsActive("B");
+		assertIsActive("A");
+		context().raiseEvent("Event2", null);
+		interpreter.runCycle();
 		assertVarValue("MyVar", 10);
+		assertIsActive("B");
+		context().raiseEvent("Return", null);
+		interpreter.runCycle();
+		assertIsActive("A");
+		context().raiseEvent("Event1", null);
+		interpreter.runCycle();
+		assertIsActive("B");
 	}
 	@Test
 	public void testsimpleHierachy() throws IOException{
