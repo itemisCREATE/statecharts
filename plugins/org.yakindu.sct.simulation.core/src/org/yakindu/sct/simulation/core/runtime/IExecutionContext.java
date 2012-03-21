@@ -130,4 +130,6 @@ public interface IExecutionContext {
 
 	public void saveHistoryStateConfiguration(ExecutionRegion region);
 
+	public abstract ExecutionEvent getDeclaredEvent(String eventName);
+
 }

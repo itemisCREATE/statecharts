@@ -9,7 +9,7 @@
  * 
  */
 package org.yakindu.sct.model.sexec.interpreter.stext
-
+ 
 import org.yakindu.sct.model.sexec.interpreter.IStatementInterpreter
 import org.yakindu.sct.simulation.core.IExecutionContext
 import org.yakindu.sct.model.sgraph.Statement

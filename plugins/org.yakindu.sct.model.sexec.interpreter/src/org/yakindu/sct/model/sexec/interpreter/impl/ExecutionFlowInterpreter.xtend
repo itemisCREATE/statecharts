@@ -305,7 +305,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	def dispatch execute(SaveHistory action){
 		executionContext.saveHistoryStateConfiguration(action.region);
 		null
-	}
+	} 
 	
 	def dispatch execute(StateSwitch stateSwitch){
 		val historyRegion = stateSwitch.historyRegion
@@ -329,7 +329,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	def dispatch execute(ScheduleTimeEvent scheduleTimeEvent){
 		var timeEvent = scheduleTimeEvent.timeEvent
 		var duration = interpreter.evaluateStatement(scheduleTimeEvent.timeValue, executionContext)
-		timingService.scheduleTimeEvent(executionContext,timeEvent.name,timeEvent.periodic, duration as Integer)
+		timingService.scheduleTimeEvent(externalExecutionContext,timeEvent.name,timeEvent.periodic, duration as Integer)
 		null
 	}
 	

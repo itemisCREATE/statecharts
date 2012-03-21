@@ -68,4 +68,8 @@ public abstract class AbstractExecutionContext implements IExecutionContext {
 		}
 	}
 
+	public ExecutionEvent getDeclaredEvent(String eventName) {
+		return null;
+	}
+
 }

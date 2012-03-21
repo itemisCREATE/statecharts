@@ -35,7 +35,7 @@ public class AbstractSTextTest {
 	@Inject
 	private XtextResource resource;
 	@Inject 
-	private ExecutionContextImpl context;
+	private IExecutionContext context;
 	@Inject
 	private StextStatementInterpreter interpreter;
 

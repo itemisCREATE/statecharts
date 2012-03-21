@@ -40,7 +40,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 
 	private List<ExecutionVariable> variables;
 	private List<ExecutionEvent> declaredEvents;
-	private List<ExecutionEvent> raisedEvents;
+	protected List<ExecutionEvent> raisedEvents;
 	private ExecutionState[] activeStateConfig;
 	private Map<Integer, ExecutionState> historyStateConfig;
 	private double timeScaleFactor;
@@ -93,7 +93,8 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		}
 	}
 
-	private ExecutionEvent getDeclaredEvent(String eventName) {
+	@Override
+	public ExecutionEvent getDeclaredEvent(String eventName) {
 		synchronized (declaredEvents) {
 			for (ExecutionEvent event : declaredEvents) {
 				if (event.getName().equals(eventName))
