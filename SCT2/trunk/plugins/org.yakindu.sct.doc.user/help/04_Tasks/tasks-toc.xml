@@ -6,7 +6,8 @@
 		</topic>
 		<topic href="help/04_Tasks/tasks.html#Validatingastatemachine" label="Validating a statemachine"></topic>
 		<topic href="help/04_Tasks/tasks.html#Simulatingastatemachine" label="Simulating a statemachine"></topic>
-		<topic href="help/04_Tasks/tasks.html#GeneratingCcode" label="Generating C code"></topic>
 		<topic href="help/04_Tasks/tasks.html#GeneratingJavacode" label="Generating Java code"></topic>
+		<topic href="help/04_Tasks/tasks.html#GeneratingCcode" label="Generating C code"></topic>
+		<topic href="help/04_Tasks/tasks.html#GeneratingCCode" label="Generating C++ Code"></topic>
 	</topic>
 </toc>

@@ -364,16 +364,123 @@ SExec is the name of an intermediate execution model. This intermediate model is
 
 h2. SGen
 
-All generators can be customized with a generator model. This is a textual model file where generator features, like i.e. the outlet path, can be specified. The following screenshot shows an example configuration for the java code generator. In future releases, we will add generator features for the execution type (event or cycle based), interface styles (static or generic) and much more.
-
-!images/sGenEditor.png!
+All generators can be customized with a generator model. This is a textual model file where generator features, like i.e. the outlet path, can be specified. The following screenshot shows an example configuration for the java code generator. 
 
 To get started with the generator model, we included a new Eclipse wizard that creates a basic configuration file with default values.
 
 !images/sGenEditor.png!
 
-To execute the Generator Model, select “Generate Model” from the context menu of the resource in the “Project Explorer”.
+The generator model is associated with the builder. If *Project* > *Build Automatically* is checked the files are generated. In the following the specific customizing features of the generator models are explained.
 
+h3. Generator model for Java
+
+The generator model for Java is used to customize the generation of Java code from the state chart model. 
+
+h4. Feature Outlet
+
+With the feature *Outlet* you define the folder the source files will be generated in:
+
+bc.. 
+		feature Outlet {
+			targetProject = "org.terra.coffee.machine"
+			targetFolder = "src-gen"			
+		}
+
+h4. Feature LicenseHeader
+
+With the feature Licence header you can set a licence text that is added to the headers of all generated files:
+
+bc.. 
+		feature licenseHeader {
+			licenseText = "Copyright (c) 2012 itemis AG.
+ All rights reserved."			
+		}
+
+
+h4. Feature Debug
+
+The feature debug controls the output of debug information. An important information source is the intermediate model sExec.
+
+bc.. 
+		feature Debug {
+			dumpSexec = false			
+		}
+
+h4. Feature FunctionInlining
+
+bc.. 
+		feature FunctionInlining {
+			inlineChoices=true
+			inlineEnterRegion=true
+			inlineEnterSequences=true
+			inlineEntries=true
+			inlineEntryActions=true
+			inlineExitActions=true
+			inlineExitRegion=true
+			inlineExitSequences=true
+			inlineReactions=true
+		}
+
+h4. Feature GeneralFeatures
+
+bc.. 
+		feature GeneralFeatures {
+			EventBasedStatemachine=true
+			GenericInterfaceSupport=true
+			InterfaceObserverSupport=true
+			RuntimeService=false
+			StatemachineFactorySupport=true
+			TimerService=true
+		}
+
+h4. Feature Naming
+
+
+bc.. 
+		feature Naming {
+			basePackage="org.java"
+			implementationSuffix="ipl"
+		}
+h3. Generator model for C
+
+h4. Feature Outlet
+
+The feature is similar to the target language Java ("Java Feature Outlet":http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_4_0_0#FeatureOutlet).
+
+h4. Feature LicenseHeader
+
+The feature is similar to the target language Java ("Java Feature LicenseHeader":http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_4_0_0#FeatureLicenseHeader)
+
+h4. Feature Debug
+
+The feature is similar to the target language Java ("Java Feature Debug":http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_4_0_0#FeatureDebug)
+
+h4. Feature CCodeFeature
+
+bc.. 
+		feature CCodeFeature {
+			DebugType="DEBUG"
+			InterfaceEventListener=false
+			Singleton=true
+		}
+
+h4. Feature FunctionInlining
+
+h3. Generator model for C++
+
+h4. Feature Outlet
+
+The feature is similar to the target language Java ("Java Feature Outlet":http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_4_0_0#FeatureOutlet).
+
+h4. Feature LicenseHeader
+
+The feature is similar to the target language Java ("Java Feature LicenseHeader":http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_4_0_0#FeatureLicenseHeader)
+
+h4. Feature Debug
+
+The feature is similar to the target language Java ("Java Feature Debug":http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_4_0_0#FeatureDebug)
+
+h4. Feature FunctionInlining
 
 
 

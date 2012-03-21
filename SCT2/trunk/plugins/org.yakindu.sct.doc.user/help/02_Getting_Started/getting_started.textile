@@ -96,7 +96,7 @@ YAKINDU SCT 2 comes with a perspective to simulate the models. To simulate a sta
 * "Outline":PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/coutline.htm view on the right top
 * Simulation View on the right bottom
 * Debug view at the top
-* "YAKINDU Statechart Editor":PLUGIN_ROOT/org.yakindu.sct.doc.user/help/02_Getting_Started/getting_started.html?path=0_1_5#YAKINDUStatechartEditor at the bottom
+* YAKINDU Statechart Editor
 
 
 The simulation view is an interactive view to watch and control the state machine simulation. To get it open the simulation perspective. 
