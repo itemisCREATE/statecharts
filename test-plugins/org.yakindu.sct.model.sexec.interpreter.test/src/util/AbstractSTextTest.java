@@ -1,4 +1,14 @@
-package org.yakindu.sct.model.sexec.interpreter.test;
+/**
+ * Copyright (c) 2012 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     committers of YAKINDU - initial API and implementation
+ */
+package util;
 
 import java.io.StringReader;
 
@@ -26,6 +36,11 @@ import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
 public class AbstractSTextTest {
 
 	@Inject
@@ -34,8 +49,8 @@ public class AbstractSTextTest {
 	private ILinker linker;
 	@Inject
 	private XtextResource resource;
-	@Inject 
-	private IExecutionContext context;
+	@Inject
+	private ExecutionContextImpl context;
 	@Inject
 	private StextStatementInterpreter interpreter;
 
@@ -62,11 +77,14 @@ public class AbstractSTextTest {
 	private void initContext() {
 		// "event abc operation foo() var myInt : integer var MyBool : boolean
 		// var myReal : real
-		ExecutionVariable myInt = new ExecutionVariable("myInt", Integer.class, 0);
+		ExecutionVariable myInt = new ExecutionVariable("myInt", Integer.class,
+				0);
 		context.declareVariable(myInt);
-		ExecutionVariable myBool = new ExecutionVariable("myBool", Boolean.class, false);
+		ExecutionVariable myBool = new ExecutionVariable("myBool",
+				Boolean.class, false);
 		context.declareVariable(myBool);
-		ExecutionVariable myFloat = new ExecutionVariable("myFloat", Float.class, 0.0f);
+		ExecutionVariable myFloat = new ExecutionVariable("myFloat",
+				Float.class, 0.0f);
 		context.declareVariable(myFloat);
 		ExecutionEvent event = new ExecutionEvent("abc", Integer.class);
 		context.declareEvent(event);
@@ -136,7 +154,7 @@ public class AbstractSTextTest {
 				defaultScope, Expression.class.getSimpleName());
 		return interpreter.evaluateStatement(statement, context);
 	}
-	
+
 	protected Object executeExpression(String scope, String expression) {
 		Scope defaultScope = createContextScope(scope);
 		Statement statement = (Statement) parseExpression(expression,

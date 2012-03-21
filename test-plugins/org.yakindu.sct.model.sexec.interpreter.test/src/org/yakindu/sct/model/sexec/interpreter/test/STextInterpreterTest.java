@@ -14,6 +14,8 @@ import static junit.framework.Assert.assertEquals;
 
 import org.junit.Test;
 
+import util.AbstractSTextTest;
+
 public class STextInterpreterTest extends AbstractSTextTest {
 
 //	@Test
