@@ -534,7 +534,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
       Object duration = _evaluateStatement;
       String _name = timeEvent.getName();
       boolean _isPeriodic = timeEvent.isPeriodic();
-      this.timingService.scheduleTimeEvent(this.executionContext, _name, _isPeriodic, ((Integer) duration));
+      this.timingService.scheduleTimeEvent(this.externalExecutionContext, _name, _isPeriodic, ((Integer) duration));
       _xblockexpression = (null);
     }
     return _xblockexpression;

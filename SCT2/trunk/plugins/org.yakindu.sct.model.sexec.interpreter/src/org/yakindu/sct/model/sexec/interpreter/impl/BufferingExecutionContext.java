@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011 committers of YAKINDU and others.
+ * Copyright (c) 2012 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -21,16 +21,23 @@ import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.simulation.core.runtime.ExecutionException;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContextListener;
+import org.yakindu.sct.simulation.core.runtime.impl.ExecutionContextImpl;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 import org.yakindu.sct.simulation.core.runtime.timer.VirtualClock;
 
-public class BufferingExecutionContext implements IExecutionContext {
+public class BufferingExecutionContext extends ExecutionContextImpl implements IExecutionContextListener {
 
 	protected IExecutionContext delegate;
+	protected boolean delegateNotify = true;
 
-	private HashMap<String, Object> raisedEvents = new HashMap<String, Object>();
 	private HashMap<String, Object> setVariables = new HashMap<String, Object>();
+
+	
+	public BufferingExecutionContext(IExecutionContext delegate) {
+		this.delegate = delegate;
+		delegate.addExecutionContextListener(this);
+	}
 
 	public List<ExecutionEvent> getDeclaredEvents() {
 		return delegate.getDeclaredEvents();
@@ -40,18 +47,14 @@ public class BufferingExecutionContext implements IExecutionContext {
 		delegate.declareEvent(event);
 	}
 
-	public List<ExecutionEvent> getRaisedEvents() {
-		return delegate.getRaisedEvents();
-	}
 
 	public void resetRaisedEvents() {
 		delegate.resetRaisedEvents();
 	}
 
-	public void raiseEvent(String name, Object value) throws ExecutionException {
-		synchronized (raisedEvents) {
-			raisedEvents.put(name, value);
-		}
+	
+	public ExecutionEvent getDeclaredEvent(String eventName) {
+		return delegate.getDeclaredEvent(eventName);
 	}
 
 	public boolean isEventRaised(String eventName) {
@@ -79,11 +82,12 @@ public class BufferingExecutionContext implements IExecutionContext {
 
 	public void flush() {
 		synchronized (raisedEvents) {
-			Set<Entry<String, Object>> entrySet = raisedEvents.entrySet();
-			for (Entry<String, Object> entry : entrySet) {
-				delegate.raiseEvent(entry.getKey(), entry.getValue());
+			delegateNotify = false;
+			for (ExecutionEvent event : raisedEvents) {
+				delegate.raiseEvent(event.getName(), event.getValue());
 			}
 			raisedEvents.clear();
+			delegateNotify = true;
 		}
 		synchronized (setVariables) {
 			Set<Entry<String, Object>> entrySet = setVariables.entrySet();
@@ -114,15 +118,6 @@ public class BufferingExecutionContext implements IExecutionContext {
 		delegate.call(procedureId);
 	}
 
-	public void addExecutionContextListener(IExecutionContextListener listener) {
-		delegate.addExecutionContextListener(listener);
-	}
-
-	public void removeExecutionContextListener(
-			IExecutionContextListener listener) {
-		delegate.removeExecutionContextListener(listener);
-	}
-
 	public double getTimeScaleFactor() {
 		return delegate.getTimeScaleFactor();
 	}
@@ -143,8 +138,21 @@ public class BufferingExecutionContext implements IExecutionContext {
 		delegate.saveHistoryStateConfiguration(region);
 	}
 
-	public BufferingExecutionContext(IExecutionContext delegate) {
-		this.delegate = delegate;
+
+	public void eventRaised(ExecutionEvent event) {
+		if ( delegateNotify ) {
+			notifyEventRaised(event);
+		}
 	}
 
+	public void variableValueChanged(ExecutionVariable variable) {
+		notifyVariableValueChanged(variable);
+		
+	}
+
+	public void timeScaleFactorChanged(double oldFactor, double newFactor) {
+		notifyTimeScaleFactorChanged(oldFactor, newFactor);
+	}
+
+	
 }
