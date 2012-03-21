@@ -93,7 +93,7 @@ public class StatePropertySection extends
 					| SWT.V_SCROLL);
 			enableXtext(txtSpecification, injector);
 			createHelpWidget(parent, txtSpecification,
-					HelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION);
+					HelpContextIds.SC_PROPERTIES_STATE_EXPRESSION);
 		} else {
 			txtSpecification = getToolkit().createText(parent, "", SWT.MULTI);
 		}
