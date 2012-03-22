@@ -56,6 +56,7 @@ public class ModelCreator {
 
 	private GeneratorEntry createGeneratorEntry(Statechart statechart) {
 		GeneratorEntry entry = factory.createGeneratorEntry();
+		entry.setContentType("statechart");
 		entry.setElementRef(statechart);
 		List<FeatureType> featureTypes = getFeatureTypes();
 		for (FeatureType featureType : featureTypes) {
