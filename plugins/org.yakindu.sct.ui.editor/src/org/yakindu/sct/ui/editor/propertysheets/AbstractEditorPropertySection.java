@@ -143,7 +143,7 @@ public abstract class AbstractEditorPropertySection extends
 	protected Injector getInjector(SemanticTarget semanticTarget) {
 		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions
 				.getRegisteredProvider(semanticTarget,
-						getActiveEditorResource().getURI().lastSegment());
+						getActiveEditorResource().getURI().fileExtension());
 		return registeredProvider.getInjector();
 	}
 

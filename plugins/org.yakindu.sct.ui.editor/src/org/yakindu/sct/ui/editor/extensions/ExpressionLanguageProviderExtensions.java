@@ -58,7 +58,7 @@ public class ExpressionLanguageProviderExtensions {
 				String registeredExtension = configurationElement
 						.getAttribute(ATTR_RESOURCE_EXTENSION);
 				if (SemanticTarget.valueOf(semanticTarget) == target
-						&& resourceExtension.endsWith(registeredExtension)) {
+						&& resourceExtension.equals(registeredExtension)) {
 					
 					String key = target.name()+configurationElement.getNamespaceIdentifier();
 					if (providerMap.get(key)!=null) {

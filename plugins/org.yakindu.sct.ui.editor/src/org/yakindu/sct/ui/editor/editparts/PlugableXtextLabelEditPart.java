@@ -59,7 +59,7 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 	private void init(SemanticTarget target) {
 		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions
 				.getRegisteredProvider(target, resolveSemanticElement()
-						.eResource().getURI().lastSegment());
+						.eResource().getURI().fileExtension());
 		injector = registeredProvider.getInjector();
 	}
 
