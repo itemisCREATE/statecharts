@@ -4,12 +4,21 @@
 package org.yakindu.sct.generator.genmodel.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.yakindu.sct.generator.genmodel.ui.highlighting.SGenSemanticHighlightingCalculator;
 
 /**
  * Use this class to register components to be used within the IDE.
  */
-public class SGenUiModule extends org.yakindu.sct.generator.genmodel.ui.AbstractSGenUiModule {
+public class SGenUiModule extends
+		org.yakindu.sct.generator.genmodel.ui.AbstractSGenUiModule {
 	public SGenUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
+
+	@Override
+	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		return SGenSemanticHighlightingCalculator.class;
+	}
+
 }
