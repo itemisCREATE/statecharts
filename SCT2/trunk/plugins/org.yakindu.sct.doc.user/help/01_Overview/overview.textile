@@ -12,7 +12,7 @@ The statechart tools are one central part of YAKINDU: the modular toolkit for mo
 
 The following graph shows these features and their relation to each other:
 
-!images/overview_yakindu.jpg! 
+!images/YAKINDU_features.png! 
 
 
 h2. Who is behind YAKINDU Statechart Tools 2?
